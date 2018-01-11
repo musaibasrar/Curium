@@ -1,5 +1,6 @@
 package com.model.student.service;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -1017,9 +1018,7 @@ public class StudentService {
 
 		String[] studentIds = request.getParameterValues("studentIDs");
 		boolean successResult = false;
-		String pathOfStudentReports = new DataUtil().getPropertiesValue("studentdetailsreportpath");
-		String nameOfFile = request.getParameter("fileName");
-		nameOfFile = nameOfFile + ".xlsx";
+		
 		List<Parents> listOfStudentRecords = new ArrayList<Parents>();
 
 		if (studentIds != null) {
@@ -1038,7 +1037,7 @@ public class StudentService {
 
 			}
 			try {
-				if (exportDataToExcel(listOfStudentRecords, pathOfStudentReports, nameOfFile)) {
+				if (exportDataToExcel(listOfStudentRecords)) {
 					successResult = true;
 				} else {
 					successResult = false;
@@ -1054,18 +1053,16 @@ public class StudentService {
 
 	}
 
-	public boolean exportDataToExcel(List<Parents> listOfStudentRecords, String pathOfStudentReports, String nameOfFile)
+	public boolean exportDataToExcel(List<Parents> listOfStudentRecords)
 			throws Exception {
 
 		boolean writeSucees = false;
-		// String name =
-		// "Error_"+detailsearchList.get(0).getFileName().substring(0,
-		// detailsearchList.get(0).getFileName().length()-4)+".xls";
+		
 		try {
 
 			// Creating an excel file
 			XSSFWorkbook workbook = new XSSFWorkbook();
-			XSSFSheet sheet = workbook.createSheet("ErrorList");
+			XSSFSheet sheet = workbook.createSheet("ListOfStudents");
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
@@ -1116,9 +1113,9 @@ public class StudentService {
 				
 				
 				ClassLoader classLoader = getClass().getClassLoader();
-				FileOutputStream out = new FileOutputStream(new File(classLoader.getResource("").getFile()+nameOfFile));
-				//FileOutputStream out = new FileOutputStream(new File("/usr/local/tomcat/webapps/www.searchmysearch.com/files/"+nameOfFile));
-				httpSession.setAttribute("filePath",new File(classLoader.getResource("").getFile()+nameOfFile));
+				//Local 
+				//FileOutputStream out = new FileOutputStream("D:/schoolfiles/test.xlsx");
+				FileOutputStream out = new FileOutputStream(new File("/usr/local/tomcat/webapps/www.searchmysearch.com/musarpbiabha/studentsdetails.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;
@@ -1143,8 +1140,7 @@ public class StudentService {
 				List<Parents> searchStudentList = new ArrayList<Parents>();
 				searchStudentList = new UserDAO().getListOfStudents(queryMain);
 				String studentName = searchStudentList.get(0).getStudent().getName();
-				System.out.println("The student name is " + studentName);
-				// request.setAttribute("searchStudentList", searchStudentList);
+				
 			}
 
 		}
@@ -1155,55 +1151,49 @@ public class StudentService {
 		return false;
 	}
 
-	public void downlaodFile() {
-		
-		try{
-		
-        ClassLoader classLoader = getClass().getClassLoader();
-        String appPath = classLoader.getResource("Zeee.xls").getFile();
-        System.out.println("appPath = " + appPath);
- 
-        // construct the complete absolute path of the file
-        URL url = null;
-		URLConnection con = null;
-        url = new URL("http://searchmysearch.com/files/Mushy.xlsx");
-		con = url.openConnection();
-             
-		////////////////////////////////
-        File downloadFile = new File(classLoader.getResource("Zeee.xls").getFile());
-        //FileInputStream inputStream = new FileInputStream(downloadFile);
-        FileInputStream inputStream = (FileInputStream) con.getInputStream();
-        // get MIME type of the file
-        String mimeType = "application/vnd.ms-excel";
+	public boolean downlaodFile() {
+		boolean result = false;
+		try {
 
-        // set content attributes for the response
-        response.setContentType(mimeType);
-        response.setContentLength((int) downloadFile.length());
- 
-        // set headers for the response
-        String headerKey = "Content-Disposition";
-        String headerValue = String.format("attachment; filename=\"%s\"",
-                downloadFile.getName());
-        response.setHeader(headerKey, headerValue);
- 
-        // get output stream of the response
-        OutputStream outStream = response.getOutputStream();
- 
-        byte[] buffer = new byte[BUFFER_SIZE];
-        int bytesRead = -1;
- 
-        // write bytes read from the input stream into the output stream
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            outStream.write(buffer, 0, bytesRead);
-        }
- 
-        inputStream.close();
-        outStream.close();
- 
-		}catch(Exception e){
-		System.out.println(""+e);	
+			// construct the complete absolute path of the file
+			URL url = null;
+			URLConnection con = null;
+			url = new URL("http://searchmysearch.com/musarpbiabha/studentsdetails.xlsx");
+			con = url.openConnection();
+
+			BufferedInputStream bis = new BufferedInputStream(
+					con.getInputStream());
+			// get MIME type of the file
+			String mimeType = "application/vnd.ms-excel";
+
+			// set content attributes for the response
+			response.setContentType(mimeType);
+			// response.setContentLength((int) bis.length());
+
+			// set headers for the response
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"",
+					"studentdetails.xlsx");
+			response.setHeader(headerKey, headerValue);
+
+			// get output stream of the response
+			OutputStream outStream = response.getOutputStream();
+
+			byte[] buffer = new byte[BUFFER_SIZE];
+			int bytesRead = -1;
+
+			// write bytes read from the input stream into the output stream
+			while ((bytesRead = bis.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+
+			bis.close();
+			outStream.close();
+			result = true;
+		} catch (Exception e) {
+			System.out.println("" + e);
 		}
-		
+		return result;
 	}
-
+	
 }
