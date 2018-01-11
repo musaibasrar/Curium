@@ -76,10 +76,7 @@ public class StudentService {
 		            if (item.isFormField()) {
 		                // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
 		                String fieldName = item.getFieldName();
-		               
-		                
-		                
-		                
+
 		                if (fieldName.equalsIgnoreCase("name")) {
 		                    
 		                    student.setName(DataUtil.emptyString(item.getString()));
@@ -124,15 +121,7 @@ public class StudentService {
 			        			conClassStudying = conClassStudying + " " + addSec;
 			        		}
 		                }
-
-		                
-
-		        		
-		        		
-		        		
-
 		        		student.setClassstudying(DataUtil.emptyString(conClassStudying));
-		                
 		                
 		                if (fieldName.equalsIgnoreCase("admclassE")) {
 		                    
@@ -145,8 +134,6 @@ public class StudentService {
 
 		                }
 
-
-
 		                if (fieldName.equalsIgnoreCase("admsecE")) {
 
 		                    
@@ -154,195 +141,102 @@ public class StudentService {
 			        		if (!addSecE.equalsIgnoreCase("Sec")) {
 			        			conClassAdmittedIn = conClassAdmittedIn + " " + addSecE;
 			        		}
-
-
 		                }
 		              
 		                student.setClassadmittedin(DataUtil.emptyString(conClassAdmittedIn));
 
-
-
 		                if (fieldName.equalsIgnoreCase("lastclass")) {
 		                    student.setStdlaststudied(DataUtil.emptyString(item.getString()));
 		                }
-
-
 		                if (fieldName.equalsIgnoreCase("lastschool")) {
 		                	student.setSchoollastattended(DataUtil.emptyString(item.getString()));
 		                }
-
-
 		                if (fieldName.equalsIgnoreCase("admnno")) {
 		                	student.setAdmissionnumber(DataUtil.emptyString(item.getString()));
 		                }
-
 		                if (fieldName.equalsIgnoreCase("dateofadmission")) {
 		                	student.setAdmissiondate(DateUtil.dateParserUpdateStd(item.getString()));
 		                }
-
-
 		                if (fieldName.equalsIgnoreCase("bloodgroup")) {
 		                    student.setBloodgroup(DataUtil.emptyString(item.getString()));
 		                }
-
-
-
 		                if (fieldName.equalsIgnoreCase("nationality")) {
 		                	student.setNationality(DataUtil.emptyString(item.getString()));
 		                }
-
-
 		                if (fieldName.equalsIgnoreCase("religion")) {
 		                    student.setReligion(DataUtil.emptyString(item.getString()));
-
 		                }
-
 		                if (fieldName.equalsIgnoreCase("caste")) {
 		                    student.setCaste(DataUtil.emptyString(item.getString()));
 		                }
-
 		                if (fieldName.equalsIgnoreCase("motherT")) {
 		                    student.setMothertongue(DataUtil.emptyString(item.getString()));
 		                }
-
 		                if (fieldName.equalsIgnoreCase("createddate")) {
 		                    student.setCreateddate(DateUtil.dateParserUpdateStd(item.getString()));
 		                }
-
 		                if (fieldName.equalsIgnoreCase("remarks")) {
 		                	student.setRemarks(DataUtil.emptyString(item.getString()));
 		                }
-
 		                if (fieldName.equalsIgnoreCase("fathersname")) {
 		                	parents.setFathersname(DataUtil.emptyString(item.getString()));
 		                }
-
-
 		                if (fieldName.equalsIgnoreCase("mothersname")) {
 		                	parents.setMothersname(DataUtil.emptyString(item.getString()));
 		                }
-
 		                if (fieldName.equalsIgnoreCase("profession")) {
 		                    parents.setProfesssion(DataUtil.emptyString(item.getString()));
-
 		                }
-
 		                if (fieldName.equalsIgnoreCase("parentsannualincome")) {
 		                	parents.setParentsannualincome(DataUtil.emptyString(item.getString()));
-
 		                }
-
 		                if (fieldName.equalsIgnoreCase("permanentaddress")) {
 		                    parents.setAddresspermanent(DataUtil.emptyString(item.getString()));
 		                }
-
 		                if (fieldName.equalsIgnoreCase("temporaryaddress")) {
 		                    parents.setAddresstemporary(DataUtil.emptyString(item.getString()));
 		                }
-
-
 		                if (fieldName.equalsIgnoreCase("noofdependents")) {
 		                	parents.setNoofdependents(DataUtil.parseInt(item.getString()));
 		                }
-		                
 		                if (fieldName.equalsIgnoreCase("remarks")) {
 		                	parents.setRemarks(DataUtil.emptyString(item.getString()));
 		                }
-		                
-		                
 		                if (fieldName.equalsIgnoreCase("contactnumber")) {
 		                	parents.setContactnumber(DataUtil.emptyString(item.getString()));
 		                }
-		                
 		                if (fieldName.equalsIgnoreCase("cocontactnumber")) {
 		                	parents.setCocontactnumber(DataUtil.emptyString(item.getString()));
 		                }
-		                
 		                if (fieldName.equalsIgnoreCase("email")) {
 		                	parents.setEmail(DataUtil.emptyString(item.getString()));
 		                }
-		                
 		            } else {
 		                // Process form file field (input type="file").
 		                String fieldName = item.getFieldName();
 
-		                //  InputStream filecontent;
-		                System.out.println("fieldname:" + fieldName);
-		                // System.out.println("filename:" + fileName);
 		                if (fieldName.equalsIgnoreCase("fileToUpload")) {
-
 
 		                    String fileName = (DataUtil.emptyString(item.getName()));
 		                    String fileValue = (DataUtil.emptyString(item.getString()));
-		                    //System.out.println("File value is "+fileValue);
-		                    
-		                    System.out.println("file name:" + fileName);
 		                    if (!fileName.equalsIgnoreCase("")) {
-		                       
 		                    	// encode data on your side using BASE64
-		                    	//byte[]   bytesEncoded = Base64.encodeBase64(fileValue.getBytes());
 		                    	byte[]   bytesEncoded = Base64.encodeBase64(item.get());
-		                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
 		                    	String saveFile = new String(bytesEncoded);
-		                    	// Decode data on other side, by processing encoded data
-		                    	/*byte[] valueDecoded= Base64.decodeBase64(bytesEncoded );
-		                    	System.out.println("Decoded value is " + new String(valueDecoded));*/
-		                    	
-		                    	// Resize the image
-                    	
-
-		                    	/*Properties properties = new Properties();
-		                        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
-		                        properties.load(inputStream);
-		                        int picWidth = Integer.parseInt(properties.getProperty("widthofpic"));
-		                        int picHeight = Integer.parseInt(properties.getProperty("heightofpic"));
-		                    	
-		                    	BufferedImage originalImage = ImageIO.read(item.getInputStream());
-									int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-			                		
-			                		//BufferedImage resizeImageJpg = resizeImage(originalImage, type);
-			                		BufferedImage resizedImage = new BufferedImage(picWidth, picHeight, type);
-			                		Graphics2D g = resizedImage.createGraphics();
-			                		g.drawImage(originalImage, 0, 0, picWidth, picHeight, null);
-			                		g.dispose();
-								
-								ByteArrayOutputStream baos = new ByteArrayOutputStream();
-								ImageIO.write( resizedImage, "jpg", baos );
-								baos.flush();
-								byte[] imageInByte = baos.toByteArray();
-								baos.close();
-								byte[]   bytesEncoded = Base64.encodeBase64(imageInByte);
-								String saveFile = new String(bytesEncoded);*/
-		                    	
-		                    	//End resizing of image
-		                    	
 		                    	student.setStudentpic(saveFile);
 
-		                    } else {
-		                       // personal.setPhoto(fileName);
-		                    }
+		                    } 
 		                }
 		            }
-
-
 		        }
-
-
-		
 		} catch (FileUploadException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		student.setArchive(0);
-
-		// student.setParents(parents);
 		parents.setStudent(student);
-
-		// student = new studentDetailsDAO().create(student);
 		parents = new parentsDetailsDAO().create(parents);
-		
-		
+
 		if(parents!=null){
 			result=true;
 		}
@@ -402,27 +296,6 @@ public class StudentService {
 				httpSession.setAttribute("student", student);
 				String classStudying = student.getClassstudying();
 				if (!classStudying.equalsIgnoreCase("") && !classStudying.equalsIgnoreCase(" ") && classStudying.contains(" ")) {
-					/*String[] parts = classStudying.split("");
-					String[] classParts = classStudying.split(" ");
-					String regex = "[a-zA-Z]+";
-					int j = 0;
-					for (int i = 0; i < parts.length; i++) {
-
-						if (parts[i].matches(regex) == true && j == 0) {
-							httpSession.setAttribute("classstudying", parts[i]);
-							j++;
-						} else if (parts[i].matches(regex) == true && j != 0) {
-							httpSession.setAttribute("secstudying", parts[i]);
-						}
-
-						// httpSession.setAttribute("classstudying", parts[0]);
-						// httpSession.setAttribute("secstudying", parts[1]);
-					}
-
-				} else {
-					request.setAttribute("classstudying", classStudying);
-				}*/
-					
 					String regex = "[a-zA-Z]+";
 					String[] classParts = classStudying.split(" ");
 					httpSession.setAttribute("classstudying", classParts[0]);
@@ -465,16 +338,6 @@ public class StudentService {
 				httpSession.setAttribute("academicPerYear", currentYear.getCurrentacademicyear());
 				httpSession.setAttribute("currentAcademicYear", currentYear.getCurrentacademicyear());
 				
-				
-				/*
-				 * if(sumOfFees!= null && !dueAmount.equalsIgnoreCase("")){
-				 * sumOfFees = sumOfFees.substring(0, sumOfFees.indexOf('.'));
-				 * dueAmount = dueAmount.substring(0, dueAmount.indexOf('.'));
-				 * httpSession.setAttribute("feespaid",
-				 * (Integer.parseInt(sumOfFees) - Integer.parseInt(dueAmount)));
-				 * }else{ httpSession.setAttribute("feespaid", 0); }
-				 */
-
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
 			}
@@ -526,11 +389,6 @@ public class StudentService {
 
 	        			parentsId = Integer.parseInt(pid);
 	        		}
-
-	        		
-	        		
-	        		System.out.println("M in in personal service and ID is :::::::::::::::::::::::::::::: " + studentId);
-	                
 	                
 	                if (fieldName.equalsIgnoreCase("name")) {
 	                    
@@ -718,20 +576,13 @@ public class StudentService {
 	                }
 	                
 	            } else {
-	                // Process form file field (input type="file").
 	                String fieldName = item.getFieldName();
 
-	                //  InputStream filecontent;
-	                System.out.println("fieldname:" + fieldName);
-	                // System.out.println("filename:" + fileName);
 	                if (fieldName.equalsIgnoreCase("fileToUpload")) {
 
 
 	                    String fileName = (DataUtil.emptyString(item.getName()));
 	                    String fileValue = (DataUtil.emptyString(item.getString()));
-	                    //System.out.println("File value is "+fileValue);
-	                    
-	                    System.out.println("file name:" + fileName);
 	                    if (!fileName.equalsIgnoreCase("")) {
 	                       
 	                    	                    	
@@ -748,19 +599,11 @@ public class StudentService {
 	                    }
 	                }
 	            }
-
-	            
-	           
-
 	        }
-
-
 	
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-		
 		 student.setArchive(0);
 		 student = new studentDetailsDAO().update(student);
  		if (pid != "") {
@@ -781,9 +624,6 @@ public class StudentService {
 
 			List<Student> list = new studentDetailsDAO().readListOfStudents();
 			request.setAttribute("studentList", list);
-			// List<PersonalDetails> list = new
-			// PersonalDetailsDAO().readListOfObjects();
-
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -794,25 +634,13 @@ public class StudentService {
 
 	public void archiveMultiple() {
 		String[] studentIds = request.getParameterValues("studentIDs");
-		String[] studentNames = request.getParameterValues("studentNames");
-
-		if (studentNames != null) {
-			List namesOfStudents = new ArrayList();
-			for (String nameof : studentNames) {
-				System.out.println("name of students" + nameof);
-				// ids.add(Integer.valueOf(id));
-
-			}
-		}
 
 		if (studentIds != null) {
 			List ids = new ArrayList();
 			for (String id : studentIds) {
-				System.out.println("id" + id);
 				ids.add(Integer.valueOf(id));
 
 			}
-			System.out.println("id length" + studentIds.length);
 			new studentDetailsDAO().archiveMultiple(ids);
 		}
 	}
@@ -822,16 +650,11 @@ public class StudentService {
 		boolean result = false;
 
 		try {
-
 			List<Student> list = new studentDetailsDAO().readListOfStudentsArchive();
 			request.setAttribute("studentListArchive", list);
-			// List<PersonalDetails> list = new
-			// PersonalDetailsDAO().readListOfObjects();
-
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			result = false;
 		}
 		return result;
 	}
@@ -841,11 +664,9 @@ public class StudentService {
 		if (studentIds != null) {
 			List ids = new ArrayList();
 			for (String id : studentIds) {
-				System.out.println("id" + id);
 				ids.add(Integer.valueOf(id));
 
 			}
-			System.out.println("id length" + studentIds.length);
 			new studentDetailsDAO().deleteMultiple(ids);
 		}
 	}
@@ -912,17 +733,6 @@ public class StudentService {
 			List<Parents> list = new studentDetailsDAO().readListOfObjectsPaginationALL((page - 1) * recordsPerPage,
 					recordsPerPage);
 			request.setAttribute("studentList", list);
-			// List<String> testList = new ArrayList<String>();
-			/*
-			 * Parents std; ListIterator<Parents> medicineIterable =
-			 * (list.listIterator()); while (medicineIterable.hasNext()) { std =
-			 * medicineIterable.next();
-			 * 
-			 * System.out.println("medicine id " + std.getFathersname());
-			 * System.out.println("medicine id " + std.getStudent().getName());
-			 * 
-			 * }
-			 */
 			int noOfRecords = new studentDetailsDAO().getNoOfRecords();
 			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 			request.setAttribute("studentList", list);
@@ -935,7 +745,6 @@ public class StudentService {
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			result = false;
 		}
 		return result;
 	}
@@ -964,7 +773,6 @@ public class StudentService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			result = false;
 		}
 		return result;
 	}
@@ -1003,12 +811,6 @@ public class StudentService {
 		}
 
 		queryMain = queryMain + querySub;
-		/*
-		 * queryMain =
-		 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
-		 * ;
-		 */
-		System.out.println("SEARCH QUERY ***** " + queryMain);
 		List<Parents> searchStudentList = new UserDAO().getListOfStudents(queryMain);
 		request.setAttribute("searchStudentList", searchStudentList);
 
@@ -1039,12 +841,9 @@ public class StudentService {
 			try {
 				if (exportDataToExcel(listOfStudentRecords)) {
 					successResult = true;
-				} else {
-					successResult = false;
-				}
+				} 
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -1125,25 +924,6 @@ public class StudentService {
 		}
 		return writeSucees;
 		// getFile(name, path);
-	}
-
-	public static void main(String[] args) {
-
-		String[] studentIds = { "2", "3", "4" };
-
-		for (String id : studentIds) {
-			if (id != null) {
-				String queryMain = "From Parents as parents where";
-				String querySub = " parents.Student.sid =" + id;
-				queryMain = queryMain + querySub;
-
-				List<Parents> searchStudentList = new ArrayList<Parents>();
-				searchStudentList = new UserDAO().getListOfStudents(queryMain);
-				String studentName = searchStudentList.get(0).getStudent().getName();
-				
-			}
-
-		}
 	}
 
 	public boolean generateBonafide() {
