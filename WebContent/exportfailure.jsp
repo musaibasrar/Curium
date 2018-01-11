@@ -76,7 +76,7 @@
     <table height="462" class="tableCSS"  >
       <tr>
         <td height="50" align="center" valign="middle">
-        <p class="style1">Export Failed. Please check the file name or select atleast one record</p></br>
+        <p class="style1">Export Failed. Please try again.</p></br>
         
         </td>
         <td></td>

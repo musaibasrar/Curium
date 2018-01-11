@@ -78,8 +78,10 @@ public class StudentAction {
 	
 
 	private String downlaodFile() {
-		new StudentService(request, response).downlaodFile();
-        return "success";
+		if(new StudentService(request, response).downlaodFile()){
+			return "exportsuccess.jsp";
+		}
+        return "exportfailure.jsp";
 	}
 
 	private String generateBonafide() {

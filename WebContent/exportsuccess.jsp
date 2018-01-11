@@ -83,8 +83,7 @@
           <td height="5" align="center" valign="middle"><p class="style1">
                   
                   <button id="download">Download</button>
-                 
-                  <a href="www.searchmysearch.com/Zeee.xlsx">click here to download</a>
+                                   
               </p>
         </td>
       </tr>

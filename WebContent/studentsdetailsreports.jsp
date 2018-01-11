@@ -810,13 +810,9 @@
 					<tr>
 													
 						<td class="footerTD" colspan="2"> &nbsp;
-						<label style="font-weight: bold;font-size: 14px;font-family: cursive;color: white;">File Name</label>
-						<label> <input
-									name="fileName" type="text" class="myclass" id="fileName"
-									size="20">
-							</label>
+						
 						<input value="Export"
-							type="submit" id="export" onfocus="fileCheck();"/></td>
+							type="submit" id="export"/></td>
 							
 							
 
