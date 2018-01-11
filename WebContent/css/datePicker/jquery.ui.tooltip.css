@@ -1,0 +1,12 @@
+.ui-tooltip {
+    box-shadow: 0 0 5px #AAAAAA;
+    padding: 8px;
+    position: absolute;
+    z-index: 9999;
+}
+* html .ui-tooltip {
+    background-image: none;
+}
+body .ui-tooltip {
+    border-width: 2px;
+}

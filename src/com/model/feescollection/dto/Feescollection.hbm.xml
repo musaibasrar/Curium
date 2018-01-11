@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16 Jan, 2015 12:48:55 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.model.feescollection.dto.Feescollection" table="feescollection" >
+        <id name="feeid" type="java.lang.Integer">
+            <column name="feeid" />
+            <!-- <generator class="identity" /> -->
+            <generator class="native" />
+        </id>
+        <property name="feescategory" type="string">
+            <column name="feescategory" length="150" />
+        </property>
+        <property name="feesamount" type="string">
+            <column name="feesamount" />
+        </property>
+        <property name="sid" type="java.lang.Integer">
+            <column name="sid" />
+        </property>
+         <property name="formonth" type="string">
+            <column name="formonth" />
+        </property>
+        <property name="feesdetailsid" type="java.lang.Integer">
+            <column name="feesdetailsid" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Bar Chart</title>
+		<script src="js/Chart.js"></script>
+	</head>
+	<body>
+		<div style="width: 50%">
+			<canvas id="canvas" height="450" width="600"></canvas>
+			
+		</div>
+		
+		<div style="width: 50%">
+		<table>
+		<tr>
+		<td>
+		<input type="text" id="cs" name="cs" value="16"/>
+		</td>
+		</tr>
+		
+		</table>
+		
+		</div>
+
+
+	<script>
+	var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+	
+	var m = document.getElementById("cs").value;
+	var barChartData = {
+		labels : ["January","February","March","April","May","June","July"],
+		datasets : [
+			{
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(220,220,220,0.8)",
+				highlightFill: "rgba(220,220,220,0.75)",
+				highlightStroke: "rgba(220,220,220,1)",
+				data : [m,10,10,10,10,10,10]
+			}
+		]
+	}
+	window.onload = function(){
+		var ctx = document.getElementById("canvas").getContext("2d");
+		window.myBar = new Chart(ctx).Bar(barChartData, {
+			responsive : true
+		});
+	}
+	</script>
+	</body>
+</html>

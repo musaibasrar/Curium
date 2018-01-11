@@ -1,0 +1,81 @@
+/**
+ * 
+ */
+package com.model.adminexpenses.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.model.adminexpenses.service.AdminService;
+import com.model.feescategory.service.FeesService;
+import com.model.student.service.StudentService;
+
+/**
+ * @author Musaib_2
+ * 
+ */
+public class AdminAction {
+
+	HttpServletRequest request;
+	HttpServletResponse response;
+	HttpSession httpSession;
+	String url;
+
+	public AdminAction(HttpServletRequest request,
+			HttpServletResponse response) {
+		this.request = request;
+		this.response = response;
+		this.httpSession = request.getSession();
+	}
+
+	public String execute(String action, String page) {
+		// TODO Auto-generated method stub
+		if (action.equalsIgnoreCase("viewAllExpenses")) {
+			System.out.println("Action is viewAllExpenses");
+			url = viewAllExpenses();
+		} else if (action.equalsIgnoreCase("addExpenses")) {
+			System.out.println("Action is addExpenses");
+			url = addExpenses();
+		}else if (action.equalsIgnoreCase("deleteMultiple")) {
+			System.out.println("Action is deleteMultiple");
+			url = deleteMultiple();
+		}
+		return url;
+	}
+
+	
+
+	
+
+	private String viewAllExpenses() { 
+		
+		new AdminService(request, response).viewAllExpenses();
+		System.out.println("IN action's view all Expenses");
+		return "adminexpenses.jsp";
+		
+    }
+
+	private String addExpenses() {
+		 if (new AdminService(request, response).addExpenses()) {
+	            return "Controller?process=AdminProcess&action=viewAllExpenses";
+	        } else {
+	            return "notSavedExpenses.jsp";
+	        }
+		
+	}
+
+	private String deleteMultiple() {
+		 new AdminService(request, response).deleteMultiple();
+	        return "Controller?process=AdminProcess&action=viewAllExpenses";
+	}
+
+	
+
+	
+
+	
+
+	
+
+}

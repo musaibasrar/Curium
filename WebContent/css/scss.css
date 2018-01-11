@@ -1,0 +1,104 @@
+$unit-size: 256px;
+$positive: #7eb348;
+$negative: #cf3636;
+$issuance: #76a346;
+$redemption: #1fc8f8;
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Lato);
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+}
+
+.positive { color: $positive; }
+.negative { color: $negative; }
+.issuance { color: $issuance !important; }
+.redemption { color: $redemption !important; }
+.small { font-size: 0.6em; }
+
+.widget {
+  outline: 1px solid #111;
+  border-top: 1px solid #555;
+  display: flex;
+  flex-direction: column;
+  background: #3B3B3B;
+  color: #FFFFFF;
+  position: relative;
+  margin-bottom: 10px;
+}
+.widget--1x1 {
+  width: $unit-size;
+  height: $unit-size;
+}
+.widget--2x1 {
+  width: $unit-size * 2;
+  height: $unit-size;
+}
+.widget--3x1 {
+  width: $unit-size * 3;
+  height: $unit-size;
+}
+
+.widget-header, .widget-footer {
+  background: #2E2E2E;
+  width: 100%;
+  height: 30px;
+}
+.widget-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.widget-footer a {
+  color: #666;
+  font-size: 14px;
+  display: inline-block;
+  margin-top: 8px;
+  margin-right: 8px;
+  float: right;
+}
+
+.widget-header-indicator {
+  border-radius: 10px;
+  width: 10px;
+  height: 10px;
+  background: #7eb348;
+  position: relative;
+  top: 8px;
+  left: 8px;
+}
+
+.padded {
+  padding: 1rem;
+}
+
+.value-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.value-list li {
+  margin: 0;
+  padding: 5px;
+}
+.value-list .description {
+  color: #666666;
+  font-size: 14px;
+  line-height: 10px;
+}
+.value-list .value {
+  color: #FFFFFF;
+  font-size: 45px;
+}
+
+.widget-content #donut {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+}

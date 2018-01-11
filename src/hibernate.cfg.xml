@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory name="test">
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		
+	 	<property name="hibernate.connection.password">root</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/school</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.default_schema">school</property>
+		
+		
+		<!-- <property name="hibernate.connection.password">schoolschool</property>
+		<property name="hibernate.connection.url">jdbc:mysql://118.67.248.230:3306/schoolschool?sessionVariables=wait_timeout=3600</property>
+		<property name="hibernate.connection.username">schoolschool</property>
+		<property name="hibernate.default_schema">schoolschool</property>
+		 -->
+		
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="current_session_context_class">thread</property>
+		<!-- <mapping class="com.model.user.dto.Login"/> -->
+		<mapping resource="com/model/user/dto/Login.hbm.xml"></mapping>
+		<mapping resource="com/model/parents/dto/Parents.hbm.xml"></mapping>
+		<mapping resource="com/model/student/dto/Student.hbm.xml"></mapping>
+		<mapping resource="com/model/std/dto/Classsec.hbm.xml"></mapping>
+		<mapping resource="com/model/feescategory/dto/Feescategory.hbm.xml"></mapping>
+		<mapping resource="com/model/department/dto/Department.hbm.xml"></mapping>
+		<mapping resource="com/model/position/dto/Position.hbm.xml"></mapping>
+		<mapping resource="com/model/employee/dto/Teacher.hbm.xml"></mapping>
+		<mapping resource="com/model/feescollection/dto/Feescollection.hbm.xml"></mapping>
+		<mapping resource="com/model/feesdetails/dto/Feesdetails.hbm.xml"></mapping>
+		<mapping resource="com/model/adminexpenses/dto/Adminexpenses.hbm.xml"></mapping>
+		<mapping resource="com/model/academicyear/dto/Currentacademicyear.hbm.xml"></mapping>
+		<mapping resource="com/model/subjectdetails/dto/Subject.hbm.xml"></mapping>
+		<mapping resource="com/model/marksdetails/dto/Marks.hbm.xml"></mapping>
+		<mapping resource="com/model/examdetails/dto/Exams.hbm.xml"></mapping>
+		<mapping resource="com/model/stampfees/dto/Academicfeesstructure.hbm.xml"></mapping>
+		<mapping resource="com/model/student/dto/Studentfeesstructure.hbm.xml"></mapping>		
+	</session-factory>
+</hibernate-configuration>

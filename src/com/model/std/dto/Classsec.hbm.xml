@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 6 Nov, 2014 12:17:14 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.model.std.dto.Classsec" table="classsec">
+        <id name="stdrdid" type="java.lang.Integer">
+            <column name="stdrdid" />
+            <generator class="identity" />
+        </id>
+        <property name="classandsec" type="java.lang.String">
+            <column name="classandsec" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,155 @@
+/* the input field */
+.date {
+	border:1px solid #ccc;
+	font-size:18px;
+	padding:4px;
+	text-align:center;
+	width:180px;
+	-moz-box-shadow:0 0 10px #eee inset;
+}
+
+#calroot {
+	/* place on top of other elements. set a higher value if nessessary */
+	z-index:1;
+	margin-top:-22px;
+	width:370px;
+}
+
+#calbody {
+	clear:both;
+	font-family:sans-serif;
+	width:364px;
+	font-size:13px;
+	border:1px solid #BDC8D2;
+	border-width:1px 1px 0;
+	background:#F5F9FF url(../../../img/gradient/h300.png) 0 37px repeat-x;
+	-moz-box-shadow:0 0 10px 0px #ccc;
+	-webkit-box-shadow:0 0 10px 0px #ccc;
+
+}
+
+#calhead {
+	padding-left:195px;
+}
+
+#caltitle {
+	font-family:sans-serif;
+	text-align:center;
+	font-size:14px;
+	float:left;
+	width:130px;
+}
+
+#calnext, #calprev {
+	display:block;
+	width:20px;
+	height:20px;
+	background:transparent url(prev.gif) no-repeat scroll center center;
+	float:left;
+	cursor:pointer;
+}
+
+#calnext {
+	background-image:url(next.gif);
+	float:right;
+}
+
+#calprev.caldisabled, #calnext.caldisabled {
+	visibility:hidden;
+}
+
+#caldays span {
+	display:block;
+	float:left;
+	width:52px;
+	text-align:center;
+	font-weight:bold;
+	padding:4px 0;
+	font-size:11px;
+	color:#7e7e7e;
+	line-height:18px;
+	background:#fff url(../../../img/gradient/h80.png) repeat-x;
+}
+
+#calweeks {
+
+}
+
+.calweek {
+	clear:left;
+	height:50px;
+	border-bottom:1px solid #BDC8D2;
+	border-top:1px solid #fff;
+}
+
+
+.calweek a {
+	display:block;
+	float:left;
+	width:50px;
+	height:50px;
+	text-decoration:none;
+	font-size:15px;
+	text-align:center;
+	line-height:50px;
+	color:#000;
+	border-right:1px solid #fff;
+	border-left:1px solid #BDC8D2;
+	text-shadow:1px 1px 1px #fff;
+}
+
+a.calsunday {
+	border-left:1px solid transparent;
+	color:#900;
+	background-color:#f2f2f2;
+}
+
+.calweek a:hover, .calfocus {
+	background:#fff url(../../../img/gradient/h80.png) repeat-x;
+}
+
+.calsun {
+	color:red;
+}
+
+a.caloff {
+	color:#999;
+	background:#eee url(../../../img/gradient/h80.png) repeat-x;
+}
+
+a.caloff.calfocus {
+	background-color:#ddd;
+}
+
+.caldisabled {
+	background-color:#efefef !important;
+	color:#ccc	!important;
+	cursor:default;
+}
+
+.caloff:hover {
+	background-color:rgb(245, 245, 250);
+}
+
+
+#caltitle select {
+	font-size:10px;
+}
+
+/* current day */
+#calcurrent {
+	background-color:#498CE2;
+	color:#fff;
+	text-shadow:0 1px 0 #000;
+	border:0;
+	width:52px;
+	background-image:none;
+	-moz-box-shadow:inset 0 0 10px 0px #000;
+}
+
+/* today */
+#caltoday {
+	background-color:#666;
+	color:#fff;
+	text-shadow:0 1px 0 #000;
+}

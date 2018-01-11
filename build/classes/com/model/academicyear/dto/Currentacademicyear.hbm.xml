@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 8 May, 2015 5:04:47 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.model.academicyear.dto.Currentacademicyear" table="currentacademicyear">
+        <id name="cayid" type="java.lang.Integer">
+            <column name="cayid" />
+            <generator class="identity" />
+        </id>
+        <property name="currentacademicyear" type="string">
+            <column name="currentacademicyear" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

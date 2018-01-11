@@ -1,0 +1,5 @@
+first add the data base through hibernate plugin
+make a reverse engineering file in the j2ee perspective
+make the hbm and dto file from the j2ee perspective
+add the class path in the hbm file
+add the mapping to the hibernate config file

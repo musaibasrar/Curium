@@ -1,0 +1,35 @@
+# shopping-list README
+
+----
+
+shopping-list allow You to create simple shopping list
+
+----
+### why 
+
+shopping-list was created to demonstrate how RESTful applications and MongoDB works.
+It's based on:
+
+  Guice framework - http://code.google.com/p/google-guice/
+  
+  Struts 2 framework - http://struts.apache.org/2.x/index.html
+  
+  Struts 2 Convention - Plugin https://cwiki.apache.org/S2PLUGINS/convention-plugin.html
+  
+  Struts 2 REST - Plugin https://cwiki.apache.org/S2PLUGINS/rest-plugin.html
+  
+  Morphia library - http://code.google.com/p/morphia/
+  
+  MongoDB - http://www.mongodb.org/
+  
+
+  
+----
+
+### author and license
+
+shopping-list is released under GPL v2. See COPYING for details.
+
+author: darek zoń
+
+    

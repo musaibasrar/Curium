@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<h:body>
+<p:layout style="min-width:400px;min-height:600px;">
+	<p:layoutUnit  position="north" resizable="true" size="70" minSize="40" maxSize="200">
+	<!-- <p:graphicImage name="/images/Evo_France.jpg" /> -->
+	
+	<h:form>
+	<!-- <p:graphicImage library="/images" name="Evo_France.jpg"/> -->
+	<p:graphicImage name="/images/Evo_France.jpg" />
+        <p:tabMenu activeIndex="#{param.i}">
+    <p:menuitem value="Home"  icon="ui-icon-home">
+        <f:param name="i" value="0" />
+    </p:menuitem>
+    <p:menuitem value="Sync."  icon="ui-icon-rotate-left">
+        <f:param name="i" value="1" />
+    </p:menuitem>
+    
+    
+    </p:tabMenu>
+    
+    <p:commandLink id="ajax"  actionListener="#{buttonView.buttonAction}" >
+        <h:outputText value="version" icon="ui-icon-home" />
+        <p:graphicImage name="/images/Evo_France.jpg" />
+    </p:commandLink>&nbsp;&nbsp;&nbsp;
+    <p:commandLink id="ajax1"  actionListener="#{buttonView.buttonAction}">
+        <h:outputText value="Help" />
+    </p:commandLink>&nbsp;&nbsp;&nbsp;
+    <p:commandLink id="ajax2"  actionListener="#{buttonView.buttonAction}">
+        <h:outputText value="Logout" />
+    </p:commandLink>
+    </h:form>
+    
+    
+    </p:layoutUnit>
+    <p:layoutUnit position="west" resizable="true" size="200" minSize="40" maxSize="200" >
+       	<h:form>
+    <p:growl autoUpdate="true"/>
+ 
+    <p:panelMenu style="width:193px">
+        <p:submenu label="Objects">
+            <p:menuitem value="Organiztion" actionListener="#{buttonView.showTable}"  ajax="false" icon="ui-icon-building-o"/>
+            <p:menuitem value="Contact" actionListener="#{buttonView.showTableContact}"  ajax="false" icon="ui-icon-user"/>
+        </p:submenu>
+        <p:submenu label="Search">
+        	<p:menuitem >
+        	
+        	</p:menuitem>
+            <p:menuitem value="Search" actionListener="#{menuView.delete}"  ajax="false" icon="ui-icon-search"/>
+        </p:submenu>
+        <p:separator />
+        
+    </p:panelMenu>
+</h:form>
+    </p:layoutUnit>
+ 
+    <p:layoutUnit position="center" name="mainframe">
+       
+        <h:form>
+   <p:dataTable  var="organization" value="#{buttonView.organList}" rendered="#{buttonView.dataTable}">
+    <p:column headerText="Name">
+        <h:outputText value="#{organization.organizationid}" />
+    </p:column>
+ 
+    
+ 
+   <p:column headerText="Brand">
+        <h:outputText value="#{organization.sizeforcows}" />
+    </p:column>
+  
+   
+</p:dataTable>
+
+<p:dataTable  var="car" value="#{OrganizationClass.organList}" rendered="#{buttonView.dataTableContact}">
+    <p:column headerText="Contact">
+        <h:outputText value="#{car.id}" />
+    </p:column>
+ 
+    <p:column headerText="Year">
+        <h:outputText value="#{car.year}" />
+    </p:column>
+ 
+    <p:column headerText="Brand">
+        <h:outputText value="#{car.brand}" />
+    </p:column>
+ 
+    <p:column headerText="Color">
+        <h:outputText value="#{car.color}" />
+    </p:column>
+</p:dataTable>
+ 
+ 
+       
+</h:form>
+    </p:layoutUnit>
+    <p:layoutUnit position="south">
+        Footer
+    </p:layoutUnit>
+</p:layout>
+</h:body>
+</html>

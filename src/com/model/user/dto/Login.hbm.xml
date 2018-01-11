@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 25 Sep, 2014 6:14:25 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.model.user.dto.Login" table="login">
+        <id name="lid" type="java.lang.Integer">
+            <column name="LID" />
+            <generator class="assigned" />
+        </id>
+        <property name="username1" type="java.lang.String" access="field">
+            <column name="USERNAME1" />
+        </property>
+        <property name="password1" type="java.lang.String">
+            <column name="PASSWORD1" />
+        </property>
+        <property name="usertype1" type="java.lang.String">
+            <column name="USERTYPE1" />
+        </property>
+    </class>
+</hibernate-mapping>
