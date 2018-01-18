@@ -63,11 +63,9 @@ public class EmployeeService {
     try {
     	List<Teacher> list = new EmployeeDAO().readListOfObjects();
         httpSession.setAttribute("employeeList", list);
-
         result = true;
     } catch (Exception e) {
         e.printStackTrace();
-        result = false;
     }
     return result;
 }
@@ -148,6 +146,18 @@ public class EmployeeService {
         List<Position> listPosition = new positionDAO().readListOfObjects();
         httpSession.setAttribute("listPosition", listPosition);
 		
+	}
+
+	public void searchEmployee() {
+		String staffName = request.getParameter("staffName");
+		String staffDepartment = request.getParameter("staffDepartment");
+		List<Teacher> employeeList = new ArrayList<Teacher>();
+		if(staffName!=""){
+			employeeList = new EmployeeDAO().readListOfEmployeesByName(staffName);
+		}else if(staffDepartment!=""){
+			employeeList = new EmployeeDAO().readListOfEmployeesByDepartment(staffDepartment);
+		}
+		request.setAttribute("employeeList", employeeList);
 	}
 
 }

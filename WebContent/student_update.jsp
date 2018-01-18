@@ -1080,7 +1080,7 @@
 							</label></td>
 
 
-							<td width="20%" class="alignRight">Remarks &nbsp;</td>
+							<td width="20%" class="alignRight">Notes &nbsp;</td>
 							<td width="28%"><label> <input name="remarks"
 									type="text" class="textField" id="remarks" size="36"
 									value="<c:out default="" value="${parents.remarks}" />">

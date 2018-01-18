@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17 Jan, 2018 7:41:40 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.model.attendance.dto.Studentdailyattendance" table="studentdailyattendance">
+        <id name="attendanceid" type="java.lang.Integer">
+            <column name="attendanceid" />
+            <generator class="identity" />
+        </id>
+        <property name="attendeeid" type="int">
+            <column name="attendeeid" not-null="true" />
+        </property>
+        <property name="intime" type="string">
+            <column name="intime" length="45" />
+        </property>
+        <property name="outtime" type="string">
+            <column name="outtime" length="45" />
+        </property>
+        <property name="date" type="date">
+            <column name="date" length="10" />
+        </property>
+        <property name="attendancestatus" type="string">
+            <column name="attendancestatus" length="15" />
+        </property>
+        <property name="academicyear" type="string">
+            <column name="academicyear" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Student Attendance</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -56,36 +56,20 @@
 -->
         </style>
 
-        <script type="text/javascript">
-            $(function(){
-                $("#view").button()
-                
-                $("#addnew").button()
-
-                });
-
-            function ViewAll(){
-                var form1=document.getElementById("form1");
-                form1.action="Controller?process=PersonalProcess&action=viewAll";
-                form1.submit();
-            }
-        </script>
+       
 </head>
     <body background="images/bg.jpg" >
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-          <td height="250" align="center" style="font-color:red" valign="middle"><p class="style1"> Operation Failed, Please Try Again</p>
+          <td height="250" align="center" style="font-color:red" valign="middle"><p class="style1">Staff attendance configuration has been added successfully</p>
           <td width="26%"  class="alignRightYear">
                             
                              
                             </td>
                             
-        <p class="style1">
-          
             
-            <!-- <input type="button" value="Back" id="addnew" onClick="JavaScript:window.location='addStudent.jsp';"> -->
-        </p></td>
+		</td>
       </tr>
     </table>
             </form>

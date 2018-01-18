@@ -27,28 +27,28 @@ public class EmployeeAction {
 
 	public String execute(String action, String page) {
 		if (action.equalsIgnoreCase("addEmployee")) {
-			System.out.println("Action is add position");
 			url = addEmployee();
 		} else if (action.equalsIgnoreCase("ViewAllEmployee")) {
-			System.out.println("Action is ViewEmployee");
 			url = viewEmployee();
 		}else if (action.equalsIgnoreCase("ViewDetails")) {
-			System.out.println("Action is ViewDetails");
 			url = viewDetails();
 		}else if (action.equalsIgnoreCase("updateEmployeeDetails")) {
-			System.out.println("Action is updateEmployeeDetails");
 			url = updateEmployeeDetails();
 		}else if (action.equalsIgnoreCase("updateEmployee")) {
-			System.out.println("Action is updateEmployee");
 			url = updateEmployee();
 		}else if (action.equalsIgnoreCase("deleteMultiple")) {
-			System.out.println("Action is deleteMultiple");
 			url = deleteMultiple();
 		}else if (action.equalsIgnoreCase("addEmployeePage")) {
-			System.out.println("Action is addEmployeePage");
 			url = addEmployeePage();
+		}else if ("searchEmployee".equalsIgnoreCase(action)) {
+			url = searchEmployee();
 		}
 		return url;
+	}
+
+	private String searchEmployee() {
+		new EmployeeService(request, response).searchEmployee();
+		return "";
 	}
 
 	private String addEmployeePage() {

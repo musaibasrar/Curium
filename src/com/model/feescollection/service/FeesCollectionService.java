@@ -52,9 +52,6 @@ public class FeesCollectionService {
 			amount = DataUtil.emptyString(feesAmounts[i]);
 			feesCategory = DataUtil.emptyString(feesCat[i]);
 
-			System.out.println("feesId :" + feescollection.getFeeid());
-			System.out.println("months :" + months);
-			System.out.println("amount :" + amount);
 			feescollection.setFeescategory(feesCategory);
 			feescollection.setFeesamount(amount);
 			feescollection.setFormonth(months);

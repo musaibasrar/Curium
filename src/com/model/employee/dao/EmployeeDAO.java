@@ -34,7 +34,6 @@ public class EmployeeDAO {
 	@SuppressWarnings("finally")
 	public Teacher create(Teacher employee) {
 		try {
-			// this.session = sessionFactory.openCurrentSession();
 			transaction = session.beginTransaction();
 			session.save(employee);
 
@@ -131,9 +130,37 @@ public class EmployeeDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			// session.close();
+			 session.close();
 			return noOfRecords;
 		}
+	}
+
+	public List<Teacher> readListOfEmployeesByName(String staffName) {
+		List<Teacher> employee = new ArrayList<Teacher>();
+		try {
+			transaction = session.beginTransaction();
+			employee = session.createQuery("From Teacher where teachername='"+staffName+"'").list();
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return employee;
+	}
+	
+	public List<Teacher> readListOfEmployeesByDepartment(String staffDepartment) {
+		List<Teacher> employee = new ArrayList<Teacher>();
+		try {
+			transaction = session.beginTransaction();
+			employee = session.createQuery("From Teacher where department = '"+staffDepartment+"'").list();
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return employee;
 	}
 
 }

@@ -37,6 +37,9 @@
 		<mapping resource="com/model/marksdetails/dto/Marks.hbm.xml"></mapping>
 		<mapping resource="com/model/examdetails/dto/Exams.hbm.xml"></mapping>
 		<mapping resource="com/model/stampfees/dto/Academicfeesstructure.hbm.xml"></mapping>
-		<mapping resource="com/model/student/dto/Studentfeesstructure.hbm.xml"></mapping>		
+		<mapping resource="com/model/student/dto/Studentfeesstructure.hbm.xml"></mapping>
+		<mapping resource="com/model/attendance/dto/Holidaysmaster.hbm.xml"></mapping>
+		<mapping resource="com/model/attendance/dto/Weeklyoff.hbm.xml"></mapping>
+		<mapping resource="com/model/attendance/dto/Attendancemaster.hbm.xml"></mapping>		
 	</session-factory>
 </hibernate-configuration>

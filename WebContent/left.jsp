@@ -477,7 +477,8 @@ Author     : Musaib
                 <a target="mainFrame" href="Controller?process=YearProcess&action=updateYear" >Academic year</a><br/>
                 <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=readListOfExams" >Exam Details</a><br/>
                 <a target="mainFrame" href="Controller?process=SubjectDetailsProcess&action=readListOfSubjects" >Subject Details</a><br/>
-
+				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceConfiguration" >Attendance</a><br/>
+				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAllHolidays" >Holidays/WeeklyOff</a><br/>
             </div>
             
 

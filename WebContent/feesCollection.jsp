@@ -1,5 +1,5 @@
 <%-- 
-    Document   : dispensePrescribedMedicine
+    Document   : feescollection
     Created on : Jul 24, 2012, 4:07:26 PM
     Author     : Administrator
 --%>
@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Fees Collection</title>
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="css/graph/jquery.jqplot.css">
 
@@ -476,9 +476,9 @@
                 .append( "<a><b> " + item.value +" </b> </a>" )
                 .appendTo( ul );
             };
-            var addDossageButtonID="#addDossage";
+            var addFeesButtonID="#addFees";
             var removeDossageButtonID="#removeDossage";
-            $( addDossageButtonID )
+            $( addFeesButtonID )
             .button({
                 icons: {
                     primary: "ui-icon-plus"
@@ -695,7 +695,7 @@
                     <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" required id="admno" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
                         
                         <td>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
-                        <td>Fees Category: <button id="addDossage">Add</button>&nbsp;&nbsp;&nbsp;<button id="removeDossage">Remove</button></td>
+                        <td>Fees Category: <button id="addFees">Add</button>&nbsp;&nbsp;&nbsp;<button id="removeDossage">Remove</button></td>
                     </tr>
                     
                     <tr>
