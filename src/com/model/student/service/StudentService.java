@@ -63,7 +63,6 @@ public class StudentService {
 	}
 
 	public boolean addStudent() {
-		System.out.println("In add contact of student service");
 		Student student = new Student();
 		Parents parents = new Parents();
 		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying=null,conClassAdmittedIn=null;
@@ -234,6 +233,14 @@ public class StudentService {
 		}
 		
 		student.setArchive(0);
+		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLM0123NOP89QRSTUVWXYZ4567";
+		int count =4;
+		StringBuilder builder = new StringBuilder();
+		while (count-- != 0) {
+		int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+		}
+		student.setStudentexternalid(builder.toString());
 		parents.setStudent(student);
 		parents = new parentsDetailsDAO().create(parents);
 
@@ -519,6 +526,10 @@ public class StudentService {
 	                
 	                if(fieldName.equalsIgnoreCase("studentpicupdate")){
 	                	studentPicUpdate=DataUtil.emptyString(item.getString());
+	                }
+	                
+	                if(fieldName.equalsIgnoreCase("studentexternalid")){
+	                	student.setStudentexternalid(DataUtil.emptyString(item.getString()));
 	                }
 	                
 	                // Updating paretns information
@@ -811,7 +822,7 @@ public class StudentService {
 		}
 
 		queryMain = queryMain + querySub;
-		List<Parents> searchStudentList = new UserDAO().getListOfStudents(queryMain);
+		List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		request.setAttribute("searchStudentList", searchStudentList);
 
 	}
@@ -830,7 +841,7 @@ public class StudentService {
 					String querySub = " parents.Student.id = " + id;
 					queryMain = queryMain + querySub;
 
-					List<Parents> searchStudentList = new UserDAO().getListOfStudents(queryMain);
+					List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 					request.setAttribute("searchStudentList", searchStudentList);
 
 					Parents searchStudentRecords = new studentDetailsDAO().getStudentRecords(queryMain);
@@ -911,10 +922,11 @@ public class StudentService {
 			}
 				
 				
-				ClassLoader classLoader = getClass().getClassLoader();
+				//ClassLoader classLoader = getClass().getClassLoader();
 				//Local 
 				//FileOutputStream out = new FileOutputStream("D:/schoolfiles/test.xlsx");
-				FileOutputStream out = new FileOutputStream(new File("/usr/local/tomcat/webapps/www.searchmysearch.com/musarpbiabha/studentsdetails.xlsx"));
+				//FileOutputStream out = new FileOutputStream(new File("/usr/local/tomcat/webapps/www.searchmysearch.com/musarpbiabha/studentsdetails.xlsx"));
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"studentsdetails.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;
@@ -935,15 +947,10 @@ public class StudentService {
 		boolean result = false;
 		try {
 
-			// construct the complete absolute path of the file
-			URL url = null;
-			URLConnection con = null;
-			url = new URL("http://searchmysearch.com/musarpbiabha/studentsdetails.xlsx");
-			con = url.openConnection();
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"studentsdetails.xlsx");
+	        FileInputStream inStream = new FileInputStream(downloadFile);
 
-			BufferedInputStream bis = new BufferedInputStream(
-					con.getInputStream());
-			// get MIME type of the file
+	        // get MIME type of the file
 			String mimeType = "application/vnd.ms-excel";
 
 			// set content attributes for the response
@@ -963,11 +970,11 @@ public class StudentService {
 			int bytesRead = -1;
 
 			// write bytes read from the input stream into the output stream
-			while ((bytesRead = bis.read(buffer)) != -1) {
+			while ((bytesRead = inStream.read(buffer)) != -1) {
 				outStream.write(buffer, 0, bytesRead);
 			}
 
-			bis.close();
+			inStream.close();
 			outStream.close();
 			result = true;
 		} catch (Exception e) {

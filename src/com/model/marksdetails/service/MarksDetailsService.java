@@ -172,7 +172,7 @@ public class MarksDetailsService {
 		 * ;
 		 */
 		System.out.println("SEARCH QUERY ***** " + queryMain);
-		List<Parents> searchStudentList = new UserDAO().getListOfStudents(queryMain);
+		List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		request.setAttribute("searchStudentList", searchStudentList);
 
 		// get all the subjects
@@ -226,22 +226,20 @@ public class MarksDetailsService {
 		 * ;
 		 */
 		System.out.println("SEARCH QUERY ***** " + queryMain);
-		List<Parents> searchStudentList = new UserDAO().getListOfStudents(queryMain);
+		List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		// request.setAttribute("searchStudentList", searchStudentList);
-		List<Integer> ids = new ArrayList();
+		/*List<Integer> ids = new ArrayList();
 
 		for (int i = 0; i < searchStudentList.size(); i++) {
 			ids.add(searchStudentList.get(i).getStudent().getSid());
 		}
 
-		System.out.println("Total Number of Students" + searchStudentList.size());
+		System.out.println("Total Number of Students" + searchStudentList.size());*/
 
 		//
 		String exam = request.getParameter("exam");
 		String subject = request.getParameter("subject");
 		System.out.println("the subject id is " + subject + ", and exam id is " + exam);
-
-		List<Marks> marksDetails = new MarksDetailsDAO().readListOfMarks(ids);
 
 		List<Parents> newStudentList = new ArrayList<Parents>();
 		List<Marks> newMarksDetails = new ArrayList<Marks>();
@@ -293,7 +291,6 @@ public class MarksDetailsService {
 		String subject = request.getParameter("subjectidselected");
 		System.out.println("the subject id is " + subject + ", and exam id is " + exam);
 		int sizeOfArray = 0;
-		Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
 		Map<Integer, Map<Integer, String>> mapOfMarksid = new HashMap<Integer, Map<Integer, String>>();
 		List<Integer> ids = new ArrayList<Integer>();
 		List<String> studentsMarksList = new ArrayList<String>();

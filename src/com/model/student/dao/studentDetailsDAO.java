@@ -152,7 +152,6 @@ public class studentDetailsDAO {
 
 			results = (List<Student>) session.createQuery("From Student")
 					.list();
-			System.out.println("name of student " + results.size());
 			transaction.commit();
 
 		} catch (HibernateException hibernateException) {
@@ -465,4 +464,37 @@ public class studentDetailsDAO {
         return parents;
 	}
 
+	public java.util.List<Parents> getStudentsList(String query) {
+		java.util.List<Parents> parents = new ArrayList<Parents>();
+        try {
+            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(query);
+            parents = (java.util.List<Parents>) HQLquery.list();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        }
+        //session.close();
+        return parents;
+	}
+	
+	public List<Student> getListStudents(String query) {
+		java.util.List<Student> student = new ArrayList<Student>();
+        try {
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(query);
+            student = HQLquery.list();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        }finally{
+        	session.close();
+        }
+        return student;
+	}
+	
 }

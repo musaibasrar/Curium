@@ -426,6 +426,13 @@ Author     : Musaib
                 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getSubjectsExams" >View Marks</a><br/>
             	<a target="mainFrame" href="progressreport.jsp" >Generate Report</a><br/>
             </div>
+            
+            <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
+            <div>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" >View Attendance</a><br/>
+                <a target="mainFrame" href="attendancemark.jsp" >Mark Attendance</a><br/>
+            </div>
+            
             <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllEmployee" >View Employees</a><br/>
@@ -489,6 +496,7 @@ Author     : Musaib
                 <a target="mainFrame" href="changePassword.jsp" >Change Password</a><br/>
                 <a target="mainFrame" href="feesCollectionDetails.jsp" >Fees Details</a><br/>
                 <a target="mainFrame" href="generateids.jsp" >Generate IDs</a><br/>
+                <a target="mainFrame" href="uploadattendance.jsp" >upload attendance file</a><br/>
             </div>
             
             
@@ -509,7 +517,7 @@ Author     : Musaib
                 <a target="mainFrame" href="sendemail.jsp" >Email</a><br/>
             </div>
             
-            
+            </div>
                    
             
             <!-- END -->

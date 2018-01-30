@@ -1,7 +1,7 @@
 <%-- 
-    Document   : addcontact
+    Document   : add Student
     Created on : Jun 17, 2013, 4:17:40 PM
-    Author     : CPEDUR1P5
+    Author     : Musaib
 --%>
 
 

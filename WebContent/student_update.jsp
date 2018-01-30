@@ -220,7 +220,9 @@
 		$("#datepicker").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'yy-mm-dd',
+			yearRange: "-50:+0"
+			
 		});
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
@@ -230,7 +232,8 @@
 		$("#datepickeradmn").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'yy-mm-dd',
+			yearRange: "-50:+0"
 		});
 		$("#anim").change(
 				function() {
@@ -242,7 +245,8 @@
 		$("#datepickerCD").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'yy-mm-dd',
+			yearRange: "-50:+0"
 		});
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
@@ -390,7 +394,8 @@
 						<tr>
 							<td width="16%" class="alignRight">Name &nbsp;</td>
 							<td width="28%"><input type="hidden" name="id" id="id"
-								value="<c:out value="${student.sid}" />" /> <label> <input
+								value="<c:out value="${student.sid}" />" /><input type="hidden" name="studentexternalid" id="studentexternalid"
+								value="<c:out value="${student.studentexternalid}" />" /> <label> <input
 									name="name" type="text" style="text-transform:uppercase"
 									value="<c:out value="${student.name}" />" class="textField"
 									id="name" size="30" data-validate="validate(required)">

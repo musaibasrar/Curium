@@ -32,20 +32,20 @@ public class EmployeeDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public Teacher create(Teacher employee) {
+	public boolean create(Teacher employee) {
+		boolean result = false;
 		try {
 			transaction = session.beginTransaction();
 			session.save(employee);
-
 			transaction.commit();
-
+			result = true;
 		} catch (HibernateException hibernateException) {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			session.close();
-			return employee;
 		}
+		return result;
 	}
 
 	@SuppressWarnings({ "unchecked", "finally" })
@@ -161,6 +161,20 @@ public class EmployeeDAO {
 			session.close();
 		}
 		return employee;
+	}
+
+	public List<String> getEmployeeExternalId() {
+		List<String> employeeExtId = new ArrayList<String>();
+		try {
+			transaction = session.beginTransaction();
+			employeeExtId = session.createQuery("select teacherexternalid from Teacher").list();
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return employeeExtId;
 	}
 
 }

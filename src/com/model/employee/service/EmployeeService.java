@@ -51,10 +51,16 @@ public class EmployeeService {
 		employee.setSalary(DataUtil.emptyString(request.getParameter("salary")));
 		employee.setRemarks(DataUtil.emptyString(request.getParameter("remarks")));
 		
-		employee = new EmployeeDAO().create(employee);
-        
-
-            return true;
+		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		int count =4;
+		StringBuilder builder = new StringBuilder();
+		while (count-- != 0) {
+		int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+		}
+		employee.setTeacherexternalid(builder.toString());
+		
+		return new EmployeeDAO().create(employee);
 	}
 
 	public boolean ViewAllEmployee() {

@@ -40,6 +40,7 @@
 		<mapping resource="com/model/student/dto/Studentfeesstructure.hbm.xml"></mapping>
 		<mapping resource="com/model/attendance/dto/Holidaysmaster.hbm.xml"></mapping>
 		<mapping resource="com/model/attendance/dto/Weeklyoff.hbm.xml"></mapping>
-		<mapping resource="com/model/attendance/dto/Attendancemaster.hbm.xml"></mapping>		
+		<mapping resource="com/model/attendance/dto/Attendancemaster.hbm.xml"></mapping>
+		<mapping resource="com/model/attendance/dto/Studentdailyattendance.hbm.xml"></mapping>		
 	</session-factory>
 </hibernate-configuration>

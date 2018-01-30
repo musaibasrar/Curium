@@ -66,5 +66,9 @@
         <property name="studentpic" type="java.lang.String">
             <column name="STUDENTPIC" />
         </property>
+        <property name="studentexternalid" type="java.lang.String">
+            <column name="STUDENTEXTERNALID" length="45" not-null="true" unique="true"/>
+        </property>
+        
     </class>
 </hibernate-mapping>

@@ -114,23 +114,6 @@ public class UserDAO {
 	        }
 	}
 
-	public java.util.List<Parents> getListOfStudents(String query) {
-		java.util.List<Parents> parents = new ArrayList<Parents>();
-        try {
-            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
-
-            transaction = session.beginTransaction();
-            Query HQLquery = session.createQuery(query);
-            parents = (java.util.List<Parents>) HQLquery.list();
-            transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
-            hibernateException.printStackTrace();
-        }
-        //session.close();
-        return parents;
-	}
-
 	public Login readPassword(String currentPassword) {
         Login login = null;
         

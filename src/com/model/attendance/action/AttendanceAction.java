@@ -3,6 +3,9 @@
  */
 package com.model.attendance.action;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,6 +16,8 @@ import com.model.attendance.service.AttendanceService;
 import com.model.employee.service.EmployeeService;
 import com.model.feescategory.service.FeesService;
 import com.model.sendsms.service.SmsService;
+import com.model.student.dao.studentDetailsDAO;
+import com.model.student.dto.Student;
 import com.model.student.service.StudentService;
 
 /**
@@ -52,8 +57,90 @@ public class AttendanceAction {
 			url = addStaffAttendanceMaster();
 		}else if ("searchEmployees".equalsIgnoreCase(action)) {
 			url = searchEmployees();
+		}else if ("uploadAttendanceFile".equalsIgnoreCase(action)) {
+			url = uploadAttendanceFile();
+		}else if ("searchStudentAttendanceDetails".equalsIgnoreCase(action)) {
+			url = searchStudentAttendanceDetails();
+		}else if ("viewAttendance".equalsIgnoreCase(action)) {
+			url = viewAttendance();
+		}else if ("searchStudentAttendanceDetailsMonthly".equalsIgnoreCase(action)) {
+			url = searchStudentAttendanceDetailsMonthly();
+		}else if ("updateStudentAttendanceDetails".equalsIgnoreCase(action)) {
+			url = updateStudentAttendanceDetails();
+		}else if ("searchStudentAttendanceDetailsMonthlyGraph".equalsIgnoreCase(action)) {
+			url = searchStudentAttendanceDetailsMonthlyGraph();
+		}else if ("searchStudentAttendanceDetailsMark".equalsIgnoreCase(action)) {
+			url = searchStudentAttendanceDetailsMark();
+		}else if ("markStudentsAttendance".equalsIgnoreCase(action)) {
+			url = markStudentsAttendance();
 		}
 		return url;
+	}
+
+	private String markStudentsAttendance() {
+		
+		if(new AttendanceService(request, response).markStudentsAttendance()){
+			return "attendancemark.jsp";
+		}
+		return errorPage;
+	}
+
+	private String searchStudentAttendanceDetailsMark() {
+		
+		if(new AttendanceService(request, response).viewStudentAttendanceDetailsMark()){
+			return "attendancemark.jsp";
+		}
+		return errorPage;
+	}
+
+	private String searchStudentAttendanceDetailsMonthlyGraph() {
+		
+		if(new AttendanceService(request, response).viewStudentAttendanceDetailsMonthlyGraph()){
+			return "viewattendancegraph.jsp";
+		}
+		return errorPage;
+	}
+
+	private String updateStudentAttendanceDetails() {
+		if(new AttendanceService(request, response).updateStudentAttendanceDetails()){
+			return "viewattendance.jsp";
+		}
+		return errorPage;
+	}
+
+	private String searchStudentAttendanceDetailsMonthly() {
+		
+		if(new AttendanceService(request, response).viewStudentAttendanceDetailsMonthly()){
+			return "viewattendancemonthly.jsp";
+		}
+		return errorPage;
+	}
+
+	private String viewAttendance() {
+
+		if(new AttendanceService(request, response).viewAttendance()){
+			return "viewattendance.jsp";
+		}
+		return errorPage;
+	}
+
+	private String searchStudentAttendanceDetails() {
+		if(new AttendanceService(request, response).searchStudentAttendanceDetails()){
+			return "viewattendance.jsp";
+		}
+		return errorPage;
+	}
+
+	private String uploadAttendanceFile(){
+		try {
+			if(new AttendanceService(request, response).uploadAttendanceFile()){
+				return "studentdailyattendancesuccess.jsp";
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return errorPage;
 	}
 
 	private String addStaffAttendanceMaster() {

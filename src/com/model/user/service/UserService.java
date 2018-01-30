@@ -293,7 +293,7 @@ public class UserService {
 			queryMain = queryMain+querySub+" AND parents.Student.archive=0";
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
-			List<Parents> searchStudentList = new UserDAO().getListOfStudents(queryMain);
+			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 			request.setAttribute("searchStudentList", searchStudentList);
 		
 		
@@ -392,7 +392,7 @@ public class UserService {
 			queryMain = queryMain+querySub;
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
-			List<Parents> searchParentsList = new UserDAO().getListOfStudents(queryMain);
+			List<Parents> searchParentsList = new studentDetailsDAO().getStudentsList(queryMain);
 			request.setAttribute("studentList", searchParentsList);
 		
 		
