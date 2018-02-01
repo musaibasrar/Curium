@@ -72,8 +72,7 @@ public class StampFeesService {
 		 * ;
 		 */
 		System.out.println("SEARCH QUERY ***** " + queryMain);
-		List<Parents> searchStudentList = new UserDAO()
-				.getListOfStudents(queryMain);
+		List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		request.setAttribute("searchStudentList", searchStudentList);
 
 	}
@@ -107,8 +106,8 @@ public class StampFeesService {
 		 * ;
 		 */
 		System.out.println("SEARCH QUERY ***** " + queryMain);
-		List<Parents> searchParentsList = new UserDAO()
-				.getListOfStudents(queryMain);
+		List<Parents> searchParentsList = new studentDetailsDAO()
+				.getStudentsList(queryMain);
 		request.setAttribute("studentList", searchParentsList);
 
 	}

@@ -1,5 +1,5 @@
 <%--
-    Document   : View Attendance monthly
+    Document   : View Attendance
     Created on : JAN 22, 2018, 4:14:28 PM
     Author     : Musaib
 --%>
@@ -391,69 +391,33 @@
 <script type="text/javascript">
                        
             var students = [
-            <c:forEach varStatus="status" items="${studentList}" var="student">{
-                value:'<c:out default="0" value="${student.admissionnumber}" />',
-                name:'<c:out default="0" value="${student.name}" />',
-                classandsec:'<c:out default="0" value="${student.classstudying}" />',
-                id:'<c:out default="0" value="${student.sid}" />',
-                externalid:'<c:out default="0" value="${student.studentexternalid}" />',
+            <c:forEach varStatus="status" items="${staffList}" var="staff">{
+                value:'<c:out default="0" value="${staff.teachername}" />',
+                id:'<c:out default="0" value="${staff.tid}" />',
+                externalid:'<c:out default="0" value="${staff.teacherexternalid}" />',
             }<c:if test="${!status.last}">,</c:if>
             </c:forEach>
         ];
             
             
-            var xAxis = [
-                            <c:forEach varStatus="status" items="${xaxis}" var="xaxis">{
-                                value:'<c:out default="0" value="${xaxis}" />',
-                            }<c:if test="${!status.last}">,</c:if>
-                            </c:forEach>
-                        ];
-            
-            function getFields(input, field) {
-                var output = [];
-                for (var i=0; i < input.length ; ++i)
-                    output.push(input[i][field]);
-                return output;
-            }
-
-            var xAxisValues = getFields(xAxis, "value");
-            
-            
-            var yAxis = [
-                         <c:forEach varStatus="status" items="${yaxis}" var="yaxis">{
-                             value:'<c:out default="0" value="${yaxis}" />',
-                         }<c:if test="${!status.last}">,</c:if>
-                         </c:forEach>
-                     ];
-         
-         function getFields(input, field) {
-             var output = [];
-             for (var i=0; i < input.length ; ++i)
-                 output.push(input[i][field]);
-             return output;
-         }
-
-         var yAxisValues = getFields(yAxis, "value");
-            
             
         $(function() {
-            $( "#admno").autocomplete({
+            $( "#nameofstaff").autocomplete({
                 source: students,
                 minLength: 1,
                 change:function(event,ui){
-                    $( "#studentId").val( ui.item.id );
+                    $( "#staffid").val( ui.item.id );
                     
                     
                 },
                 focus: function( event, ui ) {
-                    $( "#studentId").val( ui.item.id );
+                    $( "#staffid").val( ui.item.id );
                     return true;
                 },
                 select: function( event, ui ) {
-                    $( "#studentId").val( ui.item.id );
-       			  $( "#studentname").val( ui.item.name );
-       			$( "#classandsec").val( ui.item.classandsec );
-               $("#studentexternalid").val( ui.item.externalid );
+                    $( "#staffid").val( ui.item.id );
+       			  $( "#staffname").val( ui.item.value );
+               $("#staffexternalid").val( ui.item.externalid );
                     return true;
                 }
             }).data( "autocomplete" )._renderItem = function( ul, item ) {
@@ -467,61 +431,7 @@
 
         });
         
-        $(function() {
-            $( "#admnograph").autocomplete({
-                source: students,
-                minLength: 1,
-                change:function(event,ui){
-                    $( "#studentIdgraph").val( ui.item.id );
-                    
-                    
-                },
-                focus: function( event, ui ) {
-                    $( "#studentIdgraph").val( ui.item.id );
-                    return true;
-                },
-                select: function( event, ui ) {
-                    $( "#studentIdgraph").val( ui.item.id );
-       			  $( "#studentnamegraph").val( ui.item.name );
-       			$( "#classandsecgraph").val( ui.item.classandsec );
-               $("#studentexternalidgraph").val( ui.item.externalid );
-                    return true;
-                }
-            }).data( "autocomplete" )._renderItem = function( ul, item ) {
-                return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +" </b> </a>" )
-                .appendTo( ul );
-            };
-            
-                       
-
-        });
-              
         
-        var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
-    	
-    	var yAxisLabel = yAxisValues;
-    	var xAxislabel = xAxisValues;
-    	var barChartData = {
-    		labels : xAxisValues,
-    		datasets : [
-    			{
-    				fillColor : "rgba(0,0,0,0.8)",
-    				strokeColor : "rgba(220,220,220,0.8)",
-    				highlightFill: "rgba(0,0,0,0.75)",
-    				highlightStroke: "rgba(0,0,0,1)",
-    				data : yAxisLabel
-    			}
-    		]
-    	}
-    	window.onload = function(){
-    		var ctx = document.getElementById("canvas").getContext("2d");
-    		window.myBar = new Chart(ctx).Bar(barChartData, {
-    			responsive : true
-    		});
-    	}
-       
         </script>
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
@@ -529,18 +439,15 @@
 	$(function() {
 
 		$("#search").button().click(function() {
-			searchStudentAttendanceDetails();
+			searchStaffAttendanceDetails();
 		});
 		
 		$("#searchMonthly").button().click(function() {
-			searchStudentAttendanceDetailsMonthly();
+			searchStaffAttendanceDetailsMonthly();
 		});
 		
-		$("#searchMonthlyGraph").button().click(function() {
-			searchStudentAttendanceDetailsMonthlyGraph();
-		});
-		
-		 $("#studentAttendanceStatus").keypress(function (e) {
+				
+		 $("#staffAttendanceStatus").keypress(function (e) {
 		     //if the letter is not digit then display error and don't type anything
 		     if (e.which != 8 && e.which != 0 && e.which != 65 && e.which != 97 && e.which != 72 && e.which != 104 && e.which != 80 && e.which != 112 && e.which != 127) {
 		               return false;
@@ -549,25 +456,17 @@
 
 	});
 	
-	function searchStudentAttendanceDetailsMonthly() {
+	function searchStaffAttendanceDetailsMonthly() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetailsMonthly";
+		form1.action = "Controller?process=AttendanceProcess&action=searchStaffAttendanceDetailsMonthly";
 		form1.method = "POST";
 		form1.submit();
 
 	}
 	
-	function searchStudentAttendanceDetailsMonthlyGraph() {
+	function searchStaffAttendanceDetails() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetailsMonthlyGraph";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-	
-	function searchStudentAttendanceDetails() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetails";
+		form1.action = "Controller?process=AttendanceProcess&action=searchStaffAttendanceDetails";
 		form1.method = "POST";
 		form1.submit();
 
@@ -641,13 +540,7 @@
 			return false;
 
 		});
-		$("#deleteStamp").button().click(function() {
-			if (confirm('Are you sure you want to delete the stamp fees?As it can not be revert back.')) {
-			deleteFeesStamp();
-			}
-			return false;
-
-		});
+		
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
 			var trLength = $('.trClass').length;
@@ -727,7 +620,7 @@
 	   
 	function updateRecords(){
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=updateStudentAttendanceDetails";
+		form1.action = "Controller?process=AttendanceProcess&action=updateStaffAttendanceDetails";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -750,18 +643,17 @@
 				<ul>
 					<li><a href="#tabs-1">Daily Attendance</a></li>
 					<li><a href="#tabs-2">Attendance Between Dates</a></li>
-					<li><a href="#tabs-3">Monthly Attendance</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
-							<td class="alignRightFields">Date &nbsp;</td>
-							<td width="12%" align="left"><label> <input
+							<td class="alignRightFields">Date &nbsp;&nbsp;&nbsp;<label> <input
 									name="dateofattendance" type="text" class="textField"
 									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"/>
 							</label></td>
+							<td width="12%" align="left"></td>
 							
 						</tr>
 
@@ -769,43 +661,6 @@
 							<td><br /></td>
 
 						</tr>
-
-
-						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 90px">
-										<option selected>Class</option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
-								</select>
-
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 50px">
-										<option selected>Sec</option>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>E</option>
-										<option>F</option>
-										<option>G</option>
-
-								</select>
-							</label>
-						</tr>
-
 						<tr>
 							<td><br /></td>
 
@@ -818,10 +673,9 @@
 
 						<tr>
 
-							<td width="30%" class="alignRight"></td>
 
 							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
+							<td width="30%" >&nbsp;&nbsp;&nbsp;&nbsp;
 								<button id="search">Search</button>
 							</td>
 						</tr>
@@ -857,18 +711,13 @@
 						<td><br></td>
 						</tr>
 						<tr>
-                    <td style="width: 45%" class="alignRightFields">Admission No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" onfocus="checkDate();" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" />
-                    <input name="studentexternalid" type="hidden" id="studentexternalid" /> </td>
+                    <td style="width: 45%" class="alignRightFields">Staff Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="nameofstaff" id="nameofstaff" onfocus="checkDate();" style="width: 200px" /> <input name="staffId" type="hidden" id="staffId" value="" />
+                    <input name="staffexternalid" type="hidden" id="staffexternalid" /> </td>
                         
                     </tr>
                     <tr>
 						<td><br></td>
-                    <tr>
                     
-                        <td style="width: 45%" class="alignRightFields">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentname" id="studentname" style="width: 200px" required readonly/>
-                        &nbsp;&nbsp;&nbsp;Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" /></td>
-                        
-                    </tr>
 
 						<tr>
 							<td><br /></td>
@@ -905,97 +754,19 @@
 					</table>
 				</div>
 				
-				
-				<div id="tabs-3">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-
-						<tr>
-							<td class="alignRightFields">From Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<label> <input
-									name="frommonthlyattendance" type="text" class="textField"
-									id="frommonthlyattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"/>
-							</label>	
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<label>To Date: &nbsp;</label>
-							<label> <input
-									name="tomonthlyattendance" type="text" class="textField"
-									id="tomonthlyattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"/>
-							</label>
-							</td>
-							
-						</tr>
-						<tr>
-						<td><br></td>
-						</tr>
-						<tr>
-                    <td style="width: 45%" class="alignRightFields">Admission No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnograph" id="admnograph" onfocus="checkDateGraph();" style="width: 200px" /> <input name="studentIdgraph" type="hidden" id="studentIdgraph" value="" /> 
-                    <input name="studentexternalidgraph" type="hidden" id="studentexternalidgraph" /></td>
-                        
-                    </tr>
-                    <tr>
-						<td><br></td>
-                    <tr>
-                    
-                        <td style="width: 45%" class="alignRightFields">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentnamegraph" id="studentnamegraph" style="width: 200px" required readonly/>
-                        &nbsp;&nbsp;&nbsp;Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsecgraph" id="classandsecgraph" /></td>
-                        
-                    </tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-
-							
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="searchMonthlyGraph">Search</button>
-							</td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-					</table>
-				</div>
-				
 			</div>
 		</div>
 		
 		<div style="overflow: scroll; height: 600px">
 		<div align="center">
-		<label style="color:#EB6000;font-family: Tahoma;
-	font-weight: bolder;
-        font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Admission Number: </label>
-    <label   style="font-family: Tahoma;
-	font-weight: bolder;
-	color: #5E87B0;
-        font-size: 15px;">${admno}</label>
+		
         <label style="color:#EB6000;font-family: Tahoma;
 	font-weight: bolder;
-        font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;Student Name: </label>
+        font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;Staff Name: </label>
         <label   style="font-family: Tahoma;
 	font-weight: bolder;
 	color: #5E87B0;
-        font-size: 15px;text-transform:uppercase;">${studentname}</label>
+        font-size: 15px;text-transform:uppercase;">${staffname}</label>
         <label style="color:#EB6000;font-family: Tahoma;
 	font-weight: bolder;
         font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;Total Present: </label>
@@ -1028,7 +799,7 @@
 				</thead>
 
 				<tbody>
-					<c:forEach items="${studentDailyAttendance}" var="dailyattendance" varStatus="status">
+					<c:forEach items="${staffDailyAttendance}" var="dailyattendance" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
@@ -1040,7 +811,7 @@
 								><c:out
 										value="${dailyattendance.date}" /></a></td>
 							<td class="dataText">
-							<input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" value="<c:out value="${dailyattendance.attendancestatus}" />" maxlength="1">
+							<input type="text" id="staffAttendanceStatus" name="staffAttendanceStatus" style="text-transform:uppercase" value="<c:out value="${dailyattendance.attendancestatus}" />" maxlength="1">
 							</td>
 						</tr>
 					</c:forEach>
@@ -1061,7 +832,7 @@
 
 		</div>
 					
-	</form>
 
+	</form>
 </body>
 </html>

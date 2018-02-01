@@ -3,7 +3,9 @@ package com.model.attendance.dao;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,6 +16,7 @@ import org.hibernate.Transaction;
 
 import com.model.attendance.dto.Attendancemaster;
 import com.model.attendance.dto.Holidaysmaster;
+import com.model.attendance.dto.Staffdailyattendance;
 import com.model.attendance.dto.Studentdailyattendance;
 import com.model.attendance.dto.Weeklyoff;
 import com.model.employee.dto.Teacher;
@@ -207,7 +210,19 @@ public class AttendanceDAO {
 			transaction = session.beginTransaction();
 			
 			for (Studentdailyattendance studentdailyattendance : listStudentAttendance) {
-				session.save(studentdailyattendance);
+				Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
+				Query query = session.createQuery("from Studentdailyattendance  where" +
+						" attendeeid='"+studentdailyattendance.getAttendeeid()+"' and " +
+								"date= CURDATE() and academicyear = '"+studentdailyattendance.getAcademicyear()+"'");
+				studentDailyAttendanceDetails = (Studentdailyattendance) query.uniqueResult();
+				if(studentDailyAttendanceDetails == null){
+					session.save(studentdailyattendance);
+				}else{
+					Query queryTwo = session.createSQLQuery("update Studentdailyattendance set attendancestatus = " +
+							"'"+studentdailyattendance.getAttendancestatus()+"' where attendanceid = " +
+									"'"+studentDailyAttendanceDetails.getAttendanceid()+"'");
+					queryTwo.executeUpdate();
+				}
 			}
 			
 			transaction.commit();
@@ -266,12 +281,11 @@ public class AttendanceDAO {
 				i++;
 			}
 			transaction.commit();
-			/*Query query = session.createQuery("update Studentdailyattendance set attendancestatus = :attendancestatus where attendanceid IN (:ids)");
-			query.setParameterList("attendancestatus", studentAttendanceStatusList);
-			query.setParameterList("ids", attendanceIdsList);
-			query.executeUpdate();*/
+			return true;
 		}catch(Exception e){
 			System.out.println("error "+e);
+		}finally{
+			session.close();
 		}
 		return false;
 	}
@@ -293,18 +307,23 @@ public class AttendanceDAO {
 		return studentDailyAttendance;
 	}
 
-	public boolean checkStudentAttendance(Studentdailyattendance studentDailyAttendance) {
-		Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
+	public boolean checkStudentAttendance(List<Studentdailyattendance> studentDailyAttendanceList) {
+		
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
-			studentDailyAttendanceDetails = (Studentdailyattendance) query.uniqueResult();
-			if(studentDailyAttendanceDetails == null){
-				session.save(studentDailyAttendance);
-			}else{
-				Query queryTwo = session.createSQLQuery("update Studentdailyattendance set attendancestatus = '"+studentDailyAttendance.getAttendancestatus()+"' where attendanceid = '"+studentDailyAttendanceDetails.getAttendanceid()+"'");
-				queryTwo.executeUpdate();
+		
+			for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
+				Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
+				Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
+				studentDailyAttendanceDetails = (Studentdailyattendance) query.uniqueResult();
+				if(studentDailyAttendanceDetails == null){
+					session.save(studentDailyAttendance);
+				}else{
+					Query queryTwo = session.createSQLQuery("update Studentdailyattendance set attendancestatus = '"+studentDailyAttendance.getAttendancestatus()+"' where attendanceid = '"+studentDailyAttendanceDetails.getAttendanceid()+"'");
+					queryTwo.executeUpdate();
+				}
 			}
+			
 			transaction.commit();
 			return true;
 		} catch (Exception e) {
@@ -316,26 +335,20 @@ public class AttendanceDAO {
 		return false;
 	}
 
-	public void markDailyAttendanceJob(List<Student> studentList, String currentAcademicYear) {
+	public void markDailyAttendanceJob(List<Studentdailyattendance> studentDailyAttendance) {
 
 		
 		try{
 			transaction = session.beginTransaction();
 			
-			for (Student student : studentList) {
-				Student studentSingle = new Student();
-				Query query = session.createQuery("from Studentdailyattendance where attendeeid = '"+student.getStudentexternalid()+"' and academicyear='"+currentAcademicYear+"' and date=CURDATE()");
-				studentSingle = (Student) query.uniqueResult();
+			for (Studentdailyattendance student : studentDailyAttendance) {
+				Studentdailyattendance studentSingle = new Studentdailyattendance();
+				Query query = session.createQuery("from Studentdailyattendance where attendeeid = '"+student.getAttendeeid()+"' and academicyear='"+student.getAcademicyear()+"' and date=CURDATE()");
+				studentSingle = (Studentdailyattendance) query.uniqueResult();
 			
 				if(studentSingle == null){
-					Studentdailyattendance studentDailyAttendance = new Studentdailyattendance();
-					studentDailyAttendance.setAttendeeid(student.getStudentexternalid());
-					studentDailyAttendance.setDate(new Date());
-					studentDailyAttendance.setAttendancestatus("A");
-					studentDailyAttendance.setAcademicyear(currentAcademicYear);
-					session.save(studentDailyAttendance);
+					session.save(student);
 				}
-				
 			}
 			transaction.commit();
 		}catch(Exception e){
@@ -343,6 +356,164 @@ public class AttendanceDAO {
 		}finally{
 			session.close();
 		}
+	}
+
+	public Map<String, List<Studentdailyattendance>> readListOfStudentAttendanceExport(
+			String currentAcademicYear, Timestamp timestampFrom, Timestamp timestampto,
+			List<Student> searchStudentList) {
+		
+		Map<String, List<Studentdailyattendance>> mapStudentAttendance = new HashMap<String, List<Studentdailyattendance>>();
+		
+		try{
+			transaction = session.beginTransaction();
+			
+			for (Student student : searchStudentList) {
+				List<Studentdailyattendance> studentAttendance = new ArrayList<Studentdailyattendance>();
+				studentAttendance = session.createQuery("from Studentdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+student.getStudentexternalid()+"'").list();
+				mapStudentAttendance.put(student.getName(), studentAttendance);
+			}
+			transaction.commit();
+		}catch(Exception e){
+			System.out.println(""+e);
+		}
+		return mapStudentAttendance;
+	}
+
+	public boolean saveStaffAttendance(List<Staffdailyattendance> listStaffAttendance) {
+		
+		try{
+			transaction = session.beginTransaction();
+			
+			for (Staffdailyattendance staffdailyattendance : listStaffAttendance) {
+				Staffdailyattendance staffDaily = new Staffdailyattendance();
+				
+				Query query = session.createQuery("from Staffdailyattendance  where attendeeid='"+staffdailyattendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+staffdailyattendance.getAcademicyear()+"'");
+				staffDaily = (Staffdailyattendance) query.uniqueResult();
+				
+				if(staffDaily == null){
+					session.save(staffdailyattendance);
+				}else{
+					Query queryTwo = session.createSQLQuery("update Staffdailyattendance set attendancestatus = '"+staffdailyattendance.getAttendancestatus()+"' where attendanceid = '"+staffDaily.getAttendanceid()+"'");
+					queryTwo.executeUpdate();
+				}
+			}
+			
+			transaction.commit();
+			return true;
+		}catch(HibernateException e){
+			logger.info(e);
+			System.out.println(""+e);
+		}finally{
+			session.close();
+		}
+		return false;
+	}
+
+	public List<Staffdailyattendance> readListOfStaffAttendance(String currentAcademicYear,
+			Timestamp timestamp, String teacherexternalid) {
+		
+List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattendance>();
+		
+		try{
+			transaction = session.beginTransaction();
+			staffDailyAttendance = session.createQuery("from Staffdailyattendance  where date = '"+timestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacherexternalid+"'").list();
+			transaction.commit();
+		}catch(HibernateException e){
+			logger.info(e);
+			System.out.println("column "+e);
+		}finally{
+			session.close();
+		}
+		return staffDailyAttendance;
+	}
+
+	public boolean updateStaffAttendanceDetails(List<Integer> attendanceIdsList,
+			List<String> staffAttendanceStatusList) {
+		try{
+			transaction = session.beginTransaction();
+			int i =0;
+			for (Integer attIn : attendanceIdsList) {
+				Query query = session.createSQLQuery("update Staffdailyattendance set attendancestatus = '"+staffAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
+				query.executeUpdate();
+				i++;
+			}
+			transaction.commit();
+			return true;
+		}catch(Exception e){
+			System.out.println("error "+e);
+		}finally{
+			session.close();
+		}
+		return false;
+	}
+
+	public List<Staffdailyattendance> getStaffDailyAttendance(
+			String staffExternalId, Timestamp fromTimestamp,
+			Timestamp toTimestamp, String currentAcademicYear) {
+		List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattendance>();
+		try {
+			transaction = session.beginTransaction();
+			staffDailyAttendance = session.createQuery("from Staffdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+staffExternalId+"'").list();
+			transaction.commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally{
+			session.close();
+		}
+		
+		return staffDailyAttendance;
+	}
+
+	public boolean checkStaffAttendance(List<Staffdailyattendance> staffDailyAttendanceList) {
+		
+
+		try {
+			transaction = session.beginTransaction();
+			
+			for (Staffdailyattendance staffDailyAttendance : staffDailyAttendanceList) {
+				Staffdailyattendance staffDailyAttendanceDetails = new Staffdailyattendance();
+				Query query = session.createQuery("from Staffdailyattendance  where attendeeid='"+staffDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+staffDailyAttendance.getAcademicyear()+"'");
+				staffDailyAttendanceDetails = (Staffdailyattendance) query.uniqueResult();
+				if(staffDailyAttendanceDetails == null){
+					session.save(staffDailyAttendance);
+				}else{
+					Query queryTwo = session.createSQLQuery("update Staffdailyattendance set attendancestatus = '"+staffDailyAttendance.getAttendancestatus()+"' where attendanceid = '"+staffDailyAttendanceDetails.getAttendanceid()+"'");
+					queryTwo.executeUpdate();
+				}
+			}
+			
+			transaction.commit();
+			return true;
+		} catch (Exception e) {
+			System.out.println(""+e);
+		}finally{
+			session.close();
+		}
+		
+		return false;
+	}
+
+	public Map<String, List<Staffdailyattendance>> readListOfStaffAttendanceExport(
+			String currentAcademicYear, Timestamp timestampFrom, Timestamp timestampto,
+			List<Teacher> staffList) {
+
+
+		Map<String, List<Staffdailyattendance>> mapStaffAttendance = new HashMap<String, List<Staffdailyattendance>>();
+		
+		try{
+			transaction = session.beginTransaction();
+			
+			for (Teacher teacher : staffList) {
+				List<Staffdailyattendance> staffAttendance = new ArrayList<Staffdailyattendance>();
+				staffAttendance = session.createQuery("from Staffdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacher.getTeacherexternalid()+"'").list();
+				mapStaffAttendance.put(teacher.getTeachername(), staffAttendance);
+			}
+			transaction.commit();
+		}catch(Exception e){
+			System.out.println(""+e);
+		}
+		return mapStaffAttendance;
+		
 	}
 
 }

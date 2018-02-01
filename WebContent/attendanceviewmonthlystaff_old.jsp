@@ -982,20 +982,14 @@
 		
 		<div style="overflow: scroll; height: 600px">
 		<div align="center">
-		<label style="color:#EB6000;font-family: Tahoma;
-	font-weight: bolder;
-        font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Admission Number: </label>
-    <label   style="font-family: Tahoma;
-	font-weight: bolder;
-	color: #5E87B0;
-        font-size: 15px;">${admno}</label>
+		
         <label style="color:#EB6000;font-family: Tahoma;
 	font-weight: bolder;
-        font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;Student Name: </label>
+        font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;Staff Name: </label>
         <label   style="font-family: Tahoma;
 	font-weight: bolder;
 	color: #5E87B0;
-        font-size: 15px;text-transform:uppercase;">${studentname}</label>
+        font-size: 15px;text-transform:uppercase;">${staffname}</label>
         <label style="color:#EB6000;font-family: Tahoma;
 	font-weight: bolder;
         font-size: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;Total Present: </label>
@@ -1028,7 +1022,7 @@
 				</thead>
 
 				<tbody>
-					<c:forEach items="${studentDailyAttendance}" var="dailyattendance" varStatus="status">
+					<c:forEach items="${staffDailyAttendance}" var="dailyattendance" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
@@ -1040,7 +1034,7 @@
 								><c:out
 										value="${dailyattendance.date}" /></a></td>
 							<td class="dataText">
-							<input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" value="<c:out value="${dailyattendance.attendancestatus}" />" maxlength="1">
+							<input type="text" id="staffAttendanceStatus" name="staffAttendanceStatus" style="text-transform:uppercase" value="<c:out value="${dailyattendance.attendancestatus}" />" maxlength="1">
 							</td>
 						</tr>
 					</c:forEach>

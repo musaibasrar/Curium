@@ -431,15 +431,18 @@ Author     : Musaib
             <div>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" >View Attendance</a><br/>
                 <a target="mainFrame" href="attendancemark.jsp" >Mark Attendance</a><br/>
+                <a target="mainFrame" href="attendanceexport.jsp" >Export Attendance</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllEmployee" >View Employees</a><br/>
-                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllEmployee" >View All</a><br/>
+                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=addEmployeePage" >Add</a>
                 <a target="mainFrame" href="Controller?process=DepartmentProcess&action=departmentView" >Add Department</a>
                 <a target="mainFrame" href="Controller?process=PositionProcess&action=positionView" >Add Position</a>
-
+				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendanceStaff" >View Attendance</a>
+				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceMarkStaff" >Mark Attendance</a><br/>
+				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExportViewStaff" >Export Attendance</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>

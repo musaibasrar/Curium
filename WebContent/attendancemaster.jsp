@@ -650,6 +650,15 @@
 						<tr>
 
 							<td width="12%" align="left" class="alignRightFields">In Time &nbsp;</td>
+							<td><label> <input name="intime" id="intime" type="time"
+							</input>
+							
+							 </td>
+						</tr>
+						
+						<!-- <tr>
+
+							<td width="12%" align="left" class="alignRightFields">In Time &nbsp;</td>
 							<td><label> <select name="intime" id="intime"
 									style="width: 40px">
 										<option selected>07</option>
@@ -685,7 +694,7 @@
 										<option>PM</option>
 								</select>
 							</label></td>
-						</tr>
+						</tr> -->
 						
 						<tr>
 							<td><br /></td>
@@ -694,41 +703,8 @@
 						<tr>
 
 							<td width="12%" align="left" class="alignRightFields">Out Time &nbsp;</td>
-							<td><label> <select name="outtime" id="outtime"
-									style="width: 40px">
-										<option selected>07</option>
-										<option>08</option>
-										<option>09</option>
-										<option>10</option>
-										<option>11</option>
-										<option>12</option>
-										<option>01</option>
-										<option>02</option>
-										<option>03</option>
-										<option>04</option>
-										<option>05</option>
-										<option>06</option>
-								</select>
-								
-
-							</label>
-							<label style="font-weight: bold;color:#325F6D">:</label>
-							 <label> 
-									<select name="minoutstaff" id="minoutstaff"
-									style=" width: 40px">
-										<option selected>00</option>
-										<option>15</option>
-										<option>30</option>
-										<option>45</option>
-								</select>
-							</label>
-							<label> 
-									<select name="ampmoutstaff" id="ampmoutstaff"
-									style=" width: 40px">
-										<option selected>AM</option>
-										<option>PM</option>
-								</select>
-							</label></td>
+							<td><label> <input name="outtime" id="outtime" type="time"/>	</label>
+							</td>
 						</tr>
 						
 						<tr>
@@ -862,40 +838,8 @@
 
 						<tr>
 							<td class="alignRightFields">Cutoff Time &nbsp;</td>
-							<td width="70%"><label> <select name="cutoff" id="cutoff"
-									style="width: 40px">
-										<option selected>07</option>
-										<option>08</option>
-										<option>09</option>
-										<option>10</option>
-										<option>11</option>
-										<option>12</option>
-										<option>01</option>
-										<option>02</option>
-										<option>03</option>
-										<option>04</option>
-										<option>05</option>
-										<option>06</option>
-								</select>
-								
-
-							</label>
-							<label style="font-weight: bold;color:#325F6D">:</label>
-							 <label> 
-									<select name="min" id="min"
-									style=" width: 40px">
-										<option selected>00</option>
-										<option>15</option>
-										<option>30</option>
-										<option>45</option>
-								</select>
-							</label>
-							<label> 
-									<select name="ampm" id="ampm"
-									style=" width: 40px">
-										<option selected>AM</option>
-										<option>PM</option>
-								</select>
+							<td width="70%"><label> <input name="cutoff" id="cutoff" type="time"
+								</input>
 							</label>
 							</td>
 						</tr>

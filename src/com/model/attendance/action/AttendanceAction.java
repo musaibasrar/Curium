@@ -3,7 +3,10 @@
  */
 package com.model.attendance.action;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -73,8 +76,118 @@ public class AttendanceAction {
 			url = searchStudentAttendanceDetailsMark();
 		}else if ("markStudentsAttendance".equalsIgnoreCase(action)) {
 			url = markStudentsAttendance();
+		}else if ("exportMonthlyData".equalsIgnoreCase(action)) {
+			url = exportMonthlyData();
+		}else if ("download".equalsIgnoreCase(action)) {
+			url = download();
+		}else if ("viewAttendanceStaff".equalsIgnoreCase(action)) {
+			url = viewAttendanceStaff();
+		}else if ("searchStaffAttendanceDetails".equalsIgnoreCase(action)) {
+			url = searchStaffAttendanceDetails();
+		}else if ("updateStaffAttendanceDetails".equalsIgnoreCase(action)) {
+			url = updateStaffAttendanceDetails();
+		}else if ("searchStaffAttendanceDetailsMonthly".equalsIgnoreCase(action)) {
+			url = searchStaffAttendanceDetailsMonthly();
+		}else if ("attendanceMarkStaff".equalsIgnoreCase(action)) {
+			url = attendanceMarkStaff();
+		}else if ("markStaffAttendance".equalsIgnoreCase(action)) {
+			url = markStaffAttendance();
+		}else if ("markStaffAttendance".equalsIgnoreCase(action)) {
+			url = markStaffAttendance();
+		}else if ("attendanceExportViewStaff".equalsIgnoreCase(action)) {
+			url = attendanceExportViewStaff();
+		}else if ("exportMonthlyDataStaff".equalsIgnoreCase(action)) {
+			url = exportMonthlyAttendanceStaff();
+		}else if ("downloadStaffAttendance".equalsIgnoreCase(action)) {
+			url = downloadStaffAttendance();
 		}
 		return url;
+	}
+	
+	
+	private String downloadStaffAttendance() {
+		
+		if(new AttendanceService(request, response).downloadFileStaff()){
+			return "attendanceexportsuccessstaff.jsp";
+		}
+		return "exportfailure.jsp";
+		
+	}
+
+	private String exportMonthlyAttendanceStaff() {
+		
+		if(new AttendanceService(request, response).exportMonthlyDataStaff()){
+			return "attendanceexportsuccessstaff.jsp";
+		}
+		return errorPage;
+	}
+
+	private String attendanceExportViewStaff() {
+		
+		if(new AttendanceService(request, response).viewAttendanceStaff()){
+			return "attendanceexportstaff.jsp";
+		}
+		return errorPage;
+	}
+
+	private String markStaffAttendance() {
+		
+		if(new AttendanceService(request, response).markStaffAttendance()){
+			return "attendancemarkstaffsuccess.jsp";
+		}
+		return errorPage;
+	}
+
+	private String attendanceMarkStaff() {
+
+		if(new AttendanceService(request, response).viewAttendanceStaff()){
+			return "attendancemarkstaff.jsp";
+		}
+		return errorPage;
+	}
+
+	private String searchStaffAttendanceDetailsMonthly() {
+		if(new AttendanceService(request, response).viewStaffAttendanceDetailsMonthly()){
+			return "attendanceviewmonthlystaff.jsp";
+		}
+		return errorPage;
+	}
+
+	private String updateStaffAttendanceDetails() {
+		if(new AttendanceService(request, response).updateStaffAttendanceDetails()){
+			return "attendanceviewstaff.jsp";
+		}
+		return errorPage;
+	}
+
+	private String searchStaffAttendanceDetails() {
+		if(new AttendanceService(request, response).searchStaffAttendanceDetails()){
+			return "attendanceviewstaff.jsp";
+		}
+		return errorPage;
+	}
+
+	private String viewAttendanceStaff() {
+
+		if(new AttendanceService(request, response).viewAttendanceStaff()){
+			return "attendanceviewstaff.jsp";
+		}
+		return errorPage;
+	}
+
+	private String download() {
+		if(new AttendanceService(request, response).downloadFile()){
+			return "attendanceexportsuccess.jsp";
+		}
+		return "exportfailure.jsp";
+	}
+
+	private String exportMonthlyData() {
+		
+		if(new AttendanceService(request, response).exportMonthlyData()){
+			return "attendanceexportsuccess.jsp";
+		}
+		return errorPage;
 	}
 
 	private String markStudentsAttendance() {

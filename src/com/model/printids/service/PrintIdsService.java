@@ -569,7 +569,7 @@ public class PrintIdsService {
 		 * ;
 		 */
 		System.out.println("SEARCH QUERY ***** " + queryMain);
-		List<Parents> searchStudentList = new UserDAO().getListOfStudents(queryMain);
+		List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		request.setAttribute("searchStudentList", searchStudentList);
 
 	}
@@ -590,7 +590,7 @@ public class PrintIdsService {
 					String querySub = " parents.Student.id = " + id;
 					queryMain = queryMain + querySub;
 
-					List<Parents> searchStudentList = new UserDAO().getListOfStudents(queryMain);
+					List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 					request.setAttribute("searchStudentList", searchStudentList);
 
 					Parents searchStudentRecords = new studentDetailsDAO().getStudentRecords(queryMain);
@@ -708,7 +708,7 @@ public class PrintIdsService {
 				queryMain = queryMain + querySub;
 
 				List<Parents> searchStudentList = new ArrayList<Parents>();
-				searchStudentList = new UserDAO().getListOfStudents(queryMain);
+				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 				String studentName = searchStudentList.get(0).getStudent().getName();
 				System.out.println("The student name is " + studentName);
 				// request.setAttribute("searchStudentList", searchStudentList);
@@ -764,8 +764,7 @@ public class PrintIdsService {
 		 * ;
 		 */
 		System.out.println("SEARCH QUERY ***** " + queryMain);
-		List<Parents> searchStudentList = new UserDAO()
-				.getListOfStudents(queryMain);
+		List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		request.setAttribute("searchStudentList", searchStudentList);
 		
 	}
