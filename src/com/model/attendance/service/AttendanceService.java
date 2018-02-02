@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -168,7 +169,7 @@ public class AttendanceService {
 		}
 	
 		attendanceMaster.setAttendeeid("00011");
-		attendanceMaster.setIntime(request.getParameter("cutoff") +":"+ request.getParameter("min") +" "+ request.getParameter("ampm"));
+		attendanceMaster.setIntime(request.getParameter("cutoff"));
 		attendanceMaster.setWeeklyoff(sbWeek.toString());
 		attendanceMaster.setHolidayname(sbHoliday.toString());
 		
@@ -213,8 +214,8 @@ public class AttendanceService {
 		for (String idStaff : staffId) {
 			Attendancemaster attendanceMaster = new Attendancemaster();
 			attendanceMaster.setAttendeeid(idStaff);
-			attendanceMaster.setIntime(request.getParameter("intime") +":"+ request.getParameter("mininstaff") +":"+ request.getParameter("ampminstaff"));
-			attendanceMaster.setOuttime(request.getParameter("outtime") +":"+ request.getParameter("minoutstaff") +":"+ request.getParameter("ampmoutstaff"));
+			attendanceMaster.setIntime(request.getParameter("intime"));
+			attendanceMaster.setOuttime(request.getParameter("outtime"));
 			attendanceMaster.setWeeklyoff(sbWeek.toString());
 			attendanceMaster.setHolidayname(sbHoliday.toString());
 			attendanceMasterList.add(attendanceMaster);
@@ -754,6 +755,13 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 	public void markDailyAttendanceJob(){
 		
 			Date todaysDate = new Date();
+			try {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				todaysDate = sdf.parse(sdf.format(todaysDate)) ;
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			List<Student> studentList = new studentDetailsDAO().getListStudents("from Student where archive=0");
 			Currentacademicyear currentAcademicYear = new YearDAO().showYear();
 			List<Attendancemaster> studentAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails("00011");
@@ -1269,5 +1277,69 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		return result;
 		
 		}
+
+	public void markDailyAttendanceJobStaff() {
+		
+		Date todaysDate = new Date();
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			todaysDate = sdf.parse(sdf.format(todaysDate)) ;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Teacher> staffList = new EmployeeDAO().readListOfObjects();
+		Currentacademicyear currentAcademicYear = new YearDAO().showYear();
+		List<Staffdailyattendance> listStaffAttendance = new ArrayList<Staffdailyattendance>();
+		
+		for (Teacher teacher : staffList) {
+			List<Attendancemaster> staffAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails(Integer.toString((teacher.getTid())));
+			String[] weeklyOffString = staffAttendanceMaster.get(0).getWeeklyoff().split(",");
+			List<Integer> staffWeeklyOffList = new ArrayList<Integer>();
+			boolean staffWeeklyOff = false;
+			boolean staffHoliday = false;
+			for (String weekOffS : weeklyOffString) {
+				staffWeeklyOffList.add(Integer.parseInt(weekOffS));
+			}
+			List<Weeklyoff> staffWeekOff = new AttendanceDAO().readListOfWeeklyOff(staffWeeklyOffList, currentAcademicYear.getCurrentacademicyear());
+			String today = new SimpleDateFormat("EEEE").format(todaysDate);
+			for (Weeklyoff weeklyoff : staffWeekOff) {
+				if(weeklyoff.getWeeklyoffday().equalsIgnoreCase(new SimpleDateFormat("EEEE").format(todaysDate))){
+					staffWeeklyOff = true;
+				}
+			}
+			
+			if(!staffWeeklyOff){
+				String[] holidayString = staffAttendanceMaster.get(0).getHolidayname().split(",");
+				List<Integer> staffHolidayList = new ArrayList<Integer>();
+				for (String singleHoliday : holidayString) {
+					staffHolidayList.add(Integer.parseInt(singleHoliday));
+				}
+				List<Holidaysmaster> staffHolidays = new AttendanceDAO().readListOfholidays(staffHolidayList, currentAcademicYear.getCurrentacademicyear());
+				for (Holidaysmaster holidaysmaster : staffHolidays) {
+					Date fromDate = holidaysmaster.getFromdate();
+					Date toDate = holidaysmaster.getTodate();
+					if(fromDate.compareTo(todaysDate) * todaysDate.compareTo(toDate) >= 0){
+						staffHoliday = true;
+					}
+					
+				}
+				}
+			
+			if(staffWeeklyOff || staffHoliday){
+				Staffdailyattendance staffDailyAttendance = new Staffdailyattendance();
+				staffDailyAttendance.setAttendeeid(teacher.getTeacherexternalid());
+				staffDailyAttendance.setDate(new Date());
+				staffDailyAttendance.setAttendancestatus("H");
+				staffDailyAttendance.setAcademicyear(currentAcademicYear.getCurrentacademicyear());
+				listStaffAttendance.add(staffDailyAttendance);
+		}
+		
+		}
+		if(!listStaffAttendance.isEmpty()){
+			new AttendanceDAO().markDailyAttendanceJobStaff(listStaffAttendance);
+		}
+		
+}
 
 }

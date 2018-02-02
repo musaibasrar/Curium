@@ -8,21 +8,41 @@
 
 	<schedule>
 		<job>
-			<name>RunTasks</name>
-			<group>RunTasksGroup</group>
-			<description>Running daily to mark the attendance</description>
-			<job-class>com.controller.RunTasks</job-class>
+			<name>RunStudentAttendance</name>
+			<group>RunStudentAttendanceGroup</group>
+			<description>Running daily to mark the attendance of students</description>
+			<job-class>com.controller.StudentsAttendanceJob</job-class>
 		</job>
 
 		<trigger>
 			<cron>
-				<name>runTasksTrigger</name>
-				<job-name>RunTasks</job-name>
-				<job-group>RunTasksGroup</job-group>
+				<name>RunStudentTrigger</name>
+				<job-name>RunStudentAttendance</job-name>
+				<job-group>RunStudentAttendanceGroup</job-group>
 				<!-- It will run every 5 seconds (0/5 * * * * ?)-->
 				<!-- <cron-expression>0/5 * * * * ?</cron-expression> -->
 				<!-- Every day at 23:00 -->
 				<cron-expression>0 0 23 * * ?</cron-expression>
+				
+			</cron>
+		</trigger>
+		
+		<job>
+			<name>RunStaffAttendance</name>
+			<group>RunStaffAttendanceGroup</group>
+			<description>Running daily to mark the attendance of staff</description>
+			<job-class>com.controller.StaffsAttendanceJob</job-class>
+		</job>
+
+		<trigger>
+			<cron>
+				<name>RunStaffTrigger</name>
+				<job-name>RunStaffAttendance</job-name>
+				<job-group>RunStaffAttendanceGroup</job-group>
+				<!-- It will run every 5 seconds (0/5 * * * * ?)-->
+				<cron-expression>0/5 * * * * ?</cron-expression>
+				<!-- Every day at 23:00 -->
+				<!-- <cron-expression>0 0 23 * * ?</cron-expression> -->
 				
 			</cron>
 		</trigger>

@@ -5,7 +5,7 @@ import org.quartz.JobExecutionException;
 
 import com.model.attendance.service.AttendanceService;
 
- public class RunTasks implements Job {
+ public class StudentsAttendanceJob implements Job {
 
   public void execute(JobExecutionContext context) throws JobExecutionException {
     try {

@@ -516,4 +516,26 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		
 	}
 
+	public void markDailyAttendanceJobStaff(List<Staffdailyattendance> listStaffAttendance) {
+		
+		try{
+			transaction = session.beginTransaction();
+			
+			for (Staffdailyattendance staff : listStaffAttendance) {
+				Staffdailyattendance staffSingle = new Staffdailyattendance();
+				Query query = session.createQuery("from Staffdailyattendance where attendeeid = '"+staff.getAttendeeid()+"' and academicyear='"+staff.getAcademicyear()+"' and date=CURDATE()");
+				staffSingle = (Staffdailyattendance) query.uniqueResult();
+
+				if(staffSingle == null){
+					session.save(staff);
+				}
+			}
+			transaction.commit();
+		}catch(Exception e){
+			System.out.println(""+e);
+		}finally{
+			session.close();
+		}
+	}
+
 }

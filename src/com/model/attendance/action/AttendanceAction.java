@@ -265,6 +265,9 @@ public class AttendanceAction {
 
 	private String searchEmployees() {
 		new EmployeeService(request, response).searchEmployee();
+		new EmployeeService(request, response).viewAllRelations();
+		new AttendanceService(request, response).viewAllHolidays();
+		new AttendanceService(request, response).viewAllWeekOffs();
 		return "attendancemaster.jsp";
 	}
 
