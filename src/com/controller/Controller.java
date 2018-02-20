@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.model.academicyear.action.YearAction;
+import com.model.account.action.AccountAction;
 import com.model.adminexpenses.action.AdminAction;
 import com.model.attendance.action.AttendanceAction;
 import com.model.department.action.DepartmentAction;
@@ -88,6 +89,8 @@ public class Controller extends HttpServlet {
          nextUrl= new EmailAction(request, response).execute(action);
      }else if(process.equalsIgnoreCase("AttendanceProcess")){
          nextUrl= new AttendanceAction(request, response).execute(action);
+     }else if(process.equalsIgnoreCase("AccountProcess")){
+         nextUrl= new AccountAction(request, response).execute(action);
      }
 
         RequestDispatcher reg = request.getRequestDispatcher(nextUrl);

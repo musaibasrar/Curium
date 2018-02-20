@@ -42,6 +42,12 @@
 		<mapping resource="com/model/attendance/dto/Weeklyoff.hbm.xml"></mapping>
 		<mapping resource="com/model/attendance/dto/Attendancemaster.hbm.xml"></mapping>
 		<mapping resource="com/model/attendance/dto/Studentdailyattendance.hbm.xml"></mapping>
-		<mapping resource="com/model/attendance/dto/Staffdailyattendance.hbm.xml"></mapping>	
+		<mapping resource="com/model/attendance/dto/Staffdailyattendance.hbm.xml"></mapping>
+		<mapping resource="com/model/feescollection/dto/Receiptinfo.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Financialaccountingyear.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Accountgroupmaster.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Accountsubgroupmaster.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Accountdetails.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Accountdetailsbalance.hbm.xml"></mapping>	
 	</session-factory>
 </hibernate-configuration>

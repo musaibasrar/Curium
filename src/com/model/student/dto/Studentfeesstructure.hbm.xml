@@ -11,14 +11,16 @@
         <property name="sid" type="java.lang.Integer">
             <column name="sid"/>
         </property>
-        <property name="feescategory" type="string">
-            <column name="feescategory" length="100" />
-        </property>
-        <property name="feesamount" type="string">
-            <column name="feesamount" length="45" />
+        <!-- <property name="idfeescategory" type="java.lang.Integer">
+            <column name="idfeescategory" length="100" />
+        </property> -->
+        <property name="feesamount" type="java.lang.Long">
+            <column name="feesamount" precision="10" scale="0" />
         </property>
         <property name="academicyear" type="string">
             <column name="academicyear" length="45" />
         </property>
+        <many-to-one name="Feescategory" class="com.model.feescategory.dto.Feescategory"
+            column="idfeescategory" />
     </class>
 </hibernate-mapping>

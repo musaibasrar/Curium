@@ -437,10 +437,10 @@ Author     : Musaib
             <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllEmployee" >View All</a><br/>
-                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=addEmployeePage" >Add</a>
-                <a target="mainFrame" href="Controller?process=DepartmentProcess&action=departmentView" >Add Department</a>
-                <a target="mainFrame" href="Controller?process=PositionProcess&action=positionView" >Add Position</a>
-				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendanceStaff" >View Attendance</a>
+                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=addEmployeePage" >Add Staff</a><br/>
+                <a target="mainFrame" href="Controller?process=DepartmentProcess&action=departmentView" >Add Department</a><br/>
+                <a target="mainFrame" href="Controller?process=PositionProcess&action=positionView" >Add Position</a><br/>
+				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendanceStaff" >View Attendance</a><br/>
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceMarkStaff" >Mark Attendance</a><br/>
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExportViewStaff" >Export Attendance</a><br/>
             </div>
@@ -451,6 +451,7 @@ Author     : Musaib
                 <a target="mainFrame" href="Controller?process=FeesProcess&action=feesCollect" >Fees Collect</a><br/>
 				<a target="mainFrame" href="feesstructure.jsp" >Fees Structure</a><br/>                
 				<a target="mainFrame" href="Controller?process=StampFeesProcess&action=showFeesDetails" >Stamp Fee</a><br/>
+				<a target="mainFrame" href="feesCollectionDetails.jsp" >Fees Details</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
@@ -497,7 +498,6 @@ Author     : Musaib
                 <a target="mainFrame" href="Backup&Restore.jsp" >Backup</a><br/>
                 <!-- <a target="mainFrame" href="currentIssue.jsp" >Current Issue</a><br/> -->
                 <a target="mainFrame" href="changePassword.jsp" >Change Password</a><br/>
-                <a target="mainFrame" href="feesCollectionDetails.jsp" >Fees Details</a><br/>
                 <a target="mainFrame" href="generateids.jsp" >Generate IDs</a><br/>
                 <a target="mainFrame" href="uploadattendance.jsp" >upload attendance file</a><br/>
             </div>
@@ -518,6 +518,12 @@ Author     : Musaib
             <div >
                 <a target="mainFrame" href="sendsms.jsp" >SMS</a><br/>
                 <a target="mainFrame" href="sendemail.jsp" >Email</a><br/>
+            </div>
+            
+            <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
+            <div >
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=getCurrentFinancialYear" >Accounting Year</a><br/>
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=createAccount" >Ledger Account</a><br/>
             </div>
             
             </div>

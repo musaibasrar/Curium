@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.feescategory.dto.Feescategory;
 import com.model.parents.dto.Parents;
 import com.model.stampfees.dao.StampFeesDAO;
 import com.model.stampfees.dto.Academicfeesstructure;
@@ -20,7 +21,7 @@ public class StampFeesService {
 	HttpServletRequest request;
 	HttpServletResponse response;
 	HttpSession httpSession;
-	
+	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 
 	public StampFeesService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -113,6 +114,8 @@ public class StampFeesService {
 	}
 
 	public void addFeesStamp() {
+		
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
 		String[] studentIds = request.getParameterValues("studentIDs");
 		if(studentIds!=null){
 		Academicfeesstructure academicfessstructure = new Academicfeesstructure();
@@ -121,41 +124,33 @@ public class StampFeesService {
 		List<Studentfeesstructure> listOfstudentfeesstructure = new ArrayList<Studentfeesstructure>();
 		
 		String feesTotalAmount = request.getParameter("feesTotalAmount");
-		String currentYear = request.getParameter("currentyear");
 
-		String[] feesCategory = request.getParameterValues("feesNames");
+		//String[] feesCategory = request.getParameterValues("feesNames");
+		String[] feesCategoryIds = request.getParameterValues("feesIDS");
 		String[] feesAmount = request.getParameterValues("fessFullCat");
 
-    
-		System.out.println("Current Academic Year is " + currentYear);
 		List ids = new ArrayList();
 		listOfacademicfessstructure.clear();
 		for (String id : studentIds) {
 			System.out.println("id" + id);
 			academicfessstructure = new Academicfeesstructure();
 			academicfessstructure.setSid(Integer.valueOf(id));
-			academicfessstructure.setAcademicyear(currentYear);
+			academicfessstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			academicfessstructure.setTotalfees(feesTotalAmount);
 			listOfacademicfessstructure.add(academicfessstructure);
 			// ids.add(Integer.valueOf(id));
 
 		}
 		
-		listOfstudentfeesstructure.clear();
-		
-		
-		
 		for (String id : studentIds) {
 
-			for(int i=0; i < feesCategory.length ; i++){
-				int idint = Integer.valueOf(id);
-			studentfeesstructure.setSid(idint);
-			studentfeesstructure.setFeescategory(feesCategory[i]);
-			studentfeesstructure.setFeesamount(feesAmount[i]);
-			studentfeesstructure.setAcademicyear(currentYear);
-			System.out.println("feesId :" + id);
-			System.out.println("feesCategory :" + feesCategory[i]);
-			System.out.println("fees amount :" + feesAmount[i]);
+			for(int i=0; i < feesCategoryIds.length ; i++){
+				Feescategory feescategory = new Feescategory();
+			studentfeesstructure.setSid(Integer.valueOf(id));
+			feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIds[i]));
+			studentfeesstructure.setFeescategory(feescategory);
+			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[i]));
+			studentfeesstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			
 			listOfstudentfeesstructure.add(studentfeesstructure);
 			studentfeesstructure = new Studentfeesstructure();
@@ -164,12 +159,11 @@ public class StampFeesService {
 
 			
 		}
-			
-		System.out.println("id length" + studentIds.length);
-		new StampFeesDAO().addStampFees(listOfacademicfessstructure,currentYear);
 		
-		
-		new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,currentYear);
+		new StampFeesDAO().addStampFees(listOfacademicfessstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+
+		}
 		}
 	}
 

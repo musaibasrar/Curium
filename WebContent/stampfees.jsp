@@ -1,5 +1,5 @@
 <%--
-    Document   : index
+    Document   : Stamp Fees
     Created on : Dec 23, 2011, 5:52:28 PM
     Author     : Musaib
 --%>
@@ -458,7 +458,7 @@
                 sum += parseFloat($(this).val());
             });
             
-            $('#feesTotalAmount').val(sum.toPrecision(6));
+            $('#feesTotalAmount').val(sum);
 
         }
         $(document).ready(function() {
@@ -473,7 +473,7 @@
                     sum += parseFloat($(this).val());
                 });
                 
-                $('#feesTotalAmount').val(sum.toPrecision(6));
+                $('#feesTotalAmount').val(sum);
                 
             });
             $("#dataTable").click(function(){
@@ -485,7 +485,7 @@
                     sum += parseFloat($(this).val());
                 });
                 
-                $('#feesTotalAmount').val(sum.toPrecision(6));
+                $('#feesTotalAmount').val(sum);
                
             });
 
@@ -494,7 +494,7 @@
         
         var feescat=[
                      <c:forEach varStatus="status" items="${feescategory}" var="fees">{
-                             value:'<c:out default="0" value="${fees.feescategory}" />',
+                             value:'<c:out default="0" value="${fees.feescategoryname}" />',
                              particularname:'<c:out default="0" value="${fees.particularname}" />',
                              price:'<c:out default="0" value="${fees.amount}" />',
                              id:'<c:out default="0" value="${fees.idfeescategory}" />'
@@ -550,7 +550,7 @@
             var feesCount=document.getElementById("feesCount_"+value2).value;
             var final1=document.getElementById("hiddenfees_full_amount_"+value2);
             
-                final1.value=(feesCat*feesCount).toPrecision(6);
+                final1.value=(feesCat*feesCount);
            
         }
        
@@ -655,7 +655,7 @@
             });
             totalSum=sum;
             
-            $('#feesTotalAmount').val(totalSum.toPrecision(6));
+            $('#feesTotalAmount').val(totalSum);
             
             calculateGrandTotal();
             //$('#grandTotalAmount').val(0);

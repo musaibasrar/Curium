@@ -261,9 +261,11 @@
                 jQuery.each(column2,function(){
                     sum += parseFloat($(this).val());
                 });
-                $('#grandTotalAmount').val(sum.toPrecision(6));
+                $('#grandTotalAmount').val(sum);
 
             }
+            
+            
             $(document).ready(function() {
                 $("#dateoffees").val(getCurrentDate());
                 //$("#dateoffees").datepicker();
@@ -279,7 +281,7 @@
                         sum += parseFloat($(this).val());
                     });
                     totalSum=sum+miscellanous+consultation;
-                    $('#grandTotalAmount').val(totalSum.toPrecision(6));
+                    $('#grandTotalAmount').val(totalSum);
 
                 });
                 $("#miscellanousamount").keyup(function(){
@@ -292,7 +294,7 @@
                         sum += parseFloat($(this).val());
                     });
                     totalSum=sum+miscellanous+consultation;
-                    $('#grandTotalAmount').val(totalSum.toPrecision(6));
+                    $('#grandTotalAmount').val(totalSum);
                 });
                 $("#dataTable").keyup(function(){
                     var consultation=parseFloat($("#balanceamount").val());
@@ -305,7 +307,22 @@
                     });
                     totalSum=sum+miscellanous+consultation;
                     $('#feesTotalAmount').val(sum.toPrecision(6));
-                    $('#grandTotalAmount').val(totalSum.toPrecision(6));
+                    $('#grandTotalAmount').val();
+                });
+                $("#myTable").keyup(function(){
+                   
+                    var sum = 0.0;
+                    var totalSum=0.0;
+                    var amountp = $('.amountpaying');
+                    jQuery.each(amountp,function(){
+                        sum += parseFloat($(this).val());
+                    });
+                    var finep = $('.fine');
+                    jQuery.each(finep,function(){
+                        sum += parseFloat($(this).val());
+                    });
+                    totalSum=sum;
+                    $('#grandTotalAmount').val(totalSum);
                 });
                 $("#dataTable").click(function(){
                     var consultation=parseFloat($("#balanceamount").val());
@@ -318,7 +335,7 @@
                     });
                     totalSum=sum+miscellanous+consultation;
                     $('#feesTotalAmount').val(sum.toPrecision(6));
-                    $('#grandTotalAmount').val(totalSum.toPrecision(6));
+                    $('#grandTotalAmount').val(totalSum);
                 });
 
 
@@ -394,19 +411,7 @@
                     chkbox.checked=true;
                 }
             }
-            function addPrescription(visitId){
-                updateVisitByID(visitId);
-                var form1=document.getElementById("form1");
-                var rowIdString=document.getElementById('rowIdString');
-                var rowfeesIdString=document.getElementById('rowfeesIdString');
-                var rowfeesNatureString=document.getElementById('rowfeesNatureString');
-                var rowfeesStrengthString=document.getElementById('rowfeesStrengthString');
-                var rowfeesDurationString=document.getElementById('rowfeesDurationString');
-                var rowfeesDosingString=document.getElementById('rowfeesDosingString');
-                var rowfeesRemarkString=document.getElementById('rowfeesRemarkString');
-                form1.action="Controller?process=PrescriptionProcess&action=add&visitId="+visitId+"&rowIdString="+rowIdString.value+"&rowfeesIdString="+rowfeesIdString.value+"&rowfeesNatureString="+rowfeesNatureString.value+"&rowfeesStrengthString="+rowfeesStrengthString.value+"&rowfeesDurationString="+rowfeesDurationString.value+"&rowfeesDosingString="+rowfeesDosingString.value+"&rowfeesRemarkString="+rowfeesRemarkString.value;
-                form1.submit();
-            }
+           
             function getCurrentDate(){
                 var today = new Date();
                 var day=today.getDate();
@@ -433,7 +438,7 @@
 
                 var feescat=[
             <c:forEach varStatus="status" items="${feescategory}" var="fees">{
-                    value:'<c:out default="0" value="${fees.feescategory}" />',
+                    value:'<c:out default="0" value="${fees.feescategoryname}" />',
                     particularname:'<c:out default="0" value="${fees.particularname}" />',
                     price:'<c:out default="0" value="${fees.amount}" />',
                     id:'<c:out default="0" value="${fees.idfeescategory}" />'
@@ -485,7 +490,8 @@
                 }
             })
             .click(function() {
-                addRow();
+            	 getstampfees();
+                 //addRow();
                 return false;
             });
             $(removeDossageButtonID)
@@ -545,8 +551,8 @@
                     sum += parseFloat($(this).val());
                 });
                 totalSum=sum+miscellanous+consultation;
-                $('#feesTotalAmount').val(sum.toPrecision(6));
-                $('#grandTotalAmount').val(totalSum.toPrecision(6));
+                $('#feesTotalAmount').val(sum);
+                $('#grandTotalAmount').val(totalSum);
                 
                 calculateGrandTotal();
                 //$('#grandTotalAmount').val(0);
@@ -656,15 +662,7 @@
             runEffect();
 
         });
-        $( "#submit" )
-        .button().click(function(){
-        	if($("#studentName").val().length==0){
-        		alert('Admission Number & Student name is mandatory');
-         		return false;
-         	}
-        	
-        })
-        ;
+        $( "#submit" ).button();
         $( "#effect" ).hide();
     });
             
@@ -672,8 +670,31 @@
                 <script type="text/javascript">
             $(function() {
                 $( "#tabs" ).tabs();
+                
+                $("#amountpaying").keypress(function (e) {
+       		     //if the letter is not digit then display error and don't type anything
+       		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+       		               return false;
+       		    }
+       		   });
+                
+                
+                $("#fine").keypress(function (e) {
+       		     //if the letter is not digit then display error and don't type anything
+       		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+       		               return false;
+       		    }
+       		   });
             });
 
+            
+            
+            function getstampfees(){
+            	var form1 = document.getElementById("form1");
+        		form1.action = "Controller?process=FeesCollection&action=StampFees";
+        		form1.method = "POST";
+        		form1.submit();
+            }
             
         </script>
     </head>
@@ -691,37 +712,95 @@
                     </tr>
                 </thead>
                 <tbody>
+	                <tr>
+                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">Search Student:&nbsp;&nbsp;&nbsp;&nbsp; 
+                    </tr>
                     <tr>
-                    <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" required id="admno" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
+                    <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
                         
                         <td>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
-                        <td>Fees Category: <button id="addFees">Add</button>&nbsp;&nbsp;&nbsp;<button id="removeDossage">Remove</button></td>
+                        <td>Fees Structure: <button id="addFees">Add</button>&nbsp;&nbsp;&nbsp;</td>
                     </tr>
                     
                     <tr>
                     
-                        <td style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentName" id="studentName" style="width: 200px" required readonly/></td>
+                        <td style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/></td>
                         <td>Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" /></td>
                         
                     </tr>
+                    <tr>
+						<td><br></td>
+                    </tr>
+
+					<tr>
+                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">Student Details:&nbsp;&nbsp;&nbsp;&nbsp; 
+                    </tr>
+                    <tr>
+                    <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" style="width: 200px" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
+                        
+                        <td>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" value="${dateoffeesDetails}" readonly="readonly"/></td>
+                        
+                    </tr>
+                    
+                    <tr>
+                    
+                        <td style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" style="width: 200px" readonly/></td>
+                        <td>Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsecDetails" id="classandsecDetails" value="${classandsecDetails}"/></td>
+                        
+                    </tr>
+                    <tr>
+						<td><br></td>
+                    </tr>
+                    <tr>
+						<td><br></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <table width="100%" border="0" style="border-color: #4b6a84;"
+				id="myTable">
+
+				<thead>
+                    <tr >
+                    	<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+                        <td class="headerText">Fees Category</td>
+                        <td class="headerText">Total Amount/Due Amount</td>                       
+                        <td class="headerText">Amount Due to be paid</td>
+                        <td class="headerText">Fine</td>
+
+                    </tr>
+                </thead>
+
+				<tbody>
+					<c:forEach items="${studentfeesdetails}" var="studentfeesdetails" varStatus="status">
+
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="dataText" align="center"><input type="checkbox" 
+								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
+								name="studentsfsids" checked
+								value="<c:out value="${studentfeesdetails.key.sfsid}"/>" /></td>
+							<td class="dataTextInActive" align="center"><a class="dataTextInActive" style="text-transform:uppercase"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
+							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" /></td>
+							<td class="dataText" align="center">
+							<input type="text" class="amountpaying" value="0" id="amountpaying" name="amountpaying" >
+							</td>
+							<td class="dataText" align="center">
+							<input type="text" id="fine" value="0" class="fine" name="fine" >
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+				<tfoot>
                     
                     <tr>
 
-                        <td style="width: 45%">Previuos Balance:&nbsp;<input  type="text" name="balanceamount" id="balanceamount" style="width: 200px" value="0" />  </td>
-                        <td>Miscellaneous:&nbsp;&nbsp;&nbsp;<input type="text" name="miscellanousamount" id="miscellanousamount" value="0" /></td>
-
+                        <td colspan="4" align="right"><b>Total&nbsp;&nbsp;</b></td>
+                        <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
                     </tr>
-                    <tr>
-
-                    </tr>
-
-                </tbody>
-            </table>
-            <table id="dossageTable">
-                <tbody></tbody>
-
-            </table>
-            <TABLE id="dataTable" width="100%" border="1" >
+                </tfoot>
+			</table>
+            <!-- <TABLE id="dataTable" width="100%" border="1" >
                 <thead>
                     <tr >
                         <td class="headerText"><INPUT type="checkbox" id="selectAll"  name="selectAll" onclick="selectAllRow('dataTable')" /></td>
@@ -748,7 +827,7 @@
                     </tr>
                 </tfoot>
             </TABLE>
-
+ -->
             
             <input type="submit" value="submit" id="submit"/>
             

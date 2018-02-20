@@ -8,8 +8,8 @@
             <column name="idfeescategory" />
             <generator class="native" />
         </id>
-        <property name="feescategory" type="string">
-            <column name="feescategory" length="150" />
+        <property name="feescategoryname" type="string">
+            <column name="feescategoryname" length="150" />
         </property>
         <property name="amount" type="java.lang.Integer">
             <column name="amount" />

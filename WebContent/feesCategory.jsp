@@ -322,15 +322,6 @@
 	});
 </script>
 <script type="text/javascript">
-	function select(id, name) {
-		var clipEffect = 'blind';
-		var options = {};
-
-		$("#effect").show();
-		$("#medicineId").val(id)
-		$("#medicineName").val(name);
-
-	}
 	function getCurrentDate() {
 		var today = new Date();
 		var day = today.getDate();
@@ -461,7 +452,7 @@
 </head>
 <body>
 	<form id="form1"
-		action="Controller?process=StockProcess&action=addStock" method="POST">
+		method="POST">
 		<div style="height: 28px">
 			<button id="add">Add Fees Category</button>
 			<br />
@@ -602,7 +593,7 @@
 								id="<c:out value="${fees.idfeescategory}"/>" class="chcktbl"
 								name="idfeescategory"
 								value="<c:out value="${fees.idfeescategory}"/>" /></td>
-							<td class="dataText"><c:out value="${fees.feescategory}" /></td>
+							<td class="dataText"><c:out value="${fees.feescategoryname}" /></td>
 							<td class="dataText"><c:out value="${fees.particularname}" /></td>
 							<td class="dataText"><c:out value="${fees.amount}" /></td>
 

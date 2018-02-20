@@ -32,6 +32,8 @@ import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
 import com.model.department.dao.departmentDAO;
 import com.model.department.dto.Department;
+import com.model.feescollection.dao.feesCollectionDAO;
+import com.model.feescollection.dto.Receiptinfo;
 import com.model.feesdetails.dao.feesDetailsDAO;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.parents.dao.parentsDetailsDAO;
@@ -210,6 +212,45 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("email")) {
 		                	parents.setEmail(DataUtil.emptyString(item.getString()));
 		                }
+		                if (fieldName.equalsIgnoreCase("crecord")) {
+		                	student.setCrecord(DataUtil.emptyString(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("dateofcr")) {
+		                	student.setCrecorddate(DateUtil.dateParserUpdateStd(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("place")) {
+		                	student.setPlaceofbirth(DataUtil.emptyString(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("tcno")) {
+		                	student.setNooftc(DataUtil.parseInt(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("dateoftc")) {
+		                	student.setDateoftc(DateUtil.dateParserUpdateStd(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("classonleaving")) {
+		                	student.setClassonleaving(DataUtil.emptyString(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("progress")) {
+		                	student.setSubsequentprogress(DataUtil.emptyString(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("dateofleaving")) {
+		                	student.setDateleaving(DateUtil.dateParserUpdateStd(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("reasonforleaving")) {
+		                	student.setReasonleaving(DataUtil.emptyString(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("notcissued")) {
+		                	student.setNotcissued(DataUtil.parseInt(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("dateoftcissued")) {
+		                	student.setDatetcissued(DateUtil.dateParserUpdateStd(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("guardian")) {
+		                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("remarksadditional")) {
+		                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
+		                }
 		            } else {
 		                // Process form file field (input type="file").
 		                String fieldName = item.getFieldName();
@@ -285,18 +326,32 @@ public class StudentService {
 			Student student = new studentDetailsDAO().readUniqueObject(id);
 			Parents parents = new parentsDetailsDAO().readUniqueObject(id);
 
-			httpSession.setAttribute("studentfromservice",student);
+			/*httpSession.setAttribute("studentfromservice",student);
 			httpSession.setAttribute("parentsfromservice",parents);
-			httpSession.setAttribute("idofstudentfromservice",id);
+			httpSession.setAttribute("idofstudentfromservice",id);*/
 			
 			Currentacademicyear currentYear = new YearDAO().showYear();
 			httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
-			List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
-			httpSession.setAttribute("feesdetailsfromservice",feesdetails);
+			
+			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
+			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
+			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
+			request.setAttribute("receiptinfo",rinfo);
 			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, currentYear.getCurrentacademicyear());
-			String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
-			String totalFees = new feesDetailsDAO().feesTotal(id, currentYear.getCurrentacademicyear());
-			String dueAmount = new feesDetailsDAO().dueAmount(id, currentYear.getCurrentacademicyear());
+			
+			long totalSum = 0l;
+			for (Receiptinfo receiptInfoSingle : rinfo) {
+				totalSum = totalSum + receiptInfoSingle.getTotalamount();
+			}
+			
+			long totalFeesAmount = 0l;
+			for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
+				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount();
+			}
+			
+			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
+			//String totalFees = new feesDetailsDAO().feesTotal(id, currentYear.getCurrentacademicyear());
+			//String dueAmount = new feesDetailsDAO().dueAmount(id, currentYear.getCurrentacademicyear());
 			if (student == null) {
 				result = false;
 			} else {
@@ -337,11 +392,11 @@ public class StudentService {
 				}
 
 				httpSession.setAttribute("parents", parents);
-				httpSession.setAttribute("feesdetails", feesdetails);
+				//httpSession.setAttribute("feesdetails", feesdetails);
 				httpSession.setAttribute("feesstructure", feesstructure);
-				httpSession.setAttribute("sumoffees", sumOfFees);
-				httpSession.setAttribute("dueamount", dueAmount);
-				httpSession.setAttribute("totalfees", totalFees);
+				httpSession.setAttribute("sumoffees", totalSum);
+				httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
+				httpSession.setAttribute("totalfees", totalFeesAmount);
 				httpSession.setAttribute("academicPerYear", currentYear.getCurrentacademicyear());
 				httpSession.setAttribute("currentAcademicYear", currentYear.getCurrentacademicyear());
 				
@@ -531,7 +586,45 @@ public class StudentService {
 	                if(fieldName.equalsIgnoreCase("studentexternalid")){
 	                	student.setStudentexternalid(DataUtil.emptyString(item.getString()));
 	                }
-	                
+	                if (fieldName.equalsIgnoreCase("crecord")) {
+	                	student.setCrecord(DataUtil.emptyString(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("dateofcr")) {
+	                	student.setCrecorddate(DateUtil.dateParserUpdateStd(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("place")) {
+	                	student.setPlaceofbirth(DataUtil.emptyString(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("tcno")) {
+	                	student.setNooftc(DataUtil.parseInt(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("dateoftc")) {
+	                	student.setDateoftc(DateUtil.dateParserUpdateStd(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("classonleaving")) {
+	                	student.setClassonleaving(DataUtil.emptyString(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("progress")) {
+	                	student.setSubsequentprogress(DataUtil.emptyString(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("dateofleaving")) {
+	                	student.setDateleaving(DateUtil.dateParserUpdateStd(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("reasonforleaving")) {
+	                	student.setReasonleaving(DataUtil.emptyString(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("notcissued")) {
+	                	student.setNotcissued(DataUtil.parseInt(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("dateoftcissued")) {
+	                	student.setDatetcissued(DateUtil.dateParserUpdateStd(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("guardian")) {
+	                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("remarksadditional")) {
+	                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
+	                }
 	                // Updating paretns information
 	                
 	                parents.setPid(parentsId);

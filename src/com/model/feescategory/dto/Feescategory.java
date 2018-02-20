@@ -22,15 +22,15 @@ public class Feescategory implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer idfeescategory;
-	private String feescategory;
+	private String feescategoryname;
 	private Integer amount;
 	private String particularname;
 
 	public Feescategory() {
 	}
 
-	public Feescategory(String feescategory, Integer amount, String particularname) {
-		this.feescategory = feescategory;
+	public Feescategory(String feescategoryname, Integer amount, String particularname) {
+		this.feescategoryname = feescategoryname;
 		this.amount = amount;
 		this.particularname = particularname;
 	}
@@ -47,12 +47,12 @@ public class Feescategory implements java.io.Serializable {
 	}
 
 	@Column(name = "feescategory", length = 150)
-	public String getFeescategory() {
-		return this.feescategory;
+	public String getFeescategoryname() {
+		return this.feescategoryname;
 	}
 
-	public void setFeescategory(String feescategory) {
-		this.feescategory = feescategory;
+	public void setFeescategoryname(String feescategoryname) {
+		this.feescategoryname = feescategoryname;
 	}
 
 	@Column(name = "amount")

@@ -428,6 +428,23 @@
                     <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo">
                     </td>
                     </tr>
+                    
+                    	<tr>
+                        
+                         
+                            <td  width="25%"  class="alignLeft" height="50">Admission Number
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.admissionnumber}" />
+                            </td>
+                            
+                        
+                            <td width="25%"   class="alignLeft" height="50" >Cumulative record no. with date of opening</td>
+                             <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.crecord}" /> : 
+                                <fmt:formatDate value="${student.crecorddate}" pattern="yyyy-MM-dd"/>
+                            </td>
+                        </tr>
 
                         <tr>
 
@@ -454,17 +471,18 @@
                                 <c:out default="" value="${student.age}" />
                             </td>
                         </tr>
-                        <!--<tr>
-                            <td width="25%"  class="alignLeft" height="50" >Address line 2</td>
+                        <tr>
+                            <td width="25%"  class="alignLeft" height="50" >Place of birth, Tq, Dist.</td>
                             <td width="25%"  class="tablerows" >
-                              <%--  <c:out default="" value="${personal.addressline2}" /> --%>
+                              <c:out default="" value="${student.placeofbirth}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50">City
+                            <td width="25%"  class="alignLeft" height="50">No. & date of Transfer Certificate
                             </td>
                             <td  width="25%" class="tablerows" >
-                               <%-- <c:out default="" value="${personal.city}" /> --%>
+                               <c:out default="" value="${student.nooftc}" />:
+                               <fmt:formatDate value="${student.crecorddate}" pattern="yyyy-MM-dd"/>
                             </td>
-                        </tr> -->
+                        </tr>
                         <tr>
                             <td width="25%"  class="alignLeft" height="50" >Studying in class</td>
                             <td  width="25%"  class="tablerows">
@@ -493,34 +511,29 @@
                         </tr>
                         
                         <tr>
-                        
-                         
-                            <td  width="25%"  class="alignLeft" height="50">Admission Number
+                            <td  width="25%"  class="alignLeft" height="50">Subsequent progress of the student
                             </td>
                             <td width="25%" class="tablerows">
-                                <c:out default="" value="${student.admissionnumber}" />
+                                <c:out default="" value="${student.subsequentprogress}" />
                             </td>
-                            
-                        
-                            <td width="25%"   class="alignLeft" height="50" >Date Of Admission</td>
-                            <td width="25%" class="tablerows"  >
-                                <%-- <c:out default="" value="${student.admissiondate}" /> --%>
-                                <fmt:formatDate value="${student.admissiondate}" pattern="yyyy-MM-dd"/>
+                            <td  width="25%"  class="alignLeft" height="50">Blood Group
                             </td>
-                            
-
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.bloodgroup}" />
+                            </td>
                         </tr>
                         
                         </tr>
                         
                          
                         <tr>
-                        <td  width="25%"  class="alignLeft" height="50">Blood Group
-                            </td>
-                            <td width="25%" class="tablerows">
-                                <c:out default="" value="${student.bloodgroup}" />
-                            </td>
                         
+                          <td  width="25%"  class="alignLeft" height="50" >Mother Tongue
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.mothertongue}" />
+                            </td>
+                            
                             <td  width="25%"  class="alignLeft" height="50" >Nationality
                             </td>
                             <td width="25%" class="tablerows" >
@@ -549,12 +562,12 @@
                         </tr>
 
                         <tr>
-                            <td  width="25%"  class="alignLeft" height="50" >Mother Tongue
+                        
+                        <td  width="25%"  class="alignLeft" height="50" >Date of admission
                             </td>
                             <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.mothertongue}" />
+                                <c:out default="" value="${student.admissiondate}" />
                             </td>
-                            
                              <td  width="25%"  class="alignLeft" height="50">Created Date
                             </td>
                             <td width="25%" class="tablerows">
@@ -564,14 +577,47 @@
                           
                            
                         </tr>
-                         <tr>
-                                                     
+
+						
+						<tr>
                             <td  width="25%"  class="alignLeft" height="50">Remakrs
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.remarks}" />
                                 
                             </td>
+                        </tr>
+                                                
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50" >Class of leaving
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.classonleaving}" />
+                            </td>
+                            
+                             <td  width="25%"  class="alignLeft" height="50">Date of leaving the school
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <fmt:formatDate value="${student.dateleaving}" pattern="yyyy-MM-dd"/>
+                            </td>
+                          
+                           
+                        </tr>
+                        
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50" >Reason for leaving
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.reasonleaving}" />
+                            </td>
+                            
+                             <td  width="25%"  class="alignLeft" height="50">No. & date of transfer certificate issued
+                            </td>
+                            <td width="25%" class="tablerows">
+                            <c:out default="" value="${student.notcissued}" /> :
+                                <fmt:formatDate value="${student.datetcissued}" pattern="yyyy-MM-dd"/>
+                            </td>
+                          
                            
                         </tr>
                         
@@ -620,9 +666,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50">Father's Profession</td>
+                            <td width="25%"  class="alignLeft" height="50">Guardian's name & address</td>
                             <td width="25%" class="tablerows" >
-                                 <c:out value="${parents.professsion}" />
+                                 <c:out value="${student.guardiandetails}" />
                                 
                             </td>
                             <td width="25%"  class="alignLeft" height="50" >Annual Income
@@ -739,9 +785,6 @@
                             <th title="click to sort" class="headerText">Date of fees</th>
                             <th title="click to sort" class="headerText">Reference Number</th>
                             <th title="click to sort" class="headerText">Total Amount</th>
-                            <th title="click to sort" class="headerText">miscellaneous&nbsp;</th>
-                            <th title="click to sort" class="headerText">Balance Amount</th>
-                            <th title="click to sort" class="headerText">Grand Total</th>
                             <th title="click to sort" class="headerText">View Details</th>
                              
 
@@ -750,17 +793,14 @@
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${feesdetails}" var="feesdetails">
+                        <c:forEach items="${receiptinfo}" var="receiptinfo">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 
-                                <td  class="dataText"><c:out value="${feesdetails.dateoffees}"/></a></td>
-                                <td  class="dataText"><c:out value="${feesdetails.feesdetailsid}"/></a></td>
-                                <td class="dataText"><c:out value="${feesdetails.amountpercat}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.miscamount}"/></td>
-                                <td class="dataText"><c:out  value="${feesdetails.balamount}"/></td>
-                                <td class="dataText"><c:out  value="${feesdetails.grandtotal}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${feesdetails.feesdetailsid}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataText"><c:out value="${receiptinfo.date}"/></a></td>
+                                <td  class="dataText"><c:out value="${receiptinfo.receiptnumber}"/></a></td>
+                                <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  
 
                             </tr>
@@ -820,8 +860,8 @@
                               	<td class="dataText"></td>
                                	<td class="dataText"></td>
                                 <td class="dataText"></td>
-                                <td class="dataText"><c:out value="${feesstructure.feescategory}"/></td>
-                                <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feescategory.feescategoryname}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
                                
                                 
                                  

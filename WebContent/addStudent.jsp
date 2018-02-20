@@ -20,7 +20,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Add contact Page</title>
+<title>Add Student</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 
@@ -320,6 +320,63 @@
 			$("#datepicker1").datepicker("option", "showAnim", $(this).val());
 		});
 	});
+	
+	$(function() {
+		$("#dateoftc").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(
+				function() {
+					$("#dateoftc").datepicker("option", "showAnim",
+							$(this).val());
+				});
+	});
+	
+	$(function() {
+		$("#dateofadmission").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(
+				function() {
+					$("#dateofadmission").datepicker("option", "showAnim",
+							$(this).val());
+				});
+	});
+	
+	$(function() {
+		$("#dateofleaving").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(
+				function() {
+					$("#dateofleaving").datepicker("option", "showAnim",
+							$(this).val());
+				});
+	});
+	
+	$(function() {
+		$("#dateoftcissued").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(
+				function() {
+					$("#dateoftcissued").datepicker("option", "showAnim",
+							$(this).val());
+				});
+	});
+	
 	$(function() {
 		$("#datepickerCD").datepicker({
 			changeYear : true,
@@ -482,6 +539,10 @@
 			addStudent();
 
 		});
+		$("#savefour").button().click(function() {
+			addStudent();
+
+		});
 
 		$("#cancel").button().click(function() {
 			Cancel();
@@ -492,6 +553,10 @@
 
 		});
 		$("#cancelthree").button().click(function() {
+			Cancel();
+
+		});
+		$("#cancelfour").button().click(function() {
 			Cancel();
 
 		});
@@ -668,6 +733,7 @@
 					<li><a href="#fragment-1">Student's Details</a></li>
 					<li><a href="#fragment-2">Parent's Details</a></li>
 					<li><a href="#fragment-3">Upload Photo</a></li>
+					<li><a href="#fragment-4">Additional Details</a></li>
 				</ul>
 
 
@@ -691,7 +757,36 @@
 										id="mydivmobile"></div></font></td>
 						</tr>
 
+						<tr>
 
+
+							<td width="20%" class="alignRight">Admission Number* &nbsp;</td>
+							<td width="28%"><label> <input name="admnno"
+									type="text" class="textField" id="admnno" size="36"
+									onblur="validateAdmissionNumber();"
+									onkeypress="return validateContactNum(this);">
+
+							</label></td>
+
+
+							<td width="20%" class="alignRight">Cumulative Record No. With date of opening&nbsp;
+							</td>
+							<td width="28%"><label> <input name="crecord"
+									type="text" class="textField" id="crecord" size="36"
+									><input
+									name="dateofcr" type="text" class="textField"
+									id="datepicker1" size="36" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)">
+							</label></td>
+
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
 
 						<tr>
 							<td width="30%" class="alignRight">Name* &nbsp;</td>
@@ -743,7 +838,60 @@
 						<tr>
 							<td><br /></td>
 						</tr>
+				
+				
+						<tr>
+							
+							<td width="30%" class="alignRight">Place Of Birth, Tq, Dist.&nbsp;</td>
+							<td width="12%" align="left"><label> <input
+									name="place" type="text" class="myclass" id="place" size="36"
+									>
+							</label></td>
+							
+							<td width="30%" class="alignRight">No. & date of transfer certificate&nbsp;</td>
+							<td width="12%" align="left"><label> <input
+									name="tcno" type="text" class="myclass" id="tcno" size="36"
+									>
+									<input
+									name="dateoftc" type="text" class="textField"
+									id="dateoftc" size="36" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)">
+							</label></td>
 
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td width="20%" class="alignRight">Date of admission&nbsp;
+							</td>
+							<td width="28%"><label><input
+									name="dateofadmission" type="text" class="textField"
+									id="dateofadmission" size="36" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)">
+							</label></td>
+							
+							<td width="20%" class="alignRight">Subsequent progress of the student&nbsp;</td>
+							<td width="28%"><label> <input name="progress"
+									type="text" class="textField" id="progress" size="36"
+									>
+
+							</label></td> 
+
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+					
 						<tr>
 
 
@@ -869,7 +1017,7 @@
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
+						<%-- <tr>
 
 
 							<td width="20%" class="alignRight">Admission Number* &nbsp;</td>
@@ -897,7 +1045,7 @@
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr> --%>
 
 
 
@@ -1161,6 +1309,130 @@
 </div>
 
 
+<div id="fragment-4">
+							<table width="100%" border="0" align="center" id="table1">
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+
+									<td width="30%" class="alignRight"><label> <font
+											color="red"><div id="mydiv"></div></font>
+									</label></td>
+									<td width="20%" class="alignRight"></td>
+									<td class="alignRight"><font color="red"><div
+												id="mydivmobile"></div></font></td>
+								</tr>
+
+
+
+								<tr>
+									<td width="30%" class="alignRight">Class on leaving&nbsp;</td>
+									<td width="12%" align="left"><label> <input
+											name="classonleaving" type="text" class="myclass" id="classonleaving" style="text-transform:uppercase"
+											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+									<td width="30%" class="alignRight">Date of leaving the school&nbsp;</td>
+									<td width="12%" align="left"><label> <input
+									name="dateofleaving" type="text" class="textField"
+									id="dateofleaving" size="36" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"><!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+
+								</tr>
+
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+
+									<td width="16%" class="alignRight">Reason for leaving &nbsp;</td>
+
+									<td width="28%"><label> <input name="reasonforleaving"
+											type="text" class="textField" id="reasonforleaving" size="36"
+											
+											onkeypress="return validateContactNum(this);">
+
+									</label></td>
+
+
+
+									<td width="16%" class="alignRight">No. & date of transfer certificate issued&nbsp;</td>
+
+									<td width="28%"><label> <input name="notcissued"
+									type="text" class="textField" id="notcissued" size="36"
+									><input
+									name="dateoftcissued" type="text" class="textField"
+									id="dateoftcissued" size="36" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)">
+							</label></td>
+									
+								</tr>
+								
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+							<tr>
+									<td><br /></td>
+								</tr>	
+							<tr align="center">
+									
+									
+									<td width="20%" class="alignRight"> &nbsp;</td>
+
+									<td align="center">
+									
+										
+										<button id="savefour" onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();" onfocus="validateNameContact();validateFatherName();">Save</button>
+
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="cancelfour">Cancel</button>
+
+									</td>
+
+								
+								
+									
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								
+
+						</div>
+						</div>
+							
+							</table>
+							
+							</div>
+
 
 						<div id="fragment-2">
 							<table width="100%" border="0" align="center" id="table1">
@@ -1184,13 +1456,13 @@
 
 
 								<tr>
-									<td width="30%" class="alignRight">Father's Name* &nbsp;</td>
+									<td width="30%" class="alignRight">Father's Name & Occupation* &nbsp;</td>
 									<td width="12%" align="left"><label> <input
 											name="fathersname" type="text" class="myclass" id="fathersname" style="text-transform:uppercase"
 											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
-									<td width="30%" class="alignRight">Mother's Name &nbsp;</td>
+									<td width="30%" class="alignRight">Mother's Name & Occupation*&nbsp;</td>
 									<td width="12%" align="left"><label> <input
 											name="mothersname" type="text" class="myclass" id="name" style="text-transform:uppercase"
 											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
@@ -1211,13 +1483,10 @@
 
 								<tr>
 
-									<td width="16%" class="alignRight">Father's Profession &nbsp;</td>
-
-									<td width="28%"><label> <input name="profession"
-											type="text" class="textField" id="profession" size="36"
-											
-											onkeypress="return validateContactNum(this);">
-
+									<td width="16%" class="alignRight">Guardian's Name & Address &nbsp;</td>
+									<td width="28%"><label> <input name="guardian"
+											type="text" class="textField" id="guardian" size="36"
+											onclick="validateNameContact();">
 									</label></td>
 
 
@@ -1330,7 +1599,7 @@
 
 
 								<tr>
-								
+									
 									<td width="16%" class="alignRight">Notes &nbsp;</td>
 									<td width="28%"><label> <input name="remarks"
 											type="text" class="textField" id="remarks" size="36"
@@ -1393,10 +1662,19 @@
 								
 
 						</div>
-						
-
 						</div>
-						
+							
+							</table>
+							
+							</div>
+							</table>
+							</div>
+							
+							
+							</div>
+							</div>
+							
+													
 						
 						
 

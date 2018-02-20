@@ -19,7 +19,10 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.model.feescollection.dto.Receiptinfo;
 import com.model.feesdetails.dao.feesDetailsDAO;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.parents.dto.Parents;
@@ -68,13 +71,11 @@ public class FeesDetailsService {
 
 
 	public boolean exportDataForFees() {
+		
 		String[] feesIds = request.getParameterValues("feesIDs");
 		boolean successResult = false;
-		String pathOfFeesReports = new DataUtil().getPropertiesValue("feesdetailsreportpath");
-		String nameOfFile = request.getParameter("fileName");
-		nameOfFile = nameOfFile + ".xls";
-		List<Feesdetails> listOfFeesDetails = new ArrayList<Feesdetails>();
-		Feesdetails feesDetails = new Feesdetails();
+		List<Receiptinfo> listOfFeesDetails = new ArrayList<Receiptinfo>();
+		Receiptinfo receiptInfo = new Receiptinfo();
 		List<Student> listOfStudentDetails = new ArrayList<Student>();
 		Student student = new Student();
 
@@ -82,24 +83,22 @@ public class FeesDetailsService {
 			for (String id : feesIds) {
 				if (id != null || id != "") {
 					
+					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
+					listOfFeesDetails.add(receiptInfo);
 					
-					feesDetails = new feesDetailsDAO().readUniqueObject(Long.parseLong(id));
-					listOfFeesDetails.add(feesDetails);
-					
-					student = new studentDetailsDAO().readUniqueObject(feesDetails.getSid());
+					student = new studentDetailsDAO().readUniqueObject(receiptInfo.getSid());
 					listOfStudentDetails.add(student);
 				}
 
 			}
 			try {
-				if (exportDataToExcel(listOfFeesDetails, listOfStudentDetails, pathOfFeesReports, nameOfFile)) {
+				if (exportDataToExcel(listOfFeesDetails, listOfStudentDetails)) {
 					successResult = true;
 				} else {
 					successResult = false;
 				}
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -108,36 +107,28 @@ public class FeesDetailsService {
 	}
 	
 	
-	public boolean exportDataToExcel(List<Feesdetails> listOfFeesDetails, List<Student> listOfStudent, String pathOfFeesReports, String nameOfFile)
+	public boolean exportDataToExcel(List<Receiptinfo> listOfFeesDetails, List<Student> listOfStudent)
 			throws Exception {
 
 		boolean writeSucees = false;
-		// String name =
-		// "Error_"+detailsearchList.get(0).getFileName().substring(0,
-		// detailsearchList.get(0).getFileName().length()-4)+".xls";
-		try {
 
+		try {
 			// Start creating an excel file
-			HSSFWorkbook workbook = new HSSFWorkbook();
-			HSSFSheet sheet = workbook.createSheet("ErrorList");
+			XSSFWorkbook workbook = new XSSFWorkbook();
+			XSSFSheet sheet = workbook.createSheet("Fees Details");
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Admission Number", "Date of Fees", "Miscellaneous Amount", "Balance Amount", "Total", "Grand Total"});
+					new Object[] { "Admission Number", "Date of Fees", "Total"});
 			int i = 1;
-			for (Feesdetails feesDetails : listOfFeesDetails) {
+			for (Receiptinfo feesDetails : listOfFeesDetails) {
 				
 				for (Student studentDetails : listOfStudent) {
 				
-					data.put(Integer.toString(i),
-							new Object[] { studentDetails.getAdmissionnumber(), feesDetails.getDateoffees(),
-						feesDetails.getMiscamount(),
-						feesDetails.getBalamount(),
-						feesDetails.getAmountpercat(),
-						feesDetails.getGrandtotal() });
-					
+					data.put(Integer.toString(i),new Object[] { 
+						studentDetails.getAdmissionnumber(), feesDetails.getDate().toString(),
+						feesDetails.getTotalamount() });
 				}
-				
 				i++;
 			}
 			Row headerRow = sheet.createRow(0);
@@ -164,23 +155,16 @@ public class FeesDetailsService {
 						cell.setCellValue((String) obj);
 					else if (obj instanceof Double)
 						cell.setCellValue((Double) obj);
+					else if (obj instanceof Long)
+						cell.setCellValue((Long) obj);
 				}
 			}
-
-			try {
-
-				String xlsFileName = pathOfFeesReports + nameOfFile;
-				FileOutputStream out = new FileOutputStream(new File(xlsFileName));
+		
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"feesdetails.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;
-				System.out.println("Excel written successfully...");
-
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

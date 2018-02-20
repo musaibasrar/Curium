@@ -9,7 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import com.model.academicyear.dto.Currentacademicyear;
 import com.model.academicyear.service.YearService;
+import com.model.feescategory.service.FeesService;
 import com.model.feescollection.dto.Feescollection;
+import com.model.feescollection.dto.Receiptinfo;
 import com.model.feescollection.service.FeesCollectionService;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.feesdetails.service.FeesDetailsService;
@@ -32,37 +34,44 @@ public class FeesCollectionAction {
 
 	public String execute(String action, String page) {
 		 if (action.equalsIgnoreCase("feesAdd")) {
-				System.out.println("Action is feesAdd");
 				url = feesAdd();
 			}else if (action.equalsIgnoreCase("printReceipt")) {
-				System.out.println("Action is printReceipt");
 				url = printReceipt();
 			}else if (action.equalsIgnoreCase("ViewDetails")) {
-				System.out.println("Action is ViewDetails");
 				url = ViewDetails();
+			}else if (action.equalsIgnoreCase("StampFees")) {
+				url = StampFees();
 			}
 		return url;
 	}
 
+	private String StampFees() {
+		new FeesCollectionService(request, response).getStampFees();
+		new FeesService(request, response).viewFees();
+		new FeesService(request, response).viewAllStudentsList();
+		return "feesCollection.jsp";
+	}
+
 	private String ViewDetails() {
-		String ssid = request.getParameter("sid");
-		String id = request.getParameter("id");
-		System.out.println("SID AND ID "+ssid+"ID "+id);
-		new FeesCollectionService(request, response).preview();
+		//new FeesCollectionService(request, response).preview();
+		new FeesCollectionService(request, response).previewFeesDetails();
 		return "previewFeesDetail.jsp";
 	}
 
 	private String printReceipt() {
-		new FeesCollectionService(request, response).preview();
+		new FeesCollectionService(request, response).previewDetails();
 		return "printFeesDetail.jsp";
 	}
 
 	private String feesAdd() {
-		new YearService(request, response).getYear();
-		Feesdetails feesdetails = new FeesDetailsService(request, response).addFeesDetails();
-		Feescollection feescollection = new FeesCollectionService(request, response).add(feesdetails);
-		new FeesCollectionService(request, response).preview(feescollection);
-		return "previewFeesDetail.jsp";
+		Receiptinfo receiptInfo = new FeesCollectionService(request, response).add();
+		if(receiptInfo.getReceiptnumber()!=null){
+			new FeesCollectionService(request, response).preview(receiptInfo);
+			return "previewFeesDetail.jsp";
+		}else{
+			return "error.jsp";
+		}
+		
 	}
 
 }

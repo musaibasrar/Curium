@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 
 import com.model.feescategory.dto.Feescategory;
 import com.model.feescollection.dto.Feescollection;
+import com.model.feescollection.dto.Receiptinfo;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.student.dto.Student;
 import com.util.HibernateUtil;
@@ -77,6 +78,23 @@ public class feesDetailsDAO {
 	            transaction = session.beginTransaction();
 	            Query query = session.createQuery("From Feesdetails as feesdetails where feesdetails.feesdetailsid=" + feesDetailsid);
 	            feesdetails = (Feesdetails) query.uniqueResult();
+	            transaction.commit();
+	        } catch (HibernateException hibernateException) {
+	            transaction.rollback();
+	            hibernateException.printStackTrace();
+	        }
+	        //session.close();
+	        return feesdetails;
+	}
+	
+	public Receiptinfo readFeesDetails(Long feesDetailsid) {
+		 Receiptinfo feesdetails = new Receiptinfo();
+	        try {
+	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+
+	            transaction = session.beginTransaction();
+	            Query query = session.createQuery("From Receiptinfo as feesdetails where feesdetails.receiptnumber=" + feesDetailsid);
+	            feesdetails = (Receiptinfo) query.uniqueResult();
 	            transaction.commit();
 	        } catch (HibernateException hibernateException) {
 	            transaction.rollback();
@@ -153,18 +171,6 @@ public class feesDetailsDAO {
         } catch (HibernateException hibernateException) {
             transaction.rollback();
             hibernateException.printStackTrace();
-        }
-        
-        if(totalFees != null && paidFees != null){
-        	totalFees =  totalFees.substring(0, totalFees.indexOf('.'));
-        	int dueFeesint = (Integer.parseInt(totalFees)- Integer.parseInt(paidFees));
-            dueFees = Integer.toString(dueFeesint);
-        }else if(paidFees == null || paidFees.equalsIgnoreCase("") ){
-        	if(totalFees != null){
-        		totalFees =  totalFees.substring(0, totalFees.indexOf('.'));
-        	}
-        	
-        	dueFees = totalFees;
         }
         
         //session.close();

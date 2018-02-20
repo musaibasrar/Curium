@@ -1,7 +1,5 @@
 <%-- 
-    Document   : addcontact
-    Created on : Jun 17, 2013, 4:17:40 PM
-    Author     : CPEDUR1P5
+    Document   : sendemail
 --%>
 
 
@@ -19,7 +17,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Add contact Page</title>
+<title>Send Email</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 
@@ -502,36 +500,6 @@
 		return xmlHttp;
 	}
 
-	function maleCheck() {
-
-		if (document.getElementById('male').checked == true) {
-			document.getElementById('female').checked = false;
-
-		}
-
-	}
-
-	function femaleCheck() {
-
-		if (document.getElementById('female').checked == true) {
-			document.getElementById('male').checked = false;
-
-		}
-
-	}
-
-	function CalculateAge(value) {
-		var test = document.getElementById('datepicker').value;
-		var today = new Date();
-		var birthDate = new Date(test);
-		var age = today.getFullYear() - birthDate.getFullYear();
-		var m = today.getMonth() - birthDate.getMonth();
-		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-			age--;
-		}
-		//return age;
-		document.getElementById('age').value = age;
-	}
 </script>
 
 <script type="text/javascript">
@@ -679,6 +647,18 @@
 											></textarea>
 							</label></td>
 							
+						</tr>
+						
+						<td width="30%" class="alignRight">Count: &nbsp;</td>
+							<td width="12%" align="left"><label name="count" id="count" style="color: #325F6D;font-weight: bold;">
+							</label></td>
+							
+						</tr>
+
+						<tr>
+							<td width="30%" class="alignRight">No. Of Messages : &nbsp;</td>
+							<td width="12%" align="left"><label name="messagecount" id="messagecount" style="color: #325F6D;font-weight: bold;">
+							</label></td>
 						</tr>
 						
 						<tr>

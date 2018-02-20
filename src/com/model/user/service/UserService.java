@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
 import com.model.employee.dao.EmployeeDAO;
+import com.model.feescollection.dto.Receiptinfo;
 import com.model.feesdetails.dao.feesDetailsDAO;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.parents.dto.Parents;
@@ -400,8 +401,7 @@ public class UserService {
 
 	public void searchByDate() {
 		 //feesdetails.sid='"+sid+"' AND feesdetails.academicyear='"+currentYear+"'"
-		String queryMain ="From Feesdetails as feesdetails where";
-		String queryMainSum = "select sum(grandtotal) From Feesdetails as feesdetails where ";
+		String queryMain ="From Receiptinfo as feesdetails where";
 		String toDate= DataUtil.emptyString(request.getParameter("todate"));
 		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
 		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
@@ -410,22 +410,24 @@ public class UserService {
 			String querySub = "";
 			
 			if(!oneDay.equalsIgnoreCase("")){
-				querySub = " feesdetails.dateoffees = '"+oneDay+"'" ;
+				querySub = " feesdetails.date = '"+oneDay+"'" ;
 				 
 			}
 			
 			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
-				querySub = " feesdetails.dateoffees between '"+fromDate+"' AND '"+toDate+"'";
+				querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
 				
 			}
 			
-			
 			queryMain = queryMain+querySub;
-			queryMainSum = queryMainSum+querySub;
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
-			List<Feesdetails> feesDetailsList = new UserDAO().getListOfFeesDetails(queryMain);
-			String sumOfFees = new feesDetailsDAO().feesDetailsSum(queryMainSum);
+			List<Receiptinfo> feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
+			long sumOfFees = 0l;
+			for (Receiptinfo receiptinfo : feesDetailsList) {
+				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
+			}
+			
 			httpSession.setAttribute("searchfeesdetailslist", feesDetailsList);
 			httpSession.setAttribute("sumofdetailsfees", sumOfFees);
 		

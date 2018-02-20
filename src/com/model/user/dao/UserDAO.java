@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.model.feescollection.dto.Receiptinfo;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.parents.dto.Parents;
 import com.model.student.dto.Student;
@@ -170,4 +171,21 @@ public class UserDAO {
         return feesDetails;
 	}
 
+	@SuppressWarnings("unchecked")
+	public java.util.List<Receiptinfo> getReceiptDetailsList(String queryMain) {
+		java.util.List<Receiptinfo> feesDetails = new ArrayList<Receiptinfo>();
+        try {
+            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(queryMain);
+            feesDetails = (java.util.List<Receiptinfo>) HQLquery.list();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        }
+        //session.close();
+        return feesDetails;
+	}
 }

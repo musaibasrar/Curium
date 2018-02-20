@@ -780,7 +780,7 @@ for(Cookie cookie : cookies){
 
 										</c:forEach>
 
-								</select></td>
+								</select></label></td>
 
 
 							<td width="30%" class="alignRight">Designation &nbsp;</td>

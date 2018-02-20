@@ -241,6 +241,63 @@
 							$(this).val());
 				});
 	});
+	
+	$(function() {
+		$("#dateoftc").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(
+				function() {
+					$("#dateoftc").datepicker("option", "showAnim",
+							$(this).val());
+				});
+	});
+	
+	$(function() {
+		$("#dateoftcissued").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(
+				function() {
+					$("#dateoftcissued").datepicker("option", "showAnim",
+							$(this).val());
+				});
+	});
+	
+	$(function() {
+		$("#dateofadmission").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(
+				function() {
+					$("#dateofadmission").datepicker("option", "showAnim",
+							$(this).val());
+				});
+	});
+	
+	$(function() {
+		$("#dateofleaving").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(
+				function() {
+					$("#dateofleaving").datepicker("option", "showAnim",
+							$(this).val());
+				});
+	});
+	
 	$(function() {
 		$("#datepickerCD").datepicker({
 			changeYear : true,
@@ -336,12 +393,20 @@
 			updateStudent();
 
 		});
+		$("#updatefour").button().click(function() {
+			updateStudent();
+
+		});
 
 		$("#canceltwo").button().click(function() {
 			Cancel();
 
 		});
 		$("#cancelthree").button().click(function() {
+			Cancel();
+
+		});
+		$("#cancelfour").button().click(function() {
 			Cancel();
 
 		});
@@ -361,6 +426,7 @@
 					<li><a href="#tabs-1">Student Details</a></li>
 					<li><a href="#tabs-2">Parent's Details</a></li>
 					<li><a href="#tabs-3">Upload Photo</a></li>
+					<li><a href="#tabs-4">Additional Details</a></li>
 				</ul>
 
 
@@ -390,7 +456,38 @@
 						<tr>
 							<td><br /></td>
 						</tr>
+						
+						<tr>
 
+
+							<td width="16%" class="alignRight">Admission Number&nbsp;</td>
+							<td align="left"><label> <input name="admnno"
+									type="text" class="textField"
+									value="<c:out default="" value="${student.admissionnumber}" />"
+									id="admnno" size="30" data-validate="validate(required)">
+
+							</label></td>
+							<td width="16%" class="alignRight">cumulative record no. with date of opening &nbsp;</td>
+
+							<td align="left"><label><input name="crecord"
+									type="text" class="textField"
+									value="<c:out default="" value="${student.crecord}" />"
+									id="crecord" size="30"> <input
+									name="dateofcr" type="text" class="textField"
+									value="<fmt:formatDate value="${student.crecorddate}" pattern="yyyy-MM-dd"/>"
+									id="datepickeradmn" size="30"
+									data-validate="validate(required)">
+
+							</label></td>
+						</tr>
+						
+<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
 						<tr>
 							<td width="16%" class="alignRight">Name &nbsp;</td>
 							<td width="28%"><input type="hidden" name="id" id="id"
@@ -444,6 +541,36 @@
 							</label></td>
 						</tr>
 
+
+<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td width="16%" class="alignRight">Place of birth, Tq, Dist.&nbsp;</td>
+							<td align="left"><label> <input name="place"
+									type="text" class="textField"
+									value="<c:out default="" value="${student.placeofbirth}" />"
+									id="place" size="30" data-validate="validate(required)">
+
+							</label></td>
+							<td width="16%" class="alignRight">No. & date of transfer certificate&nbsp;</td>
+
+							<td align="left"><label><input name="tcno"
+									type="text" class="textField"
+									value="<c:out default="" value="${student.nooftc}"/>"
+									id="tcno" size="30">  <input
+									name="dateoftc" type="text" class="textField"
+									value="<fmt:formatDate value="${student.dateoftc}" pattern="yyyy-MM-dd"/>"
+									id="dateoftc" size="30"
+									data-validate="validate(required)">
+
+							</label></td>
+						</tr>
+						
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -607,20 +734,22 @@
 						<tr>
 
 
-							<td width="16%" class="alignRight">Admission Number&nbsp;</td>
-							<td align="left"><label> <input name="admnno"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.admissionnumber}" />"
-									id="admnno" size="30" data-validate="validate(required)">
 
-							</label></td>
 							<td width="16%" class="alignRight">Date Of Admission &nbsp;</td>
 
 							<td align="left"><label> <input
 									name="dateofadmission" type="text" class="textField"
 									value="<fmt:formatDate value="${student.admissiondate}" pattern="yyyy-MM-dd"/>"
-									id="datepickeradmn" size="30"
+									id="dateofadmission" size="30"
 									data-validate="validate(required)">
+
+							</label></td>
+							
+							<td width="16%" class="alignRight">Subsequent progress of the student&nbsp;</td>
+							<td align="left"><label> <input name="progress"
+									type="text" class="textField"
+									value="<c:out default="" value="${student.subsequentprogress}" />"
+									id="progress" size="30" data-validate="validate(required)">
 
 							</label></td>
 						</tr>
@@ -686,7 +815,7 @@
 							</label> --%>
 							
 							<label> <select name="religion" onblur="validateNameContact();"
-									id="religion" style="width: 240px" onkeypress="return validateContactNum(this);">
+									id="religion" style="width: 200px" onkeypress="return validateContactNum(this);">
 										<option selected>${student.religion}</option>
 										<option>Islam</option>
 										<option>Hinduism</option>
@@ -736,7 +865,7 @@
 							
 							<label>
 							<select name="motherT" onblur="validateNameContact();"
-									id="motherT" style="width: 240px" onkeypress="return validateContactNum(this);">
+									id="motherT" style="width: 200px" onkeypress="return validateContactNum(this);">
 										<option selected>${student.mothertongue}</option>
 										<option>Urdu</option>
 										<option>Hindi</option>
@@ -834,6 +963,7 @@
 					</table>
 				</div>
 				
+				
 				<div id="tabs-3">
 					<table width="100%" border="0" align="center" >
 						<tr>
@@ -898,6 +1028,135 @@
 						
 </div>
 
+
+						<div id="tabs-4">
+							<table width="100%" border="0" align="center" id="table1">
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+
+									<td width="30%" class="alignRight"><label> <font
+											color="red"><div id="mydiv"></div></font>
+									</label></td>
+									<td width="20%" class="alignRight"></td>
+									<td class="alignRight"><font color="red"><div
+												id="mydivmobile"></div></font></td>
+								</tr>
+
+
+
+								<tr>
+									<td width="30%" class="alignRight">Class on leaving&nbsp;</td>
+									<td width="12%" align="left"><label> <input
+											name="classonleaving" type="text"
+											value="<c:out default="" value="${student.classonleaving}" />" class="myclass" id="classonleaving" style="text-transform:uppercase"
+											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+									<td width="30%" class="alignRight">Date of leaving the school&nbsp;</td>
+									<td width="12%" align="left"><label> <input
+									name="dateofleaving" type="text" class="textField" 
+									id="dateofleaving" size="36" value="<fmt:formatDate type="date" value="${student.dateleaving}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"><!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+
+								</tr>
+
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+
+									<td width="16%" class="alignRight">Reason for leaving &nbsp;</td>
+
+									<td width="28%"><label> <input name="reasonforleaving"
+											type="text" class="textField" id="reasonforleaving" size="36"
+											value="<c:out default="" value="${student.reasonleaving}" />"
+											onkeypress="return validateContactNum(this);">
+
+									</label></td>
+
+
+
+									<td width="16%" class="alignRight">No. & date of transfer certificate issued&nbsp;</td>
+
+									<td width="28%"><label> <input name="notcissued"
+									type="text" class="textField" id="notcissued" size="36" value="<c:out default="" value="${student.notcissued}" />"
+									><input
+									name="dateoftcissued" type="text" class="textField" 
+									id="dateoftcissued" size="36" value="<fmt:formatDate type="date" value="${student.datetcissued}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)">
+							</label></td>
+									
+								</tr>
+								
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+							<tr>
+									<td><br /></td>
+								</tr>	
+							<tr align="center">
+									
+									
+									<td width="20%" class="alignRight"> &nbsp;</td>
+
+									<td align="center">
+									
+										
+										<button id="updatefour" onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();" onfocus="validateNameContact();validateFatherName();">Update</button>
+
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="cancelfour">Cancel</button>
+
+									</td>
+
+								
+								
+									
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								
+
+						</div>
+						</div>
+							
+							</table>
+							
+							</div>
+							
+							
+							
+
 				<div id="tabs-2">
 					<table width="100%" border="0" align="center" id="table1">
 						<tr>
@@ -953,12 +1212,12 @@
 
 						<tr>
 
-							<td width="16%" class="alignRight">Father's Profession
+							<td width="16%" class="alignRight">Guardian's name & address
 								&nbsp;</td>
 
-							<td width="28%"><label> <input name="profession"
-									type="text" class="textField" id="profession" size="36"
-									value="<c:out default="" value="${parents.professsion}" />">
+							<td width="28%"><label> <input name="guardian"
+									type="text" class="textField" id="guardian" size="36"
+									value="<c:out default="" value="${student.guardiandetails}" />">
 
 							</label></td>
 
@@ -997,7 +1256,7 @@
 							<td width="28%"><label> <input
 									name="cocontactnumber" type="text" class="textField"
 									id="cocontactnumber" size="36"
-									value="<c:out default="" value="${parents.cocontactnumber}" />"">
+									value="<c:out default="" value="${parents.cocontactnumber}" />">
 
 							</label></td>
 						</tr>
@@ -1011,7 +1270,6 @@
 
 
 						<tr>
-
 							<td width="16%" class="alignRight">Email
 								&nbsp;</td>
 
@@ -1040,17 +1298,12 @@
 							<td><br /></td>
 						</tr>
 						<tr>
-
-
 							<td width="16%" class="alignRight">Permanent Address &nbsp;</td>
-
 							<td width="28%"><label> <textarea
 										name="permanentaddress" type="text" class="textField"
 										id="permanentaddress" rows="4" cols="35"
 										value="<c:out default="" value="${parents.addresspermanent}"/>">${parents.addresspermanent}</textarea>
-
 							</label></td>
-
 
 							<td width="20%" class="alignRight">Temporary Address &nbsp;</td>
 							<td width="28%"><label> <textarea
@@ -1072,8 +1325,6 @@
 
 
 						<tr>
-
-
 							<td width="16%" class="alignRight">Number Of Dependents
 								&nbsp;</td>
 
@@ -1083,8 +1334,6 @@
 									value="<c:out default="" value="${parents.noofdependents}" />">
 
 							</label></td>
-
-
 							<td width="20%" class="alignRight">Notes &nbsp;</td>
 							<td width="28%"><label> <input name="remarks"
 									type="text" class="textField" id="remarks" size="36"
@@ -1138,16 +1387,14 @@
 						<tr>
 							<td><br /></td>
 						</tr>
+						</label>
+						</td>
+						</tr>
+						</table>
 
 						</div>
 
-
-
-
 						</div>
-
-
-
 						</div>
 
 

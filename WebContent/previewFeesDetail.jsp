@@ -133,7 +133,7 @@
         <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <script src="js/print/jquery.printPage.js" type="text/javascript"></script>
-        <title>JSP Page</title>
+        <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {
 
@@ -142,7 +142,8 @@
         </script>
     </head>
     <body>
-        <form action="Controller?process=DispenseProcess&action=add" method="post" onsubmit="return validateMedicine()">
+        <form>
+        <input type="hidden" value="${duplicate}" id="duplicate" name="duplicate">
             <table  width="100%">
                 <thead>
                     <tr  >
@@ -157,8 +158,8 @@
                     <tr>
                         <td style="width: 35%">Student Name: <c:out value="${student.name}" /></td>
                         <td style="width: 20%">Admission No:  <c:out value="${student.admissionnumber}" /></td>
-                        <td style="width: 20%">Date:  <c:out value="${feesdetails.dateoffees}" /></td>
-                        <td style="width: 20%">Receipt No:  <c:out value="${feesdetails.feesdetailsid}" /></td>
+                        <td style="width: 20%">Date:  <c:out value="${recieptdate}" /></td>
+                        <td style="width: 20%">Receipt No:  <c:out value="${recieptinfo.receiptnumber}" /></td>
 
                     </tr>
 
@@ -180,21 +181,15 @@
             <TABLE id="dataTable" width="100%" border="1" >
                 <thead>
                     <tr >
-
                         <td class="headerText">Fees Category</td>
                         <td class="headerText">Fees Amount</td>
-                        <td class="headerText">For The Month</td>
-                        <!-- <td class="headerText">Amount</td> -->
-
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${feescollection}" var="feescollection">
+                    <c:forEach items="${feescatmap}" var="feescatmap">
                         <tr>
-                            <td align="center"><c:out value="${feescollection.feescategory}" /></td>
-                            <td align="center"><c:out value="${feescollection.feesamount}" /></td>
-                            <td align="center"><c:out value="${feescollection.formonth}" /></td>
-                            <%-- <td align="center"><c:out value="${feescollection.amount}" /></td> --%>
+                            <td align="center"><c:out value="${feescatmap.key}" /></td>
+                            <td align="center"><c:out value="${feescatmap.value}" /></td>
                         </tr>
                     </c:forEach>
 
@@ -203,29 +198,15 @@
                     <%-- <c:forEach end="1" items="${dispense.dispensedmedicinebills}" var="dispensedmedicinebill"> --%>
                         <tr>
 
-                            <td colspan="3" align="right">Total</td>
-                            <td align="center"><c:out value="${feesdetails.amountpercat}" /></td>
+                            <td colspan="3" align="right">Total Amount</td>
+                            <td align="center"><c:out value="${recieptinfo.totalamount}" /></td>
                         </tr>
-                        <tr>
-
-                            <td colspan="3" align="right">Balance</td>
-                            <td align="center"><c:out value="${feesdetails.balamount}" /></td>
-                        </tr>
-                        <tr>
-
-                            <td colspan="3" align="right">Miscellaneous</td>
-                            <td align="center"><c:out value="${feesdetails.miscamount}" /></td>
-                        </tr>
-                        <tr>
-
-                            <td colspan="3" align="right">Grand Total</td>
-                            <td align="center"><c:out value="${feesdetails.grandtotal}" /></td>
-                        </tr>
+                        
                     <%-- </c:forEach> --%>
                     <tr>
 
 
-                        <td align="center"><a id="print" href="Controller?process=FeesCollection&action=printReceipt&id=<c:out value="${feesdetails.feesdetailsid}"/>&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td align="center"><a id="print" href="Controller?process=FeesCollection&action=printReceipt&id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </TABLE>

@@ -19,7 +19,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Advance Search for print</title>
+        <title>Academic Year</title>
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 
@@ -31,7 +31,6 @@
         <script src="js/datePicker/ui/jquery.ui.tabs.js"></script>
         <script src="js/datePicker/ui/sliderAccess.js"></script>
         <script src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script src="js/validation/jquery.ketchup.all.min.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.button.js"></script>
         <link rel="stylesheet" href="css/datePicker/demos.css">
 
@@ -270,15 +269,7 @@
     font-weight: bold;
 }
         </style>
-
-
         <script type="text/javascript" src="js/datetimepicker_css.js"></script>
-        <script src="JavaScript/actb.js"></script>
-        <script src="JavaScript/common.js"></script>
-
-
-
-
         <script>
             $(function() {
                 $("#datepicker").datepicker({changeYear: true, changeMonth: true});
@@ -385,7 +376,7 @@
                 $("#save")
                         .button()
                         .click(function() {
-                        	if($("#academicyear").val().length==0){
+                        	if($("#academicyear").val().length===0){
                         		return false;
                         	}
                         	if(confirm('Are you sure,you want to change the current academic year?')){
