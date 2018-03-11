@@ -1,6 +1,6 @@
 <%--
-    Document   : index
-    Created on : Dec 23, 2011, 5:52:28 PM
+    Document   : trial sheet
+    Created on : Mar 10, 2018, 5:52:28 PM
     Author     : Musaib
 --%>
 
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>fees structure</title>
+<title>Trial Balance</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -387,6 +387,7 @@
 	});
 	
 
+
 </script>
 
 
@@ -397,138 +398,133 @@
 <body>
 	<form id="form1">
 
-		<div id="effect" class="ui-widget-content ui-corner-all">
-			<div id="tabs">
-				<ul>
-					<li><a href="#tabs-1">Fees Structure</a></li>
-
-				</ul>
-				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-
-						<tr>
-							<td class="alignRightFields">Name &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
-							</label></td>
-							
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-
-						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 150px">
-										<option selected>Class</option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
-								</select>
-
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 120px">
-										<option selected>Sec</option>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>E</option>
-										<option>F</option>
-										<option>G</option>
-
-								</select>
-							</label>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-
-							<td width="30%" class="alignRight"></td>
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
-							</td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-					</table>
-					
-					
-
-				</div>
-			</div>
-		</div>
-
 		<div style="overflow: scroll; height: 600px">
-			<table width="100%">
-				<tr>
-					<td class="headerTD">Search result</td>
-				</tr>
-			</table>
-			<table width="100%" border="0" style="border-color: #4b6a84;"
-				id="myTable">
+		<table width="100%">
+                    <tr>
+                        <td  class="headerTD">Balance Sheet</td>
+                    </tr>
+
+                    
+
+                </table>
+                
+               <br><br>
+                
+			<table width="50%" border="0" style="border-color: #4b6a84;float: left;margin-bottom:50px;">
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class &
-							Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Admission Date</th>
-
+						
+						<th title="click to sort" class="headerText" style="font-weight: bold;">Particulars</th>
+						
+						<th title="click to sort" class="headerText" style="font-weight: bold;">Debit</th>
+						<th title="click to sort" class="headerText" style="font-weight: bold;">Credit</th>
+						
+						<th ></th>
 
 
 					</tr>
 				</thead>
 
 				<tbody>
-					<c:forEach items="${searchStudentList}" var="Parents">
+					<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							
+							<td class="dataTextInActive" style="text-align: left">CAPITAL</td>
+							<td class="dataTextInActive" style="text-align: right"><c:out value="${capital}" /></td>
+
+						</tr>
+						
+					<c:forEach items="${capitalledgeraccount}" var="capitalledgeraccount">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
-								name="studentIDs"
-								value="<c:out value="${Parents.student.sid}"/>" /></td>
-							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=StudentProcess&action=ViewFeesStructure&id=<c:out value='${Parents.student.sid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.classstudying}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.admissiondate}" /></td>
-
+							<td class="dataText" style="text-align: right"><c:out value="${capitalledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${capitalledgeraccount.value}" /></td>
+							<td class="dataText"></td>
 
 						</tr>
 					</c:forEach>
+					
+					
+					<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							
+							<td class="dataTextInActive" style="text-align: left">LOANS(LIABILITY)</td>
+							<td class="dataTextInActive" style="text-align: right"><c:out value="${loansliabilities}" /></td>
+
+						</tr>
+					<c:forEach items="${loansliabilitiesledgeraccount}" var="loansliabilitiesledgeraccount">
+
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="dataText" style="text-align: right"><c:out value="${loansliabilitiesledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${loansliabilitiesledgeraccount.value}" /></td>
+							<td class="dataText"></td>
+
+						</tr>
+					</c:forEach>
+					
+					<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							
+							<td class="dataTextInActive" style="text-align: left">CURRENT LIABILITIES</td>
+							<td class="dataTextInActive" style="text-align: right"><c:out value="${currentliabilities}" /></td>
+
+						</tr>
+					<c:forEach items="${currentliabilitiesledgeraccount}" var="currentliabilitiesledgeraccount">
+
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="dataText" style="text-align: right"><c:out value="${currentliabilitiesledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${currentliabilitiesledgeraccount.value}" /></td>
+							<td class="dataText"></td>
+
+						</tr>
+					</c:forEach>
+					
+					<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							
+							<td class="dataTextInActive" style="text-align: left">RESERVES</td>
+							<td class="dataTextInActive" style="text-align: right"><c:out value="${reserves}" /></td>
+
+						</tr>
+					<c:forEach items="${reservesledgeraccount}" var="reservesledgeraccount">
+
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="dataText" style="text-align: right"><c:out value="${reservesledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${reservesledgeraccount.value}" /></td>
+							<td class="dataText"></td>
+
+						</tr>
+					</c:forEach>
+					
+					<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							
+							<td class="dataTextInActive" style="text-align: left;height: 20px;"><c:out value="${grouponetotallabel}" /></td>
+							<td class="dataTextInActive" style="text-align: right"><c:out value="${grouponesemitotal}" /></td>
+
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							
+							<td class="dataTextInActive" style="text-align: left;height: 20px;"><c:out value="${differencelabel}" /></td>
+							<td class="dataTextInActive" style="text-align: right"><c:out value="${differenceamount}" /></td>
+
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							
+							<td class="dataTextInActive" style="text-align: left;height: 20px;">TOTAL</td>
+							<td class="dataTextInActive" style="text-align: right"><c:out value="${grouponetotal}" /></td>
+
+						</tr>
+					
 				</tbody>
 				<tfoot>
 					<tr>
@@ -540,6 +536,7 @@
 					</tr>
 				</tfoot>
 			</table>
+			
 
 		</div>
 

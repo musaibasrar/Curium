@@ -12,6 +12,11 @@ import java.net.SocketException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.MalformedInputException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.net.ftp.FTPClient;
 
@@ -21,8 +26,60 @@ public class test {
 
 	
 	public static void main(String[] args) throws SocketException, IOException{
+		
+	/*	Map<Date,Integer> myMap = new HashMap<Date, Integer>();
+		myMap.put(new Date(), 1);
+		myMap.put(new Date(), 2);
+		myMap.put(new Date(), 3);
+		myMap.put(new Date(), 4);
+		
+		for (Map.Entry<Date, Integer> string : myMap.entrySet()) {
+			System.out.println("key is "+string.getKey());
+		}*/
+		
+		
+		
+		 SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
+		 String dateBeforeString = "27 01 2018";
+		 String dateAfterString = "30 01 2018";
+
+		 try {
+		       Date dateBefore = myFormat.parse(dateBeforeString);
+		       Date dateAfter = myFormat.parse(dateAfterString);
+		       long difference = dateAfter.getTime() - dateBefore.getTime();
+		       float daysBetween = (difference / (1000*60*60*24));
+	               /* You can also convert the milliseconds to days using this method
+	                * float daysBetween = 
+	                *         TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS)
+	                */
+		       for(int j =1; j<=(int)daysBetween; j++){
+		    	   System.out.println("SUCCESS: ");
+				}
+		       System.out.println("Number of Days between dates: "+daysBetween);
+		 } catch (Exception e) {
+		       e.printStackTrace();
+		 }
+	   
+		
+		
+		
 		double totalNumbers = 2;
-		 
+		Format formatter = new SimpleDateFormat("MMMM"); 
+	    String s = formatter.format(new Date());
+	    System.out.println(s);
+
+			final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			int count =4;
+			StringBuilder builder = new StringBuilder();
+			while (count-- != 0) {
+			int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+			builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+			}
+			System.out.println(builder.toString());
+
+		
+		
+		
 		
 		System.out.println("result "+totalNumbers/100);
 		double iterations = (double) Math.ceil(totalNumbers/100);
@@ -31,8 +88,8 @@ public class test {
 		URL url = null;
 		URLConnection con = null;
 		int i;
-		try {
-			/*InputStream inputStream = null;
+/*		try {
+			InputStream inputStream = null;
 			OutputStream outputStream = null;
 			// read this file into InputStream
 			inputStream = new FileInputStream("D:/personalmusaib/Zeee.xlsx");
@@ -46,7 +103,7 @@ public class test {
 			while ((read = inputStream.read(bytes)) != -1) {
 				outputStream.write(bytes, 0, read);
 			}
-			*/
+			
 			
 			
 			
@@ -67,7 +124,7 @@ public class test {
 			malformedInputException.printStackTrace();
 		} catch (IOException ioException) {
 			ioException.printStackTrace();
-		}
+		}*/
 	}
 		
 }

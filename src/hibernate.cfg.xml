@@ -48,6 +48,10 @@
 		<mapping resource="com/model/account/dto/Accountgroupmaster.hbm.xml"></mapping>
 		<mapping resource="com/model/account/dto/Accountsubgroupmaster.hbm.xml"></mapping>
 		<mapping resource="com/model/account/dto/Accountdetails.hbm.xml"></mapping>
-		<mapping resource="com/model/account/dto/Accountdetailsbalance.hbm.xml"></mapping>	
+		<mapping resource="com/model/account/dto/Accountdetailsbalance.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Receipttransactions.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Paymenttransactions.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Contratransactions.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Journaltransactions.hbm.xml"></mapping>	
 	</session-factory>
 </hibernate-configuration>

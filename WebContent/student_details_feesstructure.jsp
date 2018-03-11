@@ -477,8 +477,8 @@
                               	<td class="dataText"></td>
                                	<td class="dataText"></td>
                                 <td class="dataText"></td>
-                                <td class="dataText"><c:out value="${feesstructure.feescategory}"/></td>
-                                <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feescategory.feescategoryname}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
                                
                                 
                                  

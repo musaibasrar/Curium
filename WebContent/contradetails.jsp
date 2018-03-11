@@ -1,6 +1,6 @@
 <%--
-    Document   : index
-    Created on : Dec 23, 2011, 5:52:28 PM
+    Document   : contra details
+    Created on : Mar 09, 2018, 3:05:28 PM
     Author     : Musaib
 --%>
 
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>fees structure</title>
+<title>Contra Details</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -358,9 +358,9 @@
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchForFees() {
+	function search() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StampFeesProcess&action=searchForFees";
+		form1.action = "Controller?process=AccountProcess&action=viewNextVoucher";
 		form1.method = "POST";
 		form1.submit();
 
@@ -369,7 +369,7 @@
 	$(function() {
 
 		$("#search").button().click(function() {
-			searchForFees();
+			search();
 		});
 		
 
@@ -400,7 +400,7 @@
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Fees Structure</a></li>
+					<li><a href="#tabs-1">Contra Details</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -408,55 +408,28 @@
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
-							<td class="alignRightFields">Name &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
-							</label></td>
-							
+							<td><br /></td>
+
+						</tr>
+
+						<tr>
+						<td></td>
+						<td></td>
+						<td width="40%"></td>
+							<td width="70%"><label> <select name="voucher"
+									id="voucher" style="width: 150px">
+										<option>Receipt</option>
+										<option>Payment</option>
+										<option selected>Contra</option>
+										<option>Journal</option>
+								</select>
 						</tr>
 
 						<tr>
 							<td><br /></td>
 
 						</tr>
-
-
-						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 150px">
-										<option selected>Class</option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
-								</select>
-
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 120px">
-										<option selected>Sec</option>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>E</option>
-										<option>F</option>
-										<option>G</option>
-
-								</select>
-							</label>
-						</tr>
-
+						
 						<tr>
 							<td><br /></td>
 
@@ -465,9 +438,10 @@
 						<tr>
 
 							<td width="30%" class="alignRight"></td>
-
+							<td></td>
+							<td><br></td>
 							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
+							<td width="20%" class="alignRight">
 								<button id="search">Search</button>
 							</td>
 						</tr>
@@ -496,35 +470,29 @@
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class &
-							Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Admission Date</th>
-
-
-
+						<th title="click to sort" class="headerText">Voucher Number</th>
+						<th title="click to sort" class="headerText">Dr Account -- Cr Account&nbsp;</th>
+						<th title="click to sort" class="headerText">Dr Amount -- Cr Amount&nbsp;</th>
+						<th title="click to sort" class="headerText">Date</th>
+						<th title="click to sort" class="headerText">Narration</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<c:forEach items="${searchStudentList}" var="Parents">
+					<c:forEach items="${contratransactions}" var="contratransactions">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
-								name="studentIDs"
-								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=StudentProcess&action=ViewFeesStructure&id=<c:out value='${Parents.student.sid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
+								href="Controller?process=StudentProcess&action=ViewFeesStructure&id=<c:out value='${contratransactions.key.transactionsid}'/>"><c:out
+										value="${contratransactions.key.transactionsid}" /></a></td>
+							<td class="dataText"><c:out value="${contratransactions.value}" /></td>
 							<td class="dataText"><c:out
-									value="${Parents.student.classstudying}" /></td>
+									value="${contratransactions.key.dramount} -- ${contratransactions.key.cramount}" /></td>
 							<td class="dataText"><c:out
-									value="${Parents.student.admissiondate}" /></td>
+									value="${contratransactions.key.date}" /></td>
+									<td class="dataText"><c:out
+									value="${contratransactions.key.narration}" /></td>
 
 
 						</tr>
