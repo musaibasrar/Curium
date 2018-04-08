@@ -284,30 +284,68 @@
     
     
     function saveReceipt(){
-    	  var form1 = document.getElementById("form1");
-          form1.action = "Controller?process=AccountProcess&action=saveReceipt";
-          form1.submit();
+    	
+    	if(document.getElementById("dramount").vlaue == 0 || document.getElementById("cramountsecond").value == 0){
+      	  alert('Voucher with zero amount cannot be saved!');
+        }else{
+        	
+        	if(confirm('Are you sure,you want to save the receipt voucher?')){
+        		
+        		var form1 = document.getElementById("form1");
+                form1.action = "Controller?process=AccountProcess&action=saveReceipt";
+                form1.submit();	
+        	}
+        	
+        }
+    	  
     	
     }
     
     function savePayment(){
-  	  var form1 = document.getElementById("form1");
-        form1.action = "Controller?process=AccountProcess&action=savePayment";
-        form1.submit();
-  	
+    	
+    	if(document.getElementById("dramountpayment").vlaue == 0 || document.getElementById("cramountpaymentsecond").value == 0){
+        	  alert('Voucher with zero amount cannot be saved!');
+          }else{
+        	  if(confirm('Are you sure,you want to save the payment voucher?')){
+        	  
+        		  var form1 = document.getElementById("form1");
+              	  form1.action = "Controller?process=AccountProcess&action=savePayment";
+              	  form1.submit();
+        	  
+        	  }
+          }
   }
     
     function saveContra(){
-  	  var form1 = document.getElementById("form1");
-        form1.action = "Controller?process=AccountProcess&action=saveContra";
-        form1.submit();
+      var accountOne = 	document.getElementById("accountbalancecontra").value;
+      var accountTwo = document.getElementById("accountbalancecontrasecond").value;
+      if(accountOne == accountTwo){
+    	  alert('An account can be selected only once!');
+      }else if(document.getElementById("dramountcontra").vlaue == 0 || document.getElementById("cramountcontrasecond").value == 0){
+    	  alert('Voucher with zero amount cannot be saved!');
+      }else{
+    	  if(confirm('Are you sure,you want to save the contra voucher?')){
+    	  var form1 = document.getElementById("form1");
+          form1.action = "Controller?process=AccountProcess&action=saveContra";
+          form1.submit();
+    	  }
+      }
+  	  
   	
   }
     
     function saveJournal(){
-    	  var form1 = document.getElementById("form1");
-          form1.action = "Controller?process=AccountProcess&action=saveJournal";
-          form1.submit();
+    	
+    	if(document.getElementById("dramountjournal").vlaue == 0 || document.getElementById("cramountjournalsecond").value == 0){
+      	  alert('Voucher with zero amount cannot be saved!');
+        }else{
+        	if(confirm('Are you sure,you want to save the journal voucher?')){
+        	 var form1 = document.getElementById("form1");
+             form1.action = "Controller?process=AccountProcess&action=saveJournal";
+             form1.submit();
+        	}
+        }
+    	 
     	
     }
         </script> 
@@ -1120,10 +1158,10 @@
 									style="width: 240px;"">
 										
 
-										<c:forEach items="${accountdetailsbalance}" var="accountdetailsbalance">
+										<c:forEach items="${accountdetailsbalancejournal}" var="accountdetailsbalancejournal">
 
-											<option value="${accountdetailsbalance.accountDetails.accountdetailsid}" data-sync-journal="${accountdetailsbalance.accountDetails.accountdetailsid}">
-												<c:out value="${accountdetailsbalance.accountDetails.accountname}" />
+											<option value="${accountdetailsbalancejournal.accountDetails.accountdetailsid}" data-sync-journal="${accountdetailsbalancejournal.accountDetails.accountdetailsid}">
+												<c:out value="${accountdetailsbalancejournal.accountDetails.accountname}" />
 											</option>
 
 
@@ -1137,10 +1175,10 @@
     text-indent: 1px;
     text-overflow: '';font-weight: bold;color: black;"">
 
-										<c:forEach items="${accountdetailsbalance}" var="accountdetailsbalance">
+										<c:forEach items="${accountdetailsbalancejournal}" var="accountdetailsbalancejournal">
 
-											<option  value="${accountdetailsbalance.accountDetails.accountdetailsid}">
-												<c:out value="${accountdetailsbalance.currentbalance}" /> (<c:out value="${accountdetailsbalance.crdr}" />)
+											<option  value="${accountdetailsbalancejournal.accountDetails.accountdetailsid}">
+												<c:out value="${accountdetailsbalancejournal.currentbalance}" /> (<c:out value="${accountdetailsbalancejournal.crdr}" />)
 											</option>
 
 
@@ -1158,10 +1196,10 @@
 									style="width: 240px;"">
 										
 
-										<c:forEach items="${accountdetailsbalance}" var="accountdetailsbalance">
+										<c:forEach items="${accountdetailsbalancejournal}" var="accountdetailsbalancejournal">
 
-											<option value="${accountdetailsbalance.accountDetails.accountdetailsid}" data-sync-journal-second="${accountdetailsbalance.accountDetails.accountdetailsid}">
-												<c:out value="${accountdetailsbalance.accountDetails.accountname}" />
+											<option value="${accountdetailsbalancejournal.accountDetails.accountdetailsid}" data-sync-journal-second="${accountdetailsbalancejournal.accountDetails.accountdetailsid}">
+												<c:out value="${accountdetailsbalancejournal.accountDetails.accountname}" />
 											</option>
 
 
@@ -1175,10 +1213,10 @@
     text-indent: 1px;
     text-overflow: '';font-weight: bold;color: black;"">
 
-										<c:forEach items="${accountdetailsbalance}" var="accountdetailsbalance">
+										<c:forEach items="${accountdetailsbalancejournal}" var="accountdetailsbalancejournal">
 
-											<option  value="${accountdetailsbalance.accountDetails.accountdetailsid}">
-												<c:out value="${accountdetailsbalance.currentbalance}" /> (<c:out value="${accountdetailsbalance.crdr}" />)
+											<option  value="${accountdetailsbalancejournal.accountDetails.accountdetailsid}">
+												<c:out value="${accountdetailsbalancejournal.currentbalance}" /> (<c:out value="${accountdetailsbalancejournal.crdr}" />)
 											</option>
 
 

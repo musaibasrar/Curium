@@ -6,7 +6,7 @@
 	<session-factory name="test">
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		
-	 	<property name="hibernate.connection.password">root</property>
+	 	<property name="hibernate.connection.password">mysql</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/school</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.default_schema">school</property>
@@ -52,6 +52,8 @@
 		<mapping resource="com/model/account/dto/Receipttransactions.hbm.xml"></mapping>
 		<mapping resource="com/model/account/dto/Paymenttransactions.hbm.xml"></mapping>
 		<mapping resource="com/model/account/dto/Contratransactions.hbm.xml"></mapping>
-		<mapping resource="com/model/account/dto/Journaltransactions.hbm.xml"></mapping>	
+		<mapping resource="com/model/account/dto/Journaltransactions.hbm.xml"></mapping>
+		<mapping resource="com/model/documents/dto/Transfercertificate.hbm.xml"></mapping>
+		<mapping resource="com/model/examdetails/dto/Examschedule.hbm.xml"></mapping>	
 	</session-factory>
 </hibernate-configuration>

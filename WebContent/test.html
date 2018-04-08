@@ -1,10 +1,39 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
 	<head>
 		<title>Bar Chart</title>
 		<script src="js/Chart.js"></script>
+		<script src="js/jspdf.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+       
 	</head>
+	
+	<script>
+	var doc = new jsPDF();
+	var specialElementHandlers = {
+	    '#editor': function (element, renderer) {
+	        return true;
+	    }
+	};
+
+	$('#cmd').click(function () {
+	    doc.fromHTML($('#content').html(), 15, 15, {
+	        'width': 170,
+	            'elementHandlers': specialElementHandlers
+	    });
+	    doc.save('sample-file.pdf');
+	});
+	</script>
+	
 	<body>
+	
+	<div id="content">
+     <h3>Hello, this is a H3 tag</h3>
+
+    <p>a pararaph</p>
+</div>
+<div id="editor"></div>
+<button id="cmd">generate PDF</button>
 		<div style="width: 50%">
 			<canvas id="canvas" height="450" width="600"></canvas>
 			
@@ -46,5 +75,63 @@
 		});
 	}
 	</script>
+	
+	
+	
+	
 	</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Print Current Page as PDF</title>
+  
+  
+  
+  
+  
+</head>
+
+<body>
+
+  <div id="content">
+     <h3>Hello, this is a H3 tag</h3>
+
+    <p>a pararaph</p>
+</div>
+<div id="editor"></div>
+<button id="cmd">generate PDF</button>
+ <script type="text/javascript" src="js/jspdf.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+  
+
+   <!--  <script  src="js/index.js"></script> -->
+   
+   <script type="text/javascript">
+   var doc = new jsPDF();
+   var specialElementHandlers = {
+       '#editor': function (element, renderer) {
+           return true;
+       }
+   };
+
+   $('#cmd').click(function () {
+       doc.fromHTML($('#content').html(), 15, 15, {
+           'width': 170,
+               'elementHandlers': specialElementHandlers
+       });
+       doc.save('sample-file.pdf');
+   });
+   
+   </script>
+
+
+
+
+</body>
+
 </html>

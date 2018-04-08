@@ -164,7 +164,7 @@
                         <table width="100%" height="120" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
                             <tr>
                                <td width="234" ><!--<div align="center"><img src="images/logo.png" width="200" height="64" /></div> --></td> 
-                                <td width="700" ><div align="center"><img src="images/SMS1.png" width="391" height="50" /></div></td>
+                                <td width="700" ><div align="center"><img src="images/SMS.png" width="391" height="50" /></div></td>
                                 <td width="210" height="10">&nbsp;</td>
                             </tr>
                             <tr>

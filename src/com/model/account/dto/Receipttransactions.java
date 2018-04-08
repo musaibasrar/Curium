@@ -30,13 +30,14 @@ public class Receipttransactions implements java.io.Serializable {
 	private Date date;
 	private String narration;
 	private int financialyear;
+	private String cancelvoucher;
 
 	public Receipttransactions() {
 	}
 
 	public Receipttransactions(Integer draccountid, Integer craccountid,
 			BigDecimal dramount, BigDecimal cramount, Integer vouchertype,
-			Date date, String narration, int financialyear) {
+			Date date, String narration, int financialyear, String cancelVoucher) {
 		this.draccountid = draccountid;
 		this.craccountid = craccountid;
 		this.dramount = dramount;
@@ -45,6 +46,7 @@ public class Receipttransactions implements java.io.Serializable {
 		this.date = date;
 		this.narration = narration;
 		this.financialyear = financialyear;
+		this.cancelvoucher = cancelVoucher;
 	}
 
 	@Id
@@ -128,6 +130,14 @@ public class Receipttransactions implements java.io.Serializable {
 
 	public void setFinancialyear(int financialyear) {
 		this.financialyear = financialyear;
+	}
+
+	public String getCancelvoucher() {
+		return cancelvoucher;
+	}
+
+	public void setCancelvoucher(String cancelvoucher) {
+		this.cancelvoucher = cancelvoucher;
 	}
 
 }

@@ -85,9 +85,10 @@ public class StudentAction {
 	}
 
 	private String generateBonafide() {
-		if (new StudentService(request, response).generateBonafide()) {
-            //return "patientDetails_1.jsp";
-            return "bonafidesuccess.jsp";
+		
+		String result = new StudentService(request, response).generateBonafide();
+		if (result!=null) {
+            return result;
         } else {
             return "bonafidefailure.jsp";
         }

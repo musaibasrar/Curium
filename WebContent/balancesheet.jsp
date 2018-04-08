@@ -389,11 +389,6 @@
 
 
 </script>
-
-
-
-
-
 </head>
 <body>
 	<form id="form1">

@@ -15,6 +15,8 @@ import com.model.feescollection.dto.Receiptinfo;
 import com.model.feescollection.service.FeesCollectionService;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.feesdetails.service.FeesDetailsService;
+import com.model.sendsms.service.SmsService;
+import com.util.DataUtil;
 
 /**
  * @author Musaib_2
@@ -66,6 +68,9 @@ public class FeesCollectionAction {
 	private String feesAdd() {
 		Receiptinfo receiptInfo = new FeesCollectionService(request, response).add();
 		if(receiptInfo.getReceiptnumber()!=null){
+			//under implementation
+			/*SmsService smsSerivce = new SmsService(request, response);
+			smsSerivce.sendSMS(DataUtil.emptyString(request.getParameter("contactnumber")),"We have received Rs."+DataUtil.emptyString(request.getParameter("grandTotalAmount"))+" towards fees collection.");*/
 			new FeesCollectionService(request, response).preview(receiptInfo);
 			return "previewFeesDetail.jsp";
 		}else{

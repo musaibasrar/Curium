@@ -1031,9 +1031,26 @@ public class StudentService {
 		// getFile(name, path);
 	}
 
-	public boolean generateBonafide() {
-		// TODO Auto-generated method stub
-		return false;
+	public String generateBonafide() {
+		
+		String[] studentIds = request.getParameterValues("studentIDs");
+		String std =  request.getParameter("id");
+		String returning = null;
+		
+		if(std!=null){
+			returning = "bonafideprint.jsp";
+		}
+		if(studentIds!=null && studentIds.length>0){
+			std=studentIds[0];
+			returning = "bonafidecertificateprint.jsp";
+		}
+		String getStudentInfo  = "from Parents as parents where parents.Student.sid="+std;
+		Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+		request.setAttribute("studentdetails", parents);
+		if(parents!=null){
+			return returning;
+		}
+		return returning;
 	}
 
 	public boolean downlaodFile() {

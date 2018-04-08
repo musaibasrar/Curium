@@ -66,14 +66,36 @@ public class AccountAction {
 		}else if (action.equalsIgnoreCase("viewNextVoucher")) {
 			url = viewNextVoucher();
 		}else if (action.equalsIgnoreCase("trialBalance")) {
-			url = trailBalance();
+			url = trialBalance();
+		}else if (action.equalsIgnoreCase("cancelReceiptVoucher")) {
+			url = cancelReceiptVoucher();
+		}else if (action.equalsIgnoreCase("cancelPaymentVoucher")) {
+			url = cancelPaymentVoucher();
 		}
 		return url;
 	}
 
-	private String trailBalance() {
+	private String cancelPaymentVoucher() {
 		
-		if(new AccountService(request, response).trailBalance()){
+		if(new AccountService(request, response).cancelPaymentVoucher()){
+			return "Controller?process=AccountProcess&action=viewVoucherReceipt";
+		}else{
+			return ERRORPAGE;
+		}
+	}
+
+	private String cancelReceiptVoucher() {
+
+		if(new AccountService(request, response).cancelReceiptVoucher()){
+			return "Controller?process=AccountProcess&action=viewVoucherReceipt";
+		}else{
+			return ERRORPAGE;
+		}
+	}
+
+	private String trialBalance() {
+		
+		if(new AccountService(request, response).trialBalance()){
 			return "trialbalance.jsp";
 		}else{
 		return ERRORPAGE;

@@ -379,12 +379,23 @@
 
 		$("#tabs").tabs();
 
-		$("#save").button().click(function() {
-			addDepartment();
+		$("#cancel").button().click(function() {
+			cancelVoucher();
 		});
 		/* $("#effect").hide(); */
 
 	});
+	
+	function cancelVoucher(){
+		
+		if(confirm('Are you sure, you want to cancel the receipt?')){
+			var form1 = document.getElementById("form1");
+			form1.action = "Controller?process=AccountProcess&action=cancelReceiptVoucher";
+			form1.method = "POST";
+			form1.submit();	
+		}
+		
+	}
 	
 
 </script>
@@ -470,6 +481,7 @@
 
 				<thead>
 					<tr>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Voucher Number</th>
 						<th title="click to sort" class="headerText">Dr Account -- Cr Account&nbsp;</th>
 						<th title="click to sort" class="headerText">Dr Amount -- Cr Amount&nbsp;</th>
@@ -483,9 +495,15 @@
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=StudentProcess&action=ViewFeesStructure&id=<c:out value='${receipttransactions.key.transactionsid}'/>"><c:out
-										value="${receipttransactions.key.transactionsid}" /></a></td>
+							
+							<td class="dataText"><input type="checkbox"
+								id="<c:out value="${receipttransactions.key.transactionsid}"/>" class="chcktbl"
+								name="receiptids"
+								value="<c:out value="${receipttransactions.key.transactionsid}"/>" />
+								
+							</td>
+							<td class="dataTextInActive"><c:out value="${receipttransactions.key.transactionsid}" />
+							</td>
 							<td class="dataText"><c:out value="${receipttransactions.value}" /></td>
 							<td class="dataText"><c:out
 									value="${receipttransactions.key.dramount} -- ${receipttransactions.key.cramount}" /></td>
@@ -500,8 +518,7 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"><input 
-							type="hidden"  id="delete" />
+						<td class="footerTD" colspan="2"><button id="cancel">Cancel</button>
 							</td>
 							
 

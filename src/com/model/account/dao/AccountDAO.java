@@ -302,6 +302,7 @@ public class AccountDAO {
 	}
 
 	public void updateAccountCurrentBalance(BigDecimal currentBalance, Integer accountId) {
+		
 		try {
 			transaction = session.beginTransaction();
 			Query query = session.createQuery("update Accountdetailsbalance set currentbalance='"+currentBalance+"' where accountdetailsid="+accountId);
@@ -310,7 +311,6 @@ public class AccountDAO {
 		} catch (HibernateException hibernateException) {
 			hibernateException.printStackTrace();
 		}
-		
 		
 	}
 
@@ -335,7 +335,7 @@ public class AccountDAO {
 		List<Receipttransactions> receiptTransactions = new ArrayList<Receipttransactions>();
 		try {
 			transaction = session.beginTransaction();
-			receiptTransactions = session.createQuery("from Receipttransactions where financialyear='"+financialYear+"' order by transactionsid ASC").list();
+			receiptTransactions = session.createQuery("from Receipttransactions where financialyear='"+financialYear+"'and cancelvoucher!='yes' order by transactionsid ASC").list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -406,6 +406,170 @@ public class AccountDAO {
 			session.close();
 		}
 		return journalTransactions;
+		
+	}
+
+	public boolean checkInTransactions(Integer accountId) {
+		
+		Receipttransactions rTransactions = new Receipttransactions();
+		Paymenttransactions pTransactions = new Paymenttransactions();
+		Contratransactions cTransactions = new Contratransactions();
+		Journaltransactions jTransactions = new Journaltransactions();
+		
+		try {
+			transaction = session.beginTransaction();
+			// receipt
+			Query receipt = session.createQuery("from Receipttransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
+			rTransactions = (Receipttransactions) receipt.uniqueResult();
+			
+			if(rTransactions.getTransactionsid() != null){
+				transaction.commit();
+				return true;
+			}
+			
+			// payment
+			Query payment = session.createQuery("from Paymenttransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
+			pTransactions = (Paymenttransactions) payment.uniqueResult();
+			if(pTransactions.getTransactionsid() != null){
+				transaction.commit();
+				return true;
+			}
+			
+			//contra 
+			Query contra = session.createQuery("from Contratransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
+			cTransactions = (Contratransactions) contra.uniqueResult();
+			if(cTransactions.getTransactionsid() != null){
+				transaction.commit();
+				return true;
+			}
+			
+			//Journal
+			Query journal = session.createQuery("from Journaltransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
+			jTransactions = (Journaltransactions) journal.uniqueResult();
+			if(jTransactions.getTransactionsid() != null){
+				transaction.commit();
+				return true;
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return false;
+	}
+
+	public boolean deleteMultipleAccounts(Integer balanceId, Integer accountId) {
+		
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("delete from Accountdetailsbalance where accountdetailsbalanceid ="+balanceId);
+			Query query2 = session.createQuery("delete from Accountdetails where accountdetailsid ="+accountId);
+			query.executeUpdate();
+			query2.executeUpdate();
+			transaction.commit();
+			return true;
+		} catch (HibernateException hibernateException) {
+			hibernateException.printStackTrace();
+		}
+		
+		return false;
+	}
+
+	public Receipttransactions getReceiptDetails(String id) {
+		
+		Receipttransactions receiptTransactions = new Receipttransactions();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from Receipttransactions where transactionsid='"+id+"'");
+			receiptTransactions = (Receipttransactions) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return receiptTransactions;
+	}
+
+	public boolean updateAccounts(Receipttransactions receiptTransaction) {
+		
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("update Accountdetailsbalance set currentbalance=currentbalance-'"+receiptTransaction.getCramount()+"' where accountdetailsid="+receiptTransaction.getCraccountid());
+			query.executeUpdate();
+			Query query2 = session.createQuery("update Accountdetailsbalance set currentbalance=currentbalance-'"+receiptTransaction.getDramount()+"' where accountdetailsid="+receiptTransaction.getDraccountid());
+			query2.executeUpdate();
+			transaction.commit();
+			return true;
+		} catch (HibernateException hibernateException) {
+			hibernateException.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return false;
+	}
+
+	public boolean cancelReceipt(String id) {
+		
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("update Receipttransactions set cancelvoucher='yes' where transactionsid="+id);
+			query.executeUpdate();
+			transaction.commit();
+			return true;
+		} catch (HibernateException hibernateException) {
+			hibernateException.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return false;
+		
+	}
+
+	public Paymenttransactions getPaymentDetails(String id) {
+		
+		Paymenttransactions paymentTransactions = new Paymenttransactions();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from Paymenttransactions where transactionsid='"+id+"'");
+			paymentTransactions = (Paymenttransactions) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return paymentTransactions;
+	}
+
+	public boolean updateAccountsPayment(Paymenttransactions paymentTransaction) {
+		
+		try {
+			transaction = session.beginTransaction();
+			if(paymentTransaction.getCraccountid() == 1 || paymentTransaction.getCraccountid() == 2){
+				Query query = session.createQuery("update Accountdetailsbalance set currentbalance=currentbalance+'"+paymentTransaction.getCramount()+"' where accountdetailsid="+paymentTransaction.getCraccountid());
+				query.executeUpdate();
+			}else{
+				Query query = session.createQuery("update Accountdetailsbalance set currentbalance=currentbalance-'"+paymentTransaction.getCramount()+"' where accountdetailsid="+paymentTransaction.getCraccountid());
+				query.executeUpdate();
+			}
+			
+			
+			Query query2 = session.createQuery("update Accountdetailsbalance set currentbalance=currentbalance-'"+paymentTransaction.getDramount()+"' where accountdetailsid="+paymentTransaction.getDraccountid());
+			query2.executeUpdate();
+			transaction.commit();
+			return true;
+		} catch (HibernateException hibernateException) {
+			hibernateException.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return false;
 		
 	}
 

@@ -207,7 +207,7 @@ public class AccountService {
 
 
 	private boolean findCrDr(String groupName) {
-		String[] groupOne = {"1","3","5","8","13","11",};
+		String[] groupOne = {"1","3","5","8","13","11"};
 		for (String group : groupOne) {
 			if(group.equalsIgnoreCase(groupName)){
 				return true;
@@ -227,8 +227,13 @@ public class AccountService {
 				String[] split = id.split("-");
 				balanceIds.add(Integer.valueOf(split[0]));
 				accountdetailsIds.add(Integer.valueOf(split[1]));
+				boolean checkInTransactions = new AccountDAO().checkInTransactions(Integer.valueOf(split[1]));
+				if(!checkInTransactions){
+					new AccountDAO().deleteMultipleAccounts(Integer.valueOf(split[0]),Integer.valueOf(split[1]));
+				}
+				
 			}
-			return new AccountDAO().deleteMultipleAccounts(balanceIds,accountdetailsIds);
+			return true;
 		}
 		
 		return false;
@@ -246,7 +251,7 @@ public class AccountService {
 		request.setAttribute("accountdetailsbalancecontra", accountDetailsBalanceBankCash);
 		request.setAttribute("accountdetailsbalancereceipt", accountDetailsBalanceBankCash);
 		request.setAttribute("accountdetailsbalancepayment", accountDetailsBalanceBankCash);
-		
+		request.setAttribute("accountdetailsbalancejournal", accountDetailsBalance);
 		return true;
 	}
 
@@ -323,15 +328,15 @@ public class AccountService {
 			accountIds.add(Integer.parseInt(draccountNamePayment));
 			accountIds.add(Integer.parseInt(craccountNamePayment));
 			accountBalance = new AccountDAO().getAccountBalanceDetails(accountIds);
-			List<BigDecimal> amounts = new ArrayList<BigDecimal>();
-			amounts.add(new BigDecimal(drAmountPayment));
-			amounts.add(new BigDecimal(crAmountPayment));
 
-			if(!accountBalance.isEmpty()){
-				new AccountDAO().updateAccountCurrentBalance(accountBalance.get(0).getCurrentbalance().subtract(amounts.get(0)),accountBalance.get(0).getAccountDetails().getAccountdetailsid());
-				new AccountDAO().updateAccountCurrentBalance(accountBalance.get(1).getCurrentbalance().add(amounts.get(1)),accountBalance.get(1).getAccountDetails().getAccountdetailsid());
-			}
-			
+				for (Accountdetailsbalance accountBalanceDetails : accountBalance) {
+					
+					if(accountBalanceDetails.getAccountDetails().getAccountSubGroupMaster().getAccountsubgroupmasterid() == 1 || accountBalanceDetails.getAccountDetails().getAccountSubGroupMaster().getAccountsubgroupmasterid() == 2){
+						new AccountDAO().updateAccountCurrentBalance(accountBalanceDetails.getCurrentbalance().subtract(new BigDecimal(drAmountPayment)),accountBalanceDetails.getAccountDetails().getAccountdetailsid());
+					}else{
+						new AccountDAO().updateAccountCurrentBalance(accountBalanceDetails.getCurrentbalance().add(new BigDecimal(crAmountPayment)),accountBalanceDetails.getAccountDetails().getAccountdetailsid());
+					}
+				}
 			return true;
 		}
 		
@@ -416,7 +421,8 @@ public class AccountService {
 			amounts.add(new BigDecimal(crAmountJournal));
 			int i = 0;
 			for (Accountdetailsbalance accBalance : accountBalance) {
-				currentBalance = accBalance.getCurrentbalance().subtract(amounts.get(i));
+				//currentBalance = accBalance.getCurrentbalance().subtract(amounts.get(i));
+				currentBalance = accBalance.getCurrentbalance().add(amounts.get(i));
 				new AccountDAO().updateAccountCurrentBalance(currentBalance,accBalance.getAccountDetails().getAccountdetailsid());
 				i++;
 			}
@@ -648,30 +654,100 @@ public class AccountService {
 	}
 
 
-	public boolean trailBalance() {
+	public boolean trialBalance() {
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
 		accountDetailsBalance = new AccountDAO().getAccountdetailsbalance();
 		
-		List<Accountdetailsbalance> accountDetailsBalanceCr = new ArrayList<Accountdetailsbalance>();
-		List<Accountdetailsbalance> accountDetailsBalanceDr = new ArrayList<Accountdetailsbalance>();
+		BigDecimal debitTotal = BigDecimal.ZERO;
+		BigDecimal creditTotal = BigDecimal.ZERO;
+		BigDecimal differenceAmont = BigDecimal.ZERO;
 		
 		if(!accountDetailsBalance.isEmpty()){
 		
 			for (Accountdetailsbalance accountbalance : accountDetailsBalance) {
 				if(accountbalance.getCrdr().equalsIgnoreCase("Cr")){
-					accountDetailsBalanceCr.add(accountbalance);
+					creditTotal = creditTotal.add(accountbalance.getCurrentbalance());
 				}else if(accountbalance.getCrdr().equalsIgnoreCase("Dr")){
-					accountDetailsBalanceDr.add(accountbalance);
+					
+					if(accountbalance.getCurrentbalance().signum() == -1){
+						accountbalance.setCrdr("Cr");
+						accountbalance.setCurrentbalance(accountbalance.getCurrentbalance().abs());
+						creditTotal = creditTotal.add(accountbalance.getCurrentbalance());
+					}else{
+						debitTotal = debitTotal.add(accountbalance.getCurrentbalance());
+					}
+					
 				}
 			}
 			
-			return true;
 		}
-		request.setAttribute("accountdetailsbalancecr", accountDetailsBalanceCr);
-		request.setAttribute("accountdetailsbalanceDr", accountDetailsBalanceDr);
+		
+		request.setAttribute("accountdetailsbalance", accountDetailsBalance);
+		request.setAttribute("credittotal", creditTotal);
+		request.setAttribute("debittotal", debitTotal);
+		
+		differenceAmont = creditTotal.subtract(debitTotal);
+		
+		if(differenceAmont.signum() == -1){
+			request.setAttribute("differencetotal", "Difference in opening balances");
+			request.setAttribute("creditdifference", differenceAmont.abs());
+			request.setAttribute("credittotal", creditTotal.add(differenceAmont.abs()));
+		}else if(differenceAmont.signum() == 1){
+			request.setAttribute("differencetotal", "Difference in opening balances");
+			request.setAttribute("debitdifference", differenceAmont.abs());
+			request.setAttribute("debittotal", debitTotal.add(differenceAmont.abs()));
+		}
+		
 		
 		return true;
+	}
+
+
+	public boolean cancelReceiptVoucher() {
+		
+		String[] receiptIds = request.getParameterValues("receiptids");
+		
+		if (receiptIds != null) {
+			
+			for (String id : receiptIds) {
+				Receipttransactions receiptTransaction = new AccountDAO().getReceiptDetails(id);
+				boolean updateResult = new AccountDAO().updateAccounts(receiptTransaction);
+				if(updateResult){
+					return new AccountDAO().cancelReceipt(id);
+				}else {
+					return false;
+				}
+				
+			}
+			
+		}
+		
+		return false;
+	}
+
+
+	public boolean cancelPaymentVoucher() {
+		
+		String[] paymentIds = request.getParameterValues("paymentids");
+		
+		if (paymentIds != null) {
+			
+			for (String id : paymentIds) {
+				Paymenttransactions paymentTransaction = new AccountDAO().getPaymentDetails(id);
+				boolean updateResult = new AccountDAO().updateAccountsPayment(paymentTransaction);
+				if(updateResult){
+					return new AccountDAO().cancelReceipt(id);
+				}else {
+					return false;
+				}
+				
+			}
+			
+		}
+		
+		return false;
+		
 	}
 	
 }

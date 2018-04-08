@@ -401,7 +401,7 @@
 		<div style="overflow: scroll; height: 600px">
 		<table width="100%">
                     <tr>
-                        <td  class="headerTD">Balance Sheet</td>
+                        <td  class="headerTD">Trial Balance</td>
                     </tr>
 
                     
@@ -410,7 +410,7 @@
                 
                <br><br>
                 
-			<table width="50%" border="0" style="border-color: #4b6a84;float: left;margin-bottom:50px;">
+			<table width="100%" border="0" style="border-color: #4b6a84;float: left;margin-bottom:50px;">
 
 				<thead>
 					<tr>
@@ -427,80 +427,47 @@
 				</thead>
 
 				<tbody>
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataTextInActive" style="text-align: left">CAPITAL</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${capital}" /></td>
-
-						</tr>
-						
-					<c:forEach items="${capitalledgeraccount}" var="capitalledgeraccount">
+					
+					<c:forEach items="${accountdetailsbalance}" var="accountdetailsbalance">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${capitalledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${capitalledgeraccount.value}" /></td>
+							<td class="dataText" style="text-align: right"><c:out value="${accountdetailsbalance.accountDetails.accountname}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
+							<c:if test="${(accountdetailsbalance.crdr == 'Dr')}">
+							<td class="dataText" style="text-align: right;"><c:out value="${accountdetailsbalance.currentbalance}" /></td>
 							<td class="dataText"></td>
-
+							</c:if>
+							
+							<c:if test="${(accountdetailsbalance.crdr == 'Cr')}">
+							<td class="dataText"></td>
+							<td class="dataText" style="text-align: right;"><c:out value="${accountdetailsbalance.currentbalance}" /></td>
+							</c:if>
+							
 						</tr>
 					</c:forEach>
 					
-					
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataTextInActive" style="text-align: left">LOANS(LIABILITY)</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${loansliabilities}" /></td>
-
-						</tr>
-					<c:forEach items="${loansliabilitiesledgeraccount}" var="loansliabilitiesledgeraccount">
+					<%-- <c:forEach items="${accountdetailsbalanceCr}" var="accountdetailsbalanceCr">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${loansliabilitiesledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${loansliabilitiesledgeraccount.value}" /></td>
-							<td class="dataText"></td>
-
-						</tr>
-					</c:forEach>
-					
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
+							<td class="dataText" style="text-align: right"><c:out value="${accountdetailsbalanceCr.accountDetails.accountname}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
-							<td class="dataTextInActive" style="text-align: left">CURRENT LIABILITIES</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${currentliabilities}" /></td>
-
-						</tr>
-					<c:forEach items="${currentliabilitiesledgeraccount}" var="currentliabilitiesledgeraccount">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${currentliabilitiesledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${currentliabilitiesledgeraccount.value}" /></td>
+							<c:if test="${(accountdetailsbalanceCr.crdr == 'Cr')}">
 							<td class="dataText"></td>
-
-						</tr>
-					</c:forEach>
-					
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
+							<td class="dataText" style="text-align: right;"><c:out value="${accountdetailsbalanceCr.currentbalance}" /></td>
+							</c:if>
 							
-							<td class="dataTextInActive" style="text-align: left">RESERVES</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${reserves}" /></td>
-
-						</tr>
-					<c:forEach items="${reservesledgeraccount}" var="reservesledgeraccount">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${reservesledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${reservesledgeraccount.value}" /></td>
+							<c:if test="${(accountdetailsbalanceCr.crdr == 'Dr')}">
+							<td class="dataText" style="text-align: right;"><c:out value="${accountdetailsbalanceCr.currentbalance}" /></td>
 							<td class="dataText"></td>
-
+							</c:if>
+							
 						</tr>
-					</c:forEach>
-					
+					</c:forEach> --%>
+					<%-- 					
 					<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							
@@ -523,12 +490,28 @@
 							<td class="dataTextInActive" style="text-align: left;height: 20px;">TOTAL</td>
 							<td class="dataTextInActive" style="text-align: right"><c:out value="${grouponetotal}" /></td>
 
-						</tr>
+						</tr> --%>
 					
 				</tbody>
 				<tfoot>
+				
+				<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="dataTextInActive" style="text-align: right;height: 20px;"><c:out value="${differencetotal}" /></td>
+							<td class="dataTextInActive" style="text-align: right"><c:out value="${debitdifference}" /></td>
+							<td class="dataTextInActive" style="text-align: right"><c:out value="${creditdifference}" /></td>
+							
+				</tr>			
+				
+				<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">TOTAL</td>
+							<td class="dataTextInActive" style="text-align: right"><c:out value="${debittotal}" /></td>
+							<td class="dataTextInActive" style="text-align: right"><c:out value="${credittotal}" /></td>
+						</tr>
 					<tr>
-						<td class="footerTD" colspan="2"><input 
+						<td class="footerTD" colspan="3"><input 
 							type="hidden"  id="delete" />
 							</td>
 							

@@ -29,6 +29,9 @@
         <property name="narration" type="string">
             <column name="narration" length="500" />
         </property>
+        <property name="cancelvoucher" type="string">
+            <column name="cancelvoucher" length="5" />
+        </property>
           <property name="financialyear" type="java.lang.Integer" not-null="true">
             <column name="financialyear" />
         </property>

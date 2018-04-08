@@ -143,7 +143,7 @@ public class SmsService {
 		return result;
 	}
 	
-	private String sendSMS(String numbers, String message) {
+	public String sendSMS(String numbers, String message) {
 		String sResult1="";
 		
 		try 

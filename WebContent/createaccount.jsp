@@ -420,9 +420,12 @@
 	 
 	function deleteRecords(){
          
-         var form1=document.getElementById("form1");
-         form1.action="Controller?process=AccountProcess&action=deleteAccount";
-        form1.submit();
+		if(confirm('Are you sure, you want to delete the account?')){
+			var form1=document.getElementById("form1");
+	         form1.action="Controller?process=AccountProcess&action=deleteAccount";
+	        form1.submit();
+		}
+         
          
      }
 </script>

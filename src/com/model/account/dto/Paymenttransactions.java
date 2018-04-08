@@ -30,13 +30,22 @@ public class Paymenttransactions implements java.io.Serializable {
 	private Date date;
 	private String narration;
 	private int financialyear;
+	private String cancelvoucher;
+	
+	public String getCancelvoucher() {
+		return cancelvoucher;
+	}
+
+	public void setCancelvoucher(String cancelvoucher) {
+		this.cancelvoucher = cancelvoucher;
+	}
 
 	public Paymenttransactions() {
 	}
 
 	public Paymenttransactions(Integer draccountid, Integer craccountid,
 			BigDecimal dramount, BigDecimal cramount, Integer vouchertype,
-			Date date, String narration, int financialyear) {
+			Date date, String narration, int financialyear, String cancelvoucher) {
 		this.draccountid = draccountid;
 		this.craccountid = craccountid;
 		this.dramount = dramount;
@@ -45,6 +54,7 @@ public class Paymenttransactions implements java.io.Serializable {
 		this.date = date;
 		this.narration = narration;
 		this.financialyear = financialyear;
+		this.cancelvoucher = cancelvoucher;
 	}
 
 	@Id

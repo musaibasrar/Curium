@@ -150,7 +150,7 @@ public class studentDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("From Student")
+			results = (List<Student>) session.createQuery("From Student where archive=0")
 					.list();
 			transaction.commit();
 
@@ -513,6 +513,23 @@ public class studentDetailsDAO {
 			//session.close();
 			return studentFeesStructure;
 		}
+	}
+
+	public boolean updateStudent(Student student) {
+		
+		try {
+			transaction = session.beginTransaction();
+			Query queryUpdate = session
+					.createQuery("update Student set reasonleaving = '"+student.getReasonleaving()+"'  where sid = '"+student.getSid()+"'");
+			queryUpdate.executeUpdate();
+			transaction.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return false;
 	}
 	
 }
