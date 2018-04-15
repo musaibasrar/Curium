@@ -1,7 +1,12 @@
 package com.model.periods.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,9 +16,14 @@ import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
 import com.model.documents.dao.DocumentDAO;
 import com.model.documents.dto.Transfercertificate;
+import com.model.employee.service.EmployeeService;
 import com.model.parents.dto.Parents;
+import com.model.periods.dao.PeriodDAO;
+import com.model.periods.dto.Perioddetails;
+import com.model.periods.dto.Periodmaster;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
+import com.model.subjectdetails.service.SubjectDetailsService;
 import com.util.DataUtil;
 import com.util.DateUtil;
 
@@ -39,71 +49,169 @@ public class PeriodService {
 		Currentacademicyear currentYear = new YearDAO().showYear();
         httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
         
-        if(currentYear.getCurrentacademicyear()==null){
+        new SubjectDetailsService(request, response).readListOfSubjects();
+        
+        new EmployeeService(request, response).ViewAllEmployee();
+       
+        List<Periodmaster> periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear());
+        request.setAttribute("periodmasterlist", periodMaster);
+        
+        if(periodMaster.isEmpty()){
         	return false;
         }
+        
 		return true;
 		
 	}
 
-	public String generateTransferCertificate() {
-		Student student = new Student();
-		Parents parents = new Parents();
-		Transfercertificate tc = new Transfercertificate();
-		String transferCertificate = null;
+	public boolean savePeriods() {
 		
-		int studentId = DataUtil.parseInt(request.getParameter("studentId"));
-		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
-		Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
+		String academicYear = DataUtil.emptyString(request.getParameter("academicyear"));
+		String totalNoOfPeriods = DataUtil.emptyString(request.getParameter("totalperiods"));
+		String durationOfPeriodsHr = DataUtil.emptyString(request.getParameter("periodduration"));
+		String durationOfPeriodsMin = DataUtil.emptyString(request.getParameter("perioddurationmin"));
+		String dayStartTimeHr = DataUtil.emptyString(request.getParameter("daystarttime"));
+		String dayStartTimeMin = DataUtil.emptyString(request.getParameter("daystartminutes"));
+		String dayStartAm = DataUtil.emptyString(request.getParameter("daystartam"));
+		String dayEndTimeHr = DataUtil.emptyString(request.getParameter("dayendtime"));
+		String dayEndTimeMin = DataUtil.emptyString(request.getParameter("dayendminutes"));
+		String dayEndAm = DataUtil.emptyString(request.getParameter("dayendam"));
+		String fromClass = DataUtil.emptyString(request.getParameter("fromclass"));
+		String toClass = DataUtil.emptyString(request.getParameter("toclass"));
 		
-		student.setReasonleaving(leavingReason);
-		student.setSid(studentId);
-		 boolean updateStudent = new studentDetailsDAO().updateStudent(student);
-		 
-		 if(updateStudent){
-			 tc.setSid(studentId);
-			 tc.setApplicationstatus("applied");
-			 tc.setDateofissues(dateOfTc);
-			 tc.setNoofissues(1);
-			 transferCertificate = new DocumentDAO().generateTransferCertificate(tc);
-		 }
-		 
-		 if("true".equalsIgnoreCase(transferCertificate)){
-			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
-			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
-			 request.setAttribute("studentdetails", parents);
-			 request.setAttribute("tcdetails", tc);
-			 return "true";
-		 }else if("studentexists".equalsIgnoreCase(transferCertificate)){
-			 return "studentexists";
-		 }
-		 
-		 
-		 return "false";
+		String[] periods = request.getParameterValues("periods");
+		String[] subjects = request.getParameterValues("subject");
+		String[] staff = request.getParameterValues("staff");
+		String[] periodStartTimeHr = request.getParameterValues("periodstarttimehr");
+		String[] periodStartTimeMin = request.getParameterValues("periodstarttimemin");
+		String[] periodStartTimeAm = request.getParameterValues("periodstarttimeam");
+		String[] periodEndTimeHr = request.getParameterValues("periodendtimehr");
+		String[] periodEndTimeMin = request.getParameterValues("periodendtimemin");
+		String[] periodEndTimeAm = request.getParameterValues("periodendtimeam");
+		String[] days = request.getParameterValues("days");
+		
+		
+		Map<String,List<Perioddetails>> periodMap = new HashMap<String,List<Perioddetails>>();
+		int getPeriod=0;
+		
+		for(int i=0; i<days.length; i++){
+			List<Perioddetails> periodList = new ArrayList<Perioddetails>();
+			
+			for (int j = 0; j < Integer.parseInt(totalNoOfPeriods); j++) {
+				Perioddetails periodDetails = new Perioddetails();
+				periodDetails.setPeriods(periods[getPeriod]);
+				periodDetails.setSubject(subjects[getPeriod]);
+				periodDetails.setStaff(staff[getPeriod]);
+				periodDetails.setTimings(periodStartTimeHr[getPeriod]+":"+periodStartTimeMin[getPeriod]+": "+periodStartTimeAm[getPeriod]+ " To "+periodEndTimeHr[getPeriod]+":"+periodEndTimeMin[getPeriod]+" "+periodEndTimeAm[getPeriod]);
+				getPeriod++;
+				periodList.add(periodDetails);
+			}
+				periodMap.put(days[i], periodList);
+		}
+
+		List<Perioddetails> periodDetailsList = new ArrayList<Perioddetails>();
+		Periodmaster periodMaster = new Periodmaster();
+		periodMaster.setAcademicyear(academicYear);
+		if(!fromClass.equalsIgnoreCase(toClass) || toClass!=""){
+			periodMaster.setClass_(fromClass+"-"+toClass);
+		}else{
+			periodMaster.setClass_(fromClass);
+		}
+		periodMaster.setDaystart(dayStartTimeHr+":"+dayStartTimeMin+" "+dayStartAm);
+		periodMaster.setDayend(dayEndTimeHr+":"+dayEndTimeMin+" "+dayEndAm);
+		periodMaster.setDurationofperiod(durationOfPeriodsHr+":"+durationOfPeriodsMin);
+		periodMaster.setTotalperiods(Integer.parseInt(totalNoOfPeriods));
+
+		return new PeriodDAO().save(periodMaster,periodMap);
 	}
 
 
-	public boolean printTransferCertificate() {
+	public boolean viewTimeTable() {
+		String periodMasterid = request.getParameter("id");
 		
-		Parents parents = new Parents();
-		Transfercertificate tc = new Transfercertificate();
+		if(periodMasterid!=null){
 		
-		int studentId = DataUtil.parseInt(request.getParameter("id"));
-		 
-			tc = new DocumentDAO().getTransferCertificateDetails(studentId);
-		 
-			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
-			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
-			 request.setAttribute("studentdetails", parents);
-			 request.setAttribute("tcdetails", tc);
-			 
-			 if(tc.getTcid() != null){
-				 return true;
-			 }else{
-				 return false;
-			 }
+			Periodmaster periodMaster = new PeriodDAO().getTimeTable(periodMasterid);
+			request.setAttribute("timetable", periodMaster);
+			
+			List<Perioddetails> periodD= new PeriodDAO().getTimeTablePeriodDetails(periodMasterid);
+			request.setAttribute("timetableperioddetails", periodD);
+			
+			Map<String,List<Perioddetails>> periodMap = new LinkedHashMap<String,List<Perioddetails>>();
+			
+			List<Perioddetails> periodDetailsMon = new ArrayList<Perioddetails>();
+			List<Perioddetails> periodDetailsTue = new ArrayList<Perioddetails>();
+			List<Perioddetails> periodDetailsWed = new ArrayList<Perioddetails>();
+			List<Perioddetails> periodDetailsThu = new ArrayList<Perioddetails>();
+			List<Perioddetails> periodDetailsFri = new ArrayList<Perioddetails>();
+			List<Perioddetails> periodDetailsSat = new ArrayList<Perioddetails>();
+			List<Perioddetails> periodDetailsSun = new ArrayList<Perioddetails>();
+			
+			for (Perioddetails periodDetailsSingle : periodD) {
+				
+					if("Monday".equalsIgnoreCase(periodDetailsSingle.getDays())){
+						periodDetailsMon.add(periodDetailsSingle);
+					}else if("Tuesday".equalsIgnoreCase(periodDetailsSingle.getDays())){
+						periodDetailsTue.add(periodDetailsSingle);
+					}else if("Wednesday".equalsIgnoreCase(periodDetailsSingle.getDays())){
+						periodDetailsWed.add(periodDetailsSingle);
+					}else if("Thursday".equalsIgnoreCase(periodDetailsSingle.getDays())){
+						periodDetailsThu.add(periodDetailsSingle);
+					}else if("Friday".equalsIgnoreCase(periodDetailsSingle.getDays())){
+						periodDetailsFri.add(periodDetailsSingle);
+					}else if("Saturday".equalsIgnoreCase(periodDetailsSingle.getDays())){
+						periodDetailsSat.add(periodDetailsSingle);
+					}else if("Sunday".equalsIgnoreCase(periodDetailsSingle.getDays())){
+						periodDetailsSun.add(periodDetailsSingle);
+					}
+					
+			}
+			
+			if(!periodDetailsMon.isEmpty()){
+				periodMap.put("Monday", periodDetailsMon);
+			}
+			
+			if(!periodDetailsTue.isEmpty()){
+				periodMap.put("Tueday", periodDetailsTue);
+			}
+
+			if(!periodDetailsWed.isEmpty()){
+				periodMap.put("Wednesday", periodDetailsWed);
+			}
+
+			if(!periodDetailsThu.isEmpty()){
+				periodMap.put("Thurday", periodDetailsThu);
+			}
+
+			if(!periodDetailsFri.isEmpty()){
+				periodMap.put("Friday", periodDetailsFri);
+			}
+
+			if(!periodDetailsSat.isEmpty()){
+				periodMap.put("Saturday", periodDetailsSat);
+			}
+
+			if(!periodDetailsSun.isEmpty()){
+				periodMap.put("Sunday", periodDetailsSun);
+			}
+			request.setAttribute("periodmap", periodMap);
+			return true;
+		}
+		return false;
 	}
 
-	
-	
+
+	public boolean deletePeriods() {
+		
+		String[] periodMasterid = request.getParameterValues("idperiodmaster");
+		if (periodMasterid != null) {
+			List ids = new ArrayList();
+			for (String id : periodMasterid) {
+				ids.add(Integer.valueOf(id));
+			}
+			return new PeriodDAO().deletePeriods(ids);
+		}
+		
+		return false;
+	}
 }

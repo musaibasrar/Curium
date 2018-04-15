@@ -1,6 +1,6 @@
 <%--
-    Document   : Fees Structure
-    Created on : Dec 23, 2011, 5:52:28 PM
+    Document   : Period Master
+    Created on : APR 11, 2018, 3:49:45 PM
     Author     : Musaib
 --%>
 
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>fees structure</title>
+<title>Period Master</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -98,6 +98,16 @@
 	text-transform: capitalize;
 	color: #325F6D;
 	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+.extraLabels {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
 	vertical-align: middle;
 	font-weight: bold;
 }
@@ -223,7 +233,7 @@
 	font-size: 12px;
 	background-color: #4b6a84;
 	color: #FFFFFF;
-	font-weight: normal;
+	font-weight: Bold;
 	width: auto;
 	height: 27px;
 	vertical-align: text-top;
@@ -289,12 +299,24 @@
 	font-weight: bold;
 	height: 22px;
 }
-</style>
-<style>
-#button {
-	
+
+.timetable {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.timetd, .timeth {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+.trclass:nth-child(even) {
+    background-color: #dddddd;
 }
 </style>
+
 <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
@@ -358,191 +380,100 @@
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchForFees() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StampFeesProcess&action=searchForFees";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-
-	$(function() {
-
-		$("#search").button().click(function() {
-			searchForFees();
-		});
-		
-
-	});
 
 	$(function() {
 
 		$("#tabs").tabs();
 
 		$("#save").button().click(function() {
-			addDepartment();
+			savePeriods();
+			return false;
 		});
-		/* $("#effect").hide(); */
+		
+		$("#createNew").button();
+		
+		$("#delete").button({
+	        icons: {
+	            primary: "ui-icon-trash"
+	        }
+	    }).click(function() {
+	    	addRow();
+	    	 return false;
+		});
+		
+		$('#chckHead').click(function () {
+            var length = $('.chcktbl:checked').length;
+            var trLength=$('.trClass').length;
+            if(length>0){
+                $('.chcktbl:checked').attr('checked', false);
+                this.checked=false;
+
+            }
+            else{
+                if (this.checked == false) {
+                    $('.chcktbl:checked').attr('checked', false);
+                }
+                else {
+                    $('.chcktbl:not(:checked)').attr('checked', true);
+                }
+
+            }
+
+        });
+        $('.chcktbl').click(function () {
+            var length = $('.chcktbl:checked').length;
+            var trLength=$('.trClass').length;
+            alert(tdLength);
+            if (length > trLength) {
+
+                $('.chcktbl:not(:checked)').attr('disabled', true);
+            }
+            else {
+                $('.chcktbl:not(:checked)').attr('disabled', false);
+            }
+        });
 
 	});
-	
 
+    
 </script>
-
-
-
-
 
 </head>
 <body>
-	<form id="form1">
-
-		<div id="effect" class="ui-widget-content ui-corner-all">
-			<div id="tabs">
-				<ul>
-					<li><a href="#tabs-1">Fees Structure</a></li>
-
-				</ul>
-				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-
-						<tr>
-							<td class="alignRightFields">Name &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
-							</label></td>
-							
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-
-						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 150px">
-										<option selected>Class</option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
-								</select>
-
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 120px">
-										<option selected>Sec</option>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>E</option>
-										<option>F</option>
-										<option>G</option>
-
-								</select>
-							</label>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-
-							<td width="30%" class="alignRight"></td>
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
-							</td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-					</table>
-					
-					
-
-				</div>
-			</div>
-		</div>
-
+	<form id="form1" method="POST">
+		
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search result</td>
+					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;${timetable.class_}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
 				id="myTable">
 
-				<thead>
-					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class &
-							Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Admission Date</th>
-
-
-
-					</tr>
-				</thead>
+				
 
 				<tbody>
-					<c:forEach items="${searchStudentList}" var="Parents">
+					<c:forEach items="${periodmap}" var="periodmap">
 
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
-								name="studentIDs"
-								value="<c:out value="${Parents.student.sid}"/>" /></td>
-							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=StudentProcess&action=ViewFeesStructure&id=<c:out value='${Parents.student.sid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.classstudying}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.admissiondate}" /></td>
-
-
+						<tr style="border-color: #000000" border="1" cellpadding="1"
+							cellspacing="1">
+							<td class="dataText"><c:out value="${periodmap.key}" /></td>
+							<c:forEach items="${periodmap.value}" var="periodmapvalue">
+							<td class="dataText"><label><c:out value="${periodmapvalue.periods}" /></label><br><label><c:out value="${periodmapvalue.subject}" />
+							<br><label><c:out value="${periodmapvalue.staff}" />
+							</label>
+							<br><label><c:out value="${periodmapvalue.timings}" /></label>
+							</td>
+							</c:forEach>
+							
 						</tr>
 					</c:forEach>
 				</tbody>
-				<tfoot>
-					<tr>
-						<td class="footerTD" colspan="2"><input 
-							type="hidden"  id="delete" />
-							</td>
-							
-
-					</tr>
-				</tfoot>
+				
 			</table>
 
 		</div>
-
 
 	</form>
 

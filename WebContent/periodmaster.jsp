@@ -233,7 +233,7 @@
 	font-size: 12px;
 	background-color: #4b6a84;
 	color: #FFFFFF;
-	font-weight: normal;
+	font-weight: Bold;
 	width: auto;
 	height: 27px;
 	vertical-align: text-top;
@@ -299,6 +299,22 @@
 	font-weight: bold;
 	height: 22px;
 }
+
+.timetable {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.timetd, .timeth {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+.trclass:nth-child(even) {
+    background-color: #dddddd;
+}
 </style>
 
 <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
@@ -361,103 +377,61 @@
 	}
 	
 </script>
-  <script type="text/javascript">
-    function init() {
-      if (arguments.callee.done) return;
-      arguments.callee.done = true;
-      if (khtmltimer) clearInterval(khtmltimer);
-      var s = document.getElementsByTagName('select');
-      for (var i = 0; i < s.length; i++) {
-        if (s[i].hasAttribute('multiple')) {
-          s[i].onclick = updateSelect;
-        }
-      }
-    }
-    function updateSelect(e) {
-      var opts = this.getElementsByTagName('option'), t, o;
-      if (e) {
-        e.preventDefault();
-        t = e.target;
-      }
-      else if (window.event) {
-        window.event.returnValue = false;
-        t = window.event.srcElement;
-      }
-      else return;
-      t = e.target || window.event.srcElement;
-      if (t.getAttribute('class') == 'selected') t.removeAttribute('class');
-      else t.setAttribute('class', 'selected');
-      for (var i = 0, j = opts.length; i < j; i++) {
-        if (opts[i].hasAttribute('class')) opts[i].selected = true;
-        else opts[i].selected = false;
-      }
-    }
-         
-    if (document.addEventListener) document.addEventListener("DOMContentLoaded", init, false);
-    /*@cc_on @*/
-    /*@if (@_win32)
-        document.write("<script id=__ie_onload defer src=javascript:void(0)><\\/script>");
-        var script = document.getElementById('__ie_onload');
-        script.onreadystatechange = function() {
-            if (this.readyState == 'complete') {
-                init();
-            }
-        };
-    /*@end @*/
-    if (/KHTML/i.test(navigator.userAgent)) {
-        var khtmltimer = setInterval(function() {
-            if (/loaded|complete/.test(document.readyState)) {
-                init();
-            }
-        }, 10);
-    }
-    window.onload = init;
-  </script>
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
-	function addHolidays() {
-
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=addHolidays";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-
-	function searchForEmployees(staffName, staffDepartment){
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=searchEmployees&staffName="+staffName+"&staffDepartment="+staffDepartment+"";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-
 	$(function() {
-
-		$("#search").button().click(function() {
-			var staffName = document.getElementById('staffname').value;
-			var staffDepartment = document.getElementById('department').value;
-			searchForEmployees(staffName, staffDepartment);
-		});
 
 		$("#tabs").tabs();
 
 		$("#save").button().click(function() {
-			if (confirm('Are you sure,you want to save these configuration?')) {
-				addStaffAttendanceMaster();
-			}
-			return false;
-		});
-
-		$("#savestudentattendance").button().click(function() {
-			if (confirm('Are you sure,you want to save these configuration?')) {
-				addStudentAttendanceMaster();
-			}
+			savePeriods();
 			return false;
 		});
 		
+		$("#createNew").button();
+		
+		$("#delete").button({
+	        icons: {
+	            primary: "ui-icon-trash"
+	        }
+	    }).click(function() {
+	    	deleteRecord();
+	    	 return false;
+		});
+		
+		$("#addSchedule").button({
+	        icons: {
+	            primary: "ui-icon-plus"
+	        }
+	    }).click(function() {
+	    	addRow();
+	    	 return false;
+		});
+		
+		$("#addScheduleNew").button({
+	        icons: {
+	            primary: "ui-icon-plus"
+	        }
+	    }).click(function() {
+	    	addColumn(document.getElementById("totalperiods").value);
+	    	
+	    	 return false;
+		});
+		
+		 var removeScheduleButtonID="#removeSchedule";
+	        $(removeScheduleButtonID)
+	        .button({
+	            icons: {
+	                primary: "ui-icon-minus"
+	            }
+	        })
+	        .click(function() {
+	            deleteRow('dataTableNew');
+	            return false;
+	        }); 
+	        
 		
 		$('#chckHead').click(function () {
             var length = $('.chcktbl:checked').length;
@@ -493,33 +467,123 @@
 
 	});
 
-	function addStudentAttendanceMaster() {
+    
+	 function addRow() {
+        var rowCount = document.getElementById('dataTable').rows.length;    
+        var col1="<td width='16%' height='30' class='alignLeft'><label><select name='periods' id='periods' style='width: 180px'><option selected value='period1'>Period-1</option><option value='period2'>Period-2</option><option value='period3'>Period-3</option><option value='period4'>Period-4</option><option value='period5'>Period-5</option><option value='period6'>Period-6</option><option value='period7'>Period-7</option><option value='period8'>Period-8</option><option value='period9'>Period-9</option><option value='period10'>Period-10</option><option value='break1'>Break-1</option><option value='break2'>Break-2</option></select></label></td>";
+        var col2="<td width='16%' height='30' class='alignLeft'><label><select name='subject' id='subject'	style='width: 240px' > <option selected></option> <c:forEach items='${listSubject}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label></td>";
+        var col3="<td class='dataTextInActive'><label> <select name='periodstarttimehr' id='periodstarttimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select> <select name='periodstarttimemin' id='periodstarttimemin' style='width: 60px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodstarttimeam' id='periodstarttimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>";
+        var col4="<td class='dataTextInActive'><label> <select name='periodendtimehr' id='periodendtimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select></label><label> <select name='periodendtimemin' id='periodendtimemin' style='width: 80px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodendtimeam' id='periodendtimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>";
+        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+"</tr>");
+        $(function() {
+            $("#dataTable").find('tbody').append(newRow);
+        });
+    }
+	 
+	 function addRowNew() {
+	        var rowCount = document.getElementById('dataTable').rows.length;    
+	        var col1="<td width='16%' height='30' class='alignLeft'><label><select name='periods' id='periods' style='width: 180px'><option selected value='period1'>Period-1</option><option value='period2'>Period-2</option><option value='period3'>Period-3</option><option value='period4'>Period-4</option><option value='period5'>Period-5</option><option value='period6'>Period-6</option><option value='period7'>Period-7</option><option value='period8'>Period-8</option><option value='period9'>Period-9</option><option value='period10'>Period-10</option><option value='break1'>Break-1</option><option value='break2'>Break-2</option></select></label></td>";
+	        var col2="<td width='16%' height='30' class='alignLeft'><label><select name='subject' id='subject'	style='width: 240px' > <option selected></option> <c:forEach items='${listSubject}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label></td>";
+	        var col3="<td class='dataTextInActive'><label> <select name='periodstarttimehr' id='periodstarttimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select> <select name='periodstarttimemin' id='periodstarttimemin' style='width: 60px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodstarttimeam' id='periodstarttimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>";
+	        var col4="<td class='dataTextInActive'><label> <select name='periodendtimehr' id='periodendtimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select></label><label> <select name='periodendtimemin' id='periodendtimemin' style='width: 80px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodendtimeam' id='periodendtimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>";
+	        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+"</tr>");
+	        $(function() {
+	            $("#dataTableNew").find('tbody').append(newRow);
+	        });
+	    }
+	 
+	 function addColumn(count) {
+	        var i;
+	        var newCol;
+	        for(i=0;i<count;i++){
+	        	var col1="<th class='timeth'><label><select name='periods' id='periods' style='width: 80px'><option selected value='period1'>Period-1</option><option value='period2'>Period-2</option><option value='period3'>Period-3</option><option value='period4'>Period-4</option><option value='period5'>Period-5</option><option value='period6'>Period-6</option><option value='period7'>Period-7</option><option value='period8'>Period-8</option><option value='period9'>Period-9</option><option value='period10'>Period-10</option><option value='break1'>Break-1</option><option value='break2'>Break-2</option><option value='leisure'>Leisure</option></select></label><br><br>"
+	        	+"<label><select name='subject' id='subject' style='width: 80px'><option selected></option><c:forEach items='${listSubject}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label><br><br>"
+	        	+"<label><select name='staff' id='staff' style='width: 80px'><option selected></option><c:forEach items='${employeeList}' var='employeeList'><option value='${employeeList.teachername}'><c:out value='${employeeList.teachername}' /></option></c:forEach></select></label><br><br>"
+	        	+"<label> <select name='periodstarttimehr' id='periodstarttimehr' style='width: 40px'><option selected value='00'>Hr</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select> <select name='periodstarttimemin' id='periodstarttimemin' style='width: 40px'><option selected value='00'>Min</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodstarttimeam' id='periodstarttimeam' style='width: 40px'><option selected></option><option value='AM'>AM</option><option value='PM'>PM</option></select></label><br>"
+	        	+"<label>TO</label><br>"
+	        	+"<label> <select name='periodendtimehr' id='periodendtimehr' style='width: 40px'><option selected value='00'>Hr</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select></label><label> <select name='periodendtimemin' id='periodendtimemin' style='width: 40px'><option selected value='00'>Min</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodendtimeam' id='periodendtimeam' style='width: 40px'><option selected></option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></th>";
+		        /* var col2="<td width='16%' height='30' class='alignLeft'><label><select name='subject' id='subject'	style='width: 240px' > <option selected></option> <c:forEach items='${listSubject}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label></td>";
+		        var col3="<td class='dataTextInActive'><label> <select name='periodstarttimehr' id='periodstarttimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select> <select name='periodstarttimemin' id='periodstarttimemin' style='width: 60px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodstarttimeam' id='periodstarttimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>";
+		        var col4="<td class='dataTextInActive'><label> <select name='periodendtimehr' id='periodendtimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select></label><label> <select name='periodendtimemin' id='periodendtimemin' style='width: 80px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodendtimeam' id='periodendtimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>"; */
+		        newCol +=col1;
+	        }
+	        var colA="<th class='timeth'><label><select name='days' id='days' style='width: 60px'><option selected value='monday'>MON</option><option value='tuesday'>TUE</option><option value='wednesday'>WED</option><option value='thursday'>THU</option><option value='friday'>FRI</option><option value='saturday'>SAT</option><option value='sunday'>SUN</option></select></label></th>";
+	        var newRow = $("<tr class='trClass'>"+colA+newCol+"</tr>");
+	        $(function() {
+	            $("#dataTableNew").find('thead').append(newRow);
+	        });
+	       /*  var col1="<td width='16%' height='30' class='alignLeft'><label><select name='periods' id='periods' style='width: 180px'><option selected value='period1'>Period-1</option><option value='period2'>Period-2</option><option value='period3'>Period-3</option><option value='period4'>Period-4</option><option value='period5'>Period-5</option><option value='period6'>Period-6</option><option value='period7'>Period-7</option><option value='period8'>Period-8</option><option value='period9'>Period-9</option><option value='period10'>Period-10</option><option value='break1'>Break-1</option><option value='break2'>Break-2</option></select></label></td>";
+	        var col2="<td width='16%' height='30' class='alignLeft'><label><select name='subject' id='subject'	style='width: 240px' > <option selected></option> <c:forEach items='${listSubject}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label></td>";
+	        var col3="<td class='dataTextInActive'><label> <select name='periodstarttimehr' id='periodstarttimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select> <select name='periodstarttimemin' id='periodstarttimemin' style='width: 60px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodstarttimeam' id='periodstarttimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>";
+	        var col4="<td class='dataTextInActive'><label> <select name='periodendtimehr' id='periodendtimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select></label><label> <select name='periodendtimemin' id='periodendtimemin' style='width: 80px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodendtimeam' id='periodendtimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>";
+	        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+"</tr>");
+	        $(function() {
+	            $("#dataTable").find('tbody').append(newRow);
+	        }); */
+	    }
+	 
+	function savePeriods() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=addStudentAttendanceMaster";
-		form1.method = "POST";
-		form1.submit();
-	}
-	
-	function addStaffAttendanceMaster() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=addStaffAttendanceMaster";
+		form1.action = "Controller?process=PeriodProcess&action=savePeriods";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function getBreaks(){
 		
-		document.getElementById("tr1").style.display = '';
-        /* document.getElementById("subgroupname").style.display = '';
-        document.getElementById("newsubgr").style.display = "none"; */
+	    var noOfBreaks = document.getElementById("totalbreaks");
+        var noOfB = noOfBreaks.options[noOfBreaks.selectedIndex].text;
+        
+        if(noOfB == 1){
+        	document.getElementById("tr1").style.display = '';	
+        	document.getElementById("tr2").style.display = "none";
+        	document.getElementById("tr3").style.display = "none";
+        }else if(noOfB == 2){
+        	document.getElementById("tr1").style.display = '';
+        	document.getElementById("tr2").style.display = '';
+        	document.getElementById("tr3").style.display = "none";
+        }else if(noOfB == 3){
+        	document.getElementById("tr1").style.display = '';
+        	document.getElementById("tr2").style.display = '';
+        	document.getElementById("tr3").style.display = '';
+        }
+	}
+	
+	function deleteRow(tableID) {
+		  try {
+           var table = document.getElementById(tableID);
+           var rowCount = table.rows.length;
+           if(rowCount==0){
+               alert('No records to delete');
+               return;
+           }
+           table.deleteRow(rowCount-1);
+           
+       }catch(e) {
+           alert(e);
+       }
+       }
+	
+	function getColumns(){
+		
+		for(var i=0; i<=6; i++){
+			addColumn(document.getElementById("totalperiods").value);	
+		}
+		
+	}
+	
+	function deleteRecord(){
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=PeriodProcess&action=deletePeriods";
+		form1.method = "POST";
+		form1.submit();
 	}
 	
 </script>
 
-
 </head>
 <body>
-	<form id="form1" action="Controller?process=MarksDetailsProcess&action=updateMarks" method="POST">
+	<form id="form1" method="POST">
 		
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -572,7 +636,7 @@
 						<tr>
 							<td class="alignRightFields">Total Number Of Periods&nbsp;</td>
 							<td width="70%">
-                                        <label> <select name="academicyear" id="academicyear"
+                                        <label> <select name="totalperiods" id="totalperiods" onchange="getColumns()"
 									style="width: 180px">
 										<option selected ></option>
 										<option value="1">1</option>
@@ -594,14 +658,14 @@
 							<label class="extraLabels">&nbsp;&nbsp;&nbsp;&nbsp;Duration Of a Period<label>
 							<label> <select name="periodduration" id="periodduration"
 									style="width: 80px">
-										<option selected>Hour</option>
-										<option value="1">1hr</option>
-										<option value="2">2hr</option>
+										<option selected value="00">Hour</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
 								</select>
 							</label>
 							<label> <select name="perioddurationmin" id="perioddurationmin"
 									style="width: 80px">
-										<option selected>Minuts</option>
+										<option selected value="00">Minuts</option>
 										<option value="00">00</option>
 										<option value="05">05</option>
 										<option value="10">10</option>
@@ -618,7 +682,60 @@
 							</label>
 							</td>
 						</tr>
+											
+						<tr>
+						<td><br></td>
+						</tr>
+						<tr>
+						<td><br></td>
+						</tr>
 						
+						<tr>
+							<td class="alignRightFields">From Class&nbsp;</td>
+							<td width="70%">
+                                        <label> <select name="fromclass" id="fromclass"
+									style="width: 180px">
+										<option selected>ALL</option>
+										<option>nursery</option>
+										<option>L.K.G</option>
+										<option>U.K.G</option>
+										<option>I</option>
+										<option>II</option>
+										<option>III</option>
+										<option>IV</option>
+										<option>V</option>
+										<option>VI</option>
+										<option>VII</option>
+										<option>VIII</option>
+										<option>IX</option>
+										<option>X</option>
+								</select> 
+
+							</label> 
+							
+							
+							<label class="extraLabels">&nbsp;&nbsp;&nbsp;&nbsp;To Class<label>
+							<label> <select name="toclass" id="toclass"
+									style="width: 180px">
+										<option selected>ALL</option>
+										<option>nursery</option>
+										<option>L.K.G</option>
+										<option>U.K.G</option>
+										<option>I</option>
+										<option>II</option>
+										<option>III</option>
+										<option>IV</option>
+										<option>V</option>
+										<option>VI</option>
+										<option>VII</option>
+										<option>VIII</option>
+										<option>IX</option>
+										<option>X</option>
+								</select> 
+							</label>
+							
+							</td>
+						</tr>
 						
 						<tr>
 							<td><br /></td>
@@ -695,7 +812,7 @@
 										
 								</select>
 							</label>
-							<label> <select name="dayendtimemin" id="dayendtimemin"
+							<label> <select name="dayendminutes" id="dayendminutes"
 									style="width: 80px">
 										<option selected>Minuts</option>
 										<option value="00">00</option>
@@ -728,11 +845,12 @@
 							<td><br /></td>
 
 						</tr>
+						
 						<tr>
 							<td><br /></td>
 
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td class="alignRightFields">Total Number Of Breaks&nbsp;</td>
 							<td width="70%">
                                         <label> <select name="totalbreaks" id="totalbreaks" onchange="getBreaks();"
@@ -746,12 +864,6 @@
 							</label> 
 							
 							</td>
-						</tr>
-						
-						
-						<tr>
-							<td><br /></td>
-
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -929,8 +1041,24 @@
 								</select>
 							</label>
 							</td>
+						</tr> -->
+							<tr>
+
+							<td width="12%" align="left" class="alignRightFields" style="font-weight: bold;color:#325F6D">&nbsp;&nbsp;&nbsp;
+							<button id="addScheduleNew">Add</button></td>
+							<td><button id="removeSchedule">Remove</button></td>
 						</tr>
-						
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						<TABLE id="dataTableNew" class="timetable" width="100%" border="1" >
+                 <thead>
+                    
+                </thead>
+                <!-- <tbody>
+                </tbody> -->
+                            </TABLE>
 						
 						<tr>
 							<td><br /></td>
@@ -940,13 +1068,14 @@
 							<td><br /></td>
 
 						</tr>
+						
 						<tr>
 
 							<td class="alignRight"></td>
 
 							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" >
-								<button id="generate">Generate</button>
+							<td width="30%" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button id="save">Save</button>
 							</td>
 						</tr>
 						<tr>
@@ -958,26 +1087,7 @@
 
 						</tr>						
 						
-						<tr>
-							<td width="12%" align="left" class="alignRightFields">Weekly Off &nbsp;</td>
-							<td width="12%" align="left"><label>
-									<select name="weekoffstaff" id="weekoffstaff" multiple="multiple"
-									style="width: 200px" >
-										
-
-										<c:forEach items="${weekOffList}" var="weekOffList">
-
-											<option value="${weekOffList.wid}">
-												<c:out value="${weekOffList.weeklyoffday}" />
-											</option>
-
-
-										</c:forEach>
-
-								</select></label>
-							</td>
-							
-						</tr>
+						
 												
 						<tr>
 							<td><br /></td>
@@ -989,94 +1099,6 @@
 
 						</tr>
 
-						<tr>
-
-							<td width="12%" align="left" class="alignRightFields">Holidays &nbsp;</td>
-							<td><label>
-									<select name="holidaysstaff" id="holidaysstaff" multiple="multiple"
-									style="width: 200px" >
-										
-
-										<c:forEach items="${holidaysList}" var="holidaysList">
-
-											<option value="${holidaysList.shid}">
-												<c:out value="${holidaysList.holidayname}" />
-											</option>
-
-
-										</c:forEach>
-
-								</select></label></td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-
-							<td width="12%" align="left" class="alignRightFields">In Time &nbsp;</td>
-							<td><label> <input name="intime" id="intime" type="time"
-							</input>
-							
-							 </td>
-						</tr>
-						
-						<!-- <tr>
-
-							<td width="12%" align="left" class="alignRightFields">In Time &nbsp;</td>
-							<td><label> <select name="intime" id="intime"
-									style="width: 40px">
-										<option selected>07</option>
-										<option>08</option>
-										<option>09</option>
-										<option>10</option>
-										<option>11</option>
-										<option>12</option>
-										<option>01</option>
-										<option>02</option>
-										<option>03</option>
-										<option>04</option>
-										<option>05</option>
-										<option>06</option>
-								</select>
-								
-
-							</label>
-							<label style="font-weight: bold;color:#325F6D">:</label>
-							 <label> 
-									<select name="mininstaff" id="mininstaff"
-									style=" width: 40px">
-										<option selected>00</option>
-										<option>15</option>
-										<option>30</option>
-										<option>45</option>
-								</select>
-							</label>
-							<label> 
-									<select name="ampminstaff" id="ampminstaff"
-									style=" width: 40px">
-										<option selected>AM</option>
-										<option>PM</option>
-								</select>
-							</label></td>
-						</tr> -->
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-
-							<td width="12%" align="left" class="alignRightFields">Out Time &nbsp;</td>
-							<td><label> <input name="outtime" id="outtime" type="time"/>	</label>
-							</td>
-						</tr>
 						
 						<tr>
 							<td><br /></td>
@@ -1086,12 +1108,14 @@
 						</tr>
 						
 					</table>
-					
-					
-					<div style="overflow: scroll; height: 600px">
+				</div>
+			</div>
+		</div>
+
+		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Staff</td>
+					<td class="headerTD">Search Result </td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -1100,46 +1124,46 @@
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Name<img
+						<th title="click to sort" class="headerText">Classes<img
 							alt=" " style="position: relative; top: 4px;"
-							src="images/sort_both.png" /></th>
-							<th title="click to sort" class="headerText">Contact Number&nbsp;</th>
-							<th title="click to sort" class="headerText">Department&nbsp;</th>
-						</tr>
+							src="css/dataTable/images/sort_both.png" /></th>
+						<th title="click to sort" class="headerText">Day Start Time<img
+							alt=" " style="position: relative; top: 4px;"
+							src="css/dataTable/images/sort_both.png" /></th>
+							<th title="click to sort" class="headerText">Day End Time<img
+							alt=" " style="position: relative; top: 4px;"
+							src="css/dataTable/images/sort_both.png" /></th>
+						<th title="click to sort" class="headerText">Total No Of Periods<img
+							alt=" " style="position: relative; top: 4px;"
+							src="css/dataTable/images/sort_both.png" /></th>
+					</tr>
 				</thead>
 
 				<tbody>
 
-					   <c:forEach items="${employeeList}" var="employee">
+					<c:forEach items="${periodmasterlist}" var="periodmasterlist">
 
-                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="Controller?process=EmployeeProcess&action=ViewDetails&id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
-                                <td class="dataText"><c:out value="${employee.contactnumber}"/></td>
-                                <td class="dataText"><c:out value="${employee.department}"/></td>
-                                
-                                 
-
-                            </tr>
-                        </c:forEach>
+						<tr style="border-color: #000000" border="1" cellpadding="1"
+							cellspacing="1">
+							<td class="dataText"><input type="checkbox" id="<c:out value="${periodmasterlist.idperiodmaster}"/>" class="chcktbl" name="idperiodmaster" value="<c:out value="${periodmasterlist.idperiodmaster}"/>" /></td>
+							<td class="dataText"><a class="dataTextInActive" href="Controller?process=PeriodProcess&action=viewTimeTable&id=<c:out value="${periodmasterlist.idperiodmaster}" />"><c:out value="${periodmasterlist.class_}" /></a></td>
+							<td class="dataText"><c:out value="${periodmasterlist.daystart}" /></td>
+							<td class="dataText"><c:out value="${periodmasterlist.dayend}" /></td>
+							<td class="dataText"><c:out value="${periodmasterlist.totalperiods}" /></td>
+						</tr>
+					</c:forEach>
 
 
 
 
 				</tbody>
 				<tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><button id="save">Save</button> 
+                            <td  class="footerTD" colspan="2" ><button id="delete">Delete</button> 
                     
                         </tr></tfoot>
 			</table>
 
 		</div>
-
-				</div>
-			</div>
-		</div>
-
-		
 
 	</form>
 

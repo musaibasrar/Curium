@@ -36,14 +36,41 @@ public class PeriodAction {
 
 		if ("periodConfiguration".equalsIgnoreCase(action)) {
 			url = periodConfiguration();
-		}else if ("generateTransferCertificate".equalsIgnoreCase(action)) {
-			url = generateTransferCertificate();
-		}else if ("PrintTransferCertificate".equalsIgnoreCase(action)) {
-			url = printTransferCertificate();
+		}else if ("savePeriods".equalsIgnoreCase(action)) {
+			url = savePeriods();
+		}else if ("viewTimeTable".equalsIgnoreCase(action)) {
+			url = viewTimeTable();
+		}else if ("deletePeriods".equalsIgnoreCase(action)) {
+			url = deletePeriods();
 		}
 		return url;
 	}
 	
+
+	private String deletePeriods() {
+		if(new PeriodService(request, response).deletePeriods()){
+			return periodConfiguration();
+		}
+		
+		return error;
+	}
+
+	private String viewTimeTable() {
+		
+		if(new PeriodService(request, response).viewTimeTable()){
+			return "timetable.jsp";
+		}
+		
+		return error;
+	}
+
+	private String savePeriods() {
+		
+		if(new PeriodService(request, response).savePeriods()){
+			return periodConfiguration();
+		}
+		return error;
+	}
 
 	private String periodConfiguration() {
 		
@@ -53,25 +80,6 @@ public class PeriodAction {
 		return error;
 	}
 
-	private String printTransferCertificate() {
-		
-		if(new DocumentService(request, response).printTransferCertificate()){
-			return "transfercertificateprint.jsp";
-		}
-        return error;
-	}
-
-	private String generateTransferCertificate() {
-		
-		String result = new DocumentService(request, response).generateTransferCertificate();
-		
-		if("true".equalsIgnoreCase(result)){
-			return "transfercertificatepreview.jsp";
-		}else if("studentexists".equalsIgnoreCase(result)){
-        return "transfercertificatefail.jsp";
-		}
-		return error;
-	}
 
 	private String transferCertificate() {
 		if(new DocumentService(request, response).transferCertificate()){

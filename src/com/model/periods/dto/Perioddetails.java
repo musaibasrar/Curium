@@ -1,3 +1,5 @@
+package com.model.periods.dto;
+
 // default package
 // Generated 7 Apr, 2018 6:09:10 PM by Hibernate Tools 4.0.0
 
@@ -17,16 +19,22 @@ public class Perioddetails implements java.io.Serializable {
 
 	private Integer idperioddetails;
 	private String periods;
+	private Integer periodmasterid;
 	private String timings;
 	private String days;
+	private String subject;
+	private String staff;
 
 	public Perioddetails() {
 	}
 
-	public Perioddetails(String periods, String timings, String days) {
+	public Perioddetails(String periods, String timings, String days, Integer periodmasterid, String subject, String staff) {
 		this.periods = periods;
 		this.timings = timings;
 		this.days = days;
+		this.periodmasterid = periodmasterid;
+		this.subject = subject;
+		this.staff = staff;
 	}
 
 	@Id
@@ -49,7 +57,7 @@ public class Perioddetails implements java.io.Serializable {
 		this.periods = periods;
 	}
 
-	@Column(name = "timings", length = 45)
+	@Column(name = "timings", length = 100)
 	public String getTimings() {
 		return this.timings;
 	}
@@ -66,5 +74,33 @@ public class Perioddetails implements java.io.Serializable {
 	public void setDays(String days) {
 		this.days = days;
 	}
+
+	@Column(name = "periodmasterid")
+	public Integer getPeriodmasterid() {
+		return periodmasterid;
+	}
+
+	public void setPeriodmasterid(Integer periodmasterid) {
+		this.periodmasterid = periodmasterid;
+	}
+
+	@Column(name = "subject")
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	@Column(name = "staff")
+	public String getStaff() {
+		return staff;
+	}
+
+	public void setStaff(String staff) {
+		this.staff = staff;
+	}
+
 
 }
