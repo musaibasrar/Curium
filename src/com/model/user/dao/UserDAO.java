@@ -100,7 +100,6 @@ public class UserDAO {
 
 	            results = (java.util.List<Student>) session.createQuery("From Student s where s.classstudying LIKE '"+classStudying+" %' OR s.classstudying = '"+classStudying+"'  AND s.archive = 0").list();
 	            noOfRecords = results.size();
-	            System.out.println("Total Number of students:::::::::::::::::::::::::::::::::::::::::: " + noOfRecords);
 	            transaction.commit();
 
 
@@ -118,9 +117,7 @@ public class UserDAO {
 	public Login readPassword(String currentPassword) {
         Login login = null;
         
-        System.out.println("The password in DAO is: "+currentPassword);
        try{
-           System.out.println("in USERDAO");
            this.session = sessionFactory.openSession();
            transaction = session.beginTransaction();
            

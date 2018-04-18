@@ -408,7 +408,7 @@
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
-							<td class="alignRightFields">Name &nbsp;</td>
+							<td class="alignRightFields">Student Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="namesearch" type="text" class="myclass" id="namesearch"
 									size="36"">

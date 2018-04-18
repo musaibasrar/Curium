@@ -849,8 +849,8 @@
 					<tr>
 						<td class="footerTD" colspan="2"><input value="Apply"
 							type="submit" id="delete" />
-							<input value="Delete Stamp Fees"
-							type="submit" id="deleteStamp" /></td>
+							<!-- <input value="Delete Stamp Fees"
+							type="submit" id="deleteStamp" /> --></td>
 							
 
 					</tr>

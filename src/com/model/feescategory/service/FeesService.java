@@ -146,6 +146,31 @@ public class FeesService {
 	}
 
 
+	public String deleteFeesCategory() {
+		
+		 String[] idfeescategory = request.getParameterValues("sfsid");
+		 List sfsId = new ArrayList();
+		 List feesCatId = new ArrayList();
+		 
+		 String studentId = request.getParameter("id");
+		 
+		 if(idfeescategory!=null){
+			 
+			 for (String string : idfeescategory) {
+				 String[] test = string.split("_");
+				 sfsId.add(Integer.valueOf(test[0]));
+				 feesCatId.add(Integer.valueOf(test[1]));
+			}
+	        new feesCategoryDAO().deleteFeesCategory(sfsId,feesCatId,studentId);
+	        
+	        return "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId;
+		 }
+		 
+		return "error.jsp";
+		
+	}
+
+
 	
 	
 

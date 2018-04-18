@@ -15,7 +15,8 @@ public class FeesAction {
 	HttpServletResponse response;
 	HttpSession httpSession;
 	String url;
-
+	String error = "error.jsp";
+	
 	public FeesAction(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
@@ -23,20 +24,23 @@ public class FeesAction {
 	}
 
 	public String execute(String action, String page) {
-		 if (action.equalsIgnoreCase("feesView")) {
-			System.out.println("Action is fees view");
+		
+		 if ("feesView".equalsIgnoreCase(action)) {
 			url = viewFees();
-		}else if (action.equalsIgnoreCase("addFeesParticular")) {
-			System.out.println("Action is addFeesParticular");
+		}else if ("addFeesParticular".equalsIgnoreCase(action)) {
 			url = addFeesParticular();
-		}else if (action.equalsIgnoreCase("feesCollect")) {
-			System.out.println("Action is feesCollect");
+		}else if ("feesCollect".equalsIgnoreCase(action)) {
 			url = feesCollect();
-		}else if (action.equalsIgnoreCase("deleteMultiple")) {
-			System.out.println("Action is deleteMultiple");
+		}else if ("deleteMultiple".equalsIgnoreCase(action)) {
 			url = deleteMultiple();
+		}else if ("deleteFeesCategory".equalsIgnoreCase(action)) {
+			url = deleteFeesCategory();
 		}
 		return url;
+	}
+
+	private String deleteFeesCategory() {
+			return new FeesService(request, response).deleteFeesCategory();
 	}
 
 	private String deleteMultiple() {
@@ -56,14 +60,12 @@ public class FeesAction {
 		
 		
 		new FeesService(request, response).addFeesParticular();
-        System.out.println("IN action's addFeesParticular");
         return "Controller?process=FeesProcess&action=feesView";
 		
 	}
 
 	private String viewFees() {
 		new FeesService(request, response).viewFees();
-        System.out.println("IN action's fees view");
         return "feesCategory.jsp";
 	}
 

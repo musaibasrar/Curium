@@ -177,8 +177,6 @@ public class FeesCollectionService {
 		String sid = request.getParameter("studentIdDetails");
 		String[] amountPaying = request.getParameterValues("amountpaying");
 		String[] fine = request.getParameterValues("fine");
-		String grandTotalAmount = request.getParameter("grandTotalAmount");
-		//String[] idsfeescategory = request.getParameterValues("idfeescategory");
 		String[] studentSfsIds = request.getParameterValues("studentsfsids");
 		
 		if(studentSfsIds!=null){
@@ -187,14 +185,20 @@ public class FeesCollectionService {
 			receiptInfo.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			receiptInfo.setDate(new Date());
 			receiptInfo.setSid(DataUtil.parseInt(sid));
-			receiptInfo.setTotalamount(DataUtil.parseLong(grandTotalAmount));
+			Long grantTotal = 0l;
+			for (int i = 0; i < studentSfsIds.length; i++) {
+				String[] totalAmount = studentSfsIds[i].split("_");
+				grantTotal+=DataUtil.parseLong(amountPaying[Integer.parseInt(totalAmount[1])]);
+			}
+			receiptInfo.setTotalamount(grantTotal);
 			new feesCollectionDAO().createReceipt(receiptInfo);
 			 
 			if(receiptInfo.getReceiptnumber()!= null){
 				for (int i = 0; i < studentSfsIds.length; i++) {
 					Feescollection feesCollect = new Feescollection();
-					feesCollect.setSfsid(DataUtil.parseInt(studentSfsIds[i]));
-					feesCollect.setAmountpaid(DataUtil.parseLong(amountPaying[i]));
+					String[] studentSfsIdamount = studentSfsIds[i].split("_");
+					feesCollect.setSfsid(DataUtil.parseInt(studentSfsIdamount[0]));
+					feesCollect.setAmountpaid(DataUtil.parseLong(amountPaying[Integer.parseInt(studentSfsIdamount[1])]));
 					feesCollect.setSid(DataUtil.parseInt(sid));
 					feesCollect.setFine(DataUtil.parseLong(fine[i]));
 					feesCollect.setDate(new Date());

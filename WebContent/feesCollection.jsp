@@ -525,6 +525,43 @@
         /**
          *
          */
+         
+         $(function(){
+            
+             $('#chckHead').click(function () {
+                 var length = $('.chcktb2:checked').length;
+                 var trLength=$('.trClass').length;
+                 if(length>0){
+                     $('.chcktb2:checked').attr('checked', false);
+                     this.checked=false;
+
+                 }
+                 else{
+                     if (this.checked == false) {
+                         $('.chcktb2:checked').attr('checked', false);
+                     }
+                     else {
+                         $('.chcktb2:not(:checked)').attr('checked', true);
+                     }
+
+                 }
+
+             });
+             $('.chcktb2').click(function () {
+                 var length = $('.chcktb2:checked').length;
+                 var trLength=$('.trClass').length;
+                 alert(tdLength);
+                 if (length > trLength) {
+
+                     $('.chcktb2:not(:checked)').attr('disabled', true);
+                 }
+                 else {
+                     $('.chcktb2:not(:checked)').attr('disabled', false);
+                 }
+             });
+
+         });
+         
         function deleteRow(tableID) {
             try {
                 var table = document.getElementById(tableID);
@@ -630,14 +667,7 @@
                 };
 
             });
-
-
-
         }
-
-
-
-
         </script>
         <script type="text/javascript">
     $(function() {
@@ -776,10 +806,10 @@
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" align="center"><input type="checkbox" 
+							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
 								name="studentsfsids" checked
-								value="<c:out value="${studentfeesdetails.key.sfsid}"/>" /></td>
+								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
 							<td class="dataTextInActive" align="center"><a class="dataTextInActive" style="text-transform:uppercase"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" /></td>
 							<td class="dataText" align="center">
