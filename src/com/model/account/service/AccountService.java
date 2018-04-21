@@ -189,7 +189,7 @@ public class AccountService {
 					Financialaccountingyear financialyear = new AccountDAO().getFinancialAccountingYear();
 					Accountdetailsbalance accountDetailsBalance = new Accountdetailsbalance();
 					accountDetailsBalance.setAccountDetails(accountDetails);
-					if(findCrDr(groupName)){
+					if(findCrDr(groupName)){ 
 						accountDetailsBalance.setCrdr("Cr");
 					}else{
 						accountDetailsBalance.setCrdr("Dr");
