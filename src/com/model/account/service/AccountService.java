@@ -167,13 +167,21 @@ public class AccountService {
 		}else if("New Sub-Group".equalsIgnoreCase(subGroupName)){
 
 			Accountsubgroupmaster accountSubGroupMaster = new Accountsubgroupmaster();
-			accountSubGroupMaster.setAccountgroupid(Integer.parseInt(groupName));
+			Accountgroupmaster accountGroup = new Accountgroupmaster();
+			accountGroup.setAccountgroupid(Integer.parseInt(groupName));
+			accountSubGroupMaster.setAccountGroupMaster(accountGroup);
 			accountSubGroupMaster.setAccountsubgroupname(newSubGroup);
 			accountSubGroupMaster = new AccountDAO().createSubGroup(accountSubGroupMaster);
 			
 			if(accountSubGroupMaster.getAccountsubgroupmasterid()!=null){
 				Accountdetails accountDetails = new Accountdetails();
+				Accountgroupmaster accountGroupMaster = new Accountgroupmaster();
+				Accountsubgroupmaster accountSubGroup = new Accountsubgroupmaster();
+				accountSubGroup.setAccountsubgroupmasterid(accountSubGroupMaster.getAccountsubgroupmasterid());
+				accountDetails.setAccountSubGroupMaster(accountSubGroup);
 				accountDetails.setAccountname(accountName);
+				accountGroupMaster.setAccountgroupid(Integer.parseInt(groupName));
+				accountDetails.setAccountGroupMaster(accountGroupMaster);
 				accountDetails.setAccountsubgroupmasterid(accountSubGroupMaster.getAccountsubgroupmasterid());
 				boolean newAccount = new AccountDAO().saveNewAccount(accountDetails);
 				
