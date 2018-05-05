@@ -628,7 +628,7 @@
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Holiday Name/Weekly Off<img
+						<th title="click to sort" class="headerText">Holidays Name<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">From Date<img

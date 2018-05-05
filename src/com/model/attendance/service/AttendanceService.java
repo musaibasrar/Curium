@@ -652,16 +652,10 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			for (Date date = start.getTime(); start.before(end); start.add(Calendar.MONTH, +1), date = start.getTime()) {
 			    // Do your job here with `date`.
 			    System.out.println(new SimpleDateFormat("dd-MM-YYYY").format(date) );
-			    
-			    
 			}
-			
-			
 			for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
 			    // Do your job here with `date`.
 			    System.out.println(new SimpleDateFormat("dd-MM-YYYY").format(date) );
-			    
-			    
 			}
 			
 		}

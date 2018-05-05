@@ -637,7 +637,7 @@ function checkMandatoryandSubmit(){
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText"  style="display:none"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class</th>
@@ -653,7 +653,7 @@ function checkMandatoryandSubmit(){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox"
+							<td class="dataText"  style="display:none"><input type="checkbox" checked  style="display:none"
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
@@ -665,7 +665,7 @@ function checkMandatoryandSubmit(){
 							<td class="dataText"><input type="text"
 								id="studentMarks" 
 								name="studentMarks"
-								onkeyup="checkMandatory();"
+								onkeyup="checkMandatory();" value="0"
 								onkeypress="return event.charCode >= 00 && event.charCode <=57"
 								maxlength="3"
 								 /></td>

@@ -558,7 +558,7 @@
 							<td class="alignRight">Group Name&nbsp;</td><br>
 							<td width="28%"> <label>
 									<select name="groupname" id="groupname" onchange="getSubGroup()"
-									style="width: 240px;"">
+									style="width: 240px;">
 										<option selected>Select Group</option>
 
 										<c:forEach items="${accountgroupmaster}" var="accountgroupmaster">
@@ -619,7 +619,7 @@
 						<tr>
 						<td width="30%" class="alignRight">Account Name &nbsp;</td>
 							<td width="12%" align="left"><label> 
-							<input name="accountname" id="accountname" type="text" size="36"/>
+							<input name="accountname" id="accountname" type="text" size="36" required/>
 							</label>
 						</tr>
 						

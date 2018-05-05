@@ -177,4 +177,35 @@ public class EmployeeDAO {
 		return employeeExtId;
 	}
 
+	public void delete(Teacher employee) {
+		
+		try {
+            transaction = session.beginTransaction();
+            session.delete(employee);
+            transaction.commit();
+            
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        } finally {
+            session.close();
+        }
+		
+	}
+
+	public Teacher getEmployeeDetails(String userName) {
+		
+		Teacher employee = new Teacher();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Teacher as employee where employee.teacherexternalid='"+userName+"'");
+			employee = (Teacher) query.uniqueResult();
+			transaction.commit();
+		} catch (HibernateException hibernateException) {
+			transaction.rollback();
+			hibernateException.printStackTrace();
+		} 
+		return employee;
+	}
+
 }

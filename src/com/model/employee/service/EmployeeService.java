@@ -19,6 +19,9 @@ import com.model.std.dao.standardDetailsDAO;
 import com.model.std.dto.Classsec;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
+import com.model.user.dao.UserDAO;
+import com.model.user.dto.Login;
+import com.model.user.service.UserService;
 import com.util.DataUtil;
 import com.util.DateUtil;
 
@@ -60,7 +63,15 @@ public class EmployeeService {
 		}
 		employee.setTeacherexternalid(builder.toString());
 		
-		return new EmployeeDAO().create(employee);
+		if(new EmployeeDAO().create(employee)){
+			if(new UserService(request, response).addUser(employee)){
+				return true;
+			}else{
+				new EmployeeDAO().delete(employee);
+			}
+		}
+		
+		return false;
 	}
 
 	public boolean ViewAllEmployee() {
@@ -69,6 +80,7 @@ public class EmployeeService {
     try {
     	List<Teacher> list = new EmployeeDAO().readListOfObjects();
         httpSession.setAttribute("employeeList", list);
+        httpSession.setAttribute("employeeListProcessSalary", list);
         result = true;
     } catch (Exception e) {
         e.printStackTrace();
@@ -81,14 +93,13 @@ public class EmployeeService {
 	        try {
 	            long id = Long.parseLong(request.getParameter("id"));
 	            Teacher employee = new EmployeeDAO().readUniqueObject(id);
+	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
 	           
-	            if (employee == null) {
-	                result = false;
-	            } else {
-	                httpSession.setAttribute("employee", employee);
-	                
-	                result = true;
-	            }
+	            if (employee.getTid() != null) {
+	            	httpSession.setAttribute("employee", employee);
+	                request.setAttribute("stafflogin", employeeLogin);
+	                return true;
+	            } 
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	            result = false;
@@ -124,6 +135,7 @@ public class EmployeeService {
 		employee.setDesignation(DataUtil.emptyString(request.getParameter("designation")));
 		employee.setSalary(DataUtil.emptyString(request.getParameter("salary")));
 		employee.setRemarks(DataUtil.emptyString(request.getParameter("remarks")));
+		employee.setTeacherexternalid(DataUtil.emptyString(request.getParameter("teacherexternalid")));
 				
 		
 		employee = new EmployeeDAO().update(employee);
@@ -164,6 +176,8 @@ public class EmployeeService {
 			employeeList = new EmployeeDAO().readListOfEmployeesByDepartment(staffDepartment);
 		}
 		request.setAttribute("employeeList", employeeList);
+		
+		new EmployeeService(request, response).ViewAllEmployee();
 	}
 
 }

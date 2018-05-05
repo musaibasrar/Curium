@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.model.employee.dto.Teacher;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.parents.dto.Parents;
@@ -46,7 +47,7 @@ public class UserDAO {
            List login1 = (List) query.list();
            System.out.println("THE  login result from the readunique object is "+login.getUsertype());
            System.out.println("THE  login result from the readunique object is "+((java.util.List) login1).get(1));*/
-           Query query = session.createQuery("FROM Login as login where login.username1= :loginName and login.password1= :password");
+           Query query = session.createQuery("FROM Login as login where login.username= :loginName and login.password= :password");
            query.setParameter("loginName", userName);
            query.setParameter("password", password);
            login = (Login) query.uniqueResult();
@@ -184,5 +185,39 @@ public class UserDAO {
         }
         //session.close();
         return feesDetails;
+	}
+
+	public boolean addUser(Login user) {
+		
+		try {
+            transaction = session.beginTransaction();
+            session.save(user);
+            transaction.commit();
+           return true;
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        } finally {
+            session.close();
+        }
+		return false;
+		
+	}
+
+	public Login getUserDetails(String teacherexternalid) {
+		Login user = new Login();
+		try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM Login as login where login.username= :loginName");
+            query.setParameter("loginName", teacherexternalid);
+            user = (Login) query.uniqueResult();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        } finally {
+            session.close();
+        }
+		return user;
 	}
 }

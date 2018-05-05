@@ -1,5 +1,5 @@
 <%-- 
-  Document   : jspbarchart
+  Document   : Dash Board
   Created on : Jan 13, 2012, 12:21:03 PM
   Author     : Musaib
 --%>
@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Dash Board</title>
 
         <script src="js/Chart.js"></script>
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">

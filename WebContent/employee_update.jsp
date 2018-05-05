@@ -291,7 +291,8 @@
 						<tr>
 							<td width="16%" class="alignRight">Name &nbsp;</td>
 							<td width="28%"><input type="hidden" name="id" id="id"
-								value="<c:out value="${employee.tid}" />" /> <label> <input
+								value="<c:out value="${employee.tid}" />" /> <label> <input type="hidden" name="teacherexternalid" id="teacherexternalid"
+								value="<c:out value="${employee.teacherexternalid}" />" /> <label><input
 									name="name" type="text" style="text-transform:uppercase"
 									value="<c:out value="${employee.teachername}" />"
 									class="textField" id="name" size="30"

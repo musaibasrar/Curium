@@ -56,6 +56,16 @@
 		<mapping resource="com/model/documents/dto/Transfercertificate.hbm.xml"></mapping>
 		<mapping resource="com/model/examdetails/dto/Examschedule.hbm.xml"></mapping>
 		<mapping resource="com/model/periods/dto/Perioddetails.hbm.xml"></mapping>
-		<mapping resource="com/model/periods/dto/Periodmaster.hbm.xml"></mapping>	
+		<mapping resource="com/model/periods/dto/Periodmaster.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Leavetypemaster.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Leavedetails.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Payhead.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Payheadstaffdetails.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Paybasic.hbm.xml"></mapping>	
+		<mapping resource="com/model/hr/dto/Pf.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Payadvancesalary.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Leaveapplication.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Processsalarydetails.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Processsalarydetailsheads.hbm.xml"></mapping>	
 	</session-factory>
 </hibernate-configuration>

@@ -535,8 +535,6 @@
 						<td class="footerTD" colspan="2"><input 
 							type="hidden"  id="delete" />
 							</td>
-							
-
 					</tr>
 				</tfoot>
 			</table>

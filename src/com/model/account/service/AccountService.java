@@ -283,6 +283,7 @@ public class AccountService {
 		transactions.setVouchertype(Integer.parseInt(receiptVoucher));
 		transactions.setDate(DateUtil.dateParserUpdateStd(receiptDate));
 		transactions.setNarration(receiptNarration);
+		transactions.setCancelvoucher("no");
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear().getFinancialid());
 		
 		if(new AccountDAO().saveReceipt(transactions)){
@@ -327,6 +328,7 @@ public class AccountService {
 		transactions.setVouchertype(Integer.parseInt(paymentVoucher));
 		transactions.setDate(DateUtil.dateParserUpdateStd(paymentDate));
 		transactions.setNarration(paymentNarration);
+		transactions.setCancelvoucher("no");
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear().getFinancialid());
 		
 		if(new AccountDAO().savePayment(transactions)){
@@ -585,10 +587,6 @@ public class AccountService {
 		Map<Receipttransactions,String> receiptMap = new HashMap<Receipttransactions, String>();
 		receiptTransactions = new AccountDAO().getReceiptTransactions(new AccountDAO().getCurrentFinancialYear().getFinancialid());
 		
-		if(receiptTransactions.isEmpty()){
-			return false;
-		}
-		
 		for (Receipttransactions receipttransactionsSingle : receiptTransactions) {
 			twoAccounts = new AccountDAO().getAccountName(receipttransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(receipttransactionsSingle.getCraccountid());
 			receiptMap.put(receipttransactionsSingle, twoAccounts);
@@ -608,10 +606,6 @@ public class AccountService {
 		Map<Paymenttransactions,String> paymentMap = new HashMap<Paymenttransactions, String>();
 		paymentTransactions = new AccountDAO().getPaymentTransactions(new AccountDAO().getCurrentFinancialYear().getFinancialid());
 		
-		if(paymentTransactions.isEmpty()){
-			return false;
-		}
-		
 		for (Paymenttransactions paymenttransactionsSingle : paymentTransactions) {
 			twoAccounts = new AccountDAO().getAccountName(paymenttransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(paymenttransactionsSingle.getCraccountid());
 			paymentMap.put(paymenttransactionsSingle, twoAccounts);
@@ -627,10 +621,6 @@ public class AccountService {
 		String twoAccounts = null;
 		Map<Contratransactions,String> paymentMap = new HashMap<Contratransactions, String>();
 		contraTransactions = new AccountDAO().getContraTransactions(new AccountDAO().getCurrentFinancialYear().getFinancialid());
-		
-		if(contraTransactions.isEmpty()){
-			return false;
-		}
 		
 		for (Contratransactions paymenttransactionsSingle : contraTransactions) {
 			twoAccounts = new AccountDAO().getAccountName(paymenttransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(paymenttransactionsSingle.getCraccountid());
@@ -648,9 +638,6 @@ public class AccountService {
 		Map<Journaltransactions,String> paymentMap = new HashMap<Journaltransactions, String>();
 		journalTransactions = new AccountDAO().getJournalTransactions(new AccountDAO().getCurrentFinancialYear().getFinancialid());
 		
-		if(journalTransactions.isEmpty()){
-			return false;
-		}
 		
 		for (Journaltransactions journaltransactionsSingle : journalTransactions) {
 			twoAccounts = new AccountDAO().getAccountName(journaltransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(journaltransactionsSingle.getCraccountid());
@@ -677,7 +664,6 @@ public class AccountService {
 				if(accountbalance.getCrdr().equalsIgnoreCase("Cr")){
 					creditTotal = creditTotal.add(accountbalance.getCurrentbalance());
 				}else if(accountbalance.getCrdr().equalsIgnoreCase("Dr")){
-					
 					if(accountbalance.getCurrentbalance().signum() == -1){
 						accountbalance.setCrdr("Cr");
 						accountbalance.setCurrentbalance(accountbalance.getCurrentbalance().abs());

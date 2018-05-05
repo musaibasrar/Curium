@@ -1,5 +1,5 @@
 <%--
-    Document   : View Attendance
+    Document   : Attendance Export
     Created on : JAN 22, 2018, 4:14:28 PM
     Author     : Musaib
 --%>
@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>fees structure</title>
+<title>Attendance Export</title>
 <script src="js/Chart.js"></script>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
@@ -528,7 +528,7 @@
 
 							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
 							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
+								<button id="search">Export</button>
 							</td>
 						</tr>
 

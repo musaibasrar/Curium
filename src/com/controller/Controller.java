@@ -21,6 +21,7 @@ import com.model.examdetails.action.ExamDetailsAction;
 import com.model.feescategory.action.FeesAction;
 import com.model.feescollection.action.FeesCollectionAction;
 import com.model.feesdetails.action.FeesDetailsAction;
+import com.model.hr.action.HrAction;
 import com.model.marksdetails.action.MarksDetailsAction;
 import com.model.periods.action.PeriodAction;
 import com.model.position.action.PositionAction;
@@ -37,9 +38,6 @@ import com.model.user.action.UserAction;
  */
 
 public class Controller extends HttpServlet {
-	
-	
-	
        
 	private void processRequest(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -92,10 +90,12 @@ public class Controller extends HttpServlet {
          nextUrl= new DocumentAction(request, response).execute(action);
      }else if("PeriodProcess".equalsIgnoreCase(process)){
          nextUrl= new PeriodAction(request, response).execute(action);
+     }else if("HrProcess".equalsIgnoreCase(process)){
+         nextUrl= new HrAction(request, response).execute(action);
      }else if("test".equalsIgnoreCase(process)){
          nextUrl= "test.html";
      }
-
+        
         RequestDispatcher reg = request.getRequestDispatcher(nextUrl);
         response.toString();
         try {

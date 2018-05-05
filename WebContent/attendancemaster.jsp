@@ -351,59 +351,6 @@
 	}
 	
 </script>
-  <script type="text/javascript">
-    function init() {
-      if (arguments.callee.done) return;
-      arguments.callee.done = true;
-      if (khtmltimer) clearInterval(khtmltimer);
-      var s = document.getElementsByTagName('select');
-      for (var i = 0; i < s.length; i++) {
-        if (s[i].hasAttribute('multiple')) {
-          s[i].onclick = updateSelect;
-        }
-      }
-    }
-    function updateSelect(e) {
-      var opts = this.getElementsByTagName('option'), t, o;
-      if (e) {
-        e.preventDefault();
-        t = e.target;
-      }
-      else if (window.event) {
-        window.event.returnValue = false;
-        t = window.event.srcElement;
-      }
-      else return;
-      t = e.target || window.event.srcElement;
-      if (t.getAttribute('class') == 'selected') t.removeAttribute('class');
-      else t.setAttribute('class', 'selected');
-      for (var i = 0, j = opts.length; i < j; i++) {
-        if (opts[i].hasAttribute('class')) opts[i].selected = true;
-        else opts[i].selected = false;
-      }
-    }
-         
-    if (document.addEventListener) document.addEventListener("DOMContentLoaded", init, false);
-    /*@cc_on @*/
-    /*@if (@_win32)
-        document.write("<script id=__ie_onload defer src=javascript:void(0)><\\/script>");
-        var script = document.getElementById('__ie_onload');
-        script.onreadystatechange = function() {
-            if (this.readyState == 'complete') {
-                init();
-            }
-        };
-    /*@end @*/
-    if (/KHTML/i.test(navigator.userAgent)) {
-        var khtmltimer = setInterval(function() {
-            if (/loaded|complete/.test(document.readyState)) {
-                init();
-            }
-        }, 10);
-    }
-    window.onload = init;
-  </script>
-
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 

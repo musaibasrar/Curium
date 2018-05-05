@@ -214,4 +214,23 @@ public class PeriodService {
 		
 		return false;
 	}
+
+
+	public boolean generateTimeTable() {
+
+		
+		Currentacademicyear currentYear = new YearDAO().showYear();
+        httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
+       
+        List<Periodmaster> periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear());
+        request.setAttribute("periodmasterlist", periodMaster);
+        
+        if(periodMaster.isEmpty()){
+        	return false;
+        }
+        
+		return true;
+		
+	
+	}
 }

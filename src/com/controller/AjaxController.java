@@ -20,6 +20,7 @@ import com.model.examdetails.action.ExamDetailsAction;
 import com.model.feescategory.action.FeesAction;
 import com.model.feescollection.action.FeesCollectionAction;
 import com.model.feesdetails.action.FeesDetailsAction;
+import com.model.hr.action.HrAction;
 import com.model.marksdetails.action.MarksDetailsAction;
 import com.model.position.action.PositionAction;
 import com.model.printids.action.PrintIdsAction;
@@ -48,10 +49,9 @@ public class AjaxController extends HttpServlet {
        System.out.println("AJAX CONTROLLER");
         if (process.equalsIgnoreCase("SubGroupName")) {
         	new AccountAction(request, response).execute(action);
+        }else if(process.equalsIgnoreCase("HrProcess")){
+        	new HrAction(request, response).execute(action);
         }
-
-     
-
     }
 
 

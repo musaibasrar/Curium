@@ -48,13 +48,9 @@
                    window.open('','_self');
                     window.close();
                     openIndexPage('index_reception.jsp',screen.width,screen.height);
-
                 }
-                else if(type=='pharmacy'){
-                   window.open('','_self');
-                    window.close();
-                    openIndexPage('index_pharmacy.jsp',screen.width,screen.height);
-
+                else if(type=='staff'){
+                	window.open('index.jsp','_self');
                 }
             }
             else if(!flag1){

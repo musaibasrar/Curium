@@ -1,7 +1,7 @@
 <%-- 
-    Document   : notSaved
+    Document   : Employee Not Saved
     Created on : Jan 5, 2012, 1:11:53 PM
-    Author     : Mayur
+    Author     : Mausaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Employee Not Saved</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -63,23 +63,17 @@
                 $("#addnew").button()
 
                 });
-
-            function ViewAll(){
-                var form1=document.getElementById("form1");
-                form1.action="Controller?process=PersonalProcess&action=viewAll";
-                form1.submit();
-            }
         </script>
 </head>
     <body background="images/bg.jpg" >
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-          <td height="250" align="center" style="font-color:red" valign="middle"><p class="style1"> Registration Unsuccessful Please Try Again</p>
+          <td height="250" align="center" style="font-color:red" valign="middle"><p class="style1"> Registration failed, Please Try Again</p>
         <p class="style1">
           
             
-            <input type="button" value="Back" id="addnew" onClick="JavaScript:window.location='addStudent.jsp';">
+            <input type="button" value="Back" id="addnew" onClick="JavaScript:window.location='addEmployee.jsp';">
         </p></td>
       </tr>
     </table>

@@ -42,10 +42,20 @@ public class PeriodAction {
 			url = viewTimeTable();
 		}else if ("deletePeriods".equalsIgnoreCase(action)) {
 			url = deletePeriods();
+		}else if ("generateTimeTable".equalsIgnoreCase(action)) {
+			url = generateTimeTable();
 		}
 		return url;
 	}
 	
+
+	private String generateTimeTable() {
+		
+		if(new PeriodService(request, response).generateTimeTable()){
+			return "classestimetable.jsp";
+		}
+		return error;
+	}
 
 	private String deletePeriods() {
 		if(new PeriodService(request, response).deletePeriods()){

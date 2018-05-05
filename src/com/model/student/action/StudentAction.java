@@ -107,12 +107,9 @@ public class StudentAction {
 	private String feesStructurePerYear() {
 		
 		
-		if (new StudentService(request, response).viewfeesStructurePerYear()) {
-            //return "patientDetails_1.jsp";
-            return "student_details_feesstructure.jsp";
-        } else{
-        	return "student_details_feesstructure.jsp";
-        }
+		new StudentService(request, response).viewfeesStructurePerYear();
+        return "student_details_feesstructure.jsp";
+        
 	}
 
 	private String ViewFeesStructure() {

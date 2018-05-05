@@ -460,6 +460,27 @@
 
                         </tr>
                         
+                        
+                        <tr>
+                        
+                         
+                            <td  width="25%"  class="alignLeft" height="50">Staff User ID
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${stafflogin.username}" />
+                            </td>
+                            
+                        
+                            <td width="25%"   class="alignLeft" height="50" >Password</td>
+                            <td width="25%" class="tablerows"  >
+                                 <c:out default="" value="${stafflogin.password}" />
+                                
+                            </td>
+                            
+
+                        </tr>
+                        
+                        
                         </tr>
                         
                         

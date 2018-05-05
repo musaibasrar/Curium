@@ -36,40 +36,42 @@ public class AccountAction {
 	}
 
 	public String execute(String action) {
-		// TODO Auto-generated method stub
-		if (action.equalsIgnoreCase("saveFinancialYear")) {
+
+		if ("saveFinancialYear".equalsIgnoreCase(action)) {
 			url = saveFinancialYear();
-		}else if (action.equalsIgnoreCase("createAccount")) {
+		}else if ("createAccount".equalsIgnoreCase(action)) {
 			url = createAccount();
-		}else if (action.equalsIgnoreCase("getCurrentFinancialYear")) {
+		}else if ("getCurrentFinancialYear".equalsIgnoreCase(action)) {
 			url = getCurrentFinancialYear();
-		}else if (action.equalsIgnoreCase("getSubGroupNames")) {
+		}else if ("getSubGroupNames".equalsIgnoreCase(action)) {
 			 getSubGroupNames();
-		}else if (action.equalsIgnoreCase("saveAccount")) {
+		}else if ("saveAccount".equalsIgnoreCase(action)) {
 			url = saveAccount();
-		}else if (action.equalsIgnoreCase("deleteAccount")) {
+		}else if ("deleteAccount".equalsIgnoreCase(action)) {
 			url = deleteAccount();
-		}else if (action.equalsIgnoreCase("createVoucher")) {
+		}else if ("createVoucher".equalsIgnoreCase(action)) {
 			url = createVoucher();
-		}else if (action.equalsIgnoreCase("saveReceipt")) {
+		}else if ("saveReceipt".equalsIgnoreCase(action)) {
 			url = saveReceipt();
-		}else if (action.equalsIgnoreCase("savePayment")) {
+		}else if ("savePayment".equalsIgnoreCase(action)) {
 			url = savePayment();
-		}else if (action.equalsIgnoreCase("saveContra")) {
+		}else if ("saveContra".equalsIgnoreCase(action)) {
 			url = saveContra();
-		}else if (action.equalsIgnoreCase("saveJournal")) {
+		}else if ("saveJournal".equalsIgnoreCase(action)) {
 			url = saveJournal();
-		}else if (action.equalsIgnoreCase("balanceSheet")) {
+		}else if ("balanceSheet".equalsIgnoreCase(action)) {
 			url = balanceSheet();
-		}else if (action.equalsIgnoreCase("viewVoucherReceipt")) {
+		}else if ("viewVoucherReceipt".equalsIgnoreCase(action)) {
 			url = viewVoucherReceipt();
-		}else if (action.equalsIgnoreCase("viewNextVoucher")) {
+		}else if ("viewNextVoucher".equalsIgnoreCase(action)) {
 			url = viewNextVoucher();
-		}else if (action.equalsIgnoreCase("trialBalance")) {
+		}else if ("trialBalance".equalsIgnoreCase(action)) {
 			url = trialBalance();
-		}else if (action.equalsIgnoreCase("cancelReceiptVoucher")) {
+		}else if ("cancelReceiptVoucher".equalsIgnoreCase(action)) {
 			url = cancelReceiptVoucher();
-		}else if (action.equalsIgnoreCase("cancelPaymentVoucher")) {
+		}else if ("cancelPaymentVoucher".equalsIgnoreCase(action)) {
+			url = cancelPaymentVoucher();
+		}else if ("deletePayHead".equalsIgnoreCase(action)) {
 			url = cancelPaymentVoucher();
 		}
 		return url;
@@ -133,12 +135,8 @@ public class AccountAction {
 	}
 
 	private String viewVoucherReceipt() {
-		
-		if(new AccountService(request, response).viewVoucherReceipt()){
+		new AccountService(request, response).viewVoucherReceipt();
 			return "receiptdetails.jsp";
-		}else{
-		return ERRORPAGE;
-		}
 	}
 
 	private String balanceSheet() {
