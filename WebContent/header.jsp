@@ -175,6 +175,10 @@
                             
                                           	<td><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				
+                            				
+                            				<td width="40" ><div align="center" ><a target="leftFrame" href="left.jsp"><img   src="images/house_home.png" width="35" height="35" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                            				<td><label style="color:white;font-size: 11px;font-family: arial;">Home</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                            				
                                             <td width="40" ><div align="center" ><a target="mainFrame" href="Controller?process=FeesProcess&action=feesCollect"><img   src="images/feescollectw.png" width="40" height="40" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><label style="color:white;font-size: 11px;font-family: arial;">Fees <br>Collect</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				
@@ -187,7 +191,7 @@
                                             <td width="40" ><div align="center" ><a target="mainFrame" href="addStudent.jsp"><img   src="images/Usersw.png" width="30" height="30" alt="Add New Student" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><label style="color:white;font-size: 12px;">Add <br>New</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                            					
-                           					<td width="40"><a target="mainFrame" href="Controller?process=StudentProcess&action=viewAllStudentsWithParents"><div align="center" align="center"><img  alt="Settings" src="images/ssettingsw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                           					<td width="40"><a target="leftFrame" href="leftsettings.jsp"><div align="center" align="center"><img  alt="Settings" src="images/ssettingsw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Master<br> Settings</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
                                             <td width="40"><a target="mainFrame" href="Controller?process=AdminProcess&action=viewAllExpenses"><div align="center" align="center"><img  alt="Admin Exp" src="images/adexpw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
