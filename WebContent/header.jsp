@@ -141,7 +141,7 @@
                 padding-right:2px;
 
 
-                width: 10px;
+                width: 20px;
                 height: 16px;
 
             }
@@ -160,25 +160,48 @@
         <form id="form1" method="post" >
             <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
                 <tr>
-                    <td height="139" valign="top" background="images/h_bg.jpg">
-                        <table width="100%" height="120" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
-                            <tr>
-                               <td width="234" ><!--<div align="center"><img src="images/logo.png" width="200" height="64" /></div> --></td> 
+                    <td valign="top" background="images/h_bg.jpg">
+                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
+                            <!-- <tr>
+                               <td width="234" ><div align="center"><img src="images/logo.png" width="200" height="64" /></div></td> 
                                 <td width="700" ><div align="center"><img src="images/SMS.png" width="391" height="50" /></div></td>
-                                <td width="210" height="10">&nbsp;</td>
+                               
+                            </tr> -->
+                            <tr>
+                            <td style="height: 30px;"></td>  
                             </tr>
                             <tr>
-                                <td></td><td></td><td></td>
-                                <td width="150" height="34"><table  background="images/tab1.png" width="153" border="0" align="center" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td width="20">&nbsp;&nbsp;&nbsp;</td>
-                                            <!-- <td width="40"><a target="mainFrame" href="Controller?process=StudentProcess&action=viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Students" src="images/Users.png" width="40" height="30" /> <div id="n1" class="noti_bubble"></div></div></a></td> -->
-                                            <!-- <td width="40"><a target="mainFrame" href="Controller?process=PersonalProcess&action=viewAll"><div align="center"  align="center"></div></div></a></td> -->
-                                            <td width="40"><a target="mainFrame" href="Controller?process=StudentProcess&action=viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Students" src="images/Users.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
-                                            <td width="40"><a target="mainFrame" href="Controller?process=UserProcess&action=dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="images/dashboard.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
-                                            <td width="40" ><div align="center" ><a target="_parent" href="Controller?process=UserProcess&action=logout"><img   src="images/logout_icon.png" width="24" height="24" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div></div></td>
-                                        </tr>
-                                    </table></td>
+                                          	<td><div align="center"><img src="images/smslog.png" width="400" height="70"/></div></td>  
+                            
+                                          	<td><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                            				
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="Controller?process=FeesProcess&action=feesCollect"><img   src="images/feescollectw.png" width="40" height="40" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                            				<td><label style="color:white;font-size: 11px;font-family: arial;">Fees <br>Collect</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                            				
+                            				<td width="40"><a target="mainFrame" href="Controller?process=AccountProcess&action=createVoucher"><div align="center" align="center"><img  alt="Create Voucher" src="images/voucherw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td><label style="color:white;font-size: 12px;">Create <br>Voucher</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            
+                                            <td width="40"><a target="mainFrame" href="feesCollectionDetails.jsp"><div align="center" align="center"><img  alt="Fees Details" src="images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="addStudent.jsp"><img   src="images/Usersw.png" width="30" height="30" alt="Add New Student" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                            				<td><label style="color:white;font-size: 12px;">Add <br>New</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                           					
+                           					<td width="40"><a target="mainFrame" href="Controller?process=StudentProcess&action=viewAllStudentsWithParents"><div align="center" align="center"><img  alt="Settings" src="images/ssettingsw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td><label style="color:white;font-size: 12px;">Master<br> Settings</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            
+                                            <td width="40"><a target="mainFrame" href="Controller?process=AdminProcess&action=viewAllExpenses"><div align="center" align="center"><img  alt="Admin Exp" src="images/adexpw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td><label style="color:white;font-size: 12px;">Admin<br> Expense</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="sendsms.jsp"><img   src="images/sendsmsw.png" width="30" height="30" alt="Send SMS" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                			<td><label style="color:white;font-size: 12px;">Send <br>Message</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            
+                                            <td width="40"><a target="mainFrame" href="Controller?process=StudentProcess&action=viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Students" src="images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td><label style="color:white;font-size: 12px;">View <br>All</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            
+                                            <td width="40"><a target="mainFrame" href="Controller?process=UserProcess&action=dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="images/dashboardw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td><label style="color:white;font-size: 12px;">Dash<br> Board</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="_parent" href="Controller?process=UserProcess&action=logout"><img   src="images/logoutw.png" width="30" height="30" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             </tr>
                         </table>
                     </td>
