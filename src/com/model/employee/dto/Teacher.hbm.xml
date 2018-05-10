@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 3 Dec, 2014 12:58:28 PM by Hibernate Tools 4.0.0 -->
+<!-- Generated 20 Jan, 2018 9:49:29 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
     <class name="com.model.employee.dto.Teacher" table="teacher">
         <id name="tid" type="java.lang.Integer">
             <column name="tid" />
-            <generator class="native" />
+            <generator class="identity" />
         </id>
         <property name="teachername" type="string">
             <column name="teachername" length="100" not-null="true" />
@@ -17,7 +17,7 @@
         <property name="subjectsteaching" type="string">
             <column name="subjectsteaching" length="500" />
         </property>
-        <property name="dateofjoining" type="java.util.Date">
+        <property name="dateofjoining" type="date">
             <column name="dateofjoining" length="10" />
         </property>
         <property name="classesteaching" type="string">
@@ -39,7 +39,7 @@
             <column name="address" length="500" />
         </property>
         <property name="contactnumber" type="string">
-            <column name="contactnumber"  length="20" />
+            <column name="contactnumber" length="20" />
         </property>
         <property name="email" type="string">
             <column name="email" length="45" />
@@ -49,6 +49,9 @@
         </property>
         <property name="gender" type="string">
             <column name="gender" length="45" />
+        </property>
+        <property name="teacherexternalid" type="string">
+            <column name="teacherexternalid" length="45" not-null="true" unique="true" />
         </property>
     </class>
 </hibernate-mapping>

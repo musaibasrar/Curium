@@ -92,22 +92,15 @@ public class DateUtil {
 
 			date = (Date) formatter.parse(stringDate);
 			String secdate = df.format(date);
-			System.out.println("The date to string is " + secdate);
 
 			datefinal = (Date) dateformatter.parse(secdate);
-			System.out.println("The datefinal is " + datefinal);
 
 		} catch (ParseException e) {
 
 			System.out.println("Exception :" + e);
 
 		}
-
 		return datefinal;
-
-		
-    
-    
     
     }
 
@@ -118,21 +111,17 @@ public class DateUtil {
 		try {
 			Date date = null;
 
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd",
-					Locale.ENGLISH);
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd");
 
 			date = (Date) formatter.parse(stringDate);
 			String secdate = df.format(date);
-			System.out.println("The date to string is " + secdate);
 
 			datefinal = (Date) dateformatter.parse(secdate);
-			System.out.println("The datefinal is " + datefinal);
 
 		} catch (ParseException e) {
 
-			System.out.println("Exception :" + e);
 			Date datefinal1 = null;
 			try {
 				Date date = null;
@@ -144,26 +133,14 @@ public class DateUtil {
 
 				date = (Date) formatter.parse(stringDate);
 				String secdate = df.format(date);
-				System.out.println("The date to string is " + secdate);
 
 				datefinal1 = (Date) dateformatter.parse(secdate);
-				System.out.println("The datefinal is " + datefinal1);
 				datefinal = datefinal1;
 			} catch (ParseException e1) {
-
 				System.out.println("Exception :" + e1);
-
 			}
-
-
 		}
-
 		return datefinal;
-
-		
-    
-    
-    
     }
     /**
      *

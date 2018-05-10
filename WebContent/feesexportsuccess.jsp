@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Fees Export Success</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -58,15 +58,15 @@
 
         <script type="text/javascript">
             $(function(){
-                $("#view").button()
-                
-                $("#addnew").button()
+                $("#download").button().click(function() {
+        			downloadFile();
 
+        		});
                 });
 
-            function ViewAll(){
+            function downloadFile(){
                 var form1=document.getElementById("form1");
-                form1.action="Controller?process=PersonalProcess&action=viewAll";
+                form1.action="Controller?process=FeesDetails&action=download";
                 form1.submit();
             }
         </script>
@@ -75,15 +75,15 @@
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="50" align="center" valign="middle"><p class="style1"> Backup Successful</p>
+        <td height="50" align="center" valign="middle"><p class="style1"> Fees details has been exported successfully</p>
         </td>
         
       </tr>
       <tr>
           <td height="5" align="center" valign="middle"><p class="style1">
-                  Backup Location --> 
-                 <%= request.getAttribute("Backuplocation") %>
                   
+                  <button id="download">Download</button>
+                                   
               </p>
         </td>
       </tr>

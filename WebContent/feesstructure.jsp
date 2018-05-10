@@ -1,5 +1,5 @@
 <%--
-    Document   : index
+    Document   : Fees Structure
     Created on : Dec 23, 2011, 5:52:28 PM
     Author     : Musaib
 --%>
@@ -386,306 +386,16 @@
 
 	});
 	
-	$(function() {
-		$("#delete").button({
-			icons : {
-				primary : "ui-icon-trash"
-			}
-		}).click(function() {
-			deleteRecords();
-			return false;
 
-		});
-		$("#deleteStamp").button({
-			icons : {
-				primary : "ui-icon-trash"
-			}
-		}).click(function() {
-			if (confirm('Are you sure you want to delete the stamp fees?As it can not be revert back.')) {
-			deleteFeesStamp();
-			}
-			return false;
-
-		});
-		$('#chckHead').click(function() {
-			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
-			if (length > 0) {
-				$('.chcktbl:checked').attr('checked', false);
-				this.checked = false;
-
-			} else {
-				if (this.checked == false) {
-					$('.chcktbl:checked').attr('checked', false);
-				} else {
-					$('.chcktbl:not(:checked)').attr('checked', true);
-				}
-
-			}
-
-		});
-		$('.chcktbl').click(function() {
-			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
-			alert(tdLength);
-			if (length > trLength) {
-
-				$('.chcktbl:not(:checked)').attr('disabled', true);
-			} else {
-				$('.chcktbl:not(:checked)').attr('disabled', false);
-			}
-		});
-
-		$("#go").button()
-
-	});
-	
-	function deleteFeesStamp(){
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StampFeesProcess&action=delete";
-		form1.method = "POST";
-		form1.submit();
-	}
 </script>
 
 
-<script type="text/javascript">
-        
-        function calculateGrandTotal() {
-            var sum = 0.0;
-            var column2 = $('.feesFullAmount')
-            jQuery.each(column2,function(){
-                sum += parseFloat($(this).val());
-            });
-            
-            $('#feesTotalAmount').val(sum.toPrecision(6));
-
-        }
-        $(document).ready(function() {
-            
-            
-            $("#dataTable").keyup(function(){
-                
-                var sum = 0.0;
-                var totalSum=0.0;
-                var column2 = $('.feesFullAmount')
-                jQuery.each(column2,function(){
-                    sum += parseFloat($(this).val());
-                });
-                
-                $('#feesTotalAmount').val(sum.toPrecision(6));
-                
-            });
-            $("#dataTable").click(function(){
-                
-                var sum = 0.0;
-                var totalSum=0.0;
-                var column2 = $('.feesFullAmount')
-                jQuery.each(column2,function(){
-                    sum += parseFloat($(this).val());
-                });
-                
-                $('#feesTotalAmount').val(sum.toPrecision(6));
-               
-            });
-
-
-        });
-        
-        var feescat=[
-                     <c:forEach varStatus="status" items="${feescategory}" var="fees">{
-                             value:'<c:out default="0" value="${fees.feescategory}" />',
-                             particularname:'<c:out default="0" value="${fees.particularname}" />',
-                             price:'<c:out default="0" value="${fees.amount}" />',
-                             id:'<c:out default="0" value="${fees.idfeescategory}" />'
-                             }<c:if test="${!status.last}">,</c:if>
-                     </c:forEach>
-                     ];
-        
-        $(function() {
-            
-            var addFeesCatButtonID="#addFeesCat";
-            var removeFeesCatButtonID="#removeFeesCat";
-            $( addFeesCatButtonID )
-            .button({
-                icons: {
-                    primary: "ui-icon-plus"
-                }
-            })
-            .click(function() {
-                addRow();
-                return false;
-            });
-            $(removeFeesCatButtonID)
-            .button({
-                icons: {
-                    primary: "ui-icon-minus"
-                }
-            })
-            .click(function() {
-                deleteRow('dataTable');
-                return false;
-            });            
-
-        });
-        
-        function SelectAll(id)
-        {
-        	
-            document.getElementById("feesCount_"+id).focus();
-            document.getElementById("feesCount_"+id).select();
-        }
-
-        function calculate(value2) {
-
-        	var feesCount=document.getElementById("feesCount_"+value2).value;
-        	
-        	if(feesCount === ''){
-        		
-        		document.getElementById("feesCount_"+value2).value = 1;
-        	}
-        	
-            //var val1=value1.value;
-            var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
-            var feesCount=document.getElementById("feesCount_"+value2).value;
-            var final1=document.getElementById("hiddenfees_full_amount_"+value2);
-            
-                final1.value=(feesCat*feesCount).toPrecision(6);
-           
-        }
-       
-    function addRow() {
-        var rowCount = document.getElementById('dataTable').rows.length;    
-        var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=fees_"+rowCount+" /><input type='hidden' class='feesStatus' name='feesStatuses' id=fees_status_"+rowCount+" value='not set' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+rowCount+" value='' /></td>";
-        var col2="<td class='dataTextInActive'><input class='feesName'   type='text' name='feesNames' id=fees_name_"+rowCount+" onkeyup='calculate("+rowCount+")' onclick='calculate("+rowCount+");'/></td>";
- 	    var col3="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'   name='fessCat'  id=hiddenfees_amount_"+rowCount+" /></td>";
-        var col4="<td class='dataTextInActive'><input type='text' value='0' onclick='SelectAll("+rowCount+");calculate("+rowCount+");' onfocus='SelectAll("+rowCount+")' onkeyup='calculate("+rowCount+")' name='feesCount' id=feesCount_"+rowCount+" /></td>";
-        var col5="<td class='dataTextInActive'><input class='feesFullAmount' type='text' value='0'   name='fessFullCat'  id=hiddenfees_full_amount_"+rowCount+" /></td>";
-        /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-        /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-        /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
-        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+"</tr>");
-        $(function() {
-            $("#dataTable").find('tbody').append(newRow);
-        });
-        $(function() {
-            $("#fees_name_"+rowCount).autocomplete({
-                source: feescat,
-                minLength: 1,
-                change:function(event,ui){
-
-                    $("#fees_id_"+rowCount ).val( ui.item.id );
-                    $( "#fees_status_"+rowCount ).val("set");
-                    $("#hiddenfees_amount_"+rowCount).val( ui.item.price );
-                    $("#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
-                   
-
-                },
-                focus: function( event, ui ) {
-                    $( "#fees_name_"+rowCount).val( ui.item.name );
-                    $( "#fees_status_"+rowCount ).val("not set");
-                    $( "#fees_id_"+rowCount ).val( ui.item.id );
-                    $( "#hiddenfees_amount_"+rowCount).val( ui.item.price );
-                    $( "#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
-                   
-
-                    return true;
-                },
-                select: function( event, ui ) {
-                    $( "#fees_name_"+rowCount).val( ui.item.value );
-                    $( "#fees_id_"+rowCount ).val( ui.item.id );
-                    $( "#fees_status_"+rowCount ).val("set");
-                    $( "#hiddenfees_amount_"+rowCount).val( ui.item.price );
-                    $( "#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
-                   
-                    return true;
-                }
-            }).data( "autocomplete" )._renderItem = function( ul, item ) {
-                return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +":-</b> <b> "+item.particularname +"</b></a>" )
-                .appendTo( ul );
-            };
-
-        });
-
-
-
-    }
-    
-    function selectAllRow(tableID){
-        var table = document.getElementById(tableID);
-        var rowCount = table.rows.length;
-        if(rowCount==1){
-            var row = table.rows[0];
-            var chkbox = row.cells[0].childNodes[0];
-            chkbox.checked=false;
-            alert('No records to select');
-        }
-        for(var i=1; i<rowCount; i++) {
-            var row = table.rows[i];
-            var chkbox = row.cells[0].childNodes[0];
-            chkbox.checked=true;
-        }
-    }
-    
-    function deleteRow(tableID) {
-        try {
-            var table = document.getElementById(tableID);
-            var rowCount = table.rows.length;
-            if(rowCount==1){
-                alert('No records to delete');
-            }
-            for(var i=1; i<rowCount-1; i++) {
-                var row = table.rows[i];
-                var chkbox = row.cells[0].childNodes[0];
-                if(null != chkbox && true == chkbox.checked) {
-                    table.deleteRow(i);
-                    rowCount--;
-                    i--;
-                }
-            }
-           
-            
-            var sum = 0.0;
-            var totalSum=0.0;
-            var column2 = $('.feesAmount')
-            jQuery.each(column2,function(){
-                sum += parseFloat($(this).val());
-            });
-            totalSum=sum;
-            
-            $('#feesTotalAmount').val(totalSum.toPrecision(6));
-            
-            calculateGrandTotal();
-            //$('#grandTotalAmount').val(0);
-        }catch(e) {
-            alert(e);
-        }
-    }
-    
-    
-    function checkthecheck()
-    {
-      
-      if(!form1.selectAll.checked) {
-        alert("Please select the student");
-        form1.selectAll.focus();
-        return false;
-      }
-      return true;
-    }
-        </script>
 
 
 
 </head>
 <body>
-	<form id="form1" action="Controller?process=StampFeesProcess&action=applyFees" method="POST">
-		<!-- <div style="height: 28px">
-			<button id="add">Add Department</button>
-			<br />
-		</div> -->
+	<form id="form1">
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -698,7 +408,7 @@
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
-							<td class="alignRightFields">Name &nbsp;</td>
+							<td class="alignRightFields">Student Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="namesearch" type="text" class="myclass" id="namesearch"
 									size="36"">
@@ -825,8 +535,6 @@
 						<td class="footerTD" colspan="2"><input 
 							type="hidden"  id="delete" />
 							</td>
-							
-
 					</tr>
 				</tfoot>
 			</table>

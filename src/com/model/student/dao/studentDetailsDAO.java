@@ -150,9 +150,8 @@ public class studentDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("From Student")
+			results = (List<Student>) session.createQuery("From Student where archive=0")
 					.list();
-			System.out.println("name of student " + results.size());
 			transaction.commit();
 
 		} catch (HibernateException hibernateException) {
@@ -398,12 +397,12 @@ public class studentDetailsDAO {
 					
 				transaction = session.beginTransaction();
 
-					Query query = session.createQuery("from Studentfeesstructure sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.feescategory = '"+studentfeesstructure.getFeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
+					Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.Feescategory.idfeescategory = '"+studentfeesstructure.getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
 					Studentfeesstructure feesStructure = (Studentfeesstructure) query.uniqueResult();
 					if(feesStructure != null){
 						
 						Query queryUpdate = session
-								.createQuery("update Studentfeesstructure set feescategory = '"+studentfeesstructure.getFeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and academicyear = '"+currentYear+"'");
+								.createQuery("update Studentfeesstructure set idfeescategory = '"+studentfeesstructure.getIdfeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and academicyear = '"+currentYear+"'");
 						
 						
 						queryUpdate.executeUpdate();
@@ -443,7 +442,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			//session.close();
 			return results;
 		}
 	}
@@ -465,4 +464,72 @@ public class studentDetailsDAO {
         return parents;
 	}
 
+	public java.util.List<Parents> getStudentsList(String query) {
+		java.util.List<Parents> parents = new ArrayList<Parents>();
+        try {
+            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(query);
+            parents = (java.util.List<Parents>) HQLquery.list();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        }
+        //session.close();
+        return parents;
+	}
+	
+	public List<Student> getListStudents(String query) {
+		java.util.List<Student> student = new ArrayList<Student>();
+        try {
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(query);
+            student = HQLquery.list();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        }finally{
+        	session.close();
+        }
+        return student;
+	}
+
+	public List<Studentfeesstructure> getStudentFeesStructureDetails(int sfsid) {
+		List<Studentfeesstructure> studentFeesStructure = new ArrayList<Studentfeesstructure>();
+
+		try {
+			transaction = session.beginTransaction();
+			studentFeesStructure = session.createQuery("from Studentfeesstructure sfs where sfs.sfsid = '"+sfsid+"'").list();
+			transaction.commit();
+
+		} catch (HibernateException hibernateException) {
+			transaction.rollback();
+			hibernateException.printStackTrace();
+
+		} finally {
+			//session.close();
+			return studentFeesStructure;
+		}
+	}
+
+	public boolean updateStudent(Student student) {
+		
+		try {
+			transaction = session.beginTransaction();
+			Query queryUpdate = session
+					.createQuery("update Student set reasonleaving = '"+student.getReasonleaving()+"'  where sid = '"+student.getSid()+"'");
+			queryUpdate.executeUpdate();
+			transaction.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return false;
+	}
+	
 }

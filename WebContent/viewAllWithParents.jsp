@@ -375,7 +375,7 @@
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>
-                        <td  class="headerTD">View All Students With Parents</td>
+                        <td  class="headerTD">View All Students</td>
                     </tr>
 
                     

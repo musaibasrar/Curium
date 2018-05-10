@@ -415,56 +415,72 @@ Author     : Musaib
 
             <div id="clock" class="headerTD"></div>
         </form>
-        <div class="headerTD">Welcome <c:out default="" value="${executive}"/> </div>
+        <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div>
 
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="Controller?process=StudentProcess&action=viewAll" >View All</a><br/>
-                <a target="mainFrame" href="addStudent.jsp" >Add New</a><br/>
-                <a target="mainFrame" href="marksentry.jsp" >Enter Marks</a><br/>
-                <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getSubjectsExams" >View Marks</a><br/>
-            	<a target="mainFrame" href="progressreport.jsp" >Generate Report</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=viewAll" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="addStudent.jsp" style="font-size: 12px;">Add New</a><br/>
             </div>
+            
+            <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
+            <div>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
+                <a target="mainFrame" href="attendancemark.jsp" style="font-size: 12px;">Mark Attendance</a><br/>
+                <a target="mainFrame" href="attendanceexport.jsp" style="font-size: 12px;">Export Attendance</a><br/>
+            </div>
+            
             <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllEmployee" >View Employees</a><br/>
-                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="Controller?process=DepartmentProcess&action=departmentView" >Add Department</a>
-                <a target="mainFrame" href="Controller?process=PositionProcess&action=positionView" >Add Position</a>
-
+                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllEmployee" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
+                <a target="mainFrame" href="Controller?process=DepartmentProcess&action=departmentView" style="font-size: 12px;">Add Department</a><br/>
+                <a target="mainFrame" href="Controller?process=PositionProcess&action=positionView" style="font-size: 12px;">Add Position</a><br/>
+				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
+				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
+				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-                <a target="mainFrame" href="Controller?process=FeesProcess&action=feesCollect" >Fees Collect</a><br/>
-				<a target="mainFrame" href="feesstructure.jsp" >Fees Structure</a><br/>                
-				<a target="mainFrame" href="Controller?process=StampFeesProcess&action=showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="Controller?process=FeesProcess&action=feesCollect" style="font-size: 12px;">Fees Collect</a><br/>
+				<a target="mainFrame" href="feesstructure.jsp" style="font-size: 12px;">Fees Structure</a><br/>                
+				<a target="mainFrame" href="Controller?process=StampFeesProcess&action=showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+				<a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Fees Details</a><br/>
+            </div> 
+            
+            <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
+            
+            <div>
+                <a target="mainFrame" href="marksentry.jsp" style="font-size: 12px;">Enter Marks</a><br/>
+                <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
+            	<a target="mainFrame" href="progressreport.jsp" style="font-size: 12px;">Generate Report</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="Controller?process=AdminProcess&action=viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="Controller?process=AdminProcess&action=viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
 
 
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="AdvanceSearch.jsp" >Search</a><br/>
+                <a target="mainFrame" href="AdvanceSearch.jsp" style="font-size: 12px;">Search</a><br/>
 
 
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="Promotion.jsp" >Promotions</a><br/>
+                <a target="mainFrame" href="Promotion.jsp" style="font-size: 12px;">Promotions</a><br/>
 
 
             </div>
 
-            <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
+            <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Archive</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=archiveViewAll" >Archive Students</a><br/>
 
@@ -473,42 +489,79 @@ Author     : Musaib
 
              <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
-                <a target="mainFrame" href="Controller?process=FeesProcess&action=feesView" >Fees Category</a>
-                <a target="mainFrame" href="Controller?process=YearProcess&action=updateYear" >Academic year</a><br/>
-                <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=readListOfExams" >Exam Details</a><br/>
-                <a target="mainFrame" href="Controller?process=SubjectDetailsProcess&action=readListOfSubjects" >Subject Details</a><br/>
-
+                <a target="mainFrame" href="Controller?process=FeesProcess&action=feesView" style="font-size: 12px;">Fees Category</a>
+                <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=examSchedule" style="font-size: 12px;">Exam Schedule</a>
+                <a target="mainFrame" href="Controller?process=YearProcess&action=updateYear" style="font-size: 12px;">Academic year</a><br/>
+                <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
+                <a target="mainFrame" href="Controller?process=SubjectDetailsProcess&action=readListOfSubjects" style="font-size: 12px;">Subject Details</a><br/>
+				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceConfiguration" style="font-size: 12px;">Attendance</a><br/>
+				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
+				<a target="mainFrame" href="Controller?process=PeriodProcess&action=periodConfiguration" style="font-size: 12px;">Periods Settings</a><br/>
             </div>
             
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-                <a target="mainFrame" href="Backup&Restore.jsp" >Backup</a><br/>
-                <!-- <a target="mainFrame" href="currentIssue.jsp" >Current Issue</a><br/> -->
-                <a target="mainFrame" href="changePassword.jsp" >Change Password</a><br/>
-                <a target="mainFrame" href="feesCollectionDetails.jsp" >Fees Details</a><br/>
-                <a target="mainFrame" href="generateids.jsp" >Generate IDs</a><br/>
+                <a target="mainFrame" href="Backup&Restore.jsp" style="font-size: 12px;">Backup</a><br/>
+                <a target="mainFrame" href="changePassword.jsp" style="font-size: 12px;">Change Password</a><br/>
+                <a target="mainFrame" href="generateids.jsp" style="font-size: 12px;">Generate IDs</a><br/>
+                <a target="mainFrame" href="uploadattendance.jsp" style="font-size: 12px;">upload attendance file</a><br/>
             </div>
             
             
             <h5 style="font-size: 12px"><a href="#" >Generate Cards</a></h5>
             <div >
-                <a target="mainFrame" href="generateids.jsp" >Generate IDs</a><br/>
+                <a target="mainFrame" href="generateids.jsp" style="font-size: 12px;">Generate IDs</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Documents</a></h5>
             <div >
-                <a target="mainFrame" href="studentsdetailsreports.jsp" >Student Details</a><br/>
-                <a target="mainFrame" href="studentsdetailsbonafide.jsp" >Study Certificate</a><br/>
+                <a target="mainFrame" href="studentsdetailsreports.jsp" style="font-size: 12px;">Student Details</a><br/>
+                <a target="mainFrame" href="studentsdetailsbonafide.jsp" style="font-size: 12px;">Bonafide Certificate</a><br/>
+                <a target="mainFrame" href="Controller?process=DocumentsProcess&action=transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
+                <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
+                <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Send Alerts</a></h5>
             <div >
-                <a target="mainFrame" href="sendsms.jsp" >SMS</a><br/>
-                <a target="mainFrame" href="sendemail.jsp" >Email</a><br/>
+                <a target="mainFrame" href="sendsms.jsp" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="sendemail.jsp" style="font-size: 12px;">Email</a><br/>
             </div>
             
+            <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
+            <div >
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=createAccount" style="font-size: 12px;">Ledger Account</a><br/>
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=viewVoucherReceipt" style="font-size: 12px;">Find/Edit Voucher</a><br/>
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=trialBalance" style="font-size: 12px;">Trial Balance</a><br/>
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
+            </div>
             
+             <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
+            <div >
+                <a target="mainFrame" href="Controller?process=HrProcess&action=leaveType" style="font-size: 12px;">Leave Type</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=payHead" style="font-size: 12px;">Pay Head</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=basicPaySettings" style="font-size: 12px;">Basic Pay Settings</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=pfSettings" style="font-size: 12px;">PF Settings</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=salaryIssue" style="font-size: 12px;">Advance Salary Issue</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=processSalary" style="font-size: 12px;">Process Salary</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
+            </div>
+            
+            <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
+            <div >
+                <a target="mainFrame" href="Controller?process=HrProcess&action=leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+            </div>
+            
+            </div>
                    
             
             <!-- END -->
@@ -516,11 +569,6 @@ Author     : Musaib
        
         <script type="text/javascript">
             $(document).ready(function() {
-
-                // For jNotify Inizialization
-                // Parameter:
-                // oneAtTime : true if you want show only one message for time
-                // appendType: 'prepend' if you want to add message on the top of stack, 'append' otherwise
 
                 $('#Notification')
                         .jnotifyInizialize({

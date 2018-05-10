@@ -22,25 +22,18 @@ public class UserAction {
 	       if (action.equalsIgnoreCase("authenticateUser")) {
 	            url = authenticateUser();
 	        }else if (action.equalsIgnoreCase("logout")) {
-	            System.out.println("logout");
 	            url = logOutUser();
 	        }else if (action.equalsIgnoreCase("changePassword")) {
-	            System.out.println("changePassword");
 	            url = changePassword();
 	        }else if (action.equalsIgnoreCase("dashBoard")) {
-				System.out.println("Action is dashBoard");
 				url = dashBoard();
 			}else if (action.equalsIgnoreCase("advanceSearch")) {
-				System.out.println("Action is Advance Search");
 				url = advanceSearch();
 			}else if (action.equalsIgnoreCase("advanceSearchByParents")) {
-				System.out.println("Action is advance Search By Parents");
 				url = advanceSearchByParents();
 			}else if (action.equalsIgnoreCase("backup")) {
-				System.out.println("Action is backup");
 				url = backup();
 			}else if (action.equalsIgnoreCase("searchByDate")) {
-				System.out.println("Action is Advance Search");
 				url = searchByDate();
 			} 
 	       return url;

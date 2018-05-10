@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
 import com.model.employee.dao.EmployeeDAO;
+import com.model.employee.dto.Teacher;
+import com.model.feescollection.dto.Receiptinfo;
 import com.model.feesdetails.dao.feesDetailsDAO;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.parents.dto.Parents;
@@ -38,48 +40,30 @@ public class UserService {
 
 	public boolean authenticateUser() {
         boolean result;
-        System.out.println("in user service");
        String userName = request.getParameter("loginName");
        String password = request.getParameter("password");
-       System.out.println("IN UserService class");
-       System.out.println("The user name is "+userName);
 
        login = new UserDAO().readUniqueObject(userName, password);
-       
-       
-       
-
 
        if (login != null) {
-            System.out.println("Login successfull");
-            String usertype = login.getUsertype1();
-            System.out.println("The the the usertype is "+usertype);
             Currentacademicyear currentAcademicYear = new YearDAO().showYear();
             String academicyear = "";
             if(currentAcademicYear!=null){
             academicyear = currentAcademicYear.getCurrentacademicyear();
             }
             httpSession.setAttribute("currentAcademicYear",academicyear);
-            
-           System.out.println("current academic year is " + academicyear);
-           request.setAttribute("userType", login.getUsertype1());
-           httpSession.setAttribute("typeOfUser",login.getUsertype1());
-           System.out.println("In userservice user present");
-           httpSession.setAttribute("executive",login.getUsertype1());
-           //new NationalityService(request, response).setSessionAtrributes();
-           
-           httpSession.setAttribute("userAuth", login.getUsertype1());
+            httpSession.setAttribute("username",login.getUsername());
+            request.setAttribute("userType", login.getUsertype());
+            httpSession.setAttribute("typeOfUser",login.getUsertype());
+            httpSession.setAttribute("userAuth", login.getUsertype());
 			//setting session to expiry in 30 mins
            	httpSession.setMaxInactiveInterval(30*60);
-			Cookie cookie = new Cookie("user",  login.getUsertype1());
+			Cookie cookie = new Cookie("user",  login.getUsertype());
 			cookie.setMaxAge(30*60);
 			response.addCookie(cookie);
-			
-           
            result = true;
        } else {
            result = false;
-           
        }
        return result;
    }
@@ -293,7 +277,7 @@ public class UserService {
 			queryMain = queryMain+querySub+" AND parents.Student.archive=0";
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
-			List<Parents> searchStudentList = new UserDAO().getListOfStudents(queryMain);
+			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 			request.setAttribute("searchStudentList", searchStudentList);
 		
 		
@@ -355,9 +339,8 @@ public class UserService {
         if (login != null && newPassword.equals(ConfirmNewPassword)) {
              
             login.setLid(1);
-            login.setPassword1(newPassword);  
+            login.setPassword(newPassword);  
             login = new UserDAO().update(login);
-            System.out.println("The login value after updating the password is "+login);
             result = true;
         } else {
             
@@ -392,7 +375,7 @@ public class UserService {
 			queryMain = queryMain+querySub;
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
-			List<Parents> searchParentsList = new UserDAO().getListOfStudents(queryMain);
+			List<Parents> searchParentsList = new studentDetailsDAO().getStudentsList(queryMain);
 			request.setAttribute("studentList", searchParentsList);
 		
 		
@@ -400,8 +383,7 @@ public class UserService {
 
 	public void searchByDate() {
 		 //feesdetails.sid='"+sid+"' AND feesdetails.academicyear='"+currentYear+"'"
-		String queryMain ="From Feesdetails as feesdetails where";
-		String queryMainSum = "select sum(grandtotal) From Feesdetails as feesdetails where ";
+		String queryMain ="From Receiptinfo as feesdetails where";
 		String toDate= DataUtil.emptyString(request.getParameter("todate"));
 		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
 		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
@@ -410,25 +392,45 @@ public class UserService {
 			String querySub = "";
 			
 			if(!oneDay.equalsIgnoreCase("")){
-				querySub = " feesdetails.dateoffees = '"+oneDay+"'" ;
+				querySub = " feesdetails.date = '"+oneDay+"'" ;
 				 
 			}
 			
 			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
-				querySub = " feesdetails.dateoffees between '"+fromDate+"' AND '"+toDate+"'";
+				querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
 				
 			}
 			
-			
 			queryMain = queryMain+querySub;
-			queryMainSum = queryMainSum+querySub;
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
-			List<Feesdetails> feesDetailsList = new UserDAO().getListOfFeesDetails(queryMain);
-			String sumOfFees = new feesDetailsDAO().feesDetailsSum(queryMainSum);
+			List<Receiptinfo> feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
+			long sumOfFees = 0l;
+			for (Receiptinfo receiptinfo : feesDetailsList) {
+				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
+			}
+			
 			httpSession.setAttribute("searchfeesdetailslist", feesDetailsList);
 			httpSession.setAttribute("sumofdetailsfees", sumOfFees);
 		
+		
+	}
+
+	public boolean addUser(Teacher employee) {
+		
+		Login user = new Login();
+		user.setUsername(employee.getTeacherexternalid());
+		final String ALPHA_NUMERIC_STRING = "RSTUABCDJKL6789MNOPQRSTUVWXYZ012345EFGHI";
+		int count =4;
+		StringBuilder builder = new StringBuilder();
+		while (count-- != 0) {
+		int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+		}
+		user.setPassword(builder.toString());
+		user.setUsertype("staff");
+		
+		return new UserDAO().addUser(user);
 		
 	}
 

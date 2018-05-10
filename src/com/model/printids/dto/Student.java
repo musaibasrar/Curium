@@ -49,6 +49,7 @@ public class Student implements java.io.Serializable {
 	private String stdlaststudied;
 	private Date createddate;
 	private Integer archive;
+	private String studentexternalid;
 	
 	//private Parents parents;
 	
@@ -64,7 +65,7 @@ public class Student implements java.io.Serializable {
 			Integer age, String gender, Date dateofbirth, String bloodgroup,
 			String nationality, String religion, String caste,
 			Date admissiondate, String admissionnumber, String mothertongue,
-			String remarks, String schoollastattended, String stdlaststudied, Date createddate, Integer archive) {
+			String remarks, String schoollastattended, String stdlaststudied, Date createddate, Integer archive, String studentexternalid) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
@@ -83,6 +84,7 @@ public class Student implements java.io.Serializable {
 		this.stdlaststudied = stdlaststudied;
 		this.createddate = createddate;
 		this.archive = archive;
+		this.studentexternalid = studentexternalid;
 	}
 
 	@Id
@@ -259,6 +261,21 @@ public class Student implements java.io.Serializable {
 
 	public void setArchive(Integer archive) {
 		this.archive = archive;
+	}
+
+	/**
+	 * @return the studentexternalid
+	 */
+	@Column(name = "studentexternalid", unique = true, nullable = false, length = 45)
+	public String getStudentexternalid() {
+		return studentexternalid;
+	}
+
+	/**
+	 * @param studentexternalid the studentexternalid to set
+	 */
+	public void setStudentexternalid(String studentexternalid) {
+		this.studentexternalid = studentexternalid;
 	}
 
 	

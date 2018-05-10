@@ -9,6 +9,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.model.employee.dto.Teacher;
+import com.model.feescollection.dto.Receiptinfo;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.parents.dto.Parents;
 import com.model.student.dto.Student;
@@ -45,7 +47,7 @@ public class UserDAO {
            List login1 = (List) query.list();
            System.out.println("THE  login result from the readunique object is "+login.getUsertype());
            System.out.println("THE  login result from the readunique object is "+((java.util.List) login1).get(1));*/
-           Query query = session.createQuery("FROM Login as login where login.username1= :loginName and login.password1= :password");
+           Query query = session.createQuery("FROM Login as login where login.username= :loginName and login.password= :password");
            query.setParameter("loginName", userName);
            query.setParameter("password", password);
            login = (Login) query.uniqueResult();
@@ -99,7 +101,6 @@ public class UserDAO {
 
 	            results = (java.util.List<Student>) session.createQuery("From Student s where s.classstudying LIKE '"+classStudying+" %' OR s.classstudying = '"+classStudying+"'  AND s.archive = 0").list();
 	            noOfRecords = results.size();
-	            System.out.println("Total Number of students:::::::::::::::::::::::::::::::::::::::::: " + noOfRecords);
 	            transaction.commit();
 
 
@@ -114,29 +115,10 @@ public class UserDAO {
 	        }
 	}
 
-	public java.util.List<Parents> getListOfStudents(String query) {
-		java.util.List<Parents> parents = new ArrayList<Parents>();
-        try {
-            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
-
-            transaction = session.beginTransaction();
-            Query HQLquery = session.createQuery(query);
-            parents = (java.util.List<Parents>) HQLquery.list();
-            transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
-            hibernateException.printStackTrace();
-        }
-        //session.close();
-        return parents;
-	}
-
 	public Login readPassword(String currentPassword) {
         Login login = null;
         
-        System.out.println("The password in DAO is: "+currentPassword);
        try{
-           System.out.println("in USERDAO");
            this.session = sessionFactory.openSession();
            transaction = session.beginTransaction();
            
@@ -187,4 +169,55 @@ public class UserDAO {
         return feesDetails;
 	}
 
+	@SuppressWarnings("unchecked")
+	public java.util.List<Receiptinfo> getReceiptDetailsList(String queryMain) {
+		java.util.List<Receiptinfo> feesDetails = new ArrayList<Receiptinfo>();
+        try {
+            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(queryMain);
+            feesDetails = (java.util.List<Receiptinfo>) HQLquery.list();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        }
+        //session.close();
+        return feesDetails;
+	}
+
+	public boolean addUser(Login user) {
+		
+		try {
+            transaction = session.beginTransaction();
+            session.save(user);
+            transaction.commit();
+           return true;
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        } finally {
+            session.close();
+        }
+		return false;
+		
+	}
+
+	public Login getUserDetails(String teacherexternalid) {
+		Login user = new Login();
+		try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM Login as login where login.username= :loginName");
+            query.setParameter("loginName", teacherexternalid);
+            user = (Login) query.uniqueResult();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        } finally {
+            session.close();
+        }
+		return user;
+	}
 }

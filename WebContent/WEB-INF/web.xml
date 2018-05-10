@@ -10,6 +10,14 @@
     <url-pattern>/Controller</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AjaxController</servlet-name>
+    <servlet-class>com.controller.AjaxController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjaxController</servlet-name>
+    <url-pattern>/AjaxController</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>StudentController</servlet-name>
     <servlet-class>com.controller.StudentController</servlet-class>
   </servlet>
@@ -22,4 +30,10 @@
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
   
+  
+  <listener>
+    <listener-class>
+       org.quartz.ee.servlet.QuartzInitializerListener
+   </listener-class>
+</listener>
 </web-app>

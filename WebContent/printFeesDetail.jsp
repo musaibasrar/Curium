@@ -216,7 +216,7 @@
 				
 
 				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:<c:out
-						value="${feesdetails.feesdetailsid}" />
+						value="${recieptinfo.receiptnumber}" />
 				</td>
 
 			</tr>
@@ -232,7 +232,7 @@
 				</td>
 
 			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date: <c:out
-						value="${feesdetails.dateoffees}" />
+						value="${recieptdate}" />
 				</td>
 			</tr>
 
@@ -261,7 +261,6 @@
 			<tr>
 
 				<td class="headerText" style="font-weight: bold">Particulars</td>
-				<td class="headerText" style="font-weight: bold">Month</td>
 				<td class="headerText" style="font-weight: bold">Fees Amount</td>
 				
 
@@ -275,13 +274,12 @@
 			</tr>
 
 
-			<c:forEach items="${feescollection}" var="feescollection">
+			<c:forEach items="${feescatmap}" var="feescatmap">
 				<tr>
 					<td class="dataText"><c:out
-							value="${feescollection.feescategory}" /></td>
-					<td class="dataText"><c:out value="${feescollection.formonth}" /></td>
+							value="${feescatmap.key}" /></td>
 					<td class="dataText">&#x20B9; <c:out
-							value="${feescollection.feesamount}" /></td>
+							value="${feescatmap.value}" /></td>
 					
 					<%-- <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
@@ -351,37 +349,15 @@
 			<td><hr width="100%"></td>
 			</tr>
 			
-			<tr>
-				<td>&nbsp;</td>
-				<td class="headerText">Total</td>
-				<td class="headerText">&nbsp;&nbsp;&nbsp;&nbsp;&#x20B9; <c:out
-						value="${feesdetails.amountpercat}" /></td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td class="headerText">Balance</td>
-				<td class="headerText">&nbsp;&nbsp;&#x20B9; <c:out
-						value="${feesdetails.balamount}" /></td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td class="headerText">Miscellaneous</td>
-				<td class="headerText">&nbsp;&nbsp;&#x20B9; <c:out
-						value="${feesdetails.miscamount}" /></td>
-			</tr>
 			
 			<tr>
-			
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			</tr>
-			
-			<tr>
-				<td>&nbsp;</td>
-				<td class="headerText">Grand Total</td>
-				<td class="headerText">&nbsp;&nbsp;&nbsp;&nbsp;&#x20B9; <c:out
-						value="${feesdetails.grandtotal}" /></td>
+				<!-- <td>&nbsp;</td> -->
+				<td class="headerText" style="font-weight: bold;" >
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				Total</td>
+				<td class="headerText">&#x20B9; <c:out
+						value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 
@@ -395,7 +371,7 @@
 
 <tr>
 
-<td >In Words: <c:out value="${grandTotal}" /></td>
+<td >In Words: <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
 <td></td>
 </tr>
 

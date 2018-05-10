@@ -22,17 +22,17 @@ public class Login implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer lid;
-	private String username1;
-	private String password1;
-	private String usertype1;
+	private String username;
+	private String password;
+	private String usertype;
 
 	public Login() {
 	}
 
-	public Login(String username1, String password1, String usertype1) {
-		this.username1 = username1;
-		this.password1 = password1;
-		this.usertype1 = usertype1;
+	public Login(String username, String password, String usertype) {
+		this.username = username;
+		this.password = password;
+		this.usertype = usertype;
 	}
 
 	@Id
@@ -46,30 +46,30 @@ public class Login implements java.io.Serializable {
 		this.lid = lid;
 	}
 
-	@Column(name = "username1", nullable = false, length = 45)
+	@Column(name = "username", nullable = false, length = 45)
 	public String getUsername() {
-		return this.username1;
+		return this.username;
 	}
 
-	public void setUsername(String username1) {
-		this.username1 = username1;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	@Column(name = "password1", nullable = false, length = 45)
-	public String getPassword1() {
-		return this.password1;
+	@Column(name = "password", nullable = false, length = 45)
+	public String getPassword() {
+		return this.password;
 	}
 
-	public void setPassword1(String password1) {
-		this.password1 = password1;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	@Column(name = "usertype1", length = 45)
-	public String getUsertype1() {
-		return this.usertype1;
+	@Column(name = "usertype", length = 45)
+	public String getUsertype() {
+		return this.usertype;
 	}
 
-	public void setUsertype1(String usertype1) {
-		this.usertype1 = usertype1;
+	public void setUsertype(String usertype) {
+		this.usertype = usertype;
 	}
 
 }

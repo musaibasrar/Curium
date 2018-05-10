@@ -5,6 +5,7 @@ package com.model.feescollection.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -12,8 +13,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.model.employee.dto.Teacher;
 import com.model.feescollection.dto.Feescollection;
+import com.model.feescollection.dto.Receiptinfo;
 import com.util.HibernateUtil;
 
 /**
@@ -31,24 +32,28 @@ public class feesCollectionDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public Feescollection create(Feescollection feescollection) {
-		 try {
-	            //this.session = sessionFactory.openCurrentSession();
-	            transaction = session.beginTransaction();
-	            session.save(feescollection);
-
-
+	public boolean create(List<Feescollection> feescollectionList) {
+		 
+		boolean result = false;
+		try {
+			 
+			 transaction = session.beginTransaction();
+			
+			for (Feescollection singleFeescollection :  feescollectionList) {
+				 session.save(singleFeescollection);
+			}
 	            transaction.commit();
-	            System.out.println("in add3");
-	        } catch (HibernateException hibernateException) {
+	            result = true;
+			 
+		} catch (HibernateException hibernateException) {
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
 	            session.close();
-	            return feescollection;
 	        }
-	}
+		return result;
 
+	}
 	@SuppressWarnings({ "unchecked", "finally" })
 	public List<Feescollection> readListOfObject(Integer feeid) {
 
@@ -66,6 +71,74 @@ public class feesCollectionDAO {
 			// session.close();
 			return results;
 		}
+	}
+
+	public List<Feescollection> getFeesForTheCurrentYear(long id, String currentAcademicYear) {
+		List<Feescollection> results = new ArrayList<Feescollection>();
+		try {
+
+			transaction = session.beginTransaction();
+			results = (List<Feescollection>) session.createQuery("From Feescollection where sid='"+id+"' and academicyear = '"+currentAcademicYear+"'").list();
+			
+			transaction.commit();
+		} catch (HibernateException hibernateException) {
+			transaction.rollback();
+			hibernateException.printStackTrace();
+		} finally {
+			// session.close();
+			return results;
+		}
+	}
+
+	public void createReceipt(Receiptinfo receiptInfo) {
+
+		try {
+			 transaction = session.beginTransaction();
+			 session.save(receiptInfo);
+			 transaction.commit();
+		} catch (HibernateException hibernateException) {
+	            transaction.rollback();
+	            hibernateException.printStackTrace();
+	        } finally {
+	            session.close();
+	        }
+	}
+
+	public Receiptinfo getReceiptInfoDetails(Integer receiptNumber, String currentAcademicYear) {
+		
+		Receiptinfo receiptDetails = new Receiptinfo();
+		
+		try {
+			 
+			 transaction = session.beginTransaction();
+			 Query query = session.createQuery("from Receiptinfo where receiptnumber = '"+receiptNumber+"' and academicyear = '"+currentAcademicYear+"'");
+			 receiptDetails = (Receiptinfo) query.uniqueResult();
+			 transaction.commit();
+		} catch (HibernateException hibernateException) {
+	            transaction.rollback();
+	            hibernateException.printStackTrace();
+	        } finally {
+	           // session.close();
+	        }
+		
+		return receiptDetails;
+		
+	}
+
+	public List<Receiptinfo> getReceiptDetailsPerStudent(long id,
+			String currentacademicyear) {
+		List<Receiptinfo> receiptInfo = new ArrayList<Receiptinfo>();
+		try{
+			transaction = session.beginTransaction();
+			receiptInfo = session.createQuery("from Receiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"'").list();
+			transaction.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return receiptInfo;
 	}
 
 }

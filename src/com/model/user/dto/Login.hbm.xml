@@ -6,16 +6,16 @@
     <class name="com.model.user.dto.Login" table="login">
         <id name="lid" type="java.lang.Integer">
             <column name="LID" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
-        <property name="username1" type="java.lang.String" access="field">
-            <column name="USERNAME1" />
+        <property name="username" type="java.lang.String" access="field">
+            <column name="USERNAME" />
         </property>
-        <property name="password1" type="java.lang.String">
-            <column name="PASSWORD1" />
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
         </property>
-        <property name="usertype1" type="java.lang.String">
-            <column name="USERTYPE1" />
+        <property name="usertype" type="java.lang.String">
+            <column name="USERTYPE" />
         </property>
     </class>
 </hibernate-mapping>

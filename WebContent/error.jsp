@@ -77,18 +77,10 @@
       <tr>
           <td height="250" align="center" style="font-color:red" valign="middle"><p class="style1"> Operation Failed, Please Try Again</p>
           <td width="26%"  class="alignRightYear">
-                             error from Current academic year is: ${errorMessage}
-                             error from student service student object: ${studentfromservice}
-                             error from student service parents object: ${parentsfromservice}
-                             error from student service id: ${idofstudentfromservice}
-                             error from student service currentyear: ${currentyearfromservice}
-                             error from student service feesdetails: ${feesdetailsfromservice}
-                             error from student service result: ${resultfromservice}
+                            
                              
                             </td>
-                            <td>
-                            in action of student: ${studentaction}
-                            </td>
+                            
         <p class="style1">
           
             

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job-scheduling-data
+	xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData
+        http://www.quartz-scheduler.org/xml/job_scheduling_data_1_8.xsd"
+	version="1.8">
+
+	<schedule>
+		<job>
+			<name>RunStudentAttendance</name>
+			<group>RunStudentAttendanceGroup</group>
+			<description>Running daily to mark the attendance of students</description>
+			<job-class>com.controller.StudentsAttendanceJob</job-class>
+		</job>
+
+		<trigger>
+			<cron>
+				<name>RunStudentTrigger</name>
+				<job-name>RunStudentAttendance</job-name>
+				<job-group>RunStudentAttendanceGroup</job-group>
+				<!-- It will run every 5 seconds (0/5 * * * * ?)-->
+				<!-- <cron-expression>0/5 * * * * ?</cron-expression> -->
+				<!-- Every day at 23:00 -->
+				<cron-expression>0 0 20 * * ?</cron-expression>
+				
+			</cron>
+		</trigger>
+		
+		<job>
+			<name>RunStaffAttendance</name>
+			<group>RunStaffAttendanceGroup</group>
+			<description>Running daily to mark the attendance of staff</description>
+			<job-class>com.controller.StaffsAttendanceJob</job-class>
+		</job>
+
+		<trigger>
+			<cron>
+				<name>RunStaffTrigger</name>
+				<job-name>RunStaffAttendance</job-name>
+				<job-group>RunStaffAttendanceGroup</job-group>
+				<!-- It will run every 5 seconds (0/5 * * * * ?)-->
+				<!-- <cron-expression>0/5 * * * * ?</cron-expression> -->
+				<!-- Every day at 23:00 -->
+				<cron-expression>0 0 23 * * ?</cron-expression>
+				
+			</cron>
+		</trigger>
+	</schedule>
+
+	
+</job-scheduling-data>

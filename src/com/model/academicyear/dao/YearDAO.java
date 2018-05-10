@@ -37,7 +37,6 @@ public class YearDAO {
 			// this.session = sessionFactory.openCurrentSession();
 			transaction = session.beginTransaction();
 			session.save(currentacademicyear);
-			error="after save";
 			transaction.commit();
 			
 		} catch (HibernateException hibernateException) {

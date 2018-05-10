@@ -1,5 +1,5 @@
 <%-- 
-    Document   : member_details
+    Document   : Student Details Fees Structure
     Created on : Jan 4, 2013, 4:39:24 PM
     Author     : Musaib
 --%>
@@ -320,8 +320,55 @@
                 $( "#cancel" )
                 .button()
                 ;
+                
+                $("#delete").button({
+        	        icons: {
+        	            primary: "ui-icon-trash"
+        	        }
+        	    }).click(function() {
+        	    	if (confirm('Are you sure you want to delete the fees category?')) {
+        	    		deleteRecord();
+        				}
+        	    	 return false;
+        		});
+                
             });
             
+            $(function(){
+                
+                $('#chckHead').click(function () {
+                    var length = $('.chcktb2:checked').length;
+                    var trLength=$('.trClass').length;
+                    if(length>0){
+                        $('.chcktb2:checked').attr('checked', false);
+                        this.checked=false;
+
+                    }
+                    else{
+                        if (this.checked == false) {
+                            $('.chcktb2:checked').attr('checked', false);
+                        }
+                        else {
+                            $('.chcktb2:not(:checked)').attr('checked', true);
+                        }
+
+                    }
+
+                });
+                $('.chcktb2').click(function () {
+                    var length = $('.chcktb2:checked').length;
+                    var trLength=$('.trClass').length;
+                    alert(tdLength);
+                    if (length > trLength) {
+
+                        $('.chcktb2:not(:checked)').attr('disabled', true);
+                    }
+                    else {
+                        $('.chcktb2:not(:checked)').attr('disabled', false);
+                    }
+                });
+
+            });
                        
             
             function searchFeesStructure() {
@@ -330,6 +377,14 @@
                 var id = document.getElementById("id").value;
                 
                 form1.action = "Controller?process=StudentProcess&action=feesStructurePerYear&id="+id;
+                form1.submit();
+
+            }
+            
+            function deleteRecord() {
+
+                var form1 = document.getElementById("form1");
+                form1.action = "Controller?process=FeesProcess&action=deleteFeesCategory";
                 form1.submit();
 
             }
@@ -457,7 +512,7 @@
                             
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
-                            <th title="click to sort" class="headerText"></th>
+                            <th title="click to sort" class="headerText"><input type="checkbox" id="chckHead" /></th>
                             <th title="click to sort" class="headerText">Fees Category</th>
                             <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
                             <th title="click to sort" class="headerText"></th>
@@ -476,21 +531,56 @@
                                 
                               	<td class="dataText"></td>
                                	<td class="dataText"></td>
-                                <td class="dataText"></td>
-                                <td class="dataText"><c:out value="${feesstructure.feescategory}"/></td>
-                                <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
+                                <td class="dataText"><input type="checkbox"  class = "chcktb2"
+								id="<c:out value="${feesstructure.sfsid}"/>" 
+								name="sfsid" 
+								value="<c:out value="${feesstructure.sfsid}"/>_<c:out value="${feesstructure.feescategory.idfeescategory}"/>" /></td>
+                                <td class="dataText"><c:out value="${feesstructure.feescategory.feescategoryname}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
                                
                                 
                                  
 
                             </tr>
                         </c:forEach>
-                        
-                        
                     </tbody>
                    
                 </table>
 				
+				<table width="100%" >
+                                    <tr>
+
+                                        <td>
+                                            <br/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button id="delete" >
+                                            Delete</button>
+
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                        </td>
+
+                                    </tr>
+                                    
+                                         <tr>
+
+                                        <td>
+                                            <br/>
+                                        </td>
+                                    </tr>
+                                    
+                                         <tr>
+
+                                        <td>
+                                            <br/>
+                                        </td>
+                                    </tr>
+                                </table>
                     
 
                 </div>

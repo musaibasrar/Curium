@@ -1,0 +1,7 @@
+first add the data base through hibernate plugin
+make a reverse engineering file in the j2ee perspective
+make the hbm and dto file from the hibenrate perspective: click on the icon > and select hibernate code generation configuration.
+add the class path in the hbm file
+add the mapping to the hibernate config file
+**Very Important**
+remove the catalog from the generated HBM file.

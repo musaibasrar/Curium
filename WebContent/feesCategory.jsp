@@ -1,7 +1,7 @@
 <%--
-    Document   : index
-    Created on : Dec 23, 2011, 5:52:28 PM
-    Author     : Mayur
+    Document   : fees category
+    Created on : Dec 23, 2016, 5:52:28 PM
+    Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -271,11 +271,7 @@
 	height: 22px;
 }
 </style>
-<style>
-#button {
-	
-}
-</style>
+
 <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
@@ -326,15 +322,6 @@
 	});
 </script>
 <script type="text/javascript">
-	function select(id, name) {
-		var clipEffect = 'blind';
-		var options = {};
-
-		$("#effect").show();
-		$("#medicineId").val(id)
-		$("#medicineName").val(name);
-
-	}
 	function getCurrentDate() {
 		var today = new Date();
 		var day = today.getDate();
@@ -465,7 +452,7 @@
 </head>
 <body>
 	<form id="form1"
-		action="Controller?process=StockProcess&action=addStock" method="POST">
+		method="POST">
 		<div style="height: 28px">
 			<button id="add">Add Fees Category</button>
 			<br />
@@ -584,13 +571,13 @@
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Fees Category<img
 							alt=" " style="position: relative; top: 4px;"
-							src="images/sort_both.png" /></th>
+							src="css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Class<img
 							alt=" " style="position: relative; top: 4px;"
-							src="images/sort_both.png" /></th>
+							src="css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Amount<img
 							alt=" " style="position: relative; top: 4px;"
-							src="images/sort_both.png" />&nbsp;&nbsp;
+							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
 
 					</tr>
@@ -606,7 +593,7 @@
 								id="<c:out value="${fees.idfeescategory}"/>" class="chcktbl"
 								name="idfeescategory"
 								value="<c:out value="${fees.idfeescategory}"/>" /></td>
-							<td class="dataText"><c:out value="${fees.feescategory}" /></td>
+							<td class="dataText"><c:out value="${fees.feescategoryname}" /></td>
 							<td class="dataText"><c:out value="${fees.particularname}" /></td>
 							<td class="dataText"><c:out value="${fees.amount}" /></td>
 
@@ -618,7 +605,7 @@
 
 				</tbody>
 				<tfoot><tr>
-                            <td  class="footerTD" colspan="1" ><button id="delete">Delete</button> 
+                            <td  class="footerTD" colspan="2" ><button id="delete">Delete</button> 
                     
                         </tr></tfoot>
 			</table>

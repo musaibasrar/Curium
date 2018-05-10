@@ -1,5 +1,8 @@
 package com.model.feescategory.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,10 @@ public class FeesService {
 	    private HttpServletResponse response;
 	    private HttpSession httpSession;
 	    
+	    /**
+	     * Size of a byte buffer to read/write file
+	     */
+	    private static final int BUFFER_SIZE = 4096;
 	
 	public FeesService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -52,7 +59,7 @@ public class FeesService {
 		
 		Feescategory feescategory = new Feescategory();
 		
-		feescategory.setFeescategory(DataUtil.emptyString(request.getParameter("feescategory")));
+		feescategory.setFeescategoryname(DataUtil.emptyString(request.getParameter("feescategory")));
 		if(!DataUtil.emptyString(request.getParameter("fromclass")).equalsIgnoreCase("ALL") && !DataUtil.emptyString(request.getParameter("toclass")).equalsIgnoreCase("ALL")){
 			feescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass"))+"-"+DataUtil.emptyString(request.getParameter("toclass")));
 		}else{
@@ -61,7 +68,7 @@ public class FeesService {
 		
 		feescategory.setAmount(DataUtil.parseInt(request.getParameter("amount")));
 		
-		if(!feescategory.getFeescategory().equalsIgnoreCase("") && !feescategory.getParticularname().equalsIgnoreCase("") && feescategory.getAmount() != 0 ){
+		if(!feescategory.getFeescategoryname().equalsIgnoreCase("") && !feescategory.getParticularname().equalsIgnoreCase("") && feescategory.getAmount() != 0 ){
 			feescategory =  new feesCategoryDAO().create(feescategory);
 		}
 		
@@ -95,6 +102,72 @@ public class FeesService {
 			result = false;
 		}
 		return result;
+	}
+
+
+	public boolean downlaodFile() {
+		boolean result = false;
+		try {
+
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"feesdetails.xlsx");
+	        FileInputStream inStream = new FileInputStream(downloadFile);
+
+	        // get MIME type of the file
+			String mimeType = "application/vnd.ms-excel";
+
+			// set content attributes for the response
+			response.setContentType(mimeType);
+			// response.setContentLength((int) bis.length());
+
+			// set headers for the response
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"",
+					"feesdetails.xlsx");
+			response.setHeader(headerKey, headerValue);
+
+			// get output stream of the response
+			OutputStream outStream = response.getOutputStream();
+
+			byte[] buffer = new byte[BUFFER_SIZE];
+			int bytesRead = -1;
+
+			// write bytes read from the input stream into the output stream
+			while ((bytesRead = inStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+
+			inStream.close();
+			outStream.close();
+			result = true;
+		} catch (Exception e) {
+			System.out.println("" + e);
+		}
+		return result;
+	}
+
+
+	public String deleteFeesCategory() {
+		
+		 String[] idfeescategory = request.getParameterValues("sfsid");
+		 List sfsId = new ArrayList();
+		 List feesCatId = new ArrayList();
+		 
+		 String studentId = request.getParameter("id");
+		 
+		 if(idfeescategory!=null){
+			 
+			 for (String string : idfeescategory) {
+				 String[] test = string.split("_");
+				 sfsId.add(Integer.valueOf(test[0]));
+				 feesCatId.add(Integer.valueOf(test[1]));
+			}
+	        new feesCategoryDAO().deleteFeesCategory(sfsId,feesCatId,studentId);
+	        
+	        return "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId;
+		 }
+		 
+		return "error.jsp";
+		
 	}
 
 

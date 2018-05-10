@@ -140,46 +140,5 @@ public class EmailService {
 		
 		return result;
 	}
-
-
-	public boolean sendNumbersSMS() {
-		
-		boolean result=false;
-		String numbers = DataUtil.emptyString(request.getParameter("numbers"));
-		String resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodynumbers")));
-		if(resultSMS!=null && resultSMS.contains("success")){
-			result = true;
-		}
-		return result;
-		
-	}
-
-	public boolean sendStaffSMS() {
-		
-		boolean result=false;
-		String resultSMS = null;		
-		List<Teacher> teacherContacts = new EmployeeDAO().readListOfObjects();
-
-		String numbers = null;
-			StringBuilder sbN = new StringBuilder();
-
-			if(!teacherContacts.isEmpty()){
-				for (Teacher teacher : teacherContacts) {
-					sbN.append(teacher.getContactnumber());
-					sbN.append(",");
-				}
-				numbers=sbN.toString();
-				numbers = numbers.substring(0, numbers.length()-1);
-				System.out.println("Numbers are *** "+numbers);
-				resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodystaff")));
-			}
-		
-		if(resultSMS!=null && resultSMS.contains("success")){
-			result = true;
-		}
-		return result;
-	}
-	
-	
 	
 }

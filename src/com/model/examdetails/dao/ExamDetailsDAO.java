@@ -10,6 +10,8 @@ import org.hibernate.Transaction;
 
 import com.model.adminexpenses.dto.Adminexpenses;
 import com.model.examdetails.dto.Exams;
+import com.model.examdetails.dto.Examschedule;
+import com.model.student.dto.Student;
 import com.util.HibernateUtil;
 
 public class ExamDetailsDAO {
@@ -52,7 +54,6 @@ public class ExamDetailsDAO {
 
 			results = (List<Exams>) session.createQuery("From Exams")
 					.list();
-			System.out.println("Exams " + results.size());
 			transaction.commit();
 
 		} catch (HibernateException hibernateException) {
@@ -80,7 +81,81 @@ public class ExamDetailsDAO {
 		}
 
 	}
-		
-	
 
+
+
+	public boolean addExamSchedule(List<Examschedule> examScheduleList) {
+
+			try {
+				transaction = session.beginTransaction();
+				for (Examschedule examschedule : examScheduleList) {
+					session.save(examschedule);
+				}
+				transaction.commit();
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally{
+				session.close();
+			}
+			return false;
+	}
+
+
+
+	public List<Examschedule> readListOfExamSchedule() {
+		
+		List<Examschedule> results = new ArrayList<Examschedule>();
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			transaction = session.beginTransaction();
+
+			results = (List<Examschedule>) session.createQuery("From Examschedule")
+					.list();
+			transaction.commit();
+
+		} catch (HibernateException hibernateException) {
+			transaction.rollback();
+			hibernateException.printStackTrace();
+
+		} finally {
+			// session.close();
+			return results;
+		}
+	}
+
+
+
+	public void deleteExamSchedule(List ids) {
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("delete from Examschedule where idexamschedule IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (HibernateException hibernateException) {
+			hibernateException.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+	}
+
+	public List<Examschedule> getExamScheduleDetails(String academicYear,
+			String classH, String exam) {
+		List<Examschedule> listExamSchedule = new ArrayList<Examschedule>();
+		try {
+			transaction = session.beginTransaction();
+			listExamSchedule = session.createQuery("from Examschedule where classes like '"+classH+"-%' and academicyear = '"+academicYear+"' and examname = '"+exam+"' ORDER BY date ASC").list();
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return listExamSchedule;
+	}
 }

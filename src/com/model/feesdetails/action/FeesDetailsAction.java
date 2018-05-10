@@ -22,19 +22,24 @@ public class FeesDetailsAction {
 
 	public String execute(String action, String page) {
 		 if (action.equalsIgnoreCase("feesView")) {
-			System.out.println("Action is fees view");
 			url = viewFees();
 		}else if (action.equalsIgnoreCase("addFeesParticular")) {
-			System.out.println("Action is addFeesParticular");
 			url = addFeesParticular();
 		}else if (action.equalsIgnoreCase("feesCollect")) {
-			System.out.println("Action is feesCollect");
 			url = feesCollect();
 		}else if (action.equalsIgnoreCase("exportDataForFees")) {
-			System.out.println("Action is export fees data");
 			url = exportFeesData();
+		}else if (action.equalsIgnoreCase("download")) {
+			url = downloadFile();
 		}
 		return url;
+	}
+
+	private String downloadFile() {
+		if(new FeesService(request, response).downlaodFile()){
+			return "feesexportsuccess.jsp";
+		}
+        return "exportfailure.jsp";
 	}
 
 	private String feesCollect() {
@@ -49,7 +54,6 @@ public class FeesDetailsAction {
 		
 		
 		new FeesService(request, response).addFeesParticular();
-        System.out.println("IN action's addFeesParticular");
         return "Controller?process=FeesProcess&action=feesView";
 		
 	}

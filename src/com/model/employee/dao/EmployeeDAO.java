@@ -32,21 +32,20 @@ public class EmployeeDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public Teacher create(Teacher employee) {
+	public boolean create(Teacher employee) {
+		boolean result = false;
 		try {
-			// this.session = sessionFactory.openCurrentSession();
 			transaction = session.beginTransaction();
 			session.save(employee);
-
 			transaction.commit();
-
+			result = true;
 		} catch (HibernateException hibernateException) {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			session.close();
-			return employee;
 		}
+		return result;
 	}
 
 	@SuppressWarnings({ "unchecked", "finally" })
@@ -131,9 +130,82 @@ public class EmployeeDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			// session.close();
+			 session.close();
 			return noOfRecords;
 		}
+	}
+
+	public List<Teacher> readListOfEmployeesByName(String staffName) {
+		List<Teacher> employee = new ArrayList<Teacher>();
+		try {
+			transaction = session.beginTransaction();
+			employee = session.createQuery("From Teacher where teachername='"+staffName+"'").list();
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return employee;
+	}
+	
+	public List<Teacher> readListOfEmployeesByDepartment(String staffDepartment) {
+		List<Teacher> employee = new ArrayList<Teacher>();
+		try {
+			transaction = session.beginTransaction();
+			employee = session.createQuery("From Teacher where department = '"+staffDepartment+"'").list();
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return employee;
+	}
+
+	public List<String> getEmployeeExternalId() {
+		List<String> employeeExtId = new ArrayList<String>();
+		try {
+			transaction = session.beginTransaction();
+			employeeExtId = session.createQuery("select teacherexternalid from Teacher").list();
+			transaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return employeeExtId;
+	}
+
+	public void delete(Teacher employee) {
+		
+		try {
+            transaction = session.beginTransaction();
+            session.delete(employee);
+            transaction.commit();
+            
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        } finally {
+            session.close();
+        }
+		
+	}
+
+	public Teacher getEmployeeDetails(String userName) {
+		
+		Teacher employee = new Teacher();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Teacher as employee where employee.teacherexternalid='"+userName+"'");
+			employee = (Teacher) query.uniqueResult();
+			transaction.commit();
+		} catch (HibernateException hibernateException) {
+			transaction.rollback();
+			hibernateException.printStackTrace();
+		} 
+		return employee;
 	}
 
 }

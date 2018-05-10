@@ -408,17 +408,7 @@
 			return false;
 
 		});
-		$("#deleteStamp").button({
-			icons : {
-				primary : "ui-icon-trash"
-			}
-		}).click(function() {
-			if (confirm('Are you sure you want to delete the stamp fees?As it can not be revert back.')) {
-			deleteFeesStamp();
-			}
-			return false;
-
-		});
+	
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
 			var trLength = $('.trClass').length;
@@ -452,124 +442,8 @@
 
 	});
 	
-	function deleteFeesStamp(){
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StampFeesProcess&action=delete";
-		form1.method = "POST";
-		form1.submit();
-	}
+	
 </script>
-
-
-<script type="text/javascript">
-        
-        function calculateGrandTotal() {
-            var sum = 0.0;
-            var column2 = $('.feesFullAmount')
-            jQuery.each(column2,function(){
-                sum += parseFloat($(this).val());
-            });
-            
-            $('#feesTotalAmount').val(sum.toPrecision(6));
-
-        }
-        $(document).ready(function() {
-            
-            
-            $("#dataTable").keyup(function(){
-                
-                var sum = 0.0;
-                var totalSum=0.0;
-                var column2 = $('.feesFullAmount')
-                jQuery.each(column2,function(){
-                    sum += parseFloat($(this).val());
-                });
-                
-                $('#feesTotalAmount').val(sum.toPrecision(6));
-                
-            });
-            $("#dataTable").click(function(){
-                
-                var sum = 0.0;
-                var totalSum=0.0;
-                var column2 = $('.feesFullAmount')
-                jQuery.each(column2,function(){
-                    sum += parseFloat($(this).val());
-                });
-                
-                $('#feesTotalAmount').val(sum.toPrecision(6));
-               
-            });
-
-
-        });
-        
-        var feescat=[
-                     <c:forEach varStatus="status" items="${feescategory}" var="fees">{
-                             value:'<c:out default="0" value="${fees.feescategory}" />',
-                             particularname:'<c:out default="0" value="${fees.particularname}" />',
-                             price:'<c:out default="0" value="${fees.amount}" />',
-                             id:'<c:out default="0" value="${fees.idfeescategory}" />'
-                             }<c:if test="${!status.last}">,</c:if>
-                     </c:forEach>
-                     ];
-        
-        $(function() {
-            
-            var addFeesCatButtonID="#addFeesCat";
-            var removeFeesCatButtonID="#removeFeesCat";
-            $( addFeesCatButtonID )
-            .button({
-                icons: {
-                    primary: "ui-icon-plus"
-                }
-            })
-            .click(function() {
-                addRow();
-                return false;
-            });
-            $(removeFeesCatButtonID)
-            .button({
-                icons: {
-                    primary: "ui-icon-minus"
-                }
-            })
-            .click(function() {
-                deleteRow('dataTable');
-                return false;
-            });            
-
-        });
-        
-        function SelectAll(id)
-        {
-        	
-            document.getElementById("feesCount_"+id).focus();
-            document.getElementById("feesCount_"+id).select();
-        }
-
-        function calculate(value2) {
-
-        	var feesCount=document.getElementById("feesCount_"+value2).value;
-        	
-        	if(feesCount === ''){
-        		
-        		document.getElementById("feesCount_"+value2).value = 1;
-        	}
-        	
-            //var val1=value1.value;
-            var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
-            var feesCount=document.getElementById("feesCount_"+value2).value;
-            var final1=document.getElementById("hiddenfees_full_amount_"+value2);
-            
-                final1.value=(feesCat*feesCount).toPrecision(6);
-           
-        }
-       
-   
-        </script>
-
-
 
 </head>
 <body>

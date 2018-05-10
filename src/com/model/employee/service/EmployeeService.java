@@ -19,6 +19,9 @@ import com.model.std.dao.standardDetailsDAO;
 import com.model.std.dto.Classsec;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
+import com.model.user.dao.UserDAO;
+import com.model.user.dto.Login;
+import com.model.user.service.UserService;
 import com.util.DataUtil;
 import com.util.DateUtil;
 
@@ -51,10 +54,24 @@ public class EmployeeService {
 		employee.setSalary(DataUtil.emptyString(request.getParameter("salary")));
 		employee.setRemarks(DataUtil.emptyString(request.getParameter("remarks")));
 		
-		employee = new EmployeeDAO().create(employee);
-        
-
-            return true;
+		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		int count =4;
+		StringBuilder builder = new StringBuilder();
+		while (count-- != 0) {
+		int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+		}
+		employee.setTeacherexternalid(builder.toString());
+		
+		if(new EmployeeDAO().create(employee)){
+			if(new UserService(request, response).addUser(employee)){
+				return true;
+			}else{
+				new EmployeeDAO().delete(employee);
+			}
+		}
+		
+		return false;
 	}
 
 	public boolean ViewAllEmployee() {
@@ -63,11 +80,10 @@ public class EmployeeService {
     try {
     	List<Teacher> list = new EmployeeDAO().readListOfObjects();
         httpSession.setAttribute("employeeList", list);
-
+        httpSession.setAttribute("employeeListProcessSalary", list);
         result = true;
     } catch (Exception e) {
         e.printStackTrace();
-        result = false;
     }
     return result;
 }
@@ -77,14 +93,13 @@ public class EmployeeService {
 	        try {
 	            long id = Long.parseLong(request.getParameter("id"));
 	            Teacher employee = new EmployeeDAO().readUniqueObject(id);
+	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
 	           
-	            if (employee == null) {
-	                result = false;
-	            } else {
-	                httpSession.setAttribute("employee", employee);
-	                
-	                result = true;
-	            }
+	            if (employee.getTid() != null) {
+	            	httpSession.setAttribute("employee", employee);
+	                request.setAttribute("stafflogin", employeeLogin);
+	                return true;
+	            } 
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	            result = false;
@@ -120,6 +135,7 @@ public class EmployeeService {
 		employee.setDesignation(DataUtil.emptyString(request.getParameter("designation")));
 		employee.setSalary(DataUtil.emptyString(request.getParameter("salary")));
 		employee.setRemarks(DataUtil.emptyString(request.getParameter("remarks")));
+		employee.setTeacherexternalid(DataUtil.emptyString(request.getParameter("teacherexternalid")));
 				
 		
 		employee = new EmployeeDAO().update(employee);
@@ -148,6 +164,20 @@ public class EmployeeService {
         List<Position> listPosition = new positionDAO().readListOfObjects();
         httpSession.setAttribute("listPosition", listPosition);
 		
+	}
+
+	public void searchEmployee() {
+		String staffName = request.getParameter("staffName");
+		String staffDepartment = request.getParameter("staffDepartment");
+		List<Teacher> employeeList = new ArrayList<Teacher>();
+		if(staffName!=""){
+			employeeList = new EmployeeDAO().readListOfEmployeesByName(staffName);
+		}else if(staffDepartment!=""){
+			employeeList = new EmployeeDAO().readListOfEmployeesByDepartment(staffDepartment);
+		}
+		request.setAttribute("employeeList", employeeList);
+		
+		new EmployeeService(request, response).ViewAllEmployee();
 	}
 
 }

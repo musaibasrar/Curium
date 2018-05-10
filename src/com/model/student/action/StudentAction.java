@@ -85,9 +85,10 @@ public class StudentAction {
 	}
 
 	private String generateBonafide() {
-		if (new StudentService(request, response).generateBonafide()) {
-            //return "patientDetails_1.jsp";
-            return "bonafidesuccess.jsp";
+		
+		String result = new StudentService(request, response).generateBonafide();
+		if (result!=null) {
+            return result;
         } else {
             return "bonafidefailure.jsp";
         }
@@ -106,18 +107,14 @@ public class StudentAction {
 	private String feesStructurePerYear() {
 		
 		
-		if (new StudentService(request, response).viewfeesStructurePerYear()) {
-            //return "patientDetails_1.jsp";
-            return "student_details_feesstructure.jsp";
-        } else{
-        	return "student_details_feesstructure.jsp";
-        }
+		new StudentService(request, response).viewfeesStructurePerYear();
+        return "student_details_feesstructure.jsp";
+        
 	}
 
 	private String ViewFeesStructure() {
 		
 		if (new StudentService(request, response).viewDetailsOfStudent()) {
-            //return "patientDetails_1.jsp";
             return "student_details_feesstructure.jsp";
         } else {
             return "viewAll.jsp";
@@ -126,16 +123,12 @@ public class StudentAction {
 
 	private String viewAllStudentsWithParents() {
 		new StudentService(request, response).viewAllStudentsParents();
-        System.out.println("IN action's view all Parents");
         return "viewAllWithParents.jsp";
 	}
 
 	private String viewAllStudents() {
-		/*new StudentService(request, response).viewAllStudents();
-        System.out.println("IN action's view all");
-        return "viewAll.jsp";*/
+		
 		new StudentService(request, response).viewAllStudentsParents();
-        System.out.println("IN action's view all Parents");
         return "viewAllWithParents.jsp";
 	}
 

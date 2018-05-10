@@ -1,5 +1,5 @@
 <%--
-    Document   : index
+    Document   : Fees Collecion Details
     Created on : Dec 23, 2011, 5:52:28 PM
     Author     : Musaib
 --%>
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
+<title>Fees Collecion Details</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -500,7 +500,8 @@
 	$(function() {
 		$("#datepicker").datepicker({
 			changeYear : true,
-			changeMonth : true
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd'
 		});
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
@@ -509,7 +510,8 @@
 	$(function() {
 		$("#datepickerfrom").datepicker({
 			changeYear : true,
-			changeMonth : true
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd'
 		});
 		$("#anim").change(function() {
 			$("#datepickerfrom").datepicker("option", "showAnim", $(this).val());
@@ -518,7 +520,8 @@
 	$(function() {
 		$("#datepickerto").datepicker({
 			changeYear : true,
-			changeMonth : true
+			changeMonth : true,
+			dateFormat: 'yy-mm-dd'
 		});
 		$("#anim").change(function() {
 			$("#datepickerto").datepicker("option", "showAnim", $(this).val());
@@ -612,9 +615,6 @@
                             <th title="click to sort" class="headerText">Date of fees</th>
                             <th title="click to sort" class="headerText">Reference Number</th>
                             <th title="click to sort" class="headerText">Total Amount</th>
-                            <th title="click to sort" class="headerText">miscellaneous&nbsp;</th>
-                            <th title="click to sort" class="headerText">Balance Amount</th>
-                            <th title="click to sort" class="headerText">Grand Total</th>
                             <th title="click to sort" class="headerText">View Details</th>
                              
 
@@ -627,16 +627,13 @@
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox"
-								id="<c:out value="${feesdetails.feesdetailsid}"/>" class="chcktbl"
+								id="<c:out value="${feesdetails.receiptnumber}"/>" class="chcktbl"
 								name="feesIDs"
-								value="<c:out value="${feesdetails.feesdetailsid}"/>" /></td>
-                                <td  class="dataText"><c:out value="${feesdetails.dateoffees}"/></a></td>
-                                <td  class="dataText"><c:out value="${feesdetails.feesdetailsid}"/></a></td>
-                                <td class="dataText"><c:out value="${feesdetails.amountpercat}"/></td>
-                                <td class="dataText"><c:out value="${feesdetails.miscamount}"/></td>
-                                <td class="dataText"><c:out  value="${feesdetails.balamount}"/></td>
-                                <td class="dataText"><c:out  value="${feesdetails.grandtotal}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${feesdetails.feesdetailsid}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
+								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
+                                <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
+                                <td  class="dataText"><c:out value="${feesdetails.receiptnumber}"/></a></td>
+                                <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
                                  
 
                             </tr>
@@ -647,11 +644,11 @@
 					<tr>
 													
 						<td class="footerTD" colspan="2"> &nbsp;
-						<label style="font-weight: bold;font-size: 14px;font-family: cursive;color: white;">File Name</label>
+						<!-- <label style="font-weight: bold;font-size: 14px;font-family: cursive;color: white;">File Name</label>
 						<label> <input
 									name="fileName" type="text" class="myclass" id="fileName"
 									size="20">
-							</label>
+							</label> -->
 						<input value="Export"
 							type="submit" id="export"/></td>
 							

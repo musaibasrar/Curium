@@ -3,6 +3,8 @@ package com.model.parents.dto;
 // default package
 // Generated 12 Sep, 2014 5:50:27 PM by Hibernate Tools 4.0.0
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

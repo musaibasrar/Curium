@@ -519,7 +519,7 @@
 </script>
 </head>
 <body>
-	<form id="form1" action="Controller?process=SearchProcess&action=advanceSearch"
+	<form id="form1" action="Controller?process=UserProcess&action=advanceSearch"
 		method="post">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
@@ -1002,12 +1002,12 @@
 						<script type="text/javascript">
 							function searchStudent() {
 								var form1 = document.getElementById("form1");
-								form1.action = "Controller?process=SearchProcess&action=advanceSearch";
+								form1.action = "Controller?process=UserProcess&action=advanceSearch";
 								form1.submit();
 							}
 							function searchByParents() {
 								var form1 = document.getElementById("form1");
-								form1.action = "Controller?process=SearchProcess&action=advanceSearchByParents";
+								form1.action = "Controller?process=UserProcess&action=advanceSearchByParents";
 								form1.submit();
 							}
 							function Cancel() {
