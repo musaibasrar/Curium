@@ -21,7 +21,7 @@
             response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>View All</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -369,7 +369,23 @@
             } 
         </script>
     </head>
-    <body  >
+      <%
+//allow access only if session exists
+String user = null;
+if(session.getAttribute("userAuth") == null){
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+}else user = (String) session.getAttribute("userAuth");
+String userName = null;
+String sessionID = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("user")) userName = cookie.getValue();
+	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+}
+}
+%>
+    <body>
 
         <form name="form1" id="form1"action="Controller?process=StudentProcess&action=archiveMultiple" method="post">
             <div style="overflow: hidden">

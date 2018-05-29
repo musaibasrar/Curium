@@ -1,17 +1,18 @@
 <%-- 
-    Document   : notSaved
+    Document   : Session Time Out
     Created on : Jan 5, 2012, 1:11:53 PM
-    Author     : Mayur
+    Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Password Success</title>
+        <title>Session Time Out</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -54,47 +55,24 @@
 	color: #000000;
 }
 -->
-.stylePass {
-	font-family: Tahoma;
-	font-weight: bold;
-	color: red;
-        font-size: 20px;
-}
         </style>
 
         <script type="text/javascript">
             $(function(){
-                $("#view").button()
-                
-                $("#addnew").button()
-
-                });
-
-           
+                $("#login").button()
+            });
+            
         </script>
 </head>
-  <%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
-%>
     <body background="images/bg.jpg" >
-        <form id="form1" method="post">
+        <form id="form1" action=""  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="250" align="center" valign="middle"><p class="stylePass"> Password Update Failed</p>
-        </td>
+        <td height="250" align="center" valign="middle"><p class="style1">Session time out, Please login again</p>
+        <p class="style1">
+          	<!-- <input type="button" value="Login" id="login" > -->
+          	<a href="Controller?process=UserProcess&action=logout" target="_parent" id="login">Login</a>
+        </p></td>
       </tr>
     </table>
             </form>

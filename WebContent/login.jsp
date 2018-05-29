@@ -12,7 +12,7 @@
     <head>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome</title>
+        <title>Al-Ameen Educational Society</title>
         <script type="text/javascript" src="js/openWindow.js"></script>
         <style type="text/css">
             <!--
@@ -35,7 +35,8 @@
             }
         </script>
     </head>
-    <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+      
+    <body style="background-image: url(images/background-alameen.png)" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
         <script type="text/javascript">
             var flag1=<c:out default="" value="${param.login_success}"/>;
             var type='<c:out default="" value="${userType}"/>';
@@ -58,50 +59,51 @@
             }
         </script>
         <form action="Controller?process=UserProcess&action=authenticateUser" method="post" id="form1">
+        
             <table width="100%" height="605" border="0" cellpadding="0" cellspacing="0">
+                
                 <tr>
-                    <td><table width="425" height="290" border="0" align="center" cellpadding="0" cellspacing="0">
-
-
+                    <td>
+                    	<table width="550" height="400" border="0"  background="images/backtop.png" align="center" cellpadding="0" cellspacing="0">
+								<tr><td><br><br><br><br><br><br><br><br><br><br></td></tr>
+								<tr><td><br></td></tr>
                             <tr>
-                                <td width="425" valign="bottom" background="images/login_page.jpg">
-
-                                    <table width="296" height="105" border="0" align="center" cellpadding="0" cellspacing="0">
-                                        <tr id="status">
-                                            <td  height="23"  colspan="2" class="status">&nbsp;</td>
-                                        </tr>
-                                        <tr id="status">
-                                            <td  height="23"  colspan="2" class="status"><br/></td>
-                                        </tr>
+                            
+                            	<td>
+                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            	</td>
+                                <td>
+													
+                                    <table width="296"  border="0" cellpadding="0" cellspacing="0">
+                                    	
                                         <tr>
-                                            <td height="23"><span class="style8">User Name</span></td>
+                                            <td height="30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <img src="images/username.png" height="30" name="login" border="0" /></td>
                                             <td>:</td>
                                             <td><span class="style48">
-                                                    <input name="loginName" type="text" size="40"style="width:200px; border:1px solid #3993DB; font-family:Arial; font-size:12px; color:#000000">
+                                                    <input name="loginName" type="text" size="40" placeholder="UserName" style="width:200px;  border:1px solid #02576c; font-family:Arial; font-size:15px; color:#000000">
                                                 </span></td>
                                         </tr>
                                         <tr>
-                                            <td height="23"><span class="style8">Password</span></td>
+                                            <td height="30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <img type="image" src="images/lock.png" height="28" name="login" border="0"  /></td>
                                             <td>:</td>
                                             <td><span class="style48">
-                                                    <input name="password" type="password" size="40"style="width:200px; border:1px solid #3993DB; font-family:Arial; font-size:12px; color:#000000">
+                                                    <input name="password" type="password" placeholder="Password" size="40"style="width:200px; border:1px solid #02576c; font-family:Arial; font-size:15px; color:#000000">
                                                 </span></td>
                                         </tr>
                                         <tr>
                                             <td width="86" height="35"><span class="style6"></span></td>
                                             <td width="10">&nbsp;</td>
                                             <td width="202"><div align="right">
-                                                    <input type="image" src="images/button.png" name="login" border="0" onclick="" />
+                                                    <input type="image" src="images/loginbutton.png" name="login" border="0" onclick="" />
                                                 </div></td>
                                         </tr>
-                                        <tr  >
-                                            <td  colspan="2" ><span id="label1" class="status">Login Failed</span></td>
-                                        </tr>
-
-
                                     </table>
-                                    <p>&nbsp;</p>
-                                    <p>&nbsp;</p></td>
+                                    <br>
+                                    
+                                    </td>
                             </tr>
                         </table></td>
                 </tr>

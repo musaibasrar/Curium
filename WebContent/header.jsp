@@ -156,6 +156,22 @@
 
         </script>
     </head>
+    <%
+//allow access only if session exists
+String user = null;
+if(session.getAttribute("userAuth") == null){
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+}else user = (String) session.getAttribute("userAuth");
+String userName = null;
+String sessionID = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("user")) userName = cookie.getValue();
+	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+}
+}
+%>
     <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
         <form id="form1" method="post" >
             <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">

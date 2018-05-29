@@ -355,6 +355,7 @@
  
        
     </head>
+    
     <%
 //allow access only if session exists
 String user = null;

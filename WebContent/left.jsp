@@ -410,6 +410,22 @@ Author     : Musaib
             });
         </script>
     </head>
+      <%
+//allow access only if session exists
+String user = null;
+if(session.getAttribute("userAuth") == null){
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+}else user = (String) session.getAttribute("userAuth");
+String userName = null;
+String sessionID = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("user")) userName = cookie.getValue();
+	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+}
+}
+%>
     <body onload="StartClock()" onunload="KillClock()">
         <form name="theClock">
 
@@ -486,7 +502,6 @@ Author     : Musaib
             <div >
                 <a target="mainFrame" href="Backup&Restore.jsp" style="font-size: 12px;">Backup</a><br/>
                 <a target="mainFrame" href="changePassword.jsp" style="font-size: 12px;">Change Password</a><br/>
-                <a target="mainFrame" href="generateids.jsp" style="font-size: 12px;">Generate IDs</a><br/>
                 <a target="mainFrame" href="uploadattendance.jsp" style="font-size: 12px;">upload attendance file</a><br/>
             </div>
             
