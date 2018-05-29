@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 15 Feb, 2018 11:56:26 AM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.account.dto.Financialaccountingyear" table="financialaccountingyear" >
+    <class name="com.model.account.dto.Financialaccountingyear" table="acc_financialaccountingyear" >
         <id name="financialid" type="java.lang.Integer">
             <column name="financialid" />
             <generator class="identity" />
@@ -16,6 +16,9 @@
         </property>
         <property name="active" type="string">
             <column name="active" length="10" not-null="true" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
         </property>
     </class>
 </hibernate-mapping>

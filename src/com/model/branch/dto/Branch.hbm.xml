@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23 May, 2018 11:42:50 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.model.branch.dto.Branch" table="branch">
+        <id name="idbranch" type="java.lang.Integer">
+            <column name="idbranch" />
+            <generator class="identity" />
+        </id>
+        <property name="branchname" type="string">
+            <column name="branchname" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

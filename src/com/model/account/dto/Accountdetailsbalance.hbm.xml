@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 18 Feb, 2018 10:47:48 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.account.dto.Accountdetailsbalance" table="accountdetailsbalance" >
+    <class name="com.model.account.dto.Accountdetailsbalance" table="acc_accountdetailsbalance" >
         <id name="accountdetailsbalanceid" type="java.lang.Integer">
             <column name="accountdetailsbalanceid" />
             <generator class="identity" />
@@ -25,6 +25,9 @@
         </property>
         <property name="enteredon" type="date">
             <column name="enteredon" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
         </property>
          <many-to-one name="accountDetails" class="com.model.account.dto.Accountdetails"
             column="accountdetailsid" lazy="false"

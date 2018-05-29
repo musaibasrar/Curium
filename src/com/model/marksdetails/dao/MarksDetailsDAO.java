@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -31,16 +31,9 @@ public class MarksDetailsDAO {
 			transaction = session.beginTransaction();
 			
 			for (Marks marks : marksList) {
-				try{
+				
 				session.save(marks);
-				}catch(HibernateException e){
-					//e.printStackTrace();
-					StringWriter sw = new StringWriter();
-					PrintWriter pw = new PrintWriter(sw);
-					e.printStackTrace(pw);
-					output=sw.toString();
-					//output=e.getMessage();
-				}
+				
 			}
 			
 			transaction.commit();
@@ -48,16 +41,7 @@ public class MarksDetailsDAO {
 		}  catch (HibernateException hibernateException) {
 			transaction.rollback();
 			hibernateException.printStackTrace();
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			hibernateException.printStackTrace(pw);
-			output=sw.toString();
-		} catch(Exception e){
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-			output=sw.toString();
-		}
+		} 
 		finally {
 			session.close();
 			return output;
@@ -153,17 +137,12 @@ public class MarksDetailsDAO {
 			return result;
 		}
 
-		public List<Marks> readMarksforStudent(int id) {
+		public List<Marks> readMarksforStudent(int id, String currentAcademicYear) {
 			List<Marks> results = new ArrayList<Marks>();
 			try {
 
 				transaction = session.beginTransaction();
-				Query query = session
-						.createQuery("From Marks where sid = '"+id+"' ORDER BY examid ASC");
-				
-				/*query.setParameter("subject", subject);
-				query.setParameter("exam", exam);*/
-				//query.executeUpdate();
+				Query query = session.createQuery("From Marks where sid = '"+id+"' and academicyear = '"+currentAcademicYear+"' ORDER BY examid ASC");
 				results = query.list();
 				transaction.commit();
 			} catch (HibernateException hibernateException) {

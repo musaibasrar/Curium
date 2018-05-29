@@ -17,5 +17,8 @@
         <property name="usertype" type="java.lang.String">
             <column name="USERTYPE" />
         </property>
+         <many-to-one name="branch" class="com.model.branch.dto.Branch"
+            column="branchid" lazy="false"
+             />
     </class>
 </hibernate-mapping>

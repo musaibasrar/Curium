@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.model.parents.dto.Parents;
-import com.model.stampfees.dto.Academicfeesstructure;
 import com.model.student.dto.Student;
 import com.model.student.dto.Studentfeesstructure;
 import com.util.HibernateUtil;
@@ -331,29 +329,20 @@ public class studentDetailsDAO {
 		List<Parents> results = new ArrayList<Parents>();
 
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
+			
 			transaction = session.beginTransaction();
-
-			// results = (List<PersonalDetails>)
-			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
-			/*Query query = session
-					.createQuery("from Student p inner join p.Parents");*/
-			/*Query query = session
-					.createSQLQuery("select Student.name,Parents.fathersname From Student inner join Parents on Student.sid = Parents.sid");*/
-			/*Query query = session
-					.createSQLQuery("select Student.name,Parents.fathersname From Student inner join Parents on Student.sid = Parents.sid").addEntity(Student.class);*/
 			Query query = session
 					.createQuery("From Parents as parents where parents.Student.archive=0 order by name ASC");
 			query.setFirstResult(offset);   
 			query.setMaxResults(noOfRecords);
-			results = query.list();
+			results = query.getResultList();
 			
 			transaction.commit();
 			
 
-		} catch (HibernateException hibernateException) {
+		} catch (Exception hibernateException) {
 			transaction.rollback();
+			System.out.println("Exception is "+hibernateException);
 			hibernateException.printStackTrace();
 
 		} finally {

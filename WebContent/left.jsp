@@ -410,6 +410,22 @@ Author     : Musaib
             });
         </script>
     </head>
+      <%
+//allow access only if session exists
+String user = null;
+if(session.getAttribute("userAuth") == null){
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+}else user = (String) session.getAttribute("userAuth");
+String userName = null;
+String sessionID = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("user")) userName = cookie.getValue();
+	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+}
+}
+%>
     <body onload="StartClock()" onunload="KillClock()">
         <form name="theClock">
 
@@ -435,8 +451,6 @@ Author     : Musaib
             <div>
                 <a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllEmployee" style="font-size: 12px;">View All</a><br/>
                 <a target="mainFrame" href="Controller?process=EmployeeProcess&action=addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
-                <a target="mainFrame" href="Controller?process=DepartmentProcess&action=departmentView" style="font-size: 12px;">Add Department</a><br/>
-                <a target="mainFrame" href="Controller?process=PositionProcess&action=positionView" style="font-size: 12px;">Add Position</a><br/>
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
@@ -447,7 +461,6 @@ Author     : Musaib
             <div>
                 <a target="mainFrame" href="Controller?process=FeesProcess&action=feesCollect" style="font-size: 12px;">Fees Collect</a><br/>
 				<a target="mainFrame" href="feesstructure.jsp" style="font-size: 12px;">Fees Structure</a><br/>                
-				<a target="mainFrame" href="Controller?process=StampFeesProcess&action=showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
 				<a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Fees Details</a><br/>
             </div> 
             
@@ -483,28 +496,12 @@ Author     : Musaib
             <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Archive</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=archiveViewAll" >Archive Students</a><br/>
-
-
             </div>
-
-             <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
-            <div>
-                <a target="mainFrame" href="Controller?process=FeesProcess&action=feesView" style="font-size: 12px;">Fees Category</a>
-                <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=examSchedule" style="font-size: 12px;">Exam Schedule</a>
-                <a target="mainFrame" href="Controller?process=YearProcess&action=updateYear" style="font-size: 12px;">Academic year</a><br/>
-                <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
-                <a target="mainFrame" href="Controller?process=SubjectDetailsProcess&action=readListOfSubjects" style="font-size: 12px;">Subject Details</a><br/>
-				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceConfiguration" style="font-size: 12px;">Attendance</a><br/>
-				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
-				<a target="mainFrame" href="Controller?process=PeriodProcess&action=periodConfiguration" style="font-size: 12px;">Periods Settings</a><br/>
-            </div>
-            
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
                 <a target="mainFrame" href="Backup&Restore.jsp" style="font-size: 12px;">Backup</a><br/>
                 <a target="mainFrame" href="changePassword.jsp" style="font-size: 12px;">Change Password</a><br/>
-                <a target="mainFrame" href="generateids.jsp" style="font-size: 12px;">Generate IDs</a><br/>
                 <a target="mainFrame" href="uploadattendance.jsp" style="font-size: 12px;">upload attendance file</a><br/>
             </div>
             
@@ -531,7 +528,6 @@ Author     : Musaib
             
             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
-                <a target="mainFrame" href="Controller?process=AccountProcess&action=getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=createAccount" style="font-size: 12px;">Ledger Account</a><br/>
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=viewVoucherReceipt" style="font-size: 12px;">Find/Edit Voucher</a><br/>
@@ -541,13 +537,6 @@ Author     : Musaib
             
              <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="Controller?process=HrProcess&action=leaveType" style="font-size: 12px;">Leave Type</a><br/>
-                <a target="mainFrame" href="Controller?process=HrProcess&action=assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
-                <a target="mainFrame" href="Controller?process=HrProcess&action=payHead" style="font-size: 12px;">Pay Head</a><br/>
-                <a target="mainFrame" href="Controller?process=HrProcess&action=addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
-                <a target="mainFrame" href="Controller?process=HrProcess&action=deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
-                <a target="mainFrame" href="Controller?process=HrProcess&action=basicPaySettings" style="font-size: 12px;">Basic Pay Settings</a><br/>
-                <a target="mainFrame" href="Controller?process=HrProcess&action=pfSettings" style="font-size: 12px;">PF Settings</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=salaryIssue" style="font-size: 12px;">Advance Salary Issue</a><br/>

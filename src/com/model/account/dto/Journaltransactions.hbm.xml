@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 7 Mar, 2018 10:59:02 AM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.account.dto.Journaltransactions" table="journaltransactions">
+    <class name="com.model.account.dto.Journaltransactions" table="acc_journaltransactions">
         <id name="transactionsid" type="java.lang.Integer">
             <column name="transactionsid" />
             <generator class="identity" />
@@ -31,6 +31,9 @@
         </property>
         <property name="financialyear" type="java.lang.Integer" not-null="true">
             <column name="financialyear" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
         </property>
     </class>
 </hibernate-mapping>

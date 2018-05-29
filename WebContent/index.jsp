@@ -61,7 +61,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("login.jsp");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -73,15 +73,15 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <frameset    rows="100,*"frameborder="0" border="0" framespacing="0"  >
+    <frameset    rows="70,*"frameborder="0" border="0" framespacing="0"  >
         <frame   src="header.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
-            <frameset  cols="175,*" frameborder="0" border="0" framespacing="0">
+            <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
                 <frame  src="left.jsp" name="leftFrame" scrolling="yes"  frameborder="1"   />
                 <frame src="Controller?process=StudentProcess&action=viewAll" name="mainFrame" scrolling="yes" />
             </frameset>
 
-   
+   </frameset>
 
 
 

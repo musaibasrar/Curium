@@ -104,5 +104,8 @@
          <property name="subsequentprogress" type="string">
             <column name="subsequentprogress" length="500" />
         </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
     </class>
 </hibernate-mapping>
