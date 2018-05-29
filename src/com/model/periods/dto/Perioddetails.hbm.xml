@@ -26,5 +26,8 @@
 	        <property name="staff" type="string">
 	            <column name="staff" length="200" />
 	        </property>
+	         <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
     </class>
 </hibernate-mapping>

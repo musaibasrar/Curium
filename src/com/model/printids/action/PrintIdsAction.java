@@ -96,12 +96,9 @@ public class PrintIdsAction {
 	
 
 	private String generateBonafide() {
-		if (new StudentService(request, response).generateBonafide()) {
-            //return "patientDetails_1.jsp";
-            return "bonafidesuccess.jsp";
-        } else {
-            return "bonafidefailure.jsp";
-        }
+		
+            return new StudentService(request, response).generateBonafide();
+        
 	}
 
 	private String searchStudentsForBonafide() {

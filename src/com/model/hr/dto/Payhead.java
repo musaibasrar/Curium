@@ -23,16 +23,19 @@ public class Payhead implements java.io.Serializable {
 	private String validatory;
 	private String description;
 	private String academicyear;
-
+	private int branchid;
+	
 	public Payhead() {
 	}
 
-	public Payhead(String payheadtype, String validatory, String description, String payheadname, String academicyear) {
+	public Payhead(String payheadtype, String validatory, String description, String payheadname, String academicyear,
+			int branchid) {
 		this.payheadtype = payheadtype;
 		this.validatory = validatory;
 		this.description = description;
 		this.payheadname = payheadname;
 		this.academicyear = academicyear;
+		this.branchid = branchid;
 	}
 
 	@Id
@@ -91,4 +94,12 @@ public class Payhead implements java.io.Serializable {
 		this.academicyear = academicyear;
 	}
 
+	@Column(name = "branchid")
+	public int getBranchid() {
+	return branchid;
+	}
+
+	public void setBranchid(int branchid) {
+	this.branchid = branchid;
+	}
 }

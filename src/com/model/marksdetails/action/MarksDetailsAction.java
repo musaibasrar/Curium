@@ -20,28 +20,20 @@ public class MarksDetailsAction {
 
 	public String execute(String action) {
 		if (action.equalsIgnoreCase("addMarks")) {
-			System.out.println("Action is addMarks");
 			url = addMarks();
 		}else if (action.equalsIgnoreCase("search")) {
-			System.out.println("Action is Search");
 			url = search();
 		}else if (action.equalsIgnoreCase("viewMarks")) {
-			System.out.println("Action is viewMarks");
 			url = viewMarks();
 		}else if (action.equalsIgnoreCase("getSubjectsExams")) {
-			System.out.println("Action is getSubjectsExams");
 			url = getSubjectsExams();
 		}else if (action.equalsIgnoreCase("updateMarks")) {
-			System.out.println("Action is updateMarks");
 			url = updateMarks();
 		}else if (action.equalsIgnoreCase("deleteMultiple")) {
-			System.out.println("Action is deleteMultiple");
 			url = deleteMultiple();
 		}else if (action.equalsIgnoreCase("generateReport")) {
-			System.out.println("Action is generateReport");
 			url = generateReport();
 		}else if (action.equalsIgnoreCase("searchForReport")) {
-			System.out.println("Action is searchForReport");
 			url = searchForReport();
 		}
 		return url;

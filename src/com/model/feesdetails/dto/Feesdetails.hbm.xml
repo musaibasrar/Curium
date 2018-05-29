@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 11 Feb, 2015 9:12:10 AM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.feesdetails.dto.Feesdetails" table="feesdetails" >
+    <class name="com.model.feesdetails.dto.Feesdetails" table="fee_feesdetails" >
         <id name="feesdetailsid" type="java.lang.Integer">
             <column name="feesdetailsid" />
             <!-- <generator class="identity" /> -->
@@ -29,6 +29,9 @@
         </property>
         <property name="academicyear" type="string">
             <column name="academicyear" length="45" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
         </property>
     </class>
 </hibernate-mapping>

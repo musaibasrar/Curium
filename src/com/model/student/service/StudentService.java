@@ -1,12 +1,9 @@
 package com.model.student.service;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -44,7 +41,6 @@ import com.model.std.dto.Classsec;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
 import com.model.student.dto.Studentfeesstructure;
-import com.model.user.dao.UserDAO;
 import com.util.DataUtil;
 import com.util.DateUtil;
 

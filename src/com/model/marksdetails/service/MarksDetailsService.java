@@ -42,7 +42,8 @@ public class MarksDetailsService {
 	HttpServletRequest request;
 	HttpServletResponse response;
 	HttpSession session;
-
+	private String CURRENTACADEMICYEAR = "currentAcademicYear";
+	
 	public MarksDetailsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
@@ -105,7 +106,7 @@ public class MarksDetailsService {
 				marks.setSubid(subid);
 				marks.setSid((int) mapEntry.getKey());
 				marks.setMarksobtained(Integer.parseInt(test));
-				String currentYear = (String) session.getAttribute("currentAcademicYear");
+				String currentYear = (String) session.getAttribute(CURRENTACADEMICYEAR);
 				marks.setAcademicyear(currentYear);
 				marksList.add(marks);
 			}
@@ -347,8 +348,7 @@ public class MarksDetailsService {
 					marks.setSubid(subid);
 					marks.setSid(studentId);
 					marks.setMarksobtained(Integer.parseInt(marksObtained));
-					String currentAcademicYear = (String) session.getAttribute("currentYear");
-					System.out.println("Current Academic Year " + currentAcademicYear);
+					String currentAcademicYear = (String) session.getAttribute(CURRENTACADEMICYEAR);
 					String currentYear = currentAcademicYear;
 					marks.setAcademicyear(currentYear);
 					marksList.add(marks);
@@ -393,68 +393,69 @@ public class MarksDetailsService {
 	}
 
 	public boolean generateReport() {
+		
 		boolean result = false;
-
-		String[] studentIds = request.getParameterValues("studentIDs");
-		String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
-		String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-
-		List<Exams> exams = new ExamDetailsDAO().readListOfExams();
-		List<Subject> subjects = new SubjectDetailsDAO().readListOfSubjects();
-		Integer[][] examsubjectCombo = new Integer[exams.size() * subjects.size()][2];
-		int r = 0, c = 0;
-		for (Exams examsList : exams) {
-
-			for (Subject subject : subjects) {
-				c = 0;
-				examsubjectCombo[r][c] = subject.getSubid();
-				c++;
-				examsubjectCombo[r][c] = examsList.getExid();
-				r++;
-			}
-
-		}
-
-		for (int i = 0; i < studentIds.length; i++) {
-			Student studentDetails = new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[i]));
-			List<Marks> marksDetails = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]));
-			marksList[i][0] = studentDetails.getAdmissionnumber();
-			marksList[i][1] = studentDetails.getName();
-			int k = 2;
-			int a=0;
-			int b=0;
+		
+		if(session.getAttribute(CURRENTACADEMICYEAR)!=null){
 			
-			for (int m=0; m<marksDetails.size(); m++) {
-				b=0;
-				if(examsubjectCombo[a][b].compareTo(marksDetails.get(m).getSubid())==0 ){
-					b++;
-					if(examsubjectCombo[a][b].compareTo(marksDetails.get(m).getExamid())==0){
-						try{
-						marksList[i][k] = marksDetails.get(m).getMarksobtained().toString();
-						k++;
-						}catch(Exception e){
-							e.printStackTrace();
-						}
-					}
-				}else{
-					marksList[i][k] = "";
-					k++;
-					m--;
-					
-				}
-				a++;
-				
-				
-			}
-		}
+			String[] studentIds = request.getParameterValues("studentIDs");
+			String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
+			String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 
-		try {
-			if (writeToReportCard(marksList)) {
-				result = true;
+			List<Exams> exams = new ExamDetailsDAO().readListOfExams();
+			List<Subject> subjects = new SubjectDetailsDAO().readListOfSubjects();
+			Integer[][] examsubjectCombo = new Integer[exams.size() * subjects.size()][2];
+			int r = 0, c = 0;
+			for (Exams examsList : exams) {
+
+				for (Subject subject : subjects) {
+					c = 0;
+					examsubjectCombo[r][c] = subject.getSubid();
+					c++;
+					examsubjectCombo[r][c] = examsList.getExid();
+					r++;
+				}
+
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			for (int i = 0; i < studentIds.length; i++) {
+				Student studentDetails = new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[i]));
+				List<Marks> marksDetails = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),session.getAttribute(CURRENTACADEMICYEAR).toString());
+				marksList[i][0] = studentDetails.getAdmissionnumber();
+				marksList[i][1] = studentDetails.getName();
+				int k = 2;
+				int a=0;
+				int b=0;
+				
+				for (int m=0; m<marksDetails.size(); m++) {
+					b=0;
+					if(examsubjectCombo[a][b].compareTo(marksDetails.get(m).getSubid())==0 ){
+						b++;
+						if(examsubjectCombo[a][b].compareTo(marksDetails.get(m).getExamid())==0){
+							try{
+							marksList[i][k] = marksDetails.get(m).getMarksobtained().toString();
+							k++;
+							}catch(Exception e){
+								e.printStackTrace();
+							}
+						}
+					}else{
+						marksList[i][k] = "0";
+						k++;
+						m--;
+					}
+					a++;
+				}
+			}
+
+			try {
+				if (writeToReportCard(marksList)) {
+					result = true;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return result;
@@ -485,15 +486,25 @@ public class MarksDetailsService {
 					 * Cell cell = row.createCell(columnCount);
 					 * cell.setCellValue(rowCount);
 					 */
-
+					
+					
 					for (Object field : aBook) {
+						Cell cell = row.createCell(++columnCount);
+						if(columnCount>1 && field !=null){
+							cell.setCellValue((Integer) Integer.parseInt(field.toString()));
+						}else if(field !=null){
+							cell.setCellValue((String) field);
+						}
+					}
+
+					/*for (Object field : aBook) {
 						Cell cell = row.createCell(++columnCount);
 						if (field instanceof String) {
 							cell.setCellValue((String) field);
 						} else if (field instanceof Integer) {
 							cell.setCellValue((Integer) field);
 						}
-					}
+					}*/
 
 				}
 

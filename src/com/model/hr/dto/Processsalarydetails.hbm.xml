@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 30 Apr, 2018 6:08:33 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.hr.dto.Processsalarydetails" table="processsalarydetails" >
+    <class name="com.model.hr.dto.Processsalarydetails" table="hr_processsalarydetails" >
         <id name="idprocesssalarydetails" type="java.lang.Integer">
             <column name="idprocesssalarydetails" />
             <generator class="identity" />
@@ -34,6 +34,9 @@
         </property>
          <property name="paymenttype" type="string">
             <column name="paymenttype" length="20" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
         </property>
         <many-to-one name="teacher" class="com.model.employee.dto.Teacher"
             column="teacherid" lazy="false" />

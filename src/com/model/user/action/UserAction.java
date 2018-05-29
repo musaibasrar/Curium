@@ -35,9 +35,15 @@ public class UserAction {
 				url = backup();
 			}else if (action.equalsIgnoreCase("searchByDate")) {
 				url = searchByDate();
-			} 
+			} else if (action.equalsIgnoreCase("sessionTimeOut")) {
+	            url = sessionTimeOut();
+	        }
 	       return url;
 	       
+	}
+
+	private String sessionTimeOut() {
+		return "sessiontimeout.jsp";
 	}
 
 	private String searchByDate() {

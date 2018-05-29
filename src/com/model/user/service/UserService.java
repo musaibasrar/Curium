@@ -53,6 +53,7 @@ public class UserService {
             }
             httpSession.setAttribute("currentAcademicYear",academicyear);
             httpSession.setAttribute("username",login.getUsername());
+            httpSession.setAttribute("branchid",login.getBranch().getIdbranch());
             request.setAttribute("userType", login.getUsertype());
             httpSession.setAttribute("typeOfUser",login.getUsertype());
             httpSession.setAttribute("userAuth", login.getUsertype());
@@ -337,16 +338,11 @@ public class UserService {
         login = new UserDAO().readPassword(currentPassword);
         
         if (login != null && newPassword.equals(ConfirmNewPassword)) {
-             
-            login.setLid(1);
             login.setPassword(newPassword);  
             login = new UserDAO().update(login);
             result = true;
         } else {
-            
-            System.out.println("Password update fails");
             result = false;
-            
         }
         return result;
     }

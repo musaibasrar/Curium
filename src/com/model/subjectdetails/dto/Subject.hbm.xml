@@ -17,5 +17,8 @@
         <property name="maxmarks" type="java.lang.Integer">
             <column name="maxmarks" />
         </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -4,7 +4,7 @@ import java.awt.List;
 import java.util.ArrayList;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -26,7 +26,8 @@ public class UserDAO {
 	    
 	    
 	    public UserDAO() {
-	        sessionFactory = HibernateUtil.getSessionFactory();
+	    	//Musaib
+	        //sessionFactory = HibernateUtil.getSessionFactory();
 	        session=HibernateUtil.openSession();
 	}
 
@@ -38,22 +39,16 @@ public class UserDAO {
         System.out.println("The password in DAO is: "+password);
        try{
            System.out.println("in USERDAO");
-           this.session = sessionFactory.openSession();
+           //Musaib
+           //this.session = sessionFactory.openSession();
            transaction = session.beginTransaction();
-           
-           /*String sql = "SELECT * FROM User where username='"+userName+"' and password='"+password+"'";
-           SQLQuery query = session.createSQLQuery(sql);
-           query.addEntity(User.class);
-           List login1 = (List) query.list();
-           System.out.println("THE  login result from the readunique object is "+login.getUsertype());
-           System.out.println("THE  login result from the readunique object is "+((java.util.List) login1).get(1));*/
            Query query = session.createQuery("FROM Login as login where login.username= :loginName and login.password= :password");
            query.setParameter("loginName", userName);
            query.setParameter("password", password);
            login = (Login) query.uniqueResult();
            transaction.commit();
            
-       }catch(HibernateException hibernateException){
+       }catch(Exception hibernateException){
            System.out.println("In userdao null pointer exception"+hibernateException);
            hibernateException.printStackTrace();
        }finally{
@@ -122,13 +117,11 @@ public class UserDAO {
            this.session = sessionFactory.openSession();
            transaction = session.beginTransaction();
            
-           Query query = session.createQuery("from Login as user where user.password1= :password");
+           Query query = session.createQuery("from Login as user where user.password= :password");
            query.setParameter("password", currentPassword);
            login = (Login) query.uniqueResult();
            transaction.commit();
-           System.out.println("THE  login result from the readunique object is "+login);
        }catch(HibernateException hibernateException){
-           System.out.println("In userdao null pointer exception"+hibernateException);
            hibernateException.printStackTrace();
        }finally{
            return login;

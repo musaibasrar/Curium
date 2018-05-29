@@ -49,6 +49,9 @@
         <property name="email" type="java.lang.String">
             <column name="EMAIL" />
         </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
         <many-to-one name="Student" class="com.model.student.dto.Student"
             column="sid" unique="true" not-null="true"
             cascade="all" />
