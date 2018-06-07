@@ -14,6 +14,7 @@ import java.net.URLConnection;
 import java.nio.charset.MalformedInputException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,6 +47,18 @@ public class test {
 		 try {
 		       Date dateBefore = myFormat.parse(dateBeforeString);
 		       Date dateAfter = myFormat.parse(dateAfterString);
+		       
+		       Calendar start = Calendar.getInstance();
+				start.setTime(dateBefore);
+				Calendar end = Calendar.getInstance();
+				end.setTime(dateAfter);
+				end.add(Calendar.DATE, 1);
+		       
+		       for (Date date = start.getTime(); start.before(end); start.add(Calendar.DAY_OF_MONTH, +1), date = start.getTime()) {
+				    // Do your job here with `date`.
+				    System.out.println("*******************************"+new SimpleDateFormat("dd-MM-YYYY").format(date) );
+				}
+		       
 		       long difference = dateAfter.getTime() - dateBefore.getTime();
 		       float daysBetween = (difference / (1000*60*60*24));
 	               /* You can also convert the milliseconds to days using this method

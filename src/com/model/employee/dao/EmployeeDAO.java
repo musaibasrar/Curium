@@ -49,6 +49,25 @@ public class EmployeeDAO {
 	}
 
 	@SuppressWarnings({ "unchecked", "finally" })
+	public List<Teacher> readListOfObjects(int branchId) {
+
+		List<Teacher> results = new ArrayList<Teacher>();
+		try {
+
+			transaction = session.beginTransaction();
+			results = (List<Teacher>) session.createQuery("From Teacher where branchid="+branchId)
+					.list();
+			transaction.commit();
+		} catch (HibernateException hibernateException) {
+			transaction.rollback();
+			hibernateException.printStackTrace();
+		} finally {
+			session.close();
+			return results;
+		}
+	}
+
+	@SuppressWarnings({ "unchecked", "finally" })
 	public List<Teacher> readListOfObjects() {
 
 		List<Teacher> results = new ArrayList<Teacher>();
@@ -66,7 +85,7 @@ public class EmployeeDAO {
 			return results;
 		}
 	}
-
+	
 	public Teacher readUniqueObject(long id) {
 
 		Teacher employee = new Teacher();
@@ -115,14 +134,14 @@ public class EmployeeDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public int getNoOfEmployees() {
+	public int getNoOfEmployees(int branchId) {
 
 		List<Teacher> results = new ArrayList<Teacher>();
 		int noOfRecords = 0;
 		try {
 
 			transaction = session.beginTransaction();
-			results = (List<Teacher>) session.createQuery("From Teacher")
+			results = (List<Teacher>) session.createQuery("From Teacher where branchid="+branchId)
 					.list();
 			noOfRecords = results.size();
 			transaction.commit();
@@ -135,11 +154,11 @@ public class EmployeeDAO {
 		}
 	}
 
-	public List<Teacher> readListOfEmployeesByName(String staffName) {
+	public List<Teacher> readListOfEmployeesByName(String staffName, int branchId) {
 		List<Teacher> employee = new ArrayList<Teacher>();
 		try {
 			transaction = session.beginTransaction();
-			employee = session.createQuery("From Teacher where teachername='"+staffName+"'").list();
+			employee = session.createQuery("From Teacher where teachername='"+staffName+"' and branchid="+branchId).list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -149,11 +168,11 @@ public class EmployeeDAO {
 		return employee;
 	}
 	
-	public List<Teacher> readListOfEmployeesByDepartment(String staffDepartment) {
+	public List<Teacher> readListOfEmployeesByDepartment(String staffDepartment, int branchId) {
 		List<Teacher> employee = new ArrayList<Teacher>();
 		try {
 			transaction = session.beginTransaction();
-			employee = session.createQuery("From Teacher where department = '"+staffDepartment+"'").list();
+			employee = session.createQuery("From Teacher where department = '"+staffDepartment+"' and branchid="+branchId).list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

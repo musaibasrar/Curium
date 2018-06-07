@@ -44,62 +44,65 @@ public class SmsService {
 		int noOfRecords = 100;
 		int offset=0;
 		
-		String queryMain ="From Parents as parents where ";
-		String querySub = "";
-		String addClass = request.getParameter("addclass");
-		String addSec = request.getParameter("addsec");
-		String conClassStudying = "";
-		
-		if(addClass.contains("ALL")){
-			querySub = querySub + "parents.Student.archive=0";
-		}else{
-			if(!addClass.equalsIgnoreCase("Class") ){
-				
-				conClassStudying = addClass+ " " +"%";
-				
-			}
-			if( !addSec.equalsIgnoreCase("Sec") && !addSec.equalsIgnoreCase("ALL")){
-				conClassStudying = addClass;
-				conClassStudying = conClassStudying + " " +addSec;
-			}
+		if(httpSession.getAttribute("branchid")!=null){
+			String queryMain ="From Parents as parents where ";
+			String querySub = "";
+			String addClass = request.getParameter("addclass");
+			String addSec = request.getParameter("addsec");
+			String conClassStudying = "";
 			
-			String classStudying = DataUtil.emptyString(conClassStudying);
-			
-			if(!classStudying.equalsIgnoreCase("")){
-				querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0";
-			}	
-		}
-		
-		queryMain = queryMain+querySub;
-
-		double totalNumbers = new SmsDAO().countNumbers(queryMain);
-		String resultSMS=null;
-		int iterations = (int) Math.ceil(totalNumbers/100);
-		
-		System.out.println("main query:"+queryMain);
-		
-		for(int i=0;i<iterations;i++){
-			List<Parents> parentsContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
-
-			String numbers = null;
-				StringBuilder sbN = new StringBuilder();
-
-				if(!parentsContacts.isEmpty()){
-					for (Parents parents : parentsContacts) {
-						sbN.append(parents.getContactnumber());
-						sbN.append(",");
-					}
-					numbers=sbN.toString();
-					numbers = numbers.substring(0, numbers.length()-1);
-					System.out.println("Numbers are *** "+numbers);
-					resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebody")));
+			if(addClass.contains("ALL")){
+				querySub = querySub + "parents.Student.archive=0";
+			}else{
+				if(!addClass.equalsIgnoreCase("Class") ){
+					
+					conClassStudying = addClass+ " " +"%";
+					
+				}
+				if( !addSec.equalsIgnoreCase("Sec") && !addSec.equalsIgnoreCase("ALL")){
+					conClassStudying = addClass;
+					conClassStudying = conClassStudying + " " +addSec;
 				}
 				
-			offset = offset+100;
+				String classStudying = DataUtil.emptyString(conClassStudying);
+				
+				if(!classStudying.equalsIgnoreCase("")){
+					querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+				}	
+			}
+			
+			queryMain = queryMain+querySub;
+
+			double totalNumbers = new SmsDAO().countNumbers(queryMain);
+			String resultSMS=null;
+			int iterations = (int) Math.ceil(totalNumbers/100);
+			
+			System.out.println("main query:"+queryMain);
+			
+			for(int i=0;i<iterations;i++){
+				List<Parents> parentsContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
+
+				String numbers = null;
+					StringBuilder sbN = new StringBuilder();
+
+					if(!parentsContacts.isEmpty()){
+						for (Parents parents : parentsContacts) {
+							sbN.append(parents.getContactnumber());
+							sbN.append(",");
+						}
+						numbers=sbN.toString();
+						numbers = numbers.substring(0, numbers.length()-1);
+						System.out.println("Numbers are *** "+numbers);
+						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebody")));
+					}
+					
+				offset = offset+100;
+			}
+			if(resultSMS!=null && resultSMS.contains("success")){
+				result = true;
+			}
 		}
-		if(resultSMS!=null && resultSMS.contains("success")){
-			result = true;
-		}
+		
         return result;
 		
 	}
@@ -121,7 +124,7 @@ public class SmsService {
 		
 		boolean result=false;
 		String resultSMS = null;		
-		List<Teacher> teacherContacts = new EmployeeDAO().readListOfObjects();
+		List<Teacher> teacherContacts = new EmployeeDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 
 		String numbers = null;
 			StringBuilder sbN = new StringBuilder();

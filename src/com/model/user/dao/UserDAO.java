@@ -61,19 +61,15 @@ public class UserDAO {
 	}
 
 	@SuppressWarnings({ "unchecked", "finally" })
-	public int getNoOfStudents() {
+	public int getNoOfStudents(int branchId) {
 		 java.util.List<Student> results = new ArrayList<Student>();
 	        int noOfRecords = 0;
 	        try {
-	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 	            transaction = session.beginTransaction();
 
-	            results = (java.util.List<Student>) session.createQuery("FROM Student s where s.archive = 0").list();
+	            results = (java.util.List<Student>) session.createQuery("FROM Student s where s.archive = 0 AND s.branchid="+branchId).list();
 	            noOfRecords = results.size();
-	            System.out.println("The size of list is:::::::::::::::::::::::::::::::::::::::::: " + noOfRecords);
 	            transaction.commit();
-
-
 
 	        } catch (HibernateException hibernateException) {
 	            transaction.rollback();
@@ -86,7 +82,7 @@ public class UserDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public int getNoOfStudentsOne(String classStudying) {
+	public int getNoOfStudentsOne(String classStudying, int branchId) {
 		 java.util.List<Student> results = new ArrayList<Student>();
 		 
 	        int noOfRecords = 0;
@@ -94,7 +90,7 @@ public class UserDAO {
 	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 	            transaction = session.beginTransaction();
 
-	            results = (java.util.List<Student>) session.createQuery("From Student s where s.classstudying LIKE '"+classStudying+" %' OR s.classstudying = '"+classStudying+"'  AND s.archive = 0").list();
+	            results = (java.util.List<Student>) session.createQuery("From Student s where s.classstudying LIKE '"+classStudying+" %' OR s.classstudying = '"+classStudying+"'  AND s.archive = 0 AND s.branchid="+branchId+"").list();
 	            noOfRecords = results.size();
 	            transaction.commit();
 

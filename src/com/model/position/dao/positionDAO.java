@@ -50,13 +50,13 @@ public class positionDAO {
 	}
 
 	@SuppressWarnings({ "finally", "unchecked" })
-	public List<Position> readListOfObjects() {
+	public List<Position> readListOfObjects(int branchId) {
 		
 		List<Position> results = new ArrayList<Position>();
         try {
             
             transaction = session.beginTransaction();
-            results = (List<Position>) session.createQuery("From Position").list();
+            results = (List<Position>) session.createQuery("From Position where branchid = "+branchId).list();
             transaction.commit();
         } catch (HibernateException hibernateException) {
             transaction.rollback();

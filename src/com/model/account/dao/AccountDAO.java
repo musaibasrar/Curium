@@ -60,12 +60,12 @@ public class AccountDAO {
 		return result;
 	}
 
-	public Financialaccountingyear getCurrentFinancialYear() {
+	public Financialaccountingyear getCurrentFinancialYear(int branchId) {
 		Financialaccountingyear financialYear = new Financialaccountingyear();
 		try{
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("from Financialaccountingyear where active = 'yes' ");
+					.createQuery("from Financialaccountingyear where active = 'yes' and branchid="+branchId);
 			financialYear = (Financialaccountingyear) query.uniqueResult();
 			transaction.commit();
 		}catch(HibernateException hb){
@@ -76,12 +76,12 @@ public class AccountDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Accountgroupmaster> getListAccountGroupMaster() {
+	public List<Accountgroupmaster> getListAccountGroupMaster(int branchId) {
 		List<Accountgroupmaster> accountGroupMaster = new ArrayList<Accountgroupmaster>();
 		
 		try{
 			transaction = session.beginTransaction();
-			accountGroupMaster = session.createQuery("from Accountgroupmaster").list();
+			accountGroupMaster = session.createQuery("from Accountgroupmaster where branchid="+branchId).list();
 			transaction.commit();
 		}catch(HibernateException hb){
 			hb.printStackTrace();
@@ -92,13 +92,13 @@ public class AccountDAO {
 		return accountGroupMaster;
 	}
 
-	public List<Accountsubgroupmaster> getListAccountSubGroupMaster(int accountGroupMasterId) {
+	public List<Accountsubgroupmaster> getListAccountSubGroupMaster(int accountGroupMasterId, int branchId) {
 		
 		List<Accountsubgroupmaster> accountSubGroupMaster = new ArrayList<Accountsubgroupmaster>();
 		
 		try{
 			transaction = session.beginTransaction();
-			accountSubGroupMaster = session.createQuery("from Accountsubgroupmaster where accountgroupid = '"+accountGroupMasterId+"'").list();
+			accountSubGroupMaster = session.createQuery("from Accountsubgroupmaster where accountgroupid = '"+accountGroupMasterId+"' and branchid ="+branchId).list();
 			transaction.commit();
 		}catch(HibernateException hb){
 			hb.printStackTrace();
@@ -137,13 +137,13 @@ public class AccountDAO {
 		
 	}
 
-	public Financialaccountingyear getFinancialAccountingYear() {
+	public Financialaccountingyear getFinancialAccountingYear(int branchId) {
 		
 		Financialaccountingyear financialYear = new Financialaccountingyear();
 		
 		try {
 			transaction = session.beginTransaction();
-			financialYear = (Financialaccountingyear) session.createQuery("from Financialaccountingyear where active='yes'").uniqueResult();
+			financialYear = (Financialaccountingyear) session.createQuery("from Financialaccountingyear where active='yes' and branchId="+branchId).uniqueResult();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -169,13 +169,13 @@ public class AccountDAO {
 		return result;
 	}
 
-	public List<Accountdetailsbalance> getAccountdetailsbalanceExBC() {
+	public List<Accountdetailsbalance> getAccountdetailsbalanceExBC(int branchId) {
 
 		List<Accountdetailsbalance> accountDetails = new ArrayList<Accountdetailsbalance>();
 		
 		try{
 			transaction = session.beginTransaction();
-			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountSubGroupMaster.accountsubgroupmasterid NOT IN (1,2)").list();
+			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountSubGroupMaster.accountsubgroupmasterid NOT IN (1,2) and branchid="+branchId).list();
 			transaction.commit();
 		}catch(HibernateException hb){
 			hb.printStackTrace();
@@ -186,13 +186,13 @@ public class AccountDAO {
 		return accountDetails;
 	}
 
-	public List<Accountdetailsbalance> getAccountdetailsbalance() {
+	public List<Accountdetailsbalance> getAccountdetailsbalance(int branchId) {
 
 		List<Accountdetailsbalance> accountDetails = new ArrayList<Accountdetailsbalance>();
 		
 		try{
 			transaction = session.beginTransaction();
-			accountDetails = session.createQuery("from Accountdetailsbalance").list();
+			accountDetails = session.createQuery("from Accountdetailsbalance where branchid="+branchId).list();
 			transaction.commit();
 		}catch(HibernateException hb){
 			hb.printStackTrace();
@@ -282,7 +282,7 @@ public class AccountDAO {
 		return false;
 	}
 	
-	public List<Accountdetailsbalance> getAccountBalanceDetails(List<Integer> accountIds) {
+	public List<Accountdetailsbalance> getAccountBalanceDetails(List<Integer> accountIds, int branchId) {
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
 		try {
@@ -290,7 +290,7 @@ public class AccountDAO {
 			
 			
 			Query query = session
-					.createQuery("from Accountdetailsbalance where accountdetailsid IN (:ids)");
+					.createQuery("from Accountdetailsbalance where accountdetailsid IN (:ids) and branchid="+branchId);
 			query.setParameterList("ids", accountIds);
 			accountDetailsBalance = query.list();
 			transaction.commit();
@@ -314,13 +314,13 @@ public class AccountDAO {
 		
 	}
 
-	public List<Accountdetailsbalance> getAccountdetailsbalanceBankCash() {
+	public List<Accountdetailsbalance> getAccountdetailsbalanceBankCash(int branchId) {
 		
 		List<Accountdetailsbalance> accountDetails = new ArrayList<Accountdetailsbalance>();
 		
 		try{
 			transaction = session.beginTransaction();
-			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountSubGroupMaster.accountsubgroupmasterid IN (1,2)").list();
+			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountSubGroupMaster.accountsubgroupmasterid IN (1,2) and branchid="+branchId).list();
 			transaction.commit();																						   											
 		}catch(HibernateException hb){
 			hb.printStackTrace();
@@ -331,11 +331,11 @@ public class AccountDAO {
 		return accountDetails;
 	}
 
-	public List<Receipttransactions> getReceiptTransactions(Integer financialYear) {
+	public List<Receipttransactions> getReceiptTransactions(Integer financialYear, int branchId) {
 		List<Receipttransactions> receiptTransactions = new ArrayList<Receipttransactions>();
 		try {
 			transaction = session.beginTransaction();
-			receiptTransactions = session.createQuery("from Receipttransactions where financialyear='"+financialYear+"'and cancelvoucher!='yes' order by transactionsid ASC").list();
+			receiptTransactions = session.createQuery("from Receipttransactions where financialyear='"+financialYear+"'and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -362,12 +362,12 @@ public class AccountDAO {
 		return null;
 	}
 
-	public List<Paymenttransactions> getPaymentTransactions(Integer financialYear) {
+	public List<Paymenttransactions> getPaymentTransactions(Integer financialYear, int branchId) {
 		
 		List<Paymenttransactions> paymentTransactions = new ArrayList<Paymenttransactions>();
 		try {
 			transaction = session.beginTransaction();
-			paymentTransactions = session.createQuery("from Paymenttransactions where financialyear='"+financialYear+"' order by transactionsid ASC ").list();
+			paymentTransactions = session.createQuery("from Paymenttransactions where financialyear='"+financialYear+"' and branchid="+branchId+" order by transactionsid ASC ").list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -378,12 +378,12 @@ public class AccountDAO {
 		return paymentTransactions;
 	}
 
-	public List<Contratransactions> getContraTransactions(Integer financialYear) {
+	public List<Contratransactions> getContraTransactions(Integer financialYear, int branchId) {
 		
 		List<Contratransactions> contraTransactions = new ArrayList<Contratransactions>();
 		try {
 			transaction = session.beginTransaction();
-			contraTransactions = session.createQuery("from Contratransactions where financialyear='"+financialYear+"' order by transactionsid ASC ").list();
+			contraTransactions = session.createQuery("from Contratransactions where financialyear='"+financialYear+"' and branchid="+branchId+" order by transactionsid ASC ").list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -393,12 +393,12 @@ public class AccountDAO {
 		return contraTransactions;
 	}
 
-	public List<Journaltransactions> getJournalTransactions(Integer financialYear) {
+	public List<Journaltransactions> getJournalTransactions(Integer financialYear, int branchId) {
 
 		List<Journaltransactions> journalTransactions = new ArrayList<Journaltransactions>();
 		try {
 			transaction = session.beginTransaction();
-			journalTransactions = session.createQuery("from Journaltransactions where financialyear='"+financialYear+"' order by transactionsid ASC ").list();
+			journalTransactions = session.createQuery("from Journaltransactions where financialyear='"+financialYear+"' and branchid="+branchId+" order by transactionsid ASC ").list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -13,18 +13,15 @@ import javax.servlet.http.HttpSession;
 import com.model.feescategory.dao.feesCategoryDAO;
 import com.model.feescategory.dto.Feescategory;
 import com.model.feesdetails.dao.feesDetailsDAO;
-import com.model.parents.dto.Parents;
-import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
-import com.model.user.dao.UserDAO;
 import com.util.DataUtil;
 
 public class FeesService {
 	
-	 private HttpServletRequest request;
+		private HttpServletRequest request;
 	    private HttpServletResponse response;
 	    private HttpSession httpSession;
-	    
+	    private String BRANCHID = "branchid";
 	    /**
 	     * Size of a byte buffer to read/write file
 	     */
@@ -39,19 +36,19 @@ public class FeesService {
 
 	public boolean viewFees() {
 		
-		
 		 boolean result = false;
-	        try {
-	        	List<Feescategory> list = new feesCategoryDAO().readListOfObjects();
-	            httpSession.setAttribute("feescategory", list);
-
-	            result = true;
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            result = false;
-	        }
+		 
+		 if(httpSession.getAttribute(BRANCHID)!=null){
+			 try {
+		        	List<Feescategory> list = new feesCategoryDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		            httpSession.setAttribute("feescategory", list);
+		            result = true;
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		            result = false;
+		        }
+		 }
 	        return result;
-		
 	}
 
 
@@ -59,20 +56,21 @@ public class FeesService {
 		
 		Feescategory feescategory = new Feescategory();
 		
-		feescategory.setFeescategoryname(DataUtil.emptyString(request.getParameter("feescategory")));
-		if(!DataUtil.emptyString(request.getParameter("fromclass")).equalsIgnoreCase("ALL") && !DataUtil.emptyString(request.getParameter("toclass")).equalsIgnoreCase("ALL")){
-			feescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass"))+"-"+DataUtil.emptyString(request.getParameter("toclass")));
-		}else{
-			feescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass")));
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			
+			feescategory.setFeescategoryname(DataUtil.emptyString(request.getParameter("feescategory")));
+			if(!DataUtil.emptyString(request.getParameter("fromclass")).equalsIgnoreCase("ALL") && !DataUtil.emptyString(request.getParameter("toclass")).equalsIgnoreCase("ALL")){
+				feescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass"))+"-"+DataUtil.emptyString(request.getParameter("toclass")));
+			}else{
+				feescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass")));
+			}
+			
+			feescategory.setAmount(DataUtil.parseInt(request.getParameter("amount")));
+			feescategory.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			if(!feescategory.getFeescategoryname().equalsIgnoreCase("") && !feescategory.getParticularname().equalsIgnoreCase("") && feescategory.getAmount() != 0 ){
+				feescategory =  new feesCategoryDAO().create(feescategory);
+			}
 		}
-		
-		feescategory.setAmount(DataUtil.parseInt(request.getParameter("amount")));
-		
-		if(!feescategory.getFeescategoryname().equalsIgnoreCase("") && !feescategory.getParticularname().equalsIgnoreCase("") && feescategory.getAmount() != 0 ){
-			feescategory =  new feesCategoryDAO().create(feescategory);
-		}
-		
-		
 	}
 
 
@@ -83,9 +81,7 @@ public class FeesService {
 	        for (String id : idfeescategory) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
-
 	        }
-	        System.out.println("id length" + idfeescategory.length);
 	        new feesCategoryDAO().deleteMultiple(ids);
 		 }
 	}
@@ -95,7 +91,7 @@ public class FeesService {
 
 		boolean result = false;
 		try {
-			List<Student> list = new feesDetailsDAO().readListOfStudents();
+			List<Student> list = new feesDetailsDAO().readListOfStudents(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			request.setAttribute("studentListFeesCollection", list);
 			result = true;
 		} catch (Exception e) {

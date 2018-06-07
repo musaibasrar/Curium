@@ -24,19 +24,19 @@ public class SubjectDetailsService {
 
 	HttpServletRequest request;
 	HttpServletResponse response;
-	HttpSession httpsession;
+	HttpSession httpSession;
 	
 	public SubjectDetailsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
-		this.httpsession = request.getSession();
+		this.httpSession = request.getSession();
 	}
 
 	public boolean readListOfSubjects() {
 		boolean result = false;
 	    try {
-	    	List<Subject> list = new SubjectDetailsDAO().readListOfSubjects();
-	        httpsession.setAttribute("listSubject", list);
+	    	List<Subject> list = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+	        httpSession.setAttribute("listSubject", list);
 
 	        result = true;
 	    } catch (Exception e) {
@@ -49,14 +49,19 @@ public class SubjectDetailsService {
 	public boolean addSubject() {
 		Subject subject = new Subject();
 		boolean result = true;
-		subject.setSubjectname(DataUtil.emptyString(request.getParameter("subjectname")));
-		subject.setMinmarks(DataUtil.parseInt(request.getParameter("minmarks")));
-		subject.setMaxmarks(DataUtil.parseInt(request.getParameter("maxmarks")));
-		subject = new SubjectDetailsDAO().addSubject(subject);
-		 
-		if(subject == null){
-			result=false;
+		
+		if(httpSession.getAttribute("branchid")!=null){
+			subject.setSubjectname(DataUtil.emptyString(request.getParameter("subjectname")));
+			subject.setMinmarks(DataUtil.parseInt(request.getParameter("minmarks")));
+			subject.setMaxmarks(DataUtil.parseInt(request.getParameter("maxmarks")));
+			subject.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+			subject = new SubjectDetailsDAO().addSubject(subject);
+			 
+			if(subject == null){
+				result=false;
+			}
 		}
+		
 		return result;
 	}
 

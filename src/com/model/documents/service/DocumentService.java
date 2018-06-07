@@ -1,48 +1,17 @@
 package com.model.documents.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import com.model.academicyear.dao.YearDAO;
-import com.model.academicyear.dto.Currentacademicyear;
-import com.model.department.dao.departmentDAO;
-import com.model.department.dto.Department;
 import com.model.documents.dao.DocumentDAO;
 import com.model.documents.dto.Transfercertificate;
-import com.model.feescollection.dao.feesCollectionDAO;
-import com.model.feescollection.dto.Receiptinfo;
-import com.model.feesdetails.dao.feesDetailsDAO;
-import com.model.feesdetails.dto.Feesdetails;
-import com.model.parents.dao.parentsDetailsDAO;
 import com.model.parents.dto.Parents;
-import com.model.position.dao.positionDAO;
-import com.model.position.dto.Position;
-import com.model.std.dto.Classsec;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
-import com.model.student.dto.Studentfeesstructure;
 import com.util.DataUtil;
 import com.util.DateUtil;
 
@@ -51,6 +20,7 @@ public class DocumentService {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession httpSession;
+	private String BRANCHID = "branchid";
 	/**
     * Size of a byte buffer to read/write file
     */
@@ -65,13 +35,16 @@ public class DocumentService {
 	
 	public boolean transferCertificate(){
 		
-		try {
-			List<Parents> list = new studentDetailsDAO().getStudentsList("from Parents");
-			request.setAttribute("studentListtc", list);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			try {
+				List<Parents> list = new studentDetailsDAO().getStudentsList("from Parents where branchid"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				request.setAttribute("studentListtc", list);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 		return false;
 		
 	}

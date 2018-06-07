@@ -1,12 +1,9 @@
 package com.model.feescollection.service;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.employee.dao.EmployeeDAO;
-import com.model.employee.dto.Teacher;
 import com.model.feescollection.dao.feesCollectionDAO;
 import com.model.feescollection.dto.Feescollection;
 import com.model.feescollection.dto.Receiptinfo;
@@ -28,7 +23,6 @@ import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
 import com.model.student.dto.Studentfeesstructure;
 import com.util.DataUtil;
-import com.util.DateUtil;
 import com.util.NumberToWord;
 
 public class FeesCollectionService {
@@ -37,7 +31,8 @@ public class FeesCollectionService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
-
+	private String BRANCHID = "branchid";
+	
 	public FeesCollectionService(HttpServletRequest request,
 			HttpServletResponse response) {
 		this.request = request;
@@ -185,6 +180,7 @@ public class FeesCollectionService {
 			receiptInfo.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			receiptInfo.setDate(new Date());
 			receiptInfo.setSid(DataUtil.parseInt(sid));
+			receiptInfo.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			Long grantTotal = 0l;
 			for (int i = 0; i < studentSfsIds.length; i++) {
 				String[] totalAmount = studentSfsIds[i].split("_");
@@ -204,6 +200,7 @@ public class FeesCollectionService {
 					feesCollect.setDate(new Date());
 					feesCollect.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 					feesCollect.setReceiptnumber(receiptInfo.getReceiptnumber());
+					feesCollect.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 					feescollection.add(feesCollect);
 				}
 				createFeesCollection = new feesCollectionDAO().create(feescollection);

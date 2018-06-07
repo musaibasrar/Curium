@@ -48,7 +48,7 @@ public class studentDetailsDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public List<Student> readListOfObjectsPagination(int offset, int noOfRecords) {
+	public List<Student> readListOfObjectsPagination(int offset, int noOfRecords, int branchId) {
 		List<Student> results = new ArrayList<Student>();
 
 		try {
@@ -59,7 +59,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("FROM Student s where s.archive = 0 order by name ASC");
+					.createQuery("FROM Student s where s.archive = 0 AND branchid="+branchId+" order by name ASC");
 			query.setFirstResult(offset);
 			query.setMaxResults(noOfRecords);
 			results = query.list();
@@ -76,7 +76,7 @@ public class studentDetailsDAO {
 	}
 
 	@SuppressWarnings({ "unchecked", "finally" })
-	public int getNoOfRecords() {
+	public int getNoOfRecords(int branchId) {
 		List<Student> results = new ArrayList<Student>();
 		int noOfRecords = 0;
 		try {
@@ -84,7 +84,7 @@ public class studentDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("From Student")
+			results = (List<Student>) session.createQuery("From Student where archive=0 AND branchid="+branchId)
 					.list();
 			noOfRecords = results.size();
 			System.out
@@ -140,7 +140,7 @@ public class studentDetailsDAO {
 	}
 
 	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Student> readListOfStudents() {
+	public List<Student> readListOfStudents(int branchId) {
 		List<Student> results = new ArrayList<Student>();
 
 		try {
@@ -148,7 +148,7 @@ public class studentDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("From Student where archive=0")
+			results = (List<Student>) session.createQuery("From Student where archive=0 AND branchid="+branchId)
 					.list();
 			transaction.commit();
 
@@ -236,7 +236,7 @@ public class studentDetailsDAO {
 	}
 
 	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Student> getListOfStudents(String classofStd) {
+	public List<Student> getListOfStudents(String classofStd, int branchId) {
 		java.util.List<Student> results = new ArrayList<Student>();
 
 		try {
@@ -245,7 +245,7 @@ public class studentDetailsDAO {
 			transaction = session.beginTransaction();
 
 			results = (java.util.List<Student>) session.createQuery(
-					"From Student s where s.classstudying LIKE '" + classofStd
+					"From Student s where s.branchid="+branchId+" AND s.classstudying LIKE '" + classofStd
 							+ " %'").list();
 
 			transaction.commit();
@@ -325,14 +325,14 @@ public class studentDetailsDAO {
 	}
 
 	public List<Parents> readListOfObjectsPaginationALL(int offset,
-			int noOfRecords) {
+			int noOfRecords, int branchId) {
 		List<Parents> results = new ArrayList<Parents>();
 
 		try {
 			
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("From Parents as parents where parents.Student.archive=0 order by name ASC");
+					.createQuery("From Parents as parents where parents.Student.archive=0 AND parents.branchid = "+branchId+" order by name ASC");
 			query.setFirstResult(offset);   
 			query.setMaxResults(noOfRecords);
 			results = query.getResultList();
@@ -351,7 +351,7 @@ public class studentDetailsDAO {
 		}
 	}
 
-	public List<Student> readListOfObjectsForIcon() {
+	public List<Student> readListOfObjectsForIcon(int branchId) {
 		List<Student> results = new ArrayList<Student>();
 
 		try {
@@ -362,7 +362,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("FROM Student s where s.archive = 0 order by name ASC");
+					.createQuery("FROM Student s where s.archive = 0 and s.branchid= "+branchId+" order by name ASC");
 			
 			results = query.list();
 			transaction.commit();

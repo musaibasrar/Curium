@@ -207,7 +207,6 @@ public class StudentAction {
 	private String viewAll() {
 
 		new StudentService(request, response).viewAllStudentsParents();
-        System.out.println("IN action's view all Parents");
         return "viewAllWithParents.jsp";
         /*new StudentService(request, response).viewAllStudents();
         System.out.println("IN action's view all");

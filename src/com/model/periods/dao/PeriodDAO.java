@@ -55,12 +55,12 @@ public class PeriodDAO {
 		return false;
 	}
 
-	public List<Periodmaster> getPeriodsDetails(String currentacademicyear) {
+	public List<Periodmaster> getPeriodsDetails(String currentacademicyear, int branchId) {
 		List<Periodmaster> periodMaster = new ArrayList<Periodmaster>();
 		
 		try {
 			transaction = session.beginTransaction();
-			periodMaster = session.createQuery("from Periodmaster where academicyear='"+currentacademicyear+"'").list();
+			periodMaster = session.createQuery("from Periodmaster where academicyear='"+currentacademicyear+"' and branchid="+branchId).list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

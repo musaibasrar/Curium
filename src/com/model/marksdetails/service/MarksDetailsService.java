@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -34,20 +33,20 @@ import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
 import com.model.subjectdetails.dao.SubjectDetailsDAO;
 import com.model.subjectdetails.dto.Subject;
-import com.model.user.dao.UserDAO;
 import com.util.DataUtil;
 
 public class MarksDetailsService {
 
 	HttpServletRequest request;
 	HttpServletResponse response;
-	HttpSession session;
+	HttpSession httpSession;
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
+	private String BRANCHID = "branchid";
 	
 	public MarksDetailsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
-		this.session = request.getSession();
+		this.httpSession = request.getSession();
 	}
 
 	public String addMarks() {
@@ -106,8 +105,9 @@ public class MarksDetailsService {
 				marks.setSubid(subid);
 				marks.setSid((int) mapEntry.getKey());
 				marks.setMarksobtained(Integer.parseInt(test));
-				String currentYear = (String) session.getAttribute(CURRENTACADEMICYEAR);
+				String currentYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
 				marks.setAcademicyear(currentYear);
+				marks.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				marksList.add(marks);
 			}
 
@@ -132,6 +132,8 @@ public class MarksDetailsService {
 
 	public void Search() {
 
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			
 		String queryMain = "From Parents as parents where";
 		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
 
@@ -163,7 +165,7 @@ public class MarksDetailsService {
 					+ "' OR parents.Student.classstudying = '" + conClassStudyingEquals
 					+ "'  AND parents.Student.archive=0";
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND parents.Student.archive=0";
+			querySub = querySub + " AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
 
 		queryMain = queryMain + querySub;
@@ -177,15 +179,18 @@ public class MarksDetailsService {
 		request.setAttribute("searchStudentList", searchStudentList);
 
 		// get all the subjects
-		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjects();
+		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("listSubject", subjectList);
 
 		// get the list for all the midterms
-		List<Exams> examList = new ExamDetailsDAO().readListOfExams();
+		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("listExam", examList);
+		}
 	}
 
 	public boolean viewMarks() {
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
 		String queryMain = "From Parents as parents where";
 		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
 
@@ -217,7 +222,7 @@ public class MarksDetailsService {
 					+ "' OR parents.Student.classstudying = '" + conClassStudyingEquals
 					+ "'  AND parents.Student.archive=0";
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND parents.Student.archive=0";
+			querySub = querySub + " AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
 
 		queryMain = queryMain + querySub;
@@ -268,16 +273,18 @@ public class MarksDetailsService {
 		 * for(int i=0; i<marksDetails.size(); i++){ System.out.println(
 		 * "Marks details "+marksDetails.get(i).getMarksobtained()); }
 		 */
+		
+		}
 		return true;
 	}
 
 	public void getSubjectExams() {
 		// get all the subjects
-		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjects();
+		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("listSubject", subjectList);
 
 		// get the list for all the midterms
-		List<Exams> examList = new ExamDetailsDAO().readListOfExams();
+		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("listExam", examList);
 
 	}
@@ -348,9 +355,10 @@ public class MarksDetailsService {
 					marks.setSubid(subid);
 					marks.setSid(studentId);
 					marks.setMarksobtained(Integer.parseInt(marksObtained));
-					String currentAcademicYear = (String) session.getAttribute(CURRENTACADEMICYEAR);
+					String currentAcademicYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
 					String currentYear = currentAcademicYear;
 					marks.setAcademicyear(currentYear);
+					marks.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 					marksList.add(marks);
 				}
 
@@ -396,14 +404,14 @@ public class MarksDetailsService {
 		
 		boolean result = false;
 		
-		if(session.getAttribute(CURRENTACADEMICYEAR)!=null){
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
 			
 			String[] studentIds = request.getParameterValues("studentIDs");
 			String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 
-			List<Exams> exams = new ExamDetailsDAO().readListOfExams();
-			List<Subject> subjects = new SubjectDetailsDAO().readListOfSubjects();
+			List<Exams> exams = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			List<Subject> subjects = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			Integer[][] examsubjectCombo = new Integer[exams.size() * subjects.size()][2];
 			int r = 0, c = 0;
 			for (Exams examsList : exams) {
@@ -420,7 +428,7 @@ public class MarksDetailsService {
 
 			for (int i = 0; i < studentIds.length; i++) {
 				Student studentDetails = new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[i]));
-				List<Marks> marksDetails = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),session.getAttribute(CURRENTACADEMICYEAR).toString());
+				List<Marks> marksDetails = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 				marksList[i][0] = studentDetails.getAdmissionnumber();
 				marksList[i][1] = studentDetails.getName();
 				int k = 2;
@@ -469,7 +477,7 @@ public class MarksDetailsService {
 				FileInputStream inputStream = new FileInputStream(
 						new File(new DataUtil().getPropertiesValue("reportcardpathdirectory")));
 				String pathOfReportCard = new DataUtil().getPropertiesValue("reportcardpathdirectory");
-				session.setAttribute("reportcardpath", pathOfReportCard);
+				httpSession.setAttribute("reportcardpath", pathOfReportCard);
 				Workbook workbook = WorkbookFactory.create(inputStream);
 
 				Sheet sheet = workbook.getSheetAt(1);

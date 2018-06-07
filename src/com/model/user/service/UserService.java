@@ -1,7 +1,7 @@
 package com.model.user.service;
 
 import java.io.InputStream;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -12,18 +12,15 @@ import javax.servlet.http.HttpSession;
 
 import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
+import com.model.branch.dto.Branch;
 import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
 import com.model.feescollection.dto.Receiptinfo;
-import com.model.feesdetails.dao.feesDetailsDAO;
-import com.model.feesdetails.dto.Feesdetails;
 import com.model.parents.dto.Parents;
 import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
 import com.model.user.dao.UserDAO;
 import com.model.user.dto.Login;
 import com.util.DataUtil;
-import com.util.DateUtil;
 
 public class UserService {
 	
@@ -31,6 +28,7 @@ public class UserService {
 	    HttpServletResponse response;
 	    HttpSession httpSession;
 	    private Login login;
+	    private String BRANCHID = "branchid";
 
 	public UserService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -76,22 +74,25 @@ public class UserService {
 	}
 
 	public void dashBoard() {
-			int totalStudents = new UserDAO().getNoOfStudents();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			
+			int totalStudents = new UserDAO().getNoOfStudents(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			request.setAttribute("totalStudents", totalStudents);
 			
-			int studentNursery = new UserDAO().getNoOfStudentsOne("nursery");
-			int studentLKG = new UserDAO().getNoOfStudentsOne("L.K.G");
-			int studentUKG = new UserDAO().getNoOfStudentsOne("U.K.G");
-	        int studentOne = new UserDAO().getNoOfStudentsOne("I");
-	        int studentTwo = new UserDAO().getNoOfStudentsOne("II");
-	        int studentThree = new UserDAO().getNoOfStudentsOne("III");
-	        int studentFour = new UserDAO().getNoOfStudentsOne("IV");
-	        int studentFive = new UserDAO().getNoOfStudentsOne("V");
-	        int studentSix = new UserDAO().getNoOfStudentsOne("VI");
-	        int studentSeven = new UserDAO().getNoOfStudentsOne("VII");
-	        int studentEight = new UserDAO().getNoOfStudentsOne("VIII");
-	        int studentNine = new UserDAO().getNoOfStudentsOne("IX");
-	        int studentTen = new UserDAO().getNoOfStudentsOne("X");
+			int studentNursery = new UserDAO().getNoOfStudentsOne("nursery", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			int studentLKG = new UserDAO().getNoOfStudentsOne("L.K.G", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			int studentUKG = new UserDAO().getNoOfStudentsOne("U.K.G", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        int studentOne = new UserDAO().getNoOfStudentsOne("I", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        int studentTwo = new UserDAO().getNoOfStudentsOne("II", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        int studentThree = new UserDAO().getNoOfStudentsOne("III", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        int studentFour = new UserDAO().getNoOfStudentsOne("IV", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        int studentFive = new UserDAO().getNoOfStudentsOne("V", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        int studentSix = new UserDAO().getNoOfStudentsOne("VI", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        int studentSeven = new UserDAO().getNoOfStudentsOne("VII", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        int studentEight = new UserDAO().getNoOfStudentsOne("VIII", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        int studentNine = new UserDAO().getNoOfStudentsOne("IX", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        int studentTen = new UserDAO().getNoOfStudentsOne("X", Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	        
 	        request.setAttribute("studentNursery", studentNursery);
 	        request.setAttribute("studentLKG", studentLKG);
@@ -108,15 +109,18 @@ public class UserService {
 	        request.setAttribute("studentTen", studentTen);
 	        
 	        
-	        int totalNoOfEmployees = new EmployeeDAO().getNoOfEmployees();
+	        int totalNoOfEmployees = new EmployeeDAO().getNoOfEmployees(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	        request.setAttribute("totalNoOfEmployees", totalNoOfEmployees);
-	      
+		}
 		
 	}
 
 	public void advanceSearch() {
 		
-		String queryMain ="From Parents as parents where";
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		String queryMain ="From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
 		String studentname= DataUtil.emptyString(request.getParameter("name"));
 		String gender = DataUtil.emptyString(request.getParameter("gender"));
 		String dateOfBirth = DataUtil.emptyString(request.getParameter("dateofbirth"));
@@ -278,7 +282,9 @@ public class UserService {
 			queryMain = queryMain+querySub+" AND parents.Student.archive=0";
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
-			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+	}
+			
 			request.setAttribute("searchStudentList", searchStudentList);
 		
 		
@@ -349,7 +355,11 @@ public class UserService {
 
 	public void advanceSearchByParents() {
 		
-		String queryMain ="From Parents as parents where";
+		List<Parents> searchParentsList = new ArrayList<Parents>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			
+		String queryMain ="From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
 		String fathersname= DataUtil.emptyString(request.getParameter("fathersname"));
 		String mothersname = DataUtil.emptyString(request.getParameter("mothersname"));
 		
@@ -371,15 +381,21 @@ public class UserService {
 			queryMain = queryMain+querySub;
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
-			List<Parents> searchParentsList = new studentDetailsDAO().getStudentsList(queryMain);
+			searchParentsList = new studentDetailsDAO().getStudentsList(queryMain);
+			
+		}
 			request.setAttribute("studentList", searchParentsList);
 		
 		
 	}
 
 	public void searchByDate() {
-		 //feesdetails.sid='"+sid+"' AND feesdetails.academicyear='"+currentYear+"'"
-		String queryMain ="From Receiptinfo as feesdetails where";
+		 
+		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			
+		String queryMain ="From Receiptinfo as feesdetails where feesdetails.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
 		String toDate= DataUtil.emptyString(request.getParameter("todate"));
 		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
 		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
@@ -400,7 +416,9 @@ public class UserService {
 			queryMain = queryMain+querySub;
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
-			List<Receiptinfo> feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
+			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
+			
+	}
 			long sumOfFees = 0l;
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
@@ -425,6 +443,9 @@ public class UserService {
 		}
 		user.setPassword(builder.toString());
 		user.setUsertype("staff");
+		Branch branch = new Branch();
+		branch.setIdbranch(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		user.setBranch(branch);
 		
 		return new UserDAO().addUser(user);
 		

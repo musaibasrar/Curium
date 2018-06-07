@@ -32,6 +32,7 @@ public class PeriodService {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession httpSession;
+	private String BRANCHID = "branchid";
 	/**
     * Size of a byte buffer to read/write file
     */
@@ -46,15 +47,21 @@ public class PeriodService {
 	
 	public boolean periodConfiguration(){
 		
-		Currentacademicyear currentYear = new YearDAO().showYear();
-        httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
-        
-        new SubjectDetailsService(request, response).readListOfSubjects();
-        
-        new EmployeeService(request, response).ViewAllEmployee();
-       
-        List<Periodmaster> periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear());
-        request.setAttribute("periodmasterlist", periodMaster);
+		List<Periodmaster> periodMaster = new ArrayList<Periodmaster>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			
+			Currentacademicyear currentYear = new YearDAO().showYear();
+	        httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
+	        
+	        new SubjectDetailsService(request, response).readListOfSubjects();
+	        
+	        new EmployeeService(request, response).ViewAllEmployee();
+	       
+	        periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        request.setAttribute("periodmasterlist", periodMaster);
+		}
+		
         
         if(periodMaster.isEmpty()){
         	return false;
@@ -103,6 +110,7 @@ public class PeriodService {
 				periodDetails.setSubject(subjects[getPeriod]);
 				periodDetails.setStaff(staff[getPeriod]);
 				periodDetails.setTimings(periodStartTimeHr[getPeriod]+":"+periodStartTimeMin[getPeriod]+": "+periodStartTimeAm[getPeriod]+ " To "+periodEndTimeHr[getPeriod]+":"+periodEndTimeMin[getPeriod]+" "+periodEndTimeAm[getPeriod]);
+				periodDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				getPeriod++;
 				periodList.add(periodDetails);
 			}
@@ -121,7 +129,7 @@ public class PeriodService {
 		periodMaster.setDayend(dayEndTimeHr+":"+dayEndTimeMin+" "+dayEndAm);
 		periodMaster.setDurationofperiod(durationOfPeriodsHr+":"+durationOfPeriodsMin);
 		periodMaster.setTotalperiods(Integer.parseInt(totalNoOfPeriods));
-
+		periodMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		return new PeriodDAO().save(periodMaster,periodMap);
 	}
 
@@ -218,13 +226,17 @@ public class PeriodService {
 
 	public boolean generateTimeTable() {
 
+		List<Periodmaster> periodMaster = new ArrayList<Periodmaster>();
 		
-		Currentacademicyear currentYear = new YearDAO().showYear();
-        httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
-       
-        List<Periodmaster> periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear());
-        request.setAttribute("periodmasterlist", periodMaster);
-        
+		if(httpSession.getAttribute(BRANCHID)!=null){
+
+			Currentacademicyear currentYear = new YearDAO().showYear();
+	        httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
+	       
+	        periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        request.setAttribute("periodmasterlist", periodMaster);
+		}
+		
         if(periodMaster.isEmpty()){
         	return false;
         }

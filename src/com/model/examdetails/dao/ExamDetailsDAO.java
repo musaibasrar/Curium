@@ -45,14 +45,14 @@ public class ExamDetailsDAO {
 
 
 
-	public List<Exams> readListOfExams() {
+	public List<Exams> readListOfExams(int branchId) {
 		List<Exams> results = new ArrayList<Exams>();
 		try {
 			// this.session =
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Exams>) session.createQuery("From Exams")
+			results = (List<Exams>) session.createQuery("From Exams where branchid="+branchId)
 					.list();
 			transaction.commit();
 
@@ -103,7 +103,7 @@ public class ExamDetailsDAO {
 
 
 
-	public List<Examschedule> readListOfExamSchedule() {
+	public List<Examschedule> readListOfExamSchedule(int branchId) {
 		
 		List<Examschedule> results = new ArrayList<Examschedule>();
 		try {
@@ -111,7 +111,7 @@ public class ExamDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Examschedule>) session.createQuery("From Examschedule")
+			results = (List<Examschedule>) session.createQuery("From Examschedule where branchid"+branchId)
 					.list();
 			transaction.commit();
 
@@ -144,11 +144,11 @@ public class ExamDetailsDAO {
 	}
 
 	public List<Examschedule> getExamScheduleDetails(String academicYear,
-			String classH, String exam) {
+			String classH, String exam, int branchId) {
 		List<Examschedule> listExamSchedule = new ArrayList<Examschedule>();
 		try {
 			transaction = session.beginTransaction();
-			listExamSchedule = session.createQuery("from Examschedule where classes like '"+classH+"-%' and academicyear = '"+academicYear+"' and examname = '"+exam+"' ORDER BY date ASC").list();
+			listExamSchedule = session.createQuery("from Examschedule where classes like '"+classH+"-%' and academicyear = '"+academicYear+"' and examname = '"+exam+"' and branchid="+branchId+" ORDER BY date ASC").list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

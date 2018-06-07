@@ -33,10 +33,10 @@ import com.util.DataUtil;
 
 public class FeesDetailsService {
 	
-	 private HttpServletRequest request;
+	 	private HttpServletRequest request;
 	    private HttpServletResponse response;
 	    private HttpSession httpSession;
-	    
+	    private String BRANCHID = "branchid";
 	
 	public FeesDetailsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -49,22 +49,26 @@ public class FeesDetailsService {
 	public Feesdetails addFeesDetails() {
 		
 		Feesdetails feesdetails = new Feesdetails();
-		// Setting the fees details
-		String sid = request.getParameter("studentId");
-		feesdetails.setSid(DataUtil.parseInt(sid));
-		feesdetails.setDateoffees(DataUtil.emptyString(request
-				.getParameter("dateoffees")));
-		feesdetails.setAmountpercat(DataUtil.emptyString(request
-				.getParameter("feesTotalAmount")));
-		feesdetails.setGrandtotal(DataUtil.emptyString(request
-				.getParameter("grandTotalAmount")));
-		feesdetails.setMiscamount(DataUtil.emptyString(request
-				.getParameter("miscellanousamount")));
-		feesdetails.setBalamount(DataUtil.emptyString(request
-				.getParameter("balanceamount")));
-		String currentYear = (String) httpSession.getAttribute("currentYear");
-		feesdetails.setAcademicyear(DataUtil.emptyString(currentYear));
-		 feesdetails = new feesDetailsDAO().create(feesdetails);
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			// Setting the fees details
+			String sid = request.getParameter("studentId");
+			feesdetails.setSid(DataUtil.parseInt(sid));
+			feesdetails.setDateoffees(DataUtil.emptyString(request
+					.getParameter("dateoffees")));
+			feesdetails.setAmountpercat(DataUtil.emptyString(request
+					.getParameter("feesTotalAmount")));
+			feesdetails.setGrandtotal(DataUtil.emptyString(request
+					.getParameter("grandTotalAmount")));
+			feesdetails.setMiscamount(DataUtil.emptyString(request
+					.getParameter("miscellanousamount")));
+			feesdetails.setBalamount(DataUtil.emptyString(request
+					.getParameter("balanceamount")));
+			String currentYear = (String) httpSession.getAttribute("currentYear");
+			feesdetails.setAcademicyear(DataUtil.emptyString(currentYear));
+			feesdetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			 feesdetails = new feesDetailsDAO().create(feesdetails);
+		}
+		
 		 return feesdetails;
 	}
 

@@ -32,13 +32,13 @@ public class SubjectDetailsDAO {
 	}
 	
 	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Subject> readListOfSubjects() {
+	public List<Subject> readListOfSubjects(int branchId) {
 		
 		List<Subject> results = new ArrayList<Subject>();
 		try {
 
 			transaction = session.beginTransaction();
-			results = (List<Subject>) session.createQuery("From Subject")
+			results = (List<Subject>) session.createQuery("From Subject where branchid="+branchId)
 					.list();
 			transaction.commit();
 		} catch (HibernateException hibernateException) {

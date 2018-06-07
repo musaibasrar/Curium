@@ -220,7 +220,7 @@ public class feesDetailsDAO {
 	        return results;
 	}
 
-	public List<Student> readListOfStudents() {
+	public List<Student> readListOfStudents(int branchId) {
 		List<Student> results = new ArrayList<Student>();
 
 		try {
@@ -228,7 +228,7 @@ public class feesDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("FROM Student s where s.sid in (select f.sid from Studentfeesstructure f)")
+			results = (List<Student>) session.createQuery("FROM Student s where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")")
 					.list();
 			transaction.commit();
 

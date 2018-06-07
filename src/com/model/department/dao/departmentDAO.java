@@ -54,13 +54,13 @@ public class departmentDAO {
 
 
 	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Department> readListOfObjects() {
+	public List<Department> readListOfObjects(int branchId) {
 		
 		List<Department> results = new ArrayList<Department>();
         try {
             
             transaction = session.beginTransaction();
-            results = (List<Department>) session.createQuery("From Department").list();
+            results = (List<Department>) session.createQuery("From Department where branchid="+branchId).list();
             transaction.commit();
         } catch (HibernateException hibernateException) {
             transaction.rollback();

@@ -49,58 +49,63 @@ public class EmailService {
 		int noOfRecords = 100;
 		int offset=0;
 		
-		String queryMain ="From Parents as parents where ";
-		String querySub = "";
-		String addClass = request.getParameter("addclass");
-		String addSec = request.getParameter("addsec");
-		String conClassStudying = "";
-		
-		if(addClass.contains("ALL")){
-			querySub = querySub + "parents.Student.archive=0";
-		}else{
-			if(!addClass.equalsIgnoreCase("Class") ){
-				
-				conClassStudying = addClass+ " " +"%";
-				
-			}
-			if( !addSec.equalsIgnoreCase("Sec") && !addSec.equalsIgnoreCase("ALL")){
-				conClassStudying = addClass;
-				conClassStudying = conClassStudying + " " +addSec;
-			}
+		if(httpSession.getAttribute("branchid")!=null){
 			
-			String classStudying = DataUtil.emptyString(conClassStudying);
+			String queryMain ="From Parents as parents where ";
+			String querySub = "";
+			String addClass = request.getParameter("addclass");
+			String addSec = request.getParameter("addsec");
+			String conClassStudying = "";
 			
-			if(!classStudying.equalsIgnoreCase("")){
-				querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0";
-			}	
-		}
-		
-		queryMain = queryMain+querySub;
-		
-		double totalEmails = new EmailDAO().countEmails(queryMain);
-		int iterations = (int) Math.ceil(totalEmails/100);
-		
-		System.out.println("main query:"+queryMain);
-		
-		for(int i=0;i<iterations;i++){
-			List<Parents> parentsEmails = new EmailDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
-
-			String emails = null;
-				StringBuilder sbN = new StringBuilder();
-
-				if(!parentsEmails.isEmpty()){
-					for (Parents parents : parentsEmails) {
-						sbN.append(parents.getEmail());
-						sbN.append(",");
-					}
-					emails=sbN.toString();
-					emails = emails.substring(0, emails.length()-1);
-					System.out.println("emails are *** "+emails);
-					result = sendEmail(emails,DataUtil.emptyString(request.getParameter("subject")),DataUtil.emptyString(request.getParameter("messagebody")));
+			if(addClass.contains("ALL")){
+				querySub = querySub + "parents.Student.archive=0";
+			}else{
+				if(!addClass.equalsIgnoreCase("Class") ){
+					
+					conClassStudying = addClass+ " " +"%";
+					
+				}
+				if( !addSec.equalsIgnoreCase("Sec") && !addSec.equalsIgnoreCase("ALL")){
+					conClassStudying = addClass;
+					conClassStudying = conClassStudying + " " +addSec;
 				}
 				
-			offset = offset+100;
+				String classStudying = DataUtil.emptyString(conClassStudying);
+				
+				if(!classStudying.equalsIgnoreCase("")){
+					querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+				}	
+			}
+			
+			queryMain = queryMain+querySub;
+			
+			double totalEmails = new EmailDAO().countEmails(queryMain);
+			int iterations = (int) Math.ceil(totalEmails/100);
+			
+			System.out.println("main query:"+queryMain);
+			
+			for(int i=0;i<iterations;i++){
+				List<Parents> parentsEmails = new EmailDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
+
+				String emails = null;
+					StringBuilder sbN = new StringBuilder();
+
+					if(!parentsEmails.isEmpty()){
+						for (Parents parents : parentsEmails) {
+							sbN.append(parents.getEmail());
+							sbN.append(",");
+						}
+						emails=sbN.toString();
+						emails = emails.substring(0, emails.length()-1);
+						System.out.println("emails are *** "+emails);
+						result = sendEmail(emails,DataUtil.emptyString(request.getParameter("subject")),DataUtil.emptyString(request.getParameter("messagebody")));
+					}
+					
+				offset = offset+100;
+			}
 		}
+		
+		
 		
         return result;
 		

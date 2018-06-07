@@ -39,7 +39,6 @@ public class StudentController extends HttpServlet {
         
         
         List<Student> list = new studentDetailsDAO().readListOfObjectsForIcon();
-        System.out.println("In Student controller");
         response.setContentType("text/xml");
         response.setHeader("Cache-Control", "no-cache");
         try {

@@ -30,6 +30,7 @@ public class EmployeeService {
 	private HttpServletRequest request;
     private HttpServletResponse response;
     private HttpSession httpSession;
+    private String BRANCHID = "branchid";
     
 	public EmployeeService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -41,6 +42,7 @@ public class EmployeeService {
 	public boolean addEmployee() {
 		Teacher employee = new Teacher();
 		
+		if(httpSession.getAttribute(BRANCHID)!=null){
 		employee.setTeachername(DataUtil.emptyString(request.getParameter("name")));
 		employee.setGender(DataUtil.emptyString(request.getParameter("gender")));
 		employee.setAddress(DataUtil.emptyString(request.getParameter("address")));
@@ -62,6 +64,7 @@ public class EmployeeService {
 		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
 		}
 		employee.setTeacherexternalid(builder.toString());
+		employee.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		if(new EmployeeDAO().create(employee)){
 			if(new UserService(request, response).addUser(employee)){
@@ -70,7 +73,7 @@ public class EmployeeService {
 				new EmployeeDAO().delete(employee);
 			}
 		}
-		
+		}
 		return false;
 	}
 
@@ -78,7 +81,7 @@ public class EmployeeService {
 		
 		boolean result = false;
     try {
-    	List<Teacher> list = new EmployeeDAO().readListOfObjects();
+    	List<Teacher> list = new EmployeeDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
         httpSession.setAttribute("employeeList", list);
         httpSession.setAttribute("employeeListProcessSalary", list);
         result = true;
@@ -159,9 +162,9 @@ public class EmployeeService {
 	}
 
 	public void viewAllRelations() {
-		List<Department> listDepartment = new departmentDAO().readListOfObjects();
+		List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
         httpSession.setAttribute("listDepartment", listDepartment);
-        List<Position> listPosition = new positionDAO().readListOfObjects();
+        List<Position> listPosition = new positionDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
         httpSession.setAttribute("listPosition", listPosition);
 		
 	}
@@ -170,11 +173,15 @@ public class EmployeeService {
 		String staffName = request.getParameter("staffName");
 		String staffDepartment = request.getParameter("staffDepartment");
 		List<Teacher> employeeList = new ArrayList<Teacher>();
-		if(staffName!=""){
-			employeeList = new EmployeeDAO().readListOfEmployeesByName(staffName);
-		}else if(staffDepartment!=""){
-			employeeList = new EmployeeDAO().readListOfEmployeesByDepartment(staffDepartment);
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			if(staffName!=""){
+				employeeList = new EmployeeDAO().readListOfEmployeesByName(staffName, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			}else if(staffDepartment!=""){
+				employeeList = new EmployeeDAO().readListOfEmployeesByDepartment(staffDepartment, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			}
 		}
+		
 		request.setAttribute("employeeList", employeeList);
 		
 		new EmployeeService(request, response).ViewAllEmployee();

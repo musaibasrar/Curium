@@ -22,6 +22,7 @@ public class StampFeesService {
 	HttpServletResponse response;
 	HttpSession httpSession;
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
+	private String BRANCHID = "branchid";
 
 	public StampFeesService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -31,8 +32,11 @@ public class StampFeesService {
 	}
 
 	public void advanceSearch() {
-
-		String queryMain = "From Parents as parents where";
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		
+			String queryMain = "From Parents as parents where";
 		String studentname = DataUtil.emptyString(request
 				.getParameter("namesearch"));
 
@@ -54,7 +58,7 @@ public class StampFeesService {
 		String querySub = "";
 
 		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0";
+			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
 
 		if (!classStudying.equalsIgnoreCase("")
@@ -63,7 +67,7 @@ public class StampFeesService {
 					+ classStudying + "' AND parents.Student.archive=0";
 		} else if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " parents.Student.classstudying like '"
-					+ classStudying + "' AND parents.Student.archive=0";
+					+ classStudying + "' AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
 
 		queryMain = queryMain + querySub;
@@ -73,42 +77,49 @@ public class StampFeesService {
 		 * ;
 		 */
 		System.out.println("SEARCH QUERY ***** " + queryMain);
-		List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		
+	}
 		request.setAttribute("searchStudentList", searchStudentList);
 
 	}
 
 	public void advanceSearchByParents() {
 
-		String queryMain = "From Parents as parents where";
-		String fathersname = DataUtil.emptyString(request
-				.getParameter("fathersname"));
-		String mothersname = DataUtil.emptyString(request
-				.getParameter("mothersname"));
+		List<Parents> searchParentsList = new ArrayList<Parents>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			String queryMain = "From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			String fathersname = DataUtil.emptyString(request
+					.getParameter("fathersname"));
+			String mothersname = DataUtil.emptyString(request
+					.getParameter("mothersname"));
 
-		String querySub = "";
+			String querySub = "";
 
-		if (!fathersname.equalsIgnoreCase("")) {
-			querySub = " parents.fathersname like '%" + fathersname + "%'";
+			if (!fathersname.equalsIgnoreCase("")) {
+				querySub = "AND parents.fathersname like '%" + fathersname + "%'";
+			}
+
+			if (!mothersname.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
+				querySub = querySub + " AND parents.mothersname like '%"
+						+ mothersname + "%'";
+			} else if (!mothersname.equalsIgnoreCase("")) {
+				querySub = querySub + "AND parents.mothersname like '%" + mothersname
+						+ "%'";
+			}
+
+			queryMain = queryMain + querySub;
+			/*
+			 * queryMain =
+			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+			 * ;
+			 */
+			System.out.println("SEARCH QUERY ***** " + queryMain);
+			searchParentsList = new studentDetailsDAO()
+					.getStudentsList(queryMain);
 		}
-
-		if (!mothersname.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND parents.mothersname like '%"
-					+ mothersname + "%'";
-		} else if (!mothersname.equalsIgnoreCase("")) {
-			querySub = querySub + " parents.mothersname like '%" + mothersname
-					+ "%'";
-		}
-
-		queryMain = queryMain + querySub;
-		/*
-		 * queryMain =
-		 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
-		 * ;
-		 */
-		System.out.println("SEARCH QUERY ***** " + queryMain);
-		List<Parents> searchParentsList = new studentDetailsDAO()
-				.getStudentsList(queryMain);
+		
 		request.setAttribute("studentList", searchParentsList);
 
 	}
@@ -137,6 +148,7 @@ public class StampFeesService {
 			academicfessstructure.setSid(Integer.valueOf(id));
 			academicfessstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			academicfessstructure.setTotalfees(feesTotalAmount);
+			academicfessstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			listOfacademicfessstructure.add(academicfessstructure);
 			// ids.add(Integer.valueOf(id));
 
@@ -151,7 +163,7 @@ public class StampFeesService {
 			studentfeesstructure.setFeescategory(feescategory);
 			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[i]));
 			studentfeesstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-			
+			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			listOfstudentfeesstructure.add(studentfeesstructure);
 			studentfeesstructure = new Studentfeesstructure();
 		}

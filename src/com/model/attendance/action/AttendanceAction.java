@@ -92,8 +92,6 @@ public class AttendanceAction {
 			url = attendanceMarkStaff();
 		}else if ("markStaffAttendance".equalsIgnoreCase(action)) {
 			url = markStaffAttendance();
-		}else if ("markStaffAttendance".equalsIgnoreCase(action)) {
-			url = markStaffAttendance();
 		}else if ("attendanceExportViewStaff".equalsIgnoreCase(action)) {
 			url = attendanceExportViewStaff();
 		}else if ("exportMonthlyDataStaff".equalsIgnoreCase(action)) {

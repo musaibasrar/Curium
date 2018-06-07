@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,6 +45,7 @@ public class HrService {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession httpSession;
+	private String BRANCHID = "branchid";
 
 	public HrService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -57,9 +57,13 @@ public class HrService {
 	}
 
 	public boolean leaveType() {
+
+		List<Leavetypemaster> list = new ArrayList<Leavetypemaster>();
 		
-		List<Leavetypemaster> list = new HrDAO().readListOfLeaveTypes();
-        httpSession.setAttribute("leavetypemaster", list);
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			list = new HrDAO().readListOfLeaveTypes(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		}
+		httpSession.setAttribute("leavetypemaster", list);
         	
         return true;
 	}
@@ -68,6 +72,7 @@ public class HrService {
 		
 		Leavetypemaster leaveMaster = new Leavetypemaster();
 		leaveMaster.setLeavetypename(DataUtil.emptyString(request.getParameter("leavetypename")));
+		leaveMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		return new HrDAO().saveLeaveType(leaveMaster);
 	}
 
@@ -96,6 +101,7 @@ public class HrService {
 				leaveDetails.setTeacher(teacher);
 				leaveDetails.setNumberofleaves(Integer.parseInt(totalLeaves[i]));
 				leaveDetails.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
+				leaveDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				leaveDetailsList.add(leaveDetails);
 			}
 			
@@ -136,7 +142,7 @@ public class HrService {
 	public void payHead() {
 
 		if(httpSession.getAttribute("currentAcademicYear")!=null){
-		List<Payhead> payHeadList = new HrDAO().getPayHeadList(httpSession.getAttribute("currentAcademicYear").toString());
+		List<Payhead> payHeadList = new HrDAO().getPayHeadList(httpSession.getAttribute("currentAcademicYear").toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("payheadlist", payHeadList);
 		}
 	}
@@ -150,6 +156,7 @@ public class HrService {
 		payHead.setValidatory(DataUtil.emptyString(request.getParameter("validatory")));
 		payHead.setDescription(DataUtil.emptyString(request.getParameter("description")));
 		payHead.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
+		payHead.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		return new HrDAO().savePayHead(payHead);
 		}
 		return false;
@@ -176,6 +183,7 @@ public class HrService {
 				payHead.setIdpayhead(Integer.parseInt(payHeadId));
 				payHeadStaffDetails.setPayhead(payHead);
 				payHeadStaffDetails.setValue(new BigDecimal(values[i]));
+				payHeadStaffDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				payHeadStaffDetailsList.add(payHeadStaffDetails);
 			}
 			
@@ -218,6 +226,7 @@ public class HrService {
 				payBasic.setOvertime("no");
 			}
 			payBasic.setPaymenttype(paymentType[i]);
+			payBasic.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			
 			payBasicList.add(payBasic);
 		}
@@ -236,14 +245,19 @@ public class HrService {
 		pf.setDate(DateUtil.dateParserUpdateStd(DataUtil.emptyString(request.getParameter("datepf"))));
 		pf.setPaidbyemployee(Integer.parseInt(paidByStaff));
 		pf.setPaidbymanagement(Integer.parseInt(paidByManagement));
-		
+		pf.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		new HrDAO().addPf(pf);
 		
 	}
 
 	public void pfSettings() {
 		
-		List<Pf> pf = new HrDAO().pfSettings();
+		List<Pf> pf = new ArrayList<Pf>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			pf = new HrDAO().pfSettings(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		}
+		
 		request.setAttribute("pflist", pf);
 		
 	}
@@ -264,24 +278,32 @@ public class HrService {
 		
 		Payadvancesalary payAdvanceSalary = new Payadvancesalary();
 		Teacher teacher = new Teacher();
-		payAdvanceSalary.setAmount(new BigDecimal(DataUtil.emptyString(request.getParameter("amount"))));
-		payAdvanceSalary.setDeductionpermonth(new BigDecimal(DataUtil.emptyString(request.getParameter("deductionpermonth"))));
-		payAdvanceSalary.setDeductionstartmonth(DataUtil.emptyString(request.getParameter("deductionmonth")));
-		payAdvanceSalary.setDeductionstartyear(DataUtil.emptyString(request.getParameter("deductionyear")));
-		teacher.setTid(Integer.parseInt(DataUtil.emptyString(request.getParameter("staffid"))));
-		payAdvanceSalary.setTeacher(teacher);
-		payAdvanceSalary.setYear(DataUtil.emptyString(request.getParameter("year")));
-		payAdvanceSalary.setMonth(DataUtil.emptyString(request.getParameter("month")));
-		payAdvanceSalary.setSalaryfordays(Integer.parseInt(DataUtil.emptyString(request.getParameter("salaryforday"))));
-		payAdvanceSalary.setStatus("apply");
-		payAdvanceSalary.setDate(DateUtil.dateParserUpdateStd(DataUtil.emptyString(request.getParameter("dateadvance"))));
-		
-		return new HrDAO().saveAdvanceSalary(payAdvanceSalary);
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			payAdvanceSalary.setAmount(new BigDecimal(DataUtil.emptyString(request.getParameter("amount"))));
+			payAdvanceSalary.setDeductionpermonth(new BigDecimal(DataUtil.emptyString(request.getParameter("deductionpermonth"))));
+			payAdvanceSalary.setDeductionstartmonth(DataUtil.emptyString(request.getParameter("deductionmonth")));
+			payAdvanceSalary.setDeductionstartyear(DataUtil.emptyString(request.getParameter("deductionyear")));
+			teacher.setTid(Integer.parseInt(DataUtil.emptyString(request.getParameter("staffid"))));
+			payAdvanceSalary.setTeacher(teacher);
+			payAdvanceSalary.setYear(DataUtil.emptyString(request.getParameter("year")));
+			payAdvanceSalary.setMonth(DataUtil.emptyString(request.getParameter("month")));
+			payAdvanceSalary.setSalaryfordays(Integer.parseInt(DataUtil.emptyString(request.getParameter("salaryforday"))));
+			payAdvanceSalary.setStatus("apply");
+			payAdvanceSalary.setDate(DateUtil.dateParserUpdateStd(DataUtil.emptyString(request.getParameter("dateadvance"))));
+			payAdvanceSalary.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			return new HrDAO().saveAdvanceSalary(payAdvanceSalary);	
+		}
+		return false;
 	}
 
 	public void salaryApprovalDispaly() {
 		
-		List<Payadvancesalary> payAdvanceSalary = new HrDAO().salaryApprovalDispaly();
+		List<Payadvancesalary> payAdvanceSalary = new ArrayList<Payadvancesalary>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			payAdvanceSalary = new HrDAO().salaryApprovalDispaly(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		}
+		
 		request.setAttribute("payadvancesalarylist", payAdvanceSalary);
 	}
 
@@ -290,11 +312,12 @@ public class HrService {
 		String paymentAdvance = request.getParameter("payadvance");
 		String reason = request.getParameter("reason_"+paymentAdvance);
 		String status = request.getParameter("status_"+paymentAdvance);
-		if(paymentAdvance!=null){
+		if(httpSession.getAttribute(BRANCHID)!=null && paymentAdvance!=null){
 		Payadvancesalary payAdvance = new Payadvancesalary();
 		payAdvance.setIdpayadvancesalary(Integer.parseInt(paymentAdvance));
 		payAdvance.setReason(DataUtil.emptyString(reason));
 		payAdvance.setStatus(DataUtil.emptyString(status));
+		payAdvance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		return new HrDAO().saveAdvanceSalaryApproval(payAdvance);
 		}
@@ -313,7 +336,12 @@ public class HrService {
 
 	public boolean salaryIssue() {
 		
-		List<Payadvancesalary> payAdvanceSalary = new HrDAO().salaryIssue();
+		List<Payadvancesalary> payAdvanceSalary = new ArrayList<Payadvancesalary>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			payAdvanceSalary = new HrDAO().salaryIssue(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		}
+		
 		request.setAttribute("salaryissue", payAdvanceSalary);
 		return true;
 	}
@@ -339,6 +367,7 @@ public class HrService {
 				}
 				leaveApplication.setTotalleaves(totalLeaves);
 				leaveApplication.setDateofapply(new Date());
+				leaveApplication.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				return new HrDAO().applyLeave(leaveApplication);
 		}
 		
@@ -409,7 +438,7 @@ public class HrService {
 	public boolean leaveApprovals() {
 		
 		if(httpSession.getAttribute("currentAcademicYear")!=null){
-			List<Leaveapplication> listLeaveApplication = new HrDAO().leaveApprovals(httpSession.getAttribute("currentAcademicYear").toString());
+			List<Leaveapplication> listLeaveApplication = new HrDAO().leaveApprovals(httpSession.getAttribute("currentAcademicYear").toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			request.setAttribute("leaveapplicationlist", listLeaveApplication);
 			return true;
 		}
@@ -477,6 +506,7 @@ public class HrService {
 				processHeadsBasic.setPayheadname("Basic Pay");
 				processHeadsBasic.setPayheadtype("Earning");
 				processHeadsBasic.setAmount(basicPay.getBasicpay());
+				processHeadsBasic.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				processSalarydetailsheadList.add(processHeadsBasic);   
 	               
 				// earning/deduction calculations
@@ -519,6 +549,7 @@ public class HrService {
 								totalDeduction = totalDeduction.add(payheadstaffdetails.getValue());
 							}
 						}
+						processHeads.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						processSalarydetailsheadList.add(processHeads);
 					}
 				}else{
@@ -540,6 +571,7 @@ public class HrService {
 			       BigDecimal netPayment = basicPayStaff.add(totalEarnings);
 			       netPayment = netPayment.subtract(totalDeduction);
 			       processSalary.setNetpayment(netPayment);	
+			       processSalary.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			       
 			       processsalarydetailsList.add(processSalary);
 			       
@@ -559,7 +591,7 @@ public class HrService {
 
 		if(httpSession.getAttribute("currentAcademicYear")!=null){
 			String payHeadType = request.getParameter("payHeadType");
-		List<Payhead> payHeadList = new HrDAO().getPayHeadListDynamic(payHeadType,httpSession.getAttribute("currentAcademicYear").toString());
+		List<Payhead> payHeadList = new HrDAO().getPayHeadListDynamic(payHeadType,httpSession.getAttribute("currentAcademicYear").toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("payheadlistdynamic", payHeadList);
 		
 		
@@ -597,7 +629,7 @@ public class HrService {
 
 		if(httpSession.getAttribute("currentAcademicYear")!=null){
 			
-			List<Processsalarydetails> processSalaryDetailsList = new HrDAO().issueStaffSalary(httpSession.getAttribute("currentAcademicYear").toString());
+			List<Processsalarydetails> processSalaryDetailsList = new HrDAO().issueStaffSalary(httpSession.getAttribute("currentAcademicYear").toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			request.setAttribute("processsalarydetailslist", processSalaryDetailsList);
 			
 			if(processSalaryDetailsList.isEmpty()){

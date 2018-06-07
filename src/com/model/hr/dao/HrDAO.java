@@ -42,13 +42,13 @@ public class HrDAO {
 		session = HibernateUtil.openSession();
 	}
 
-	public List<Leavetypemaster> readListOfLeaveTypes() {
+	public List<Leavetypemaster> readListOfLeaveTypes(int branchId) {
 		
 		List<Leavetypemaster> list = new ArrayList<Leavetypemaster>();
 
 		try {
             transaction = session.beginTransaction();
-            list = session.createQuery("From Leavetypemaster").list();
+            list = session.createQuery("From Leavetypemaster where branchid="+branchId).list();
             transaction.commit();
         } catch (HibernateException hibernateException) {
             transaction.rollback();
@@ -142,12 +142,12 @@ public class HrDAO {
 		return false;
 	}
 
-	public List<Payhead> getPayHeadList(String academicYear) {
+	public List<Payhead> getPayHeadList(String academicYear, int branchId) {
 		List<Payhead> payHead = new ArrayList<Payhead>();
 		
 		try {
 			transaction = session.beginTransaction();
-			payHead = session.createQuery("from Payhead where academicyear='"+academicYear+"'").list();
+			payHead = session.createQuery("from Payhead where academicyear='"+academicYear+"' and branchid="+branchId).list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -207,13 +207,13 @@ public class HrDAO {
 		
 	}
 
-	public List<Pf> pfSettings() {
+	public List<Pf> pfSettings(int branchId) {
 		
 		List<Pf> pf = new ArrayList<Pf>();
 		
 		try {
 			transaction = session.beginTransaction();
-			pf = session.createQuery("From Pf order by date Desc").list();
+			pf = session.createQuery("From Pf where branchid = "+branchId+" order by date Desc").list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -254,12 +254,12 @@ public class HrDAO {
 		return false;
 	}
 
-	public List<Payadvancesalary> salaryApprovalDispaly() {
+	public List<Payadvancesalary> salaryApprovalDispaly(int branchId) {
 		
 		List<Payadvancesalary> payAdvanceSalary = new ArrayList<Payadvancesalary>();
 		try {
 			transaction = session.beginTransaction();
-			payAdvanceSalary = session.createQuery("from Payadvancesalary where status='apply'").list();
+			payAdvanceSalary = session.createQuery("from Payadvancesalary where status='apply' and branchid = "+branchId).list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -300,11 +300,11 @@ public class HrDAO {
 		return false;
 	}
 
-	public List<Payadvancesalary> salaryIssue() {
+	public List<Payadvancesalary> salaryIssue(int branchId) {
 		List<Payadvancesalary> payAdvanceSalary = new ArrayList<Payadvancesalary>();
 		try {
 			transaction = session.beginTransaction();
-			payAdvanceSalary = session.createQuery("from Payadvancesalary where status='approved' or status='rejected'").list();
+			payAdvanceSalary = session.createQuery("from Payadvancesalary where status='approved' or status='rejected' and branchid="+branchId).list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -329,13 +329,13 @@ public class HrDAO {
 		return false;
 	}
 
-	public List<Leaveapplication> leaveApprovals(String currentAcademicYear) {
+	public List<Leaveapplication> leaveApprovals(String currentAcademicYear, int branchId) {
 		
 		List<Leaveapplication> listLeaveApplication = new ArrayList<Leaveapplication>();
 		
 		try {
 			transaction = session.beginTransaction();
-			listLeaveApplication = session.createQuery("from Leaveapplication where academicyear='"+currentAcademicYear+"'").list();
+			listLeaveApplication = session.createQuery("from Leaveapplication where academicyear='"+currentAcademicYear+"' and branchid="+branchId).list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -404,12 +404,12 @@ public class HrDAO {
 		
 	}
 
-	public List<Payhead> getPayHeadListDynamic(String payHeadType, String academicYear) {
+	public List<Payhead> getPayHeadListDynamic(String payHeadType, String academicYear, int branchId) {
 			List<Payhead> payHead = new ArrayList<Payhead>();
 			
 			try {
 				transaction = session.beginTransaction();
-				payHead = session.createQuery("from Payhead where payheadtype='"+payHeadType+"' and academicyear='"+academicYear+"'").list();
+				payHead = session.createQuery("from Payhead where payheadtype='"+payHeadType+"' and academicyear='"+academicYear+"' and branchid="+branchId).list();
 				transaction.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -454,13 +454,13 @@ public class HrDAO {
 		return payHeadStaffList;
 	}
 
-	public List<Processsalarydetails> issueStaffSalary(String academicYear) {
+	public List<Processsalarydetails> issueStaffSalary(String academicYear, int branchId) {
 		
 	List<Processsalarydetails> processSalaryDetails = new ArrayList<Processsalarydetails>();
 		
 		try {
 			transaction = session.beginTransaction();
-			processSalaryDetails = session.createQuery("from Processsalarydetails where academicyear='"+academicYear+"'").list();
+			processSalaryDetails = session.createQuery("from Processsalarydetails where academicyear='"+academicYear+"' and branchid="+branchId).list();
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

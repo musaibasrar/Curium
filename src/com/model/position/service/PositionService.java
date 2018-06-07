@@ -33,6 +33,7 @@ public class PositionService {
 
 		position.setPositionname(DataUtil.emptyString(request
 				.getParameter("position")));
+		position.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 		if(!position.getPositionname().equalsIgnoreCase("")){
 			position = new positionDAO().create(position);
 		}
@@ -43,7 +44,7 @@ public class PositionService {
 	public boolean viewPosition() {
 		boolean result = false;
         try {
-        	List<Position> list = new positionDAO().readListOfObjects();
+        	List<Position> list = new positionDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
             httpSession.setAttribute("positionList", list);
 
             result = true;

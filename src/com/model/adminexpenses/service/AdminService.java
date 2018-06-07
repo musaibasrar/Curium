@@ -31,7 +31,7 @@ public class AdminService {
 	 private HttpServletRequest request;
 	    private HttpServletResponse response;
 	    private HttpSession httpSession;
-	    
+	    private String BRANCHID = "branchid";
 	
 	public AdminService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -41,31 +41,32 @@ public class AdminService {
 
 
 	public boolean addExpenses() {
-		System.out.println("In add contact of student service");
+
 		Adminexpenses adminexpenses = new Adminexpenses();
-		
-		
-		adminexpenses.setItemDescription(DataUtil.emptyString(request.getParameter("item")));
-		adminexpenses.setQuantity(DataUtil.parseInt(request.getParameter("quantity")));
-		adminexpenses.setPriceofitem(DataUtil.parseInt(request.getParameter("price")));
-		adminexpenses.setEntrydate(DateUtil.simpleDateParser(request.getParameter("entrydate")));
-		
-		
-		if(!adminexpenses.getItemDescription().equalsIgnoreCase("") && adminexpenses.getQuantity() != 0
-				&& adminexpenses.getPriceofitem() != 0				
-				){
-		adminexpenses = new AdminDetailsDAO().create(adminexpenses);
-		    return true;
-		}else{
-            return false;
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			adminexpenses.setItemDescription(DataUtil.emptyString(request.getParameter("item")));
+			adminexpenses.setQuantity(DataUtil.parseInt(request.getParameter("quantity")));
+			adminexpenses.setPriceofitem(DataUtil.parseInt(request.getParameter("price")));
+			adminexpenses.setEntrydate(DateUtil.simpleDateParser(request.getParameter("entrydate")));
+			
+			
+			if(!adminexpenses.getItemDescription().equalsIgnoreCase("") && adminexpenses.getQuantity() != 0
+					&& adminexpenses.getPriceofitem() != 0				
+					){
+			adminexpenses = new AdminDetailsDAO().create(adminexpenses);
+			    return true;
+			}
 		}
+
+		return false;
+		
 	}
 
 
 	public boolean viewAllExpenses() {
 		boolean result = false;
         try {
-        	List<Adminexpenses> list = new AdminDetailsDAO().readListOfExpenses();
+        	List<Adminexpenses> list = new AdminDetailsDAO().readListOfExpenses(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
             httpSession.setAttribute("adminexpenses", list);
 
             result = true;

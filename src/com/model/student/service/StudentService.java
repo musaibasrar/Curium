@@ -49,6 +49,7 @@ public class StudentService {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession httpSession;
+	private String BRANCHID = "branchid";
 	/**
     * Size of a byte buffer to read/write file
     */
@@ -116,6 +117,8 @@ public class StudentService {
 		                    addSec = DataUtil.emptyString(item.getString());
 		                    if (!addSec.equalsIgnoreCase("Sec")) {
 			        			conClassStudying = conClassStudying + " " + addSec;
+			        		}else{
+			        			conClassStudying = conClassStudying + " " ;
 			        		}
 		                }
 		        		student.setClassstudying(DataUtil.emptyString(conClassStudying));
@@ -278,7 +281,9 @@ public class StudentService {
 		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
 		}
 		student.setStudentexternalid(builder.toString());
+		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		parents.setStudent(student);
+		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		parents = new parentsDetailsDAO().create(parents);
 
 		if(parents!=null){
@@ -301,8 +306,8 @@ public class StudentService {
 			}
 
 			List<Student> list = new studentDetailsDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
-					recordsPerPage);
-			int noOfRecords = new studentDetailsDAO().getNoOfRecords();
+					recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			int noOfRecords = new studentDetailsDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 			request.setAttribute("studentList", list);
 			request.setAttribute("noOfPages", noOfPages);
@@ -705,9 +710,11 @@ public class StudentService {
 		e.printStackTrace();
 	}
 		 student.setArchive(0);
+		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		 student = new studentDetailsDAO().update(student);
  		if (pid != "") {
  			parents.setStudent(student);
+ 			parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
  			parents = new parentsDetailsDAO().update(parents);
  		}
 		String stId = student.getSid().toString();
@@ -719,16 +726,20 @@ public class StudentService {
 	public boolean viewAllStudentsList() {
 
 		boolean result = false;
-		String pages = "1";
-		try {
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			
+			try {
 
-			List<Student> list = new studentDetailsDAO().readListOfStudents();
-			request.setAttribute("studentList", list);
-			result = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			result = false;
+				List<Student> list = new studentDetailsDAO().readListOfStudents(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				request.setAttribute("studentList", list);
+				result = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				result = false;
+			}
+			
 		}
+	
 		return result;
 	}
 
@@ -787,18 +798,20 @@ public class StudentService {
 
 	@SuppressWarnings("finally")
 	public boolean searchClass() {
+		
 		String classofStd = request.getParameter("classofstd");
-
 		boolean result = false;
-		try {
-			List<Student> studentList = new studentDetailsDAO().getListOfStudents(classofStd);
-			request.setAttribute("studentList", studentList);
-			result = true;
-		} catch (Exception e) {
-			result = false;
-		} finally {
-			return result;
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			try {
+				List<Student> studentList = new studentDetailsDAO().getListOfStudents(classofStd, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				request.setAttribute("studentList", studentList);
+				result = true;
+			} catch (Exception e) {
+				result = false;
+			} 
 		}
+		return result;
 
 	}
 
@@ -823,29 +836,28 @@ public class StudentService {
 
 		boolean result = false;
 		String pages = "1";
-		try {
-			int page = 1;
-			int recordsPerPage = 2000;
-			if (pages != null) {
-				page = Integer.parseInt(pages);
-			}
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			try {
+				int page = 1;
+				int recordsPerPage = 2000;
+				if (pages != null) {
+					page = Integer.parseInt(pages);
+				}
 
-			List<Parents> list = new studentDetailsDAO().readListOfObjectsPaginationALL((page - 1) * recordsPerPage,
-					recordsPerPage);
-			request.setAttribute("studentList", list);
-			int noOfRecords = new studentDetailsDAO().getNoOfRecords();
-			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-			request.setAttribute("studentList", list);
-			request.setAttribute("noOfPages", noOfPages);
-			request.setAttribute("currentPage", page);
-			List<Department> listDepartment = new departmentDAO().readListOfObjects();
-			httpSession.setAttribute("listDepartment", listDepartment);
-			List<Position> listPosition = new positionDAO().readListOfObjects();
-			httpSession.setAttribute("listPosition", listPosition);
-			result = true;
-		} catch (Exception e) {
-			e.printStackTrace();
+				List<Parents> list = new studentDetailsDAO().readListOfObjectsPaginationALL((page - 1) * recordsPerPage,
+						recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				request.setAttribute("studentList", list);
+				int noOfRecords = new studentDetailsDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+				request.setAttribute("studentList", list);
+				request.setAttribute("noOfPages", noOfPages);
+				request.setAttribute("currentPage", page);
+				result = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 		return result;
 	}
 
@@ -879,40 +891,44 @@ public class StudentService {
 
 	public void studentsDetailsSearch() {
 
-		String queryMain = "From Parents as parents where";
-		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			
+			String queryMain = "From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
+			String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
 
-		String addClass = request.getParameter("classsearch");
-		String addSec = request.getParameter("secsearch");
-		String conClassStudying = "";
+			String addClass = request.getParameter("classsearch");
+			String addSec = request.getParameter("secsearch");
+			String conClassStudying = "";
 
-		if (!addClass.equalsIgnoreCase("Class")) {
+			if (!addClass.equalsIgnoreCase("Class")) {
 
-			conClassStudying = addClass + " " + "%";
+				conClassStudying = addClass + " " + "%";
 
+			}
+			if (!addSec.equalsIgnoreCase("Sec")) {
+				conClassStudying = addClass;
+				conClassStudying = conClassStudying + " " + addSec;
+			}
+
+			String classStudying = DataUtil.emptyString(conClassStudying);
+
+			String querySub = "";
+
+			if (!studentname.equalsIgnoreCase("")) {
+				querySub = " parents.Student.name like '%" + studentname + "%'";
+			}
+
+			if (!classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
+				querySub = querySub + " AND parents.Student.classstudying like '" + classStudying + "' ";
+			} else if (!classStudying.equalsIgnoreCase("")) {
+				querySub = querySub + " parents.Student.classstudying like '" + classStudying + "' ";
+			}
+
+			queryMain = queryMain + querySub;
+			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			request.setAttribute("searchStudentList", searchStudentList);
 		}
-		if (!addSec.equalsIgnoreCase("Sec")) {
-			conClassStudying = addClass;
-			conClassStudying = conClassStudying + " " + addSec;
-		}
-
-		String classStudying = DataUtil.emptyString(conClassStudying);
-
-		String querySub = "";
-
-		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.Student.name like '%" + studentname + "%'";
-		}
-
-		if (!classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND parents.Student.classstudying like '" + classStudying + "' ";
-		} else if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " parents.Student.classstudying like '" + classStudying + "' ";
-		}
-
-		queryMain = queryMain + querySub;
-		List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
-		request.setAttribute("searchStudentList", searchStudentList);
+		
 
 	}
 
@@ -926,7 +942,7 @@ public class StudentService {
 		if (studentIds != null) {
 			for (String id : studentIds) {
 				if (id != null || id != "") {
-					String queryMain = "From Parents as parents where";
+					String queryMain = "From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
 					String querySub = " parents.Student.id = " + id;
 					queryMain = queryMain + querySub;
 

@@ -17,6 +17,7 @@ public class DepartmentService {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession httpSession;
+	private String BRANCHID = "branchid";
 
 	public DepartmentService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -31,19 +32,22 @@ public class DepartmentService {
 		
 		
 		Department department = new Department();
-		
-		department.setDepartmentname(DataUtil.emptyString(request.getParameter("department")));
-		if(!department.getDepartmentname().equalsIgnoreCase("")){
-			department =  new departmentDAO().create(department);
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			
+			department.setDepartmentname(DataUtil.emptyString(request.getParameter("department")));
+			department.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			
+			if(!department.getDepartmentname().equalsIgnoreCase("")){
+				department =  new departmentDAO().create(department);
+			}
+			
 		}
-		
-		
 	}
 
 	public boolean viewDepartment() {
 		boolean result = false;
         try {
-        	List<Department> list = new departmentDAO().readListOfObjects();
+        	List<Department> list = new departmentDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
             httpSession.setAttribute("departmentList", list);
 
             result = true;

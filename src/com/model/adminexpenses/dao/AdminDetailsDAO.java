@@ -51,7 +51,7 @@ public class AdminDetailsDAO {
 
 
 	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Adminexpenses> readListOfExpenses() {
+	public List<Adminexpenses> readListOfExpenses(int branchId) {
 		List<Adminexpenses> results = new ArrayList<Adminexpenses>();
 
 		try {
@@ -59,7 +59,7 @@ public class AdminDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Adminexpenses>) session.createQuery("From Adminexpenses")
+			results = (List<Adminexpenses>) session.createQuery("From Adminexpenses where branchid="+branchId)
 					.list();
 			System.out.println("Adminexpenses " + results.size());
 			transaction.commit();

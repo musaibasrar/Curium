@@ -41,11 +41,11 @@ public class AttendanceDAO {
 		return null;
 	}
 
-	public List<Holidaysmaster> readListOfHolidays(String currentAcademicYear) {
+	public List<Holidaysmaster> readListOfHolidays(String currentAcademicYear, int branchId) {
 		List<Holidaysmaster> holidayMaster = new ArrayList<Holidaysmaster>();
 		try{
 			transaction = session.beginTransaction();
-			holidayMaster = session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"'").list();
+			holidayMaster = session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"' and branchid="+branchId).list();
 			transaction.commit();
 		}catch(Exception e){
 			transaction.rollback();
@@ -107,11 +107,11 @@ public class AttendanceDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Weeklyoff> readListOfWeekOff(String academicYear) {
+	public List<Weeklyoff> readListOfWeekOff(String academicYear, int branchId) {
 			List<Weeklyoff> weeklyOff = new ArrayList<Weeklyoff>();
 			try{
 				transaction = session.beginTransaction();
-				weeklyOff = session.createQuery("from Weeklyoff where academicyear='"+academicYear+"'").list();
+				weeklyOff = session.createQuery("from Weeklyoff where academicyear='"+academicYear+"' and branchid="+branchId).list();
 				transaction.commit();
 			}catch(Exception e){
 				e.printStackTrace();
@@ -123,11 +123,30 @@ public class AttendanceDAO {
 	}
 
 	public List<Weeklyoff> readListOfWeeklyOff(List<Integer> weeklyOffList,
+			String academicYear, int branchid) {
+		List<Weeklyoff> weeklyOff = new ArrayList<Weeklyoff>();
+		try{
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from Weeklyoff where academicyear='"+academicYear+"' and wid IN (:ids) and branchid="+branchid);
+			query.setParameterList("ids", weeklyOffList);
+			weeklyOff = query.list();
+			transaction.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+	return weeklyOff;
+
+	}
+	
+	public List<Weeklyoff> readListOfWeeklyOff(List<Integer> weeklyOffList,
 			String academicYear) {
 		List<Weeklyoff> weeklyOff = new ArrayList<Weeklyoff>();
 		try{
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Weeklyoff where academicyear='"+academicYear+"' and wid IN (:ids)");
+			Query query = session.createQuery("from Weeklyoff where academicyear='"+academicYear+"' and wid IN (:ids) ");
 			query.setParameterList("ids", weeklyOffList);
 			weeklyOff = query.list();
 			transaction.commit();
@@ -142,11 +161,29 @@ public class AttendanceDAO {
 	}
 
 	public List<Holidaysmaster> readListOfholidays(
+			List<Integer> holidaysIntList, String currentAcademicYear, int branchId) {
+		List<Holidaysmaster> holidayMaster = new ArrayList<Holidaysmaster>();
+		try{
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"' and shid IN (:ids) and branchid="+branchId);
+			query.setParameterList("ids", holidaysIntList);
+			holidayMaster = query.list();
+			transaction.commit();
+		}catch(Exception e){
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+		
+		return holidayMaster;
+	}
+	
+	public List<Holidaysmaster> readListOfholidays(
 			List<Integer> holidaysIntList, String currentAcademicYear) {
 		List<Holidaysmaster> holidayMaster = new ArrayList<Holidaysmaster>();
 		try{
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"' and shid IN (:ids)");
+			Query query = session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"' and shid IN (:ids) ");
 			query.setParameterList("ids", holidaysIntList);
 			holidayMaster = query.list();
 			transaction.commit();
@@ -190,6 +227,20 @@ public class AttendanceDAO {
 		return false;
 	}
 
+	public List<Attendancemaster> getAttendanceMasterDetails(String attendeeId, int branchId) {
+		List<Attendancemaster> studentAttendanceMaster = new ArrayList<Attendancemaster>();
+		try{
+			transaction = session.beginTransaction();
+			studentAttendanceMaster = session.createQuery("From Attendancemaster where attendeeid = "+attendeeId+" and branchid="+branchId).list();
+			transaction.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return studentAttendanceMaster;
+	}
+	
 	public List<Attendancemaster> getAttendanceMasterDetails(String attendeeId) {
 		List<Attendancemaster> studentAttendanceMaster = new ArrayList<Attendancemaster>();
 		try{
@@ -236,13 +287,13 @@ public class AttendanceDAO {
 		return false;
 	}
 
-	public List<Studentdailyattendance> readListOfStudentAttendance(String currentAcademicYear, Timestamp date, String studentExternalId) {
+	public List<Studentdailyattendance> readListOfStudentAttendance(String currentAcademicYear, Timestamp date, String studentExternalId, int branchId) {
 		
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
 		
 		try{
 			transaction = session.beginTransaction();
-			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date = '"+date+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"'").list();
+			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date = '"+date+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"' and branchid="+branchId).list();
 			transaction.commit();
 		}catch(HibernateException e){
 			logger.info(e);
@@ -255,11 +306,11 @@ public class AttendanceDAO {
 
 	public List<Studentdailyattendance> getStudentDailyAttendance(
 			String studentExternalId, Timestamp fromTimestamp,
-			Timestamp toTimestamp, String currentAcademicYear) {
+			Timestamp toTimestamp, String currentAcademicYear, int branchId) {
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
 		try {
 			transaction = session.beginTransaction();
-			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"'").list();
+			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"' and branchid="+branchId).list();
 			transaction.commit();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -292,11 +343,11 @@ public class AttendanceDAO {
 
 	public List<Studentdailyattendance> getStudentDailyAttendanceGraph(
 			String studentExternalIdGraph, Timestamp timestampFrom,
-			Timestamp timestampto, String currentAcademicYear) {
+			Timestamp timestampto, String currentAcademicYear, int branchId) {
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
 		try {
 			transaction = session.beginTransaction();
-			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalIdGraph+"'").list();
+			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalIdGraph+"' and branchid="+branchId).list();
 			transaction.commit();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -360,7 +411,7 @@ public class AttendanceDAO {
 
 	public Map<String, List<Studentdailyattendance>> readListOfStudentAttendanceExport(
 			String currentAcademicYear, Timestamp timestampFrom, Timestamp timestampto,
-			List<Student> searchStudentList) {
+			List<Student> searchStudentList, int branchId) {
 		
 		Map<String, List<Studentdailyattendance>> mapStudentAttendance = new HashMap<String, List<Studentdailyattendance>>();
 		
@@ -369,7 +420,7 @@ public class AttendanceDAO {
 			
 			for (Student student : searchStudentList) {
 				List<Studentdailyattendance> studentAttendance = new ArrayList<Studentdailyattendance>();
-				studentAttendance = session.createQuery("from Studentdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+student.getStudentexternalid()+"'").list();
+				studentAttendance = session.createQuery("from Studentdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+student.getStudentexternalid()+"' and branchid="+branchId).list();
 				mapStudentAttendance.put(student.getName(), studentAttendance);
 			}
 			transaction.commit();
@@ -410,13 +461,13 @@ public class AttendanceDAO {
 	}
 
 	public List<Staffdailyattendance> readListOfStaffAttendance(String currentAcademicYear,
-			Timestamp timestamp, String teacherexternalid) {
+			Timestamp timestamp, String teacherexternalid, int branchId) {
 		
 List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattendance>();
 		
 		try{
 			transaction = session.beginTransaction();
-			staffDailyAttendance = session.createQuery("from Staffdailyattendance  where date = '"+timestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacherexternalid+"'").list();
+			staffDailyAttendance = session.createQuery("from Staffdailyattendance  where date = '"+timestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacherexternalid+"' and branchid="+branchId).list();
 			transaction.commit();
 		}catch(HibernateException e){
 			logger.info(e);
@@ -449,11 +500,11 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 
 	public List<Staffdailyattendance> getStaffDailyAttendance(
 			String staffExternalId, Timestamp fromTimestamp,
-			Timestamp toTimestamp, String currentAcademicYear) {
+			Timestamp toTimestamp, String currentAcademicYear, int branchId) {
 		List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattendance>();
 		try {
 			transaction = session.beginTransaction();
-			staffDailyAttendance = session.createQuery("from Staffdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+staffExternalId+"'").list();
+			staffDailyAttendance = session.createQuery("from Staffdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+staffExternalId+"' and branchid="+branchId).list();
 			transaction.commit();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -495,7 +546,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 
 	public Map<String, List<Staffdailyattendance>> readListOfStaffAttendanceExport(
 			String currentAcademicYear, Timestamp timestampFrom, Timestamp timestampto,
-			List<Teacher> staffList) {
+			List<Teacher> staffList, int branchId) {
 
 
 		Map<String, List<Staffdailyattendance>> mapStaffAttendance = new HashMap<String, List<Staffdailyattendance>>();
@@ -505,7 +556,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			
 			for (Teacher teacher : staffList) {
 				List<Staffdailyattendance> staffAttendance = new ArrayList<Staffdailyattendance>();
-				staffAttendance = session.createQuery("from Staffdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacher.getTeacherexternalid()+"'").list();
+				staffAttendance = session.createQuery("from Staffdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacher.getTeacherexternalid()+"' and branchid="+branchId).list();
 				mapStaffAttendance.put(teacher.getTeachername(), staffAttendance);
 			}
 			transaction.commit();
