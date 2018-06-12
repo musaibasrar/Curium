@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10 Jun, 2018 11:34:55 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="Pudetails" table="pudetails" catalog="school">
+        <id name="idpudetails" type="java.lang.Integer">
+            <column name="idpudetails" />
+            <generator class="identity" />
+        </id>
+        <property name="exampassedappearance" type="java.lang.Integer">
+            <column name="exampassedappearance" />
+        </property>
+        <property name="exampassedyear" type="string">
+            <column name="exampassedyear" length="45" />
+        </property>
+        <property name="exampassedregno" type="string">
+            <column name="exampassedregno" length="45" />
+        </property>
+        <property name="exampassedresultwithclass" type="string">
+            <column name="exampassedresultwithclass" length="100" />
+        </property>
+        <property name="secondlanguage" type="string">
+            <column name="secondlanguage" length="45" />
+        </property>
+        <property name="aggregatemarkssslc" type="string">
+            <column name="aggregatemarkssslc" length="45" />
+        </property>
+        <property name="optionalsubjects" type="string">
+            <column name="optionalsubjects" length="200" />
+        </property>
+        <property name="compulsorysubjects" type="string">
+            <column name="compulsorysubjects" length="500" />
+        </property>
+        <property name="sslcmediuminstruction" type="string">
+            <column name="sslcmediuminstruction" length="45" />
+        </property>
+        <property name="pumediuminstruction" type="string">
+            <column name="pumediuminstruction" length="45" />
+        </property>
+        <property name="sid" type="java.lang.Integer">
+            <column name="sid" />
+        </property>
+    </class>
+</hibernate-mapping>

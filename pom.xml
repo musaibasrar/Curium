@@ -42,6 +42,12 @@
 			<artifactId>quartz</artifactId>
 			<version>2.3.0</version>
 		</dependency>
+<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz-jobs -->
+<dependency>
+    <groupId>org.quartz-scheduler</groupId>
+    <artifactId>quartz-jobs</artifactId>
+    <version>2.3.0</version>
+</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
 		<dependency>
@@ -87,6 +93,31 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.37</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/taglibs/standard -->
+<dependency>
+    <groupId>taglibs</groupId>
+    <artifactId>standard</artifactId>
+    <version>1.1.2</version>
+</dependency>
+
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-c3p0</artifactId>
+    <version>5.3.1.Final</version>
+</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>3.17</version>
+</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
+		
 
 	</dependencies>
 
