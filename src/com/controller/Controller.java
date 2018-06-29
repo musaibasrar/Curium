@@ -29,6 +29,7 @@ import com.model.printids.action.PrintIdsAction;
 import com.model.sendemail.action.EmailAction;
 import com.model.sendsms.action.SmsAction;
 import com.model.stampfees.action.StampFeesAction;
+import com.model.std.action.StandardAction;
 import com.model.student.action.StudentAction;
 import com.model.subjectdetails.action.SubjectDetailsAction;
 import com.model.user.action.UserAction;
@@ -92,6 +93,8 @@ public class Controller extends HttpServlet {
          nextUrl= new PeriodAction(request, response).execute(action);
      }else if("HrProcess".equalsIgnoreCase(process)){
          nextUrl= new HrAction(request, response).execute(action);
+     }else if("ClassProcess".equalsIgnoreCase(process)){
+         nextUrl= new StandardAction(request, response).execute(action);;
      }else if("test".equalsIgnoreCase(process)){
          nextUrl= "test.html";
      }
