@@ -110,7 +110,7 @@ public class UserDAO {
         Login login = null;
         
        try{
-           this.session = sessionFactory.openSession();
+          // this.session = sessionFactory.openSession();
            transaction = session.beginTransaction();
            
            Query query = session.createQuery("from Login as user where user.password= :password");
@@ -126,11 +126,9 @@ public class UserDAO {
 
 	public Login update(Login login) {
         try {
-            //this.session = sessionFactory.openCurrentSession();
             transaction = session.beginTransaction();
             session.update(login);
             transaction.commit();
-            System.out.println("in add2");
         } catch (HibernateException hibernateException) {
             transaction.rollback();
             hibernateException.printStackTrace();

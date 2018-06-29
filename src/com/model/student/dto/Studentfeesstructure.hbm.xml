@@ -23,6 +23,9 @@
           <property name="branchid" type="int">
             <column name="branchid" />
         </property>
+        <property name="concession" type="java.lang.Integer">
+            <column name="concession"/>
+        </property>
         <many-to-one name="Feescategory" class="com.model.feescategory.dto.Feescategory"
             column="idfeescategory" />
     </class>

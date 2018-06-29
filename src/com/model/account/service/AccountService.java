@@ -59,13 +59,14 @@ public class AccountService {
 		Financialaccountingyear financialYear = new Financialaccountingyear();
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			financialYear =  new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			request.setAttribute("currentfinancialaccountingyearfrom", financialYear.getFinancialstartdate());
-			request.setAttribute("currentfinancialaccountingyearto", financialYear.getFinancialenddate());
 		}
 		
 		if(financialYear!=null){
-			return true;
-		}else return false;
+	                  request.setAttribute("currentfinancialaccountingyearfrom", financialYear.getFinancialstartdate());
+	                  request.setAttribute("currentfinancialaccountingyearto", financialYear.getFinancialenddate());
+		}
+		
+		return true;
 	}
 
 
@@ -86,7 +87,7 @@ public class AccountService {
 		
 		if(!accountGroupMaster.isEmpty()){
 			return true;
-		}else return false;
+		} return false;
 		
 	}
 

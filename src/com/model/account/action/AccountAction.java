@@ -81,27 +81,27 @@ public class AccountAction {
 		
 		if(new AccountService(request, response).cancelPaymentVoucher()){
 			return "Controller?process=AccountProcess&action=viewVoucherReceipt";
-		}else{
-			return ERRORPAGE;
 		}
+			return ERRORPAGE;
+	
 	}
 
 	private String cancelReceiptVoucher() {
 
 		if(new AccountService(request, response).cancelReceiptVoucher()){
 			return "Controller?process=AccountProcess&action=viewVoucherReceipt";
-		}else{
-			return ERRORPAGE;
 		}
+			return ERRORPAGE;
+		
 	}
 
 	private String trialBalance() {
 		
 		if(new AccountService(request, response).trialBalance()){
 			return "trialbalance.jsp";
-		}else{
-		return ERRORPAGE;
 		}
+		return ERRORPAGE;
+		
 	}
 
 	private String viewNextVoucher() {
@@ -142,69 +142,69 @@ public class AccountAction {
 	private String balanceSheet() {
 		if(new AccountService(request, response).balanceSheet()){
 			return "balancesheet.jsp";
-		}else{
-		return ERRORPAGE;
 		}
+		return ERRORPAGE;
+		
 	}
 
 	private String saveJournal() {
 		if(new AccountService(request, response).saveJournal()){
 			return "Controller?process=AccountProcess&action=createVoucher";
-		}else{
-		return ERRORPAGE;
 		}
+		return ERRORPAGE;
+		
 	}
 
 	private String saveContra() {
 		if(new AccountService(request, response).saveContra()){
 			return "Controller?process=AccountProcess&action=createVoucher";
-		}else{
-		return ERRORPAGE;
 		}
+		return ERRORPAGE;
+		
 	}
 
 	private String savePayment() {
 		
 		if(new AccountService(request, response).savePayment()){
 			return "Controller?process=AccountProcess&action=createVoucher";
-		}else{
-		return ERRORPAGE;
 		}
+		return ERRORPAGE;
+		
 	}
 
 	private String saveReceipt() {
 		if(new AccountService(request, response).saveReceipt()){
 			return "Controller?process=AccountProcess&action=createVoucher";
-		}else{
-		return ERRORPAGE;
 		}
+		return ERRORPAGE;
+		
 	}
 
 	private String createVoucher() {
 
 		if(new AccountService(request, response).createVoucher()){
 			return "createvoucher.jsp";
-		}else{
-		return ERRORPAGE;
 		}
+		return ERRORPAGE;
+		
 	}
 
 	private String deleteAccount() {
 		
 		if(new AccountService(request, response).deleteAccount()){
 			return "Controller?process=AccountProcess&action=createAccount";
-		}else{
-		return ERRORPAGE;
 		}
+		return ERRORPAGE;
+		
 	}
 
 	private String saveAccount() {
 		
 		if(new AccountService(request, response).saveAccount()){
 			return "Controller?process=AccountProcess&action=createAccount";
-		}else{
-		return ERRORPAGE;
 		}
+		return ERRORPAGE;
+		
 		
 	}
 
@@ -222,26 +222,26 @@ public class AccountAction {
 		
 		if(new AccountService(request, response).createAccount()){
 			return "createaccount.jsp";
-		}else{
-		return ERRORPAGE;
 		}
+		return ERRORPAGE;
+		
 	}
 
 	private String getCurrentFinancialYear() {
 		if(new AccountService(request, response).getCurrentFinancialYear()){
 			return "financialyear.jsp";
-		}else{
-		return ERRORPAGE;
 		}
+		return ERRORPAGE;
+		
 	}
 
 	private String saveFinancialYear() { 
 		
 		if(new AccountService(request, response).saveFinancialYear()){
 			return "financialyearsaved.jsp";
-		}else{
-		return ERRORPAGE;
 		}
+		return ERRORPAGE;
+		
 		
     }
 
