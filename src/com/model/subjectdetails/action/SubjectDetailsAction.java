@@ -22,13 +22,10 @@ public class SubjectDetailsAction {
 	public String execute(String action) {
 		
 		if (action.equalsIgnoreCase("readListOfSubjects")) {
-			System.out.println("Action is readListOfSubjects");
 			url = readListOfSubjects();
 		}else if (action.equalsIgnoreCase("addSubject")) {
-			System.out.println("Action is addSubject");
 			url = addSubject();
 		}else if (action.equalsIgnoreCase("deleteMultiple")) {
-			System.out.println("Action is addSubject");
 			url = deleteMultiple();
 		}
 		

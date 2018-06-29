@@ -3,9 +3,6 @@ package com.model.user.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.model.academicyear.service.YearService;
-import com.model.user.dao.UserDAO;
-import com.model.user.dto.Login;
 import com.model.user.service.UserService;
 
 public class UserAction {

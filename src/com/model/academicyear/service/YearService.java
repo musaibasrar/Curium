@@ -1,36 +1,12 @@
 package com.model.academicyear.service;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
-import com.model.adminexpenses.dao.AdminDetailsDAO;
-import com.model.adminexpenses.dto.Adminexpenses;
-import com.model.department.dao.departmentDAO;
-import com.model.department.dto.Department;
-import com.model.feescategory.dao.feesCategoryDAO;
-import com.model.feescategory.dto.Feescategory;
-import com.model.feesdetails.dao.feesDetailsDAO;
-import com.model.feesdetails.dto.Feesdetails;
-import com.model.parents.dao.parentsDetailsDAO;
-import com.model.parents.dto.Parents;
-import com.model.position.dao.positionDAO;
-import com.model.position.dto.Position;
-import com.model.std.dao.standardDetailsDAO;
-import com.model.std.dto.Classsec;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
-import com.model.user.dao.UserDAO;
 import com.util.DataUtil;
-import com.util.DateUtil;
 
 public class YearService {
 	

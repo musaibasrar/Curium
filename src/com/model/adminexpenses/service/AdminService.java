@@ -1,7 +1,6 @@
 package com.model.adminexpenses.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,19 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import com.model.adminexpenses.dao.AdminDetailsDAO;
 import com.model.adminexpenses.dto.Adminexpenses;
-import com.model.department.dao.departmentDAO;
-import com.model.department.dto.Department;
-import com.model.feesdetails.dao.feesDetailsDAO;
-import com.model.feesdetails.dto.Feesdetails;
-import com.model.parents.dao.parentsDetailsDAO;
-import com.model.parents.dto.Parents;
-import com.model.position.dao.positionDAO;
-import com.model.position.dto.Position;
-import com.model.std.dao.standardDetailsDAO;
-import com.model.std.dto.Classsec;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
-import com.model.user.dao.UserDAO;
 import com.util.DataUtil;
 import com.util.DateUtil;
 

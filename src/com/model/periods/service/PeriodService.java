@@ -49,24 +49,22 @@ public class PeriodService {
 		
 		List<Periodmaster> periodMaster = new ArrayList<Periodmaster>();
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			
-			Currentacademicyear currentYear = new YearDAO().showYear();
-	        httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
-	        
-	        new SubjectDetailsService(request, response).readListOfSubjects();
-	        
-	        new EmployeeService(request, response).ViewAllEmployee();
-	       
-	        periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	        request.setAttribute("periodmasterlist", periodMaster);
-		}
+		try {
+	                Currentacademicyear currentYear = new YearDAO().showYear();
+	                httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
+	                
+	                new SubjectDetailsService(request, response).readListOfSubjects();
+	                
+	                new EmployeeService(request, response).ViewAllEmployee();
+	               
+	                periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	                request.setAttribute("periodmasterlist", periodMaster);
+		    
+                } catch (Exception e) {
+                   return false;
+                }
 		
-        
-        if(periodMaster.isEmpty()){
-        	return false;
-        }
-        
+	        
 		return true;
 		
 	}

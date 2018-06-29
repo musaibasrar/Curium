@@ -33,7 +33,7 @@ public class Studentfeesstructure implements java.io.Serializable {
 	private Long feesamount;
 	private String academicyear;
 	private int branchid;
-
+	private Integer concession;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idfeescategory")
@@ -43,12 +43,13 @@ public class Studentfeesstructure implements java.io.Serializable {
 	}
 
 	public Studentfeesstructure(Integer sid, Integer idfeescategory,
-			Long feesamount, String academicyear, int branchid) {
+			Long feesamount, String academicyear, int branchid, Integer concession) {
 		this.sid = sid;
 		this.idfeescategory = idfeescategory;
 		this.feesamount = feesamount;
 		this.academicyear = academicyear;
 		this.branchid = branchid;
+		this.concession = concession;
 	}
 
 	@Id
@@ -115,4 +116,13 @@ public class Studentfeesstructure implements java.io.Serializable {
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
 	}
+
+	@Column(name = "concession")
+        public Integer getConcession() {
+            return this.concession;
+        }
+    
+        public void setConcession(Integer concession) {
+            this.concession = concession;
+        }
 }
