@@ -18,14 +18,16 @@ import javax.persistence.Table;
 public class Classsec implements java.io.Serializable {
 
 	private Integer stdrdid;
-	private String classandsec;
+	private String classdetails;
+	private String section;
 	private int branchid;
 
 	public Classsec() {
 	}
 
-	public Classsec(String classandsec, int branchid) {
-		this.classandsec = classandsec;
+	public Classsec(String classdetails, String section, int branchid) {
+		this.classdetails = classdetails;
+		this.section = section;
 		this.branchid = branchid;
 	}
 
@@ -40,17 +42,26 @@ public class Classsec implements java.io.Serializable {
 		this.stdrdid = stdrdid;
 	}
 
-	@Column(name = "classandsec", length = 45)
-	public String getClassandsec() {
-		return this.classandsec;
+	@Column(name = "classdetails", length = 45)
+	public String getClassdetails() {
+		return this.classdetails;
 	}
 
-	public void setClassandsec(String classandsec) {
-		this.classandsec = classandsec;
+	public void setClassdetails(String classdetails) {
+		this.classdetails = classdetails;
 	}
-
 	
-	@Column(name = "branchid")
+        	
+	@Column(name = "section", length = 45)
+        public String getSection() {
+            return this.section;
+        }
+    
+        public void setSection(String section) {
+            this.section = section;
+        }
+
+    @Column(name = "branchid")
 	public int getBranchid() {
 	return branchid;
 	}
