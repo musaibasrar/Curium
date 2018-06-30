@@ -37,7 +37,9 @@ public class Parents implements java.io.Serializable {
 	private String email;
 	private Student student;
 	private int branchid;
-	
+        private String fathersqualification;
+        private String mothersqualification;
+        
 	public Parents() {
 	}
 
@@ -45,7 +47,7 @@ public class Parents implements java.io.Serializable {
 			String addresspermanent, String addresstemporary,
 			String professsion, String parentsannualincome,
 			Integer noofdependents, Integer sid, Integer tid, String remarks, String contactnumber, String cocontactnumber,
-			int branchid) {
+			int branchid, String fathersqualification, String mothersqualification) {
 		this.fathersname = fathersname;
 		this.mothersname = mothersname;
 		this.addresspermanent = addresspermanent;
@@ -59,6 +61,8 @@ public class Parents implements java.io.Serializable {
 		this.contactnumber = contactnumber;
 		this.cocontactnumber = cocontactnumber;
 		this.branchid = branchid;
+		this.fathersqualification = fathersqualification;
+		this.mothersqualification = mothersqualification;
 	}
 
 	@Id
@@ -211,4 +215,24 @@ public class Parents implements java.io.Serializable {
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
 	}
+
+	@Column(name = "fathersqualification")
+    public String getFathersqualification() {
+        return this.fathersqualification;
+    }
+
+    
+    public void setFathersqualification(String fathersqualification) {
+        this.fathersqualification = fathersqualification;
+    }
+
+    @Column(name = "mothersqualification")
+    public String getMothersqualification() {
+        return this.mothersqualification;
+    }
+
+    
+    public void setMothersqualification(String mothersqualification) {
+        this.mothersqualification = mothersqualification;
+    }
 }
