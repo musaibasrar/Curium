@@ -13,8 +13,14 @@
         <property name="fathersname" type="java.lang.String">
             <column name="FATHERSNAME" />
         </property>
+        <property name="fathersqualification" type="java.lang.String">
+            <column name="FATHERSQUALIFICATION" />
+        </property>
         <property name="mothersname" type="java.lang.String">
             <column name="MOTHERSNAME" />
+        </property>
+        <property name="mothersqualification" type="java.lang.String">
+            <column name="MOTHERSQUALIFICATION" />
         </property>
         <property name="addresspermanent" type="java.lang.String">
             <column name="ADDRESSPERMANENT" />
