@@ -130,7 +130,6 @@ public class FeesCollectionService {
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
 		long id = Long.parseLong(request.getParameter("studentId"));
 		List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-		Object cay = httpSession.getAttribute(CURRENTACADEMICYEAR);
 		List<Feescollection> feesCollection = new feesCollectionDAO().getFeesForTheCurrentYear(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 		Map<Studentfeesstructure,Long> feesMap = new HashMap<Studentfeesstructure, Long>();
 		
@@ -139,7 +138,6 @@ public class FeesCollectionService {
 			sf.getFeescategory().getFeescategoryname();
 		}
 		
-		String feescat = feesstructure.get(0).getFeescategory().getFeescategoryname();
 		for (Studentfeesstructure singleFeesStructure : feesstructure) {
 			Long totalAmountPerCategory = 0l;
 			for (Feescollection singleFeescollection : feesCollection) {
