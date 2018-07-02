@@ -1,5 +1,5 @@
 <%-- 
-    Document   : updatemember_1
+    Document   : student update
     Created on : Jan 10, 2013, 3:25:59 PM
     Author     : Musaib
 --%>
@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
+<title>Student Update</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 
@@ -748,6 +748,38 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
+						
+						<tr>
+
+
+							<td width="16%" class="alignRight">Languages Studied &nbsp;</td>
+
+							<td><label> <input
+									name="languagesstudied" type="text" class="textField"
+									value="<c:out default="" value="${student.languagesstudied}" />"
+									id="languagesstudied" size="30" data-validate="validate(required)">
+
+							</label></td>
+
+							<td width="30%" class="alignRight">Last School Medium of Instruction 
+								&nbsp;</td>
+							<td width="12%" align="left"><label> <input
+									name="mediumofinstructionlastschool" type="text" class="textField"
+									value="<c:out default="" value="${student.instructionmediumlastschool}" />"
+									id="mediumofinstructionlastschool" size="30" data-validate="validate(required)">
+							</label></td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
 
 
 
@@ -1211,6 +1243,33 @@ for(Cookie cookie : cookies){
 									size="36" style="text-transform:uppercase"
 									value="<c:out default="" value="${parents.mothersname}" />"">
 									<!-- onkeyup="check(this.value);"  -->
+							</label></td>
+
+
+						</tr>
+
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td width="30%" class="alignRight">Father's Qualification &nbsp;</td>
+							<td width="12%" align="left"><label> <input
+									name="fathersqualification" type="text" class="myclass" id="fathersqualification"
+									size="36" style="text-transform:uppercase"
+									value="<c:out default="" value="${parents.fathersqualification}" />">
+							</label></td>
+
+							<td width="30%" class="alignRight">Mother's Qualification &nbsp;</td>
+							<td width="12%" align="left"><label> <input
+									name="mothersqualification" type="text" class="myclass" id="mothersqualification"
+									size="36" style="text-transform:uppercase"
+									value="<c:out default="" value="${parents.mothersqualification}" />">
 							</label></td>
 
 

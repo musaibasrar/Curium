@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
+<title>Fees Category</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -502,45 +502,34 @@ for(Cookie cookie : cookies){
 							</td>
 
 							<td width="8%">
-							 <label> <select name="fromclass" id="fromclass"
-									style="width: 120px">
-										<option selected>ALL</option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
-								</select> 
+							 <label> 
+								<select name="fromclass" id="fromclass"
+									style="width: 120px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}">
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>	
+										</c:forEach>
+								</select>
+								
 							</label>
 							&nbsp;<label style="font-weight: bold;color:#325F85">To Class &nbsp;</label>
 							
 							<label>
 							<select name="toclass" id="toclass"
-									style="width: 120px">
-										<option selected>ALL</option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
-								</select> 
-							
+									style="width: 120px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+													<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}">
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+											</c:if>
+										</c:forEach>
+								</select>
 							</label>
 							
 							</td>
