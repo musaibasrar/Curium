@@ -424,7 +424,7 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${studentListArchive}" var="Student">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>"/></td>
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>:<c:out value="${Student.pudetails.idpudetails}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Student.name}"/></td>
                                 <td class="dataText"><c:out value="${Student.classstudying}"/></td>

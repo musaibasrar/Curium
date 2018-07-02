@@ -597,6 +597,29 @@ for(Cookie cookie : cookies){
 									data-validate="validate(required)">
 							</label></td>
 						</tr>
+						
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+						
+						<tr>
+							<td width="20%" class="alignRight">Select Branch  &nbsp;&nbsp;</td>
+							<td ><label> <select name="selectedbranchid"
+									id="selectedbranchid" style="width: 240px" required>
+										<option selected></option>
+										<option value="2:Boys High School">Boys High School</option>
+										<option value="3:Girls High School">Girls High School</option>
+										<option value="4:P.U. College">P.U. College</option>
+										<option value="5:Degree College">Degree College</option>
+								</select>
+
+							</label></td>
+							
+						</tr>
+							
 						<tr>
 						<td>&nbsp;</td>
 						</tr>
@@ -619,7 +642,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">View Fees Details (The total fees collected is &#x20B9; ${sumofdetailsfees})</td>
+					<td class="headerTD"><label style="color: #EB6000;">Branch Name: </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees collected :</label>&#x20B9;${sumofdetailsfees}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"

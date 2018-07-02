@@ -1,5 +1,5 @@
 <%-- 
-    Document   : updatemember_1
+    Document   : Employee update
     Created on : Jan 10, 2013, 3:25:59 PM
     Author     : Musaib
 --%>
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
+<title>Employee Update</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 
@@ -308,7 +308,10 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Name &nbsp;</td>
 							<td width="28%"><input type="hidden" name="id" id="id"
 								value="<c:out value="${employee.tid}" />" /> <label> <input type="hidden" name="teacherexternalid" id="teacherexternalid"
-								value="<c:out value="${employee.teacherexternalid}" />" /> <label><input
+								value="<c:out value="${employee.teacherexternalid}" />" /> 
+								<input type="hidden" name="branchid" id="branchid"
+								value="<c:out value="${employee.branchid}" />" /> 
+								<label><input
 									name="name" type="text" style="text-transform:uppercase"
 									value="<c:out value="${employee.teachername}" />"
 									class="textField" id="name" size="30"
