@@ -36,7 +36,7 @@
         </script>
     </head>
       
-    <body style="background-image: url(images/background-alameen.png)" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+    <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
         <script type="text/javascript">
             var flag1=<c:out default="" value="${param.login_success}"/>;
             var type='<c:out default="" value="${userType}"/>';

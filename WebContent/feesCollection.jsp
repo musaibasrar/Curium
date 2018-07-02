@@ -434,17 +434,7 @@
                 return month+"/"+day+"/"+year;
 
             }
-            
-
-                var feescat=[
-            <c:forEach varStatus="status" items="${feescategory}" var="fees">{
-                    value:'<c:out default="0" value="${fees.feescategoryname}" />',
-                    particularname:'<c:out default="0" value="${fees.particularname}" />',
-                    price:'<c:out default="0" value="${fees.amount}" />',
-                    id:'<c:out default="0" value="${fees.idfeescategory}" />'
-                    }<c:if test="${!status.last}">,</c:if>
-            </c:forEach>
-            ];
+           
             var students = [
             <c:forEach varStatus="status" items="${studentListFeesCollection}" var="student">{
                 value:'<c:out default="0" value="${student.admissionnumber}" />',
@@ -612,62 +602,7 @@
                 final1.value=(val2);
             }    
         }
-
-         
-
-        function addRow() {
-            var rowCount = document.getElementById('dataTable').rows.length;    
-            var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=fees_"+rowCount+" /><input type='hidden' class='feesStatus' name='feesStatuses' id=fees_status_"+rowCount+" value='not set' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+rowCount+" value='' /></td>";
-            var col2="<td class='dataTextInActive'><input class='feesName' type='text' name='feesNames' id=fees_name_"+rowCount+" /></td>";
-            var col3="<td class='dataTextInActive'><input type='text' value='0' readonly name='fessCat'  id=hiddenfees_amount_"+rowCount+" /></td>";
-            /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-            var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>";
-            var col5="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>";
-            var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+"</tr>");
-            $(function() {
-                $("#dataTable").find('tbody').append(newRow);
-            });
-            $(function() {
-                $("#fees_name_"+rowCount).autocomplete({
-                    source: feescat,
-                    minLength: 1,
-                    change:function(event,ui){
-
-                        $("#fees_id_"+rowCount ).val( ui.item.id );
-                        $( "#fees_status_"+rowCount ).val("set");
-                        $("#hiddenfees_amount_"+rowCount).val( ui.item.price );
-                        $("#hiddenfees_quantity_"+rowCount).val( ui.item.particularname );
-                        calculate(rowCount);
-
-                    },
-                    focus: function( event, ui ) {
-                        $( "#fees_name_"+rowCount).val( ui.item.name );
-                        $( "#fees_status_"+rowCount ).val("not set");
-                        $( "#fees_id_"+rowCount ).val( ui.item.id );
-                        $( "#hiddenfees_amount_"+rowCount).val( ui.item.price );
-                        $("#hiddenfees_quantity_"+rowCount).val( ui.item.particularname );
-                        calculate(rowCount);
-
-                        return true;
-                    },
-                    select: function( event, ui ) {
-                        $( "#fees_name_"+rowCount).val( ui.item.value );
-                        $( "#fees_id_"+rowCount ).val( ui.item.id );
-                        $( "#fees_status_"+rowCount ).val("set");
-                        $( "#hiddenfees_amount_"+rowCount).val( ui.item.price );
-                        $("#hiddenfees_quantity_"+rowCount).val( ui.item.particularname );
-                        calculate(rowCount);
-                        return true;
-                    }
-                }).data( "autocomplete" )._renderItem = function( ul, item ) {
-                    return $( "<li></li>" )
-                    .data( "item.autocomplete", item )
-                    .append( "<a><b> " + item.value +":-</b> <b> "+item.particularname +"</b></a>" )
-                    .appendTo( ul );
-                };
-
-            });
-        }
+       
         </script>
         <script type="text/javascript">
     $(function() {

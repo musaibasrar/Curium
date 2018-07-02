@@ -12,7 +12,7 @@
     <head>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Al-Ameen Educational Society</title>
+        <title>Curium - School ERP</title>
         <script type="text/javascript" src="js/openWindow.js"></script>
         <style type="text/css">
             <!--
@@ -36,16 +36,20 @@
         </script>
     </head>
       
-    <body style="background-image: url(images/background-alameen.png)" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+    <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
         <script type="text/javascript">
             var flag1=<c:out default="" value="${param.login_success}"/>;
             var type='<c:out default="" value="${userType}"/>';
             
             if(flag1){
-                if(type=='admin'){
-                    window.open('index.jsp','_self');
-                }
-                else if(type=='reception'){                    
+            	
+            	if(type=='superadmin'){
+                    window.open('index_superadmin.jsp','_self');
+                }else if(type=='admin'){
+                    window.open('index_admin.jsp','_self');
+                }else if(type=='feescollector'){
+                    window.open('index_feescollector.jsp','_self');
+                }else if(type=='reception'){                    
                    window.open('','_self');
                     window.close();
                     openIndexPage('index_reception.jsp',screen.width,screen.height);

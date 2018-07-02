@@ -61,7 +61,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 18px;
+	font-size: 32px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -70,7 +70,7 @@
 	font-weight: normal;
 	font-family: ariel;
 	color: black;
-	font-size: 10px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -174,14 +174,15 @@
 		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
+				<td align="center">
+				<img src="images/alameenlogo.png" width="200" height="150"/>
+				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				
-				Divine M.A. English Higher Primary & High School </td>
+				AL-AMEEN URDU BOYS/GIRLS <br>
+				<label class="addressLine">High School, Bidar.<br>
+				 </label>
+				</td>
 			</tr>
-			<tr>
-			<td class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</td>
-			</tr>
-
 			<tr>
 			<td></td></tr>
 			<tr></tr>
@@ -206,11 +207,11 @@
 			</tr>
 			<tr>
 			
-				<td class="dataTextBoldLeft" style="width: 40%">Student
+				<td class="dataTextBoldLeft" style="width: 50%">Student
 					Name: <c:out value="${student.name}" />
 				</td>
 			
-				<td class="dataTextBoldLeft" >Admission No:<c:out value="${student.admissionnumber}" />
+				<td class="dataTextBoldLeft" style="width: 30%">Admission No:<c:out value="${student.admissionnumber}" />
 				</td>
 				
 
@@ -225,11 +226,11 @@
 			<td></td>
 			</tr>
 			<tr>
-			<td class="dataTextBoldLeft" style="width: 40%">Fathers
+			<td class="dataTextBoldLeft" style="width: 50%">Fathers
 					Name: <c:out value="${parents.fathersname}" />
 				</td>
 			
-				<td class="dataTextBoldLeft" >Class & Sec:<c:out value="${student.classstudying}" />
+				<td class="dataTextBoldLeft" style="width: 30%">Class & Sec:<c:out value="${student.classstudying}" />
 				</td>
 
 			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date: <c:out

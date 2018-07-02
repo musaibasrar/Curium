@@ -437,7 +437,7 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=viewAll" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="addStudent.jsp" style="font-size: 12px;">Add New</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=addNew" style="font-size: 12px;">Add New</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
@@ -520,7 +520,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
             </div> 
             
-            <h5 style="font-size: 12px"><a href="#" >Send Alerts</a></h5>
+            <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
             <div >
                 <a target="mainFrame" href="sendsms.jsp" style="font-size: 12px;">SMS</a><br/>
                 <a target="mainFrame" href="sendemail.jsp" style="font-size: 12px;">Email</a><br/>
