@@ -1,5 +1,5 @@
 <%-- 
-    Document   : member_details
+    Document   : student_details
     Created on : Jan 4, 2013, 4:39:24 PM
     Author     : Musaib
 --%>
@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Student Details</title>
 
         <script type="text/javascript" language="JavaScript" src="js/motionpack.js"></script>
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -299,7 +299,7 @@
             function updateStudent(){
                
                 var form1=document.getElementById("form1");
-                form1.action="Controller?process=StudentProcess&action=updateStudentDetails&id=<c:out value='${student.sid}'/>";
+                form1.action="Controller?process=StudentProcess&action=updateStudentDetails&id=<c:out value='${student.sid}'/>&urlbranchid=<c:out value='${student.branchid}'/>";
                 form1.submit();
             }
             
@@ -527,6 +527,19 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
+                        <td width="25%"   class="alignLeft" height="50" >Languages Studied</td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.languagesstudied}" />
+                            </td>
+                            
+                            
+                            <td width="25%"   class="alignLeft" height="50" >Last School Medium of Instruction</td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.instructionmediumlastschool}" />
+                            </td>
+                        </tr>
+                       
+                        <tr>
                             <td  width="25%"  class="alignLeft" height="50">Subsequent progress of the student
                             </td>
                             <td width="25%" class="tablerows">
@@ -681,6 +694,20 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${parents.mothersname}" />
                             </td>
                         </tr>
+                        
+                        <tr>
+
+                            <td width="25%"  class="alignLeft" height="50">Father's Qualification</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.fathersqualification}" />
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50" >Mother's Qualification
+                            </td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.mothersqualification}" />
+                            </td>
+                        </tr>
+                        
                         <tr>
                             <td width="25%"  class="alignLeft" height="50">Guardian's name & address</td>
                             <td width="25%" class="tablerows" >
@@ -859,6 +886,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText">Fees Category</th>
                             <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Concession&nbsp;</th>
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
@@ -878,7 +906,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.feescategoryname}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
-                               
+                                <td class="dataText"><c:out value="${feesstructure.concession}"/></td>
                                 
                                  
 

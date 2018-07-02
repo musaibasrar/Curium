@@ -437,7 +437,6 @@
 		});
 
 		$("#go").button()
-
 	});
 	
 	function deleteFeesStamp(){
@@ -540,17 +539,14 @@
 
         	var feesCount=document.getElementById("feesCount_"+value2).value;
         	
-        	if(feesCount === ''){
-        		
-        		document.getElementById("feesCount_"+value2).value = 1;
-        	}
-        	
-            //var val1=value1.value;
+        	        	
             var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
             var feesCount=document.getElementById("feesCount_"+value2).value;
+            var feesConcession=document.getElementById("feesConcession_"+value2).value;
             var final1=document.getElementById("hiddenfees_full_amount_"+value2);
-            
-                final1.value=(feesCat*feesCount);
+            	
+            	var concession = ((feesCat*feesCount)*feesConcession)/100;
+                final1.value=(feesCat*feesCount)-concession;
            
         }
        
@@ -558,13 +554,14 @@
         var rowCount = document.getElementById('dataTable').rows.length;    
         var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=fees_"+rowCount+" /><input type='hidden' class='feesStatus' name='feesStatuses' id=fees_status_"+rowCount+" value='not set' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+rowCount+" value='' /></td>";
         var col2="<td class='dataTextInActive'><input class='feesName'   type='text' name='feesNames' id=fees_name_"+rowCount+" onkeyup='calculate("+rowCount+")' onclick='calculate("+rowCount+");'/></td>";
- 	    var col3="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'   name='fessCat'  id=hiddenfees_amount_"+rowCount+" /></td>";
+ 	    var col3="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'   name='fessCat'  id=hiddenfees_amount_"+rowCount+" readonly/></td>";
         var col4="<td class='dataTextInActive'><input type='text' value='0' onclick='SelectAll("+rowCount+");calculate("+rowCount+");' onfocus='SelectAll("+rowCount+")' onkeyup='calculate("+rowCount+")' name='feesCount' id=feesCount_"+rowCount+" /></td>";
-        var col5="<td class='dataTextInActive'><input class='feesFullAmount' type='text' value='0'   name='fessFullCat'  id=hiddenfees_full_amount_"+rowCount+" /></td>";
+        var col5="<td class='dataTextInActive'><input type='text' value='0' onclick='calculate("+rowCount+");' onkeyup='calculate("+rowCount+")' name='feesConcession' id=feesConcession_"+rowCount+" /></td>";
+        var col6="<td class='dataTextInActive'><input class='feesFullAmount' type='text' value='0'   name='fessFullCat'  id=hiddenfees_full_amount_"+rowCount+" /></td>";
         /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
-        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+"</tr>");
+        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+"</tr>");
         $(function() {
             $("#dataTable").find('tbody').append(newRow);
         });
@@ -718,35 +715,31 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 150px">
-										<option selected>Class</option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
+							<td width="70%"><label> 
+								<select name="classsearch" id="classsearch"
+									style="width: 120px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}">
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>
+										</c:forEach>
 								</select>
 
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 120px">
-										<option selected>Sec</option>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>E</option>
-										<option>F</option>
-										<option>G</option>
+							</label> <label> 
+									<select name="secsearch" id="secsearch"
+									style="width: 120px;">
+										<option selected></option>
 
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.section != '')}">
+											<option value="${classdetailslist.section}">
+												<c:out value="${classdetailslist.section}" />
+											</option>
+										</c:if>
+										</c:forEach>
 								</select>
 							</label>
 						</tr>
@@ -790,6 +783,7 @@ for(Cookie cookie : cookies){
 								<td class="headerText">Fees Category</td>
 								<td class="headerText">Fees Amount</td>
 								<td class="headerText">No.of installments in a Year</td>
+								<td class="headerText">Concession %</td>
 								<td class="headerText">Fees Total Amount</td>
 
 
@@ -802,7 +796,7 @@ for(Cookie cookie : cookies){
 						<tfoot>
 							<tr>
 
-								<td colspan="4" align="right">Total&nbsp;&nbsp;</td>
+								<td colspan="5" align="right">Total&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
 									name="feesTotalAmount" id="feesTotalAmount" value="0" /></td>
 							</tr>
