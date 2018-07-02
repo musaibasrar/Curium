@@ -52,11 +52,11 @@ public class UserService {
             httpSession.setAttribute("currentAcademicYear",academicyear);
             httpSession.setAttribute("username",login.getUsername());
             httpSession.setAttribute("branchid",login.getBranch().getIdbranch());
-            request.setAttribute("userType", login.getUsertype());
+            httpSession.setAttribute("userType", login.getUsertype());
             httpSession.setAttribute("typeOfUser",login.getUsertype());
             httpSession.setAttribute("userAuth", login.getUsertype());
-			//setting session to expiry in 30 mins
-           	httpSession.setMaxInactiveInterval(30*60);
+			//setting session to expiry in 60 mins
+           	httpSession.setMaxInactiveInterval(60*60);
 			Cookie cookie = new Cookie("user",  login.getUsertype());
 			cookie.setMaxAge(30*60);
 			response.addCookie(cookie);
@@ -392,10 +392,12 @@ public class UserService {
 	public void searchByDate() {
 		 
 		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
-		
+		String branchId = request.getParameter("selectedbranchid");
+                String[] branchIdName = branchId.split(":");
+                
 		if(httpSession.getAttribute(BRANCHID)!=null){
-			
-		String queryMain ="From Receiptinfo as feesdetails where feesdetails.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
+		
+		String queryMain ="From Receiptinfo as feesdetails where feesdetails.branchid="+Integer.parseInt(branchIdName[0])+" AND";
 		String toDate= DataUtil.emptyString(request.getParameter("todate"));
 		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
 		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
@@ -426,7 +428,7 @@ public class UserService {
 			
 			httpSession.setAttribute("searchfeesdetailslist", feesDetailsList);
 			httpSession.setAttribute("sumofdetailsfees", sumOfFees);
-		
+			httpSession.setAttribute("feesdetailsbranchname", branchIdName[1]);
 		
 	}
 

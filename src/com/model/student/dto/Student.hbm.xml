@@ -107,5 +107,14 @@
           <property name="branchid" type="int">
             <column name="branchid" />
         </property>
+        <property name="languagesstudied" type="string">
+            <column name="languagesstudied" length="80" />
+        </property>
+        <property name="instructionmediumlastschool" type="string">
+            <column name="instructionmediumlastschool" length="45" />
+        </property>
+         <many-to-one name="Pudetails" class="com.model.pudetails.dto.Pudetails"
+            column="pudetailsid" unique="true" not-null="true"
+            cascade="all" />
     </class>
 </hibernate-mapping>

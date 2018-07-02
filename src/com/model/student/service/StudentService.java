@@ -27,16 +27,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
-import com.model.department.dao.departmentDAO;
-import com.model.department.dto.Department;
 import com.model.feescollection.dao.feesCollectionDAO;
 import com.model.feescollection.dto.Receiptinfo;
-import com.model.feesdetails.dao.feesDetailsDAO;
-import com.model.feesdetails.dto.Feesdetails;
 import com.model.parents.dao.parentsDetailsDAO;
 import com.model.parents.dto.Parents;
-import com.model.position.dao.positionDAO;
-import com.model.position.dto.Position;
+import com.model.pudetails.dto.Pudetails;
 import com.model.std.dto.Classsec;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
@@ -50,6 +45,8 @@ public class StudentService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	private StringBuilder optional = new StringBuilder();
+	private StringBuilder compulsory = new StringBuilder();
 	/**
     * Size of a byte buffer to read/write file
     */
@@ -64,7 +61,8 @@ public class StudentService {
 	public boolean addStudent() {
 		Student student = new Student();
 		Parents parents = new Parents();
-		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying=null,conClassAdmittedIn=null;
+		Pudetails puDetails = new Pudetails();
+		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying = null,conClassAdmittedIn=null;
 		boolean result=false;
 		
 		try {
@@ -104,20 +102,17 @@ public class StudentService {
 		                    
 		                    addClass = DataUtil.emptyString(item.getString());
 		                    if (!addClass.equalsIgnoreCase("Class")) {
+		                            conClassStudying = addClass;
 
-			        			conClassStudying = addClass;
-
-			        		}
+		                    }
 		                }
-
-		                
 
 		                if (fieldName.equalsIgnoreCase("addsec")) {
 
 		                    addSec = DataUtil.emptyString(item.getString());
 		                    if (!addSec.equalsIgnoreCase("Sec")) {
 			        			conClassStudying = conClassStudying + " " + addSec;
-			        		}else{
+			        		}else if(conClassStudying !=null){
 			        			conClassStudying = conClassStudying + " " ;
 			        		}
 		                }
@@ -140,7 +135,9 @@ public class StudentService {
 		                    addSecE = DataUtil.emptyString(item.getString());
 			        		if (!addSecE.equalsIgnoreCase("Sec")) {
 			        			conClassAdmittedIn = conClassAdmittedIn + " " + addSecE;
-			        		}
+			        		}else if(conClassAdmittedIn!=null){
+			        		    conClassAdmittedIn = conClassAdmittedIn + " " ;
+                                            }
 		                }
 		              
 		                student.setClassadmittedin(DataUtil.emptyString(conClassAdmittedIn));
@@ -177,39 +174,6 @@ public class StudentService {
 		                }
 		                if (fieldName.equalsIgnoreCase("remarks")) {
 		                	student.setRemarks(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("fathersname")) {
-		                	parents.setFathersname(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("mothersname")) {
-		                	parents.setMothersname(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("profession")) {
-		                    parents.setProfesssion(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("parentsannualincome")) {
-		                	parents.setParentsannualincome(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("permanentaddress")) {
-		                    parents.setAddresspermanent(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("temporaryaddress")) {
-		                    parents.setAddresstemporary(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("noofdependents")) {
-		                	parents.setNoofdependents(DataUtil.parseInt(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("remarks")) {
-		                	parents.setRemarks(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("contactnumber")) {
-		                	parents.setContactnumber(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("cocontactnumber")) {
-		                	parents.setCocontactnumber(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("email")) {
-		                	parents.setEmail(DataUtil.emptyString(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("crecord")) {
 		                	student.setCrecord(DataUtil.emptyString(item.getString()));
@@ -250,6 +214,105 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("remarksadditional")) {
 		                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
 		                }
+		                if (fieldName.equalsIgnoreCase("pep")) {
+                                    puDetails.setExampassedappearance(DataUtil.parseInt(item.getString()));
+                                }
+		                if (fieldName.equalsIgnoreCase("passedyear")) {
+                                    puDetails.setExampassedyear(DataUtil.emptyString(item.getString()));
+                                }
+		                if (fieldName.equalsIgnoreCase("regno")) {
+                                    puDetails.setExampassedregno(DataUtil.emptyString(item.getString()));
+                                }
+		                if (fieldName.equalsIgnoreCase("resultclass")) {
+                                    puDetails.setExampassedresultwithclass(DataUtil.emptyString(item.getString()));
+                                }
+		                if (fieldName.equalsIgnoreCase("Xsecondlanguage")) {
+                                    puDetails.setSecondlanguage(DataUtil.emptyString(item.getString()));
+                                }
+		                if (fieldName.equalsIgnoreCase("aggmarks")) {
+                                    puDetails.setAggregatemarkssslc(DataUtil.emptyString(item.getString()));
+                                }
+		                if (fieldName.equalsIgnoreCase("arts1")) {
+		                    if(!DataUtil.emptyString(item.getString()).isEmpty()) {
+		                        optional.append(DataUtil.emptyString(item.getString())+"-");
+		                    }
+                                }
+		                if (fieldName.equalsIgnoreCase("arts2")) {
+                                    if(!DataUtil.emptyString(item.getString()).isEmpty()) {
+                                        compulsory.append(DataUtil.emptyString(item.getString())+"-");
+                                    }
+                                }
+		                if (fieldName.equalsIgnoreCase("science1")) {
+		                    
+                                    if(!DataUtil.emptyString(item.getString()).isEmpty()) {
+                                        optional.append(DataUtil.emptyString(item.getString())+"-");
+                                    }
+                                    
+                                }
+		                if (fieldName.equalsIgnoreCase("science2")) {
+                                    if(!DataUtil.emptyString(item.getString()).isEmpty()) {
+                                        compulsory.append(DataUtil.emptyString(item.getString())+"-");
+                                    }
+                                   
+                                }
+		                if (fieldName.equalsIgnoreCase("Xmediuminstruction")) {
+		                    puDetails.setSslcmediuminstruction(DataUtil.emptyString(item.getString()));
+                                   
+                                }
+		                if (fieldName.equalsIgnoreCase("PUmediuminstruction")) {
+		                    puDetails.setPumediuminstruction(DataUtil.emptyString(item.getString()));
+                                   
+                                }
+		                if (fieldName.equalsIgnoreCase("languagesstudied")) {
+                                    student.setLanguagesstudied(DataUtil.emptyString(item.getString()));
+                                   
+                                }
+		                if (fieldName.equalsIgnoreCase("mediumofinstructionlastschool")) {
+		                    student.setInstructionmediumlastschool(DataUtil.emptyString(item.getString()));
+                                   
+                                }
+		                if (fieldName.equalsIgnoreCase("fathersname")) {
+                                    parents.setFathersname(DataUtil.emptyString(item.getString()));
+                                }
+                                if (fieldName.equalsIgnoreCase("mothersname")) {
+                                        parents.setMothersname(DataUtil.emptyString(item.getString()));
+                                }
+                                if (fieldName.equalsIgnoreCase("profession")) {
+                                    parents.setProfesssion(DataUtil.emptyString(item.getString()));
+                                }
+                                if (fieldName.equalsIgnoreCase("parentsannualincome")) {
+                                        parents.setParentsannualincome(DataUtil.emptyString(item.getString()));
+                                }
+                                if (fieldName.equalsIgnoreCase("permanentaddress")) {
+                                    parents.setAddresspermanent(DataUtil.emptyString(item.getString()));
+                                }
+                                if (fieldName.equalsIgnoreCase("temporaryaddress")) {
+                                    parents.setAddresstemporary(DataUtil.emptyString(item.getString()));
+                                }
+                                if (fieldName.equalsIgnoreCase("noofdependents")) {
+                                        parents.setNoofdependents(DataUtil.parseInt(item.getString()));
+                                }
+                                if (fieldName.equalsIgnoreCase("remarks")) {
+                                        parents.setRemarks(DataUtil.emptyString(item.getString()));
+                                }
+                                if (fieldName.equalsIgnoreCase("contactnumber")) {
+                                        parents.setContactnumber(DataUtil.emptyString(item.getString()));
+                                }
+                                if (fieldName.equalsIgnoreCase("cocontactnumber")) {
+                                        parents.setCocontactnumber(DataUtil.emptyString(item.getString()));
+                                }
+                                if (fieldName.equalsIgnoreCase("email")) {
+                                        parents.setEmail(DataUtil.emptyString(item.getString()));
+                                }
+		                if (fieldName.equalsIgnoreCase("fathersqualification")) {
+		                    parents.setFathersqualification(DataUtil.emptyString(item.getString()));
+                                   
+                                }
+		                if (fieldName.equalsIgnoreCase("mothersqualification")) {
+		                    parents.setMothersqualification(DataUtil.emptyString(item.getString()));
+                                   
+                                }
+		                
 		            } else {
 		                // Process form file field (input type="file").
 		                String fieldName = item.getFieldName();
@@ -282,6 +345,9 @@ public class StudentService {
 		}
 		student.setStudentexternalid(builder.toString());
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		puDetails.setOptionalsubjects(optional.toString());
+		puDetails.setCompulsorysubjects(compulsory.toString());
+		student.setPudetails(puDetails);
 		parents.setStudent(student);
 		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		parents = new parentsDetailsDAO().create(parents);
@@ -415,6 +481,7 @@ public class StudentService {
 		Student student = new Student();
 		Classsec classsec = new Classsec();
 		Parents parents = new Parents();
+		Pudetails puDetails = new Pudetails();
 		String id = "";
 		String pid = "";
 		int studentId = 0;
@@ -680,6 +747,58 @@ public class StudentService {
 	                	parents.setEmail(DataUtil.emptyString(item.getString()));
 	                }
 	                
+	                if (fieldName.equalsIgnoreCase("pep")) {
+                            puDetails.setExampassedappearance(DataUtil.parseInt(item.getString()));
+                        }
+                        if (fieldName.equalsIgnoreCase("passedyear")) {
+                            puDetails.setExampassedyear(DataUtil.emptyString(item.getString()));
+                        }
+                        if (fieldName.equalsIgnoreCase("regno")) {
+                            puDetails.setExampassedregno(DataUtil.emptyString(item.getString()));
+                        }
+                        if (fieldName.equalsIgnoreCase("resultclass")) {
+                            puDetails.setExampassedresultwithclass(DataUtil.emptyString(item.getString()));
+                        }
+                        if (fieldName.equalsIgnoreCase("Xsecondlanguage")) {
+                            puDetails.setSecondlanguage(DataUtil.emptyString(item.getString()));
+                        }
+                        if (fieldName.equalsIgnoreCase("aggmarks")) {
+                            puDetails.setAggregatemarkssslc(DataUtil.emptyString(item.getString()));
+                        }
+                        if (fieldName.equalsIgnoreCase("subjectspart1")) {
+                            puDetails.setOptionalsubjects(DataUtil.emptyString(item.getString()));
+                        }
+                        if (fieldName.equalsIgnoreCase("subjectspart2")) {
+                            puDetails.setCompulsorysubjects(DataUtil.emptyString(item.getString()));
+                        }
+                        if (fieldName.equalsIgnoreCase("Xmediuminstruction")) {
+                            puDetails.setSslcmediuminstruction(DataUtil.emptyString(item.getString()));
+                           
+                        }
+                        if (fieldName.equalsIgnoreCase("PUmediuminstruction")) {
+                            puDetails.setPumediuminstruction(DataUtil.emptyString(item.getString()));
+                           
+                        }
+                        if (fieldName.equalsIgnoreCase("pudetailsid")) {
+                            puDetails.setIdpudetails(DataUtil.parseInt(item.getString()));
+                           
+                        }
+                        if (fieldName.equalsIgnoreCase("fathersqualification")) {
+                            parents.setFathersqualification(DataUtil.emptyString(item.getString()));
+                           
+                        }
+                        if (fieldName.equalsIgnoreCase("mothersqualification")) {
+                            parents.setMothersqualification(DataUtil.emptyString(item.getString()));
+                           
+                        }
+                        if (fieldName.equalsIgnoreCase("languagesstudied")) {
+                            student.setLanguagesstudied(DataUtil.emptyString(item.getString()));
+                           
+                        }
+                        if (fieldName.equalsIgnoreCase("mediumofinstructionlastschool")) {
+                            student.setInstructionmediumlastschool(DataUtil.emptyString(item.getString()));
+                           
+                        }
 	            } else {
 	                String fieldName = item.getFieldName();
 
@@ -711,6 +830,8 @@ public class StudentService {
 	}
 		 student.setArchive(0);
 		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	         new studentDetailsDAO().updatePuDetails(puDetails);
+	         student.setPudetails(puDetails);
 		 student = new studentDetailsDAO().update(student);
  		if (pid != "") {
  			parents.setStudent(student);
@@ -718,8 +839,8 @@ public class StudentService {
  			parents = new parentsDetailsDAO().update(parents);
  		}
 		String stId = student.getSid().toString();
-        return stId;
-		
+		int branchId = student.getBranchid();
+        return stId+"_"+branchId;
 		
 	}
 
@@ -774,11 +895,13 @@ public class StudentService {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		if (studentIds != null) {
 			List ids = new ArrayList();
+			List iddetails = new ArrayList();
 			for (String id : studentIds) {
-				ids.add(Integer.valueOf(id));
-
+			        String[] iddetailsarray = id.split(":");
+				ids.add(Integer.valueOf(iddetailsarray[0]));
+				iddetails.add(Integer.valueOf(iddetailsarray[1]));
 			}
-			new studentDetailsDAO().deleteMultiple(ids);
+			new studentDetailsDAO().deleteMultiple(ids,iddetails);
 		}
 	}
 
@@ -863,23 +986,30 @@ public class StudentService {
 
 	public boolean viewfeesStructurePerYear() {
 		boolean result = false;
+		
 		try {
-			long id = Long.parseLong(request.getParameter("id"));
-			String academicYear = request.getParameter("academicyear");
 
-			List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, academicYear);
-			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id,
-					academicYear);
-			String sumOfFees = new feesDetailsDAO().feesSum(id, academicYear);
-			String totalFees = new feesDetailsDAO().feesTotal(id, academicYear);
-			String dueAmount = new feesDetailsDAO().dueAmount(id, academicYear);
-
-			httpSession.setAttribute("feesdetails", feesdetails);
-			httpSession.setAttribute("feesstructure", feesstructure);
-			httpSession.setAttribute("sumoffees", sumOfFees);
-			httpSession.setAttribute("dueamount", dueAmount);
-			httpSession.setAttribute("totalfees", totalFees);
-			httpSession.setAttribute("academicPerYear", academicYear);
+		    long id = Long.parseLong(request.getParameter("id"));
+                    String academicYear = request.getParameter("academicyear");
+                    
+                    List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,academicYear);
+                    request.setAttribute("receiptinfo",rinfo);
+                    List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, academicYear);
+                    
+                    long totalSum = 0l;
+                    for (Receiptinfo receiptInfoSingle : rinfo) {
+                            totalSum = totalSum + receiptInfoSingle.getTotalamount();
+                    }
+                    
+                    long totalFeesAmount = 0l;
+                    for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
+                            totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount();
+                    }
+                            httpSession.setAttribute("feesstructure", feesstructure);
+                            httpSession.setAttribute("sumoffees", totalSum);
+                            httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
+                            httpSession.setAttribute("totalfees", totalFeesAmount);
+                            httpSession.setAttribute("academicPerYear", academicYear);
 
 			result = true;
 
@@ -1104,5 +1234,44 @@ public class StudentService {
 		}
 		return result;
 	}
+
+    public String addNew() {
+        
+        if(httpSession.getAttribute(BRANCHID)!=null){
+            String branchId = httpSession.getAttribute(BRANCHID).toString();
+            if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
+                return "addStudent.jsp";
+            }else if("4".equalsIgnoreCase(branchId)) {
+                return "addStudentPU.jsp";
+            }else if("5".equalsIgnoreCase(branchId)) {
+                return "addStudentPU.jsp";
+            }
+        }
+        return "sessiontimeout.jsp";
+    }
+
+    public void viewAllStudentsSuperAdmin() {
+
+        String pages = "1";
+        
+                try {
+                        int page = 1;
+                        int recordsPerPage = 5000;
+                        if (pages != null) {
+                                page = Integer.parseInt(pages);
+                        }
+                        List<Parents> list = new studentDetailsDAO().readListStudentsSuperAdmin((page - 1) * recordsPerPage,
+                                        recordsPerPage);
+                        request.setAttribute("studentList", list);
+                        int noOfRecords = new studentDetailsDAO().getNoOfRecords();
+                        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+                        request.setAttribute("studentList", list);
+                        request.setAttribute("noOfPages", noOfPages);
+                        request.setAttribute("currentPage", page);
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+        
+}
 	
 }

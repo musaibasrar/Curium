@@ -17,7 +17,7 @@ import com.model.student.dto.Student;
 import com.util.HibernateUtil;
 
 public class feesDetailsDAO {
-	Session session = null;
+        Session session = null;
     /**
      * * Hibernate Session Variable
      */
@@ -29,14 +29,14 @@ public class feesDetailsDAO {
     SessionFactory sessionFactory;
     
 
-	public feesDetailsDAO() {
-		session = HibernateUtil.openSession();
-	}
+        public feesDetailsDAO() {
+                session = HibernateUtil.openSession();
+        }
 
-	@SuppressWarnings({ "finally", "unchecked" })
-	public List<Feescategory> readListOfObjects() {
-		
-		List<Feescategory> results = new ArrayList<Feescategory>();
+        @SuppressWarnings({ "finally", "unchecked" })
+        public List<Feescategory> readListOfObjects() {
+                
+                List<Feescategory> results = new ArrayList<Feescategory>();
         try {
             
             transaction = session.beginTransaction();
@@ -49,11 +49,11 @@ public class feesDetailsDAO {
             //session.close();
             return results;
         }
-	}
+        }
 
-	@SuppressWarnings("finally")
-	public Feesdetails create(Feesdetails feesdetails) {
-		try {
+        @SuppressWarnings("finally")
+        public Feesdetails create(Feesdetails feesdetails) {
+                try {
             //this.session = sessionFactory.openCurrentSession();
             transaction = session.beginTransaction();
             session.save(feesdetails);
@@ -68,94 +68,91 @@ public class feesDetailsDAO {
             session.close();
             return feesdetails;
         }
-	}
+        }
 
-	public Feesdetails readUniqueObject(Long feesDetailsid) {
-		 Feesdetails feesdetails = new Feesdetails();
-	        try {
-	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+        public Feesdetails readUniqueObject(Long feesDetailsid) {
+                 Feesdetails feesdetails = new Feesdetails();
+                try {
+                    //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 
-	            transaction = session.beginTransaction();
-	            Query query = session.createQuery("From Feesdetails as feesdetails where feesdetails.feesdetailsid=" + feesDetailsid);
-	            feesdetails = (Feesdetails) query.uniqueResult();
-	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
-	            transaction.rollback();
-	            hibernateException.printStackTrace();
-	        }
-	        //session.close();
-	        return feesdetails;
-	}
-	
-	public Receiptinfo readFeesDetails(Long feesDetailsid) {
-		 Receiptinfo feesdetails = new Receiptinfo();
-	        try {
-	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+                    transaction = session.beginTransaction();
+                    Query query = session.createQuery("From Feesdetails as feesdetails where feesdetails.feesdetailsid=" + feesDetailsid);
+                    feesdetails = (Feesdetails) query.uniqueResult();
+                    transaction.commit();
+                } catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+                }
+                //session.close();
+                return feesdetails;
+        }
+        
+        public Receiptinfo readFeesDetails(Long feesDetailsid) {
+                 Receiptinfo feesdetails = new Receiptinfo();
+                try {
+                    //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 
-	            transaction = session.beginTransaction();
-	            Query query = session.createQuery("From Receiptinfo as feesdetails where feesdetails.receiptnumber=" + feesDetailsid);
-	            feesdetails = (Receiptinfo) query.uniqueResult();
-	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
-	            transaction.rollback();
-	            hibernateException.printStackTrace();
-	        }
-	        //session.close();
-	        return feesdetails;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Feesdetails> readList(Long sid, String currentYear) {
-		 
-		 List<Feesdetails> results = new ArrayList<Feesdetails>();
-	        try {
-	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+                    transaction = session.beginTransaction();
+                    Query query = session.createQuery("From Receiptinfo as feesdetails where feesdetails.receiptnumber=" + feesDetailsid);
+                    feesdetails = (Receiptinfo) query.uniqueResult();
+                    transaction.commit();
+                } catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+                }
+                //session.close();
+                return feesdetails;
+        }
+        
+        @SuppressWarnings("unchecked")
+        public List<Feesdetails> readList(Long sid, String currentYear) {
+                 
+                 List<Feesdetails> results = new ArrayList<Feesdetails>();
+                try {
+                    transaction = session.beginTransaction();
+                    String query = "From Feesdetails as feesdetails where feesdetails.sid='"+sid+"' AND feesdetails.academicyear='"+currentYear+"'";
+                                results = (List<Feesdetails>) session.createQuery(query).list();
+                                
+                                
+                  
+                    transaction.commit();
+                } catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+                }
+                //session.close();
+                return results;
+        }
 
-	            transaction = session.beginTransaction();
-	            transaction = session.beginTransaction();
-	            String query = "From Feesdetails as feesdetails where feesdetails.sid='"+sid+"' AND feesdetails.academicyear='"+currentYear+"'";
-				results = (List<Feesdetails>) session.createQuery(query).list();
-				
-				
-	          
-	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
-	            transaction.rollback();
-	            hibernateException.printStackTrace();
-	        }
-	        //session.close();
-	        return results;
-	}
+        public String feesSum(long id, String currentYear) {
+                 
+                String results = "";
+                try {
+                    //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 
-	public String feesSum(long id, String currentYear) {
-		 
-		String results = "";
-	        try {
-	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+                    transaction = session.beginTransaction();
+                    
+                                Query query =  session.createQuery("select sum(grandtotal) From Feesdetails as feesdetails where feesdetails.sid=" + id +"and feesdetails.academicyear='"+currentYear+"'");
+                                results =  (String) query.uniqueResult();
+                                /*
+                                Query queryTotalFees =  session.createQuery("select totalfees From Academicfessstructure as afs where afs.sid=" + id +"and afs.academicyear="+currentYear);
+                                results =  (String) queryTotalFees.uniqueResult();*/
+                                
+                  
+                    transaction.commit();
+                } catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+                }
+                //session.close();
+                return results;
+        }
 
-	            transaction = session.beginTransaction();
-	            
-				Query query =  session.createQuery("select sum(grandtotal) From Feesdetails as feesdetails where feesdetails.sid=" + id +"and feesdetails.academicyear='"+currentYear+"'");
-				results =  (String) query.uniqueResult();
-				/*
-				Query queryTotalFees =  session.createQuery("select totalfees From Academicfessstructure as afs where afs.sid=" + id +"and afs.academicyear="+currentYear);
-				results =  (String) queryTotalFees.uniqueResult();*/
-				
-	          
-	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
-	            transaction.rollback();
-	            hibernateException.printStackTrace();
-	        }
-	        //session.close();
-	        return results;
-	}
-
-	public String dueAmount(long id, String currentYear) {
-		
-		String paidFees = "";
-		String totalFees = "";
-		String dueFees = "";
+        public String dueAmount(long id, String currentYear) {
+                
+                String paidFees = "";
+                String totalFees = "";
+                String dueFees = "";
         try {
             //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 
@@ -163,11 +160,11 @@ public class feesDetailsDAO {
             
             String queryPaidFees = "select sum(grandtotal) from Feesdetails as feesdetails where feesdetails.sid=" + id +"and feesdetails.academicyear='"+currentYear+"'";
             String queryTotalFees = "select afs.totalfees from Academicfeesstructure as afs where afs.sid="+id+"and afs.academicyear='"+currentYear+"'";
-			Query queryPF =  session.createQuery(queryPaidFees);
-			paidFees =  (String) queryPF.uniqueResult();
-			Query queryTF =  session.createQuery(queryTotalFees);
-			totalFees =  (String) queryTF.uniqueResult();
-			transaction.commit();
+                        Query queryPF =  session.createQuery(queryPaidFees);
+                        paidFees =  (String) queryPF.uniqueResult();
+                        Query queryTF =  session.createQuery(queryTotalFees);
+                        totalFees =  (String) queryTF.uniqueResult();
+                        transaction.commit();
         } catch (HibernateException hibernateException) {
             transaction.rollback();
             hibernateException.printStackTrace();
@@ -175,71 +172,92 @@ public class feesDetailsDAO {
         
         //session.close();
         return dueFees;
-	}
+        }
 
-	public String feesDetailsSum(String queryMain) {
-		 
-		String results = "";
-	        try {
-	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+        public String feesDetailsSum(String queryMain) {
+                 
+                String results = "";
+                try {
+                    //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 
-	            transaction = session.beginTransaction();
-	            transaction = session.beginTransaction();
-				Query query =  session.createQuery(queryMain);
-				results =  (String) query.uniqueResult();
-				
-	          
-	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
-	            transaction.rollback();
-	            hibernateException.printStackTrace();
-	        }
-	        //session.close();
-	        return results;
-	}
+                    transaction = session.beginTransaction();
+                    transaction = session.beginTransaction();
+                                Query query =  session.createQuery(queryMain);
+                                results =  (String) query.uniqueResult();
+                                
+                  
+                    transaction.commit();
+                } catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+                }
+                //session.close();
+                return results;
+        }
 
-	public String feesTotal(long id, String currentYear) {
-		 
-		String results = "";
-	        try {
-	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+        public String feesTotal(long id, String currentYear) {
+                 
+                String results = "";
+                try {
+                    //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 
-	            transaction = session.beginTransaction();
-	           
-				
-				Query queryTotalFees =  session.createQuery("select totalfees From Academicfeesstructure as afs where afs.sid=" + id +"and afs.academicyear='"+currentYear+"'");
-				results =  (String) queryTotalFees.uniqueResult();
-				
-	          
-	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
-	            transaction.rollback();
-	            hibernateException.printStackTrace();
-	        }
-	        //session.close();
-	        return results;
-	}
+                    transaction = session.beginTransaction();
+                   
+                                
+                                Query queryTotalFees =  session.createQuery("select totalfees From Academicfeesstructure as afs where afs.sid=" + id +"and afs.academicyear='"+currentYear+"'");
+                                results =  (String) queryTotalFees.uniqueResult();
+                                
+                  
+                    transaction.commit();
+                } catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+                }
+                //session.close();
+                return results;
+        }
 
-	public List<Student> readListOfStudents(int branchId) {
-		List<Student> results = new ArrayList<Student>();
+        public List<Student> readListOfStudents(int branchId) {
+                List<Student> results = new ArrayList<Student>();
 
-		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
-			transaction = session.beginTransaction();
+                try {
+                        // this.session =
+                        // HibernateUtil.getSessionFactory().openCurrentSession();
+                        transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("FROM Student s where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")")
-					.list();
-			transaction.commit();
+                        results = (List<Student>) session.createQuery("FROM Student s where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")")
+                                        .list();
+                        transaction.commit();
 
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
-			hibernateException.printStackTrace();
+                } catch (HibernateException hibernateException) {
+                        transaction.rollback();
+                        hibernateException.printStackTrace();
 
-		} finally {
-			// session.close();
-			return results;
-		}
-	}
+                } finally {
+                        // session.close();
+                        return results;
+                }
+        }
+        
+        
+        public List<Student> readListOfAllBranchStudents() {
+            List<Student> results = new ArrayList<Student>();
+
+            try {
+                    transaction = session.beginTransaction();
+
+                    results = (List<Student>) session.createQuery("FROM Student s where s.archive = 0 and s.sid in (select f.sid from Studentfeesstructure f) ")
+                                    .list();
+                    transaction.commit();
+
+            } catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+
+            } finally {
+                    // session.close();
+                    return results;
+            }
+    }
 
 }

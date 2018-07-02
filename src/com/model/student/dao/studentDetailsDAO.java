@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.parents.dto.Parents;
+import com.model.pudetails.dto.Pudetails;
 import com.model.student.dto.Student;
 import com.model.student.dto.Studentfeesstructure;
 import com.util.HibernateUtil;
@@ -201,7 +202,7 @@ public class studentDetailsDAO {
 		}
 	}
 
-	public void deleteMultiple(List ids) {
+	public void deleteMultiple(List ids, List iddetails) {
 		try {
 			transaction = session.beginTransaction();
 			
@@ -212,8 +213,12 @@ public class studentDetailsDAO {
 			Query query2 = session
 					.createQuery("delete from Student where sid IN (:ids)");
 			query2.setParameterList("ids", ids);
+			Query query3 = session
+                                .createQuery("delete from Pudetails where idpudetails IN (:iddetails)");
+                        query3.setParameterList("iddetails", iddetails);
 			query.executeUpdate();
 			query2.executeUpdate();
+			query3.executeUpdate();
 			transaction.commit();
 		} catch (HibernateException hibernateException) {
 			hibernateException.printStackTrace();
@@ -520,5 +525,60 @@ public class studentDetailsDAO {
 		}
 		return false;
 	}
+
+    public void updatePuDetails(Pudetails puDetails) {
+        try {
+            // this.session = sessionFactory.openCurrentSession();
+            transaction = session.beginTransaction();
+            session.update(puDetails);
+            transaction.commit();
+    } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+    } 
+    }
+
+    public List<Parents> readListStudentsSuperAdmin(int offset, int noOfRecords) {
+        List<Parents> results = new ArrayList<Parents>();
+
+        try {
+                
+                transaction = session.beginTransaction();
+                Query query = session
+                                .createQuery("From Parents as parents where parents.Student.archive=0 order by name ASC");
+                query.setFirstResult(offset);   
+                query.setMaxResults(noOfRecords);
+                results = query.getResultList();
+                
+                transaction.commit();
+                
+
+        } catch (Exception hibernateException) {
+                transaction.rollback();
+                System.out.println("Exception is "+hibernateException);
+                hibernateException.printStackTrace();
+
+        } finally {
+                // session.close();
+                return results;
+        }
+}
+
+    public int getNoOfRecords() {
+        List<Student> results = new ArrayList<Student>();
+        int noOfRecords = 0;
+        try {
+                transaction = session.beginTransaction();
+                results = (List<Student>) session.createQuery("From Student where archive=0").list();
+                noOfRecords = results.size();
+                transaction.commit();
+        } catch (HibernateException hibernateException) {
+                transaction.rollback();
+                hibernateException.printStackTrace();
+
+        } finally {
+                return noOfRecords;
+        }
+}
 	
 }

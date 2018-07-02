@@ -11,14 +11,8 @@ import com.model.department.dao.departmentDAO;
 import com.model.department.dto.Department;
 import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
-import com.model.parents.dao.parentsDetailsDAO;
-import com.model.parents.dto.Parents;
 import com.model.position.dao.positionDAO;
 import com.model.position.dto.Position;
-import com.model.std.dao.standardDetailsDAO;
-import com.model.std.dto.Classsec;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
 import com.model.user.dao.UserDAO;
 import com.model.user.dto.Login;
 import com.model.user.service.UserService;
@@ -139,7 +133,7 @@ public class EmployeeService {
 		employee.setSalary(DataUtil.emptyString(request.getParameter("salary")));
 		employee.setRemarks(DataUtil.emptyString(request.getParameter("remarks")));
 		employee.setTeacherexternalid(DataUtil.emptyString(request.getParameter("teacherexternalid")));
-				
+		employee.setBranchid(DataUtil.parseInt(request.getParameter("branchid")));		
 		
 		employee = new EmployeeDAO().update(employee);
 				

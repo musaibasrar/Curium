@@ -81,7 +81,7 @@ public class AccountDAO {
 		
 		try{
 			transaction = session.beginTransaction();
-			accountGroupMaster = session.createQuery("from Accountgroupmaster where branchid="+branchId).list();
+			accountGroupMaster = session.createQuery("from Accountgroupmaster").list();
 			transaction.commit();
 		}catch(HibernateException hb){
 			hb.printStackTrace();

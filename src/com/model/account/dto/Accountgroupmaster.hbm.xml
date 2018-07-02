@@ -11,8 +11,5 @@
         <property name="accountgroupname" type="string">
             <column name="accountgroupname" length="150" not-null="true" />
         </property>
-        <property name="branchid" type="int">
-            <column name="branchid" />
-        </property>
     </class>
 </hibernate-mapping>

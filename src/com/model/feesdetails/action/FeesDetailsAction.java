@@ -60,11 +60,10 @@ public class FeesDetailsAction {
 
 	private String viewFees() {
 		new FeesService(request, response).viewFees();
-        System.out.println("IN action's fees view");
         return "feesCategory.jsp";
 	}
 
-private String exportFeesData() {
+	private String exportFeesData() {
 		
 		if(new FeesDetailsService(request, response).exportDataForFees()){
 			return "feesexportsuccess.jsp";

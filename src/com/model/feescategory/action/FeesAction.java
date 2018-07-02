@@ -4,8 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.feescategory.dto.Feescategory;
 import com.model.feescategory.service.FeesService;
 import com.model.std.service.StandardService;
+import com.model.student.service.StudentService;
+import com.util.DataUtil;
+import com.util.DateUtil;
 
 public class FeesAction {
         HttpServletRequest request;
@@ -32,6 +36,8 @@ public class FeesAction {
                         url = deleteMultiple();
                 }else if ("deleteFeesCategory".equalsIgnoreCase(action)) {
                         url = deleteFeesCategory();
+                }else if ("feesCollectAllBranches".equalsIgnoreCase(action)) {
+                    url = feesCollectAllBranches();
                 }else if ("feesStructure".equalsIgnoreCase(action)) {
                     url = feesStructure();
                 }
@@ -60,6 +66,14 @@ public class FeesAction {
     
         }
 
+        private String feesCollectAllBranches() {
+            
+                new FeesService(request, response).viewFees();
+                new FeesService(request, response).viewAllBranchStudents();
+                return "feesCollection.jsp";
+            
+                }
+        
         private String addFeesParticular() {
                 
                 

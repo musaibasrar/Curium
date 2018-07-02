@@ -5,18 +5,18 @@
 <hibernate-configuration>
 	<session-factory name="test">
 		
-		 <property name="hibernate.multiTenancy">SCHEMA</property>
+		 <!-- <property name="hibernate.multiTenancy">SCHEMA</property>
          	<property name="hibernate.tenant_identifier_resolver">com.model.multitenant.SchemaResolver</property>
-            <property name="hibernate.multi_tenant_connection_provider">com.model.multitenant.MultiTenantProvider</property>
+            <property name="hibernate.multi_tenant_connection_provider">com.model.multitenant.MultiTenantProvider</property> -->
 		 
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 	 	<property name="hibernate.connection.password">mysql</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/school</property>
 		<property name="hibernate.connection.username">root</property>
-		<!-- <property name="hibernate.default_schema">school</property> -->
 		
-			
-            <!-- <property name="hibernate.hbm2ddl.auto">create-drop</property> -->
+		
+		<!-- <property name="hibernate.default_schema">school</property> -->
+        <!-- <property name="hibernate.hbm2ddl.auto">create-drop</property> -->
             
 		<!-- <property name="hibernate.connection.password">schoolschool</property>
 		<property name="hibernate.connection.url">jdbc:mysql://118.67.248.230:3306/schoolschool?sessionVariables=wait_timeout=3600</property>
@@ -73,6 +73,7 @@
 		<mapping resource="com/model/hr/dto/Leaveapplication.hbm.xml"></mapping>
 		<mapping resource="com/model/hr/dto/Processsalarydetails.hbm.xml"></mapping>
 		<mapping resource="com/model/hr/dto/Processsalarydetailsheads.hbm.xml"></mapping>
-		<mapping resource="com/model/branch/dto/Branch.hbm.xml"></mapping>	
+		<mapping resource="com/model/branch/dto/Branch.hbm.xml"></mapping>
+		<mapping resource="com/model/pudetails/dto/Pudetails.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>
