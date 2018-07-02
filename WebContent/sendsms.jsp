@@ -1,7 +1,7 @@
 <%-- 
-    Document   : addcontact
-    Created on : Jun 17, 2013, 4:17:40 PM
-    Author     : CPEDUR1P5
+    Document   : send SMS
+    Created on : JUN 22, 2018, 4:17:40 PM
+    Author     : Musaib
 --%>
 
 
@@ -19,7 +19,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Add contact Page</title>
+<title>SEND SMS</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 

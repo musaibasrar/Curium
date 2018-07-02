@@ -255,37 +255,6 @@
         <script src="JavaScript/actb.js"></script>
         <script src="JavaScript/common.js"></script>
 
-
-
-
-        <script>
-            $(function() {
-                $("#datepicker").datepicker({changeYear: true, changeMonth: true});
-                $("#anim").change(function() {
-                    $("#datepicker").datepicker("option", "showAnim", $(this).val());
-                });
-                 $("#datepickercredits").datepicker({changeYear: true, changeMonth: true});
-                $("#anim").change(function() {
-                    $("#datepickercredits").datepicker("option", "showAnim", $(this).val());
-                });
-                 $("#datepickercredittodate").datepicker({changeYear: true, changeMonth: true});
-                $("#anim").change(function() {
-                    $("#datepickercredittodate").datepicker("option", "showAnim", $(this).val());
-                });
-                $("#datepickercompls").datepicker({changeYear: true, changeMonth: true});
-                $("#anim").change(function() {
-                    $("#datepickercompls").datepicker("option", "showAnim", $(this).val());
-                });
-                 $("#datepickercomplstodate").datepicker({changeYear: true, changeMonth: true});
-                $("#anim").change(function() {
-                    $("#datepickercomplstodate").datepicker("option", "showAnim", $(this).val());
-                });
-            });
-
-        </script>
-
-
-
         <script>
 
         function validatePassword()
@@ -541,42 +510,7 @@ for(Cookie cookie : cookies){
                 form1.submit();
 
             }
-            
-            function searchBetweenDatesCreditS() {
-
-                var form1 = document.getElementById("form1");
-                form1.action = "Controller?process=Search&action=searchbydatescredits";
-                form1.submit();
-
-            }
-            function searchBetweenDatesComplS() {
-
-                var form1 = document.getElementById("form1");
-                form1.action = "Controller?process=Search&action=searchbydatescompls";
-                form1.submit();
-
-            }
-
-            function searchBetweenDates1() {
-                alert("In search between dates");
-                var fromdate = document.getElementById("datepicker");
-                var todate = document.getElementById("datepickertodate");
-                var fromDate = fromdate.options[fromdate.selectedIndex].text;
-                var toDate = todate.options[todate.selectedIndex].text;
-
-                if (fromDate === "") {
-                    document.getElementById("datepicker").style.display = "none";
-                    document.getElementById("datepickertodate").style.display = "none";
-
-                } else {
-                    alert("In else of search between dates")
-                    var form1 = document.getElementById("form1");
-
-                    form1.action = "Controller?process=Search&action=searchbydates";
-                    form1.submit();
-                }
-            }
-
+         
             function Cancel() {
                 var form1 = document.getElementById("form1");
                 form1.action = "Controller?process=StudentProcess&action=viewAll";
@@ -606,15 +540,10 @@ for(Cookie cookie : cookies){
                 var txtBox = document.getElementById(elementName);
                 if (txtBox.value != "") {
                     txtBox.className = "textField";
-
                 }
                 else if (txtBox.value == "") {
                     txtBox.className = "emptyFieldSet";
-
                 }
-
-
-
             }
         </script>
     </body>

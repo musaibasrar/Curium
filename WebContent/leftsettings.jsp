@@ -336,6 +336,11 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=PeriodProcess&action=periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
             </div>
             
+            <h5 style="font-size: 12px"><a href="#">Class</a></h5>
+            <div>
+                <a target="mainFrame" href="Controller?process=ClassProcess&action=viewClasses" style="font-size: 12px;">Add Classes</a><br/>
+            </div>
+            
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=FeesProcess&action=feesView" style="font-size: 12px;">Fees Category</a><br/>

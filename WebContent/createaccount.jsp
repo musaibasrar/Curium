@@ -430,35 +430,6 @@
      }
 </script>
 <script type="text/javascript">
-	/* function checkmobile(value) {
-
-		xmlHttp = GetXmlHttpObject()
-		var url = "mobilecheck.jsp";
-		url = url + "?contactNO=" + value;
-		xmlHttp.onreadystatechange = stateChangedmobile
-		xmlHttp.open("GET", url, true)
-		xmlHttp.send(null)
-	}
-	function stateChangedmobile() {
-
-		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-			var showdata = xmlHttp.responseText;
-			document.getElementById("mydivmobile").innerHTML = showdata;
-		}
-	}
-	function GetXmlHttpObject() {
-		var xmlHttp = null;
-		try {
-			xmlHttp = new XMLHttpRequest();
-		} catch (e) {
-			try {
-				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-			} catch (e) {
-				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-		}
-		return xmlHttp;
-	} */
 
     function dropdowndist() {
         var distlistitem = document.getElementById("sgname");
@@ -469,8 +440,6 @@
             document.getElementById("subgroupname").style.display = "none";
             document.getElementById("newsubgr").style.display = '';
         }
-
-
     }
     
     var xmlHttp;
