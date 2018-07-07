@@ -75,5 +75,6 @@
 		<mapping resource="com/model/hr/dto/Processsalarydetailsheads.hbm.xml"></mapping>
 		<mapping resource="com/model/branch/dto/Branch.hbm.xml"></mapping>
 		<mapping resource="com/model/pudetails/dto/Pudetails.hbm.xml"></mapping>
+		<mapping resource="com/model/degreedetails/dto/Degreedetails.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>

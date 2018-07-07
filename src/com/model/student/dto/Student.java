@@ -16,6 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import com.model.degreedetails.dto.Degreedetails;
 import com.model.pudetails.dto.Pudetails;
 
 /**
@@ -62,6 +63,7 @@ public class Student implements java.io.Serializable {
 	private String languagesstudied;
 	private String instructionmediumlastschool;
 	private Pudetails pudetails;
+	private Degreedetails degreedetails;
 	
 	public Student() {
 	}
@@ -462,5 +464,15 @@ public class Student implements java.io.Serializable {
     
     public void setInstructionmediumlastschool(String instructionmediumlastschool) {
         this.instructionmediumlastschool = instructionmediumlastschool;
+    }
+
+    
+    public Degreedetails getDegreedetails() {
+        return this.degreedetails;
+    }
+
+    
+    public void setDegreedetails(Degreedetails degreedetails) {
+        this.degreedetails = degreedetails;
     }
 }

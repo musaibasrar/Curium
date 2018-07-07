@@ -62,7 +62,7 @@ public class FeesCollectionAction {
                     }else if("4".equalsIgnoreCase(branchId)) {
                         return "printFeesDetail_pu.jsp";
                     }else if("5".equalsIgnoreCase(branchId)) {
-                        return "printFeesDetail.jsp";
+                        return "printFeesDetail_dc.jsp";
                     }
                 }
                 

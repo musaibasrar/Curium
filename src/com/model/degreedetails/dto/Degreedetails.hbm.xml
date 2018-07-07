@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 5 Jul, 2018 7:53:05 PM by Hibernate Tools 5.3.0.Beta2 --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="com.model.degreedetails.dto.Degreedetails" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="degreedetails">
+        <id name="iddegreedetails" type="java.lang.Integer">
+            <column name="iddegreedetails"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="exampassedappearance" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="exampassedappearance"/>
+        </property>
+        <property generated="never" lazy="false" name="exampassedyear" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="exampassedyear"/>
+        </property>
+        <property generated="never" lazy="false" name="exampassedregno" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="exampassedregno"/>
+        </property>
+        <property generated="never" lazy="false" name="exampassedresultwithclass" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="exampassedresultwithclass"/>
+        </property>
+        <property generated="never" lazy="false" name="pumediuminstruction" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="pumediuminstruction"/>
+        </property>
+        <property generated="never" lazy="false" name="subjectsqualifingexampartone" optimistic-lock="true" type="string" unique="false">
+            <column length="200" name="subjectsqualifingexampartone"/>
+        </property>
+        <property generated="never" lazy="false" name="subjectsqualifingexamparttwo" optimistic-lock="true" type="string" unique="false">
+            <column length="500" name="subjectsqualifingexamparttwo"/>
+        </property>
+        <property generated="never" lazy="false" name="subjectsdegreecoursepartone" optimistic-lock="true" type="string" unique="false">
+            <column length="200" name="subjectsdegreecoursepartone"/>
+        </property>
+        <property generated="never" lazy="false" name="subjectsdegreecourseparttwo" optimistic-lock="true" type="string" unique="false">
+            <column length="500" name="subjectsdegreecourseparttwo"/>
+        </property>
+        <property generated="never" lazy="false" name="pumarkscard" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="pumarkscard"/>
+        </property>
+        <property generated="never" lazy="false" name="medicalreport" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="medicalreport"/>
+        </property>
+        <property generated="never" lazy="false" name="incomecertificate" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="incomecertificate"/>
+        </property>
+        <property generated="never" lazy="false" name="migrationcertificate" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="migrationcertificate"/>
+        </property>
+        <property generated="never" lazy="false" name="transfercertificate" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="transfercertificate"/>
+        </property>
+        <property generated="never" lazy="false" name="castecertificate" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="castecertificate"/>
+        </property>
+        <property generated="never" lazy="false" name="proficiencysports" optimistic-lock="true" type="string" unique="false">
+            <column length="400" name="proficiencysports"/>
+        </property>
+        <property generated="never" lazy="false" name="extracurricular" optimistic-lock="true" type="string" unique="false">
+            <column length="400" name="extracurricular"/>
+        </property>
+        <property generated="never" lazy="false" name="areyouemployee" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="areyouemployee"/>
+        </property>
+        <property generated="never" lazy="false" name="karnataka" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="karnataka"/>
+        </property>
+    </class>
+</hibernate-mapping>

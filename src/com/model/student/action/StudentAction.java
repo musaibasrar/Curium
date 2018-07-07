@@ -196,7 +196,7 @@ public class StudentAction {
                     }else if(request.getParameter("urlbranchid").equalsIgnoreCase("4")) {
                         return "student_update_pu.jsp";
                     }else if(request.getParameter("urlbranchid").equalsIgnoreCase("5")) {
-                        return "student_update_pu.jsp";
+                        return "student_update_dc.jsp";
                     }
                     return "student_update.jsp";
                 }
