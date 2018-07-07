@@ -612,45 +612,30 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Studying in Class&nbsp;</td>
 
 							<td width="28%">
-							<%-- 
-							<label> <input name="classsec"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.classstudying}" />"
-									id="classsec" size="30" style="text-transform: uppercase;">
-
-							</label> --%>
-							
-							<label> <select name="classsec" id="classsec"
-									style="width: 120px">
-										<option selected><c:out default="" value="${classstudying}" /></option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
+							<label> 
+							<select name="classsec" id="classsec"
+									style="width: 120px;">
+										<option selected>${classstudying}</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}" >
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>	
+										</c:forEach>
 								</select>
-
 							</label> <label> 
-									<select name="secstudying" id="secstudying"
-									style=" width: 80px">
-										<option selected><c:out default="" value="${secstudying}" /></option>
-										<option></option>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>E</option>
-										<option>F</option>
-										<option>G</option>
-
+							
+							<select name="secstudying" id="secstudying"
+									style="width: 80px;">
+										<option selected>${secstudying}</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.section != '')}">
+											<option value="${classdetailslist.section}">
+												<c:out value="${classdetailslist.section}" />
+											</option>
+										</c:if>	
+										</c:forEach>
 								</select>
 							</label>
 							
@@ -659,46 +644,34 @@ for(Cookie cookie : cookies){
 
 
 							<td width="20%" class="alignRight">Admitted in class &nbsp;</td>
-
-							<%-- <td width="28%"><label> <input name="admclass"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.classadmittedin}" />"
-									id="admclass" size="30" style="text-transform: uppercase;">
-
-							</label> --%>
 							<td width="28%">
-							<label> <select name="admclass" id="admclass"
-									style="width: 115px">
-										<option selected><c:out default="" value="${classadm}" /></option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
+							<label> 
+							
+									<select name="admclass" id="admclass"
+									style="width: 115px;">
+										<option selected>${classadm}</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}" >
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>	
+										</c:forEach>
 								</select>
 
 							</label> <label> 
-									<select name="admsec" id="admsec"
-									style=" width: 80px">
-										<option selected><c:out default="" value="${secadm}" /></option>
-										<option></option>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>E</option>
-										<option>F</option>
-										<option>G</option>
+							<select name="admsec" id="admsec"
+									style="width: 80px;">
+										<option selected>${secadm}</option>
 
-								</select>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.section != '')}">
+											<option value="${classdetailslist.section}">
+												<c:out value="${classdetailslist.section}" />
+											</option>
+										</c:if>	
+										</c:forEach>
+							</select>
 							</label>
 							
 							
@@ -718,27 +691,20 @@ for(Cookie cookie : cookies){
 
 						<tr>
 
-
 							<td width="16%" class="alignRight">Last Class Studied &nbsp;</td>
 
-							<td><label> <select name="lastclass" id="lastclass"
-									style="width: 200px" onchange="dropdown()">
+							<td><label> 
+										<select name="lastclass" id="lastclass"
+									style="width: 200px;">
 										<option selected>${student.stdlaststudied}</option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}" >
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>	
+										</c:forEach>
 								</select>
-
 							</label></td>
 
 							<td width="30%" class="alignRight">Last School Attended
