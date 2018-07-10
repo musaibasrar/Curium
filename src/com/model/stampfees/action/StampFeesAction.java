@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.model.academicyear.service.YearService;
 import com.model.feescategory.service.FeesService;
 import com.model.stampfees.service.StampFeesService;
+import com.model.std.service.StandardService;
 import com.model.student.service.StudentService;
 import com.model.user.dao.UserDAO;
 import com.model.user.dto.Login;
@@ -54,6 +55,7 @@ public class StampFeesAction {
 
 	private String showFeesDetails() {
 		new FeesService(request, response).viewFees();
+		new StandardService(request, response).viewClasses();
 		new YearService(request, response).getYear();
 		return "stampfees.jsp";
 	}

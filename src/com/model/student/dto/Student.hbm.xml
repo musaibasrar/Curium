@@ -107,5 +107,11 @@
           <property name="branchid" type="int">
             <column name="branchid" />
         </property>
+        <property name="languagesstudied" type="string">
+            <column name="languagesstudied" length="80" />
+        </property>
+        <property name="instructionmediumlastschool" type="string">
+            <column name="instructionmediumlastschool" length="45" />
+        </property>
     </class>
 </hibernate-mapping>

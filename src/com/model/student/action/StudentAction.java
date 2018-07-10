@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.model.feescategory.service.FeesService;
 import com.model.stampfees.service.StampFeesService;
+import com.model.std.service.StandardService;
 import com.model.student.service.StudentService;
 
 /**
@@ -30,8 +31,8 @@ public class StudentAction {
 	}
 
 	public String execute(String action, String page) {
-		// TODO Auto-generated method stub
-		if (action.equalsIgnoreCase("viewAll")) {
+
+	        if (action.equalsIgnoreCase("viewAll")) {
 			url = viewAll();
 		}else if (action.equalsIgnoreCase("viewAllStudents")) {
 			url = viewAllStudents();
@@ -71,11 +72,24 @@ public class StudentAction {
 			url = generateBonafide();
 		}else if (action.equalsIgnoreCase("download")) {
 			url = downlaodFile();
-		}
+		}else if (action.equalsIgnoreCase("addNew")) {
+                    url = addNew();
+                }else if (action.equalsIgnoreCase("viewAllSuperAdmin")) {
+                    url = viewAllSuperAdmin();
+                }
 		return url;
 	}
 	
 	
+	private String viewAllSuperAdmin() {
+            new StudentService(request, response).viewAllStudentsSuperAdmin();
+                return "viewAllWithParents.jsp";
+        }
+
+    private String addNew() {
+            new StandardService(request, response).viewClasses();
+            return new StudentService(request, response).addNew();
+        }
 
 	private String downlaodFile() {
 		if(new StudentService(request, response).downlaodFile()){
@@ -157,7 +171,6 @@ public class StudentAction {
 
 	private String archiveViewAll() {
 		new StudentService(request, response).viewAllStudentsArchive();
-        System.out.println("IN action's view all Archive");
         return "ArchiveviewAll.jsp";
 	}
 

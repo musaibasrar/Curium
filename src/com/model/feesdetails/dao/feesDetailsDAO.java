@@ -109,9 +109,6 @@ public class feesDetailsDAO {
 		 
 		 List<Feesdetails> results = new ArrayList<Feesdetails>();
 	        try {
-	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
-
-	            transaction = session.beginTransaction();
 	            transaction = session.beginTransaction();
 	            String query = "From Feesdetails as feesdetails where feesdetails.sid='"+sid+"' AND feesdetails.academicyear='"+currentYear+"'";
 				results = (List<Feesdetails>) session.createQuery(query).list();

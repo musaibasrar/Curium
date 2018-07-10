@@ -49,7 +49,7 @@ public class FeesCollectionAction {
 
 	private String StampFees() {
 		new FeesCollectionService(request, response).getStampFees();
-		new FeesService(request, response).viewFees();
+		//new FeesService(request, response).viewFees();
 		new FeesService(request, response).viewAllStudentsList();
 		return "feesCollection.jsp";
 	}

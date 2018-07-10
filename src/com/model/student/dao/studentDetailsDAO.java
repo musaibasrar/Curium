@@ -521,4 +521,48 @@ public class studentDetailsDAO {
 		return false;
 	}
 	
+	public List<Parents> readListStudentsSuperAdmin(int offset, int noOfRecords) {
+	        List<Parents> results = new ArrayList<Parents>();
+
+	        try {
+	                
+	                transaction = session.beginTransaction();
+	                Query query = session
+	                                .createQuery("From Parents as parents where parents.Student.archive=0 order by name ASC");
+	                query.setFirstResult(offset);   
+	                query.setMaxResults(noOfRecords);
+	                results = query.getResultList();
+	                
+	                transaction.commit();
+	                
+
+	        } catch (Exception hibernateException) {
+	                transaction.rollback();
+	                System.out.println("Exception is "+hibernateException);
+	                hibernateException.printStackTrace();
+
+	        } finally {
+	                // session.close();
+	                return results;
+	        }
+	}
+	
+	
+	    public int getNoOfRecords() {
+	        List<Student> results = new ArrayList<Student>();
+	        int noOfRecords = 0;
+	        try {
+	                transaction = session.beginTransaction();
+	                results = (List<Student>) session.createQuery("From Student where archive=0").list();
+	                noOfRecords = results.size();
+	                transaction.commit();
+	        } catch (HibernateException hibernateException) {
+	                transaction.rollback();
+	                hibernateException.printStackTrace();
+
+	        } finally {
+	                return noOfRecords;
+	        }
+	}
+	
 }

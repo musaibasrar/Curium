@@ -54,6 +54,8 @@ public class Student implements java.io.Serializable {
 	private Date datetcissued;
 	private String guardiandetails;
 	private String subsequentprogress;
+	private String languagesstudied;
+        private String instructionmediumlastschool;
 	private int branchid;
 
 	public Student() {
@@ -73,7 +75,8 @@ public class Student implements java.io.Serializable {
 			String studentexternalid, String crecord, Date crecorddate,
 			String placeofbirth, Integer nooftc, Date dateoftc,
 			String classonleaving, Date dateleaving, String reasonleaving,
-			Integer notcissued, Date datetcissued, String guardiandetails, int branchid) {
+			Integer notcissued, Date datetcissued, String guardiandetails, int branchid,
+			String languagesstudied, String instructionmediumlastschool) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
@@ -105,6 +108,8 @@ public class Student implements java.io.Serializable {
 		this.notcissued = notcissued;
 		this.datetcissued = datetcissued;
 		this.guardiandetails = guardiandetails;
+		this.languagesstudied = languagesstudied;
+                this.instructionmediumlastschool = instructionmediumlastschool;
 		this.branchid = branchid;
 	}
 
@@ -414,7 +419,25 @@ public class Student implements java.io.Serializable {
 		this.subsequentprogress = subsequentprogress;
 	}
 
-	
+	    public String getLanguagesstudied() {
+	        return this.languagesstudied;
+	    }
+
+	    
+	    public void setLanguagesstudied(String languagesstudied) {
+	        this.languagesstudied = languagesstudied;
+	    }
+
+	    
+	    public String getInstructionmediumlastschool() {
+	        return this.instructionmediumlastschool;
+	    }
+
+	    
+	    public void setInstructionmediumlastschool(String instructionmediumlastschool) {
+	        this.instructionmediumlastschool = instructionmediumlastschool;
+	    }
+	    
 	@Column(name = "branchid")
 	public int getBranchid() {
 	return branchid;

@@ -99,25 +99,21 @@ public class StudentService {
 		                    student.setAge(DataUtil.parseInt(item.getString()));
 
 		                }
-
+		                
 		                if (fieldName.equalsIgnoreCase("addclass")) {
 		                    
 		                    addClass = DataUtil.emptyString(item.getString());
 		                    if (!addClass.equalsIgnoreCase("Class")) {
-
-			        			conClassStudying = addClass;
-
-			        		}
+			        	     conClassStudying = addClass;
+			             }
 		                }
-
 		                
-
 		                if (fieldName.equalsIgnoreCase("addsec")) {
 
 		                    addSec = DataUtil.emptyString(item.getString());
 		                    if (!addSec.equalsIgnoreCase("Sec")) {
 			        			conClassStudying = conClassStudying + " " + addSec;
-			        		}else{
+			        		}else if(conClassStudying !=null){
 			        			conClassStudying = conClassStudying + " " ;
 			        		}
 		                }
@@ -849,7 +845,6 @@ public class StudentService {
 				request.setAttribute("studentList", list);
 				int noOfRecords = new studentDetailsDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-				request.setAttribute("studentList", list);
 				request.setAttribute("noOfPages", noOfPages);
 				request.setAttribute("currentPage", page);
 				result = true;
@@ -1104,5 +1099,44 @@ public class StudentService {
 		}
 		return result;
 	}
+
+    public void viewAllStudentsSuperAdmin() {
+        
+        String pages = "1";
+        
+        try {
+                int page = 1;
+                int recordsPerPage = 5000;
+                if (pages != null) {
+                        page = Integer.parseInt(pages);
+                }
+                List<Parents> list = new studentDetailsDAO().readListStudentsSuperAdmin((page - 1) * recordsPerPage,
+                                recordsPerPage);
+                request.setAttribute("studentList", list);
+                int noOfRecords = new studentDetailsDAO().getNoOfRecords();
+                int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+                request.setAttribute("studentList", list);
+                request.setAttribute("noOfPages", noOfPages);
+                request.setAttribute("currentPage", page);
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        
+    }
+
+    public String addNew() {
+        
+        if(httpSession.getAttribute(BRANCHID)!=null){
+            String branchId = httpSession.getAttribute(BRANCHID).toString();
+            if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
+                return "addStudent.jsp";
+            }else if("4".equalsIgnoreCase(branchId)) {
+                return "addStudentPU.jsp";
+            }else if("5".equalsIgnoreCase(branchId)) {
+                return "addStudentDC.jsp";
+            }
+        }
+        return "sessiontimeout.jsp";
+    }
 	
 }
