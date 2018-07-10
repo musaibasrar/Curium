@@ -63,6 +63,11 @@
         <property name="archive" type="java.lang.Integer">
             <column name="ARCHIVE" />
         </property>
-        
+        <property name="studentexternalid" type="java.lang.String">
+            <column name="STUDENTEXTERNALID" length="45" not-null="true" unique="true" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
     </class>
 </hibernate-mapping>

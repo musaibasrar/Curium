@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 24 Jul, 2015 12:41:35 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.student.dto.Studentfeesstructure" table="studentfeesstructure">
+    <class name="com.model.student.dto.Studentfeesstructure" table="fee_studentfeesstructure">
         <id name="sfsid" type="java.lang.Integer">
             <column name="sfsid" />
            <generator class="native" />
@@ -11,14 +11,22 @@
         <property name="sid" type="java.lang.Integer">
             <column name="sid"/>
         </property>
-        <property name="feescategory" type="string">
-            <column name="feescategory" length="100" />
-        </property>
-        <property name="feesamount" type="string">
-            <column name="feesamount" length="45" />
+        <!-- <property name="idfeescategory" type="java.lang.Integer">
+            <column name="idfeescategory" length="100" />
+        </property> -->
+        <property name="feesamount" type="java.lang.Long">
+            <column name="feesamount" precision="10" scale="0" />
         </property>
         <property name="academicyear" type="string">
             <column name="academicyear" length="45" />
         </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        <property name="concession" type="java.lang.Integer">
+            <column name="concession"/>
+        </property>
+        <many-to-one name="Feescategory" class="com.model.feescategory.dto.Feescategory"
+            column="idfeescategory" />
     </class>
 </hibernate-mapping>

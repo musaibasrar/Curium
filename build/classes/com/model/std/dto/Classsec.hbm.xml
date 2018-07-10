@@ -8,8 +8,14 @@
             <column name="stdrdid" />
             <generator class="identity" />
         </id>
-        <property name="classandsec" type="java.lang.String">
-            <column name="classandsec" />
+        <property name="classdetails" type="java.lang.String">
+            <column name="classdetails" />
+        </property>
+        <property name="section" type="java.lang.String">
+            <column name="section" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
         </property>
     </class>
 </hibernate-mapping>

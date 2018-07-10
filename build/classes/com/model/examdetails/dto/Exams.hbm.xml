@@ -11,5 +11,8 @@
         <property name="examname" type="string">
             <column name="examname" length="45" />
         </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
     </class>
 </hibernate-mapping>

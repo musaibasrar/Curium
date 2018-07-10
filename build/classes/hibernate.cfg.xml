@@ -4,14 +4,20 @@
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory name="test">
-		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		
-	 	<property name="hibernate.connection.password">root</property>
+		 <!-- <property name="hibernate.multiTenancy">SCHEMA</property>
+         	<property name="hibernate.tenant_identifier_resolver">com.model.multitenant.SchemaResolver</property>
+            <property name="hibernate.multi_tenant_connection_provider">com.model.multitenant.MultiTenantProvider</property> -->
+		 
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+	 	<property name="hibernate.connection.password">mysql</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/school</property>
 		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.default_schema">school</property>
 		
 		
+		<!-- <property name="hibernate.default_schema">school</property> -->
+        <!-- <property name="hibernate.hbm2ddl.auto">create-drop</property> -->
+            
 		<!-- <property name="hibernate.connection.password">schoolschool</property>
 		<property name="hibernate.connection.url">jdbc:mysql://118.67.248.230:3306/schoolschool?sessionVariables=wait_timeout=3600</property>
 		<property name="hibernate.connection.username">schoolschool</property>
@@ -37,6 +43,36 @@
 		<mapping resource="com/model/marksdetails/dto/Marks.hbm.xml"></mapping>
 		<mapping resource="com/model/examdetails/dto/Exams.hbm.xml"></mapping>
 		<mapping resource="com/model/stampfees/dto/Academicfeesstructure.hbm.xml"></mapping>
-		<mapping resource="com/model/student/dto/Studentfeesstructure.hbm.xml"></mapping>		
+		<mapping resource="com/model/student/dto/Studentfeesstructure.hbm.xml"></mapping>
+		<mapping resource="com/model/attendance/dto/Holidaysmaster.hbm.xml"></mapping>
+		<mapping resource="com/model/attendance/dto/Weeklyoff.hbm.xml"></mapping>
+		<mapping resource="com/model/attendance/dto/Attendancemaster.hbm.xml"></mapping>
+		<mapping resource="com/model/attendance/dto/Studentdailyattendance.hbm.xml"></mapping>
+		<mapping resource="com/model/attendance/dto/Staffdailyattendance.hbm.xml"></mapping>
+		<mapping resource="com/model/feescollection/dto/Receiptinfo.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Financialaccountingyear.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Accountgroupmaster.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Accountsubgroupmaster.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Accountdetails.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Accountdetailsbalance.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Receipttransactions.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Paymenttransactions.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Contratransactions.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Journaltransactions.hbm.xml"></mapping>
+		<mapping resource="com/model/documents/dto/Transfercertificate.hbm.xml"></mapping>
+		<mapping resource="com/model/examdetails/dto/Examschedule.hbm.xml"></mapping>
+		<mapping resource="com/model/periods/dto/Perioddetails.hbm.xml"></mapping>
+		<mapping resource="com/model/periods/dto/Periodmaster.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Leavetypemaster.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Leavedetails.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Payhead.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Payheadstaffdetails.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Paybasic.hbm.xml"></mapping>	
+		<mapping resource="com/model/hr/dto/Pf.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Payadvancesalary.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Leaveapplication.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Processsalarydetails.hbm.xml"></mapping>
+		<mapping resource="com/model/hr/dto/Processsalarydetailsheads.hbm.xml"></mapping>
+		<mapping resource="com/model/branch/dto/Branch.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>

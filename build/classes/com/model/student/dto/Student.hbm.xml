@@ -1,70 +1,111 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 25 Sep, 2014 6:34:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 14 Feb, 2018 12:05:33 AM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.student.dto.Student" table="student">
+    <class name="com.model.student.dto.Student" table="student" >
         <id name="sid" type="java.lang.Integer">
-            <column name="SID" />
-            <!-- <generator class="assigned" /> -->
-            <generator class="native" />
+            <column name="sid" />
+            <generator class="identity" />
         </id>
-        <property name="name" type="java.lang.String">
-            <column name="NAME" />
+        <property name="name" type="string">
+            <column name="name" length="200" not-null="true" />
         </property>
-        <property name="classstudying" type="java.lang.String">
-            <column name="CLASSSTUDYING" />
+        <property name="classstudying" type="string">
+            <column name="classstudying" length="45" />
         </property>
-        <property name="classadmittedin" type="java.lang.String">
-            <column name="CLASSADMITTEDIN" />
+        <property name="classadmittedin" type="string">
+            <column name="classadmittedin" length="45" />
         </property>
         <property name="age" type="java.lang.Integer">
-            <column name="AGE" />
+            <column name="age" />
         </property>
-        <property name="gender" type="java.lang.String">
-            <column name="GENDER" />
+        <property name="gender" type="string">
+            <column name="gender" length="45" />
         </property>
-        <property name="dateofbirth" type="java.util.Date">
-            <column name="DATEOFBIRTH" />
+        <property name="dateofbirth" type="date">
+            <column name="dateofbirth" length="10" />
         </property>
-        <property name="bloodgroup" type="java.lang.String">
-            <column name="BLOODGROUP" />
+        <property name="bloodgroup" type="string">
+            <column name="bloodgroup" length="45" />
         </property>
-        <property name="nationality" type="java.lang.String">
-            <column name="NATIONALITY" />
+        <property name="nationality" type="string">
+            <column name="nationality" length="45" />
         </property>
-        <property name="religion" type="java.lang.String">
-            <column name="RELIGION" />
+        <property name="religion" type="string">
+            <column name="religion" length="45" />
         </property>
-        <property name="caste" type="java.lang.String">
-            <column name="CASTE" />
+        <property name="caste" type="string">
+            <column name="caste" length="45" />
         </property>
-        <property name="admissiondate" type="java.util.Date">
-            <column name="ADMISSIONDATE" />
+        <property name="admissiondate" type="date">
+            <column name="admissiondate" length="10" />
         </property>
-        <property name="admissionnumber" type="java.lang.String">
-            <column name="ADMISSIONNUMBER" />
+        <property name="admissionnumber" type="string">
+            <column name="admissionnumber" length="20" />
         </property>
-        <property name="mothertongue" type="java.lang.String">
-            <column name="MOTHERTONGUE" />
+        <property name="mothertongue" type="string">
+            <column name="mothertongue" length="45" />
         </property>
-        <property name="remarks" type="java.lang.String">
-            <column name="REMARKS" />
+        <property name="remarks" type="string">
+            <column name="Remarks" length="500" />
         </property>
-        <property name="schoollastattended" type="java.lang.String">
-            <column name="SCHOOLLASTATTENDED" />
+        <property name="schoollastattended" type="string">
+            <column name="schoollastattended" length="100" />
         </property>
-        <property name="stdlaststudied" type="java.lang.String">
-            <column name="STDLASTSTUDIED" />
+        <property name="stdlaststudied" type="string">
+            <column name="stdlaststudied" length="45" />
         </property>
-        <property name="createddate" type="java.util.Date">
-            <column name="CREATEDDATE" />
+        <property name="createddate" type="date">
+            <column name="createddate" length="10" />
         </property>
         <property name="archive" type="java.lang.Integer">
-            <column name="ARCHIVE" />
+            <column name="archive" />
         </property>
-        <property name="studentpic" type="java.lang.String">
-            <column name="STUDENTPIC" />
+        <property name="studentpic" type="string">
+            <column name="studentpic" />
+        </property>
+        <property name="studentexternalid" type="string">
+            <column name="studentexternalid" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="crecord" type="string">
+            <column name="crecord" length="45" />
+        </property>
+        <property name="crecorddate" type="date">
+            <column name="crecorddate" length="10" />
+        </property>
+        <property name="placeofbirth" type="string">
+            <column name="placeofbirth" length="100" />
+        </property>
+        <property name="nooftc" type="java.lang.Integer">
+            <column name="nooftc" />
+        </property>
+        <property name="dateoftc" type="date">
+            <column name="dateoftc" length="10" />
+        </property>
+        <property name="classonleaving" type="string">
+            <column name="classonleaving" length="45" />
+        </property>
+        <property name="dateleaving" type="date">
+            <column name="dateleaving" length="10" />
+        </property>
+        <property name="reasonleaving" type="string">
+            <column name="reasonleaving" length="500" />
+        </property>
+        <property name="notcissued" type="java.lang.Integer">
+            <column name="notcissued" />
+        </property>
+        <property name="datetcissued" type="date">
+            <column name="datetcissued" length="10" />
+        </property>
+        <property name="guardiandetails" type="string">
+            <column name="guardiandetails" length="200" />
+        </property>
+         <property name="subsequentprogress" type="string">
+            <column name="subsequentprogress" length="500" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
         </property>
     </class>
 </hibernate-mapping>
