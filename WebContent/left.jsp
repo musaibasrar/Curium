@@ -447,7 +447,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="attendanceexport.jsp" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllEmployee" style="font-size: 12px;">View All</a><br/>
                 <a target="mainFrame" href="Controller?process=EmployeeProcess&action=addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>

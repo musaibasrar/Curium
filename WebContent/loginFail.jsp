@@ -12,7 +12,7 @@
     <head>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Al-Ameen Educational Society</title>
+        <title>Curium - School ERP</title>
         <script type="text/javascript" src="js/openWindow.js"></script>
         <style type="text/css">
             <!--
@@ -64,7 +64,7 @@
                 
                 <tr>
                     <td>
-                    	<table width="550" height="400" border="0"  background="images/backtop.png" align="center" cellpadding="0" cellspacing="0">
+                    	<table width="550" height="400" border="0"  background="images/curiumlogin.jpg" align="center" cellpadding="0" cellspacing="0">
 								<tr><td><br><br><br><br><br><br><br><br><br><br></td></tr>
 								<tr><td><br></td></tr>
                             <tr>
@@ -77,7 +77,7 @@
 												
                                     <table width="296"  border="0" cellpadding="0" cellspacing="0">
                                     	
-                                        <tr>
+                                        <tr><br>
                                         <p align="left" style="color: red;">Please enter correct username and password</p>
                                             <td height="30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <img type="image" src="images/username.png" height="30" name="login" border="0" onclick="" /></td>
