@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 22 Jul, 2018 12:47:40 PM by Hibernate Tools 5.3.0.Beta2 --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="com.model.language.dto.Language" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="language">
+        <id name="idlanguage" type="java.lang.Integer">
+            <column name="idlanguage"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="language" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="language"/>
+        </property>
+    </class>
+</hibernate-mapping>
