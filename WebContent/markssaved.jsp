@@ -69,6 +69,11 @@
                 form1.action="Controller?process=StudentProcess&action=viewAll";
                 form1.submit();
             }
+            function enterMarks(){
+                var form1=document.getElementById("form1");
+                form1.action="Controller?process=MarksDetailsProcess&action=enterMarks";
+                form1.submit();
+            }
         </script>
 </head>
   <%
@@ -94,7 +99,7 @@ for(Cookie cookie : cookies){
         <td height="250" align="center" valign="middle"><p class="style1"> Marks Added/Updated/Deleted Successfully</p>
         <p class="style1">
           
-          	<input type="button" value="Enter Marks" id="addnew" onClick="JavaScript:window.location='marksentry.jsp';">
+          	<input type="button" value="Enter Marks" id="addnew" onclick="enterMarks()">
             <input type="button" id="view" value="View All Students" onClick="ViewAll()">
             
         </p></td>

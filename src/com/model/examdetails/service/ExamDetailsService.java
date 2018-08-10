@@ -110,14 +110,19 @@ public class ExamDetailsService {
 		String[] date = request.getParameterValues("fromdate");
 		String[] startTime = request.getParameterValues("starttime");
 		String[] endTime = request.getParameterValues("endtime");
+		String[] centerCodes = request.getParameterValues("centercodes");
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			
 			for (int i=0; i<subject.length;i++) {
 				Examschedule examschedule = new Examschedule();
 				examschedule.setAcademicyear(DataUtil.emptyString(request.getParameter("academicyear")));
-				examschedule.setClasses(DataUtil.emptyString(request.getParameter("fromclass"))+"-"+DataUtil.emptyString(request.getParameter("toclass")));
-				examschedule.setExamname(DataUtil.emptyString(request.getParameter("exam")));
+				String centerCodeList = "";
+				for (String string : centerCodes) {
+                                    centerCodeList = centerCodeList+","+string;
+                                }
+				examschedule.setCentercode(centerCodeList);
+				examschedule.setExamname(DataUtil.emptyString(request.getParameter("examlevel")));
 				examschedule.setDate(DateUtil.dateParserUpdateStd(date[i]));
 				String[] starttimeSplit = startTime[i].split(":");
 				String hours = starttimeSplit[0];
@@ -187,7 +192,7 @@ public class ExamDetailsService {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			
-			List<Examschedule> exams = new ExamDetailsDAO().readListOfExamSchedule(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			List<Examschedule> exams = new ExamDetailsDAO().readListOfExamSchedule();
 			 httpSession.setAttribute("examschedule", exams);
 			if(exams == null){
 				result=false;
@@ -220,26 +225,17 @@ public class ExamDetailsService {
 
 	public boolean getExamScheduleDetails() {
 		
-		String academicYear = DataUtil.emptyString(request.getParameter("academicyear"));
-		String classH = DataUtil.emptyString(request.getParameter("class"));
-		String classAdmno = DataUtil.emptyString(request.getParameter("classandsec"));
-		String studentName = DataUtil.emptyString(request.getParameter("studentName"));
-		String exam = DataUtil.emptyString(request.getParameter("exam"));
+		String academicYear = DataUtil.emptyString(request.getParameter("searchacademicyear"));
+		String[] searchExamLevel = DataUtil.emptyString(request.getParameter("searchexamlevel")).split(":");
+                String[] searchCenter = DataUtil.emptyString(request.getParameter("searchcentercode")).split(":");
+                
 		
-		request.setAttribute("selectedclass", classH);
-		request.setAttribute("selectedexam", exam);
-		request.setAttribute("selectedstudentname", studentName);
-		request.setAttribute("selectedclassandsec", classAdmno);
-		request.setAttribute("selectedadmissionno", DataUtil.emptyString(request.getParameter("admno")));
-		
-		if(classAdmno!=""){
-			String[] c = classAdmno.split(" ");
-			classH  = c[0];
-		}
+		request.setAttribute("selectedcentercode", DataUtil.emptyString(request.getParameter("searchcentercode")));
+		request.setAttribute("selectedexamlevel", DataUtil.emptyString(request.getParameter("searchexamlevel")));
+	
 		if(httpSession.getAttribute(BRANCHID)!=null){
-			
 			List<Examschedule> examschedules = new ArrayList<Examschedule>();
-			examschedules = new ExamDetailsDAO().getExamScheduleDetails(academicYear, classH, exam, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			examschedules = new ExamDetailsDAO().getExamScheduleDetails(academicYear, searchCenter[0], searchExamLevel[0], Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			request.setAttribute("examschedules", examschedules);
 			if(!examschedules.isEmpty()){
 				return true;
@@ -252,53 +248,45 @@ public class ExamDetailsService {
 
 	public void printPreviewHallTicket() {
 		
-		String[] examName = request.getParameterValues("examname");
-		String[] classes = request.getParameterValues("classes");
+		String[] examLevels = request.getParameterValues("examlevels");
+		String[] centerCodes = request.getParameterValues("centercodes");
 		String[] subject = request.getParameterValues("subject");
 		String[] dateOfExam = request.getParameterValues("date");
 		String[] startTime = request.getParameterValues("starttime");
 		String[] endTime = request.getParameterValues("endtime");
-		String classAndSec = request.getParameter("classandsec");
-		String admNo = request.getParameter("admno");
-		String studentName = request.getParameter("studentName");
+
 		
-		if(examName!=null){
+		String[] selectedExamLevel = DataUtil.emptyString(request.getParameter("hiddenexamlevel")).toString().split(":");
+		String[] selectedCenterCode = DataUtil.emptyString(request.getParameter("hiddencentercode")).toString().split(":");
+		
+		if(examLevels!=null){
 		
 		List<Parents> studentList = new ArrayList<Parents>();
 		List<Examschedule> examscheduleList = new ArrayList<Examschedule>();
 		
-		if(admNo==""){
-			studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.classstudying LIKE '" + 
-					DataUtil.emptyString(request.getParameter("class"))	
-				+ " %'");
-		}else{
-			Parents parent = new Parents();
-			Student student = new Student();
-			student.setAdmissionnumber(admNo);
-			student.setName(studentName);
-			student.setClassstudying(classAndSec);
-			parent.setStudent(student);
-			studentList.add(parent);
+			studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.examlevel = '" + 
+			        selectedExamLevel[0]+"' and parents.Student.centercode='"+selectedCenterCode[0]+"'");
+		             
+	                request.setAttribute("studentList", studentList);
+	                
+	                for (int i = 0; i < endTime.length; i++) {
+	                        Examschedule exams = new Examschedule();
+	                        //exams.setClasses(classes[i]);
+	                        exams.setDate(DateUtil.dateParserUpdateStd(dateOfExam[i]));
+	                        exams.setExamname(examLevels[i]);
+	                        exams.setSubject(subject[i]);
+	                        exams.setStarttime(startTime[i]);
+	                        exams.setEndtime(endTime[i]);
+	                        examscheduleList.add(exams);
+	                }
+	                request.setAttribute("examcodename", selectedExamLevel[0]+" / "+selectedExamLevel[1]);
+	                request.setAttribute("centercodename", selectedCenterCode[0]+" / "+selectedCenterCode[1]);
+	                request.setAttribute("examschedulelist", examscheduleList);
 		}
 		
-		
-		request.setAttribute("studentList", studentList);
-		
-		for (int i = 0; i < endTime.length; i++) {
-			Examschedule exams = new Examschedule();
-			exams.setClasses(classes[i]);
-			exams.setDate(DateUtil.dateParserUpdateStd(dateOfExam[i]));
-			exams.setExamname(examName[i]);
-			exams.setSubject(subject[i]);
-			exams.setStarttime(startTime[i]);
-			exams.setEndtime(endTime[i]);
-			examscheduleList.add(exams);
-		}
-		request.setAttribute("examname", examName[0]);
-		request.setAttribute("examschedulelist", examscheduleList);
-		
-	}
-		
-	}
 
+	
+	}
+		
+	
 }

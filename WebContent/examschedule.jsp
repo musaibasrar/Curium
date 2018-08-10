@@ -283,6 +283,15 @@
 	font-weight: bold;
 	height: 22px;
 }
+.dataTextLeft {
+	border-radius: 3px;
+	font-family: Tahoma;
+	color: #4b6a84;
+	font-size: 13px;
+	letter-spacing: normal;
+	text-align: left;
+	background-color: #E3EFFF;
+}
 </style>
 <style>
 #button {
@@ -328,6 +337,15 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
+			"sScrollY" : "380px",
+			"bPaginate" : false,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bSort" : true,
+			"bInfo" : false,
+			"bAutoWidth" : false
+		});
+		$('#centertable').dataTable({
 			"sScrollY" : "380px",
 			"bPaginate" : false,
 			"bLengthChange" : false,
@@ -439,6 +457,44 @@
          });
      });
 	 
+	 
+	 var xmlHttp;
+	    var count;
+	    function getSubjects() {
+
+			var selected=document.getElementById('examlevel').value;
+
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "AjaxController?process=AttendanceProcess&action=getSubjects&urlexamlevel="+selected,true);
+			xmlHttp.send(null);
+		}
+	    
+		function stateChanged() {
+
+			if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+				document.getElementById("subjectlist").innerHTML = xmlHttp.responseText;
+			}
+		}
+		function GetXmlHttpObject() {
+			var xmlHttp = null;
+			try {
+				xmlHttp = new XMLHttpRequest();
+			} catch (e) {
+				try {
+					xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+				} catch (e) {
+					xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+			}
+			return xmlHttp;
+		}
 	
      
 	 function addRow() {
@@ -486,6 +542,7 @@
              alert(e);
          }
          }
+	 
 </script>
 </head>
 <%
@@ -521,138 +578,38 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td><br /></td>
-
 						</tr>	
+
 						<tr>
-							<td><br /></td>
-
-						</tr>		
-
-<tr>
-<td><br/></td>
-</tr>
-
-	<tr>
-							<td><br /></td>
-
-						</tr>
-                            <tr>
-                            
-                            
-
-
                                 <td class="alignLeft" >
-                                    
-                                    Academic Year*&nbsp;&nbsp;&nbsp;&nbsp; 
-
-                                
                                     <label>
-                                        <label> <select name="academicyear" id="academicyear"
-									style="width: 120px">
+                                        <select name="academicyear" id="academicyear" 
+									style="width: 180px;display: none;">
 										<option selected value="${currentYear}">${currentYear}(Current Year)</option>
-										<option value="2015/16">2015/16</option>
-										<option value="2016/17">2016/17</option>
-										<option value="2017/18">2017/18</option>
 										<option value="2018/19">2018/19</option>
 										<option value="2019/20">2019/20</option>
-										
+										<option value="2019/20">2020/21</option>
 								</select>
-
 							</label> 
-                                    </label>
-
                                 </td>
-
-
                             </tr>
-                            
-                            <tr>
-							<td><br /></td>
-
-						</tr>
 						<tr>
-							<td><br /></td>
-
-						</tr>
-									
-						
-						<tr>
-						
-						<td width="16%" class="alignLeft">From Class &nbsp;
-							 <label> <select name="fromclass" id="fromclass"
-									style="width: 70px">
+						<td width="16%" class="alignLeft">Examination Level &nbsp;
+							 <label>
+							   <select name="examlevel" id="examlevel"
+									style="width: 180px;" required>
 										<option selected></option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
-								</select> 
-							</label>
-							&nbsp;<label style="font-weight: bold;color:#325F85">To Class &nbsp;</label>
-							
-							<label>
-							<select name="toclass" id="toclass"
-									style="width: 70px">
-										<option selected></option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
-								</select> 
-							
-							</label>
-							
-							</td>
-							
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-								
-								<tr>
-						<td width="80%" class="alignLeft">Exam &nbsp;&nbsp;&nbsp;
-							<label>
-									<select name="exam" id="exam"
-									style="width: 180px">
-										<option selected></option>
-
-										<c:forEach items="${examdetails}" var="listExam">
-
-											<option value="${listExam.examname}">
-												<c:out value="${listExam.examname}" />
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
 											</option>
-
-
 										</c:forEach>
-
-								</select></td>
+								</select>
+							</label>
+						</td>
+							
 						</tr>
-										
+						
 						<tr>
 							<td><br /></td>
 
@@ -662,9 +619,60 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
-
+						
 						<tr>
+						
+						<td>
+						<label class="alignLeft">Center Name</label><br><br>
+						<div style="overflow: scroll; height: 300px;width: 180px;">
+				<table width="100%" border="0" style="border-color: #4b6a84;"
+				id="centertable">
 
+				<thead>
+					<tr>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th title="click to sort" class="headerText">Center Code<img
+							alt=" " style="position: relative; top: 4px;"
+							src="css/dataTable/images/sort_both.png" /></th>
+					</tr>
+				</thead>
+
+				<tbody>
+
+					<c:forEach items="${branchList}" var="branchlist">
+
+						<tr style="border-color: #000000" border="1" cellpadding="1"
+							cellspacing="1">
+							<td class="dataTextLeft"><input type="checkbox" id="<c:out value="${branchlist.centercode}"/>" class="chcktbl" name="centercodes" value="<c:out value="${branchlist.centercode}"/>" /></td>
+							<td class="dataTextLeft">${branchlist.centercode} : ${branchlist.centername}</td>
+						</tr>
+					</c:forEach>
+
+
+
+
+				</tbody>
+				<tfoot><tr>
+                            <td  class="footerTD" colspan="2" > 
+                    
+                        </tr></tfoot>
+			</table>
+
+		</div>
+		</td>
+		</tr>
+
+<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
 							<td width="12%" align="left" class="alignRightFields" style="font-weight: bold;color:#325F6D">Details: &nbsp;&nbsp;&nbsp;
 							<button id="addSchedule">Add</button>&nbsp;&nbsp;&nbsp;<button id="removeSchedule">Remove</button></td>
 						</tr>
@@ -716,9 +724,12 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Class<img
+						<th title="click to sort" class="headerText">Center Code<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
+						<th title="click to sort" class="headerText">Exam Level<img
+							alt=" " style="position: relative; top: 4px;"
+							src="css/dataTable/images/sort_both.png" /></th>	
 						<th title="click to sort" class="headerText">Subject<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
@@ -743,7 +754,8 @@ for(Cookie cookie : cookies){
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
 							<td class="dataText"><input type="checkbox" id="<c:out value="${examschedule.idexamschedule}"/>" class="chcktbl" name="idexamschedule" value="<c:out value="${examschedule.idexamschedule}"/>" /></td>
-							<td class="dataText"><c:out value="${examschedule.classes}" /></td>
+							<td class="dataText"><c:out value="${examschedule.centercode}" /></td>
+							<td class="dataText"><c:out value="${examschedule.examname}" /></td>
 							<td class="dataText"><c:out value="${examschedule.subject}" /></td>
 							<td class="dataText"><c:out value="${examschedule.date}" /></td>
 							<td class="dataText"><c:out value="${examschedule.starttime}" /></td>

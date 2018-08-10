@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.model.examdetails.service.ExamDetailsService;
+import com.model.examlevels.dto.Examleveldetails;
+import com.model.examlevels.service.ExamLevelService;
 import com.model.student.service.StudentService;
 import com.model.subjectdetails.service.SubjectDetailsService;
 
@@ -50,6 +52,7 @@ public class SubjectDetailsAction {
 
 	private String readListOfSubjects() {
 		new SubjectDetailsService(request, response).readListOfSubjects();
+		new ExamLevelService(request, response).examLevels();
         System.out.println("IN action's view all Subjects");
         return "SubjectDetails.jsp";
 	}

@@ -328,34 +328,7 @@
 	});
 </script>
 <script>
-	function issues() {
-
-		var distlistitem = document.getElementById("subscriptionfor");
-		var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
-
-		if (distlistitemtext == "1 year") {
-			document.getElementById("totalissues").value = "24";
-		} else if (distlistitemtext == "2 years") {
-			document.getElementById("totalissues").value = "48";
-		} else if (distlistitemtext == "3 years") {
-			document.getElementById("totalissues").value = "72";
-		} else if (distlistitemtext == "5 years") {
-			document.getElementById("totalissues").value = "120";
-		} else if (distlistitemtext == "Life Time") {
-			document.getElementById("totalissues").value = "240";
-		}
-
-	}
-
-	function calculateIssues() {
-
-		var totalissues = document.getElementById("totalissues").value;
-		var fromissues = document.getElementById("fromkmissueno").value;
-
-		var toissues = parseInt(totalissues, 10) + parseInt(fromissues, 10) - 1;
-		document.getElementById("tokmissueno").value = toissues;
-
-	}
+	
 	function CalculateAge(value) {
 		var test = document.getElementById('datepicker').value;
 		var today = new Date();
@@ -440,9 +413,8 @@ for(Cookie cookie : cookies){
 			<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Student Details</a></li>
-					<li><a href="#tabs-2">Parent's Details</a></li>
+					<li><a href="#tabs-2">Additional Details</a></li>
 					<li><a href="#tabs-3">Upload Photo</a></li>
-					<li><a href="#tabs-4">Additional Details</a></li>
 				</ul>
 
 
@@ -483,18 +455,7 @@ for(Cookie cookie : cookies){
 									id="admnno" size="30" data-validate="validate(required)">
 
 							</label></td>
-							<td width="16%" class="alignRight">cumulative record no. with date of opening &nbsp;</td>
-
-							<td align="left"><label><input name="crecord"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.crecord}" />"
-									id="crecord" size="30"> <input
-									name="dateofcr" type="text" class="textField"
-									value="<fmt:formatDate value="${student.crecorddate}" pattern="yyyy-MM-dd"/>"
-									id="datepickeradmn" size="30"
-									data-validate="validate(required)">
-
-							</label></td>
+							
 						</tr>
 						
 <tr>
@@ -566,190 +527,18 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td width="16%" class="alignRight">Place of birth, Tq, Dist.&nbsp;</td>
-							<td align="left"><label> <input name="place"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.placeofbirth}" />"
-									id="place" size="30" data-validate="validate(required)">
-
-							</label></td>
-							<td width="16%" class="alignRight">No. & date of transfer certificate&nbsp;</td>
-
-							<td align="left"><label><input name="tcno"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.nooftc}"/>"
-									id="tcno" size="30">  <input
-									name="dateoftc" type="text" class="textField"
-									value="<fmt:formatDate value="${student.dateoftc}" pattern="yyyy-MM-dd"/>"
-									id="dateoftc" size="30"
-									data-validate="validate(required)">
-
-							</label></td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td width="16%" class="alignRight">Studying in Class&nbsp;</td>
-
-							<td width="28%">
-							
-							<label> 
-									<select name="classsec" id="classsec"
-									style="width: 120px;">
-										<option selected>${classstudying}</option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}" >
-												<c:out value="${classdetailslist.classdetails}" />
+							<td width="16%" class="alignRight">Qualification&nbsp;</td>
+							<td align="left"><label>
+								<select name="qualification" id="qualification"
+									style="width: 240px;">
+										<option selected>${student.qualification}</option>
+										<c:forEach items="${qualificationlist}" var="qualificationlist">
+											<option value="${qualificationlist.qualification}" >
+												<c:out value="${qualificationlist.qualification}" />
 											</option>
-										</c:if>	
 										</c:forEach>
 								</select>
-							</label> <label>
-							
-							<select name="secstudying" id="secstudying"
-									style="width: 80px;">
-										<option selected>${secstudying}</option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.section != '')}">
-											<option value="${classdetailslist.section}">
-												<c:out value="${classdetailslist.section}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-								</select>
-							</label>
-							
-							</td>
-
-
-
-							<td width="20%" class="alignRight">Admitted in class &nbsp;</td>
-
-							<td width="28%">
-							<label> 
-								<select name="admclass" id="admclass"
-									style="width: 115px;">
-										<option selected>${classadm}</option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}" >
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-								</select>
-							</label> <label> 
-									<select name="admsec" id="admsec"
-									style="width: 80px;">
-										<option selected>${secadm}</option>
-
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.section != '')}">
-											<option value="${classdetailslist.section}">
-												<c:out value="${classdetailslist.section}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-							</select>
-							</label>
-							
-							
-							
-							</td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-
-						<tr>
-
-
-							<td width="16%" class="alignRight">Last Class Studied &nbsp;</td>
-
-							<td><label> <select name="lastclass" id="lastclass"
-									style="width: 200px;">
-										<option selected>${student.stdlaststudied}</option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}" >
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-								</select>
-
 							</label></td>
-
-							<td width="30%" class="alignRight">Last School Attended
-								&nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="lastschool" type="text" class="textField"
-									value="<c:out default="" value="${student.schoollastattended}" />"
-									id="lastschool" size="30" data-validate="validate(required)">
-							</label></td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-						
-						<tr>
-
-
-							<td width="16%" class="alignRight">Languages Studied &nbsp;</td>
-
-							<td><label> <input
-									name="languagesstudied" type="text" class="textField"
-									value="<c:out default="" value="${student.languagesstudied}" />"
-									id="languagesstudied" size="30" data-validate="validate(required)">
-
-							</label></td>
-
-							<td width="30%" class="alignRight">Last School Medium of Instruction 
-								&nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="mediumofinstructionlastschool" type="text" class="textField"
-									value="<c:out default="" value="${student.instructionmediumlastschool}" />"
-									id="mediumofinstructionlastschool" size="30" data-validate="validate(required)">
-							</label></td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-
-
-
 							<td width="16%" class="alignRight">Date Of Admission &nbsp;</td>
 
 							<td align="left"><label> <input
@@ -759,140 +548,117 @@ for(Cookie cookie : cookies){
 									data-validate="validate(required)">
 
 							</label></td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td width="16%" class="alignRight">Examination Level&nbsp;</td>
+
+							<td width="28%">
 							
-							<td width="16%" class="alignRight">Subsequent progress of the student&nbsp;</td>
-							<td align="left"><label> <input name="progress"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.subsequentprogress}" />"
-									id="progress" size="30" data-validate="validate(required)">
-
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-
-
-						<tr>
-							<td width="16%" class="alignRight">Blood Group &nbsp;</td>
-
-							<td><label> <select name="bloodgroup"
-									id="bloodgroup" style="width: 200px">
-										<option selected>${student.bloodgroup}</option>
-										<option>A +ve</option>
-										<option>A -ve</option>
-										<option>AB +ve</option>
-										<option>AB -ve</option>
-										<option>O +ve</option>
-										<option>O -ve</option>
-										<option>B +ve</option>
-										<option>B -ve</option>
+							<label> 
+							 <select name="examlevel" id="examlevel"
+									style="width: 240px;">
+										<option selected>${student.examlevel}</option>
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
 								</select>
-
-							</label></td>
-							<td width="16%" class="alignRight">Nationality &nbsp;</td>
-
-							<td><label> <select name="nationality"
-									id="nationality" style="width: 200px" onchange="dropdown()">
-										<option selected>${student.nationality }</option>
-										<option>Indian</option>
-										<option>Other</option>
-								</select>
-
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-
-
-
-						<tr>
-
-
-							<td width="16%" class="alignRight">Religion &nbsp;</td>
-
-							<td align="left"><%-- <label> <input name="religion"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.religion}" />"
-									id="religion" size="30">
-
-							</label> --%>
-							
-							<label> <select name="religion" onblur="validateNameContact();"
-									id="religion" style="width: 200px" onkeypress="return validateContactNum(this);">
-										<option selected>${student.religion}</option>
-										<option>Islam</option>
-										<option>Hinduism</option>
-										<option>Christianity</option>
-										<option>jainism</option>
-										<option>sikhism</option>
-								</select>
-
-							</label>
-							
+									
+							</label> 
 							
 							</td>
 
+							<td width="20%" class="alignRight">Language Opted&nbsp;</td>
 
-							<td width="16%" class="alignRight">Caste &nbsp;</td>
+							<td width="28%">
+							<label> 
+								<select name="languageopted" id="languageopted"
+									style="width: 240px;">
+										<option selected>${student.languageopted}</option>
+										<c:forEach items="${languageslist}" var="languageslist">
+											<option value="${languageslist.language}" >
+												<c:out value="${languageslist.language}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+							
+							</td>
+						</tr>
 
-							<td align="left"><label> <input name="caste"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.caste}" />"
-									id="caste" size="30">
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+
+						<tr>
+
+
+							<td width="16%" class="alignRight">Center Code &nbsp;</td>
+
+							<td><label> <select name="centercode" id="centercode"
+									style="width: 240px;">
+										<option selected>${student.centercode}</option>
+										<c:forEach items="${branchList}" var="branchlist">
+											<option value="${branchlist.centercode}" >
+												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
+											</option>
+										</c:forEach>
+								</select>
 
 							</label></td>
 
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-
-
-
-						<tr>
-
-
-							<td width="16%" class="alignRight">Mother Tongue &nbsp;</td>
-
-							<td align="left"><%-- <label> <input name="motherT"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.mothertongue}" />"
-									id="motherT" size="30">
-
-							</label> --%>
-							
-							<label>
-							<select name="motherT" onblur="validateNameContact();"
-									id="motherT" style="width: 200px" onkeypress="return validateContactNum(this);">
-										<option selected>${student.mothertongue}</option>
-										<option>Urdu</option>
-										<option>Hindi</option>
-										<option>English</option>
-										<option>Kannada</option>
-										<option>Marathi</option>
-										<option>Telugu</option>
-										<option>Tamil</option>
+							<td width="30%" class="alignRight">District Code
+								&nbsp;</td>
+							<td width="12%" align="left"><label> <select name="districtcode" id="districtcode"
+									style="width: 240px;" onchange="getAdmNo()">
+										<option selected>${student.districtcode}</option>
+										<c:forEach items="${districtsList}" var="districtsList">
+											<option value="${districtsList.districtcode}" >
+												<c:out value="${districtsList.districtcode} -- ${districtsList.districtname}" />
+											</option>
+										</c:forEach>
 								</select>
-							</label>
-							
-							</td>
+							</label></td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+						
+						<tr>
+
+						<td width="16%" class="alignRight">Remarks&nbsp;</td>
+
+							<td align="left"><label> <input name="remarks"
+									type="text" class="textField"
+									value="<c:out default="" value="${student.remarks}" />"
+									id="remarks" size="30">
+
+							</label></td>
 
 
 							<td width="20%" class="alignRight">Created Date &nbsp;</td>
@@ -910,38 +676,6 @@ for(Cookie cookie : cookies){
 
 							<td><br /></td>
 						</tr>
-
-
-
-						<tr>
-
-
-							<td width="16%" class="alignRight">Remarks&nbsp;</td>
-
-							<td align="left"><label> <input name="remarks"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.remarks}" />"
-									id="remarks" size="30">
-
-							</label></td>
-						<tr>
-
-							<td></td>
-
-						</tr>
-						<tr>
-
-							<td></td>
-
-						</tr>
-
-						<tr>
-
-							<td></td>
-
-						</tr>
-
-
 
 					</table>
 
@@ -1044,133 +778,6 @@ for(Cookie cookie : cookies){
 </div>
 
 
-						<div id="tabs-4">
-							<table width="100%" border="0" align="center" id="table1">
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-								<tr>
-
-									<td width="30%" class="alignRight"><label> <font
-											color="red"><div id="mydiv"></div></font>
-									</label></td>
-									<td width="20%" class="alignRight"></td>
-									<td class="alignRight"><font color="red"><div
-												id="mydivmobile"></div></font></td>
-								</tr>
-
-
-
-								<tr>
-									<td width="30%" class="alignRight">Class on leaving&nbsp;</td>
-									<td width="12%" align="left"><label> <input
-											name="classonleaving" type="text"
-											value="<c:out default="" value="${student.classonleaving}" />" class="myclass" id="classonleaving" style="text-transform:uppercase"
-											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
-									</label></td>
-
-									<td width="30%" class="alignRight">Date of leaving the school&nbsp;</td>
-									<td width="12%" align="left"><label> <input
-									name="dateofleaving" type="text" class="textField" 
-									id="dateofleaving" size="36" value="<fmt:formatDate type="date" value="${student.dateleaving}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"><!-- onkeyup="check(this.value);"  -->
-									</label></td>
-
-
-								</tr>
-
-
-
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-
-								<tr>
-
-									<td width="16%" class="alignRight">Reason for leaving &nbsp;</td>
-
-									<td width="28%"><label> <input name="reasonforleaving"
-											type="text" class="textField" id="reasonforleaving" size="36"
-											value="<c:out default="" value="${student.reasonleaving}" />"
-											onkeypress="return validateContactNum(this);">
-
-									</label></td>
-
-
-
-									<td width="16%" class="alignRight">No. & date of transfer certificate issued&nbsp;</td>
-
-									<td width="28%"><label> <input name="notcissued"
-									type="text" class="textField" id="notcissued" size="36" value="<c:out default="" value="${student.notcissued}" />"
-									><input
-									name="dateoftcissued" type="text" class="textField" 
-									id="dateoftcissued" size="36" value="<fmt:formatDate type="date" value="${student.datetcissued}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)">
-							</label></td>
-									
-								</tr>
-								
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-								
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-							<tr>
-									<td><br /></td>
-								</tr>	
-							<tr align="center">
-									
-									
-									<td width="20%" class="alignRight"> &nbsp;</td>
-
-									<td align="center">
-									
-										
-										<button id="updatefour" onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();" onfocus="validateNameContact();validateFatherName();">Update</button>
-
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="cancelfour">Cancel</button>
-
-									</td>
-
-								
-								
-									
-								</tr>
-
-								<tr>
-									<td><br /></td>
-								</tr>
-
-
-								<tr>
-									<td><br /></td>
-								</tr>
-								
-
-						</div>
-						</div>
-							
-							</table>
-							
-							</div>
-							
-							
-							
 
 				<div id="tabs-2">
 					<table width="100%" border="0" align="center" id="table1">
@@ -1204,7 +811,7 @@ for(Cookie cookie : cookies){
 									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
 
-							<td width="30%" class="alignRight">Mother's Name &nbsp;</td>
+							<td width="30%" class="alignRight">Husband's Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="mothersname" type="text" class="myclass" id="name"
 									size="36" style="text-transform:uppercase"
@@ -1223,38 +830,10 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-						
-						<tr>
-							<td width="30%" class="alignRight">Father's Qualification &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="fathersqualification" type="text" class="myclass" id="fathersqualification"
-									size="36" style="text-transform:uppercase"
-									value="<c:out default="" value="${parents.fathersqualification}" />">
-							</label></td>
-
-							<td width="30%" class="alignRight">Mother's Qualification &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="mothersqualification" type="text" class="myclass" id="mothersqualification"
-									size="36" style="text-transform:uppercase"
-									value="<c:out default="" value="${parents.mothersqualification}" />">
-							</label></td>
-
-
-						</tr>
-
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
 
 						<tr>
 
-							<td width="16%" class="alignRight">Guardian's name & address
+							<td width="16%" class="alignRight">Guardian's name
 								&nbsp;</td>
 
 							<td width="28%"><label> <input name="guardian"
@@ -1263,26 +842,6 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 
-
-
-							<td width="16%" class="alignRight">Annual Income &nbsp;</td>
-
-							<td width="28%"><label> <input name="annualincome"
-									type="text" class="textField" id="annualincome" size="36"
-									value="<c:out default="" value="${parents.parentsannualincome}" />">
-
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-
 							<td width="16%" class="alignRight">Contact Number &nbsp;</td>
 
 							<td width="28%"><label> <input name="contactnumber"
@@ -1290,28 +849,25 @@ for(Cookie cookie : cookies){
 									value="<c:out default="" value="${parents.contactnumber}" />"">
 
 							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 
 
-
-							<td width="16%" class="alignRight">CO-Contact Number &nbsp;</td>
-
-							<td width="28%"><label> <input
-									name="cocontactnumber" type="text" class="textField"
-									id="cocontactnumber" size="36"
-									value="<c:out default="" value="${parents.cocontactnumber}" />">
-
+						<tr>
+						
+						<td width="16%" class="alignRight">Address &nbsp;</td>
+							<td width="28%"><label> <textarea
+										name="permanentaddress" type="text" class="textField"
+										id="permanentaddress" rows="4" cols="35"
+										value="<c:out default="" value="${parents.addresspermanent}"/>">${parents.addresspermanent}</textarea>
 							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-
-						<tr>
+							
 							<td width="16%" class="alignRight">Email
 								&nbsp;</td>
 
@@ -1319,66 +875,20 @@ for(Cookie cookie : cookies){
 									type="email" class="textField" id="email" size="36"
 									onblur="validateNameContact();"
 									value="<c:out default="" value="${parents.email}" />">
-									
-
-							<td width="20%" class="alignRight">Number Of Dependents
-								&nbsp;</td>
-
-							<td width="28%"><label> <input name="noofdependents"
-									type="text" class="textField" id="noofdependents" size="36"
-									onblur="validateNameContact();"
-									value="<c:out default="" value="${parents.noofdependents}" />">
-
-							</label></td>
-
-
-
+						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
-							<td width="16%" class="alignRight">Permanent Address &nbsp;</td>
-							<td width="28%"><label> <textarea
-										name="permanentaddress" type="text" class="textField"
-										id="permanentaddress" rows="4" cols="35"
-										value="<c:out default="" value="${parents.addresspermanent}"/>">${parents.addresspermanent}</textarea>
-							</label></td>
-
-							<td width="20%" class="alignRight">Temporary Address &nbsp;</td>
-							<td width="28%"><label> <textarea
-										name="temporaryaddress"
-										value="<c:out default="" value="${parents.addresstemporary}" />"
-										type="text" class="textField" id="temporaryaddress" rows="4"
-										cols="35">${parents.addresstemporary}</textarea>
-							</label></td>
-						</tr>
-
-
+						
 
 						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-
-						<tr>
-							<td width="16%" class="alignRight">Number Of Dependents
-								&nbsp;</td>
-
-							<td width="28%"><label> <input name="noofdependents"
-									type="text" class="textField" id="noofdependents" size="36"
-									onblur="validateNameContact();"
-									value="<c:out default="" value="${parents.noofdependents}" />">
-
-							</label></td>
+							
 							<td width="20%" class="alignRight">Notes &nbsp;</td>
-							<td width="28%"><label> <input name="remarks"
-									type="text" class="textField" id="remarks" size="36"
+							<td width="28%"><label> <input name="notes"
+									type="text" class="textField" id="notes" size="36"
 									value="<c:out default="" value="${parents.remarks}" />">
 							</label></td>
 						</tr>

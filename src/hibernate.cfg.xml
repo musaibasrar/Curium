@@ -74,5 +74,10 @@
 		<mapping resource="com/model/hr/dto/Processsalarydetails.hbm.xml"></mapping>
 		<mapping resource="com/model/hr/dto/Processsalarydetailsheads.hbm.xml"></mapping>
 		<mapping resource="com/model/branch/dto/Branch.hbm.xml"></mapping>
+		<mapping resource="com/model/branch/dto/Districts.hbm.xml"></mapping>
+		<mapping resource="com/model/examlevels/dto/Examleveldetails.hbm.xml"></mapping>
+		<mapping resource="com/model/language/dto/Language.hbm.xml"></mapping>
+		<mapping resource="com/model/qualification/dto/Qualification.hbm.xml"></mapping>
+		<mapping resource="com/model/examlevels/dto/Subexamlevel.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>

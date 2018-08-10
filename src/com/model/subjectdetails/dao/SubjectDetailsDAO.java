@@ -11,6 +11,7 @@ import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.model.examlevels.dto.Subexamlevel;
 import com.model.subjectdetails.dto.Subject;
 import com.util.HibernateUtil;
 
@@ -50,14 +51,18 @@ public class SubjectDetailsDAO {
 		}
 	}
 
-	public Subject addSubject(Subject subject) {
+	public Subject addSubject(Subject subject, String[] examlevelids) {
 		try {
-			// this.session = sessionFactory.openCurrentSession();
 			transaction = session.beginTransaction();
 			session.save(subject);
-
-			transaction.commit();
 			
+			for (String examLevelCode : examlevelids) {
+			    Subexamlevel subExamLevel = new Subexamlevel();
+			    subExamLevel.setSubjectname(subject.getSubjectname());
+			    subExamLevel.setExamlevel(examLevelCode);
+			    session.save(subExamLevel);
+                        }
+			transaction.commit();
 		} catch (HibernateException hibernateException) {
 			transaction.rollback();
 			hibernateException.printStackTrace();
@@ -79,7 +84,20 @@ public class SubjectDetailsDAO {
 		} catch (HibernateException hibernateException) {
 			hibernateException.printStackTrace();
 		}
-		
 	}
+
+    public Subject getSubjectDetails(String subject) {
+        Subject subjectDet = new Subject();
+        try {
+            transaction = session.beginTransaction();
+            Query query = session
+                            .createQuery("from Subject where subjectname = '"+subject+"'");
+            subjectDet = (Subject) query.uniqueResult();
+            transaction.commit();
+    } catch (HibernateException hibernateException) {
+            hibernateException.printStackTrace();
+    }
+        return subjectDet;
+    }
 
 }

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : member_details
+    Document   : Fees Print
     Created on : Jan 4, 2013, 4:39:24 PM
     Author     : Musaib
 --%>
@@ -15,7 +15,7 @@
 <html>
     <head >
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Please wait...</title> 
+        <title>Fees Print</title> 
 
         <script type="text/javascript" language="JavaScript" src="js/motionpack.js"></script>
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">

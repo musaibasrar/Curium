@@ -7,7 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.model.academicyear.service.YearService;
+import com.model.branch.dao.BranchDAO;
+import com.model.branch.service.BranchService;
 import com.model.examdetails.service.ExamDetailsService;
+import com.model.examlevels.service.ExamLevelService;
+import com.model.language.service.LanguageService;
 import com.model.stampfees.service.StampFeesService;
 import com.model.student.service.StudentService;
 import com.model.subjectdetails.service.SubjectDetailsService;
@@ -62,6 +66,9 @@ public class ExamDetailsAction {
 
 	private String searchHallTicketDetails() {
 		
+	        new ExamLevelService(request, response).examLevels();
+                new BranchService(request, response).viewBranches();
+            
 		new ExamDetailsService(request, response).getExamScheduleDetails();
 		new ExamDetailsService(request, response).readListOfExams();
 		new SubjectDetailsService(request, response).readListOfSubjects();
@@ -73,9 +80,9 @@ public class ExamDetailsAction {
 		
 		boolean result;
 		
-		result = new ExamDetailsService(request, response).readListOfExams();
-		if (!result) 
-			return error;
+		    new ExamLevelService(request, response).examLevels();
+	            new BranchService(request, response).viewBranches();
+	            
 		result = new SubjectDetailsService(request, response).readListOfSubjects();
 		if (!result) 
 			return error;
@@ -111,9 +118,8 @@ public class ExamDetailsAction {
 		
 		boolean result;
 		
-		result = new ExamDetailsService(request, response).readListOfExams();
-		if (!result) 
-			return error;
+		new ExamLevelService(request, response).examLevels();
+		new BranchService(request, response).viewBranches();
 		result = new SubjectDetailsService(request, response).readListOfSubjects();
 		if (!result) 
 			return error;

@@ -29,5 +29,11 @@
           <property name="branchid" type="int">
             <column name="branchid" />
         </property>
+        <property name="subject" type="string">
+            <column name="subject" length="45" />
+        </property>
+        <property name="examlevelcode" type="string">
+            <column name="examlevelcode" length="20" />
+        </property>
     </class>
 </hibernate-mapping>

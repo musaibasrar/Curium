@@ -480,25 +480,16 @@ for(Cookie cookie : cookies){
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
 						<tr>
-							<td width="10%" class="alignRight">Class&nbsp;</td>
-							<td width="70%"><label> <select name="classofstd" id="classofstd"
-									style="width: 240px" onchange="dropdown()">
+							<td width="10%" class="alignRight">Examination Level&nbsp;</td>
+							<td width="70%"><label> <select name="examlevel" id="examlevel"
+									style="width: 240px;" required>
 										<option selected></option>
-										<option>Nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
 								</select>
-
 							</label></td>
 						</tr>
 
@@ -546,9 +537,9 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Student.name}"/></td>
-                                <td class="dataText"><c:out value="${Student.classstudying}"/></td>
+                                <td class="dataText"><c:out value="${Student.examlevel}"/></td>
                                 <td class="dataText"><c:out  value="${Student.admissiondate}"/></td>
-                                 <input type="hidden" id="classstudying" name="classstudying" value="${Student.classstudying}"/>
+                                 <input type="hidden" id="classstudying" name="classstudying" value="${Student.examlevel}"/>
 
                             </tr>
                         </c:forEach>

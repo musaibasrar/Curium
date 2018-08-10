@@ -23,39 +23,22 @@ public class Student implements java.io.Serializable {
 
 	private Integer sid;
 	private String name;
-	private String classstudying;
-	private String classadmittedin;
+	private String qualification;
+	private String examlevel;
 	private Integer age;
 	private String gender;
 	private Date dateofbirth;
-	private String bloodgroup;
-	private String nationality;
-	private String religion;
-	private String caste;
+	private String languageopted;
+	private String districtcode;
+	private String centercode;
 	private Date admissiondate;
 	private String admissionnumber;
-	private String mothertongue;
 	private String remarks;
-	private String schoollastattended;
-	private String stdlaststudied;
 	private Date createddate;
 	private Integer archive;
 	private String studentpic;
 	private String studentexternalid;
-	private String crecord;
-	private Date crecorddate;
-	private String placeofbirth;
-	private Integer nooftc;
-	private Date dateoftc;
-	private String classonleaving;
-	private Date dateleaving;
-	private String reasonleaving;
-	private Integer notcissued;
-	private Date datetcissued;
 	private String guardiandetails;
-	private String subsequentprogress;
-	private String languagesstudied;
-        private String instructionmediumlastschool;
 	private int branchid;
 
 	public Student() {
@@ -66,50 +49,30 @@ public class Student implements java.io.Serializable {
 		this.studentexternalid = studentexternalid;
 	}
 
-	public Student(String name, String classstudying, String classadmittedin,
-			Integer age, String gender, Date dateofbirth, String bloodgroup,
-			String nationality, String religion, String caste,
-			Date admissiondate, String admissionnumber, String mothertongue,
-			String remarks, String schoollastattended, String stdlaststudied,
+	public Student(String name, String qualification, String examlevel,
+			Integer age, String gender, Date dateofbirth, String languageopted,
+			String districtcode, String centercode, 
+			Date admissiondate, String admissionnumber, 
+			String remarks, String guardiandetails,
 			Date createddate, Integer archive, String studentpic,
-			String studentexternalid, String crecord, Date crecorddate,
-			String placeofbirth, Integer nooftc, Date dateoftc,
-			String classonleaving, Date dateleaving, String reasonleaving,
-			Integer notcissued, Date datetcissued, String guardiandetails, int branchid,
-			String languagesstudied, String instructionmediumlastschool) {
+			String studentexternalid,  int branchid) {
 		this.name = name;
-		this.classstudying = classstudying;
-		this.classadmittedin = classadmittedin;
+		this.qualification = qualification;
+		this.examlevel = examlevel;
 		this.age = age;
 		this.gender = gender;
 		this.dateofbirth = dateofbirth;
-		this.bloodgroup = bloodgroup;
-		this.nationality = nationality;
-		this.religion = religion;
-		this.caste = caste;
+		this.languageopted = languageopted;
+		this.districtcode = districtcode;
+		this.centercode = centercode;
 		this.admissiondate = admissiondate;
 		this.admissionnumber = admissionnumber;
-		this.mothertongue = mothertongue;
 		this.remarks = remarks;
-		this.schoollastattended = schoollastattended;
-		this.stdlaststudied = stdlaststudied;
 		this.createddate = createddate;
 		this.archive = archive;
 		this.studentpic = studentpic;
 		this.studentexternalid = studentexternalid;
-		this.crecord = crecord;
-		this.crecorddate = crecorddate;
-		this.placeofbirth = placeofbirth;
-		this.nooftc = nooftc;
-		this.dateoftc = dateoftc;
-		this.classonleaving = classonleaving;
-		this.dateleaving = dateleaving;
-		this.reasonleaving = reasonleaving;
-		this.notcissued = notcissued;
-		this.datetcissued = datetcissued;
 		this.guardiandetails = guardiandetails;
-		this.languagesstudied = languagesstudied;
-                this.instructionmediumlastschool = instructionmediumlastschool;
 		this.branchid = branchid;
 	}
 
@@ -133,23 +96,26 @@ public class Student implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "classstudying", length = 45)
-	public String getClassstudying() {
-		return this.classstudying;
-	}
+	@Column(name = "qualification", length = 45)
+	    
+	    public String getQualification() {
+	        return this.qualification;
+	    }
 
-	public void setClassstudying(String classstudying) {
-		this.classstudying = classstudying;
-	}
+	    
+	    public void setQualification(String qualification) {
+	        this.qualification = qualification;
+	    }
 
-	@Column(name = "classadmittedin", length = 45)
-	public String getClassadmittedin() {
-		return this.classadmittedin;
-	}
+	@Column(name = "examlevel", length = 45)
+	    public String getExamlevel() {
+	        return this.examlevel;
+	    }
 
-	public void setClassadmittedin(String classadmittedin) {
-		this.classadmittedin = classadmittedin;
-	}
+	    
+	    public void setExamlevel(String examlevel) {
+	        this.examlevel = examlevel;
+	    }
 
 	@Column(name = "age")
 	public Integer getAge() {
@@ -179,42 +145,39 @@ public class Student implements java.io.Serializable {
 		this.dateofbirth = dateofbirth;
 	}
 
-	@Column(name = "bloodgroup", length = 45)
-	public String getBloodgroup() {
-		return this.bloodgroup;
-	}
+	@Column(name = "languageopted", length = 45)
+	    public String getLanguageopted() {
+	        return this.languageopted;
+	    }
 
-	public void setBloodgroup(String bloodgroup) {
-		this.bloodgroup = bloodgroup;
-	}
+	    
+	    public void setLanguageopted(String languageopted) {
+	        this.languageopted = languageopted;
+	    }
 
-	@Column(name = "nationality", length = 45)
-	public String getNationality() {
-		return this.nationality;
-	}
 
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
-	}
+	@Column(name = "districtcode", length = 5)
+	    public String getDistrictcode() {
+	        return this.districtcode;
+	    }
 
-	@Column(name = "religion", length = 45)
-	public String getReligion() {
-		return this.religion;
-	}
+	    
+	    public void setDistrictcode(String districtcode) {
+	        this.districtcode = districtcode;
+	    }
 
-	public void setReligion(String religion) {
-		this.religion = religion;
-	}
 
-	@Column(name = "caste", length = 45)
-	public String getCaste() {
-		return this.caste;
-	}
+	@Column(name = "centercode", length = 5)
+	    public String getCentercode() {
+	        return this.centercode;
+	    }
 
-	public void setCaste(String caste) {
-		this.caste = caste;
-	}
+	    
+	    public void setCentercode(String centercode) {
+	        this.centercode = centercode;
+	    }
 
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "admissiondate", length = 10)
 	public Date getAdmissiondate() {
@@ -234,15 +197,7 @@ public class Student implements java.io.Serializable {
 		this.admissionnumber = admissionnumber;
 	}
 
-	@Column(name = "mothertongue", length = 45)
-	public String getMothertongue() {
-		return this.mothertongue;
-	}
-
-	public void setMothertongue(String mothertongue) {
-		this.mothertongue = mothertongue;
-	}
-
+	
 	@Column(name = "Remarks", length = 500)
 	public String getRemarks() {
 		return this.remarks;
@@ -252,24 +207,7 @@ public class Student implements java.io.Serializable {
 		this.remarks = remarks;
 	}
 
-	@Column(name = "schoollastattended", length = 100)
-	public String getSchoollastattended() {
-		return this.schoollastattended;
-	}
-
-	public void setSchoollastattended(String schoollastattended) {
-		this.schoollastattended = schoollastattended;
-	}
-
-	@Column(name = "stdlaststudied", length = 45)
-	public String getStdlaststudied() {
-		return this.stdlaststudied;
-	}
-
-	public void setStdlaststudied(String stdlaststudied) {
-		this.stdlaststudied = stdlaststudied;
-	}
-
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "createddate", length = 10)
 	public Date getCreateddate() {
@@ -307,100 +245,6 @@ public class Student implements java.io.Serializable {
 		this.studentexternalid = studentexternalid;
 	}
 
-	@Column(name = "crecord", length = 45)
-	public String getCrecord() {
-		return this.crecord;
-	}
-
-	public void setCrecord(String crecord) {
-		this.crecord = crecord;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "crecorddate", length = 10)
-	public Date getCrecorddate() {
-		return this.crecorddate;
-	}
-
-	public void setCrecorddate(Date crecorddate) {
-		this.crecorddate = crecorddate;
-	}
-
-	@Column(name = "placeofbirth", length = 100)
-	public String getPlaceofbirth() {
-		return this.placeofbirth;
-	}
-
-	public void setPlaceofbirth(String placeofbirth) {
-		this.placeofbirth = placeofbirth;
-	}
-
-	@Column(name = "nooftc")
-	public Integer getNooftc() {
-		return this.nooftc;
-	}
-
-	public void setNooftc(Integer nooftc) {
-		this.nooftc = nooftc;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "dateoftc", length = 10)
-	public Date getDateoftc() {
-		return this.dateoftc;
-	}
-
-	public void setDateoftc(Date dateoftc) {
-		this.dateoftc = dateoftc;
-	}
-
-	@Column(name = "classonleaving", length = 45)
-	public String getClassonleaving() {
-		return this.classonleaving;
-	}
-
-	public void setClassonleaving(String classonleaving) {
-		this.classonleaving = classonleaving;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "dateleaving", length = 10)
-	public Date getDateleaving() {
-		return this.dateleaving;
-	}
-
-	public void setDateleaving(Date dateleaving) {
-		this.dateleaving = dateleaving;
-	}
-
-	@Column(name = "reasonleaving", length = 500)
-	public String getReasonleaving() {
-		return this.reasonleaving;
-	}
-
-	public void setReasonleaving(String reasonleaving) {
-		this.reasonleaving = reasonleaving;
-	}
-
-	@Column(name = "notcissued")
-	public Integer getNotcissued() {
-		return this.notcissued;
-	}
-
-	public void setNotcissued(Integer notcissued) {
-		this.notcissued = notcissued;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "datetcissued", length = 10)
-	public Date getDatetcissued() {
-		return this.datetcissued;
-	}
-
-	public void setDatetcissued(Date datetcissued) {
-		this.datetcissued = datetcissued;
-	}
-
 	@Column(name = "guardiandetails", length = 200)
 	public String getGuardiandetails() {
 		return this.guardiandetails;
@@ -410,34 +254,6 @@ public class Student implements java.io.Serializable {
 		this.guardiandetails = guardiandetails;
 	}
 
-	@Column(name = "subsequentprogress", length = 500)
-	public String getSubsequentprogress() {
-		return subsequentprogress;
-	}
-
-	public void setSubsequentprogress(String subsequentprogress) {
-		this.subsequentprogress = subsequentprogress;
-	}
-
-	    public String getLanguagesstudied() {
-	        return this.languagesstudied;
-	    }
-
-	    
-	    public void setLanguagesstudied(String languagesstudied) {
-	        this.languagesstudied = languagesstudied;
-	    }
-
-	    
-	    public String getInstructionmediumlastschool() {
-	        return this.instructionmediumlastschool;
-	    }
-
-	    
-	    public void setInstructionmediumlastschool(String instructionmediumlastschool) {
-	        this.instructionmediumlastschool = instructionmediumlastschool;
-	    }
-	    
 	@Column(name = "branchid")
 	public int getBranchid() {
 	return branchid;
@@ -446,4 +262,5 @@ public class Student implements java.io.Serializable {
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
 	}
+  
 }

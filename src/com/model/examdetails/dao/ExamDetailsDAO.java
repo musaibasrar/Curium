@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.model.adminexpenses.dto.Adminexpenses;
+import com.model.branch.dto.Branch;
 import com.model.examdetails.dto.Exams;
 import com.model.examdetails.dto.Examschedule;
 import com.model.student.dto.Student;
@@ -103,16 +104,15 @@ public class ExamDetailsDAO {
 
 
 
-	public List<Examschedule> readListOfExamSchedule(int branchId) {
+	public List<Examschedule> readListOfExamSchedule() {
 		
 		List<Examschedule> results = new ArrayList<Examschedule>();
 		try {
 			// this.session =
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
-
-			results = (List<Examschedule>) session.createQuery("From Examschedule where branchid"+branchId)
-					.list();
+			//results = (List<Examschedule>) session.createQuery("From Examschedule where branchid"+branchId).list();
+			results = (List<Examschedule>) session.createQuery("From Examschedule").list();
 			transaction.commit();
 
 		} catch (HibernateException hibernateException) {
@@ -144,11 +144,18 @@ public class ExamDetailsDAO {
 	}
 
 	public List<Examschedule> getExamScheduleDetails(String academicYear,
-			String classH, String exam, int branchId) {
+			String centerCode, String exam, int branchId) {
 		List<Examschedule> listExamSchedule = new ArrayList<Examschedule>();
 		try {
 			transaction = session.beginTransaction();
-			listExamSchedule = session.createQuery("from Examschedule where classes like '"+classH+"-%' and academicyear = '"+academicYear+"' and examname = '"+exam+"' and branchid="+branchId+" ORDER BY date ASC").list();
+			if(!centerCode.equalsIgnoreCase("")) {
+			    listExamSchedule = session.createQuery("from Examschedule where examname = '"+exam+"' and academicyear = '"+academicYear+"' and centercode like '%,"+centerCode+",%' ORDER BY date ASC").list();
+			}else {
+			    Query query = session.createQuery("from Branch where idbranch="+branchId);
+			    Branch branch = (Branch) query.uniqueResult();
+			   listExamSchedule = session.createQuery("from Examschedule where examname = '"+exam+"-%' and academicyear = '"+academicYear+"' and  centercode like '%,"+branch.getCentercode()+",%' ORDER BY date ASC").list();
+			}
+			
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

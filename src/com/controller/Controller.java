@@ -14,18 +14,22 @@ import com.model.academicyear.action.YearAction;
 import com.model.account.action.AccountAction;
 import com.model.adminexpenses.action.AdminAction;
 import com.model.attendance.action.AttendanceAction;
+import com.model.branch.action.BranchAction;
 import com.model.department.action.DepartmentAction;
 import com.model.documents.action.DocumentAction;
 import com.model.employee.action.EmployeeAction;
 import com.model.examdetails.action.ExamDetailsAction;
+import com.model.examlevels.action.ExamLevelAction;
 import com.model.feescategory.action.FeesAction;
 import com.model.feescollection.action.FeesCollectionAction;
 import com.model.feesdetails.action.FeesDetailsAction;
 import com.model.hr.action.HrAction;
+import com.model.language.action.LanguageAction;
 import com.model.marksdetails.action.MarksDetailsAction;
 import com.model.periods.action.PeriodAction;
 import com.model.position.action.PositionAction;
 import com.model.printids.action.PrintIdsAction;
+import com.model.qualification.action.QualificationAction;
 import com.model.sendemail.action.EmailAction;
 import com.model.sendsms.action.SmsAction;
 import com.model.stampfees.action.StampFeesAction;
@@ -95,6 +99,14 @@ public class Controller extends HttpServlet {
          nextUrl= new HrAction(request, response).execute(action);
      }else if("ClassProcess".equalsIgnoreCase(process)){
          nextUrl= new StandardAction(request, response).execute(action);;
+     }else if("BranchProcess".equalsIgnoreCase(process)){
+         nextUrl= new BranchAction(request, response).execute(action);;
+     }else if("LevelProcess".equalsIgnoreCase(process)){
+         nextUrl= new ExamLevelAction(request, response).execute(action);;
+     }else if("LanguageProcess".equalsIgnoreCase(process)){
+         nextUrl= new LanguageAction(request, response).execute(action);;
+     }else if("QualificationProcess".equalsIgnoreCase(process)){
+         nextUrl= new QualificationAction(request, response).execute(action);;
      }else if("test".equalsIgnoreCase(process)){
          nextUrl= "test.html";
      }

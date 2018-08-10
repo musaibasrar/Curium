@@ -404,9 +404,9 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            <th title="click to sort" class="headerText">Class</th>
-                            <th title="click to sort" class="headerText">Father's Name&nbsp;</th>
-                            <th title="click to sort" class="headerText">Mother's Name&nbsp;</th>
+                            <th title="click to sort" class="headerText">Exam Level</th>
+                            <th title="click to sort" class="headerText">District Code&nbsp;</th>
+                            <th title="click to sort" class="headerText">Center Code&nbsp;</th>
                         </tr>
                     </thead>
 
@@ -417,9 +417,9 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.name}"/></td>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.classstudying}"/></td>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.fathersname}"/></td>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.mothersname}"/></td>
+                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.examlevel}"/></td>
+                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.districtcode}"/></td>
+                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.centercode}"/></td>
                                 <!-- <fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/>  -->
                                 <!-- <td class="dataText"><fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/></td> -->
                                  

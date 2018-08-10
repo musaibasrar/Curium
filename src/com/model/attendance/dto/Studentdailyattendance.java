@@ -34,14 +34,15 @@ public class Studentdailyattendance implements java.io.Serializable {
 	private String attendancestatus;
 	private String academicyear;
 	private int branchid;
-
+	private String subject;
+	private String examlevelcode;
 	
 	public Studentdailyattendance() {
 	}
 
 	public Studentdailyattendance(String attendeeid, String intime,
 			String outtime, Date date, String attendancestatus,
-			String academicyear, int branchid) {
+			String academicyear, int branchid, String subject, String examlevelcode) {
 		this.attendeeid = attendeeid;
 		this.intime = intime;
 		this.outtime = outtime;
@@ -49,6 +50,8 @@ public class Studentdailyattendance implements java.io.Serializable {
 		this.attendancestatus = attendancestatus;
 		this.academicyear = academicyear;
 		this.branchid = branchid;
+		this.subject = subject;
+		this.examlevelcode=examlevelcode;
 	}
 
 	@Id
@@ -118,11 +121,30 @@ public class Studentdailyattendance implements java.io.Serializable {
 	}
 	
 	@Column(name = "branchid")
-	public Integer getBranchid() {
+	public int getBranchid() {
 	return branchid;
 	}
 
-	public void setBranchid(Integer branchid) {
-	this.branchid = branchid;
-	}
+	   public void setBranchid(int branchid) {
+	        this.branchid = branchid;
+	    }
+
+        public String getSubject() {
+            return this.subject;
+        }
+    
+        public void setSubject(String subject) {
+            this.subject = subject;
+        }
+
+        
+        public String getExamlevelcode() {
+            return this.examlevelcode;
+        }
+
+        
+        public void setExamlevelcode(String examlevelcode) {
+            this.examlevelcode = examlevelcode;
+        }
+
 }

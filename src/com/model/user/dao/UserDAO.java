@@ -2,6 +2,8 @@ package com.model.user.dao;
 
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
@@ -34,9 +36,6 @@ public class UserDAO {
 	@SuppressWarnings("finally")
 	public Login readUniqueObject(String userName, String password) {
         Login login = null;
-        System.out.println("in readuniqueobject method");
-        System.out.println("The username in DAO is: "+userName);
-        System.out.println("The password in DAO is: "+password);
        try{
            System.out.println("in USERDAO");
            //Musaib
@@ -207,4 +206,56 @@ public class UserDAO {
         }
 		return user;
 	}
+
+    public java.util.List<Login> readListOfUsers() {
+        
+        java.util.List<Login> loginList = new ArrayList<Login>();
+        try {
+            transaction = session.beginTransaction();
+            loginList = session.createQuery("FROM Login").list();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return loginList;
+    }
+
+    public boolean updateMultipleUsers(Map<Integer, java.util.List<String>> userMap) {
+        boolean result = false;
+        
+        try{
+            transaction = session.beginTransaction();
+            
+            for (Entry<Integer, java.util.List<String>> entry : userMap.entrySet()) {
+                Query query = session.createQuery("update Login set username='"+entry.getValue().get(1)+"' ,password= '"+entry.getValue().get(2)+"', usertype='"+entry.getValue().get(3)+"' , branchid='"+entry.getValue().get(0)+"' , addstudentflag='"+entry.getValue().get(4)+"', lastmodifiedby='"+entry.getValue().get(5)+"' where lid="+entry.getKey()+"");
+                query.executeUpdate();
+            }
+            transaction.commit();
+            result = true;
+        }catch(HibernateException hibernateException){
+            hibernateException.printStackTrace();
+        }finally{
+            session.close();
+        }
+        
+        return result;
+    }
+
+    public boolean deleteMultipleUsers(java.util.List<Integer> ids) {
+        boolean result = false;
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("delete from Login where lid IN (:ids)");
+            query.setParameterList("ids", ids);
+            query.executeUpdate();
+            transaction.commit();
+            result = true;
+        } catch (HibernateException hibernateException) {
+            hibernateException.printStackTrace();
+        }
+        return result;
+    }
 }

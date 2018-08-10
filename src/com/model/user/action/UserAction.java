@@ -33,19 +33,47 @@ public class UserAction {
 			}else if (action.equalsIgnoreCase("searchByDate")) {
 				url = searchByDate();
 			} else if (action.equalsIgnoreCase("sessionTimeOut")) {
-	            url = sessionTimeOut();
-	        }
+        	            url = sessionTimeOut();
+        	        }else if (action.equalsIgnoreCase("viewLogin")) {
+                            url = viewLogin();
+                        }else if (action.equalsIgnoreCase("addUser")) {
+                            url = addUser();
+                        }else if (action.equalsIgnoreCase("updateMultipleUsers")) {
+                            url = updateMultipleUsers();
+                        }else if (action.equalsIgnoreCase("deleteMultipleUsers")) {
+                            url = deleteMultipleUsers();
+                        }
 	       return url;
 	       
 	}
 
-	private String sessionTimeOut() {
+	private String deleteMultipleUsers() {
+	    new UserService(request, response).deleteMultipleUsers();
+            return "Controller?process=UserProcess&action=viewLogin";
+    }
+
+    private String updateMultipleUsers() {
+	    new UserService(request, response).updateMultipleUsers();
+            return "Controller?process=UserProcess&action=viewLogin";
+    }
+
+    private String addUser() {
+	    new UserService(request, response).addUser();
+            return "Controller?process=UserProcess&action=viewLogin";
+    }
+
+    private String viewLogin() {
+	    new UserService(request, response).viewLogin();
+            return "logindetails.jsp";
+    }
+
+    private String sessionTimeOut() {
 		return "sessiontimeout.jsp";
 	}
 
 	private String searchByDate() {
 		new UserService(request, response).searchByDate();
-        return "feesCollectionDetails.jsp";
+                return "feesCollectionDetails.jsp";
 	}
 
 	private String advanceSearchByParents() {

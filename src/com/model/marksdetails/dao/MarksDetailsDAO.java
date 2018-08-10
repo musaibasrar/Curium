@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
@@ -120,13 +121,12 @@ public class MarksDetailsDAO {
 			}
 		}
 
-		public boolean deleteMultiple(List ids, List studentListids) {
+		public boolean deleteMultiple(List ids) {
 			boolean result= false;
 			try {
 				transaction = session.beginTransaction();
-				Query query = session.createQuery("delete from Marks  where marksid IN (:ids) and sid IN (:studentids)");
+				Query query = session.createQuery("delete from Marks  where marksid IN (:ids)");
 				query.setParameterList("ids", ids);
-				query.setParameterList("studentids", studentListids);
 				query.executeUpdate();
 				transaction.commit();
 				result=true;
@@ -153,6 +153,51 @@ public class MarksDetailsDAO {
 				return results;
 			}
 		}
+
+        public Marks readMarks(Integer sid, Integer subjectId, Integer examId, String academicYear) {
+
+                Marks marks = new Marks();
+                try {
+
+                    transaction = session.beginTransaction();
+                    Query query = session.createQuery("From Marks where sid = '"+sid+"' and subid = "+subjectId+" and examid = "+examId+" and academicyear = '"+academicYear+"' ");
+                    marks = (Marks) query.uniqueResult();
+                    transaction.commit();
+            } catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+            } finally {
+                     session.close();
+                    return marks;
+            }
+        }
+
+        public boolean updateMarks(Map<Integer, Integer> idsMarks) {
+            boolean result = false;         
+            
+            try{
+                    transaction = session.beginTransaction();
+                    for (Map.Entry<Integer, Integer> mapIdsMarks: idsMarks.entrySet()) {
+                            Query query = session.createQuery("update Marks set marksobtained = "+mapIdsMarks.getValue()+" where marksid="+mapIdsMarks.getKey()+"");
+                            query.executeUpdate();
+                    }
+            
+            result = true;
+            
+    
+                    transaction.commit();
+                    
+            }  catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+            } catch(Exception e){
+                    e.printStackTrace();
+            }
+            finally {
+                    session.close();
+                    return result;
+            }
+    }
 	
 	
 	

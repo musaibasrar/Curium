@@ -98,12 +98,37 @@ public class AttendanceAction {
 			url = exportMonthlyAttendanceStaff();
 		}else if ("downloadStaffAttendance".equalsIgnoreCase(action)) {
 			url = downloadStaffAttendance();
-		}
+		}else if ("markAttendance".equalsIgnoreCase(action)) {
+                    url = markAttendance();
+                }else if ("getSubjects".equalsIgnoreCase(action)) {
+                    getSubjects();
+                }else if ("printAttendanceReport".equalsIgnoreCase(action)) {
+                   url = printAttendanceReport();
+                }
 		return url;
 	}
 	
 	
-	private String downloadStaffAttendance() {
+	private String printAttendanceReport() {
+	    return "printattendancereport.jsp";
+    }
+
+    private void getSubjects() {
+	    
+	    try {
+            new AttendanceService(request, response).getSubjects();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private String markAttendance() {
+        new AttendanceService(request, response).markAttendance();
+        return "attendancemark.jsp";
+    }
+
+    private String downloadStaffAttendance() {
 		
 		if(new AttendanceService(request, response).downloadFileStaff()){
 			return "attendanceexportsuccessstaff.jsp";
@@ -198,10 +223,8 @@ public class AttendanceAction {
 
 	private String searchStudentAttendanceDetailsMark() {
 		
-		if(new AttendanceService(request, response).viewStudentAttendanceDetailsMark()){
+	            new AttendanceService(request, response).viewStudentAttendanceDetailsMark();
 			return "attendancemark.jsp";
-		}
-		return errorPage;
 	}
 
 	private String searchStudentAttendanceDetailsMonthlyGraph() {
@@ -214,7 +237,7 @@ public class AttendanceAction {
 
 	private String updateStudentAttendanceDetails() {
 		if(new AttendanceService(request, response).updateStudentAttendanceDetails()){
-			return "viewattendance.jsp";
+			return "updateattendancesuccess.jsp";
 		}
 		return errorPage;
 	}

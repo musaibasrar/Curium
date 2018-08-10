@@ -571,7 +571,6 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		
 		try{
 			transaction = session.beginTransaction();
-			
 			for (Staffdailyattendance staff : listStaffAttendance) {
 				Staffdailyattendance staffSingle = new Staffdailyattendance();
 				Query query = session.createQuery("from Staffdailyattendance where attendeeid = '"+staff.getAttendeeid()+"' and academicyear='"+staff.getAcademicyear()+"' and date=CURDATE()");
@@ -588,5 +587,64 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			session.close();
 		}
 	}
+
+    public boolean checkAttendace(String subjectName, String examLevelCode, String currentAcademicYear, String branchId) {
+        
+                List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
+                try{
+                        transaction = session.beginTransaction();
+                        studentDailyAttendance = session.createQuery("from Studentdailyattendance  where subject = '"+subjectName+"' and examlevelcode = '"+examLevelCode+"' and academicyear = '"+currentAcademicYear+"' and branchid="+branchId).list();
+                        transaction.commit();
+                }catch(HibernateException e){
+                        logger.info(e);
+                }finally{
+                        session.close();
+                }
+                
+                if(studentDailyAttendance.size()>0){
+                    return true;
+                }
+                return false;
+        
+}
+
+    public List<Studentdailyattendance> getStudentAttendance(String HQL) {
+        
+        List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
+        
+        try{
+                transaction = session.beginTransaction();
+                studentDailyAttendance = session.createQuery(HQL).list();
+                transaction.commit();
+        }catch(HibernateException e){
+                logger.info(e);
+        }finally{
+                session.close();
+        }
+        return studentDailyAttendance;
+        
+    }
+
+    public boolean updateStudentAttendanceDetails(String[] studentAttendanceStatusId, String[] studentAttendanceStatus) {
+        
+        try{
+            transaction = session.beginTransaction();
+            int i =0;
+            for (String attIn : studentAttendanceStatusId) {
+                    if(!attIn.equalsIgnoreCase("")) {
+                        Query query = session.createQuery("update Studentdailyattendance set attendancestatus = '"+studentAttendanceStatus[i]+"' where attendanceid = '"+Integer.parseInt(attIn)+"'");
+                        query.executeUpdate();
+                    }
+                    i++;
+            }
+            transaction.commit();
+            return true;
+    }catch(Exception e){
+            System.out.println("error "+e);
+    }finally{
+            session.close();
+    }
+    return false;
+    }
 
 }

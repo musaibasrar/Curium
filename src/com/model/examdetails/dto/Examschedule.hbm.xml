@@ -23,8 +23,8 @@
         <property name="examname" type="string">
             <column name="examname" length="30" />
         </property>
-        <property name="classes" type="string">
-            <column name="classes" length="45" />
+        <property name="centercode" type="string">
+            <column name="centercode" length="200" />
         </property>
         <property name="academicyear" type="string">
             <column name="academicyear" length="45" />

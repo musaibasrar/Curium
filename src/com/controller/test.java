@@ -38,6 +38,14 @@ public class test {
 			System.out.println("key is "+string.getKey());
 		}*/
 		
+	    double ip=348842;
+	            double i2=ip/60000;
+	            System.out.println("double"+i2);
+	    
+	    
+	    int number = 10;        
+	    String str = String.format("%04d", number);  // 0009      
+	    System.out.printf("original number %d, numeric string with padding : %s", 9, str);
 		
 		
 		 SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");

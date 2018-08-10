@@ -3,7 +3,10 @@ package com.model.marksdetails.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.model.branch.service.BranchService;
 import com.model.examdetails.service.ExamDetailsService;
+import com.model.examlevels.service.ExamLevelService;
+import com.model.language.service.LanguageService;
 import com.model.marksdetails.service.MarksDetailsService;
 import com.model.student.service.StudentService;
 
@@ -35,13 +38,20 @@ public class MarksDetailsAction {
 			url = generateReport();
 		}else if (action.equalsIgnoreCase("searchForReport")) {
 			url = searchForReport();
-		}
+		}else if (action.equalsIgnoreCase("enterMarks")) {
+                    url = enterMarks();
+            }
 		return url;
 	}
 
 	
 
-	private String searchForReport() {
+	private String enterMarks() {
+	        new MarksDetailsService(request, response).enterMarks();
+	        return "marksentry.jsp";
+    }
+
+    private String searchForReport() {
 		new MarksDetailsService(request, response).Search();
         return "progressreport.jsp";
 	}

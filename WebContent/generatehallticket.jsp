@@ -439,7 +439,7 @@ background-color:rgba(0, 0, 0, 0);
 		                <c:forEach varStatus="status" items="${studentList}" var="student">{
 		                    value:'<c:out default="0" value="${student.admissionnumber}" />',
 		                    name:'<c:out default="0" value="${student.name}" />',
-		                    classandsec:'<c:out default="0" value="${student.classstudying}" />',
+		                    
 		                    id:'<c:out default="0" value="${student.sid}" />',
 		                    
 		                }<c:if test="${!status.last}">,</c:if>
@@ -462,7 +462,7 @@ background-color:rgba(0, 0, 0, 0);
 		                    select: function( event, ui ) {
 		                        $( "#studentId").val( ui.item.id );
 		           			  $( "#studentName").val( ui.item.name );
-		           			$( "#classandsec").val( ui.item.classandsec );
+		           			/* $( "#classandsec").val( ui.item.classandsec ); */
 		                        /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
 		                        return true;
 		                    }
@@ -508,88 +508,41 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td><br /></td>
-
 						</tr>	
 						<tr>
 							<td><br /></td>
-
-						</tr>		
-
-<tr>
-<td><br/></td>
-</tr>
-
-	<tr>
-							<td><br /></td>
-
 						</tr>
                             <tr>
-
                                 <td class="alignLeft" >
-                                    
-                                    Academic Year*&nbsp;&nbsp;&nbsp;&nbsp; 
-
-                                
                                     <label>
-                                        <label> <select name="academicyear" id="academicyear"
-									style="width: 180px">
+                                        <label> <select name="searchacademicyear" id="searchacademicyear"
+									style="width: 180px;display: none;">
 										<option selected value="${currentYear}">${currentYear}(Current Year)</option>
-										<option value="2015/16">2015/16</option>
-										<option value="2016/17">2016/17</option>
-										<option value="2017/18">2017/18</option>
 										<option value="2018/19">2018/19</option>
 										<option value="2019/20">2019/20</option>
-										
+										<option value="2019/20">2020/21</option>
 								</select>
-
 							</label> 
                                     </label>
-
                                 </td>
-
-
                             </tr>
-                            
-                            <tr>
-							<td><br /></td>
-
-						</tr>
 						<tr>
-							<td><br /></td>
-
-						</tr>
-									
-						
-						<tr>
-						
 						<td width="16%" class="alignLeft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						Class &nbsp;&nbsp;&nbsp;&nbsp;
-							 <label> <select name="class" id="class"
-									style="width: 180px">
-										<option selected>${selectedclass}</option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
-								</select> 
+						Examination Level &nbsp;&nbsp;&nbsp;&nbsp;
+							 <label> <select name="searchexamlevel" id="searchexamlevel"
+									style="width: 180px;" required>
+										<option selected></option>
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}:${examleveldetails.levelname}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
+								</select>
 							</label>
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							OR
-							&nbsp;&nbsp;&nbsp;&nbsp;
 							
-							Admission No: &nbsp;&nbsp;&nbsp;&nbsp;
-							<label><input type="text" name="admno" id="admno" value="${selectedadmissionno}" style="width: 180px">
-							<input type="hidden" name="classandsec" id="classandsec" value="${selectedclassandsec}" style="width: 180px">
-							<input type="hidden" name="studentName" id="studentName" value="${selectedstudentname}" style="width: 180px">
+							<label>
+							<input type="hidden" name="hiddenexamlevel" id="hiddenexamlevel" value="${selectedexamlevel}" style="width: 180px">
+							<input type="hidden" name="hiddencentercode" id="hiddencentercode" value="${selectedcentercode}" style="width: 180px">
 							</label>
 							
 							</td>
@@ -607,22 +560,22 @@ for(Cookie cookie : cookies){
 								
 								<tr>
 						<td width="80%" class="alignLeft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						Exam &nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;
+						Center &nbsp;&nbsp;&nbsp;&nbsp;
 							<label>
-									<select name="exam" id="exam"
-									style="width: 180px">
-										<option selected>${selectedexam}</option>
-
-										<c:forEach items="${examdetails}" var="listExam">
-
-											<option value="${listExam.examname}">
-												<c:out value="${listExam.examname}" />
+									<select name="searchcentercode" id="searchcentercode"
+									style="width: 180px;" required>
+										<option selected></option>
+										<c:forEach items="${branchList}" var="branchlist">
+											<option value="${branchlist.centercode}:${branchlist.centername}" >
+												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
 											</option>
-
-
 										</c:forEach>
-
-								</select></td>
+								</select>
+								
+								</label>
+								</td>
 						</tr>
 										
 					
@@ -664,7 +617,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Exam<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
-						<th title="click to sort" class="headerText">Class<img
+						<th title="click to sort" class="headerText">Center Codes<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Subject<img
@@ -690,17 +643,14 @@ for(Cookie cookie : cookies){
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
 							<td class="dataText"><input type="checkbox" id="<c:out value="${examschedule.idexamschedule}"/>" class="chcktbl" name="idexamschedule" value="<c:out value="${examschedule.idexamschedule}"/>" /></td>
-							<td class="dataText"><input type="text" name="examname" class="transparent" value="<c:out value="${examschedule.examname}"/>" /></td>
-							<td class="dataText"><input type="text" name="classes" class="transparent" value="<c:out value="${examschedule.classes}"/>" /></td>
+							<td class="dataText"><input type="text" name="examlevels" class="transparent" value="<c:out value="${examschedule.examname}"/>" /></td>
+							<td class="dataText"><input type="text" name="centercodes" class="transparent" value="<c:out value="${examschedule.centercode}"/>" /></td>
 							<td class="dataText"><input type="text" name="subject" class="transparent" value="<c:out value="${examschedule.subject}" />" /></td>
 							<td class="dataText"><input type="text" name="date" class="transparent" value="<c:out value="${examschedule.date}" />" /></td>
 							<td class="dataText"><input type="text" name="starttime" class="transparent" value="<c:out value="${examschedule.starttime}" />" /></td>
 							<td class="dataText"><input type="text" name="endtime" class="transparent" value="<c:out value="${examschedule.endtime}" />" /></td>
 						</tr>
-					</c:forEach>
-
-
-
+					</c:forEach> 
 
 				</tbody>
 				<tfoot><tr>

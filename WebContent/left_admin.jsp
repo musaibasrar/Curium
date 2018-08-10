@@ -236,12 +236,11 @@ Author     : Musaib
             }*/
             a{
                 text-decoration:none;
-
-                color:#cfe0ea;;
+                color:#cfe0ea;
             }
             a:hover{
-                text-decoration:none;
-                color:#FFFFFF;
+                text-decoration:underline;
+                color:#EB6000;
             }
             h1{
                 font-size:140%;
@@ -408,6 +407,8 @@ Author     : Musaib
 
 
             });
+            
+       
         </script>
     </head>
       <%
@@ -436,25 +437,34 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="Controller?process=StudentProcess&action=viewAll" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="Controller?process=StudentProcess&action=addNew" style="font-size: 12px;">Add New</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=viewAll" class="featurehyperlink" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=addNew" class="featurehyperlink" style="font-size: 12px;">Add New</a><br/>
+            </div>
+            
+            <h5 style="font-size: 12px"><a href="#">Reports</a></h5>
+            <div>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=studentsListReport" style="font-size: 12px;">Students Details</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=questionPaperSet" style="font-size: 12px;">Question Paper Set</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=languageListReport" style="font-size: 12px;">Language Report</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=resultReport" style="font-size: 12px;">Result Report</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=rankListReport" style="font-size: 12px;">Rank List</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
-                <a target="mainFrame" href="attendancemark.jsp" style="font-size: 12px;">Mark Attendance</a><br/>
-                <a target="mainFrame" href="attendanceexport.jsp" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
+                <!-- <a target="mainFrame" href="attendanceexport.jsp" style="font-size: 12px;">Export Attendance</a><br/> -->
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllEmployee" style="font-size: 12px;">View All</a><br/>
                 <a target="mainFrame" href="Controller?process=EmployeeProcess&action=addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
-            </div>
+            </div> -->
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
@@ -466,7 +476,7 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             
             <div>
-                <a target="mainFrame" href="marksentry.jsp" style="font-size: 12px;">Enter Marks</a><br/>
+                <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=enterMarks" style="font-size: 12px;">Enter Marks</a><br/>
                 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
             	<a target="mainFrame" href="progressreport.jsp" style="font-size: 12px;">Generate Report</a><br/>
             </div> 
@@ -478,16 +488,16 @@ for(Cookie cookie : cookies){
 
             </div>
             
-            <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
                 <a target="mainFrame" href="AdvanceSearch.jsp" style="font-size: 12px;">Search</a><br/>
 
 
-            </div>
+            </div> -->
 
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="Promotion.jsp" style="font-size: 12px;">Promotions</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=promotion" style="font-size: 12px;">Promotions</a><br/>
 
 
             </div>
@@ -496,22 +506,22 @@ for(Cookie cookie : cookies){
             <div >
                 <a target="mainFrame" href="Backup&Restore.jsp" style="font-size: 12px;">Backup</a><br/>
                 <a target="mainFrame" href="changePassword.jsp" style="font-size: 12px;">Change Password</a><br/>
-                <a target="mainFrame" href="uploadattendance.jsp" style="font-size: 12px;">upload attendance file</a><br/>
+                <!-- <a target="mainFrame" href="uploadattendance.jsp" style="font-size: 12px;">upload attendance file</a><br/> -->
             </div>
             
             
-            <h5 style="font-size: 12px"><a href="#" >Generate Cards</a></h5>
+           <!--  <h5 style="font-size: 12px"><a href="#" >Generate Cards</a></h5>
             <div >
                 <a target="mainFrame" href="generateids.jsp" style="font-size: 12px;">Generate IDs</a><br/>
-            </div>
+            </div> -->
             
             <h5 style="font-size: 12px"><a href="#" >Documents</a></h5>
             <div >
-                <a target="mainFrame" href="studentsdetailsreports.jsp" style="font-size: 12px;">Student Details</a><br/>
+                <!-- <a target="mainFrame" href="studentsdetailsreports.jsp" style="font-size: 12px;">Student Details</a><br/>
                 <a target="mainFrame" href="studentsdetailsbonafide.jsp" style="font-size: 12px;">Bonafide Certificate</a><br/>
-                <a target="mainFrame" href="Controller?process=DocumentsProcess&action=transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
+                <a target="mainFrame" href="Controller?process=DocumentsProcess&action=transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/> -->
                 <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
-                <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
+                <!-- <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTimeTable" style="font-size: 12px;">Time Table</a><br/> -->
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
@@ -529,7 +539,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
             </div>
             
-             <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
+             <!-- <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=HrProcess&action=advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
@@ -542,7 +552,7 @@ for(Cookie cookie : cookies){
             <div >
                 <a target="mainFrame" href="Controller?process=HrProcess&action=leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
-            </div>
+            </div> -->
             
             </div>
                    

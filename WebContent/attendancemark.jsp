@@ -130,7 +130,7 @@
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
-	text-align: left;
+	text-align: right;
 	vertical-align: middle;
 	font-weight: bold;
 }
@@ -322,6 +322,33 @@
 	font-weight: bold;
 	height: 22px;
 }
+
+.alert-box {
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;  
+}
+.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.attendanceupdate {
+    color: black;
+    background-color: #fff1b7;
+    border-color: #d6e9c6;
+    display: none;
+}
 </style>
 <style>
 #button {
@@ -494,8 +521,67 @@
 	}
 	
 	
+	    var xmlHttp;
+	    var count;
+	    function getSubjects() {
+
+			var selected=document.getElementById('examlevel').value;
+
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "AjaxController?process=AttendanceProcess&action=getSubjects&urlexamlevel="+selected,true);
+			xmlHttp.send(null);
+		}
+	    
+		function stateChanged() {
+
+			if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+				document.getElementById("subjectlist").innerHTML = xmlHttp.responseText;
+			}
+		}
+		function GetXmlHttpObject() {
+			var xmlHttp = null;
+			try {
+				xmlHttp = new XMLHttpRequest();
+			} catch (e) {
+				try {
+					xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+				} catch (e) {
+					xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+			}
+			return xmlHttp;
+		}
+
+	
 	
 </script>
+
+<script type="text/javascript">
+					
+					var attendancesave='<c:out default="" value="${attendancesave}"/>';
+					var attendanceupdate='<c:out default="" value="${attendanceupdate}"/>';
+					
+		            if(attendancesave == "true"){
+		            	 $(function(){
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            	 });
+		            	 }else if(attendancesave == "false"){
+		            	  $(function(){
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            		 });
+		            	 }else if(attendanceupdate == "true"){
+		                   	 $(function(){
+		                   		 $( "div.attendanceupdate" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		                   	 });
+		                   	 }
+        </script>
 
 </head>
 <%
@@ -517,11 +603,12 @@ for(Cookie cookie : cookies){
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form id="form1"  method="POST">
-		<!-- <div style="height: 28px">
-			<button id="add">Add Department</button>
-			<br />
-		</div> -->
+	
+		<div class="alert-box success">Attendance has been marked successfully!!!</div>
+		<div class="alert-box failure">Unable to mark the attendance!!!</div>
 
+		<div class="alert-box attendanceupdate">Cannot mark the attendance twice!!!</div>
+		
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
@@ -534,7 +621,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Date &nbsp;</td>
 							<td width="12%" align="left"><label> <input
-									name="dateofattendance" type="text" class="textField"
+									name="dateofattendance" type="text" class="textField" style="width: 195px;"
 									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" readonly="readonly" data-validate="validate(required)"/>
 							</label></td>
 							
@@ -547,38 +634,31 @@ for(Cookie cookie : cookies){
 
 
 						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 90px">
-										<option selected>Class</option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
+							<td class="alignRightFields">Examination Level &nbsp;</td>
+							<td width="70%"><label> <select name="examlevel" id="examlevel"
+									style="width: 200px;" onchange="getSubjects()" required>
+										<option selected></option>
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
 								</select>
 
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 50px">
-										<option selected>Sec</option>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>E</option>
-										<option>F</option>
-										<option>G</option>
+							</label> 
+						</tr>
 
+						<tr>
+							<td><br /></td>
+
+						</tr>
+
+						<tr >
+							<td class="alignRightFields">Subject&nbsp;</td>
+							<td width="70%" id="subjectlist"><select
+									style="width: 200px;" required>
+										<option selected></option>
 								</select>
-							</label>
 						</tr>
 
 						<tr>
@@ -625,7 +705,9 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Attendance Status&nbsp;</th>
+						<th title="click to sort" class="headerText">${subjectlisttodisplay}
+						<input type="hidden" name="subjectlisttodisplay" value="${subjectlisttodisplay}"/>
+						<input type="hidden" name="searchexamlevel" value="${searchexamlevel}"/>&nbsp;</th>
 					</tr>
 				</thead>
 
@@ -642,7 +724,11 @@ for(Cookie cookie : cookies){
 										value="${attendanceList.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${attendanceList.name}" /></td>
 							<td class="dataText">
-							<input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" value="P" maxlength="1">
+							<select name="studentAttendanceStatus" id="studentAttendanceStatus">
+										<option selected value="Present" >Present</option>
+											<option value="Present" >Present</option>
+											<option value="Absent" >Absent</option>
+								</select>
 							</td>
 						</tr>
 					</c:forEach>
@@ -651,7 +737,7 @@ for(Cookie cookie : cookies){
 					<tr>
 					
 						<td class="footerTD" colspan="2">
-							<button id="update">Update</button>
+							<button id="update">Submit</button>
 							<!-- <input value="Delete Stamp Fees"
 							type="submit" id="deleteStamp" /> --></td>
 							

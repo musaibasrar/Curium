@@ -360,10 +360,10 @@
 <script type="text/javascript">
 	function searchForMarks() {
 		
-		var examName = document.getElementById("exam").options[document.getElementById("exam").selectedIndex].text;
+		/* var examName = document.getElementById("exam").options[document.getElementById("exam").selectedIndex].text;
 		var subName = document.getElementById("subject").options[document.getElementById("subject").selectedIndex].text;
 		document.getElementById('subjectselected').value = subName;
-		document.getElementById('examselected').value = examName;
+		document.getElementById('examselected').value = examName; */
 		var form1 = document.getElementById("form1");
 		form1.action = "Controller?process=MarksDetailsProcess&action=viewMarks";
 		form1.method = "POST";
@@ -492,6 +492,52 @@ function checkMandatoryandSubmit(){
     	
     }
     
+		var xmlHttp;
+		var count;
+		function getSubjects() {
+		
+			var selected=document.getElementById('examlevel').value;
+		
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+		        
+		     } else if (window.ActiveXObject) {
+		    	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		         
+		     }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "AjaxController?process=AttendanceProcess&action=getSubjects&urlexamlevel="+selected,true);
+			xmlHttp.send(null);
+		}
+		
+		function stateChanged() {
+		
+			if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+				document.getElementById("subjectlist").innerHTML = xmlHttp.responseText;
+			}
+		}
+		function GetXmlHttpObject() {
+			var xmlHttp = null;
+			try {
+				xmlHttp = new XMLHttpRequest();
+			} catch (e) {
+				try {
+					xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+				} catch (e) {
+					xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+			}
+			return xmlHttp;
+		}
+    
+		function validateList() {
+			if (document.getElementById("centercode").value.length == 0 || document.getElementById("examlevel").value.length == 0 
+					|| document.getElementById("subjectlist").value.length == 0 )
+			{
+				alert("Filter the records with Center Code, Exam Level & Subject");
+			}
+
+		}
    
         </script>
 
@@ -530,14 +576,38 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
+							<tr>
+							<td><br /></td>
 
+						</tr>
+							<tr>
+							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="academicyear" id="academicyear"
+									style="width: 200px;" required>
+										<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2019/20" >2019/20</option>
+											<option value="2020/21" >2020/21</option>
+								</select>
+							</label> 
+						</tr>
+						
 						<tr>
-							<td class="alignRightFields">Name &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
+							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
+									style="width: 200px;">
+										<option selected></option>
+										<c:forEach items="${branchList}" var="branchlist">
+											<option value="${branchlist.centercode}:${branchlist.centername}" >
+												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
+											</option>
+										</c:forEach>
+								</select>
 							</label></td>
-							
 						</tr>
 
 						<tr>
@@ -547,96 +617,53 @@ for(Cookie cookie : cookies){
 
 
 						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 150px">
-										<option selected>Class</option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
-								</select>
-
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 120px">
-										<option selected>Sec</option>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>E</option>
-										<option>F</option>
-										<option>G</option>
-
-								</select>
-							</label>
-						</tr>
-
-
-				<tr>
-							<td><br /></td>
-						</tr>
-
-<tr>
-						<td class="alignRightFields">Subject &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft"><label>
-									<select name="subject" id="subject"
-									style="width: 240px" ">
+						<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="examlevel" id="examlevel" onchange="getSubjects()"
+									style="width: 200px;">
 										<option selected></option>
-
-										<c:forEach items="${listSubject}" var="listSubject">
-
-											<option value="${listSubject.subid}">
-												<c:out value="${listSubject.subjectname}" />
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
 											</option>
-
-
 										</c:forEach>
-
-								</select></td>
-						
-						</tr>						
-						
+								</select>
+							</label> 
+						</tr>
 						<tr>
 							<td><br /></td>
-
 						</tr>
 						
 						<tr>
-						<td class="alignRightFields">Exam &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft"><label>
-									<select name="exam" id="exam"
-									style="width: 240px">
+							<td class="alignRightFields">Language &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="languageopted" id="languageopted"
+									style="width: 200px;">
 										<option selected></option>
-
-										<c:forEach items="${listExam}" var="listExam">
-
-											<option value="${listExam.exid}">
-												<c:out value="${listExam.examname}" />
+										<c:forEach items="${languageslist}" var="languageslist">
+											<option value="${languageslist.language}" >
+												<c:out value="${languageslist.language}" />
 											</option>
-
-
 										</c:forEach>
-
-								</select></td>
+								</select>
+							</label> 
 						</tr>
-						
+
 						<tr>
 							<td><br /></td>
 						</tr>
 						
+						<tr>
+							<td class="alignRightFields">Subject&nbsp;</td>
+							<td width="70%" id="subjectlist"><select
+									style="width: 200px;">
+										<option selected></option>
+								</select>
+						</tr>					
 						
-						
-						
+						<tr>
+							<td><br /></td>
+						</tr>
 						
 						<tr>
 							<!-- <td class="alignRightFields">Subject &nbsp;</td> -->
@@ -662,39 +689,19 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-
 							<td width="30%" class="alignRight"></td>
-
 							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
 							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
+								<button id="search" onmouseover="validateList();" onfocus="validateList();">Search</button>
 							</td>
 						</tr>
-						
-						
 						<tr>
 							<td><br /></td>
-
 						</tr>
-						
+						<tr>
+							<td><br /></td>
+						</tr>
 					
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						
-						<tr>
-							<td><br /></td>
-						</tr>
 					</table>
 					
 					<table>
@@ -737,7 +744,6 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class</th>
 						<th title="click to sort" class="headerText">Marks</th>
 
 
@@ -746,28 +752,26 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 				</thead>
 
 				<tbody>
-					<c:forEach items="${newStudentList}" var="Parents" varStatus="status">
+					<c:forEach items="${marksstudentmap}" var="Parents" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
-								name="studentIDs"
-								value="<c:out value="${Parents.student.sid}"/>" /></td>
+								id="<c:out value="${Parents.value.marksid}"/>" class="chcktbl"
+								name="marksIDs"
+								value="<c:out value="${Parents.value.marksid}:${status.index}"/>" /></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText"><c:out value="${Parents.student.classstudying}" /></td>
-							<td class="dataText"><input type="text" id="studentMarks" name="studentMarks" value="<c:out value="${newMarksDetails[status.index].marksobtained}" />"><%-- <input type="text"
+										value="${Parents.key.student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${Parents.key.student.name}" /></td>
+							<td class="dataText"><input type="text" id="studentMarks" name="studentMarks" value="<c:out value="${Parents.value.marksobtained}" />">
+							<%-- <input type="text"
 								id="studentMarks" 
 								name="studentMarks"
 								onkeyup="checkMandatory();"
 								onkeypress="return event.charCode >= 00 && event.charCode <=57"
 								maxlength="3"
 								 /> --%>
-								 <input type="hidden" id="marksid" name="marksid" value="<c:out value="${newMarksDetails[status.index].marksid}" />">
-								 
 								 </td>
 
 

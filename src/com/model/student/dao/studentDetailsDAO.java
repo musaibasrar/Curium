@@ -236,7 +236,7 @@ public class studentDetailsDAO {
 	}
 
 	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Student> getListOfStudents(String classofStd, int branchId) {
+	public List<Student> getListOfStudents(String examLevel, int branchId) {
 		java.util.List<Student> results = new ArrayList<Student>();
 
 		try {
@@ -245,9 +245,7 @@ public class studentDetailsDAO {
 			transaction = session.beginTransaction();
 
 			results = (java.util.List<Student>) session.createQuery(
-					"From Student s where s.branchid="+branchId+" AND s.classstudying LIKE '" + classofStd
-							+ " %'").list();
-
+					"From Student s where s.branchid="+branchId+" AND s.examlevel = '" +examLevel+ "'").list();
 			transaction.commit();
 
 		} catch (HibernateException hibernateException) {
@@ -456,8 +454,6 @@ public class studentDetailsDAO {
 	public java.util.List<Parents> getStudentsList(String query) {
 		java.util.List<Parents> parents = new ArrayList<Parents>();
         try {
-            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
-
             transaction = session.beginTransaction();
             Query HQLquery = session.createQuery(query);
             parents = (java.util.List<Parents>) HQLquery.list();
@@ -466,7 +462,6 @@ public class studentDetailsDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         }
-        //session.close();
         return parents;
 	}
 	
@@ -504,7 +499,7 @@ public class studentDetailsDAO {
 		}
 	}
 
-	public boolean updateStudent(Student student) {
+	/*public boolean updateStudent(Student student) {
 		
 		try {
 			transaction = session.beginTransaction();
@@ -519,7 +514,7 @@ public class studentDetailsDAO {
 			session.close();
 		}
 		return false;
-	}
+	}*/
 	
 	public List<Parents> readListStudentsSuperAdmin(int offset, int noOfRecords) {
 	        List<Parents> results = new ArrayList<Parents>();

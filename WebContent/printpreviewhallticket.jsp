@@ -62,7 +62,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 18px;
+	font-size: 28px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -71,7 +71,7 @@
 	font-weight: normal;
 	font-family: ariel;
 	color: black;
-	font-size: 12px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -178,6 +178,11 @@ span{
     		text-align: left;
    		    padding: 8px;
         }
+         .namedetailscenter{
+        	border: 0px solid #dddddd;
+    		text-align: right;
+   		    padding: 8px;
+        }
     </style>
 	
         <title>Print Hall Ticket</title>
@@ -205,7 +210,7 @@ for(Cookie cookie : cookies){
 		<br>
                         <c:forEach items="${studentList}" var="Parents">
                         
-                        	<table width="100%" style="border-collapse: collapse;">
+                        	<!-- <table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				
@@ -218,8 +223,24 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td></td></tr>
 			<tr></tr>
-</table>
-
+</table> -->
+		<table width="100%" style="border-collapse: collapse;">
+			<tr>
+				<td align="center">
+				<img src="images/bielogo.png" width="100" height="150"/>
+				</td>
+				<td class="dataTextBoldCenter" style="width: 100%">
+				BOARD OF ISLAMIC EDUCATION <br>
+				KARNATAKA<br><br>
+				<label class="addressLine">HALL TICKET<br>
+				 </label>
+				</td>
+			</tr>
+			<tr>
+			<td></td></tr>
+			<tr></tr>
+	</table>
+	
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
 
@@ -228,8 +249,7 @@ for(Cookie cookie : cookies){
                 </tr>
             </TABLE>
 
-			<table width="100%" style="border-collapse: collapse;">
-					<tr><td><br></td></tr>
+			<%-- <table width="100%" style="border-collapse: collapse;">
 				<tr>
 					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket (${examname})
 					</td>
@@ -238,24 +258,45 @@ for(Cookie cookie : cookies){
 					<td></td>
 				</tr>
 				<tr></tr>
-			</table>
+			</table> --%>
 
 			<table style=" border-collapse: collapse;width: 100%;">
-											
-                            <tr style="border-color:#000000">
-                                <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.name}"/></label></td>
-                                <td class="namedetails"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><c:out value="${Parents.student.classstudying}"/></td>
-                                
-                             </tr>
-                             
-                             
-                             <tr>   
-                                <td class="namedetails"><label>Admission No:&nbsp;&nbsp;&nbsp;</label><c:out value="${Parents.student.admissionnumber}"/></td>
+							<tr>   
+                                <td class="namedetails"><label>Admission No:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.admissionnumber}"/></label></td>
                                 <td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
 									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td>
                             </tr>
-                            
+                            				
+                            <tr style="border-color:#000000">
+                                <td class="namedetails"><label>Exam Code/Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${examcodename}"/></label></td>
+                                <td class="namedetails"><label>Center Code/Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${centercodename}"/></label></td>
+                             </tr>
+                             
+                             <tr style="border-color:#000000">
+                                <td class="namedetails"><label>Language Opted.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.languageopted}"/></label></td>
+                             </tr> 
+                             
+                             
+                             <tr style="border-color:#000000">
+                                <td class="namedetails"><label>Candidate Name :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.name}"/></label></td>
+                             	
+                             	<c:if test="${(Parents.student.guardiandetails != '')}">
+                                <td class="namedetails"><label>Guardian Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.guardiandetails}"/></label></td>
+                                </c:if>
+
+							<c:if test="${(Parents.fathersname != '')}">
+                                <td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.fathersname}"/></label></td>
+							</c:if>
+							
+							<c:if test="${(Parents.mothersname != '')}">
+                                <td class="namedetails"><label>Husband's Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.mothersname}"/></label></td>
+							</c:if>	
+                             
+                             </tr>                            
+
+																                                	
+                             
                             <tr>
                             <td><br></td>
                             </tr>
@@ -304,9 +345,9 @@ for(Cookie cookie : cookies){
 			</tr>
 		<tr>
 		<td></td>
-		<td align="left">Accountant</td>	
-			<td align="centre">Class Teacher</td>
-			<td align="centre">Head Master</td>
+		<td align="left">Candidate's Signature</td>	
+			<td align="centre">Seal & Sign of Organiser</td>
+			<td align="centre">Signature of Chief Examiner</td>
 			</tr>
 			
 			<tr>

@@ -11,11 +11,11 @@
         <property name="name" type="string">
             <column name="name" length="200" not-null="true" />
         </property>
-        <property name="classstudying" type="string">
-            <column name="classstudying" length="45" />
+        <property name="qualification" type="string">
+            <column name="qualification" length="45" />
         </property>
-        <property name="classadmittedin" type="string">
-            <column name="classadmittedin" length="45" />
+        <property name="examlevel" type="string">
+            <column name="examlevel" length="45" />
         </property>
         <property name="age" type="java.lang.Integer">
             <column name="age" />
@@ -26,17 +26,14 @@
         <property name="dateofbirth" type="date">
             <column name="dateofbirth" length="10" />
         </property>
-        <property name="bloodgroup" type="string">
-            <column name="bloodgroup" length="45" />
+        <property name="languageopted" type="string">
+            <column name="languageopted" length="45" />
         </property>
-        <property name="nationality" type="string">
-            <column name="nationality" length="45" />
+        <property name="districtcode" type="string">
+            <column name="districtcode" length="5" />
         </property>
-        <property name="religion" type="string">
-            <column name="religion" length="45" />
-        </property>
-        <property name="caste" type="string">
-            <column name="caste" length="45" />
+        <property name="centercode" type="string">
+            <column name="centercode" length="5" />
         </property>
         <property name="admissiondate" type="date">
             <column name="admissiondate" length="10" />
@@ -44,17 +41,8 @@
         <property name="admissionnumber" type="string">
             <column name="admissionnumber" length="20" />
         </property>
-        <property name="mothertongue" type="string">
-            <column name="mothertongue" length="45" />
-        </property>
         <property name="remarks" type="string">
             <column name="Remarks" length="500" />
-        </property>
-        <property name="schoollastattended" type="string">
-            <column name="schoollastattended" length="100" />
-        </property>
-        <property name="stdlaststudied" type="string">
-            <column name="stdlaststudied" length="45" />
         </property>
         <property name="createddate" type="date">
             <column name="createddate" length="10" />
@@ -68,50 +56,11 @@
         <property name="studentexternalid" type="string">
             <column name="studentexternalid" length="45" not-null="true" unique="true" />
         </property>
-        <property name="crecord" type="string">
-            <column name="crecord" length="45" />
-        </property>
-        <property name="crecorddate" type="date">
-            <column name="crecorddate" length="10" />
-        </property>
-        <property name="placeofbirth" type="string">
-            <column name="placeofbirth" length="100" />
-        </property>
-        <property name="nooftc" type="java.lang.Integer">
-            <column name="nooftc" />
-        </property>
-        <property name="dateoftc" type="date">
-            <column name="dateoftc" length="10" />
-        </property>
-        <property name="classonleaving" type="string">
-            <column name="classonleaving" length="45" />
-        </property>
-        <property name="dateleaving" type="date">
-            <column name="dateleaving" length="10" />
-        </property>
-        <property name="reasonleaving" type="string">
-            <column name="reasonleaving" length="500" />
-        </property>
-        <property name="notcissued" type="java.lang.Integer">
-            <column name="notcissued" />
-        </property>
-        <property name="datetcissued" type="date">
-            <column name="datetcissued" length="10" />
-        </property>
         <property name="guardiandetails" type="string">
             <column name="guardiandetails" length="200" />
         </property>
-         <property name="subsequentprogress" type="string">
-            <column name="subsequentprogress" length="500" />
-        </property>
           <property name="branchid" type="int">
             <column name="branchid" />
-        </property>
-        <property name="languagesstudied" type="string">
-            <column name="languagesstudied" length="80" />
-        </property>
-        <property name="instructionmediumlastschool" type="string">
-            <column name="instructionmediumlastschool" length="45" />
         </property>
     </class>
 </hibernate-mapping>

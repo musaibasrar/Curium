@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -388,141 +389,7 @@
 	}
 	
 </script>
-<script type="text/javascript">
-                       
-            var students = [
-            <c:forEach varStatus="status" items="${studentList}" var="student">{
-                value:'<c:out default="0" value="${student.admissionnumber}" />',
-                name:'<c:out default="0" value="${student.name}" />',
-                classandsec:'<c:out default="0" value="${student.classstudying}" />',
-                id:'<c:out default="0" value="${student.sid}" />',
-                externalid:'<c:out default="0" value="${student.studentexternalid}" />',
-            }<c:if test="${!status.last}">,</c:if>
-            </c:forEach>
-        ];
-            
-            
-            var xAxis = [
-                            <c:forEach varStatus="status" items="${xaxis}" var="xaxis">{
-                                value:'<c:out default="0" value="${xaxis}" />',
-                            }<c:if test="${!status.last}">,</c:if>
-                            </c:forEach>
-                        ];
-            
-            function getFields(input, field) {
-                var output = [];
-                for (var i=0; i < input.length ; ++i)
-                    output.push(input[i][field]);
-                return output;
-            }
 
-            var xAxisValues = getFields(xAxis, "value");
-            
-            
-            var yAxis = [
-                         <c:forEach varStatus="status" items="${yaxis}" var="yaxis">{
-                             value:'<c:out default="0" value="${yaxis}" />',
-                         }<c:if test="${!status.last}">,</c:if>
-                         </c:forEach>
-                     ];
-         
-         function getFields(input, field) {
-             var output = [];
-             for (var i=0; i < input.length ; ++i)
-                 output.push(input[i][field]);
-             return output;
-         }
-
-         var yAxisValues = getFields(yAxis, "value");
-            
-            
-        $(function() {
-            $( "#admno").autocomplete({
-                source: students,
-                minLength: 1,
-                change:function(event,ui){
-                    $( "#studentId").val( ui.item.id );
-                    
-                    
-                },
-                focus: function( event, ui ) {
-                    $( "#studentId").val( ui.item.id );
-                    return true;
-                },
-                select: function( event, ui ) {
-                    $( "#studentId").val( ui.item.id );
-       			  $( "#studentname").val( ui.item.name );
-       			$( "#classandsec").val( ui.item.classandsec );
-               $("#studentexternalid").val( ui.item.externalid );
-                    return true;
-                }
-            }).data( "autocomplete" )._renderItem = function( ul, item ) {
-                return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +" </b> </a>" )
-                .appendTo( ul );
-            };
-            
-                       
-
-        });
-        
-        $(function() {
-            $( "#admnograph").autocomplete({
-                source: students,
-                minLength: 1,
-                change:function(event,ui){
-                    $( "#studentIdgraph").val( ui.item.id );
-                    
-                    
-                },
-                focus: function( event, ui ) {
-                    $( "#studentIdgraph").val( ui.item.id );
-                    return true;
-                },
-                select: function( event, ui ) {
-                    $( "#studentIdgraph").val( ui.item.id );
-       			  $( "#studentnamegraph").val( ui.item.name );
-       			$( "#classandsecgraph").val( ui.item.classandsec );
-               $("#studentexternalidgraph").val( ui.item.externalid );
-                    return true;
-                }
-            }).data( "autocomplete" )._renderItem = function( ul, item ) {
-                return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +" </b> </a>" )
-                .appendTo( ul );
-            };
-            
-                       
-
-        });
-              
-        
-        var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
-    	
-    	var yAxisLabel = yAxisValues;
-    	var xAxislabel = xAxisValues;
-    	var barChartData = {
-    		labels : xAxisValues,
-    		datasets : [
-    			{
-    				fillColor : "rgba(0,0,0,0.8)",
-    				strokeColor : "rgba(220,220,220,0.8)",
-    				highlightFill: "rgba(0,0,0,0.75)",
-    				highlightStroke: "rgba(0,0,0,1)",
-    				data : yAxisLabel
-    			}
-    		]
-    	}
-    	window.onload = function(){
-    		var ctx = document.getElementById("canvas").getContext("2d");
-    		window.myBar = new Chart(ctx).Bar(barChartData, {
-    			responsive : true
-    		});
-    	}
-       
-        </script>
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
@@ -532,14 +399,7 @@
 			searchStudentAttendanceDetails();
 		});
 		
-		$("#searchMonthly").button().click(function() {
-			searchStudentAttendanceDetailsMonthly();
-		});
-		
-		$("#searchMonthlyGraph").button().click(function() {
-			searchStudentAttendanceDetailsMonthlyGraph();
-		});
-		
+				
 		 $("#studentAttendanceStatus").keypress(function (e) {
 		     //if the letter is not digit then display error and don't type anything
 		     if (e.which != 8 && e.which != 0 && e.which != 65 && e.which != 97 && e.which != 72 && e.which != 104 && e.which != 80 && e.which != 112 && e.which != 127) {
@@ -548,22 +408,6 @@
 		   });
 
 	});
-	
-	function searchStudentAttendanceDetailsMonthly() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetailsMonthly";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-	
-	function searchStudentAttendanceDetailsMonthlyGraph() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetailsMonthlyGraph";
-		form1.method = "POST";
-		form1.submit();
-
-	}
 	
 	function searchStudentAttendanceDetails() {
 		var form1 = document.getElementById("form1");
@@ -577,63 +421,22 @@
 
 		$("#tabs").tabs();
 
-		$("#save").button().click(function() {
-			addDepartment();
-		});
+		$("#effect").hide();
 		
-		$("#dateofattendance").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$("#anim").change(function() {
-			$("#dateofattendance").datepicker("option", "showAnim", $(this).val());
-		});
-		
-		$("#fromdateofattendance").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$("#anim").change(function() {
-			$("#fromdateofattendance").datepicker("option", "showAnim", $(this).val());
-		});
-		
-		$("#todateofattendance").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$("#anim").change(function() {
-			$("#todateofattendance").datepicker("option", "showAnim", $(this).val());
-		});
-		
-		$("#frommonthlyattendance").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$("#anim").change(function() {
-			$("#frommonthlyattendance").datepicker("option", "showAnim", $(this).val());
-		});
-		
-		$("#tomonthlyattendance").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$("#anim").change(function() {
-			$("#tomonthlyattendance").datepicker("option", "showAnim", $(this).val());
-		});
-		
-		/* $("#effect").hide(); */
-
+		 $("#printattendancereport").button({
+				icons : {
+					primary : "ui-icon-print"
+				}
+			})
 	});
+	
+	
+	function printAttendanceReport() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=AttendanceProcess&action=printAttendanceReport";
+		form1.method = "POST";
+		form1.submit();
+	}
 	
 	$(function() {
 		$("#update").button().click(function() {
@@ -641,13 +444,7 @@
 			return false;
 
 		});
-		$("#deleteStamp").button().click(function() {
-			if (confirm('Are you sure you want to delete the stamp fees?As it can not be revert back.')) {
-			deleteFeesStamp();
-			}
-			return false;
-
-		});
+		
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
 			var trLength = $('.trClass').length;
@@ -682,6 +479,25 @@
 	});
 	
 
+    $(function() {
+		// run the currently selected effect
+		function runEffect() {
+
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		// set effect from select menu value
+		$("#add").button({
+			icons : {
+				primary : "ui-icon-arrowthick-1-s"
+			}
+		}).click(function() {
+			runEffect();
+			return false;
+		});
+	});
 	
 	   function checkDate(){
 			  var toDate = document.getElementById('todateofattendance').value;
@@ -754,29 +570,37 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-<jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form id="form1" action="Controller?process=StampFeesProcess&action=applyFees" method="POST">
-		<!-- <div style="height: 28px">
-			<button id="add">Add Department</button>
+	<form id="form1" method="POST">
+		
+		<div style="height: 28px">
+		
+			<button id="add">Apply Filters</button>
 			<br />
-		</div> -->
-
+		</div>
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Daily Attendance</a></li>
-					<li><a href="#tabs-2">Attendance Between Dates</a></li>
-					<li><a href="#tabs-3">Monthly Attendance Graph</a></li>
+					<li><a href="#tabs-1">Filters</a></li>
+
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
-
+								
+								<tr>
+								<td class="alignRightFields"><br></td>
+								</tr>
 						<tr>
-							<td class="alignRightFields">Date &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="dateofattendance" type="text" class="textField"
-									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"/>
+							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
+							<td width="12%" align="left"><label> <select name="centercode" id="centercode" required
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${branchList}" var="branchlist">
+											<option value="${branchlist.centercode}:${branchlist.centername}" >
+												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
+											</option>
+										</c:forEach>
+								</select>
 							</label></td>
 							
 						</tr>
@@ -785,41 +609,20 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
-
-
+						
 						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 90px">
-										<option selected>Class</option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
+							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="examlevelcode" id="examlevelcode" required
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}:${examleveldetails.levelname}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
 								</select>
-
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 50px">
-										<option selected>Sec</option>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>E</option>
-										<option>F</option>
-										<option>G</option>
-
-								</select>
-							</label>
+							</label> 
 						</tr>
 
 						<tr>
@@ -827,6 +630,38 @@ for(Cookie cookie : cookies){
 
 						</tr>
 						
+						<tr>
+							<td class="alignRightFields">Language &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="languageopted" id="languageopted"
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${languageslist}" var="languageslist">
+											<option value="${languageslist.language}" >
+												<c:out value="${languageslist.language}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="selectedacademicyear" id="selectedacademicyear"
+									style="width: 240px;" required>
+										<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2019/20" >2019/20</option>
+											<option value="2020/21" >2020/21</option>
+								</select>
+							</label> 
+						</tr>
+
 						<tr>
 							<td><br /></td>
 
@@ -849,157 +684,13 @@ for(Cookie cookie : cookies){
 
 					</table>
 				</div>
-
-				<div id="tabs-2">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-
-						<tr>
-							<td class="alignRightFields">From Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<label> <input
-									name="fromdateofattendance" type="text" class="textField"
-									id="fromdateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"/>
-							</label>
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<label>To Date: &nbsp;</label>
-							<label> <input
-									name="todateofattendance" type="text" class="textField"
-									id="todateofattendance" size="25"  value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"/>
-							</label>
-							</td>
-							
-						</tr>
-						<tr>
-						<td><br></td>
-						</tr>
-						<tr>
-                    <td style="width: 45%" class="alignRightFields">Admission No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" onfocus="checkDate();" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" />
-                    <input name="studentexternalid" type="hidden" id="studentexternalid" /> </td>
-                        
-                    </tr>
-                    <tr>
-						<td><br></td>
-                    <tr>
-                    
-                        <td style="width: 45%" class="alignRightFields">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentname" id="studentname" style="width: 200px" required readonly/>
-                        &nbsp;&nbsp;&nbsp;Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" /></td>
-                        
-                    </tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-
-							
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="searchMonthly">Search</button>
-							</td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-					</table>
-				</div>
-				
-				
-				<div id="tabs-3">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-
-						<tr>
-							<td class="alignRightFields">From Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<label> <input
-									name="frommonthlyattendance" type="text" class="textField"
-									id="frommonthlyattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"/>
-							</label>	
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<label>To Date: &nbsp;</label>
-							<label> <input
-									name="tomonthlyattendance" type="text" class="textField"
-									id="tomonthlyattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"/>
-							</label>
-							</td>
-							
-						</tr>
-						<tr>
-						<td><br></td>
-						</tr>
-						<tr>
-                    <td style="width: 45%" class="alignRightFields">Admission No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnograph" id="admnograph" onfocus="checkDateGraph();" style="width: 200px" /> <input name="studentIdgraph" type="hidden" id="studentIdgraph" value="" /> 
-                    <input name="studentexternalidgraph" type="hidden" id="studentexternalidgraph" /></td>
-                        
-                    </tr>
-                    <tr>
-						<td><br></td>
-                    <tr>
-                    
-                        <td style="width: 45%" class="alignRightFields">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentnamegraph" id="studentnamegraph" style="width: 200px" required readonly/>
-                        &nbsp;&nbsp;&nbsp;Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsecgraph" id="classandsecgraph" /></td>
-                        
-                    </tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-
-							
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="searchMonthlyGraph">Search</button>
-							</td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-					</table>
-				</div>
-				
 			</div>
 		</div>
 		
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search result</td>
+					<td class="headerTD" >View Attendance</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -1010,26 +701,40 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Attendance Status&nbsp;</th>
+						<c:forEach items="${attendancesubexamlevel}" var="subexamlevel">
+						<th title="click to sort" class="headerText">${subexamlevel.subjectname}&nbsp;</th>
+						</c:forEach>
+						<!-- <th title="click to sort" class="headerText">Paper 3&nbsp;</th>
+						<th title="click to sort" class="headerText">Paper 1&nbsp;</th>
+						<th title="click to sort" class="headerText">Paper 2&nbsp;</th> -->
 					</tr>
 				</thead>
 
 				<tbody>
-					<c:forEach items="${StudentDailyAttendanceDate}" var="attendanceList" varStatus="status">
+					<c:forEach items="${viewAttendancemap}" var="viewAttendancemap" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${attendanceList.attendanceid}"/>" class="chcktbl"
+								id="<c:out value="${viewAttendancemap.key.admissionnumber}"/>" class="chcktbl"
 								name="attandanceIDs"
-								value="<c:out value="${attendanceList.attendanceid},${status.index}"/>" /></td>
+								value="<c:out value="${viewAttendancemap.key.admissionnumber},${status.index}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
-										value="${StudentListAttendance[status.index].admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${StudentListAttendance[status.index].name}" /></td>
+										value="${viewAttendancemap.key.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${viewAttendancemap.key.name}" /></td>
+							<c:forEach items="${viewAttendancemap.value}" var="subjectdetails">
 							<td class="dataText">
-							<input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" value="<c:out value="${attendanceList.attendancestatus}" />" maxlength="1">
+							<c:set var="attendanceparts" value="${fn:split(subjectdetails, '%')}" />
+							<input type="hidden" id="studentAttendanceStatusId" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;"  name="studentAttendanceStatusId" style="text-transform:uppercase" value="<c:out value="${attendanceparts[0]}" />" maxlength="1">
+							<%-- <input type="text" id="studentAttendanceStatus" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;"  name="studentAttendanceStatus" style="text-transform:uppercase" value="<c:out value="${attendanceparts[1]}" />" maxlength="1"> --%>
+							<select name="studentAttendanceStatus" id="studentAttendanceStatus" style="background-color: #E3EFFF;border-style: white;color: #4B6A84;">
+										<option selected >${attendanceparts[1]}</option>
+											<option value="Present" >Present</option>
+											<option value="Absent" >Absent</option>
+								</select>
 							</td>
+							</c:forEach>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -1037,11 +742,11 @@ for(Cookie cookie : cookies){
 					<tr>
 					
 						<td class="footerTD" colspan="2">
-							<button id="update">Update</button>
-							<!-- <input value="Delete Stamp Fees"
-							type="submit" id="deleteStamp" /> --></td>
-							
-
+						
+							<a id="update">Update</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+						  <a id="printattendancereport" href="Controller?process=AttendanceProcess&action=printAttendanceReport">Print</a>
+						</td>
 					</tr>
 				</tfoot>
 			</table>

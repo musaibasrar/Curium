@@ -28,15 +28,19 @@ public class Login implements java.io.Serializable {
 	private String password;
 	private String usertype;
 	private Branch branch;
+	private String lastmodifiedby;
+	private Byte addstudentflag;
 	
 	public Login() {
 	}
 
-	public Login(String username, String password, String usertype, Branch branch) {
+	public Login(String username, String password, String usertype, Branch branch, String lastmodifiedby, Byte addstudentflag) {
 		this.username = username;
 		this.password = password;
 		this.usertype = usertype;
 		this.branch = branch;
+		this.lastmodifiedby = lastmodifiedby;
+		this.addstudentflag = addstudentflag;
 	}
 
 	@Id
@@ -83,5 +87,23 @@ public class Login implements java.io.Serializable {
 	public void setBranch(Branch branch) {
 		this.branch = branch;
 	}
+
+	@Column(name = "lastmodifiedby", length = 45)
+    public String getLastmodifiedby() {
+        return this.lastmodifiedby;
+    }
+
+    
+    public void setLastmodifiedby(String lastmodifiedby) {
+        this.lastmodifiedby = lastmodifiedby;
+    }
+
+    public Byte getAddstudentflag() {
+        return this.addstudentflag;
+    }
+
+    public void setAddstudentflag(Byte addstudentflag) {
+        this.addstudentflag = addstudentflag;
+    }
 
 }

@@ -55,7 +55,10 @@ public class SubjectDetailsService {
 			subject.setMinmarks(DataUtil.parseInt(request.getParameter("minmarks")));
 			subject.setMaxmarks(DataUtil.parseInt(request.getParameter("maxmarks")));
 			subject.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-			subject = new SubjectDetailsDAO().addSubject(subject);
+			
+			//Add examlevels
+			String[] examlevelids = request.getParameterValues("examlevel");
+			subject = new SubjectDetailsDAO().addSubject(subject,examlevelids);
 			 
 			if(subject == null){
 				result=false;
@@ -83,6 +86,10 @@ public class SubjectDetailsService {
 	}
 		 return result;
 	}
+
+    public Subject getSubjectDetails(String subject) {
+       return new SubjectDetailsDAO().getSubjectDetails(subject);        
+    }
 	
 	
 	

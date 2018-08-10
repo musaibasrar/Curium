@@ -434,9 +434,7 @@
         
     function checkMandatory(){
     	
-    	if(document.getElementById("exam").value == ""){
-    		alert('Please enter the exam field');	
-    	}else if(document.getElementById("subject").value == ""){
+    	if(document.getElementById("subject").value == ""){
     		alert('Please enter the subject');
     	}
     	
@@ -452,9 +450,7 @@ function checkMandatoryandSubmit(){
 				}
 			}
 			
-    	if(document.getElementById("exam").value == ""){
-    		alert('Please enter the exam field');	
-    	}else if(document.getElementById("subject").value == ""){
+    	if(document.getElementById("subject").value == ""){
     		alert('Please enter the subject');
     	}else if(resultCheckBox){
     		alert('Select the student(s) to update the marks');
@@ -508,10 +504,16 @@ for(Cookie cookie : cookies){
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
-							<td class="alignRightFields">Name &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
+							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
+							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
+									style="width: 240px;" required>
+										<option selected></option>
+										<c:forEach items="${branchList}" var="branchlist">
+											<option value="${branchlist.centercode}:${branchlist.centername}" >
+												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
+											</option>
+										</c:forEach>
+								</select>
 							</label></td>
 							
 						</tr>
@@ -523,38 +525,39 @@ for(Cookie cookie : cookies){
 
 
 						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 150px">
-										<option selected>Class</option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
+						<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="examlevel" id="examlevel"
+									style="width: 240px;" required>
+										<option selected></option>
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.idexamlevel}:${examleveldetails.levelcode}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
 								</select>
+							</label> 
+							
+						</tr>
 
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 120px">
-										<option selected>Sec</option>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>E</option>
-										<option>F</option>
-										<option>G</option>
+						<tr>
+							<td><br /></td>
 
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Language &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="languageopted" id="languageopted"
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${languageslist}" var="languageslist">
+											<option value="${languageslist.language}" >
+												<c:out value="${languageslist.language}" />
+											</option>
+										</c:forEach>
 								</select>
-							</label>
+							</label> 
 						</tr>
 
 						<tr>
@@ -563,7 +566,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						
-
+						
 						<tr>
 
 							<td width="30%" class="alignRight"></td>
@@ -588,52 +591,22 @@ for(Cookie cookie : cookies){
 									<select name="subject" id="subject"
 									style="width: 240px" ">
 										<option selected></option>
-
-										<c:forEach items="${listSubject}" var="listSubject">
-
-											<option value="${listSubject.subid}">
+										<c:forEach items="${subjectlist}" var="listSubject">
+											<option value="${listSubject.subjectname}">
 												<c:out value="${listSubject.subjectname}" />
 											</option>
-
-
 										</c:forEach>
-
 								</select></label></td>
 						
 						</tr>						
 						
 						<tr>
-							<td><br /></td>
+							<td>
+							<input type="hidden" id="hiddensearchedexamlevel" name="hiddensearchedexamlevel" value="${searchedexamlevel}">
+							<br /></td>
 
 						</tr>
 						
-						<tr>
-						<td width="30%" class="alignRight">Exam &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft"><label>
-									<select name="exam" id="exam"
-									style="width: 240px">
-										<option selected></option>
-
-										<c:forEach items="${listExam}" var="listExam">
-
-											<option value="${listExam.exid}">
-												<c:out value="${listExam.examname}" />
-											</option>
-
-
-										</c:forEach>
-
-								</select></td>
-						</tr>
-						
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
 					</table>
 					
 					
@@ -653,31 +626,28 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"  style="display:none"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class</th>
+						<th title="click to sort" class="headerText">Exam Level</th>
 						<th title="click to sort" class="headerText">Marks</th>
-
-
-
 					</tr>
 				</thead>
 
 				<tbody>
-					<c:forEach items="${searchStudentList}" var="Parents">
+					<c:forEach items="${mapstudentreports}" var="Parents" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"  style="display:none"><input type="checkbox" checked  style="display:none"
-								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
+							<td class="dataText" ><input type="checkbox" checked
+								id="<c:out value="${Parents.key.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
-								value="<c:out value="${Parents.student.sid}"/>" /></td>
+								value="<c:out value="${Parents.key.student.sid}:${status.index}"/>" /></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText"><c:out value="${Parents.student.classstudying}" /></td>
+										value="${Parents.key.student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${Parents.key.student.name}" /></td>
+							<td class="dataText"><c:out value="${Parents.key.student.examlevel}" /></td>
 							<td class="dataText"><input type="text"
 								id="studentMarks" 
 								name="studentMarks"

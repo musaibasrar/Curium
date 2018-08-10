@@ -1,15 +1,19 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 23 May, 2018 11:42:50 AM by Hibernate Tools 4.0.0 -->
-<hibernate-mapping>
-    <class name="com.model.branch.dto.Branch" table="branch">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 17 Jul, 2018 11:38:26 AM by Hibernate Tools 5.3.0.Beta2 --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="com.model.branch.dto.Branch" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="branch">
         <id name="idbranch" type="java.lang.Integer">
-            <column name="idbranch" />
-            <generator class="identity" />
+            <column name="idbranch"/>
+            <generator class="identity"/>
         </id>
-        <property name="branchname" type="string">
-            <column name="branchname" length="50" />
+        <property generated="never" lazy="false" name="centername" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="centername"/>
+        </property>
+        <property generated="never" lazy="false" name="centercode" optimistic-lock="true" type="string" unique="false">
+            <column length="5" name="centercode"/>
+        </property>
+        <property generated="never" lazy="false" name="districtcode" optimistic-lock="true" type="string" unique="false">
+            <column length="5" name="districtcode"/>
         </property>
     </class>
 </hibernate-mapping>

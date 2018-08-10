@@ -1,5 +1,5 @@
 <%--
-    Document   : index
+    Document   : Subject Details 
     Created on : Dec 23, 2011, 5:52:28 PM
     Author     : Musaib
 --%>
@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
+<title>Subject Details </title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -90,6 +90,17 @@
 	text-transform: capitalize;
 	color: #325F6D;
 	text-align: right;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+.alignLeft{
+	font-family: Tahoma;
+	font-size: 11px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: left;
 	vertical-align: middle;
 	font-weight: bold;
 }
@@ -536,7 +547,26 @@ for(Cookie cookie : cookies){
 							</label></td>
 						</tr>
 						
+						<tr>
+							<td><br /></td>
+						</tr>			
+							
+						<tr><td width="15%" class="alignLeft">Select Examination Level</td></tr>
+					</table>
+					
+					<table width="100%" border="0" align="center">
+					
+						
+						<c:forEach items="${examleveldetails}" var="examleveldetails">
 
+						<tr>
+						 	<td>&nbsp;&nbsp;</td>
+							<td class="alignLeft"><input
+									name="examlevel" type="checkbox" id="examlevel" value="${examleveldetails.levelcode}"
+									size="36"> <c:out value="${examleveldetails.levelname}" /></td>
+						</tr>
+					</c:forEach>
+						
 						<tr>
 							<td><br /></td>
 						</tr>			
@@ -545,6 +575,8 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 					</table>
+					
+					
 					<table id="table2" width="100%" border="0" align="center">
 						<tr>
 							<td align="center">

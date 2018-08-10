@@ -26,7 +26,7 @@ public class Examschedule implements java.io.Serializable {
 	private String endtime;
 	private String subject;
 	private String examname;
-	private String classes;
+	private String centercode;
 	private String academicyear;
 	private	int branchid;
 	
@@ -35,14 +35,14 @@ public class Examschedule implements java.io.Serializable {
 	}
 
 	public Examschedule(Date date, String starttime, String endtime,
-			String subject, String examname, String classes, String academicyear,
+			String subject, String examname, String centercode, String academicyear,
 			int branchid) {
 		this.date = date;
 		this.starttime = starttime;
 		this.endtime = endtime;
 		this.subject = subject;
 		this.examname = examname;
-		this.classes = classes;
+		this.centercode = centercode;
 		this.academicyear = academicyear;
 		this.branchid = branchid;
 	}
@@ -104,15 +104,6 @@ public class Examschedule implements java.io.Serializable {
 		this.examname = examname;
 	}
 
-	@Column(name = "classes", length = 45)
-	public String getClasses() {
-		return this.classes;
-	}
-
-	public void setClasses(String classes) {
-		this.classes = classes;
-	}
-
 	@Column(name = "academicyear", length = 45)
 	public String getAcademicyear() {
 		return this.academicyear;
@@ -131,5 +122,15 @@ public class Examschedule implements java.io.Serializable {
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
 	}
+
+	@Column(name = "centercode", length = 200)
+    public String getCentercode() {
+        return this.centercode;
+    }
+
+    
+    public void setCentercode(String centercode) {
+        this.centercode = centercode;
+    }
 	
 }

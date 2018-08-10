@@ -25,19 +25,25 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.global.Global;
 import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
-import com.model.department.dao.departmentDAO;
-import com.model.department.dto.Department;
+import com.model.branch.dao.BranchDAO;
+import com.model.branch.dto.Branch;
+import com.model.branch.service.BranchService;
+import com.model.examlevels.dao.ExamLevelDetailsDAO;
+import com.model.examlevels.dto.Examleveldetails;
+import com.model.examlevels.service.ExamLevelService;
 import com.model.feescollection.dao.feesCollectionDAO;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.feesdetails.dao.feesDetailsDAO;
 import com.model.feesdetails.dto.Feesdetails;
+import com.model.language.service.LanguageService;
 import com.model.parents.dao.parentsDetailsDAO;
 import com.model.parents.dto.Parents;
-import com.model.position.dao.positionDAO;
-import com.model.position.dto.Position;
+import com.model.qualification.service.QualificationService;
 import com.model.std.dto.Classsec;
+import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
 import com.model.student.dto.Studentfeesstructure;
@@ -100,52 +106,8 @@ public class StudentService {
 
 		                }
 		                
-		                if (fieldName.equalsIgnoreCase("addclass")) {
-		                    
-		                    addClass = DataUtil.emptyString(item.getString());
-		                    if (!addClass.equalsIgnoreCase("Class")) {
-			        	     conClassStudying = addClass;
-			             }
-		                }
-		                
-		                if (fieldName.equalsIgnoreCase("addsec")) {
-
-		                    addSec = DataUtil.emptyString(item.getString());
-		                    if (!addSec.equalsIgnoreCase("Sec")) {
-			        			conClassStudying = conClassStudying + " " + addSec;
-			        		}else if(conClassStudying !=null){
-			        			conClassStudying = conClassStudying + " " ;
-			        		}
-		                }
-		        		student.setClassstudying(DataUtil.emptyString(conClassStudying));
-		                
-		                if (fieldName.equalsIgnoreCase("admclassE")) {
-		                    
-		                    addClassE = DataUtil.emptyString(item.getString());
-
-		                    if (!addClassE.equalsIgnoreCase("Class")) {
-			        			conClassAdmittedIn = addClassE;
-
-			        		}
-
-		                }
-
-		                if (fieldName.equalsIgnoreCase("admsecE")) {
-
-		                    
-		                    addSecE = DataUtil.emptyString(item.getString());
-			        		if (!addSecE.equalsIgnoreCase("Sec")) {
-			        			conClassAdmittedIn = conClassAdmittedIn + " " + addSecE;
-			        		}
-		                }
-		              
-		                student.setClassadmittedin(DataUtil.emptyString(conClassAdmittedIn));
-
-		                if (fieldName.equalsIgnoreCase("lastclass")) {
-		                    student.setStdlaststudied(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("lastschool")) {
-		                	student.setSchoollastattended(DataUtil.emptyString(item.getString()));
+		                if (fieldName.equalsIgnoreCase("qualification")) {
+		                    student.setQualification(DataUtil.emptyString(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("admnno")) {
 		                	student.setAdmissionnumber(DataUtil.emptyString(item.getString()));
@@ -153,20 +115,17 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("dateofadmission")) {
 		                	student.setAdmissiondate(DateUtil.dateParserUpdateStd(item.getString()));
 		                }
-		                if (fieldName.equalsIgnoreCase("bloodgroup")) {
-		                    student.setBloodgroup(DataUtil.emptyString(item.getString()));
+		                if (fieldName.equalsIgnoreCase("examlevel")) {
+		                    student.setExamlevel(DataUtil.emptyString(item.getString()));
 		                }
-		                if (fieldName.equalsIgnoreCase("nationality")) {
-		                	student.setNationality(DataUtil.emptyString(item.getString()));
+		                if (fieldName.equalsIgnoreCase("languageopted")) {
+		                	student.setLanguageopted(DataUtil.emptyString(item.getString()));
 		                }
-		                if (fieldName.equalsIgnoreCase("religion")) {
-		                    student.setReligion(DataUtil.emptyString(item.getString()));
+		                if (fieldName.equalsIgnoreCase("districtcode")) {
+		                    student.setDistrictcode(DataUtil.emptyString(item.getString()));
 		                }
-		                if (fieldName.equalsIgnoreCase("caste")) {
-		                    student.setCaste(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("motherT")) {
-		                    student.setMothertongue(DataUtil.emptyString(item.getString()));
+		                if (fieldName.equalsIgnoreCase("centercode")) {
+		                    student.setCentercode(DataUtil.emptyString(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("createddate")) {
 		                    student.setCreateddate(DateUtil.dateParserUpdateStd(item.getString()));
@@ -180,65 +139,17 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("mothersname")) {
 		                	parents.setMothersname(DataUtil.emptyString(item.getString()));
 		                }
-		                if (fieldName.equalsIgnoreCase("profession")) {
-		                    parents.setProfesssion(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("parentsannualincome")) {
-		                	parents.setParentsannualincome(DataUtil.emptyString(item.getString()));
-		                }
 		                if (fieldName.equalsIgnoreCase("permanentaddress")) {
 		                    parents.setAddresspermanent(DataUtil.emptyString(item.getString()));
 		                }
-		                if (fieldName.equalsIgnoreCase("temporaryaddress")) {
-		                    parents.setAddresstemporary(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("noofdependents")) {
-		                	parents.setNoofdependents(DataUtil.parseInt(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("remarks")) {
+		                if (fieldName.equalsIgnoreCase("notes")) {
 		                	parents.setRemarks(DataUtil.emptyString(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("contactnumber")) {
 		                	parents.setContactnumber(DataUtil.emptyString(item.getString()));
 		                }
-		                if (fieldName.equalsIgnoreCase("cocontactnumber")) {
-		                	parents.setCocontactnumber(DataUtil.emptyString(item.getString()));
-		                }
 		                if (fieldName.equalsIgnoreCase("email")) {
 		                	parents.setEmail(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("crecord")) {
-		                	student.setCrecord(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("dateofcr")) {
-		                	student.setCrecorddate(DateUtil.dateParserUpdateStd(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("place")) {
-		                	student.setPlaceofbirth(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("tcno")) {
-		                	student.setNooftc(DataUtil.parseInt(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("dateoftc")) {
-		                	student.setDateoftc(DateUtil.dateParserUpdateStd(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("classonleaving")) {
-		                	student.setClassonleaving(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("progress")) {
-		                	student.setSubsequentprogress(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("dateofleaving")) {
-		                	student.setDateleaving(DateUtil.dateParserUpdateStd(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("reasonforleaving")) {
-		                	student.setReasonleaving(DataUtil.emptyString(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("notcissued")) {
-		                	student.setNotcissued(DataUtil.parseInt(item.getString()));
-		                }
-		                if (fieldName.equalsIgnoreCase("dateoftcissued")) {
-		                	student.setDatetcissued(DateUtil.dateParserUpdateStd(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("guardian")) {
 		                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
@@ -269,6 +180,8 @@ public class StudentService {
 		}
 		
 		student.setArchive(0);
+		
+		// set external id
 		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLM0123NOP89QRSTUVWXYZ4567";
 		int count =4;
 		StringBuilder builder = new StringBuilder();
@@ -277,6 +190,8 @@ public class StudentService {
 		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
 		}
 		student.setStudentexternalid(builder.toString());
+		// End external id
+		
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		parents.setStudent(student);
 		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -353,41 +268,6 @@ public class StudentService {
 				result = false;
 			} else {
 				httpSession.setAttribute("student", student);
-				String classStudying = student.getClassstudying();
-				if (!classStudying.equalsIgnoreCase("") && !classStudying.equalsIgnoreCase(" ") && classStudying.contains(" ")) {
-					String regex = "[a-zA-Z]+";
-					String[] classParts = classStudying.split(" ");
-					httpSession.setAttribute("classstudying", classParts[0]);
-					
-					if(classParts.length>=2 && classParts[1].matches(regex) == true ){
-					httpSession.setAttribute("secstudying", classParts[1]);
-					}else{
-						httpSession.setAttribute("secstudying", "");
-					}
-
-				} else {
-					request.setAttribute("classstudying", classStudying);
-					request.setAttribute("secstudying", "");
-				}
-
-				String classAdmitted = student.getClassadmittedin();
-				
-				if (!classAdmitted.equalsIgnoreCase("")  && !classAdmitted.equalsIgnoreCase(" ") && classAdmitted.contains(" ")) {
-
-					String regex = "[a-zA-Z]+";
-					String[] classAdmittedParts = classAdmitted.split(" ");
-					
-					httpSession.setAttribute("classadm", classAdmittedParts[0]);
-					if(classAdmittedParts.length>=2 &&  classAdmittedParts[1].matches(regex) == true){
-					httpSession.setAttribute("secadm", classAdmittedParts[1]);
-					}else{
-						httpSession.setAttribute("secadm", "");
-					}
-				} else {
-					request.setAttribute("classadm", classAdmitted);
-					request.setAttribute("secadm", "");
-				}
-
 				httpSession.setAttribute("parents", parents);
 				//httpSession.setAttribute("feesdetails", feesdetails);
 				httpSession.setAttribute("feesstructure", feesstructure);
@@ -473,66 +353,23 @@ public class StudentService {
 	                    student.setAge(DataUtil.parseInt(item.getString()));
 
 	                }
-
-	                if (fieldName.equalsIgnoreCase("classsec")) {
-	                    
-	                    addClass = DataUtil.emptyString(item.getString());
-	                    if (!addClass.equalsIgnoreCase("Class")) {
-
-		        			conClassStudying = addClass;
-
-		        		}
-	                }
-
 	                
-
-	                if (fieldName.equalsIgnoreCase("secstudying")) {
-
-	                    addSec = DataUtil.emptyString(item.getString());
-	                    if (!addSec.equalsIgnoreCase("Sec")) {
-		        			conClassStudying = conClassStudying + " " + addSec;
-		        		}
-	                }
-
-	        		student.setClassstudying(DataUtil.emptyString(conClassStudying));
+	                if (fieldName.equalsIgnoreCase("qualification")) {
+                            student.setQualification(DataUtil.emptyString(item.getString()));
+                        }
 	                
-	                
-	                if (fieldName.equalsIgnoreCase("admclass")) {
-	                    
-	                    addClassE = DataUtil.emptyString(item.getString());
-
-	                    if (!addClassE.equalsIgnoreCase("Class")) {
-		        			conClassAdmittedIn = addClassE;
-
-		        		}
-
-	                }
-
-
-
-	                if (fieldName.equalsIgnoreCase("admsec")) {
-
-	                    
-	                    addSecE = DataUtil.emptyString(item.getString());
-		        		if (!addSecE.equalsIgnoreCase("Sec")) {
-		        			conClassAdmittedIn = conClassAdmittedIn + " " + addSecE;
-		        		}
-
-
-	                }
-	              
-	                student.setClassadmittedin(DataUtil.emptyString(conClassAdmittedIn));
-
-
-
-	                if (fieldName.equalsIgnoreCase("lastclass")) {
-	                    student.setStdlaststudied(DataUtil.emptyString(item.getString()));
-	                }
-
-
-	                if (fieldName.equalsIgnoreCase("lastschool")) {
-	                	student.setSchoollastattended(DataUtil.emptyString(item.getString()));
-	                }
+	                if (fieldName.equalsIgnoreCase("examlevel")) {
+                            student.setExamlevel(DataUtil.emptyString(item.getString()));
+                        }
+                        if (fieldName.equalsIgnoreCase("languageopted")) {
+                                student.setLanguageopted(DataUtil.emptyString(item.getString()));
+                        }
+                        if (fieldName.equalsIgnoreCase("districtcode")) {
+                            student.setDistrictcode(DataUtil.emptyString(item.getString()));
+                        }
+                        if (fieldName.equalsIgnoreCase("centercode")) {
+                            student.setCentercode(DataUtil.emptyString(item.getString()));
+                        }
 
 
 	                if (fieldName.equalsIgnoreCase("admnno")) {
@@ -541,31 +378,6 @@ public class StudentService {
 
 	                if (fieldName.equalsIgnoreCase("dateofadmission")) {
 	                	student.setAdmissiondate(DateUtil.dateParserUpdateStd(item.getString()));
-	                }
-
-
-	                if (fieldName.equalsIgnoreCase("bloodgroup")) {
-	                    student.setBloodgroup(DataUtil.emptyString(item.getString()));
-	                }
-
-
-
-	                if (fieldName.equalsIgnoreCase("nationality")) {
-	                	student.setNationality(DataUtil.emptyString(item.getString()));
-	                }
-
-
-	                if (fieldName.equalsIgnoreCase("religion")) {
-	                    student.setReligion(DataUtil.emptyString(item.getString()));
-
-	                }
-
-	                if (fieldName.equalsIgnoreCase("caste")) {
-	                    student.setCaste(DataUtil.emptyString(item.getString()));
-	                }
-
-	                if (fieldName.equalsIgnoreCase("motherT")) {
-	                    student.setMothertongue(DataUtil.emptyString(item.getString()));
 	                }
 
 	                if (fieldName.equalsIgnoreCase("createddate")) {
@@ -583,39 +395,7 @@ public class StudentService {
 	                if(fieldName.equalsIgnoreCase("studentexternalid")){
 	                	student.setStudentexternalid(DataUtil.emptyString(item.getString()));
 	                }
-	                if (fieldName.equalsIgnoreCase("crecord")) {
-	                	student.setCrecord(DataUtil.emptyString(item.getString()));
-	                }
-	                if (fieldName.equalsIgnoreCase("dateofcr")) {
-	                	student.setCrecorddate(DateUtil.dateParserUpdateStd(item.getString()));
-	                }
-	                if (fieldName.equalsIgnoreCase("place")) {
-	                	student.setPlaceofbirth(DataUtil.emptyString(item.getString()));
-	                }
-	                if (fieldName.equalsIgnoreCase("tcno")) {
-	                	student.setNooftc(DataUtil.parseInt(item.getString()));
-	                }
-	                if (fieldName.equalsIgnoreCase("dateoftc")) {
-	                	student.setDateoftc(DateUtil.dateParserUpdateStd(item.getString()));
-	                }
-	                if (fieldName.equalsIgnoreCase("classonleaving")) {
-	                	student.setClassonleaving(DataUtil.emptyString(item.getString()));
-	                }
-	                if (fieldName.equalsIgnoreCase("progress")) {
-	                	student.setSubsequentprogress(DataUtil.emptyString(item.getString()));
-	                }
-	                if (fieldName.equalsIgnoreCase("dateofleaving")) {
-	                	student.setDateleaving(DateUtil.dateParserUpdateStd(item.getString()));
-	                }
-	                if (fieldName.equalsIgnoreCase("reasonforleaving")) {
-	                	student.setReasonleaving(DataUtil.emptyString(item.getString()));
-	                }
-	                if (fieldName.equalsIgnoreCase("notcissued")) {
-	                	student.setNotcissued(DataUtil.parseInt(item.getString()));
-	                }
-	                if (fieldName.equalsIgnoreCase("dateoftcissued")) {
-	                	student.setDatetcissued(DateUtil.dateParserUpdateStd(item.getString()));
-	                }
+	                
 	                if (fieldName.equalsIgnoreCase("guardian")) {
 	                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
 	                }
@@ -659,7 +439,7 @@ public class StudentService {
 	                	parents.setNoofdependents(DataUtil.parseInt(item.getString()));
 	                }
 	                
-	                if (fieldName.equalsIgnoreCase("remarks")) {
+	                if (fieldName.equalsIgnoreCase("notes")) {
 	                	parents.setRemarks(DataUtil.emptyString(item.getString()));
 	                }
 	                
@@ -795,12 +575,12 @@ public class StudentService {
 	@SuppressWarnings("finally")
 	public boolean searchClass() {
 		
-		String classofStd = request.getParameter("classofstd");
+		String examLevel = request.getParameter("examlevel");
 		boolean result = false;
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			try {
-				List<Student> studentList = new studentDetailsDAO().getListOfStudents(classofStd, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Student> studentList = new studentDetailsDAO().getListOfStudents(examLevel, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				request.setAttribute("studentList", studentList);
 				result = true;
 			} catch (Exception e) {
@@ -927,7 +707,7 @@ public class StudentService {
 
 	}
 
-	public boolean exportDataForStudents() {
+	public boolean exportDataStudents() {
 
 		String[] studentIds = request.getParameterValues("studentIDs");
 		boolean successResult = false;
@@ -976,21 +756,21 @@ public class StudentService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
-							"Admitted In Class", "Admission Number", "Admission Date", "Blood Group", "Religion",
-							"Caste", "Fathers Name", "Mothers Name" });
+					new Object[] { "Student Name", "Gender", "Date Of Birth", "Age", "Qualification",
+							"Exam Level", "Admission Number", "Admission Date", "Language Opted", "District Code",
+							"Center Code", "Fathers Name", "Husband Name" });
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
 						new Object[] { studentDetails.getStudent().getName(), studentDetails.getStudent().getGender(),
 								studentDetails.getStudent().getDateofbirth().toString(),
 								studentDetails.getStudent().getAge().toString(),
-								studentDetails.getStudent().getClassstudying(),
-								studentDetails.getStudent().getClassadmittedin(),
+								studentDetails.getStudent().getQualification(),
+								studentDetails.getStudent().getExamlevel(),
 								studentDetails.getStudent().getAdmissionnumber(),
 								studentDetails.getStudent().getAdmissiondate().toString(),
-								studentDetails.getStudent().getBloodgroup(), studentDetails.getStudent().getReligion(),
-								studentDetails.getStudent().getCaste(), studentDetails.getFathersname(),
+								studentDetails.getStudent().getLanguageopted(), studentDetails.getStudent().getDistrictcode(),
+								studentDetails.getStudent().getCentercode(), studentDetails.getFathersname(),
 								studentDetails.getMothersname() });
 				i++;
 			}
@@ -1127,16 +907,217 @@ public class StudentService {
     public String addNew() {
         
         if(httpSession.getAttribute(BRANCHID)!=null){
-            String branchId = httpSession.getAttribute(BRANCHID).toString();
-            if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
-                return "addStudent.jsp";
-            }else if("4".equalsIgnoreCase(branchId)) {
-                return "addStudentPU.jsp";
-            }else if("5".equalsIgnoreCase(branchId)) {
-                return "addStudentDC.jsp";
-            }
+            new ExamLevelService(request, response).examLevels();
+            new LanguageService(request, response).viewLanguage();
+            new BranchService(request, response).viewDistricts();
+            new BranchService(request, response).viewBranches();
+            new QualificationService(request, response).viewQualification();
+            return "addStudent.jsp";
         }
         return "sessiontimeout.jsp";
     }
-	
+
+    public void studentsListReport() {
+
+        new ExamLevelService(request, response).examLevels();
+        new LanguageService(request, response).viewLanguage();
+        new BranchService(request, response).viewDistricts();
+        new BranchService(request, response).viewBranches();
+        new QualificationService(request, response).viewQualification(); 
+        httpSession.setAttribute("mapstudentreports", "");
+        httpSession.setAttribute("printcentername", "");
+        httpSession.setAttribute("printexamlevel", "");
+        httpSession.setAttribute("printlanguage", "");
+        httpSession.setAttribute("printqualification", "");
+        
+    }
+
+    public void searchStudents() {
+       String searchQuery = "From Parents as parent where ";
+       String subQuery =null;
+       
+            if(!request.getParameter("centercode").equalsIgnoreCase("")) {
+                String[] centerCode = request.getParameter("centercode").split(":");
+                subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
+                httpSession.setAttribute("printcentername", "Center Name: "+centerCode[1]);
+            }
+            
+            if(!request.getParameter("districtcode").equalsIgnoreCase("")) {
+                if(subQuery!=null) {
+                    subQuery = subQuery+"AND parent.Student.districtcode = '"+request.getParameter("districtcode")+"'";
+                }else {
+                    subQuery = "parent.Student.districtcode = '"+request.getParameter("districtcode")+"'";
+                }
+            }
+            
+            if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
+                if(subQuery!=null) {
+                    subQuery = subQuery+"AND parent.Student.examlevel = '"+request.getParameter("examlevel")+"'";
+                }else {
+                    subQuery = "parent.Student.examlevel = '"+request.getParameter("examlevel")+"'";
+                }
+                httpSession.setAttribute("printexamlevel", "Examination Level: "+request.getParameter("examlevel").toString());
+            }
+            
+            if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
+                if(subQuery!=null) {
+                    subQuery = subQuery+"AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+                }else {
+                    subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+                }
+                httpSession.setAttribute("printlanguage", "Language: "+request.getParameter("languageopted").toString());
+            }
+            
+            if(!request.getParameter("qualification").equalsIgnoreCase("")) {
+                if(subQuery!=null) {
+                    subQuery = subQuery+"AND parent.Student.qualification = '"+request.getParameter("qualification")+"'";
+                }else {
+                    subQuery = "parent.Student.qualification = '"+request.getParameter("qualification")+"'";
+                }
+                httpSession.setAttribute("printqualification", "Qualification: "+request.getParameter("qualification").toString());
+            }
+            
+            searchQuery = searchQuery+subQuery;
+            List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
+            Map<Parents,String> mapStudentReports = new HashMap<Parents,String>();
+            
+            for (Parents parents : parentsList) {
+                Branch centerName = new BranchDAO().getBranch(parents.getStudent().getCentercode());
+                mapStudentReports.put(parents, centerName.getCentername());
+            }
+            httpSession.setAttribute("mapstudentreports", mapStudentReports);
+            new ExamLevelService(request, response).examLevels();
+            new LanguageService(request, response).viewLanguage();
+            new BranchService(request, response).viewDistricts();
+            new BranchService(request, response).viewBranches();
+            new QualificationService(request, response).viewQualification(); 
+            
+            new Global(mapStudentReports);
+    }
+
+
+    public void exportStudentsReport() {
+        boolean result = false;
+        try {
+            if (exportDataToExcel(new Global().getStudentsReports())) {
+                    result = true;
+            } 
+
+    } catch (Exception e) {
+            e.printStackTrace();
+    }
+        
+    }
+
+    private boolean exportDataToExcel(Map<Parents, String> studentsReports) {
+
+        for (Map.Entry<Parents, String> entry : studentsReports.entrySet()) {
+            System.out.println("Map Values "+entry.getValue());
+        }
+        return false;
+    }
+
+    public void searchLanguagesReport() {
+        
+        List<Parents> parentsList = new ArrayList<Parents>();
+        List<Branch> centerList = new ArrayList<Branch>();
+        Map<List<String>,List<String>> languageReports = new HashMap<List<String>,List<String>>();
+        
+        String centerQuery =null;
+        
+             if(!request.getParameter("centercode").equalsIgnoreCase("")) {
+                 Branch centerDetails = new Branch();
+                 String[] centerCode = request.getParameter("centercode").split(":");
+                 centerQuery = "where centercode = '"+centerCode[0]+"'";
+                 centerDetails.setCentercode(centerCode[0]);
+                 centerDetails.setCentername(centerCode[1]);
+                 centerList.add(centerDetails);
+                 httpSession.setAttribute("printcentername", "Center Name: "+centerCode[1]);
+             }else {
+                 centerList = new BranchDAO().readListOfObjects();
+             }
+             
+                          
+             if (!request.getParameter("examlevel").equalsIgnoreCase("")) {
+                     
+                     
+                 for (Branch eachBranch : centerList) {   
+                     
+                     List<String> centerNameCode = new ArrayList<String>();
+                     List<String> languageCount = new ArrayList<String>();
+                     int englishCount =0, urduCount=0, hindiCount=0, kannadaCount = 0;
+                     
+                     parentsList = new studentDetailsDAO().getStudentsList("From Parents parents where "
+                             + "parents.Student.examlevel='"+request.getParameter("examlevel").toString()+"' and parents.Student.centercode='"+eachBranch.getCentercode()+"'");
+                    
+                     for (Parents singleParents : parentsList) {
+                             if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("English")) {
+                                 englishCount = englishCount+1;
+                             }else if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("Urdu")) {
+                                 urduCount = urduCount+1;
+                             }else if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("Hindi")) {
+                                 hindiCount = hindiCount+1;
+                             }else if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("Kannada")) {
+                                 kannadaCount = kannadaCount+1;
+                             }
+                    }
+                     
+                     centerNameCode.add(eachBranch.getCentercode());
+                     centerNameCode.add(eachBranch.getCentername());
+                     languageCount.add(Integer.toString(englishCount));
+                     languageCount.add(Integer.toString(urduCount));
+                     languageCount.add(Integer.toString(hindiCount));
+                     languageCount.add(Integer.toString(kannadaCount));
+                     languageCount.add(Integer.toString(englishCount+urduCount+hindiCount+kannadaCount));
+                     
+                     languageReports.put(centerNameCode, languageCount);
+                }
+                 httpSession.setAttribute("printexamlevel", "Exam Level: "+request.getParameter("examlevel").toString());
+            }else {
+                
+                for (Branch eachBranch : centerList) {   
+                    
+                    List<String> centerNameCode = new ArrayList<String>();
+                    List<String> languageCount = new ArrayList<String>();
+                    int englishCount = 0, urduCount = 0, hindiCount = 0, kannadaCount = 0;
+                    
+                    parentsList = new studentDetailsDAO().getStudentsList("From Parents parents where "
+                            + "parents.Student.centercode='"+eachBranch.getCentercode()+"'");
+                   
+                    for (Parents singleParents : parentsList) {
+                            if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("English")) {
+                                englishCount = englishCount+1;
+                            }else if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("Urdu")) {
+                                urduCount = urduCount+1;
+                            }else if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("Hindi")) {
+                                hindiCount = hindiCount+1;
+                            }else if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("Kannada")) {
+                                kannadaCount = kannadaCount+1;
+                            }
+                   }
+                    
+                    centerNameCode.add(eachBranch.getCentercode());
+                    centerNameCode.add(eachBranch.getCentername());
+                    languageCount.add(Integer.toString(englishCount));
+                    languageCount.add(Integer.toString(urduCount));
+                    languageCount.add(Integer.toString(hindiCount));
+                    languageCount.add(Integer.toString(kannadaCount));
+                    languageCount.add(Integer.toString(englishCount+urduCount+hindiCount+kannadaCount));
+                    
+                    languageReports.put(centerNameCode, languageCount);
+               }
+            }
+             httpSession.setAttribute("languagereports", languageReports);
+             new ExamLevelService(request, response).examLevels();
+             new BranchService(request, response).viewBranches();
+     }
+
+    public void languageListReport() {
+
+        new ExamLevelService(request, response).examLevels();
+        new BranchService(request, response).viewBranches();
+        httpSession.setAttribute("languagereports", "");
+        httpSession.setAttribute("printcentername", "");
+        httpSession.setAttribute("printexamlevel", "");
+    }
 }

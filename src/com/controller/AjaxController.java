@@ -17,6 +17,7 @@ import com.model.attendance.action.AttendanceAction;
 import com.model.department.action.DepartmentAction;
 import com.model.employee.action.EmployeeAction;
 import com.model.examdetails.action.ExamDetailsAction;
+import com.model.examlevels.action.ExamLevelAction;
 import com.model.feescategory.action.FeesAction;
 import com.model.feescollection.action.FeesCollectionAction;
 import com.model.feesdetails.action.FeesDetailsAction;
@@ -51,6 +52,10 @@ public class AjaxController extends HttpServlet {
         	new AccountAction(request, response).execute(action);
         }else if(process.equalsIgnoreCase("HrProcess")){
         	new HrAction(request, response).execute(action);
+        }else if("LevelProcess".equalsIgnoreCase(process)){
+            new ExamLevelAction(request, response).execute(action);;
+        }else if("AttendanceProcess".equalsIgnoreCase(process)){
+            new AttendanceAction(request, response).execute(action);;
         }
     }
 

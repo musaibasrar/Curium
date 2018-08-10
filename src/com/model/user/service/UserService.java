@@ -2,7 +2,9 @@ package com.model.user.service;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.Cookie;
@@ -12,7 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
+import com.model.branch.dao.BranchDAO;
 import com.model.branch.dto.Branch;
+import com.model.branch.service.BranchService;
 import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
 import com.model.feescollection.dto.Receiptinfo;
@@ -340,11 +344,11 @@ public class UserService {
         String currentPassword = request.getParameter("currentpassword");
         String newPassword = request.getParameter("newpassword");
         String ConfirmNewPassword = request.getParameter("confirmpassword");
-        
         login = new UserDAO().readPassword(currentPassword);
         
         if (login != null && newPassword.equals(ConfirmNewPassword)) {
             login.setPassword(newPassword);  
+            login.setLastmodifiedby(httpSession.getAttribute("username").toString());
             login = new UserDAO().update(login);
             result = true;
         } else {
@@ -451,4 +455,78 @@ public class UserService {
 		
 	}
 
+    public void viewLogin() {
+        new BranchService(request, response).viewBranches();
+        List<Login> loginList = new UserDAO().readListOfUsers();
+        request.setAttribute("loginlist", loginList);
+               
+    }
+
+    public void addUser() {
+        
+        boolean result = false;
+        Login login = new Login();
+        Branch branch = new BranchDAO().getBranch(DataUtil.emptyString(request.getParameter("centercode")));
+        login.setBranch(branch);
+        login.setUsername(DataUtil.emptyString(request.getParameter("username")));
+        login.setPassword(DataUtil.emptyString(request.getParameter("passwd")));
+        login.setUsertype(DataUtil.emptyString(request.getParameter("usertype")));
+        login.setAddstudentflag((byte)DataUtil.parseInt(request.getParameter("admissionprocess")));
+        login.setLastmodifiedby(httpSession.getAttribute("username").toString());
+        
+        if (!login.getPassword().equalsIgnoreCase("")) {
+            result = new UserDAO().addUser(login);
+        }
+        
+        request.setAttribute("usersave", result);
+    }
+
+    public void updateMultipleUsers() {
+        
+        String[] loginIds = request.getParameterValues("loginids");
+        String[] centerCode = request.getParameterValues("updatecentercode");
+        String[] userName = request.getParameterValues("updateusername");
+        String[] password = request.getParameterValues("updatepassword");
+        String[] addStudentFlag = request.getParameterValues("updateadmissionprocess");
+        String[] userType = request.getParameterValues("updateusertype");
+        
+        if(loginIds!=null){
+            
+            List<Login> loginList = new ArrayList<Login>();
+            Map<Integer, List<String>> userMap = new HashMap<Integer, List<String>>();
+            
+            for(int i=0; i<loginIds.length;i++) {
+                List<String> valSetOne = new ArrayList<String>();
+                String[] lginId = loginIds[i].split(":");
+                valSetOne.add(centerCode[Integer.valueOf(lginId[1])]);
+                valSetOne.add(userName[Integer.valueOf(lginId[1])]);
+                valSetOne.add(password[Integer.valueOf(lginId[1])]);
+                valSetOne.add(userType[Integer.valueOf(lginId[1])]);
+                valSetOne.add(addStudentFlag[Integer.valueOf(lginId[1])]);
+                valSetOne.add(httpSession.getAttribute("username").toString());
+                userMap.put(Integer.valueOf(lginId[0]), valSetOne);
+            }
+            boolean result = new UserDAO().updateMultipleUsers(userMap);
+            request.setAttribute("userupdate", result);
+        }
+}
+
+    public void deleteMultipleUsers() {
+
+        
+        String[] loginIds = request.getParameterValues("loginids");
+        if(loginIds!=null){
+        
+       List<Integer> ids = new ArrayList<Integer>();
+       for (String id : loginIds) {
+           String[] brId = id.split(":");
+           ids.add(Integer.valueOf(brId[0]));
+       }
+       boolean result = new UserDAO().deleteMultipleUsers(ids);
+       request.setAttribute("userdelete", result);
+        }
+        
+    
+        
+    }
 }
