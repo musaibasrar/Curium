@@ -79,5 +79,6 @@
 		<mapping resource="com/model/language/dto/Language.hbm.xml"></mapping>
 		<mapping resource="com/model/qualification/dto/Qualification.hbm.xml"></mapping>
 		<mapping resource="com/model/examlevels/dto/Subexamlevel.hbm.xml"></mapping>
+		<mapping resource="com/model/referencebooks/dto/Referencebooks.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>

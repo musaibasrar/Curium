@@ -1,4 +1,4 @@
-package com.model.qualification.dao;
+package com.model.referencebooks.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +9,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import com.model.examlevels.dto.Examleveldetails;
 import com.model.qualification.dto.Qualification;
+import com.model.referencebooks.dto.Referencebooks;
 import com.util.HibernateUtil;
 
-public class QualificationDAO {
+public class ReferenceBooksDAO {
 
 	
 	Session session = null;
@@ -28,7 +28,7 @@ public class QualificationDAO {
     SessionFactory sessionFactory;
     
 
-	public QualificationDAO() {
+	public ReferenceBooksDAO() {
 		session = HibernateUtil.openSession();
 	}
 
@@ -36,13 +36,13 @@ public class QualificationDAO {
 	
 
 	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Qualification> readListOfObjects() {
+	public List<Referencebooks> readListOfObjects() {
 		
-		List<Qualification> results = new ArrayList<Qualification>();
+		List<Referencebooks> results = new ArrayList<Referencebooks>();
         try {
             
             transaction = session.beginTransaction();
-            results = (List<Qualification>) session.createQuery("From Qualification").list();
+            results = (List<Referencebooks>) session.createQuery("From Referencebooks").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {
             transaction.rollback();
@@ -54,25 +54,26 @@ public class QualificationDAO {
 	}
 
 
-	public void deleteMultiple(List ids) {
+	public boolean deleteMultiple(List ids) {
 		try {
             transaction = session.beginTransaction();
-            Query query = session.createQuery("delete from Department where depid IN (:ids)");
+            Query query = session.createQuery("delete from Referencebooks where idreferencebooks IN (:ids)");
             query.setParameterList("ids", ids);
             query.executeUpdate();
             transaction.commit();
+            return true;
         } catch (HibernateException hibernateException) {
             hibernateException.printStackTrace();
         }
-		
+		return false;
 	}
 
 
-    public boolean addQualification(Qualification qual) {
+    public boolean addReferenceBooks(Referencebooks ref) {
         boolean result = false;
         try {
             transaction = session.beginTransaction();
-            session.save(qual);
+            session.save(ref);
             transaction.commit();
             result = true;
         } catch (HibernateException hibernateException) {
@@ -85,34 +86,13 @@ public class QualificationDAO {
     }
 
 
-
-
-    public boolean deleteMultipleQualification(List<Integer> ids) {
-        
-        boolean result = false;
-        try {
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("delete from Qualification where idqualification IN (:ids)");
-            query.setParameterList("ids", ids);
-            query.executeUpdate();
-            transaction.commit();
-            result = true;
-        } catch (HibernateException hibernateException) {
-            hibernateException.printStackTrace();
-        }
-        return result;
-    }
-
-
-
-
-    public boolean updateMultipleQualification(List<Qualification> qualList) {
+    public boolean updateMultipleReferenceBooks(List<Referencebooks> refbooksList) {
 
         boolean result = false;
         try {
             transaction = session.beginTransaction();
-            for (Qualification qualLevel : qualList) {
-                session.update(qualLevel);
+            for (Referencebooks refBooks : refbooksList) {
+                session.update(refBooks);
             }
             transaction.commit();
             result = true;
@@ -121,5 +101,24 @@ public class QualificationDAO {
         }
         return result;
     
+    }
+
+
+
+
+    public List<Referencebooks> getReferenceBooks(String examLevelCode) {
+        List<Referencebooks> refBooksList = new ArrayList<Referencebooks>();
+        try {
+            
+            transaction = session.beginTransaction();
+            refBooksList = (List<Referencebooks>) session.createQuery("From Referencebooks where examlevelcode='"+examLevelCode+"'").list();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        } finally {
+            //session.close();
+            return refBooksList;
+        }
     }
 }

@@ -111,12 +111,32 @@ public class StudentAction {
                     url = searchRankListReport();
                 }else if (action.equalsIgnoreCase("printRankListReport")) {
                     url = printRankListReport();
+                }else if (action.equalsIgnoreCase("marksSheet")) {
+                    url = marksSheet();
+                }else if (action.equalsIgnoreCase("searchMarksSheet")) {
+                    url = searchMarksSheet();
+                }else if (action.equalsIgnoreCase("printMarksSheet")) {
+                    url = printMarksSheet();
                 }
 		return url;
 	}
 	
 	
-	private String printRankListReport() {
+	private String printMarksSheet() {
+	    return "printmarkssheet.jsp";
+    }
+
+    private String searchMarksSheet() {
+	    new ResultService(request, response).searchMarksSheet();
+            return "markssheet.jsp";
+    }
+
+    private String marksSheet() {
+	    new ResultService(request, response).marksSheet();
+            return "markssheet.jsp";
+    }
+
+    private String printRankListReport() {
         return "printranklistreport.jsp";
     }
 

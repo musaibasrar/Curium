@@ -30,6 +30,7 @@ import com.model.periods.action.PeriodAction;
 import com.model.position.action.PositionAction;
 import com.model.printids.action.PrintIdsAction;
 import com.model.qualification.action.QualificationAction;
+import com.model.referencebooks.action.ReferenceBooksAction;
 import com.model.sendemail.action.EmailAction;
 import com.model.sendsms.action.SmsAction;
 import com.model.stampfees.action.StampFeesAction;
@@ -107,6 +108,8 @@ public class Controller extends HttpServlet {
          nextUrl= new LanguageAction(request, response).execute(action);;
      }else if("QualificationProcess".equalsIgnoreCase(process)){
          nextUrl= new QualificationAction(request, response).execute(action);;
+     }else if("ReferenceBooksProcess".equalsIgnoreCase(process)){
+         nextUrl= new ReferenceBooksAction(request, response).execute(action);;
      }else if("test".equalsIgnoreCase(process)){
          nextUrl= "test.html";
      }

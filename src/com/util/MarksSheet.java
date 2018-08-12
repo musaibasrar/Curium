@@ -2,37 +2,41 @@ package com.util;
 
 import java.util.List;
 
-import com.model.student.dto.Student;
+import com.model.parents.dto.Parents;
 
-public class Result  implements java.io.Serializable,Comparable<Result> {
+public class MarksSheet  implements java.io.Serializable,Comparable<MarksSheet> {
     
-    Student student;
+    Parents parents;
     List<Integer> marksList;
     List<String> subjectList;
     List<String> referenceBooksList;
+    double totalMarksObtained;
     double percentage;
     String resultclass;
     
-    public Result() {
+    public MarksSheet() {
     }
 
-    public Result(Student student, List<Integer> marksList, double percentage, String resultclass, List<String> subjectList, List<String> referenceBooksList) {
-        this.student = student;
+    public MarksSheet(Parents parents, List<Integer> marksList, double percentage, String resultclass, List<String> subjectList, 
+            List<String> referenceBooksList, double totalMarksObtained) {
+        this.parents = parents;
         this.subjectList = subjectList;
         this.marksList = marksList;
         this.percentage = percentage;
         this.resultclass = resultclass;
         this.referenceBooksList = referenceBooksList;
+        this.totalMarksObtained = totalMarksObtained;
+    }
+
+
+    
+    public Parents getParents() {
+        return this.parents;
     }
 
     
-    public Student getStudent() {
-        return this.student;
-    }
-
-    
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setParents(Parents parents) {
+        this.parents = parents;
     }
 
     public String getResultclass() {
@@ -84,9 +88,19 @@ public class Result  implements java.io.Serializable,Comparable<Result> {
         this.referenceBooksList = referenceBooksList;
     }
 
+    
+    public double getTotalMarksObtained() {
+        return this.totalMarksObtained;
+    }
+
+    
+    public void setTotalMarksObtained(double totalMarksObtained) {
+        this.totalMarksObtained = totalMarksObtained;
+    }
+
     @Override
-    public int compareTo(Result result) {
-        double percentage = ((Result) result).getPercentage();
+    public int compareTo(MarksSheet result) {
+        double percentage = ((MarksSheet) result).getPercentage();
         return Double.compare(percentage, this.percentage);
     }
   }
