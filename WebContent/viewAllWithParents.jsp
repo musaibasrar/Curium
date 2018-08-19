@@ -58,9 +58,10 @@
                 color: #FFFFFF;
                 font-weight: normal;
                 width: auto ;
-                height: 22px;
+                height: 27px;
                 vertical-align: middle;
                 text-align: center;
+                
 
             }
             .dataText {

@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.model.employee.dto.Organizersdetails;
 import com.model.employee.dto.Teacher;
 import com.model.position.dto.Position;
 import com.model.student.dto.Student;
@@ -226,5 +227,85 @@ public class EmployeeDAO {
 		} 
 		return employee;
 	}
+
+    public boolean create(Organizersdetails orgDet) {
+        boolean result = false;
+        try {
+                transaction = session.beginTransaction();
+                session.save(orgDet);
+                transaction.commit();
+                result = true;
+        } catch (HibernateException hibernateException) {
+                transaction.rollback();
+                hibernateException.printStackTrace();
+        } finally {
+                session.close();
+        }
+        return result;
+}
+
+    public List<Organizersdetails> readListOfOrganizers() {
+
+        List<Organizersdetails> results = new ArrayList<Organizersdetails>();
+        try {
+
+                transaction = session.beginTransaction();
+                results = (List<Organizersdetails>) session.createQuery("From Organizersdetails")
+                                .list();
+                transaction.commit();
+        } catch (HibernateException hibernateException) {
+                transaction.rollback();
+                hibernateException.printStackTrace();
+        } finally {
+                session.close();
+                return results;
+        }
+}
+
+    public Organizersdetails readOrganizersdetails(long id) {
+
+        Organizersdetails orgDetails = new Organizersdetails();
+
+        try {
+                transaction = session.beginTransaction();
+                Query query = session.createQuery("From Organizersdetails where idorganizersdetails=" + id);
+                orgDetails = (Organizersdetails) query.uniqueResult();
+                transaction.commit();
+        } catch (HibernateException hibernateException) {
+                transaction.rollback();
+                hibernateException.printStackTrace();
+        } 
+
+        return orgDetails;
+}
+
+    public Organizersdetails update(Organizersdetails orgDet) {
+        try {
+    //this.session = sessionFactory.openCurrentSession();
+    transaction = session.beginTransaction();
+    session.update(orgDet);
+    transaction.commit();
+    
+} catch (HibernateException hibernateException) {
+    transaction.rollback();
+    hibernateException.printStackTrace();
+} finally {
+    //session.close();
+    return orgDet;
+}
+}
+
+    public void deleteMultipleOrganizers(List ids) {
+        try {
+    transaction = session.beginTransaction();
+    Query query = session.createQuery("delete from Organizersdetails where idorganizersdetails IN (:ids)");
+    query.setParameterList("ids", ids);
+    query.executeUpdate();
+    transaction.commit();
+} catch (HibernateException hibernateException) {
+    hibernateException.printStackTrace();
+}
+        
+}
 
 }

@@ -40,6 +40,11 @@ public class Student implements java.io.Serializable {
 	private String studentexternalid;
 	private String guardiandetails;
 	private int branchid;
+	private String religion;
+	private String education;
+	private String admittedin;
+	private Integer passedout;
+	private Integer droppedout;
 
 	public Student() {
 	}
@@ -55,7 +60,8 @@ public class Student implements java.io.Serializable {
 			Date admissiondate, String admissionnumber, 
 			String remarks, String guardiandetails,
 			Date createddate, Integer archive, String studentpic,
-			String studentexternalid,  int branchid) {
+			String studentexternalid,  int branchid, String religion, String education,
+			String admittedin, int passedout, int droppedout) {
 		this.name = name;
 		this.qualification = qualification;
 		this.examlevel = examlevel;
@@ -74,6 +80,11 @@ public class Student implements java.io.Serializable {
 		this.studentexternalid = studentexternalid;
 		this.guardiandetails = guardiandetails;
 		this.branchid = branchid;
+		this.religion = religion;
+		this.education = education;
+		this.admittedin = admittedin;
+		this.passedout = passedout;
+		this.droppedout = droppedout;
 	}
 
 	@Id
@@ -262,5 +273,55 @@ public class Student implements java.io.Serializable {
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
 	}
+
+	@Column(name = "religion")
+    public String getReligion() {
+        return this.religion;
+    }
+
+    
+    public void setReligion(String religion) {
+        this.religion = religion;
+    }
+
+    
+    public String getEducation() {
+        return this.education;
+    }
+
+    
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    
+    public String getAdmittedin() {
+        return this.admittedin;
+    }
+
+    
+    public void setAdmittedin(String admittedin) {
+        this.admittedin = admittedin;
+    }
+
+    
+    public Integer getPassedout() {
+        return this.passedout;
+    }
+
+    
+    public void setPassedout(Integer passedout) {
+        this.passedout = passedout;
+    }
+
+    
+    public Integer getDroppedout() {
+        return this.droppedout;
+    }
+
+    
+    public void setDroppedout(Integer droppedout) {
+        this.droppedout = droppedout;
+    }
   
 }

@@ -14,6 +14,11 @@
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/school</property>
 		<property name="hibernate.connection.username">root</property>
 		
+		<!-- <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+	 	<property name="hibernate.connection.password">cmuursaiuibm@123#</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/bie</property>
+		<property name="hibernate.connection.username">root</property> -->
+		
 		
 		<!-- <property name="hibernate.default_schema">school</property> -->
         <!-- <property name="hibernate.hbm2ddl.auto">create-drop</property> -->
@@ -23,6 +28,7 @@
 		<property name="hibernate.connection.username">schoolschool</property>
 		<property name="hibernate.default_schema">schoolschool</property>
 		 -->
+		<property name="Hibernate.temp.use_jdbc_metadata_defaults">false</property>
 		
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="current_session_context_class">thread</property>
@@ -80,5 +86,10 @@
 		<mapping resource="com/model/qualification/dto/Qualification.hbm.xml"></mapping>
 		<mapping resource="com/model/examlevels/dto/Subexamlevel.hbm.xml"></mapping>
 		<mapping resource="com/model/referencebooks/dto/Referencebooks.hbm.xml"></mapping>
+		<mapping resource="com/model/std/dto/Classhierarchy.hbm.xml"></mapping>
+		<mapping resource="com/model/employee/dto/Organizersdetails.hbm.xml"></mapping>
+		<mapping resource="com/model/order/dto/Books.hbm.xml"></mapping>
+		<mapping resource="com/model/order/dto/Orderssummary.hbm.xml"></mapping>
+		<mapping resource="com/model/order/dto/Ordersdetails.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>

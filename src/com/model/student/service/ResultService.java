@@ -414,4 +414,20 @@ public class ResultService {
              new BranchService(request, response).viewBranches();
              new QualificationService(request, response).viewQualification();
      }
+
+    public void resultReportCenter() {
+        
+        if(httpSession.getAttribute(BRANCHID)!=null) {
+        new ExamLevelService(request, response).examLevels();
+        new LanguageService(request, response).viewLanguage();
+        new BranchService(request, response).viewBranchesCenter(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+        new QualificationService(request, response).viewQualification();
+        httpSession.setAttribute("resultlist", "");
+        httpSession.setAttribute("resultsubexamlevel", "");
+        httpSession.setAttribute("resultcentername", "");
+        httpSession.setAttribute("resultexamlevel", "");
+        httpSession.setAttribute("resultlanguage", "");
+        httpSession.setAttribute("resultqualification", "");
+        }
+    }
 }

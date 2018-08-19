@@ -163,4 +163,17 @@ public class BranchService {
         request.setAttribute("centersave", result);
     }
 
+    public void viewBranchesCenter(int branchId) {
+        
+        try {
+            List<Branch> list = new BranchDAO().readListOfObjects(branchId);
+            request.setAttribute("branchList", list);
+            logger.info("Branch List "+list.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        
+    }
+
 }

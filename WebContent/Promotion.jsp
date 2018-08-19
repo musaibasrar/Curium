@@ -1,5 +1,5 @@
 <%--
-    Document   : index
+    Document   : Promotion
     Created on : Dec 23, 2011, 5:52:28 PM
     Author     : Musaib
 --%>
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
+<title>Promotion</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -382,6 +382,27 @@
 		form1.submit();
 
 	}
+	function promoteClass() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=StudentProcess&action=promoteClass";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	function graduated() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=StudentProcess&action=graduated";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	function dropped() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=StudentProcess&action=dropped";
+		form1.method = "POST";
+		form1.submit();
+
+	}
 	$(function() {
 
 		$("#tabs").tabs();
@@ -391,22 +412,32 @@
 		$("#effect").hide();
 
 	});
-	function calculatestock() {
-
-		var tablet = document.getElementById('tablet').value;
-		var strip = document.getElementById('strip').value;
-
-		var stock = Number(tablet) * Number(strip);
-
-		document.getElementById('stockQuantity').value = stock;
-
-	}
+	
 	 $(function(){
          $("#promote").button({
              icons:{
-                 primary: "ui-icon-trash"
+                 primary: "ui-icon-arrowreturnthick-1-n"
              }
+         }).click(function(){
+        			 promoteClass();
          });
+         
+         $("#dropped").button({
+             icons:{
+                 primary: "ui-icon-triangle-1-s"
+             }
+         }).click(function(){
+        	 dropped();
+         });
+         
+         $("#graduated").button({
+             icons:{
+                 primary: "ui-icon-star"
+             }
+         }).click(function(){
+        	 graduated();
+         });
+        
          $('#chckHead').click(function () {
              var length = $('.chcktbl:checked').length;
              var trLength=$('.trClass').length;
@@ -438,11 +469,6 @@
                  $('.chcktbl:not(:checked)').attr('disabled', false);
              }
          });
-         
-         $( "#go" )
-         .button()
-         
-
      });
 </script>
 </head>
@@ -463,8 +489,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1"
-		action="Controller?process=StudentProcess&action=promoteClass" method="POST">
+	<form id="form1" method="POST">
 		<div style="height: 28px">
 			<button id="add">Search</button>
 			<br />
@@ -479,6 +504,24 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
+						
+						<tr>
+							<td class="alignRight" >Center&nbsp;&nbsp;&nbsp;</td>
+							<td width="12%" align="left"><label> <select name="centercode" id="centercode" required
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${branchList}" var="branchlist">
+											<option value="${branchlist.centercode}:${branchlist.centername}" >
+												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label></td>
+							
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 						<tr>
 							<td width="10%" class="alignRight">Examination Level&nbsp;</td>
 							<td width="70%"><label> <select name="examlevel" id="examlevel"
@@ -493,6 +536,23 @@ for(Cookie cookie : cookies){
 							</label></td>
 						</tr>
 
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignRight">Language &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="languageopted" id="languageopted"
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${languageslist}" var="languageslist">
+											<option value="${languageslist.language}" >
+												<c:out value="${languageslist.language}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -522,7 +582,8 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            <th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
+                            <th title="click to sort" class="headerText">Exam Level&nbsp;</th>
+                            <th title="click to sort" class="headerText">Center Code&nbsp;</th>
                             <th title="click to sort" class="headerText">Admission Date</th>
                              
 
@@ -538,6 +599,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Student.name}"/></td>
                                 <td class="dataText"><c:out value="${Student.examlevel}"/></td>
+                                <td class="dataText"><c:out value="${Student.centercode}"/></td>
                                 <td class="dataText"><c:out  value="${Student.admissiondate}"/></td>
                                  <input type="hidden" id="classstudying" name="classstudying" value="${Student.examlevel}"/>
 
@@ -545,7 +607,11 @@ for(Cookie cookie : cookies){
                         </c:forEach>
                     </tbody>
                     <tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><input value="Promote" type="submit" id="promote"/> </td>
+                            <td  class="footerTD" colspan="2" ><button value="Promote" id="promote">Promote</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="graduated">Graduated</button> 
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button id="dropped">Dropped Out</button>
+                            </td>
                     
                         </tr></tfoot>
                 </table>

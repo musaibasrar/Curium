@@ -87,6 +87,7 @@
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    page-break-after:always;
 }
 
 .datatd, .datath {
@@ -95,6 +96,11 @@
     padding: 8px;
 }
 
+.reportheaders{
+	font-weight: bold;
+	font-size: 15px;
+
+}
 </style>
 
 <script>
@@ -189,7 +195,7 @@
 
 <body style="text-align: center" class="bodymargin">
 	<form method="post" class="bodymargin">
-		
+		<c:forEach begin="1" end="${noofpapers}">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
@@ -225,9 +231,9 @@
 			
 			</tr>
 			<tr>
-						<td class="dataTextBoldLeft" style="width: 50%"><c:out value="${printcentername}" />
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printcentername}" /></label>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td class="dataTextBoldLeft" style="width: 50%"><c:out value="${printexamlevel}" /></td>
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printexamlevel}" /></label></td>
 					
 			</tr>
 			
@@ -235,9 +241,9 @@
 			<td></td>
 			</tr>
 			<tr>
-						<td class="dataTextBoldLeft" style="width: 50%"><c:out value="${printlanguage}" />
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printlanguage}" /></label>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td class="dataTextBoldLeft" style="width: 50%"><c:out value="Exam Paper" /></td>
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="Exam Paper" /></label></td>
 			</tr>
 			
 			<tr>
@@ -276,6 +282,7 @@
 			</tbody>
 				</table>
 			<br><br>
+			</c:forEach>
 	</form>
 </body>
 </html>

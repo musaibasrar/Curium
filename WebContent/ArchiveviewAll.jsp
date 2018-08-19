@@ -427,7 +427,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Student.name}"/></td>
-                                <td class="dataText"><c:out value="${Student.classstudying}"/></td>
+                                <td class="dataText"><c:out value="${Student.examlevel}"/></td>
                                 <td class="dataText"><c:out  value="${Student.admissiondate}"/></td>
                                  
 

@@ -552,14 +552,14 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Students Details Report</a></li>
+					<li><a href="#tabs-1">Apply Filters</a></li>
 
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
 								<tr>
-								<td class="alignRightFields" >Apply Filters<br></td>
+								<td class="alignRightFields" >Filters<br></td>
 								</tr>
 								<tr>
 								<td class="alignRightFields"><br></td>
@@ -664,6 +664,23 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Religion &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="religion" id="religion"
+									style="width: 240px;">
+										<option selected></option>
+											<option value="ISLAM" >Islam</option>
+											<option value="OTHERS" >Others</option>
+								</select>
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
 
 						<tr>
 
@@ -691,7 +708,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search result</td>
+					<td class="headerTD">Students Details Report</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"

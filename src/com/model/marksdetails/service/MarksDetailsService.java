@@ -195,7 +195,7 @@ public class MarksDetailsService {
 
 		            List<Subexamlevel>  subExamList =  new ExamLevelService(request, response).getSubExamLevelSubject(examLevel[1]);
 		            request.setAttribute("subjectlist", subExamList);
-		            
+		            httpSession.setAttribute("subjectlistevaluation", subExamList);
 		            request.setAttribute("searchedexamlevel", DataUtil.emptyString(request.getParameter("examlevel")));
 		}
 	}
@@ -499,6 +499,8 @@ public class MarksDetailsService {
         new LanguageService(request, response).viewLanguage();
         new BranchService(request, response).viewBranches();
         httpSession.setAttribute("mapstudentreports", "");
+        httpSession.setAttribute("subjectlistevaluation", "");
+        
     }
 
 }

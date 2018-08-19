@@ -47,15 +47,8 @@
                     window.open('index_superadmin.jsp','_self');
                 }else if(type=='admin'){
                     window.open('index_admin.jsp','_self');
-                }else if(type=='feescollector'){
-                    window.open('index_feescollector.jsp','_self');
-                }else if(type=='reception'){                    
-                   window.open('','_self');
-                    window.close();
-                    openIndexPage('index_reception.jsp',screen.width,screen.height);
-                }
-                else if(type=='staff'){
-                	window.open('index.jsp','_self');
+                }else if(type=='centerorganizer'){
+                    window.open('index_center.jsp','_self');
                 }
             }
             else if(!flag1){
@@ -68,7 +61,7 @@
                 
                 <tr>
                     <td>
-                    	<table width="550" height="400" border="0"  background="images/curiumlogin.jpg" align="center" cellpadding="0" cellspacing="0">
+                    	<table width="550" height="400" border="0"  background="images/bielogin.jpg" align="center" cellpadding="0" cellspacing="0">
 								<tr><td><br><br><br><br><br><br><br><br><br><br></td></tr>
 								<tr><td><br></td></tr>
                             <tr>

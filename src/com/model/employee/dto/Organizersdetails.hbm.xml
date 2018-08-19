@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 13 Aug, 2018 3:12:46 PM by Hibernate Tools 5.3.0.Beta2 --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="com.model.employee.dto.Organizersdetails" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="organizersdetails">
+        <id name="idorganizersdetails" type="java.lang.Integer">
+            <column name="idorganizersdetails"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="name" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="name"/>
+        </property>
+        <property generated="never" lazy="false" name="contactnumber" optimistic-lock="true" type="string" unique="false">
+            <column length="10" name="contactnumber"/>
+        </property>
+        <property generated="never" lazy="false" name="centercode" optimistic-lock="true" type="string" unique="false">
+            <column length="5" name="centercode"/>
+        </property>
+        <property generated="never" lazy="false" name="emailid" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="emailid"/>
+        </property>
+        <property generated="never" lazy="false" name="address" optimistic-lock="true" type="string" unique="false">
+            <column length="200" name="address"/>
+        </property>
+        <property generated="never" lazy="false" name="photo" optimistic-lock="true" type="string" unique="false">
+            <column name="photo"/>
+        </property>
+    </class>
+</hibernate-mapping>

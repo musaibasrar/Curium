@@ -188,7 +188,7 @@ for(Cookie cookie : cookies){
                             </tr>
                             <tr>
                             				<td width="10"></td>
-                                          	<td align="left"><img src="images/curiumheader.png" /></td>  
+                                          	<td align="left"><img src="images/bieheader.png" width="200"/></td>  
                                           	<!-- <td><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td> -->
                             				<td width="40" ><div align="center" ><a target="leftFrame" href="left_admin.jsp"><img src="images/house_home.png" width="35" height="35" alt="Home"  title="Home"/></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><a target="leftFrame" href="left_admin.jsp" style="color:white;font-size: 11px;font-family: arial;">Home</a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>

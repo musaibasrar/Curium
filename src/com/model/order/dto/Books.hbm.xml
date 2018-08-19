@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 14 Aug, 2018 9:02:51 AM by Hibernate Tools 5.3.0.Beta2 --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="com.model.order.dto.Books" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="books">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="isbn" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="ISBN" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="language" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="language" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="author" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="author"/>
+        </property>
+        <property generated="never" lazy="false" name="publisher" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="publisher"/>
+        </property>
+        <property generated="never" lazy="false" name="bookimage" optimistic-lock="true" type="string" unique="false">
+            <column name="bookimage"/>
+        </property>
+        <property generated="never" lazy="false" name="genre" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="genre"/>
+        </property>
+        <property generated="never" lazy="false" name="title" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="title"/>
+        </property>
+        <property generated="never" lazy="false" name="quantity" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="quantity"/>
+        </property>
+        <property generated="never" lazy="false" name="edition" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="edition"/>
+        </property>
+        <property generated="never" lazy="false" name="totalpage" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="totalpage"/>
+        </property>
+        <property generated="never" lazy="false" name="description" optimistic-lock="true" type="string" unique="false">
+            <column length="500" name="description"/>
+        </property>
+        <property generated="never" lazy="false" name="userid" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="userid"/>
+        </property>
+        <property generated="never" lazy="false" name="price" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="price"/>
+        </property>
+    </class>
+</hibernate-mapping>

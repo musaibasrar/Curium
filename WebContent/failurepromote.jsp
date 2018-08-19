@@ -91,12 +91,8 @@ for(Cookie cookie : cookies){
         <form id="form1" action=""  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="250" align="center" valign="middle"><p class="style1"> Student Added Successfully</p>
-        <p class="style1">
-          
-            <input type="button" id="view" value="View All " onClick="ViewAll()">
-            <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='addStudent.jsp';">
-        </p></td>
+        <td height="250" align="center" valign="middle"><p class="style1"> Failed to update the academic status of Student,Please try again.</p>
+        </td>
       </tr>
     </table>
             </form>

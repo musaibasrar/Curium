@@ -1,5 +1,5 @@
 <%-- 
-    Document   : Saved
+    Document   : Success Promote
     Created on : Jan 5, 2012, 1:11:53 PM
     Author     : Musaib
 --%>
@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Save success</title>
+        <title>Success Promote</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -91,11 +91,8 @@ for(Cookie cookie : cookies){
         <form id="form1" action=""  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="250" align="center" valign="middle"><p class="style1"> Student Added Successfully</p>
+        <td height="250" align="center" valign="middle"><p class="style1">Student(s) academic status has been updated successfully</p>
         <p class="style1">
-          
-            <input type="button" id="view" value="View All " onClick="ViewAll()">
-            <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='addStudent.jsp';">
         </p></td>
       </tr>
     </table>

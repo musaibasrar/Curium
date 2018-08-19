@@ -53,14 +53,29 @@
         <property name="studentpic" type="string">
             <column name="studentpic" />
         </property>
+        <property name="religion" type="string">
+            <column name="religion" />
+        </property>
+        <property name="education" type="string">
+            <column name="education" />
+        </property>
         <property name="studentexternalid" type="string">
             <column name="studentexternalid" length="45" not-null="true" unique="true" />
         </property>
         <property name="guardiandetails" type="string">
             <column name="guardiandetails" length="200" />
         </property>
+        <property name="admittedin" type="string">
+            <column name="admittedin" length="20" />
+        </property>
           <property name="branchid" type="int">
             <column name="branchid" />
+        </property>
+         <property name="passedout" type="int">
+            <column name="passedout" />
+        </property>
+         <property name="droppedout" type="int">
+            <column name="droppedout" />
         </property>
     </class>
 </hibernate-mapping>

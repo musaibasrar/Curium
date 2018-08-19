@@ -468,6 +468,32 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.gender}" />
                             </td>
                         </tr>
+                        
+                        <tr>
+
+                            <td width="25%"  class="alignLeft" height="50">Father's Name</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.fathersname}" />
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50" >Husband's Name
+                            </td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.mothersname}" />
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="25%"  class="alignLeft" height="50">Guardian's name</td>
+                            <td width="25%" class="tablerows" >
+                                 <c:out value="${student.guardiandetails}" />
+                                
+                            </td>
+                             <td width="25%"  class="alignLeft" height="50" >Contact Number</td>
+                            <td  width="25%"  class="tablerows">
+                                <c:out default="" value="${parents.contactnumber}" />
+                            </td>
+                        </tr>
+                        
                         <tr>
                             <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
                             <td width="25%" class="tablerows" >
@@ -497,11 +523,12 @@ for(Cookie cookie : cookies){
                             <td  width="25%"  class="tablerows">
                                 <c:out default="" value="${student.examlevel}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50">Language Opted
+                            
+                            <td width="25%"  class="alignLeft" height="50" >Admitted In</td>
+                            <td  width="25%"  class="tablerows">
+                                <c:out default="" value="${student.admittedin}" />
                             </td>
-                            <td width="25%" class="tablerows">
-                                <c:out default="" value="${student.languageopted}" />
-                            </td>
+                           
                         </tr>
                         <tr>
                         <td width="25%"   class="alignLeft" height="50" >Center Code</td>
@@ -514,25 +541,39 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.districtcode}" />
                             </td>
-                           
-                           
-                        
                         </tr>
-                        
-
                         <tr>
                         
-                        <td  width="25%"  class="alignLeft" height="50">Remakrs
+                         
+                            <td width="25%"  class="alignLeft" height="50">Language Opted
                             </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.remarks}" />
-                                
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.languageopted}" />
                             </td>
+                            
                              <td  width="25%"  class="alignLeft" height="50">Created Date
                             </td>
                             <td width="25%" class="tablerows">
                                 <%-- <c:out default="" value="${student.createddate}" /> --%>
                                 <fmt:formatDate value="${student.createddate}" pattern="yyyy-MM-dd"/>
+                            </td>
+                        </tr>
+                        <tr>
+                        <td  width="25%"  class="alignLeft" height="50">Religion
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.religion}" />
+                                
+                            </td>
+                             
+                        </tr>
+                        
+                        <tr>
+                        <td  width="25%"  class="alignLeft" height="50">Remakrs
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.remarks}" />
+                                
                             </td>
                         </tr>
                                                 
@@ -566,30 +607,7 @@ for(Cookie cookie : cookies){
 
                     <table  border="0px" width="100%"  id="table1" align="center">
 
-                        <tr>
-
-                            <td width="25%"  class="alignLeft" height="50">Father's Name</td>
-                            <td width="25%" class="tablerows" style="text-transform:uppercase">
-                                <c:out default="" value="${parents.fathersname}" />
-                            </td>
-                            <td width="25%"  class="alignLeft" height="50" >Husband's Name
-                            </td>
-                            <td width="25%" class="tablerows" style="text-transform:uppercase">
-                                <c:out default="" value="${parents.mothersname}" />
-                            </td>
-                        </tr>
                         
-                        <tr>
-                            <td width="25%"  class="alignLeft" height="50">Guardian's name</td>
-                            <td width="25%" class="tablerows" >
-                                 <c:out value="${student.guardiandetails}" />
-                                
-                            </td>
-                             <td width="25%"  class="alignLeft" height="50" >Contact Number</td>
-                            <td  width="25%"  class="tablerows">
-                                <c:out default="" value="${parents.contactnumber}" />
-                            </td>
-                        </tr>
                         <!--<tr>
                             <td width="25%"  class="alignLeft" height="50" >Address line 2</td>
                             <td width="25%"  class="tablerows" >
@@ -620,6 +638,10 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${parents.remarks}" />
                             </td>
+                            <td  width="25%"  class="alignLeft" height="50">Education</td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.education}" />
+                            </td>
                         </tr>
                         
 
@@ -648,7 +670,7 @@ for(Cookie cookie : cookies){
 
 
             </div>
-              <div id="accordion2" style="width: 100%;height: 100%">
+              <%-- <div id="accordion2" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Fees Details</a></h3>
                 
@@ -702,8 +724,8 @@ for(Cookie cookie : cookies){
 
 
 
-            </div>
-            <div id="accordion3" style="width: 100%;height: 100%">
+            </div> --%>
+            <%-- <div id="accordion3" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Fees Structure</a></h3>
                 
@@ -766,7 +788,7 @@ for(Cookie cookie : cookies){
 
 
 
-            </div>
+            </div> --%>
             <table  width="70%"  id="table11" align="center">
                         <tr>
                             <td width="30%"> 

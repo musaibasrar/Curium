@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 15 Aug, 2018 11:48:02 AM by Hibernate Tools 5.3.0.Beta2 --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="com.model.order.dto.Ordersdetails" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="ordersdetails">
+        <id name="idordersdetails" type="java.lang.Integer">
+            <column name="idordersdetails"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="bookid" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="bookid"/>
+        </property>
+                <property generated="never" lazy="false" name="orderssummaryid" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="orderssummaryid"/>
+        </property> 
+        <property generated="never" lazy="false" name="quantity" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="quantity"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -27,111 +27,7 @@ Author     : Musaib
         <link href="css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="js/notification/jquery.jnotify.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="css/font-awesome.css">
-        <script type="text/javascript">
-            var get;
-            function getdata1() {
-                var startHour, startMin;
-                var tDate = new Date();
-                startHour = tDate.getHours();
-                startMin = tDate.getMinutes();
-
-                if (typeof XMLHttpRequest != "undefined") {
-                    get = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    get = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                get.onreadystatechange = processdata;
-                get.open("POST", "AjaxController?process=VisitProcess&action=getAJaxNextVisit&startHour=" + startHour + "&startMin=" + startMin, true);
-                get.send(null);
-
-            }
-
-            function processdata() {
-                var id, hourID, patientID, reminderTime, visitTime, rating, name, complaint, link;
-                if (get.readyState == 4)
-                {
-                    if (get.status == 200) {
-                        var visits = get.responseXML.getElementsByTagName("Visits")[0];
-                        var visitNodes = visits.getElementsByTagName("Visit");
-                        for (var i = 0; i < visitNodes.length; i++) {
-                            var visit = visitNodes[i];
-
-                            patientID = visit.getElementsByTagName("PatientID")[0].firstChild.nodeValue;
-                            visitTime = visit.getElementsByTagName("VisitTime")[0].firstChild.nodeValue;
-                            name = visit.getElementsByTagName("PatientName")[0].firstChild.nodeValue;
-                            link = "<a target='mainFrame' href='Controller?process=PatientProcess&action=viewDetails&id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
-
-                            $(function() {
-                                $('#Notification').jnotifyAddMessage({
-                                    text: link,
-                                    permanent: false,
-                                    disappearTime: 30000
-                                });
-
-                            });
-
-                        }
-
-
-                        setTimeout('getdata1();', 60000);
-
-
-                    }
-                }
-
-            }
-            /**
-             * Comment
-             */
-            var getExpiringStockCount;
-            function getExpiringStock() {
-                if (typeof XMLHttpRequest != "undefined") {
-                    getExpiringStockCount = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getExpiringStockCount = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                getExpiringStockCount.onreadystatechange = processExpiringStockData;
-                getExpiringStockCount.open("POST", "AjaxController?process=StockProcess&action=getExpiringStock", true);
-                getExpiringStockCount.send(null);
-
-            }
-           
-            var getDepletingStockCount;
-            function getDepletingStock() {
-                if (typeof XMLHttpRequest != "undefined") {
-                    getDepletingStockCount = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getDepletingStockCount = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                getDepletingStockCount.onreadystatechange = processDepletingStockData;
-                getDepletingStockCount.open("POST", "AjaxController?process=StockProcess&action=getDepletingStock", true);
-                getDepletingStockCount.send(null);
-
-            }
-            function processDepletingStockData() {
-
-                if (getDepletingStockCount.readyState == 4)
-                {
-                    if (getDepletingStockCount.status == 200) {
-                        var count = getDepletingStockCount.responseXML.getElementsByTagName("DepletingStockCount")[0];
-                        var depletingStockCount = count.childNodes[0].nodeValue;
-                        var depletingStock = document.getElementById("depletingStock");
-                        depletingStock.innerHTML = " " + depletingStockCount;
-                        setTimeout('getDepletingStock();', 60000);
-
-
-                    }
-                }
-
-            }
-
-        </script>
+        
         <script type="text/javascript">
             var req;
 
@@ -449,6 +345,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=resultReport" style="font-size: 12px;">Result Report</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=rankListReport" style="font-size: 12px;">Rank List</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=marksSheet" style="font-size: 12px;">Marks Sheet</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=evaluationSheet" style="font-size: 12px;">Evaluation Sheet</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
@@ -479,7 +376,7 @@ for(Cookie cookie : cookies){
             <div>
                 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=enterMarks" style="font-size: 12px;">Enter Marks</a><br/>
                 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
-            	<a target="mainFrame" href="progressreport.jsp" style="font-size: 12px;">Generate Report</a><br/>
+            	<!-- <a target="mainFrame" href="progressreport.jsp" style="font-size: 12px;">Generate Report</a><br/> -->
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
@@ -540,6 +437,25 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
             </div>
             
+             <h5 style="font-size: 12px"><a href="#" >Order Management</a></h5>
+            <div >
+            	<a target="mainFrame" href="Controller?process=OrderProcess&action=placeOrder" style="font-size: 12px;">Place Order</a><br/>
+            	<a target="mainFrame" href="Controller?process=OrderProcess&action=viewOrder" style="font-size: 12px;">View Orders</a><br/>
+            </div>
+            
+            <h5 style="font-size: 12px"><a href="#" >Organizers</a></h5>
+            <div >
+            	<a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllOrganizers" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=addNewOrganizersDetails" style="font-size: 12px;">Add New</a><br/>
+            </div>
+            
+            <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Archive</a></h5>
+            <div>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=viewGraduated" >Graduated Students</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=viewDropped" >Dropped Out Students</a><br/>
+            </div>
+
              <!-- <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=HrProcess&action=advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>

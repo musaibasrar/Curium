@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.parents.dto.Parents;
+import com.model.std.dto.Classhierarchy;
 import com.model.student.dto.Student;
 import com.model.student.dto.Studentfeesstructure;
 import com.util.HibernateUtil;
@@ -59,7 +60,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("FROM Student s where s.archive = 0 AND branchid="+branchId+" order by name ASC");
+					.createQuery("FROM Student s where s.archive = 0 AND s.passedout = 0 AND s.droppedout = 0 order by name ASC");
 			query.setFirstResult(offset);
 			query.setMaxResults(noOfRecords);
 			results = query.list();
@@ -84,7 +85,7 @@ public class studentDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("From Student where archive=0 AND branchid="+branchId)
+			results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND droppedout = 0 ")
 					.list();
 			noOfRecords = results.size();
 			System.out
@@ -148,7 +149,7 @@ public class studentDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("From Student where archive=0 AND branchid="+branchId)
+			results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND droppedout = 0 ")
 					.list();
 			transaction.commit();
 
@@ -245,7 +246,7 @@ public class studentDetailsDAO {
 			transaction = session.beginTransaction();
 
 			results = (java.util.List<Student>) session.createQuery(
-					"From Student s where s.branchid="+branchId+" AND s.examlevel = '" +examLevel+ "'").list();
+					"From Student s where s.examlevel = '" +examLevel+ "'").list();
 			transaction.commit();
 
 		} catch (HibernateException hibernateException) {
@@ -279,42 +280,19 @@ public class studentDetailsDAO {
 
 		try {
 			transaction = session.beginTransaction();
-
-			String hql = "UPDATE Student set classstudying = :promotedclass WHERE sid IN (:ids)";
+			Query query1 = session.createQuery("From Classhierarchy where lowerclass = '"+classStudying+"'");
+			Classhierarchy ch = (Classhierarchy) query1.uniqueResult();
+			String hql = "UPDATE Student set examlevel = :promotedclass WHERE sid IN (:ids)";
 			Query query = session.createQuery(hql);
-			if(classStudying.equalsIgnoreCase("Nursery")){
-				query.setParameter("promotedclass", "L.K.G "+sec);
-			}else if(classStudying.equalsIgnoreCase("L.K.G")){
-				query.setParameter("promotedclass", "U.K.G "+sec);
-			}else if(classStudying.equalsIgnoreCase("U.K.G")){
-				query.setParameter("promotedclass", "I "+sec);
-			}else if(classStudying.equalsIgnoreCase("I")){
-				query.setParameter("promotedclass", "II "+sec);
-			}else if(classStudying.equalsIgnoreCase("II")){
-				query.setParameter("promotedclass", "III "+sec);
-			}else if(classStudying.equalsIgnoreCase("III")){
-				query.setParameter("promotedclass", "IV "+sec);
-			}else if(classStudying.equalsIgnoreCase("IV")){
-				query.setParameter("promotedclass", "V "+sec);
-			}else if(classStudying.equalsIgnoreCase("V")){
-				query.setParameter("promotedclass", "VI "+sec);
-			}else if(classStudying.equalsIgnoreCase("VI")){
-				query.setParameter("promotedclass", "VII "+sec);
-			}else if(classStudying.equalsIgnoreCase("VII")){
-				query.setParameter("promotedclass", "VIII "+sec);
-			}else if(classStudying.equalsIgnoreCase("VIII")){
-				query.setParameter("promotedclass", "IX "+sec);
-			}else if(classStudying.equalsIgnoreCase("IX")){
-				query.setParameter("promotedclass", "X "+sec);
+			if(ch!=null) {
+			    query.setParameter("promotedclass", ch.getUpperclass());
 			}
-			
 			query.setParameterList("ids", ids);
-
 			query.executeUpdate();
 			transaction.commit();
 			result = true;
-		} catch (HibernateException hibernateException) {
-			hibernateException.printStackTrace();
+		} catch (Exception Exception) {
+			Exception.printStackTrace();
 			result = false;
 		} finally {
 			return result;
@@ -327,22 +305,16 @@ public class studentDetailsDAO {
 		List<Parents> results = new ArrayList<Parents>();
 
 		try {
-			
 			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("From Parents as parents where parents.Student.archive=0 AND parents.branchid = "+branchId+" order by name ASC");
+			Query query = session.createQuery("From Parents as parents where parents.Student.archive=0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 order by name ASC");
 			query.setFirstResult(offset);   
 			query.setMaxResults(noOfRecords);
 			results = query.getResultList();
-			
 			transaction.commit();
-			
-
 		} catch (Exception hibernateException) {
 			transaction.rollback();
 			System.out.println("Exception is "+hibernateException);
 			hibernateException.printStackTrace();
-
 		} finally {
 			// session.close();
 			return results;
@@ -360,7 +332,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("FROM Student s where s.archive = 0 and s.branchid= "+branchId+" order by name ASC");
+					.createQuery("FROM Student s where s.archive = 0 AND s.passedout = 0 AND s.droppedout = 0 order by name ASC");
 			
 			results = query.list();
 			transaction.commit();
@@ -523,7 +495,7 @@ public class studentDetailsDAO {
 	                
 	                transaction = session.beginTransaction();
 	                Query query = session
-	                                .createQuery("From Parents as parents where parents.Student.archive=0 order by name ASC");
+	                                .createQuery("From Parents as parents where parents.Student.archive=0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0  order by name ASC");
 	                query.setFirstResult(offset);   
 	                query.setMaxResults(noOfRecords);
 	                results = query.getResultList();
@@ -548,7 +520,7 @@ public class studentDetailsDAO {
 	        int noOfRecords = 0;
 	        try {
 	                transaction = session.beginTransaction();
-	                results = (List<Student>) session.createQuery("From Student where archive=0").list();
+	                results = (List<Student>) session.createQuery("From Student where archive=0 AND s.passedout = 0 AND s.droppedout = 0 ").list();
 	                noOfRecords = results.size();
 	                transaction.commit();
 	        } catch (HibernateException hibernateException) {
@@ -559,5 +531,138 @@ public class studentDetailsDAO {
 	                return noOfRecords;
 	        }
 	}
+
+        public boolean graduateMultiple(List ids) {
+            boolean result = false;
+
+          try {
+                  transaction = session.beginTransaction();
+                  String hql = "UPDATE Student set passedout = 1 WHERE sid IN (:ids)";
+                  Query query = session.createQuery(hql);
+                  query.setParameterList("ids", ids);
+                  query.executeUpdate();
+                  transaction.commit();
+                  result = true;
+          } catch (Exception Exception) {
+                  Exception.printStackTrace();
+                  result = false;
+          } finally {
+                  return result;
+          }
+
+  }
+
+        public boolean droppedMultiple(List ids) {
+            boolean result = false;
+
+          try {
+                  transaction = session.beginTransaction();
+                  String hql = "UPDATE Student set droppedout = 1 WHERE sid IN (:ids)";
+                  Query query = session.createQuery(hql);
+                  query.setParameterList("ids", ids);
+                  query.executeUpdate();
+                  transaction.commit();
+                  result = true;
+          } catch (Exception Exception) {
+                  Exception.printStackTrace();
+                  result = false;
+          } finally {
+                  return result;
+          }
+
+  }
+
+        public List<Student> readListOfStudentsGraduated() {
+            List<Student> results = new ArrayList<Student>();
+
+            try {
+                    // this.session =
+                    // HibernateUtil.getSessionFactory().openCurrentSession();
+                    transaction = session.beginTransaction();
+
+                    results = (List<Student>) session.createQuery(
+                                    "FROM Student s where s.passedout = 1 order by name ASC")
+                                    .list();
+                    transaction.commit();
+
+            } catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+
+            } finally {
+                    // session.close();
+                    return results;
+            }
+    }
+
+        public List<Student> readListOfStudentsDropped() {
+            List<Student> results = new ArrayList<Student>();
+
+            try {
+                    // this.session =
+                    // HibernateUtil.getSessionFactory().openCurrentSession();
+                    transaction = session.beginTransaction();
+
+                    results = (List<Student>) session.createQuery(
+                                    "FROM Student s where s.droppedout = 1 order by name ASC")
+                                    .list();
+                    transaction.commit();
+
+            } catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+
+            } finally {
+                    // session.close();
+                    return results;
+            }
+    }
+
+        public void restoreMultipleGraduate(List ids) {
+            try {
+                transaction = session.beginTransaction();
+                Query query = session
+                                .createQuery("update Student set passedout = 0  where id IN (:ids)");
+                query.setParameterList("ids", ids);
+                query.executeUpdate();
+                transaction.commit();
+        } catch (HibernateException hibernateException) {
+                hibernateException.printStackTrace();
+        }
+
+}
+
+        public void restoreMultipleDroppedout(List ids) {
+            try {
+                transaction = session.beginTransaction();
+                Query query = session.createQuery("update Student set droppedout = 0  where id IN (:ids)");
+                query.setParameterList("ids", ids);
+                query.executeUpdate();
+                transaction.commit();
+        } catch (HibernateException hibernateException) {
+                hibernateException.printStackTrace();
+        }
+
+}
+
+        public int getNoOfRecordsCenter(int branchId) {
+            List<Student> results = new ArrayList<Student>();
+            int noOfRecords = 0;
+            try {
+                    transaction = session.beginTransaction();
+                    results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND droppedout = 0 AND branchid="+branchId)
+                                    .list();
+                    noOfRecords = results.size();
+                    System.out.println("The size of list is:::::::::::::::::::::::::::::::::::::::::: "+ noOfRecords);
+                    transaction.commit();
+            } catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+
+            } finally {
+                    // session.close();
+                    return noOfRecords;
+            }
+    }
 	
 }

@@ -7,12 +7,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.model.academicyear.dao.YearDAO;
+import com.model.academicyear.dto.Currentacademicyear;
+import com.model.branch.dao.BranchDAO;
+import com.model.branch.service.BranchService;
 import com.model.department.dao.departmentDAO;
 import com.model.department.dto.Department;
 import com.model.employee.dao.EmployeeDAO;
+import com.model.employee.dto.Organizersdetails;
 import com.model.employee.dto.Teacher;
+import com.model.feescollection.dao.feesCollectionDAO;
+import com.model.feescollection.dto.Receiptinfo;
+import com.model.parents.dao.parentsDetailsDAO;
+import com.model.parents.dto.Parents;
 import com.model.position.dao.positionDAO;
 import com.model.position.dto.Position;
+import com.model.std.dto.Classsec;
+import com.model.student.dao.studentDetailsDAO;
+import com.model.student.dto.Student;
+import com.model.student.dto.Studentfeesstructure;
 import com.model.user.dao.UserDAO;
 import com.model.user.dto.Login;
 import com.model.user.service.UserService;
@@ -180,5 +199,223 @@ public class EmployeeService {
 		
 		new EmployeeService(request, response).ViewAllEmployee();
 	}
+
+    public boolean addOrganizer() {
+        
+        Organizersdetails orgDet = new Organizersdetails();
+        boolean result = false;
+        try {
+                List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+        
+                 for (FileItem item : items) {
+                    if (item.isFormField()) {
+                        String fieldName = item.getFieldName();
+
+                        if (fieldName.equalsIgnoreCase("name")) {
+                            
+                            orgDet.setName(DataUtil.emptyString(item.getString()));
+                        }
+
+                        
+                        if (fieldName.equalsIgnoreCase("contactnumber")) {
+                            
+                            orgDet.setContactnumber(DataUtil.emptyString(item.getString()));
+
+                        }
+
+                        if (fieldName.equalsIgnoreCase("centercode")) {
+
+                            orgDet.setCentercode(DataUtil.emptyString(item.getString()));
+
+                        }
+
+                        if (fieldName.equalsIgnoreCase("email")) {
+                            orgDet.setEmailid(DataUtil.emptyString(item.getString()));
+                        }
+                        
+                        if (fieldName.equalsIgnoreCase("Address")) {
+                            orgDet.setAddress(DataUtil.emptyString(item.getString()));
+                        }
+                        
+                    } else {
+                        // Process form file field (input type="file").
+                        String fieldName = item.getFieldName();
+
+                        if (fieldName.equalsIgnoreCase("fileToUpload")) {
+
+                            String fileName = (DataUtil.emptyString(item.getName()));
+                            String fileValue = (DataUtil.emptyString(item.getString()));
+                            if (!fileName.equalsIgnoreCase("")) {
+                                // encode data on your side using BASE64
+                                byte[]   bytesEncoded = Base64.encodeBase64(item.get());
+                                String saveFile = new String(bytesEncoded);
+                                orgDet.setPhoto(saveFile);
+                            } 
+                        }
+                    }
+                }
+        } catch (FileUploadException e) {
+                e.printStackTrace();
+        }
+        
+        
+      
+        result = new EmployeeDAO().create(orgDet);
+
+        return result;
+
+}
+
+    public void viewAllOrganizers() {
+        
+            try {
+            List<Organizersdetails> list = new EmployeeDAO().readListOfOrganizers();
+            httpSession.setAttribute("organizersList", list);
+            } catch (Exception e) {
+            e.printStackTrace();
+            }
+    }
+
+    public void viewOrganizerDetails() {
+        boolean result = false;
+       try {
+           long id = Long.parseLong(request.getParameter("id"));
+           Organizersdetails organizer = new EmployeeDAO().readOrganizersdetails(id);
+          
+           if (organizer.getIdorganizersdetails() != null) {
+               httpSession.setAttribute("organizersdetails", organizer);
+           } 
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+}
+
+    public boolean viewDetailsOfOrganizer() {
+        boolean result = false;
+        try {
+                long id = Long.parseLong(request.getParameter("id"));
+                Organizersdetails organizersDetails = new EmployeeDAO().readOrganizersdetails(id);
+                
+                if (organizersDetails == null) {
+                        result = false;
+                } else {
+                        new BranchService(request, response).viewBranches();
+                        httpSession.setAttribute("organizer", organizersDetails);
+                        httpSession.setAttribute("organizersphoto", organizersDetails.getPhoto());
+                        httpSession.setAttribute("resultfromservice",result);
+                        result = true;
+                }
+        } catch (Exception e) {
+                e.printStackTrace();
+                result = false;
+        }
+        return result;
+}
+
+    public String updateOrganizer() {
+        Organizersdetails orgDet = new Organizersdetails();
+        boolean result = false;
+        String id = "";
+        String pid = "";
+        int organizerId = 0;
+        String organizerPicUpdate=null;
+        
+        try{
+                
+        List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+
+         for (FileItem item : items) {
+            if (item.isFormField()) {
+                // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
+                String fieldName = item.getFieldName();
+               
+                if (fieldName.equalsIgnoreCase("id")) {                 
+                id = DataUtil.emptyString(item.getString());
+                
+                }
+                
+                        if(id!=""){
+                                organizerId = Integer.parseInt(id);
+                                orgDet.setIdorganizersdetails(organizerId);
+                        }
+                        
+                       
+                
+                         if (fieldName.equalsIgnoreCase("name")) {
+                            
+                            orgDet.setName(DataUtil.emptyString(item.getString()));
+                        }
+
+                        
+                        if (fieldName.equalsIgnoreCase("contactnumber")) {
+                            
+                            orgDet.setContactnumber(DataUtil.emptyString(item.getString()));
+
+                        }
+
+                        if (fieldName.equalsIgnoreCase("centercode")) {
+
+                            orgDet.setCentercode(DataUtil.emptyString(item.getString()));
+
+                        }
+
+                        if (fieldName.equalsIgnoreCase("email")) {
+                            orgDet.setEmailid(DataUtil.emptyString(item.getString()));
+                        }
+                        
+                        if (fieldName.equalsIgnoreCase("Address")) {
+                            orgDet.setAddress(DataUtil.emptyString(item.getString()));
+                        }
+                                                                    
+                        if(fieldName.equalsIgnoreCase("organizerpicupdate")){
+                            organizerPicUpdate=DataUtil.emptyString(item.getString());
+                        }
+                        
+                    } else {
+                String fieldName = item.getFieldName();
+
+                if (fieldName.equalsIgnoreCase("fileToUpload")) {
+
+
+                    String fileName = (DataUtil.emptyString(item.getName()));
+                    String fileValue = (DataUtil.emptyString(item.getString()));
+                    if (!fileName.equalsIgnoreCase("")) {
+                       
+                                                
+                        // Resize the image
+                        byte[]   bytesEncoded = Base64.encodeBase64(item.get());
+                        System.out.println("ecncoded value is " + new String(bytesEncoded ));
+                        String saveFile = new String(bytesEncoded);
+
+                        orgDet.setPhoto(saveFile);
+
+                    } else{
+                        
+                        orgDet.setPhoto(organizerPicUpdate);
+                    }
+                }
+            }
+        }
+
+} catch (Exception e) {
+        e.printStackTrace();
+}
+         orgDet = new EmployeeDAO().update(orgDet);
+        return orgDet.getIdorganizersdetails().toString();
+}
+
+    public void deleteMultipleOrganizers() {
+        String[] employeeIds = request.getParameterValues("organizersIDs");
+        if(employeeIds!=null){
+       List ids = new ArrayList();
+       for (String id : employeeIds) {
+           System.out.println("id" + id);
+           ids.add(Integer.valueOf(id));
+
+       }
+       System.out.println("id length" + employeeIds.length);
+       new EmployeeDAO().deleteMultipleOrganizers(ids);
+        }
+}
 
 }

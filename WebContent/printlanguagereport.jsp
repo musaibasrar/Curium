@@ -94,6 +94,11 @@
     text-align: left;
     padding: 8px;
 }
+.reportheaders{
+	font-weight: bold;
+	font-size: 15px;
+
+}
 
 </style>
 
@@ -225,9 +230,9 @@
 			
 			</tr>
 			<tr>
-						<td class="dataTextBoldLeft" style="width: 50%"><c:out value="${printcentername}" />
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printcentername}" /></label>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td class="dataTextBoldLeft" style="width: 50%"><c:out value="${printexamlevel}" /></td>
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printexamlevel}" /></label></td>
 					
 			</tr>
 			

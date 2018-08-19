@@ -47,7 +47,6 @@ public class AjaxController extends HttpServlet {
         
         String process = request.getParameter("process");
         String action = request.getParameter("action");
-       System.out.println("AJAX CONTROLLER");
         if (process.equalsIgnoreCase("SubGroupName")) {
         	new AccountAction(request, response).execute(action);
         }else if(process.equalsIgnoreCase("HrProcess")){

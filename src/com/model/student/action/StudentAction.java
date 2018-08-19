@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.branch.service.BranchService;
 import com.model.examlevels.service.ExamLevelService;
+import com.model.language.service.LanguageService;
+import com.model.marksdetails.service.MarksDetailsService;
 import com.model.stampfees.service.StampFeesService;
 import com.model.student.service.ResultService;
 import com.model.student.service.StudentService;
@@ -37,7 +40,9 @@ public class StudentAction {
 			url = viewAll();
 		}else if (action.equalsIgnoreCase("viewAllStudents")) {
 			url = viewAllStudents();
-		}else if (action.equalsIgnoreCase("viewAllStudentsWithParents")) {
+		}else if (action.equalsIgnoreCase("viewAllStudentsCenter")) {
+                    url = viewAllStudentsCenter();
+                }else if (action.equalsIgnoreCase("viewAllStudentsWithParents")) {
 			url = viewAllStudentsWithParents();
 		}else if (action.equalsIgnoreCase("AddStudent")) {
 			url = addStudent();
@@ -79,6 +84,8 @@ public class StudentAction {
                     url = viewAllSuperAdmin();
                 }else if (action.equalsIgnoreCase("studentsListReport")) {
                     url = studentsListReport();
+                }else if (action.equalsIgnoreCase("studentsListReportCenter")) {
+                    url = studentsListReportCenter();
                 }else if (action.equalsIgnoreCase("searchStudents")) {
                     url = searchStudents();
                 }else if (action.equalsIgnoreCase("exportStudentsReport")) {
@@ -101,6 +108,8 @@ public class StudentAction {
                     url = promotion();
                 }else if (action.equalsIgnoreCase("resultReport")) {
                     url = resultReport();
+                }else if (action.equalsIgnoreCase("resultReportCenter")) {
+                    url = resultReportCenter();
                 }else if (action.equalsIgnoreCase("searchResultReport")) {
                     url = searchResultReport();
                 }else if (action.equalsIgnoreCase("printResultReport")) {
@@ -117,12 +126,95 @@ public class StudentAction {
                     url = searchMarksSheet();
                 }else if (action.equalsIgnoreCase("printMarksSheet")) {
                     url = printMarksSheet();
+                }else if (action.equalsIgnoreCase("evaluationSheet")) {
+                    url = evaluationSheet();
+                }else if (action.equalsIgnoreCase("searchForEvaluationSheet")) {
+                    url = searchForEvaluationSheet();
+                }else if (action.equalsIgnoreCase("printEvaluationSheet")) {
+                    url = printEvaluationSheet();
+                }else if (action.equalsIgnoreCase("graduated")) {
+                    url = graduated();
+                }else if (action.equalsIgnoreCase("dropped")) {
+                    url = dropped();
+                }else if (action.equalsIgnoreCase("viewGraduated")) {
+                    url = viewGraduated();
+                }else if (action.equalsIgnoreCase("viewDropped")) {
+                    url = viewDropped();
+                }else if (action.equalsIgnoreCase("restoreMultipleGraduate")) {
+                    url = restoreMultipleGraduate();
+                }else if (action.equalsIgnoreCase("restoreMultipleDroppedout")) {
+                    url = restoreMultipleDroppedout();
                 }
 		return url;
 	}
 	
 	
-	private String printMarksSheet() {
+
+    private String resultReportCenter() {
+        new ResultService(request, response).resultReportCenter();
+        return "resultreport.jsp";
+    }
+
+    private String studentsListReportCenter() {
+        new StudentService(request, response).studentsListReportCenter();
+        return "studentsreports.jsp";
+}
+
+    private String viewAllStudentsCenter() {
+        new StudentService(request, response).viewAllStudentsParentsCenter();
+            return "viewAllWithParents.jsp";
+}
+
+    private String restoreMultipleDroppedout() { 
+        new StudentService(request, response).restoreMultipleDroppedout();
+        return "Controller?process=StudentProcess&action=viewAll";
+    }
+
+    private String restoreMultipleGraduate() {
+        new StudentService(request, response).restoreMultipleGraduate();
+        return "Controller?process=StudentProcess&action=viewAll";
+        
+    }
+
+    private String viewDropped() {
+        new StudentService(request, response).viewDropped();
+        return "droppedout.jsp";
+    }
+
+    private String viewGraduated() {
+        new StudentService(request, response).viewGraduated();
+        return "graduated.jsp";
+}
+
+    private String dropped() {
+        if( new StudentService(request, response).droppedMultiple()){
+            return "successpromote.jsp";
+    }
+            return "failurepromote.jsp"; 
+    }
+
+    private String graduated() {
+        if( new StudentService(request, response).graduateMultiple()){
+            return "successpromote.jsp";
+    }
+            return "failurepromote.jsp"; 
+    }
+
+    private String printEvaluationSheet() {
+        return "printevaluationsheet.jsp";
+    }
+    
+    private String searchForEvaluationSheet() {
+        new MarksDetailsService(request, response).Search();
+        return "evaluationsheet.jsp";
+    }
+
+    private String evaluationSheet() {
+	    new MarksDetailsService(request, response).enterMarks();
+            return "evaluationsheet.jsp";
+    }
+
+    private String printMarksSheet() {
 	    return "printmarkssheet.jsp";
     }
 
@@ -166,6 +258,8 @@ public class StudentAction {
 
     private String promotion() {
 	    new ExamLevelService(request, response).examLevels();
+	    new LanguageService(request, response).viewLanguage();
+	    new BranchService(request, response).viewBranches();
         return "Promotion.jsp";
     }
 
@@ -291,6 +385,8 @@ public class StudentAction {
 	private String searchClass() {
 		new StudentService(request, response).searchClass();
 		new ExamLevelService(request, response).examLevels();
+		new LanguageService(request, response).viewLanguage();
+	        new BranchService(request, response).viewBranches();
 	    return "Promotion.jsp";
 	}
 
@@ -323,7 +419,6 @@ public class StudentAction {
 
 	private String updateStudentDetails() {
 		if (new StudentService(request, response).viewDetailsOfStudent()) {
-            //return "patientDetails_1.jsp";
             return "student_update.jsp";
         } else {
             return "viewAll.jsp";
@@ -333,7 +428,6 @@ public class StudentAction {
 	private String viewStudent() {
 		String studentaction=null;
 		if (new StudentService(request, response).viewDetailsOfStudent()) {
-            //return "patientDetails_1.jsp";
 			studentaction = "success";
 			httpSession.setAttribute("studentaction",studentaction);
             return "student_details.jsp";
@@ -350,25 +444,17 @@ public class StudentAction {
 	        } else {
 	            return "notSaved.jsp";
 	        }
-		
 	}
 
 	private String viewAll() {
-
 		new StudentService(request, response).viewAllStudentsParents();
-        return "viewAllWithParents.jsp";
-        /*new StudentService(request, response).viewAllStudents();
-        System.out.println("IN action's view all");
-        return "viewAll.jsp";*/
-		
+		return "viewAllWithParents.jsp";
 	}
 
 	private String studentsDetailsReport() {
 		new StudentService(request, response).studentsDetailsSearch();
 		return "studentsdetailsreports.jsp";
-		
 	}
-	
 
 	private String exportDataStudents() {
 		if(new StudentService(request, response).exportDataStudents()){
@@ -376,8 +462,5 @@ public class StudentAction {
 		}else{
 			return "exportfailure.jsp";
 		}
-		
 	}
-
-
 }

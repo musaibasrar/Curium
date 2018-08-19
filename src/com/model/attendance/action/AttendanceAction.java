@@ -3,25 +3,14 @@
  */
 package com.model.attendance.action;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.academicyear.service.YearService;
-import com.model.adminexpenses.service.AdminService;
 import com.model.attendance.service.AttendanceService;
 import com.model.employee.service.EmployeeService;
-import com.model.feescategory.service.FeesService;
-import com.model.sendsms.service.SmsService;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
-import com.model.student.service.StudentService;
 
 /**
  * @author Musaib_2
@@ -66,7 +55,9 @@ public class AttendanceAction {
 			url = searchStudentAttendanceDetails();
 		}else if ("viewAttendance".equalsIgnoreCase(action)) {
 			url = viewAttendance();
-		}else if ("searchStudentAttendanceDetailsMonthly".equalsIgnoreCase(action)) {
+		}else if ("viewAttendanceCenter".equalsIgnoreCase(action)) {
+                    url = viewAttendance();
+                }else if ("searchStudentAttendanceDetailsMonthly".equalsIgnoreCase(action)) {
 			url = searchStudentAttendanceDetailsMonthly();
 		}else if ("updateStudentAttendanceDetails".equalsIgnoreCase(action)) {
 			url = updateStudentAttendanceDetails();

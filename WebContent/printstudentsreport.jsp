@@ -95,6 +95,12 @@
     padding: 8px;
 }
 
+.reportheaders{
+	font-weight: bold;
+	font-size: 15px;
+
+}
+
 </style>
 
 <script>
@@ -226,11 +232,11 @@
 			</tr>
 			<tr>
 					<c:if test="${(printcentername != '')}">
-						<td class="dataTextBoldLeft" style="width: 50%"><c:out value="${printcentername}" /></td>
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printcentername}" /></label></td>
 					</c:if>
-				
+						<td></td>
 					<c:if test="${(printexamlevel != '')}">
-						<td class="dataTextBoldLeft" style="width: 50%"><c:out value="${printexamlevel}" /></td>
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printexamlevel}" /></label></td>
 					</c:if>
 
 			</tr>
@@ -240,11 +246,20 @@
 			<tr>
 								
 					<c:if test="${(printlanguage != '')}">
-						<td class="dataTextBoldLeft" style="width: 50%"><c:out value="${printlanguage}" /></td>
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printlanguage}" /></label></td>
 					</c:if>
 					
 					<c:if test="${(printqualification != '')}">
-						<td class="dataTextBoldLeft" style="width: 50%"><c:out value="${printqualification}" /></td>
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printqualification}" /></label></td>
+					</c:if>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+								
+					<c:if test="${(printreligion != '')}">
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printreligion}" /></label></td>
 					</c:if>
 			</tr>
 			<tr>
@@ -269,8 +284,6 @@
 						<th  class="datath">Gender</th>
 						<th  class="datath">Exam Level</th>
 						<th  class="datath">Language</th>
-						<th  class="datath">Center Name</th>
-
  				 </tr>
  			 </thead>
  		 
@@ -297,8 +310,6 @@
 							value="${Parents.key.student.examlevel}" /></td>		
 					<td class="datatd"><c:out
 							value="${Parents.key.student.languageopted}" /></td>
-					<td class="datatd"><c:out
-							value="${Parents.value}" /></td>		
 				</tr>
 			</c:forEach>
 			</tbody>

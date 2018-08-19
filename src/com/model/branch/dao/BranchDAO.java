@@ -38,7 +38,7 @@ public class BranchDAO {
 		List<Branch> results = new ArrayList<Branch>();
         try {
             transaction = session.beginTransaction();
-            results = (List<Branch>) session.createQuery("From Branch").list();
+            results = (List<Branch>) session.createQuery("From Branch order by centercode ASC").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {
             transaction.rollback();
@@ -173,6 +173,38 @@ public class BranchDAO {
             session.close();
             return results;
         }
+}
+
+    public Branch getBranch(int branchId) {
+        Branch results = new Branch();
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("From Branch where idbranch='" + branchId + "'");
+            results = (Branch) query.uniqueResult();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        } finally {
+            session.close();
+            return results;
+        }
+    }
+
+    public List<Branch> readListOfObjects(int branchId) {
+        
+        List<Branch> results = new ArrayList<Branch>();
+try {
+    transaction = session.beginTransaction();
+    results = (List<Branch>) session.createQuery("From Branch where branchid ="+branchId+" order by centercode ASC").list();
+    transaction.commit();
+} catch (HibernateException hibernateException) {
+    transaction.rollback();
+    hibernateException.printStackTrace();
+} finally {
+    session.close();
+    return results;
+}
 }
 
     }

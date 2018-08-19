@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Center Details</title>
+<title>Login Details</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <link rel="stylesheet" href="css/font-awesome.css">
@@ -757,8 +757,8 @@ for(Cookie cookie : cookies){
 											<c:out value="In Progress" />
 										</c:if>
 										</option>
-										<option value="0">Pause</option>
-										<option value="1">Resume</option>
+										<option value="0">Hold</option>
+										<option value="1">Progress</option>
 							</select>
 						  </td>	
 						  <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${loginlist.lastmodifiedby}" />" id="updatelasmodified" name="updatelasmodified" readonly></td>
@@ -775,6 +775,8 @@ for(Cookie cookie : cookies){
                             <td  class="footerTD" colspan="2" ><button id="update">Update</button> 
                     		&nbsp;&nbsp;&nbsp;&nbsp;
                             <button id="delete">Delete</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button id="delete">Bulk Pause</button>
                             </td> 
                         </tr></tfoot>
 			</table>

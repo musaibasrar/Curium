@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.branch.dao.BranchDAO;
+import com.model.branch.service.BranchService;
 import com.model.department.service.DepartmentService;
 import com.model.employee.service.EmployeeService;
 import com.model.position.service.PositionService;
@@ -42,11 +44,66 @@ public class EmployeeAction {
 			url = addEmployeePage();
 		}else if ("searchEmployee".equalsIgnoreCase(action)) {
 			url = searchEmployee();
-		}
+		}else if ("addOrganizer".equalsIgnoreCase(action)) {
+                    url = addOrganizer();
+		}else if ("addNewOrganizersDetails".equalsIgnoreCase(action)) {
+                    url = addNewOrganizersDetails();
+		}else if (action.equalsIgnoreCase("viewAllOrganizers")) {
+                    url = viewAllOrganizers();
+		}else if (action.equalsIgnoreCase("viewOrganizerDetails")) {
+                    url = viewOrganizerDetails();
+                }else if (action.equalsIgnoreCase("updateOrganizerDetails")) {
+                    url = updateOrganizerDetails();
+                }else if (action.equalsIgnoreCase("updateOrganizer")) {
+                    url = updateOrganizer();
+                }else if (action.equalsIgnoreCase("deleteMultipleOrganizers")) {
+                    url = deleteMultipleOrganizers();
+                }
 		return url;
 	}
 
-	private String searchEmployee() {
+	private String deleteMultipleOrganizers() {
+	    new EmployeeService(request, response).deleteMultipleOrganizers();
+        return "Controller?process=EmployeeProcess&action=viewAllOrganizers";
+        }
+
+    private String updateOrganizer() {
+	    return "Controller?process=EmployeeProcess&action=viewOrganizerDetails&id=" + new EmployeeService(request, response).updateOrganizer();
+    }
+
+    private String updateOrganizerDetails() {
+                    if (new EmployeeService(request, response).viewDetailsOfOrganizer()) {
+                return "organizerupdate.jsp";
+            } else {
+                return "viewAllOrganizers.jsp";
+            }
+    }
+
+    private String viewOrganizerDetails() {
+	    new EmployeeService(request, response).viewOrganizerDetails();
+            return "organizerdetails.jsp";
+    }
+
+    private String viewAllOrganizers() {
+	    new EmployeeService(request, response).viewAllOrganizers();
+        return "viewallorganizers.jsp";
+    }
+
+    private String addNewOrganizersDetails() {
+	    new BranchService(request, response).viewBranches();
+	    return "addorganizers.jsp";
+    }
+
+    private String addOrganizer() {
+	    
+	   if( new EmployeeService(request, response).addOrganizer()) {
+	       return "organizersuccess.jsp";
+	   }
+	   return "error.jsp";
+       
+    }
+
+    private String searchEmployee() {
 		new EmployeeService(request, response).searchEmployee();
 		return "";
 	}

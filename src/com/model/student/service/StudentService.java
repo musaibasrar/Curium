@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -33,6 +34,7 @@ import com.model.branch.dto.Branch;
 import com.model.branch.service.BranchService;
 import com.model.examlevels.dao.ExamLevelDetailsDAO;
 import com.model.examlevels.dto.Examleveldetails;
+import com.model.examlevels.dto.Subexamlevel;
 import com.model.examlevels.service.ExamLevelService;
 import com.model.feescollection.dao.feesCollectionDAO;
 import com.model.feescollection.dto.Receiptinfo;
@@ -133,6 +135,15 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("remarks")) {
 		                	student.setRemarks(DataUtil.emptyString(item.getString()));
 		                }
+		                if (fieldName.equalsIgnoreCase("religion")) {
+                                    student.setReligion(DataUtil.emptyString(item.getString()));
+                                }
+		                if (fieldName.equalsIgnoreCase("educationqualification")) {
+                                    student.setEducation(DataUtil.emptyString(item.getString()));
+                                }
+		                if (fieldName.equalsIgnoreCase("admittedin")) {
+                                    student.setAdmittedin(DataUtil.emptyString(item.getString()));
+                                }
 		                if (fieldName.equalsIgnoreCase("fathersname")) {
 		                	parents.setFathersname(DataUtil.emptyString(item.getString()));
 		                }
@@ -180,6 +191,8 @@ public class StudentService {
 		}
 		
 		student.setArchive(0);
+		student.setPassedout(0);
+		student.setDroppedout(0);
 		
 		// set external id
 		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLM0123NOP89QRSTUVWXYZ4567";
@@ -280,6 +293,13 @@ public class StudentService {
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
 			}
+			
+			    new ExamLevelService(request, response).examLevels();
+		            new LanguageService(request, response).viewLanguage();
+		            new BranchService(request, response).viewDistricts();
+		            new BranchService(request, response).viewBranches();
+		            new QualificationService(request, response).viewQualification();
+		            
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = false;
@@ -388,9 +408,17 @@ public class StudentService {
 	                	student.setRemarks(DataUtil.emptyString(item.getString()));
 	                }
 	                
+	                if (fieldName.equalsIgnoreCase("educationqualification")) {
+                            student.setEducation(DataUtil.emptyString(item.getString()));
+                        }
+	                
 	                if(fieldName.equalsIgnoreCase("studentpicupdate")){
 	                	studentPicUpdate=DataUtil.emptyString(item.getString());
 	                }
+	                
+	                if (fieldName.equalsIgnoreCase("admittedin")) {
+                            student.setAdmittedin(DataUtil.emptyString(item.getString()));
+                        }
 	                
 	                if(fieldName.equalsIgnoreCase("studentexternalid")){
 	                	student.setStudentexternalid(DataUtil.emptyString(item.getString()));
@@ -402,6 +430,18 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("remarksadditional")) {
 	                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
 	                }
+	                if (fieldName.equalsIgnoreCase("religion")) {
+                            student.setReligion(DataUtil.emptyString(item.getString()));
+                        }
+	                if(fieldName.equalsIgnoreCase("studentarchiveupdate")){
+	                    student.setArchive(DataUtil.parseInt(item.getString()));
+                        }
+	                if(fieldName.equalsIgnoreCase("studentdroppedoutupdate")){
+	                    student.setDroppedout(DataUtil.parseInt(item.getString()));
+                        }
+	                if(fieldName.equalsIgnoreCase("studentpassedoutupdate")){
+	                    student.setPassedout(DataUtil.parseInt(item.getString()));
+                        }
 	                // Updating paretns information
 	                
 	                parents.setPid(parentsId);
@@ -485,7 +525,7 @@ public class StudentService {
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-		 student.setArchive(0);
+
 		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		 student = new studentDetailsDAO().update(student);
  		if (pid != "") {
@@ -574,20 +614,35 @@ public class StudentService {
 
 	@SuppressWarnings("finally")
 	public boolean searchClass() {
-		
-		String examLevel = request.getParameter("examlevel");
-		boolean result = false;
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			try {
-				List<Student> studentList = new studentDetailsDAO().getListOfStudents(examLevel, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				request.setAttribute("studentList", studentList);
-				result = true;
-			} catch (Exception e) {
-				result = false;
-			} 
-		}
-		return result;
+	    String searchQuery = "From Student as student where student.archive=0 and student.passedout=0 and student.droppedout=0 ";
+	       String subQuery =null;
+	       
+	            if(!request.getParameter("centercode").equalsIgnoreCase("")) {
+	                String[] centerCode = request.getParameter("centercode").split(":");
+	                subQuery = "and student.centercode = '"+centerCode[0]+"'";
+	            }
+	          	            
+	            if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
+	                if(subQuery!=null) {
+	                    subQuery = subQuery+"AND student.examlevel = '"+request.getParameter("examlevel")+"'";
+	                }else {
+	                    subQuery = "student.examlevel = '"+request.getParameter("examlevel")+"'";
+	                }
+	            }
+	            
+	            if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
+	                if(subQuery!=null) {
+	                    subQuery = subQuery+"AND student.languageopted = '"+request.getParameter("languageopted")+"'";
+	                }else {
+	                    subQuery = "student.languageopted = '"+request.getParameter("languageopted")+"'";
+	                }
+	            }
+	            
+	            searchQuery = searchQuery+subQuery;
+	            List<Student> studentList = new studentDetailsDAO().getListStudents(searchQuery);
+	            request.setAttribute("studentList", studentList);
+	     
+		return true;
 
 	}
 
@@ -929,6 +984,8 @@ public class StudentService {
         httpSession.setAttribute("printexamlevel", "");
         httpSession.setAttribute("printlanguage", "");
         httpSession.setAttribute("printqualification", "");
+        httpSession.setAttribute("printreligion", "");
+        httpSession.setAttribute("noofpapers", "");
         
     }
 
@@ -939,7 +996,7 @@ public class StudentService {
             if(!request.getParameter("centercode").equalsIgnoreCase("")) {
                 String[] centerCode = request.getParameter("centercode").split(":");
                 subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
-                httpSession.setAttribute("printcentername", "Center Name: "+centerCode[1]);
+                httpSession.setAttribute("printcentername", "Center Code/Name: "+centerCode[0]+"/"+centerCode[1]);
             }
             
             if(!request.getParameter("districtcode").equalsIgnoreCase("")) {
@@ -977,6 +1034,16 @@ public class StudentService {
                 httpSession.setAttribute("printqualification", "Qualification: "+request.getParameter("qualification").toString());
             }
             
+            if(!DataUtil.emptyString(request.getParameter("religion")).equalsIgnoreCase("")) {
+                if(subQuery!=null) {
+                    subQuery = subQuery+"AND parent.Student.religion = '"+request.getParameter("religion")+"'";
+                }else {
+                    subQuery = "parent.Student.religion = '"+request.getParameter("religion")+"'";
+                }
+                httpSession.setAttribute("printreligion", "Religion: "+request.getParameter("religion").toString());
+            }
+
+            
             searchQuery = searchQuery+subQuery;
             List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
             Map<Parents,String> mapStudentReports = new HashMap<Parents,String>();
@@ -992,7 +1059,9 @@ public class StudentService {
             new BranchService(request, response).viewBranches();
             new QualificationService(request, response).viewQualification(); 
             
-            new Global(mapStudentReports);
+            //Query subexamlevel to get the numbers of papers per exam
+            List<Subexamlevel> noOfPapers = new ExamLevelService(request, response).getSubExamLevelSubject(request.getParameter("examlevel"));
+            httpSession.setAttribute("noofpapers", noOfPapers.size());
     }
 
 
@@ -1021,7 +1090,7 @@ public class StudentService {
         
         List<Parents> parentsList = new ArrayList<Parents>();
         List<Branch> centerList = new ArrayList<Branch>();
-        Map<List<String>,List<String>> languageReports = new HashMap<List<String>,List<String>>();
+        Map<List<String>,List<String>> languageReports = new LinkedHashMap<List<String>,List<String>>();
         
         String centerQuery =null;
         
@@ -1082,7 +1151,7 @@ public class StudentService {
                     int englishCount = 0, urduCount = 0, hindiCount = 0, kannadaCount = 0;
                     
                     parentsList = new studentDetailsDAO().getStudentsList("From Parents parents where "
-                            + "parents.Student.centercode='"+eachBranch.getCentercode()+"'");
+                            + "parents.Student.centercode='"+eachBranch.getCentercode()+"' order by parents.Student.centercode ASC");
                    
                     for (Parents singleParents : parentsList) {
                             if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("English")) {
@@ -1119,5 +1188,140 @@ public class StudentService {
         httpSession.setAttribute("languagereports", "");
         httpSession.setAttribute("printcentername", "");
         httpSession.setAttribute("printexamlevel", "");
+    }
+
+    public boolean graduateMultiple() {
+        String[] studentIds = request.getParameterValues("studentIDs");
+        String classStudying = request.getParameter("classstudying");
+        boolean result = false;
+        List ids = new ArrayList();
+        for (String id : studentIds) {
+                System.out.println("id" + id);
+                ids.add(Integer.valueOf(id));
+
+        }
+        if (new studentDetailsDAO().graduateMultiple(ids)) {
+                result = true;
+        }
+        return result;
+}
+
+    public boolean droppedMultiple() {
+        String[] studentIds = request.getParameterValues("studentIDs");
+        String classStudying = request.getParameter("classstudying");
+        boolean result = false;
+        List ids = new ArrayList();
+        for (String id : studentIds) {
+                System.out.println("id" + id);
+                ids.add(Integer.valueOf(id));
+
+        }
+        System.out.println("id length" + studentIds.length);
+        if (new studentDetailsDAO().droppedMultiple(ids)) {
+                result = true;
+        }
+        return result;
+}
+
+    public boolean viewGraduated() {
+
+        boolean result = false;
+
+        try {
+                List<Student> list = new studentDetailsDAO().readListOfStudentsGraduated();
+                request.setAttribute("studentListGraduated", list);
+                result = true;
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        return result;
+}
+
+    public boolean viewDropped() {
+
+        boolean result = false;
+
+        try {
+                List<Student> list = new studentDetailsDAO().readListOfStudentsDropped();
+                request.setAttribute("studentListDropped", list);
+                result = true;
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        return result;
+}
+
+    public void restoreMultipleGraduate() {
+        String[] studentIds = request.getParameterValues("studentIDs");
+        if (studentIds != null) {
+                List ids = new ArrayList();
+                for (String id : studentIds) {
+                        System.out.println("id" + id);
+                        ids.add(Integer.valueOf(id));
+
+                }
+                System.out.println("id length" + studentIds.length);
+                new studentDetailsDAO().restoreMultipleGraduate(ids);
+        }
+}
+
+    public void restoreMultipleDroppedout() {
+        String[] studentIds = request.getParameterValues("studentIDs");
+        if (studentIds != null) {
+                List ids = new ArrayList();
+                for (String id : studentIds) {
+                        System.out.println("id" + id);
+                        ids.add(Integer.valueOf(id));
+
+                }
+                System.out.println("id length" + studentIds.length);
+                new studentDetailsDAO().restoreMultipleDroppedout(ids);
+        }
+}
+
+    public boolean viewAllStudentsParentsCenter() {
+
+        boolean result = false;
+        String pages = "1";
+        if(httpSession.getAttribute(BRANCHID)!=null){
+                try {
+                        int page = 1;
+                        int recordsPerPage = 2000;
+                        if (pages != null) {
+                                page = Integer.parseInt(pages);
+                        }
+
+                        List<Parents> list = new studentDetailsDAO().readListOfObjectsPaginationALL((page - 1) * recordsPerPage,
+                                        recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                        request.setAttribute("studentList", list);
+                        int noOfRecords = new studentDetailsDAO().getNoOfRecordsCenter(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+                        request.setAttribute("noOfPages", noOfPages);
+                        request.setAttribute("currentPage", page);
+                        result = true;
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+        }
+        
+        return result;
+}
+
+    public void studentsListReportCenter() {
+
+        if(httpSession.getAttribute(BRANCHID)!=null) {
+        new ExamLevelService(request, response).examLevels();
+        new LanguageService(request, response).viewLanguage();
+        //new BranchService(request, response).viewDistricts();
+        new BranchService(request, response).viewBranchesCenter(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+        new QualificationService(request, response).viewQualification(); 
+        httpSession.setAttribute("mapstudentreports", "");
+        httpSession.setAttribute("printcentername", "");
+        httpSession.setAttribute("printexamlevel", "");
+        httpSession.setAttribute("printlanguage", "");
+        httpSession.setAttribute("printqualification", "");
+        httpSession.setAttribute("printreligion", "");
+        httpSession.setAttribute("noofpapers", "");
+        }
     }
 }
