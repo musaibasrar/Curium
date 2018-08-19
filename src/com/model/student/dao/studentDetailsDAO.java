@@ -664,5 +664,47 @@ public class studentDetailsDAO {
                     return noOfRecords;
             }
     }
+
+        public List<Parents> readListOfObjectsPaginationALLCenter(int offset, int noOfRecords, int branchId) {
+            List<Parents> results = new ArrayList<Parents>();
+
+            try {
+                    transaction = session.beginTransaction();
+                    Query query = session.createQuery("From Parents as parents where parents.Student.archive=0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 AND parents.Student.branchid = "+branchId+" order by name ASC");
+                    query.setFirstResult(offset);   
+                    query.setMaxResults(noOfRecords);
+                    results = query.getResultList();
+                    transaction.commit();
+            } catch (Exception hibernateException) {
+                    transaction.rollback();
+                    System.out.println("Exception is "+hibernateException);
+                    hibernateException.printStackTrace();
+            } finally {
+                    // session.close();
+                    return results;
+            }
+    }
+
+        public List<Student> readListOfStudentsCenter(int branchId) {
+            List<Student> results = new ArrayList<Student>();
+
+            try {
+                    // this.session =
+                    // HibernateUtil.getSessionFactory().openCurrentSession();
+                    transaction = session.beginTransaction();
+
+                    results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND droppedout = 0 AND branchid="+branchId)
+                                    .list();
+                    transaction.commit();
+
+            } catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+
+            } finally {
+                    // session.close();
+                    return results;
+            }
+    }
 	
 }

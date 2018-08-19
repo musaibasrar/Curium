@@ -49,7 +49,9 @@ public class ExamDetailsAction {
 			url = deleteExamSchedule();
 		}else if ("generateHallTicket".equalsIgnoreCase(action)) {
 			url = generateHallTicket();
-		}else if ("searchHallTicketDetails".equalsIgnoreCase(action)) {
+		}else if ("generateHallTicketCenter".equalsIgnoreCase(action)) {
+                    url = generateHallTicketCenter();
+                }else if ("searchHallTicketDetails".equalsIgnoreCase(action)) {
 			url = searchHallTicketDetails();
 		}else if ("printPreviewHallTicket".equalsIgnoreCase(action)) {
 			url = printPreviewHallTicket();
@@ -58,7 +60,27 @@ public class ExamDetailsAction {
 	}
 
 		
-	private String printPreviewHallTicket() {
+	private String generateHallTicketCenter() {
+            
+            boolean result;
+            
+                new ExamLevelService(request, response).examLevels();
+                new BranchService(request, response).viewBranchesCenter();
+                
+            result = new SubjectDetailsService(request, response).readListOfSubjects();
+            if (!result) 
+                    return error;
+            result = new YearService(request, response).getYear();
+            if (!result) 
+                    return error;
+            result = new StudentService(request, response).viewAllStudentsListCenter();
+            if (!result) 
+                    return error;
+            
+            return "generatehallticket.jsp";
+    }
+
+    private String printPreviewHallTicket() {
 		
 		new ExamDetailsService(request, response).printPreviewHallTicket();
 		return "printpreviewhallticket.jsp";

@@ -558,6 +558,28 @@ public class StudentService {
 	
 		return result;
 	}
+	
+	public boolean viewAllStudentsListCenter() {
+
+
+            boolean result = false;
+            if(httpSession.getAttribute(BRANCHID)!=null){
+                    
+                    try {
+
+                            List<Student> list = new studentDetailsDAO().readListOfStudentsCenter(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                            request.setAttribute("studentList", list);
+                            result = true;
+                    } catch (Exception e) {
+                            e.printStackTrace();
+                            result = false;
+                    }
+                    
+            }
+    
+            return result;
+    
+	}
 
 	public void archiveMultiple() {
 		String[] studentIds = request.getParameterValues("studentIDs");
@@ -1291,7 +1313,7 @@ public class StudentService {
                                 page = Integer.parseInt(pages);
                         }
 
-                        List<Parents> list = new studentDetailsDAO().readListOfObjectsPaginationALL((page - 1) * recordsPerPage,
+                        List<Parents> list = new studentDetailsDAO().readListOfObjectsPaginationALLCenter((page - 1) * recordsPerPage,
                                         recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
                         request.setAttribute("studentList", list);
                         int noOfRecords = new studentDetailsDAO().getNoOfRecordsCenter(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));

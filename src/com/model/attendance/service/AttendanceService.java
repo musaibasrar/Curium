@@ -1363,4 +1363,16 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
                 }
         }
 
+    public boolean viewAttendanceCenter() {
+        List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+        request.setAttribute("studentList", studentList);
+                
+                 new ExamLevelService(request, response).examLevels();
+                 new LanguageService(request, response).viewLanguage();
+                 new BranchService(request, response).viewBranchesCenter(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                 httpSession.setAttribute("viewAttendancemap", "");
+                 
+                return true;
+}
+
 }

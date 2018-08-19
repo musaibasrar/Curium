@@ -56,7 +56,7 @@ public class AttendanceAction {
 		}else if ("viewAttendance".equalsIgnoreCase(action)) {
 			url = viewAttendance();
 		}else if ("viewAttendanceCenter".equalsIgnoreCase(action)) {
-                    url = viewAttendance();
+                    url = viewAttendanceCenter();
                 }else if ("searchStudentAttendanceDetailsMonthly".equalsIgnoreCase(action)) {
 			url = searchStudentAttendanceDetailsMonthly();
 		}else if ("updateStudentAttendanceDetails".equalsIgnoreCase(action)) {
@@ -100,7 +100,14 @@ public class AttendanceAction {
 	}
 	
 	
-	private String printAttendanceReport() {
+	private String viewAttendanceCenter() {
+            if(new AttendanceService(request, response).viewAttendanceCenter()){
+                    return "viewattendance.jsp";
+            }
+            return errorPage;
+        }
+
+    private String printAttendanceReport() {
 	    return "printattendancereport.jsp";
     }
 

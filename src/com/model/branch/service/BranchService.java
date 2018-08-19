@@ -175,5 +175,18 @@ public class BranchService {
         }
         
     }
+    
+    public void viewBranchesCenter() {
+        
+        try {
+            List<Branch> list = new BranchDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+            request.setAttribute("branchList", list);
+            logger.info("Branch List "+list.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        
+    }
 
 }
