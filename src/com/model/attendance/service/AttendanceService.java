@@ -737,6 +737,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				studentDailyAttendanceList.add(studentDailyAttendance);
 			}
 			result = new AttendanceDAO().checkStudentAttendance(studentDailyAttendanceList);
+			request.setAttribute("attendancesave", result);
 		}
 		return result;
 	}

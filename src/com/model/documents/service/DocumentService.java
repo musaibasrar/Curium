@@ -59,9 +59,9 @@ public class DocumentService {
 		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
 		Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
 		
-		student.setReasonleaving(leavingReason);
+		//student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
-		 boolean updateStudent = new studentDetailsDAO().updateStudent(student);
+		 boolean updateStudent = true;
 		 
 		 if(updateStudent){
 			 tc.setSid(studentId);

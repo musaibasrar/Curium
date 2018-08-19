@@ -417,6 +417,22 @@
 
 	}
 	
+	function pauseRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=UserProcess&action=pauseAllUsers";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	
+	function resumeRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=UserProcess&action=resumeAllUsers";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	
 	$(function() {
 
 		$("#tabs").tabs();
@@ -434,6 +450,24 @@
              }
          }).click(function(){
              deleteRecords();
+             return false;
+
+         });
+         $("#bulkstop").button({
+             icons:{
+                 primary: "ui-icon-stop"
+             }
+         }).click(function(){
+             pauseRecords();
+             return false;
+
+         });
+         $("#bulkstart").button({
+             icons:{
+                 primary: "ui-icon-play"
+             }
+         }).click(function(){
+             resumeRecords();
              return false;
 
          });
@@ -646,11 +680,10 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td width="10%" class="alignRight">User Type &nbsp;</td>
-							<td width="70%"><label> <select name="usertype" id="usertype"
-									style="width: 200px;">
+							<td width="70%"><label> <select name="usertype" id="usertype">
 										<option selected></option>
-										<option value="superadmin">Super Admin</option>
 										<option value="admin">Admin</option>
+										<option value="centerorganizer">Center Organizer</option>
 								</select>
 
 							</label></td>
@@ -663,10 +696,10 @@ for(Cookie cookie : cookies){
 							<td width="10%" class="alignRight">Admission Process &nbsp;</td>
 							<td width="70%"><label> 
 							<select name="admissionprocess" id="admissionprocess"
-									style="width: 200px;">
+									>
 										<option selected></option>
-										<option value="0">Start</option>
-										<option value="1">Stop</option>
+										<option value="1">Start</option>
+										<option value="0">Stop</option>
 							</select>
 							</label></td>
 							
@@ -713,9 +746,9 @@ for(Cookie cookie : cookies){
 							<th title="click to sort" class="headerText">Admission Process Status&nbsp;<img
 							alt=" " style="position: relative; top: 4px;"
 							src="images/sort_both.png" /></th>
-							<th title="click to sort" class="headerText">Last Modified By&nbsp;<img
+							<!-- <th title="click to sort" class="headerText">Last Modified By&nbsp;<img
 							alt=" " style="position: relative; top: 4px;"
-							src="images/sort_both.png" /></th>
+							src="images/sort_both.png" /></th> -->
 					</tr>
 				</thead>
 
@@ -742,8 +775,8 @@ for(Cookie cookie : cookies){
 						  <select name="updateusertype" id="updateusertype"
 									style="width: 180px;">
 										<option selected value="${loginlist.usertype}">${loginlist.usertype}</option>
-										<option value="superadmin">Super Admin</option>
 										<option value="admin">Admin</option>
+										<option value="centerorganizer">Center Organizer</option>
 								</select>
 						  </td>	
 						  <td class="dataText">
@@ -751,17 +784,17 @@ for(Cookie cookie : cookies){
 									style="width: 180px;">
 										<option selected value="${loginlist.addstudentflag}">
 										<c:if test="${(loginlist.addstudentflag == '0')}">
-											<c:out value="On Hold" />
+											<c:out value="Stopped" />
 										</c:if>
 										<c:if test="${(loginlist.addstudentflag == '1')}">
-											<c:out value="In Progress" />
+											<c:out value="Started" />
 										</c:if>
 										</option>
-										<option value="0">Hold</option>
-										<option value="1">Progress</option>
+										<option value="0">Stop</option>
+										<option value="1">Start</option>
 							</select>
 						  </td>	
-						  <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${loginlist.lastmodifiedby}" />" id="updatelasmodified" name="updatelasmodified" readonly></td>
+						  <%-- <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${loginlist.lastmodifiedby}" />" id="updatelasmodified" name="updatelasmodified" readonly></td> --%>
 						  <%-- <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${loginlist.branch.centercode}" />" id="updatecentercode" name="updatecentercode"></td> --%>
 						  
 						</tr>
@@ -776,7 +809,9 @@ for(Cookie cookie : cookies){
                     		&nbsp;&nbsp;&nbsp;&nbsp;
                             <button id="delete">Delete</button>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <button id="delete">Bulk Pause</button>
+                            <button id="bulkstop">Bulk Stop</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button id="bulkstart">Bulk Start</button>
                             </td> 
                         </tr></tfoot>
 			</table>

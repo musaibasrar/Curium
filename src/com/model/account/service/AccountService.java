@@ -58,7 +58,7 @@ public class AccountService {
 	public boolean getCurrentFinancialYear() {
 		Financialaccountingyear financialYear = new Financialaccountingyear();
 		if(httpSession.getAttribute(BRANCHID)!=null){
-			financialYear =  new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			financialYear =  new AccountDAO().getCurrentFinancialYear();
 		}
 		
 		if(financialYear!=null){
@@ -76,11 +76,11 @@ public class AccountService {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			
-			accountGroupMaster = new AccountDAO().getListAccountGroupMaster(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			accountGroupMaster = new AccountDAO().getListAccountGroupMaster();
 			request.setAttribute("accountgroupmaster", accountGroupMaster);
 			
 			List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-			accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			accountDetailsBalance = new AccountDAO().getAccountdetailsbalance();
 			request.setAttribute("accountdetailsbalance", accountDetailsBalance);
 		}
 		
@@ -98,7 +98,7 @@ public class AccountService {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			int accountGroupMasterId = Integer.parseInt(request.getParameter("groupname"));
-			accountSubGroupMaster = new AccountDAO().getListAccountSubGroupMaster(accountGroupMasterId,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			accountSubGroupMaster = new AccountDAO().getListAccountSubGroupMaster(accountGroupMasterId);
 			request.setAttribute("accountsubgroupmaster", accountSubGroupMaster);
 			PrintWriter out = response.getWriter(); 
 			response.setContentType("text/xml");
@@ -166,7 +166,7 @@ public class AccountService {
 			
 			if(newAccount){
 				// Add account balance
-				Financialaccountingyear financialyear = new AccountDAO().getFinancialAccountingYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				Financialaccountingyear financialyear = new AccountDAO().getFinancialAccountingYear();
 				Accountdetailsbalance accountDetailsBalance = new Accountdetailsbalance();
 				accountDetailsBalance.setAccountDetails(accountDetails);
 				if(findCrDr(groupName)){
@@ -206,7 +206,7 @@ public class AccountService {
 				boolean newAccount = new AccountDAO().saveNewAccount(accountDetails);
 				
 				if(newAccount){
-					Financialaccountingyear financialyear = new AccountDAO().getFinancialAccountingYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					Financialaccountingyear financialyear = new AccountDAO().getFinancialAccountingYear();
 					Accountdetailsbalance accountDetailsBalance = new Accountdetailsbalance();
 					accountDetailsBalance.setAccountDetails(accountDetails);
 					if(findCrDr(groupName)){ 
@@ -272,11 +272,11 @@ public class AccountService {
 	public boolean createVoucher() {
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-		accountDetailsBalance = new AccountDAO().getAccountdetailsbalanceExBC(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		accountDetailsBalance = new AccountDAO().getAccountdetailsbalanceExBC();
 		request.setAttribute("accountdetailsbalanceexbc", accountDetailsBalance);
 		
 		List<Accountdetailsbalance> accountDetailsBalanceBankCash = new ArrayList<Accountdetailsbalance>();
-		accountDetailsBalanceBankCash = new AccountDAO().getAccountdetailsbalanceBankCash(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		accountDetailsBalanceBankCash = new AccountDAO().getAccountdetailsbalanceBankCash();
 		request.setAttribute("accountdetailsbalancecontra", accountDetailsBalanceBankCash);
 		request.setAttribute("accountdetailsbalancereceipt", accountDetailsBalanceBankCash);
 		request.setAttribute("accountdetailsbalancepayment", accountDetailsBalanceBankCash);
@@ -305,7 +305,7 @@ public class AccountService {
 		transactions.setDate(DateUtil.dateParserUpdateStd(receiptDate));
 		transactions.setNarration(receiptNarration);
 		transactions.setCancelvoucher("no");
-		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear().getFinancialid());
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		if(new AccountDAO().saveReceipt(transactions)){
@@ -314,7 +314,7 @@ public class AccountService {
 			List<Integer> accountIds = new ArrayList<Integer>();
 			accountIds.add(Integer.parseInt(draccountName));
 			accountIds.add(Integer.parseInt(craccountName));
-			accountBalance = new AccountDAO().getAccountBalanceDetails(accountIds,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			accountBalance = new AccountDAO().getAccountBalanceDetails(accountIds);
 			List<BigDecimal> amounts = new ArrayList<BigDecimal>();
 			amounts.add(new BigDecimal(drAmount));
 			amounts.add(new BigDecimal(crAmount));
@@ -352,7 +352,7 @@ public class AccountService {
 		transactions.setNarration(paymentNarration);
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear().getFinancialid());
 		
 		if(new AccountDAO().savePayment(transactions)){
 			List<Accountdetailsbalance> accountBalance = new ArrayList<Accountdetailsbalance>();
@@ -360,7 +360,7 @@ public class AccountService {
 			List<Integer> accountIds = new ArrayList<Integer>();
 			accountIds.add(Integer.parseInt(draccountNamePayment));
 			accountIds.add(Integer.parseInt(craccountNamePayment));
-			accountBalance = new AccountDAO().getAccountBalanceDetails(accountIds,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			accountBalance = new AccountDAO().getAccountBalanceDetails(accountIds);
 
 				for (Accountdetailsbalance accountBalanceDetails : accountBalance) {
 					
@@ -397,7 +397,7 @@ public class AccountService {
 		transactions.setDate(DateUtil.dateParserUpdateStd(contraDate));
 		transactions.setNarration(contraNarration);
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear().getFinancialid());
 		
 		if(new AccountDAO().saveContra(transactions)){
 			List<Accountdetailsbalance> accountBalance = new ArrayList<Accountdetailsbalance>();
@@ -405,7 +405,7 @@ public class AccountService {
 			List<Integer> accountIds = new ArrayList<Integer>();
 			accountIds.add(Integer.parseInt(draccountNameContra));
 			accountIds.add(Integer.parseInt(craccountNameContra));
-			accountBalance = new AccountDAO().getAccountBalanceDetails(accountIds,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			accountBalance = new AccountDAO().getAccountBalanceDetails(accountIds);
 			List<BigDecimal> amounts = new ArrayList<BigDecimal>();
 			amounts.add(new BigDecimal(drAmountContra));
 			amounts.add(new BigDecimal(crAmountContra));
@@ -442,7 +442,7 @@ public class AccountService {
 		transactions.setDate(DateUtil.dateParserUpdateStd(journalDate));
 		transactions.setNarration(journalNarration);
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear().getFinancialid());
 		
 		if(new AccountDAO().saveJournal(transactions)){
 			List<Accountdetailsbalance> accountBalance = new ArrayList<Accountdetailsbalance>();
@@ -450,7 +450,7 @@ public class AccountService {
 			List<Integer> accountIds = new ArrayList<Integer>();
 			accountIds.add(Integer.parseInt(draccountNameJournal));
 			accountIds.add(Integer.parseInt(craccountNameJournal));
-			accountBalance = new AccountDAO().getAccountBalanceDetails(accountIds, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			accountBalance = new AccountDAO().getAccountBalanceDetails(accountIds);
 			List<BigDecimal> amounts = new ArrayList<BigDecimal>();
 			amounts.add(new BigDecimal(drAmountJournal));
 			amounts.add(new BigDecimal(crAmountJournal));
@@ -501,7 +501,7 @@ public class AccountService {
 		
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-		accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		accountDetailsBalance = new AccountDAO().getAccountdetailsbalance();
 		
 		for (Accountdetailsbalance accountdetails : accountDetailsBalance) {
 			int groupId = accountdetails.getAccountDetails().getAccountGroupMaster().getAccountgroupid();
@@ -610,8 +610,11 @@ public class AccountService {
 		List<Receipttransactions> receiptTransactions = new ArrayList<Receipttransactions>();
 		String twoAccounts = null;
 		Map<Receipttransactions,String> receiptMap = new HashMap<Receipttransactions, String>();
-		receiptTransactions = new AccountDAO().getReceiptTransactions(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		
+		Financialaccountingyear financialYear = new Financialaccountingyear();
+		financialYear = new AccountDAO().getCurrentFinancialYear();
+		if(financialYear!=null) {
+		    receiptTransactions = new AccountDAO().getReceiptTransactions(financialYear.getFinancialid());
+		}
 		for (Receipttransactions receipttransactionsSingle : receiptTransactions) {
 			twoAccounts = new AccountDAO().getAccountName(receipttransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(receipttransactionsSingle.getCraccountid());
 			receiptMap.put(receipttransactionsSingle, twoAccounts);
@@ -629,7 +632,13 @@ public class AccountService {
 		List<Paymenttransactions> paymentTransactions = new ArrayList<Paymenttransactions>();
 		String twoAccounts = null;
 		Map<Paymenttransactions,String> paymentMap = new HashMap<Paymenttransactions, String>();
-		paymentTransactions = new AccountDAO().getPaymentTransactions(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		Financialaccountingyear financialYear = new Financialaccountingyear();
+                financialYear = new AccountDAO().getCurrentFinancialYear();
+               
+                if(financialYear!=null) {
+                    paymentTransactions = new AccountDAO().getPaymentTransactions(financialYear.getFinancialid());    
+                }
+		
 		
 		for (Paymenttransactions paymenttransactionsSingle : paymentTransactions) {
 			twoAccounts = new AccountDAO().getAccountName(paymenttransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(paymenttransactionsSingle.getCraccountid());
@@ -645,7 +654,13 @@ public class AccountService {
 		List<Contratransactions> contraTransactions = new ArrayList<Contratransactions>();
 		String twoAccounts = null;
 		Map<Contratransactions,String> paymentMap = new HashMap<Contratransactions, String>();
-		contraTransactions = new AccountDAO().getContraTransactions(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		Financialaccountingyear financialYear = new Financialaccountingyear();
+                financialYear = new AccountDAO().getCurrentFinancialYear();
+               
+                if(financialYear!=null) {
+                    contraTransactions = new AccountDAO().getContraTransactions(financialYear.getFinancialid());
+                }
 		
 		for (Contratransactions paymenttransactionsSingle : contraTransactions) {
 			twoAccounts = new AccountDAO().getAccountName(paymenttransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(paymenttransactionsSingle.getCraccountid());
@@ -661,8 +676,13 @@ public class AccountService {
 		List<Journaltransactions> journalTransactions = new ArrayList<Journaltransactions>();
 		String twoAccounts = null;
 		Map<Journaltransactions,String> paymentMap = new HashMap<Journaltransactions, String>();
-		journalTransactions = new AccountDAO().getJournalTransactions(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
+		Financialaccountingyear financialYear = new Financialaccountingyear();
+                financialYear = new AccountDAO().getCurrentFinancialYear();
+               
+                if(financialYear!=null) {
+                    journalTransactions = new AccountDAO().getJournalTransactions(financialYear.getFinancialid());
+                }
 		
 		for (Journaltransactions journaltransactionsSingle : journalTransactions) {
 			twoAccounts = new AccountDAO().getAccountName(journaltransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(journaltransactionsSingle.getCraccountid());
@@ -677,7 +697,7 @@ public class AccountService {
 	public boolean trialBalance() {
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-		accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		accountDetailsBalance = new AccountDAO().getAccountdetailsbalance();
 		
 		BigDecimal debitTotal = BigDecimal.ZERO;
 		BigDecimal creditTotal = BigDecimal.ZERO;

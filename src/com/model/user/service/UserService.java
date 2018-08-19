@@ -540,8 +540,17 @@ public class UserService {
        boolean result = new UserDAO().deleteMultipleUsers(ids);
        request.setAttribute("userdelete", result);
         }
+    }
+
+    public void pauseAllUsers() {
+        boolean result = new UserDAO().pauseAllUsers();
+        request.setAttribute("userupdate", result);
         
-    
+    }
+
+    public void resumeAllUsers() {
+        boolean result = new UserDAO().resumeAllUsers();
+        request.setAttribute("userupdate", result);
         
     }
 }

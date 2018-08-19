@@ -258,4 +258,40 @@ public class UserDAO {
         }
         return result;
     }
+
+    public boolean pauseAllUsers() {
+        boolean result = false;
+        
+        try{
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("update Login set addstudentflag=0");
+            query.executeUpdate();
+            transaction.commit();
+            result = true;
+        }catch(HibernateException hibernateException){
+            hibernateException.printStackTrace();
+        }finally{
+            session.close();
+        }
+        
+        return result;
+    }
+
+    public boolean resumeAllUsers() {
+        boolean result = false;
+        
+        try{
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("update Login set addstudentflag=1");
+            query.executeUpdate();
+            transaction.commit();
+            result = true;
+        }catch(HibernateException hibernateException){
+            hibernateException.printStackTrace();
+        }finally{
+            session.close();
+        }
+        
+        return result;
+    }
 }

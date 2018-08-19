@@ -2,7 +2,6 @@ package com.model.attendance.dao;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,9 +9,9 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.model.attendance.dto.Attendancemaster;
 import com.model.attendance.dto.Holidaysmaster;
@@ -22,6 +21,7 @@ import com.model.attendance.dto.Weeklyoff;
 import com.model.employee.dto.Teacher;
 import com.model.student.dto.Student;
 import com.util.HibernateUtil;
+
 
 public class AttendanceDAO {
 	Session session = null;
@@ -269,7 +269,7 @@ public class AttendanceDAO {
 				if(studentDailyAttendanceDetails == null){
 					session.save(studentdailyattendance);
 				}else{
-					Query queryTwo = session.createSQLQuery("update Studentdailyattendance set attendancestatus = " +
+					Query queryTwo = session.createQuery("update Studentdailyattendance set attendancestatus = " +
 							"'"+studentdailyattendance.getAttendancestatus()+"' where attendanceid = " +
 									"'"+studentDailyAttendanceDetails.getAttendanceid()+"'");
 					queryTwo.executeUpdate();
@@ -326,7 +326,7 @@ public class AttendanceDAO {
 			transaction = session.beginTransaction();
 			int i =0;
 			for (Integer attIn : attendanceIdsList) {
-				Query query = session.createSQLQuery("update Studentdailyattendance set attendancestatus = '"+studentAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
+				Query query = session.createQuery("update Studentdailyattendance set attendancestatus = '"+studentAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
 				query.executeUpdate();
 				
 				i++;
@@ -484,7 +484,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			transaction = session.beginTransaction();
 			int i =0;
 			for (Integer attIn : attendanceIdsList) {
-				Query query = session.createSQLQuery("update Staffdailyattendance set attendancestatus = '"+staffAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
+				Query query = session.createQuery("update Staffdailyattendance set attendancestatus = '"+staffAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
 				query.executeUpdate();
 				i++;
 			}

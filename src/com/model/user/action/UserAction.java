@@ -42,12 +42,26 @@ public class UserAction {
                             url = updateMultipleUsers();
                         }else if (action.equalsIgnoreCase("deleteMultipleUsers")) {
                             url = deleteMultipleUsers();
+                        }else if (action.equalsIgnoreCase("pauseAllUsers")) {
+                            url = pauseAllUsers();
+                        }else if (action.equalsIgnoreCase("resumeAllUsers")) {
+                            url = resumeAllUsers();
                         }
 	       return url;
 	       
 	}
 
-	private String deleteMultipleUsers() {
+	private String resumeAllUsers() {
+            new UserService(request, response).resumeAllUsers();
+            return "Controller?process=UserProcess&action=viewLogin";
+    }
+
+    private String pauseAllUsers() {
+	    new UserService(request, response).pauseAllUsers();
+            return "Controller?process=UserProcess&action=viewLogin";
+    }
+
+    private String deleteMultipleUsers() {
 	    new UserService(request, response).deleteMultipleUsers();
             return "Controller?process=UserProcess&action=viewLogin";
     }
