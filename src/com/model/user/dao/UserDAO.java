@@ -230,7 +230,7 @@ public class UserDAO {
             transaction = session.beginTransaction();
             
             for (Entry<Integer, java.util.List<String>> entry : userMap.entrySet()) {
-                Query query = session.createQuery("update Login set username='"+entry.getValue().get(1)+"' ,password= '"+entry.getValue().get(2)+"', usertype='"+entry.getValue().get(3)+"' , branchid='"+entry.getValue().get(0)+"' , addstudentflag='"+entry.getValue().get(4)+"', lastmodifiedby='"+entry.getValue().get(5)+"' where lid="+entry.getKey()+"");
+                Query query = session.createQuery("update Login set username='"+entry.getValue().get(1)+"' ,password= '"+entry.getValue().get(2)+"', usertype='"+entry.getValue().get(3)+"' , branchid='"+Integer.parseInt(entry.getValue().get(0))+"' , addstudentflag='"+entry.getValue().get(4)+"', lastmodifiedby='"+entry.getValue().get(5)+"' where lid="+entry.getKey()+"");
                 query.executeUpdate();
             }
             transaction.commit();
