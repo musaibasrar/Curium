@@ -30,7 +30,7 @@ public class UserDAO {
 	    public UserDAO() {
 	    	//Musaib
 	        //sessionFactory = HibernateUtil.getSessionFactory();
-	        session=HibernateUtil.openSession();
+	        session=HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")

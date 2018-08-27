@@ -184,7 +184,7 @@ for(Cookie cookie : cookies){
                             </tr>
                             <tr>
                             				<td width="10"></td>
-                                          	<td align="left"><img src="images/bieheader.png" width="200"/></td>  
+                                          	<td align="left"><img src="images/bieheaderstrong.png" /></td>  
                                           	<!-- <td><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td> -->
                             				
                                             <td width="40" ><div align="center" ><a target="mainFrame" href="Controller?process=StudentProcess&action=addNewStudentCenter"><img title="Add New Student"  src="images/Usersw.png" width="30" height="30" alt="Add New Student" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
