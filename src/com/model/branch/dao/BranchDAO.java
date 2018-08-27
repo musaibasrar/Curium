@@ -196,7 +196,7 @@ public class BranchDAO {
         List<Branch> results = new ArrayList<Branch>();
 try {
     transaction = session.beginTransaction();
-    results = (List<Branch>) session.createQuery("From Branch where branchid ="+branchId+" order by centercode ASC").list();
+    results = (List<Branch>) session.createQuery("From Branch where idbranch ="+branchId+" order by centercode ASC").list();
     transaction.commit();
 } catch (HibernateException hibernateException) {
     transaction.rollback();
@@ -206,5 +206,63 @@ try {
     return results;
 }
 }
+
+    public boolean checkDistrict(Districts district) {
+        
+                List<Districts> distList = new ArrayList<Districts>();
+                
+        try {
+            transaction = session.beginTransaction();
+            distList = (List<Districts>) session.createQuery("From Districts where districtname ='"+district.getDistrictname()+"' or districtcode = '"+district.getDistrictcode()+"'").list();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
+            hibernateException.printStackTrace();
+        } finally {
+            session.close();
+        }
+        if(distList.size()>0) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkBranch(Branch branch) {
+        
+            List<Branch> branchList = new ArrayList<Branch>();
+                    
+            try {
+                transaction = session.beginTransaction();
+                branchList = (List<Branch>) session.createQuery("From Branch where centercode ='"+branch.getCentercode()+"' or centername = '"+branch.getCentername()+"'").list();
+                transaction.commit();
+            } catch (HibernateException hibernateException) {
+                transaction.rollback();
+                hibernateException.printStackTrace();
+            } finally {
+                session.close();
+            }
+            if(branchList.size()>0) {
+                return true;
+            }
+            return false;
+            }
+
+    public List<Districts> getDistrict(String districtcode) {
+        
+              List<Districts> distList = new ArrayList<Districts>();
+                        
+                try {
+                    transaction = session.beginTransaction();
+                    distList = (List<Districts>) session.createQuery("From Districts where districtcode = '"+districtcode+"'").list();
+                    transaction.commit();
+                } catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+                } finally {
+                    session.close();
+                }
+                
+                return distList;
+    }
 
     }

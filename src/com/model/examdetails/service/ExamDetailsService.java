@@ -112,14 +112,20 @@ public class ExamDetailsService {
 		String[] endTime = request.getParameterValues("endtime");
 		String[] centerCodes = request.getParameterValues("centercodes");
 		
-		if(httpSession.getAttribute(BRANCHID)!=null){
+		if(httpSession.getAttribute(BRANCHID)!=null && subject!=null){
 			
 			for (int i=0; i<subject.length;i++) {
 				Examschedule examschedule = new Examschedule();
 				examschedule.setAcademicyear(DataUtil.emptyString(request.getParameter("academicyear")));
 				String centerCodeList = "";
 				for (String string : centerCodes) {
-                                    centerCodeList = centerCodeList+","+string;
+				    
+				    if(!"".equalsIgnoreCase(centerCodeList)) {
+				        centerCodeList = centerCodeList+","+string;
+				    }else {
+				        centerCodeList = string;
+				    }
+                                    
                                 }
 				examschedule.setCentercode(centerCodeList);
 				examschedule.setExamname(DataUtil.emptyString(request.getParameter("examlevel")));

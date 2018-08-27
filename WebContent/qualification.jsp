@@ -631,7 +631,7 @@ for(Cookie cookie : cookies){
 					<c:forEach items="${qualificationlist}" var="qualificationlist" varStatus="status">
 						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${qualificationlist.idqualification}"/>" class = "chcktbl"  name="qualificationids"  value="${qualificationlist.idqualification}:${status.index}"/></td>
-						  <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${qualificationlist.qualification}" />" id="updatequalification" name="updatequalification"></td>
+						  <td class="dataText"><label style="display: none;"><c:out value="${qualificationlist.qualification}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${qualificationlist.qualification}" />" id="updatequalification" name="updatequalification"></td>
 						</tr>
 					</c:forEach>
 

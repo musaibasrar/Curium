@@ -80,6 +80,8 @@ public class StudentAction {
 			url = downlaodFile();
 		}else if (action.equalsIgnoreCase("addNew")) {
                     url = addNew();
+                }else if (action.equalsIgnoreCase("addNewStudentCenter")) {
+                    url = addNewStudentCenter();
                 }else if (action.equalsIgnoreCase("viewAllSuperAdmin")) {
                     url = viewAllSuperAdmin();
                 }else if (action.equalsIgnoreCase("studentsListReport")) {
@@ -88,6 +90,8 @@ public class StudentAction {
                     url = studentsListReportCenter();
                 }else if (action.equalsIgnoreCase("searchStudents")) {
                     url = searchStudents();
+                }else if (action.equalsIgnoreCase("searchStudentsCenter")) {
+                    url = searchStudentsCenter();
                 }else if (action.equalsIgnoreCase("exportStudentsReport")) {
                     url = exportStudentsReport();
                 }else if (action.equalsIgnoreCase("printStudentReport")) {
@@ -112,6 +116,8 @@ public class StudentAction {
                     url = resultReportCenter();
                 }else if (action.equalsIgnoreCase("searchResultReport")) {
                     url = searchResultReport();
+                }else if (action.equalsIgnoreCase("searchResultReportCenter")) {
+                    url = searchResultReportCenter();
                 }else if (action.equalsIgnoreCase("printResultReport")) {
                     url = printResultReport();
                 }else if (action.equalsIgnoreCase("rankListReport")) {
@@ -150,14 +156,28 @@ public class StudentAction {
 	
 	
 
+    private String searchResultReportCenter() {
+        new ResultService(request, response).searchResultReportCenter();
+        return "resultreportcenter.jsp";
+}
+
+    private String searchStudentsCenter() {
+        new StudentService(request, response).searchStudentsCenter();
+        return "studentsreportscenter.jsp";
+}
+
+    private String addNewStudentCenter() {
+        return new StudentService(request, response).addNewStdentCenter();
+        }
+
     private String resultReportCenter() {
         new ResultService(request, response).resultReportCenter();
-        return "resultreport.jsp";
+        return "resultreportcenter.jsp";
     }
 
     private String studentsListReportCenter() {
         new StudentService(request, response).studentsListReportCenter();
-        return "studentsreports.jsp";
+        return "studentsreportscenter.jsp";
 }
 
     private String viewAllStudentsCenter() {

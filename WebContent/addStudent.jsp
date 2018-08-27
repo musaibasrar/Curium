@@ -905,7 +905,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Center Code*&nbsp;</td>
 
 							<td width="28%"><label> 
-							<select name="centercode" id="centercode"
+							<select name="centercode" id="centercode" onchange="getAdmNo()"
 									style="width: 240px;" required>
 										<option selected></option>
 										<c:forEach items="${branchList}" var="branchlist">

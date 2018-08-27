@@ -62,10 +62,18 @@ public class BranchService {
         district.setDistrictname(DataUtil.emptyString(request.getParameter("districtname")));
 
         if (!district.getDistrictname().equalsIgnoreCase("")) {
-            result = new BranchDAO().create(district);
+            result = new BranchDAO().checkDistrict(district);
+            
+            if(!result) {
+                result = new BranchDAO().create(district);
+                request.setAttribute("districtsave", result);
+            }else {
+                request.setAttribute("districtduplicate", result);
+            }
+            
         }
         
-        request.setAttribute("districtsave", result);
+        
     }
 
     public void updateDistricts() {
@@ -157,10 +165,18 @@ public class BranchService {
         branch.setDistrictcode(distCode[0]);
 
         if (!branch.getCentername().equalsIgnoreCase("")) {
-            result = new BranchDAO().addBranches(branch);
+            
+            result = new BranchDAO().checkBranch(branch);
+            
+            if(!result) {
+                result = new BranchDAO().addBranches(branch);
+                request.setAttribute("centersave", result);
+            }else {
+                request.setAttribute("centerduplicate", result);
+            }
         }
         
-        request.setAttribute("centersave", result);
+       
     }
 
     public void viewBranchesCenter(int branchId) {
@@ -182,6 +198,19 @@ public class BranchService {
             List<Branch> list = new BranchDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
             request.setAttribute("branchList", list);
             logger.info("Branch List "+list.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        
+    }
+
+    public void viewDistrictsCenter(String districtcode) {
+        
+        try {
+            List<Districts> list = new BranchDAO().getDistrict(districtcode);
+            request.setAttribute("districtsList", list);
+            logger.info("District List "+list.size());
         } catch (Exception e) {
             e.printStackTrace();
             

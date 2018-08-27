@@ -528,7 +528,7 @@ for(Cookie cookie : cookies){
 						
 								<tr>
 							<td width="10%" class="alignRight">Minimum Marks &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> <input id="minmarks"
+							<td width="70%"><label> <input id="minmarks" onkeypress="return event.charCode >= 00 && event.charCode <=57"
 									name="minmarks" type="text" class="textField"  size="30" required>
 
 							</label></td>
@@ -541,7 +541,7 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 							<td width="10%" class="alignRight">Maximum Marks &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> <input id="maxmarks"
+							<td width="70%"><label> <input id="maxmarks" onkeypress="return event.charCode >= 00 && event.charCode <=57"
 									name="maxmarks" type="text" class="textField"  size="30" required>
 
 							</label></td>

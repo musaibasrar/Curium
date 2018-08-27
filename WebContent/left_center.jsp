@@ -334,7 +334,7 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=viewAllStudentsCenter" class="featurehyperlink" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="Controller?process=StudentProcess&action=addNew" class="featurehyperlink" style="font-size: 12px;">Add New</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=addNewStudentCenter" class="featurehyperlink" style="font-size: 12px;">Add New</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Reports</a></h5>

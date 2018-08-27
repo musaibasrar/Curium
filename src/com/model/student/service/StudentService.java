@@ -1346,4 +1346,74 @@ public class StudentService {
         httpSession.setAttribute("noofpapers", "");
         }
     }
+
+    public String addNewStdentCenter() {
+        
+        if(httpSession.getAttribute(BRANCHID)!=null){
+            new ExamLevelService(request, response).examLevels();
+            new LanguageService(request, response).viewLanguage();
+            new BranchService(request, response).viewBranchesCenter(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+            List<Branch> branchList = (List<Branch>) request.getAttribute("branchList");
+            new BranchService(request, response).viewDistrictsCenter(branchList.get(0).getDistrictcode());
+            new QualificationService(request, response).viewQualification();
+            return "addStudent.jsp";
+        }
+        return "sessiontimeout.jsp";
+    }
+
+    public void searchStudentsCenter() {
+        String searchQuery = "From Parents as parent where ";
+        String subQuery =null;
+        
+        
+        if(httpSession.getAttribute(BRANCHID)!=null) {
+            
+        Branch branch = new BranchDAO().getBranch(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+        
+            if(branch!=null) {
+                 subQuery = "parent.Student.centercode = '"+branch.getCentercode()+"'";
+                 httpSession.setAttribute("printcentername", "Center Code/Name: "+branch.getCentercode()+"/"+branch.getCentername());
+             
+                 subQuery = subQuery+" AND parent.Student.districtcode = '"+branch.getDistrictcode()+"'";
+             
+             if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
+                     subQuery = subQuery+" AND parent.Student.examlevel = '"+request.getParameter("examlevel")+"'";
+                 httpSession.setAttribute("printexamlevel", "Examination Level: "+request.getParameter("examlevel").toString());
+             }
+             
+             if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
+                     subQuery = subQuery+" AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+                 httpSession.setAttribute("printlanguage", "Language: "+request.getParameter("languageopted").toString());
+             }
+             
+             if(!request.getParameter("qualification").equalsIgnoreCase("")) {
+                     subQuery = subQuery+" AND parent.Student.qualification = '"+request.getParameter("qualification")+"'";
+                 httpSession.setAttribute("printqualification", "Qualification: "+request.getParameter("qualification").toString());
+             }
+             
+             if(!DataUtil.emptyString(request.getParameter("religion")).equalsIgnoreCase("")) {
+                     subQuery = subQuery+" AND parent.Student.religion = '"+request.getParameter("religion")+"'";
+                     httpSession.setAttribute("printreligion", "Religion: "+request.getParameter("religion").toString());
+             }
+             searchQuery = searchQuery+subQuery;
+             List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
+             Map<Parents,String> mapStudentReports = new HashMap<Parents,String>();
+             
+             for (Parents parents : parentsList) {
+                 Branch centerName = new BranchDAO().getBranch(parents.getStudent().getCentercode());
+                 mapStudentReports.put(parents, centerName.getCentername());
+             }
+             httpSession.setAttribute("mapstudentreports", mapStudentReports);
+             new ExamLevelService(request, response).examLevels();
+             new LanguageService(request, response).viewLanguage();
+             new BranchService(request, response).viewDistricts();
+             new BranchService(request, response).viewBranches();
+             new QualificationService(request, response).viewQualification(); 
+             
+             //Query subexamlevel to get the numbers of papers per exam
+             List<Subexamlevel> noOfPapers = new ExamLevelService(request, response).getSubExamLevelSubject(request.getParameter("examlevel"));
+             httpSession.setAttribute("noofpapers", noOfPapers.size());
+     }
+    }
+    }
 }

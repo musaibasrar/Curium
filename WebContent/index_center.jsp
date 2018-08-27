@@ -72,15 +72,14 @@ for(Cookie cookie : cookies){
 }
 %>
 
-    <frameset    rows="139,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="header_center.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
-
-            <frameset  cols="175,*" frameborder="0" border="0" framespacing="0">
+    <frameset    rows="80,*"frameborder="0" border="0" framespacing="0"  >
+		<frame   src="header_center.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
+            <frameset  cols="179,*" frameborder="0" border="0" framespacing="0">
                 <frame  src="left_center.jsp" name="leftFrame" scrolling="NO"  frameborder="1"   />
-                <frame src="Controller?process=StudentProcess&action=viewAllCenter" name="mainFrame" scrolling="yes" />
+                <frame src="Controller?process=StudentProcess&action=viewAllStudentsCenter" name="mainFrame" scrolling="yes" />
             </frameset>
 
-   
+   </frameset>
 
 
 

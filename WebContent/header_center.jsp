@@ -178,11 +178,7 @@ for(Cookie cookie : cookies){
                 <tr>
                     <td valign="top" background="images/h_bg.jpg">
                         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
-                            <!-- <tr>
-                               <td width="234" ><div align="center"><img src="images/logo.png" width="200" height="64" /></div></td> 
-                                <td width="700" ><div align="center"><img src="images/SMS.png" width="391" height="50" /></div></td>
-                               
-                            </tr> -->
+                         
                             <tr>
                             <td style="height: 30px;"></td>  
                             </tr>
@@ -191,18 +187,16 @@ for(Cookie cookie : cookies){
                                           	<td align="left"><img src="images/bieheader.png" width="200"/></td>  
                                           	<!-- <td><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td> -->
                             				
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="Controller?process=StudentProcess&action=addNew"><img title="Add New Student"  src="images/Usersw.png" width="30" height="30" alt="Add New Student" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="Controller?process=StudentProcess&action=addNewStudentCenter"><img title="Add New Student"  src="images/Usersw.png" width="30" height="30" alt="Add New Student" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><label style="color:white;font-size: 12px;">Add <br>New</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                            					
-                           					<td width="40"><a target="mainFrame" href="Controller?process=StudentProcess&action=viewAllCenter"><div align="center" align="center"><img  alt="View All Students" src="images/allusersw.png" width="30" height="30" title="View All Students"/> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                           					<td width="40"><a target="mainFrame" href="Controller?process=StudentProcess&action=viewAllStudentsCenter"><div align="center" align="center"><img  alt="View All Students" src="images/allusersw.png" width="30" height="30" title="View All Students"/> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">View <br>All</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
                                             <td width="40" ><div align="center" ><a target="_parent" href="Controller?process=UserProcess&action=logout"><img   src="images/logoutw.png" width="30" height="30" alt="Log Out" title="Logout"/></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             <td width="60" ><div align="center" ><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             </tr>
-                            <tr>
-                            <td style="height: 30px;"></td>  
-                            </tr>
+                            
                         </table>
                     </td>
                 </tr>

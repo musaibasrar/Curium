@@ -708,7 +708,7 @@ for(Cookie cookie : cookies){
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
    						  <td class="dataText"><input type="checkbox" id = "<c:out value="${referencebookslist.idreferencebooks}"/>" class = "chcktbl"  name="referencebooksid"  value="<c:out value="${referencebookslist.idreferencebooks}:${status.index}"/>"/></td>
-						  <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${referencebookslist.referencebooks}" />" id="updatereferencebooks" name="updatereferencebooks"></td>
+						  <td class="dataText"><label style="display: none;"><c:out value="${referencebookslist.referencebooks}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${referencebookslist.referencebooks}" />" id="updatereferencebooks" name="updatereferencebooks"></td>
 						  <td class="dataText">
 							<label style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" > 
 							 <select name="updateexamlevel" id="updateexamlevel"

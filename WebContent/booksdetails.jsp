@@ -621,7 +621,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td width="10%" class="alignRight">Price &nbsp;</td>
-							<td width="70%"><label> <input id="price" 
+							<td width="70%"><label> <input id="price" onkeypress="return event.charCode >= 00 && event.charCode <=57"
 									name="price" type="text" class="textField" required size="30"
 									required>
 
@@ -633,7 +633,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td width="10%" class="alignRight">Quantity &nbsp;</td>
-							<td width="70%"><label> <input id="quantity" 
+							<td width="70%"><label> <input id="quantity" onkeypress="return event.charCode >= 00 && event.charCode <=57"
 									name="quantity" type="text" class="textField" required size="30">
 
 							</label></td>

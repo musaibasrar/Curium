@@ -321,6 +321,13 @@
     display: none;
 }
 
+.centerduplicate {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
 </style>
 <style>
 #button {
@@ -493,6 +500,7 @@
 					var centersave='<c:out default="" value="${centersave}"/>';
 		            var centerupdate='<c:out default="" value="${centerupdate}"/>';
 		            var centerdelete='<c:out default="" value="${centerdelete}"/>';
+		            var centerduplicate='<c:out default="" value="${centerduplicate}"/>';
 		            
 		            if(centersave == "true"){
 		            	 $(function(){
@@ -519,6 +527,11 @@
 			                   		 $( "div.deletefailure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
 			                   		 });
 			                   	 }
+			                   	else if(centerduplicate == "true"){
+				                   	  $(function(){
+				                   		 $( "div.centerduplicate" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+				                   		 });
+				                   	 }
 			
             
             
@@ -558,6 +571,8 @@ for(Cookie cookie : cookies){
 		
 		<div class="alert-box delete">Center has been deleted successfully!!!</div>
 		<div class="alert-box deletefailure">Deletion Failed, Unable to delete center!!!</div>
+		
+		<div class="alert-box centerduplicate">Saving Failed, Center Code/Name already exits!!!</div>
 		
 		
 		<div style="height: 28px">
@@ -658,8 +673,8 @@ for(Cookie cookie : cookies){
 
 						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${branchlist.idbranch}"/>" class = "chcktbl"  name="branchids"  value="<c:out value="${branchlist.idbranch}:${status.index}"/>"/></td>
-						  <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${branchlist.centercode}" />" id="updatecentercode" name="updatecentercode"></td>
-						  <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${branchlist.centername}" />" id="updatecentername" name="updatecentername"></td>
+						  <td class="dataText"><label style="display: none;"><c:out value="${branchlist.centercode}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${branchlist.centercode}" />" id="updatecentercode" name="updatecentercode"></td>
+						  <td class="dataText"><label style="display: none;"><c:out value="${branchlist.centername}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${branchlist.centername}" />" id="updatecentername" name="updatecentername"></td>
 						  <td class="dataText">
 						  <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${branchlist.districtcode}" />" id="updatedistcode" name="updatedistcode" readonly="readonly">
 						</tr>

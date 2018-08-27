@@ -321,6 +321,14 @@
     border-color: #ebccd1;
     display: none;
 }
+
+.districtduplicate {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
 </style>
 <style>
 #button {
@@ -504,6 +512,7 @@
 					var districtsave='<c:out default="" value="${districtsave}"/>';
 		            var districtupdate='<c:out default="" value="${districtupdate}"/>';
 		            var districtdelete='<c:out default="" value="${districtdelete}"/>';
+		            var districtduplicate='<c:out default="" value="${districtduplicate}"/>';
 		            
 		            if(districtsave == "true"){
 		            	 $(function(){
@@ -529,7 +538,11 @@
 			                   	  $(function(){
 			                   		 $( "div.deletefailure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
 			                   		 });
-			                   	 }
+			                   	 }else if(districtduplicate == "true"){
+				                   	  $(function(){
+					                   		 $( "div.districtduplicate" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+					                   		 });
+					                   	 }
 			
             
             
@@ -562,6 +575,8 @@ for(Cookie cookie : cookies){
 		
 		<div class="alert-box delete">District has been deleted successfully!!!</div>
 		<div class="alert-box deletefailure">Deletion Failed, Unable to delete District!!!</div>
+		
+		<div class="alert-box districtduplicate">Saving Failed, District Name/District Code already exits!!!</div>
 		
 		
 		<div style="height: 28px">
@@ -646,8 +661,8 @@ for(Cookie cookie : cookies){
 					<c:forEach items="${districtsList}" var="districtslist" varStatus="status">
 						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${districtslist.iddistrict}"/>" class = "chcktbl"  name="districtids"  value="${districtslist.iddistrict}:${status.index}"/></td>
-						  <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${districtslist.districtcode}" />" id="distcode" name="distcode"></td>
-						  <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${districtslist.districtname}" />" id="distname" name="distname"></td>
+						  <td class="dataText"><label style="display: none;"><c:out value="${districtslist.districtcode}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${districtslist.districtcode}" />" id="distcode" name="distcode"></td>
+						  <td class="dataText"><label style="display: none;"><c:out value="${districtslist.districtname}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${districtslist.districtname}" />" id="distname" name="distname"></td>
 						</tr>
 					</c:forEach>
 

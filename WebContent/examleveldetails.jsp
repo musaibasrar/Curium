@@ -647,8 +647,8 @@ for(Cookie cookie : cookies){
 
 						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${examleveldetails.idexamlevel}"/>" class = "chcktbl"  name="examlevelids"  value="<c:out value="${examleveldetails.idexamlevel}:${status.index}"/>"/></td>
-						  <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${examleveldetails.levelcode}" />" id="updatelevelcode" name="updatelevelcode"></td>
-						  <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${examleveldetails.levelname}" />" id="updatelevelname" name="updatelevelname"></td>
+						  <td class="dataText"><label style="display: none;"><c:out value="${examleveldetails.levelcode}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${examleveldetails.levelcode}" />" id="updatelevelcode" name="updatelevelcode"></td>
+						  <td class="dataText"><label style="display: none;"><c:out value="${examleveldetails.levelname}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${examleveldetails.levelname}" />" id="updatelevelname" name="updatelevelname"></td>
 						  <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${examleveldetails.duration}" />" id="updateduration" name="updateduration"></td>
 						</tr>
 					</c:forEach>
