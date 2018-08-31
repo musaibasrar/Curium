@@ -40,9 +40,33 @@ public class ReferenceBooksAction {
             }else if (action.equalsIgnoreCase("updateMultipleRecords")) {
                 logger.info("Action is updateMultipleQualification");
                 url = updateMultipleRecords();
+            }else if (action.equalsIgnoreCase("searchReferenceBooks")) {
+                logger.info("Action is searchReferenceBooks");
+                url = searchReferenceBooks();
+            }else if (action.equalsIgnoreCase("viewReferenceBooksCenter")) {
+                logger.info("Action is searchReferenceBooks");
+                url = viewReferenceBooksCenter();
+            }else if (action.equalsIgnoreCase("searchReferenceBooksCenter")) {
+                logger.info("Action is searchReferenceBooksCenter");
+                url = searchReferenceBooksCenter();
             }
             return url;
 	}
+
+        private String searchReferenceBooksCenter() {
+            new ReferenceBooksService(request, response).searchReferenceBooks();
+            return "referencebookscenter.jsp";
+    }
+
+        private String viewReferenceBooksCenter() {
+            new ReferenceBooksService(request, response).viewReferenceBooks();
+            return "referencebookscenter.jsp";
+    }
+
+        private String searchReferenceBooks() {
+            new ReferenceBooksService(request, response).searchReferenceBooks();
+            return "referencebooks.jsp";
+    }
 
         private String addReferenceBooks() {
         new ReferenceBooksService(request, response).addReferenceBooks();

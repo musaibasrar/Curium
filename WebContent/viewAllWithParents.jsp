@@ -405,6 +405,8 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th title="click to sort" class="headerText">Father/Guardian/Husband Name</th>
+                            <th title="click to sort" class="headerText">Language</th>
                             <th title="click to sort" class="headerText">Exam Level</th>
                             <th title="click to sort" class="headerText">District Code&nbsp;</th>
                             <th title="click to sort" class="headerText">Center Code&nbsp;</th>
@@ -418,6 +420,18 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.name}"/></td>
+                                <td class="dataText">
+								<c:if test="${(Parents.mothersname != '')}">
+								<c:out value="${Parents.mothersname}" />
+								</c:if>
+								<c:if test="${(Parents.fathersname != '')}">
+								<c:out value="${Parents.fathersname}" />
+								</c:if>
+								<c:if test="${(Parents.student.guardiandetails != '')}">
+								<c:out value="${Parents.student.guardiandetails}" />
+								</c:if>
+								</td>
+								<td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.languageopted}"/></td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.examlevel}"/></td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.districtcode}"/></td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.centercode}"/></td>

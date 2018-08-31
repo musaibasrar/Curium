@@ -49,7 +49,7 @@ public class feesCollectionDAO {
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
-	            session.close();
+	            //session.close();
 	        }
 		return result;
 
@@ -68,7 +68,7 @@ public class feesCollectionDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -85,7 +85,7 @@ public class feesCollectionDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -100,7 +100,7 @@ public class feesCollectionDAO {
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
-	            session.close();
+	            //session.close();
 	        }
 	}
 
@@ -118,7 +118,7 @@ public class feesCollectionDAO {
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
-	           // session.close();
+	           // //session.close();
 	        }
 		
 		return receiptDetails;
@@ -135,7 +135,7 @@ public class feesCollectionDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return receiptInfo;

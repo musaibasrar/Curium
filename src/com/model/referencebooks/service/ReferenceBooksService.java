@@ -37,9 +37,9 @@ public class ReferenceBooksService {
 
     public void viewReferenceBooks() {
         
-            List<Referencebooks> list = new ReferenceBooksDAO().readListOfObjects();
+            /*List<Referencebooks> list = new ReferenceBooksDAO().readListOfObjects();
             request.setAttribute("referencebookslist", list);
-            logger.info("Reference Books List "+list.size());
+            logger.info("Reference Books List "+list.size());*/
             new ExamLevelService(request, response).examLevels();
         
     }
@@ -96,5 +96,14 @@ public class ReferenceBooksService {
         }
         request.setAttribute("referencesave", result);
     }
+
+    public void searchReferenceBooks() {
+        
+        List<Referencebooks> list = new ReferenceBooksDAO().getReferenceBooks(DataUtil.emptyString(request.getParameter("examlevelsearch")));
+        request.setAttribute("referencebookslist", list);
+        logger.info("Reference Books List "+list.size());
+        new ExamLevelService(request, response).examLevels();
+    
+}
         
 }

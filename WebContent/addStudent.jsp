@@ -471,24 +471,6 @@
 
 	}
 
-	function validateNameContact() {
-		if (document.getElementById("name").value.length == 0)
-
-		{
-			document.getElementById("name").style.background = 'red';
-			alert("Enter The Name ");
-		}
-
-	}
-	function validateAdmissionNumber() {
-		if (document.getElementById("admnno").value.length == 0)
-
-		{
-			document.getElementById("admnno").style.background = 'red';
-			alert("Enter The Admission Number ");
-		}
-
-	}
 </script>
 
 
@@ -726,7 +708,7 @@ for(Cookie cookie : cookies){
 							<td width="30%" class="alignRight">Name* &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="name" type="text" class="myclass" id="name" size="36" style="text-transform:uppercase"
-									onblur="validateName();" required> <!-- onkeyup="check(this.value);"  -->
+									required>
 							</label></td>
 
 							<td width="30%" class="alignRight">Gender &nbsp;</td>
@@ -974,7 +956,7 @@ for(Cookie cookie : cookies){
 						<tr>
 
 							<td width="20%" class="alignRight">Admission Number&nbsp;</td>
-							<td width="28%" id="getAdmNumber"><label><input name="admnno" type="text" class="textField" id="admnno" size="36"></label></td>
+							<td width="28%" id="getAdmNumber"><label><input name="admnno" type="text" class="textField" id="admnno" size="36" required></label></td>
 							
 							<td width="16%" class="alignRight">Religion&nbsp;</td>
 							<td width="28%">
@@ -1030,7 +1012,7 @@ for(Cookie cookie : cookies){
 								
 								<tr>
 									<td align="center">
-										<button id="save" onmouseover="validateNameContact();validateAdmissionNumber();" onfocus="validateNameContact();">Save</button>
+										<button id="save">Save</button>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="cancel">Cancel</button>
 
@@ -1080,7 +1062,7 @@ for(Cookie cookie : cookies){
 									<td align="center">
 										
 										
-										<button id="savethree" onmouseover="validateNameContact();validateAdmissionNumber();" onfocus="validateNameContact();">Save</button>
+										<button id="savethree" >Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="cancelthree">Cancel</button>
@@ -1132,7 +1114,7 @@ for(Cookie cookie : cookies){
 
 									<td width="28%"><label> <input name="email"
 											type="email" class="textField" id="email" size="36"
-											onblur="validateNameContact();"
+											
 											>
 									</label></td>
 									</tr>
@@ -1153,13 +1135,13 @@ for(Cookie cookie : cookies){
 									<td width="16%" class="alignRight">Notes &nbsp;</td>
 									<td width="28%"><label> <input name="notes"
 											type="text" class="textField" id="notes" size="36"
-											onclick="validateNameContact();">
+											>
 									</label></td>
 									<td width="16%" class="alignRight">Education &nbsp;</td>
 
 									<td width="28%"><label> <input name="educationqualification"
 											type="text" class="textField" id="educationqualification" size="36"
-											onblur="validateNameContact();"
+											
 											>
 									</label></td>
 								</tr>
@@ -1196,7 +1178,7 @@ for(Cookie cookie : cookies){
 									<td align="center">
 									
 										
-										<button id="savetwo" onmouseover="validateNameContact();validateAdmissionNumber();" onfocus="validateNameContact();">Save</button>
+										<button id="savetwo" >Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="canceltwo">Cancel</button>

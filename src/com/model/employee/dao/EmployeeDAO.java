@@ -44,7 +44,7 @@ public class EmployeeDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return result;
 	}
@@ -63,7 +63,7 @@ public class EmployeeDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 			return results;
 		}
 	}
@@ -82,7 +82,7 @@ public class EmployeeDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 			return results;
 		}
 	}
@@ -150,7 +150,7 @@ public class EmployeeDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			 session.close();
+			 //session.close();
 			return noOfRecords;
 		}
 	}
@@ -164,7 +164,7 @@ public class EmployeeDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return employee;
 	}
@@ -178,7 +178,7 @@ public class EmployeeDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return employee;
 	}
@@ -192,7 +192,7 @@ public class EmployeeDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return employeeExtId;
 	}
@@ -208,7 +208,7 @@ public class EmployeeDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
         }
 		
 	}
@@ -239,7 +239,7 @@ public class EmployeeDAO {
                 transaction.rollback();
                 hibernateException.printStackTrace();
         } finally {
-                session.close();
+                //session.close();
         }
         return result;
 }
@@ -257,7 +257,7 @@ public class EmployeeDAO {
                 transaction.rollback();
                 hibernateException.printStackTrace();
         } finally {
-                session.close();
+                //session.close();
                 return results;
         }
 }

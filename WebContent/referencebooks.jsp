@@ -462,6 +462,14 @@
 
 	}
 	
+	function searchReferenceBooks() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=ReferenceBooksProcess&action=searchReferenceBooks";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	
 	function updateRecords() {
 		var form1 = document.getElementById("form1");
 		form1.action = "Controller?process=ReferenceBooksProcess&action=updateMultipleRecords";
@@ -488,9 +496,23 @@
 				addReferenceBooks();
 			}else{
 				alert('Enter Mandatory Fields');
+				return false;
 			}
 			
 		});
+		
+		$("#search").button().click(function() {
+			var examlevel = document.getElementById('examlevelsearch').value;
+			
+			if(examlevel !=""){
+				searchReferenceBooks();
+			}else{
+				alert('Enter Mandatory Fields');
+				return false;
+			}
+			
+		});
+		
 		$("#effect").hide();
 
 	});
@@ -631,16 +653,51 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Add Reference Books</a></li>
+					<li><a href="#tabs-1">Search</a></li>
+					<li><a href="#tabs-2">Add</a></li>
 
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="10" id="table1" style="display: block">
+												
 						<tr>
-							<td width="10%" class="alignRight" >Book Name &nbsp;&nbsp;&nbsp;</td>
+						<td width="16%" class="alignRight">Examination Level*&nbsp;</td>
+							<td width="28%">
+							 <label> 
+							 <select name="examlevelsearch" id="examlevelsearch"
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label></td>
+						
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>			
+					</table>
+					
+					<table id="table2" width="100%" border="0" align="center">
+						<tr>
+							<td align="center">
+								<button id="search">Search</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+				
+				<div id="tabs-2">
+					<table width="100%" border="0" align="center" cellpadding="0"
+						cellspacing="10" id="table1" style="display: block">
+						<tr>
+							<td width="10%" class="alignRight" >Book Name* &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> <input id="bookname" style="text-transform: capitalize;width: 240px;"
-									name="bookname" type="text" class="textField" size="30" required>
+									name="bookname" type="text" class="textField" size="30">
 
 							</label></td>
 						</tr>

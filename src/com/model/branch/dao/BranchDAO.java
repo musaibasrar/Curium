@@ -44,7 +44,7 @@ public class BranchDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return results;
         }
 	}
@@ -60,7 +60,7 @@ public class BranchDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return results;
         }
     }
@@ -76,7 +76,7 @@ public class BranchDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return result;
         }
     }
@@ -153,7 +153,7 @@ public class BranchDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return result;
         }
     }
@@ -170,7 +170,7 @@ public class BranchDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return results;
         }
 }
@@ -186,7 +186,7 @@ public class BranchDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return results;
         }
     }
@@ -202,7 +202,7 @@ try {
     transaction.rollback();
     hibernateException.printStackTrace();
 } finally {
-    session.close();
+    //session.close();
     return results;
 }
 }
@@ -219,7 +219,7 @@ try {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
         }
         if(distList.size()>0) {
             return true;
@@ -239,7 +239,7 @@ try {
                 transaction.rollback();
                 hibernateException.printStackTrace();
             } finally {
-                session.close();
+                //session.close();
             }
             if(branchList.size()>0) {
                 return true;
@@ -259,10 +259,9 @@ try {
                     transaction.rollback();
                     hibernateException.printStackTrace();
                 } finally {
-                    session.close();
+                    //session.close();
                 }
                 
                 return distList;
     }
-
     }

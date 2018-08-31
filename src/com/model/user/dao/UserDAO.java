@@ -1,7 +1,8 @@
 package com.model.user.dao;
 
-import java.awt.List;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -184,7 +185,7 @@ public class UserDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
         }
 		return false;
 		
@@ -202,7 +203,7 @@ public class UserDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
         }
 		return user;
 	}
@@ -218,7 +219,7 @@ public class UserDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
         }
         return loginList;
     }
@@ -238,7 +239,7 @@ public class UserDAO {
         }catch(HibernateException hibernateException){
             hibernateException.printStackTrace();
         }finally{
-            session.close();
+            //session.close();
         }
         
         return result;
@@ -271,7 +272,7 @@ public class UserDAO {
         }catch(HibernateException hibernateException){
             hibernateException.printStackTrace();
         }finally{
-            session.close();
+            //session.close();
         }
         
         return result;
@@ -289,9 +290,61 @@ public class UserDAO {
         }catch(HibernateException hibernateException){
             hibernateException.printStackTrace();
         }finally{
-            session.close();
+            //session.close();
         }
         
         return result;
+    }
+    
+    
+    @SuppressWarnings("finally")
+    public Login readUniqueObject(String userName) {
+    Login login = null;
+   try{
+       transaction = session.beginTransaction();
+       Query query = session.createQuery("FROM Login as login where login.username= :loginName");
+       query.setParameter("loginName", userName);
+       login = (Login) query.uniqueResult();
+       transaction.commit();
+       
+   }catch(Exception hibernateException){
+       System.out.println("In userdao"+hibernateException);
+       hibernateException.printStackTrace();
+   }finally{
+       return login;
+   }}
+
+    public Login getAddStudentStatus(int branchid, String userName) {
+        Login login = null;
+        try{
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM Login as login where username= '"+userName+"' and branchid= "+branchid+"");
+            login = (Login) query.uniqueResult();
+            transaction.commit();
+            
+        }catch(Exception hibernateException){
+            System.out.println("In userdao"+hibernateException);
+            hibernateException.printStackTrace();
+        }finally{
+            return login;
+        }}
+
+    public boolean checkUser(java.util.List<Integer> ids) {
+        try {
+            transaction = session.beginTransaction();
+            for (Integer id : ids) {
+                Query queryLogin = session.createQuery("from Login where lid="+id+"");
+                Login login = (Login) queryLogin.uniqueResult();
+                List<Student> list = session.createQuery("From Student where branchid = "+login.getBranch().getIdbranch()+"").list();
+                if(list.size()>0) {
+                    transaction.commit();
+                    return true;
+                }
+            }
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            hibernateException.printStackTrace();
+        }
+        return false;
     }
 }

@@ -358,6 +358,17 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=generateHallTicketCenter" style="font-size: 12px;">Hall Ticket</a><br/>
                 <!-- <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTimeTable" style="font-size: 12px;">Time Table</a><br/> -->
             </div> 
+            
+             <h5 style="font-size: 12px"><a href="#" >Order Management</a></h5>
+            <div >
+            	<a target="mainFrame" href="Controller?process=OrderProcess&action=placeOrder" style="font-size: 12px;">Place Order</a><br/>
+            	<a target="mainFrame" href="Controller?process=OrderProcess&action=viewOrderCenter" style="font-size: 12px;">View Orders</a><br/>
+            </div>
+            
+            <h5 style="font-size: 12px"><a href="#">Reference Books</a></h5>
+            <div>
+                <a target="mainFrame" href="Controller?process=ReferenceBooksProcess&action=viewReferenceBooksCenter" style="font-size: 12px;">Reference Books</a><br/>
+            </div>
           
             <!-- END -->
            

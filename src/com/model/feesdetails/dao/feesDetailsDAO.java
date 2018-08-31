@@ -65,7 +65,7 @@ public class feesDetailsDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return feesdetails;
         }
 	}
@@ -234,7 +234,7 @@ public class feesDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}

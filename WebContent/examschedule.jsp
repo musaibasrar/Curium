@@ -383,7 +383,7 @@
         	}
 			
 		});
-		
+		$("#effect").hide();
 		$("#addSchedule").button({
 	        icons: {
 	            primary: "ui-icon-plus"
@@ -392,8 +392,6 @@
 	    	addRow();
 	    	 return false;
 		});
-		
-		$("#effect").show();
 		
 		 var removeScheduleButtonID="#removeSchedule";
 	        $(removeScheduleButtonID)
@@ -499,10 +497,10 @@
      
 	 function addRow() {
          var rowCount = document.getElementById('dataTable').rows.length;    
-         var col1="<td width='16%' height='30' class='alignLeft'><label><select name='subject' id='subject'	style='width: 240px' > <option selected></option> <c:forEach items='${listSubject}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label></td>";
-         var col2="<td class='dataTextInActive'><input type='date' name='fromdate' id=from_date_"+rowCount+" /></td>";
-         var col3="<td class='dataTextInActive'><input type='time' name='starttime' id=start_time_"+rowCount+" /></td>";
-         var col4="<td class='dataTextInActive'><input type='time' name='endtime' id=end_time_"+rowCount+" /></td>";
+         var col1="<td width='16%' height='30' class='alignLeft'><label><select name='subject' id='subject'	style='width: 240px' required> <option selected></option> <c:forEach items='${listSubject}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label></td>";
+         var col2="<td class='dataTextInActive'><input type='date' name='fromdate' id=from_date_"+rowCount+" required/></td>";
+         var col3="<td class='dataTextInActive'><input type='time' name='starttime' id=start_time_"+rowCount+" required/></td>";
+         var col4="<td class='dataTextInActive'><input type='time' name='endtime' id=end_time_"+rowCount+" required/></td>";
          
          var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+"</tr>");
          $(function() {
@@ -544,6 +542,24 @@
          }
 	 
 </script>
+<script type="text/javascript">
+	$(function() {
+		// run the currently selected effect
+		function runEffect() {
+
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		// set effect from select menu value
+		$("#add").button().click(function() {
+			runEffect();
+			return false;
+		});
+	});
+	
+</script>
 </head>
 <%
 //allow access only if session exists
@@ -564,13 +580,17 @@ for(Cookie cookie : cookies){
 <body>
 	<form id="form1">
 			
+			<div style="height: 28px">
+			<button id="add">Add Schedule Exams</button>
+			<br />
+		</div>
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			
 				
 				<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Schedule Exams</a></li>
+					<li><a href="#tabs-1">Enter Details</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"

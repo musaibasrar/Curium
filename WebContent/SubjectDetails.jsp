@@ -338,63 +338,6 @@
 		});
 	});
 </script>
-<script type="text/javascript">
-	function select(id, name) {
-		var clipEffect = 'blind';
-		var options = {};
-
-		$("#effect").show();
-		$("#medicineId").val(id)
-		$("#medicineName").val(name);
-
-	}
-	function getCurrentDate() {
-		var today = new Date();
-		var day = today.getDate();
-		var month = today.getMonth() + 1;
-		var year = today.getFullYear();
-		if (month < 10) {
-			month = "0" + month;
-
-		} else {
-			month = month;
-		}
-		if (day < 10) {
-			day = "0" + day;
-
-		} else {
-			day = day;
-		}
-		return month + "/" + day + "/" + year;
-
-	}
-</script>
-<script type="text/javascript">
-	$(function() {
-		// run the currently selected effect
-		function runEffect() {
-
-			var clipEffect = 'blind';
-			var options = {};
-			$("#effect").toggle(clipEffect, options, 1000);
-		}
-		;
-		// set effect from select menu value
-		$("#add").button().click(function() {
-			runEffect();
-			return false;
-		});
-	});
-	$(function() {
-		$("#entrydate").datepicker({
-			changeYear : true,
-			changeMonth : true
-		});
-		$("#anim").change(function() {
-			$("#entrydate").datepicker("option", "showAnim", $(this).val());
-		});
-	});
-</script>
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function addSubjects() {
@@ -416,18 +359,9 @@
 
 		$("#tabs").tabs();
 		$("#save").button().click(function() {
-			var subname = document.getElementById('subjectname').value;
-			var minmarks = document.getElementById('minmarks').value;
-			var maxmarks = document.getElementById('maxmarks').value;
-			
-			if(subname != "" && minmarks !="" && maxmarks != ""){
-				addSubjects();
-			}else{
-				alert('All fields are mandatory');
-			}
-			
+			addSubjects();
 		});
-		$("#effect").show();
+		$("#effect").hide();
 
 	});
 	
@@ -479,6 +413,24 @@
 
      });
 </script>
+<script type="text/javascript">
+	$(function() {
+		// run the currently selected effect
+		function runEffect() {
+
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		// set effect from select menu value
+		$("#add").button().click(function() {
+			runEffect();
+			return false;
+		});
+	});
+	
+</script>
 </head>
   <%
 //allow access only if session exists
@@ -502,12 +454,15 @@ for(Cookie cookie : cookies){
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");
 		%>
-		
+		<div style="height: 28px">
+			<button id="add">Add Subject Details</button>
+			<br />
+		</div>
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Add Subject Details</a></li>
+					<li><a href="#tabs-1">Enter Details</a></li>
 
 				</ul>
 				<div id="tabs-1">

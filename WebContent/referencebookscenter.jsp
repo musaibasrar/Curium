@@ -1,6 +1,6 @@
 <%--
-    Document   : Order Details
-    Created on : AUG 14, 2018, 5:52:28 PM
+    Document   : Reference Books 
+    Created on : Aug 08, 2018, 4:18:28 PM
     Author     : Musaib
 --%>
 
@@ -15,14 +15,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Order Details</title>
-<style type="text/css" title="currentStyle">
-            @import "css/dataTable/css/demo_page.css";
-            @import "css/dataTable/css/jquery.dataTables.css";
-        </style>
+<title>Subject Details </title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
-<link rel="stylesheet" href="css/font-awesome.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -95,6 +90,17 @@
 	text-transform: capitalize;
 	color: #325F6D;
 	text-align: right;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+.alignLeft{
+	font-family: Tahoma;
+	font-size: 11px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: left;
 	vertical-align: middle;
 	font-weight: bold;
 }
@@ -205,19 +211,21 @@
 }
 
 .headerText {
-                border-radius:3px;
-                width: 10px;
-                font-family: Tahoma;
-                font-size: 12px;
-                background-color: #4b6a84;
-                color: #FFFFFF;
-                font-weight: normal;
-                width: auto ;
-                height: 27px;
-                vertical-align: middle;
-                text-align: center;
-            }
-            
+	border-radius: 3px;
+	width: 10px;
+	font-family: Tahoma;
+	font-size: 12px;
+	background-color: #4b6a84;
+	color: #FFFFFF;
+	font-weight: normal;
+	width: auto;
+	height: 27px;
+	vertical-align: text-top;
+	text-align: center;
+	background-image:
+		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+}
+
 .dataText {
 	border-radius: 3px;
 	font-family: Tahoma;
@@ -323,7 +331,6 @@
     border-color: #ebccd1;
     display: none;
 }
-
 </style>
 <style>
 #button {
@@ -343,6 +350,9 @@
 	src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
 <script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
+
+<script type="text/javascript"
+	src="js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
@@ -353,28 +363,56 @@
 	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery.effects.slide.js"></script>
-
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.effects.bounce.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.effects.clip.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.effects.transfer.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.effects.blind.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
-            "bPaginate": true,
-            "bLengthChange": false,
-            "bFilter": true,
-            "bSort": true,
-            "bInfo": true,
-            "bStateSave": false,
-            "bProcessing": false,
-            "bServerSide": false,
-            "bAutoWidth": true,
-            "iDisplayLength": 2000,
-            "aoColumnDefs":[
-                { 'bSortable': false, 'aTargets': [ 0 ] }
-            ]
-            
-        });
+			"sScrollY" : "380px",
+			"bPaginate" : false,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bSort" : true,
+			"bInfo" : false,
+			"bAutoWidth" : false
+		});
 	});
-	
-	
+</script>
+<script type="text/javascript">
+	function select(id, name) {
+		var clipEffect = 'blind';
+		var options = {};
+
+		$("#effect").show();
+	}
+	function getCurrentDate() {
+		var today = new Date();
+		var day = today.getDate();
+		var month = today.getMonth() + 1;
+		var year = today.getFullYear();
+		if (month < 10) {
+			month = "0" + month;
+
+		} else {
+			month = month;
+		}
+		if (day < 10) {
+			day = "0" + day;
+
+		} else {
+			day = day;
+		}
+		return month + "/" + day + "/" + year;
+
+	}
 </script>
 <script type="text/javascript">
 	function select(id, name) {
@@ -396,58 +434,54 @@
 		}
 		;
 		// set effect from select menu value
-		$("#add").button({
-            icons:{
-                primary: " ui-icon-arrowthick-1-s"
-            }
-        }).click(function() {
+		$("#add").button().click(function() {
 			runEffect();
 			return false;
 		});
 	});
-	
+	$(function() {
+		$("#entrydate").datepicker({
+			changeYear : true,
+			changeMonth : true
+		});
+		$("#anim").change(function() {
+			$("#entrydate").datepicker("option", "showAnim", $(this).val());
+		});
+	});
 </script>
+<script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function addBooks() {
+	
+	
+	function searchReferenceBooks() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=OrderProcess&action=addBooks";
+		form1.action = "Controller?process=ReferenceBooksProcess&action=searchReferenceBooksCenter";
 		form1.method = "POST";
 		form1.submit();
 
 	}
-	
-	function deleteRecords() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=OrderProcess&action=deleteMultipleBooks";
-		form1.method = "POST";
-		form1.submit();
 
-	}
-	
-	function confirmOrder() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=OrderProcess&action=confirmOrder";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-	
 	$(function() {
 
 		$("#tabs").tabs();
-		$("#save").button({
-            icons:{
-                primary: "ui-icon-contact"
-            }
-        }).click(function() {
-			addBooks();
+		$("#search").button().click(function() {
+			var examlevel = document.getElementById('examlevelsearch').value;
+			
+			if(examlevel !=""){
+				searchReferenceBooks();
+			}else{
+				alert('Enter Mandatory Fields');
+				return false;
+			}
+			
 		});
+		
 		$("#effect").hide();
 
 	});
 	
 	 $(function(){
-         $("#deletebooks").button({
+         $("#delete").button({
              icons:{
                  primary: "ui-icon-trash"
              }
@@ -456,14 +490,12 @@
              return false;
 
          });
-         $("#placeorder").button({
+         $("#update").button({
              icons:{
                  primary: "ui-icon-note"
              }
          }).click(function(){
-        	 if(confirm('Are you sure,you want to place the order?')){
-        		 confirmOrder();	
-         	}
+             updateRecords();
              return false;
 
          });
@@ -498,23 +530,53 @@
                  $('.chcktbl:not(:checked)').attr('disabled', false);
              }
          });
-	 });
+         
+         $( "#go" )
+         .button()
+         
 
-	 
-	 function calculatePrice(value){
-		 var price = document.getElementById("price_"+value).value;
-		 var quantity = document.getElementById("quantity_"+value).value;
-		 var totalAmount = price*quantity;
-		 document.getElementById("totalprice_"+value).value = totalAmount;
-	 }
-	 
+     });
 </script>
 
-		
+<script type="text/javascript">
+					
+					var referencesave='<c:out default="" value="${referencesave}"/>';
+		            var referenceupdate='<c:out default="" value="${referenceupdate}"/>';
+		            var referencedelete='<c:out default="" value="${referencedelete}"/>';
+		            
+		            if(referencesave == "true"){
+		            	 $(function(){
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            	 });
+		            	 }else if(referencesave == "false"){
+		            	  $(function(){
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            		 });
+		            	 }else if(referenceupdate == "true"){
+		                   	 $(function(){
+		                   		 $( "div.update" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		                   	 });
+		                   	 }else if(referenceupdate == "false"){
+		                   	  $(function(){
+		                   		 $( "div.updatefailure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		                   		 });
+		                   	 }else if(referencedelete == "true"){
+			                   	 $(function(){
+			                   		 $( "div.delete" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+			                   	 });
+			                   	 }else if(referencedelete == "false"){
+			                   	  $(function(){
+			                   		 $( "div.updatedelete" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+			                   		 });
+			                   	 }
+			
+            
+            
+        </script>
         
-       
+        
 </head>
-<%
+  <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -531,54 +593,128 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" method="POST">
+	<form id="form1" action="Controller?process=SubjectDetailsProcess&action=deleteMultiple" method="POST">
+		<%
+			java.text.DateFormat df = new java.text.SimpleDateFormat(
+					"MM/dd/yyyy");
+		%>
 		
+		<div class="alert-box success">Reference Book has been added successfully!!!</div>
+		<div class="alert-box failure">Saving Failed, Unable to create new Reference Book!!!</div>
 		
-		<div style="overflow:hidden;height: 600px;">
+		<div class="alert-box update">Reference Book has been updated successfully!!!</div>
+		<div class="alert-box updatefailure">Update Failed, Unable to update Reference Book!!!</div>
+		
+		<div class="alert-box delete">Reference Book has been deleted successfully!!!</div>
+		<div class="alert-box deletefailure">Deletion Failed, Unable to delete Reference Book!!!</div>
+		
+		<div style="height: 28px">
+			<button id="add">Reference Books</button>
+			<br />
+		</div>
+
+		<div id="effect" class="ui-widget-content ui-corner-all">
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-1">Search</a></li>
+				</ul>
+				<div id="tabs-1">
+					<table width="100%" border="0" align="center" cellpadding="0"
+						cellspacing="10" id="table1" style="display: block">
+												
+						<tr>
+						<td width="16%" class="alignRight">Examination Level*&nbsp;</td>
+							<td width="28%">
+							 <label> 
+							 <select name="examlevelsearch" id="examlevelsearch"
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label></td>
+						
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>			
+					</table>
+					
+					<table id="table2" width="100%" border="0" align="center">
+						<tr>
+							<td align="center">
+								<button id="search">Search</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Order Details <br>Order Number: ${ordernumber} &nbsp;&nbsp;&nbsp;&nbsp; Center Name: ${centername}</td>
+					<td class="headerTD">Reference Books</td>
 				</tr>
-			</table> 
-			
-			<table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
-						
-                    <thead>
-                        <tr>
-                            <th title="click to sort" class="headerText">Book Title</th>
-                            <th title="click to sort" class="headerText">Author&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            <th title="click to sort" class="headerText">Price Per Book&nbsp;</th>
-                            <th title="click to sort" class="headerText">Quantity</th>
-                            <th title="click to sort" class="headerText">Total Price&nbsp;</th>
-                        </tr>
-                    </thead>
-						
-                    <tbody>
-                    	<c:set var="grandtotal" value="0"> </c:set>
-                        <c:forEach items="${orderbooksmap}" var="orderdetails" varStatus="status">
-											
-                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><c:out value="${orderdetails.value.title}"/></td>
-                                <td class="dataText"><c:out value="${orderdetails.value.author}"/></td>
-                                <td class="dataText"><c:out value="${orderdetails.value.price}"/></td>
-                                <td class="dataText"><c:out value="${orderdetails.key.quantity}"/></td>
-                                <td class="dataText"><c:out value="${orderdetails.key.quantity*orderdetails.value.price}"/></td>
-                            </tr>
-                            <c:set var="grandtotal" value="${grandtotal + orderdetails.key.quantity*orderdetails.value.price}"/>
-                        </c:forEach>
-                        
-                    </tbody>
-                    
-                    <tfoot>
-                    	<tr>
-                        	<td ></td>
-                                <td ></td>
-                                <td ></td>
-                                <td align="right" class="headerText" style="font-size: 15px;">Grand Total</td>
-                                <td class="headerText" style="font-size: 15px;">${grandtotal}</td>
-                        	</tr>
-                    </tfoot>
-                </table>
+			</table>
+			<table width="100%" border="0" style="border-color: #4b6a84;"
+				id="myTable">
+
+				<thead>
+					<tr>
+						<th title="click to sort" class="headerText">Sl.No.<img
+							alt=" " style="position: relative; top: 4px;"
+							src="images/sort_both.png" /></th>
+						<th title="click to sort" class="headerText">Book<img
+							alt=" " style="position: relative; top: 4px;"
+							src="images/sort_both.png" /></th>
+							<th title="click to sort" class="headerText">Examination Level&nbsp;
+							<img
+							alt=" " style="position: relative; top: 4px;"
+							src="images/sort_both.png" />
+							</th>
+						</tr>
+				</thead>
+
+				<tbody>
+
+					<c:forEach items="${referencebookslist}" var="referencebookslist" varStatus="status">
+
+						<tr style="border-color: #000000" border="1" cellpadding="1"
+							cellspacing="1">
+   						  <td class="dataText"><c:out value="${(status.index)+1}" /></td>
+						  <td class="dataText"><label style="display: none;"><c:out value="${referencebookslist.referencebooks}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${referencebookslist.referencebooks}" />" id="updatereferencebooks" name="updatereferencebooks"></td>
+						  <td class="dataText">
+							<label style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" > 
+							 <select name="updateexamlevel" id="updateexamlevel"
+									style="width: 240px;" required>
+										<option selected>${referencebookslist.examlevelcode}</option>
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label>  
+						  </td>			
+						</tr>
+					</c:forEach>
+
+
+
+
+				</tbody>
+				<tfoot><tr>
+							 <td  class="footerTD" colspan="2" >
+                    		&nbsp;&nbsp;&nbsp;&nbsp;
+                            
+                    	</td>
+                        </tr></tfoot>
+			</table>
+
 		</div>
 
 

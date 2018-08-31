@@ -322,6 +322,20 @@
     display: none;
 }
 
+.userexist{
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.usercheck{
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
 </style>
 <style>
 #button {
@@ -520,32 +534,42 @@
 					var usersave='<c:out default="" value="${usersave}"/>';
 		            var userupdate='<c:out default="" value="${userupdate}"/>';
 		            var userdelete='<c:out default="" value="${userdelete}"/>';
+		            var userexist='<c:out default="" value="${userexist}"/>';
+		            var usercheck ='<c:out default="" value="${usercheck}"/>';
 		            
 		            if(usersave == "true"){
 		            	 $(function(){
-		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 4000 ).fadeOut( 1400 );
 		            	 });
 		            	 }else if(usersave == "false"){
 		            	  $(function(){
-		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 4000 ).fadeOut( 1400 );
 		            		 });
 		            	 }else if(userupdate == "true"){
 		                   	 $(function(){
-		                   		 $( "div.update" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		                   		 $( "div.update" ).fadeIn( 800 ).delay( 4000 ).fadeOut( 1400 );
 		                   	 });
 		                   	 }else if(userupdate == "false"){
 		                   	  $(function(){
-		                   		 $( "div.updatefailure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		                   		 $( "div.updatefailure" ).fadeIn( 800 ).delay( 4000 ).fadeOut( 1400 );
 		                   		 });
 		                   	 }else if(userdelete == "true"){
 			                   	 $(function(){
-			                   		 $( "div.delete" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+			                   		 $( "div.delete" ).fadeIn( 800 ).delay( 4000 ).fadeOut( 1400 );
 			                   	 });
 			                   	 }else if(userdelete == "false"){
 			                   	  $(function(){
-			                   		 $( "div.deletefailure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+			                   		 $( "div.deletefailure" ).fadeIn( 800 ).delay( 4000 ).fadeOut( 1400 );
 			                   		 });
-			                   	 }
+			                   	 }else if(userexist == "true"){
+				                   	  $(function(){
+					                   		 $( "div.userexist" ).fadeIn( 800 ).delay( 4000 ).fadeOut( 1400 );
+					                   		 });
+					                   	 }else if(usercheck == "true"){
+					                   		 $(function(){
+						                   		 $( "div.usercheck" ).fadeIn( 800 ).delay( 4000 ).fadeOut( 1400 );
+						                   		 });
+					                   	 }
 		            function viewPassword(rowNum)
 		            {
 		              var passwordInput = document.getElementById('updatepassword'+rowNum);
@@ -609,6 +633,10 @@ for(Cookie cookie : cookies){
 		<div class="alert-box delete">User has been deleted successfully!!!</div>
 		<div class="alert-box deletefailure">Deletion Failed, Unable to delete User!!!</div>
 		
+		<div class="alert-box userexist">User already exists!!!</div>
+		
+		<div class="alert-box usercheck">Deletion Failed, User is mapped with student(s)!!!</div>
+		
 		
 		<div style="height: 28px">
 			<button id="add">Add Users</button>
@@ -628,7 +656,7 @@ for(Cookie cookie : cookies){
 							<td width="10%" class="alignRight">Center Code &nbsp;</td>
 							<td width="70%">
 								<label> 
-							<select name="centercode" id="centercode"
+							<select name="centercode" id="centercode" required
 									style="width: 200px;">
 										<option selected></option>
 										<c:forEach items="${branchList}" var="branchlist">
@@ -680,7 +708,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td width="10%" class="alignRight">User Type &nbsp;</td>
-							<td width="70%"><label> <select name="usertype" id="usertype">
+							<td width="70%"><label> <select name="usertype" id="usertype" required>
 										<option selected></option>
 										<option value="admin">Admin</option>
 										<option value="centerorganizer">Center Organizer</option>
@@ -695,7 +723,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td width="10%" class="alignRight">Admission Process &nbsp;</td>
 							<td width="70%"><label> 
-							<select name="admissionprocess" id="admissionprocess"
+							<select name="admissionprocess" id="admissionprocess" required
 									>
 										<option selected></option>
 										<option value="1">Start</option>

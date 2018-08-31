@@ -80,7 +80,7 @@ public class ReferenceBooksDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return result;
         }
     }

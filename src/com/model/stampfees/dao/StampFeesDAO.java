@@ -161,7 +161,7 @@ public class StampFeesDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 			/*return student;*/
 		}
 	}

@@ -81,7 +81,7 @@ public class ExamLevelDetailsDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return result;
         }
     }

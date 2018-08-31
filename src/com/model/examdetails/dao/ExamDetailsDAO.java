@@ -38,7 +38,7 @@ public class ExamDetailsDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 			return exams;
 		}
 		
@@ -62,7 +62,7 @@ public class ExamDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -97,7 +97,7 @@ public class ExamDetailsDAO {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}finally{
-				session.close();
+				//session.close();
 			}
 			return false;
 	}
@@ -120,7 +120,7 @@ public class ExamDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -138,7 +138,7 @@ public class ExamDetailsDAO {
 		} catch (HibernateException hibernateException) {
 			hibernateException.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 	}
@@ -160,7 +160,7 @@ public class ExamDetailsDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return listExamSchedule;

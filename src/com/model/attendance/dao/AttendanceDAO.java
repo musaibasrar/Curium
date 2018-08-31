@@ -50,7 +50,7 @@ public class AttendanceDAO {
 		}catch(Exception e){
 			transaction.rollback();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		
 		return holidayMaster;
@@ -67,7 +67,7 @@ public class AttendanceDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -83,7 +83,7 @@ public class AttendanceDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -100,7 +100,7 @@ public class AttendanceDAO {
 			transaction.rollback();
 			e.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		
 		return false;
@@ -116,7 +116,7 @@ public class AttendanceDAO {
 			}catch(Exception e){
 				e.printStackTrace();
 			} finally {
-				session.close();
+				//session.close();
 			}
 			
 		return weeklyOff;
@@ -134,7 +134,7 @@ public class AttendanceDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		
 	return weeklyOff;
@@ -153,7 +153,7 @@ public class AttendanceDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		
 	return weeklyOff;
@@ -172,7 +172,7 @@ public class AttendanceDAO {
 		}catch(Exception e){
 			transaction.rollback();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		
 		return holidayMaster;
@@ -190,7 +190,7 @@ public class AttendanceDAO {
 		}catch(Exception e){
 			transaction.rollback();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		
 		return holidayMaster;
@@ -206,7 +206,7 @@ public class AttendanceDAO {
 		} catch (Exception e) {
 				e.printStackTrace();
 		}finally {
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -222,7 +222,7 @@ public class AttendanceDAO {
 		}catch(Exception e){
 				e.printStackTrace();
 		}finally {
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -236,7 +236,7 @@ public class AttendanceDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return studentAttendanceMaster;
 	}
@@ -250,7 +250,7 @@ public class AttendanceDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return studentAttendanceMaster;
 	}
@@ -282,7 +282,7 @@ public class AttendanceDAO {
 			logger.info(e);
 			System.out.println(""+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -299,7 +299,7 @@ public class AttendanceDAO {
 			logger.info(e);
 			System.out.println("column "+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return studentDailyAttendance;
 	}
@@ -315,7 +315,7 @@ public class AttendanceDAO {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return studentDailyAttendance;
@@ -336,7 +336,7 @@ public class AttendanceDAO {
 		}catch(Exception e){
 			System.out.println("error "+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -352,7 +352,7 @@ public class AttendanceDAO {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return studentDailyAttendance;
@@ -380,7 +380,7 @@ public class AttendanceDAO {
 		} catch (Exception e) {
 			System.out.println(""+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return false;
@@ -405,7 +405,7 @@ public class AttendanceDAO {
 		}catch(Exception e){
 			System.out.println(""+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 	}
 
@@ -455,7 +455,7 @@ public class AttendanceDAO {
 			logger.info(e);
 			System.out.println(""+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -473,7 +473,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			logger.info(e);
 			System.out.println("column "+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return staffDailyAttendance;
 	}
@@ -493,7 +493,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		}catch(Exception e){
 			System.out.println("error "+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -509,7 +509,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		} catch (Exception e) {
 			// TODO: handle exception
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return staffDailyAttendance;
@@ -538,7 +538,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		} catch (Exception e) {
 			System.out.println(""+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return false;
@@ -584,7 +584,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		}catch(Exception e){
 			System.out.println(""+e);
 		}finally{
-			session.close();
+			//session.close();
 		}
 	}
 
@@ -598,7 +598,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
                 }catch(HibernateException e){
                         logger.info(e);
                 }finally{
-                        session.close();
+                        //session.close();
                 }
                 
                 if(studentDailyAttendance.size()>0){
@@ -619,7 +619,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
         }catch(HibernateException e){
                 logger.info(e);
         }finally{
-                session.close();
+                //session.close();
         }
         return studentDailyAttendance;
         
@@ -642,7 +642,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
     }catch(Exception e){
             System.out.println("error "+e);
     }finally{
-            session.close();
+            //session.close();
     }
     return false;
     }

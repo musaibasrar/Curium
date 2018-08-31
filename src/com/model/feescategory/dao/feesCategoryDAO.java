@@ -62,7 +62,7 @@ public class feesCategoryDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return feescategory;
         }
 	}
@@ -103,7 +103,7 @@ public class feesCategoryDAO {
 		} catch (HibernateException hibernateException) {
 			hibernateException.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 	}
 

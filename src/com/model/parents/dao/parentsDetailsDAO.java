@@ -39,7 +39,7 @@ public class parentsDetailsDAO {
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
-	            session.close();
+	            //session.close();
 	            return parents;
 	        }
 	}

@@ -55,7 +55,7 @@ public class AccountDAO {
 			System.out.println(""+hibernateException);
 			transaction.rollback();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return result;
 	}
@@ -85,7 +85,7 @@ public class AccountDAO {
 		}catch(HibernateException hb){
 			hb.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return accountGroupMaster;
@@ -102,7 +102,7 @@ public class AccountDAO {
 		}catch(HibernateException hb){
 			hb.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return accountSubGroupMaster;
@@ -130,7 +130,7 @@ public class AccountDAO {
 			hb.printStackTrace();
 			System.out.println("error "+hb);
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return result;
 		
@@ -147,7 +147,7 @@ public class AccountDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return financialYear;
@@ -163,7 +163,7 @@ public class AccountDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return result;
 	}
@@ -179,7 +179,7 @@ public class AccountDAO {
 		}catch(HibernateException hb){
 			hb.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return accountDetails;
@@ -196,7 +196,7 @@ public class AccountDAO {
 		}catch(HibernateException hb){
 			hb.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return accountDetails;
@@ -231,7 +231,7 @@ public class AccountDAO {
 		}catch(HibernateException hb){
 			hb.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -246,7 +246,7 @@ public class AccountDAO {
 		} catch (HibernateException hb) {
 			hb.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -261,7 +261,7 @@ public class AccountDAO {
 		} catch (HibernateException hb) {
 			hb.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -276,7 +276,7 @@ public class AccountDAO {
 		} catch (HibernateException hb) {
 			hb.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -324,7 +324,7 @@ public class AccountDAO {
 		}catch(HibernateException hb){
 			hb.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return accountDetails;
@@ -339,7 +339,7 @@ public class AccountDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return receiptTransactions;
@@ -356,7 +356,7 @@ public class AccountDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return null;
 	}
@@ -371,7 +371,7 @@ public class AccountDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return paymentTransactions;
@@ -387,7 +387,7 @@ public class AccountDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return contraTransactions;
 	}
@@ -402,7 +402,7 @@ public class AccountDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return journalTransactions;
 		
@@ -454,7 +454,7 @@ public class AccountDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return false;
@@ -488,7 +488,7 @@ public class AccountDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return receiptTransactions;
@@ -507,7 +507,7 @@ public class AccountDAO {
 		} catch (HibernateException hibernateException) {
 			hibernateException.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return false;
 	}
@@ -523,7 +523,7 @@ public class AccountDAO {
 		} catch (HibernateException hibernateException) {
 			hibernateException.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return false;
 		
@@ -540,7 +540,7 @@ public class AccountDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return paymentTransactions;
@@ -566,7 +566,7 @@ public class AccountDAO {
 		} catch (HibernateException hibernateException) {
 			hibernateException.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return false;
 		

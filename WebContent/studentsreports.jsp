@@ -717,6 +717,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
+						<th title="click to sort" class="headerText">Sl.No.</th>
 						<th title="click to sort" class="headerText">Registration No.</th>
 						<th title="click to sort" class="headerText">Student Name</th>
 						<th title="click to sort" class="headerText">Father/Guardian/Husband Name</th>
@@ -730,7 +731,7 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-					<c:forEach items="${mapstudentreports}" var="Parents">
+					<c:forEach items="${mapstudentreports}" var="Parents"  varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
@@ -738,6 +739,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${Parents.key.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.key.student.sid}"/>" /></td> --%>
+							<td class="dataText"><c:out value="${(status.index)+1}" /></td>
 							<td class="dataTextInActive"><c:out value="${Parents.key.student.admissionnumber}" /></td>
 							<td class="dataText"><c:out value="${Parents.key.student.name}" /></td>
 							<td class="dataText">

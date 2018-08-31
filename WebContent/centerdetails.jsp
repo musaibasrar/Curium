@@ -439,7 +439,11 @@
                  primary: "ui-icon-trash"
              }
          }).click(function(){
-             deleteRecords();
+        	 
+        	 if(confirm('Are you sure, you want to delete the center?')){
+        		 deleteRecords();
+        	 }
+             
              return false;
 
          });
@@ -614,7 +618,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td width="10%" class="alignRight">District Code &nbsp;</td>
 							<td width="70%"><label> 
-									<select name="districtcode" id="districtcode"
+									<select name="districtcode" id="districtcode" required
 									style="width: 200px;">
 										<option selected></option>
 										<c:forEach items="${districtsList}" var="districtslist">

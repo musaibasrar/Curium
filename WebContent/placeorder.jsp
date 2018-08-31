@@ -462,11 +462,35 @@
                  primary: "ui-icon-note"
              }
          }).click(function(){
-        	 if(confirm('Are you sure,you want to place the order?')){
-        		 confirmOrder();	
-         	}
-             return false;
 
+        	 var chkds = $("input[name='booksids']:checkbox");
+        	 
+        	       		 
+        	 if (chkds.is(":checked"))  {
+        		 
+        		 for (index = 0, len = chkds.length; index < len; ++index) {
+         		 	var test = chkds[index].value;
+         		 	var splits = test.split(":");
+         		 	var ind = splits[1];
+         		 	
+         		 	if(chkds[index].checked){
+         		 		var quantity = document.getElementById('quantity_'+ind).value;
+         		 		if(quantity == 0){
+         		 			alert('Quantity should be greater than 0');
+         		 			return false;
+         		 		}
+         		 	}
+ 	        	}
+        		 
+            	 if(confirm('Are you sure,you want to place the order?')){
+            		 confirmOrder();	
+             	}
+                 //return false;
+        	 } else {
+        		 alert('Select the book(s) to place the order');
+        		 return false;
+        	 }
+        	 
          });
          $('#chckHead').click(function () {
              var length = $('.chcktbl:checked').length;

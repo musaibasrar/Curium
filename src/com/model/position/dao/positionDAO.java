@@ -44,7 +44,7 @@ public class positionDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            session.close();
+            //session.close();
             return position;
         }
 	}

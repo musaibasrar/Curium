@@ -32,7 +32,7 @@ public class OrderDAO {
             } catch (Exception e) {
                     e.printStackTrace();
             }finally{
-                    session.close();
+                    //session.close();
             }
             return booksList;
          }
@@ -52,7 +52,7 @@ public class OrderDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
     } finally {
-            session.close();
+            //session.close();
     }
         return result;
 }
@@ -112,7 +112,7 @@ public class OrderDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
     } finally {
-            session.close();
+            //session.close();
     }
         return result;
 }
@@ -129,7 +129,7 @@ public class OrderDAO {
         } catch (Exception e) {
                 e.printStackTrace();
         }finally{
-                session.close();
+                //session.close();
         }
         return booksList;
      }
@@ -219,7 +219,7 @@ public class OrderDAO {
         } catch (Exception e) {
                 e.printStackTrace();
         }finally{
-                session.close();
+                //session.close();
         }
         return ordersList;
      }
@@ -252,7 +252,7 @@ public class OrderDAO {
         } catch (Exception e) {
                 e.printStackTrace();
         }finally{
-                session.close();
+                //session.close();
         }
         return book;
      }

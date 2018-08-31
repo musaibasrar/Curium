@@ -160,6 +160,7 @@ public class ExamDetailsService {
 				String endmeridian = null;
 				String outputEndTime = null;
 					  if (Integer.parseInt(endhours) < 12) {
+					      outputEndTime = endTime[i];
 						  endmeridian = "AM";
 					  } else if (Integer.parseInt(endhours) >= 12) {
 

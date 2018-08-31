@@ -46,7 +46,7 @@ public class SubjectDetailsDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			 session.close();
+			 //session.close();
 			return results;
 		}
 	}
@@ -67,7 +67,7 @@ public class SubjectDetailsDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 			return subject;
 		}
 		

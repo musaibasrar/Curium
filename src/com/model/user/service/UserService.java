@@ -489,11 +489,16 @@ public class UserService {
         login.setAddstudentflag((byte)DataUtil.parseInt(request.getParameter("admissionprocess")));
         login.setLastmodifiedby(httpSession.getAttribute("username").toString());
         
-        if (!login.getPassword().equalsIgnoreCase("")) {
-            result = new UserDAO().addUser(login);
+        if (!login.getPassword().equalsIgnoreCase("") && !login.getPassword().equalsIgnoreCase("")) {
+            
+           Login loginAuth =  new UserDAO().readUniqueObject(DataUtil.emptyString(request.getParameter("username")));
+            if(loginAuth==null) {
+                result = new UserDAO().addUser(login);
+                request.setAttribute("usersave", result);
+            }else {
+                request.setAttribute("userexist", true);
+            }
         }
-        
-        request.setAttribute("usersave", result);
     }
 
     public void updateMultipleUsers() {
@@ -537,8 +542,14 @@ public class UserService {
            String[] brId = id.split(":");
            ids.add(Integer.valueOf(brId[0]));
        }
-       boolean result = new UserDAO().deleteMultipleUsers(ids);
-       request.setAttribute("userdelete", result);
+       
+       if(new UserDAO().checkUser(ids)) {
+           request.setAttribute("usercheck", true); 
+       }else {
+           boolean result = new UserDAO().deleteMultipleUsers(ids);
+           request.setAttribute("userdelete", result);
+       }
+       
         }
     }
 

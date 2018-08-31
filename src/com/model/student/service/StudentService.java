@@ -32,8 +32,6 @@ import com.model.academicyear.dto.Currentacademicyear;
 import com.model.branch.dao.BranchDAO;
 import com.model.branch.dto.Branch;
 import com.model.branch.service.BranchService;
-import com.model.examlevels.dao.ExamLevelDetailsDAO;
-import com.model.examlevels.dto.Examleveldetails;
 import com.model.examlevels.dto.Subexamlevel;
 import com.model.examlevels.service.ExamLevelService;
 import com.model.feescollection.dao.feesCollectionDAO;
@@ -45,10 +43,11 @@ import com.model.parents.dao.parentsDetailsDAO;
 import com.model.parents.dto.Parents;
 import com.model.qualification.service.QualificationService;
 import com.model.std.dto.Classsec;
-import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
 import com.model.student.dto.Studentfeesstructure;
+import com.model.user.dao.UserDAO;
+import com.model.user.dto.Login;
 import com.util.DataUtil;
 import com.util.DateUtil;
 
@@ -1350,6 +1349,10 @@ public class StudentService {
     public String addNewStdentCenter() {
         
         if(httpSession.getAttribute(BRANCHID)!=null){
+            Login login = new UserDAO().getAddStudentStatus(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), httpSession.getAttribute("username").toString());
+            if(login.getAddstudentflag()==0) {
+                return "addstudenthold.jsp";
+            }
             new ExamLevelService(request, response).examLevels();
             new LanguageService(request, response).viewLanguage();
             new BranchService(request, response).viewBranchesCenter(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));

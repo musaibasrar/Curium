@@ -19,6 +19,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 public class HibernateUtil {
 
     private static final SessionFactory sessionFactory;
+   // private static final ServiceRegistry serviceRegistry;
 
     
    /* final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
@@ -39,7 +40,26 @@ public class HibernateUtil {
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);*/
              //Session session = sessionFactory.openSession();
         	
-        	
+           /* Configuration configuration = new Configuration();
+            configuration.configure("hibernate.cfg.xml");
+            
+            serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+                    configuration.getProperties()).build();
+            
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            
+            
+            configuration.setSessionFactoryObserver(
+                    new SessionFactoryObserver() {
+                        @Override
+                        public void sessionFactoryCreated(SessionFactory factory) {}
+                        @Override
+                        public void sessionFactoryClosed(SessionFactory factory) {
+                            ((StandardServiceRegistryImpl) serviceRegistry).destroy();
+                        }
+                    }
+            );*/
+            
         	StandardServiceRegistry standardRegistry = 
         		       new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
         			Metadata metaData = 

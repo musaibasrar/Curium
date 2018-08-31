@@ -364,12 +364,12 @@ for(Cookie cookie : cookies){
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
             </div> -->
 
-            <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
+           <!--  <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
 				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesStructure" style="font-size: 12px;">Fees Structure</a><br/>                
-				<!-- <a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Fees Details</a><br/> -->
-            </div> 
+				<a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Fees Details</a><br/>
+            </div>  -->
             
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             

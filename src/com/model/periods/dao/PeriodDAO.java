@@ -49,7 +49,7 @@ public class PeriodDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return false;
@@ -65,7 +65,7 @@ public class PeriodDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return periodMaster;
 		
@@ -81,7 +81,7 @@ public class PeriodDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return periodMaster;
 		
@@ -96,7 +96,7 @@ public class PeriodDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return periodDetailsList;
 	}
@@ -114,7 +114,7 @@ public class PeriodDAO {
 		} catch (HibernateException hibernateException) {
 			hibernateException.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		
 		return false;

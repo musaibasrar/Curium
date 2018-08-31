@@ -43,7 +43,7 @@ public class studentDetailsDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 			return student;
 		}
 	}
@@ -71,7 +71,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -98,7 +98,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return noOfRecords;
 		}
 	}
@@ -119,7 +119,7 @@ public class studentDetailsDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		}
-		// session.close();
+		// //session.close();
 		return student;
 	}
 
@@ -135,7 +135,7 @@ public class studentDetailsDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			// session.close();
+			// //session.close();
 			return student;
 		}
 	}
@@ -158,7 +158,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -197,7 +197,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -254,7 +254,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -316,7 +316,7 @@ public class studentDetailsDAO {
 			System.out.println("Exception is "+hibernateException);
 			hibernateException.printStackTrace();
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -342,7 +342,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+			// //session.close();
 			return results;
 		}
 	}
@@ -375,7 +375,7 @@ public class studentDetailsDAO {
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
+			//session.close();
 		}
 	}
 
@@ -448,7 +448,7 @@ public class studentDetailsDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         }finally{
-        	session.close();
+        	//session.close();
         }
         return student;
 	}
@@ -483,7 +483,7 @@ public class studentDetailsDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			session.close();
+			//session.close();
 		}
 		return false;
 	}*/
@@ -509,7 +509,7 @@ public class studentDetailsDAO {
 	                hibernateException.printStackTrace();
 
 	        } finally {
-	                // session.close();
+	                // //session.close();
 	                return results;
 	        }
 	}
@@ -590,7 +590,7 @@ public class studentDetailsDAO {
                     hibernateException.printStackTrace();
 
             } finally {
-                    // session.close();
+                    // //session.close();
                     return results;
             }
     }
@@ -613,7 +613,7 @@ public class studentDetailsDAO {
                     hibernateException.printStackTrace();
 
             } finally {
-                    // session.close();
+                    // //session.close();
                     return results;
             }
     }
@@ -660,7 +660,7 @@ public class studentDetailsDAO {
                     hibernateException.printStackTrace();
 
             } finally {
-                    // session.close();
+                    // //session.close();
                     return noOfRecords;
             }
     }
@@ -680,7 +680,7 @@ public class studentDetailsDAO {
                     System.out.println("Exception is "+hibernateException);
                     hibernateException.printStackTrace();
             } finally {
-                    // session.close();
+                    // //session.close();
                     return results;
             }
     }
@@ -702,7 +702,7 @@ public class studentDetailsDAO {
                     hibernateException.printStackTrace();
 
             } finally {
-                    // session.close();
+                    // //session.close();
                     return results;
             }
     }

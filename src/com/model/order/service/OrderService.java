@@ -304,5 +304,7 @@ public class OrderService {
         }
         request.setAttribute("orderbooksmap", orderBooksMap);
         request.setAttribute("ordernumber", orderId);
+        request.setAttribute("centername", DataUtil.emptyString(request.getParameter("centername")));
+        
     }
 }
