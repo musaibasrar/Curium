@@ -29,7 +29,7 @@ public class departmentDAO {
     
 
 	public departmentDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 

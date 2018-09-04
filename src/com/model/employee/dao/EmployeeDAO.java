@@ -29,7 +29,7 @@ public class EmployeeDAO {
 	//SessionFactory sessionFactory;
 
 	public EmployeeDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")

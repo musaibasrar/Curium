@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import com.model.examlevels.dao.ExamLevelDetailsDAO;
 import com.model.examlevels.dto.Examleveldetails;
 import com.model.examlevels.service.ExamLevelService;
+import com.model.language.service.LanguageService;
 import com.model.qualification.dao.QualificationDAO;
 import com.model.qualification.dto.Qualification;
 import com.model.referencebooks.dao.ReferenceBooksDAO;
@@ -41,6 +42,7 @@ public class ReferenceBooksService {
             request.setAttribute("referencebookslist", list);
             logger.info("Reference Books List "+list.size());*/
             new ExamLevelService(request, response).examLevels();
+            new LanguageService(request, response).viewLanguage();
         
     }
 
@@ -65,6 +67,7 @@ public class ReferenceBooksService {
         String[] referenceBooksIds = request.getParameterValues("referencebooksid");
         String[] referenceBooksUpdate = request.getParameterValues("updatereferencebooks");
         String[] updateExamLevel = request.getParameterValues("updateexamlevel");
+        String[] updateLanguage = request.getParameterValues("updatelanguage");
 
         if(referenceBooksIds!=null){
             
@@ -76,6 +79,7 @@ public class ReferenceBooksService {
                 refBooks.setIdreferencebooks((Integer.valueOf(refId [0])));
                 refBooks.setReferencebooks(referenceBooksUpdate[Integer.valueOf(refId [1])]);
                 refBooks.setExamlevelcode(updateExamLevel[Integer.valueOf(refId [1])]);
+                refBooks.setLanguage(updateLanguage[Integer.valueOf(refId [1])]);
                 referenceBooksList.add(refBooks);
             }
             boolean result = new ReferenceBooksDAO().updateMultipleReferenceBooks(referenceBooksList);
@@ -90,7 +94,8 @@ public class ReferenceBooksService {
         boolean result = false;
         ref.setReferencebooks(DataUtil.camelCase(request.getParameter("bookname")));
         ref.setExamlevelcode(DataUtil.emptyString(request.getParameter("examlevel")).toUpperCase());
-
+        ref.setLanguage(DataUtil.emptyString(request.getParameter("languageoptedsave")).toUpperCase());
+        
         if (!ref.getReferencebooks().equalsIgnoreCase("")) {
             result = new ReferenceBooksDAO().addReferenceBooks(ref);
         }
@@ -99,10 +104,11 @@ public class ReferenceBooksService {
 
     public void searchReferenceBooks() {
         
-        List<Referencebooks> list = new ReferenceBooksDAO().getReferenceBooks(DataUtil.emptyString(request.getParameter("examlevelsearch")));
+        List<Referencebooks> list = new ReferenceBooksDAO().getReferenceBooks(DataUtil.emptyString(request.getParameter("examlevelsearch")),DataUtil.emptyString(request.getParameter("languageopted")));
         request.setAttribute("referencebookslist", list);
         logger.info("Reference Books List "+list.size());
         new ExamLevelService(request, response).examLevels();
+        new LanguageService(request, response).viewLanguage();
     
 }
         

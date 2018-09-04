@@ -623,7 +623,7 @@ for(Cookie cookie : cookies){
 										<option selected></option>
 										<c:forEach items="${districtsList}" var="districtslist">
 										<c:if test="${(districtslist.districtcode != '')}">
-											<option value="${districtslist.districtcode}" >
+											<option value="${districtslist.districtcode}- ${districtslist.districtname}" >
 												<c:out value="${districtslist.districtcode} - ${districtslist.districtname}" />
 											</option>
 										</c:if>	
@@ -658,14 +658,14 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Center Code<img
+						<th class="headerText" style="width: 10%;"><input type="checkbox" id="chckHead" /></th>
+						<th title="click to sort" class="headerText" style="width: 5%;">Center Code<img
 							alt=" " style="position: relative; top: 4px;"
 							src="images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Center Name&nbsp;<img
 							alt=" " style="position: relative; top: 4px;"
 							src="images/sort_both.png" /></th>
-							<th title="click to sort" class="headerText">District Code&nbsp;<img
+							<th title="click to sort" class="headerText">District Name&nbsp;<img
 							alt=" " style="position: relative; top: 4px;"
 							src="images/sort_both.png" /></th>
 					</tr>
@@ -676,8 +676,8 @@ for(Cookie cookie : cookies){
 					<c:forEach items="${branchList}" var="branchlist" varStatus="status">
 
 						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
-                          <td class="dataText"><input type="checkbox" id = "<c:out value="${branchlist.idbranch}"/>" class = "chcktbl"  name="branchids"  value="<c:out value="${branchlist.idbranch}:${status.index}"/>"/></td>
-						  <td class="dataText"><label style="display: none;"><c:out value="${branchlist.centercode}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${branchlist.centercode}" />" id="updatecentercode" name="updatecentercode"></td>
+                          <td class="dataText" style="width: 10%;"><input type="checkbox" id = "<c:out value="${branchlist.idbranch}"/>" class = "chcktbl"  name="branchids"  value="<c:out value="${branchlist.idbranch}:${status.index}"/>"/></td>
+						  <td class="dataText" style="width: 5%;"><label style="display: none;"><c:out value="${branchlist.centercode}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${branchlist.centercode}" />" id="updatecentercode" name="updatecentercode"></td>
 						  <td class="dataText"><label style="display: none;"><c:out value="${branchlist.centername}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${branchlist.centername}" />" id="updatecentername" name="updatecentername"></td>
 						  <td class="dataText">
 						  <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${branchlist.districtcode}" />" id="updatedistcode" name="updatedistcode" readonly="readonly">

@@ -27,7 +27,7 @@ public class studentDetailsDAO {
 	//SessionFactory sessionFactory;
 
 	public studentDetailsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")

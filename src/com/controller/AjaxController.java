@@ -14,6 +14,7 @@ import com.model.academicyear.action.YearAction;
 import com.model.account.action.AccountAction;
 import com.model.adminexpenses.action.AdminAction;
 import com.model.attendance.action.AttendanceAction;
+import com.model.branch.action.BranchAction;
 import com.model.department.action.DepartmentAction;
 import com.model.employee.action.EmployeeAction;
 import com.model.examdetails.action.ExamDetailsAction;
@@ -55,6 +56,10 @@ public class AjaxController extends HttpServlet {
             new ExamLevelAction(request, response).execute(action);;
         }else if("AttendanceProcess".equalsIgnoreCase(process)){
             new AttendanceAction(request, response).execute(action);;
+        }else if("AttendanceProcess".equalsIgnoreCase(process)){
+            new AttendanceAction(request, response).execute(action);;
+        }else if("DistrictProcess".equalsIgnoreCase(process)){
+            new BranchAction(request, response).execute(action);;
         }
     }
 

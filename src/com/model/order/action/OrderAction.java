@@ -60,12 +60,26 @@ public class OrderAction {
                     url = searchOrders();
                 }else if ("viewOrderDetails".equalsIgnoreCase(action)) {
                     url = viewOrderDetails();
+                }else if ("viewOrderCenter".equalsIgnoreCase(action)) {
+                    url = viewOrderCenter();
+                }else if ("searchOrdersCenter".equalsIgnoreCase(action)) {
+                    url = searchOrdersCenter();
                 }
 		return url;
 	}
 
 		
-	private String viewOrderDetails() {
+	private String searchOrdersCenter() {
+            new OrderService(request, response).searchOrdersCenter();
+            return "viewordercenter.jsp";
+    }
+
+    private String viewOrderCenter() {
+            new OrderService(request, response).viewOrderCenter();
+            return "viewordercenter.jsp";
+    }
+
+    private String viewOrderDetails() {
 	    new OrderService(request, response).viewOrderDetails();
         return "orderdetails.jsp";
     }

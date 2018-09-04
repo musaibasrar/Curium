@@ -28,7 +28,7 @@ public class LanguageDAO {
     
 
 	public LanguageDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 

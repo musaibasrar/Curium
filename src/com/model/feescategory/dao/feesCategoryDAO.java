@@ -27,7 +27,7 @@ public class feesCategoryDAO {
     
 
 	public feesCategoryDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings({ "finally", "unchecked" })

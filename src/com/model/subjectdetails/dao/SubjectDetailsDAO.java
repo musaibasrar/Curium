@@ -29,7 +29,7 @@ public class SubjectDetailsDAO {
 	
 	
 	public SubjectDetailsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 	
 	@SuppressWarnings({ "unchecked", "finally" })

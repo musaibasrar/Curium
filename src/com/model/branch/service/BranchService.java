@@ -1,5 +1,7 @@
 package com.model.branch.service;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,8 @@ import org.apache.logging.log4j.Logger;
 import com.model.branch.dao.BranchDAO;
 import com.model.branch.dto.Branch;
 import com.model.branch.dto.Districts;
+import com.model.examlevels.dto.Subexamlevel;
+import com.model.examlevels.service.ExamLevelService;
 import com.util.DataUtil;
 
 public class BranchService {
@@ -162,7 +166,7 @@ public class BranchService {
         branch.setCentercode(DataUtil.emptyString(request.getParameter("centercode")));
         branch.setCentername(DataUtil.emptyString(request.getParameter("centername")));
         String[] distCode = DataUtil.emptyString(request.getParameter("districtcode")).split("-");
-        branch.setDistrictcode(distCode[0]);
+        branch.setDistrictcode(distCode[1]);
 
         if (!branch.getCentername().equalsIgnoreCase("")) {
             
@@ -217,5 +221,24 @@ public class BranchService {
         }
         
     }
+
+    public void getDistrictName() throws IOException {
+       
+            Branch branch = new BranchDAO().getDistrictName(DataUtil.emptyString(request.getParameter("centercode")));
+                PrintWriter out = response.getWriter(); 
+                response.setContentType("text/xml");
+                response.setHeader("Cache-Control", "no-cache");
+                try {
+                        if(branch!=null){
+                                String buffer = branch.getDistrictcode();
+                                response.getWriter().println(buffer);
+                        }
+                } catch (Exception e) {
+                    out.write("");
+                } finally {
+                    out.flush();
+                    out.close();
+                }
+        }
 
 }

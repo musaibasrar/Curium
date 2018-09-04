@@ -33,7 +33,7 @@ public class AccountDAO {
 	
 
 	public AccountDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")

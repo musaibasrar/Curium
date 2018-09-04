@@ -27,6 +27,6 @@
             <column name="concession"/>
         </property>
         <many-to-one name="Feescategory" class="com.model.feescategory.dto.Feescategory"
-            column="idfeescategory" />
+            column="idfeescategory" lazy="false" />
     </class>
 </hibernate-mapping>

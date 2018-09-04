@@ -416,7 +416,7 @@
 		if (document.getElementById("name").value.length == 0)
 
 		{
-			document.getElementById("name").style.background = 'red';
+			document.getElementById("name").style.background = 'white';
 			alert("Enter The Name");
 		}
 
@@ -479,7 +479,7 @@
 		if (document.getElementById("name").value.length == 0)
 
 		{
-			document.getElementById("name").style.background = 'red';
+			document.getElementById("name").style.background = 'white';
 			alert("Enter The Name");
 		}
 
@@ -609,22 +609,7 @@
 
 <script type="text/javascript">
 
-	function watermark(inputId, text) {
-		var inputBox = document.getElementById(inputId);
-		if (inputBox.value.length > 0) {
-			if (inputBox.value == text)
-				inputBox.value = '';
-		} else
-			inputBox.value = text;
-	}
-	function watermark2(inputId, text) {
-		var inputBox = document.getElementById(inputId);
-		if (inputBox.value.length > 0) {
-			if (inputBox.value == text)
-				inputBox.value = '';
-		} else
-			inputBox.value = text;
-	}
+
 	
 	   function getAdmNo() {
 
@@ -649,6 +634,29 @@
 				document.getElementById("admnno").value = xmlHttp.responseText;
 			}
 		}
+		
+		  function getDistrictCode() {
+
+				var centerCode = document.getElementById('centercode').value;
+
+				 if (typeof XMLHttpRequest != "undefined") {
+					 xmlHttp = new XMLHttpRequest();
+		            
+		         } else if (window.ActiveXObject) {
+		        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		             
+		         }
+				xmlHttp.onreadystatechange = stateChangedDC;
+				xmlHttp.open("GET", "AjaxController?process=DistrictProcess&action=getDistrictName&centercode="+centerCode,true);
+				xmlHttp.send(null);
+			}
+		   
+			function stateChangedDC() {
+
+				if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+					document.getElementById("districtcode").value = xmlHttp.responseText;
+				}
+			}
 </script>
 </head>
 <%
@@ -887,7 +895,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Center Code*&nbsp;</td>
 
 							<td width="28%"><label> 
-							<select name="centercode" id="centercode" onchange="getAdmNo()"
+							<select name="centercode" id="centercode" onchange="getAdmNo();getDistrictCode();"
 									style="width: 240px;" required>
 										<option selected></option>
 										<c:forEach items="${branchList}" var="branchlist">
@@ -903,15 +911,8 @@ for(Cookie cookie : cookies){
 
 							<td width="20%" class="alignRight">District Code &nbsp;</td>
 							<td width="28%"><label> 
-									<select name="districtcode" id="districtcode"
-									style="width: 240px;" onchange="getAdmNo()" required>
-										<option selected></option>
-										<c:forEach items="${districtsList}" var="districtsList">
-											<option value="${districtsList.districtcode}" >
-												<c:out value="${districtsList.districtcode} -- ${districtsList.districtname}" />
-											</option>
-										</c:forEach>
-								</select>
+									<input type="text" name="districtcode" id="districtcode" 
+									style="width: 240px;"  required>
 							</label></td>
 						</tr>
 

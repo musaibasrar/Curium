@@ -27,7 +27,7 @@ public class PeriodDAO {
 	//SessionFactory sessionFactory;
 
 	public PeriodDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 	
 	public boolean save(Periodmaster periodMaster,Map<String, List<Perioddetails>> periodMap) {

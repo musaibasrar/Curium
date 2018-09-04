@@ -19,7 +19,7 @@ public class OrderDAO {
 	Transaction transaction;
 	
 	public OrderDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
     public List<Books> readBooks() {
@@ -124,7 +124,7 @@ public class OrderDAO {
         List<Orderssummary> booksList = new ArrayList<Orderssummary>();
         try {
                 transaction = session.beginTransaction();
-                booksList = session.createQuery("from Orderssummary").list();
+                booksList = session.createQuery("from Orderssummary order by idorders DESC").list();
                 transaction.commit();
         } catch (Exception e) {
                 e.printStackTrace();
@@ -255,6 +255,21 @@ public class OrderDAO {
                 //session.close();
         }
         return book;
+     }
+
+    public List<Orderssummary> viewOrderCenter(int branchId) {
+        
+        List<Orderssummary> booksList = new ArrayList<Orderssummary>();
+        try {
+                transaction = session.beginTransaction();
+                booksList = session.createQuery("from Orderssummary where centercode = '"+branchId+"'").list();
+                transaction.commit();
+        } catch (Exception e) {
+                e.printStackTrace();
+        }finally{
+                //session.close();
+        }
+        return booksList;
      }
 
 

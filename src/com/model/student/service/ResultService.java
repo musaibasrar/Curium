@@ -342,7 +342,7 @@ public class ResultService {
              List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
              String[] examDet = examLevel.split(":");
              List<Subexamlevel> subList = new ExamLevelDetailsDAO().getSubExamLevelSubject(examDet[0]);
-             List<Referencebooks> refBooksList = new ReferenceBooksDAO().getReferenceBooks(examDet[0]);
+             List<Referencebooks> refBooksList = new ReferenceBooksDAO().getReferenceBooks(examDet[0],DataUtil.emptyString(request.getParameter("languageopted")));
              List<String> referenceBooksList = new ArrayList<String>();
              for (Referencebooks refBook : refBooksList) {
                  referenceBooksList.add(refBook.getReferencebooks());

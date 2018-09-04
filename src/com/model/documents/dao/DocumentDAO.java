@@ -29,7 +29,7 @@ public class DocumentDAO {
 	//SessionFactory sessionFactory;
 
 	public DocumentDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 	
 	

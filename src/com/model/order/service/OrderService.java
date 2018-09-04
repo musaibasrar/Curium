@@ -262,7 +262,7 @@ public class OrderService {
             if(subQuery==null) {
                 subQuery = "orderdate between '"+DataUtil.emptyString(request.getParameter("fromdate"))+"' and '"+DataUtil.emptyString(request.getParameter("todate"))+"'";
             }else {
-                subQuery = "and orderdate between '"+DataUtil.emptyString(request.getParameter("fromdate"))+"' and '"+DataUtil.emptyString(request.getParameter("todate"))+"'";     
+                subQuery = subQuery + "and orderdate between '"+DataUtil.emptyString(request.getParameter("fromdate"))+"' and '"+DataUtil.emptyString(request.getParameter("todate"))+"'";     
             }
         }
         
@@ -270,15 +270,13 @@ public class OrderService {
             if(subQuery==null) {
                 subQuery = "narration = '"+request.getParameter("orderstatus")+"'";
             }else {
-                subQuery = "and narration = '"+request.getParameter("orderstatus")+"'";
+                subQuery = subQuery + "and narration = '"+request.getParameter("orderstatus")+"'";
             }
-            
         }
         
         if(subQuery!=null) {
             SQL = SQL+connector+subQuery;
         }
-        
         
         List<Orderssummary> orderSummary = new OrderDAO().viewOrder(SQL);
         Map<Orderssummary,Branch> SumOrd = new LinkedHashMap<Orderssummary,Branch>();
@@ -286,11 +284,11 @@ public class OrderService {
         for (Orderssummary orderssummary : orderSummary) {
          Branch branch = new BranchDAO().getBranch(Integer.parseInt(orderssummary.getCentercode()));
          SumOrd.put(orderssummary, branch);
-     }
+        }
         new BranchService(request, response).viewBranches();
         request.setAttribute("ordersummarylist", SumOrd);
-         
-     }
+        
+        }
 
     public void viewOrderDetails() {
         
@@ -307,4 +305,59 @@ public class OrderService {
         request.setAttribute("centername", DataUtil.emptyString(request.getParameter("centername")));
         
     }
+
+    public void viewOrderCenter() {
+        Branch branch = new BranchDAO().getBranch(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+        List<Orderssummary> orderSummary = new OrderDAO().viewOrderCenter(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+        Map<Orderssummary,Branch> SumOrd = new LinkedHashMap<Orderssummary,Branch>();
+        
+        for (Orderssummary orderssummary : orderSummary) {
+         SumOrd.put(orderssummary, branch);
+     }
+        new BranchService(request, response).viewBranchesCenter();
+        request.setAttribute("ordersummarylist", SumOrd);
+         
+     }
+
+    public void searchOrdersCenter() {
+        
+        String SQL = "From Orderssummary";
+        String connector = " WHERE ";
+        String subQuery = null;
+        
+        if(!DataUtil.emptyString(request.getParameter("branchid")).equalsIgnoreCase("")) {
+            subQuery = "centercode = '"+request.getParameter("branchid")+"'";
+        }
+        
+        if(DateUtil.datePars(request.getParameter("fromdate"))!=null && DateUtil.datePars(request.getParameter("todate"))!=null) {
+            if(subQuery==null) {
+                subQuery = "orderdate between '"+DataUtil.emptyString(request.getParameter("fromdate"))+"' and '"+DataUtil.emptyString(request.getParameter("todate"))+"'";
+            }else {
+                subQuery = subQuery + "and orderdate between '"+DataUtil.emptyString(request.getParameter("fromdate"))+"' and '"+DataUtil.emptyString(request.getParameter("todate"))+"'";     
+            }
+        }
+        
+        if(!DataUtil.emptyString(request.getParameter("orderstatus")).equalsIgnoreCase("")) {
+            if(subQuery==null) {
+                subQuery = "narration = '"+request.getParameter("orderstatus")+"'";
+            }else {
+                subQuery = subQuery + "and narration = '"+request.getParameter("orderstatus")+"'";
+            }
+        }
+        
+        if(subQuery!=null) {
+            SQL = SQL+connector+subQuery;
+        }
+        
+        List<Orderssummary> orderSummary = new OrderDAO().viewOrder(SQL);
+        Map<Orderssummary,Branch> SumOrd = new LinkedHashMap<Orderssummary,Branch>();
+        
+        for (Orderssummary orderssummary : orderSummary) {
+         Branch branch = new BranchDAO().getBranch(Integer.parseInt(orderssummary.getCentercode()));
+         SumOrd.put(orderssummary, branch);
+        }
+        new BranchService(request, response).viewBranchesCenter();
+        request.setAttribute("ordersummarylist", SumOrd);
+        
+        }
 }

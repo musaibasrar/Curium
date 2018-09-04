@@ -24,7 +24,7 @@ public class SmsDAO {
 	Transaction transaction1;
 
 	public SmsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	public long countNumbers(String queryMain) {

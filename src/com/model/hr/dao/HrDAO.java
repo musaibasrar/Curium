@@ -39,7 +39,7 @@ public class HrDAO {
     
 
 	public HrDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	public List<Leavetypemaster> readListOfLeaveTypes(int branchId) {

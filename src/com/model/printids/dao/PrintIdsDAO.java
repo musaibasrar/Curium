@@ -26,7 +26,7 @@ public class PrintIdsDAO {
 	SessionFactory sessionFactory;
 
 	public PrintIdsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 

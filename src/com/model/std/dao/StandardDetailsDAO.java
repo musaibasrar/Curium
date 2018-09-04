@@ -26,7 +26,7 @@ public class StandardDetailsDAO {
     SessionFactory sessionFactory;
 	
 	public StandardDetailsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")

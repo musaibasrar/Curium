@@ -27,7 +27,7 @@ public class YearDAO {
 	
 
 	public YearDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")

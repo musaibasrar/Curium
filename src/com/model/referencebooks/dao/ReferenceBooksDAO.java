@@ -29,7 +29,7 @@ public class ReferenceBooksDAO {
     
 
 	public ReferenceBooksDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 
@@ -106,12 +106,17 @@ public class ReferenceBooksDAO {
 
 
 
-    public List<Referencebooks> getReferenceBooks(String examLevelCode) {
+    public List<Referencebooks> getReferenceBooks(String examLevelCode, String language) {
         List<Referencebooks> refBooksList = new ArrayList<Referencebooks>();
         try {
             
             transaction = session.beginTransaction();
-            refBooksList = (List<Referencebooks>) session.createQuery("From Referencebooks where examlevelcode='"+examLevelCode+"'").list();
+            if(language!="") {
+                refBooksList = (List<Referencebooks>) session.createQuery("From Referencebooks where examlevelcode='"+examLevelCode+"' and language='"+language+"'").list();
+            }else {
+                refBooksList = (List<Referencebooks>) session.createQuery("From Referencebooks where examlevelcode='"+examLevelCode+"'").list();
+            }
+            
             transaction.commit();
         } catch (HibernateException hibernateException) {
             transaction.rollback();

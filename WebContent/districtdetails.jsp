@@ -576,7 +576,7 @@ for(Cookie cookie : cookies){
 		<div class="alert-box delete">District has been deleted successfully!!!</div>
 		<div class="alert-box deletefailure">Deletion Failed, Unable to delete District!!!</div>
 		
-		<div class="alert-box districtduplicate">Saving Failed, District Name/District Code already exits!!!</div>
+		<div class="alert-box districtduplicate">Saving Failed, District Name already exits!!!</div>
 		
 		
 		<div style="height: 28px">

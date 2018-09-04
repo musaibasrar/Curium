@@ -22,7 +22,7 @@ public class parentsDetailsDAO {
 	    SessionFactory sessionFactory;
 	    
 	    public parentsDetailsDAO() {
-	    	   session = HibernateUtil.openSession();
+	    	   session = HibernateUtil.openCurrentSession();
 		}
 
 	@SuppressWarnings("finally")

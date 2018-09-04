@@ -27,7 +27,7 @@ public class positionDAO {
 	SessionFactory sessionFactory;
 
 	public positionDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")

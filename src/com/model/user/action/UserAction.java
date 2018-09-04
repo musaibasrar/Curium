@@ -82,6 +82,7 @@ public class UserAction {
     }
 
     private String sessionTimeOut() {
+        new UserService(request, response).logOutUser();
 		return "sessiontimeout.jsp";
 	}
 

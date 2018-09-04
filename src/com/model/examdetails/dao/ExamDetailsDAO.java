@@ -21,7 +21,7 @@ public class ExamDetailsDAO {
 	Transaction transaction;
 	
 	public ExamDetailsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 	
 	

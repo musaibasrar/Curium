@@ -92,7 +92,7 @@ public class UserService {
 		        List<String> yaxisList = new LinkedList<String>() ;
 		       // int[] test = new int[branchList.size()] ;
 		        for (Branch branch : branchList) {
-                            List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.branchid="+branch.getIdbranch());
+                            List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.centercode='"+branch.getCentercode()+"'");
                             xaxisList.add("\"" + branch.getCentername() + "\"");
                             if(student!=null) {
                                 String studentCount = Integer.toString(student.size());
@@ -100,7 +100,6 @@ public class UserService {
                             }else {
                                 yaxisList.add("\"" + 0 + "\"");
                             }
-                            
                         }
 		        request.setAttribute("studentxaxis", xaxisList);
 		        request.setAttribute("studentyaxis", yaxisList);

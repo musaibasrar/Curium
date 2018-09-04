@@ -33,7 +33,7 @@ public class AttendanceDAO {
 	private static final Logger logger = LogManager.getLogger(AttendanceDAO.class);
 
 	public AttendanceDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	public List<Teacher> readListOfObjects() {

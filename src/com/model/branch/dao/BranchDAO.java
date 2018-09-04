@@ -29,7 +29,7 @@ public class BranchDAO {
     
 
 	public BranchDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings({ "unchecked", "finally", "cast" })
@@ -213,7 +213,7 @@ try {
                 
         try {
             transaction = session.beginTransaction();
-            distList = (List<Districts>) session.createQuery("From Districts where districtname ='"+district.getDistrictname()+"' or districtcode = '"+district.getDistrictcode()+"'").list();
+            distList = (List<Districts>) session.createQuery("From Districts where districtname ='"+district.getDistrictname()+"'").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {
             transaction.rollback();
@@ -264,4 +264,23 @@ try {
                 
                 return distList;
     }
+
+    public Branch getDistrictName(String centerCode) {
+        
+        Branch dist = new Branch();
+                  
+          try {
+              transaction = session.beginTransaction();
+              Query query = session.createQuery("From Branch where centercode = '"+centerCode+"'");
+              dist = (Branch) query.uniqueResult();
+              transaction.commit();
+          } catch (HibernateException hibernateException) {
+              transaction.rollback();
+              hibernateException.printStackTrace();
+          } finally {
+              //session.close();
+          }
+          
+          return dist;
+}
     }

@@ -28,7 +28,7 @@ public class feesCollectionDAO {
     SessionFactory sessionFactory;
 
 	public feesCollectionDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")

@@ -30,7 +30,7 @@ public class feesDetailsDAO {
     
 
 	public feesDetailsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings({ "finally", "unchecked" })

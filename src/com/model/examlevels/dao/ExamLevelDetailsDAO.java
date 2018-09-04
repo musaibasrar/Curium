@@ -31,7 +31,7 @@ public class ExamLevelDetailsDAO {
     
 
 	public ExamLevelDetailsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 

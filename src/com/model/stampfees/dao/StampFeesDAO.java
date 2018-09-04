@@ -24,7 +24,7 @@ public class StampFeesDAO {
 	    
 	    public StampFeesDAO() {
 	        sessionFactory = HibernateUtil.getSessionFactory();
-	        session=HibernateUtil.openSession();
+	        session=HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")

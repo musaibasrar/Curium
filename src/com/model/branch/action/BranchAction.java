@@ -1,5 +1,7 @@
 package com.model.branch.action;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -7,9 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.model.attendance.dao.AttendanceDAO;
 import com.model.branch.service.BranchService;
-import com.model.department.service.DepartmentService;
 
 public class BranchAction {
 
@@ -51,8 +51,22 @@ public class BranchAction {
         } else if (action.equalsIgnoreCase("updateMultipleCenters")) {
             logger.info("update Centers");
             url = updateCenters();
+        }else if (action.equalsIgnoreCase("getDistrictName")) {
+            logger.info("View Districts");
+            getDistrictName();
         }
         return url;
+    }
+
+    private void getDistrictName() {
+
+        try {
+        new BranchService(request, response).getDistrictName();
+    } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+
     }
 
     private String addBranches() {

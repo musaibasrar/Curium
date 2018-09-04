@@ -59,7 +59,7 @@ public class HibernateUtil {
                         }
                     }
             );*/
-            
+               System.out.println("Static block hibernate util");
         	StandardServiceRegistry standardRegistry = 
         		       new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
         			Metadata metaData = 
@@ -87,6 +87,7 @@ public class HibernateUtil {
      *
      */
     public static void closeSession() {
+        System.out.println("Close session");
         sessionFactory.getCurrentSession().close();
 
     }

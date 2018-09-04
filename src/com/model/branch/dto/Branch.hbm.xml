@@ -13,7 +13,7 @@
             <column length="5" name="centercode"/>
         </property>
         <property generated="never" lazy="false" name="districtcode" optimistic-lock="true" type="string" unique="false">
-            <column length="5" name="districtcode"/>
+            <column length="50" name="districtcode"/>
         </property>
     </class>
 </hibernate-mapping>

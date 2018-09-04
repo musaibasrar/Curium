@@ -12,5 +12,8 @@
         <property generated="never" lazy="false" name="referencebooks" optimistic-lock="true" type="string" unique="false">
             <column length="150" name="referencebooks"/>
         </property>
+        <property generated="never" lazy="false" name="language" optimistic-lock="true" type="string" unique="false">
+            <column length="15" name="language"/>
+        </property>
     </class>
 </hibernate-mapping>

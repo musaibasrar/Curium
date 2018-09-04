@@ -29,7 +29,7 @@ public class QualificationDAO {
     
 
 	public QualificationDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 

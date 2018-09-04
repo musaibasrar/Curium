@@ -25,7 +25,7 @@ public class EmailDAO {
 	
 
 	public EmailDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	

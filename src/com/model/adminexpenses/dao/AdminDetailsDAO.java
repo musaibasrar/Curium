@@ -26,7 +26,7 @@ public class AdminDetailsDAO {
 	SessionFactory sessionFactory;
 
 	public AdminDetailsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")

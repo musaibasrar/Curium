@@ -1,15 +1,13 @@
 package com.model.marksdetails.dao;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.model.marksdetails.dto.Marks;
 import com.util.HibernateUtil;
@@ -20,7 +18,7 @@ public class MarksDetailsDAO {
 	Transaction transaction;
 	
 	public MarksDetailsDAO() {
-		session=HibernateUtil.openSession();
+		session=HibernateUtil.openCurrentSession();
 	}
 
 	public String addMarks(List<Marks> marksList) {
