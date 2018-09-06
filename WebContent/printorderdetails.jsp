@@ -1,5 +1,5 @@
 <%--
-    Document   : Books Details
+    Document   : Order Details
     Created on : AUG 14, 2018, 5:52:28 PM
     Author     : Musaib
 --%>
@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Books Details</title>
+<title>Order Details</title>
 <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -208,7 +208,7 @@
                 border-radius:3px;
                 width: 10px;
                 font-family: Tahoma;
-                font-size: 12px;
+                font-size: 16px;
                 background-color: #4b6a84;
                 color: #FFFFFF;
                 font-weight: normal;
@@ -222,7 +222,7 @@
 	border-radius: 3px;
 	font-family: Tahoma;
 	color: #4b6a84;
-	font-size: 13px;
+	font-size: 16px;
 	letter-spacing: normal;
 	text-align: center;
 	background-color: #E3EFFF;
@@ -269,7 +269,7 @@
 		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
 	color: #FFFFFF;
 	font-family: Tahoma;
-	font-size: 13px;
+	font-size: 18px;
 	text-transform: uppercase;
 	text-align: center;
 	font-weight: bold;
@@ -357,16 +357,15 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
-            "sScrollY": "380px",
-            "bPaginate": true,
+            "bPaginate": false,
             "bLengthChange": false,
-            "bFilter": true,
+            "bFilter": false,
             "bSort": true,
-            "bInfo": true,
+            "bInfo": false,
             "bStateSave": false,
             "bProcessing": false,
             "bServerSide": false,
-            "bAutoWidth": false,
+            "bAutoWidth": true,
             "iDisplayLength": 2000,
             "aoColumnDefs":[
                 { 'bSortable': false, 'aTargets': [ 0 ] }
@@ -374,6 +373,8 @@
             
         });
 	});
+	
+	
 </script>
 <script type="text/javascript">
 	function select(id, name) {
@@ -423,9 +424,9 @@
 
 	}
 	
-	function updateRecords() {
+	function confirmOrder() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=OrderProcess&action=updateBooks";
+		form1.action = "Controller?process=OrderProcess&action=confirmOrder";
 		form1.method = "POST";
 		form1.submit();
 
@@ -455,12 +456,24 @@
              return false;
 
          });
-         $("#update").button({
+         $("#printorder").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         }).click(function(){
+        	 window.print();
+        	 document.getElementById('printorder').style.display = ''; 
+             return false;
+
+         });
+         $("#placeorder").button({
              icons:{
                  primary: "ui-icon-note"
              }
          }).click(function(){
-             updateRecords();
+        	 if(confirm('Are you sure,you want to place the order?')){
+        		 confirmOrder();	
+         	}
              return false;
 
          });
@@ -495,44 +508,67 @@
                  $('.chcktbl:not(:checked)').attr('disabled', false);
              }
          });
-         
-     });
+	 });
+
+	 
+	 function calculatePrice(value){
+		 var price = document.getElementById("price_"+value).value;
+		 var quantity = document.getElementById("quantity_"+value).value;
+		 var totalAmount = price*quantity;
+		 document.getElementById("totalprice_"+value).value = totalAmount;
+	 }
+	 
+	 
+</script>
+<script>
+    window.onload = function(){
+        window.print();
+        var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=OrderProcess&action=postprintOrder";
+		form1.method = "POST";
+		form1.submit();
+
+    }
+    
 </script>
 
-		<script type="text/javascript">
-					
-					var bookssave='<c:out default="" value="${bookssave}"/>';
-		            var booksupdate='<c:out default="" value="${booksupdate}"/>';
-		            var booksdelete='<c:out default="" value="${booksdelete}"/>';
-		            
-		            if(bookssave == "true"){
-		            	 $(function(){
-		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
-		            	 });
-		            	 }else if(bookssave == "false"){
-		            	  $(function(){
-		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
-		            		 });
-		            	 }else if(booksupdate == "true"){
-		                   	 $(function(){
-		                   		 $( "div.update" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
-		                   	 });
-		                   	 }else if(booksupdate == "false"){
-		                   	  $(function(){
-		                   		 $( "div.updatefailure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
-		                   		 });
-		                   	 }else if(booksdelete == "true"){
-			                   	 $(function(){
-			                   		 $( "div.delete" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
-			                   	 });
-			                   	 }else if(booksdelete == "false"){
-			                   	  $(function(){
-			                   		 $( "div.deletefailure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
-			                   		 });
-			                   	 }
+		
+        <style type="text/css">
+
+        @media print {
+            .fontsize { font-size: 35px ;
+                        font-weight: bold;
+                        font-family: 'Times New Roman';
+                        
+                        
+            }
+            .header,.hide { visibility: hidden }
+            .bodymargin{
+                margin-left: 0px ;
+                margin-right: 0px;
+            }
             
-        </script>
+        }
         
+        @page {
+              
+             margin-left:  0cm;
+             margin-right: 0cm;
+             margin-bottom: 0cm;
+             margin-top: 0cm;
+        }
+
+        @media screen {
+            .fontsize { font-size: 35px;
+                        font-weight: bold;
+                        font-family: 'Times New Roman'
+            }
+            .bodymargin{
+                margin-left: 0px ;
+                margin-right: 0px;
+            }
+        }
+    </style>
        
 </head>
 <%
@@ -553,158 +589,56 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1" method="POST">
-		<%
-			java.text.DateFormat df = new java.text.SimpleDateFormat(
-					"MM/dd/yyyy");
-		%>
-
-		<div class="alert-box success">Book(s) has been added successfully!!!</div>
-		<div class="alert-box failure">Saving Failed, Unable to create new Book(s)!!!</div>
-		
-		<div class="alert-box update">Book(s) has been updated successfully!!!</div>
-		<div class="alert-box updatefailure">Update Failed, Unable to update Book(s)!!!</div>
-		
-		<div class="alert-box delete">Book(s) has been deleted successfully!!!</div>
-		<div class="alert-box deletefailure">Deletion Failed, Unable to delete Book(s)!!!</div>
 		
 		
-		<div style="height: 28px">
-			<button id="add">Add Books</button>
-			<br />
-		</div>
-
-		<div id="effect" class="ui-widget-content ui-corner-all">
-			<div id="tabs">
-				<ul>
-					<li><a href="#tabs-1">Books Details</a></li>
-
-				</ul>
-				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="10%" class="alignRight">Book Title &nbsp;</td>
-							<td width="70%"><label> <input id="title"
-									name="title" type="text" class="textField" required size="30">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="10%" class="alignRight">Author &nbsp;</td>
-							<td width="70%"><label> <input id="author"
-									name="author" type="text" class="textField" required size="30">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="10%" class="alignRight">Language&nbsp;</td>
-							<td width="70%"><label> <input id="language"
-									name="language" type="text" class="textField" required size="30">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="10%" class="alignRight">Edition &nbsp;</td>
-							<td width="70%"><label> <input id="edition" 
-									name="edition" type="text" class="textField" required size="30">
-
-							</label></td>
-							
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="10%" class="alignRight">Price &nbsp;</td>
-							<td width="70%"><label> <input id="price" onkeypress="return event.charCode >= 00 && event.charCode <=57"
-									name="price" type="text" class="textField" required size="30"
-									required>
-
-							</label></td>
-							
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="10%" class="alignRight">Quantity &nbsp;</td>
-							<td width="70%"><label> <input id="quantity" onkeypress="return event.charCode >= 00 && event.charCode <=57"
-									name="quantity" type="text" class="textField" required size="30">
-
-							</label></td>
-							
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-					</table>
-					<table id="table2" width="100%" border="0" align="center">
-						<tr>
-							<td align="center">
-								<button id="save">Save</button>
-							</td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
-
-		<div style="overflow: scroll; height: 600px">
+		<div style="overflow:hidden;height: 600px;">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Books Details</td>
+					<td class="headerTD"><u>Order Details</u> <br><br>Order Number: ${ordernumber} &nbsp;&nbsp;&nbsp;&nbsp; Center Name: ${centername}
+					&nbsp;&nbsp;&nbsp;&nbsp; Order Date: ${orderdate}</td>
 				</tr>
-			</table>
+			</table> 
 			
 			<table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
-
+						
                     <thead>
                         <tr>
-                            <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
+                        	<th title="click to sort" class="headerText">Sl.No.</th>
                             <th title="click to sort" class="headerText">Book Title</th>
-                            <th title="click to sort" class="headerText">Language</th>
-                            <th title="click to sort" class="headerText">Author&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            <th title="click to sort" class="headerText">Quantity</th>
+                            <th title="click to sort" class="headerText">Author&nbsp;</th>
                             <th title="click to sort" class="headerText">Price Per Book&nbsp;</th>
+                            <th title="click to sort" class="headerText">Quantity</th>
                             <th title="click to sort" class="headerText">Total Price&nbsp;</th>
                         </tr>
                     </thead>
-
+						<hr>
                     <tbody>
-                        <c:forEach items="${bookslist}" var="books" varStatus="status">
+                    	<c:set var="grandtotal" value="0"> </c:set>
+                        <c:forEach items="${orderbooksmap}" var="orderdetails" varStatus="status">
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${books.id}"/>" class = "chcktbl"  name="booksids"  value="<c:out value="${books.id}:${status.index}"/>"/></td>
-                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.title}"/>" id="updatetitle" name="updatetitle"><label style="display: none;"><c:out value="${books.title}"/></label></td>
-                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.language}"/>" id="updatelanguage" name="updatelanguage"><label style="display: none;"><c:out value="${books.language}"/></label></td>
-                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.author}"/>" id="updateauthor" name="updateauthor"><label style="display: none;"><c:out value="${books.author}"/></label></td>
-                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.quantity}"/>" id="updatequantity" name="updatequantity"><label style="display: none;"><c:out value="${books.quantity}"/></label></td>
-                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.price}"/>" id="updateprice" name="updateprice"><label style="display: none;"><c:out value="${books.price}"/></label></td>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${books.quantity * books.price}"/></td>
+                            	<td class="dataText"><c:out value="${(status.index)+1}" /></td>
+                                <td class="dataText"><c:out value="${orderdetails.value.title}"/></td>
+                                <td class="dataText"><c:out value="${orderdetails.value.author}"/></td>
+                                <td class="dataText"><c:out value="${orderdetails.value.price}"/></td>
+                                <td class="dataText"><c:out value="${orderdetails.key.quantity}"/></td>
+                                <td class="dataText"><c:out value="${orderdetails.key.quantity*orderdetails.value.price}"/></td>
                             </tr>
+                            <c:set var="grandtotal" value="${grandtotal + orderdetails.key.quantity*orderdetails.value.price}"/>
                         </c:forEach>
+                        
                     </tbody>
-                    <tfoot><tr>
-                     		<td  class="footerTD" colspan="2" ><button id="update">Update</button> 
-                    		&nbsp;&nbsp;&nbsp;&nbsp;
-                           <button id="deletebooks">Delete</button> </td>
                     
-                        </tr></tfoot>
+                    <tfoot>
+                    	<tr>
+                        	<td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td align="right" class="headerText" style="font-size: 20px;">Grand Total</td>
+                                <td class="headerText" style="font-size: 20px;">${grandtotal}</td>
+                        	</tr>
+                    </tfoot>
                 </table>
 		</div>
 

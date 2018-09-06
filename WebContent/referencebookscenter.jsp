@@ -640,7 +640,25 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>			
+						</tr>	
+						<tr>
+							<td class="alignRight">Language &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="languageopted" id="languageopted"
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${languageslist}" var="languageslist">
+											<option value="${languageslist.language}" >
+												<c:out value="${languageslist.language}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>		
 					</table>
 					
 					<table id="table2" width="100%" border="0" align="center">
@@ -671,6 +689,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Book<img
 							alt=" " style="position: relative; top: 4px;"
 							src="images/sort_both.png" /></th>
+							<th title="click to sort" class="headerText">Language&nbsp;</th>
 							<th title="click to sort" class="headerText">Examination Level&nbsp;
 							<img
 							alt=" " style="position: relative; top: 4px;"
@@ -687,6 +706,7 @@ for(Cookie cookie : cookies){
 							cellspacing="1">
    						  <td class="dataText"><c:out value="${(status.index)+1}" /></td>
 						  <td class="dataText"><label style="display: none;"><c:out value="${referencebookslist.referencebooks}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${referencebookslist.referencebooks}" />" id="updatereferencebooks" name="updatereferencebooks"></td>
+						  <td class="dataText"><label style="display: none;"><c:out value="${referencebookslist.language}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${referencebookslist.language}" />" id="updatereferencebooks" name="updatereferencebooks"></td>
 						  <td class="dataText">
 							<label style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" > 
 							 <select name="updateexamlevel" id="updateexamlevel"

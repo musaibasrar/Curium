@@ -357,11 +357,11 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
-            "bPaginate": true,
+            "bPaginate": false,
             "bLengthChange": false,
-            "bFilter": true,
+            "bFilter": false,
             "bSort": true,
-            "bInfo": true,
+            "bInfo": false,
             "bStateSave": false,
             "bProcessing": false,
             "bServerSide": false,
@@ -432,6 +432,14 @@
 
 	}
 	
+	function printOrder() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=OrderProcess&action=printOrder";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	
 	$(function() {
 
 		$("#tabs").tabs();
@@ -453,6 +461,15 @@
              }
          }).click(function(){
              deleteRecords();
+             return false;
+
+         });
+         $("#printorder").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         }).click(function(){
+        	 printOrder();
              return false;
 
          });
@@ -511,7 +528,42 @@
 </script>
 
 		
+        <style type="text/css">
+
+        @media print {
+            .fontsize { font-size: 15px ;
+                        font-weight: bold;
+                        font-family: 'Times New Roman';
+                        
+                        
+            }
+            .header,.hide { visibility: hidden }
+            .bodymargin{
+                margin-left: 0px ;
+                margin-right: 0px;
+            }
+            
+        }
         
+        @page {
+              
+             margin-left:  0cm;
+             margin-right: 0cm;
+             margin-bottom: 0cm;
+             margin-top: 0cm;
+        }
+
+        @media screen {
+            .fontsize { font-size: 15px;
+                        font-weight: bold;
+                        font-family: 'Times New Roman'
+            }
+            .bodymargin{
+                margin-left: 0px ;
+                margin-right: 0px;
+            }
+        }
+    </style>
        
 </head>
 <%
@@ -537,7 +589,8 @@ for(Cookie cookie : cookies){
 		<div style="overflow:hidden;height: 600px;">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Order Details <br>Order Number: ${ordernumber} &nbsp;&nbsp;&nbsp;&nbsp; Center Name: ${centername}</td>
+					<td class="headerTD">Order Details <br>Order Number: ${ordernumber} &nbsp;&nbsp;&nbsp;&nbsp; Center Name: ${centername}
+					&nbsp;&nbsp;&nbsp;&nbsp; Order Date: ${orderdate}</td>
 				</tr>
 			</table> 
 			
@@ -545,8 +598,9 @@ for(Cookie cookie : cookies){
 						
                     <thead>
                         <tr>
+                        	<th title="click to sort" class="headerText">Sl.No.</th>
                             <th title="click to sort" class="headerText">Book Title</th>
-                            <th title="click to sort" class="headerText">Author&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th title="click to sort" class="headerText">Author&nbsp;</th>
                             <th title="click to sort" class="headerText">Price Per Book&nbsp;</th>
                             <th title="click to sort" class="headerText">Quantity</th>
                             <th title="click to sort" class="headerText">Total Price&nbsp;</th>
@@ -558,6 +612,7 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${orderbooksmap}" var="orderdetails" varStatus="status">
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                            	<td class="dataText"><c:out value="${(status.index)+1}" /></td>
                                 <td class="dataText"><c:out value="${orderdetails.value.title}"/></td>
                                 <td class="dataText"><c:out value="${orderdetails.value.author}"/></td>
                                 <td class="dataText"><c:out value="${orderdetails.value.price}"/></td>
@@ -574,11 +629,14 @@ for(Cookie cookie : cookies){
                         	<td ></td>
                                 <td ></td>
                                 <td ></td>
+                                <td ></td>
                                 <td align="right" class="headerText" style="font-size: 15px;">Grand Total</td>
                                 <td class="headerText" style="font-size: 15px;">${grandtotal}</td>
                         	</tr>
                     </tfoot>
                 </table>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="printorder" onclick="this.style.display = 'none'">Print</button>
 		</div>
 
 

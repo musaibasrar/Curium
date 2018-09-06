@@ -66,11 +66,11 @@ public class OrderService {
         boolean result = false;
         book.setTitle(DataUtil.camelCase(request.getParameter("title")));
         book.setAuthor(DataUtil.camelCase(request.getParameter("author")));
+        book.setLanguage(DataUtil.camelCase(request.getParameter("language")));
         book.setEdition(DataUtil.camelCase(request.getParameter("edition")));
         book.setPrice(DataUtil.parseInt(request.getParameter("price")));
         book.setQuantity(DataUtil.parseInt(request.getParameter("quantity")));
         book.setIsbn("DEFAULT");
-        book.setLanguage("DEFAULT");
         if (!book.getTitle().equalsIgnoreCase("")) {
             result = new OrderDAO().addBooks(book);
         }
@@ -85,6 +85,7 @@ public class OrderService {
         
         String[] booksIds = request.getParameterValues("booksids");
         String[] title = request.getParameterValues("updatetitle");
+        String[] language = request.getParameterValues("updatelanguage");
         String[] author = request.getParameterValues("updateauthor");
         String[] quantity = request.getParameterValues("updatequantity");
         String[] price = request.getParameterValues("updateprice");
@@ -101,8 +102,8 @@ public class OrderService {
                 book.setAuthor(author[Integer.valueOf(bookId[1])]);
                 book.setQuantity(Integer.parseInt(quantity[Integer.valueOf(bookId[1])]));
                 book.setPrice(Integer.parseInt(price[Integer.valueOf(bookId[1])]));
+                book.setLanguage(language[Integer.valueOf(bookId[1])]);
                 book.setIsbn("DEFAULT");
-                book.setLanguage("DEFAULT");
                 booksList.add(book);
             }
             boolean result = new OrderDAO().updateMultipleBooks(booksList);
@@ -300,9 +301,10 @@ public class OrderService {
             Books books = new OrderDAO().getBook(ordersdetails.getBookid());
             orderBooksMap.put(ordersdetails, books);
         }
-        request.setAttribute("orderbooksmap", orderBooksMap);
-        request.setAttribute("ordernumber", orderId);
-        request.setAttribute("centername", DataUtil.emptyString(request.getParameter("centername")));
+        httpSession.setAttribute("orderbooksmap", orderBooksMap);
+        httpSession.setAttribute("ordernumber", orderId);
+        httpSession.setAttribute("centername", DataUtil.emptyString(request.getParameter("centername")));
+        httpSession.setAttribute("orderdate", DataUtil.emptyString(request.getParameter("orderdate")));
         
     }
 

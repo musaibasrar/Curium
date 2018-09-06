@@ -728,7 +728,7 @@ for(Cookie cookie : cookies){
 					<c:forEach items="${ordersummarylist}" var="ordersummarylist" varStatus="status">
 						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
                           <td class="dataText" style="width:10%"><input type="checkbox" id = "<c:out value="${ordersummarylist.key.idorders}"/>" class = "chcktbl"  name="orderids"  value="${ordersummarylist.key.idorders}:${status.index}"/></td>
-						  <td  class="dataTextInActive" style="width:10%"><a class="dataTextInActive" href="Controller?process=OrderProcess&action=viewOrderDetails&id=<c:out value='${ordersummarylist.key.idorders}'/>&centername=<c:out value="${ordersummarylist.value.centername}" />"><c:out value="${ordersummarylist.key.idorders}"/></a></td>
+						  <td  class="dataTextInActive" style="width:10%"><a class="dataTextInActive" href="Controller?process=OrderProcess&action=viewOrderDetails&id=<c:out value='${ordersummarylist.key.idorders}'/>&centername=<c:out value="${ordersummarylist.value.centername}" />&orderdate=<c:out value="${ordersummarylist.key.orderdate}" />"><c:out value="${ordersummarylist.key.idorders}"/></a></td>
 						  <td class="dataText"><c:out value="${ordersummarylist.value.centername}" /></td>
 						  <td class="dataText"><c:out value="${ordersummarylist.key.orderdate}" /></td>
 						  <td class="dataText"><c:out value="${ordersummarylist.key.narration}" /></td>

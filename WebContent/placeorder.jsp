@@ -592,12 +592,13 @@ for(Cookie cookie : cookies){
 
                     <thead>
                         <tr>
-                            <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
-                            <th title="click to sort" class="headerText">Book Title</th>
-                            <th title="click to sort" class="headerText">Author&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            <th title="click to sort" class="headerText">Price Per Book&nbsp;</th>
-                            <th title="click to sort" class="headerText">Quantity</th>
-                            <th title="click to sort" class="headerText">Total Price&nbsp;</th>
+                            <th class="headerText" style="width: 10%;"><input  type="checkbox" id = "chckHead" /></th>
+                            <th title="click to sort" class="headerText" style="width: 30%;">Book Title</th>
+                            <th title="click to sort" class="headerText">Language&nbsp;&nbsp;</th>
+                            <th title="click to sort" class="headerText" style="width: 20%;">Author</th>
+                            <th title="click to sort" class="headerText">Price Per Book</th>
+                            <th title="click to sort" class="headerText" style="width: 20%;">Quantity</th>
+                            <th title="click to sort" class="headerText" style="width: 20%;">Total Price</th>
                         </tr>
                     </thead>
 
@@ -605,13 +606,14 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${bookslist}" var="books" varStatus="status">
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${books.id}"/>" class = "chcktbl"  name="booksids"  value="<c:out value="${books.id}:${status.index}"/>"/></td>
-                                <td class="dataText"><c:out value="${books.title}"/></td>
-                                <td class="dataText"><c:out value="${books.author}"/></td>
+                                <td class="dataText" style="width: 10%;"><input type="checkbox" id = "<c:out value="${books.id}"/>" class = "chcktbl"  name="booksids"  value="<c:out value="${books.id}:${status.index}"/>"/></td>
+                                <td class="dataText" style="width: 30%;"><c:out value="${books.title}"/></td>
+                                <td class="dataText"><c:out value="${books.language}"/></td>
+                                <td class="dataText" style="width: 20%;"><c:out value="${books.author}"/></td>
                                 <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.price}"/>" class="price" id="price_${status.index}" name="price" readonly="readonly"></td>
-                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="0" class="quantity" id="quantity_${status.index}" name="quantity" onkeyup="calculatePrice(${status.index});"></td>
+                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 20%;" value="0" class="quantity" id="quantity_${status.index}" name="quantity" onkeyup="calculatePrice(${status.index});"></td>
                                 <td class="dataText" style="text-transform:uppercase">
-                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" id="totalprice_${status.index}" name="totalprice">
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 20%;" id="totalprice_${status.index}" name="totalprice">
                                 </td>
                             </tr>
                         </c:forEach>

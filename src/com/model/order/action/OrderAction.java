@@ -64,12 +64,24 @@ public class OrderAction {
                     url = viewOrderCenter();
                 }else if ("searchOrdersCenter".equalsIgnoreCase(action)) {
                     url = searchOrdersCenter();
+                }else if ("printOrder".equalsIgnoreCase(action)) {
+                    url = printOrder();
+                }else if ("postprintOrder".equalsIgnoreCase(action)) {
+                    url = postprintOrder();
                 }
 		return url;
 	}
 
 		
-	private String searchOrdersCenter() {
+	private String postprintOrder() {
+        return "orderdetails.jsp";
+    }
+
+    private String printOrder() {
+        return "printorderdetails.jsp";
+    }
+
+    private String searchOrdersCenter() {
             new OrderService(request, response).searchOrdersCenter();
             return "viewordercenter.jsp";
     }
