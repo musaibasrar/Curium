@@ -609,54 +609,30 @@
 
 <script type="text/javascript">
 
-
-	
 	   function getAdmNo() {
 
 			var examLevel=document.getElementById('examlevel').value;
 			var centerCode = document.getElementById('centercode').value;
 
-			 if (typeof XMLHttpRequest != "undefined") {
-				 xmlHttp = new XMLHttpRequest();
+			
+				var xmlHttp = new XMLHttpRequest();
 	            
-	         } else if (window.ActiveXObject) {
-	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-	             
-	         }
-			xmlHttp.onreadystatechange = stateChanged;
+	        
+			xmlHttp.onreadystatechange = function(){
+
+				if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+					var admNoDis =  xmlHttp.responseText;
+					var splitAdmDist = admNoDis.split("$");
+					var admNo = splitAdmDist[0];
+					var distName = splitAdmDist[1];
+					document.getElementById("admnno").value = admNo;
+					document.getElementById("districtcode").value = distName;
+				}
+			};
 			xmlHttp.open("GET", "AjaxController?process=LevelProcess&action=getAdmissionNo&examlevel="+examLevel+"&centercode="+centerCode,true);
 			xmlHttp.send(null);
 		}
-	   
-		function stateChanged() {
-
-			if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-				document.getElementById("admnno").value = xmlHttp.responseText;
-			}
-		}
-		
-		  function getDistrictCode() {
-
-				var centerCode = document.getElementById('centercode').value;
-
-				 if (typeof XMLHttpRequest != "undefined") {
-					 xmlHttp = new XMLHttpRequest();
-		            
-		         } else if (window.ActiveXObject) {
-		        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-		             
-		         }
-				xmlHttp.onreadystatechange = stateChangedDC;
-				xmlHttp.open("GET", "AjaxController?process=DistrictProcess&action=getDistrictName&centercode="+centerCode,true);
-				xmlHttp.send(null);
-			}
-		   
-			function stateChangedDC() {
-
-				if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-					document.getElementById("districtcode").value = xmlHttp.responseText;
-				}
-			}
+		 
 </script>
 </head>
 <%
@@ -895,7 +871,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Center Code*&nbsp;</td>
 
 							<td width="28%"><label> 
-							<select name="centercode" id="centercode" onchange="getAdmNo();getDistrictCode();"
+							<select name="centercode" id="centercode" onchange="getAdmNo();"
 									style="width: 240px;" required>
 										<option selected></option>
 										<c:forEach items="${branchList}" var="branchlist">
@@ -1104,7 +1080,7 @@ for(Cookie cookie : cookies){
 									
 									<td width="16%" class="alignRight">Address &nbsp;</td>
 
-									<td width="28%"><label> <textarea  name="permanentaddress"
+									<td width="28%"><label> <textarea wrap=off  name="permanentaddress"
 											type="text" class="textField" id="permanentaddress" rows="4" cols="35"
 											
 											onkeypress="return validateContactNum(this);"></textarea>

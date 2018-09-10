@@ -222,23 +222,13 @@ public class BranchService {
         
     }
 
-    public void getDistrictName() throws IOException {
+    public String getDistrictName()  {
        
             Branch branch = new BranchDAO().getDistrictName(DataUtil.emptyString(request.getParameter("centercode")));
-                PrintWriter out = response.getWriter(); 
-                response.setContentType("text/xml");
-                response.setHeader("Cache-Control", "no-cache");
-                try {
                         if(branch!=null){
-                                String buffer = branch.getDistrictcode();
-                                response.getWriter().println(buffer);
+                               return branch.getDistrictcode();
                         }
-                } catch (Exception e) {
-                    out.write("");
-                } finally {
-                    out.flush();
-                    out.close();
-                }
+            return "";            
         }
 
 }

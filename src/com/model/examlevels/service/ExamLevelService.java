@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.model.branch.dao.BranchDAO;
 import com.model.branch.dto.Branch;
+import com.model.branch.service.BranchService;
 import com.model.examlevels.dao.ExamLevelDetailsDAO;
 import com.model.examlevels.dto.Examleveldetails;
 import com.model.examlevels.dto.Subexamlevel;
@@ -124,14 +125,14 @@ public class ExamLevelService {
         admissionNumber = currentAcademicYear.substring(2, 4)+request.getParameter("centercode")+String.format("%03d", admission);
         System.out.println("AdmissionNumber "+admissionNumber);
 
-       
+        String districtName = new BranchService(request, response).getDistrictName();
+        
         PrintWriter out = response.getWriter(); 
-        response.setContentType("text/xml");
+        response.setContentType("text/plain");
         response.setHeader("Cache-Control", "no-cache");
         try {
-
         //String buffer = "<input name='admno' type='text' class='textField' id='admno' size='36' value='"+admissionNumber+"' >";
-        String buffer = admissionNumber;
+        String buffer = admissionNumber+"$"+districtName;
         response.getWriter().println(buffer);
                 
         } catch (Exception e) {

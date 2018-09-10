@@ -51,22 +51,8 @@ public class BranchAction {
         } else if (action.equalsIgnoreCase("updateMultipleCenters")) {
             logger.info("update Centers");
             url = updateCenters();
-        }else if (action.equalsIgnoreCase("getDistrictName")) {
-            logger.info("View Districts");
-            getDistrictName();
         }
         return url;
-    }
-
-    private void getDistrictName() {
-
-        try {
-        new BranchService(request, response).getDistrictName();
-    } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
-
     }
 
     private String addBranches() {
