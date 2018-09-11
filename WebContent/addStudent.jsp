@@ -744,7 +744,7 @@ for(Cookie cookie : cookies){
 
 									<td width="16%" class="alignRight">Guardian's Name&nbsp;</td>
 									<td width="28%"><label> <input name="guardian"
-											type="text" class="textField" id="guardian" size="36"
+											type="text" class="textField" id="guardian" size="36" style="text-transform:uppercase"
 											onclick="validateNameContact();">
 									</label></td>
 

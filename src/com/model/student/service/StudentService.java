@@ -84,7 +84,7 @@ public class StudentService {
 
 		                if (fieldName.equalsIgnoreCase("name")) {
 		                    
-		                    student.setName(DataUtil.emptyString(item.getString()));
+		                    student.setName(DataUtil.emptyString(item.getString()).toUpperCase());
 		                    System.out.println("name==" + item.getString());
 		                }
 
@@ -144,10 +144,10 @@ public class StudentService {
                                     student.setAdmittedin(DataUtil.emptyString(item.getString()));
                                 }
 		                if (fieldName.equalsIgnoreCase("fathersname")) {
-		                	parents.setFathersname(DataUtil.emptyString(item.getString()));
+		                	parents.setFathersname(DataUtil.emptyString(item.getString()).toUpperCase());
 		                }
 		                if (fieldName.equalsIgnoreCase("mothersname")) {
-		                	parents.setMothersname(DataUtil.emptyString(item.getString()));
+		                	parents.setMothersname(DataUtil.emptyString(item.getString()).toUpperCase());
 		                }
 		                if (fieldName.equalsIgnoreCase("permanentaddress")) {
 		                    parents.setAddresspermanent(DataUtil.emptyString(item.getString()));
@@ -162,7 +162,7 @@ public class StudentService {
 		                	parents.setEmail(DataUtil.emptyString(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("guardian")) {
-		                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
+		                	student.setGuardiandetails(DataUtil.emptyString(item.getString()).toUpperCase());
 		                }
 		                if (fieldName.equalsIgnoreCase("remarksadditional")) {
 		                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
@@ -350,7 +350,7 @@ public class StudentService {
 	                
 	                if (fieldName.equalsIgnoreCase("name")) {
 	                    
-	                    student.setName(DataUtil.emptyString(item.getString()));
+	                    student.setName(DataUtil.emptyString(item.getString()).toUpperCase());
 	                    System.out.println("name==" + item.getString());
 	                }
 
@@ -424,7 +424,7 @@ public class StudentService {
 	                }
 	                
 	                if (fieldName.equalsIgnoreCase("guardian")) {
-	                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
+	                	student.setGuardiandetails(DataUtil.emptyString(item.getString()).toUpperCase());
 	                }
 	                if (fieldName.equalsIgnoreCase("remarksadditional")) {
 	                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
@@ -447,12 +447,12 @@ public class StudentService {
 	        		parents.setSid(studentId);
 
 	                if (fieldName.equalsIgnoreCase("fathersname")) {
-	                	parents.setFathersname(DataUtil.emptyString(item.getString()));
+	                	parents.setFathersname(DataUtil.emptyString(item.getString()).toUpperCase());
 	                }
 
 
 	                if (fieldName.equalsIgnoreCase("mothersname")) {
-	                	parents.setMothersname(DataUtil.emptyString(item.getString()));
+	                	parents.setMothersname(DataUtil.emptyString(item.getString()).toUpperCase());
 	                }
 
 	                if (fieldName.equalsIgnoreCase("profession")) {

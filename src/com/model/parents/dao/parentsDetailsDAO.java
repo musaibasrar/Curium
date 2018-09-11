@@ -31,8 +31,6 @@ public class parentsDetailsDAO {
 	            //this.session = sessionFactory.openCurrentSession();
 	            transaction = session.beginTransaction();
 	            session.save(parents);
-
-
 	            transaction.commit();
 	           
 	        } catch (HibernateException hibernateException) {

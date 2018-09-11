@@ -326,6 +326,12 @@
 
 		});
 		
+		$("#contactnumber").keypress(function (e) {
+		     //if the letter is not digit then display error and don't type anything
+		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		               return false;
+		    }
+		   });
 	});
 </script>
 <script>
@@ -491,17 +497,17 @@ for(Cookie cookie : cookies){
 							<td width="12%" align="left"><input type="hidden"
 								name="idparents" id="idparents"
 								value="<c:out value="${parents.pid}" />" /> <label> <input
-									name="fathersname" type="text" class="myclass" id="name"
+									name="fathersname" type="text" class="myclass" id="fathersname"
 									size="36" style="text-transform:uppercase"
-									value="<c:out default="" value="${parents.fathersname}" />"">
+									value="<c:out default="" value="${parents.fathersname}" />">
 									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
 
 							<td width="30%" class="alignRight">Husband's Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
-									name="mothersname" type="text" class="myclass" id="name"
+									name="mothersname" type="text" class="myclass" id="mothersname"
 									size="36" style="text-transform:uppercase"
-									value="<c:out default="" value="${parents.mothersname}" />"">
+									value="<c:out default="" value="${parents.mothersname}" />">
 									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
 
@@ -523,7 +529,7 @@ for(Cookie cookie : cookies){
 								&nbsp;</td>
 
 							<td width="28%"><label> <input name="guardian"
-									type="text" class="textField" id="guardian" size="36"
+									type="text" class="textField" id="guardian" size="36" style="text-transform:uppercase"
 									value="<c:out default="" value="${student.guardiandetails}" />">
 
 							</label></td>
@@ -531,8 +537,8 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Contact Number &nbsp;</td>
 
 							<td width="28%"><label> <input name="contactnumber"
-									type="text" class="textField" id="contactnumber" size="36"
-									value="<c:out default="" value="${parents.contactnumber}" />"">
+									type="text" class="textField" id="contactnumber" size="36" maxlength="10" minlength="10"
+									value="<c:out default="" value="${parents.contactnumber}" />">
 
 							</label></td>
 						</tr>
@@ -873,7 +879,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<%-- <tr>
 							<td width="30%" class="alignRight">Father's Name* &nbsp;</td>
 							<td width="12%" align="left"><input type="hidden"
 								name="idparents" id="idparents"
@@ -930,7 +936,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
+ --%>
 
 						<tr>
 						
