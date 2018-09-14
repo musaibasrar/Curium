@@ -632,6 +632,11 @@
 			xmlHttp.open("GET", "AjaxController?process=LevelProcess&action=getAdmissionNo&examlevel="+examLevel+"&centercode="+centerCode,true);
 			xmlHttp.send(null);
 		}
+	   
+	   function getAdmittedIn(){
+		   var exLevel =document.getElementById("examlevel").value;
+			document.getElementById("admittedin").value = exLevel;
+	   }
 		 
 </script>
 </head>
@@ -651,7 +656,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-<body>
+<body onload="getAdmNo();getAdmittedIn()">
 	<form id="form1" action="Controller?process=PersonalProcess&action=add"
 		method="post"  enctype="multipart/form-data">
 		<%
@@ -697,9 +702,9 @@ for(Cookie cookie : cookies){
 
 							<td width="30%" class="alignRight">Gender &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft">&nbsp;Male<input
-								type="checkbox" value="Male" name="gender" id="male"
+								type="checkbox" value="Male" name="gender" id="male" ${genderadd == 'Male' ? 'checked' : ''} 
 								onclick="maleCheck();" />&nbsp; &nbsp;Female<input
-								type="checkbox" value="Female" name="gender" id="female"
+								type="checkbox" value="Female" name="gender" id="female" ${genderadd == 'Female' ? 'checked' : ''} 
 								onclick="femaleCheck()" />
 
 							</td>
@@ -747,18 +752,14 @@ for(Cookie cookie : cookies){
 											type="text" class="textField" id="guardian" size="36" style="text-transform:uppercase"
 											onclick="validateNameContact();">
 									</label></td>
-
-
-
-									<td width="16%" class="alignRight">Contact Number &nbsp;</td>
-
-									<td width="28%"><label> <input name="contactnumber"
-											type="text" class="textField" id="contactnumber" size="36"
-											maxlength="10" minlength="10"
-											>
-
-									</label></td>
 									
+										
+							<td width="16%" class="alignRight">Date of admission&nbsp;
+							</td>
+							<td width="28%"><label><input
+									name="dateofadmission" type="text" class="textField"
+									id="dateofadmission" size="36" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)">
+							</label></td>
 								</tr>
 								
 								<tr>
@@ -770,20 +771,30 @@ for(Cookie cookie : cookies){
 
 						<tr>
 						<tr>
-							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
-							<td width="28%"><label> <input name="dateofbirth"
-									type="text" class="textField" id="datepicker" size="36"
-									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
-							</label></td>
 
 							<td width="30%" class="alignRight">Age &nbsp;</td>
 							<td width="12%" align="left"><label> <input
-									name="age" type="text" class="myclass" id="age" size="36"
+									name="age" type="text" class="myclass" id="age" size="36" value="${ageadd}"
 									onblur="validateName();">
 							</label></td>
 
 
+							<td width="16%" class="alignRight">Qualification&nbsp;</td>
+
+							<td width="28%"><label>
+							
+							<select name="qualification" id="qualification"
+									style="width: 240px;">
+										<option selected>${qualificationadd}</option>
+										<c:forEach items="${qualificationlist}" var="qualificationlist">
+											<option value="${qualificationlist.qualification}" >
+												<c:out value="${qualificationlist.qualification}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+							</td>
+							
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -795,45 +806,12 @@ for(Cookie cookie : cookies){
 				
 						<tr>
 						
-						<td width="16%" class="alignRight">Qualification&nbsp;</td>
-
-							<td width="28%"><label>
-							
-							<select name="qualification" id="qualification"
-									style="width: 240px;">
-										<option selected></option>
-										<c:forEach items="${qualificationlist}" var="qualificationlist">
-											<option value="${qualificationlist.qualification}" >
-												<c:out value="${qualificationlist.qualification}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label> 
-							</td>
-							
-							<td width="16%" class="alignRight">Date of admission&nbsp;
-							</td>
-							<td width="28%"><label><input
-									name="dateofadmission" type="text" class="textField"
-									id="dateofadmission" size="36" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)">
-							</label></td>
-
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-						
 							<td width="16%" class="alignRight">Examination Level*&nbsp;</td>
 							<td width="28%">
 							 <label> 
-							 <select name="examlevel" id="examlevel"
+							 <select name="examlevel" id="examlevel" onchange="getAdmittedIn()"
 									style="width: 240px;" required>
-										<option selected></option>
+										<option selected>${examleveladd}</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
@@ -873,7 +851,7 @@ for(Cookie cookie : cookies){
 							<td width="28%"><label> 
 							<select name="centercode" id="centercode" onchange="getAdmNo();"
 									style="width: 240px;" required>
-										<option selected></option>
+										<option selected>${centercodeadd}</option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}" >
 												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
@@ -906,7 +884,7 @@ for(Cookie cookie : cookies){
 							<td><label>
 								<select name="languageopted" id="languageopted"
 									style="width: 240px;" required>
-										<option selected></option>
+										<option selected>${languageadd}</option>
 										<c:forEach items="${languageslist}" var="languageslist">
 											<option value="${languageslist.language}" >
 												<c:out value="${languageslist.language}" />
@@ -946,21 +924,6 @@ for(Cookie cookie : cookies){
 							</label></td>
 						</tr>
 
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-						
-							<td width="20%" class="alignRight">Remarks &nbsp;</td>
-							<td width="28%"><label> <input name="remarks"
-									type="text" class="textField" id="remarks" size="36"
-									onclick="validateNameContact();">
-							</label></td>
-						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -1078,13 +1041,12 @@ for(Cookie cookie : cookies){
 
 								<tr>
 									
-									<td width="16%" class="alignRight">Address &nbsp;</td>
+									<td width="16%" class="alignRight">Contact Number &nbsp;</td>
 
-									<td width="28%"><label> <textarea wrap=off  name="permanentaddress"
-											type="text" class="textField" id="permanentaddress" rows="4" cols="35"
-											
-											onkeypress="return validateContactNum(this);"></textarea>
-
+									<td width="28%"><label> <input name="contactnumber"
+											type="text" class="textField" id="contactnumber" size="36"
+											maxlength="10" minlength="10"
+											>
 									</label></td>
 									
 									<td width="16%" class="alignRight">Email &nbsp;</td>
@@ -1108,12 +1070,6 @@ for(Cookie cookie : cookies){
 
 
 								<tr>
-									
-									<td width="16%" class="alignRight">Notes &nbsp;</td>
-									<td width="28%"><label> <input name="notes"
-											type="text" class="textField" id="notes" size="36"
-											>
-									</label></td>
 									<td width="16%" class="alignRight">Education &nbsp;</td>
 
 									<td width="28%"><label> <input name="educationqualification"

@@ -454,19 +454,20 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td width="16%" class="alignRight">Name &nbsp;</td>
 							<td width="28%"><input type="hidden" name="id" id="id"
-								value="<c:out value="${organizer.idorganizersdetails}" />" /><input type="hidden" name="studentexternalid" id="studentexternalid"
+								value="<c:out value="${organizer.idorganizersdetails}" />" /><input type="hidden" name="organizerid" id="organizerid"
 								value="<c:out value="${organizer.idorganizersdetails}" />" /> <label> <input
 									name="name" type="text" style="text-transform:uppercase"
 									value="<c:out value="${organizer.name}" />" class="textField"
 									id="name" size="30" data-validate="validate(required)">
 							</label></td>
-
-							<td width="16%" class="alignRight">Contact Number &nbsp;</td>
-							<td width="16%" class="alignLeft"><label> <input
-									name="contactnumber" type="text" class="myclass" id="contactnumber"
-									size="36" style="text-transform:uppercase"
-									value="<c:out default="" value="${organizersdetails.contactnumber}" />"">
-							</label>
+							
+							<td width="16%" class="alignRight">Gender &nbsp;</td>
+							<td width="16%" class="alignLeft">Male<input type="checkbox"
+								value="Male" name="gender" id="male" onclick="maleCheck();"
+								${organizer.gender == 'Male' ? 'checked' : ''} />&nbsp;
+								&nbsp;Female<input type="checkbox" value="Female" name="gender"
+								id="female" onclick="femaleCheck()"
+								${organizer.gender == 'Female' ? 'checked' : ''} />
 							</td>
 						</tr>
 						<tr>
@@ -476,6 +477,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
+						
 						<tr>
 							<td width="30%" class="alignRight">Center Code &nbsp;</td>
 							<td width="12%" align="left"> 
@@ -489,27 +491,8 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label>
-							<td width="30%" class="alignRight">Email &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="email" type="text" class="myclass" id="email"
-									size="36" style="text-transform:uppercase"
-									value="<c:out default="" value="${organizersdetails.emailid}" />"">
-									<!-- onkeyup="check(this.value);"  -->
-							</label></td>
-
-
-						</tr>
-
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
+							</td>
+						
 
 							<td width="16%" class="alignRight">Address
 								&nbsp;</td>
@@ -521,6 +504,68 @@ for(Cookie cookie : cookies){
 							</label></td>
 						</tr>
 
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						 <tr>
+                            <td width="30%" class="alignRight">Fathers Name</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <input name="fathername"
+									type="text" class="textField" id="fathername" size="36"
+									value="<c:out default="" value="${organizersdetails.fathername}" />">
+									
+                            </td>
+                            
+                            <td width="16%" class="alignRight">Husband Name</td>
+                            <td width="25%" class="tablerows" >
+                                 <input name="husbandname"
+									type="text" class="textField" id="husbandname" size="36"
+									value="<c:out default="" value="${organizersdetails.husbandname}" />">
+                            </td>
+                        </tr>
+                        <tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							
+							<td width="16%" class="alignRight">Contact Number &nbsp;</td>
+							<td width="16%" class="alignLeft"><label> <input
+									name="contactnumber" type="text" class="myclass" id="contactnumber"
+									size="36" style="text-transform:uppercase"
+									value="<c:out default="" value="${organizersdetails.contactnumber}" />">
+							</label>
+							</td>
+							<td width="30%" class="alignRight">Email &nbsp;</td>
+							<td width="12%" align="left"><label> <input
+									name="email" type="text" class="myclass" id="email"
+									size="36" style="text-transform:uppercase"
+									value="<c:out default="" value="${organizersdetails.emailid}" />"">
+									<!-- onkeyup="check(this.value);"  -->
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							
+							<td width="16%" class="alignRight">education &nbsp;</td>
+							<td width="16%" class="alignLeft"><label> <input
+									name="education" type="text" class="myclass" id="education"
+									size="36" value="<c:out default="" value="${organizersdetails.education}"/>">
+							</label>
+							</td>
+						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>

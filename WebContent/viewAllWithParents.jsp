@@ -208,11 +208,19 @@
             } );
         </script>
         <script type="text/javascript">
-            function deleteRecords(){
-                var form1=document.getElementById("form1");
-                 
-                form1.submit();
-            }
+        function deleteRecords(){
+            var form1=document.getElementById("form1");
+            form1.action="Controller?process=StudentProcess&action=deleteMultiple";
+           form1.submit();
+            
+        }
+        
+        function archiveRecords(){
+            var form1=document.getElementById("form1");
+            form1.action="Controller?process=StudentProcess&action=archiveMultiple";
+           form1.submit();
+            
+        }
             function filter2 (phrase, _id)
             {
                 var words = phrase.value.toLowerCase().split(" ");
@@ -312,10 +320,24 @@
                         primary: "ui-icon-trash"
                     }
                 }).click(function(){
-                    deleteRecords();
+                	if(confirm('are you sure, you want to delete?')){
+                		 deleteRecords();
+                	}
                     return false;
 
                 });
+                
+                $("#archive").button({
+                    icons:{
+                        primary: "ui-icon-trash"
+                    }
+                }).click(function(){
+                	if(confirm('are you sure, you want to archive?')){
+               		 archiveRecords();
+               	}
+                   return false;
+
+               });
                 $('#chckHead').click(function () {
                     var length = $('.chcktbl:checked').length;
                     var trLength=$('.trClass').length;
@@ -443,7 +465,9 @@ for(Cookie cookie : cookies){
                         </c:forEach>
                     </tbody>
                     <tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><input value="Archive" type="submit" id="delete"/> </td>
+                            <td  class="footerTD" colspan="2" >
+                            <input value="Delete" type="submit" id="delete"/> &nbsp;&nbsp;&nbsp;
+                            <input value="Archive" type="submit" id="archive"/> </td>
                     
                         </tr></tfoot>
                 </table>

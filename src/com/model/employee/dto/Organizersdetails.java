@@ -15,16 +15,25 @@ public class Organizersdetails implements java.io.Serializable {
     private String emailid;
     private String address;
     private String photo;
+    private String gender;
+    private String education;
+    private String fathername;
+    private String husbandname;
 
     public Organizersdetails() {}
 
-    public Organizersdetails(String name, String contactnumber, String centercode, String emailid, String address, String photo) {
+    public Organizersdetails(String name, String contactnumber, String centercode, String emailid, String address, String photo,
+                             String gender, String education, String fathername, String husbandname) {
         this.name = name;
         this.contactnumber = contactnumber;
         this.centercode = centercode;
         this.emailid = emailid;
         this.address = address;
         this.photo = photo;
+        this.gender = gender;
+        this.education = education;
+        this.fathername = fathername;
+        this.husbandname = husbandname;
     }
 
     public Integer getIdorganizersdetails() {
@@ -81,6 +90,46 @@ public class Organizersdetails implements java.io.Serializable {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    
+    public String getGender() {
+        return this.gender;
+    }
+
+    
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    
+    public String getEducation() {
+        return this.education;
+    }
+
+    
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    
+    public String getFathername() {
+        return this.fathername;
+    }
+
+    
+    public void setFathername(String fathername) {
+        this.fathername = fathername;
+    }
+
+    
+    public String getHusbandname() {
+        return this.husbandname;
+    }
+
+    
+    public void setHusbandname(String husbandname) {
+        this.husbandname = husbandname;
     }
 
 }

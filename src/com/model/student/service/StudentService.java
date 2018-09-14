@@ -205,6 +205,16 @@ public class StudentService {
 		// End external id
 		
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		//SET STUDENTS DETAILS
+		httpSession.setAttribute("genderadd", student.getGender());
+		httpSession.setAttribute("examleveladd", student.getExamlevel());
+		httpSession.setAttribute("qualificationadd", student.getQualification());
+		httpSession.setAttribute("centercodeadd", student.getCentercode());
+		httpSession.setAttribute("languageadd", student.getLanguageopted());
+		httpSession.setAttribute("ageadd", student.getAge());
+		
+		
 		parents.setStudent(student);
 		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		parents = new parentsDetailsDAO().create(parents);
@@ -607,7 +617,7 @@ public class StudentService {
 		return result;
 	}
 
-	public void deleteMultiple() {
+	public boolean deleteMultiple() {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		if (studentIds != null) {
 			List ids = new ArrayList();
@@ -615,8 +625,12 @@ public class StudentService {
 				ids.add(Integer.valueOf(id));
 
 			}
-			new studentDetailsDAO().deleteMultiple(ids);
+			if(new studentDetailsDAO().deleteMultiple(ids)) {
+			    return true;
+			}
+			return false;
 		}
+		return false;
 	}
 
 	public void restoreMultiple() {

@@ -212,21 +212,16 @@ public class EmployeeService {
                         String fieldName = item.getFieldName();
 
                         if (fieldName.equalsIgnoreCase("name")) {
-                            
-                            orgDet.setName(DataUtil.emptyString(item.getString()));
+                            orgDet.setName(DataUtil.emptyString(item.getString()).toUpperCase());
                         }
 
                         
                         if (fieldName.equalsIgnoreCase("contactnumber")) {
-                            
                             orgDet.setContactnumber(DataUtil.emptyString(item.getString()));
-
                         }
 
                         if (fieldName.equalsIgnoreCase("centercode")) {
-
                             orgDet.setCentercode(DataUtil.emptyString(item.getString()));
-
                         }
 
                         if (fieldName.equalsIgnoreCase("email")) {
@@ -235,6 +230,22 @@ public class EmployeeService {
                         
                         if (fieldName.equalsIgnoreCase("Address")) {
                             orgDet.setAddress(DataUtil.emptyString(item.getString()));
+                        }
+                        
+                        if (fieldName.equalsIgnoreCase("gender")) {
+                            orgDet.setGender(DataUtil.emptyString(item.getString()));
+                        }
+                        
+                        if (fieldName.equalsIgnoreCase("fathername")) {
+                            orgDet.setFathername(DataUtil.emptyString(item.getString()).toUpperCase());
+                        }
+                        
+                        if (fieldName.equalsIgnoreCase("husbandname")) {
+                            orgDet.setHusbandname(DataUtil.emptyString(item.getString()).toUpperCase());
+                        }
+                        
+                        if (fieldName.equalsIgnoreCase("education")) {
+                            orgDet.setEducation(DataUtil.emptyString(item.getString()));
                         }
                         
                     } else {
@@ -343,20 +354,16 @@ public class EmployeeService {
                 
                          if (fieldName.equalsIgnoreCase("name")) {
                             
-                            orgDet.setName(DataUtil.emptyString(item.getString()));
+                            orgDet.setName(DataUtil.emptyString(item.getString()).toUpperCase());
                         }
 
                         
                         if (fieldName.equalsIgnoreCase("contactnumber")) {
-                            
                             orgDet.setContactnumber(DataUtil.emptyString(item.getString()));
-
                         }
 
                         if (fieldName.equalsIgnoreCase("centercode")) {
-
                             orgDet.setCentercode(DataUtil.emptyString(item.getString()));
-
                         }
 
                         if (fieldName.equalsIgnoreCase("email")) {
@@ -369,6 +376,22 @@ public class EmployeeService {
                                                                     
                         if(fieldName.equalsIgnoreCase("organizerpicupdate")){
                             organizerPicUpdate=DataUtil.emptyString(item.getString());
+                        }
+                        
+                        if (fieldName.equalsIgnoreCase("gender")) {
+                            orgDet.setGender(DataUtil.emptyString(item.getString()));
+                        }
+                        
+                        if (fieldName.equalsIgnoreCase("fathername")) {
+                            orgDet.setFathername(DataUtil.emptyString(item.getString()).toUpperCase());
+                        }
+                        
+                        if (fieldName.equalsIgnoreCase("husbandname")) {
+                            orgDet.setHusbandname(DataUtil.emptyString(item.getString()).toUpperCase());
+                        }
+                        
+                        if (fieldName.equalsIgnoreCase("education")) {
+                            orgDet.setEducation(DataUtil.emptyString(item.getString()));
                         }
                         
                     } else {

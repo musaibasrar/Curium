@@ -789,7 +789,7 @@ for(Cookie cookie : cookies){
 						  <td class="dataText">
 						  <select name="updatecentercode" id="updatecentercode"
 									style="width: 180px;">
-										<option selected>${loginlist.branch.centercode}</option>
+										<option selected value="${loginlist.branch.idbranch}">${loginlist.branch.centercode}</option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.idbranch}" >
 												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />

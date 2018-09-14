@@ -439,19 +439,50 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" style="text-transform:uppercase">
                                 <c:out default="" value="${organizersdetails.name}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Contact Number
+                            
+                            <td width="25%"  class="alignLeft" height="50">Gender &nbsp;</td>
+							<td width="25%" class="tablerows" >
+							<c:out default="" value="${organizersdetails.gender}" />
+							</td>
+							
+                           
+                        </tr>
+                        
+                        <tr>
+                        <td width="25%"  class="alignLeft" height="50">Center Code</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${organizersdetails.centercode}" />
+                            </td>
+                            
+                            <td width="25%"  class="alignLeft" height="50">Address</td>
+                            <td width="25%" class="tablerows" >
+                                 <c:out value="${organizersdetails.address}" />
+                            </td>
+                             
+                        </tr>
+                        
+                        <tr>
+                            <td width="25%"  class="alignLeft" height="50">Fathers Name</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${organizersdetails.fathername}" />
+                            </td>
+                            
+                            <td width="25%"  class="alignLeft" height="50">Husband Name</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                 <c:out value="${organizersdetails.husbandname}" />
+                            </td>
+                             
+                        </tr>
+                        
+                        
+                        <tr>
+									
+							 <td width="25%"  class="alignLeft" height="50" >Contact Number
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${organizersdetails.contactnumber}" />
                             </td>
-                        </tr>
-                        
-                        <tr>
-
-                            <td width="25%"  class="alignLeft" height="50">Center Code</td>
-                            <td width="25%" class="tablerows" style="text-transform:uppercase">
-                                <c:out default="" value="${organizersdetails.centercode}" />
-                            </td>
+                            
                             <td width="25%"  class="alignLeft" height="50" >Email
                             </td>
                             <td width="25%" class="tablerows" style="text-transform:uppercase">
@@ -460,12 +491,13 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50">Address</td>
-                            <td width="25%" class="tablerows" >
-                                 <c:out value="${organizersdetails.address}" />
+							<td width="25%"  class="alignLeft" height="50">education</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${organizersdetails.education}" />
                             </td>
-                             
+                                                    
                         </tr>
+                        
                         
                         <tr>
                             <td  width="25%"  class="alignLeft" height="50">

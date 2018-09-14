@@ -16,13 +16,25 @@
             <column length="5" name="centercode"/>
         </property>
         <property generated="never" lazy="false" name="emailid" optimistic-lock="true" type="string" unique="false">
-            <column length="20" name="emailid"/>
+            <column length="50" name="emailid"/>
         </property>
         <property generated="never" lazy="false" name="address" optimistic-lock="true" type="string" unique="false">
             <column length="200" name="address"/>
         </property>
         <property generated="never" lazy="false" name="photo" optimistic-lock="true" type="string" unique="false">
             <column name="photo"/>
+        </property>
+        <property generated="never" lazy="false" name="gender" optimistic-lock="true" type="string" unique="false">
+            <column length="10" name="gender"/>
+        </property>
+        <property generated="never" lazy="false" name="fathername" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="fathername"/>
+        </property>
+        <property generated="never" lazy="false" name="husbandname" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="husbandname"/>
+        </property>
+        <property generated="never" lazy="false" name="education" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="education"/>
         </property>
     </class>
 </hibernate-mapping>

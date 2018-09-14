@@ -709,15 +709,16 @@ for(Cookie cookie : cookies){
 									onblur="validateName();" required> <!-- onkeyup="check(this.value);"  -->
 							</label></td>
 
-									<td width="16%" class="alignRight">Contact Number &nbsp;</td>
 
-									<td width="28%"><label> <input name="contactnumber"
-											type="text" class="textField" id="contactnumber" size="36"
-											maxlength="10" minlength="10"
-											>
+								<td width="30%" class="alignRight">Gender &nbsp;</td>
+							<td width="16%" height="30" class="alignLeft">&nbsp;Male<input
+								type="checkbox" value="Male" name="gender" id="male"  
+								onclick="maleCheck();" />&nbsp; &nbsp;Female<input
+								type="checkbox" value="Female" name="gender" id="female"  
+								onclick="femaleCheck()" />
 
-									</label></td>
-
+							</td>
+									
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -727,8 +728,8 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						
-						<tr>
-									<td width="30%" class="alignRight">Center&nbsp;</td>
+								<tr>
+											<td width="30%" class="alignRight">Center&nbsp;</td>
 									<td width="12%" align="left"><label> <select name="centercode" id="centercode"
 									style="width: 240px;">
 										<option selected></option>
@@ -739,29 +740,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label></td>
-
-									<td width="16%" class="alignRight">Email &nbsp;</td>
-
-									<td width="28%"><label> <input name="email"
-											type="email" class="textField" id="email" size="36"
-											onblur="validateNameContact();"
-											>
-									</label></td>
-
-								</tr>
-
-
-
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-								
-
-								<tr>
-
+							
 									<td width="16%" class="alignRight">Address&nbsp;</td>
 									<td width="28%"><label> <input name="address"
 											type="text" class="textField" id="address" size="36"
@@ -773,6 +752,75 @@ for(Cookie cookie : cookies){
 								<tr>
 									<td><br /></td>
 								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+							<td width="16%" class="alignRight">Father's Name &nbsp;</td>
+
+									<td width="28%"><label> <input name="fathername" style="text-transform:uppercase"
+											type="text" class="textField" id="fathername" size="36"
+											
+											>
+
+									</label></td>
+									<td width="16%" class="alignRight">Husband's Name&nbsp;</td>
+
+									<td width="28%"><label> <input name="husbandname" style="text-transform:uppercase"
+											class="textField" id="husbandname" size="36"
+											onblur="validateNameContact();"
+											>
+									</label></td>
+
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								
+								<tr>
+							<td width="16%" class="alignRight">Contact Number &nbsp;</td>
+
+									<td width="28%"><label> <input name="contactnumber"
+											type="text" class="textField" id="contactnumber" size="36"
+											maxlength="10" minlength="10">
+									</label></td>
+
+									<td width="16%" class="alignRight">Email &nbsp;</td>
+
+									<td width="28%"><label> <input name="email"
+											type="email" class="textField" id="email" size="36"
+											onblur="validateNameContact();">
+									</label></td>
+
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								
+								<tr>
+								<td width="16%" class="alignRight">Education &nbsp;</td>
+
+									<td width="28%"><label> <input name="education"
+											type="text" class="textField" id="education" size="36">
+									</label></td>
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								
 								<tr>
 									<td><br /></td>
 								</tr>

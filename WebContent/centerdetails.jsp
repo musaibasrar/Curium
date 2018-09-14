@@ -334,7 +334,6 @@
 	
 }
 </style>
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -423,6 +422,14 @@
 
 	}
 	
+	function printRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=BranchProcess&action=printCenters";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	
 	$(function() {
 
 		$("#tabs").tabs();
@@ -453,6 +460,15 @@
              }
          }).click(function(){
              updateRecords();
+             return false;
+
+         });
+         $("#print").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         }).click(function(){
+        		 printRecords();
              return false;
 
          });
@@ -536,9 +552,6 @@
 				                   		 $( "div.centerduplicate" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
 				                   		 });
 				                   	 }
-			
-            
-            
         </script>
         
        
@@ -624,7 +637,7 @@ for(Cookie cookie : cookies){
 										<c:forEach items="${districtsList}" var="districtslist">
 										<c:if test="${(districtslist.districtcode != '')}">
 											<option value="${districtslist.districtcode}- ${districtslist.districtname}" >
-												<c:out value="${districtslist.districtcode} - ${districtslist.districtname}" />
+												<c:out value="${districtslist.districtname} - ${districtslist.districtcode}" />
 											</option>
 										</c:if>	
 										</c:forEach>
@@ -679,7 +692,7 @@ for(Cookie cookie : cookies){
                           <td class="dataText" style="width: 10%;"><input type="checkbox" id = "<c:out value="${branchlist.idbranch}"/>" class = "chcktbl"  name="branchids"  value="<c:out value="${branchlist.idbranch}:${status.index}"/>"/></td>
 						  <td class="dataText" style="width: 5%;"><label style="display: none;"><c:out value="${branchlist.centercode}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${branchlist.centercode}" />" id="updatecentercode" name="updatecentercode"></td>
 						  <td class="dataText"><label style="display: none;"><c:out value="${branchlist.centername}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${branchlist.centername}" />" id="updatecentername" name="updatecentername"></td>
-						  <td class="dataText">
+						  <td class="dataText"><label style="display: none;"><c:out value="${branchlist.districtcode}" /></label>
 						  <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${branchlist.districtcode}" />" id="updatedistcode" name="updatedistcode" readonly="readonly">
 						</tr>
 					</c:forEach>
@@ -692,6 +705,8 @@ for(Cookie cookie : cookies){
                             <td  class="footerTD" colspan="2" ><button id="update">Update</button> 
                     		&nbsp;&nbsp;&nbsp;&nbsp;
                             <button id="delete">Delete</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button id="print">Print</button>
                             </td> 
                         </tr></tfoot>
 			</table>

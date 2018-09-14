@@ -335,10 +335,10 @@ for(Cookie cookie : cookies){
                 <!-- <a target="mainFrame" href="Controller?process=PeriodProcess&action=periodConfiguration" style="font-size: 12px;">Time Table</a><br/> -->
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Centre Details</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Center Details</a></h5>
             <div>
             	<a target="mainFrame" href="Controller?process=BranchProcess&action=viewDistricts" style="font-size: 12px;">District Code</a><br/>
-                <a target="mainFrame" href="Controller?process=BranchProcess&action=viewBranches" style="font-size: 12px;">Centre Details</a><br/>
+                <a target="mainFrame" href="Controller?process=BranchProcess&action=viewBranches" style="font-size: 12px;">Center Details</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Examination Level</a></h5>

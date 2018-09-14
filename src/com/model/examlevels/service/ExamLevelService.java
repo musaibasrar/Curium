@@ -118,7 +118,7 @@ public class ExamLevelService {
         int admission = 1;
         if(lastSid.size() > 0) {
             //admission = lastSid.get(0).getSid();
-            admission = Integer.parseInt(lastSid.get(0).getAdmissionnumber().substring(4));
+            admission = Integer.parseInt(lastSid.get(0).getAdmissionnumber().substring(lastSid.get(0).getAdmissionnumber().length()-3));
             admission++;
         }
         

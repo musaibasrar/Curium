@@ -613,7 +613,7 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
 						<th title="click to sort" class="headerText">Exam<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
@@ -642,7 +642,7 @@ for(Cookie cookie : cookies){
 					<c:forEach items="${examschedules}" var="examschedule">
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
-							<td class="dataText"><input type="checkbox" id="<c:out value="${examschedule.idexamschedule}"/>" class="chcktbl" name="idexamschedule" value="<c:out value="${examschedule.idexamschedule}"/>" /></td>
+							<%-- <td class="dataText"><input type="checkbox" id="<c:out value="${examschedule.idexamschedule}"/>" class="chcktbl" name="idexamschedule" value="<c:out value="${examschedule.idexamschedule}"/>" /></td> --%>
 							<td class="dataText"><input type="text" name="examlevels" class="transparent" value="<c:out value="${examschedule.examname}"/>" /></td>
 							<td class="dataText"><input type="text" name="centercodes" class="transparent" value="<c:out value="${examschedule.centercode}"/>" /></td>
 							<td class="dataText"><input type="text" name="subject" class="transparent" value="<c:out value="${examschedule.subject}" />" /></td>

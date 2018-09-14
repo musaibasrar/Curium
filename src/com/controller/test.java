@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -27,7 +28,17 @@ public class test {
 
 	
 	public static void main(String[] args) throws SocketException, IOException{
-		
+
+	    String word = "musaibone";
+	    if (word.length() == 3) {
+	        System.out.println(word);
+	      } else if (word.length() > 3) {
+	          System.out.println( word.substring(word.length() - 3));
+	      } else {
+	        // whatever is appropriate in this case
+	        throw new IllegalArgumentException("word has less than 3 characters!");
+	      }
+	    
 	/*	Map<Date,Integer> myMap = new HashMap<Date, Integer>();
 		myMap.put(new Date(), 1);
 		myMap.put(new Date(), 2);

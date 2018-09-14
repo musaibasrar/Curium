@@ -118,12 +118,12 @@ public class ExamDetailsService {
 				Examschedule examschedule = new Examschedule();
 				examschedule.setAcademicyear(DataUtil.emptyString(request.getParameter("academicyear")));
 				String centerCodeList = "";
-				for (String string : centerCodes) {
+				for (String center : centerCodes) {
 				    
 				    if(!"".equalsIgnoreCase(centerCodeList)) {
-				        centerCodeList = centerCodeList+","+string;
+				        centerCodeList = centerCodeList+"|"+center;
 				    }else {
-				        centerCodeList = string;
+				        centerCodeList = "|"+center;
 				    }
                                     
                                 }

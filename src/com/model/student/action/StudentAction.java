@@ -417,8 +417,11 @@ public class StudentAction {
 	}
 
 	private String deleteMultiple() {
-		 new StudentService(request, response).deleteMultiple();
-	        return "Controller?process=StudentProcess&action=archiveViewAll";
+		 if(new StudentService(request, response).deleteMultiple()) {
+		     return "deletesuccess.jsp";
+		 }
+		 return "deletefail.jsp";
+	        //return "Controller?process=StudentProcess&action=archiveViewAll";
 	}
 
 	private String archiveViewAll() {

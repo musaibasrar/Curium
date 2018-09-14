@@ -3,6 +3,7 @@ package com.model.branch.service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +37,8 @@ public class BranchService {
     public void viewBranches() {
         try {
             List<Branch> list = new BranchDAO().readListOfObjects();
-            request.setAttribute("branchList", list);
+            Collections.sort(list);
+            httpSession.setAttribute("branchList", list);
             logger.info("Branch List "+list.size());
         } catch (Exception e) {
             e.printStackTrace();

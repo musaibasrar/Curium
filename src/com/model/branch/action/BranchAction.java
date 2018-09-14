@@ -51,8 +51,15 @@ public class BranchAction {
         } else if (action.equalsIgnoreCase("updateMultipleCenters")) {
             logger.info("update Centers");
             url = updateCenters();
+        }else if (action.equalsIgnoreCase("printCenters")) {
+            logger.info("print Centers");
+            url = printCenters();
         }
         return url;
+    }
+
+    private String printCenters() {
+        return "printcenters.jsp";
     }
 
     private String addBranches() {

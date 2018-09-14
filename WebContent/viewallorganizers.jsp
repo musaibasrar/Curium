@@ -360,6 +360,7 @@ for(Cookie cookie : cookies){
                         <tr  >
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th title="click to sort" class="headerText">Father's/Husband's Name</th>
                             <th title="click to sort" class="headerText">Contact Number</th>
                             <th title="click to sort" class="headerText">Center Code&nbsp;</th>
                             
@@ -374,6 +375,14 @@ for(Cookie cookie : cookies){
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${organizerslist.idorganizersdetails}"/>" class = "chcktbl"  name="organizersIDs"  value="<c:out value="${organizerslist.idorganizersdetails}"/>"/></td>
                                 <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="Controller?process=EmployeeProcess&action=viewOrganizerDetails&id=<c:out value='${organizerslist.idorganizersdetails}'/>"><c:out value="${organizerslist.name}"/></a></td>
+                                <td class="dataText">
+								<c:if test="${(organizerslist.fathername != '')}">
+								<c:out value="${organizerslist.fathername}" />
+								</c:if>
+								<c:if test="${(organizerslist.husbandname != '')}">
+								<c:out value="${organizerslist.husbandname}" />
+								</c:if>
+								</td>
                                 <td class="dataText"><c:out value="${organizerslist.contactnumber}"/></td>
                                 <td class="dataText"><c:out value="${organizerslist.centercode}"/></td>
                             </tr>
