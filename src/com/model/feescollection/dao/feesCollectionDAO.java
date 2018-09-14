@@ -45,7 +45,7 @@ public class feesCollectionDAO {
 	            transaction.commit();
 	            result = true;
 			 
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
@@ -64,7 +64,7 @@ public class feesCollectionDAO {
 			results = (List<Feescollection>) session.createQuery("From Feescollection where feesdetailsid="+feeid).list();
 			
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
@@ -81,7 +81,7 @@ public class feesCollectionDAO {
 			results = (List<Feescollection>) session.createQuery("From Feescollection where sid='"+id+"' and academicyear = '"+currentAcademicYear+"'").list();
 			
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
@@ -96,7 +96,7 @@ public class feesCollectionDAO {
 			 transaction = session.beginTransaction();
 			 session.save(receiptInfo);
 			 transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
@@ -114,7 +114,7 @@ public class feesCollectionDAO {
 			 Query query = session.createQuery("from Receiptinfo where receiptnumber = '"+receiptNumber+"' and academicyear = '"+currentAcademicYear+"'");
 			 receiptDetails = (Receiptinfo) query.uniqueResult();
 			 transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
@@ -132,7 +132,7 @@ public class feesCollectionDAO {
 			transaction = session.beginTransaction();
 			receiptInfo = session.createQuery("from Receiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"'").list();
 			transaction.commit();
-		}catch(Exception e){
+		}catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();

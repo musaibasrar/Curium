@@ -41,7 +41,7 @@ public class PrintIdsDAO {
 	                    Query query = session.createQuery("From Parents as parents where parents.Student.sid=" + sid);
 	                    parentsDetails = (Parents) query.uniqueResult();
 	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
+	        } catch (HibernateException hibernateException) {transaction.rollback();
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } 	      

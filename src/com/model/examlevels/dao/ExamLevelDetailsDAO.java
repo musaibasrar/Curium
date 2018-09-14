@@ -46,7 +46,7 @@ public class ExamLevelDetailsDAO {
             transaction = session.beginTransaction();
             results = (List<Examleveldetails>) session.createQuery("From Examleveldetails").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -63,7 +63,7 @@ public class ExamLevelDetailsDAO {
             query.setParameterList("ids", ids);
             query.executeUpdate();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
 		
@@ -77,7 +77,7 @@ public class ExamLevelDetailsDAO {
             session.save(examLevel);
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -99,7 +99,7 @@ public class ExamLevelDetailsDAO {
             query.executeUpdate();
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
         return result;
@@ -118,7 +118,7 @@ public class ExamLevelDetailsDAO {
             }
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
         return result;
@@ -135,7 +135,7 @@ public class ExamLevelDetailsDAO {
             transaction = session.beginTransaction();
             results = (List<Subexamlevel>) session.createQuery("From Subexamlevel where examlevel='"+examLevel+"'").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -155,7 +155,7 @@ public class ExamLevelDetailsDAO {
             transaction = session.beginTransaction();
             results = (List<Examleveldetails>) session.createQuery("From Examleveldetails where levelcode='"+examLevel+"'").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {

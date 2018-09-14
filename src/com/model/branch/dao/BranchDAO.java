@@ -40,7 +40,7 @@ public class BranchDAO {
             transaction = session.beginTransaction();
             results = (List<Branch>) session.createQuery("From Branch order by centercode ASC").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -56,7 +56,7 @@ public class BranchDAO {
             transaction = session.beginTransaction();
             results = (List<Districts>) session.createQuery("From Districts").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -72,7 +72,7 @@ public class BranchDAO {
             session.save(district);
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -91,7 +91,7 @@ public class BranchDAO {
             }
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
         return result;
@@ -106,7 +106,7 @@ public class BranchDAO {
             query.executeUpdate();
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
         return result;
@@ -121,7 +121,7 @@ public class BranchDAO {
             query.executeUpdate();
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
         return result;
@@ -136,7 +136,7 @@ public class BranchDAO {
             }
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
         return result;
@@ -149,7 +149,7 @@ public class BranchDAO {
             session.save(branch);
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -166,7 +166,7 @@ public class BranchDAO {
             Query query = session.createQuery("From Branch where centercode='" + centerCode + "'");
             results = (Branch) query.uniqueResult();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -182,7 +182,7 @@ public class BranchDAO {
             Query query = session.createQuery("From Branch where idbranch='" + branchId + "'");
             results = (Branch) query.uniqueResult();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -198,7 +198,7 @@ try {
     transaction = session.beginTransaction();
     results = (List<Branch>) session.createQuery("From Branch where idbranch ="+branchId+" order by centercode ASC").list();
     transaction.commit();
-} catch (HibernateException hibernateException) {
+} catch (HibernateException hibernateException) {transaction.rollback();
     transaction.rollback();
     hibernateException.printStackTrace();
 } finally {
@@ -215,7 +215,7 @@ try {
             transaction = session.beginTransaction();
             distList = (List<Districts>) session.createQuery("From Districts where districtname ='"+district.getDistrictname()+"'").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -233,9 +233,9 @@ try {
                     
             try {
                 transaction = session.beginTransaction();
-                branchList = (List<Branch>) session.createQuery("From Branch where centercode ='"+branch.getCentercode()+"' or centername = '"+branch.getCentername()+"'").list();
+                branchList = (List<Branch>) session.createQuery("From Branch where centercode ='"+branch.getCentercode()+"'").list();
                 transaction.commit();
-            } catch (HibernateException hibernateException) {
+            } catch (HibernateException hibernateException) {transaction.rollback();
                 transaction.rollback();
                 hibernateException.printStackTrace();
             } finally {
@@ -255,7 +255,7 @@ try {
                     transaction = session.beginTransaction();
                     distList = (List<Districts>) session.createQuery("From Districts where districtcode = '"+districtcode+"'").list();
                     transaction.commit();
-                } catch (HibernateException hibernateException) {
+                } catch (HibernateException hibernateException) {transaction.rollback();
                     transaction.rollback();
                     hibernateException.printStackTrace();
                 } finally {
@@ -274,7 +274,7 @@ try {
               Query query = session.createQuery("From Branch where centercode = '"+centerCode+"'");
               dist = (Branch) query.uniqueResult();
               transaction.commit();
-          } catch (HibernateException hibernateException) {
+          } catch (HibernateException hibernateException) {transaction.rollback();
               transaction.rollback();
               hibernateException.printStackTrace();
           } finally {

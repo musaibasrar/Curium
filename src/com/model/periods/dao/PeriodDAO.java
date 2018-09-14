@@ -46,7 +46,7 @@ public class PeriodDAO {
 			}
 			transaction.commit();
 			return true;
-		}catch(Exception e){
+		}catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -62,7 +62,7 @@ public class PeriodDAO {
 			transaction = session.beginTransaction();
 			periodMaster = session.createQuery("from Periodmaster where academicyear='"+currentacademicyear+"' and branchid="+branchId).list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -78,7 +78,7 @@ public class PeriodDAO {
 			Query query = session.createQuery("from Periodmaster where idperiodmaster="+periodMasterid);
 			periodMaster = (Periodmaster) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -93,7 +93,7 @@ public class PeriodDAO {
 			transaction = session.beginTransaction();
 			periodDetailsList = session.createQuery("from Perioddetails where periodmasterid="+periodMasterid+" order by idperioddetails ASC").list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -111,7 +111,7 @@ public class PeriodDAO {
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}finally{
 			//session.close();

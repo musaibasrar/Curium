@@ -45,7 +45,7 @@ public class DocumentDAO {
 			session.save(tc);
 			transaction.commit();
 			return "true";
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}
 		return "false";
@@ -61,7 +61,7 @@ public class DocumentDAO {
 			Query query = session.createQuery("from Transfercertificate where sid="+studentId);
 			tc = (Transfercertificate) query.uniqueResult(); 
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}
 		return tc;

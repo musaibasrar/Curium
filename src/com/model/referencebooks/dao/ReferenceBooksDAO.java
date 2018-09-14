@@ -44,7 +44,7 @@ public class ReferenceBooksDAO {
             transaction = session.beginTransaction();
             results = (List<Referencebooks>) session.createQuery("From Referencebooks").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -62,7 +62,7 @@ public class ReferenceBooksDAO {
             query.executeUpdate();
             transaction.commit();
             return true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
 		return false;
@@ -76,7 +76,7 @@ public class ReferenceBooksDAO {
             session.save(ref);
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -96,7 +96,7 @@ public class ReferenceBooksDAO {
             }
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
         return result;
@@ -118,7 +118,7 @@ public class ReferenceBooksDAO {
             }
             
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {

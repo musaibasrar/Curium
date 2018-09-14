@@ -35,7 +35,7 @@ public class StandardDetailsDAO {
 	            transaction = session.beginTransaction();
 	            session.save(classsec);
 	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
+	        } catch (HibernateException hibernateException) {transaction.rollback();
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
@@ -51,7 +51,7 @@ public class StandardDetailsDAO {
             transaction = session.beginTransaction();
             classsecList = session.createQuery("From Classsec where branchid="+branchId).list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -68,7 +68,7 @@ public class StandardDetailsDAO {
                 query.setParameterList("ids", ids);
                 query.executeUpdate();
                 transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
                 hibernateException.printStackTrace();
         }
 

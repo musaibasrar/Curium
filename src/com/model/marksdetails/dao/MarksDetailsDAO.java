@@ -37,7 +37,7 @@ public class MarksDetailsDAO {
 			
 			transaction.commit();
 			
-		}  catch (HibernateException hibernateException) {
+		}  catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} 
@@ -62,7 +62,7 @@ public class MarksDetailsDAO {
 			//query.executeUpdate();
 			results = query.list();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
@@ -84,7 +84,7 @@ public class MarksDetailsDAO {
 				//query.executeUpdate();
 				results = query.list();
 				transaction.commit();
-			} catch (HibernateException hibernateException) {
+			} catch (HibernateException hibernateException) {transaction.rollback();
 				transaction.rollback();
 				hibernateException.printStackTrace();
 			} finally {
@@ -107,10 +107,10 @@ public class MarksDetailsDAO {
 	        
 				transaction.commit();
 				
-			}  catch (HibernateException hibernateException) {
+			}  catch (HibernateException hibernateException) {transaction.rollback();
 				transaction.rollback();
 				hibernateException.printStackTrace();
-			} catch(Exception e){
+			} catch (Exception e) {transaction.rollback();
 				e.printStackTrace();
 			}
 			finally {
@@ -128,7 +128,7 @@ public class MarksDetailsDAO {
 				query.executeUpdate();
 				transaction.commit();
 				result=true;
-			} catch (HibernateException hibernateException) {
+			} catch (HibernateException hibernateException) {transaction.rollback();
 				hibernateException.printStackTrace();
 				result=false;
 			}
@@ -143,7 +143,7 @@ public class MarksDetailsDAO {
 				Query query = session.createQuery("From Marks where sid = '"+id+"' and academicyear = '"+currentAcademicYear+"' ORDER BY examid ASC");
 				results = query.list();
 				transaction.commit();
-			} catch (HibernateException hibernateException) {
+			} catch (HibernateException hibernateException) {transaction.rollback();
 				transaction.rollback();
 				hibernateException.printStackTrace();
 			} finally {
@@ -161,7 +161,7 @@ public class MarksDetailsDAO {
                     Query query = session.createQuery("From Marks where sid = '"+sid+"' and subid = "+subjectId+" and examid = "+examId+" and academicyear = '"+academicYear+"' ");
                     marks = (Marks) query.uniqueResult();
                     transaction.commit();
-            } catch (HibernateException hibernateException) {
+            } catch (HibernateException hibernateException) {transaction.rollback();
                     transaction.rollback();
                     hibernateException.printStackTrace();
             } finally {
@@ -185,10 +185,10 @@ public class MarksDetailsDAO {
     
                     transaction.commit();
                     
-            }  catch (HibernateException hibernateException) {
+            }  catch (HibernateException hibernateException) {transaction.rollback();
                     transaction.rollback();
                     hibernateException.printStackTrace();
-            } catch(Exception e){
+            } catch (Exception e) {transaction.rollback();
                     e.printStackTrace();
             }
             finally {

@@ -44,7 +44,7 @@ public class QualificationDAO {
             transaction = session.beginTransaction();
             results = (List<Qualification>) session.createQuery("From Qualification").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -61,7 +61,7 @@ public class QualificationDAO {
             query.setParameterList("ids", ids);
             query.executeUpdate();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
 		
@@ -75,7 +75,7 @@ public class QualificationDAO {
             session.save(qual);
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -97,7 +97,7 @@ public class QualificationDAO {
             query.executeUpdate();
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
         return result;
@@ -116,7 +116,7 @@ public class QualificationDAO {
             }
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
         return result;

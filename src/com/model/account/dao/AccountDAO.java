@@ -51,7 +51,7 @@ public class AccountDAO {
 			session.save(financialaccountingyear);
 			transaction.commit();
 			result = true;
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			System.out.println(""+hibernateException);
 			transaction.rollback();
 		} finally {
@@ -67,7 +67,7 @@ public class AccountDAO {
 			Query query = session.createQuery("from Financialaccountingyear where active = 'yes'");
 			financialYear = (Financialaccountingyear) query.uniqueResult();
 			transaction.commit();
-		}catch(HibernateException hb){
+		}catch (HibernateException hb) {transaction.rollback();transaction.rollback();
 			System.out.println("error "+hb);
 		}
 		
@@ -82,7 +82,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			accountGroupMaster = session.createQuery("from Accountgroupmaster").list();
 			transaction.commit();
-		}catch(HibernateException hb){
+		}catch (HibernateException hb) {transaction.rollback();transaction.rollback();
 			hb.printStackTrace();
 		}finally{
 			//session.close();
@@ -99,7 +99,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			accountSubGroupMaster = session.createQuery("from Accountsubgroupmaster where accountgroupid = '"+accountGroupMasterId+"' ").list();
 			transaction.commit();
-		}catch(HibernateException hb){
+		}catch (HibernateException hb) {transaction.rollback();transaction.rollback();
 			hb.printStackTrace();
 		}finally{
 			//session.close();
@@ -113,7 +113,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			session.save(accountSubGroupMaster);
 			transaction.commit();
-		}catch(HibernateException hb){
+		}catch (HibernateException hb) {transaction.rollback();transaction.rollback();
 			hb.printStackTrace();
 		}
 		return accountSubGroupMaster;
@@ -126,7 +126,7 @@ public class AccountDAO {
 			session.save(accountDetails);
 			transaction.commit();
 			result = true;
-		}catch(HibernateException hb){
+		}catch (HibernateException hb) {transaction.rollback();transaction.rollback();
 			hb.printStackTrace();
 			System.out.println("error "+hb);
 		}finally{
@@ -144,7 +144,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			financialYear = (Financialaccountingyear) session.createQuery("from Financialaccountingyear where active='yes' ").uniqueResult();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -160,7 +160,7 @@ public class AccountDAO {
 			session.save(accountDetailsBalance);
 			transaction.commit();
 			result = true;
-		}catch(Exception e){
+		}catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -176,7 +176,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountSubGroupMaster.accountsubgroupmasterid NOT IN (1,2)").list();
 			transaction.commit();
-		}catch(HibernateException hb){
+		}catch (HibernateException hb) {transaction.rollback();transaction.rollback();
 			hb.printStackTrace();
 		}finally{
 			//session.close();
@@ -193,7 +193,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			accountDetails = session.createQuery("from Accountdetailsbalance").list();
 			transaction.commit();
-		}catch(HibernateException hb){
+		}catch (HibernateException hb) {transaction.rollback();transaction.rollback();
 			hb.printStackTrace();
 		}finally{
 			//session.close();
@@ -214,7 +214,7 @@ public class AccountDAO {
 			query2.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 		
@@ -228,7 +228,7 @@ public class AccountDAO {
 			session.save(transactions);
 			transaction.commit();
 			return true;
-		}catch(HibernateException hb){
+		}catch (HibernateException hb) {transaction.rollback();transaction.rollback();
 			hb.printStackTrace();
 		}finally{
 			//session.close();
@@ -243,7 +243,7 @@ public class AccountDAO {
 			session.save(transactions);
 			transaction.commit();
 			return true;
-		} catch (HibernateException hb) {
+		} catch (HibernateException hb) {transaction.rollback();
 			hb.printStackTrace();
 		} finally {
 			//session.close();
@@ -258,7 +258,7 @@ public class AccountDAO {
 			session.save(transactions);
 			transaction.commit();
 			return true;
-		} catch (HibernateException hb) {
+		} catch (HibernateException hb) {transaction.rollback();
 			hb.printStackTrace();
 		} finally {
 			//session.close();
@@ -273,7 +273,7 @@ public class AccountDAO {
 			session.save(transactions);
 			transaction.commit();
 			return true;
-		} catch (HibernateException hb) {
+		} catch (HibernateException hb) {transaction.rollback();
 			hb.printStackTrace();
 		} finally {
 			//session.close();
@@ -293,7 +293,7 @@ public class AccountDAO {
 			query.setParameterList("ids", accountIds);
 			accountDetailsBalance = query.list();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 		
@@ -307,7 +307,7 @@ public class AccountDAO {
 			Query query = session.createQuery("update Accountdetailsbalance set currentbalance='"+currentBalance+"' where accountdetailsid="+accountId);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 		
@@ -321,7 +321,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountSubGroupMaster.accountsubgroupmasterid IN (1,2) ").list();
 			transaction.commit();																						   											
-		}catch(HibernateException hb){
+		}catch (HibernateException hb) {transaction.rollback();transaction.rollback();
 			hb.printStackTrace();
 		}finally{
 			//session.close();
@@ -336,7 +336,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			receiptTransactions = session.createQuery("from Receipttransactions where financialyear='"+financialYear+"'and cancelvoucher!='yes' order by transactionsid ASC").list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -353,7 +353,7 @@ public class AccountDAO {
 			accountDetails = (Accountdetails) query.uniqueResult(); 
 			transaction.commit();
 			return accountDetails.getAccountname();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -368,7 +368,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			paymentTransactions = session.createQuery("from Paymenttransactions where financialyear='"+financialYear+"' order by transactionsid ASC ").list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -384,7 +384,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			contraTransactions = session.createQuery("from Contratransactions where financialyear='"+financialYear+"' order by transactionsid ASC ").list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -399,7 +399,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			journalTransactions = session.createQuery("from Journaltransactions where financialyear='"+financialYear+"' order by transactionsid ASC ").list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -451,7 +451,7 @@ public class AccountDAO {
 			}
 			
 			
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -470,7 +470,7 @@ public class AccountDAO {
 			query2.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 		
@@ -485,7 +485,7 @@ public class AccountDAO {
 			Query query = session.createQuery("from Receipttransactions where transactionsid='"+id+"'");
 			receiptTransactions = (Receipttransactions) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -504,7 +504,7 @@ public class AccountDAO {
 			query2.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}finally{
 			//session.close();
@@ -520,7 +520,7 @@ public class AccountDAO {
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}finally{
 			//session.close();
@@ -537,7 +537,7 @@ public class AccountDAO {
 			Query query = session.createQuery("from Paymenttransactions where transactionsid='"+id+"'");
 			paymentTransactions = (Paymenttransactions) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -563,7 +563,7 @@ public class AccountDAO {
 			query2.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}finally{
 			//session.close();

@@ -50,9 +50,9 @@ public class StampFeesDAO {
            login = (Login) query.uniqueResult();
            transaction.commit();
            
-       }catch(HibernateException hibernateException){
-           System.out.println("In userdao null pointer exception"+hibernateException);
-           hibernateException.printStackTrace();
+       }catch (Exception e) {transaction.rollback();
+           System.out.println("In userdao null pointer exception"+e);
+           e.printStackTrace();
        }finally{
            return login;
        }}
@@ -77,7 +77,7 @@ public class StampFeesDAO {
 
 
 
-	        } catch (HibernateException hibernateException) {
+	        } catch (HibernateException hibernateException) {transaction.rollback();
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 
@@ -103,7 +103,7 @@ public class StampFeesDAO {
 
 
 
-	        } catch (HibernateException hibernateException) {
+	        } catch (HibernateException hibernateException) {transaction.rollback();
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 
@@ -122,7 +122,7 @@ public class StampFeesDAO {
             Query HQLquery = session.createQuery(query);
             parents = (java.util.List<Parents>) HQLquery.list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         }
@@ -157,7 +157,7 @@ public class StampFeesDAO {
 
 			transaction.commit();
 			System.out.println("in add3");
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
@@ -181,7 +181,7 @@ public class StampFeesDAO {
 			query.executeUpdate();
 			query2.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 

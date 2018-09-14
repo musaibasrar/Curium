@@ -42,7 +42,7 @@ public class feesDetailsDAO {
             transaction = session.beginTransaction();
             results = (List<Feescategory>) session.createQuery("From Feescategory").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -61,7 +61,7 @@ public class feesDetailsDAO {
 
             transaction.commit();
             
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -79,7 +79,7 @@ public class feesDetailsDAO {
 	            Query query = session.createQuery("From Feesdetails as feesdetails where feesdetails.feesdetailsid=" + feesDetailsid);
 	            feesdetails = (Feesdetails) query.uniqueResult();
 	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
+	        } catch (HibernateException hibernateException) {transaction.rollback();
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        }
@@ -96,7 +96,7 @@ public class feesDetailsDAO {
 	            Query query = session.createQuery("From Receiptinfo as feesdetails where feesdetails.receiptnumber=" + feesDetailsid);
 	            feesdetails = (Receiptinfo) query.uniqueResult();
 	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
+	        } catch (HibernateException hibernateException) {transaction.rollback();
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        }
@@ -116,7 +116,7 @@ public class feesDetailsDAO {
 				
 	          
 	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
+	        } catch (HibernateException hibernateException) {transaction.rollback();
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        }
@@ -140,7 +140,7 @@ public class feesDetailsDAO {
 				
 	          
 	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
+	        } catch (HibernateException hibernateException) {transaction.rollback();
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        }
@@ -165,7 +165,7 @@ public class feesDetailsDAO {
 			Query queryTF =  session.createQuery(queryTotalFees);
 			totalFees =  (String) queryTF.uniqueResult();
 			transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         }
@@ -187,7 +187,7 @@ public class feesDetailsDAO {
 				
 	          
 	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
+	        } catch (HibernateException hibernateException) {transaction.rollback();
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        }
@@ -209,7 +209,7 @@ public class feesDetailsDAO {
 				
 	          
 	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
+	        } catch (HibernateException hibernateException) {transaction.rollback();
 	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        }
@@ -229,7 +229,7 @@ public class feesDetailsDAO {
 					.list();
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 

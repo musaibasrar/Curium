@@ -42,7 +42,7 @@ public class SubjectDetailsDAO {
 			results = (List<Subject>) session.createQuery("From Subject where branchid="+branchId)
 					.list();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
@@ -63,7 +63,7 @@ public class SubjectDetailsDAO {
 			    session.save(subExamLevel);
                         }
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
@@ -81,7 +81,7 @@ public class SubjectDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 	}
@@ -94,7 +94,7 @@ public class SubjectDetailsDAO {
                             .createQuery("from Subject where subjectname = '"+subject+"'");
             subjectDet = (Subject) query.uniqueResult();
             transaction.commit();
-    } catch (HibernateException hibernateException) {
+    } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
     }
         return subjectDet;

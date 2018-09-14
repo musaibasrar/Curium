@@ -29,7 +29,7 @@ public class OrderDAO {
                     transaction = session.beginTransaction();
                     booksList = session.createQuery("from Books").list();
                     transaction.commit();
-            } catch (Exception e) {
+            } catch (Exception e) {transaction.rollback();
                     e.printStackTrace();
             }finally{
                     //session.close();
@@ -48,7 +48,7 @@ public class OrderDAO {
             session.save(book);
             transaction.commit();
             result = true;
-    } catch (HibernateException hibernateException) {
+    } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
     } finally {
@@ -68,7 +68,7 @@ public class OrderDAO {
             }
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
         return result;
@@ -86,7 +86,7 @@ public class OrderDAO {
             query.executeUpdate();
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
         return result;
@@ -108,7 +108,7 @@ public class OrderDAO {
             }
             transaction.commit();
             result = true;
-    } catch (HibernateException hibernateException) {
+    } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
     } finally {
@@ -126,7 +126,7 @@ public class OrderDAO {
                 transaction = session.beginTransaction();
                 booksList = session.createQuery("from Orderssummary order by idorders DESC").list();
                 transaction.commit();
-        } catch (Exception e) {
+        } catch (Exception e) {transaction.rollback();
                 e.printStackTrace();
         }finally{
                 //session.close();
@@ -147,7 +147,7 @@ public class OrderDAO {
             query.executeUpdate();
             transaction.commit();
             result = true;
-    } catch (HibernateException hibernateException) {
+    } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
     }
             return result;
@@ -168,7 +168,7 @@ public class OrderDAO {
            
             transaction.commit();
             result = true;
-    } catch (HibernateException hibernateException) {
+    } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
     }
             return result;
@@ -189,7 +189,7 @@ public class OrderDAO {
            
             transaction.commit();
             result = true;
-    } catch (HibernateException hibernateException) {
+    } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
     }
             return result;
@@ -202,7 +202,7 @@ public class OrderDAO {
                 Query HQLquery = session.createQuery(SQL);
                 orderList = (java.util.List<Orderssummary>) HQLquery.list();
                 transaction.commit();
-            } catch (HibernateException hibernateException) {
+            } catch (HibernateException hibernateException) {transaction.rollback();
                 transaction.rollback();
                 hibernateException.printStackTrace();
             }
@@ -216,7 +216,7 @@ public class OrderDAO {
                 transaction = session.beginTransaction();
                 ordersList = session.createQuery("from Ordersdetails where orderssummaryid="+id).list();
                 transaction.commit();
-        } catch (Exception e) {
+        } catch (Exception e) {transaction.rollback();
                 e.printStackTrace();
         }finally{
                 //session.close();
@@ -235,7 +235,7 @@ public class OrderDAO {
             }
             transaction.commit();
             result = true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
         return result;
@@ -249,7 +249,7 @@ public class OrderDAO {
                 Query query = session.createQuery("from Books where id="+bookid);
                 book = (Books) query.uniqueResult();
                 transaction.commit();
-        } catch (Exception e) {
+        } catch (Exception e) {transaction.rollback();
                 e.printStackTrace();
         }finally{
                 //session.close();
@@ -264,7 +264,7 @@ public class OrderDAO {
                 transaction = session.beginTransaction();
                 booksList = session.createQuery("from Orderssummary where centercode = '"+branchId+"'").list();
                 transaction.commit();
-        } catch (Exception e) {
+        } catch (Exception e) {transaction.rollback();
                 e.printStackTrace();
         }finally{
                 //session.close();

@@ -38,7 +38,7 @@ public class SmsDAO {
 					+ "AND contactnumber IS NOT NULL and contactnumber <> '' ");
 			totalNumbers = (long) query.uniqueResult();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		}
@@ -65,7 +65,7 @@ public class SmsDAO {
 
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 

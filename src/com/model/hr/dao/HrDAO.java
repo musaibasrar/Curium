@@ -50,7 +50,7 @@ public class HrDAO {
             transaction = session.beginTransaction();
             list = session.createQuery("From Leavetypemaster where branchid="+branchId).list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -66,7 +66,7 @@ public class HrDAO {
             session.save(leaveMaster);
             transaction.commit();
             return true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -81,7 +81,7 @@ public class HrDAO {
             session.delete(leaveType);
             transaction.commit();
             return true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -99,7 +99,7 @@ public class HrDAO {
 			}
             transaction.commit();
             return true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -115,7 +115,7 @@ public class HrDAO {
             transaction = session.beginTransaction();
             leaveDetailsList = session.createQuery("From Leavedetails where idteacher="+teacherId+" and academicyear='"+academicYear+"'").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -133,7 +133,7 @@ public class HrDAO {
             session.save(payHead);
             transaction.commit();
             return true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -149,7 +149,7 @@ public class HrDAO {
 			transaction = session.beginTransaction();
 			payHead = session.createQuery("from Payhead where academicyear='"+academicYear+"' and branchid="+branchId).list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -168,7 +168,7 @@ public class HrDAO {
 			}
 			transaction.commit();
 			return true;
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -185,7 +185,7 @@ public class HrDAO {
 				}
 				transaction.commit();
 				return true;
-			} catch (Exception e) {
+			} catch (Exception e) {transaction.rollback();
 				e.printStackTrace();
 			}finally{
 				//session.close();
@@ -199,7 +199,7 @@ public class HrDAO {
 			transaction = session.beginTransaction();
 			session.save(pf);
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -215,7 +215,7 @@ public class HrDAO {
 			transaction = session.beginTransaction();
 			pf = session.createQuery("From Pf where branchid = "+branchId+" order by date Desc").list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -231,7 +231,7 @@ public class HrDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}finally{
 			//session.close();
@@ -246,7 +246,7 @@ public class HrDAO {
 			session.save(payAdvanceSalary);
 			transaction.commit();
 			return true;
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -261,7 +261,7 @@ public class HrDAO {
 			transaction = session.beginTransaction();
 			payAdvanceSalary = session.createQuery("from Payadvancesalary where status='apply' and branchid = "+branchId).list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -277,7 +277,7 @@ public class HrDAO {
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -291,7 +291,7 @@ public class HrDAO {
             session.delete(payAdvance);
             transaction.commit();
             return true;
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) {transaction.rollback();
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -306,7 +306,7 @@ public class HrDAO {
 			transaction = session.beginTransaction();
 			payAdvanceSalary = session.createQuery("from Payadvancesalary where status='approved' or status='rejected' and branchid="+branchId).list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -321,7 +321,7 @@ public class HrDAO {
 			session.save(leaveApplication);
 			transaction.commit();
 			return true;
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -337,7 +337,7 @@ public class HrDAO {
 			transaction = session.beginTransaction();
 			listLeaveApplication = session.createQuery("from Leaveapplication where academicyear='"+currentAcademicYear+"' and branchid="+branchId).list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -355,7 +355,7 @@ public class HrDAO {
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -373,7 +373,7 @@ public class HrDAO {
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -395,7 +395,7 @@ public class HrDAO {
 			}
 			transaction.commit();
 			return true;
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -411,7 +411,7 @@ public class HrDAO {
 				transaction = session.beginTransaction();
 				payHead = session.createQuery("from Payhead where payheadtype='"+payHeadType+"' and academicyear='"+academicYear+"' and branchid="+branchId).list();
 				transaction.commit();
-			} catch (Exception e) {
+			} catch (Exception e) {transaction.rollback();
 				e.printStackTrace();
 			}finally{
 				//session.close();
@@ -429,7 +429,7 @@ public class HrDAO {
 			Query query = session.createSQLQuery("select * from Paybasic where idteacher = "+idteacher+" and academicyear='"+academicYear+"' ORDER BY idpaybasic DESC LIMIT 1").addEntity(Paybasic.class);
 			basicPay = (Paybasic) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -445,7 +445,7 @@ public class HrDAO {
 			transaction = session.beginTransaction();
 			payHeadStaffList = session.createQuery("from Payheadstaffdetails where idteacher = "+teacherid+" and academicyear='"+academicYear+"'").list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -462,7 +462,7 @@ public class HrDAO {
 			transaction = session.beginTransaction();
 			processSalaryDetails = session.createQuery("from Processsalarydetails where academicyear='"+academicYear+"' and branchid="+branchId).list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -479,7 +479,7 @@ public class HrDAO {
 			Query query = session.createQuery("from Processsalarydetails where idprocesssalarydetails="+processId+"");
 			processSalaryDetails = (Processsalarydetails) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -495,7 +495,7 @@ public class HrDAO {
 			transaction = session.beginTransaction();
 			processSalaryHeadsList = session.createQuery("from Processsalarydetailsheads where idprocesssalary="+processId+"").list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -512,7 +512,7 @@ public class HrDAO {
 			Query query = session.createQuery("from Processsalarydetailsheads where idprocesssalary="+processId+" and payheadname='Basic Pay'");
 			processSalaryHeads = (Processsalarydetailsheads) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -528,7 +528,7 @@ public class HrDAO {
 			transaction = session.beginTransaction();
 			PayHeadStaffDetailsList = session.createQuery("from Payheadstaffdetails where idteacher="+staffId+" and academicyear='"+academicYear+"'").list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -544,7 +544,7 @@ public class HrDAO {
 			transaction = session.beginTransaction();
 			processSalaryDetails = session.createQuery("from Processsalarydetails where teacherid="+teacherId+"").list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -562,7 +562,7 @@ public class HrDAO {
 			transaction.commit();
 			return true;
 			
-			} catch (HibernateException hibernateException) {
+			} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}finally{
 			//session.close();
@@ -579,7 +579,7 @@ public class HrDAO {
 			Query query = session.createQuery("from Processsalarydetails where teacherid="+staffId+" and month='"+month+"' and year='"+year+"'");
 			processSalaryDetails = (Processsalarydetails) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -596,7 +596,7 @@ public class HrDAO {
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
@@ -613,7 +613,7 @@ public class HrDAO {
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();

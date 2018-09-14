@@ -38,7 +38,7 @@ public class AdminDetailsDAO {
 
 			transaction.commit();
 			System.out.println("in add3");
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
@@ -64,7 +64,7 @@ public class AdminDetailsDAO {
 			System.out.println("Adminexpenses " + results.size());
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 
@@ -85,7 +85,7 @@ public class AdminDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 

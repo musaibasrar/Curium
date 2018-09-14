@@ -34,7 +34,7 @@ public class ExamDetailsDAO {
 
 			transaction.commit();
 			System.out.println("in add3");
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
@@ -57,7 +57,7 @@ public class ExamDetailsDAO {
 					.list();
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 
@@ -77,7 +77,7 @@ public class ExamDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 
@@ -94,7 +94,7 @@ public class ExamDetailsDAO {
 				}
 				transaction.commit();
 				return true;
-			} catch (Exception e) {
+			} catch (Exception e) {transaction.rollback();
 				e.printStackTrace();
 			}finally{
 				//session.close();
@@ -115,7 +115,7 @@ public class ExamDetailsDAO {
 			results = (List<Examschedule>) session.createQuery("From Examschedule").list();
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			transaction.rollback();
 			hibernateException.printStackTrace();
 
@@ -135,7 +135,7 @@ public class ExamDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}finally{
 			//session.close();
@@ -148,16 +148,18 @@ public class ExamDetailsDAO {
 		List<Examschedule> listExamSchedule = new ArrayList<Examschedule>();
 		try {
 			transaction = session.beginTransaction();
-			if(!centerCode.equalsIgnoreCase("")) {
-			    listExamSchedule = session.createQuery("from Examschedule where examname = '"+exam+"' and academicyear = '"+academicYear+"' and centercode like '%,"+centerCode+",%' ORDER BY date ASC").list();
-			}else {
-			    Query query = session.createQuery("from Branch where idbranch="+branchId);
-			    Branch branch = (Branch) query.uniqueResult();
-			   listExamSchedule = session.createQuery("from Examschedule where examname = '"+exam+"-%' and academicyear = '"+academicYear+"' and  centercode like '%,"+branch.getCentercode()+",%' ORDER BY date ASC").list();
-			}
 			
+			//listExamSchedule = session.createQuery("from Examschedule where examname = '"+exam+"' and academicyear = '"+academicYear+"' and centercode like '%|"+centerCode+"' ORDER BY date ASC").list();
+			
+			if(centerCode.equalsIgnoreCase("00")) {
+			    listExamSchedule = session.createQuery("from Examschedule where examname = '"+exam+"' and academicyear = '"+academicYear+"' ORDER BY date ASC").list();
+			}else {
+			    /*Query query = session.createQuery("from Branch where idbranch="+branchId);
+			    Branch branch = (Branch) query.uniqueResult();*/
+			   listExamSchedule = session.createQuery("from Examschedule where examname = '"+exam+"' and academicyear = '"+academicYear+"' and  centercode like '%|"+centerCode+"%' ORDER BY date ASC").list();
+			}
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
 		}finally{
 			//session.close();
