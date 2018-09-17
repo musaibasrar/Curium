@@ -351,12 +351,9 @@ public class studentDetailsDAO {
 	public void addStudentfeesstructure(List<Studentfeesstructure> listOfstudentfeesstructure, String currentYear) {
 		try {
 			// this.session = sessionFactory.openCurrentSession();
-			
+		        transaction = session.beginTransaction();
 			
 			for (Studentfeesstructure studentfeesstructure : listOfstudentfeesstructure) {
-					
-				transaction = session.beginTransaction();
-
 					Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.Feescategory.idfeescategory = '"+studentfeesstructure.getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
 					Studentfeesstructure feesStructure = (Studentfeesstructure) query.uniqueResult();
 					if(feesStructure != null){
