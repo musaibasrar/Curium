@@ -42,7 +42,6 @@ public class PrintIdsDAO {
 	                    parentsDetails = (Parents) query.uniqueResult();
 	            transaction.commit();
 	        } catch (HibernateException hibernateException) {transaction.rollback();
-	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } 	      
 	        return parentsDetails;

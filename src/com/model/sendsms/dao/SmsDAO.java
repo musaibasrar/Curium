@@ -39,7 +39,6 @@ public class SmsDAO {
 			totalNumbers = (long) query.uniqueResult();
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 		// //session.close();
@@ -66,7 +65,6 @@ public class SmsDAO {
 			transaction.commit();
 
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 
 		} finally {

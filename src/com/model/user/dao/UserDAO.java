@@ -73,7 +73,6 @@ public class UserDAO {
 	            transaction.commit();
 
 	        } catch (HibernateException hibernateException) {transaction.rollback();
-	            transaction.rollback();
 	            hibernateException.printStackTrace();
 
 	        } finally {
@@ -98,7 +97,6 @@ public class UserDAO {
 
 
 	        } catch (HibernateException hibernateException) {transaction.rollback();
-	            transaction.rollback();
 	            hibernateException.printStackTrace();
 
 	        } finally {
@@ -131,7 +129,6 @@ public class UserDAO {
             session.update(login);
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -150,7 +147,6 @@ public class UserDAO {
             feesDetails = (java.util.List<Feesdetails>) HQLquery.list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         }
         //session.close();
@@ -168,7 +164,6 @@ public class UserDAO {
             feesDetails = (java.util.List<Receiptinfo>) HQLquery.list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         }
         //session.close();
@@ -183,7 +178,6 @@ public class UserDAO {
             transaction.commit();
            return true;
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -201,7 +195,6 @@ public class UserDAO {
             user = (Login) query.uniqueResult();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -217,7 +210,6 @@ public class UserDAO {
             loginList = session.createQuery("FROM Login").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();

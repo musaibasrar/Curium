@@ -43,7 +43,6 @@ public class SubjectDetailsDAO {
 					.list();
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			 //session.close();
@@ -64,7 +63,6 @@ public class SubjectDetailsDAO {
                         }
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			//session.close();

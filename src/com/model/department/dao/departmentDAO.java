@@ -44,7 +44,6 @@ public class departmentDAO {
             transaction.commit();
             
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -63,7 +62,6 @@ public class departmentDAO {
             results = (List<Department>) session.createQuery("From Department where branchid="+branchId).list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();

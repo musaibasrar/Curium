@@ -49,7 +49,6 @@ public class OrderDAO {
             transaction.commit();
             result = true;
     } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
     } finally {
             //session.close();
@@ -109,7 +108,6 @@ public class OrderDAO {
             transaction.commit();
             result = true;
     } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
     } finally {
             //session.close();
@@ -203,7 +201,6 @@ public class OrderDAO {
                 orderList = (java.util.List<Orderssummary>) HQLquery.list();
                 transaction.commit();
             } catch (HibernateException hibernateException) {transaction.rollback();
-                transaction.rollback();
                 hibernateException.printStackTrace();
             }
             return orderList;

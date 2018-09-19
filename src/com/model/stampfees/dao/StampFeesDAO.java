@@ -78,7 +78,6 @@ public class StampFeesDAO {
 
 
 	        } catch (HibernateException hibernateException) {transaction.rollback();
-	            transaction.rollback();
 	            hibernateException.printStackTrace();
 
 	        } finally {
@@ -104,7 +103,6 @@ public class StampFeesDAO {
 
 
 	        } catch (HibernateException hibernateException) {transaction.rollback();
-	            transaction.rollback();
 	            hibernateException.printStackTrace();
 
 	        } finally {
@@ -123,7 +121,6 @@ public class StampFeesDAO {
             parents = (java.util.List<Parents>) HQLquery.list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         }
         //session.close();
@@ -158,7 +155,6 @@ public class StampFeesDAO {
 			transaction.commit();
 			System.out.println("in add3");
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			//session.close();

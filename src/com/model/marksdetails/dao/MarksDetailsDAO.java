@@ -38,7 +38,6 @@ public class MarksDetailsDAO {
 			transaction.commit();
 			
 		}  catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} 
 		finally {
@@ -63,7 +62,6 @@ public class MarksDetailsDAO {
 			results = query.list();
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			 //session.close();
@@ -85,7 +83,6 @@ public class MarksDetailsDAO {
 				results = query.list();
 				transaction.commit();
 			} catch (HibernateException hibernateException) {transaction.rollback();
-				transaction.rollback();
 				hibernateException.printStackTrace();
 			} finally {
 				 //session.close();
@@ -107,9 +104,6 @@ public class MarksDetailsDAO {
 	        
 				transaction.commit();
 				
-			}  catch (HibernateException hibernateException) {transaction.rollback();
-				transaction.rollback();
-				hibernateException.printStackTrace();
 			} catch (Exception e) {transaction.rollback();
 				e.printStackTrace();
 			}
@@ -144,7 +138,6 @@ public class MarksDetailsDAO {
 				results = query.list();
 				transaction.commit();
 			} catch (HibernateException hibernateException) {transaction.rollback();
-				transaction.rollback();
 				hibernateException.printStackTrace();
 			} finally {
 				 //session.close();
@@ -162,7 +155,6 @@ public class MarksDetailsDAO {
                     marks = (Marks) query.uniqueResult();
                     transaction.commit();
             } catch (HibernateException hibernateException) {transaction.rollback();
-                    transaction.rollback();
                     hibernateException.printStackTrace();
             } finally {
                      //session.close();
@@ -185,9 +177,6 @@ public class MarksDetailsDAO {
     
                     transaction.commit();
                     
-            }  catch (HibernateException hibernateException) {transaction.rollback();
-                    transaction.rollback();
-                    hibernateException.printStackTrace();
             } catch (Exception e) {transaction.rollback();
                     e.printStackTrace();
             }

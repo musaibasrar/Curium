@@ -35,7 +35,6 @@ public class ExamDetailsDAO {
 			transaction.commit();
 			System.out.println("in add3");
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			//session.close();
@@ -58,7 +57,6 @@ public class ExamDetailsDAO {
 			transaction.commit();
 
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 
 		} finally {
@@ -116,7 +114,6 @@ public class ExamDetailsDAO {
 			transaction.commit();
 
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 
 		} finally {

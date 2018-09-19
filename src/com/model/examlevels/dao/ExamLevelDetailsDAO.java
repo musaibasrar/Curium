@@ -47,7 +47,6 @@ public class ExamLevelDetailsDAO {
             results = (List<Examleveldetails>) session.createQuery("From Examleveldetails").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -78,7 +77,6 @@ public class ExamLevelDetailsDAO {
             transaction.commit();
             result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -136,7 +134,6 @@ public class ExamLevelDetailsDAO {
             results = (List<Subexamlevel>) session.createQuery("From Subexamlevel where examlevel='"+examLevel+"'").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -156,7 +153,6 @@ public class ExamLevelDetailsDAO {
             results = (List<Examleveldetails>) session.createQuery("From Examleveldetails where levelcode='"+examLevel+"'").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();

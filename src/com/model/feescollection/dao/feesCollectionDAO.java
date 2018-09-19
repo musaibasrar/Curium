@@ -46,7 +46,6 @@ public class feesCollectionDAO {
 	            result = true;
 			 
 		} catch (HibernateException hibernateException) {transaction.rollback();
-	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
 	            //session.close();
@@ -65,7 +64,6 @@ public class feesCollectionDAO {
 			
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			// //session.close();
@@ -82,7 +80,6 @@ public class feesCollectionDAO {
 			
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			// //session.close();
@@ -97,7 +94,6 @@ public class feesCollectionDAO {
 			 session.save(receiptInfo);
 			 transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
 	            //session.close();
@@ -115,7 +111,6 @@ public class feesCollectionDAO {
 			 receiptDetails = (Receiptinfo) query.uniqueResult();
 			 transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
 	           // //session.close();

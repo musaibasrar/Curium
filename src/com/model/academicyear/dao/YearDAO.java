@@ -40,7 +40,7 @@ public class YearDAO {
 			transaction.commit();
 			
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
+			
 			error=hibernateException.getMessage();
 		} finally {
 			//session.close();
@@ -62,7 +62,6 @@ public class YearDAO {
 			currentacademicyear = (Currentacademicyear) query.uniqueResult();
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 		// //session.close();

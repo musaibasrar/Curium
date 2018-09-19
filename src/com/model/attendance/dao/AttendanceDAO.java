@@ -48,7 +48,6 @@ public class AttendanceDAO {
 			holidayMaster = session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"' and branchid="+branchId).list();
 			transaction.commit();
 		}catch (Exception e) {transaction.rollback();
-			transaction.rollback();
 		} finally {
 			//session.close();
 		}
@@ -64,7 +63,6 @@ public class AttendanceDAO {
 			return true;
 
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			//session.close();
@@ -80,7 +78,6 @@ public class AttendanceDAO {
 			return true;
 
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			//session.close();
@@ -97,7 +94,6 @@ public class AttendanceDAO {
 			transaction.commit();
 			return true;
 		}catch (HibernateException e) {transaction.rollback();
-			transaction.rollback();
 			e.printStackTrace();
 		} finally {
 			//session.close();
@@ -170,7 +166,6 @@ public class AttendanceDAO {
 			holidayMaster = query.list();
 			transaction.commit();
 		}catch (Exception e) {transaction.rollback();
-			transaction.rollback();
 		} finally {
 			//session.close();
 		}
@@ -188,7 +183,6 @@ public class AttendanceDAO {
 			holidayMaster = query.list();
 			transaction.commit();
 		}catch (Exception e) {transaction.rollback();
-			transaction.rollback();
 		} finally {
 			//session.close();
 		}

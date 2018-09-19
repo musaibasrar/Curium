@@ -45,7 +45,6 @@ public class QualificationDAO {
             results = (List<Qualification>) session.createQuery("From Qualification").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -76,7 +75,6 @@ public class QualificationDAO {
             transaction.commit();
             result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();

@@ -34,7 +34,6 @@ public class parentsDetailsDAO {
 	            transaction.commit();
 	           
 	        } catch (HibernateException hibernateException) {transaction.rollback();
-	            transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
 	            //session.close();
@@ -52,7 +51,6 @@ public class parentsDetailsDAO {
             parents = (Parents) query.uniqueResult();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         }
         //session.close();
@@ -69,7 +67,6 @@ public class parentsDetailsDAO {
             transaction.commit();
             System.out.println("in update parents");
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();

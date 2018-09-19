@@ -41,7 +41,6 @@ public class EmployeeDAO {
 			transaction.commit();
 			result = true;
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			//session.close();
@@ -60,7 +59,6 @@ public class EmployeeDAO {
 					.list();
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			//session.close();
@@ -79,7 +77,6 @@ public class EmployeeDAO {
 					.list();
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			//session.close();
@@ -98,7 +95,6 @@ public class EmployeeDAO {
 			employee = (Teacher) query.uniqueResult();
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} 
 
@@ -113,7 +109,6 @@ public class EmployeeDAO {
             transaction.commit();
             
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -147,7 +142,6 @@ public class EmployeeDAO {
 			noOfRecords = results.size();
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
 			 //session.close();
@@ -205,7 +199,6 @@ public class EmployeeDAO {
             transaction.commit();
             
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -222,7 +215,6 @@ public class EmployeeDAO {
 			employee = (Teacher) query.uniqueResult();
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		} 
 		return employee;
@@ -236,7 +228,6 @@ public class EmployeeDAO {
                 transaction.commit();
                 result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
-                transaction.rollback();
                 hibernateException.printStackTrace();
         } finally {
                 //session.close();
@@ -254,7 +245,6 @@ public class EmployeeDAO {
                                 .list();
                 transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-                transaction.rollback();
                 hibernateException.printStackTrace();
         } finally {
                 //session.close();
@@ -272,7 +262,6 @@ public class EmployeeDAO {
                 orgDetails = (Organizersdetails) query.uniqueResult();
                 transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-                transaction.rollback();
                 hibernateException.printStackTrace();
         } 
 
@@ -287,7 +276,6 @@ public class EmployeeDAO {
     transaction.commit();
     
 } catch (HibernateException hibernateException) {transaction.rollback();
-    transaction.rollback();
     hibernateException.printStackTrace();
 } finally {
     //session.close();

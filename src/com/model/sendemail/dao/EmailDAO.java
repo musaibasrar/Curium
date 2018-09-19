@@ -40,7 +40,6 @@ public class EmailDAO {
 			totalNumbers = (long) query.uniqueResult();
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 		}
 		// //session.close();
@@ -69,7 +68,6 @@ public class EmailDAO {
 			
 
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			transaction.rollback();
 			hibernateException.printStackTrace();
 
 		} finally {

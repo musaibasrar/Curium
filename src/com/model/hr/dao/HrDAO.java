@@ -51,7 +51,6 @@ public class HrDAO {
             list = session.createQuery("From Leavetypemaster where branchid="+branchId).list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -67,7 +66,6 @@ public class HrDAO {
             transaction.commit();
             return true;
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -82,7 +80,6 @@ public class HrDAO {
             transaction.commit();
             return true;
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -100,7 +97,6 @@ public class HrDAO {
             transaction.commit();
             return true;
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -116,7 +112,6 @@ public class HrDAO {
             leaveDetailsList = session.createQuery("From Leavedetails where idteacher="+teacherId+" and academicyear='"+academicYear+"'").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -134,7 +129,6 @@ public class HrDAO {
             transaction.commit();
             return true;
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -292,7 +286,6 @@ public class HrDAO {
             transaction.commit();
             return true;
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();

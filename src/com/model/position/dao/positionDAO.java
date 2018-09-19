@@ -41,7 +41,6 @@ public class positionDAO {
             transaction.commit();
             
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -59,7 +58,6 @@ public class positionDAO {
             results = (List<Position>) session.createQuery("From Position where branchid = "+branchId).list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();

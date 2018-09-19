@@ -40,7 +40,7 @@ public class BranchDAO {
             transaction = session.beginTransaction();
             results = (List<Branch>) session.createQuery("From Branch order by centercode ASC").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {transaction.rollback();
+        } catch (HibernateException hibernateException) {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -57,7 +57,6 @@ public class BranchDAO {
             results = (List<Districts>) session.createQuery("From Districts").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -73,7 +72,6 @@ public class BranchDAO {
             transaction.commit();
             result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -142,6 +140,7 @@ public class BranchDAO {
         return result;
     }
 
+    @SuppressWarnings("finally")
     public boolean addBranches(Branch branch) {
         boolean result = false;
         try {
@@ -150,7 +149,6 @@ public class BranchDAO {
             transaction.commit();
             result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -167,7 +165,6 @@ public class BranchDAO {
             results = (Branch) query.uniqueResult();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -183,7 +180,6 @@ public class BranchDAO {
             results = (Branch) query.uniqueResult();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -199,7 +195,6 @@ try {
     results = (List<Branch>) session.createQuery("From Branch where idbranch ="+branchId+" order by centercode ASC").list();
     transaction.commit();
 } catch (HibernateException hibernateException) {transaction.rollback();
-    transaction.rollback();
     hibernateException.printStackTrace();
 } finally {
     //session.close();
@@ -216,7 +211,6 @@ try {
             distList = (List<Districts>) session.createQuery("From Districts where districtname ='"+district.getDistrictname()+"'").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -236,7 +230,6 @@ try {
                 branchList = (List<Branch>) session.createQuery("From Branch where centercode ='"+branch.getCentercode()+"'").list();
                 transaction.commit();
             } catch (HibernateException hibernateException) {transaction.rollback();
-                transaction.rollback();
                 hibernateException.printStackTrace();
             } finally {
                 //session.close();
@@ -256,7 +249,6 @@ try {
                     distList = (List<Districts>) session.createQuery("From Districts where districtcode = '"+districtcode+"'").list();
                     transaction.commit();
                 } catch (HibernateException hibernateException) {transaction.rollback();
-                    transaction.rollback();
                     hibernateException.printStackTrace();
                 } finally {
                     //session.close();
@@ -275,7 +267,6 @@ try {
               dist = (Branch) query.uniqueResult();
               transaction.commit();
           } catch (HibernateException hibernateException) {transaction.rollback();
-              transaction.rollback();
               hibernateException.printStackTrace();
           } finally {
               //session.close();

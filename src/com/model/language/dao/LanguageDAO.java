@@ -43,7 +43,7 @@ public class LanguageDAO {
             transaction = session.beginTransaction();
             results = (List<Language>) session.createQuery("From Language").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {transaction.rollback();
+        } catch (HibernateException hibernateException) {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
@@ -60,7 +60,6 @@ public class LanguageDAO {
             transaction.commit();
             result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();

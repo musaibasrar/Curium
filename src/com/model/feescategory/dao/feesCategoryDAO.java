@@ -40,7 +40,6 @@ public class feesCategoryDAO {
             results = (List<Feescategory>) session.createQuery("From Feescategory where branchid="+branchId).list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -59,7 +58,6 @@ public class feesCategoryDAO {
             transaction.commit();
             
         } catch (HibernateException hibernateException) {transaction.rollback();
-            transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
             //session.close();
