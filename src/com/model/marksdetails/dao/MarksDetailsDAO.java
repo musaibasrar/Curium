@@ -7,6 +7,7 @@ import java.util.Map;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 
 import com.model.marksdetails.dto.Marks;
@@ -21,31 +22,30 @@ public class MarksDetailsDAO {
 		session=HibernateUtil.openCurrentSession();
 	}
 
-	public String addMarks(List<Marks> marksList) {
+	@SuppressWarnings("finally")
+    public String addMarks(List<Marks> marksList) {
 		
 		boolean result = false;	
 		String output = "success";
 		
 		try{
 			transaction = session.beginTransaction();
-			
 			for (Marks marks : marksList) {
-				
 				session.save(marks);
-				
 			}
-			
 			transaction.commit();
-			
-		}  catch (HibernateException hibernateException) {transaction.rollback();
-			hibernateException.printStackTrace();
-		} 
+		}  catch(ConstraintViolationException  e){                                                       
+		    transaction.rollback();
+		    output = "Duplicate";
+                }  catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+                   
+            }
 		finally {
 			//session.close();
 			return output;
 		}
-		
-		
 	}
 
 	public List<Marks> readListOfMarks(List<Integer> ids) {

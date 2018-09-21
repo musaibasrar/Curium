@@ -365,18 +365,21 @@
 		var examLevel = document.getElementById("examlevel").value;
 		var language = document.getElementById("languageopted").value;
 		
-		if(centerCode!=""  || examLevel!="" || language!="" ){
-			var form1 = document.getElementById("form1");
-			form1.action = "Controller?process=StudentProcess&action=searchQuestionPaperDetails";
-			form1.method = "POST";
-			form1.submit();
-		}else{
-			alert('Enter atleast one filter criteria');
-			var form1 = document.getElementById("form1");
-			form1.action = "Controller?process=StudentProcess&action=questionPaperSet";
-			form1.method = "POST";
-			form1.submit();
-		}
+		var form1 = document.getElementById("form1");
+		if(form1.checkValidity()) {
+			if(centerCode!=""  || examLevel!="" || language!="" ){
+				form1.action = "Controller?process=StudentProcess&action=searchQuestionPaperDetails";
+				form1.method = "POST";
+				form1.submit();
+			}else{
+				alert('Enter atleast one filter criteria');
+				form1.action = "Controller?process=StudentProcess&action=questionPaperSet";
+				form1.method = "POST";
+				form1.submit();
+			}
+		  }
+		
+
 	}
 
 	function printQuestionPaperSet() {
@@ -608,7 +611,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="examlevel" id="examlevel"
+										<select name="examlevel" id="examlevel" required
 									style="width: 240px;">
 										<option selected></option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">

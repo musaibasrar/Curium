@@ -90,7 +90,7 @@
 }
 
 .datatd, .datath {
-    border: 1px solid #dddddd;
+    border: 1px solid #000000;
     text-align: left;
     padding: 5px;
     width: 10%;
@@ -170,10 +170,10 @@
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
+             margin-bottom: 1cm;
+             margin-top: 1cm;
         }
 
         @media screen {

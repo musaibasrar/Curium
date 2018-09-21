@@ -185,9 +185,7 @@ public class AccountDAO {
 	}
 
 	public List<Accountdetailsbalance> getAccountdetailsbalance() {
-
 		List<Accountdetailsbalance> accountDetails = new ArrayList<Accountdetailsbalance>();
-		
 		try{
 			transaction = session.beginTransaction();
 			accountDetails = session.createQuery("from Accountdetailsbalance").list();
@@ -197,7 +195,6 @@ public class AccountDAO {
 		}finally{
 			//session.close();
 		}
-		
 		return accountDetails;
 	}
 	

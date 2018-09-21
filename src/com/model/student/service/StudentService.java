@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -659,7 +660,7 @@ public class StudentService {
 	          	            
 	            if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
 	                if(subQuery!=null) {
-	                    subQuery = subQuery+"AND student.examlevel = '"+request.getParameter("examlevel")+"'";
+	                    subQuery = subQuery+" AND student.examlevel = '"+request.getParameter("examlevel")+"'";
 	                }else {
 	                    subQuery = "student.examlevel = '"+request.getParameter("examlevel")+"'";
 	                }
@@ -673,7 +674,7 @@ public class StudentService {
 	                }
 	            }
 	            
-	            searchQuery = searchQuery+subQuery;
+	            searchQuery = searchQuery+subQuery+" Order by student.admissionnumber ASC";
 	            List<Student> studentList = new studentDetailsDAO().getListStudents(searchQuery);
 	            request.setAttribute("studentList", studentList);
 	     
@@ -685,11 +686,13 @@ public class StudentService {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String classStudying = request.getParameter("classstudying");
 		boolean result = false;
-		List ids = new ArrayList();
+		List ids = new LinkedList<Integer>();
+		List admNo = new LinkedList<String>(); 
 		for (String id : studentIds) {
 			System.out.println("id" + id);
-			ids.add(Integer.valueOf(id));
-
+			String[] idAdmNo = id.split("~");
+			ids.add(Integer.valueOf(idAdmNo[0]));
+			admNo.add(idAdmNo[1]);    
 		}
 		System.out.println("id length" + studentIds.length);
 		if (new studentDetailsDAO().promoteMultiple(ids, classStudying)) {
@@ -789,7 +792,7 @@ public class StudentService {
 				querySub = querySub + " parents.Student.classstudying like '" + classStudying + "' ";
 			}
 
-			queryMain = queryMain + querySub;
+			queryMain = queryMain + querySub + " Order By parent.Student.admissionnumber ASC";
 			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 			request.setAttribute("searchStudentList", searchStudentList);
 		}
@@ -1079,9 +1082,9 @@ public class StudentService {
             }
 
             
-            searchQuery = searchQuery+subQuery;
+            searchQuery = searchQuery+subQuery+" Order By parent.Student.admissionnumber ASC";
             List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
-            Map<Parents,String> mapStudentReports = new HashMap<Parents,String>();
+            Map<Parents,String> mapStudentReports = new LinkedHashMap<Parents,String>();
             
             for (Parents parents : parentsList) {
                 Branch centerName = new BranchDAO().getBranch(parents.getStudent().getCentercode());
@@ -1152,7 +1155,7 @@ public class StudentService {
                      int englishCount =0, urduCount=0, hindiCount=0, kannadaCount = 0;
                      
                      parentsList = new studentDetailsDAO().getStudentsList("From Parents parents where "
-                             + "parents.Student.examlevel='"+request.getParameter("examlevel").toString()+"' and parents.Student.centercode='"+eachBranch.getCentercode()+"'");
+                             + "parents.Student.examlevel='"+request.getParameter("examlevel").toString()+"' and parents.Student.centercode='"+eachBranch.getCentercode()+"'  Order By parents.Student.admissionnumber ASC");
                     
                      for (Parents singleParents : parentsList) {
                              if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("English")) {
@@ -1232,7 +1235,8 @@ public class StudentService {
         List ids = new ArrayList();
         for (String id : studentIds) {
                 System.out.println("id" + id);
-                ids.add(Integer.valueOf(id));
+                String[] idAdmNo = id.split("~");
+                ids.add(Integer.valueOf(idAdmNo[0]));
 
         }
         if (new studentDetailsDAO().graduateMultiple(ids)) {
@@ -1248,7 +1252,8 @@ public class StudentService {
         List ids = new ArrayList();
         for (String id : studentIds) {
                 System.out.println("id" + id);
-                ids.add(Integer.valueOf(id));
+                String[] idAdmNo = id.split("~");
+                ids.add(Integer.valueOf(idAdmNo[0]));
 
         }
         System.out.println("id length" + studentIds.length);
@@ -1412,7 +1417,7 @@ public class StudentService {
                      subQuery = subQuery+" AND parent.Student.religion = '"+request.getParameter("religion")+"'";
                      httpSession.setAttribute("printreligion", "Religion: "+request.getParameter("religion").toString());
              }
-             searchQuery = searchQuery+subQuery;
+             searchQuery = searchQuery+subQuery+" Order By parent.Student.admissionnumber ASC";
              List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
              Map<Parents,String> mapStudentReports = new HashMap<Parents,String>();
              

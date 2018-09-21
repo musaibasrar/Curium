@@ -150,10 +150,10 @@ span{
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
+             margin-bottom: 1cm;
+             margin-top: 1cm;
         }
 
         @media screen {
@@ -183,6 +183,19 @@ span{
     		text-align: right;
    		    padding: 8px;
         }
+        
+        .datatable {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.datatd, .datath {
+    border: 1px solid #000000;
+    text-align: left;
+    padding: 8px;
+}
+
     </style>
 	
         <title>Print Hall Ticket</title>
@@ -262,40 +275,31 @@ for(Cookie cookie : cookies){
 
 			<table style=" border-collapse: collapse;width: 100%;">
 							<tr>   
-                                <td class="namedetails"><label>Admission No:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.admissionnumber}"/></label></td>
-                                <td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
-									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td>
+                                <td class="namedetails"><label>Admission No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.admissionnumber}"/></label></td>
+                                <td class="namedetails"><label>Language Opted.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.languageopted}"/></label></td>
                             </tr>
                             				
                             <tr style="border-color:#000000">
-                                <td class="namedetails"><label>Exam Code/Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${examcodename}"/></label></td>
-                                <td class="namedetails"><label>Center Code/Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${centercodename}"/></label></td>
+                                <td class="namedetails">
+                                <label>Candidate Name :&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.name}"/></label>
+                            	</td>
+                                <td class="namedetails"><label>Center Code/Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${centercodename}"/></label></td>
                              </tr>
                              
                              <tr style="border-color:#000000">
-                                <td class="namedetails"><label>Language Opted.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.languageopted}"/></label></td>
-                             </tr> 
-                             
-                             
-                             <tr style="border-color:#000000">
-                                <td class="namedetails"><label>Candidate Name :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.name}"/></label></td>
-                             	
-                             	<c:if test="${(Parents.student.guardiandetails != '')}">
-                                <td class="namedetails"><label>Guardian Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.guardiandetails}"/></label></td>
+                                <c:if test="${(Parents.student.guardiandetails != '')}">
+                                <td class="namedetails"><label>Guardian Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.guardiandetails}"/></label></td>
                                 </c:if>
 
 							<c:if test="${(Parents.fathersname != '')}">
-                                <td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.fathersname}"/></label></td>
+                                <td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.fathersname}"/></label></td>
 							</c:if>
 							
 							<c:if test="${(Parents.mothersname != '')}">
-                                <td class="namedetails"><label>Husband's Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.mothersname}"/></label></td>
+                                <td class="namedetails"><label>Husband's Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.mothersname}"/></label></td>
 							</c:if>	
-                             
-                             </tr>                            
-
-																                                	
+                                <td class="namedetails"><label>Exam Code/Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${examcodename}"/></label></td>
+                             </tr>
                              
                             <tr>
                             <td><br></td>

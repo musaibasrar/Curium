@@ -297,7 +297,7 @@ public class UserService {
 				querySub = querySub + " parents.Student.remarks like '%"+remarks+"%'";
 			}
 			
-			queryMain = queryMain+querySub+" AND parents.Student.archive=0";
+			queryMain = queryMain+querySub+" AND parents.Student.archive=0  Order By parents.Student.admissionnumber ASC";
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
 			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);

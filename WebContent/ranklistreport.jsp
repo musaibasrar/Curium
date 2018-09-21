@@ -411,9 +411,11 @@
 	
 	function searchRankListReport() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StudentProcess&action=searchRankListReport";
-		form1.method = "POST";
-		form1.submit();
+		if(form1.checkValidity()) {
+			form1.action = "Controller?process=StudentProcess&action=searchRankListReport";
+			form1.method = "POST";
+			form1.submit();
+		  }
 	}
 	
 	$(function() {
@@ -529,7 +531,7 @@ for(Cookie cookie : cookies){
 								</tr>
 						<tr>
 							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
-							<td width="12%" align="left"><label> <select name="centercode" id="centercode" required
+							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
 									style="width: 240px;">
 										<option selected></option>
 										<c:forEach items="${branchList}" var="branchlist">
@@ -570,7 +572,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Language &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="languageopted" id="languageopted"
+										<select name="languageopted" id="languageopted" required
 									style="width: 240px;">
 										<option selected></option>
 										<c:forEach items="${languageslist}" var="languageslist">
@@ -590,7 +592,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Qualification &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="qualification" id="qualification"
+										<select name="qualification" id="qualification" required
 									style="width: 240px;">
 										<option selected></option>
 										<c:forEach items="${qualificationlist}" var="qualificationlist">

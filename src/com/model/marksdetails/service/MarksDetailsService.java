@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -180,9 +181,9 @@ public class MarksDetailsService {
 		                httpSession.setAttribute("printlanguage", "Language: "+request.getParameter("languageopted").toString());
 		            }
 		            
-		            searchQuery = searchQuery+subQuery;
+		            searchQuery = searchQuery+subQuery+ " Order By parent.Student.admissionnumber ASC";
 		            List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
-		            Map<Parents,String> mapStudentReports = new HashMap<Parents,String>();
+		            Map<Parents,String> mapStudentReports = new LinkedHashMap<Parents,String>();
 		            
 		            for (Parents parents : parentsList) {
 		                Branch centerName = new BranchDAO().getBranch(parents.getStudent().getCentercode());
@@ -235,9 +236,9 @@ public class MarksDetailsService {
 	                                httpSession.setAttribute("printlanguage", "Language: "+request.getParameter("languageopted").toString());
 	                            }
 	                            
-	                            searchQuery = searchQuery+subQuery;
+	                            searchQuery = searchQuery+subQuery+" Order By parent.Student.admissionnumber ASC";
 	                            List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
-	                            Map<Parents,String> mapStudentReports = new HashMap<Parents,String>();
+	                            //Map<Parents,String> mapStudentReports = new HashMap<Parents,String>();
 	                            
 		
 		List<Examleveldetails> examLevelDetails = new ExamLevelService(request, response).getExamLevelDetails(examLevel);
@@ -248,7 +249,7 @@ public class MarksDetailsService {
                 
 		List<Parents> newStudentList = new ArrayList<Parents>();
 		List<Marks> newMarksDetails = new ArrayList<Marks>();
-		Map<Parents,Marks> marksStudentMap = new HashMap<Parents,Marks>();
+		Map<Parents,Marks> marksStudentMap = new LinkedHashMap<Parents,Marks>();
 		
 		for (Parents parents : parentsList) {
 		        

@@ -411,9 +411,12 @@
 	
 	function searchResultReport() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StudentProcess&action=searchResultReport";
-		form1.method = "POST";
-		form1.submit();
+		if(form1.checkValidity()) {
+			form1.action = "Controller?process=StudentProcess&action=searchResultReport";
+			form1.method = "POST";
+			form1.submit();
+		  }
+		
 	}
 	
 	$(function() {

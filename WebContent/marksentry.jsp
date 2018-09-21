@@ -360,10 +360,11 @@
 <script type="text/javascript">
 	function searchForMarks() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MarksDetailsProcess&action=search";
-		form1.method = "POST";
-		form1.submit();
-
+		if(form1.checkValidity()) {
+			form1.action = "Controller?process=MarksDetailsProcess&action=search";
+			form1.method = "POST";
+			form1.submit();
+		  }
 	}
 
 	$(function() {
@@ -376,14 +377,8 @@
 	});
 
 	$(function() {
-
 		$("#tabs").tabs();
-
-		$("#save").button().click(function() {
-			addDepartment();
-		});
 		/* $("#effect").hide(); */
-
 	});
 	
 	$(function() {

@@ -200,7 +200,7 @@ public class ResultService {
              if(!request.getParameter("examlevelcode").equalsIgnoreCase("")) {
                  String[] examLevelCode = examLevel.split(":");
                  if(subQuery!=null) {
-                     subQuery = subQuery+"AND parent.Student.examlevel = '"+examLevelCode[0]+"'";
+                     subQuery = subQuery+" AND parent.Student.examlevel = '"+examLevelCode[0]+"'";
                  }else {
                      subQuery = "parent.Student.examlevel = '"+examLevelCode[0]+"'";
                  }
@@ -209,7 +209,7 @@ public class ResultService {
              if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
                  language = request.getParameter("languageopted");
                  if(subQuery!=null) {
-                     subQuery = subQuery+"AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+                     subQuery = subQuery+" AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                  }else {
                      subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                  }
@@ -218,7 +218,7 @@ public class ResultService {
 
              if(!request.getParameter("qualification").equalsIgnoreCase("")) {
                  if(subQuery!=null) {
-                     subQuery = subQuery+"AND parent.Student.qualification = '"+request.getParameter("qualification")+"'";
+                     subQuery = subQuery+" AND parent.Student.qualification = '"+request.getParameter("qualification")+"'";
                  }else {
                      subQuery = "parent.Student.qualification = '"+request.getParameter("qualification")+"'";
                  }
@@ -285,7 +285,12 @@ public class ResultService {
              httpSession.setAttribute("resultsubexamlevel", subList);
              String[] centerCodeName = DataUtil.emptyString(request.getParameter("centercode")).split(":");
              String[] examLevelCodeName = DataUtil.emptyString(request.getParameter("examlevelcode")).split(":");
-             httpSession.setAttribute("resultcentername",  "Center Code/Name:  "+centerCodeName[0]+"/"+centerCodeName[1]);
+             if(!"".equalsIgnoreCase(centerCodeName[0])) {
+                 httpSession.setAttribute("resultcentername",  "Center Code/Name:  "+centerCodeName[0]+"/"+centerCodeName[1]);
+             }else {
+                 httpSession.setAttribute("resultcentername",  "Center Code/Name:  ALL");
+             }
+             
              httpSession.setAttribute("resultexamlevel", "Examination Code:  "+examLevelCodeName[0]);
              if(language==null) {
                  language = "ALL";

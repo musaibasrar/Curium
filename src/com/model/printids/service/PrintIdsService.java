@@ -84,7 +84,7 @@ public class PrintIdsService {
 						+ classStudying + "' AND parents.Student.archive=0 and parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
 			}
 
-			queryMain = queryMain + querySub;
+			queryMain = queryMain + querySub + " Order By parents.Student.admissionnumber ASC";
 			/*
 			 * queryMain =
 			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"

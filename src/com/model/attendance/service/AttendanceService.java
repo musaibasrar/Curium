@@ -690,7 +690,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
                     
                     if(!attendanceStatus) {
                         List<Student> searchStudentList = new studentDetailsDAO().getListStudents("From Student as student where student.examlevel='"+DataUtil.emptyString(request.getParameter("examlevel"))+"'"
-                                + "and student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+"");
+                                + "and student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" Order by student.admissionnumber ASC");
                     request.setAttribute("StudentListAttendance", searchStudentList);
                     request.setAttribute("subjectlisttodisplay", DataUtil.emptyString(request.getParameter("subjectnameAjax")));
                     request.setAttribute("searchexamlevel", DataUtil.emptyString(request.getParameter("examlevel")));
@@ -836,7 +836,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
 			querySub = querySub + " AND student.archive=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
-		queryMain = queryMain + querySub;
+		queryMain = queryMain + querySub + " Order by student.admissionnumber ASC";
 		List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
 		
 		Date monthOf = DateUtil.dateParserUpdateStd(request.getParameter("monthof"));
@@ -1365,7 +1365,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
         }
 
     public boolean viewAttendanceCenter() {
-        List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+        List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" Order by admissionnumber ASC");
         request.setAttribute("studentList", studentList);
                 
                  new ExamLevelService(request, response).examLevels();

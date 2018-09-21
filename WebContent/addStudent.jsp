@@ -657,7 +657,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body onload="getAdmNo();getAdmittedIn()">
-	<form id="form1" action="Controller?process=PersonalProcess&action=add"
+	<form id="form1" 
 		method="post"  enctype="multipart/form-data">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
@@ -699,16 +699,11 @@ for(Cookie cookie : cookies){
 									name="name" type="text" class="myclass" id="name" size="36" style="text-transform:uppercase"
 									required>
 							</label></td>
-
-							<td width="30%" class="alignRight">Gender &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft">&nbsp;Male<input
-								type="checkbox" value="Male" name="gender" id="male" ${genderadd == 'Male' ? 'checked' : ''} 
-								onclick="maleCheck();" />&nbsp; &nbsp;Female<input
-								type="checkbox" value="Female" name="gender" id="female" ${genderadd == 'Female' ? 'checked' : ''} 
-								onclick="femaleCheck()" />
-
-							</td>
-
+								<td width="30%" class="alignRight">Father's Name&nbsp;</td>
+									<td width="12%" align="left"><label> <input
+											name="fathersname" type="text" class="myclass" id="fathersname" style="text-transform:uppercase"
+											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
 
 						</tr>
 						<tr>
@@ -720,16 +715,17 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-									<td width="30%" class="alignRight">Father's Name&nbsp;</td>
-									<td width="12%" align="left"><label> <input
-											name="fathersname" type="text" class="myclass" id="fathersname" style="text-transform:uppercase"
-											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
-									</label></td>
-
 									<td width="30%" class="alignRight">Husband's Name&nbsp;</td>
 									<td width="12%" align="left"><label> <input
 											name="mothersname" type="text" class="myclass" id="mothersname" style="text-transform:uppercase"
 											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+									
+									
+									<td width="16%" class="alignRight">Guardian's Name&nbsp;</td>
+									<td width="28%"><label> <input name="guardian"
+											type="text" class="textField" id="guardian" size="36" style="text-transform:uppercase"
+											onclick="validateNameContact();">
 									</label></td>
 
 
@@ -746,12 +742,14 @@ for(Cookie cookie : cookies){
 								
 
 								<tr>
+								<td width="30%" class="alignRight">Gender &nbsp;</td>
+								<td width="16%" height="30" class="alignLeft">&nbsp;Male<input
+								type="checkbox" value="Male" name="gender" id="male" ${genderadd == 'Male' ? 'checked' : ''} 
+								onclick="maleCheck();" />&nbsp; &nbsp;Female<input
+								type="checkbox" value="Female" name="gender" id="female" ${genderadd == 'Female' ? 'checked' : ''} 
+								onclick="femaleCheck()" />
 
-									<td width="16%" class="alignRight">Guardian's Name&nbsp;</td>
-									<td width="28%"><label> <input name="guardian"
-											type="text" class="textField" id="guardian" size="36" style="text-transform:uppercase"
-											onclick="validateNameContact();">
-									</label></td>
+							</td>
 									
 										
 							<td width="16%" class="alignRight">Date of admission&nbsp;
@@ -809,7 +807,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Examination Level*&nbsp;</td>
 							<td width="28%">
 							 <label> 
-							 <select name="examlevel" id="examlevel" onchange="getAdmittedIn()"
+							 <select name="examlevel" id="examlevel" onchange="getAdmittedIn();getAdmNo();"
 									style="width: 240px;" required>
 										<option selected>${examleveladd}</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
@@ -1143,8 +1141,10 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function addStudent() {
 								var form1 = document.getElementById("form1");
-								form1.action = "Controller?process=StudentProcess&action=AddStudent";
-								form1.submit();
+								  if(form1.checkValidity()) {
+									  form1.action = "Controller?process=StudentProcess&action=AddStudent";
+										form1.submit();
+								  }
 							}
 
 							function Cancel() {

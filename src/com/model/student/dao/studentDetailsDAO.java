@@ -275,7 +275,7 @@ public class studentDetailsDAO {
 			Query query1 = session.createQuery("From Classhierarchy where lowerclass = '"+classStudying+"'");
 			Classhierarchy ch = (Classhierarchy) query1.uniqueResult();
 			if(ch!=null) {
-			    String hql = "UPDATE Student set examlevel = :promotedclass WHERE sid IN (:ids)";
+			    String hql = "UPDATE Student set examlevel = :promotedclass, admissionnumber = replace(admissionnumber, '"+classStudying+"', '"+ch.getUpperclass()+"') WHERE sid IN (:ids)";
 	                        Query query = session.createQuery(hql);
 	                        query.setParameter("promotedclass", ch.getUpperclass());
 	                        query.setParameterList("ids", ids);
@@ -477,7 +477,7 @@ public class studentDetailsDAO {
 	                
 	                transaction = session.beginTransaction();
 	                Query query = session
-	                                .createQuery("From Parents as parents where parents.Student.archive=0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0  order by name ASC");
+	                                .createQuery("From Parents as parents where parents.Student.archive=0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0   Order By parents.Student.admissionnumber ASC");
 	                query.setFirstResult(offset);   
 	                query.setMaxResults(noOfRecords);
 	                results = query.getResultList();

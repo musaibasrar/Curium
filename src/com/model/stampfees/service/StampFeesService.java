@@ -70,7 +70,7 @@ public class StampFeesService {
 					+ classStudying + "' AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
 
-		queryMain = queryMain + querySub;
+		queryMain = queryMain + querySub + " Order By parents.Student.admissionnumber ASC";
 		/*
 		 * queryMain =
 		 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
