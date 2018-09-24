@@ -73,6 +73,7 @@ public class StudentService {
 		Student student = new Student();
 		Parents parents = new Parents();
 		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying=null,conClassAdmittedIn=null;
+		String admissionYear = null;
 		boolean result=false;
 		
 		try {
@@ -168,6 +169,9 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("remarksadditional")) {
 		                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
 		                }
+		                if (fieldName.equalsIgnoreCase("admissionyear")) {
+                                    admissionYear = DataUtil.emptyString(item.getString());
+                            }
 		            } else {
 		                // Process form file field (input type="file").
 		                String fieldName = item.getFieldName();
@@ -214,6 +218,7 @@ public class StudentService {
 		httpSession.setAttribute("centercodeadd", student.getCentercode());
 		httpSession.setAttribute("languageadd", student.getLanguageopted());
 		httpSession.setAttribute("ageadd", student.getAge());
+		httpSession.setAttribute("admissionyear", admissionYear);
 		
 		
 		parents.setStudent(student);

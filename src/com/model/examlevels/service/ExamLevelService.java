@@ -111,7 +111,14 @@ public class ExamLevelService {
     public void getAdmissionNo() throws IOException {
         
         String admissionNumber = null;   
-        String currentAcademicYear = (String) httpSession.getAttribute("currentAcademicYear");
+        String currentAcademicYear = null;
+        
+        if("".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("admissionyear")))) {
+            currentAcademicYear = (String) httpSession.getAttribute("currentAcademicYear"); 
+        }else {
+            currentAcademicYear = request.getParameter("admissionyear");
+        }
+        
         String subAcademicYear = currentAcademicYear.substring(2, 4);
         List<Student> lastSid = new studentDetailsDAO().getListStudents("From Student where examlevel='"+request.getParameter("examlevel")+"'"
                 + " and centercode='"+request.getParameter("centercode")+"' and admissionnumber like '"+subAcademicYear+"%' order by sid DESC");

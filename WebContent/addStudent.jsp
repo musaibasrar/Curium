@@ -613,7 +613,7 @@
 
 			var examLevel=document.getElementById('examlevel').value;
 			var centerCode = document.getElementById('centercode').value;
-
+			var admissionYear = document.getElementById('admissionyear').value;
 			
 				var xmlHttp = new XMLHttpRequest();
 	            
@@ -629,7 +629,7 @@
 					document.getElementById("districtcode").value = distName;
 				}
 			};
-			xmlHttp.open("GET", "AjaxController?process=LevelProcess&action=getAdmissionNo&examlevel="+examLevel+"&centercode="+centerCode,true);
+			xmlHttp.open("GET", "AjaxController?process=LevelProcess&action=getAdmissionNo&examlevel="+examLevel+"&centercode="+centerCode+"&admissionyear="+admissionYear,true);
 			xmlHttp.send(null);
 		}
 	   
@@ -920,6 +920,47 @@ for(Cookie cookie : cookies){
 											<option value="OTHERS" >Others</option>
 								</select>
 							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td width="20%" class="alignRight">Admission Year&nbsp;</td>
+							<td width="28%"><label>
+										<select name="admissionyear" id="admissionyear" onchange="getAdmNo();"
+									style="width: 240px;">
+											<option selected >${admissionyear}</option>
+											<option value="2000/01" >2000/01</option>
+											<option value="2001/02" >2001/02</option>
+											<option value="2002/03" >2002/03</option>
+											<option value="2003/04" >2003/04</option>
+											<option value="2004/05" >2004/05</option>
+											<option value="2005/06" >2005/06</option>
+											<option value="2006/07" >2006/07</option>
+											<option value="2007/08" >2007/08</option>
+											<option value="2008/09" >2008/09</option>
+											<option value="2009/10" >2009/10</option>
+											<option value="2010/11" >2010/11</option>
+											<option value="2011/12" >2011/12</option>
+											<option value="2012/13" >2012/13</option>
+											<option value="2013/14" >2013/14</option>
+											<option value="2014/15" >2014/15</option>
+											<option value="2015/16" >2015/16</option>
+											<option value="2016/17" >2016/17</option>
+											<option value="2017/18" >2017/18</option>
+											<option value="2018/19" >2018/19</option>
+											<option value="2019/20" >2019/20</option>
+											<option value="2020/21" >2020/21</option>
+											<option value="2021/22" >2021/22</option>
+											<option value="2022/23" >2022/23</option>
+											
+								</select>	
+								</label></td>
 						</tr>
 
 						<tr>
