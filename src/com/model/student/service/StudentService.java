@@ -709,13 +709,13 @@ public class StudentService {
 	public boolean viewAllStudentsParents() {
 
 		boolean result = false;
-		String pages = "1";
+		//String pages = "1";
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			try {
 				int page = 1;
-				int recordsPerPage = 2000;
-				if (pages != null) {
-					page = Integer.parseInt(pages);
+				int recordsPerPage = 100;
+				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
+					page = Integer.parseInt(request.getParameter("page"));
 				}
 
 				List<Parents> list = new studentDetailsDAO().readListOfObjectsPaginationALL((page - 1) * recordsPerPage,
