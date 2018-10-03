@@ -35,6 +35,17 @@
 		  <property name="hibernate.c3p0.max_statements">50</property>
 		  <property name="hibernate.c3p0.idle_test_period">300</property>
 		  
+		  
+		  
+			<!-- Query Cache -->
+			<!-- <property name="hibernate.cache.use_second_level_cache">true</property> -->
+			<property name="hibernate.show_sql">true</property>
+			<property name="cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+		 	<property name="cache.use_query_cache">true</property>
+ 		 	<property name="net.sf.ehcache.configurationResourceName">myehcache.xml</property>
+			<!-- End Query Cache-->
+			
+			
   
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="current_session_context_class">thread</property>
