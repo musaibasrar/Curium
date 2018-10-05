@@ -22,25 +22,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Student</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
-
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script src="js/datePicker/jquery-1.7.1.js"></script>
 <script src="js/datePicker/ui/jquery.ui.core.js"></script>
 <script src="js/datePicker/ui/jquery.ui.widget.js"></script>
 <script src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
 <script src="js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="js/datePicker/ui/sliderAccess.js"></script>
-<script src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="js/validation/jquery.ketchup.all.min.js"></script>
+
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery.ui.button.js"></script>
 <link rel="stylesheet" href="css/datePicker/demos.css">
-
-
-
-
 
 <style type="text/css">
 .myclass {
@@ -255,92 +245,19 @@
 		}
 
 	}
-
-	function issues() {
-
-		var distlistitem = document.getElementById("subscriptionfor");
-		var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
-
-		if (distlistitemtext == "1 year") {
-			document.getElementById("noofissues").value = "24";
-		} else if (distlistitemtext == "2 years") {
-			document.getElementById("noofissues").value = "48";
-		} else if (distlistitemtext == "3 years") {
-			document.getElementById("noofissues").value = "72";
-		} else if (distlistitemtext == "5 years") {
-			document.getElementById("noofissues").value = "120";
-		} else if (distlistitemtext == "Life Time") {
-			document.getElementById("noofissues").value = "240";
-		}
-
-	}
-
-	function calculateIssues() {
-
-		var totalissues = document.getElementById("noofissues").value;
-		var fromissues = document.getElementById("fromkmissueno").value;
-
-		var toissues = parseInt(totalissues, 10) + parseInt(fromissues, 10) - 1;
-		document.getElementById("tokmissueno").value = toissues;
-
-	}
 </script>
 
 
 
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
-
-<script src="JavaScript/actb.js"></script>
-<script src="JavaScript/common.js"></script>
-
-
-
-
 <script>
-	$(function() {
-		$("#datepicker").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$("#anim").change(function() {
-			$("#datepicker").datepicker("option", "showAnim", $(this).val());
-		});
-	});
-	$(function() {
-		$("#datepicker1").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$("#anim").change(function() {
-			$("#datepicker1").datepicker("option", "showAnim", $(this).val());
-		});
-	});
-	
-	$(function() {
-		$("#dateoftc").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$("#anim").change(
-				function() {
-					$("#dateoftc").datepicker("option", "showAnim",
-							$(this).val());
-				});
-	});
-	
 	$(function() {
 		$("#dateofadmission").datepicker({
 			changeYear : true,
 			changeMonth : true,
 			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
+			yearRange: "-50:+10"
 		});
 		$("#anim").change(
 				function() {
@@ -350,39 +267,11 @@
 	});
 	
 	$(function() {
-		$("#dateofleaving").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$("#anim").change(
-				function() {
-					$("#dateofleaving").datepicker("option", "showAnim",
-							$(this).val());
-				});
-	});
-	
-	$(function() {
-		$("#dateoftcissued").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$("#anim").change(
-				function() {
-					$("#dateoftcissued").datepicker("option", "showAnim",
-							$(this).val());
-				});
-	});
-	
-	$(function() {
 		$("#datepickerCD").datepicker({
 			changeYear : true,
 			changeMonth : true,
 			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
+			yearRange: "-50:+10"
 		});
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
@@ -441,16 +330,6 @@
 		obj.value = obj.value.replace(reg, "");
 	}
 
-	function noofissues() {
-		var issues = document.getElementById("noofissues");
-		var issuestext = issues.options[issues.selectedIndex].text;
-
-		if (issuestext == "1 year") {
-
-		}
-
-	}
-
 	function validateContact() {
 
 		if (document.getElementById("contactNO").value.length == 0) {
@@ -500,49 +379,15 @@
 <script type="text/javascript">
 	$(function() {
 
-		$("#set").button().click(function() {
-			addPatientWithAppointment();
-
-		});
-		
-		$("#save").button().click(function() {
-			addStudent();
-
-		});
-		$("#savetwo").button().click(function() {
-			addStudent();
-
-		});
-		$("#savetwo").button().click(function() {
-			addStudent();
-
-		});
-		$("#savethree").button().click(function() {
-			addStudent();
-
-		});
-		$("#savefour").button().click(function() {
+		$(".save").button().click(function() {
 			addStudent();
 
 		});
 
-		$("#cancel").button().click(function() {
+		$(".cancel").button().click(function() {
 			Cancel();
 
 		});
-		$("#canceltwo").button().click(function() {
-			Cancel();
-
-		});
-		$("#cancelthree").button().click(function() {
-			Cancel();
-
-		});
-		$("#cancelfour").button().click(function() {
-			Cancel();
-
-		});
-			
 	});
 </script>
 <script>
@@ -593,18 +438,6 @@
 
 	}
 
-	function CalculateAge(value) {
-		var test = document.getElementById('datepicker').value;
-		var today = new Date();
-		var birthDate = new Date(test);
-		var age = today.getFullYear() - birthDate.getFullYear();
-		var m = today.getMonth() - birthDate.getMonth();
-		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-			age--;
-		}
-		//return age;
-		document.getElementById('age').value = age;
-	}
 </script>
 
 <script type="text/javascript">
@@ -991,9 +824,9 @@ for(Cookie cookie : cookies){
 								
 								<tr>
 									<td align="center">
-										<button id="save">Save</button>
+										<button id="saveone" class="save">Save</button>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="cancel">Cancel</button>
+										<button id="cancelone" class="cancel">Cancel</button>
 
 									</td>
 
@@ -1041,10 +874,10 @@ for(Cookie cookie : cookies){
 									<td align="center">
 										
 										
-										<button id="savethree" >Save</button>
+										<button id="savethree" class="save">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="cancelthree">Cancel</button>
+										<button id="cancelthree" class="cancel">Cancel</button>
 
 									</td>
 
@@ -1150,10 +983,10 @@ for(Cookie cookie : cookies){
 									<td align="center">
 									
 										
-										<button id="savetwo" >Save</button>
+										<button id="savetwo" class="save">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="canceltwo">Cancel</button>
+										<button id="canceltwo" class="cancel">Cancel</button>
 
 									</td>
 

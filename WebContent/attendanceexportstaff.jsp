@@ -17,8 +17,6 @@
 <script src="js/Chart.js"></script>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
-<link rel="stylesheet" href="css/graph/jquery.jqplot.css">
-<link rel="stylesheet" href="css/graph/jquery.jqplot.min.css">
 
 
   <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
@@ -37,16 +35,6 @@
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.trendline.min.js"></script>
-        <script src="js/jquery.jqplot.min.js" ></script>
-        <script src="js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
         
 <style type="text/css">
 <!--
@@ -328,7 +316,7 @@
 	
 }
 </style>
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -342,8 +330,7 @@
 <script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript"
-	src="js/validation/jquery.ketchup.all.min.js"></script>
+
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"

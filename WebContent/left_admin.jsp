@@ -522,11 +522,6 @@ for(Cookie cookie : cookies){
             </table>
 
         </div>
-
-        <script>
-            getdata1();
-            
-        </script>
     </body>
 
 </html>

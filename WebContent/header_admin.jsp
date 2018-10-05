@@ -14,75 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <script type="text/javascript">
-            var getMember;
-            //var getVisit;
-            function getdata() {
-
-                if (typeof XMLHttpRequest != "undefined") {
-                    getMember = new XMLHttpRequest();
-                   // getVisit = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getMember = new ActiveXObject("Microsoft.XMLHTTP");
-                    //getVisit = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-                getMember.onreadystatechange = processMemberData;
-                getMember.open("POST", "StudentController",true);
-                getMember.send(null);
-
-                /* getVisit.onreadystatechange = processVisitData;
-                getVisit.open("POST", "AppointmentController",true);
-                getVisit.send(null); */
-            }
-
-            function processMemberData() {
-                if (getMember.readyState==4)
-                {
-                    if (getMember.status==200){
-
-                        var count = getMember.responseXML.getElementsByTagName("count")[0];
-                        var childCount=count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML=childCount;
-                        mdiv.style.visibility='visible';
-                        //setTimeout('getdata();', 6000);
-
-
-                    }
-                }
-
-            }
-          /*   function processVisitData() {
-                if (getVisit.readyState==4)
-                {
-                    if (getVisit.status==200){
-
-                        var visitCount = getVisit.responseXML.getElementsByTagName("visitcount")[0];
-                        var childVisitCount=visitCount.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n2");
-                        mdiv.innerHTML=childVisitCount;
-                        mdiv.style.visibility='visible';
-                        setTimeout('getdata();', 60000);
-
-
-                    }
-                }
-
-            } */
-
-        </script>
-      <!--  <script  type="text/javascript">
-            function hidePatientPopup()
-            {
-                document.getElementById("n1").style.visibility='hidden';
-            }
-            function hideVisitPopup()
-            {
-
-                document.getElementById("n2").style.visibility='hidden';
-            }
-        </script> -->
+        
         <style type="text/css">
             <!--
             .style1 {font-family: Arial, Helvetica, sans-serif;
@@ -229,9 +161,9 @@ for(Cookie cookie : cookies){
                     </td>
                 </tr>
             </table>
-            <script>
+           <!--  <script>
                 getdata();
-            </script>
+            </script> -->
         </form>
     </body>
 

@@ -14,12 +14,12 @@
 
 <html >
     <head >
-        <%
+       <%--  <%
             response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
             response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
             response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
             response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
-        %>
+        %> --%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View All</title>
         <style type="text/css" title="currentStyle">
@@ -145,9 +145,6 @@
                 getMember.open("POST", "ContactController",true);
                 getMember.send(null);
 
-                getVisit.onreadystatechange = processVisitData;
-                getVisit.open("POST", "AppointmentController",true);
-                getVisit.send(null);
             }
 
             function processMemberData() {
@@ -369,20 +366,8 @@
                         $('.chcktbl:not(:checked)').attr('disabled', false);
                     }
                 });
-                
-                $( "#go" )
-                .button()
-                
-
             });
             
-            function refreshPage(){
-                 var form1=document.getElementById("form1");
-                form1.action="Controller?process=PersonalProcess&action=ViewAllGo";
-                form1.submit();
-                
-                //window.location.reload();
-            } 
             function redirect(){
                  var form1=document.getElementById("form1");
                     form1.action="Controller?process=PersonalProcess&action=redirect";
@@ -391,6 +376,64 @@
                 //window.location.reload();
             } 
         </script>
+        
+        <script type="text/javascript">
+
+	$(function() {
+
+		$("#apply").button().click(function() {
+			searchRankListReport();
+		});
+		
+				
+		 $("#studentAttendanceStatus").keypress(function (e) {
+		     //if the letter is not digit then display error and don't type anything
+		     if (e.which != 8 && e.which != 0 && e.which != 65 && e.which != 97 && e.which != 72 && e.which != 104 && e.which != 80 && e.which != 112 && e.which != 127) {
+		               return false;
+		    }
+		   });
+
+	});
+	
+	function searchRankListReport() {
+		var form1 = document.getElementById("form1");
+		if(form1.checkValidity()) {
+			form1.action = "Controller?process=StudentProcess&action=searchRankListReport";
+			form1.method = "POST";
+			form1.submit();
+		  }
+	}
+	
+	$(function() {
+
+		$("#tabs").tabs();
+
+		$("#effect").hide();
+	});
+
+    $(function() {
+		// run the currently selected effect
+		function runEffect() {
+
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		// set effect from select menu value
+		$("#add").button({
+			icons : {
+				primary : "ui-icon-arrowthick-1-s"
+			}
+		}).click(function() {
+			runEffect();
+			return false;
+		});
+	});
+	
+
+	
+</script>
     </head>
       <%
 //allow access only if session exists
@@ -411,6 +454,146 @@ for(Cookie cookie : cookies){
     <body  >
 
         <form name="form1" id="form1"action="Controller?process=StudentProcess&action=archiveMultiple" method="post">
+            
+            
+		<div style="height: 28px">
+		
+			<button id="add">Apply Filters</button>
+			<br />
+		</div>
+		<div id="effect" class="ui-widget-content ui-corner-all">
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-1">Filters</a></li>
+
+				</ul>
+				<div id="tabs-1">
+					<table width="100%" border="0" align="center" cellpadding="0"
+						cellspacing="0" id="table1" style="display: block">
+								
+								<tr>
+								<td class="alignRightFields"><br></td>
+								</tr>
+						<tr>
+							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
+							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${branchList}" var="branchlist">
+											<option value="${branchlist.centercode}:${branchlist.centername}" >
+												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label></td>
+							
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="examlevelcode" id="examlevelcode" required
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}:${examleveldetails.idexamlevel}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Language &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="languageopted" id="languageopted" required
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${languageslist}" var="languageslist">
+											<option value="${languageslist.language}" >
+												<c:out value="${languageslist.language}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Qualification &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="qualification" id="qualification" required
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${qualificationlist}" var="qualificationlist">
+											<option value="${qualificationlist.qualification}" >
+												<c:out value="${qualificationlist.qualification}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						
+						<tr>
+							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="academicyear" id="academicyear"
+									style="width: 240px;" required>
+										<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2019/20" >2019/20</option>
+											<option value="2020/21" >2020/21</option>
+								</select>
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+
+						<tr>
+
+							<td width="30%" class="alignRight"></td>
+
+							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
+							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
+								<button id="apply">Apply</button>
+							</td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+					</table>
+				</div>
+			</div>
+		</div>
+		
+            
+            
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>

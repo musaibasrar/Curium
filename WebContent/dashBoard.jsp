@@ -31,8 +31,8 @@
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+              
+        
         <script type="text/javascript" src="js/graph/plugins/jqplot.barRenderer.min.js"></script>
         <script type="text/javascript" src="js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
         <script type="text/javascript" src="js/graph/plugins/jqplot.cursor.min.js"></script>
