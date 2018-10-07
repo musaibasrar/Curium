@@ -39,7 +39,7 @@ public class SubjectDetailsDAO {
 		try {
 
 			transaction = session.beginTransaction();
-			results = (List<Subject>) session.createQuery("From Subject where branchid="+branchId)
+			results = (List<Subject>) session.createQuery("From Subject where branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();

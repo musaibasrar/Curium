@@ -42,7 +42,7 @@ public class QualificationDAO {
         try {
             
             transaction = session.beginTransaction();
-            results = (List<Qualification>) session.createQuery("From Qualification").list();
+            results = (List<Qualification>) session.createQuery("From Qualification").setCacheable(true).setCacheRegion("commonregion").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();

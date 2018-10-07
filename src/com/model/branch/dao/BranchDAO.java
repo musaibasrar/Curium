@@ -38,7 +38,7 @@ public class BranchDAO {
 		List<Branch> results = new ArrayList<Branch>();
         try {
             transaction = session.beginTransaction();
-            results = (List<Branch>) session.createQuery("From Branch order by centercode ASC").list();
+            results = (List<Branch>) session.createQuery("From Branch order by centercode ASC").setCacheable(true).setCacheRegion("commonregion").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {
             transaction.rollback();
@@ -54,7 +54,7 @@ public class BranchDAO {
         List<Districts> results = new ArrayList<Districts>();
         try {
             transaction = session.beginTransaction();
-            results = (List<Districts>) session.createQuery("From Districts").list();
+            results = (List<Districts>) session.createQuery("From Districts").setCacheable(true).setCacheRegion("commonregion").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
@@ -161,7 +161,7 @@ public class BranchDAO {
         Branch results = new Branch();
         try {
             transaction = session.beginTransaction();
-            Query query = session.createQuery("From Branch where centercode='" + centerCode + "'");
+            Query query = session.createQuery("From Branch where centercode='" + centerCode + "'").setCacheable(true).setCacheRegion("commonregion");
             results = (Branch) query.uniqueResult();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
@@ -176,7 +176,7 @@ public class BranchDAO {
         Branch results = new Branch();
         try {
             transaction = session.beginTransaction();
-            Query query = session.createQuery("From Branch where idbranch='" + branchId + "'");
+            Query query = session.createQuery("From Branch where idbranch='" + branchId + "'").setCacheable(true).setCacheRegion("commonregion");
             results = (Branch) query.uniqueResult();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
@@ -192,7 +192,7 @@ public class BranchDAO {
         List<Branch> results = new ArrayList<Branch>();
 try {
     transaction = session.beginTransaction();
-    results = (List<Branch>) session.createQuery("From Branch where idbranch ="+branchId+" order by centercode ASC").list();
+    results = (List<Branch>) session.createQuery("From Branch where idbranch ="+branchId+" order by centercode ASC").setCacheable(true).setCacheRegion("commonregion").list();
     transaction.commit();
 } catch (HibernateException hibernateException) {transaction.rollback();
     hibernateException.printStackTrace();
@@ -263,7 +263,7 @@ try {
                   
           try {
               transaction = session.beginTransaction();
-              Query query = session.createQuery("From Branch where centercode = '"+centerCode+"'");
+              Query query = session.createQuery("From Branch where centercode = '"+centerCode+"'").setCacheable(true).setCacheRegion("commonregion");
               dist = (Branch) query.uniqueResult();
               transaction.commit();
           } catch (HibernateException hibernateException) {transaction.rollback();

@@ -41,7 +41,7 @@ public class LanguageDAO {
         try {
             
             transaction = session.beginTransaction();
-            results = (List<Language>) session.createQuery("From Language").list();
+            results = (List<Language>) session.createQuery("From Language").setCacheable(true).setCacheRegion("commonregion").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {
             transaction.rollback();

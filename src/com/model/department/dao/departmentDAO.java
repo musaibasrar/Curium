@@ -59,7 +59,7 @@ public class departmentDAO {
         try {
             
             transaction = session.beginTransaction();
-            results = (List<Department>) session.createQuery("From Department where branchid="+branchId).list();
+            results = (List<Department>) session.createQuery("From Department where branchid="+branchId).setCacheable(true).setCacheRegion("commonregion").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();

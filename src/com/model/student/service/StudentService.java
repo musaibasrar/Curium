@@ -713,11 +713,10 @@ public class StudentService {
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			try {
 				int page = 1;
-				int recordsPerPage = 100;
+				int recordsPerPage = 50;
 				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
 					page = Integer.parseInt(request.getParameter("page"));
 				}
-
 				List<Parents> list = new studentDetailsDAO().readListOfObjectsPaginationALL((page - 1) * recordsPerPage,
 						recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				request.setAttribute("studentList", list);
@@ -725,6 +724,12 @@ public class StudentService {
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				request.setAttribute("noOfPages", noOfPages);
 				request.setAttribute("currentPage", page);
+				if(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())==1) {
+				    request.setAttribute("totalstudents", new studentDetailsDAO().getNoOfRecords());
+				}else {
+				    request.setAttribute("totalstudents", new studentDetailsDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())));
+				}
+				
 				result = true;
 			} catch (Exception e) {
 				e.printStackTrace();

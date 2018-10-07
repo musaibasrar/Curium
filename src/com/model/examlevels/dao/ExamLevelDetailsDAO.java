@@ -9,8 +9,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import com.model.branch.dto.Branch;
-import com.model.department.dto.Department;
 import com.model.examlevels.dto.Examleveldetails;
 import com.model.examlevels.dto.Subexamlevel;
 import com.util.HibernateUtil;
@@ -32,6 +30,7 @@ public class ExamLevelDetailsDAO {
 
 	public ExamLevelDetailsDAO() {
 		session = HibernateUtil.openCurrentSession();
+	    //session = HibernateUtil.openSession();
 	}
 
 
@@ -42,12 +41,14 @@ public class ExamLevelDetailsDAO {
 		
 		List<Examleveldetails> results = new ArrayList<Examleveldetails>();
         try {
-            
             transaction = session.beginTransaction();
-            results = (List<Examleveldetails>) session.createQuery("From Examleveldetails").list();
+            results = (List<Examleveldetails>) session.createQuery("From Examleveldetails").setCacheable(true).setCacheRegion("commonregion").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {transaction.rollback();
+        } catch (HibernateException hibernateException) {
+            transaction.rollback();
             hibernateException.printStackTrace();
+        }catch(Exception ex) {
+            ex.printStackTrace();
         } finally {
             //session.close();
             return results;
@@ -131,7 +132,7 @@ public class ExamLevelDetailsDAO {
         try {
             
             transaction = session.beginTransaction();
-            results = (List<Subexamlevel>) session.createQuery("From Subexamlevel where examlevel='"+examLevel+"'").list();
+            results = (List<Subexamlevel>) session.createQuery("From Subexamlevel where examlevel='"+examLevel+"'").setCacheable(true).setCacheRegion("commonregion").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
@@ -150,7 +151,7 @@ public class ExamLevelDetailsDAO {
         try {
             
             transaction = session.beginTransaction();
-            results = (List<Examleveldetails>) session.createQuery("From Examleveldetails where levelcode='"+examLevel+"'").list();
+            results = (List<Examleveldetails>) session.createQuery("From Examleveldetails where levelcode='"+examLevel+"'").setCacheable(true).setCacheRegion("commonregion").list();
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
