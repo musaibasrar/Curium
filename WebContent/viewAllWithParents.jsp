@@ -22,19 +22,15 @@
         %> --%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View All</title>
-        <style type="text/css" title="currentStyle">
-            @import "css/dataTable/css/demo_page.css";
-            @import "css/dataTable/css/jquery.dataTables.css";
-        </style>
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.button.js"></script>
+        
+        	<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
+			<link rel="stylesheet" href="css/datePicker/demos.css">
+			<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+			<script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+			<script type="text/javascript" src="js/dataTable/jquery.dataTables.js"></script>
+			
+			
+        
         <style type="text/css" >
             <!--
             .header {
@@ -120,69 +116,35 @@
             .footerTD{
                 border-radius:6px;
                 background-color:#4b6a84;
-
-
                 text-align: left;
-
-
             }
             -->
+            
+            .alignRightFields {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+
+         .alignCenterFields {
+	font-family: Tahoma;
+	font-size: 14px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: center;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
         </style>
-        <script type="text/javascript">
-            var getMember;
-            var getVisit;
-            function getdata() {
-
-                if (typeof XMLHttpRequest != "undefined") {
-                    getMember = new XMLHttpRequest();
-                    getVisit = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getMember = new ActiveXObject("Microsoft.XMLHTTP");
-                    getVisit = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-                getMember.onreadystatechange = processMemberData;
-                getMember.open("POST", "ContactController",true);
-                getMember.send(null);
-
-            }
-
-            function processMemberData() {
-                if (getMember.readyState==4)
-                {
-                    if (getMember.status==200){
-
-                        var count = getMember.responseXML.getElementsByTagName("count")[0];
-                        var childCount=count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML=childCount;
-                        mdiv.style.visibility='visible';
-                        setTimeout('getdata();', 60000);
-
-
-                    }
-                }
-
-            }
-            function processVisitData() {
-                if (getVisit.readyState==4)
-                {
-                    if (getVisit.status==200){
-
-                        var visitCount = getVisit.responseXML.getElementsByTagName("visitcount")[0];
-                        var childVisitCount=visitCount.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n2");
-                        mdiv.innerHTML=childVisitCount;
-                        mdiv.style.visibility='visible';
-                        setTimeout('getdata();', 60000);
-
-
-                    }
-                }
-
-            }
-
-        </script>
+        
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $('#myTable').dataTable( {
@@ -218,98 +180,8 @@
            form1.submit();
             
         }
-            function filter2 (phrase, _id)
-            {
-                var words = phrase.value.toLowerCase().split(" ");
-                var table = document.getElementById(_id);
-                var ele;
-                var dd=table.rows.length;
-                //var aa=dd/2;
-                var aa=dd-1;
-                var display=true;
-
-                for (var r = 1; r < table.rows.length; r++)
-                {
-
-                    ele = table.rows[r].innerHTML.replace(/<[^>]+>/g,"");
-                    var displayStyle = 'none';
-                    for (var i = 0; i < words.length; i++)
-                    {
-                        if (ele.toLowerCase().indexOf(words[i])>=0)
-                        {
-                            displayStyle = '';
-                        }
-                        else
-                        {
-                            displayStyle = 'none';
-                            dd=dd-1;
-                            display=false;
-                            break;
-                        }
-                    }
-                    table.rows[r].style.display = displayStyle;
-                }
-
-                var label = document.getElementById("labelDisplay");
-                if(display==true)
-                {
-                    label.innerHTML = "Matching Results: "+aa;
-                    label.style.display='none';
-                }
-                else
-                {
-                    label.innerHTML ="Matching Results: "+dd;
-                    label.style.display='block';
-                }
-            }
-
         </script>
-        <script type="text/javascript">
-            var getMember;
-           
-            function getlist() {
-                
-       
-                try{
-                    var listitem = document.getElementById("advsearch").value;
-                    if (typeof XMLHttpRequest != "undefined") {
-                        getMember = new XMLHttpRequest();
-                   
-                    } else if (window.ActiveXObject) {
-                        getMember = new ActiveXObject("Microsoft.XMLHTTP");
-                    
-                    }
-
-                    getMember.onreadystatechange = processMemberData;
-                    getMember.open("POST", "detailslist?alphabet="+listitem+"",true);
-                    getMember.send(null);
-               
-                    
-                }catch(e){
-                    alert(e);
-                }
-            }
-
-            function processMemberData() {
-                if (getMember.readyState==4)
-                {
-                    if (getMember.status==200){
-
-                        var count = getMember.responseXML.getElementsByTagName("count")[0];
-                        var childCount=count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML=childCount;
-                        mdiv.style.visibility='visible';
-                        setTimeout('getdata();', 60000);
-
-
-                    }
-                }
-
-            }
-            
-
-        </script>
+        
         <script type="text/javascript">
             $(function(){
                 $("#delete").button({
@@ -377,63 +249,7 @@
             } 
         </script>
         
-        <script type="text/javascript">
-
-	$(function() {
-
-		$("#apply").button().click(function() {
-			searchRankListReport();
-		});
-		
-				
-		 $("#studentAttendanceStatus").keypress(function (e) {
-		     //if the letter is not digit then display error and don't type anything
-		     if (e.which != 8 && e.which != 0 && e.which != 65 && e.which != 97 && e.which != 72 && e.which != 104 && e.which != 80 && e.which != 112 && e.which != 127) {
-		               return false;
-		    }
-		   });
-
-	});
-	
-	function searchRankListReport() {
-		var form1 = document.getElementById("form1");
-		if(form1.checkValidity()) {
-			form1.action = "Controller?process=StudentProcess&action=searchRankListReport";
-			form1.method = "POST";
-			form1.submit();
-		  }
-	}
-	
-	$(function() {
-
-		$("#tabs").tabs();
-
-		$("#effect").hide();
-	});
-
-    $(function() {
-		// run the currently selected effect
-		function runEffect() {
-
-			var clipEffect = 'blind';
-			var options = {};
-			$("#effect").toggle(clipEffect, options, 1000);
-		}
-		;
-		// set effect from select menu value
-		$("#add").button({
-			icons : {
-				primary : "ui-icon-arrowthick-1-s"
-			}
-		}).click(function() {
-			runEffect();
-			return false;
-		});
-	});
-	
-
-	
-</script>
+        
     </head>
       <%
 //allow access only if session exists
@@ -451,148 +267,9 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body  >
+    <body>
 
         <form name="form1" id="form1"action="Controller?process=StudentProcess&action=archiveMultiple" method="post">
-            
-            
-		<div style="height: 28px">
-		
-			<button id="add">Apply Filters</button>
-			<br />
-		</div>
-		<div id="effect" class="ui-widget-content ui-corner-all">
-			<div id="tabs">
-				<ul>
-					<li><a href="#tabs-1">Filters</a></li>
-
-				</ul>
-				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-								
-								<tr>
-								<td class="alignRightFields"><br></td>
-								</tr>
-						<tr>
-							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
-							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
-									style="width: 240px;">
-										<option selected></option>
-										<c:forEach items="${branchList}" var="branchlist">
-											<option value="${branchlist.centercode}:${branchlist.centername}" >
-												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label></td>
-							
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="examlevelcode" id="examlevelcode" required
-									style="width: 240px;">
-										<option selected></option>
-										<c:forEach items="${examleveldetails}" var="examleveldetails">
-											<option value="${examleveldetails.levelcode}:${examleveldetails.idexamlevel}" >
-												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label> 
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td class="alignRightFields">Language &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="languageopted" id="languageopted" required
-									style="width: 240px;">
-										<option selected></option>
-										<c:forEach items="${languageslist}" var="languageslist">
-											<option value="${languageslist.language}" >
-												<c:out value="${languageslist.language}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label> 
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td class="alignRightFields">Qualification &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="qualification" id="qualification" required
-									style="width: 240px;">
-										<option selected></option>
-										<c:forEach items="${qualificationlist}" var="qualificationlist">
-											<option value="${qualificationlist.qualification}" >
-												<c:out value="${qualificationlist.qualification}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label> 
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						
-						<tr>
-							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="academicyear" id="academicyear"
-									style="width: 240px;" required>
-										<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
-											<option value="2019/20" >2019/20</option>
-											<option value="2020/21" >2020/21</option>
-								</select>
-							</label> 
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-
-							<td width="30%" class="alignRight"></td>
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="apply">Apply</button>
-							</td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-					</table>
-				</div>
-			</div>
-		</div>
-		
-            
             
             <div style="overflow: hidden">
                 <table width="100%">
@@ -658,6 +335,7 @@ for(Cookie cookie : cookies){
             </div>
             
             <div align="center">
+            			<p class="alignCenterFields">Total Number Of Students: ${totalstudents}</p>
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
                     <td><a style="color: #4B6A84;font-size: 12px" href="Controller?process=StudentProcess&action=viewAll&page=${currentPage - 1}">Previous</a></td>

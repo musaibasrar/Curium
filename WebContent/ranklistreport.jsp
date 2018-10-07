@@ -385,14 +385,6 @@
 			searchRankListReport();
 		});
 		
-				
-		 $("#studentAttendanceStatus").keypress(function (e) {
-		     //if the letter is not digit then display error and don't type anything
-		     if (e.which != 8 && e.which != 0 && e.which != 65 && e.which != 97 && e.which != 72 && e.which != 104 && e.which != 80 && e.which != 112 && e.which != 127) {
-		               return false;
-		    }
-		   });
-
 	});
 	
 	function searchRankListReport() {
