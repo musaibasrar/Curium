@@ -36,8 +36,6 @@ public class AjaxController extends HttpServlet {
             new ExamLevelAction(request, response).execute(action);
         }else if("AttendanceProcess".equalsIgnoreCase(process)){
             new AttendanceAction(request, response).execute(action);
-        }else if("AttendanceProcess".equalsIgnoreCase(process)){
-            new AttendanceAction(request, response).execute(action);
         }else if("DistrictProcess".equalsIgnoreCase(process)){
             new BranchAction(request, response).execute(action);
         }

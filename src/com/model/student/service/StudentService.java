@@ -1101,6 +1101,8 @@ public class StudentService {
                 mapStudentReports.put(parents, centerName.getCentername());
             }
             httpSession.setAttribute("mapstudentreports", mapStudentReports);
+            httpSession.setAttribute("totalstudentsforprint", parentsList.size());
+            
             new ExamLevelService(request, response).examLevels();
             new LanguageService(request, response).viewLanguage();
             new BranchService(request, response).viewDistricts();
