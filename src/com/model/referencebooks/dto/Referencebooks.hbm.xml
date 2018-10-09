@@ -15,5 +15,8 @@
         <property generated="never" lazy="false" name="language" optimistic-lock="true" type="string" unique="false">
             <column length="15" name="language"/>
         </property>
+        <property generated="never" lazy="false" name="subject" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="subject"/>
+        </property>
     </class>
 </hibernate-mapping>

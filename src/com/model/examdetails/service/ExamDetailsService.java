@@ -7,24 +7,25 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.adminexpenses.dao.AdminDetailsDAO;
-import com.model.examdetails.action.ExamDetailsAction;
 import com.model.examdetails.dao.ExamDetailsDAO;
 import com.model.examdetails.dto.Exams;
 import com.model.examdetails.dto.Examschedule;
 import com.model.parents.dto.Parents;
+import com.model.referencebooks.dto.Referencebooks;
+import com.model.referencebooks.service.ReferenceBooksService;
 import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
 import com.util.DataUtil;
 import com.util.DateUtil;
+import com.util.HallTicket;
 
 /**
  * @author Musaib_2
@@ -269,26 +270,42 @@ public class ExamDetailsService {
 		if(examLevels!=null){
 		
 		List<Parents> studentList = new ArrayList<Parents>();
-		List<Examschedule> examscheduleList = new ArrayList<Examschedule>();
+		
+		Map<Parents,List<HallTicket>> hallTicketMap = new HashMap<Parents,List<HallTicket>>();
 		
 			studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.examlevel = '" + 
 			        selectedExamLevel[0]+"' and parents.Student.centercode='"+selectedCenterCode[0]+"'");
 		             
+	              for (Parents student : studentList) {
+	                  List<HallTicket> examscheduleList = new ArrayList<HallTicket>();
+	                  for (int i = 0; i < examLevels.length; i++) {
+	                            HallTicket exams = new HallTicket();
+	                            //exams.setClasses(classes[i]);
+	                            exams.setDate(DateUtil.dateParserUpdateStd(dateOfExam[i]));
+	                            exams.setExamname(examLevels[i]);
+	                            exams.setSubject(subject[i]);
+	                            exams.setStarttime(startTime[i]);
+	                            exams.setEndtime(endTime[i]);
+	                            List<Referencebooks> referenceBooksList = 
+	                                    new ReferenceBooksService(request, response).getReferenceBooks(examLevels[i],subject[i],student.getStudent().getLanguageopted());
+	                            StringBuffer referenceBooks = new StringBuffer();
+	                            String prefix = "";
+	                            for (Referencebooks referencebooks : referenceBooksList) {
+	                                referenceBooks.append(prefix);
+	                                prefix = ", ";
+	                                referenceBooks.append(referencebooks.getReferencebooks());
+                                    }
+	                            exams.setReferencebooks(referenceBooks.toString());
+	                            examscheduleList.add(exams);
+	                    }
+	                  hallTicketMap.put(student, examscheduleList);
+                    } 
+
 	                request.setAttribute("studentList", studentList);
-	                
-	                for (int i = 0; i < endTime.length; i++) {
-	                        Examschedule exams = new Examschedule();
-	                        //exams.setClasses(classes[i]);
-	                        exams.setDate(DateUtil.dateParserUpdateStd(dateOfExam[i]));
-	                        exams.setExamname(examLevels[i]);
-	                        exams.setSubject(subject[i]);
-	                        exams.setStarttime(startTime[i]);
-	                        exams.setEndtime(endTime[i]);
-	                        examscheduleList.add(exams);
-	                }
 	                request.setAttribute("examcodename", selectedExamLevel[0]+" / "+selectedExamLevel[1]);
 	                request.setAttribute("centercodename", selectedCenterCode[0]+" / "+selectedCenterCode[1]);
-	                request.setAttribute("examschedulelist", examscheduleList);
+	                request.setAttribute("hallticketmap", hallTicketMap);
+	                //request.setAttribute("examschedulelist", examscheduleList);
 		}
 		
 

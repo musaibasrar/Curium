@@ -38,7 +38,7 @@ public class ReferenceBooksAction {
                 logger.info("Action is deleteMultiple");
                 url = deleteMultiple();
             }else if (action.equalsIgnoreCase("updateMultipleRecords")) {
-                logger.info("Action is updateMultipleQualification");
+                logger.info("Action is updateMultipleRecords");
                 url = updateMultipleRecords();
             }else if (action.equalsIgnoreCase("searchReferenceBooks")) {
                 logger.info("Action is searchReferenceBooks");

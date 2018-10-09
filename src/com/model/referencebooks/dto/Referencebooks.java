@@ -12,13 +12,15 @@ public class Referencebooks implements java.io.Serializable {
     private String examlevelcode;
     private String referencebooks;
     private String language;
+    private String subject;
 
     public Referencebooks() {}
 
-    public Referencebooks(String examlevelcode, String referencebooks, String language) {
+    public Referencebooks(String examlevelcode, String referencebooks, String language, String subject) {
         this.examlevelcode = examlevelcode;
         this.referencebooks = referencebooks;
         this.language = language;
+        this.subject = subject;
     }
 
     public Integer getIdreferencebooks() {
@@ -53,6 +55,16 @@ public class Referencebooks implements java.io.Serializable {
     
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    
+    public String getSubject() {
+        return this.subject;
+    }
+
+    
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
 }

@@ -123,4 +123,22 @@ public class ReferenceBooksDAO {
             return refBooksList;
         }
     }
+
+
+
+
+    public List<Referencebooks> getReferenceBooks(String examLevel, String subject, String languageopted) {
+        List<Referencebooks> refBooksList = new ArrayList<Referencebooks>();
+        try {
+            
+            transaction = session.beginTransaction();
+            refBooksList = (List<Referencebooks>) session.createQuery("From Referencebooks where examlevelcode='"+examLevel+"' and language='"+languageopted+"' and subject='"+subject+"'").list();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {transaction.rollback();
+            hibernateException.printStackTrace();
+        } finally {
+            //session.close();
+            return refBooksList;
+        }
+    }
 }
