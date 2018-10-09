@@ -34,16 +34,17 @@ public class LanguageService {
 
 	}
 
-    public void viewLanguage() {
-        
+    public List<Language> viewLanguage() {
+        List<Language> list = new ArrayList<Language>();
         try {
-            List<Language> list = new LanguageDAO().readListOfObjects();
+            list = new LanguageDAO().readListOfObjects();
             request.setAttribute("languageslist", list);
             logger.info("Language details List "+list.size());
         } catch (Exception e) {
             e.printStackTrace();
             
         }
+        return list;
         
     }
 
