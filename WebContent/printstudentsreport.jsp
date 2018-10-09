@@ -67,10 +67,10 @@
 }
 
 .addressLine{
-	font-weight: normal;
+	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 18px;
+	font-size: 22px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -99,6 +99,17 @@
 	font-weight: bold;
 	font-size: 15px;
 
+}
+
+         .alignCenterFields {
+	font-family: Tahoma;
+	font-size: 14px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: black;
+	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
 }
 
 </style>
@@ -314,6 +325,7 @@
 			</c:forEach>
 			</tbody>
 				</table>
+			<p class="alignCenterFields">Total: ${totalstudentsforprint}</p>
 			<br><br>
 	</form>
 </body>

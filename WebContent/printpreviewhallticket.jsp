@@ -220,8 +220,10 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
+	<button id="print" onclick="window.print();" 
+                   this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide">Print</button>
 		<br>
-                        <c:forEach items="${studentList}" var="Parents">
+                        <c:forEach items="${hallticketmap}" var="Parents">
                         
                         	<!-- <table width="100%" style="border-collapse: collapse;">
 			<tr>
@@ -275,28 +277,28 @@ for(Cookie cookie : cookies){
 
 			<table style=" border-collapse: collapse;width: 100%;">
 							<tr>   
-                                <td class="namedetails"><label>Admission No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.admissionnumber}"/></label></td>
-                                <td class="namedetails"><label>Language Opted.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.languageopted}"/></label></td>
+                                <td class="namedetails"><label>Admission No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.student.admissionnumber}"/></label></td>
+                                <td class="namedetails"><label>Language Opted.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.student.languageopted}"/></label></td>
                             </tr>
                             				
                             <tr style="border-color:#000000">
                                 <td class="namedetails">
-                                <label>Candidate Name :&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.name}"/></label>
+                                <label>Candidate Name :&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.student.name}"/></label>
                             	</td>
                                 <td class="namedetails"><label>Center Code/Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${centercodename}"/></label></td>
                              </tr>
                              
                              <tr style="border-color:#000000">
-                                <c:if test="${(Parents.student.guardiandetails != '')}">
-                                <td class="namedetails"><label>Guardian Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.guardiandetails}"/></label></td>
+                                <c:if test="${(Parents.key.student.guardiandetails != '')}">
+                                <td class="namedetails"><label>Guardian Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.student.guardiandetails}"/></label></td>
                                 </c:if>
 
-							<c:if test="${(Parents.fathersname != '')}">
-                                <td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.fathersname}"/></label></td>
+							<c:if test="${(Parents.key.fathersname != '')}">
+                                <td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.fathersname}"/></label></td>
 							</c:if>
 							
-							<c:if test="${(Parents.mothersname != '')}">
-                                <td class="namedetails"><label>Husband's Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.mothersname}"/></label></td>
+							<c:if test="${(Parents.key.mothersname != '')}">
+                                <td class="namedetails"><label>Husband's Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.mothersname}"/></label></td>
 							</c:if>	
                                 <td class="namedetails"><label>Exam Code/Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${examcodename}"/></label></td>
                              </tr>
@@ -312,17 +314,20 @@ for(Cookie cookie : cookies){
                             	<tr>
                             	<th class="subjectdetails">Date</th>
                             	<th class="subjectdetails">Subject</th>
+                            	<th class="subjectdetails">Reference Books</th>
                             	<th class="subjectdetails">Time</th>
                             	<th class="subjectdetails">Examiner's Sign</th>
                             	</tr>
                             	
                             	<tbody>
-                            	<c:forEach items="${examschedulelist}" var="examschedulelist">
+                            	<c:forEach items="${Parents.value}" var="examschedulelist">
                              	<tr>
                                 <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="dd-MM-yyyy"/></td>
                                 <td class="subjectdetails"><c:out value="${examschedulelist.subject}"/></td>
+                                <td class="subjectdetails"><c:out value="${examschedulelist.referencebooks}"/></td>
                                 <td class="subjectdetails"><c:out value="${examschedulelist.starttime}"/>&nbsp;-&nbsp;<c:out value="${examschedulelist.endtime}"/></td>
                                 <td class="subjectdetails"></td>
+                                
                                 </tr>
                                  </c:forEach>
                        

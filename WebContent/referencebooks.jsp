@@ -380,7 +380,7 @@
 			"bLengthChange" : false,
 			"bFilter" : true,
 			"bSort" : true,
-			"bInfo" : false,
+			"bInfo" : true,
 			"bAutoWidth" : false
 		});
 	});
@@ -503,7 +503,7 @@
 		$("#search").button().click(function() {
 			var examlevel = document.getElementById('examlevelsearch').value;
 			
-			if(examlevel !=""){
+			if(examlevel!=""){
 				searchReferenceBooks();
 			}else{
 				alert('Enter Mandatory Fields');
@@ -567,11 +567,45 @@
              }
          });
          
-         $( "#go" )
-         .button()
-         
-
      });
+	 
+	 var xmlHttp;
+	    var count;
+	    function getSubjects() {
+
+			var selected=document.getElementById('examlevel').value;
+
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "AjaxController?process=AttendanceProcess&action=getSubjects&urlexamlevel="+selected,true);
+			xmlHttp.send(null);
+		}
+	    
+		function stateChanged() {
+
+			if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+				document.getElementById("subjectlist").innerHTML = xmlHttp.responseText;
+			}
+		}
+		function GetXmlHttpObject() {
+			var xmlHttp = null;
+			try {
+				xmlHttp = new XMLHttpRequest();
+			} catch (e) {
+				try {
+					xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+				} catch (e) {
+					xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+			}
+			return xmlHttp;
+		}
 </script>
 
 <script type="text/javascript">
@@ -664,7 +698,7 @@ for(Cookie cookie : cookies){
 						<td width="16%" class="alignRight">Examination Level*&nbsp;</td>
 							<td width="28%">
 							 <label> 
-							 <select name="examlevelsearch" id="examlevelsearch"
+							 <select name="examlevelsearch" id="examlevelsearch" 
 									style="width: 240px;">
 										<option selected></option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
@@ -715,7 +749,7 @@ for(Cookie cookie : cookies){
 						cellspacing="10" id="table1" style="display: block">
 						<tr>
 							<td width="10%" class="alignRight" >Book Name* &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> <input id="bookname" style="text-transform: capitalize;width: 240px;"
+							<td width="70%"><label> <input id="bookname" style="text-transform: capitalize;width: 200px;"
 									name="bookname" type="text" class="textField" size="30">
 
 							</label></td>
@@ -730,8 +764,8 @@ for(Cookie cookie : cookies){
 						<td width="16%" class="alignRight">Examination Level*&nbsp;</td>
 							<td width="28%">
 							 <label> 
-							 <select name="examlevel" id="examlevel"
-									style="width: 240px;">
+							 <select name="examlevel" id="examlevel" onchange="getSubjects()"
+									style="width: 200px;">
 										<option selected></option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}" >
@@ -745,11 +779,22 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>	
+						<tr >
+							<td width="16%" class="alignRight">Subject*&nbsp;</td>
+							<td width="70%" id="subjectlist" name="subjectlist"><select
+									style="width: 200px;" required>
+										<option selected></option>
+								</select>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
 						<tr>
 							<td class="alignRight">Language &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="languageoptedsave" id="languageoptedsave"
-									style="width: 240px;">
+									style="width: 200px;">
 										<option selected></option>
 										<c:forEach items="${languageslist}" var="languageslist">
 											<option value="${languageslist.language}" >
@@ -792,6 +837,7 @@ for(Cookie cookie : cookies){
 							src="images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Language&nbsp;</th>
 							<th title="click to sort" class="headerText">Examination Level&nbsp;</th>
+							<th title="click to sort" class="headerText">Subject&nbsp;</th>
 							
 						</tr>
 				</thead>
@@ -821,6 +867,19 @@ for(Cookie cookie : cookies){
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label>  
+						  </td>		
+						  <td class="dataText">
+							<label style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" > 
+							 <select name="updatesubject" id="updatesubject"
+									style="width: 200px;" required>
+										<option selected>${referencebookslist.subject}</option>
+										<c:forEach items="${listSubject}" var="listSubject">
+											<option value="${listSubject.subjectname}" >
+												<c:out value="${listSubject.subjectname}" />
 											</option>
 										</c:forEach>
 								</select>

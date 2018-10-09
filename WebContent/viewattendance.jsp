@@ -361,7 +361,7 @@
 			"bLengthChange" : false,
 			"bFilter" : true,
 			"bSort" : true,
-			"bInfo" : false,
+			"bInfo" : true,
 			"bAutoWidth" : false
 		});
 	});
@@ -398,11 +398,13 @@
 	});
 	
 	function searchStudentAttendanceDetails() {
+		
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetails";
-		form1.method = "POST";
-		form1.submit();
-
+		if(form1.checkValidity()) {
+			form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetails";
+			form1.method = "POST";
+			form1.submit();
+		  }
 	}
 	
 	$(function() {

@@ -67,10 +67,10 @@
 }
 
 .addressLine{
-	font-weight: normal;
+	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 18px;
+	font-size: 22px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -204,7 +204,7 @@
 				<td class="dataTextBoldCenter" style="width: 100%">
 				BOARD OF ISLAMIC EDUCATION <br>
 				KARNATAKA<br><br>
-				<label class="addressLine">Question Paper Set<br>
+				<label class="addressLine">Question Paper Set &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total: ${totalstudentsforprint}<br>
 				 </label>
 				</td>
 			</tr>

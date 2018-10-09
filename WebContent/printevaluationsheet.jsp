@@ -67,10 +67,10 @@
 }
 
 .addressLine{
-	font-weight: normal;
+	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 18px;
+	font-size: 22px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -176,6 +176,7 @@
              margin-right: 1cm;
              margin-bottom: 1cm;
              margin-top: 1cm;
+             /* size: auto; */
         }
 
         @media screen {
@@ -232,7 +233,7 @@
 			</tr>
 			<tr>
 					<c:if test="${(printcentername != '')}">
-						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printcentername}" /></label></td>
+						<td class="dataTextBoldLeft" style="width: 30%"><label class="reportheaders"><c:out value="${printcentername}" /></label></td>
 					</c:if>
 						<td></td>
 					<c:if test="${(printexamlevel != '')}">
@@ -270,6 +271,7 @@
   						<th  class="datath">Admission Number</th>
 						<th  class="datath">Student Name</th>
 						<th  class="datath">Marks</th>
+						<th  class="datath">Marks In Words</th>
  				 </tr>
  			 </thead>
  		 
@@ -280,6 +282,7 @@
 							value="${Parents.key.student.admissionnumber}" /></td>
 					<td class="datatd"><c:out
 							value="${Parents.key.student.name}" /></td>
+					<td class="datatd"></td>
 					<td class="datatd"></td>
 				</tr>
 			</c:forEach>

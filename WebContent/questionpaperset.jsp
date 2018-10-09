@@ -338,7 +338,7 @@
 			"bLengthChange" : false,
 			"bFilter" : true,
 			"bSort" : true,
-			"bInfo" : false,
+			"bInfo" : true,
 			"bAutoWidth" : false
 		});
 	});
@@ -366,12 +366,12 @@
 		
 		var form1 = document.getElementById("form1");
 		if(form1.checkValidity()) {
-			if(centerCode!=""  || examLevel!="" || language!="" ){
+			if(centerCode!=""  && examLevel!="" || language!="" ){
 				form1.action = "Controller?process=StudentProcess&action=searchQuestionPaperDetails";
 				form1.method = "POST";
 				form1.submit();
 			}else{
-				alert('Enter atleast one filter criteria');
+				alert('Enter All Mandatory Fields');
 				form1.action = "Controller?process=StudentProcess&action=questionPaperSet";
 				form1.method = "POST";
 				form1.submit();
@@ -567,7 +567,7 @@ for(Cookie cookie : cookies){
 								<td class="alignRightFields"><br></td>
 								</tr>
 						<tr>
-							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRightFields" >Center*&nbsp;&nbsp;&nbsp;</td>
 							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
 									style="width: 240px;">
 										<option selected></option>
@@ -608,9 +608,9 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRightFields">Exam Level* &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="examlevel" id="examlevel" required
+										<select name="examlevel" id="examlevel"
 									style="width: 240px;">
 										<option selected></option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">

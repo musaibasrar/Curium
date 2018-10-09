@@ -338,7 +338,7 @@
 			"bLengthChange" : false,
 			"bFilter" : true,
 			"bSort" : true,
-			"bInfo" : false,
+			"bInfo" : true,
 			"bAutoWidth" : false
 		});
 	});
@@ -592,7 +592,8 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Exam Level</th>
-						<th title="click to sort" class="headerText">Marks</th>
+						<th title="click to sort" class="headerText" width="20%">Marks</th>
+						<th title="click to sort" class="headerText">Marks In Words</th>
 					</tr>
 				</thead>
 
@@ -606,14 +607,16 @@ for(Cookie cookie : cookies){
 										value="${Parents.key.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.key.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.key.student.examlevel}" /></td>
-							<td class="dataText"><input type="text"
+							<td class="dataText" width="20%"><input type="text"
 								id="studentMarks" 
 								name="studentMarks"
 								onkeypress="return event.charCode >= 00 && event.charCode <=57"
 								maxlength="3"
 								 /></td>
-
-
+							<td class="dataText"><input type="text"
+								id="studentMarkswords" 
+								name="studentMarkswords"
+								 /></td>
 						</tr>
 					</c:forEach>
 				</tbody>

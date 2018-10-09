@@ -341,7 +341,7 @@ background-color:rgba(0, 0, 0, 0);
 			"bLengthChange" : false,
 			"bFilter" : true,
 			"bSort" : true,
-			"bInfo" : false,
+			"bInfo" : true,
 			"bAutoWidth" : false
 		});
 	});

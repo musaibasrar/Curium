@@ -67,10 +67,10 @@
 }
 
 .addressLine{
-	font-weight: normal;
+	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 18px;
+	font-size: 22px;
 	letter-spacing: normal;
 	text-align: center;
 }
