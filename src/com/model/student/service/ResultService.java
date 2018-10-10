@@ -58,6 +58,12 @@ public class ResultService {
 	             httpSession.setAttribute("markssheetcentername", "");
 	             httpSession.setAttribute("markssheetexamlevel", "");
 	             httpSession.setAttribute("markssheetlanguage", "");
+	             httpSession.setAttribute("totalstudentresult", "");
+	             httpSession.setAttribute("failcount", "");
+	             httpSession.setAttribute("passcount", "");
+	             httpSession.setAttribute("secondcount", "");
+	             httpSession.setAttribute("firstcount", "");
+	             httpSession.setAttribute("distinction", "");
 	    }
 	
 	
@@ -72,6 +78,12 @@ public class ResultService {
         httpSession.setAttribute("resultexamlevel", "");
         httpSession.setAttribute("resultlanguage", "");
         httpSession.setAttribute("resultqualification", "");
+        httpSession.setAttribute("totalstudentresult", "");
+        httpSession.setAttribute("failcount", "");
+        httpSession.setAttribute("passcount", "");
+        httpSession.setAttribute("secondcount", "");
+        httpSession.setAttribute("firstcount", "");
+        httpSession.setAttribute("distinction", "");
     }
 
     public void searchResultReport() {
@@ -108,6 +120,7 @@ public class ResultService {
             String[] examDet = examLevel.split(":");
             List<Subexamlevel> subList = new ExamLevelDetailsDAO().getSubExamLevelSubject(examDet[0]);
             List<Result> resultList = new ArrayList<Result>();
+            int failCounter=0,passCounter=0,secondCounter=0,firstCounter=0,distinctionCounter=0;
             
             for (Parents studentDetails : parentsList) {
                 Result result = new Result();
@@ -142,6 +155,19 @@ public class ResultService {
                     if(finalResult==null) {
                         finalResult = res;
                     }
+                    
+                    if("FAIL".equalsIgnoreCase(finalResult)) {
+                        failCounter++;
+                    }else if("PASS".equalsIgnoreCase(finalResult)) {
+                        passCounter++;
+                    }else if("SECOND CLASS".equalsIgnoreCase(finalResult)) {
+                        secondCounter++;
+                    }else if("FIRST CLASS".equalsIgnoreCase(finalResult)) {
+                        firstCounter++;
+                    }else if("DISTINCTION".equalsIgnoreCase(finalResult)) {
+                        distinctionCounter++;
+                    }
+                    
                     result.setStudent(studentDetails.getStudent());
                     result.setSubjectList(subjectList);
                     result.setMarksList(marksList);
@@ -149,6 +175,12 @@ public class ResultService {
                     result.setResultclass(finalResult);
                     resultList.add(result);
             }
+            httpSession.setAttribute("totalstudentresult", parentsList.size());
+            httpSession.setAttribute("failcount", failCounter);
+            httpSession.setAttribute("passcount", passCounter);
+            httpSession.setAttribute("secondcount", secondCounter);
+            httpSession.setAttribute("firstcount", firstCounter);
+            httpSession.setAttribute("distinction", distinctionCounter);
             httpSession.setAttribute("resultlist", resultList);
             httpSession.setAttribute("resultsubexamlevel", subList);
             String[] centerCodeName = DataUtil.emptyString(request.getParameter("centercode")).split(":");
@@ -230,6 +262,8 @@ public class ResultService {
              String[] examDet = examLevel.split(":");
              List<Subexamlevel> subList = new ExamLevelDetailsDAO().getSubExamLevelSubject(examDet[0]);
              List<Result> resultList = new ArrayList<Result>();
+             List<Result> resultListFail = new ArrayList<Result>();
+             int failCounter=0,passCounter=0,secondCounter=0,firstCounter=0,distinctionCounter=0;
              
              for (Parents studentDetails : parentsList) {
                  Result result = new Result();
@@ -259,11 +293,26 @@ public class ResultService {
                      }
                      
                      double percentage = (marksObtained*100)/totalMarks;
+                     String numberAsString = String.format ("%.2f", percentage);
+                     percentage = Double.valueOf(numberAsString);
                      String res = getResultClass(percentage);
                      
                      if(finalResult==null) {
                          finalResult = res;
                      }
+                     
+                     if("FAIL".equalsIgnoreCase(finalResult)) {
+                         failCounter++;
+                     }else if("PASS".equalsIgnoreCase(finalResult)) {
+                         passCounter++;
+                     }else if("SECOND CLASS".equalsIgnoreCase(finalResult)) {
+                         secondCounter++;
+                     }else if("FIRST CLASS".equalsIgnoreCase(finalResult)) {
+                         firstCounter++;
+                     }else if("DISTINCTION".equalsIgnoreCase(finalResult)) {
+                         distinctionCounter++;
+                     }
+                     
                      result.setStudent(studentDetails.getStudent());
                      result.setSubjectList(subjectList);
                      result.setMarksList(marksList);
@@ -272,15 +321,29 @@ public class ResultService {
                      
                      if(!"FAIL".equalsIgnoreCase(result.getResultclass())) {
                          resultList.add(result);
+                     }else {
+                         resultListFail.add(result);
                      }
                      
              }
              Collections.sort(resultList);
+             Collections.sort(resultListFail);
+
              int i=1;
              for (Result result : resultList) {
+                 result.setRank(i);
                 System.out.println(result.getPercentage()+": Rank:"+i);
                 i++;
             }
+             resultList.addAll(resultListFail);
+             
+             httpSession.setAttribute("totalstudentresult", parentsList.size());
+             httpSession.setAttribute("failcount", failCounter);
+             httpSession.setAttribute("passcount", passCounter);
+             httpSession.setAttribute("secondcount", secondCounter);
+             httpSession.setAttribute("firstcount", firstCounter);
+             httpSession.setAttribute("distinction", distinctionCounter);
+             
              httpSession.setAttribute("resultlist", resultList);
              httpSession.setAttribute("resultsubexamlevel", subList);
              String[] centerCodeName = DataUtil.emptyString(request.getParameter("centercode")).split(":");
@@ -349,6 +412,8 @@ public class ResultService {
              List<Subexamlevel> subList = new ExamLevelDetailsDAO().getSubExamLevelSubject(examDet[0]);
              
              List<MarksSheet> resultList = new ArrayList<MarksSheet>();
+             List<MarksSheet> resultListFail = new ArrayList<MarksSheet>();
+             int failCounter=0,passCounter=0,secondCounter=0,firstCounter=0,distinctionCounter=0;
              
              for (Parents studentDetails : parentsList) {
                  MarksSheet result = new MarksSheet();
@@ -378,12 +443,25 @@ public class ResultService {
                      }
                      
                      double percentage = (marksObtained*100)/totalMarks;
+                     String numberAsString = String.format ("%.2f", percentage);
+                     percentage = Double.valueOf(numberAsString);
                      String res = getResultClass(percentage);
                      
                      if(finalResult==null) {
                          finalResult = res;
                      }
                      
+                     if("FAIL".equalsIgnoreCase(finalResult)) {
+                         failCounter++;
+                     }else if("PASS".equalsIgnoreCase(finalResult)) {
+                         passCounter++;
+                     }else if("SECOND CLASS".equalsIgnoreCase(finalResult)) {
+                         secondCounter++;
+                     }else if("FIRST CLASS".equalsIgnoreCase(finalResult)) {
+                         firstCounter++;
+                     }else if("DISTINCTION".equalsIgnoreCase(finalResult)) {
+                         distinctionCounter++;
+                     }
                      // get the reference books
                      List<Referencebooks> refBooksList = new ReferenceBooksDAO().getReferenceBooks(examDet[0],studentDetails.getStudent().getLanguageopted());
                      List<String> referenceBooksList = new ArrayList<String>();
@@ -402,15 +480,29 @@ public class ResultService {
                      
                      if(!"FAIL".equalsIgnoreCase(result.getResultclass())) {
                          resultList.add(result);
+                     }else {
+                         resultListFail.add(result);
                      }
                      
              }
              Collections.sort(resultList);
+             Collections.sort(resultListFail);
+            
              int i=1;
              for (MarksSheet result : resultList) {
+                 result.setRank(i);
                 System.out.println(result.getPercentage()+": Rank:"+i);
                 i++;
             }
+             resultList.addAll(resultListFail);
+             
+             httpSession.setAttribute("totalstudentresult", parentsList.size());
+             httpSession.setAttribute("failcount", failCounter);
+             httpSession.setAttribute("passcount", passCounter);
+             httpSession.setAttribute("secondcount", secondCounter);
+             httpSession.setAttribute("firstcount", firstCounter);
+             httpSession.setAttribute("distinction", distinctionCounter);
+             
              httpSession.setAttribute("markssheetlist", resultList);
              httpSession.setAttribute("markssheetsubexamlevel", subList);
              String[] centerCodeName = DataUtil.emptyString(request.getParameter("centercode")).split(":");

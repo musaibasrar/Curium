@@ -40,6 +40,8 @@ public class StudentAction {
 			url = viewAll();
 		}else if (action.equalsIgnoreCase("viewAllStudents")) {
 			url = viewAllStudents();
+		}else if (action.equalsIgnoreCase("searchStudentsviewAll")) {
+                    url = searchStudentsviewAll();
 		}else if (action.equalsIgnoreCase("viewAllStudentsCenter")) {
                     url = viewAllStudentsCenter();
                 }else if (action.equalsIgnoreCase("viewAllStudentsWithParents")) {
@@ -155,6 +157,11 @@ public class StudentAction {
 	}
 	
 	
+
+    private String searchStudentsviewAll() {
+        new StudentService(request, response).searchStudentsviewAll();
+        return "viewAllWithParents.jsp";
+}
 
     private String searchResultReportCenter() {
         new ResultService(request, response).searchResultReportCenter();

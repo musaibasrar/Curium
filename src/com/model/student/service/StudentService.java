@@ -736,6 +736,13 @@ public class StudentService {
 			}
 		}
 		
+		        new ExamLevelService(request, response).examLevels();
+		        new LanguageService(request, response).viewLanguage();
+		        new BranchService(request, response).viewDistricts();
+		        new BranchService(request, response).viewBranches();
+		        new QualificationService(request, response).viewQualification(); 
+		        httpSession.setAttribute("noofpapers", "");
+		
 		return result;
 	}
 
@@ -1156,9 +1163,9 @@ public class StudentService {
                  centerList = new BranchDAO().readListOfObjects();
              }
              
-                          
+             int englishCountTotal =0, urduCountTotal=0, hindiCountTotal=0, kannadaCountTotal= 0;
+             
              if (!request.getParameter("examlevel").equalsIgnoreCase("")) {
-                     
                      
                  for (Branch eachBranch : centerList) {   
                      
@@ -1180,6 +1187,9 @@ public class StudentService {
                                  kannadaCount = kannadaCount+1;
                              }
                     }
+                     englishCountTotal = englishCountTotal + englishCount;
+                     urduCountTotal = urduCountTotal + urduCount;
+                     kannadaCountTotal = kannadaCountTotal + kannadaCount;
                      
                      centerNameCode.add(eachBranch.getCentercode());
                      centerNameCode.add(eachBranch.getCentername());
@@ -1215,6 +1225,10 @@ public class StudentService {
                             }
                    }
                     
+                    englishCountTotal = englishCountTotal + englishCount;
+                    urduCountTotal = urduCountTotal + urduCount;
+                    kannadaCountTotal = kannadaCountTotal + kannadaCount;
+                    
                     centerNameCode.add(eachBranch.getCentercode());
                     centerNameCode.add(eachBranch.getCentername());
                     languageCount.add(Integer.toString(englishCount));
@@ -1226,6 +1240,11 @@ public class StudentService {
                     languageReports.put(centerNameCode, languageCount);
                }
             }
+             httpSession.setAttribute("englishcounttotal", englishCountTotal);
+             httpSession.setAttribute("urducounttotal", urduCountTotal);
+             httpSession.setAttribute("hindicounttotal", hindiCountTotal);
+             httpSession.setAttribute("kannadacounttotal", kannadaCountTotal);
+             httpSession.setAttribute("totalcount", englishCountTotal+urduCountTotal+hindiCountTotal+kannadaCountTotal);
              httpSession.setAttribute("languagereports", languageReports);
              new ExamLevelService(request, response).examLevels();
              new BranchService(request, response).viewBranches();
@@ -1238,6 +1257,11 @@ public class StudentService {
         httpSession.setAttribute("languagereports", "");
         httpSession.setAttribute("printcentername", "");
         httpSession.setAttribute("printexamlevel", "");
+        httpSession.setAttribute("englishcounttotal", "");
+        httpSession.setAttribute("urducounttotal", "");
+        httpSession.setAttribute("hindicounttotal", "");
+        httpSession.setAttribute("kannadacounttotal", "");
+        httpSession.setAttribute("totalcount", "");
     }
 
     public boolean graduateMultiple() {
@@ -1450,4 +1474,76 @@ public class StudentService {
      }
     }
     }
+
+    public void searchStudentsviewAll() {
+        String searchQuery = "From Parents as parent where ";
+        String subQuery =null;
+        
+             if(!request.getParameter("centercode").equalsIgnoreCase("")) {
+                 String[] centerCode = request.getParameter("centercode").split(":");
+                 subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
+                 httpSession.setAttribute("printcentername", "Center Code/Name: "+centerCode[0]+"/"+centerCode[1]);
+             }
+             
+             if(!request.getParameter("districtcode").equalsIgnoreCase("")) {
+                 if(subQuery!=null) {
+                     subQuery = subQuery+"AND parent.Student.districtcode = '"+request.getParameter("districtcode")+"'";
+                 }else {
+                     subQuery = "parent.Student.districtcode = '"+request.getParameter("districtcode")+"'";
+                 }
+             }
+             
+             if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
+                 if(subQuery!=null) {
+                     subQuery = subQuery+"AND parent.Student.examlevel = '"+request.getParameter("examlevel")+"'";
+                 }else {
+                     subQuery = "parent.Student.examlevel = '"+request.getParameter("examlevel")+"'";
+                 }
+                 httpSession.setAttribute("printexamlevel", "Examination Level: "+request.getParameter("examlevel").toString());
+             }
+             
+             if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
+                 if(subQuery!=null) {
+                     subQuery = subQuery+"AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+                 }else {
+                     subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+                 }
+                 httpSession.setAttribute("printlanguage", "Language: "+request.getParameter("languageopted").toString());
+             }
+             
+             if(!request.getParameter("qualification").equalsIgnoreCase("")) {
+                 if(subQuery!=null) {
+                     subQuery = subQuery+"AND parent.Student.qualification = '"+request.getParameter("qualification")+"'";
+                 }else {
+                     subQuery = "parent.Student.qualification = '"+request.getParameter("qualification")+"'";
+                 }
+                 httpSession.setAttribute("printqualification", "Qualification: "+request.getParameter("qualification").toString());
+             }
+             
+             if(!DataUtil.emptyString(request.getParameter("religion")).equalsIgnoreCase("")) {
+                 if(subQuery!=null) {
+                     subQuery = subQuery+"AND parent.Student.religion = '"+request.getParameter("religion")+"'";
+                 }else {
+                     subQuery = "parent.Student.religion = '"+request.getParameter("religion")+"'";
+                 }
+                 httpSession.setAttribute("printreligion", "Religion: "+request.getParameter("religion").toString());
+             }
+
+             
+             searchQuery = searchQuery+subQuery+" Order By parent.Student.admissionnumber ASC";
+             List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
+             
+             request.setAttribute("studentList", parentsList);
+             request.setAttribute("noOfPages", 1);
+             request.setAttribute("currentPage", 1);
+             request.setAttribute("totalstudents", parentsList.size());
+
+             new ExamLevelService(request, response).examLevels();
+             new LanguageService(request, response).viewLanguage();
+             new BranchService(request, response).viewDistricts();
+             new BranchService(request, response).viewBranches();
+             new QualificationService(request, response).viewQualification(); 
+             
+             
+     }
 }

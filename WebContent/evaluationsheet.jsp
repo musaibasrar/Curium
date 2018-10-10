@@ -630,7 +630,6 @@ for(Cookie cookie : cookies){
 					</tr>
 				</tfoot>
 			</table>
-
 		</div>
 
 

@@ -12,17 +12,19 @@ public class Result  implements java.io.Serializable,Comparable<Result> {
     List<String> referenceBooksList;
     double percentage;
     String resultclass;
+    Integer rank;
     
     public Result() {
     }
 
-    public Result(Student student, List<Integer> marksList, double percentage, String resultclass, List<String> subjectList, List<String> referenceBooksList) {
+    public Result(Student student, List<Integer> marksList, double percentage, String resultclass, List<String> subjectList, List<String> referenceBooksList, Integer rank) {
         this.student = student;
         this.subjectList = subjectList;
         this.marksList = marksList;
         this.percentage = percentage;
         this.resultclass = resultclass;
         this.referenceBooksList = referenceBooksList;
+        this.rank = rank;
     }
 
     
@@ -88,5 +90,15 @@ public class Result  implements java.io.Serializable,Comparable<Result> {
     public int compareTo(Result result) {
         double percentage = ((Result) result).getPercentage();
         return Double.compare(percentage, this.percentage);
+    }
+
+    
+    public Integer getRank() {
+        return this.rank;
+    }
+
+    
+    public void setRank(Integer rank) {
+        this.rank = rank;
     }
   }

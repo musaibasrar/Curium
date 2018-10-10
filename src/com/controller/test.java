@@ -51,7 +51,10 @@ public class test {
 		
 	    double ip=348842;
 	            double i2=ip/60000;
+	            String numberAsString = String.format ("%.2f", i2);
+	            double t = Double.valueOf(numberAsString);
 	            System.out.println("double"+i2);
+	            System.out.println("double"+t);
 	    
 	    
 	    int number = 10;        

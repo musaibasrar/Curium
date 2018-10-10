@@ -94,6 +94,11 @@
     text-align: left;
     padding: 8px;
 }
+.datatdt{
+    border: 0px solid #000000;
+    text-align: left;
+    padding: 8px;
+}
 .reportheaders{
 	font-weight: bold;
 	font-size: 15px;
@@ -276,8 +281,18 @@
 							<td class="datatd"><c:out value="${languagereports.value.get(4)}" /></td>	
 						</tr>
 					</c:forEach>
+					<tr>
+							<td class="datatdt"></td>
+							<td class="datatdt">Total</td>
+							<td class="datatdt"><c:out value="${englishcounttotal}" /></td>
+							<td class="datatdt"><c:out value="${urducounttotal}" /></td>
+							<td class="datatdt"><c:out value="${hindicounttotal}" /></td>
+							<td class="datatdt"><c:out value="${kannadacounttotal}" /></td>
+							<td class="datatdt"><c:out value="${totalcount}" /></td>
+						</tr>
 			</tbody>
 				</table>
+				
 			<br><br>
 	</form>
 </body>

@@ -183,6 +183,39 @@
         </script>
         
         <script type="text/javascript">
+    	$(function() {
+
+    		$("#tabs").tabs();
+    		
+    		 $("#effect").hide();
+    		 
+    		 $("#search").button().click(function() {
+    				searchForStudents();
+    			});
+    	});
+    	
+    	
+    	function searchForStudents() {
+    		var centerCode = document.getElementById("centercode").value;
+    		var districtCode = document.getElementById("districtcode").value;
+    		var examLevel = document.getElementById("examlevel").value;
+    		var language = document.getElementById("languageopted").value;
+    		var qualification = document.getElementById("qualification").value;
+    		
+    		if(centerCode!="" || districtCode!="" || examLevel!="" || language!="" || qualification!=""){
+    			var form1 = document.getElementById("form1");
+    			form1.action = "Controller?process=StudentProcess&action=searchStudentsviewAll";
+    			form1.method = "POST";
+    			form1.submit();
+    		}else{
+    			alert('Enter atleast one filter criteria');
+    			var form1 = document.getElementById("form1");
+    			form1.action = "Controller?process=StudentProcess&action=viewAll";
+    			form1.method = "POST";
+    			form1.submit();
+    		}
+    	}
+    	
             $(function(){
                 $("#delete").button({
                     icons:{
@@ -247,6 +280,22 @@
                 
                 //window.location.reload();
             } 
+            
+            $(function() {
+        		// run the currently selected effect
+        		function runEffect() {
+
+        			var clipEffect = 'blind';
+        			var options = {};
+        			$("#effect").toggle(clipEffect, options, 1000);
+        		}
+        		;
+        		// set effect from select menu value
+        		$("#add").button().click(function() {
+        			runEffect();
+        			return false;
+        		});
+        	});
         </script>
         
         
@@ -270,7 +319,166 @@ for(Cookie cookie : cookies){
     <body>
 
         <form name="form1" id="form1"action="Controller?process=StudentProcess&action=archiveMultiple" method="post">
-            
+            <div style="height: 28px">
+			<button id="add">Students Details Report</button>
+			<br />
+		</div>
+
+		<div id="effect" class="ui-widget-content ui-corner-all">
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-1">Apply Filters</a></li>
+
+				</ul>
+				<div id="tabs-1">
+					<table width="100%" border="0" align="center" cellpadding="0"
+						cellspacing="0" id="table1" style="display: block">
+								<tr>
+								<td class="alignRightFields" >Filters<br></td>
+								</tr>
+								<tr>
+								<td class="alignRightFields"><br></td>
+								</tr>
+						<tr>
+							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
+							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${branchList}" var="branchlist">
+											<option value="${branchlist.centercode}:${branchlist.centername}" >
+												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label></td>
+							
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+
+
+						<tr>
+							<td class="alignRightFields">District &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="districtcode" id="districtcode"
+									style="width: 240px;" onchange="getAdmNo()">
+										<option selected></option>
+										<c:forEach items="${districtsList}" var="districtsList">
+											<option value="${districtsList.districtcode}" >
+												<c:out value="${districtsList.districtcode} -- ${districtsList.districtname}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="examlevel" id="examlevel"
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Language &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="languageopted" id="languageopted"
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${languageslist}" var="languageslist">
+											<option value="${languageslist.language}" >
+												<c:out value="${languageslist.language}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Qualification &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="qualification" id="qualification"
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${qualificationlist}" var="qualificationlist">
+											<option value="${qualificationlist.qualification}" >
+												<c:out value="${qualificationlist.qualification}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Religion &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="religion" id="religion"
+									style="width: 240px;">
+										<option selected></option>
+											<option value="ISLAM" >Islam</option>
+											<option value="OTHERS" >Others</option>
+								</select>
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+
+						<tr>
+
+							<td width="30%" class="alignRight"></td>
+
+							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
+							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
+								<button id="search">Search</button>
+							</td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+					</table>
+					
+					
+
+				</div>
+			</div>
+		</div>
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>

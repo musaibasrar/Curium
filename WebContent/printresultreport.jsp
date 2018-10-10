@@ -94,7 +94,11 @@
     text-align: left;
     padding: 8px;
 }
-
+.datatdt{
+    border: 0px solid #000000;
+    text-align: left;
+    padding: 8px;
+}
 </style>
 
 <script>
@@ -273,6 +277,8 @@
 			</tbody>
 				</table>
 			<br><br>
+			 <a style="font-weight: bold;color: black;font-size: 20px;">&nbsp;&nbsp;Total: ${totalstudentresult}&nbsp;&nbsp;Distinction: ${distinctioncount}&nbsp;&nbsp;First Class: ${firstcount}
+						  &nbsp;&nbsp;Second Class: ${secondcount}&nbsp;&nbsp;Pass: ${passcount}&nbsp;&nbsp;Fail: ${failcount}</a>
 	</form>
 </body>
 </html>

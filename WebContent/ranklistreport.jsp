@@ -655,7 +655,7 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out value="${resultlist.student.languageopted}" /></td>
 							<td class="dataText"><c:out value="${resultlist.percentage}" /></td>
 							<td class="dataText"><c:out value="${resultlist.resultclass}" /></td>
-							<td class="dataText"><c:out value="${status.index+1}"/></td>								
+							<td class="dataText"><c:out value="${resultlist.rank}"/></td>								
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -664,6 +664,10 @@ for(Cookie cookie : cookies){
 					
 						<td class="footerTD" colspan="2">
 						  <a id="printranklistreport" href="Controller?process=StudentProcess&action=printRankListReport">Print</a>
+						</td>
+						<td class="footerTD" colspan="2">
+						  <a style="font-weight: bold;color: white;font-size: 14px;">&nbsp;&nbsp;Total: ${totalstudentresult}&nbsp;&nbsp;Distinction: ${distinctioncount}&nbsp;&nbsp;First Class: ${firstcount}
+						  &nbsp;&nbsp;Second Class: ${secondcount}&nbsp;&nbsp;Pass: ${passcount}&nbsp;&nbsp;Fail: ${failcount}</a>
 						</td>
 					</tr>
 				</tfoot>

@@ -287,9 +287,12 @@
 				</tr>
 			</c:forEach>
 			</tbody>
+			<a style="font-weight: bold;color: black;font-size: 14px;">&nbsp;&nbsp;Total Number of Students: ${totalstudentevaluation}</a>
 				</table>
 			<br><br>
+			
 			</c:forEach>
+			
 	</form>
 </body>
 </html>

@@ -190,6 +190,7 @@ public class MarksDetailsService {
 		                mapStudentReports.put(parents, centerName.getCentername());
 		            }
 		            httpSession.setAttribute("mapstudentreports", mapStudentReports);
+		            httpSession.setAttribute("totalstudentevaluation", parentsList.size());
 		            new ExamLevelService(request, response).examLevels();
 		            new LanguageService(request, response).viewLanguage();
 		            new BranchService(request, response).viewBranches();
@@ -501,7 +502,7 @@ public class MarksDetailsService {
         new BranchService(request, response).viewBranches();
         httpSession.setAttribute("mapstudentreports", "");
         httpSession.setAttribute("subjectlistevaluation", "");
-        
+        httpSession.setAttribute("totalstudentevaluation", "");
     }
 
 }

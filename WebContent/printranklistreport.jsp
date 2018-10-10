@@ -271,12 +271,14 @@
 							<td class="datatd"><c:out value="${resultlist.student.name}" /></td>
 							<td class="datatd"><c:out value="${resultlist.percentage}" /></td>
 							<td class="datatd"><c:out value="${resultlist.resultclass}" /></td>
-							<td class="datatd"><c:out value="${status.index+1}" /></td>							
+							<td class="datatd"><c:out value="${resultlist.rank}" /></td>							
 						</tr>
 					</c:forEach>
 			</tbody>
 				</table>
 			<br><br>
+			<a style="font-weight: bold;color: black;font-size: 20px;">&nbsp;&nbsp;Total: ${totalstudentresult}&nbsp;&nbsp;Distinction: ${distinctioncount}&nbsp;&nbsp;First Class: ${firstcount}
+						  &nbsp;&nbsp;Second Class: ${secondcount}&nbsp;&nbsp;Pass: ${passcount}&nbsp;&nbsp;Fail: ${failcount}</a>
 	</form>
 </body>
 </html>

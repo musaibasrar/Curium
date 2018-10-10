@@ -242,6 +242,8 @@
 	background-color: #E3EFFF;
 }
 
+
+
 .dataTextInActive {
 	border-radius: 3px;
 	font-family: Tahoma;
@@ -648,6 +650,16 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out	value="${languagereports.value.get(4)}" /></td>	
 						</tr>
 					</c:forEach>
+					
+					<tr>
+							<td class="dataText"></td>
+							<td class="dataText">Total</td>
+							<td class="dataText"><c:out value="${englishcounttotal}" /></td>
+							<td class="dataText"><c:out value="${urducounttotal}" /></td>
+							<td class="dataText"><c:out value="${hindicounttotal}" /></td>
+							<td class="dataText"><c:out value="${kannadacounttotal}" /></td>
+							<td class="dataText"><c:out value="${totalcount}" /></td>
+						</tr>
 				</tbody>
 				<tfoot>
 					<tr>
