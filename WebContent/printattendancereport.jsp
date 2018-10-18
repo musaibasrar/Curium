@@ -166,10 +166,11 @@
         
         @page {
               
-             margin-left:  1cm;
-             margin-right: 1cm;
-             margin-bottom: 1cm;
-             margin-top: 1cm;
+             margin-left:  0.5cm;
+             margin-right: 0.5cm;
+             margin-bottom: 0cm;
+             margin-top: 0cm;
+             size: auto;
         }
 
         @media screen {
@@ -189,7 +190,7 @@
 
 <body style="text-align: center" class="bodymargin">
 	<form method="post" class="bodymargin">
-		
+		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">

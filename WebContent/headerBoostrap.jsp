@@ -142,14 +142,20 @@ for(Cookie cookie : cookies){
           <li><a href="#">Contact</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu"  role="menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Nav header</li>
-              <li><a href="#">Separated link</a></li>
-              <li><a href="#">One more separated link</a></li>
+            <ul class="dropdown-menu" style="
+    width: 100%;
+    position: absolute;
+    left: -400px;
+    min-width: 800px;
+    overflow: hidden;
+    top: 0px; role="menu">
+              <li style="display: inline-block;"><a href="#">Action</a></li>
+              <li style="display: inline-block;"><a href="#">Another action</a></li>
+              <li style="display: inline-block;"><a href="#">Something else here</a></li>
+              <li style="display: inline-block;" class="divider"></li>
+              <li style="display: inline-block;" class="dropdown-header">Nav header</li>
+              <li style="display: inline-block;"><a href="#">Separated link</a></li>
+              <li style="display: inline-block;"><a href="#">One more separated link</a></li>
             </ul>
           </li>
         </ul>

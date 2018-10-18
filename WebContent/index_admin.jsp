@@ -74,6 +74,15 @@ for(Cookie cookie : cookies){
 }
 }
 %>
+  <!--   <body>
+    			<div class="container">
+			<iframe   src="headerBoostrap.jsp" width="100%"></iframe>
+                </div>
+                <iframe  src="left_admin.jsp" name="leftFrame"></iframe>
+                <iframe src="Controller?process=StudentProcess&action=viewAll" name="mainFrame" ></iframe>
+    
+        </body> -->
+    
     <frameset    rows="70,*"frameborder="0" border="0" framespacing="0"  >
 			<frame   src="header_admin.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">

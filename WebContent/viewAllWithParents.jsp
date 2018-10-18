@@ -320,7 +320,7 @@ for(Cookie cookie : cookies){
 
         <form name="form1" id="form1"action="Controller?process=StudentProcess&action=archiveMultiple" method="post">
             <div style="height: 28px">
-			<button id="add">Students Details Report</button>
+			<button id="add">Search Students</button>
 			<br />
 		</div>
 
@@ -343,7 +343,8 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
 							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${studentviewallcenter}</option>
+										<option></option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}:${branchlist.centername}" >
 												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
@@ -365,7 +366,8 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="districtcode" id="districtcode"
 									style="width: 240px;" onchange="getAdmNo()">
-										<option selected></option>
+										<option selected>${studentviewalldistrict}</option>
+										<option></option>
 										<c:forEach items="${districtsList}" var="districtsList">
 											<option value="${districtsList.districtcode}" >
 												<c:out value="${districtsList.districtcode} -- ${districtsList.districtname}" />
@@ -385,7 +387,8 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="examlevel" id="examlevel"
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${studentviewallexamlevel}</option>
+										<option></option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
@@ -405,7 +408,8 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="languageopted" id="languageopted"
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${studentviewalllanguage}</option>
+										<option></option>
 										<c:forEach items="${languageslist}" var="languageslist">
 											<option value="${languageslist.language}" >
 												<c:out value="${languageslist.language}" />
@@ -425,7 +429,8 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="qualification" id="qualification"
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${studentviewallqualification}</option>
+										<option></option>
 										<c:forEach items="${qualificationlist}" var="qualificationlist">
 											<option value="${qualificationlist.qualification}" >
 												<c:out value="${qualificationlist.qualification}" />
@@ -445,9 +450,35 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="religion" id="religion"
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${studentviewallreligion}</option>
+										<option></option>
 											<option value="ISLAM" >Islam</option>
 											<option value="OTHERS" >Others</option>
+								</select>
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="academicyear" id="academicyear"
+									style="width: 240px;" required>
+										<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2013/14" >2013/14</option>
+											<option value="2014/15" >2014/15</option>
+											<option value="2015/16" >2015/16</option>
+											<option value="2016/17" >2016/17</option>
+											<option value="2017/18" >2017/18</option>
+											<option value="2018/19" >2018/19</option>
+											<option value="2019/20" >2019/20</option>
+											<option value="2020/21" >2020/21</option>
+											<option value="2020/21" >2021/22</option>
+											<option value="2020/21" >2022/23</option>
 								</select>
 							</label> 
 						</tr>
@@ -551,8 +582,8 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Page numbers.
                 The when condition does not display a link for the current page--%>
-                <table border="0" cellpadding="5" cellspacing="5">
-                    <tr>
+                <%-- <table border="0" cellpadding="5" cellspacing="5" >
+                    <tr style="width: 400px;">
                         <c:forEach begin="1" end="${noOfPages}" var="i">
                             <c:choose>
                                 <c:when test="${currentPage eq i}">
@@ -564,7 +595,7 @@ for(Cookie cookie : cookies){
                             </c:choose>
                         </c:forEach>
                     </tr>
-                </table>
+                </table> --%>
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">

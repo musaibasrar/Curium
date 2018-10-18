@@ -567,7 +567,8 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
 							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${studentsreportcentersearch}</option>
+										<option></option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}:${branchlist.centername}" >
 												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
@@ -589,7 +590,8 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="districtcode" id="districtcode"
 									style="width: 240px;" onchange="getAdmNo()">
-										<option selected></option>
+										<option selected>${studentsreportdistrictsearch}</option>
+										<option></option>
 										<c:forEach items="${districtsList}" var="districtsList">
 											<option value="${districtsList.districtcode}" >
 												<c:out value="${districtsList.districtcode} -- ${districtsList.districtname}" />
@@ -609,7 +611,8 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="examlevel" id="examlevel"
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${studentsreportexamlevelsearch}</option>
+										<option></option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
@@ -629,7 +632,8 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="languageopted" id="languageopted"
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${studentsreportlanguagesearch}</option>
+										<option></option>
 										<c:forEach items="${languageslist}" var="languageslist">
 											<option value="${languageslist.language}" >
 												<c:out value="${languageslist.language}" />
@@ -649,7 +653,8 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="qualification" id="qualification"
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${studentsreportqualificationsearch}</option>
+										<option></option>
 										<c:forEach items="${qualificationlist}" var="qualificationlist">
 											<option value="${qualificationlist.qualification}" >
 												<c:out value="${qualificationlist.qualification}" />
@@ -669,9 +674,35 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="religion" id="religion"
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${studentsreportreligionsearch}</option>
+										<option></option>
 											<option value="ISLAM" >Islam</option>
 											<option value="OTHERS" >Others</option>
+								</select>
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="academicyear" id="academicyear"
+									style="width: 240px;" required>
+										<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2013/14" >2013/14</option>
+											<option value="2014/15" >2014/15</option>
+											<option value="2015/16" >2015/16</option>
+											<option value="2016/17" >2016/17</option>
+											<option value="2017/18" >2017/18</option>
+											<option value="2018/19" >2018/19</option>
+											<option value="2019/20" >2019/20</option>
+											<option value="2020/21" >2020/21</option>
+											<option value="2020/21" >2021/22</option>
+											<option value="2020/21" >2022/23</option>
 								</select>
 							</label> 
 						</tr>

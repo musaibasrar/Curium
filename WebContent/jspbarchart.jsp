@@ -100,7 +100,7 @@ for(Cookie cookie : cookies){
                   legend: { display: false },
                   title: {
                     display: true,
-                    text: 'Number of Students Per Center'
+                    text: 'Number of Students Per District'
                   }
                 }
             });

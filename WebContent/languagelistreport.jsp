@@ -556,7 +556,8 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
 							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
 									style="width: 240px;">
-										<option selected> </option>
+										<option selected> ${studentsreportcentersearch}</option>
+										<option></option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}:${branchlist.centername}" >
 												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
@@ -577,7 +578,8 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="examlevel" id="examlevel"
 									style="width: 240px;">
-										<option selected> </option>
+										<option selected>${studentsreportexamlevelsearch} </option>
+										<option></option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />

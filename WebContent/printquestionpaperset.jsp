@@ -13,6 +13,7 @@
 
 <html >
 <head>
+<title>Question Paper Set</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -92,6 +93,12 @@
 
 .datatd, .datath {
     border: 1px solid #000000;
+    text-align: left;
+    padding: 8px;
+}
+
+.datathe {
+    border: 0px solid #000000;
     text-align: left;
     padding: 8px;
 }
@@ -176,6 +183,7 @@
              margin-right: 1cm;
              margin-bottom: 1cm;
              margin-top: 1cm;
+             size: auto;
         }
 
         @media screen {
@@ -196,6 +204,7 @@
 <body style="text-align: center" class="bodymargin">
 	<form method="post" class="bodymargin">
 		<c:forEach begin="1" end="${noofpapers}">
+		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
@@ -261,6 +270,12 @@
             
             <table class="datatable">
             <thead>
+            <tr>
+  						<th title="click to sort" class="datathe"></th>
+						<th title="click to sort" class="datathe"></th>
+						<th title="click to sort" class="datathe"></th>
+
+ 				 </tr>
  				 <tr>
   						<th title="click to sort" class="datath">Sl.No.</th>
 						<th title="click to sort" class="datath">Registration No.</th>

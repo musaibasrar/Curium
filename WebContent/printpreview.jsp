@@ -364,10 +364,11 @@ for(Cookie cookie : cookies){
         
         @page {
               
-             margin-left:  1cm;
+           margin-left:  1cm;
              margin-right: 1cm;
              margin-bottom: 1cm;
              margin-top: 1cm;
+             size: auto;
         }
 
         @media screen {

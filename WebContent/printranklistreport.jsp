@@ -13,6 +13,7 @@
 
 <html >
 <head>
+<title>Rank List Report</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -166,10 +167,11 @@
         
         @page {
               
-             margin-left:  1cm;
+           	margin-left:  1cm;
              margin-right: 1cm;
              margin-bottom: 1cm;
              margin-top: 1cm;
+             size: auto;
         }
 
         @media screen {
@@ -189,7 +191,7 @@
 
 <body style="text-align: center" class="bodymargin">
 	<form method="post" class="bodymargin">
-		
+		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">

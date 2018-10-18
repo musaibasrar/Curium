@@ -13,6 +13,7 @@
 
 <html >
 <head>
+<title>Marks Sheet</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -170,10 +171,11 @@
         
         @page {
               
-             margin-left:  1cm;
+           margin-left:  1cm;
              margin-right: 1cm;
              margin-bottom: 1cm;
              margin-top: 1cm;
+             size: auto;
         }
 
         @media screen {
@@ -194,6 +196,7 @@
 <body style="text-align: center" class="bodymargin">
 	<form method="post" class="bodymargin">
 		<c:forEach items="${markssheetlist}" var="mlist" >
+		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">

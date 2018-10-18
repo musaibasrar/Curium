@@ -529,12 +529,12 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td width="30%" class="alignRight">Name* &nbsp;</td>
 							<td width="12%" align="left"><label> <input
-									name="name" type="text" class="myclass" id="name" size="36" style="text-transform:uppercase"
+									name="name" type="text" class="myclass" id="name" size="36" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									required>
 							</label></td>
 								<td width="30%" class="alignRight">Father's Name&nbsp;</td>
 									<td width="12%" align="left"><label> <input
-											name="fathersname" type="text" class="myclass" id="fathersname" style="text-transform:uppercase"
+											name="fathersname" type="text" class="myclass" id="fathersname" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
@@ -549,15 +549,16 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 									<td width="30%" class="alignRight">Husband's Name&nbsp;</td>
+									
 									<td width="12%" align="left"><label> <input
-											name="mothersname" type="text" class="myclass" id="mothersname" style="text-transform:uppercase"
-											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+											name="mothersname" type="text" class="myclass" id="mothersname" size="36" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											 onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 									
 									
 									<td width="16%" class="alignRight">Guardian's Name&nbsp;</td>
 									<td width="28%"><label> <input name="guardian"
-											type="text" class="textField" id="guardian" size="36" style="text-transform:uppercase"
+											type="text" class="textField" id="guardian" size="36" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											onclick="validateNameContact();">
 									</label></td>
 
@@ -576,7 +577,7 @@ for(Cookie cookie : cookies){
 
 								<tr>
 								<td width="30%" class="alignRight">Gender &nbsp;</td>
-								<td width="16%" height="30" class="alignLeft">&nbsp;Male<input
+								<td width="16%" height="30" class="alignLeft">&nbsp;Male<input 
 								type="checkbox" value="Male" name="gender" id="male" ${genderadd == 'Male' ? 'checked' : ''} 
 								onclick="maleCheck();" />&nbsp; &nbsp;Female<input
 								type="checkbox" value="Female" name="gender" id="female" ${genderadd == 'Female' ? 'checked' : ''} 
@@ -588,7 +589,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Date of admission&nbsp;
 							</td>
 							<td width="28%"><label><input
-									name="dateofadmission" type="text" class="textField"
+									name="dateofadmission" type="text" class="textField" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									id="dateofadmission" size="36" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)">
 							</label></td>
 								</tr>
@@ -605,7 +606,7 @@ for(Cookie cookie : cookies){
 
 							<td width="30%" class="alignRight">Age &nbsp;</td>
 							<td width="12%" align="left"><label> <input
-									name="age" type="text" class="myclass" id="age" size="36" value="${ageadd}"
+									name="age" type="text" class="myclass" id="age" size="36" value="${ageadd}" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									onblur="validateName();">
 							</label></td>
 
@@ -614,11 +615,11 @@ for(Cookie cookie : cookies){
 
 							<td width="28%"><label>
 							
-							<select name="qualification" id="qualification"
-									style="width: 240px;">
-										<option selected>${qualificationadd}</option>
+							<select name="qualification" id="qualification" 
+									style="width: 280px;text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
+										<option selected style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">${qualificationadd}</option>
 										<c:forEach items="${qualificationlist}" var="qualificationlist">
-											<option value="${qualificationlist.qualification}" >
+											<option value="${qualificationlist.qualification}" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
 												<c:out value="${qualificationlist.qualification}" />
 											</option>
 										</c:forEach>
@@ -641,10 +642,10 @@ for(Cookie cookie : cookies){
 							<td width="28%">
 							 <label> 
 							 <select name="examlevel" id="examlevel" onchange="getAdmittedIn();getAdmNo();"
-									style="width: 240px;" required>
-										<option selected>${examleveladd}</option>
+									style="width: 280px;text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;" required>
+										<option selected style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">${examleveladd}</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
-											<option value="${examleveldetails.levelcode}" >
+											<option value="${examleveldetails.levelcode}" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
 											</option>
 										</c:forEach>
@@ -655,10 +656,10 @@ for(Cookie cookie : cookies){
 							<td width="28%">
 							 <label> 
 							 <select name="admittedin" id="admittedin"
-									style="width: 240px;" required>
+									style="width: 280px;text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;" required>
 										<option selected></option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
-											<option value="${examleveldetails.levelcode}" >
+											<option value="${examleveldetails.levelcode}" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
 											</option>
 										</c:forEach>
@@ -681,10 +682,10 @@ for(Cookie cookie : cookies){
 
 							<td width="28%"><label> 
 							<select name="centercode" id="centercode" onchange="getAdmNo();"
-									style="width: 240px;" required>
+									style="width: 280px;text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;" required>
 										<option selected>${centercodeadd}</option>
 										<c:forEach items="${branchList}" var="branchlist">
-											<option value="${branchlist.centercode}" >
+											<option value="${branchlist.centercode}" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
 												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
 											</option>
 										</c:forEach>
@@ -696,8 +697,8 @@ for(Cookie cookie : cookies){
 
 							<td width="20%" class="alignRight">District Code &nbsp;</td>
 							<td width="28%"><label> 
-									<input type="text" name="districtcode" id="districtcode" 
-									style="width: 240px;"  required>
+									<input type="text" name="districtcode" id="districtcode" size="36"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"  required>
 							</label></td>
 						</tr>
 
@@ -714,10 +715,10 @@ for(Cookie cookie : cookies){
 						<td width="16%" class="alignRight">Language Opted* &nbsp;</td>
 							<td><label>
 								<select name="languageopted" id="languageopted"
-									style="width: 240px;" required>
-										<option selected>${languageadd}</option>
+									style="width: 280px;text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;" required>
+										<option selected style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">${languageadd}</option>
 										<c:forEach items="${languageslist}" var="languageslist">
-											<option value="${languageslist.language}" >
+											<option value="${languageslist.language}" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
 												<c:out value="${languageslist.language}" />
 											</option>
 										</c:forEach>
@@ -725,7 +726,7 @@ for(Cookie cookie : cookies){
 							</label></td>
 
 							<td width="20%" class="alignRight">Created Date &nbsp;</td>
-							<td width="28%"><label> <input name="createddate"
+							<td width="28%"><label> <input name="createddate" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									type="text" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"
 									class="textField" id="datepickerCD" size="36"
 									data-validate="validate(required)">
@@ -742,15 +743,15 @@ for(Cookie cookie : cookies){
 						<tr>
 
 							<td width="20%" class="alignRight">Admission Number&nbsp;</td>
-							<td width="28%" id="getAdmNumber"><label><input name="admnno" type="text" class="textField" id="admnno" size="36" required></label></td>
+							<td width="28%" id="getAdmNumber"><label><input name="admnno" type="text" class="textField" id="admnno" size="36" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;" required></label></td>
 							
 							<td width="16%" class="alignRight">Religion&nbsp;</td>
 							<td width="28%">
 							 <label> 
-							 <select name="religion" id="religion"
-									style="width: 240px;" required>
-										<option selected value="ISLAM">Islam</option>
-											<option value="OTHERS" >Others</option>
+							 <select name="religion" id="religion" 
+									style="width: 280px;text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;" required>
+										<option selected value="ISLAM" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">Islam</option>
+											<option value="OTHERS" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">Others</option>
 								</select>
 							</label></td>
 						</tr>
@@ -766,31 +767,31 @@ for(Cookie cookie : cookies){
 							<td width="20%" class="alignRight">Admission Year&nbsp;</td>
 							<td width="28%"><label>
 										<select name="admissionyear" id="admissionyear" onchange="getAdmNo();"
-									style="width: 240px;">
-											<option selected >${admissionyear}</option>
-											<option value="2000/01" >2000/01</option>
-											<option value="2001/02" >2001/02</option>
-											<option value="2002/03" >2002/03</option>
-											<option value="2003/04" >2003/04</option>
-											<option value="2004/05" >2004/05</option>
-											<option value="2005/06" >2005/06</option>
-											<option value="2006/07" >2006/07</option>
-											<option value="2007/08" >2007/08</option>
-											<option value="2008/09" >2008/09</option>
-											<option value="2009/10" >2009/10</option>
-											<option value="2010/11" >2010/11</option>
-											<option value="2011/12" >2011/12</option>
-											<option value="2012/13" >2012/13</option>
-											<option value="2013/14" >2013/14</option>
-											<option value="2014/15" >2014/15</option>
-											<option value="2015/16" >2015/16</option>
-											<option value="2016/17" >2016/17</option>
-											<option value="2017/18" >2017/18</option>
-											<option value="2018/19" >2018/19</option>
-											<option value="2019/20" >2019/20</option>
-											<option value="2020/21" >2020/21</option>
-											<option value="2021/22" >2021/22</option>
-											<option value="2022/23" >2022/23</option>
+									style="width: 280px;text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
+											<option selected style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">${admissionyear}</option>
+											<option value="2000/01" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2000/01</option>
+											<option value="2001/02" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2001/02</option>
+											<option value="2002/03" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2002/03</option>
+											<option value="2003/04" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2003/04</option>
+											<option value="2004/05" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2004/05</option>
+											<option value="2005/06" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2005/06</option>
+											<option value="2006/07" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2006/07</option>
+											<option value="2007/08" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2007/08</option>
+											<option value="2008/09" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2008/09</option>
+											<option value="2009/10" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2009/10</option>
+											<option value="2010/11" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2010/11</option>
+											<option value="2011/12" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2011/12</option>
+											<option value="2012/13" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2012/13</option>
+											<option value="2013/14" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2013/14</option>
+											<option value="2014/15" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2014/15</option>
+											<option value="2015/16" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2015/16</option>
+											<option value="2016/17" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2016/17</option>
+											<option value="2017/18" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2017/18</option>
+											<option value="2018/19" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2018/19</option>
+											<option value="2019/20" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2019/20</option>
+											<option value="2020/21" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2020/21</option>
+											<option value="2021/22" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2021/22</option>
+											<option value="2022/23" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2022/23</option>
 											
 								</select>	
 								</label></td>

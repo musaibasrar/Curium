@@ -511,7 +511,8 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
 							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${studentsreportcentersearch}</option>
+										<option></option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}:${branchlist.centername}" >
 												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
@@ -532,7 +533,8 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="examlevelcode" id="examlevelcode" required
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${studentsreportexamlevelsearch}</option>
+										<option></option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}:${examleveldetails.idexamlevel}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
@@ -552,7 +554,8 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="languageopted" id="languageopted" required
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${studentsreportlanguagesearch}</option>
+										<option></option>
 										<c:forEach items="${languageslist}" var="languageslist">
 											<option value="${languageslist.language}" >
 												<c:out value="${languageslist.language}" />
@@ -572,7 +575,8 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="qualification" id="qualification" required
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${studentsreportqualificationsearch}</option>
+										<option></option>
 										<c:forEach items="${qualificationlist}" var="qualificationlist">
 											<option value="${qualificationlist.qualification}" >
 												<c:out value="${qualificationlist.qualification}" />

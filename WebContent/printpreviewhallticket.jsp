@@ -62,16 +62,16 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 28px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
 }
 
 .addressLine{
-	font-weight: normal;
+	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 18px;
+	font-size: 16px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -150,10 +150,11 @@ span{
         
         @page {
               
-             margin-left:  1cm;
+           	margin-left:  1cm;
              margin-right: 1cm;
              margin-bottom: 1cm;
              margin-top: 1cm;
+             size: auto;
         }
 
         @media screen {
@@ -168,7 +169,7 @@ span{
         }
         
         .subjectdetails{
-        	border: 1px solid #dddddd;
+        	border: 1px solid black;
     		text-align: left;
    		    padding: 8px;
         }
@@ -176,7 +177,7 @@ span{
          .namedetails{
         	border: 0px solid #dddddd;
     		text-align: left;
-   		    padding: 8px;
+   		    padding: 4px;
         }
          .namedetailscenter{
         	border: 0px solid #dddddd;
@@ -198,7 +199,7 @@ span{
 
     </style>
 	
-        <title>Print Hall Ticket</title>
+        <title>Hall Ticket</title>
         
 </head>
   <%
@@ -222,27 +223,12 @@ for(Cookie cookie : cookies){
 	<form method="post" class="bodymargin">
 	<button id="print" onclick="window.print();" 
                    this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide">Print</button>
-		<br>
-                        <c:forEach items="${hallticketmap}" var="Parents">
-                        
-                        	<!-- <table width="100%" style="border-collapse: collapse;">
-			<tr>
-				<td class="dataTextBoldCenter" style="width: 100%">
-				
-				Divine M.A. English Higher Primary & High School </td>
-			</tr>
-			<tr>
-			<td class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</td>
-			</tr>
-
-			<tr>
-			<td></td></tr>
-			<tr></tr>
-</table> -->
-		<table width="100%" style="border-collapse: collapse;">
+		<c:forEach items="${hallticketmap}" var="Parents">
+                        	
+		<table width="100%" style="page-break-inside: avoid;border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="images/bielogo.png" width="100" height="150"/>
+				<img src="images/bielogo.png" width="50" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				BOARD OF ISLAMIC EDUCATION <br>
@@ -253,7 +239,6 @@ for(Cookie cookie : cookies){
 			</tr>
 			<tr>
 			<td></td></tr>
-			<tr></tr>
 	</table>
 	
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
@@ -263,18 +248,6 @@ for(Cookie cookie : cookies){
 
                 </tr>
             </TABLE>
-
-			<%-- <table width="100%" style="border-collapse: collapse;">
-				<tr>
-					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket (${examname})
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-				</tr>
-				<tr></tr>
-			</table> --%>
-
 			<table style=" border-collapse: collapse;width: 100%;">
 							<tr>   
                                 <td class="namedetails"><label>Admission No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.student.admissionnumber}"/></label></td>
@@ -302,11 +275,6 @@ for(Cookie cookie : cookies){
 							</c:if>	
                                 <td class="namedetails"><label>Exam Code/Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${examcodename}"/></label></td>
                              </tr>
-                             
-                            <tr>
-                            <td><br></td>
-                            </tr>
-                            
                             </table>
                             
                             <table style=" border-collapse: collapse;width: 100%;">
@@ -339,19 +307,17 @@ for(Cookie cookie : cookies){
                             
                             
                             <TABLE id="dataTable" width="100%" border="0"
-			style="page-break-after: always; border-collapse: collapse;">
+			style="page-break-inside:auto; border-collapse: collapse;">
 
 			<tr>
 			<td>
 			<br>
-			<br><br><br></td>
+			<br></td>
 			</tr>
 			<tr>
 			<td></td>
 			</tr>
-			<tr>
-			<td></td>
-			</tr>
+			
 		<tr>
 		<td></td>
 		<td align="left">Candidate's Signature</td>	
@@ -360,16 +326,8 @@ for(Cookie cookie : cookies){
 			</tr>
 			
 			<tr>
-                        <td align="center"><br><br><br><br><br></td>
-                    </tr>
-             
-             <tr>
-            	<td>
-            		
-                   <button id="print" onclick="window.print();" 
-                   this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide">Print</button>     
-                </td>
-             </tr>
+               <td align="center"><br><br></td>
+            </tr>
                     
 		</TABLE>
                                  

@@ -13,6 +13,7 @@
 
 <html >
 <head>
+<title>Evaluation Sheet</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -176,7 +177,7 @@
              margin-right: 1cm;
              margin-bottom: 1cm;
              margin-top: 1cm;
-             /* size: auto; */
+             size: auto;
         }
 
         @media screen {
@@ -197,6 +198,7 @@
 <body style="text-align: center" class="bodymargin">
 	<form method="post" class="bodymargin">
 		<c:forEach items="${subjectlistevaluation}" var="sublist">
+		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
