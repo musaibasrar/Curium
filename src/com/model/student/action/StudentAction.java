@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.model.attendance.dao.AttendanceDAO;
 import com.model.branch.service.BranchService;
 import com.model.examlevels.service.ExamLevelService;
 import com.model.language.service.LanguageService;
@@ -27,6 +31,8 @@ public class StudentAction {
 	HttpSession httpSession;
 	String url;
 
+	private static final Logger logger = LogManager.getLogger(StudentAction.class);
+	
 	public StudentAction(HttpServletRequest request,
 			HttpServletResponse response) {
 		this.request = request;
@@ -37,6 +43,9 @@ public class StudentAction {
 	public String execute(String action, String page) {
 
 	        if (action.equalsIgnoreCase("viewAll")) {
+	            logger.info("view all ******************************");
+	            logger.error("Error view all ******************************");
+	            logger.debug("Debug view all ******************************");
 			url = viewAll();
 		}else if (action.equalsIgnoreCase("viewAllStudents")) {
 			url = viewAllStudents();

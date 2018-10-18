@@ -5,15 +5,12 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
-import com.model.adminexpenses.dto.Adminexpenses;
-import com.model.branch.dto.Branch;
 import com.model.examdetails.dto.Exams;
 import com.model.examdetails.dto.Examschedule;
-import com.model.student.dto.Student;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class ExamDetailsDAO {
 

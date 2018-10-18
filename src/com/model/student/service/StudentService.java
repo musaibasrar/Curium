@@ -1052,6 +1052,9 @@ public class StudentService {
                 String[] centerCode = request.getParameter("centercode").split(":");
                 subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
                 httpSession.setAttribute("printcentername", "Center Code/Name: "+centerCode[0]+"/"+centerCode[1]);
+                httpSession.setAttribute("studentsreportcentersearch", centerCode[0]+":"+centerCode[1]);
+            }else {
+                httpSession.setAttribute("studentsreportcentersearch", "");
             }
             
             if(!request.getParameter("districtcode").equalsIgnoreCase("")) {
@@ -1060,6 +1063,9 @@ public class StudentService {
                 }else {
                     subQuery = "parent.Student.districtcode = '"+request.getParameter("districtcode")+"'";
                 }
+                httpSession.setAttribute("studentsreportdistrictsearch", request.getParameter("districtcode").toString());
+            }else {
+                httpSession.setAttribute("studentsreportdistrictsearch", "");
             }
             
             if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
@@ -1069,6 +1075,9 @@ public class StudentService {
                     subQuery = "parent.Student.examlevel = '"+request.getParameter("examlevel")+"'";
                 }
                 httpSession.setAttribute("printexamlevel", "Examination Level: "+request.getParameter("examlevel").toString());
+                httpSession.setAttribute("studentsreportexamlevelsearch", request.getParameter("examlevel").toString());
+            }else {
+                httpSession.setAttribute("studentsreportexamlevelsearch", "");
             }
             
             if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
@@ -1078,6 +1087,9 @@ public class StudentService {
                     subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                 }
                 httpSession.setAttribute("printlanguage", "Language: "+request.getParameter("languageopted").toString());
+                httpSession.setAttribute("studentsreportlanguagesearch",request.getParameter("languageopted").toString());
+            }else {
+                httpSession.setAttribute("studentsreportlanguagesearch","");
             }
             
             if(!request.getParameter("qualification").equalsIgnoreCase("")) {
@@ -1087,6 +1099,9 @@ public class StudentService {
                     subQuery = "parent.Student.qualification = '"+request.getParameter("qualification")+"'";
                 }
                 httpSession.setAttribute("printqualification", "Qualification: "+request.getParameter("qualification").toString());
+                httpSession.setAttribute("studentsreportqualificationsearch", request.getParameter("qualification").toString());
+            }else {
+                httpSession.setAttribute("studentsreportqualificationsearch", "");
             }
             
             if(!DataUtil.emptyString(request.getParameter("religion")).equalsIgnoreCase("")) {
@@ -1096,8 +1111,20 @@ public class StudentService {
                     subQuery = "parent.Student.religion = '"+request.getParameter("religion")+"'";
                 }
                 httpSession.setAttribute("printreligion", "Religion: "+request.getParameter("religion").toString());
+                httpSession.setAttribute("studentsreportreligionsearch", request.getParameter("religion").toString());
+            }else {
+                httpSession.setAttribute("studentsreportreligionsearch", "");
             }
-
+            
+            if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
+                if(subQuery!=null) {
+                    String subAcademicYear = request.getParameter("academicyear").toString().substring(2, 4);
+                    
+                    subQuery = subQuery+"AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
+                }else {
+                    subQuery = "parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
+                }
+            }
             
             searchQuery = searchQuery+subQuery+" Order By parent.Student.admissionnumber ASC";
             List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
@@ -1483,6 +1510,7 @@ public class StudentService {
                  String[] centerCode = request.getParameter("centercode").split(":");
                  subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
                  httpSession.setAttribute("printcentername", "Center Code/Name: "+centerCode[0]+"/"+centerCode[1]);
+                 httpSession.setAttribute("studentviewallcenter", centerCode[0]+":"+centerCode[1]);
              }
              
              if(!request.getParameter("districtcode").equalsIgnoreCase("")) {
@@ -1491,6 +1519,9 @@ public class StudentService {
                  }else {
                      subQuery = "parent.Student.districtcode = '"+request.getParameter("districtcode")+"'";
                  }
+                 httpSession.setAttribute("studentviewalldistrict", request.getParameter("districtcode").toString());
+             }else {
+                 httpSession.setAttribute("studentviewalldistrict", "");
              }
              
              if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
@@ -1500,6 +1531,9 @@ public class StudentService {
                      subQuery = "parent.Student.examlevel = '"+request.getParameter("examlevel")+"'";
                  }
                  httpSession.setAttribute("printexamlevel", "Examination Level: "+request.getParameter("examlevel").toString());
+                 httpSession.setAttribute("studentviewallexamlevel", request.getParameter("examlevel").toString());
+             }else {
+                 httpSession.setAttribute("studentviewallexamlevel", "");
              }
              
              if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
@@ -1509,6 +1543,9 @@ public class StudentService {
                      subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                  }
                  httpSession.setAttribute("printlanguage", "Language: "+request.getParameter("languageopted").toString());
+                 httpSession.setAttribute("studentviewalllanguage", request.getParameter("languageopted").toString());
+             }else {
+                 httpSession.setAttribute("studentviewalllanguage", "");
              }
              
              if(!request.getParameter("qualification").equalsIgnoreCase("")) {
@@ -1518,6 +1555,9 @@ public class StudentService {
                      subQuery = "parent.Student.qualification = '"+request.getParameter("qualification")+"'";
                  }
                  httpSession.setAttribute("printqualification", "Qualification: "+request.getParameter("qualification").toString());
+                 httpSession.setAttribute("studentviewallqualification", request.getParameter("qualification").toString());
+             }else {
+                 httpSession.setAttribute("studentviewallqualification", "");
              }
              
              if(!DataUtil.emptyString(request.getParameter("religion")).equalsIgnoreCase("")) {
@@ -1527,6 +1567,19 @@ public class StudentService {
                      subQuery = "parent.Student.religion = '"+request.getParameter("religion")+"'";
                  }
                  httpSession.setAttribute("printreligion", "Religion: "+request.getParameter("religion").toString());
+                 httpSession.setAttribute("studentviewallreligion", request.getParameter("religion").toString());
+             }else {
+                 httpSession.setAttribute("studentviewallreligion", "");
+             }
+             
+             if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
+                 if(subQuery!=null) {
+                     String subAcademicYear = request.getParameter("academicyear").toString().substring(2, 4);
+                     
+                     subQuery = subQuery+"AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
+                 }else {
+                     subQuery = "parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
+                 }
              }
 
              
@@ -1543,7 +1596,5 @@ public class StudentService {
              new BranchService(request, response).viewDistricts();
              new BranchService(request, response).viewBranches();
              new QualificationService(request, response).viewQualification(); 
-             
-             
      }
 }

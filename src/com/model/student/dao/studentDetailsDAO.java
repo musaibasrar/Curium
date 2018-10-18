@@ -8,8 +8,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import com.util.Session;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.attendance.dao.AttendanceDAO;
@@ -308,8 +308,6 @@ public class studentDetailsDAO {
 			transaction = session.beginTransaction();
 			Date date= new Date();
 			 long time = date.getTime();
-			System.out.println("*** START TIME**** "+time);
-			
 			Query query = session.createQuery("From Parents as parents where parents.Student.archive=0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 order by parents.Student.sid DESC").setCacheable(true).setCacheRegion("commonregion");
 			query.setFirstResult(offset);   
 			query.setMaxResults(noOfRecords);
@@ -317,11 +315,10 @@ public class studentDetailsDAO {
 			
 			Date date2= new Date();
 			 long time2 = date2.getTime();
-			System.out.println("*** END TIME**** "+time2);
-			System.out.println(time-time2);
+			 logger.info("Query Student View All time: "+(time-time2));
 			transaction.commit();
 		} catch (Exception e) {transaction.rollback();
-			System.out.println("Exception is "+e);
+		        logger.info("Exception is "+e);
 			e.printStackTrace();
 		} finally {
 			// //session.close();

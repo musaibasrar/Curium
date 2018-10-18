@@ -9,8 +9,6 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.attendance.dto.Attendancemaster;
@@ -21,6 +19,8 @@ import com.model.attendance.dto.Weeklyoff;
 import com.model.employee.dto.Teacher;
 import com.model.student.dto.Student;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 
 public class AttendanceDAO {
@@ -36,10 +36,6 @@ public class AttendanceDAO {
 		session = HibernateUtil.openCurrentSession();
 	}
 
-	public List<Teacher> readListOfObjects() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public List<Holidaysmaster> readListOfHolidays(String currentAcademicYear, int branchId) {
 		List<Holidaysmaster> holidayMaster = new ArrayList<Holidaysmaster>();

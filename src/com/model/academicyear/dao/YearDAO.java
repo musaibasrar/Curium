@@ -1,18 +1,12 @@
 package com.model.academicyear.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import com.model.academicyear.dto.Currentacademicyear;
-import com.model.adminexpenses.dto.Adminexpenses;
-import com.model.student.dto.Student;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class YearDAO {
 	Session session = null;

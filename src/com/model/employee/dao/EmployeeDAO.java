@@ -5,15 +5,12 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import com.model.employee.dto.Organizersdetails;
 import com.model.employee.dto.Teacher;
-import com.model.position.dto.Position;
-import com.model.student.dto.Student;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class EmployeeDAO {
 

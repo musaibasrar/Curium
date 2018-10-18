@@ -8,9 +8,9 @@ import java.util.Map.Entry;
 
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
-import org.hibernate.Session;
+import com.util.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import com.util.Session.Transaction;
 
 import com.model.employee.dto.Teacher;
 import com.model.feescollection.dto.Receiptinfo;

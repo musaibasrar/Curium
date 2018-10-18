@@ -7,12 +7,12 @@ import java.util.Map.Entry;
 
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.model.periods.dto.Perioddetails;
 import com.model.periods.dto.Periodmaster;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class PeriodDAO {
 	Session session = null;

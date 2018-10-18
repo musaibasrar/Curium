@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import com.model.account.dto.Accountdetails;
 import com.model.account.dto.Accountdetailsbalance;
@@ -19,6 +17,8 @@ import com.model.account.dto.Journaltransactions;
 import com.model.account.dto.Paymenttransactions;
 import com.model.account.dto.Receipttransactions;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class AccountDAO {
 	Session session = null;

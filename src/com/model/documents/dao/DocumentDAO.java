@@ -1,20 +1,11 @@
 package com.model.documents.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import com.model.documents.dto.Transfercertificate;
-import com.model.parents.dto.Parents;
-import com.model.stampfees.dto.Academicfeesstructure;
-import com.model.student.dto.Student;
-import com.model.student.dto.Studentfeesstructure;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class DocumentDAO {
 	Session session = null;

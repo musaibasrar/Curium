@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 import com.model.examlevels.dto.Subexamlevel;
 import com.model.subjectdetails.dto.Subject;

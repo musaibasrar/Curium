@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.branch.dto.Branch;
 import com.model.branch.dto.Districts;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class BranchDAO {
 
 	
-	Session session = null;
+    Session session = null;
     /**
      * * Hibernate Session Variable
      */
@@ -262,6 +262,7 @@ try {
         Branch dist = new Branch();
                   
           try {
+              //if
               transaction = session.beginTransaction();
               Query query = session.createQuery("From Branch where centercode = '"+centerCode+"'").setCacheable(true).setCacheRegion("commonregion");
               dist = (Branch) query.uniqueResult();

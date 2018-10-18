@@ -1,13 +1,13 @@
 package com.model.parents.dao;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.parents.dto.Parents;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class parentsDetailsDAO {
 	 Session session = null;

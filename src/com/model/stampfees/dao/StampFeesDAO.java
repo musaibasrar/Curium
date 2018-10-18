@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
-import org.hibernate.Session;
+import com.util.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import com.util.Session.Transaction;
 
 import com.model.parents.dto.Parents;
 import com.model.stampfees.dto.Academicfeesstructure;
@@ -35,7 +35,6 @@ public class StampFeesDAO {
         System.out.println("The password in DAO is: "+password);
        try{
            System.out.println("in USERDAO");
-           this.session = sessionFactory.openSession();
            transaction = session.beginTransaction();
            
            /*String sql = "SELECT * FROM User where username='"+userName+"' and password='"+password+"'";

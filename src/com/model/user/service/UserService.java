@@ -18,6 +18,7 @@ import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
 import com.model.branch.dao.BranchDAO;
 import com.model.branch.dto.Branch;
+import com.model.branch.dto.Districts;
 import com.model.branch.service.BranchService;
 import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
@@ -87,18 +88,19 @@ public class UserService {
 
 	public void dashBoard() {
 		
-		        List<Branch> branchList = new BranchDAO().readListOfObjects();
+		        //List<Branch> branchList = new BranchDAO().readListOfObjects();
+	                List<Districts> districtsList = new BranchDAO().readListOfObjectsDistrict();
 		        List<String> xaxisList = new LinkedList<String>() ;
 		        List<String> yaxisList = new LinkedList<String>() ;
 		       // int[] test = new int[branchList.size()] ;
-		        for (Branch branch : branchList) {
-                            List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.centercode='"+branch.getCentercode()+"'");
-                            xaxisList.add("\"" + branch.getCentername() + "\"");
+		        for (Districts dist : districtsList) {
+                            List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.districtcode='"+dist.getDistrictname()+"'");
+                            xaxisList.add("\""+dist.getDistrictname()+"\"");
                             if(student!=null) {
                                 String studentCount = Integer.toString(student.size());
-                                yaxisList.add("\"" + studentCount + "\"");
+                                yaxisList.add("\""+studentCount+"\"");
                             }else {
-                                yaxisList.add("\"" + 0 + "\"");
+                                yaxisList.add("\""+0+"\"");
                             }
                         }
 		        request.setAttribute("studentxaxis", xaxisList);

@@ -4,13 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
-import com.model.department.dto.Department;
-import com.model.feescategory.dto.Feescategory;
 import com.model.hr.dto.Leaveapplication;
 import com.model.hr.dto.Leavedetails;
 import com.model.hr.dto.Leavetypemaster;
@@ -22,6 +18,8 @@ import com.model.hr.dto.Pf;
 import com.model.hr.dto.Processsalarydetails;
 import com.model.hr.dto.Processsalarydetailsheads;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class HrDAO {
 
@@ -419,7 +417,7 @@ public class HrDAO {
 		
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createSQLQuery("select * from Paybasic where idteacher = "+idteacher+" and academicyear='"+academicYear+"' ORDER BY idpaybasic DESC LIMIT 1").addEntity(Paybasic.class);
+			Query query = session.createSQLQueryEntity("select * from Paybasic where idteacher = "+idteacher+" and academicyear='"+academicYear+"' ORDER BY idpaybasic DESC LIMIT 1",Paybasic.class);
 			basicPay = (Paybasic) query.uniqueResult();
 			transaction.commit();
 		} catch (Exception e) {transaction.rollback();
