@@ -44,7 +44,6 @@ public class studentDetailsDAO {
 			transaction = session.beginTransaction();
 			session.save(student);
 			transaction.commit();
-			System.out.println("in add3");
 		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
@@ -92,9 +91,6 @@ public class studentDetailsDAO {
 			results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND droppedout = 0 order by admissionnumber ASC").setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			noOfRecords = results.size();
-			System.out
-					.println("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
-							+ noOfRecords);
 			transaction.commit();
 
 		} catch (HibernateException hibernateException) {transaction.rollback();
@@ -132,7 +128,6 @@ public class studentDetailsDAO {
 			transaction = session.beginTransaction();
 			session.update(student);
 			transaction.commit();
-			System.out.println("in add2");
 		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
@@ -189,7 +184,6 @@ public class studentDetailsDAO {
 			results = (List<Student>) session.createQuery(
 					"FROM Student s where s.archive = 1 order by admissionnumber ASC")
 					.list();
-			System.out.println("name of student " + results.size());
 			transaction.commit();
 
 		} catch (HibernateException hibernateException) {transaction.rollback();
@@ -499,9 +493,7 @@ public class studentDetailsDAO {
 	                
 
 	        } catch (Exception e) {transaction.rollback();
-	                System.out.println("Exception is "+e);
-	                e.printStackTrace();
-
+	                logger.error(e);
 	        } finally {
 	                // //session.close();
 	                return results;
@@ -644,7 +636,6 @@ public class studentDetailsDAO {
                     results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND droppedout = 0 AND branchid="+branchId+" order by admissionnumber ASC").setCacheable(true).setCacheRegion("commonregion")
                                     .list();
                     noOfRecords = results.size();
-                    System.out.println("The size of list is:::::::::::::::::::::::::::::::::::::::::: "+ noOfRecords);
                     transaction.commit();
             } catch (HibernateException hibernateException) {transaction.rollback();
                     hibernateException.printStackTrace();
@@ -666,7 +657,7 @@ public class studentDetailsDAO {
                     results = query.getResultList();
                     transaction.commit();
             } catch (Exception e) {transaction.rollback();
-                    System.out.println("Exception is "+e);
+                    logger.error("Exception is "+e);
                     e.printStackTrace();
             } finally {
                     // //session.close();

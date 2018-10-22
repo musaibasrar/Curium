@@ -3,6 +3,8 @@
  */
 package com.util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
 
 /**
@@ -14,6 +16,7 @@ public class Session {
     private static Session myLocalSession = new Session();
     private org.hibernate.Session currentSession = null;
 
+    private static final Logger logger = LogManager.getLogger(Session.class);
     /**
      * 
      */
@@ -33,17 +36,17 @@ public class Session {
     }
 
     public Transaction beginTransaction() {
-        System.out.println("Begin transaction");
+        logger.info("Begin transaction");
         return new Transaction(getCurrentSession().beginTransaction());
     }
 
     public org.hibernate.query.Query createQuery(String query) {
-        System.out.println("Query:  "+query);
+        logger.info("Query:  "+query);
         return getCurrentSession().createQuery(query);
     }
     
     public org.hibernate.query.Query createSQLQuery(String query) {
-        System.out.println("SQLQuery:"+query);
+        logger.info("SQLQuery:"+query);
         return getCurrentSession().createSQLQuery(query);
     }
     
@@ -52,22 +55,22 @@ public class Session {
     }
 
     public void save(java.io.Serializable obj) {
-        System.out.println("save "+obj.getClass());
+        logger.info("save "+obj.getClass());
         getCurrentSession().save(obj);
     }
 
     public void update(java.io.Serializable obj) {
-        System.out.println("update "+obj.getClass());
+        logger.info("update "+obj.getClass());
         getCurrentSession().update(obj);
     }
     
     public void delete(java.io.Serializable obj) {
-        System.out.println("delete "+obj.getClass());
+        logger.info("delete "+obj.getClass());
         getCurrentSession().delete(obj);
     }
     
     public void saveOrUpdate(java.io.Serializable obj) {
-        System.out.println("saveOrUpdate "+obj.getClass());
+        logger.info("saveOrUpdate "+obj.getClass());
         getCurrentSession().saveOrUpdate(obj);
     }
     
@@ -79,12 +82,12 @@ public class Session {
         }
         
         public void commit(){
-            System.out.println("Transaction committed");
+            logger.info("Transaction committed");
             this.transaction.commit();
         }
         
         public void rollback() {
-            System.out.println("Transaction roll back");
+            logger.info("Transaction roll back");
             this.transaction.rollback();
         }
         

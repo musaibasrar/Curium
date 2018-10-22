@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 
@@ -16,6 +18,7 @@ import com.model.account.dto.Financialaccountingyear;
 import com.model.account.dto.Journaltransactions;
 import com.model.account.dto.Paymenttransactions;
 import com.model.account.dto.Receipttransactions;
+import com.model.attendance.dao.AttendanceDAO;
 import com.util.HibernateUtil;
 import com.util.Session;
 import com.util.Session.Transaction;
@@ -30,7 +33,7 @@ public class AccountDAO {
 	 * * Hibernate Transaction Variable
 	 */
 	Transaction transaction1;
-	
+	private static final Logger logger = LogManager.getLogger(AccountDAO.class);
 
 	public AccountDAO() {
 		session = HibernateUtil.openCurrentSession();
@@ -52,7 +55,7 @@ public class AccountDAO {
 			transaction.commit();
 			result = true;
 		} catch (HibernateException hibernateException) {transaction.rollback();
-			System.out.println(""+hibernateException);
+			logger.info(""+hibernateException);
 		} finally {
 			//session.close();
 		}
@@ -67,7 +70,7 @@ public class AccountDAO {
 			financialYear = (Financialaccountingyear) query.uniqueResult();
 			transaction.commit();
 		}catch (HibernateException hb) {transaction.rollback();
-			System.out.println("error "+hb);
+			logger.error("error "+hb);
 		}
 		
 		return financialYear;
@@ -127,7 +130,7 @@ public class AccountDAO {
 			result = true;
 		}catch (HibernateException hb) {transaction.rollback();
 			hb.printStackTrace();
-			System.out.println("error "+hb);
+			logger.error("error "+hb);
 		}finally{
 			//session.close();
 		}

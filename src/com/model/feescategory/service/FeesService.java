@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.model.feescategory.dao.feesCategoryDAO;
 import com.model.feescategory.dto.Feescategory;
 import com.model.feesdetails.dao.feesDetailsDAO;
@@ -22,6 +25,8 @@ public class FeesService {
 	    private HttpServletResponse response;
 	    private HttpSession httpSession;
 	    private String BRANCHID = "branchid";
+	    
+	    private static final Logger logger = LogManager.getLogger(FeesService.class);
 	    /**
 	     * Size of a byte buffer to read/write file
 	     */
@@ -79,7 +84,6 @@ public class FeesService {
 		 if(idfeescategory!=null){
 	        List ids = new ArrayList();
 	        for (String id : idfeescategory) {
-	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
 	        }
 	        new feesCategoryDAO().deleteMultiple(ids);
@@ -136,7 +140,7 @@ public class FeesService {
 			outStream.close();
 			result = true;
 		} catch (Exception e) {
-			System.out.println("" + e);
+		    logger.error("" + e);
 		}
 		return result;
 	}

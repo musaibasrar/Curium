@@ -19,13 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
-import com.global.Global;
 import com.model.branch.dao.BranchDAO;
 import com.model.branch.dto.Branch;
 import com.model.branch.service.BranchService;
@@ -38,7 +39,6 @@ import com.model.language.service.LanguageService;
 import com.model.marksdetails.dao.MarksDetailsDAO;
 import com.model.marksdetails.dto.Marks;
 import com.model.parents.dto.Parents;
-import com.model.qualification.service.QualificationService;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
 import com.model.subjectdetails.dao.SubjectDetailsDAO;
@@ -53,6 +53,8 @@ public class MarksDetailsService {
 	HttpSession httpSession;
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private String BRANCHID = "branchid";
+	
+	private static final Logger logger = LogManager.getLogger(MarksDetailsService.class);
 	
 	public MarksDetailsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -69,7 +71,7 @@ public class MarksDetailsService {
 		String[] examList = request.getParameter("hiddensearchedexamlevel").split(":");
 		String exam = examList[0];
 		String subject = request.getParameter("subject");
-		System.out.println("the subject id is " + subject + ", and exam level is " + exam);
+		logger.info("the subject id is " + subject + ", and exam level is " + exam);
 		int sizeOfArray = 0;
 		Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
 		List<Integer> ids = new ArrayList<Integer>();
@@ -85,7 +87,6 @@ public class MarksDetailsService {
 		if (studentsMarks != null) {
 
 			for (String marksList : studentsMarks) {
-				System.out.println("student Marks" + marksList);
 				studentsMarksList.add(marksList);
 
 			}
@@ -98,8 +99,6 @@ public class MarksDetailsService {
 			}*/
 
 			sizeOfArray = ids.size();
-
-			System.out.println("id length" + studentIds.length);
 
 			for (int i = 0; i < sizeOfArray; i++) {
 				mapOfMarks.put(ids.get(i), studentsMarksList.get(i));
@@ -115,7 +114,7 @@ public class MarksDetailsService {
 
 			while (mapIterator.hasNext()) {
 				Map.Entry mapEntry = (Entry) mapIterator.next();
-				System.out.println("The id is " + mapEntry.getKey() + "and marks is " + mapEntry.getValue());
+				    logger.info("The id is " + mapEntry.getKey() + "and marks is " + mapEntry.getValue());
 
 				String test = (String) mapEntry.getValue();
 				Marks marks = new Marks();

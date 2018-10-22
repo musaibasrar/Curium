@@ -269,8 +269,7 @@ public class AttendanceDAO {
 			transaction.commit();
 			return true;
 		}catch (HibernateException e) {transaction.rollback();
-			logger.info(e);
-			System.out.println(""+e);
+			logger.error(e);
 		}finally{
 			//session.close();
 		}
@@ -286,8 +285,7 @@ public class AttendanceDAO {
 			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date = '"+date+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"' and branchid="+branchId).list();
 			transaction.commit();
 		}catch (HibernateException e) {transaction.rollback();
-			logger.info(e);
-			System.out.println("column "+e);
+			logger.error(e);
 		}finally{
 			//session.close();
 		}
@@ -324,7 +322,7 @@ public class AttendanceDAO {
 			transaction.commit();
 			return true;
 		}catch (Exception e) {transaction.rollback();
-			System.out.println("error "+e);
+		logger.error("error "+e);
 		}finally{
 			//session.close();
 		}
@@ -368,7 +366,7 @@ public class AttendanceDAO {
 			transaction.commit();
 			return true;
 		} catch (Exception e) {transaction.rollback();
-			System.out.println(""+e);
+		        logger.error(""+e);
 		}finally{
 			//session.close();
 		}
@@ -393,7 +391,7 @@ public class AttendanceDAO {
 			}
 			transaction.commit();
 		}catch (Exception e) {transaction.rollback();
-			System.out.println(""+e);
+		logger.error(""+e);
 		}finally{
 			//session.close();
 		}
@@ -415,7 +413,7 @@ public class AttendanceDAO {
 			}
 			transaction.commit();
 		}catch (Exception e) {transaction.rollback();
-			System.out.println(""+e);
+		logger.error(""+e);
 		}
 		return mapStudentAttendance;
 	}
@@ -442,8 +440,7 @@ public class AttendanceDAO {
 			transaction.commit();
 			return true;
 		}catch (HibernateException e) {transaction.rollback();
-			logger.info(e);
-			System.out.println(""+e);
+			logger.error(""+e);
 		}finally{
 			//session.close();
 		}
@@ -460,8 +457,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			staffDailyAttendance = session.createQuery("from Staffdailyattendance  where date = '"+timestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacherexternalid+"' and branchid="+branchId).list();
 			transaction.commit();
 		}catch (HibernateException e) {transaction.rollback();
-			logger.info(e);
-			System.out.println("column "+e);
+		        logger.error(e);
 		}finally{
 			//session.close();
 		}
@@ -481,7 +477,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			transaction.commit();
 			return true;
 		}catch (Exception e) {transaction.rollback();
-			System.out.println("error "+e);
+		logger.error("error "+e);
 		}finally{
 			//session.close();
 		}
@@ -526,7 +522,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			transaction.commit();
 			return true;
 		} catch (Exception e) {transaction.rollback();
-			System.out.println(""+e);
+		logger.error(""+e);
 		}finally{
 			//session.close();
 		}
@@ -551,7 +547,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			}
 			transaction.commit();
 		}catch (Exception e) {transaction.rollback();
-			System.out.println(""+e);
+		logger.error(""+e);
 		}
 		return mapStaffAttendance;
 		
@@ -572,7 +568,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			}
 			transaction.commit();
 		}catch (Exception e) {transaction.rollback();
-			System.out.println(""+e);
+		logger.error(""+e);
 		}finally{
 			//session.close();
 		}
@@ -630,7 +626,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
             transaction.commit();
             return true;
     }catch (Exception e) {transaction.rollback();
-            System.out.println("error "+e);
+    logger.error("error "+e);
     }finally{
             //session.close();
     }

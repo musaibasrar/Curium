@@ -332,7 +332,6 @@ public class ResultService {
              int i=1;
              for (Result result : resultList) {
                  result.setRank(i);
-                System.out.println(result.getPercentage()+": Rank:"+i);
                 i++;
             }
              resultList.addAll(resultListFail);
@@ -491,7 +490,6 @@ public class ResultService {
              int i=1;
              for (MarksSheet result : resultList) {
                  result.setRank(i);
-                System.out.println(result.getPercentage()+": Rank:"+i);
                 i++;
             }
              resultList.addAll(resultListFail);

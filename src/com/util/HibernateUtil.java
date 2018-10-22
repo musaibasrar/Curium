@@ -4,8 +4,9 @@
  */
 package com.util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -19,6 +20,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 public class HibernateUtil {
 
     private static final SessionFactory sessionFactory;
+    private static final Logger logger = LogManager.getLogger(HibernateUtil.class);
     
    // private static final ServiceRegistry serviceRegistry;
 
@@ -60,7 +62,6 @@ public class HibernateUtil {
                         }
                     }
             );*/
-               System.out.println("Static block hibernate util");
         	StandardServiceRegistry standardRegistry = 
         		       new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
         			Metadata metaData = 
@@ -70,8 +71,7 @@ public class HibernateUtil {
              //sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             // Log the exception. 
-        	System.out.println("ERROR **********************");
-            System.err.println("Initial SessionFactory creation failed." + ex);
+            logger.error("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
@@ -88,7 +88,7 @@ public class HibernateUtil {
      *
      */
     public static void closeSession() {
-        System.out.println("Close session");
+        logger.info("Close session");
         sessionFactory.getCurrentSession().close();
 
     }

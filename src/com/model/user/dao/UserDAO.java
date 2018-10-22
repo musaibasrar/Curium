@@ -6,19 +6,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
-import com.util.Session;
 import org.hibernate.SessionFactory;
-import com.util.Session.Transaction;
+import org.hibernate.query.Query;
 
-import com.model.employee.dto.Teacher;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.feesdetails.dto.Feesdetails;
-import com.model.parents.dto.Parents;
 import com.model.student.dto.Student;
 import com.model.user.dto.Login;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class UserDAO {
 	 Session session = null;
@@ -27,7 +27,7 @@ public class UserDAO {
 	    /** * Hibernate Transaction Variable */
 	    SessionFactory sessionFactory;
 	    
-	    
+	    private static final Logger logger = LogManager.getLogger(UserDAO.class);
 	    public UserDAO() {
 	    	//Musaib
 	        //sessionFactory = HibernateUtil.getSessionFactory();
@@ -39,7 +39,6 @@ public class UserDAO {
 	public Login readUniqueObject(String userName, String password) {
         Login login = null;
        try{
-           System.out.println("in USERDAO");
            //Musaib
            //this.session = sessionFactory.openSession();
            transaction = session.beginTransaction();
@@ -50,7 +49,7 @@ public class UserDAO {
            transaction.commit();
            
        }catch (Exception e) {transaction.rollback();
-           System.out.println("In userdao null pointer exception"+e);
+           logger.error("In userdao null pointer exception"+e);
            e.printStackTrace();
        }finally{
            return login;
@@ -301,7 +300,7 @@ public class UserDAO {
        transaction.commit();
        
    }catch (Exception e) {transaction.rollback();
-       System.out.println("In userdao"+e);
+       logger.error("In userdao"+e);
        e.printStackTrace();
    }finally{
        return login;
@@ -316,7 +315,7 @@ public class UserDAO {
             transaction.commit();
             
         }catch (Exception e) {transaction.rollback();
-            System.out.println("In userdao"+e);
+            logger.error("In userdao"+e);
             e.printStackTrace();
         }finally{
             return login;

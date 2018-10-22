@@ -22,6 +22,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -58,6 +60,8 @@ public class StudentService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	
+	private static final Logger logger = LogManager.getLogger(StudentService.class);
 	/**
     * Size of a byte buffer to read/write file
     */
@@ -87,7 +91,6 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("name")) {
 		                    
 		                    student.setName(DataUtil.emptyString(item.getString()).toUpperCase());
-		                    System.out.println("name==" + item.getString());
 		                }
 
 		                
@@ -342,7 +345,6 @@ public class StudentService {
 	                // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
 	                String fieldName = item.getFieldName();
 	               
-	                System.out.println("field name is "+fieldName);
 	                if (fieldName.equalsIgnoreCase("id")) {	                
 	                id = DataUtil.emptyString(item.getString());
 	                
@@ -352,8 +354,6 @@ public class StudentService {
 	        		pid = DataUtil.emptyString(item.getString());
 	                }
 	                
-	        		System.out.println("THE ID IS: " + id + "," + pid);
-        		
 	        		if(id!=""){
 	        			studentId = Integer.parseInt(id);
 	        			student.setSid(studentId);
@@ -367,7 +367,6 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("name")) {
 	                    
 	                    student.setName(DataUtil.emptyString(item.getString()).toUpperCase());
-	                    System.out.println("name==" + item.getString());
 	                }
 
 	                
@@ -524,7 +523,6 @@ public class StudentService {
 	                    	                    	
 	                    	// Resize the image
 	                    	byte[]   bytesEncoded = Base64.encodeBase64(item.get());
-	                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
 	                    	String saveFile = new String(bytesEncoded);
 
 	                    	student.setStudentpic(saveFile);
@@ -644,11 +642,9 @@ public class StudentService {
 		if (studentIds != null) {
 			List ids = new ArrayList();
 			for (String id : studentIds) {
-				System.out.println("id" + id);
 				ids.add(Integer.valueOf(id));
 
 			}
-			System.out.println("id length" + studentIds.length);
 			new studentDetailsDAO().restoreMultiple(ids);
 		}
 	}
@@ -694,12 +690,10 @@ public class StudentService {
 		List ids = new LinkedList<Integer>();
 		List admNo = new LinkedList<String>(); 
 		for (String id : studentIds) {
-			System.out.println("id" + id);
 			String[] idAdmNo = id.split("~");
 			ids.add(Integer.valueOf(idAdmNo[0]));
 			admNo.add(idAdmNo[1]);    
 		}
-		System.out.println("id length" + studentIds.length);
 		if (new studentDetailsDAO().promoteMultiple(ids, classStudying)) {
 			result = true;
 		}
@@ -985,7 +979,7 @@ public class StudentService {
 			outStream.close();
 			result = true;
 		} catch (Exception e) {
-			System.out.println("" + e);
+			logger.error("" + e);
 		}
 		return result;
 	}
@@ -1165,7 +1159,7 @@ public class StudentService {
     private boolean exportDataToExcel(Map<Parents, String> studentsReports) {
 
         for (Map.Entry<Parents, String> entry : studentsReports.entrySet()) {
-            System.out.println("Map Values "+entry.getValue());
+            logger.info("Map Values "+entry.getValue());
         }
         return false;
     }
@@ -1297,7 +1291,6 @@ public class StudentService {
         boolean result = false;
         List ids = new ArrayList();
         for (String id : studentIds) {
-                System.out.println("id" + id);
                 String[] idAdmNo = id.split("~");
                 ids.add(Integer.valueOf(idAdmNo[0]));
 
@@ -1314,12 +1307,10 @@ public class StudentService {
         boolean result = false;
         List ids = new ArrayList();
         for (String id : studentIds) {
-                System.out.println("id" + id);
                 String[] idAdmNo = id.split("~");
                 ids.add(Integer.valueOf(idAdmNo[0]));
 
         }
-        System.out.println("id length" + studentIds.length);
         if (new studentDetailsDAO().droppedMultiple(ids)) {
                 result = true;
         }
@@ -1359,11 +1350,9 @@ public class StudentService {
         if (studentIds != null) {
                 List ids = new ArrayList();
                 for (String id : studentIds) {
-                        System.out.println("id" + id);
                         ids.add(Integer.valueOf(id));
 
                 }
-                System.out.println("id length" + studentIds.length);
                 new studentDetailsDAO().restoreMultipleGraduate(ids);
         }
 }
@@ -1373,11 +1362,9 @@ public class StudentService {
         if (studentIds != null) {
                 List ids = new ArrayList();
                 for (String id : studentIds) {
-                        System.out.println("id" + id);
                         ids.add(Integer.valueOf(id));
 
                 }
-                System.out.println("id length" + studentIds.length);
                 new studentDetailsDAO().restoreMultipleDroppedout(ids);
         }
 }

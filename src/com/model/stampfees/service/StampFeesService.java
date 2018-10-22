@@ -7,13 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.model.feescategory.dto.Feescategory;
 import com.model.parents.dto.Parents;
 import com.model.stampfees.dao.StampFeesDAO;
 import com.model.stampfees.dto.Academicfeesstructure;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Studentfeesstructure;
-import com.model.user.dao.UserDAO;
 import com.util.DataUtil;
 
 public class StampFeesService {
@@ -23,6 +25,8 @@ public class StampFeesService {
 	HttpSession httpSession;
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private String BRANCHID = "branchid";
+	
+	private static final Logger logger = LogManager.getLogger(StampFeesService.class);
 
 	public StampFeesService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -76,7 +80,7 @@ public class StampFeesService {
 		 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
 		 * ;
 		 */
-		System.out.println("SEARCH QUERY ***** " + queryMain);
+		logger.info("SEARCH QUERY ***** " + queryMain);
 		searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		
 	}
@@ -115,7 +119,7 @@ public class StampFeesService {
 			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
-			System.out.println("SEARCH QUERY ***** " + queryMain);
+			logger.info("SEARCH QUERY ***** " + queryMain);
 			searchParentsList = new studentDetailsDAO()
 					.getStudentsList(queryMain);
 		}
@@ -143,7 +147,6 @@ public class StampFeesService {
 		List ids = new ArrayList();
 		listOfacademicfessstructure.clear();
 		for (String id : studentIds) {
-			System.out.println("id" + id);
 			academicfessstructure = new Academicfeesstructure();
 			academicfessstructure.setSid(Integer.valueOf(id));
 			academicfessstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
@@ -187,11 +190,9 @@ public class StampFeesService {
 		if(studentIds!=null){
 			List ids = new ArrayList();
 	        for (String id : studentIds) {
-	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
 	            
 	        }
-	        System.out.println("id length" + studentIds.length);
 	        new StampFeesDAO().deleteMultiple(ids,currentYear);
 		
 	}

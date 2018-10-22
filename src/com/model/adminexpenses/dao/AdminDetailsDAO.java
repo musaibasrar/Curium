@@ -36,7 +36,6 @@ public class AdminDetailsDAO {
 			session.save(adminexpenses);
 
 			transaction.commit();
-			System.out.println("in add3");
 		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
@@ -59,7 +58,6 @@ public class AdminDetailsDAO {
 
 			results = (List<Adminexpenses>) session.createQuery("From Adminexpenses where branchid="+branchId)
 					.list();
-			System.out.println("Adminexpenses " + results.size());
 			transaction.commit();
 
 		} catch (HibernateException hibernateException) {transaction.rollback();

@@ -555,7 +555,6 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			
 			int totalMonths =0;
 			for (Date date = start.getTime(); start.before(end); start.add(Calendar.MONTH, +1), date = start.getTime()) {
-			    //System.out.println(new SimpleDateFormat("dd-MM-YYYY").format(date) );
 			    totalMonths++;
 			}
 			
@@ -664,11 +663,11 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			
 			for (Date date = start.getTime(); start.before(end); start.add(Calendar.MONTH, +1), date = start.getTime()) {
 			    // Do your job here with `date`.
-			    System.out.println(new SimpleDateFormat("dd-MM-YYYY").format(date) );
+			    logger.info(new SimpleDateFormat("dd-MM-YYYY").format(date) );
 			}
 			for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
 			    // Do your job here with `date`.
-			    System.out.println(new SimpleDateFormat("dd-MM-YYYY").format(date) );
+			    logger.info(new SimpleDateFormat("dd-MM-YYYY").format(date) );
 			}
 			
 		}
@@ -966,7 +965,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			outStream.close();
 			result = true;
 		} catch (Exception e) {
-			System.out.println("" + e);
+		    logger.error("" + e);
 		}
 		return result;
 		
@@ -1266,7 +1265,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			outStream.close();
 			result = true;
 		} catch (Exception e) {
-			System.out.println("" + e);
+		    logger.error("" + e);
 		}
 		return result;
 		

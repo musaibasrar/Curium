@@ -4,9 +4,6 @@
 package com.model.order.service;
 
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -19,20 +16,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.model.branch.dao.BranchDAO;
 import com.model.branch.dto.Branch;
 import com.model.branch.service.BranchService;
-import com.model.examdetails.dao.ExamDetailsDAO;
-import com.model.examdetails.dto.Exams;
-import com.model.examdetails.dto.Examschedule;
 import com.model.order.dao.OrderDAO;
 import com.model.order.dto.Books;
 import com.model.order.dto.Ordersdetails;
 import com.model.order.dto.Orderssummary;
-import com.model.parents.dto.Parents;
 import com.model.sendsms.service.SmsService;
-import com.model.student.dao.studentDetailsDAO;
-import com.sun.mail.iap.ConnectionException;
 import com.util.DataUtil;
 import com.util.DateUtil;
 
@@ -46,6 +40,8 @@ public class OrderService {
 	HttpServletResponse response;
 	HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	
+	private static final Logger logger = LogManager.getLogger(OrderService.class);
 	
 	public OrderService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -156,7 +152,7 @@ public class OrderService {
                     String orderSendingNumber = properties.getProperty("sendordernumber");
                     new SmsService(request, response).sendSMS(orderSendingNumber, "New order has been placed.");
                 } catch (Exception e) {
-                    System.out.println(e);
+                    logger.error(e);
                 }
             }
             request.setAttribute("ordersave", confirmation);

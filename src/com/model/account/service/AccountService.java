@@ -127,7 +127,6 @@ public class AccountService {
 		                    "<option value='2'>Product Name 2 For Category 2</option>" +
 		                    "<option value='3'>Product Name 3 For Category 2</option></subgroup>");*/
 		        	
-		            System.out.println("The size of the list is "+accountSubGroupMaster.size());
 		        } catch (Exception e) {
 		            out.write("<subgroup>0</subgroup>");
 		        } finally {

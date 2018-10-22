@@ -1,12 +1,6 @@
 package com.model.sendemail.service;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Properties;
@@ -18,14 +12,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.SimpleEmail;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import com.model.academicyear.dao.YearDAO;
-import com.model.academicyear.dto.Currentacademicyear;
-import com.model.employee.dao.EmployeeDAO;
-import com.model.employee.dto.Teacher;
 import com.model.parents.dto.Parents;
 import com.model.sendemail.dao.EmailDAO;
-import com.model.sendsms.dao.SmsDAO;
 import com.util.DataUtil;
 
 public class EmailService {
@@ -33,7 +24,7 @@ public class EmailService {
 	 private HttpServletRequest request;
 	    private HttpServletResponse response;
 	    private HttpSession httpSession;
-	    
+	    private static final Logger logger = LogManager.getLogger(EmailService.class);
 	private static DecimalFormat df2 = new DecimalFormat(".##");
 	
 	public EmailService(HttpServletRequest request, HttpServletResponse response) {
@@ -82,7 +73,7 @@ public class EmailService {
 			double totalEmails = new EmailDAO().countEmails(queryMain);
 			int iterations = (int) Math.ceil(totalEmails/100);
 			
-			System.out.println("main query:"+queryMain);
+			logger.info("main query:"+queryMain);
 			
 			for(int i=0;i<iterations;i++){
 				List<Parents> parentsEmails = new EmailDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
@@ -97,7 +88,7 @@ public class EmailService {
 						}
 						emails=sbN.toString();
 						emails = emails.substring(0, emails.length()-1);
-						System.out.println("emails are *** "+emails);
+						logger.info("emails are *** "+emails);
 						result = sendEmail(emails,DataUtil.emptyString(request.getParameter("subject")),DataUtil.emptyString(request.getParameter("messagebody")));
 					}
 					
@@ -140,7 +131,7 @@ public class EmailService {
 			email.send();
 			result = true;
 		} catch (Exception e) {
-			System.out.println(""+e);
+			logger.error(""+e);
 		}
 		
 		return result;

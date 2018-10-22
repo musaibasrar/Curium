@@ -53,7 +53,6 @@ public class SubjectDetailsAction {
 	private String readListOfSubjects() {
 		new SubjectDetailsService(request, response).readListOfSubjects();
 		new ExamLevelService(request, response).examLevels();
-        System.out.println("IN action's view all Subjects");
         return "SubjectDetails.jsp";
 	}
 	

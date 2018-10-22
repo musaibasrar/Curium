@@ -71,11 +71,9 @@ public class AdminService {
 		 if(expensesIds!=null){
 	        List ids = new ArrayList();
 	        for (String id : expensesIds) {
-	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
 
 	        }
-	        System.out.println("id length" + expensesIds.length);
 	        new AdminDetailsDAO().deleteMultiple(ids);
 	}
 	}

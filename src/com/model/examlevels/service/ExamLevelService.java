@@ -130,7 +130,7 @@ public class ExamLevelService {
         }
         
         admissionNumber = currentAcademicYear.substring(2, 4)+request.getParameter("centercode")+request.getParameter("examlevel")+String.format("%03d", admission);
-        System.out.println("AdmissionNumber "+admissionNumber);
+        logger.info("AdmissionNumber "+admissionNumber);
 
         String districtName = new BranchService(request, response).getDistrictName();
         

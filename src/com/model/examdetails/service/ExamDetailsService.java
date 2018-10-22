@@ -89,7 +89,6 @@ public class ExamDetailsService {
 		 if(examIds!=null){
 	        List ids = new ArrayList();
 	        for (String id : examIds) {
-	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
 
 	        }

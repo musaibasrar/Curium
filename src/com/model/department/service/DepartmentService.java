@@ -65,11 +65,9 @@ public class DepartmentService {
 		 
 	        List ids = new ArrayList();
 	        for (String id : departmentIds) {
-	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
 
 	        }
-	        System.out.println("id length" + departmentIds.length);
 	        new departmentDAO().deleteMultiple(ids);
 		 }
 	}

@@ -33,10 +33,8 @@ public class YearAction {
 	public String execute(String action) {
 		// TODO Auto-generated method stub
 		if (action.equalsIgnoreCase("saveYear")) {
-			System.out.println("Action is viewAllExpenses");
 			url = saveYear();
 		} else if (action.equalsIgnoreCase("updateYear")) {
-			System.out.println("Action is addExpenses");
 			url = updateYear();
 		}
 		return url;

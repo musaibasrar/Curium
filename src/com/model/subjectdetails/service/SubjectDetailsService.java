@@ -74,11 +74,9 @@ public class SubjectDetailsService {
 		 if(examIds!=null){
 	        List ids = new ArrayList();
 	        for (String id : examIds) {
-	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
 
 	        }
-	        System.out.println("id length" + examIds.length);
 	        new SubjectDetailsDAO().deleteMultiple(ids);
 	        result = true;
 	}else{

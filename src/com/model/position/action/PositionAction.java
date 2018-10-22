@@ -23,13 +23,10 @@ public class PositionAction {
 
 	public String execute(String action, String page) {
 		if (action.equalsIgnoreCase("addPosition")) {
-			System.out.println("Action is add position");
 			url = addPosition();
 		}else if (action.equalsIgnoreCase("positionView")) {
-			System.out.println("Action is positionView");
 			url = viewPosition();
 		}else if (action.equalsIgnoreCase("deleteMultiple")) {
-			System.out.println("Action is deleteMultiple");
 			url = deleteMultiple();
 		}
 		return url;
@@ -42,14 +39,12 @@ public class PositionAction {
 
 	private String viewPosition() {
 		new PositionService(request, response).viewPosition();
-        System.out.println("IN action's position view");
         return "position.jsp";
 	}
 
 	private String addPosition() {
 		
 		new PositionService(request, response).addPosition();
-		System.out.println("IN action's add position");
 		return "Controller?process=PositionProcess&action=positionView";
 	}
 

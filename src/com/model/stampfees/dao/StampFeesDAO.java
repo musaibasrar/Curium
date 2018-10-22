@@ -2,17 +2,19 @@ package com.model.stampfees.dao;
 
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
-import com.util.Session;
 import org.hibernate.SessionFactory;
-import com.util.Session.Transaction;
+import org.hibernate.query.Query;
 
 import com.model.parents.dto.Parents;
 import com.model.stampfees.dto.Academicfeesstructure;
 import com.model.student.dto.Student;
 import com.model.user.dto.Login;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class StampFeesDAO {
 	 Session session = null;
@@ -20,7 +22,7 @@ public class StampFeesDAO {
 	    Transaction transaction = null;
 	    /** * Hibernate Transaction Variable */
 	    SessionFactory sessionFactory;
-	    
+	    private static final Logger logger = LogManager.getLogger(StampFeesDAO.class);
 	    
 	    public StampFeesDAO() {
 	        sessionFactory = HibernateUtil.getSessionFactory();
@@ -30,11 +32,7 @@ public class StampFeesDAO {
 	@SuppressWarnings("finally")
 	public Login readUniqueObject(String userName, String password) {
         Login login = null;
-        System.out.println("in readuniqueobject method");
-        System.out.println("The username in DAO is: "+userName);
-        System.out.println("The password in DAO is: "+password);
        try{
-           System.out.println("in USERDAO");
            transaction = session.beginTransaction();
            
            /*String sql = "SELECT * FROM User where username='"+userName+"' and password='"+password+"'";
@@ -50,8 +48,7 @@ public class StampFeesDAO {
            transaction.commit();
            
        }catch (Exception e) {transaction.rollback();
-           System.out.println("In userdao null pointer exception"+e);
-           e.printStackTrace();
+           logger.info(e);
        }finally{
            return login;
        }}
@@ -71,7 +68,6 @@ public class StampFeesDAO {
 
 	            results = (java.util.List<Student>) session.createQuery("FROM Student s where s.archive = 0 order by s.admissionnumber ASC").list();
 	            noOfRecords = results.size();
-	            System.out.println("The size of list is:::::::::::::::::::::::::::::::::::::::::: " + noOfRecords);
 	            transaction.commit();
 
 
@@ -96,7 +92,6 @@ public class StampFeesDAO {
 
 	            results = (java.util.List<Student>) session.createQuery("From Student s where s.classstudying LIKE '"+classStudying+" %' AND s.archive = 0 Order by s.admissionnumber ASC").list();
 	            noOfRecords = results.size();
-	            System.out.println("Total Number of students:::::::::::::::::::::::::::::::::::::::::: " + noOfRecords);
 	            transaction.commit();
 
 
@@ -149,10 +144,7 @@ public class StampFeesDAO {
 			
 			
 			}
-			
-
 			transaction.commit();
-			System.out.println("in add3");
 		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {

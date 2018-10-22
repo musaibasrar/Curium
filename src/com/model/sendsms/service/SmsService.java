@@ -15,8 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.academicyear.dao.YearDAO;
-import com.model.academicyear.dto.Currentacademicyear;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
 import com.model.parents.dto.Parents;
@@ -28,7 +29,7 @@ public class SmsService {
 	 private HttpServletRequest request;
 	    private HttpServletResponse response;
 	    private HttpSession httpSession;
-	    
+	    private static final Logger logger = LogManager.getLogger(SmsService.class);
 	private static DecimalFormat df2 = new DecimalFormat(".##");
 	
 	public SmsService(HttpServletRequest request, HttpServletResponse response) {
@@ -77,7 +78,7 @@ public class SmsService {
 			String resultSMS=null;
 			int iterations = (int) Math.ceil(totalNumbers/100);
 			
-			System.out.println("main query:"+queryMain);
+			logger.info("main query:"+queryMain);
 			
 			for(int i=0;i<iterations;i++){
 				List<Parents> parentsContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
@@ -92,7 +93,7 @@ public class SmsService {
 						}
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
-						System.out.println("Numbers are *** "+numbers);
+						logger.info("Numbers are *** "+numbers);
 						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebody")));
 					}
 					
@@ -136,7 +137,6 @@ public class SmsService {
 				}
 				numbers=sbN.toString();
 				numbers = numbers.substring(0, numbers.length()-1);
-				System.out.println("Numbers are *** "+numbers);
 				resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodystaff")));
 			}
 		
@@ -188,7 +188,7 @@ public class SmsService {
 		} 
 		catch (Exception e)
 		{
-		System.out.println("Error SMS "+e);
+		logger.error("Error SMS "+e);
 		return "Error "+e;
 		}
 	

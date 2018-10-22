@@ -1,43 +1,27 @@
 package com.model.printids.service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import com.model.feesdetails.dao.feesDetailsDAO;
-import com.model.feesdetails.dto.Feesdetails;
-import com.model.parents.dao.parentsDetailsDAO;
 import com.model.parents.dto.Parents;
 import com.model.printids.dao.PrintIdsDAO;
-import com.model.std.dto.Classsec;
 import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
-import com.model.student.dto.Studentfeesstructure;
-import com.model.user.dao.UserDAO;
 import com.util.DataUtil;
-import com.util.DateUtil;
 
 public class PrintIdsService {
 
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession httpSession;
+	
+	private static final Logger logger = LogManager.getLogger(PrintIdsService.class);
 
 	public PrintIdsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -90,7 +74,7 @@ public class PrintIdsService {
 			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
-			System.out.println("SEARCH QUERY ***** " + queryMain);
+			logger.info("SEARCH QUERY ***** " + queryMain);
 			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		}
 			request.setAttribute("searchStudentList", searchStudentList);
@@ -109,7 +93,7 @@ public class PrintIdsService {
           for (String id : studentIDs) {
 
               
-               System.out.println("Value of i is " + i);
+               logger.info("Value of i is " + i);
                int sid = Integer.valueOf(id);
                parentsDetails = new PrintIdsDAO().printMultipleIds(id);
                

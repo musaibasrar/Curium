@@ -130,13 +130,11 @@ public class EmployeeService {
         String id = "";
         id = request.getParameter("id");
         
-        System.out.println("THE ID IS: " + id);
 
         int employeeId = 0;
         int parentsId = 0;
         employeeId = Integer.parseInt(id);
         
-        System.out.println("M in in personal service and ID is :::::::::::::::::::::::::::::: " + employeeId);
 
         employee.setTid(employeeId);
         employee.setTeachername(DataUtil.emptyString(request.getParameter("name")));
@@ -165,11 +163,9 @@ public class EmployeeService {
 		 if(employeeIds!=null){
 	        List ids = new ArrayList();
 	        for (String id : employeeIds) {
-	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
 
 	        }
-	        System.out.println("id length" + employeeIds.length);
 	        new EmployeeDAO().deleteMultiple(ids);
 		 }
 	}
@@ -407,7 +403,6 @@ public class EmployeeService {
                                                 
                         // Resize the image
                         byte[]   bytesEncoded = Base64.encodeBase64(item.get());
-                        System.out.println("ecncoded value is " + new String(bytesEncoded ));
                         String saveFile = new String(bytesEncoded);
 
                         orgDet.setPhoto(saveFile);
@@ -432,11 +427,9 @@ public class EmployeeService {
         if(employeeIds!=null){
        List ids = new ArrayList();
        for (String id : employeeIds) {
-           System.out.println("id" + id);
            ids.add(Integer.valueOf(id));
 
        }
-       System.out.println("id length" + employeeIds.length);
        new EmployeeDAO().deleteMultipleOrganizers(ids);
         }
 }

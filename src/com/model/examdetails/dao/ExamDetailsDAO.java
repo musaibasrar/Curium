@@ -30,7 +30,6 @@ public class ExamDetailsDAO {
 			session.save(exams);
 
 			transaction.commit();
-			System.out.println("in add3");
 		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {

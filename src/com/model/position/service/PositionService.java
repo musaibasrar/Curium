@@ -60,11 +60,9 @@ public class PositionService {
 		 if(positionIds!=null){
 	        List ids = new ArrayList();
 	        for (String id : positionIds) {
-	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
 
 	        }
-	        System.out.println("id length" + positionIds.length);
 	        new positionDAO().deleteMultiple(ids);
 		 }
 	}

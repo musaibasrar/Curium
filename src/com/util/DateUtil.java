@@ -4,12 +4,14 @@
  */
 package com.util;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -20,6 +22,7 @@ public class DateUtil {
     static SimpleDateFormat simpleDateFormat;
     static Date returnDate;
 
+    private static final Logger logger = LogManager.getLogger(DateUtil.class);
     /**
      *
      * @param source String Object
@@ -97,7 +100,7 @@ public class DateUtil {
 
 		} catch (ParseException e) {
 
-			System.out.println("Exception :" + e);
+			logger.error("Exception :" + e);
 
 		}
 		return datefinal;
@@ -137,7 +140,7 @@ public class DateUtil {
 				datefinal1 = (Date) dateformatter.parse(secdate);
 				datefinal = datefinal1;
 			} catch (ParseException e1) {
-				System.out.println("Exception :" + e1);
+				logger.error("Exception :" + e1);
 			}
 		}
 		return datefinal;
@@ -324,10 +327,8 @@ public static Date dateParserUpdateStd(String stringDate) {
 
 			date = (Date) formatter.parse(stringDate);
 			String secdate = df.format(date);
-			System.out.println("The date to string is " + secdate);
 
 			datefinal = (Date) dateformatter.parse(secdate);
-			System.out.println("The datefinal is " + datefinal);
 
 		} catch (ParseException e) {
 				e.printStackTrace();

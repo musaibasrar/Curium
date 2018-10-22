@@ -2,7 +2,6 @@ package com.model.user.service;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,23 +13,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
 import com.model.branch.dao.BranchDAO;
 import com.model.branch.dto.Branch;
 import com.model.branch.dto.Districts;
 import com.model.branch.service.BranchService;
-import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.order.dao.OrderDAO;
 import com.model.order.dto.Books;
-import com.model.order.service.OrderService;
 import com.model.parents.dto.Parents;
 import com.model.qualification.dao.QualificationDAO;
 import com.model.qualification.dto.Qualification;
 import com.model.student.dao.studentDetailsDAO;
-import com.model.student.service.StudentService;
 import com.model.user.dao.UserDAO;
 import com.model.user.dto.Login;
 import com.util.DataUtil;
@@ -42,6 +41,8 @@ public class UserService {
 	    HttpSession httpSession;
 	    private Login login;
 	    private String BRANCHID = "branchid";
+	    
+	    private static final Logger logger = LogManager.getLogger(UserService.class);
 
 	public UserService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -301,7 +302,7 @@ public class UserService {
 			
 			queryMain = queryMain+querySub+" AND parents.Student.archive=0  Order By parents.Student.admissionnumber ASC";
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
-			System.out.println("SEARCH QUERY ***** "+queryMain);
+			logger.info("SEARCH QUERY ***** "+queryMain);
 			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 	}
 			
@@ -318,14 +319,12 @@ public class UserService {
             InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
             properties.load(inputStream);
             String backupDirectoryIS = properties.getProperty("backupdirectory");
-            System.out.println("the backup directory from input stream is " + backupDirectoryIS);
-
 
             int processComplete; // to verify that either process completed or not
             String sqlExtension = ".sql";
             String backupLocation = backupDirectoryIS + fileName + sqlExtension;
             String mysqlPath = properties.getProperty("mysqlpath");
-            System.out.println("the back up for  the backuplocation " + backupLocation);
+            logger.info("the back up for  the backuplocation " + backupLocation);
             request.setAttribute("Backuplocation", backupLocation);
             Process runtimeProcess = Runtime.getRuntime().exec(mysqlPath + backupLocation);
 
@@ -335,19 +334,15 @@ public class UserService {
             processComplete = runtimeProcess.waitFor();//store the state in variable
 
             if (processComplete == 1) {//if values equal 1 process failed
-                System.out.println("FAILED");
                 result = false;
 
             } else if (processComplete == 0) {//if values equal 0 process failed
-                System.out.println("success");
-
                 //display message
                 result = true;
-
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         return result;
     }
@@ -400,7 +395,7 @@ public class UserService {
 			
 			queryMain = queryMain+querySub;
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
-			System.out.println("SEARCH QUERY ***** "+queryMain);
+			logger.info("SEARCH QUERY ***** "+queryMain);
 			searchParentsList = new studentDetailsDAO().getStudentsList(queryMain);
 			
 		}
@@ -435,7 +430,7 @@ public class UserService {
 			
 			queryMain = queryMain+querySub;
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
-			System.out.println("SEARCH QUERY ***** "+queryMain);
+			logger.info("SEARCH QUERY ***** "+queryMain);
 			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
 			
 	}
