@@ -432,46 +432,7 @@ background-color:rgba(0, 0, 0, 0);
              return false;
          });
      });
-	 
-	 
-	 var students = [
-		                <c:forEach varStatus="status" items="${studentList}" var="student">{
-		                    value:'<c:out default="0" value="${student.admissionnumber}" />',
-		                    name:'<c:out default="0" value="${student.name}" />',
-		                    
-		                    id:'<c:out default="0" value="${student.sid}" />',
-		                    
-		                }<c:if test="${!status.last}">,</c:if>
-		                </c:forEach>
-		            ];
-	 
-		            $(function() {
-		                $( "#admno").autocomplete({
-		                    source: students,
-		                    minLength: 1,
-		                    change:function(event,ui){
-		                        $( "#studentId").val( ui.item.id );
-		                        
-		                        
-		                    },
-		                    focus: function( event, ui ) {
-		                        $( "#studentId").val( ui.item.id );
-		                        return true;
-		                    },
-		                    select: function( event, ui ) {
-		                        $( "#studentId").val( ui.item.id );
-		           			  $( "#studentName").val( ui.item.name );
-		           			/* $( "#classandsec").val( ui.item.classandsec ); */
-		                        /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
-		                        return true;
-		                    }
-		                }).data( "autocomplete" )._renderItem = function( ul, item ) {
-		                    return $( "<li></li>" )
-		                    .data( "item.autocomplete", item )
-		                    .append( "<a><b> " + item.value +" </b> </a>" )
-		                    .appendTo( ul );
-		                };
-		            });
+
 </script>
 </head>
 <%

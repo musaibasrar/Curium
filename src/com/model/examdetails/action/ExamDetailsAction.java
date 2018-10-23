@@ -92,8 +92,8 @@ public class ExamDetailsAction {
                 new BranchService(request, response).viewBranches();
             
 		new ExamDetailsService(request, response).getExamScheduleDetails();
-		new ExamDetailsService(request, response).readListOfExams();
-		new SubjectDetailsService(request, response).readListOfSubjects();
+		//new ExamDetailsService(request, response).readListOfExams();
+		//new SubjectDetailsService(request, response).readListOfSubjects();
 		
 		return "generatehallticket.jsp";
 	}
@@ -105,15 +105,15 @@ public class ExamDetailsAction {
 		    new ExamLevelService(request, response).examLevels();
 	            new BranchService(request, response).viewBranches();
 	            
-		result = new SubjectDetailsService(request, response).readListOfSubjects();
+		/*result = new SubjectDetailsService(request, response).readListOfSubjects();
 		if (!result) 
-			return error;
+			return error;*/
 		result = new YearService(request, response).getYear();
 		if (!result) 
 			return error;
-		result = new StudentService(request, response).viewAllStudentsList();
+		/*result = new StudentService(request, response).viewAllStudentsList();
 		if (!result) 
-			return error;
+			return error;*/
 		
 		return "generatehallticket.jsp";
 	}
