@@ -43,9 +43,6 @@ public class StudentAction {
 	public String execute(String action, String page) {
 
 	        if (action.equalsIgnoreCase("viewAll")) {
-	            logger.info("view all ******************************");
-	            logger.error("Error view all ******************************");
-	            logger.debug("Debug view all ******************************");
 			url = viewAll();
 		}else if (action.equalsIgnoreCase("viewAllStudents")) {
 			url = viewAllStudents();

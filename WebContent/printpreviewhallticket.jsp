@@ -62,7 +62,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 18px;
+	font-size: 24px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -71,7 +71,7 @@
 	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 16px;
+	font-size: 20px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -224,15 +224,16 @@ for(Cookie cookie : cookies){
 	<button id="print" onclick="window.print();" 
                    this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide">Print</button>
 		<c:forEach items="${hallticketmap}" var="Parents">
-                        	
+            <div style="page-break-inside: avoid;">             	
 		<table width="100%" style="page-break-inside: avoid;border-collapse: collapse;">
+			
 			<tr>
 				<td align="center">
 				<img src="images/bielogo.png" width="50" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				BOARD OF ISLAMIC EDUCATION <br>
-				KARNATAKA<br><br>
+				BOARD OF ISLAMIC EDUCATION KARNATAKA
+				<br><br>
 				<label class="addressLine">HALL TICKET<br>
 				 </label>
 				</td>
@@ -241,7 +242,7 @@ for(Cookie cookie : cookies){
 			<td></td></tr>
 	</table>
 	
-<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
                 <tr>
 
                     <td colspan="4" ></td>
@@ -253,12 +254,16 @@ for(Cookie cookie : cookies){
                                 <td class="namedetails"><label>Admission No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.student.admissionnumber}"/></label></td>
                                 <td class="namedetails"><label>Language Opted.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.student.languageopted}"/></label></td>
                             </tr>
+                            
+                            <tr>
+                            <td></td>
+                            </tr>	
                             				
                             <tr style="border-color:#000000">
                                 <td class="namedetails">
                                 <label>Candidate Name :&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.student.name}"/></label>
                             	</td>
-                                <td class="namedetails"><label>Center Code/Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${centercodename}"/></label></td>
+                                
                              </tr>
                              
                              <tr style="border-color:#000000">
@@ -273,7 +278,25 @@ for(Cookie cookie : cookies){
 							<c:if test="${(Parents.key.mothersname != '')}">
                                 <td class="namedetails"><label>Husband's Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.mothersname}"/></label></td>
 							</c:if>	
-                                <td class="namedetails"><label>Exam Code/Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${examcodename}"/></label></td>
+                             </tr>
+                             
+                             <tr>
+                            <td></td>
+                            </tr>	
+                             
+                              <tr style="border-color:#000000">
+                                <td class="namedetails">
+                                <label>Center Code/Name :&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${centercodename}"/></label>
+                            	</td>
+                             </tr>
+                             <tr>
+                            <td></td>
+                            </tr>	
+                             
+                             <tr style="border-color:#000000">
+                                <td class="namedetails">
+                                <label>Exam Code/Name :&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${examcodename}"/></label>
+                            	</td>
                              </tr>
                             </table>
                             
@@ -307,15 +330,23 @@ for(Cookie cookie : cookies){
                             
                             
                             <TABLE id="dataTable" width="100%" border="0"
-			style="page-break-inside:auto; border-collapse: collapse;">
+			style="page-break-inside:avoid; border-collapse: collapse;">
 
-			<tr>
+			<!-- <tr>
 			<td>
 			<br>
 			<br></td>
 			</tr>
+            <tr>
+			<td align="left"></td>	
+			<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td align="left" style="padding-left: 300px;"><img alt="Chief Examiner Signature" src="images/cesignature.jpg" width="150" height="50"></td>
+			</tr> -->
 			<tr>
-			<td></td>
+		<td></td>
+		<td align="left"></td>	
+			<td align="centre"></td>
+			<td align="centre"><img alt="Chief Examiner Signature" src="images/cesignature.jpg" width="150" height="50"></td>
 			</tr>
 			
 		<tr>
@@ -326,11 +357,11 @@ for(Cookie cookie : cookies){
 			</tr>
 			
 			<tr>
-               <td align="center"><br><br></td>
+               <td align="center"><br><br><br></td>
             </tr>
                     
 		</TABLE>
-                                 
+		</div>                                 
                         </c:forEach>
 			
 	</form>

@@ -9,5 +9,8 @@
         <property generated="never" lazy="false" name="qualification" optimistic-lock="true" type="string" unique="false">
             <column length="50" name="qualification"/>
         </property>
+        <property generated="never" lazy="false" name="qualificationmaxage" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="qualificationmaxage"/>
+        </property>
     </class>
 </hibernate-mapping>

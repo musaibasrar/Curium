@@ -10,6 +10,7 @@ public class Qualification implements java.io.Serializable {
 
     private Integer idqualification;
     private String qualification;
+    private Integer qualificationmaxage;
 
     public Qualification() {}
 
@@ -31,6 +32,16 @@ public class Qualification implements java.io.Serializable {
 
     public void setQualification(String qualification) {
         this.qualification = qualification;
+    }
+
+    
+    public Integer getQualificationmaxage() {
+        return this.qualificationmaxage;
+    }
+
+    
+    public void setQualificationmaxage(Integer qualificationmaxage) {
+        this.qualificationmaxage = qualificationmaxage;
     }
 
 }

@@ -44,6 +44,7 @@ import com.model.feesdetails.dto.Feesdetails;
 import com.model.language.service.LanguageService;
 import com.model.parents.dao.parentsDetailsDAO;
 import com.model.parents.dto.Parents;
+import com.model.qualification.dto.Qualification;
 import com.model.qualification.service.QualificationService;
 import com.model.std.dto.Classsec;
 import com.model.student.dao.studentDetailsDAO;
@@ -688,19 +689,38 @@ public class StudentService {
 		String classStudying = request.getParameter("classstudying");
 		boolean result = false;
 		List ids = new LinkedList<Integer>();
-		List admNo = new LinkedList<String>(); 
+		List<Student> studentList = new ArrayList<Student>();
 		for (String id : studentIds) {
 			String[] idAdmNo = id.split("~");
 			ids.add(Integer.valueOf(idAdmNo[0]));
-			admNo.add(idAdmNo[1]);    
+			Student std = getStudentDetails(Long.valueOf(idAdmNo[0]));
+			String qualification = getQualification(std.getQualification(),std.getAge()+1);
+			std.setQualification(qualification);
+			studentList.add(std);
 		}
-		if (new studentDetailsDAO().promoteMultiple(ids, classStudying)) {
+		if (new studentDetailsDAO().promoteMultiple(studentList, classStudying)) {
 			result = true;
 		}
 		return result;
 	}
 
-	public boolean viewAllStudentsParents() {
+	private String getQualification(String qualification, Integer age) {
+	    List<Qualification> qualList = new QualificationService(request, response).viewQualification();
+        String qual = qualification;
+        
+           for(int i=0;i<qualList.size()-1;i++) {
+               if(qualList.get(i).getQualification().equalsIgnoreCase(qualification) && age > qualList.get(i).getQualificationmaxage()) {
+                   qual = qualList.get(++i).getQualification();
+               }
+           }
+        return qual;
+    }
+
+    private Student getStudentDetails(Long studentId) {
+        return  new studentDetailsDAO().readUniqueObject(studentId);
+    }
+
+    public boolean viewAllStudentsParents() {
 
 		boolean result = false;
 		//String pages = "1";
@@ -1118,6 +1138,9 @@ public class StudentService {
                 }else {
                     subQuery = "parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
                 }
+                httpSession.setAttribute("studentsreportacademicsearch", request.getParameter("academicyear").toString());
+            }else {
+                httpSession.setAttribute("studentsreportacademicsearch", "");
             }
             
             searchQuery = searchQuery+subQuery+" Order By parent.Student.admissionnumber ASC";
@@ -1180,8 +1203,10 @@ public class StudentService {
                  centerDetails.setCentername(centerCode[1]);
                  centerList.add(centerDetails);
                  httpSession.setAttribute("printcentername", "Center Name: "+centerCode[1]);
+                 httpSession.setAttribute("studentsreportcentersearch", centerCode[0]+":"+centerCode[1]);
              }else {
                  centerList = new BranchDAO().readListOfObjects();
+                 httpSession.setAttribute("studentsreportcentersearch", "");
              }
              
              int englishCountTotal =0, urduCountTotal=0, hindiCountTotal=0, kannadaCountTotal= 0;
@@ -1223,6 +1248,7 @@ public class StudentService {
                      languageReports.put(centerNameCode, languageCount);
                 }
                  httpSession.setAttribute("printexamlevel", "Exam Level: "+request.getParameter("examlevel").toString());
+                 httpSession.setAttribute("studentsreportexamlevelsearch", request.getParameter("examlevel").toString());
             }else {
                 
                 for (Branch eachBranch : centerList) {   
@@ -1232,7 +1258,7 @@ public class StudentService {
                     int englishCount = 0, urduCount = 0, hindiCount = 0, kannadaCount = 0;
                     
                     parentsList = new studentDetailsDAO().getStudentsList("From Parents parents where "
-                            + "parents.Student.centercode='"+eachBranch.getCentercode()+"' order by parents.Student.centercode ASC");
+                            + "parents.Student.centercode='"+eachBranch.getCentercode()+"' order by parents.Student.centercode DESC");
                    
                     for (Parents singleParents : parentsList) {
                             if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("English")) {
@@ -1260,6 +1286,7 @@ public class StudentService {
                     
                     languageReports.put(centerNameCode, languageCount);
                }
+                httpSession.setAttribute("studentsreportexamlevelsearch", "");
             }
              httpSession.setAttribute("englishcounttotal", englishCountTotal);
              httpSession.setAttribute("urducounttotal", urduCountTotal);
@@ -1392,6 +1419,14 @@ public class StudentService {
                 } catch (Exception e) {
                         e.printStackTrace();
                 }
+                
+                new ExamLevelService(request, response).examLevels();
+                new LanguageService(request, response).viewLanguage();
+                new BranchService(request, response).viewDistricts();
+                new BranchService(request, response).viewBranchesCenter();
+                List<Branch> list = (List<Branch>) request.getAttribute("branchList");
+                request.setAttribute("studentviewallcenter", list.get(0).getCentercode()+":"+list.get(0).getCentername());
+                new QualificationService(request, response).viewQualification(); 
         }
         
         return result;
@@ -1560,17 +1595,39 @@ public class StudentService {
              }
              
              if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
+                 String subAcademicYear = request.getParameter("academicyear").toString().substring(2, 4);
                  if(subQuery!=null) {
-                     String subAcademicYear = request.getParameter("academicyear").toString().substring(2, 4);
-                     
                      subQuery = subQuery+"AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
                  }else {
-                     subQuery = "parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
+                     subQuery = "parent.Student.admissionnumber like '"+subAcademicYear+"%' ";
+                 }
+                 httpSession.setAttribute("studentviewallacademic", request.getParameter("academicyear").toString());
+             }else {
+                 httpSession.setAttribute("studentviewallacademic", "");
+             }
+             
+             if(!DataUtil.emptyString(request.getParameter("admissionnumber")).equalsIgnoreCase("")) {
+                 if(subQuery!=null) {
+                     subQuery = subQuery+"AND parent.Student.admissionnumber like '%"+request.getParameter("admissionnumber")+"%'";
+                 }else {
+                     subQuery = "parent.Student.admissionnumber like '%"+request.getParameter("admissionnumber")+"%'";
                  }
              }
-
              
-             searchQuery = searchQuery+subQuery+" Order By parent.Student.admissionnumber ASC";
+             if(!DataUtil.emptyString(request.getParameter("studentname")).equalsIgnoreCase("")) {
+                 if(subQuery!=null) {
+                     subQuery = subQuery+"AND parent.Student.name like '%"+request.getParameter("studentname")+"%'";
+                 }else {
+                     subQuery = "parent.Student.name like '%"+request.getParameter("studentname")+"%'";
+                 }
+             }
+             
+             if(subQuery!=null) {
+                 searchQuery = searchQuery+subQuery+"AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND  parent.Student.archive = 0 Order By parent.Student.admissionnumber ASC";
+             }else {
+                 searchQuery = searchQuery+"parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND  parent.Student.archive = 0 Order By parent.Student.admissionnumber ASC";
+             }
+             
              List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
              
              request.setAttribute("studentList", parentsList);
@@ -1581,7 +1638,13 @@ public class StudentService {
              new ExamLevelService(request, response).examLevels();
              new LanguageService(request, response).viewLanguage();
              new BranchService(request, response).viewDistricts();
-             new BranchService(request, response).viewBranches();
+             if("admin".equalsIgnoreCase(httpSession.getAttribute("typeOfUser").toString())) {
+                 new BranchService(request, response).viewBranches();
+             }else {
+                 new BranchService(request, response).viewBranchesCenter();
+             }
+             
+             
              new QualificationService(request, response).viewQualification(); 
      }
 }

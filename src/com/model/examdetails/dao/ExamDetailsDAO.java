@@ -149,7 +149,7 @@ public class ExamDetailsDAO {
 			}else {
 			    /*Query query = session.createQuery("from Branch where idbranch="+branchId);
 			    Branch branch = (Branch) query.uniqueResult();*/
-			   listExamSchedule = session.createQuery("from Examschedule where examname = '"+exam+"' and academicyear = '"+academicYear+"' and  centercode like '%|"+centerCode+"%' ORDER BY date ASC").list();
+			   listExamSchedule = session.createQuery("from Examschedule where examname = '"+exam+"' and academicyear = '"+academicYear+"' and  centercode like '%|"+centerCode+"|%' ORDER BY date ASC").list();
 			}
 			transaction.commit();
 		} catch (Exception e) {transaction.rollback();

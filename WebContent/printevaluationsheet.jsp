@@ -267,7 +267,7 @@
             </TABLE>
             <br>
             
-            <table class="datatable" style="page-break-after:always;">
+            <table class="datatable" style="page-break-after:auto;">
             <thead>
  				 <tr>
   						<th  class="datath">Admission Number</th>

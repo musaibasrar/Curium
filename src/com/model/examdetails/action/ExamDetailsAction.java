@@ -88,9 +88,6 @@ public class ExamDetailsAction {
 
 	private String searchHallTicketDetails() {
 		
-	        new ExamLevelService(request, response).examLevels();
-                new BranchService(request, response).viewBranches();
-            
 		new ExamDetailsService(request, response).getExamScheduleDetails();
 		//new ExamDetailsService(request, response).readListOfExams();
 		//new SubjectDetailsService(request, response).readListOfSubjects();

@@ -704,20 +704,10 @@ for(Cookie cookie : cookies){
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
    						  <td class="dataText"><c:out value="${(status.index)+1}" /></td>
-						  <td class="dataText"><label style="display: none;"><c:out value="${referencebookslist.referencebooks}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${referencebookslist.referencebooks}" />" id="updatereferencebooks" name="updatereferencebooks"></td>
-						  <td class="dataText"><label style="display: none;"><c:out value="${referencebookslist.language}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${referencebookslist.language}" />" id="updatereferencebooks" name="updatereferencebooks"></td>
+						  <td class="dataText"><label><c:out value="${referencebookslist.referencebooks}" /></label></td>
+						  <td class="dataText"><label><c:out value="${referencebookslist.language}" /></label></td>
 						  <td class="dataText">
-							<label style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" > 
-							 <select name="updateexamlevel" id="updateexamlevel"
-									style="width: 240px;" required>
-										<option selected>${referencebookslist.examlevelcode}</option>
-										<c:forEach items="${examleveldetails}" var="examleveldetails">
-											<option value="${examleveldetails.levelcode}" >
-												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label>  
+						  <label><c:out value="${referencebookslist.examlevelcode}" /></label>
 						  </td>			
 						</tr>
 					</c:forEach>

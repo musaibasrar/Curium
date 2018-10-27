@@ -32,17 +32,18 @@ public class QualificationService {
 
 	}
 
-    public void viewQualification() {
+    public List<Qualification> viewQualification() {
         
+        List<Qualification> qualificationList = new ArrayList<Qualification>();
         try {
-            List<Qualification> list = new QualificationDAO().readListOfObjects();
-            request.setAttribute("qualificationlist", list);
-            logger.info("Qualification details List "+list.size());
+            qualificationList = new QualificationDAO().readListOfObjects();
+            request.setAttribute("qualificationlist", qualificationList);
+            logger.info("Qualification details List "+qualificationList.size());
         } catch (Exception e) {
             e.printStackTrace();
             
         }
-        
+        return qualificationList;
     }
 
     public void addQualification() {

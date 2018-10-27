@@ -95,7 +95,10 @@ public class ResultService {
        
             if(!request.getParameter("centercode").equalsIgnoreCase("")) {
                 String[] centerCode = request.getParameter("centercode").split(":");
-                subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
+                subQuery = "parent.Student.centercode = '"+centerCode[0]+"'"; 
+                httpSession.setAttribute("resultservicecentersearch", centerCode[0]+":"+centerCode[1]);
+            }else {
+                httpSession.setAttribute("resultservicecentersearch", "");
             }
             
             if(!request.getParameter("examlevelcode").equalsIgnoreCase("")) {
@@ -105,6 +108,9 @@ public class ResultService {
                 }else {
                     subQuery = "parent.Student.examlevel = '"+examLevelCode[0]+"'";
                 }
+                httpSession.setAttribute("resultserviceexamlevelsearch", request.getParameter("examlevelcode").toString());
+            }else {
+                httpSession.setAttribute("resultserviceexamlevelsearch", "");
             }
             
             if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
@@ -114,7 +120,24 @@ public class ResultService {
                 }else {
                     subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                 }
+                httpSession.setAttribute("resultservicelanguagesearch",request.getParameter("languageopted").toString());
+            }else {
+                httpSession.setAttribute("resultservicelanguagesearch","");
             }
+            
+            if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
+                if(subQuery!=null) {
+                    String subAcademicYear = request.getParameter("academicyear").toString().substring(2, 4);
+                    
+                    subQuery = subQuery+"AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
+                }else {
+                    subQuery = "parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
+                }
+                httpSession.setAttribute("resultserviceacademicsearch",request.getParameter("academicyear").toString());
+            }else {
+                httpSession.setAttribute("resultserviceacademicsearch","");
+            }
+            
             searchQuery = searchQuery+subQuery;
             List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
             String[] examDet = examLevel.split(":");
@@ -227,6 +250,9 @@ public class ResultService {
              if(!request.getParameter("centercode").equalsIgnoreCase("")) {
                  String[] centerCode = request.getParameter("centercode").split(":");
                  subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
+                 httpSession.setAttribute("ranklistcentersearch", centerCode[0]+":"+centerCode[1]);
+             }else {
+                 httpSession.setAttribute("ranklistcentersearch", "");
              }
              
              if(!request.getParameter("examlevelcode").equalsIgnoreCase("")) {
@@ -236,6 +262,9 @@ public class ResultService {
                  }else {
                      subQuery = "parent.Student.examlevel = '"+examLevelCode[0]+"'";
                  }
+                 httpSession.setAttribute("ranklistexamlevelsearch", request.getParameter("examlevelcode").toString());
+             }else {
+                 httpSession.setAttribute("ranklistexamlevelsearch", "");
              }
              
              if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
@@ -245,6 +274,9 @@ public class ResultService {
                  }else {
                      subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                  }
+                 httpSession.setAttribute("ranklistlanguagesearch",request.getParameter("languageopted").toString());
+             }else {
+                 httpSession.setAttribute("ranklistlanguagesearch","");
              }
              
 
@@ -255,6 +287,22 @@ public class ResultService {
                      subQuery = "parent.Student.qualification = '"+request.getParameter("qualification")+"'";
                  }
                  httpSession.setAttribute("resultqualification", "Qualification: "+request.getParameter("qualification").toString());
+                 httpSession.setAttribute("ranklistqualificationsearch", request.getParameter("qualification").toString());
+             }else {
+                 httpSession.setAttribute("ranklistqualificationsearch", "");
+             }
+             
+             if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
+                 if(subQuery!=null) {
+                     String subAcademicYear = request.getParameter("academicyear").toString().substring(2, 4);
+                     
+                     subQuery = subQuery+"AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
+                 }else {
+                     subQuery = "parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
+                 }
+                 httpSession.setAttribute("ranklistacademicsearch",request.getParameter("academicyear").toString());
+             }else {
+                 httpSession.setAttribute("ranklistacademicsearch","");
              }
              
              searchQuery = searchQuery+subQuery;
@@ -375,6 +423,9 @@ public class ResultService {
              if(!request.getParameter("centercode").equalsIgnoreCase("")) {
                  String[] centerCode = request.getParameter("centercode").split(":");
                  subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
+                 httpSession.setAttribute("markssheetcentersearch", centerCode[0]+":"+centerCode[1]);
+             }else {
+                 httpSession.setAttribute("markssheetcentersearch", "");
              }
              
              if(!request.getParameter("examlevelcode").equalsIgnoreCase("")) {
@@ -384,6 +435,9 @@ public class ResultService {
                  }else {
                      subQuery = "parent.Student.examlevel = '"+examLevelCode[0]+"'";
                  }
+                 httpSession.setAttribute("markssheetexamlevelsearch", request.getParameter("examlevelcode").toString());
+             }else {
+                 httpSession.setAttribute("markssheetexamlevelsearch", "");
              }
              
              if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
@@ -393,6 +447,9 @@ public class ResultService {
                  }else {
                      subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                  }
+                 httpSession.setAttribute("markssheetlanguagesearch",request.getParameter("languageopted").toString());
+             }else {
+                 httpSession.setAttribute("markssheetlanguagesearch","");
              }
              
 
@@ -403,6 +460,23 @@ public class ResultService {
                      subQuery = "parent.Student.qualification = '"+request.getParameter("qualification")+"'";
                  }
                  httpSession.setAttribute("resultqualification", "Qualification: "+request.getParameter("qualification").toString());
+                 httpSession.setAttribute("markssheetqualificationsearch", request.getParameter("qualification").toString());
+             }else {
+                 httpSession.setAttribute("markssheetqualificationsearch", "");
+             }
+             
+             
+             if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
+                 if(subQuery!=null) {
+                     String subAcademicYear = request.getParameter("academicyear").toString().substring(2, 4);
+                     
+                     subQuery = subQuery+"AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
+                 }else {
+                     subQuery = "parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
+                 }
+                 httpSession.setAttribute("markssheetacademicsearch",request.getParameter("academicyear").toString());
+             }else {
+                 httpSession.setAttribute("markssheetacademicsearch","");
              }
              
              searchQuery = searchQuery+subQuery;

@@ -652,23 +652,17 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out	value="${languagereports.value.get(4)}" /></td>	
 						</tr>
 					</c:forEach>
-					
-					<tr>
-							<td class="dataText"></td>
-							<td class="dataText">Total</td>
-							<td class="dataText"><c:out value="${englishcounttotal}" /></td>
-							<td class="dataText"><c:out value="${urducounttotal}" /></td>
-							<td class="dataText"><c:out value="${hindicounttotal}" /></td>
-							<td class="dataText"><c:out value="${kannadacounttotal}" /></td>
-							<td class="dataText"><c:out value="${totalcount}" /></td>
-						</tr>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"> 
-						<button id="export" type="submit">Export</button>
+						<td class="footerTD" colspan="2">
+						  <button id="export" type="submit">Export</button>
 						&nbsp;&nbsp;
 						  <button id="printlanguagereport">Print</button>
+						</td>
+						<td class="footerTD" colspan="2">
+						  <a style="font-weight: bold;color: white;font-size: 14px;">&nbsp;&nbsp;English: ${englishcounttotal}&nbsp;&nbsp;Urdu: ${urducounttotal}&nbsp;&nbsp;Hindi: ${hindicounttotal}
+						  &nbsp;&nbsp;Kannada: ${kannadacounttotal}&nbsp;&nbsp;Total: ${totalcount}&nbsp;&nbsp;</a>
 						</td>
 					</tr>
 				</tfoot>

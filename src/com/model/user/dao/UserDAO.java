@@ -67,7 +67,7 @@ public class UserDAO {
 	        try {
 	            transaction = session.beginTransaction();
 
-	            results = (java.util.List<Student>) session.createQuery("FROM Student s where s.archive = 0 AND s.branchid="+branchId+" order by s.admissionnumber ASC").list();
+	            results = (java.util.List<Student>) session.createQuery("FROM Student s where s.archive = 0 AND s.branchid="+branchId+" order by s.admissionnumber DESC").list();
 	            noOfRecords = results.size();
 	            transaction.commit();
 

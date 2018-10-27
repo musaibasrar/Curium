@@ -16,9 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.branch.service.BranchService;
 import com.model.examdetails.dao.ExamDetailsDAO;
 import com.model.examdetails.dto.Exams;
 import com.model.examdetails.dto.Examschedule;
+import com.model.examlevels.service.ExamLevelService;
 import com.model.parents.dto.Parents;
 import com.model.referencebooks.dto.Referencebooks;
 import com.model.referencebooks.service.ReferenceBooksService;
@@ -121,9 +123,9 @@ public class ExamDetailsService {
 				for (String center : centerCodes) {
 				    
 				    if(!"".equalsIgnoreCase(centerCodeList)) {
-				        centerCodeList = centerCodeList+"|"+center;
+				        centerCodeList = centerCodeList+center+"|";
 				    }else {
-				        centerCodeList = "|"+center;
+				        centerCodeList = "|"+center+"|";
 				    }
                                     
                                 }
@@ -188,7 +190,7 @@ public class ExamDetailsService {
 			}
 			result = new ExamDetailsDAO().addExamSchedule(examScheduleList);
 		}
-		
+		request.setAttribute("examschedulesave", result);
 		return result;
 	}
 
@@ -225,6 +227,7 @@ public class ExamDetailsService {
 	}else{
 		result = false;
 	}
+		 request.setAttribute("examscheduledelete", result);
 		 return result;
 	
 	}
@@ -244,6 +247,15 @@ public class ExamDetailsService {
 			List<Examschedule> examschedules = new ArrayList<Examschedule>();
 			examschedules = new ExamDetailsDAO().getExamScheduleDetails(academicYear, searchCenter[0], searchExamLevel[0], Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			request.setAttribute("examschedules", examschedules);
+			
+			 new ExamLevelService(request, response).examLevels();
+                         new BranchService(request, response).viewBranches();
+                        if("admin".equalsIgnoreCase(httpSession.getAttribute("typeOfUser").toString())) {
+                            new BranchService(request, response).viewBranches();
+                        }else {
+                            new BranchService(request, response).viewBranchesCenter();
+                        }
+                        
 			if(!examschedules.isEmpty()){
 				return true;
 			}

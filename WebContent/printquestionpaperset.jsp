@@ -88,7 +88,8 @@
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    page-break-after:always;
+    /* page-break-after:always; */
+    page-break-after:auto;
 }
 
 .datatd, .datath {

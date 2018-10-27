@@ -292,6 +292,40 @@
 	text-align: left;
 	background-color: #E3EFFF;
 }
+.alert-box {
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;  
+}
+
+.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.delete {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.deletefailure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
 </style>
 <style>
 #button {
@@ -559,6 +593,32 @@
 	});
 	
 </script>
+<script type="text/javascript">
+					
+					var examschedulesave='<c:out default="" value="${examschedulesave}"/>';
+		            var examscheduledelete='<c:out default="" value="${examscheduledelete}"/>';
+		            
+		            if(examschedulesave == "true"){
+		            	 $(function(){
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            	 });
+		            	 }else if(examschedulesave == "false"){
+		            	  $(function(){
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            		 });
+		            	 }else if(examscheduledelete == "true"){
+			                   	 $(function(){
+			                   		 $( "div.delete" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+			                   	 });
+			                   	 }else if(examscheduledelete == "false"){
+			                   	  $(function(){
+			                   		 $( "div.updatedelete" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+			                   		 });
+			                   	 }
+			
+            
+            
+        </script>
 </head>
 <%
 //allow access only if session exists
@@ -578,6 +638,13 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1">
+	
+			<div class="alert-box success">Exam Schedule has been added successfully!!!</div>
+		<div class="alert-box failure">Saving Failed, Unable to add Exam Schedule!!!</div>
+		
+		<div class="alert-box delete">Exam Schedule has been deleted successfully!!!</div>
+		<div class="alert-box deletefailure">Deletion Failed, Unable to delete Exam Schedule!!!</div>
+		
 			
 			<div style="height: 28px">
 			<button id="add">Add Schedule Exams</button>
@@ -743,25 +810,25 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Center Code<img
-							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
-						<th title="click to sort" class="headerText">Exam Level<img
+						<th title="click to sort" class="headerText">Examination Level<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>	
-						<th title="click to sort" class="headerText">Subject<img
+						<th title="click to sort" class="headerText">&nbsp;&nbsp;&nbsp;Subject&nbsp;&nbsp;&nbsp;<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
-							<th title="click to sort" class="headerText">Date<img
+							<th title="click to sort" class="headerText">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
-						<th title="click to sort" class="headerText">Start Time<img
+						<th title="click to sort" class="headerText">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start&nbsp;&nbsp;&nbsp;Time&nbsp;&nbsp;&nbsp;<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
-						<th title="click to sort" class="headerText">End Time<img
+						<th title="click to sort" class="headerText">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End&nbsp;&nbsp;&nbsp;Time&nbsp;&nbsp;&nbsp;<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
+						<th title="click to sort" class="headerText" style="text-align: left;">Center Code<img
+							alt=" " style="position: relative; top: 4px;"
+							src="css/dataTable/images/sort_both.png" /></th>
 
 					</tr>
 				</thead>
@@ -773,12 +840,12 @@ for(Cookie cookie : cookies){
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
 							<td class="dataText"><input type="checkbox" id="<c:out value="${examschedule.idexamschedule}"/>" class="chcktbl" name="idexamschedule" value="<c:out value="${examschedule.idexamschedule}"/>" /></td>
-							<td class="dataText"><c:out value="${examschedule.centercode}" /></td>
 							<td class="dataText"><c:out value="${examschedule.examname}" /></td>
 							<td class="dataText"><c:out value="${examschedule.subject}" /></td>
 							<td class="dataText"><c:out value="${examschedule.date}" /></td>
 							<td class="dataText"><c:out value="${examschedule.starttime}" /></td>
 							<td class="dataText"><c:out value="${examschedule.endtime}" /></td>
+							<td class="dataText" style="text-align: left;"><c:out value="${examschedule.centercode}" /></td>
 						</tr>
 					</c:forEach>
 

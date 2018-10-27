@@ -420,11 +420,19 @@ public class AttendanceService {
 		        String mainQuery = "from Student where centercode='"+centerCode[0]+"'";
 	                      String subQuery = null;
 	                        
+	                      subQuery = " and examlevel = '"+examLevel[0]+"'";
+	                      
 	                        if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
-	                            subQuery = " and languageopted='"+request.getParameter("languageopted")+"'";
-	                            mainQuery =  mainQuery+subQuery;
+	                            subQuery = subQuery+" and languageopted='"+request.getParameter("languageopted")+"'";
 	                            httpSession.setAttribute("attendancelanguageopted", "Language: "+request.getParameter("languageopted"));
 	                        }
+	                        
+	                        if(!request.getParameter("selectedacademicyear").equalsIgnoreCase("")) {
+	                            String subAcademicYear = request.getParameter("selectedacademicyear").toString().substring(2, 4);
+	                                subQuery = subQuery+" AND admissionnumber like '"+subAcademicYear+"%'";
+	                        }
+	                       
+	                     mainQuery = mainQuery+subQuery+" AND passedout = 0 AND droppedout = 0 AND archive = 0 Order By admissionnumber ASC";
 		        
 		        List<Student> studentsListPerCenter = new studentDetailsDAO().getListStudents(mainQuery);
 		        
@@ -453,8 +461,11 @@ public class AttendanceService {
 		            
 		            new ExamLevelService(request, response).examLevels();
 		            new LanguageService(request, response).viewLanguage();
-		            new BranchService(request, response).viewBranches();
-		            
+		            if("admin".equalsIgnoreCase(httpSession.getAttribute("typeOfUser").toString())) {
+		                 new BranchService(request, response).viewBranches();
+		             }else {
+		                 new BranchService(request, response).viewBranchesCenter();
+		             }
 		            result = true;
 		}
 		return result;

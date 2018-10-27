@@ -160,6 +160,9 @@ public class MarksDetailsService {
 		                String[] centerCode = request.getParameter("centercode").split(":");
 		                subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
 		                httpSession.setAttribute("printcentername", "Center Name: "+centerCode[1]);
+		                httpSession.setAttribute("evaluationsheetcentersearch", centerCode[0]+":"+centerCode[1]);
+		            }else {
+		                httpSession.setAttribute("evaluationsheetcentersearch", "");
 		            }
 		            
 		            if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
@@ -169,6 +172,9 @@ public class MarksDetailsService {
 		                    subQuery = "parent.Student.examlevel = '"+examLevel[1]+"'";
 		                }
 		                httpSession.setAttribute("printexamlevel", "Examination Level: "+examLevel[1]);
+		                httpSession.setAttribute("evaluationsheetexamlevelsearch", request.getParameter("examlevel").toString());
+		            }else {
+		                httpSession.setAttribute("evaluationsheetexamlevelsearch", "");
 		            }
 		            
 		            if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
@@ -178,6 +184,9 @@ public class MarksDetailsService {
 		                    subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
 		                }
 		                httpSession.setAttribute("printlanguage", "Language: "+request.getParameter("languageopted").toString());
+		                httpSession.setAttribute("evaluationsheetlanguagesearch",request.getParameter("languageopted").toString());
+		            }else {
+		                httpSession.setAttribute("evaluationsheetlanguagesearch","");
 		            }
 		            
 		            searchQuery = searchQuery+subQuery+ " Order By parent.Student.admissionnumber ASC";

@@ -201,19 +201,42 @@
     		var examLevel = document.getElementById("examlevel").value;
     		var language = document.getElementById("languageopted").value;
     		var qualification = document.getElementById("qualification").value;
+    		var religion = document.getElementById("religion").value;
+    		var academicyear = document.getElementById("academicyear").value;
+    		var admissionnumber = document.getElementById("admissionnumber").value;
+    		var studentname = document.getElementById("studentname").value;
+    		var branchid = document.getElementById("branchid").value;
     		
-    		if(centerCode!="" || districtCode!="" || examLevel!="" || language!="" || qualification!=""){
-    			var form1 = document.getElementById("form1");
-    			form1.action = "Controller?process=StudentProcess&action=searchStudentsviewAll";
-    			form1.method = "POST";
-    			form1.submit();
+    		if(branchid == 1){
+    			if(centerCode!="" || districtCode!="" || examLevel!="" || language!="" || qualification!="" ||
+        				religion!="" || academicyear!="" || admissionnumber!="" || studentname!=""){
+        			var form1 = document.getElementById("form1");
+        			form1.action = "Controller?process=StudentProcess&action=searchStudentsviewAll";
+        			form1.method = "POST";
+        			form1.submit();
+        		}else{
+        			alert('Enter atleast one filter criteria');
+        			var form1 = document.getElementById("form1");
+        			form1.action = "Controller?process=StudentProcess&action=viewAll";
+        			form1.method = "POST";
+        			form1.submit();
+        		}
     		}else{
-    			alert('Enter atleast one filter criteria');
-    			var form1 = document.getElementById("form1");
-    			form1.action = "Controller?process=StudentProcess&action=viewAll";
-    			form1.method = "POST";
-    			form1.submit();
+    			if(centerCode!=""){
+        			var form1 = document.getElementById("form1");
+        			form1.action = "Controller?process=StudentProcess&action=searchStudentsviewAll";
+        			form1.method = "POST";
+        			form1.submit();
+        		}else{
+        			alert('Please select the center');
+        			var form1 = document.getElementById("form1");
+        			form1.action = "Controller?process=StudentProcess&action=viewAllStudentsCenter";
+        			form1.method = "POST";
+        			form1.submit();
+        		}
     		}
+    		
+    		
     	}
     	
             $(function(){
@@ -340,7 +363,7 @@ for(Cookie cookie : cookies){
 								<td class="alignRightFields"><br></td>
 								</tr>
 						<tr>
-							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;<input name="branchid" type="hidden" id="branchid" value="${branchid}" /></td>
 							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
 									style="width: 240px;">
 										<option selected>${studentviewallcenter}</option>
@@ -467,8 +490,10 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="academicyear" id="academicyear"
-									style="width: 240px;" required>
-										<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+									style="width: 240px;">
+										<option selected value="${studentviewallacademic}">${studentviewallacademic}</option>
+											<option></option>
+											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
 											<option value="2013/14" >2013/14</option>
 											<option value="2014/15" >2014/15</option>
 											<option value="2015/16" >2015/16</option>
@@ -480,6 +505,33 @@ for(Cookie cookie : cookies){
 											<option value="2020/21" >2021/22</option>
 											<option value="2020/21" >2022/23</option>
 								</select>
+							</label> 
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Admission Number&nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<input
+									name="admissionnumber" type="text" id="admissionnumber" size="36" style="text-transform:uppercase;font-weight: bold;width: 236px;"
+									>
+							</label> 
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Student Name &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> <input
+									name="studentname" type="text" id="studentname" size="36" style="text-transform:uppercase;font-weight: bold;width: 236px;"
+									>
 							</label> 
 						</tr>
 
