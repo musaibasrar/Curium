@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.model.periods.dto.Perioddetails;
 import com.model.periods.dto.Periodmaster;
@@ -25,6 +27,8 @@ public class PeriodDAO {
 	 */
 	Transaction transaction1;
 	//SessionFactory sessionFactory;
+	
+	private static final Logger logger = LogManager.getLogger(PeriodDAO.class);
 
 	public PeriodDAO() {
 		session = HibernateUtil.openSession();
@@ -46,7 +50,7 @@ public class PeriodDAO {
 			}
 			transaction.commit();
 			return true;
-		}catch(Exception e){
+		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally{
 			session.close();
@@ -62,7 +66,7 @@ public class PeriodDAO {
 			transaction = session.beginTransaction();
 			periodMaster = session.createQuery("from Periodmaster where academicyear='"+currentacademicyear+"' and branchid="+branchId).list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally{
 			session.close();
@@ -78,7 +82,7 @@ public class PeriodDAO {
 			Query query = session.createQuery("from Periodmaster where idperiodmaster="+periodMasterid);
 			periodMaster = (Periodmaster) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally{
 			session.close();
@@ -93,7 +97,7 @@ public class PeriodDAO {
 			transaction = session.beginTransaction();
 			periodDetailsList = session.createQuery("from Perioddetails where periodmasterid="+periodMasterid+" order by idperioddetails ASC").list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally{
 			session.close();
@@ -111,7 +115,7 @@ public class PeriodDAO {
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}finally{
 			session.close();

@@ -1,19 +1,12 @@
 package com.model.documents.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.model.documents.dto.Transfercertificate;
-import com.model.parents.dto.Parents;
-import com.model.stampfees.dto.Academicfeesstructure;
-import com.model.student.dto.Student;
-import com.model.student.dto.Studentfeesstructure;
 import com.util.HibernateUtil;
 
 public class DocumentDAO {
@@ -27,6 +20,8 @@ public class DocumentDAO {
 	 */
 	Transaction transaction1;
 	//SessionFactory sessionFactory;
+	
+	private static final Logger logger = LogManager.getLogger(DocumentDAO.class);
 
 	public DocumentDAO() {
 		session = HibernateUtil.openSession();
@@ -45,7 +40,7 @@ public class DocumentDAO {
 			session.save(tc);
 			transaction.commit();
 			return "true";
-		} catch (Exception e) {
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}
 		return "false";
@@ -61,7 +56,7 @@ public class DocumentDAO {
 			Query query = session.createQuery("from Transfercertificate where sid="+studentId);
 			tc = (Transfercertificate) query.uniqueResult(); 
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}
 		return tc;

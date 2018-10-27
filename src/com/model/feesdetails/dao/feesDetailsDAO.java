@@ -3,14 +3,15 @@ package com.model.feesdetails.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.model.feescategory.dto.Feescategory;
-import com.model.feescollection.dto.Feescollection;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.student.dto.Student;
@@ -28,6 +29,7 @@ public class feesDetailsDAO {
   
     SessionFactory sessionFactory;
     
+    private static final Logger logger = LogManager.getLogger(feesDetailsDAO.class);
 
         public feesDetailsDAO() {
                 session = HibernateUtil.openSession();
@@ -42,8 +44,8 @@ public class feesDetailsDAO {
             transaction = session.beginTransaction();
             results = (List<Feescategory>) session.createQuery("From Feescategory").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
             hibernateException.printStackTrace();
         } finally {
             //session.close();
@@ -61,8 +63,8 @@ public class feesDetailsDAO {
 
             transaction.commit();
             
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
             hibernateException.printStackTrace();
         } finally {
             session.close();
@@ -79,8 +81,8 @@ public class feesDetailsDAO {
                     Query query = session.createQuery("From Feesdetails as feesdetails where feesdetails.feesdetailsid=" + feesDetailsid);
                     feesdetails = (Feesdetails) query.uniqueResult();
                     transaction.commit();
-                } catch (HibernateException hibernateException) {
-                    transaction.rollback();
+                } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                    
                     hibernateException.printStackTrace();
                 }
                 //session.close();
@@ -96,8 +98,8 @@ public class feesDetailsDAO {
                     Query query = session.createQuery("From Receiptinfo as feesdetails where feesdetails.receiptnumber=" + feesDetailsid);
                     feesdetails = (Receiptinfo) query.uniqueResult();
                     transaction.commit();
-                } catch (HibernateException hibernateException) {
-                    transaction.rollback();
+                } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                    
                     hibernateException.printStackTrace();
                 }
                 //session.close();
@@ -116,8 +118,8 @@ public class feesDetailsDAO {
                                 
                   
                     transaction.commit();
-                } catch (HibernateException hibernateException) {
-                    transaction.rollback();
+                } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                    
                     hibernateException.printStackTrace();
                 }
                 //session.close();
@@ -140,8 +142,8 @@ public class feesDetailsDAO {
                                 
                   
                     transaction.commit();
-                } catch (HibernateException hibernateException) {
-                    transaction.rollback();
+                } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                    
                     hibernateException.printStackTrace();
                 }
                 //session.close();
@@ -165,8 +167,8 @@ public class feesDetailsDAO {
                         Query queryTF =  session.createQuery(queryTotalFees);
                         totalFees =  (String) queryTF.uniqueResult();
                         transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
             hibernateException.printStackTrace();
         }
         
@@ -181,14 +183,13 @@ public class feesDetailsDAO {
                     //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 
                     transaction = session.beginTransaction();
-                    transaction = session.beginTransaction();
                                 Query query =  session.createQuery(queryMain);
                                 results =  (String) query.uniqueResult();
                                 
                   
                     transaction.commit();
-                } catch (HibernateException hibernateException) {
-                    transaction.rollback();
+                } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                    
                     hibernateException.printStackTrace();
                 }
                 //session.close();
@@ -209,8 +210,8 @@ public class feesDetailsDAO {
                                 
                   
                     transaction.commit();
-                } catch (HibernateException hibernateException) {
-                    transaction.rollback();
+                } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                    
                     hibernateException.printStackTrace();
                 }
                 //session.close();
@@ -229,8 +230,8 @@ public class feesDetailsDAO {
                                         .list();
                         transaction.commit();
 
-                } catch (HibernateException hibernateException) {
-                        transaction.rollback();
+                } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                        
                         hibernateException.printStackTrace();
 
                 } finally {
@@ -250,8 +251,8 @@ public class feesDetailsDAO {
                                     .list();
                     transaction.commit();
 
-            } catch (HibernateException hibernateException) {
-                    transaction.rollback();
+            } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                    
                     hibernateException.printStackTrace();
 
             } finally {

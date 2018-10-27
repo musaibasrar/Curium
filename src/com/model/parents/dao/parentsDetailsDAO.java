@@ -1,5 +1,7 @@
 package com.model.parents.dao;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -21,6 +23,8 @@ public class parentsDetailsDAO {
 	    Transaction transaction1;
 	    SessionFactory sessionFactory;
 	    
+	    private static final Logger logger = LogManager.getLogger(parentsDetailsDAO.class);
+	    
 	    public parentsDetailsDAO() {
 	    	   session = HibernateUtil.openSession();
 		}
@@ -35,8 +39,8 @@ public class parentsDetailsDAO {
 
 	            transaction.commit();
 	           
-	        } catch (HibernateException hibernateException) {
-	            transaction.rollback();
+	        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
 	            hibernateException.printStackTrace();
 	        } finally {
 	            session.close();
@@ -53,8 +57,8 @@ public class parentsDetailsDAO {
             Query query = session.createQuery("from Parents as parents where parents.Student.sid=" + id);
             parents = (Parents) query.uniqueResult();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
             hibernateException.printStackTrace();
         }
         //session.close();
@@ -70,8 +74,8 @@ public class parentsDetailsDAO {
             session.update(parents);
             transaction.commit();
             System.out.println("in update parents");
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
             hibernateException.printStackTrace();
         } finally {
             //session.close();

@@ -56,6 +56,13 @@
 			<version>2.11.0</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
+		    <version>2.11.0</version>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
@@ -100,11 +107,13 @@
     <version>1.1.2</version>
 </dependency>
 
+<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-c3p0 -->
 <dependency>
     <groupId>org.hibernate</groupId>
     <artifactId>hibernate-c3p0</artifactId>
-    <version>5.3.1.Final</version>
+    <version>5.3.6.Final</version>
 </dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 <dependency>
     <groupId>org.apache.poi</groupId>
@@ -118,6 +127,40 @@
     <version>1.2</version>
 </dependency>
 		
+  <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>1.7.5</version>
+    </dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-ehcache -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-ehcache</artifactId>
+    <version>5.3.6.Final</version>
+</dependency>
+		
+			<!-- EHCache Core APIs -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.10.3</version>
+		</dependency>
+		
+		<!-- EHCache Core APIs -->
+		<!-- <dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.6.11</version>
+		</dependency> -->
+		
+		
+		<!-- Hibernate Jcache -->
+  <!-- <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-jcache</artifactId>
+      <version>5.3.0.Final</version>
+    </dependency> -->
 
 	</dependencies>
 

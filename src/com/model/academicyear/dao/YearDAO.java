@@ -1,17 +1,13 @@
 package com.model.academicyear.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.model.academicyear.dto.Currentacademicyear;
-import com.model.adminexpenses.dto.Adminexpenses;
-import com.model.student.dto.Student;
 import com.util.HibernateUtil;
 
 public class YearDAO {
@@ -24,6 +20,8 @@ public class YearDAO {
 	 * * Hibernate Transaction Variable
 	 */
 	Transaction transaction1;
+	
+	private static final Logger logger = LogManager.getLogger(YearDAO.class);
 	
 
 	public YearDAO() {
@@ -39,8 +37,8 @@ public class YearDAO {
 			session.save(currentacademicyear);
 			transaction.commit();
 			
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			error=hibernateException.getMessage();
 		} finally {
 			session.close();
@@ -61,8 +59,8 @@ public class YearDAO {
 					.createQuery("from Currentacademicyear as ca where ca.cayid = (select max(cayid) from Currentacademicyear) ");
 			currentacademicyear = (Currentacademicyear) query.uniqueResult();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
 		}
 		// session.close();

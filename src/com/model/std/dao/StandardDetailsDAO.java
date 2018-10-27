@@ -3,6 +3,8 @@ package com.model.std.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,7 +26,9 @@ public class StandardDetailsDAO {
      */
     Transaction transaction1;
     SessionFactory sessionFactory;
-	
+
+    private static final Logger logger = LogManager.getLogger(StandardDetailsDAO.class);
+    
 	public StandardDetailsDAO() {
 		session = HibernateUtil.openSession();
 	}
@@ -35,8 +39,8 @@ public class StandardDetailsDAO {
 	            transaction = session.beginTransaction();
 	            session.save(classsec);
 	            transaction.commit();
-	        } catch (HibernateException hibernateException) {
-	            transaction.rollback();
+	        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
 	            hibernateException.printStackTrace();
 	        } finally {
 	            session.close();
@@ -51,8 +55,8 @@ public class StandardDetailsDAO {
             transaction = session.beginTransaction();
             classsecList = session.createQuery("From Classsec where branchid="+branchId).list();
             transaction.commit();
-        } catch (HibernateException hibernateException) {
-            transaction.rollback();
+        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
             hibernateException.printStackTrace();
         } finally {
             session.close();
@@ -68,7 +72,7 @@ public class StandardDetailsDAO {
                 query.setParameterList("ids", ids);
                 query.executeUpdate();
                 transaction.commit();
-        } catch (HibernateException hibernateException) {
+        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
                 hibernateException.printStackTrace();
         }
 

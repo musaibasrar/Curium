@@ -3,21 +3,23 @@ package com.model.examdetails.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
-import com.model.adminexpenses.dto.Adminexpenses;
 import com.model.examdetails.dto.Exams;
 import com.model.examdetails.dto.Examschedule;
-import com.model.student.dto.Student;
 import com.util.HibernateUtil;
 
 public class ExamDetailsDAO {
 
 	Session session;
 	Transaction transaction;
+	
+	private static final Logger logger = LogManager.getLogger(ExamDetailsDAO.class);
 	
 	public ExamDetailsDAO() {
 		session = HibernateUtil.openSession();
@@ -33,8 +35,8 @@ public class ExamDetailsDAO {
 
 			transaction.commit();
 			System.out.println("in add3");
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
 		} finally {
 			session.close();
@@ -56,8 +58,8 @@ public class ExamDetailsDAO {
 					.list();
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
 
 		} finally {
@@ -76,7 +78,7 @@ public class ExamDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 
@@ -93,7 +95,7 @@ public class ExamDetailsDAO {
 				}
 				transaction.commit();
 				return true;
-			} catch (Exception e) {
+			} catch (Exception e) { transaction.rollback(); logger.error(e);
 				e.printStackTrace();
 			}finally{
 				session.close();
@@ -115,8 +117,8 @@ public class ExamDetailsDAO {
 					.list();
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
 
 		} finally {
@@ -135,7 +137,7 @@ public class ExamDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
+		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}finally{
 			session.close();
@@ -150,7 +152,7 @@ public class ExamDetailsDAO {
 			transaction = session.beginTransaction();
 			listExamSchedule = session.createQuery("from Examschedule where classes like '"+classH+"-%' and academicyear = '"+academicYear+"' and examname = '"+exam+"' and branchid="+branchId+" ORDER BY date ASC").list();
 			transaction.commit();
-		} catch (Exception e) {
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally{
 			session.close();

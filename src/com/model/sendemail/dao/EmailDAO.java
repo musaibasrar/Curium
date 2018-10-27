@@ -3,12 +3,13 @@ package com.model.sendemail.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
-import com.model.academicyear.dto.Currentacademicyear;
 import com.model.parents.dto.Parents;
 import com.util.HibernateUtil;
 
@@ -23,7 +24,8 @@ public class EmailDAO {
 	 */
 	Transaction transaction1;
 	
-
+	private static final Logger logger = LogManager.getLogger(EmailDAO.class);
+	
 	public EmailDAO() {
 		session = HibernateUtil.openSession();
 	}
@@ -39,8 +41,8 @@ public class EmailDAO {
 			Query query = session.createQuery("select count(*)" +queryMain+ "AND email IS NOT NULL AND email <> '' ");
 			totalNumbers = (long) query.uniqueResult();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
 		}
 		// session.close();
@@ -68,8 +70,8 @@ public class EmailDAO {
 			transaction.commit();
 			
 
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
 
 		} finally {

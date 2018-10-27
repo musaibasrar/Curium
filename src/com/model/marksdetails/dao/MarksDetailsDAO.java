@@ -1,14 +1,14 @@
 package com.model.marksdetails.dao;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.model.marksdetails.dto.Marks;
 import com.util.HibernateUtil;
@@ -17,6 +17,8 @@ public class MarksDetailsDAO {
 
 	Session session;
 	Transaction transaction;
+	
+	private static final Logger logger = LogManager.getLogger(MarksDetailsDAO.class);
 	
 	public MarksDetailsDAO() {
 		session=HibernateUtil.openSession();
@@ -38,8 +40,8 @@ public class MarksDetailsDAO {
 			
 			transaction.commit();
 			
-		}  catch (HibernateException hibernateException) {
-			transaction.rollback();
+		}  catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
 		} 
 		finally {
@@ -63,8 +65,8 @@ public class MarksDetailsDAO {
 			//query.executeUpdate();
 			results = query.list();
 			transaction.commit();
-		} catch (HibernateException hibernateException) {
-			transaction.rollback();
+		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
 		} finally {
 			 session.close();
@@ -85,8 +87,8 @@ public class MarksDetailsDAO {
 				//query.executeUpdate();
 				results = query.list();
 				transaction.commit();
-			} catch (HibernateException hibernateException) {
-				transaction.rollback();
+			} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
 				hibernateException.printStackTrace();
 			} finally {
 				 session.close();
@@ -108,10 +110,10 @@ public class MarksDetailsDAO {
 	        
 				transaction.commit();
 				
-			}  catch (HibernateException hibernateException) {
-				transaction.rollback();
+			}  catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
 				hibernateException.printStackTrace();
-			} catch(Exception e){
+			} catch (Exception e) { transaction.rollback(); logger.error(e);
 				e.printStackTrace();
 			}
 			finally {
@@ -130,7 +132,7 @@ public class MarksDetailsDAO {
 				query.executeUpdate();
 				transaction.commit();
 				result=true;
-			} catch (HibernateException hibernateException) {
+			} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
 				hibernateException.printStackTrace();
 				result=false;
 			}
@@ -145,8 +147,8 @@ public class MarksDetailsDAO {
 				Query query = session.createQuery("From Marks where sid = '"+id+"' and academicyear = '"+currentAcademicYear+"' ORDER BY examid ASC");
 				results = query.list();
 				transaction.commit();
-			} catch (HibernateException hibernateException) {
-				transaction.rollback();
+			} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
 				hibernateException.printStackTrace();
 			} finally {
 				 session.close();

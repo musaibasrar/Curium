@@ -131,7 +131,6 @@ public class StampFeesService {
 		if(studentIds!=null){
 		Academicfeesstructure academicfessstructure = new Academicfeesstructure();
 		List<Academicfeesstructure> listOfacademicfessstructure = new ArrayList<Academicfeesstructure>();
-		Studentfeesstructure studentfeesstructure = new Studentfeesstructure();
 		List<Studentfeesstructure> listOfstudentfeesstructure = new ArrayList<Studentfeesstructure>();
 		
 		String feesTotalAmount = request.getParameter("feesTotalAmount");
@@ -157,7 +156,8 @@ public class StampFeesService {
 		for (String id : studentIds) {
 
 			for(int i=0; i < feesCategoryIds.length ; i++){
-			    
+			
+			Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
 			Feescategory feescategory = new Feescategory();
 			studentfeesstructure.setSid(Integer.valueOf(id));
 			feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIds[i]));
@@ -167,7 +167,6 @@ public class StampFeesService {
 			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));
 			listOfstudentfeesstructure.add(studentfeesstructure);
-			studentfeesstructure = new Studentfeesstructure();
 		}
 			
 
