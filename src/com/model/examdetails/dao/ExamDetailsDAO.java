@@ -6,8 +6,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import com.util.Session;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.examdetails.dto.Exams;
@@ -22,7 +22,7 @@ public class ExamDetailsDAO {
 	private static final Logger logger = LogManager.getLogger(ExamDetailsDAO.class);
 	
 	public ExamDetailsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 	
 	
@@ -39,7 +39,6 @@ public class ExamDetailsDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
 			return exams;
 		}
 		
@@ -97,8 +96,6 @@ public class ExamDetailsDAO {
 				return true;
 			} catch (Exception e) { transaction.rollback(); logger.error(e);
 				e.printStackTrace();
-			}finally{
-				session.close();
 			}
 			return false;
 	}
@@ -139,10 +136,7 @@ public class ExamDetailsDAO {
 			transaction.commit();
 		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
-		}finally{
-			session.close();
 		}
-		
 	}
 
 	public List<Examschedule> getExamScheduleDetails(String academicYear,
@@ -154,8 +148,6 @@ public class ExamDetailsDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-		}finally{
-			session.close();
 		}
 		
 		return listExamSchedule;

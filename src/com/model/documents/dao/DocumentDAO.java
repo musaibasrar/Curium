@@ -2,8 +2,8 @@ package com.model.documents.dao;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import com.util.Session;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.documents.dto.Transfercertificate;
@@ -24,7 +24,7 @@ public class DocumentDAO {
 	private static final Logger logger = LogManager.getLogger(DocumentDAO.class);
 
 	public DocumentDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 	
 	

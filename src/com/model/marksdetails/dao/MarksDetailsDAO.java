@@ -6,8 +6,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import com.util.Session;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.marksdetails.dto.Marks;
@@ -21,7 +21,7 @@ public class MarksDetailsDAO {
 	private static final Logger logger = LogManager.getLogger(MarksDetailsDAO.class);
 	
 	public MarksDetailsDAO() {
-		session=HibernateUtil.openSession();
+		session=HibernateUtil.openCurrentSession();
 	}
 
 	public String addMarks(List<Marks> marksList) {
@@ -45,7 +45,6 @@ public class MarksDetailsDAO {
 			hibernateException.printStackTrace();
 		} 
 		finally {
-			session.close();
 			return output;
 		}
 		
@@ -69,7 +68,6 @@ public class MarksDetailsDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
-			 session.close();
 			return results;
 		}
 	}
@@ -91,7 +89,6 @@ public class MarksDetailsDAO {
 				
 				hibernateException.printStackTrace();
 			} finally {
-				 session.close();
 				return results;
 			}
 	}
@@ -117,7 +114,6 @@ public class MarksDetailsDAO {
 				e.printStackTrace();
 			}
 			finally {
-				session.close();
 				return result;
 			}
 		}
@@ -151,7 +147,6 @@ public class MarksDetailsDAO {
 				
 				hibernateException.printStackTrace();
 			} finally {
-				 session.close();
 				return results;
 			}
 		}

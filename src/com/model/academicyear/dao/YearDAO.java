@@ -3,8 +3,8 @@ package com.model.academicyear.dao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import com.util.Session;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.academicyear.dto.Currentacademicyear;
@@ -25,7 +25,7 @@ public class YearDAO {
 	
 
 	public YearDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")
@@ -41,7 +41,6 @@ public class YearDAO {
 			
 			error=hibernateException.getMessage();
 		} finally {
-			session.close();
 			return error;
 		}
 	}

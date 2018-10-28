@@ -6,8 +6,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import com.util.Session;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.parents.dto.Parents;
@@ -31,7 +31,7 @@ public class studentDetailsDAO {
 	private static final Logger logger = LogManager.getLogger(studentDetailsDAO.class);
 	
 	public studentDetailsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")
@@ -47,7 +47,6 @@ public class studentDetailsDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
 			return student;
 		}
 	}
@@ -412,9 +411,7 @@ public class studentDetailsDAO {
 		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
-		} finally {
-			session.close();
-		}
+		} 
 	}
 
 	public List<Studentfeesstructure> getStudentFeesStructure(long id,
@@ -488,8 +485,6 @@ public class studentDetailsDAO {
         } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        }finally{
-        	session.close();
         }
         return student;
 	}
@@ -523,8 +518,6 @@ public class studentDetailsDAO {
 			return true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-		}finally{
-			session.close();
 		}
 		return false;
 	}

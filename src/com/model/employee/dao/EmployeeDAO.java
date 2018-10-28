@@ -6,8 +6,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import com.util.Session;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.employee.dto.Teacher;
@@ -29,7 +29,7 @@ public class EmployeeDAO {
 	private static final Logger logger = LogManager.getLogger(EmployeeDAO.class);
 
 	public EmployeeDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")
@@ -43,9 +43,7 @@ public class EmployeeDAO {
 		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
-		} finally {
-			session.close();
-		}
+		} 
 		return result;
 	}
 
@@ -63,7 +61,6 @@ public class EmployeeDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
 			return results;
 		}
 	}
@@ -82,7 +79,6 @@ public class EmployeeDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
-			session.close();
 			return results;
 		}
 	}
@@ -150,7 +146,6 @@ public class EmployeeDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
-			 session.close();
 			return noOfRecords;
 		}
 	}
@@ -163,8 +158,6 @@ public class EmployeeDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-		}finally{
-			session.close();
 		}
 		return employee;
 	}
@@ -177,8 +170,6 @@ public class EmployeeDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-		}finally{
-			session.close();
 		}
 		return employee;
 	}
@@ -191,8 +182,6 @@ public class EmployeeDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-		}finally{
-			session.close();
 		}
 		return employeeExtId;
 	}
@@ -207,10 +196,7 @@ public class EmployeeDAO {
         } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        } finally {
-            session.close();
         }
-		
 	}
 
 	public Teacher getEmployeeDetails(String userName) {

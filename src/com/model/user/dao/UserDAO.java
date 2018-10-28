@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import com.util.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.feescollection.dto.Receiptinfo;
@@ -21,14 +21,14 @@ public class UserDAO {
 	    /** * Hibernate Session Variable */
 	    Transaction transaction = null;
 	    /** * Hibernate Transaction Variable */
-	    SessionFactory sessionFactory;
+	    SessionFactory sessionFacto;
 	    
 	    private static final Logger logger = LogManager.getLogger(UserDAO.class);
 	    
 	    public UserDAO() {
 	    	//Musaib
 	        //sessionFactory = HibernateUtil.getSessionFactory();
-	        session=HibernateUtil.openSession();
+	        session=HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")
@@ -178,8 +178,6 @@ public class UserDAO {
         } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        } finally {
-            session.close();
         }
 		return false;
 		
@@ -196,9 +194,7 @@ public class UserDAO {
         } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        } finally {
-            session.close();
-        }
+        } 
 		return user;
 	}
 }

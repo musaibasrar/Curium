@@ -8,8 +8,8 @@ import java.util.Map.Entry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import com.util.Session;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.periods.dto.Perioddetails;
@@ -31,7 +31,7 @@ public class PeriodDAO {
 	private static final Logger logger = LogManager.getLogger(PeriodDAO.class);
 
 	public PeriodDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 	
 	public boolean save(Periodmaster periodMaster,Map<String, List<Perioddetails>> periodMap) {
@@ -52,8 +52,6 @@ public class PeriodDAO {
 			return true;
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-		}finally{
-			session.close();
 		}
 		
 		return false;
@@ -68,8 +66,6 @@ public class PeriodDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-		}finally{
-			session.close();
 		}
 		return periodMaster;
 		
@@ -84,8 +80,6 @@ public class PeriodDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-		}finally{
-			session.close();
 		}
 		return periodMaster;
 		
@@ -99,8 +93,6 @@ public class PeriodDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-		}finally{
-			session.close();
 		}
 		return periodDetailsList;
 	}
@@ -117,10 +109,7 @@ public class PeriodDAO {
 			return true;
 		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
-		}finally{
-			session.close();
 		}
-		
 		return false;
 	}
 	

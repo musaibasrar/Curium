@@ -3,9 +3,9 @@ package com.model.parents.dao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import com.util.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.parents.dto.Parents;
@@ -26,7 +26,7 @@ public class parentsDetailsDAO {
 	    private static final Logger logger = LogManager.getLogger(parentsDetailsDAO.class);
 	    
 	    public parentsDetailsDAO() {
-	    	   session = HibernateUtil.openSession();
+	    	   session = HibernateUtil.openCurrentSession();
 		}
 
 	@SuppressWarnings("finally")
@@ -43,7 +43,6 @@ public class parentsDetailsDAO {
 	            
 	            hibernateException.printStackTrace();
 	        } finally {
-	            session.close();
 	            return parents;
 	        }
 	}

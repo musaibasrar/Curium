@@ -4,7 +4,6 @@
  */
 package com.util;
  
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -75,8 +74,8 @@ public class HibernateUtil {
      * @return
      */
     public static Session openSession(){
-        return getSessionFactory()
-        		.openSession();
+    	return Session.getInstance(getSessionFactory()
+        		.openSession());
         //.withOptions().tenantIdentifier( "school" )
 
     }
@@ -85,12 +84,12 @@ public class HibernateUtil {
      * @return
      */
     public static Session openCurrentSession() {
-        if(getSessionFactory().getCurrentSession().isOpen()){
-            return getSessionFactory().getCurrentSession();
+    	if(getSessionFactory().getCurrentSession().isOpen()){
+            return Session.getInstance(getSessionFactory().getCurrentSession());
 
         }
         else{
-            return getSessionFactory().openSession();
+            return Session.getInstance(getSessionFactory().openSession());
         }
 
         //return getSessionFactory().getCurrentSession();

@@ -6,9 +6,9 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import com.util.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.department.dto.Department;
@@ -31,7 +31,7 @@ public class departmentDAO {
     private static final Logger logger = LogManager.getLogger(departmentDAO.class);
 
 	public departmentDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 
@@ -49,7 +49,6 @@ public class departmentDAO {
             
             hibernateException.printStackTrace();
         } finally {
-            session.close();
             return department;
         }
 	}

@@ -6,9 +6,9 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import com.util.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.std.dto.Classsec;
@@ -30,7 +30,7 @@ public class StandardDetailsDAO {
     private static final Logger logger = LogManager.getLogger(StandardDetailsDAO.class);
     
 	public StandardDetailsDAO() {
-		session = HibernateUtil.openSession();
+		session = HibernateUtil.openCurrentSession();
 	}
 
 	@SuppressWarnings("finally")
@@ -43,7 +43,6 @@ public class StandardDetailsDAO {
 	            
 	            hibernateException.printStackTrace();
 	        } finally {
-	            session.close();
 	            return classsec;
 	        }
 	}
@@ -59,7 +58,6 @@ public class StandardDetailsDAO {
             
             hibernateException.printStackTrace();
         } finally {
-            session.close();
             return classsecList;
         }
     }
