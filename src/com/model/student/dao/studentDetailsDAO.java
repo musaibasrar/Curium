@@ -64,7 +64,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("FROM Student s where s.archive = 0 AND branchid="+branchId+" order by name ASC");
+					.createQuery("FROM Student s where s.archive = 0 AND branchid="+branchId+" order by name ASC").setCacheable(true).setCacheRegion("commonregion");
 			query.setFirstResult(offset);
 			query.setMaxResults(noOfRecords);
 			results = query.list();
@@ -89,7 +89,7 @@ public class studentDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("From Student where archive=0 AND branchid="+branchId)
+			results = (List<Student>) session.createQuery("From Student where archive=0 AND branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			noOfRecords = results.size();
 			System.out
@@ -153,7 +153,7 @@ public class studentDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("From Student where archive=0 AND branchid="+branchId)
+			results = (List<Student>) session.createQuery("From Student where archive=0 AND branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			transaction.commit();
 
@@ -191,7 +191,7 @@ public class studentDetailsDAO {
 			transaction = session.beginTransaction();
 
 			results = (List<Student>) session.createQuery(
-					"FROM Student s where s.archive = 1 order by name ASC")
+					"FROM Student s where s.archive = 1 order by name ASC").setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			System.out.println("name of student " + results.size());
 			transaction.commit();
@@ -320,7 +320,7 @@ public class studentDetailsDAO {
 			
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("From Parents as parents where parents.Student.archive=0 AND parents.branchid = "+branchId+" order by name ASC");
+					.createQuery("From Parents as parents where parents.Student.archive=0 AND parents.branchid = "+branchId+" order by name ASC").setCacheable(true).setCacheRegion("commonregion");
 			query.setFirstResult(offset);   
 			query.setMaxResults(noOfRecords);
 			results = query.getResultList();
@@ -352,7 +352,7 @@ public class studentDetailsDAO {
 			Query query = session
 					.createQuery("FROM Student s where s.archive = 0 and s.branchid= "+branchId+" order by name ASC");
 			
-			results = query.list();
+			results = query.setCacheable(true).setCacheRegion("commonregion").list();
 			transaction.commit();
 
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
@@ -426,7 +426,7 @@ public class studentDetailsDAO {
         try {
             transaction = session.beginTransaction();
             Query HQLquery = session.createQuery(queryMain);
-            parents = (Parents) HQLquery.uniqueResult();
+            parents = (Parents) HQLquery.setCacheable(true).setCacheRegion("commonregion").uniqueResult();
             transaction.commit();
         } catch (Exception hibernateException) {
         	transaction.rollback(); 
@@ -444,7 +444,7 @@ public class studentDetailsDAO {
 
             transaction = session.beginTransaction();
             Query HQLquery = session.createQuery(query);
-            parents = (java.util.List<Parents>) HQLquery.list();
+            parents = (java.util.List<Parents>) HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
             transaction.commit();
         } catch (Exception hibernateException) {
         	transaction.rollback(); 
@@ -460,7 +460,7 @@ public class studentDetailsDAO {
         try {
             transaction = session.beginTransaction();
             Query HQLquery = session.createQuery(query);
-            student = HQLquery.list();
+            student = HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
             transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
@@ -545,7 +545,7 @@ public class studentDetailsDAO {
         int noOfRecords = 0;
         try {
                 transaction = session.beginTransaction();
-                results = (List<Student>) session.createQuery("From Student where archive=0").list();
+                results = (List<Student>) session.createQuery("From Student where archive=0").setCacheable(true).setCacheRegion("commonregion").list();
                 noOfRecords = results.size();
                 transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
