@@ -405,7 +405,7 @@ public class StudentService {
 		}
 		
 		student.setArchive(0);
-		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLM0123NOP89QRSTUVWXYZ4567";
+		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLM0123NOP89QRSTUVWXYZ4567*&!@#%~$.'?<>{[|;:/";
 		int count =4;
 		StringBuilder builder = new StringBuilder();
 		while (count-- != 0) {
