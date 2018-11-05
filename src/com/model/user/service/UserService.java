@@ -131,14 +131,14 @@ public class UserService {
 		String conClassStudying = "";
 		
 		
-		if(!addClass.equalsIgnoreCase("Class") ){
+		if(!addClass.equalsIgnoreCase("") ){
 			
-			conClassStudying = addClass  + " " +"%";
+			conClassStudying = addClass+"%";
 			
 		}
-		if( !addSec.equalsIgnoreCase("Sec")){
+		if( !addSec.equalsIgnoreCase("")){
 			conClassStudying = addClass;
-			conClassStudying = conClassStudying + " " +addSec;
+			conClassStudying = conClassStudying + "--" +addSec;
 		}
 			
 		
@@ -149,14 +149,14 @@ public class UserService {
 			String addClassE = request.getParameter("admclassE");
 			String addSecE = request.getParameter("admsecE");
 			String conClassAdmittedIn = "";
-			if(!addClassE.equalsIgnoreCase("Class") ){
+			if(!addClassE.equalsIgnoreCase("") ){
 				
-				conClassAdmittedIn = addClassE  + " " +"%";
+				conClassAdmittedIn = addClassE+"%";
 				
 			}
-			if( !addSecE.equalsIgnoreCase("Sec")){
+			if( !addSecE.equalsIgnoreCase("")){
 				conClassAdmittedIn = addClassE;
-				conClassAdmittedIn = conClassAdmittedIn + " " +addSecE;
+				conClassAdmittedIn = conClassAdmittedIn + "--" +addSecE;
 			}
 			
 			

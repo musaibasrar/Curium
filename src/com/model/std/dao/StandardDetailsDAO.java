@@ -5,12 +5,13 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.HibernateException;
+
 import com.util.Session;
 import org.hibernate.SessionFactory;
 import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
+import com.model.std.dto.Classhierarchy;
 import com.model.std.dto.Classsec;
 import com.util.HibernateUtil;
 
@@ -39,7 +40,7 @@ public class StandardDetailsDAO {
 	            transaction = session.beginTransaction();
 	            session.save(classsec);
 	            transaction.commit();
-	        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 	            
 	            hibernateException.printStackTrace();
 	        } finally {
@@ -54,8 +55,7 @@ public class StandardDetailsDAO {
             transaction = session.beginTransaction();
             classsecList = session.createQuery("From Classsec where branchid="+branchId).list();
             transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             hibernateException.printStackTrace();
         } finally {
             return classsecList;
@@ -70,11 +70,50 @@ public class StandardDetailsDAO {
                 query.setParameterList("ids", ids);
                 query.executeUpdate();
                 transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
                 hibernateException.printStackTrace();
         }
+    }
 
+	public void createClassHierarchy(Classhierarchy classHierarchy) {
+		 try {
+	            transaction = session.beginTransaction();
+	            session.save(classHierarchy);
+	            transaction.commit();
+	        } catch (Exception hibernateException) { 
+	        	transaction.rollback(); 
+	        	logger.error(hibernateException);
+	            hibernateException.printStackTrace();
+	        } 
+	}
 
+	public void deleteClassHierarchy(List ids) {
+
+        try {
+                transaction = session.beginTransaction();
+                Query query = session.createQuery("delete from Classhierarchy where idclasshierarchy IN (:ids)");
+                query.setParameterList("ids", ids);
+                query.executeUpdate();
+                transaction.commit();
+        } catch (Exception hibernateException) { 
+        		transaction.rollback(); 
+        		logger.error(hibernateException);
+                hibernateException.printStackTrace();
+        }
+    }
+
+	public List<Classhierarchy> viewClassHierarchy(int branchid) {
         
+        List<Classhierarchy> classHierarchyList = new ArrayList<Classhierarchy>();
+        try {
+            transaction = session.beginTransaction();
+            classHierarchyList = session.createQuery("From Classhierarchy where branchid="+branchid).list();
+            transaction.commit();
+        } catch (Exception hibernateException) { 
+        	transaction.rollback(); 
+        	logger.error(hibernateException);
+            hibernateException.printStackTrace();
+        }
+        return classHierarchyList;
     }
 }

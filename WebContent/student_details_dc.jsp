@@ -662,9 +662,6 @@ for(Cookie cookie : cookies){
 									<c:out default="" value="${student.degreedetails.extracurricular}" />
 									
 									</td>
-							</td>
-
-
 						</tr>
 						
 						<tr>

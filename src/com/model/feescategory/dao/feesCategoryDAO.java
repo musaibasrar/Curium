@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.HibernateException;
+
 import com.util.Session;
 import org.hibernate.SessionFactory;
 import com.util.Session.Transaction;
@@ -43,7 +43,7 @@ public class feesCategoryDAO {
             transaction = session.beginTransaction();
             results = (List<Feescategory>) session.createQuery("From Feescategory where branchid="+branchId).list();
             transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         } finally {
@@ -62,7 +62,7 @@ public class feesCategoryDAO {
 
             transaction.commit();
             
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         } finally {
@@ -82,7 +82,7 @@ public class feesCategoryDAO {
 			query.executeUpdate();
 			
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 
@@ -103,7 +103,7 @@ public class feesCategoryDAO {
 				query.executeUpdate();
 			}
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 	}

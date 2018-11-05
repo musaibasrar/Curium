@@ -5,13 +5,14 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.HibernateException;
+
 import com.util.Session;
 import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.parents.dto.Parents;
 import com.model.pudetails.dto.Pudetails;
+import com.model.std.dto.Classhierarchy;
 import com.model.student.dto.Student;
 import com.model.student.dto.Studentfeesstructure;
 import com.util.HibernateUtil;
@@ -43,7 +44,7 @@ public class studentDetailsDAO {
 
 			transaction.commit();
 			System.out.println("in add3");
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 		} finally {
@@ -69,7 +70,7 @@ public class studentDetailsDAO {
 			results = query.list();
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -96,7 +97,7 @@ public class studentDetailsDAO {
 							+ noOfRecords);
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -118,7 +119,7 @@ public class studentDetailsDAO {
 							+ id);
 			student = (Student) query.uniqueResult();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 		}
@@ -134,7 +135,7 @@ public class studentDetailsDAO {
 			session.update(student);
 			transaction.commit();
 			System.out.println("in add2");
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 		} finally {
@@ -156,7 +157,7 @@ public class studentDetailsDAO {
 					.list();
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -174,7 +175,7 @@ public class studentDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 
@@ -195,7 +196,7 @@ public class studentDetailsDAO {
 			System.out.println("name of student " + results.size());
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -223,7 +224,7 @@ public class studentDetailsDAO {
 			query2.executeUpdate();
 			query3.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 
@@ -237,7 +238,7 @@ public class studentDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 
@@ -258,7 +259,7 @@ public class studentDetailsDAO {
 
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -276,7 +277,7 @@ public class studentDetailsDAO {
 		  String[] temp;
 		 
 		  /* delimiter */
-		  String delimiter = " ";
+		  String delimiter = "--";
 		  /* given string will be split by the argument delimiter provided. */
 		  temp = stringclassStudying.split(delimiter);
 		  /* print substrings */
@@ -289,41 +290,20 @@ public class studentDetailsDAO {
 
 		try {
 			transaction = session.beginTransaction();
-
-			String hql = "UPDATE Student set classstudying = :promotedclass WHERE sid IN (:ids)";
-			Query query = session.createQuery(hql);
-			if(classStudying.equalsIgnoreCase("Nursery")){
-				query.setParameter("promotedclass", "L.K.G "+sec);
-			}else if(classStudying.equalsIgnoreCase("L.K.G")){
-				query.setParameter("promotedclass", "U.K.G "+sec);
-			}else if(classStudying.equalsIgnoreCase("U.K.G")){
-				query.setParameter("promotedclass", "I "+sec);
-			}else if(classStudying.equalsIgnoreCase("I")){
-				query.setParameter("promotedclass", "II "+sec);
-			}else if(classStudying.equalsIgnoreCase("II")){
-				query.setParameter("promotedclass", "III "+sec);
-			}else if(classStudying.equalsIgnoreCase("III")){
-				query.setParameter("promotedclass", "IV "+sec);
-			}else if(classStudying.equalsIgnoreCase("IV")){
-				query.setParameter("promotedclass", "V "+sec);
-			}else if(classStudying.equalsIgnoreCase("V")){
-				query.setParameter("promotedclass", "VI "+sec);
-			}else if(classStudying.equalsIgnoreCase("VI")){
-				query.setParameter("promotedclass", "VII "+sec);
-			}else if(classStudying.equalsIgnoreCase("VII")){
-				query.setParameter("promotedclass", "VIII "+sec);
-			}else if(classStudying.equalsIgnoreCase("VIII")){
-				query.setParameter("promotedclass", "IX "+sec);
-			}else if(classStudying.equalsIgnoreCase("IX")){
-				query.setParameter("promotedclass", "X "+sec);
-			}
+			Query query1 = session.createQuery("From Classhierarchy where lowerclass = '"+classStudying+"'");
+			Classhierarchy ch = (Classhierarchy) query1.uniqueResult();
 			
-			query.setParameterList("ids", ids);
-
-			query.executeUpdate();
+			if(ch!=null) {
+				String hql = "UPDATE Student set classstudying = :promotedclass WHERE sid IN (:ids)";
+				Query query = session.createQuery(hql);
+				query.setParameter("promotedclass", ch.getUpperclass()+sec);
+				query.setParameterList("ids", ids);
+				query.executeUpdate();
+			}
+	
 			transaction.commit();
 			result = true;
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 			result = false;
 		} finally {
@@ -375,7 +355,7 @@ public class studentDetailsDAO {
 			results = query.list();
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -408,7 +388,7 @@ public class studentDetailsDAO {
 			}
 			
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 		} 
@@ -431,7 +411,7 @@ public class studentDetailsDAO {
 			results = query.list();
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -444,14 +424,13 @@ public class studentDetailsDAO {
 	public Parents getStudentRecords(String queryMain) {
 		Parents parents = new Parents();
         try {
-            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
-
             transaction = session.beginTransaction();
             Query HQLquery = session.createQuery(queryMain);
             parents = (Parents) HQLquery.uniqueResult();
             transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            
+        } catch (Exception hibernateException) {
+        	transaction.rollback(); 
+        	logger.error(hibernateException);
             hibernateException.printStackTrace();
         }
         //session.close();
@@ -467,8 +446,9 @@ public class studentDetailsDAO {
             Query HQLquery = session.createQuery(query);
             parents = (java.util.List<Parents>) HQLquery.list();
             transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            
+        } catch (Exception hibernateException) {
+        	transaction.rollback(); 
+        	logger.error(hibernateException);
             hibernateException.printStackTrace();
         }
         //session.close();
@@ -482,7 +462,7 @@ public class studentDetailsDAO {
             Query HQLquery = session.createQuery(query);
             student = HQLquery.list();
             transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         }
@@ -497,7 +477,7 @@ public class studentDetailsDAO {
 			studentFeesStructure = session.createQuery("from Studentfeesstructure sfs where sfs.sfsid = '"+sfsid+"'").list();
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -528,7 +508,7 @@ public class studentDetailsDAO {
             transaction = session.beginTransaction();
             session.update(puDetails);
             transaction.commit();
-    } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+    } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
     } 
@@ -568,7 +548,7 @@ public class studentDetailsDAO {
                 results = (List<Student>) session.createQuery("From Student where archive=0").list();
                 noOfRecords = results.size();
                 transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
                 
                 hibernateException.printStackTrace();
 
@@ -576,5 +556,10 @@ public class studentDetailsDAO {
                 return noOfRecords;
         }
 }
+
+	public String getPromotionClass(String classStudying) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

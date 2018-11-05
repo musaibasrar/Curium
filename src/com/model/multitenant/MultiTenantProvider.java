@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Map;
  
-import org.hibernate.HibernateException;
+
 import org.hibernate.engine.config.spi.ConfigurationService;
 import org.hibernate.c3p0.internal.C3P0ConnectionProvider;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
@@ -55,7 +55,12 @@ public class MultiTenantProvider implements MultiTenantConnectionProvider, Servi
 		}
 		catch (Exception e) {
 			System.out.println("Exception is "+e);
-			throw new HibernateException("Could not alter JDBC connection to specified schema [" + tenantIdentifier + "]", e);
+			try {
+				throw new Exception("Could not alter JDBC connection to specified schema [" + tenantIdentifier + "]", e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		return connection;
 	}
@@ -66,7 +71,12 @@ public class MultiTenantProvider implements MultiTenantConnectionProvider, Servi
 			connection.createStatement().execute("USE school");
 		}
 		catch (SQLException e) {
-			throw new HibernateException("Could not alter JDBC connection to specified schema [public]", e);
+			try {
+				throw new Exception("Could not alter JDBC connection to specified schema [public]", e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		connectionProvider.closeConnection(connection);
 	}

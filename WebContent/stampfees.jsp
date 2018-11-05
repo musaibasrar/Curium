@@ -15,6 +15,7 @@
 <title>stamp fees</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
+
 <style type="text/css">
 <!--
 .divCSS {
@@ -309,6 +310,9 @@
 <script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
 
+<script type="text/javascript" src="js/globalize.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/globalize.cultures.js"></script>
+
 <script type="text/javascript"
 	src="js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
@@ -545,8 +549,9 @@
             var feesConcession=document.getElementById("feesConcession_"+value2).value;
             var final1=document.getElementById("hiddenfees_full_amount_"+value2);
             	
-            	var concession = ((feesCat*feesCount)*feesConcession)/100;
-                final1.value=(feesCat*feesCount)-concession;
+            	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
+            	//feesConcession (direct amount)
+                final1.value=(feesCat*feesCount)-feesConcession;
            
         }
        
@@ -660,8 +665,6 @@
             alert(e);
         }
     }
-    
-   
         </script>
 
 </head>
@@ -687,7 +690,23 @@ for(Cookie cookie : cookies){
 			<button id="add">Add Department</button>
 			<br />
 		</div> -->
-
+		<p id="para"></p>
+    <label for="ddlculture">Select Region</label>
+    <select id="ddlculture">
+        <option></option>
+        <option value="zh-TW">China</option>
+        <option value="fr-FR">France</option>
+        <option value="de-DE">Germany</option>
+        <option value="en-IN">India</option>
+        <option value="ja-JP">Japan</option>
+        <option value="ru-RU">Russia</option>
+        <option value="es-ES">Spain</option>
+        <option value="en-GB">United Kingdom</option>
+        <option value="en-US">United States</option>
+    </select>
+    <label for="txtNum">Formatted Number: </label>
+    <input type="text" id="txtNum" readonly="true" />
+    
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
@@ -783,7 +802,7 @@ for(Cookie cookie : cookies){
 								<td class="headerText">Fees Category</td>
 								<td class="headerText">Fees Amount</td>
 								<td class="headerText">No.of installments in a Year</td>
-								<td class="headerText">Concession %</td>
+								<td class="headerText">Concession Amount</td>
 								<td class="headerText">Fees Total Amount</td>
 
 

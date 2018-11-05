@@ -815,12 +815,11 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Subjects Proposed in Degree Course&nbsp;</td>
 							<td align="left"><label>&nbsp;Part I- <input
 									name="ppartone" type="text" class="myclass" id="ppartone" size="30" style="text-transform:uppercase"
-									value="${student.degreedetails.subjectsdegreecoursepartone}" />
-									onblur="validateName();" > <br><br>
+									value="${student.degreedetails.subjectsdegreecoursepartone}" onblur="validateName();" />
+									<br><br>
 							</label><label>Part II- <input
 									name="pparttwo" type="text" class="myclass" id="pparttwo" size="30" style="text-transform:uppercase"
-									value="${student.degreedetails.subjectsdegreecourseparttwo}" />
-									onblur="validateName();" > 
+									value="${student.degreedetails.subjectsdegreecourseparttwo}" onblur="validateName();"/>
 							</label><br>
 							<label>Note: Add subjects separated by commas</label>
 							</td>
@@ -956,7 +955,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft">
 							<input
 									name="lastschool" type="text" class="myclass" id="lastschool" value="${student.schoollastattended}"
-									size="36" onblur="validateName();">
+									size="36">
 									
 							<br><br><br>
 									<input name="games" type="text" class="myclass" id="games" size="36" style="text-transform:uppercase"
@@ -965,7 +964,7 @@ for(Cookie cookie : cookies){
 									
 									<input
 									name="extracurricular" type="text" class="myclass" id="extracurricular" size="36" style="text-transform:uppercase"
-									value="${student.degreedetails.extracurricular}
+									value="${student.degreedetails.extracurricular}"
 									onblur="validateName();" >
 									
 									</td>

@@ -2,12 +2,14 @@ package com.model.std.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.model.std.dao.StandardDetailsDAO;
+import com.model.std.dto.Classhierarchy;
 import com.model.std.dto.Classsec;
 import com.util.DataUtil;
 
@@ -64,5 +66,37 @@ public class StandardService {
                 return viewClasses();
         }
         return false;
+    }
+
+	public void addClassHierarchy() {
+        
+        if(httpSession.getAttribute(BRANCHID)!=null){
+            Classhierarchy classHierarchy = new Classhierarchy();
+            classHierarchy.setLowerclass(DataUtil.emptyString(request.getParameter("lowerclass")));
+            classHierarchy.setUpperclass(DataUtil.emptyString(request.getParameter("upperclass")));
+            classHierarchy.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+            new StandardDetailsDAO().createClassHierarchy(classHierarchy);
+            viewClasses();
+            }
+    }
+
+	public void deleteClassHierarchy() {
+        
+        String[] classIds = request.getParameterValues("idclasshierarchy");
+        if (classIds != null) {
+                List ids = new ArrayList();
+                for (String id : classIds) {
+                        ids.add(Integer.valueOf(id));
+                }
+                new StandardDetailsDAO().deleteClassHierarchy(ids);
+                viewClasses();
+        }
+    }
+
+	public void viewClassHierarchy() {
+        if(httpSession.getAttribute(BRANCHID)!=null){
+            List<Classhierarchy> classHierarchy = new StandardDetailsDAO().viewClassHierarchy(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+            httpSession.setAttribute("classhierarchy", classHierarchy);
+        }
     }
 }

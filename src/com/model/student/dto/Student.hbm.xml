@@ -114,10 +114,10 @@
             <column name="instructionmediumlastschool" length="45" />
         </property>
          <many-to-one name="Pudetails" class="com.model.pudetails.dto.Pudetails"
-            column="pudetailsid" unique="true" not-null="true"
+            column="pudetailsid" unique="true" not-null="true" lazy="false"
             cascade="all" />
           <many-to-one name="degreedetails" class="com.model.degreedetails.dto.Degreedetails"
-            column="degreedetailsid" unique="true" not-null="true"
+            column="degreedetailsid" unique="true" not-null="true" lazy="false"
             cascade="all" />
     </class>
 </hibernate-mapping>

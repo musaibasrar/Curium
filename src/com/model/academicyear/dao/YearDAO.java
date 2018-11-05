@@ -2,7 +2,7 @@ package com.model.academicyear.dao;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.HibernateException;
+
 import com.util.Session;
 import com.util.Session.Transaction;
 import org.hibernate.query.Query;
@@ -37,7 +37,7 @@ public class YearDAO {
 			session.save(currentacademicyear);
 			transaction.commit();
 			
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			error=hibernateException.getMessage();
 		} finally {
@@ -50,15 +50,12 @@ public class YearDAO {
 	public Currentacademicyear showYear() {
 		Currentacademicyear currentacademicyear = new Currentacademicyear();
 		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
-			
 			transaction = session.beginTransaction();
 			Query query = session
 					.createQuery("from Currentacademicyear as ca where ca.cayid = (select max(cayid) from Currentacademicyear) ");
 			currentacademicyear = (Currentacademicyear) query.uniqueResult();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 		}

@@ -480,25 +480,19 @@ for(Cookie cookie : cookies){
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
 						<tr>
-							<td width="10%" class="alignRight">Class&nbsp;</td>
-							<td width="70%"><label> <select name="classofstd" id="classofstd"
-									style="width: 240px" onchange="dropdown()">
+							<td width="10%" class="alignRight">Class&nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+							<select name="classofstd" id="classofstd"
+									style="width: 220px;">
 										<option selected></option>
-										<option>Nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}" >
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>	
+										</c:forEach>
 								</select>
-
 							</label></td>
 						</tr>
 
@@ -508,7 +502,10 @@ for(Cookie cookie : cookies){
 					</table>
 					<table id="table2" width="100%" border="0" align="center">
 						<tr>
-							<td align="center">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td align="left">
 								<button id="search">Search</button>
 							</td>
 						</tr>

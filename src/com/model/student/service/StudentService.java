@@ -34,6 +34,7 @@ import com.model.parents.dao.parentsDetailsDAO;
 import com.model.parents.dto.Parents;
 import com.model.pudetails.dto.Pudetails;
 import com.model.std.dto.Classsec;
+import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
 import com.model.student.dto.Studentfeesstructure;
@@ -104,7 +105,7 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("addclass")) {
 		                    
 		                    addClass = DataUtil.emptyString(item.getString());
-		                    if (!addClass.equalsIgnoreCase("Class")) {
+		                    if (!addClass.equalsIgnoreCase("")) {
 		                            conClassStudying = addClass;
 
 		                    }
@@ -113,8 +114,8 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("addsec")) {
 
 		                    addSec = DataUtil.emptyString(item.getString());
-		                    if (!addSec.equalsIgnoreCase("Sec")) {
-			        			conClassStudying = conClassStudying + " " + addSec;
+		                    if (!addSec.equalsIgnoreCase("")) {
+			        			conClassStudying = conClassStudying + "--" + addSec;
 			        		}else if(conClassStudying !=null){
 			        			conClassStudying = conClassStudying + " " ;
 			        		}
@@ -125,7 +126,7 @@ public class StudentService {
 		                    
 		                    addClassE = DataUtil.emptyString(item.getString());
 
-		                    if (!addClassE.equalsIgnoreCase("Class")) {
+		                    if (!addClassE.equalsIgnoreCase("")) {
 			        			conClassAdmittedIn = addClassE;
 
 			        		}
@@ -136,8 +137,8 @@ public class StudentService {
 
 		                    
 		                    addSecE = DataUtil.emptyString(item.getString());
-			        		if (!addSecE.equalsIgnoreCase("Sec")) {
-			        			conClassAdmittedIn = conClassAdmittedIn + " " + addSecE;
+			        		if (!addSecE.equalsIgnoreCase("")) {
+			        			conClassAdmittedIn = conClassAdmittedIn + "--" + addSecE;
 			        		}else if(conClassAdmittedIn!=null){
 			        		    conClassAdmittedIn = conClassAdmittedIn + " " ;
                                             }
@@ -495,7 +496,7 @@ public class StudentService {
 				String classStudying = student.getClassstudying();
 				if (!classStudying.equalsIgnoreCase("") && !classStudying.equalsIgnoreCase(" ") && classStudying.contains(" ")) {
 					String regex = "[a-zA-Z]+";
-					String[] classParts = classStudying.split(" ");
+					String[] classParts = classStudying.split("--");
 					httpSession.setAttribute("classstudying", classParts[0]);
 					
 					if(classParts.length>=2 && classParts[1].matches(regex) == true ){
@@ -514,7 +515,7 @@ public class StudentService {
 				if (!classAdmitted.equalsIgnoreCase("")  && !classAdmitted.equalsIgnoreCase(" ") && classAdmitted.contains(" ")) {
 
 					String regex = "[a-zA-Z]+";
-					String[] classAdmittedParts = classAdmitted.split(" ");
+					String[] classAdmittedParts = classAdmitted.split("--");
 					
 					httpSession.setAttribute("classadm", classAdmittedParts[0]);
 					if(classAdmittedParts.length>=2 &&  classAdmittedParts[1].matches(regex) == true){
@@ -539,6 +540,7 @@ public class StudentService {
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
 			}
+			new StandardService(request, response).viewClasses();
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = false;
@@ -618,7 +620,7 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("classsec")) {
 	                    
 	                    addClass = DataUtil.emptyString(item.getString());
-	                    if (!addClass.equalsIgnoreCase("Class")) {
+	                    if (!addClass.equalsIgnoreCase("")) {
 
 		        			conClassStudying = addClass;
 
@@ -630,8 +632,8 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("secstudying")) {
 
 	                    addSec = DataUtil.emptyString(item.getString());
-	                    if (!addSec.equalsIgnoreCase("Sec")) {
-		        			conClassStudying = conClassStudying + " " + addSec;
+	                    if (!addSec.equalsIgnoreCase("")) {
+		        			conClassStudying = conClassStudying + "--" + addSec;
 		        		}
 	                }
 
@@ -642,7 +644,7 @@ public class StudentService {
 	                    
 	                    addClassE = DataUtil.emptyString(item.getString());
 
-	                    if (!addClassE.equalsIgnoreCase("Class")) {
+	                    if (!addClassE.equalsIgnoreCase("")) {
 		        			conClassAdmittedIn = addClassE;
 
 		        		}
@@ -655,8 +657,8 @@ public class StudentService {
 
 	                    
 	                    addSecE = DataUtil.emptyString(item.getString());
-		        		if (!addSecE.equalsIgnoreCase("Sec")) {
-		        			conClassAdmittedIn = conClassAdmittedIn + " " + addSecE;
+		        		if (!addSecE.equalsIgnoreCase("")) {
+		        			conClassAdmittedIn = conClassAdmittedIn + "--" + addSecE;
 		        		}
 
 
@@ -1080,7 +1082,6 @@ public class StudentService {
 			ids.add(Integer.valueOf(id));
 
 		}
-		System.out.println("id length" + studentIds.length);
 		if (new studentDetailsDAO().promoteMultiple(ids, classStudying)) {
 			result = true;
 		}
@@ -1205,7 +1206,7 @@ public class StudentService {
 			for (String id : studentIds) {
 				if (id != null || id != "") {
 					String queryMain = "From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
-					String querySub = " parents.Student.id = " + id;
+					String querySub = " parents.Student.id = "+id+" order by parents.Student.admissionnumber ASC";
 					queryMain = queryMain + querySub;
 
 					List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
@@ -1308,23 +1309,16 @@ public class StudentService {
 	public String generateBonafide() {
 		
 		String[] studentIds = request.getParameterValues("studentIDs");
-		String std =  request.getParameter("id");
-		String returning = null;
+		String bonafidePage = null;
 		
-		if(std!=null){
-			returning = "bonafideprint.jsp";
+		if(studentIds!=null){
+			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
+			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			httpSession.setAttribute("studentdetailsbonafide", parents);
+			bonafidePage = "bonafidecertificateprint.jsp";
 		}
-		if(studentIds!=null && studentIds.length>0){
-			std=studentIds[0];
-			returning = "bonafidecertificateprint.jsp";
-		}
-		String getStudentInfo  = "from Parents as parents where parents.Student.sid="+std;
-		Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
-		request.setAttribute("studentdetails", parents);
-		if(parents!=null){
-			return returning;
-		}
-		return returning;
+		
+		return bonafidePage;
 	}
 
 	public boolean downlaodFile() {

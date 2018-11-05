@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.HibernateException;
+
 import com.util.Session;
 import com.util.Session.Transaction;
 import org.hibernate.query.Query;
@@ -40,7 +40,7 @@ public class EmployeeDAO {
 			session.save(employee);
 			transaction.commit();
 			result = true;
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 		} 
@@ -57,7 +57,7 @@ public class EmployeeDAO {
 			results = (List<Teacher>) session.createQuery("From Teacher where branchid="+branchId)
 					.list();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 		} finally {
@@ -75,7 +75,7 @@ public class EmployeeDAO {
 			results = (List<Teacher>) session.createQuery("From Teacher")
 					.list();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 		} finally {
@@ -93,7 +93,7 @@ public class EmployeeDAO {
 			Query query = session.createQuery("From Teacher as employee where employee.tid=" + id);
 			employee = (Teacher) query.uniqueResult();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 		} 
@@ -108,7 +108,7 @@ public class EmployeeDAO {
             session.update(employee);
             transaction.commit();
             
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         } finally {
@@ -124,7 +124,7 @@ public class EmployeeDAO {
             query.setParameterList("ids", ids);
             query.executeUpdate();
             transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             hibernateException.printStackTrace();
         }
 		
@@ -142,7 +142,7 @@ public class EmployeeDAO {
 					.list();
 			noOfRecords = results.size();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 		} finally {
@@ -193,7 +193,7 @@ public class EmployeeDAO {
             session.delete(employee);
             transaction.commit();
             
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         }
@@ -207,7 +207,7 @@ public class EmployeeDAO {
 			Query query = session.createQuery("From Teacher as employee where employee.teacherexternalid='"+userName+"'");
 			employee = (Teacher) query.uniqueResult();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 		} 

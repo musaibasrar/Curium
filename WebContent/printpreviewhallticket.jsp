@@ -202,7 +202,6 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
-		<br>
                         <c:forEach items="${studentList}" var="Parents">
                         
                         	<table width="100%" style="border-collapse: collapse;">

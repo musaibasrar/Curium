@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.HibernateException;
+
 import com.util.Session;
 import com.util.Session.Transaction;
 import org.hibernate.query.Query;
@@ -107,7 +107,7 @@ public class PeriodDAO {
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 		return false;

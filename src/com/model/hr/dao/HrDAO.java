@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.HibernateException;
+
 import com.util.Session;
 import org.hibernate.SessionFactory;
 import com.util.Session.Transaction;
@@ -51,7 +51,7 @@ public class HrDAO {
             transaction = session.beginTransaction();
             list = session.createQuery("From Leavetypemaster where branchid="+branchId).list();
             transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         } 
@@ -65,7 +65,7 @@ public class HrDAO {
             session.save(leaveMaster);
             transaction.commit();
             return true;
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         }
@@ -78,7 +78,7 @@ public class HrDAO {
             session.delete(leaveType);
             transaction.commit();
             return true;
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         }
@@ -94,7 +94,7 @@ public class HrDAO {
 			}
             transaction.commit();
             return true;
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         } 
@@ -108,7 +108,7 @@ public class HrDAO {
             transaction = session.beginTransaction();
             leaveDetailsList = session.createQuery("From Leavedetails where idteacher="+teacherId+" and academicyear='"+academicYear+"'").list();
             transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         } 
@@ -123,7 +123,7 @@ public class HrDAO {
             session.save(payHead);
             transaction.commit();
             return true;
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         } 
@@ -209,7 +209,7 @@ public class HrDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 		
@@ -261,7 +261,7 @@ public class HrDAO {
             session.delete(payAdvance);
             transaction.commit();
             return true;
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         }
@@ -497,7 +497,7 @@ public class HrDAO {
 			transaction.commit();
 			return true;
 			
-			} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 		return false;

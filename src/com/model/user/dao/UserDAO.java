@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.HibernateException;
+
 import com.util.Session;
 import org.hibernate.SessionFactory;
 import com.util.Session.Transaction;
@@ -65,7 +65,7 @@ public class UserDAO {
 	            noOfRecords = results.size();
 	            transaction.commit();
 
-	        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 	            
 	            hibernateException.printStackTrace();
 
@@ -90,7 +90,7 @@ public class UserDAO {
 
 
 
-	        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 	            
 	            hibernateException.printStackTrace();
 
@@ -111,7 +111,7 @@ public class UserDAO {
            query.setParameter("password", currentPassword);
            login = (Login) query.uniqueResult();
            transaction.commit();
-       }catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+       }catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
            hibernateException.printStackTrace();
        }finally{
            return login;
@@ -123,7 +123,7 @@ public class UserDAO {
             transaction = session.beginTransaction();
             session.update(login);
             transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         } finally {
@@ -142,7 +142,7 @@ public class UserDAO {
             Query HQLquery = session.createQuery(queryMain);
             feesDetails = (java.util.List<Feesdetails>) HQLquery.list();
             transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         }
@@ -160,7 +160,7 @@ public class UserDAO {
             Query HQLquery = session.createQuery(queryMain);
             feesDetails = (java.util.List<Receiptinfo>) HQLquery.list();
             transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         }
@@ -175,7 +175,7 @@ public class UserDAO {
             session.save(user);
             transaction.commit();
            return true;
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         }
@@ -191,7 +191,7 @@ public class UserDAO {
             query.setParameter("loginName", teacherexternalid);
             user = (Login) query.uniqueResult();
             transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         } 

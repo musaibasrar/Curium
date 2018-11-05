@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import com.model.documents.service.DocumentService;
 import com.model.feescategory.service.FeesService;
 import com.model.stampfees.service.StampFeesService;
+import com.model.std.service.StandardService;
 import com.model.student.service.StudentService;
 
 /**
@@ -39,10 +40,30 @@ public class DocumentAction {
 			url = generateTransferCertificate();
 		}else if ("PrintTransferCertificate".equalsIgnoreCase(action)) {
 			url = printTransferCertificate();
+		}else if ("studentsDetailsReports".equalsIgnoreCase(action)) {
+			url = studentsDetailsReports();
+		}else if ("studentsDetailsBonafide".equalsIgnoreCase(action)) {
+			url = studentsDetailsBonafide();
+		}else if ("printBonafide".equalsIgnoreCase(action)) {
+			url = printBonafide();
 		}
-		return url;
-	}
+		return url; 
+	} 
 	
+
+	private String printBonafide() {
+		return "bonafideprint.jsp";
+	}
+
+	private String studentsDetailsBonafide() {
+		new StandardService(request, response).viewClasses(); 
+		return "studentsdetailsbonafide.jsp";
+	}
+
+	private String studentsDetailsReports() {
+		new StandardService(request, response).viewClasses(); 
+		return "studentsdetailsreports.jsp";
+	}
 
 	private String printTransferCertificate() {
 		

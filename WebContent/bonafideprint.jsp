@@ -154,6 +154,7 @@ span{
              margin-right: 0cm;
              margin-bottom: 0cm;
              margin-top: 0cm;
+             size: auto;
         }
 
         @media screen {
@@ -167,15 +168,11 @@ span{
             }
         }
     </style>
-	<script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="js/print/jquery.printPage.js" type="text/javascript"></script>
-        <title>Print Receipt</title>
+        <title>Bonafide Print</title>
         <script type="text/javascript">
-             $(function() {
-
-                 $("#print").printPage();
-             });
+             window.onload = function(){
+            	 window.print();
+             }
         </script>
 
 </head>
@@ -203,10 +200,10 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				
-				Divine M.A. English Higher Primary & High School </td>
+				Al-Ameen Education Society's </td>
 			</tr>
 			<tr>
-			<td class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</td>
+			<td class="addressLine">Bidar- 585401</td>
 			</tr>
 
 			<tr>
@@ -250,7 +247,7 @@ border-color: transparent;"
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">This is to certify that Ms. &nbsp;&nbsp;
-					<span style="font-weight: bold;"> <c:out value="${studentdetails.student.name}" /></span>
+					<span style="font-weight: bold;"> <c:out value="${studentdetailsbonafide.student.name}" /></span>
 					</h3>
 				</td>
 				<!-- <td>
@@ -261,7 +258,7 @@ border-color: transparent;"
 					 &nbsp;&nbsp;
 					<h3 style="font-weight: normal;" >
 					
-					Son of &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${studentdetails.fathersname}" /></span></h3>
+					Son of &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${studentdetailsbonafide.fathersname}" /></span></h3>
 				</td>
 				
 			
@@ -281,7 +278,7 @@ border-color: transparent;"
 				
 				<h3 style="font-weight: normal;" >
 					
-					is presently studying in Grade &nbsp;&nbsp; <span style="font-weight: bold;"><c:out value="${studentdetails.student.classstudying}     " /></span></h3>
+					is presently studying in Grade &nbsp;&nbsp; <span style="font-weight: bold;"><c:out value="${studentdetailsbonafide.student.classstudying}     " /></span></h3>
 				
 				
 				</td>
@@ -306,7 +303,7 @@ border-color: transparent;"
 		<tr>
 		<td class="dataTextBoldLeft" >
 					His/Her date of birth as per our school record is&nbsp;&nbsp;<span style="font-weight: bold;">
-					<c:out value="${studentdetails.student.dateofbirth}" /></span></td>	
+					<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span></td>	
 	    </tr>
 	    
 	    <tr>

@@ -59,7 +59,7 @@
             <column name="branchid" />
         </property>
         <many-to-one name="Student" class="com.model.student.dto.Student"
-            column="sid" unique="true" not-null="true"
+            column="sid" unique="true" not-null="true" lazy="false"
             cascade="all" />
     </class>
 </hibernate-mapping>

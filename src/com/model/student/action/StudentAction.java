@@ -75,12 +75,19 @@ public class StudentAction {
                     url = addNew();
                 }else if (action.equalsIgnoreCase("viewAllSuperAdmin")) {
                     url = viewAllSuperAdmin();
+                }else if (action.equalsIgnoreCase("advanceSearchStudents")) {
+                    url = advanceSearchStudents();
                 }
                 return url;
         }
         
 
-    private String viewAllSuperAdmin() {
+    private String advanceSearchStudents() {
+    		new StandardService(request, response).viewClasses();
+			return "AdvanceSearch.jsp";
+		}
+
+	private String viewAllSuperAdmin() {
             new StudentService(request, response).viewAllStudentsSuperAdmin();
                 return "viewAllWithParents.jsp";
         }

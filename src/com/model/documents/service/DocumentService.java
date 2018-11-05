@@ -37,7 +37,7 @@ public class DocumentService {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			try {
-				List<Parents> list = new studentDetailsDAO().getStudentsList("from Parents where branchid"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Parents> list = new studentDetailsDAO().getStudentsList("from Parents where branchid = "+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				request.setAttribute("studentListtc", list);
 				return true;
 			} catch (Exception e) {
@@ -53,7 +53,7 @@ public class DocumentService {
 		Student student = new Student();
 		Parents parents = new Parents();
 		Transfercertificate tc = new Transfercertificate();
-		String transferCertificate = null;
+		String transferCertificateString = null;
 		
 		int studentId = DataUtil.parseInt(request.getParameter("studentId"));
 		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
@@ -68,20 +68,22 @@ public class DocumentService {
 			 tc.setApplicationstatus("applied");
 			 tc.setDateofissues(dateOfTc);
 			 tc.setNoofissues(1);
-			 transferCertificate = new DocumentDAO().generateTransferCertificate(tc);
+			 
+			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
+			 if(transferCertificate != null){
+				 return "studentexists";
+			 }else {
+					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc);
+			}
 		 }
 		 
-		 if("true".equalsIgnoreCase(transferCertificate)){
+		 if("true".equalsIgnoreCase(transferCertificateString)){
 			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			 request.setAttribute("studentdetails", parents);
 			 request.setAttribute("tcdetails", tc);
 			 return "true";
-		 }else if("studentexists".equalsIgnoreCase(transferCertificate)){
-			 return "studentexists";
 		 }
-		 
-		 
 		 return "false";
 	}
 

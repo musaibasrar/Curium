@@ -93,91 +93,9 @@ span{
     font-weight: normal;
 }
 </style>
-
-
-<!-- <style type="text/css">
-
-        @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-            	margin-top: 0px;
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              size: auto;   /* auto is the current printer page size */
-           	  margin: 0mm;  /* this affects the margin in the printer settings */ 
-            
-        }
-
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-        }
-    </style> -->
-    
-    <style type="text/css">
-
-        @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
-        }
-
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-        }
-    </style>
 	<script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="js/print/jquery.printPage.js" type="text/javascript"></script>
-        <title>Print Bonafide Certificate</title>
-        <script type="text/javascript">
-             $(function() {
-
-                 $("#print").printPage();
-             });
-        </script>
-
+        <title>Bonafide Certificate</title>
 </head>
 <%
 //allow access only if session exists
@@ -196,17 +114,16 @@ for(Cookie cookie : cookies){
 }
 %>
 <body style="text-align: center" class="bodymargin">
-<jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
 		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				
-				Divine M.A. English Higher Primary & High School </td>
+				Al-Ameen Education Society's </td>
 			</tr>
 			<tr>
-			<td class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</td>
+			<td class="addressLine">Bidar- 585401</td>
 			</tr>
 
 			<tr>
@@ -249,7 +166,7 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">This is to certify that Ms. &nbsp;&nbsp;
-					<span style="font-weight: bold;"> <c:out value="${studentdetails.student.name}" /></span>
+					<span style="font-weight: bold;"> <c:out value="${studentdetailsbonafide.student.name}" /></span>
 					</h3>
 				</td>
 				<!-- <td>
@@ -260,7 +177,7 @@ for(Cookie cookie : cookies){
 					 &nbsp;&nbsp;
 					<h3 style="font-weight: normal;" >
 					
-					Son of &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${studentdetails.fathersname}" /></span></h3>
+					Son of &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${studentdetailsbonafide.fathersname}" /></span></h3>
 				</td>
 				
 			
@@ -280,7 +197,7 @@ for(Cookie cookie : cookies){
 				
 				<h3 style="font-weight: normal;" >
 					
-					is presently studying in Grade &nbsp;&nbsp; <span style="font-weight: bold;"><c:out value="${studentdetails.student.classstudying}     " /></span></h3>
+					is presently studying in Grade &nbsp;&nbsp; <span style="font-weight: bold;"><c:out value="${studentdetailsbonafide.student.classstudying}     " /></span></h3>
 				
 				
 				</td>
@@ -305,7 +222,7 @@ for(Cookie cookie : cookies){
 		<tr>
 		<td class="dataTextBoldLeft" >
 					His/Her date of birth as per our school record is&nbsp;&nbsp;<span style="font-weight: bold;">
-					<c:out value="${studentdetails.student.dateofbirth}" /></span></td>	
+					<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span></td>	
 	    </tr>
 		</TABLE>
 
@@ -331,7 +248,7 @@ for(Cookie cookie : cookies){
 			</tr>
 			
 			<tr>
-                        <td align="center"><a id="print" href="Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>
+                        <td align="center"><a id="print" href="Controller?process=DocumentsProcess&action=printBonafide">Print</a></td>
                     </tr>
 		</TABLE>
 		

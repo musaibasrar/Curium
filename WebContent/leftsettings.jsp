@@ -136,8 +136,8 @@ Author     : Musaib
                 color:#cfe0ea;;
             }
             a:hover{
-                text-decoration:none;
-                color:#FFFFFF;
+                text-decoration:underline;
+                color:#EB6000;
             }
             h1{
                 font-size:140%;
@@ -360,6 +360,10 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div>
             
+              <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
+            <div>
+				<a target="mainFrame" href="Controller?process=ClassProcess&action=classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
+            </div>
             
             <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>

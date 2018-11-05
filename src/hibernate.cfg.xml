@@ -34,7 +34,7 @@
 		  
 			<!-- Query Cache -->
 			<!-- <property name="hibernate.cache.use_second_level_cache">true</property> -->
-			<!-- <property name="hibernate.show_sql">true</property> -->
+			<!-- <property name="hibernate.show_sql">true</property>  -->
 			<property name="cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
 		 	<property name="cache.use_query_cache">true</property>
  		 	<property name="net.sf.ehcache.configurationResourceName">myehcache.xml</property>
@@ -93,5 +93,6 @@
 		<mapping resource="com/model/branch/dto/Branch.hbm.xml"></mapping>
 		<mapping resource="com/model/pudetails/dto/Pudetails.hbm.xml"></mapping>
 		<mapping resource="com/model/degreedetails/dto/Degreedetails.hbm.xml"></mapping>
+		<mapping resource="com/model/std/dto/Classhierarchy.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>

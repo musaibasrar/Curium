@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.model.academicyear.service.YearService;
 import com.model.examdetails.service.ExamDetailsService;
 import com.model.stampfees.service.StampFeesService;
+import com.model.std.service.StandardService;
 import com.model.student.service.StudentService;
 import com.model.subjectdetails.service.SubjectDetailsService;
 import com.util.DataUtil;
@@ -76,6 +77,9 @@ public class ExamDetailsAction {
 		result = new ExamDetailsService(request, response).readListOfExams();
 		if (!result) 
 			return error;
+		result = new StandardService(request, response).viewClasses();
+		if (!result) 
+			return error;
 		result = new SubjectDetailsService(request, response).readListOfSubjects();
 		if (!result) 
 			return error;
@@ -112,6 +116,9 @@ public class ExamDetailsAction {
 		boolean result;
 		
 		result = new ExamDetailsService(request, response).readListOfExams();
+		if (!result) 
+			return error;
+		result = new StandardService(request, response).viewClasses();
 		if (!result) 
 			return error;
 		result = new SubjectDetailsService(request, response).readListOfSubjects();

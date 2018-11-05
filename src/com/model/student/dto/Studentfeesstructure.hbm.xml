@@ -26,7 +26,7 @@
         <property name="concession" type="java.lang.Integer">
             <column name="concession"/>
         </property>
-        <many-to-one name="Feescategory" class="com.model.feescategory.dto.Feescategory"
+        <many-to-one name="Feescategory" class="com.model.feescategory.dto.Feescategory" lazy="false"
             column="idfeescategory" />
     </class>
 </hibernate-mapping>

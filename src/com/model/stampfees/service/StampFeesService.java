@@ -44,14 +44,14 @@ public class StampFeesService {
 		String addSec = request.getParameter("secsearch");
 		String conClassStudying = "";
 
-		if (!addClass.equalsIgnoreCase("Class")) {
+		if (!addClass.equalsIgnoreCase("")) {
 
-			conClassStudying = addClass + " " + "%";
+			conClassStudying = addClass+"%";
 
 		}
-		if (!addSec.equalsIgnoreCase("Sec")) {
+		if (!addSec.equalsIgnoreCase("")) {
 			conClassStudying = addClass;
-			conClassStudying = conClassStudying + " " + addSec;
+			conClassStudying = conClassStudying + "--" + addSec;
 		}
 
 		String classStudying = DataUtil.emptyString(conClassStudying);
@@ -67,7 +67,7 @@ public class StampFeesService {
 					+ classStudying + "' AND parents.Student.archive=0";
 		} else if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " parents.Student.classstudying like '"
-					+ classStudying + "' AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+					+ classStudying + "' AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
 		}
 
 		queryMain = queryMain + querySub;

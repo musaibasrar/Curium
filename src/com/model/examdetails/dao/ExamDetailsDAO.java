@@ -5,14 +5,13 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.HibernateException;
-import com.util.Session;
-import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.examdetails.dto.Exams;
 import com.model.examdetails.dto.Examschedule;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class ExamDetailsDAO {
 
@@ -35,7 +34,7 @@ public class ExamDetailsDAO {
 
 			transaction.commit();
 			System.out.println("in add3");
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 		} finally {
@@ -57,7 +56,7 @@ public class ExamDetailsDAO {
 					.list();
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 
@@ -77,7 +76,7 @@ public class ExamDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 
@@ -110,12 +109,13 @@ public class ExamDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Examschedule>) session.createQuery("From Examschedule where branchid"+branchId)
+			results = (List<Examschedule>) session.createQuery("From Examschedule where branchid = "+branchId)
 					.list();
 			transaction.commit();
 
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
+		} catch (Exception hibernateException) {
+			transaction.rollback(); 
+			logger.error(hibernateException);
 			hibernateException.printStackTrace();
 
 		} finally {
@@ -134,7 +134,7 @@ public class ExamDetailsDAO {
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 	}

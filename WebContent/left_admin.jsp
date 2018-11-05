@@ -240,8 +240,8 @@ Author     : Musaib
                 color:#cfe0ea;;
             }
             a:hover{
-                text-decoration:none;
-                color:#FFFFFF;
+                text-decoration:underline;
+                color:#EB6000;
             }
             h1{
                 font-size:140%;
@@ -480,16 +480,15 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="AdvanceSearch.jsp" style="font-size: 12px;">Search</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=advanceSearchStudents" style="font-size: 12px;">Search</a><br/>
 
 
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="Promotion.jsp" style="font-size: 12px;">Promotions</a><br/>
-
-
+                <a target="mainFrame" href="Controller?process=ClassProcess&action=promoteClass" style="font-size: 12px;">Promotions</a><br/>
+				
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
@@ -507,8 +506,8 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="#" >Documents</a></h5>
             <div >
-                <a target="mainFrame" href="studentsdetailsreports.jsp" style="font-size: 12px;">Student Details</a><br/>
-                <a target="mainFrame" href="studentsdetailsbonafide.jsp" style="font-size: 12px;">Bonafide Certificate</a><br/>
+                <a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsReports" style="font-size: 12px;">Student Details</a><br/>
+                <a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
                 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
                 <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
                 <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
@@ -516,7 +515,7 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
             <div >
-                <a target="mainFrame" href="sendsms.jsp" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="Controller?process=SMSProcess&action=sendSMS" style="font-size: 12px;">SMS</a><br/>
                 <a target="mainFrame" href="sendemail.jsp" style="font-size: 12px;">Email</a><br/>
             </div>
             

@@ -717,6 +717,32 @@
 		} else
 			inputBox.value = text;
 	}
+	
+    function numberWithCommas() {
+    	var x=this.value;
+    	var lastThree = x.substring(x.length-3);
+    	var otherNumbers = x.substring(0,x.length-3);
+    	if(otherNumbers != '')
+    	    lastThree = ',' + lastThree;
+    	var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+    	alert(res);
+    }
+    
+    function numberWithCommasForFloat(x) {
+    var x=12345652457.557;
+    x=x.toString();
+    var afterPoint = '';
+    if(x.indexOf('.') > 0)
+       afterPoint = x.substring(x.indexOf('.'),x.length);
+    x = Math.floor(x);
+    x=x.toString();
+    var lastThree = x.substring(x.length-3);
+    var otherNumbers = x.substring(0,x.length-3);
+    if(otherNumbers != '')
+        lastThree = ',' + lastThree;
+    var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree + afterPoint;
+    alert(res);
+    }
 </script>
 </head>
 <%
@@ -1513,7 +1539,7 @@ for(Cookie cookie : cookies){
 									<td width="16%" class="alignRight">Annual Income &nbsp;</td>
 
 									<td width="28%"><label> <input name="parentsannualincome"
-											type="text" class="textField" id="parentsannualincome" size="36"
+											type="text" class="textField" id="parentsannualincome" size="36" onkeyup="numberWithCommas(this);"
 											>
 
 									</label></td>

@@ -1,6 +1,6 @@
 <%--
-    Document   : index
-    Created on : Dec 23, 2011, 5:52:28 PM
+    Document   : Class Hierarchy
+    Created on : Oct 29, 2018, 3:52:28 PM
     Author     : Musaib
 --%>
 
@@ -12,10 +12,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Students Details Reports</title>
+<title>Class Hierarchy</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
+.footerTD{
+                border-radius:6px;
+                background-color:#4b6a84;
+
+
+                text-align: left;
+
+
+            }
 <!--
 .divCSS {
 	overflow: scroll;
@@ -91,28 +100,6 @@
 	font-weight: bold;
 }
 
-.alignRightFields {
-	font-family: Tahoma;
-	font-size: 11px;
-	font-style: normal;
-	text-transform: capitalize;
-	color: #325F6D;
-	text-align: left;
-	vertical-align: middle;
-	font-weight: bold;
-}
-
-.alignSearch {
-	font-family: Tahoma;
-	font-size: 11px;
-	font-style: normal;
-	text-transform: capitalize;
-	color: #325F6D;
-	text-align: left;
-	vertical-align: middle;
-	font-weight: bold;
-}
-
 .alignRightMultiple {
 	font-family: Tahoma;
 	font-size: 11px;
@@ -121,12 +108,6 @@
 	vertical-align: middle;
 	font-style: normal;
 	color: #325F6D;
-}
-
-.footerTD {
-	border-radius: 6px;
-	background-color: #4b6a84;
-	text-align: left;
 }
 
 .alignCentreMultiple {
@@ -290,11 +271,7 @@
 	height: 22px;
 }
 </style>
-<style>
-#button {
-	
-}
-</style>
+
 <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
@@ -345,147 +322,128 @@
 	});
 </script>
 <script type="text/javascript">
-	function select(id, name) {
-		var clipEffect = 'blind';
-		var options = {};
+	function getCurrentDate() {
+		var today = new Date();
+		var day = today.getDate();
+		var month = today.getMonth() + 1;
+		var year = today.getFullYear();
+		if (month < 10) {
+			month = "0" + month;
 
-		$("#effect").show();
-		
+		} else {
+			month = month;
+		}
+		if (day < 10) {
+			day = "0" + day;
+
+		} else {
+			day = day;
+		}
+		return month + "/" + day + "/" + year;
 
 	}
-	
 </script>
+<script type="text/javascript">
+	$(function() {
+		// run the currently selected effect
+		function runEffect() {
 
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		// set effect from select menu value
+		$("#add").button().click(function() {
+			runEffect();
+			return false;
+		});
+	});
+</script>
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchForStudents() {
+
+	function addClassHierarchy() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StudentProcess&action=searchForStudents";
+		form1.action = "Controller?process=ClassProcess&action=addClassHierarchy";
 		form1.method = "POST";
 		form1.submit();
 
 	}
-
-	$(function() {
-
-		$("#search").button().click(function() {
-			searchForStudents();
-		});
-		
-
-	});
-
+	
 	$(function() {
 
 		$("#tabs").tabs();
-
 		$("#save").button().click(function() {
-			addDepartment();
+			addClassHierarchy();
 		});
-		/* $("#effect").hide(); */
+		$("#effect").hide();
 
 	});
-	
-	$(function() {
-		$("#export").button({
-			icons : {
-				primary : "ui-icon-trash"
-			}
-		});
-		
-		$('#chckHead').click(function() {
-			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
-			if (length > 0) {
-				$('.chcktbl:checked').attr('checked', false);
-				this.checked = false;
 
-			} else {
-				if (this.checked == false) {
-					$('.chcktbl:checked').attr('checked', false);
-				} else {
-					$('.chcktbl:not(:checked)').attr('checked', true);
-				}
+	$(function(){
+         $("#delete").button({
+             icons:{
+                 primary: "ui-icon-trash"
+             }
+         }).click(function(){
+             deleteRecords();
+             return false;
 
-			}
+         });
+         $('#chckHead').click(function () {
+             var length = $('.chcktbl:checked').length;
+             var trLength=$('.trClass').length;
+             if(length>0){
+                 $('.chcktbl:checked').attr('checked', false);
+                 this.checked=false;
 
-		});
-		$('.chcktbl').click(function() {
-			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
-			alert(tdLength);
-			if (length > trLength) {
+             }
+             else{
+                 if (this.checked == false) {
+                     $('.chcktbl:checked').attr('checked', false);
+                 }
+                 else {
+                     $('.chcktbl:not(:checked)').attr('checked', true);
+                 }
 
-				$('.chcktbl:not(:checked)').attr('disabled', true);
-			} else {
-				$('.chcktbl:not(:checked)').attr('disabled', false);
-			}
-		});
+             }
 
-		$("#go").button()
+         });
+         $('.chcktbl').click(function () {
+             var length = $('.chcktbl:checked').length;
+             var trLength=$('.trClass').length;
+             alert(tdLength);
+             if (length > trLength) {
 
-	});
-	
-	
+                 $('.chcktbl:not(:checked)').attr('disabled', true);
+             }
+             else {
+                 $('.chcktbl:not(:checked)').attr('disabled', false);
+             }
+         });
+         
+         $( "#go" )
+         .button()
+         
+         
+    	 $("#amount").keypress(function (e) {
+		     //if the letter is not digit then display error and don't type anything
+		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		               return false;
+		    }
+		   });
+     });
+	 function deleteRecords(){
+         
+         var form1=document.getElementById("form1");
+         form1.action="Controller?process=ClassProcess&action=deleteClassHierarchy";
+        form1.submit();
+         
+     }
 </script>
-
-
-<script type="text/javascript">
-        
-      
-        $(document).ready(function() {
-            
-            
-            $("#dataTable").keyup(function(){
-                
-                var sum = 0.0;
-                var totalSum=0.0;
-                var column2 = $('.feesFullAmount')
-                jQuery.each(column2,function(){
-                    sum += parseFloat($(this).val());
-                });
-                
-                $('#feesTotalAmount').val(sum.toPrecision(6));
-                
-            });
-            $("#dataTable").click(function(){
-                
-                var sum = 0.0;
-                var totalSum=0.0;
-                var column2 = $('.feesFullAmount')
-                jQuery.each(column2,function(){
-                    sum += parseFloat($(this).val());
-                });
-                
-                $('#feesTotalAmount').val(sum.toPrecision(6));
-               
-            });
-
-
-        });
-    
-    function selectAllRow(tableID){
-        var table = document.getElementById(tableID);
-        var rowCount = table.rows.length;
-        if(rowCount==1){
-            var row = table.rows[0];
-            var chkbox = row.cells[0].childNodes[0];
-            chkbox.checked=false;
-            alert('No records to select');
-        }
-        for(var i=1; i<rowCount; i++) {
-            var row = table.rows[i];
-            var chkbox = row.cells[0].childNodes[0];
-            chkbox.checked=true;
-        }
-    }
-
-    </script>
-
-
-
 </head>
-  <%
+<%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -502,90 +460,77 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=StudentProcess&action=exportDataForStudents" method="POST">
-		<!-- <div style="height: 28px">
-			<button id="add">Add Department</button>
+	<form id="form1"
+		method="POST">
+		<div style="height: 28px">
+			<button id="add">Add Class Hierarchy</button>
 			<br />
-		</div> -->
+		</div>
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Students Details Report</a></li>
+					<li><a href="#tabs-1">Details</a></li>
 
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
-
-						<tr>
-							<td class="alignRightFields">Name &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
-							</label></td>
-							
-						</tr>
-
+						
 						<tr>
 							<td><br /></td>
-
 						</tr>
 
-
+						<tr></tr>
 						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 150px">
+						
+						<td style="font-weight: bold;color:#325F85">Lower Class &nbsp;
+							 <label> 
+								<select name="lowerclass" id="lowerclass"
+									style="width: 220px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}" >
-												<c:out value="${classdetailslist.classdetails}" />
+											<option value="${classdetailslist.classdetails}">
+												${classdetailslist.classdetails}
 											</option>
 										</c:if>	
 										</c:forEach>
 								</select>
-
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 120px">
+								
+							</label>
+							&nbsp;<label style="font-weight: bold;color:#325F85">&nbsp;&nbsp;Upper Class &nbsp;</label>
+							
+							<label>
+							<select name="upperclass" id="upperclass"
+									style="width: 220px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.section != '')}">
-											<option value="${classdetailslist.section}">
-												<c:out value="${classdetailslist.section}" />
+													<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}">
+												${classdetailslist.classdetails}
 											</option>
-										</c:if>	
+											</c:if>
 										</c:forEach>
-
 								</select>
 							</label>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-
-							<td width="30%" class="alignRight"></td>
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
 							</td>
 						</tr>
-
-
+						
 						<tr>
 							<td><br /></td>
 						</tr>
-
 					</table>
-					
-					
-
+					<table id="table2" width="100%" border="0" align="center">
+						<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+							<td align="left">
+								<button id="save">Save</button>
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -593,7 +538,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search result</td>
+					<td class="headerTD">Fees Category</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -602,51 +547,41 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class &
-							Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Admission Date</th>
-
-
+						<th title="click to sort" class="headerText">Lower Class<img
+							alt=" " style="position: relative; top: 4px;"
+							src="css/dataTable/images/sort_both.png" /></th>
+						<th title="click to sort" class="headerText">Upper Class<img
+							alt=" " style="position: relative; top: 4px;"
+							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+						</th>
 
 					</tr>
 				</thead>
 
 				<tbody>
-					<c:forEach items="${searchStudentList}" var="Parents">
 
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
+					<c:forEach items="${classhierarchy}" var="classhierarchy">
+
+						<tr style="border-color: #000000" border="1" cellpadding="1"
+							cellspacing="1">
 							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
-								name="studentIDs"
-								value="<c:out value="${Parents.student.sid}"/>" /></td>
-							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.classstudying}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.admissiondate}" /></td>
-
+								id="<c:out value="${classhierarchy.idclasshierarchy}"/>" class="chcktbl"
+								name="idclasshierarchy"
+								value="<c:out value="${classhierarchy.idclasshierarchy}"/>" /></td>
+							<td class="dataText"><c:out value="${classhierarchy.lowerclass}" /></td>
+							<td class="dataText"><c:out value="${classhierarchy.upperclass}" /></td>
 
 						</tr>
 					</c:forEach>
-				</tbody>
-				<tfoot>
-					<tr>
-													
-						<td class="footerTD" colspan="2"> &nbsp;
-						
-						<input value="Export"
-							type="submit" id="export"/></td>
-							
-							
 
-					</tr>
-				</tfoot>
+
+
+
+				</tbody>
+				<tfoot><tr>
+                            <td  class="footerTD" colspan="2" ><button id="delete">Delete</button> 
+                    
+                        </tr></tfoot>
 			</table>
 
 		</div>

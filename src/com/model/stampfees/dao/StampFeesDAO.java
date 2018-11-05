@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.HibernateException;
+
 import com.util.Session;
 import org.hibernate.SessionFactory;
 import com.util.Session.Transaction;
@@ -48,7 +48,7 @@ public class StampFeesDAO {
            login = (Login) query.uniqueResult();
            transaction.commit();
            
-       }catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+       }catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
            System.out.println(hibernateException);
        }finally{
            return login;
@@ -74,7 +74,7 @@ public class StampFeesDAO {
 
 
 
-	        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 	            
 	            hibernateException.printStackTrace();
 
@@ -100,7 +100,7 @@ public class StampFeesDAO {
 
 
 
-	        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 	            
 	            hibernateException.printStackTrace();
 
@@ -119,7 +119,7 @@ public class StampFeesDAO {
             Query HQLquery = session.createQuery(query);
             parents = (java.util.List<Parents>) HQLquery.list();
             transaction.commit();
-        } catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         }
@@ -154,7 +154,7 @@ public class StampFeesDAO {
 
 			transaction.commit();
 			System.out.println("in add3");
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 		} 
@@ -175,7 +175,7 @@ public class StampFeesDAO {
 			query.executeUpdate();
 			query2.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 

@@ -32,15 +32,43 @@ public class StandardAction {
 			url = viewClasses();
 		}else if (action.equalsIgnoreCase("createClass")) {
                         url = createClass();
-                 }else if (action.equalsIgnoreCase("deleteClass")) {
+        }else if (action.equalsIgnoreCase("deleteClass")) {
                         url = deleteClass();
-               }
-		
+        }else if (action.equalsIgnoreCase("promoteClass")) {
+                   url = promoteClass();
+        }else if (action.equalsIgnoreCase("classHierarchy")) {
+            url = classHierarchy();
+        }else if (action.equalsIgnoreCase("addClassHierarchy")) {
+            url = addClassHierarchy();
+        }else if (action.equalsIgnoreCase("deleteClassHierarchy")) {
+            url = deleteClassHierarchy();
+        }
 		return url;
 	}
 	
 	
-	  private String deleteClass() {
+	  private String deleteClassHierarchy() {
+		  new StandardService(request, response).deleteClassHierarchy();
+	      return "Controller?process=ClassProcess&action=classHierarchy";
+	}
+
+	private String addClassHierarchy() {
+		  	new StandardService(request, response).addClassHierarchy();
+	        return "Controller?process=ClassProcess&action=classHierarchy";
+	}
+
+	private String classHierarchy() {
+		  new StandardService(request, response).viewClasses();
+		  new StandardService(request, response).viewClassHierarchy();
+			return "classhierarchy.jsp";
+	}
+
+	private String promoteClass() {
+		  new StandardService(request, response).viewClasses();
+		return "Promotion.jsp";
+	}
+
+	private String deleteClass() {
 	      
 	      if( new StandardService(request, response).deleteClasses()) {
 	          return "addclass.jsp";

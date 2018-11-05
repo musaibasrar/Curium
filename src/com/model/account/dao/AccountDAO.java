@@ -6,10 +6,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
-import com.util.Session;
-import com.util.Session.Transaction;
 
 import com.model.account.dto.Accountdetails;
 import com.model.account.dto.Accountdetailsbalance;
@@ -21,6 +18,8 @@ import com.model.account.dto.Journaltransactions;
 import com.model.account.dto.Paymenttransactions;
 import com.model.account.dto.Receipttransactions;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class AccountDAO {
 	Session session = null;
@@ -53,7 +52,7 @@ public class AccountDAO {
 			session.save(financialaccountingyear);
 			transaction.commit();
 			result = true;
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			System.out.println(""+hibernateException);
 			
 		} 
@@ -68,7 +67,7 @@ public class AccountDAO {
 					.createQuery("from Financialaccountingyear where active = 'yes' and branchid="+branchId);
 			financialYear = (Financialaccountingyear) query.uniqueResult();
 			transaction.commit();
-		}catch (HibernateException hb) {  transaction.rollback(); logger.error(hb);
+		}catch (Exception hb) {  transaction.rollback(); logger.error(hb);
 			System.out.println("error "+hb);
 		}
 		
@@ -83,7 +82,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			accountGroupMaster = session.createQuery("from Accountgroupmaster").list();
 			transaction.commit();
-		}catch (HibernateException hb) { transaction.rollback(); logger.error(hb);
+		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
 		}
 		
@@ -98,7 +97,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			accountSubGroupMaster = session.createQuery("from Accountsubgroupmaster where accountgroupid = '"+accountGroupMasterId+"' and branchid ="+branchId).list();
 			transaction.commit();
-		}catch (HibernateException hb) { transaction.rollback(); logger.error(hb);
+		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
 		}
 		
@@ -110,7 +109,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			session.save(accountSubGroupMaster);
 			transaction.commit();
-		}catch (HibernateException hb) {  transaction.rollback(); logger.error(hb);
+		}catch (Exception hb) {  transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
 		}
 		return accountSubGroupMaster;
@@ -123,7 +122,7 @@ public class AccountDAO {
 			session.save(accountDetails);
 			transaction.commit();
 			result = true;
-		}catch (HibernateException hb) { transaction.rollback(); logger.error(hb);
+		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
 			System.out.println("error "+hb);
 		}
@@ -167,7 +166,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountSubGroupMaster.accountsubgroupmasterid NOT IN (1,2) and branchid="+branchId).list();
 			transaction.commit();
-		}catch (HibernateException hb) { transaction.rollback(); logger.error(hb);
+		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
 		}
 		
@@ -182,7 +181,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			accountDetails = session.createQuery("from Accountdetailsbalance where branchid="+branchId).list();
 			transaction.commit();
-		}catch (HibernateException hb) {  transaction.rollback(); logger.error(hb);
+		}catch (Exception hb) {  transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
 		}
 		
@@ -201,7 +200,7 @@ public class AccountDAO {
 			query2.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 		
@@ -215,7 +214,7 @@ public class AccountDAO {
 			session.save(transactions);
 			transaction.commit();
 			return true;
-		}catch (HibernateException hb) { transaction.rollback(); logger.error(hb);
+		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
 		}
 		return false;
@@ -228,7 +227,7 @@ public class AccountDAO {
 			session.save(transactions);
 			transaction.commit();
 			return true;
-		} catch (HibernateException hb) { transaction.rollback(); logger.error(hb);
+		} catch (Exception hb) { transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
 		}
 		return false;
@@ -241,7 +240,7 @@ public class AccountDAO {
 			session.save(transactions);
 			transaction.commit();
 			return true;
-		} catch (HibernateException hb) { transaction.rollback(); logger.error(hb);
+		} catch (Exception hb) { transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
 		} 
 		return false;
@@ -254,7 +253,7 @@ public class AccountDAO {
 			session.save(transactions);
 			transaction.commit();
 			return true;
-		} catch (HibernateException hb) { transaction.rollback(); logger.error(hb);
+		} catch (Exception hb) { transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
 		} 
 		return false;
@@ -272,7 +271,7 @@ public class AccountDAO {
 			query.setParameterList("ids", accountIds);
 			accountDetailsBalance = query.list();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 		
@@ -286,7 +285,7 @@ public class AccountDAO {
 			Query query = session.createQuery("update Accountdetailsbalance set currentbalance='"+currentBalance+"' where accountdetailsid="+accountId);
 			query.executeUpdate();
 			transaction.commit();
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 		
@@ -300,7 +299,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountSubGroupMaster.accountsubgroupmasterid IN (1,2) and branchid="+branchId).list();
 			transaction.commit();																						   											
-		}catch (HibernateException hb) { transaction.rollback(); logger.error(hb);
+		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
 		}
 		return accountDetails;
@@ -431,7 +430,7 @@ public class AccountDAO {
 			query2.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 		
@@ -462,7 +461,7 @@ public class AccountDAO {
 			query2.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 		return false;
@@ -476,7 +475,7 @@ public class AccountDAO {
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 		return false;
@@ -514,7 +513,7 @@ public class AccountDAO {
 			query2.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (HibernateException hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}
 		return false;

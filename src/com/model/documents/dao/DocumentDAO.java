@@ -30,20 +30,17 @@ public class DocumentDAO {
 	
 
 	public String generateTransferCertificate(Transfercertificate tc) {
-		
+		String status = "false";
 		try {
-			Transfercertificate transferCertificate = getTransferCertificateDetails(tc.getSid()); 
-			if(transferCertificate != null){
-				return "studentexists";
-			}
 			transaction = session.beginTransaction();
 			session.save(tc);
 			transaction.commit();
-			return "true";
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			status = "true";
+		} catch (Exception e) { 
+			transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}
-		return "false";
+		return status;
 	}
 
 

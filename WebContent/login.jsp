@@ -101,7 +101,7 @@
                                             <td width="86" height="35"><span class="style6"></span></td>
                                             <td width="10">&nbsp;</td>
                                             <td width="202"><div align="right">
-                                                    <input type="image" src="images/loginbutton.png" name="login" border="0" onclick="" />
+                                                    <input type="image" src="images/loginbutton.png" name="login" border="0" />
                                                 </div></td>
                                         </tr>
                                     </table>
