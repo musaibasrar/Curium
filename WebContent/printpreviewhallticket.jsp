@@ -150,7 +150,7 @@ span{
         
         @page {
               
-           	margin-left:  1cm;
+             margin-left:  1cm;
              margin-right: 1cm;
              margin-bottom: 1cm;
              margin-top: 1cm;
@@ -170,6 +170,12 @@ span{
         
         .subjectdetails{
         	border: 1px solid black;
+    		text-align: left;
+   		    padding: 8px;
+        }
+        
+        .nosubjectdetails{
+        	border: 0px;
     		text-align: left;
    		    padding: 8px;
         }
@@ -199,7 +205,14 @@ span{
 
     </style>
 	
-        <title>Hall Ticket</title>
+	<script type="text/javascript">
+                       
+		window.onload = function(){
+		window.print();
+		}
+        </script>
+        
+       <title>Hall Ticket</title>
         
 </head>
   <%
@@ -221,13 +234,13 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
-	<button id="print" onclick="window.print();" 
-                   this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide">Print</button>
 		<c:forEach items="${hallticketmap}" var="Parents">
-            <div style="page-break-inside: avoid;">             	
+		
+            <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">             	
 		<table width="100%" style="page-break-inside: avoid;border-collapse: collapse;">
-			
 			<tr>
+				<td></td>
+				<td></td>
 				<td align="center">
 				<img src="images/bielogo.png" width="50" height="80"/>
 				</td>
@@ -238,8 +251,7 @@ for(Cookie cookie : cookies){
 				 </label>
 				</td>
 			</tr>
-			<tr>
-			<td></td></tr>
+			
 	</table>
 	
 <TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
@@ -309,39 +321,48 @@ for(Cookie cookie : cookies){
                             	<th class="subjectdetails">Time</th>
                             	<th class="subjectdetails">Examiner's Sign</th>
                             	</tr>
-                            	
+                            	</thead>
                             	<tbody>
-                            	<c:forEach items="${Parents.value}" var="examschedulelist">
+                            	<c:forEach items="${Parents.value}" var="examschedulelist" varStatus = "status">
                              	<tr>
                                 <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="dd-MM-yyyy"/></td>
                                 <td class="subjectdetails"><c:out value="${examschedulelist.subject}"/></td>
                                 <td class="subjectdetails"><c:out value="${examschedulelist.referencebooks}"/></td>
                                 <td class="subjectdetails"><c:out value="${examschedulelist.starttime}"/>&nbsp;-&nbsp;<c:out value="${examschedulelist.endtime}"/></td>
                                 <td class="subjectdetails"></td>
-                                
                                 </tr>
                                  </c:forEach>
-                       
+                                 <c:if test="${totalpapers < 2}">
+						 		<tr>
+	                                <td class="nosubjectdetails"></td>
+                                	<td class="nosubjectdetails"></td>
+                               	    <td class="nosubjectdetails"></td>
+                                	<td class="nosubjectdetails"></td>
+                                	<td class="nosubjectdetails"></td>
+                                </tr>
+                                <tr>
+	                                <td class="nosubjectdetails"></td>
+                                	<td class="nosubjectdetails"></td>
+                               	    <td class="nosubjectdetails"></td>
+                                	<td class="nosubjectdetails"></td>
+                                	<td class="nosubjectdetails"></td>
+                                </tr>
+								</c:if>
+                                 
                     </tbody>
-                            	</thead>
-                            	
-                            
                             </table>
                             
                             
                             <TABLE id="dataTable" width="100%" border="0"
 			style="page-break-inside:avoid; border-collapse: collapse;">
 
-			<!-- <tr>
-			<td>
-			<br>
-			<br></td>
-			</tr>
+		
             <tr>
+            <td align="left"></td>	
 			<td align="left"></td>	
 			<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			<td align="left" style="padding-left: 300px;"><img alt="Chief Examiner Signature" src="images/cesignature.jpg" width="150" height="50"></td>
-			</tr> -->
+			<td align="left"></td>
+			</tr>
 			<tr>
 		<td></td>
 		<td align="left"></td>	
@@ -355,13 +376,10 @@ for(Cookie cookie : cookies){
 			<td align="centre">Seal & Sign of Organiser</td>
 			<td align="centre">Signature of Chief Examiner</td>
 			</tr>
-			
-			<tr>
-               <td align="center"><br><br><br></td>
-            </tr>
-                    
 		</TABLE>
-		</div>                                 
+		</div>               
+		<br> 
+		<br> 
                         </c:forEach>
 			
 	</form>

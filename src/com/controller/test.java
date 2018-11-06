@@ -29,6 +29,7 @@ public class test {
 	
 	public static void main(String[] args) throws SocketException, IOException{
 
+	    
 	    String word = "musaibone";
 	    if (word.length() == 3) {
 	        System.out.println(word);
@@ -160,6 +161,29 @@ public class test {
 		} catch (IOException ioException) {
 			ioException.printStackTrace();
 		}*/
+		
+		
+		 //Read CSV
+	           /* String csvFile = "E:\\memberdata.csv";
+	                String line = "";
+	                String cvsSplitBy = ",";
+
+	                try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+
+	                    while ((line = br.readLine()) != null) {
+
+	                        // use comma as separator
+	                        String[] rowData = line.split(cvsSplitBy);
+
+	                        System.out.println("First Name= " + rowData[0] + " , Last Name=" + rowData[1] + "");
+
+	                    }
+
+	                } catch (IOException e) {
+	                    e.printStackTrace();
+	                }
+
+	            }*/
 	}
 		
 }

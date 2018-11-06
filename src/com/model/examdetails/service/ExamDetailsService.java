@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -280,12 +282,12 @@ public class ExamDetailsService {
 		
 		if(examLevels!=null){
 		
-		List<Parents> studentList = new ArrayList<Parents>();
+		List<Parents> studentList = new LinkedList<Parents>();
 		
-		Map<Parents,List<HallTicket>> hallTicketMap = new HashMap<Parents,List<HallTicket>>();
+		Map<Parents,List<HallTicket>> hallTicketMap = new LinkedHashMap<Parents,List<HallTicket>>();
 		
 			studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.examlevel = '" + 
-			        selectedExamLevel[0]+"' and parents.Student.centercode='"+selectedCenterCode[0]+"'");
+			        selectedExamLevel[0]+"' and parents.Student.centercode='"+selectedCenterCode[0]+"' order by parents.Student.admissionnumber ASC");
 		             
 	              for (Parents student : studentList) {
 	                  List<HallTicket> examscheduleList = new ArrayList<HallTicket>();
@@ -316,6 +318,7 @@ public class ExamDetailsService {
 	                request.setAttribute("examcodename", selectedExamLevel[0]+" / "+selectedExamLevel[1]);
 	                request.setAttribute("centercodename", selectedCenterCode[0]+" / "+selectedCenterCode[1]);
 	                request.setAttribute("hallticketmap", hallTicketMap);
+	                request.setAttribute("totalpapers", examLevels.length);
 	                //request.setAttribute("examschedulelist", examscheduleList);
 		}
 		
