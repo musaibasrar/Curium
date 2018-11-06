@@ -14,9 +14,9 @@
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/schoolAlAmeenDev</property>
 		<property name="hibernate.connection.username">root</property>
 		
-		<!-- <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+	<!-- 	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">cmuursaiuibm@123#</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/schoolschool</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/alameen</property>
         <property name="hibernate.connection.username">curium</property> -->
 		
 		
