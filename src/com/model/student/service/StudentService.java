@@ -1365,13 +1365,14 @@ public class StudentService {
         
         if(httpSession.getAttribute(BRANCHID)!=null){
             String branchId = httpSession.getAttribute(BRANCHID).toString();
-            if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
+            return "addStudent.jsp";
+           /* if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
                 return "addStudent.jsp";
             }else if("4".equalsIgnoreCase(branchId)) {
                 return "addStudentPU.jsp";
             }else if("5".equalsIgnoreCase(branchId)) {
                 return "addStudentDC.jsp";
-            }
+            }*/
         }
         return "sessiontimeout.jsp";
     }

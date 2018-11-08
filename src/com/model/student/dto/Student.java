@@ -64,6 +64,9 @@ public class Student implements java.io.Serializable {
 	private String instructionmediumlastschool;
 	private Pudetails pudetails;
 	private Degreedetails degreedetails;
+	private Integer passedout;
+	private Integer droppedout;
+	private Integer leftout;
 	
 	public Student() {
 	}
@@ -83,7 +86,8 @@ public class Student implements java.io.Serializable {
 			String placeofbirth, Integer nooftc, Date dateoftc,
 			String classonleaving, Date dateleaving, String reasonleaving,
 			Integer notcissued, Date datetcissued, String guardiandetails, int branchid,
-			String languagesstudied, String instructionmediumlastschool) {
+			String languagesstudied, String instructionmediumlastschool,
+			Integer passedout, Integer droppedout, Integer leftout) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
@@ -118,6 +122,9 @@ public class Student implements java.io.Serializable {
 		this.branchid = branchid;
 		this.languagesstudied = languagesstudied;
 		this.instructionmediumlastschool = instructionmediumlastschool;
+		this.passedout = passedout;
+		this.droppedout = droppedout;
+		this.leftout = leftout;
 	}
 
 	@Id
@@ -475,4 +482,31 @@ public class Student implements java.io.Serializable {
     public void setDegreedetails(Degreedetails degreedetails) {
         this.degreedetails = degreedetails;
     }
+    
+    @Column(name = "passedout")
+	public Integer getPassedout() {
+		return passedout;
+	}
+
+	public void setPassedout(Integer passedout) {
+		this.passedout = passedout;
+	}
+
+	@Column(name = "droppedout")
+	public Integer getDroppedout() {
+		return droppedout;
+	}
+
+	public void setDroppedout(Integer droppedout) {
+		this.droppedout = droppedout;
+	}
+
+	@Column(name = "leftout")
+	public Integer getLeftout() {
+		return leftout;
+	}
+
+	public void setLeftout(Integer leftout) {
+		this.leftout = leftout;
+	}
 }

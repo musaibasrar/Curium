@@ -113,11 +113,20 @@
         <property name="instructionmediumlastschool" type="string">
             <column name="instructionmediumlastschool" length="45" />
         </property>
-         <many-to-one name="Pudetails" class="com.model.pudetails.dto.Pudetails"
+         <property name="passedout" type="java.lang.Integer">
+            <column name="passedout" />
+        </property>
+         <property name="droppedout" type="java.lang.Integer">
+            <column name="droppedout" />
+        </property>
+          <property name="leftout" type="java.lang.Integer">
+            <column name="leftout" />
+        </property>
+         <!-- <many-to-one name="Pudetails" class="com.model.pudetails.dto.Pudetails"
             column="pudetailsid" unique="true" not-null="true" lazy="false"
             cascade="all" />
           <many-to-one name="degreedetails" class="com.model.degreedetails.dto.Degreedetails"
             column="degreedetailsid" unique="true" not-null="true" lazy="false"
-            cascade="all" />
+            cascade="all" /> -->
     </class>
 </hibernate-mapping>
