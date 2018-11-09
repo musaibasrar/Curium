@@ -122,6 +122,61 @@
           <property name="leftout" type="java.lang.Integer">
             <column name="leftout" />
         </property>
+        
+        <property name="semester" type="java.lang.Integer">
+            <column name="semester" />
+        </property>
+        <property name="stream" type="string">
+            <column name="stream" length="25" />
+        </property>
+        <property name="mediumofinstruction" type="string">
+            <column name="mediumofinstruction" length="15" />
+        </property>
+        <property name="previousschooltype" type="string">
+            <column name="previousschooltype" length="30" />
+        </property>
+        <property name="previouschooladdress" type="string">
+            <column name="previouschooladdress" length="250" />
+        </property>
+        <property name="urbanrural" type="string">
+            <column name="urbanrural" length="5" />
+        </property>
+        <property name="studentscastecertno" type="string">
+            <column name="studentscastecertno" length="25" />
+        </property>
+        <property name="fatherscastecertno" type="string">
+            <column name="fatherscastecertno" length="25" />
+        </property>
+        <property name="motherscastecertno" type="string">
+            <column name="motherscastecertno" length="25" />
+        </property>
+        <property name="studentscaste" type="string">
+            <column name="studentscaste" length="15" />
+        </property> 
+        <property name="fatherscaste" type="string">
+            <column name="fatherscaste" length="15" />
+        </property>    
+        <property name="motherscaste" type="string">
+            <column name="motherscaste" length="15" />
+        </property> 
+        <property name="socialcategory" type="string">
+            <column name="socialcategory" length="10" />
+        </property>    
+        <property name="belongtobpl" type="java.lang.Integer">
+            <column name="belongtobpl"/>
+        </property> 
+        <property name="bplcardno" type="string">
+            <column name="bplcardno" length="25" />
+        </property> 
+        <property name="bhagyalakshmibondnumber" type="string">
+            <column name="bhagyalakshmibondnumber" length="25" />
+        </property>
+        <property name="disabilitychild" type="string">
+            <column name="disabilitychild" length="40" />
+        </property>   
+        <property name="specialcategory" type="string">
+            <column name="specialcategory" length="25" />
+        </property> 
          <!-- <many-to-one name="Pudetails" class="com.model.pudetails.dto.Pudetails"
             column="pudetailsid" unique="true" not-null="true" lazy="false"
             cascade="all" />

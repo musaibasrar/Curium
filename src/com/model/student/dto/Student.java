@@ -68,6 +68,25 @@ public class Student implements java.io.Serializable {
 	private Integer droppedout;
 	private Integer leftout;
 	
+	private Integer semester;
+	private String stream;
+	private String mediumofinstruction;
+	private String previousschooltype;
+	private String previouschooladdress;
+	private String urabanrural;
+	private String studentscastecertno;
+	private String fatherscastecertno;
+	private String motherscastecertno;
+	private String studentscaste;
+	private String fatherscaste;
+	private String motherscaste;
+	private String socialcategory;
+	private Integer belongtobpl;
+	private String bplcardno;
+	private String bhagyalakshmibondnumber;
+	private String disabilitychild;
+	private String specialcategory;
+	
 	public Student() {
 	}
 
@@ -87,7 +106,11 @@ public class Student implements java.io.Serializable {
 			String classonleaving, Date dateleaving, String reasonleaving,
 			Integer notcissued, Date datetcissued, String guardiandetails, int branchid,
 			String languagesstudied, String instructionmediumlastschool,
-			Integer passedout, Integer droppedout, Integer leftout) {
+			Integer passedout, Integer droppedout, Integer leftout, Integer semester,String stream,String mediumofinstruction,
+			 String previousschooltype,String previouschooladdress,String urabanrural,String studentscastecertno,
+			 String fatherscastecertno,String motherscastecertno,String studentscaste,String fatherscaste,
+			 String motherscaste,String socialcategory,Integer belongtobpl,String bplcardno,String bhagyalakshmibondnumber,
+			 String disabilitychild,String specialcategory) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
@@ -125,6 +148,24 @@ public class Student implements java.io.Serializable {
 		this.passedout = passedout;
 		this.droppedout = droppedout;
 		this.leftout = leftout;
+		this.semester = semester;
+		this.stream = stream;
+		this.mediumofinstruction = mediumofinstruction;
+		this.previousschooltype = previousschooltype;
+		this.previouschooladdress = previouschooladdress;
+		this.urabanrural = urabanrural;
+		this.studentscastecertno = studentscastecertno;
+		this.fatherscastecertno = fatherscastecertno;
+		this.motherscastecertno = motherscastecertno;
+		this.studentscaste = studentscaste;
+		this.fatherscaste = fatherscaste;
+		this.motherscaste = motherscaste;
+		this.socialcategory = socialcategory;
+		this.belongtobpl = belongtobpl;
+		this.bplcardno = bplcardno;
+		this.bhagyalakshmibondnumber = bhagyalakshmibondnumber;
+		this.disabilitychild = disabilitychild;
+		this.specialcategory = specialcategory;
 	}
 
 	@Id
@@ -509,4 +550,151 @@ public class Student implements java.io.Serializable {
 	public void setLeftout(Integer leftout) {
 		this.leftout = leftout;
 	}
+
+	public Integer getSemester() {
+		return semester;
+	}
+
+	public void setSemester(Integer semester) {
+		this.semester = semester;
+	}
+
+	public String getStream() {
+		return stream;
+	}
+
+	public void setStream(String stream) {
+		this.stream = stream;
+	}
+
+	public String getMediumofinstruction() {
+		return mediumofinstruction;
+	}
+
+	public void setMediumofinstruction(String mediumofinstruction) {
+		this.mediumofinstruction = mediumofinstruction;
+	}
+
+	public String getPreviousschooltype() {
+		return previousschooltype;
+	}
+
+	public void setPreviousschooltype(String previousschooltype) {
+		this.previousschooltype = previousschooltype;
+	}
+
+	public String getPreviouschooladdress() {
+		return previouschooladdress;
+	}
+
+	public void setPreviouschooladdress(String previouschooladdress) {
+		this.previouschooladdress = previouschooladdress;
+	}
+
+	public String getUrabanrural() {
+		return urabanrural;
+	}
+
+	public void setUrabanrural(String urabanrural) {
+		this.urabanrural = urabanrural;
+	}
+
+	public String getStudentscastecertno() {
+		return studentscastecertno;
+	}
+
+	public void setStudentscastecertno(String studentscastecertno) {
+		this.studentscastecertno = studentscastecertno;
+	}
+
+	public String getFatherscastecertno() {
+		return fatherscastecertno;
+	}
+
+	public void setFatherscastecertno(String fatherscastecertno) {
+		this.fatherscastecertno = fatherscastecertno;
+	}
+
+	public String getMotherscastecertno() {
+		return motherscastecertno;
+	}
+
+	public void setMotherscastecertno(String motherscastecertno) {
+		this.motherscastecertno = motherscastecertno;
+	}
+
+	public String getStudentscaste() {
+		return studentscaste;
+	}
+
+	public void setStudentscaste(String studentscaste) {
+		this.studentscaste = studentscaste;
+	}
+
+	public String getFatherscaste() {
+		return fatherscaste;
+	}
+
+	public void setFatherscaste(String fatherscaste) {
+		this.fatherscaste = fatherscaste;
+	}
+
+	public String getMotherscaste() {
+		return motherscaste;
+	}
+
+	public void setMotherscaste(String motherscaste) {
+		this.motherscaste = motherscaste;
+	}
+
+	public String getSocialcategory() {
+		return socialcategory;
+	}
+
+	public void setSocialcategory(String socialcategory) {
+		this.socialcategory = socialcategory;
+	}
+
+	public Integer getBelongtobpl() {
+		return belongtobpl;
+	}
+
+	public void setBelongtobpl(Integer belongtobpl) {
+		this.belongtobpl = belongtobpl;
+	}
+
+	public String getBplcardno() {
+		return bplcardno;
+	}
+
+	public void setBplcardno(String bplcardno) {
+		this.bplcardno = bplcardno;
+	}
+
+	public String getBhagyalakshmibondnumber() {
+		return bhagyalakshmibondnumber;
+	}
+
+	public void setBhagyalakshmibondnumber(String bhagyalakshmibondnumber) {
+		this.bhagyalakshmibondnumber = bhagyalakshmibondnumber;
+	}
+
+	public String getDisabilitychild() {
+		return disabilitychild;
+	}
+
+	public void setDisabilitychild(String disabilitychild) {
+		this.disabilitychild = disabilitychild;
+	}
+
+	public String getSpecialcategory() {
+		return specialcategory;
+	}
+
+	public void setSpecialcategory(String specialcategory) {
+		this.specialcategory = specialcategory;
+	}
+	
+	
+	
 }
