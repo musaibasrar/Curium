@@ -73,7 +73,7 @@ public class Student implements java.io.Serializable {
 	private String mediumofinstruction;
 	private String previousschooltype;
 	private String previouschooladdress;
-	private String urabanrural;
+	private String urbanrural;
 	private String studentscastecertno;
 	private String fatherscastecertno;
 	private String motherscastecertno;
@@ -107,7 +107,7 @@ public class Student implements java.io.Serializable {
 			Integer notcissued, Date datetcissued, String guardiandetails, int branchid,
 			String languagesstudied, String instructionmediumlastschool,
 			Integer passedout, Integer droppedout, Integer leftout, Integer semester,String stream,String mediumofinstruction,
-			 String previousschooltype,String previouschooladdress,String urabanrural,String studentscastecertno,
+			 String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,
 			 String fatherscastecertno,String motherscastecertno,String studentscaste,String fatherscaste,
 			 String motherscaste,String socialcategory,Integer belongtobpl,String bplcardno,String bhagyalakshmibondnumber,
 			 String disabilitychild,String specialcategory) {
@@ -153,7 +153,7 @@ public class Student implements java.io.Serializable {
 		this.mediumofinstruction = mediumofinstruction;
 		this.previousschooltype = previousschooltype;
 		this.previouschooladdress = previouschooladdress;
-		this.urabanrural = urabanrural;
+		this.urbanrural = urbanrural;
 		this.studentscastecertno = studentscastecertno;
 		this.fatherscastecertno = fatherscastecertno;
 		this.motherscastecertno = motherscastecertno;
@@ -591,12 +591,12 @@ public class Student implements java.io.Serializable {
 		this.previouschooladdress = previouschooladdress;
 	}
 
-	public String getUrabanrural() {
-		return urabanrural;
+	public String getUrbanrural() {
+		return urbanrural;
 	}
 
-	public void setUrabanrural(String urabanrural) {
-		this.urabanrural = urabanrural;
+	public void setUrbanrural(String urbanrural) {
+		this.urbanrural = urbanrural;
 	}
 
 	public String getStudentscastecertno() {

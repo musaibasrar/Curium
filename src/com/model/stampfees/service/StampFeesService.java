@@ -36,18 +36,14 @@ public class StampFeesService {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 		
-			String queryMain = "From Parents as parents where";
-		String studentname = DataUtil.emptyString(request
-				.getParameter("namesearch"));
-
+		String queryMain = "From Parents as parents where";
+		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
 		String addClass = request.getParameter("classsearch");
 		String addSec = request.getParameter("secsearch");
 		String conClassStudying = "";
 
 		if (!addClass.equalsIgnoreCase("")) {
-
 			conClassStudying = addClass+"%";
-
 		}
 		if (!addSec.equalsIgnoreCase("")) {
 			conClassStudying = addClass;
@@ -70,14 +66,10 @@ public class StampFeesService {
 					+ classStudying + "' AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
 		}
 
-		queryMain = queryMain + querySub;
-		/*
-		 * queryMain =
-		 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
-		 * ;
-		 */
-		System.out.println("SEARCH QUERY ***** " + queryMain);
-		searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		if(!"".equalsIgnoreCase(querySub)) {
+			queryMain = queryMain + querySub;
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		}
 		
 	}
 		request.setAttribute("searchStudentList", searchStudentList);

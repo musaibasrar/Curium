@@ -1,6 +1,6 @@
 <%--
-    Document   : Stamp Fees
-    Created on : Dec 23, 2011, 5:52:28 PM
+    Document   : Admission Abstract
+    Created on : Nov 09, 2018, 12:05:28 PM
     Author     : Musaib
 --%>
 
@@ -12,10 +12,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>stamp fees</title>
+<title>Admission Abstract</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
-
 <style type="text/css">
 <!--
 .divCSS {
@@ -310,9 +309,6 @@
 <script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript" src="js/globalize.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/globalize.cultures.js"></script>
-
 <script type="text/javascript"
 	src="js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
@@ -362,9 +358,9 @@
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchForFees() {
+	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StampFeesProcess&action=search";
+		form1.action = "Controller?process=DocumentsProcess&action=searchForStudents";
 		form1.method = "POST";
 		form1.submit();
 
@@ -373,7 +369,7 @@
 	$(function() {
 
 		$("#search").button().click(function() {
-			searchForFees();
+			searchForStudents();
 		});
 		
 
@@ -382,35 +378,15 @@
 	$(function() {
 
 		$("#tabs").tabs();
-
-		$("#save").button().click(function() {
-			addDepartment();
-		});
-		/* $("#effect").hide(); */
-
 	});
 	
 	$(function() {
-		$("#delete").button({
+		$("#export").button({
 			icons : {
 				primary : "ui-icon-trash"
 			}
-		}).click(function() {
-			deleteRecords();
-			return false;
-
 		});
-		$("#deleteStamp").button({
-			icons : {
-				primary : "ui-icon-trash"
-			}
-		}).click(function() {
-			if (confirm('Are you sure you want to delete the stamp fees?As it can not be revert back.')) {
-			deleteFeesStamp();
-			}
-			return false;
-
-		});
+		
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
 			var trLength = $('.trClass').length;
@@ -441,29 +417,16 @@
 		});
 
 		$("#go").button()
+
 	});
 	
-	function deleteFeesStamp(){
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StampFeesProcess&action=delete";
-		form1.method = "POST";
-		form1.submit();
-	}
+	
 </script>
 
 
 <script type="text/javascript">
         
-        function calculateGrandTotal() {
-            var sum = 0.0;
-            var column2 = $('.feesFullAmount')
-            jQuery.each(column2,function(){
-                sum += parseFloat($(this).val());
-            });
-            
-            $('#feesTotalAmount').val(sum);
-
-        }
+      
         $(document).ready(function() {
             
             
@@ -476,7 +439,7 @@
                     sum += parseFloat($(this).val());
                 });
                 
-                $('#feesTotalAmount').val(sum);
+                $('#feesTotalAmount').val(sum.toPrecision(6));
                 
             });
             $("#dataTable").click(function(){
@@ -488,132 +451,12 @@
                     sum += parseFloat($(this).val());
                 });
                 
-                $('#feesTotalAmount').val(sum);
+                $('#feesTotalAmount').val(sum.toPrecision(6));
                
             });
 
 
         });
-        
-        var feescat=[
-                     <c:forEach varStatus="status" items="${feescategory}" var="fees">{
-                             value:'<c:out default="0" value="${fees.feescategoryname}" />',
-                             particularname:'<c:out default="0" value="${fees.particularname}" />',
-                             price:'<c:out default="0" value="${fees.amount}" />',
-                             id:'<c:out default="0" value="${fees.idfeescategory}" />'
-                             }<c:if test="${!status.last}">,</c:if>
-                     </c:forEach>
-                     ];
-        
-        $(function() {
-            
-            var addFeesCatButtonID="#addFeesCat";
-            var removeFeesCatButtonID="#removeFeesCat";
-            $( addFeesCatButtonID )
-            .button({
-                icons: {
-                    primary: "ui-icon-plus"
-                }
-            })
-            .click(function() {
-                addRow();
-                return false;
-            });
-            $(removeFeesCatButtonID)
-            .button({
-                icons: {
-                    primary: "ui-icon-minus"
-                }
-            })
-            .click(function() {
-                deleteRow('dataTable');
-                return false;
-            });            
-
-        });
-        
-        function SelectAll(id)
-        {
-        	
-            document.getElementById("feesCount_"+id).focus();
-            document.getElementById("feesCount_"+id).select();
-        }
-
-        function calculate(value2) {
-
-        	var feesCount=document.getElementById("feesCount_"+value2).value;
-        	
-        	        	
-            var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
-            var feesCount=document.getElementById("feesCount_"+value2).value;
-            var feesConcession=document.getElementById("feesConcession_"+value2).value;
-            var final1=document.getElementById("hiddenfees_full_amount_"+value2);
-            	
-            	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
-            	//feesConcession (direct amount)
-                final1.value=(feesCat*feesCount)-feesConcession;
-           
-        }
-       
-    function addRow() {
-        var rowCount = document.getElementById('dataTable').rows.length;    
-        var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=fees_"+rowCount+" /><input type='hidden' class='feesStatus' name='feesStatuses' id=fees_status_"+rowCount+" value='not set' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+rowCount+" value='' /></td>";
-        var col2="<td class='dataTextInActive'><input class='feesName'   type='text' name='feesNames' id=fees_name_"+rowCount+" onkeyup='calculate("+rowCount+")' onclick='calculate("+rowCount+");'/></td>";
- 	    var col3="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'   name='fessCat'  id=hiddenfees_amount_"+rowCount+" readonly/></td>";
-        var col4="<td class='dataTextInActive'><input type='text' value='0' onclick='SelectAll("+rowCount+");calculate("+rowCount+");' onfocus='SelectAll("+rowCount+")' onkeyup='calculate("+rowCount+")' name='feesCount' id=feesCount_"+rowCount+" /></td>";
-        var col5="<td class='dataTextInActive'><input type='text' value='0' onclick='calculate("+rowCount+");' onkeyup='calculate("+rowCount+")' name='feesConcession' id=feesConcession_"+rowCount+" /></td>";
-        var col6="<td class='dataTextInActive'><input class='feesFullAmount' type='text' value='0'   name='fessFullCat'  id=hiddenfees_full_amount_"+rowCount+" /></td>";
-        /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-        /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-        /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
-        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+"</tr>");
-        $(function() {
-            $("#dataTable").find('tbody').append(newRow);
-        });
-        $(function() {
-            $("#fees_name_"+rowCount).autocomplete({
-                source: feescat,
-                minLength: 1,
-                change:function(event,ui){
-
-                    $("#fees_id_"+rowCount ).val( ui.item.id );
-                    $( "#fees_status_"+rowCount ).val("set");
-                    $("#hiddenfees_amount_"+rowCount).val( ui.item.price );
-                    $("#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
-                   
-
-                },
-                focus: function( event, ui ) {
-                    $( "#fees_name_"+rowCount).val( ui.item.name );
-                    $( "#fees_status_"+rowCount ).val("not set");
-                    $( "#fees_id_"+rowCount ).val( ui.item.id );
-                    $( "#hiddenfees_amount_"+rowCount).val( ui.item.price );
-                    $( "#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
-                   
-
-                    return true;
-                },
-                select: function( event, ui ) {
-                    $( "#fees_name_"+rowCount).val( ui.item.value );
-                    $( "#fees_id_"+rowCount ).val( ui.item.id );
-                    $( "#fees_status_"+rowCount ).val("set");
-                    $( "#hiddenfees_amount_"+rowCount).val( ui.item.price );
-                    $( "#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
-                   
-                    return true;
-                }
-            }).data( "autocomplete" )._renderItem = function( ul, item ) {
-                return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +":-</b> <b> "+item.particularname +"</b></a>" )
-                .appendTo( ul );
-            };
-
-        });
-
-
-
-    }
     
     function selectAllRow(tableID){
         var table = document.getElementById(tableID);
@@ -630,42 +473,48 @@
             chkbox.checked=true;
         }
     }
-    
-    function deleteRow(tableID) {
-        try {
-            var table = document.getElementById(tableID);
-            var rowCount = table.rows.length;
-            if(rowCount==1){
-                alert('No records to delete');
-            }
-            for(var i=1; i<rowCount-1; i++) {
-                var row = table.rows[i];
-                var chkbox = row.cells[0].childNodes[0];
-                if(null != chkbox && true == chkbox.checked) {
-                    table.deleteRow(i);
-                    rowCount--;
-                    i--;
+
+    </script>
+
+
+<script type="text/javascript">
+            var students = [
+            <c:forEach varStatus="status" items="${studentListaa}" var="parents">{
+                value:'<c:out default="0" value="${parents.student.admissionnumber}" />',
+                id:'<c:out default="0" value="${parents.student.sid}" />',
+                
+            }<c:if test="${!status.last}">,</c:if>
+            </c:forEach>
+        ];
+        $(function() {
+            $( "#admno").autocomplete({
+                source: students,
+                minLength: 1,
+                change:function(event,ui){
+                    $( "#studentId").val( ui.item.id );
+                },
+                focus: function( event, ui ) {
+                    $( "#studentId").val( ui.item.id );
+                    return true;
+                },
+                select: function( event, ui ) {
+                    $( "#studentId").val( ui.item.id );
+                    
+                    return true;
                 }
-            }
+            }).data( "autocomplete" )._renderItem = function( ul, item ) {
+                return $( "<li></li>" )
+                .data( "item.autocomplete", item )
+                .append( "<a><b> " + item.value +" </b> </a>" )
+                .appendTo( ul );
+            };
+            var addFeesButtonID="#addFees";
+        });
+        $('#selectAll').click(function () {
            
-            
-            var sum = 0.0;
-            var totalSum=0.0;
-            var column2 = $('.feesAmount')
-            jQuery.each(column2,function(){
-                sum += parseFloat($(this).val());
-            });
-            totalSum=sum;
-            
-            $('#feesTotalAmount').val(totalSum);
-            
-            calculateGrandTotal();
-            //$('#grandTotalAmount').val(0);
-        }catch(e) {
-            alert(e);
-        }
-    }
+        });
         </script>
+
 
 </head>
   <%
@@ -685,23 +534,35 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=StampFeesProcess&action=applyFees" method="POST">
-    
+	<form id="form1" action="Controller?process=DocumentsProcess&action=generateAdmissionAbstract" method="POST">
+		
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Stamp Fees</a></li>
+					<li><a href="#tabs-1">Admission Abstract</a></li>
 
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
+						
+						<tr>
+							<td class="alignRightFields">Admission No &nbsp;</td>
+							<td width="12%" align="left"><label> <input  type="text" name="admno" id="admno" style="width: 235px" 
+							onfocusout="datetowords()"/> <input name="studentId" type="hidden" id="studentId" value="" /> 
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
 
 						<tr>
 							<td class="alignRightFields">Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
+									size="36" />
 							</label></td>
 							
 						</tr>
@@ -714,31 +575,29 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> 
-								<select name="classsearch" id="classsearch"
-									style="width: 120px;">
+							<td width="70%"><label> <select name="classsearch"
+									id="classsearch" style="width: 150px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}">
+											<option value="${classdetailslist.classdetails}" >
 												<c:out value="${classdetailslist.classdetails}" />
 											</option>
-										</c:if>
+										</c:if>	
 										</c:forEach>
 								</select>
 
-							</label> <label> 
-									<select name="secsearch" id="secsearch"
-									style="width: 120px;">
+							</label> <label> <select name="secsearch" id="secsearch"
+									style="width: 80px">
 										<option selected></option>
-
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.section != '')}">
 											<option value="${classdetailslist.section}">
 												<c:out value="${classdetailslist.section}" />
 											</option>
-										</c:if>
+										</c:if>	
 										</c:forEach>
+
 								</select>
 							</label>
 						</tr>
@@ -764,44 +623,8 @@ for(Cookie cookie : cookies){
 						</tr>
 
 					</table>
-					<div class="alignRightFields">
-
-						Fees Category:
-						<button id="addFeesCat">Add</button>
-						<button id="removeFeesCat">Remove</button>
-						<input
-									name="currentyear" type="hidden" value="${currentYear}" class="myclass" id="currentyear"
-									size="36"">
-					</div>
-					<TABLE id="dataTable" width="100%" border="0">
-						<thead>
-							<tr>
-								<td class="headerText"><INPUT type="checkbox"
-									id="selectAll" name="selectAll"
-									onclick="selectAllRow('dataTable')" /></td>
-								<td class="headerText">Fees Category</td>
-								<td class="headerText">Fees Amount</td>
-								<td class="headerText">No.of installments in a Year</td>
-								<td class="headerText">Concession Amount</td>
-								<td class="headerText">Fees Total Amount</td>
-
-
-
-							</tr>
-						</thead>
-						<tbody>
-
-						</tbody>
-						<tfoot>
-							<tr>
-
-								<td colspan="5" align="right">Total&nbsp;&nbsp;</td>
-								<td align="center"><input type="text"
-									name="feesTotalAmount" id="feesTotalAmount" value="0" /></td>
-							</tr>
-
-						</tfoot>
-					</TABLE>
+					
+					
 
 				</div>
 			</div>
@@ -839,8 +662,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
-							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>"><c:out
+							<td class="dataText"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out
@@ -854,10 +676,12 @@ for(Cookie cookie : cookies){
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"><input value="Apply"
-							type="submit" id="delete" />
-							<!-- <input value="Delete Stamp Fees"
-							type="submit" id="deleteStamp" /> --></td>
+													
+						<td class="footerTD" colspan="2"> &nbsp;
+						
+						<input value="Export"
+							type="submit" id="export"/></td>
+							
 							
 
 					</tr>

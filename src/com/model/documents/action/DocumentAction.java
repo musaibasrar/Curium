@@ -46,10 +46,50 @@ public class DocumentAction {
 			url = studentsDetailsBonafide();
 		}else if ("printBonafide".equalsIgnoreCase(action)) {
 			url = printBonafide();
+		}else if ("admissionAbstract".equalsIgnoreCase(action)) {
+			url = admissionAbstract();
+		}else if ("searchForStudents".equalsIgnoreCase(action)) {
+			url = searchForStudents();
+		}else if ("generateAdmissionAbstract".equalsIgnoreCase(action)) {
+			url = generateAdmissionAbstract();
+		}else if ("download".equalsIgnoreCase(action)) {
+			url = downloadAdmissionAbstract();
 		}
 		return url; 
 	} 
 	
+
+	private String downloadAdmissionAbstract() {
+		if(new DocumentService(request, response).downlaodFile()){
+            return "exportsuccessaa.jsp";
+    }
+		return "exportfailure.jsp";
+	}
+
+	private String generateAdmissionAbstract() {
+		
+        if(new DocumentService(request, response).exportAdmissionAbstract()){
+                return "exportsuccessaa.jsp";
+        }else{
+                return "exportfailure.jsp";
+        }
+        
+	}
+
+	private String searchForStudents() {
+		if(new DocumentService(request, response).searchForStudents()){
+			new DocumentService(request, response).admissionAbstract();
+			return "admissionabstract.jsp";
+		}
+        return error;
+	}
+
+	private String admissionAbstract() {
+		if(new DocumentService(request, response).admissionAbstract()){
+			return "admissionabstract.jsp";
+		}
+        return error;
+	}
 
 	private String printBonafide() {
 		return "bonafideprint.jsp";
