@@ -476,7 +476,7 @@
             $( addFeesButtonID )
             .button({
                 icons: {
-                    primary: "ui-icon-plus"
+                    primary: "ui-icon-search"
                 }
             })
             .click(function() {
@@ -700,7 +700,7 @@ for(Cookie cookie : cookies){
                     <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
                         
                         <td>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
-                        <td>Fees Structure: <button id="addFees">Add</button>&nbsp;&nbsp;&nbsp;</td>
+                        
                     </tr>
                     
                     <tr>
@@ -709,6 +709,17 @@ for(Cookie cookie : cookies){
                         <td>Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" /></td>
                         
                     </tr>
+                    
+                    <tr>
+						<td><br></td>
+                    </tr>
+                    
+                    <tr>
+                    	
+                        <td><button id="addFees">Search Fees</button>&nbsp;&nbsp;&nbsp;</td>
+                        
+                    </tr>
+                    
                     <tr>
 						<td><br></td>
                     </tr>
