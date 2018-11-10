@@ -300,27 +300,7 @@
 		obj.value = obj.value.replace(reg, "");
 	}
 
-	function validateName() {
-
-		if (document.getElementById("name").value.length == 0)
-
-		{
-			document.getElementById("name").style.background = 'white';
-			alert("Enter The Name");
-		}
-
-	}
 	
-	function validateFatherName() {
-
-		if (document.getElementById("fathersname").value.length == 0)
-
-		{
-			document.getElementById("fathersname").style.background = 'red';
-			alert("Enter The Father's Name");
-		}
-
-	}
 
 	function validateNameAlpha(obj) {
 
@@ -351,29 +331,6 @@
 	}
 
 </script>
-
-
-<script>
-	function validateWhileSave() {
-		if (document.getElementById("name").value.length == 0)
-
-		{
-			document.getElementById("name").style.background = 'white';
-			alert("Enter The Name");
-		}
-
-		if (document.getElementById("contactNO").value.length == 0)
-
-		{
-			document.getElementById("contactNO").style.background = 'red';
-			alert("Enter The Contact Number");
-		}
-	}
-</script>
-
-
-
-
 
 
 <script type="text/javascript">
