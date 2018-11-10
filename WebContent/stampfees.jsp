@@ -686,27 +686,8 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1" action="Controller?process=StampFeesProcess&action=applyFees" method="POST">
-		<!-- <div style="height: 28px">
-			<button id="add">Add Department</button>
-			<br />
-		</div> -->
-		<p id="para"></p>
-    <label for="ddlculture">Select Region</label>
-    <select id="ddlculture">
-        <option></option>
-        <option value="zh-TW">China</option>
-        <option value="fr-FR">France</option>
-        <option value="de-DE">Germany</option>
-        <option value="en-IN">India</option>
-        <option value="ja-JP">Japan</option>
-        <option value="ru-RU">Russia</option>
-        <option value="es-ES">Spain</option>
-        <option value="en-GB">United Kingdom</option>
-        <option value="en-US">United States</option>
-    </select>
-    <label for="txtNum">Formatted Number: </label>
-    <input type="text" id="txtNum" readonly="true" />
-    
+		<!--  -->
+	     
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
