@@ -411,28 +411,6 @@
 		obj.value = obj.value.replace(reg, "");
 	}
 
-	function validateName() {
-
-		if (document.getElementById("name").value.length == 0)
-
-		{
-			document.getElementById("name").style.background = 'red';
-			alert("Enter The Name");
-		}
-
-	}
-	
-	function validateFatherName() {
-
-		if (document.getElementById("fathersname").value.length == 0)
-
-		{
-			document.getElementById("fathersname").style.background = 'red';
-			alert("Enter The Father's Name");
-		}
-
-	}
-
 	function validateNameAlpha(obj) {
 
 		document.getElementById("name").style.background = 'white';
@@ -492,29 +470,6 @@
 </script>
 
 
-<script>
-	function validateWhileSave() {
-		if (document.getElementById("name").value.length == 0)
-
-		{
-			document.getElementById("name").style.background = 'red';
-			alert("Enter The Name");
-		}
-
-		if (document.getElementById("contactNO").value.length == 0)
-
-		{
-			document.getElementById("contactNO").style.background = 'red';
-			alert("Enter The Contact Number");
-		}
-	}
-</script>
-
-
-
-
-
-
 <script type="text/javascript">
 	$(function() {
 
@@ -523,44 +478,16 @@
 
 		});
 		
-		$("#save").button().click(function() {
-			addStudent();
-
-		});
-		$("#savetwo").button().click(function() {
-			addStudent();
-
-		});
-		$("#savetwo").button().click(function() {
-			addStudent();
-
-		});
-		$("#savethree").button().click(function() {
-			addStudent();
-
-		});
-		$("#savefour").button().click(function() {
+		$(".save").button().click(function() {
 			addStudent();
 
 		});
 
-		$("#cancel").button().click(function() {
+		$(".cancel").button().click(function() {
 			Cancel();
 
 		});
-		$("#canceltwo").button().click(function() {
-			Cancel();
-
-		});
-		$("#cancelthree").button().click(function() {
-			Cancel();
-
-		});
-		$("#cancelfour").button().click(function() {
-			Cancel();
-
-		});
-			
+					
 	});
 </script>
 <script>
@@ -834,7 +761,7 @@ for(Cookie cookie : cookies){
 							<td width="30%" class="alignRight">Name* &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="name" type="text" class="myclass" id="name" size="36" style="text-transform:uppercase"
-									onblur="validateName();" required> <!-- onkeyup="check(this.value);"  -->
+									 required> <!-- onkeyup="check(this.value);"  -->
 							</label></td>
 
 							<td width="30%" class="alignRight">Gender &nbsp;</td>
@@ -1236,10 +1163,10 @@ for(Cookie cookie : cookies){
 									<td align="center">
 										
 										
-										<button id="save" onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();" onfocus="validateNameContact();validateFatherName();">Save</button>
+										<button id="save" class="save" onmouseover="validateNameContact();validateAdmissionNumber();" onfocus="validateNameContact();">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="cancel">Cancel</button>
+										<button id="cancel" class="cancel">Cancel</button>
 
 									</td>
 
@@ -1289,10 +1216,10 @@ for(Cookie cookie : cookies){
 									<td align="center">
 										
 										
-										<button id="savethree" onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();" onfocus="validateNameContact();validateFatherName();">Save</button>
+										<button id="savethree" class="save" onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();" onfocus="validateNameContact();validateFatherName();">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="cancelthree">Cancel</button>
+										<button id="cancelthree" class="cancel">Cancel</button>
 
 									</td>
 
@@ -1424,10 +1351,10 @@ for(Cookie cookie : cookies){
 									<td align="center">
 									
 										
-										<button id="savefour" onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();" onfocus="validateNameContact();validateFatherName();">Save</button>
+										<button id="savefour" class="save" onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();" onfocus="validateNameContact();validateFatherName();">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="cancelfour">Cancel</button>
+										<button id="cancelfour" class="cancel">Cancel</button>
 
 									</td>
 
@@ -1479,13 +1406,13 @@ for(Cookie cookie : cookies){
 									<td width="30%" class="alignRight">Father's Name & Occupation* &nbsp;</td>
 									<td width="12%" align="left"><label> <input
 											name="fathersname" type="text" class="myclass" id="fathersname" style="text-transform:uppercase"
-											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+											size="36" required> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
 									<td width="30%" class="alignRight">Mother's Name & Occupation*&nbsp;</td>
 									<td width="12%" align="left"><label> <input
 											name="mothersname" type="text" class="myclass" id="name" style="text-transform:uppercase"
-											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+											size="36"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
 
@@ -1504,13 +1431,13 @@ for(Cookie cookie : cookies){
 									<td width="30%" class="alignRight">Father's Qualification &nbsp;</td>
 									<td width="12%" align="left"><label> <input
 											name="fathersqualification" type="text" class="myclass" id="fathersqualification" style="text-transform:uppercase"
-											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+											size="36" > <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
 									<td width="30%" class="alignRight">Mother's Qualification&nbsp;</td>
 									<td width="12%" align="left"><label> <input
 											name="mothersqualification" type="text" class="myclass" id="mothersqualification" style="text-transform:uppercase"
-											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+											size="36" > <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
 
@@ -1684,10 +1611,10 @@ for(Cookie cookie : cookies){
 									<td align="center">
 									
 										
-										<button id="savetwo" onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();" onfocus="validateNameContact();validateFatherName();">Save</button>
+										<button id="savetwo" class="save" onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();" onfocus="validateNameContact();validateFatherName();">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="canceltwo">Cancel</button>
+										<button id="canceltwo" class="cancel">Cancel</button>
 
 									</td>
 
@@ -1727,8 +1654,10 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function addStudent() {
 								var form1 = document.getElementById("form1");
-								form1.action = "Controller?process=StudentProcess&action=AddStudent";
-								form1.submit();
+								if(form1.checkValidity()) {
+									form1.action = "Controller?process=StudentProcess&action=AddStudent";
+									form1.submit();
+								  }
 							}
 
 							function Cancel() {
