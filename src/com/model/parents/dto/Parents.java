@@ -40,6 +40,11 @@ public class Parents implements java.io.Serializable {
         private String fathersqualification;
         private String mothersqualification;
         
+    	private String fatherscastecertno;
+    	private String motherscastecertno;
+    	private String fatherscaste;
+    	private String motherscaste;
+        
 	public Parents() {
 	}
 
@@ -47,7 +52,8 @@ public class Parents implements java.io.Serializable {
 			String addresspermanent, String addresstemporary,
 			String professsion, String parentsannualincome,
 			Integer noofdependents, Integer sid, Integer tid, String remarks, String contactnumber, String cocontactnumber,
-			int branchid, String fathersqualification, String mothersqualification) {
+			int branchid, String fathersqualification, String mothersqualification,String fatherscastecertno,String motherscastecertno,
+			String fatherscaste,String motherscaste) {
 		this.fathersname = fathersname;
 		this.mothersname = mothersname;
 		this.addresspermanent = addresspermanent;
@@ -63,6 +69,10 @@ public class Parents implements java.io.Serializable {
 		this.branchid = branchid;
 		this.fathersqualification = fathersqualification;
 		this.mothersqualification = mothersqualification;
+		this.fatherscastecertno = fatherscastecertno;
+		this.motherscastecertno = motherscastecertno;
+		this.fatherscaste = fatherscaste;
+		this.motherscaste = motherscaste;
 	}
 
 	@Id
@@ -235,4 +245,39 @@ public class Parents implements java.io.Serializable {
     public void setMothersqualification(String mothersqualification) {
         this.mothersqualification = mothersqualification;
     }
+    
+	
+	public String getFatherscastecertno() {
+		return fatherscastecertno;
+	}
+
+	public void setFatherscastecertno(String fatherscastecertno) {
+		this.fatherscastecertno = fatherscastecertno;
+	}
+
+	public String getMotherscastecertno() {
+		return motherscastecertno;
+	}
+
+	public void setMotherscastecertno(String motherscastecertno) {
+		this.motherscastecertno = motherscastecertno;
+	}
+
+
+	public String getFatherscaste() {
+		return fatherscaste;
+	}
+
+	public void setFatherscaste(String fatherscaste) {
+		this.fatherscaste = fatherscaste;
+	}
+
+	public String getMotherscaste() {
+		return motherscaste;
+	}
+
+	public void setMotherscaste(String motherscaste) {
+		this.motherscaste = motherscaste;
+	}
+
 }

@@ -75,11 +75,7 @@ public class Student implements java.io.Serializable {
 	private String previouschooladdress;
 	private String urbanrural;
 	private String studentscastecertno;
-	private String fatherscastecertno;
-	private String motherscastecertno;
 	private String studentscaste;
-	private String fatherscaste;
-	private String motherscaste;
 	private String socialcategory;
 	private Integer belongtobpl;
 	private String bplcardno;
@@ -107,9 +103,8 @@ public class Student implements java.io.Serializable {
 			Integer notcissued, Date datetcissued, String guardiandetails, int branchid,
 			String languagesstudied, String instructionmediumlastschool,
 			Integer passedout, Integer droppedout, Integer leftout, Integer semester,String stream,String mediumofinstruction,
-			 String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,
-			 String fatherscastecertno,String motherscastecertno,String studentscaste,String fatherscaste,
-			 String motherscaste,String socialcategory,Integer belongtobpl,String bplcardno,String bhagyalakshmibondnumber,
+			 String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,String studentscaste,
+			 String socialcategory,Integer belongtobpl,String bplcardno,String bhagyalakshmibondnumber,
 			 String disabilitychild,String specialcategory) {
 		this.name = name;
 		this.classstudying = classstudying;
@@ -155,11 +150,7 @@ public class Student implements java.io.Serializable {
 		this.previouschooladdress = previouschooladdress;
 		this.urbanrural = urbanrural;
 		this.studentscastecertno = studentscastecertno;
-		this.fatherscastecertno = fatherscastecertno;
-		this.motherscastecertno = motherscastecertno;
 		this.studentscaste = studentscaste;
-		this.fatherscaste = fatherscaste;
-		this.motherscaste = motherscaste;
 		this.socialcategory = socialcategory;
 		this.belongtobpl = belongtobpl;
 		this.bplcardno = bplcardno;
@@ -607,44 +598,12 @@ public class Student implements java.io.Serializable {
 		this.studentscastecertno = studentscastecertno;
 	}
 
-	public String getFatherscastecertno() {
-		return fatherscastecertno;
-	}
-
-	public void setFatherscastecertno(String fatherscastecertno) {
-		this.fatherscastecertno = fatherscastecertno;
-	}
-
-	public String getMotherscastecertno() {
-		return motherscastecertno;
-	}
-
-	public void setMotherscastecertno(String motherscastecertno) {
-		this.motherscastecertno = motherscastecertno;
-	}
-
 	public String getStudentscaste() {
 		return studentscaste;
 	}
 
 	public void setStudentscaste(String studentscaste) {
 		this.studentscaste = studentscaste;
-	}
-
-	public String getFatherscaste() {
-		return fatherscaste;
-	}
-
-	public void setFatherscaste(String fatherscaste) {
-		this.fatherscaste = fatherscaste;
-	}
-
-	public String getMotherscaste() {
-		return motherscaste;
-	}
-
-	public void setMotherscaste(String motherscaste) {
-		this.motherscaste = motherscaste;
 	}
 
 	public String getSocialcategory() {

@@ -144,20 +144,8 @@
         <property name="studentscastecertno" type="string">
             <column name="studentscastecertno" length="25" />
         </property>
-        <property name="fatherscastecertno" type="string">
-            <column name="fatherscastecertno" length="25" />
-        </property>
-        <property name="motherscastecertno" type="string">
-            <column name="motherscastecertno" length="25" />
-        </property>
         <property name="studentscaste" type="string">
             <column name="studentscaste" length="15" />
-        </property> 
-        <property name="fatherscaste" type="string">
-            <column name="fatherscaste" length="15" />
-        </property>    
-        <property name="motherscaste" type="string">
-            <column name="motherscaste" length="15" />
         </property> 
         <property name="socialcategory" type="string">
             <column name="socialcategory" length="10" />
