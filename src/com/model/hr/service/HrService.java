@@ -26,6 +26,7 @@ import com.model.attendance.dto.Holidaysmaster;
 import com.model.attendance.dto.Weeklyoff;
 import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
+import com.model.employee.service.EmployeeService;
 import com.model.hr.dao.HrDAO;
 import com.model.hr.dto.Leaveapplication;
 import com.model.hr.dto.Leavedetails;
@@ -360,7 +361,9 @@ public class HrService {
 			leaveApplication.setTodate(DateUtil.dateParserUpdateStd(request.getParameter("todate")));
 			String userName = httpSession.getAttribute("username").toString();
 				Teacher teacher = new EmployeeDAO().getEmployeeDetails(userName);
-				leaveApplication.setIdteacher(teacher.getTid());
+				Teacher addTeacher = new Teacher();
+				addTeacher.setTid(teacher.getTid());
+				leaveApplication.setTeacher(addTeacher);
 				int totalLeaves = calculateLeaves(DateUtil.dateParserUpdateStd(request.getParameter("fromdate")),DateUtil.dateParserUpdateStd(request.getParameter("todate")),teacher.getTid());
 				if(totalLeaves==0){
 					return false;
@@ -760,6 +763,54 @@ public class HrService {
 		}
 		issueStaffSalary();
 		return result;
+	}
+	
+public void updateBasicpayEmployees() {
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		String[] staffIds =  request.getParameterValues("employeeIDs");
+		String[] basicPay = request.getParameterValues("basicpay");
+		String[] paymentType = request.getParameterValues("paymenttype");
+		String[] accountNo = request.getParameterValues("accountno");
+		String[] overTime = request.getParameterValues("overtime");
+		String[] academicYear = request.getParameterValues("academicyear");
+		
+		List<Integer> overTimeList = new ArrayList<Integer>();
+		
+		if(overTime != null){
+			for (String string : overTime) {
+				String[] ot = string.split("_");
+				overTimeList.add(Integer.parseInt(ot[1]));
+			}
+		}
+		
+		
+		List<Paybasic> payBasicList = new ArrayList<Paybasic>();
+		
+		for(int i=0; i<staffIds.length; i++){
+			String[] splitId = staffIds[i].split(":");
+			Paybasic payBasic = new Paybasic();
+			Teacher teacher = new Teacher();
+			payBasic.setIdpaybasic(Integer.parseInt(splitId[2]));
+			payBasic.setAcademicyear(academicYear[Integer.parseInt(splitId[1])]);
+			payBasic.setAccountno(accountNo[Integer.parseInt(splitId[1])]);
+			payBasic.setBasicpay(new BigDecimal(basicPay[Integer.parseInt(splitId[1])]));
+			teacher.setTid(Integer.parseInt(splitId[0]));
+			payBasic.setTeacher(teacher);
+			if(overTimeList.contains(Integer.parseInt(splitId[0]))){
+				payBasic.setOvertime("yes");
+			}else{
+				payBasic.setOvertime("no");
+			}
+			payBasic.setPaymenttype(paymentType[Integer.parseInt(splitId[1])]);
+			payBasic.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			
+			payBasicList.add(payBasic);
+		}
+		 boolean result = new HrDAO().updatePayBasic(payBasicList);
+			 request.setAttribute("basicpayupdate", result);
+		}
+		new EmployeeService(request, response).basicpayEmployees();
 	}
 	
 }

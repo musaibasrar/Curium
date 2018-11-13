@@ -449,6 +449,60 @@
 	
 </script>
 
+<script type="text/javascript">
+           
+            var staff = [
+                            <c:forEach varStatus="status" items="${employeeList}" var="employeelist">{
+                                value:'<c:out default="0" value="${employeelist.teachername}" />',
+                                department:'<c:out default="0" value="${employeelist.department}" />',
+                                designation:'<c:out default="0" value="${employeelist.designation}" />',
+                                id:'<c:out default="0" value="${employeelist.tid}" />',
+                                
+                            }<c:if test="${!status.last}">,</c:if>
+                            </c:forEach>
+                        ];
+            
+        $(function() {
+            $( "#staffname").autocomplete({
+                source: staff,
+                minLength: 1,
+                change:function(event,ui){
+                    $( "#staffid").val( ui.item.id );
+                },
+                focus: function( event, ui ) {
+                    $( "#staffid").val( ui.item.id );
+                    return true;
+                },
+                select: function( event, ui ) {
+                    $( "#staffid").val( ui.item.id );
+       			$( "#designation").val( ui.item.designation );
+       			$( "#department").val( ui.item.department );
+                    return true;
+                }
+            }).data( "autocomplete" )._renderItem = function( ul, item ) {
+                return $( "<li></li>" )
+                .data( "item.autocomplete", item )
+                .append( "<a><b> " + item.value +" </b> </a>" )
+                .appendTo( ul );
+            };
+        });
+        $('#selectAll').click(function () {
+            var length = $('.chcktbl:checked').length;
+            var trLength=$('.trClass').length;
+            if(length>0){
+                $('.chcktbl:checked').attr('checked', false);
+                this.checked=false;
+            }
+            else{
+                if (this.checked == false) {
+                    $('.chcktbl:checked').attr('checked', false);
+                }
+                else {
+                    $('.chcktbl:not(:checked)').attr('checked', true);
+                }
+            }
+        });
+        </script>
 
 </head>
 <%
@@ -481,7 +535,7 @@ for(Cookie cookie : cookies){
 
 						</tr>
 							<tr>
-							<td><br /></td>
+							<td class="alignRightFields">Apply Filters: &nbsp;<br /><br /></td>
 
 						</tr>
 						</tr>
@@ -579,7 +633,7 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-					   <c:forEach items="${employeeList}" var="employee">
+					   <c:forEach items="${searchedemployeeList}" var="employee">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText" style="display:none"><input type="checkbox"  checked id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
                                 <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="Controller?process=HrProcess&action=viewLeavesDetails&id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>

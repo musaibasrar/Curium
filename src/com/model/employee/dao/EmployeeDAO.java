@@ -11,6 +11,7 @@ import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.employee.dto.Teacher;
+import com.model.hr.dto.Paybasic;
 import com.util.HibernateUtil;
 
 public class EmployeeDAO {
@@ -58,6 +59,33 @@ public class EmployeeDAO {
 					.list();
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+			return results;
+		}
+	}
+	
+	@SuppressWarnings({ "unchecked", "finally" })
+	public List<Teacher> readListOfEmployeesBasicPay(int branchId) {
+
+		List<Teacher> results = new ArrayList<Teacher>();
+		try {
+
+			transaction = session.beginTransaction();
+			List<Paybasic> payList = session.createQuery("From Paybasic").list();
+			List tidList = new ArrayList<>();
+			tidList.add(0);
+			for (Paybasic paybasic : payList) {
+				tidList.add(paybasic.getTeacher().getTid());
+			}
+			Query query = session.createQuery("From Teacher where branchid="+branchId+" and tid NOT IN (:basicPayList)");
+			query.setParameterList("basicPayList", tidList);
+			results = query.getResultList();
+			transaction.commit();
+		} catch (Exception hibernateException) { 
+			transaction.rollback(); 
+			logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
 		} finally {
@@ -154,7 +182,17 @@ public class EmployeeDAO {
 		List<Teacher> employee = new ArrayList<Teacher>();
 		try {
 			transaction = session.beginTransaction();
-			employee = session.createQuery("From Teacher where teachername='"+staffName+"' and branchid="+branchId).list();
+			
+			List<Paybasic> payList = session.createQuery("From Paybasic").list();
+			List tidList = new ArrayList<>();
+			tidList.add(0);
+			for (Paybasic paybasic : payList) {
+				tidList.add(paybasic.getTeacher().getTid());
+			}
+			Query query = session.createQuery("From Teacher where teachername='"+staffName+"' and branchid="+branchId+" and tid NOT IN (:basicPayList)");
+			query.setParameterList("basicPayList", tidList);
+			employee = query.getResultList();
+			
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
@@ -166,7 +204,16 @@ public class EmployeeDAO {
 		List<Teacher> employee = new ArrayList<Teacher>();
 		try {
 			transaction = session.beginTransaction();
-			employee = session.createQuery("From Teacher where department = '"+staffDepartment+"' and branchid="+branchId).list();
+			
+			List<Paybasic> payList = session.createQuery("From Paybasic").list();
+			List tidList = new ArrayList<>();
+			tidList.add(0);
+			for (Paybasic paybasic : payList) {
+				tidList.add(paybasic.getTeacher().getTid());
+			}
+			Query query = session.createQuery("From Teacher where department='"+staffDepartment+"' and branchid="+branchId+" and tid NOT IN (:basicPayList)");
+			query.setParameterList("basicPayList", tidList);
+			employee = query.getResultList();
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
@@ -212,6 +259,24 @@ public class EmployeeDAO {
 			hibernateException.printStackTrace();
 		} 
 		return employee;
+	}
+
+	public List<Paybasic> readListOfEmployeesBasicPayDetails(int branchId) {
+
+		List<Paybasic> payList = new ArrayList<Paybasic>();
+		try {
+
+			transaction = session.beginTransaction();
+			payList = session.createQuery("From Paybasic where branchid="+branchId).list();
+			transaction.commit();
+		} catch (Exception hibernateException) { 
+			transaction.rollback(); 
+			logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+			return payList;
+		}
 	}
 
 }

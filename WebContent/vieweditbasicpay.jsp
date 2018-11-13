@@ -1,53 +1,20 @@
 <%--
-    Document   : View Attendance
-    Created on : JAN 22, 2018, 4:14:28 PM
+    Document   : view/edit Basic Pay
+    Created on : NOV 12, 2018, 04:41:45 PM
     Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>fees structure</title>
-<script src="js/Chart.js"></script>
+<title>view/edit Basic Pay</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
-<link rel="stylesheet" href="css/graph/jquery.jqplot.css">
-<link rel="stylesheet" href="css/graph/jquery.jqplot.min.css">
-
-
-  <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        
-        
-         <script  type="text/javascript" src="js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.trendline.min.js"></script>
-        <script src="js/jquery.jqplot.min.js" ></script>
-        <script src="js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
-        
 <style type="text/css">
 <!--
 .divCSS {
@@ -125,6 +92,17 @@
 }
 
 .alignRightFields {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+.amount {
 	font-family: Tahoma;
 	font-size: 11px;
 	font-style: normal;
@@ -322,13 +300,55 @@
 	font-weight: bold;
 	height: 22px;
 }
-</style>
-<style>
-#button {
-	
+.amount {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
 }
+
+.alert-box {
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;  
+}
+
+.update {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.updatefailure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.delete {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.deletefailure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+
 </style>
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -388,61 +408,106 @@
 	}
 	
 </script>
+  
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
-	$(function() {
-
-		$("#search").button().click(function() {
-			exportMonthlyData();
-		});
-	});
-	
-	function exportMonthlyData() {
+	function searchForEmployees(staffName, staffDepartment){
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=exportMonthlyDataStaff";
+		form1.action = "Controller?process=HrProcess&action=searchEmployeesForbasicpay&staffName="+staffName+"&staffDepartment="+staffDepartment+"";
 		form1.method = "POST";
 		form1.submit();
 
 	}
-	
-	
-	
+
 	$(function() {
+
+		$("#search").button().click(function() {
+			var staffName = document.getElementById('staffname').value;
+			var staffDepartment = document.getElementById('department').value;
+			searchForEmployees(staffName, staffDepartment);
+		});
 
 		$("#tabs").tabs();
 
-		$("#save").button().click(function() {
-			addDepartment();
+		$("#update").button().click(function() {
+			if (confirm('Are you sure,you want to update?')) {
+				updateBasicPay();
+			}
+			return false;
 		});
 		
-		$("#monthof").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+10"
-		});
-		$("#anim").change(function() {
-			$("#dateofattendance").datepicker("option", "showAnim", $(this).val());
-		});
+		$('#chckHead').click(function () {
+            var length = $('.chcktbl:checked').length;
+            var trLength=$('.trClass').length;
+            if(length>0){
+                $('.chcktbl:checked').attr('checked', false);
+                this.checked=false;
+
+            }
+            else{
+                if (this.checked == false) {
+                    $('.chcktbl:checked').attr('checked', false);
+                }
+                else {
+                    $('.chcktbl:not(:checked)').attr('checked', true);
+                }
+
+            }
+
+        });
+        $('.chcktbl').click(function () {
+            var length = $('.chcktbl:checked').length;
+            var trLength=$('.trClass').length;
+            alert(tdLength);
+            if (length > trLength) {
+
+                $('.chcktbl:not(:checked)').attr('disabled', true);
+            }
+            else {
+                $('.chcktbl:not(:checked)').attr('disabled', false);
+            }
+        });
 
 	});
+
+	 
+	
+	function updateBasicPay() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=HrProcess&action=updateBasicPay";
+		form1.method = "POST";
+		form1.submit();
+	}
 	
 	
-	   function checkDate(){
-			  var ofDate = document.getElementById('monthof').value;
-			  var currentDate = new Date();
-			  var sDate = new Date(ofDate);
-			  
-			if(ofDate!= '' && sDate > currentDate)
-			  {
-			    alert("Please ensure that the Date is lesser than or equals to current Date.");
-			    document.getElementById('todateofattendance').value = '';
-			    return false;
-			  }
-	   }
 </script>
+
+<script type="text/javascript">
+					
+					var basicpayupdate='<c:out default="" value="${basicpayupdate}"/>';
+		            var basicpaydelete='<c:out default="" value="${basicpaydelete}"/>';
+		            
+		            	if(basicpayupdate == "true"){
+		                   	 $(function(){
+		                   		 $( "div.update" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		                   	 });
+		                   	 }else if(basicpayupdate == "false"){
+		                   	  $(function(){
+		                   		 $( "div.updatefailure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		                   		 });
+		                   	 }else if(basicpaydelete == "true"){
+			                   	 $(function(){
+			                   		 $( "div.delete" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+			                   	 });
+			                   	 }else if(basicpaydelete == "false"){
+			                   	  $(function(){
+			                   		 $( "div.deletefailure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+			                   		 });
+			                   	 }
+            
+        </script>
 
 </head>
 <%
@@ -462,79 +527,77 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-<jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form id="form1" action="Controller?process=StampFeesProcess&action=applyFees" method="POST">
-		<!-- <div style="height: 28px">
-			<button id="add">Add Department</button>
-			<br />
-		</div> -->
+	<form id="form1" method="POST">
+	
+	
+				<div class="alert-box update">Basic Pay has been updated successfully!!!</div>
+				<div class="alert-box updatefailure">Update Failed, Unable to update Basic Pay!!!</div>
+				
+				<div class="alert-box delete">Basic Pay has been deleted successfully!!!</div>
+				<div class="alert-box deletefailure">Deletion Failed, Unable to delete Basic Pay!!!</div>
+				
+				
+				<div style="overflow: scroll; height: 600px">
+			<table width="100%">
+				<tr>
+					<td class="headerTD">View/Edit Basic Pay</td>
+				</tr>
+			</table>
+			<table width="100%" border="0" style="border-color: #4b6a84;"
+				id="myTable">
 
-		<div id="effect" class="ui-widget-content ui-corner-all">
-			<div id="tabs">
-				<ul>
-					<li><a href="#tabs-1">Export Monthly Attendance</a></li>
-				</ul>
-				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-
-						<tr>
-							<td class="alignRightFields">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label> <input
-									name="monthof" type="text" class="textField"
-									id="monthof" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"/>
-							</label></td>
+				<thead>
+					<tr>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th title="click to sort" class="headerText">Name<img
+							alt=" " style="position: relative; top: 4px;"
+							src="images/sort_both.png" /></th>
+							<th title="click to sort" class="headerText">Department&nbsp;</th>
+							<th title="click to sort" class="headerText">Designation&nbsp;</th>
+							<th title="click to sort" class="headerText">Basic Pay&nbsp;</th>
+							<th title="click to sort" class="headerText">Payment Type&nbsp;</th>
+							<th title="click to sort" class="headerText">Account No&nbsp;</th>
+							<th title="click to sort" class="headerText">Eligible For OT&nbsp;</th>
 						</tr>
+				</thead>
 
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-
-						<%-- <tr>
-							<td width="30%" class="alignRightFields">Staff Name &nbsp;&nbsp;&nbsp;
-							<label>
-									<select name="staffname" id="staffname"
-									style="width: 240px" ">
-										<option selected></option>
-
-										<c:forEach items="${staffList}" var="stafflist">
-
-											<option>
-												<c:out value="${stafflist.teachername}" />
-											</option>
-
-
-										</c:forEach>
-
+				<tbody>
+					   <c:forEach items="${vieweditbasicpay}" var="employee" varStatus="status">
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.teacher.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.teacher.tid}:${status.index}:${employee.idpaybasic}"/>"/></td>
+                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="Controller?process=HrProcess&action=viewLeavesDetails&id=<c:out value='${employee.teacher.tid}'/>"><c:out value="${employee.teacher.teachername}"/></a></td>
+                                <td class="dataText"><c:out value="${employee.teacher.department}"/></td>
+                                <td class="dataText"><c:out value="${employee.teacher.designation}"/></td>
+                                <td class="dataText"><input type="text"	id="basicpay" name="basicpay" value="${employee.basicpay}"
+								onkeypress="return event.charCode >= 00 && event.charCode <=57"/></td>
+								<td class="dataText"><select name="paymenttype" id="paymenttype">
+										<option selected>${employee.paymenttype}</option>
+										<option>Cash</option>
+										<option>Bank</option>
 								</select></td>
-						</tr> --%>
+								<td class="dataText"><input type="text"	id="accountno" name="accountno" value="${employee.accountno}"
+								onkeypress="return event.charCode >= 00 && event.charCode <=57"/></td>
+								<td class="dataText">
+								<input type="checkbox" id = "ot_<c:out value="${employee.teacher.tid}"/>" ${employee.overtime == 'yes' ? 'checked' : ''}
+								class = "chcktbl"  name="overtime"  value="ot_<c:out value="${employee.teacher.tid}"/>"/>
+								
+								
+								<input type="hidden" 
+								name="academicyear"  value="${employee.academicyear}"/>
+								</td>
+                            </tr>
+                        </c:forEach>
+				</tbody>
+				<tfoot><tr>
+                            <td  class="footerTD" colspan="2" ><button id="update">Update</button> 
+                    
+                        </tr></tfoot>
+			</table>
 
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-							<td width="30%">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Export</button>
-							</td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-					</table>
-				</div>
-			</div>
 		</div>
+		
+
 	</form>
+
 </body>
 </html>

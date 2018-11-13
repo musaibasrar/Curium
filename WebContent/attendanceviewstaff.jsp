@@ -458,10 +458,11 @@
 	
 	function searchStaffAttendanceDetailsMonthly() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=searchStaffAttendanceDetailsMonthly";
-		form1.method = "POST";
-		form1.submit();
-
+		if(form1.checkValidity()) {
+			form1.action = "Controller?process=AttendanceProcess&action=searchStaffAttendanceDetailsMonthly";
+			form1.method = "POST";
+			form1.submit();
+		  }
 	}
 	
 	function searchStaffAttendanceDetails() {
@@ -469,7 +470,6 @@
 		form1.action = "Controller?process=AttendanceProcess&action=searchStaffAttendanceDetails";
 		form1.method = "POST";
 		form1.submit();
-
 	}
 	
 	$(function() {
@@ -727,7 +727,7 @@ for(Cookie cookie : cookies){
 						<td><br></td>
 						</tr>
 						<tr>
-                    <td style="width: 45%" class="alignRightFields">Staff Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="nameofstaff" id="nameofstaff" onfocus="checkDate();" style="width: 200px" /> <input name="staffId" type="hidden" id="staffId" value="" />
+                    <td style="width: 45%" class="alignRightFields">Staff Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="nameofstaff" id="nameofstaff" onfocus="checkDate();" style="width: 200px" required/> <input name="staffId" type="hidden" id="staffId" value="" />
                     <input name="staffexternalid" type="hidden" id="staffexternalid" /> </td>
                         
                     </tr>

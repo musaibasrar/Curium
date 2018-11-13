@@ -482,14 +482,14 @@ for(Cookie cookie : cookies){
 
 						<tr>
 
-							<td width="16%" class="alignRight">Salary &nbsp;</td>
+							<%-- <td width="16%" class="alignRight">Salary &nbsp;</td>
 
 							<td align="left"><label> <input name="salary"
 									type="text" class="textField"
 									value="<c:out default="" value="${employee.salary}" />"
 									id="salary" size="30" data-validate="validate(required)">
 
-							</label></td>
+							</label></td> --%>
 
 							<td width="16%" class="alignRight">Remarks&nbsp;</td>
 

@@ -245,7 +245,7 @@ public class HrDAO {
 
 		try {
 			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update Payadvancesalary set reason = '"+payAdvance.getReason()+"',status = '"+payAdvance.getStatus()+"' where idpayadvancesalary="+payAdvance.getIdpayadvancesalary());
+			Query query= session.createSQLQuery("update hr_payadvancesalary set reason = '"+payAdvance.getReason()+"',status = '"+payAdvance.getStatus()+"' where idpayadvancesalary="+payAdvance.getIdpayadvancesalary());
 			query.executeUpdate();
 			transaction.commit();
 			return true;
@@ -311,7 +311,7 @@ public class HrDAO {
 		
 		try {
 			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update Leaveapplication set status = 'rejected' where idleaveapplication IN (:ids)");
+			Query query= session.createSQLQuery("update hr_leaveapplication set status = 'rejected' where idleaveapplication IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
@@ -327,12 +327,14 @@ public class HrDAO {
 		
 		try {
 			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update Leaveapplication set status = 'approved' where idleaveapplication IN (:ids)");
+			Query query= session.createSQLQuery("update hr_leaveapplication set status = 'approved' where idleaveapplication IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { 
+			transaction.rollback(); 
+			logger.error(e);
 			e.printStackTrace();
 		}
 		return false;
@@ -378,10 +380,12 @@ public class HrDAO {
 		
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createSQLQueryEntity("select * from Paybasic where idteacher = "+idteacher+" and academicyear='"+academicYear+"' ORDER BY idpaybasic DESC LIMIT 1",Paybasic.class);
+			Query query = session.createSQLQueryEntity("select * from hr_paybasic where idteacher = "+idteacher+" and academicyear='"+academicYear+"' ORDER BY idpaybasic DESC LIMIT 1",Paybasic.class);
 			basicPay = (Paybasic) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { 
+			transaction.rollback(); 
+			logger.error(e);
 			e.printStackTrace();
 		}
 		return basicPay;
@@ -522,7 +526,7 @@ public class HrDAO {
 
 		try {
 			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update Processsalarydetails set status = 'ISSUED' where idprocesssalarydetails IN (:ids)");
+			Query query= session.createSQLQuery("update hr_processsalarydetails set status = 'ISSUED' where idprocesssalarydetails IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
@@ -537,7 +541,7 @@ public class HrDAO {
 		
 		try {
 			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update Processsalarydetails set status = 'CANCELLED' where idprocesssalarydetails IN (:ids)");
+			Query query= session.createSQLQuery("update hr_processsalarydetails set status = 'CANCELLED' where idprocesssalarydetails IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
@@ -547,5 +551,20 @@ public class HrDAO {
 		}
 		return false;
 	}
+
+	public boolean updatePayBasic(List<Paybasic> payBasicList) {
+		
+		try {
+			transaction = session.beginTransaction();
+			for (Paybasic payBasic : payBasicList) {
+				session.update(payBasic);
+			}
+			transaction.commit();
+			return true;
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}
+		return false;		
+}
 	
 }

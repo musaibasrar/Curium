@@ -473,10 +473,6 @@
 <script type="text/javascript">
 	$(function() {
 
-		$("#set").button().click(function() {
-			addPatientWithAppointment();
-
-		});
 		
 		$(".save").button().click(function() {
 			addStudent();

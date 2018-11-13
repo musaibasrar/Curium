@@ -460,11 +460,11 @@ for(Cookie cookie : cookies){
                         <tr>
                         
                          
-                            <td  width="25%"  class="alignLeft" height="50">Salary
+                            <%-- <td  width="25%"  class="alignLeft" height="50">Salary
                             </td>
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${employee.salary}" />
-                            </td>
+                            </td> --%>
                             
                         
                             <td width="25%"   class="alignLeft" height="50" >Remarks</td>

@@ -365,7 +365,7 @@ for(Cookie cookie : cookies){
 				<a target="mainFrame" href="Controller?process=ClassProcess&action=classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
                 
                 <a target="mainFrame" href="Controller?process=DepartmentProcess&action=departmentView" style="font-size: 12px;">Add Department</a><br/>
@@ -384,15 +384,16 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=HrProcess&action=payHead" style="font-size: 12px;">Pay Head</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
-                <a target="mainFrame" href="Controller?process=HrProcess&action=basicPaySettings" style="font-size: 12px;">Basic Pay Settings</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=pfSettings" style="font-size: 12px;">PF Settings</a><br/>
             </div>
             
-               <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
+              <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
-            </div>
+            </div> -->
             
             </div>
             

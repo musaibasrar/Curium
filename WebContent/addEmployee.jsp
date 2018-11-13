@@ -1,5 +1,5 @@
 <%-- 
-    Document   : addcontact
+    Document   : Add Employee
     Created on : Jun 17, 2013, 4:17:40 PM
     Author     : CPEDUR1P5
 --%>
@@ -13,13 +13,14 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Add Employee Page</title>
+<title>Add Employee</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 
@@ -620,11 +621,7 @@ for(Cookie cookie : cookies){
 <body>
 	<form id="form1" action="Controller?process=PersonalProcess&action=add"
 		method="post">
-		<%
-			java.text.DateFormat df = new java.text.SimpleDateFormat(
-					"dd/MM/yyyy");
-		%>
-
+	<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		<div>
 			<div id="tabs">
 				<ul>
@@ -717,7 +714,7 @@ for(Cookie cookie : cookies){
 							</label></td>
 
 							<td width="20%" class="alignRight">Date Of Joining &nbsp;</td>
-							<td width="28%"><label> <input name="dateofjoining"
+							<td width="28%"><label> <input name="dateofjoining" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-YYYY"/>"
 									type="text" class="textField" id="datepicker" size="36"
 									
 									data-validate="validate(required)">
@@ -811,12 +808,12 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 
-							<td width="30%" class="alignRight">Salary &nbsp;</td>
+							<!-- <td width="30%" class="alignRight">Salary &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="salary" type="text" class="myclass"
 									id="salary" size="36" onblur="validateName();">
-									<!-- onkeyup="check(this.value);"  -->
-							</label></td>
+									onkeyup="check(this.value);" 
+							</label></td> -->
 
 
 							<td width="30%" class="alignRight">Remarks &nbsp;</td>

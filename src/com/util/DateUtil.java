@@ -324,10 +324,8 @@ public static Date dateParserUpdateStd(String stringDate) {
 
 			date = (Date) formatter.parse(stringDate);
 			String secdate = df.format(date);
-			System.out.println("The date to string is " + secdate);
 
 			datefinal = (Date) dateformatter.parse(secdate);
-			System.out.println("The datefinal is " + datefinal);
 
 		} catch (ParseException e) {
 				e.printStackTrace();
@@ -335,10 +333,26 @@ public static Date dateParserUpdateStd(String stringDate) {
 		}
 
 		return datefinal;
-
-		
-    
-    
-    
     }
+
+
+public static Date dateParserdd(String stringDate) {
+	
+	Date datefinal = null;
+	try {
+		Date date = null;
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd",
+				Locale.ENGLISH);
+
+		date = (Date) formatter.parse(stringDate);
+		String secdate = formatter.format(date);
+
+		datefinal = (Date) formatter.parse(secdate);
+
+	} catch (ParseException e) {
+			e.printStackTrace();
+	}
+	return datefinal;
+}
 }

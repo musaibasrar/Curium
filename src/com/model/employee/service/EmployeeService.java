@@ -1,5 +1,6 @@
 package com.model.employee.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import com.model.department.dao.departmentDAO;
 import com.model.department.dto.Department;
 import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
+import com.model.hr.dao.HrDAO;
+import com.model.hr.dto.Paybasic;
 import com.model.position.dao.positionDAO;
 import com.model.position.dto.Position;
 import com.model.user.dao.UserDAO;
@@ -42,7 +45,7 @@ public class EmployeeService {
 		employee.setAddress(DataUtil.emptyString(request.getParameter("address")));
 		employee.setContactnumber(DataUtil.emptyString(request.getParameter("contactnumber")));
 		employee.setEmail(DataUtil.emptyString(request.getParameter("email")));
-		employee.setDateofjoining(DateUtil.simpleDateParser(request.getParameter("dateofjoining")));
+		employee.setDateofjoining(DateUtil.dateParserdd(request.getParameter("dateofjoining")));
 		employee.setTotalexperience(DataUtil.emptyString(request.getParameter("totalexperience")));
 		employee.setQualification(DataUtil.emptyString(request.getParameter("qualification")));
 		employee.setDepartment(DataUtil.emptyString(request.getParameter("department")));
@@ -156,11 +159,13 @@ public class EmployeeService {
 	}
 
 	public void viewAllRelations() {
-		List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-        httpSession.setAttribute("listDepartment", listDepartment);
-        List<Position> listPosition = new positionDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-        httpSession.setAttribute("listPosition", listPosition);
 		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+			List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        httpSession.setAttribute("listDepartment", listDepartment);
+	        List<Position> listPosition = new positionDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        httpSession.setAttribute("listPosition", listPosition);
+		}
 	}
 
 	public void searchEmployee() {
@@ -173,12 +178,22 @@ public class EmployeeService {
 				employeeList = new EmployeeDAO().readListOfEmployeesByName(staffName, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			}else if(staffDepartment!=""){
 				employeeList = new EmployeeDAO().readListOfEmployeesByDepartment(staffDepartment, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			}else {
+				employeeList = new EmployeeDAO().readListOfEmployeesBasicPay(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			}
 		}
 		
-		request.setAttribute("employeeList", employeeList);
+		request.setAttribute("searchedemployeeList", employeeList);
 		
 		new EmployeeService(request, response).ViewAllEmployee();
 	}
 
+	public void basicpayEmployees() {
+		List<Paybasic> employeeList = new ArrayList<Paybasic>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+				employeeList = new EmployeeDAO().readListOfEmployeesBasicPayDetails(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		}
+		request.setAttribute("vieweditbasicpay", employeeList);
+	}
 }

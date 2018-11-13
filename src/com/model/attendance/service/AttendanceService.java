@@ -1227,6 +1227,21 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			    row.createCell(++i).setCellValue(totalDaysAbsent);
 			    row.createCell(++i).setCellValue(totalLeaves);
 			}
+			
+			int rownumTwo = 2;
+			
+			for (Entry<String, List<Staffdailyattendance>> entry : staffsAttendance.entrySet())
+			{
+			    Row row = sheet.createRow(rownumTwo++);
+			    row.createCell(0).setCellValue("");
+			    	int i=1;
+			    for (Staffdailyattendance staffdailyattendance : entry.getValue()) {
+			    	row.createCell(i).setCellValue(staffdailyattendance.getIntime()+"/"+staffdailyattendance.getOuttime());
+			    	sheet.autoSizeColumn(i);
+			    	i++;
+			    	
+				}
+			}
 				
 				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"staffsmonthlyattendance.xlsx"));
 				workbook.write(out);
@@ -1259,7 +1274,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			// set headers for the response
 			String headerKey = "Content-Disposition";
 			String headerValue = String.format("attachment; filename=\"%s\"",
-					"studentsmonthlyattendance.xlsx");
+					"staffsmonthlyattendance.xlsx");
 			response.setHeader(headerKey, headerValue);
 
 			// get output stream of the response

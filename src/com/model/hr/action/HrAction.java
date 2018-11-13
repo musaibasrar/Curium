@@ -114,8 +114,22 @@ public class HrAction {
 			url = issueProcessedSalary();
 		}else if ("cancelStaffSalary".equalsIgnoreCase(action)) {
 			url = cancelStaffSalary();
+		}else if ("viewEditbasicPay".equalsIgnoreCase(action)) {
+			url = viewEditbasicPay();
+		}else if ("updateBasicPay".equalsIgnoreCase(action)) {
+			url = updateBasicPay();
 		}
 		return url;
+	}
+
+	private String updateBasicPay() {
+		new HrService(request, response).updateBasicpayEmployees();
+		return "vieweditbasicpay.jsp";
+	}
+
+	private String viewEditbasicPay() {
+		new EmployeeService(request, response).basicpayEmployees();
+		return "vieweditbasicpay.jsp";
 	}
 
 	private String cancelStaffSalary() {

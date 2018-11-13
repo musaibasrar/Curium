@@ -83,7 +83,6 @@ public class EmployeeAction {
 
 	private String viewEmployee() {
 		new EmployeeService(request, response).ViewAllEmployee();
-		System.out.println("IN action's view all Employee");
 		return "viewAllEmployee.jsp";
 	}
 
