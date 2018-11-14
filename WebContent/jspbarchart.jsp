@@ -38,10 +38,10 @@ for(Cookie cookie : cookies){
     <label style="font-family: Tahoma;
 	font-weight: bolder;
 	color: #5E87B0;
-        font-size: 20px;"> DASH BOARD </label><br><br>
+        font-size: 16px;"> DASH BOARD </label>
     		<!-- <h1 align="center" class="headerTD">Number Of Students Per Center</h1> -->
 			<%-- <canvas id="canvas" height="100" width="300"></canvas> --%>
-			<canvas id="student-chart" width="800" height="200"></canvas>
+			<canvas id="student-chart" width="800" height="380"></canvas>
 		</div>
 		<div align="center">
 		<div style="float: left;">
@@ -68,7 +68,7 @@ for(Cookie cookie : cookies){
         	var studentslabel = JSON.parse(totalStudents);
         	
             new Chart(document.getElementById("student-chart"), {
-                type: 'bar',
+                type: 'horizontalBar',
                 data: {
                   labels: centerslabel,
                   datasets: [
@@ -80,7 +80,30 @@ for(Cookie cookie : cookies){
       	                'rgba(30, 26, 86, 0.2)',
       	                'rgba(75, 202, 48, 0.2)',
       	                'rgba(153, 102, 255, 0.2)',
-      	                'rgba(86, 59, 64, 0.2)'
+      	                'rgba(86, 59, 64, 0.2)',
+      	                'rgba(60, 39, 132, 0.2)',
+      	                'rgba(54, 162, 235, 0.2)',
+      	                'rgba(30, 26, 86, 0.2)',
+      	                'rgba(75, 202, 48, 0.2)',
+      	                'rgba(153, 102, 255, 0.2)',
+      	                'rgba(86, 59, 64, 0.2)',
+      	                'rgba(60, 39, 132, 0.2)',
+      	                'rgba(54, 162, 235, 0.2)',
+      	                'rgba(30, 26, 86, 0.2)',
+      	                'rgba(75, 202, 48, 0.2)',
+      	                'rgba(153, 102, 255, 0.2)',
+      	                'rgba(86, 59, 64, 0.2)',
+      	                'rgba(60, 39, 132, 0.2)',
+      	                'rgba(54, 162, 235, 0.2)',
+      	                'rgba(30, 26, 86, 0.2)',
+      	                'rgba(75, 202, 48, 0.2)',
+      	                'rgba(153, 102, 255, 0.2)',
+      	                'rgba(86, 59, 64, 0.2)',
+      	                'rgba(60, 39, 132, 0.2)',
+      	                'rgba(54, 162, 235, 0.2)',
+      	                'rgba(30, 26, 86, 0.2)',
+      	                'rgba(75, 202, 48, 0.2)',
+      	                'rgba(153, 102, 255, 0.2)'
       	            ],
       	            borderColor: [
       	                'rgba(200,99,132,1)',
@@ -88,7 +111,31 @@ for(Cookie cookie : cookies){
       	                'rgba(220, 206, 86, 1)',
       	                'rgba(75, 192, 192, 1)',
       	                'rgba(153, 102, 255, 1)',
-      	                'rgba(290, 159, 64, 1)'
+      	                'rgba(290, 159, 64, 1)',
+      	                'rgba(200,99,132,1)',
+      	                'rgba(54, 162, 235, 1)',
+      	                'rgba(220, 206, 86, 1)',
+      	                'rgba(75, 192, 192, 1)',
+      	                'rgba(153, 102, 255, 1)',
+      	                'rgba(290, 159, 64, 1)',
+      	                'rgba(200,99,132,1)',
+      	                'rgba(54, 162, 235, 1)',
+      	                'rgba(220, 206, 86, 1)',
+      	                'rgba(75, 192, 192, 1)',
+      	                'rgba(153, 102, 255, 1)',
+      	                'rgba(290, 159, 64, 1)',
+      	                'rgba(200,99,132,1)',
+      	                'rgba(54, 162, 235, 1)',
+      	                'rgba(220, 206, 86, 1)',
+      	                'rgba(75, 192, 192, 1)',
+      	                'rgba(153, 102, 255, 1)',
+      	                'rgba(290, 159, 64, 1)',
+      	                'rgba(200,99,132,1)',
+      	                'rgba(54, 162, 235, 1)',
+      	                'rgba(220, 206, 86, 1)',
+      	                'rgba(75, 192, 192, 1)',
+      	                'rgba(153, 102, 255, 1)'
+      	                
       	            ],
       	            maintainAspectRatio: false,
       	            borderWidth: 3,
@@ -97,13 +144,34 @@ for(Cookie cookie : cookies){
                   ]
                 },
                 options: {
-                  legend: { display: false },
+                	 labels: {
+                         // This more specific font property overrides the global property
+                         fontColor: 'red'
+                     },
+                  legend: {
+                	  display: false,
+                	 
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            fontColor: "Black"
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "Black"
+                        }
+                    }]
+                },
+                 
                   title: {
                     display: true,
                     text: 'Number of Students Per District'
                   }
                 }
             });
+
             
             var booksnamex = document.getElementById("booksname").innerHTML;
         	var booksnamelabel = JSON.parse(booksnamex);
