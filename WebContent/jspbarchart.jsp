@@ -33,7 +33,7 @@ for(Cookie cookie : cookies){
 }
 %>
    
-    <body >
+    <body>
     <div align="center">
     <label style="font-family: Tahoma;
 	font-weight: bolder;
@@ -49,18 +49,29 @@ for(Cookie cookie : cookies){
 	<label id="students" style="display: none;">${studentyaxis}</label>
 	
             </form>
-            
-            <script>
+	     <script>
         	var totalcenters = document.getElementById("classesstudying").innerHTML;
         	var centerslabel = JSON.parse(totalcenters);
         	
         	var totalStudents = document.getElementById("students").innerHTML;
         	var studentslabel = JSON.parse(totalStudents);
         	
+        	 var newarr=GetMax(studentslabel);
+        		var roundedno = newarr % 100;
+        		var finalstep = 100 -roundedno + parseInt(newarr);
+   
+        		function GetMax(arr)
+        		{   var MaxX=arr[0];
+
+        		    for (var X=0;X<arr.length;X++)
+        		        if (MaxX<arr[X])
+        		            MaxX=arr[X];
+
+        		    return MaxX;
+        		}
+        	
             new Chart(document.getElementById("student-chart"), {
                 type: 'bar',
-                scaleStartValue:0, 
-                scaleStepWidth:100,
                 data: {
                   labels: centerslabel,
                   datasets: [
@@ -93,12 +104,19 @@ for(Cookie cookie : cookies){
                   title: {
                     display: true,
                     text: 'Number of Students Per Class'
-                  }
+                  },
+                   scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                max: finalstep,
+                                stepSize: 100
+                               }
+                        
+                            }]
                 }
+                } 
             });
-            
-	</script>
-</body>
-
-    
+	</script> 
+</body>    
 </html>
