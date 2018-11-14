@@ -16,8 +16,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -241,16 +249,27 @@ public class DocumentService {
 			XSSFSheet sheetTwo = workbook.createSheet("Page 2");
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> dataTwo = new HashMap<String, Object[]>();
+			Map<String, Object[]> headerDataTop = new HashMap<String, Object[]>();
+			Map<String, Object[]> headerDataSN = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerDataTwo = new HashMap<String, Object[]>();
+			
+			headerDataTop.put("HeaderTop",
+					new Object[] { "ADMISSION ABSTRACT"});
+			
+			headerDataSN.put("HeaderSN",
+					new Object[] { "Name of school: "});
+			
 			headerData.put("Header",
 					new Object[] { "Admission No.", "Cumulative Record No. with date of opening", "Name in Full", "Boy or Girl", "Date of Birth",
 							"Father and mother Name and occupation", "Parents Annual Income", "Number Of Dependence", "Nationality, Religion and caste",
 							"Mother Tongue", "Guardian Name and Address"});
+			
 			headerDataTwo.put("Header",
 					new Object[] { "Permanent address of the Pupil", "Last schoool attended", "Standard last studied", "No.& date of transfer certificate",
-							"Standard to which admitted with school", "Date of admission", "Subsequest progress", "Class of leaving",
+							"Standard to which admitted with school", "Date of admission", "Subsequent progress", "Class of leaving",
 							"Date of leaving school", "Reason for leaving", "No. & date of transfer cerificate issed", "Remarks"});
+			
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
@@ -279,17 +298,79 @@ public class DocumentService {
 				i++;
 			}
 			
+			//Fonts
+			 XSSFFont font= workbook.createFont();
+			    font.setFontHeightInPoints((short)20);
+			    font.setFontName("Arial");
+			    font.setColor(IndexedColors.BLACK.getIndex());
+			    font.setBold(true);
+			    font.setItalic(false);
+			    
+			 XSSFFont headerFont= workbook.createFont();
+			 	headerFont.setFontName("Arial");
+			 	headerFont.setColor(IndexedColors.BLACK.getIndex());
+			 	headerFont.setBold(true);
+			 	headerFont.setItalic(false);    
+
+			
+			//styles
+			 XSSFCellStyle style = workbook.createCellStyle();
+			 style.setFont(font);
+			 
+			 XSSFCellStyle stylePage2 = workbook.createCellStyle();
+			 stylePage2.setFont(headerFont);
+			 
+			 XSSFCellStyle styleHeader = workbook.createCellStyle();
+			 styleHeader.setFont(headerFont);
+			 styleHeader.setWrapText(true);
+			 styleHeader.setAlignment(HorizontalAlignment.CENTER); 
+			 styleHeader.setRotation((short)90);
+			 styleHeader.setBorderBottom(BorderStyle.THIN);
+			 styleHeader.setBorderTop(BorderStyle.THIN);
+			 styleHeader.setBorderRight(BorderStyle.THIN);
+			 styleHeader.setBorderLeft(BorderStyle.THIN);
+			 
+			 XSSFCellStyle styleRows = workbook.createCellStyle();
+			 styleRows.setBorderTop(BorderStyle.THIN);
+			 styleRows.setBorderRight(BorderStyle.THIN);
+			 styleRows.setBorderLeft(BorderStyle.THIN);
+			 
+			 //End Style
+			 
 			// Sheet One
+			
 			Row headerRow = sheet.createRow(0);
+			Object[] objArrHeaderTop = headerDataTop.get("HeaderTop");
+			int cellnumber = 2;
+			for (Object obj : objArrHeaderTop) {
+				Cell cell = headerRow.createCell(cellnumber++);
+				if (obj instanceof String)
+					cell.setCellValue((String) obj);
+					cell.setCellStyle(style);
+			}
+			
+			Row headerRowSN = sheet.createRow(2);
+			Object[] objArrHeaderSN = headerDataSN.get("HeaderSN");
+			int cellnumSN = 2;
+			for (Object obj : objArrHeaderSN) {
+				Cell cell = headerRowSN.createCell(cellnumSN++);
+				if (obj instanceof String)
+					cell.setCellValue((String) obj);
+					cell.setCellStyle(stylePage2);
+			}
+			
+			Row headerRowT = sheet.createRow(4);
 			Object[] objArrHeader = headerData.get("Header");
 			int cellnum1 = 0;
 			for (Object obj : objArrHeader) {
-				Cell cell = headerRow.createCell(cellnum1++);
+				Cell cell = headerRowT.createCell(cellnum1++);
 				if (obj instanceof String)
 					cell.setCellValue((String) obj);
+					cell.setCellStyle(styleHeader);
 			}
+			
 			Set<String> keyset = data.keySet();
-			int rownum = 1;
+			int rownum = 5;
 			for (String key : keyset) {
 				Row row = sheet.createRow(rownum++);
 				Object[] objArr = data.get(key);
@@ -304,6 +385,8 @@ public class DocumentService {
 						cell.setCellValue((String) obj);
 					else if (obj instanceof Double)
 						cell.setCellValue((Double) obj);
+					
+					cell.setCellStyle(styleRows);
 				}
 			}
 			
@@ -315,6 +398,7 @@ public class DocumentService {
 				Cell cell = headerRowTwo.createCell(cellnumTwo++);
 				if (obj instanceof String)
 					cell.setCellValue((String) obj);
+					cell.setCellStyle(styleHeader);
 			}
 			Set<String> keysetTwo= dataTwo.keySet();
 			int rownumTwo = 1;
@@ -332,6 +416,7 @@ public class DocumentService {
 						cell.setCellValue((String) obj);
 					else if (obj instanceof Double)
 						cell.setCellValue((Double) obj);
+					cell.setCellStyle(styleRows);
 				}
 			}
 			

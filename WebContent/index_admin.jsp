@@ -89,7 +89,7 @@ for(Cookie cookie : cookies){
 		   </c:if>
 		   
 		   <c:if test="${(username == 'supucadmin')}">
-			    <frame   src="header_admin_supu.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
+			    <frame   src="header_admin_supuc.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
 		   </c:if>
 		   
 		   <c:if test="${(username == 'sjuhpsadmin')}">
