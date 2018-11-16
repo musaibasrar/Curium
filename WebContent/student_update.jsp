@@ -447,7 +447,7 @@ for(Cookie cookie : cookies){
 
 							<td width="16%" class="alignRight">Admission Number&nbsp;</td>
 							<td align="left"><label> <input name="admnno"
-									type="text" class="textField"
+									type="text" class="textField" required
 									value="<c:out default="" value="${student.admissionnumber}" />"
 									id="admnno" size="30" data-validate="validate(required)">
 
@@ -465,7 +465,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td width="16%" class="alignRight">Name &nbsp;</td>
 							<td width="28%"><input type="hidden" name="id" id="id"
-								value="<c:out value="${student.sid}" />" /><input type="hidden" name="studentexternalid" id="studentexternalid"
+								value="<c:out value="${student.sid}" />" /><input type="hidden" name="studentexternalid" id="studentexternalid" required
 								value="<c:out value="${student.studentexternalid}" />" /> <label> <input
 									name="name" type="text" style="text-transform:uppercase"
 									value="<c:out value="${student.name}" />" class="textField"
@@ -585,7 +585,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Qualification&nbsp;</td>
 							<td align="left"><label>
 								<select name="qualification" id="qualification"
-									style="width: 240px;">
+									style="width: 240px;" required>
 										<option selected>${student.qualification}</option>
 										<c:forEach items="${qualificationlist}" var="qualificationlist">
 											<option value="${qualificationlist.qualification}" >
@@ -621,7 +621,7 @@ for(Cookie cookie : cookies){
 							
 							<label> 
 							 <select name="examlevel" id="examlevel"
-									style="width: 240px;">
+									style="width: 240px;" required>
 										<option selected>${student.examlevel}</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}" >
@@ -665,7 +665,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Center Code &nbsp;</td>
 
 							<td><label> <select name="centercode" id="centercode"
-									style="width: 240px;">
+									style="width: 240px;" required>
 										<option selected>${student.centercode}</option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}" >
@@ -679,7 +679,7 @@ for(Cookie cookie : cookies){
 							<td width="30%" class="alignRight">District Code
 								&nbsp;</td>
 							<td width="12%" align="left"><label> <select name="districtcode" id="districtcode"
-									style="width: 240px;" onchange="getAdmNo()">
+									style="width: 240px;" onchange="getAdmNo()" required>
 										<option selected>${student.districtcode}</option>
 										<c:forEach items="${districtsList}" var="districtsList">
 											<option value="${districtsList.districtcode}" >
@@ -709,7 +709,7 @@ for(Cookie cookie : cookies){
 							<td align="left">
 							<label> 
 								<select name="languageopted" id="languageopted"
-									style="width: 240px;">
+									style="width: 240px;" required>
 										<option selected>${student.languageopted}</option>
 										<c:forEach items="${languageslist}" var="languageslist">
 											<option value="${languageslist.language}" >
