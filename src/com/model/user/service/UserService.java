@@ -1,9 +1,17 @@
 package com.model.user.service;
 
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
 
 import javax.servlet.http.Cookie;
@@ -97,9 +105,117 @@ public class UserService {
                 }
         request.setAttribute("studentxaxis", xaxisList);
         request.setAttribute("studentyaxis", yaxisList);
+        feesdailysearch();
+		feesmonthlysearch();
 		}
 		
 	}
+	
+	public void feesdailysearch() {
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date newdate = new Date();
+		Calendar startCalendar = new GregorianCalendar();
+		startCalendar.setTime(newdate);
+		String todaysDate = df.format(newdate);
+		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
+		Date dateBefore = null;
+		Date dateAfter = null;
+		
+		String queryMain = "From Receiptinfo as feesdetails where ";
+		
+		try {
+			dateBefore = df.parse(todaysDate);
+			dateAfter = df.parse(todaysDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		Calendar start = Calendar.getInstance();
+		start.setTime(dateBefore);
+		Calendar end = Calendar.getInstance();
+		end.setTime(dateAfter);
+		start.set(Calendar.DAY_OF_MONTH, start.getActualMinimum(Calendar.DAY_OF_MONTH));
+		end.set(Calendar.DAY_OF_MONTH, end.getActualMaximum(Calendar.DAY_OF_MONTH));
+		end.add(Calendar.DATE, 1);
+		
+		List<String> dailyDatesList = new LinkedList<String>();
+		List<String> totalFeesSum = new LinkedList<String>();
+		
+		for (Date date = start.getTime(); start.before(end); start.add(Calendar.DAY_OF_MONTH,+1), date = start.getTime()) {
+			todaysDate = new SimpleDateFormat("YYYY-MM-dd").format(date);
+			String querySub = "";
+			querySub = " feesdetails.date = '" + todaysDate + "'";
+			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain + querySub);
+			BigDecimal sumOfFees = BigDecimal.ZERO;
+			for (Receiptinfo receiptinfo : feesDetailsList) {
+				BigDecimal fee = new BigDecimal(receiptinfo.getTotalamount());
+				sumOfFees = sumOfFees.add(fee);
+			}
+			totalFeesSum.add("\"" + sumOfFees + "\"");
+			dailyDatesList.add("\"" + todaysDate + "\"");
+		}
+		request.setAttribute("studenttotalfees", totalFeesSum);
+		request.setAttribute("currentdate", dailyDatesList);
+	}
+
+	public void feesmonthlysearch() {
+		
+		List<String> monthList = new LinkedList<String>();
+		List<String> totalFeesSum = new LinkedList<String>();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date newdate = new Date();
+		String todaysDate = df.format(newdate);
+		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
+		Date dateBefore = null;
+		Date dateAfter = null;
+		String queryMain = "From Receiptinfo as feesdetails where ";
+		String toDate = DataUtil.emptyString(request.getParameter("todate"));
+		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
+		
+		try {
+			dateBefore = df.parse(todaysDate);
+			dateAfter = df.parse(todaysDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		Calendar start1 = Calendar.getInstance();
+		start1.setTime(dateBefore);
+		Calendar end1 = Calendar.getInstance();
+		end1.setTime(dateAfter);
+		start1.set(Calendar.MONTH, start1.getActualMinimum(Calendar.MONTH));
+		start1.set(Calendar.DAY_OF_MONTH, start1.getActualMinimum(Calendar.DAY_OF_MONTH));
+		end1.set(Calendar.MONTH, end1.getActualMaximum(Calendar.MONTH));
+		end1.add(Calendar.DAY_OF_MONTH, 1);
+		
+		for (Date date = start1.getTime(); start1.before(end1); start1.add(Calendar.MONTH,+1), date = start1.getTime()) {
+			fromDate = new SimpleDateFormat("YYYY-MM-dd").format(date);
+			Calendar endday = Calendar.getInstance();
+			endday.setTime(date);
+			endday.set(Calendar.DAY_OF_MONTH, start1.getActualMaximum(Calendar.DAY_OF_MONTH));
+			Date enddayofmonth = endday.getTime();
+			toDate = new SimpleDateFormat("YYYY-MM-dd").format(enddayofmonth);
+			String querySub = "";
+			querySub = " feesdetails.date between '" + fromDate + "' AND '" + toDate + "'";
+			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain + querySub);
+			BigDecimal sumOfFees = BigDecimal.ZERO;
+			for (Receiptinfo receiptinfo : feesDetailsList) {
+				BigDecimal fee = new BigDecimal(receiptinfo.getTotalamount());
+				sumOfFees = sumOfFees.add(fee);
+			}
+			totalFeesSum.add("\"" + sumOfFees + "\"");
+			//Date Format
+			SimpleDateFormat month_date = new SimpleDateFormat("MMM yyyy", Locale.ENGLISH);
+			String monthYear = month_date.format(date);
+			
+			monthList.add("\"" + monthYear + "\"");
+		}
+		
+		request.setAttribute("monthlystudentsfees", totalFeesSum);
+		request.setAttribute("monthlist", monthList);
+	}
+	
 
 	public void advanceSearch() {
 		

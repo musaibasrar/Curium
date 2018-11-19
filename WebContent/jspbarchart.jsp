@@ -42,11 +42,17 @@ for(Cookie cookie : cookies){
     		<!-- <h1 align="center" class="headerTD">Number Of Students Per Center</h1> -->
 			<%-- <canvas id="canvas" height="100" width="300"></canvas> --%>
 			<canvas id="student-chart" width="800" height="200"></canvas>
+			<canvas id="student-feeschart" width="800" height="400"></canvas>
+			<canvas id="student-monthlyfeeschart" width="800" height="400"></canvas>
 		</div>
-		
+
    <form id="form1" method="post">
 	<label id="classesstudying" style="display: none;">${studentxaxis}</label>
 	<label id="students" style="display: none;">${studentyaxis}</label>
+	<label id = "studentsfees" style="display: none;">${studenttotalfees}</label>
+	<label id = "currentdate" style="display: none;">${currentdate}</label>
+	<label id = "monthlystudentsfees" style="display: none;">${monthlystudentsfees}</label>
+	<label id = "monthlist" style="display: none;">${monthlist}</label>
 	
             </form>
 	     <script>
@@ -58,7 +64,7 @@ for(Cookie cookie : cookies){
         	
         	 var newarr=GetMax(studentslabel);
         		var roundedno = newarr % 100;
-        		var finalstep = 100 -roundedno + parseInt(newarr);
+        		var finalstep = (100 -roundedno) + parseInt(newarr);
    
         		function GetMax(arr)
         		{   var MaxX=arr[0];
@@ -115,6 +121,115 @@ for(Cookie cookie : cookies){
                         
                             }]
                 }
+                } 
+            });
+            
+          //Bar Chart for Daily fees
+        	var totalfees = document.getElementById("studentsfees").innerHTML;
+        	var feeslabel = JSON.parse(totalfees);
+        	
+      	 	var currdate = document.getElementById("currentdate").innerHTML;
+      		var dateslabel = JSON.parse(currdate);
+        	
+            new Chart(document.getElementById("student-feeschart"), {
+                type: 'bar',
+                data: {
+                  labels: dateslabel,
+                  datasets: [
+                    {
+                      backgroundColor: [
+      	                'rgba(60, 39, 132, 0.2)',
+      	                'rgba(54, 162, 235, 0.2)',
+      	                'rgba(30, 26, 86, 0.2)',
+      	                'rgba(75, 202, 48, 0.2)',
+      	                'rgba(153, 102, 255, 0.2)',
+      	                'rgba(86, 59, 64, 0.2)'
+      	            ],
+      	            borderColor: [
+      	                'rgba(200,99,132,1)',
+      	                'rgba(54, 162, 235, 1)',
+      	                'rgba(220, 206, 86, 1)',
+      	                'rgba(75, 192, 192, 1)',
+      	                'rgba(153, 102, 255, 1)',
+      	                'rgba(290, 159, 64, 1)'
+      	            ],
+      	            maintainAspectRatio: false,
+      	            borderWidth: 3,
+                      data: feeslabel
+                    }
+                  ]
+                },
+                options: {
+                  legend: { display: false },
+                  title: {
+                    display: true,
+                    text: 'Daily Fees Collection'
+                  } ,
+                   scales: {
+                	   yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                //max: finalstep,
+                                stepSize: 10000
+                               }
+                        
+                            }]
+                } 
+                } 
+            });
+            
+            
+          //Bar Chart for Monthly fees
+        	var monthlyfees = document.getElementById("monthlystudentsfees").innerHTML;
+        	var monthlyfeeslabel = JSON.parse(monthlyfees);
+        	
+      	 	var monthlist = document.getElementById("monthlist").innerHTML;
+      		var monthlistlabel = JSON.parse(monthlist);
+        	
+            new Chart(document.getElementById("student-monthlyfeeschart"), {
+                type: 'bar',
+                data: {
+                  labels: monthlistlabel,
+                  datasets: [
+                    {
+                      backgroundColor: [
+      	                'rgba(60, 39, 132, 0.2)',
+      	                'rgba(54, 162, 235, 0.2)',
+      	                'rgba(30, 26, 86, 0.2)',
+      	                'rgba(75, 202, 48, 0.2)',
+      	                'rgba(153, 102, 255, 0.2)',
+      	                'rgba(86, 59, 64, 0.2)'
+      	            ],
+      	            borderColor: [
+      	                'rgba(200,99,132,1)',
+      	                'rgba(54, 162, 235, 1)',
+      	                'rgba(220, 206, 86, 1)',
+      	                'rgba(75, 192, 192, 1)',
+      	                'rgba(153, 102, 255, 1)',
+      	                'rgba(290, 159, 64, 1)'
+      	            ],
+      	            maintainAspectRatio: false,
+      	            borderWidth: 3,
+                      data: monthlyfeeslabel
+                    }
+                  ]
+                },
+                options: {
+                  legend: { display: false },
+                  title: {
+                    display: true,
+                    text: 'Monthly Fees Collection'
+                  } ,
+                   scales: {
+                	   yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                //max: finalstep,
+                                stepSize: 10000
+                               }
+                        
+                            }]
+                } 
                 } 
             });
 	</script> 
