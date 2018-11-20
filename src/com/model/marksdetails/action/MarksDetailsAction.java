@@ -21,7 +21,7 @@ public class MarksDetailsAction {
 	public String execute(String action) {
 		if (action.equalsIgnoreCase("addMarks")) {
 			url = addMarks();
-		}else if (action.equalsIgnoreCase("search")) {
+    	}else if (action.equalsIgnoreCase("search")) {
 			url = search();
 		}else if (action.equalsIgnoreCase("viewMarks")) {
 			url = viewMarks();
@@ -35,11 +35,28 @@ public class MarksDetailsAction {
 			url = generateReport();
 		}else if (action.equalsIgnoreCase("searchForReport")) {
 			url = searchForReport();
+		}else if (action.equalsIgnoreCase("getGraphicalReportData")) {
+			url = getGraphicalReportData();
+		}else if (action.equalsIgnoreCase("searchForGraphicalReport")) {
+			url = searchForGraphicalReport();
+		}else if (action.equalsIgnoreCase("getStudentGraph")) {
+			url = getStudentGraph();
 		}
+
 		return url;
 	}
 
 	
+
+	private String getStudentGraph() {
+		new MarksDetailsService(request, response).getStudentGraph();
+		return "studentgraph.jsp";
+	}
+
+	private String getGraphicalReportData() {
+		new MarksDetailsService(request, response).getStudentList();
+		return "graphicalreport.jsp";
+	}
 
 	private String searchForReport() {
 		new MarksDetailsService(request, response).Search();
@@ -100,5 +117,10 @@ public class MarksDetailsAction {
         return "marksentry.jsp";
 	}
 	
+	private String searchForGraphicalReport() {
+		new MarksDetailsService(request, response).Search();
+		new MarksDetailsService(request, response).getStudentList();
+        return "graphicalreport.jsp";
+	}
 	
 }

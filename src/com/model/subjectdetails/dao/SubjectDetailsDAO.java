@@ -83,4 +83,21 @@ public class SubjectDetailsDAO {
 		
 	}
 
+	public Subject getSubjectDetails(Integer subid) {
+		
+		Subject subject = new Subject();
+		try {
+
+			transaction = session.beginTransaction();
+			Query query =  session.createQuery("From Subject where id="+subid);
+			subject = (Subject) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) {
+			transaction.rollback(); 
+			logger.error(hibernateException);
+		} finally {
+			return subject;
+		}
+	}
+
 }

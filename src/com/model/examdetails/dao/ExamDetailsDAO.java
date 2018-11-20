@@ -9,6 +9,7 @@ import org.hibernate.query.Query;
 
 import com.model.examdetails.dto.Exams;
 import com.model.examdetails.dto.Examschedule;
+import com.model.subjectdetails.dto.Subject;
 import com.util.HibernateUtil;
 import com.util.Session;
 import com.util.Session.Transaction;
@@ -151,5 +152,24 @@ public class ExamDetailsDAO {
 		}
 		
 		return listExamSchedule;
+	}
+
+
+
+	public Exams getExamDetails(Integer examid) {
+		
+		Exams exam = new Exams();
+		try {
+
+			transaction = session.beginTransaction();
+			Query query =  session.createQuery("From Exams where id="+examid);
+			exam = (Exams) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) {
+			transaction.rollback(); 
+			logger.error(hibernateException);
+		} finally {
+			return exam;
+		}
 	}
 }

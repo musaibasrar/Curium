@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -33,7 +34,9 @@ import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
 import com.model.subjectdetails.dao.SubjectDetailsDAO;
 import com.model.subjectdetails.dto.Subject;
+import com.model.subjectdetails.service.SubjectDetailsService;
 import com.util.DataUtil;
+import com.util.ExamsDetails;
 
 public class MarksDetailsService {
 
@@ -163,7 +166,7 @@ public class MarksDetailsService {
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = " parents.Student.classstudying like '" + classStudying
 					+ "' OR parents.Student.classstudying = '" + conClassStudyingEquals
-					+ "'  AND parents.Student.archive=0";
+					+ "' AND parents.Student.archive=0";
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
 			querySub = querySub + " AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
@@ -186,8 +189,52 @@ public class MarksDetailsService {
 		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("listExam", examList);
 		}
+
 	}
 
+	public void getStudentGraph()
+	{
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			
+			String studentid = DataUtil.emptyString(request.getParameter("id"));
+			Student searchStudent = new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentid));
+
+				List<Exams> examDetailsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Subject> subjectDetailsList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<ExamsDetails> examDetails = new ArrayList<ExamsDetails>();
+				
+				for (Exams exams : examDetailsList) {
+					
+					ExamsDetails examsD = new ExamsDetails();
+							List<Marks> marksListPerSubject = new MarksDetailsDAO().readMarksPerExam(searchStudent.getSid(),exams.getExid(),
+									httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+							List<String> subjectAppeared = new LinkedList<String>();
+							List<Integer> marksScored = new LinkedList<Integer>();
+							examsD.setExamName("\""+exams.getExamname()+"\"");
+							
+							for (Subject subject2 : subjectDetailsList) {
+								
+									for (Marks marks3 : marksListPerSubject) {
+
+										if(subject2.getSubid() == marks3.getSubid()) {
+											subjectAppeared.add("\""+subject2.getSubjectname()+"\"");
+											marksScored.add(marks3.getMarksobtained());
+										}
+									}
+							}
+							examsD.setSubjects(subjectAppeared);
+							examsD.setMarks(marksScored);
+							
+							if(!marksScored.isEmpty()) {
+								examDetails.add(examsD);
+							}
+				}
+				
+				request.setAttribute("examDetailsGraph", examDetails);
+				request.setAttribute("examDetailsGraphSize", examDetails.size());
+				request.setAttribute("studentName", searchStudent.getName().toUpperCase());
+		}
+	}
 	public boolean viewMarks() {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
@@ -565,5 +612,13 @@ public class MarksDetailsService {
 		}
 
 	}
+
+	public void getStudentList() {
+		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		request.setAttribute("studentList", studentList);
+		
+	}
+
+
 
 }

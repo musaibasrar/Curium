@@ -145,6 +145,24 @@ public class MarksDetailsDAO {
 				return results;
 			}
 		}
+
+		public List<Marks> readMarksPerExam(Integer sid, Integer exid, String currentAcademicYear) {
+			
+			List<Marks> results = new ArrayList<Marks>();
+			try {
+
+				transaction = session.beginTransaction();
+				Query query = session.createQuery("From Marks where sid = "+sid+" and examid = "+exid+" and academicyear = '"+currentAcademicYear+"' ORDER BY subid ASC");
+				results = query.list();
+				transaction.commit();
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
+				hibernateException.printStackTrace();
+			} finally {
+				return results;
+			}
+			
+		}
 	
 	
 	
