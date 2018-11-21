@@ -91,7 +91,7 @@ for(Cookie cookie : cookies){
         <form id="form1" action=""  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="250" align="center" valign="middle"><p class="style1"> Student Added Successfully</p>
+        <td height="250" align="center" valign="middle"><p class="style1"> Student Promoted Successfully...</p>
         <p class="style1">
           
             <input type="button" id="view" value="View All " onClick="ViewAll()">

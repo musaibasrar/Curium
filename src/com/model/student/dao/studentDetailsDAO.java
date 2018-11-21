@@ -247,16 +247,11 @@ public class studentDetailsDAO {
 	@SuppressWarnings({ "unchecked", "finally" })
 	public List<Student> getListOfStudents(String classofStd, int branchId) {
 		java.util.List<Student> results = new ArrayList<Student>();
-
 		try {
 			// this.session =
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
-
-			results = (java.util.List<Student>) session.createQuery(
-					"From Student s where s.branchid="+branchId+" AND s.classstudying LIKE '" + classofStd
-							+ " %'").list();
-
+			results = (java.util.List<Student>) session.createQuery("From Student s where s.branchid="+branchId+" AND s.classstudying LIKE '"+classofStd+"%' AND s.archive=0 AND s.passedout=0 AND s.droppedout=0 and s.leftout=0").list();
 			transaction.commit();
 
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

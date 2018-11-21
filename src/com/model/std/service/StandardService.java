@@ -99,4 +99,48 @@ public class StandardService {
             httpSession.setAttribute("classhierarchy", classHierarchy);
         }
     }
+
+	public boolean graduateMultiple() {
+		String[] studentIds = request.getParameterValues("studentIDs");
+		boolean result = false;
+			List ids = new ArrayList();
+			for (String id : studentIds) {
+				System.out.println("id" + id);
+				ids.add(Integer.valueOf(id));
+		}
+		if (new StandardDetailsDAO().graduateMultiple(ids)) {
+			result = true;
+		}
+		return result;
+
+	}
+	
+	public boolean droppedoutMultiple() {
+	String[] studentIds = request.getParameterValues("studentIDs");
+	boolean result = false;
+		List ids = new ArrayList();
+		for (String id : studentIds) {
+			System.out.println("id" + id);
+			ids.add(Integer.valueOf(id));
+		}
+		if(new StandardDetailsDAO().droppedoutMultiple(ids)){
+			result = true;
+		}
+		return result;
+	}
+
+	public boolean leftoutMultiple() {
+		String[] studentIds = request.getParameterValues("studentIDs");
+		boolean result = false;
+		List ids = new ArrayList();
+		for (String id : studentIds) {
+			System.out.println("id" + id);
+			ids.add(Integer.valueOf(id));
+
+		}
+		if(new StandardDetailsDAO().leftoutMultiple(ids)) {
+			result = true;
+		}
+		return result;
+	}
 }

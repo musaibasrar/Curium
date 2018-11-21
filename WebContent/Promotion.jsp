@@ -401,12 +401,64 @@
 		document.getElementById('stockQuantity').value = stock;
 
 	}
+	
+    function graduateMultiple(){
+        
+        var form1=document.getElementById("form1");
+        form1.action="Controller?process=ClassProcess&action=graduateMultiple";
+       form1.submit();
+        
+    }
+	
+    function dropoutMultiple(){
+        
+        var form1=document.getElementById("form1");
+        form1.action="Controller?process=ClassProcess&action=dropoutMultiple";
+       form1.submit();
+        
+    }
+	
+    function leftoutMultiple(){
+        
+        var form1=document.getElementById("form1");
+        form1.action="Controller?process=ClassProcess&action=leftoutMultiple";
+       form1.submit();
+        
+    }
+    
 	 $(function(){
          $("#promote").button({
              icons:{
-                 primary: "ui-icon-trash"
+                 primary: "ui-icon-arrowreturnthick-1-n"
              }
          });
+         
+         $("#graduated").button({
+             icons:{
+                 primary: "ui-icon-star"
+             }
+         }).click(function(){
+         		graduateMultiple();	
+         	});
+             
+         
+         $("#droppedout").button({
+             icons:{
+                 primary: "ui-icon-triangle-1-s"
+             }
+         }).click(function(){
+         		dropoutMultiple();	
+         	});
+    
+         $("#leftout").button({
+             icons:{
+                 primary: "ui-icon-triangle-1-s"
+             }
+         }).click(function(){
+         		leftoutMultiple();	
+         	})
+             
+    
          $('#chckHead').click(function () {
              var length = $('.chcktbl:checked').length;
              var trLength=$('.trClass').length;
@@ -551,9 +603,15 @@ for(Cookie cookie : cookies){
                         </c:forEach>
                     </tbody>
                     <tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><input value="Promote" type="submit" id="promote"/> </td>
                     
-                        </tr></tfoot>
+                    <td  class="footerTD" colspan="2" ><button value="Promote" type="submit" id="promote">Promote</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="graduated">Graduated</button> 
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button id="droppedout">Dropped Out</button>
+                             &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button id="leftout">Left Out</button>
+                            </td>
+                   </tr></tfoot>
                 </table>
 
 		</div>

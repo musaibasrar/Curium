@@ -41,13 +41,41 @@ public class StandardAction {
         }else if (action.equalsIgnoreCase("addClassHierarchy")) {
             url = addClassHierarchy();
         }else if (action.equalsIgnoreCase("deleteClassHierarchy")) {
-            url = deleteClassHierarchy();
+        	url = deleteClassHierarchy();
+        }else if (action.equalsIgnoreCase("graduateMultiple")) {
+        	url = graduateMultiple();
+        }else if (action.equalsIgnoreCase("dropoutMultiple")) {
+        	url = droppedoutMultiple();
+        }else if (action.equalsIgnoreCase("leftoutMultiple")) {
+            url = leftoutMultiple();
         }
 		return url;
 	}
+
+	  private String leftoutMultiple() {
+		  if(new StandardService(request, response).leftoutMultiple()) {  
+			  return "successleftout.jsp";
+		  }
+		  return "failureleftout.jsp"; 
+		  }
+
+	private String droppedoutMultiple() {
+		  if(new StandardService(request, response).droppedoutMultiple()) { 
+			  return "successdroppedout.jsp";
+		  }
+		  return "failuredroppedout.jsp"; 
+		  }
+
+	private String graduateMultiple() {
+		  if(new StandardService(request, response).graduateMultiple()) { 
+			     return "successgraduate.jsp";
+		  }
+		  return "failuregraduate.jsp"; 
+	}
+
 	
 	
-	  private String deleteClassHierarchy() {
+	private String deleteClassHierarchy() {
 		  new StandardService(request, response).deleteClassHierarchy();
 	      return "Controller?process=ClassProcess&action=classHierarchy";
 	}

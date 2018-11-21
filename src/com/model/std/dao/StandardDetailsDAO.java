@@ -116,4 +116,64 @@ public class StandardDetailsDAO {
         }
         return classHierarchyList;
     }
+
+	@SuppressWarnings("finally")
+	public boolean graduateMultiple(List ids) {
+		boolean result = false;
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("update Student set passedout = 1  where id IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+			result = true;
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+			result = false;
+		} finally {
+			return result;
+		}
+		
+			}
+
+	@SuppressWarnings("finally")
+	public boolean droppedoutMultiple(List ids) {
+		boolean result = false;
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("update Student set droppedout = 1  where id IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+			result = true;
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		hibernateException.printStackTrace();
+		result = false;
+	} finally {
+		return result;
+	}
+	
+		}
+
+	@SuppressWarnings("finally")
+	public boolean leftoutMultiple(List ids) {
+		boolean result = false;
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("update Student set leftout = 1  where id IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+			result = true;
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		hibernateException.printStackTrace();
+		result = false;
+	} finally {
+		return result;
+	}
+	
+		}
 }
