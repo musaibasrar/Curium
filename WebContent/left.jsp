@@ -470,6 +470,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="marksentry.jsp" style="font-size: 12px;">Enter Marks</a><br/>
                 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
             	<a target="mainFrame" href="progressreport.jsp" style="font-size: 12px;">Generate Report</a><br/>
+           		<a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
