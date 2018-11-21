@@ -175,10 +175,10 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left">
-				<img src="images/alameenlogo.png" width="200" height="150"/>
+				<img src="images/curiumheader.png" width="200" height="150"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				Al-Ameen Comp. P.U. College <br>
+				Curium Comp. P.U. College <br>
 				<label class="addressLine">Bidar- 585401 <br>
 				(Recognised and Aided by the Govt. of Karnataka)
 				 </label>

@@ -200,7 +200,7 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				
-				Al-Ameen Education Society's </td>
+				Curium Education Society's </td>
 			</tr>
 			<tr>
 			<td class="addressLine">Bidar- 585401</td>

@@ -175,10 +175,10 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="images/alameenlogo.png" width="200" height="150"/>
+				<img src="images/curiumheader.png" width="200" height="150"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				AL-AMEEN URDU BOYS/GIRLS <br>
+				CURIUM URDU BOYS/GIRLS <br>
 				<label class="addressLine">High School, Bidar.<br>
 				 </label>
 				</td>

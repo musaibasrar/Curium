@@ -175,12 +175,11 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left">
-				<img src="images/alameenlogo.png" width="200" height="150"/>
+				<img src="images/curiumheader.png" width="200" height="150"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				<label class="addressLine">Al-Ameen Education Society's
-				 </label><br>
-				Al-Ameen Dr. Mumtaz Ahmed Khan<br>
+				<label class="addressLine">Curium Education Society's
+				 </label>
 				<label class="addressLine">Degree College, Bidar- 585401 <br>
 				 </label>
 				

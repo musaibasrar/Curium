@@ -188,7 +188,7 @@ for(Cookie cookie : cookies){
                             </tr>
                             <tr>
                             				<td width="10"></td>
-                                          	<td align="left"><img src="images/alameenlogosa.png" /></td>  
+                                          	<td align="left"><img src="images/curiumheader.png" /></td>  
                             				                           				
                                             <td width="40" ><div align="center" ><a target="mainFrame" href="Controller?process=FeesProcess&action=feesCollectAllBranches"><img   src="images/feescollectw.png" width="40" height="40" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><label style="color:white;font-size: 11px;font-family: arial;">Fees <br>Collect</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
