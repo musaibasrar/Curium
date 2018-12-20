@@ -62,7 +62,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 28px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -71,7 +71,7 @@
 	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 22px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -160,26 +160,29 @@
 
 </head>
 
-
-
-
         @media print {
-            .fontsize { font-size: 15px ;
+            .fontsize { 
                         font-weight: bold;
                         font-family: 'Times New Roman';
                         
                         
             }
-            .header,.hide { visibility: hidden }
+            /* .header,.hide {
+             visibility: hidden } */
             .bodymargin{
                 margin-left: 0px ;
                 margin-right: 0px;
             }
             
+            #footer {
+         display: block;
+         position: fixed;
+         bottom: 0;
+    } 
+            
         }
         
         @page {
-              
              margin-left:  1cm;
              margin-right: 1cm;
              margin-bottom: 1cm;
@@ -188,7 +191,7 @@
         }
 
         @media screen {
-            .fontsize { font-size: 15px;
+            .fontsize { 
                         font-weight: bold;
                         font-family: 'Times New Roman'
             }
@@ -204,12 +207,124 @@
 
 <body style="text-align: center" class="bodymargin">
 	<form method="post" class="bodymargin">
-		<c:forEach begin="1" end="${noofpapers}">
-		<br>
+	
+	 <table border="0" width="100%"> 
+	 <thead>
+    <tr>
+     <th style="width:100%">
+     <table width="100%" style="border-collapse: collapse;">
+			<tr>
+				<td align="center">
+				<img src="images/bielogo.png" width="80" height="110"/>
+				</td>
+				<td class="dataTextBoldCenter" style="width: 100%">
+				BOARD OF ISLAMIC EDUCATION <br>
+				KARNATAKA<br><br>
+				<label class="addressLine">Question Paper Set &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				Total: ${totalstudentsforprint}<br>
+				 </label>
+				</td>
+			</tr>
+			<tr>
+			<td></td></tr>
+			<tr></tr>
+	</table>
+	
+	<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
+
+		<table>
+		<tr>
+			<td></td>
+			
+			</tr>
+			<tr>
+			<td></td>
+			
+			</tr>
+			<tr>
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printcentername}" /></label>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printexamlevel}" /></label></td>
+					
+			</tr>
+			
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printlanguage}" /></label>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="Exam Paper" /></label></td>
+			</tr>
+		</table>
+     
+     
+     </th>
+   </tr>
+  </thead> 
+  
+  <tbody>
+  		<tr>
+  		<td>
+  		
+  		<c:forEach begin="1" end="${noofpapers}">
+		 <div style="page-break-inside: avoid;"> 
+		
+		<!-- <TABLE  width="100%" border="1" style="border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE> -->
+            <br>
+            
+            <table class="datatable">
+            <thead>
+ 				 <tr>
+  						<th title="click to sort" class="datath">Sl.No.</th>
+						<th title="click to sort" class="datath">Registration No.</th>
+						<th title="click to sort" class="datath">Student Name</th>
+
+ 				 </tr>
+ 			 </thead>
+ 		 
+			<tbody>
+				  <c:forEach items="${mapstudentreports}" var="Parents" varStatus="status">
+				<tr>
+					<td class="datatd" style="font-size: 11px;"><c:out value="${(status.index)+1}" /></td>
+					<td class="datatd" style="font-size: 11px;"><c:out
+							value="${Parents.key.student.admissionnumber}" /></td>
+					<td class="datatd" style="font-size: 11px;"><c:out
+							value="${Parents.key.student.name}" /></td>
+				</tr>
+			</c:forEach>
+			</tbody>
+				</table>
+				</div>
+			<br><br>
+			</c:forEach>
+  		</td>
+  		
+  		</tr>
+ </tbody> 
+  
+  
+  <tfoot>
+  </tfoot>
+	 </table>
+		<%-- <c:forEach begin="1" end="${noofpapers}">
+		 <div style="page-break-inside: avoid;"> 
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="images/bielogo.png" width="100" height="150"/>
+				<img src="images/bielogo.png" width="80" height="110"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				BOARD OF ISLAMIC EDUCATION <br>
@@ -271,12 +386,6 @@
             
             <table class="datatable">
             <thead>
-            <tr>
-  						<th title="click to sort" class="datathe"></th>
-						<th title="click to sort" class="datathe"></th>
-						<th title="click to sort" class="datathe"></th>
-
- 				 </tr>
  				 <tr>
   						<th title="click to sort" class="datath">Sl.No.</th>
 						<th title="click to sort" class="datath">Registration No.</th>
@@ -288,17 +397,18 @@
 			<tbody>
 				  <c:forEach items="${mapstudentreports}" var="Parents" varStatus="status">
 				<tr>
-					<td class="datatd"><c:out value="${(status.index)+1}" /></td>
-					<td class="datatd"><c:out
+					<td class="datatd" style="font-size: 11px;"><c:out value="${(status.index)+1}" /></td>
+					<td class="datatd" style="font-size: 11px;"><c:out
 							value="${Parents.key.student.admissionnumber}" /></td>
-					<td class="datatd"><c:out
+					<td class="datatd" style="font-size: 11px;"><c:out
 							value="${Parents.key.student.name}" /></td>
 				</tr>
 			</c:forEach>
 			</tbody>
 				</table>
+				</div>
 			<br><br>
-			</c:forEach>
+			</c:forEach> --%>
 	</form>
 </body>
 </html>

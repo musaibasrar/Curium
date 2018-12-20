@@ -62,7 +62,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 28px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -102,7 +102,7 @@
 }
 .reportheaders{
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 12px;
 
 }
 
@@ -185,7 +185,7 @@
         }
 
         @media screen {
-            .fontsize { font-size: 15px;
+            .fontsize { font-size: 12px;
                         font-weight: bold;
                         font-family: 'Times New Roman'
             }
@@ -205,13 +205,15 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="images/bielogo.png" width="100" height="150"/>
+				<img src="images/bielogo.png" width="80" height="110"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				BOARD OF ISLAMIC EDUCATION <br>
 				KARNATAKA<br><br>
-				<label class="addressLine">Language Report<br>
-				 </label>
+				<label class="addressLine">Language Report</label><br>
+				<label class="reportheaders"><c:out value="${printcentername}" /></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label class="reportheaders"><c:out value="${printexamlevel}" /></label>
+				 
 				</td>
 			</tr>
 			<tr>
@@ -226,37 +228,7 @@
 
                 </tr>
             </TABLE>
-
-		<table>
-		<tr>
-			<td></td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr>
-						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printcentername}" /></label>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printexamlevel}" /></label></td>
-					
-			</tr>
-			
-			<tr>
-			<td></td>
-			</tr>
-			
-		</table>
-		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
-                <tr>
-
-                    <td colspan="4" ></td>
-
-                </tr>
-            </TABLE>
-            <br>
-            
+		
             <table class="datatable">
             <thead>
  				 <tr>
@@ -274,13 +246,13 @@
 					<c:forEach items="${languagereports}" var="languagereports">
 
 						<tr>
-							<td class="datatd"><c:out value="${languagereports.key.get(0)}" /></td>
-							<td class="datatd"><c:out value="${languagereports.key.get(1)}" /></td>
-							<td class="datatd"><c:out value="${languagereports.value.get(0)}" /></td>
-							<td class="datatd"><c:out value="${languagereports.value.get(1)}" /></td>
-							<td class="datatd"><c:out value="${languagereports.value.get(2)}" /></td>
-							<td class="datatd"><c:out value="${languagereports.value.get(3)}" /></td>
-							<td class="datatd"><c:out value="${languagereports.value.get(4)}" /></td>	
+							<td class="datatd" style="font-size: 12px;"><c:out value="${languagereports.key.get(0)}" /></td>
+							<td class="datatd" style="font-size: 12px;"><c:out value="${languagereports.key.get(1)}" /></td>
+							<td class="datatd" style="font-size: 12px;"><c:out value="${languagereports.value.get(0)}" /></td>
+							<td class="datatd" style="font-size: 12px;"><c:out value="${languagereports.value.get(1)}" /></td>
+							<td class="datatd" style="font-size: 12px;"><c:out value="${languagereports.value.get(2)}" /></td>
+							<td class="datatd" style="font-size: 12px;"><c:out value="${languagereports.value.get(3)}" /></td>
+							<td class="datatd" style="font-size: 12px;"><c:out value="${languagereports.value.get(4)}" /></td>	
 						</tr>
 					</c:forEach>
 					<tr>
