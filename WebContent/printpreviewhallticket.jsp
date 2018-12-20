@@ -62,7 +62,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 24px;
+	font-size: 20px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -71,7 +71,7 @@
 	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 20px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -242,7 +242,7 @@ for(Cookie cookie : cookies){
 				<td></td>
 				<td></td>
 				<td align="center">
-				<img src="images/bielogo.png" width="50" height="80"/>
+				<img src="images/bielogo.png" width="40" height="70"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				BOARD OF ISLAMIC EDUCATION KARNATAKA
@@ -379,6 +379,8 @@ for(Cookie cookie : cookies){
 		</TABLE>
 		</div>               
 		<br> 
+		<br> 
+		<br>
 		<br> 
                         </c:forEach>
 			
