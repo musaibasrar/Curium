@@ -32,7 +32,7 @@ public class BranchDAO {
 		session = HibernateUtil.openCurrentSession();
 	}
 
-	@SuppressWarnings({ "unchecked", "finally", "cast" })
+	@SuppressWarnings({ "unchecked", "finally" })
 	public List<Branch> readListOfObjects() {
 		
 		List<Branch> results = new ArrayList<Branch>();

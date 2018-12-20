@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.model.attendance.dao.AttendanceDAO;
 import com.model.branch.service.BranchService;
 import com.model.examlevels.service.ExamLevelService;
 import com.model.language.service.LanguageService;
@@ -18,7 +17,6 @@ import com.model.marksdetails.service.MarksDetailsService;
 import com.model.stampfees.service.StampFeesService;
 import com.model.student.service.ResultService;
 import com.model.student.service.StudentService;
-import com.util.DataUtil;
 
 /**
  * @author Musaib_2

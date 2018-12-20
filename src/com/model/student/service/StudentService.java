@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -1190,7 +1191,7 @@ public class StudentService {
     public void searchLanguagesReport() {
         
         List<Parents> parentsList = new ArrayList<Parents>();
-        List<Branch> centerList = new ArrayList<Branch>();
+        List<Branch> centerList = new LinkedList<Branch>();
         Map<List<String>,List<String>> languageReports = new LinkedHashMap<List<String>,List<String>>();
         
         String centerQuery =null;
@@ -1206,6 +1207,7 @@ public class StudentService {
                  httpSession.setAttribute("studentsreportcentersearch", centerCode[0]+":"+centerCode[1]);
              }else {
                  centerList = new BranchDAO().readListOfObjects();
+                 Collections.sort(centerList);
                  httpSession.setAttribute("studentsreportcentersearch", "");
              }
              
@@ -1215,7 +1217,7 @@ public class StudentService {
                      
                  for (Branch eachBranch : centerList) {   
                      
-                     List<String> centerNameCode = new ArrayList<String>();
+                     List<String> centerNameCode = new LinkedList<String>();
                      List<String> languageCount = new ArrayList<String>();
                      int englishCount =0, urduCount=0, hindiCount=0, kannadaCount = 0;
                      
@@ -1237,15 +1239,19 @@ public class StudentService {
                      urduCountTotal = urduCountTotal + urduCount;
                      kannadaCountTotal = kannadaCountTotal + kannadaCount;
                      
-                     centerNameCode.add(eachBranch.getCentercode());
-                     centerNameCode.add(eachBranch.getCentername());
-                     languageCount.add(Integer.toString(englishCount));
-                     languageCount.add(Integer.toString(urduCount));
-                     languageCount.add(Integer.toString(hindiCount));
-                     languageCount.add(Integer.toString(kannadaCount));
-                     languageCount.add(Integer.toString(englishCount+urduCount+hindiCount+kannadaCount));
                      
-                     languageReports.put(centerNameCode, languageCount);
+                     if(englishCount!=0 || urduCount!=0 ||  hindiCount!=0 ||  kannadaCount!=0) {
+
+                    	 centerNameCode.add(eachBranch.getCentercode());
+                    	 centerNameCode.add(eachBranch.getCentername());
+                    	 languageCount.add(Integer.toString(englishCount));
+	                     languageCount.add(Integer.toString(urduCount));
+	                     languageCount.add(Integer.toString(hindiCount));
+	                     languageCount.add(Integer.toString(kannadaCount));
+	                     languageCount.add(Integer.toString(englishCount+urduCount+hindiCount+kannadaCount));
+	                     
+	                     languageReports.put(centerNameCode, languageCount);
+                     }
                 }
                  httpSession.setAttribute("printexamlevel", "Exam Level: "+request.getParameter("examlevel").toString());
                  httpSession.setAttribute("studentsreportexamlevelsearch", request.getParameter("examlevel").toString());
@@ -1253,7 +1259,7 @@ public class StudentService {
                 
                 for (Branch eachBranch : centerList) {   
                     
-                    List<String> centerNameCode = new ArrayList<String>();
+                    List<String> centerNameCode = new LinkedList<String>();
                     List<String> languageCount = new ArrayList<String>();
                     int englishCount = 0, urduCount = 0, hindiCount = 0, kannadaCount = 0;
                     
@@ -1276,15 +1282,18 @@ public class StudentService {
                     urduCountTotal = urduCountTotal + urduCount;
                     kannadaCountTotal = kannadaCountTotal + kannadaCount;
                     
-                    centerNameCode.add(eachBranch.getCentercode());
-                    centerNameCode.add(eachBranch.getCentername());
-                    languageCount.add(Integer.toString(englishCount));
-                    languageCount.add(Integer.toString(urduCount));
-                    languageCount.add(Integer.toString(hindiCount));
-                    languageCount.add(Integer.toString(kannadaCount));
-                    languageCount.add(Integer.toString(englishCount+urduCount+hindiCount+kannadaCount));
-                    
-                    languageReports.put(centerNameCode, languageCount);
+                    if(englishCount!=0 || urduCount!=0 ||  hindiCount!=0 ||  kannadaCount!=0) {
+                    	
+                    	centerNameCode.add(eachBranch.getCentercode());
+                        centerNameCode.add(eachBranch.getCentername());
+                        languageCount.add(Integer.toString(englishCount));
+                        languageCount.add(Integer.toString(urduCount));
+                        languageCount.add(Integer.toString(hindiCount));
+                        languageCount.add(Integer.toString(kannadaCount));
+                        languageCount.add(Integer.toString(englishCount+urduCount+hindiCount+kannadaCount));
+                        
+                        languageReports.put(centerNameCode, languageCount);
+                    }
                }
                 httpSession.setAttribute("studentsreportexamlevelsearch", "");
             }
