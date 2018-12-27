@@ -1055,8 +1055,6 @@ public class StudentService {
         httpSession.setAttribute("printlanguage", "");
         httpSession.setAttribute("printqualification", "");
         httpSession.setAttribute("printreligion", "");
-        httpSession.setAttribute("noofpapers", "");
-        
     }
 
     public void searchStudents() {
@@ -1161,9 +1159,14 @@ public class StudentService {
             new BranchService(request, response).viewBranches();
             new QualificationService(request, response).viewQualification(); 
             
-            //Query subexamlevel to get the numbers of papers per exam
-            List<Subexamlevel> noOfPapers = new ExamLevelService(request, response).getSubExamLevelSubject(request.getParameter("examlevel"));
-            httpSession.setAttribute("noofpapersExtraM", noOfPapers);
+            //get subject name
+            if(!DataUtil.emptyString(request.getParameter("subjectnameAjax")).equalsIgnoreCase("")) {
+                httpSession.setAttribute("studentsreportsubjctsearch", request.getParameter("subjectnameAjax").toString());
+                httpSession.setAttribute("printsubjectname", "Exam Paper: "+DataUtil.emptyString(request.getParameter("subjectnameAjax")));
+            }else {
+                httpSession.setAttribute("studentsreportsubjctsearch", "");
+            }
+            
     }
 
 

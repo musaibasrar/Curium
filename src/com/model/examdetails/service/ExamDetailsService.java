@@ -244,6 +244,9 @@ public class ExamDetailsService {
 		
 		request.setAttribute("selectedcentercode", DataUtil.emptyString(request.getParameter("searchcentercode")));
 		request.setAttribute("selectedexamlevel", DataUtil.emptyString(request.getParameter("searchexamlevel")));
+		
+		httpSession.setAttribute("centercodesearch", DataUtil.emptyString(request.getParameter("searchcentercode")));
+		httpSession.setAttribute("examlevelsearch", DataUtil.emptyString(request.getParameter("searchexamlevel")));
 	
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			List<Examschedule> examschedules = new ArrayList<Examschedule>();

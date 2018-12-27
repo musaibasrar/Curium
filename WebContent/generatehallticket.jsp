@@ -425,11 +425,7 @@ background-color:rgba(0, 0, 0, 0);
                  primary: "ui-icon-mail-open"
              }
          }).click(function(){
-        	 if(confirm('Are you sure,you want to print?')){
         		 printPreview();	
-         	}
-             
-             return false;
          });
      });
 
@@ -491,7 +487,7 @@ for(Cookie cookie : cookies){
 						Examination Level &nbsp;&nbsp;&nbsp;&nbsp;
 							 <label> <select name="searchexamlevel" id="searchexamlevel"
 									style="width: 180px;" required>
-										<option selected></option>
+										<option selected>${examlevelsearch}</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}:${examleveldetails.levelname}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
@@ -526,7 +522,7 @@ for(Cookie cookie : cookies){
 							<label>
 									<select name="searchcentercode" id="searchcentercode"
 									style="width: 180px;" required>
-										<option selected></option>
+										<option selected>${centercodesearch}</option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}:${branchlist.centername}" >
 												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
