@@ -1163,7 +1163,7 @@ public class StudentService {
             
             //Query subexamlevel to get the numbers of papers per exam
             List<Subexamlevel> noOfPapers = new ExamLevelService(request, response).getSubExamLevelSubject(request.getParameter("examlevel"));
-            httpSession.setAttribute("noofpapers", noOfPapers.size());
+            httpSession.setAttribute("noofpapersExtraM", noOfPapers);
     }
 
 
@@ -1237,6 +1237,7 @@ public class StudentService {
                     }
                      englishCountTotal = englishCountTotal + englishCount;
                      urduCountTotal = urduCountTotal + urduCount;
+                     hindiCountTotal = hindiCountTotal + hindiCount;
                      kannadaCountTotal = kannadaCountTotal + kannadaCount;
                      
                      
@@ -1280,6 +1281,7 @@ public class StudentService {
                     
                     englishCountTotal = englishCountTotal + englishCount;
                     urduCountTotal = urduCountTotal + urduCount;
+                    hindiCountTotal = hindiCountTotal + hindiCount;
                     kannadaCountTotal = kannadaCountTotal + kannadaCount;
                     
                     if(englishCount!=0 || urduCount!=0 ||  hindiCount!=0 ||  kannadaCount!=0) {

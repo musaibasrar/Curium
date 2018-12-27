@@ -259,8 +259,8 @@
 			</tr>
 			<tr>
 						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printlanguage}" /></label>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="Exam Paper" /></label></td>
+						</td>
+						
 			</tr>
 		</table>
      
@@ -273,16 +273,17 @@
   		<tr>
   		<td>
   		
-  		<c:forEach begin="1" end="${noofpapers}">
+  		<c:forEach items="${noofpapersExtraM}" var="noofpapersExtraM" varStatus="status">
 		 <div style="page-break-inside: avoid;"> 
 		
-		<!-- <TABLE  width="100%" border="1" style="border-collapse:collapse;">
+			<TABLE>
                 <tr>
 
-                    <td colspan="4" ></td>
-
+                    <td class="dataTextBoldLeft" style="width: 50%">
+                    <label class="reportheaders"><c:out value="Exam Paper: " /> ${noofpapersExtraM.subjectname}</label></td>
+																																 					
                 </tr>
-            </TABLE> -->
+            </TABLE>
             <br>
             
             <table class="datatable">
@@ -308,7 +309,9 @@
 			</tbody>
 				</table>
 				</div>
-			<br><br>
+				<div style="page-break-after: always;"> 
+					<br><br>
+				</div>
 			</c:forEach>
   		</td>
   		
