@@ -263,7 +263,7 @@ for(Cookie cookie : cookies){
             </TABLE>
 			<table style=" border-collapse: collapse;width: 100%;">
 							<tr>   
-                                <td class="namedetails"><label>Admission No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.student.admissionnumber}"/></label></td>
+                                <td class="namedetails"><label>Admission No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;font-size: 18px;"><c:out value="${Parents.key.student.admissionnumber}"/></label></td>
                                 <td class="namedetails"><label>Language Opted.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.student.languageopted}"/></label></td>
                             </tr>
                             
@@ -298,7 +298,7 @@ for(Cookie cookie : cookies){
                              
                               <tr style="border-color:#000000">
                                 <td class="namedetails">
-                                <label>Center Code/Name :&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${centercodename}"/></label>
+                                <label>Center Code/Name :&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;font-size: 18px"><c:out value="${centercodename}"/></label>
                             	</td>
                              </tr>
                              <tr>
