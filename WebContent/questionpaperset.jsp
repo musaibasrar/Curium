@@ -523,47 +523,6 @@
 		});
 	});
     
-    
-    var xmlHttp;
-	var count;
-	function getSubjects() {
-	
-		var selected=document.getElementById('examlevel').value;
-	
-		 if (typeof XMLHttpRequest != "undefined") {
-			 xmlHttp = new XMLHttpRequest();
-	        
-	     } else if (window.ActiveXObject) {
-	    	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-	         
-	     }
-		xmlHttp.onreadystatechange = stateChanged;
-		xmlHttp.open("GET", "AjaxController?process=AttendanceProcess&action=getSubjects&urlexamlevel="+selected,true);
-		xmlHttp.send(null);
-	}
-	
-	function stateChanged() {
-	
-		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-			document.getElementById("subjectlist").innerHTML = xmlHttp.responseText;
-		}
-	}
-	function GetXmlHttpObject() {
-		var xmlHttp = null;
-		try {
-			xmlHttp = new XMLHttpRequest();
-		} catch (e) {
-			try {
-				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-			} catch (e) {
-				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-		}
-		return xmlHttp;
-	}
-
-	
-    
     </script>
 
 
@@ -653,7 +612,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Exam Level* &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="examlevel" id="examlevel" onchange="getSubjects()"
+										<select name="examlevel" id="examlevel"
 									style="width: 240px;">
 										<option selected>${studentsreportexamlevelsearch}</option>
 										<option></option>
@@ -694,33 +653,6 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td class="alignRightFields">Subject* &nbsp;&nbsp;&nbsp;</td>
-							
-							<td width="70%" id="subjectlist"><select
-									style="width: 240px;">
-										<option selected>${studentsreportsubjctsearch}</option>
-								</select>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<!-- <td class="alignRightFields">Subject &nbsp;</td> -->
-							<td width="12%" align="left"><label> <input
-									name="subjectidselected" type="hidden" class="myclass" id="subjectidselected"
-									size="36" value='<c:out value="${subjectid}"></c:out>'>
-							</label></td>
-							
 						</tr>
 						
 						<tr>

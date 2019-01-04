@@ -207,8 +207,8 @@
 
 <body style="text-align: center" class="bodymargin">
 	<form method="post" class="bodymargin">
-	
-	 <table border="0" width="100%"> 
+	<c:forEach items="${noofpapers}" var="noofpapers">
+	 <table border="0" width="100%" style="page-break-after: always;"> 
 	 <thead>
     <tr>
      <th style="width:100%">
@@ -260,7 +260,8 @@
 			<tr>
 						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printlanguage}" /></label>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printsubjectname}" /></label></td>
+						<%-- <td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printsubjectname}" /></label></td> --%>
+						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${noofpapers.subjectname}" /></label></td>
 			</tr>
 		</table>
      
@@ -310,6 +311,7 @@
   <tfoot>
   </tfoot>
 	 </table>
+	 </c:forEach>
 	</form>
 </body>
 </html>

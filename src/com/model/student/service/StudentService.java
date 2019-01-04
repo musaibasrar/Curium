@@ -1167,6 +1167,10 @@ public class StudentService {
                 httpSession.setAttribute("studentsreportsubjctsearch", "");
             }
             
+          //Query subexamlevel to get the numbers of papers per exam
+            List<Subexamlevel> noOfPapers = new ExamLevelService(request, response).getSubExamLevelSubject(request.getParameter("examlevel"));
+            httpSession.setAttribute("noofpapers", noOfPapers);
+            
     }
 
 
@@ -1530,10 +1534,7 @@ public class StudentService {
              new BranchService(request, response).viewDistricts();
              new BranchService(request, response).viewBranches();
              new QualificationService(request, response).viewQualification(); 
-             
-             //Query subexamlevel to get the numbers of papers per exam
-             List<Subexamlevel> noOfPapers = new ExamLevelService(request, response).getSubExamLevelSubject(request.getParameter("examlevel"));
-             httpSession.setAttribute("noofpapers", noOfPapers.size());
+            
      }
     }
     }
