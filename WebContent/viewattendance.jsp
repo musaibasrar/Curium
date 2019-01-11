@@ -399,12 +399,18 @@
 	
 	function searchStudentAttendanceDetails() {
 		
-		var form1 = document.getElementById("form1");
-		if(form1.checkValidity()) {
+		var centerCode = document.getElementById("centercode").value;
+		var examLevel = document.getElementById("examlevelcode").value;
+		
+		
+		if(centerCode!="" && examLevel!=""){
+			var form1 = document.getElementById("form1");
 			form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetails";
 			form1.method = "POST";
 			form1.submit();
-		  }
+		}else{
+			alert('Enter mandatory fields');
+		}
 	}
 	
 	$(function() {
@@ -581,10 +587,11 @@ for(Cookie cookie : cookies){
 								<td class="alignRightFields"><br></td>
 								</tr>
 						<tr>
-							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRightFields" >Center*&nbsp;&nbsp;&nbsp;</td>
 							<td width="12%" align="left"><label> <select name="centercode" id="centercode" required
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${attendancecenternamesearch}</option>
+										<option></option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}:${branchlist.centername}" >
 												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
@@ -601,11 +608,12 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRightFields">Exam Level* &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="examlevelcode" id="examlevelcode" required
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${attendanceexamlevelnamesearch}</option>
+										<option></option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}:${examleveldetails.levelname}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
@@ -625,7 +633,8 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="languageopted" id="languageopted"
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${attendancelanguageoptedsearch}</option>
+										<option></option>
 										<c:forEach items="${languageslist}" var="languageslist">
 											<option value="${languageslist.language}" >
 												<c:out value="${languageslist.language}" />
@@ -635,13 +644,13 @@ for(Cookie cookie : cookies){
 							</label> 
 						</tr>
 
-						<tr>
+						<%-- <tr>
 							<td><br /></td>
 
 						</tr>
 						
 						<tr>
-							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRightFields">Academic Year* &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="selectedacademicyear" id="selectedacademicyear"
 									style="width: 240px;" required>
@@ -659,7 +668,7 @@ for(Cookie cookie : cookies){
 											<option value="2020/21" >2022/23</option>
 								</select>
 							</label> 
-						</tr>
+						</tr> --%>
 
 						<tr>
 							<td><br /></td>

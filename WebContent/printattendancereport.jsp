@@ -61,7 +61,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 28px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -70,7 +70,7 @@
 	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 22px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -165,11 +165,10 @@
         }
         
         @page {
-              
-             margin-left:  0.5cm;
-             margin-right: 0.5cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
+             margin-bottom: 1cm;
+             margin-top: 1cm;
              size: auto;
         }
 
@@ -194,11 +193,10 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="images/bielogo.png" width="100" height="150"/>
+				<img src="images/bielogo.png" width="80" height="110"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				BOARD OF ISLAMIC EDUCATION <br>
-				KARNATAKA<br><br>
+				BOARD OF ISLAMIC EDUCATION KARNATAKA<br><br>
 				<label class="addressLine">ATTENDANCE LIST<br>
 				 </label>
 				</td>

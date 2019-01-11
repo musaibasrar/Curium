@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -405,19 +406,21 @@ public class AttendanceService {
 		    
                     String[] centerCode = request.getParameter("centercode").split(":");
                     httpSession.setAttribute("attendancecentername", "Center Code/Center Name: "+centerCode[0]+"/"+centerCode[1]);
+                    httpSession.setAttribute("attendancecenternamesearch", centerCode[0]+":"+centerCode[1]);
                     
                     String[] examLevel = request.getParameter("examlevelcode").split(":");
                     httpSession.setAttribute("attendanexamlevelcode", examLevel[0]);
                     httpSession.setAttribute("attendanceexamlevelname", "Exam Code/Exam Name: "+examLevel[0]+"/"+examLevel[1]);
+                    httpSession.setAttribute("attendanceexamlevelnamesearch", examLevel[0]+":"+examLevel[1]);
                     
 		  //get the total subjects
                     List<Subexamlevel> subexamlevel = new ExamLevelDetailsDAO().getSubExamLevelSubject(examLevel[0]);
                     httpSession.setAttribute("attendancesubexamlevel", subexamlevel);
                     //		               
-                    Map<Student,List<String>> viewAttendanceMap = new HashMap<Student,List<String>>();
+                    Map<Student,List<String>> viewAttendanceMap = new LinkedHashMap<Student,List<String>>();
                     List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
 		    
-		        String mainQuery = "from Student where centercode='"+centerCode[0]+"'";
+                    String mainQuery = "from Student where centercode='"+centerCode[0]+"'";
 	                      String subQuery = null;
 	                        
 	                      subQuery = " and examlevel = '"+examLevel[0]+"'";
@@ -425,12 +428,13 @@ public class AttendanceService {
 	                        if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
 	                            subQuery = subQuery+" and languageopted='"+request.getParameter("languageopted")+"'";
 	                            httpSession.setAttribute("attendancelanguageopted", "Language: "+request.getParameter("languageopted"));
+	                            httpSession.setAttribute("attendancelanguageoptedsearch", request.getParameter("languageopted"));
 	                        }
 	                        
-	                        if(!request.getParameter("selectedacademicyear").equalsIgnoreCase("")) {
+	                      /*  if(!request.getParameter("selectedacademicyear").equalsIgnoreCase("")) {
 	                            String subAcademicYear = request.getParameter("selectedacademicyear").toString().substring(2, 4);
 	                                subQuery = subQuery+" AND admissionnumber like '"+subAcademicYear+"%'";
-	                        }
+	                        }*/
 	                       
 	                     mainQuery = mainQuery+subQuery+" AND passedout = 0 AND droppedout = 0 AND archive = 0 Order By admissionnumber ASC";
 		        
@@ -440,7 +444,7 @@ public class AttendanceService {
 		            List<String> attendanceStatus = new ArrayList<String>();
 		            
                             studentDailyAttendance = new AttendanceDAO().getStudentAttendance(""
-                                    + "from Studentdailyattendance where attendeeid = '"+student.getStudentexternalid()+"' and academicyear='"+request.getParameter("selectedacademicyear")+"' and examlevelcode='"+examLevel[0]+"'");
+                                    + "from Studentdailyattendance where attendeeid = '"+student.getStudentexternalid()+"'  and examlevelcode='"+examLevel[0]+"'");
                             
                             for (Subexamlevel sel : subexamlevel) {
                                 boolean subStatus = false;
