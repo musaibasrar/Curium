@@ -61,12 +61,21 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 18px;
+	font-size: 25px;
 	letter-spacing: normal;
 	text-align: center;
 }
 
 .addressLine{
+	font-weight: bold;
+	font-family: ariel;
+	color: black;
+	font-size: 25px;
+	letter-spacing: normal;
+	text-align: center;
+}
+
+.examlabels{
 	font-weight: bold;
 	font-family: ariel;
 	color: black;
@@ -197,8 +206,8 @@
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				BOARD OF ISLAMIC EDUCATION KARNATAKA<br><br>
-				<label class="addressLine">ATTENDANCE LIST<br>
-				 </label>
+				<label class="examlabels">${attendancecentercode}</label><label class="addressLine">&nbsp;&nbsp;&nbsp;ATTENDANCE LIST&nbsp;&nbsp;&nbsp;
+				 </label><label class="examlabels">Exam Code: ${attendanexamlevelcode}</label><br>
 				</td>
 			</tr>
 			<tr>

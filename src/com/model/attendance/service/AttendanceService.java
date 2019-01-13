@@ -406,6 +406,7 @@ public class AttendanceService {
 		    
                     String[] centerCode = request.getParameter("centercode").split(":");
                     httpSession.setAttribute("attendancecentername", "Center Code/Center Name: "+centerCode[0]+"/"+centerCode[1]);
+                    httpSession.setAttribute("attendancecentercode", "Center Code: "+centerCode[0]);
                     httpSession.setAttribute("attendancecenternamesearch", centerCode[0]+":"+centerCode[1]);
                     
                     String[] examLevel = request.getParameter("examlevelcode").split(":");
