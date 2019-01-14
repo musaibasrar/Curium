@@ -69,7 +69,7 @@ public class StampFeesDAO {
 
 	            results = (java.util.List<Student>) session.createQuery("FROM Student s where s.archive = 0").list();
 	            noOfRecords = results.size();
-	            System.out.println("The size of list is:::::::::::::::::::::::::::::::::::::::::: " + noOfRecords);
+	            logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: " + noOfRecords);
 	            transaction.commit();
 
 

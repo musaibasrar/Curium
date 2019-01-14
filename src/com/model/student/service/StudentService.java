@@ -258,6 +258,12 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("specialcategory")) {
 		                	student.setSpecialcategory(DataUtil.emptyString(item.getString()));
 		                }
+		                if (fieldName.equalsIgnoreCase("sts")) {
+		                	student.setSts(DataUtil.parseInt(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("rte")) {
+		                	student.setRte(DataUtil.parseInt(item.getString()));
+		                }
 		                // PU Details
 		                if (fieldName.equalsIgnoreCase("pep")) {
                                     puDetails.setExampassedappearance(DataUtil.parseInt(item.getString()));
@@ -455,6 +461,9 @@ public class StudentService {
 		}
 		
 		student.setArchive(0);
+		student.setPassedout(0);
+		student.setDroppedout(0);
+		student.setLeftout(0);
 		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLM0123NOP89QRSTUVWXYZ4567*&!@#%~$.'?<>{[|;:/";
 		int count =4;
 		StringBuilder builder = new StringBuilder();
@@ -860,6 +869,12 @@ public class StudentService {
 	                if(fieldName.equalsIgnoreCase("newcategory")) {
 	                	newcateg = DataUtil.emptyString(item.getString());
 	                }
+	                if (fieldName.equalsIgnoreCase("sts")) {
+	                	student.setSts(DataUtil.parseInt(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("rte")) {
+	                	student.setRte(DataUtil.parseInt(item.getString()));
+	                }
 	                // Updating paretns information
 	                
 	                parents.setPid(parentsId);
@@ -1075,9 +1090,16 @@ public class StudentService {
 		}
 		 student.setArchive(0);
 		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-	         new studentDetailsDAO().updatePuDetails(puDetails);
+		 
+		 if(puDetails.getIdpudetails()!=null) {
+			 new studentDetailsDAO().updatePuDetails(puDetails);
 	         student.setPudetails(puDetails);
+		 }
+	         
+		 if(degreeDetails.getIddegreedetails()!=null) {
+			 new studentDetailsDAO().updateDegreeDetails(degreeDetails);
 	         student.setDegreedetails(degreeDetails);
+		 } 
 		 student = new studentDetailsDAO().update(student);
  		if (pid != "") {
  			parents.setStudent(student);

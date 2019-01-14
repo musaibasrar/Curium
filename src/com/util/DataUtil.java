@@ -84,7 +84,7 @@ public class DataUtil {
             return 0;
         }
         else{
-            return Short.parseShort(src);
+            return Integer.parseInt(src);
         }
         
     }

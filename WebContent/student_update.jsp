@@ -194,72 +194,21 @@
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 
 <script type="text/javascript">
-	document.getElementById("UpdateExecutive").style.display = 'none';
-	function maleCheck() {
+	
+	
+	function yesCheck(id) {
 
-		if (document.getElementById('male').checked == true) {
-			document.getElementById('female').checked = false;
-
+		if (document.getElementById(id).checked == true) {
+			var splitId = id.split(':');
+			document.getElementById('no:'+splitId[1]).checked = false;
 		}
 
 	}
+	function noCheck(id) {
 
-	function femaleCheck() {
-
-		if (document.getElementById('female').checked == true) {
-			document.getElementById('male').checked = false;
-
-		}
-
-	}
-	function semCheck1() {
-
-		if (document.getElementById('semester1').checked == true) {
-			document.getElementById('semester2').checked = false;
-
-		}
-
-	}
-
-	function semCheck2() {
-
-		if (document.getElementById('semester2').checked == true) {
-			document.getElementById('semester1').checked = false;
-
-		}
-
-	}
-	function urbanCheck() {
-
-		if (document.getElementById('urban').checked == true) {
-			document.getElementById('rural').checked = false;
-
-		}
-
-	}
-
-	function ruralCheck() {
-
-		if (document.getElementById('rural').checked == true) {
-			document.getElementById('urban').checked = false;
-
-		}
-
-	}
-
-	function yesbplCheck() {
-
-		if (document.getElementById('yesbpl').checked == true) {
-			document.getElementById('nobpl').checked = false;
-
-		}
-
-	}
-	function nobplCheck() {
-
-		if (document.getElementById('nobpl').checked == true) {
-			document.getElementById('yesbpl').checked = false;
-
+		if (document.getElementById(id).checked == true) {
+			var splitId = id.split(':');
+			document.getElementById('yes:'+splitId[1]).checked = false;
 		}
 
 	}
@@ -472,6 +421,13 @@
 			Cancel();
 
 		});
+		 $("#sts").keypress(function (e) {
+		     //if the letter is not digit then display error and don't type anything
+		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		               return false;
+		    }
+		   });
+		 
 	});
 	
 	
@@ -565,9 +521,9 @@ for(Cookie cookie : cookies){
 							<td width="30%" class="alignRight">Semester &nbsp;</td>
 							<td width="16%" class="alignLeft">&nbsp;Semester
 								1<input type="checkbox" value="1" name="semester"
-								id="semester1" onclick="semCheck1();" ${student.semester == '1' ? 'checked' : ''}  />&nbsp; &nbsp;Semester 2<input
-								type="checkbox" value="2" name="semester" id="semester2"
-								onclick="semCheck2()" ${student.gender == '2' ? 'checked' : ''} />
+								id="yes:semester" onclick="yesCheck(this.id);" ${student.semester == '1' ? 'checked' : ''}  />&nbsp; &nbsp;Semester 2<input
+								type="checkbox" value="2" name="semester" id="no:semester"
+								onclick="noCheck(this.id)" ${student.semester == '2' ? 'checked' : ''} />
 
 							</td>
 
@@ -643,6 +599,14 @@ for(Cookie cookie : cookies){
 									id="previouschooladdress" size="36" value="${student.previouschooladdress}"
 									style="text-transform: uppercase" required> <!-- onkeyup="check(this.value);"  -->
 							</label></td>
+							
+							<td width="16%" class="alignRight">STS Number &nbsp;</td>
+
+									<td width="16%"><label> <input
+											name="sts" type="text" class="textField"
+											id="sts" size="36" value="${student.sts}">
+
+									</label></td>
 
 						</tr>
 						<tr>
@@ -665,10 +629,10 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Gender &nbsp;</td>
 
 							<td width="16%" class="alignLeft">Male<input type="checkbox"
-								value="Male" name="gender" id="male" onclick="maleCheck();"
+								value="Male" name="gender" id="yes:male" onclick="yesCheck(this.id);"
 								${student.gender == 'Male' ? 'checked' : ''} />&nbsp;
 								&nbsp;Female<input type="checkbox" value="Female" name="gender"
-								id="female" onclick="femaleCheck()"
+								id="no:male" onclick="noCheck(this.id);"
 								${student.gender == 'Female' ? 'checked' : ''} />
 
 							</td>
@@ -723,10 +687,10 @@ for(Cookie cookie : cookies){
 							</label></td>
 							<td width="30%" class="alignRight">Urban / Rural &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft">&nbsp;Urban<input
-								type="checkbox" value="Urban" name="urbanrural" id="urban"
-								onclick="urbanCheck();" ${student.urbanrural == 'Urban' ? 'checked' : ''} />&nbsp; &nbsp;Rural<input
-								type="checkbox" value="Rural" name="urbanrural" id="rural"
-								onclick="ruralCheck();" ${student.urbanrural == 'Rural' ? 'checked' : ''} />
+								type="checkbox" value="Urban" name="urbanrural" id="yes:urban"
+								onclick="yesCheck(this.id);" ${student.urbanrural == 'Urban' ? 'checked' : ''} />&nbsp; &nbsp;Rural<input
+								type="checkbox" value="Rural" name="urbanrural" id="no:urban"
+								onclick="noCheck(this.id);" ${student.urbanrural == 'Rural' ? 'checked' : ''} />
 
 							</td>
 						</tr>
@@ -1057,10 +1021,10 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td width="30%" class="alignRight">Belong to BPL &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
-								type="checkbox" value="1" name="belongtobpl" id="yesbpl"
-								onclick="yesbplCheck();" ${student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="belongtobpl" id="nobpl"
-								onclick="nobplCheck();" ${student.belongtobpl == '0' ? 'checked' : ''}/>
+								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
+								onclick="yesCheck(this.id);" ${student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
+								onclick="noCheck(this.id);" ${student.belongtobpl == '0' ? 'checked' : ''}/>
 
 							</td>
 							<td width="20%" class="alignRight">BPL Card No.
@@ -1178,12 +1142,13 @@ for(Cookie cookie : cookies){
 
 						<tr>
 
-							<td width="20%" class="alignRight">Created Date &nbsp;</td>
-							<td width="28%"><label> <input name="createddate"
-									type="text" value="<fmt:formatDate value="${student.createddate}" pattern="yyyy-MM-dd"/>" class="textField"
-									id="datepickerCD" size="30" data-validate="validate(required)">
-							</label></td>
-
+							<td width="30%" class="alignRight">RTE &nbsp;</td>
+							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
+								type="checkbox" value="1" name="rte" id="yes:rte"
+								onclick="yesCheck(this.id);" ${student.rte == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="rte" id="no:rte"
+								onclick="noCheck(this.id);" ${student.rte == '0' ? 'checked' : ''}/>
+							</td>
 
 							<td width="16%" class="alignRight">Remarks&nbsp;</td>
 
@@ -1193,6 +1158,28 @@ for(Cookie cookie : cookies){
 									id="remarks" size="30">
 
 							</label></td>
+							</tr>
+							
+							
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+
+
+
+						<tr>
+							<td width="20%" class="alignRight">Created Date &nbsp;</td>
+							<td width="28%"><label> <input name="createddate"
+									type="text" value="<fmt:formatDate value="${student.createddate}" pattern="yyyy-MM-dd"/>" class="textField"
+									id="datepickerCD" size="30" data-validate="validate(required)">
+							</label></td>
+
+							</tr>
+							
 						<tr>
 
 							<td></td>

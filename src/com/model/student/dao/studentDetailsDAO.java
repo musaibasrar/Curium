@@ -10,6 +10,7 @@ import com.util.Session;
 import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
+import com.model.degreedetails.dto.Degreedetails;
 import com.model.parents.dto.Parents;
 import com.model.pudetails.dto.Pudetails;
 import com.model.std.dto.Classhierarchy;
@@ -92,8 +93,7 @@ public class studentDetailsDAO {
 			results = (List<Student>) session.createQuery("From Student where archive=0 AND branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			noOfRecords = results.size();
-			System.out
-					.println("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+			logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
 							+ noOfRecords);
 			transaction.commit();
 
@@ -502,6 +502,18 @@ public class studentDetailsDAO {
             // this.session = sessionFactory.openCurrentSession();
             transaction = session.beginTransaction();
             session.update(puDetails);
+            transaction.commit();
+    } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+    } 
+    }
+    
+    public void updateDegreeDetails(Degreedetails degreeDetails) {
+        try {
+            // this.session = sessionFactory.openCurrentSession();
+            transaction = session.beginTransaction();
+            session.update(degreeDetails);
             transaction.commit();
     } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             

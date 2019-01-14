@@ -1,5 +1,5 @@
 <%-- 
-    Document   : viewAll
+    Document   : Advance Search Result
     Created on : Dec 29, 2012, 1:57:17 PM
     Author     : Musaib
 --%>
@@ -13,14 +13,9 @@
 
 <html >
     <head >
-        <%
-            response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
-            response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
-            response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
-            response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
-        %>
+       
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Advance Search Result</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -404,10 +399,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
-                            <th title="click to sort" class="headerText">Admission Date</th>
-                             
-
-
+                            <th title="click to sort" class="headerText">Fathers Name&nbsp;</th>
                         </tr>
                     </thead>
 
@@ -416,12 +408,10 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Parents.student.name}"/></td>
                                 <td class="dataText"><c:out value="${Parents.student.classstudying}"/></td>
-                                <td class="dataText"><c:out  value="${Parents.student.admissiondate}"/></td>
-                                 
-
+                                <td class="dataText"><c:out value="${Parents.fathersname}"/></td>
                             </tr>
                         </c:forEach>
                     </tbody>

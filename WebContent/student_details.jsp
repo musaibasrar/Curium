@@ -491,6 +491,11 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${student.previouschooladdress}" />
                             </td>
+                            <td width="25%" class="alignLeft" height="50">STS Number
+								</td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.sts}" />
+                            </td>
                        </tr>     
 						                           
                             
@@ -689,12 +694,17 @@ for(Cookie cookie : cookies){
 
                         <tr>
                         
-                     
-                             <td  width="25%"  class="alignLeft" height="50">Created Date
+                         <td  width="25%"  class="alignLeft" height="50" >RTE
                             </td>
-                            <td width="25%" class="tablerows">
-                                <%-- <c:out default="" value="${student.createddate}" /> --%>
-                                <fmt:formatDate value="${student.createddate}" pattern="yyyy-MM-dd"/>
+                            <td width="25%" class="tablerows" >
+                               
+                                <c:if test="${(student.rte ==1)}">    
+           						  <c:out default="" value="Yes" />
+           						 </c:if>
+                                <c:if test="${(student.rte == 0)}">    
+           						  <c:out default="" value="No" />
+           						 </c:if>
+           						 
                             </td>
    
                             <td  width="25%"  class="alignLeft" height="50">Remarks
@@ -703,6 +713,17 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.remarks}" />
                                 
                             </td>
+                        </tr>
+                        
+                        <tr>
+                        
+                             <td  width="25%"  class="alignLeft" height="50">Created Date
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <%-- <c:out default="" value="${student.createddate}" /> --%>
+                                <fmt:formatDate value="${student.createddate}" pattern="yyyy-MM-dd"/>
+                            </td>
+   
                         </tr>
                                                 
                         <tr>

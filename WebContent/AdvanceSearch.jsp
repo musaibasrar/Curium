@@ -397,6 +397,14 @@
 			Cancel();
 
 		});
+		
+		 $("#sts").keypress(function (e) {
+		     //if the letter is not digit then display error and don't type anything
+		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		               return false;
+		    }
+		   });
+		 
 	});
 </script>
 <script>
@@ -454,6 +462,23 @@
 		}
 
 	}
+	
+	 function yesCheck(id) {
+
+			if (document.getElementById(id).checked == true) {
+				var splitId = id.split(':');
+				document.getElementById('no:'+splitId[1]).checked = false;
+			}
+
+		}
+		function noCheck(id) {
+
+			if (document.getElementById(id).checked == true) {
+				var splitId = id.split(':');
+				document.getElementById('yes:'+splitId[1]).checked = false;
+			}
+
+		}
 
 	function CalculateAge(value) {
 		var test = document.getElementById('datepicker').value;
@@ -573,7 +598,7 @@ for(Cookie cookie : cookies){
 
 
 						<tr>
-							<td width="30%" class="alignRight">Name* &nbsp;</td>
+							<td width="30%" class="alignRight">Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="name" type="text" class="myclass" id="name" size="36"
 									onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
@@ -597,8 +622,35 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						
+						
+						<tr>
+							<td width="30%" class="alignRight">STS Number&nbsp;</td>
+							<td width="12%" align="left"><label>
+										<input
+											name="sts" type="text" class="textField"
+											id="sts" size="36"/>
+							</label></td>
+
+							<td width="30%" class="alignRight">RTE &nbsp;</td>
+							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
+								type="checkbox" value="1" name="rte" id="yes:rte"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="rte" id="no:rte"
+								onclick="noCheck(this.id);" />
+
+							</td>
+
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 
 						<tr>
+							<td><br /></td>
+						</tr>
+
 						<tr>
 							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
 							<td width="28%"><label> <input name="dateofbirth"

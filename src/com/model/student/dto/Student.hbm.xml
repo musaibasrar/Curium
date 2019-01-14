@@ -165,6 +165,12 @@
         <property name="specialcategory" type="string">
             <column name="specialcategory" length="25" />
         </property> 
+        <property name="sts" type="java.lang.Integer">
+            <column name="sts" />
+        </property>
+        <property name="rte" type="java.lang.Integer">
+            <column name="rte" />
+        </property>
          <!-- <many-to-one name="Pudetails" class="com.model.pudetails.dto.Pudetails"
             column="pudetailsid" unique="true" not-null="true" lazy="false"
             cascade="all" />

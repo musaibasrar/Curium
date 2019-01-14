@@ -82,6 +82,8 @@ public class Student implements java.io.Serializable {
 	private String bhagyalakshmibondnumber;
 	private String disabilitychild;
 	private String specialcategory;
+	private Integer sts;
+	private Integer rte;
 	
 	public Student() {
 	}
@@ -105,7 +107,7 @@ public class Student implements java.io.Serializable {
 			Integer passedout, Integer droppedout, Integer leftout, Integer semester,String stream,String mediumofinstruction,
 			 String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,String studentscaste,
 			 String socialcategory,Integer belongtobpl,String bplcardno,String bhagyalakshmibondnumber,
-			 String disabilitychild,String specialcategory) {
+			 String disabilitychild,String specialcategory, Integer sts, Integer rte) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
@@ -157,6 +159,8 @@ public class Student implements java.io.Serializable {
 		this.bhagyalakshmibondnumber = bhagyalakshmibondnumber;
 		this.disabilitychild = disabilitychild;
 		this.specialcategory = specialcategory;
+		this.sts=sts;
+		this.rte=rte;
 	}
 
 	@Id
@@ -652,6 +656,22 @@ public class Student implements java.io.Serializable {
 
 	public void setSpecialcategory(String specialcategory) {
 		this.specialcategory = specialcategory;
+	}
+
+	public Integer getSts() {
+		return sts;
+	}
+
+	public void setSts(Integer sts) {
+		this.sts = sts;
+	}
+
+	public Integer getRte() {
+		return rte;
+	}
+
+	public void setRte(Integer rte) {
+		this.rte = rte;
 	}
 	
 	
