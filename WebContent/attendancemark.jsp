@@ -440,10 +440,21 @@
 	}
 	
 	function searchStudentAttendanceDetailsMark() {
+		
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetailsMark";
-		form1.method = "POST";
-		form1.submit();
+		
+		if(form1.checkValidity()) {
+			form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetailsMark";
+			form1.method = "POST";
+			form1.submit();
+			
+		}else{
+				alert('Enter All Mandatory Fields');
+				
+			}
+			
+		
+		
 
 	}
 	
@@ -569,6 +580,21 @@
 		                   		 $( "div.attendanceupdate" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
 		                   	 });
 		                   	 }
+		            
+		            
+		            $(function() {
+		        		$("#dateofattendance").datepicker({
+		        			changeYear : true,
+		        			changeMonth : true,
+		        			dateFormat: 'yy-mm-dd',
+		        			yearRange: "-50:+10"
+		        		});
+		        		$("#dateofattendance").change(
+		        				function() {
+		        					$("#dateofattendance").datepicker("option", "showAnim",
+		        							$(this).val());
+		        				});
+		        	});
         </script>
 
 </head>
@@ -607,11 +633,21 @@ for(Cookie cookie : cookies){
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
-							<td class="alignRightFields">Date &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="dateofattendance" type="text" class="textField" style="width: 195px;"
-									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" readonly="readonly" data-validate="validate(required)"/>
-							</label></td>
+						
+							<td class="alignRightFields">Center Code*&nbsp;</td>
+
+							<td width="12%" align="left"><label> 
+							<select name="centercode" id="centercode"
+									style="width: 200px;text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;" required>
+										<option selected>${centercodesearch}</option>
+										<c:forEach items="${branchList}" var="branchlist">
+											<option value="${branchlist.centercode}" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
+												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+							</td>
 							
 						</tr>
 
@@ -647,6 +683,7 @@ for(Cookie cookie : cookies){
 									style="width: 200px;" required>
 										<option selected></option>
 								</select>
+								</td>
 						</tr>
 
 						<tr>

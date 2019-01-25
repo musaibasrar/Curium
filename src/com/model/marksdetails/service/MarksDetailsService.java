@@ -27,11 +27,14 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
+import com.model.attendance.dao.AttendanceDAO;
+import com.model.attendance.dto.Studentdailyattendance;
 import com.model.branch.dao.BranchDAO;
 import com.model.branch.dto.Branch;
 import com.model.branch.service.BranchService;
 import com.model.examdetails.dao.ExamDetailsDAO;
 import com.model.examdetails.dto.Exams;
+import com.model.examlevels.dao.ExamLevelDetailsDAO;
 import com.model.examlevels.dto.Examleveldetails;
 import com.model.examlevels.dto.Subexamlevel;
 import com.model.examlevels.service.ExamLevelService;
@@ -68,9 +71,8 @@ public class MarksDetailsService {
 
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String[] studentsMarks = request.getParameterValues("studentMarks");
-		String[] examList = request.getParameter("hiddensearchedexamlevel").split(":");
-		String exam = examList[0];
-		String subject = request.getParameter("subject");
+		String exam = request.getParameter("hiddensearchedexamlevel");
+		String subject = request.getParameter("hiddensearchedsubject");
 		logger.info("the subject id is " + subject + ", and exam level is " + exam);
 		int sizeOfArray = 0;
 		Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
@@ -107,7 +109,13 @@ public class MarksDetailsService {
 			Set mapSet = mapOfMarks.entrySet();
 			Iterator mapIterator = mapSet.iterator();
 
-			int examid = Integer.parseInt(exam);
+			
+			
+			List<Examleveldetails> examLevelDetails = new ExamLevelDetailsDAO().getExamLevelDetails(exam);
+			
+			int examid = examLevelDetails.get(0).getIdexamlevel();
+			
+			
 			Subject subjectDetails = new SubjectDetailsService(request, response).getSubjectDetails(subject);
 			int subid = subjectDetails.getSubid();
 			List<Marks> marksList = new ArrayList<Marks>();
@@ -193,6 +201,10 @@ public class MarksDetailsService {
 		            List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
 		            Map<Parents,String> mapStudentReports = new LinkedHashMap<Parents,String>();
 		            
+		            List<Student> searchStudentList = new studentDetailsDAO().getListStudents("From Student as student where student.examlevel='"+DataUtil.emptyString(request.getParameter("examlevel"))+"'"
+                            + "and student.centercode="+DataUtil.emptyString(request.getParameter("centercode"))+" Order by student.admissionnumber ASC");
+		            
+		            
 		            for (Parents parents : parentsList) {
 		                Branch centerName = new BranchDAO().getBranch(parents.getStudent().getCentercode());
 		                mapStudentReports.put(parents, centerName.getCentername());
@@ -200,13 +212,14 @@ public class MarksDetailsService {
 		            httpSession.setAttribute("mapstudentreports", mapStudentReports);
 		            httpSession.setAttribute("totalstudentevaluation", parentsList.size());
 		            new ExamLevelService(request, response).examLevels();
-		            new LanguageService(request, response).viewLanguage();
+		            //new LanguageService(request, response).viewLanguage();
 		            new BranchService(request, response).viewBranches();
 
 		            List<Subexamlevel>  subExamList =  new ExamLevelService(request, response).getSubExamLevelSubject(examLevel[1]);
 		            request.setAttribute("subjectlist", subExamList);
 		            httpSession.setAttribute("subjectlistevaluation", subExamList);
 		            request.setAttribute("searchedexamlevel", DataUtil.emptyString(request.getParameter("examlevel")));
+		            request.setAttribute("subjectentermarks", DataUtil.emptyString(request.getParameter("subject")));
 		}
 	}
 
@@ -506,11 +519,66 @@ public class MarksDetailsService {
 
     public void enterMarks() {
         new ExamLevelService(request, response).examLevels();
-        new LanguageService(request, response).viewLanguage();
+        //new LanguageService(request, response).viewLanguage();
         new BranchService(request, response).viewBranches();
-        httpSession.setAttribute("mapstudentreports", "");
+        httpSession.setAttribute("studentslist", "");
         httpSession.setAttribute("subjectlistevaluation", "");
         httpSession.setAttribute("totalstudentevaluation", "");
     }
+
+	public void SearchMarksEntry() {
+
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		    
+		    String examLevel = DataUtil.emptyString(request.getParameter("examlevel"));
+		       String searchQuery = "From Parents as parent where ";
+		       String subQuery =null;
+		       
+		            if(!request.getParameter("centercode").equalsIgnoreCase("")) {
+		                String[] centerCode = request.getParameter("centercode").split(":");
+		                subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
+		                httpSession.setAttribute("printcentername", "Center Name: "+centerCode[1]);
+		                httpSession.setAttribute("evaluationsheetcentersearch", centerCode[0]+":"+centerCode[1]);
+		            }else {
+		                httpSession.setAttribute("evaluationsheetcentersearch", "");
+		            }
+		            
+		            if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
+		                if(subQuery!=null) {
+		                    subQuery = subQuery+" AND parent.Student.examlevel = '"+examLevel+"'";
+		                }else {
+		                    subQuery = "parent.Student.examlevel = '"+examLevel+"'";
+		                }
+		                httpSession.setAttribute("printexamlevel", "Examination Level: "+examLevel);
+		                httpSession.setAttribute("evaluationsheetexamlevelsearch", request.getParameter("examlevel").toString());
+		            }else {
+		                httpSession.setAttribute("evaluationsheetexamlevelsearch", "");
+		            }
+		            
+		            
+		            List<Studentdailyattendance> studentDailyAttendanceOne = new ArrayList<Studentdailyattendance>();
+		           
+	                            studentDailyAttendanceOne = new AttendanceDAO().getStudentAttendance(""
+	                                    + "from Studentdailyattendance where  examlevelcode='"+examLevel+"'"
+	                                    		+ " and subject='"+DataUtil.emptyString(request.getParameter("subjectnameAjax"))+"' and attendancestatus='Present'");
+		            
+	                            searchQuery = searchQuery+subQuery;
+	                            
+	                            List<String> studentExternalId = new ArrayList<String>();
+	                            for (Studentdailyattendance studentdailyattendance : studentDailyAttendanceOne) {
+	                            	studentExternalId.add(studentdailyattendance.getAttendeeid());
+								}
+	                            
+	                            List<Parents> parentsList = new studentDetailsDAO().getStudentsListAttendance(searchQuery, studentExternalId);
+		            
+		            httpSession.setAttribute("studentslist", parentsList);
+		            
+		            new ExamLevelService(request, response).examLevels();
+		            new BranchService(request, response).viewBranches();
+		            
+		            request.setAttribute("searchedexamlevel", DataUtil.emptyString(request.getParameter("examlevel")));
+		            request.setAttribute("searchedsubject", DataUtil.emptyString(request.getParameter("subjectnameAjax")));
+		}
+	}
 
 }

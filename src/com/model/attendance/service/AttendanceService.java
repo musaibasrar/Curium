@@ -700,12 +700,13 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			
                     
                         boolean attendanceStatus = new AttendanceDAO().checkAttendace(DataUtil.emptyString(request.getParameter("subjectnameAjax")),DataUtil.emptyString(request.getParameter("examlevel")),
-                                httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+                                httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),
+                                DataUtil.emptyString(request.getParameter("centercode")));
                       
                     
                     if(!attendanceStatus) {
                         List<Student> searchStudentList = new studentDetailsDAO().getListStudents("From Student as student where student.examlevel='"+DataUtil.emptyString(request.getParameter("examlevel"))+"'"
-                                + "and student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" Order by student.admissionnumber ASC");
+                                + "and student.centercode="+DataUtil.emptyString(request.getParameter("centercode"))+" Order by student.admissionnumber ASC");
                     request.setAttribute("StudentListAttendance", searchStudentList);
                     request.setAttribute("subjectlisttodisplay", DataUtil.emptyString(request.getParameter("subjectnameAjax")));
                     request.setAttribute("searchexamlevel", DataUtil.emptyString(request.getParameter("examlevel")));
@@ -714,9 +715,13 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
                         request.setAttribute("attendanceupdate", "true");
                         request.setAttribute("attendancesave", "");
                     }
-	                new ExamLevelService(request, response).examLevels();
+	               
 	                result = "true";
 		}
+		
+		 new ExamLevelService(request, response).examLevels();
+	     new BranchService(request, response).viewBranches();
+	     httpSession.setAttribute("centercodesearch", DataUtil.emptyString(request.getParameter("centercode")));
 		
 		return result;
 	}
@@ -727,29 +732,22 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			String[] attendanceIds = request.getParameterValues("externalIDs");
 			String[] studentAttendanceStatus = request.getParameterValues("studentAttendanceStatus");
 			
-			List<String> attendanceIdsList = new ArrayList<String>();
-			List<String> studentAttendanceStatusList = new ArrayList<String>();
+			List<Studentdailyattendance> studentDailyAttendanceList = new ArrayList<Studentdailyattendance>();
 			for (String attid : attendanceIds) {
 				String[] attidString = attid.split(",");
 				if(attidString[0]!=null && attidString[1]!=null){
-					attendanceIdsList.add(attidString[0]);
-					studentAttendanceStatusList.add(studentAttendanceStatus[Integer.parseInt(attidString[1])]);	
+					Studentdailyattendance studentDailyAttendance = new Studentdailyattendance();
+					studentDailyAttendance.setAttendeeid(attidString[0]);
+					studentDailyAttendance.setAttendancestatus(studentAttendanceStatus[Integer.parseInt(attidString[1])]);
+					studentDailyAttendance.setIntime("00:00");
+					studentDailyAttendance.setOuttime("00:00");
+					studentDailyAttendance.setDate(new Date());
+					studentDailyAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+					studentDailyAttendance.setBranchid(Integer.parseInt(request.getParameter("centercode")));
+					studentDailyAttendance.setSubject(DataUtil.emptyString(request.getParameter("subjectlisttodisplay")));
+					studentDailyAttendance.setExamlevelcode(DataUtil.emptyString(request.getParameter("searchexamlevel")));
+					studentDailyAttendanceList.add(studentDailyAttendance);
 				}
-				
-			}
-			List<Studentdailyattendance> studentDailyAttendanceList = new ArrayList<Studentdailyattendance>();
-			for (int i=0; i<attendanceIdsList.size();i++) {
-				Studentdailyattendance studentDailyAttendance = new Studentdailyattendance();
-				studentDailyAttendance.setAttendeeid(attendanceIdsList.get(i));
-				studentDailyAttendance.setAttendancestatus(studentAttendanceStatusList.get(i));
-				studentDailyAttendance.setIntime("00:00");
-				studentDailyAttendance.setOuttime("00:00");
-				studentDailyAttendance.setDate(new Date());
-				studentDailyAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-				studentDailyAttendance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				studentDailyAttendance.setSubject(DataUtil.emptyString(request.getParameter("subjectlisttodisplay")));
-				studentDailyAttendance.setExamlevelcode(DataUtil.emptyString(request.getParameter("searchexamlevel")));
-				studentDailyAttendanceList.add(studentDailyAttendance);
 			}
 			result = new AttendanceDAO().checkStudentAttendance(studentDailyAttendanceList);
 			request.setAttribute("attendancesave", result);
@@ -1353,6 +1351,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 
     public void markAttendance() {
         new ExamLevelService(request, response).examLevels();
+        new BranchService(request, response).viewBranches();
         request.setAttribute("attendanceupdate", "");
         request.setAttribute("attendancesave", "");
     }

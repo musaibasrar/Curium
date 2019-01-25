@@ -92,7 +92,7 @@ for(Cookie cookie : cookies){
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>																							
-          <td height="250" align="center" style="font-color:red" valign="middle"><p class="style1">Entry Failed-Duplicate Record(s) Found. Please edit the record(s).</p>
+          <td height="250" align="center" style="font-color:red" valign="middle"><p class="style1">Entry Failed-Duplicate Record(s) Found.<br> Please edit the record(s).</p>
         <p class="style1">
           
             

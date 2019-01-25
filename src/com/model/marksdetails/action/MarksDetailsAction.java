@@ -106,7 +106,7 @@ public class MarksDetailsAction {
 	}
 	
 	private String search() {
-		new MarksDetailsService(request, response).Search();
+		new MarksDetailsService(request, response).SearchMarksEntry();
         return "marksentry.jsp";
 	}
 	

@@ -13,6 +13,7 @@ import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.attendance.dao.AttendanceDAO;
+import com.model.attendance.dto.Studentdailyattendance;
 import com.model.parents.dto.Parents;
 import com.model.std.dto.Classhierarchy;
 import com.model.student.dto.Student;
@@ -689,5 +690,23 @@ public class studentDetailsDAO {
                     return results;
             }
     }
+
+		public List<Parents> getStudentsListAttendance(String searchQuery, List<String> studentExternalId) {
+            List<Parents> studentDetails = new ArrayList<Parents>();
+                  transaction = session.beginTransaction();
+                  try {
+                  //String hql = "UPDATE Student set passedout = 1 WHERE sid IN (:ids)";
+                  String hql = searchQuery+"  AND parent.Student.studentexternalid IN (:ids) Order By parent.Student.admissionnumber ASC";
+                  Query query = session.createQuery(hql);
+                  query.setParameterList("ids", studentExternalId);
+                  studentDetails = query.getResultList();
+                  transaction.commit();
+          } catch (Exception e) {transaction.rollback();
+                  e.printStackTrace();
+          } finally {
+                  return studentDetails;
+          }
+
+  }
 	
 }

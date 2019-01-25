@@ -353,7 +353,7 @@ public class AttendanceDAO {
 		
 			for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
 				Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
-				Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
+				Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and academicyear = '"+studentDailyAttendance.getAcademicyear()+"' and subject = '"+studentDailyAttendance.getSubject()+"'");
 				studentDailyAttendanceDetails = (Studentdailyattendance) query.uniqueResult();
 				if(studentDailyAttendanceDetails == null){
 					session.save(studentDailyAttendance);

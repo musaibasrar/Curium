@@ -212,11 +212,8 @@ public class AttendanceAction {
 	}
 
 	private String markStudentsAttendance() {
-		
-		if(new AttendanceService(request, response).markStudentsAttendance()){
+		new AttendanceService(request, response).markStudentsAttendance();
 			return "attendancemark.jsp";
-		}
-		return errorPage;
 	}
 
 	private String searchStudentAttendanceDetailsMark() {

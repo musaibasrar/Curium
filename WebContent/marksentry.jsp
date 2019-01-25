@@ -416,7 +416,12 @@
 			}
 		});
 
-		$("#go").button()
+		$('#form1').keydown(function(event) {
+			var key = event.which;
+			if (key == 17) {
+				 $('#addMarks').focus();
+			}
+			});
 
 	});
 	
@@ -426,14 +431,7 @@
 
 <script type="text/javascript">
         
-    function checkMandatory(){
-    	
-    	if(document.getElementById("subject").value == ""){
-    		alert('Please enter the subject');
-    	}
-    	
-    }
-    
+        
 function checkMandatoryandSubmit(){
     	
 			var checkBox = document.getElementsByName("studentIDs");
@@ -444,9 +442,7 @@ function checkMandatoryandSubmit(){
 				}
 			}
 			
-    	if(document.getElementById("subject").value == ""){
-    		alert('Please enter the subject');
-    	}else if(resultCheckBox){
+    	if(resultCheckBox){
     		alert('Select the student(s) to update the marks');
     	}else{
     		var form1 = document.getElementById("form1");
@@ -458,7 +454,45 @@ function checkMandatoryandSubmit(){
     	
     }
     
-   
+    
+			var xmlHttp;
+			var count;
+			function getSubjects() {
+			
+				var selected=document.getElementById('examlevel').value;
+			
+				 if (typeof XMLHttpRequest != "undefined") {
+					 xmlHttp = new XMLHttpRequest();
+			        
+			     } else if (window.ActiveXObject) {
+			    	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			         
+			     }
+				xmlHttp.onreadystatechange = stateChanged;
+				xmlHttp.open("GET", "AjaxController?process=AttendanceProcess&action=getSubjects&urlexamlevel="+selected,true);
+				xmlHttp.send(null);
+			}
+			
+			function stateChanged() {
+			
+				if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+					document.getElementById("subjectlist").innerHTML = xmlHttp.responseText;
+				}
+			}
+			function GetXmlHttpObject() {
+				var xmlHttp = null;
+				try {
+					xmlHttp = new XMLHttpRequest();
+				} catch (e) {
+					try {
+						xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+					} catch (e) {
+						xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+				}
+				return xmlHttp;
+			}
+			
         </script>
 
 
@@ -500,7 +534,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
 							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
-									style="width: 240px;" required>
+									style="width: 200px;" required>
 										<option selected></option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}:${branchlist.centername}" >
@@ -519,13 +553,13 @@ for(Cookie cookie : cookies){
 
 
 						<tr>
-						<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
+						<td class="alignRightFields">Examination Level &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="examlevel" id="examlevel"
-									style="width: 240px;" required>
+									style="width: 200px;" onchange="getSubjects()" required>
 										<option selected></option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
-											<option value="${examleveldetails.idexamlevel}:${examleveldetails.levelcode}" >
+											<option value="${examleveldetails.levelcode}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
 											</option>
 										</c:forEach>
@@ -538,7 +572,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
-						
+						<%-- 
 						<tr>
 							<td class="alignRightFields">Language &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
@@ -557,9 +591,23 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 
+						</tr> --%>
+						
+						
+						<tr>
+						
+						<td class="alignRightFields">Subject &nbsp;&nbsp;&nbsp;</td>
+							<td width="16%" height="30" id="subjectlist"><select
+									style="width: 200px;" required>
+										<option selected></option>
+								</select></td>
+						
+						</tr>			
+						
+						<tr>
+							<td><br /></td>
+
 						</tr>
-						
-						
 						
 						<tr>
 
@@ -579,24 +627,12 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						
-						<tr>
-						<td width="30%" class="alignRight">Subject &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft"><label>
-									<select name="subject" id="subject"
-									style="width: 240px" ">
-										<option selected></option>
-										<c:forEach items="${subjectlist}" var="listSubject">
-											<option value="${listSubject.subjectname}">
-												<c:out value="${listSubject.subjectname}" />
-											</option>
-										</c:forEach>
-								</select></label></td>
-						
-						</tr>						
+									
 						
 						<tr>
 							<td>
 							<input type="hidden" id="hiddensearchedexamlevel" name="hiddensearchedexamlevel" value="${searchedexamlevel}">
+							<input type="hidden" id="hiddensearchedsubject" name="hiddensearchedsubject" value="${searchedsubject}">
 							<br /></td>
 
 						</tr>
@@ -620,7 +656,7 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Exam Level</th>
@@ -629,23 +665,23 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-					<c:forEach items="${mapstudentreports}" var="Parents" varStatus="status">
+					<c:forEach items="${studentslist}" var="Parents" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" ><input type="checkbox" checked
-								id="<c:out value="${Parents.key.student.sid}"/>" class="chcktbl"
+							<td class="dataText" style="display: none;"><input type="checkbox" checked 
+								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
-								value="<c:out value="${Parents.key.student.sid}:${status.index}"/>" /></td>
+								value="<c:out value="${Parents.student.sid}:${status.index}"/>" /></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
-										value="${Parents.key.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.key.student.name}" /></td>
-							<td class="dataText"><c:out value="${Parents.key.student.examlevel}" /></td>
+										value="${Parents.student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
+							<td class="dataText"><c:out value="${Parents.student.examlevel}" /></td>
 							<td class="dataText"><input type="text"
 								id="studentMarks" 
 								name="studentMarks"
-								onkeyup="checkMandatory();" value="0"
+								value="0"
 								onkeypress="return event.charCode >= 00 && event.charCode <=57"
 								maxlength="3"
 								 /></td>
@@ -657,7 +693,7 @@ for(Cookie cookie : cookies){
 				<tfoot>
 					<tr>
 						<td class="footerTD" colspan="2"><input value="Add Marks"
-							type="button" id="addMarks" onclick="checkMandatoryandSubmit();" onmouseover="checkMandatory();"/>
+							type="button" id="addMarks" onclick="checkMandatoryandSubmit();" />
 							<!-- <input value="Delete Stamp Fees"
 							type="submit" id="deleteStamp" /> --></td>
 							
