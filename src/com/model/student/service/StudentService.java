@@ -1548,6 +1548,8 @@ public class StudentService {
                  subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
                  httpSession.setAttribute("printcentername", "Center Code/Name: "+centerCode[0]+"/"+centerCode[1]);
                  httpSession.setAttribute("studentviewallcenter", centerCode[0]+":"+centerCode[1]);
+             }else {
+            	 httpSession.setAttribute("studentviewallcenter", "");
              }
              
              if(!request.getParameter("districtcode").equalsIgnoreCase("")) {

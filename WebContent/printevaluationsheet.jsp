@@ -62,7 +62,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 28px;
+	font-size: 24px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -71,7 +71,7 @@
 	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 22px;
+	font-size: 24px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -98,7 +98,7 @@
 
 .reportheaders{
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 20px;
 
 }
 
@@ -197,26 +197,44 @@
 
 <body style="text-align: center" class="bodymargin">
 	<form method="post" class="bodymargin">
-		<c:forEach items="${subjectlistevaluation}" var="sublist">
-		<br>
-		<table width="100%" style="border-collapse: collapse;">
+	
+			<!-- START -->
+			
+			<c:forEach items="${subjectlistevaluation}" var="sublist">
+	 <table border="0" width="100%" style="page-break-after: always;"> 
+	 <thead>
+    <tr>
+     <th style="width:100%">
+     <table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="images/bielogo.png" width="100" height="150"/>
+				<img src="images/bielogo.png" width="90" height="130"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				BOARD OF ISLAMIC EDUCATION <br>
-				KARNATAKA<br><br>
-				<label class="addressLine">EVALUATION SHEET<br>
-				 </label>
+				BOARD OF ISLAMIC EDUCATION KARNATAKA
+				<br><br>
+				<label class="addressLine"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EVALUATION SHEET &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 </label><br><br>
+				 <c:if test="${(printcentername != '')}">
+						<c:out value="${printcentercode}" />
+					</c:if>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<%-- <c:if test="${(printexamlevel != '')}">
+						<label class="reportheaders"><c:out value="${printexamlevel}" /></label>
+					</c:if> --%>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					Total: ${totalstudentevaluation}
 				</td>
 			</tr>
 			<tr>
 			<td></td></tr>
 			<tr></tr>
 	</table>
-
-<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+	
+	<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
 
                     <td colspan="4" ></td>
@@ -252,28 +270,30 @@
 						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printlanguage}" /></label></td>
 					</c:if>
 					<td></td>
-						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders">Subject: <c:out value="${sublist.subjectname}" /></label></td>
+					<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders">Subject: <c:out value="${sublist.subjectname}" /></label></td>
 			</tr>
 			<tr>
 			<td></td>
 			</tr>
+			<tr>
+						
+			</tr>
 		</table>
-		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
-                <tr>
-
-                    <td colspan="4" ></td>
-
-                </tr>
-            </TABLE>
-            <br>
-            
-            <table class="datatable" style="page-break-after:auto;">
+     </th>
+   </tr>
+  </thead> 
+  
+  <tbody>
+  		<tr>
+  		<td>
+		 <div style="page-break-inside: avoid;"> 
+		  <table class="datatable" style="page-break-after:auto;">
             <thead>
  				 <tr>
   						<th  class="datath">Admission Number</th>
 						<th  class="datath">Student Name</th>
 						<th  class="datath">Marks</th>
-						<th  class="datath">Marks In Words</th>
+						<th  class="datath">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks In Words&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
  				 </tr>
  			 </thead>
  		 
@@ -289,12 +309,40 @@
 				</tr>
 			</c:forEach>
 			</tbody>
-			<a style="font-weight: bold;color: black;font-size: 14px;">&nbsp;&nbsp;Total Number of Students: ${totalstudentevaluation}</a>
 				</table>
+				</div>
 			<br><br>
 			
-			</c:forEach>
-			
+  		</td>
+  		
+  		</tr>
+ </tbody> 
+  
+  
+  <tfoot>
+  	
+  	<tr>
+  	<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name: </td>
+  	</tr>
+  	<tr>
+  	<td><br></td>
+  	</tr>
+  	<tr>
+  	<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact No.: </td>
+  	</tr>
+  	<tr>
+  	<td><br><br></td>
+  	</tr>
+		  <tr>
+				<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signature of Evaluator &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				Signature of Chief Evaluator</td>	
+			</tr>
+  </tfoot>
+	 </table>
+	 </c:forEach>		
 	</form>
 </body>
 </html>

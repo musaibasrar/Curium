@@ -145,14 +145,15 @@ public class MarksDetailsDAO {
 			}
 		}
 
-        public Marks readMarks(Integer sid, Integer subjectId, Integer examId, String academicYear) {
+        public List<Marks> readMarks(List<Integer> studentIds, Integer subjectId, Integer examId, String academicYear) {
 
-                Marks marks = new Marks();
+                List<Marks> marks = new ArrayList<Marks>();
                 try {
 
                     transaction = session.beginTransaction();
-                    Query query = session.createQuery("From Marks where sid = '"+sid+"' and subid = "+subjectId+" and examid = "+examId+" and academicyear = '"+academicYear+"' ");
-                    marks = (Marks) query.uniqueResult();
+                    Query query = session.createQuery("From Marks where subid = "+subjectId+" and examid = "+examId+" and academicyear = '"+academicYear+"' and sid IN (:sids)");
+                    query.setParameterList("sids", studentIds);
+                    marks = query.getResultList();
                     transaction.commit();
             } catch (HibernateException hibernateException) {transaction.rollback();
                     hibernateException.printStackTrace();
@@ -184,6 +185,48 @@ public class MarksDetailsDAO {
                     //session.close();
                     return result;
             }
+    }
+
+		public String addUpdateMarks(List<Marks> marksList) {
+			
+			boolean result = false;	
+			String output = "success";
+			
+			try{
+				transaction = session.beginTransaction();
+				for (Marks marks : marksList) {
+					session.saveOrUpdate(marks);
+				}
+				transaction.commit();
+			}  catch(ConstraintViolationException  e){                                                       
+			    transaction.rollback();
+			    output = "Duplicate";
+	                }  catch (HibernateException hibernateException) {
+	                    transaction.rollback();
+	                    hibernateException.printStackTrace();
+	                   
+	            }
+			finally {
+				//session.close();
+				return output;
+			}
+		}
+
+		public Marks readMarksPerStudent(Integer sid, Integer subjectId, Integer examId, String academicYear) {
+
+            Marks marks = new Marks();
+            try {
+
+                transaction = session.beginTransaction();
+                Query query = session.createQuery("From Marks where subid = "+subjectId+" and examid = "+examId+" and academicyear = '"+academicYear+"' and sid = "+sid+" ");
+                marks = (Marks) query.uniqueResult();
+                transaction.commit();
+        } catch (HibernateException hibernateException) {transaction.rollback();
+                hibernateException.printStackTrace();
+        } finally {
+                 //session.close();
+                return marks;
+        }
     }
 	
 	

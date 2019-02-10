@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -168,6 +169,7 @@ public class MarksDetailsService {
 		                String[] centerCode = request.getParameter("centercode").split(":");
 		                subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
 		                httpSession.setAttribute("printcentername", "Center Name: "+centerCode[1]);
+		                httpSession.setAttribute("printcentercode", "Center Code: "+centerCode[0]);
 		                httpSession.setAttribute("evaluationsheetcentersearch", centerCode[0]+":"+centerCode[1]);
 		            }else {
 		                httpSession.setAttribute("evaluationsheetcentersearch", "");
@@ -175,7 +177,7 @@ public class MarksDetailsService {
 		            
 		            if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
 		                if(subQuery!=null) {
-		                    subQuery = subQuery+"AND parent.Student.examlevel = '"+examLevel[1]+"'";
+		                    subQuery = subQuery+" AND parent.Student.examlevel = '"+examLevel[1]+"'";
 		                }else {
 		                    subQuery = "parent.Student.examlevel = '"+examLevel[1]+"'";
 		                }
@@ -187,7 +189,7 @@ public class MarksDetailsService {
 		            
 		            if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
 		                if(subQuery!=null) {
-		                    subQuery = subQuery+"AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+		                    subQuery = subQuery+" AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
 		                }else {
 		                    subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
 		                }
@@ -201,10 +203,6 @@ public class MarksDetailsService {
 		            List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
 		            Map<Parents,String> mapStudentReports = new LinkedHashMap<Parents,String>();
 		            
-		            List<Student> searchStudentList = new studentDetailsDAO().getListStudents("From Student as student where student.examlevel='"+DataUtil.emptyString(request.getParameter("examlevel"))+"'"
-                            + "and student.centercode="+DataUtil.emptyString(request.getParameter("centercode"))+" Order by student.admissionnumber ASC");
-		            
-		            
 		            for (Parents parents : parentsList) {
 		                Branch centerName = new BranchDAO().getBranch(parents.getStudent().getCentercode());
 		                mapStudentReports.put(parents, centerName.getCentername());
@@ -212,7 +210,7 @@ public class MarksDetailsService {
 		            httpSession.setAttribute("mapstudentreports", mapStudentReports);
 		            httpSession.setAttribute("totalstudentevaluation", parentsList.size());
 		            new ExamLevelService(request, response).examLevels();
-		            //new LanguageService(request, response).viewLanguage();
+		            new LanguageService(request, response).viewLanguage();
 		            new BranchService(request, response).viewBranches();
 
 		            List<Subexamlevel>  subExamList =  new ExamLevelService(request, response).getSubExamLevelSubject(examLevel[1]);
@@ -223,7 +221,7 @@ public class MarksDetailsService {
 		}
 	}
 
-	public boolean viewMarks() {
+	public String viewMarks() {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 		    
@@ -269,17 +267,42 @@ public class MarksDetailsService {
 		Integer examId = examLevelDetails.get(0).getIdexamlevel();
                 Integer subjectId = subjectDetails.getSubid();
                 
-		List<Parents> newStudentList = new ArrayList<Parents>();
-		List<Marks> newMarksDetails = new ArrayList<Marks>();
 		Map<Parents,Marks> marksStudentMap = new LinkedHashMap<Parents,Marks>();
+		List<Integer> studentIds = new LinkedList<Integer>();
 		
-		for (Parents parents : parentsList) {
-		        
+			for (Parents parents : parentsList) {
+				studentIds.add(parents.getStudent().getSid());
+			}
+		
+			List<Marks> singleMarksDetails = new MarksDetailsDAO().readMarks(studentIds, subjectId,	examId, academicYear);
+			
+			
+			if(singleMarksDetails.size() > 0) {
+
+				for (Marks marks : singleMarksDetails) {
+					
+					for (Parents parents : parentsList) {
+						
+						if(parents.getStudent().getSid().intValue() == marks.getSid().intValue()) {
+							marksStudentMap.put(parents, marks);
+						}
+					}
+					
+				}
+			}else {
+				return "MARKSENTRY";
+			}
+			
+			
+		/*for (Parents parents : parentsList) {
+					studentIds.add(parents.getStudent().getSid());
+			
+			
 			Marks singleMarksDetails = new MarksDetailsDAO().readMarks(parents.getStudent().getSid(),subjectId,examId,academicYear);
 			if(singleMarksDetails!=null) {
 			    marksStudentMap.put(parents, singleMarksDetails);  
 			}
-		}
+		}*/
 
 		request.setAttribute("marksstudentmap", marksStudentMap);
 		request.setAttribute("subjectselected", subjectName);
@@ -291,7 +314,7 @@ public class MarksDetailsService {
     
 		}
 		
-		return true;
+		return "VIEWMARKS";
 	}
 
 	public void getSubjectExams() {
@@ -519,7 +542,7 @@ public class MarksDetailsService {
 
     public void enterMarks() {
         new ExamLevelService(request, response).examLevels();
-        //new LanguageService(request, response).viewLanguage();
+        new LanguageService(request, response).viewLanguage();
         new BranchService(request, response).viewBranches();
         httpSession.setAttribute("studentslist", "");
         httpSession.setAttribute("subjectlistevaluation", "");
@@ -538,6 +561,7 @@ public class MarksDetailsService {
 		                String[] centerCode = request.getParameter("centercode").split(":");
 		                subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
 		                httpSession.setAttribute("printcentername", "Center Name: "+centerCode[1]);
+		                httpSession.setAttribute("printcentercode", "Center Code: "+centerCode[0]);
 		                httpSession.setAttribute("evaluationsheetcentersearch", centerCode[0]+":"+centerCode[1]);
 		            }else {
 		                httpSession.setAttribute("evaluationsheetcentersearch", "");
@@ -576,9 +600,103 @@ public class MarksDetailsService {
 		            new ExamLevelService(request, response).examLevels();
 		            new BranchService(request, response).viewBranches();
 		            
-		            request.setAttribute("searchedexamlevel", DataUtil.emptyString(request.getParameter("examlevel")));
-		            request.setAttribute("searchedsubject", DataUtil.emptyString(request.getParameter("subjectnameAjax")));
+		            httpSession.setAttribute("searchedexamlevel", DataUtil.emptyString(request.getParameter("examlevel")));
+		            httpSession.setAttribute("searchedsubject", DataUtil.emptyString(request.getParameter("subjectnameAjax")));
 		}
 	}
+	
+	
+	public String addMarksNew() {
+
+
+		String result = "false";
+
+		String[] studentIds = request.getParameterValues("studentIDs");
+		String[] studentsMarks = request.getParameterValues("studentMarks");
+		String exam = request.getParameter("examselected");
+		String subject = request.getParameter("subjectselected");
+		logger.info("the subject id is " + subject + ", and exam level is " + exam);
+		int sizeOfArray = 0;
+		Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
+		List<Integer> ids = new ArrayList<Integer>();
+		List<String> studentsMarksList = new ArrayList<String>();
+
+		if (studentIds != null && subject != null) {
+		for (String sid : studentIds) {
+                        String[] stdId = sid.split(":");
+                        studentsMarksList.add(studentsMarks[Integer.parseInt(stdId[1])]);
+                        ids.add(Integer.valueOf(stdId[0]));
+                }
+		
+		if (studentsMarks != null) {
+
+			for (String marksList : studentsMarks) {
+				studentsMarksList.add(marksList);
+
+			}
+		}
+
+			/*for (String id : studentIds) {
+				System.out.println("id" + id);
+				ids.add(Integer.valueOf(id));
+
+			}*/
+
+			sizeOfArray = ids.size();
+
+			for (int i = 0; i < sizeOfArray; i++) {
+				mapOfMarks.put(ids.get(i), studentsMarksList.get(i));
+			}
+
+			Set mapSet = mapOfMarks.entrySet();
+			Iterator mapIterator = mapSet.iterator();
+
+			
+			
+			List<Examleveldetails> examLevelDetails = new ExamLevelDetailsDAO().getExamLevelDetails(exam);
+			
+			int examid = examLevelDetails.get(0).getIdexamlevel();
+			
+			
+			Subject subjectDetails = new SubjectDetailsService(request, response).getSubjectDetails(subject);
+			int subid = subjectDetails.getSubid();
+			List<Marks> marksList = new ArrayList<Marks>();
+
+			while (mapIterator.hasNext()) {
+				Map.Entry mapEntry = (Entry) mapIterator.next();
+				    logger.info("The id is " + mapEntry.getKey() + "and marks is " + mapEntry.getValue());
+
+				String test = (String) mapEntry.getValue();
+				Marks marks = new Marks();
+				marks.setExamid(examid);
+				marks.setSubid(subid);
+				marks.setSid((int) mapEntry.getKey());
+				marks.setMarksobtained(Integer.parseInt(test));
+				String currentYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
+				marks.setAcademicyear(currentYear);
+				marks.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				marksList.add(marks);
+			}
+
+			String output = new MarksDetailsDAO().addMarks(marksList);
+			
+			if(output=="success"){
+				result = "true";
+			}else if (output.contains("Duplicate")){
+				result = "Duplicate";
+				
+				
+			}
+				
+			
+			/*if (new MarksDetailsDAO().addMarks(marksList)) {
+				result = true;
+			}*/
+		}
+
+		return result;
+	
+	}
+	
 
 }

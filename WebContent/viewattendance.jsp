@@ -403,7 +403,7 @@
 		var examLevel = document.getElementById("examlevelcode").value;
 		
 		
-		if(centerCode!="" && examLevel!=""){
+		if(examLevel!=""){
 			var form1 = document.getElementById("form1");
 			form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetails";
 			form1.method = "POST";
@@ -588,7 +588,7 @@ for(Cookie cookie : cookies){
 								</tr>
 						<tr>
 							<td class="alignRightFields" >Center*&nbsp;&nbsp;&nbsp;</td>
-							<td width="12%" align="left"><label> <select name="centercode" id="centercode" required
+							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
 									style="width: 240px;">
 										<option selected>${attendancecenternamesearch}</option>
 										<option></option>

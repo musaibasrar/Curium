@@ -403,29 +403,36 @@ public class AttendanceService {
 		
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
 		    
+			String searchQuery = "from Student where ";
+		    String subQuery =null;
 		    
-                    String[] centerCode = request.getParameter("centercode").split(":");
-                    httpSession.setAttribute("attendancecentername", "Center Code/Center Name: "+centerCode[0]+"/"+centerCode[1]);
-                    httpSession.setAttribute("attendancecentercode", "Center Code: "+centerCode[0]);
-                    httpSession.setAttribute("attendancecenternamesearch", centerCode[0]+":"+centerCode[1]);
+					
+			if(!request.getParameter("centercode").equalsIgnoreCase("")) {
+                String[] centerCode = request.getParameter("centercode").split(":");
+                subQuery = "centercode = '"+centerCode[0]+"'";
+                httpSession.setAttribute("attendancecentername", "Center Code/Center Name: "+centerCode[0]+"/"+centerCode[1]);
+                httpSession.setAttribute("attendancecentercode", "Center Code: "+centerCode[0]);
+                httpSession.setAttribute("attendancecenternamesearch", centerCode[0]+":"+centerCode[1]);
+            }else {
+                httpSession.setAttribute("attendancecenternamesearch", "");
+            }
+			
                     
                     String[] examLevel = request.getParameter("examlevelcode").split(":");
                     httpSession.setAttribute("attendanexamlevelcode", examLevel[0]);
                     httpSession.setAttribute("attendanceexamlevelname", "Exam Code/Exam Name: "+examLevel[0]+"/"+examLevel[1]);
                     httpSession.setAttribute("attendanceexamlevelnamesearch", examLevel[0]+":"+examLevel[1]);
                     
-		  //get the total subjects
-                    List<Subexamlevel> subexamlevel = new ExamLevelDetailsDAO().getSubExamLevelSubject(examLevel[0]);
-                    httpSession.setAttribute("attendancesubexamlevel", subexamlevel);
-                    //		               
+                   	               
                     Map<Student,List<String>> viewAttendanceMap = new LinkedHashMap<Student,List<String>>();
                     List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
 		    
-                    String mainQuery = "from Student where centercode='"+centerCode[0]+"'";
-	                      String subQuery = null;
+                    if(subQuery!=null) {
+                    	 subQuery = " and examlevel = '"+examLevel[0]+"'";
+                    }else {
+                    	subQuery = "examlevel = '"+examLevel[0]+"'";
+                    }
 	                        
-	                      subQuery = " and examlevel = '"+examLevel[0]+"'";
-	                      
 	                        if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
 	                            subQuery = subQuery+" and languageopted='"+request.getParameter("languageopted")+"'";
 	                            httpSession.setAttribute("attendancelanguageopted", "Language: "+request.getParameter("languageopted"));
@@ -437,9 +444,14 @@ public class AttendanceService {
 	                                subQuery = subQuery+" AND admissionnumber like '"+subAcademicYear+"%'";
 	                        }*/
 	                       
-	                     mainQuery = mainQuery+subQuery+" AND passedout = 0 AND droppedout = 0 AND archive = 0 Order By admissionnumber ASC";
+	                        searchQuery = searchQuery+subQuery+" AND passedout = 0 AND droppedout = 0 AND archive = 0 Order By admissionnumber ASC";
 		        
-		        List<Student> studentsListPerCenter = new studentDetailsDAO().getListStudents(mainQuery);
+		        List<Student> studentsListPerCenter = new studentDetailsDAO().getListStudents(searchQuery);
+		        
+		        //get the total subjects
+                List<Subexamlevel> subexamlevel = new ExamLevelDetailsDAO().getSubExamLevelSubject(examLevel[0]);
+                httpSession.setAttribute("attendancesubexamlevel", subexamlevel);
+                //	
 		        
 		        for (Student student : studentsListPerCenter) {
 		            List<String> attendanceStatus = new ArrayList<String>();

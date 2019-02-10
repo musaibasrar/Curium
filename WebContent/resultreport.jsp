@@ -676,7 +676,7 @@ for(Cookie cookie : cookies){
 						</td>
 						<td class="footerTD" colspan="2">
 						  <a style="font-weight: bold;color: white;font-size: 14px;">&nbsp;&nbsp;Total: ${totalstudentresult}&nbsp;&nbsp;Distinction: ${distinctioncount}&nbsp;&nbsp;First Class: ${firstcount}
-						  &nbsp;&nbsp;Second Class: ${secondcount}&nbsp;&nbsp;Pass: ${passcount}&nbsp;&nbsp;Fail: ${failcount}</a>
+						  &nbsp;&nbsp;Second Class: ${secondcount}&nbsp;&nbsp;Pass: ${passcount}&nbsp;&nbsp;Fail: ${failcount}&nbsp;&nbsp;Absent: ${absentcount}</a>
 						</td>
 					</tr>
 				</tfoot>

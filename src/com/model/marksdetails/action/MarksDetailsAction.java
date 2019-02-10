@@ -86,15 +86,22 @@ public class MarksDetailsAction {
 	}
 
 	private String viewMarks() {
-		if (new MarksDetailsService(request, response).viewMarks()) {
-            return "markssearch.jsp";
-        } else {
-            return "error.jsp";
-        }
+		
+		String result = new MarksDetailsService(request, response).viewMarks();
+		
+		if(("MARKSENTRY").equalsIgnoreCase(result)) {
+			return search();
+		}else if(("VIEWMARKS").equalsIgnoreCase(result)) {
+			return "markssearch.jsp";
+		}else {
+			return "error.jsp";
+		}
+		
 	}
 
 	private String addMarks() {
-		String result = new MarksDetailsService(request, response).addMarks();
+		//String result = new MarksDetailsService(request, response).addMarks();
+		String result = new MarksDetailsService(request, response).addMarksNew();
 		if (result=="true") {
             return "markssaved.jsp";
         } else if(result=="Duplicate") {

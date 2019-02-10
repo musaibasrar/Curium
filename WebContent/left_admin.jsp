@@ -348,12 +348,12 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=evaluationSheet" style="font-size: 12px;">Evaluation Sheet</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
-                <!-- <a target="mainFrame" href="attendanceexport.jsp" style="font-size: 12px;">Export Attendance</a><br/> -->
-            </div>
+                <a target="mainFrame" href="attendanceexport.jsp" style="font-size: 12px;">Export Attendance</a><br/>
+            </div> -->
             
             <!-- <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
@@ -374,8 +374,10 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             
             <div>
-                <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=enterMarks" style="font-size: 12px;">Enter Marks</a><br/>
-                <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
+                <!-- <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=enterMarks" style="font-size: 12px;">Enter Marks</a><br/> -->
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
+                <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getSubjectsExams" style="font-size: 12px;">Enter Marks</a><br/>
             	<!-- <a target="mainFrame" href="progressreport.jsp" style="font-size: 12px;">Generate Report</a><br/> -->
             </div> 
             

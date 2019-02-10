@@ -143,7 +143,7 @@ public class ResultService {
             String[] examDet = examLevel.split(":");
             List<Subexamlevel> subList = new ExamLevelDetailsDAO().getSubExamLevelSubject(examDet[0]);
             List<Result> resultList = new ArrayList<Result>();
-            int failCounter=0,passCounter=0,secondCounter=0,firstCounter=0,distinctionCounter=0;
+            int failCounter=0,passCounter=0,secondCounter=0,firstCounter=0,distinctionCounter=0,absentCounter=0;
             
             for (Parents studentDetails : parentsList) {
                 Result result = new Result();
@@ -155,7 +155,7 @@ public class ResultService {
                 
                     for (Subexamlevel subexamlevel : subList) {
                         Subject subjectIds = new SubjectDetailsDAO().getSubjectDetails(subexamlevel.getSubjectname());
-                        Marks marks = new MarksDetailsDAO().readMarks(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), academicYear);
+                        Marks marks = new MarksDetailsDAO().readMarksPerStudent(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), academicYear);
                         subjectList.add(subjectIds.getSubjectname());
                         
                         if(marks!=null) {
@@ -163,7 +163,7 @@ public class ResultService {
                             marksObtained = marksObtained+marks.getMarksobtained();
                         }else {
                             marksList.add(0);
-                            finalResult = "FAIL";
+                            finalResult = "ABSENT";
                         }
                         
                         totalMarks = totalMarks+subjectIds.getMaxmarks();
@@ -189,6 +189,8 @@ public class ResultService {
                         firstCounter++;
                     }else if("DISTINCTION".equalsIgnoreCase(finalResult)) {
                         distinctionCounter++;
+                    }else if("ABSENT".equalsIgnoreCase(finalResult)) {
+                    	absentCounter++;
                     }
                     
                     result.setStudent(studentDetails.getStudent());
@@ -204,6 +206,7 @@ public class ResultService {
             httpSession.setAttribute("secondcount", secondCounter);
             httpSession.setAttribute("firstcount", firstCounter);
             httpSession.setAttribute("distinction", distinctionCounter);
+            httpSession.setAttribute("absentcount", absentCounter);
             httpSession.setAttribute("resultlist", resultList);
             httpSession.setAttribute("resultsubexamlevel", subList);
             String[] centerCodeName = DataUtil.emptyString(request.getParameter("centercode")).split(":");
@@ -323,7 +326,7 @@ public class ResultService {
                  
                      for (Subexamlevel subexamlevel : subList) {
                          Subject subjectIds = new SubjectDetailsDAO().getSubjectDetails(subexamlevel.getSubjectname());
-                         Marks marks = new MarksDetailsDAO().readMarks(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), academicYear);
+                         Marks marks = new MarksDetailsDAO().readMarksPerStudent(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), academicYear);
                          subjectList.add(subjectIds.getSubjectname());
                          
                          if(marks!=null) {
@@ -498,7 +501,7 @@ public class ResultService {
                  
                      for (Subexamlevel subexamlevel : subList) {
                          Subject subjectIds = new SubjectDetailsDAO().getSubjectDetails(subexamlevel.getSubjectname());
-                         Marks marks = new MarksDetailsDAO().readMarks(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), academicYear);
+                         Marks marks = new MarksDetailsDAO().readMarksPerStudent(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), academicYear);
                          subjectList.add(subjectIds.getSubjectname());
                          
                          if(marks!=null) {
@@ -649,7 +652,7 @@ public class ResultService {
                  
                      for (Subexamlevel subexamlevel : subList) {
                          Subject subjectIds = new SubjectDetailsDAO().getSubjectDetails(subexamlevel.getSubjectname());
-                         Marks marks = new MarksDetailsDAO().readMarks(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), academicYear);
+                         Marks marks = new MarksDetailsDAO().readMarksPerStudent(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), academicYear);
                          subjectList.add(subjectIds.getSubjectname());
                          
                          if(marks!=null) {

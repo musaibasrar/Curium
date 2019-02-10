@@ -357,13 +357,13 @@
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
+
+	
 	function searchForMarks() {
 		var form1 = document.getElementById("form1");
-		if(form1.checkValidity()) {
-			form1.action = "Controller?process=MarksDetailsProcess&action=search";
-			form1.method = "POST";
-			form1.submit();
-		  }
+		form1.action = "Controller?process=MarksDetailsProcess&action=viewMarks";
+		form1.method = "POST";
+		form1.submit();
 	}
 
 	$(function() {
@@ -530,11 +530,38 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
+							<tr>
+							<td><br /></td>
 
+						</tr>
+							<tr>
+							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="academicyear" id="academicyear"
+									style="width: 200px;" required>
+										<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2013/14" >2013/14</option>
+											<option value="2014/15" >2014/15</option>
+											<option value="2015/16" >2015/16</option>
+											<option value="2016/17" >2016/17</option>
+											<option value="2017/18" >2017/18</option>
+											<option value="2018/19" >2018/19</option>
+											<option value="2019/20" >2019/20</option>
+											<option value="2020/21" >2020/21</option>
+											<option value="2020/21" >2021/22</option>
+											<option value="2020/21" >2022/23</option>
+								</select>
+							</label> 
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						
 						<tr>
 							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
 							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
-									style="width: 200px;" required>
+									style="width: 200px;">
 										<option selected></option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}:${branchlist.centername}" >
@@ -543,7 +570,6 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label></td>
-							
 						</tr>
 
 						<tr>
@@ -553,10 +579,10 @@ for(Cookie cookie : cookies){
 
 
 						<tr>
-						<td class="alignRightFields">Examination Level &nbsp;&nbsp;&nbsp;</td>
+						<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="examlevel" id="examlevel"
-									style="width: 200px;" onchange="getSubjects()" required>
+										<select name="examlevel" id="examlevel" onchange="getSubjects()"
+									style="width: 200px;">
 										<option selected></option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}" >
@@ -565,19 +591,16 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label> 
-							
 						</tr>
-
 						<tr>
 							<td><br /></td>
-
 						</tr>
-						<%-- 
+						
 						<tr>
 							<td class="alignRightFields">Language &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="languageopted" id="languageopted"
-									style="width: 240px;">
+									style="width: 200px;">
 										<option selected></option>
 										<c:forEach items="${languageslist}" var="languageslist">
 											<option value="${languageslist.language}" >
@@ -590,56 +613,80 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td><br /></td>
-
-						</tr> --%>
-						
-						
-						<tr>
-						
-						<td class="alignRightFields">Subject &nbsp;&nbsp;&nbsp;</td>
-							<td width="16%" height="30" id="subjectlist"><select
-									style="width: 200px;" required>
-										<option selected></option>
-								</select></td>
-						
-						</tr>			
-						
-						<tr>
-							<td><br /></td>
-
 						</tr>
 						
 						<tr>
-
+							<td class="alignRightFields">Subject&nbsp;</td>
+							<td width="70%" id="subjectlist"><select
+									style="width: 200px;">
+										<option selected></option>
+								</select>
+						</tr>					
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<!-- <td class="alignRightFields">Subject &nbsp;</td> -->
+							<td width="12%" align="left"><label> <input
+									name="subjectidselected" type="hidden" class="myclass" id="searchedsubject"
+									size="36" value='<c:out value="${searchedsubject}"></c:out>'>
+							</label></td>
+							
+						</tr>
+						
+						<tr>
+							<!-- <td class="alignRightFields">Exam &nbsp;</td> -->
+							<td width="12%" align="left"><label> <input
+									name="examidselected" type="hidden" class="myclass" id="searchedexamlevel"
+									size="36" value='<c:out value="${searchedexamlevel}"></c:out>'>
+							</label></td>
+							
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr><tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
 							<td width="30%" class="alignRight"></td>
-
 							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
 							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
+								<button id="search" onmouseover="validateList();" onfocus="validateList();">Search</button>
 							</td>
 						</tr>
-
-
 						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
-						
-									
-						
-						<tr>
-							<td>
-							<input type="hidden" id="hiddensearchedexamlevel" name="hiddensearchedexamlevel" value="${searchedexamlevel}">
-							<input type="hidden" id="hiddensearchedsubject" name="hiddensearchedsubject" value="${searchedsubject}">
-							<br /></td>
-
-						</tr>
-						
+					
 					</table>
 					
-					
+					<table>
+					<tr>
+							<td class="alignRightFields">Subject &nbsp;</td>
+							
+							
+							<td ><label> <input style="border: none;
+border-color: transparent;background-color:#E6EEF4;font-size: 18px;font-weight:bold;font-variant: small-caps;color: #EB6000;"
+									readonly="readonly"  name="subjectselected" type="text" class="myclass" id="subjectselected"
+									size="36" value='<c:out value="${searchedsubject}"></c:out>'>
+							</label></td>
+							
+							
+							<td class="alignRightFields">Exam &nbsp;&nbsp;</td>
+							<td ><label> <input style="border: none;
+border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:bold;font-variant: small-caps;color: #EB6000;"
+									name="examselected" type="text" class="myclass" id="examselected"
+									size="36" value='<c:out value="${searchedexamlevel}"></c:out>'>
+							</label></td>
+							
+						</tr>
+					</table>
 
 				</div>
 			</div>
