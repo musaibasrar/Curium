@@ -200,7 +200,7 @@
 	
 			<!-- START -->
 			
-			<c:forEach items="${subjectlistevaluation}" var="sublist">
+			<c:forEach items="${mapstudentsexam}" var="parentsexam" >
 	 <table border="0" width="100%" style="page-break-after: always;"> 
 	 <thead>
     <tr>
@@ -270,7 +270,7 @@
 						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printlanguage}" /></label></td>
 					</c:if>
 					<td></td>
-					<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders">Subject: <c:out value="${sublist.subjectname}" /></label></td>
+					<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders">Subject: <c:out value="${parentsexam.key.subjectname}" /></label></td>
 			</tr>
 			<tr>
 			<td></td>
@@ -298,12 +298,12 @@
  			 </thead>
  		 
 			<tbody>
-				  <c:forEach items="${mapstudentreports}" var="Parents">
+				<c:forEach items="${parentsexam.value}" var="Parents" >
 				<tr>
 					<td class="datatd"><c:out
-							value="${Parents.key.student.admissionnumber}" /></td>
+							value="${Parents.student.admissionnumber}" /></td>
 					<td class="datatd"><c:out
-							value="${Parents.key.student.name}" /></td>
+							value="${Parents.student.name}" /></td>
 					<td class="datatd"></td>
 					<td class="datatd"></td>
 				</tr>

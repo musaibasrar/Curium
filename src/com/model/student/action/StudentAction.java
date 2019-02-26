@@ -236,7 +236,7 @@ public class StudentAction {
     }
     
     private String searchForEvaluationSheet() {
-        new MarksDetailsService(request, response).Search();
+        new MarksDetailsService(request, response).SearchForEvaluationSheet();
         return "evaluationsheet.jsp";
     }
 

@@ -697,6 +697,109 @@ public class MarksDetailsService {
 		return result;
 	
 	}
+
+	public void SearchForEvaluationSheet() {
+
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		    
+		    
+		    String[] examLevel = DataUtil.emptyString(request.getParameter("examlevel")).split(":");
+		       String searchQuery = "From Parents as parent where ";
+		       String subQuery =null;
+		       
+		            if(!request.getParameter("centercode").equalsIgnoreCase("")) {
+		                String[] centerCode = request.getParameter("centercode").split(":");
+		                subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
+		                httpSession.setAttribute("printcentername", "Center Name: "+centerCode[1]);
+		                httpSession.setAttribute("printcentercode", "Center Code: "+centerCode[0]);
+		                httpSession.setAttribute("evaluationsheetcentersearch", centerCode[0]+":"+centerCode[1]);
+		            }else {
+		                httpSession.setAttribute("evaluationsheetcentersearch", "");
+		            }
+		            
+		            if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
+		                if(subQuery!=null) {
+		                    subQuery = subQuery+" AND parent.Student.examlevel = '"+examLevel[1]+"'";
+		                }else {
+		                    subQuery = "parent.Student.examlevel = '"+examLevel[1]+"'";
+		                }
+		                httpSession.setAttribute("printexamlevel", "Examination Level: "+examLevel[1]);
+		                httpSession.setAttribute("evaluationsheetexamlevelsearch", request.getParameter("examlevel").toString());
+		            }else {
+		                httpSession.setAttribute("evaluationsheetexamlevelsearch", "");
+		            }
+		            
+		            if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
+		                if(subQuery!=null) {
+		                    subQuery = subQuery+" AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+		                }else {
+		                    subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+		                }
+		                httpSession.setAttribute("printlanguage", "Language: "+request.getParameter("languageopted").toString());
+		                httpSession.setAttribute("evaluationsheetlanguagesearch",request.getParameter("languageopted").toString());
+		            }else {
+		                httpSession.setAttribute("evaluationsheetlanguagesearch","");
+		            }
+		            
+		            searchQuery = searchQuery+subQuery+ " Order By parent.Student.admissionnumber ASC";
+		            List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
+		            
+		            //New Code
+		            List<Subexamlevel>  subExamList =  new ExamLevelService(request, response).getSubExamLevelSubject(examLevel[1]);
+		            Map<Subexamlevel,List<Parents>> parentsExam = new HashMap<Subexamlevel,List<Parents>>();
+		            
+		            for (Subexamlevel subexamlevel : subExamList) {
+		            	 
+		            	List<Parents> listParents = new ArrayList<Parents>();
+		            	 
+		            
+		            List<String> studentExternalId = new ArrayList<String>();
+		            List<Studentdailyattendance> studentDailyAttendance =  new AttendanceDAO().getStudentAttendance("from Studentdailyattendance where examlevelcode='"+examLevel[1]+"' and attendancestatus='Present' and subject='"+subexamlevel.getSubjectname()+"'");
+                            
+                            for (Studentdailyattendance studentdailyattendance2 : studentDailyAttendance) {
+                            	studentExternalId.add(studentdailyattendance2.getAttendeeid());
+							}
+                            
+                            for (Parents parent : parentsList) {
+                            
+								if(studentExternalId.contains(parent.getStudent().getStudentexternalid())) {
+										System.out.println("************ True external id "+parent.getStudent().getStudentexternalid());
+										listParents.add(parent);
+										
+							}
+								
+                            }
+                            
+                            if(listParents.size()>0) {
+                            	parentsExam.put(subexamlevel, listParents);
+                            }
+                            
+		            }   
+		            httpSession.setAttribute("mapstudentsexam", parentsExam);
+		            //End New Code
+		            
+		           /* 
+		            Map<Parents,String> mapStudentReports = new LinkedHashMap<Parents,String>();
+		            
+		            for (Parents parents : parentsList) {
+		                Branch centerName = new BranchDAO().getBranch(parents.getStudent().getCentercode());
+		                mapStudentReports.put(parents, centerName.getCentername());
+		            }
+		            //Musaib httpSession.setAttribute("mapstudentreports", mapStudentReports);
+		            */		            
+		            
+		            httpSession.setAttribute("totalstudentevaluation", parentsList.size());
+		            new ExamLevelService(request, response).examLevels();
+		            new LanguageService(request, response).viewLanguage();
+		            new BranchService(request, response).viewBranches();
+
+		            //List<Subexamlevel>  subExamList =  new ExamLevelService(request, response).getSubExamLevelSubject(examLevel[1]);
+		            request.setAttribute("subjectlist", subExamList);
+		            httpSession.setAttribute("subjectlistevaluation", subExamList);
+		            request.setAttribute("searchedexamlevel", DataUtil.emptyString(request.getParameter("examlevel")));
+		            request.setAttribute("subjectentermarks", DataUtil.emptyString(request.getParameter("subject")));
+		}
+	}
 	
 
 }

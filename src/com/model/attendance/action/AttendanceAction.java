@@ -90,16 +90,30 @@ public class AttendanceAction {
 		}else if ("downloadStaffAttendance".equalsIgnoreCase(action)) {
 			url = downloadStaffAttendance();
 		}else if ("markAttendance".equalsIgnoreCase(action)) {
-                    url = markAttendance();
-                }else if ("getSubjects".equalsIgnoreCase(action)) {
-                    getSubjects();
-                }else if ("printAttendanceReport".equalsIgnoreCase(action)) {
-                   url = printAttendanceReport();
-                }
+            url = markAttendance();
+        }else if ("getSubjects".equalsIgnoreCase(action)) {
+            getSubjects();
+        }else if ("printAttendanceReport".equalsIgnoreCase(action)) {
+            url = printAttendanceReport();
+        }else if ("attendancereport".equalsIgnoreCase(action)) {
+            url = AttendanceReport();
+        }else if ("searchAttendanceStatus".equalsIgnoreCase(action)) {
+            url = searchAttendanceStatus();
+        }
 		return url;
 	}
 	
 	
+	private String searchAttendanceStatus() {
+		new AttendanceService(request, response).searchAttendanceStatus();
+		return "attendancereport.jsp";
+	}
+
+	private String AttendanceReport() {
+		new AttendanceService(request, response).getDetails();
+		return "attendancereport.jsp";
+	}
+
 	private String viewAttendanceCenter() {
             if(new AttendanceService(request, response).viewAttendanceCenter()){
                     return "viewattendance.jsp";

@@ -428,7 +428,7 @@ public class AttendanceService {
                     List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
 		    
                     if(subQuery!=null) {
-                    	 subQuery = " and examlevel = '"+examLevel[0]+"'";
+                    	 subQuery = subQuery+" and examlevel = '"+examLevel[0]+"'";
                     }else {
                     	subQuery = "examlevel = '"+examLevel[0]+"'";
                     }
@@ -1403,5 +1403,120 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
                  
                 return true;
 }
+
+	public void getDetails() {
+		
+		// get all the subjects
+		List<Subject> subjectList = new SubjectDetailsDAO()
+				.readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		request.setAttribute("listSubject", subjectList);
+
+		new ExamLevelService(request, response).examLevels();
+		new LanguageService(request, response).viewLanguage();
+		new BranchService(request, response).viewBranches();
+		
+	        }
+
+	public boolean searchAttendanceStatus() {
+		boolean result = false;
+		
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		    
+			String searchQuery = "from Student where ";
+		    String subQuery =null;
+		    
+					
+			if(!request.getParameter("centercode").equalsIgnoreCase("")) {
+                String[] centerCode = request.getParameter("centercode").split(":");
+                subQuery = "centercode = '"+centerCode[0]+"'";
+                httpSession.setAttribute("attendancecentername", "Center Code/Center Name: "+centerCode[0]+"/"+centerCode[1]);
+                httpSession.setAttribute("attendancecentercode", "Center Code: "+centerCode[0]);
+                httpSession.setAttribute("attendancecenternamesearch", centerCode[0]+":"+centerCode[1]);
+            }else {
+                httpSession.setAttribute("attendancecenternamesearch", "");
+            }
+			
+                    
+                    String[] examLevel = request.getParameter("examlevel").split(":");
+                    httpSession.setAttribute("attendanexamlevelcode", examLevel[0]);
+                    httpSession.setAttribute("attendanceexamlevelname", "Exam Code/Exam Name: "+examLevel[0]+"/"+examLevel[1]);
+                    httpSession.setAttribute("attendanceexamlevelnamesearch", examLevel[0]+":"+examLevel[1]);
+                    
+                   	               
+                    Map<Student,List<String>> viewAttendanceMap = new LinkedHashMap<Student,List<String>>();
+                    List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
+		    
+                    if(subQuery!=null) {
+                    	 subQuery = subQuery+" and examlevel = '"+examLevel[0]+"'";
+                    }else {
+                    	subQuery = "examlevel = '"+examLevel[0]+"'";
+                    }
+	                        
+	                        if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
+	                            subQuery = subQuery+" and languageopted='"+request.getParameter("languageopted")+"'";
+	                            httpSession.setAttribute("attendancelanguageopted", "Language: "+request.getParameter("languageopted"));
+	                            httpSession.setAttribute("attendancelanguageoptedsearch", request.getParameter("languageopted"));
+	                        }
+	                        
+	                      /*  if(!request.getParameter("selectedacademicyear").equalsIgnoreCase("")) {
+	                            String subAcademicYear = request.getParameter("selectedacademicyear").toString().substring(2, 4);
+	                                subQuery = subQuery+" AND admissionnumber like '"+subAcademicYear+"%'";
+	                        }*/
+	                       
+	                        searchQuery = searchQuery+subQuery+" AND passedout = 0 AND droppedout = 0 AND archive = 0 Order By admissionnumber ASC";
+		        
+		        List<Student> studentsListPerCenter = new studentDetailsDAO().getListStudents(searchQuery);
+		        
+		        //get the total subjects
+                List<Subexamlevel> subexamlevel = new ExamLevelDetailsDAO().getSubExamLevelSubject(examLevel[0]);
+                httpSession.setAttribute("attendancesubexamlevel", subexamlevel);
+                //	
+		        
+		        for (Student student : studentsListPerCenter) {
+		            List<String> attendanceStatus = new ArrayList<String>();
+		            
+		            String attendanceQuery = null;
+		            
+		            if(!request.getParameter("attendancestatus").equalsIgnoreCase("")) {
+		            	attendanceQuery = "from Studentdailyattendance where attendeeid = '"+student.getStudentexternalid()+"'  and examlevelcode='"+examLevel[0]+"' and attendancestatus='"+request.getParameter("attendancestatus")+"' and subject='"+request.getParameter("subjectnameAjax")+"'";
+		            }else {
+		            	attendanceQuery = "from Studentdailyattendance where attendeeid = '"+student.getStudentexternalid()+"'  and examlevelcode='"+examLevel[0]+"' and subject='"+request.getParameter("subjectnameAjax")+"'";
+		            }
+		            				
+                            studentDailyAttendance = new AttendanceDAO().getStudentAttendance(attendanceQuery);
+                            
+                            if(studentDailyAttendance.size() > 0) {
+                            	 boolean subStatus = false;
+                                 for (Studentdailyattendance stAtt : studentDailyAttendance) {
+                                         if(stAtt.getSubject().equalsIgnoreCase(request.getParameter("subjectnameAjax").toString())) {
+                                             attendanceStatus.add(stAtt.getAttendanceid()+ "%" + stAtt.getAttendancestatus());
+                                             subStatus = true;
+                                         }
+                                 }
+                                 if(!subStatus) {
+                                     attendanceStatus.add("");
+                                 }
+                             viewAttendanceMap.put(student, attendanceStatus);
+                            }
+                               
+                        }
+		        
+		            httpSession.setAttribute("viewAttendanceStatusMap", viewAttendanceMap);
+		            httpSession.setAttribute("selectedsubjectname", request.getParameter("subjectnameAjax"));
+		            
+		            httpSession.setAttribute("searchedexamlevel", DataUtil.emptyString(request.getParameter("examlevel")));
+		            httpSession.setAttribute("searchedsubject", DataUtil.emptyString(request.getParameter("subjectnameAjax")));
+		            
+		            new ExamLevelService(request, response).examLevels();
+		            new LanguageService(request, response).viewLanguage();
+		            if("admin".equalsIgnoreCase(httpSession.getAttribute("typeOfUser").toString())) {
+		                 new BranchService(request, response).viewBranches();
+		             }else {
+		                 new BranchService(request, response).viewBranchesCenter();
+		             }
+		            result = true;
+		}
+		return result;
+	}
 
 }
