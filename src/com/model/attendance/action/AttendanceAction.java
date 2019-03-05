@@ -245,10 +245,13 @@ public class AttendanceAction {
 	}
 
 	private String updateStudentAttendanceDetails() {
-		if(new AttendanceService(request, response).updateStudentAttendanceDetails()){
+		
+		new AttendanceService(request, response).updateStudentAttendanceDetails();
+		return "viewattendance.jsp";
+		/*if(new AttendanceService(request, response).updateStudentAttendanceDetails()){
 			return "updateattendancesuccess.jsp";
 		}
-		return errorPage;
+		return errorPage;*/
 	}
 
 	private String searchStudentAttendanceDetailsMonthly() {

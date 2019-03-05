@@ -562,7 +562,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
 							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
 									style="width: 200px;">
-										<option selected></option>
+										<option selected>${evaluationsheetcentersearch}</option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}:${branchlist.centername}" >
 												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
@@ -583,7 +583,7 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="examlevel" id="examlevel" onchange="getSubjects()"
 									style="width: 200px;">
-										<option selected></option>
+										<option selected>${examselected}</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
@@ -601,7 +601,7 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="languageopted" id="languageopted"
 									style="width: 200px;">
-										<option selected></option>
+										<option selected>${languagesearch}</option>
 										<c:forEach items="${languageslist}" var="languageslist">
 											<option value="${languageslist.language}" >
 												<c:out value="${languageslist.language}" />
@@ -619,7 +619,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Subject&nbsp;</td>
 							<td width="70%" id="subjectlist"><select
 									style="width: 200px;">
-										<option selected></option>
+										<option selected>${subjectselected}</option>
 								</select>
 						</tr>					
 						
@@ -627,23 +627,6 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						
-						<tr>
-							<!-- <td class="alignRightFields">Subject &nbsp;</td> -->
-							<td width="12%" align="left"><label> <input
-									name="subjectidselected" type="hidden" class="myclass" id="searchedsubject"
-									size="36" value='<c:out value="${searchedsubject}"></c:out>'>
-							</label></td>
-							
-						</tr>
-						
-						<tr>
-							<!-- <td class="alignRightFields">Exam &nbsp;</td> -->
-							<td width="12%" align="left"><label> <input
-									name="examidselected" type="hidden" class="myclass" id="searchedexamlevel"
-									size="36" value='<c:out value="${searchedexamlevel}"></c:out>'>
-							</label></td>
-							
-						</tr>
 						<tr>
 							<td><br /></td>
 						</tr><tr>

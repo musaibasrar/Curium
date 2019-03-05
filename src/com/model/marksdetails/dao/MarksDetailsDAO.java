@@ -47,6 +47,29 @@ public class MarksDetailsDAO {
 			return output;
 		}
 	}
+	
+	@SuppressWarnings("finally")
+    public String addMarks(Marks marks) {
+		
+		boolean result = false;	
+		String output = "success";
+		
+		try{
+			transaction = session.beginTransaction();
+				session.save(marks);
+			transaction.commit();
+		}  catch(ConstraintViolationException  e){                                                       
+		    transaction.rollback();
+		    output = "Duplicate";
+                }  catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+            }
+		finally {
+			//session.close();
+			return output;
+		}
+	}
 
 	public List<Marks> readListOfMarks(List<Integer> ids) {
 		List<Marks> results = new ArrayList<Marks>();

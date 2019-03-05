@@ -594,7 +594,7 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
         
 }
 
-    public List<Studentdailyattendance> getStudentAttendance(String HQL) {
+    public List<Studentdailyattendance> getStudentsAttendance(String HQL) {
         
         List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
         
@@ -606,6 +606,23 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
                 logger.info(e);
         }finally{
                 //session.close();
+        }
+        return studentDailyAttendance;
+        
+    }
+    
+ public Studentdailyattendance getStudentAttendance(String HQL) {
+        
+        Studentdailyattendance studentDailyAttendance = new Studentdailyattendance();
+        
+        try{
+                transaction = session.beginTransaction();
+                Query query = session.createQuery(HQL);
+                studentDailyAttendance = (Studentdailyattendance) query.uniqueResult();
+                transaction.commit();
+        }catch (HibernateException e) {
+        		transaction.rollback();
+                logger.info(e);
         }
         return studentDailyAttendance;
         

@@ -58,11 +58,13 @@ import com.model.branch.service.BranchService;
 import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
 import com.model.examlevels.dao.ExamLevelDetailsDAO;
+import com.model.examlevels.dto.Examleveldetails;
 import com.model.examlevels.dto.Subexamlevel;
 import com.model.examlevels.service.ExamLevelService;
 import com.model.language.service.LanguageService;
 import com.model.marksdetails.dao.MarksDetailsDAO;
 import com.model.marksdetails.dto.Marks;
+import com.model.marksdetails.service.MarksDetailsService;
 import com.model.parents.dto.Parents;
 import com.model.qualification.service.QualificationService;
 import com.model.student.dao.studentDetailsDAO;
@@ -456,7 +458,7 @@ public class AttendanceService {
 		        for (Student student : studentsListPerCenter) {
 		            List<String> attendanceStatus = new ArrayList<String>();
 		            
-                            studentDailyAttendance = new AttendanceDAO().getStudentAttendance(""
+                            studentDailyAttendance = new AttendanceDAO().getStudentsAttendance(""
                                     + "from Studentdailyattendance where attendeeid = '"+student.getStudentexternalid()+"'  and examlevelcode='"+examLevel[0]+"'");
                             
                             for (Subexamlevel sel : subexamlevel) {
@@ -478,6 +480,9 @@ public class AttendanceService {
 		            
 		            new ExamLevelService(request, response).examLevels();
 		            new LanguageService(request, response).viewLanguage();
+		            httpSession.setAttribute("attendanceStatusFlag", "");
+					httpSession.setAttribute("attendanceUpdateStatus", "");
+					
 		            if("admin".equalsIgnoreCase(httpSession.getAttribute("typeOfUser").toString())) {
 		                 new BranchService(request, response).viewBranches();
 		             }else {
@@ -551,18 +556,64 @@ public class AttendanceService {
 
 	public boolean updateStudentAttendanceDetails() {
 		
+		boolean result = false;
+		
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
 		    
 			String[] studentAttendanceStatus = request.getParameterValues("studentAttendanceStatus");
 			String[] studentAttendanceStatusId = request.getParameterValues("studentAttendanceStatusId");
+			String[] studentAdmissionNumber = request.getParameterValues("studentAdmissionNumber");
+			String[] studentID = request.getParameterValues("studentID");
+			String[] centerCodeSp = request.getParameter("centercode").split(":");
+			String[] examLevelSp = request.getParameter("examlevelcode").split(":");
 			
-			return new AttendanceDAO().updateStudentAttendanceDetails(studentAttendanceStatusId,studentAttendanceStatus);
+			String admissionNumber = checkCurrentAttendanceStatus(studentAttendanceStatusId,studentAttendanceStatus, studentAdmissionNumber, 
+					studentID, centerCodeSp[0], examLevelSp[0]);
+			
+			if(admissionNumber!=null) {
+				httpSession.setAttribute("attendanceStatusFlag", "false");
+				httpSession.setAttribute("attendanceUpdateStatus", admissionNumber+" can't be marked as absent. Please delete the marks and try again.");
+			}else {
+				result = new AttendanceDAO().updateStudentAttendanceDetails(studentAttendanceStatusId,studentAttendanceStatus);
+				
+				if(result) {
+					httpSession.setAttribute("attendanceStatusFlag", "true");
+					httpSession.setAttribute("attendanceUpdateStatus", "Attendance has been updated successfully");
+				}
+			}
 		}
-		return false;
+		return result;
+	}
+	
+      private String checkCurrentAttendanceStatus(String[] studentAttendanceStatusId, String[] studentAttendanceStatus, String[] studentAdmissionNumber,
+			String[] studentID, String centerCode, String examLevelCode) {
+		
+    	  boolean marks = false;
+    	  String admissionNumber = null;
+    	  int i =0;
+    	  for (String statusId : studentAttendanceStatusId) {
+    		  
+    		  		if("Absent".equalsIgnoreCase(studentAttendanceStatus[i])) {
+    		  			
+    		  				List<Subexamlevel> subExamLevel = new ExamLevelDetailsDAO().getSubExamLevelSubject(examLevelCode);
+    		  				List<Examleveldetails> examDetails = new ExamLevelDetailsDAO().getExamLevelDetails(examLevelCode);
+    		  				
+    		  				for (Subexamlevel subExam : subExamLevel) {
+    		  					Subject subject = new SubjectDetailsDAO().getSubjectDetails(subExam.getSubjectname());
+    		  					marks = new MarksDetailsService(request, response).checkMarks(studentID[i], subject.getSubid(), examDetails.get(0).getIdexamlevel(), 
+    		  							httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+    		  					if(marks) {
+    		  						admissionNumber = studentAdmissionNumber[i];
+    		  						return admissionNumber;
+    		  					}
+							}
+    		  		}
+    		  	i++;
+    	  	}
+		return admissionNumber;
 	}
 
-	
-public boolean viewStudentAttendanceDetailsMonthlyGraph() {
+    public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				
 		boolean result = false;
 				
@@ -1483,13 +1534,13 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		            	attendanceQuery = "from Studentdailyattendance where attendeeid = '"+student.getStudentexternalid()+"'  and examlevelcode='"+examLevel[0]+"' and subject='"+request.getParameter("subjectnameAjax")+"'";
 		            }
 		            				
-                            studentDailyAttendance = new AttendanceDAO().getStudentAttendance(attendanceQuery);
+                            studentDailyAttendance = new AttendanceDAO().getStudentsAttendance(attendanceQuery);
                             
                             if(studentDailyAttendance.size() > 0) {
                             	 boolean subStatus = false;
                                  for (Studentdailyattendance stAtt : studentDailyAttendance) {
                                          if(stAtt.getSubject().equalsIgnoreCase(request.getParameter("subjectnameAjax").toString())) {
-                                             attendanceStatus.add(stAtt.getAttendanceid()+ "%" + stAtt.getAttendancestatus());
+                                             attendanceStatus.add(stAtt.getAttendanceid()+ "%" + stAtt.getAttendancestatus()+ "%" + request.getParameter("subjectnameAjax").toString());
                                              subStatus = true;
                                          }
                                  }
@@ -1517,6 +1568,16 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		            result = true;
 		}
 		return result;
+	}
+
+	public Studentdailyattendance getStudentAttendance(Student notFound, String subjectName, String examLevel) {
+		
+		Studentdailyattendance studentAttendance = new Studentdailyattendance();
+		
+			String HQL = "from Studentdailyattendance where attendeeid = '"+notFound.getStudentexternalid()+"' and subject = '"+subjectName+"' and examlevelcode = '"+examLevel+"'";
+			studentAttendance = new AttendanceDAO().getStudentAttendance(HQL);
+		
+		return studentAttendance;
 	}
 
 }

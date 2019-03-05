@@ -544,7 +544,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="examlevelcode" id="examlevelcode" required
+										<select name="examlevelcode" id="examlevelcode"
 									style="width: 240px;">
 										<option selected>${resultserviceexamlevelsearch}</option>
 										<option></option>

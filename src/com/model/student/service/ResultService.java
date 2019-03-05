@@ -172,8 +172,16 @@ public class ResultService {
                         }
                     }
                     
-                    double percentage = (marksObtained*100)/totalMarks;
-                    String res = getResultClass(percentage);
+                    String res = null;
+                    double percentage = 0;
+                    		
+                    if(totalMarks>0) {
+                    	percentage = (marksObtained*100)/totalMarks;
+                        res = getResultClass(percentage);
+                    }else {
+                    	res = "No Result";
+                    }
+                    
                     
                     if(finalResult==null) {
                         finalResult = res;

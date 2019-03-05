@@ -312,11 +312,29 @@
 	font-weight: bold;
 	height: 22px;
 }
+
 </style>
 <style>
-#button {
-	
+.alert-box {
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;  
 }
+.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
 </style>
 
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
@@ -458,6 +476,7 @@
 			}
 
 		});
+		
 		$('.chcktbl').click(function() {
 			var length = $('.chcktbl:checked').length;
 			var trLength = $('.trClass').length;
@@ -470,7 +489,15 @@
 			}
 		});
 
-		$("#go").button()
+		/* $("#okdivsuccess").button().click(function() {
+			$( "div.success" ).hide();
+			$( "div.failure" ).hide();
+		});
+		
+		$("#okdivfailure").button().click(function() {
+			$( "div.success" ).hide();
+			$( "div.failure" ).hide();
+		}); */
 
 	});
 	
@@ -548,6 +575,22 @@
 	
 </script>
 
+<script type="text/javascript">
+					
+					var attendanceupdate='<c:out default="" value="${attendanceStatusFlag}"/>';
+					
+		            if(attendanceupdate == "true"){
+		            	 $(function(){
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 20000 ).fadeOut( 1400 );
+		            	 });
+		            	 }else if(attendanceupdate == "false"){
+		            	  $(function(){
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 20000 ).fadeOut( 1400 );
+		            		 });
+		            	 }
+        </script>
+        
+
 </head>
   <%
 //allow access only if session exists
@@ -567,6 +610,14 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1" method="POST">
+		
+		
+		<div class="alert-box success">${attendanceUpdateStatus} <br>
+		<!-- <a id="okdivsuccess">Ok</a> -->
+		</div>
+		<div class="alert-box failure">${attendanceUpdateStatus} <br>
+		<!-- <a id="okdivfailure">Ok</a> -->
+		</div>
 		
 		<div style="height: 28px">
 		
@@ -706,7 +757,7 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<c:forEach items="${attendancesubexamlevel}" var="subexamlevel">
@@ -723,10 +774,10 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox"
+							<%-- <td class="dataText"><input type="checkbox"
 								id="<c:out value="${viewAttendancemap.key.admissionnumber}"/>" class="chcktbl"
 								name="attandanceIDs"
-								value="<c:out value="${viewAttendancemap.key.admissionnumber},${status.index}"/>" /></td>
+								value="<c:out value="${viewAttendancemap.key.admissionnumber},${status.index}"/>" /></td> --%>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
 										value="${viewAttendancemap.key.admissionnumber}" /></a></td>
@@ -735,6 +786,8 @@ for(Cookie cookie : cookies){
 							<td class="dataText">
 							<c:set var="attendanceparts" value="${fn:split(subjectdetails, '%')}" />
 							<input type="hidden" id="studentAttendanceStatusId" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;"  name="studentAttendanceStatusId" style="text-transform:uppercase" value="<c:out value="${attendanceparts[0]}" />" maxlength="1">
+							<input type="hidden" id="studentAdmissionNumber"  name="studentAdmissionNumber"  value="${viewAttendancemap.key.admissionnumber}" />
+							<input type="hidden" id="studentID"  name="studentID"  value="${viewAttendancemap.key.sid}" />
 							<%-- <input type="text" id="studentAttendanceStatus" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;"  name="studentAttendanceStatus" style="text-transform:uppercase" value="<c:out value="${attendanceparts[1]}" />" maxlength="1"> --%>
 							<select name="studentAttendanceStatus" id="studentAttendanceStatus" style="background-color: #E3EFFF;border-style: white;color: #4B6A84;">
 										<option selected >${attendanceparts[1]}</option>

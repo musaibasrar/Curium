@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -30,6 +32,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import com.model.attendance.dao.AttendanceDAO;
 import com.model.attendance.dto.Studentdailyattendance;
+import com.model.attendance.service.AttendanceService;
 import com.model.branch.dao.BranchDAO;
 import com.model.branch.dto.Branch;
 import com.model.branch.service.BranchService;
@@ -227,37 +230,53 @@ public class MarksDetailsService {
 		    
 	                    String examLevel = DataUtil.emptyString(request.getParameter("examlevel"));
 	                    String subjectName = DataUtil.emptyString(request.getParameter("subjectnameAjax"));
+	                    if(subjectName==null || subjectName.isEmpty()) {
+	                    	subjectName = DataUtil.emptyString(request.getParameter("subjectselected"));
+	                    }
 	                    String academicYear = DataUtil.emptyString(request.getParameter("academicyear"));
 	                    
-	                       String searchQuery = "From Parents as parent where ";
+	                       String searchQuery = "From Student where ";
 	                       String subQuery =null;
 	                       
 	                            if(!request.getParameter("centercode").equalsIgnoreCase("")) {
 	                                String[] centerCode = request.getParameter("centercode").split(":");
-	                                subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
+	                                subQuery = "centercode = '"+centerCode[0]+"'";
 	                                httpSession.setAttribute("printcentername", "Center Name: "+centerCode[1]);
-	                            }
+	                                httpSession.setAttribute("evaluationsheetcentersearch", centerCode[0]+":"+centerCode[1]);
+	        		            }else {
+	        		                httpSession.setAttribute("evaluationsheetcentersearch", "");
+	        		            }
 	                            
 	                            if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
 	                                if(subQuery!=null) {
-	                                    subQuery = subQuery+"AND parent.Student.examlevel = '"+examLevel+"'";
+	                                    subQuery = subQuery+" AND examlevel = '"+examLevel+"'";
 	                                }else {
-	                                    subQuery = "parent.Student.examlevel = '"+examLevel+"'";
+	                                    subQuery = "examlevel = '"+examLevel+"'";
 	                                }
 	                                httpSession.setAttribute("printexamlevel", "Examination Level: "+examLevel);
-	                            }
+	                                httpSession.setAttribute("evaluationsheetexamlevelsearch", request.getParameter("examlevel").toString());
+	                                httpSession.setAttribute("examselected", examLevel);
+	        		            }else {
+	        		                httpSession.setAttribute("evaluationsheetexamlevelsearch", "");
+	        		                httpSession.setAttribute("examselected", "");
+	        		            }
 	                            
 	                            if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
 	                                if(subQuery!=null) {
-	                                    subQuery = subQuery+"AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+	                                    subQuery = subQuery+" AND languageopted = '"+request.getParameter("languageopted")+"'";
 	                                }else {
-	                                    subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+	                                    subQuery = "languageopted = '"+request.getParameter("languageopted")+"'";
 	                                }
 	                                httpSession.setAttribute("printlanguage", "Language: "+request.getParameter("languageopted").toString());
-	                            }
+	                                httpSession.setAttribute("languagesearch", request.getParameter("languageopted").toString());
+	        		            }else {
+	        		                httpSession.setAttribute("languagesearch", "");
+	        		            }
 	                            
-	                            searchQuery = searchQuery+subQuery+" Order By parent.Student.admissionnumber ASC";
-	                            List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
+	                            request.setAttribute("subjectselected", subjectName);
+	                            
+	                            searchQuery = searchQuery+subQuery+" Order By admissionnumber ASC";
+	                            List<Student> studentList = new studentDetailsDAO().getListStudents(searchQuery);
 	                            //Map<Parents,String> mapStudentReports = new HashMap<Parents,String>();
 	                            
 		
@@ -267,24 +286,58 @@ public class MarksDetailsService {
 		Integer examId = examLevelDetails.get(0).getIdexamlevel();
                 Integer subjectId = subjectDetails.getSubid();
                 
-		Map<Parents,Marks> marksStudentMap = new LinkedHashMap<Parents,Marks>();
+		Map<Student,Marks> marksStudentMap = new LinkedHashMap<Student,Marks>();
 		List<Integer> studentIds = new LinkedList<Integer>();
 		
-			for (Parents parents : parentsList) {
-				studentIds.add(parents.getStudent().getSid());
+			for (Student student : studentList) {
+				studentIds.add(student.getSid());
 			}
 		
 			List<Marks> singleMarksDetails = new MarksDetailsDAO().readMarks(studentIds, subjectId,	examId, academicYear);
 			
-			
 			if(singleMarksDetails.size() > 0) {
+				
+				//sort student and marks
+				Collections.sort(studentList);
+				Collections.sort(singleMarksDetails);
 
-				for (Marks marks : singleMarksDetails) {
+				for (Student student : studentList) {
 					
-					for (Parents parents : parentsList) {
+					boolean marksYesNo = false;
+					
+					for (Marks marks : singleMarksDetails) {
 						
-						if(parents.getStudent().getSid().intValue() == marks.getSid().intValue()) {
-							marksStudentMap.put(parents, marks);
+						if(student.getSid().intValue() == marks.getSid().intValue()) {
+							marksYesNo = true;
+							marksStudentMap.put(student, marks);
+							break;
+						}
+					}
+					
+					if(!marksYesNo) {
+						
+						Studentdailyattendance studentAttendance = new Studentdailyattendance();
+						
+						//search in attendance 
+						studentAttendance = new AttendanceService().getStudentAttendance(student,subjectName,examLevel);
+							
+						if(studentAttendance!=null && "Present".equalsIgnoreCase(studentAttendance.getAttendancestatus())) {
+							
+							Marks marksObtained = new Marks();
+							marksObtained.setExamid(examId);
+							marksObtained.setSubid(subjectId);
+							marksObtained.setSid(student.getSid());
+							marksObtained.setMarksobtained(0);
+							String currentYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
+							marksObtained.setAcademicyear(currentYear);
+							marksObtained.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+							String output = new MarksDetailsDAO().addMarks(marksObtained);
+
+							if(output=="success"){
+								marksStudentMap.put(student, marksObtained);
+							}else if (output.contains("Duplicate")){
+								logger.info("Duplicate marks found");
+							}
 						}
 					}
 					
@@ -304,10 +357,8 @@ public class MarksDetailsService {
 			}
 		}*/
 
-		request.setAttribute("marksstudentmap", marksStudentMap);
-		request.setAttribute("subjectselected", subjectName);
-		request.setAttribute("examselected", examLevel);
-		
+				request.setAttribute("marksstudentmap", marksStudentMap);
+				
                 new ExamLevelService(request, response).examLevels();
                 new LanguageService(request, response).viewLanguage();
                 new BranchService(request, response).viewBranches();
@@ -554,6 +605,12 @@ public class MarksDetailsService {
 		if(httpSession.getAttribute(BRANCHID)!=null){
 		    
 		    String examLevel = DataUtil.emptyString(request.getParameter("examlevel"));
+		    String subjectName = DataUtil.emptyString(request.getParameter("subjectnameAjax"));
+		    
+            if(subjectName==null || subjectName.isEmpty()) {
+            	subjectName = DataUtil.emptyString(request.getParameter("subjectselected"));
+            }
+            
 		       String searchQuery = "From Parents as parent where ";
 		       String subQuery =null;
 		       
@@ -575,16 +632,31 @@ public class MarksDetailsService {
 		                }
 		                httpSession.setAttribute("printexamlevel", "Examination Level: "+examLevel);
 		                httpSession.setAttribute("evaluationsheetexamlevelsearch", request.getParameter("examlevel").toString());
+		                httpSession.setAttribute("examselected", examLevel);
+		                
 		            }else {
 		                httpSession.setAttribute("evaluationsheetexamlevelsearch", "");
+		                httpSession.setAttribute("examselected", "");
+		            }
+		            
+		            if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
+                        if(subQuery!=null) {
+                            subQuery = subQuery+" AND languageopted = '"+request.getParameter("languageopted")+"'";
+                        }else {
+                            subQuery = "languageopted = '"+request.getParameter("languageopted")+"'";
+                        }
+                        httpSession.setAttribute("printlanguage", "Language: "+request.getParameter("languageopted").toString());
+                        httpSession.setAttribute("languagesearch", request.getParameter("languageopted").toString());
+		            }else {
+		                httpSession.setAttribute("languagesearch", "");
 		            }
 		            
 		            
 		            List<Studentdailyattendance> studentDailyAttendanceOne = new ArrayList<Studentdailyattendance>();
 		           
-	                            studentDailyAttendanceOne = new AttendanceDAO().getStudentAttendance(""
+	                            studentDailyAttendanceOne = new AttendanceDAO().getStudentsAttendance(""
 	                                    + "from Studentdailyattendance where  examlevelcode='"+examLevel+"'"
-	                                    		+ " and subject='"+DataUtil.emptyString(request.getParameter("subjectnameAjax"))+"' and attendancestatus='Present'");
+	                                    		+ " and subject='"+subjectName+"' and attendancestatus='Present'");
 		            
 	                            searchQuery = searchQuery+subQuery;
 	                            
@@ -599,7 +671,9 @@ public class MarksDetailsService {
 		            
 		            new ExamLevelService(request, response).examLevels();
 		            new BranchService(request, response).viewBranches();
+		            new LanguageService(request, response).viewLanguage();
 		            
+		            request.setAttribute("subjectselected", subjectName);
 		            httpSession.setAttribute("searchedexamlevel", DataUtil.emptyString(request.getParameter("examlevel")));
 		            httpSession.setAttribute("searchedsubject", DataUtil.emptyString(request.getParameter("subjectnameAjax")));
 		}
@@ -684,11 +758,7 @@ public class MarksDetailsService {
 				result = "true";
 			}else if (output.contains("Duplicate")){
 				result = "Duplicate";
-				
-				
 			}
-				
-			
 			/*if (new MarksDetailsDAO().addMarks(marksList)) {
 				result = true;
 			}*/
@@ -754,7 +824,7 @@ public class MarksDetailsService {
 		            	 
 		            
 		            List<String> studentExternalId = new ArrayList<String>();
-		            List<Studentdailyattendance> studentDailyAttendance =  new AttendanceDAO().getStudentAttendance("from Studentdailyattendance where examlevelcode='"+examLevel[1]+"' and attendancestatus='Present' and subject='"+subexamlevel.getSubjectname()+"'");
+		            List<Studentdailyattendance> studentDailyAttendance =  new AttendanceDAO().getStudentsAttendance("from Studentdailyattendance where examlevelcode='"+examLevel[1]+"' and attendancestatus='Present' and subject='"+subexamlevel.getSubjectname()+"'");
                             
                             for (Studentdailyattendance studentdailyattendance2 : studentDailyAttendance) {
                             	studentExternalId.add(studentdailyattendance2.getAttendeeid());
@@ -799,6 +869,18 @@ public class MarksDetailsService {
 		            request.setAttribute("searchedexamlevel", DataUtil.emptyString(request.getParameter("examlevel")));
 		            request.setAttribute("subjectentermarks", DataUtil.emptyString(request.getParameter("subject")));
 		}
+	}
+
+	public boolean checkMarks(String sid, Integer subid, Integer idexamlevel, String academicYear) {
+			List<Integer> sID = new ArrayList<Integer>();
+			sID.add(Integer.parseInt(sid));
+		
+			List<Marks> marksList = new MarksDetailsDAO().readMarks(sID, subid, idexamlevel, academicYear);
+		
+		if(marksList.size()>0) {
+			return true;
+		}
+			return false;
 	}
 	
 
