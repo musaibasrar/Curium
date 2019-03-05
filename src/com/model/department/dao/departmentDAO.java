@@ -45,7 +45,7 @@ public class departmentDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return department;
         }
 	}
@@ -63,7 +63,7 @@ public class departmentDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return results;
         }
 	}
@@ -78,7 +78,9 @@ public class departmentDAO {
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
 		
 	}
 }

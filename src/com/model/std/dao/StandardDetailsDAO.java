@@ -38,7 +38,7 @@ public class StandardDetailsDAO {
 	        } catch (HibernateException hibernateException) {transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
-	            //session.close();
+	            HibernateUtil.closeSession();
 	            return classsec;
 	        }
 	}
@@ -53,7 +53,7 @@ public class StandardDetailsDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return classsecList;
         }
     }
@@ -68,7 +68,9 @@ public class StandardDetailsDAO {
                 transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
                 hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
 
 
         

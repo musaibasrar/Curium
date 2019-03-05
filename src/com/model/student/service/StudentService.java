@@ -728,7 +728,7 @@ public class StudentService {
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			try {
 				int page = 1;
-				int recordsPerPage = 50;
+				int recordsPerPage = 20;
 				if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
 					page = Integer.parseInt(request.getParameter("page"));
 				}

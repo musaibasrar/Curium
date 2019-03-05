@@ -32,7 +32,7 @@ public class OrderDAO {
             } catch (Exception e) {transaction.rollback();
                     e.printStackTrace();
             }finally{
-                    //session.close();
+                    HibernateUtil.closeSession();
             }
             return booksList;
          }
@@ -51,7 +51,7 @@ public class OrderDAO {
     } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
     } finally {
-            //session.close();
+            HibernateUtil.closeSession();
     }
         return result;
 }
@@ -69,7 +69,9 @@ public class OrderDAO {
             result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
         return result;
     }
 
@@ -87,7 +89,9 @@ public class OrderDAO {
             result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
         return result;
     }
 
@@ -110,7 +114,7 @@ public class OrderDAO {
     } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
     } finally {
-            //session.close();
+            HibernateUtil.closeSession();
     }
         return result;
 }
@@ -127,7 +131,7 @@ public class OrderDAO {
         } catch (Exception e) {transaction.rollback();
                 e.printStackTrace();
         }finally{
-                //session.close();
+                HibernateUtil.closeSession();
         }
         return booksList;
      }
@@ -147,7 +151,9 @@ public class OrderDAO {
             result = true;
     } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-    }
+    }finally {
+		HibernateUtil.closeSession();
+	}
             return result;
 }
 
@@ -168,7 +174,9 @@ public class OrderDAO {
             result = true;
     } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-    }
+    }finally {
+		HibernateUtil.closeSession();
+	}
             return result;
 }
 
@@ -189,7 +197,9 @@ public class OrderDAO {
             result = true;
     } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-    }
+    }finally {
+		HibernateUtil.closeSession();
+	}
             return result;
 }
 
@@ -202,7 +212,9 @@ public class OrderDAO {
                 transaction.commit();
             } catch (HibernateException hibernateException) {transaction.rollback();
                 hibernateException.printStackTrace();
-            }
+            }finally {
+    			HibernateUtil.closeSession();
+    		}
             return orderList;
             }
 
@@ -216,7 +228,7 @@ public class OrderDAO {
         } catch (Exception e) {transaction.rollback();
                 e.printStackTrace();
         }finally{
-                //session.close();
+                HibernateUtil.closeSession();
         }
         return ordersList;
      }
@@ -234,7 +246,9 @@ public class OrderDAO {
             result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
         return result;
     }
 
@@ -249,7 +263,7 @@ public class OrderDAO {
         } catch (Exception e) {transaction.rollback();
                 e.printStackTrace();
         }finally{
-                //session.close();
+                HibernateUtil.closeSession();
         }
         return book;
      }
@@ -264,7 +278,7 @@ public class OrderDAO {
         } catch (Exception e) {transaction.rollback();
                 e.printStackTrace();
         }finally{
-                //session.close();
+                HibernateUtil.closeSession();
         }
         return booksList;
      }

@@ -37,7 +37,7 @@ public class YearDAO {
 			
 			error=hibernateException.getMessage();
 		} finally {
-			//session.close();
+			HibernateUtil.closeSession();
 			return error;
 		}
 	}
@@ -57,8 +57,9 @@ public class YearDAO {
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
-		// //session.close();
 		return currentacademicyear;
 	}
 

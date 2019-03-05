@@ -41,7 +41,9 @@ public class SmsDAO {
 		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}
-		// //session.close();
+		finally {
+			HibernateUtil.closeSession();
+		}
 		return totalNumbers;
 	}
 
@@ -68,7 +70,7 @@ public class SmsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// //session.close();
+			 HibernateUtil.closeSession();
 			return results;
 		}
 	}

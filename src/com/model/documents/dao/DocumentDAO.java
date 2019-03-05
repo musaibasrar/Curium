@@ -38,6 +38,8 @@ public class DocumentDAO {
 			return "true";
 		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return "false";
 	}
@@ -54,6 +56,8 @@ public class DocumentDAO {
 			transaction.commit();
 		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return tc;
 	}

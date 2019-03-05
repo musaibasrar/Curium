@@ -36,7 +36,7 @@ public class parentsDetailsDAO {
 	        } catch (HibernateException hibernateException) {transaction.rollback();
 	            hibernateException.printStackTrace();
 	        } finally {
-	            //session.close();
+	            HibernateUtil.closeSession();
 	            return parents;
 	        }
 	}
@@ -53,7 +53,9 @@ public class parentsDetailsDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
-        //session.close();
+        finally {
+			HibernateUtil.closeSession();
+		}
         return parents;
 	}
 
@@ -69,7 +71,7 @@ public class parentsDetailsDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return parents;
         }
 	}

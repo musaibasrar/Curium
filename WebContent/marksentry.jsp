@@ -602,6 +602,7 @@ for(Cookie cookie : cookies){
 										<select name="languageopted" id="languageopted"
 									style="width: 200px;">
 										<option selected>${languagesearch}</option>
+										<option></option>
 										<c:forEach items="${languageslist}" var="languageslist">
 											<option value="${languageslist.language}" >
 												<c:out value="${languageslist.language}" />

@@ -44,7 +44,7 @@ public class BranchDAO {
             transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return results;
         }
 	}
@@ -59,7 +59,7 @@ public class BranchDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return results;
         }
     }
@@ -74,7 +74,7 @@ public class BranchDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return result;
         }
     }
@@ -91,7 +91,9 @@ public class BranchDAO {
             result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
         return result;
 }
 
@@ -106,7 +108,9 @@ public class BranchDAO {
             result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
         return result;
 }
 
@@ -121,7 +125,9 @@ public class BranchDAO {
             result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
         return result;
     }
 
@@ -136,7 +142,9 @@ public class BranchDAO {
             result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
         return result;
     }
 
@@ -151,7 +159,7 @@ public class BranchDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return result;
         }
     }
@@ -167,7 +175,7 @@ public class BranchDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return results;
         }
 }
@@ -182,7 +190,7 @@ public class BranchDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return results;
         }
     }
@@ -197,7 +205,7 @@ try {
 } catch (HibernateException hibernateException) {transaction.rollback();
     hibernateException.printStackTrace();
 } finally {
-    //session.close();
+    HibernateUtil.closeSession();
     return results;
 }
 }
@@ -213,7 +221,7 @@ try {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
         }
         if(distList.size()>0) {
             return true;
@@ -232,7 +240,7 @@ try {
             } catch (HibernateException hibernateException) {transaction.rollback();
                 hibernateException.printStackTrace();
             } finally {
-                //session.close();
+                HibernateUtil.closeSession();
             }
             if(branchList.size()>0) {
                 return true;
@@ -251,7 +259,7 @@ try {
                 } catch (HibernateException hibernateException) {transaction.rollback();
                     hibernateException.printStackTrace();
                 } finally {
-                    //session.close();
+                    HibernateUtil.closeSession();
                 }
                 
                 return distList;
@@ -270,7 +278,7 @@ try {
           } catch (HibernateException hibernateException) {transaction.rollback();
               hibernateException.printStackTrace();
           } finally {
-              //session.close();
+              HibernateUtil.closeSession();
           }
           
           return dist;

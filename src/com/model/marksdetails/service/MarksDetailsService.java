@@ -273,7 +273,7 @@ public class MarksDetailsService {
 	        		                httpSession.setAttribute("languagesearch", "");
 	        		            }
 	                            
-	                            request.setAttribute("subjectselected", subjectName);
+	                            httpSession.setAttribute("subjectselected", subjectName);
 	                            
 	                            searchQuery = searchQuery+subQuery+" Order By admissionnumber ASC";
 	                            List<Student> studentList = new studentDetailsDAO().getListStudents(searchQuery);
@@ -675,7 +675,7 @@ public class MarksDetailsService {
 		            
 		            request.setAttribute("subjectselected", subjectName);
 		            httpSession.setAttribute("searchedexamlevel", DataUtil.emptyString(request.getParameter("examlevel")));
-		            httpSession.setAttribute("searchedsubject", DataUtil.emptyString(request.getParameter("subjectnameAjax")));
+		            httpSession.setAttribute("searchedsubject", subjectName);
 		}
 	}
 	

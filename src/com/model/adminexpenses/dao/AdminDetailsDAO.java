@@ -39,7 +39,7 @@ public class AdminDetailsDAO {
 		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			//session.close();
+			HibernateUtil.closeSession();
 			return adminexpenses;
 		}
 	}
@@ -64,7 +64,7 @@ public class AdminDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// //session.close();
+			 HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -82,6 +82,8 @@ public class AdminDetailsDAO {
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 
 	}

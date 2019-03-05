@@ -42,7 +42,9 @@ public class EmailDAO {
 		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		}
-		// //session.close();
+		finally {
+			HibernateUtil.closeSession();
+		}
 		return totalNumbers;
 	}
 
@@ -71,7 +73,7 @@ public class EmailDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// //session.close();
+			 HibernateUtil.closeSession();
 			return results;
 		}
 	}

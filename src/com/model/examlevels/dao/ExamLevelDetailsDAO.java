@@ -50,7 +50,7 @@ public class ExamLevelDetailsDAO {
         }catch(Exception ex) {
             ex.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return results;
         }
 	}
@@ -65,7 +65,9 @@ public class ExamLevelDetailsDAO {
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
 		
 	}
 
@@ -80,7 +82,7 @@ public class ExamLevelDetailsDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return result;
         }
     }
@@ -100,7 +102,9 @@ public class ExamLevelDetailsDAO {
             result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
         return result;
     }
 
@@ -119,7 +123,9 @@ public class ExamLevelDetailsDAO {
             result = true;
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
         return result;
     
     }
@@ -137,7 +143,7 @@ public class ExamLevelDetailsDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return results;
         }
     }
@@ -156,7 +162,7 @@ public class ExamLevelDetailsDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return results;
         }
     }

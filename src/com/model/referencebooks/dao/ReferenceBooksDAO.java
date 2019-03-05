@@ -47,7 +47,7 @@ public class ReferenceBooksDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return results;
         }
 	}
@@ -63,7 +63,9 @@ public class ReferenceBooksDAO {
             return true;
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
 		return false;
 	}
 
@@ -78,7 +80,7 @@ public class ReferenceBooksDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return result;
         }
     }
@@ -119,7 +121,7 @@ public class ReferenceBooksDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return refBooksList;
         }
     }
@@ -137,7 +139,7 @@ public class ReferenceBooksDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+            HibernateUtil.closeSession();
             return refBooksList;
         }
     }

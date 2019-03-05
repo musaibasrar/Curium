@@ -50,6 +50,7 @@ public class StampFeesDAO {
        }catch (Exception e) {transaction.rollback();
            logger.info(e);
        }finally{
+   			HibernateUtil.closeSession();
            return login;
        }}
 
@@ -76,7 +77,7 @@ public class StampFeesDAO {
 	            hibernateException.printStackTrace();
 
 	        } finally {
-	            //session.close();
+	            HibernateUtil.closeSession();
 	            return noOfRecords;
 	        }
 	}
@@ -100,7 +101,7 @@ public class StampFeesDAO {
 	            hibernateException.printStackTrace();
 
 	        } finally {
-	            //session.close();
+	            HibernateUtil.closeSession();
 	            return noOfRecords;
 	        }
 	}
@@ -117,7 +118,9 @@ public class StampFeesDAO {
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
         }
-        //session.close();
+        finally {
+			HibernateUtil.closeSession();
+		}
         return parents;
 	}
 
@@ -148,7 +151,7 @@ public class StampFeesDAO {
 		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
 		} finally {
-			//session.close();
+			HibernateUtil.closeSession();
 			/*return student;*/
 		}
 	}
@@ -170,6 +173,8 @@ public class StampFeesDAO {
 			transaction.commit();
 		} catch (HibernateException hibernateException) {transaction.rollback();
 			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 
 	
