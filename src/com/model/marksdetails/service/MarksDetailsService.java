@@ -833,7 +833,6 @@ public class MarksDetailsService {
                             for (Parents parent : parentsList) {
                             
 								if(studentExternalId.contains(parent.getStudent().getStudentexternalid())) {
-										System.out.println("************ True external id "+parent.getStudent().getStudentexternalid());
 										listParents.add(parent);
 										
 							}

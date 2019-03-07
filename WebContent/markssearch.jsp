@@ -737,7 +737,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 
 				<thead>
 					<tr>
-						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Marks</th>
@@ -752,7 +752,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="display: none;"><input type="checkbox" checked
+							<td class="dataText"><input type="checkbox" checked
 								id="<c:out value="${Parents.value.marksid}"/>" class="chcktbl"
 								name="marksIDs"
 								value="<c:out value="${Parents.value.marksid}:${status.index}"/>" /></td>

@@ -674,12 +674,13 @@ for(Cookie cookie : cookies){
 							</label> 
 						</tr>
 
-						<tr>
+						 <tr>
 							<td><br /></td>
 
 						</tr>
 						
-						<tr>
+						
+						<tr style="display: none;">
 							<td class="alignRightFields">Language &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="languageopted" id="languageopted"
@@ -693,7 +694,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label> 
-						</tr>
+						</tr> 
 
 						<%-- <tr>
 							<td><br /></td>
@@ -786,7 +787,7 @@ for(Cookie cookie : cookies){
 							<td class="dataText">
 							<c:set var="attendanceparts" value="${fn:split(subjectdetails, '%')}" />
 							<input type="hidden" id="studentAttendanceStatusId" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;"  name="studentAttendanceStatusId" style="text-transform:uppercase" value="<c:out value="${attendanceparts[0]}" />" maxlength="1">
-							<input type="hidden" id="studentAdmissionNumber"  name="studentAdmissionNumber"  value="${viewAttendancemap.key.admissionnumber}" />
+							<input type="hidden" id="studentAdmissionNumber"  name="studentAdmissionNumber${status.index}"  value="${viewAttendancemap.key.admissionnumber}" />
 							<input type="hidden" id="studentID"  name="studentID"  value="${viewAttendancemap.key.sid}" />
 							<%-- <input type="text" id="studentAttendanceStatus" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;"  name="studentAttendanceStatus" style="text-transform:uppercase" value="<c:out value="${attendanceparts[1]}" />" maxlength="1"> --%>
 							<select name="studentAttendanceStatus" id="studentAttendanceStatus" style="background-color: #E3EFFF;border-style: white;color: #4B6A84;">

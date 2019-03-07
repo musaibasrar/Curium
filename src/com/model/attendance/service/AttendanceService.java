@@ -769,7 +769,7 @@ public class AttendanceService {
                     
                     if(!attendanceStatus) {
                         List<Student> searchStudentList = new studentDetailsDAO().getListStudents("From Student as student where student.examlevel='"+DataUtil.emptyString(request.getParameter("examlevel"))+"'"
-                                + "and student.centercode="+DataUtil.emptyString(request.getParameter("centercode"))+" Order by student.admissionnumber ASC");
+                                + " and student.centercode="+DataUtil.emptyString(request.getParameter("centercode"))+" Order by student.admissionnumber ASC");
                     request.setAttribute("StudentListAttendance", searchStudentList);
                     request.setAttribute("subjectlisttodisplay", DataUtil.emptyString(request.getParameter("subjectnameAjax")));
                     request.setAttribute("searchexamlevel", DataUtil.emptyString(request.getParameter("examlevel")));
