@@ -400,7 +400,7 @@ public class AttendanceService {
 		return false;
 	}
 
-	public boolean searchStudentAttendanceDetails() {
+	public boolean searchStudentAttendanceDetails(boolean updateFlags) {
 		boolean result = false;
 		
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
@@ -465,12 +465,12 @@ public class AttendanceService {
                                 boolean subStatus = false;
                                 for (Studentdailyattendance stAtt : studentDailyAttendance) {
                                         if(stAtt.getSubject().equalsIgnoreCase(sel.getSubjectname())) {
-                                            attendanceStatus.add(stAtt.getAttendanceid()+ "%" + stAtt.getAttendancestatus());
+                                            attendanceStatus.add(stAtt.getAttendanceid()+ "%" + stAtt.getAttendancestatus()+ "%" + sel.getSubjectname());
                                             subStatus = true;
                                         }
                                 }
                                 if(!subStatus) {
-                                    attendanceStatus.add("");
+                                    attendanceStatus.add("0% %"+sel.getSubjectname());
                                 }
                             }
                             viewAttendanceMap.put(student, attendanceStatus);
@@ -478,16 +478,19 @@ public class AttendanceService {
 		        
 		            httpSession.setAttribute("viewAttendancemap", viewAttendanceMap);
 		            
-		            new ExamLevelService(request, response).examLevels();
-		            new LanguageService(request, response).viewLanguage();
-		            httpSession.setAttribute("attendanceStatusFlag", "");
-					httpSession.setAttribute("attendanceUpdateStatus", "");
-					
-		            if("admin".equalsIgnoreCase(httpSession.getAttribute("typeOfUser").toString())) {
-		                 new BranchService(request, response).viewBranches();
-		             }else {
-		                 new BranchService(request, response).viewBranchesCenter();
-		             }
+		            if(updateFlags) {
+		            	new ExamLevelService(request, response).examLevels();
+			            new LanguageService(request, response).viewLanguage();
+			            httpSession.setAttribute("attendanceStatusFlag", "");
+						httpSession.setAttribute("attendanceUpdateStatus", "");
+						
+			            if("admin".equalsIgnoreCase(httpSession.getAttribute("typeOfUser").toString())) {
+			                 new BranchService(request, response).viewBranches();
+			             }else {
+			                 new BranchService(request, response).viewBranchesCenter();
+			             }
+		            }
+		            
 		            result = true;
 		}
 		return result;
@@ -501,6 +504,8 @@ public class AttendanceService {
                          new LanguageService(request, response).viewLanguage();
                          new BranchService(request, response).viewBranches();
                          httpSession.setAttribute("viewAttendancemap", "");
+                         httpSession.setAttribute("attendanceStatusFlag", "");
+ 						httpSession.setAttribute("attendanceUpdateStatus", "");
                          
 			return true;
 	}
@@ -564,6 +569,7 @@ public class AttendanceService {
 			String[] studentAttendanceStatusId = request.getParameterValues("studentAttendanceStatusId");
 			String[] studentAdmissionNumber = request.getParameterValues("studentAdmissionNumber");
 			String[] studentID = request.getParameterValues("studentID");
+			String[] subjectName = request.getParameterValues("subjectName");
 			String[] centerCodeSp = request.getParameter("centercode").split(":");
 			String[] examLevelSp = request.getParameter("examlevelcode").split(":");
 			
@@ -574,11 +580,42 @@ public class AttendanceService {
 				httpSession.setAttribute("attendanceStatusFlag", "false");
 				httpSession.setAttribute("attendanceUpdateStatus", admissionNumber+" can't be marked as absent. Please delete the marks and try again.");
 			}else {
-				result = new AttendanceDAO().updateStudentAttendanceDetails(studentAttendanceStatusId,studentAttendanceStatus);
+				Map<String,String> notNullStudentAttendance = new HashMap<String,String>();
+				List<Studentdailyattendance> nullStudentAttedanceList = new ArrayList<Studentdailyattendance>();
+				
+				for(int i=0;i<studentAttendanceStatusId.length;i++) {
+					
+						if(!"0".equalsIgnoreCase(studentAttendanceStatusId[i])) {
+							notNullStudentAttendance.put(studentAttendanceStatusId[i], studentAttendanceStatus[i]);
+						}else if("0".equalsIgnoreCase(studentAttendanceStatusId[i])) {
+							
+							//Get attendeeid
+							Student student = new studentDetailsDAO().readUniqueObject(Long.parseLong(studentID[i]));
+							
+							Studentdailyattendance studentDailyAttendance = new Studentdailyattendance();
+							studentDailyAttendance.setAttendeeid(student.getStudentexternalid());
+							studentDailyAttendance.setAttendancestatus(studentAttendanceStatus[i]);
+							studentDailyAttendance.setIntime("00:00");
+							studentDailyAttendance.setOuttime("00:00");
+							studentDailyAttendance.setDate(new Date());
+							studentDailyAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+							studentDailyAttendance.setBranchid(Integer.parseInt(centerCodeSp[0]));
+							studentDailyAttendance.setSubject(subjectName[i]);
+							studentDailyAttendance.setExamlevelcode(examLevelSp[0]);
+							nullStudentAttedanceList.add(studentDailyAttendance);
+						}
+				}
+							if(nullStudentAttedanceList.size()>0) {
+								new AttendanceDAO().checkStudentAttendance(nullStudentAttedanceList);
+							}
+							
+				result = new AttendanceDAO().updateStudentAttendanceDetailsMap(notNullStudentAttendance);
+				
 				
 				if(result) {
 					httpSession.setAttribute("attendanceStatusFlag", "true");
 					httpSession.setAttribute("attendanceUpdateStatus", "Attendance has been updated successfully");
+					boolean res = searchStudentAttendanceDetails(false);
 				}
 			}
 		}

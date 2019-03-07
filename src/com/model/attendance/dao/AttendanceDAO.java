@@ -3,6 +3,7 @@ package com.model.attendance.dao;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -352,7 +353,8 @@ public class AttendanceDAO {
 			transaction = session.beginTransaction();
 		
 			for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
-				Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
+				session.save(studentDailyAttendance);
+				/*Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
 				Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and academicyear = '"+studentDailyAttendance.getAcademicyear()+"' and subject = '"+studentDailyAttendance.getSubject()+"'");
 				studentDailyAttendanceDetails = (Studentdailyattendance) query.uniqueResult();
 				if(studentDailyAttendanceDetails == null){
@@ -360,7 +362,7 @@ public class AttendanceDAO {
 				}else{
 					Query queryTwo = session.createSQLQuery("update Studentdailyattendance set attendancestatus = '"+studentDailyAttendance.getAttendancestatus()+"' where attendanceid = '"+studentDailyAttendanceDetails.getAttendanceid()+"'");
 					queryTwo.executeUpdate();
-				}
+				}*/
 			}
 			
 			transaction.commit();
@@ -633,18 +635,16 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
         return studentDailyAttendance;
         
     }
-
-    public boolean updateStudentAttendanceDetails(String[] studentAttendanceStatusId, String[] studentAttendanceStatus) {
+    
+ public boolean updateStudentAttendanceDetailsMap(Map<String, String> notNullStudentAttendanceMap) {
         
         try{
             transaction = session.beginTransaction();
-            int i =0;
-            for (String attIn : studentAttendanceStatusId) {
-                    if(!attIn.equalsIgnoreCase("")) {
-                        Query query = session.createQuery("update Studentdailyattendance set attendancestatus = '"+studentAttendanceStatus[i]+"' where attendanceid = '"+Integer.parseInt(attIn)+"'");
-                        query.executeUpdate();
-                    }
-                    i++;
+            
+            for (Map.Entry<String, String> entry : notNullStudentAttendanceMap.entrySet())
+            {
+                Query query = session.createQuery("update Studentdailyattendance set attendancestatus = '"+entry.getValue()+"' where attendanceid = '"+entry.getKey()+"'");
+                query.executeUpdate();
             }
             transaction.commit();
             return true;

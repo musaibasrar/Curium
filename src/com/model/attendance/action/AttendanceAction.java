@@ -271,7 +271,7 @@ public class AttendanceAction {
 	}
 
 	private String searchStudentAttendanceDetails() {
-		if(new AttendanceService(request, response).searchStudentAttendanceDetails()){
+		if(new AttendanceService(request, response).searchStudentAttendanceDetails(true)){
 			return "viewattendance.jsp";
 		}
 		return errorPage;
