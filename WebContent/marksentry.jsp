@@ -691,7 +691,9 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Exam Level</th>
-						<th title="click to sort" class="headerText">Marks</th>
+						<c:forEach items="${subjectsperexam}" var="subjects">
+						<th title="click to sort" class="headerText">${subjects.subjectname}</th>
+						</c:forEach>
 					</tr>
 				</thead>
 
@@ -709,14 +711,16 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.student.examlevel}" /></td>
+							
+							<c:forEach items="${subjectsperexam}" var="subjects">
 							<td class="dataText"><input type="text"
 								id="studentMarks" 
-								name="studentMarks"
+								name="studentMarks${subjects.subjectname}"
 								value="0"
 								onkeypress="return event.charCode >= 00 && event.charCode <=57"
 								maxlength="3"
 								 /></td>
-
+								</c:forEach>
 
 						</tr>
 					</c:forEach>

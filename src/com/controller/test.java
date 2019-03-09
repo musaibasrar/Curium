@@ -14,6 +14,7 @@ import java.net.URLConnection;
 import java.nio.charset.MalformedInputException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,13 +23,28 @@ import java.util.Map;
 
 import org.apache.commons.net.ftp.FTPClient;
 
+import com.mchange.v2.collection.MapEntry;
 import com.model.sendsms.dao.SmsDAO;
 
 public class test {
 
 	
 	public static void main(String[] args) throws SocketException, IOException{
-
+		
+		
+		
+		Map<Integer,List<String>> mapString = new HashMap<Integer,List<String>>();
+		
+		List<String> test = new ArrayList<String>();
+		test.add("one");
+		mapString.put(1, test);
+		test.add("two");
+		mapString.put(1, test);
+		
+		for (Map.Entry<Integer,List<String>> entry : mapString.entrySet())
+		{
+		    System.out.println(entry.getKey() + "/" + entry.getValue());
+		}
 	    
 	    String word = "musaibone";
 	    if (word.length() == 3) {

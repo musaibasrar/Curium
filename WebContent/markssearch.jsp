@@ -737,30 +737,39 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Marks</th>
-
-
-
+						<c:forEach items="${subjectsperexam}" var="subjects">
+						<th title="click to sort" class="headerText">${subjects.subjectname}</th>
+						</c:forEach>
 					</tr>
 				</thead>
 
 				<tbody>
 					<c:forEach items="${marksstudentmap}" var="Parents" varStatus="status">
 
-						<tr class="trClass" style="border-color: #000000" border="1"
+						<tr class="trClass" style="border-color: #000000" border="1" 
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox" checked
-								id="<c:out value="${Parents.value.marksid}"/>" class="chcktbl"
-								name="marksIDs"
-								value="<c:out value="${Parents.value.marksid}:${status.index}"/>" /></td>
+							<td class="dataText" style="display: none;"><input type="checkbox" checked
+								id="<c:out value=""/>" class="chcktbl"
+								name="mIDs"
+								value="<c:out value=""/>" /></td>
+								
+								
 								<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
 										value="${Parents.key.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.key.name}" /></td>
-							<td class="dataText"><input type="text" id="studentMarks" name="studentMarks" value="<c:out value="${Parents.value.marksobtained}" />">
+							
+							<c:forEach items="${Parents.value}" var="markslist">
+							<td class="dataText">
+							<input type="hidden" id="marksid" name="marksIDs" value="<c:out value="${markslist.marksid}" />">
+							<input type="text" id="studentMarks" name="studentMarks" value="<c:out value="${markslist.marksobtained}" />">
+							</td>
+							</c:forEach>
+							
+							<%-- <td class="dataText"><input type="text" id="studentMarks" name="studentMarks" value="<c:out value="${Parents.value.marksobtained}" />"> --%>
 							<%-- <input type="text"
 								id="studentMarks" 
 								name="studentMarks"

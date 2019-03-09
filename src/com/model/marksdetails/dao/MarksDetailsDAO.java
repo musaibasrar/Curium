@@ -23,15 +23,18 @@ public class MarksDetailsDAO {
 	}
 
 	@SuppressWarnings("finally")
-    public String addMarks(List<Marks> marksList) {
+    public String addMarksMap(Map<String, List<Marks>> marksSubjectMap) {
 		
-		boolean result = false;	
 		String output = "success";
 		
 		try{
+
 			transaction = session.beginTransaction();
-			for (Marks marks : marksList) {
-				session.save(marks);
+			for (Map.Entry<String,List<Marks>> entry : marksSubjectMap.entrySet()) {
+				
+				for (Marks marks : entry.getValue()) {
+					session.save(marks);
+				}
 			}
 			transaction.commit();
 		}  catch(ConstraintViolationException  e){                                                       

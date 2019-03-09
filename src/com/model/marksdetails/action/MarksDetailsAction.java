@@ -100,8 +100,7 @@ public class MarksDetailsAction {
 	}
 
 	private String addMarks() {
-		//String result = new MarksDetailsService(request, response).addMarks();
-		String result = new MarksDetailsService(request, response).addMarksNew();
+		String result = new MarksDetailsService(request, response).addMarks();
 		if (result=="true") {
             return "markssaved.jsp";
         } else if(result=="Duplicate") {

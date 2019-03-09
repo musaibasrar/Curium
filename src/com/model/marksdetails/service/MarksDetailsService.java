@@ -69,96 +69,6 @@ public class MarksDetailsService {
 		this.httpSession = request.getSession();
 	}
 
-	public String addMarks() {
-
-		String result = "false";
-
-		String[] studentIds = request.getParameterValues("studentIDs");
-		String[] studentsMarks = request.getParameterValues("studentMarks");
-		String exam = request.getParameter("hiddensearchedexamlevel");
-		String subject = request.getParameter("hiddensearchedsubject");
-		logger.info("the subject id is " + subject + ", and exam level is " + exam);
-		int sizeOfArray = 0;
-		Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
-		List<Integer> ids = new ArrayList<Integer>();
-		List<String> studentsMarksList = new ArrayList<String>();
-
-		if (studentIds != null && subject != null) {
-		for (String sid : studentIds) {
-                        String[] stdId = sid.split(":");
-                        studentsMarksList.add(studentsMarks[Integer.parseInt(stdId[1])]);
-                        ids.add(Integer.valueOf(stdId[0]));
-                }
-		
-		if (studentsMarks != null) {
-
-			for (String marksList : studentsMarks) {
-				studentsMarksList.add(marksList);
-
-			}
-		}
-
-			/*for (String id : studentIds) {
-				System.out.println("id" + id);
-				ids.add(Integer.valueOf(id));
-
-			}*/
-
-			sizeOfArray = ids.size();
-
-			for (int i = 0; i < sizeOfArray; i++) {
-				mapOfMarks.put(ids.get(i), studentsMarksList.get(i));
-			}
-
-			Set mapSet = mapOfMarks.entrySet();
-			Iterator mapIterator = mapSet.iterator();
-
-			
-			
-			List<Examleveldetails> examLevelDetails = new ExamLevelDetailsDAO().getExamLevelDetails(exam);
-			
-			int examid = examLevelDetails.get(0).getIdexamlevel();
-			
-			
-			Subject subjectDetails = new SubjectDetailsService(request, response).getSubjectDetails(subject);
-			int subid = subjectDetails.getSubid();
-			List<Marks> marksList = new ArrayList<Marks>();
-
-			while (mapIterator.hasNext()) {
-				Map.Entry mapEntry = (Entry) mapIterator.next();
-				    logger.info("The id is " + mapEntry.getKey() + "and marks is " + mapEntry.getValue());
-
-				String test = (String) mapEntry.getValue();
-				Marks marks = new Marks();
-				marks.setExamid(examid);
-				marks.setSubid(subid);
-				marks.setSid((int) mapEntry.getKey());
-				marks.setMarksobtained(Integer.parseInt(test));
-				String currentYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
-				marks.setAcademicyear(currentYear);
-				marks.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				marksList.add(marks);
-			}
-
-			String output = new MarksDetailsDAO().addMarks(marksList);
-			
-			if(output=="success"){
-				result = "true";
-			}else if (output.contains("Duplicate")){
-				result = "Duplicate";
-				
-				
-			}
-				
-			
-			/*if (new MarksDetailsDAO().addMarks(marksList)) {
-				result = true;
-			}*/
-		}
-
-		return result;
-	}
-
 	public void Search() {
 
 		if(httpSession.getAttribute(BRANCHID)!=null){
@@ -281,10 +191,12 @@ public class MarksDetailsService {
 	                            
 		
 		List<Examleveldetails> examLevelDetails = new ExamLevelService(request, response).getExamLevelDetails(examLevel);
-		Subject subjectDetails = new SubjectDetailsService(request, response).getSubjectDetails(subjectName);
+		
+		//Subject subjectDetails = new SubjectDetailsService(request, response).getSubjectDetails(subjectName);
+		  // Integer subjectId = subjectDetails.getSubid();
 		
 		Integer examId = examLevelDetails.get(0).getIdexamlevel();
-                Integer subjectId = subjectDetails.getSubid();
+              
                 
 		Map<Student,Marks> marksStudentMap = new LinkedHashMap<Student,Marks>();
 		List<Integer> studentIds = new LinkedList<Integer>();
@@ -292,12 +204,104 @@ public class MarksDetailsService {
 			for (Student student : studentList) {
 				studentIds.add(student.getSid());
 			}
+			
+			//New Code
+			List<Subexamlevel> subjectList = (List<Subexamlevel>) httpSession.getAttribute("subjectsperexam");
+			List<Marks> studentmarksList = new ArrayList<Marks>();
+			Map<Student,List<Marks>> studentmarksMap = new HashMap<Student,List<Marks>>();
+			
+			for (Subexamlevel subexamlevel : subjectList) {
+
+				Subject subjectDetails = new SubjectDetailsService(request, response).getSubjectDetails(subexamlevel.getSubjectname());
+		        Integer subjectId = subjectDetails.getSubid();
+		        
+		        
+		        List<Marks> singleMarksDetails = new MarksDetailsDAO().readMarks(studentIds, subjectId,	examId, academicYear);
+		        
+		        if(singleMarksDetails.size() > 0) {
+					
+					//sort student and marks by SID
+					Collections.sort(studentList);
+					Collections.sort(singleMarksDetails);
+
+					for (Student student : studentList) {
+						
+						boolean marksYesNo = false;
+						
+						for (Marks marks : singleMarksDetails) {
+							
+							if(student.getSid().intValue() == marks.getSid().intValue()) {
+								marksYesNo = true;
+								List<Marks> mapMarksList = studentmarksMap.get(student);
+								if(mapMarksList==null) {
+									List<Marks> studentmarksList1 = new ArrayList<Marks>();
+									studentmarksList1.add(marks);
+									studentmarksMap.put(student, studentmarksList1);
+								}else {
+									mapMarksList.add(marks);
+									studentmarksMap.put(student, mapMarksList);
+								}
+								
+								break;
+							}
+						}
+						
+						if(!marksYesNo) {
+							
+							Studentdailyattendance studentAttendance = new Studentdailyattendance();
+							
+							//search in attendance 
+							studentAttendance = new AttendanceService().getStudentAttendance(student,subjectName,examLevel);
+								
+							if(studentAttendance!=null && "Present".equalsIgnoreCase(studentAttendance.getAttendancestatus())) {
+								
+								Marks marksObtained = new Marks();
+								marksObtained.setExamid(examId);
+								marksObtained.setSubid(subjectId);
+								marksObtained.setSid(student.getSid());
+								marksObtained.setMarksobtained(0);
+								String currentYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
+								marksObtained.setAcademicyear(currentYear);
+								marksObtained.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+								String output = new MarksDetailsDAO().addMarks(marksObtained);
+
+								if(output=="success"){
+									
+									List<Marks> mapMarksList = studentmarksMap.get(student);
+									
+									if(mapMarksList==null) {
+										List<Marks> studentmarksList1 = new ArrayList<Marks>();
+										studentmarksList1.add(marksObtained);
+										studentmarksMap.put(student, studentmarksList1);
+									}else {
+										mapMarksList.add(marksObtained);
+										studentmarksMap.put(student, mapMarksList);
+									}
+								}else if (output.contains("Duplicate")){
+									logger.info("Duplicate marks found");
+								}
+							}
+						}
+						
+					}
+				}else {
+					return "MARKSENTRY";
+				}
+		        
+			}
+			
+			request.setAttribute("marksstudentmap", studentmarksMap);
+			
+            new ExamLevelService(request, response).examLevels();
+            new LanguageService(request, response).viewLanguage();
+            new BranchService(request, response).viewBranches();
+			//End New Code
 		
-			List<Marks> singleMarksDetails = new MarksDetailsDAO().readMarks(studentIds, subjectId,	examId, academicYear);
+			/*List<Marks> singleMarksDetails = new MarksDetailsDAO().readMarks(studentIds, subjectId,	examId, academicYear);
 			
 			if(singleMarksDetails.size() > 0) {
 				
-				//sort student and marks
+				//sort student and marks by SID
 				Collections.sort(studentList);
 				Collections.sort(singleMarksDetails);
 
@@ -347,7 +351,7 @@ public class MarksDetailsService {
 			}
 			
 			
-		/*for (Parents parents : parentsList) {
+		for (Parents parents : parentsList) {
 					studentIds.add(parents.getStudent().getSid());
 			
 			
@@ -355,13 +359,13 @@ public class MarksDetailsService {
 			if(singleMarksDetails!=null) {
 			    marksStudentMap.put(parents, singleMarksDetails);  
 			}
-		}*/
+		}
 
 				request.setAttribute("marksstudentmap", marksStudentMap);
 				
                 new ExamLevelService(request, response).examLevels();
                 new LanguageService(request, response).viewLanguage();
-                new BranchService(request, response).viewBranches();
+                new BranchService(request, response).viewBranches();*/
     
 		}
 		
@@ -384,16 +388,17 @@ public class MarksDetailsService {
 	}
 
 	public boolean updateMarks() {
+		
 		boolean result = false;
 		String[] marksIds = request.getParameterValues("marksIDs");
 		String[] studentsMarks = request.getParameterValues("studentMarks");
 		Map<Integer, Integer> idsMarks = new HashMap<Integer, Integer>();
 		
 		if(marksIds!=null) {
-		    
+			int i=0;
 		for (String marksId : marksIds) {
-                    String[] stdId = marksId.split(":");
-                    idsMarks.put(Integer.parseInt(stdId[0]), Integer.parseInt(studentsMarks[Integer.parseInt(stdId[1])]));
+                    idsMarks.put(Integer.parseInt(marksId), Integer.parseInt(studentsMarks[i]));
+                    i++;
                 }
 		
 		if (new MarksDetailsDAO().updateMarks(idsMarks)) {
@@ -680,92 +685,71 @@ public class MarksDetailsService {
 	}
 	
 	
-	public String addMarksNew() {
-
+	public String addMarks() {
 
 		String result = "false";
-
 		String[] studentIds = request.getParameterValues("studentIDs");
-		String[] studentsMarks = request.getParameterValues("studentMarks");
 		String exam = request.getParameter("examselected");
-		String subject = request.getParameter("subjectselected");
-		logger.info("the subject id is " + subject + ", and exam level is " + exam);
-		int sizeOfArray = 0;
-		Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
-		List<Integer> ids = new ArrayList<Integer>();
-		List<String> studentsMarksList = new ArrayList<String>();
-
-		if (studentIds != null && subject != null) {
-		for (String sid : studentIds) {
-                        String[] stdId = sid.split(":");
-                        studentsMarksList.add(studentsMarks[Integer.parseInt(stdId[1])]);
-                        ids.add(Integer.valueOf(stdId[0]));
-                }
 		
-		if (studentsMarks != null) {
+		List<Examleveldetails> examLevelDetails = new ExamLevelDetailsDAO().getExamLevelDetails(exam);
+		int examid = examLevelDetails.get(0).getIdexamlevel();
+		
+		
+		List<Subexamlevel> subjectList = (List<Subexamlevel>) httpSession.getAttribute("subjectsperexam");
+		Map<String,List<Marks>> marksSubjectMap = new HashMap<String,List<Marks>>();
+		
+		for (Subexamlevel subexamlevel : subjectList) {
+			
+			String[] studentsMarks = request.getParameterValues("studentMarks"+subexamlevel.getSubjectname());
+			String subject = subexamlevel.getSubjectname();
+			logger.info("the subject id is " + subject + ", and exam level is " + exam);
+			
+			Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
 
-			for (String marksList : studentsMarks) {
-				studentsMarksList.add(marksList);
+			if (studentIds != null && subject != null) {
 
+				for (String sid : studentIds) {
+	                        String[] stdId = sid.split(":");
+	                        mapOfMarks.put(Integer.valueOf(stdId[0]), studentsMarks[Integer.parseInt(stdId[1])]);
+	                }
+			
+				Set mapSet = mapOfMarks.entrySet();
+				Iterator mapIterator = mapSet.iterator();
+				
+				Subject subjectDetails = new SubjectDetailsService(request, response).getSubjectDetails(subject);
+				int subid = subjectDetails.getSubid();
+				
+				List<Marks> marksList = new ArrayList<Marks>();
+
+				while (mapIterator.hasNext()) {
+					Map.Entry mapEntry = (Entry) mapIterator.next();
+					    logger.info("The id is " + mapEntry.getKey() + "and marks is " + mapEntry.getValue());
+
+					String test = (String) mapEntry.getValue();
+					Marks marks = new Marks();
+					marks.setExamid(examid);
+					marks.setSubid(subid);
+					marks.setSid((int) mapEntry.getKey());
+					marks.setMarksobtained(Integer.parseInt(test));
+					String currentYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
+					marks.setAcademicyear(currentYear);
+					marks.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					marksList.add(marks);
+				}
+				
+				marksSubjectMap.put(subexamlevel.getSubjectname(), marksList);
 			}
 		}
-
-			/*for (String id : studentIds) {
-				System.out.println("id" + id);
-				ids.add(Integer.valueOf(id));
-
-			}*/
-
-			sizeOfArray = ids.size();
-
-			for (int i = 0; i < sizeOfArray; i++) {
-				mapOfMarks.put(ids.get(i), studentsMarksList.get(i));
-			}
-
-			Set mapSet = mapOfMarks.entrySet();
-			Iterator mapIterator = mapSet.iterator();
-
-			
-			
-			List<Examleveldetails> examLevelDetails = new ExamLevelDetailsDAO().getExamLevelDetails(exam);
-			
-			int examid = examLevelDetails.get(0).getIdexamlevel();
-			
-			
-			Subject subjectDetails = new SubjectDetailsService(request, response).getSubjectDetails(subject);
-			int subid = subjectDetails.getSubid();
-			List<Marks> marksList = new ArrayList<Marks>();
-
-			while (mapIterator.hasNext()) {
-				Map.Entry mapEntry = (Entry) mapIterator.next();
-				    logger.info("The id is " + mapEntry.getKey() + "and marks is " + mapEntry.getValue());
-
-				String test = (String) mapEntry.getValue();
-				Marks marks = new Marks();
-				marks.setExamid(examid);
-				marks.setSubid(subid);
-				marks.setSid((int) mapEntry.getKey());
-				marks.setMarksobtained(Integer.parseInt(test));
-				String currentYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
-				marks.setAcademicyear(currentYear);
-				marks.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				marksList.add(marks);
-			}
-
-			String output = new MarksDetailsDAO().addMarks(marksList);
+		
+			String output = new MarksDetailsDAO().addMarksMap(marksSubjectMap);
 			
 			if(output=="success"){
 				result = "true";
 			}else if (output.contains("Duplicate")){
 				result = "Duplicate";
 			}
-			/*if (new MarksDetailsDAO().addMarks(marksList)) {
-				result = true;
-			}*/
-		}
-
-		return result;
-	
+			
+			return result;
 	}
 
 	public void SearchForEvaluationSheet() {
@@ -814,7 +798,7 @@ public class MarksDetailsService {
 		            searchQuery = searchQuery+subQuery+ " Order By parent.Student.admissionnumber ASC";
 		            List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
 		            
-		            //New Code
+		            
 		            List<Subexamlevel>  subExamList =  new ExamLevelService(request, response).getSubExamLevelSubject(examLevel[1]);
 		            Map<Subexamlevel,List<Parents>> parentsExam = new HashMap<Subexamlevel,List<Parents>>();
 		            
@@ -845,7 +829,7 @@ public class MarksDetailsService {
                             
 		            }   
 		            httpSession.setAttribute("mapstudentsexam", parentsExam);
-		            //End New Code
+		            
 		            
 		           /* 
 		            Map<Parents,String> mapStudentReports = new LinkedHashMap<Parents,String>();

@@ -1461,6 +1461,7 @@ public class AttendanceService {
     public void getSubjects() throws IOException {
        
         List<Subexamlevel> subjectList = new ExamLevelService(request, response).getSubExamLevelSubject(DataUtil.emptyString(request.getParameter("urlexamlevel")));
+        httpSession.setAttribute("subjectsperexam", subjectList);
                 PrintWriter out = response.getWriter(); 
                 response.setContentType("text/xml");
                 response.setHeader("Cache-Control", "no-cache");
