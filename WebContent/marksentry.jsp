@@ -616,7 +616,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						
-						<tr>
+						<tr style="display: none;">
 							<td class="alignRightFields">Subject&nbsp;</td>
 							<td width="70%" id="subjectlist"><select
 									style="width: 200px;">
@@ -651,7 +651,7 @@ for(Cookie cookie : cookies){
 					</table>
 					
 					<table>
-					<tr>
+					<tr style="display: none;">
 							<td class="alignRightFields">Subject &nbsp;</td>
 							
 							
