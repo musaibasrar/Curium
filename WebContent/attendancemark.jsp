@@ -661,7 +661,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Examination Level &nbsp;</td>
 							<td width="70%"><label> <select name="examlevel" id="examlevel"
 									style="width: 200px;" onchange="getSubjects()" required>
-										<option selected></option>
+										<option selected>${searchexamlevel}</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
@@ -677,10 +677,10 @@ for(Cookie cookie : cookies){
 
 						</tr>
 
-						<tr >
+						<tr style="display: none;">
 							<td class="alignRightFields">Subject&nbsp;</td>
 							<td width="70%" id="subjectlist"><select
-									style="width: 200px;" required>
+									style="width: 200px;">
 										<option selected></option>
 								</select>
 								</td>
@@ -730,9 +730,11 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">${subjectlisttodisplay}
+						<c:forEach items="${subjectsperexam}" var="subjects">
+						<th title="click to sort" class="headerText">${subjects.subjectname}
 						<input type="hidden" name="subjectlisttodisplay" value="${subjectlisttodisplay}"/>
 						<input type="hidden" name="searchexamlevel" value="${searchexamlevel}"/>&nbsp;</th>
+						</c:forEach>
 					</tr>
 				</thead>
 
@@ -748,13 +750,15 @@ for(Cookie cookie : cookies){
 							<td class="dataTextInActive"><a class="dataTextInActive"><c:out
 										value="${attendanceList.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${attendanceList.name}" /></td>
+							<c:forEach items="${subjectsperexam}" var="subjects">
 							<td class="dataText">
-							<select name="studentAttendanceStatus" id="studentAttendanceStatus">
+							<select name="studentAttendanceStatus${subjects.subjectname}" id="studentAttendanceStatus">
 										<option selected value="Present" >Present</option>
 											<option value="Present" >Present</option>
 											<option value="Absent" >Absent</option>
-								</select>
+							</select>
 							</td>
+							</c:forEach>
 						</tr>
 					</c:forEach>
 				</tbody>

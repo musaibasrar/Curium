@@ -829,6 +829,48 @@ public class AttendanceService {
     public boolean markStudentsAttendance() {
 		boolean result = false;
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
+			
+			//New Code 
+			
+			String[] attendanceIds = request.getParameterValues("externalIDs");
+			List<Studentdailyattendance> studentDailyAttendanceList = new ArrayList<Studentdailyattendance>();
+			
+			List<Subexamlevel> subjectList = (List<Subexamlevel>) httpSession.getAttribute("subjectsperexam");
+			
+			for (Subexamlevel subexamlevel : subjectList) {
+				
+			String[] studentAttendanceStatus = request.getParameterValues("studentAttendanceStatus"+subexamlevel.getSubjectname());
+
+			for (String attid : attendanceIds) {
+				String[] attidString = attid.split(",");
+				if(attidString[0]!=null && attidString[1]!=null){
+					Studentdailyattendance studentDailyAttendance = new Studentdailyattendance();
+					studentDailyAttendance.setAttendeeid(attidString[0]);
+					studentDailyAttendance.setAttendancestatus(studentAttendanceStatus[Integer.parseInt(attidString[1])]);
+					studentDailyAttendance.setIntime("00:00");
+					studentDailyAttendance.setOuttime("00:00");
+					studentDailyAttendance.setDate(new Date());
+					studentDailyAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+					studentDailyAttendance.setBranchid(Integer.parseInt(request.getParameter("centercode")));
+					studentDailyAttendance.setSubject(subexamlevel.getSubjectname());
+					studentDailyAttendance.setExamlevelcode(DataUtil.emptyString(request.getParameter("searchexamlevel")));
+					studentDailyAttendanceList.add(studentDailyAttendance);
+				}
+			}
+			}
+			result = new AttendanceDAO().checkStudentAttendance(studentDailyAttendanceList);
+			request.setAttribute("attendancesave", result);
+			request.setAttribute("searchexamlevel", DataUtil.emptyString(request.getParameter("searchexamlevel")));
+			new ExamLevelService(request, response).examLevels();
+	        new BranchService(request, response).viewBranches();
+		}
+		return result;
+			
+			
+			//End New Code
+			
+			
+			/*
 			String[] attendanceIds = request.getParameterValues("externalIDs");
 			String[] studentAttendanceStatus = request.getParameterValues("studentAttendanceStatus");
 			
@@ -854,7 +896,8 @@ public class AttendanceService {
 			new ExamLevelService(request, response).examLevels();
 	        new BranchService(request, response).viewBranches();
 		}
-		return result;
+		return result;*/
+		
 	}
 	
 	public void markDailyAttendanceJob(){
