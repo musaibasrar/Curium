@@ -76,25 +76,9 @@ for(Cookie cookie : cookies){
 %>
     <frameset    rows="70,*"frameborder="0" border="0" framespacing="0"  >
     
-		   <c:if test="${(username == 'admin')}">
-			    <frame   src="header_admin_suuhs.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
+		   <c:if test="${(userType == 'admin')}">
+			    <frame   src="header_admin.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
 		   </c:if>
-        
-		   <c:if test="${(username == 'suasadmin')}">
-			    <frame   src="header_admin_suas.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
-		   </c:if>
-		   
-		   <c:if test="${(username == 'supsadmin')}">
-			    <frame   src="header_admin_sups.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
-		   </c:if>
-		   
-		   <c:if test="${(username == 'supucadmin')}">
-			    <frame   src="header_admin_supuc.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
-		   </c:if>
-		   
-		   <c:if test="${(username == 'sjuhpsadmin')}">
-			    <frame   src="header_admin_sjuhps.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
-		   </c:if>		   		   
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
                 <frame  src="left_admin.jsp" name="leftFrame" scrolling="yes"  frameborder="1"   />

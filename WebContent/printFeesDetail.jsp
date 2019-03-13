@@ -11,7 +11,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
-<html moznomarginboxes >
+<html>
+<title>FEES RECIEPT</title>
 <head>
 <style type="text/css">
 <!--
@@ -174,33 +175,27 @@
 		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="center">
+				<td align="left">
 				<img src="images/curiumheader.png" width="200" height="150"/>
-				</td>
-				<td class="dataTextBoldCenter" style="width: 100%">
-				CURIUM URDU BOYS/GIRLS <br>
-				<label class="addressLine">High School, Bidar.<br>
+				</td> 
+				<td style="width: 100%;" align="left">
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;Cambridge School, Yadgir </label><br>
+				<label class="addressLine">Behind Mohan Complex, Chittapur Road, Yadgir - 585202<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											Dist - Yadgir (K.S.) Cell: 9880012654 
 				 </label>
 				</td>
 			</tr>
-			<tr>
-			<td></td></tr>
-			<tr></tr>
 </table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
-
                     <td colspan="4" ></td>
-
                 </tr>
             </TABLE>
 
 		<table>
-		<tr>
-			<td></td>
-			
-			</tr>
+		
 			<tr>
 			<td></td>
 			
@@ -379,7 +374,17 @@
 
 <tr>
 <td align="left">Note: Fees once deposited will not be refunded under any Circumstances</td>
-<td align="right">Clerk</td>
+</tr>
+
+<tr>
+<td><br><br></td>
+</tr>
+<tr>
+
+<td align="Center"><br>Clerks</td>
+
+<td align="left">H.M</td>
+
 </tr>
 		</TABLE>
 
