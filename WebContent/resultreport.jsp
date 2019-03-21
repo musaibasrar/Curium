@@ -588,7 +588,7 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="academicyear" id="academicyear"
 									style="width: 240px;" required>
-											<option selected value="${resultserviceacademicsearch}">${resultserviceacademicsearch}</option>
+											<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
 											<option ></option>
 											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
 											<option value="2013/14" >2013/14</option>

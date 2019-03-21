@@ -517,6 +517,7 @@
 		form1.action = "Controller?process=AttendanceProcess&action=markStudentsAttendance";
 		form1.method = "POST";
 		form1.submit();
+		document.getElementById("update").disabled = true;
 	}
 	
 	

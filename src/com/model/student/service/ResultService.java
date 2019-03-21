@@ -75,6 +75,7 @@ public class ResultService {
         httpSession.setAttribute("resultlist", "");
         httpSession.setAttribute("resultsubexamlevel", "");
         httpSession.setAttribute("resultcentername", "");
+        httpSession.setAttribute("resultcentercode", "");
         httpSession.setAttribute("resultexamlevel", "");
         httpSession.setAttribute("resultlanguage", "");
         httpSession.setAttribute("resultqualification", "");
@@ -104,7 +105,7 @@ public class ResultService {
             if(!request.getParameter("examlevelcode").equalsIgnoreCase("")) {
                 String[] examLevelCode = examLevel.split(":");
                 if(subQuery!=null) {
-                    subQuery = subQuery+"AND parent.Student.examlevel = '"+examLevelCode[0]+"'";
+                    subQuery = subQuery+" AND parent.Student.examlevel = '"+examLevelCode[0]+"'";
                 }else {
                     subQuery = "parent.Student.examlevel = '"+examLevelCode[0]+"'";
                 }
@@ -116,7 +117,7 @@ public class ResultService {
             if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
                 language = request.getParameter("languageopted");
                 if(subQuery!=null) {
-                    subQuery = subQuery+"AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+                    subQuery = subQuery+" AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                 }else {
                     subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                 }
@@ -125,18 +126,18 @@ public class ResultService {
                 httpSession.setAttribute("resultservicelanguagesearch","");
             }
             
-            if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
+            /*if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
                 if(subQuery!=null) {
                     String subAcademicYear = request.getParameter("academicyear").toString().substring(2, 4);
                     
-                    subQuery = subQuery+"AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
+                    subQuery = subQuery+" AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
                 }else {
                     subQuery = "parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
                 }
                 httpSession.setAttribute("resultserviceacademicsearch",request.getParameter("academicyear").toString());
             }else {
                 httpSession.setAttribute("resultserviceacademicsearch","");
-            }
+            }*/
             
             searchQuery = searchQuery+subQuery;
             List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
@@ -213,13 +214,14 @@ public class ResultService {
             httpSession.setAttribute("passcount", passCounter);
             httpSession.setAttribute("secondcount", secondCounter);
             httpSession.setAttribute("firstcount", firstCounter);
-            httpSession.setAttribute("distinction", distinctionCounter);
+            httpSession.setAttribute("distinctioncount", distinctionCounter);
             httpSession.setAttribute("absentcount", absentCounter);
             httpSession.setAttribute("resultlist", resultList);
             httpSession.setAttribute("resultsubexamlevel", subList);
             String[] centerCodeName = DataUtil.emptyString(request.getParameter("centercode")).split(":");
             String[] examLevelCodeName = DataUtil.emptyString(request.getParameter("examlevelcode")).split(":");
             httpSession.setAttribute("resultcentername",  "Center Code/Name:  "+centerCodeName[0]+"/"+centerCodeName[1]);
+            httpSession.setAttribute("resultcentercode",  "Center Code:  "+centerCodeName[0]);
             httpSession.setAttribute("resultexamlevel", "Examination Code:  "+examLevelCodeName[0]);
             
             if(language==null) {
@@ -242,7 +244,7 @@ public class ResultService {
             return "SECOND CLASS";
         }else if(percentage < 79) {
             return "FIRST CLASS";
-        }else if(percentage < 100) {
+        }else if(percentage <= 100) {
             return "Distinction";
         }else {
             return "";
@@ -408,6 +410,7 @@ public class ResultService {
              String[] examLevelCodeName = DataUtil.emptyString(request.getParameter("examlevelcode")).split(":");
              if(!"".equalsIgnoreCase(centerCodeName[0])) {
                  httpSession.setAttribute("resultcentername",  "Center Code/Name:  "+centerCodeName[0]+"/"+centerCodeName[1]);
+                 httpSession.setAttribute("resultcentercode",  "Center Code:  "+centerCodeName[0]);
              }else {
                  httpSession.setAttribute("resultcentername",  "Center Code/Name:  ALL");
              }
@@ -612,6 +615,7 @@ public class ResultService {
         httpSession.setAttribute("resultlist", "");
         httpSession.setAttribute("resultsubexamlevel", "");
         httpSession.setAttribute("resultcentername", "");
+        httpSession.setAttribute("resultcentercode", "");
         httpSession.setAttribute("resultexamlevel", "");
         httpSession.setAttribute("resultlanguage", "");
         httpSession.setAttribute("resultqualification", "");
@@ -694,6 +698,7 @@ public class ResultService {
              httpSession.setAttribute("resultsubexamlevel", subList);
              String[] examLevelCodeName = DataUtil.emptyString(request.getParameter("examlevelcode")).split(":");
              httpSession.setAttribute("resultcentername",  "Center Code/Name:  "+branch.getCentercode()+"/"+branch.getCentername());
+             httpSession.setAttribute("resultcentercode",  "Center Code:  "+branch.getCentercode());
              httpSession.setAttribute("resultexamlevel", "Examination Code:  "+examLevelCodeName[0]);
              
              if(language==null) {

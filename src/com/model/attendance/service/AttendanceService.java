@@ -98,8 +98,7 @@ public class AttendanceService {
 	}
 
 	public void viewAllHolidays() {
-		//remove it after testing
-		//httpSession.setAttribute("currentAcademicYear", "2017/18");
+		
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
 		List<Holidaysmaster> list = new AttendanceDAO().readListOfHolidays(httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	        request.setAttribute("holidaysList", list);

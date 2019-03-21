@@ -62,7 +62,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 28px;
+	font-size: 24px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -71,7 +71,7 @@
 	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 22px;
+	font-size: 24px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -195,10 +195,14 @@
 				<img src="images/bielogo.png" width="100" height="150"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				BOARD OF ISLAMIC EDUCATION <br>
-				KARNATAKA<br><br>
-				<label class="addressLine">RESULTS<br>
+				BOARD OF ISLAMIC EDUCATION KARNATAKA<br><br>
+				<label class="addressLine">RESULTS<br><br><br>
 				 </label>
+				 <c:out value="${resultcentercode}" />
+				 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 <c:out value="${resultexamlevel}" />
 				</td>
 			</tr>
 			<tr>
