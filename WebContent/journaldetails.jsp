@@ -491,20 +491,20 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-					<c:forEach items="${journaltransactions}" var="journaltransactions">
+					<c:forEach items="${vouchertransactions}" var="vouchertransactions">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=StudentProcess&action=ViewFeesStructure&id=<c:out value='${journaltransactions.key.transactionsid}'/>"><c:out
-										value="${journaltransactions.key.transactionsid}" /></a></td>
-							<td class="dataText"><c:out value="${journaltransactions.value}" /></td>
+								href="Controller?process=StudentProcess&action=ViewFeesStructure&id=<c:out value='${vouchertransactions.key.transactionsid}'/>"><c:out
+										value="${vouchertransactions.key.transactionsid}" /></a></td>
+							<td class="dataText"><c:out value="${vouchertransactions.value}" /></td>
 							<td class="dataText"><c:out
-									value="${journaltransactions.key.dramount} -- ${journaltransactions.key.cramount}" /></td>
+									value="${vouchertransactions.key.dramount} -- ${vouchertransactions.key.cramount}" /></td>
 							<td class="dataText"><c:out
-									value="${journaltransactions.key.date}" /></td>
+									value="${vouchertransactions.key.transactiondate}" /></td>
 									<td class="dataText"><c:out
-									value="${journaltransactions.key.narration}" /></td>
+									value="${vouchertransactions.key.narration}" /></td>
 
 
 						</tr>

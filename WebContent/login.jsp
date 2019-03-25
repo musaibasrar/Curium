@@ -63,23 +63,12 @@
             }
         </script>
         <form action="Controller?process=UserProcess&action=authenticateUser" method="post" id="form1">
-        
-            <table width="100%" height="605" border="0" cellpadding="0" cellspacing="0">
-                
-                <tr>
-                    <td>
-                    	<table width="550" height="400" border="0"  background="images/curiumlogin.jpg" align="center" cellpadding="0" cellspacing="0">
-								<tr><td><br><br><br><br><br><br><br><br><br><br></td></tr>
-								<tr><td><br></td></tr>
-                            <tr>
-                            
-                            	<td>
-                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            	</td>
-                                <td>
-													
-                                    <table width="296"  border="0" cellpadding="0" cellspacing="0">
+                    	
+                                    <table>
+                                    
+                                    	<tr>
+                                    	<td> <img alt="" src="images/curiumlogo.jpg"></td>
+                                    	</tr>
                                     	
                                         <tr>
                                             <td height="30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -105,13 +94,7 @@
                                                 </div></td>
                                         </tr>
                                     </table>
-                                    <br>
                                     
-                                    </td>
-                            </tr>
-                        </table></td>
-                </tr>
-            </table>
         </form>
     </body>
 </html>

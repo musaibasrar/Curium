@@ -444,11 +444,11 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 					
-					<c:forEach items="${accountdetailsbalance}" var="accountdetailsbalance">
+					<c:forEach items="${accountdetailsbalanceMap}" var="accountdetails">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${accountdetailsbalance.accountDetails.accountname}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<td class="dataText" style="text-align: right"><c:out value="${accountdetails.key.accountDetails.accountname}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
 							<c:if test="${(accountdetailsbalance.crdr == 'Dr')}">

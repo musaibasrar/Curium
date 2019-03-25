@@ -14,30 +14,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Voucher</title>
+
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="css/graph/jquery.jqplot.css">
 
         <link rel="stylesheet" href="css/datePicker/demos.css">
-        <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.widget.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script  type="text/javascript" src="js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
-
-        <script type="text/javascript" src="js/datePicker/ui/jquery.effects.slide.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.effects.bounce.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.effects.clip.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.effects.transfer.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.effects.blind.js"></script>
+  
         <style type="text/css">
             <!--
             .labelCss {
@@ -233,7 +217,8 @@
                 height: auto;
                 display: inline;
             }
-            .style1 {
+            .style1 { <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
                 font-family: Tahoma;
                 font-size: 14px;
             }
@@ -254,6 +239,7 @@
         
         <script type="text/javascript">
     $(function() {
+    
         // run the currently selected effect
         function runEffect() {
             var clipEffect='blind';
@@ -261,11 +247,11 @@
             $( "#effect" ).toggle( clipEffect, options, 1000 );
         };
         
+       
         $( "#saveReceipt" ).button().click(function() {
             saveReceipt();
             return false;
         });
-        
         $( "#savePayment" ).button().click(function() {
             savePayment();
             return false;
@@ -287,6 +273,8 @@
     	
     	if(document.getElementById("dramount").vlaue == 0 || document.getElementById("cramountsecond").value == 0){
       	  alert('Voucher with zero amount cannot be saved!');
+        }else if(document.getElementById("dramount").value != document.getElementById("cramountsecond").value){
+        	alert('Credits must be equal to Debits.');
         }else{
         	
         	if(confirm('Are you sure,you want to save the receipt voucher?')){
@@ -305,6 +293,8 @@
     	
     	if(document.getElementById("dramountpayment").vlaue == 0 || document.getElementById("cramountpaymentsecond").value == 0){
         	  alert('Voucher with zero amount cannot be saved!');
+          }else if(document.getElementById("dramountpayment").value != document.getElementById("cramountpaymentsecond").value){
+          	alert('Credits must be equal to Debits.'); 	
           }else{
         	  if(confirm('Are you sure,you want to save the payment voucher?')){
         	  
@@ -321,8 +311,10 @@
       var accountTwo = document.getElementById("accountbalancecontrasecond").value;
       if(accountOne == accountTwo){
     	  alert('An account can be selected only once!');
-      }else if(document.getElementById("dramountcontra").vlaue == 0 || document.getElementById("cramountcontrasecond").value == 0){
+      }else if(document.getElementById("dramountcontra").value == 0 || document.getElementById("cramountcontrasecond").value == 0){
     	  alert('Voucher with zero amount cannot be saved!');
+      }else if(document.getElementById("dramountcontra").value != document.getElementById("cramountcontrasecond").value){
+        	alert('Credits must be equal to Debits.'); 	
       }else{
     	  if(confirm('Are you sure,you want to save the contra voucher?')){
     	  var form1 = document.getElementById("form1");
@@ -336,8 +328,10 @@
     
     function saveJournal(){
     	
-    	if(document.getElementById("dramountjournal").vlaue == 0 || document.getElementById("cramountjournalsecond").value == 0){
+    	if(document.getElementById("dramountjournal").value == 0 || document.getElementById("cramountjournalsecond").value == 0){
       	  alert('Voucher with zero amount cannot be saved!');
+        }else if(document.getElementById("dramountjournal").value != document.getElementById("cramountjournalsecond").value){
+        	alert('Credits must be equal to Debits.'); 	
         }else{
         	if(confirm('Are you sure,you want to save the journal voucher?')){
         	 var form1 = document.getElementById("form1");
@@ -345,8 +339,6 @@
              form1.submit();
         	}
         }
-    	 
-    	
     }
         </script> 
         <script type="text/javascript">
@@ -806,7 +798,7 @@ for(Cookie cookie : cookies){
 									style="width: 240px;"">
 										
 
-										<c:forEach items="${accountdetailsbalancepayment}" var="accountdetailsbalance">
+										<c:forEach items="${accountdetailsbalanceexpacc}" var="accountdetailsbalance">
 
 											<option value="${accountdetailsbalance.accountDetails.accountdetailsid}" data-sync-payment="${accountdetailsbalance.accountDetails.accountdetailsid}">
 												<c:out value="${accountdetailsbalance.accountDetails.accountname}" />
@@ -816,14 +808,13 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 
 								</select></label></td>
-					<td align="center"><label>
-									<select name="accountbalancepayment" id="accountbalancepayment" disabled="true"
+					<td align="center"><label><select name="accountbalancepayment" id="accountbalancepayment" disabled="true"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
     text-indent: 1px;
     text-overflow: '';font-weight: bold;color: black;"">
 
-										<c:forEach items="${accountdetailsbalancepayment}" var="accountdetailsbalance">
+										<c:forEach items="${accountdetailsbalanceexpacc}" var="accountdetailsbalance">
 
 											<option  value="${accountdetailsbalance.accountDetails.accountdetailsid}">
 												<c:out value="${accountdetailsbalance.currentbalance}" /> (<c:out value="${accountdetailsbalance.crdr}" />)
@@ -840,11 +831,11 @@ for(Cookie cookie : cookies){
 					<tr>
 					<td align="center" ><input size="2" style="font-weight: bold;background-color: #EEEEEE;font-size: 12px;" type="text" value="Cr" readonly /></td>
 					<td align="center"><label>
-									<select name="accountnamepaymentsecond" id="accountnamepaymentsecond" 
+										<select name="accountnamepaymentsecond" id="accountnamepaymentsecond" 
 									style="width: 240px;"">
 										
 
-										<c:forEach items="${accountdetailsbalanceexbc}" var="accountdetailsbalance">
+										<c:forEach items="${accountdetailsbalancepayment}" var="accountdetailsbalance">
 
 											<option value="${accountdetailsbalance.accountDetails.accountdetailsid}" data-sync-payment-second="${accountdetailsbalance.accountDetails.accountdetailsid}">
 												<c:out value="${accountdetailsbalance.accountDetails.accountname}" />
@@ -853,15 +844,16 @@ for(Cookie cookie : cookies){
 
 										</c:forEach>
 
-								</select></label></td>
+								</select>
+									</label></td>
 					<td align="center"><label>
-									<select name="accountbalancepaymentsecond" id="accountbalancepaymentsecond" disabled="true"
+					<select name="accountbalancepaymentsecond" id="accountbalancepaymentsecond" disabled="true"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
     text-indent: 1px;
     text-overflow: '';font-weight: bold;color: black;"">
 
-										<c:forEach items="${accountdetailsbalanceexbc}" var="accountdetailsbalance">
+										<c:forEach items="${accountdetailsbalancepayment}" var="accountdetailsbalance">
 
 											<option  value="${accountdetailsbalance.accountDetails.accountdetailsid}">
 												<c:out value="${accountdetailsbalance.currentbalance}" /> (<c:out value="${accountdetailsbalance.crdr}" />)
@@ -870,7 +862,9 @@ for(Cookie cookie : cookies){
 
 										</c:forEach>
 
-								</select></label></td>
+								</select>
+								
+									</label></td>
 					<td align="center"><b><input type="text" name="dramountpaymentsecond" id="dramountpaymentsecond" style="background-color: #E3E3E3;" readonly/></b></td>
 					<td align="center"><b><input type="text" name="cramountpaymentsecond" id="cramountpaymentsecond" value="0"/></b></td>
 					</tr>

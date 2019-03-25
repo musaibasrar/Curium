@@ -507,26 +507,26 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-					<c:forEach items="${receipttransactions}" var="receipttransactions">
+					<c:forEach items="${vouchertransactions}" var="vouchertransactions">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							
 							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${receipttransactions.key.transactionsid}"/>" class="chcktbl"
+								id="<c:out value="${vouchertransactions.key.transactionsid}"/>" class="chcktbl"
 								name="receiptids"
-								value="<c:out value="${receipttransactions.key.transactionsid}"/>" />
+								value="<c:out value="${vouchertransactions.key.transactionsid}"/>" />
 								
 							</td>
-							<td class="dataTextInActive"><c:out value="${receipttransactions.key.transactionsid}" />
+							<td class="dataTextInActive"><c:out value="${vouchertransactions.key.transactionsid}" />
 							</td>
-							<td class="dataText"><c:out value="${receipttransactions.value}" /></td>
+							<td class="dataText"><c:out value="${vouchertransactions.value}" /></td>
 							<td class="dataText"><c:out
-									value="${receipttransactions.key.dramount} -- ${receipttransactions.key.cramount}" /></td>
+									value="${vouchertransactions.key.dramount} -- ${vouchertransactions.key.cramount}" /></td>
 							<td class="dataText"><c:out
-									value="${receipttransactions.key.date}" /></td>
+									value="${vouchertransactions.key.transactiondate}" /></td>
 									<td class="dataText"><c:out
-									value="${receipttransactions.key.narration}" /></td>
+									value="${vouchertransactions.key.narration}" /></td>
 
 
 						</tr>

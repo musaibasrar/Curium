@@ -79,7 +79,7 @@ public class AccountAction {
 
 	private String cancelPaymentVoucher() {
 		
-		if(new AccountService(request, response).cancelPaymentVoucher()){
+		if(new AccountService(request, response).cancelVoucher()){
 			return "Controller?process=AccountProcess&action=viewVoucherReceipt";
 		}
 			return ERRORPAGE;
@@ -88,7 +88,7 @@ public class AccountAction {
 
 	private String cancelReceiptVoucher() {
 
-		if(new AccountService(request, response).cancelReceiptVoucher()){
+		if(new AccountService(request, response).cancelVoucher()){
 			return "Controller?process=AccountProcess&action=viewVoucherReceipt";
 		}
 			return ERRORPAGE;
@@ -109,25 +109,25 @@ public class AccountAction {
 		
 		if(nextVoucher.equalsIgnoreCase("Receipt")){
 			
-			if(new AccountService(request, response).viewVoucherReceipt()){
+			if(new AccountService(request, response).viewVouchers(1)){
 				return "receiptdetails.jsp";
 			}
 			
 		}else if(nextVoucher.equalsIgnoreCase("Payment")){
 			
-			if(new AccountService(request, response).viewVoucherPayment()){
+			if(new AccountService(request, response).viewVouchers(2)){
 				return "paymentdetails.jsp";
 			}
 			
 		}else if(nextVoucher.equalsIgnoreCase("Contra")){
 			
-			if(new AccountService(request, response).viewVoucherContra()){
+			if(new AccountService(request, response).viewVouchers(3)){
 				return "contradetails.jsp";
 			}
 			
 		}else if(nextVoucher.equalsIgnoreCase("Journal")){
 			
-			if(new AccountService(request, response).viewVoucherJournal()){
+			if(new AccountService(request, response).viewVouchers(4)){
 				return "journaldetails.jsp";
 			}
 		}
@@ -135,7 +135,7 @@ public class AccountAction {
 	}
 
 	private String viewVoucherReceipt() {
-		new AccountService(request, response).viewVoucherReceipt();
+		new AccountService(request, response).viewVouchers(1);
 			return "receiptdetails.jsp";
 	}
 

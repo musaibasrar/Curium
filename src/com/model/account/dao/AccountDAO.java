@@ -12,11 +12,8 @@ import com.model.account.dto.Accountdetails;
 import com.model.account.dto.Accountdetailsbalance;
 import com.model.account.dto.Accountgroupmaster;
 import com.model.account.dto.Accountsubgroupmaster;
-import com.model.account.dto.Contratransactions;
 import com.model.account.dto.Financialaccountingyear;
-import com.model.account.dto.Journaltransactions;
-import com.model.account.dto.Paymenttransactions;
-import com.model.account.dto.Receipttransactions;
+import com.model.account.dto.VoucherEntrytransactions;
 import com.util.HibernateUtil;
 import com.util.Session;
 import com.util.Session.Transaction;
@@ -45,7 +42,7 @@ public class AccountDAO {
 			transaction = session.beginTransaction();
 			Query query = session.createQuery("from Financialaccountingyear where active='yes'");
 			financialYear = (Financialaccountingyear) query.uniqueResult();
-			if(financialYear.getActive().equalsIgnoreCase(financialaccountingyear.getActive())){
+			if(financialYear!=null && financialYear.getActive().equalsIgnoreCase(financialaccountingyear.getActive())){
 				financialYear.setActive("no");
 				session.update(financialYear);
 			}
@@ -158,13 +155,15 @@ public class AccountDAO {
 		return result;
 	}
 
-	public List<Accountdetailsbalance> getAccountdetailsbalanceExBC(int branchId) {
+	public List<Accountdetailsbalance> getAccountdetailsbalanceExBC(List<Integer> accountIds, int branchId) {
 
 		List<Accountdetailsbalance> accountDetails = new ArrayList<Accountdetailsbalance>();
 		
 		try{
 			transaction = session.beginTransaction();
-			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountSubGroupMaster.accountsubgroupmasterid NOT IN (1,2) and branchid="+branchId).list();
+			Query query = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountGroupMaster.accountgroupid IN (:accountIds) and branchid="+branchId);
+			query.setParameterList("accountIds", accountIds);
+			accountDetails = query.getResultList();
 			transaction.commit();
 		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
@@ -207,7 +206,7 @@ public class AccountDAO {
 		return false;
 	}
 
-	public boolean saveReceipt(Receipttransactions transactions) {
+	public boolean saveVoucher(VoucherEntrytransactions transactions) {
 		
 		try{
 			transaction = session.beginTransaction();
@@ -219,45 +218,24 @@ public class AccountDAO {
 		}
 		return false;
 	}
-
-	public boolean savePayment(Paymenttransactions transactions) {
-
-		try {
+	
+	public boolean saveVoucherwithAccUpdate(VoucherEntrytransactions transactions, String drAmount, String crAmount) {
+		
+		try{
 			transaction = session.beginTransaction();
 			session.save(transactions);
+			Query query = session.createQuery(drAmount);
+			query.executeUpdate();
+			Query query1 = session.createQuery(crAmount);
+			query1.executeUpdate();
 			transaction.commit();
 			return true;
-		} catch (Exception hb) { transaction.rollback(); logger.error(hb);
+		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
 		}
 		return false;
 	}
 
-	public boolean saveContra(Contratransactions transactions) {
-
-		try {
-			transaction = session.beginTransaction();
-			session.save(transactions);
-			transaction.commit();
-			return true;
-		} catch (Exception hb) { transaction.rollback(); logger.error(hb);
-			hb.printStackTrace();
-		} 
-		return false;
-	}
-	
-	public boolean saveJournal(Journaltransactions transactions) {
-
-		try {
-			transaction = session.beginTransaction();
-			session.save(transactions);
-			transaction.commit();
-			return true;
-		} catch (Exception hb) { transaction.rollback(); logger.error(hb);
-			hb.printStackTrace();
-		} 
-		return false;
-	}
 	
 	public List<Accountdetailsbalance> getAccountBalanceDetails(List<Integer> accountIds, int branchId) {
 		
@@ -297,7 +275,7 @@ public class AccountDAO {
 		
 		try{
 			transaction = session.beginTransaction();
-			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountSubGroupMaster.accountsubgroupmasterid IN (1,2) and branchid="+branchId).list();
+			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountGroupMaster.accountgroupid IN (1) and branchid="+branchId).list();
 			transaction.commit();																						   											
 		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
@@ -305,16 +283,29 @@ public class AccountDAO {
 		return accountDetails;
 	}
 
-	public List<Receipttransactions> getReceiptTransactions(Integer financialYear, int branchId) {
-		List<Receipttransactions> receiptTransactions = new ArrayList<Receipttransactions>();
+	public List<VoucherEntrytransactions> getVoucherEntryTransactions(Integer financialYear, int branchId, int voucherType) {
+		
+		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
 		try {
 			transaction = session.beginTransaction();
-			receiptTransactions = session.createQuery("from Receipttransactions where financialyear='"+financialYear+"'and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
+			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where financialyear='"+financialYear+"'and cancelvoucher!='yes' and vouchertype="+voucherType+" and branchid = "+branchId+" order by transactionsid ASC").list();
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}		
-		return receiptTransactions;
+		return voucherEntrytransactions;
+	}
+	
+	public List<VoucherEntrytransactions> getVoucherEntryTransactionsBetweenDates(String fromDate, String toDate, int accNo, int branchId) {
+		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
+		try {
+			transaction = session.beginTransaction();
+			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and draccountid='"+accNo+"' or craccountid='"+accNo+"' and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}		
+		return voucherEntrytransactions;
 	}
 
 	public String getAccountName(Integer accountid) {
@@ -331,88 +322,22 @@ public class AccountDAO {
 		return null;
 	}
 
-	public List<Paymenttransactions> getPaymentTransactions(Integer financialYear, int branchId) {
-		
-		List<Paymenttransactions> paymentTransactions = new ArrayList<Paymenttransactions>();
-		try {
-			transaction = session.beginTransaction();
-			paymentTransactions = session.createQuery("from Paymenttransactions where financialyear='"+financialYear+"' and branchid="+branchId+" order by transactionsid ASC ").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}		
-		return paymentTransactions;
-	}
-
-	public List<Contratransactions> getContraTransactions(Integer financialYear, int branchId) {
-		
-		List<Contratransactions> contraTransactions = new ArrayList<Contratransactions>();
-		try {
-			transaction = session.beginTransaction();
-			contraTransactions = session.createQuery("from Contratransactions where financialyear='"+financialYear+"' and branchid="+branchId+" order by transactionsid ASC ").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}
-		return contraTransactions;
-	}
-
-	public List<Journaltransactions> getJournalTransactions(Integer financialYear, int branchId) {
-
-		List<Journaltransactions> journalTransactions = new ArrayList<Journaltransactions>();
-		try {
-			transaction = session.beginTransaction();
-			journalTransactions = session.createQuery("from Journaltransactions where financialyear='"+financialYear+"' and branchid="+branchId+" order by transactionsid ASC ").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}
-		return journalTransactions;
-		
-	}
 
 	public boolean checkInTransactions(Integer accountId) {
 		
-		Receipttransactions rTransactions = new Receipttransactions();
-		Paymenttransactions pTransactions = new Paymenttransactions();
-		Contratransactions cTransactions = new Contratransactions();
-		Journaltransactions jTransactions = new Journaltransactions();
+		VoucherEntrytransactions rTransactions = new VoucherEntrytransactions();
+		
 		
 		try {
 			transaction = session.beginTransaction();
-			// receipt
-			Query receipt = session.createQuery("from Receipttransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
-			rTransactions = (Receipttransactions) receipt.uniqueResult();
+
+			Query receipt = session.createQuery("from VoucherEntrytransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
+			rTransactions = (VoucherEntrytransactions) receipt.uniqueResult();
 			
 			if(rTransactions.getTransactionsid() != null){
 				transaction.commit();
 				return true;
 			}
-			
-			// payment
-			Query payment = session.createQuery("from Paymenttransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
-			pTransactions = (Paymenttransactions) payment.uniqueResult();
-			if(pTransactions.getTransactionsid() != null){
-				transaction.commit();
-				return true;
-			}
-			
-			//contra 
-			Query contra = session.createQuery("from Contratransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
-			cTransactions = (Contratransactions) contra.uniqueResult();
-			if(cTransactions.getTransactionsid() != null){
-				transaction.commit();
-				return true;
-			}
-			
-			//Journal
-			Query journal = session.createQuery("from Journaltransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
-			jTransactions = (Journaltransactions) journal.uniqueResult();
-			if(jTransactions.getTransactionsid() != null){
-				transaction.commit();
-				return true;
-			}
-			
 			
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
@@ -437,27 +362,27 @@ public class AccountDAO {
 		return false;
 	}
 
-	public Receipttransactions getReceiptDetails(String id) {
+	public VoucherEntrytransactions getVoucherDetails(String id) {
 		
-		Receipttransactions receiptTransactions = new Receipttransactions();
+		VoucherEntrytransactions voucherTransactions = new VoucherEntrytransactions();
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Receipttransactions where transactionsid='"+id+"'");
-			receiptTransactions = (Receipttransactions) query.uniqueResult();
+			Query query = session.createQuery("from VoucherEntrytransactions where transactionsid='"+id+"'");
+			voucherTransactions = (VoucherEntrytransactions) query.uniqueResult();
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}
-		return receiptTransactions;
+		return voucherTransactions;
 	}
 
-	public boolean updateAccounts(Receipttransactions receiptTransaction) {
+	public boolean updateAccounts(VoucherEntrytransactions voucherTransaction) {
 		
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("update Accountdetailsbalance set currentbalance=currentbalance-'"+receiptTransaction.getCramount()+"' where accountdetailsid="+receiptTransaction.getCraccountid());
+			Query query = session.createQuery("update Accountdetailsbalance set currentbalance=currentbalance-'"+voucherTransaction.getCramount()+"' where accountdetailsid="+voucherTransaction.getCraccountid());
 			query.executeUpdate();
-			Query query2 = session.createQuery("update Accountdetailsbalance set currentbalance=currentbalance-'"+receiptTransaction.getDramount()+"' where accountdetailsid="+receiptTransaction.getDraccountid());
+			Query query2 = session.createQuery("update Accountdetailsbalance set currentbalance=currentbalance-'"+voucherTransaction.getDramount()+"' where accountdetailsid="+voucherTransaction.getDraccountid());
 			query2.executeUpdate();
 			transaction.commit();
 			return true;
@@ -467,11 +392,11 @@ public class AccountDAO {
 		return false;
 	}
 
-	public boolean cancelReceipt(String id) {
+	public boolean cancelVoucher(String id) {
 		
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("update Receipttransactions set cancelvoucher='yes' where transactionsid="+id);
+			Query query = session.createQuery("update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id);
 			query.executeUpdate();
 			transaction.commit();
 			return true;
@@ -482,42 +407,17 @@ public class AccountDAO {
 		
 	}
 
-	public Paymenttransactions getPaymentDetails(String id) {
-		
-		Paymenttransactions paymentTransactions = new Paymenttransactions();
+	public Accountdetails getAccountDetails(int accountid) {
+		Accountdetails accountDetails = new Accountdetails();
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Paymenttransactions where transactionsid='"+id+"'");
-			paymentTransactions = (Paymenttransactions) query.uniqueResult();
+			Query query =  session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
+			accountDetails = (Accountdetails) query.uniqueResult(); 
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}
-		return paymentTransactions;
-	}
-
-	public boolean updateAccountsPayment(Paymenttransactions paymentTransaction) {
-		
-		try {
-			transaction = session.beginTransaction();
-			if(paymentTransaction.getCraccountid() == 1 || paymentTransaction.getCraccountid() == 2){
-				Query query = session.createQuery("update Accountdetailsbalance set currentbalance=currentbalance+'"+paymentTransaction.getCramount()+"' where accountdetailsid="+paymentTransaction.getCraccountid());
-				query.executeUpdate();
-			}else{
-				Query query = session.createQuery("update Accountdetailsbalance set currentbalance=currentbalance-'"+paymentTransaction.getCramount()+"' where accountdetailsid="+paymentTransaction.getCraccountid());
-				query.executeUpdate();
-			}
-			
-			
-			Query query2 = session.createQuery("update Accountdetailsbalance set currentbalance=currentbalance-'"+paymentTransaction.getDramount()+"' where accountdetailsid="+paymentTransaction.getDraccountid());
-			query2.executeUpdate();
-			transaction.commit();
-			return true;
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}
-		return false;
-		
+		return accountDetails;
 	}
 
 }

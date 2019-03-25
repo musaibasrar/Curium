@@ -612,20 +612,6 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
-
-						<tr>
-						<td width="30%" class="alignRight">Opening Balance &nbsp;</td>
-							<td width="12%" align="left"><label> 
-							<input name="openingbalance" id="openingbalance" type="text" value="0" size="36"/>
-							</label>
-						</tr>
-						
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-
-
 						<div>
 							<table width="100%">
 								<tr>
@@ -654,7 +640,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Account Details</td>
+					<td class="headerTD">Chart of Accounts</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -663,21 +649,20 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Account Name<img
-							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
-						<th title="click to sort" class="headerText">Opening Balance<img
-							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
-						<th title="click to sort" class="headerText">Sub-Group<img
-							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
-						</th>
 						<th title="click to sort" class="headerText">Group<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
-
+						<th title="click to sort" class="headerText">Sub-Group<img
+							alt=" " style="position: relative; top: 4px;"
+							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+						</th>
+						<th title="click to sort" class="headerText">Account Name<img
+							alt=" " style="position: relative; top: 4px;"
+							src="css/dataTable/images/sort_both.png" /></th>
+						<th title="click to sort" class="headerText">Balance<img
+							alt=" " style="position: relative; top: 4px;"
+							src="css/dataTable/images/sort_both.png" /></th>
 					</tr>
 				</thead>
 
@@ -691,11 +676,10 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${accountdetailsbalance.accountdetailsbalanceid}"/>" class="chcktbl"
 								name="accountids"
 								value="<c:out value="${accountdetailsbalance.accountdetailsbalanceid}-${accountdetailsbalance.accountDetails.accountdetailsid}"/>" /></td>
-								
-							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountname}" /></td>
-								<td class="dataText"><c:out value="${accountdetailsbalance.openingbalance}" />(${accountdetailsbalance.crdr})</td>
-							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountSubGroupMaster.accountsubgroupname}" /></td>
 							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountGroupMaster.accountgroupname}" /></td>
+							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountSubGroupMaster.accountsubgroupname}" /></td>
+							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountname}" /></td>
+							<td class="dataText">&#8377;&nbsp<c:out value="${accountdetailsbalance.currentbalance}" /></td>
 						</tr>
 					</c:forEach>
 

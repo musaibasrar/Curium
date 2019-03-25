@@ -275,7 +275,7 @@
     			changeYear : true,
     			changeMonth : true,
     			dateFormat: 'yy-mm-dd',
-    			yearRange: "-50:+0"
+    			yearRange: "-50:+10"
     		});
     		$("#anim").change(function() {
     			$("#fromdate").datepicker("option", "showAnim", $(this).val());
@@ -286,7 +286,7 @@
     			changeYear : true,
     			changeMonth : true,
     			dateFormat: 'yy-mm-dd',
-    			yearRange: "-50:+1"
+    			yearRange: "-50:+10"
     		});
     		$("#anim").change(function() {
     			$("#todate").datepicker("option", "showAnim", $(this).val());
