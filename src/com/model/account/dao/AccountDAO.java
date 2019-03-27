@@ -296,6 +296,19 @@ public class AccountDAO {
 		return voucherEntrytransactions;
 	}
 	
+	public List<VoucherEntrytransactions> getCancelledVoucherEntryTransactions(Integer financialYear, int branchId) {
+		
+		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
+		try {
+			transaction = session.beginTransaction();
+			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where financialyear='"+financialYear+"'and cancelvoucher='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}		
+		return voucherEntrytransactions;
+	}
+	
 	public List<VoucherEntrytransactions> getVoucherEntryTransactionsBetweenDates(String fromDate, String toDate, int accNo, int branchId) {
 		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
 		try {
@@ -376,14 +389,16 @@ public class AccountDAO {
 		return voucherTransactions;
 	}
 
-	public boolean updateAccounts(VoucherEntrytransactions voucherTransaction) {
+	public boolean updateAccountsWithVoucherCancel(String updateDrAccount, String updateCrAccount, String cancelVoucher) {
 		
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("update Accountdetailsbalance set currentbalance=currentbalance-'"+voucherTransaction.getCramount()+"' where accountdetailsid="+voucherTransaction.getCraccountid());
-			query.executeUpdate();
-			Query query2 = session.createQuery("update Accountdetailsbalance set currentbalance=currentbalance-'"+voucherTransaction.getDramount()+"' where accountdetailsid="+voucherTransaction.getDraccountid());
-			query2.executeUpdate();
+			Query updateDr = session.createQuery(updateDrAccount);
+			updateDr.executeUpdate();
+			Query updateCr = session.createQuery(updateCrAccount);
+			updateCr.executeUpdate();
+			Query cancelVoucherQuery = session.createQuery(cancelVoucher);
+			cancelVoucherQuery.executeUpdate();
 			transaction.commit();
 			return true;
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

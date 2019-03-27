@@ -1,6 +1,6 @@
 <%--
-    Document   : payment details
-    Created on : Mar 09, 2018, 3:05:28 PM
+    Document   : Cancelled Voucher
+    Created on : Mar 26, 2019, 3:26:28 PM
     Author     : Musaib
 --%>
 
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Receipt Details</title>
+<title>Cancelled Voucher Details</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -379,24 +379,13 @@
 
 		$("#tabs").tabs();
 
-		$("#cancel").button().click(function() {
-			cancelVoucher();
-		});
-		/* $("#effect").hide(); */
-
 	});
-	
-	function cancelVoucher(){
-		
-		if(confirm('Are you sure, you want to cancel the Payment Voucher?')){
-			var form1 = document.getElementById("form1");
-			form1.action = "Controller?process=AccountProcess&voucherType=2&action=cancelVoucher";
-			form1.method = "POST";
-			form1.submit();	
-		}
-		
-	}
+
 </script>
+
+
+
+
 
 </head>
   <%
@@ -418,72 +407,10 @@ for(Cookie cookie : cookies){
 <body>
 	<form id="form1">
 
-		<div id="effect" class="ui-widget-content ui-corner-all">
-			<div id="tabs">
-				<ul>
-					<li><a href="#tabs-1">Payment Details</a></li>
-
-				</ul>
-				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-						<td></td>
-						<td></td>
-						<td width="40%"></td>
-							<td width="70%"><label> <select name="voucher"
-									id="voucher" style="width: 150px">
-										<option>Receipt</option>
-										<option selected>Payment</option>
-										<option>Contra</option>
-										<option>Journal</option>
-								</select>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-
-							<td width="30%" class="alignRight"></td>
-							<td></td>
-							<td><br></td>
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="20%" class="alignRight">
-								<button id="search">Search</button>
-							</td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-					</table>
-					
-					
-
-				</div>
-			</div>
-		</div>
-
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search result</td>
+					<td class="headerTD">Cancelled Vouchers List</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -491,7 +418,6 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Voucher Number</th>
 						<th title="click to sort" class="headerText">Dr Account -- Cr Account&nbsp;</th>
 						<th title="click to sort" class="headerText">Dr Amount -- Cr Amount&nbsp;</th>
@@ -501,18 +427,11 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-					<c:forEach items="${vouchertransactions}" var="vouchertransactions">
+					<c:forEach items="${cancelledvouchertransactions}" var="vouchertransactions">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${vouchertransactions.key.transactionsid}"/>" class="chcktbl"
-								name="transactionids"
-								value="<c:out value="${vouchertransactions.key.transactionsid}"/>" />
-								
-							</td>
-							<td class="dataTextInActive">
-							<c:out value="${vouchertransactions.key.transactionsid}" />
+							<td class="dataTextInActive"><c:out value="${vouchertransactions.key.transactionsid}" />
 							</td>
 							<td class="dataText"><c:out value="${vouchertransactions.value}" /></td>
 							<td class="dataText"><c:out
@@ -528,10 +447,6 @@ for(Cookie cookie : cookies){
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"><button id="cancel">Cancel Voucher</button>
-							</td>
-							
-
 					</tr>
 				</tfoot>
 			</table>

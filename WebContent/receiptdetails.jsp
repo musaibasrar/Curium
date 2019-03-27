@@ -388,9 +388,9 @@
 	
 	function cancelVoucher(){
 		
-		if(confirm('Are you sure, you want to cancel the receipt?')){
+		if(confirm('Are you sure, you want to cancel the Receipt Voucher?')){
 			var form1 = document.getElementById("form1");
-			form1.action = "Controller?process=AccountProcess&action=cancelReceiptVoucher";
+			form1.action = "Controller?process=AccountProcess&voucherType=1&action=cancelVoucher";
 			form1.method = "POST";
 			form1.submit();	
 		}
@@ -514,7 +514,7 @@ for(Cookie cookie : cookies){
 							
 							<td class="dataText"><input type="checkbox"
 								id="<c:out value="${vouchertransactions.key.transactionsid}"/>" class="chcktbl"
-								name="receiptids"
+								name="transactionids"
 								value="<c:out value="${vouchertransactions.key.transactionsid}"/>" />
 								
 							</td>
@@ -534,7 +534,7 @@ for(Cookie cookie : cookies){
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"><button id="cancel">Cancel</button>
+						<td class="footerTD" colspan="2"><button id="cancel">Cancel Voucher</button>
 							</td>
 							
 

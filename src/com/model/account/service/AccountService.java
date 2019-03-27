@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -596,7 +598,7 @@ public class AccountService {
 
 		String twoAccounts = null;
 		
-		Map<VoucherEntrytransactions,String> voucherMap = new HashMap<VoucherEntrytransactions, String>();
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
 		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
 		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), voucherType);
 		
@@ -756,23 +758,97 @@ public class AccountService {
 
 	public boolean cancelVoucher() {
 		
-		String[] receiptIds = request.getParameterValues("receiptids");
+		String[] receiptIds = request.getParameterValues("transactionids");
+		int voucherType = DataUtil.parseInt(request.getParameter("voucherType"));
 		
-		if (receiptIds != null) {
+		if (receiptIds != null || voucherType!=0) {
 			
 			for (String id : receiptIds) {
 				VoucherEntrytransactions voucherTransaction = new AccountDAO().getVoucherDetails(id);
-				boolean updateResult = new AccountDAO().updateAccounts(voucherTransaction);
-				if(updateResult){
-					return new AccountDAO().cancelVoucher(id);
-				}else {
-					return false;
+				
+				if(voucherType==1) {
+					
+					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
+					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
+
+					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id;
+					
+					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+				}else if(voucherType==2) {
+
+					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
+					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
+					
+					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id;
+					
+					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+				}else if(voucherType==3) {
+
+					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
+					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
+					
+					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id;
+					
+					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+				}else if(voucherType==4) {
+					
+					// Dr
+					Accountdetails accountDetailsDr = new AccountDAO().getAccountDetails(voucherTransaction.getDraccountid());
+					String updateDrAccount= null;
+					if(accountDetailsDr.getAccountGroupMaster().getAccountgroupid()==1 || accountDetailsDr.getAccountGroupMaster().getAccountgroupid()==5) {
+						updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
+					}else {
+						updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
+					}
+					
+					//Cr
+					
+					Accountdetails accountDetailsCr = new AccountDAO().getAccountDetails(voucherTransaction.getCraccountid());
+					String updateCrAccount= null;
+					
+					if(accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==2 || accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==3 || accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==4) {
+						updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
+					}else {
+						updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
+					}
+					
+					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id;
+					
+					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
 				}
+
+				
 				
 			}
 			
 		}
 		
+		return false;
+	}
+
+
+	public boolean viewCancelledVouchers() {
+		
+		List<VoucherEntrytransactions> cancelledVoucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
+		String twoAccounts = null;
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
+		cancelledVoucherTransactions = new AccountDAO().getCancelledVoucherEntryTransactions(financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		for (VoucherEntrytransactions voucherEntry : cancelledVoucherTransactions) {
+			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		request.setAttribute("cancelledvouchertransactions", voucherMap);
+		
+		return true;
+		
+		}
 		return false;
 	}
 

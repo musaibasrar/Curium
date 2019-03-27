@@ -382,9 +382,23 @@
 		$("#save").button().click(function() {
 			addDepartment();
 		});
+		$("#cancel").button().click(function() {
+			cancelVoucher();
+		});
 		/* $("#effect").hide(); */
 
 	});
+	
+	function cancelVoucher(){
+		
+		if(confirm('Are you sure, you want to cancel the Contra Voucher?')){
+			var form1 = document.getElementById("form1");
+			form1.action = "Controller?process=AccountProcess&voucherType=3&action=cancelVoucher";
+			form1.method = "POST";
+			form1.submit();	
+		}
+		
+	}
 	
 
 </script>
@@ -486,6 +500,7 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Voucher Number</th>
 						<th title="click to sort" class="headerText">Dr Account -- Cr Account&nbsp;</th>
 						<th title="click to sort" class="headerText">Dr Amount -- Cr Amount&nbsp;</th>
@@ -499,9 +514,13 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=StudentProcess&action=ViewFeesStructure&id=<c:out value='${vouchertransactions.key.transactionsid}'/>"><c:out
-										value="${vouchertransactions.key.transactionsid}" /></a></td>
+							<td class="dataText"><input type="checkbox"
+								id="<c:out value="${vouchertransactions.key.transactionsid}"/>" class="chcktbl"
+								name="transactionids"
+								value="<c:out value="${vouchertransactions.key.transactionsid}"/>" />
+								
+							</td>
+							<td class="dataTextInActive"><a class="dataTextInActive"><c:out value="${vouchertransactions.key.transactionsid}" /></a></td>
 							<td class="dataText"><c:out value="${vouchertransactions.value}" /></td>
 							<td class="dataText"><c:out
 									value="${vouchertransactions.key.dramount} -- ${vouchertransactions.key.cramount}" /></td>
@@ -516,8 +535,7 @@ for(Cookie cookie : cookies){
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"><input 
-							type="hidden"  id="delete" />
+						<td class="footerTD" colspan="2"><button id="cancel">Cancel Voucher</button>
 							</td>
 							
 
