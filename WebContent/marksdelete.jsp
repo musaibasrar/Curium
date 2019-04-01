@@ -1,19 +1,18 @@
 <%--
-    Document   : Attendance Report
-    Created on : Feb 10, 2019, 02:17:28 PM
+    Document   : Marks Delete
+    Created on : Mar 29, 2019, 5:54:28 PM
     Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Marks Entry</title>
+<title>Marks Delete</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -358,35 +357,53 @@
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-
-	
-	function searchAttendanceStatus() {
+	function searchForMarks() {
+		
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=searchAttendanceStatus";
+		form1.action = "Controller?process=MarksDetailsProcess&action=deleteMarksEntry";
 		form1.method = "POST";
 		form1.submit();
+
 	}
 
 	$(function() {
 
 		$("#search").button().click(function() {
-			searchAttendanceStatus();
+			searchForMarks();
 		});
 		
 
 	});
 
 	$(function() {
+
 		$("#tabs").tabs();
+
+		$("#save").button().click(function() {
+			addDepartment();
+		});
 		/* $("#effect").hide(); */
+
 	});
 	
 	$(function() {
-		$("#addMarks").button({
+		$("#updateMarks").button({
 			icons : {
 				primary : "ui-icon-trash"
 			}
 		});
+		$("#delete").button({
+            icons:{
+                primary: "ui-icon-trash"
+            }
+        }).click(function(){
+        	if(confirm('Are you sure,you want to delete?')){
+        		deleteRecords();	
+        	}
+            
+            return false;
+
+        });
 		
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
@@ -420,19 +437,34 @@
 		$('#form1').keydown(function(event) {
 			var key = event.which;
 			if (key == 17) {
-				 $('#addMarks').focus();
+				 $('#updateMarks').focus();
 			}
 			});
 
 	});
 	
-	
+	function deleteRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=MarksDetailsProcess&action=deleteMultiple";
+		form1.method = "POST";
+		form1.submit();
+
+	}
 </script>
 
 
 <script type="text/javascript">
-        
-        
+    
+    function checkMandatory(){
+    	
+    	if(document.getElementById("exam").value == ""){
+    		alert('Please enter the exam field');	
+    	}else if(document.getElementById("subject").value == ""){
+    		alert('Please enter the subject');
+    	}
+    	
+    }
+    
 function checkMandatoryandSubmit(){
     	
 			var checkBox = document.getElementsByName("studentIDs");
@@ -443,7 +475,12 @@ function checkMandatoryandSubmit(){
 				}
 			}
 			
-    	if(resultCheckBox){
+    	if(document.getElementById("exam").value == ""){
+    		
+    		alert('Please enter the exam field');	
+    	}else if(document.getElementById("subject").value == ""){
+    		alert('Please enter the subject');
+    	}else if(resultCheckBox){
     		alert('Select the student(s) to update the marks');
     	}else{
     		var form1 = document.getElementById("form1");
@@ -455,53 +492,59 @@ function checkMandatoryandSubmit(){
     	
     }
     
-    
-			var xmlHttp;
-			var count;
-			function getSubjects() {
-			
-				var examlevel=document.getElementById('examlevel').value;
-				var splitExamLevel = examlevel.split(":");
-				var selected = splitExamLevel[0];
-				
-				 if (typeof XMLHttpRequest != "undefined") {
-					 xmlHttp = new XMLHttpRequest();
-			        
-			     } else if (window.ActiveXObject) {
-			    	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-			         
-			     }
-				xmlHttp.onreadystatechange = stateChanged;
-				xmlHttp.open("GET", "AjaxController?process=AttendanceProcess&action=getSubjects&urlexamlevel="+selected,true);
-				xmlHttp.send(null);
+		var xmlHttp;
+		var count;
+		function getSubjects() {
+		
+			var selected=document.getElementById('examlevel').value;
+		
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+		        
+		     } else if (window.ActiveXObject) {
+		    	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		         
+		     }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "AjaxController?process=AttendanceProcess&action=getSubjects&urlexamlevel="+selected,true);
+			xmlHttp.send(null);
+		}
+		
+		function stateChanged() {
+		
+			if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+				document.getElementById("subjectlist").innerHTML = xmlHttp.responseText;
 			}
-			
-			function stateChanged() {
-			
-				if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-					document.getElementById("subjectlist").innerHTML = xmlHttp.responseText;
-				}
-			}
-			function GetXmlHttpObject() {
-				var xmlHttp = null;
+		}
+		function GetXmlHttpObject() {
+			var xmlHttp = null;
+			try {
+				xmlHttp = new XMLHttpRequest();
+			} catch (e) {
 				try {
-					xmlHttp = new XMLHttpRequest();
+					xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
 				} catch (e) {
-					try {
-						xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-					} catch (e) {
-						xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-					}
+					xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
 				}
-				return xmlHttp;
 			}
-			
+			return xmlHttp;
+		}
+    
+		function validateList() {
+			if (document.getElementById("centercode").value.length == 0 || document.getElementById("examlevel").value.length == 0 
+					|| document.getElementById("subjectlist").value.length == 0 )
+			{
+				alert("Filter the records with Center Code, Exam Level & Subject");
+			}
+
+		}
+   
         </script>
 
 
 
 </head>
-  <%
+ <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -518,7 +561,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=MarksDetailsProcess&action=addMarks" method="POST">
+	<form id="form1" action="Controller?process=MarksDetailsProcess&action=updateMarks" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -527,7 +570,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Attendance Report</a></li>
+					<li><a href="#tabs-1">Marks Delete</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -536,26 +579,36 @@ for(Cookie cookie : cookies){
 							<tr>
 							<td><br /></td>
 
-						<%-- </tr>
+						</tr>
 							<tr>
 							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="academicyear" id="academicyear"
 									style="width: 200px;" required>
 										<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2013/14" >2013/14</option>
+											<option value="2014/15" >2014/15</option>
+											<option value="2015/16" >2015/16</option>
+											<option value="2016/17" >2016/17</option>
+											<option value="2017/18" >2017/18</option>
+											<option value="2018/19" >2018/19</option>
+											<option value="2019/20" >2019/20</option>
+											<option value="2020/21" >2020/21</option>
+											<option value="2020/21" >2021/22</option>
+											<option value="2020/21" >2022/23</option>
 								</select>
 							</label> 
 						</tr>
 						
 						<tr>
 							<td><br /></td>
-						</tr> --%>
+						</tr>
 						
 						<tr>
 							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
 							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
 									style="width: 200px;">
-										<option selected>${attendancecenternamesearch}</option>
+										<option selected>${evaluationsheetcentersearch}</option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}:${branchlist.centername}" >
 												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
@@ -574,11 +627,11 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="examlevel" id="examlevel" 
+										<select name="examlevel" id="examlevel" onchange="getSubjects()"
 									style="width: 200px;">
-										<option selected>${searchedexamlevel}</option>
+										<option selected>${examselected}</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
-											<option value="${examleveldetails.levelcode}:${examleveldetails.levelname}" >
+											<option value="${examleveldetails.levelcode}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
 											</option>
 										</c:forEach>
@@ -594,7 +647,8 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="languageopted" id="languageopted"
 									style="width: 200px;">
-										<option selected>${attendancelanguageoptedsearch}</option>
+										<option selected>${languagesearch}</option>
+										<option></option>
 										<c:forEach items="${languageslist}" var="languageslist">
 											<option value="${languageslist.language}" >
 												<c:out value="${languageslist.language}" />
@@ -608,55 +662,18 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						
-						<tr>
+						<tr style="display: none;">
 							<td class="alignRightFields">Subject&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="subjectnameAjax" id="subjectnameAjax"
+							<td width="70%" id="subjectlist"><select
 									style="width: 200px;">
-										<option selected>${searchedsubject}</option>
-										<option>Paper 1</option>
-										<option>Paper 2</option>
+										<option selected>${subjectselected}</option>
 								</select>
-							</label> 
 						</tr>					
 						
 						<tr>
 							<td><br /></td>
 						</tr>
 						
-						<tr>
-							<td class="alignRightFields">Attendance Status &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="attendancestatus" id="attendancestatus"
-									style="width: 200px;">
-										<option selected></option>
-										<option>Present</option>
-										<option>Absent</option>
-								</select>
-							</label> 
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<!-- <td class="alignRightFields">Subject &nbsp;</td> -->
-							<td width="12%" align="left"><label> <input
-									name="subjectidselected" type="hidden" class="myclass" id="searchedsubject"
-									size="36" value='<c:out value="${searchedsubject}"></c:out>'>
-							</label></td>
-							
-						</tr>
-						
-						<tr>
-							<!-- <td class="alignRightFields">Exam &nbsp;</td> -->
-							<td width="12%" align="left"><label> <input
-									name="examidselected" type="hidden" class="myclass" id="searchedexamlevel"
-									size="36" value='<c:out value="${searchedexamlevel}"></c:out>'>
-							</label></td>
-							
-						</tr>
 						<tr>
 							<td><br /></td>
 						</tr><tr>
@@ -680,14 +697,14 @@ for(Cookie cookie : cookies){
 					</table>
 					
 					<table>
-					<tr>
+					<tr style="display: none;">
 							<td class="alignRightFields">Subject &nbsp;</td>
 							
 							
 							<td ><label> <input style="border: none;
 border-color: transparent;background-color:#E6EEF4;font-size: 18px;font-weight:bold;font-variant: small-caps;color: #EB6000;"
 									readonly="readonly"  name="subjectselected" type="text" class="myclass" id="subjectselected"
-									size="36" value='<c:out value="${searchedsubject}"></c:out>'>
+									size="36" value='<c:out value="${subjectselected}"></c:out>'>
 							</label></td>
 							
 							
@@ -695,7 +712,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 18px;font-weight:b
 							<td ><label> <input style="border: none;
 border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:bold;font-variant: small-caps;color: #EB6000;"
 									name="examselected" type="text" class="myclass" id="examselected"
-									size="36" value='<c:out value="${searchedexamlevel}"></c:out>'>
+									size="36" value='<c:out value="${examselected}"></c:out>'>
 							</label></td>
 							
 						</tr>
@@ -716,47 +733,60 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 
 				<thead>
 					<tr>
-						<th class="headerText">Sl.No.</th>
+						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">${selectedsubjectname}&nbsp;</th>
-						
-						<!-- <th title="click to sort" class="headerText">Paper 3&nbsp;</th>
-						<th title="click to sort" class="headerText">Paper 1&nbsp;</th>
-						<th title="click to sort" class="headerText">Paper 2&nbsp;</th> -->
+						<c:forEach items="${subjectsperexam}" var="subjects">
+						<th title="click to sort" class="headerText">${subjects.subjectname}</th>
+						</c:forEach>
 					</tr>
 				</thead>
 
 				<tbody>
-					<c:forEach items="${viewAttendanceStatusMap}" var="viewAttendancemap" varStatus="status">
+					<c:forEach items="${marksstudentmap}" var="Parents" varStatus="status">
 
-						<tr class="trClass" style="border-color: #000000" border="1"
+						<tr class="trClass" style="border-color: #000000" border="1" 
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><c:out value="${(status.index)+1}" /></td>
-							<td class="dataTextInActive"><a class="dataTextInActive"
+							<td class="dataText" style="display: none;"><input type="checkbox" checked
+								id="<c:out value=""/>" class="chcktbl"
+								name="mIDs"
+								value="<c:out value=""/>" /></td>
+								
+								
+								<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
-										value="${viewAttendancemap.key.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${viewAttendancemap.key.name}" /></td>
-							<c:forEach items="${viewAttendancemap.value}" var="subjectdetails">
+										value="${Parents.key.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${Parents.key.name}" />
+							<input type="hidden" id="studentexternalid" name="studentexternalid" value="<c:out value="${Parents.key.studentexternalid}" />">
+							</td>
+							<c:forEach items="${Parents.value}" var="markslist">
 							<td class="dataText">
-							<c:set var="attendanceparts" value="${fn:split(subjectdetails, '%')}" />
-							<input type="hidden" id="studentAttendanceStatusId" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;"  name="studentAttendanceStatusId" style="text-transform:uppercase" value="<c:out value="${attendanceparts[0]}" />" maxlength="1">
-							<%-- <input type="text" id="studentAttendanceStatus" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;"  name="studentAttendanceStatus" style="text-transform:uppercase" value="<c:out value="${attendanceparts[1]}" />" maxlength="1"> --%>
-							<select name="studentAttendanceStatus" id="studentAttendanceStatus" style="background-color: #E3EFFF;border-style: white;color: #4B6A84;">
-										<option selected >${attendanceparts[1]}</option>
-											<option value="Present" >Present</option>
-											<option value="Absent" >Absent</option>
-								</select>
+							<input type="checkbox"
+								id="marksid" class="chcktbl"
+								name="marksIDs"
+								value="<c:out value="${markslist.marksid}" />" />
+							<%-- <input type="hidden" id="marksid" name="marksIDs" value="<c:out value="${markslist.marksid}" />"> --%>
+							<input type="text" id="studentMarks" name="studentMarks" value="<c:out value="${markslist.marksobtained}" />">
 							</td>
 							</c:forEach>
+							
+							<%-- <td class="dataText"><input type="text" id="studentMarks" name="studentMarks" value="<c:out value="${Parents.value.marksobtained}" />"> --%>
+							<%-- <input type="text"
+								id="studentMarks" 
+								name="studentMarks"
+								onkeyup="checkMandatory();"
+								onkeypress="return event.charCode >= 00 && event.charCode <=57"
+								maxlength="3"
+								 /> --%>
+								 </td>
+
+
 						</tr>
 					</c:forEach>
 				</tbody>
 				<tfoot>
 					<tr>
-					
-						<td class="footerTD" colspan="2">
-						</td>
+						<td class="footerTD" colspan="2"><button id="delete">Delete</button>
 					</tr>
 				</tfoot>
 			</table>

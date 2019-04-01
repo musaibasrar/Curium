@@ -201,10 +201,8 @@ public class MarksDetailsDAO {
                             query.executeUpdate();
                     }
             
-            result = true;
-            
-    
                     transaction.commit();
+                    result = true;
                     
             } catch (Exception e) {transaction.rollback();
                     e.printStackTrace();

@@ -1,5 +1,6 @@
 package com.model.student.dao;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -459,6 +460,21 @@ public class studentDetailsDAO {
         	HibernateUtil.closeSession();
         }
         return student;
+	}
+	
+	public BigInteger getStudentsListSQL(String query) {
+		BigInteger totalCount = null;
+        try {
+            transaction = session.beginTransaction();
+            Query SQLquery = session.createSQLQuery(query);
+            totalCount = (BigInteger) SQLquery.uniqueResult();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {transaction.rollback();
+            hibernateException.printStackTrace();
+        }finally{
+        	HibernateUtil.closeSession();
+        }
+        return totalCount;
 	}
 
 	public List<Studentfeesstructure> getStudentFeesStructureDetails(int sfsid) {

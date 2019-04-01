@@ -688,7 +688,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRightFields">Batch &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="academicyear" id="academicyear"
 									style="width: 240px;">

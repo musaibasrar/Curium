@@ -156,13 +156,20 @@ public class StudentAction {
                     url = restoreMultipleGraduate();
                 }else if (action.equalsIgnoreCase("restoreMultipleDroppedout")) {
                     url = restoreMultipleDroppedout();
+                }else if (action.equalsIgnoreCase("resultanalysis")) {
+                    url = resultAnalysis();
                 }
 		return url;
 	}
 	
 	
 
-    private String searchStudentsviewAll() {
+    private String resultAnalysis() {
+    	new ResultService(request, response).resultAnalysis();
+        return "resultanalysis.jsp";
+	}
+
+	private String searchStudentsviewAll() {
         new StudentService(request, response).searchStudentsviewAll();
         return "viewAllWithParents.jsp";
 }

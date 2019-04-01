@@ -229,9 +229,9 @@
 		</table>
 		
 		<table  width="50%" border="0" style="border-color: #4b6a84;float: left;">
-		<tr>
+			<tr>
 			<td></td>
-			
+			</tr>
 			
 			<tr>
 						<td class="markssheetlabel">Examination:&nbsp;</td>
@@ -248,6 +248,11 @@
 						<td class="markssheetlabel">Reg.No:&nbsp;</td>
 						<td class="markssheetvalue">${mlist.parents.student.admissionnumber}</td>
 			</tr>
+			
+			<tr>
+			<td><br><br></td>
+			</tr>
+			
 			
 		</table>
 		
@@ -285,6 +290,9 @@
                                 Guardian:&nbsp;</td><td class="markssheetvalue">${mlist.parents.student.guardiandetails}</td>
                                 </c:if>
                 </tr>
+                <tr>
+			<td><br><br></td>
+			</tr>
                
                        
 		</table>
@@ -312,7 +320,7 @@
 							<td class="datatd"><c:out value="${mlist.resultclass}" /></td>
 						</tr>
 						
-							<tr><td><br><br><br></td></tr>
+							<tr><td><br><br><br><br><br></td></tr>
 
 			</tbody>
 				</table>

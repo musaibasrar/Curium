@@ -574,7 +574,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Update Marks</a></li>
+					<li><a href="#tabs-1">Marks</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -760,8 +760,9 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 								<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
 										value="${Parents.key.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.key.name}" /></td>
-							
+							<td class="dataText"><c:out value="${Parents.key.name}" />
+							<input type="hidden" id="studentexternalid" name="studentexternalid" value="<c:out value="${Parents.key.studentexternalid}" />">
+							</td>
 							<c:forEach items="${Parents.value}" var="markslist">
 							<td class="dataText">
 							<input type="hidden" id="marksid" name="marksIDs" value="<c:out value="${markslist.marksid}" />">

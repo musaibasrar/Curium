@@ -39,12 +39,35 @@ public class MarksDetailsAction {
 		}else if (action.equalsIgnoreCase("searchForReport")) {
 			url = searchForReport();
 		}else if (action.equalsIgnoreCase("enterMarks")) {
-                    url = enterMarks();
-            }
+            url = enterMarks();
+        }else if (action.equalsIgnoreCase("deleteMarks")) {
+            url = deleteMarks();
+        }else if(action.equalsIgnoreCase("deleteMarksEntry")) {
+        	url = deleteMarksEntry();
+        }
 		return url;
 	}
 
 	
+
+	private String deleteMarksEntry() {
+		
+			String result = new MarksDetailsService(request, response).viewMarks();
+			
+			if(("MARKSENTRY").equalsIgnoreCase(result)) {
+				return search();
+			}else if(("VIEWMARKS").equalsIgnoreCase(result)) {
+				return "marksdelete.jsp";
+			}else {
+				return "error.jsp";
+			}
+			
+	}
+
+	private String deleteMarks() {
+		new MarksDetailsService(request, response).getSubjectExams();
+        return "marksdelete.jsp";
+	}
 
 	private String enterMarks() {
 	        new MarksDetailsService(request, response).enterMarks();

@@ -1,6 +1,6 @@
 <%--
-    Document   : Rank List Report
-    Created on : AUG 09, 2018, 11:14:28 PM
+    Document   : Result Analysis
+    Created on : MAR 24, 2018, 11:46:28 PM
     Author     : Musaib
 --%>
 
@@ -14,9 +14,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Rank List Report</title>
+<title>Result Analysis</title>
+
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
+
+
 
   <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -35,6 +38,7 @@
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
         
+
         
 <style type="text/css">
 <!--
@@ -114,11 +118,22 @@
 
 .alignRightFields {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 21px;
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
 	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+.alignRightFieldsOne {
+	font-family: Tahoma;
+	font-size: 21px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #EB6000;
+	text-align: right;
 	vertical-align: middle;
 	font-weight: bold;
 }
@@ -323,34 +338,7 @@
 <script type="text/javascript" language="javascript"
 	src="js/dataTable/jquery.dataTables.js"></script>
 <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.widget.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
 
-
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.button.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.core.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.slide.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.bounce.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.clip.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.transfer.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.blind.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -382,27 +370,34 @@
 	$(function() {
 
 		$("#apply").button().click(function() {
-			searchRankListReport();
+			searchResultReport();
 		});
 		
+				
+		 $("#studentAttendanceStatus").keypress(function (e) {
+		     //if the letter is not digit then display error and don't type anything
+		     if (e.which != 8 && e.which != 0 && e.which != 65 && e.which != 97 && e.which != 72 && e.which != 104 && e.which != 80 && e.which != 112 && e.which != 127) {
+		               return false;
+		    }
+		   });
+
 	});
 	
-	function searchRankListReport() {
+	function searchResultReport() {
 		var form1 = document.getElementById("form1");
 		if(form1.checkValidity()) {
-			form1.action = "Controller?process=StudentProcess&action=searchRankListReport";
+			form1.action = "Controller?process=StudentProcess&action=searchResultReport";
 			form1.method = "POST";
 			form1.submit();
 		  }
+		
 	}
 	
 	$(function() {
 
 		$("#tabs").tabs();
 
-		$("#effect").hide();
-		
-		 $("#printranklistreport").button({
+		 $("#printresultreport").button({
 				icons : {
 					primary : "ui-icon-print"
 				}
@@ -489,101 +484,34 @@ for(Cookie cookie : cookies){
 <body>
 	<form id="form1" method="POST">
 		
-		<div style="height: 28px">
 		
-			<button id="add">Apply Filters</button>
-			<br />
-		</div>
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Filters</a></li>
-
+					<li><a href="#tabs-1">Result Analysis Report</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
 								
 								<tr>
-								<td class="alignRightFields"><br></td>
+								<td><br></td>
 								</tr>
+						
 						<tr>
-							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
-							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
-									style="width: 240px;">
-										<option selected>${ranklistcentersearch}</option>
-										<option></option>
-										<c:forEach items="${branchList}" var="branchlist">
-											<option value="${branchlist.centercode}:${branchlist.centername}" >
-												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label></td>
-							
+							<td class="alignRightFields" >Total Present: &nbsp;&nbsp;&nbsp;&nbsp;<label class="alignRightFieldsOne">${resultanalysispresent} </label>&nbsp;</td>
+							<td class="alignRightFields">Total Absent:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="alignRightFieldsOne">${resultanalysisabsent} </label>&nbsp;</td>
 						</tr>
 
 						<tr>
 							<td><br /></td>
 
 						</tr>
-						
+								
+								
 						<tr>
-							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="examlevelcode" id="examlevelcode" required
-									style="width: 240px;">
-										<option selected>${ranklistexamlevelsearch}</option>
-										<option></option>
-										<c:forEach items="${examleveldetails}" var="examleveldetails">
-											<option value="${examleveldetails.levelcode}:${examleveldetails.idexamlevel}" >
-												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label> 
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td class="alignRightFields">Language &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="languageopted" id="languageopted"
-									style="width: 240px;">
-										<option selected>${ranklistlanguagesearch}</option>
-										<option></option>
-										<c:forEach items="${languageslist}" var="languageslist">
-											<option value="${languageslist.language}" >
-												<c:out value="${languageslist.language}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label> 
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td class="alignRightFields">Qualification &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="qualification" id="qualification"
-									style="width: 240px;">
-										<option selected>${ranklistqualificationsearch}</option>
-										<option></option>
-										<c:forEach items="${qualificationlist}" var="qualificationlist">
-											<option value="${qualificationlist.qualification}" >
-												<c:out value="${qualificationlist.qualification}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label> 
+							<td class="alignRightFields" >Total Distinctions:  &nbsp;&nbsp;<label class="alignRightFieldsOne">${resultanalysisdistinction}</label>&nbsp;</td>
+							<td class="alignRightFields" >Total First Class:  &nbsp;&nbsp;<label class="alignRightFieldsOne">${resultanalysisfirstclass}</label>&nbsp;</td>
 						</tr>
 
 						<tr>
@@ -593,56 +521,49 @@ for(Cookie cookie : cookies){
 						
 						
 						<tr>
-							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="academicyear" id="academicyear"
-									style="width: 240px;" required>
-										<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
-											<option ></option>
-											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
-											<option value="2013/14" >2013/14</option>
-											<option value="2014/15" >2014/15</option>
-											<option value="2015/16" >2015/16</option>
-											<option value="2016/17" >2016/17</option>
-											<option value="2017/18" >2017/18</option>
-											<option value="2018/19" >2018/19</option>
-											<option value="2019/20" >2019/20</option>
-											<option value="2020/21" >2020/21</option>
-											<option value="2020/21" >2021/22</option>
-											<option value="2020/21" >2022/23</option>
-								</select>
-							</label> 
+							<td class="alignRightFields" >Total Second Class: &nbsp;<label class="alignRightFieldsOne">${resultanalysissecondclass}</label>&nbsp;</td>
+							<td class="alignRightFields" >Total Pass: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="alignRightFieldsOne">${resultanalysispass}</label>&nbsp;</td>
 						</tr>
 
 						<tr>
 							<td><br /></td>
 
 						</tr>
-
+						
 						<tr>
-
-							<td width="30%" class="alignRight"></td>
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="apply">Apply</button>
-							</td>
+							<td class="alignRightFields" >Total Fail: &nbsp;&nbsp;&nbsp;&nbsp;<label class="alignRightFieldsOne">${resultanalysisfail}</label>&nbsp;</td>
 						</tr>
 
+						<tr>
+							<td><br /></td>
 
+						</tr>
+						
+						
+						<tr>
+							<td class="alignRightFields">Total Other religion students appeared for Paper 1: &nbsp;<label class="alignRightFieldsOne">${resultanalysispaper1nonm} </label>&nbsp;</td>
+							<td class="alignRightFields">Total Other religion students appeared for Paper 2: &nbsp;<label class="alignRightFieldsOne">${resultanalysispaper2nonm}</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+												
 						<tr>
 							<td><br /></td>
 						</tr>
 
 					</table>
 				</div>
+				
 			</div>
 		</div>
 		
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD" >Rank List</td>
+					<td class="headerTD" >Result Analysis</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -650,38 +571,44 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Student Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Language</th>
-						<th title="click to sort" class="headerText">%&nbsp;</th>
-						<th title="click to sort" class="headerText">Result</th>
-						<th title="click to sort" class="headerText">Rank</th>
+						<th title="click to sort" class="headerText">Center Code</th>
+						<th title="click to sort" class="headerText">Center Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Exam Level Code</th>
+						<th title="click to sort" class="headerText">Distinction&nbsp;</th>
+						<th title="click to sort" class="headerText">First Class&nbsp;</th>
+						<th title="click to sort" class="headerText">Second Class&nbsp;</th>
+						<th title="click to sort" class="headerText">Pass&nbsp;</th>
+						<th title="click to sort" class="headerText">Fail&nbsp;</th>
+						<th title="click to sort" class="headerText">Present&nbsp;</th>
+						<th title="click to sort" class="headerText">Absent&nbsp;</th>
+						<th title="click to sort" class="headerText">Total&nbsp;</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<c:forEach items="${resultlist}" var="resultlist" varStatus="status">
+					<c:forEach items="${resultanalysis}" var="resultanalysis" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataTextInActive"><a class="dataTextInActive"><c:out	value="${resultlist.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${resultlist.student.name}" /></td>
-							<td class="dataText"><c:out value="${resultlist.student.languageopted}" /></td>
-							<td class="dataText"><c:out value="${resultlist.percentage}" /></td>
-							<td class="dataText"><c:out value="${resultlist.resultclass}" /></td>
-							<td class="dataText"><c:out value="${resultlist.rank}"/></td>								
+							<td class="dataTextInActive"><a class="dataTextInActive"><c:out	value="${resultanalysis.centerCode}" /></a></td>
+							<td class="dataText"><c:out value="${resultanalysis.centerName}" /></td>
+							<td class="dataText"><c:out value="${resultanalysis.examLevelCode}" /></td>
+							<td class="dataText"><c:out value="${resultanalysis.distinction}" /></td>
+							<td class="dataText"><c:out value="${resultanalysis.firstClass}" /></td>
+							<td class="dataText"><c:out value="${resultanalysis.secondClass}" /></td>
+							<td class="dataText"><c:out value="${resultanalysis.pass}" /></td>
+							<td class="dataText"><c:out value="${resultanalysis.fail}" /></td>
+							<td class="dataText"><c:out value="${resultanalysis.present}" /></td>
+							<td class="dataText"><c:out value="${resultanalysis.absent}" /></td>
+							<td class="dataText"><c:out value="${resultanalysis.totalStudent}" /></td>
+							
 						</tr>
 					</c:forEach>
 				</tbody>
 				<tfoot>
 					<tr>
-					
 						<td class="footerTD" colspan="2">
-						  <a id="printranklistreport" href="Controller?process=StudentProcess&action=printRankListReport">Print</a>
-						</td>
-						<td class="footerTD" colspan="2">
-						  <a style="font-weight: bold;color: white;font-size: 14px;">&nbsp;&nbsp;Total: ${totalstudentresult}&nbsp;&nbsp;Distinction: ${distinctioncount}&nbsp;&nbsp;First Class: ${firstcount}
-						  &nbsp;&nbsp;Second Class: ${secondcount}&nbsp;&nbsp;Pass: ${passcount}&nbsp;&nbsp;Fail: ${failcount}</a>
+						 
 						</td>
 					</tr>
 				</tfoot>

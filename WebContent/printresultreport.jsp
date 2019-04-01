@@ -53,7 +53,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 12px;
+	font-size: 22px;
 	letter-spacing: normal;
 	text-align: left;
 }
@@ -71,7 +71,7 @@
 	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 24px;
+	font-size: 26px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -196,7 +196,7 @@
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				BOARD OF ISLAMIC EDUCATION KARNATAKA<br><br>
-				<label class="addressLine">RESULTS<br><br><br>
+				<label class="addressLine">RESULTS<br><br>
 				 </label>
 				 <c:out value="${resultcentercode}" />
 				 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

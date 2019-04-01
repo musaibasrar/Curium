@@ -347,6 +347,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=marksSheet" style="font-size: 12px;">Marks Sheet</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=evaluationSheet" style="font-size: 12px;">Evaluation Sheet</a><br/>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendancereport" style="font-size: 12px;">Attendance Report</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=resultanalysis" style="font-size: 12px;">Result Analysis</a><br/>
             </div>
             
             <!-- <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
@@ -379,6 +380,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
                 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getSubjectsExams" style="font-size: 12px;">Enter Marks</a><br/>
+                <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=deleteMarks" style="font-size: 12px;">Delete Marks</a><br/>
             	<!-- <a target="mainFrame" href="progressreport.jsp" style="font-size: 12px;">Generate Report</a><br/> -->
             </div> 
             
