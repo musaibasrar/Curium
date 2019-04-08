@@ -6,8 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 
 <html>
 <head>
@@ -219,7 +218,7 @@
 	color: #4b6a84;
 	font-size: 13px;
 	letter-spacing: normal;
-	text-align: center;
+	text-align: left;
 	background-color: #E3EFFF;
 }
 
@@ -270,6 +269,28 @@
 	font-weight: bold;
 	height: 22px;
 }
+
+.alert-box {
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;  
+}
+
+.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
 </style>
 
 <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
@@ -352,6 +373,7 @@
 
 		$("#tabs").tabs();
 		$("#save").button().click(function() {
+			$("#save").attr("disabled", true);
 			saveaccount();
 		});
 		$("#effect").hide();
@@ -410,12 +432,17 @@
          });
          
      });
+	 
 	 function saveaccount(){
-
-		 var form1=document.getElementById("form1");
-         form1.action="Controller?process=AccountProcess&action=saveAccount";
-        form1.submit();
-         
+		 
+		 var form1 = document.getElementById("form1");
+		 
+			if(form1.checkValidity()) {
+				var form1=document.getElementById("form1");
+		        form1.action="Controller?process=AccountProcess&action=saveAccount";
+		        form1.submit();
+			  }
+		 $("#save").attr("disabled", false);
      }
 	 
 	function deleteRecords(){
@@ -435,10 +462,21 @@
         var distlistitem = document.getElementById("sgname");
         var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
 
-        if (distlistitemtext == "New Sub-Group") {
+        if (distlistitemtext == "New Group") {
             document.getElementById("sgname").style.display = "none";
             document.getElementById("subgroupname").style.display = "none";
             document.getElementById("newsubgr").style.display = '';
+        }
+    }
+    
+    function ssGroupSelect() {
+        var distlistitem = document.getElementById("ssgname");
+        var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
+
+        if (distlistitemtext == "New Sub-Group") {
+			document.getElementById("ssgname").style.display = "none";
+            document.getElementById("ssgroupname").style.display = "none";
+            document.getElementById("newssgrouptd").style.display = '';
         }
     }
     
@@ -447,17 +485,23 @@
     function getSubGroup() {
 
 		var selected=document.getElementById('groupname').value;
+			
+		if(selected.includes("Select Group") || selected.includes("New Group")){
+			return false;
+		}else{
 
-		 if (typeof XMLHttpRequest != "undefined") {
-			 xmlHttp = new XMLHttpRequest();
-            
-         } else if (window.ActiveXObject) {
-        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-             
-         }
-		xmlHttp.onreadystatechange = stateChanged;
-		xmlHttp.open("GET", "AjaxController?process=SubGroupName&action=getSubGroupNames&groupname="+selected,true);
-		xmlHttp.send(null);
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "AjaxController?process=SubGroupName&action=getSubGroupNames&groupname="+selected,true);
+			xmlHttp.send(null);
+		}
+		
 	}
     
 	function stateChanged() {
@@ -490,8 +534,68 @@
 		}
 		return xmlHttp;
 	}
+	
+	var xmlHttp;
+    var count;
+    function getSSGroup() {
+
+		var selected=document.getElementById('sgname').value;
+		
+		if(selected.includes("Select Sub-Group") || selected.includes("New Sub-Group")){
+			return false;
+		}else{
+
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChangedSSGroup;
+			xmlHttp.open("GET", "AjaxController?process=SubGroupName&action=getSSGroupNames&subgroupname="+selected,true);
+			xmlHttp.send(null);
+		}
+
+	}
+    
+	function stateChangedSSGroup() {
+
+		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+			//document.getElementById("mydivmobile").innerHTML = xmlHttp.responseText;
+			document.getElementById("ssgroupname").innerHTML = xmlHttp.responseText;
+			
+			/* count = xmlHttp.responseXML.getElementsByTagName("subgroup")[0];
+			var childCount=count.childNodes[0].nodeValue;
+			document.getElementById("mydivmobile").innerHTML = childCount;
+			document.getElementById("subgroupname").innerHTML = childCount; */
+			/* var showdata = xmlHttp.responseText;
+			document.getElementById("mydivmobile").innerHTML = showdata; */
+		    document.getElementById("ssgname").style.display = '';
+            document.getElementById("ssgroupname").style.display = '';
+            document.getElementById("newssgroup").style.display = "none";
+		}
+	}
 
 </script>
+
+<script type="text/javascript">
+					
+					var accountalert='<c:out default="" value="${createaccountalert}"/>';
+		            
+		            if(accountalert == "true"){
+		            	 $(function(){
+		            		 $( "div.success" ).html("Ledger Account created successfully");
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            	 });
+		            	 }else if(accountalert.includes("Error")){
+		            	  $(function(){
+		            		  $( "div.failure" ).html(accountalert);
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            		 });
+		            	 }
+        </script>
+        
 </head>
 <%
 //allow access only if session exists
@@ -510,8 +614,12 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1"
-		 method="POST">
+	<form id="form1" method="POST">
+	
+		<div class="alert-box success"></div>
+		<div class="alert-box failure"></div>
+		
+		
 		<div style="height: 28px">
 			<button id="add">Create Account</button>
 			<br />
@@ -522,29 +630,15 @@ for(Cookie cookie : cookies){
 				<ul>
 					<li><a href="#tabs-1">Create Account</a></li>
 				</ul>
-
-
-
-				<div id="tabs-1">
-					<table width="100%" border="0" align="center" id="table1">
+					<table width="100%" border="0">
 						
-
 						<tr>
-
-							<td width="30%" class="alignRight"><label> <font
-									color="red"><div id="mydiv"></div></font>
-							</label></td>
-							<td width="20%" class="alignRight"></td>
-							<td class="alignRight"><font color="red"><div
-										id="mydivmobile"></div></font></td>
-						</tr>
-
-						<tr>
-							<td class="alignRight">Group Name&nbsp;</td><br>
-							<td width="28%"> <label>
-									<select name="groupname" id="groupname" onchange="getSubGroup()"
+						<br>
+							<td class="alignRight">Account Type*&nbsp;</td>
+							<td width="58%"> <label>
+									<select name="groupname" id="groupname" onchange="getSubGroup()" required
 									style="width: 240px;">
-										<option selected>Select Group</option>
+										<option selected>Select Account Type</option>
 
 										<c:forEach items="${accountgroupmaster}" var="accountgroupmaster">
 
@@ -556,41 +650,23 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 
 								</select></label> </td>
+								</tr>
 							<tr>
 							<td><br /></td>
 						</tr>
 						
 						<tr>
-						<td width="30%" class="alignRight">Sub-Group Name &nbsp;</td>
+						<td width="30%" class="alignRight">Group Name &nbsp;</td>
 							<td width="12%" align="left" id="subgroupname"><label> <select name="subgroupname" id="sgname"  onchange="dropdowndist()"
 									style="width: 240px" ">
-									<option >Select Sub-Group</option>
-									<%-- 	<option selected>${count}</option>
-
-										<c:forEach items="${count}" var="accountsubgroupmaster">
-
-											<option>
-												<c:out value="${accountsubgroupmaster.accountsubgroupname}" />
-											</option>
-
-
-										</c:forEach>
-										<c:forEach items="${accountsubgroupmaster}" var="accountsubgroupmaster">
-
-											<option>
-												<c:out value="${accountsubgroupmaster.accountsubgroupname}" />
-											</option>
-
-
-										</c:forEach>
-										<option>New Sub-Group</option> --%>
+									<option >Select Group</option>
 								</select>
 							</label>
 							
 							</td>
-							<td width="12%" align="left" id="newsubgr" style="display: none;">
+							<td width="12%" align="left" id="newsubgr" style="display:none;">
 							<label>
-                               <input name="newsubgroup" id="newsubgroup" type="text" size="36"  placeholder="Add New Sub-Group" />
+                               <input name="newsubgroup" id="newsubgroup" type="text" size="36"  placeholder="Add New Group" />
                             </label>
 							</td>
 							
@@ -602,38 +678,62 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-						<td width="30%" class="alignRight">Account Name &nbsp;</td>
-							<td width="12%" align="left"><label> 
-							<input name="accountname" id="accountname" type="text" size="36" required/>
+						<td width="30%" class="alignRight">Sub-Group Name &nbsp;</td>
+							<td width="12%" align="left" id="ssgroupname"><label> <select name="ssgroupname" id="ssgname"  onchange="ssGroupSelect()"
+									style="width: 240px">
+									<option >Select Sub-Group</option>
+								</select>
 							</label>
+							
+							</td>
+							<td width="12%" align="left" id="newssgrouptd" style="display: none;">
+							<label>
+                               <input name="newssgroup" id="newssgroupname" type="text" size="36"  placeholder="Add New Sub-Group" />
+                            </label>
+							</td>
 						</tr>
 						
 						<tr>
 							<td><br /></td>
 						</tr>
-
-						<div>
-							<table width="100%">
+						
+						<tr>
+						<td width="30%" class="alignRight">Account Name* &nbsp;</td>
+							<td width="12%" align="left">
+							<input type="text" name="accountname" id="accountname" size="36" required/>
+							</td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+						<td width="30%" class="alignRight">Account Code* &nbsp;</td>
+							<td width="12%" align="left">
+							<input type="text" name="accountcode" id="accountcode" size="36" required/>
+							</td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
 								<tr>
 
 									<td><br /></td>
 								</tr>
+								
 								<tr>
-									<td align="center">
+									
+									<td width="30%" class="alignRight"><button id="save">Save</button>&nbsp;</td>
 
-										<button id="save">Save</button>
-
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<td width="12%" align="left">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="reset">Reset</button>
-
-									</td>
-
+							</td>	
 
 								</tr>
-							</table>
-
-						</div>
-						
+						</table>
 			</div>
 		</div>
 
@@ -649,6 +749,10 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th title="click to sort" class="headerText">Account Type<img
+							alt=" " style="position: relative; top: 4px;"
+							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+						</th>
 						<th title="click to sort" class="headerText">Group<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
@@ -657,6 +761,9 @@ for(Cookie cookie : cookies){
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
+						<th title="click to sort" class="headerText">Account Code<img
+							alt=" " style="position: relative; top: 4px;"
+							src="css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Account Name<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
@@ -678,6 +785,8 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${accountdetailsbalance.accountdetailsbalanceid}-${accountdetailsbalance.accountDetails.accountdetailsid}"/>" /></td>
 							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountGroupMaster.accountgroupname}" /></td>
 							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountSubGroupMaster.accountsubgroupname}" /></td>
+							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountSSGroupMaster.ssgroupname}" /></td>
+							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountcode}" /></td>
 							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountname}" /></td>
 							<td class="dataText">&#8377;&nbsp<c:out value="${accountdetailsbalance.currentbalance}" /></td>
 						</tr>

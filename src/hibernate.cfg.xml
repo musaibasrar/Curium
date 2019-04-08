@@ -3,7 +3,7 @@
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-	<session-factory name="alameen">
+	<session-factory name="multibranch">
 		
 		 <!-- <property name="hibernate.multiTenancy">SCHEMA</property>
          	<property name="hibernate.tenant_identifier_resolver">com.model.multitenant.SchemaResolver</property>
@@ -12,11 +12,11 @@
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 	 	<property name="hibernate.connection.password">mysql</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/v2dev</property>
-		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.username">root</property> 
 		
-		<!-- <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<!--<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">cmuursaiuibm@123#</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/v2dev</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cambridgeschool</property>
         <property name="hibernate.connection.username">curium</property> -->
 		
 		
@@ -76,6 +76,7 @@
 		<mapping resource="com/model/account/dto/Financialaccountingyear.hbm.xml"></mapping>
 		<mapping resource="com/model/account/dto/Accountgroupmaster.hbm.xml"></mapping>
 		<mapping resource="com/model/account/dto/Accountsubgroupmaster.hbm.xml"></mapping>
+		<mapping resource="com/model/account/dto/Accountssgroupmaster.hbm.xml"></mapping>
 		<mapping resource="com/model/account/dto/Accountdetails.hbm.xml"></mapping>
 		<mapping resource="com/model/account/dto/Accountdetailsbalance.hbm.xml"></mapping>
 		<mapping resource="com/model/documents/dto/Transfercertificate.hbm.xml"></mapping>

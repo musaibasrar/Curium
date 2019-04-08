@@ -487,12 +487,6 @@ for(Cookie cookie : cookies){
 
             </div>
 
-            <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
-            <div>
-                <a target="mainFrame" href="Controller?process=ClassProcess&action=promoteClass" style="font-size: 12px;">Promotions</a><br/>
-				
-            </div>
-
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
                 <a target="mainFrame" href="Backup&Restore.jsp" style="font-size: 12px;">Backup</a><br/>
@@ -528,7 +522,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a><br/>
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a><br/>
-                <a target="mainFrame" href="Controller?process=AccountProcess&action=trialBalance" style="font-size: 12px;">Trial Balance</a><br/>
+                <a target="mainFrame" href="trialbalance.jsp" style="font-size: 12px;">Trial Balance</a><br/>
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
             </div>
             
@@ -545,6 +539,12 @@ for(Cookie cookie : cookies){
             <div >
                 <a target="mainFrame" href="Controller?process=HrProcess&action=leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+            </div>
+            
+            <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
+            <div>
+                <a target="mainFrame" href="Controller?process=ClassProcess&action=promoteClass" style="font-size: 12px;">Promotions</a><br/>
+				
             </div>
             
             </div>

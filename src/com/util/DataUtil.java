@@ -105,7 +105,14 @@ public class DataUtil {
      }
 
 
-   
+   public static String dateFromatConversion(String ddmmyyyy) {
+	   String date = null;
+	   
+	   String[] dateToConvert = ddmmyyyy.split("-");
+	   date = dateToConvert[2]+"-"+dateToConvert[1]+"-"+dateToConvert[0];
+	   
+	   return date;
+   }
     
 
 }

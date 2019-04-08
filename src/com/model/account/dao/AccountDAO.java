@@ -11,6 +11,7 @@ import org.hibernate.query.Query;
 import com.model.account.dto.Accountdetails;
 import com.model.account.dto.Accountdetailsbalance;
 import com.model.account.dto.Accountgroupmaster;
+import com.model.account.dto.Accountssgroupmaster;
 import com.model.account.dto.Accountsubgroupmaster;
 import com.model.account.dto.Financialaccountingyear;
 import com.model.account.dto.VoucherEntrytransactions;
@@ -112,13 +113,14 @@ public class AccountDAO {
 		return accountSubGroupMaster;
 	}
 
-	public boolean saveNewAccount(Accountdetails accountDetails) {
-		boolean result = false;
+	public String saveNewAccount(Accountdetails accountDetails, Accountdetailsbalance accountDetailsBalance) {
+		String result = "false";
 		try{
 			transaction = session.beginTransaction();
 			session.save(accountDetails);
+			session.save(accountDetailsBalance);
 			transaction.commit();
-			result = true;
+			result = "true";
 		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
 			hb.printStackTrace();
 			System.out.println("error "+hb);
@@ -142,13 +144,13 @@ public class AccountDAO {
 		return financialYear;
 	}
 
-	public boolean saveAccountBalance(Accountdetailsbalance accountDetailsBalance) {
-		boolean result = false;
+	public String saveAccountBalance(Accountdetailsbalance accountDetailsBalance) {
+		String result = "false";
 		try{
 			transaction = session.beginTransaction();
 			session.save(accountDetailsBalance);
 			transaction.commit();
-			result = true;
+			result = "true";
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}
@@ -313,7 +315,7 @@ public class AccountDAO {
 		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
 		try {
 			transaction = session.beginTransaction();
-			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and draccountid='"+accNo+"' or craccountid='"+accNo+"' and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
+			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and (draccountid='"+accNo+"' or craccountid='"+accNo+"') and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
@@ -346,9 +348,9 @@ public class AccountDAO {
 
 			Query receipt = session.createQuery("from VoucherEntrytransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
 			rTransactions = (VoucherEntrytransactions) receipt.uniqueResult();
-			
-			if(rTransactions.getTransactionsid() != null){
-				transaction.commit();
+			transaction.commit();
+
+			if(rTransactions != null){
 				return true;
 			}
 			
@@ -433,6 +435,57 @@ public class AccountDAO {
 			e.printStackTrace();
 		}
 		return accountDetails;
+	}
+
+	public Accountdetails checkAccountDetails(String accountName, String accountCode) {
+		Accountdetails accountDetails = new Accountdetails();
+		try {
+			transaction = session.beginTransaction();
+			Query query =  session.createQuery("from Accountdetails where accountname = '"+accountName+"' or accountcode='"+accountCode+"'");
+			accountDetails = (Accountdetails) query.uniqueResult(); 
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}
+		return accountDetails;
+	}
+
+	public List<Accountdetails> getAccountdetails() {
+		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
+		try {
+			transaction = session.beginTransaction();
+			accountDetails =  session.createQuery("from Accountdetails order by accountcode ASC").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}
+		return accountDetails;
+	}
+
+	public List<Accountssgroupmaster> getListAccountSSGroupMaster(int accountSubGroupMasterId, int branchId) {
+		
+		List<Accountssgroupmaster> accountSubGroupMaster = new ArrayList<Accountssgroupmaster>();
+		
+		try{
+			transaction = session.beginTransaction();
+			accountSubGroupMaster = session.createQuery("from Accountssgroupmaster where subgroupmasterid = '"+accountSubGroupMasterId+"' and branchid ="+branchId).list();
+			transaction.commit();
+		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
+			hb.printStackTrace();
+		}
+		
+		return accountSubGroupMaster;
+	}
+
+	public Accountssgroupmaster createSSGroup(Accountssgroupmaster accountSSGroupMaster) {
+		try{
+			transaction = session.beginTransaction();
+			session.save(accountSSGroupMaster);
+			transaction.commit();
+		}catch (Exception hb) {  transaction.rollback(); logger.error(hb);
+			hb.printStackTrace();
+		}
+		return accountSSGroupMaster;
 	}
 
 }

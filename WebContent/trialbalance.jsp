@@ -295,7 +295,6 @@
 	
 }
 </style>
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -344,17 +343,6 @@
 		});
 	});
 </script>
-<script type="text/javascript">
-	function select(id, name) {
-		var clipEffect = 'blind';
-		var options = {};
-
-		$("#effect").show();
-		
-
-	}
-	
-</script>
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
@@ -379,13 +367,60 @@
 
 		$("#tabs").tabs();
 
-		$("#save").button().click(function() {
-			addDepartment();
+		$("#search").button().click(function() {
+			getTrialBalance();
 		});
-		/* $("#effect").hide(); */
-
+		$("#effect").hide();
 	});
 	
+	
+	function getTrialBalance(){
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=AccountProcess&action=trialBalance";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
+	$(function() {
+		// run the currently selected effect
+		function runEffect() {
+
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		// set effect from select menu value
+		$("#add").button({
+			icons : {
+				primary : "ui-icon-arrowthick-1-s"
+			}
+		}).click(function() {
+			runEffect();
+			return false;
+		});
+	});
+	$(function() {
+		$("#fromdate").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			yearRange: "-50:+10"
+		});
+		$( "#fromdate" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$("#anim").change(function() {
+			$("#fromdate").datepicker("option", "showAnim", $(this).val());
+		});
+		
+		$("#todate").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			yearRange: "-50:+10"
+		});
+		$( "#todate" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$("#anim").change(function() {
+			$("#todate").datepicker("option", "showAnim", $(this).val());
+		});
+	});
 
 
 </script>
@@ -413,6 +448,56 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1">
+	
+	<div style="height: 28px">
+			<button id="add">Parameters</button>
+			<br />
+		</div>
+
+		<div id="effect" class="ui-widget-content ui-corner-all">
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-1">Enter Dates</a></li>
+
+				</ul>
+				<div id="tabs-1">
+					<table width="100%" border="0" align="center" cellpadding="0"
+						cellspacing="0" id="table1" style="display: block">
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+						<td width="20%" class="alignRight">From Date(MM/DD/YYYY)&nbsp;</td>
+							<td width="28%"><label> <input name="fromdate" autocomplete="off"
+									type="text" 
+									class="textField" id="fromdate" size="36" 
+									data-validate="validate(required)">
+							</label></td>
+							
+							<td width="20%" class="alignRight">To Date(MM/DD/YYYY)&nbsp;</td>
+							<td width="28%"><label> <input name="todate" autocomplete="off"
+									type="text" 
+									class="textField" id="todate" size="36"
+									data-validate="validate(required)">
+							</label></td>
+							
+							</tr>
+							
+							
+							<tr>
+							<td><br /></td>
+						</tr>
+					</table>
+					<table id="table2" width="100%" border="0" align="center">
+						<tr>
+							<td align="center">
+								<button id="search">Submit</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
 
 		<div style="overflow: scroll; height: 600px">
 		<table width="100%">
@@ -448,17 +533,17 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${accountdetails.key.accountDetails.accountname}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<td class="dataText" style="text-align: right"><c:out value="${accountdetails.key.accountname}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
-							<c:if test="${(accountdetailsbalance.crdr == 'Dr')}">
-							<td class="dataText" style="text-align: right;"><c:out value="${accountdetailsbalance.currentbalance}" /></td>
+							<c:if test="${(accountdetails.key.accountGroupMaster.accountgroupid == 1) || (accountdetails.key.accountGroupMaster.accountgroupid == 5)}">
+							<td class="dataText" style="text-align: right;"><c:out value="${accountdetails.value}" /></td>
 							<td class="dataText"></td>
 							</c:if>
 							
-							<c:if test="${(accountdetailsbalance.crdr == 'Cr')}">
+							<c:if test="${(accountdetails.key.accountGroupMaster.accountgroupid == 2) || (accountdetails.key.accountGroupMaster.accountgroupid == 3) || (accountdetails.key.accountGroupMaster.accountgroupid == 4)}">
 							<td class="dataText"></td>
-							<td class="dataText" style="text-align: right;"><c:out value="${accountdetailsbalance.currentbalance}" /></td>
+							<td class="dataText" style="text-align: right;"><c:out value="${accountdetails.value}" /></td>
 							</c:if>
 							
 						</tr>

@@ -71,9 +71,22 @@ public class AccountAction {
 			url = cancelVoucher();
 		}else if ("viewCancelledVouchers".equalsIgnoreCase(action)) {
 			url = viewCancelledVouchers();
+		}else if ("getSSGroupNames".equalsIgnoreCase(action)) {
+				getSSGroupName();
 		}
 		return url;
 	}
+
+	private void getSSGroupName() {
+		
+		try {
+			new AccountService(request, response).getSSGroupNames();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+}
 
 	private String viewCancelledVouchers() {
 		if(new AccountService(request, response).viewCancelledVouchers()) {
@@ -196,9 +209,9 @@ public class AccountAction {
 
 	private String saveAccount() {
 		
-		if(new AccountService(request, response).saveAccount()){
+		if(!"false".equalsIgnoreCase(new AccountService(request, response).saveAccount())){
 			return "Controller?process=AccountProcess&action=createAccount";
-		}
+		} 
 		return ERRORPAGE;
 		
 		
