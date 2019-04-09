@@ -9,16 +9,16 @@
          	<property name="hibernate.tenant_identifier_resolver">com.model.multitenant.SchemaResolver</property>
             <property name="hibernate.multi_tenant_connection_provider">com.model.multitenant.MultiTenantProvider</property> -->
 		 
-		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<!-- <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 	 	<property name="hibernate.connection.password">mysql</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/school</property>
-		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.username">root</property> -->
 		
-		<!-- <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 	 	<property name="hibernate.connection.password">cmuursaiuibm@123#</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/bie</property>
 		<property name="hibernate.connection.username">curium</property>
-		 -->
+		
 		
 		<!-- <property name="hibernate.default_schema">school</property> -->
         <!-- <property name="hibernate.hbm2ddl.auto">create-drop</property> -->

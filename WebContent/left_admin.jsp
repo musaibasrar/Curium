@@ -343,11 +343,12 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=questionPaperSet" style="font-size: 12px;">Question Paper Set</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=languageListReport" style="font-size: 12px;">Language Report</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=resultReport" style="font-size: 12px;">Result Report</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=resultList" style="font-size: 12px;">Result List</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=rankListReport" style="font-size: 12px;">Rank List</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=marksSheet" style="font-size: 12px;">Marks Sheet</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=evaluationSheet" style="font-size: 12px;">Evaluation Sheet</a><br/>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendancereport" style="font-size: 12px;">Attendance Report</a><br/>
-                <a target="mainFrame" href="Controller?process=StudentProcess&action=resultanalysis" style="font-size: 12px;">Result Analysis</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=resultAnalysis" style="font-size: 12px;">Result Analysis</a><br/>
             </div>
             
             <!-- <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>

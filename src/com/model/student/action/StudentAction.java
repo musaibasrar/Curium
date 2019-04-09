@@ -156,15 +156,47 @@ public class StudentAction {
                     url = restoreMultipleGraduate();
                 }else if (action.equalsIgnoreCase("restoreMultipleDroppedout")) {
                     url = restoreMultipleDroppedout();
-                }else if (action.equalsIgnoreCase("resultanalysis")) {
+                }else if (action.equalsIgnoreCase("resultAnalysis")) {
                     url = resultAnalysis();
+                }else if (action.equalsIgnoreCase("resultList")) {
+                    url = resultList();
+                }else if (action.equalsIgnoreCase("searchResultList")) {
+                    url = searchResultList();
+                }else if (action.equalsIgnoreCase("printResultList")) {
+                    url = printResultList();
+                }else if (action.equalsIgnoreCase("resultListCenter")) {
+                    url = resultListCenter();
                 }
 		return url;
 	}
 	
 	
 
-    private String resultAnalysis() {
+    private String resultListCenter() {
+	    new ResultService(request, response).resultReport();
+        return "resultlistcenter.jsp";
+    }
+
+	private String printResultList() {
+        return "printresultlist.jsp";
+        }
+
+	private String searchResultList() {
+	    new ResultService(request, response).searchRankListReport();
+	    
+	    if("true".equalsIgnoreCase(request.getParameter("centervalue"))) {
+	    	return "resultlistcenter.jsp";
+	    }
+	    
+        return "resultlist.jsp";
+    }
+
+	private String resultList() {
+	    new ResultService(request, response).resultReport();
+        return "resultlist.jsp";
+}
+
+	private String resultAnalysis() {
     	new ResultService(request, response).resultAnalysis();
         return "resultanalysis.jsp";
 	}

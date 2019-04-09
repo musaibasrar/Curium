@@ -94,6 +94,7 @@ public class ResultService {
         httpSession.setAttribute("secondcount", "");
         httpSession.setAttribute("firstcount", "");
         httpSession.setAttribute("distinction", "");
+        httpSession.setAttribute("resultlistadmno", "");
     }
 
     public void searchResultReport() {
@@ -247,11 +248,11 @@ public class ResultService {
         
         if(percentage < 35) {
             return "FAIL";
-        }else if(percentage < 49) {
+        }else if(percentage <= 49) {
             return "PASS";
-        }else if(percentage < 59) {
+        }else if(percentage <= 59) {
             return "SECOND CLASS";
-        }else if(percentage < 79) {
+        }else if(percentage <= 74) {
             return "FIRST CLASS";
         }else if(percentage <= 100) {
             return "Distinction";
@@ -265,6 +266,8 @@ public class ResultService {
         
         String examLevel = request.getParameter("examlevelcode");
         String academicYear = request.getParameter("academicyear");
+        String centerValue = request.getParameter("centervalue");
+
         String language = null;
         String searchQuery = "From Parents as parent where ";
         String subQuery =null;
@@ -273,9 +276,16 @@ public class ResultService {
                  String[] centerCode = request.getParameter("centercode").split(":");
                  subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
                  httpSession.setAttribute("ranklistcentersearch", centerCode[0]+":"+centerCode[1]);
+             }else if("true".equalsIgnoreCase(centerValue)){
+            	 Branch branch = new BranchDAO().getBranch(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                 if(branch!=null) {
+                     subQuery = "parent.Student.centercode = '"+branch.getCentercode()+"'";
+                     httpSession.setAttribute("ranklistcentersearch", branch.getCentercode()+":"+branch.getCentername());
+                 }
              }else {
                  httpSession.setAttribute("ranklistcentersearch", "");
              }
+             
              
              if(!request.getParameter("examlevelcode").equalsIgnoreCase("")) {
                  String[] examLevelCode = examLevel.split(":");
@@ -332,6 +342,7 @@ public class ResultService {
              String[] examDet = examLevel.split(":");
              List<Subexamlevel> subList = new ExamLevelDetailsDAO().getSubExamLevelSubject(examDet[0]);
              List<Result> resultList = new ArrayList<Result>();
+             List<Result> resultListRL = new LinkedList<Result>();
              List<Result> resultListFail = new ArrayList<Result>();
              int failCounter=0,passCounter=0,secondCounter=0,firstCounter=0,distinctionCounter=0;
              
@@ -391,13 +402,15 @@ public class ResultService {
                      
                      if(!"FAIL".equalsIgnoreCase(result.getResultclass())  && !"ABSENT".equalsIgnoreCase(result.getResultclass())) {
                          resultList.add(result);
+                         resultListRL.add(result);
                      }else if("FAIL".equalsIgnoreCase(result.getResultclass())){
                          resultListFail.add(result);
+                         resultListRL.add(result);
                      }
                      
              }
              Collections.sort(resultList);
-             Collections.sort(resultListFail);
+             //Collections.sort(resultListFail);
 
              int i=1;
              for (Result result : resultList) {
@@ -415,6 +428,7 @@ public class ResultService {
              
              httpSession.setAttribute("resultlist", resultList);
              httpSession.setAttribute("resultsubexamlevel", subList);
+             httpSession.setAttribute("resultlistadmno", resultListRL);
              String[] centerCodeName = DataUtil.emptyString(request.getParameter("centercode")).split(":");
              String[] examLevelCodeName = DataUtil.emptyString(request.getParameter("examlevelcode")).split(":");
              if(!"".equalsIgnoreCase(centerCodeName[0])) {
@@ -589,7 +603,7 @@ public class ResultService {
                  result.setRank(i);
                 i++;
             }
-             resultList.addAll(resultListFail);
+            // resultList.addAll(resultListFail);
              
              httpSession.setAttribute("totalstudentresult", parentsList.size());
              httpSession.setAttribute("failcount", failCounter);
