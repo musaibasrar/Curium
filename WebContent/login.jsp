@@ -64,35 +64,25 @@
         </script>
         <form action="Controller?process=UserProcess&action=authenticateUser" method="post" id="form1">
                     	
-                                    <table>
-                                    
+                                    <table align="center">
                                     	<tr>
-                                    	<td> <img alt="" src="images/curiumlogo.jpg"></td>
+                                    	<td>
+                                    	<br><br><br>
+                                    	</td>
                                     	</tr>
-                                    	
-                                        <tr>
-                                            <td height="30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <img src="images/username.png" height="30" name="login" border="0" /></td>
-                                            <td>:</td>
-                                            <td><span class="style48">
-                                                    <input name="loginName" type="text" size="40" placeholder="UserName" style="width:200px;  border:1px solid #02576c; font-family:Arial; font-size:15px; color:#000000">
-                                                </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td height="30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <img type="image" src="images/lock.png" height="28" name="login" border="0"  /></td>
-                                            <td>:</td>
-                                            <td><span class="style48">
-                                                    <input name="password" type="password" placeholder="Password" size="40"style="width:200px; border:1px solid #02576c; font-family:Arial; font-size:15px; color:#000000">
-                                                </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td width="86" height="35"><span class="style6"></span></td>
-                                            <td width="10">&nbsp;</td>
-                                            <td width="202"><div align="right">
-                                                    <input type="image" src="images/loginbutton.png" name="login" border="0" />
-                                                </div></td>
-                                        </tr>
+                                    	<tr>
+                                    	<td> <img alt="" src="images/cambridgelogo.jpg" style="width:400px;height: 400px"></td>
+                                    	<td></td><td></td><td></td>
+                                    	 <td>
+                                            <img src="images/username.png" height="30" name="login" style="vertical-align: bottom;"/>
+                                                    <input name="loginName" type="text"  placeholder="UserName" >
+                                                <br><br><br>
+                                                <img type="image" src="images/lock.png" height="28" name="login" style="vertical-align: bottom;"/>
+                                                <input name="password" type="password" placeholder="Password">
+                                                <br><br><br>
+                                                <input type="image" src="images/loginbutton.png" name="login" border="0" />
+                                                </td>
+                                    	</tr>
                                     </table>
                                     
         </form>

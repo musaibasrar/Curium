@@ -12,7 +12,7 @@
     <head>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Curium Educational Society</title>
+        <title>Curium - School ERP</title>
         <script type="text/javascript" src="js/openWindow.js"></script>
         <style type="text/css">
             <!--
@@ -42,10 +42,14 @@
             var type='<c:out default="" value="${userType}"/>';
             
             if(flag1){
-                if(type=='admin'){
-                    window.open('index.jsp','_self');
-                }
-                else if(type=='reception'){                    
+            	
+            	if(type=='superadmin'){
+                    window.open('index_superadmin.jsp','_self');
+                }else if(type=='admin'){
+                    window.open('index_admin.jsp','_self');
+                }else if(type=='feescollector'){
+                    window.open('index_feescollector.jsp','_self');
+                }else if(type=='reception'){                    
                    window.open('','_self');
                     window.close();
                     openIndexPage('index_reception.jsp',screen.width,screen.height);
@@ -59,56 +63,29 @@
             }
         </script>
         <form action="Controller?process=UserProcess&action=authenticateUser" method="post" id="form1">
-        
-            <table width="100%" height="605" border="0" cellpadding="0" cellspacing="0">
-                
-                <tr>
-                    <td>
-                    	<table width="550" height="400" border="0"  background="images/curiumlogin.jpg" align="center" cellpadding="0" cellspacing="0">
-								<tr><td><br><br><br><br><br><br><br><br><br><br></td></tr>
-								<tr><td><br></td></tr>
-                            <tr>
-                            
-                            	<td>
-                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            	</td>
-                                <td>
-												
-                                    <table width="296"  border="0" cellpadding="0" cellspacing="0">
-                                    	
-                                        <tr>
-                                        <p align="left" style="color: red;">Please enter correct username and password</p>
-                                            <td height="30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <img type="image" src="images/username.png" height="30" name="login" border="0" onclick="" /></td>
-                                            <td>:</td>
-                                            <td><span class="style48">
-                                                    <input name="loginName" type="text" size="40" placeholder="UserName" style="width:200px;  border:1px solid #02576c; font-family:Arial; font-size:15px; color:#000000">
-                                                </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td height="30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <img type="image" src="images/lock.png" height="25" name="login" border="0" onclick="" /></td>
-                                            <td>:</td>
-                                            <td><span class="style48">
-                                                    <input name="password" type="password" placeholder="Password" size="40"style="width:200px; border:1px solid #02576c; font-family:Arial; font-size:15px; color:#000000">
-                                                </span></td>
-                                        </tr>
-                                        <tr>
-                                            <td width="86" height="35"><span class="style6"></span></td>
-                                            <td width="10">&nbsp;</td>
-                                            <td width="202"><div align="right">
-                                                    <input type="image" src="images/loginbutton.png" name="login" border="0" onclick="" />
-                                                </div></td>
-                                        </tr>
+                    	
+                                    <table align="center">
+                                    	<tr>
+                                    	<td>
+                                    	<br><br><br>
+                                    	</td>
+                                    	</tr>
+                                    	<tr>
+                                    	<td> <img alt="" src="images/cambridgelogo.jpg" style="width:400px;height: 400px"></td>
+                                    	<td></td><td></td><td></td>
+                                    	 <td>
+                                    	 <p align="left" style="color: red;">Please enter correct username and password</p>
+                                            <img src="images/username.png" height="30" name="login" style="vertical-align: bottom;"/>
+                                                    <input name="loginName" type="text"  placeholder="UserName" >
+                                                <br><br><br>
+                                                <img type="image" src="images/lock.png" height="28" name="login" style="vertical-align: bottom;"/>
+                                                <input name="password" type="password" placeholder="Password">
+                                                <br><br><br>
+                                                <input type="image" src="images/loginbutton.png" name="login" border="0" />
+                                                </td>
+                                    	</tr>
                                     </table>
-                                    <br>
                                     
-                                    </td>
-                            </tr>
-                        </table></td>
-                </tr>
-            </table>
         </form>
     </body>
 </html>

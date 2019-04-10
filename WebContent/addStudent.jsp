@@ -14,8 +14,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML5>
 
 <html>
 <head>
@@ -305,6 +304,7 @@
 			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
+		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
 		});
@@ -316,6 +316,7 @@
 			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
+		$( "#datepicker1" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepicker1").datepicker("option", "showAnim", $(this).val());
 		});
@@ -328,6 +329,7 @@
 			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
+		$( "#dateoftc" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateoftc").datepicker("option", "showAnim",
@@ -342,6 +344,7 @@
 			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
+		$( "#dateofadmission" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateofadmission").datepicker("option", "showAnim",
@@ -356,6 +359,7 @@
 			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
+		$( "#dateofleaving" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateofleaving").datepicker("option", "showAnim",
@@ -370,6 +374,7 @@
 			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
+		$( "#dateoftcissued" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateoftcissued").datepicker("option", "showAnim",
@@ -384,6 +389,7 @@
 			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
+		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
 		});
@@ -578,9 +584,9 @@
 
 
 	function CalculateAge(value) {
-		var test = document.getElementById('datepicker').value;
+		var dateOfBirth = document.getElementById('datepicker').value;
 		var today = new Date();
-		var birthDate = new Date(test);
+		var birthDate = new Date(Date.parse(dateOfBirth));
 		var age = today.getFullYear() - birthDate.getFullYear();
 		var m = today.getMonth() - birthDate.getMonth();
 		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
@@ -759,104 +765,6 @@
 									onkeypress="return validateContactNum(this);">
 
 							</label></td>
-
-
-							<td width="20%" class="alignRight">Cumulative Record No.
-								With date of opening&nbsp;</td>
-							<td width="28%"><label> <input name="crecord"
-									type="text" class="textField" id="crecord" size="36"><input
-									name="dateofcr" type="text" class="textField" id="datepicker1"
-									size="36"
-									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"
-									data-validate="validate(required)">
-							</label></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="30%" class="alignRight">Semester &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft">&nbsp;Semester
-								1<input type="checkbox" value="1" name="semester"
-								id="yes:semester" onclick="yesCheck(this.id);" />&nbsp; &nbsp;Semester 2<input
-								type="checkbox" value="2" name="semester" id="no:semester"
-								onclick="noCheck(this.id)" />
-
-							</td>
-							<td width="16%" class="alignRight">Stream&nbsp;</td>
-
-							<td><label> <select name="stream" id="stream"
-									style="width: 240px">
-										<option selected></option>
-										<option>NA</option>
-										<option>Commerce</option>
-										<option>Vocational</option>
-										<option>Science</option>
-										<option>Arts</option>
-								</select>
-
-							</label></td>
-
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-
-
-							<td width="16%" class="alignRight">Medium of
-								Instruction&nbsp;</td>
-
-							<td><label> <select name="mediumofinstruction"
-									id="mediumofinstruction" style="width: 240px">
-										<option selected></option>
-										<option>Kannada</option>
-										<option>Hindi</option>
-										<option>Urdu</option>
-										<option>English</option>
-										<option>Marathi</option>
-										<option>Tamil</option>
-										<option>Telgu</option>
-								</select>
-
-							</label></td>
-							<td width="16%" class="alignRight">Previous School
-								Type&nbsp;</td>
-
-							<td><label> <select name="previousschooltype"
-									id="previousschooltype" style="width: 240px">
-										<option selected></option>
-										<option>Government</option>
-										<option>Private Aided</option>
-										<option>Local Bodies</option>
-										<option>Private Unaided School</option>
-								</select>
-
-							</label></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td width="30%" class="alignRight">Previous School Address
-								&nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="previouschooladdress" type="text" class="myclass"
-									id="previouschooladdress" size="36"
-									style="text-transform: uppercase"> <!-- onkeyup="check(this.value);"  -->
-							</label></td>
-
 							<td width="16%" class="alignRight">STS Number &nbsp;</td>
 
 									<td width="28%"><label> <input
@@ -864,7 +772,6 @@
 											id="sts" size="36">
 
 									</label></td>
-									
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -872,6 +779,7 @@
 						<tr>
 							<td><br /></td>
 						</tr>
+						
 						<tr>
 							<td width="30%" class="alignRight">Name* &nbsp;</td>
 							<td width="12%" align="left"><label> <input
@@ -902,7 +810,7 @@
 						<tr>
 							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
 							<td width="28%"><label> <input name="dateofbirth"
-									type="text" class="textField" id="datepicker" size="36"
+									type="text" class="textField" id="datepicker" size="36" autocomplete="false"
 									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
 							</label></td>
@@ -931,15 +839,15 @@
 							<td width="12%" align="left"><label> <input
 									name="place" type="text" class="myclass" id="place" size="36">
 							</label></td>
-
-							<td width="30%" class="alignRight">Urban / Rural &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft">&nbsp;Urban<input
-								type="checkbox" value="Urban" name="urbanrural" id="yes:urban"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Rural<input
-								type="checkbox" value="Rural" name="urbanrural" id="no:urban"
-								onclick="noCheck(this.id);" />
-
-							</td>
+							
+							<td width="20%" class="alignRight">Date of admission&nbsp;</td>
+							<td width="28%"><label><input name="dateofadmission"
+									type="text" class="textField" id="dateofadmission" size="36"
+									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"
+									data-validate="validate(required)"> </label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -955,31 +863,7 @@
 							<td width="28%"><label >
 							<input name="dateoftc" type="text" class="textField"
 									id="dateoftc" size="36"
-									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"
 									data-validate="validate(required)"></label></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td width="20%" class="alignRight">Date of admission&nbsp;</td>
-							<td width="28%"><label><input name="dateofadmission"
-									type="text" class="textField" id="dateofadmission" size="36"
-									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"
-									data-validate="validate(required)"> </label></td>
-
-							<td width="20%" class="alignRight">Subsequent progress of
-								the student&nbsp;</td>
-							<td width="28%"><label> <input name="progress"
-									type="text" class="textField" id="progress" size="36">
-
-							</label></td>
 
 						</tr>
 
@@ -1055,65 +939,6 @@
 						</tr>
 
 						<tr>
-
-
-							<td width="16%" class="alignRight">Last Class Studied &nbsp;</td>
-
-							<td width="28%"><label> <select name="lastclass" id="lastclass"
-									style="width: 240px;">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<option value="${classdetailslist.classdetails}">
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label></td>
-
-							<td width="20%" class="alignRight">Last School Attended
-								&nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="lastschool" type="text" class="myclass" id="lastschool"
-									size="36" onblur="validateName();">
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-
-
-							<td width="16%" class="alignRight">Languages Studied &nbsp;</td>
-
-							<td width="28%"><label> <input
-									name="languagesstudied" type="text" class="textField"
-									id="languagesstudied" size="36">
-							</label></td>
-
-
-
-							<td width="20%" class="alignRight">Last School Medium of
-								Instruction &nbsp;</td>
-							<td width="28%"><label> <input
-									name="mediumofinstructionlastschool" type="text"
-									class="textField" id="mediumofinstructionlastschool" size="36">
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
 							<td width="16%" class="alignRight">Blood Group &nbsp;</td>
 
 							<td><label> <select name="bloodgroup"
@@ -1138,7 +963,7 @@
 
 							<td><label> <select name="nationality"
 									id="nationality" style="width: 240px" onchange="dropdown()">
-										<option selected></option>
+										<option selected>Indian</option>
 										<option>Indian</option>
 										<option>Other</option>
 								</select>
@@ -1233,7 +1058,7 @@
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td width="30%" class="alignRight">Belong to BPL &nbsp;</td>
+							<td width="30%" class="alignRight">Was in receipt of any scholarship&nbsp;</td>
 							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
@@ -1241,7 +1066,7 @@
 								onclick="noCheck(this.id);" />
 
 							</td>
-							<td width="20%" class="alignRight">BPL Card No.
+							<td width="20%" class="alignRight">Adhar Card No.
 								&nbsp;</td>
 							<td width="28%"><label> <input
 									name="bplcardno" type="text" class="textField"
@@ -1256,30 +1081,19 @@
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td width="20%" class="alignRight">Bhagyalaxmi Bond No.
+							<td width="20%" class="alignRight">Whether Vaccinated
 								&nbsp;</td>
+								<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
+								type="checkbox" value="1" name="bhagyalakshmibondnumber" id="yes:vaccinated"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="bhagyalakshmibondnumber" id="no:vaccinated"
+								onclick="noCheck(this.id);" />
+
+							</td>
+							<td width="16%" class="alignRight">Marks of Identification on Pupil's body&nbsp;</td>
 							<td width="28%"><label> <input
-									name="bhagyalakshmibondnumber" type="text" class="textField"
-									id="bhagyalakshmibondnumber" size="36">
-
-							</label></td>
-							<td width="16%" class="alignRight">Disability Child&nbsp;</td>
-							<td><label> <select name="disabilitychild"
-									id="disabilitychild" style="width: 240px">
-										<option selected></option>
-										<option>Not Applicable</option>
-										<option>Autism</option>
-										<option>Physically Handicapped</option>
-										<option>Hearing Impairment</option>
-										<option>Learning Disability</option>
-										<option>Loco Motor Impairment</option>
-										<option>Mental Retardation</option>
-										<option>Multiple Disability</option>
-										<option>Speech Impairment</option>
-										<option>Visual Impairment(Blindness)</option>
-										<option>Visual Impairment(Low Vision)</option>
-										<option>Cerebral Palsy</option>
-								</select>
+									name="disabilitychild" type="text" class="textField"
+									id="disabilitychild" size="36">
 
 							</label></td>
 						</tr>
@@ -1289,13 +1103,15 @@
 						<tr>
 							<td><br /></td>
 						</tr>
+						
 						<tr>
 							<td width="20%" class="alignRight">Special Category&nbsp;</td>
 
 							<td id="categoryname"><label> <select
 									name="specialcategory" onchange="enterOtherSpecialCategory()"
 									id="specialcategory" style="width: 240px">
-										<option selected></option>
+										<option selected>None</option>
+										<option></option>
 										<option>None</option>
 										<option>Destitute</option>
 										<option>HIV Case</option>
@@ -1339,7 +1155,104 @@
 								<tr>
 									<td><br /></td>
 								</tr>
-					
+								
+								<tr>
+
+
+							<td width="16%" class="alignRight">Last Class Studied &nbsp;</td>
+
+							<td width="28%"><label> <select name="lastclass" id="lastclass"
+									style="width: 240px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<option value="${classdetailslist.classdetails}">
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label></td>
+
+							<td width="20%" class="alignRight">Last School Attended
+								&nbsp;</td>
+							<td width="12%" align="left"><label> <input
+									name="lastschool" type="text" class="myclass" id="lastschool"
+									size="36" onblur="validateName();">
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+
+
+							<td width="16%" class="alignRight">Languages Studied &nbsp;</td>
+
+							<td width="28%"><label> <input
+									name="languagesstudied" type="text" class="textField"
+									id="languagesstudied" size="36">
+							</label></td>
+
+
+
+							<td width="20%" class="alignRight">Core Subjects Studied &nbsp;</td>
+							<td width="28%"><label> <input
+									name="progress" type="text"
+									class="textField" id="progress" size="36">
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+								
+								<tr>
+							<td width="16%" class="alignRight">Last School Medium of
+								Instruction&nbsp;</td>
+
+							<td><label> <select name="mediumofinstruction"
+									id="mediumofinstruction" style="width: 240px">
+										<option selected></option>
+										<option>Kannada</option>
+										<option>Hindi</option>
+										<option>Urdu</option>
+										<option>English</option>
+										<option>Marathi</option>
+										<option>Tamil</option>
+										<option>Telgu</option>
+								</select>
+
+							</label></td>
+							<td width="16%" class="alignRight">Last School
+								Type&nbsp;</td>
+
+							<td><label> <select name="previousschooltype"
+									id="previousschooltype" style="width: 240px">
+										<option selected></option>
+										<option>Government</option>
+										<option>Private Aided</option>
+										<option>Local Bodies</option>
+										<option>Private Unaided School</option>
+								</select>
+
+							</label></td>
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
 						<tr>
 						
 							<td width="20%" class="alignRight">RTE
@@ -1529,7 +1442,6 @@
 									<td width="12%" align="left"><label> <input
 											name="dateofleaving" type="text" class="textField"
 											id="dateofleaving" size="36"
-											value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"
 											data-validate="validate(required)"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
@@ -1567,7 +1479,6 @@
 											type="text" class="textField" id="notcissued" size="36"><input
 											name="dateoftcissued" type="text" class="textField"
 											id="dateoftcissued" size="36"
-											value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"
 											data-validate="validate(required)">
 									</label></td>
 
@@ -1663,16 +1574,14 @@
 
 
 								<tr>
-									<td width="30%" class="alignRight">Father's Name &
-										Occupation* &nbsp;</td>
+									<td width="30%" class="alignRight">Father's Name* &nbsp;</td>
 									<td width="12%" align="left"><label> <input
 											name="fathersname" type="text" class="myclass"
 											id="fathersname" style="text-transform: uppercase" size="36"
 											required> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
-									<td width="30%" class="alignRight">Mother's Name &
-										Occupation*&nbsp;</td>
+									<td width="30%" class="alignRight">Mother's Name* &nbsp;</td>
 									<td width="12%" align="left"><label> <input
 											name="mothersname" type="text" class="myclass" id="name"
 											style="text-transform: uppercase" size="36"> <!-- onkeyup="check(this.value);"  -->
@@ -1716,15 +1625,15 @@
 									<td><br /></td>
 								</tr>
 								<tr>
-									<td width="20%" class="alignRight">Fathers Caste
-										Certificate No.&nbsp;</td>
+									<td width="20%" class="alignRight">Fathers Occupation
+										&nbsp;</td>
 									<td width="28%"><label> <input
 											name="fatherscastecertno" type="text" class="textField"
 											id="fatherscastecertno" size="36">
 									</label></td>
 
-									<td width="20%" class="alignRight">Mothers Caste
-										Certificate No.&nbsp;</td>
+									<td width="20%" class="alignRight">Mothers Occupation
+										&nbsp;</td>
 									<td width="28%"><label> <input
 											name="motherscastecertno" type="text" class="textField"
 											id="motherscastecertno" size="36">
@@ -1737,25 +1646,6 @@
 								<tr>
 									<td><br /></td>
 								</tr>
-								<tr>
-									<td width="20%" class="alignRight">Fathers Caste &nbsp;</td>
-									<td width="28%"><label> <input name="fatherscaste"
-											type="text" class="textField" id="fatherscaste" size="36">
-									</label></td>
-
-									<td width="20%" class="alignRight">Mothers Caste &nbsp;</td>
-									<td width="28%"><label> <input name="motherscaste"
-											type="text" class="textField" id="motherscaste" size="36">
-									</label></td>
-
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
 
 								<tr>
 
@@ -1798,7 +1688,7 @@
 
 
 
-									<td width="16%" class="alignRight">CO-Contact Number
+									<td width="16%" class="alignRight">Co-Contact Number
 										&nbsp;</td>
 
 									<td width="28%"><label> <input
