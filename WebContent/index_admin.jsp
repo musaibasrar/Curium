@@ -87,7 +87,7 @@ for(Cookie cookie : cookies){
 			<frame   src="header_admin.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
                 <frame  src="left_admin.jsp" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="Controller?process=StudentProcess&action=viewAll" name="mainFrame" scrolling="yes" />
+                <frame src="welcome.jsp" name="mainFrame" scrolling="yes" />
             </frameset>
    </frameset>
     <noframes>
