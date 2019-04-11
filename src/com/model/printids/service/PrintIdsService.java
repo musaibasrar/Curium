@@ -58,14 +58,14 @@ public class PrintIdsService {
 			String addSec = request.getParameter("secsearch");
 			String conClassStudying = "";
 
-			if (!addClass.equalsIgnoreCase("Class")) {
+			if (!addClass.equalsIgnoreCase("")) {
 
-				conClassStudying = addClass + " " + "%";
+				conClassStudying = addClass+"--" +"%";
 
 			}
-			if (!addSec.equalsIgnoreCase("Sec")) {
+			if (!addSec.equalsIgnoreCase("")) {
 				conClassStudying = addClass;
-				conClassStudying = conClassStudying + " " + addSec;
+				conClassStudying = conClassStudying+addSec;
 			}
 
 			String classStudying = DataUtil.emptyString(conClassStudying);

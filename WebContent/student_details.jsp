@@ -9,6 +9,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
     <head>
@@ -514,12 +515,17 @@ for(Cookie cookie : cookies){
                         <tr>
                             <td width="25%"  class="alignLeft" height="50" >Studying in class</td>
                             <td  width="25%"  class="tablerows">
-                                <c:out default="" value="${student.classstudying}" />
+                            <c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
+						    ${splt} 
+							</c:forEach>
+                               <%--  <c:out default="" value="${student.classstudying}" /> --%>
                             </td>
                             <td width="25%"  class="alignLeft" height="50">Admitted in class
                             </td>
                             <td width="25%" class="tablerows">
-                                <c:out default="" value="${student.classadmittedin}" />
+		                            <c:forEach var="splt" items="${fn:split(student.classadmittedin,'--')}">
+								    ${splt} 
+									</c:forEach>
                             </td>
                         </tr>
                         

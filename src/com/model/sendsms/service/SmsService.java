@@ -54,14 +54,14 @@ public class SmsService {
 			if(addClass.contains("ALL")){
 				querySub = querySub + "parents.Student.archive=0";
 			}else{
-				if(!addClass.equalsIgnoreCase("Class") ){
-					
-					conClassStudying = addClass+ " " +"%";
-					
+				if (!addClass.equalsIgnoreCase("")) {
+
+					conClassStudying = addClass+"--" +"%";
+
 				}
-				if( !addSec.equalsIgnoreCase("Sec") && !addSec.equalsIgnoreCase("ALL")){
+				if (!addSec.equalsIgnoreCase("")) {
 					conClassStudying = addClass;
-					conClassStudying = conClassStudying + " " +addSec;
+					conClassStudying = conClassStudying+addSec;
 				}
 				
 				String classStudying = DataUtil.emptyString(conClassStudying);

@@ -392,16 +392,15 @@ public class AttendanceService {
 			String addSec = request.getParameter("secsearch");
 			String conClassStudying = "";
 			String conClassStudyingEquals = "";
+			
+			if (!addClass.equalsIgnoreCase("")) {
 
-			if (!addClass.equalsIgnoreCase("Class")) {
+				conClassStudying = addClass+"--" +"%";
 
-				conClassStudying = addClass + " " + "%";
-				conClassStudyingEquals = addClass;
 			}
-			if (!addSec.equalsIgnoreCase("Sec")) {
+			if (!addSec.equalsIgnoreCase("")) {
 				conClassStudying = addClass;
-				conClassStudying = conClassStudying + " " + addSec;
-				conClassStudyingEquals = conClassStudying;
+				conClassStudying = conClassStudying+addSec;
 			}
 
 			String classStudying = DataUtil.emptyString(conClassStudying);
@@ -684,15 +683,14 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			String conClassStudying = "";
 			String conClassStudyingEquals = "";
 
-			if (!addClass.equalsIgnoreCase("Class")) {
+			if (!addClass.equalsIgnoreCase("")) {
 
-				conClassStudying = addClass + " " + "%";
-				conClassStudyingEquals = addClass;
+				conClassStudying = addClass+"--" +"%";
+
 			}
-			if (!addSec.equalsIgnoreCase("Sec")) {
+			if (!addSec.equalsIgnoreCase("")) {
 				conClassStudying = addClass;
-				conClassStudying = conClassStudying + " " + addSec;
-				conClassStudyingEquals = conClassStudying;
+				conClassStudying = conClassStudying+addSec;
 			}
 
 			String classStudying = DataUtil.emptyString(conClassStudying);
@@ -827,16 +825,16 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		String conClassStudying = "";
 		String conClassStudyingEquals = "";
 
-		if (!addClass.equalsIgnoreCase("Class")) {
+		if (!addClass.equalsIgnoreCase("")) {
 
-			conClassStudying = addClass + " " + "%";
-			conClassStudyingEquals = addClass;
+			conClassStudying = addClass+"--" +"%";
+
 		}
-		if (!addSec.equalsIgnoreCase("Sec")) {
+		if (!addSec.equalsIgnoreCase("")) {
 			conClassStudying = addClass;
-			conClassStudying = conClassStudying + " " + addSec;
-			conClassStudyingEquals = conClassStudying;
+			conClassStudying = conClassStudying+addSec;
 		}
+		
 		String classStudying = DataUtil.emptyString(conClassStudying);
 		String querySub = "";
 

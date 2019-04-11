@@ -233,14 +233,14 @@ public class UserService {
 		String conClassStudying = "";
 		
 		
-		if(!addClass.equalsIgnoreCase("") ){
-			
-			conClassStudying = addClass+"%";
-			
+		if (!addClass.equalsIgnoreCase("")) {
+
+			conClassStudying = addClass+"--" +"%";
+
 		}
-		if( !addSec.equalsIgnoreCase("")){
+		if (!addSec.equalsIgnoreCase("")) {
 			conClassStudying = addClass;
-			conClassStudying = conClassStudying + "--" +addSec;
+			conClassStudying = conClassStudying+addSec;
 		}
 			
 		
@@ -251,21 +251,18 @@ public class UserService {
 			String addClassE = request.getParameter("admclassE");
 			String addSecE = request.getParameter("admsecE");
 			String conClassAdmittedIn = "";
-			if(!addClassE.equalsIgnoreCase("") ){
-				
-				conClassAdmittedIn = addClassE+"%";
-				
-			}
-			if( !addSecE.equalsIgnoreCase("")){
-				conClassAdmittedIn = addClassE;
-				conClassAdmittedIn = conClassAdmittedIn + "--" +addSecE;
-			}
 			
+			if (!addClassE.equalsIgnoreCase("")) {
+
+				conClassAdmittedIn = addClassE+"--" +"%";
+
+			}
+			if (!addSecE.equalsIgnoreCase("")) {
+				conClassAdmittedIn = addClassE;
+				conClassAdmittedIn = conClassAdmittedIn+addSecE;
+			}
 			
 			String classAdmitted = DataUtil.emptyString(conClassAdmittedIn);
-			
-		
-		
 			String lastClass = DataUtil.emptyString(request.getParameter("lastclass"));
 			String lastSchool =  DataUtil.emptyString(request.getParameter("lastschool"));
 			String admissionNo =  DataUtil.emptyString(request.getParameter("admnno"));

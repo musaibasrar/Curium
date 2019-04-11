@@ -417,7 +417,11 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.name}"/></td>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.classstudying}"/></td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>
+                                </td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.fathersname}"/></td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.mothersname}"/></td>
                                 <!-- <fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/>  -->

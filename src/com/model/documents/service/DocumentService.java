@@ -162,13 +162,15 @@ public class DocumentService {
 		String addClass = request.getParameter("classsearch");
 		String addSec = request.getParameter("secsearch");
 		String conClassStudying = "";
-
+		
 		if (!addClass.equalsIgnoreCase("")) {
-			conClassStudying = addClass+"%";
+
+			conClassStudying = addClass+"--" +"%";
+
 		}
 		if (!addSec.equalsIgnoreCase("")) {
 			conClassStudying = addClass;
-			conClassStudying = conClassStudying + "--" + addSec;
+			conClassStudying = conClassStudying+addSec;
 		}
 
 		String classStudying = DataUtil.emptyString(conClassStudying);

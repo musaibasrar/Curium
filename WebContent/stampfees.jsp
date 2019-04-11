@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -710,11 +711,22 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
+						
+						<tr>
+							<td></td>
+							
+							<td class="alignRightFields">OR</td>
 
+						</tr>
+					
+						<tr>
+							<td><br /></td>
+
+						</tr>
 
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> 
+							<td width="90%"><label> 
 								<select name="classsearch" id="classsearch"
 									style="width: 120px;">
 										<option selected></option>
@@ -843,8 +855,10 @@ for(Cookie cookie : cookies){
 								href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.classstudying}" /></td>
+							<td class="dataText">
+							 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
+								    ${splt} 
+									</c:forEach>
 							<td class="dataText"><c:out
 									value="${Parents.student.admissiondate}" /></td>
 

@@ -106,7 +106,7 @@ public class StudentService {
 		                    
 		                    addClass = DataUtil.emptyString(item.getString());
 		                    if (!addClass.equalsIgnoreCase("")) {
-		                            conClassStudying = addClass;
+		                            conClassStudying = addClass+"--";
 
 		                    }
 		                }
@@ -115,9 +115,7 @@ public class StudentService {
 
 		                    addSec = DataUtil.emptyString(item.getString());
 		                    if (!addSec.equalsIgnoreCase("")) {
-			        			conClassStudying = conClassStudying + "--" + addSec;
-			        		}else if(conClassStudying !=null){
-			        			conClassStudying = conClassStudying + " " ;
+			        			conClassStudying = conClassStudying+addSec;
 			        		}
 		                }
 		        		student.setClassstudying(DataUtil.emptyString(conClassStudying));
@@ -127,21 +125,16 @@ public class StudentService {
 		                    addClassE = DataUtil.emptyString(item.getString());
 
 		                    if (!addClassE.equalsIgnoreCase("")) {
-			        			conClassAdmittedIn = addClassE;
-
+			        			conClassAdmittedIn = addClassE+"--";
 			        		}
-
 		                }
 
 		                if (fieldName.equalsIgnoreCase("admsecE")) {
-
 		                    
 		                    addSecE = DataUtil.emptyString(item.getString());
 			        		if (!addSecE.equalsIgnoreCase("")) {
-			        			conClassAdmittedIn = conClassAdmittedIn + "--" + addSecE;
-			        		}else if(conClassAdmittedIn!=null){
-			        		    conClassAdmittedIn = conClassAdmittedIn + " " ;
-                                            }
+			        			conClassAdmittedIn = conClassAdmittedIn+addSecE;
+			        		}
 		                }
 		              
 		                student.setClassadmittedin(DataUtil.emptyString(conClassAdmittedIn));
@@ -560,17 +553,13 @@ public class StudentService {
 			} else {
 				httpSession.setAttribute("student", student);
 				String classStudying = student.getClassstudying();
-				if (!classStudying.equalsIgnoreCase("") && !classStudying.equalsIgnoreCase(" ") && classStudying.contains(" ")) {
-					String regex = "[a-zA-Z]+";
+				if (!classStudying.equalsIgnoreCase("")) {
 					String[] classParts = classStudying.split("--");
 					httpSession.setAttribute("classstudying", classParts[0]);
-					
-					if(classParts.length>=2 && classParts[1].matches(regex) == true ){
-					httpSession.setAttribute("secstudying", classParts[1]);
-					}else{
-						httpSession.setAttribute("secstudying", "");
+					if(classParts.length>1) {
+						httpSession.setAttribute("secstudying", classParts[1]);
 					}
-
+					
 				} else {
 					request.setAttribute("classstudying", classStudying);
 					request.setAttribute("secstudying", "");
@@ -578,17 +567,14 @@ public class StudentService {
 
 				String classAdmitted = student.getClassadmittedin();
 				
-				if (!classAdmitted.equalsIgnoreCase("")  && !classAdmitted.equalsIgnoreCase(" ") && classAdmitted.contains(" ")) {
+				if (!classAdmitted.equalsIgnoreCase("")) {
 
-					String regex = "[a-zA-Z]+";
 					String[] classAdmittedParts = classAdmitted.split("--");
-					
 					httpSession.setAttribute("classadm", classAdmittedParts[0]);
-					if(classAdmittedParts.length>=2 &&  classAdmittedParts[1].matches(regex) == true){
-					httpSession.setAttribute("secadm", classAdmittedParts[1]);
-					}else{
-						httpSession.setAttribute("secadm", "");
+					if(classAdmittedParts.length>1) {
+						httpSession.setAttribute("secadm", classAdmittedParts[1]);
 					}
+					
 				} else {
 					request.setAttribute("classadm", classAdmitted);
 					request.setAttribute("secadm", "");
@@ -689,8 +675,7 @@ public class StudentService {
 	                    
 	                    addClass = DataUtil.emptyString(item.getString());
 	                    if (!addClass.equalsIgnoreCase("")) {
-
-		        			conClassStudying = addClass;
+		        			conClassStudying = addClass+"--";
 
 		        		}
 	                }
@@ -701,7 +686,7 @@ public class StudentService {
 
 	                    addSec = DataUtil.emptyString(item.getString());
 	                    if (!addSec.equalsIgnoreCase("")) {
-		        			conClassStudying = conClassStudying + "--" + addSec;
+		        			conClassStudying = conClassStudying+ addSec;
 		        		}
 	                }
 
@@ -713,7 +698,7 @@ public class StudentService {
 	                    addClassE = DataUtil.emptyString(item.getString());
 
 	                    if (!addClassE.equalsIgnoreCase("")) {
-		        			conClassAdmittedIn = addClassE;
+		        			conClassAdmittedIn = addClassE+"--";
 
 		        		}
 
@@ -726,7 +711,7 @@ public class StudentService {
 	                    
 	                    addSecE = DataUtil.emptyString(item.getString());
 		        		if (!addSecE.equalsIgnoreCase("")) {
-		        			conClassAdmittedIn = conClassAdmittedIn + "--" + addSecE;
+		        			conClassAdmittedIn = conClassAdmittedIn+addSecE;
 		        		}
 
 
@@ -1304,14 +1289,14 @@ public class StudentService {
 			String addSec = request.getParameter("secsearch");
 			String conClassStudying = "";
 
-			if (!addClass.equalsIgnoreCase("Class")) {
+			if (!addClass.equalsIgnoreCase("")) {
 
-				conClassStudying = addClass + " " + "%";
+				conClassStudying = addClass+"--" +"%";
 
 			}
-			if (!addSec.equalsIgnoreCase("Sec")) {
+			if (!addSec.equalsIgnoreCase("")) {
 				conClassStudying = addClass;
-				conClassStudying = conClassStudying + " " + addSec;
+				conClassStudying = conClassStudying+addSec;
 			}
 
 			String classStudying = DataUtil.emptyString(conClassStudying);

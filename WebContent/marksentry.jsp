@@ -526,7 +526,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="70%"><label> <select name="classsearch"
 									id="classsearch" style="width: 150px">
-										<option selected>Class</option>
+										<option selected></option>
 										<option>nursery</option>
 										<option>L.K.G</option>
 										<option>U.K.G</option>
@@ -544,7 +544,7 @@ for(Cookie cookie : cookies){
 
 							</label> <label> <select name="secsearch" id="secsearch"
 									style="width: 120px">
-										<option selected>Sec</option>
+										<option selected></option>
 										<option>A</option>
 										<option>B</option>
 										<option>C</option>
