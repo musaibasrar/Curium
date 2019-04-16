@@ -36,11 +36,32 @@ public class FeesCollectionAction {
                                 url = ViewDetails();
                         }else if (action.equalsIgnoreCase("StampFees")) {
                                 url = StampFees();
+                        }else if (action.equalsIgnoreCase("CancelFeesReceipt")) {
+                            url = cancelFeesReceipt();
+                        }else if (action.equalsIgnoreCase("viewCancelledReceipts")) {
+                            url = viewCancelledReceipts();
+                        }else if (action.equalsIgnoreCase("UndoFeesReceipt")) {
+                            url = undoFeesReceipt();
                         }
                 return url;
         }
 
-        private String StampFees() {
+        private String undoFeesReceipt() {
+        	new FeesCollectionService(request, response).undoFeesReceipt();
+			return "Controller?process=FeesCollection&action=viewCancelledReceipts";
+		}
+
+		private String viewCancelledReceipts() {
+        	new FeesCollectionService(request, response).viewCancelledReceipts();
+			return "feescancelledreceipts.jsp";
+		}
+
+		private String cancelFeesReceipt() {
+			new FeesCollectionService(request, response).cancelFeesReceipt();
+			return "Controller?process=UserProcess&action=searchByDate";
+		}
+
+		private String StampFees() {
                 new FeesCollectionService(request, response).getStampFees();
                 new FeesService(request, response).viewAllBranchStudents();
                 return "feesCollection.jsp";

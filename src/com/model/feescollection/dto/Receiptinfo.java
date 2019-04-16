@@ -32,6 +32,7 @@ public class Receiptinfo implements java.io.Serializable {
 	private Long totalamount;
 	private String academicyear;
 	private int branchid;
+	private int cancelreceipt;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Receiptinfo")
 	private Set<Feescollection> feesCollectionRecords =
@@ -45,13 +46,14 @@ public class Receiptinfo implements java.io.Serializable {
 	}
 
 	public Receiptinfo(int sid, Date date, Long totalamount, String academicyear, 
-			Set<Feescollection> feesCollecionRecords, int branchid) {
+			Set<Feescollection> feesCollecionRecords, int branchid, int cancelreceipt) {
 		this.sid = sid;
 		this.date = date;
 		this.totalamount = totalamount;
 		this.academicyear = academicyear;
 		this.feesCollectionRecords = feesCollecionRecords;
 		this.branchid = branchid;
+		this.cancelreceipt = cancelreceipt;
 	}
 
 	@Id
@@ -117,6 +119,15 @@ public class Receiptinfo implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+
+	@Column(name = "cancelreceipt")
+	public int getCancelreceipt() {
+		return cancelreceipt;
+	}
+
+	public void setCancelreceipt(int cancelreceipt) {
+		this.cancelreceipt = cancelreceipt;
 	}
 	
 }

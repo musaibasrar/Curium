@@ -378,4 +378,16 @@ public static Date dateParserddmmyyyy(String stringDate) {
 
 	return datefinal;
 }
+
+public static String getStringDate(Date dateofbirth) {
+	
+	String date = null;
+	
+	if(dateofbirth!=null) {
+		date = dateofbirth.toString();
+	}
+	
+	return date;
+	}
+
 }

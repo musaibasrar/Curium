@@ -43,6 +43,8 @@ public class feesCollectionDAO {
 			 transaction = session.beginTransaction();
 			
 			for (Feescollection singleFeescollection :  feescollectionList) {
+				Query query = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
+				query.executeUpdate();
 				 session.save(singleFeescollection);
 			}
 	            transaction.commit();
@@ -129,12 +131,30 @@ public class feesCollectionDAO {
 		List<Receiptinfo> receiptInfo = new ArrayList<Receiptinfo>();
 		try{
 			transaction = session.beginTransaction();
-			receiptInfo = session.createQuery("from Receiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"'").list();
+			receiptInfo = session.createQuery("from Receiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}
 		return receiptInfo;
+	}
+
+	public List<Feescollection> getFeesCollectionDetails(int receiptId) {
+
+		List<Feescollection> results = new ArrayList<Feescollection>();
+		try {
+
+			transaction = session.beginTransaction();
+			results = (List<Feescollection>) session.createQuery("From Feescollection where receiptnumber="+receiptId).list();
+			transaction.commit();
+			
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+			// session.close();
+			return results;
+		}
 	}
 
 }

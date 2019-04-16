@@ -155,6 +155,7 @@ public class StampFeesService {
 			feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIds[i]));
 			studentfeesstructure.setFeescategory(feescategory);
 			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[i]));
+			studentfeesstructure.setFeespaid((long) 0);
 			studentfeesstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));

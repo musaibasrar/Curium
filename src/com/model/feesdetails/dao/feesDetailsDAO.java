@@ -12,6 +12,7 @@ import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.feescategory.dto.Feescategory;
+import com.model.feescollection.dto.Feescollection;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.student.dto.Student;
@@ -259,5 +260,61 @@ public class feesDetailsDAO {
                     return results;
             }
     }
+
+		public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection) {
+			
+			boolean result = false;
+
+            try {
+                    transaction = session.beginTransaction();
+                    
+	                    Query query = session.createQuery("update Receiptinfo set cancelreceipt=1 where receiptnumber="+receiptId);
+	                    query.executeUpdate();
+                    
+                    for (Feescollection feescoll : feesCollection) {
+                    	Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.getSfsid());
+                    	queryStudentFS.executeUpdate();
+					}
+                    
+                    transaction.commit();
+                    result = true;
+            } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                    
+                    hibernateException.printStackTrace();
+
+            } finally {
+                    // session.close();
+            }
+            return result;
+			
+		}
+
+		public boolean undoFeesReceipt(int receiptId, List<Feescollection> feesCollection) {
+			
+			boolean result = false;
+
+            try {
+                    transaction = session.beginTransaction();
+                    
+	                    Query query = session.createQuery("update Receiptinfo set cancelreceipt=0 where receiptnumber="+receiptId);
+	                    query.executeUpdate();
+                    
+                    for (Feescollection feescoll : feesCollection) {
+                    	Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+feescoll.getAmountpaid()+" where sfsid="+feescoll.getSfsid());
+                    	queryStudentFS.executeUpdate();
+					}
+                    
+                    transaction.commit();
+                    result = true;
+            } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                    
+                    hibernateException.printStackTrace();
+
+            } finally {
+                    // session.close();
+            }
+            return result;
+			
+		}
 
 }

@@ -17,6 +17,9 @@
         <property name="feesamount" type="java.lang.Long">
             <column name="feesamount" precision="10" scale="0" />
         </property>
+        <property name="feespaid" type="java.lang.Long">
+            <column name="feespaid" precision="10" scale="0" default="0"/>
+        </property>
         <property name="academicyear" type="string">
             <column name="academicyear" length="45" />
         </property>

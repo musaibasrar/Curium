@@ -661,6 +661,16 @@
         		form1.submit();
             }
             
+            function checkWithDueAmount(duePayment){
+            	var dueAmount = parseInt(document.getElementById("dueamount").value);
+            	var payment = parseInt(duePayment.value);
+            	
+            	if(payment>dueAmount){
+            		duePayment.value = 0;
+            		alert('Amount Due to be paid must be lesser than or equals to Due Amount');
+            	}
+            }
+            
         </script>
     </head>
     <%
@@ -773,9 +783,12 @@ for(Cookie cookie : cookies){
 								name="studentsfsids" checked
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
 							<td class="dataTextInActive" align="center"><a class="dataTextInActive" style="text-transform:uppercase"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
-							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" /></td>
+							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
+							<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
+							<input type="hidden" id="dueamount" value="${studentfeesdetails.value}"/>
+							</td>
 							<td class="dataText" align="center">
-							<input type="text" class="amountpaying" value="0" id="amountpaying" name="amountpaying" >
+							<input type="text" class="amountpaying" value="0" id="amountpaying" name="amountpaying" onkeyup="checkWithDueAmount(this)">
 							</td>
 							<td class="dataText" align="center">
 							<input type="text" id="fine" value="0" class="fine" name="fine" >

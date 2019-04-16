@@ -1,6 +1,6 @@
 <%--
-    Document   : Fees Collecion Details
-    Created on : Dec 23, 2011, 5:52:28 PM
+    Document   : Fees Cancelled Receipts
+    Created on : Apr 16, 2019, 11:13:28 AM
     Author     : Musaib
 --%>
 
@@ -407,7 +407,7 @@
 <script type="text/javascript">
 	function searchByDate() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=UserProcess&action=searchByDate";
+		form1.action = "Controller?process=FeesCollection&action=viewCancelledReceipts";
 		form1.method = "POST";
 		form1.submit();
 
@@ -587,8 +587,8 @@ for(Cookie cookie : cookies){
 	<form id="form1"
 		action="Controller?process=FeesDetails&action=exportDataForFees" method="POST">
 		
-		<div class="alert-box success">Receipt has been cancelled successfully!!!</div>
-		<div class="alert-box failure">Receipt cancellation failed, Please try again!!!</div>
+		<div class="alert-box success">Receipt undo cancellation is successful!!!</div>
+		<div class="alert-box failure">Receipt undo cancellation failed, Please try again!!!</div>
 		
 		
 		<div style="height: 28px">
@@ -609,7 +609,7 @@ for(Cookie cookie : cookies){
 							<td width="20%" class="alignRight">Date: &nbsp;</td>
 							<td width="28%"><label> <input name="oneday"
 									type="text" class="textField" id="datepicker" size="36"
-									onfocus="checkFields()" value="${dayone}" autocomplete="false"
+									onfocus="checkFields()" value="${dayonecancel}" autocomplete="false"
 									data-validate="validate(required)">
 							</label></td>
 						</tr>
@@ -628,13 +628,13 @@ for(Cookie cookie : cookies){
 							<td width="20%" class="alignRight">From Date:  &nbsp;&nbsp;</td>
 							<td ><label> <input name="fromdate"
 									type="text" class="textField" id="datepickerfrom" size="36"
-									onfocus="checkFieldsFrom()" value="${datefrom}" autocomplete="false"
+									onfocus="checkFieldsFrom()" value="${datefromcancel}" autocomplete="false"
 									data-validate="validate(required)">
 							</label></td>
 							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date:</td>
 							<td ><label> <input name="todate"
 									type="text" class="textField" id="datepickerto" size="36"
-									onfocus="checkFieldsTo()" value="${dateto}" autocomplete="false"
+									onfocus="checkFieldsTo()" value="${datetocancel}" autocomplete="false"
 									data-validate="validate(required)">
 							</label></td>
 						</tr>
@@ -683,7 +683,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees collected :</label>&#x20B9;${sumofdetailsfees}</td>
+					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees amount cancelled :</label>&#x20B9;${sumofdetailsfeescancelled}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -696,14 +696,14 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Reference Number</th>
                             <th title="click to sort" class="headerText">Total Amount</th>
                             <th title="click to sort" class="headerText">View Details</th>
-                            <th title="click to sort" class="headerText">Cancel Receipt</th>
+                            <th title="click to sort" class="headerText">Undo Receipt</th>
 
 
                         </tr>
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${searchfeesdetailslist}" var="feesdetails">
+                        <c:forEach items="${searchfeesdetailslistcancelled}" var="feesdetails">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox"
@@ -714,7 +714,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${feesdetails.receiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=CancelFeesReceipt&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=UndoFeesReceipt&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>"><i class="fa fa-undo" style="color:#1b5605;font-size: 18px;"></i></a></td>
 
                             </tr>
                         </c:forEach>

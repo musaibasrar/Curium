@@ -31,6 +31,7 @@ public class Studentfeesstructure implements java.io.Serializable {
 	private Integer sid;
 	private Integer idfeescategory;
 	private Long feesamount;
+	private Long feespaid;
 	private String academicyear;
 	private int branchid;
 	private Integer concession;
@@ -43,13 +44,14 @@ public class Studentfeesstructure implements java.io.Serializable {
 	}
 
 	public Studentfeesstructure(Integer sid, Integer idfeescategory,
-			Long feesamount, String academicyear, int branchid, Integer concession) {
+			Long feesamount, Long feespaid, String academicyear, int branchid, Integer concession) {
 		this.sid = sid;
 		this.idfeescategory = idfeescategory;
 		this.feesamount = feesamount;
 		this.academicyear = academicyear;
 		this.branchid = branchid;
 		this.concession = concession;
+		this.feespaid = feespaid;
 	}
 
 	@Id
@@ -125,4 +127,13 @@ public class Studentfeesstructure implements java.io.Serializable {
         public void setConcession(Integer concession) {
             this.concession = concession;
         }
+        
+        @Column(name = "feespaid", precision = 10, scale = 0)
+    	public Long getFeespaid() {
+    		return this.feespaid;
+    	}
+
+    	public void setFeespaid(Long feespaid) {
+    		this.feespaid = feespaid;
+    	}
 }

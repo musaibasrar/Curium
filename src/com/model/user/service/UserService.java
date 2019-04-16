@@ -122,7 +122,7 @@ public class UserService {
 		Date dateBefore = null;
 		Date dateAfter = null;
 		
-		String queryMain = "From Receiptinfo as feesdetails where ";
+		String queryMain = "From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and";
 		
 		try {
 			dateBefore = df.parse(todaysDate);
@@ -169,7 +169,7 @@ public class UserService {
 		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
 		Date dateBefore = null;
 		Date dateAfter = null;
-		String queryMain = "From Receiptinfo as feesdetails where ";
+		String queryMain = "From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and ";
 		String toDate = DataUtil.emptyString(request.getParameter("todate"));
 		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
 		
@@ -504,11 +504,21 @@ public class UserService {
 		 
 		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
 		String branchId = request.getParameter("selectedbranchid");
-                String[] branchIdName = branchId.split(":");
+		int idBranch = 0;
                 
 		if(httpSession.getAttribute(BRANCHID)!=null){
 		
-		String queryMain ="From Receiptinfo as feesdetails where feesdetails.branchid="+Integer.parseInt(branchIdName[0])+" AND";
+
+	        if(branchId!=null) {
+	        	String[] branchIdName = branchId.split(":");
+	        	idBranch = Integer.parseInt(branchIdName[0]);
+	        	httpSession.setAttribute("feesdetailsbranchname", branchIdName[1]);
+	        	httpSession.setAttribute("branchname", "Branch Name:");
+	        }else {
+	        	idBranch = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+	        }
+	        
+		String queryMain ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
 		String toDate= DataUtil.emptyString(request.getParameter("todate"));
 		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
 		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
@@ -518,12 +528,21 @@ public class UserService {
 			
 			if(!oneDay.equalsIgnoreCase("")){
 				querySub = " feesdetails.date = '"+oneDay+"'" ;
-				 
+				 httpSession.setAttribute("dayone", oneDay);
+				 httpSession.setAttribute("datefrom", "");
+				 httpSession.setAttribute("dateto", "");
+			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dayone")))) {
+				querySub = " feesdetails.date = '"+(String) httpSession.getAttribute("dayone")+"'" ;
 			}
 			
 			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
 				querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
-				
+				httpSession.setAttribute("datefrom", fromDate);
+				httpSession.setAttribute("dateto", toDate);
+				httpSession.setAttribute("dayone", "");
+			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("datefrom"))) && 
+					!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dateto"))) ) {
+				querySub = " feesdetails.date between '"+(String) httpSession.getAttribute("datefrom")+"' AND '"+(String) httpSession.getAttribute("dateto")+"'";
 			}
 			
 			queryMain = queryMain+querySub;
@@ -539,8 +558,6 @@ public class UserService {
 			
 			httpSession.setAttribute("searchfeesdetailslist", feesDetailsList);
 			httpSession.setAttribute("sumofdetailsfees", sumOfFees);
-			httpSession.setAttribute("feesdetailsbranchname", branchIdName[1]);
-		
 	}
 
 	public boolean addUser(Teacher employee) {

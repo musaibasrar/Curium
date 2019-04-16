@@ -173,13 +173,14 @@
 <body style="text-align: center" class="bodymargin">
 	<form method="post" class="bodymargin">
 		<br>
+		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left">
-				<img src="images/curiumheader.png" width="200" height="150"/>
+				<img src="images/cambridgelogo.jpg" width="200" height="150"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;Cambridge School, Yadgir </label><br>
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;Cambridge School Yadgir </label><br>
 				<label class="addressLine">Behind Mohan Complex, Chittapur Road, Yadgir - 585202<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											Dist - Yadgir (K.S.) Cell: 9880012654 
@@ -368,7 +369,7 @@
 
 <tr>
 
-<td >In Words: <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
+<td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
 <td></td>
 </tr>
 

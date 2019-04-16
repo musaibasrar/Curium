@@ -1376,16 +1376,16 @@ public class StudentService {
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
-						new Object[] { studentDetails.getStudent().getName(), studentDetails.getStudent().getGender(),
-								studentDetails.getStudent().getDateofbirth().toString(),
-								studentDetails.getStudent().getAge().toString(),
-								studentDetails.getStudent().getClassstudying(),
-								studentDetails.getStudent().getClassadmittedin(),
-								studentDetails.getStudent().getAdmissionnumber(),
-								studentDetails.getStudent().getAdmissiondate().toString(),
-								studentDetails.getStudent().getBloodgroup(), studentDetails.getStudent().getReligion(),
-								studentDetails.getStudent().getCaste(), studentDetails.getFathersname(),
-								studentDetails.getMothersname() });
+						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
+								 DataUtil.emptyString(DateUtil.getStringDate(studentDetails.getStudent().getDateofbirth())),
+								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
+								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying()),
+								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin()),
+								 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
+								 DataUtil.emptyString(studentDetails.getStudent().getAdmissiondate().toString()),
+								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
+								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
+								 DataUtil.emptyString(studentDetails.getMothersname()) });
 				i++;
 			}
 			Row headerRow = sheet.createRow(0);

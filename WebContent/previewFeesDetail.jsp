@@ -136,9 +136,13 @@
         <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {
-
                  $("#print").printPage();
              });
+             
+             function printReceipt(){
+            	 document.getElementById("print").click();
+            	 //document.location.href = "Controller?process=FeesProcess&action=feesCollect"; 
+             }
         </script>
     </head>
       <%
@@ -157,8 +161,8 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body>
-        <form>
+    <body onload="printReceipt()">
+        <form id="form">
         <input type="hidden" value="${duplicate}" id="duplicate" name="duplicate">
             <table  width="100%">
                 <thead>

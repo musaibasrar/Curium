@@ -301,7 +301,6 @@
 		$("#datepicker").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
 		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
@@ -313,7 +312,6 @@
 		$("#datepicker1").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
 		$( "#datepicker1" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
@@ -326,7 +324,7 @@
 		$("#dateoftc").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
+			
 			yearRange: "-50:+0"
 		});
 		$( "#dateoftc" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
@@ -341,7 +339,6 @@
 		$("#dateofadmission").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
 		$( "#dateofadmission" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
@@ -356,7 +353,6 @@
 		$("#dateofleaving").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
 		$( "#dateofleaving" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
@@ -371,7 +367,6 @@
 		$("#dateoftcissued").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
 		$( "#dateoftcissued" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
@@ -386,7 +381,6 @@
 		$("#datepickerCD").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
 			yearRange: "-50:+0"
 		});
 		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
@@ -585,8 +579,10 @@
 
 	function CalculateAge(value) {
 		var dateOfBirth = document.getElementById('datepicker').value;
+		var splitDate = dateOfBirth.split('-');
+		var dateOfBirthSplit = splitDate[1]+"-"+splitDate[0]+"-"+splitDate[2]
 		var today = new Date();
-		var birthDate = new Date(Date.parse(dateOfBirth));
+		var birthDate = new Date(dateOfBirthSplit);
 		var age = today.getFullYear() - birthDate.getFullYear();
 		var m = today.getMonth() - birthDate.getMonth();
 		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
