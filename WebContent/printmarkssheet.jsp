@@ -87,7 +87,8 @@
 .datatable {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 60%;
+    width: 80%;
+    font-size: 18px;
 }
 
 .datatd, .datath {
@@ -99,7 +100,7 @@
 .markssheetlabel{
 	font-weight: bold;
 	font-size: 20px;
-	text-align: right;
+	text-align: left;
 }
 .markssheetvalue{
 	font-size: 18px;
@@ -186,8 +187,8 @@
         
         @page {
               
-           margin-left:  0cm;
-             margin-right: 2cm;
+           margin-left:  1.5cm;
+             margin-right: 1cm;
              margin-bottom: 0cm;
              margin-top: 0cm;
              size: auto;
@@ -212,86 +213,73 @@
 	<form method="post" class="bodymargin">
 		<c:forEach items="${markssheetlist}" var="mlist" >
 		<div style="page-break-inside: avoid;">
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		<table  width="50%" border="0" style="border-color: #4b6a84;float: left;">
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<table width="100%" border="0" style="border-color: #4b6a84;float: left;text-align: left">
 		
 			<tr>
-						<td class="markssheetlabel">Examination Year:&nbsp;</td>
-						<td class="markssheetvalue">${markssheetyear}</td>
-						
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td><label class="markssheetlabel">Examination Year:</label>&nbsp;&nbsp;<label class="markssheetvalue">${markssheetyear}</label></td>
+						<td><label class="markssheetlabel">Center Code:</label>&nbsp;<label class="markssheetvalue">${markssheetcentercode}</label></td>
 			</tr>
 			
 			<tr>
-						<td class="markssheetlabel">Center Code:&nbsp;</td>
-						<td class="markssheetvalue">${markssheetcentercode}</td>	
-						
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td><label class="markssheetlabel">Language:</label>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<label class="markssheetvalue">${mlist.parents.student.languageopted}</label></td>
+						<td><label class="markssheetlabel">Reg. No:</label>&nbsp;&nbsp;
+						<label class="markssheetvalue">${mlist.parents.student.admissionnumber}</label></td>
 			</tr>
 		</table>
 		
-		<table  width="50%" border="0" style="border-color: #4b6a84;float: left;">
-			<tr>
-			<td></td>
-			</tr>
-			
-			<tr>
-						<td class="markssheetlabel">Examination:&nbsp;</td>
-						<td class="markssheetvalue">${markssheetexamlevel}</td>
-			</tr>
-			
+		
+		<table  width="100%" border="0" style="border-color: #4b6a84;float: left;text-align: left">
+					<tr>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td><label class="markssheetlabel">Examination:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<label class="markssheetvalue">${markssheetexamlevel}</label></td>
+					</tr>
+		</table>
+	
+		
+		<table width="100%" style="text-align: left">
+		
 			<tr>
 						
-						<td class="markssheetlabel">Language:&nbsp;</td>
-						<td class="markssheetvalue">${markssheetlanguage}</td>
+						<td><label class="markssheetlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Center Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<label class="markssheetvalue">${markssheetcentername}</label></td>
 			</tr>
 			
 			<tr>
-						<td class="markssheetlabel">Reg.No:&nbsp;</td>
-						<td class="markssheetvalue">${mlist.parents.student.admissionnumber}</td>
-			</tr>
-			
-			<tr>
-			<td><br><br></td>
-			</tr>
-			
-			
-		</table>
-		
-		<table align="center">
-		
-			<tr>
-						<td class="markssheetlabel">
-						Center Name:&nbsp;</td>
-						<td class="markssheetvalue">${markssheetcentername}</td>
-			</tr>
-			
-			<tr>
-						<td class="markssheetlabel">
-						Candidate Name:&nbsp;</td>
-						<td class="markssheetvalue">${mlist.parents.student.name}
-						</td>
+						<td><br><br><label class="markssheetlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Candidate Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<label class="markssheetvalue">${mlist.parents.student.name}</label></td>
 			</tr>
 			
 			      <tr>
-			      
 							<c:if test="${(mlist.parents.mothersname != '')}">
-                                <td class="markssheetlabel">
-                                W/O:&nbsp;</td>
-                                <td class="markssheetvalue">${mlist.parents.mothersname}</td>
+							<td><label class="markssheetlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							W/O:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<label class="markssheetvalue">${mlist.parents.mothersname}</label></td>
 							</c:if>	
 
 								<c:if test="${(mlist.parents.fathersname != '')}">
-                                <td class="markssheetlabel">
-                                S/D/O:&nbsp;</td><td class="markssheetvalue">${mlist.parents.fathersname}</td>
+								
+								<td><label class="markssheetlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								S/D/O:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+							<label class="markssheetvalue">${mlist.parents.fathersname}</label></td>
+						
 							</c:if>
-							
 
                              	<c:if test="${(mlist.parents.student.guardiandetails != '')}">
-                                <td class="markssheetlabel">
-                                Guardian:&nbsp;</td><td class="markssheetvalue">${mlist.parents.student.guardiandetails}</td>
+                             	<td><label class="markssheetlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                             	Guardian:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+								<label class="markssheetvalue">${mlist.parents.student.guardiandetails}</label></td>
                                 </c:if>
                 </tr>
                 <tr>
-			<td><br><br></td>
+			<td><br></td>
 			</tr>
                
                        
@@ -306,6 +294,7 @@
 						<th class="datath">${subexamlevel}</th>
 						</c:forEach>
 						<th class="datath">Total</th>
+						<th class="datath">Percentage</th>
 						<th class="datath">Result</th>
 					</tr>
 				</thead>
@@ -317,10 +306,13 @@
 							<td class="datatd"><c:out value="${markslist}" /></td>
 							</c:forEach>
 							<td class="datatd"><c:out value="${mlist.totalMarksObtained}" /></td>
+							<td class="datatd">
+							<fmt:formatNumber type = "number" 
+         					pattern = "0.#" value = "${mlist.percentage}" />%</td>
 							<td class="datatd"><c:out value="${mlist.resultclass}" /></td>
 						</tr>
 						
-							<tr><td><br><br><br><br><br></td></tr>
+							<tr><td><br></td></tr>
 
 			</tbody>
 				</table>
@@ -333,33 +325,28 @@
 							<c:forEach items="${mlist.referenceBooksList}" var="referencebooks" varStatus="status">
 							<tr align="center" >
 							<td></td>
-							<td align="left" style="font-weight: bold;">${status.index+1}.<c:out value="${referencebooks}" /></td>
+							<td align="left" style="font-weight: bold;">${status.index+1}.&nbsp;<c:out value="${referencebooks}" /><br></td>
 							</tr>
 						</c:forEach>
 							</tr>
 				</table>
-<div id="footer">
+<!-- <div id="footer">
+
 		<table>
 				<tr>
-		
-			<td align="left"></td>	
-			<td align="centre"></td>
-			<td align="right"><img alt="Chief Examiner Signature" src="images/cesignature.jpg" width="200" height="70"></td>
-			</tr>
-				<tr>
+					<td align="right">
+					<img alt="Chief Examiner Signature" src="images/cesignature.jpg" width="200" height="70">
+					</td>
+				</tr>
 				
-				<td align="center" style="padding-left: 100px;">Seal & Sign of Organiser</td>	
-			<td align="centre" style="padding-left: 50px;">Candidate's Signature</td>
-			<td align="center" style="padding-left: 100px;padding-left: 50px;">Signature of Chief Examiner</td>
-		
-			</tr>
-			<tr>
-			<td><br><br></td>
-			</tr>
-
-				</table>
+				<tr>
+					<td><br><br><br><br></td>
+				</tr>
+			
+	    </table>
+	  
 			</div>
-			</div>
+ -->			</div>
 			</c:forEach>
 	</form>
 </body>

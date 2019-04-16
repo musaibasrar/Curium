@@ -61,12 +61,8 @@ public class ResultService {
 	        new QualificationService(request, response).viewQualification();
 	                
         	     httpSession.setAttribute("markssheetlist", "");
-                     httpSession.setAttribute("markssheetsubexamlevel", "");
+                 httpSession.setAttribute("markssheetsubexamlevel", "");
 	             httpSession.setAttribute("markssheetyear", "");
-	             httpSession.setAttribute("markssheetcentercode", "");
-	             httpSession.setAttribute("markssheetcentername", "");
-	             httpSession.setAttribute("markssheetexamlevel", "");
-	             httpSession.setAttribute("markssheetlanguage", "");
 	             httpSession.setAttribute("totalstudentresult", "");
 	             httpSession.setAttribute("failcount", "");
 	             httpSession.setAttribute("passcount", "");
@@ -529,14 +525,20 @@ public class ResultService {
                  MarksSheet result = new MarksSheet();
                  List<Integer> marksList = new ArrayList<Integer>();
                  List<String> subjectList = new ArrayList<String>();
-                 double marksObtained = 0;
+                 int marksObtained = 0;
                  double totalMarks = 0;
                  String finalResult = null;
                  
                      for (Subexamlevel subexamlevel : subList) {
                          Subject subjectIds = new SubjectDetailsDAO().getSubjectDetails(subexamlevel.getSubjectname());
                          Marks marks = new MarksDetailsDAO().readMarksPerStudent(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), academicYear);
-                         subjectList.add(subjectIds.getSubjectname());
+                         
+                         if(subList.size()==1) {
+                        	 subjectList.add(subjectIds.getSubjectname().replaceAll("1",""));
+                         }else {
+                        	 subjectList.add(subjectIds.getSubjectname());
+                         }
+                         
                          
                          if(marks!=null) {
                              marksList.add(marks.getMarksobtained());
@@ -575,8 +577,14 @@ public class ResultService {
                      // get the reference books
                      List<Referencebooks> refBooksList = new ReferenceBooksDAO().getReferenceBooks(examDet[0],studentDetails.getStudent().getLanguageopted());
                      List<String> referenceBooksList = new ArrayList<String>();
+                     
                      for (Referencebooks refBook : refBooksList) {
-                         referenceBooksList.add(refBook.getReferencebooks());
+                    	 String[] referenceBooks = refBook.getReferencebooks().split(",");
+                    	 
+                    	 for (String refBooks : referenceBooks) {
+                    		 referenceBooksList.add(refBooks.trim());
+						}
+                         
                     }
                     //End querying reference books
                      
@@ -603,7 +611,7 @@ public class ResultService {
                  result.setRank(i);
                 i++;
             }
-            // resultList.addAll(resultListFail);
+            resultList.addAll(resultListFail);
              
              httpSession.setAttribute("totalstudentresult", parentsList.size());
              httpSession.setAttribute("failcount", failCounter);
@@ -621,6 +629,7 @@ public class ResultService {
              httpSession.setAttribute("markssheetcentername", centerCodeName[1]);
              httpSession.setAttribute("markssheetexamlevel", examLevelCodeName[2]);
              httpSession.setAttribute("markssheetlanguage", language);
+             httpSession.setAttribute("markssheetacademicsearch",academicYear);
              
              new ExamLevelService(request, response).examLevels();
              new LanguageService(request, response).viewLanguage();

@@ -10,7 +10,7 @@ public class MarksSheet  implements java.io.Serializable,Comparable<MarksSheet> 
     List<Integer> marksList;
     List<String> subjectList;
     List<String> referenceBooksList;
-    double totalMarksObtained;
+    int totalMarksObtained;
     double percentage;
     String resultclass;
     Integer rank;
@@ -19,7 +19,7 @@ public class MarksSheet  implements java.io.Serializable,Comparable<MarksSheet> 
     }
 
     public MarksSheet(Parents parents, List<Integer> marksList, double percentage, String resultclass, List<String> subjectList, 
-            List<String> referenceBooksList, double totalMarksObtained, Integer rank) {
+            List<String> referenceBooksList, int totalMarksObtained, Integer rank) {
         this.parents = parents;
         this.subjectList = subjectList;
         this.marksList = marksList;
@@ -91,12 +91,12 @@ public class MarksSheet  implements java.io.Serializable,Comparable<MarksSheet> 
     }
 
     
-    public double getTotalMarksObtained() {
+    public int getTotalMarksObtained() {
         return this.totalMarksObtained;
     }
 
     
-    public void setTotalMarksObtained(double totalMarksObtained) {
+    public void setTotalMarksObtained(int totalMarksObtained) {
         this.totalMarksObtained = totalMarksObtained;
     }
 
