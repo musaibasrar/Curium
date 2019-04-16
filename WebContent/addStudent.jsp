@@ -1427,12 +1427,19 @@
 
 								<tr>
 									<td width="30%" class="alignRight">Class on leaving&nbsp;</td>
-									<td width="12%" align="left"><label> <input
-											name="classonleaving" type="text" class="myclass"
-											id="classonleaving" style="text-transform: uppercase"
-											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
-									</label></td>
-
+									<td width="12%" align="left">
+									<label> <select name="classonleaving"
+									id="classonleaving" style="width: 220px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+										</select>
+									</label>
 									<td width="30%" class="alignRight">Date of leaving the
 										school&nbsp;</td>
 									<td width="12%" align="left"><label> <input
