@@ -206,12 +206,14 @@ for(Cookie cookie : cookies){
                         
                         	<table width="100%" style="border-collapse: collapse;">
 			<tr>
+			<td class="addressLine">R.R.R. Education & Charitable Trust(R)</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				
-				Divine M.A. English Higher Primary & High School </td>
+				SHAMFORD PRIMARY/SHAMFORD PUBLIC HIGHER PRIMARY SCHOOL<br>
+				SHRI GURUPADESHWAR HIGH SCHOOL
+				</td>
 			</tr>
 			<tr>
-			<td class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</td>
+			<td class="addressLine">BORAL, Tq. Humnabad, Dist. Bidar</td>
 			</tr>
 
 			<tr>

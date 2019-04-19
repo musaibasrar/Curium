@@ -15,7 +15,7 @@
 <html>
     <head >
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Please wait...</title> 
+        <title>ID CARD</title> 
 
         <script type="text/javascript" language="JavaScript" src="js/motionpack.js"></script>
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -428,7 +428,7 @@ for(Cookie cookie : cookies){
                             <c:if test="${limit < iInitial}">
                             <td class="fontsize" >
                          <div class="card">
-  								<img src="images/divine.jpg" alt="Avatar" style="width:100%">
+  								<img src="images/shamfordheaderlogo.png" alt="shamford" style="width:100%">
   								<div class="container">
     							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
     							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
@@ -444,7 +444,7 @@ for(Cookie cookie : cookies){
                             <% i = i + 1;%>
                             <c:if test="${limit < iInitial}">
                             <td  class="fontsize"> <div class="card">
-  								<img src="images/divine.jpg" alt="Avatar" style="width:100%">
+  								<img src="images/shamfordheaderlogo.png" alt="shamford" style="width:100%">
   								<div class="container">
     							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
     							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" alt="Student's Photo" /> 
@@ -457,7 +457,7 @@ for(Cookie cookie : cookies){
                             <% i = i + 1;%>
                             <c:if test="${limit < iInitial}">
                             <td  class="fontsize"> <div class="card">
-  								<img src="images/divine.jpg" alt="Avatar" style="width:100%">
+  								<img src="images/shamfordheaderlogo.png" alt="shamford" style="width:100%">
   								<div class="container">
     							<h4>Student's Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
     							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />

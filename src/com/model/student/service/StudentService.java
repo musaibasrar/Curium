@@ -169,6 +169,7 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("createddate")) {
 		                    student.setCreateddate(DateUtil.dateParserddmmyyyy(item.getString()));
 		                }
+		                //@UI 'Elaborate your choice'	
 		                if (fieldName.equalsIgnoreCase("remarks")) {
 		                	student.setRemarks(DataUtil.emptyString(item.getString()));
 		                }
@@ -209,7 +210,7 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("guardian")) {
 		                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
 		                }
-		                
+		                //@UI 'School Transport required'
 		                if (fieldName.equalsIgnoreCase("semester")) {
 		                	student.setSemester(DataUtil.parseInt(item.getString()));
 		                }
@@ -225,6 +226,7 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("previouschooladdress")) {
 		                	student.setPreviouschooladdress(DataUtil.emptyString(item.getString()));
 		                }
+		                //@UI 'ANy other '
 		                if (fieldName.equalsIgnoreCase("urbanrural")) {
 		                	student.setUrbanrural(DataUtil.emptyString(item.getString()));
 		                }
@@ -237,22 +239,23 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("socialcategory")) {
 		                	student.setSocialcategory(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Was in receipt of any scholarship'
+		                //@UI 'Medical'
 		                if (fieldName.equalsIgnoreCase("belongtobpl")) {
 		                	student.setBelongtobpl(DataUtil.parseInt(item.getString()));
 		                }
-		                //@UI 'Adhar card no'
+		                //@UI 'Media'
 		                if (fieldName.equalsIgnoreCase("bplcardno")) {
 		                	student.setBplcardno(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Whether Vaccinated'
+		                //@UI 'Academics'
 		                if (fieldName.equalsIgnoreCase("bhagyalakshmibondnumber")) {
 		                	student.setBhagyalakshmibondnumber(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Marks of Identification on Pupil's body'
+		                //@UI 'Sports'
 		                if (fieldName.equalsIgnoreCase("disabilitychild")) {
 		                	student.setDisabilitychild(DataUtil.emptyString(item.getString()));
 		                }
+		                //@UI 'cultural'
 		                if (fieldName.equalsIgnoreCase("specialcategory")) {
 		                	student.setSpecialcategory(DataUtil.emptyString(item.getString()));
 		                }
@@ -767,7 +770,7 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("createddate")) {
 	                    student.setCreateddate(DateUtil.dateParserddmmyyyy(item.getString()));
 	                }
-
+	                
 	                if (fieldName.equalsIgnoreCase("remarks")) {
 	                	student.setRemarks(DataUtil.emptyString(item.getString()));
 	                }
@@ -815,7 +818,6 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("guardian")) {
 	                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
 	                }
-	                
 	                if (fieldName.equalsIgnoreCase("semester")) {
 	                	student.setSemester(DataUtil.parseInt(item.getString()));
 	                }

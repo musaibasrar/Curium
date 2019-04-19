@@ -64,14 +64,15 @@
         </script>
         <form action="Controller?process=UserProcess&action=authenticateUser" method="post" id="form1">
                     	
-                                    <table align="center">
+                                    <table align="left">
                                     	<tr>
                                     	<td>
                                     	<br><br><br>
                                     	</td>
                                     	</tr>
                                     	<tr>
-                                    	<td> <img alt="" src="images/cambridgelogo.jpg" style="width:400px;height: 400px"></td>
+                                    	<td width="300px;"></td>
+                                    	<td> <img alt="" src="images/shamfordlogo.jpg" style="width:400px;height: 400px"></td>
                                     	<td></td><td></td><td></td>
                                     	 <td>
                                     	 <p align="left" style="color: red;">Please enter correct username and password</p>

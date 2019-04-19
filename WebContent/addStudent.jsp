@@ -610,16 +610,7 @@
 
 	}
 	
-	 function enterOtherSpecialCategory() {
-	        var distlistitem = document.getElementById("specialcategory");
-	        var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
-
-	        if (distlistitemtext == "Others (Please Specify)") {
-	            document.getElementById("specialcategory").style.display = "none";
-	            document.getElementById("categoryname").style.display = "none";
-	            document.getElementById("newcateg").style.display = '';
-	        }
-	    }
+	
 </script>
 
 <script type="text/javascript">
@@ -1013,8 +1004,7 @@
 
 							</label></td> -->
 
-							<td width="20%" class="alignRight">Students Caste
-								Certificate No.&nbsp;</td>
+							<td width="20%" class="alignRight">Students Caste Certificate No.&nbsp;</td>
 							<td width="28%"><label> <input
 									name="studentscastecertno" type="text" class="textField"
 									id="studentscastecertno" size="36">
@@ -1053,97 +1043,25 @@
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
-							<td width="30%" class="alignRight">Was in receipt of any scholarship&nbsp;</td>
-							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
-								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
-								onclick="noCheck(this.id);" />
-
-							</td>
-							<td width="20%" class="alignRight">Adhar Card No.
-								&nbsp;</td>
-							<td width="28%"><label> <input
-									name="bplcardno" type="text" class="textField"
-									id="bplcardno" size="36">
-
-							</label></td>
-						</tr>	
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="20%" class="alignRight">Whether Vaccinated
-								&nbsp;</td>
-								<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
-								type="checkbox" value="1" name="bhagyalakshmibondnumber" id="yes:vaccinated"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="bhagyalakshmibondnumber" id="no:vaccinated"
-								onclick="noCheck(this.id);" />
-
-							</td>
-							<td width="16%" class="alignRight">Marks of Identification on Pupil's body&nbsp;</td>
-							<td width="28%"><label> <input
-									name="disabilitychild" type="text" class="textField"
-									id="disabilitychild" size="36">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
 						
 						<tr>
-							<td width="20%" class="alignRight">Special Category&nbsp;</td>
+							<td width="20%" class="alignRight">Areas in which you contribute towards enrichment of the school&nbsp;</td>
 
-							<td id="categoryname"><label> <select
-									name="specialcategory" onchange="enterOtherSpecialCategory()"
-									id="specialcategory" style="width: 240px">
-										<option selected>None</option>
-										<option></option>
-										<option>None</option>
-										<option>Destitute</option>
-										<option>HIV Case</option>
-										<option>Orphans</option>
-										<option>Others (Please Specify)</option>
-								</select>
-
-							</label></td>
-							<td width="28%" id="newcateg"
-								style="display: none;"><label> <input
-									name="newcategory" id="newcategory" type="text" class="textField" size="36"
-									placeholder="Add Other Category" />
-							</label></td>
-							
-							<td width="16%" class="alignRight">Mother Tongue &nbsp;</td>
-							<td width="28%">
-								<!-- <label> <input name="motherT"
-									type="text" class="textField" id="motherT" size="36"
-									onblur="validateNameContact();"
-									onkeypress="return validateContactNum(this);">
-
-							</label> --> <label> <select name="motherT"
-									onblur="validateNameContact();" id="motherT"
-									style="width: 240px"
-									onkeypress="return validateContactNum(this);">
-										<option selected></option>
-										<option>Urdu</option>
-										<option>Hindi</option>
-										<option>English</option>
-										<option>Kannada</option>
-										<option>Marathi</option>
-										<option>Telugu</option>
-										<option>Tamil</option>
-								</select>
+							<td><label>
+										<input type="checkbox" name="specialcategory" value="Cultural">Cultural&nbsp;&nbsp;
+										<input type="checkbox" name="belongtobpl" value="1">Medical<br>
+										<input type="checkbox" name="bplcardno" value="Media">Media&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="checkbox" name="bhagyalakshmibondnumber" value="Academic">Academic<br>
+										<input type="checkbox" name="disabilitychild" value="Sports">Sports&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="checkbox" name="urbanrural" value="Other">Any Other<br> 
 							</label>
 							</td>
+							
+							<td width="20%" class="alignRight">Please elaborate your choice &nbsp;</td>
+							<td width="28%"><label> <input name="remarks"
+									type="text" class="textField" id="remarks" size="36"
+									onclick="validateNameContact();">
+							</label></td>
 						</tr>
 						<tr>
 									<td><br /></td>
@@ -1261,11 +1179,29 @@
 								onclick="noCheck(this.id);" />
 										</td>
 										
-							<td width="20%" class="alignRight">Remarks &nbsp;</td>
-							<td width="28%"><label> <input name="remarks"
-									type="text" class="textField" id="remarks" size="36"
-									onclick="validateNameContact();">
-							</label></td>
+							
+							<td width="16%" class="alignRight">Mother Tongue &nbsp;</td>
+							<td width="28%">
+								<!-- <label> <input name="motherT"
+									type="text" class="textField" id="motherT" size="36"
+									onblur="validateNameContact();"
+									onkeypress="return validateContactNum(this);">
+
+							</label> --> <label> <select name="motherT"
+									onblur="validateNameContact();" id="motherT"
+									style="width: 240px"
+									onkeypress="return validateContactNum(this);">
+										<option selected></option>
+										<option>Urdu</option>
+										<option>Hindi</option>
+										<option>English</option>
+										<option>Kannada</option>
+										<option>Marathi</option>
+										<option>Telugu</option>
+										<option>Tamil</option>
+								</select>
+							</label>
+							</td>
 						</tr>
 
 <tr>
@@ -1275,7 +1211,16 @@
 							<td><br /></td>
 						</tr>
 						<tr>
-										
+									<td width="20%" class="alignRight">School Transport Required
+										&nbsp;</td>
+
+									<td width="28%" height="30" class="alignLeft">&nbsp;Yes<input
+								type="checkbox" value="1" name="semester" id="yes:str"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="semester" id="no:str"
+								onclick="noCheck(this.id);" />
+										</td>
+											
 							<td width="20%" class="alignRight">Created Date &nbsp;</td>
 							<td width="28%"><label> <input name="createddate"
 									type="text"
@@ -1288,13 +1233,6 @@
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
 
 						<div>
 							<table width="100%">
@@ -1490,20 +1428,7 @@
 								<tr>
 									<td><br /></td>
 								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
+								
 
 								<tr align="center">
 
@@ -1514,7 +1439,9 @@
 										href="#">Previous</a></td>
 								</tr>
 
-
+								<tr>
+									<td><br /></td>
+								</tr>
 								<tr align="center">
 
 

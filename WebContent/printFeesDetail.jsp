@@ -62,7 +62,16 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 32px;
+	font-size: 18px;
+	letter-spacing: normal;
+	text-align: center;
+}
+
+.dataCenter {
+	font-weight: bold;
+	font-family: Tahoma;
+	color: black;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -177,13 +186,21 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left">
-				<img src="images/cambridgelogo.jpg" width="200" height="150"/>
+				<img src="images/shamfordlogo.jpg" width="200" height="150"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;Cambridge School Yadgir </label><br>
-				<label class="addressLine">Behind Mohan Complex, Chittapur Road, Yadgir - 585202<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											Dist - Yadgir (K.S.) Cell: 9880012654 
+				<label class="addressLine">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				R.R.R. Education & Charitable Trust(R)
+				 </label><br>
+				<label class="dataTextBoldCenter">SHAMFORD PRIMARY/SHAMFORD PUBLIC HIGHER PRIMARY SCHOOL</label><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label class="dataCenter">SHRI GURUPADESHWAR HIGH SCHOOL </label><br>
+				<label class="addressLine">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				20/A, BORAL MANNAEKHELLI, Tq. Humnabad,<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											 Dist. Bidar (K.S.) Cell: 7348895279, 7348898279 
 				 </label>
 				</td>
 			</tr>

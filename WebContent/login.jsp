@@ -49,12 +49,7 @@
                     window.open('index_admin.jsp','_self');
                 }else if(type=='feescollector'){
                     window.open('index_feescollector.jsp','_self');
-                }else if(type=='reception'){                    
-                   window.open('','_self');
-                    window.close();
-                    openIndexPage('index_reception.jsp',screen.width,screen.height);
-                }
-                else if(type=='staff'){
+                }else if(type=='staff'){
                 	window.open('index.jsp','_self');
                 }
             }
@@ -64,14 +59,15 @@
         </script>
         <form action="Controller?process=UserProcess&action=authenticateUser" method="post" id="form1">
                     	
-                                    <table align="center">
+                                    <table align="left">
                                     	<tr>
                                     	<td>
                                     	<br><br><br>
                                     	</td>
                                     	</tr>
                                     	<tr>
-                                    	<td> <img alt="" src="images/cambridgelogo.jpg" style="width:400px;height: 400px"></td>
+                                    	<td width="300px;"></td>
+                                    	<td> <img alt="" src="images/shamfordlogo.jpg" style="width:400px;height: 400px"></td>
                                     	<td></td><td></td><td></td>
                                     	 <td>
                                             <img src="images/username.png" height="30" name="login" style="vertical-align: bottom;"/>
