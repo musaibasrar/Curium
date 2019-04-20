@@ -49,6 +49,7 @@ public class studentDetailsDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
+				HibernateUtil.closeSession();
 			return student;
 		}
 	}
@@ -76,7 +77,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -102,7 +103,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+				HibernateUtil.closeSession();
 			return noOfRecords;
 		}
 	}
@@ -122,8 +123,10 @@ public class studentDetailsDAO {
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
-		// session.close();
+		
 		return student;
 	}
 
@@ -139,7 +142,7 @@ public class studentDetailsDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
-			// session.close();
+				HibernateUtil.closeSession();
 			return student;
 		}
 	}
@@ -162,7 +165,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -177,6 +180,8 @@ public class studentDetailsDAO {
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 
 	}
@@ -201,7 +206,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -226,6 +231,8 @@ public class studentDetailsDAO {
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 
 	}
@@ -240,6 +247,8 @@ public class studentDetailsDAO {
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 
 	}
@@ -259,7 +268,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -302,6 +311,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 			result = false;
 		} finally {
+				HibernateUtil.closeSession();
 			return result;
 		}
 
@@ -329,7 +339,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -355,7 +365,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			// session.close();
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -386,7 +396,9 @@ public class studentDetailsDAO {
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
-		} 
+		} finally {
+			HibernateUtil.closeSession();
+		}
 	}
 
 	public List<Studentfeesstructure> getStudentFeesStructure(long id,
@@ -411,7 +423,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			//session.close();
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -427,8 +439,10 @@ public class studentDetailsDAO {
         	transaction.rollback(); 
         	logger.error(hibernateException);
             hibernateException.printStackTrace();
-        }
-        //session.close();
+        }finally {
+			HibernateUtil.closeSession();
+		}
+        
         return parents;
 	}
 
@@ -445,8 +459,10 @@ public class studentDetailsDAO {
         	transaction.rollback(); 
         	logger.error(hibernateException);
             hibernateException.printStackTrace();
-        }
-        //session.close();
+        }finally {
+			HibernateUtil.closeSession();
+		}
+       
         return parents;
 	}
 	
@@ -460,7 +476,9 @@ public class studentDetailsDAO {
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
         return student;
 	}
 
@@ -477,7 +495,7 @@ public class studentDetailsDAO {
 			hibernateException.printStackTrace();
 
 		} finally {
-			//session.close();
+				HibernateUtil.closeSession();
 			return studentFeesStructure;
 		}
 	}
@@ -493,6 +511,8 @@ public class studentDetailsDAO {
 			return true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -506,7 +526,9 @@ public class studentDetailsDAO {
     } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-    } 
+    } finally {
+		HibernateUtil.closeSession();
+	}
     }
     
     public void updateDegreeDetails(Degreedetails degreeDetails) {
@@ -518,7 +540,9 @@ public class studentDetailsDAO {
     } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-    } 
+    } finally {
+		HibernateUtil.closeSession();
+	}
     }
 
     public List<Parents> readListStudentsSuperAdmin(int offset, int noOfRecords) {
@@ -542,7 +566,7 @@ public class studentDetailsDAO {
                 hibernateException.printStackTrace();
 
         } finally {
-                // session.close();
+    			HibernateUtil.closeSession();
                 return results;
         }
 }
@@ -560,6 +584,7 @@ public class studentDetailsDAO {
                 hibernateException.printStackTrace();
 
         } finally {
+    			HibernateUtil.closeSession();
                 return noOfRecords;
         }
 }
