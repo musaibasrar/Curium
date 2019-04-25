@@ -44,7 +44,9 @@ public class EmployeeDAO {
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
-		} 
+		} finally {
+			HibernateUtil.closeSession();
+		}
 		return result;
 	}
 
@@ -62,6 +64,7 @@ public class EmployeeDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -89,6 +92,7 @@ public class EmployeeDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -107,6 +111,7 @@ public class EmployeeDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -124,7 +129,9 @@ public class EmployeeDAO {
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
-		} 
+		} finally {
+			HibernateUtil.closeSession();
+		}
 
 		return employee;
 	}
@@ -140,7 +147,7 @@ public class EmployeeDAO {
             
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+    			HibernateUtil.closeSession();
             return employee;
         }
 	}
@@ -154,7 +161,9 @@ public class EmployeeDAO {
             transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
 		
 	}
 
@@ -174,6 +183,7 @@ public class EmployeeDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
+				HibernateUtil.closeSession();
 			return noOfRecords;
 		}
 	}
@@ -196,6 +206,8 @@ public class EmployeeDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return employee;
 	}
@@ -217,6 +229,8 @@ public class EmployeeDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return employee;
 	}
@@ -229,6 +243,8 @@ public class EmployeeDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return employeeExtId;
 	}
@@ -243,7 +259,9 @@ public class EmployeeDAO {
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
 	}
 
 	public Teacher getEmployeeDetails(String userName) {
@@ -257,7 +275,9 @@ public class EmployeeDAO {
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
-		} 
+		} finally {
+			HibernateUtil.closeSession();
+		}
 		return employee;
 	}
 
@@ -275,6 +295,7 @@ public class EmployeeDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
+				HibernateUtil.closeSession();
 			return payList;
 		}
 	}

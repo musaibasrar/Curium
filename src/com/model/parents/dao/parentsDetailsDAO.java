@@ -43,6 +43,7 @@ public class parentsDetailsDAO {
 	            
 	            hibernateException.printStackTrace();
 	        } finally {
+	    			HibernateUtil.closeSession();
 	            return parents;
 	        }
 	}
@@ -59,8 +60,9 @@ public class parentsDetailsDAO {
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        }
-        //session.close();
+        }finally {
+			HibernateUtil.closeSession();
+		}
         return parents;
 	}
 
@@ -77,7 +79,7 @@ public class parentsDetailsDAO {
             
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+    			HibernateUtil.closeSession();
             return parents;
         }
 	}

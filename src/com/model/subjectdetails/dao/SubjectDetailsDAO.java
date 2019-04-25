@@ -48,6 +48,7 @@ public class SubjectDetailsDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -64,6 +65,7 @@ public class SubjectDetailsDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
+				HibernateUtil.closeSession();
 			return subject;
 		}
 		
@@ -79,7 +81,9 @@ public class SubjectDetailsDAO {
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
-		}
+		}finally {
+			HibernateUtil.closeSession();
+		 }
 		
 	}
 
@@ -96,6 +100,7 @@ public class SubjectDetailsDAO {
 			transaction.rollback(); 
 			logger.error(hibernateException);
 		} finally {
+				HibernateUtil.closeSession();
 			return subject;
 		}
 	}

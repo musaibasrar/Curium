@@ -53,7 +53,9 @@ public class feesCollectionDAO {
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 	            
 	            hibernateException.printStackTrace();
-	        } 
+	        } finally {
+				HibernateUtil.closeSession();
+			}
 		return result;
 
 	}
@@ -71,7 +73,7 @@ public class feesCollectionDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
-			// session.close();
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -88,7 +90,7 @@ public class feesCollectionDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
-			// session.close();
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -102,7 +104,9 @@ public class feesCollectionDAO {
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 	            
 	            hibernateException.printStackTrace();
-	        } 
+	        } finally {
+				HibernateUtil.closeSession();
+			}
 	}
 
 	public Receiptinfo getReceiptInfoDetails(Integer receiptNumber, String currentAcademicYear) {
@@ -119,9 +123,8 @@ public class feesCollectionDAO {
 	            
 	            hibernateException.printStackTrace();
 	        } finally {
-	           // session.close();
-	        }
-		
+				HibernateUtil.closeSession();
+			}
 		return receiptDetails;
 		
 	}
@@ -135,6 +138,8 @@ public class feesCollectionDAO {
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return receiptInfo;
 	}
@@ -152,7 +157,7 @@ public class feesCollectionDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
-			// session.close();
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}

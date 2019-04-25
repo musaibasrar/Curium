@@ -43,8 +43,8 @@ public class MarksDetailsDAO {
 		}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
-		} 
-		finally {
+		}finally {
+				HibernateUtil.closeSession();
 			return output;
 		}
 		
@@ -68,6 +68,7 @@ public class MarksDetailsDAO {
 			
 			hibernateException.printStackTrace();
 		} finally {
+				HibernateUtil.closeSession();
 			return results;
 		}
 	}
@@ -89,6 +90,7 @@ public class MarksDetailsDAO {
 				
 				hibernateException.printStackTrace();
 			} finally {
+					HibernateUtil.closeSession();
 				return results;
 			}
 	}
@@ -109,6 +111,7 @@ public class MarksDetailsDAO {
 				hibernateException.printStackTrace();
 			} 
 			finally {
+					HibernateUtil.closeSession();
 				return result;
 			}
 		}
@@ -126,6 +129,8 @@ public class MarksDetailsDAO {
 			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 				hibernateException.printStackTrace();
 				result=false;
+			}finally {
+				HibernateUtil.closeSession();
 			}
 			return result;
 		}
@@ -142,6 +147,7 @@ public class MarksDetailsDAO {
 				
 				hibernateException.printStackTrace();
 			} finally {
+					HibernateUtil.closeSession();
 				return results;
 			}
 		}
@@ -159,6 +165,7 @@ public class MarksDetailsDAO {
 				
 				hibernateException.printStackTrace();
 			} finally {
+					HibernateUtil.closeSession();
 				return results;
 			}
 			

@@ -46,6 +46,7 @@ public class UserDAO {
            System.out.println("In userdao null pointer exception"+hibernateException);
            hibernateException.printStackTrace();
        }finally{
+   			HibernateUtil.closeSession();
            return login;
        }}
 
@@ -70,7 +71,7 @@ public class UserDAO {
 	            hibernateException.printStackTrace();
 
 	        } finally {
-	            //session.close();
+	    			HibernateUtil.closeSession();
 	            return noOfRecords;
 	        }
 	}
@@ -95,7 +96,7 @@ public class UserDAO {
 	            hibernateException.printStackTrace();
 
 	        } finally {
-	            //session.close();
+	    			HibernateUtil.closeSession();
 	            return noOfRecords;
 	        }
 	}
@@ -114,6 +115,7 @@ public class UserDAO {
        }catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
            hibernateException.printStackTrace();
        }finally{
+   			HibernateUtil.closeSession();
            return login;
        }
    }
@@ -127,7 +129,7 @@ public class UserDAO {
             
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+    			HibernateUtil.closeSession();
             return login;
         }
    }
@@ -146,7 +148,9 @@ public class UserDAO {
             
             hibernateException.printStackTrace();
         }
-        //session.close();
+        finally {
+			HibernateUtil.closeSession();
+		 }
         return feesDetails;
 	}
 
@@ -164,7 +168,9 @@ public class UserDAO {
             
             hibernateException.printStackTrace();
         }
-        //session.close();
+        finally {
+			HibernateUtil.closeSession();
+		 }
         return feesDetails;
 	}
 
@@ -178,7 +184,9 @@ public class UserDAO {
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		 }
 		return false;
 		
 	}
@@ -194,7 +202,9 @@ public class UserDAO {
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        } 
+        } finally {
+			HibernateUtil.closeSession();
+		 }
 		return user;
 	}
 }

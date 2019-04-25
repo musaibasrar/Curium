@@ -54,7 +54,9 @@ public class HrDAO {
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        } 
+        } finally {
+			HibernateUtil.closeSession();
+		}
         return list;
 	}
 
@@ -68,7 +70,9 @@ public class HrDAO {
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
 		return false;
 	}
 
@@ -81,7 +85,9 @@ public class HrDAO {
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
 		return false;
 	}
 
@@ -97,7 +103,9 @@ public class HrDAO {
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        } 
+        } finally {
+			HibernateUtil.closeSession();
+		}
 		return false;
 	}
 
@@ -111,7 +119,9 @@ public class HrDAO {
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        } 
+        } finally {
+			HibernateUtil.closeSession();
+		}
 		return leaveDetailsList;
 		
 	}
@@ -126,7 +136,9 @@ public class HrDAO {
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        } 
+        } finally {
+			HibernateUtil.closeSession();
+		}
 		return false;
 	}
 
@@ -139,6 +151,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		
 		return payHead;
@@ -156,6 +170,8 @@ public class HrDAO {
 			return true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;		
 	}
@@ -171,6 +187,8 @@ public class HrDAO {
 				return true;
 			} catch (Exception e) { transaction.rollback(); logger.error(e);
 				e.printStackTrace();
+			}finally {
+				HibernateUtil.closeSession();
 			}
 			return false;		
 	}
@@ -183,6 +201,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		
 	}
@@ -197,6 +217,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return pf;
 	}
@@ -211,6 +233,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		
 	}
@@ -224,6 +248,8 @@ public class HrDAO {
 			return true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -237,6 +263,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return payAdvanceSalary;
 	}
@@ -251,6 +279,8 @@ public class HrDAO {
 			return true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -264,7 +294,9 @@ public class HrDAO {
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
 		return false;
 	}
 
@@ -276,6 +308,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return payAdvanceSalary;
 	}
@@ -289,6 +323,8 @@ public class HrDAO {
 			return true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -303,6 +339,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return listLeaveApplication;
 	}
@@ -318,6 +356,8 @@ public class HrDAO {
 			return true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 		
@@ -336,6 +376,8 @@ public class HrDAO {
 			transaction.rollback(); 
 			logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 		
@@ -356,6 +398,8 @@ public class HrDAO {
 			return true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 		
@@ -370,6 +414,8 @@ public class HrDAO {
 				transaction.commit();
 			} catch (Exception e) { transaction.rollback(); logger.error(e);
 				e.printStackTrace();
+			}finally {
+				HibernateUtil.closeSession();
 			}			
 			return payHead;
 	}
@@ -387,6 +433,8 @@ public class HrDAO {
 			transaction.rollback(); 
 			logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return basicPay;
 	}
@@ -401,6 +449,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return payHeadStaffList;
 	}
@@ -415,6 +465,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return processSalaryDetails;
 	}
@@ -430,6 +482,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return processSalaryDetails;
 	}
@@ -444,6 +498,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return processSalaryHeadsList;
 	}
@@ -459,6 +515,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return processSalaryHeads;
 	}
@@ -473,6 +531,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return PayHeadStaffDetailsList;
 	}
@@ -487,6 +547,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return processSalaryDetails;
 	}
@@ -503,6 +565,8 @@ public class HrDAO {
 			
 			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -518,6 +582,8 @@ public class HrDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return processSalaryDetails;
 	}
@@ -533,6 +599,8 @@ public class HrDAO {
 			return true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -548,6 +616,8 @@ public class HrDAO {
 			return true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -563,6 +633,8 @@ public class HrDAO {
 			return true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;		
 }

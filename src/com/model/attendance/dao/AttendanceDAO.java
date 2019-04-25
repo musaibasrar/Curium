@@ -49,7 +49,9 @@ public class AttendanceDAO {
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			
-		} 
+		} finally {
+			HibernateUtil.closeSession();
+		}
 		
 		return holidayMaster;
 	}
@@ -64,7 +66,9 @@ public class AttendanceDAO {
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
-		} 
+		} finally {
+			HibernateUtil.closeSession();
+		}
 		return false;
 	}
 
@@ -78,6 +82,8 @@ public class AttendanceDAO {
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -93,6 +99,8 @@ public class AttendanceDAO {
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		
 		return false;
@@ -107,6 +115,8 @@ public class AttendanceDAO {
 				transaction.commit();
 			}catch (Exception e) { transaction.rollback(); logger.error(e);
 				e.printStackTrace();
+			}finally {
+				HibernateUtil.closeSession();
 			}
 			
 		return weeklyOff;
@@ -123,7 +133,9 @@ public class AttendanceDAO {
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-		} 
+		} finally {
+			HibernateUtil.closeSession();
+		}
 		
 	return weeklyOff;
 
@@ -140,7 +152,9 @@ public class AttendanceDAO {
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-		} 
+		} finally {
+			HibernateUtil.closeSession();
+		}
 		
 	return weeklyOff;
 
@@ -157,7 +171,9 @@ public class AttendanceDAO {
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			
-		} 
+		}finally {
+			HibernateUtil.closeSession();
+		}
 		
 		return holidayMaster;
 	}
@@ -173,7 +189,9 @@ public class AttendanceDAO {
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			
-		} 
+		} finally {
+			HibernateUtil.closeSession();
+		}
 		
 		return holidayMaster;
 	}
@@ -187,6 +205,8 @@ public class AttendanceDAO {
 			return true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 				e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -201,6 +221,8 @@ public class AttendanceDAO {
 			return true;
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 				e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -213,6 +235,8 @@ public class AttendanceDAO {
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return studentAttendanceMaster;
 	}
@@ -225,6 +249,8 @@ public class AttendanceDAO {
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return studentAttendanceMaster;
 	}
@@ -255,6 +281,8 @@ public class AttendanceDAO {
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			logger.info(e);
 			System.out.println(""+e);
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -270,6 +298,8 @@ public class AttendanceDAO {
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			logger.info(e);
 			System.out.println("column "+e);
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return studentDailyAttendance;
 	}
@@ -284,6 +314,8 @@ public class AttendanceDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			// TODO: handle exception
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return studentDailyAttendance;
 	}
@@ -302,6 +334,8 @@ public class AttendanceDAO {
 			return true;
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			System.out.println("error "+e);
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -316,6 +350,8 @@ public class AttendanceDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			// TODO: handle exception
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return studentDailyAttendance;
 	}
@@ -341,6 +377,8 @@ public class AttendanceDAO {
 			return true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			System.out.println(""+e);
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -363,6 +401,8 @@ public class AttendanceDAO {
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			System.out.println(""+e);
+		}finally {
+			HibernateUtil.closeSession();
 		}
 	}
 
@@ -383,6 +423,8 @@ public class AttendanceDAO {
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			System.out.println(""+e);
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return mapStudentAttendance;
 	}
@@ -411,6 +453,8 @@ public class AttendanceDAO {
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			logger.info(e);
 			System.out.println(""+e);
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -427,6 +471,8 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			logger.info(e);
 			System.out.println("column "+e);
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return staffDailyAttendance;
 	}
@@ -445,6 +491,8 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			return true;
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			System.out.println("error "+e);
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -459,6 +507,8 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			// TODO: handle exception
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return staffDailyAttendance;
 	}
@@ -485,6 +535,8 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			return true;
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			System.out.println(""+e);
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}
@@ -507,6 +559,8 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			System.out.println(""+e);
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return mapStaffAttendance;
 		
@@ -529,6 +583,8 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			System.out.println(""+e);
+		}finally {
+			HibernateUtil.closeSession();
 		}
 	}
 
