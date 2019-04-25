@@ -52,6 +52,8 @@ public class PeriodDAO {
 			return true;
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		
 		return false;
@@ -66,6 +68,8 @@ public class PeriodDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return periodMaster;
 		
@@ -80,6 +84,8 @@ public class PeriodDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return periodMaster;
 		
@@ -93,6 +99,8 @@ public class PeriodDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return periodDetailsList;
 	}
@@ -109,6 +117,8 @@ public class PeriodDAO {
 			return true;
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return false;
 	}

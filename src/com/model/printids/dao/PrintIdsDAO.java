@@ -43,7 +43,9 @@ public class PrintIdsDAO {
 	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 	            
 	            hibernateException.printStackTrace();
-	        } 	      
+	        } finally {
+				HibernateUtil.closeSession();
+			}	      
 	        return parentsDetails;
 	}
 

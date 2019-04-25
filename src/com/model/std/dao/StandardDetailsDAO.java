@@ -44,6 +44,7 @@ public class StandardDetailsDAO {
 	            
 	            hibernateException.printStackTrace();
 	        } finally {
+	    			HibernateUtil.closeSession();
 	            return classsec;
 	        }
 	}
@@ -58,6 +59,7 @@ public class StandardDetailsDAO {
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             hibernateException.printStackTrace();
         } finally {
+    			HibernateUtil.closeSession();
             return classsecList;
         }
     }
@@ -72,7 +74,9 @@ public class StandardDetailsDAO {
                 transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
                 hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
     }
 
 	public void createClassHierarchy(Classhierarchy classHierarchy) {
@@ -84,7 +88,9 @@ public class StandardDetailsDAO {
 	        	transaction.rollback(); 
 	        	logger.error(hibernateException);
 	            hibernateException.printStackTrace();
-	        } 
+	        } finally {
+				HibernateUtil.closeSession();
+			}
 	}
 
 	public void deleteClassHierarchy(List ids) {
@@ -99,7 +105,9 @@ public class StandardDetailsDAO {
         		transaction.rollback(); 
         		logger.error(hibernateException);
                 hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
     }
 
 	public List<Classhierarchy> viewClassHierarchy(int branchid) {
@@ -113,7 +121,9 @@ public class StandardDetailsDAO {
         	transaction.rollback(); 
         	logger.error(hibernateException);
             hibernateException.printStackTrace();
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
         return classHierarchyList;
     }
 
@@ -132,6 +142,7 @@ public class StandardDetailsDAO {
 			hibernateException.printStackTrace();
 			result = false;
 		} finally {
+				HibernateUtil.closeSession();
 			return result;
 		}
 		
@@ -152,6 +163,7 @@ public class StandardDetailsDAO {
 		hibernateException.printStackTrace();
 		result = false;
 	} finally {
+			HibernateUtil.closeSession();
 		return result;
 	}
 	
@@ -172,6 +184,7 @@ public class StandardDetailsDAO {
 		hibernateException.printStackTrace();
 		result = false;
 	} finally {
+			HibernateUtil.closeSession();
 		return result;
 	}
 	

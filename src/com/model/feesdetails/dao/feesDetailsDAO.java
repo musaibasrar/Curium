@@ -49,7 +49,7 @@ public class feesDetailsDAO {
             
             hibernateException.printStackTrace();
         } finally {
-            //session.close();
+    			HibernateUtil.closeSession();
             return results;
         }
         }
@@ -68,6 +68,7 @@ public class feesDetailsDAO {
             
             hibernateException.printStackTrace();
         } finally {
+    			HibernateUtil.closeSession();
             return feesdetails;
         }
         }
@@ -84,8 +85,9 @@ public class feesDetailsDAO {
                 } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
                     
                     hibernateException.printStackTrace();
-                }
-                //session.close();
+                }finally {
+        			HibernateUtil.closeSession();
+        		}
                 return feesdetails;
         }
         
@@ -101,8 +103,9 @@ public class feesDetailsDAO {
                 } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
                     
                     hibernateException.printStackTrace();
-                }
-                //session.close();
+                }finally {
+        			HibernateUtil.closeSession();
+        		}
                 return feesdetails;
         }
         
@@ -121,8 +124,9 @@ public class feesDetailsDAO {
                 } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
                     
                     hibernateException.printStackTrace();
-                }
-                //session.close();
+                }finally {
+        			HibernateUtil.closeSession();
+        		}
                 return results;
         }
 
@@ -146,7 +150,9 @@ public class feesDetailsDAO {
                     
                     hibernateException.printStackTrace();
                 }
-                //session.close();
+                finally {
+        			HibernateUtil.closeSession();
+        		}
                 return results;
         }
 
@@ -172,7 +178,9 @@ public class feesDetailsDAO {
             hibernateException.printStackTrace();
         }
         
-        //session.close();
+        finally {
+			HibernateUtil.closeSession();
+		}
         return dueFees;
         }
 
@@ -191,8 +199,9 @@ public class feesDetailsDAO {
                 } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
                     
                     hibernateException.printStackTrace();
-                }
-                //session.close();
+                }finally {
+        			HibernateUtil.closeSession();
+        		}
                 return results;
         }
 
@@ -213,8 +222,9 @@ public class feesDetailsDAO {
                 } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
                     
                     hibernateException.printStackTrace();
-                }
-                //session.close();
+                }finally {
+        			HibernateUtil.closeSession();
+        		}
                 return results;
         }
 
@@ -235,7 +245,7 @@ public class feesDetailsDAO {
                         hibernateException.printStackTrace();
 
                 } finally {
-                        // session.close();
+            			HibernateUtil.closeSession();
                         return results;
                 }
         }
@@ -256,7 +266,7 @@ public class feesDetailsDAO {
                     hibernateException.printStackTrace();
 
             } finally {
-                    // session.close();
+        			HibernateUtil.closeSession();
                     return results;
             }
     }
@@ -282,9 +292,9 @@ public class feesDetailsDAO {
                     
                     hibernateException.printStackTrace();
 
-            } finally {
-                    // session.close();
-            }
+            }finally {
+    			HibernateUtil.closeSession();
+    		}
             return result;
 			
 		}
@@ -310,9 +320,9 @@ public class feesDetailsDAO {
                     
                     hibernateException.printStackTrace();
 
-            } finally {
-                    // session.close();
-            }
+            }finally {
+    			HibernateUtil.closeSession();
+    		}
             return result;
 			
 		}

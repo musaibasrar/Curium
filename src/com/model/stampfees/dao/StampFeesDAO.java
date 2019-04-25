@@ -51,6 +51,7 @@ public class StampFeesDAO {
        }catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
            System.out.println(hibernateException);
        }finally{
+   			HibernateUtil.closeSession();
            return login;
        }}
 
@@ -79,7 +80,7 @@ public class StampFeesDAO {
 	            hibernateException.printStackTrace();
 
 	        } finally {
-	            //session.close();
+	    			HibernateUtil.closeSession();
 	            return noOfRecords;
 	        }
 	}
@@ -105,7 +106,7 @@ public class StampFeesDAO {
 	            hibernateException.printStackTrace();
 
 	        } finally {
-	            //session.close();
+	    			HibernateUtil.closeSession();
 	            return noOfRecords;
 	        }
 	}
@@ -122,8 +123,9 @@ public class StampFeesDAO {
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-        }
-        //session.close();
+        }finally {
+			HibernateUtil.closeSession();
+		}
         return parents;
 	}
 
@@ -157,7 +159,9 @@ public class StampFeesDAO {
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
-		} 
+		} finally {
+			HibernateUtil.closeSession();
+		}
 	}
 
 	public void deleteMultiple(java.util.List ids, String currentYear) {
@@ -177,6 +181,8 @@ public class StampFeesDAO {
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 
 	
