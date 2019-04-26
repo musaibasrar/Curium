@@ -62,9 +62,11 @@ public class UserService {
             httpSession.setAttribute("currentAcademicYear",academicyear);
             httpSession.setAttribute("username",login.getUsername());
             httpSession.setAttribute("branchid",login.getBranch().getIdbranch());
-            httpSession.setAttribute("userType", login.getUsertype());
-            httpSession.setAttribute("typeOfUser",login.getUsertype());
-            httpSession.setAttribute("userAuth", login.getUsertype());
+            httpSession.setAttribute("branchname",login.getBranch().getBranchname());
+            String[] userType = login.getUsertype().split("-");
+            httpSession.setAttribute("userType", userType[0]);
+            httpSession.setAttribute("typeOfUser",userType[0]);
+            httpSession.setAttribute("userAuth", userType[0]);
 			//setting session to expiry in 60 mins
            	httpSession.setMaxInactiveInterval(60*60);
 			Cookie cookie = new Cookie("user",  login.getUsertype());
