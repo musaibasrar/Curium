@@ -254,35 +254,6 @@
 		}
 
 	}
-
-	function issues() {
-
-		var distlistitem = document.getElementById("subscriptionfor");
-		var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
-
-		if (distlistitemtext == "1 year") {
-			document.getElementById("noofissues").value = "24";
-		} else if (distlistitemtext == "2 years") {
-			document.getElementById("noofissues").value = "48";
-		} else if (distlistitemtext == "3 years") {
-			document.getElementById("noofissues").value = "72";
-		} else if (distlistitemtext == "5 years") {
-			document.getElementById("noofissues").value = "120";
-		} else if (distlistitemtext == "Life Time") {
-			document.getElementById("noofissues").value = "240";
-		}
-
-	}
-
-	function calculateIssues() {
-
-		var totalissues = document.getElementById("noofissues").value;
-		var fromissues = document.getElementById("fromkmissueno").value;
-
-		var toissues = parseInt(totalissues, 10) + parseInt(fromissues, 10) - 1;
-		document.getElementById("tokmissueno").value = toissues;
-
-	}
 </script>
 
 
@@ -419,15 +390,6 @@
 		obj.value = obj.value.replace(reg, "");
 	}
 
-	function noofissues() {
-		var issues = document.getElementById("noofissues");
-		var issuestext = issues.options[issues.selectedIndex].text;
-
-		if (issuestext == "1 year") {
-
-		}
-
-	}
 
 	function validateContact() {
 
@@ -1044,52 +1006,6 @@
 										<option>SC</option>
 										<option>ST</option>
 								</select>
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="30%" class="alignRight">Was in receipt of any scholarship&nbsp;</td>
-							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
-								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
-								onclick="noCheck(this.id);" />
-
-							</td>
-							<td width="20%" class="alignRight">Adhar Card No.
-								&nbsp;</td>
-							<td width="28%"><label> <input
-									name="bplcardno" type="text" class="textField"
-									id="bplcardno" size="36">
-
-							</label></td>
-						</tr>	
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="20%" class="alignRight">Whether Vaccinated
-								&nbsp;</td>
-								<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
-								type="checkbox" value="1" name="bhagyalakshmibondnumber" id="yes:vaccinated"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="bhagyalakshmibondnumber" id="no:vaccinated"
-								onclick="noCheck(this.id);" />
-
-							</td>
-							<td width="16%" class="alignRight">Marks of Identification on Pupil's body&nbsp;</td>
-							<td width="28%"><label> <input
-									name="disabilitychild" type="text" class="textField"
-									id="disabilitychild" size="36">
 
 							</label></td>
 						</tr>
