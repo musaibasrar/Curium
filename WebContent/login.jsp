@@ -59,22 +59,22 @@
         </script>
         <form action="Controller?process=UserProcess&action=authenticateUser" method="post" id="form1">
                     	
-                                    <table align="center">
+                                    <table align="left">
                                     	<tr>
                                     	<td>
-                                    	<br><br><br>
+                                    	<br><br><br><br>
                                     	</td>
                                     	</tr>
                                     	<tr>
-                                    	<td> <img alt="" src="images/cambridgelogo.jpg" style="width:400px;height: 400px"></td>
-                                    	<td></td><td></td><td></td>
+                                    	<td style="width: 30%"></td>
+                                    	<td> <img alt="" src="images/madinalogo.jpg" style="width:400px;height: 350px"></td>
                                     	 <td>
                                             <img src="images/username.png" height="30" name="login" style="vertical-align: bottom;"/>
                                                     <input name="loginName" type="text"  placeholder="UserName" >
                                                 <br><br><br>
                                                 <img type="image" src="images/lock.png" height="28" name="login" style="vertical-align: bottom;"/>
                                                 <input name="password" type="password" placeholder="Password">
-                                                <br><br><br>
+                                                <br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <input type="image" src="images/loginbutton.png" name="login" border="0" />
                                                 </td>
                                     	</tr>

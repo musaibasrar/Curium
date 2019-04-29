@@ -717,7 +717,7 @@
 
 						<tr>
 							<td width="20%" class="alignRight">Admission Number* &nbsp;</td>
-							<td width="28%"><label> <input name="admnno"
+							<td width="28%"><label> <input name="admnno" required
 									type="text" class="textField" id="admnno" size="36"
 									onblur="validateAdmissionNumber();"
 									onkeypress="return validateContactNum(this);">
@@ -1635,7 +1635,7 @@
 
 									</label></td>
 
-									<td width="20%" class="alignRight">Number Of Dependents
+									<td width="20%" class="alignRight">Total Number Of Dependents
 										&nbsp;</td>
 
 									<td width="28%"><label> <input
@@ -1654,7 +1654,66 @@
 								<tr>
 									<td><br /></td>
 								</tr>
+								
+								<tr>
 
+									<td width="16%" class="alignRight">No. of Elder Brother(s)&nbsp;</td>
+
+									<td width="28%"><label> <input name="belongtobpl"
+											type="number" class="textField" id="belongtobpl" style="width: 230px;"
+											onblur="validateNameContact();">
+
+									</label></td>
+
+									<td width="20%" class="alignRight">No. of Younger Brother(s)
+										&nbsp;</td>
+
+									<td width="28%"><label> <input
+											name="bplcardno" type="number" class="textField"
+											id="bplcardno" style="width: 230px;" onblur="validateNameContact();">
+
+									</label></td>
+
+
+								</tr>
+
+								<tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+
+									<td width="16%" class="alignRight">No. of Elder Sister(s)&nbsp;</td>
+
+									<td width="28%"><label> <input name="bhagyalakshmibondnumber"
+											type="number" class="textField" id="bhagyalakshmibondnumber" style="width: 230px;"
+											onblur="validateNameContact();">
+
+									</label></td>
+
+									<td width="20%" class="alignRight">No. of Younger Sister(s)
+										&nbsp;</td>
+
+									<td width="28%"><label> <input
+											name="disabilitychild" type="number" class="textField"
+											id="disabilitychild" style="width: 230px;" onblur="validateNameContact();">
+
+									</label></td>
+
+
+								</tr>
+
+								<tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>	
 								<td width="16%" class="alignRight">Permanent Address &nbsp;</td>
 
 								<td width="28%"><label> <textarea

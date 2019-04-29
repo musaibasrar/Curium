@@ -1441,7 +1441,6 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
-
 						<tr>
 							<td width="16%" class="alignRight">Email
 								&nbsp;</td>
@@ -1462,14 +1461,72 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 
-
-
+							</tr>
+							
 						<tr>
-							<td><br /></td>
+							<td><br></td>
 						</tr>
 						<tr>
-							<td><br /></td>
+							<td><br></td>
 						</tr>
+						
+						<tr>
+							<td width="16%" class="alignRight">No. of Elder Brother(s)
+								&nbsp;</td>
+
+							<td width="28%"><label> <input name="belongtobpl"
+									type="number" class="textField" id="belongtobpl" style="width: 230px;"
+									value="<c:out default="" value="${student.belongtobpl}" />">
+							</label>
+							</td>
+							<td width="20%" class="alignRight">No. of Younger Brother(s)
+								&nbsp;</td>
+
+							<td width="28%"><label> <input name="bplcardno"
+									type="number" class="textField" id="bplcardno" style="width: 230px;"
+									value="<c:out default="" value="${student.bplcardno}" />">
+
+							</label></td>
+
+							</tr>
+							
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr>
+							<td><br></td>
+						</tr>
+						
+						<tr>
+							<td width="16%" class="alignRight">No. of Elder Sister(s)
+								&nbsp;</td>
+
+							<td width="28%"><label> <input name="bhagyalakshmibondnumber"
+									type="number" class="textField" id="bhagyalakshmibondnumber" style="width: 230px;"
+									onblur="validateNameContact();"
+									value="<c:out default="" value="${student.bhagyalakshmibondnumber}" />">
+								</label>
+								</td>	
+
+							<td width="20%" class="alignRight">No. of Younger Sister(s)
+								&nbsp;</td>
+
+							<td width="28%"><label> <input name="disabilitychild"
+									type="number" class="textField" id="disabilitychild" style="width: 230px;"
+									onblur="validateNameContact();"
+									value="<c:out default="" value="${student.disabilitychild}" />">
+
+							</label></td>
+
+							</tr>
+							
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr>
+							<td><br></td>
+						</tr>
+						
 						<tr>
 							<td width="16%" class="alignRight">Permanent Address &nbsp;</td>
 							<td width="28%"><label> <textarea

@@ -153,8 +153,8 @@ for(Cookie cookie : cookies){
 						cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
 						<tr>
 
-							<td align="left"><img src="images/cambridgeheaderlogo.png"
-								style="width: 200px; height: 70px;" /></td>
+							<td align="left"><img src="images/madinalogo.png"
+								style="width: 150px; height: 70px;" /></td>
 							<td><a target="leftFrame" href="left_admin.jsp"> <img
 									src="images/house_home.png" width="35" height="35"
 									alt="Home" style="vertical-align: bottom;" />Home

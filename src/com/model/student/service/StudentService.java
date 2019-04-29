@@ -237,19 +237,19 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("socialcategory")) {
 		                	student.setSocialcategory(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Was in receipt of any scholarship'
+		                //@UI 'No of Elder brothers'
 		                if (fieldName.equalsIgnoreCase("belongtobpl")) {
 		                	student.setBelongtobpl(DataUtil.parseInt(item.getString()));
 		                }
-		                //@UI 'Adhar card no'
+		                //@UI 'No of Younger brothers'
 		                if (fieldName.equalsIgnoreCase("bplcardno")) {
 		                	student.setBplcardno(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Whether Vaccinated'
+		                //@UI 'No of Elder Sisters'
 		                if (fieldName.equalsIgnoreCase("bhagyalakshmibondnumber")) {
 		                	student.setBhagyalakshmibondnumber(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Marks of Identification on Pupil's body'
+		                //@UI 'No of Younger Sisters'
 		                if (fieldName.equalsIgnoreCase("disabilitychild")) {
 		                	student.setDisabilitychild(DataUtil.emptyString(item.getString()));
 		                }

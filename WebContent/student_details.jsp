@@ -825,6 +825,36 @@ for(Cookie cookie : cookies){
 
 
                         </tr>
+                        <tr>
+                            <td width="25%"   class="alignLeft" height="50" >No. of Elder Brother(s)</td>
+                            <td width="25%" class="tablerows"  >
+                                 <c:out default="" value="${student.belongtobpl}" />
+                                
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50">No. of Younger Brother(s)
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.bplcardno}" />
+                                
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <td width="25%"   class="alignLeft" height="50" >No. of Elder Sister(s)</td>
+                            <td width="25%" class="tablerows"  >
+                                 <c:out default="" value="${student.bhagyalakshmibondnumber}" />
+                                
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50">No. of Younger Sister(s)
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.disabilitychild}" />
+                                
+                            </td>
+
+
+                        </tr>
                         
 
 
