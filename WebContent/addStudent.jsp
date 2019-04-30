@@ -255,34 +255,6 @@
 
 	}
 
-	function issues() {
-
-		var distlistitem = document.getElementById("subscriptionfor");
-		var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
-
-		if (distlistitemtext == "1 year") {
-			document.getElementById("noofissues").value = "24";
-		} else if (distlistitemtext == "2 years") {
-			document.getElementById("noofissues").value = "48";
-		} else if (distlistitemtext == "3 years") {
-			document.getElementById("noofissues").value = "72";
-		} else if (distlistitemtext == "5 years") {
-			document.getElementById("noofissues").value = "120";
-		} else if (distlistitemtext == "Life Time") {
-			document.getElementById("noofissues").value = "240";
-		}
-
-	}
-
-	function calculateIssues() {
-
-		var totalissues = document.getElementById("noofissues").value;
-		var fromissues = document.getElementById("fromkmissueno").value;
-
-		var toissues = parseInt(totalissues, 10) + parseInt(fromissues, 10) - 1;
-		document.getElementById("tokmissueno").value = toissues;
-
-	}
 </script>
 
 
@@ -417,16 +389,6 @@
 
 		reg = /[^a-z]/g;
 		obj.value = obj.value.replace(reg, "");
-	}
-
-	function noofissues() {
-		var issues = document.getElementById("noofissues");
-		var issuestext = issues.options[issues.selectedIndex].text;
-
-		if (issuestext == "1 year") {
-
-		}
-
 	}
 
 	function validateContact() {
@@ -623,77 +585,17 @@
 </script>
 
 <script type="text/javascript">
-	function checkmobile(value) {
-
-		xmlHttp = GetXmlHttpObject()
-		var url = "mobilecheck.jsp";
-		url = url + "?contactNO=" + value;
-		xmlHttp.onreadystatechange = stateChangedmobile
-		xmlHttp.open("GET", url, true)
-		xmlHttp.send(null)
-	}
-	function stateChangedmobile() {
-
-		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-			var showdata = xmlHttp.responseText;
-			document.getElementById("mydivmobile").innerHTML = showdata;
-		}
-	}
-	function GetXmlHttpObject() {
-		var xmlHttp = null;
-		try {
-			xmlHttp = new XMLHttpRequest();
-		} catch (e) {
-			try {
-				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-			} catch (e) {
-				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-		}
-		return xmlHttp;
-	}
-
-	function watermark(inputId, text) {
-		var inputBox = document.getElementById(inputId);
-		if (inputBox.value.length > 0) {
-			if (inputBox.value == text)
-				inputBox.value = '';
-		} else
-			inputBox.value = text;
-	}
-	function watermark2(inputId, text) {
-		var inputBox = document.getElementById(inputId);
-		if (inputBox.value.length > 0) {
-			if (inputBox.value == text)
-				inputBox.value = '';
-		} else
-			inputBox.value = text;
-	}
 	
-    function numberWithCommas() {
-    	var x=this.value;
+    function numberWithCommas(annualincome) {
+    	var x=annualincome.value;
+    	x = x.replace (/,/g, "");
+    	
     	var lastThree = x.substring(x.length-3);
     	var otherNumbers = x.substring(0,x.length-3);
     	if(otherNumbers != '')
     	    lastThree = ',' + lastThree;
     	var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
-    	alert(res);
-    }
-    
-    function numberWithCommasForFloat(x) {
-    var x=12345652457.557;
-    x=x.toString();
-    var afterPoint = '';
-    if(x.indexOf('.') > 0)
-       afterPoint = x.substring(x.indexOf('.'),x.length);
-    x = Math.floor(x);
-    x=x.toString();
-    var lastThree = x.substring(x.length-3);
-    var otherNumbers = x.substring(0,x.length-3);
-    if(otherNumbers != '')
-        lastThree = ',' + lastThree;
-    var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree + afterPoint;
-    alert(res);
+    	annualincome.value = res;
     }
 </script>
 </head>
@@ -756,7 +658,8 @@
 						<tr>
 							<td width="20%" class="alignRight">Admission Number* &nbsp;</td>
 							<td width="28%"><label> <input name="admnno"
-									type="text" class="textField" id="admnno" size="36"
+									type="text" class="myclass" id="admnno" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									onblur="validateAdmissionNumber();"
 									onkeypress="return validateContactNum(this);">
 
@@ -764,8 +667,9 @@
 							<td width="16%" class="alignRight">STS Number &nbsp;</td>
 
 									<td width="28%"><label> <input
-											name="sts" type="text" class="textField"
-											id="sts" size="36">
+											name="sts" type="text" class="myclass" size="30"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="sts" size="30">
 
 									</label></td>
 						</tr>
@@ -777,10 +681,11 @@
 						</tr>
 						
 						<tr>
-							<td width="30%" class="alignRight">Name* &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="name" type="text" class="myclass" id="name" size="36"
-									style="text-transform: uppercase" required> <!-- onkeyup="check(this.value);"  -->
+							<td width="30%" class="alignRight">Student Name* &nbsp;</td>
+							<td width="30%" align="left"><label> <input
+									name="name" type="text" class="myclass" id="name" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									required>
 							</label></td>
 
 							<td width="30%" class="alignRight">Gender &nbsp;</td>
@@ -806,14 +711,16 @@
 						<tr>
 							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
 							<td width="28%"><label> <input name="dateofbirth"
-									type="text" class="textField" id="datepicker" size="36" autocomplete="false"
+									type="text" class="myclass" id="datepicker" size="30" autocomplete="false"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
 							</label></td>
 
 							<td width="30%" class="alignRight">Age &nbsp;</td>
 							<td width="12%" align="left"><label> <input
-									name="age" type="text" class="myclass" id="age" size="36"
+									name="age" type="text" class="myclass" id="age" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									onblur="validateName();">
 							</label></td>
 
@@ -833,12 +740,14 @@
 							<td width="30%" class="alignRight">Place Of Birth, Tq,
 								Dist.&nbsp;</td>
 							<td width="12%" align="left"><label> <input
-									name="place" type="text" class="myclass" id="place" size="36">
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									name="place" type="text" class="myclass" id="place" size="30">
 							</label></td>
 							
 							<td width="20%" class="alignRight">Date of admission&nbsp;</td>
 							<td width="28%"><label><input name="dateofadmission"
-									type="text" class="textField" id="dateofadmission" size="36"
+									type="text" class="myclass" id="dateofadmission" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"
 									data-validate="validate(required)"> </label></td>
 						</tr>
@@ -852,13 +761,15 @@
 							<td width="30%" class="alignRight">No. of transfer
 								certificate&nbsp;</td>
 							<td width="12%" align="left"><label> <input
-									name="tcno" type="text" class="myclass" id="tcno" size="36">
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									name="tcno" type="text" class="myclass" id="tcno" size="30">
 									
 							</label></td>
 									<td width="20%" class="alignRight">Date of Transfer Certificate&nbsp;</td>
 							<td width="28%"><label >
-							<input name="dateoftc" type="text" class="textField"
-									id="dateoftc" size="36"
+							<input name="dateoftc" type="text" class="myclass"
+									id="dateoftc" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									data-validate="validate(required)"></label></td>
 
 						</tr>
@@ -876,7 +787,7 @@
 
 							<td class="alignRight">Studying in Class&nbsp;</td>
 							<td width="28%"><label> <select name="addclass"
-									id="addclass" style="width: 120px;">
+									id="addclass" style="width: 128px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -888,7 +799,7 @@
 								</select>
 
 							</label> <label> <select name="addsec" id="addsec"
-									style="width: 120px;">
+									style="width: 128px;">
 										<option selected></option>
 
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -905,7 +816,7 @@
 							</td>
 
 							<td width="28%"><label> <select name="admclassE"
-									id="admclassE" style="width: 120px;">
+									id="admclassE" style="width: 128px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<option value="${classdetailslist.classdetails}">
@@ -914,7 +825,7 @@
 										</c:forEach>
 								</select>
 							</label> <label> <select name="admsecE" id="admsecE"
-									style="width: 100px;">
+									style="width: 128px;">
 										<option selected></option>
 
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -938,7 +849,7 @@
 							<td width="16%" class="alignRight">Blood Group &nbsp;</td>
 
 							<td><label> <select name="bloodgroup"
-									id="bloodgroup" style="width: 240px">
+									id="bloodgroup" style="width: 256px">
 										<option selected></option>
 										<option>A +ve</option>
 										<option>B +ve</option>
@@ -958,7 +869,7 @@
 							<td width="16%" class="alignRight">Nationality &nbsp;</td>
 
 							<td><label> <select name="nationality"
-									id="nationality" style="width: 240px" onchange="dropdown()">
+									id="nationality" style="width: 256px" onchange="dropdown()">
 										<option selected>Indian</option>
 										<option>Indian</option>
 										<option>Other</option>
@@ -983,13 +894,13 @@
 
 							<td width="28%">
 								<!-- <label> <input name="religion"
-									type="text" class="textField" id="religion" size="36"
+									type="text" class="myclass" id="religion" size="30"
 									onblur="validateNameContact();"
 									onkeypress="return validateContactNum(this);">
 
 							</label> --> <label> <select name="religion"
 									onblur="validateNameContact();" id="religion"
-									style="width: 240px"
+									style="width: 256px"
 									onkeypress="return validateContactNum(this);">
 										<option selected></option>
 										<option>Islam</option>
@@ -1007,7 +918,7 @@
 
 							<!-- <td width="20%" class="alignRight">Caste &nbsp;</td>
 							<td width="28%"><label> <input name="caste"
-									type="text" class="textField" id="caste" size="36"
+									type="text" class="myclass" id="caste" size="30"
 									onblur="validateNameContact();"
 									onkeypress="return validateContactNum(this);">
 
@@ -1016,8 +927,9 @@
 							<td width="20%" class="alignRight">Students Caste
 								Certificate No.&nbsp;</td>
 							<td width="28%"><label> <input
-									name="studentscastecertno" type="text" class="textField"
-									id="studentscastecertno" size="36">
+									name="studentscastecertno" type="text" class="myclass"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									id="studentscastecertno" size="30">
 
 							</label></td>
 						</tr>
@@ -1031,13 +943,14 @@
 						<tr>
 							<td width="20%" class="alignRight">Students Caste &nbsp;</td>
 							<td width="28%"><label> <input name="studentscaste"
-									type="text" class="textField" id="studentscaste" size="36">
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									type="text" class="myclass" id="studentscaste" size="30">
 
 							</label></td>
 
 							<td width="16%" class="alignRight">Social Category&nbsp;</td>
 							<td><label> <select name="socialcategory"
-									id="socialcategory" style="width: 240px">
+									id="socialcategory" style="width: 256px">
 										<option selected></option>
 										<option>General</option>
 										<option>OBC</option>
@@ -1065,8 +978,9 @@
 							<td width="20%" class="alignRight">Adhar Card No.
 								&nbsp;</td>
 							<td width="28%"><label> <input
-									name="bplcardno" type="text" class="textField"
-									id="bplcardno" size="36">
+									name="bplcardno" type="text" class="myclass"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									id="bplcardno" size="30">
 
 							</label></td>
 						</tr>	
@@ -1088,8 +1002,9 @@
 							</td>
 							<td width="16%" class="alignRight">Marks of Identification on Pupil's body&nbsp;</td>
 							<td width="28%"><label> <input
-									name="disabilitychild" type="text" class="textField"
-									id="disabilitychild" size="36">
+									name="disabilitychild" type="text" class="myclass"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									id="disabilitychild" size="30">
 
 							</label></td>
 						</tr>
@@ -1105,7 +1020,7 @@
 
 							<td id="categoryname"><label> <select
 									name="specialcategory" onchange="enterOtherSpecialCategory()"
-									id="specialcategory" style="width: 240px">
+									id="specialcategory" style="width: 256px">
 										<option selected>None</option>
 										<option></option>
 										<option>None</option>
@@ -1118,20 +1033,21 @@
 							</label></td>
 							<td width="28%" id="newcateg"
 								style="display: none;"><label> <input
-									name="newcategory" id="newcategory" type="text" class="textField" size="36"
+									name="newcategory" id="newcategory" type="text" class="myclass" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									placeholder="Add Other Category" />
 							</label></td>
 							
 							<td width="16%" class="alignRight">Mother Tongue &nbsp;</td>
 							<td width="28%">
 								<!-- <label> <input name="motherT"
-									type="text" class="textField" id="motherT" size="36"
+									type="text" class="textField" id="motherT" size="30"
 									onblur="validateNameContact();"
 									onkeypress="return validateContactNum(this);">
 
 							</label> --> <label> <select name="motherT"
 									onblur="validateNameContact();" id="motherT"
-									style="width: 240px"
+									style="width: 256px"
 									onkeypress="return validateContactNum(this);">
 										<option selected></option>
 										<option>Urdu</option>
@@ -1158,7 +1074,7 @@
 							<td width="16%" class="alignRight">Last Class Studied &nbsp;</td>
 
 							<td width="28%"><label> <select name="lastclass" id="lastclass"
-									style="width: 240px;">
+									style="width: 256px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<option value="${classdetailslist.classdetails}">
@@ -1172,7 +1088,8 @@
 								&nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="lastschool" type="text" class="myclass" id="lastschool"
-									size="36" onblur="validateName();">
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									size="30" onblur="validateName();">
 							</label></td>
 						</tr>
 
@@ -1190,8 +1107,9 @@
 							<td width="16%" class="alignRight">Languages Studied &nbsp;</td>
 
 							<td width="28%"><label> <input
-									name="languagesstudied" type="text" class="textField"
-									id="languagesstudied" size="36">
+									name="languagesstudied" type="text" class="myclass"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									id="languagesstudied" size="30">
 							</label></td>
 
 
@@ -1199,7 +1117,8 @@
 							<td width="20%" class="alignRight">Core Subjects Studied &nbsp;</td>
 							<td width="28%"><label> <input
 									name="progress" type="text"
-									class="textField" id="progress" size="36">
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									class="myclass" id="progress" size="30">
 							</label></td>
 						</tr>
 
@@ -1215,7 +1134,7 @@
 								Instruction&nbsp;</td>
 
 							<td><label> <select name="mediumofinstruction"
-									id="mediumofinstruction" style="width: 240px">
+									id="mediumofinstruction" style="width: 256px">
 										<option selected></option>
 										<option>Kannada</option>
 										<option>Hindi</option>
@@ -1231,7 +1150,7 @@
 								Type&nbsp;</td>
 
 							<td><label> <select name="previousschooltype"
-									id="previousschooltype" style="width: 240px">
+									id="previousschooltype" style="width: 256px">
 										<option selected></option>
 										<option>Government</option>
 										<option>Private Aided</option>
@@ -1263,7 +1182,8 @@
 										
 							<td width="20%" class="alignRight">Remarks &nbsp;</td>
 							<td width="28%"><label> <input name="remarks"
-									type="text" class="textField" id="remarks" size="36"
+									type="text" class="myclass" id="remarks" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									onclick="validateNameContact();">
 							</label></td>
 						</tr>
@@ -1280,7 +1200,8 @@
 							<td width="28%"><label> <input name="createddate"
 									type="text"
 									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"
-									class="textField" id="datepickerCD" size="36"
+									class="myclass" id="datepickerCD" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"s
 									data-validate="validate(required)">
 							</label></td>
 							
@@ -1443,8 +1364,8 @@
 									<td width="30%" class="alignRight">Date of leaving the
 										school&nbsp;</td>
 									<td width="12%" align="left"><label> <input
-											name="dateofleaving" type="text" class="textField"
-											id="dateofleaving" size="36"
+											name="dateofleaving" type="text" class="myclass"
+											id="dateofleaving" size="30"
 											data-validate="validate(required)"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
@@ -1467,8 +1388,9 @@
 										&nbsp;</td>
 
 									<td width="28%"><label> <input
-											name="reasonforleaving" type="text" class="textField"
-											id="reasonforleaving" size="36"
+											name="reasonforleaving" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="reasonforleaving" size="30"
 											onkeypress="return validateContactNum(this);">
 
 									</label></td>
@@ -1479,31 +1401,30 @@
 										certificate issued&nbsp;</td>
 
 									<td width="28%"><label> <input name="notcissued"
-											type="text" class="textField" id="notcissued" size="36"><input
-											name="dateoftcissued" type="text" class="textField"
-											id="dateoftcissued" size="36"
-											data-validate="validate(required)">
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											type="text" class="myclass" id="notcissued" size="30" placeholder="No. of Transfer Certificate">
 									</label></td>
 
 								</tr>
 
 								<tr>
+								<td width="28%"></td>
+								<td width="28%"></td>
+								<td width="28%"></td>
+									<td><label>
+											<input
+											name="dateoftcissued" type="text" class="myclass"
+											id="dateoftcissued" size="30" placeholder="Date of Transfer Certificate"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											data-validate="validate(required)">
+									</label></td>
+								</tr>
+								<tr>
 									<td><br /></td>
 								</tr>
 								<tr>
 									<td><br /></td>
 								</tr>
-
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
 
 								<tr align="center">
 
@@ -1513,7 +1434,14 @@
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
 										href="#">Previous</a></td>
 								</tr>
+								
+								<tr>
+									<td><br /></td>
+								</tr>
 
+								<tr>
+									<td><br /></td>
+								</tr>
 
 								<tr align="center">
 
@@ -1580,14 +1508,16 @@
 									<td width="30%" class="alignRight">Father's Name* &nbsp;</td>
 									<td width="12%" align="left"><label> <input
 											name="fathersname" type="text" class="myclass"
-											id="fathersname" style="text-transform: uppercase" size="36"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="fathersname" size="30"
 											required> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
 									<td width="30%" class="alignRight">Mother's Name* &nbsp;</td>
 									<td width="12%" align="left"><label> <input
 											name="mothersname" type="text" class="myclass" id="name"
-											style="text-transform: uppercase" size="36"> <!-- onkeyup="check(this.value);"  -->
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											size="30"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
 
@@ -1607,16 +1537,18 @@
 										&nbsp;</td>
 									<td width="12%" align="left"><label> <input
 											name="fathersqualification" type="text" class="myclass"
-											id="fathersqualification" style="text-transform: uppercase"
-											size="36"> <!-- onkeyup="check(this.value);"  -->
+											id="fathersqualification" 
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											size="30"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
 									<td width="30%" class="alignRight">Mother's
 										Qualification&nbsp;</td>
 									<td width="12%" align="left"><label> <input
 											name="mothersqualification" type="text" class="myclass"
-											id="mothersqualification" style="text-transform: uppercase"
-											size="36"> <!-- onkeyup="check(this.value);"  -->
+											id="mothersqualification"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											size="30"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
 
@@ -1631,15 +1563,17 @@
 									<td width="20%" class="alignRight">Fathers Occupation
 										&nbsp;</td>
 									<td width="28%"><label> <input
-											name="fatherscastecertno" type="text" class="textField"
-											id="fatherscastecertno" size="36">
+											name="fatherscastecertno" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="fatherscastecertno" size="30">
 									</label></td>
 
 									<td width="20%" class="alignRight">Mothers Occupation
 										&nbsp;</td>
 									<td width="28%"><label> <input
-											name="motherscastecertno" type="text" class="textField"
-											id="motherscastecertno" size="36">
+											name="motherscastecertno" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="motherscastecertno" size="30">
 									</label></td>
 								</tr>
 
@@ -1655,7 +1589,8 @@
 									<td width="16%" class="alignRight">Guardian's Name &
 										Address &nbsp;</td>
 									<td width="28%"><label> <input name="guardian"
-											type="text" class="textField" id="guardian" size="36"
+											type="text" class="myclass" id="guardian" size="30"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											onclick="validateNameContact();">
 									</label></td>
 
@@ -1664,8 +1599,9 @@
 									<td width="16%" class="alignRight">Annual Income &nbsp;</td>
 
 									<td width="28%"><label> <input
-											name="parentsannualincome" type="text" class="textField"
-											id="parentsannualincome" size="36"
+											name="parentsannualincome" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="parentsannualincome" size="30"
 											onkeyup="numberWithCommas(this);">
 
 									</label></td>
@@ -1684,8 +1620,9 @@
 									<td width="16%" class="alignRight">Contact Number &nbsp;</td>
 
 									<td width="28%"><label> <input
-											name="contactnumber" type="text" class="textField"
-											id="contactnumber" size="36" maxlength="10" minlength="10">
+											name="contactnumber" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="contactnumber" size="30" maxlength="10" minlength="10">
 
 									</label></td>
 
@@ -1695,8 +1632,9 @@
 										&nbsp;</td>
 
 									<td width="28%"><label> <input
-											name="cocontactnumber" type="text" class="textField"
-											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+											name="cocontactnumber" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="cocontactnumber" size="30" maxlength="10" minlength="10">
 
 									</label></td>
 								</tr>
@@ -1714,7 +1652,8 @@
 									<td width="16%" class="alignRight">Email &nbsp;</td>
 
 									<td width="28%"><label> <input name="email"
-											type="email" class="textField" id="email" size="36"
+											type="email" class="myclass" id="email" size="30"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											onblur="validateNameContact();">
 
 									</label></td>
@@ -1723,8 +1662,9 @@
 										&nbsp;</td>
 
 									<td width="28%"><label> <input
-											name="noofdependents" type="text" class="textField"
-											id="noofdependents" size="36" onblur="validateNameContact();">
+											name="noofdependents" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="noofdependents" size="30" onblur="validateNameContact();">
 
 									</label></td>
 
@@ -1742,8 +1682,8 @@
 								<td width="16%" class="alignRight">Permanent Address &nbsp;</td>
 
 								<td width="28%"><label> <textarea
-											name="permanentaddress" type="text" class="textField"
-											id="permanentaddress" rows="4" cols="35"
+											name="permanentaddress" type="text" 
+											id="permanentaddress" rows="4" cols="40"
 											onkeypress="return validateContactNum(this);"></textarea>
 
 								</label></td>
@@ -1751,8 +1691,8 @@
 
 								<td width="20%" class="alignRight">Temporary Address &nbsp;</td>
 								<td width="28%"><label> <textarea
-											name="temporaryaddress" type="text" class="textField"
-											id="temporaryaddress" rows="4" cols="35"></textarea>
+											name="temporaryaddress" type="text" 
+											id="temporaryaddress" rows="4" cols="40"></textarea>
 								</label></td>
 								</tr>
 
@@ -1770,7 +1710,8 @@
 
 									<td width="16%" class="alignRight">Notes &nbsp;</td>
 									<td width="28%"><label> <input name="remarksadditional"
-											type="text" class="textField" id="remarksadditional" size="36"
+											type="text" class="myclass" id="remarksadditional" size="30"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											onclick="validateNameContact();">
 									</label></td>
 								</tr>
