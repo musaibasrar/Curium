@@ -190,7 +190,6 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("classonleaving")) {
 		                	student.setClassonleaving(DataUtil.emptyString(item.getString()));
 		                }
-		                // @UI 'core subjects studied'
 		                if (fieldName.equalsIgnoreCase("progress")) {
 		                	student.setSubsequentprogress(DataUtil.emptyString(item.getString()));
 		                }
@@ -213,6 +212,7 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("semester")) {
 		                	student.setSemester(DataUtil.parseInt(item.getString()));
 		                }
+		                //@UI 'BMTC Bus Pass'
 		                if (fieldName.equalsIgnoreCase("stream")) {
 		                	student.setStream(DataUtil.emptyString(item.getString()));
 		                }		                
@@ -237,21 +237,24 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("socialcategory")) {
 		                	student.setSocialcategory(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Was in receipt of any scholarship'
 		                if (fieldName.equalsIgnoreCase("belongtobpl")) {
 		                	student.setBelongtobpl(DataUtil.parseInt(item.getString()));
 		                }
-		                //@UI 'Adhar card no'
 		                if (fieldName.equalsIgnoreCase("bplcardno")) {
 		                	student.setBplcardno(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Whether Vaccinated'
 		                if (fieldName.equalsIgnoreCase("bhagyalakshmibondnumber")) {
 		                	student.setBhagyalakshmibondnumber(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Marks of Identification on Pupil's body'
-		                if (fieldName.equalsIgnoreCase("disabilitychild")) {
+		                //@UI 'Language Group'
+		                if (fieldName.equalsIgnoreCase("disabilitychild1")) {
 		                	student.setDisabilitychild(DataUtil.emptyString(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("disabilitychild2")) {
+		                	student.setDisabilitychild(student.getDisabilitychild()+","+DataUtil.emptyString(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("disabilitychild3")) {
+		                	student.setDisabilitychild(student.getDisabilitychild()+","+DataUtil.emptyString(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("specialcategory")) {
 		                	student.setSpecialcategory(DataUtil.emptyString(item.getString()));
@@ -313,7 +316,7 @@ public class StudentService {
                                    
                                 }
 		                // End PU Details
-		                
+		                //@UI 'SASTS Child Number'
 		                if (fieldName.equalsIgnoreCase("languagesstudied")) {
                                     student.setLanguagesstudied(DataUtil.emptyString(item.getString()));
                                    
