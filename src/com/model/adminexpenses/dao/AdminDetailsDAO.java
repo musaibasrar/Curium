@@ -40,7 +40,6 @@ public class AdminDetailsDAO {
 			session.save(adminexpenses);
 
 			transaction.commit();
-			System.out.println("in add3");
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();

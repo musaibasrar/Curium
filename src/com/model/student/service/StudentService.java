@@ -855,8 +855,15 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("bhagyalakshmibondnumber")) {
 	                	student.setBhagyalakshmibondnumber(DataUtil.emptyString(item.getString()));
 	                }
-	                if (fieldName.equalsIgnoreCase("disabilitychild")) {
+	              //@UI 'Language Group'
+	                if (fieldName.equalsIgnoreCase("disabilitychild1")) {
 	                	student.setDisabilitychild(DataUtil.emptyString(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("disabilitychild2")) {
+	                	student.setDisabilitychild(student.getDisabilitychild()+","+DataUtil.emptyString(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("disabilitychild3")) {
+	                	student.setDisabilitychild(student.getDisabilitychild()+","+DataUtil.emptyString(item.getString()));
 	                }
 	                if (fieldName.equalsIgnoreCase("specialcategory")) {
 	                	dropdowncateg = DataUtil.emptyString(item.getString());

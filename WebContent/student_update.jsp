@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -433,7 +434,7 @@ for(Cookie cookie : cookies){
 				
 				<tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo">
+                    <img src="data:image;base64,<c:out value="${student.studentpic}"/>" style="width: 200px;height: 200px;" alt="Student's Photo">
                     <input type="hidden" value="<c:out value="${student.studentpic}"/>" id="studentpicupdate" name="studentpicupdate">
                     </td>
                     </tr>
@@ -460,7 +461,7 @@ for(Cookie cookie : cookies){
 							<td align="left"><label> <input name="admnno"
 									type="text" class="textField"
 									value="<c:out default="" value="${student.admissionnumber}" />"
-									id="admnno" size="30" data-validate="validate(required)">
+									id="admnno" size="36" data-validate="validate(required)">
 
 							</label></td>
 							<td width="16%" class="alignRight">STS Number &nbsp;</td>
@@ -481,7 +482,7 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${student.studentexternalid}" />" /> <label> <input
 									name="name" type="text" style="text-transform:uppercase"
 									value="<c:out value="${student.name}" />" class="textField"
-									id="name" size="30" data-validate="validate(required)">
+									id="name" size="36" data-validate="validate(required)">
 							</label></td>
 
 							<td width="16%" class="alignRight">Gender &nbsp;</td>
@@ -510,7 +511,7 @@ for(Cookie cookie : cookies){
 							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
 							<td width="28%"><label> <input name="dateofbirth"
 									type="text" value="<fmt:formatDate value="${student.dateofbirth}" pattern="yyyy-MM-dd"/>"
-									class="textField" id="datepicker" size="30"
+									class="textField" id="datepicker" size="36"
 									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
 									
@@ -522,7 +523,7 @@ for(Cookie cookie : cookies){
 							<td align="left"><label> <input name="age"
 									type="text" class="textField"
 									value="<c:out default="" value="${student.age}" />" id="age"
-									size="30">
+									size="36">
 
 							</label></td>
 						</tr>
@@ -540,7 +541,7 @@ for(Cookie cookie : cookies){
 							<td align="left"><label> <input name="place"
 									type="text" class="textField"
 									value="<c:out default="" value="${student.placeofbirth}" />"
-									id="place" size="30" data-validate="validate(required)">
+									id="place" size="36" data-validate="validate(required)">
 
 							</label></td>
 							<td width="16%" class="alignRight">Date Of Admission &nbsp;</td>
@@ -548,7 +549,7 @@ for(Cookie cookie : cookies){
 							<td align="left"><label> <input
 									name="dateofadmission" type="text" class="textField"
 									value="<fmt:formatDate value="${student.admissiondate}" pattern="yyyy-MM-dd"/>"
-									id="dateofadmission" size="30"
+									id="dateofadmission" size="36"
 									data-validate="validate(required)">
 
 							</label></td>
@@ -584,7 +585,7 @@ for(Cookie cookie : cookies){
 							</label> <label>
 							
 							<select name="secstudying" id="secstudying"
-									style="width: 80px;">
+									style="width: 110px;">
 										<option selected>${secstudying}</option>
 										<option></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -606,7 +607,7 @@ for(Cookie cookie : cookies){
 							<td width="28%">
 							<label> 
 								<select name="admclass" id="admclass"
-									style="width: 115px;">
+									style="width: 120px;">
 										<option selected>${classadm}</option>
 										<option></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -619,7 +620,7 @@ for(Cookie cookie : cookies){
 								</select>
 							</label> <label> 
 									<select name="admsec" id="admsec"
-									style="width: 80px;">
+									style="width: 110px;">
 										<option selected>${secadm}</option>
 										<option></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -650,7 +651,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Blood Group &nbsp;</td>
 
 							<td><label> <select name="bloodgroup"
-									id="bloodgroup" style="width: 200px">
+									id="bloodgroup" style="width: 230px">
 										<option selected>${student.bloodgroup}</option>
 										<option>A +ve</option>
 										<option>A -ve</option>
@@ -666,7 +667,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Nationality &nbsp;</td>
 
 							<td><label> <select name="nationality"
-									id="nationality" style="width: 200px" onchange="dropdown()">
+									id="nationality" style="width: 230px" onchange="dropdown()">
 										<option selected>${student.nationality }</option>
 										<option>Indian</option>
 										<option>Other</option>
@@ -693,18 +694,18 @@ for(Cookie cookie : cookies){
 							<td align="left"><%-- <label> <input name="religion"
 									type="text" class="textField"
 									value="<c:out default="" value="${student.religion}" />"
-									id="religion" size="30">
+									id="religion" size="36">
 
 							</label> --%>
 							
 							<label> <select name="religion" onblur="validateNameContact();"
-									id="religion" style="width: 200px" onkeypress="return validateContactNum(this);">
+									id="religion" style="width: 230px" onkeypress="return validateContactNum(this);">
 										<option selected>${student.religion}</option>
 										<option>Islam</option>
 										<option>Hinduism</option>
 										<option>Christianity</option>
-										<option>jainism</option>
 										<option>sikhism</option>
+										<option>jainism</option>
 								</select>
 
 							</label>
@@ -718,11 +719,11 @@ for(Cookie cookie : cookies){
 							<td align="left"><label> <input name="caste"
 									type="text" class="textField"
 									value="<c:out default="" value="${student.caste}" />"
-									id="caste" size="30">
+									id="caste" size="36">
 
 							</label></td>
  --%>
- 							<td width="16%" class="alignRight">Students Caste</td>
+ 							<td width="16%" class="alignRight">Students Caste Certificate No.</td>
 							<td width="28%"><label> <input
 									name="studentscastecertno" type="text" class="textField" value="${student.studentscastecertno}"
 									id="studentscastecertno" size="36">
@@ -825,7 +826,7 @@ for(Cookie cookie : cookies){
 								Instruction&nbsp;</td>
 
 							<td><label> <select name="mediumofinstruction"
-									id="mediumofinstruction" style="width: 240px">
+									id="mediumofinstruction" style="width: 230px">
 										<option selected>${student.mediumofinstruction}</option>
 										<option>Kannada</option>
 										<option>Hindi</option>
@@ -843,13 +844,13 @@ for(Cookie cookie : cookies){
 							<td align="left"><%-- <label> <input name="motherT"
 									type="text" class="textField"
 									value="<c:out default="" value="${student.mothertongue}" />"
-									id="motherT" size="30">
+									id="motherT" size="36">
 
 							</label> --%>
 							
 							<label>
 							<select name="motherT" onblur="validateNameContact();"
-									id="motherT" style="width: 200px" onkeypress="return validateContactNum(this);">
+									id="motherT" style="width: 230px" onkeypress="return validateContactNum(this);">
 										<option selected>${student.mothertongue}</option>
 										<option>Urdu</option>
 										<option>Hindi</option>
@@ -880,7 +881,7 @@ for(Cookie cookie : cookies){
 
 							<td id="categoryname"><label> <select
 									name="specialcategory" onchange="enterOtherSpecialCategory()"
-									id="specialcategory" style="width: 240px">
+									id="specialcategory" style="width: 230px">
 										<option selected>${student.specialcategory}</option>
 										<option>None</option>
 										<option>Destitute</option>
@@ -925,14 +926,14 @@ for(Cookie cookie : cookies){
 							<td align="left"><label> <input name="remarks"
 									type="text" class="textField"
 									value="<c:out default="" value="${student.remarks}" />"
-									id="remarks" size="30">
+									id="remarks" size="36">
 
 							</label></td>
 							
 							<td width="20%" class="alignRight">Created Date &nbsp;</td>
 							<td width="28%"><label> <input name="createddate"
 									type="text" value="<fmt:formatDate value="${student.createddate}" pattern="yyyy-MM-dd"/>" class="textField"
-									id="datepickerCD" size="30" data-validate="validate(required)">
+									id="datepickerCD" size="36" data-validate="validate(required)">
 							</label></td>
 
 							</tr>
@@ -1015,7 +1016,7 @@ for(Cookie cookie : cookies){
 
 								<td align="center">
 								<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
-								
+								&nbsp;&nbsp;&nbsp;
 								<a class="prevtab"
 									style="font-weight: bold; color: #325F6D; font-size: 13px"
 									href="#">Previous</a></td>
@@ -1071,10 +1072,18 @@ for(Cookie cookie : cookies){
 
 								<tr>
 									<td width="30%" class="alignRight">Class on leaving&nbsp;</td>
-									<td width="12%" align="left"><label> <input
-											name="classonleaving" type="text"
-											value="<c:out default="" value="${student.classonleaving}" />" class="myclass" id="classonleaving" style="text-transform:uppercase"
-											size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+									<td width="12%" align="left"><label>
+										<select name="classonleaving"
+									id="classonleaving" style="width: 230px;">
+										<option selected>${student.classonleaving}</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+										</select>
 									</label></td>
 
 									<td width="30%" class="alignRight">Date of leaving the school&nbsp;</td>
@@ -1130,9 +1139,17 @@ for(Cookie cookie : cookies){
 								<tr>
 									<td><br /></td>
 								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
+	
+							<tr>
+							<td></td>
+								<td align="center">
+								<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<a class="prevtab"
+									style="font-weight: bold; color: #325F6D; font-size: 13px"
+									href="#">Previous</a></td>
+							</tr>
+							
 							<tr>
 									<td><br /></td>
 								</tr>	
@@ -1466,7 +1483,7 @@ for(Cookie cookie : cookies){
 							<td><label><input name="tcno"
 									type="text" class="textField"
 									value="<c:out default="" value="${student.nooftc}"/>"
-									id="tcno" size="30">  
+									id="tcno" size="36">  
 
 							</label></td>
 							<td class="alignRight">Date of transfer certificate&nbsp;</td>
@@ -1474,7 +1491,7 @@ for(Cookie cookie : cookies){
 							<td><label> <input
 									name="dateoftc" type="text" class="textField"
 									value="<fmt:formatDate value="${student.dateoftc}" pattern="yyyy-MM-dd"/>"
-									id="dateoftc" size="30"
+									id="dateoftc" size="36"
 									data-validate="validate(required)">
 
 							</label></td>
@@ -1492,7 +1509,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Previous Class Studied &nbsp;</td>
 
 							<td><label> <select name="lastclass" id="lastclass"
-									style="width: 200px;">
+									style="width: 230px;">
 										<option selected>${student.stdlaststudied}</option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
@@ -1510,7 +1527,7 @@ for(Cookie cookie : cookies){
 							<td width="12%" align="left"><label> <input
 									name="lastschool" type="text" class="textField"
 									value="<c:out default="" value="${student.schoollastattended}" />"
-									id="lastschool" size="30" data-validate="validate(required)">
+									id="lastschool" size="36" data-validate="validate(required)">
 							</label></td>
 						</tr>
 
@@ -1533,7 +1550,7 @@ for(Cookie cookie : cookies){
 							<td><label> <input
 									name="languagesstudied" type="text" class="textField"
 									value="<c:out default="" value="${student.languagesstudied}" />"
-									id="languagesstudied" size="30" data-validate="validate(required)">
+									id="languagesstudied" size="36" data-validate="validate(required)">
 
 							</label></td>
 							
@@ -1541,7 +1558,7 @@ for(Cookie cookie : cookies){
 							<td align="left"><label> <input name="previouschooladdress"
 									type="text" class="textField"
 									value="<c:out default="" value="${student.previouschooladdress}" />"
-									id="previouschooladdress" size="30" data-validate="validate(required)">
+									id="previouschooladdress" size="36" data-validate="validate(required)">
 
 							</label></td>
 
@@ -1560,7 +1577,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Previous School Type&nbsp;</td>
 
 							<td><label> <select name="previousschooltype"
-									id="previousschooltype" style="width: 200px">
+									id="previousschooltype" style="width: 230px">
 										<option selected>${student.previousschooltype}</option>
 										<option></option>
 										<option>Government</option>
@@ -1593,7 +1610,10 @@ for(Cookie cookie : cookies){
 
 							<tr>
 
-								<td align="center"><a class="prevtab"
+								<td align="center">
+								<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<a class="prevtab"
 									style="font-weight: bold; color: #325F6D; font-size: 13px"
 									href="#">Previous</a></td>
 							</tr>
@@ -1636,7 +1656,101 @@ for(Cookie cookie : cookies){
 
 				</div>
 
+				<div id="tabs-6">
 
+							<div>
+								<table width="100%">
+								 <c:set var="languagearray" value="${fn:split(student.disabilitychild,',')}"/>
+									<tr>
+
+										<td><br /></td>
+									</tr>
+									
+									<tr>
+								<td width="10%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight"> 1st Language&nbsp;&nbsp;&nbsp;&nbsp;<input name="disabilitychild1"
+									value="<c:out default="" value="${languagearray[0]}" />"
+									type="text" class="myclass" id="disabilitychild1" size="36"
+									onclick="validateNameContact();">
+							</label></td>
+						</tr>
+						<tr>
+
+										<td><br /></td>
+									</tr>
+						<tr>
+								<td width="20%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight"> 2nd Language&nbsp;&nbsp;<input name="disabilitychild2"
+									value="<c:out default="" value="${languagearray[1]}" />"
+									type="text" class="myclass" id="disabilitychild2" size="36"
+									onclick="validateNameContact();">
+							</label></td>
+						</tr>
+						<tr>
+
+										<td><br /></td>
+									</tr>
+						<tr>
+								<td width="20%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight"> 3rd Language&nbsp;&nbsp;<input name="disabilitychild3"
+									value="<c:out default="" value="${languagearray[2]}" />"
+									type="text" class="myclass" id="disabilitychild3" size="36"
+									onclick="validateNameContact();">
+							</label></td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr align="left">
+
+								<tr>
+								<td></td>
+								<td align="left">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+								<tr><td><br></td></tr>
+									<tr>
+										<td></td>
+								<td>
+
+
+									<button id="updatethree" class="update"
+										onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
+										onfocus="validateNameContact();validateFatherName();">Update</button>
+
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<button id="cancelthree" class="cancel">Cancel</button>
+
+								</td>
+
+
+							</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+								</table>
+
+							</div>
+
+						</div>
 				
 
 						</div>

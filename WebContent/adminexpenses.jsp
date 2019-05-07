@@ -9,13 +9,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
+<title>Admin Expenses</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -599,7 +600,7 @@ for(Cookie cookie : cookies){
 						  <td class="dataText"><c:out value="${expenses.itemDescription}" /></td>
 						  <td class="dataText"><c:out value="${expenses.quantity}" /></td>
 						  <td class="dataText"><c:out value="${expenses.priceofitem}" /></td>
-						  <td class="dataText"><c:out value="${expenses.entrydate}" /></td>
+						  <td class="dataText"><fmt:formatDate value="${expenses.entrydate}" pattern="dd-MM-yyyy"/></td>
 
 						</tr>
 					</c:forEach>
