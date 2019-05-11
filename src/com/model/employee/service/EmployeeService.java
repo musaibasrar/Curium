@@ -45,13 +45,21 @@ public class EmployeeService {
 		employee.setAddress(DataUtil.emptyString(request.getParameter("address")));
 		employee.setContactnumber(DataUtil.emptyString(request.getParameter("contactnumber")));
 		employee.setEmail(DataUtil.emptyString(request.getParameter("email")));
-		employee.setDateofjoining(DateUtil.dateParserdd(request.getParameter("dateofjoining")));
+		employee.setDateofjoining(DateUtil.dateParserddmmyyyy(request.getParameter("dateofjoining")));
 		employee.setTotalexperience(DataUtil.emptyString(request.getParameter("totalexperience")));
 		employee.setQualification(DataUtil.emptyString(request.getParameter("qualification")));
 		employee.setDepartment(DataUtil.emptyString(request.getParameter("department")));
 		employee.setDesignation(DataUtil.emptyString(request.getParameter("designation")));
 		employee.setSalary(DataUtil.emptyString(request.getParameter("salary")));
 		employee.setRemarks(DataUtil.emptyString(request.getParameter("remarks")));
+		employee.setCurrentemployee(DataUtil.emptyString(request.getParameter("currentemployee")));
+		
+		//Bank Details
+		employee.setBankname(DataUtil.emptyString(request.getParameter("bankname")));
+		employee.setBankifsc(DataUtil.emptyString(request.getParameter("bankifsc")));
+		employee.setAccno(DataUtil.emptyString(request.getParameter("accno")));
+		//End Bank Details
+		
 		
 		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 		int count =4;
@@ -128,7 +136,7 @@ public class EmployeeService {
 		employee.setAddress(DataUtil.emptyString(request.getParameter("address")));
 		employee.setContactnumber(DataUtil.emptyString(request.getParameter("contactnumber")));
 		employee.setEmail(DataUtil.emptyString(request.getParameter("email")));
-		employee.setDateofjoining(DateUtil.datePars(request.getParameter("dateofjoining")));
+		employee.setDateofjoining(DateUtil.dateParserddmmyyyy(request.getParameter("dateofjoining")));
 		employee.setTotalexperience(DataUtil.emptyString(request.getParameter("totalexperience")));
 		employee.setQualification(DataUtil.emptyString(request.getParameter("qualification")));
 		employee.setDepartment(DataUtil.emptyString(request.getParameter("department")));
@@ -137,6 +145,16 @@ public class EmployeeService {
 		employee.setRemarks(DataUtil.emptyString(request.getParameter("remarks")));
 		employee.setTeacherexternalid(DataUtil.emptyString(request.getParameter("teacherexternalid")));
 		employee.setBranchid(DataUtil.parseInt(request.getParameter("branchid")));		
+		employee.setCurrentemployee(DataUtil.emptyString(request.getParameter("currentemployee")));
+
+		//Bank Details
+				employee.setBankname(DataUtil.emptyString(request.getParameter("bankname")));
+				employee.setBankifsc(DataUtil.emptyString(request.getParameter("bankifsc")));
+				employee.setAccno(DataUtil.emptyString(request.getParameter("accno")));
+		//End Bank Details
+				
+		employee.setLeavingdate(DateUtil.dateParserddmmyyyy(request.getParameter("leavingdate")));
+				
 		
 		employee = new EmployeeDAO().update(employee);
 				
