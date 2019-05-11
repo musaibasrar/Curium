@@ -50,6 +50,25 @@
         <property name="gender" type="string">
             <column name="gender" length="45" />
         </property>
+        
+        <property name="leavingdate" type="date">
+            <column name="leavingdate" length="10" />
+        </property>
+        <property name="bankname" type="string">
+            <column name="bankname" length="500" />
+        </property>
+        <property name="bankbranch" type="string">
+            <column name="bankbranch" length="200" />
+        </property>
+        <property name="bankifsc" type="string">
+            <column name="bankifsc" length="50" />
+        </property>
+        <property name="accno" type="string">
+            <column name="accno" length="500" />
+        </property>
+        <property name="currentemployee" type="string">
+            <column name="currentemployee" length="20" />
+        </property>
         <property name="teacherexternalid" type="string">
             <column name="teacherexternalid" length="45" not-null="true" unique="true" />
         </property>
