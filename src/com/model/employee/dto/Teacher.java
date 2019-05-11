@@ -38,6 +38,13 @@ public class Teacher implements java.io.Serializable {
 	private String gender;
 	private String teacherexternalid;
 	private int branchid;
+	private Date leavingdate;
+	private String bankname;
+	private String bankbranch;
+	private String bankifsc;
+	private String accno;
+	private String currentemployee;
+	
 	
 	
 	public Teacher() {
@@ -53,7 +60,7 @@ public class Teacher implements java.io.Serializable {
 			String classesteaching, String salary, String department,
 			String qualification, String totalexperience, String address,
 			String contactnumber, String email, String remarks, String gender,
-			String teacherexternalid) {
+			String teacherexternalid, Date leavingdate, String bankname, String bankbranch, String bankifsc, String accno, String currentemployee) {
 		this.teachername = teachername;
 		this.designation = designation;
 		this.subjectsteaching = subjectsteaching;
@@ -69,6 +76,12 @@ public class Teacher implements java.io.Serializable {
 		this.remarks = remarks;
 		this.gender = gender;
 		this.teacherexternalid = teacherexternalid;
+		this.leavingdate = leavingdate;
+		this.bankname = bankname;
+		this.bankbranch = bankbranch;
+		this.bankifsc = bankifsc;
+		this.accno = accno;
+		this.currentemployee = currentemployee;
 	}
 
 	@Id
@@ -225,5 +238,53 @@ public class Teacher implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+
+	public Date getLeavingdate() {
+		return leavingdate;
+	}
+
+	public void setLeavingdate(Date leavingdate) {
+		this.leavingdate = leavingdate;
+	}
+
+	public String getBankname() {
+		return bankname;
+	}
+
+	public void setBankname(String bankname) {
+		this.bankname = bankname;
+	}
+
+	public String getBankbranch() {
+		return bankbranch;
+	}
+
+	public void setBankbranch(String bankbranch) {
+		this.bankbranch = bankbranch;
+	}
+
+	public String getBankifsc() {
+		return bankifsc;
+	}
+
+	public void setBankifsc(String bankifsc) {
+		this.bankifsc = bankifsc;
+	}
+
+	public String getAccno() {
+		return accno;
+	}
+
+	public void setAccno(String accno) {
+		this.accno = accno;
+	}
+
+	public String getCurrentemployee() {
+		return currentemployee;
+	}
+
+	public void setCurrentemployee(String currentemployee) {
+		this.currentemployee = currentemployee;
 	}
 }
