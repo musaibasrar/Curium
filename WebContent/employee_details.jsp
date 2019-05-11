@@ -35,14 +35,6 @@
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
             <!--
@@ -261,33 +253,21 @@
         </style>
         <script type="text/javascript">
             
-            function updateStudent(){
-               
+            function updateStaff(){
                 var form1=document.getElementById("form1");
                 form1.action="Controller?process=EmployeeProcess&action=updateEmployeeDetails&id=<c:out value='${employee.tid}'/>";
                 form1.submit();
             }
             
-            function typeofrelation(){
-                var listitem = document.getElementById("subscriber");
-                var listitemtext = listitem.options[listitem.selectedIndex].text;
-                alert(listitemtext);
-                
-                if(listitemtext=="1"){
-                    document.getElementById("typeofrelation").value="subscriber";
-                    
-                }
-            }
-            
-      
         </script>
 
         <script type="text/javascript">
             $(function() {
 
-                $("#accordion").accordion({
+                $(".accordion").accordion({
                     collapsible: true,
-                    
+                    navigation: true,
+                    active: false,
                     autoHeight: false});
                 $("#accordion1").accordion({
                     collapsible: true,
@@ -309,6 +289,38 @@
             });
         </script>
 
+                            <script type="text/javascript">
+                                $(function() {
+                                    $( "#set" )
+                                    .button()
+                                    .click(function() {
+                                        setAppointment();
+
+                                    });
+                                    $( "#modify" )
+                                    .button()
+                                    .click(function() {
+                                        updateStaff();
+
+                                    });
+                                    $( "#fullSummary" )
+                                    .button()
+                                    .click(function() {
+                                        fullSummary();
+
+                                    });
+                                });
+                                
+                                function calIssues(){
+                                    var fromIss = document.getElementById("").value;
+                                }
+                                
+                                function Cancel(){
+                                    var form1=document.getElementById("form1");
+                                    form1.action="Controller?process=EmployeeProcess&action=viewAllEmployee";
+                                    form1.submit();
+                                }
+                            </script>
 
     </head>
     <%
@@ -328,46 +340,7 @@ for(Cookie cookie : cookies){
 }
 %>
     <body background="images/bg.jpg">
-        <jsp:useBean id="now" class="java.util.Date" />
-        <fmt:formatDate var="today" type="date" value="${now}" />
         <form  method="post" id="form1">
-
-            <div>
-                <table id="table3" width="100%" border="0" cellpadding="1" cellspacing="1" align="center"  >
-                    <tr><td >
-
-
-                            <%--<button id="fullSummary">Full Summary</button>--%>
-                            <script type="text/javascript">
-                                $(function() {
-                                    $( "#set" )
-                                    .button()
-                                    .click(function() {
-                                        setAppointment();
-
-                                    });
-                                    $( "#modify" )
-                                    .button()
-                                    .click(function() {
-                                        updateStudent();
-
-                                    });
-                                    $( "#fullSummary" )
-                                    .button()
-                                    .click(function() {
-                                        fullSummary();
-
-                                    });
-                                });
-                                
-                                function calIssues(){
-                                    var fromIss = document.getElementById("").value;
-                                }
-                            </script>
-                        </td></tr>
-
-                </table>
-            </div>
 
             <table width="100%">
                 <tr>
@@ -378,9 +351,9 @@ for(Cookie cookie : cookies){
                 </tr>
 
             </table>
-            <div id="accordion" style="width: 100%;height: 100%">
+            <div class="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Details</a></h3>
+                <h3><a href="#">Personal Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
@@ -422,8 +395,7 @@ for(Cookie cookie : cookies){
                             </td>
                             <td width="25%"  class="alignLeft" height="50">Date Of Joining</td>
                             <td width="25%" class="tablerows" >
-                                <%-- <c:out value="${student.dateofbirth}" /> --%>
-                                <fmt:formatDate pattern="dd/MM/yyyy" value="${employee.dateofjoining}"/>
+                                <fmt:formatDate pattern="dd-MM-yyyy" value="${employee.dateofjoining}"/>
                             </td>
                             
                         </tr>
@@ -458,22 +430,23 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                        
                          
-                            <%-- <td  width="25%"  class="alignLeft" height="50">Salary
-                            </td>
-                            <td width="25%" class="tablerows">
-                                <c:out default="" value="${employee.salary}" />
-                            </td> --%>
+                            <td  width="25%"  class="alignLeft" height="50">Current Employee</td>
                             
+                            <td width="25%" class="tablerows">
+                            	<c:if test="${(employee.currentemployee ==1)}">    
+           						  <c:out default="" value="Yes" />
+           						 </c:if>
+                                <c:if test="${(employee.currentemployee ==0)}">    
+           						  <c:out default="" value="No" />
+           						 </c:if>
+                            </td>
                         
-                            <td width="25%"   class="alignLeft" height="50" >Remarks</td>
+                            <td width="25%" class="alignLeft" height="50" >Remarks</td>
                             <td width="25%" class="tablerows"  >
                                  <c:out default="" value="${employee.remarks}" />
-                                
                             </td>
                             
-
                         </tr>
                         
                         
@@ -496,9 +469,50 @@ for(Cookie cookie : cookies){
 
                         </tr>
                         
-                        
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows" >
+
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows">
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="accordion" style="width: 100%;height: 100%">
+
+                <h3><a href="#">Bank Details</a></h3>
+                <div>
+
+                    <table  border="0px" width="100%"  id="table1" align="center">
+
+                        <tr>
+
+                            <td width="25%"  class="alignLeft" height="50">Bank Name</td>
+                            <td width="25%" class="tablerows"  style="text-transform:uppercase">
+                                <c:out default="" value="${employee.bankname}" />
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50" >Bank IFSC
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${employee.bankifsc}" />
+                            </td>
                         </tr>
                         
+                          <tr>
+                        <td  width="25%"  class="alignLeft" height="50">Account Number
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${employee.accno}" />
+                            </td>
+                                                    
+                        </tr>
                         
                         <tr>
                             <td  width="25%"  class="alignLeft" height="50">
@@ -513,42 +527,50 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                     </table>
-
-                   
                 </div>
+            </div>
+            
+            <div class="accordion" style="width: 100%;height: 100%">
 
+                <h3><a href="#">Additional Details</a></h3>
+                <div>
 
+                    <table border="0px" width="100%"  id="table1" align="center">
 
+                        <tr>
+                            <td width="25%"  class="alignLeft" height="50">Date of Leaving&nbsp;</td>
+                            <td width="25%" class="tablerows"  style="text-transform:uppercase">
+                            <fmt:formatDate pattern="dd-MM-yyyy" value="${employee.leavingdate}"/>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows" >
 
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows">
 
-
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             
             <table  width="70%"  id="table11" align="center">
                         <tr>
-                            <td width="30%"> 
-
-                            </td>
+                            <td width="30%"></td>
                             <td>
                                 <button id="modify" type="submit">Modify</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button id="cancel" >Cancel</button>
                             </td>
-
                         </tr>
-
-                    </table>
-            <script>
-                typeofrelation();
-            </script>
-
+          </table>
+          
         </form>
-        <script>
-            function Cancel(){
-                var form1=document.getElementById("form1");
-                form1.action="Controller?process=EmployeeProcess&action=viewAllEmployee";
-                form1.submit();
-            }
-        </script>
     </body>
 </html>

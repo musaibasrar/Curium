@@ -33,14 +33,8 @@
 <script src="js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script src="js/datePicker/ui/sliderAccess.js"></script>
 <script src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="js/validation/jquery.ketchup.all.min.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.button.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/jquery.ui.button.js"></script>
 <link rel="stylesheet" href="css/datePicker/demos.css">
-
-
-
-
 
 <style type="text/css">
 .myclass {
@@ -297,16 +291,9 @@
 	}
 </script>
 
-
-
-
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
-
 <script src="JavaScript/actb.js"></script>
 <script src="JavaScript/common.js"></script>
-
-
-
 
 <script>
 	$(function() {
@@ -315,6 +302,7 @@
 			changeMonth : true,
 			yearRange: "-50:+0"
 		});
+		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
 		});
@@ -325,6 +313,7 @@
 			changeMonth : true,
 			yearRange: "-50:+0"
 		});
+		$( "#datepicker1" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepicker1").datepicker("option", "showAnim", $(this).val());
 		});
@@ -335,10 +324,24 @@
 			changeMonth : true,
 			yearRange: "-50:+0"
 		});
+		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
 		});
 	});
+	$(function() {
+		$("#datepickerleaving").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			yearRange: "-50:+0"
+		});
+		$( "#datepickerleaving" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$("#anim").change(function() {
+			$("#datepickerleaving").datepicker("option", "showAnim", $(this).val());
+		});
+	});
+	
+	
 </script>
 
 
@@ -455,12 +458,12 @@
 			addPatientWithTodaysAppointment();
 
 		});
-		$("#save").button().click(function() {
+		$(".save").button().click(function() {
 			addEmployee();
 
 		});
 
-		$("#cancel").button().click(function() {
+		$(".cancel").button().click(function() {
 			Cancel();
 
 		});
@@ -486,7 +489,17 @@
 <script>
 	$(function() {
 		$("#tabs").tabs();
-
+		
+		$(".nexttab").click(function() {
+		    var selected = $("#tabs").tabs("option", "selected");
+		    $("#tabs").tabs("option", "selected", selected + 1);
+		});
+		
+		$(".prevtab").click(function() {
+		    var selected = $("#tabs").tabs("option", "selected");
+		    $("#tabs").tabs("option", "selected", selected - 1);
+		});
+		
 	});
 </script>
 
@@ -520,24 +533,24 @@
 		}
 		return xmlHttp;
 	}
+	
+	function yesCheck(id) {
 
-	function maleCheck() {
-
-		if (document.getElementById('male').checked == true) {
-			document.getElementById('female').checked = false;
-
+		if (document.getElementById(id).checked == true) {
+			var splitId = id.split(':');
+			document.getElementById('no:'+splitId[1]).checked = false;
 		}
 
 	}
+	function noCheck(id) {
 
-	function femaleCheck() {
-
-		if (document.getElementById('female').checked == true) {
-			document.getElementById('male').checked = false;
-
+		if (document.getElementById(id).checked == true) {
+			var splitId = id.split(':');
+			document.getElementById('yes:'+splitId[1]).checked = false;
 		}
 
 	}
+	
 
 	function CalculateAge(value) {
 		var test = document.getElementById('datepicker').value;
@@ -619,57 +632,45 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=PersonalProcess&action=add"
-		method="post">
-	<jsp:useBean id="now" class="java.util.Date" scope="page" />
+	<form id="form1" action="Controller?process=PersonalProcess&action=add" method="post">
+		
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
+		
 		<div>
+		
 			<div id="tabs">
+				
 				<ul>
-					<li><a href="#tabs-1">Employee's Details</a></li>
-
+					<li><a href="#tabs-1">Staff Details</a></li>
+					<li><a href="#tabs-2">Bank Details</a></li>
+					<li><a href="#tabs-3">Additional Details</a></li>
 				</ul>
 
-
-
 				<div id="tabs-1">
+
 					<table width="100%" border="0" align="center" id="table1">
+					
 						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
-
 						<tr>
-
-							<td width="30%" class="alignRight"><label> <font
-									color="red"><div id="mydiv"></div></font>
-							</label></td>
-							<td width="20%" class="alignRight"></td>
-							<td class="alignRight"><font color="red"><div
-										id="mydivmobile"></div></font></td>
-						</tr>
-
-
-
-						<tr>
-							<td width="30%" class="alignRight">Name* &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="name" type="text" class="myclass" id="name" size="36" style="text-transform:uppercase"
+							<td class="alignRight">Name* &nbsp;</td>
+							<td align="left"><label> <input
+									name="name" type="text" class="myclass" id="name" size="36" 
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
 							</label></td>
 
-							<td width="30%" class="alignRight">Gender &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft">&nbsp;Male<input
-								type="checkbox" value="male" name="gender" id="male"
-								onclick="maleCheck();" />&nbsp; &nbsp;Female<input
-								type="checkbox" value="female" name="gender" id="female"
-								onclick="femaleCheck()" />
-
+							<td class="alignRight">Gender &nbsp;</td>
+							<td class="alignLeft">&nbsp;Male<input
+								type="checkbox" value="male" name="gender" id="yes:male"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
+								type="checkbox" value="female" name="gender" id="no:female"
+								onclick="noCheck(this.id);" />
 							</td>
-
-
-
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -682,21 +683,18 @@ for(Cookie cookie : cookies){
 						<tr>
 						<tr>
 
-							<td width="20%" class="alignRight">Address &nbsp;</td>
-							<td width="28%"><label> <input name="address"
-									type="text" class="textField" id="address" size="36"
-									">
-
+							<td class="alignRight">Address &nbsp;</td>
+							<td><label> <input name="address"
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									type="text" class="textField" id="address" size="36">
 							</label></td>
 
-
-							<td width="20%" class="alignRight">Contact Number &nbsp;</td>
-							<td width="28%"><label> <input
+							<td class="alignRight">Contact Number &nbsp;</td>
+							<td><label> <input
 									name="contactnumber" type="text" class="textField"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									id="contactnumber" size="36" maxlength="10" minlength="10"/>
 							</label></td>
-
-
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -708,21 +706,18 @@ for(Cookie cookie : cookies){
 
 						<tr>
 
-							<td width="20%" class="alignRight">email &nbsp;</td>
-							<td width="28%"><label> <input name="email"
+							<td class="alignRight">email &nbsp;</td>
+							<td><label> <input name="email"
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									type="email" class="textField" id="email" size="36">
 							</label></td>
 
-							<td width="20%" class="alignRight">Date Of Joining &nbsp;</td>
-							<td width="28%"><label> <input name="dateofjoining" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-YYYY"/>"
+							<td class="alignRight">Date Of Joining &nbsp;</td>
+							<td><label> <input name="dateofjoining" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-YYYY"/>"
+										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									type="text" class="textField" id="datepicker" size="36"
-									
 									data-validate="validate(required)">
 							</label></td>
-
-
-
-
 						</tr>
 
 						<tr>
@@ -733,17 +728,18 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
-
-							<td width="30%" class="alignRight">Total Experience &nbsp;</td>
-							<td width="12%" align="left"><label> <input
+							<td class="alignRight">Total Experience &nbsp;</td>
+							<td align="left"><label> <input
 									name="totalexperience" type="text" class="myclass"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									id="totalexperience" size="36" onblur="validateName();">
 									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
 
 
-							<td width="20%" class="alignRight">Qualification &nbsp;</td>
-							<td width="28%"><label> <input name="qualification"
+							<td class="alignRight">Qualification &nbsp;</td>
+							<td><label> <input name="qualification"
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									type="text" class="textField" id="qualification" size="36"
 									>
 							</label></td>
@@ -759,13 +755,10 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-
-
-
-							<td width="30%" class="alignRight">Department &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft"><label>
+							<td class="alignRight">Department &nbsp;</td>
+							<td class="alignLeft"><label>
 									<select name="department" id="department"
-									style="width: 240px" ">
+									style="width: 300px">
 										<option selected></option>
 
 										<c:forEach items="${listDepartment}" var="listDepartment">
@@ -780,10 +773,10 @@ for(Cookie cookie : cookies){
 								</select></label></td>
 
 
-							<td width="30%" class="alignRight">Designation &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft"><label>
+							<td class="alignRight">Designation &nbsp;</td>
+							<td class="alignLeft"><label>
 									<select name="designation" id="designation"
-									style="width: 240px" ">
+									style="width: 300px">
 										<option selected></option>
 
 										<c:forEach items="${listPosition}" var="listPosition">
@@ -814,41 +807,184 @@ for(Cookie cookie : cookies){
 									id="salary" size="36" onblur="validateName();">
 									onkeyup="check(this.value);" 
 							</label></td> -->
+							<td class="alignRight">Current Employee &nbsp;</td>
+							<td class="alignLeft">&nbsp;Yes<input
+								type="checkbox" value="1" name="currentemployee" id="yes:employee"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="currentemployee" id="no:employee"
+								onclick="noCheck(this.id)" />
+							</td>
 
-
-							<td width="30%" class="alignRight">Remarks &nbsp;</td>
-							<td width="12%" align="left"><label> <input
+							<td class="alignRight">Remarks &nbsp;</td>
+							<td align="left"><label> <input
 									name="remarks" type="text" class="myclass" id="remarks"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
 							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+									<tr>
+										<td></td><td></td>
+										<td align="center"><a class="nexttab"
+											style="font-weight: bold; color: #325F6D; font-size: 13px"
+											href="#">Next</a></td>
+									</tr>
+									
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td></td><td></td>
+									<td>
+										<button id="save" class="save" onmouseover="validateNameContact();">Save</button>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="cancel" class="cancel">Cancel</button>
 
+									</td>
+								</tr>
+					</table>
+					</div>
+					
+					<div id="tabs-2">
 
+					<table width="100%" border="0" align="center" id="table1">
+					
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignRight">Bank Name &nbsp;</td>
+							<td align="left"><label> <input
+									name="bankname" type="text" class="myclass" id="bankname" size="36" 
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+							</label></td>
+
+							<td class="alignRight">Bank IFSC &nbsp;</td>
+							<td class="alignLeft"><label> <input
+									name="bankifsc" type="text" class="myclass" id="bankifsc" size="36" 
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									onblur="validateName();">
+							</label>
+							</td>
 						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
 
+						<tr>
+							<td><br /></td>
+						</tr>
 
-						<div>
-							<table width="100%">
+						<tr>
+						<tr>
+							<td class="alignRight">Account Number &nbsp;</td>
+							<td><label> <input name="accno"
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									type="text" class="textField" id="accno" size="36">
+							</label></td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+										<td></td><td></td>		
+										<td align="center">
+										<a class="nexttab"
+											style="font-weight: bold; color: #325F6D; font-size: 13px"
+											href="#">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;
+										<a class="prevtab"
+											style="font-weight: bold; color: #325F6D; font-size: 13px"
+											href="#">Previous</a></td>
+									</tr>
+									
+									
 								<tr>
-
 									<td><br /></td>
 								</tr>
 								<tr>
-									<td align="center">
-
-										<button id="save" onmouseover="validateNameContact();">Save</button>
-
+									<td></td><td></td>
+									<td>
+										<button id="save" class="save" onmouseover="validateNameContact();">Save</button>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="cancel">Cancel</button>
+										<button id="cancel" class="cancel">Cancel</button>
 
 									</td>
-
-
 								</tr>
-							</table>
+					</table>
+					</div>
+					
+					<div id="tabs-3">
 
+					<table width="100%" border="0" align="center" id="table1">
+					
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignRight">Date Of Leaving &nbsp;</td>
+							<td><label> 
+										<input name="dateofleaving"
+									type="text" class="myclass" id="datepickerleaving" size="30" autocomplete="off"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									onchange="CalculateAge(this)"
+									data-validate="validate(required)">
+									
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+									<tr>
+									
+										<td align="right">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a class="prevtab"
+											style="font-weight: bold; color: #325F6D; font-size: 13px"
+											href="#">Previous</a></td>
+									</tr>
+									
+									
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td>
+										<button id="save" class="save" onmouseover="validateNameContact();">Save</button>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="cancel" class="cancel">Cancel</button>
+
+									</td>
+								</tr>
+					</table>
+					</div>
+					
+					
+					</div>
+					
 						</div>
 						</form>
 						<script type="text/javascript">
