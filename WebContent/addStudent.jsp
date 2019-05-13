@@ -634,6 +634,7 @@
 					<li><a href="#fragment-3">Upload Photo</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Language Group</a></li>
+					<li><a href="#fragment-7">Bank Details</a></li>
 				</ul>
 
 
@@ -805,11 +806,12 @@
 							</label> <label> <select name="admsecE" id="admsecE"
 									style="width: 128px;">
 										<option selected></option>
-
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<option value="${classdetailslist.section}">
-												<c:out value="${classdetailslist.section}" />
-											</option>
+											<c:if test="${(classdetailslist.section != '')}">
+												<option value="${classdetailslist.section}">
+													<c:out value="${classdetailslist.section}" />
+												</option>
+											</c:if>
 										</c:forEach>
 								</select>
 							</label></td>
@@ -1850,6 +1852,104 @@
 									type="text" class="myclass" id="disabilitychild3" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									onclick="validateNameContact();">
+							</label></td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr align="left">
+
+								<tr>
+								<td></td>
+								<td align="left">
+								<a class="nexttab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Next</a> 
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+								<tr><td><br></td></tr>
+									<tr>
+										<td></td>
+										<td align="left">
+
+
+											<button id="savethree" class="save"
+												onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
+												onfocus="validateNameContact();validateFatherName();">Save</button>
+
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<button id="cancelthree" class="cancel">Cancel</button>
+
+										</td>
+
+
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+								</table>
+
+							</div>
+
+						</div>
+						
+						<div id="fragment-7">
+
+							<div>
+								<table width="100%">
+									<tr>
+
+										<td><br /></td>
+									</tr>
+									
+									<tr>
+								<td width="10%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight">Bank Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input name="bankname" type="text" class="myclass" id="bankname" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									>
+							</label></td>
+						</tr>
+						<tr>
+
+										<td><br /></td>
+									</tr>
+						<tr>
+								<td width="20%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight"> Bank IFSC Code&nbsp;&nbsp;
+							<input name="bankifsc" type="text" class="myclass" id="bankifsc" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									>
+							</label></td>
+						</tr>
+						<tr>
+
+										<td><br /></td>
+									</tr>
+						<tr>
+								<td width="20%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight"> Account No. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input name="accno" type="text" class="myclass" id="accno" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									">
 							</label></td>
 						</tr>
 						

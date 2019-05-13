@@ -424,6 +424,7 @@ for(Cookie cookie : cookies){
 					<li><a href="#tabs-3">Upload Photo</a></li>
 					<li><a href="#tabs-4">Additional Details</a></li>
 					<li><a href="#tabs-6">Language Group</a></li>
+					<li><a href="#tabs-7">Bank Details</a></li>
 				</ul>
 
 
@@ -585,7 +586,7 @@ for(Cookie cookie : cookies){
 							</label> <label>
 							
 							<select name="secstudying" id="secstudying"
-									style="width: 110px;">
+									style="width: 100px;">
 										<option selected>${secstudying}</option>
 										<option></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -1752,6 +1753,101 @@ for(Cookie cookie : cookies){
 
 						</div>
 				
+				
+				<div id="tabs-7">
+
+							<div>
+								<table width="100%">
+									<tr>
+
+										<td><br /></td>
+									</tr>
+									
+									<tr>
+								<td width="10%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight"> Bank Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="bankname"
+									value="<c:out default="" value="${student.bankname}" />"
+									type="text" class="myclass" id="bankname" size="36"
+									onclick="validateNameContact();">
+							</label></td>
+						</tr>
+						<tr>
+
+										<td><br /></td>
+									</tr>
+						<tr>
+								<td width="20%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight"> Bank IFSC Code&nbsp;&nbsp;<input name="bankifsc"
+									value="<c:out default="" value="${student.bankifsc}" />"
+									type="text" class="myclass" id="bankifsc" size="36"
+									onclick="validateNameContact();">
+							</label></td>
+						</tr>
+						<tr>
+
+										<td><br /></td>
+									</tr>
+						<tr>
+								<td width="20%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight"> Account No.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="accno"
+									value="<c:out default="" value="${student.accno}" />"
+									type="text" class="myclass" id="accno" size="36"
+									onclick="validateNameContact();">
+							</label></td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr align="left">
+
+								<tr>
+								<td></td>
+								<td align="left">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+								<tr><td><br></td></tr>
+									<tr>
+										<td></td>
+								<td>
+
+
+									<button id="updatethree" class="update"
+										onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
+										onfocus="validateNameContact();validateFatherName();">Update</button>
+
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<button id="cancelthree" class="cancel">Cancel</button>
+
+								</td>
+
+
+							</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+								</table>
+
+							</div>
+
+						</div>
 
 						</div>
 						</div>

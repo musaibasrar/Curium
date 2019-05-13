@@ -825,6 +825,53 @@ for(Cookie cookie : cookies){
                     </table>
                 </div>
     </div>
+    
+    <div class="accordion" style="width: 100%;height: 100%">
+		
+                <h3><a href="#">Bank Details</a></h3>
+                <div>
+
+                    <table  border="0px" width="100%"  id="table1" align="center">
+                         <tr>
+                            <td  width="25%"  class="alignLeft" height="50" >Bank Name
+                           
+                            </td>
+                            <td width="25%" class="tablerows" >
+                              ${student.bankname}
+                            </td>
+                            
+                             <td  width="25%"  class="alignLeft" height="50">Bank IFSC Code
+                            </td>
+                            <td width="25%" class="tablerows">
+                                ${student.bankifsc}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50" >Account No.
+                            </td>
+                            <td width="25%" class="tablerows" >
+                               ${student.accno}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows" >
+
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows">
+
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </div>
+    </div>
+    
             <div class="accordion" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Parent's Details</a></h3>
