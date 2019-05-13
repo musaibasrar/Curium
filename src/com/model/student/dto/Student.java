@@ -84,6 +84,10 @@ public class Student implements java.io.Serializable {
 	private String specialcategory;
 	private Integer sts;
 	private Integer rte;
+	private String bankname;
+	private String bankbranch;
+	private String accno;
+	private String bankifsc;
 	
 	public Student() {
 	}
@@ -107,7 +111,7 @@ public class Student implements java.io.Serializable {
 			Integer passedout, Integer droppedout, Integer leftout, Integer semester,String stream,String mediumofinstruction,
 			 String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,String studentscaste,
 			 String socialcategory,Integer belongtobpl,String bplcardno,String bhagyalakshmibondnumber,
-			 String disabilitychild,String specialcategory, Integer sts, Integer rte) {
+			 String disabilitychild,String specialcategory, Integer sts, Integer rte, String bankname, String bankbranch, String accno, String bankifsc) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
@@ -161,6 +165,10 @@ public class Student implements java.io.Serializable {
 		this.specialcategory = specialcategory;
 		this.sts=sts;
 		this.rte=rte;
+		this.bankname=bankname;
+		this.bankbranch=bankbranch;
+		this.accno=accno;
+		this.bankifsc=bankifsc;
 	}
 
 	@Id
@@ -672,6 +680,38 @@ public class Student implements java.io.Serializable {
 
 	public void setRte(Integer rte) {
 		this.rte = rte;
+	}
+
+	public String getBankname() {
+		return bankname;
+	}
+
+	public void setBankname(String bankname) {
+		this.bankname = bankname;
+	}
+
+	public String getBankbranch() {
+		return bankbranch;
+	}
+
+	public void setBankbranch(String bankbranch) {
+		this.bankbranch = bankbranch;
+	}
+
+	public String getAccno() {
+		return accno;
+	}
+
+	public void setAccno(String accno) {
+		this.accno = accno;
+	}
+
+	public String getBankifsc() {
+		return bankifsc;
+	}
+
+	public void setBankifsc(String bankifsc) {
+		this.bankifsc = bankifsc;
 	}
 	
 	
