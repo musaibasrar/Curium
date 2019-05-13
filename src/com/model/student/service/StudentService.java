@@ -438,6 +438,18 @@ public class StudentService {
 		                
 		                //End Degree Details
 		                
+		                //Bank Details
+		                if (fieldName.equalsIgnoreCase("bankname")) {
+		                	student.setBankname(DataUtil.emptyString(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("bankifsc")) {
+		                	student.setBankifsc(DataUtil.emptyString(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("accno")) {
+		                	student.setAccno(DataUtil.emptyString(item.getString()));
+		                }
+		                //End Bank Details
+		                
 		            } else {
 		                // Process form file field (input type="file").
 		                String fieldName = item.getFieldName();
@@ -1044,8 +1056,20 @@ public class StudentService {
                         if (fieldName.equalsIgnoreCase("karnataka")) {
                             degreeDetails.setKarnataka(DataUtil.parseInt(item.getString()));
                         }
-                        
                         //End Degree Details
+                        
+                      //Bank Details
+		                if (fieldName.equalsIgnoreCase("bankname")) {
+		                	student.setBankname(DataUtil.emptyString(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("bankifsc")) {
+		                	student.setBankifsc(DataUtil.emptyString(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("accno")) {
+		                	student.setAccno(DataUtil.emptyString(item.getString()));
+		                }
+		              //End Bank Details
+		                
 	            } else {
 	                String fieldName = item.getFieldName();
 
