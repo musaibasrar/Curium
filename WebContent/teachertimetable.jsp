@@ -1,6 +1,6 @@
 <%--
-    Document   : Period Master
-    Created on : APR 11, 2018, 3:49:45 PM
+    Document   : Classes time table
+    Created on : MAY 05, 2018, 3:49:45 PM
     Author     : Musaib
 --%>
 
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Period Master</title>
+<title>Staff's List</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -523,13 +523,10 @@
 	    }
 	 
 	function savePeriods() {
-		
 		var form1 = document.getElementById("form1");
-		if(form1.checkValidity()) {
-			form1.action = "Controller?process=PeriodProcess&action=savePeriods";
-			form1.method = "POST";
-			form1.submit();
-		  }
+		form1.action = "Controller?process=PeriodProcess&action=savePeriods";
+		form1.method = "POST";
+		form1.submit();
 	}
 	
 	function getBreaks(){
@@ -585,7 +582,7 @@
 </script>
 
 </head>
-  <%
+<%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -603,509 +600,11 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1" method="POST">
-		
-		<div id="effect" class="ui-widget-content ui-corner-all">
-			<div id="tabs">
-				<ul>
-					<li><a href="#tabs-1">Period Master</a></li>
-				</ul>
-				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-
-						</tr>
-							<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>					
-						<tr>
-							<td class="alignRightFields">Academic Year&nbsp;</td>
-							<td width="70%"><label>    
-                              
-                             <select name="academicyear" id="academicyear" style="width: 180px">
-										
-										<option selected value="${currentYear}">${currentYear}(Current Year)</option>
-										<option value="2015/16">2015/16</option>
-										<option value="2016/17">2016/17</option>
-										<option value="2017/18">2017/18</option>
-										<option value="2018/19">2018/19</option>
-										<option value="2019/20">2019/20</option>
-										
-							 </select>
-
-							</label> 
-                                    </label>
-
-							</label> 
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td class="alignRightFields">Total Number Of Periods(including breaks)&nbsp;</td>
-							<td width="70%">
-                                        <label> <select name="totalperiods" id="totalperiods" onchange="getColumns()" required
-									style="width: 180px">
-										<option selected ></option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-										
-								</select>
-
-							</label> 
-							
-							
-							<label class="extraLabels">&nbsp;&nbsp;&nbsp;&nbsp;Duration Of a Period</label>
-							<label> <select name="periodduration" id="periodduration" required
-									style="width: 80px">
-										<option selected value="00">Hour</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-								</select>
-							</label>
-							<label> <select name="perioddurationmin" id="perioddurationmin" required
-									style="width: 80px">
-										<option selected value="00">Minuts</option>
-										<option value="00">00</option>
-										<option value="05">05</option>
-										<option value="10">10</option>
-										<option value="15">15</option>
-										<option value="20">20</option>
-										<option value="25">25</option>
-										<option value="30">30</option>
-										<option value="35">35</option>
-										<option value="40">40</option>
-										<option value="45">45</option>
-										<option value="50">50</option>
-										<option value="55">55</option>
-								</select>
-							</label>
-							</td>
-						</tr>
-											
-						<tr>
-						<td><br></td>
-						</tr>
-						<tr>
-						<td><br></td>
-						</tr>
-						
-						<tr>
-							<td class="alignRightFields">Class&nbsp;</td>
-							<td width="70%">
-                                        <label>  <select name="fromclass" id="fromclass"  required
-									style="width: 220px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-							</label> 
-							</td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-							<td class="alignRightFields">Day Start Time &nbsp;</td>
-							<td width="70%">
-                                        <label> <select name="daystarttime" id="daystarttime" required
-									style="width: 60px">
-										<option selected >Hour</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-										<option value="11">11</option>
-										<option value="12">12</option>
-										
-								</select>
-								<select name="daystartminutes" id="daystartminutes" required
-									style="width: 60px">
-										<option selected>Minuts</option>
-										<option value="00">00</option>
-										<option value="05">05</option>
-										<option value="10">10</option>
-										<option value="15">15</option>
-										<option value="20">20</option>
-										<option value="25">25</option>
-										<option value="30">30</option>
-										<option value="35">35</option>
-										<option value="40">40</option>
-										<option value="45">45</option>
-										<option value="50">50</option>
-										<option value="55">55</option>
-										
-								</select>
-								<select name="daystartam" id="daystartam" required
-									style="width: 60px">
-										<option selected>AM</option>
-										<option value="AM">AM</option>
-										<option value="PM">PM</option>
-								</select>
-
-							</label> 
-							
-							
-							<label class="extraLabels">&nbsp;&nbsp;&nbsp;&nbsp;Day End Time<label>
-							<label> <select name="dayendtime" id="dayendtime" required
-									style="width: 60px">
-										<option selected >Hour</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-										<option value="11">11</option>
-										<option value="12">12</option>
-										
-								</select>
-							</label>
-							<label> <select name="dayendminutes" id="dayendminutes" required
-									style="width: 80px">
-										<option selected>Minuts</option>
-										<option value="00">00</option>
-										<option value="05">05</option>
-										<option value="10">10</option>
-										<option value="15">15</option>
-										<option value="20">20</option>
-										<option value="25">25</option>
-										<option value="30">30</option>
-										<option value="35">35</option>
-										<option value="40">40</option>
-										<option value="45">45</option>
-										<option value="50">50</option>
-										<option value="55">55</option>
-								</select>
-								
-								<select name="dayendam" id="dayendam"
-									style="width: 60px">
-										<option selected>AM</option>
-										<option value="AM">AM</option>
-										<option value="PM">PM</option>
-								</select>
-								
-								
-							</label>
-							</td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						<!-- <tr>
-							<td class="alignRightFields">Total Number Of Breaks&nbsp;</td>
-							<td width="70%">
-                                        <label> <select name="totalbreaks" id="totalbreaks" onchange="getBreaks();"
-									style="width: 180px">
-										<option selected ></option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-								</select>
-
-							</label> 
-							
-							</td>
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr style="display: none;" id="tr1">
-							<td class="alignRightFields">Break 1 - After&nbsp;</td>
-							<td width="70%">
-                                        <label> <select name="breakafter1" id="breakafter1"
-									style="width: 180px">
-										<option selected ></option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-										
-								</select>
-
-							</label> 
-							
-							
-							<label class="extraLabels">&nbsp;&nbsp;&nbsp;&nbsp;Duration of Break<label>
-							<label> <select name="breakduration1" id="breakduration1"
-									style="width: 80px">
-										<option selected>Hour</option>
-										<option value="0">0hr</option>
-										<option value="1">1hr</option>
-										<option value="2">2hr</option>
-								</select>
-							</label>
-							<label> <select name="breakduration1nmin" id="breakduration1nmin"
-									style="width: 80px">
-										<option selected>Minuts</option>
-										<option value="00">00</option>
-										<option value="05">05</option>
-										<option value="10">10</option>
-										<option value="15">15</option>
-										<option value="20">20</option>
-										<option value="25">25</option>
-										<option value="30">30</option>
-										<option value="35">35</option>
-										<option value="40">40</option>
-										<option value="45">45</option>
-										<option value="50">50</option>
-										<option value="55">55</option>
-								</select>
-							</label>
-							</td>
-						</tr>
-						
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr style="display: none;" id="tr2">
-							<td class="alignRightFields">Break 2 - After&nbsp;</td>
-							<td width="70%">
-                                        <label> <select name="breakafter2" id="breakafter2"
-									style="width: 180px">
-										<option selected ></option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-										
-								</select>
-
-							</label> 
-							
-							
-							<label class="extraLabels">&nbsp;&nbsp;&nbsp;&nbsp;Duration of Break<label>
-							<label> <select name="breakduration2" id="breakduration2"
-									style="width: 80px">
-										<option selected>Hour</option>
-										<option value="0">0hr</option>
-										<option value="1">1hr</option>
-										<option value="2">2hr</option>
-								</select>
-							</label>
-							<label> <select name="periodduration2min" id="periodduration2min"
-									style="width: 80px">
-										<option selected>Minuts</option>
-										<option value="00">00</option>
-										<option value="05">05</option>
-										<option value="10">10</option>
-										<option value="15">15</option>
-										<option value="20">20</option>
-										<option value="25">25</option>
-										<option value="30">30</option>
-										<option value="35">35</option>
-										<option value="40">40</option>
-										<option value="45">45</option>
-										<option value="50">50</option>
-										<option value="55">55</option>
-								</select>
-							</label>
-							</td>
-						</tr>
-						
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr style="display: none;" id="tr3">
-							<td class="alignRightFields">Break 3 - After&nbsp;</td>
-							<td width="70%">
-                                        <label> <select name="breakafter3" id="breakafter3"
-									style="width: 180px">
-										<option selected ></option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-										
-								</select>
-
-							</label> 
-							
-							
-							<label class="extraLabels">&nbsp;&nbsp;&nbsp;&nbsp;Duration of Break<label>
-							<label> <select name="periodduration3" id="periodduration3"
-									style="width: 80px">
-										<option selected>Hour</option>
-										<option value="0">0hr</option>
-										<option value="1">1hr</option>
-										<option value="2">2hr</option>
-								</select>
-							</label>
-							<label> <select name="periodduration3min" id="periodduration3min"
-									style="width: 80px">
-										<option selected>Minuts</option>
-										<option value="00">00</option>
-										<option value="05">05</option>
-										<option value="10">10</option>
-										<option value="15">15</option>
-										<option value="20">20</option>
-										<option value="25">25</option>
-										<option value="30">30</option>
-										<option value="35">35</option>
-										<option value="40">40</option>
-										<option value="45">45</option>
-										<option value="50">50</option>
-										<option value="55">55</option>
-								</select>
-							</label>
-							</td>
-						</tr> -->
-							<tr>
-
-							<td width="12%" align="left" class="alignRightFields" style="font-weight: bold;color:#325F6D">&nbsp;&nbsp;&nbsp;
-							<button id="addScheduleNew">Add</button></td>
-							<td><button id="removeSchedule">Remove</button></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						<TABLE id="dataTableNew" class="timetable" width="100%" border="1" >
-                 <thead>
-                    
-                </thead>
-                <!-- <tbody>
-                </tbody> -->
-                            </TABLE>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-
-							<td class="alignRight"></td>
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="save">Save</button>
-							</td>
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>						
-						
-						
-												
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-					</table>
-				</div>
-			</div>
-		</div>
 
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search Result </td>
+					<td class="headerTD">Staff's List</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -1114,16 +613,10 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Classes<img
+						<th title="click to sort" class="headerText">Staff Name<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
-						<th title="click to sort" class="headerText">Day Start Time<img
-							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
-							<th title="click to sort" class="headerText">Day End Time<img
-							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
-						<th title="click to sort" class="headerText">Total No Of Periods<img
+						<th title="click to sort" class="headerText">Department<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
 					</tr>
@@ -1131,15 +624,13 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 
-					<c:forEach items="${periodmasterlist}" var="periodmasterlist">
+					<c:forEach items="${employeeList}" var="employeelist">
 
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
-							<td class="dataText"><input type="checkbox" id="<c:out value="${periodmasterlist.idperiodmaster}"/>" class="chcktbl" name="idperiodmaster" value="<c:out value="${periodmasterlist.idperiodmaster}"/>" /></td>
-							<td class="dataText"><a class="dataTextInActive" href="Controller?process=PeriodProcess&action=viewTimeTable&id=<c:out value="${periodmasterlist.idperiodmaster}" />"><c:out value="${periodmasterlist.class_}" /></a></td>
-							<td class="dataText"><c:out value="${periodmasterlist.daystart}" /></td>
-							<td class="dataText"><c:out value="${periodmasterlist.dayend}" /></td>
-							<td class="dataText"><c:out value="${periodmasterlist.totalperiods}" /></td>
+							<td class="dataText"><input type="checkbox" id="<c:out value="${employeelist.tid}"/>" class="chcktbl" name="staffid" value="<c:out value="${employeelist.tid}"/>" /></td>
+							<td class="dataText"><a class="dataTextInActive" href="Controller?process=PeriodProcess&action=viewTeacherTimeTable&teachername=<c:out value="${employeelist.teachername}" />"><c:out value="${employeelist.teachername}" /></a></td>
+							<td class="dataText"><c:out value="${employeelist.department}" /></td>
 						</tr>
 					</c:forEach>
 
