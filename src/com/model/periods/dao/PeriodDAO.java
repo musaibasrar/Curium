@@ -79,7 +79,7 @@ public class PeriodDAO {
 			Periodmaster periodMaster = new Periodmaster();
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Periodmaster where idperiodmaster="+periodMasterid);
+			Query query = session.createQuery("from Periodmaster where idperiodmaster="+periodMasterid).setCacheable(true).setCacheRegion("commonregion");
 			periodMaster = (Periodmaster) query.uniqueResult();
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
@@ -121,6 +121,21 @@ public class PeriodDAO {
 			HibernateUtil.closeSession();
 		}
 		return false;
+	}
+
+	public List<Perioddetails> getPeriodDetailsForTeacher(String teacherName) {
+		
+		List<Perioddetails> periodDetailsList = new ArrayList<Perioddetails>();
+		try {
+			transaction = session.beginTransaction();
+			periodDetailsList = session.createQuery("from Perioddetails where staff='"+teacherName+"' order by idperioddetails ASC").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return periodDetailsList;
 	}
 	
 }
