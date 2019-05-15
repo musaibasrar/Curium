@@ -508,7 +508,8 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
                 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
                 <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
-                <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
+                <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTimeTable" style="font-size: 12px;">Class Time Table</a><br/>
+                <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
