@@ -224,72 +224,6 @@
 -->
 </style>
 
-<script type="text/javascript">
-	function dropdown() {
-		var listitem = document.getElementById("city");
-		var listitemtext = listitem.options[listitem.selectedIndex].text;
-
-		if (listitemtext == "Add New") {
-			document.getElementById("city").style.display = "none";
-			document.getElementById("addcity").style.display = '';
-		}
-	}
-
-	function dropdownclass() {
-
-		var classlistitem = document.getElementById("classsec");
-		var classlistitemtext = classlistitem.options[classlistitem.selectedIndex].text;
-
-		if (classlistitemtext == "Add New") {
-			document.getElementById("classsec").style.display = "none";
-			document.getElementById("addclass").style.display = '';
-			document.getElementById("addsec").style.display = '';
-		}
-
-	}
-
-	function dropdownadmclass() {
-
-		var classlistitem = document.getElementById("admclass");
-		var classlistitemtext = classlistitem.options[classlistitem.selectedIndex].text;
-
-		if (classlistitemtext == "Add New") {
-			document.getElementById("admclass").style.display = "none";
-			document.getElementById("admclassE").style.display = '';
-			document.getElementById("addsecE").style.display = '';
-		}
-
-	}
-
-	function issues() {
-
-		var distlistitem = document.getElementById("subscriptionfor");
-		var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
-
-		if (distlistitemtext == "1 year") {
-			document.getElementById("noofissues").value = "24";
-		} else if (distlistitemtext == "2 years") {
-			document.getElementById("noofissues").value = "48";
-		} else if (distlistitemtext == "3 years") {
-			document.getElementById("noofissues").value = "72";
-		} else if (distlistitemtext == "5 years") {
-			document.getElementById("noofissues").value = "120";
-		} else if (distlistitemtext == "Life Time") {
-			document.getElementById("noofissues").value = "240";
-		}
-
-	}
-
-	function calculateIssues() {
-
-		var totalissues = document.getElementById("noofissues").value;
-		var fromissues = document.getElementById("fromkmissueno").value;
-
-		var toissues = parseInt(totalissues, 10) + parseInt(fromissues, 10) - 1;
-		document.getElementById("tokmissueno").value = toissues;
-
-	}
-</script>
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script src="JavaScript/actb.js"></script>
@@ -380,16 +314,6 @@
 
 		reg = /[^a-z]/g;
 		obj.value = obj.value.replace(reg, "");
-	}
-
-	function noofissues() {
-		var issues = document.getElementById("noofissues");
-		var issuestext = issues.options[issues.selectedIndex].text;
-
-		if (issuestext == "1 year") {
-
-		}
-
 	}
 
 	function validateContact() {
@@ -597,22 +521,6 @@
 		return xmlHttp;
 	}
 
-	function watermark(inputId, text) {
-		var inputBox = document.getElementById(inputId);
-		if (inputBox.value.length > 0) {
-			if (inputBox.value == text)
-				inputBox.value = '';
-		} else
-			inputBox.value = text;
-	}
-	function watermark2(inputId, text) {
-		var inputBox = document.getElementById(inputId);
-		if (inputBox.value.length > 0) {
-			if (inputBox.value == text)
-				inputBox.value = '';
-		} else
-			inputBox.value = text;
-	}
 </script>
 </head>
 <%
@@ -668,8 +576,8 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft">&nbsp;Male<input
 								type="checkbox" value="male" name="gender" id="yes:male"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
-								type="checkbox" value="female" name="gender" id="no:female"
-								onclick="noCheck(this.id);" />
+								type="checkbox" value="female" name="gender" id="no:male"
+								onclick="noCheck(this.id)" />
 							</td>
 						</tr>
 						<tr>

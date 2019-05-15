@@ -246,10 +246,11 @@
 	border-radius: 3px;
 	font-family: Tahoma;
 	color: #4b6a84;
-	font-size: 13px;
+	font-size: 16px;
 	letter-spacing: normal;
 	text-align: center;
 	background-color: #E3EFFF;
+	font-weight: bold;
 }
 
 .dataTextInActive {
@@ -461,7 +462,7 @@ for(Cookie cookie : cookies){
 		<div>
 			<table width="100%">
 				<tr>
-					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;${timetable.class_}</td>
+					<td class="headerTD">${teachername}&nbsp;&nbsp;&nbsp;&nbsp;TIME TABLE</td>
 				</tr>
 			</table>
 			<table width="100%" border="1" style="border-color: #4b6a84;"
@@ -470,18 +471,45 @@ for(Cookie cookie : cookies){
 				
 
 				<tbody>
-					<c:forEach items="${periodmap}" var="periodmap">
+					<c:forEach items="${teacherperiodmasterlist}" var="teacherperiodmasterlist" varStatus="status">
 
-						<tr style="border-color: #000000" border="1" cellpadding="1"
-							cellspacing="1">
-							<td class="dataText"><c:out value="${periodmap.key}" /></td>
-							<c:forEach items="${periodmap.value}" var="periodmapvalue">
+						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+
+							<c:if test="${status.index==0}">
+							<td class="dataText">Monday</td>
+							</c:if>
+							<c:if test="${status.index==1}">
+							<td class="dataText">Tuesday</td>
+							</c:if>
+							<c:if test="${status.index==2}">
+							<td class="dataText">Wednesday</td>
+							</c:if>
+							<c:if test="${status.index==3}">
+							<td class="dataText">Thursday</td>
+							</c:if>
+							<c:if test="${status.index==4}">
+							<td class="dataText">Friday</td>
+							</c:if>
+							<c:if test="${status.index==5}">
+							<td class="dataText">Saturday</td>
+							</c:if>
+							<c:if test="${status.index==6}">
+							<td class="dataText">Sunday</td>
+							</c:if>
+							
+							<c:forEach var="entry" items="${teacherperiodmasterlist}">
+							<td class="dataText">Period-<label style="font-weight: bold;font-size: 18px">${entry.key}</label>
+							<br>Class-<label><c:out value="${entry.value}" /></label>
+							</td>
+           					 </c:forEach>
+							
+							<%-- <c:forEach items="${periodmap.value}" var="periodmapvalue">
 							<td class="dataText"><label><c:out value="${periodmapvalue.periods}" /></label><br><label><c:out value="${periodmapvalue.subject}" />
 							<br><label><c:out value="${periodmapvalue.staff}" />
 							</label>
 							<br><label><c:out value="${periodmapvalue.timings}" /></label>
 							</td>
-							</c:forEach>
+							</c:forEach> --%>
 							
 						</tr>
 					</c:forEach>
