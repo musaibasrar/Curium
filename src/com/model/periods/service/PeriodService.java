@@ -1,12 +1,11 @@
 package com.model.periods.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,18 +13,14 @@ import javax.servlet.http.HttpSession;
 
 import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
-import com.model.documents.dao.DocumentDAO;
-import com.model.documents.dto.Transfercertificate;
 import com.model.employee.service.EmployeeService;
 import com.model.parents.dto.Parents;
 import com.model.periods.dao.PeriodDAO;
 import com.model.periods.dto.Perioddetails;
 import com.model.periods.dto.Periodmaster;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
+import com.model.std.service.StandardService;
 import com.model.subjectdetails.service.SubjectDetailsService;
 import com.util.DataUtil;
-import com.util.DateUtil;
 
 public class PeriodService {
 
@@ -56,7 +51,7 @@ public class PeriodService {
 	                new SubjectDetailsService(request, response).readListOfSubjects();
 	                
 	                new EmployeeService(request, response).ViewAllEmployee();
-	               
+	                new StandardService(request, response).viewClasses();
 	                periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	                request.setAttribute("periodmasterlist", periodMaster);
 		    
@@ -118,11 +113,7 @@ public class PeriodService {
 		List<Perioddetails> periodDetailsList = new ArrayList<Perioddetails>();
 		Periodmaster periodMaster = new Periodmaster();
 		periodMaster.setAcademicyear(academicYear);
-		if(!fromClass.equalsIgnoreCase(toClass) || toClass!=""){
-			periodMaster.setClass_(fromClass+"-"+toClass);
-		}else{
-			periodMaster.setClass_(fromClass);
-		}
+		periodMaster.setClass_(fromClass);
 		periodMaster.setDaystart(dayStartTimeHr+":"+dayStartTimeMin+" "+dayStartAm);
 		periodMaster.setDayend(dayEndTimeHr+":"+dayEndTimeMin+" "+dayEndAm);
 		periodMaster.setDurationofperiod(durationOfPeriodsHr+":"+durationOfPeriodsMin);
@@ -242,5 +233,84 @@ public class PeriodService {
 		return true;
 		
 	
+	}
+
+
+	public boolean viewTeacherTimeTable() {
+		
+		boolean result = false;
+		List<Map> periodMapList = new LinkedList<Map>();
+		
+		Map<String,String> mondayMap = new HashMap<String,String>();
+		Map<String,String> tuesdayMap = new HashMap<String,String>();
+		Map<String,String> wednesdayMap = new HashMap<String,String>();
+		Map<String,String> thursdayMap = new HashMap<String,String>();
+		Map<String,String> fridayMap = new HashMap<String,String>();
+		Map<String,String> saturdayMap = new HashMap<String,String>();
+		Map<String,String> sundayMap = new HashMap<String,String>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			String teacherName = request.getParameter("teachername");
+			List<Perioddetails> periodDetailsList = new PeriodDAO().getPeriodDetailsForTeacher(teacherName);
+			
+			for (Perioddetails perioddetails : periodDetailsList) {
+				
+				Periodmaster periodMaster = new PeriodDAO().getTimeTable(perioddetails.getPeriodmasterid().toString());
+				
+				if("monday".equalsIgnoreCase(perioddetails.getDays())) {
+					String periodNo = perioddetails.getPeriods();
+					mondayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClass_());
+				}else if("tuesday".equalsIgnoreCase(perioddetails.getDays())) {
+					String periodNo = perioddetails.getPeriods();
+					tuesdayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClass_());
+				}else if("wednesday".equalsIgnoreCase(perioddetails.getDays())) {
+					String periodNo = perioddetails.getPeriods();
+					wednesdayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClass_());
+				}else if("thursday".equalsIgnoreCase(perioddetails.getDays())) {
+					String periodNo = perioddetails.getPeriods();
+					thursdayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClass_());
+				}else if("friday".equalsIgnoreCase(perioddetails.getDays())) {
+					String periodNo = perioddetails.getPeriods();
+					fridayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClass_());
+				}else if("saturday".equalsIgnoreCase(perioddetails.getDays())) {
+					String periodNo = perioddetails.getPeriods();
+					saturdayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClass_());
+				}else if("sunday".equalsIgnoreCase(perioddetails.getDays())) {
+					String periodNo = perioddetails.getPeriods();
+					sundayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClass_());
+				}
+				
+			}
+			
+			if(!mondayMap.isEmpty()) {
+				periodMapList.add(mondayMap);
+			}
+			if(!tuesdayMap.isEmpty()) {
+				periodMapList.add(tuesdayMap);
+			}
+			if(!wednesdayMap.isEmpty()) {
+				periodMapList.add(wednesdayMap);
+			}
+			if(!thursdayMap.isEmpty()) {
+				periodMapList.add(thursdayMap);
+			}
+			if(!fridayMap.isEmpty()) {
+				periodMapList.add(fridayMap);
+			}
+			if(!saturdayMap.isEmpty()) {
+				periodMapList.add(saturdayMap);
+			}
+			if(!sundayMap.isEmpty()) {
+				periodMapList.add(sundayMap);
+			}
+			
+			request.setAttribute("teachername", teacherName);
+			request.setAttribute("teacherperiodmasterlist", periodMapList);
+			
+			result = true;
+		}
+		
+		
+		return result;
 	}
 }

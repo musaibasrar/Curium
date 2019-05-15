@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.model.documents.service.DocumentService;
+import com.model.employee.service.EmployeeService;
 import com.model.feescategory.service.FeesService;
 import com.model.periods.service.PeriodService;
 import com.model.stampfees.service.StampFeesService;
@@ -44,10 +45,31 @@ public class PeriodAction {
 			url = deletePeriods();
 		}else if ("generateTimeTable".equalsIgnoreCase(action)) {
 			url = generateTimeTable();
+		}else if ("generateTeacherTimeTable".equalsIgnoreCase(action)) {
+			url = generateTeacherTimeTable();
+		}else if ("viewTeacherTimeTable".equalsIgnoreCase(action)) {
+			url = viewTeacherTimeTable();
 		}
 		return url;
 	}
 	
+
+	private String viewTeacherTimeTable() {
+		
+		if(new PeriodService(request, response).viewTeacherTimeTable()){
+			return "teachertimetableview.jsp";
+		}
+		return error;
+		
+	}
+
+	private String generateTeacherTimeTable() {
+		
+		if(new EmployeeService(request, response).ViewAllEmployee()){
+			return "teachertimetable.jsp";
+		}
+		return error;
+	}
 
 	private String generateTimeTable() {
 		
