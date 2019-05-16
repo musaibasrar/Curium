@@ -638,6 +638,7 @@ for(Cookie cookie : cookies){
 							<td width="28%"> <label>Class: <select name="addclass" id="addclass"
 									style="width: 120px">
 										<option selected></option>
+										<option>ALL</option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
 											<option value="${classdetailslist.classdetails}" >
@@ -651,7 +652,7 @@ for(Cookie cookie : cookies){
 									<select name="addsec" id="addsec"
 									style=" width: 120px">
 										<option selected></option>
-
+										<option>ALL</option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.section != '')}">
 											<option value="${classdetailslist.section}">
