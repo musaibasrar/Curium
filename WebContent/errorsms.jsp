@@ -81,12 +81,12 @@ for(Cookie cookie : cookies){
 }
 %>
     <body background="images/bg.jpg" >
-        <form id="form1" action=""  method="post">
+        <form id="form1" action="Controller?process=SMSProcess&action=sendSMS"  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
         <td height="250" align="center" valign="middle"><p class="style1" style="color:red;font-size: 20px;">SMS sending failed</p>
         <p class="style1">
-            <input type="button" value="Resend SMS" id="sendsmspage" onClick="JavaScript:window.location='sendsmssearch.jsp';">
+            <input type="submit" value="Resend SMS" id="sendsmspage">
         </p></td>
       </tr>
     </table>
