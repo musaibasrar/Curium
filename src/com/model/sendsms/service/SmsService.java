@@ -3,7 +3,9 @@ package com.model.sendsms.service;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -15,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
 import com.model.employee.dao.EmployeeDAO;
@@ -22,6 +27,7 @@ import com.model.employee.dto.Teacher;
 import com.model.parents.dto.Parents;
 import com.model.sendsms.dao.SmsDAO;
 import com.util.DataUtil;
+import com.util.Session;
 
 public class SmsService {
 	
@@ -30,6 +36,7 @@ public class SmsService {
 	    private HttpSession httpSession;
 	    
 	private static DecimalFormat df2 = new DecimalFormat(".##");
+	 private static final Logger logger = LogManager.getLogger(SmsService.class);
 	
 	public SmsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -74,10 +81,10 @@ public class SmsService {
 			queryMain = queryMain+querySub;
 
 			double totalNumbers = new SmsDAO().countNumbers(queryMain);
-			String resultSMS=null;
+			int resultSMS=0;
 			int iterations = (int) Math.ceil(totalNumbers/100);
 			
-			System.out.println("main query:"+queryMain);
+			logger.info("main query:"+queryMain);
 			
 			for(int i=0;i<iterations;i++){
 				List<Parents> parentsContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
@@ -92,13 +99,13 @@ public class SmsService {
 						}
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
-						System.out.println("Numbers are *** "+numbers);
+						logger.info("Numbers are *** "+numbers);
 						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebody")));
 					}
 					
 				offset = offset+100;
 			}
-			if(resultSMS!=null && resultSMS.contains("success")){
+			if(resultSMS==200){
 				result = true;
 			}
 		}
@@ -112,8 +119,8 @@ public class SmsService {
 		
 		boolean result=false;
 		String numbers = DataUtil.emptyString(request.getParameter("numbers"));
-		String resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodynumbers")));
-		if(resultSMS!=null && resultSMS.contains("success")){
+		int resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodynumbers")));
+		if(resultSMS==200){
 			result = true;
 		}
 		return result;
@@ -123,7 +130,7 @@ public class SmsService {
 	public boolean sendStaffSMS() {
 		
 		boolean result=false;
-		String resultSMS = null;		
+		int resultSMS=0;		
 		List<Teacher> teacherContacts = new EmployeeDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 
 		String numbers = null;
@@ -136,62 +143,75 @@ public class SmsService {
 				}
 				numbers=sbN.toString();
 				numbers = numbers.substring(0, numbers.length()-1);
-				System.out.println("Numbers are *** "+numbers);
+				logger.info("Numbers are *** "+numbers);
 				resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodystaff")));
 			}
 		
-		if(resultSMS!=null && resultSMS.contains("success")){
+		if(resultSMS==200){
 			result = true;
 		}
 		return result;
 	}
 	
-	public String sendSMS(String numbers, String message) {
-		String sResult1="";
-		
+	public int sendSMS(String numbers, String message) {
+		int responseCode = 0;
 		try 
 		{
 			Properties properties = new Properties();
 	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
 	        properties.load(inputStream);
 	        String smsuser = properties.getProperty("smsuser");
-	        String smspassword = properties.getProperty("smspassword");
 	        String smssender = properties.getProperty("smssender");
+	        String apikey = properties.getProperty("apikey");
 	        
+	      
 		// Construct data
 		String phonenumbers=numbers;
-		String data="user=" + URLEncoder.encode(smsuser, "UTF-8");
-		data +="&password=" + URLEncoder.encode(smspassword, "UTF-8");
-		data +="&message=" + URLEncoder.encode(message, "UTF-8");
-		data +="&sender=" + URLEncoder.encode(smssender, "UTF-8");
-		data +="&mobile=" + URLEncoder.encode(phonenumbers, "UTF-8");
-		data +="&type=" + URLEncoder.encode("3", "UTF-8");
+		String data="username=" + smsuser;
+		data +="&message=" + message;
+		data +="&sendername=" + smssender;
+		data +="&smstype=" + "TRANS";
+		data +="&numbers=" + phonenumbers;
+		data +="&apikey=" + apikey;
 		// Send data
-		URL url = new URL("http://login.bulksmsgateway.in/sendmessage.php?"+data);
-		URLConnection conn = url.openConnection();
-		conn.setDoOutput(true);
-		OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-		wr.write(data);
-		wr.flush();
-		// Get the response
-		BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		String line;
 		
-		while ((line = rd.readLine()) != null) 
-		{
-		// Process line...
-		sResult1=sResult1+line+" ";
-		}
-		wr.close();
-		rd.close();
-		return sResult1;
-		} 
+		String POST_URL = "http://sms.bulksmsind.in/sendSMS?"+data;
+        URL obj = new URL(POST_URL);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		con.setRequestMethod("POST");
+
+		// For POST only - START
+		con.setDoOutput(true);
+		OutputStream os = con.getOutputStream();
+		os.write("CURIUM".getBytes());
+		os.flush();
+		os.close();
+		// For POST only - END
+
+		responseCode = con.getResponseCode();
+		logger.info("POST Response Code :: " + responseCode);
+
+		if (responseCode == HttpURLConnection.HTTP_OK) { //success
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					con.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+
+			// print result
+			logger.info(response.toString());
+		} else {
+			logger.info("POST request not worked");
+		}}
 		catch (Exception e)
 		{
-		System.out.println("Error SMS "+e);
-		return "Error "+e;
+		logger.info("Error SMS "+e);
 		}
-	
+		return responseCode;
 	}
 	
 }
