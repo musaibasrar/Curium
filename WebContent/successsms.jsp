@@ -65,12 +65,12 @@
         </script>
 </head>
     <body background="images/bg.jpg" >
-        <form id="form1" action=""  method="post">
+        <form id="form1" action="Controller?process=SMSProcess&action=sendSMS"  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
         <td height="250" align="center" valign="middle"><p class="style1">SMS sent successfully</p>
         <p class="style1">
-            <input type="button" value="Send SMS" id="sendsmspage" onClick="JavaScript:window.location='sendsmssearch.jsp';">
+            <input type="submit" value="Send SMS" id="sendsmspage">
         </p></td>
       </tr>
     </table>
