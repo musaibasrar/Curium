@@ -266,11 +266,11 @@ public class ExamDetailsService {
 		
 		List<Parents> studentList = new ArrayList<Parents>();
 		List<Examschedule> examscheduleList = new ArrayList<Examschedule>();
+		String classStudying = DataUtil.emptyString(request.getParameter("class"));
+		classStudying = classStudying+"--" +"%";
 		
 		if(admNo==""){
-			studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.classstudying LIKE '" + 
-					DataUtil.emptyString(request.getParameter("class"))	
-				+ " %'");
+			studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.classstudying LIKE '"+classStudying+"'");
 		}else{
 			Parents parent = new Parents();
 			Student student = new Student();
