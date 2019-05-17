@@ -243,7 +243,11 @@ for(Cookie cookie : cookies){
 											
                             <tr style="border-color:#000000">
                                 <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.name}"/></label></td>
-                                <td class="namedetails"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><c:out value="${Parents.student.classstudying}"/></td>
+                                <td class="namedetails"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
+						    ${splt} 
+							</c:forEach>
+                                </td>
                                 
                              </tr>
                              
