@@ -58,11 +58,20 @@
 	text-align: left;
 }
 
-.dataTextBoldCenter {
+.dataTextBoldCenter{
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 32px;
+	font-size: 36px;
+	letter-spacing: normal;
+	text-align: center;
+}
+
+.preprimary{
+	font-weight: bold;
+	font-family: Tahoma;
+	color: black;
+	font-size: 24px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -149,9 +158,9 @@
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
+             margin-bottom: 1cm;
              margin-top: 0cm;
         }
 
@@ -176,15 +185,20 @@
 		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
+				<td width="10%;"></td>
 				<td align="left">
-				<img src="images/cambridgelogo.jpg" width="200" height="150"/>
+				<img src="images/theageheaderlogo.png" width="200" height="150"/>
 				</td> 
+				<td></td><td></td>
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;Cambridge School Yadgir </label><br>
-				<label class="addressLine">Behind Mohan Complex, Chittapur Road, Yadgir - 585202<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											Dist - Yadgir (K.S.) Cell: 9880012654 
-				 </label>
+				<label class="addressLine">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				Al-Asr Trust (R)<br></label>
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;The Age&nbsp;&nbsp;</label><label class="preprimary">Pre & Primary School</label><br>
+				<label class="addressLine">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				BASAVAKALYAN - 585327, <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dist. Bidar. (K.S.) ph: 9035364030/9590952550</label>
 				</td>
 			</tr>
 </table>

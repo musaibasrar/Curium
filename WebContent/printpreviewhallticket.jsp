@@ -53,7 +53,7 @@
 	font-weight: normal;
 	font-family: Tahoma;
 	color: black;
-	font-size: 12px;
+	font-size: 18px;
 	letter-spacing: normal;
 	text-align: left;
 }
@@ -80,6 +80,24 @@
 	font-family: Tahoma;
 	color: black;
 	font-size: 12px;
+	letter-spacing: normal;
+	text-align: center;
+}
+
+.theage{
+	font-weight: bold;
+	font-family: Tahoma;
+	color: black;
+	font-size: 32px;
+	letter-spacing: normal;
+	text-align: center;
+}
+
+.preprimary{
+	font-weight: bold;
+	font-family: Tahoma;
+	color: black;
+	font-size: 22px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -153,7 +171,7 @@ span{
              margin-left:  0cm;
              margin-right: 0cm;
              margin-bottom: 0cm;
-             margin-top: 0cm;
+             margin-top: 1cm;
         }
 
         @media screen {
@@ -180,7 +198,7 @@ span{
         }
     </style>
 	
-        <title>Print Hall Ticket</title>
+        <title>Hall Ticket</title>
         
 </head>
   <%
@@ -202,18 +220,22 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
-                        <c:forEach items="${studentList}" var="Parents">
+         
+         <c:forEach items="${studentList}" var="Parents">
                         
-                        	<table width="100%" style="border-collapse: collapse;">
-			<tr>
-				<td class="dataTextBoldCenter" style="width: 100%">
+          <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">  
+          <table width="100%" style="border-collapse: collapse;">
+			<tr align="center">
+				<td width="20%;"></td>
+				<td>
+				<img src="images/theageheaderlogo.png" width="80" height="80"/>
+				</td>
+				<td class="dataTextBoldLeft">
+				<label class="theage">&nbsp;&nbsp;The Age&nbsp;&nbsp;</label><label class="preprimary">Pre & Primary School</label><br>
+				<label class="addressLine">BASAVAKALYAN - 585327, Dist. Bidar. (K.S.) ph: 9035364030/9590952550</label>
 				
-				Divine M.A. English Higher Primary & High School </td>
+				</td>
 			</tr>
-			<tr>
-			<td class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</td>
-			</tr>
-
 			<tr>
 			<td></td></tr>
 			<tr></tr>
@@ -309,7 +331,7 @@ for(Cookie cookie : cookies){
 			</tr>
 			
 			<tr>
-                        <td align="center"><br><br><br><br><br></td>
+                        <td align="center"><br></td>
                     </tr>
              
              <tr>
@@ -321,7 +343,7 @@ for(Cookie cookie : cookies){
              </tr>
                     
 		</TABLE>
-                                 
+                   </div>               
                         </c:forEach>
 			
 	</form>
