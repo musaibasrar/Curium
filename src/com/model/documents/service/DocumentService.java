@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -278,7 +280,7 @@ public class DocumentService {
 						new Object[] { studentDetails.getStudent().getAdmissionnumber(), studentDetails.getStudent().getCrecord()+"/"+studentDetails.getStudent().getCrecorddate(),
 								studentDetails.getStudent().getName(),
 								studentDetails.getStudent().getGender(),
-								studentDetails.getStudent().getDateofbirth().toString(),
+								getStringDate(studentDetails.getStudent().getDateofbirth()),
 								studentDetails.getFathersname()+" / "+studentDetails.getMothersname(),
 								studentDetails.getParentsannualincome(),
 								studentDetails.getNoofdependents(),
@@ -290,10 +292,10 @@ public class DocumentService {
 								studentDetails.getStudent().getStdlaststudied(),
 								studentDetails.getStudent().getNooftc()+"/"+studentDetails.getStudent().getDateoftc(),
 								studentDetails.getStudent().getClassadmittedin(),
-								studentDetails.getStudent().getAdmissiondate().toString(),
+								getStringDate(studentDetails.getStudent().getAdmissiondate()),
 								studentDetails.getStudent().getSubsequentprogress(),
 								studentDetails.getStudent().getClassonleaving(),
-								studentDetails.getStudent().getDateleaving().toString(),
+								getStringDate(studentDetails.getStudent().getDateleaving()),
 								studentDetails.getStudent().getReasonleaving(),
 								studentDetails.getStudent().getNotcissued()+"/"+studentDetails.getStudent().getDatetcissued(),
 								studentDetails.getStudent().getRemarks()});
@@ -423,7 +425,7 @@ public class DocumentService {
 			}
 			
 			
-				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"admissionabstract.xlsx"));
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/admissionabstract.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;
@@ -435,11 +437,21 @@ public class DocumentService {
 	}
 
 
+	private Object getStringDate(Date date) {
+		
+		if(date!=null) {
+		    SimpleDateFormat formatter=new SimpleDateFormat("dd/MM/yyyy");  
+			return formatter.format(date);
+		}
+		return null;
+	}
+
+
 	public boolean downlaodFile() {
 		boolean result = false;
 		try {
 
-			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"admissionabstract.xlsx");
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/admissionabstract.xlsx");
 	        FileInputStream inStream = new FileInputStream(downloadFile);
 
 	        // get MIME type of the file
