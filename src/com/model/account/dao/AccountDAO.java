@@ -512,10 +512,10 @@ public class AccountDAO {
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return accountDetails;
-	}finally {
-		HibernateUtil.closeSession();
 	}
 
 	public List<Accountssgroupmaster> getListAccountSSGroupMaster(int accountSubGroupMasterId, int branchId) {
