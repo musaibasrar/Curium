@@ -34,7 +34,7 @@ public class AdminService {
 			adminexpenses.setQuantity(DataUtil.parseInt(request.getParameter("quantity")));
 			adminexpenses.setPriceofitem(DataUtil.parseInt(request.getParameter("price")));
 			adminexpenses.setEntrydate(DateUtil.simpleDateParser(request.getParameter("entrydate")));
-			
+			adminexpenses.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			
 			if(!adminexpenses.getItemDescription().equalsIgnoreCase("") && adminexpenses.getQuantity() != 0
 					&& adminexpenses.getPriceofitem() != 0				
