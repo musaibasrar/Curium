@@ -46,6 +46,8 @@ public class MarksDetailsService {
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private String BRANCHID = "branchid";
 	
+	private static final int BUFFER_SIZE = 4096;
+	
 	public MarksDetailsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
@@ -516,14 +518,12 @@ public class MarksDetailsService {
 
 	private boolean writeToReportCard(String[][] marksList) throws Exception {
 		boolean result = false;
-		if (copyReportCard()) {
 
 			try {
-				FileInputStream inputStream = new FileInputStream(
-						new File(new DataUtil().getPropertiesValue("reportcardpathdirectory")));
-				String pathOfReportCard = new DataUtil().getPropertiesValue("reportcardpathdirectory");
-				httpSession.setAttribute("reportcardpath", pathOfReportCard);
-				Workbook workbook = WorkbookFactory.create(inputStream);
+								
+				InputStream is = this.getClass().getClassLoader().getResourceAsStream("ReportCard.xlsx");
+									
+				Workbook workbook = WorkbookFactory.create(is);
 
 				Sheet sheet = workbook.getSheetAt(1);
 
@@ -560,54 +560,18 @@ public class MarksDetailsService {
 					}*/
 
 				}
-
-				inputStream.close();
-
-				FileOutputStream outputStream = new FileOutputStream(
-						new DataUtil().getPropertiesValue("reportcardpathdirectory"));
-				workbook.write(outputStream);
-				// workbook.close();
-				outputStream.close();
+				is.close();
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/reportcard.xlsx"));
+				workbook.write(out);
+				out.close();
+				
 				result = true;
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
-		}
+		
 
 		return result;
-
-	}
-
-	@SuppressWarnings("finally")
-	private boolean copyReportCard() {
-		boolean result = false;
-		InputStream is = null;
-		OutputStream os = null;
-		String destFile = new DataUtil().getPropertiesValue("reportcardpathdirectory");
-
-		try {
-			is = this.getClass().getClassLoader().getResourceAsStream("reportCardTemplate.xlsx");
-			;
-			os = new FileOutputStream(destFile);
-			byte[] buffer = new byte[1024];
-			int length;
-			while ((length = is.read(buffer)) > 0) {
-				os.write(buffer, 0, length);
-			}
-			result = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-
-			try {
-				is.close();
-				os.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return result;
-		}
 
 	}
 
@@ -615,6 +579,46 @@ public class MarksDetailsService {
 		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("studentList", studentList);
 		
+	}
+
+	public boolean downloadReportCard() {
+		boolean result = false;
+		try {
+
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/reportcard.xlsx");
+	        FileInputStream inStream = new FileInputStream(downloadFile);
+
+	        // get MIME type of the file
+			String mimeType = "application/vnd.ms-excel";
+
+			// set content attributes for the response
+			response.setContentType(mimeType);
+			// response.setContentLength((int) bis.length());
+
+			// set headers for the response
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"",
+					"reportcard.xlsx");
+			response.setHeader(headerKey, headerValue);
+
+			// get output stream of the response
+			OutputStream outStream = response.getOutputStream();
+
+			byte[] buffer = new byte[BUFFER_SIZE];
+			int bytesRead = -1;
+
+			// write bytes read from the input stream into the output stream
+			while ((bytesRead = inStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+
+			inStream.close();
+			outStream.close();
+			result = true;
+		} catch (Exception e) {
+			System.out.println("" + e);
+		}
+		return result;
 	}
 
 
