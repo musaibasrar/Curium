@@ -1403,8 +1403,8 @@ public class StudentService {
 						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
 								 DataUtil.emptyString(DateUtil.getStringDate(studentDetails.getStudent().getDateofbirth())),
 								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
-								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying()),
-								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin()),
+								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
+								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
 								 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
 								 DataUtil.emptyString(studentDetails.getStudent().getAdmissiondate().toString()),
 								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
@@ -1444,7 +1444,7 @@ public class StudentService {
 				//Local 
 				//FileOutputStream out = new FileOutputStream("D:/schoolfiles/test.xlsx");
 				//FileOutputStream out = new FileOutputStream(new File("/usr/local/tomcat/webapps/www.searchmysearch.com/musarpbiabha/studentsdetails.xlsx"));
-				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"studentsdetails.xlsx"));
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/studentsdetails.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;
@@ -1475,7 +1475,7 @@ public class StudentService {
 		boolean result = false;
 		try {
 
-			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"studentsdetails.xlsx");
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/studentsdetails.xlsx");
 	        FileInputStream inStream = new FileInputStream(downloadFile);
 
 	        // get MIME type of the file
