@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.model.examdetails.service.ExamDetailsService;
 import com.model.marksdetails.service.MarksDetailsService;
+import com.model.std.service.StandardService;
 import com.model.student.service.StudentService;
 
 public class MarksDetailsAction {
@@ -41,12 +42,27 @@ public class MarksDetailsAction {
 			url = searchForGraphicalReport();
 		}else if (action.equalsIgnoreCase("getStudentGraph")) {
 			url = getStudentGraph();
+		}else if (action.equalsIgnoreCase("progressReport")) {
+			url = progressreport();
+		}else if (action.equalsIgnoreCase("downloadReportCard")) {
+			url = downloadReportCard();
 		}
 
 		return url;
 	}
 
 	
+
+	private String downloadReportCard() {
+		new MarksDetailsService(request, response).downloadReportCard();
+            return "reportcardsaved.jsp";
+		
+	}
+
+	private String progressreport() {
+		new StandardService(request, response).viewClasses();
+		return "progressreport.jsp";
+	}
 
 	private String getStudentGraph() {
 		new MarksDetailsService(request, response).getStudentGraph();
