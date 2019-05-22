@@ -515,6 +515,26 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						
+						<tr>
+							<td width="10%" class="alignRight">Exam &nbsp;&nbsp;&nbsp;</td>
+							<td width="28%"><label> <select name="examname"
+									id="examname" style="width: 200px;">
+										<option selected></option>
+										<c:forEach items="${examdetails}" var="examdetails">
+												<option value="${examdetails.examname}">
+													<c:out value="${examdetails.examname}" />
+												</option>
+										</c:forEach>
+								</select>
+
+							</label></td>
+						</tr>
+						
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
 								<tr>
 							<td width="10%" class="alignRight">Minimum Marks &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> <input id="minmarks"
@@ -571,6 +591,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Subject Name<img
 							alt=" " style="position: relative; top: 4px;"
 							src="images/sort_both.png" /></th>
+							<th title="click to sort" class="headerText">Exam&nbsp;</th>
 							<th title="click to sort" class="headerText">Minimum Marks&nbsp;</th>
 							<th title="click to sort" class="headerText">Maximum Marks&nbsp;</th>
 						</tr>
@@ -586,8 +607,9 @@ for(Cookie cookie : cookies){
 							
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${listSubject.subid}"/>" class = "chcktbl"  name="subjectIDs"  value="<c:out value="${listSubject.subid}"/>"/></td>
 						  <td class="dataText"><c:out value="${listSubject.subjectname}" /></td>
+						  <td class="dataText"><c:out value="${listSubject.examname}" /></td>
 						  <td class="dataText"><c:out value="${listSubject.minmarks}" /></td>
-						   <td class="dataText"><c:out value="${listSubject.maxmarks}" /></td>
+						  <td class="dataText"><c:out value="${listSubject.maxmarks}" /></td>
 						</tr>
 					</c:forEach>
 
