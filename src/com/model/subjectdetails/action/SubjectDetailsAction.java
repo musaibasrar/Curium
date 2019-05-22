@@ -22,7 +22,7 @@ public class SubjectDetailsAction {
 	public String execute(String action) {
 		
 		if (action.equalsIgnoreCase("readListOfSubjects")) {
-			url = readListOfSubjects();
+			url = readListOfSubjectsExams();
 		}else if (action.equalsIgnoreCase("addSubject")) {
 			url = addSubject();
 		}else if (action.equalsIgnoreCase("deleteMultiple")) {
@@ -48,8 +48,9 @@ public class SubjectDetailsAction {
 		}
 	}
 
-	private String readListOfSubjects() {
+	private String readListOfSubjectsExams() {
 		new SubjectDetailsService(request, response).readListOfSubjects();
+		new ExamDetailsService(request, response).readListOfExams();
         System.out.println("IN action's view all Subjects");
         return "SubjectDetails.jsp";
 	}
