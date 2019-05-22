@@ -54,6 +54,7 @@ public class SubjectDetailsService {
 			subject.setSubjectname(DataUtil.emptyString(request.getParameter("subjectname")));
 			subject.setMinmarks(DataUtil.parseInt(request.getParameter("minmarks")));
 			subject.setMaxmarks(DataUtil.parseInt(request.getParameter("maxmarks")));
+			subject.setExamname(DataUtil.emptyString(request.getParameter("examname")));
 			subject.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 			subject = new SubjectDetailsDAO().addSubject(subject);
 			 
