@@ -204,22 +204,26 @@ for(Cookie cookie : cookies){
 	<form method="post" class="bodymargin">
                         <c:forEach items="${studentList}" var="Parents">
                         
-                        	<table width="100%" style="border-collapse: collapse;">
-			<tr>
-				<td class="dataTextBoldCenter" style="width: 100%">
+                        
+                         <table width="100%" style="border-collapse: collapse;">
+			<tr align="center">
+				<td width="20%;"></td>
+				<td>
+				<img src="images/curiumheader.png" width="80" height="80"/>
+				</td>
+				<td class="dataTextBoldLeft">
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				Red Rose Public School&nbsp;&nbsp;</label><br>
+				<label class="addressLine">Near Old Public Garden, Talawdi, Bidar - 585401. Ph.No: 08482-230030</label>
 				
-				Divine M.A. English Higher Primary & High School </td>
+				</td>
 			</tr>
-			<tr>
-			<td class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</td>
-			</tr>
-
 			<tr>
 			<td></td></tr>
 			<tr></tr>
-</table>
-
-<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+	</table>
+                        	
+			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
 
                     <td colspan="4" ></td>

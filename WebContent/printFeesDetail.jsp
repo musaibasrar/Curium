@@ -149,8 +149,8 @@
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
              margin-bottom: 0cm;
              margin-top: 0cm;
         }
@@ -176,14 +176,15 @@
 		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
+				<td width="20%"></td>
 				<td align="left">
-				<img src="images/cambridgelogo.jpg" width="200" height="150"/>
+				<img src="images/curiumlogin.jpg" width="200" height="150"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;Cambridge School Yadgir </label><br>
-				<label class="addressLine">Behind Mohan Complex, Chittapur Road, Yadgir - 585202<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											Dist - Yadgir (K.S.) Cell: 9880012654 
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;Red Rose Public School </label><br>
+				<label class="addressLine">&nbsp;&nbsp;Near Old Public Garden, Talawdi, Bidar - 585401<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											Ph: 08482-230030 
 				 </label>
 				</td>
 			</tr>

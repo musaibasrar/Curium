@@ -426,12 +426,11 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body onload="StartClock()" onunload="KillClock()">
-        <form name="theClock">
+    <body>
 
-            <div id="clock" class="headerTD"></div>
-        </form>
-        <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div>
+        <div class="headerTD"><label style="color: #FFFFFF;font-family: Tahoma;font-size: 16px;text-transform: uppercase;text-align: center;font-weight: bold;
+                ">${branchname}</label></div>
+		<div class="headerTD"> </div>
 
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>

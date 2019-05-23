@@ -629,15 +629,17 @@
 			<div id="tabs">
 				<ul>
 					<li><a href="#fragment-1">Student's Details</a></li>
+					<li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-2">Parent's Details</a></li>
 					<li><a href="#fragment-3">Upload Photo</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
+					<li><a href="#fragment-7">Bank Details</a></li>
 				</ul>
 
 
 
 				<div id="fragment-1">
-					<table width="100%" border="0" align="center" id="table1">
+					<table style="width: 100%;" border="0" align="center" id="table1">
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -754,30 +756,6 @@
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="30%" class="alignRight">No. of transfer
-								certificate&nbsp;</td>
-							<td width="12%" align="left"><label> <input
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									name="tcno" type="text" class="myclass" id="tcno" size="30">
-									
-							</label></td>
-									<td width="20%" class="alignRight">Date of Transfer Certificate&nbsp;</td>
-							<td width="28%"><label >
-							<input name="dateoftc" type="text" class="myclass"
-									id="dateoftc" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									data-validate="validate(required)"></label></td>
-
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -967,78 +945,16 @@
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
-							<td width="30%" class="alignRight">Was in receipt of any scholarship&nbsp;</td>
-							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
-								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
-								onclick="noCheck(this.id);" />
-
-							</td>
-							<td width="20%" class="alignRight">Adhar Card No.
-								&nbsp;</td>
-							<td width="28%"><label> <input
-									name="bplcardno" type="text" class="myclass"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									id="bplcardno" size="30">
-
-							</label></td>
-						</tr>	
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="20%" class="alignRight">Whether Vaccinated
-								&nbsp;</td>
-								<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
-								type="checkbox" value="1" name="bhagyalakshmibondnumber" id="yes:vaccinated"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="bhagyalakshmibondnumber" id="no:vaccinated"
-								onclick="noCheck(this.id);" />
-
-							</td>
-							<td width="16%" class="alignRight">Marks of Identification on Pupil's body&nbsp;</td>
-							<td width="28%"><label> <input
-									name="disabilitychild" type="text" class="myclass"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									id="disabilitychild" size="30">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
 						
 						<tr>
-							<td width="20%" class="alignRight">Special Category&nbsp;</td>
+						<td width="30%" class="alignRight">Whether Vaccinated&nbsp;</td>
+							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
+								type="checkbox" value="1" name="belongtobpl" id="yes:vaccine"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="belongtobpl" id="no:vaccine"
+								onclick="noCheck(this.id);" />
 
-							<td id="categoryname"><label> <select
-									name="specialcategory" onchange="enterOtherSpecialCategory()"
-									id="specialcategory" style="width: 256px">
-										<option selected>None</option>
-										<option></option>
-										<option>None</option>
-										<option>Destitute</option>
-										<option>HIV Case</option>
-										<option>Orphans</option>
-										<option>Others (Please Specify)</option>
-								</select>
-
-							</label></td>
-							<td width="28%" id="newcateg"
-								style="display: none;"><label> <input
-									name="newcategory" id="newcategory" type="text" class="myclass" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									placeholder="Add Other Category" />
-							</label></td>
-							
+							</td>
 							<td width="16%" class="alignRight">Mother Tongue &nbsp;</td>
 							<td width="28%">
 								<!-- <label> <input name="motherT"
@@ -1069,108 +985,30 @@
 									<td><br /></td>
 								</tr>
 								
-								<tr>
-
-
-							<td width="16%" class="alignRight">Last Class Studied &nbsp;</td>
-
-							<td width="28%"><label> <select name="lastclass" id="lastclass"
-									style="width: 256px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<option value="${classdetailslist.classdetails}">
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label></td>
-
-							<td width="20%" class="alignRight">Last School Attended
-								&nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="lastschool" type="text" class="myclass" id="lastschool"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									size="30" onblur="validateName();">
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-
-
-							<td width="16%" class="alignRight">Languages Studied &nbsp;</td>
-
-							<td width="28%"><label> <input
-									name="languagesstudied" type="text" class="myclass"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									id="languagesstudied" size="30">
-							</label></td>
-
-
-
-							<td width="20%" class="alignRight">Core Subjects Studied &nbsp;</td>
-							<td width="28%"><label> <input
-									name="progress" type="text"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									class="myclass" id="progress" size="30">
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-								
-								<tr>
-							<td width="16%" class="alignRight">Last School Medium of
-								Instruction&nbsp;</td>
-
-							<td><label> <select name="mediumofinstruction"
-									id="mediumofinstruction" style="width: 256px">
-										<option selected></option>
-										<option>Kannada</option>
-										<option>Hindi</option>
-										<option>Urdu</option>
-										<option>English</option>
-										<option>Marathi</option>
-										<option>Tamil</option>
-										<option>Telgu</option>
-								</select>
-
-							</label></td>
-							<td width="16%" class="alignRight">Last School
-								Type&nbsp;</td>
-
-							<td><label> <select name="previousschooltype"
-									id="previousschooltype" style="width: 256px">
-										<option selected></option>
-										<option>Government</option>
-										<option>Private Aided</option>
-										<option>Local Bodies</option>
-										<option>Private Unaided School</option>
-								</select>
-
-							</label></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
 						<tr>
 						
+						<td width="20%" class="alignRight">Special Category&nbsp;</td>
+
+							<td id="categoryname"><label> <select
+									name="specialcategory" onchange="enterOtherSpecialCategory()"
+									id="specialcategory" style="width: 256px">
+										<option selected>None</option>
+										<option></option>
+										<option>None</option>
+										<option>Destitute</option>
+										<option>HIV Case</option>
+										<option>Orphans</option>
+										<option>Others (Please Specify)</option>
+								</select>
+
+							</label></td>
+							<td width="28%" id="newcateg"
+								style="display: none;"><label> <input
+									name="newcategory" id="newcategory" type="text" class="myclass" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									placeholder="Add Other Category" />
+							</label></td>
+							
 							<td width="20%" class="alignRight">RTE
 										&nbsp;</td>
 
@@ -1180,29 +1018,29 @@
 								type="checkbox" value="0" name="rte" id="no:rte"
 								onclick="noCheck(this.id);" />
 										</td>
-										
-							<td width="20%" class="alignRight">Remarks &nbsp;</td>
+						</tr>
+
+					<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+								<td width="20%" class="alignRight">Remarks &nbsp;</td>
 							<td width="28%"><label> <input name="remarks"
 									type="text" class="myclass" id="remarks" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									onclick="validateNameContact();">
 							</label></td>
-						</tr>
-
-<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-										
+									
 							<td width="20%" class="alignRight">Created Date &nbsp;</td>
 							<td width="28%"><label> <input name="createddate"
 									type="text"
 									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"
 									class="myclass" id="datepickerCD" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"s
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									data-validate="validate(required)">
 							</label></td>
 							
@@ -1327,25 +1165,13 @@
 
 
 						<div id="fragment-4">
-							<table width="100%" border="0" align="center" id="table1">
+							<table>
 								<tr>
 									<td><br /></td>
 								</tr>
 								<tr>
 									<td><br /></td>
 								</tr>
-
-								<tr>
-
-									<td width="30%" class="alignRight"><label> <font
-											color="red"><div id="mydiv"></div></font>
-									</label></td>
-									<td width="20%" class="alignRight"></td>
-									<td class="alignRight"><font color="red"><div
-												id="mydivmobile"></div></font></td>
-								</tr>
-
-
 
 								<tr>
 									<td width="30%" class="alignRight">Class on leaving&nbsp;</td>
@@ -1403,7 +1229,7 @@
 
 									<td width="28%"><label> <input name="notcissued"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-											type="text" class="myclass" id="notcissued" size="30" placeholder="No. of Transfer Certificate">
+											type="text" class="myclass" id="notcissued" size="30" placeholder="Transfer Certificate No.">
 									</label></td>
 
 								</tr>
@@ -1428,10 +1254,11 @@
 								</tr>
 
 								<tr align="center">
-
-									<td width="20%" class="alignRight">&nbsp;</td>
-
-									<td align="center"><a class="prevtab"
+									<td width="40%" class="alignRight">&nbsp;</td>
+									<td align="center"><a class="nexttab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
 										href="#">Previous</a></td>
 								</tr>
@@ -1492,18 +1319,6 @@
 								<tr>
 									<td><br /></td>
 								</tr>
-
-								<tr>
-
-									<td width="30%" class="alignRight"><label> <font
-											color="red"><div id="mydiv"></div></font>
-									</label></td>
-									<td width="20%" class="alignRight"></td>
-									<td class="alignRight"><font color="red"><div
-												id="mydivmobile"></div></font></td>
-								</tr>
-
-
 
 								<tr>
 									<td width="30%" class="alignRight">Father's Name* &nbsp;</td>
@@ -1679,7 +1494,54 @@
 								<tr>
 									<td><br /></td>
 								</tr>
+								
+								<tr>
+									<td width="16%" class="alignRight">No. of Elder Brother(s)&nbsp;</td>
+									<td width="28%"><label> <input name="semester"
+											type="number" class="myclass" id="semester" 
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;width:260px;"
+											onblur="validateNameContact();">
+									</label></td>
+									<td width="20%" class="alignRight">No. of Younger Brother(s)
+										&nbsp;</td>
+									<td width="28%"><label> <input
+											name="bplcardno" type="number" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;width:260px;"
+											id="bplcardno"  onblur="validateNameContact();">
+									</label></td>
+								</tr>
+								<tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td width="16%" class="alignRight">No. of Elder Sister(s)&nbsp;</td>
+									<td width="28%"><label> <input name="bhagyalakshmibondnumber"
+											type="number" class="myclass" id="bhagyalakshmibondnumber" 
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;width:260px;"
+											onblur="validateNameContact();">
+									</label></td>
+									<td width="20%" class="alignRight">No. of Younger Sister(s)
+										&nbsp;</td>
+									<td width="28%"><label> <input
+											name="disabilitychild" type="number" class="myclass"
+											id="disabilitychild" 
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;width:260px;"
+											onblur="validateNameContact();">
+									</label></td>
+								</tr>
+								<tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
 
+								<tr>
 								<td width="16%" class="alignRight">Permanent Address &nbsp;</td>
 
 								<td width="28%"><label> <textarea
@@ -1773,13 +1635,286 @@
 									<td><br /></td>
 								</tr>
 
-
-								</div>
-								</div>
-
 							</table>
 
 						</div>
+						
+						<div id="fragment-5">
+
+							<div>
+								<table width="100%">
+									<tr>
+
+										<td><br /></td>
+									</tr>
+
+									<tr>
+							<td width="30%" class="alignRight">Transfer
+								certificate No.&nbsp;</td>
+							<td width="12%" align="left"><label> <input
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									name="tcno" type="text" class="myclass" id="tcno" size="30">
+									
+							</label></td>
+									<td width="20%" class="alignRight">Date of Transfer Certificate&nbsp;</td>
+							<td width="28%"><label >
+							<input name="dateoftc" type="text" class="myclass"
+									id="dateoftc" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									data-validate="validate(required)"></label></td>
+
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td width="16%" class="alignRight">Previous Class Studied &nbsp;</td>
+
+							<td width="28%"><label> <select name="lastclass" id="lastclass"
+									style="width: 256px">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<option value="${classdetailslist.classdetails}">
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label></td>
+
+							<td width="20%" class="alignRight">Previous School Name
+								&nbsp;</td>
+							<td width="12%" align="left"><label> <input
+									name="lastschool" type="text" class="myclass" id="lastschool"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									size="30" onblur="validateName();">
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td width="16%" class="alignRight">Languages Studied &nbsp;</td>
+
+							<td width="28%"><label> <input
+									name="languagesstudied" type="text" class="myclass"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									id="languagesstudied" size="30">
+							</label></td>
+							<td width="20%" class="alignRight">Previous School Address &nbsp;</td>
+							<td width="28%"><label>
+											<textarea
+											name="previouschooladdress" type="text" 
+											id="previouschooladdress" rows="4" cols="40"
+											></textarea>
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+								
+								<tr>
+								
+							<td width="16%" class="alignRight">Medium of
+								Instruction&nbsp;</td>
+
+							<td><label> <select name="mediumofinstruction"
+									id="mediumofinstruction" style="width: 256px">
+										<option selected></option>
+										<option>Kannada</option>
+										<option>Hindi</option>
+										<option>Urdu</option>
+										<option>English</option>
+										<option>Marathi</option>
+										<option>Tamil</option>
+										<option>Telgu</option>
+								</select>
+
+							</label></td>
+							
+								
+								
+							<td width="16%" class="alignRight">Previous School
+								Type&nbsp;</td>
+
+							<td><label> <select name="previousschooltype"
+									id="previousschooltype" style="width: 256px">
+										<option selected></option>
+										<option>Government</option>
+										<option>Private Aided</option>
+										<option>Local Bodies</option>
+										<option>Private Unaided School</option>
+								</select>
+
+							</label></td>
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+								<tr align="center">
+									<td width="40%" class="alignRight">&nbsp;</td>
+									<td align="center"><a class="nexttab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+						
+
+									<tr>
+										<td></td>
+										<td align="left">
+
+
+											<button id="savethree" class="save"
+												onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
+												onfocus="validateNameContact();validateFatherName();">Save</button>
+
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<button id="cancelthree" class="cancel">Cancel</button>
+
+										</td>
+
+
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+								</table>
+
+							</div>
+
+						</div>
+						
+						<div id="fragment-7">
+
+							<div>
+								<table width="100%">
+									<tr>
+
+										<td><br /></td>
+									</tr>
+									
+									<tr>
+								<td width="10%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight">Bank Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input name="bankname" type="text" class="myclass" id="bankname" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									>
+							</label></td>
+						</tr>
+						<tr>
+
+										<td><br /></td>
+									</tr>
+						<tr>
+								<td width="20%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight"> Bank IFSC Code&nbsp;&nbsp;
+							<input name="bankifsc" type="text" class="myclass" id="bankifsc" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									>
+							</label></td>
+						</tr>
+						<tr>
+
+										<td><br /></td>
+									</tr>
+						<tr>
+								<td width="20%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight"> Account No. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input name="accno" type="text" class="myclass" id="accno" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									">
+							</label></td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr align="left">
+
+								<tr>
+								<td></td>
+								<td align="left">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+								<tr><td><br></td></tr>
+									<tr>
+										<td></td>
+										<td align="left">
+
+
+											<button id="savethree" class="save"
+												onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
+												onfocus="validateNameContact();validateFatherName();">Save</button>
+
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<button id="cancelthree" class="cancel">Cancel</button>
+
+										</td>
+
+
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+								</table>
+
+							</div>
+
+						</div>
+						
 					</table>
 				</div>
 

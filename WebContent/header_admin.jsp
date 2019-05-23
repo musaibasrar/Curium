@@ -152,9 +152,10 @@ for(Cookie cookie : cookies){
                         <table width="100%" border="0" align="center"
 						cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
 						<tr>
-
+							<td width="2%"></td>
 							<td align="left"><img src="images/curiumheader.png"
-								style="width: 200px; height: 70px;" /></td>
+								style="width: 100px; height: 70px;" /></td>
+								<td width="4%"></td>
 							<td><a target="leftFrame" href="left_admin.jsp"> <img
 									src="images/house_home.png" width="35" height="35"
 									alt="Home" style="vertical-align: bottom;" />Home
@@ -179,7 +180,7 @@ for(Cookie cookie : cookies){
 							<td><a target="mainFrame"
 								href="Controller?process=StudentProcess&action=addNew"> <img
 									src="images/Usersw.png" width="30" height="30"
-									alt="Add New Student" style="vertical-align: bottom;" />Add New
+									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
 							<td ><a target="leftFrame" href="leftsettings.jsp">
@@ -202,7 +203,7 @@ for(Cookie cookie : cookies){
 								href="Controller?process=StudentProcess&action=viewAllStudentsWithParents"><img
 									alt="View All Students" src="images/allusersw.png" width="30"
 									height="30" style="vertical-align: bottom;"/>
-								View All
+								View Students
 							</a></td>
 							
 							<td ><a target="mainFrame"
