@@ -983,8 +983,6 @@ for(Cookie cookie : cookies){
 							
 							</td>
 							</tr>
-							
-							
 							<tr>
 							<td><br /></td>
 						</tr>
@@ -1016,15 +1014,32 @@ for(Cookie cookie : cookies){
 							</tr>
 							
 						<tr>
+							<td><br/></td>
+						</tr>
+						<tr>
+							<td><br/></td>
+						</tr>
+						
+						<tr>
+							<td width="16%" class="alignRight">Adhar Card &nbsp;</td>
 
-							<td></td>
+							<td><label> <input
+									name="stream" type="text" class="textField"
+									value="<c:out default="" value="${student.stream}" />"
+									id="stream" size="36" data-validate="validate(required)">
 
+							</label></td>
+
+						</tr>
+
+						<tr>
+							<td><br /></td>
 						</tr>
 						<tr>
 
-							<td></td>
-
+							<td><br /></td>
 						</tr>
+						
 
 						<tr>
 

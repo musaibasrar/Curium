@@ -1235,6 +1235,19 @@
 						<tr>
 							<td><br /></td>
 						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td width="20%" class="alignRight">Adhar Card&nbsp;</td>
+							<td width="28%"><label> 
+								<input name="stream" type="text" class="textField" id="stream" size="36">
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 
 						<div>
 							<table width="100%">

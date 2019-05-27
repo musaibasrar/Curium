@@ -214,6 +214,7 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("semester")) {
 		                	student.setSemester(DataUtil.parseInt(item.getString()));
 		                }
+		                //@UI 'Adhar Card'
 		                if (fieldName.equalsIgnoreCase("stream")) {
 		                	student.setStream(DataUtil.emptyString(item.getString()));
 		                }		                

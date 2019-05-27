@@ -689,7 +689,15 @@ for(Cookie cookie : cookies){
                             </td>
    
                         </tr>
-                                                
+                                 
+                         <tr>
+                            <td  width="25%"  class="alignLeft" height="50" >Adhar Card
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.stream}" />
+                            </td>
+                        </tr>
+                                       
                         <tr>
                             <td  width="25%"  class="alignLeft" height="50" >Class of leaving
                             </td>
@@ -702,8 +710,6 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows">
                                 <fmt:formatDate value="${student.dateleaving}" pattern="dd-MM-yyyy"/>
                             </td>
-                          
-                           
                         </tr>
                         
                         <tr>
