@@ -848,7 +848,8 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		queryMain = queryMain + querySub;
 		List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
 		
-		Date monthOf = DateUtil.dateParserUpdateStd(request.getParameter("monthof"));
+		
+		Date monthOf = DateUtil.dateParserddmmyyyy(request.getParameter("monthof"));
 		 
 		Calendar cStart = Calendar.getInstance();
 		cStart.setTime(monthOf);
@@ -910,6 +911,20 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			    	int totalDaysPresent = 0;
 			    	int totalDaysAbsent = 0;
 			    for (Studentdailyattendance studentdailyattendance : entry.getValue()) {
+			    			
+			    		if(studentdailyattendance.getDate().compareTo(monthOf) > 0) {
+			    			
+			    			long difference = studentdailyattendance.getDate().getTime() - monthOf.getTime();
+			 		        float daysBetween = (difference / (1000*60*60*24));
+			 		        
+			 		        	for(int j=0; j<daysBetween; j++) {
+			 		        		row.createCell(i).setCellValue("NA");
+			 				    	sheet.autoSizeColumn(i);
+			 				    	i++;
+			 		        	}
+			 		       
+			    		}
+			    	
 			    	if("P".equalsIgnoreCase(studentdailyattendance.getAttendancestatus()) || "H".equalsIgnoreCase(studentdailyattendance.getAttendancestatus())){
 			    		totalDaysPresent++;
 			    	}
@@ -919,14 +934,23 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			    	row.createCell(i).setCellValue(studentdailyattendance.getAttendancestatus());
 			    	sheet.autoSizeColumn(i);
 			    	i++;
-			    	
 				}
+			    
+			    if(i<numberOfDays) {
+			    	
+	 		        	for(int j=i; j<=numberOfDays; j++) {
+	 		        		row.createCell(i).setCellValue("NA");
+	 				    	sheet.autoSizeColumn(i);
+	 				    	i++;
+	 		        	}
+			    }
+			    
 			    
 			    row.createCell(++i).setCellValue(totalDaysPresent);
 			    row.createCell(++i).setCellValue(totalDaysAbsent);
 			}
 				
-				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"studentsmonthlyattendance.xlsx"));
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/studentsmonthlyattendance.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;
@@ -944,7 +968,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		boolean result = false;
 		try {
 
-			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"studentsmonthlyattendance.xlsx");
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/studentsmonthlyattendance.xlsx");
 	        FileInputStream inStream = new FileInputStream(downloadFile);
 
 	        // get MIME type of the file
