@@ -819,9 +819,11 @@
 									id="admclassE" style="width: 128px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<option value="${classdetailslist.classdetails}">
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
 										</c:forEach>
 								</select>
 							</label> <label> <select name="admsecE" id="admsecE"
