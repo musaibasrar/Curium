@@ -351,7 +351,8 @@ for(Cookie cookie : cookies){
             <div>
                 <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
                 <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
-                <a target="mainFrame" href="Controller?process=SubjectDetailsProcess&action=readListOfSubjects" style="font-size: 12px;">Subject Details</a><br/>
+                <a target="mainFrame" href="Controller?process=SubjectDetailsProcess&action=readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
+                <a target="mainFrame" href="Controller?process=SubjectDetailsProcess&action=readListOfSubjects" style="font-size: 12px;">Subject Details</a>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
