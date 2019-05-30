@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import com.model.feescategory.service.FeesService;
 import com.model.printids.service.PrintIdsService;
 import com.model.stampfees.service.StampFeesService;
+import com.model.std.service.StandardService;
 import com.model.student.service.StudentService;
 
 /**
@@ -36,10 +37,17 @@ public class PrintIdsAction {
 			url = printPreview();
 		}else if (action.equalsIgnoreCase("searchDetails")) {
 			url = searchDetails();
+		}else if (action.equalsIgnoreCase("generateIds")) {
+			url = generateIds();
 		}
 		return url;
 	}
 	
+
+	private String generateIds() {
+		 new StandardService(request, response).viewClasses();
+		return "generateids.jsp";
+	}
 
 	private String searchDetails() {
         
