@@ -879,6 +879,15 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("rte")) {
 	                	student.setRte(DataUtil.parseInt(item.getString()));
 	                }
+	                if (fieldName.equalsIgnoreCase("passedout")) {
+	                	student.setPassedout(DataUtil.parseInt(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("leftout")) {
+	                	student.setLeftout(DataUtil.parseInt(item.getString()));
+	                }
+	                if (fieldName.equalsIgnoreCase("droppedout")) {
+	                	student.setDroppedout(DataUtil.parseInt(item.getString()));
+	                }
 	                // Updating paretns information
 	                
 	                parents.setPid(parentsId);
