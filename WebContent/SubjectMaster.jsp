@@ -1,6 +1,6 @@
 <%--
-    Document   : index
-    Created on : Dec 23, 2011, 5:52:28 PM
+    Document   : Subject Master
+    Created on : MAY 29, 2019, 01:29:28 PM
     Author     : Musaib
 --%>
 
@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
+<title>Subject Master</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -292,28 +292,7 @@
 <script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript"
-	src="js/validation/jquery.ketchup.all.min.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.button.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.core.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.slide.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.bounce.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.clip.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.transfer.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.blind.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/ScrollableGridPlugin.js"></script>
+
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -327,37 +306,7 @@
 		});
 	});
 </script>
-<script type="text/javascript">
-	function select(id, name) {
-		var clipEffect = 'blind';
-		var options = {};
 
-		$("#effect").show();
-		$("#medicineId").val(id)
-		$("#medicineName").val(name);
-
-	}
-	function getCurrentDate() {
-		var today = new Date();
-		var day = today.getDate();
-		var month = today.getMonth() + 1;
-		var year = today.getFullYear();
-		if (month < 10) {
-			month = "0" + month;
-
-		} else {
-			month = month;
-		}
-		if (day < 10) {
-			day = "0" + day;
-
-		} else {
-			day = day;
-		}
-		return month + "/" + day + "/" + year;
-
-	}
-</script>
 <script type="text/javascript">
 	$(function() {
 		// run the currently selected effect
@@ -388,7 +337,7 @@
 <script type="text/javascript">
 	function addSubjects() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=SubjectDetailsProcess&action=addSubject";
+		form1.action = "Controller?process=SubjectDetailsProcess&action=addSubjectMaster";
 		form1.method = "POST";
 		form1.submit();
 
@@ -396,7 +345,7 @@
 	
 	function deleteRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=SubjectDetailsProcess&action=deleteMultiple";
+		form1.action = "Controller?process=SubjectDetailsProcess&action=deleteMultipleSubjects";
 		form1.method = "POST";
 		form1.submit();
 
@@ -406,13 +355,11 @@
 		$("#tabs").tabs();
 		$("#save").button().click(function() {
 			var subname = document.getElementById('subjectname').value;
-			var minmarks = document.getElementById('minmarks').value;
-			var maxmarks = document.getElementById('maxmarks').value;
-			
-			if(subname != "" && minmarks !="" && maxmarks != ""){
+
+			if(subname != "" ){
 				addSubjects();
 			}else{
-				alert('All fields are mandatory');
+				alert('Enter the Subject Name');
 			}
 			
 		});
@@ -486,7 +433,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=SubjectDetailsProcess&action=deleteMultiple" method="POST">
+	<form id="form1" action="Controller?process=SubjectDetailsProcess&action=deleteMultipleSubjects" method="POST">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");
@@ -496,7 +443,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Add Subject Details</a></li>
+					<li><a href="#tabs-1">Add Subject</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -504,90 +451,11 @@ for(Cookie cookie : cookies){
 						cellspacing="10" id="table1" style="display: block">
 						<tr>
 							<td width="10%" class="alignRight">Subject Name &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-									<select name="subjectname"
-									id="subjectname" style="width: 200px;">
-										<option selected></option>
-										<c:forEach items="${listSubjectNames}" var="subjectnames">
-												<option value="${subjectnames.subjectname}">
-													<c:out value="${subjectnames.subjectname}" />
-												</option>
-										</c:forEach>
-								</select>
-							
-							</label>
-							
-							</td>
-						</tr>
-						
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td width="10%" class="alignRight">Exam &nbsp;&nbsp;&nbsp;</td>
-							<td width="28%"><label> <select name="examname"
-									id="examname" style="width: 200px;">
-										<option selected></option>
-										<c:forEach items="${examdetails}" var="examdetails">
-												<option value="${examdetails.examname}">
-													<c:out value="${examdetails.examname}" />
-												</option>
-										</c:forEach>
-								</select>
+							<td width="70%"><label> <input id="subjectname"
+									name="subjectname" type="text" class="textField"  size="30" required>
 
 							</label></td>
 						</tr>
-						
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td width="10%" class="alignRight">Class &nbsp;&nbsp;&nbsp;</td>
-							<td width="28%"><label> <select name="examclass"
-									id="examclass" style="width: 200px;">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-
-							</label></td>
-						</tr>
-						
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-								<tr>
-							<td width="10%" class="alignRight">Minimum Marks &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> <input id="minmarks"
-									name="minmarks" type="text" class="textField"  size="30" required>
-
-							</label></td>
-						</tr>
-						
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td width="10%" class="alignRight">Maximum Marks &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> <input id="maxmarks"
-									name="maxmarks" type="text" class="textField"  size="30" required>
-
-							</label></td>
-						</tr>
-						
 
 						<tr>
 							<td><br /></td>
@@ -623,32 +491,18 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Subject Name<img
 							alt=" " style="position: relative; top: 4px;"
 							src="images/sort_both.png" /></th>
-							<th title="click to sort" class="headerText">Exam&nbsp;</th>
-							<th title="click to sort" class="headerText">Class&nbsp;</th>
-							<th title="click to sort" class="headerText">Minimum Marks&nbsp;</th>
-							<th title="click to sort" class="headerText">Maximum Marks&nbsp;</th>
 						</tr>
 				</thead>
 
 				<tbody>
 
-					<c:forEach items="${listSubject}" var="listSubject">
+					<c:forEach items="${listSubjectNames}" var="listSubject">
 
-						<tr style="border-color: #000000" border="1" cellpadding="1"
-							cellspacing="1">
-							
-							
-                          <td class="dataText"><input type="checkbox" id = "<c:out value="${listSubject.subid}"/>" class = "chcktbl"  name="subjectIDs"  value="<c:out value="${listSubject.subid}"/>"/></td>
+						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
+                          <td class="dataText"><input type="checkbox" id = "<c:out value="${listSubject.subjectid}"/>" class = "chcktbl"  name="subjectIDs"  value="<c:out value="${listSubject.subjectid}"/>"/></td>
 						  <td class="dataText"><c:out value="${listSubject.subjectname}" /></td>
-						  <td class="dataText"><c:out value="${listSubject.examname}" /></td>
-						  <td class="dataText"><c:out value="${listSubject.examclass}" /></td>
-						  <td class="dataText"><c:out value="${listSubject.minmarks}" /></td>
-						  <td class="dataText"><c:out value="${listSubject.maxmarks}" /></td>
 						</tr>
 					</c:forEach>
-
-
-
 
 				</tbody>
 				<tfoot><tr>

@@ -23,5 +23,8 @@
         <property name="examname" type="string">
             <column name="examname" length="150" />
         </property>
+         <property name="examclass" type="string">
+            <column name="examclass" length="10" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -98,5 +98,6 @@
 		<mapping resource="com/model/degreedetails/dto/Degreedetails.hbm.xml"></mapping>
 		<mapping resource="com/model/std/dto/Classhierarchy.hbm.xml"></mapping>
 		<mapping resource="com/model/account/dto/Voucherentrytransactions.hbm.xml"></mapping>
+		<mapping resource="com/model/subjectdetails/dto/Subjectmaster.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>

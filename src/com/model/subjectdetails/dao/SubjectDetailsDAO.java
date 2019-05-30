@@ -14,6 +14,7 @@ import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.subjectdetails.dto.Subject;
+import com.model.subjectdetails.dto.Subjectmaster;
 import com.util.HibernateUtil;
 
 /**
@@ -103,6 +104,58 @@ public class SubjectDetailsDAO {
 				HibernateUtil.closeSession();
 			return subject;
 		}
+	}
+
+	public Subjectmaster addSubjectMaster(Subjectmaster subject) {
+		try {
+			// this.session = sessionFactory.openCurrentSession();
+			transaction = session.beginTransaction();
+			session.save(subject);
+
+			transaction.commit();
+			
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return subject;
+		}
+		
+	}
+
+	public List<Subject> readListOfSubjectNames(int branchId) {
+		
+		List<Subject> results = new ArrayList<Subject>();
+		try {
+
+			transaction = session.beginTransaction();
+			results = (List<Subject>) session.createQuery("From Subjectmaster where branchid="+branchId)
+					.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+
+	public void deleteMultipleSubjects(List ids) {
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("delete from Subjectmaster where subjectid IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		
 	}
 
 }
