@@ -715,9 +715,11 @@ for(Cookie cookie : cookies){
 									style="width: 120px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<option value="${classdetailslist.classdetails}">
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
 										</c:forEach>
 								</select> 
 							</label> <label> 
@@ -727,9 +729,11 @@ for(Cookie cookie : cookies){
 										<option selected></option>
 
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<option value="${classdetailslist.section}">
-												<c:out value="${classdetailslist.section}" />
-											</option>
+											<c:if test="${(classdetailslist.section != '')}">
+												<option value="${classdetailslist.section}">
+													<c:out value="${classdetailslist.section}" />
+												</option>
+											</c:if>
 										</c:forEach>
 
 								</select>
