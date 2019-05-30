@@ -19,6 +19,7 @@ import com.model.attendance.service.AttendanceService;
 import com.model.employee.service.EmployeeService;
 import com.model.feescategory.service.FeesService;
 import com.model.sendsms.service.SmsService;
+import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
 import com.model.student.service.StudentService;
@@ -98,11 +99,25 @@ public class AttendanceAction {
 			url = exportMonthlyAttendanceStaff();
 		}else if ("downloadStaffAttendance".equalsIgnoreCase(action)) {
 			url = downloadStaffAttendance();
+		}else if ("markAttendance".equalsIgnoreCase(action)) {
+			url = markAttendance();
+		}else if ("attendanceExport".equalsIgnoreCase(action)) {
+			url = attendanceExport();
 		}
 		return url;
 	}
 	
 	
+	private String attendanceExport() {
+		new StandardService(request, response).viewClasses();
+		return "attendanceexport.jsp";
+	}
+
+	private String markAttendance() {
+		new StandardService(request, response).viewClasses();
+		return "attendancemark.jsp";
+	}
+
 	private String downloadStaffAttendance() {
 		
 		if(new AttendanceService(request, response).downloadFileStaff()){
@@ -230,6 +245,7 @@ public class AttendanceAction {
 	private String viewAttendance() {
 
 		if(new AttendanceService(request, response).viewAttendance()){
+			new StandardService(request, response).viewClasses();
 			return "viewattendance.jsp";
 		}
 		return errorPage;
