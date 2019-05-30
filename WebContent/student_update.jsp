@@ -437,6 +437,9 @@ for(Cookie cookie : cookies){
                     <td>
                     <img src="data:image;base64,<c:out value="${student.studentpic}"/>" style="width: 200px;height: 200px;" alt="Student's Photo">
                     <input type="hidden" value="<c:out value="${student.studentpic}"/>" id="studentpicupdate" name="studentpicupdate">
+                    <input type="hidden" value="<c:out value="${student.passedout}"/>" id="passedout" name="passedout">
+                    <input type="hidden" value="<c:out value="${student.droppedout}"/>" id="droppedout" name="droppedout">
+                    <input type="hidden" value="<c:out value="${student.leftout}"/>" id="leftout" name="leftout">
                     </td>
                     </tr>
 				
