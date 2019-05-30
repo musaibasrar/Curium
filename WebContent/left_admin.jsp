@@ -443,8 +443,8 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
-                <a target="mainFrame" href="attendancemark.jsp" style="font-size: 12px;">Mark Attendance</a><br/>
-                <a target="mainFrame" href="attendanceexport.jsp" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExport" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
@@ -498,7 +498,7 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="#" >Generate Cards</a></h5>
             <div >
-                <a target="mainFrame" href="generateids.jsp" style="font-size: 12px;">Generate IDs</a><br/>
+                <a target="mainFrame" href="Controller?process=printids&action=generateIds" style="font-size: 12px;">Generate IDs</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Documents</a></h5>
