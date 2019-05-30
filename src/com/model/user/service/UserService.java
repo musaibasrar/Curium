@@ -95,7 +95,14 @@ public class UserService {
             List<String> yaxisList = new LinkedList<String>() ;
        // int[] test = new int[branchList.size()] ;
         for (Classsec classstudying : classsecList) {
-                    List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.classstudying='"+classstudying.getClassdetails()+"'"
+        	
+		        	String classStudying = classstudying.getClassdetails();
+		    		
+		    		if (!classStudying.equalsIgnoreCase("")) {
+		    			classStudying = classStudying+"--" +"%";
+		    		}
+		    		
+                    List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.classstudying like '"+classStudying+"'"
                     		+ " AND parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0");
                     xaxisList.add("\""+classstudying.getClassdetails()+"\"");
                     if(student.size()>0) {
