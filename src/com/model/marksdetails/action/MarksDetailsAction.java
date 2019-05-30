@@ -71,6 +71,7 @@ public class MarksDetailsAction {
 
 	private String getGraphicalReportData() {
 		new MarksDetailsService(request, response).getStudentList();
+		new StandardService(request, response).viewClasses();
 		return "graphicalreport.jsp";
 	}
 

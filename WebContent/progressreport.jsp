@@ -596,6 +596,8 @@ for(Cookie cookie : cookies){
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">
+							<input type="hidden" id="examclass" name="examclass"
+								value="<c:out value="${Parents.student.classstudying}"/>" />
 							 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 						    ${splt} 
 							</c:forEach>
