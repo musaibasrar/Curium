@@ -36,10 +36,17 @@ public class PrintIdsAction {
 			url = printPreview();
 		}else if (action.equalsIgnoreCase("searchDetails")) {
 			url = searchDetails();
+		}else if (action.equalsIgnoreCase("generateIds")) {
+			url = generateIds();
 		}
 		return url;
 	}
 	
+
+	private String generateIds() {
+		 new StandardService(request, response).viewClasses();
+		return "generateids.jsp";
+	}
 
 	private String searchDetails() {
         
@@ -51,6 +58,7 @@ public class PrintIdsAction {
 
 		new PrintIdsService(request, response).printMultiple();
         return "printpreview.jsp";
-	}
+	}
+
 
 }
