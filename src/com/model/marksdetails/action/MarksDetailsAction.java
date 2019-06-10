@@ -46,12 +46,19 @@ public class MarksDetailsAction {
 			url = progressreport();
 		}else if (action.equalsIgnoreCase("downloadReportCard")) {
 			url = downloadReportCard();
+		}else if (action.equalsIgnoreCase("marksEntry")) {
+			url = marksEntry();
 		}
 
 		return url;
 	}
 
 	
+
+	private String marksEntry() {
+		new StandardService(request, response).viewClasses();
+        return "marksentry.jsp";
+	}
 
 	private String downloadReportCard() {
 		new MarksDetailsService(request, response).downloadReportCard();
@@ -111,6 +118,7 @@ public class MarksDetailsAction {
 
 	private String viewMarks() {
 		if (new MarksDetailsService(request, response).viewMarks()) {
+			new MarksDetailsService(request, response).getSubjectExams();
             return "markssearch.jsp";
         } else {
             return "error.jsp";
