@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -525,34 +526,29 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 150px">
+									id="classsearch" style="width: 120px;">
 										<option selected></option>
-										<option>nursery</option>
-										<option>L.K.G</option>
-										<option>U.K.G</option>
-										<option>I</option>
-										<option>II</option>
-										<option>III</option>
-										<option>IV</option>
-										<option>V</option>
-										<option>VI</option>
-										<option>VII</option>
-										<option>VIII</option>
-										<option>IX</option>
-										<option>X</option>
-								</select>
-
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 120px">
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+										</select>
+									</label>
+							 <label> 
+									<select name="secsearch" id="secsearch"
+									style="width: 110px;">
 										<option selected></option>
-										<option>A</option>
-										<option>B</option>
-										<option>C</option>
-										<option>D</option>
-										<option>E</option>
-										<option>F</option>
-										<option>G</option>
 
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.section != '')}">
+												<option value="${classdetailslist.section}">
+													<c:out value="${classdetailslist.section}" />
+												</option>
+											</c:if>
+										</c:forEach>
 								</select>
 							</label>
 						</tr>
@@ -589,9 +585,9 @@ for(Cookie cookie : cookies){
 									style="width: 240px" ">
 										<option selected></option>
 
-										<c:forEach items="${listSubject}" var="listSubject">
+										<c:forEach items="${listSubjectNames}" var="listSubject">
 
-											<option value="${listSubject.subid}">
+											<option value="${listSubject.subjectid}">
 												<c:out value="${listSubject.subjectname}" />
 											</option>
 
@@ -677,7 +673,11 @@ for(Cookie cookie : cookies){
 								><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText"><c:out value="${Parents.student.classstudying}" /></td>
+							<td class="dataText">
+								<c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>
+							</td>
 							<td class="dataText"><input type="text"
 								id="studentMarks" 
 								name="studentMarks"
