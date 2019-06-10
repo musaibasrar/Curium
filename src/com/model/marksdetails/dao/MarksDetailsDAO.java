@@ -140,7 +140,7 @@ public class MarksDetailsDAO {
 			try {
 
 				transaction = session.beginTransaction();
-				Query query = session.createQuery("From Marks where sid = '"+id+"' and academicyear = '"+currentAcademicYear+"' ORDER BY examid ASC");
+				Query query = session.createQuery("From Marks where sid = '"+id+"' and academicyear = '"+currentAcademicYear+"' ORDER BY examid,subid ASC");
 				results = query.list();
 				transaction.commit();
 			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
