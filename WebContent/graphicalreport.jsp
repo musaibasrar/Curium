@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -500,7 +501,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=MarksDetailsProcess&action=generateReport" method="POST">
+	<form id="form1" action="Controller?process=MarksDetailsProcess&action=getStudentGraph" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -537,8 +538,8 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="70%">
-									<label> <select name="addclass"
-									id="addclass" style="width: 128px;">
+									<label> <select name="classsearch"
+									id="classsearch" style="width: 128px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -549,7 +550,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 
-							</label> <label> <select name="addsec" id="addsec"
+							</label> <label> <select name="secsearch" id="secsearch"
 									style="width: 128px;">
 										<option selected></option>
 
@@ -633,20 +634,22 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
-							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=MarksDetailsProcess&action=getStudentGraph&id=<c:out value='${Parents.student.sid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
+							<td class="dataTextInActive"><c:out value="${Parents.student.admissionnumber}" /></td>
 							<%-- 					<td class="dataTextInActive"><a class="dataTextInActive"
 								href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'
 								/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 									value="${Parents.student.admissionnumber}" /></a></td> 
 									Controller?process=MarksDetailsProcess&action=getStudentGraph--%>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.classstudying}" /></td>
-
-
-
+							<td class="dataText">
+							<input type="hidden" id="examclass" name="examclass"
+								value="<c:out value="${Parents.student.classstudying}"/>" />
+							 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
+						    ${splt} 
+							</c:forEach>
+							</td>
+							<%-- <td class="dataText"><c:out
+									value="${Parents.student.classstudying}" /></td> --%>
 						</tr>
 					</c:forEach>
 				</tbody>
