@@ -183,8 +183,8 @@ public class MarksDetailsService {
 		request.setAttribute("searchStudentList", searchStudentList);
 
 		// get all the subjects
-		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),addClass+"--");
-		request.setAttribute("listSubject", subjectList);
+		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		request.setAttribute("listSubjectNames", subjectList);
 
 		// get the list for all the midterms
 		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -197,11 +197,13 @@ public class MarksDetailsService {
 	{
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			
-			String studentid = DataUtil.emptyString(request.getParameter("id"));
-			Student searchStudent = new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentid));
-
+			//String studentid = DataUtil.emptyString(request.getParameter("id"));
+			String[] studentIds = request.getParameterValues("studentIDs");
+			Student searchStudent = new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[0]));
+			String[] examClass = request.getParameterValues("examclass");
+			String[] exCl = examClass[0].split("--");
 				List<Exams> examDetailsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				List<Subject> subjectDetailsList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Subject> subjectDetailsList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),exCl[0]);
 				List<ExamsDetails> examDetails = new ArrayList<ExamsDetails>();
 				
 				for (Exams exams : examDetailsList) {
@@ -327,7 +329,7 @@ public class MarksDetailsService {
 
 	public void getSubjectExams() {
 		// get all the subjects
-		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("listSubject", subjectList);
 
 		// get the list for all the midterms
@@ -456,51 +458,19 @@ public class MarksDetailsService {
 			String[] studentIds = request.getParameterValues("studentIDs");
 			String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-			String[] examClass = request.getParameterValues("examclass");
-			List<Exams> exams = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			List<Subject> subjects = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), examClass[0]);
-			Integer[][] examsubjectCombo = new Integer[exams.size() * subjects.size()][2];
-			int r = 0, c = 0;
-			for (Exams examsList : exams) {
-
-				for (Subject subject : subjects) {
-					c = 0;
-					examsubjectCombo[r][c] = subject.getSubid();
-					c++;
-					examsubjectCombo[r][c] = examsList.getExid();
-					r++;
-				}
-
-			}
 
 			for (int i = 0; i < studentIds.length; i++) {
 				Student studentDetails = new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[i]));
-				List<Marks> marksDetails = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+				
+				List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 				marksList[i][0] = studentDetails.getAdmissionnumber();
 				marksList[i][1] = studentDetails.getName();
 				int k = 2;
-				int a=0;
-				int b=0;
 				
-				for (int m=0; m<marksDetails.size(); m++) {
-					b=0;
-					if(examsubjectCombo[a][b].compareTo(marksDetails.get(m).getSubid())==0 ){
-						b++;
-						if(examsubjectCombo[a][b].compareTo(marksDetails.get(m).getExamid())==0){
-							try{
-							marksList[i][k] = marksDetails.get(m).getMarksobtained().toString();
+				for (int m=0; m<marksDetailsList.size(); m++) {
+							marksList[i][k] = marksDetailsList.get(m).getMarksobtained().toString();
 							k++;
-							}catch(Exception e){
-								e.printStackTrace();
-							}
-						}
-					}else{
-						marksList[i][k] = "0";
-						k++;
-						m--;
 					}
-					a++;
-				}
 			}
 
 			try {
