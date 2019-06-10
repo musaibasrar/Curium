@@ -121,7 +121,7 @@ public class ExamDetailsAction {
 		result = new StandardService(request, response).viewClasses();
 		if (!result) 
 			return error;
-		result = new SubjectDetailsService(request, response).readListOfSubjects();
+		new SubjectDetailsService(request, response).readListOfSubjectNames();
 		if (!result) 
 			return error;
 		result = new YearService(request, response).getYear();
