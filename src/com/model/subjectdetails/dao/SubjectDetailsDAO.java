@@ -36,13 +36,13 @@ public class SubjectDetailsDAO {
 	}
 	
 	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Subject> readListOfSubjects(int branchId) {
+	public List<Subject> readListOfSubjects(int branchId, String examClass) {
 		
 		List<Subject> results = new ArrayList<Subject>();
 		try {
 
 			transaction = session.beginTransaction();
-			results = (List<Subject>) session.createQuery("From Subject where branchid="+branchId)
+			results = (List<Subject>) session.createQuery("From Subject where examclass = '"+examClass+"' and branchid="+branchId)
 					.list();
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
@@ -156,6 +156,24 @@ public class SubjectDetailsDAO {
 			HibernateUtil.closeSession();
 		 }
 		
+	}
+
+	public List<Subject> readAllSubjects(int branchId) {
+		
+		List<Subject> results = new ArrayList<Subject>();
+		try {
+
+			transaction = session.beginTransaction();
+			results = (List<Subject>) session.createQuery("From Subject where branchid="+branchId)
+					.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
 	}
 
 }

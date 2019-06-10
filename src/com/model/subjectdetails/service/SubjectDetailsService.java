@@ -34,7 +34,7 @@ public class SubjectDetailsService {
 	public boolean readListOfSubjects() {
 		boolean result = false;
 	    try {
-	    	List<Subject> list = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+	    	List<Subject> list = new SubjectDetailsDAO().readAllSubjects(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 	        httpSession.setAttribute("listSubject", list);
 
 	        result = true;
