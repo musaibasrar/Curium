@@ -578,38 +578,15 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 						
-						<td width="16%" class="alignLeft">From Class &nbsp;
-							 <label> <select name="fromclass" id="fromclass"
-									style="width: 100px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
+						<td  width="16%" class="alignLeft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										Classes&nbsp;&nbsp;&nbsp;
+							<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}" >
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
+										<input type="checkbox"  name="classesselected" value="${classdetailslist.classdetails}">
+										${classdetailslist.classdetails}
 										</c:if>	
-										</c:forEach>
-								</select> 
-							</label>
-							&nbsp;<label style="font-weight: bold;color:#325F85">To Class &nbsp;</label>
-							
-							<label>
-							<select name="toclass" id="toclass"
-									style="width: 100px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}" >
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-								</select> 
-							
-							</label>
-							
-							</td>
-							
+							</c:forEach>
+						</td>
 						</tr>
 						
 						<tr>
@@ -623,7 +600,9 @@ for(Cookie cookie : cookies){
 						</tr>
 								
 								<tr>
-						<td width="80%" class="alignLeft">Exam &nbsp;&nbsp;&nbsp;
+						<td width="80%" class="alignLeft">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Exam &nbsp;&nbsp;&nbsp;
 							<label>
 									<select name="exam" id="exam"
 									style="width: 180px">
@@ -653,7 +632,9 @@ for(Cookie cookie : cookies){
 
 						<tr>
 
-							<td width="12%" align="left" class="alignRightFields" style="font-weight: bold;color:#325F6D">Details: &nbsp;&nbsp;&nbsp;
+							<td width="12%" align="left" class="alignRightFields" style="font-weight: bold;color:#325F6D">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Details: &nbsp;&nbsp;&nbsp;
 							<button id="addSchedule">Add</button>&nbsp;&nbsp;&nbsp;<button id="removeSchedule">Remove</button></td>
 						</tr>
 						
