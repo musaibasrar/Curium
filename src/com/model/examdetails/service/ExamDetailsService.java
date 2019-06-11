@@ -110,69 +110,75 @@ public class ExamDetailsService {
 		String[] date = request.getParameterValues("fromdate");
 		String[] startTime = request.getParameterValues("starttime");
 		String[] endTime = request.getParameterValues("endtime");
+		String[] classesSelected = request.getParameterValues("classesselected");
+		
+		
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			
-			for (int i=0; i<subject.length;i++) {
-				Examschedule examschedule = new Examschedule();
-				examschedule.setAcademicyear(DataUtil.emptyString(request.getParameter("academicyear")));
-				examschedule.setClasses(DataUtil.emptyString(request.getParameter("fromclass"))+"-"+DataUtil.emptyString(request.getParameter("toclass")));
-				examschedule.setExamname(DataUtil.emptyString(request.getParameter("exam")));
-				examschedule.setDate(DateUtil.dateParserUpdateStd(date[i]));
-				String[] starttimeSplit = startTime[i].split(":");
-				String hours = starttimeSplit[0];
-				String meridian = null;
-				String outputStartTime = null;
-					  if (Integer.parseInt(hours) < 12) {
-						  outputStartTime = startTime[i];
-					    meridian = "AM";
-					  } else if (Integer.parseInt(hours) >= 12) {
+			for (String selectedClass : classesSelected) {
+				
+				for (int i=0; i<subject.length;i++) {
+					Examschedule examschedule = new Examschedule();
+					examschedule.setAcademicyear(DataUtil.emptyString(request.getParameter("academicyear")));
+					examschedule.setClasses(selectedClass);
+					examschedule.setExamname(DataUtil.emptyString(request.getParameter("exam")));
+					examschedule.setDate(DateUtil.dateParserUpdateStd(date[i]));
+					String[] starttimeSplit = startTime[i].split(":");
+					String hours = starttimeSplit[0];
+					String meridian = null;
+					String outputStartTime = null;
+						  if (Integer.parseInt(hours) < 12) {
+							  outputStartTime = startTime[i];
+						    meridian = "AM";
+						  } else if (Integer.parseInt(hours) >= 12) {
+							  
+							  DateFormat df = new SimpleDateFormat("HH:mm");
+						       //Date/time pattern of desired output date
+						       DateFormat outputformat = new SimpleDateFormat("hh:mm");
+						       Date date1 = null;
+						       try{
+						          //Conversion of input String to date
+						    	  date1= df.parse(startTime[i]);
+						          //old date format to new date format
+						    	  outputStartTime = outputformat.format(date1);
+						    	}catch(ParseException pe){
+						    	    pe.printStackTrace();
+						    	 }
+						    meridian = "PM";
+						  }
 						  
-						  DateFormat df = new SimpleDateFormat("HH:mm");
-					       //Date/time pattern of desired output date
-					       DateFormat outputformat = new SimpleDateFormat("hh:mm");
-					       Date date1 = null;
-					       try{
-					          //Conversion of input String to date
-					    	  date1= df.parse(startTime[i]);
-					          //old date format to new date format
-					    	  outputStartTime = outputformat.format(date1);
-					    	}catch(ParseException pe){
-					    	    pe.printStackTrace();
-					    	 }
-					    meridian = "PM";
-					  }
-					  
-				examschedule.setStarttime(outputStartTime+" "+meridian);
-				String[] endtimeSplit = endTime[i].split(":");
-				String endhours = endtimeSplit[0];
-				String endmeridian = null;
-				String outputEndTime = null;
-					  if (Integer.parseInt(endhours) < 12) {
-						  endmeridian = "AM";
-					  } else if (Integer.parseInt(endhours) >= 12) {
-
-						  DateFormat df = new SimpleDateFormat("HH:mm");
-					       //Date/time pattern of desired output date
-					       DateFormat outputformat = new SimpleDateFormat("hh:mm");
-					       Date date1 = null;
-					       
-					       try{
-					          //Conversion of input String to date
-					    	  date1= df.parse(endTime[i]);
-					          //old date format to new date format
-					    	  outputEndTime = outputformat.format(date1);
-					    	}catch(ParseException pe){
-					    	    pe.printStackTrace();
-					    	 }
-					       
-						  endmeridian = "PM";
-					  }
-					  
-				examschedule.setEndtime(outputEndTime+" "+endmeridian);
-				examschedule.setSubject(DataUtil.emptyString(subject[i]));
-				examschedule.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				examScheduleList.add(examschedule);
+					examschedule.setStarttime(outputStartTime+" "+meridian);
+					String[] endtimeSplit = endTime[i].split(":");
+					String endhours = endtimeSplit[0];
+					String endmeridian = null;
+					String outputEndTime = null;
+						  if (Integer.parseInt(endhours) < 12) {
+							  endmeridian = "AM";
+						  } else if (Integer.parseInt(endhours) >= 12) {
+	
+							  DateFormat df = new SimpleDateFormat("HH:mm");
+						       //Date/time pattern of desired output date
+						       DateFormat outputformat = new SimpleDateFormat("hh:mm");
+						       Date date1 = null;
+						       
+						       try{
+						          //Conversion of input String to date
+						    	  date1= df.parse(endTime[i]);
+						          //old date format to new date format
+						    	  outputEndTime = outputformat.format(date1);
+						    	}catch(ParseException pe){
+						    	    pe.printStackTrace();
+						    	 }
+						       
+							  endmeridian = "PM";
+						  }
+						  
+					examschedule.setEndtime(outputEndTime+" "+endmeridian);
+					examschedule.setSubject(DataUtil.emptyString(subject[i]));
+					examschedule.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					examScheduleList.add(examschedule);
+				}
 			}
 			result = new ExamDetailsDAO().addExamSchedule(examScheduleList);
 		}

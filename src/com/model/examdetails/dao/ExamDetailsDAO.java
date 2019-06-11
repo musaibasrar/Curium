@@ -152,7 +152,7 @@ public class ExamDetailsDAO {
 		List<Examschedule> listExamSchedule = new ArrayList<Examschedule>();
 		try {
 			transaction = session.beginTransaction();
-			listExamSchedule = session.createQuery("from Examschedule where classes like '"+classH+"-%' and academicyear = '"+academicYear+"' and examname = '"+exam+"' and branchid="+branchId+" ORDER BY date ASC").list();
+			listExamSchedule = session.createQuery("from Examschedule where classes = '"+classH+"' and academicyear = '"+academicYear+"' and examname = '"+exam+"' and branchid="+branchId+" ORDER BY date ASC").list();
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
