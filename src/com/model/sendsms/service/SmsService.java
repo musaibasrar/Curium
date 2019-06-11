@@ -167,11 +167,11 @@ public class SmsService {
 	      
 		// Construct data
 		String phonenumbers=numbers;
-		String data="username=" + smsuser;
-		data +="&message=" + message;
-		data +="&sendername=" + smssender;
+		String data="username=" + URLEncoder.encode(smsuser, "UTF-8");
+		data +="&message=" + URLEncoder.encode(message, "UTF-8");
+		data +="&sendername=" + URLEncoder.encode(smssender, "UTF-8");
 		data +="&smstype=" + "TRANS";
-		data +="&numbers=" + phonenumbers;
+		data +="&numbers=" + URLEncoder.encode(phonenumbers, "UTF-8");
 		data +="&apikey=" + apikey;
 		// Send data
 		
