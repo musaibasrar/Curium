@@ -179,7 +179,7 @@ for(Cookie cookie : cookies){
 							<td><a target="mainFrame"
 								href="Controller?process=StudentProcess&action=addNew"> <img
 									src="images/Usersw.png" width="30" height="30"
-									alt="Add New Student" style="vertical-align: bottom;" />Add New
+									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
 							<td ><a target="leftFrame" href="leftsettings.jsp">
@@ -202,7 +202,7 @@ for(Cookie cookie : cookies){
 								href="Controller?process=StudentProcess&action=viewAllStudentsWithParents"><img
 									alt="View All Students" src="images/allusersw.png" width="30"
 									height="30" style="vertical-align: bottom;"/>
-								View All
+								View Students
 							</a></td>
 							
 							<td ><a target="mainFrame"
