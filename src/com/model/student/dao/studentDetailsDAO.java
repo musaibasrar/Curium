@@ -91,7 +91,7 @@ public class studentDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("From Student where archive=0 AND branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
+			results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout=0 AND droppedout=0 and leftout=0 AND branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			noOfRecords = results.size();
 			logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
@@ -155,7 +155,7 @@ public class studentDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("From Student where archive=0 AND branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
+			results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout=0 AND droppedout=0 and leftout=0 AND branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			transaction.commit();
 
@@ -574,7 +574,7 @@ public class studentDetailsDAO {
         int noOfRecords = 0;
         try {
                 transaction = session.beginTransaction();
-                results = (List<Student>) session.createQuery("From Student where archive=0").setCacheable(true).setCacheRegion("commonregion").list();
+                results = (List<Student>) session.createQuery("From Student where archive=0 and passedout=0 AND droppedout=0 and leftout=0").setCacheable(true).setCacheRegion("commonregion").list();
                 noOfRecords = results.size();
                 transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

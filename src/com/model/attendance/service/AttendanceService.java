@@ -761,7 +761,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			List<Student> studentList = new studentDetailsDAO().getListStudents("from Student where archive=0");
+			List<Student> studentList = new studentDetailsDAO().getListStudents("from Student where archive=0 and passedout=0 AND droppedout=0 and leftout=0");
 			Currentacademicyear currentAcademicYear = new YearDAO().showYear();
 			List<Attendancemaster> studentAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails("00011");
 			String[] weeklyOffString = studentAttendanceMaster.get(0).getWeeklyoff().split(",");
