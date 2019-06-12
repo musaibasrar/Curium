@@ -34,7 +34,6 @@ import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
 import com.model.subjectdetails.dao.SubjectDetailsDAO;
 import com.model.subjectdetails.dto.Subject;
-import com.model.subjectdetails.service.SubjectDetailsService;
 import com.util.DataUtil;
 import com.util.ExamsDetails;
 
@@ -183,8 +182,8 @@ public class MarksDetailsService {
 		request.setAttribute("searchStudentList", searchStudentList);
 
 		// get all the subjects
-		List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),addClass+"--");
-		request.setAttribute("listSubject", subjectList);
+		/*List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),addClass+"--");
+		request.setAttribute("listSubject", subjectList);*/
 
 		// get the list for all the midterms
 		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -458,7 +457,7 @@ public class MarksDetailsService {
 			String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 			String[] examClass = request.getParameterValues("examclass");
 			List<Exams> exams = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			List<Subject> subjects = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), examClass[0]);
+			List<Subject> subjects = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			Integer[][] examsubjectCombo = new Integer[exams.size() * subjects.size()][2];
 			int r = 0, c = 0;
 			for (Exams examsList : exams) {
