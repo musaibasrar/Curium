@@ -586,13 +586,19 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
-
-							<td width="30%" class="alignRight"><label> <font
-									color="red"><div id="mydiv"></div></font>
+							<td width="30%" class="alignRight">Contact Number &nbsp;</td>
+							<td width="12%" align="left"><label> <input
+									name="contactnumber" type="text" class="myclass" id="contactnumber" size="36"
+									onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
 							</label></td>
-							<td width="20%" class="alignRight"></td>
-							<td class="alignRight"><font color="red"><div
-										id="mydivmobile"></div></font></td>
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
 						</tr>
 
 
