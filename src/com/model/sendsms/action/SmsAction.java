@@ -42,14 +42,18 @@ public class SmsAction {
 			url = sendStaffSMS();
 		}else if (action.equalsIgnoreCase("sendSMS")) {
 			url = sendSMS();
+		}else if (action.equalsIgnoreCase("SMSbalanceCheck")) {
+			url = SMSbalanceCheck();
 		}
 		
 		return url;
 	}
 
-	
-
-	
+	private String SMSbalanceCheck() {
+		new StandardService(request, response).viewClasses();
+		new SmsService(request, response).getSMSBalance();
+		return "sendsms.jsp";
+	}
 
 	private String sendSMS() {
 		new StandardService(request, response).viewClasses();

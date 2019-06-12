@@ -167,11 +167,11 @@ public class SmsService {
 	      
 		// Construct data
 		String phonenumbers=numbers;
-		String data="username=" + smsuser;
-		data +="&message=" + message;
-		data +="&sendername=" + smssender;
+		String data="username=" + URLEncoder.encode(smsuser, "UTF-8");
+		data +="&message=" + URLEncoder.encode(message, "UTF-8");
+		data +="&sendername=" + URLEncoder.encode(smssender, "UTF-8");
 		data +="&smstype=" + "TRANS";
-		data +="&numbers=" + phonenumbers;
+		data +="&numbers=" + URLEncoder.encode(phonenumbers, "UTF-8");
 		data +="&apikey=" + apikey;
 		// Send data
 		
@@ -183,7 +183,7 @@ public class SmsService {
 		// For POST only - START
 		con.setDoOutput(true);
 		OutputStream os = con.getOutputStream();
-		os.write("CURIUM".getBytes());
+		//os.write("CURIUM".getBytes());
 		os.flush();
 		os.close();
 		// For POST only - END
@@ -212,6 +212,69 @@ public class SmsService {
 		logger.info("Error SMS "+e);
 		}
 		return responseCode;
+	}
+
+
+	public void getSMSBalance() {
+		int responseCode = 0;
+		try 
+		{
+			Properties properties = new Properties();
+	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
+	        properties.load(inputStream);
+	        String smsuser = properties.getProperty("smsuser");
+	        String apikey = properties.getProperty("apikey");
+	        
+	      
+		// Construct data
+		String data="username=" + smsuser;
+		data +="&apikey=" + apikey;
+		// Send data
+		
+		String POST_URL = "http://sms.bulksmsind.in/getSMSCredit?"+data;
+        URL obj = new URL(POST_URL);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		con.setRequestMethod("POST");
+
+		// For POST only - START
+		con.setDoOutput(true);
+		OutputStream os = con.getOutputStream();
+		//os.write("CURIUM".getBytes());
+		os.flush();
+		os.close();
+		// For POST only - END
+
+		responseCode = con.getResponseCode();
+		logger.info("POST Response Code :: " + responseCode);
+		
+		if (responseCode == HttpURLConnection.HTTP_OK) { //success
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					con.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+
+			// print result
+			logger.info("Response in string"+response.toString());
+			
+			if(!response.toString().isEmpty()) {
+				String[] finalResponse = response.toString().replace("[[", "").split(",");
+				logger.info("SMS Balance "+finalResponse[0]);
+				request.setAttribute("smsbalance", finalResponse[0]);
+			}
+			
+			
+		} else {
+			logger.info("POST request not worked");
+		}}
+		catch (Exception e)
+		{
+		logger.info("Error SMS "+e);
+		}
 	}
 	
 }
