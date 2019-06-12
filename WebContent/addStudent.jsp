@@ -420,15 +420,7 @@
 		}
 
 	}
-	function validateAdmissionNumber() {
-		if (document.getElementById("admnno").value.length == 0)
-
-		{
-			document.getElementById("admnno").style.background = 'red';
-			alert("Enter The Admission Number ");
-		}
-
-	}
+	
 	function selectOnlyThis(id) {
 	    for (var i = 1;i <= 2; i++)
 	    {
@@ -628,13 +620,156 @@
 		<div>
 			<div id="tabs">
 				<ul>
+					<li><a href="#fragment-0">Student's Info</a></li>
 					<li><a href="#fragment-1">Student's Details</a></li>
 					<li><a href="#fragment-2">Parent's Details</a></li>
 					<li><a href="#fragment-3">Upload Photo</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
 				</ul>
 
+				
+					<div id="fragment-0">
+							<table width="100%" border="0" align="center" >
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
 
+								<tr>
+							<td align="right"><label style="color: #325F6D;font-weight: bold;font-size: 15px">Student Name* &nbsp;</label><label> <input
+									name="name" type="text" class="myclass" id="name" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									required>
+							</label></td>
+							
+							
+							<td width="28%"><label style="color: #325F6D;font-weight: bold;font-size: 15px">&nbsp;&nbsp;&nbsp;&nbsp;Studying in Class&nbsp;</label><label> <select name="addclass"
+									id="addclass" style="width: 80px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+
+							</label> <label> <select name="addsec" id="addsec"
+									style="width: 80px;">
+										<option selected></option>
+
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.section != '')}">
+												<option value="${classdetailslist.section}">
+													<c:out value="${classdetailslist.section}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+							</label></td>
+
+
+								</tr>
+
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+
+									<td align="right"><label style="color: #325F6D;font-weight: bold;font-size: 15px">Contact Number &nbsp;</label><label> <input
+											name="contactnumber" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="contactnumber" size="30" maxlength="10" minlength="10">
+
+									</label></td>
+								
+								
+								<td width="16%" height="30" class="alignLeft"><label style="color: #325F6D;font-weight: bold;font-size: 16px">&nbsp;&nbsp;&nbsp;&nbsp;Gender &nbsp;&nbsp;</label>Male<input
+								type="checkbox" value="Male" name="gender" id="yes:male"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
+								type="checkbox" value="Female" name="gender" id="no:male"
+								onclick="noCheck(this.id)" />
+								</td>
+							
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr align="center">
+
+									<td width="20%" class="alignRight">&nbsp;</td>
+
+									<td align="left">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<a class="nexttab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">
+										
+										Next</a></td>
+								</tr>
+								
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr >
+
+
+									<td width="20%">&nbsp;</td>
+
+									<td align="left">
+
+
+										<button id="savefour" class="save"
+											onmouseover="validateNameContact();"
+											onfocus="validateNameContact();">Save</button>
+
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="cancelfour" class="cancel">Cancel</button>
+
+									</td>
+
+
+
+
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								</div>
+								</div>
+
+							</table>
+
+						</div>
+				
 
 				<div id="fragment-1">
 					<table width="100%" border="0" align="center" id="table1">
@@ -660,7 +795,7 @@
 							<td width="28%"><label> <input name="admnno"
 									type="text" class="myclass" id="admnno" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									onblur="validateAdmissionNumber();"
+									onblur=""
 									onkeypress="return validateContactNum(this);">
 
 							</label></td>
@@ -680,33 +815,6 @@
 							<td><br /></td>
 						</tr>
 						
-						<tr>
-							<td width="30%" class="alignRight">Student Name* &nbsp;</td>
-							<td width="30%" align="left"><label> <input
-									name="name" type="text" class="myclass" id="name" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									required>
-							</label></td>
-
-							<td width="30%" class="alignRight">Gender &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft">&nbsp;Male<input
-								type="checkbox" value="Male" name="gender" id="yes:male"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
-								type="checkbox" value="Female" name="gender" id="no:male"
-								onclick="noCheck(this.id)" />
-
-							</td>
-
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
 						<tr>
 						<tr>
 							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
@@ -785,32 +893,6 @@
 						<tr>
 
 
-							<td class="alignRight">Studying in Class&nbsp;</td>
-							<td width="28%"><label> <select name="addclass"
-									id="addclass" style="width: 128px;">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-
-							</label> <label> <select name="addsec" id="addsec"
-									style="width: 128px;">
-										<option selected></option>
-
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.section != '')}">
-												<option value="${classdetailslist.section}">
-													<c:out value="${classdetailslist.section}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-							</label></td>
 
 							<td width="16%" class="alignRight">Admitted in Class &nbsp;
 							</td>
@@ -1244,7 +1326,7 @@
 
 
 										<button id="save" class="save"
-											onmouseover="validateNameContact();validateAdmissionNumber();"
+											onmouseover="validateNameContact();"
 											onfocus="validateNameContact();">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1299,8 +1381,8 @@
 
 
 											<button id="savethree" class="save"
-												onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
-												onfocus="validateNameContact();validateFatherName();">Save</button>
+												onmouseover="validateNameContact();"
+												onfocus="validateNameContact();">Save</button>
 
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<button id="cancelthree" class="cancel">Cancel</button>
@@ -1455,8 +1537,8 @@
 
 
 										<button id="savefour" class="save"
-											onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
-											onfocus="validateNameContact();validateFatherName();">Save</button>
+											onmouseover="validateNameContact();"
+											onfocus="validateNameContact();">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="cancelfour" class="cancel">Cancel</button>
@@ -1513,7 +1595,7 @@
 											name="fathersname" type="text" class="myclass"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="fathersname" size="30"
-											required> <!-- onkeyup="check(this.value);"  -->
+											> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
 									<td width="30%" class="alignRight">Mother's Name* &nbsp;</td>
@@ -1619,17 +1701,6 @@
 								</tr>
 
 								<tr>
-
-									<td width="16%" class="alignRight">Contact Number &nbsp;</td>
-
-									<td width="28%"><label> <input
-											name="contactnumber" type="text" class="myclass"
-											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-											id="contactnumber" size="30" maxlength="10" minlength="10">
-
-									</label></td>
-
-
 
 									<td width="16%" class="alignRight">Co-Contact Number
 										&nbsp;</td>
@@ -1753,8 +1824,8 @@
 
 
 										<button id="savetwo" class="save"
-											onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
-											onfocus="validateNameContact();validateFatherName();">Save</button>
+											onmouseover="validateNameContact();"
+											onfocus="validateNameContact();">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="canceltwo" class="cancel">Cancel</button>
