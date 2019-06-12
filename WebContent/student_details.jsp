@@ -346,6 +346,11 @@
                 .click(function() {
                     updateVisit();
                 });  */
+                $("#accordioninfo").accordion({
+                    collapsible: true,
+                    navigation: true,
+                    active: false,
+                    autoHeight: false});
                 $( "#cancel" )
                 .button()
                 .click(function() {
@@ -432,6 +437,70 @@ for(Cookie cookie : cookies){
                 </tr>
 
             </table>
+            
+            <div id="accordioninfo" style="width: 100%;height: 100%">
+
+                <h3><a href="#">Student's Info</a></h3>
+                <div>
+
+                    <table  border="0px" width="100%"  id="table1" align="center">
+
+                        <tr>
+
+                           <td width="25%"  class="alignLeft" height="50">Name</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${student.name}" />
+                            </td>
+                            
+                            <td width="25%"  class="alignLeft" height="50" >Studying in class</td>
+                            <td  width="25%"  class="tablerows">
+                            <c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
+						    ${splt} 
+							</c:forEach>
+                            </td>
+                        </tr>
+                        
+                       
+                        <tr>
+                            <td width="25%"  class="alignLeft" height="50" >Contact Number</td>
+                            <td  width="25%"  class="tablerows">
+                                <c:out default="" value="${parents.contactnumber}" />
+                            </td>
+                            
+                            <td width="25%"  class="alignLeft" height="50" >Gender
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.gender}" />
+                            </td>
+                            
+                        </tr>
+					<tr>
+
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows" >
+
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows">
+
+                            </td>
+                        </tr>
+                    </table>
+
+                    
+
+                </div>
+
+
+
+
+
+
+            </div>
+            
             <div id="accordion" style="width: 100%;height: 100%">
 		
                 <h3><a href="#">Student Details</a></h3>
@@ -462,17 +531,6 @@ for(Cookie cookie : cookies){
                             
                         </tr>
 
-					<tr>
-                            <td width="25%"  class="alignLeft" height="50">Name</td>
-                            <td width="25%" class="tablerows" style="text-transform:uppercase">
-                                <c:out default="" value="${student.name}" />
-                            </td>
-                            <td width="25%"  class="alignLeft" height="50" >Gender
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.gender}" />
-                            </td>
-                        </tr>
                         <tr>
                             <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
                             <td width="25%" class="tablerows" >
@@ -513,13 +571,7 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50" >Studying in class</td>
-                            <td  width="25%"  class="tablerows">
-                            <c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
-						    ${splt} 
-							</c:forEach>
-                               <%--  <c:out default="" value="${student.classstudying}" /> --%>
-                            </td>
+                            
                             <td width="25%"  class="alignLeft" height="50">Admitted in class
                             </td>
                             <td width="25%" class="tablerows">
@@ -817,10 +869,6 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50" >Contact Number</td>
-                            <td  width="25%"  class="tablerows">
-                                <c:out default="" value="${parents.contactnumber}" />
-                            </td>
                             <td width="25%"  class="alignLeft" height="50">Co-Contact Number
                             </td>
                             <td width="25%" class="tablerows">
@@ -883,16 +931,7 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                     </table>
-
-                    
-
                 </div>
-
-
-
-
-
-
             </div>
               <div id="accordion2" style="width: 100%;height: 100%">
 

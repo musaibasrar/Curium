@@ -161,25 +161,9 @@ for(Cookie cookie : cookies){
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="Controller?process=FeesProcess&action=feesCollect"> <img
-									src="images/feescollectw.png" width="35" height="35"
-									alt="Fees Collection" style="vertical-align: bottom;" />Fees
-									Collect
-							</a></td>
-
-							<td><a target="mainFrame"
-								href="Controller?process=AccountProcess&action=createVoucher">
-									<img alt="Create Voucher" src="images/voucherw.png" width="30"
-									height="30" />Create Voucher
-							</a></td>
-
-							<!-- <td ><a target="mainFrame" href="feesCollectionDetails.jsp"><img  alt="Fees Details" src="images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
-
-							<td><a target="mainFrame"
 								href="Controller?process=StudentProcess&action=addNew"> <img
 									src="images/Usersw.png" width="30" height="30"
-									alt="Add New Student" style="vertical-align: bottom;" />Add New
+									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
 							<td ><a target="leftFrame" href="leftsettings.jsp">
@@ -187,13 +171,7 @@ for(Cookie cookie : cookies){
 									height="30" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
-							<td ><a target="mainFrame"
-								href="Controller?process=AdminProcess&action=viewAllExpenses"><img
-									alt="Admin Exp" src="images/adexpw.png" width="30" height="30" style="vertical-align: bottom;"/>
-									Admin Expense
-							</a></td>
-
-							<td ><a target="mainFrame" href="sendsms.jsp"><img
+							<td ><a target="mainFrame" href="Controller?process=SMSProcess&action=sendSMS"><img
 									src="images/sendsmsw.png" width="30" height="30" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a></td>
@@ -202,7 +180,7 @@ for(Cookie cookie : cookies){
 								href="Controller?process=StudentProcess&action=viewAllStudentsWithParents"><img
 									alt="View All Students" src="images/allusersw.png" width="30"
 									height="30" style="vertical-align: bottom;"/>
-								View All
+								View Students
 							</a></td>
 							
 							<td ><a target="mainFrame"

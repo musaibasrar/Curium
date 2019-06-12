@@ -440,6 +440,18 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=addNew" style="font-size: 12px;">Add New</a><br/>
             </div>
             
+             <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
+            <div >
+                <a target="mainFrame" href="Controller?process=SMSProcess&action=sendSMS" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="sendemail.jsp" style="font-size: 12px;">Email</a><br/>
+            </div>
+            
+             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
+            <div>
+                <a target="mainFrame" href="Controller?process=ClassProcess&action=promoteClass" style="font-size: 12px;">Promotions</a><br/>
+				
+            </div>
+            
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
@@ -512,12 +524,6 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a><br/>
             </div> 
             
-            <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
-            <div >
-                <a target="mainFrame" href="Controller?process=SMSProcess&action=sendSMS" style="font-size: 12px;">SMS</a><br/>
-                <a target="mainFrame" href="sendemail.jsp" style="font-size: 12px;">Email</a><br/>
-            </div>
-            
             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=createAccount" style="font-size: 12px;">Ledger Account</a><br/>
@@ -541,12 +547,6 @@ for(Cookie cookie : cookies){
             <div >
                 <a target="mainFrame" href="Controller?process=HrProcess&action=leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
-            <div>
-                <a target="mainFrame" href="Controller?process=ClassProcess&action=promoteClass" style="font-size: 12px;">Promotions</a><br/>
-				
             </div>
             
             </div>

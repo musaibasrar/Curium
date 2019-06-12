@@ -464,12 +464,146 @@ for(Cookie cookie : cookies){
 		<div>
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Student Details</a></li>
+					<li><a href="#tabs-0">Student's Info</a></li>
+					<li><a href="#tabs-1">Student's Details</a></li>
 					<li><a href="#tabs-2">Parent's Details</a></li>
 					<li><a href="#tabs-3">Upload Photo</a></li>
 					<li><a href="#tabs-4">Additional Details</a></li>
 				</ul>
 
+
+				<div id="tabs-0">
+							<table width="100%" border="0" align="center" id="table1">
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+									
+							<td align="right"><label style="color: #325F6D;font-weight: bold;font-size: 15px">Student Name* &nbsp;</label><input type="hidden" name="id" id="id"
+								value="<c:out value="${student.sid}" />" /><input type="hidden" name="studentexternalid" id="studentexternalid"
+								value="<c:out value="${student.studentexternalid}" />" /> <label> <input
+									name="name" type="text" style="text-transform:uppercase"
+									value="<c:out value="${student.name}" />" class="textField"
+									id="name" size="36" data-validate="validate(required)">
+							</label></td>
+
+
+							<td width="16%">
+								<label style="color: #325F6D;font-weight: bold;font-size: 15px">&nbsp;&nbsp;&nbsp;&nbsp;Studying in Class&nbsp;</label>					
+							<label> 
+									<select name="classsec" id="classsec"
+									style="width: 80px;">
+										<option selected>${classstudying}</option>
+										<option></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}" >
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>	
+										</c:forEach>
+								</select>
+							</label> <label>
+							
+							<select name="secstudying" id="secstudying"
+									style="width: 80px;">
+										<option selected>${secstudying}</option>
+										<option></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.section != '')}">
+											<option value="${classdetailslist.section}">
+												<c:out value="${classdetailslist.section}" />
+											</option>
+										</c:if>	
+										</c:forEach>
+								</select>
+							</label>
+							
+							</td>
+
+
+								</tr>
+
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+									
+								<td align="right"><label style="color: #325F6D;font-weight: bold;font-size: 15px">Contact Number &nbsp;</label><label> <input name="contactnumber"
+									type="text" class="textField" id="contactnumber" size="36"
+									value="<c:out default="" value="${parents.contactnumber}" />"">
+
+								</label></td>
+								
+
+							<td width="16%" class="alignLeft"><label style="color: #325F6D;font-weight: bold;font-size: 16px">&nbsp;&nbsp;&nbsp;&nbsp;Gender &nbsp;&nbsp;</label>Male<input type="checkbox"
+								value="Male" name="gender" id="yes:male" onclick="yesCheck(this.id);"
+								${student.gender == 'Male' ? 'checked' : ''} />&nbsp;
+								&nbsp;Female<input type="checkbox" value="Female" name="gender"
+								id="no:male" onclick="noCheck(this.id);"
+								${student.gender == 'Female' ? 'checked' : ''} />
+
+							</td>
+
+								</tr>
+								
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								
+								<tr>
+									<td><br /></td>
+								</tr>
+							<tr align="left">
+									
+									
+									<td width="10%" class="alignRight"> &nbsp;</td>
+
+									<td align="left">
+									
+										
+										<button id="updatefour" onmouseover="validateNameContact();validateAdmissionNumber();" onfocus="validateNameContact();">Update</button>
+
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="cancelfour">Cancel</button>
+
+									</td>
+
+								
+								
+									
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								
+
+						</div>
+						</div>
+							
+							</table>
+							
+							</div>
 
 
 				<div id="tabs-1">
@@ -522,32 +656,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
-							<td width="16%" class="alignRight">Name &nbsp;</td>
-							<td width="28%"><input type="hidden" name="id" id="id"
-								value="<c:out value="${student.sid}" />" /><input type="hidden" name="studentexternalid" id="studentexternalid"
-								value="<c:out value="${student.studentexternalid}" />" /> <label> <input
-									name="name" type="text" style="text-transform:uppercase"
-									value="<c:out value="${student.name}" />" class="textField"
-									id="name" size="30" data-validate="validate(required)">
-							</label></td>
-
-							<td width="16%" class="alignRight">Gender &nbsp;</td>
-
-							<td width="16%" class="alignLeft">Male<input type="checkbox"
-								value="Male" name="gender" id="yes:male" onclick="yesCheck(this.id);"
-								${student.gender == 'Male' ? 'checked' : ''} />&nbsp;
-								&nbsp;Female<input type="checkbox" value="Female" name="gender"
-								id="no:male" onclick="noCheck(this.id);"
-								${student.gender == 'Female' ? 'checked' : ''} />
-
-							</td>
-
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
+						
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -1189,7 +1298,7 @@ for(Cookie cookie : cookies){
 									<td align="center">
 										
 										
-										<button id="updatethree" onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();" onfocus="validateNameContact();validateFatherName();">Update</button>
+										<button id="updatethree" onmouseover="validateNameContact();validateAdmissionNumber();" onfocus="validateNameContact();">Update</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="cancelthree">Cancel</button>
@@ -1313,7 +1422,7 @@ for(Cookie cookie : cookies){
 									<td align="center">
 									
 										
-										<button id="updatefour" onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();" onfocus="validateNameContact();validateFatherName();">Update</button>
+										<button id="updatefour" onmouseover="validateNameContact();validateAdmissionNumber();" onfocus="validateNameContact();">Update</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="cancelfour">Cancel</button>
@@ -1475,17 +1584,6 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
-
-							<td width="16%" class="alignRight">Contact Number &nbsp;</td>
-
-							<td width="28%"><label> <input name="contactnumber"
-									type="text" class="textField" id="contactnumber" size="36"
-									value="<c:out default="" value="${parents.contactnumber}" />"">
-
-							</label></td>
-
-
-
 							<td width="16%" class="alignRight">CO-Contact Number &nbsp;</td>
 
 							<td width="28%"><label> <input
@@ -1599,7 +1697,7 @@ for(Cookie cookie : cookies){
 									<td align="center">
 									
 										
-										<button id="updatetwo" onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();" onfocus="validateNameContact();validateFatherName();">Update</button>
+										<button id="updatetwo" onmouseover="validateNameContact();validateAdmissionNumber();" onfocus="validateNameContact();">Update</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="canceltwo">Cancel</button>

@@ -402,11 +402,10 @@ for(Cookie cookie : cookies){
                     <thead>
                         <tr>
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
-                            <th title="click to sort" class="headerText">Admission Number</th>
+                            <th title="click to sort" class="headerText">Contact Number</th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Class</th>
-                            <th title="click to sort" class="headerText">Father's Name&nbsp;</th>
-                            <th title="click to sort" class="headerText">Mother's Name&nbsp;</th>
+                            <th title="click to sort" class="headerText">Gender&nbsp;</th>
                         </tr>
                     </thead>
 
@@ -415,15 +414,14 @@ for(Cookie cookie : cookies){
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.contactnumber}"/></a></td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.name}"/></td>
                                 <td class="dataText" style="text-transform:uppercase">
                                  <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
                                 </td>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.fathersname}"/></td>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.mothersname}"/></td>
+                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.gender}"/></td>
                                 <!-- <fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/>  -->
                                 <!-- <td class="dataText"><fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/></td> -->
                                  
@@ -442,7 +440,7 @@ for(Cookie cookie : cookies){
             <div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="Controller?process=PersonalProcessPages&page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="Controller?process=StudentProcess&action=viewAll&page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -455,7 +453,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="Controller?process=PersonalProcessPages&page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="Controller?process=StudentProcess&action=viewAll&page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -464,7 +462,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="Controller?process=PersonalProcessPages&page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="Controller?process=StudentProcess&action=viewAll&page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
             

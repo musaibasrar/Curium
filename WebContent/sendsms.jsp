@@ -614,26 +614,21 @@ for(Cookie cookie : cookies){
 
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" id="table1">
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
 
 						<tr>
-
-							<td width="30%" class="alignRight"><label> <font
-									color="red"><div id="mydiv"></div></font>
-							</label></td>
 							<td width="20%" class="alignRight"></td>
-							<td class="alignRight"><font color="red"><div
-										id="mydivmobile"></div></font></td>
+							<td class="alignRight"></td>
+							<td width="30%" class="alignRight">
+							<a href="Controller?process=SMSProcess&action=SMSbalanceCheck" title="Click to check SMS balance">SMS Balance</a>
+											: ${smsbalance}
+							</td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
 						</tr>
 
-<tr>
-
-
+						<tr>
 							<td class="alignRight">Select&nbsp;</td>
 							<td width="28%"> <label>Class: <select name="addclass" id="addclass"
 									style="width: 120px">

@@ -41,7 +41,7 @@ for(Cookie cookie : cookies){
         font-size: 20px;"> DASH BOARD </label><br><br>
     		<!-- <h1 align="center" class="headerTD">Number Of Students Per Center</h1> -->
 			<%-- <canvas id="canvas" height="100" width="300"></canvas> --%>
-			<canvas id="student-chart" width="800" height="200"></canvas>
+			<canvas id="student-chart" width="800" height="300"></canvas>
 			<canvas id="student-feeschart" width="800" height="400"></canvas>
 			<canvas id="student-monthlyfeeschart" width="800" height="400"></canvas>
 		</div>
@@ -115,8 +115,8 @@ for(Cookie cookie : cookies){
                         yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: finalstep,
-                                stepSize: 100
+                                //max: finalstep,
+                                stepSize: 200
                                }
                         
                             }]
