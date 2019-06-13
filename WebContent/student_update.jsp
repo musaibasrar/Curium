@@ -465,9 +465,11 @@ for(Cookie cookie : cookies){
 			<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Student Details</a></li>
+					<li><a href="#tabs-5">Previous School Details</a></li>
 					<li><a href="#tabs-2">Parent's Details</a></li>
 					<li><a href="#tabs-3">Upload Photo</a></li>
 					<li><a href="#tabs-4">Additional Details</a></li>
+					<li><a href="#tabs-6">Bank Details</a></li>
 				</ul>
 
 
@@ -610,34 +612,6 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>		
-						
-						<tr>
-							<td width="16%" class="alignRight">No. of transfer certificate&nbsp;</td>
-
-							<td align="left"><label><input name="tcno"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.nooftc}"/>"
-									id="tcno" size="30">  
-
-							</label></td>
-							<td width="16%" class="alignRight">Date of transfer certificate&nbsp;</td>
-
-							<td align="left"><label> <input
-									name="dateoftc" type="text" class="textField"
-									value="<fmt:formatDate value="${student.dateoftc}" pattern="yyyy-MM-dd"/>"
-									id="dateoftc" size="30"
-									data-validate="validate(required)">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						
 						
 						
 						<tr>
@@ -952,45 +926,6 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td width="16%" class="alignRight">Last Class Studied &nbsp;</td>
-
-							<td><label> <select name="lastclass" id="lastclass"
-									style="width: 200px;">
-										<option selected>${student.stdlaststudied}</option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}" >
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-								</select>
-
-							</label></td>
-
-							<td width="30%" class="alignRight">Last School Attended
-								&nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="lastschool" type="text" class="textField"
-									value="<c:out default="" value="${student.schoollastattended}" />"
-									id="lastschool" size="30" data-validate="validate(required)">
-							</label></td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-						
-						<tr>
-
-
 							<td width="16%" class="alignRight">Languages Studied &nbsp;</td>
 
 							<td><label> <input
@@ -1018,45 +953,6 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						
-						<tr>
-							<td width="16%" class="alignRight">Last School Medium of
-								Instruction&nbsp;</td>
-
-							<td><label> <select name="mediumofinstruction"
-									id="mediumofinstruction" style="width: 240px">
-										<option selected>${student.mediumofinstruction}</option>
-										<option>Kannada</option>
-										<option>Hindi</option>
-										<option>Urdu</option>
-										<option>English</option>
-										<option>Marathi</option>
-										<option>Tamil</option>
-										<option>Telgu</option>
-								</select>
-
-							</label></td>
-							<td width="16%" class="alignRight">Last School
-								Type&nbsp;</td>
-
-							<td><label> <select name="previousschooltype"
-									id="previousschooltype" style="width: 240px">
-										<option selected>${student.previousschooltype}</option>
-										<option>Government</option>
-										<option>Private Aided</option>
-										<option>Local Bodies</option>
-										<option>Private Unaided School</option>
-								</select>
-
-							</label></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
 						<tr>
 
 							<td width="30%" class="alignRight">RTE &nbsp;</td>
@@ -1175,7 +1071,8 @@ for(Cookie cookie : cookies){
 								<tr>
 
 									<td align="center">
-									
+									<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
+								&nbsp;&nbsp;&nbsp;
 									<a class="prevtab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Previous</a>
 									</td>
 								</tr>
@@ -1295,16 +1192,23 @@ for(Cookie cookie : cookies){
 								<tr>
 									<td><br /></td>
 								</tr>
-								
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
+							<tr>
 									<td><br /></td>
 								</tr>
 							<tr>
+							<td></td>
+								<td align="center">
+								<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<a class="prevtab"
+									style="font-weight: bold; color: #325F6D; font-size: 13px"
+									href="#">Previous</a></td>
+							</tr>
+							
+							<tr>
 									<td><br /></td>
-								</tr>	
+								</tr>
+									
 							<tr align="center">
 									
 									
@@ -1621,12 +1525,276 @@ for(Cookie cookie : cookies){
 
 						</div>
 
+							<div id="tabs-5">
+				
+						<table style="width:70%;" align="center">
+								<tr>
+
+										<td><br /></td>
+									</tr>
+									
+						<tr>
+							<td class="alignRight">Transfer certificate No.&nbsp;</td>
+
+							<td><label><input name="tcno"
+									type="text" class="textField"
+									value="<c:out default="" value="${student.nooftc}"/>"
+									id="tcno" size="36">  
+
+							</label></td>
+							<td class="alignRight">Date of transfer certificate&nbsp;</td>
+
+							<td><label> <input
+									name="dateoftc" type="text" class="textField"
+									value="<fmt:formatDate value="${student.dateoftc}" pattern="yyyy-MM-dd"/>"
+									id="dateoftc" size="36"
+									data-validate="validate(required)">
+
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+
+						<tr>
+							<td class="alignRight">Previous Class Studied &nbsp;</td>
+
+							<td><label> <select name="lastclass" id="lastclass"
+									style="width: 230px;">
+										<option selected>${student.stdlaststudied}</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}" >
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>	
+										</c:forEach>
+								</select>
+
+							</label></td>
+
+							<td class="alignRight">Previous School Name
+								&nbsp;</td>
+							<td width="12%" align="left"><label> <input
+									name="lastschool" type="text" class="textField"
+									value="<c:out default="" value="${student.schoollastattended}" />"
+									id="lastschool" size="36" data-validate="validate(required)">
+							</label></td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+						
+						<tr>
+							<td width="16%" class="alignRight">Previous School Medium of
+								Instruction&nbsp;</td>
+
+							<td><label> <select name="mediumofinstruction"
+									id="mediumofinstruction" style="width: 240px">
+										<option selected>${student.mediumofinstruction}</option>
+										<option>Kannada</option>
+										<option>Hindi</option>
+										<option>Urdu</option>
+										<option>English</option>
+										<option>Marathi</option>
+										<option>Tamil</option>
+										<option>Telgu</option>
+								</select>
+
+							</label></td>
+							
+							<td class="alignRight">Previous School Type&nbsp;</td>
+
+							<td><label> <select name="previousschooltype"
+									id="previousschooltype" style="width: 230px">
+										<option selected>${student.previousschooltype}</option>
+										<option></option>
+										<option>Government</option>
+										<option>Private Aided</option>
+										<option>Local Bodies</option>
+										<option>Private Unaided School</option>
+								</select>
+
+							</label></td>
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+
+					</table>
+
+
+
+					<div>
+						<table width="100%">
+							<tr>
+
+								<td><br /></td>
+							</tr>
+
+							<tr>
+
+								<td align="center">
+								<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<a class="prevtab"
+									style="font-weight: bold; color: #325F6D; font-size: 13px"
+									href="#">Previous</a></td>
+							</tr>
+
+							<tr>
+
+								<td><br /></td>
+							</tr>
+
+							<tr>
+								<td align="center">
+
+
+									<button id="updatethree" class="update"
+										onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
+										onfocus="validateNameContact();validateFatherName();">Update</button>
+
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<button id="cancelthree" class="cancel">Cancel</button>
+
+								</td>
+
+
+							</tr>
+							<tr>
+								<td><br /></td>
+							</tr>
+							<tr>
+								<td><br /></td>
+							</tr>
+							<tr>
+								<td><br /></td>
+							</tr>
+							<tr>
+								<td><br /></td>
+							</tr>
+						</table>
+
+					</div>
+
+				</div>
+				
+				<div id="tabs-6">
+
+							<div>
+								<table width="100%">
+									<tr>
+
+										<td><br /></td>
+									</tr>
+									
+									<tr>
+								<td width="10%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight"> Bank Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="bankname"
+									value="<c:out default="" value="${student.bankname}" />"
+									type="text" class="myclass" id="bankname" size="36"
+									onclick="validateNameContact();">
+							</label></td>
+						</tr>
+						<tr>
+
+										<td><br /></td>
+									</tr>
+						<tr>
+								<td width="20%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight"> Bank IFSC Code&nbsp;&nbsp;<input name="bankifsc"
+									value="<c:out default="" value="${student.bankifsc}" />"
+									type="text" class="myclass" id="bankifsc" size="36"
+									onclick="validateNameContact();">
+							</label></td>
+						</tr>
+						<tr>
+
+										<td><br /></td>
+									</tr>
+						<tr>
+								<td width="20%" class="alignRight"></td>
+							<td width="68%"><label class="alignRight"> Account No.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="accno"
+									value="<c:out default="" value="${student.accno}" />"
+									type="text" class="myclass" id="accno" size="36"
+									onclick="validateNameContact();">
+							</label></td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr align="left">
+
+								<tr>
+								<td></td>
+								<td align="left">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+								<tr><td><br></td></tr>
+									<tr>
+										<td></td>
+								<td>
+
+
+									<button id="updatethree" class="update"
+										onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
+										onfocus="validateNameContact();validateFatherName();">Update</button>
+
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<button id="cancelthree" class="cancel">Cancel</button>
+
+								</td>
+
+
+							</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+								</table>
+
+							</div>
+
+						</div>
+	
 						</div>
 						</div>
-
-
-
-
 						</form>
 						<script>
 							$(function() {
