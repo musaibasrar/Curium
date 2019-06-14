@@ -926,34 +926,6 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td width="16%" class="alignRight">Languages Studied &nbsp;</td>
-
-							<td><label> <input
-									name="languagesstudied" type="text" class="textField"
-									value="<c:out default="" value="${student.languagesstudied}" />"
-									id="languagesstudied" size="30" data-validate="validate(required)">
-
-							</label></td>
-							
-							<td width="16%" class="alignRight">Core Subjects Studied&nbsp;</td>
-							<td align="left"><label> <input name="progress"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.subsequentprogress}" />"
-									id="progress" size="30" data-validate="validate(required)">
-
-							</label></td>
-
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-						
-						<tr>
 
 							<td width="30%" class="alignRight">RTE &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
@@ -1597,6 +1569,32 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
+							<td width="16%" class="alignRight">Languages Studied &nbsp;</td>
+
+							<td><label> <input
+									name="languagesstudied" type="text" class="textField"
+									value="<c:out default="" value="${student.languagesstudied}" />"
+									id="languagesstudied" size="30" data-validate="validate(required)">
+
+							</label></td>
+							
+							<td width="16%" class="alignRight">Core Subjects Studied&nbsp;</td>
+							<td align="left"><label> <input name="progress"
+									type="text" class="textField"
+									value="<c:out default="" value="${student.subsequentprogress}" />"
+									id="progress" size="30" data-validate="validate(required)">
+
+							</label></td>
+
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
 						
 						<tr>
 							<td width="16%" class="alignRight">Previous School Medium of
