@@ -956,7 +956,7 @@
 								onclick="noCheck(this.id);" />
 
 							</td>
-							<td width="20%" class="alignRight">Adhar Card No.
+							<td width="20%" class="alignRight">Student's adhar Card No.
 								&nbsp;</td>
 							<td width="28%"><label> <input
 									name="bplcardno" type="text" class="myclass"
@@ -1049,34 +1049,6 @@
 									<td><br /></td>
 								</tr>
 
-						<tr>
-
-
-							<td width="16%" class="alignRight">Languages Studied &nbsp;</td>
-
-							<td width="28%"><label> <input
-									name="languagesstudied" type="text" class="myclass"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									id="languagesstudied" size="30">
-							</label></td>
-
-
-
-							<td width="20%" class="alignRight">Core Subjects Studied &nbsp;</td>
-							<td width="28%"><label> <input
-									name="progress" type="text"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									class="myclass" id="progress" size="30">
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-								
 						<tr>
 						
 							<td width="20%" class="alignRight">RTE
@@ -1757,6 +1729,32 @@
 							<td><br /></td>
 						</tr>
 
+						<tr>
+							<td width="16%" class="alignRight">Languages Studied &nbsp;</td>
+
+							<td width="28%"><label> <input
+									name="languagesstudied" type="text" class="myclass"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									id="languagesstudied" size="30">
+							</label></td>
+
+
+
+							<td width="20%" class="alignRight">Core Subjects Studied &nbsp;</td>
+							<td width="28%"><label> <input
+									name="progress" type="text"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									class="myclass" id="progress" size="30">
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
 						<tr>
 							<td width="16%" class="alignRight">Previous School Medium of
 								Instruction&nbsp;</td>
