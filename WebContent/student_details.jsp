@@ -622,19 +622,6 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                        <td width="25%"   class="alignLeft" height="50" >Languages Studied</td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.languagesstudied}" />
-                            </td>
-                            
-                            
-                            <td width="25%"   class="alignLeft" height="50" >Core Subjects Studied</td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.subsequentprogress}" />
-                            </td>
-                        </tr>
-                        
-                        <tr>
                         
                          <td  width="25%"  class="alignLeft" height="50" >RTE
                             </td>
@@ -750,9 +737,19 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.schoollastattended}" />
                             </td>
-                           
-                           
+                        </tr>
                         
+                         <tr>
+                        <td width="25%"   class="alignLeft" height="50" >Languages Studied</td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.languagesstudied}" />
+                            </td>
+                            
+                            
+                            <td width="25%"   class="alignLeft" height="50" >Core Subjects Studied</td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.subsequentprogress}" />
+                            </td>
                         </tr>
                         
                         <tr>
