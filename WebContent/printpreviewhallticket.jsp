@@ -208,10 +208,10 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				
-				Divine M.A. English Higher Primary & High School </td>
+				Shaheen Pre & Primary School</td>
 			</tr>
 			<tr>
-			<td class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</td>
+			<td class="addressLine">Opp. Star Shadi Mahal, Ring Road, Veer Sagara,Tumkur-572101<br>Ph: +91 99866 06766, +91 79759 92850</td>
 			</tr>
 
 			<tr>

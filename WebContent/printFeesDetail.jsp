@@ -180,10 +180,10 @@
 				<img src="images/cambridgelogo.jpg" width="200" height="150"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;Cambridge School Yadgir </label><br>
-				<label class="addressLine">Behind Mohan Complex, Chittapur Road, Yadgir - 585202<br>
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;Shaheen Pre & Primary School</label><br>
+				<label class="addressLine">Opp. Star Shadi Mahal, Ring Road, Veer Sagara,Tumkur-572101<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											Dist - Yadgir (K.S.) Cell: 9880012654 
+											Ph: +91 99866 06766, +91 79759 92850 
 				 </label>
 				</td>
 			</tr>

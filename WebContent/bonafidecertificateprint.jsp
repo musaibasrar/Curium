@@ -120,10 +120,10 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				
-				Curium Education Society's </td>
+				Shaheen Pre & Primary School </td>
 			</tr>
 			<tr>
-			<td class="addressLine">Bidar- 585401</td>
+			<td class="addressLine">Opp. Star Shadi Mahal, Ring Road, Veer Sagara,Tumkur-572101<br>Ph: +91 99866 06766, +91 79759 92850</td>
 			</tr>
 
 			<tr>

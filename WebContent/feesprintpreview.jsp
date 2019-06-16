@@ -4,7 +4,6 @@
     Author     : Musaib
 --%>
 
-<%@page import="com.model.personal.dto.PersonalDetails"%>
 <%@page import="java.lang.String"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
