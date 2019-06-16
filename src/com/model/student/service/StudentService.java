@@ -67,6 +67,9 @@ public class StudentService {
 		Pudetails puDetails = new Pudetails();
 		Degreedetails degreeDetails = new Degreedetails();
 		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying = null,conClassAdmittedIn=null;
+		String siblingOne=null;
+		String siblingTwo=null;
+		String siblingThree=null;
 		boolean result=false;
 		
 		try {
@@ -249,7 +252,7 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("bhagyalakshmibondnumber")) {
 		                	student.setBhagyalakshmibondnumber(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Marks of Identification on Pupil's body'
+		                //@UI 'Previous school dice code'
 		                if (fieldName.equalsIgnoreCase("disabilitychild")) {
 		                	student.setDisabilitychild(DataUtil.emptyString(item.getString()));
 		                }
@@ -259,6 +262,7 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("sts")) {
 		                	student.setSts(DataUtil.parseInt(item.getString()));
 		                }
+		                //@ UI 'Whether school transportation required'
 		                if (fieldName.equalsIgnoreCase("rte")) {
 		                	student.setRte(DataUtil.parseInt(item.getString()));
 		                }
@@ -368,15 +372,44 @@ public class StudentService {
 		                if(fieldName.equalsIgnoreCase("motherscastecertno")){
 		                	parents.setMotherscastecertno(DataUtil.emptyString(item.getString()));
 		                }
+		                //@UI 'Fathers Adhar Card No.'
 		                if(fieldName.equalsIgnoreCase("fatherscaste")){
 		                	parents.setFatherscaste(DataUtil.emptyString(item.getString()));
 		                }
+		              //@UI 'Mothers Adhar Card No.'
 		                if(fieldName.equalsIgnoreCase("motherscaste")){
 		                	parents.setMotherscaste(DataUtil.emptyString(item.getString()));
 		                }
-		                if (fieldName.equalsIgnoreCase("remarksadditional")) {
-		                	parents.setRemarks(DataUtil.emptyString(item.getString()));
+		                //@UI Siblings
+		                if (fieldName.equalsIgnoreCase("bs1")) {
+		                	siblingOne = DataUtil.emptyString(item.getString());
 		                }
+		                if (fieldName.equalsIgnoreCase("sats1")) {
+		                	siblingOne = siblingOne+ ":" + DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("class1")) {
+		                	siblingOne = siblingOne+ ":" + DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("bs2")) {
+		                	siblingTwo = (DataUtil.emptyString(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("sats2")) {
+		                	siblingTwo = siblingTwo+ ":" + DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("class2")) {
+		                	siblingTwo = siblingTwo+ ":" + DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("bs3")) {
+		                	siblingThree = DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("sats3")) {
+		                	siblingThree = siblingThree+ ":" + DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("class3")) {
+		                	siblingThree = siblingThree+ ":" + DataUtil.emptyString(item.getString());
+		                }
+		                //@UI End Siblings
+		                
 		                // Adding Degree Details
 		                if (fieldName.equalsIgnoreCase("pepdc")) {
                                     degreeDetails.setExampassedappearance(DataUtil.parseInt(item.getString()));
@@ -491,6 +524,11 @@ public class StudentService {
 		student.setDegreedetails(degreeDetails);
 		parents.setStudent(student);
 		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+
+		//set siblings detials
+		parents.setRemarks(siblingOne+";"+siblingTwo+";"+siblingThree);
+		//end siblings details
+		
 		parents = new parentsDetailsDAO().create(parents);
 
 		if(parents!=null){
@@ -591,6 +629,33 @@ public class StudentService {
 					request.setAttribute("classadm", classAdmitted);
 					request.setAttribute("secadm", "");
 				}
+				
+				//get Siblings Details
+					String[] siblings = parents.getRemarks().split(";");
+					String[] siblingDetailsOne = null;
+					String[] siblingDetailsTwo = null;
+					String[] siblingDetailsThree = null;
+					
+					try {
+						siblingDetailsOne = siblings[0].split(":");
+						request.setAttribute("bs1", siblingDetailsOne[0]);
+						request.setAttribute("sats1", siblingDetailsOne[1]);
+						request.setAttribute("class1", siblingDetailsOne[2]);
+						
+						siblingDetailsTwo = siblings[1].split(":");
+						request.setAttribute("bs2", siblingDetailsTwo[0]);
+						request.setAttribute("sats2", siblingDetailsTwo[1]);
+						request.setAttribute("class2", siblingDetailsTwo[2]);
+						
+						siblingDetailsThree = siblings[2].split(":");
+						request.setAttribute("bs3", siblingDetailsThree[0]);
+						request.setAttribute("sats3", siblingDetailsThree[1]);
+						request.setAttribute("class3", siblingDetailsThree[2]);
+					}catch (Exception e) {
+						// TODO: handle exception
+					}
+					
+				//End Siblings details
 
 				httpSession.setAttribute("parents", parents);
 				//httpSession.setAttribute("feesdetails", feesdetails);
@@ -626,6 +691,9 @@ public class StudentService {
 		String studentPicUpdate=null;
 		String dropdowncateg=null;
 		String newcateg=null;
+		String siblingOne=null;
+		String siblingTwo=null;
+		String siblingThree=null;
 		
 		try{
 			
@@ -1079,6 +1147,36 @@ public class StudentService {
 		                }
 		              //End Bank Details
 		                
+		                //@UI Siblings
+		                if (fieldName.equalsIgnoreCase("bs1")) {
+		                	siblingOne = DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("sats1")) {
+		                	siblingOne = siblingOne+ ":" + DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("class1")) {
+		                	siblingOne = siblingOne+ ":" + DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("bs2")) {
+		                	siblingTwo = (DataUtil.emptyString(item.getString()));
+		                }
+		                if (fieldName.equalsIgnoreCase("sats2")) {
+		                	siblingTwo = siblingTwo+ ":" + DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("class2")) {
+		                	siblingTwo = siblingTwo+ ":" + DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("bs3")) {
+		                	siblingThree = DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("sats3")) {
+		                	siblingThree = siblingThree+ ":" + DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("class3")) {
+		                	siblingThree = siblingThree+ ":" + DataUtil.emptyString(item.getString());
+		                }
+		                //@UI End Siblings
+		                
 	            } else {
 	                String fieldName = item.getFieldName();
 
@@ -1129,6 +1227,9 @@ public class StudentService {
  		if (pid != "") {
  			parents.setStudent(student);
  			parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+ 			//set siblings detials
+ 			parents.setRemarks(siblingOne+";"+siblingTwo+";"+siblingThree);
+ 			//end siblings details
  			parents = new parentsDetailsDAO().update(parents);
  		}
 		String stId = student.getSid().toString();

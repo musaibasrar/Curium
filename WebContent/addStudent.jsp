@@ -846,7 +846,6 @@
 
 							</label></td>
 
-
 							<td width="16%" class="alignRight">Nationality &nbsp;</td>
 
 							<td><label> <select name="nationality"
@@ -857,8 +856,6 @@
 								</select>
 
 							</label></td>
-
-
 						</tr>
 
 						<tr>
@@ -948,15 +945,7 @@
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td width="30%" class="alignRight">Was in receipt of any scholarship&nbsp;</td>
-							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
-								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
-								onclick="noCheck(this.id);" />
-
-							</td>
-							<td width="20%" class="alignRight">Student's adhar Card No.
+							<td width="20%" class="alignRight">Student's Adhar Card No.
 								&nbsp;</td>
 							<td width="28%"><label> <input
 									name="bplcardno" type="text" class="myclass"
@@ -964,6 +953,34 @@
 									id="bplcardno" size="30">
 
 							</label></td>
+							
+							<td width="20%" class="alignRight">Differently Abled Child?&nbsp;</td>
+
+							<td id="categoryname"><label> <select
+									name="specialcategory" onchange="enterOtherSpecialCategory()"
+									id="specialcategory" style="width: 256px">
+										<option selected>Not Applicable</option>
+										<option></option>
+										<option>Not Applicable</option>
+										<option>Hearing Impairment</option>
+										<option>Speech Impairment</option>
+										<option>Visual Impairment</option>
+										<option>Physically Handicapped</option>
+										<option>Autism</option>
+										<option>Mental Retardation</option>
+										<option>Learning Disability</option>
+										<option>Cerebral Palsy</option>
+										<option>Others (Please Specify)</option>
+								</select>
+
+							</label></td>
+							<td width="28%" id="newcateg"
+								style="display: none;"><label> <input
+									name="newcategory" id="newcategory" type="text" class="myclass" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									placeholder="Please Specify" />
+							</label></td>
+							
 						</tr>	
 						<tr>
 							<td><br /></td>
@@ -981,13 +998,17 @@
 								onclick="noCheck(this.id);" />
 
 							</td>
-							<td width="16%" class="alignRight">Marks of Identification on Pupil's body&nbsp;</td>
-							<td width="28%"><label> <input
-									name="disabilitychild" type="text" class="myclass"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									id="disabilitychild" size="30">
+							
+							<td width="20%" class="alignRight">Whether school transportation required?
+										&nbsp;</td>
 
-							</label></td>
+									<td width="28%" height="30" class="alignLeft">&nbsp;Yes<input
+								type="checkbox" value="1" name="rte" id="yes:rte"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="rte" id="no:rte"
+								onclick="noCheck(this.id);" />
+										</td>
+						
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -996,29 +1017,7 @@
 							<td><br /></td>
 						</tr>
 						
-						<tr>
-							<td width="20%" class="alignRight">Special Category&nbsp;</td>
-
-							<td id="categoryname"><label> <select
-									name="specialcategory" onchange="enterOtherSpecialCategory()"
-									id="specialcategory" style="width: 256px">
-										<option selected>None</option>
-										<option></option>
-										<option>None</option>
-										<option>Destitute</option>
-										<option>HIV Case</option>
-										<option>Orphans</option>
-										<option>Others (Please Specify)</option>
-								</select>
-
-							</label></td>
-							<td width="28%" id="newcateg"
-								style="display: none;"><label> <input
-									name="newcategory" id="newcategory" type="text" class="myclass" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									placeholder="Add Other Category" />
-							</label></td>
-							
+						<tr>	
 							<td width="16%" class="alignRight">Mother Tongue &nbsp;</td>
 							<td width="28%">
 								<!-- <label> <input name="motherT"
@@ -1031,35 +1030,17 @@
 									style="width: 256px"
 									onkeypress="return validateContactNum(this);">
 										<option selected></option>
-										<option>Urdu</option>
+										<option>Kannada</option>
 										<option>Hindi</option>
 										<option>English</option>
-										<option>Kannada</option>
+										<option>Urdu</option>
 										<option>Marathi</option>
 										<option>Telugu</option>
 										<option>Tamil</option>
+										<option>Malayalam</option>
 								</select>
 							</label>
 							</td>
-						</tr>
-						<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-						<tr>
-						
-							<td width="20%" class="alignRight">RTE
-										&nbsp;</td>
-
-									<td width="28%" height="30" class="alignLeft">&nbsp;Yes<input
-								type="checkbox" value="1" name="rte" id="yes:rte"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="rte" id="no:rte"
-								onclick="noCheck(this.id);" />
-										</td>
 										
 							<td width="20%" class="alignRight">Remarks &nbsp;</td>
 							<td width="28%"><label> <input name="remarks"
@@ -1069,7 +1050,7 @@
 							</label></td>
 						</tr>
 
-<tr>
+						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
@@ -1294,7 +1275,7 @@
 								<td width="28%"></td>
 									<td><label>
 											<input
-											name="dateoftcissued" type="text" class="myclass"
+											name="dateoftcissued" type="text" class="myclass" autocomplete="false"
 											id="dateoftcissued" size="30" placeholder="Date of Transfer Certificate"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											data-validate="validate(required)">
@@ -1417,6 +1398,31 @@
 								</tr>
 
 								<tr>
+									<td width="20%" class="alignRight">Father's Adhar Card No.
+										&nbsp;</td>
+									<td width="28%"><label> <input
+											name="fatherscaste" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="fatherscastecertno" size="30">
+									</label></td>
+
+									<td width="20%" class="alignRight">Mother's Adhar Card No.
+										&nbsp;</td>
+									<td width="28%"><label> <input
+											name="motherscaste" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="motherscastecertno" size="30">
+									</label></td>
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								
+								<tr>
 									<td width="30%" class="alignRight">Father's Qualification
 										&nbsp;</td>
 									<td width="12%" align="left"><label> <input
@@ -1443,6 +1449,7 @@
 								<tr>
 									<td><br /></td>
 								</tr>
+								
 								<tr>
 									<td width="20%" class="alignRight">Fathers Occupation
 										&nbsp;</td>
@@ -1563,6 +1570,7 @@
 									<td><br /></td>
 								</tr>
 
+								<tr>
 								<td width="16%" class="alignRight">Permanent Address &nbsp;</td>
 
 								<td width="28%"><label> <textarea
@@ -1580,7 +1588,7 @@
 								</label></td>
 								</tr>
 
-
+								
 
 								<tr>
 									<td><br /></td>
@@ -1588,16 +1596,87 @@
 								<tr>
 									<td><br /></td>
 								</tr>
-
+								<tr>
+									<td><br /></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td align="center">
+								<label style="text-decoration: underline;font-weight: bold;font-variant: small-caps;font-size: 15px;color: #EB6000;">SIBLINGS</label></td>
+								</tr>
 
 								<tr>
+									<td><br /></td>
+								</tr>
+								
+								<tr>
+									<td><br /></td>
+								</tr>
+								
+								<tr>
 
-									<td width="16%" class="alignRight">Notes &nbsp;</td>
-									<td width="28%"><label> <input name="remarksadditional"
-											type="text" class="myclass" id="remarksadditional" size="30"
+									<td width="16%" class="alignRight">Name of Brother(s) & Sister(s) Studying &nbsp;</td>
+									<td width="28%"><label> 1. <input name="bs1"
+											type="text" class="myclass" id="bs1" size="30"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											onclick="validateNameContact();">
 									</label></td>
+									<td width="20%" class="alignRight">SATS
+										&nbsp;</td>
+
+									<td width="28%"><label><input
+											name="sats1" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="s1" size="10" onblur="validateNameContact();"></label>
+									<label class="alignRight"> &nbsp;Class&nbsp;</label> <input
+											name="class1" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="noofdependents" size="10" onblur="validateNameContact();">
+									</td>
+									
+								</tr>
+								<tr>
+
+									<td width="16%" class="alignRight">&nbsp;</td>
+									<td width="28%"><label> 2. <input name="bs2"
+											type="text" class="myclass" id="bs2" size="30"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											onclick="validateNameContact();">
+									</label></td>
+									<td width="20%" class="alignRight">SATS
+										&nbsp;</td>
+
+									<td width="28%"><label><input
+											name="sats2" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="sats2" size="10" onblur="validateNameContact();"></label>
+									<label class="alignRight"> &nbsp;Class&nbsp;</label> <input
+											name="class2" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="class2" size="10" onblur="validateNameContact();">
+									</td>
+								</tr>
+								<tr>
+
+									<td width="16%" class="alignRight">&nbsp;</td>
+									<td width="28%"><label> 3. <input name="bs3"
+											type="text" class="myclass" id="bs3" size="30"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											onclick="validateNameContact();">
+									</label></td>
+									<td width="20%" class="alignRight">SATS
+										&nbsp;</td>
+
+									<td width="28%"><label><input
+											name="sats3" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="sats3" size="10" onblur="validateNameContact();"></label>
+									<label class="alignRight"> &nbsp;Class&nbsp;</label> <input
+											name="class3" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="class3" size="10" onblur="validateNameContact();">
+									</td>
 								</tr>
 
 								<tr>
@@ -1684,7 +1763,7 @@
 									<td width="20%" class="alignRight">Date of Transfer Certificate&nbsp;</td>
 							<td width="28%"><label >
 							<input name="dateoftc" type="text" class="myclass"
-									id="dateoftc" size="30"
+									id="dateoftc" size="30" autocomplete="false"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									data-validate="validate(required)"></label></td>
 
@@ -1794,6 +1873,24 @@
 						<tr>
 							<td><br /></td>
 						</tr>
+						
+						<tr>
+							<td width="16%" class="alignRight">Previous school dice code&nbsp;</td>
+							<td width="28%"><label> <input
+									name="disabilitychild" type="text" class="myclass"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									id="disabilitychild" size="30">
+
+							</label></td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
 								<tr align="center">
 									<td width="40%" class="alignRight">&nbsp;</td>
 									<td align="center"><a class="nexttab"
