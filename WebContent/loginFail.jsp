@@ -71,7 +71,7 @@
                                     	</td>
                                     	</tr>
                                     	<tr>
-                                    	<td> <img alt="" src="images/curiumlogin.jpg" style="width:300px;height: 300px"></td>
+                                    	<td> <img alt="" src="images/curiumlogin.jpg" style="width:400px;height: 256px"></td>
                                     	<td></td><td></td><td></td>
                                     	 <td>
                                     	 <p align="left" style="color: red;">Please enter correct username and password</p>
