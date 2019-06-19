@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -322,6 +323,27 @@
 	font-weight: bold;
 	height: 22px;
 }
+
+.alert-box {
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;  
+}
+.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
 </style>
 <style>
 #button {
@@ -436,15 +458,6 @@
 
 		$("#tabs").tabs();
 
-		$("#save").button().click(function() {
-			addDepartment();
-		});
-		
-	
-		
-		
-		/* $("#effect").hide(); */
-
 	});
 	
 	$(function() {
@@ -482,8 +495,6 @@
 			}
 		});
 
-		$("#go").button()
-
 	});
 	
 	function updateRecords(){
@@ -496,6 +507,49 @@
 	
 	
 </script>
+
+<script type="text/javascript">
+					
+					var attedanceresult='<c:out default="" value="${attedanceresult}"/>';
+					var splitMessage = attedanceresult.split('-');
+					
+		            if(attedanceresult.includes("success")){
+		            	 $(function(){
+		            		 $( "div.success" ).html(splitMessage[1]);
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            	 });
+		            	 }else if(attedanceresult.includes("error")){
+		            	  $(function(){
+		            		 $( "div.failure" ).html(splitMessage[1]);
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            		 });
+		            	 }
+		            
+		            $(function() {
+		        		$("#dateofattendance").datepicker({
+		        			changeYear : true,
+		        			changeMonth : true,
+		        			dateFormat: 'yy-mm-dd',
+		        			yearRange: "-50:+10"
+		        		});
+		        		$("#dateofattendance").change(
+		        				function() {
+		        					$("#dateofattendance").datepicker("option", "showAnim",
+		        							$(this).val());
+		        				});
+		        	});
+		            
+		            
+		            function markabsent(cheese){
+		            	if(cheese.value=="P"){
+		            		cheese.value="A";
+		            	}else if(cheese.value=="A"){
+		            		cheese.value="P";
+		            	}
+		            }
+        </script>
+
+
 
 </head>
 <%
@@ -517,10 +571,9 @@ for(Cookie cookie : cookies){
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form id="form1"  method="POST">
-		<!-- <div style="height: 28px">
-			<button id="add">Add Department</button>
-			<br />
-		</div> -->
+	
+		<div class="alert-box success"></div>
+		<div class="alert-box failure"></div>
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -607,7 +660,9 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search result</td>
+					<td class="headerTD">Mark Attendance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class:&nbsp;${attendanceclass} 
+					<input type="hidden" id="attendanceclass" name="attendanceclass" value="${attendanceclasssearch}" />
+						</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -615,7 +670,7 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Attendance Status&nbsp;</th>
@@ -627,7 +682,7 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox"
+							<td class="dataText" style="display: none;"><input type="checkbox" checked="checked" 
 								id="<c:out value="${attendanceList.studentexternalid}"/>" class="chcktbl"
 								name="externalIDs"
 								value="<c:out value="${attendanceList.studentexternalid},${status.index}"/>" /></td>
@@ -635,7 +690,7 @@ for(Cookie cookie : cookies){
 										value="${attendanceList.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${attendanceList.name}" /></td>
 							<td class="dataText">
-							<input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" value="P" maxlength="1">
+							<input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" size="2" readonly="readonly" value="P" maxlength="1" onclick="markabsent(this);">
 							</td>
 						</tr>
 					</c:forEach>
@@ -644,7 +699,7 @@ for(Cookie cookie : cookies){
 					<tr>
 					
 						<td class="footerTD" colspan="2">
-							<button id="update">Update</button>
+							<button id="update">Submit</button>
 							<!-- <input value="Delete Stamp Fees"
 							type="submit" id="deleteStamp" /> --></td>
 							
