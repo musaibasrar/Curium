@@ -154,7 +154,7 @@ public class MarksDetailsService {
 		}
 		if (!addSec.equalsIgnoreCase("")) {
 			conClassStudying = addClass;
-			conClassStudying = conClassStudying+addSec;
+			conClassStudying = conClassStudying+"--"+addSec+"%";
 		}
 
 		String classStudying = DataUtil.emptyString(conClassStudying);
@@ -256,7 +256,7 @@ public class MarksDetailsService {
 		}
 		if (!addSec.equalsIgnoreCase("")) {
 			conClassStudying = addClass;
-			conClassStudying = conClassStudying+addSec;
+			conClassStudying = conClassStudying+"--"+addSec+"%";
 		}
 
 		String classStudying = DataUtil.emptyString(conClassStudying);
