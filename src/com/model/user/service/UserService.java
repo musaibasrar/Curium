@@ -249,7 +249,7 @@ public class UserService {
 		}
 		if (!addSec.equalsIgnoreCase("")) {
 			conClassStudying = addClass;
-			conClassStudying = conClassStudying+addSec;
+			conClassStudying = conClassStudying+"--"+addSec+"%";
 		}
 			
 		

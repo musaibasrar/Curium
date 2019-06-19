@@ -630,7 +630,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						
-						<tr>
+						<!-- <tr>
 							<td width="30%" class="alignRight">STS Number&nbsp;</td>
 							<td width="12%" align="left"><label>
 										<input
@@ -648,14 +648,14 @@ for(Cookie cookie : cookies){
 							</td>
 
 
-						</tr>
-						<tr>
+						</tr> -->
+						<!-- <tr>
 							<td><br /></td>
 						</tr>
 
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 
 						<tr>
 							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
