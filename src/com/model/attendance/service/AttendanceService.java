@@ -400,7 +400,7 @@ public class AttendanceService {
 			}
 			if (!addSec.equalsIgnoreCase("")) {
 				conClassStudying = addClass;
-				conClassStudying = conClassStudying+addSec;
+				conClassStudying = conClassStudying+"--"+addSec+"%";
 			}
 
 			String classStudying = DataUtil.emptyString(conClassStudying);
@@ -690,7 +690,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			}
 			if (!addSec.equalsIgnoreCase("")) {
 				conClassStudying = addClass;
-				conClassStudying = conClassStudying+addSec;
+				conClassStudying = conClassStudying+"--"+addSec+"%";
 			}
 
 			String classStudying = DataUtil.emptyString(conClassStudying);
@@ -832,7 +832,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		}
 		if (!addSec.equalsIgnoreCase("")) {
 			conClassStudying = addClass;
-			conClassStudying = conClassStudying+addSec;
+			conClassStudying = conClassStudying+"--"+addSec+"%";
 		}
 		
 		String classStudying = DataUtil.emptyString(conClassStudying);
