@@ -65,7 +65,7 @@ public class PrintIdsService {
 			}
 			if (!addSec.equalsIgnoreCase("")) {
 				conClassStudying = addClass;
-				conClassStudying = conClassStudying+addSec;
+				conClassStudying = conClassStudying+"--"+addSec+"%";
 			}
 
 			String classStudying = DataUtil.emptyString(conClassStudying);
