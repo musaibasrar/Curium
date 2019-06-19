@@ -7,10 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.feescategory.service.FeesService;
 import com.model.printids.service.PrintIdsService;
-import com.model.stampfees.service.StampFeesService;
-import com.model.student.service.StudentService;
+import com.model.std.service.StandardService;
 
 /**
  * @author Musaib_2
