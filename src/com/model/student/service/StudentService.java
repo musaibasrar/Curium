@@ -115,7 +115,7 @@ public class StudentService {
 
 		                    addSec = DataUtil.emptyString(item.getString());
 		                    if (!addSec.equalsIgnoreCase("")) {
-			        			conClassStudying = conClassStudying+addSec;
+			        			conClassStudying = conClassStudying+"--"+addSec+"%";
 			        		}
 		                }
 		        		student.setClassstudying(DataUtil.emptyString(conClassStudying));
