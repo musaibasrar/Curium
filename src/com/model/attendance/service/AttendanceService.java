@@ -4,17 +4,20 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -52,6 +55,7 @@ import com.model.employee.dto.Teacher;
 import com.model.marksdetails.dao.MarksDetailsDAO;
 import com.model.marksdetails.dto.Marks;
 import com.model.parents.dto.Parents;
+import com.model.sendsms.service.SmsService;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
 import com.model.user.dao.UserDAO;
@@ -400,7 +404,7 @@ public class AttendanceService {
 			}
 			if (!addSec.equalsIgnoreCase("")) {
 				conClassStudying = addClass;
-				conClassStudying = conClassStudying+addSec;
+				conClassStudying = conClassStudying+"--"+addSec+"%";
 			}
 
 			String classStudying = DataUtil.emptyString(conClassStudying);
@@ -690,7 +694,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			}
 			if (!addSec.equalsIgnoreCase("")) {
 				conClassStudying = addClass;
-				conClassStudying = conClassStudying+addSec;
+				conClassStudying = conClassStudying+"--"+addSec+"%";
 			}
 
 			String classStudying = DataUtil.emptyString(conClassStudying);
@@ -702,7 +706,6 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 
 			if (!classStudying.equalsIgnoreCase("")) {
 				querySub = " student.classstudying like '" + classStudying
-						+ "' OR student.classstudying = '" + conClassStudyingEquals
 						+ "'  AND student.archive=0";
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
 				querySub = querySub + " AND student.archive=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
@@ -712,6 +715,8 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
 
 			request.setAttribute("StudentListAttendance", searchStudentList);
+			request.setAttribute("attendanceclass", conClassStudying.replace("--"," ").replace("%", ""));
+			request.setAttribute("attendanceclasssearch", addClass);
 			
 		        result = true;
 			}
@@ -727,6 +732,9 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			String[] studentAttendanceStatus = request.getParameterValues("studentAttendanceStatus");
 			List<String> attendanceIdsList = new ArrayList<String>();
 			List<String> studentAttendanceStatusList = new ArrayList<String>();
+			
+			if(attendanceIds!=null) {
+			
 			for (String attid : attendanceIds) {
 				String[] attidString = attid.split(",");
 				if(attidString[0]!=null && attidString[1]!=null){
@@ -746,11 +754,78 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				studentDailyAttendance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				studentDailyAttendanceList.add(studentDailyAttendance);
 			}
-			result = new AttendanceDAO().checkStudentAttendance(studentDailyAttendanceList);
+			
+			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList); 
+			request.setAttribute("attedanceresult", res);
+			
+				if(res!=null) {
+					result = true;
+				}
+					if(res.contains("success")) {
+						sendSMSAbsentees(studentDailyAttendanceList);
+					}
+			}
 		}
 		return result;
 	}
 	
+	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList) {
+		
+		Properties properties = new Properties();
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
+        
+			        try {
+						properties.load(inputStream);
+					} catch (IOException e) {
+						logger.info("send SMS "+e);
+					}
+        
+        String sendSMS = properties.getProperty("sendsms");
+        String classesPrePrimary = properties.getProperty("classespreprimary");
+        String classesPrimary = properties.getProperty("classesprimary");
+        String classesHigh = properties.getProperty("classeshigh");
+        
+        
+        if("yes".equalsIgnoreCase(sendSMS)) {
+        	
+        	String attendanceClass = request.getParameter("attendanceclass");
+        	String absentMessage = null;
+        	StringBuilder sbN = new StringBuilder();
+        	String numbers = null;
+        	List<String> classesPrePrimaryArray = Arrays.asList(classesPrePrimary.split(","));
+        	List<String> classesPrimaryArray = Arrays.asList(classesPrimary.split(","));
+        	List<String> classesHighArray = Arrays.asList(classesHigh.split(","));
+        	
+        	if(classesPrePrimaryArray.contains(attendanceClass)) {
+        		absentMessage = properties.getProperty("absentmessagepreprimary");
+        	}else if(classesPrimaryArray.contains(attendanceClass)) {
+        		absentMessage = properties.getProperty("absentmessageprimary");
+        	}else if(classesHighArray.contains(attendanceClass)) {
+        		absentMessage = properties.getProperty("absentmessagehigh");
+        	}
+        	
+        	for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
+				  
+        		if("A".equalsIgnoreCase(studentDailyAttendance.getAttendancestatus())) {
+        				List<Parents> parentDetails = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
+        				if(parentDetails.size()>0) {
+        					sbN.append(parentDetails.get(0).getContactnumber());
+        					sbN.append(",");
+        				}
+				  }
+			}
+        	
+        	if(sbN.length()>1) {
+        		numbers = sbN.toString();
+    			numbers = numbers.substring(0, numbers.length()-1);
+    			logger.info("Absentees Numbers "+numbers+" Absentees Message "+absentMessage);
+    			new SmsService(request, response).sendSMS(numbers, absentMessage);
+        	}
+        }
+        
+		
+	}
+
 	public void markDailyAttendanceJob(){
 		
 			Date todaysDate = new Date();
@@ -832,7 +907,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		}
 		if (!addSec.equalsIgnoreCase("")) {
 			conClassStudying = addClass;
-			conClassStudying = conClassStudying+addSec;
+			conClassStudying = conClassStudying+"--"+addSec+"%";
 		}
 		
 		String classStudying = DataUtil.emptyString(conClassStudying);

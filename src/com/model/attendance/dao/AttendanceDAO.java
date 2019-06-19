@@ -356,7 +356,9 @@ public class AttendanceDAO {
 		return studentDailyAttendance;
 	}
 
-	public boolean checkStudentAttendance(List<Studentdailyattendance> studentDailyAttendanceList) {
+	public String checkAndMarkStudentAttendance(List<Studentdailyattendance> studentDailyAttendanceList) {
+		
+		String result = null;
 		
 		try {
 			transaction = session.beginTransaction();
@@ -368,19 +370,18 @@ public class AttendanceDAO {
 				if(studentDailyAttendanceDetails == null){
 					session.save(studentDailyAttendance);
 				}else{
-					Query queryTwo = session.createSQLQuery("update Studentdailyattendance set attendancestatus = '"+studentDailyAttendance.getAttendancestatus()+"' where attendanceid = '"+studentDailyAttendanceDetails.getAttendanceid()+"'");
-					queryTwo.executeUpdate();
+					return "error-Can't Mark the attendance twice!!!";
 				}
 			}
 			
 			transaction.commit();
-			return true;
+			return "success-Attedance has been marked successfully.";
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			System.out.println(""+e);
 		}finally {
 			HibernateUtil.closeSession();
 		}
-		return false;
+		return result;
 	}
 
 	public void markDailyAttendanceJob(List<Studentdailyattendance> studentDailyAttendance) {
