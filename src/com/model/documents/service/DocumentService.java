@@ -197,7 +197,7 @@ public class DocumentService {
 		}
 		
 		if(!"".equalsIgnoreCase(querySub)) {
-			queryMain = queryMain + querySub + " AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+			queryMain = queryMain + querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
 			System.out.println("QUERY*********** "+queryMain);
 			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		}
