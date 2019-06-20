@@ -417,9 +417,9 @@ public class AttendanceService {
 			if (!classStudying.equalsIgnoreCase("")) {
 				querySub = " student.classstudying like '" + classStudying
 						+ "' OR student.classstudying = '" + conClassStudyingEquals
-						+ "'  AND student.archive=0";
+						+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0";
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND student.archive=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+				querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 			}
 
 			queryMain = queryMain + querySub;
@@ -706,9 +706,9 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 
 			if (!classStudying.equalsIgnoreCase("")) {
 				querySub = " student.classstudying like '" + classStudying
-						+ "'  AND student.archive=0";
+						+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0";
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND student.archive=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+				querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 			}
 
 			queryMain = queryMain + querySub;
@@ -917,9 +917,9 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = " student.classstudying like '" + classStudying
 					+ "' OR student.classstudying = '" + conClassStudyingEquals
-					+ "'  AND student.archive=0";
+					+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0";
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND student.archive=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
 		queryMain = queryMain + querySub;
 		List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
