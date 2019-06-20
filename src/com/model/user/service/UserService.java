@@ -401,7 +401,7 @@ public class UserService {
 				querySub = querySub + " parents.Student.rte = '"+rte+"'";
 			}
 			
-			queryMain = queryMain+querySub+" AND parents.Student.archive=0";
+			queryMain = queryMain+querySub+" AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
 			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 	}
 			

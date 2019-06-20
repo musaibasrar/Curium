@@ -59,7 +59,7 @@ public class SmsService {
 			String conClassStudying = "";
 			
 			if(addClass.contains("ALL")){
-				querySub = querySub + "parents.Student.archive=0";
+				querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
 			}else{
 				if (!addClass.equalsIgnoreCase("")) {
 
@@ -74,7 +74,7 @@ public class SmsService {
 				String classStudying = DataUtil.emptyString(conClassStudying);
 				
 				if(!classStudying.equalsIgnoreCase("")){
-					querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+					querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
 				}	
 			}
 			

@@ -167,9 +167,9 @@ public class MarksDetailsService {
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = " parents.Student.classstudying like '" + classStudying
 					+ "' OR parents.Student.classstudying = '" + conClassStudyingEquals
-					+ "' AND parents.Student.archive=0";
+					+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
 
 		queryMain = queryMain + querySub;
@@ -269,9 +269,9 @@ public class MarksDetailsService {
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = " parents.Student.classstudying like '" + classStudying
 					+ "' OR parents.Student.classstudying = '" + conClassStudyingEquals
-					+ "'  AND parents.Student.archive=0";
+					+ "'  AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND parents.Student.archive=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
 
 		queryMain = queryMain + querySub;
