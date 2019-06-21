@@ -818,7 +818,8 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
         	if(sbN.length()>1) {
         		numbers = sbN.toString();
     			numbers = numbers.substring(0, numbers.length()-1);
-    			logger.info("Absentees Numbers "+numbers+" Absentees Message "+absentMessage);
+    			String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
+    			logger.info("Absentees Numbers "+numbers+" Absentees Message "+absentMessage.replace("%todaysdate%", todaysDate));
     			new SmsService(request, response).sendSMS(numbers, absentMessage);
         	}
         }
