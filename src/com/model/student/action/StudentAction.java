@@ -53,8 +53,6 @@ public class StudentAction {
                         url = deleteMultiple();
                 }else if (action.equalsIgnoreCase("restoreMultiple")) {
                         url = restoreMultiple();
-                }else if (action.equalsIgnoreCase("searchByClass")) {
-                        url = searchClass();
                 }else if (action.equalsIgnoreCase("promoteClass")) {
                         url = promoteClass();
                 }else if (action.equalsIgnoreCase("ViewFeesStructure")) {
@@ -159,11 +157,6 @@ public class StudentAction {
                return "failurepromote.jsp"; 
         }
 
-        private String searchClass() {
-                new StudentService(request, response).searchClass();
-            return "Promotion.jsp";
-        }
-
         private String restoreMultiple() {
                 new StudentService(request, response).restoreMultiple();
             return "Controller?process=StudentProcess&action=viewAll";// TODO Auto-generated method stub
@@ -249,13 +242,6 @@ public class StudentAction {
         return "viewAllWithParents.jsp";
         }
 
-        private String studentsDetailsReport() {
-
-                new StudentService(request, response).studentsDetailsSearch();
-        return "studentsdetailsreports.jsp";
-                
-        }
-        
 
         private String exportDataForStudents() {
                 if(new StudentService(request, response).exportDataForStudents()){
