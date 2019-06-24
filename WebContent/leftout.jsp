@@ -1,6 +1,6 @@
 <%-- 
-    Document   : viewAll
-    Created on : Dec 29, 2012, 1:57:17 PM
+    Document   : Left out
+    Created on : JUN 24, 2019, 04:40:17 PM
     Author     : Musaib
 --%>
 
@@ -20,7 +20,7 @@
             response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Dropped Out</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -126,64 +126,6 @@
             }
             -->
         </style>
-        <script type="text/javascript">
-            var getMember;
-            var getVisit;
-            function getdata() {
-
-                if (typeof XMLHttpRequest != "undefined") {
-                    getMember = new XMLHttpRequest();
-                    getVisit = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getMember = new ActiveXObject("Microsoft.XMLHTTP");
-                    getVisit = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-                getMember.onreadystatechange = processMemberData;
-                getMember.open("POST", "ContactController",true);
-                getMember.send(null);
-
-                getVisit.onreadystatechange = processVisitData;
-                getVisit.open("POST", "AppointmentController",true);
-                getVisit.send(null);
-            }
-
-            function processMemberData() {
-                if (getMember.readyState==4)
-                {
-                    if (getMember.status==200){
-
-                        var count = getMember.responseXML.getElementsByTagName("count")[0];
-                        var childCount=count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML=childCount;
-                        mdiv.style.visibility='visible';
-                        setTimeout('getdata();', 60000);
-
-
-                    }
-                }
-
-            }
-            function processVisitData() {
-                if (getVisit.readyState==4)
-                {
-                    if (getVisit.status==200){
-
-                        var visitCount = getVisit.responseXML.getElementsByTagName("visitcount")[0];
-                        var childVisitCount=visitCount.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n2");
-                        mdiv.innerHTML=childVisitCount;
-                        mdiv.style.visibility='visible';
-                        setTimeout('getdata();', 60000);
-
-
-                    }
-                }
-
-            }
-
-        </script>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $('#myTable').dataTable( {
@@ -215,101 +157,12 @@
             }
             function restoreRecords(){
                 var form1=document.getElementById("form1");
-                 form1.action="Controller?process=StudentProcess&action=restoreMultiple";
+                 form1.action="Controller?process=ClassProcess&action=restoreMultipleLeftout";
                 form1.submit();
             }
-            function filter2 (phrase, _id)
-            {
-                var words = phrase.value.toLowerCase().split(" ");
-                var table = document.getElementById(_id);
-                var ele;
-                var dd=table.rows.length;
-                //var aa=dd/2;
-                var aa=dd-1;
-                var display=true;
-
-                for (var r = 1; r < table.rows.length; r++)
-                {
-
-                    ele = table.rows[r].innerHTML.replace(/<[^>]+>/g,"");
-                    var displayStyle = 'none';
-                    for (var i = 0; i < words.length; i++)
-                    {
-                        if (ele.toLowerCase().indexOf(words[i])>=0)
-                        {
-                            displayStyle = '';
-                        }
-                        else
-                        {
-                            displayStyle = 'none';
-                            dd=dd-1;
-                            display=false;
-                            break;
-                        }
-                    }
-                    table.rows[r].style.display = displayStyle;
-                }
-
-                var label = document.getElementById("labelDisplay");
-                if(display==true)
-                {
-                    label.innerHTML = "Matching Results: "+aa;
-                    label.style.display='none';
-                }
-                else
-                {
-                    label.innerHTML ="Matching Results: "+dd;
-                    label.style.display='block';
-                }
-            }
 
         </script>
-        <script type="text/javascript">
-            var getMember;
-           
-            function getlist() {
-                
-       
-                try{
-                    var listitem = document.getElementById("advsearch").value;
-                    if (typeof XMLHttpRequest != "undefined") {
-                        getMember = new XMLHttpRequest();
-                   
-                    } else if (window.ActiveXObject) {
-                        getMember = new ActiveXObject("Microsoft.XMLHTTP");
-                    
-                    }
-
-                    getMember.onreadystatechange = processMemberData;
-                    getMember.open("POST", "detailslist?alphabet="+listitem+"",true);
-                    getMember.send(null);
-               
-                    
-                }catch(e){
-                    alert(e);
-                }
-            }
-
-            function processMemberData() {
-                if (getMember.readyState==4)
-                {
-                    if (getMember.status==200){
-
-                        var count = getMember.responseXML.getElementsByTagName("count")[0];
-                        var childCount=count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML=childCount;
-                        mdiv.style.visibility='visible';
-                        setTimeout('getdata();', 60000);
-
-
-                    }
-                }
-
-            }
-            
-
-        </script>
+        
         <script type="text/javascript">
             $(function(){
                 $("#delete").button({
@@ -395,11 +248,11 @@ for(Cookie cookie : cookies){
 %>
     <body  >
 
-        <form name="form1" id="form1"action="Controller?process=StudentProcess&action=restoreMultiple" method="post">
+        <form name="form1" id="form1"action="Controller?process=ClassProcess&action=restoreMultipleLeftout" method="post">
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>
-                        <td  class="headerTD">View All Archive Students</td>
+                        <td  class="headerTD">View All Left Out Students</td>
                     </tr>
 
                     
@@ -421,20 +274,17 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${studentListArchive}" var="Student">
+                        <c:forEach items="${studentListLeft}" var="Student">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>:<c:out value="${Student.pudetails.idpudetails}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Student.name}"/></td>
                                 <td class="dataText">
                                 <c:forEach var="splt" items="${fn:split(Student.classstudying,'--')}">
 						    		${splt} 
-								</c:forEach>
-                                </td>
+								</c:forEach></td>
                                 <td class="dataText"><c:out  value="${Student.admissiondate}"/></td>
-                                 
-
                             </tr>
                         </c:forEach>
                     </tbody>
