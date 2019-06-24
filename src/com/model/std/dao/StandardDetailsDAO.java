@@ -13,6 +13,7 @@ import org.hibernate.query.Query;
 
 import com.model.std.dto.Classhierarchy;
 import com.model.std.dto.Classsec;
+import com.model.student.dto.Student;
 import com.util.HibernateUtil;
 
 public class StandardDetailsDAO {
@@ -189,4 +190,137 @@ public class StandardDetailsDAO {
 	}
 	
 		}
+	
+	public List<Student> readListOfStudentsGraduated() {
+        List<Student> results = new ArrayList<Student>();
+
+        try {
+                // this.session =
+                // HibernateUtil.getSessionFactory().openCurrentSession();
+                transaction = session.beginTransaction();
+
+                results = (List<Student>) session.createQuery(
+                                "FROM Student s where s.passedout = 1 order by s.admissionnumber DESC")
+                                .list();
+                transaction.commit();
+
+        } catch (Exception hibernateException) {transaction.rollback();
+                hibernateException.printStackTrace();
+
+        } finally {
+                HibernateUtil.closeSession();
+                return results;
+        }
+	}
+
+	public List<Student> readListOfStudentsDropped() {
+        List<Student> results = new ArrayList<Student>();
+
+        try {
+                // this.session =
+                // HibernateUtil.getSessionFactory().openCurrentSession();
+                transaction = session.beginTransaction();
+
+                results = (List<Student>) session.createQuery(
+                                "FROM Student s where s.droppedout = 1 order by s.admissionnumber DESC")
+                                .list();
+                transaction.commit();
+
+        } catch (Exception hibernateException) {transaction.rollback();
+                hibernateException.printStackTrace();
+
+        } finally {
+                HibernateUtil.closeSession();
+                return results;
+        }
+	}
+	
+	public void restoreMultipleGraduate(List ids) {
+        try {
+            transaction = session.beginTransaction();
+            Query query = session
+                            .createQuery("update Student set passedout = 0  where id IN (:ids)");
+            query.setParameterList("ids", ids);
+            query.executeUpdate();
+            transaction.commit();
+    } catch (Exception hibernateException) {transaction.rollback();
+            hibernateException.printStackTrace();
+    }finally {
+		HibernateUtil.closeSession();
+	}
+
+	}
+
+    public void restoreMultipleDroppedout(List ids) {
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("update Student set droppedout = 0  where id IN (:ids)");
+            query.setParameterList("ids", ids);
+            query.executeUpdate();
+            transaction.commit();
+    } catch (Exception hibernateException) {transaction.rollback();
+            hibernateException.printStackTrace();
+    }finally {
+		HibernateUtil.closeSession();
+	}
+
+    }
+    
+	@SuppressWarnings({ "unchecked", "finally" })
+	public List<Student> getStudentsByClass(String classofStd, int branchId) {
+		java.util.List<Student> results = new ArrayList<Student>();
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			transaction = session.beginTransaction();
+			results = (java.util.List<Student>) session.createQuery("From Student s where s.branchid="+branchId+" AND s.classstudying LIKE '"+classofStd+"%' AND s.archive=0 AND s.passedout=0 AND s.droppedout=0 and s.leftout=0").list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+
+	public List<Student> readListOfStudentsLeft() {
+        List<Student> results = new ArrayList<Student>();
+
+        try {
+                // this.session =
+                // HibernateUtil.getSessionFactory().openCurrentSession();
+                transaction = session.beginTransaction();
+
+                results = (List<Student>) session.createQuery(
+                                "FROM Student s where s.leftout = 1 order by s.admissionnumber DESC")
+                                .list();
+                transaction.commit();
+
+        } catch (Exception hibernateException) {transaction.rollback();
+                hibernateException.printStackTrace();
+
+        } finally {
+                HibernateUtil.closeSession();
+                return results;
+        }
+	}
+
+	public void restoreMultipleLeftout(List ids) {
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("update Student set leftout = 0  where id IN (:ids)");
+            query.setParameterList("ids", ids);
+            query.executeUpdate();
+            transaction.commit();
+    } catch (Exception hibernateException) {transaction.rollback();
+            hibernateException.printStackTrace();
+    }finally {
+		HibernateUtil.closeSession();
+	}
+
+    }
+	
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.model.std.service.StandardService;
+import com.model.student.service.StudentService;
 
 /**
  * @author Musaib_2
@@ -48,9 +49,59 @@ public class StandardAction {
         	url = droppedoutMultiple();
         }else if (action.equalsIgnoreCase("leftoutMultiple")) {
             url = leftoutMultiple();
+        }else if (action.equalsIgnoreCase("viewGraduated")) {
+            url = viewGraduated();
+        }else if (action.equalsIgnoreCase("viewDropped")) {
+            url = viewDropped();
+        }else if (action.equalsIgnoreCase("viewLeftOut")) {
+            url = viewLeftOut();
+        }else if (action.equalsIgnoreCase("restoreMultipleGraduate")) {
+            url = restoreMultipleGraduate();
+        }else if (action.equalsIgnoreCase("restoreMultipleDroppedout")) {
+            url = restoreMultipleDroppedout();
+        }else if (action.equalsIgnoreCase("restoreMultipleLeftout")) {
+            url = restoreMultipleLeftout();
+        }else if (action.equalsIgnoreCase("searchByClass")) {
+            url = searchByClass();
         }
 		return url;
 	}
+	
+	
+		 private String restoreMultipleLeftout() { 
+		        new StandardService(request, response).restoreMultipleLeftout();
+		        return "Controller?process=ClassProcess&action=viewLeftOut";
+		    }
+
+		private String viewLeftOut() {
+		        new StandardService(request, response).viewleft();
+		        return "leftout.jsp";
+		    }
+
+		private String searchByClass() {
+	         new StandardService(request, response).searchByClass();
+	         return "Promotion.jsp";
+		 	}
+
+		private String restoreMultipleDroppedout() { 
+	        new StandardService(request, response).restoreMultipleDroppedout();
+	        return "Controller?process=ClassProcess&action=viewDropped";
+	    }
+
+	    private String restoreMultipleGraduate() {
+	        new StandardService(request, response).restoreMultipleGraduate();
+	        return "Controller?process=ClassProcess&action=viewGraduated";
+	    }
+	    
+	    private String viewDropped() {
+	        new StandardService(request, response).viewDropped();
+	        return "droppedout.jsp";
+	    }
+
+		private String viewGraduated() {
+	        new StandardService(request, response).viewGraduated();
+	        return "graduated.jsp";
+		}
 
 	  private String leftoutMultiple() {
 		  if(new StandardService(request, response).leftoutMultiple()) {  
