@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import com.model.std.dao.StandardDetailsDAO;
 import com.model.std.dto.Classhierarchy;
 import com.model.std.dto.Classsec;
+import com.model.student.dao.studentDetailsDAO;
+import com.model.student.dto.Student;
 import com.util.DataUtil;
 
 public class StandardService {
@@ -143,4 +145,105 @@ public class StandardService {
 		}
 		return result;
 	}
+	
+	public boolean viewGraduated() {
+
+        boolean result = false;
+
+        try {
+                List<Student> list = new StandardDetailsDAO().readListOfStudentsGraduated();
+                request.setAttribute("studentListGraduated", list);
+                result = true;
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        return result;
+}
+
+	public boolean viewDropped() {
+
+        boolean result = false;
+
+        try {
+                List<Student> list = new StandardDetailsDAO().readListOfStudentsDropped();
+                request.setAttribute("studentListDropped", list);
+                result = true;
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        return result;
+	}
+	
+    public void restoreMultipleGraduate() {
+        String[] studentIds = request.getParameterValues("studentIDs");
+        if (studentIds != null) {
+                List ids = new ArrayList();
+                for (String id : studentIds) {
+                        ids.add(Integer.valueOf(id));
+
+                }
+                new StandardDetailsDAO().restoreMultipleGraduate(ids);
+        }
+}
+
+    public void restoreMultipleDroppedout() {
+        String[] studentIds = request.getParameterValues("studentIDs");
+        if (studentIds != null) {
+                List ids = new ArrayList();
+                for (String id : studentIds) {
+                        ids.add(Integer.valueOf(id));
+
+                }
+                new StandardDetailsDAO().restoreMultipleDroppedout(ids);
+        }
+    }
+
+    @SuppressWarnings("finally")
+	public boolean searchByClass() {
+		
+		String classofStd = request.getParameter("classofstd");
+		boolean result = false;
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			try {
+				if(classofStd!=null) {
+					classofStd=classofStd+"--";
+				}
+				List<Student> studentList = new StandardDetailsDAO().getStudentsByClass(classofStd, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				request.setAttribute("studentList", studentList);
+				result = true;
+			} catch (Exception e) {
+				result = false;
+			} 
+		}
+		return result;
+
+	}
+
+	public boolean viewleft() {
+
+        boolean result = false;
+
+        try {
+                List<Student> list = new StandardDetailsDAO().readListOfStudentsLeft();
+                request.setAttribute("studentListLeft", list);
+                result = true;
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        return result;
+	}
+
+	public void restoreMultipleLeftout() {
+        String[] studentIds = request.getParameterValues("studentIDs");
+        if (studentIds != null) {
+                List ids = new ArrayList();
+                for (String id : studentIds) {
+                        ids.add(Integer.valueOf(id));
+
+                }
+                new StandardDetailsDAO().restoreMultipleLeftout(ids);
+        }
+    }
+    
 }

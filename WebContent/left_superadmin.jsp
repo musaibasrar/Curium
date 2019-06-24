@@ -448,6 +448,9 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Archive</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="Controller?process=ClassProcess&action=viewGraduated" >Graduated Students</a><br/>
+                <a target="mainFrame" href="Controller?process=ClassProcess&action=viewDropped" >Dropped Out Students</a><br/>
+                <a target="mainFrame" href="Controller?process=ClassProcess&action=viewLeftOut" >Left Out Students</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>

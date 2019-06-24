@@ -221,12 +221,17 @@ public class studentDetailsDAO {
 			Query query2 = session
 					.createQuery("delete from Student where sid IN (:ids)");
 			query2.setParameterList("ids", ids);
-			Query query3 = session
-                                .createQuery("delete from Pudetails where idpudetails IN (:iddetails)");
-                        query3.setParameterList("iddetails", iddetails);
+			
+			if(iddetails.size()>0) {
+				Query query3 = session
+                        .createQuery("delete from Pudetails where idpudetails IN (:iddetails)");
+                query3.setParameterList("iddetails", iddetails);
+                query3.executeUpdate();
+			}
+			
 			query.executeUpdate();
 			query2.executeUpdate();
-			query3.executeUpdate();
+			
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
@@ -250,26 +255,6 @@ public class studentDetailsDAO {
 			HibernateUtil.closeSession();
 		 }
 
-	}
-
-	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Student> getListOfStudents(String classofStd, int branchId) {
-		java.util.List<Student> results = new ArrayList<Student>();
-		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
-			transaction = session.beginTransaction();
-			results = (java.util.List<Student>) session.createQuery("From Student s where s.branchid="+branchId+" AND s.classstudying LIKE '"+classofStd+"%' AND s.archive=0 AND s.passedout=0 AND s.droppedout=0 and s.leftout=0").list();
-			transaction.commit();
-
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
-		}
 	}
 
 	@SuppressWarnings("finally")
