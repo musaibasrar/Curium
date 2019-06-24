@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -377,7 +378,7 @@
 <script type="text/javascript">
 	function searchClass() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StudentProcess&action=searchByClass";
+		form1.action = "Controller?process=ClassProcess&action=searchByClass";
 		form1.method = "POST";
 		form1.submit();
 
@@ -595,7 +596,11 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Student.name}"/></td>
-                                <td class="dataText"><c:out value="${Student.classstudying}"/></td>
+                                <td class="dataText">
+                                <c:forEach var="splt" items="${fn:split(Student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>
+                                </td>
                                 <td class="dataText"><c:out  value="${Student.admissiondate}"/></td>
                                  <input type="hidden" id="classstudying" name="classstudying" value="${Student.classstudying}"/>
 
