@@ -1194,7 +1194,9 @@ public class StudentService {
 			for (String id : studentIds) {
 			        String[] iddetailsarray = id.split(":");
 				ids.add(Integer.valueOf(iddetailsarray[0]));
-				iddetails.add(Integer.valueOf(iddetailsarray[1]));
+				if(iddetailsarray.length>1) {
+					iddetails.add(Integer.valueOf(iddetailsarray[1]));
+				}
 			}
 			new studentDetailsDAO().deleteMultiple(ids,iddetails);
 		}
@@ -1205,32 +1207,12 @@ public class StudentService {
 		if (studentIds != null) {
 			List ids = new ArrayList();
 			for (String id : studentIds) {
-				System.out.println("id" + id);
-				ids.add(Integer.valueOf(id));
-
+		        String[] iddetailsarray = id.split(":");
+		        ids.add(Integer.valueOf(iddetailsarray[0]));
 			}
 			System.out.println("id length" + studentIds.length);
 			new studentDetailsDAO().restoreMultiple(ids);
 		}
-	}
-
-	@SuppressWarnings("finally")
-	public boolean searchClass() {
-		
-		String classofStd = request.getParameter("classofstd");
-		boolean result = false;
-		
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			try {
-				List<Student> studentList = new studentDetailsDAO().getListOfStudents(classofStd, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				request.setAttribute("studentList", studentList);
-				result = true;
-			} catch (Exception e) {
-				result = false;
-			} 
-		}
-		return result;
-
 	}
 
 	public boolean promoteMultiple() {
@@ -1313,48 +1295,6 @@ public class StudentService {
 		return result;
 	}
 
-	public void studentsDetailsSearch() {
-
-		if(httpSession.getAttribute(BRANCHID)!=null){
-			
-			String queryMain = "From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
-			String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
-
-			String addClass = request.getParameter("classsearch");
-			String addSec = request.getParameter("secsearch");
-			String conClassStudying = "";
-
-			if (!addClass.equalsIgnoreCase("")) {
-
-				conClassStudying = addClass+"--" +"%";
-
-			}
-			if (!addSec.equalsIgnoreCase("")) {
-				conClassStudying = addClass;
-				conClassStudying = conClassStudying+"--"+addSec+"%";
-			}
-
-			String classStudying = DataUtil.emptyString(conClassStudying);
-
-			String querySub = "";
-
-			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parents.Student.name like '%" + studentname + "%'";
-			}
-
-			if (!classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parents.Student.classstudying like '" + classStudying + "' ";
-			} else if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " parents.Student.classstudying like '" + classStudying + "' ";
-			}
-
-			queryMain = queryMain + querySub;
-			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
-			request.setAttribute("searchStudentList", searchStudentList);
-		}
-		
-
-	}
 
 	public boolean exportDataForStudents() {
 
