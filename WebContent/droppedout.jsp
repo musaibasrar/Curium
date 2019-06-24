@@ -1,5 +1,5 @@
 <%-- 
-    Document   : viewAll
+    Document   : Dropped out
     Created on : Dec 29, 2012, 1:57:17 PM
     Author     : Musaib
 --%>
@@ -20,7 +20,7 @@
             response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Dropped Out</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -215,7 +215,7 @@
             }
             function restoreRecords(){
                 var form1=document.getElementById("form1");
-                 form1.action="Controller?process=StudentProcess&action=restoreMultiple";
+                 form1.action="Controller?process=ClassProcess&action=restoreMultipleDroppedout";
                 form1.submit();
             }
             function filter2 (phrase, _id)
@@ -395,11 +395,11 @@ for(Cookie cookie : cookies){
 %>
     <body  >
 
-        <form name="form1" id="form1"action="Controller?process=StudentProcess&action=restoreMultiple" method="post">
+        <form name="form1" id="form1"action="Controller?process=ClassProcess&action=restoreMultipleDroppedout" method="post">
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>
-                        <td  class="headerTD">View All Archive Students</td>
+                        <td  class="headerTD">View All Dropped Out Students</td>
                     </tr>
 
                     
@@ -421,17 +421,16 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${studentListArchive}" var="Student">
+                        <c:forEach items="${studentListDropped}" var="Student">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>:<c:out value="${Student.pudetails.idpudetails}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Student.name}"/></td>
                                 <td class="dataText">
                                 <c:forEach var="splt" items="${fn:split(Student.classstudying,'--')}">
 						    		${splt} 
-								</c:forEach>
-                                </td>
+								</c:forEach></td>
                                 <td class="dataText"><c:out  value="${Student.admissiondate}"/></td>
                                  
 
