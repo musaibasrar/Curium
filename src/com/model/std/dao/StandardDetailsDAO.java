@@ -48,7 +48,9 @@ public class StandardDetailsDAO {
         List<Classsec> classsecList = new ArrayList<Classsec>();
         try {
             transaction = session.beginTransaction();
-            classsecList = session.createQuery("From Classsec where branchid="+branchId).list();
+
+            classsecList = session.createQuery("From Classsec where classdetails <> '' and branchid="+branchId).setCacheable(true).setCacheRegion("commonregion").list();
+
             transaction.commit();
         } catch (HibernateException hibernateException) {transaction.rollback();
             hibernateException.printStackTrace();
