@@ -750,42 +750,6 @@ for(Cookie cookie : cookies){
 						
 						
 						<tr>
-							<td width="16%" class="alignRight">Studying in Class&nbsp;</td>
-
-							<td width="28%">
-							
-							<label> 
-									<select name="classsec" id="classsec"
-									style="width: 120px;">
-										<option selected>${classstudying}</option>
-										<option></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}" >
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-								</select>
-							</label> <label>
-							
-							<select name="secstudying" id="secstudying"
-									style="width: 80px;">
-										<option selected>${secstudying}</option>
-										<option></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.section != '')}">
-											<option value="${classdetailslist.section}">
-												<c:out value="${classdetailslist.section}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-								</select>
-							</label>
-							
-							</td>
-
-
 
 							<td width="20%" class="alignRight">Admitted in class &nbsp;</td>
 
