@@ -727,41 +727,36 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 
 	public boolean markStudentsAttendance() {
 		boolean result = false;
+		
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
+			
 			String[] attendanceIds = request.getParameterValues("externalIDs");
 			String[] studentAttendanceStatus = request.getParameterValues("studentAttendanceStatus");
-			List<String> attendanceIdsList = new ArrayList<String>();
-			List<String> studentAttendanceStatusList = new ArrayList<String>();
-			
+						
 			if(attendanceIds!=null) {
 			
-			for (String attid : attendanceIds) {
-				String[] attidString = attid.split(",");
-				if(attidString[0]!=null && attidString[1]!=null){
-					attendanceIdsList.add(attidString[0]);
-					studentAttendanceStatusList.add(studentAttendanceStatus[Integer.parseInt(attidString[1])]);	
-				}
-				
-			}
 			List<Studentdailyattendance> studentDailyAttendanceList = new ArrayList<Studentdailyattendance>();
-			for (int i=0; i<attendanceIdsList.size();i++) {
+			
+			for(int i=0;i<attendanceIds.length;i++) {
 				Studentdailyattendance studentDailyAttendance = new Studentdailyattendance();
-				studentDailyAttendance.setAttendeeid(attendanceIdsList.get(i));
-				studentDailyAttendance.setAttendancestatus(studentAttendanceStatusList.get(i));
+				
+				String[] attidString = attendanceIds[i].split(",");
+				studentDailyAttendance.setAttendeeid(attidString[0]);
+				studentDailyAttendance.setAttendancestatus(studentAttendanceStatus[i]);
 				studentDailyAttendance.setIntime("00:00");
 				studentDailyAttendance.setDate(new Date());
 				studentDailyAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 				studentDailyAttendance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				studentDailyAttendanceList.add(studentDailyAttendance);
 			}
-			
+					
 			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList); 
 			request.setAttribute("attedanceresult", res);
 			
 				if(res!=null) {
 					result = true;
 				}
-					if(res.contains("success")) {
+					if(res!=null && res.contains("success")) {
 						sendSMSAbsentees(studentDailyAttendanceList);
 					}
 			}
