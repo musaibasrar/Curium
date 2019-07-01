@@ -476,14 +476,7 @@ public class StudentService {
 		student.setPassedout(0);
 		student.setDroppedout(0);
 		student.setLeftout(0);
-		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLM0123NOP89QRSTUVWXYZ4567*&!@#%~$.'?<>{[|;:/";
-		int count =4;
-		StringBuilder builder = new StringBuilder();
-		while (count-- != 0) {
-		int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
-		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
-		}
-		student.setStudentexternalid(builder.toString());
+		student.setStudentexternalid(DataUtil.generateString(5));
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		puDetails.setOptionalsubjects(optional.toString());
 		puDetails.setCompulsorysubjects(compulsory.toString());
