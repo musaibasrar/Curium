@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
+import java.util.Random;
 
 /**
  *
@@ -115,6 +116,41 @@ public class DataUtil {
 	   
 	   return date;
    }
+   
+   public static String generateString(int lengthh) {
+
+       // ||, -, *, /, <>, <, >, ,(comma), =, <=, >=, ~=, !=, ^=, (, )
+       String alphaNumeric = new String("hijklmno0123459ABEFGHIJKL678MNOPQZabcdefgpqCDrstuvwxyz@#$&-+[]{RSTUVWXY}");
+       int alphaNumericLength = alphaNumeric.length();
+
+       String generatedRandomNumber = new String();
+
+       for (int i = 0; i < lengthh; i++) {
+           int index = generateIndex(alphaNumericLength);
+           generatedRandomNumber = generatedRandomNumber + alphaNumeric.charAt(index);
+       }
+       System.out.println("RANDOMNUMBER IS ::: "+generatedRandomNumber);
+       return generatedRandomNumber;
+
+   }
+
+   private static int generateIndex(int alphaNumericLength) {
+       int newRandomNumber = returnRandom(alphaNumericLength);
+       return newRandomNumber;
+   }
+
+   private static int returnRandom(int alphaNumericLength) {
+       Random random = new Random();
+       int mathrandom = random.nextInt(59245);
+
+       do {
+           double randomDouble = Math.random();
+           if (randomDouble < 0.01) continue;
+           mathrandom = (int) (mathrandom * randomDouble);
+       } while (mathrandom >= alphaNumericLength);
+       return mathrandom;
+   }
+     
     
 
 }
