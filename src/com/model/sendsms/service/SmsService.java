@@ -87,14 +87,17 @@ public class SmsService {
 			logger.info("main query:"+queryMain);
 			
 			for(int i=0;i<iterations;i++){
-				List<Parents> parentsContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
+				List<Object> pContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
 
+				//List<Parents> parentsContacts = (List<Parents>) Parents.class.cast(pContacts); 
+				
 				String numbers = null;
 					StringBuilder sbN = new StringBuilder();
 
-					if(!parentsContacts.isEmpty()){
-						for (Parents parents : parentsContacts) {
-							sbN.append(parents.getContactnumber());
+					if(!pContacts.isEmpty()){
+						for (Object parents : pContacts) {
+							Parents par = Parents.class.cast(parents);
+							sbN.append(par.getContactnumber());
 							sbN.append(",");
 						}
 						numbers=sbN.toString();
@@ -130,27 +133,58 @@ public class SmsService {
 	public boolean sendStaffSMS() {
 		
 		boolean result=false;
-		int resultSMS=0;		
-		List<Teacher> teacherContacts = new EmployeeDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-
-		String numbers = null;
-			StringBuilder sbN = new StringBuilder();
-
-			if(!teacherContacts.isEmpty()){
-				for (Teacher teacher : teacherContacts) {
-					sbN.append(teacher.getContactnumber());
-					sbN.append(",");
-				}
-				numbers=sbN.toString();
-				numbers = numbers.substring(0, numbers.length()-1);
-				logger.info("Numbers are *** "+numbers);
-				resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodystaff")));
-			}
+		int noOfRecords = 100;
+		int offset=0;
 		
-		if(resultSMS==200){
-			result = true;
+		if(httpSession.getAttribute("branchid")!=null){
+			String queryMain ="From Teacher as teacher where ";
+			String querySub = "";
+			String department = request.getParameter("department");
+			
+			if (!department.equalsIgnoreCase("")) {
+				
+					if(department.contains("ALL")){
+							querySub = querySub + "teacher.currentemployee=1";
+					}else{
+							querySub = querySub + "teacher.department = '"+department+"' AND teacher.currentemployee=1";
+					}
+					
+			queryMain = queryMain+querySub+ "AND teacher.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+
+			double totalNumbers = new SmsDAO().countNumbers(queryMain);
+			int resultSMS=0;
+			int iterations = (int) Math.ceil(totalNumbers/100);
+			
+			logger.info("main query:"+queryMain);
+			
+			for(int i=0;i<iterations;i++){
+				List<Object> teacherContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
+				
+				List<Teacher> teachersContact = (List<Teacher>) Teacher.class.cast(teacherContacts); 
+						
+				String numbers = null;
+					StringBuilder sbN = new StringBuilder();
+
+					if(!teachersContact.isEmpty()){
+						for (Teacher teacher : teachersContact) {
+							sbN.append(teacher.getContactnumber());
+							sbN.append(",");
+						}
+						numbers=sbN.toString();
+						numbers = numbers.substring(0, numbers.length()-1);
+						logger.info("Numbers are *** "+numbers);
+						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebody")));
+					}
+					
+				offset = offset+100;
+			}
+			if(resultSMS==200){
+				result = true;
+			}
 		}
-		return result;
+		}
+		
+        return result;
 	}
 	
 	public int sendSMS(String numbers, String message) {
