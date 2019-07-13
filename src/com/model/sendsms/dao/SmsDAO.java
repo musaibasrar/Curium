@@ -55,9 +55,9 @@ public class SmsDAO {
 		return null;
 	}
 
-	public List<Parents> readListOfObjectsPaginationALL(int offset,
+	public List<Object> readListOfObjectsPaginationALL(int offset,
 			int noOfRecords, String queryMain) {
-		List<Parents> results = new ArrayList<Parents>();
+		List<Object> results = new ArrayList<Object>();
 
 		try {
 			transaction = session.beginTransaction();

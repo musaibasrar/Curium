@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.model.academicyear.service.YearService;
 import com.model.adminexpenses.service.AdminService;
+import com.model.employee.service.EmployeeService;
 import com.model.feescategory.service.FeesService;
 import com.model.sendsms.service.SmsService;
 import com.model.std.service.StandardService;
@@ -53,6 +54,7 @@ public class SmsAction {
 
 	private String sendSMS() {
 		new StandardService(request, response).viewClasses();
+		new EmployeeService(request, response).viewDepartments();
 		return "sendsms.jsp";
 	}
 
