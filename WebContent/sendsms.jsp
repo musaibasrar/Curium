@@ -717,21 +717,39 @@ for(Cookie cookie : cookies){
 						
 						<div id="tabs-2">
 					<table width="100%" border="0" align="center" id="table1">
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-
-							<td width="30%" class="alignRight"><label> <font
-									color="red"><div id="mydiv"></div></font>
-							</label></td>
+					
+					<tr>
 							<td width="20%" class="alignRight"></td>
-							<td class="alignRight"><font color="red"><div
-										id="mydivmobile"></div></font></td>
+							<td class="alignRight"></td>
+							<td width="30%" class="alignRight">
+							<a href="Controller?process=SMSProcess&action=SMSbalanceCheck" title="Click to check SMS balance">SMS Balance</a>
+											: ${smsbalance}
+							</td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td class="alignRight">Select&nbsp;</td>
+							<td width="28%"> <label>Department: <select name="department" id="department"
+									style="width: 120px">
+										<option selected></option>
+										<option>ALL</option>
+										<c:forEach items="${listDepartment}" var="listDepartment">
+											<option value="${listDepartment.departmentname}" >
+												<c:out value="${listDepartment.departmentname}" />
+											</option>
+										</c:forEach>
+								</select>
+
+							</label> </td>
+							<tr>
+							<td><br /></td>
 						</tr>
 
 						<tr>

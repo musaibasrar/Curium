@@ -214,4 +214,12 @@ public class EmployeeService {
 		}
 		request.setAttribute("vieweditbasicpay", employeeList);
 	}
+
+	public void viewDepartments() {
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+			List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        httpSession.setAttribute("listDepartment", listDepartment);
+		}
+	}
 }
