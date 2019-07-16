@@ -339,7 +339,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("FROM Student s where s.archive = 0 and s.branchid= "+branchId+" order by name ASC");
+					.createQuery("FROM Student s where s.archive = 0 and s.passedout=0 AND s.droppedout=0 and s.leftout=0 and s.branchid= "+branchId+" order by name ASC");
 			
 			results = query.setCacheable(true).setCacheRegion("commonregion").list();
 			transaction.commit();
