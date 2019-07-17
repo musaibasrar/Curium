@@ -193,7 +193,7 @@ for(Cookie cookie : cookies){
 									Admin Expense
 							</a></td>
 
-							<td ><a target="mainFrame" href="sendsms.jsp"><img
+							<td ><a target="mainFrame" href="Controller?process=SMSProcess&action=sendSMS"><img
 									src="images/sendsmsw.png" width="30" height="30" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a></td>
