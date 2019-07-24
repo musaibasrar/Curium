@@ -699,7 +699,7 @@ public class StudentService {
 			std.setQualification(qualification);
 			studentList.add(std);
 		}
-		if (new studentDetailsDAO().promoteMultiple(studentList, classStudying)) {
+		if (new studentDetailsDAO().promoteOrDemoteMultiple(studentList, classStudying, "Promote")) {
 			result = true;
 		}
 		return result;
@@ -1129,7 +1129,7 @@ public class StudentService {
                 httpSession.setAttribute("studentsreportreligionsearch", "");
             }
             
-            if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
+           if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
                 if(subQuery!=null) {
                     String subAcademicYear = request.getParameter("academicyear").toString().substring(2, 4);
                     
@@ -1141,8 +1141,7 @@ public class StudentService {
             }else {
                 httpSession.setAttribute("studentsreportacademicsearch", "");
             }
-            
-            searchQuery = searchQuery+subQuery+" Order By parent.Student.admissionnumber ASC";
+            searchQuery = searchQuery+subQuery+" AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND  parent.Student.archive = 0  Order By parent.Student.admissionnumber ASC";
             List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
             Map<Parents,String> mapStudentReports = new LinkedHashMap<Parents,String>();
             
@@ -1540,12 +1539,11 @@ public class StudentService {
     }
 
     public void searchStudentsviewAll() {
-        String searchQuery = "From Parents as parent where ";
-        String subQuery =null;
+        String searchQuery = "From Parents as parent where parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND  parent.Student.archive = 0";
         
              if(!request.getParameter("centercode").equalsIgnoreCase("")) {
                  String[] centerCode = request.getParameter("centercode").split(":");
-                 subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
+                 searchQuery = searchQuery+" AND parent.Student.centercode = '"+centerCode[0]+"'";
                  httpSession.setAttribute("printcentername", "Center Code/Name: "+centerCode[0]+"/"+centerCode[1]);
                  httpSession.setAttribute("studentviewallcenter", centerCode[0]+":"+centerCode[1]);
              }else {
@@ -1553,22 +1551,14 @@ public class StudentService {
              }
              
              if(!request.getParameter("districtcode").equalsIgnoreCase("")) {
-                 if(subQuery!=null) {
-                     subQuery = subQuery+"AND parent.Student.districtcode = '"+request.getParameter("districtcode")+"'";
-                 }else {
-                     subQuery = "parent.Student.districtcode = '"+request.getParameter("districtcode")+"'";
-                 }
+            	 searchQuery = searchQuery+" AND parent.Student.districtcode = '"+request.getParameter("districtcode")+"'";
                  httpSession.setAttribute("studentviewalldistrict", request.getParameter("districtcode").toString());
              }else {
                  httpSession.setAttribute("studentviewalldistrict", "");
              }
              
              if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
-                 if(subQuery!=null) {
-                     subQuery = subQuery+"AND parent.Student.examlevel = '"+request.getParameter("examlevel")+"'";
-                 }else {
-                     subQuery = "parent.Student.examlevel = '"+request.getParameter("examlevel")+"'";
-                 }
+                	 searchQuery = searchQuery+" AND parent.Student.examlevel = '"+request.getParameter("examlevel")+"'";
                  httpSession.setAttribute("printexamlevel", "Examination Level: "+request.getParameter("examlevel").toString());
                  httpSession.setAttribute("studentviewallexamlevel", request.getParameter("examlevel").toString());
              }else {
@@ -1576,11 +1566,7 @@ public class StudentService {
              }
              
              if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
-                 if(subQuery!=null) {
-                     subQuery = subQuery+"AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
-                 }else {
-                     subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
-                 }
+            	 searchQuery = searchQuery+" AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                  httpSession.setAttribute("printlanguage", "Language: "+request.getParameter("languageopted").toString());
                  httpSession.setAttribute("studentviewalllanguage", request.getParameter("languageopted").toString());
              }else {
@@ -1588,11 +1574,7 @@ public class StudentService {
              }
              
              if(!request.getParameter("qualification").equalsIgnoreCase("")) {
-                 if(subQuery!=null) {
-                     subQuery = subQuery+"AND parent.Student.qualification = '"+request.getParameter("qualification")+"'";
-                 }else {
-                     subQuery = "parent.Student.qualification = '"+request.getParameter("qualification")+"'";
-                 }
+            	 searchQuery = searchQuery+" AND parent.Student.qualification = '"+request.getParameter("qualification")+"'";
                  httpSession.setAttribute("printqualification", "Qualification: "+request.getParameter("qualification").toString());
                  httpSession.setAttribute("studentviewallqualification", request.getParameter("qualification").toString());
              }else {
@@ -1600,11 +1582,7 @@ public class StudentService {
              }
              
              if(!DataUtil.emptyString(request.getParameter("religion")).equalsIgnoreCase("")) {
-                 if(subQuery!=null) {
-                     subQuery = subQuery+"AND parent.Student.religion = '"+request.getParameter("religion")+"'";
-                 }else {
-                     subQuery = "parent.Student.religion = '"+request.getParameter("religion")+"'";
-                 }
+            	 searchQuery = searchQuery+" AND parent.Student.religion = '"+request.getParameter("religion")+"'";
                  httpSession.setAttribute("printreligion", "Religion: "+request.getParameter("religion").toString());
                  httpSession.setAttribute("studentviewallreligion", request.getParameter("religion").toString());
              }else {
@@ -1613,37 +1591,51 @@ public class StudentService {
              
              if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
                  String subAcademicYear = request.getParameter("academicyear").toString().substring(2, 4);
-                 if(subQuery!=null) {
-                     subQuery = subQuery+"AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
-                 }else {
-                     subQuery = "parent.Student.admissionnumber like '"+subAcademicYear+"%' ";
-                 }
+                 searchQuery = searchQuery+" AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
                  httpSession.setAttribute("studentviewallacademic", request.getParameter("academicyear").toString());
              }else {
                  httpSession.setAttribute("studentviewallacademic", "");
              }
              
              if(!DataUtil.emptyString(request.getParameter("admissionnumber")).equalsIgnoreCase("")) {
-                 if(subQuery!=null) {
-                     subQuery = subQuery+"AND parent.Student.admissionnumber like '%"+request.getParameter("admissionnumber")+"%'";
-                 }else {
-                     subQuery = "parent.Student.admissionnumber like '%"+request.getParameter("admissionnumber")+"%'";
-                 }
+            	 searchQuery = searchQuery+" AND parent.Student.admissionnumber like '%"+request.getParameter("admissionnumber")+"%'";
+            	 httpSession.setAttribute("studentviewalladmissionno", request.getParameter("admissionnumber").toString());
+             }else {
+            	 httpSession.setAttribute("studentviewalladmissionno", "");
              }
              
              if(!DataUtil.emptyString(request.getParameter("studentname")).equalsIgnoreCase("")) {
-                 if(subQuery!=null) {
-                     subQuery = subQuery+"AND parent.Student.name like '%"+request.getParameter("studentname")+"%'";
-                 }else {
-                     subQuery = "parent.Student.name like '%"+request.getParameter("studentname")+"%'";
-                 }
+            	 searchQuery = searchQuery+" AND parent.Student.name like '%"+request.getParameter("studentname")+"%'";
+            	 httpSession.setAttribute("studentviewallstudentname", request.getParameter("studentname").toString());
+             }else {
+            	 httpSession.setAttribute("studentviewallstudentname", "");
              }
              
-             if(subQuery!=null) {
-                 searchQuery = searchQuery+subQuery+"AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND  parent.Student.archive = 0 Order By parent.Student.admissionnumber ASC";
+             if(!DataUtil.emptyString(request.getParameter("fhgname")).equalsIgnoreCase("")) {
+            	 searchQuery = searchQuery+" AND parent.fathersname like '%"+request.getParameter("fhgname")+"%' or parent.mothersname like '%"+request.getParameter("fhgname")+"%'"
+            	 		+ "or parent.Student.guardiandetails like '%"+request.getParameter("fhgname")+"%'";
+            	 httpSession.setAttribute("studentviewallfhgname", request.getParameter("fhgname").toString());
              }else {
-                 searchQuery = searchQuery+"parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND  parent.Student.archive = 0 Order By parent.Student.admissionnumber ASC";
+            	 httpSession.setAttribute("studentviewallfhgname", "");
              }
+             
+             if(!DataUtil.emptyString(request.getParameter("gender")).equalsIgnoreCase("")) {
+            	 searchQuery = searchQuery+" AND parent.Student.gender = '"+request.getParameter("gender")+"'";
+            	 httpSession.setAttribute("studentviewallgender", request.getParameter("gender").toString());
+             }else {
+            	 httpSession.setAttribute("studentviewallgender", "");
+             }
+             
+             if(!DataUtil.emptyString(request.getParameter("fromage")).equalsIgnoreCase("") && !DataUtil.emptyString(request.getParameter("toage")).equalsIgnoreCase("")) {
+            	 searchQuery = searchQuery+" AND parent.Student.age BETWEEN '"+request.getParameter("fromage")+"' AND '"+request.getParameter("toage")+"'";
+            	 httpSession.setAttribute("studentviewallfromage", request.getParameter("fromage").toString());
+            	 httpSession.setAttribute("studentviewalltoage", request.getParameter("toage").toString());
+             }else {
+            	 httpSession.setAttribute("studentviewallfromage", "");
+            	 httpSession.setAttribute("studentviewalltoage", "");
+             }
+             
+             searchQuery = searchQuery+" Order By parent.Student.admissionnumber ASC";
              
              List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
              
@@ -1664,4 +1656,24 @@ public class StudentService {
              
              new QualificationService(request, response).viewQualification(); 
      }
+
+	public boolean demoteMultiple() {
+		String[] studentIds = request.getParameterValues("studentIDs");
+		String classStudying = request.getParameter("classstudying");
+		boolean result = false;
+		List ids = new LinkedList<Integer>();
+		List<Student> studentList = new ArrayList<Student>();
+		for (String id : studentIds) {
+			String[] idAdmNo = id.split("~");
+			ids.add(Integer.valueOf(idAdmNo[0]));
+			Student std = getStudentDetails(Long.valueOf(idAdmNo[0]));
+			String qualification = getQualification(std.getQualification(),std.getAge()-1);
+			std.setQualification(qualification);
+			studentList.add(std);
+		}
+		if (new studentDetailsDAO().promoteOrDemoteMultiple(studentList, classStudying, "Demote")) {
+			result = true;
+		}
+		return result;
+	}
 }

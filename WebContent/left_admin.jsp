@@ -342,7 +342,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=studentsListReport" style="font-size: 12px;">Students Details</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=questionPaperSet" style="font-size: 12px;">Question Paper Set</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=languageListReport" style="font-size: 12px;">Language Report</a><br/>
-                <a target="mainFrame" href="Controller?process=StudentProcess&action=resultReport" style="font-size: 12px;">Result Report</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=resultReport" style="font-size: 12px;">Result Summary Report</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=resultList" style="font-size: 12px;">Result List</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=rankListReport" style="font-size: 12px;">Rank List</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=marksSheet" style="font-size: 12px;">Marks Sheet</a><br/>

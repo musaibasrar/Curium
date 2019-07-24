@@ -66,10 +66,12 @@ public class StudentAction {
 			url = deleteMultiple();
 		}else if (action.equalsIgnoreCase("restoreMultiple")) {
 			url = restoreMultiple();
-		}else if (action.equalsIgnoreCase("searchByClass")) {
-			url = searchClass();
+		}else if (action.equalsIgnoreCase("searchForPromotion")) {
+			url = searchForPromotion();
 		}else if (action.equalsIgnoreCase("promoteClass")) {
 			url = promoteClass();
+		}else if (action.equalsIgnoreCase("demoteClass")) {
+			url = demoteClass();
 		}else if (action.equalsIgnoreCase("ViewFeesStructure")) {
 			url = ViewFeesStructure();
 		}else if (action.equalsIgnoreCase("feesStructurePerYear")) {
@@ -172,7 +174,14 @@ public class StudentAction {
 	
 	
 
-    private String resultListCenter() {
+    private String demoteClass() {
+		if( new StudentService(request, response).demoteMultiple()){
+			return "successpromote.jsp";
+		}
+	       return "failurepromote.jsp"; 
+	}
+
+	private String resultListCenter() {
 	    new ResultService(request, response).resultReport();
         return "resultlistcenter.jsp";
     }
@@ -452,11 +461,8 @@ public class StudentAction {
 	       return "failurepromote.jsp"; 
 	}
 
-	private String searchClass() {
-		new StudentService(request, response).searchClass();
-		new ExamLevelService(request, response).examLevels();
-		new LanguageService(request, response).viewLanguage();
-	        new BranchService(request, response).viewBranches();
+	private String searchForPromotion() {
+		new ResultService(request, response).searchResultReport();
 	    return "Promotion.jsp";
 	}
 

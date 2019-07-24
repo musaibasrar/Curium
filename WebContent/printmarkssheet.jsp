@@ -291,9 +291,17 @@
             <thead>
 					<tr>
 						<c:forEach items="${mlist.subjectList}" var="subexamlevel">
+						<c:if test="${(subexamlevel != 'PAPER ')}">
 						<th class="datath">${subexamlevel}</th>
+						</c:if>
+						<c:set var = "subjectname" value = "${subexamlevel}"/>
 						</c:forEach>
+						<c:if test="${(subjectname == 'PAPER ')}">
+						<th class="datath">Marks</th>
+						</c:if>
+						<c:if test="${(subjectname != 'PAPER ')}">
 						<th class="datath">Total</th>
+						</c:if>
 						<th class="datath">Percentage</th>
 						<th class="datath">Result</th>
 					</tr>
@@ -303,7 +311,9 @@
 
 						<tr>
 							<c:forEach items="${mlist.marksList}" var="markslist">
+							<c:if test="${(subjectname != 'PAPER ')}">
 							<td class="datatd"><c:out value="${markslist}" /></td>
+							</c:if>
 							</c:forEach>
 							<td class="datatd"><c:out value="${mlist.totalMarksObtained}" /></td>
 							<td class="datatd">

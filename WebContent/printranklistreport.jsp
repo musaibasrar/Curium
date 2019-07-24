@@ -269,7 +269,7 @@
 				</thead>
 			<tbody>
 			
-			<c:forEach items="${resultlist}" var="resultlist" varStatus="status">
+			<c:forEach items="${ranklistreport}" var="resultlist" varStatus="status">
 
 						<tr>
 							<td class="datatd"><a class="dataTextInActive"><c:out	value="${resultlist.student.admissionnumber}" /></a></td>

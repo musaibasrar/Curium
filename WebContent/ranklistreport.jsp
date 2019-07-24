@@ -593,24 +593,20 @@ for(Cookie cookie : cookies){
 						
 						
 						<tr>
-							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRightFields">Exam Year &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="academicyear" id="academicyear"
+										<select name="examyear" id="examyear"
 									style="width: 240px;" required>
-										<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option selected value="${ranklistexamyear}">${ranklistexamyear}</option>
 											<option ></option>
 											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
-											<option value="2013/14" >2013/14</option>
-											<option value="2014/15" >2014/15</option>
-											<option value="2015/16" >2015/16</option>
-											<option value="2016/17" >2016/17</option>
-											<option value="2017/18" >2017/18</option>
 											<option value="2018/19" >2018/19</option>
-											<option value="2019/20" >2019/20</option>
-											<option value="2020/21" >2020/21</option>
-											<option value="2020/21" >2021/22</option>
-											<option value="2020/21" >2022/23</option>
-								</select>
+											<option value="2017/18" >2017/18</option>
+											<option value="2016/17" >2016/17</option>
+											<option value="2015/16" >2015/16</option>
+											<option value="2014/15" >2014/15</option>
+											<option value="2013/14" >2013/14</option>
+										</select>
 							</label> 
 						</tr>
 
@@ -660,7 +656,7 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-					<c:forEach items="${resultlist}" var="resultlist" varStatus="status">
+					<c:forEach items="${ranklistreport}" var="resultlist" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">

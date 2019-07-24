@@ -78,6 +78,7 @@ public class ResultService {
         new BranchService(request, response).viewBranches();
         new QualificationService(request, response).viewQualification();
         httpSession.setAttribute("resultlist", "");
+        httpSession.setAttribute("ranklistreport", "");
         httpSession.setAttribute("resultsubexamlevel", "");
         httpSession.setAttribute("resultcentername", "");
         httpSession.setAttribute("resultcentercode", "");
@@ -95,7 +96,7 @@ public class ResultService {
 
     public void searchResultReport() {
        String examLevel = request.getParameter("examlevelcode");
-       String academicYear = request.getParameter("academicyear");
+       String examYear = request.getParameter("examyear");
        String language = null;
        String searchQuery = "From Parents as parent where ";
        String subQuery =null;
@@ -132,6 +133,12 @@ public class ResultService {
                 httpSession.setAttribute("resultservicelanguagesearch","");
             }
             
+            if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
+            	httpSession.setAttribute("resultexamyear",examYear);
+            }else {
+            	httpSession.setAttribute("resultexamyear","");
+            }
+            
             /*if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
                 if(subQuery!=null) {
                     String subAcademicYear = request.getParameter("academicyear").toString().substring(2, 4);
@@ -162,7 +169,7 @@ public class ResultService {
                 
                     for (Subexamlevel subexamlevel : subList) {
                         Subject subjectIds = new SubjectDetailsDAO().getSubjectDetails(subexamlevel.getSubjectname());
-                        Marks marks = new MarksDetailsDAO().readMarksPerStudent(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), academicYear);
+                        Marks marks = new MarksDetailsDAO().readMarksPerStudent(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), examYear);
                         subjectList.add(subjectIds.getSubjectname());
                         
                         if(marks!=null) {
@@ -261,7 +268,7 @@ public class ResultService {
     public void searchRankListReport() {
         
         String examLevel = request.getParameter("examlevelcode");
-        String academicYear = request.getParameter("academicyear");
+        String examYear = request.getParameter("examyear");
         String centerValue = request.getParameter("centervalue");
 
         String language = null;
@@ -320,6 +327,12 @@ public class ResultService {
                  httpSession.setAttribute("ranklistqualificationsearch", "");
              }
              
+             if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
+            	 httpSession.setAttribute("ranklistexamyear",examYear);
+             }else {
+            	 httpSession.setAttribute("ranklistexamyear","");
+             }
+             
              /*if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
                  if(subQuery!=null) {
                      String subAcademicYear = request.getParameter("academicyear").toString().substring(2, 4);
@@ -338,6 +351,7 @@ public class ResultService {
              String[] examDet = examLevel.split(":");
              List<Subexamlevel> subList = new ExamLevelDetailsDAO().getSubExamLevelSubject(examDet[0]);
              List<Result> resultList = new ArrayList<Result>();
+             List<Result> rankListReportList = new ArrayList<Result>();
              List<Result> resultListRL = new LinkedList<Result>();
              List<Result> resultListFail = new ArrayList<Result>();
              int failCounter=0,passCounter=0,secondCounter=0,firstCounter=0,distinctionCounter=0;
@@ -352,7 +366,7 @@ public class ResultService {
                  
                      for (Subexamlevel subexamlevel : subList) {
                          Subject subjectIds = new SubjectDetailsDAO().getSubjectDetails(subexamlevel.getSubjectname());
-                         Marks marks = new MarksDetailsDAO().readMarksPerStudent(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), academicYear);
+                         Marks marks = new MarksDetailsDAO().readMarksPerStudent(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), examYear);
                          subjectList.add(subjectIds.getSubjectname());
                          
                          if(marks!=null) {
@@ -396,7 +410,12 @@ public class ResultService {
                      result.setPercentage(percentage);
                      result.setResultclass(finalResult);
                      
-                     if(!"FAIL".equalsIgnoreCase(result.getResultclass())  && !"ABSENT".equalsIgnoreCase(result.getResultclass())) {
+                     
+                     if("DISTINCTION".equalsIgnoreCase(result.getResultclass())) {
+                    	 rankListReportList.add(result);
+                     }
+                     
+                    if(!"FAIL".equalsIgnoreCase(result.getResultclass())  && !"ABSENT".equalsIgnoreCase(result.getResultclass())) {
                          resultList.add(result);
                          resultListRL.add(result);
                      }else if("FAIL".equalsIgnoreCase(result.getResultclass())){
@@ -406,12 +425,19 @@ public class ResultService {
                      
              }
              Collections.sort(resultList);
+             Collections.sort(rankListReportList);
              //Collections.sort(resultListFail);
 
              int i=1;
              for (Result result : resultList) {
                  result.setRank(i);
                 i++;
+            }
+             
+             int j=1;
+             for (Result result : rankListReportList) {
+                 result.setRank(j);
+                j++;
             }
              //resultList.addAll(resultListFail);
              
@@ -423,6 +449,7 @@ public class ResultService {
              httpSession.setAttribute("distinctioncount", distinctionCounter);
              
              httpSession.setAttribute("resultlist", resultList);
+             httpSession.setAttribute("ranklistreport", rankListReportList);
              httpSession.setAttribute("resultsubexamlevel", subList);
              httpSession.setAttribute("resultlistadmno", resultListRL);
              String[] centerCodeName = DataUtil.emptyString(request.getParameter("centercode")).split(":");
@@ -448,7 +475,7 @@ public class ResultService {
 
     public void searchMarksSheet() {
         String examLevel = request.getParameter("examlevelcode");
-        String academicYear = request.getParameter("academicyear");
+        String examYear = request.getParameter("examyear");
         String language = null;
         String searchQuery = "From Parents as parent where ";
         String subQuery =null;
@@ -497,7 +524,7 @@ public class ResultService {
              }else {
                  httpSession.setAttribute("markssheetqualificationsearch", "");
              }
-             
+          
              
              /*if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
                  if(subQuery!=null) {
@@ -531,7 +558,7 @@ public class ResultService {
                  
                      for (Subexamlevel subexamlevel : subList) {
                          Subject subjectIds = new SubjectDetailsDAO().getSubjectDetails(subexamlevel.getSubjectname());
-                         Marks marks = new MarksDetailsDAO().readMarksPerStudent(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), academicYear);
+                         Marks marks = new MarksDetailsDAO().readMarksPerStudent(studentDetails.getStudent().getSid(), subjectIds.getSubid(), Integer.parseInt(examDet[1]), examYear);
                          
                          if(subList.size()==1) {
                         	 subjectList.add(subjectIds.getSubjectname().replaceAll("1",""));
@@ -624,12 +651,12 @@ public class ResultService {
              httpSession.setAttribute("markssheetsubexamlevel", subList);
              String[] centerCodeName = DataUtil.emptyString(request.getParameter("centercode")).split(":");
              String[] examLevelCodeName = DataUtil.emptyString(request.getParameter("examlevelcode")).split(":");
-             httpSession.setAttribute("markssheetyear", academicYear);
+             httpSession.setAttribute("markssheetyear", examYear);
              httpSession.setAttribute("markssheetcentercode", centerCodeName[0]);
              httpSession.setAttribute("markssheetcentername", centerCodeName[1]);
              httpSession.setAttribute("markssheetexamlevel", examLevelCodeName[2]);
              httpSession.setAttribute("markssheetlanguage", language);
-             httpSession.setAttribute("markssheetacademicsearch",academicYear);
+             httpSession.setAttribute("markssheetacademicsearch",examYear);
              
              new ExamLevelService(request, response).examLevels();
              new LanguageService(request, response).viewLanguage();

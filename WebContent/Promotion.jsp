@@ -374,9 +374,9 @@
 </script>
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchClass() {
+	function search() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StudentProcess&action=searchByClass";
+		form1.action = "Controller?process=StudentProcess&action=searchForPromotion";
 		form1.method = "POST";
 		form1.submit();
 
@@ -384,6 +384,13 @@
 	function promoteClass() {
 		var form1 = document.getElementById("form1");
 		form1.action = "Controller?process=StudentProcess&action=promoteClass";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	function demoteClass() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=StudentProcess&action=demoteClass";
 		form1.method = "POST";
 		form1.submit();
 
@@ -406,7 +413,7 @@
 
 		$("#tabs").tabs();
 		$("#search").button().click(function() {
-			searchClass();
+			search();
 		});
 		$("#effect").hide();
 
@@ -420,7 +427,13 @@
          }).click(function(){
         			 promoteClass();
          });
-         
+         $("#demote").button({
+             icons:{
+                 primary: "ui-icon-arrowreturnthick-1-s"
+             }
+         }).click(function(){
+        			 demoteClass();
+         });
          $("#dropped").button({
              icons:{
                  primary: "ui-icon-triangle-1-s"
@@ -508,7 +521,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRight" >Center&nbsp;&nbsp;&nbsp;</td>
 							<td width="12%" align="left"><label> <select name="centercode" id="centercode" required
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${resultservicecentersearch}</option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}:${branchlist.centername}" >
 												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
@@ -523,11 +536,11 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td width="10%" class="alignRight">Examination Level&nbsp;</td>
-							<td width="70%"><label> <select name="examlevel" id="examlevel"
+							<td width="70%"><label> <select name="examlevelcode" id="examlevelcode"
 									style="width: 240px;" required>
-										<option selected></option>
+										<option selected>${resultserviceexamlevelsearch}</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
-											<option value="${examleveldetails.levelcode}" >
+											<option value="${examleveldetails.levelcode}:${examleveldetails.idexamlevel}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
 											</option>
 										</c:forEach>
@@ -543,7 +556,7 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="languageopted" id="languageopted"
 									style="width: 240px;">
-										<option selected></option>
+										<option selected>${resultservicelanguagesearch}</option>
 										<c:forEach items="${languageslist}" var="languageslist">
 											<option value="${languageslist.language}" >
 												<c:out value="${languageslist.language}" />
@@ -555,6 +568,34 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						
+						<tr>
+							<td class="alignRight">Exam Year &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="examyear" id="examyear"
+									style="width: 240px;" required>
+											<option selected value="${resultexamyear}">${resultexamyear}</option>
+											<option ></option>
+											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2013/14" >2013/14</option>
+											<option value="2014/15" >2014/15</option>
+											<option value="2015/16" >2015/16</option>
+											<option value="2016/17" >2016/17</option>
+											<option value="2017/18" >2017/18</option>
+											<option value="2018/19" >2018/19</option>
+											<option value="2019/20" >2019/20</option>
+											<option value="2020/21" >2020/21</option>
+											<option value="2020/21" >2021/22</option>
+											<option value="2020/21" >2022/23</option>
+								</select>
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
 					</table>
 					<table id="table2" width="100%" border="0" align="center">
 						<tr>
@@ -583,31 +624,31 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Exam Level&nbsp;</th>
                             <th title="click to sort" class="headerText">Center Code&nbsp;</th>
-                            <th title="click to sort" class="headerText">Admission Date</th>
-                             
-
-
+                            <th title="click to sort" class="headerText">%&nbsp;</th>
+                            <th title="click to sort" class="headerText">Result&nbsp;</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${studentList}" var="Student">
+                        <c:forEach items="${resultlist}" var="resultlist">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}~${Student.admissionnumber}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
-                                <td class="dataText"><c:out value="${Student.name}"/></td>
-                                <td class="dataText"><c:out value="${Student.examlevel}"/></td>
-                                <td class="dataText"><c:out value="${Student.centercode}"/></td>
-                                <td class="dataText"><c:out  value="${Student.admissiondate}"/></td>
-                                 <input type="hidden" id="classstudying" name="classstudying" value="${Student.examlevel}"/>
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${resultlist.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${resultlist.student.sid}~${resultlist.student.admissionnumber}"/>"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${resultlist.student.sid}'/>"><c:out value="${resultlist.student.admissionnumber}"/></a></td>
+                                <td class="dataText"><c:out value="${resultlist.student.name}"/></td>
+                                <td class="dataText"><c:out value="${resultlist.student.examlevel}"/></td>
+                                <td class="dataText"><c:out value="${resultlist.student.centercode}"/></td>
+                                <td class="dataText"><c:out value="${resultlist.percentage}" /></td>
+                                <td class="dataText"><c:out value="${resultlist.resultclass}" /></td>
+                                 <input type="hidden" id="classstudying" name="classstudying" value="${resultlist.student.examlevel}"/>
 
                             </tr>
                         </c:forEach>
                     </tbody>
                     <tfoot><tr>
                             <td  class="footerTD" colspan="2" ><button value="Promote" id="promote">Promote</button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="graduated">Graduated</button> 
+                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="demote">Demote</button> 
+                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="graduated">Graduated</button> 
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <button id="dropped">Dropped Out</button>
                             </td>

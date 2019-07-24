@@ -126,9 +126,15 @@
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
-	text-align: left;
+	text-align: right;
 	vertical-align: middle;
 	font-weight: bold;
+}
+
+.alignParallelFields {
+	font-family: Tahoma;
+	font-weight: bold;
+	color: #325F6D;
 }
 
 
@@ -205,11 +211,14 @@
     		var academicyear = document.getElementById("academicyear").value;
     		var admissionnumber = document.getElementById("admissionnumber").value;
     		var studentname = document.getElementById("studentname").value;
+    		var fhgname = document.getElementById("fhgname").value;
+    		var fromage = document.getElementById("fromage").value;
+    		var toage = document.getElementById("toage").value;
     		var branchid = document.getElementById("branchid").value;
     		
     		if(branchid == 1){
     			if(centerCode!="" || districtCode!="" || examLevel!="" || language!="" || qualification!="" ||
-        				religion!="" || academicyear!="" || admissionnumber!="" || studentname!=""){
+        				religion!="" || academicyear!="" || admissionnumber!="" || studentname!="" || fhgname!="" || fromage!="" || toage!="" || document.getElementById('male').checked == true || document.getElementById('female').checked == true){
         			var form1 = document.getElementById("form1");
         			form1.action = "Controller?process=StudentProcess&action=searchStudentsviewAll";
         			form1.method = "POST";
@@ -321,7 +330,28 @@
         	});
         </script>
         
-        
+        <script type="text/javascript">
+
+	function maleCheck() {
+
+		if (document.getElementById('male').checked == true) {
+			document.getElementById('female').checked = false;
+
+		}
+
+	}
+
+	function femaleCheck() {
+
+		if (document.getElementById('female').checked == true) {
+			document.getElementById('male').checked = false;
+
+		}
+
+	}
+
+</script>
+
     </head>
       <%
 //allow access only if session exists
@@ -354,17 +384,12 @@ for(Cookie cookie : cookies){
 
 				</ul>
 				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-								<tr>
-								<td class="alignRightFields" >Filters<br></td>
-								</tr>
-								<tr>
-								<td class="alignRightFields"><br></td>
-								</tr>
+				
+					<table width="30%" border="0" style="border-color: #4b6a84;float: left;margin-bottom:50px;" >
+					<tr>
 						<tr>
 							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;<input name="branchid" type="hidden" id="branchid" value="${branchid}" /></td>
-							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
+							<td><label> <select name="centercode" id="centercode"
 									style="width: 240px;">
 										<option selected>${studentviewallcenter}</option>
 										<option></option>
@@ -374,7 +399,8 @@ for(Cookie cookie : cookies){
 											</option>
 										</c:forEach>
 								</select>
-							</label></td>
+							</label>
+							</td>
 							
 						</tr>
 
@@ -382,11 +408,114 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
+							<td><label> 
+										<select name="examlevel" id="examlevel"
+									style="width: 240px;">
+										<option selected>${studentviewallexamlevel}</option>
+										<option></option>
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+							
+							</td>
+						</tr>
 
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Qualification &nbsp;&nbsp;&nbsp;</td>
+							<td ><label> 
+										<select name="qualification" id="qualification"
+									style="width: 240px;">
+										<option selected>${studentviewallqualification}</option>
+										<option></option>
+										<c:forEach items="${qualificationlist}" var="qualificationlist">
+											<option value="${qualificationlist.qualification}" >
+												<c:out value="${qualificationlist.qualification}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+							</td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Batch &nbsp;&nbsp;&nbsp;</td>
+							<td><label> 
+										<select name="academicyear" id="academicyear"
+									style="width: 240px;">
+										<option selected value="${studentviewallacademic}">${studentviewallacademic}</option>
+											<option></option>
+											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2018/19" >2018/19</option>
+											<option value="2017/18" >2017/18</option>
+											<option value="2016/17" >2016/17</option>
+											<option value="2015/16" >2015/16</option>
+											<option value="2014/15" >2014/15</option>
+											<option value="2013/14" >2013/14</option>
+								</select>
+							</label> 
+							</td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Student Name &nbsp;&nbsp;&nbsp;</td>
+							<td><label> <input
+									name="studentname" type="text" id="studentname" value="${studentviewallstudentname}" size="36" style="text-transform:uppercase;font-weight: bold;width: 236px;"
+									>
+							</label> 
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Age &nbsp;&nbsp;&nbsp;</td>
+							<td><label> From Age:&nbsp;<input
+									name="fromage" type="text" id="fromage" size="15" style="text-transform:uppercase;font-weight: bold;width: 36px;"
+									>
+							</label>
+							<label> To Age:&nbsp;<input
+									name="toage" type="text" id="toage" size="15" style="text-transform:uppercase;font-weight: bold;width: 36px;"
+									>
+							</label> 
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+					</table>
+					
+					
+					<table width="50%" border="0" style="border-color: #4b6a84;margin-bottom:50px;" >
 
 						<tr>
 							<td class="alignRightFields">District &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
+							<td><label> 
 										<select name="districtcode" id="districtcode"
 									style="width: 240px;" onchange="getAdmNo()">
 										<option selected>${studentviewalldistrict}</option>
@@ -406,29 +535,8 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="examlevel" id="examlevel"
-									style="width: 240px;">
-										<option selected>${studentviewallexamlevel}</option>
-										<option></option>
-										<c:forEach items="${examleveldetails}" var="examleveldetails">
-											<option value="${examleveldetails.levelcode}" >
-												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label> 
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
 							<td class="alignRightFields">Language &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
+							<td><label> 
 										<select name="languageopted" id="languageopted"
 									style="width: 240px;">
 										<option selected>${studentviewalllanguage}</option>
@@ -440,27 +548,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label> 
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td class="alignRightFields">Qualification &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="qualification" id="qualification"
-									style="width: 240px;">
-										<option selected>${studentviewallqualification}</option>
-										<option></option>
-										<c:forEach items="${qualificationlist}" var="qualificationlist">
-											<option value="${qualificationlist.qualification}" >
-												<c:out value="${qualificationlist.qualification}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label> 
+							</td>
 						</tr>
 
 						<tr>
@@ -470,7 +558,7 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 							<td class="alignRightFields">Religion &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
+							<td><label> 
 										<select name="religion" id="religion"
 									style="width: 240px;">
 										<option selected>${studentviewallreligion}</option>
@@ -487,35 +575,8 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="academicyear" id="academicyear"
-									style="width: 240px;">
-										<option selected value="${studentviewallacademic}">${studentviewallacademic}</option>
-											<option></option>
-											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
-											<option value="2013/14" >2013/14</option>
-											<option value="2014/15" >2014/15</option>
-											<option value="2015/16" >2015/16</option>
-											<option value="2016/17" >2016/17</option>
-											<option value="2017/18" >2017/18</option>
-											<option value="2018/19" >2018/19</option>
-											<option value="2019/20" >2019/20</option>
-											<option value="2020/21" >2020/21</option>
-											<option value="2020/21" >2021/22</option>
-											<option value="2020/21" >2022/23</option>
-								</select>
-							</label> 
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
 							<td class="alignRightFields">Admission Number&nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
+							<td><label> 
 										<input
 									name="admissionnumber" type="text" id="admissionnumber" size="36" style="text-transform:uppercase;font-weight: bold;width: 236px;"
 									>
@@ -528,35 +589,41 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td class="alignRightFields">Student Name &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> <input
-									name="studentname" type="text" id="studentname" size="36" style="text-transform:uppercase;font-weight: bold;width: 236px;"
-									>
-							</label> 
+							<td class="alignRightFields">F/H/G Name &nbsp;&nbsp;&nbsp;</td>
+							<td>
+								<label>
+								 <input name="fhgname" type="text" id="fhgname" size="36" style="text-transform:uppercase;font-weight: bold;width: 236px;">
+								</label> 
 						</tr>
-
+						
+						
 						<tr>
 							<td><br /></td>
 
 						</tr>
-
+						
 						<tr>
+								<td class="alignRightFields">Gender &nbsp;</td>
+								<td>&nbsp;Male<input type="checkbox" value="Male" name="gender" id="male" ${studentviewallgender == 'Male' ? 'checked' : ''} 
+								onclick="maleCheck();" />&nbsp; &nbsp;Female<input
+								type="checkbox" value="Female" name="gender" id="female" ${studentviewallgender == 'Female' ? 'checked' : ''} 
+								onclick="femaleCheck()" />
 
-							<td width="30%" class="alignRight"></td>
+								</td>
+							</tr>
 
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
-							</td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
 
 					</table>
 					
+					<table >
+					<tr>
+							<td width="50%"></td>
+							<td >
+								<button id="search">Search</button>
+							</td>
+						</tr>
+					
+					</table>
 					
 
 				</div>

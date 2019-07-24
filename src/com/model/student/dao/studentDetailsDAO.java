@@ -263,7 +263,7 @@ public class studentDetailsDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public boolean promoteMultiple(List<Student> studentList, String classStudying) {
+	public boolean promoteOrDemoteMultiple(List<Student> studentList, String classStudying, String promoteOrDemote) {
 		boolean result = false;
 		
 		  String stringclassStudying = classStudying;
@@ -283,21 +283,41 @@ public class studentDetailsDAO {
 
 		try {
 			transaction = session.beginTransaction();
-			Query query1 = session.createQuery("From Classhierarchy where lowerclass = '"+classStudying+"'");
-			Classhierarchy ch = (Classhierarchy) query1.uniqueResult();
-			if(ch!=null) {
-			    
-			    for (Student student : studentList) {
-			        String hql = "UPDATE Student set examlevel = :promotedclass,"
-			                + " admissionnumber = replace(admissionnumber, '"+classStudying+"', '"+ch.getUpperclass()+"'),"
-			                        + " age = age+1, qualification = '"+student.getQualification()+"' WHERE sid ="+student.getSid();
-                                Query query = session.createQuery(hql);
-                                query.setParameter("promotedclass", ch.getUpperclass());
-                                query.executeUpdate();
-                            }
+			
+			if("Promote".equalsIgnoreCase(promoteOrDemote)){
+				
+				Query query1 = session.createQuery("From Classhierarchy where lowerclass = '"+classStudying+"'");
+				Classhierarchy ch = (Classhierarchy) query1.uniqueResult();
+				if(ch!=null) {
+				    
+				    for (Student student : studentList) {
+				        String hql = "UPDATE Student set examlevel = :promotedclass,"
+				                + " admissionnumber = replace(admissionnumber, '"+classStudying+"', '"+ch.getUpperclass()+"'),"
+				                        + " age = age+1, qualification = '"+student.getQualification()+"' WHERE sid ="+student.getSid();
+	                                Query query = session.createQuery(hql);
+	                                query.setParameter("promotedclass", ch.getUpperclass());
+	                                query.executeUpdate();
+	                            }
+				}
+				
+			}else if("Demote".equalsIgnoreCase(promoteOrDemote)){
+				Query query1 = session.createQuery("From Classhierarchy where upperclass = '"+classStudying+"'");
+				Classhierarchy ch = (Classhierarchy) query1.uniqueResult();
+				if(ch!=null) {
+				    for (Student student : studentList) {
+				        String hql = "UPDATE Student set examlevel = :demotedclass,"
+				                + " admissionnumber = replace(admissionnumber, '"+classStudying+"', '"+ch.getLowerclass()+"'),"
+				                        + " age = age-1, qualification = '"+student.getQualification()+"' WHERE sid ="+student.getSid();
+	                                Query query = session.createQuery(hql);
+	                                query.setParameter("demotedclass", ch.getLowerclass());
+	                                query.executeUpdate();
+	                        }
+				}
 			}
 			
 			transaction.commit();
+			
+			
 			result = true;
 		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();
