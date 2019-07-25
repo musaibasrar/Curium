@@ -553,7 +553,7 @@ public class ResultService {
                  List<Integer> marksList = new ArrayList<Integer>();
                  List<String> subjectList = new ArrayList<String>();
                  int marksObtained = 0;
-                 double totalMarks = 0;
+                 int totalMarks = 0;
                  String finalResult = null;
                  
                      for (Subexamlevel subexamlevel : subList) {
@@ -622,6 +622,7 @@ public class ResultService {
                      result.setResultclass(finalResult);
                      result.setTotalMarksObtained(marksObtained);
                      result.setReferenceBooksList(referenceBooksList);
+                     result.setTotalMarks(totalMarks);
                      
                      if(!"FAIL".equalsIgnoreCase(result.getResultclass()) && !"ABSENT".equalsIgnoreCase(result.getResultclass())) {
                          resultList.add(result);

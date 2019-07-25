@@ -87,13 +87,13 @@
 .datatable {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 80%;
+    width: 90%;
     font-size: 18px;
 }
 
 .datatd, .datath {
     border: 1px solid #000000;
-    text-align: left;
+    text-align: center;
     padding: 5px;
     width: 10%;
 }
@@ -297,11 +297,12 @@
 						<c:set var = "subjectname" value = "${subexamlevel}"/>
 						</c:forEach>
 						<c:if test="${(subjectname == 'PAPER ')}">
-						<th class="datath">Marks</th>
+						<th class="datath">Marks Obtained</th>
 						</c:if>
 						<c:if test="${(subjectname != 'PAPER ')}">
-						<th class="datath">Total</th>
+						<th class="datath">Marks Obtained</th>
 						</c:if>
+						<th class="datath">Total Marks</th>
 						<th class="datath">Percentage</th>
 						<th class="datath">Result</th>
 					</tr>
@@ -316,6 +317,7 @@
 							</c:if>
 							</c:forEach>
 							<td class="datatd"><c:out value="${mlist.totalMarksObtained}" /></td>
+							<td class="datatd"><c:out value="${mlist.totalMarks}" /></td>
 							<td class="datatd">
 							<fmt:formatNumber type = "number" 
          					pattern = "0.#" value = "${mlist.percentage}" />%</td>
