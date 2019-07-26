@@ -149,7 +149,7 @@ public class SmsService {
 							querySub = querySub + "teacher.department = '"+department+"' AND teacher.currentemployee=1";
 					}
 					
-			queryMain = queryMain+querySub+ "AND teacher.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+			queryMain = queryMain+querySub+ " AND teacher.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
 
 			double totalNumbers = new SmsDAO().countNumbers(queryMain);
 			int resultSMS=0;
@@ -160,20 +160,21 @@ public class SmsService {
 			for(int i=0;i<iterations;i++){
 				List<Object> teacherContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
 				
-				List<Teacher> teachersContact = (List<Teacher>) Teacher.class.cast(teacherContacts); 
+				//List<Teacher> teachersContact = (List<Teacher>) Teacher.class.cast(teacherContacts); 
 						
 				String numbers = null;
 					StringBuilder sbN = new StringBuilder();
 
-					if(!teachersContact.isEmpty()){
-						for (Teacher teacher : teachersContact) {
-							sbN.append(teacher.getContactnumber());
+					if(!teacherContacts.isEmpty()){
+						for (Object teacher : teacherContacts) {
+							Teacher teach = Teacher.class.cast(teacher);
+							sbN.append(teach.getContactnumber());
 							sbN.append(",");
 						}
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
 						logger.info("Numbers are *** "+numbers);
-						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebody")));
+						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodystaff")));
 					}
 					
 				offset = offset+100;
