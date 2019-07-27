@@ -765,5 +765,38 @@ public class studentDetailsDAO {
           }
 
   }
+
+		public boolean approveRecords(List ids) {
+			try {
+				transaction = session.beginTransaction();
+				Query query = session
+						.createQuery("update Student set remarks='approved' where sid IN (:ids)");
+				query.setParameterList("ids", ids);
+				query.executeUpdate();
+				transaction.commit();
+				return true;
+			} catch (HibernateException hibernateException) {transaction.rollback();
+				hibernateException.printStackTrace();
+			}finally {
+				HibernateUtil.closeSession();
+			}
+			return false;
+		}
+
+		public void rejectRecords(List ids) {
+			try {
+				transaction = session.beginTransaction();
+				Query query = session
+						.createQuery("update Student set archive = 1, remarks='rejected' where id IN (:ids)");
+				query.setParameterList("ids", ids);
+				query.executeUpdate();
+				transaction.commit();
+			} catch (HibernateException hibernateException) {transaction.rollback();
+				hibernateException.printStackTrace();
+			}finally {
+				HibernateUtil.closeSession();
+			}
+
+		}
 	
 }

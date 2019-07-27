@@ -216,6 +216,13 @@ public class StudentService {
 		
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
+		//if branch is not head office
+		if(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())!=1) {
+			student.setRemarks("underapproval");
+		}
+		
+		
+		
 		//SET STUDENTS DETAILS
 		httpSession.setAttribute("genderadd", student.getGender());
 		httpSession.setAttribute("examleveladd", student.getExamlevel());
@@ -634,7 +641,6 @@ public class StudentService {
 			if(new studentDetailsDAO().deleteMultiple(ids)) {
 			    return true;
 			}
-			return false;
 		}
 		return false;
 	}
@@ -1675,5 +1681,59 @@ public class StudentService {
 			result = true;
 		}
 		return result;
+	}
+
+	public void pendingApprovals() {
+		
+        String searchQuery = "From Parents as parent where parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND parent.Student.archive = 0";
+        
+        if(!request.getParameter("centercode").equalsIgnoreCase("")) {
+            String[] centerCode = request.getParameter("centercode").split(":");
+            searchQuery = searchQuery+" AND parent.Student.centercode = '"+centerCode[0]+"'";
+            httpSession.setAttribute("printcentername", "Center Code/Name: "+centerCode[0]+"/"+centerCode[1]);
+            httpSession.setAttribute("studentviewallcenter", centerCode[0]+":"+centerCode[1]);
+        }else {
+       	 httpSession.setAttribute("studentviewallcenter", "");
+        }
+        
+        searchQuery = searchQuery+" AND parent.Student.remarks = 'underapproval' Order By parent.Student.admissionnumber ASC";
+        
+        List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
+        
+        request.setAttribute("studentListPendingApproval", parentsList);
+        request.setAttribute("noOfPages", 1);
+        request.setAttribute("currentPage", 1);
+        request.setAttribute("totalstudents", parentsList.size());
+
+        new BranchService(request, response).viewBranches();
+        
+	}
+
+	public boolean approveRecords() {
+		
+		String[] studentIds = request.getParameterValues("studentIDs");
+		if (studentIds != null) {
+			List ids = new ArrayList();
+			for (String id : studentIds) {
+				ids.add(Integer.valueOf(id));
+			}
+			if(new studentDetailsDAO().approveRecords(ids)) {
+			    return true;
+			}
+		}
+		return false;
+	}
+
+	public void rejectRecords() {
+		String[] studentIds = request.getParameterValues("studentIDs");
+
+		if (studentIds != null) {
+			List ids = new ArrayList();
+			for (String id : studentIds) {
+				ids.add(Integer.valueOf(id));
+
+			}
+			new studentDetailsDAO().rejectRecords(ids);
+		}
 	}
 }

@@ -786,7 +786,8 @@ public class ResultService {
 	       String subQuery =null;
 	       
 	    // Get other Religion Student Details
-	       String currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString();
+	       //String currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString();
+	       String currentAcademicYear = request.getParameter("examyear");
 	       BigInteger studentListPaper1 = new studentDetailsDAO().getStudentsListSQL("select count(*) from student s, att_studentdailyattendance sa WHERE religion='OTHERS' AND sa.attendancestatus = 'Present'  AND sa.subject='PAPER 1' AND s.studentexternalid = sa.attendeeid AND sa.academicyear='"+currentAcademicYear+"'");
 	       httpSession.setAttribute("resultanalysispaper1nonm", studentListPaper1);
 	       System.out.println("resultanalysispaper1nonm ********** "+studentListPaper1);

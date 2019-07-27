@@ -348,7 +348,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=marksSheet" style="font-size: 12px;">Marks Sheet</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=evaluationSheet" style="font-size: 12px;">Evaluation Sheet</a><br/>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendancereport" style="font-size: 12px;">Attendance Report</a><br/>
-                <a target="mainFrame" href="Controller?process=StudentProcess&action=resultAnalysis" style="font-size: 12px;">Result Analysis</a><br/>
+                <a target="mainFrame" href="resultanalysisyearly.jsp" style="font-size: 12px;">Result Analysis</a><br/>
             </div>
             
             <!-- <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
@@ -410,6 +410,7 @@ for(Cookie cookie : cookies){
             <div >
                 <a target="mainFrame" href="Backup&Restore.jsp" style="font-size: 12px;">Backup</a><br/>
                 <a target="mainFrame" href="changePassword.jsp" style="font-size: 12px;">Change Password</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=pendingapprovals&centercode=""" style="font-size: 12px;">Pending Approvals</a><br/>
                 <!-- <a target="mainFrame" href="uploadattendance.jsp" style="font-size: 12px;">upload attendance file</a><br/> -->
             </div>
             

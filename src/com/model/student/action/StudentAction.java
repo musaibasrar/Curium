@@ -168,13 +168,34 @@ public class StudentAction {
                     url = printResultList();
                 }else if (action.equalsIgnoreCase("resultListCenter")) {
                     url = resultListCenter();
+                }else if (action.equalsIgnoreCase("pendingapprovals")) {
+                    url = pendingApprovals();
+                }else if (action.equalsIgnoreCase("approveRecords")) {
+                    url = approveRecords();
+                }else if (action.equalsIgnoreCase("rejectRecords")) {
+                    url = rejectRecords();
                 }
 		return url;
 	}
 	
 	
 
-    private String demoteClass() {
+    private String rejectRecords() {
+		 new StudentService(request, response).rejectRecords();
+		 return "rejectsuccess.jsp";
+	}
+
+	private String approveRecords() {
+		 new StudentService(request, response).approveRecords();
+		 return "approvesuccess.jsp";
+	}
+
+	private String pendingApprovals() {
+		 new StudentService(request, response).pendingApprovals();
+		return "pendingapprovals.jsp";
+	}
+
+	private String demoteClass() {
 		if( new StudentService(request, response).demoteMultiple()){
 			return "successpromote.jsp";
 		}

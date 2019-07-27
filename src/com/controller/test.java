@@ -1,17 +1,10 @@
 package com.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.SocketException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.charset.MalformedInputException;
+import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,15 +14,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.net.ftp.FTPClient;
-
-import com.mchange.v2.collection.MapEntry;
-import com.model.sendsms.dao.SmsDAO;
-
 public class test {
 
 	
 	public static void main(String[] args) throws SocketException, IOException{
+		
+
+		Double price = 5.000;
+		DecimalFormat format = new DecimalFormat("0.#");
+		System.out.println(format.format(price));
+		
+		
+		double marksObtained = 2.0;
+		
+		System.out.println("Marks Obtained "+Math.round(marksObtained));
 		
 		
 		
