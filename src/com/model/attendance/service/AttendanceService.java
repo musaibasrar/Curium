@@ -909,7 +909,7 @@ public class AttendanceService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			List<Student> studentList = new studentDetailsDAO().getListStudents("from Student where archive=0");
+			List<Student> studentList = new studentDetailsDAO().getListStudents("from Student where AND passedout = 0 AND droppedout = 0 AND  archive = 0");
 			Currentacademicyear currentAcademicYear = new YearDAO().showYear();
 			List<Attendancemaster> studentAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails("00011");
 			String[] weeklyOffString = studentAttendanceMaster.get(0).getWeeklyoff().split(",");
@@ -989,9 +989,9 @@ public class AttendanceService {
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = " student.classstudying like '" + classStudying
 					+ "' OR student.classstudying = '" + conClassStudyingEquals
-					+ "'  AND student.archive=0";
+					+ "'  AND student.archive=0 AND student.passedout = 0 AND student.droppedout = 0";
 		} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND student.archive=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = querySub + " AND student.archive=0 AND student.passedout = 0 AND student.droppedout = 0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
 		queryMain = queryMain + querySub + " Order by student.admissionnumber ASC";
 		List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
