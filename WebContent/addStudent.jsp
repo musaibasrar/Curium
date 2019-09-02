@@ -639,22 +639,12 @@
 
 
 				<div id="fragment-1">
-					<table width="100%" border="0" align="center" id="table1">
+					<table width="90%" border="0" align="left" id="table1">
 						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
-
-						<tr>
-
-							<td width="30%" class="alignRight"><label> <font
-									color="red"><div id="mydiv"></div></font>
-							</label></td>
-							<td width="20%" class="alignRight"></td>
-							<td class="alignRight"><font color="red"><div
-										id="mydivmobile"></div></font></td>
 						</tr>
 
 						<tr>
@@ -1216,22 +1206,10 @@
 								</tr>
 
 								<tr>
-
-									<td width="30%" class="alignRight"><label> <font
-											color="red"><div id="mydiv"></div></font>
-									</label></td>
-									<td width="20%" class="alignRight"></td>
-									<td class="alignRight"><font color="red"><div
-												id="mydivmobile"></div></font></td>
-								</tr>
-
-
-
-								<tr>
-									<td width="30%" class="alignRight">Class on leaving&nbsp;</td>
-									<td width="12%" align="left">
+									<td class="alignRight">Class on leaving&nbsp;</td>
+									<td align="left">
 									<label> <select name="classonleaving"
-									id="classonleaving" style="width: 220px;">
+									id="classonleaving" style="width: 260px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -1242,11 +1220,11 @@
 										</c:forEach>
 										</select>
 									</label>
-									<td width="30%" class="alignRight">Date of leaving the
+									<td class="alignRight">Date of leaving the
 										school&nbsp;</td>
-									<td width="12%" align="left"><label> <input
+									<td align="left"><label> <input
 											name="dateofleaving" type="text" class="myclass"
-											id="dateofleaving" size="30"
+											id="dateofleaving" size="40"
 											data-validate="validate(required)"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
@@ -1265,10 +1243,10 @@
 
 								<tr>
 
-									<td width="16%" class="alignRight">Reason for leaving
+									<td class="alignRight">Reason for leaving
 										&nbsp;</td>
 
-									<td width="28%"><label> <input
+									<td><label> <input
 											name="reasonforleaving" type="text" class="myclass"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="reasonforleaving" size="30"
@@ -1278,25 +1256,25 @@
 
 
 
-									<td width="16%" class="alignRight">No. & date of transfer
+									<td class="alignRight">No. & date of transfer
 										certificate issued&nbsp;</td>
 
-									<td width="28%"><label> <input name="notcissued"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									<td ><label> <input name="notcissued"
+									style="height: 18px;font-size: 13px;font-weight: bold;"
 											type="text" class="myclass" id="notcissued" size="30" placeholder="No. of Transfer Certificate">
 									</label></td>
 
 								</tr>
 
 								<tr>
-								<td width="28%"></td>
-								<td width="28%"></td>
-								<td width="28%"></td>
+								<td></td>
+								<td></td>
+								<td></td>
 									<td><label>
 											<input
 											name="dateoftcissued" type="text" class="myclass"
 											id="dateoftcissued" size="30" placeholder="Date of Transfer Certificate"
-											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											style="height: 18px;font-size: 13px;font-weight: bold;"
 											data-validate="validate(required)">
 									</label></td>
 								</tr>
@@ -1358,10 +1336,6 @@
 									<td><br /></td>
 								</tr>
 
-
-								</div>
-								</div>
-
 							</table>
 
 						</div>
@@ -1377,28 +1351,16 @@
 								</tr>
 
 								<tr>
-
-									<td width="30%" class="alignRight"><label> <font
-											color="red"><div id="mydiv"></div></font>
-									</label></td>
-									<td width="20%" class="alignRight"></td>
-									<td class="alignRight"><font color="red"><div
-												id="mydivmobile"></div></font></td>
-								</tr>
-
-
-
-								<tr>
-									<td width="30%" class="alignRight">Father's Name* &nbsp;</td>
-									<td width="12%" align="left"><label> <input
+									<td class="alignRight">Father's Name* &nbsp;</td>
+									<td align="left"><label> <input
 											name="fathersname" type="text" class="myclass"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="fathersname" size="30"
 											required> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
-									<td width="30%" class="alignRight">Mother's Name* &nbsp;</td>
-									<td width="12%" align="left"><label> <input
+									<td class="alignRight">Mother's Name* &nbsp;</td>
+									<td align="left"><label> <input
 											name="mothersname" type="text" class="myclass" id="name"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											size="30"> <!-- onkeyup="check(this.value);"  -->
@@ -1417,18 +1379,18 @@
 								</tr>
 
 								<tr>
-									<td width="30%" class="alignRight">Father's Qualification
+									<td class="alignRight">Father's Qualification
 										&nbsp;</td>
-									<td width="12%" align="left"><label> <input
+									<td align="left"><label> <input
 											name="fathersqualification" type="text" class="myclass"
 											id="fathersqualification" 
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											size="30"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
-									<td width="30%" class="alignRight">Mother's
+									<td class="alignRight">Mother's
 										Qualification&nbsp;</td>
-									<td width="12%" align="left"><label> <input
+									<td align="left"><label> <input
 											name="mothersqualification" type="text" class="myclass"
 											id="mothersqualification"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
@@ -1444,17 +1406,17 @@
 									<td><br /></td>
 								</tr>
 								<tr>
-									<td width="20%" class="alignRight">Fathers Occupation
+									<td class="alignRight">Fathers Occupation
 										&nbsp;</td>
-									<td width="28%"><label> <input
+									<td><label> <input
 											name="fatherscastecertno" type="text" class="myclass"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="fatherscastecertno" size="30">
 									</label></td>
 
-									<td width="20%" class="alignRight">Mothers Occupation
+									<td class="alignRight">Mothers Occupation
 										&nbsp;</td>
-									<td width="28%"><label> <input
+									<td ><label> <input
 											name="motherscastecertno" type="text" class="myclass"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="motherscastecertno" size="30">
@@ -1470,9 +1432,9 @@
 
 								<tr>
 
-									<td width="16%" class="alignRight">Guardian's Name &
+									<td class="alignRight">Guardian's Name &
 										Address &nbsp;</td>
-									<td width="28%"><label> <input name="guardian"
+									<td ><label> <input name="guardian"
 											type="text" class="myclass" id="guardian" size="30"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											onclick="validateNameContact();">
@@ -1480,9 +1442,9 @@
 
 
 
-									<td width="16%" class="alignRight">Annual Income &nbsp;</td>
+									<td class="alignRight">Annual Income &nbsp;</td>
 
-									<td width="28%"><label> <input
+									<td ><label> <input
 											name="parentsannualincome" type="text" class="myclass"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="parentsannualincome" size="30"
@@ -1501,9 +1463,9 @@
 
 								<tr>
 
-									<td width="16%" class="alignRight">Contact Number &nbsp;</td>
+									<td class="alignRight">Contact Number &nbsp;</td>
 
-									<td width="28%"><label> <input
+									<td><label> <input
 											name="contactnumber" type="text" class="myclass"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="contactnumber" size="30" maxlength="10" minlength="10">
@@ -1512,10 +1474,10 @@
 
 
 
-									<td width="16%" class="alignRight">Co-Contact Number
+									<td class="alignRight">Co-Contact Number
 										&nbsp;</td>
 
-									<td width="28%"><label> <input
+									<td><label> <input
 											name="cocontactnumber" type="text" class="myclass"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="cocontactnumber" size="30" maxlength="10" minlength="10">
@@ -1533,19 +1495,19 @@
 
 								<tr>
 
-									<td width="16%" class="alignRight">Email &nbsp;</td>
+									<td class="alignRight">Email &nbsp;</td>
 
-									<td width="28%"><label> <input name="email"
+									<td ><label> <input name="email"
 											type="email" class="myclass" id="email" size="30"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											onblur="validateNameContact();">
 
 									</label></td>
 
-									<td width="20%" class="alignRight">Number Of Dependents
+									<td class="alignRight">Number Of Dependents
 										&nbsp;</td>
 
-									<td width="28%"><label> <input
+									<td ><label> <input
 											name="noofdependents" type="text" class="myclass"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="noofdependents" size="30" onblur="validateNameContact();">
@@ -1563,9 +1525,9 @@
 									<td><br /></td>
 								</tr>
 
-								<td width="16%" class="alignRight">Permanent Address &nbsp;</td>
+								<td class="alignRight">Permanent Address &nbsp;</td>
 
-								<td width="28%"><label> <textarea
+								<td ><label> <textarea
 											name="permanentaddress" type="text" 
 											id="permanentaddress" rows="4" cols="40"
 											onkeypress="return validateContactNum(this);"></textarea>
@@ -1573,8 +1535,8 @@
 								</label></td>
 
 
-								<td width="20%" class="alignRight">Temporary Address &nbsp;</td>
-								<td width="28%"><label> <textarea
+								<td class="alignRight">Temporary Address &nbsp;</td>
+								<td ><label> <textarea
 											name="temporaryaddress" type="text" 
 											id="temporaryaddress" rows="4" cols="40"></textarea>
 								</label></td>
@@ -1592,8 +1554,8 @@
 
 								<tr>
 
-									<td width="16%" class="alignRight">Notes &nbsp;</td>
-									<td width="28%"><label> <input name="remarksadditional"
+									<td class="alignRight">Notes &nbsp;</td>
+									<td ><label> <input name="remarksadditional"
 											type="text" class="myclass" id="remarksadditional" size="30"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											onclick="validateNameContact();">
@@ -1612,7 +1574,7 @@
 
 
 								<tr align="center">
-									<td width="40%" class="alignRight">&nbsp;</td>
+									<td class="alignRight">&nbsp;</td>
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
 										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
@@ -1626,42 +1588,26 @@
 									<td><br /></td>
 								</tr>
 								<tr align="center">
-
-
-									<td width="20%" class="alignRight">&nbsp;</td>
-
+									<td class="alignRight">&nbsp;</td>
 									<td align="center">
-
-
 										<button id="savetwo" class="save"
 											onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
 											onfocus="validateNameContact();validateFatherName();">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="canceltwo" class="cancel">Cancel</button>
-
 									</td>
 
-
-
-
 								</tr>
 
 								<tr>
 									<td><br /></td>
 								</tr>
 
-
 								<tr>
 									<td><br /></td>
 								</tr>
-
-
-								</div>
-								</div>
-
 							</table>
-
 						</div>
 						
 						<div id="fragment-5">
@@ -1674,15 +1620,15 @@
 									</tr>
 
 									<tr>
-							<td width="30%" class="alignRight">Transfer
+							<td class="alignRight">Transfer
 								certificate No.&nbsp;</td>
-							<td width="12%" align="left"><label> <input
+							<td  align="left"><label> <input
 							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									name="tcno" type="text" class="myclass" id="tcno" size="30">
 									
 							</label></td>
-									<td width="20%" class="alignRight">Date of Transfer Certificate&nbsp;</td>
-							<td width="28%"><label >
+									<td class="alignRight">Date of Transfer Certificate&nbsp;</td>
+							<td ><label >
 							<input name="dateoftc" type="text" class="myclass"
 									id="dateoftc" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
@@ -1699,9 +1645,9 @@
 						</tr>
 						
 						<tr>
-							<td width="16%" class="alignRight">Previous Class Studied &nbsp;</td>
+							<td class="alignRight">Previous Class Studied &nbsp;</td>
 
-							<td width="28%"><label> <select name="lastclass" id="lastclass"
+							<td ><label> <select name="lastclass" id="lastclass"
 									style="width: 256px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -1712,9 +1658,9 @@
 								</select>
 							</label></td>
 
-							<td width="20%" class="alignRight">Previous School Name
+							<td class="alignRight">Previous School Name
 								&nbsp;</td>
-							<td width="12%" align="left"><label> <input
+							<td  align="left"><label> <input
 									name="lastschool" type="text" class="myclass" id="lastschool"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									size="30" onblur="validateName();">
@@ -1730,9 +1676,9 @@
 						</tr>
 
 						<tr>
-							<td width="16%" class="alignRight">Languages Studied &nbsp;</td>
+							<td class="alignRight">Languages Studied &nbsp;</td>
 
-							<td width="28%"><label> <input
+							<td><label> <input
 									name="languagesstudied" type="text" class="myclass"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									id="languagesstudied" size="30">
@@ -1740,8 +1686,8 @@
 
 
 
-							<td width="20%" class="alignRight">Core Subjects Studied &nbsp;</td>
-							<td width="28%"><label> <input
+							<td class="alignRight">Core Subjects Studied &nbsp;</td>
+							<td><label> <input
 									name="progress" type="text"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									class="myclass" id="progress" size="30">
@@ -1756,7 +1702,7 @@
 						</tr>
 						
 						<tr>
-							<td width="16%" class="alignRight">Previous School Medium of
+							<td class="alignRight">Previous School Medium of
 								Instruction&nbsp;</td>
 
 							<td><label> <select name="mediumofinstruction"
@@ -1773,7 +1719,7 @@
 
 							</label></td>
 							
-							<td width="16%" class="alignRight">Previous School
+							<td class="alignRight">Previous School
 								Type&nbsp;</td>
 
 							<td><label> <select name="previousschooltype"
@@ -1795,7 +1741,7 @@
 							<td><br /></td>
 						</tr>
 								<tr align="center">
-									<td width="40%" class="alignRight">&nbsp;</td>
+									<td class="alignRight">&nbsp;</td>
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
 										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
@@ -1854,9 +1800,8 @@
 									</tr>
 									
 									<tr>
-								<td width="10%" class="alignRight"></td>
-							<td width="68%"><label class="alignRight">Bank Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input name="bankname" type="text" class="myclass" id="bankname" size="30"
+								<td class="alignRight">Bank Name &nbsp;</td>
+							<td><label> <input name="bankname" type="text" class="myclass" id="bankname" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									>
 							</label></td>
@@ -1865,24 +1810,22 @@
 
 										<td><br /></td>
 									</tr>
+						
 						<tr>
-								<td width="20%" class="alignRight"></td>
-							<td width="68%"><label class="alignRight"> Bank IFSC Code&nbsp;&nbsp;
-							<input name="bankifsc" type="text" class="myclass" id="bankifsc" size="30"
+							<td class="alignRight">Bank IFSC Code&nbsp;</td>
+							<td><label> <input name="bankifsc" type="text" class="myclass" id="bankifsc" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									>
 							</label></td>
 						</tr>
-						<tr>
-
+								<tr>
 										<td><br /></td>
-									</tr>
+								</tr>
 						<tr>
-								<td width="20%" class="alignRight"></td>
-							<td width="68%"><label class="alignRight"> Account No. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input name="accno" type="text" class="myclass" id="accno" size="30"
+							<td class="alignRight">Account No. &nbsp;</td>
+							<td><label> <input name="accno" type="text" class="myclass" id="accno" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									">
+									>
 							</label></td>
 						</tr>
 						
