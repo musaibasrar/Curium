@@ -760,8 +760,7 @@ for(Cookie cookie : cookies){
 				<tfoot>
 					<tr>
 						<td class="footerTD" colspan="2"> 
-						<button id="export" type="submit">Export</button>
-						&nbsp;&nbsp;
+						<!-- <button id="export" type="submit">Export</button> -->
 						  <button id="printstudentsreport">Print</button>
 						</td>
 					</tr>

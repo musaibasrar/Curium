@@ -347,7 +347,7 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendanceCenter" style="font-size: 12px;">View Attendance</a><br/>
-                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendanceCenter" style="font-size: 12px;">Mark Attendance</a><br/>
                 <!-- <a target="mainFrame" href="attendanceexport.jsp" style="font-size: 12px;">Export Attendance</a><br/> -->
             </div>
 

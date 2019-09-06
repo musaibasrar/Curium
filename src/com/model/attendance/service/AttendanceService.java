@@ -1660,4 +1660,11 @@ public class AttendanceService {
 		return studentAttendance;
 	}
 
+	public void markAttendanceCenter() {
+        new ExamLevelService(request, response).examLevels();
+        new BranchService(request, response).viewBranchesCenter();
+        request.setAttribute("attendanceupdate", "");
+        request.setAttribute("attendancesave", "");
+    }
+
 }

@@ -91,6 +91,8 @@ public class AttendanceAction {
 			url = downloadStaffAttendance();
 		}else if ("markAttendance".equalsIgnoreCase(action)) {
             url = markAttendance();
+        }else if ("markAttendanceCenter".equalsIgnoreCase(action)) {
+            url = markAttendanceCenter();
         }else if ("getSubjects".equalsIgnoreCase(action)) {
             getSubjects();
         }else if ("printAttendanceReport".equalsIgnoreCase(action)) {
@@ -104,6 +106,11 @@ public class AttendanceAction {
 	}
 	
 	
+	private String markAttendanceCenter() {
+        new AttendanceService(request, response).markAttendanceCenter();
+        return "attendancemark.jsp";
+    }
+
 	private String searchAttendanceStatus() {
 		new AttendanceService(request, response).searchAttendanceStatus();
 		return "attendancereport.jsp";
