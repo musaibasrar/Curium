@@ -819,7 +819,13 @@ public class AttendanceService {
 		}
 		
 		 new ExamLevelService(request, response).examLevels();
-	     new BranchService(request, response).viewBranches();
+		 
+		 if("admin".equalsIgnoreCase(httpSession.getAttribute("typeOfUser").toString())) {
+             new BranchService(request, response).viewBranches();
+         }else {
+             new BranchService(request, response).viewBranchesCenter();
+         }
+		 
 	     httpSession.setAttribute("centercodesearch", DataUtil.emptyString(request.getParameter("centercode")));
 		
 		return result;
