@@ -1,44 +1,20 @@
 <%--
-    Document   : Marks Sheet
-    Created on : AUG 11, 2018, 12:50:28 PM
+    Document   : Promotion
+    Created on : Dec 23, 2011, 5:52:28 PM
     Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Marks Sheet</title>
-<script src="js/Chart.js"></script>
+<title>Promotion</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
-
-
-
-  <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        
-        
-         <script  type="text/javascript" src="js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
-              
-        
 <style type="text/css">
 <!--
 .divCSS {
@@ -115,28 +91,6 @@
 	font-weight: bold;
 }
 
-.alignRightFields {
-	font-family: Tahoma;
-	font-size: 11px;
-	font-style: normal;
-	text-transform: capitalize;
-	color: #325F6D;
-	text-align: left;
-	vertical-align: middle;
-	font-weight: bold;
-}
-
-.alignSearch {
-	font-family: Tahoma;
-	font-size: 11px;
-	font-style: normal;
-	text-transform: capitalize;
-	color: #325F6D;
-	text-align: left;
-	vertical-align: middle;
-	font-weight: bold;
-}
-
 .alignRightMultiple {
 	font-family: Tahoma;
 	font-size: 11px;
@@ -145,12 +99,6 @@
 	vertical-align: middle;
 	font-style: normal;
 	color: #325F6D;
-}
-
-.footerTD {
-	border-radius: 6px;
-	background-color: #4b6a84;
-	text-align: left;
 }
 
 .alignCentreMultiple {
@@ -313,6 +261,15 @@
 	font-weight: bold;
 	height: 22px;
 }
+.footerTD{
+                border-radius:6px;
+                background-color:#4b6a84;
+
+
+                text-align: left;
+
+
+            }
 </style>
 <style>
 #button {
@@ -373,82 +330,33 @@
 		var options = {};
 
 		$("#effect").show();
-		
+		$("#medicineId").val(id)
+		$("#medicineName").val(name);
 
 	}
-	
+	function getCurrentDate() {
+		var today = new Date();
+		var day = today.getDate();
+		var month = today.getMonth() + 1;
+		var year = today.getFullYear();
+		if (month < 10) {
+			month = "0" + month;
+
+		} else {
+			month = month;
+		}
+		if (day < 10) {
+			day = "0" + day;
+
+		} else {
+			day = day;
+		}
+		return month + "/" + day + "/" + year;
+
+	}
 </script>
-
-<script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-
 	$(function() {
-
-		$("#apply").button().click(function() {
-			searchMarksSheet();
-		});
-		
-	});
-	
-	function searchMarksSheet() {
-		var form1 = document.getElementById("form1");
-		if(form1.checkValidity()) {
-			form1.action = "Controller?process=StudentProcess&action=searchMarksSheet";
-			form1.method = "POST";
-			form1.submit();
-		  }
-	}
-	
-	$(function() {
-
-		$("#tabs").tabs();
-
-		$("#effect").hide();
-		
-		 $("#printmarkssheetlistreport").button({
-				icons : {
-					primary : "ui-icon-print"
-				}
-			})
-	});
-	
-	$(function() {
-			
-		$('#chckHead').click(function() {
-			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
-			if (length > 0) {
-				$('.chcktbl:checked').attr('checked', false);
-				this.checked = false;
-
-			} else {
-				if (this.checked == false) {
-					$('.chcktbl:checked').attr('checked', false);
-				} else {
-					$('.chcktbl:not(:checked)').attr('checked', true);
-				}
-
-			}
-
-		});
-		$('.chcktbl').click(function() {
-			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
-			alert(tdLength);
-			if (length > trLength) {
-
-				$('.chcktbl:not(:checked)').attr('disabled', true);
-			} else {
-				$('.chcktbl:not(:checked)').attr('disabled', false);
-			}
-		});
-
-		$("#go").button()
-
-	});
-	
-
-    $(function() {
 		// run the currently selected effect
 		function runEffect() {
 
@@ -458,20 +366,123 @@
 		}
 		;
 		// set effect from select menu value
-		$("#add").button({
-			icons : {
-				primary : "ui-icon-arrowthick-1-s"
-			}
-		}).click(function() {
+		$("#add").button().click(function() {
 			runEffect();
 			return false;
 		});
 	});
-	
-
-	
 </script>
+<script type="text/javascript" src="js/datetimepicker_css.js"></script>
+<script type="text/javascript">
+	function search() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=StudentProcess&action=searchForPromotion";
+		form1.method = "POST";
+		form1.submit();
 
+	}
+	function promoteClass() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=StudentProcess&action=promoteClass";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	function demoteClass() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=StudentProcess&action=demoteClass";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	function graduated() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=StudentProcess&action=graduated";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	function dropped() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=StudentProcess&action=dropped";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	$(function() {
+
+		$("#tabs").tabs();
+		$("#search").button().click(function() {
+			search();
+		});
+		$("#effect").hide();
+
+	});
+	
+	 $(function(){
+         $("#promote").button({
+             icons:{
+                 primary: "ui-icon-arrowreturnthick-1-n"
+             }
+         }).click(function(){
+        			 promoteClass();
+         });
+         $("#demote").button({
+             icons:{
+                 primary: "ui-icon-arrowreturnthick-1-s"
+             }
+         }).click(function(){
+        			 demoteClass();
+         });
+         $("#dropped").button({
+             icons:{
+                 primary: "ui-icon-triangle-1-s"
+             }
+         }).click(function(){
+        	 dropped();
+         });
+         
+         $("#graduated").button({
+             icons:{
+                 primary: "ui-icon-star"
+             }
+         }).click(function(){
+        	 graduated();
+         });
+        
+         $('#chckHead').click(function () {
+             var length = $('.chcktbl:checked').length;
+             var trLength=$('.trClass').length;
+             if(length>0){
+                 $('.chcktbl:checked').attr('checked', false);
+                 this.checked=false;
+
+             }
+             else{
+                 if (this.checked == false) {
+                     $('.chcktbl:checked').attr('checked', false);
+                 }
+                 else {
+                     $('.chcktbl:not(:checked)').attr('checked', true);
+                 }
+
+             }
+
+         });
+         $('.chcktbl').click(function () {
+             var length = $('.chcktbl:checked').length;
+             var trLength=$('.trClass').length;
+             alert(tdLength);
+             if (length > trLength) {
+
+                 $('.chcktbl:not(:checked)').attr('disabled', true);
+             }
+             else {
+                 $('.chcktbl:not(:checked)').attr('disabled', false);
+             }
+         });
+     });
+</script>
 </head>
   <%
 //allow access only if session exists
@@ -491,31 +502,26 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1" method="POST">
-		
 		<div style="height: 28px">
-		
-			<button id="add">Apply Filters</button>
+			<button id="add">Search</button>
 			<br />
 		</div>
+
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Filters</a></li>
+					<li><a href="#tabs-1">Criteria</a></li>
 
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
-								
-								<tr>
-								<td class="alignRightFields"><br></td>
-								</tr>
+						
 						<tr>
-							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRight" >Center&nbsp;&nbsp;&nbsp;</td>
 							<td width="12%" align="left"><label> <select name="centercode" id="centercode" required
 									style="width: 240px;">
-										<option selected>${markssheetcentersearch}</option>
-										<option></option>
+										<option selected>${resultservicecentersearch}</option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}:${branchlist.centername}" >
 												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
@@ -525,40 +531,32 @@ for(Cookie cookie : cookies){
 							</label></td>
 							
 						</tr>
-
 						<tr>
 							<td><br /></td>
-
 						</tr>
-						
 						<tr>
-							<td class="alignRightFields">Current Exam Level &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="examlevelcode" id="examlevelcode" required
-									style="width: 240px;">
-										<option selected>${markssheetexamlevelsearch}</option>
-										<option></option>
+							<td width="10%" class="alignRight">Examination Level&nbsp;</td>
+							<td width="70%"><label> <select name="examlevelcode" id="examlevelcode"
+									style="width: 240px;" required>
+										<option selected>${resultserviceexamlevelsearch}</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
-											<option value="${examleveldetails.levelcode}:${examleveldetails.idexamlevel}:${examleveldetails.levelname}" >
+											<option value="${examleveldetails.levelcode}:${examleveldetails.idexamlevel}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
 											</option>
 										</c:forEach>
 								</select>
-							</label> 
+							</label></td>
 						</tr>
 
 						<tr>
 							<td><br /></td>
-
 						</tr>
-						
 						<tr>
-							<td class="alignRightFields">Language &nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRight">Language &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="languageopted" id="languageopted"
 									style="width: 240px;">
-										<option selected>${markssheetlanguagesearch}</option>
-										<option></option>
+										<option selected>${resultservicelanguagesearch}</option>
 										<c:forEach items="${languageslist}" var="languageslist">
 											<option value="${languageslist.language}" >
 												<c:out value="${languageslist.language}" />
@@ -567,68 +565,28 @@ for(Cookie cookie : cookies){
 								</select>
 							</label> 
 						</tr>
-
 						<tr>
 							<td><br /></td>
-
 						</tr>
 						
 						<tr>
-							<td class="alignRightFields">Qualification &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="qualification" id="qualification"
-									style="width: 240px;">
-										<option selected>${markssheetqualificationsearch}</option>
-										<option></option>
-										<c:forEach items="${qualificationlist}" var="qualificationlist">
-											<option value="${qualificationlist.qualification}" >
-												<c:out value="${qualificationlist.qualification}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label> 
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="forexamlevel" id="forexamlevel" required
-									style="width: 240px;">
-										<option selected>${formarkssheetexamlevelsearch}</option>
-										<option></option>
-										<c:forEach items="${examleveldetails}" var="examleveldetails">
-											<option value="${examleveldetails.levelcode}:${examleveldetails.idexamlevel}:${examleveldetails.levelname}" >
-												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label> 
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td class="alignRightFields">Exam Year &nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRight">Exam Year &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="examyear" id="examyear"
 									style="width: 240px;" required>
-										<option selected value="${markssheetacademicsearch}">${markssheetacademicsearch}</option>
+											<option selected value="${resultexamyear}">${resultexamyear}</option>
 											<option ></option>
 											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
-											<option value="2018/19" >2018/19</option>
-											<option value="2017/18" >2017/18</option>
-											<option value="2016/17" >2016/17</option>
-											<option value="2015/16" >2015/16</option>
-											<option value="2014/15" >2014/15</option>
 											<option value="2013/14" >2013/14</option>
+											<option value="2014/15" >2014/15</option>
+											<option value="2015/16" >2015/16</option>
+											<option value="2016/17" >2016/17</option>
+											<option value="2017/18" >2017/18</option>
+											<option value="2018/19" >2018/19</option>
+											<option value="2019/20" >2019/20</option>
+											<option value="2020/21" >2020/21</option>
+											<option value="2020/21" >2021/22</option>
+											<option value="2020/21" >2022/23</option>
 								</select>
 							</label> 
 						</tr>
@@ -637,77 +595,71 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
-
+						
+					</table>
+					<table id="table2" width="100%" border="0" align="center">
 						<tr>
-
-							<td width="30%" class="alignRight"></td>
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="apply">Apply</button>
+							<td align="center">
+								<button id="search">Search</button>
 							</td>
 						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
 					</table>
 				</div>
 			</div>
 		</div>
-		
+
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD" >Marks Sheet List</td>
+					<td class="headerTD">View All Students</td>
+					
 				</tr>
 			</table>
-			<table width="100%" border="0" style="border-color: #4b6a84;"
-				id="myTable">
+			<table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 
-				<thead>
-					<tr>
-						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Student Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Language</th>
-						<th title="click to sort" class="headerText">%&nbsp;</th>
-						<th title="click to sort" class="headerText">Result</th>
-						<th title="click to sort" class="headerText">Rank</th>
-					</tr>
-				</thead>
+                    <thead>
+                        <tr  >
+                            <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
+                            <th title="click to sort" class="headerText">Admission Number</th>
+                            <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th title="click to sort" class="headerText">Exam Level&nbsp;</th>
+                            <th title="click to sort" class="headerText">Center Code&nbsp;</th>
+                            <th title="click to sort" class="headerText">%&nbsp;</th>
+                            <th title="click to sort" class="headerText">Result&nbsp;</th>
+                        </tr>
+                    </thead>
 
-				<tbody>
-					<c:forEach items="${markssheetlist}" var="markssheetlist" varStatus="status">
+                    <tbody>
+                        <c:forEach items="${resultlist}" var="resultlist">
 
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataTextInActive"><a class="dataTextInActive"><c:out	value="${markssheetlist.parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${markssheetlist.parents.student.name}" /></td>
-							<td class="dataText"><c:out value="${markssheetlist.parents.student.languageopted}" /></td>
-							<td class="dataText"><c:out value="${markssheetlist.percentage}" /></td>
-							<td class="dataText"><c:out value="${markssheetlist.resultclass}" /></td>
-							<td class="dataText"><c:out value="${markssheetlist.rank}"/></td>								
-						</tr>
-					</c:forEach>
-				</tbody>
-				<tfoot>
-					<tr>
-					
-						<td class="footerTD" colspan="2">
-						  <a id="printmarkssheetlistreport" href="Controller?process=StudentProcess&action=printMarksSheet">Print</a>
-						</td>
-						<td class="footerTD" colspan="2">
-						  <a style="font-weight: bold;color: white;font-size: 14px;">&nbsp;&nbsp;Total: ${totalstudentresult}&nbsp;&nbsp;Distinction: ${distinctioncount}&nbsp;&nbsp;First Class: ${firstcount}
-						  &nbsp;&nbsp;Second Class: ${secondcount}&nbsp;&nbsp;Pass: ${passcount}&nbsp;&nbsp;Fail: ${failcount}</a>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${resultlist.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${resultlist.student.sid}~${resultlist.student.admissionnumber}"/>"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${resultlist.student.sid}'/>"><c:out value="${resultlist.student.admissionnumber}"/></a></td>
+                                <td class="dataText"><c:out value="${resultlist.student.name}"/></td>
+                                <td class="dataText"><c:out value="${resultlist.student.examlevel}"/></td>
+                                <td class="dataText"><c:out value="${resultlist.student.centercode}"/></td>
+                                <td class="dataText"><c:out value="${resultlist.percentage}" /></td>
+                                <td class="dataText"><c:out value="${resultlist.resultclass}" /></td>
+                                 <input type="hidden" id="classstudying" name="classstudying" value="${resultlist.student.examlevel}"/>
+
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                    <tfoot><tr>
+                            <td  class="footerTD" colspan="2" ><button value="Promote" id="promote">Promote</button>
+                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="demote">Demote</button> 
+                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="graduated">Graduated</button> 
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button id="dropped">Dropped Out</button>
+                            </td>
+                    
+                        </tr></tfoot>
+                </table>
 
 		</div>
 
+
 	</form>
+
 </body>
 </html>

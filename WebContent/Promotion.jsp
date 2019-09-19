@@ -409,6 +409,13 @@
 		form1.submit();
 
 	}
+	
+	function selectForExamLevel(){
+		var selected=document.getElementById('examlevelcode').value;
+		document.getElementById('forexamlevel').value = selected;
+		
+	}
+	
 	$(function() {
 
 		$("#tabs").tabs();
@@ -536,7 +543,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td width="10%" class="alignRight">Examination Level&nbsp;</td>
-							<td width="70%"><label> <select name="examlevelcode" id="examlevelcode"
+							<td width="70%"><label> <select name="examlevelcode" id="examlevelcode" onchange="selectForExamLevel()"
 									style="width: 240px;" required>
 										<option selected>${resultserviceexamlevelsearch}</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
@@ -567,6 +574,12 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td><br /></td>
+						</tr>
+						
+						<tr style="display: none;">
+							<td width="10%" class="alignRight">Examination Level&nbsp;</td>
+							<td width="70%"><label> <input type="text" name="forexamlevel" id="forexamlevel" value="${resultserviceexamlevelsearch}">
+							</label></td>
 						</tr>
 						
 						<tr>
@@ -623,6 +636,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Exam Level&nbsp;</th>
+                            <th title="click to sort" class="headerText">Qualification&nbsp;</th>
                             <th title="click to sort" class="headerText">Center Code&nbsp;</th>
                             <th title="click to sort" class="headerText">%&nbsp;</th>
                             <th title="click to sort" class="headerText">Result&nbsp;</th>
@@ -637,6 +651,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${resultlist.student.sid}'/>"><c:out value="${resultlist.student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${resultlist.student.name}"/></td>
                                 <td class="dataText"><c:out value="${resultlist.student.examlevel}"/></td>
+                                <td class="dataText"><c:out value="${resultlist.student.qualification}"/></td>
                                 <td class="dataText"><c:out value="${resultlist.student.centercode}"/></td>
                                 <td class="dataText"><c:out value="${resultlist.percentage}" /></td>
                                 <td class="dataText"><c:out value="${resultlist.resultclass}" /></td>

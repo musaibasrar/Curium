@@ -97,6 +97,8 @@ public class ResultService {
     public void searchResultReport() {
        String examLevel = request.getParameter("examlevelcode");
        String examYear = request.getParameter("examyear");
+       String ForExamLevel = request.getParameter("forexamlevel");
+       
        String language = null;
        String searchQuery = "From Parents as parent where ";
        String subQuery =null;
@@ -117,8 +119,10 @@ public class ResultService {
                     subQuery = "parent.Student.examlevel = '"+examLevelCode[0]+"'";
                 }
                 httpSession.setAttribute("resultserviceexamlevelsearch", request.getParameter("examlevelcode").toString());
+                httpSession.setAttribute("forresultserviceexamlevelsearch", request.getParameter("forexamlevel").toString());
             }else {
                 httpSession.setAttribute("resultserviceexamlevelsearch", "");
+                httpSession.setAttribute("forresultserviceexamlevelsearch", "");
             }
             
             if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
@@ -154,7 +158,7 @@ public class ResultService {
             
             searchQuery = searchQuery+subQuery;
             List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
-            String[] examDet = examLevel.split(":");
+            String[] examDet = ForExamLevel.split(":");
             List<Subexamlevel> subList = new ExamLevelDetailsDAO().getSubExamLevelSubject(examDet[0]);
             List<Result> resultList = new ArrayList<Result>();
             int failCounter=0,passCounter=0,secondCounter=0,firstCounter=0,distinctionCounter=0,absentCounter=0;
@@ -270,7 +274,7 @@ public class ResultService {
         String examLevel = request.getParameter("examlevelcode");
         String examYear = request.getParameter("examyear");
         String centerValue = request.getParameter("centervalue");
-
+        String forExamLevel = request.getParameter("forexamlevel");
         String language = null;
         String searchQuery = "From Parents as parent where ";
         String subQuery =null;
@@ -298,8 +302,10 @@ public class ResultService {
                      subQuery = "parent.Student.examlevel = '"+examLevelCode[0]+"'";
                  }
                  httpSession.setAttribute("ranklistexamlevelsearch", request.getParameter("examlevelcode").toString());
+                 httpSession.setAttribute("forranklistexamlevelsearch", request.getParameter("forexamlevel").toString());
              }else {
                  httpSession.setAttribute("ranklistexamlevelsearch", "");
+                 httpSession.setAttribute("forranklistexamlevelsearch", "");
              }
              
              if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
@@ -348,7 +354,7 @@ public class ResultService {
              
              searchQuery = searchQuery+subQuery;
              List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
-             String[] examDet = examLevel.split(":");
+             String[] examDet = forExamLevel.split(":");
              List<Subexamlevel> subList = new ExamLevelDetailsDAO().getSubExamLevelSubject(examDet[0]);
              List<Result> resultList = new ArrayList<Result>();
              List<Result> rankListReportList = new ArrayList<Result>();
@@ -476,6 +482,8 @@ public class ResultService {
     public void searchMarksSheet() {
         String examLevel = request.getParameter("examlevelcode");
         String examYear = request.getParameter("examyear");
+        String forExamLevel = request.getParameter("forexamlevel");
+        
         String language = null;
         String searchQuery = "From Parents as parent where ";
         String subQuery =null;
@@ -496,8 +504,10 @@ public class ResultService {
                      subQuery = "parent.Student.examlevel = '"+examLevelCode[0]+"'";
                  }
                  httpSession.setAttribute("markssheetexamlevelsearch", request.getParameter("examlevelcode").toString());
+                 httpSession.setAttribute("formarkssheetexamlevelsearch", request.getParameter("forexamlevel").toString());
              }else {
                  httpSession.setAttribute("markssheetexamlevelsearch", "");
+                 httpSession.setAttribute("formarkssheetexamlevelsearch", "");
              }
              
              if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
@@ -541,7 +551,7 @@ public class ResultService {
              
              searchQuery = searchQuery+subQuery;
              List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
-             String[] examDet = examLevel.split(":");
+             String[] examDet = forExamLevel.split(":");
              List<Subexamlevel> subList = new ExamLevelDetailsDAO().getSubExamLevelSubject(examDet[0]);
              
              List<MarksSheet> resultList = new ArrayList<MarksSheet>();

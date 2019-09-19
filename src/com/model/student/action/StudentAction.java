@@ -118,6 +118,8 @@ public class StudentAction {
                     url = printLanguageReport();
                 }else if (action.equalsIgnoreCase("promotion")) {
                     url = promotion();
+                }else if (action.equalsIgnoreCase("promotionCenter")) {
+                    url = promotionCenter();
                 }else if (action.equalsIgnoreCase("resultReport")) {
                     url = resultReport();
                 }else if (action.equalsIgnoreCase("resultReportCenter")) {
@@ -180,7 +182,14 @@ public class StudentAction {
 	
 	
 
-    private String rejectRecords() {
+    private String promotionCenter() {
+	    new ExamLevelService(request, response).examLevels();
+	    new LanguageService(request, response).viewLanguage();
+	    new BranchService(request, response).viewBranchesCenter();
+        return "Promotion.jsp";
+    }
+
+	private String rejectRecords() {
 		 new StudentService(request, response).rejectRecords();
 		 return "rejectsuccess.jsp";
 	}

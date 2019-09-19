@@ -263,11 +263,12 @@ public class studentDetailsDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public boolean promoteOrDemoteMultiple(List<Student> studentList, String classStudying, String promoteOrDemote) {
+	public boolean promoteOrDemoteMultiple(List<Student> studentList, String classStudying,  String currentAcademicYear, String promoteOrDemote) {
 		boolean result = false;
 		
 		  String stringclassStudying = classStudying;
 		  String[] temp;
+		  int previousAcademicYear = Integer.parseInt(currentAcademicYear)-1;
 		 
 		  /* delimiter */
 		  String delimiter = " ";
@@ -291,12 +292,14 @@ public class studentDetailsDAO {
 				if(ch!=null) {
 				    
 				    for (Student student : studentList) {
-				        String hql = "UPDATE Student set examlevel = :promotedclass,"
-				                + " admissionnumber = replace(admissionnumber, '"+classStudying+"', '"+ch.getUpperclass()+"'),"
-				                        + " age = age+1, qualification = '"+student.getQualification()+"' WHERE sid ="+student.getSid();
-	                                Query query = session.createQuery(hql);
-	                                query.setParameter("promotedclass", ch.getUpperclass());
+				        String hql = "UPDATE student set examlevel = '"+ch.getUpperclass()+"',"
+				        		+ " admissionnumber = CONCAT(REPLACE(LEFT(admissionnumber,2),"
+            					+ " '"+previousAcademicYear+"', '"+currentAcademicYear+"'),SUBSTRING(admissionnumber, 3, CHAR_LENGTH(admissionnumber))),"
+			                     		+ " admissionnumber = replace(admissionnumber, '"+classStudying+"', '"+ch.getUpperclass()+"'),"
+				                        + " age = age+1, qualification = '"+student.getQualification()+"' WHERE sid ="+student.getSid()+"";
+	                                Query query = session.createSQLQuery(hql);
 	                                query.executeUpdate();
+	                                
 	                            }
 				}
 				
@@ -305,8 +308,10 @@ public class studentDetailsDAO {
 				Classhierarchy ch = (Classhierarchy) query1.uniqueResult();
 				if(ch!=null) {
 				    for (Student student : studentList) {
-				        String hql = "UPDATE Student set examlevel = :demotedclass,"
-				                + " admissionnumber = replace(admissionnumber, '"+classStudying+"', '"+ch.getLowerclass()+"'),"
+				        String hql = "UPDATE student set examlevel = :demotedclass,"
+				                		+ "admissionnumber = CONCAT(REPLACE(LEFT(admissionnumber,2), '"+currentAcademicYear+"', '"+previousAcademicYear+"'),"
+		        	                    + "SUBSTRING(admissionnumber, 3, CHAR_LENGTH(admissionnumber))),"
+		        	                    + " admissionnumber = replace(admissionnumber, '"+classStudying+"', '"+ch.getLowerclass()+"'),"
 				                        + " age = age-1, qualification = '"+student.getQualification()+"' WHERE sid ="+student.getSid();
 	                                Query query = session.createQuery(hql);
 	                                query.setParameter("demotedclass", ch.getLowerclass());

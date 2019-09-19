@@ -542,7 +542,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRightFields">Current Exam Level &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="examlevelcode" id="examlevelcode" required
 									style="width: 240px;">
@@ -578,6 +578,28 @@ for(Cookie cookie : cookies){
 							</label> 
 						</tr>
 
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="forexamlevel" id="forexamlevel" required
+									style="width: 240px;"> 
+										<option selected>${forresultserviceexamlevelsearch}</option>
+										<option></option>
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}:${examleveldetails.idexamlevel}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+						</tr>
+						
+						
 						<tr>
 							<td><br /></td>
 

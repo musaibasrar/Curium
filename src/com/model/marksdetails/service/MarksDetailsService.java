@@ -693,6 +693,7 @@ public class MarksDetailsService {
 		
 		List<Examleveldetails> examLevelDetails = new ExamLevelDetailsDAO().getExamLevelDetails(exam);
 		int examid = examLevelDetails.get(0).getIdexamlevel();
+		String examLevelCode = examLevelDetails.get(0).getLevelcode();
 		
 		
 		List<Subexamlevel> subjectList = (List<Subexamlevel>) httpSession.getAttribute("subjectsperexam");
@@ -734,6 +735,7 @@ public class MarksDetailsService {
 					String currentYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
 					marks.setAcademicyear(currentYear);
 					marks.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					marks.setExamlevel(examLevelCode);
 					marksList.add(marks);
 				}
 				

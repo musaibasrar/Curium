@@ -26,18 +26,20 @@ public class Marks implements java.io.Serializable, Comparable<Marks> {
 	private Integer marksobtained;
 	private String academicyear;
 	private int branchid;
+	private String examlevel;
 	
 	public Marks() {
 	}
 
 	public Marks(Integer sid, Integer subid, Integer examid,
-			Integer marksobtained, String academicyear, int branchid) {
+			Integer marksobtained, String academicyear, int branchid, String examlevel) {
 		this.sid = sid;
 		this.subid = subid;
 		this.examid = examid;
 		this.marksobtained = marksobtained;
 		this.academicyear = academicyear;
 		this.branchid = branchid;
+		this.examlevel = examlevel;
 	}
 
 	@Id
@@ -104,12 +106,21 @@ public class Marks implements java.io.Serializable, Comparable<Marks> {
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
 	}
+	
+	@Column(name = "examlevel")
+	public String getExamlevel() {
+		return examlevel;
+	}
+
+	public void setExamlevel(String examlevel) {
+		this.examlevel = examlevel;
+	}
 
 	@Override
 	public int compareTo(Marks marks) {
 		Integer sid = marks.getSid();
         return Integer.compare(this.sid, sid);
 	}
-		
+
 
 }

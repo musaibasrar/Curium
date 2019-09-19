@@ -725,7 +725,7 @@ for(Cookie cookie : cookies){
 							<td width="28%"><label>
 										<select name="admissionyear" id="admissionyear" onchange="getAdmNo();"
 									style="width: 280px;text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
-											<option selected style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">${admissionyear}</option>
+											<option selected style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">${currentAcademicYear}</option>
 											<option value="2000/01" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2000/01</option>
 											<option value="2001/02" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2001/02</option>
 											<option value="2002/03" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2002/03</option>

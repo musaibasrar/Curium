@@ -694,6 +694,10 @@ public class StudentService {
 	public boolean promoteMultiple() {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String classStudying = request.getParameter("classstudying");
+		String currentYear = httpSession.getAttribute("currentAcademicYear").toString();
+		String[] currentAcademicYear = currentYear.split("/");
+		String academicYear = currentAcademicYear[0].substring(currentAcademicYear[0].length() - 2);
+		
 		boolean result = false;
 		List ids = new LinkedList<Integer>();
 		List<Student> studentList = new ArrayList<Student>();
@@ -705,7 +709,7 @@ public class StudentService {
 			std.setQualification(qualification);
 			studentList.add(std);
 		}
-		if (new studentDetailsDAO().promoteOrDemoteMultiple(studentList, classStudying, "Promote")) {
+		if (new studentDetailsDAO().promoteOrDemoteMultiple(studentList, classStudying, academicYear, "Promote")) {
 			result = true;
 		}
 		return result;
@@ -1666,6 +1670,10 @@ public class StudentService {
 	public boolean demoteMultiple() {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String classStudying = request.getParameter("classstudying");
+		String currentYear = httpSession.getAttribute("currentAcademicYear").toString();
+		String[] currentAcademicYear = currentYear.split("/");
+		String academicYear = currentAcademicYear[0].substring(currentAcademicYear[0].length() - 2);
+		
 		boolean result = false;
 		List ids = new LinkedList<Integer>();
 		List<Student> studentList = new ArrayList<Student>();
@@ -1677,7 +1685,7 @@ public class StudentService {
 			std.setQualification(qualification);
 			studentList.add(std);
 		}
-		if (new studentDetailsDAO().promoteOrDemoteMultiple(studentList, classStudying, "Demote")) {
+		if (new studentDetailsDAO().promoteOrDemoteMultiple(studentList, classStudying, academicYear, "Demote")) {
 			result = true;
 		}
 		return result;

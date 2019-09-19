@@ -360,6 +360,13 @@ for(Cookie cookie : cookies){
                 <!-- <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTimeTable" style="font-size: 12px;">Time Table</a><br/> -->
             </div> 
             
+            <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
+            <div>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=promotionCenter" style="font-size: 12px;">Promotions</a><br/>
+
+
+            </div>
+            
              <h5 style="font-size: 12px"><a href="#" >Order Management</a></h5>
             <div >
             	<a target="mainFrame" href="Controller?process=OrderProcess&action=placeOrder" style="font-size: 12px;">Place Order</a><br/>
