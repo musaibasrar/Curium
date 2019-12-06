@@ -65,10 +65,18 @@
                                     	<br><br><br>
                                     	</td>
                                     	</tr>
+                                    	
                                     	<tr>
-                                    	<td> <img alt="" src="images/curiumlogin.jpg" style="width:300px;height: 300px"></td>
-                                    	<td></td><td></td><td></td>
+                                    	<td> <img alt="" src="images/curiumlogin.jpg" style="width:550px;height: 150px"></td>
+                                    	</tr>
+                                    	
+                                    </table>
+                                    <table align="center">
+                                    	
+                                    	<tr>
+                                    	
                                     	 <td>
+                                    	 <br><br>
                                             <img src="images/username.png" height="30" name="login" style="vertical-align: bottom;"/>
                                                     <input name="loginName" type="text"  placeholder="UserName" >
                                                 <br><br><br>

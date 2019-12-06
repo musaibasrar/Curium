@@ -426,7 +426,7 @@ for(Cookie cookie : cookies){
             <table width="100%">
                 <tr>
                     <td  class="headerTD">NAME: &nbsp;<c:out value="${student.name}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      
+                      Divine Number: &nbsp;<c:out value="${student.studentexternalid}" />
 
                     </td>
                 </tr>
@@ -443,6 +443,9 @@ for(Cookie cookie : cookies){
                     <tr>
                     <td>
                     <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentpic.jpg" href="data:image/jpg;base64,<c:out value="${student.studentpic}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -602,11 +605,6 @@ for(Cookie cookie : cookies){
            						 
                             </td>
                             
-                            <td  width="25%"  class="alignLeft" height="50" >Marks of Identification on Pupil's body
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.disabilitychild}" />
-                            </td>                        
                         </tr>
                         <tr>
                         <td  width="25%"  class="alignLeft" height="50" >Special Category
@@ -636,7 +634,7 @@ for(Cookie cookie : cookies){
            						 
                             </td>
    
-                            <td  width="25%"  class="alignLeft" height="50">Remarks
+                            <td  width="25%"  class="alignLeft" height="50">Any other languages spoken
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.remarks}" />
@@ -651,6 +649,13 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows">
                                 <%-- <c:out default="" value="${student.createddate}" /> --%>
                                 <fmt:formatDate value="${student.createddate}" pattern="dd-MM-yyyy"/>
+                            </td>
+                            
+                            <td  width="25%"  class="alignLeft" height="50">Divine Number
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.studentexternalid}" />
+                                
                             </td>
    
                         </tr>
@@ -746,7 +751,7 @@ for(Cookie cookie : cookies){
                             </td>
                             
                             
-                            <td width="25%"   class="alignLeft" height="50" >Core Subjects Studied</td>
+                            <td width="25%"   class="alignLeft" height="50" >Date of leaving school with reasons</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.subsequentprogress}" />
                             </td>
@@ -779,6 +784,61 @@ for(Cookie cookie : cookies){
 
                             </td>
                         </tr>
+                    </table>
+                </div>
+    </div>
+    
+    <div class="accordion" style="width: 100%;height: 100%">
+		
+                <h3><a href="#">Documents</a></h3>
+                <div>
+
+                    <table  border="0px" width="100%"  id="table1" align="center">
+                    
+                        <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc1.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc2.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc3.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc4.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc5.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
+                    </td>
+                    </tr>
                     </table>
                 </div>
     </div>
@@ -873,6 +933,20 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${parents.motherscastecertno}" />
                             </td>
                         </tr>
+                        
+                        <tr>
+                            <td width="25%"  class="alignLeft" height="50">Father's Adhaar Card</td>
+                            <td width="25%" class="tablerows" >
+                                 <c:out value="${parents.fatherscaste}" />
+                                
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50" >Mother's Adhaar Card
+                            </td>
+                            <td width="25%"  class="tablerows">
+                                <c:out default="" value="${parents.motherscaste}" />
+                            </td>
+                        </tr>
+                        
                         <tr>
                             <td width="25%"  class="alignLeft" height="50">Guardian's name & address</td>
                             <td width="25%" class="tablerows" >
@@ -908,13 +982,41 @@ for(Cookie cookie : cookies){
 					</tr>
 					
 					<tr>
-                            <td width="25%"   class="alignLeft" height="50" >Parmanent Address</td>
+                            <td width="25%"   class="alignLeft" height="50" >No. of Elder Brother(s)</td>
+                            <td width="25%" class="tablerows"  >
+                                 <c:out default="" value="${student.semester}" />
+                                
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50">No. of Younger Brother(s)
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.stream}" />
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="25%"   class="alignLeft" height="50" >No. of Elder Sister(s)</td>
+                            <td width="25%" class="tablerows"  >
+                                 <c:out default="" value="${student.urbanrural}" />
+                                
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50">No. of Younger Sister(s)
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.disabilitychild}" />
+                                
+                            </td>
+                        </tr>
+                        
+					
+					<tr>
+                            <td width="25%"   class="alignLeft" height="50" >Permanent Address</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${parents.addresspermanent}" />
                             </td>
                            
                             
-                            <td  width="25%"  class="alignLeft" height="50">Temporary Address
+                            <td  width="25%"  class="alignLeft" height="50">Present Address
                             </td>
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${parents.addresstemporary}" />
@@ -922,11 +1024,13 @@ for(Cookie cookie : cookies){
                         
                         </tr>
                         <tr>
-                            <td width="25%"   class="alignLeft" height="50" >Number Of Dependents</td>
-                            <td width="25%" class="tablerows"  >
-                                 <c:out default="" value="${parents.noofdependents}" />
-                                
+                        
+                         <td  width="25%"  class="alignLeft" height="50" >Pupil Staying With
                             </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.specialcategory}" />
+                            </td>
+
                             <td  width="25%"  class="alignLeft" height="50">Notes
                             </td>
                             <td width="25%" class="tablerows" >

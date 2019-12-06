@@ -320,7 +320,7 @@
         <script type="text/javascript">
             $(function() {
 
-                $("#accordion").accordion({
+                $(".accordion").accordion({
                     collapsible: true,
                     navigation: true,
                     active: false,
@@ -431,7 +431,7 @@ for(Cookie cookie : cookies){
                 </tr>
 
             </table>
-            <div id="accordion" style="width: 100%;height: 100%">
+            <div class="accordion" style="width: 100%;height: 100%">
 		
                 <h3><a href="#">Student Details</a></h3>
                 <div>
@@ -455,10 +455,9 @@ for(Cookie cookie : cookies){
                             </td>
                             
                         
-                            <td width="25%"   class="alignLeft" height="50" >Cumulative record no. with date of opening</td>
+                            <td width="25%"   class="alignLeft" height="50" >SATS Number</td>
                              <td width="25%" class="tablerows">
-                                <c:out default="" value="${student.crecord}" /> : 
-                                <fmt:formatDate value="${student.crecorddate}" pattern="yyyy-MM-dd"/>
+                                <c:out default="" value="${student.sts}" /> : 
                             </td>
                         </tr>
 
@@ -499,32 +498,7 @@ for(Cookie cookie : cookies){
                                <fmt:formatDate value="${student.crecorddate}" pattern="yyyy-MM-dd"/>
                             </td>
                         </tr>
-                        <tr>
-                            <td width="25%"  class="alignLeft" height="50" >Studying in class</td>
-                            <td  width="25%"  class="tablerows">
-                                <c:out default="" value="${student.classstudying}" />
-                            </td>
-                            <td width="25%"  class="alignLeft" height="50">Admitted in class
-                            </td>
-                            <td width="25%" class="tablerows">
-                                <c:out default="" value="${student.classadmittedin}" />
-                            </td>
-                        </tr>
-                        <tr>
-                        <td width="25%"   class="alignLeft" height="50" >Last Class Studied</td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.stdlaststudied}" />
-                            </td>
-                            
-                            
-                            <td width="25%"   class="alignLeft" height="50" >Last School Attended</td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.schoollastattended}" />
-                            </td>
-                           
-                           
                         
-                        </tr>
                         
                         <tr>
                             <td  width="25%"  class="alignLeft" height="50">Subsequent progress of the student
@@ -539,8 +513,29 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         
+                         <tr>
+                            <td width="25%"  class="alignLeft" height="50" >UID (Aadhaar) No.</td>
+                            <td width="25%"  class="tablerows" >
+                              <c:out default="" value="${student.crecord}" />
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50">Income Certificate No.
+                            </td>
+                            <td  width="25%" class="tablerows" >
+                               <c:out default="" value="${student.socialcategory}" />
+                            </td>
                         </tr>
                         
+                           <tr>
+                            <td width="25%"  class="alignLeft" height="50" >Student's Email ID</td>
+                            <td width="25%"  class="tablerows" >
+                              <c:out default="" value="${student.bhagyalakshmibondnumber}" />
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50">Physical Condition
+                            </td>
+                            <td  width="25%" class="tablerows" >
+                               <c:out default="" value="${student.disabilitychild}" />
+                            </td>
+                        </tr>
                          
                         <tr>
                         
@@ -571,11 +566,37 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.caste}" />
                             </td>
-
-                            
-
-
                         </tr>
+                        
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50" >Caste Certificate No.
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.studentscastecertno}" />
+                            </td>
+                        </tr>
+
+						<tr>
+                         <td  width="25%"  class="alignLeft" height="50" >Belongs to BPL
+                            </td>
+                            <td width="25%" class="tablerows" >
+                               
+                                <c:if test="${(student.belongtobpl ==0)}">    
+           						  <c:out default="" value="No" />
+           						 </c:if>
+                                <c:if test="${(student.belongtobpl ==1)}">    
+           						  <c:out default="" value="Yes" />
+           						 </c:if>
+           						 
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50" >BPL Card No.
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.bplcardno}" />
+                            </td>                        
+                        
+                        </tr>
+
 
                         <tr>
                         
@@ -656,7 +677,7 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                       <tr>
-                            <td  width="25%"  class="alignLeft" height="50" >Reg. No.
+                            <td  width="25%"  class="alignLeft" height="50" >SSLC Reg. No.
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.pudetails.exampassedregno}" />
@@ -735,6 +756,53 @@ for(Cookie cookie : cookies){
 
 
             </div>
+            
+            <div class="accordion" style="width: 100%;height: 100%">
+		
+                <h3><a href="#">Bank Details</a></h3>
+                <div>
+
+                    <table  border="0px" width="100%"  id="table1" align="center">
+                         <tr>
+                            <td  width="25%"  class="alignLeft" height="50" >Bank Name
+                           
+                            </td>
+                            <td width="25%" class="tablerows" >
+                              ${student.bankname}
+                            </td>
+                            
+                             <td  width="25%"  class="alignLeft" height="50">Bank IFSC Code
+                            </td>
+                            <td width="25%" class="tablerows">
+                                ${student.bankifsc}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50" >Account No.
+                            </td>
+                            <td width="25%" class="tablerows" >
+                               ${student.accno}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows" >
+
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows">
+
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </div>
+    </div>
+    
             <div id="accordion1" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Parent's Details</a></h3>

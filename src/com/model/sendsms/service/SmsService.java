@@ -66,7 +66,7 @@ public class SmsService {
 					conClassStudying = addClass+"--" +"%";
 
 				}
-				if (!addSec.equalsIgnoreCase("")) {
+				if (!addSec.equalsIgnoreCase("") && !addSec.contains("ALL")) {
 					conClassStudying = addClass;
 					conClassStudying = conClassStudying+"--"+addSec+"%";
 				}

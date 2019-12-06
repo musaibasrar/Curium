@@ -631,7 +631,7 @@
 					<li><a href="#fragment-1">Student's Details</a></li>
 					<li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-2">Parent's Details</a></li>
-					<li><a href="#fragment-3">Upload Photo</a></li>
+					<li><a href="#fragment-3">Upload Documents</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
 				</ul>
@@ -971,45 +971,7 @@
 								onclick="noCheck(this.id);" />
 
 							</td>
-							<td width="16%" class="alignRight">Marks of Identification on Pupil's body&nbsp;</td>
-							<td width="28%"><label> <input
-									name="disabilitychild" type="text" class="myclass"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									id="disabilitychild" size="30">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td width="20%" class="alignRight">Special Category&nbsp;</td>
-
-							<td id="categoryname"><label> <select
-									name="specialcategory" onchange="enterOtherSpecialCategory()"
-									id="specialcategory" style="width: 256px">
-										<option selected>None</option>
-										<option></option>
-										<option>None</option>
-										<option>Destitute</option>
-										<option>HIV Case</option>
-										<option>Orphans</option>
-										<option>Others (Please Specify)</option>
-								</select>
-
-							</label></td>
-							<td width="28%" id="newcateg"
-								style="display: none;"><label> <input
-									name="newcategory" id="newcategory" type="text" class="myclass" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									placeholder="Add Other Category" />
-							</label></td>
-							
-							<td width="16%" class="alignRight">Mother Tongue &nbsp;</td>
+							<td width="20%" class="alignRight">Mother Tongue &nbsp;</td>
 							<td width="28%">
 								<!-- <label> <input name="motherT"
 									type="text" class="textField" id="motherT" size="30"
@@ -1033,12 +995,12 @@
 							</td>
 						</tr>
 						<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
 						<tr>
 						
 							<td width="20%" class="alignRight">RTE
@@ -1051,7 +1013,7 @@
 								onclick="noCheck(this.id);" />
 										</td>
 										
-							<td width="20%" class="alignRight">Remarks &nbsp;</td>
+							<td width="20%" class="alignRight">Any other languages spoken &nbsp;</td>
 							<td width="28%"><label> <input name="remarks"
 									type="text" class="myclass" id="remarks" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
@@ -1131,8 +1093,67 @@
 						<div id="fragment-3">
 							<table width="100%" border="0" align="center">
 								<tr>
-									<td><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #eb6000;font-weight: bold;">Note: Upload only .jpg images</label></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Pic</label><br /> <input type="file" name="fileToUpload"
 										id="fileToUpload" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 1</label><br /> <input type="file" name="studentdoc1"
+										id="studentdoc1" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 2</label><br /> <input type="file" name="studentdoc2"
+										id="studentdoc2" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 3</label><br /> <input type="file" name="studentdoc3"
+										id="studentdoc3" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 4</label><br /> <input type="file" name="studentdoc4"
+										id="studentdoc4" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 5</label><br /> <input type="file" name="studentdoc5"
+										id="studentdoc5" accept="image/*"></td>
 								</tr>
 
 
@@ -1148,8 +1169,7 @@
 									</tr>
 
 									<tr>
-
-										<td align="center"><a class="nexttab"
+										<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="nexttab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
 											href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 											class="prevtab"
@@ -1163,7 +1183,7 @@
 									</tr>
 
 									<tr>
-										<td align="center">
+										<td align="left">
 
 
 											<button id="savethree" class="save"
@@ -1429,6 +1449,31 @@
 								<tr>
 									<td><br /></td>
 								</tr>
+								
+								<tr>
+									<td class="alignRight">Father's Adhaar No.
+										&nbsp;</td>
+									<td><label> <input
+											name="fatherscaste" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="fatherscaste" size="30">
+									</label></td>
+
+									<td class="alignRight">Mother's Adhaar No.
+										&nbsp;</td>
+									<td ><label> <input
+											name="motherscaste" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="motherscaste" size="30">
+									</label></td>
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
 
 								<tr>
 
@@ -1525,6 +1570,53 @@
 									<td><br /></td>
 								</tr>
 
+								<tr>
+									<td width="16%" class="alignRight">No. of Elder Brother(s)&nbsp;</td>
+									<td width="28%"><label> <input name="semester"
+											type="number" class="myclass" id="semester" 
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;width:260px;"
+											onblur="validateNameContact();">
+									</label></td>
+									<td width="20%" class="alignRight">No. of Younger Brother(s)
+										&nbsp;</td>
+									<td width="28%"><label> <input
+											name="stream" type="number" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;width:260px;"
+											id="stream"  onblur="validateNameContact();">
+									</label></td>
+								</tr>
+								<tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td width="16%" class="alignRight">No. of Elder Sister(s)&nbsp;</td>
+									<td width="28%"><label> <input name="urbanrural"
+											type="number" class="myclass" id="urbanrural" 
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;width:260px;"
+											onblur="validateNameContact();">
+									</label></td>
+									<td width="20%" class="alignRight">No. of Younger Sister(s)
+										&nbsp;</td>
+									<td width="28%"><label> <input
+											name="disabilitychild" type="number" class="myclass"
+											id="disabilitychild" 
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;width:260px;"
+											onblur="validateNameContact();">
+									</label></td>
+								</tr>
+								<tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
 								<td class="alignRight">Permanent Address &nbsp;</td>
 
 								<td ><label> <textarea
@@ -1535,7 +1627,7 @@
 								</label></td>
 
 
-								<td class="alignRight">Temporary Address &nbsp;</td>
+								<td class="alignRight">Present Address &nbsp;</td>
 								<td ><label> <textarea
 											name="temporaryaddress" type="text" 
 											id="temporaryaddress" rows="4" cols="40"></textarea>
@@ -1553,6 +1645,28 @@
 
 
 								<tr>
+								
+									<td width="20%" class="alignRight">Pupil Staying with &nbsp;</td>
+
+							<td id="categoryname"><label> <select
+									name="specialcategory" onchange="enterOtherSpecialCategory()"
+									id="specialcategory" style="width: 256px">
+										<option selected>Parents</option>
+										<option></option>
+										<option>Guardian</option>
+										<option>Paying Hostel</option>
+										<option>Rented Room</option>
+										<option>Free Boarding Home</option>
+										<option>Others (Please Specify)</option>
+								</select>
+							</label></td>
+							<td width="28%" id="newcateg"
+								style="display: none;"><label> <input
+									name="newcategory" id="newcategory" type="text" class="myclass" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									placeholder="Add Other Category" />
+							</label></td>
+							
 
 									<td class="alignRight">Notes &nbsp;</td>
 									<td ><label> <input name="remarksadditional"
@@ -1686,7 +1800,7 @@
 
 
 
-							<td class="alignRight">Core Subjects Studied &nbsp;</td>
+							<td class="alignRight">Date of leaving school with reasons &nbsp;</td>
 							<td><label> <input
 									name="progress" type="text"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"

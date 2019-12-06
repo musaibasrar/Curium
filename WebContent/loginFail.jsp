@@ -63,18 +63,33 @@
             }
         </script>
         <form action="Controller?process=UserProcess&action=authenticateUser" method="post" id="form1">
-                    	
-                                    <table align="center">
+        
+        							<table align="center">
                                     	<tr>
                                     	<td>
                                     	<br><br><br>
                                     	</td>
                                     	</tr>
+                                    	
                                     	<tr>
-                                    	<td> <img alt="" src="images/curiumlogin.jpg" style="width:300px;height: 300px"></td>
-                                    	<td></td><td></td><td></td>
+                                    	<td> <img alt="" src="images/curiumlogin.jpg" style="width:550px;height: 150px"></td>
+                                    	</tr>
+                                    	
+                                    </table>
+                                    
+                                    
+                                    <table align="center">
+                                    
+                                    	<tr>
+                                    		<td>
+                                    			<label style="color: red;">Username or Password is incorrect</label>
+                                    		</td>
+                                    	</tr>
+                                    	
+                                    	<tr>
+                                    	
                                     	 <td>
-                                    	 <p align="left" style="color: red;">Please enter correct username and password</p>
+                                    	 <br>
                                             <img src="images/username.png" height="30" name="login" style="vertical-align: bottom;"/>
                                                     <input name="loginName" type="text"  placeholder="UserName" >
                                                 <br><br><br>

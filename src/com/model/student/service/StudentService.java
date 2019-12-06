@@ -169,6 +169,7 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("createddate")) {
 		                    student.setCreateddate(DateUtil.dateParserddmmyyyy(item.getString()));
 		                }
+		                // @UI 'Any other languages spoken'
 		                if (fieldName.equalsIgnoreCase("remarks")) {
 		                	student.setRemarks(DataUtil.emptyString(item.getString()));
 		                }
@@ -190,7 +191,7 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("classonleaving")) {
 		                	student.setClassonleaving(DataUtil.emptyString(item.getString()));
 		                }
-		                // @UI 'core subjects studied'
+		                // @UI 'Date of leaving school with reasons'
 		                if (fieldName.equalsIgnoreCase("progress")) {
 		                	student.setSubsequentprogress(DataUtil.emptyString(item.getString()));
 		                }
@@ -209,10 +210,11 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("guardian")) {
 		                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
 		                }
-		                
+		                // @UI 'No of elder brothers'
 		                if (fieldName.equalsIgnoreCase("semester")) {
 		                	student.setSemester(DataUtil.parseInt(item.getString()));
 		                }
+		                // @UI 'No. of Younger Brothers'
 		                if (fieldName.equalsIgnoreCase("stream")) {
 		                	student.setStream(DataUtil.emptyString(item.getString()));
 		                }		                
@@ -225,6 +227,7 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("previouschooladdress")) {
 		                	student.setPreviouschooladdress(DataUtil.emptyString(item.getString()));
 		                }
+		                // @UI 'No. of Elder Sister'
 		                if (fieldName.equalsIgnoreCase("urbanrural")) {
 		                	student.setUrbanrural(DataUtil.emptyString(item.getString()));
 		                }
@@ -249,10 +252,11 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("bhagyalakshmibondnumber")) {
 		                	student.setBhagyalakshmibondnumber(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Marks of Identification on Pupil's body'
+		                //@UI 'No. of Younger Sister'
 		                if (fieldName.equalsIgnoreCase("disabilitychild")) {
 		                	student.setDisabilitychild(DataUtil.emptyString(item.getString()));
 		                }
+		                //@UI 'Pupil staying with'
 		                if (fieldName.equalsIgnoreCase("specialcategory")) {
 		                	student.setSpecialcategory(DataUtil.emptyString(item.getString()));
 		                }
@@ -364,13 +368,15 @@ public class StudentService {
 		                if(fieldName.equalsIgnoreCase("fatherscastecertno")){
 		                	parents.setFatherscastecertno(DataUtil.emptyString(item.getString()));
 		                }
-		              //@UI 'Mothers Occupation'
+		                //@UI 'Mothers Occupation'
 		                if(fieldName.equalsIgnoreCase("motherscastecertno")){
 		                	parents.setMotherscastecertno(DataUtil.emptyString(item.getString()));
 		                }
+		                //@UI 'Fathers Adhaar No'
 		                if(fieldName.equalsIgnoreCase("fatherscaste")){
 		                	parents.setFatherscaste(DataUtil.emptyString(item.getString()));
 		                }
+		                //@UI 'Mothers Adhaar No'
 		                if(fieldName.equalsIgnoreCase("motherscaste")){
 		                	parents.setMotherscaste(DataUtil.emptyString(item.getString()));
 		                }
@@ -450,6 +456,8 @@ public class StudentService {
 		                }
 		                //End Bank Details
 		                
+		                
+		                
 		            } else {
 		                // Process form file field (input type="file").
 		                String fieldName = item.getFieldName();
@@ -466,6 +474,74 @@ public class StudentService {
 
 		                    } 
 		                }
+		                
+		              //Student Docs
+		                if (fieldName.equalsIgnoreCase("studentdoc1")) {
+
+		                    String fileName = (DataUtil.emptyString(item.getName()));
+		                    String fileValue = (DataUtil.emptyString(item.getString()));
+		                    if (!fileName.equalsIgnoreCase("")) {
+		                    	// encode data on your side using BASE64
+		                    	byte[]   bytesEncoded = Base64.encodeBase64(item.get());
+		                    	String saveFile = new String(bytesEncoded);
+		                    	student.setStudentdoc1(saveFile);
+
+		                    } 
+		                }
+		                
+		                if (fieldName.equalsIgnoreCase("studentdoc2")) {
+
+		                    String fileName = (DataUtil.emptyString(item.getName()));
+		                    String fileValue = (DataUtil.emptyString(item.getString()));
+		                    if (!fileName.equalsIgnoreCase("")) {
+		                    	// encode data on your side using BASE64
+		                    	byte[]   bytesEncoded = Base64.encodeBase64(item.get());
+		                    	String saveFile = new String(bytesEncoded);
+		                    	student.setStudentdoc2(saveFile);
+
+		                    } 
+		                }
+		                
+		                if (fieldName.equalsIgnoreCase("studentdoc3")) {
+
+		                    String fileName = (DataUtil.emptyString(item.getName()));
+		                    String fileValue = (DataUtil.emptyString(item.getString()));
+		                    if (!fileName.equalsIgnoreCase("")) {
+		                    	// encode data on your side using BASE64
+		                    	byte[]   bytesEncoded = Base64.encodeBase64(item.get());
+		                    	String saveFile = new String(bytesEncoded);
+		                    	student.setStudentdoc3(saveFile);
+
+		                    } 
+		                }
+		                
+		                if (fieldName.equalsIgnoreCase("studentdoc4")) {
+
+		                    String fileName = (DataUtil.emptyString(item.getName()));
+		                    String fileValue = (DataUtil.emptyString(item.getString()));
+		                    if (!fileName.equalsIgnoreCase("")) {
+		                    	// encode data on your side using BASE64
+		                    	byte[]   bytesEncoded = Base64.encodeBase64(item.get());
+		                    	String saveFile = new String(bytesEncoded);
+		                    	student.setStudentdoc4(saveFile);
+
+		                    } 
+		                }
+		                
+		                if (fieldName.equalsIgnoreCase("studentdoc5")) {
+
+		                    String fileName = (DataUtil.emptyString(item.getName()));
+		                    String fileValue = (DataUtil.emptyString(item.getString()));
+		                    if (!fileName.equalsIgnoreCase("")) {
+		                    	// encode data on your side using BASE64
+		                    	byte[]   bytesEncoded = Base64.encodeBase64(item.get());
+		                    	String saveFile = new String(bytesEncoded);
+		                    	student.setStudentdoc5(saveFile);
+
+		                    } 
+		                }
+		                
+		                //End Student Docs
 		            }
 		        }
 		} catch (FileUploadException e) {
@@ -476,7 +552,7 @@ public class StudentService {
 		student.setPassedout(0);
 		student.setDroppedout(0);
 		student.setLeftout(0);
-		student.setStudentexternalid(DataUtil.generateString(5));
+		student.setStudentexternalid("dv"+DataUtil.generateString(6));
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		puDetails.setOptionalsubjects(optional.toString());
 		puDetails.setCompulsorysubjects(compulsory.toString());
@@ -619,6 +695,17 @@ public class StudentService {
 		int parentsId = 0;
 		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying=null,conClassAdmittedIn=null;
 		String studentPicUpdate=null;
+		String studentpicdelete=null;
+		String studentDoc1Update=null;
+		String studentDoc2Update=null;
+		String studentDoc3Update=null;
+		String studentDoc4Update=null;
+		String studentDoc5Update=null;
+		String studentdoc1delete=null;
+		String studentdoc2delete=null;
+		String studentdoc3delete=null;
+		String studentdoc4delete=null;
+		String studentdoc5delete=null;
 		String dropdowncateg=null;
 		String newcateg=null;
 		
@@ -781,6 +868,26 @@ public class StudentService {
 	                
 	                if(fieldName.equalsIgnoreCase("studentpicupdate")){
 	                	studentPicUpdate=DataUtil.emptyString(item.getString());
+	                }
+	                
+	                if(fieldName.equalsIgnoreCase("studentdoc1update")){
+	                	studentDoc1Update=DataUtil.emptyString(item.getString());
+	                }
+	                
+	                if(fieldName.equalsIgnoreCase("studentdoc2update")){
+	                	studentDoc2Update=DataUtil.emptyString(item.getString());
+	                }
+	                
+	                if(fieldName.equalsIgnoreCase("studentdoc3update")){
+	                	studentDoc3Update=DataUtil.emptyString(item.getString());
+	                }
+	                
+	                if(fieldName.equalsIgnoreCase("studentdoc4update")){
+	                	studentDoc4Update=DataUtil.emptyString(item.getString());
+	                }
+	                
+	                if(fieldName.equalsIgnoreCase("studentdoc5update")){
+	                	studentDoc5Update=DataUtil.emptyString(item.getString());
 	                }
 	                
 	                if(fieldName.equalsIgnoreCase("studentexternalid")){
@@ -1073,6 +1180,31 @@ public class StudentService {
 		                	student.setAccno(DataUtil.emptyString(item.getString()));
 		                }
 		              //End Bank Details
+		                                
+
+		                if (fieldName.equalsIgnoreCase("studentpicdelete")) {
+		                	studentpicdelete=DataUtil.emptyString(item.getString());
+		                }
+		                
+		                if (fieldName.equalsIgnoreCase("studentdoc1delete")) {
+		                	studentdoc1delete=DataUtil.emptyString(item.getString());
+		                }
+		                
+		                if (fieldName.equalsIgnoreCase("studentdoc2delete")) {
+		                	studentdoc2delete=DataUtil.emptyString(item.getString());
+		                }
+		                
+		                if (fieldName.equalsIgnoreCase("studentdoc3delete")) {
+		                	studentdoc3delete=DataUtil.emptyString(item.getString());
+		                }
+		                
+		                if (fieldName.equalsIgnoreCase("studentdoc4delete")) {
+		                	studentdoc4delete=DataUtil.emptyString(item.getString());
+		                }
+		                
+		                if (fieldName.equalsIgnoreCase("studentdoc5delete")) {
+		                	studentdoc5delete=DataUtil.emptyString(item.getString());
+		                }
 		                
 	            } else {
 	                String fieldName = item.getFieldName();
@@ -1093,8 +1225,131 @@ public class StudentService {
 	                    	student.setStudentpic(saveFile);
 
 	                    } else{
-	                    	
+	                    	if(studentpicdelete!=null) {
+	                    		student.setStudentpic(null);
+	                    	}else {
 	                    	student.setStudentpic(studentPicUpdate);
+	                    	}
+	                    }
+	                }
+	                
+	                if (fieldName.equalsIgnoreCase("studentdoc1")) {
+
+
+	                    String fileName = (DataUtil.emptyString(item.getName()));
+	                    String fileValue = (DataUtil.emptyString(item.getString()));
+	                    if (!fileName.equalsIgnoreCase("")) {
+	                       
+	                    	                    	
+	                    	// Resize the image
+	                    	byte[]   bytesEncoded = Base64.encodeBase64(item.get());
+	                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
+	                    	String saveFile = new String(bytesEncoded);
+
+	                    	student.setStudentdoc1(saveFile);
+
+	                    } else{
+	                    	if(studentdoc1delete!=null) {
+	                    		student.setStudentdoc1(null);
+	                    	}else {
+	                    	student.setStudentdoc1(studentDoc1Update);
+	                    	}
+	                    }
+	                }
+	                
+	                if (fieldName.equalsIgnoreCase("studentdoc2")) {
+
+
+	                    String fileName = (DataUtil.emptyString(item.getName()));
+	                    String fileValue = (DataUtil.emptyString(item.getString()));
+	                    if (!fileName.equalsIgnoreCase("")) {
+	                       
+	                    	                    	
+	                    	// Resize the image
+	                    	byte[]   bytesEncoded = Base64.encodeBase64(item.get());
+	                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
+	                    	String saveFile = new String(bytesEncoded);
+
+	                    	student.setStudentdoc2(saveFile);
+
+	                    } else{
+	                    	if(studentdoc2delete!=null) {
+	                    		student.setStudentdoc2(null);
+	                    	}else {
+	                    	student.setStudentdoc2(studentDoc2Update);
+	                    	}
+	                    }
+	                }
+	                
+	                if (fieldName.equalsIgnoreCase("studentdoc3")) {
+
+
+	                    String fileName = (DataUtil.emptyString(item.getName()));
+	                    String fileValue = (DataUtil.emptyString(item.getString()));
+	                    if (!fileName.equalsIgnoreCase("")) {
+	                       
+	                    	                    	
+	                    	// Resize the image
+	                    	byte[]   bytesEncoded = Base64.encodeBase64(item.get());
+	                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
+	                    	String saveFile = new String(bytesEncoded);
+
+	                    	student.setStudentdoc3(saveFile);
+
+	                    } else{
+	                    	if(studentdoc3delete!=null) {
+	                    		student.setStudentdoc3(null);
+	                    	}else {
+	                    	student.setStudentdoc3(studentDoc3Update);
+	                    	}
+	                    }
+	                }
+	                
+	                if (fieldName.equalsIgnoreCase("studentdoc4")) {
+
+
+	                    String fileName = (DataUtil.emptyString(item.getName()));
+	                    String fileValue = (DataUtil.emptyString(item.getString()));
+	                    if (!fileName.equalsIgnoreCase("")) {
+	                       
+	                    	                    	
+	                    	// Resize the image
+	                    	byte[]   bytesEncoded = Base64.encodeBase64(item.get());
+	                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
+	                    	String saveFile = new String(bytesEncoded);
+
+	                    	student.setStudentdoc4(saveFile);
+
+	                    } else{
+	                    	if(studentdoc4delete!=null) {
+	                    		student.setStudentdoc4(null);
+	                    	}else {
+	                    	student.setStudentdoc4(studentDoc4Update);
+	                    	}
+	                    }
+	                }
+	                
+	                if (fieldName.equalsIgnoreCase("studentdoc5")) {
+
+
+	                    String fileName = (DataUtil.emptyString(item.getName()));
+	                    String fileValue = (DataUtil.emptyString(item.getString()));
+	                    if (!fileName.equalsIgnoreCase("")) {
+	                       
+	                    	                    	
+	                    	// Resize the image
+	                    	byte[]   bytesEncoded = Base64.encodeBase64(item.get());
+	                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
+	                    	String saveFile = new String(bytesEncoded);
+
+	                    	student.setStudentdoc5(saveFile);
+
+	                    } else{
+	                    	if(studentdoc5delete!=null) {
+	                    		student.setStudentdoc5(null);
+	                    	}else {
+	                    	student.setStudentdoc5(studentDoc5Update);
+	                    	}
 	                    }
 	                }
 	            }
@@ -1459,14 +1714,12 @@ public class StudentService {
         
         if(httpSession.getAttribute(BRANCHID)!=null){
             String branchId = httpSession.getAttribute(BRANCHID).toString();
-            return "addStudent.jsp";
-           /* if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
+           if("2".equalsIgnoreCase(branchId)) {
                 return "addStudent.jsp";
-            }else if("4".equalsIgnoreCase(branchId)) {
+            }else if("3".equalsIgnoreCase(branchId)) {
                 return "addStudentPU.jsp";
-            }else if("5".equalsIgnoreCase(branchId)) {
-                return "addStudentDC.jsp";
-            }*/
+            }
+           
         }
         return "sessiontimeout.jsp";
     }

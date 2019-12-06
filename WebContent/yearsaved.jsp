@@ -56,20 +56,6 @@
 -->
         </style>
 
-        <script type="text/javascript">
-            $(function(){
-                $("#view").button()
-                
-                $("#addnew").button()
-
-                });
-
-            function ViewAll(){
-                var form1=document.getElementById("form1");
-                form1.action="Controller?process=StudentProcess&action=viewAll";
-                form1.submit();
-            }
-        </script>
 </head>
   <%
 //allow access only if session exists
@@ -91,12 +77,12 @@ for(Cookie cookie : cookies){
         <form id="form1" action=""  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="250" align="center" valign="middle"><p class="style1"> Year Added/Updated Successfully</br>
-         
+        <td height="250" align="center" valign="middle"><p class="style1"> Year Added/Updated Successfully<br><br>
+         Please logout and login again to reflect the change in academic year
         </p>
         <p class="style1">
           
-            <input type="button" id="view" value="Home" onClick="ViewAll()">
+            <a target="_parent" href="Controller?process=UserProcess&action=logout" style="font-size: 22px;color: #eb6000;font-weight: bold;">Logout</a>
             <!-- <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='addStudent.jsp';"> -->
         </p></td>
       </tr>
