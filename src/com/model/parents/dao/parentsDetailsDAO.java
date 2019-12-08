@@ -33,9 +33,10 @@ public class parentsDetailsDAO {
 	public Parents create(Parents parents) {
 		 try {
 	            //this.session = sessionFactory.openCurrentSession();
+			 	logger.info("*************** DAO create parents *************** "+parents.getStudent().getName());
 	            transaction = session.beginTransaction();
 	            session.save(parents);
-
+	            logger.info("*************** DAO save parents *************** "+parents.getStudent().getName());
 
 	            transaction.commit();
 	           

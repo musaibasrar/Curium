@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.model.stampfees.service.StampFeesService;
 import com.model.std.service.StandardService;
 import com.model.student.service.StudentService;
@@ -22,6 +25,8 @@ public class StudentAction {
         HttpSession httpSession;
         String url;
 
+        private static final Logger logger = LogManager.getLogger(StudentAction.class);
+        
         public StudentAction(HttpServletRequest request,
                         HttpServletResponse response) {
                 this.request = request;
@@ -225,6 +230,7 @@ public class StudentAction {
         }
 
         private String addStudent() {
+        		logger.info("************* ADD STUDENT *************** ");
                  if (new StudentService(request, response).addStudent()) {
                     return "saved.jsp";
                 } else {

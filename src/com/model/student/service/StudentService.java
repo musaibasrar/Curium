@@ -20,6 +20,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -53,6 +55,8 @@ public class StudentService {
     * Size of a byte buffer to read/write file
     */
    private static final int BUFFER_SIZE = 4096;
+   
+   private static final Logger logger = LogManager.getLogger(StudentService.class);
 	
 	public StudentService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -61,6 +65,8 @@ public class StudentService {
 	}
 
 	public boolean addStudent() {
+		
+		logger.info("*******Student Service: Add Student ****** ");
 	    
 		Student student = new Student();
 		Parents parents = new Parents();
@@ -70,6 +76,7 @@ public class StudentService {
 		boolean result=false;
 		
 		try {
+			logger.info("*******Student Service: TRY Add Student ****** ");
 			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 		
 			 for (FileItem item : items) {
@@ -562,6 +569,8 @@ public class StudentService {
 		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		parents = new parentsDetailsDAO().create(parents);
 
+		logger.info("*******Student Service: Created Student ****** "+student.getName());
+		
 		if(parents!=null){
 			result=true;
 		}
