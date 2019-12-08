@@ -239,7 +239,6 @@
 			document.getElementById("addcity").style.display = '';
 		}
 	}
-
 	
 
 	function dropdownadmclass() {
@@ -420,15 +419,7 @@
 		}
 
 	}
-	function validateAdmissionNumber() {
-		if (document.getElementById("admnno").value.length == 0)
-
-		{
-			document.getElementById("admnno").style.background = 'red';
-			alert("Enter The Admission Number ");
-		}
-
-	}
+	
 	function selectOnlyThis(id) {
 	    for (var i = 1;i <= 2; i++)
 	    {
@@ -445,7 +436,11 @@
 
 		
 		$(".save").button().click(function() {
-			addStudent();
+			var form1 = document.getElementById("form1");
+			if(form1.checkValidity()) {
+				form1.savestudent.disabled = true;
+				addStudent();
+			}
 
 		});
 
@@ -619,8 +614,7 @@
 	}
 %>
 <body>
-	<form id="form1" action="Controller?process=PersonalProcess&action=add"
-		method="post" enctype="multipart/form-data">
+	<form id="form1" method="post" enctype="multipart/form-data">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
 		%>
@@ -628,9 +622,7 @@
 		<div>
 			<div id="tabs">
 				<ul>
-					<li><a href="#fragment-1">Student's Details</a></li>
-					<li><a href="#fragment-5">Previous School Details</a></li>
-					<li><a href="#fragment-2">Parent's Details</a></li>
+					<li><a href="#fragment-1">Basic Information</a></li>
 					<li><a href="#fragment-3">Upload Documents</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
@@ -640,20 +632,20 @@
 
 				<div id="fragment-1">
 					<table width="90%" border="0" align="left" id="table1">
-						<tr>
-							<td><br /></td>
-						</tr>
+						
 						<tr>
 							<td><br /></td>
 						</tr>
 
 						<tr>
-							<td width="20%" class="alignRight">Admission Number* &nbsp;</td>
+							<td align="center"><h3 style="text-decoration: underline;color: #eb6000">Student's Details:</h3><br /></td>
+						</tr>
+								
+						<tr>
+							<td width="20%" class="alignRight">Admission Number &nbsp;</td>
 							<td width="28%"><label> <input name="admnno"
 									type="text" class="myclass" id="admnno" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									onblur="validateAdmissionNumber();"
-									onkeypress="return validateContactNum(this);">
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
 
 							</label></td>
 							<td width="16%" class="alignRight">STS Number &nbsp;</td>
@@ -753,9 +745,9 @@
 						<tr>
 
 
-							<td class="alignRight">Studying in Class&nbsp;</td>
+							<td class="alignRight">Studying in Class*&nbsp;</td>
 							<td width="28%"><label> <select name="addclass"
-									id="addclass" style="width: 128px;">
+									id="addclass" style="width: 128px;" required="required">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -1045,329 +1037,136 @@
 						<tr>
 							<td><br /></td>
 						</tr>
+						
+						<tr>
+							<td align="center"><h3 style="text-decoration: underline;color: #eb6000">Previous School Details:</h3><br /></td>
+						</tr>
+						
+											
+						<tr>
+							<td class="alignRight">Transfer
+								certificate No.&nbsp;</td>
+							<td  align="left"><label> <input
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									name="tcno" type="text" class="myclass" id="tcno" size="30">
+									
+							</label></td>
+									<td class="alignRight">Date of Transfer Certificate&nbsp;</td>
+							<td ><label >
+							<input name="dateoftc" type="text" class="myclass"
+									id="dateoftc" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									data-validate="validate(required)"></label></td>
+
+						</tr>
+
 						<tr>
 							<td><br /></td>
 						</tr>
 
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignRight">Previous Class Studied &nbsp;</td>
 
-						<div>
-							<table width="100%">
-								<tr>
-
-									<td><br /></td>
-								</tr>
-
-								<tr>
-
-									<td align="center"><a class="nexttab"
-										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Next</a></td>
-								</tr>
-
-								<tr>
-
-									<td><br /></td>
-								</tr>
-
-								<tr>
-									<td align="center">
-
-
-										<button id="save" class="save"
-											onmouseover="validateNameContact();validateAdmissionNumber();"
-											onfocus="validateNameContact();">Save</button>
-
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="cancel" class="cancel">Cancel</button>
-
-									</td>
-
-
-								</tr>
-							</table>
-
-						</div>
-
-
-
-						<div id="fragment-3">
-							<table width="100%" border="0" align="center">
-								<tr>
-									<td><label style="font-size: 12px;color: #eb6000;font-weight: bold;">Note: Upload only .jpg images</label></td>
-								</tr>
-								
-								<tr>
-								<td></td>
-								<td></td>
-								</tr>
-								
-								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Pic</label><br /> <input type="file" name="fileToUpload"
-										id="fileToUpload" accept="image/*"></td>
-								</tr>
-								
-								<tr>
-								<td></td>
-								<td></td>
-								</tr>
-								
-								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 1</label><br /> <input type="file" name="studentdoc1"
-										id="studentdoc1" accept="image/*"></td>
-								</tr>
-								
-								<tr>
-								<td></td>
-								<td></td>
-								</tr>
-								
-								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 2</label><br /> <input type="file" name="studentdoc2"
-										id="studentdoc2" accept="image/*"></td>
-								</tr>
-								
-								<tr>
-								<td></td>
-								<td></td>
-								</tr>
-								
-								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 3</label><br /> <input type="file" name="studentdoc3"
-										id="studentdoc3" accept="image/*"></td>
-								</tr>
-								
-								<tr>
-								<td></td>
-								<td></td>
-								</tr>
-								
-								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 4</label><br /> <input type="file" name="studentdoc4"
-										id="studentdoc4" accept="image/*"></td>
-								</tr>
-								
-								<tr>
-								<td></td>
-								<td></td>
-								</tr>
-								
-								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 5</label><br /> <input type="file" name="studentdoc5"
-										id="studentdoc5" accept="image/*"></td>
-								</tr>
-
-
-							</table>
-
-
-
-							<div>
-								<table width="100%">
-									<tr>
-
-										<td><br /></td>
-									</tr>
-
-									<tr>
-										<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="nexttab"
-											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
-											class="prevtab"
-											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Previous</a></td>
-									</tr>
-
-									<tr>
-
-										<td><br /></td>
-									</tr>
-
-									<tr>
-										<td align="left">
-
-
-											<button id="savethree" class="save"
-												onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
-												onfocus="validateNameContact();validateFatherName();">Save</button>
-
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<button id="cancelthree" class="cancel">Cancel</button>
-
-										</td>
-
-
-									</tr>
-									<tr>
-										<td><br /></td>
-									</tr>
-									<tr>
-										<td><br /></td>
-									</tr>
-									<tr>
-										<td><br /></td>
-									</tr>
-									<tr>
-										<td><br /></td>
-									</tr>
-								</table>
-
-							</div>
-
-						</div>
-
-
-						<div id="fragment-4">
-							<table width="100%" border="0" align="center" id="table1">
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-								<tr>
-									<td class="alignRight">Class on leaving&nbsp;</td>
-									<td align="left">
-									<label> <select name="classonleaving"
-									id="classonleaving" style="width: 260px;">
+							<td ><label> <select name="lastclass" id="lastclass"
+									style="width: 256px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
+											<option value="${classdetailslist.classdetails}">
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
 										</c:forEach>
-										</select>
-									</label>
-									<td class="alignRight">Date of leaving the
-										school&nbsp;</td>
-									<td align="left"><label> <input
-											name="dateofleaving" type="text" class="myclass"
-											id="dateofleaving" size="40"
-											data-validate="validate(required)"> <!-- onkeyup="check(this.value);"  -->
-									</label></td>
+								</select>
+							</label></td>
+
+							<td class="alignRight">Previous School Name
+								&nbsp;</td>
+							<td  align="left"><label> <input
+									name="lastschool" type="text" class="myclass" id="lastschool"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									size="30" onblur="validateName();">
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td class="alignRight">Languages Studied &nbsp;</td>
+
+							<td><label> <input
+									name="languagesstudied" type="text" class="myclass"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									id="languagesstudied" size="30">
+							</label></td>
 
 
-								</tr>
 
+							<td class="alignRight">Date of leaving school with reasons &nbsp;</td>
+							<td><label> <input
+									name="progress" type="text"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									class="myclass" id="progress" size="30">
+							</label></td>
+						</tr>
 
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignRight">Previous School Medium of
+								Instruction&nbsp;</td>
 
-								<tr>
+							<td><label> <select name="mediumofinstruction"
+									id="mediumofinstruction" style="width: 256px">
+										<option selected></option>
+										<option>Kannada</option>
+										<option>Hindi</option>
+										<option>Urdu</option>
+										<option>English</option>
+										<option>Marathi</option>
+										<option>Tamil</option>
+										<option>Telgu</option>
+								</select>
+
+							</label></td>
+							
+							<td class="alignRight">Previous School
+								Type&nbsp;</td>
+
+							<td><label> <select name="previousschooltype"
+									id="previousschooltype" style="width: 256px">
+										<option selected></option>
+										<option>Government</option>
+										<option>Private Aided</option>
+										<option>Local Bodies</option>
+										<option>Private Unaided School</option>
+								</select>
+
+							</label></td>
+						</tr>
+						
+						<tr>
 									<td><br /></td>
 								</tr>
 								<tr>
 									<td><br /></td>
-								</tr>
-
-
-								<tr>
-
-									<td class="alignRight">Reason for leaving
-										&nbsp;</td>
-
-									<td><label> <input
-											name="reasonforleaving" type="text" class="myclass"
-											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-											id="reasonforleaving" size="30"
-											onkeypress="return validateContactNum(this);">
-
-									</label></td>
-
-
-
-									<td class="alignRight">No. & date of transfer
-										certificate issued&nbsp;</td>
-
-									<td ><label> <input name="notcissued"
-									style="height: 18px;font-size: 13px;font-weight: bold;"
-											type="text" class="myclass" id="notcissued" size="30" placeholder="No. of Transfer Certificate">
-									</label></td>
-
-								</tr>
-
-								<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-									<td><label>
-											<input
-											name="dateoftcissued" type="text" class="myclass"
-											id="dateoftcissued" size="30" placeholder="Date of Transfer Certificate"
-											style="height: 18px;font-size: 13px;font-weight: bold;"
-											data-validate="validate(required)">
-									</label></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-								<tr align="center">
-
-									<td width="20%" class="alignRight">&nbsp;</td>
-
-									<td align="center"><a class="nexttab"
-										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
-										class="prevtab"
-										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Previous</a></td>
 								</tr>
 								
 								<tr>
-									<td><br /></td>
-								</tr>
-
-								<tr>
-									<td><br /></td>
-								</tr>
-
-								<tr align="center">
-
-
-									<td width="20%" class="alignRight">&nbsp;</td>
-
-									<td align="center">
-
-
-										<button id="savefour" class="save"
-											onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
-											onfocus="validateNameContact();validateFatherName();">Save</button>
-
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="cancelfour" class="cancel">Cancel</button>
-
-									</td>
-
-
-
-
-								</tr>
-
-								<tr>
-									<td><br /></td>
-								</tr>
-
-
-								<tr>
-									<td><br /></td>
-								</tr>
-
-							</table>
-
-						</div>
-
-
-						<div id="fragment-2">
-							<table width="100%" border="0" align="center" id="table1">
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
+									<td align="center"><h3 style="text-decoration: underline;color: #eb6000">Parent's Details:</h3><br /></td>
 								</tr>
 
 								<tr>
@@ -1383,7 +1182,7 @@
 									<td align="left"><label> <input
 											name="mothersname" type="text" class="myclass" id="name"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-											size="30"> <!-- onkeyup="check(this.value);"  -->
+											size="30" required> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
 
@@ -1508,12 +1307,12 @@
 
 								<tr>
 
-									<td class="alignRight">Contact Number &nbsp;</td>
+									<td class="alignRight">Contact Number* &nbsp;</td>
 
 									<td><label> <input
 											name="contactnumber" type="text" class="myclass"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-											id="contactnumber" size="30" maxlength="10" minlength="10">
+											id="contactnumber" size="30" maxlength="10" minlength="10" required>
 
 									</label></td>
 
@@ -1675,56 +1474,126 @@
 											onclick="validateNameContact();">
 									</label></td>
 								</tr>
+								
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 
+
+						<div>
+							<table width="100%">
 								<tr>
+
 									<td><br /></td>
 								</tr>
 
-
 								<tr>
-									<td><br /></td>
-								</tr>
 
-
-
-								<tr align="center">
-									<td class="alignRight">&nbsp;</td>
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
-										class="prevtab"
-										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Previous</a></td>
+										href="#">Next</a></td>
 								</tr>
-
 
 								<tr>
+
 									<td><br /></td>
 								</tr>
-								<tr align="center">
-									<td class="alignRight">&nbsp;</td>
+
+								<tr>
 									<td align="center">
-										<button id="savetwo" class="save"
-											onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
-											onfocus="validateNameContact();validateFatherName();">Save</button>
+
+
+										<button id="save" class="save" name="savestudent">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="canceltwo" class="cancel">Cancel</button>
+										<button id="cancel" class="cancel">Cancel</button>
+
 									</td>
 
-								</tr>
 
-								<tr>
-									<td><br /></td>
-								</tr>
-
-								<tr>
-									<td><br /></td>
 								</tr>
 							</table>
+
 						</div>
-						
-						<div id="fragment-5">
+
+
+
+						<div id="fragment-3">
+							<table width="100%" border="0" align="center">
+								<tr>
+									<td><label style="font-size: 12px;color: #eb6000;font-weight: bold;">Note: Upload only .jpg images</label></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Pic</label><br /> <input type="file" name="fileToUpload"
+										id="fileToUpload" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 1</label><br /> <input type="file" name="studentdoc1"
+										id="studentdoc1" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 2</label><br /> <input type="file" name="studentdoc2"
+										id="studentdoc2" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 3</label><br /> <input type="file" name="studentdoc3"
+										id="studentdoc3" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 4</label><br /> <input type="file" name="studentdoc4"
+										id="studentdoc4" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 5</label><br /> <input type="file" name="studentdoc5"
+										id="studentdoc5" accept="image/*"></td>
+								</tr>
+
+
+							</table>
+
+
 
 							<div>
 								<table width="100%">
@@ -1734,150 +1603,24 @@
 									</tr>
 
 									<tr>
-							<td class="alignRight">Transfer
-								certificate No.&nbsp;</td>
-							<td  align="left"><label> <input
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									name="tcno" type="text" class="myclass" id="tcno" size="30">
-									
-							</label></td>
-									<td class="alignRight">Date of Transfer Certificate&nbsp;</td>
-							<td ><label >
-							<input name="dateoftc" type="text" class="myclass"
-									id="dateoftc" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									data-validate="validate(required)"></label></td>
-
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td class="alignRight">Previous Class Studied &nbsp;</td>
-
-							<td ><label> <select name="lastclass" id="lastclass"
-									style="width: 256px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<option value="${classdetailslist.classdetails}">
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label></td>
-
-							<td class="alignRight">Previous School Name
-								&nbsp;</td>
-							<td  align="left"><label> <input
-									name="lastschool" type="text" class="myclass" id="lastschool"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									size="30" onblur="validateName();">
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td class="alignRight">Languages Studied &nbsp;</td>
-
-							<td><label> <input
-									name="languagesstudied" type="text" class="myclass"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									id="languagesstudied" size="30">
-							</label></td>
-
-
-
-							<td class="alignRight">Date of leaving school with reasons &nbsp;</td>
-							<td><label> <input
-									name="progress" type="text"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									class="myclass" id="progress" size="30">
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td class="alignRight">Previous School Medium of
-								Instruction&nbsp;</td>
-
-							<td><label> <select name="mediumofinstruction"
-									id="mediumofinstruction" style="width: 256px">
-										<option selected></option>
-										<option>Kannada</option>
-										<option>Hindi</option>
-										<option>Urdu</option>
-										<option>English</option>
-										<option>Marathi</option>
-										<option>Tamil</option>
-										<option>Telgu</option>
-								</select>
-
-							</label></td>
-							
-							<td class="alignRight">Previous School
-								Type&nbsp;</td>
-
-							<td><label> <select name="previousschooltype"
-									id="previousschooltype" style="width: 256px">
-										<option selected></option>
-										<option>Government</option>
-										<option>Private Aided</option>
-										<option>Local Bodies</option>
-										<option>Private Unaided School</option>
-								</select>
-
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-								<tr align="center">
-									<td class="alignRight">&nbsp;</td>
-									<td align="center"><a class="nexttab"
-										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
-										class="prevtab"
-										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Previous</a></td>
-								</tr>
-
-
-								<tr>
-									<td><br /></td>
-								</tr>
-						
+										<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="nexttab"
+											style="font-weight: bold; color: #325F6D; font-size: 13px"
+											href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+											class="prevtab"
+											style="font-weight: bold; color: #325F6D; font-size: 13px"
+											href="#">Previous</a></td>
+									</tr>
 
 									<tr>
-										<td></td>
+
+										<td><br /></td>
+									</tr>
+
+									<tr>
 										<td align="left">
 
 
-											<button id="savethree" class="save"
-												onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
-												onfocus="validateNameContact();validateFatherName();">Save</button>
+											<button id="savethree" class="save" name="savestudent">Save</button>
 
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<button id="cancelthree" class="cancel">Cancel</button>
@@ -1903,7 +1646,151 @@
 							</div>
 
 						</div>
-						
+
+
+						<div id="fragment-4">
+							<table width="100%" border="0" align="center" id="table1">
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+									<td class="alignRight">Class on leaving&nbsp;</td>
+									<td align="left">
+									<label> <select name="classonleaving"
+									id="classonleaving" style="width: 260px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+										</select>
+									</label>
+									<td class="alignRight">Date of leaving the
+										school&nbsp;</td>
+									<td align="left"><label> <input
+											name="dateofleaving" type="text" class="myclass"
+											id="dateofleaving" size="40"
+											data-validate="validate(required)"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+
+								</tr>
+
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+
+									<td class="alignRight">Reason for leaving
+										&nbsp;</td>
+
+									<td><label> <input
+											name="reasonforleaving" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="reasonforleaving" size="30"
+											onkeypress="return validateContactNum(this);">
+
+									</label></td>
+
+
+
+									<td class="alignRight">No. & date of transfer
+										certificate issued&nbsp;</td>
+
+									<td ><label> <input name="notcissued"
+									style="height: 18px;font-size: 13px;font-weight: bold;"
+											type="text" class="myclass" id="notcissued" size="30" placeholder="No. of Transfer Certificate">
+									</label></td>
+
+								</tr>
+
+								<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+									<td><label>
+											<input
+											name="dateoftcissued" type="text" class="myclass"
+											id="dateoftcissued" size="30" placeholder="Date of Transfer Certificate"
+											style="height: 18px;font-size: 13px;font-weight: bold;"
+											data-validate="validate(required)">
+									</label></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr align="center">
+
+									<td width="20%" class="alignRight">&nbsp;</td>
+
+									<td align="center"><a class="nexttab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+								
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr align="center">
+
+
+									<td width="20%" class="alignRight">&nbsp;</td>
+
+									<td align="center">
+
+
+										<button id="savefour" class="save" name="savestudent">Save</button>
+
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="cancelfour" class="cancel">Cancel</button>
+
+									</td>
+
+
+
+
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+
+
+								<tr>
+									<td><br /></td>
+								</tr>
+
+							</table>
+
+						</div>
+
+
 						<div id="fragment-6">
 
 							<div>
@@ -1967,12 +1854,10 @@
 										<td align="left">
 
 
-											<button id="savethree" class="save"
-												onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
-												onfocus="validateNameContact();validateFatherName();">Save</button>
+											<button id="savesix" class="save" name="savestudent">Save</button>
 
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<button id="cancelthree" class="cancel">Cancel</button>
+											<button id="cancelsix" class="cancel">Cancel</button>
 
 										</td>
 
@@ -2010,10 +1895,8 @@
 	<script type="text/javascript">
 							function addStudent() {
 								var form1 = document.getElementById("form1");
-								if(form1.checkValidity()) {
 									form1.action = "Controller?process=StudentProcess&action=AddStudent";
 									form1.submit();
-								  }
 							}
 
 							function Cancel() {
