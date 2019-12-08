@@ -444,37 +444,7 @@
 	$(function() {
 
 		
-		$("#save").button().click(function() {
-			addStudent();
-
-		});
-		
-		$("#saveone").button().click(function() {
-			addStudent();
-
-		});
-		
-		$("#savetwo").button().click(function() {
-			addStudent();
-
-		});
-		
-		$("#savethree").button().click(function() {
-			addStudent();
-
-		});
-		
-		$("#savefour").button().click(function() {
-			addStudent();
-
-		});
-		
-		$("#savefive").button().click(function() {
-			addStudent();
-
-		});
-		
-		$("#savesix").button().click(function() {
+		$(".save").button().click(function() {
 			addStudent();
 
 		});
@@ -649,7 +619,7 @@
 	}
 %>
 <body>
-	<form id="form1" 
+	<form id="form1" action="Controller?process=PersonalProcess&action=add"
 		method="post" enctype="multipart/form-data">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
@@ -1103,7 +1073,7 @@
 									<td align="center">
 
 
-										<button id="save" 
+										<button id="save" class="save"
 											onmouseover="validateNameContact();validateAdmissionNumber();"
 											onfocus="validateNameContact();">Save</button>
 
@@ -1216,7 +1186,7 @@
 										<td align="left">
 
 
-											<button id="savethree" 
+											<button id="savethree" class="save"
 												onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
 												onfocus="validateNameContact();validateFatherName();">Save</button>
 
@@ -1363,7 +1333,7 @@
 									<td align="center">
 
 
-										<button id="savefour" 
+										<button id="savefour" class="save"
 											onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
 											onfocus="validateNameContact();validateFatherName();">Save</button>
 
@@ -1734,7 +1704,7 @@
 								<tr align="center">
 									<td class="alignRight">&nbsp;</td>
 									<td align="center">
-										<button id="savetwo" 
+										<button id="savetwo" class="save"
 											onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
 											onfocus="validateNameContact();validateFatherName();">Save</button>
 
@@ -1905,7 +1875,7 @@
 										<td align="left">
 
 
-											<button id="savefive" 
+											<button id="savethree" class="save"
 												onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
 												onfocus="validateNameContact();validateFatherName();">Save</button>
 
@@ -1997,7 +1967,7 @@
 										<td align="left">
 
 
-											<button id="savesix" 
+											<button id="savethree" class="save"
 												onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
 												onfocus="validateNameContact();validateFatherName();">Save</button>
 
