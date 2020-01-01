@@ -237,16 +237,19 @@ public class ExamDetailsService {
 
 	public boolean getExamScheduleDetails() {
 		
-		String academicYear = DataUtil.emptyString(request.getParameter("searchacademicyear"));
+		//String academicYear = DataUtil.emptyString(request.getParameter("searchacademicyear"));
+		String academicYear = DataUtil.emptyString(request.getParameter("examyear"));
 		String[] searchExamLevel = DataUtil.emptyString(request.getParameter("searchexamlevel")).split(":");
-                String[] searchCenter = DataUtil.emptyString(request.getParameter("searchcentercode")).split(":");
+        String[] searchCenter = DataUtil.emptyString(request.getParameter("searchcentercode")).split(":");
                 
-		
+        request.setAttribute("selectedexamyear", DataUtil.emptyString(request.getParameter("examyear")));
 		request.setAttribute("selectedcentercode", DataUtil.emptyString(request.getParameter("searchcentercode")));
 		request.setAttribute("selectedexamlevel", DataUtil.emptyString(request.getParameter("searchexamlevel")));
+		request.setAttribute("selectedexamyear", DataUtil.emptyString(request.getParameter("examyear")));
 		
 		httpSession.setAttribute("centercodesearch", DataUtil.emptyString(request.getParameter("searchcentercode")));
 		httpSession.setAttribute("examlevelsearch", DataUtil.emptyString(request.getParameter("searchexamlevel")));
+		httpSession.setAttribute("selectedexamyear", DataUtil.emptyString(request.getParameter("examyear")));
 	
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			List<Examschedule> examschedules = new ArrayList<Examschedule>();
@@ -278,11 +281,13 @@ public class ExamDetailsService {
 		String[] dateOfExam = request.getParameterValues("date");
 		String[] startTime = request.getParameterValues("starttime");
 		String[] endTime = request.getParameterValues("endtime");
-
+		String[] examscheduleacademicyear = request.getParameterValues("examscheduleacademicyear");
+		String subAcademicYear = examscheduleacademicyear[0].substring(2, 4);
 		
 		String[] selectedExamLevel = DataUtil.emptyString(request.getParameter("hiddenexamlevel")).toString().split(":");
 		String[] selectedCenterCode = DataUtil.emptyString(request.getParameter("hiddencentercode")).toString().split(":");
 		
+		   
 		if(examLevels!=null){
 		
 		List<Parents> studentList = new LinkedList<Parents>();
@@ -290,7 +295,7 @@ public class ExamDetailsService {
 		Map<Parents,List<HallTicket>> hallTicketMap = new LinkedHashMap<Parents,List<HallTicket>>();
 		
 			studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.examlevel = '" + 
-			        selectedExamLevel[0]+"' and parents.Student.centercode='"+selectedCenterCode[0]+"' order by parents.Student.admissionnumber ASC");
+			        selectedExamLevel[0]+"' and parents.Student.centercode='"+selectedCenterCode[0]+"' AND parents.Student.admissionnumber like '"+subAcademicYear+"%' order by parents.Student.admissionnumber ASC");
 		             
 	              for (Parents student : studentList) {
 	                  List<HallTicket> examscheduleList = new ArrayList<HallTicket>();

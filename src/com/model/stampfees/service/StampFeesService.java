@@ -62,16 +62,16 @@ public class StampFeesService {
 		String querySub = "";
 
 		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 AND parents.Student.passedout = 0 AND (parents.Student.remarks = 'approved'  OR parents.Student.remarks = 'admin' ) AND parents.Student.droppedout = 0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
 
 		if (!classStudying.equalsIgnoreCase("")
 				&& !querySub.equalsIgnoreCase("")) {
 			querySub = querySub + " AND parents.Student.classstudying like '"
-					+ classStudying + "' AND parents.Student.archive=0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 ";
+					+ classStudying + "' AND parents.Student.archive=0 AND parents.Student.passedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin')  AND parents.Student.droppedout = 0 ";
 		} else if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " parents.Student.classstudying like '"
-					+ classStudying + "' AND parents.Student.archive=0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+					+ classStudying + "' AND parents.Student.archive=0 AND parents.Student.passedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin')  AND parents.Student.droppedout = 0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		}
 
 		queryMain = queryMain + querySub + " Order By parents.Student.admissionnumber ASC";

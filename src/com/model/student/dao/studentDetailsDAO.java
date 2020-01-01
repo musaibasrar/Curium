@@ -66,7 +66,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("FROM Student s where s.archive = 0 AND s.passedout = 0 AND s.droppedout = 0 order by admissionnumber DESC");
+					.createQuery("FROM Student s where s.archive = 0 AND s.passedout = 0 AND s.remarks = 'approved' OR s.remarks='admin' AND s.droppedout = 0 order by admissionnumber DESC");
 			query.setFirstResult(offset);
 			query.setMaxResults(noOfRecords);
 			results = query.list();
@@ -90,7 +90,7 @@ public class studentDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND droppedout = 0 order by admissionnumber DESC").setCacheable(true).setCacheRegion("commonregion")
+			results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND (remarks = 'approved' OR remarks = 'admin') AND droppedout = 0 order by admissionnumber DESC").setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			noOfRecords = results.size();
 			transaction.commit();
@@ -149,7 +149,7 @@ public class studentDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND droppedout = 0 order by admissionnumber DESC").setCacheable(true).setCacheRegion("commonregion")
+			results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND (remarks = 'approved' OR remarks = 'admin') AND droppedout = 0 order by admissionnumber DESC").setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			transaction.commit();
 
@@ -342,7 +342,7 @@ public class studentDetailsDAO {
 			transaction = session.beginTransaction();
 			Date date= new Date();
 			 long time = date.getTime();
-			Query query = session.createQuery("From Parents as parents where parents.Student.archive=0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 order by parents.Student.sid DESC").setCacheable(true).setCacheRegion("commonregion");
+			Query query = session.createQuery("From Parents as parents where parents.Student.archive=0 AND parents.Student.passedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin')  AND  parents.Student.droppedout = 0 order by parents.Student.sid DESC").setCacheable(true).setCacheRegion("commonregion");
 			query.setFirstResult(offset);   
 			query.setMaxResults(noOfRecords);
 			results = query.getResultList();
@@ -371,7 +371,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("FROM Student s where s.archive = 0 AND s.passedout = 0 AND s.droppedout = 0 order by s.admissionnumber DESC");
+					.createQuery("FROM Student s where s.archive = 0 AND s.passedout = 0 AND (s.remarks = 'approved' OR s.remarks = 'admin') AND s.droppedout = 0 order by s.admissionnumber DESC");
 			
 			results = query.list();
 			transaction.commit();
@@ -543,7 +543,7 @@ public class studentDetailsDAO {
 	                
 	                transaction = session.beginTransaction();
 	                Query query = session
-	                                .createQuery("From Parents as parents where parents.Student.archive=0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0   Order By parents.Student.admissionnumber ASC").setCacheable(true).setCacheRegion("commonregion");
+	                                .createQuery("From Parents as parents where parents.Student.archive=0 AND parents.Student.passedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin') AND parents.Student.droppedout = 0   Order By parents.Student.admissionnumber ASC").setCacheable(true).setCacheRegion("commonregion");
 	                query.setFirstResult(offset);   
 	                query.setMaxResults(noOfRecords);
 	                results = query.getResultList();
@@ -565,7 +565,7 @@ public class studentDetailsDAO {
 	        int noOfRecords = 0;
 	        try {
 	                transaction = session.beginTransaction();
-	                results = (List<Student>) session.createQuery("From Student s where s.archive=0 AND s.passedout = 0 AND s.droppedout = 0").setCacheable(true).setCacheRegion("commonregion").list();
+	                results = (List<Student>) session.createQuery("From Student s where s.archive=0 AND s.passedout = 0 AND (s.remarks = 'approved' OR s.remarks = 'admin') AND s.droppedout = 0").setCacheable(true).setCacheRegion("commonregion").list();
 	                noOfRecords = results.size();
 	                transaction.commit();
 	        } catch (HibernateException hibernateException) {transaction.rollback();
@@ -699,7 +699,7 @@ public class studentDetailsDAO {
             int noOfRecords = 0;
             try {
                     transaction = session.beginTransaction();
-                    results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND droppedout = 0 AND branchid="+branchId+" order by admissionnumber DESC").setCacheable(true).setCacheRegion("commonregion")
+                    results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND remarks = 'approved' OR remarks='admin' AND droppedout = 0 AND branchid="+branchId+" order by admissionnumber DESC").setCacheable(true).setCacheRegion("commonregion")
                                     .list();
                     noOfRecords = results.size();
                     transaction.commit();
@@ -717,7 +717,7 @@ public class studentDetailsDAO {
 
             try {
                     transaction = session.beginTransaction();
-                    Query query = session.createQuery("From Parents as parents where parents.Student.archive=0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 AND parents.Student.branchid = "+branchId+" order by parents.Student.admissionnumber DESC").setCacheable(true).setCacheRegion("commonregion");
+                    Query query = session.createQuery("From Parents as parents where parents.Student.archive=0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin')  AND parents.Student.branchid = "+branchId+" order by parents.Student.admissionnumber DESC").setCacheable(true).setCacheRegion("commonregion");
                     query.setFirstResult(offset);   
                     query.setMaxResults(noOfRecords);
                     results = query.getResultList();
@@ -739,7 +739,7 @@ public class studentDetailsDAO {
                     // HibernateUtil.getSessionFactory().openCurrentSession();
                     transaction = session.beginTransaction();
 
-                    results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND droppedout = 0 AND branchid="+branchId+" order by admissionnumber DESC").setCacheable(true).setCacheRegion("commonregion")
+                    results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND (remarks = 'approved' OR remarks = 'admin') AND droppedout = 0 AND branchid="+branchId+" order by admissionnumber DESC").setCacheable(true).setCacheRegion("commonregion")
                                     .list();
                     transaction.commit();
 
@@ -775,7 +775,7 @@ public class studentDetailsDAO {
 			try {
 				transaction = session.beginTransaction();
 				Query query = session
-						.createQuery("update Student set remarks='approved' where sid IN (:ids)");
+						.createQuery("update Student set remarks='approved',approvedon=current_date() where sid IN (:ids)");
 				query.setParameterList("ids", ids);
 				query.executeUpdate();
 				transaction.commit();
@@ -792,7 +792,7 @@ public class studentDetailsDAO {
 			try {
 				transaction = session.beginTransaction();
 				Query query = session
-						.createQuery("update Student set archive = 1, remarks='rejected' where id IN (:ids)");
+						.createQuery("update Student set remarks='rejected' where id IN (:ids)");
 				query.setParameterList("ids", ids);
 				query.executeUpdate();
 				transaction.commit();

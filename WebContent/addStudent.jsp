@@ -337,10 +337,13 @@
 	$(function() {
 
 		$(".save").button().click(function() {
-			addStudent();
-
+			var form1 = document.getElementById("form1");
+			if(form1.checkValidity()) {
+				form1.savestudent.disabled = true;
+				addStudent();
+			}
 		});
-
+		
 		$(".cancel").button().click(function() {
 			Cancel();
 
@@ -782,7 +785,7 @@ for(Cookie cookie : cookies){
 								
 								<tr>
 									<td align="center">
-										<button id="saveone" class="save">Save</button>
+										<button id="saveone" class="save" name="savestudent">Save</button>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="cancelone" class="cancel">Cancel</button>
 
@@ -832,7 +835,7 @@ for(Cookie cookie : cookies){
 									<td align="center">
 										
 										
-										<button id="savethree" class="save">Save</button>
+										<button id="savethree" class="save" name="savestudent">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="cancelthree" class="cancel">Cancel</button>
@@ -941,7 +944,7 @@ for(Cookie cookie : cookies){
 									<td align="center">
 									
 										
-										<button id="savetwo" class="save">Save</button>
+										<button id="savetwo" class="save" name="savestudent">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="canceltwo" class="cancel">Cancel</button>
@@ -971,12 +974,12 @@ for(Cookie cookie : cookies){
 							</div>
 						</form>
 						<script type="text/javascript">
+						
 							function addStudent() {
 								var form1 = document.getElementById("form1");
-								  if(form1.checkValidity()) {
-									  form1.action = "Controller?process=StudentProcess&action=AddStudent";
-										form1.submit();
-								  }
+								  	form1.action = "Controller?process=StudentProcess&action=AddStudent";
+									form1.submit();
+								 
 							}
 
 							function Cancel() {

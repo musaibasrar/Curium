@@ -641,6 +641,29 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
+							<td class="alignRightFields">Exam Year &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="examyear" id="examyear"
+									style="width: 200px;" required>
+										<option selected value="${attendanceacademicsearch}">${attendanceacademicsearch}</option>
+											<option ></option>
+											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2018/19" >2018/19</option>
+											<option value="2017/18" >2017/18</option>
+											<option value="2016/17" >2016/17</option>
+											<option value="2015/16" >2015/16</option>
+											<option value="2014/15" >2014/15</option>
+											<option value="2013/14" >2013/14</option>
+								</select>
+							</label> 
+							</td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
 							<!-- <td class="alignRightFields">Subject &nbsp;</td> -->
 							<td width="12%" align="left"><label> <input
 									name="subjectidselected" type="hidden" class="myclass" id="searchedsubject"

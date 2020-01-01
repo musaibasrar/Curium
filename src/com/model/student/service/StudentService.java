@@ -76,6 +76,9 @@ public class StudentService {
 	}
 
 	public boolean addStudent() {
+		
+		logger.info("*******Student Service: Add Student ****** ");
+		
 		Student student = new Student();
 		Parents parents = new Parents();
 		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying=null,conClassAdmittedIn=null;
@@ -83,6 +86,7 @@ public class StudentService {
 		boolean result=false;
 		
 		try {
+			logger.info("*******Student Service: TRY Add Student ****** ");
 			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 		
 			 for (FileItem item : items) {
@@ -219,6 +223,10 @@ public class StudentService {
 		//if branch is not head office
 		if(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())!=1) {
 			student.setRemarks("underapproval");
+		}else {
+			student.setRemarks("admin");
+			Date todaysDate = new Date();
+			student.setApprovedon(todaysDate);
 		}
 		
 		
@@ -236,7 +244,7 @@ public class StudentService {
 		parents.setStudent(student);
 		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		parents = new parentsDetailsDAO().create(parents);
-
+		logger.info("*******Student Service: Created Student ****** "+student.getName());
 		if(parents!=null){
 			result=true;
 		}
@@ -659,7 +667,7 @@ public class StudentService {
 
 	@SuppressWarnings("finally")
 	public boolean searchClass() {
-	    String searchQuery = "From Student as student where student.archive=0 and student.passedout=0 and student.droppedout=0 ";
+	    String searchQuery = "From Student as student where student.archive=0 and student.passedout=0 and student.remarks = 'approved' OR student.remarks='admin' AND student.droppedout=0 ";
 	       String subQuery =null;
 	       
 	            if(!request.getParameter("centercode").equalsIgnoreCase("")) {
@@ -1139,19 +1147,19 @@ public class StudentService {
                 httpSession.setAttribute("studentsreportreligionsearch", "");
             }
             
-           if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
+           if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
                 if(subQuery!=null) {
-                    String subAcademicYear = request.getParameter("academicyear").toString().substring(2, 4);
+                    String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
                     
                     subQuery = subQuery+"AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
                 }else {
                     subQuery = "parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
                 }
-                httpSession.setAttribute("studentsreportacademicsearch", request.getParameter("academicyear").toString());
+                httpSession.setAttribute("studentsreportacademicsearch", request.getParameter("examyear").toString());
             }else {
                 httpSession.setAttribute("studentsreportacademicsearch", "");
             }
-            searchQuery = searchQuery+subQuery+" AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND  parent.Student.archive = 0  Order By parent.Student.admissionnumber ASC";
+            searchQuery = searchQuery+subQuery+" AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin')  AND parent.Student.archive = 0  Order By parent.Student.admissionnumber ASC";
             List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
             Map<Parents,String> mapStudentReports = new LinkedHashMap<Parents,String>();
             
@@ -1209,6 +1217,7 @@ public class StudentService {
         List<Parents> parentsList = new ArrayList<Parents>();
         List<Branch> centerList = new LinkedList<Branch>();
         Map<List<String>,List<String>> languageReports = new LinkedHashMap<List<String>,List<String>>();
+        String academicYear = null;
         
         String centerQuery =null;
         
@@ -1227,6 +1236,18 @@ public class StudentService {
                  httpSession.setAttribute("studentsreportcentersearch", "");
              }
              
+             
+             if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
+            	 String currentYear = request.getParameter("examyear");
+                 String[] currentAcademicYear = currentYear.split("/");
+         		 academicYear = currentAcademicYear[0].substring(currentAcademicYear[0].length() - 2);
+                  httpSession.setAttribute("languageacademicsearch", request.getParameter("examyear").toString());
+              }else {
+            	  academicYear="";
+                  httpSession.setAttribute("languageacademicsearch", "");
+              }
+             
+             
              int englishCountTotal =0, urduCountTotal=0, hindiCountTotal=0, kannadaCountTotal= 0;
              
              if (!request.getParameter("examlevel").equalsIgnoreCase("")) {
@@ -1238,7 +1259,7 @@ public class StudentService {
                      int englishCount =0, urduCount=0, hindiCount=0, kannadaCount = 0;
                      
                      parentsList = new studentDetailsDAO().getStudentsList("From Parents parents where "
-                             + "parents.Student.examlevel='"+request.getParameter("examlevel").toString()+"' and parents.Student.centercode='"+eachBranch.getCentercode()+"'  Order By parents.Student.admissionnumber ASC");
+                             + "parents.Student.examlevel='"+request.getParameter("examlevel").toString()+"' and parents.Student.centercode='"+eachBranch.getCentercode()+"' and parents.Student.admissionnumber like '"+academicYear+"%' Order By parents.Student.admissionnumber ASC");
                     
                      for (Parents singleParents : parentsList) {
                              if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("English")) {
@@ -1529,6 +1550,13 @@ public class StudentService {
                      subQuery = subQuery+" AND parent.Student.religion = '"+request.getParameter("religion")+"'";
                      httpSession.setAttribute("printreligion", "Religion: "+request.getParameter("religion").toString());
              }
+             
+             if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
+                     String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
+                     subQuery = subQuery+"AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
+                     httpSession.setAttribute("studentsreportacademicsearch", request.getParameter("examyear").toString());
+             }
+             
              searchQuery = searchQuery+subQuery+" Order By parent.Student.admissionnumber ASC";
              List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
              Map<Parents,String> mapStudentReports = new HashMap<Parents,String>();
@@ -1549,7 +1577,7 @@ public class StudentService {
     }
 
     public void searchStudentsviewAll() {
-        String searchQuery = "From Parents as parent where parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND  parent.Student.archive = 0";
+        String searchQuery = "From Parents as parent where parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin')  AND parent.Student.archive = 0";
         
              if(!request.getParameter("centercode").equalsIgnoreCase("")) {
                  String[] centerCode = request.getParameter("centercode").split(":");
@@ -1691,7 +1719,7 @@ public class StudentService {
 		return result;
 	}
 
-	public void pendingApprovals() {
+	public String pendingApprovals() {
 		
         String searchQuery = "From Parents as parent where parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND parent.Student.archive = 0";
         
@@ -1713,7 +1741,13 @@ public class StudentService {
         request.setAttribute("currentPage", 1);
         request.setAttribute("totalstudents", parentsList.size());
 
-        new BranchService(request, response).viewBranches();
+        if("1".equalsIgnoreCase(httpSession.getAttribute("branchid").toString())) {
+        	new BranchService(request, response).viewBranches();
+        	return "pendingapprovals.jsp";
+        }else {
+        	new BranchService(request, response).viewBranchesCenter();
+        	return "pendingapprovalscenter.jsp";
+        }
         
 	}
 
@@ -1743,5 +1777,48 @@ public class StudentService {
 			}
 			new studentDetailsDAO().rejectRecords(ids);
 		}
+	}
+
+	public String rejectedApprovals() {
+		
+        String searchQuery = "From Parents as parent where parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND parent.Student.archive = 0";
+        
+        if(!request.getParameter("centercode").equalsIgnoreCase("")) {
+            String[] centerCode = request.getParameter("centercode").split(":");
+            searchQuery = searchQuery+" AND parent.Student.centercode = '"+centerCode[0]+"'";
+            httpSession.setAttribute("printcentername", "Center Code/Name: "+centerCode[0]+"/"+centerCode[1]);
+            httpSession.setAttribute("studentviewallcenter", centerCode[0]+":"+centerCode[1]);
+        }else {
+       	 httpSession.setAttribute("studentviewallcenter", "");
+        }
+        
+        searchQuery = searchQuery+" AND parent.Student.remarks = 'rejected' Order By parent.Student.admissionnumber ASC";
+        
+        List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
+        
+        request.setAttribute("studentListRejectedApproval", parentsList);
+        request.setAttribute("noOfPages", 1);
+        request.setAttribute("currentPage", 1);
+        request.setAttribute("totalstudents", parentsList.size());
+
+        if("1".equalsIgnoreCase(httpSession.getAttribute("branchid").toString())) {
+        	new BranchService(request, response).viewBranches();
+        	return "rejectedapprovals.jsp";
+        }else {
+        	new BranchService(request, response).viewBranchesCenter();
+        	return "rejectedapprovalscenter.jsp";
+        }
+        
+	}
+
+	public void approvalsHistory() {
+		
+		String fromDate = DateUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DateUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("todate")));
+
+	    String searchQuery = "From Parents as parents where parents.Student.archive=0 and parents.Student.passedout=0 and parents.Student.droppedout=0 and parents.Student.remarks = 'approved' and parents.Student.approvedon between '"+fromDate+"' and '"+toDate+"' Order by parents.Student.centercode ASC";
+	    List<Parents> studentList = new studentDetailsDAO().getStudentsList(searchQuery);
+	    request.setAttribute("studentList", studentList);
+		
 	}
 }

@@ -47,6 +47,7 @@ public class Student implements java.io.Serializable, Comparable<Student>{
 	private String admittedin;
 	private Integer passedout;
 	private Integer droppedout;
+	private Date approvedon;
 
 	public Student() {
 	}
@@ -63,7 +64,7 @@ public class Student implements java.io.Serializable, Comparable<Student>{
 			String remarks, String guardiandetails,
 			Date createddate, Integer archive, String studentpic,
 			String studentexternalid,  int branchid, String religion, String education,
-			String admittedin, int passedout, int droppedout) {
+			String admittedin, int passedout, int droppedout, Date approvedon) {
 		this.name = name;
 		this.qualification = qualification;
 		this.examlevel = examlevel;
@@ -87,6 +88,7 @@ public class Student implements java.io.Serializable, Comparable<Student>{
 		this.admittedin = admittedin;
 		this.passedout = passedout;
 		this.droppedout = droppedout;
+		this.approvedon = approvedon;
 	}
 
 	@Id
@@ -325,6 +327,14 @@ public class Student implements java.io.Serializable, Comparable<Student>{
     public void setDroppedout(Integer droppedout) {
         this.droppedout = droppedout;
     }
+
+	public Date getApprovedon() {
+		return approvedon;
+	}
+
+	public void setApprovedon(Date approvedon) {
+		this.approvedon = approvedon;
+	}
 
 	@Override
 	public int compareTo(Student student) {

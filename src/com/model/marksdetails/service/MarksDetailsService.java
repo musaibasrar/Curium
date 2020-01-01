@@ -797,6 +797,19 @@ public class MarksDetailsService {
 		                httpSession.setAttribute("evaluationsheetlanguagesearch","");
 		            }
 		            
+		            if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
+		                if(subQuery!=null) {
+		                    String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
+		                    
+		                    subQuery = subQuery+"AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
+		                }else {
+		                    subQuery = "parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
+		                }
+		                httpSession.setAttribute("evaluationsheetacademicsearch", request.getParameter("examyear").toString());
+		            }else {
+		                httpSession.setAttribute("evaluationsheetacademicsearch", "");
+		            }
+		            
 		            searchQuery = searchQuery+subQuery+ " Order By parent.Student.admissionnumber ASC";
 		            List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
 		            

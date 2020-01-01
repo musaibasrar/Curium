@@ -367,6 +367,13 @@ for(Cookie cookie : cookies){
 
             </div>
             
+            <h5 style="font-size: 12px"><a href="#" >Approvals</a></h5>
+            <div>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=pendingapprovals&centercode=${logincentercode}"" style="font-size: 12px;">Pending Approvals</a><br/>
+				<a target="mainFrame" href="Controller?process=StudentProcess&action=rejectedapprovals&centercode=${logincentercode}"" style="font-size: 12px;">Rejected Approvals</a><br/>
+
+            </div>
+            
              <h5 style="font-size: 12px"><a href="#" >Order Management</a></h5>
             <div >
             	<a target="mainFrame" href="Controller?process=OrderProcess&action=placeOrder" style="font-size: 12px;">Place Order</a><br/>

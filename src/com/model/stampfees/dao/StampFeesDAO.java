@@ -67,7 +67,7 @@ public class StampFeesDAO {
 	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 	            transaction = session.beginTransaction();
 
-	            results = (java.util.List<Student>) session.createQuery("FROM Student s where s.archive = 0 AND s.passedout = 0 AND s.droppedout = 0 order by s.admissionnumber ASC").list();
+	            results = (java.util.List<Student>) session.createQuery("FROM Student s where s.archive = 0 AND s.passedout = 0 AND (s.remarks = 'approved' OR s.remarks = 'admin') AND s.droppedout = 0 order by s.admissionnumber ASC").list();
 	            noOfRecords = results.size();
 	            transaction.commit();
 
@@ -91,7 +91,7 @@ public class StampFeesDAO {
 	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 	            transaction = session.beginTransaction();
 
-	            results = (java.util.List<Student>) session.createQuery("From Student s where s.classstudying LIKE '"+classStudying+" %' AND s.archive = 0 AND s.passedout = 0 AND s.droppedout = 0 Order by s.admissionnumber ASC").list();
+	            results = (java.util.List<Student>) session.createQuery("From Student s where s.classstudying LIKE '"+classStudying+" %' AND s.archive = 0 AND (s.remarks = 'approved' OR s.remarks = 'admin') AND s.passedout = 0 AND s.droppedout = 0 Order by s.admissionnumber ASC").list();
 	            noOfRecords = results.size();
 	            transaction.commit();
 

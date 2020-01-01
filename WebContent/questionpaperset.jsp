@@ -674,7 +674,30 @@ for(Cookie cookie : cookies){
 								</select>
 							</label> 
 						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Exam Year &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="examyear" id="examyear"
+									style="width: 240px;" required>
+										<option selected value="${studentsreportacademicsearch}">${studentsreportacademicsearch}</option>
+											<option ></option>
+											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2018/19" >2018/19</option>
+											<option value="2017/18" >2017/18</option>
+											<option value="2016/17" >2016/17</option>
+											<option value="2015/16" >2015/16</option>
+											<option value="2014/15" >2014/15</option>
+											<option value="2013/14" >2013/14</option>
+								</select>
+							</label> 
+							</td>
+						</tr>
 
+						<tr>
+							<td><br /></td>
+
+						</tr>
 						<tr>
 							<td><br /></td>
 
@@ -740,8 +763,8 @@ for(Cookie cookie : cookies){
 				<tfoot>
 					<tr>
 						<td class="footerTD" colspan="2"> 
-						<button id="export" type="submit">Export</button>
-						&nbsp;&nbsp;
+						<!-- <button id="export" type="submit">Export</button>
+						&nbsp;&nbsp; -->
 						  <button id="printquestionpaperreport">Print</button>
 						</td>
 					</tr>

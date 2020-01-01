@@ -620,7 +620,7 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 										<select name="examyear" id="examyear"
 									style="width: 240px;" required>
-										<option selected value="${markssheetacademicsearch}">${markssheetacademicsearch}</option>
+										<option selected value="${studentsreportacademicsearch}">${studentsreportacademicsearch}</option>
 											<option ></option>
 											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
 											<option value="2018/19" >2018/19</option>
@@ -631,6 +631,7 @@ for(Cookie cookie : cookies){
 											<option value="2013/14" >2013/14</option>
 								</select>
 							</label> 
+							</td>
 						</tr>
 
 						<tr>

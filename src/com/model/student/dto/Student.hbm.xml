@@ -77,5 +77,8 @@
          <property name="droppedout" type="int">
             <column name="droppedout" />
         </property>
+        <property name="approvedon" type="date">
+            <column name="approvedon" length="10" />
+        </property>
     </class>
 </hibernate-mapping>

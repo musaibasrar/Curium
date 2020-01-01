@@ -1,6 +1,6 @@
 <%--
-    Document   : Language List Report
-    Created on : JUL 27, 2018, 12:59:28 PM
+    Document   : trial sheet
+    Created on : Mar 10, 2018, 5:52:28 PM
     Author     : Musaib
 --%>
 
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Language List Reports</title>
+<title>Trial Balance</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -97,7 +97,7 @@
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
-	text-align: right;
+	text-align: left;
 	vertical-align: middle;
 	font-weight: bold;
 }
@@ -242,8 +242,6 @@
 	background-color: #E3EFFF;
 }
 
-
-
 .dataTextInActive {
 	border-radius: 3px;
 	font-family: Tahoma;
@@ -297,7 +295,6 @@
 	
 }
 </style>
-
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -311,7 +308,8 @@
 <script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
 
-
+<script type="text/javascript"
+	src="js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
@@ -335,49 +333,39 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
-			"sScrollY" : "380px",
-			"bPaginate" : false,
-			"bLengthChange" : false,
-			"bFilter" : true,
-			"bSort" : true,
-			"bInfo" : true,
-			"bAutoWidth" : false
-		});
+            "sScrollY": "380px",
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": true,
+            "bStateSave": false,
+            "bProcessing": false,
+            "bServerSide": false,
+            "bAutoWidth": false,
+            "iDisplayLength": 20000,
+            "aoColumnDefs":[
+                { 'bSortable': false, 'aTargets': [ 0 ] }
+            ]
+            
+        });
 	});
-</script>
-<script type="text/javascript">
-	function select(id, name) {
-		var clipEffect = 'blind';
-		var options = {};
-
-		$("#effect").show();
-		
-
-	}
-	
 </script>
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchLanguages() {
+	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StudentProcess&action=searchLanguagesReport";
+		form1.action = "Controller?process=StampFeesProcess&action=searchForFees";
 		form1.method = "POST";
 		form1.submit();
 
 	}
 
-	function printLanguageReport() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StudentProcess&action=printLanguageReport";
-		form1.method = "POST";
-		form1.submit();
-	}
-	
 	$(function() {
 
 		$("#search").button().click(function() {
-			searchLanguages();
+			searchForFees();
 		});
 		
 
@@ -386,114 +374,22 @@
 	$(function() {
 
 		$("#tabs").tabs();
-		
-		 $("#effect").hide();
-		 
-		 $("#printlanguagereport").button({
-				icons : {
-					primary : "ui-icon-print"
-				}
-			}).click(function() {
-				printLanguageReport();
-			});
-		 
-		 $("#export").button({
-				icons : {
-					primary : "ui-icon-extlink"
-				}
-			});
 
+		$("#search").button().click(function() {
+			getApprovalsHistory();
+		});
+		$("#effect").hide();
 	});
+	
+	
+	function getApprovalsHistory(){
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=StudentProcess&action=approvalshistory";
+		form1.method = "POST";
+		form1.submit();
+	}
 	
 	$(function() {
-		
-		
-		$('#chckHead').click(function() {
-			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
-			if (length > 0) {
-				$('.chcktbl:checked').attr('checked', false);
-				this.checked = false;
-
-			} else {
-				if (this.checked == false) {
-					$('.chcktbl:checked').attr('checked', false);
-				} else {
-					$('.chcktbl:not(:checked)').attr('checked', true);
-				}
-
-			}
-
-		});
-		$('.chcktbl').click(function() {
-			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
-			alert(tdLength);
-			if (length > trLength) {
-
-				$('.chcktbl:not(:checked)').attr('disabled', true);
-			} else {
-				$('.chcktbl:not(:checked)').attr('disabled', false);
-			}
-		});
-
-		$("#go").button()
-
-	});
-	
-	
-</script>
-
-
-<script type="text/javascript">
-        
-      
-        $(document).ready(function() {
-            
-            
-            $("#dataTable").keyup(function(){
-                
-                var sum = 0.0;
-                var totalSum=0.0;
-                var column2 = $('.feesFullAmount')
-                jQuery.each(column2,function(){
-                    sum += parseFloat($(this).val());
-                });
-                
-                $('#feesTotalAmount').val(sum.toPrecision(6));
-                
-            });
-            $("#dataTable").click(function(){
-                
-                var sum = 0.0;
-                var totalSum=0.0;
-                var column2 = $('.feesFullAmount')
-                jQuery.each(column2,function(){
-                    sum += parseFloat($(this).val());
-                });
-                
-            });
-
-
-        });
-    
-    function selectAllRow(tableID){
-        var table = document.getElementById(tableID);
-        var rowCount = table.rows.length;
-        if(rowCount==1){
-            var row = table.rows[0];
-            var chkbox = row.cells[0].childNodes[0];
-            chkbox.checked=false;
-            alert('No records to select');
-        }
-        for(var i=1; i<rowCount; i++) {
-            var row = table.rows[i];
-            var chkbox = row.cells[0].childNodes[0];
-            chkbox.checked=true;
-        }
-    }
-
-    $(function() {
 		// run the currently selected effect
 		function runEffect() {
 
@@ -503,13 +399,41 @@
 		}
 		;
 		// set effect from select menu value
-		$("#add").button().click(function() {
+		$("#add").button({
+			icons : {
+				primary : "ui-icon-arrowthick-1-s"
+			}
+		}).click(function() {
 			runEffect();
 			return false;
 		});
 	});
-    
-    </script>
+	$(function() {
+		$("#fromdate").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			yearRange: "-50:+10"
+		});
+		$( "#fromdate" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$("#anim").change(function() {
+			$("#fromdate").datepicker("option", "showAnim", $(this).val());
+		});
+		
+		$("#todate").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			yearRange: "-50:+10"
+		});
+		$( "#todate" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$("#anim").change(function() {
+			$("#todate").datepicker("option", "showAnim", $(this).val());
+		});
+	});
+
+
+</script>
+
+
 
 
 
@@ -531,173 +455,120 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=StudentProcess&action=exportStudentsReport" method="POST">
-		<div style="height: 28px">
-			<button id="add">Language List Report</button>
-			<br>
+	<form id="form1">
+	
+	<div style="height: 28px">
+			<button id="add">Parameters</button>
+			<br />
 		</div>
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Language List Report</a></li>
+					<li><a href="#tabs-1">Enter Dates</a></li>
 
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
-								<tr>
-								<td class="alignRightFields" >Apply Filters<br></td>
-								</tr>
-								<tr>
-								<td class="alignRightFields"><br></td>
-								</tr>
 						<tr>
-							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
-							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
-									style="width: 240px;">
-										<option selected> ${studentsreportcentersearch}</option>
-										<option></option>
-										<c:forEach items="${branchList}" var="branchlist">
-											<option value="${branchlist.centercode}:${branchlist.centername}" >
-												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
-											</option>
-										</c:forEach>
-								</select>
+							<td><br /></td>
+						</tr>
+						<tr>
+						<td width="20%" class="alignRight">From Date(MM/DD/YYYY)&nbsp;</td>
+							<td width="28%"><label> <input name="fromdate" autocomplete="off"
+									type="text" 
+									class="textField" id="fromdate" size="36" 
+									data-validate="validate(required)">
 							</label></td>
 							
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="examlevel" id="examlevel"
-									style="width: 240px;">
-										<option selected>${studentsreportexamlevelsearch} </option>
-										<option></option>
-										<c:forEach items="${examleveldetails}" var="examleveldetails">
-											<option value="${examleveldetails.levelcode}" >
-												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
-											</option>
-										</c:forEach>
-								</select>
-							</label> 
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td class="alignRightFields">Exam Year &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="examyear" id="examyear"
-									style="width: 240px;" required>
-										<option selected value="${languageacademicsearch}">${languageacademicsearch}</option>
-											<option ></option>
-											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
-											<option value="2018/19" >2018/19</option>
-											<option value="2017/18" >2017/18</option>
-											<option value="2016/17" >2016/17</option>
-											<option value="2015/16" >2015/16</option>
-											<option value="2014/15" >2014/15</option>
-											<option value="2013/14" >2013/14</option>
-								</select>
-							</label> 
-							</td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-
-							<td width="30%" class="alignRight"></td>
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
-							</td>
-						</tr>
-
-
-						<tr>
+							<td width="20%" class="alignRight">To Date(MM/DD/YYYY)&nbsp;</td>
+							<td width="28%"><label> <input name="todate" autocomplete="off"
+									type="text" 
+									class="textField" id="todate" size="36"
+									data-validate="validate(required)">
+							</label></td>
+							
+							</tr>
+							
+							
+							<tr>
 							<td><br /></td>
 						</tr>
-
 					</table>
-					
-					
-
+					<table id="table2" width="100%" border="0" align="center">
+						<tr>
+							<td align="center">
+								<button id="search">Submit</button>
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
 
-		<div style="overflow: scroll; height: 600px">
-			<table width="100%">
-				<tr>
-					<td class="headerTD">Language List Report</td>
-				</tr>
-			</table>
-			<table width="100%" border="0" style="border-color: #4b6a84;"
-				id="myTable">
+		<div style="overflow: hidden">
+                <table width="100%">
+                    <tr>
+                        <td  class="headerTD">Approvals History</td>
+                    </tr>
 
-				<thead>
-					<tr>
-						<th title="click to sort" class="headerText">CODE</th>
-						<th title="click to sort" class="headerText">CENTER NAME</th>
-						<th title="click to sort" class="headerText">ENGLISH</th>
-						<th title="click to sort" class="headerText">URDU</th>
-						<th title="click to sort" class="headerText">HINDI</th>
-						<th title="click to sort" class="headerText">KANNADA</th>
-						<th title="click to sort" class="headerText">TOTAL</th>
-					</tr>
-				</thead>
+                    
 
-				<tbody>
-					<c:forEach items="${languagereports}" var="languagereports">
+                </table>
+                <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText"><c:out value="${languagereports.key.get(0)}" /></td>
-							<td class="dataText"><c:out value="${languagereports.key.get(1)}" /></td>
-							<td class="dataText"><c:out value="${languagereports.value.get(0)}" /></td>
-							<td class="dataText"><c:out	value="${languagereports.value.get(1)}" /></td>
-							<td class="dataText"><c:out	value="${languagereports.value.get(2)}" /></td>
-							<td class="dataText"><c:out	value="${languagereports.value.get(3)}" /></td>
-							<td class="dataText"><c:out	value="${languagereports.value.get(4)}" /></td>	
-						</tr>
-					</c:forEach>
-				</tbody>
-				<tfoot>
-					<tr>
-						<td class="footerTD" colspan="2">
-						  <!-- <button id="export" type="submit">Export</button>
-						&nbsp;&nbsp; -->
-						  <button id="printlanguagereport">Print</button>
-						</td>
-						<td class="footerTD" colspan="2">
-						  <a style="font-weight: bold;color: white;font-size: 14px;">&nbsp;&nbsp;English: ${englishcounttotal}&nbsp;&nbsp;Urdu: ${urducounttotal}&nbsp;&nbsp;Hindi: ${hindicounttotal}
-						  &nbsp;&nbsp;Kannada: ${kannadacounttotal}&nbsp;&nbsp;Total: ${totalcount}&nbsp;&nbsp;</a>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
+                    <thead>
+                        <tr>
+                            <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
+                            <th title="click to sort" class="headerText">Admission Number</th>
+                            <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th title="click to sort" class="headerText">Father/Guardian/Husband Name</th>
+                            <th title="click to sort" class="headerText">Language</th>
+                            <th title="click to sort" class="headerText">Exam Level</th>
+                            <th title="click to sort" class="headerText">District Code&nbsp;</th>
+                            <th title="click to sort" class="headerText">Center Code&nbsp;</th>
+                        </tr>
+                    </thead>
 
-		</div>
+                    <tbody>
+                        <c:forEach items="${studentList}" var="Parents">
+											
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
+                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.name}"/></td>
+                                <td class="dataText">
+								<c:if test="${(Parents.mothersname != '')}">
+								<c:out value="${Parents.mothersname}" />
+								</c:if>
+								<c:if test="${(Parents.fathersname != '')}">
+								<c:out value="${Parents.fathersname}" />
+								</c:if>
+								<c:if test="${(Parents.student.guardiandetails != '')}">
+								<c:out value="${Parents.student.guardiandetails}" />
+								</c:if>
+								</td>
+								<td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.languageopted}"/></td>
+                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.examlevel}"/></td>
+                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.districtcode}"/></td>
+                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.centercode}"/></td>
+                                <!-- <fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/>  -->
+                                <!-- <td class="dataText"><fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/></td> -->
+                                 
+
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                     <tfoot><tr>
+                            <td  class="footerTD" colspan="2" >
+                            <input type="text" style="background-color: #345c80;border: thin;" id="delete"/> &nbsp;&nbsp;&nbsp;
+                            </td>
+                    
+                        </tr></tfoot>
+                </table>
+
+            </div>
 
 
 	</form>

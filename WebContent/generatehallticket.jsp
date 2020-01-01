@@ -484,7 +484,7 @@ for(Cookie cookie : cookies){
                             </tr>
 						<tr>
 						<td width="16%" class="alignLeft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						Examination Level &nbsp;&nbsp;&nbsp;&nbsp;
+						Examination Level &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							 <label> <select name="searchexamlevel" id="searchexamlevel"
 									style="width: 180px;" required>
 										<option selected>${examlevelsearch}</option>
@@ -531,6 +531,38 @@ for(Cookie cookie : cookies){
 								</select>
 								
 								</label>
+								</td>
+						</tr>
+										
+										<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+
+						</tr>
+								
+								<tr>
+						<td width="80%" class="alignLeft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;
+						Exam Year &nbsp;&nbsp;&nbsp;&nbsp;
+							<label> 
+										<select name="examyear" id="examyear"
+									style="width: 180px;" required>
+										<option selected value="${selectedexamyear}">${selectedexamyear}</option>
+											<option ></option>
+											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2018/19" >2018/19</option>
+											<option value="2017/18" >2017/18</option>
+											<option value="2016/17" >2016/17</option>
+											<option value="2015/16" >2015/16</option>
+											<option value="2014/15" >2014/15</option>
+											<option value="2013/14" >2013/14</option>
+								</select>
+							</label> 
 								</td>
 						</tr>
 										
@@ -589,6 +621,10 @@ for(Cookie cookie : cookies){
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
+						<th title="click to sort" class="headerText">Academic Year<img
+							alt=" " style="position: relative; top: 4px;"
+							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+						</th>
 
 					</tr>
 				</thead>
@@ -605,6 +641,7 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><input type="text" name="date" class="transparent" value="<c:out value="${examschedule.date}" />" /></td>
 							<td class="dataText"><input type="text" name="starttime" class="transparent" value="<c:out value="${examschedule.starttime}" />" /></td>
 							<td class="dataText"><input type="text" name="endtime" class="transparent" value="<c:out value="${examschedule.endtime}" />" /></td>
+							<td class="dataText"><input type="text" name="examscheduleacademicyear" class="transparent" value="<c:out value="${examschedule.academicyear}" />" /></td>
 						</tr>
 					</c:forEach> 
 

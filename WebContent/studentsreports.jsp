@@ -690,7 +690,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Batch &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="academicyear" id="academicyear"
+										<select name="examyear" id="examyear"
 									style="width: 240px;">
 										<option selected value="${studentsreportacademicsearch}">${studentsreportacademicsearch}</option>
 											<option ></option>

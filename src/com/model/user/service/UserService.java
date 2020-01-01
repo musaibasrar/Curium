@@ -69,6 +69,7 @@ public class UserService {
             request.setAttribute("userType", login.getUsertype());
             httpSession.setAttribute("typeOfUser",login.getUsertype());
             httpSession.setAttribute("userAuth", login.getUsertype());
+            httpSession.setAttribute("logincentercode", login.getBranch().getCentercode()+":"+login.getBranch().getCentername());
 			//setting session to expiry in 60 mins
            	httpSession.setMaxInactiveInterval(60*60);
 			Cookie cookie = new Cookie("user",  login.getUsertype());
@@ -294,13 +295,13 @@ public class UserService {
 				querySub = querySub + " parents.Student.createddate = '"+createdDate+"'";
 			} 
 			
-			if(!remarks.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
+			/*if(!remarks.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
 				querySub = querySub + " AND parents.Student.remarks like '%"+remarks+"%'";
 			}else if(!remarks.equalsIgnoreCase("")){
 				querySub = querySub + " parents.Student.remarks like '%"+remarks+"%'";
-			}
+			}*/
 			
-			queryMain = queryMain+querySub+" AND parents.Student.archive=0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 Order By parents.Student.admissionnumber ASC";
+			queryMain = queryMain+querySub+" AND parents.Student.archive=0 AND parents.Student.passedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin')  AND parents.Student.droppedout = 0 Order By parents.Student.admissionnumber ASC";
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 			logger.info("SEARCH QUERY ***** "+queryMain);
 			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);

@@ -51,7 +51,9 @@ public class StudentAction {
                 }else if (action.equalsIgnoreCase("viewAllStudentsWithParents")) {
 			url = viewAllStudentsWithParents();
 		}else if (action.equalsIgnoreCase("AddStudent")) {
+			logger.info("********* Action : Add Student ***************** ");
 			url = addStudent();
+			logger.info("********* Action URL : Add Student ***************** "+url);
 		}else if (action.equalsIgnoreCase("ViewDetails")) {
 			url = viewStudent();
 		}else if (action.equalsIgnoreCase("updateStudentDetails")) {
@@ -176,13 +178,26 @@ public class StudentAction {
                     url = approveRecords();
                 }else if (action.equalsIgnoreCase("rejectRecords")) {
                     url = rejectRecords();
+                }else if (action.equalsIgnoreCase("rejectedapprovals")) {
+                    url = rejectedApprovals();
+                }else if (action.equalsIgnoreCase("approvalshistory")) {
+                    url = approvalsHistory();
                 }
 		return url;
 	}
 	
 	
 
-    private String promotionCenter() {
+    private String approvalsHistory() {
+    	new StudentService(request, response).approvalsHistory();
+		return "approvalshistory.jsp";
+	}
+
+	private String rejectedApprovals() {
+    	return new StudentService(request, response).rejectedApprovals();
+	}
+
+	private String promotionCenter() {
 	    new ExamLevelService(request, response).examLevels();
 	    new LanguageService(request, response).viewLanguage();
 	    new BranchService(request, response).viewBranchesCenter();
@@ -200,8 +215,7 @@ public class StudentAction {
 	}
 
 	private String pendingApprovals() {
-		 new StudentService(request, response).pendingApprovals();
-		return "pendingapprovals.jsp";
+		 return new StudentService(request, response).pendingApprovals();
 	}
 
 	private String demoteClass() {
@@ -548,7 +562,9 @@ public class StudentAction {
 	}
 
 	private String addStudent() {
+		logger.info("******* Add Student ****** ");
 		 if (new StudentService(request, response).addStudent()) {
+			 logger.info("******* Saved Student ****** ");
 	            return "saved.jsp";
 	        } else {
 	            return "notSaved.jsp";
