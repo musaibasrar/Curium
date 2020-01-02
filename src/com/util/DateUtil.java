@@ -379,6 +379,29 @@ public static Date dateParserddmmyyyy(String stringDate) {
 	return datefinal;
 }
 
+public static Date indiandateParser(String stringDate) {
+	
+	Date datefinal = null;
+	try {
+		Date date = null;
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy",
+				Locale.ENGLISH);
+		SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd");
+
+		date = (Date) formatter.parse(stringDate);
+		String secdate = dateformatter.format(date);
+
+		datefinal = (Date) dateformatter.parse(secdate);
+
+	} catch (ParseException e) {
+			e.printStackTrace();
+	
+	}
+
+	return datefinal;
+}
+
 public static String getStringDate(Date dateofbirth) {
 	
 	String date = null;

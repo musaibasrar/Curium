@@ -77,8 +77,8 @@
         <property name="placeofbirth" type="string">
             <column name="placeofbirth" length="100" />
         </property>
-        <property name="nooftc" type="java.lang.Integer">
-            <column name="nooftc" />
+        <property name="nooftc" type="string">
+            <column name="nooftc" length="50"/>
         </property>
         <property name="dateoftc" type="date">
             <column name="dateoftc" length="10" />

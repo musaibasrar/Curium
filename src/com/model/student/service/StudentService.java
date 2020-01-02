@@ -99,7 +99,7 @@ public class StudentService {
 
 		                if (fieldName.equalsIgnoreCase("dateofbirth")) {
 
-		                	student.setDateofbirth(DateUtil.dateParserddmmyyyy(item.getString()));
+		                	student.setDateofbirth(DateUtil.indiandateParser(item.getString()));
 
 		                }
 
@@ -156,7 +156,7 @@ public class StudentService {
 		                	student.setAdmissionnumber(DataUtil.emptyString(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("dateofadmission")) {
-		                	student.setAdmissiondate(DateUtil.dateParserddmmyyyy(item.getString()));
+		                	student.setAdmissiondate(DateUtil.indiandateParser(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("bloodgroup")) {
 		                    student.setBloodgroup(DataUtil.emptyString(item.getString()));
@@ -174,7 +174,7 @@ public class StudentService {
 		                    student.setMothertongue(DataUtil.emptyString(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("createddate")) {
-		                    student.setCreateddate(DateUtil.dateParserddmmyyyy(item.getString()));
+		                    student.setCreateddate(DateUtil.indiandateParser(item.getString()));
 		                }
 		                // @UI 'Any other languages spoken'
 		                if (fieldName.equalsIgnoreCase("remarks")) {
@@ -190,10 +190,10 @@ public class StudentService {
 		                	student.setPlaceofbirth(DataUtil.emptyString(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("tcno")) {
-		                	student.setNooftc(DataUtil.parseInt(item.getString()));
+		                	student.setNooftc(DataUtil.emptyString(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("dateoftc")) {
-		                	student.setDateoftc(DateUtil.dateParserddmmyyyy(item.getString()));
+		                	student.setDateoftc(DateUtil.indiandateParser(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("classonleaving")) {
 		                	student.setClassonleaving(DataUtil.emptyString(item.getString()));
@@ -203,7 +203,7 @@ public class StudentService {
 		                	student.setSubsequentprogress(DataUtil.emptyString(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("dateofleaving")) {
-		                	student.setDateleaving(DateUtil.dateParserddmmyyyy(item.getString()));
+		                	student.setDateleaving(DateUtil.indiandateParser(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("reasonforleaving")) {
 		                	student.setReasonleaving(DataUtil.emptyString(item.getString()));
@@ -212,7 +212,7 @@ public class StudentService {
 		                	student.setNotcissued(DataUtil.parseInt(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("dateoftcissued")) {
-		                	student.setDatetcissued(DateUtil.dateParserddmmyyyy(item.getString()));
+		                	student.setDatetcissued(DateUtil.indiandateParser(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("guardian")) {
 		                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
@@ -764,7 +764,7 @@ public class StudentService {
 
 	                if (fieldName.equalsIgnoreCase("dateofbirth")) {
 
-	                	student.setDateofbirth(DateUtil.dateParserddmmyyyy(item.getString()));
+	                	student.setDateofbirth(DateUtil.indiandateParser(item.getString()));
 
 	                }
 
@@ -839,7 +839,7 @@ public class StudentService {
 	                }
 
 	                if (fieldName.equalsIgnoreCase("dateofadmission")) {
-	                	student.setAdmissiondate(DateUtil.dateParserddmmyyyy(item.getString()));
+	                	student.setAdmissiondate(DateUtil.indiandateParser(item.getString()));
 	                }
 
 
@@ -868,7 +868,7 @@ public class StudentService {
 	                }
 
 	                if (fieldName.equalsIgnoreCase("createddate")) {
-	                    student.setCreateddate(DateUtil.dateParserddmmyyyy(item.getString()));
+	                    student.setCreateddate(DateUtil.indiandateParser(item.getString()));
 	                }
 
 	                if (fieldName.equalsIgnoreCase("remarks")) {
@@ -912,10 +912,10 @@ public class StudentService {
 	                	student.setPlaceofbirth(DataUtil.emptyString(item.getString()));
 	                }
 	                if (fieldName.equalsIgnoreCase("tcno")) {
-	                	student.setNooftc(DataUtil.parseInt(item.getString()));
+	                	student.setNooftc(DataUtil.emptyString(item.getString()));
 	                }
 	                if (fieldName.equalsIgnoreCase("dateoftc")) {
-	                	student.setDateoftc(DateUtil.dateParserddmmyyyy(item.getString()));
+	                	student.setDateoftc(DateUtil.indiandateParser(item.getString()));
 	                }
 	                if (fieldName.equalsIgnoreCase("classonleaving")) {
 	                	student.setClassonleaving(DataUtil.emptyString(item.getString()));
@@ -924,7 +924,7 @@ public class StudentService {
 	                	student.setSubsequentprogress(DataUtil.emptyString(item.getString()));
 	                }
 	                if (fieldName.equalsIgnoreCase("dateofleaving")) {
-	                	student.setDateleaving(DateUtil.dateParserddmmyyyy(item.getString()));
+	                	student.setDateleaving(DateUtil.indiandateParser(item.getString()));
 	                }
 	                if (fieldName.equalsIgnoreCase("reasonforleaving")) {
 	                	student.setReasonleaving(DataUtil.emptyString(item.getString()));
@@ -933,7 +933,7 @@ public class StudentService {
 	                	student.setNotcissued(DataUtil.parseInt(item.getString()));
 	                }
 	                if (fieldName.equalsIgnoreCase("dateoftcissued")) {
-	                	student.setDatetcissued(DateUtil.dateParserddmmyyyy(item.getString()));
+	                	student.setDatetcissued(DateUtil.indiandateParser(item.getString()));
 	                }
 	                if (fieldName.equalsIgnoreCase("guardian")) {
 	                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
@@ -990,15 +990,20 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("rte")) {
 	                	student.setRte(DataUtil.parseInt(item.getString()));
 	                }
-	                if (fieldName.equalsIgnoreCase("passedout")) {
-	                	student.setPassedout(DataUtil.parseInt(item.getString()));
-	                }
-	                if (fieldName.equalsIgnoreCase("leftout")) {
+	                if(fieldName.equalsIgnoreCase("studentarchiveupdate")){
+	                    student.setArchive(DataUtil.parseInt(item.getString()));
+                        }
+	                if(fieldName.equalsIgnoreCase("studentdroppedoutupdate")){
+	                    student.setDroppedout(DataUtil.parseInt(item.getString()));
+                        }
+	                if(fieldName.equalsIgnoreCase("studentpassedoutupdate")){
+	                    student.setPassedout(DataUtil.parseInt(item.getString()));
+                        }
+	                if (fieldName.equalsIgnoreCase("studentleftoutupdate")) {
 	                	student.setLeftout(DataUtil.parseInt(item.getString()));
 	                }
-	                if (fieldName.equalsIgnoreCase("droppedout")) {
-	                	student.setDroppedout(DataUtil.parseInt(item.getString()));
-	                }
+	                
+	                
 	                // Updating paretns information
 	                
 	                parents.setPid(parentsId);
@@ -1372,7 +1377,7 @@ public class StudentService {
 		}else {
 			student.setSpecialcategory(newcateg);
 		}
-		 student.setArchive(0);
+		 //student.setArchive(0);
 		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		 
 		 if(puDetails.getIdpudetails()!=null) {

@@ -50,7 +50,7 @@ public class Student implements java.io.Serializable {
 	private String crecord;
 	private Date crecorddate;
 	private String placeofbirth;
-	private Integer nooftc;
+	private String nooftc;
 	private Date dateoftc;
 	private String classonleaving;
 	private Date dateleaving;
@@ -110,7 +110,7 @@ public class Student implements java.io.Serializable {
 			String remarks, String schoollastattended, String stdlaststudied,
 			Date createddate, Integer archive, String studentpic,
 			String studentexternalid, String crecord, Date crecorddate,
-			String placeofbirth, Integer nooftc, Date dateoftc,
+			String placeofbirth, String nooftc, Date dateoftc,
 			String classonleaving, Date dateleaving, String reasonleaving,
 			Integer notcissued, Date datetcissued, String guardiandetails, int branchid,
 			String languagesstudied, String instructionmediumlastschool,
@@ -406,11 +406,11 @@ public class Student implements java.io.Serializable {
 	}
 
 	@Column(name = "nooftc")
-	public Integer getNooftc() {
+	public String getNooftc() {
 		return this.nooftc;
 	}
 
-	public void setNooftc(Integer nooftc) {
+	public void setNooftc(String nooftc) {
 		this.nooftc = nooftc;
 	}
 

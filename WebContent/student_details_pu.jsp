@@ -9,6 +9,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
     <head>
@@ -457,7 +458,7 @@ for(Cookie cookie : cookies){
                         
                             <td width="25%"   class="alignLeft" height="50" >SATS Number</td>
                              <td width="25%" class="tablerows">
-                                <c:out default="" value="${student.sts}" /> : 
+                                <c:out default="" value="${student.sts}" />
                             </td>
                         </tr>
 
@@ -477,7 +478,7 @@ for(Cookie cookie : cookies){
                             <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
                             <td width="25%" class="tablerows" >
                                 <%-- <c:out value="${student.dateofbirth}" /> --%>
-                                <fmt:formatDate value="${student.dateofbirth}" pattern="yyyy-MM-dd"/>
+                                <fmt:formatDate value="${student.dateofbirth}" pattern="dd/MM/yyyy"/>
                                 
                             </td>
                             <td width="25%"  class="alignLeft" height="50" >Age
@@ -491,11 +492,28 @@ for(Cookie cookie : cookies){
                             <td width="25%"  class="tablerows" >
                               <c:out default="" value="${student.placeofbirth}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50">No. & date of Transfer Certificate
+                            <td width="25%"  class="alignLeft" height="50">Transfer Certificate No. & date
                             </td>
                             <td  width="25%" class="tablerows" >
                                <c:out default="" value="${student.nooftc}" />:
-                               <fmt:formatDate value="${student.crecorddate}" pattern="yyyy-MM-dd"/>
+                               <fmt:formatDate value="${student.dateoftc}" pattern="dd/MM/yyyy"/>
+                            </td>
+                        </tr>
+                        
+                         <tr>
+                            <td width="25%"  class="alignLeft" height="50" >Studying in class</td>
+                            <td  width="25%"  class="tablerows">
+                            <c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
+						    ${splt} 
+							</c:forEach>
+                               <%--  <c:out default="" value="${student.classstudying}" /> --%>
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50">Admitted in class
+                            </td>
+                            <td width="25%" class="tablerows">
+		                            <c:forEach var="splt" items="${fn:split(student.classadmittedin,'--')}">
+								    ${splt} 
+									</c:forEach>
                             </td>
                         </tr>
                         
@@ -603,13 +621,13 @@ for(Cookie cookie : cookies){
                         <td  width="25%"  class="alignLeft" height="50" >Date of admission
                             </td>
                             <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.admissiondate}" />
+                                <fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>
                             </td>
                              <td  width="25%"  class="alignLeft" height="50">Created Date
                             </td>
                             <td width="25%" class="tablerows">
                                 <%-- <c:out default="" value="${student.createddate}" /> --%>
-                                <fmt:formatDate value="${student.createddate}" pattern="yyyy-MM-dd"/>
+                                <fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>
                             </td>
                           
                            
@@ -624,39 +642,9 @@ for(Cookie cookie : cookies){
                                 
                             </td>
                         </tr>
-                                                
-                        <tr>
-                            <td  width="25%"  class="alignLeft" height="50" >Class of leaving
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.classonleaving}" />
-                            </td>
-                            
-                             <td  width="25%"  class="alignLeft" height="50">Date of leaving the school
-                            </td>
-                            <td width="25%" class="tablerows">
-                                <fmt:formatDate value="${student.dateleaving}" pattern="yyyy-MM-dd"/>
-                            </td>
-                          
-                           
-                        </tr>
-                        
-                        <tr>
-                            <td  width="25%"  class="alignLeft" height="50" >Reason for leaving
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.reasonleaving}" />
-                            </td>
-                            
-                             <td  width="25%"  class="alignLeft" height="50">No. & date of transfer certificate issued
-                            </td>
-                            <td width="25%" class="tablerows">
-                            <c:out default="" value="${student.notcissued}" /> :
-                                <fmt:formatDate value="${student.datetcissued}" pattern="yyyy-MM-dd"/>
-                            </td>
-                        </tr>
-                        
-                        
+                				 <tr>
+									<td align="center"><h3 style="text-decoration: underline;color: #eb6000">Student's Details-2:</h3><br /></td>
+								</tr>                               
                           <tr>
                             <td  width="25%"  class="alignLeft" height="50" >Particulars of the Examination passed
                             </td>
@@ -757,52 +745,6 @@ for(Cookie cookie : cookies){
 
             </div>
             
-            <div class="accordion" style="width: 100%;height: 100%">
-		
-                <h3><a href="#">Bank Details</a></h3>
-                <div>
-
-                    <table  border="0px" width="100%"  id="table1" align="center">
-                         <tr>
-                            <td  width="25%"  class="alignLeft" height="50" >Bank Name
-                           
-                            </td>
-                            <td width="25%" class="tablerows" >
-                              ${student.bankname}
-                            </td>
-                            
-                             <td  width="25%"  class="alignLeft" height="50">Bank IFSC Code
-                            </td>
-                            <td width="25%" class="tablerows">
-                                ${student.bankifsc}
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                            <td  width="25%"  class="alignLeft" height="50" >Account No.
-                            </td>
-                            <td width="25%" class="tablerows" >
-                               ${student.accno}
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                            <td  width="25%"  class="alignLeft" height="50">
-                            </td>
-                            <td width="25%" class="tablerows" >
-
-                            </td>
-                            <td  width="25%"  class="alignLeft" height="50">
-                            </td>
-                            <td width="25%" class="tablerows">
-
-                            </td>
-                        </tr>
-                        
-                    </table>
-                </div>
-    </div>
-    
             <div id="accordion1" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Parent's Details</a></h3>
@@ -916,11 +858,6 @@ for(Cookie cookie : cookies){
                     
 
                 </div>
-
-
-
-
-
 
             </div>
               <div id="accordion2" style="width: 100%;height: 100%">
@@ -1036,12 +973,52 @@ for(Cookie cookie : cookies){
 
                 </div>
 
-
-
-
-
-
             </div>
+            <div class="accordion" style="width: 100%;height: 100%">
+		
+                <h3><a href="#">Bank Details</a></h3>
+                <div>
+
+                    <table  border="0px" width="100%"  id="table1" align="center">
+                         <tr>
+                            <td  width="25%"  class="alignLeft" height="50" >Bank Name
+                           
+                            </td>
+                            <td width="25%" class="tablerows" >
+                              ${student.bankname}
+                            </td>
+                            
+                             <td  width="25%"  class="alignLeft" height="50">Bank IFSC Code
+                            </td>
+                            <td width="25%" class="tablerows">
+                                ${student.bankifsc}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50" >Account No.
+                            </td>
+                            <td width="25%" class="tablerows" >
+                               ${student.accno}
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows" >
+
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows">
+
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </div>
+    </div>
             <table  width="70%"  id="table11" align="center">
                         <tr>
                             <td width="30%"> 

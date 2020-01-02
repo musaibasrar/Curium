@@ -150,10 +150,11 @@ span{
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
+             margin-bottom: 1cm;
+             margin-top: 1cm;
+             size: auto;
         }
 
         @media screen {
@@ -168,7 +169,13 @@ span{
         }
         
         .subjectdetails{
-        	border: 1px solid #dddddd;
+        	border: 1px solid black;
+    		text-align: left;
+   		    padding: 8px;
+        }
+        
+        .nosubjectdetails{
+        	border: 0px;
     		text-align: left;
    		    padding: 8px;
         }
@@ -176,11 +183,34 @@ span{
          .namedetails{
         	border: 0px solid #dddddd;
     		text-align: left;
+   		    padding: 4px;
+        }
+         .namedetailscenter{
+        	border: 0px solid #dddddd;
+    		text-align: right;
    		    padding: 8px;
         }
+        
+        .datatable {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.datatd, .datath {
+    border: 1px solid #000000;
+    text-align: left;
+    padding: 8px;
+}
+
     </style>
-	
-        <title>Print Hall Ticket</title>
+	<script type="text/javascript">
+                       
+		window.onload = function(){
+		window.print();
+		}
+        </script>
+	<title> </title>
         
 </head>
   <%
@@ -204,22 +234,23 @@ for(Cookie cookie : cookies){
 	<form method="post" class="bodymargin">
                         <c:forEach items="${studentList}" var="Parents">
                         
-                        	<table width="100%" style="border-collapse: collapse;">
+                        <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
+                        	<table style="page-break-inside: avoid;border-collapse: collapse;">
 			<tr>
-				<td class="dataTextBoldCenter" style="width: 100%">
-				
-				Divine M.A. English Higher Primary & High School </td>
+				<td width="10%"></td>
+				<td><img src="images/curiumheader.png" width="190" height="60"/></td>
+				<td width="5%"></td>
+				<td>
+				<label class="dataTextBoldCenter">Divine M.A. English Higher Primary & High School </label><br>
+				<label class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</label>
+				</td>
 			</tr>
-			<tr>
-			<td class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</td>
-			</tr>
-
 			<tr>
 			<td></td></tr>
 			<tr></tr>
 </table>
 
-<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
                 <tr>
 
                     <td colspan="4" ></td>
@@ -228,7 +259,7 @@ for(Cookie cookie : cookies){
             </TABLE>
 
 			<table width="100%" style="border-collapse: collapse;">
-					<tr><td><br></td></tr>
+					
 				<tr>
 					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket (${examname})
 					</td>
@@ -273,7 +304,7 @@ for(Cookie cookie : cookies){
                             	<th class="subjectdetails">Time</th>
                             	<th class="subjectdetails">Examiner's Sign</th>
                             	</tr>
-                            	
+                            	</thead>
                             	<tbody>
                             	<c:forEach items="${examschedulelist}" var="examschedulelist">
                              	<tr>
@@ -284,47 +315,26 @@ for(Cookie cookie : cookies){
                                 </tr>
                                  </c:forEach>
                        
-                    </tbody>
-                            	</thead>
-                            	
-                            
+                   				 </tbody>
                             </table>
                             
                             
                             <TABLE id="dataTable" width="100%" border="0"
-			style="page-break-after: always; border-collapse: collapse;">
+			style="page-break-inside:avoid; border-collapse: collapse;">
 
-			<tr>
-			<td>
-			<br>
-			<br><br><br></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-		<tr>
-		<td></td>
-		<td align="left">Accountant</td>	
-			<td align="centre">Class Teacher</td>
-			<td align="centre">Head Master</td>
-			</tr>
-			
-			<tr>
-                        <td align="center"><br><br><br><br><br></td>
-                    </tr>
-             
-             <tr>
-            	<td>
-            		
-                   <button id="print" onclick="window.print();" 
-                   this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide">Print</button>     
-                </td>
-             </tr>
+						<tr>
+							<td><br><br><br></td>
+						</tr>
+				<tr>
+				<td></td>
+				<td align="left">Accountant</td>	
+					<td align="centre">Class Teacher</td>
+					<td align="centre">Head Master</td>
+					</tr>
                     
 		</TABLE>
+		</div>
+		<br><br><br>
                                  
                         </c:forEach>
 			

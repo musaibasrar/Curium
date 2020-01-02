@@ -272,9 +272,9 @@
 		$("#datepicker").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
 		});
@@ -283,9 +283,9 @@
 		$("#datepicker1").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepicker1" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepicker1").datepicker("option", "showAnim", $(this).val());
 		});
@@ -295,10 +295,9 @@
 		$("#dateoftc").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#dateoftc" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateoftc").datepicker("option", "showAnim",
@@ -310,9 +309,9 @@
 		$("#dateofadmission").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#dateofadmission" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateofadmission").datepicker("option", "showAnim",
@@ -324,9 +323,9 @@
 		$("#dateofleaving").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#dateofleaving" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateofleaving").datepicker("option", "showAnim",
@@ -338,9 +337,9 @@
 		$("#dateoftcissued").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#dateoftcissued" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateoftcissued").datepicker("option", "showAnim",
@@ -352,9 +351,9 @@
 		$("#datepickerCD").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
 		});
@@ -390,16 +389,6 @@
 		obj.value = obj.value.replace(reg, "");
 	}
 
-	function validateContact() {
-
-		if (document.getElementById("contactNO").value.length == 0) {
-			document.getElementById("contactNO").style.background = 'red';
-
-			alert("Enter Contact number");
-
-		}
-
-	}
 
 	function validateContactNum(obj) {
 
@@ -536,10 +525,10 @@
 
 	function CalculateAge(value) {
 		var dateOfBirth = document.getElementById('datepicker').value;
-		var splitDate = dateOfBirth.split('-');
-		var dateOfBirthSplit = splitDate[1]+"-"+splitDate[0]+"-"+splitDate[2]
+		var from = dateOfBirth.split("/");
 		var today = new Date();
-		var birthDate = new Date(dateOfBirthSplit);
+		var birthDate = new Date(from[2],from[1] - 1,from[0]);
+		var month = birthDate.getMonth();
 		var age = today.getFullYear() - birthDate.getFullYear();
 		var m = today.getMonth() - birthDate.getMonth();
 		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
@@ -651,7 +640,7 @@
 							<td width="16%" class="alignRight">STS Number &nbsp;</td>
 
 									<td width="28%"><label> <input
-											name="sts" type="text" class="myclass" size="30"
+											name="sts" type="text" class="myclass" size="30" maxlength="9"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="sts" size="30">
 
@@ -697,8 +686,7 @@
 							<td width="28%"><label> <input name="dateofbirth"
 									type="text" class="myclass" id="datepicker" size="30" autocomplete="false"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
+									onchange="CalculateAge(this)" readonly="readonly">
 							</label></td>
 
 							<td width="30%" class="alignRight">Age &nbsp;</td>
@@ -732,8 +720,7 @@
 							<td width="28%"><label><input name="dateofadmission"
 									type="text" class="myclass" id="dateofadmission" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"
-									data-validate="validate(required)"> </label></td>
+									data-validate="validate(required)" readonly="readonly"> </label></td>
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -864,7 +851,7 @@
 							</label> --> <label> <select name="religion"
 									onblur="validateNameContact();" id="religion"
 									style="width: 256px"
-									onkeypress="return validateContactNum(this);">
+									>
 										<option selected></option>
 										<option>Islam</option>
 										<option>Hinduism</option>
@@ -973,7 +960,7 @@
 							</label> --> <label> <select name="motherT"
 									onblur="validateNameContact();" id="motherT"
 									style="width: 256px"
-									onkeypress="return validateContactNum(this);">
+									>
 										<option selected></option>
 										<option>Urdu</option>
 										<option>Hindi</option>
@@ -1024,7 +1011,7 @@
 							<td width="20%" class="alignRight">Created Date &nbsp;</td>
 							<td width="28%"><label> <input name="createddate"
 									type="text"
-									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
 									class="myclass" id="datepickerCD" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"s
 									data-validate="validate(required)">
@@ -1054,8 +1041,8 @@
 									<td class="alignRight">Date of Transfer Certificate&nbsp;</td>
 							<td ><label >
 							<input name="dateoftc" type="text" class="myclass"
-									id="dateoftc" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									id="dateoftc" size="30" autocomplete="false"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;" 
 									data-validate="validate(required)"></label></td>
 
 						</tr>
@@ -1112,7 +1099,7 @@
 
 							<td class="alignRight">Date of leaving school with reasons &nbsp;</td>
 							<td><label> <input
-									name="progress" type="text"
+									name="progress" type="text" 
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									class="myclass" id="progress" size="30">
 							</label></td>
@@ -1281,7 +1268,7 @@
 									<td ><label> <input name="guardian"
 											type="text" class="myclass" id="guardian" size="30"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-											onclick="validateNameContact();">
+											>
 									</label></td>
 
 
@@ -1421,7 +1408,7 @@
 								<td ><label> <textarea
 											name="permanentaddress" type="text" 
 											id="permanentaddress" rows="4" cols="40"
-											onkeypress="return validateContactNum(this);"></textarea>
+											></textarea>
 
 								</label></td>
 
@@ -1702,7 +1689,7 @@
 											name="reasonforleaving" type="text" class="myclass"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="reasonforleaving" size="30"
-											onkeypress="return validateContactNum(this);">
+											>
 
 									</label></td>
 
