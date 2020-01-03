@@ -477,7 +477,7 @@ for(Cookie cookie : cookies){
                             <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
                             <td width="25%" class="tablerows" >
                                 <%-- <c:out value="${student.dateofbirth}" /> --%>
-                                <fmt:formatDate value="${student.dateofbirth}" pattern="dd-MM-yyyy"/>
+                                <fmt:formatDate value="${student.dateofbirth}" pattern="dd/MM/yyyy"/>
                                 
                             </td>
                             <td width="25%"  class="alignLeft" height="50" >Age
@@ -494,7 +494,7 @@ for(Cookie cookie : cookies){
                            <td  width="25%"  class="alignLeft" height="50" >Date of admission
                             </td>
                             <td width="25%" class="tablerows" >
-                            	<fmt:formatDate value="${student.admissiondate}" pattern="dd-MM-yyyy"/>
+                            	<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>
                             </td>
                         </tr>  
                         
@@ -650,7 +650,7 @@ for(Cookie cookie : cookies){
                             </td>
                             <td width="25%" class="tablerows">
                                 <%-- <c:out default="" value="${student.createddate}" /> --%>
-                                <fmt:formatDate value="${student.createddate}" pattern="dd-MM-yyyy"/>
+                                <fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>
                             </td>
    
                         </tr>
@@ -665,7 +665,7 @@ for(Cookie cookie : cookies){
                              <td  width="25%"  class="alignLeft" height="50">Date of leaving the school
                             </td>
                             <td width="25%" class="tablerows">
-                                <fmt:formatDate value="${student.dateleaving}" pattern="dd-MM-yyyy"/>
+                                <fmt:formatDate value="${student.dateleaving}" pattern="dd/MM/yyyy"/>
                             </td>
                           
                            
@@ -682,7 +682,7 @@ for(Cookie cookie : cookies){
                             </td>
                             <td width="25%" class="tablerows">
                             <c:out default="" value="${student.notcissued}" /> :
-                                <fmt:formatDate value="${student.datetcissued}" pattern="dd-MM-yyyy"/>
+                                <fmt:formatDate value="${student.datetcissued}" pattern="dd/MM/yyyy"/>
                             </td>
                           
                            
@@ -722,7 +722,7 @@ for(Cookie cookie : cookies){
                              <td width="25%"  class="alignLeft" height="50">Date of Transfer Certificate
                             </td>
                             <td  width="25%" class="tablerows" >
-                               <fmt:formatDate value="${student.dateoftc}" pattern="dd-MM-yyyy"/>
+                               <fmt:formatDate value="${student.dateoftc}" pattern="dd/MM/yyyy"/>
                             </td>
                         </tr>
                         

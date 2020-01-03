@@ -273,9 +273,9 @@
 		$("#datepicker").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
 		});
@@ -284,9 +284,9 @@
 		$("#datepicker1").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepicker1" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepicker1").datepicker("option", "showAnim", $(this).val());
 		});
@@ -296,10 +296,9 @@
 		$("#dateoftc").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#dateoftc" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateoftc").datepicker("option", "showAnim",
@@ -311,9 +310,9 @@
 		$("#dateofadmission").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#dateofadmission" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateofadmission").datepicker("option", "showAnim",
@@ -325,9 +324,9 @@
 		$("#dateofleaving").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#dateofleaving" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateofleaving").datepicker("option", "showAnim",
@@ -339,9 +338,9 @@
 		$("#dateoftcissued").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#dateoftcissued" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateoftcissued").datepicker("option", "showAnim",
@@ -353,9 +352,9 @@
 		$("#datepickerCD").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
 		});
@@ -365,116 +364,11 @@
 </script>
 
 
-
-<script>
-	function validateFormNo() {
-		if (document.getElementById("formNo").value.length == 0)
-
-		{
-			document.getElementById("formNo").style.background = 'red';
-			alert("Enter The Form Number");
-		}
-	}
-
-	function validateFormNum(obj) {
-		document.getElementById("formNo").style.background = 'white';
-
-		reg = /[^0-9]/g;
-		obj.value = obj.value.replace(reg, "");
-	}
-
-	function validateNameAlpha(obj) {
-
-		document.getElementById("name").style.background = 'white';
-
-		reg = /[^a-z]/g;
-		obj.value = obj.value.replace(reg, "");
-	}
-
-	function validateContact() {
-
-		if (document.getElementById("contactNO").value.length == 0) {
-			document.getElementById("contactNO").style.background = 'red';
-
-			alert("Enter Contact number");
-
-		}
-
-	}
-
-	function validateContactNum(obj) {
-
-		document.getElementById("contactNO").style.background = 'white';
-
-		reg = /[^0-9]/g;
-		obj.value = obj.value.replace(reg, "");
-
-	}
-
-	function validateNameContact() {
-		if (document.getElementById("name").value.length == 0)
-
-		{
-			document.getElementById("name").style.background = 'red';
-			alert("Enter The Name ");
-		}
-
-	}
-	function validateAdmissionNumber() {
-		if (document.getElementById("admnno").value.length == 0)
-
-		{
-			document.getElementById("admnno").style.background = 'red';
-			alert("Enter The Admission Number ");
-		}
-
-	}
-	function selectOnlyThis(id) {
-	    for (var i = 1;i <= 2; i++)
-	    {
-	        document.getElementById(i).checked = false;
-	    }
-	    document.getElementById(id).checked = true;
-	}
-	
-</script>
-
-
 <script type="text/javascript">
 	$(function() {
 
 		
-		$("#save").button().click(function() {
-			addStudent();
-
-		});
-		
-		$("#saveone").button().click(function() {
-			addStudent();
-
-		});
-		
-		$("#savetwo").button().click(function() {
-			addStudent();
-
-		});
-		
-		$("#savethree").button().click(function() {
-			addStudent();
-
-		});
-		
-		$("#savefour").button().click(function() {
-			addStudent();
-
-		});
-		
-		$("#savefive").button().click(function() {
-			addStudent();
-
-		});
-		
-		$("#savesix").button().click(function() {
+		$(".save").button().click(function() {
 			addStudent();
 
 		});
@@ -571,10 +465,10 @@
 
 	function CalculateAge(value) {
 		var dateOfBirth = document.getElementById('datepicker').value;
-		var splitDate = dateOfBirth.split('-');
-		var dateOfBirthSplit = splitDate[1]+"-"+splitDate[0]+"-"+splitDate[2]
+		var from = dateOfBirth.split("/");
 		var today = new Date();
-		var birthDate = new Date(dateOfBirthSplit);
+		var birthDate = new Date(from[2],from[1] - 1,from[0]);
+		var month = birthDate.getMonth();
 		var age = today.getFullYear() - birthDate.getFullYear();
 		var m = today.getMonth() - birthDate.getMonth();
 		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
@@ -583,7 +477,6 @@
 		//return age;
 		document.getElementById('age').value = age;
 	}
-	
 	
 	function yesCheck(id) {
 
@@ -659,9 +552,9 @@
 			<div id="tabs">
 				<ul>
 					<li><a href="#fragment-1">Student's Details</a></li>
-					<li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-2">Parent's Details</a></li>
 					<li><a href="#fragment-3">Upload Photo</a></li>
+					<li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
 				</ul>
@@ -679,11 +572,9 @@
 
 						<tr>
 							<td width="20%" class="alignRight">Admission Number* &nbsp;</td>
-							<td width="28%"><label> <input name="admnno"
+							<td width="28%"><label> <input name="admnno" required
 									type="text" class="myclass" id="admnno" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									onblur="validateAdmissionNumber();"
-									onkeypress="return validateContactNum(this);">
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
 
 							</label></td>
 							<td width="16%" class="alignRight">STS Number &nbsp;</td>
@@ -705,7 +596,7 @@
 						<tr>
 							<td width="30%" class="alignRight">Student Name* &nbsp;</td>
 							<td width="30%" align="left"><label> <input
-									name="name" type="text" class="myclass" id="name" size="30"
+									name="name" type="text" class="myclass" id="name" size="30" required
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									required>
 							</label></td>
@@ -743,7 +634,7 @@
 							<td width="12%" align="left"><label> <input
 									name="age" type="text" class="myclass" id="age" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									onblur="validateName();">
+									>
 							</label></td>
 
 
@@ -767,10 +658,9 @@
 							</label></td>
 							
 							<td width="20%" class="alignRight">Date of admission&nbsp;</td>
-							<td width="28%"><label><input name="dateofadmission"
+							<td width="28%"><label><input name="dateofadmission" autocomplete="false"
 									type="text" class="myclass" id="dateofadmission" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"
 									data-validate="validate(required)"> </label></td>
 						</tr>
 						<tr>
@@ -900,9 +790,8 @@
 									onkeypress="return validateContactNum(this);">
 
 							</label> --> <label> <select name="religion"
-									onblur="validateNameContact();" id="religion"
-									style="width: 256px"
-									onkeypress="return validateContactNum(this);">
+									id="religion"
+									style="width: 256px">
 										<option selected></option>
 										<option>Islam</option>
 										<option>Hinduism</option>
@@ -1047,9 +936,8 @@
 									onkeypress="return validateContactNum(this);">
 
 							</label> --> <label> <select name="motherT"
-									onblur="validateNameContact();" id="motherT"
-									style="width: 256px"
-									onkeypress="return validateContactNum(this);">
+									 id="motherT"
+									style="width: 256px">
 										<option selected></option>
 										<option>Urdu</option>
 										<option>Hindi</option>
@@ -1085,7 +973,7 @@
 							<td width="28%"><label> <input name="remarks"
 									type="text" class="myclass" id="remarks" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									onclick="validateNameContact();">
+									>
 							</label></td>
 						</tr>
 
@@ -1100,7 +988,7 @@
 							<td width="20%" class="alignRight">Created Date &nbsp;</td>
 							<td width="28%"><label> <input name="createddate"
 									type="text"
-									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
 									class="myclass" id="datepickerCD" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"s
 									data-validate="validate(required)">
@@ -1141,9 +1029,7 @@
 									<td align="center">
 
 
-										<button id="save" 
-											onmouseover="validateNameContact();validateAdmissionNumber();"
-											onfocus="validateNameContact();">Save</button>
+										<button id="savestudents" class="save" name="savestudent">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="cancel" class="cancel">Cancel</button>
@@ -1196,9 +1082,7 @@
 										<td align="center">
 
 
-											<button id="savethree" 
-												onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
-												onfocus="validateNameContact();validateFatherName();">Save</button>
+											<button id="savethree" class="save" name="savestudent">Save</button>
 
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<button id="cancelthree" class="cancel">Cancel</button>
@@ -1253,7 +1137,7 @@
 									<td class="alignRight">Date of leaving the
 										school&nbsp;</td>
 									<td align="left"><label> <input
-											name="dateofleaving" type="text" class="myclass"
+											name="dateofleaving" type="text" class="myclass" autocomplete="false"
 											id="dateofleaving" size="40"
 											data-validate="validate(required)"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
@@ -1280,7 +1164,7 @@
 											name="reasonforleaving" type="text" class="myclass"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="reasonforleaving" size="30"
-											onkeypress="return validateContactNum(this);">
+											>
 
 									</label></td>
 
@@ -1290,7 +1174,7 @@
 										certificate issued&nbsp;</td>
 
 									<td ><label> <input name="notcissued"
-									style="height: 18px;font-size: 13px;font-weight: bold;"
+									style="height: 18px;font-size: 13px;font-weight: bold;" autocomplete="false"
 											type="text" class="myclass" id="notcissued" size="30" placeholder="No. of Transfer Certificate">
 									</label></td>
 
@@ -1302,7 +1186,7 @@
 								<td></td>
 									<td><label>
 											<input
-											name="dateoftcissued" type="text" class="myclass"
+											name="dateoftcissued" type="text" class="myclass" autocomplete="false"
 											id="dateoftcissued" size="30" placeholder="Date of Transfer Certificate"
 											style="height: 18px;font-size: 13px;font-weight: bold;"
 											data-validate="validate(required)">
@@ -1343,9 +1227,7 @@
 									<td align="center">
 
 
-										<button id="savefour" 
-											onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
-											onfocus="validateNameContact();validateFatherName();">Save</button>
+										<button id="savefour" class="save" name="savestudent">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="cancelfour" class="cancel">Cancel</button>
@@ -1383,7 +1265,7 @@
 								<tr>
 									<td class="alignRight">Father's Name* &nbsp;</td>
 									<td align="left"><label> <input
-											name="fathersname" type="text" class="myclass"
+											name="fathersname" type="text" class="myclass" required
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="fathersname" size="30"
 											required> <!-- onkeyup="check(this.value);"  -->
@@ -1391,7 +1273,7 @@
 
 									<td class="alignRight">Mother's Name* &nbsp;</td>
 									<td align="left"><label> <input
-											name="mothersname" type="text" class="myclass" id="name"
+											name="mothersname" type="text" class="myclass" id="name" required
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											size="30"> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
@@ -1467,7 +1349,7 @@
 									<td ><label> <input name="guardian"
 											type="text" class="myclass" id="guardian" size="30"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-											onclick="validateNameContact();">
+											>
 									</label></td>
 
 
@@ -1493,10 +1375,10 @@
 
 								<tr>
 
-									<td class="alignRight">Contact Number &nbsp;</td>
+									<td class="alignRight">Contact Number* &nbsp;</td>
 
 									<td><label> <input
-											name="contactnumber" type="text" class="myclass"
+											name="contactnumber" type="text" class="myclass" required
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 											id="contactnumber" size="30" maxlength="10" minlength="10">
 
@@ -1530,7 +1412,7 @@
 									<td ><label> <input name="email"
 											type="email" class="myclass" id="email" size="30"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-											onblur="validateNameContact();">
+											>
 
 									</label></td>
 
@@ -1540,7 +1422,7 @@
 									<td ><label> <input
 											name="noofdependents" type="text" class="myclass"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-											id="noofdependents" size="30" onblur="validateNameContact();">
+											id="noofdependents" size="30" >
 
 									</label></td>
 
@@ -1560,7 +1442,7 @@
 								<td ><label> <textarea
 											name="permanentaddress" type="text" 
 											id="permanentaddress" rows="4" cols="40"
-											onkeypress="return validateContactNum(this);"></textarea>
+											></textarea>
 
 								</label></td>
 
@@ -1588,7 +1470,7 @@
 									<td ><label> <input name="remarksadditional"
 											type="text" class="myclass" id="remarksadditional" size="30"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-											onclick="validateNameContact();">
+											>
 									</label></td>
 								</tr>
 
@@ -1620,9 +1502,7 @@
 								<tr align="center">
 									<td class="alignRight">&nbsp;</td>
 									<td align="center">
-										<button id="savetwo" 
-											onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
-											onfocus="validateNameContact();validateFatherName();">Save</button>
+										<button id="savetwo"  class="save" name="savestudent">Save</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button id="canceltwo" class="cancel">Cancel</button>
@@ -1660,7 +1540,7 @@
 									<td class="alignRight">Date of Transfer Certificate&nbsp;</td>
 							<td ><label >
 							<input name="dateoftc" type="text" class="myclass"
-									id="dateoftc" size="30"
+									id="dateoftc" size="30" autocomplete="false"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									data-validate="validate(required)"></label></td>
 
@@ -1693,7 +1573,7 @@
 							<td  align="left"><label> <input
 									name="lastschool" type="text" class="myclass" id="lastschool"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									size="30" onblur="validateName();">
+									size="30" >
 							</label></td>
 						</tr>
 
@@ -1791,9 +1671,7 @@
 										<td align="left">
 
 
-											<button id="savefive" 
-												onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
-												onfocus="validateNameContact();validateFatherName();">Save</button>
+											<button id="savefive" class="save" name="savestudent">Save</button>
 
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<button id="cancelthree" class="cancel">Cancel</button>
@@ -1883,9 +1761,7 @@
 										<td align="left">
 
 
-											<button id="savesix" 
-												onmouseover="validateNameContact();validateFatherName();validateAdmissionNumber();"
-												onfocus="validateNameContact();validateFatherName();">Save</button>
+											<button id="savesix" class="save" name="savestudent">Save</button>
 
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<button id="cancelthree" class="cancel">Cancel</button>
@@ -1927,6 +1803,7 @@
 							function addStudent() {
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
+									form1.savestudent.disabled = true;
 									form1.action = "Controller?process=StudentProcess&action=AddStudent";
 									form1.submit();
 								  }
@@ -1938,34 +1815,7 @@
 								form1.submit();
 							}
 
-							function validateEmptyField(elementName) {
-
-								var txtBox = document
-										.getElementById(elementName);
-
-								if (txtBox.value == "") {
-
-									txtBox.className = "emptyFieldSet";
-
-								} else if (txtBox.value != "") {
-									txtBox.className = "textField";
-
-								}
-
-							}
-							function notEmptyField(elementName) {
-								alert(elementName);
-								var txtBox = document
-										.getElementById(elementName);
-								if (txtBox.value != "") {
-									txtBox.className = "textField";
-
-								} else if (txtBox.value == "") {
-									txtBox.className = "emptyFieldSet";
-
-								}
-
-							}
+							
 						</script>
 </body>
 </html>

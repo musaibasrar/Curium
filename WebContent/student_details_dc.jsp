@@ -458,7 +458,7 @@ for(Cookie cookie : cookies){
                             <td  width="25%"  class="alignLeft" height="50" >Date of admission
                             </td>
                             <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.admissiondate}" />
+                           		 <fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>
                             </td>
                         </tr>
 
@@ -478,7 +478,7 @@ for(Cookie cookie : cookies){
                             <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
                             <td width="25%" class="tablerows" >
                                 <%-- <c:out value="${student.dateofbirth}" /> --%>
-                                <fmt:formatDate value="${student.dateofbirth}" pattern="yyyy-MM-dd"/>
+                                <fmt:formatDate value="${student.dateofbirth}" pattern="dd/MM/yyyy"/>
                                 
                             </td>
                             <td width="25%"  class="alignLeft" height="50" >Age
@@ -496,7 +496,7 @@ for(Cookie cookie : cookies){
                             </td>
                             <td  width="25%" class="tablerows" >
                                <c:out default="" value="${student.nooftc}" />:
-                               <fmt:formatDate value="${student.crecorddate}" pattern="yyyy-MM-dd"/>
+                               <fmt:formatDate value="${student.crecorddate}" pattern="dd/MM/yyyy"/>
                             </td>
                         </tr>
                         <tr>
@@ -618,7 +618,7 @@ for(Cookie cookie : cookies){
                             </td>
                             <td width="25%" class="tablerows">
                                 <%-- <c:out default="" value="${student.createddate}" /> --%>
-                                <fmt:formatDate value="${student.createddate}" pattern="yyyy-MM-dd"/>
+                                <fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>
                             </td>
                         </tr>
 

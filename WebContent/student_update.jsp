@@ -231,11 +231,10 @@
 		$("#datepicker").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 			
 		});
-		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
 		});
@@ -244,10 +243,9 @@
 		$("#datepickeradmn").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepickeradmin" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#datepickeradmn").datepicker("option", "showAnim",
@@ -259,10 +257,9 @@
 		$("#dateoftc").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#dateoftc" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateoftc").datepicker("option", "showAnim",
@@ -274,10 +271,9 @@
 		$("#dateoftcissued").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#dateoftcissued" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateoftcissued").datepicker("option", "showAnim",
@@ -289,10 +285,9 @@
 		$("#dateofadmission").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#dateofadmission" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateofadmission").datepicker("option", "showAnim",
@@ -304,10 +299,9 @@
 		$("#dateofleaving").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#dateofleaving" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(
 				function() {
 					$("#dateofleaving").datepicker("option", "showAnim",
@@ -319,10 +313,9 @@
 		$("#datepickerCD").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
 		});
@@ -346,38 +339,13 @@
 	});
 </script>
 <script>
-	function issues() {
-
-		var distlistitem = document.getElementById("subscriptionfor");
-		var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
-
-		if (distlistitemtext == "1 year") {
-			document.getElementById("totalissues").value = "24";
-		} else if (distlistitemtext == "2 years") {
-			document.getElementById("totalissues").value = "48";
-		} else if (distlistitemtext == "3 years") {
-			document.getElementById("totalissues").value = "72";
-		} else if (distlistitemtext == "5 years") {
-			document.getElementById("totalissues").value = "120";
-		} else if (distlistitemtext == "Life Time") {
-			document.getElementById("totalissues").value = "240";
-		}
-
-	}
-
-	function calculateIssues() {
-
-		var totalissues = document.getElementById("totalissues").value;
-		var fromissues = document.getElementById("fromkmissueno").value;
-
-		var toissues = parseInt(totalissues, 10) + parseInt(fromissues, 10) - 1;
-		document.getElementById("tokmissueno").value = toissues;
-
-	}
+	
 	function CalculateAge(value) {
-		var test = document.getElementById('datepicker').value;
+		var dateOfBirth = document.getElementById('datepicker').value;
+		var from = dateOfBirth.split("/");
 		var today = new Date();
-		var birthDate = new Date(test);
+		var birthDate = new Date(from[2],from[1] - 1,from[0]);
+		var month = birthDate.getMonth();
 		var age = today.getFullYear() - birthDate.getFullYear();
 		var m = today.getMonth() - birthDate.getMonth();
 		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
@@ -386,6 +354,7 @@
 		//return age;
 		document.getElementById('age').value = age;
 	}
+	
 </script>
 
 
@@ -508,7 +477,7 @@ for(Cookie cookie : cookies){
 
 							<td width="16%" class="alignRight">Admission Number&nbsp;</td>
 							<td align="left"><label> <input name="admnno"
-									type="text" class="textField"
+									type="text" class="textField" required
 									value="<c:out default="" value="${student.admissionnumber}" />"
 									id="admnno" size="30" data-validate="validate(required)">
 
@@ -529,7 +498,7 @@ for(Cookie cookie : cookies){
 							<td width="28%"><input type="hidden" name="id" id="id"
 								value="<c:out value="${student.sid}" />" /><input type="hidden" name="studentexternalid" id="studentexternalid"
 								value="<c:out value="${student.studentexternalid}" />" /> <label> <input
-									name="name" type="text" style="text-transform:uppercase"
+									name="name" type="text" style="text-transform:uppercase" required
 									value="<c:out value="${student.name}" />" class="textField"
 									id="name" size="30" data-validate="validate(required)">
 							</label></td>
@@ -558,8 +527,8 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
-							<td width="28%"><label> <input name="dateofbirth"
-									type="text" value="<fmt:formatDate value="${student.dateofbirth}" pattern="yyyy-MM-dd"/>"
+							<td width="28%"><label> <input name="dateofbirth" autocomplete="false"
+									type="text" value="<fmt:formatDate value="${student.dateofbirth}" pattern="dd/MM/yyyy"/>"
 									class="textField" id="datepicker" size="30"
 									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
@@ -596,8 +565,8 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Date Of Admission &nbsp;</td>
 
 							<td align="left"><label> <input
-									name="dateofadmission" type="text" class="textField"
-									value="<fmt:formatDate value="${student.admissiondate}" pattern="yyyy-MM-dd"/>"
+									name="dateofadmission" type="text" class="textField" autocomplete="false"
+									value="<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>"
 									id="dateofadmission" size="30"
 									data-validate="validate(required)">
 
@@ -959,7 +928,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td width="20%" class="alignRight">Created Date &nbsp;</td>
 							<td width="28%"><label> <input name="createddate"
-									type="text" value="<fmt:formatDate value="${student.createddate}" pattern="yyyy-MM-dd"/>" class="textField"
+									type="text" value="<fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>" class="textField"
 									id="datepickerCD" size="30" data-validate="validate(required)">
 							</label></td>
 
@@ -1117,8 +1086,8 @@ for(Cookie cookie : cookies){
 
 									<td width="30%" class="alignRight">Date of leaving the school&nbsp;</td>
 									<td width="12%" align="left"><label> <input
-									name="dateofleaving" type="text" class="textField" 
-									id="dateofleaving" size="36" value="<fmt:formatDate type="date" value="${student.dateleaving}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"><!-- onkeyup="check(this.value);"  -->
+									name="dateofleaving" type="text" class="textField" autocomplete="false"
+									id="dateofleaving" size="36" value="<fmt:formatDate type="date" value="${student.dateleaving}" pattern="dd/MM/yyyy"/>" data-validate="validate(required)"><!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
 
@@ -1152,8 +1121,8 @@ for(Cookie cookie : cookies){
 									<td width="28%"><label> <input name="notcissued"
 									type="text" class="textField" id="notcissued" size="36" value="<c:out default="" value="${student.notcissued}" />"
 									><input
-									name="dateoftcissued" type="text" class="textField" 
-									id="dateoftcissued" size="36" value="<fmt:formatDate type="date" value="${student.datetcissued}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)">
+									name="dateoftcissued" type="text" class="textField"  autocomplete="false"
+									id="dateoftcissued" size="36" value="<fmt:formatDate type="date" value="${student.datetcissued}" pattern="dd/MM/yyyy"/>" data-validate="validate(required)">
 							</label></td>
 									
 								</tr>
@@ -1248,15 +1217,15 @@ for(Cookie cookie : cookies){
 								name="idparents" id="idparents"
 								value="<c:out value="${parents.pid}" />" /> <label> <input
 									name="fathersname" type="text" class="myclass" id="name"
-									size="36" style="text-transform:uppercase"
+									size="36" style="text-transform:uppercase" required
 									value="<c:out default="" value="${parents.fathersname}" />"">
 									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
 
-							<td width="30%" class="alignRight">Mother's Name &nbsp;</td>
+							<td width="30%" class="alignRight">Mother's Name* &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="mothersname" type="text" class="myclass" id="name"
-									size="36" style="text-transform:uppercase"
+									size="36" style="text-transform:uppercase" required
 									value="<c:out default="" value="${parents.mothersname}" />"">
 									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
@@ -1352,11 +1321,11 @@ for(Cookie cookie : cookies){
 
 						<tr>
 
-							<td width="16%" class="alignRight">Contact Number &nbsp;</td>
+							<td width="16%" class="alignRight">Contact Number* &nbsp;</td>
 
 							<td width="28%"><label> <input name="contactnumber"
-									type="text" class="textField" id="contactnumber" size="36"
-									value="<c:out default="" value="${parents.contactnumber}" />"">
+									type="text" class="textField" id="contactnumber" size="36" required
+									value="<c:out default="" value="${parents.contactnumber}" />">
 
 							</label></td>
 
@@ -1517,8 +1486,8 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Date of transfer certificate&nbsp;</td>
 
 							<td><label> <input
-									name="dateoftc" type="text" class="textField"
-									value="<fmt:formatDate value="${student.dateoftc}" pattern="yyyy-MM-dd"/>"
+									name="dateoftc" type="text" class="textField" autocomplete="false"
+									value="<fmt:formatDate value="${student.dateoftc}" pattern="dd/MM/yyyy"/>"
 									id="dateoftc" size="36"
 									data-validate="validate(required)">
 
@@ -1828,10 +1797,12 @@ for(Cookie cookie : cookies){
 							}
 
 							function updateStudent() {
-
+								
 								var form1 = document.getElementById("form1");
-								form1.action = "Controller?process=StudentProcess&action=updateStudent";
-								form1.submit();
+								if(form1.checkValidity()) {
+									form1.action = "Controller?process=StudentProcess&action=updateStudent";
+									form1.submit();
+								  }
 							}
 						</script>
 </body>
