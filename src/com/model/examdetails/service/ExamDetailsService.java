@@ -295,7 +295,7 @@ public class ExamDetailsService {
 		Map<Parents,List<HallTicket>> hallTicketMap = new LinkedHashMap<Parents,List<HallTicket>>();
 		
 			studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.examlevel = '" + 
-			        selectedExamLevel[0]+"' and parents.Student.centercode='"+selectedCenterCode[0]+"' AND parents.Student.admissionnumber like '"+subAcademicYear+"%' order by parents.Student.admissionnumber ASC");
+			        selectedExamLevel[0]+"' and parents.Student.centercode='"+selectedCenterCode[0]+"' AND parents.Student.admissionnumber like '"+subAcademicYear+"%' AND parents.Student.archive = 0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin') order by parents.Student.admissionnumber ASC");
 		             
 	              for (Parents student : studentList) {
 	                  List<HallTicket> examscheduleList = new ArrayList<HallTicket>();

@@ -401,7 +401,7 @@
 
 	$(function() {
 
-		$("#search").button().click(function() {
+		$("#searchattendance").button().click(function() {
 			searchStudentAttendanceDetails();
 		});
 		
@@ -417,18 +417,14 @@
 	
 	function searchStudentAttendanceDetails() {
 		
-		var centerCode = document.getElementById("centercode").value;
-		var examLevel = document.getElementById("examlevelcode").value;
 		
-		
-		if(examLevel!=""){
-			var form1 = document.getElementById("form1");
+		var form1 = document.getElementById("form1");
+		if(form1.checkValidity()) {
 			form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetails";
 			form1.method = "POST";
 			form1.submit();
-		}else{
-			alert('Enter mandatory fields');
 		}
+		
 	}
 	
 	$(function() {
@@ -639,7 +635,7 @@ for(Cookie cookie : cookies){
 								</tr>
 						<tr>
 							<td class="alignRightFields" >Center*&nbsp;&nbsp;&nbsp;</td>
-							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
+							<td width="12%" align="left"><label> <select name="centercode" id="centercode" required
 									style="width: 240px;">
 										<option selected>${attendancecenternamesearch}</option>
 										<option></option>
@@ -657,6 +653,10 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
+						<tr>
+							<td><br /></td>
+
+						</tr>
 						
 						<tr>
 							<td class="alignRightFields">Exam Level* &nbsp;&nbsp;&nbsp;</td>
@@ -664,7 +664,6 @@ for(Cookie cookie : cookies){
 										<select name="examlevelcode" id="examlevelcode" required
 									style="width: 240px;">
 										<option selected>${attendanceexamlevelnamesearch}</option>
-										<option></option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}:${examleveldetails.levelname}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
@@ -672,8 +671,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label> 
-						</tr>
-
+						</tr> 
 						 <tr>
 							<td><br /></td>
 
@@ -696,18 +694,19 @@ for(Cookie cookie : cookies){
 							</label> 
 						</tr> 
 
-						<%-- <tr>
+						<tr>
 							<td><br /></td>
 
 						</tr>
 						
 						<tr>
-							<td class="alignRightFields">Academic Year* &nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRightFields">Exam Year* &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="selectedacademicyear" id="selectedacademicyear"
-									style="width: 240px;" required>
-										<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
-											<option></option>
+										<select name="examyear" id="examyear"
+									style="width: 240px;">
+										<option selected value="${studentsattendancesearch}">${studentsattendancesearch}</option>
+											<option ></option>
+											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
 											<option value="2013/14" >2013/14</option>
 											<option value="2014/15" >2014/15</option>
 											<option value="2015/16" >2015/16</option>
@@ -720,7 +719,7 @@ for(Cookie cookie : cookies){
 											<option value="2020/21" >2022/23</option>
 								</select>
 							</label> 
-						</tr> --%>
+						</tr> 
 
 						<tr>
 							<td><br /></td>
@@ -733,7 +732,7 @@ for(Cookie cookie : cookies){
 
 							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
 							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
+								<button id="searchattendance">Search</button>
 							</td>
 						</tr>
 
@@ -771,6 +770,7 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
+				
 					<c:forEach items="${viewAttendancemap}" var="viewAttendancemap" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
@@ -807,8 +807,8 @@ for(Cookie cookie : cookies){
 						<td class="footerTD" colspan="2">
 						
 							<a id="update">Update</a>
-								&nbsp;&nbsp;&nbsp;&nbsp;
-						  <a id="printattendancereport" href="Controller?process=AttendanceProcess&action=printAttendanceReport">Print</a>
+								
+						  <!-- <a id="printattendancereport" href="Controller?process=AttendanceProcess&action=printAttendanceReport">Print</a> -->
 						</td>
 					</tr>
 				</tfoot>

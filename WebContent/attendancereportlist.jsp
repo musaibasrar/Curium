@@ -1,21 +1,40 @@
 <%--
-    Document   : Attendance Report
-    Created on : Feb 10, 2019, 02:17:28 PM
+    Document   : Attendance Report List
+    Created on : JAN 06, 2020, 10:00:28 AM
     Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Attendance Report</title>
+<title>Attendance Report List</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
+
+  <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        
+        
+         <script  type="text/javascript" src="js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
+        
 <style type="text/css">
 <!--
 .divCSS {
@@ -290,11 +309,29 @@
 	font-weight: bold;
 	height: 22px;
 }
+
 </style>
 <style>
-#button {
-	
+.alert-box {
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;  
 }
+.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
 </style>
 
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
@@ -359,35 +396,55 @@
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
+	$(function() {
+
+		$("#searchattendance").button().click(function() {
+			searchStudentAttendanceDetails();
+		});
+		
+				
+		 $("#studentAttendanceStatus").keypress(function (e) {
+		     //if the letter is not digit then display error and don't type anything
+		     if (e.which != 8 && e.which != 0 && e.which != 65 && e.which != 97 && e.which != 72 && e.which != 104 && e.which != 80 && e.which != 112 && e.which != 127) {
+		               return false;
+		    }
+		   });
+
+	});
 	
-	function searchAttendanceStatus() {
+	function searchStudentAttendanceDetails() {
+
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=searchAttendanceStatus";
+		if(form1.checkValidity()) {
+			form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceList";
+			form1.method = "POST";
+			form1.submit();
+		}
+		
+	}
+	
+	$(function() {
+
+		$("#tabs").tabs();
+
+		//$("#effect").hide();
+		
+		 $("#printattendancereport").button({
+				icons : {
+					primary : "ui-icon-print"
+				}
+			})
+	});
+	
+	
+	function printAttendanceReport() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=AttendanceProcess&action=printAttendanceReport";
 		form1.method = "POST";
 		form1.submit();
 	}
-
-	$(function() {
-
-		$("#search").button().click(function() {
-			searchAttendanceStatus();
-		});
-		
-
-	});
-
-	$(function() {
-		$("#tabs").tabs();
-		/* $("#effect").hide(); */
-	});
 	
 	$(function() {
-		$("#addMarks").button({
-			icons : {
-				primary : "ui-icon-trash"
-			}
-		});
-		
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
 			var trLength = $('.trClass').length;
@@ -405,6 +462,7 @@
 			}
 
 		});
+		
 		$('.chcktbl').click(function() {
 			var length = $('.chcktbl:checked').length;
 			var trLength = $('.trClass').length;
@@ -417,88 +475,99 @@
 			}
 		});
 
-		$('#form1').keydown(function(event) {
-			var key = event.which;
-			if (key == 17) {
-				 $('#addMarks').focus();
-			}
-			});
+		/* $("#okdivsuccess").button().click(function() {
+			$( "div.success" ).hide();
+			$( "div.failure" ).hide();
+		});
+		
+		$("#okdivfailure").button().click(function() {
+			$( "div.success" ).hide();
+			$( "div.failure" ).hide();
+		}); */
 
 	});
 	
+
+    $(function() {
+		// run the currently selected effect
+		function runEffect() {
+
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		// set effect from select menu value
+		$("#add").button({
+			icons : {
+				primary : "ui-icon-arrowthick-1-s"
+			}
+		}).click(function() {
+			runEffect();
+			return false;
+		});
+	});
+	
+	   function checkDate(){
+			  var toDate = document.getElementById('todateofattendance').value;
+			  var fromDate = document.getElementById('fromdateofattendance').value;
+			  var currentDate = new Date();
+			  var sDate = new Date(toDate);
+			  var fDate = new Date(fromDate);
+			  
+			if(toDate!= '' && sDate > currentDate)
+			  {
+			    alert("Please ensure that the To Date is lesser than or equals to current Date.");
+			    document.getElementById('todateofattendance').value = '';
+			    return false;
+			  }else if(sDate < fDate){
+				  alert("Please ensure that the To Date is greater than or equals to from Date.");
+				    document.getElementById('todateofattendance').value = '';
+				    return false;  
+			  }else if(fromDate== '' || toDate== ''){
+			    	alert("Enter the valid dates");
+			    }
+	   }
+	   
+	   function checkDateGraph(){
+			  var toDate = document.getElementById('tomonthlyattendance').value;
+			  var fromDate = document.getElementById('frommonthlyattendance').value;
+			  var currentDate = new Date();
+			  var sDate = new Date(toDate);
+			  var fDate = new Date(fromDate);
+			  
+			if(toDate!= '' && sDate > currentDate)
+			  {
+			    alert("Please ensure that the To Date is lesser than or equals to current Date.");
+			    document.getElementById('tomonthlyattendance').value = '';
+			    return false;
+			  }else if(sDate < fDate){
+				  alert("Please ensure that the To Date is greater than or equals to from Date.");
+				    document.getElementById('tomonthlyattendance').value = '';
+				    return false;  
+			  }else if(fromDate== '' || toDate== ''){
+			    	alert("Enter the valid dates");
+			    }
+	   }
+	   
 	
 </script>
 
-
 <script type="text/javascript">
-        
-        
-function checkMandatoryandSubmit(){
-    	
-			var checkBox = document.getElementsByName("studentIDs");
-			var resultCheckBox=true;			
-			for(var i=0; i<checkBox.length; i++){
-				if(checkBox[i].checked){
-					resultCheckBox=false;
-				}
-			}
-			
-    	if(resultCheckBox){
-    		alert('Select the student(s) to update the marks');
-    	}else{
-    		var form1 = document.getElementById("form1");
-    		form1.action = "Controller?process=MarksDetailsProcess&action=addMarks";
-    		form1.method = "POST";
-    		form1.submit();
-
-    	}
-    	
-    }
-    
-    
-			var xmlHttp;
-			var count;
-			function getSubjects() {
-			
-				var examlevel=document.getElementById('examlevel').value;
-				var splitExamLevel = examlevel.split(":");
-				var selected = splitExamLevel[0];
-				
-				 if (typeof XMLHttpRequest != "undefined") {
-					 xmlHttp = new XMLHttpRequest();
-			        
-			     } else if (window.ActiveXObject) {
-			    	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-			         
-			     }
-				xmlHttp.onreadystatechange = stateChanged;
-				xmlHttp.open("GET", "AjaxController?process=AttendanceProcess&action=getSubjects&urlexamlevel="+selected,true);
-				xmlHttp.send(null);
-			}
-			
-			function stateChanged() {
-			
-				if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-					document.getElementById("subjectlist").innerHTML = xmlHttp.responseText;
-				}
-			}
-			function GetXmlHttpObject() {
-				var xmlHttp = null;
-				try {
-					xmlHttp = new XMLHttpRequest();
-				} catch (e) {
-					try {
-						xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-					} catch (e) {
-						xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-					}
-				}
-				return xmlHttp;
-			}
-			
+					
+					var attendanceupdate='<c:out default="" value="${attendanceStatusFlag}"/>';
+					
+		            if(attendanceupdate == "true"){
+		            	 $(function(){
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 20000 ).fadeOut( 1400 );
+		            	 });
+		            	 }else if(attendanceupdate == "false"){
+		            	  $(function(){
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 20000 ).fadeOut( 1400 );
+		            		 });
+		            	 }
         </script>
-
-
+        
 
 </head>
   <%
@@ -518,44 +587,40 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=MarksDetailsProcess&action=addMarks" method="POST">
-		<!-- <div style="height: 28px">
-			<button id="add">Add Department</button>
+	<form id="form1" method="POST">
+		
+		
+		<div class="alert-box success">${attendanceUpdateStatus} <br>
+		<!-- <a id="okdivsuccess">Ok</a> -->
+		</div>
+		<div class="alert-box failure">${attendanceUpdateStatus} <br>
+		<!-- <a id="okdivfailure">Ok</a> -->
+		</div>
+		
+		<div style="height: 28px">
+		
+			<button id="add">Apply Filters</button>
 			<br />
-		</div> -->
-
+		</div>
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Attendance Analysis Report</a></li>
+					<li><a href="#tabs-1">Filters</a></li>
 
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
-							<tr>
-							<td><br /></td>
-
-						<%-- </tr>
-							<tr>
-							<td class="alignRightFields">Academic Year &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="academicyear" id="academicyear"
-									style="width: 200px;" required>
-										<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
-								</select>
-							</label> 
-						</tr>
-						
+								
+								<tr>
+								<td class="alignRightFields"><br></td>
+								</tr>
 						<tr>
-							<td><br /></td>
-						</tr> --%>
-						
-						<tr>
-							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
-							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
-									style="width: 200px;">
+							<td class="alignRightFields" >Center*&nbsp;&nbsp;&nbsp;</td>
+							<td width="12%" align="left"><label> <select name="centercode" id="centercode" required
+									style="width: 240px;">
 										<option selected>${attendancecenternamesearch}</option>
+										<option></option>
 										<c:forEach items="${branchList}" var="branchlist">
 											<option value="${branchlist.centercode}:${branchlist.centername}" >
 												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
@@ -563,20 +628,25 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label></td>
+							
 						</tr>
 
 						<tr>
 							<td><br /></td>
 
 						</tr>
-
-
 						<tr>
-						<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
+							<td><br /></td>
+
+						</tr>
+						
+						<%-- <tr>
+							<td class="alignRightFields">Exam Level* &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="examlevel" id="examlevel" 
-									style="width: 200px;">
-										<option selected>${searchedexamlevel}</option>
+										<select name="examlevelcode" id="examlevelcode" required
+									style="width: 240px;">
+										<option selected>${attendanceexamlevelnamesearch}</option>
+										<option value="${examleveldetails}">All</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}:${examleveldetails.levelname}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
@@ -584,17 +654,34 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label> 
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
+						</tr>  --%>
+						
 						
 						<tr>
+							<td class="alignRightFields" style="font-weight: bold;color:#325F6D">Exam Level* &nbsp;</td>
+							<td width="70%">
+							<c:forEach items="${examleveldetails}" var="examleveldetails">
+							<label style="font-weight: bold;color:#325F6D"> <input
+									name="examlevelcode" type="checkbox" class="myclass" id="examlevelcode" value="${examleveldetails.levelcode}:${examleveldetails.levelname}"
+									size="36"> ${examleveldetails.levelcode}
+							</label>
+							</c:forEach>
+							</td>
+							
+						</tr>
+						 <tr>
+							<td><br /></td>
+
+						</tr>
+						
+						
+						<tr style="display: none;">
 							<td class="alignRightFields">Language &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="languageopted" id="languageopted"
-									style="width: 200px;">
+									style="width: 240px;">
 										<option selected>${attendancelanguageoptedsearch}</option>
+										<option></option>
 										<c:forEach items="${languageslist}" var="languageslist">
 											<option value="${languageslist.language}" >
 												<c:out value="${languageslist.language}" />
@@ -602,136 +689,64 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label> 
-						</tr>
+						</tr> 
 
 						<tr>
 							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td class="alignRightFields">Subject&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="subjectnameAjax" id="subjectnameAjax"
-									style="width: 200px;">
-										<option selected>${searchedsubject}</option>
-										<option>Paper 1</option>
-										<option>Paper 2</option>
-								</select>
-							</label> 
-						</tr>					
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td class="alignRightFields">Attendance Status &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> 
-										<select name="attendancestatus" id="attendancestatus"
-									style="width: 200px;">
-										<option selected></option>
-										<option>Present</option>
-										<option>Absent</option>
-								</select>
-							</label> 
-						</tr>
 
-						<tr>
-							<td><br /></td>
 						</tr>
 						
 						<tr>
-							<td class="alignRightFields">Exam Year &nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRightFields">Exam Year* &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="examyear" id="examyear"
-									style="width: 200px;" required>
-										<option selected value="${attendanceacademicsearch}">${attendanceacademicsearch}</option>
+									style="width: 240px;">
+										<option selected value="${studentsattendancesearch}">${studentsattendancesearch}</option>
 											<option ></option>
 											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
-											<option value="2018/19" >2018/19</option>
-											<option value="2017/18" >2017/18</option>
-											<option value="2016/17" >2016/17</option>
-											<option value="2015/16" >2015/16</option>
-											<option value="2014/15" >2014/15</option>
 											<option value="2013/14" >2013/14</option>
+											<option value="2014/15" >2014/15</option>
+											<option value="2015/16" >2015/16</option>
+											<option value="2016/17" >2016/17</option>
+											<option value="2017/18" >2017/18</option>
+											<option value="2018/19" >2018/19</option>
+											<option value="2019/20" >2019/20</option>
+											<option value="2020/21" >2020/21</option>
+											<option value="2020/21" >2021/22</option>
+											<option value="2020/21" >2022/23</option>
 								</select>
 							</label> 
-							</td>
-						</tr>
+						</tr> 
 
 						<tr>
 							<td><br /></td>
+
 						</tr>
-						
+
 						<tr>
-							<!-- <td class="alignRightFields">Subject &nbsp;</td> -->
-							<td width="12%" align="left"><label> <input
-									name="subjectidselected" type="hidden" class="myclass" id="searchedsubject"
-									size="36" value='<c:out value="${searchedsubject}"></c:out>'>
-							</label></td>
-							
-						</tr>
-						
-						<tr>
-							<!-- <td class="alignRightFields">Exam &nbsp;</td> -->
-							<td width="12%" align="left"><label> <input
-									name="examidselected" type="hidden" class="myclass" id="searchedexamlevel"
-									size="36" value='<c:out value="${searchedexamlevel}"></c:out>'>
-							</label></td>
-							
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr><tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
+
 							<td width="30%" class="alignRight"></td>
+
 							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
 							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search" onmouseover="validateList();" onfocus="validateList();">Search</button>
+								<button id="searchattendance">Print</button>
 							</td>
 						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-					
-					</table>
-					
-					<table>
-					<tr>
-							<td class="alignRightFields">Subject &nbsp;</td>
-							
-							
-							<td ><label> <input style="border: none;
-border-color: transparent;background-color:#E6EEF4;font-size: 18px;font-weight:bold;font-variant: small-caps;color: #EB6000;"
-									readonly="readonly"  name="subjectselected" type="text" class="myclass" id="subjectselected"
-									size="36" value='<c:out value="${searchedsubject}"></c:out>'>
-							</label></td>
-							
-							
-							<td class="alignRightFields">Exam &nbsp;&nbsp;</td>
-							<td ><label> <input style="border: none;
-border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:bold;font-variant: small-caps;color: #EB6000;"
-									name="examselected" type="text" class="myclass" id="examselected"
-									size="36" value='<c:out value="${searchedexamlevel}"></c:out>'>
-							</label></td>
-							
-						</tr>
-					</table>
 
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+					</table>
 				</div>
 			</div>
 		</div>
-
-		<div style="overflow: scroll; height: 600px">
+		
+		<%-- <div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search result</td>
+					<td class="headerTD" >View Attendance</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -739,11 +754,12 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 
 				<thead>
 					<tr>
-						<th class="headerText">Sl.No.</th>
+						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">${selectedsubjectname}&nbsp;</th>
-						
+						<c:forEach items="${attendancesubexamlevel}" var="subexamlevel">
+						<th title="click to sort" class="headerText">${subexamlevel.subjectname}&nbsp;</th>
+						</c:forEach>
 						<!-- <th title="click to sort" class="headerText">Paper 3&nbsp;</th>
 						<th title="click to sort" class="headerText">Paper 1&nbsp;</th>
 						<th title="click to sort" class="headerText">Paper 2&nbsp;</th> -->
@@ -751,11 +767,17 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 				</thead>
 
 				<tbody>
-					<c:forEach items="${viewAttendanceStatusMap}" var="viewAttendancemap" varStatus="status">
+				
+				<c:forEach items="${viewAttendancemaplist}" var="viewAttendancemapList" varStatus="status">
+					
+					<c:forEach items="${viewAttendancemapList}" var="viewAttendancemap" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><c:out value="${(status.index)+1}" /></td>
+							<td class="dataText"><input type="checkbox"
+								id="<c:out value="${viewAttendancemap.key.admissionnumber}"/>" class="chcktbl"
+								name="attandanceIDs"
+								value="<c:out value="${viewAttendancemap.key.admissionnumber},${status.index}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
 										value="${viewAttendancemap.key.admissionnumber}" /></a></td>
@@ -764,7 +786,10 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 							<td class="dataText">
 							<c:set var="attendanceparts" value="${fn:split(subjectdetails, '%')}" />
 							<input type="hidden" id="studentAttendanceStatusId" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;"  name="studentAttendanceStatusId" style="text-transform:uppercase" value="<c:out value="${attendanceparts[0]}" />" maxlength="1">
-							<%-- <input type="text" id="studentAttendanceStatus" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;"  name="studentAttendanceStatus" style="text-transform:uppercase" value="<c:out value="${attendanceparts[1]}" />" maxlength="1"> --%>
+							<input type="hidden" id="studentAdmissionNumber"  name="studentAdmissionNumber"  value="${viewAttendancemap.key.admissionnumber}" />
+							<input type="hidden" id="studentID"  name="studentID"  value="${viewAttendancemap.key.sid}" />
+							<input type="hidden" id="subjectName"  name="subjectName"  value="${attendanceparts[2]}" />
+							<input type="text" id="studentAttendanceStatus" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;"  name="studentAttendanceStatus" style="text-transform:uppercase" value="<c:out value="${attendanceparts[1]}" />" maxlength="1">
 							<select name="studentAttendanceStatus" id="studentAttendanceStatus" style="background-color: #E3EFFF;border-style: white;color: #4B6A84;">
 										<option selected >${attendanceparts[1]}</option>
 											<option value="Present" >Present</option>
@@ -774,20 +799,21 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 							</c:forEach>
 						</tr>
 					</c:forEach>
+					
+					</c:forEach>
 				</tbody>
 				<tfoot>
 					<tr>
 					
 						<td class="footerTD" colspan="2">
+						  <a id="printattendancereport" href="Controller?process=AttendanceProcess&action=printAttendanceReport">Print</a>
 						</td>
 					</tr>
 				</tfoot>
 			</table>
 
-		</div>
-
+		</div> --%>
 
 	</form>
-
 </body>
 </html>

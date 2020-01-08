@@ -99,6 +99,10 @@ public class AttendanceAction {
             url = printAttendanceReport();
         }else if ("attendancereport".equalsIgnoreCase(action)) {
             url = AttendanceReport();
+        }else if ("attendancereportlist".equalsIgnoreCase(action)) {
+            url = AttendanceReportList();
+        }else if ("searchStudentAttendanceList".equalsIgnoreCase(action)) {
+            url = searchStudentAttendanceList();
         }else if ("searchAttendanceStatus".equalsIgnoreCase(action)) {
             url = searchAttendanceStatus();
         }
@@ -106,6 +110,14 @@ public class AttendanceAction {
 	}
 	
 	
+	private String AttendanceReportList() {
+
+		if(new AttendanceService(request, response).viewAttendance()){
+			return "attendancereportlist.jsp";
+		}
+		return errorPage;
+	}
+
 	private String markAttendanceCenter() {
         new AttendanceService(request, response).markAttendanceCenter();
         return "attendancemark.jsp";
@@ -280,6 +292,13 @@ public class AttendanceAction {
 	private String searchStudentAttendanceDetails() {
 		if(new AttendanceService(request, response).searchStudentAttendanceDetails(true)){
 			return "viewattendance.jsp";
+		}
+		return errorPage;
+	}
+	
+	private String searchStudentAttendanceList() {
+		if(new AttendanceService(request, response).searchStudentAttendanceList(true)){
+			return "printattendancereport.jsp";
 		}
 		return errorPage;
 	}

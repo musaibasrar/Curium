@@ -667,7 +667,7 @@ public class StudentService {
 
 	@SuppressWarnings("finally")
 	public boolean searchClass() {
-	    String searchQuery = "From Student as student where student.archive=0 and student.passedout=0 and student.remarks = 'approved' OR student.remarks='admin' AND student.droppedout=0 ";
+	    String searchQuery = "From Student as student where student.archive=0 and student.passedout=0 and (student.remarks = 'approved' OR student.remarks='admin') AND student.droppedout=0 ";
 	       String subQuery =null;
 	       
 	            if(!request.getParameter("centercode").equalsIgnoreCase("")) {
@@ -1259,7 +1259,7 @@ public class StudentService {
                      int englishCount =0, urduCount=0, hindiCount=0, kannadaCount = 0;
                      
                      parentsList = new studentDetailsDAO().getStudentsList("From Parents parents where "
-                             + "parents.Student.examlevel='"+request.getParameter("examlevel").toString()+"' and parents.Student.centercode='"+eachBranch.getCentercode()+"' and parents.Student.admissionnumber like '"+academicYear+"%' Order By parents.Student.admissionnumber ASC");
+                             + "parents.Student.examlevel='"+request.getParameter("examlevel").toString()+"' and parents.Student.centercode='"+eachBranch.getCentercode()+"' and parents.Student.admissionnumber like '"+academicYear+"%'  AND parents.Student.archive = 0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin')  Order By parents.Student.admissionnumber ASC");
                     
                      for (Parents singleParents : parentsList) {
                              if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("English")) {
@@ -1302,7 +1302,7 @@ public class StudentService {
                     int englishCount = 0, urduCount = 0, hindiCount = 0, kannadaCount = 0;
                     
                     parentsList = new studentDetailsDAO().getStudentsList("From Parents parents where "
-                            + "parents.Student.centercode='"+eachBranch.getCentercode()+"' order by parents.Student.centercode DESC");
+                            + "parents.Student.centercode='"+eachBranch.getCentercode()+"' AND parents.Student.archive = 0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin') order by parents.Student.centercode DESC");
                    
                     for (Parents singleParents : parentsList) {
                             if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("English")) {
@@ -1557,7 +1557,7 @@ public class StudentService {
                      httpSession.setAttribute("studentsreportacademicsearch", request.getParameter("examyear").toString());
              }
              
-             searchQuery = searchQuery+subQuery+" Order By parent.Student.admissionnumber ASC";
+             searchQuery = searchQuery+subQuery+" AND parent.Student.archive = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin') Order By parent.Student.admissionnumber ASC";
              List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
              Map<Parents,String> mapStudentReports = new HashMap<Parents,String>();
              

@@ -66,7 +66,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("FROM Student s where s.archive = 0 AND s.passedout = 0 AND s.remarks = 'approved' OR s.remarks='admin' AND s.droppedout = 0 order by admissionnumber DESC");
+					.createQuery("FROM Student s where s.archive = 0 AND s.passedout = 0 AND (s.remarks = 'approved' OR s.remarks='admin') AND s.droppedout = 0 order by admissionnumber DESC");
 			query.setFirstResult(offset);
 			query.setMaxResults(noOfRecords);
 			results = query.list();
@@ -250,7 +250,7 @@ public class studentDetailsDAO {
 			transaction = session.beginTransaction();
 
 			results = (java.util.List<Student>) session.createQuery(
-					"From Student s where s.examlevel = '" +examLevel+ "' order by s.admissionnumber DESC").list();
+					"From Student s where s.examlevel = '" +examLevel+ "' AND s.archive = 0 AND s.passedout = 0 AND s.droppedout = 0 AND (s.remarks = 'approved' OR s.remarks = 'admin') order by s.admissionnumber DESC").list();
 			transaction.commit();
 
 		} catch (HibernateException hibernateException) {transaction.rollback();
@@ -699,7 +699,7 @@ public class studentDetailsDAO {
             int noOfRecords = 0;
             try {
                     transaction = session.beginTransaction();
-                    results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND remarks = 'approved' OR remarks='admin' AND droppedout = 0 AND branchid="+branchId+" order by admissionnumber DESC").setCacheable(true).setCacheRegion("commonregion")
+                    results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout = 0 AND (remarks = 'approved' OR remarks='admin') AND droppedout = 0 AND branchid="+branchId+" order by admissionnumber DESC").setCacheable(true).setCacheRegion("commonregion")
                                     .list();
                     noOfRecords = results.size();
                     transaction.commit();

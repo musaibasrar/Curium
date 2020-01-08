@@ -121,7 +121,7 @@ public class ExamLevelService {
         
         String subAcademicYear = currentAcademicYear.substring(2, 4);
         List<Student> lastSid = new studentDetailsDAO().getListStudents("From Student where examlevel='"+request.getParameter("examlevel")+"'"
-                + " and centercode='"+request.getParameter("centercode")+"' and admissionnumber like '"+subAcademicYear+"%' order by sid DESC");
+                + " and centercode='"+request.getParameter("centercode")+"' and admissionnumber like '"+subAcademicYear+"%' AND archive = 0 AND passedout = 0 AND droppedout = 0 AND (remarks = 'approved' OR remarks = 'admin') order by sid DESC");
         int admission = 1;
         if(lastSid.size() > 0) {
             //admission = lastSid.get(0).getSid();

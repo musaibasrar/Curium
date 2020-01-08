@@ -156,7 +156,7 @@ public class ResultService {
                 httpSession.setAttribute("resultserviceacademicsearch","");
             }*/
             
-            searchQuery = searchQuery+subQuery;
+            searchQuery = searchQuery+subQuery+ " AND parent.Student.archive = 0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin') Order By parent.Student.admissionnumber ASC";
             List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
             String[] examDet = ForExamLevel.split(":");
             List<Subexamlevel> subList = new ExamLevelDetailsDAO().getSubExamLevelSubject(examDet[0]);
@@ -352,7 +352,7 @@ public class ResultService {
                  httpSession.setAttribute("ranklistacademicsearch","");
              }*/
              
-             searchQuery = searchQuery+subQuery;
+             searchQuery = searchQuery+subQuery+ " AND parent.Student.archive = 0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin') Order By parent.Student.admissionnumber ASC";
              List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
              String[] examDet = forExamLevel.split(":");
              List<Subexamlevel> subList = new ExamLevelDetailsDAO().getSubExamLevelSubject(examDet[0]);
@@ -549,7 +549,7 @@ public class ResultService {
                  httpSession.setAttribute("markssheetacademicsearch","");
              }*/
              
-             searchQuery = searchQuery+subQuery;
+             searchQuery = searchQuery+subQuery+" AND parent.Student.archive = 0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin') Order By parent.Student.admissionnumber ASC";
              List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
              String[] examDet = forExamLevel.split(":");
              List<Subexamlevel> subList = new ExamLevelDetailsDAO().getSubExamLevelSubject(examDet[0]);
@@ -718,7 +718,7 @@ public class ResultService {
                  language = request.getParameter("languageopted");
                      subQuery = subQuery+"AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
              }
-             searchQuery = searchQuery+subQuery;
+             searchQuery = searchQuery+subQuery+" AND parent.Student.archive = 0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin') Order By parent.Student.admissionnumber ASC";
              List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
              String[] examDet = examLevel.split(":");
              List<Subexamlevel> subList = new ExamLevelDetailsDAO().getSubExamLevelSubject(examDet[0]);
@@ -822,7 +822,8 @@ public class ResultService {
 	       					
 	       					String searchQuery = "From Parents as parent where ";
 	       					subQuery = "parent.Student.centercode = '"+branch.getCentercode()+"'"
-	       							+ " AND parent.Student.examlevel = '"+examLevels.getLevelcode()+"'"; 
+	       							+ " AND parent.Student.examlevel = '"+examLevels.getLevelcode()+"' "
+	       									+ " AND parent.Student.archive = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin')"; 
 	       					
 	       		            searchQuery = searchQuery+subQuery;
 	       		            List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);

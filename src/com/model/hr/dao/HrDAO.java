@@ -295,7 +295,7 @@ public class HrDAO {
 		List<Payadvancesalary> payAdvanceSalary = new ArrayList<Payadvancesalary>();
 		try {
 			transaction = session.beginTransaction();
-			payAdvanceSalary = session.createQuery("from Payadvancesalary where status='approved' or status='rejected' and branchid="+branchId).list();
+			payAdvanceSalary = session.createQuery("from Payadvancesalary where (status='approved' or status='rejected') and branchid="+branchId).list();
 			transaction.commit();
 		} catch (Exception e) {transaction.rollback();
 			e.printStackTrace();

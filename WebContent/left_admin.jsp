@@ -347,7 +347,8 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=rankListReport" style="font-size: 12px;">Rank List</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=marksSheet" style="font-size: 12px;">Marks Sheet</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=evaluationSheet" style="font-size: 12px;">Evaluation Sheet</a><br/>
-                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendancereport" style="font-size: 12px;">Attendance Report</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendancereportlist" style="font-size: 12px;">Attendance Report</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendancereport" style="font-size: 12px;">Attendance Analysis Report</a><br/>
                 <a target="mainFrame" href="resultanalysisyearly.jsp" style="font-size: 12px;">Result Analysis</a><br/>
             </div>
             
@@ -378,8 +379,8 @@ for(Cookie cookie : cookies){
             
             <div>
                 <!-- <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=enterMarks" style="font-size: 12px;">Enter Marks</a><br/> -->
-                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
+				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
                 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getSubjectsExams" style="font-size: 12px;">Enter Marks</a><br/>
                 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=deleteMarks" style="font-size: 12px;">Delete Marks</a><br/>
             	<!-- <a target="mainFrame" href="progressreport.jsp" style="font-size: 12px;">Generate Report</a><br/> -->

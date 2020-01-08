@@ -96,7 +96,7 @@ public class UserService {
 		        List<String> yaxisList = new LinkedList<String>() ;
 		       // int[] test = new int[branchList.size()] ;
 		        for (Districts dist : districtsList) {
-                            List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.districtcode='"+dist.getDistrictname()+"'");
+                            List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.districtcode='"+dist.getDistrictname()+"' AND parents.Student.archive = 0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin')");
                             xaxisList.add("\""+dist.getDistrictname()+"\"");
                             if(student!=null) {
                                 String studentCount = Integer.toString(student.size());
@@ -127,7 +127,7 @@ public class UserService {
                         List<String> qualificationquantity = new LinkedList<String>();
                         
                         for (Qualification qualification : qualificationList) {
-                            List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.qualification ='"+qualification.getQualification()+"'");
+                            List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.qualification ='"+qualification.getQualification()+"' AND parents.Student.archive = 0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin')");
                             qualificationName.add("\"" + qualification.getQualification() + "\"");
                             qualificationquantity.add("\"" + student.size() + "\"");
                         }

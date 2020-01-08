@@ -112,7 +112,7 @@ public class MarksDetailsService {
 		                httpSession.setAttribute("evaluationsheetlanguagesearch","");
 		            }
 		            
-		            searchQuery = searchQuery+subQuery+ " Order By parent.Student.admissionnumber ASC";
+		            searchQuery = searchQuery+subQuery+ " AND parent.Student.archive = 0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin') Order By parent.Student.admissionnumber ASC";
 		            List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
 		            Map<Parents,String> mapStudentReports = new LinkedHashMap<Parents,String>();
 		            
@@ -185,7 +185,7 @@ public class MarksDetailsService {
 	                            
 	                            httpSession.setAttribute("subjectselected", subjectName);
 	                            
-	                            searchQuery = searchQuery+subQuery+" Order By admissionnumber ASC";
+	                            searchQuery = searchQuery+subQuery+" AND archive = 0 AND passedout = 0 AND droppedout = 0 AND (remarks = 'approved' OR remarks = 'admin') Order By admissionnumber ASC";
 	                            List<Student> studentList = new studentDetailsDAO().getListStudents(searchQuery);
 	                            //Map<Parents,String> mapStudentReports = new HashMap<Parents,String>();
 	                            
@@ -810,7 +810,7 @@ public class MarksDetailsService {
 		                httpSession.setAttribute("evaluationsheetacademicsearch", "");
 		            }
 		            
-		            searchQuery = searchQuery+subQuery+ " Order By parent.Student.admissionnumber ASC";
+		            searchQuery = searchQuery+subQuery+ " AND parent.Student.archive = 0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin') Order By parent.Student.admissionnumber ASC";
 		            List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
 		            
 		            
