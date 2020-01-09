@@ -1712,7 +1712,7 @@ public class AttendanceService {
             }
 					
 					String[] examLevelValues = request.getParameterValues("examlevelcode");
-					Map<Map<Student,List<String>>, String> attendanceMap = new HashMap<Map<Student,List<String>>, String>();
+					Map<Map<Student,List<String>>, String> attendanceMap = new LinkedHashMap<Map<Student,List<String>>, String>();
 					
 					
 					for (String examLevels : examLevelValues) {
@@ -1763,14 +1763,18 @@ public class AttendanceService {
                 httpSession.setAttribute("attendancesubexamlevel", subexamlevel);
                 //	
 		        
-		        for (Student student : studentsListPerCenter) {
-		            List<String> subDetails = new ArrayList<String>();
-                            for (Subexamlevel sel : subexamlevel) {
-                                	subDetails.add("0% %"+sel.getSubjectname());
-                            }
-                            viewAttendanceMap.put(student, subDetails);
-                        }
-		        		attendanceMap.put(viewAttendanceMap, examLevel[0]+"/"+examLevel[1]);
+                if(!studentsListPerCenter.isEmpty()) {
+               
+				        for (Student student : studentsListPerCenter) {
+				            List<String> subDetails = new ArrayList<String>();
+		                            for (Subexamlevel sel : subexamlevel) {
+		                                	subDetails.add("0% %"+sel.getSubjectname());
+		                            }
+		                            viewAttendanceMap.put(student, subDetails);
+		                        }
+				        		attendanceMap.put(viewAttendanceMap, examLevel[0]+"/"+examLevel[1]);
+		        		
+                			}
 					}
 					httpSession.setAttribute("viewAttendancemaplist", attendanceMap);
 		            // Here it is 

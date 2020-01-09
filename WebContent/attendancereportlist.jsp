@@ -447,7 +447,7 @@
 	$(function() {
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
+			var trLength = $('.labelClass').length;
 			if (length > 0) {
 				$('.chcktbl:checked').attr('checked', false);
 				this.checked = false;
@@ -465,7 +465,7 @@
 		
 		$('.chcktbl').click(function() {
 			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
+			var trLength = $('.labelClass').length;
 			alert(tdLength);
 			if (length > trLength) {
 
@@ -656,13 +656,21 @@ for(Cookie cookie : cookies){
 							</label> 
 						</tr>  --%>
 						
-						
+						<tr>
+							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"> &nbsp;</td>
+							<td>
+							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
+							</label>
+							</td>
+							
+						</tr>
+											
 						<tr>
 							<td class="alignRightFields" style="font-weight: bold;color:#325F6D">Exam Level* &nbsp;</td>
-							<td width="70%">
+							<td>
 							<c:forEach items="${examleveldetails}" var="examleveldetails">
-							<label style="font-weight: bold;color:#325F6D"> <input
-									name="examlevelcode" type="checkbox" class="myclass" id="examlevelcode" value="${examleveldetails.levelcode}:${examleveldetails.levelname}"
+							<label class="labelClass" style="font-weight: bold;color:#325F6D"> <input
+									name="examlevelcode" type="checkbox" class="chcktbl" id="examlevelcode" value="${examleveldetails.levelcode}:${examleveldetails.levelname}"
 									size="36"> ${examleveldetails.levelcode}
 							</label>
 							</c:forEach>

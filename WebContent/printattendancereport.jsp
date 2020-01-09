@@ -81,7 +81,7 @@
 	color: black;
 	font-size: 18px;
 	letter-spacing: normal;
-	text-align: center;
+	text-align: left;
 }
 
 .dataText {
@@ -198,8 +198,8 @@
 
 <body style="text-align: center" class="bodymargin">
 	<form method="post" class="bodymargin">
-	<c:forEach items="${viewAttendancemaplist}" var="viewAttendancemaplist" >
-		<div style="page-break-inside:avoid;">
+	
+		
 		<br>
 		<table width="100%" style="border-collapse: collapse;page-break-inside:avoid;">
 			<tr>
@@ -210,26 +210,28 @@
 				BOARD OF ISLAMIC EDUCATION KARNATAKA<br><br>
 				<label class="examlabels">${attendancecentercode}</label><label class="addressLine">&nbsp;&nbsp;&nbsp;ATTENDANCE LIST&nbsp;&nbsp;&nbsp;
 				 </label>
-				 <label class="examlabels">
+				 <%-- <label class="examlabels">
 				 Exam Code:
 					 <c:set var="attendanexamlevel" value="${fn:split(viewAttendancemaplist.value, '/')}" />
 							<c:out value="${attendanexamlevel[0]}" />
-				</label><br>
+				</label> --%><br>
 				</td>
 			</tr>
 			<tr>
 			<td></td></tr>
 			<tr></tr>
 	</table>
-
-<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+	<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
 
                     <td colspan="4" ></td>
 
                 </tr>
-            </TABLE>
-
+    </TABLE>
+            
+<c:forEach items="${viewAttendancemaplist}" var="viewAttendancemaplist" >
+	
+	<br>
 		<table>
 		<tr>
 			<td></td>
@@ -277,6 +279,7 @@
 						<th  class="datath">Sl.No.</th> 				 
   						<th  class="datath">Registration No.</th>
 						<th  class="datath">Student Name</th>
+						<c:set var="attendanexamlevel" value="${fn:split(viewAttendancemaplist.value, '/')}" />
 						<c:if test="${(attendanexamlevel[0] == 'CF') || (attendanexamlevel[0] == 'CS') }">
 								<th class="datath">Paper 1</th>
 							</c:if>
@@ -313,7 +316,7 @@
 					</c:forEach>
 			</tbody>
 				</table>
-				</div>
+				
 				</c:forEach>
 			<br><br>
 	</form>
