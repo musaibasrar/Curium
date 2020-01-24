@@ -6,6 +6,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 // Generated 14 Feb, 2018 12:05:32 AM by Hibernate Tools 4.0.0
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -62,7 +63,7 @@ public class Student implements java.io.Serializable {
 	private int branchid;
 	private String languagesstudied;
 	private String instructionmediumlastschool;
-	private Pudetails pudetails;
+	private List<Pudetails> pudetails;
 	private Degreedetails degreedetails;
 	private Integer passedout;
 	private Integer droppedout;
@@ -488,12 +489,12 @@ public class Student implements java.io.Serializable {
 	}
 
     
-    public Pudetails getPudetails() {
+    public List<Pudetails> getPudetails() {
         return this.pudetails;
     }
 
     
-    public void setPudetails(Pudetails pudetails) {
+    public void setPudetails(List<Pudetails> pudetails) {
         this.pudetails = pudetails;
     }
 

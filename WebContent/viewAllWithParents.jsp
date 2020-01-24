@@ -404,7 +404,7 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            <th title="click to sort" class="headerText">Class</th>
+                            <th title="click to sort" class="headerText">Course</th>
                             <th title="click to sort" class="headerText">Father's Name&nbsp;</th>
                             <th title="click to sort" class="headerText">Mother's Name&nbsp;</th>
                         </tr>

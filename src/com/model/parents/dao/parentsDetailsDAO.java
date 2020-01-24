@@ -1,5 +1,7 @@
 package com.model.parents.dao;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,6 +11,7 @@ import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.parents.dto.Parents;
+import com.model.pudetails.dto.Pudetails;
 import com.util.HibernateUtil;
 
 public class parentsDetailsDAO {
@@ -35,7 +38,12 @@ public class parentsDetailsDAO {
 	            //this.session = sessionFactory.openCurrentSession();
 	            transaction = session.beginTransaction();
 	            session.save(parents);
-
+	            List<Pudetails> pudetailsList = parents.getStudent().getPudetails();
+	            	
+	            	for (Pudetails pudetails : pudetailsList) {
+	            			pudetails.setExampassedappearance(parents.getStudent().getSid());
+	            			session.save(pudetails);
+					}
 
 	            transaction.commit();
 	           
@@ -73,6 +81,14 @@ public class parentsDetailsDAO {
             //this.session = sessionFactory.openCurrentSession();
             transaction = session.beginTransaction();
             session.update(parents);
+            
+            List<Pudetails> pudetailsList = parents.getStudent().getPudetails();
+        	
+        	for (Pudetails pudetails : pudetailsList) {
+        			pudetails.setExampassedappearance(parents.getStudent().getSid());
+        			session.save(pudetails);
+			}
+        	
             transaction.commit();
             System.out.println("in update parents");
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

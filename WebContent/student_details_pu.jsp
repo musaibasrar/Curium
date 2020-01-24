@@ -642,7 +642,7 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" >
                                 <label> First appearance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="checkbox" value="1" name="pep" id="firstappearance"
-								onclick="Check1();" ${student.pudetails.exampassedappearance == '1' ? 'checked' : ''}/>&nbsp;&nbsp;<br>Subsequent appearance&nbsp;<input
+								onclick="Check1();" ${student.pudetails.exampassedyear == '1' ? 'checked' : ''}/>&nbsp;&nbsp;<br>Subsequent appearance&nbsp;<input
 								type="checkbox" value="0" ${student.pudetails.exampassedappearance == '0' ? 'checked' : ''} name="pep" id="subsequentappearance"
 								onclick="Check2()" />
 							</label>
