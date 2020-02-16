@@ -62,7 +62,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 18px;
+	font-size: 14px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -158,7 +158,7 @@ span{
         }
 
         @media screen {
-            .fontsize { font-size: 15px;
+            .fontsize { font-size: 10px;
                         font-weight: bold;
                         font-family: 'Times New Roman'
             }
@@ -205,7 +205,6 @@ span{
 
     </style>
 	<script type="text/javascript">
-                       
 		window.onload = function(){
 		window.print();
 		}
@@ -241,7 +240,7 @@ for(Cookie cookie : cookies){
 				<td><img src="images/curiumheader.png" width="190" height="60"/></td>
 				<td width="5%"></td>
 				<td>
-				<label class="dataTextBoldCenter">Divine M.A. English Higher Primary & High School </label><br>
+				<label class="dataTextBoldCenter">Divine M.A. Independent P.U. College </label><br>
 				<label class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</label>
 				</td>
 			</tr>
@@ -250,7 +249,7 @@ for(Cookie cookie : cookies){
 			<tr></tr>
 </table>
 
-<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
+			<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
                 <tr>
 
                     <td colspan="4" ></td>
@@ -270,7 +269,7 @@ for(Cookie cookie : cookies){
 				<tr></tr>
 			</table>
 
-			<table style=" border-collapse: collapse;width: 100%;">
+			<table style="border-collapse: collapse;width: 70%;float: left">
 											
                             <tr style="border-color:#000000">
                                 <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.name}"/></label></td>
@@ -284,15 +283,25 @@ for(Cookie cookie : cookies){
                              
                              
                              <tr>   
-                                <td class="namedetails"><label>Admission No:&nbsp;&nbsp;&nbsp;</label><c:out value="${Parents.student.admissionnumber}"/></td>
-                                <td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
+				<td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.fathersname}"/></label></td>	
+                                <td class="namedetails"><label>Exam Reg. No.:&nbsp;&nbsp;&nbsp;</label><!--<c:out value="${Parents.student.admissionnumber}"/>--></td>
+                                <!--<td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
 									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td>
+									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td> -->
                             </tr>
                             
-                            <tr>
+                           <!-- <tr>
                             <td><br></td>
-                            </tr>
+                            </tr> -->
+                            
+                            </table>
+                            
+                            <table style=" border-collapse: collapse;width: 30%;float: left">
+                            	<tr>
+                            		<td>
+                            			<img src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" style="width: 60px;height: 60px;">
+                            		</td>
+                            	</tr>
                             
                             </table>
                             
@@ -323,7 +332,7 @@ for(Cookie cookie : cookies){
 			style="page-break-inside:avoid; border-collapse: collapse;">
 
 						<tr>
-							<td><br><br><br></td>
+							<td><br></td>
 						</tr>
 				<tr>
 				<td></td>
