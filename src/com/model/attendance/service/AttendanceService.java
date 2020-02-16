@@ -461,12 +461,12 @@ public class AttendanceService {
                 List<Subexamlevel> subexamlevel = new ExamLevelDetailsDAO().getSubExamLevelSubject(examLevel[0]);
                 httpSession.setAttribute("attendancesubexamlevel", subexamlevel);
                 //	
-		        
+		        String academicYear = request.getParameter("examyear").toString();
 		        for (Student student : studentsListPerCenter) {
 		            List<String> attendanceStatus = new ArrayList<String>();
 		            
                             studentDailyAttendance = new AttendanceDAO().getStudentsAttendance(""
-                                    + "from Studentdailyattendance where attendeeid = '"+student.getStudentexternalid()+"'  and examlevelcode='"+examLevel[0]+"'");
+                                    + "from Studentdailyattendance where attendeeid = '"+student.getStudentexternalid()+"'  and examlevelcode='"+examLevel[0]+"' and academicyear='"+academicYear+"'");
                             
                             for (Subexamlevel sel : subexamlevel) {
                                 boolean subStatus = false;
@@ -811,8 +811,20 @@ public class AttendanceService {
                       
                     
                     if(!attendanceStatus) {
+                    	
+                    		String searchQuery = null;
+                    		
+                    	   if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
+                               String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
+                               searchQuery = " AND student.admissionnumber like '"+subAcademicYear+"%'";
+                               httpSession.setAttribute("studentattendancemark", request.getParameter("examyear").toString());
+                           }else {
+                               httpSession.setAttribute("studentattendancemark", "");
+                           }
+                    	   httpSession.setAttribute("searchexamlevel", request.getParameter("examlevel").toString());
                         List<Student> searchStudentList = new studentDetailsDAO().getListStudents("From Student as student where student.examlevel='"+DataUtil.emptyString(request.getParameter("examlevel"))+"'"
-                                + " and student.centercode="+DataUtil.emptyString(request.getParameter("centercode"))+" AND student.archive = 0 AND student.passedout = 0 AND student.droppedout = 0 AND (student.remarks = 'approved' OR student.remarks = 'admin') Order by student.admissionnumber ASC");
+                                + searchQuery
+                        		+ " and student.centercode="+DataUtil.emptyString(request.getParameter("centercode"))+" AND student.archive = 0 AND student.passedout = 0 AND student.droppedout = 0 AND (student.remarks = 'approved' OR student.remarks = 'admin') Order by student.admissionnumber ASC");
                     request.setAttribute("StudentListAttendance", searchStudentList);
                     request.setAttribute("subjectlisttodisplay", DataUtil.emptyString(request.getParameter("subjectnameAjax")));
                     request.setAttribute("searchexamlevel", DataUtil.emptyString(request.getParameter("examlevel")));

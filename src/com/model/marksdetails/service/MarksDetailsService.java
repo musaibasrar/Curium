@@ -143,7 +143,7 @@ public class MarksDetailsService {
 	                    if(subjectName==null || subjectName.isEmpty()) {
 	                    	subjectName = DataUtil.emptyString(request.getParameter("subjectselected"));
 	                    }
-	                    String academicYear = DataUtil.emptyString(request.getParameter("academicyear"));
+	                    String academicYear = DataUtil.emptyString(request.getParameter("examyear"));
 	                    
 	                       String searchQuery = "From Student where ";
 	                       String subQuery =null;
@@ -184,6 +184,20 @@ public class MarksDetailsService {
 	        		            }
 	                            
 	                            httpSession.setAttribute("subjectselected", subjectName);
+	                            
+	                            if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
+	                                if(subQuery!=null) {
+	                                    String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
+	                                    
+	                                    subQuery = subQuery+" AND admissionnumber like '"+subAcademicYear+"%'";
+	                                }else {
+	                                    subQuery = " admissionnumber like '\"+subAcademicYear+\"%'";
+	                                }
+	                                httpSession.setAttribute("studentmarksentryexamyear", request.getParameter("examyear").toString());
+	                            }else {
+	                                httpSession.setAttribute("studentmarksentryexamyear", "");
+	                            }
+	                            
 	                            
 	                            searchQuery = searchQuery+subQuery+" AND archive = 0 AND passedout = 0 AND droppedout = 0 AND (remarks = 'approved' OR remarks = 'admin') Order By admissionnumber ASC";
 	                            List<Student> studentList = new studentDetailsDAO().getListStudents(searchQuery);
@@ -646,15 +660,28 @@ public class MarksDetailsService {
 		            
 		            if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
                         if(subQuery!=null) {
-                            subQuery = subQuery+" AND languageopted = '"+request.getParameter("languageopted")+"'";
+                            subQuery = subQuery+" AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                         }else {
-                            subQuery = "languageopted = '"+request.getParameter("languageopted")+"'";
+                            subQuery = " parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                         }
                         httpSession.setAttribute("printlanguage", "Language: "+request.getParameter("languageopted").toString());
                         httpSession.setAttribute("languagesearch", request.getParameter("languageopted").toString());
 		            }else {
 		                httpSession.setAttribute("languagesearch", "");
 		            }
+		            
+		            if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
+                        if(subQuery!=null) {
+                            String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
+                            
+                            subQuery = subQuery+" AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
+                        }else {
+                            subQuery = " parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
+                        }
+                        httpSession.setAttribute("studentmarksentryexamyear", request.getParameter("examyear").toString());
+                    }else {
+                        httpSession.setAttribute("studentmarksentryexamyear", "");
+                    }
 		            
 		            
 		            List<Studentdailyattendance> studentDailyAttendanceOne = new ArrayList<Studentdailyattendance>();

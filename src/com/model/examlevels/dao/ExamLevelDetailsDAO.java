@@ -1,14 +1,17 @@
 package com.model.examlevels.dao;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+import com.model.academicyear.dto.Currentacademicyear;
 import com.model.examlevels.dto.Examleveldetails;
 import com.model.examlevels.dto.Subexamlevel;
+import com.model.std.dto.Classhierarchy;
 import com.util.HibernateUtil;
 import com.util.Session;
 import com.util.Session.Transaction;
@@ -166,4 +169,39 @@ public class ExamLevelDetailsDAO {
             return results;
         }
     }
+
+
+
+
+	public List<String> getClassHierarchyLowerClass(String examLevel) {
+		
+		List<String> classList = new LinkedList<String>();
+		Classhierarchy classHierarchy = new Classhierarchy();
+        try {
+        	transaction = session.beginTransaction();
+            boolean result = true;
+            
+            do{
+            	
+            	Query query = session.createQuery("From Classhierarchy where upperclass = '"+examLevel+"'");
+            	classHierarchy = (Classhierarchy) query.uniqueResult();
+            	
+            	if(query.equals(null)) {
+            		result = false;
+            	}else {
+            		classList.add(classHierarchy.getLowerclass());
+                	examLevel = classHierarchy.getLowerclass();
+            	}
+            	
+            }while(result); 
+            
+            transaction.commit();
+        } catch (HibernateException hibernateException) {transaction.rollback();
+            hibernateException.printStackTrace();
+        } finally {
+            HibernateUtil.closeSession();
+            return classList;
+        }
+        
+	}
 }

@@ -532,7 +532,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td class="alignRightFields">Current Exam Level &nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="examlevelcode" id="examlevelcode" required
 									style="width: 240px;">
@@ -594,7 +594,7 @@ for(Cookie cookie : cookies){
 
 						</tr>
 						
-						<tr>
+						<%-- <tr>
 							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="forexamlevel" id="forexamlevel" required
@@ -613,7 +613,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 
-						</tr>
+						</tr> --%>
 						
 						<tr>
 							<td class="alignRightFields">Exam Year &nbsp;&nbsp;&nbsp;</td>
