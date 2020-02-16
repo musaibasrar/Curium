@@ -63,15 +63,57 @@ public class StampFeesService {
 					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
 		} else if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " parents.Student.classstudying like '"
-					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" ";
 		}
+		
+		  if(!DataUtil.emptyString(request.getParameter("admissionyear")).equalsIgnoreCase("")) {
+                  String subAcademicYear = request.getParameter("admissionyear").toString().substring(0, 4);
+                  querySub = querySub+" AND YEAR(parents.Student.admissiondate) = '"+subAcademicYear+"'";
+              httpSession.setAttribute("searchedadmissionyear", request.getParameter("admissionyear").toString());
+          }else {
+              httpSession.setAttribute("searchedadmissionyear", "");
+          }
 
 		if(!"".equalsIgnoreCase(querySub)) {
-			queryMain = queryMain + querySub;
+			queryMain = queryMain + querySub + " order by parents.Student.admissionnumber ASC";
 			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		}
 		
 	}
+		httpSession.setAttribute("classselected", request.getParameter("classsearch"));	
+		httpSession.setAttribute("trainingcenter", request.getParameter("trainingcenter"));
+		
+		String test = request.getParameter("examconducted2");
+		String examconductedtext = request.getParameter("examconductedtext");
+		String examconducted = request.getParameter("examconducted");
+		
+		if(!request.getParameter("examconducted2").isEmpty()) {
+			httpSession.setAttribute("examconductedcenter", request.getParameter("examconducted2"));
+		}else if(request.getParameter("examconductedtext") != null){
+			httpSession.setAttribute("examconductedcenter", request.getParameter("examconductedtext"));
+		}else {
+			httpSession.setAttribute("examconductedcenter", request.getParameter("examconducted"));
+		}
+		
+		httpSession.setAttribute("result", request.getParameter("result"));
+		httpSession.setAttribute("certificateawardedon", request.getParameter("certificateawardedon"));
+		
+		if(!request.getParameter("fromdate2").isEmpty()) {
+			httpSession.setAttribute("fromdatecenter", request.getParameter("fromdate2"));
+		}else if(request.getParameter("fromdatetext") != null){
+			httpSession.setAttribute("fromdatecenter", request.getParameter("fromdatetext"));
+		}else {
+			httpSession.setAttribute("fromdatecenter", request.getParameter("fromdate"));
+		}
+		
+		if(!request.getParameter("todate2").isEmpty()) {
+			httpSession.setAttribute("todatecenter", request.getParameter("todate2"));
+		}else if(request.getParameter("todatetext") != null){
+			httpSession.setAttribute("todatecenter", request.getParameter("todatetext"));
+		}else {
+			httpSession.setAttribute("todatecenter", request.getParameter("todate"));
+		}
+		
 		request.setAttribute("searchStudentList", searchStudentList);
 
 	}

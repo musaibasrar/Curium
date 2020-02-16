@@ -488,5 +488,27 @@ public class DocumentService {
 	}
 
 	
+	public String generateCertificate() {
+		
+		String[] studentIds = request.getParameterValues("studentIDs");
+		String certificate = request.getParameter("certificate");
+		
+		String bonafidePage = null;
+		
+		if(studentIds!=null){
+			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
+			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			httpSession.setAttribute("studentdetailsbonafide", parents);
+			if("gp".equalsIgnoreCase(certificate)) {
+				bonafidePage = "gpcertificateprint.jsp";
+			}else if("taksha".equalsIgnoreCase(certificate)) {
+				bonafidePage = "takshacertificateprint.jsp";
+			}
+			
+		}
+		
+		return bonafidePage;
+	}
+	
 	
 }

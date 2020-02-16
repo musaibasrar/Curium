@@ -114,7 +114,17 @@ public class StudentAction {
 
         private String searchStudentsForBonafide() {
                 new StampFeesService(request, response).advanceSearch();
-        return "studentsdetailsbonafide.jsp";
+                
+                String certificate = request.getParameter("certificate");
+                
+                if("gp".equalsIgnoreCase(certificate)) {
+                	return "gpcertificate.jsp";
+                }else if("taksha".equalsIgnoreCase(certificate)) {
+                	return "takshacertificate.jsp";
+                }else {
+                	return "error.jsp";
+                }
+        
         }
 
         private String searchForStudents() {

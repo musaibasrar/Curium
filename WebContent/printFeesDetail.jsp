@@ -64,7 +64,7 @@
 	color: black;
 	font-size: 32px;
 	letter-spacing: normal;
-	text-align: center;
+	text-align: left;
 }
 
 .addressLine{
@@ -176,14 +176,15 @@
 		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left">
-				<img src="images/cambridgelogo.jpg" width="200" height="150"/>
+				<td></td>
+				<td>
+				<img src="images/curiumheader.png" width="250" height="120"/>
 				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;Cambridge School Yadgir </label><br>
-				<label class="addressLine">Behind Mohan Complex, Chittapur Road, Yadgir - 585202<br>
+				<td>
+				<label class="dataTextBoldCenter">GP IT Solutions </label><br>
+				<label class="addressLine">Fateh Complex, Near Gutti Hospital, Ambedkar Circle, <br>Bidar. Ph.No- +91-8197415966<br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											Dist - Yadgir (K.S.) Cell: 9880012654 
+										
 				 </label>
 				</td>
 			</tr>
@@ -199,10 +200,11 @@
 		
 			<tr>
 			<td></td>
+			<td></td>
 			
 			</tr>
 			<tr>
-			
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 				<td class="dataTextBoldLeft" style="width: 50%">Student
 					Name: <c:out value="${student.name}" />
 				</td>
@@ -221,7 +223,9 @@
 			<tr>
 			<td></td>
 			</tr>
+			
 			<tr>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			<td class="dataTextBoldLeft" style="width: 50%">Fathers
 					Name: <c:out value="${parents.fathersname}" />
 				</td>
@@ -258,8 +262,8 @@
 
 			<tr>
 
-				<td class="headerText" style="font-weight: bold">Particulars</td>
-				<td class="headerText" style="font-weight: bold">Fees Amount</td>
+				<td >Particulars</td>
+				<td >Fees Amount</td>
 				
 
 			</tr>
@@ -350,11 +354,11 @@
 			
 			<tr>
 				<!-- <td>&nbsp;</td> -->
-				<td class="headerText" style="font-weight: bold;" >
+				<td>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				Total</td>
-				<td class="headerText">&#x20B9; <c:out
+				<td >&#x20B9; <c:out
 						value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
@@ -369,12 +373,13 @@
 
 <tr>
 
-<td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
+<td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /><br>
+	</td>
 <td></td>
 </tr>
 
 <tr>
-<td align="left">Note: Fees once deposited will not be refunded under any Circumstances</td>
+<td align="center">Note: Fees once deposited will not be refunded under any Circumstances</td>
 </tr>
 
 <tr>
@@ -382,7 +387,7 @@
 </tr>
 <tr>
 
-<td align="Center"><br>Clerks</td>
+<td align="left"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clerks</td>
 
 <td align="left">H.M</td>
 

@@ -42,8 +42,10 @@ public class DocumentAction {
 			url = printTransferCertificate();
 		}else if ("studentsDetailsReports".equalsIgnoreCase(action)) {
 			url = studentsDetailsReports();
-		}else if ("studentsDetailsBonafide".equalsIgnoreCase(action)) {
-			url = studentsDetailsBonafide();
+		}else if ("gpcertificate".equalsIgnoreCase(action)) {
+			url = gpCertificate();
+		}else if ("takshacertificate".equalsIgnoreCase(action)) {
+			url = takshaCertificate();
 		}else if ("printBonafide".equalsIgnoreCase(action)) {
 			url = printBonafide();
 		}else if ("admissionAbstract".equalsIgnoreCase(action)) {
@@ -54,10 +56,22 @@ public class DocumentAction {
 			url = generateAdmissionAbstract();
 		}else if ("download".equalsIgnoreCase(action)) {
 			url = downloadAdmissionAbstract();
+		}else if (action.equalsIgnoreCase("GenerateCertificate")) {
+            url = generateCertificate();
 		}
 		return url; 
 	} 
 	
+
+	 private String generateCertificate() {
+                
+                String result = new DocumentService(request, response).generateCertificate();
+                if (result!=null) {
+            return result;
+        } else {
+            return "error.jsp";
+        }
+        }
 
 	private String downloadAdmissionAbstract() {
 		if(new DocumentService(request, response).downlaodFile()){
@@ -92,12 +106,18 @@ public class DocumentAction {
 	}
 
 	private String printBonafide() {
-		return "bonafideprint.jsp";
+		return "gpcertificateprint.jsp";
+		//return "bonafideprint.jsp";
 	}
 
-	private String studentsDetailsBonafide() {
+	private String gpCertificate() {
 		new StandardService(request, response).viewClasses(); 
-		return "studentsdetailsbonafide.jsp";
+		return "gpcertificate.jsp";
+	}
+	
+	private String takshaCertificate() {
+		new StandardService(request, response).viewClasses(); 
+		return "takshacertificate.jsp";
 	}
 
 	private String studentsDetailsReports() {
