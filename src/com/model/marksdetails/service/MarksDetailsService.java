@@ -185,6 +185,18 @@ public class MarksDetailsService {
 	                            
 	                            httpSession.setAttribute("subjectselected", subjectName);
 	                            
+	                           
+
+	    		                if(subQuery!=null) {
+	    		                    String subAcademicYear = httpSession.getAttribute(CURRENTACADEMICYEAR).toString().substring(2, 4);
+	    		                    subQuery = subQuery+"AND admissionnumber like '"+subAcademicYear+"%'";
+	    		                }
+	    		                
+	    		                httpSession.setAttribute("studentmarksentryexamyear", request.getParameter("examyear").toString());
+	    		            
+		                        if(!httpSession.getAttribute(CURRENTACADEMICYEAR).toString().equalsIgnoreCase(request.getParameter("examyear").toString())) {
+	                            
+	                            
 	                            if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
 	                                if(subQuery!=null) {
 	                                    String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
@@ -198,7 +210,7 @@ public class MarksDetailsService {
 	                                httpSession.setAttribute("studentmarksentryexamyear", "");
 	                            }
 	                            
-	                            
+		                        }
 	                            searchQuery = searchQuery+subQuery+" AND archive = 0 AND passedout = 0 AND droppedout = 0 AND (remarks = 'approved' OR remarks = 'admin') Order By admissionnumber ASC";
 	                            List<Student> studentList = new studentDetailsDAO().getListStudents(searchQuery);
 	                            //Map<Parents,String> mapStudentReports = new HashMap<Parents,String>();
@@ -265,7 +277,7 @@ public class MarksDetailsService {
 							Studentdailyattendance studentAttendance = new Studentdailyattendance();
 							
 							//search in attendance 
-							studentAttendance = new AttendanceService().getStudentAttendance(student,subjectName,examLevel);
+							studentAttendance = new AttendanceService().getStudentAttendance(student,subjectName,examLevel,request.getParameter("examyear").toString());
 								
 							if(studentAttendance!=null && "Present".equalsIgnoreCase(studentAttendance.getAttendancestatus())) {
 								
@@ -670,25 +682,34 @@ public class MarksDetailsService {
 		                httpSession.setAttribute("languagesearch", "");
 		            }
 		            
-		            if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
-                        if(subQuery!=null) {
-                            String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
-                            
-                            subQuery = subQuery+" AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
-                        }else {
-                            subQuery = " parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
-                        }
-                        httpSession.setAttribute("studentmarksentryexamyear", request.getParameter("examyear").toString());
-                    }else {
-                        httpSession.setAttribute("studentmarksentryexamyear", "");
+		            if(subQuery!=null) {
+	                    String subAcademicYear = httpSession.getAttribute(CURRENTACADEMICYEAR).toString().substring(2, 4);
+	                    subQuery = subQuery+"AND admissionnumber like '"+subAcademicYear+"%'";
+	                }
+	                
+		            httpSession.setAttribute("studentmarksentryexamyear", request.getParameter("examyear").toString());
+	            
+                    if(!httpSession.getAttribute(CURRENTACADEMICYEAR).toString().equalsIgnoreCase(request.getParameter("examyear").toString())) {
+                    
+                    	 if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
+                             if(subQuery!=null) {
+                                 String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
+                                 
+                                 subQuery = subQuery+" AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
+                             }else {
+                                 subQuery = " parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
+                             }
+                             httpSession.setAttribute("studentmarksentryexamyear", request.getParameter("examyear").toString());
+                         }else {
+                             httpSession.setAttribute("studentmarksentryexamyear", "");
+                         }
                     }
-		            
-		            
+                    
 		            List<Studentdailyattendance> studentDailyAttendanceOne = new ArrayList<Studentdailyattendance>();
 		           
 	                            studentDailyAttendanceOne = new AttendanceDAO().getStudentsAttendance(""
 	                                    + "from Studentdailyattendance where  examlevelcode='"+examLevel+"'"
-	                                    		+ " and subject='"+subjectName+"' and attendancestatus='Present'");
+	                                    		+ " and subject='"+subjectName+"' and attendancestatus='Present' and academicyear='"+request.getParameter("examyear").toString()+"'");
 		            
 	                            searchQuery = searchQuery+subQuery;
 	                            
@@ -824,18 +845,30 @@ public class MarksDetailsService {
 		                httpSession.setAttribute("evaluationsheetlanguagesearch","");
 		            }
 		            
-		            if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
-		                if(subQuery!=null) {
-		                    String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
-		                    
-		                    subQuery = subQuery+"AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
-		                }else {
-		                    subQuery = "parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
-		                }
-		                httpSession.setAttribute("evaluationsheetacademicsearch", request.getParameter("examyear").toString());
-		            }else {
-		                httpSession.setAttribute("evaluationsheetacademicsearch", "");
-		            }
+		            if(subQuery!=null) {
+	                    String subAcademicYear = httpSession.getAttribute(CURRENTACADEMICYEAR).toString().substring(2, 4);
+	                    subQuery = subQuery+"AND admissionnumber like '"+subAcademicYear+"%'";
+	                }
+	                
+		            httpSession.setAttribute("evaluationsheetacademicsearch", request.getParameter("examyear").toString());
+	            
+                    if(!httpSession.getAttribute(CURRENTACADEMICYEAR).toString().equalsIgnoreCase(request.getParameter("examyear").toString())) {
+                    	if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
+    		                if(subQuery!=null) {
+    		                    String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
+    		                    
+    		                    subQuery = subQuery+"AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
+    		                }else {
+    		                    subQuery = "parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
+    		                }
+    		                httpSession.setAttribute("evaluationsheetacademicsearch", request.getParameter("examyear").toString());
+    		            }else {
+    		                httpSession.setAttribute("evaluationsheetacademicsearch", "");
+    		            }
+                    	
+                    }
+		            
+		            
 		            
 		            searchQuery = searchQuery+subQuery+ " AND parent.Student.archive = 0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin') Order By parent.Student.admissionnumber ASC";
 		            List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
@@ -850,7 +883,7 @@ public class MarksDetailsService {
 		            	 
 		            
 		            List<String> studentExternalId = new ArrayList<String>();
-		            List<Studentdailyattendance> studentDailyAttendance =  new AttendanceDAO().getStudentsAttendance("from Studentdailyattendance where examlevelcode='"+examLevel[1]+"' and attendancestatus='Present' and subject='"+subexamlevel.getSubjectname()+"'");
+		            List<Studentdailyattendance> studentDailyAttendance =  new AttendanceDAO().getStudentsAttendance("from Studentdailyattendance where examlevelcode='"+examLevel[1]+"' and attendancestatus='Present' and subject='"+subexamlevel.getSubjectname()+"' and academicyear='"+request.getParameter("examyear").toString()+"'");
                             
                             for (Studentdailyattendance studentdailyattendance2 : studentDailyAttendance) {
                             	studentExternalId.add(studentdailyattendance2.getAttendeeid());

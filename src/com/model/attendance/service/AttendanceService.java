@@ -1614,17 +1614,28 @@ public class AttendanceService {
 	                            httpSession.setAttribute("attendancelanguageoptedsearch", request.getParameter("languageopted"));
 	                        }
 	                        
-	                        if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
+	                        
+	                        
 	    		                if(subQuery!=null) {
-	    		                    String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
+	    		                    String subAcademicYear = httpSession.getAttribute(CURRENTACADEMICYEAR).toString().substring(2, 4);
 	    		                    subQuery = subQuery+"AND admissionnumber like '"+subAcademicYear+"%'";
 	    		                }
+	    		                
 	    		                httpSession.setAttribute("attendanceacademicsearch", request.getParameter("examyear").toString());
-	    		            }else {
-	    		                httpSession.setAttribute("attendanceacademicsearch", "");
-	    		            }
 	    		            
-	                        
+		                        if(!httpSession.getAttribute(CURRENTACADEMICYEAR).toString().equalsIgnoreCase(request.getParameter("examyear").toString())) {
+		                        
+			                        if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
+			    		                if(subQuery!=null) {
+			    		                    String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
+			    		                    subQuery = subQuery+"AND admissionnumber like '"+subAcademicYear+"%'";
+			    		                }
+			    		                httpSession.setAttribute("attendanceacademicsearch", request.getParameter("examyear").toString());
+			    		            }else {
+			    		                httpSession.setAttribute("attendanceacademicsearch", "");
+			    		            }
+		                        }
+
 	                        
 	                      /*  if(!request.getParameter("selectedacademicyear").equalsIgnoreCase("")) {
 	                            String subAcademicYear = request.getParameter("selectedacademicyear").toString().substring(2, 4);
@@ -1646,9 +1657,9 @@ public class AttendanceService {
 		            String attendanceQuery = null;
 		            
 		            if(!request.getParameter("attendancestatus").equalsIgnoreCase("")) {
-		            	attendanceQuery = "from Studentdailyattendance where attendeeid = '"+student.getStudentexternalid()+"'  and examlevelcode='"+examLevel[0]+"' and attendancestatus='"+request.getParameter("attendancestatus")+"' and subject='"+request.getParameter("subjectnameAjax")+"'";
+		            	attendanceQuery = "from Studentdailyattendance where attendeeid = '"+student.getStudentexternalid()+"'  and examlevelcode='"+examLevel[0]+"' and attendancestatus='"+request.getParameter("attendancestatus")+"' and subject='"+request.getParameter("subjectnameAjax")+"' and academicyear='"+request.getParameter("examyear").toString()+"'";
 		            }else {
-		            	attendanceQuery = "from Studentdailyattendance where attendeeid = '"+student.getStudentexternalid()+"'  and examlevelcode='"+examLevel[0]+"' and subject='"+request.getParameter("subjectnameAjax")+"'";
+		            	attendanceQuery = "from Studentdailyattendance where attendeeid = '"+student.getStudentexternalid()+"'  and examlevelcode='"+examLevel[0]+"' and subject='"+request.getParameter("subjectnameAjax")+"' and academicyear='"+request.getParameter("examyear").toString()+"'";
 		            }
 		            				
                             studentDailyAttendance = new AttendanceDAO().getStudentsAttendance(attendanceQuery);
@@ -1687,11 +1698,11 @@ public class AttendanceService {
 		return result;
 	}
 
-	public Studentdailyattendance getStudentAttendance(Student notFound, String subjectName, String examLevel) {
+	public Studentdailyattendance getStudentAttendance(Student notFound, String subjectName, String examLevel, String examYear) {
 		
 		Studentdailyattendance studentAttendance = new Studentdailyattendance();
 		
-			String HQL = "from Studentdailyattendance where attendeeid = '"+notFound.getStudentexternalid()+"' and subject = '"+subjectName+"' and examlevelcode = '"+examLevel+"'";
+			String HQL = "from Studentdailyattendance where attendeeid = '"+notFound.getStudentexternalid()+"' and subject = '"+subjectName+"' and examlevelcode = '"+examLevel+"' and academicyear='"+examYear+"'";
 			studentAttendance = new AttendanceDAO().getStudentAttendance(HQL);
 		
 		return studentAttendance;
