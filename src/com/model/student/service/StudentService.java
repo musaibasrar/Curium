@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -1563,7 +1564,7 @@ public class StudentService {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		boolean successResult = false;
 		
-		List<Parents> listOfStudentRecords = new ArrayList<Parents>();
+		Map<Parents,Long> listOfStudentRecords = new HashMap<Parents,Long>();
 
 		if (studentIds != null) {
 			for (String id : studentIds) {
@@ -1574,9 +1575,30 @@ public class StudentService {
 
 					List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 					request.setAttribute("searchStudentList", searchStudentList);
-
+					
 					Parents searchStudentRecords = new studentDetailsDAO().getStudentRecords(queryMain);
-					listOfStudentRecords.add(searchStudentRecords);
+					//listOfStudentRecords.add(searchStudentRecords);
+					
+					// GET Fees Info
+					
+					 List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(Long.parseLong(id),httpSession.getAttribute("currentAcademicYear").toString());
+	                    request.setAttribute("receiptinfo",rinfo);
+	                    List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(Long.parseLong(id),httpSession.getAttribute("currentAcademicYear").toString());
+	                    
+	                    long totalSum = 0l;
+	                    for (Receiptinfo receiptInfoSingle : rinfo) {
+	                            totalSum = totalSum + receiptInfoSingle.getTotalamount();
+	                    }
+	                    
+	                    long totalFeesAmount = 0l;
+	                    for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
+	                            totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount();
+	                    }
+	                            httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
+					
+					// End Fees Info
+	                            
+	                            listOfStudentRecords.put(searchStudentRecords, totalFeesAmount-totalSum);
 				}
 
 			}
@@ -1594,7 +1616,7 @@ public class StudentService {
 
 	}
 
-	public boolean exportDataToExcel(List<Parents> listOfStudentRecords)
+	public boolean exportDataToExcel(Map<Parents, Long> listOfStudentRecords)
 			throws Exception {
 
 		boolean writeSucees = false;
@@ -1607,22 +1629,18 @@ public class StudentService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
-							"Admitted In Class", "Admission Number", "Admission Date", "Blood Group", "Religion",
-							"Caste", "Fathers Name", "Mothers Name" });
+					new Object[] { "Admission No.", "Student Name", "Studying In Class",
+									"Fathers Name", "Fees Due Amount" });
 			int i = 1;
-			for (Parents studentDetails : listOfStudentRecords) {
+			
+			for (Entry<Parents, Long> studentDetails : listOfStudentRecords.entrySet()) {
+			
 				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
-								 DataUtil.emptyString(DateUtil.getStringDate(studentDetails.getStudent().getDateofbirth())),
-								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
-								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
-								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
-								 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
-								 DataUtil.emptyString(studentDetails.getStudent().getAdmissiondate().toString()),
-								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
-								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
-								 DataUtil.emptyString(studentDetails.getMothersname()) });
+						new Object[] { DataUtil.emptyString(studentDetails.getKey().getStudent().getStudentexternalid()),
+								 DataUtil.emptyString(studentDetails.getKey().getStudent().getName()), 
+								 DataUtil.emptyString(studentDetails.getKey().getStudent().getClassstudying().replace("--", " ")),
+								 DataUtil.emptyString(studentDetails.getKey().getFathersname()),
+								 studentDetails.getValue()});
 				i++;
 			}
 			Row headerRow = sheet.createRow(0);
