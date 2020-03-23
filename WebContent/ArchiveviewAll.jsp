@@ -439,7 +439,8 @@ for(Cookie cookie : cookies){
                         </c:forEach>
                     </tbody>
                     <tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><input value="Restore" type="submit" id="restore"/> &nbsp; &nbsp; &nbsp; &nbsp;<button id="delete">Delete</button> 
+                            <td  class="footerTD" colspan="2" ><input value="Restore" type="submit" id="restore"/> &nbsp; &nbsp; &nbsp; &nbsp;
+                            <button id="delete">Delete</button> 
                     
                         </tr></tfoot>
                 </table>

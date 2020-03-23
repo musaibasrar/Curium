@@ -75,12 +75,21 @@ public class StudentAction {
                     url = viewAllSuperAdmin();
                 }else if (action.equalsIgnoreCase("advanceSearchStudents")) {
                     url = advanceSearchStudents();
-                }
+                }else if (action.equalsIgnoreCase("multiClassSearch")) {
+                    url = multiClassSearch();
+            }
                 return url;
         }
         
 
-    private String advanceSearchStudents() {
+    private String multiClassSearch() {
+
+        new StampFeesService(request, response).multiClassSearch();
+        return "studentsdetailsreports.jsp";
+
+		}
+
+	private String advanceSearchStudents() {
     		new StandardService(request, response).viewClasses();
 			return "AdvanceSearch.jsp";
 		}

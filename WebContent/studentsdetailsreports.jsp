@@ -360,7 +360,7 @@
 <script type="text/javascript">
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StudentProcess&action=searchForStudents";
+		form1.action = "Controller?process=StudentProcess&action=multiClassSearch";
 		form1.method = "POST";
 		form1.submit();
 
@@ -515,12 +515,12 @@ for(Cookie cookie : cookies){
 
 				</ul>
 				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
+					<table width="30%" border="0" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
 							<td class="alignRightFields">Name &nbsp;</td>
-							<td width="12%" align="left"><label> <input
+							<td><label> <input
 									name="namesearch" type="text" class="myclass" id="namesearch"
 									size="36"">
 							</label></td>
@@ -535,7 +535,14 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
+							<td>
+							<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+										<input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
+										${classdetailslist.classdetails}
+										</c:if>	
+							</c:forEach>
+							<%-- <label> <select name="classsearch"
 									id="classsearch" style="width: 150px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -547,7 +554,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 
-							</label> <label> <select name="secsearch" id="secsearch"
+							</label>  --%><label style="visibility: hidden;"> <select name="secsearch" id="secsearch"
 									style="width: 120px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
