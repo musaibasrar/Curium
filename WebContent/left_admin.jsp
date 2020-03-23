@@ -492,7 +492,8 @@ for(Cookie cookie : cookies){
             <div >
                 <a target="mainFrame" href="Backup&Restore.jsp" style="font-size: 12px;">Backup</a><br/>
                 <a target="mainFrame" href="changePassword.jsp" style="font-size: 12px;">Change Password</a><br/>
-                <a target="mainFrame" href="uploadattendance.jsp" style="font-size: 12px;">upload attendance file</a><br/>
+                <a target="mainFrame" href="uploadattendance.jsp" style="font-size: 12px;">Upload Attendance File</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=archiveViewAll" style="font-size: 12px;">Archive Students</a><br/>
             </div>
             
             
