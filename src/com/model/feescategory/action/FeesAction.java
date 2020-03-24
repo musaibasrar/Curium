@@ -40,11 +40,18 @@ public class FeesAction {
                     url = feesCollectAllBranches();
                 }else if ("feesStructure".equalsIgnoreCase(action)) {
                     url = feesStructure();
+                }else if ("feesReport".equalsIgnoreCase(action)) {
+                    url = feesReport();
                 }
                 return url;
         }
 
-        private String feesStructure() {
+        private String feesReport() {
+        	new StandardService(request, response).viewClasses();
+			return "feesreport.jsp";
+		}
+
+		private String feesStructure() {
             new StandardService(request, response).viewClasses();
         return "feesstructure.jsp";
     }
