@@ -42,11 +42,18 @@ public class FeesCollectionAction {
                             url = viewCancelledReceipts();
                         }else if (action.equalsIgnoreCase("UndoFeesReceipt")) {
                             url = undoFeesReceipt();
-                        }
+                        }else if (action.equalsIgnoreCase("searchFeesReport")) {
+                            url = searchFeesReport();
+                    }
                 return url;
         }
 
-        private String undoFeesReceipt() {
+        private String searchFeesReport() {
+            new FeesCollectionService(request, response).getFeesReport();
+            return "feesreport.jsp";
+    }
+
+		private String undoFeesReceipt() {
         	new FeesCollectionService(request, response).undoFeesReceipt();
 			return "Controller?process=FeesCollection&action=viewCancelledReceipts";
 		}
