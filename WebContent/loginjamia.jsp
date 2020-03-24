@@ -49,17 +49,12 @@
                     window.open('index_admin.jsp','_self');
                 }else if(type=='feescollector'){
                     window.open('index_feescollector.jsp','_self');
-                }else if(type=='reception'){                    
-                   window.open('','_self');
-                    window.close();
-                    openIndexPage('index_reception.jsp',screen.width,screen.height);
-                }
-                else if(type=='staff'){
+                }else if(type=='staff'){
                 	window.open('index.jsp','_self');
                 }
             }
             else if(!flag1){
-            	window.open('loginFail.jsp','_self');
+            	window.open('loginFailJamia.jsp','_self');
             }
         </script>
         <form action="Controller?process=UserProcess&action=authenticateUser" method="post" id="form1">
@@ -71,12 +66,13 @@
                                     	</td>
                                     	</tr>
                                     	<tr>
-                                    	<td> <img alt="" src="images/curiumlogin.jpg" style="width:313px;height: 354px"></td>
+                                    	<td> <img alt="" src="images/jamialogin.jpeg" style="width:313px;height: 329px"></td>
                                     	<td></td><td></td><td></td>
                                     	 <td>
-                                    	 <p align="left" style="color: red;">Please enter correct username and password</p>
+                                    	 <br><br><br><br>	
                                             <img src="images/username.png" height="30" name="login" style="vertical-align: bottom;"/>
                                                     <input name="loginName" type="text"  placeholder="UserName" >
+                                                    <input name="jamia" type="hidden" value="true">
                                                 <br><br><br>
                                                 <img type="image" src="images/lock.png" height="28" name="login" style="vertical-align: bottom;"/>
                                                 <input name="password" type="password" placeholder="Password">

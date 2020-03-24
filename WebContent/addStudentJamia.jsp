@@ -992,6 +992,32 @@
 						</tr>
 						
 						<tr>
+							<td width="20%" class="alignRight">Marital Status &nbsp;</td>
+							<td width="28%"><label> <input name="previouschooladdress"
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									type="text" class="myclass" id="previouschooladdress" size="30">
+
+							</label></td>
+							
+							<td width="20%" class="alignRight">Husband's Name
+								&nbsp;</td>
+							<td width="28%"><label> <input
+									name="crecord" type="text" class="myclass"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									id="crecord" size="30">
+
+							</label></td>
+
+							
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
 							<td width="20%" class="alignRight">Pupil Staying with&nbsp;</td>
 
 							<td id="categoryname"><label> <select

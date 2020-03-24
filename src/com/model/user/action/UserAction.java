@@ -34,9 +34,16 @@ public class UserAction {
 				url = searchByDate();
 			} else if (action.equalsIgnoreCase("sessionTimeOut")) {
 	            url = sessionTimeOut();
+	        } else if (action.equalsIgnoreCase("logoutjamia")) {
+	            url = logoutJamia();
 	        }
 	       return url;
 	       
+	}
+
+	private String logoutJamia() {
+		new UserService(request, response).logOutUser();
+        return "loginjamia.jsp?logout=true";
 	}
 
 	private String sessionTimeOut() {
@@ -75,10 +82,15 @@ public class UserAction {
 	}
 
 	private String authenticateUser() {
+		
 		if (new UserService(request, response).authenticateUser()) {
 			
         return "login.jsp?login_success=true";
     } else {
+    	
+    	if("true".equalsIgnoreCase(request.getParameter("jamia"))) {
+    		return "loginjamia.jsp?login_success=false";
+		}
         return "login.jsp?login_success=false";
     }
 	}

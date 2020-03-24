@@ -191,12 +191,11 @@ public class StudentAction {
             
                 if (new StudentService(request, response).viewDetailsOfStudent()) {
                     String urlBranchId = request.getParameter("urlbranchid");
-                    if("1".equalsIgnoreCase(urlBranchId) || "2".equalsIgnoreCase(urlBranchId) || "3".equalsIgnoreCase(urlBranchId)) {
+                    
+                    if("2".equalsIgnoreCase(urlBranchId)) {
                         return "student_update.jsp";
-                    }else if(request.getParameter("urlbranchid").equalsIgnoreCase("4")) {
-                        return "student_update.jsp";
-                    }else if(request.getParameter("urlbranchid").equalsIgnoreCase("5")) {
-                        return "student_update.jsp";
+                    }else if(request.getParameter("urlbranchid").equalsIgnoreCase("3")) {
+                        return "student_update_jamia.jsp";
                     }
                     return "student_update.jsp";
                 }
@@ -207,20 +206,13 @@ public class StudentAction {
         private String viewStudent() {
             
         if (new StudentService(request, response).viewDetailsOfStudent()) {
-            if(request.getParameter("urlbranchid").equalsIgnoreCase("1")) {
-                return "student_details.jsp";
-            }else if(request.getParameter("urlbranchid").equalsIgnoreCase("2")) {
+            if(request.getParameter("urlbranchid").equalsIgnoreCase("2")) {
                 return "student_details.jsp";
             }else if(request.getParameter("urlbranchid").equalsIgnoreCase("3")) {
-                return "student_details.jsp";
-            }else if(request.getParameter("urlbranchid").equalsIgnoreCase("4")) {
-                return "student_details.jsp";
-            }else if(request.getParameter("urlbranchid").equalsIgnoreCase("5")) {
-                return "student_details.jsp";
+                return "student_details_jamia.jsp";
             }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
                 return "student_details_withoutmodify.jsp";
             }
-            
             return "student_details.jsp";
         } else {
             return "error.jsp";

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : login
-    Created on : Jan 9, 2012, 5:44:56 PM
+    Document   : login Fail Jamia
+    Created on : JUN 26, 2019, 09:27:56 PM
     Author     : Musaib
 --%>
 
@@ -59,7 +59,7 @@
                 }
             }
             else if(!flag1){
-            	window.open('loginFail.jsp','_self');
+            	window.open('loginFailJamia.jsp','_self');
             }
         </script>
         <form action="Controller?process=UserProcess&action=authenticateUser" method="post" id="form1">
@@ -71,7 +71,7 @@
                                     	</td>
                                     	</tr>
                                     	<tr>
-                                    	<td> <img alt="" src="images/curiumlogin.jpg" style="width:313px;height: 354px"></td>
+                                    	<td> <img alt="" src="images/jamialogin.jpeg" style="width:313px;height: 354px"></td>
                                     	<td></td><td></td><td></td>
                                     	 <td>
                                     	 <p align="left" style="color: red;">Please enter correct username and password</p>

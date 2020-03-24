@@ -153,7 +153,7 @@ for(Cookie cookie : cookies){
 						cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
 						<tr>
 
-							<td align="left"><img src="images/curiumheader.png"
+							<td align="left"><img src="images/jamiaheader.png"
 								style="width: 150px; height: 70px;" /></td>
 							<td><a target="leftFrame" href="left_admin.jsp"> <img
 									src="images/house_home.png" width="35" height="35"
@@ -213,7 +213,7 @@ for(Cookie cookie : cookies){
 									</a></td>
 								
 							<td ><a target="_parent"
-								href="Controller?process=UserProcess&action=logout"><img
+								href="Controller?process=UserProcess&action=logoutjamia"><img
 									src="images/logoutw.png" width="30" height="30" alt="Log Out" /></a></td>
 							<td width="60"></td>
 						</tr>

@@ -172,6 +172,7 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("remarks")) {
 		                	student.setRemarks(DataUtil.emptyString(item.getString()));
 		                }
+		                //@ UI 'Husband Name'
 		                if (fieldName.equalsIgnoreCase("crecord")) {
 		                	student.setCrecord(DataUtil.emptyString(item.getString()));
 		                }
@@ -209,10 +210,11 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("guardian")) {
 		                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
 		                }
-		                
+		                //@UI 'No. of Elder Brother(s)'
 		                if (fieldName.equalsIgnoreCase("semester")) {
 		                	student.setSemester(DataUtil.parseInt(item.getString()));
 		                }
+		                //@UI 'No. of Younger Brother(s)'
 		                if (fieldName.equalsIgnoreCase("stream")) {
 		                	student.setStream(DataUtil.emptyString(item.getString()));
 		                }		                
@@ -222,6 +224,7 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("previousschooltype")) {
 		                	student.setPreviousschooltype(DataUtil.emptyString(item.getString()));
 		                }
+		                //@UI 'Marital Status' 
 		                if (fieldName.equalsIgnoreCase("previouschooladdress")) {
 		                	student.setPreviouschooladdress(DataUtil.emptyString(item.getString()));
 		                }
@@ -241,18 +244,19 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("belongtobpl")) {
 		                	student.setBelongtobpl(DataUtil.parseInt(item.getString()));
 		                }
-		                //@UI 'Adhar card no'
+		                //@UI 'Studnet's Sub Caste'
 		                if (fieldName.equalsIgnoreCase("bplcardno")) {
 		                	student.setBplcardno(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Whether Vaccinated'
+		                //@UI 'No. of Elder Sister(s)'
 		                if (fieldName.equalsIgnoreCase("bhagyalakshmibondnumber")) {
 		                	student.setBhagyalakshmibondnumber(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Marks of Identification on Pupil's body'
+		                //@UI 'No. of Younger Sister(s)'
 		                if (fieldName.equalsIgnoreCase("disabilitychild")) {
 		                	student.setDisabilitychild(DataUtil.emptyString(item.getString()));
 		                }
+		                //@UI 'PUPIL Staying with'
 		                if (fieldName.equalsIgnoreCase("specialcategory")) {
 		                	student.setSpecialcategory(DataUtil.emptyString(item.getString()));
 		                }
@@ -476,14 +480,7 @@ public class StudentService {
 		student.setPassedout(0);
 		student.setDroppedout(0);
 		student.setLeftout(0);
-		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLM0123NOP89QRSTUVWXYZ4567*&!@#%~$.'?<>{[|;:/";
-		int count =4;
-		StringBuilder builder = new StringBuilder();
-		while (count-- != 0) {
-		int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
-		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
-		}
-		student.setStudentexternalid(builder.toString());
+		student.setStudentexternalid(DataUtil.generateString(5));
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		puDetails.setOptionalsubjects(optional.toString());
 		puDetails.setCompulsorysubjects(compulsory.toString());
@@ -1466,7 +1463,14 @@ public class StudentService {
         
         if(httpSession.getAttribute(BRANCHID)!=null){
             String branchId = httpSession.getAttribute(BRANCHID).toString();
-            return "addStudent.jsp";
+            	// return "addStudent.jsp";
+            
+            if("2".equalsIgnoreCase(branchId)) {
+                return "addStudent.jsp";
+            }else if("3".equalsIgnoreCase(branchId)) {
+                return "addStudentJamia.jsp";
+            }
+            
            /* if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
                 return "addStudent.jsp";
             }else if("4".equalsIgnoreCase(branchId)) {

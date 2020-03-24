@@ -11,7 +11,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
-<html moznomarginboxes >
+<html>
+<title>FEES RECIEPT</title>
 <head>
 <style type="text/css">
 <!--
@@ -148,8 +149,8 @@
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
              margin-bottom: 0cm;
              margin-top: 0cm;
         }
@@ -160,7 +161,7 @@
                         font-family: 'Times New Roman'
             }
             .bodymargin{
-                margin-left: 0px ;
+                margin-left:  0px;
                 margin-right: 0px;
             }
         }
@@ -172,37 +173,30 @@
 <body style="text-align: center" class="bodymargin">
 	<form method="post" class="bodymargin">
 		<br>
+		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left">
-				<img src="images/curiumheader.png" width="200" height="150"/>
-				</td>
-				<td class="dataTextBoldCenter" style="width: 100%">
-				<label class="addressLine">Curium Education Society's
+				<img src="images/curiumlogin.jpg" width="180" height="150"/>
+				</td> 
+				<td style="width: 100%;" align="left">
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JAMIA RAUZAT-UL-BANAT </label><br>
+				<label class="addressLine">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mohella Ali Bagh, Near Masjid Siddiq Shah Taleem<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											Bidar. (K.S.) Cell: 9945906615 (O) 9241174345
 				 </label>
-				<label class="addressLine">Degree College, Bidar- 585401 <br>
-				 </label>
-				
 				</td>
 			</tr>
-			<tr>
-			<td></td></tr>
-			<tr></tr>
 </table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
-
                     <td colspan="4" ></td>
-
                 </tr>
             </TABLE>
 
 		<table>
-		<tr>
-			<td></td>
-			
-			</tr>
+		
 			<tr>
 			<td></td>
 			
@@ -375,13 +369,23 @@
 
 <tr>
 
-<td >In Words: <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
+<td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
 <td></td>
 </tr>
 
 <tr>
 <td align="left">Note: Fees once deposited will not be refunded under any Circumstances</td>
-<td align="right">Clerk</td>
+</tr>
+
+<tr>
+<td><br><br></td>
+</tr>
+<tr>
+
+<td align="Center"><br>Clerks</td>
+
+<td align="left">H.M</td>
+
 </tr>
 		</TABLE>
 
