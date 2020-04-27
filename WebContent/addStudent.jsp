@@ -594,7 +594,7 @@
 						</tr>
 						
 						<tr>
-							<td width="30%" class="alignRight">Student Name* &nbsp;</td>
+							<td width="30%" class="alignRight">Child Name*(As on birth certificate) &nbsp;</td>
 							<td width="30%" align="left"><label> <input
 									name="name" type="text" class="myclass" id="name" size="30" required
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
@@ -1263,7 +1263,7 @@
 								</tr>
 
 								<tr>
-									<td class="alignRight">Father's Name* &nbsp;</td>
+									<td class="alignRight">Father's Name*(First Name, Last Name) &nbsp;</td>
 									<td align="left"><label> <input
 											name="fathersname" type="text" class="myclass" required
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
@@ -1271,7 +1271,7 @@
 											required> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 
-									<td class="alignRight">Mother's Name* &nbsp;</td>
+									<td class="alignRight">Mother's Name*(First Name, Last Name) &nbsp;</td>
 									<td align="left"><label> <input
 											name="mothersname" type="text" class="myclass" id="name" required
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
