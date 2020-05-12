@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 
 @Configuration
-@Import({ WebXmlConfiguration.class})
+@Import({ WebXmlConfiguration.class })
 @ImportResource({ "classpath*:appContext.xml" })
 // @PropertySource(value="classpath:META-INF/spring/jdbc.properties")
 @EnableAutoConfiguration
