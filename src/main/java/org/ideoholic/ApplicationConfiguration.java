@@ -1,4 +1,4 @@
-package org.ideoholic.controller.infrastructure;
+package org.ideoholic;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Configuration;

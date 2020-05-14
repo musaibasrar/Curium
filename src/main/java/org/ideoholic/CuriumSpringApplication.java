@@ -1,13 +1,12 @@
 /**
  * 
  */
-package org.ideoholic.controller;
+package org.ideoholic;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import org.ideoholic.controller.infrastructure.ApplicationConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
