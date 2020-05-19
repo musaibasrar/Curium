@@ -48,4 +48,16 @@ public class UserRestApiResource {
 		return Response.status(200).entity(output).build();
 	}
 
+	@POST
+	@Path("changePassword")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response changePassword(final UserProfileDto userDto) {
+		String output = "";
+		output = userService.changePassword(userDto.getCurrentPassword(), userDto.getNewPassword(),
+				userDto.getConfirmNewPassword());
+
+		return Response.status(200).entity(output).build();
+
+	}
 }
