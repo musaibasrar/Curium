@@ -154,7 +154,7 @@ for(Cookie cookie : cookies){
 						<tr>
 
 							<td align="left"><img src="images/curiumheader.png"
-								style="width: 200px; height: 70px;" /></td>
+								style="width: 220px; height: 70px;" /></td>
 							<td><a target="leftFrame" href="left_admin.jsp"> <img
 									src="images/house_home.png" width="35" height="35"
 									alt="Home" style="vertical-align: bottom;" />Home

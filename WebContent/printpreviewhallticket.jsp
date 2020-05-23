@@ -67,6 +67,15 @@
 	text-align: center;
 }
 
+.hallTicket {
+	font-weight: bold;
+	font-family: Tahoma;
+	color: black;
+	font-size: 16px;
+	letter-spacing: normal;
+	text-align: center;
+}
+
 .addressLine{
 	font-weight: normal;
 	font-family: ariel;
@@ -95,41 +104,6 @@ span{
 </style>
 
 
-<!-- <style type="text/css">
-
-        @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-            	margin-top: 0px;
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              size: auto;   /* auto is the current printer page size */
-           	  margin: 0mm;  /* this affects the margin in the printer settings */ 
-            
-        }
-
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-        }
-    </style> -->
     
     <style type="text/css">
 
@@ -150,33 +124,30 @@ span{
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
              margin-bottom: 0cm;
              margin-top: 0cm;
         }
 
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-        }
         
         .subjectdetails{
         	border: 1px solid #dddddd;
-    		text-align: left;
+    		text-align: center;
    		    padding: 8px;
         }
         
          .namedetails{
         	border: 0px solid #dddddd;
+    		text-align: center;
+   		    padding: 2px;
+   		    
+        }
+         .namedetailsheader{
+        	border: 0px solid #dddddd;
     		text-align: left;
-   		    padding: 8px;
+   		    padding: 2px;
+   		    
         }
     </style>
 	
@@ -203,34 +174,38 @@ for(Cookie cookie : cookies){
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
                         <c:forEach items="${studentList}" var="Parents">
-                        
-                        	<table width="100%" style="border-collapse: collapse;">
+                        <div align="center">
+                        	<table>
 			<tr>
-				<td class="dataTextBoldCenter" style="width: 100%">
-				
-				Shaheen Pre & Primary School</td>
+				<td></td>
+				<td>
+				<img src="images/curiumlogin.jpg" width="180" height="60"/>
+				</td>
+				<td class="dataTextBoldCenter">
+						Brainy Stars<br>
+					<label class="addressLine">
+						International Holistic Montessori (School)<br>
+			Plot No.62, Sector No.2, Shiv Basav Nagar, Belgavi-590 010, Karnataka State.<br>Ph: 083 - 12477371
+					</label>
+				</td>
 			</tr>
 			<tr>
-			<td class="addressLine">Opp. Star Shadi Mahal, Ring Road, Veer Sagara,Tumkur-572101<br>Ph: +91 99866 06766, +91 79759 92850</td>
+			
 			</tr>
 
-			<tr>
-			<td></td></tr>
-			<tr></tr>
 </table>
+</div>
 
-<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+		    <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
-
                     <td colspan="4" ></td>
-
                 </tr>
+                
             </TABLE>
 
 			<table width="100%" style="border-collapse: collapse;">
-					<tr><td><br></td></tr>
 				<tr>
-					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket (${examname})
+					<td class="hallTicket" style="width: 100%">Hall Ticket (${examname})
 					</td>
 				</tr>
 				<tr>
@@ -239,11 +214,11 @@ for(Cookie cookie : cookies){
 				<tr></tr>
 			</table>
 
-			<table style=" border-collapse: collapse;width: 100%;">
+			<table style="border-collapse: collapse;width: 100%;float: left">
 											
                             <tr style="border-color:#000000">
-                                <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.name}"/></label></td>
-                                <td class="namedetails"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <td class="namedetailsheader"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.name}"/></label></td>
+                                <td class="namedetailsheader"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 						    ${splt} 
 							</c:forEach>
@@ -253,14 +228,10 @@ for(Cookie cookie : cookies){
                              
                              
                              <tr>   
-                                <td class="namedetails"><label>Admission No:&nbsp;&nbsp;&nbsp;</label><c:out value="${Parents.student.admissionnumber}"/></td>
-                                <td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
+                                <td class="namedetailsheader"><label>Admission No:&nbsp;&nbsp;&nbsp;</label><c:out value="${Parents.student.admissionnumber}"/></td>
+                                <td class="namedetailsheader"><label>Date Of Issue:&nbsp;&nbsp;</label><input
 									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td>
-                            </tr>
-                            
-                            <tr>
-                            <td><br></td>
                             </tr>
                             
                             </table>
@@ -292,18 +263,11 @@ for(Cookie cookie : cookies){
                             
                             
                             <TABLE id="dataTable" width="100%" border="0"
-			style="page-break-after: always; border-collapse: collapse;">
+			style="page-break-inside:avoid; border-collapse: collapse;">
 
 			<tr>
 			<td>
-			<br>
 			<br><br><br></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
 			</tr>
 		<tr>
 		<td></td>
@@ -313,7 +277,7 @@ for(Cookie cookie : cookies){
 			</tr>
 			
 			<tr>
-                        <td align="center"><br><br><br><br><br></td>
+                        <td align="center"><br><br></td>
                     </tr>
              
              <tr>

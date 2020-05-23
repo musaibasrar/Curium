@@ -67,11 +67,20 @@
 	text-align: center;
 }
 
+.addressLineOne{
+	font-weight: normal;
+	font-family: ariel;
+	color: black;
+	font-size: 20px;
+	letter-spacing: normal;
+	text-align: center;
+}
+
 .addressLine{
 	font-weight: normal;
 	font-family: ariel;
 	color: black;
-	font-size: 18px;
+	font-size: 14px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -149,8 +158,8 @@
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
              margin-bottom: 0cm;
              margin-top: 0cm;
         }
@@ -177,13 +186,20 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left">
-				<img src="images/cambridgelogo.jpg" width="200" height="150"/>
+				<img src="images/curiumlogin.jpg" width="250" height="100"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;Shaheen Pre & Primary School</label><br>
-				<label class="addressLine">Opp. Star Shadi Mahal, Ring Road, Veer Sagara,Tumkur-572101<br>
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Brainy Stars</label><br>
+						<label class="addressLineOne">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				International Holistic Montessori (School)
+				 </label><br>
+				<label class="addressLine">
+				Plot No.62, Sector No.2, Shiv Basav Nagar, Belgavi-590 010, Karnataka State.<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											Ph: +91 99866 06766, +91 79759 92850 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Ph: 083 - 12477371
 				 </label>
 				</td>
 			</tr>
@@ -382,9 +398,9 @@
 </tr>
 <tr>
 
-<td align="Center"><br>Clerks</td>
+<td align="Center"></td>
 
-<td align="left">H.M</td>
+<td align="left"><br>Signature</td>
 
 </tr>
 		</TABLE>
