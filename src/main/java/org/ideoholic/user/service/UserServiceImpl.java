@@ -70,10 +70,16 @@ public class UserServiceImpl implements UserService {
 		new UserDAO().sessionClose();
 		return sb.toString();
 	}
-	
-   public String changePassword(String currentPassword, String newPassword, String confirmNewPassword) {
-		
+
+	public String changePassword(String currentPassword, String newPassword, String confirmNewPassword) {
+		/*
+		 * TODO: Need to add username also to the parameter as the user needs to be
+		 * fetched by the username and then the password matched with current password
+		 * before changing to new password, also confirm password needs to be shifted as
+		 * UI responsibility
+		 */
 		StringBuffer sb = new StringBuffer();
+<<<<<<< HEAD
 		sb.append("{"); 
          Login login = new UserDAO().readPassword(currentPassword);
         
@@ -241,11 +247,28 @@ public String feesdailysearch() {
 		sb.append("}");
 		return sb.toString();
 	}
+=======
+		sb.append("{");
+		Login login = new UserDAO().readPassword(currentPassword);
+>>>>>>> 02df6597ad947ff279dd2316bd7adace1a9d856d
 
+		if (login != null && newPassword.equals(confirmNewPassword)) {
+			login.setPassword(newPassword);
+			login = new UserDAO().update(login);
+			sb.append("result:").append(true);
+		} else {
+			sb.append("result:").append(false);
+		}
 
+<<<<<<< HEAD
     public String advanceSearch(SearchParameterDto searchParameter, String branchId) {
 	StringBuffer sb = new StringBuffer();
 	sb.append("{");
+=======
+		sb.append("}");
+		return sb.toString();
+	}
+>>>>>>> 02df6597ad947ff279dd2316bd7adace1a9d856d
 
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 		
@@ -553,5 +576,8 @@ public String searchByDate(String branchId, String selectedbranchid, String toDa
 		sb.append("}");
 		return sb.toString();
 }
+<<<<<<< HEAD
 
 }
+=======
+>>>>>>> 02df6597ad947ff279dd2316bd7adace1a9d856d
