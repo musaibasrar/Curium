@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.ideoholic.user.dto.UserProfileDto;
+import org.ideoholic.user.service.SearchParameterDto;
 import org.ideoholic.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +41,6 @@ public class UserRestApiResource {
 
 	@GET
 	@Path("logout")
-	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response logout() {
 		String output = "";
@@ -60,4 +60,64 @@ public class UserRestApiResource {
 		return Response.status(200).entity(output).build();
 
 	}
+	
+	@POST
+	@Path("dashBoard")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response dashBoard(final UserProfileDto userDto) {
+		String output = "";
+				output = userService.dashBoard(userDto.getBranchId(), userDto.getToDate(),userDto.getFromDate());
+
+		return Response.status(200).entity(output).build();
+	}
+	
+	@POST
+	@Path("advanceSearch")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response advanceSearch(final UserProfileDto userDto) {
+		String output = "";
+				output = userService.advanceSearch(null, userDto.getBranchId());
+
+		return Response.status(200).entity(output).build();
+	}
+	
+	@POST
+	@Path("advanceSearchByParents")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response advanceSearchByParents(final UserProfileDto userDto) {
+		String output = "";
+				output = userService.advanceSearchByParents(userDto.getBranchId(),userDto.getFathersName(), userDto.getMothersName());
+
+		return Response.status(200).entity(output).build();
+	}
+	
+	@POST
+	@Path("backupData")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response backupData(final UserProfileDto userDto) {
+		String output = "";
+				output = userService.backupData(userDto.getFileName());
+
+		return Response.status(200).entity(output).build();
+	}
+	
+	@POST
+	@Path("searchByDate")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response searchByDate(final UserProfileDto userDto) {
+		String output = "";
+				output = userService.searchByDate(userDto.getBranchId(),userDto.getSelectedbranchid(),userDto.getToDate(), userDto.getFromDate(),
+						userDto.getOneDay(),userDto.getDayOne(),userDto.getDateFrom(),userDto.getDateTo());
+
+		return Response.status(200).entity(output).build();
+	}
+
+	
+	
+
 }
