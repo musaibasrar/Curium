@@ -201,4 +201,14 @@ public class StudentRestApiResource {
 		output = studentService.viewAllStudentsSuperAdmin();
 		return Response.status(200).entity(output).build();
 	}
+	
+	@POST
+	@Path("addNew")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response addNew(final StudentProfileDto studentDto) {
+		String output = "";
+		output = studentService.addNew(studentDto.getBranchId());
+		return Response.status(200).entity(output).build();
+	}
 }
