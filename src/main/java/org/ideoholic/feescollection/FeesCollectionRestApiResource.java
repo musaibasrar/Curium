@@ -77,5 +77,16 @@ public class FeesCollectionRestApiResource {
 
 	}
 	
+	@POST
+	@Path("undoFeesReceipt")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response undoFeesReceipt(final FeesCollectionProfileDto FeesDto) {
+		String output = "";
+		output =feesCollectionService.undoFeesReceipt(FeesDto.getCurrentAcademicYear(),FeesDto.getReceiptId());
+		return Response.status(200).entity(output).build();
+
+	}
+	
 
 }

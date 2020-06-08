@@ -18,4 +18,6 @@ public interface FeesCollectionService {
 	String viewCancelledReceipts(String branchId, String branchId1, String toDate, String fromDate, String oneDay,
 			String dayOne, String dayonecancel, String datefromcancel, String datetocancel);
 
+	String undoFeesReceipt(String currentAcademicYear, int receiptId);
+
 }

@@ -166,4 +166,22 @@ public String viewCancelledReceipts(String branchId,String branchId1,String toDa
 		return sb.toString();
 }
 
+
+public String undoFeesReceipt(String currentAcademicYear, int receiptId) {
+	StringBuffer sb = new StringBuffer();
+	sb.append("{");
+	
+	if(currentAcademicYear!=null){
+		
+		List<Feescollection> feesCollection = new feesCollectionDAO().getFeesCollectionDetails(receiptId);
+		boolean result = new feesDetailsDAO().undoFeesReceipt(receiptId, feesCollection);
+		
+		
+		sb.append("cancelreceiptresult").append(result);
+			
+	}
+	sb.append("}");
+	return sb.toString();
+}
+
 }
