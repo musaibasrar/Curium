@@ -32,9 +32,10 @@ public class YearServiceImpl implements YearService {
 		currentacademicyear = new YearDAO().showYear();
 			if(currentacademicyear != null){
 				sb.append("currentyear").append(currentacademicyear.getCurrentacademicyear());
+				sb.append("result:").append(true);
 				return sb.toString();
 			}else{
-				
+				sb.append("result:").append(false);
 				sb.append("}");
 				return sb.toString();
 			}

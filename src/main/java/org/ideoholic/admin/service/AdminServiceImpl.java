@@ -41,9 +41,11 @@ public class AdminServiceImpl implements AdminService {
 					&& adminexpenses.getPriceofitem() != 0				
 					){
 			adminexpenses = new AdminDetailsDAO().create(adminexpenses);
+			sb.append("result:").append("true");
 			    return sb.toString();
 			}
 		}
+		sb.append("result:").append("false");
 		sb.append("}");
 		return sb.toString();
 		

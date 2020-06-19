@@ -36,12 +36,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		if(new EmployeeDAO().create(employee)){
 			if(userService.addUser(employee)){
+				sb.append("result:").append(true);
 				return sb.toString();
 			}else{
 				new EmployeeDAO().delete(employee);
 			}
 		}
 		}
+		sb.append("result:").append(false);
 		sb.append("}");
 		return sb.toString();
 	}

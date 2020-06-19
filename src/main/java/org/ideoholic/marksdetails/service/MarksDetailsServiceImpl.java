@@ -256,6 +256,7 @@ public String viewMarks(String branchId,String studentname,String addClass,Strin
 		 */
 		
 		}
+		sb.append("result:").append(true);
 		sb.append("}");
 		return sb.toString();
 	}

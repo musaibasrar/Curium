@@ -86,6 +86,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 			e.printStackTrace();	
 			}
 		}
+		sb.append("result");
 		sb.append("}");
 		return sb.toString();
 	}
@@ -102,6 +103,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 			boolean saveWeeklyOff= new AttendanceDAO().saveWeeklyOff(weeklyOff);
 		}
 		}
+		sb.append("result:").append(false);
 		sb.append("}");
 		return sb.toString();
 	}
@@ -116,6 +118,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 		}
 		boolean deleteholidayIds= new AttendanceDAO().deleteMultiple(holidayIds);	
 		}
+		sb.append("result:").append(false);
 		sb.append("}");
 		return sb.toString();
 	}
@@ -422,6 +425,7 @@ private String checkTimings(String inTime, String cutOffTime) {
 	} catch (Exception e) {
 		logger.info("checktimings "+e);
 	}
+	sb.append("result:").append(false);
 	sb.append("}");
 return sb.toString();
 }
@@ -432,8 +436,10 @@ public String viewAttendance(String branchId) {
 	List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId.toString()));
 	sb.append("studentList").append(studentList);
 		if(!studentList.isEmpty()){
+			sb.append("result:").append(true);
 			return sb.toString();
 		}
+		sb.append("result:").append(false);
 		sb.append("}");
 		return sb.toString();
 }
@@ -455,7 +461,9 @@ public String updateStudentAttendanceDetails(String currentAcademicYear,String[]
 		}
 		boolean updateAttendceDetail=new AttendanceDAO().updateStudentAttendanceDetails(attendanceIdsList,studentAttendanceStatusList,currentAcademicYear.toString());
 	}
+	sb.append("result:").append(false);
 	sb.append("}");
+	
 	return sb.toString();
 }
 
@@ -760,11 +768,12 @@ public String viewAttendanceStaff(String branchId) {
 		List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId.toString()));
 		sb.append("staffList").append(staffList);
 			if(!staffList.isEmpty()){
+				sb.append("result:").append(true);
 				return sb.toString();
 			}
 	}
+	sb.append("result:").append(false);
 	sb.append("}");
-	
 		return sb.toString();
 }
 
@@ -821,6 +830,7 @@ public String updateStaffAttendanceDetails(String currentAcademicYear,String[] a
 		}
 		boolean updateStaffDetails= new AttendanceDAO().updateStaffAttendanceDetails(attendanceIdsList,staffAttendanceStatusList);
 	}
+	sb.append("result:").append(false);
 	sb.append("}");
 	return sb.toString();
 }
