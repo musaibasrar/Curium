@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ideoholic.employee.dto.AddEmplParameterDto;
+
+import com.model.department.dao.departmentDAO;
+import com.model.department.dto.Department;
 import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
+import com.model.hr.dto.Paybasic;
 import com.model.user.dao.UserDAO;
 import com.model.user.dto.Login;
 import com.model.user.service.UserService;
@@ -75,7 +79,7 @@ public String viewDetailsEmployee(long id) {
           
            if (employee.getTid() != null) {
         	   sb.append("employee").append(employee);
-           	sb.append("stafflogin").append(employeeLogin);
+           	sb.append(",stafflogin").append(employeeLogin);
                return sb.toString();
            } 
        } catch (Exception e) {
@@ -157,6 +161,20 @@ public String addEmployee(String branchId, AddEmplParameterDto addParam,
 		org.ideoholic.user.service.UserService userService) {
 	// TODO Auto-generated method stub
 	return null;
+}
+
+
+public String basicpayEmployees(String branchId) {
+	StringBuffer sb = new StringBuffer();
+	sb.append("{");
+	List<Paybasic> employeeList = new ArrayList<Paybasic>();
+	
+	if(branchId!=null){
+			employeeList = new EmployeeDAO().readListOfEmployeesBasicPayDetails(Integer.parseInt(branchId.toString()));
+	}
+	sb.append("vieweditbasicpay").append(employeeList);
+	sb.append("}");
+	return sb.toString();
 }
 
 }
