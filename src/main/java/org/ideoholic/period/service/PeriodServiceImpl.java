@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.ideoholic.employee.service.EmployeeServiceImpl;
 import org.ideoholic.period.dto.SaveParamDto;
+import org.ideoholic.standard.service.StandardServiceImpl;
 import org.ideoholic.subjectdetails.service.SubjectDetailsServiceImpl;
 
 import com.model.academicyear.dao.YearDAO;
@@ -26,6 +27,7 @@ public class PeriodServiceImpl implements PeriodService {
 
 	SubjectDetailsServiceImpl subjectDetails;
 	EmployeeServiceImpl employee;
+	StandardServiceImpl standard;
 	
 public String periodConfiguration(String branchId){
 	StringBuffer sb = new StringBuffer();
@@ -40,7 +42,7 @@ public String periodConfiguration(String branchId){
 	                subjectDetails.readListOfSubjects(branchId);
 	                
 	                employee.ViewAllEmployee(branchId);
-	                new StandardService(request, response).viewClasses();
+	                standard.viewClasses(branchId);
 	                periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(branchId.toString()));
 	                sb.append("periodmasterlist").append(periodMaster);
 		    
