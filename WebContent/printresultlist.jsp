@@ -266,8 +266,8 @@
 						<%-- <c:forEach items="${resultsubexamlevel}" var="subexamlevel">
 						<th title="click to sort" class="datath">${subexamlevel.subjectname}&nbsp;</th>
 						</c:forEach> --%>
-						<th title="click to sort" class="headerText">Paper 1&nbsp;</th>
-						<th title="click to sort" class="headerText">Paper 2&nbsp;</th>
+						<th title="click to sort" class="datath">Paper 1&nbsp;</th>
+						<th title="click to sort" class="datath">Paper 2&nbsp;</th>
 						<th title="click to sort" class="datath">%&nbsp;</th>
 						<th title="click to sort" class="datath">Result&nbsp;</th>
 					</tr>
@@ -285,13 +285,10 @@
 							</c:forEach> --%>
 							<c:forEach items="${resultlist.marksList}" var="markslist">
 							<c:if test="${(markslist == 0 && resultlist.resultclass != 'FAIL' )}">
-							<td class="dataText"></td>
+							<td class="datatd"></td>
 							</c:if>
-							<%-- <c:if test="${(markslist == 0 && resultlist.resultclass == 'FAIL' )}">
-							<td class="dataText"><c:out value="${markslist}" /></td>
-							</c:if> --%>
 							<c:if test="${(markslist !=0 || resultlist.resultclass == 'FAIL' )}">
-							<td class="dataText"><c:out value="${markslist}" /></td>
+							<td class="datatd"><c:out value="${markslist}" /></td>
 							</c:if>
 							</c:forEach>
 							<td class="datatd"><c:out value="${resultlist.percentage}" /></td>

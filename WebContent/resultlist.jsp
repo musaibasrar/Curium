@@ -535,6 +535,7 @@ for(Cookie cookie : cookies){
 									style="width: 240px;">
 										<option selected>${ranklistexamlevelsearch}</option>
 										<option></option>
+										<option>ALL</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}:${examleveldetails.idexamlevel}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
@@ -698,7 +699,6 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out value="${markslist}" /></td>
 							</c:if>
 							</c:forEach>
-							<%-- <c:if test="${(resultlist.marksList)}"> --%>
 							<td class="dataText"><c:out value="${resultlist.percentage}" /></td>
 							<td class="dataText"><c:out value="${resultlist.resultclass}" /></td>
 						</tr>

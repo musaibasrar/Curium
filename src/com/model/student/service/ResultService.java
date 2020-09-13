@@ -333,7 +333,7 @@ public class ResultService {
         String language = null;
         
         
-        if(examLevel.isEmpty()) {
+        if(examLevel.equalsIgnoreCase("ALL")) {
         	
         	 examLevellist = new ExamLevelDetailsDAO().readListOfObjects();
         	 
@@ -437,8 +437,6 @@ public class ResultService {
              
              searchQuery = searchQuery+subQuery+ " AND parent.Student.archive = 0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin') Order By parent.Student.admissionnumber ASC";
              List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
-             
-             System.out.println("Query is "+searchQuery);
              
              //Query Class Hierarchy to get the exam level (levelcode)
              String subExamYear = examYear.substring(0, 4);
@@ -557,13 +555,12 @@ public class ResultService {
                 j++;
             }
              //resultList.addAll(resultListFail);
-             parentsListMain = parentsListMain+parentsList.size();
+             //parentsListMain = parentsListMain+parentsList.size();
              failCounterMain = failCounterMain + failCounter;
              passCounterMain = passCounterMain + passCounter;
              secondCounterMain = secondCounterMain + secondCounter;
              firstCounterMain = firstCounterMain + firstCounter;
              distinctionCounterMain = distinctionCounterMain + distinctionCounter;
-             
              
              //httpSession.setAttribute("totalstudentresult", parentsList.size());
              //httpSession.setAttribute("failcount", failCounter);
@@ -626,14 +623,18 @@ public class ResultService {
                  httpSession.setAttribute("resultcentername",  "Center Code/Name:  ALL");
              }
              
-             httpSession.setAttribute("resultexamlevel", "Examination Code:  "+examLevelCodeName[0]);
+             if(examLevel.equalsIgnoreCase("ALL")) {
+            	 httpSession.setAttribute("resultexamlevel", "Examination Code:  ALL");
+             }else {
+            	 httpSession.setAttribute("resultexamlevel", "Examination Code:  "+examLevelCodeName[0]);
+             }
+             
              httpSession.setAttribute("resultlanguage", "Language: "+language);
              
         		}
-                // End here
-                
+                             
         	
-        	
+        	 parentsListMain = parentsListMain + failCounterMain + passCounterMain + secondCounterMain + firstCounterMain + distinctionCounterMain;
         	  httpSession.setAttribute("totalstudentresult", parentsListMain);
               httpSession.setAttribute("failcount", failCounterMain);
               httpSession.setAttribute("passcount", passCounterMain);
