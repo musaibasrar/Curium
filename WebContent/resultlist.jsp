@@ -531,7 +531,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="examlevelcode" id="examlevelcode" required
+										<select name="examlevelcode" id="examlevelcode" 
 									style="width: 240px;">
 										<option selected>${ranklistexamlevelsearch}</option>
 										<option></option>
@@ -669,9 +669,11 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Student Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Language</th>
-						<c:forEach items="${resultsubexamlevel}" var="subexamlevel">
+						<%-- <c:forEach items="${resultsubexamlevel}" var="subexamlevel">
 						<th title="click to sort" class="headerText">${subexamlevel.subjectname}&nbsp;</th>
-						</c:forEach>
+						</c:forEach> --%>
+						<th title="click to sort" class="headerText">Paper 1&nbsp;</th>
+						<th title="click to sort" class="headerText">Paper 2&nbsp;</th>
 						<th title="click to sort" class="headerText">%&nbsp;</th>
 						<th title="click to sort" class="headerText">Result</th>
 					</tr>
@@ -686,8 +688,17 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out value="${resultlist.student.name}" /></td>
 							<td class="dataText"><c:out value="${resultlist.student.languageopted}" /></td>
 							<c:forEach items="${resultlist.marksList}" var="markslist">
+							<c:if test="${(markslist == 0 && resultlist.resultclass != 'FAIL' )}">
+							<td class="dataText"></td>
+							</c:if>
+							<%-- <c:if test="${(markslist == 0 && resultlist.resultclass == 'FAIL' )}">
 							<td class="dataText"><c:out value="${markslist}" /></td>
+							</c:if> --%>
+							<c:if test="${(markslist !=0 || resultlist.resultclass == 'FAIL' )}">
+							<td class="dataText"><c:out value="${markslist}" /></td>
+							</c:if>
 							</c:forEach>
+							<%-- <c:if test="${(resultlist.marksList)}"> --%>
 							<td class="dataText"><c:out value="${resultlist.percentage}" /></td>
 							<td class="dataText"><c:out value="${resultlist.resultclass}" /></td>
 						</tr>

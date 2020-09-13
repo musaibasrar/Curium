@@ -263,9 +263,11 @@
 						<th title="click to sort" class="datath">Admission No.</th>
 						<th title="click to sort" class="datath">Student Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="datath">Language</th>
-						<c:forEach items="${resultsubexamlevel}" var="subexamlevel">
+						<%-- <c:forEach items="${resultsubexamlevel}" var="subexamlevel">
 						<th title="click to sort" class="datath">${subexamlevel.subjectname}&nbsp;</th>
-						</c:forEach>
+						</c:forEach> --%>
+						<th title="click to sort" class="headerText">Paper 1&nbsp;</th>
+						<th title="click to sort" class="headerText">Paper 2&nbsp;</th>
 						<th title="click to sort" class="datath">%&nbsp;</th>
 						<th title="click to sort" class="datath">Result&nbsp;</th>
 					</tr>
@@ -278,8 +280,19 @@
 							<td class="datatd"><a class="dataTextInActive"><c:out	value="${resultlist.student.admissionnumber}" /></a></td>
 							<td class="datatd"><c:out value="${resultlist.student.name}" /></td>
 							<td class="datatd"><c:out value="${resultlist.student.languageopted}" /></td>
-							<c:forEach items="${resultlist.marksList}" var="markslist">
+							<%-- <c:forEach items="${resultlist.marksList}" var="markslist">
 							<td class="datatd"><c:out value="${markslist}" /></td>
+							</c:forEach> --%>
+							<c:forEach items="${resultlist.marksList}" var="markslist">
+							<c:if test="${(markslist == 0 && resultlist.resultclass != 'FAIL' )}">
+							<td class="dataText"></td>
+							</c:if>
+							<%-- <c:if test="${(markslist == 0 && resultlist.resultclass == 'FAIL' )}">
+							<td class="dataText"><c:out value="${markslist}" /></td>
+							</c:if> --%>
+							<c:if test="${(markslist !=0 || resultlist.resultclass == 'FAIL' )}">
+							<td class="dataText"><c:out value="${markslist}" /></td>
+							</c:if>
 							</c:forEach>
 							<td class="datatd"><c:out value="${resultlist.percentage}" /></td>
 							<td class="datatd"><c:out value="${resultlist.resultclass}" /></td>

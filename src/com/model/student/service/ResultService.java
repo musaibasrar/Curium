@@ -43,6 +43,7 @@ public class ResultService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private static final Logger logger = LogManager.getLogger(ResultService.class);
 	/**
     * Size of a byte buffer to read/write file
@@ -314,16 +315,46 @@ public class ResultService {
     public void searchRankListReport() {
         
         String examLevel = request.getParameter("examlevelcode");
-        String[] examLevelCode = examLevel.split(":");
         String examYear = request.getParameter("examyear");
         String centerValue = request.getParameter("centervalue");
-       
+        String centerCodeMain = request.getParameter("centercode");
+        String languageOptedMain = request.getParameter("languageopted");
+        String qualificationMain = request.getParameter("qualification");
+        String examYearMain = request.getParameter("examyear");
+        List<Examleveldetails> examLevellist = new ArrayList<Examleveldetails>();
+        List<String> examList = new ArrayList<String>();
+        int parentsListMain = 0;
+        int failCounterMain=0,passCounterMain=0,secondCounterMain=0,firstCounterMain=0,distinctionCounterMain=0;
+        List<Result> resultListMain = new ArrayList<Result>();
+        List<Result> rankListReportListMain = new ArrayList<Result>();
+        List<Result> resultListRLMain = new LinkedList<Result>();
+        List<List<Result>> resultListFailMain = new ArrayList<List<Result>>();
+        List<Subexamlevel> subListMain = new ArrayList<Subexamlevel>();
         String language = null;
-        String searchQuery = "From Parents as parent where ";
-        String subQuery =null;
         
-             if(!request.getParameter("centercode").equalsIgnoreCase("")) {
-                 String[] centerCode = request.getParameter("centercode").split(":");
+        
+        if(examLevel.isEmpty()) {
+        	
+        	 examLevellist = new ExamLevelDetailsDAO().readListOfObjects();
+        	 
+        	 for (Examleveldetails examleveldetails : examLevellist) {
+        		 examList.add(examleveldetails.getLevelcode()+":"+examleveldetails.getIdexamlevel());
+			}
+        	 
+        }else {
+        	examList.add(examLevel);
+        }
+        
+        	for (String examListIteration : examList) {
+        		
+        		String searchQuery = null;
+                String subQuery =null;
+                searchQuery = "From Parents as parent where ";
+        		
+        		String[] examLevelCode = examListIteration.split(":");
+        	
+             if(!centerCodeMain.isEmpty()) {
+                 String[] centerCode = centerCodeMain.split(":");
                  subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
                  httpSession.setAttribute("ranklistcentersearch", centerCode[0]+":"+centerCode[1]);
              }else if("true".equalsIgnoreCase(centerValue)){
@@ -337,6 +368,15 @@ public class ResultService {
              }
              
              
+             if(subQuery!=null) {
+                 subQuery = subQuery+" AND parent.Student.examlevel = '"+examLevelCode[0]+"'";
+             }else {
+                 subQuery = "parent.Student.examlevel = '"+examLevelCode[0]+"'";
+             }
+             httpSession.setAttribute("ranklistexamlevelsearch", request.getParameter("examlevelcode").toString());
+             
+             /*
+             
              if(!request.getParameter("examlevelcode").equalsIgnoreCase("")) {
                  
                  if(subQuery!=null) {
@@ -349,9 +389,9 @@ public class ResultService {
              }else {
                  httpSession.setAttribute("ranklistexamlevelsearch", "");
                  //httpSession.setAttribute("forranklistexamlevelsearch", "");
-             }
+             }*/
              
-             if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
+             if(!languageOptedMain.isEmpty()) {
                  language = request.getParameter("languageopted");
                  if(subQuery!=null) {
                      subQuery = subQuery+" AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
@@ -364,7 +404,7 @@ public class ResultService {
              }
              
 
-             if(!request.getParameter("qualification").equalsIgnoreCase("")) {
+             if(!qualificationMain.isEmpty()) {
                  if(subQuery!=null) {
                      subQuery = subQuery+" AND parent.Student.qualification = '"+request.getParameter("qualification")+"'";
                  }else {
@@ -376,7 +416,7 @@ public class ResultService {
                  httpSession.setAttribute("ranklistqualificationsearch", "");
              }
              
-             if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
+             if(!examYearMain.isEmpty()) {
             	 httpSession.setAttribute("ranklistexamyear",examYear);
              }else {
             	 httpSession.setAttribute("ranklistexamyear","");
@@ -398,6 +438,7 @@ public class ResultService {
              searchQuery = searchQuery+subQuery+ " AND parent.Student.archive = 0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin') Order By parent.Student.admissionnumber ASC";
              List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
              
+             System.out.println("Query is "+searchQuery);
              
              //Query Class Hierarchy to get the exam level (levelcode)
              String subExamYear = examYear.substring(0, 4);
@@ -453,6 +494,10 @@ public class ResultService {
                          if(marks!=null && marks.getMarksobtained() < subjectIds.getMinmarks()) {
                              finalResult = "FAIL";
                          }
+                     }
+                     
+                     if (subList.size()==1) {
+                             marksList.add(0);
                      }
                      
                      double percentage = (marksObtained*100)/totalMarks;
@@ -512,18 +557,43 @@ public class ResultService {
                 j++;
             }
              //resultList.addAll(resultListFail);
+             parentsListMain = parentsListMain+parentsList.size();
+             failCounterMain = failCounterMain + failCounter;
+             passCounterMain = passCounterMain + passCounter;
+             secondCounterMain = secondCounterMain + secondCounter;
+             firstCounterMain = firstCounterMain + firstCounter;
+             distinctionCounterMain = distinctionCounterMain + distinctionCounter;
              
-             httpSession.setAttribute("totalstudentresult", parentsList.size());
-             httpSession.setAttribute("failcount", failCounter);
-             httpSession.setAttribute("passcount", passCounter);
-             httpSession.setAttribute("secondcount", secondCounter);
-             httpSession.setAttribute("firstcount", firstCounter);
-             httpSession.setAttribute("distinctioncount", distinctionCounter);
              
-             httpSession.setAttribute("resultlist", resultList);
-             httpSession.setAttribute("ranklistreport", rankListReportList);
-             httpSession.setAttribute("resultsubexamlevel", subList);
-             httpSession.setAttribute("resultlistadmno", resultListRL);
+             //httpSession.setAttribute("totalstudentresult", parentsList.size());
+             //httpSession.setAttribute("failcount", failCounter);
+             //httpSession.setAttribute("passcount", passCounter);
+             //httpSession.setAttribute("secondcount", secondCounter);
+             //httpSession.setAttribute("firstcount", firstCounter);
+             //httpSession.setAttribute("distinctioncount", distinctionCounter);
+             
+             for (Result reslist : resultList) {
+            	 resultListMain.add(reslist);
+			}
+             
+             for (Result rankList : rankListReportList) {
+            	 rankListReportListMain.add(rankList);
+			}
+             
+             for (Result rlList : resultListRL) {
+            	 resultListRLMain.add(rlList);
+			}
+             
+             subListMain = subList;
+             //resultListMain.add(resultList);
+             //rankListReportListMain.add(rankListReportList);
+             //subListMain.add(subList);
+             //resultListRLMain.add(resultListRL);
+             
+             //httpSession.setAttribute("resultlist", resultList);
+             //httpSession.setAttribute("ranklistreport", rankListReportList);
+             //httpSession.setAttribute("resultsubexamlevel", subList);
+             //httpSession.setAttribute("resultlistadmno", resultListRL);
              
              if(language==null) {
                  language = "ALL";
@@ -547,8 +617,8 @@ public class ResultService {
                  httpSession.setAttribute("resultlistadmno", "");
              }
              
-             String[] centerCodeName = DataUtil.emptyString(request.getParameter("centercode")).split(":");
-             String[] examLevelCodeName = DataUtil.emptyString(request.getParameter("examlevelcode")).split(":");
+             String[] centerCodeName = centerCodeMain.split(":");
+             String[] examLevelCodeName = examListIteration.split(":");
              if(!"".equalsIgnoreCase(centerCodeName[0])) {
                  httpSession.setAttribute("resultcentername",  "Center Code/Name:  "+centerCodeName[0]+"/"+centerCodeName[1]);
                  httpSession.setAttribute("resultcentercode",  "Center Code:  "+centerCodeName[0]);
@@ -559,6 +629,24 @@ public class ResultService {
              httpSession.setAttribute("resultexamlevel", "Examination Code:  "+examLevelCodeName[0]);
              httpSession.setAttribute("resultlanguage", "Language: "+language);
              
+        		}
+                // End here
+                
+        	
+        	
+        	  httpSession.setAttribute("totalstudentresult", parentsListMain);
+              httpSession.setAttribute("failcount", failCounterMain);
+              httpSession.setAttribute("passcount", passCounterMain);
+              httpSession.setAttribute("secondcount", secondCounterMain);
+              httpSession.setAttribute("firstcount", firstCounterMain);
+              httpSession.setAttribute("distinctioncount", distinctionCounterMain);
+              
+              httpSession.setAttribute("resultlist", resultListMain);
+              httpSession.setAttribute("ranklistreport", rankListReportListMain);
+              httpSession.setAttribute("resultsubexamlevel", subListMain);
+              httpSession.setAttribute("resultlistadmno", resultListRLMain);
+              
+              
              new ExamLevelService(request, response).examLevels();
              new LanguageService(request, response).viewLanguage();
              new BranchService(request, response).viewBranches();
@@ -585,21 +673,21 @@ public class ResultService {
              if(!request.getParameter("examlevelcode").equalsIgnoreCase("")) {
                  
                  if(subQuery!=null) {
-                     subQuery = subQuery+"AND parent.Student.examlevel = '"+examLevelCode[0]+"'";
+                     subQuery = subQuery+" AND parent.Student.examlevel = '"+examLevelCode[0]+"'";
                  }else {
                      subQuery = "parent.Student.examlevel = '"+examLevelCode[0]+"'";
                  }
                  httpSession.setAttribute("markssheetexamlevelsearch", request.getParameter("examlevelcode").toString());
-                 httpSession.setAttribute("formarkssheetexamlevelsearch", request.getParameter("forexamlevel").toString());
+                // httpSession.setAttribute("formarkssheetexamlevelsearch", request.getParameter("forexamlevel").toString());
              }else {
                  httpSession.setAttribute("markssheetexamlevelsearch", "");
-                 httpSession.setAttribute("formarkssheetexamlevelsearch", "");
+               //  httpSession.setAttribute("formarkssheetexamlevelsearch", "");
              }
              
              if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
                  language = request.getParameter("languageopted");
                  if(subQuery!=null) {
-                     subQuery = subQuery+"AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+                     subQuery = subQuery+" AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                  }else {
                      subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                  }
@@ -611,7 +699,7 @@ public class ResultService {
 
              if(!request.getParameter("qualification").equalsIgnoreCase("")) {
                  if(subQuery!=null) {
-                     subQuery = subQuery+"AND parent.Student.qualification = '"+request.getParameter("qualification")+"'";
+                     subQuery = subQuery+" AND parent.Student.qualification = '"+request.getParameter("qualification")+"'";
                  }else {
                      subQuery = "parent.Student.qualification = '"+request.getParameter("qualification")+"'";
                  }
@@ -621,6 +709,20 @@ public class ResultService {
                  httpSession.setAttribute("markssheetqualificationsearch", "");
              }
           
+             
+             if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
+	                if(subQuery!=null) {
+	                    String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
+	                    String subCurrentAcademicYear = httpSession.getAttribute(CURRENTACADEMICYEAR).toString().substring(2, 4);
+	                    
+	                    subQuery = subQuery+"AND (parent.Student.admissionnumber like '"+subCurrentAcademicYear+"%'";
+	                    subQuery = subQuery+" OR parent.Student.admissionnumber like '"+subAcademicYear+"%')";
+	                }
+	                httpSession.setAttribute("studentsreportacademicsearch", request.getParameter("examyear").toString());
+	            }else {
+	                httpSession.setAttribute("studentsreportacademicsearch", "");
+	            }
+             
              
              /*if(!DataUtil.emptyString(request.getParameter("academicyear")).equalsIgnoreCase("")) {
                  if(subQuery!=null) {
@@ -767,6 +869,7 @@ public class ResultService {
              httpSession.setAttribute("secondcount", secondCounter);
              httpSession.setAttribute("firstcount", firstCounter);
              httpSession.setAttribute("distinction", distinctionCounter);
+             httpSession.setAttribute("forexamlevel", forExamLevelCode);
              
              httpSession.setAttribute("markssheetlist", resultList);
              httpSession.setAttribute("markssheetsubexamlevel", subList);
@@ -781,6 +884,7 @@ public class ResultService {
 	             httpSession.setAttribute("secondcount", "");
 	             httpSession.setAttribute("firstcount", "");
 	             httpSession.setAttribute("distinction", "");
+	             httpSession.setAttribute("forexamlevel", "");
              }
              String[] centerCodeName = DataUtil.emptyString(request.getParameter("centercode")).split(":");
              String[] examLevelCodeName = DataUtil.emptyString(request.getParameter("examlevelcode")).split(":");

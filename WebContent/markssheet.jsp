@@ -662,7 +662,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD" >Marks Sheet List</td>
+					<td class="headerTD" >Exam: ${forexamlevel} &nbsp;&nbsp;Marks Sheet List</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -700,7 +700,7 @@ for(Cookie cookie : cookies){
 						  <a id="printmarkssheetlistreport" href="Controller?process=StudentProcess&action=printMarksSheet">Print</a>
 						</td>
 						<td class="footerTD" colspan="2">
-						  <a style="font-weight: bold;color: white;font-size: 14px;">&nbsp;&nbsp;Total: ${totalstudentresult}&nbsp;&nbsp;Distinction: ${distinctioncount}&nbsp;&nbsp;First Class: ${firstcount}
+						  <a style="font-weight: bold;color: white;font-size: 14px;">Exam: ${forexamlevel}&nbsp;&nbsp;Total: ${totalstudentresult}&nbsp;&nbsp;Distinction: ${distinctioncount}&nbsp;&nbsp;First Class: ${firstcount}
 						  &nbsp;&nbsp;Second Class: ${secondcount}&nbsp;&nbsp;Pass: ${passcount}&nbsp;&nbsp;Fail: ${failcount}</a>
 						</td>
 					</tr>

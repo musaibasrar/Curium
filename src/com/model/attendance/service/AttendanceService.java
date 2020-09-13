@@ -1613,28 +1613,21 @@ public class AttendanceService {
 	                            httpSession.setAttribute("attendancelanguageopted", "Language: "+request.getParameter("languageopted"));
 	                            httpSession.setAttribute("attendancelanguageoptedsearch", request.getParameter("languageopted"));
 	                        }
+
 	                        
-	                        
-	                        
-	    		                if(subQuery!=null) {
-	    		                    String subAcademicYear = httpSession.getAttribute(CURRENTACADEMICYEAR).toString().substring(2, 4);
-	    		                    subQuery = subQuery+"AND admissionnumber like '"+subAcademicYear+"%'";
-	    		                }
-	    		                
-	    		                httpSession.setAttribute("attendanceacademicsearch", request.getParameter("examyear").toString());
-	    		            
-		                        if(!httpSession.getAttribute(CURRENTACADEMICYEAR).toString().equalsIgnoreCase(request.getParameter("examyear").toString())) {
 		                        
 			                        if(!DataUtil.emptyString(request.getParameter("examyear")).equalsIgnoreCase("")) {
 			    		                if(subQuery!=null) {
 			    		                    String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
-			    		                    subQuery = subQuery+"AND admissionnumber like '"+subAcademicYear+"%'";
+			    		                    String subCurrentAcademicYear = httpSession.getAttribute(CURRENTACADEMICYEAR).toString().substring(2, 4);
+			    		                    
+			    		                    subQuery = subQuery+"AND (admissionnumber like '"+subCurrentAcademicYear+"%'";
+			    		                    subQuery = subQuery+" OR admissionnumber like '"+subAcademicYear+"%')";
 			    		                }
 			    		                httpSession.setAttribute("attendanceacademicsearch", request.getParameter("examyear").toString());
 			    		            }else {
 			    		                httpSession.setAttribute("attendanceacademicsearch", "");
 			    		            }
-		                        }
 
 	                        
 	                      /*  if(!request.getParameter("selectedacademicyear").equalsIgnoreCase("")) {
