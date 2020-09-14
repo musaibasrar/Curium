@@ -495,7 +495,7 @@ public class ResultService {
                      }
                      
                      if (subList.size()==1) {
-                             marksList.add(0);
+                             marksList.add(999);
                      }
                      
                      double percentage = (marksObtained*100)/totalMarks;
