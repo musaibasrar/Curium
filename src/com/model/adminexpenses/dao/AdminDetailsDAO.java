@@ -12,6 +12,7 @@ import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.adminexpenses.dto.Adminexpenses;
+import com.model.feescollection.dto.Receiptinfo;
 import com.util.HibernateUtil;
 
 public class AdminDetailsDAO {
@@ -94,6 +95,26 @@ public class AdminDetailsDAO {
 			HibernateUtil.closeSession();
 		}
 
+	}
+
+	public List<Adminexpenses> searchExpensesbydate(String queryMain) {
+		
+		java.util.List<Adminexpenses> adminExpenses = new ArrayList<Adminexpenses>();
+        try {
+            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(queryMain);
+            adminExpenses = (java.util.List<Adminexpenses>) HQLquery.list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        }
+        finally {
+			HibernateUtil.closeSession();
+		 }
+        return adminExpenses;
 	}
 
 	

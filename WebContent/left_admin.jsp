@@ -475,13 +475,6 @@ for(Cookie cookie : cookies){
             	<a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
             </div> 
             
-            <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
-            <div>
-                <a target="mainFrame" href="Controller?process=AdminProcess&action=viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
-
-
-            </div>
-            
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=advanceSearchStudents" style="font-size: 12px;">Search</a><br/>
@@ -513,6 +506,13 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTimeTable" style="font-size: 12px;">Class Time Table</a><br/>
                 <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a><br/>
             </div> 
+            
+            <h5 style="font-size: 12px"><a href="#" >Expenses</a></h5>
+            <div>
+                <a target="mainFrame" href="Controller?process=AdminProcess&action=viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
+
+
+            </div>
             
             <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
             <div >

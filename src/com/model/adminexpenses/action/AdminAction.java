@@ -32,14 +32,13 @@ public class AdminAction {
 	public String execute(String action, String page) {
 		// TODO Auto-generated method stub
 		if (action.equalsIgnoreCase("viewAllExpenses")) {
-			System.out.println("Action is viewAllExpenses");
 			url = viewAllExpenses();
 		} else if (action.equalsIgnoreCase("addExpenses")) {
-			System.out.println("Action is addExpenses");
 			url = addExpenses();
 		}else if (action.equalsIgnoreCase("deleteMultiple")) {
-			System.out.println("Action is deleteMultiple");
 			url = deleteMultiple();
+		}else if ("searchExpenses".equalsIgnoreCase(action)) {
+			url = searchExpensesbydate();
 		}
 		return url;
 	}
@@ -48,10 +47,15 @@ public class AdminAction {
 
 	
 
+	private String searchExpensesbydate() {
+		
+		new AdminService(request, response).searchExpensesbydate();
+		return "adminexpenses.jsp";
+	}
+
 	private String viewAllExpenses() { 
 		
 		new AdminService(request, response).viewAllExpenses();
-		System.out.println("IN action's view all Expenses");
 		return "adminexpenses.jsp";
 		
     }
