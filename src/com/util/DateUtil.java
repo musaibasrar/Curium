@@ -404,6 +404,20 @@ public static String dateParserddMMYYYY(Date date) {
 	return datefinal;
 }
 
+public static String dateParseryyyymmdd(Date date) {
+	
+	String datefinal = null;
+	try {
+		SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd");
+
+		datefinal = dateformatter.format(date);
+		System.out.println("datefinal "+datefinal);
+	} catch (Exception e) {
+			e.printStackTrace();
+	}
+	return datefinal;
+}
+
 public static Date indiandateParser(String stringDate) {
 	
 	Date datefinal = null;
