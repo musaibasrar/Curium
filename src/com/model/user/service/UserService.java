@@ -21,12 +21,17 @@ import javax.servlet.http.HttpSession;
 
 import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
+import com.model.adminexpenses.service.AdminService;
 import com.model.branch.dto.Branch;
+import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
+import com.model.feescollection.action.FeesCollectionAction;
 import com.model.feescollection.dto.Receiptinfo;
+import com.model.feescollection.service.FeesCollectionService;
 import com.model.parents.dto.Parents;
 import com.model.std.dao.StandardDetailsDAO;
 import com.model.std.dto.Classsec;
+import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.user.dao.UserDAO;
 import com.model.user.dto.Login;
@@ -93,8 +98,9 @@ public class UserService {
             List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
             List<String> xaxisList = new LinkedList<String>() ;
             List<String> yaxisList = new LinkedList<String>() ;
-       // int[] test = new int[branchList.size()] ;
-        for (Classsec classstudying : classsecList) {
+            int totalStudents = 0;
+            // int[] test = new int[branchList.size()] ;
+            for (Classsec classstudying : classsecList) {
         	
 		        	String classStudying = classstudying.getClassdetails();
 		    		
@@ -104,6 +110,7 @@ public class UserService {
 		    		
                     List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.classstudying like '"+classStudying+"'"
                     		+ " AND parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0");
+                    totalStudents+=student.size();
                     xaxisList.add("\""+classstudying.getClassdetails()+"\"");
                     if(student.size()>0) {
                         String studentCount = Integer.toString(student.size());
@@ -111,9 +118,31 @@ public class UserService {
                     }else {
                         yaxisList.add("\""+0+"\"");
                     }
-                }
+                    
+                	}
+        
+        	// Total Teachers
+        	List<Teacher> teacher = new EmployeeDAO().readCurrentTeachers();
+        	request.setAttribute("totalteachers", teacher.size());
+        	// End Total Teachers
+        	
+        	//Fees Details
+        	new FeesCollectionService(request, response).getFeesDetailsDashBoard();
+        	//End Fees Details
+        	
+        	//Daily Expenses
+        		new AdminService(request, response).dailyExpenses();
+        		
+        	//Monthly Expenses
+        		new AdminService(request, response).getMonthlyExpenses();
+        		
+        	//Get Boys & Girls
+        		new AdminService(request, response).getTotalBoysGirls();
+        		
+        	
         request.setAttribute("studentxaxis", xaxisList);
         request.setAttribute("studentyaxis", yaxisList);
+        request.setAttribute("totalstudents", totalStudents);
         feesdailysearch();
 		feesmonthlysearch();
 		}
