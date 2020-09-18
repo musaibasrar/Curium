@@ -386,10 +386,6 @@
 	$(function() {
 
 		$("#tabs").tabs();
-
-		$("#save").button().click(function() {
-			addDepartment();
-		});
 		/* $("#effect").hide(); */
 
 	});
