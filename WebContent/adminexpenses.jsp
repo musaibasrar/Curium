@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -18,6 +19,40 @@
 <title>JSP Page</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
+<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script type="text/javascript" language="javascript"
+	src="js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.ui.widget.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
+
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.ui.button.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.effects.core.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.effects.slide.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.effects.bounce.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.effects.clip.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.effects.transfer.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/jquery.effects.blind.js"></script>
+<script type="text/javascript"
+	src="js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <style type="text/css">
 <!--
 .divCSS {
@@ -272,48 +307,24 @@
 	font-weight: bold;
 	height: 22px;
 }
+.alignLeft {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
 </style>
 <style>
 #button {
 	
 }
 </style>
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script type="text/javascript" language="javascript"
-	src="js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.widget.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript"
-	src="js/validation/jquery.ketchup.all.min.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.button.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.core.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.slide.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.bounce.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.clip.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.transfer.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/jquery.effects.blind.js"></script>
-<script type="text/javascript"
-	src="js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -325,7 +336,23 @@
 			"bInfo" : false,
 			"bAutoWidth" : false
 		});
+		
+		 $('table thead th').each(function(i) {
+             calculateColumn(i);
+         });
+		 
 	});
+
+      function calculateColumn(index) {
+          var total = 0;
+          $('table tr').each(function() {
+              var value = parseInt($('#priceofitem', this).eq(index).text());
+              if (!isNaN(value)) {
+                  total += value;
+              }
+          });
+          $('#total').eq(index).text('Total: ' + total);
+      }
 </script>
 <script type="text/javascript">
 	function select(id, name) {
@@ -378,6 +405,7 @@
 		$("#entrydate").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
 		$("#anim").change(function() {
@@ -468,6 +496,94 @@
          
 
      });
+	 
+	 function searchByDate() {
+			var form1 = document.getElementById("form1");
+			form1.action = "Controller?process=AdminProcess&action=searchExpenses";
+			form1.method = "POST";
+			form1.submit();
+
+		}
+		$(function() {
+
+			$("#search").button().click(function() {
+				searchByDate();
+			});
+
+		});
+		
+		 function checkFieldsButton() {
+			 
+				
+				var oneday = document.getElementById('datepicker').value;
+				var fromdate = document.getElementById('datepickerfrom').value;
+				var todate = document.getElementById('datepickerto').value;
+				
+				if(oneday == "" && fromdate == "" && todate == ""){
+					alert("Please enter the search criteria");
+				}
+			
+				if(fromdate > todate ){
+					alert('"To date" should be greater than "From date"');
+				}
+				
+			}
+
+		 
+		 function checkFieldsTo() {
+			 
+				
+					document.getElementById('datepicker').value = "";
+					
+					
+				}
+
+		 
+		 function checkFieldsFrom() {
+			 
+			 document.getElementById('datepicker').value = "";
+			 document.getElementById('datepickerto').value = "";
+			}
+		 
+		 
+		 function checkFields() {
+
+				document.getElementById('datepickerfrom').value = "";
+				document.getElementById('datepickerto').value = "";
+				
+				
+			}
+	 
+		 $(function() {
+				$("#datepicker").datepicker({
+					changeYear : true,
+					changeMonth : true,
+					dateFormat: 'dd/mm/yy'
+				});
+				$("#anim").change(function() {
+					$("#datepicker").datepicker("option", "showAnim", $(this).val());
+				});
+			});
+			$(function() {
+				$("#datepickerfrom").datepicker({
+					changeYear : true,
+					changeMonth : true,
+					dateFormat: 'dd/mm/yy'
+				});
+				$("#anim").change(function() {
+					$("#datepickerfrom").datepicker("option", "showAnim", $(this).val());
+				});
+			});
+			$(function() {
+				$("#datepickerto").datepicker({
+					changeYear : true,
+					changeMonth : true,
+					dateFormat: 'dd/mm/yy'
+				});
+				$("#anim").change(function() {
+					$("#datepickerto").datepicker("option", "showAnim", $(this).val());
+				});
+			});
 </script>
 </head>
 <%
@@ -489,12 +605,12 @@ for(Cookie cookie : cookies){
 <body>
 	<form id="form1"
 		action="Controller?process=DepartmentProcess&action=deleteMultiple" method="POST">
-		<%
-			java.text.DateFormat df = new java.text.SimpleDateFormat(
-					"MM/dd/yyyy");
+			<%
+			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
 		%>
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		<div style="height: 28px">
-			<button id="add">Add Expenses</button>
+			<button id="add">Add/Search Expenses</button>
 			<br />
 		</div>
 
@@ -502,7 +618,7 @@ for(Cookie cookie : cookies){
 			<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Details</a></li>
-
+					<li><a href="#tabs-2">Search</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
@@ -510,7 +626,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td width="10%" class="alignRight">Item Description &nbsp;</td>
 							<td width="70%"><label> <input id="item"
-									name="item" type="text" class="textField" required size="30">
+									name="item" type="text" class="textField" required size="36">
 
 							</label></td>
 						</tr>
@@ -522,7 +638,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td width="10%" class="alignRight">Quantity &nbsp;</td>
 							<td width="70%"><label> <input id="quantity"
-									name="quantity" type="text" class="textField" required size="30">
+									name="quantity" type="text" class="textField" required size="36">
 
 							</label></td>
 						</tr>
@@ -532,7 +648,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td width="10%" class="alignRight">Price(Rs.) &nbsp;</td>
 							<td width="70%"><label> <input id="price"
-									name="price" type="text" class="textField" required size="30">
+									name="price" type="text" class="textField" required size="36">
 
 							</label></td>
 						</tr>
@@ -540,9 +656,9 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-						<td width="20%" class="alignRight">Created Date(MM/dd/year)&nbsp;</td>
+						<td width="20%" class="alignRight">Created Date&nbsp;</td>
 							<td width="28%"><label> <input name="entrydate"
-									type="text" value="<%=df.format(new java.util.Date())%>"
+									type="text" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									class="textField" id="entrydate" size="36"
 									data-validate="validate(required)">
 							</label></td>
@@ -557,18 +673,73 @@ for(Cookie cookie : cookies){
 					<table id="table2" width="100%" border="0" align="center">
 						<tr>
 							<td align="center">
-								<button id="save">Save</button>
+								<button onmouseover="checkFieldsButton();" id="save">Save</button>
 							</td>
 						</tr>
 					</table>
 				</div>
+				
+				<div id="tabs-2">
+					<table width="100%" border="0" align="center" cellpadding="0"
+						cellspacing="0" id="table1" style="display: block">
+						<tr>
+							<td width="20%" class="alignRight">Date: &nbsp;</td>
+							<td width="28%"><label> <input name="oneday"
+									type="text" class="textField" id="datepicker" size="36"
+									onfocus="checkFields()" value="${dayone}" autocomplete="false"
+									data-validate="validate(required)">
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+						<td width="20%" class="alignRight">&nbsp;Between Dates</td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td width="20%" class="alignRight">From Date:  &nbsp;&nbsp;</td>
+							<td ><label> <input name="fromdate"
+									type="text" class="textField" id="datepickerfrom" size="36"
+									onfocus="checkFieldsFrom()" value="${datefrom}" autocomplete="false"
+									data-validate="validate(required)">
+							</label></td>
+							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date:</td>
+							<td ><label> <input name="todate"
+									type="text" class="textField" id="datepickerto" size="36"
+									onfocus="checkFieldsTo()" value="${dateto}" autocomplete="false"
+									data-validate="validate(required)">
+							</label></td>
+						</tr>
+						
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+						
+					</table>
+					<table id="table2" width="100%" border="0" align="center">
+						<tr>
+							<td align="center">
+								<button id="search">Search</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+				
 			</div>
 		</div>
 
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">View All Expenses</td>
+					<td class="headerTD">Expenses &nbsp;&nbsp;&nbsp;${sumofexpenses}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -598,8 +769,8 @@ for(Cookie cookie : cookies){
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${expenses.idAdminExpenses}"/>" class = "chcktbl"  name="expensesIDs"  value="<c:out value="${expenses.idAdminExpenses}"/>"/></td>
 						  <td class="dataText"><c:out value="${expenses.itemDescription}" /></td>
 						  <td class="dataText"><c:out value="${expenses.quantity}" /></td>
-						  <td class="dataText"><c:out value="${expenses.priceofitem}" /></td>
-						  <td class="dataText"><c:out value="${expenses.entrydate}" /></td>
+						  <td class="dataText" id="priceofitem"><c:out value="${expenses.priceofitem}" /></td>
+						  <td class="dataText"><fmt:formatDate value="${expenses.entrydate}" pattern="dd/MM/yyyy"/></td>
 
 						</tr>
 					</c:forEach>
@@ -609,8 +780,9 @@ for(Cookie cookie : cookies){
 
 				</tbody>
 				<tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button> 
-                    
+                            <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
+                    		<td class="footerTD"><button id="delete" type="submit">Delete</button> </td>
+                    		
                         </tr></tfoot>
 			</table>
 
