@@ -1,10 +1,14 @@
 package com.model.feescollection.service;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,11 +24,14 @@ import com.model.feesdetails.dao.feesDetailsDAO;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.parents.dao.parentsDetailsDAO;
 import com.model.parents.dto.Parents;
+import com.model.std.dto.Classsec;
+import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
 import com.model.student.dto.Studentfeesstructure;
 import com.model.user.dao.UserDAO;
 import com.util.DataUtil;
+import com.util.DateUtil;
 import com.util.NumberToWord;
 
 public class FeesCollectionService {
@@ -440,6 +447,169 @@ public class FeesCollectionService {
 		}
 		
 	  }
+	
+	
+	
+	public void getFeesDetailsDashBoard() {
+		
+		Long totalFeesAmount = 0l;
+		Long totalPaidAmount = 0l;
+		Long totalDueAmount = 0l;
+		
+
+		// Get Students
+
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+
+		if (httpSession.getAttribute(BRANCHID) != null) {
+
+			String queryMain = "From Parents as parents where";
+			new StandardService(request, response).viewClasses();
+			List<Classsec> classList = (List<Classsec>) httpSession.getAttribute("classdetailslist");
+			
+			
+			StringBuffer conClassStudying = new StringBuffer();
+
+			int i = 0;
+			for (Classsec classOne : classList) {
+
+				if (i > 0) {
+					conClassStudying.append("' OR parents.Student.classstudying LIKE '" + classOne.getClassdetails() + "--" + "%");
+				} else {
+					conClassStudying.append(classOne.getClassdetails() + "--" + "%");
+				}
+
+				i++;
+			}
+
+			String classStudying = DataUtil.emptyString(conClassStudying.toString());
+			String querySub = "";
+
+			if (!classStudying.equalsIgnoreCase("")) {
+				querySub = querySub + " parents.Student.classstudying like '" + classStudying
+						+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="
+						+ Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())
+						+ " order by parents.Student.admissionnumber ASC";
+			}
+
+			if (!"".equalsIgnoreCase(querySub)) {
+				queryMain = queryMain + querySub;
+				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			}
+
+		}
+		// End Students
+
+		if (httpSession.getAttribute(CURRENTACADEMICYEAR) != null) {
+
+			List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
+
+			for (Parents parents : searchStudentList) {
+
+				StudentFeesReport studentFeesReport = new StudentFeesReport();
+
+				long id = parents.getStudent().getSid();
+				List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id,
+						httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+
+				studentFeesReport.setStudent(parents.getStudent());
+				studentFeesReport.setStudentFeesStructure(feesstructure);
+
+				studentFeesReportList.add(studentFeesReport);
+			}
+			
+			
+			for (StudentFeesReport studentFeesReport : studentFeesReportList) {
+				
+				for (Studentfeesstructure studentFeesStructure : studentFeesReport.getStudentFeesStructure()) {
+					totalFeesAmount+=studentFeesStructure.getFeesamount();
+					totalPaidAmount+=studentFeesStructure.getFeespaid();
+					totalDueAmount = totalDueAmount + (studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid());
+				}
+			}
+
+			request.setAttribute("totalFeesAmountDashBoard", totalFeesAmount);
+			request.setAttribute("totalPaidAmountDashBoard", totalPaidAmount);
+			request.setAttribute("totalDueAmountDashBoard", totalDueAmount);
+		}
+		
+		
+		
+		//get monthly and daily fees details
+		 
+		List<Receiptinfo> feesDetailsListDaily = new ArrayList<Receiptinfo>();
+		List<Receiptinfo> feesDetailsListMonthly = new ArrayList<Receiptinfo>();
+		String branchId = request.getParameter("selectedbranchid");
+		int idBranch = 0;
+		String Currentmonth = null;        
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		
+
+	        if(branchId!=null) {
+	        	String[] branchIdName = branchId.split(":");
+	        	idBranch = Integer.parseInt(branchIdName[0]);
+	        	httpSession.setAttribute("feesdetailsbranchname", branchIdName[1]);
+	        	httpSession.setAttribute("branchname", "Branch Name:");
+	        }else {
+	        	idBranch = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+	        }
+	        
+		String queryMainDaily ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
+		String queryMainMonthly ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
+
+
+		Date monthOf = new Date();
+		 
+		Calendar cStart = Calendar.getInstance();
+		cStart.setTime(monthOf);
+		cStart.set(Calendar.DAY_OF_MONTH, cStart.getActualMinimum(Calendar.DAY_OF_MONTH));
+		monthOf = cStart.getTime();
+		Timestamp TimestampFrom = new Timestamp(monthOf.getTime());
+		
+		cStart.set(Calendar.DAY_OF_MONTH, cStart.getActualMaximum(Calendar.DAY_OF_MONTH));
+		Date lastDayOfMonth = cStart.getTime();
+		Timestamp Timestampto = new Timestamp(lastDayOfMonth.getTime());
+		
+		Currentmonth = cStart.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+		
+		
+		String pattern = "yyyy-MM-dd";
+		String todaysDate =new SimpleDateFormat(pattern).format(new Date());
+		
+			String querySubDaily = "";
+			String querySubMonthly = "";
+			// Daily Fees
+			querySubDaily = " feesdetails.date = '"+todaysDate+"'" ;
+			queryMainDaily = queryMainDaily+querySubDaily;
+			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+			System.out.println("SEARCH QUERY ***** "+queryMainDaily);
+			feesDetailsListDaily = new UserDAO().getReceiptDetailsList(queryMainDaily);
+			
+			// Monthly Fees
+			    querySubMonthly = " feesdetails.date between '"+TimestampFrom+"' AND '"+Timestampto+"'";
+			    queryMainMonthly = queryMainMonthly+querySubMonthly;
+			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+			System.out.println("SEARCH QUERY ***** "+queryMainMonthly);
+			feesDetailsListMonthly = new UserDAO().getReceiptDetailsList(queryMainMonthly);
+			
+				}
+			long sumOfFeesDaily = 0l;
+			for (Receiptinfo receiptinfo : feesDetailsListDaily) {
+				sumOfFeesDaily = sumOfFeesDaily + receiptinfo.getTotalamount();
+			}
+			
+			long sumOfFeesMonthly = 0l;
+			for (Receiptinfo receiptinfo : feesDetailsListMonthly) {
+				sumOfFeesMonthly = sumOfFeesMonthly + receiptinfo.getTotalamount();
+			}
+			
+			
+			httpSession.setAttribute("sumOfFeesDaily", sumOfFeesDaily);
+			httpSession.setAttribute("sumOfFeesMonthly", sumOfFeesMonthly);
+			httpSession.setAttribute("Currentmonth", Currentmonth+"'s");
+	
+	}
 	
 	}
 
