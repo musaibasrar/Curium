@@ -74,7 +74,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <frameset    rows="70,*"frameborder="0" border="0" framespacing="0"  >
+    <frameset    rows="50,*"frameborder="0" border="0" framespacing="0"  >
     
 		   <c:if test="${(userType == 'admin')}">
 			    <frame   src="header_admin.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
