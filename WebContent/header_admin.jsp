@@ -14,47 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <script type="text/javascript">
-            var getMember;
-            //var getVisit;
-            function getdata() {
-
-                if (typeof XMLHttpRequest != "undefined") {
-                    getMember = new XMLHttpRequest();
-                   // getVisit = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getMember = new ActiveXObject("Microsoft.XMLHTTP");
-                    //getVisit = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-                getMember.onreadystatechange = processMemberData;
-                getMember.open("POST", "StudentController",true);
-                getMember.send(null);
-
-                /* getVisit.onreadystatechange = processVisitData;
-                getVisit.open("POST", "AppointmentController",true);
-                getVisit.send(null); */
-            }
-
-            function processMemberData() {
-                if (getMember.readyState==4)
-                {
-                    if (getMember.status==200){
-
-                        var count = getMember.responseXML.getElementsByTagName("count")[0];
-                        var childCount=count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML=childCount;
-                        mdiv.style.visibility='visible';
-                        //setTimeout('getdata();', 6000);
-
-
-                    }
-                }
-
-            }
-        
-        </script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -117,6 +80,13 @@
                 height: 16px;
 
             }
+            a:visited {
+    color: #383838;
+    
+}
+a:hover {
+text-decoration: underline;
+}
            
         </style>
         <script type="text/javascript">
@@ -145,87 +115,84 @@ for(Cookie cookie : cookies){
 }
 %>
     <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-        <form id="form1" method="post" >
-            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td valign="top" background="images/h_bg.jpg">
+        <div class="container-fluid">
+        
                         <table width="100%" border="0" align="center"
-						cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
+						cellpadding="2" cellspacing="0" bordercolor="#FFFFFF">
+						<tr><td></td></tr>
 						<tr>
 
 							<td align="left"><img src="images/curiumheader.png"
-								style="width: 200px; height: 70px;" /></td>
+								style="width: 200px; height: 20px;" /></td>
 							<td><a target="leftFrame" href="left_admin.jsp"> <img
-									src="images/house_home.png" width="35" height="35"
+									src="images/home.svg" width="25" height="25" 
 									alt="Home" style="vertical-align: bottom;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
 								href="Controller?process=FeesProcess&action=feesCollect"> <img
-									src="images/feescollectw.png" width="35" height="35"
-									alt="Fees Collection" style="vertical-align: bottom;" />Fees
-									Collect
+									src="images/feescollect.svg" width="25" height="25"
+									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
-							<td><a target="mainFrame"
-								href="Controller?process=AccountProcess&action=createVoucher">
-									<img alt="Create Voucher" src="images/voucherw.png" width="30"
-									height="30" />Create Voucher
-							</a></td>
+							<td>
+								<a target="mainFrame"
+								href="Controller?process=AccountProcess&action=createVoucher"> <img
+									src="images/createvoucher.svg" width="25" height="25"
+									alt="Create Voucher" style="vertical-align: bottom;" />
+									Create Voucher
+								</a>
+							</td>
 
 							<!-- <td ><a target="mainFrame" href="feesCollectionDetails.jsp"><img  alt="Fees Details" src="images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
 								href="Controller?process=StudentProcess&action=addNew"> <img
-									src="images/Usersw.png" width="30" height="30"
+									src="images/student_header.svg" width="25" height="25"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
 							<td ><a target="leftFrame" href="leftsettings.jsp">
-									<img alt="Settings" src="images/ssettingsw.png" width="30"
-									height="30" style="vertical-align: bottom;" />Master Settings
+									<img alt="Settings" src="images/settings.svg" width="25"
+									height="25" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
 							<td ><a target="mainFrame"
 								href="Controller?process=AdminProcess&action=viewAllExpenses"><img
-									alt="Admin Exp" src="images/adexpw.png" width="30" height="30" style="vertical-align: bottom;"/>
+									alt="Admin Exp" src="images/adminexp.svg" width="25" height="25" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
 
 							<td ><a target="mainFrame" href="sendsms.jsp"><img
-									src="images/sendsmsw.png" width="30" height="30" alt="Send SMS" style="vertical-align: bottom;"/>
+									src="images/sendmessage.svg" width="25" height="25" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a></td>
 
 							<td ><a target="mainFrame"
 								href="Controller?process=StudentProcess&action=viewAllStudentsWithParents"><img
-									alt="View All Students" src="images/allusersw.png" width="30"
-									height="30" style="vertical-align: bottom;"/>
+									alt="View All Students" src="images/students.svg" width="25"
+									height="25" style="vertical-align: bottom;"/>
 								View Students
 							</a></td>
 							
 							<td ><a target="mainFrame"
 								href="Controller?process=UserProcess&action=dashBoard"><img
-									alt="Dash Board" src="images/dashboardw.png" width="30"
-									height="30" style="vertical-align: bottom;"/>
+									alt="Dash Board" src="images/dashboard.svg" width="25"
+									height="25" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td>
 								
 							<td ><a target="_parent"
 								href="Controller?process=UserProcess&action=logout"><img
-									src="images/logoutw.png" width="30" height="30" alt="Log Out" /></a></td>
+									src="images/logout.svg" width="25" height="25" alt="Log Out" 
+									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>
 
 					</table>
-				</td>
-                </tr>
-            </table>
-            <script>
-                getdata();
-            </script>
-        </form>
+            </div>
+        <hr style="border-top: 5px solid rgba(1,1,1,1);">
     </body>
 
 </html>
