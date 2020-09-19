@@ -277,8 +277,6 @@ public class AdminService {
 					totalGirls+=1;
 			}
 		}
-		System.out.println("boys "+totalBoys);
-		System.out.println("girls "+totalGirls);
 		boysGirls.add("\"" + totalBoys + "\""); 
 		boysGirls.add("\"" + totalGirls + "\"");
 		request.setAttribute("totalboysgirls", boysGirls);

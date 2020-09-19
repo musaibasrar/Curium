@@ -27,6 +27,7 @@ Author     : Musaib
         <link href="css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="js/notification/jquery.jnotify.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="css/font-awesome.css">
+		
         <script type="text/javascript">
             var get;
             function getdata1() {

@@ -126,6 +126,10 @@
 
             }
             -->
+           .dataTables_filter {
+   			 	float: left;
+    			text-align: left;
+			}
         </style>
         <script type="text/javascript">
             var getMember;
