@@ -287,56 +287,7 @@ Author     : Musaib
                 document.getElementById("n1").style.visibility = 'hidden';
             }
         </script>
-        <script type="text/javascript">
-            var req;
-
-
-            function count() {
-
-                var idField = document.getElementById("userid");
-                var url = "AppointmentController";
-                if (typeof XMLHttpRequest != "undefined") {
-                    req = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    req = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                var url = "AppointmentController";
-                req.open("POST", url, true);
-
-
-
-                //req.open("POST", url, true);
-
-                req.send();
-                req.onreadystatechange = function()
-                {
-                    if (req.readyState == 4)
-                    {
-                        if (req.status == 200) {
-
-                            var count = req.responseXML.getElementsByTagName("count")[0];
-                            var childCount = count.childNodes[0].nodeValue;
-                            var mdiv = document.getElementById("n1");
-                            mdiv.innerHTML = childCount;
-                            mdiv.style.visible = 'block';
-
-                        }
-                    }
-                }
-
-
-
-            }
-
-
-            var timer = null;
-            function auto_reload()
-            {
-                alert();
-                window.location = 'notication.jsp';
-            }
-
-        </script>
+        
         <script language="JavaScript">
             var clockID = 0;
             function UpdateClock() {
@@ -434,18 +385,21 @@ for(Cookie cookie : cookies){
         <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div>
 
         <div id="container" style="width: 100%" >
-            <h5 style="font-size: 12px"><a href="#">Students</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Dashboard</a></h5>
             <div>
-                <a target="mainFrame" href="Controller?process=StudentProcess&action=viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="Controller?process=UserProcess&action=dashBoardAdmin&dashboardbranchid=2&branchname=Sunrise College of Nursing" style="font-size: 12px;">Sunrise Nursing</a><br/>
+                <a target="mainFrame" href="Controller?process=UserProcess&action=dashBoardAdmin&dashboardbranchid=3&branchname=Sunrise College of Pharmacy" style="font-size: 12px;">Sunrise Pharmacy</a><br/>
+                <a target="mainFrame" href="Controller?process=UserProcess&action=dashBoardAdmin&dashboardbranchid=4&branchname=Sunrise College of Physiotherapy" style="font-size: 12px;">Sunrise Physiotherapy</a><br/>
+                <a target="mainFrame" href="Controller?process=UserProcess&action=dashBoardAdmin&dashboardbranchid=5&branchname=Sunrise Institute of Paramedical Sciences" style="font-size: 12px;">Sunrise Paramedical</a><br/>
+                <a target="mainFrame" href="Controller?process=UserProcess&action=dashBoardAdmin&dashboardbranchid=6&branchname=HPR College of Nursing (B.Sc. Nursing)" style="font-size: 12px;">HPR Nursing</a><br/>
+                <a target="mainFrame" href="Controller?process=UserProcess&action=dashBoardAdmin&dashboardbranchid=7&branchname=Karnataka School of Nursing (GNM)" style="font-size: 12px;">Karnataka Nursing</a><br/>
+                <a target="mainFrame" href="Controller?process=UserProcess&action=dashBoardAdmin&dashboardbranchid=8&branchname=Koushthubha School of Nursing (GNM)" style="font-size: 12px;">Koushthubha Nursing</a><br/>
+                <a target="mainFrame" href="Controller?process=UserProcess&action=dashBoardAdmin&dashboardbranchid=9&branchname=Sri Sai School of Nursing" style="font-size: 12px;">Sri Sai Nursing</a><br/>
+                <a target="mainFrame" href="Controller?process=UserProcess&action=dashBoardAdmin&dashboardbranchid=10&branchname=Kshatriya School of Nursing" style="font-size: 12px;">Kshatriya Nursing</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
-            <div>
-				<a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Fees Details</a><br/>
-            </div> 
-            
-            <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Archive</a></h5>
+            <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Students Status</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=archiveViewAll" >Archive Students</a><br/>
                 <a target="mainFrame" href="Controller?process=ClassProcess&action=viewGraduated" >Graduated Students</a><br/>
@@ -456,11 +410,6 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
                 <a target="mainFrame" href="changePassword.jsp" style="font-size: 12px;">Change Password</a><br/>
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
-            <div >
-                <a target="mainFrame" href="sendsms_superadmin.jsp" style="font-size: 12px;">SMS</a><br/>
             </div>
            
             </div>

@@ -4,109 +4,31 @@
     Author     : Musaib
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
     <head>
-        <title>School Management</title>
+        <title>CURIUM</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <script type="text/javascript">
-            var getMember;
-            //var getVisit;
-            function getdata() {
-
-                if (typeof XMLHttpRequest != "undefined") {
-                    getMember = new XMLHttpRequest();
-                   // getVisit = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getMember = new ActiveXObject("Microsoft.XMLHTTP");
-                    //getVisit = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-                getMember.onreadystatechange = processMemberData;
-                getMember.open("POST", "StudentController",true);
-                getMember.send(null);
-
-                /* getVisit.onreadystatechange = processVisitData;
-                getVisit.open("POST", "AppointmentController",true);
-                getVisit.send(null); */
-            }
-
-            function processMemberData() {
-                if (getMember.readyState==4)
-                {
-                    if (getMember.status==200){
-
-                        var count = getMember.responseXML.getElementsByTagName("count")[0];
-                        var childCount=count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML=childCount;
-                        mdiv.style.visibility='visible';
-                        //setTimeout('getdata();', 6000);
-
-
-                    }
-                }
-
-            }
-          /*   function processVisitData() {
-                if (getVisit.readyState==4)
-                {
-                    if (getVisit.status==200){
-
-                        var visitCount = getVisit.responseXML.getElementsByTagName("visitcount")[0];
-                        var childVisitCount=visitCount.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n2");
-                        mdiv.innerHTML=childVisitCount;
-                        mdiv.style.visibility='visible';
-                        setTimeout('getdata();', 60000);
-
-
-                    }
-                }
-
-            } */
-
-        </script>
-      <!--  <script  type="text/javascript">
-            function hidePatientPopup()
-            {
-                document.getElementById("n1").style.visibility='hidden';
-            }
-            function hideVisitPopup()
-            {
-
-                document.getElementById("n2").style.visibility='hidden';
-            }
-        </script> -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/popper.min.js"></script>
+     
         <style type="text/css">
-            <!--
+            
             .style1 {font-family: Arial, Helvetica, sans-serif;
                      font-size: 12px;
                      color: #666666;
             }
             .style50 {color: #FFFFFF}
             .style6 {font-size: 10; font-family: Arial, Helvetica, sans-serif; color: #FFFFFF; }
-            a:link {
-                color: #FFFFFF;
-                text-decoration: none;
-            }
-            a:visited {
-                text-decoration: none;
-                color: #FFFFFF;
-            }
-            a:hover {
-                text-decoration: none;
-                color: #CBE577;
-            }
-            a:active {
-                text-decoration: none;
-                color: #FFFFFF;
-            }
+            
             .style5 {font-family: Calibri; font-size: 14px; color: #FFFFFF; }
             .style51 {
                 font-size: 14px;
@@ -145,7 +67,27 @@
                 height: 16px;
 
             }
-            -->
+
+			a:link {
+                color: black;
+                text-decoration: none;
+                font-family: arial;
+                font-size: 10px;
+            }
+            a:active {
+                color: #ef5b00;
+                text-decoration: underline;
+            }
+            
+			a:hover {
+				text-decoration: underline;
+			}
+			            a:visited {
+    			color: #383838;
+    
+			}
+			
+           
         </style>
         <script type="text/javascript">
             function logout(){
@@ -173,51 +115,39 @@ for(Cookie cookie : cookies){
 }
 %>
     <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-        <form id="form1" method="post" >
-            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td valign="top" background="images/h_bg.jpg">
-                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
-                            <!-- <tr>
-                               <td width="234" ><div align="center"><img src="images/logo.png" width="200" height="64" /></div></td> 
-                                <td width="700" ><div align="center"><img src="images/SMS.png" width="391" height="50" /></div></td>
-                               
-                            </tr> -->
-                            <tr>
-                            <td style="height: 30px;"></td>  
-                            </tr>
-                            <tr>
-                            				<td width="10"></td>
-                                          	<td align="left"><img src="images/curiumheader.png" /></td>  
-                                          	<!-- <td><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td> -->
-                            				<td width="40" ><div align="center" ><a target="leftFrame" href="left_superadmin.jsp"><img src="images/house_home.png" width="35" height="35" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                            				<td><a target="leftFrame" href="left_superadmin.jsp" style="color:white;font-size: 11px;font-family: arial;">Home</a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            
-                                            <td width="40"><a target="mainFrame" href="feesCollectionDetails.jsp"><div align="center" align="center"><img  alt="Fees Details" src="images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="sendsms_superadmin.jsp"><img   src="images/sendsmsw.png" width="30" height="30" alt="Send SMS" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                			<td><label style="color:white;font-size: 12px;">Send <br>Message</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            
-                                            <td width="40"><a target="mainFrame" href="Controller?process=StudentProcess&action=viewAllSuperAdmin"><div align="center" align="center"><img  alt="View All Students" src="images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">View <br>All</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            
-                                            <td width="40"><a target="mainFrame" href="Controller?process=UserProcess&action=dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="images/dashboardw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">Dash<br> Board</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            <td width="40" ><div align="center" ><a target="_parent" href="Controller?process=UserProcess&action=logout"><img   src="images/logoutw.png" width="30" height="30" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            <td width="60" ><div align="center" ><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                            </tr>
-                            <tr>
-                            <td style="height: 30px;"></td>  
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-            <script>
-                getdata();
-            </script>
-        </form>
+        <div class="container-fluid">
+        
+                        <table width="50%" border="0" cellpadding="2" cellspacing="0" bordercolor="#FFFFFF">
+						<tr><td></td></tr>
+						<tr>
+						
+							<td><a target="mainFrame"
+								href="welcome.jsp" ><img src="images/logo.jpg"
+								 />
+							</a></td>
+							
+							<td><a target="mainFrame" href="Controller?process=UserProcess&action=superadminwelcome"> <img
+									src="images/home.svg" width="25" height="25" 
+									alt="Home" style="vertical-align: bottom;" />Home
+							</a></td>
+
+							<td ><a target="mainFrame"
+								href="Controller?process=UserProcess&action=dashBoardSuperAdmin"><img
+									alt="Dash Board" src="images/dashboard.svg" width="25"
+									height="25" style="vertical-align: bottom;"/>
+									Dash Board
+									</a></td>
+								
+							<td ><a target="_parent"
+								href="Controller?process=UserProcess&action=logout"><img
+									src="images/logout.svg" width="25" height="25" alt="Log Out" 
+									style="vertical-align: bottom;"/>Logout</a></td>
+							<td width="60"></td>
+						</tr>
+
+					</table>
+            </div>
+        <hr style="border-top: 1px solid rgba(1,1,1,1);">
     </body>
 
 </html>

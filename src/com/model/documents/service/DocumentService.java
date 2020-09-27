@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,12 +19,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -277,23 +273,21 @@ public class DocumentService {
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
-						new Object[] { studentDetails.getStudent().getAdmissionnumber(), studentDetails.getStudent().getCrecord()+"/"+studentDetails.getStudent().getCrecorddate(),
+						new Object[] { studentDetails.getStudent().getAdmissionnumber()+"/"+studentDetails.getStudent().getCrecorddate(),
 								studentDetails.getStudent().getName(),
 								studentDetails.getStudent().getGender(),
 								getStringDate(studentDetails.getStudent().getDateofbirth()),
 								studentDetails.getFathersname()+" / "+studentDetails.getMothersname(),
 								studentDetails.getParentsannualincome(),
 								studentDetails.getNoofdependents(),
-								studentDetails.getStudent().getNationality()+","+studentDetails.getStudent().getReligion()+" and "+studentDetails.getStudent().getCaste(),
+								studentDetails.getStudent().getNationality()+","+studentDetails.getStudent().getReligion()+" and "+studentDetails.getStudent().getStudentcaste(),
 								studentDetails.getStudent().getMothertongue(), ""});
 				
 				dataTwo.put(Integer.toString(i),
 						new Object[] { studentDetails.getAddresspermanent(), studentDetails.getStudent().getSchoollastattended(),
-								studentDetails.getStudent().getStdlaststudied(),
 								studentDetails.getStudent().getNooftc()+"/"+studentDetails.getStudent().getDateoftc(),
 								studentDetails.getStudent().getClassadmittedin(),
 								getStringDate(studentDetails.getStudent().getAdmissiondate()),
-								studentDetails.getStudent().getSubsequentprogress(),
 								studentDetails.getStudent().getClassonleaving(),
 								getStringDate(studentDetails.getStudent().getDateleaving()),
 								studentDetails.getStudent().getReasonleaving(),

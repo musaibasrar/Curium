@@ -83,6 +83,53 @@ public class UserService {
        }
        return result;
    }
+	
+	public boolean authenticateSuperUser() {
+        boolean result = false;
+        
+        String superAdmin =null;
+        String superUserAuth = null;
+
+        
+        	if(httpSession.getAttribute("userAuth")!=null) {
+	        	superAdmin = httpSession.getAttribute("userAuth").toString();
+	        }
+        
+        	if(httpSession.getAttribute("superuserAuth")!=null) {
+	        	superUserAuth = DataUtil.emptyString(httpSession.getAttribute("superuserAuth").toString());	
+	        }
+        
+        if("superadmin".equalsIgnoreCase(superAdmin) || "superadmin".equalsIgnoreCase(superUserAuth)) {
+        	int branchId = Integer.parseInt(request.getParameter("branchid").toString());
+        	login = new UserDAO().getLoginDetails(branchId);
+
+       if (login != null) {
+            Currentacademicyear currentAcademicYear = new YearDAO().showYear();
+            String academicyear = "";
+            if(currentAcademicYear!=null){
+            academicyear = currentAcademicYear.getCurrentacademicyear();
+            }
+            httpSession.setAttribute("currentAcademicYear",academicyear);
+            httpSession.setAttribute("username",login.getUsername());
+            httpSession.setAttribute("branchid",login.getBranch().getIdbranch());
+            httpSession.setAttribute("branchname",login.getBranch().getBranchname());
+            String[] userType = login.getUsertype().split("-");
+            httpSession.setAttribute("userType", userType[0]);
+            httpSession.setAttribute("typeOfUser",userType[0]);
+            httpSession.setAttribute("userAuth", userType[0]);
+            httpSession.setAttribute("superuserAuth", "superAdmin");
+			//setting session to expiry in 60 mins
+           	httpSession.setMaxInactiveInterval(60*60);
+			Cookie cookie = new Cookie("user",  login.getUsertype());
+			cookie.setMaxAge(30*60);
+			response.addCookie(cookie);
+           result = true;
+       } else {
+           result = false;
+       }
+        }
+       return result;
+   }
 
 	public void logOutUser() {
 		httpSession.invalidate();
@@ -93,9 +140,95 @@ public class UserService {
 	public void dashBoard() {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
+			int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			request.setAttribute("adminbranchid", branchId);
+			dashBoardAdmin();
+		}
+		
+	}
+	
+	public void dashBoardAdmin() {
+		
+		int dashboardBranchId = 0;
+		
+			if(request.getParameter("dashboardbranchid")!=null) {
+				dashboardBranchId = Integer.parseInt(request.getParameter("dashboardbranchid"));
+				System.out.println("Super Dashboard id is "+dashboardBranchId);
+			}else if(request.getAttribute("adminbranchid")!= null) {
+				dashboardBranchId = Integer.parseInt((request.getAttribute("adminbranchid").toString()));
+				System.out.println("Admin id is "+dashboardBranchId);
+			}
+		 
+		if(httpSession.getAttribute(BRANCHID)!=null){
 			
 			//List<Branch> branchList = new BranchDAO().readListOfObjects();
-            List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+            List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(dashboardBranchId);
+            List<String> xaxisList = new LinkedList<String>() ;
+            List<String> yaxisList = new LinkedList<String>() ;
+            int totalStudents = 0;
+            // int[] test = new int[branchList.size()] ;
+            for (Classsec classstudying : classsecList) {
+        	
+		        	String classStudying = classstudying.getClassdetails();
+		    		
+		    		if (!classStudying.equalsIgnoreCase("")) {
+		    			classStudying = classStudying+"--" +"%";
+		    		}
+		    		
+                    List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.classstudying like '"+classStudying+"'"
+                    		+ " AND parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0 AND parents.Student.branchid='"+dashboardBranchId+"'");
+                    totalStudents+=student.size();
+                    xaxisList.add("\""+classstudying.getClassdetails()+"\"");
+                    if(student.size()>0) {
+                        String studentCount = Integer.toString(student.size());
+                        yaxisList.add("\""+studentCount+"\"");
+                    }else {
+                        yaxisList.add("\""+0+"\"");
+                    }
+                    
+                	}
+        
+        	// Total Teachers
+        	List<Teacher> teacher = new EmployeeDAO().readCurrentTeachers(dashboardBranchId);
+        	request.setAttribute("totalteachers", teacher.size());
+        	// End Total Teachers
+        	
+        	//Fees Details
+        	new FeesCollectionService(request, response).getFeesDetailsDashBoard(dashboardBranchId);
+        	//End Fees Details
+        	
+        	//Daily Expenses
+        		new AdminService(request, response).dailyExpenses(dashboardBranchId);
+        		
+        	//Monthly Expenses
+        		new AdminService(request, response).getMonthlyExpenses(dashboardBranchId);
+        		
+        	//Get Boys & Girls
+        		new AdminService(request, response).getTotalBoysGirls(dashboardBranchId);
+        		
+        	//Fees Daily
+       		 feesdailysearch(dashboardBranchId);
+       		 
+       	    //Fees Monthly 
+       	    feesmonthlysearch(dashboardBranchId);	
+        		
+        		
+        	
+        request.setAttribute("studentxaxis", xaxisList);
+        request.setAttribute("studentyaxis", yaxisList);
+        request.setAttribute("totalstudents", totalStudents);
+        request.setAttribute("dashboardbranchname", request.getParameter("branchname"));
+		}
+		
+	}
+	
+	public void dashBoardSuperAdmin() {
+		
+		 
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			
+			//List<Branch> branchList = new BranchDAO().readListOfObjects();
+            List<Classsec> classsecList = new StandardDetailsDAO().viewClasses();
             List<String> xaxisList = new LinkedList<String>() ;
             List<String> yaxisList = new LinkedList<String>() ;
             int totalStudents = 0;
@@ -139,17 +272,70 @@ public class UserService {
         	//Get Boys & Girls
         		new AdminService(request, response).getTotalBoysGirls();
         		
+        	//Fees Daily
+       		 feesdailysearch();
+       		 
+       	    //Fees Monthly 
+       	    feesmonthlysearch();	
+        		
+        		
         	
         request.setAttribute("studentxaxis", xaxisList);
         request.setAttribute("studentyaxis", yaxisList);
         request.setAttribute("totalstudents", totalStudents);
-        feesdailysearch();
-		feesmonthlysearch();
 		}
 		
 	}
 	
-	public void feesdailysearch() {
+	public void feesdailysearch(int branchId) {
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date newdate = new Date();
+		Calendar startCalendar = new GregorianCalendar();
+		startCalendar.setTime(newdate);
+		String todaysDate = df.format(newdate);
+		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
+		Date dateBefore = null;
+		Date dateAfter = null;
+		
+		String queryMain = "From Receiptinfo as feesdetails where feesdetails.branchid='"+branchId+"' and feesdetails.cancelreceipt=0 and";
+		
+		try {
+			dateBefore = df.parse(todaysDate);
+			dateAfter = df.parse(todaysDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		Calendar start = Calendar.getInstance();
+		start.setTime(dateBefore);
+		Calendar end = Calendar.getInstance();
+		end.setTime(dateAfter);
+		start.set(Calendar.DAY_OF_MONTH, start.getActualMinimum(Calendar.DAY_OF_MONTH));
+		end.set(Calendar.DAY_OF_MONTH, end.getActualMaximum(Calendar.DAY_OF_MONTH));
+		end.add(Calendar.DATE, 1);
+		
+		List<String> dailyDatesList = new LinkedList<String>();
+		List<String> totalFeesSum = new LinkedList<String>();
+		
+		for (Date date = start.getTime(); start.before(end); start.add(Calendar.DAY_OF_MONTH,+1), date = start.getTime()) {
+			todaysDate = new SimpleDateFormat("YYYY-MM-dd").format(date);
+			String querySub = "";
+			querySub = " feesdetails.date = '" + todaysDate + "'";
+			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain + querySub);
+			BigDecimal sumOfFees = BigDecimal.ZERO;
+			for (Receiptinfo receiptinfo : feesDetailsList) {
+				BigDecimal fee = new BigDecimal(receiptinfo.getTotalamount());
+				sumOfFees = sumOfFees.add(fee);
+			}
+			totalFeesSum.add("\"" + sumOfFees + "\"");
+			dailyDatesList.add("\"" + todaysDate + "\"");
+		}
+		request.setAttribute("studenttotalfees", totalFeesSum);
+		request.setAttribute("currentdate", dailyDatesList);
+	}
+	
+public void feesdailysearch() {
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date newdate = new Date();
@@ -197,7 +383,64 @@ public class UserService {
 		request.setAttribute("currentdate", dailyDatesList);
 	}
 
-	public void feesmonthlysearch() {
+	public void feesmonthlysearch(int branchId) {
+		
+		List<String> monthList = new LinkedList<String>();
+		List<String> totalFeesSum = new LinkedList<String>();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date newdate = new Date();
+		String todaysDate = df.format(newdate);
+		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
+		Date dateBefore = null;
+		Date dateAfter = null;
+		String queryMain = "From Receiptinfo as feesdetails where feesdetails.branchid='"+branchId+"' and feesdetails.cancelreceipt=0 and ";
+		String toDate = DataUtil.emptyString(request.getParameter("todate"));
+		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
+		
+		try {
+			dateBefore = df.parse(todaysDate);
+			dateAfter = df.parse(todaysDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		Calendar start1 = Calendar.getInstance();
+		start1.setTime(dateBefore);
+		Calendar end1 = Calendar.getInstance();
+		end1.setTime(dateAfter);
+		start1.set(Calendar.MONTH, start1.getActualMinimum(Calendar.MONTH));
+		start1.set(Calendar.DAY_OF_MONTH, start1.getActualMinimum(Calendar.DAY_OF_MONTH));
+		end1.set(Calendar.MONTH, end1.getActualMaximum(Calendar.MONTH));
+		end1.add(Calendar.DAY_OF_MONTH, 1);
+		
+		for (Date date = start1.getTime(); start1.before(end1); start1.add(Calendar.MONTH,+1), date = start1.getTime()) {
+			fromDate = new SimpleDateFormat("YYYY-MM-dd").format(date);
+			Calendar endday = Calendar.getInstance();
+			endday.setTime(date);
+			endday.set(Calendar.DAY_OF_MONTH, start1.getActualMaximum(Calendar.DAY_OF_MONTH));
+			Date enddayofmonth = endday.getTime();
+			toDate = new SimpleDateFormat("YYYY-MM-dd").format(enddayofmonth);
+			String querySub = "";
+			querySub = " feesdetails.date between '" + fromDate + "' AND '" + toDate + "'";
+			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain + querySub);
+			BigDecimal sumOfFees = BigDecimal.ZERO;
+			for (Receiptinfo receiptinfo : feesDetailsList) {
+				BigDecimal fee = new BigDecimal(receiptinfo.getTotalamount());
+				sumOfFees = sumOfFees.add(fee);
+			}
+			totalFeesSum.add("\"" + sumOfFees + "\"");
+			//Date Format
+			SimpleDateFormat month_date = new SimpleDateFormat("MMM yyyy", Locale.ENGLISH);
+			String monthYear = month_date.format(date);
+			
+			monthList.add("\"" + monthYear + "\"");
+		}
+		
+		request.setAttribute("monthlystudentsfees", totalFeesSum);
+		request.setAttribute("monthlist", monthList);
+	}
+	
+public void feesmonthlysearch() {
 		
 		List<String> monthList = new LinkedList<String>();
 		List<String> totalFeesSum = new LinkedList<String>();

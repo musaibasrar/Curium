@@ -64,6 +64,21 @@ public class StandardDetailsDAO {
             return classsecList;
         }
     }
+    
+    public List<Classsec> viewClasses() {
+        
+        List<Classsec> classsecList = new ArrayList<Classsec>();
+        try {
+            transaction = session.beginTransaction();
+            classsecList = session.createQuery("From Classsec").setCacheable(true).setCacheRegion("commonregion").list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return classsecList;
+        }
+    }
 
     public void deleteMultiple(List ids) {
 

@@ -154,26 +154,14 @@ public class AdminService {
 	}
 	
 	
-	public void dailyExpenses() {
+	public void dailyExpenses(int branchId) {
 
 		 
 		List<Adminexpenses> adminExpensesList = new ArrayList<Adminexpenses>();
-		String branchId = request.getParameter("selectedbranchid");
-		int idBranch = 0;
                
 		if(httpSession.getAttribute(BRANCHID)!=null){
-		
-
-	        if(branchId!=null) {
-	        	String[] branchIdName = branchId.split(":");
-	        	idBranch = Integer.parseInt(branchIdName[0]);
-	        	httpSession.setAttribute("expensesdatebranchname", branchIdName[1]);
-	        	httpSession.setAttribute("branchname", "Branch Name:");
-	        }else {
-	        	idBranch = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
-	        }
 	        
-		String queryMain ="From Adminexpenses as adminexpenses where branchid="+idBranch+" AND";
+		String queryMain ="From Adminexpenses as adminexpenses where adminexpenses.branchid="+branchId+" AND";
 		String pattern = "yyyy-MM-dd";
 		String oneDay =new SimpleDateFormat(pattern).format(new Date());
 		
@@ -201,6 +189,99 @@ public class AdminService {
 	
 	}
 	
+	public void dailyExpenses() {
+
+		 
+		List<Adminexpenses> adminExpensesList = new ArrayList<Adminexpenses>();
+               
+		if(httpSession.getAttribute(BRANCHID)!=null){
+	        
+		String queryMain ="From Adminexpenses as adminexpenses where";
+		String pattern = "yyyy-MM-dd";
+		String oneDay =new SimpleDateFormat(pattern).format(new Date());
+		
+		
+			String querySub = "";
+			
+			if(!oneDay.equalsIgnoreCase("")){
+				querySub = " adminexpenses.entrydate = '"+oneDay+"'" ;
+				request.setAttribute("dayone", oneDay);
+			}
+			
+						
+			queryMain = queryMain+querySub;
+			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
+			adminExpensesList = new AdminDetailsDAO().searchExpensesbydate(queryMain);
+			
+	}
+			long sumOfExpenses = 0l;
+			for (Adminexpenses adminexp : adminExpensesList) {
+				sumOfExpenses = sumOfExpenses + adminexp.getPriceofitem();
+			}
+			
+			request.setAttribute("dailyadminexpenses", adminExpensesList);
+			request.setAttribute("dailyexpenses", sumOfExpenses);
+	
+	}
+	
+	public void getMonthlyExpenses(int branchId) {
+
+		
+		List<String> monthList = new LinkedList<String>();
+		List<String> totalExpensesSum = new LinkedList<String>();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date newdate = new Date();
+		String todaysDate = df.format(newdate);
+		List<Adminexpenses> adminExpenseList = new ArrayList<Adminexpenses>();
+		Date dateBefore = null;
+		Date dateAfter = null;
+		String queryMain = "From Adminexpenses as adminexpenses where adminexpenses.branchid='"+branchId+"' AND";
+		String toDate = DataUtil.emptyString(request.getParameter("todate"));
+		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
+		
+		try {
+			dateBefore = df.parse(todaysDate);
+			dateAfter = df.parse(todaysDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		Calendar start1 = Calendar.getInstance();
+		start1.setTime(dateBefore);
+		Calendar end1 = Calendar.getInstance();
+		end1.setTime(dateAfter);
+		start1.set(Calendar.MONTH, start1.getActualMinimum(Calendar.MONTH));
+		start1.set(Calendar.DAY_OF_MONTH, start1.getActualMinimum(Calendar.DAY_OF_MONTH));
+		end1.set(Calendar.MONTH, end1.getActualMaximum(Calendar.MONTH));
+		end1.add(Calendar.DAY_OF_MONTH, 1);
+		
+		for (Date date = start1.getTime(); start1.before(end1); start1.add(Calendar.MONTH,+1), date = start1.getTime()) {
+			fromDate = new SimpleDateFormat("YYYY-MM-dd").format(date);
+			Calendar endday = Calendar.getInstance();
+			endday.setTime(date);
+			endday.set(Calendar.DAY_OF_MONTH, start1.getActualMaximum(Calendar.DAY_OF_MONTH));
+			Date enddayofmonth = endday.getTime();
+			toDate = new SimpleDateFormat("YYYY-MM-dd").format(enddayofmonth);
+			String querySub = "";
+			querySub = " adminexpenses.entrydate between '" + fromDate + "' AND '" + toDate + "'";
+			adminExpenseList = new AdminDetailsDAO().searchExpensesbydate(queryMain + querySub);
+			BigDecimal sumOfExpenses = BigDecimal.ZERO;
+			for (Adminexpenses expenseAdmin : adminExpenseList) {
+				BigDecimal fee = new BigDecimal(expenseAdmin.getPriceofitem());
+				sumOfExpenses = sumOfExpenses.add(fee);
+			}
+			totalExpensesSum.add("\"" + sumOfExpenses + "\"");
+			//Date Format
+			SimpleDateFormat month_date = new SimpleDateFormat("MMM yyyy", Locale.ENGLISH);
+			String monthYear = month_date.format(date);
+			
+			monthList.add("\"" + monthYear + "\"");
+		}
+		
+		request.setAttribute("monthlyexpenses", totalExpensesSum);
+		request.setAttribute("monthlistexpenses", monthList);
+	
+	}
 	
 	public void getMonthlyExpenses() {
 
@@ -213,7 +294,7 @@ public class AdminService {
 		List<Adminexpenses> adminExpenseList = new ArrayList<Adminexpenses>();
 		Date dateBefore = null;
 		Date dateAfter = null;
-		String queryMain = "From Adminexpenses as adminexpenses where ";
+		String queryMain = "From Adminexpenses as adminexpenses";
 		String toDate = DataUtil.emptyString(request.getParameter("todate"));
 		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
 		
@@ -262,13 +343,32 @@ public class AdminService {
 	}
 	
 	
-	public void getTotalBoysGirls() {
+	public void getTotalBoysGirls(int branchId) {
 		List<Student> studentsList = new ArrayList<Student>();
-		int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 		int totalBoys = 0, totalGirls = 0;
 		List<String> boysGirls = new ArrayList<String>();
 		
 		studentsList = new studentDetailsDAO().getListStudents("From Student as student where student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND branchid = "+branchId+" order by name ASC");
+		
+		for (Student student : studentsList) {
+			if("Male".equalsIgnoreCase(student.getGender())) {
+					totalBoys+=1;
+			}else if("Female".equalsIgnoreCase(student.getGender())) {
+					totalGirls+=1;
+			}
+		}
+		boysGirls.add("\"" + totalBoys + "\""); 
+		boysGirls.add("\"" + totalGirls + "\"");
+		request.setAttribute("totalboysgirls", boysGirls);
+	}
+	
+
+	public void getTotalBoysGirls() {
+		List<Student> studentsList = new ArrayList<Student>();
+		int totalBoys = 0, totalGirls = 0;
+		List<String> boysGirls = new ArrayList<String>();
+		
+		studentsList = new studentDetailsDAO().getListStudents("From Student as student where student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 order by name ASC");
 		
 		for (Student student : studentsList) {
 			if("Male".equalsIgnoreCase(student.getGender())) {

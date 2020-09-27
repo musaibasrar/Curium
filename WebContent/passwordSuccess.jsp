@@ -87,7 +87,7 @@ for(Cookie cookie : cookies){
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="250" align="center" valign="middle"><p class="style1"> Password Changed Successful</p>
+        <td height="250" align="center" valign="middle"><p class="style1"> Password Changed Successfully</p>
         </td>
       </tr>
     </table>

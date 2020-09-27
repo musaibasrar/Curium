@@ -36,18 +36,14 @@ public class Student implements java.io.Serializable {
 	private String bloodgroup;
 	private String nationality;
 	private String religion;
-	private String caste;
 	private Date admissiondate;
 	private String admissionnumber;
 	private String mothertongue;
 	private String remarks;
-	private String schoollastattended;
-	private String stdlaststudied;
 	private Date createddate;
 	private Integer archive;
 	private String studentpic;
 	private String studentexternalid;
-	private String crecord;
 	private Date crecorddate;
 	private String placeofbirth;
 	private Integer nooftc;
@@ -58,36 +54,51 @@ public class Student implements java.io.Serializable {
 	private Integer notcissued;
 	private Date datetcissued;
 	private String guardiandetails;
-	private String subsequentprogress;
 	private int branchid;
-	private String languagesstudied;
-	private String instructionmediumlastschool;
 	private Pudetails pudetails;
 	private Degreedetails degreedetails;
 	private Integer passedout;
 	private Integer droppedout;
 	private Integer leftout;
 	
-	private Integer semester;
-	private String stream;
-	private String mediumofinstruction;
-	private String previousschooltype;
-	private String previouschooladdress;
-	private String urbanrural;
 	private String studentscastecertno;
-	private String studentscaste;
-	private String socialcategory;
-	private Integer belongtobpl;
-	private String bplcardno;
-	private String bhagyalakshmibondnumber;
-	private String disabilitychild;
-	private String specialcategory;
+	private String caste;
 	private Integer sts;
 	private Integer rte;
-	private String bankname;
 	private String bankbranch;
 	private String accno;
 	private String bankifsc;
+	
+	private String studentdoc1;
+	private String studentdoc2;
+	private String studentdoc3;
+	private String studentdoc4;
+	private String studentdoc5;
+	private String studentdoc6;
+	private String studentdoc7;
+	private String studentdoc8;
+	private String studentdoc9;
+	private String studentdoc10;
+	
+	private String tenthboard;
+	private String tenthyearofpassing;
+	private String tenthnoofattempts;
+	private String tenthtotalmarkssecured;
+	private String tenthpercentage;
+	private String twelthboard;
+	private String twelthyearofpassing;
+	private String twelthnoofattempts;
+	private String twelthtotalmarkssecured;
+	private String twelthpercentage;
+	private String markscard10;
+	private String markscard12;
+	private String certificatemigration;
+	private String eligibilitycertificate;
+	private String transfercertificate;
+	private String conductcertificate;
+	private String adharcard;
+	private String passportsizephotos;
+	private String schoollastattended;
 	
 	public Student() {
 	}
@@ -99,19 +110,19 @@ public class Student implements java.io.Serializable {
 
 	public Student(String name, String classstudying, String classadmittedin,
 			Integer age, String gender, Date dateofbirth, String bloodgroup,
-			String nationality, String religion, String caste,
+			String nationality, String religion, 
 			Date admissiondate, String admissionnumber, String mothertongue,
-			String remarks, String schoollastattended, String stdlaststudied,
+			String remarks, String schoollastattended, 
 			Date createddate, Integer archive, String studentpic,
-			String studentexternalid, String crecord, Date crecorddate,
+			String studentexternalid, Date crecorddate,
 			String placeofbirth, Integer nooftc, Date dateoftc,
 			String classonleaving, Date dateleaving, String reasonleaving,
 			Integer notcissued, Date datetcissued, String guardiandetails, int branchid,
-			String languagesstudied, String instructionmediumlastschool,
-			Integer passedout, Integer droppedout, Integer leftout, Integer semester,String stream,String mediumofinstruction,
-			 String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,String studentscaste,
-			 String socialcategory,Integer belongtobpl,String bplcardno,String bhagyalakshmibondnumber,
-			 String disabilitychild,String specialcategory, Integer sts, Integer rte, String bankname, String bankbranch, String accno, String bankifsc) {
+			Integer passedout, Integer droppedout, Integer leftout,String studentscastecertno,String caste,
+			Integer sts, Integer rte, String bankbranch, String accno, String bankifsc,
+			String studentdoc1, String studentdoc2, String studentdoc3, String studentdoc4, String studentdoc5,
+			String studentdoc6, String studentdoc7, String studentdoc8, String studentdoc9, String studentdoc10,
+			String tenthboard,String tenthyearofpassing,String tenthnoofattempts,String tenthtotalmarkssecured,String tenthpercentage,String twelthboard,String twelthyearofpassing,String twelthnoofattempts,String twelthtotalmarkssecured,String twelthpercentage,String markscard10,String markscard12,String certificatemigration,String eligibilitycertificate,String transfercertificate,String conductcertificate,String adharcard,String passportsizephotos) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
@@ -121,18 +132,14 @@ public class Student implements java.io.Serializable {
 		this.bloodgroup = bloodgroup;
 		this.nationality = nationality;
 		this.religion = religion;
-		this.caste = caste;
 		this.admissiondate = admissiondate;
 		this.admissionnumber = admissionnumber;
 		this.mothertongue = mothertongue;
 		this.remarks = remarks;
-		this.schoollastattended = schoollastattended;
-		this.stdlaststudied = stdlaststudied;
 		this.createddate = createddate;
 		this.archive = archive;
 		this.studentpic = studentpic;
 		this.studentexternalid = studentexternalid;
-		this.crecord = crecord;
 		this.crecorddate = crecorddate;
 		this.placeofbirth = placeofbirth;
 		this.nooftc = nooftc;
@@ -144,31 +151,45 @@ public class Student implements java.io.Serializable {
 		this.datetcissued = datetcissued;
 		this.guardiandetails = guardiandetails;
 		this.branchid = branchid;
-		this.languagesstudied = languagesstudied;
-		this.instructionmediumlastschool = instructionmediumlastschool;
 		this.passedout = passedout;
 		this.droppedout = droppedout;
 		this.leftout = leftout;
-		this.semester = semester;
-		this.stream = stream;
-		this.mediumofinstruction = mediumofinstruction;
-		this.previousschooltype = previousschooltype;
-		this.previouschooladdress = previouschooladdress;
-		this.urbanrural = urbanrural;
 		this.studentscastecertno = studentscastecertno;
-		this.studentscaste = studentscaste;
-		this.socialcategory = socialcategory;
-		this.belongtobpl = belongtobpl;
-		this.bplcardno = bplcardno;
-		this.bhagyalakshmibondnumber = bhagyalakshmibondnumber;
-		this.disabilitychild = disabilitychild;
-		this.specialcategory = specialcategory;
+		this.caste = caste;
 		this.sts=sts;
 		this.rte=rte;
-		this.bankname=bankname;
 		this.bankbranch=bankbranch;
 		this.accno=accno;
 		this.bankifsc=bankifsc;
+		this.studentdoc1=studentdoc1;
+		this.studentdoc2=studentdoc2;
+		this.studentdoc3=studentdoc3;
+		this.studentdoc4=studentdoc4;
+		this.studentdoc5=studentdoc5;
+		this.studentdoc6=studentdoc6;
+		this.studentdoc7=studentdoc7;
+		this.studentdoc8=studentdoc8;
+		this.studentdoc9=studentdoc9;
+		this.studentdoc10=studentdoc10;
+		this.tenthboard=tenthboard;
+		this.tenthyearofpassing=tenthyearofpassing;
+		this.tenthnoofattempts=tenthnoofattempts;
+		this.tenthtotalmarkssecured=tenthtotalmarkssecured;
+		this.tenthpercentage=tenthpercentage;
+		this.twelthboard=twelthboard;
+		this.twelthyearofpassing=twelthyearofpassing;
+		this.twelthnoofattempts=twelthnoofattempts;
+		this.twelthtotalmarkssecured=twelthtotalmarkssecured;
+		this.twelthpercentage=twelthpercentage;
+		this.markscard10=markscard10;
+		this.markscard12=markscard12;
+		this.certificatemigration=certificatemigration;
+		this.eligibilitycertificate=eligibilitycertificate;
+		this.transfercertificate=transfercertificate;
+		this.conductcertificate=conductcertificate;
+		this.adharcard=adharcard;
+		this.passportsizephotos=passportsizephotos;
+		this.schoollastattended=schoollastattended;
 	}
 
 	@Id
@@ -264,15 +285,6 @@ public class Student implements java.io.Serializable {
 		this.religion = religion;
 	}
 
-	@Column(name = "caste", length = 45)
-	public String getCaste() {
-		return this.caste;
-	}
-
-	public void setCaste(String caste) {
-		this.caste = caste;
-	}
-
 	@Temporal(TemporalType.DATE)
 	@Column(name = "admissiondate", length = 10)
 	public Date getAdmissiondate() {
@@ -310,23 +322,6 @@ public class Student implements java.io.Serializable {
 		this.remarks = remarks;
 	}
 
-	@Column(name = "schoollastattended", length = 100)
-	public String getSchoollastattended() {
-		return this.schoollastattended;
-	}
-
-	public void setSchoollastattended(String schoollastattended) {
-		this.schoollastattended = schoollastattended;
-	}
-
-	@Column(name = "stdlaststudied", length = 45)
-	public String getStdlaststudied() {
-		return this.stdlaststudied;
-	}
-
-	public void setStdlaststudied(String stdlaststudied) {
-		this.stdlaststudied = stdlaststudied;
-	}
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "createddate", length = 10)
@@ -363,15 +358,6 @@ public class Student implements java.io.Serializable {
 
 	public void setStudentexternalid(String studentexternalid) {
 		this.studentexternalid = studentexternalid;
-	}
-
-	@Column(name = "crecord", length = 45)
-	public String getCrecord() {
-		return this.crecord;
-	}
-
-	public void setCrecord(String crecord) {
-		this.crecord = crecord;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -468,16 +454,6 @@ public class Student implements java.io.Serializable {
 		this.guardiandetails = guardiandetails;
 	}
 
-	@Column(name = "subsequentprogress", length = 500)
-	public String getSubsequentprogress() {
-		return subsequentprogress;
-	}
-
-	public void setSubsequentprogress(String subsequentprogress) {
-		this.subsequentprogress = subsequentprogress;
-	}
-
-	
 	@Column(name = "branchid")
 	public int getBranchid() {
 	return branchid;
@@ -497,27 +473,6 @@ public class Student implements java.io.Serializable {
         this.pudetails = pudetails;
     }
 
-    
-    public String getLanguagesstudied() {
-        return this.languagesstudied;
-    }
-
-    
-    public void setLanguagesstudied(String languagesstudied) {
-        this.languagesstudied = languagesstudied;
-    }
-
-    
-    public String getInstructionmediumlastschool() {
-        return this.instructionmediumlastschool;
-    }
-
-    
-    public void setInstructionmediumlastschool(String instructionmediumlastschool) {
-        this.instructionmediumlastschool = instructionmediumlastschool;
-    }
-
-    
     public Degreedetails getDegreedetails() {
         return this.degreedetails;
     }
@@ -554,53 +509,6 @@ public class Student implements java.io.Serializable {
 		this.leftout = leftout;
 	}
 
-	public Integer getSemester() {
-		return semester;
-	}
-
-	public void setSemester(Integer semester) {
-		this.semester = semester;
-	}
-
-	public String getStream() {
-		return stream;
-	}
-
-	public void setStream(String stream) {
-		this.stream = stream;
-	}
-
-	public String getMediumofinstruction() {
-		return mediumofinstruction;
-	}
-
-	public void setMediumofinstruction(String mediumofinstruction) {
-		this.mediumofinstruction = mediumofinstruction;
-	}
-
-	public String getPreviousschooltype() {
-		return previousschooltype;
-	}
-
-	public void setPreviousschooltype(String previousschooltype) {
-		this.previousschooltype = previousschooltype;
-	}
-
-	public String getPreviouschooladdress() {
-		return previouschooladdress;
-	}
-
-	public void setPreviouschooladdress(String previouschooladdress) {
-		this.previouschooladdress = previouschooladdress;
-	}
-
-	public String getUrbanrural() {
-		return urbanrural;
-	}
-
-	public void setUrbanrural(String urbanrural) {
-		this.urbanrural = urbanrural;
-	}
 
 	public String getStudentscastecertno() {
 		return studentscastecertno;
@@ -608,62 +516,6 @@ public class Student implements java.io.Serializable {
 
 	public void setStudentscastecertno(String studentscastecertno) {
 		this.studentscastecertno = studentscastecertno;
-	}
-
-	public String getStudentscaste() {
-		return studentscaste;
-	}
-
-	public void setStudentscaste(String studentscaste) {
-		this.studentscaste = studentscaste;
-	}
-
-	public String getSocialcategory() {
-		return socialcategory;
-	}
-
-	public void setSocialcategory(String socialcategory) {
-		this.socialcategory = socialcategory;
-	}
-
-	public Integer getBelongtobpl() {
-		return belongtobpl;
-	}
-
-	public void setBelongtobpl(Integer belongtobpl) {
-		this.belongtobpl = belongtobpl;
-	}
-
-	public String getBplcardno() {
-		return bplcardno;
-	}
-
-	public void setBplcardno(String bplcardno) {
-		this.bplcardno = bplcardno;
-	}
-
-	public String getBhagyalakshmibondnumber() {
-		return bhagyalakshmibondnumber;
-	}
-
-	public void setBhagyalakshmibondnumber(String bhagyalakshmibondnumber) {
-		this.bhagyalakshmibondnumber = bhagyalakshmibondnumber;
-	}
-
-	public String getDisabilitychild() {
-		return disabilitychild;
-	}
-
-	public void setDisabilitychild(String disabilitychild) {
-		this.disabilitychild = disabilitychild;
-	}
-
-	public String getSpecialcategory() {
-		return specialcategory;
-	}
-
-	public void setSpecialcategory(String specialcategory) {
-		this.specialcategory = specialcategory;
 	}
 
 	public Integer getSts() {
@@ -680,14 +532,6 @@ public class Student implements java.io.Serializable {
 
 	public void setRte(Integer rte) {
 		this.rte = rte;
-	}
-
-	public String getBankname() {
-		return bankname;
-	}
-
-	public void setBankname(String bankname) {
-		this.bankname = bankname;
 	}
 
 	public String getBankbranch() {
@@ -712,6 +556,246 @@ public class Student implements java.io.Serializable {
 
 	public void setBankifsc(String bankifsc) {
 		this.bankifsc = bankifsc;
+	}
+
+	public String getStudentdoc1() {
+		return studentdoc1;
+	}
+
+	public void setStudentdoc1(String studentdoc1) {
+		this.studentdoc1 = studentdoc1;
+	}
+
+	public String getStudentdoc2() {
+		return studentdoc2;
+	}
+
+	public void setStudentdoc2(String studentdoc2) {
+		this.studentdoc2 = studentdoc2;
+	}
+
+	public String getStudentdoc3() {
+		return studentdoc3;
+	}
+
+	public void setStudentdoc3(String studentdoc3) {
+		this.studentdoc3 = studentdoc3;
+	}
+
+	public String getStudentdoc4() {
+		return studentdoc4;
+	}
+
+	public void setStudentdoc4(String studentdoc4) {
+		this.studentdoc4 = studentdoc4;
+	}
+
+	public String getStudentdoc5() {
+		return studentdoc5;
+	}
+
+	public void setStudentdoc5(String studentdoc5) {
+		this.studentdoc5 = studentdoc5;
+	}
+
+	public String getStudentdoc6() {
+		return studentdoc6;
+	}
+
+	public void setStudentdoc6(String studentdoc6) {
+		this.studentdoc6 = studentdoc6;
+	}
+
+	public String getStudentdoc7() {
+		return studentdoc7;
+	}
+
+	public void setStudentdoc7(String studentdoc7) {
+		this.studentdoc7 = studentdoc7;
+	}
+
+	public String getStudentdoc8() {
+		return studentdoc8;
+	}
+
+	public void setStudentdoc8(String studentdoc8) {
+		this.studentdoc8 = studentdoc8;
+	}
+
+	public String getStudentdoc9() {
+		return studentdoc9;
+	}
+
+	public void setStudentdoc9(String studentdoc9) {
+		this.studentdoc9 = studentdoc9;
+	}
+
+	public String getStudentdoc10() {
+		return studentdoc10;
+	}
+
+	public void setStudentdoc10(String studentdoc10) {
+		this.studentdoc10 = studentdoc10;
+	}
+
+	public String getTenthboard() {
+		return tenthboard;
+	}
+
+	public void setTenthboard(String tenthboard) {
+		this.tenthboard = tenthboard;
+	}
+
+	public String getTenthyearofpassing() {
+		return tenthyearofpassing;
+	}
+
+	public void setTenthyearofpassing(String tenthyearofpassing) {
+		this.tenthyearofpassing = tenthyearofpassing;
+	}
+
+	public String getTenthnoofattempts() {
+		return tenthnoofattempts;
+	}
+
+	public void setTenthnoofattempts(String tenthnoofattempts) {
+		this.tenthnoofattempts = tenthnoofattempts;
+	}
+
+	public String getTenthtotalmarkssecured() {
+		return tenthtotalmarkssecured;
+	}
+
+	public void setTenthtotalmarkssecured(String tenthtotalmarkssecured) {
+		this.tenthtotalmarkssecured = tenthtotalmarkssecured;
+	}
+
+	public String getTenthpercentage() {
+		return tenthpercentage;
+	}
+
+	public void setTenthpercentage(String tenthpercentage) {
+		this.tenthpercentage = tenthpercentage;
+	}
+
+	public String getTwelthboard() {
+		return twelthboard;
+	}
+
+	public void setTwelthboard(String twelthboard) {
+		this.twelthboard = twelthboard;
+	}
+
+	public String getTwelthyearofpassing() {
+		return twelthyearofpassing;
+	}
+
+	public void setTwelthyearofpassing(String twelthyearofpassing) {
+		this.twelthyearofpassing = twelthyearofpassing;
+	}
+
+	public String getTwelthnoofattempts() {
+		return twelthnoofattempts;
+	}
+
+	public void setTwelthnoofattempts(String twelthnoofattempts) {
+		this.twelthnoofattempts = twelthnoofattempts;
+	}
+
+	public String getTwelthtotalmarkssecured() {
+		return twelthtotalmarkssecured;
+	}
+
+	public void setTwelthtotalmarkssecured(String twelthtotalmarkssecured) {
+		this.twelthtotalmarkssecured = twelthtotalmarkssecured;
+	}
+
+	public String getTwelthpercentage() {
+		return twelthpercentage;
+	}
+
+	public void setTwelthpercentage(String twelthpercentage) {
+		this.twelthpercentage = twelthpercentage;
+	}
+
+	public String getMarkscard10() {
+		return markscard10;
+	}
+
+	public void setMarkscard10(String markscard10) {
+		this.markscard10 = markscard10;
+	}
+
+	public String getMarkscard12() {
+		return markscard12;
+	}
+
+	public void setMarkscard12(String markscard12) {
+		this.markscard12 = markscard12;
+	}
+
+	public String getCertificatemigration() {
+		return certificatemigration;
+	}
+
+	public void setCertificatemigration(String certificatemigration) {
+		this.certificatemigration = certificatemigration;
+	}
+
+	public String getEligibilitycertificate() {
+		return eligibilitycertificate;
+	}
+
+	public void setEligibilitycertificate(String eligibilitycertificate) {
+		this.eligibilitycertificate = eligibilitycertificate;
+	}
+
+	public String getTransfercertificate() {
+		return transfercertificate;
+	}
+
+	public void setTransfercertificate(String transfercertificate) {
+		this.transfercertificate = transfercertificate;
+	}
+
+	public String getConductcertificate() {
+		return conductcertificate;
+	}
+
+	public void setConductcertificate(String conductcertificate) {
+		this.conductcertificate = conductcertificate;
+	}
+
+	public String getAdharcard() {
+		return adharcard;
+	}
+
+	public void setAdharcard(String adharcard) {
+		this.adharcard = adharcard;
+	}
+
+	public String getPassportsizephotos() {
+		return passportsizephotos;
+	}
+
+	public void setPassportsizephotos(String passportsizephotos) {
+		this.passportsizephotos = passportsizephotos;
+	}
+
+	public String getSchoollastattended() {
+		return schoollastattended;
+	}
+
+	public void setSchoollastattended(String schoollastattended) {
+		this.schoollastattended = schoollastattended;
+	}
+
+	public String getCaste() {
+		return caste;
+	}
+
+	public void setCaste(String caste) {
+		this.caste = caste;
 	}
 	
 	

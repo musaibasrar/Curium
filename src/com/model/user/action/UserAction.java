@@ -34,9 +34,36 @@ public class UserAction {
 				url = searchByDate();
 			} else if (action.equalsIgnoreCase("sessionTimeOut")) {
 	            url = sessionTimeOut();
+	        }else if (action.equalsIgnoreCase("dashBoardadmin")) {
+				url = dashBoardAdmin();
+			}else if (action.equalsIgnoreCase("superadminwelcome")) {
+				url = superAdminWelcome();
+			}else if (action.equalsIgnoreCase("authenticateSuperUser")) {
+	            url = authenticateSuperUser();
+	        }else if (action.equalsIgnoreCase("dashBoardSuperAdmin")) {
+	            url = dashBoardSuperAdmin();
 	        }
 	       return url;
 	       
+	}
+
+
+	private String dashBoardSuperAdmin() {
+		new UserService(request, response).dashBoardSuperAdmin();
+		return "jspbarchart.jsp";
+	}
+
+	private String authenticateSuperUser() {
+		if (new UserService(request, response).authenticateSuperUser()) {
+			
+	        return "login.jsp?login_success=true";
+	    } else {
+	        return "login.jsp?login_success=false";
+	    }
+		}
+
+	private String superAdminWelcome() {
+		return "superadminwelcome.jsp";
 	}
 
 	private String sessionTimeOut() {
@@ -70,6 +97,12 @@ public class UserAction {
 
 	private String dashBoard() {
 		new UserService(request, response).dashBoard();
+        //return "dashBoard.jsp";
+		return "jspbarchart.jsp";
+	}
+	
+	private String dashBoardAdmin() {
+		new UserService(request, response).dashBoardAdmin();
         //return "dashBoard.jsp";
 		return "jspbarchart.jsp";
 	}

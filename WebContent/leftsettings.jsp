@@ -330,6 +330,7 @@ for(Cookie cookie : cookies){
         <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div>
 
         <div id="container" style="width: 100%" >
+        	
             <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=YearProcess&action=updateYear" style="font-size: 12px;">Academic year</a><br/>

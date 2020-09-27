@@ -207,4 +207,19 @@ public class UserDAO {
 		 }
 		return user;
 	}
+
+	public Login getLoginDetails(int branchId) {
+        Login login = null;
+       try{
+           transaction = session.beginTransaction();
+           Query query = session.createQuery("FROM Login as login where login.branch='"+branchId+"' and login.usertype='admin'");
+           login = (Login) query.uniqueResult();
+           transaction.commit();
+           
+       }catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+           hibernateException.printStackTrace();
+       }finally{
+   			HibernateUtil.closeSession();
+           return login;
+       }}
 }

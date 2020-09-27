@@ -66,7 +66,7 @@
                                     	</td>
                                     	</tr>
                                     	<tr>
-                                    	<td> <img alt="" src="images/curiumlogin.jpg" style="width:300px;height: 300px"></td>
+                                    	<td> <img alt="" src="images/welcomelogo.jpg" style="width:300px;height: 300px"></td>
                                     	<td></td><td></td><td></td>
                                     	 <td>
                                             <img src="images/username.png" height="30" name="login" style="vertical-align: bottom;"/>

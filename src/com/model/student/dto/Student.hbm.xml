@@ -35,9 +35,6 @@
         <property name="religion" type="string">
             <column name="religion" length="45" />
         </property>
-        <property name="caste" type="string">
-            <column name="caste" length="45" />
-        </property>
         <property name="admissiondate" type="date">
             <column name="admissiondate" length="10" />
         </property>
@@ -53,9 +50,6 @@
         <property name="schoollastattended" type="string">
             <column name="schoollastattended" length="100" />
         </property>
-        <property name="stdlaststudied" type="string">
-            <column name="stdlaststudied" length="45" />
-        </property>
         <property name="createddate" type="date">
             <column name="createddate" length="10" />
         </property>
@@ -67,9 +61,6 @@
         </property>
         <property name="studentexternalid" type="string">
             <column name="studentexternalid" length="45" not-null="true" unique="true" />
-        </property>
-        <property name="crecord" type="string">
-            <column name="crecord" length="45" />
         </property>
         <property name="crecorddate" type="date">
             <column name="crecorddate" length="10" />
@@ -101,17 +92,8 @@
         <property name="guardiandetails" type="string">
             <column name="guardiandetails" length="200" />
         </property>
-         <property name="subsequentprogress" type="string">
-            <column name="subsequentprogress" length="500" />
-        </property>
           <property name="branchid" type="int">
             <column name="branchid" />
-        </property>
-        <property name="languagesstudied" type="string">
-            <column name="languagesstudied" length="80" />
-        </property>
-        <property name="instructionmediumlastschool" type="string">
-            <column name="instructionmediumlastschool" length="45" />
         </property>
          <property name="passedout" type="java.lang.Integer">
             <column name="passedout" />
@@ -122,48 +104,11 @@
           <property name="leftout" type="java.lang.Integer">
             <column name="leftout" />
         </property>
-        
-        <property name="semester" type="java.lang.Integer">
-            <column name="semester" />
-        </property>
-        <property name="stream" type="string">
-            <column name="stream" length="25" />
-        </property>
-        <property name="mediumofinstruction" type="string">
-            <column name="mediumofinstruction" length="15" />
-        </property>
-        <property name="previousschooltype" type="string">
-            <column name="previousschooltype" length="30" />
-        </property>
-        <property name="previouschooladdress" type="string">
-            <column name="previouschooladdress" length="250" />
-        </property>
-        <property name="urbanrural" type="string">
-            <column name="urbanrural" length="5" />
-        </property>
         <property name="studentscastecertno" type="string">
             <column name="studentscastecertno" length="25" />
         </property>
-        <property name="studentscaste" type="string">
-            <column name="studentscaste" length="15" />
-        </property> 
-        <property name="socialcategory" type="string">
-            <column name="socialcategory" length="10" />
-        </property>    
-        <property name="belongtobpl" type="java.lang.Integer">
-            <column name="belongtobpl"/>
-        </property> 
-        <property name="bplcardno" type="string">
-            <column name="bplcardno" length="25" />
-        </property> 
-        <property name="bhagyalakshmibondnumber" type="string">
-            <column name="bhagyalakshmibondnumber" length="25" />
-        </property>
-        <property name="disabilitychild" type="string">
-            <column name="disabilitychild" length="40" />
-        </property>   
-        <property name="specialcategory" type="string">
-            <column name="specialcategory" length="25" />
+        <property name="caste" type="string">
+            <column name="caste" />
         </property> 
         <property name="sts" type="java.lang.Integer">
             <column name="sts" />
@@ -171,9 +116,9 @@
         <property name="rte" type="java.lang.Integer">
             <column name="rte" />
         </property>
-         <property name="bankname" type="string">
+         <!-- <property name="bankname" type="string">
             <column name="bankname" length="500" />
-        </property>   
+        </property> -->   
          <property name="bankbranch" type="string">
             <column name="bankbranch" length="200" />
         </property>   
@@ -182,7 +127,95 @@
         </property>   
          <property name="bankifsc" type="string">
             <column name="bankifsc" length="50" />
-        </property>   
+        </property>
+         
+        <property name="studentdoc1" type="string">
+            <column name="studentdoc1" />
+        </property>
+        <property name="studentdoc2" type="string">
+            <column name="studentdoc2" />
+        </property>
+        <property name="studentdoc3" type="string">
+            <column name="studentdoc3" />
+        </property>
+        <property name="studentdoc4" type="string">
+            <column name="studentdoc4" />
+        </property>
+        <property name="studentdoc5" type="string">
+            <column name="studentdoc5" />
+        </property>
+        <property name="studentdoc6" type="string">
+            <column name="studentdoc6" />
+        </property>
+        <property name="studentdoc7" type="string">
+            <column name="studentdoc7" />
+        </property>
+        <property name="studentdoc8" type="string">
+            <column name="studentdoc8" />
+        </property>
+        <property name="studentdoc9" type="string">
+            <column name="studentdoc9" />
+        </property>
+        <property name="studentdoc10" type="string">
+            <column name="studentdoc10" />
+        </property>
+        
+        <property name="tenthboard" type="string">
+            <column name="tenthboard" />
+        </property>
+        <property name="tenthyearofpassing" type="string">
+            <column name="tenthyearofpassing" />
+        </property>
+        <property name="tenthnoofattempts" type="string">
+            <column name="tenthnoofattempts" />
+        </property>
+        <property name="tenthtotalmarkssecured" type="string">
+            <column name="tenthtotalmarkssecured" />
+        </property>
+        <property name="tenthpercentage" type="string">
+            <column name="tenthpercentage" />
+        </property>
+        <property name="twelthboard" type="string">
+            <column name="twelthboard" />
+        </property>
+        <property name="twelthyearofpassing" type="string">
+            <column name="twelthyearofpassing" />
+        </property>
+        <property name="twelthnoofattempts" type="string">
+            <column name="twelthnoofattempts" />
+        </property>
+        <property name="twelthtotalmarkssecured" type="string">
+            <column name="twelthtotalmarkssecured" />
+        </property>
+        <property name="twelthpercentage" type="string">
+            <column name="twelthpercentage" />
+        </property>
+        <property name="markscard10" type="string">
+            <column name="markscard10" />
+        </property>
+        <property name="markscard12" type="string">
+            <column name="markscard12" />
+        </property>
+        <property name="certificatemigration" type="string">
+            <column name="certificatemigration" />
+        </property>
+        <property name="eligibilitycertificate" type="string">
+            <column name="eligibilitycertificate" />
+        </property>
+        <property name="transfercertificate" type="string">
+            <column name="transfercertificate" />
+        </property>
+        <property name="conductcertificate" type="string">
+            <column name="conductcertificate" />
+        </property>
+        <property name="adharcard" type="string">
+            <column name="adharcard" />
+        </property>
+        <property name="passportsizephotos" type="string">
+            <column name="passportsizephotos" />
+        </property>
+        
+          
          <!-- <many-to-one name="Pudetails" class="com.model.pudetails.dto.Pudetails"
             column="pudetailsid" unique="true" not-null="true" lazy="false"
             cascade="all" />

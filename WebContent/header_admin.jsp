@@ -27,21 +27,7 @@
             }
             .style50 {color: #FFFFFF}
             .style6 {font-size: 10; font-family: Arial, Helvetica, sans-serif; color: #FFFFFF; }
-            a:link {
-                color: #FFFFFF;
-                text-decoration: none;
-                font-family: arial;
-                font-size: 10px;
-            }
-            a:visited {
-                color: #FFFFFF;
-            }
-            a:hover {
-                color: yellow;
-            }
-            a:active {
-                color: #FFFFFF;
-            }
+            
             .style5 {font-family: Calibri; font-size: 14px; color: #FFFFFF; }
             .style51 {
                 font-size: 14px;
@@ -80,13 +66,26 @@
                 height: 16px;
 
             }
-            a:visited {
-    color: #383838;
+
+			a:link {
+                color: black;
+                text-decoration: none;
+                font-family: arial;
+                font-size: 10px;
+            }
+            a:active {
+                color: #ef5b00;
+                text-decoration: underline;
+            }
+            
+			a:hover {
+				text-decoration: underline;
+			}
+			            a:visited {
+    			color: #383838;
     
-}
-a:hover {
-text-decoration: underline;
-}
+			}
+			
            
         </style>
         <script type="text/javascript">
@@ -121,9 +120,12 @@ for(Cookie cookie : cookies){
 						cellpadding="2" cellspacing="0" bordercolor="#FFFFFF">
 						<tr><td></td></tr>
 						<tr>
-
-							<td align="left"><img src="images/curiumheader.png"
-								style="width: 200px; height: 20px;" /></td>
+						
+							<td><a target="mainFrame"
+								href="welcome.jsp" ><img src="images/logo.jpg"
+								 />
+							</a></td>
+							
 							<td><a target="leftFrame" href="left_admin.jsp"> <img
 									src="images/home.svg" width="25" height="25" 
 									alt="Home" style="vertical-align: bottom;" />Home
@@ -192,7 +194,7 @@ for(Cookie cookie : cookies){
 
 					</table>
             </div>
-        <hr style="border-top: 5px solid rgba(1,1,1,1);">
+        <hr style="border-top: 1px solid rgba(1,1,1,1);">
     </body>
 
 </html>

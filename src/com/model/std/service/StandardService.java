@@ -2,7 +2,6 @@ package com.model.std.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import com.model.std.dao.StandardDetailsDAO;
 import com.model.std.dto.Classhierarchy;
 import com.model.std.dto.Classsec;
-import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
 import com.util.DataUtil;
 

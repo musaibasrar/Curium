@@ -120,14 +120,15 @@ public class DataUtil {
    public static String generateString(int lengthh) {
 
        // ||, -, *, /, <>, <, >, ,(comma), =, <=, >=, ~=, !=, ^=, (, )
-       String alphaNumeric = new String("hijklmno0123459ABEFGHIJKL678MNOPQZabcdefgpqCDrstuvwxyz@#$&-+[]{RSTUVWXY}");
-       int alphaNumericLength = alphaNumeric.length();
+       //String alphaNumeric = new String("hijklmno0123459ABEFGHIJKL678MNOPQZabcdefgpqCDrstuvwxyz@#$&-+[]{RSTUVWXY}");
+	   String numeric = new String("01234567899876543210");
+       int alphaNumericLength = numeric.length();
 
        String generatedRandomNumber = new String();
 
        for (int i = 0; i < lengthh; i++) {
            int index = generateIndex(alphaNumericLength);
-           generatedRandomNumber = generatedRandomNumber + alphaNumeric.charAt(index);
+           generatedRandomNumber = generatedRandomNumber + numeric.charAt(index);
        }
        System.out.println("RANDOMNUMBER IS ::: "+generatedRandomNumber);
        return generatedRandomNumber;
