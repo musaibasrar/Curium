@@ -50,7 +50,7 @@ public class UserAction {
 
 	private String dashBoardSuperAdmin() {
 		new UserService(request, response).dashBoardSuperAdmin();
-		return "jspbarchart.jsp";
+		return "dashboardsuperadmin.jsp";
 	}
 
 	private String authenticateSuperUser() {
