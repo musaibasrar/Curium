@@ -8,17 +8,35 @@
             <column name="idAdminExpenses" />
             <generator class="native" />
         </id>
-        <property name="itemDescription" type="string">
-            <column name="`item description`" length="500" />
+        <property name="itemdescription" type="string">
+            <column name="itemdescription" length="500" />
         </property>
-        <property name="priceofitem" type="java.lang.Integer">
+        <property name="priceofitem" type="string">
             <column name="priceofitem" />
         </property>
         <property name="entrydate" type="timestamp">
             <column name="entrydate" length="19" not-null="true" />
         </property>
-        <property name="quantity" type="java.lang.Integer">
-            <column name="quantity" />
+        <property name="vno" type="java.lang.Integer">
+            <column name="vno" />
+        </property>
+         <property name="paidto" type="string">
+            <column name="paidto"/>
+        </property>
+         <property name="chequeno" type="string">
+            <column name="chequeno" />
+        </property>
+        <property name="paymenttype" type="string">
+            <column name="paymenttype" />
+        </property>
+        <property name="bankname" type="string">
+            <column name="bankname" />
+        </property>
+         <property name="chequedate" type="timestamp">
+            <column name="chequedate" />
+        </property>
+         <property name="voucherstatus" type="string">
+            <column name="voucherstatus" length="500" />
         </property>
         <property name="branchid" type="int">
             <column name="branchid" />

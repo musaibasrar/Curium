@@ -2,6 +2,7 @@ package com.model.adminexpenses.service;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,22 +42,27 @@ public class AdminService {
 	public boolean addExpenses() {
 
 		Adminexpenses adminexpenses = new Adminexpenses();
+		
 		if(httpSession.getAttribute(BRANCHID)!=null){
-			adminexpenses.setItemDescription(DataUtil.emptyString(request.getParameter("item")));
-			adminexpenses.setQuantity(DataUtil.parseInt(request.getParameter("quantity")));
-			adminexpenses.setPriceofitem(DataUtil.parseInt(request.getParameter("price")));
+			adminexpenses.setItemdescription(DataUtil.emptyString(request.getParameter("item")));
+			adminexpenses.setPriceofitem(DataUtil.emptyString(request.getParameter("price")));
+			adminexpenses.setPaidto(DataUtil.emptyString(request.getParameter("paidto")));
+			adminexpenses.setPaymenttype(DataUtil.emptyString(request.getParameter("paymenttype")));
+			adminexpenses.setChequeno(DataUtil.emptyString(request.getParameter("chequeno")));
+			adminexpenses.setBankname(DataUtil.emptyString(request.getParameter("bankname")));
+			adminexpenses.setChequedate(DateUtil.indiandateParser(request.getParameter("chequedate")));
 			adminexpenses.setEntrydate(DateUtil.indiandateParser(request.getParameter("entrydate")));
+			adminexpenses.setVoucherstatus("pending");
 			adminexpenses.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			
-			if(!adminexpenses.getItemDescription().equalsIgnoreCase("") && adminexpenses.getQuantity() != 0
-					&& adminexpenses.getPriceofitem() != 0				
-					){
-			adminexpenses = new AdminDetailsDAO().create(adminexpenses);
-			    return true;
-			}
+			if(!adminexpenses.getItemdescription().equalsIgnoreCase("") && !adminexpenses.getPriceofitem().equalsIgnoreCase(""))
+				{
+					adminexpenses = new AdminDetailsDAO().create(adminexpenses);
+					return true;
+				}
 		}
 
-		return false;
+			return false;
 		
 	}
 
@@ -111,7 +117,7 @@ public class AdminService {
 	        	idBranch = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 	        }
 	        
-		String queryMain ="From Adminexpenses as adminexpenses where branchid="+idBranch+" AND";
+		String queryMain ="From Adminexpenses as adminexpenses where adminexpenses.voucherstatus='approved' AND adminexpenses.branchid="+idBranch+" AND";
 		String toDate= DataUtil.emptyString(request.getParameter("todate"));
 		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
 		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
@@ -146,7 +152,9 @@ public class AdminService {
 	}
 			long sumOfExpenses = 0l;
 			for (Adminexpenses adminexp : adminExpensesList) {
-				sumOfExpenses = sumOfExpenses + adminexp.getPriceofitem();
+				String bigNumber = adminexp.getPriceofitem();
+				long expadmin = Long.valueOf(bigNumber.replaceAll(",", "").toString());
+				sumOfExpenses = sumOfExpenses + expadmin;
 			}
 			
 			request.setAttribute("adminexpenses", adminExpensesList);
@@ -162,7 +170,7 @@ public class AdminService {
 		int idBranch = 0;
                
 		if(httpSession.getAttribute(BRANCHID)!=null){
-		
+
 
 	        if(branchId!=null) {
 	        	String[] branchIdName = branchId.split(":");
@@ -193,7 +201,9 @@ public class AdminService {
 	}
 			long sumOfExpenses = 0l;
 			for (Adminexpenses adminexp : adminExpensesList) {
-				sumOfExpenses = sumOfExpenses + adminexp.getPriceofitem();
+				String bigNumber = adminexp.getPriceofitem();
+				long expadmin = Long.valueOf(bigNumber.replaceAll(",", "").toString());
+				sumOfExpenses = sumOfExpenses + expadmin;
 			}
 			
 			request.setAttribute("dailyadminexpenses", adminExpensesList);
@@ -282,6 +292,43 @@ public class AdminService {
 		boysGirls.add("\"" + totalBoys + "\""); 
 		boysGirls.add("\"" + totalGirls + "\"");
 		request.setAttribute("totalboysgirls", boysGirls);
+	}
+
+
+	public void printVoucher() {
+		 String[] expensesIds = request.getParameterValues("expensesIDs");
+        try {
+        	Adminexpenses adminExpense = new AdminDetailsDAO().readExpenses(Integer.parseInt(expensesIds[0]),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+            httpSession.setAttribute("adminexpenses", adminExpense);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
+
+
+	public void rejectVoucher() {
+		 String[] expensesIds = request.getParameterValues("expensesIDs");
+		 if(expensesIds!=null){
+	        List ids = new ArrayList();
+	        for (String id : expensesIds) {
+	            System.out.println("id" + id);
+	            ids.add(Integer.valueOf(id));
+	        }
+	        new AdminDetailsDAO().rejectVoucher(ids);
+	}
+	}
+
+
+	public void approveVoucher() {
+		 String[] expensesIds = request.getParameterValues("expensesIDs");
+		 if(expensesIds!=null){
+	        List ids = new ArrayList();
+	        for (String id : expensesIds) {
+	            System.out.println("id" + id);
+	            ids.add(Integer.valueOf(id));
+	        }
+	        new AdminDetailsDAO().approveVoucher(ids);
+	}
 	}
 
 

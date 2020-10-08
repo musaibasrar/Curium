@@ -39,6 +39,12 @@ public class AdminAction {
 			url = deleteMultiple();
 		}else if ("searchExpenses".equalsIgnoreCase(action)) {
 			url = searchExpensesbydate();
+		}else if (action.equalsIgnoreCase("printVoucher")) {
+			url = printVoucher();
+		}else if (action.equalsIgnoreCase("approveVoucher")) {
+			url = approveVoucher();
+		}else if (action.equalsIgnoreCase("rejectVoucher")) {
+			url = rejectVoucher();
 		}
 		return url;
 	}
@@ -46,6 +52,22 @@ public class AdminAction {
 	
 
 	
+
+	private String rejectVoucher() {
+		
+			new AdminService(request, response).rejectVoucher();
+            return "Controller?process=AdminProcess&action=viewAllExpenses";
+	}
+
+	private String approveVoucher() {
+		new AdminService(request, response).approveVoucher();
+        return "Controller?process=AdminProcess&action=viewAllExpenses";
+	}
+
+	private String printVoucher() {
+		 new AdminService(request, response).printVoucher();
+	        return "paymentvoucherprint.jsp";
+	}
 
 	private String searchExpensesbydate() {
 		
