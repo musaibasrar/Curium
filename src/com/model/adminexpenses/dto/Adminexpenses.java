@@ -21,11 +21,17 @@ import javax.persistence.TemporalType;
 public class Adminexpenses implements java.io.Serializable {
 
 	private Integer idAdminExpenses;
-	private String itemDescription;
-	private Integer priceofitem;
+	private String itemdescription;
+	private String priceofitem;
 	private Date entrydate;
-	private Integer quantity;
+	private Integer vno;
+	private String paidto;
+	private String chequeno;
+	private String voucherstatus;
 	private int branchid;
+	private String paymenttype;
+	private String bankname;
+	private Date chequedate;
 
 	public Adminexpenses() {
 	}
@@ -34,13 +40,21 @@ public class Adminexpenses implements java.io.Serializable {
 		this.entrydate = entrydate;
 	}
 
-	public Adminexpenses(String itemDescription, Integer priceofitem,
-			Date entrydate, Integer quantity, int branchid) {
-		this.itemDescription = itemDescription;
+	public Adminexpenses(String itemdescription, String priceofitem,
+			Date entrydate, Integer vno, int branchid,String paidto,
+			String chequeno,
+			String voucherstatus,Date chequedate,String paymenttype,String bankname) {
+		this.itemdescription = itemdescription;
 		this.priceofitem = priceofitem;
 		this.entrydate = entrydate;
-		this.quantity = quantity;
+		this.vno = vno;
+		this.paidto = paidto;
+		this.chequeno = chequeno;
+		this.voucherstatus = voucherstatus;
 		this.branchid = branchid;
+		this.chequedate = chequedate;
+		this.paymenttype = paymenttype;
+		this.bankname = bankname;
 	}
 
 	@Id
@@ -55,20 +69,20 @@ public class Adminexpenses implements java.io.Serializable {
 	}
 
 	@Column(name = "item description", length = 500)
-	public String getItemDescription() {
-		return this.itemDescription;
+	public String getItemdescription() {
+		return this.itemdescription;
 	}
 
-	public void setItemDescription(String itemDescription) {
-		this.itemDescription = itemDescription;
+	public void setItemdescription(String itemdescription) {
+		this.itemdescription = itemdescription;
 	}
 
 	@Column(name = "priceofitem")
-	public Integer getPriceofitem() {
+	public String getPriceofitem() {
 		return this.priceofitem;
 	}
 
-	public void setPriceofitem(Integer priceofitem) {
+	public void setPriceofitem(String priceofitem) {
 		this.priceofitem = priceofitem;
 	}
 
@@ -82,13 +96,13 @@ public class Adminexpenses implements java.io.Serializable {
 		this.entrydate = entrydate;
 	}
 
-	@Column(name = "quantity")
-	public Integer getQuantity() {
-		return quantity;
+	@Column(name = "vno")
+	public Integer getVno() {
+		return vno;
 	}
 
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
+	public void setVno(Integer vno) {
+		this.vno = vno;
 	}
 	
 	@Column(name = "branchid")
@@ -98,5 +112,53 @@ public class Adminexpenses implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+
+	public String getPaidto() {
+		return paidto;
+	}
+
+	public void setPaidto(String paidto) {
+		this.paidto = paidto;
+	}
+
+	public String getChequeno() {
+		return chequeno;
+	}
+
+	public void setChequeno(String chequeno) {
+		this.chequeno = chequeno;
+	}
+
+	public String getVoucherstatus() {
+		return voucherstatus;
+	}
+
+	public void setVoucherstatus(String voucherstatus) {
+		this.voucherstatus = voucherstatus;
+	}
+
+	public String getPaymenttype() {
+		return paymenttype;
+	}
+
+	public void setPaymenttype(String paymenttype) {
+		this.paymenttype = paymenttype;
+	}
+
+	public String getBankname() {
+		return bankname;
+	}
+
+	public void setBankname(String bankname) {
+		this.bankname = bankname;
+	}
+
+	public Date getChequedate() {
+		return chequedate;
+	}
+
+	public void setChequedate(Date chequedate) {
+		this.chequedate = chequedate;
 	}
 }

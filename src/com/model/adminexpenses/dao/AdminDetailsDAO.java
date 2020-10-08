@@ -13,6 +13,7 @@ import org.hibernate.query.Query;
 
 import com.model.adminexpenses.dto.Adminexpenses;
 import com.model.feescollection.dto.Receiptinfo;
+import com.model.student.dto.Student;
 import com.util.HibernateUtil;
 
 public class AdminDetailsDAO {
@@ -39,9 +40,7 @@ public class AdminDetailsDAO {
 			// this.session = sessionFactory.openCurrentSession();
 			transaction = session.beginTransaction();
 			session.save(adminexpenses);
-
 			transaction.commit();
-			System.out.println("in add3");
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
@@ -82,7 +81,24 @@ public class AdminDetailsDAO {
 
 
 	public void deleteMultiple(List ids) {
+		
+
 		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("update Adminexpenses set voucherstatus='cancelled' where idAdminExpenses IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+
+	
+		
+	/*	try {
 			transaction = session.beginTransaction();
 			Query query = session
 					.createQuery("delete from Adminexpenses where idAdminExpenses IN (:ids)");
@@ -93,7 +109,7 @@ public class AdminDetailsDAO {
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
-		}
+		}*/
 
 	}
 
@@ -115,6 +131,65 @@ public class AdminDetailsDAO {
 			HibernateUtil.closeSession();
 		 }
         return adminExpenses;
+	}
+
+	public Adminexpenses readExpenses(int expensesIds, int branchId) {
+		
+
+			Adminexpenses results = new Adminexpenses();
+
+			try {
+				// this.session =
+				// HibernateUtil.getSessionFactory().openCurrentSession();
+				transaction = session.beginTransaction();
+				
+				Query query = session
+						.createQuery("From Adminexpenses where idAdminExpenses='"+expensesIds+"' and branchid="+branchId);
+				results = (Adminexpenses) query.uniqueResult();
+
+				transaction.commit();
+
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
+				hibernateException.printStackTrace();
+
+			} finally {
+					HibernateUtil.closeSession();
+				return results;
+			}
+			
+	}
+
+	public void rejectVoucher(List ids) {
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("update Adminexpenses set voucherstatus='rejected' where idAdminExpenses IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+
+	}
+
+	public void approveVoucher(List ids) {
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("update Adminexpenses set voucherstatus='approved' where idAdminExpenses IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+
 	}
 
 	
