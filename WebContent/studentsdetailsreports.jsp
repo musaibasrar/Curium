@@ -82,13 +82,18 @@
 
 .alignRight {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
 	text-align: right;
 	vertical-align: middle;
 	font-weight: bold;
+}
+
+.vl {
+  border-left: 1px solid green;
+  height: 2px;
 }
 
 .alignRightFields {
@@ -515,14 +520,13 @@ for(Cookie cookie : cookies){
 
 				</ul>
 				<div id="tabs-1">
-					<table width="30%" border="0" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
+					<table>
 
 						<tr>
-							<td class="alignRightFields">Name &nbsp;</td>
+							<td class="alignRight">Name &nbsp;</td>
 							<td><label> <input
 									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
+									size="36">
 							</label></td>
 							
 						</tr>
@@ -534,13 +538,14 @@ for(Cookie cookie : cookies){
 
 
 						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
+							<td class="alignRight">Class &nbsp;</td>
 							<td>
 							<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
 										<input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
-										${classdetailslist.classdetails}
+										${classdetailslist.classdetails}&nbsp;&nbsp;
 										</c:if>	
+										
 							</c:forEach>
 							<%-- <label> <select name="classsearch"
 									id="classsearch" style="width: 150px">
@@ -576,10 +581,10 @@ for(Cookie cookie : cookies){
 
 						<tr>
 
-							<td width="30%" class="alignRight"></td>
+							<td></td>
 
 							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
+							<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;
 								<button id="search">Search</button>
 							</td>
 						</tr>
