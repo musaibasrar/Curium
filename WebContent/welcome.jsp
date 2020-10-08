@@ -35,8 +35,17 @@ for(Cookie cookie : cookies){
 }
 %>
     <body>
-    		<br><br>
+    		<br>
     		<div class="container">
+    		
+    			<div class="row">
+    					
+    				<div class="col" align="center">
+    				<label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 20px;"> ${branchname} </label>
+    				</div>
+    						
+    			</div>
+    		
     			<div class="row">
     					
     				<div class="col">

@@ -177,13 +177,12 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left">
-				<img src="images/cambridgelogo.jpg" width="200" height="150"/>
+				<img src="images/welcomelogo.jpg" width="150" height="150"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;Cambridge School Yadgir </label><br>
-				<label class="addressLine">Behind Mohan Complex, Chittapur Road, Yadgir - 585202<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											Dist - Yadgir (K.S.) Cell: 9880012654 
+				<label class="addressLine">Bright Future Foundation (R)<br>
+				 </label>
+				<label class="dataTextBoldCenter">${branchname} </label><br>
 				 </label>
 				</td>
 			</tr>

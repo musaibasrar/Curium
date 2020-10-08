@@ -1,5 +1,5 @@
 <%-- 
-    Document   : member_details
+    Document   : Employee_Details
     Created on : Jan 4, 2013, 4:39:24 PM
     Author     : Musaib
 --%>
@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Employee Details</title>
 
         <script type="text/javascript" language="JavaScript" src="js/motionpack.js"></script>
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -37,7 +37,6 @@
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
 
         <style type="text/css">
-            <!--
             .dataTextInActive {
                 border-radius:1px;
                 font-family: Tahoma;
@@ -150,13 +149,14 @@
             }
             .alignRight {
                 font-family: Tahoma;
-                font-size: 11px;
+                font-size: 14px;
                 font-style: normal;
                 text-transform: capitalize;
                 color: #325F6D;
                 text-align: right;
                 vertical-align: middle;
                 font-weight: bold;
+                width: 200px;
             }
             .alignLeft {
                 font-family: Tahoma;
@@ -243,13 +243,16 @@
                 color: #325f6d;
             }
             .tablerows{
-                font-size: 12px;
+                font-size: 14px;
                 font-family: Tahoma;
                 text-align: left;
                 font-weight: bold;
+                padding-top: 0px;
+                padding-left: 20px;
+                padding-right: 30px;
+                width: 200px;
 
             }
-            -->
         </style>
         <script type="text/javascript">
             
@@ -356,84 +359,100 @@ for(Cookie cookie : cookies){
                 <h3><a href="#">Personal Details</a></h3>
                 <div>
 
-                    <table  border="0px" width="100%"  id="table1" align="center">
+                    <table  width="auto;" border="0" align="left" >
 
                         <tr>
 
-                            <td width="25%"  class="alignLeft" height="50">Name</td>
-                            <td width="25%" class="tablerows"  style="text-transform:uppercase">
+                            <td   class="alignRight" height="50">Name</td>
+                            <td  class="tablerows"  style="text-transform:uppercase">
                                 <c:out default="" value="${employee.teachername}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Gender
+                            <td   class="alignRight" height="50" >Gender
                             </td>
-                            <td width="25%" class="tablerows" >
+                            <td  class="tablerows" >
                                 <c:out default="" value="${employee.gender}" />
                             </td>
                         </tr>
                         
-                          <tr>
-                        <td  width="25%"  class="alignLeft" height="50">Address
+                         <tr>
+                         
+                         	<td   class="alignRight" height="50">Qualification
                             </td>
-                            <td width="25%" class="tablerows">
-                                <c:out default="" value="${employee.address}" />
-                            </td>
-                        
-                            <td  width="25%"  class="alignLeft" height="50" >Contact Number
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${employee.contactnumber}" />
-                            </td>
-
-                            
-                        </tr>
-                        
-                        <tr>
-                        <td width="25%"  class="alignLeft" height="50" >Email
-                            </td>
-                            <td width="25%"  class="tablerows">
-                                <c:out default="" value="${employee.email}" />
-                            </td>
-                            <td width="25%"  class="alignLeft" height="50">Date Of Joining</td>
-                            <td width="25%" class="tablerows" >
-                                <fmt:formatDate pattern="dd-MM-yyyy" value="${employee.dateofjoining}"/>
-                            </td>
-                            
-                        </tr>
-                        
-                        <tr>
-                            <td width="25%"  class="alignLeft" height="50" >Total Experience</td>
-                            <td  width="25%"  class="tablerows">
-                                <c:out default="" value="${employee.totalexperience}" />
-                            </td>
-                            <td width="25%"  class="alignLeft" height="50">Qualification
-                            </td>
-                            <td width="25%" class="tablerows">
+                            <td  class="tablerows">
                                 <c:out default="" value="${employee.qualification}" />
                             </td>
+                            
+                            <td   class="alignRight" height="50" >Total Experience</td>
+                            <td    class="tablerows">
+                                <c:out default="" value="${employee.totalexperience}" />
+                            </td>
+                            
                         </tr>
-                        
                         
                         <tr>
-                        <td width="25%"   class="alignLeft" height="50" >Department</td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${employee.department}" />
-                            </td>
-                            
-                            
-                            <td width="25%"   class="alignLeft" height="50" >Designation</td>
-                            <td width="25%" class="tablerows" >
+                        
+                         <td    class="alignRight" height="50" >Designation</td>
+                            <td  class="tablerows" >
                                 <c:out default="" value="${employee.designation}" />
                             </td>
-                           
-                           
-                        
+                            
+                            
+                        <td    class="alignRight" height="50" >Department</td>
+                            <td  class="tablerows" >
+                                <c:out default="" value="${employee.department}" />
+                            </td>
                         </tr>
+                        
+                        
+                          <tr>
+                          
+                            <td    class="alignRight" height="50" >Contact Number
+                            </td>
+                            <td  class="tablerows" >
+                                <c:out default="" value="${employee.contactnumber}" />
+                            </td>
+                            
+                        <td    class="alignRight" height="50">Address
+                            </td>
+                            <td  class="tablerows">
+                                <c:out default="" value="${employee.address}" />
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                          
+                            <td    class="alignRight" height="50" >Aadhar Number
+                            </td>
+                            <td  class="tablerows" >
+                                <c:out default="" value="${employee.aadharnumber}" />
+                            </td>
+                            
+                        <td    class="alignRight" height="50">PAN
+                            </td>
+                            <td  class="tablerows">
+                                <c:out default="" value="${employee.pan}" />
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                        <td   class="alignRight" height="50" >Email
+                            </td>
+                            <td   class="tablerows">
+                                <c:out default="" value="${employee.email}" />
+                            </td>
+                            <td   class="alignRight" height="50">Date Of Joining</td>
+                            <td  class="tablerows" >
+                                <fmt:formatDate pattern="dd/MM/yyyy" value="${employee.dateofjoining}"/>
+                            </td>
+                            
+                        </tr>
+                        
                         
                         <tr>
                          
-                            <td  width="25%"  class="alignLeft" height="50">Current Employee</td>
+                            <td    class="alignRight" height="50">Current Employee</td>
                             
-                            <td width="25%" class="tablerows">
+                            <td  class="tablerows">
                             	<c:if test="${(employee.currentemployee ==1)}">    
            						  <c:out default="" value="Yes" />
            						 </c:if>
@@ -442,8 +461,8 @@ for(Cookie cookie : cookies){
            						 </c:if>
                             </td>
                         
-                            <td width="25%" class="alignLeft" height="50" >Remarks</td>
-                            <td width="25%" class="tablerows"  >
+                            <td  class="alignRight" height="50" >Remarks</td>
+                            <td  class="tablerows"  >
                                  <c:out default="" value="${employee.remarks}" />
                             </td>
                             
@@ -453,15 +472,15 @@ for(Cookie cookie : cookies){
                         <tr>
                         
                          
-                            <td  width="25%"  class="alignLeft" height="50">Staff User ID
+                            <td    class="alignRight" height="50">Staff User ID
                             </td>
-                            <td width="25%" class="tablerows">
+                            <td  class="tablerows">
                                 <c:out default="" value="${stafflogin.username}" />
                             </td>
                             
                         
-                            <td width="25%"   class="alignLeft" height="50" >Password</td>
-                            <td width="25%" class="tablerows"  >
+                            <td    class="alignRight" height="50" >Password</td>
+                            <td  class="tablerows"  >
                                  <c:out default="" value="${stafflogin.password}" />
                                 
                             </td>
@@ -470,14 +489,14 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                            <td  width="25%"  class="alignLeft" height="50">
+                            <td    class="alignRight" height="50">
                             </td>
-                            <td width="25%" class="tablerows" >
+                            <td  class="tablerows" >
 
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50">
+                            <td    class="alignRight" height="50">
                             </td>
-                            <td width="25%" class="tablerows">
+                            <td  class="tablerows">
 
                             </td>
                         </tr>
@@ -485,44 +504,146 @@ for(Cookie cookie : cookies){
                 </div>
             </div>
             
+            
+            <div class="accordion" style="width: 100%;height: 100%">
+		
+                <h3><a href="#">Documents</a></h3>
+                <div>
+
+                    <table id="table1" align="center">
+                    
+                        <tr>
+                    <td class="alignRight" height="30">
+                    <img src="data:image;base64,<c:out value="${employee.doc1}"/>" alt="Doc 1" style="width: 200px;height: 200px;">
+                    </td>
+                    <td class="tablerows" >
+                    <a download="doc1.jpg" href="data:image/jpg;base64,<c:out value="${employee.doc1}"/>">Download</a>
+                    </td>
+                    <td class="alignRight" height="30">
+                    <img src="data:image;base64,<c:out value="${employee.doc6}"/>" alt="Doc 6" style="width: 200px;height: 200px;">
+                    </td>
+                    <td class="tablerows" >
+                    <a download="doc6.jpg" href="data:image/jpg;base64,<c:out value="${employee.doc6}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td class="alignRight" height="30">
+                    <img src="data:image;base64,<c:out value="${employee.doc2}"/>" alt="Doc 2" style="width: 200px;height: 200px;">
+                    </td>
+                    <td class="tablerows" >
+                    <a download="doc2.jpg" href="data:image/jpg;base64,<c:out value="${employee.doc2}"/>">Download</a>
+                    </td>
+                     <td class="alignRight" height="30">
+                    <img src="data:image;base64,<c:out value="${employee.doc7}"/>" alt="Doc 7" style="width: 200px;height: 200px;">
+                    </td>
+                    <td class="tablerows" >
+                    <a download="doc7.jpg" href="data:image/jpg;base64,<c:out value="${employee.doc7}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td class="alignRight" height="30">
+                    <img src="data:image;base64,<c:out value="${employee.doc3}"/>" alt="Doc 3" style="width: 200px;height: 200px;">
+                    </td>
+                    <td class="tablerows" >
+                    <a download="doc3.jpg" href="data:image/jpg;base64,<c:out value="${employee.doc3}"/>">Download</a>
+                    </td>
+                    <td class="alignRight" height="30">
+                    <img src="data:image;base64,<c:out value="${employee.doc8}"/>" alt="Doc 8" style="width: 200px;height: 200px;">
+                    </td>
+                    <td class="tablerows" >
+                    <a download="doc8.jpg" href="data:image/jpg;base64,<c:out value="${employee.doc8}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td class="alignRight" height="30">
+                    <img src="data:image;base64,<c:out value="${employee.doc4}"/>" alt="Doc 4" style="width: 200px;height: 200px;">
+                    </td>
+                    <td class="tablerows" >
+                    <a download="doc4.jpg" href="data:image/jpg;base64,<c:out value="${employee.doc4}"/>">Download</a>
+                    </td>
+                    <td class="alignRight" height="30">
+                    <img src="data:image;base64,<c:out value="${employee.doc9}"/>" alt="Doc 9" style="width: 200px;height: 200px;">
+                    </td>
+                    <td class="tablerows" >
+                    <a download="doc9.jpg" href="data:image/jpg;base64,<c:out value="${employee.doc9}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td class="alignRight" height="30">
+                    <img src="data:image;base64,<c:out value="${employee.doc5}"/>" alt="Doc 5" style="width: 200px;height: 200px;">
+                    </td>
+                    <td class="tablerows" >
+                    <a download="doc5.jpg" href="data:image/jpg;base64,<c:out value="${employee.doc5}"/>">Download</a>
+                    </td>
+                    <td class="alignRight" height="30">
+                    <img src="data:image;base64,<c:out value="${employee.doc10}"/>" alt="Doc 10" style="width: 200px;height: 200px;">
+                    </td>
+                    <td class="tablerows" >
+                    <a download="doc10.jpg" href="data:image/jpg;base64,<c:out value="${employee.doc10}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <%-- <tr>
+                    <td class="alignRight" height="30">
+                    <img src="data:image;base64,<c:out value="${employee.doc6}"/>" alt="Doc 6" style="width: 200px;height: 200px;">
+                    </td>
+                    <td class="tablerows" >
+                    <a download="doc6.jpg" href="data:image/jpg;base64,<c:out value="${employee.doc6}"/>">Download</a>
+                    </td>
+                    <td class="alignRight" height="30">
+                    <img src="data:image;base64,<c:out value="${employee.doc10}"/>" alt="Doc 10" style="width: 200px;height: 200px;">
+                    </td>
+                    <td class="tablerows" >
+                    <a download="doc10.jpg" href="data:image/jpg;base64,<c:out value="${employee.doc10}"/>">Download</a>
+                    </td>
+                    </tr> --%>
+                     
+                    </table>
+                </div>
+    </div>
+    
             <div class="accordion" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Bank Details</a></h3>
                 <div>
 
-                    <table  border="0px" width="100%"  id="table1" align="center">
+                    <table  border="0px" style="width: auto;"  id="table1" align="left">
 
                         <tr>
 
-                            <td width="25%"  class="alignLeft" height="50">Bank Name</td>
-                            <td width="25%" class="tablerows"  style="text-transform:uppercase">
+                            <td   class="alignRight" height="50">Bank Name</td>
+                            <td  class="tablerows"  style="text-transform:uppercase">
                                 <c:out default="" value="${employee.bankname}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Bank IFSC
+                            <td   class="alignRight" height="50" >Bank IFSC
                             </td>
-                            <td width="25%" class="tablerows" >
+                            <td  class="tablerows" >
                                 <c:out default="" value="${employee.bankifsc}" />
                             </td>
                         </tr>
                         
                           <tr>
-                        <td  width="25%"  class="alignLeft" height="50">Account Number
+                        <td    class="alignRight" height="50">Account Number
                             </td>
-                            <td width="25%" class="tablerows">
+                            <td  class="tablerows">
                                 <c:out default="" value="${employee.accno}" />
                             </td>
                                                     
                         </tr>
                         
                         <tr>
-                            <td  width="25%"  class="alignLeft" height="50">
+                            <td    class="alignRight" height="50">
                             </td>
-                            <td width="25%" class="tablerows" >
+                            <td  class="tablerows" >
 
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50">
+                            <td    class="alignRight" height="50">
                             </td>
-                            <td width="25%" class="tablerows">
+                            <td  class="tablerows">
 
                             </td>
                         </tr>
@@ -535,24 +656,24 @@ for(Cookie cookie : cookies){
                 <h3><a href="#">Additional Details</a></h3>
                 <div>
 
-                    <table border="0px" width="100%"  id="table1" align="center">
+                    <table border="0px" style="width: auto;"  id="table1" align="left">
 
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50">Date of Leaving&nbsp;</td>
-                            <td width="25%" class="tablerows"  style="text-transform:uppercase">
-                            <fmt:formatDate pattern="dd-MM-yyyy" value="${employee.leavingdate}"/>
+                            <td   class="alignRight" height="50">Date of Leaving&nbsp;</td>
+                            <td  class="tablerows"  style="text-transform:uppercase">
+                            <fmt:formatDate pattern="dd/MM/yyyy" value="${employee.leavingdate}"/>
                             </td>
                         </tr>
                         
                         <tr>
-                            <td  width="25%"  class="alignLeft" height="50">
+                            <td    class="alignRight" height="50">
                             </td>
-                            <td width="25%" class="tablerows" >
+                            <td  class="tablerows" >
 
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50">
+                            <td    class="alignRight" height="50">
                             </td>
-                            <td width="25%" class="tablerows">
+                            <td  class="tablerows">
 
                             </td>
                         </tr>

@@ -25,13 +25,11 @@ import com.model.adminexpenses.service.AdminService;
 import com.model.branch.dto.Branch;
 import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
-import com.model.feescollection.action.FeesCollectionAction;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.feescollection.service.FeesCollectionService;
 import com.model.parents.dto.Parents;
 import com.model.std.dao.StandardDetailsDAO;
 import com.model.std.dto.Classsec;
-import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.user.dao.UserDAO;
 import com.model.user.dto.Login;
@@ -52,10 +50,53 @@ public class UserService {
 	}
 
 	public boolean authenticateUser() {
-        boolean result;
-       String userName = request.getParameter("loginName");
-       String password = request.getParameter("password");
-
+        boolean result = false;
+       String userName = null;
+       String password = null;
+       int branchId = 0;
+       
+       
+       if(!request.getParameter("loginNameSuperAdmin").isEmpty() && !request.getParameter("passwordSuperAdmin").isEmpty()) {
+    	   userName = request.getParameter("loginNameSuperAdmin");
+    	   password = request.getParameter("passwordSuperAdmin");
+    	   branchId = 1;
+       }else if(!request.getParameter("loginNamescn").isEmpty() && !request.getParameter("passwordscn").isEmpty()) {
+    	   userName = request.getParameter("loginNamescn");
+    	   password = request.getParameter("passwordscn");
+    	   branchId = 2;
+       }else if(!request.getParameter("loginNamescp").isEmpty() && !request.getParameter("passwordscp").isEmpty()) {
+    	   userName = request.getParameter("loginNamescp");
+    	   password = request.getParameter("passwordscp");
+    	   branchId = 3;
+       }else if(!request.getParameter("loginNamescbpt").isEmpty() && !request.getParameter("passwordscbpt").isEmpty()) {
+    	   userName = request.getParameter("loginNamescbpt");
+    	   password = request.getParameter("passwordscbpt");
+    	   branchId = 4;
+       }else if(!request.getParameter("loginNamesips").isEmpty() && !request.getParameter("passwordsips").isEmpty()) {
+    	   userName = request.getParameter("loginNamesips");
+    	   password = request.getParameter("passwordsips");
+    	   branchId = 5;
+       }else if(!request.getParameter("loginNamehpr").isEmpty() && !request.getParameter("passwordhpr").isEmpty()) {
+    	   userName = request.getParameter("loginNamehpr");
+    	   password = request.getParameter("passwordhpr");
+    	   branchId = 6;
+       }else if(!request.getParameter("loginNamekksn").isEmpty() && !request.getParameter("passwordkksn").isEmpty()) {
+    	   userName = request.getParameter("loginNamekksn");
+    	   password = request.getParameter("passwordkksn");
+    	   branchId = 7;
+       }else if(!request.getParameter("loginNameksn").isEmpty() && !request.getParameter("passwordksn").isEmpty()) {
+    	   userName = request.getParameter("loginNameksn");
+    	   password = request.getParameter("passwordksn");
+    	   branchId = 8;
+       }else if(!request.getParameter("loginNamesssn").isEmpty() && !request.getParameter("passwordsssn").isEmpty()) {
+    	   userName = request.getParameter("loginNamesssn");
+    	   password = request.getParameter("passwordsssn");
+    	   branchId = 9;
+       }else if(!request.getParameter("loginNamekssn").isEmpty() && !request.getParameter("passwordkssn").isEmpty()) {
+    	   userName = request.getParameter("loginNamekssn");
+    	   password = request.getParameter("passwordkssn");
+    	   branchId = 10;
+       }
        login = new UserDAO().readUniqueObject(userName, password);
 
        if (login != null) {
@@ -68,6 +109,7 @@ public class UserService {
             httpSession.setAttribute("username",login.getUsername());
             httpSession.setAttribute("branchid",login.getBranch().getIdbranch());
             httpSession.setAttribute("branchname",login.getBranch().getBranchname());
+            httpSession.setAttribute("branchcode",login.getBranch().getBranchcode());
             String[] userType = login.getUsertype().split("-");
             httpSession.setAttribute("userType", userType[0]);
             httpSession.setAttribute("typeOfUser",userType[0]);
@@ -77,7 +119,11 @@ public class UserService {
 			Cookie cookie = new Cookie("user",  login.getUsertype());
 			cookie.setMaxAge(30*60);
 			response.addCookie(cookie);
-           result = true;
+			
+			if(login.getBranch().getIdbranch() == branchId) {
+				result = true;
+			}
+           
        } else {
            result = false;
        }

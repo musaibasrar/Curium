@@ -39,7 +39,6 @@
         <script type="text/javascript" src="js/datePicker/ui/jquery.effects.transfer.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery.effects.blind.js"></script>
         <style type="text/css">
-            <!--
             .labelCss {
                 font-family: Tahoma;
                 font-size: 11px;
@@ -155,16 +154,25 @@
                 width: auto;
                 height: auto;
             }
+            .alignRightButton {
+					font-family: Tahoma;
+					font-style: normal;
+					text-transform: capitalize;
+					color: #325F6D;
+					text-align: right;
+					vertical-align: middle;
+					font-weight: bold;
+				}
             .alignRight {
-                font-family: Tahoma;
-                font-size: 11px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: right;
-                vertical-align: middle;
-                font-weight: bold;
-            }
+					font-family: Tahoma;
+					font-size: 14px;
+					font-style: normal;
+					text-transform: capitalize;
+					color: #325F6D;
+					text-align: right;
+					vertical-align: middle;
+					font-weight: bold;
+				}
             .alignLeft {
                 font-family: Tahoma;
                 font-size: 11px;
@@ -249,7 +257,6 @@
                 vertical-align: middle;
                 color: #325f6d;
             }
-            -->
         </style>
         <script type="text/javascript">
             /**
@@ -437,7 +444,7 @@
            
             var students = [
             <c:forEach varStatus="status" items="${studentListFeesCollection}" var="student">{
-                value:'<c:out default="0" value="${student.admissionnumber}" />',
+                value:'<c:out default="0" value="${student.studentexternalid}" />',
                 name:'<c:out default="0" value="${student.name}" />',
                 classandsec:'<c:out default="0" value="${student.classstudying}" />',
                 id:'<c:out default="0" value="${student.sid}" />',
@@ -446,7 +453,7 @@
             </c:forEach>
         ];
         $(function() {
-            $( "#admno").autocomplete({
+            $( "#uin").autocomplete({
                 source: students,
                 minLength: 1,
                 change:function(event,ui){
@@ -691,32 +698,31 @@ for(Cookie cookie : cookies){
 %>
     <body>
         <form id="form1" action="Controller?process=FeesCollection&action=feesAdd" method="post" onkeypress="if (event.keyCode == 92) addRow();">
-            <div style="height: 28px">
-                <!--<a href="#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
-
                
-            <table  width="100%">
+               
+               <table  width="100%">
                 <thead>
                     <tr>
                         <th colspan="3" class="headerTD"> Fees Collection</th>
 
                     </tr>
                 </thead>
+            </table>
+            
+            <table  width="70%">
                 <tbody>
 	                <tr>
-                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">Search Student:&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <td  style="font-weight: bold;font-size: 15px;color: #4B6A84">Search Student:&nbsp;&nbsp;&nbsp;&nbsp; 
                     </tr>
                     <tr>
-                    <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
-                        
-                        <td>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
-                        
+                    	<td class="alignRight">UIN:&nbsp;&nbsp;<input  type="text" name="uin" id="uin" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
+                       	<td class="alignRight">Date:&nbsp;&nbsp;<input type="text" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
                     </tr>
                     
                     <tr>
                     
-                        <td style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/></td>
-                        <td>Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" /></td>
+                        <td class="alignRight">Student Name:&nbsp;&nbsp;<input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/></td>
+                        <td class="alignRight">Class & SEC:&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" /></td>
                         
                     </tr>
                     
@@ -726,7 +732,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     	
-                        <td><button id="addFees">Search Fees</button>&nbsp;&nbsp;&nbsp;</td>
+                        <td class="alignRightButton"><button id="addFees">Search Fees</button>&nbsp;&nbsp;&nbsp;</td>
                         
                     </tr>
                     
@@ -735,19 +741,19 @@ for(Cookie cookie : cookies){
                     </tr>
 
 					<tr>
-                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">Student Details:&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <td style="font-weight: bold;font-size: 15px;color: #4B6A84">Student Details:&nbsp;&nbsp;&nbsp;&nbsp; 
                     </tr>
                     <tr>
-                    <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" style="width: 200px" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
+                    <td class="alignRight">UIN:&nbsp;&nbsp;<input  type="text" name="uindetails" required id="uindetails" readonly value="${uindetails}" style="width: 200px" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
                         
-                        <td>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" value="${dateoffeesDetails}" readonly="readonly"/></td>
+                    <td class="alignRight">Date:&nbsp;&nbsp;<input type="text" name="dateoffeesDetails" id="dateoffeesDetails" value="${dateoffeesDetails}" readonly="readonly"/></td>
                         
                     </tr>
                     
                     <tr>
                     
-                        <td style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" style="width: 200px" readonly/></td>
-                        <td>Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsecDetails" id="classandsecDetails" value="${classandsecDetails}"/></td>
+                        <td class="alignRight">Student Name:&nbsp;&nbsp;<input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" style="width: 200px" readonly/></td>
+                        <td class="alignRight">Class & SEC:&nbsp;&nbsp;<input type="text" name="classandsecDetails" id="classandsecDetails" value="${classandsecDetails}"/></td>
                         
                     </tr>
                     <tr>
@@ -800,7 +806,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
 
-                        <td colspan="4" align="right"><b>Total&nbsp;&nbsp;</b></td>
+                        <td colspan="4" ><b>Total&nbsp;&nbsp;</b></td>
                         <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
                     </tr>
                 </tfoot>

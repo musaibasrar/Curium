@@ -451,6 +451,13 @@ font-family: arial, sans-serif;
 		    }
 		   });
 		 
+		 $("#studentcontactnumber").keypress(function (e) {
+		     //if the letter is not digit then display error and don't type anything
+		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		               return false;
+		    }
+		   });
+		 
 		 $("#cocontactnumber").keypress(function (e) {
 		     //if the letter is not digit then display error and don't type anything
 		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
@@ -540,14 +547,14 @@ font-family: arial, sans-serif;
 
 	}
 	
-	 function enterOtherSpecialCategory() {
-	        var distlistitem = document.getElementById("specialcategory");
+	 function enterOtherNationality() {
+	        var distlistitem = document.getElementById("nationality");
 	        var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
 
-	        if (distlistitemtext == "Others (Please Specify)") {
-	            document.getElementById("specialcategory").style.display = "none";
-	            document.getElementById("categoryname").style.display = "none";
-	            document.getElementById("newcateg").style.display = '';
+	        if (distlistitemtext == "Other (Please Specify)") {
+	            document.getElementById("nationality").style.display = "none";
+	            document.getElementById("nationalityname").style.display = "none";
+	            document.getElementById("newnationality").style.display = '';
 	        }
 	    }
 </script>
@@ -674,7 +681,7 @@ font-family: arial, sans-serif;
 
 
 						<tr>
-							<td width="20%" class="alignRight">Admission Number &nbsp;</td>
+							<td width="20%" class="alignRight">Registration Number &nbsp;</td>
 							<td width="28%"><label> <input name="admnno"
 									type="text" class="myclass" id="admnno" size="26"
 									style="text-transform:uppercase;height: 30px;font-size: 16px;font-weight: bold;border-radius: 5px">
@@ -687,7 +694,7 @@ font-family: arial, sans-serif;
 									style="text-transform:uppercase;height: 30px;font-size: 16px;font-weight: bold;border-radius: 5px"
 									data-validate="validate(required)"> </label></td>
 									
-						<!-- 	<td width="16%" class="alignRight">STS Number &nbsp;</td>
+						<!-- 	<td width="16%" class="alignRight">Contact Number &nbsp;</td>
 
 									<td width="28%"><label> <input
 											name="sts" type="text" class="myclass" size="26"
@@ -706,7 +713,7 @@ font-family: arial, sans-serif;
 						<tr>
 
 
-							<td class="alignRight">Studying in Class&nbsp;</td>
+							<td class="alignRight">Class Studying&nbsp;</td>
 							<td width="28%"><label> <select name="addclass"
 									id="addclass" style="width: 260px;height: 30px;border-radius: 5px;font-size: 16px;background-color: white">
 										<option selected></option>
@@ -732,8 +739,33 @@ font-family: arial, sans-serif;
 										</c:forEach>
 								</select>
 							</label> --%></td>
+							
+							<td width="16%" class="alignRight">Mother Tongue &nbsp;</td>
+							<td width="28%">
+								<!-- <label> <input name="motherT"
+									type="text" class="textField" id="motherT" size="30"
+									onblur="validateNameContact();"
+									onkeypress="return validateContactNum(this);">
 
-							<td width="16%" class="alignRight">Admitted in Class &nbsp;
+							</label> --> <label> <select name="motherT"
+									 id="motherT"
+									style="width: 256px;height: 30px;border-radius: 5px;font-size: 16px;background-color: white">
+										<option selected></option>
+										<option>Urdu</option>
+										<option>Hindi</option>
+										<option>English</option>
+										<option>Kannada</option>
+										<option>Marathi</option>
+										<option>Telugu</option>
+										<option>Tamil</option>
+										<option>Malayalam</option>
+										<option>Gujrati</option>
+										<option>Bengali</option>
+								</select>
+							</label>
+							</td>
+
+							<%-- <td width="16%" class="alignRight">Admitted in Class &nbsp;
 							</td>
 
 							<td width="28%"><label> <select name="admclassE"
@@ -747,7 +779,7 @@ font-family: arial, sans-serif;
 											</c:if>
 										</c:forEach>
 								</select>
-							</label> <%-- <label> <select name="admsecE" id="admsecE"
+							</label> <label> <select name="admsecE" id="admsecE"
 									style="width: 128px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -758,7 +790,7 @@ font-family: arial, sans-serif;
 											</c:if>
 										</c:forEach>
 								</select>
-							</label> --%></td>
+							</label></td> --%>
 
 						</tr>
 
@@ -790,15 +822,22 @@ font-family: arial, sans-serif;
 							</label></td>
 
 
-							<td width="16%" class="alignRight">Nationality &nbsp;</td>
+							<td width="16%" class="alignRight" >Nationality &nbsp;</td>
 
-							<td><label> <select name="nationality"
+							<td id="nationalityname"><label> <select name="nationality" onchange="enterOtherNationality()"
 									id="nationality" style="width: 256px;height: 30px;border-radius: 5px;font-size: 16px;background-color: white" onchange="dropdown()">
 										<option selected>Indian</option>
 										<option>Indian</option>
-										<option>Other</option>
+										<option>Other (Please Specify)</option>
 								</select>
 
+							</label></td>
+							
+							<td id="newnationality"
+								style="display: none;"><label> <input
+									name="addnewnationality" id="addnewnationality" type="text" class="myclass" size="26"
+									style="text-transform:uppercase;height: 30px;font-size: 16px;font-weight: bold;border-radius: 5px"
+									placeholder="Add Nationality" />
 							</label></td>
 
 
@@ -869,27 +908,16 @@ font-family: arial, sans-serif;
 									type="text" class="myclass" id="studentscaste" size="26">
 							</label></td>
 							
-							<td width="16%" class="alignRight">Mother Tongue &nbsp;</td>
-							<td width="28%">
-								<!-- <label> <input name="motherT"
-									type="text" class="textField" id="motherT" size="30"
-									onblur="validateNameContact();"
-									onkeypress="return validateContactNum(this);">
-
-							</label> --> <label> <select name="motherT"
-									 id="motherT"
-									style="width: 256px;height: 30px;border-radius: 5px;font-size: 16px;background-color: white">
-										<option selected></option>
-										<option>Urdu</option>
-										<option>Hindi</option>
-										<option>English</option>
-										<option>Kannada</option>
-										<option>Marathi</option>
-										<option>Telugu</option>
-										<option>Tamil</option>
-								</select>
-							</label>
-							</td>
+							
+							
+							<td width="20%" class="alignRight">Created Date &nbsp;</td>
+							<td width="28%"><label> <input name="createddate"
+									type="text"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
+									class="myclass" id="datepickerCD" size="29"
+									style="text-transform:uppercase;height: 30px;font-size: 13px;font-weight: bold;border-radius: 5px"
+									data-validate="validate(required)">
+							</label></td>
 
 						<!-- 	<td width="16%" class="alignRight">Social Category&nbsp;</td>
 							<td><label> <select name="socialcategory"
@@ -951,6 +979,9 @@ font-family: arial, sans-serif;
 
 							</label></td>
 						</tr> -->
+						
+					
+								
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -981,22 +1012,39 @@ font-family: arial, sans-serif;
 									placeholder="Add Other Category" />
 							</label></td>-->
 							
+									<td class="alignRight">Contact Number &nbsp;</td>
+
+									<td><label> <input
+											name="studentcontactnumber" type="text" class="myclass" size="26"
+											style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
+											id="studentcontactnumber" size="26"  maxlength="10" minlength="10">
+
+									</label></td> 
+									
+									<td class="alignRight">Email &nbsp;</td>
+
+									<td ><label> <input name="studentemail"
+											type="email" class="myclass" id="studentemail" size="26"
+											style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
+											>
+
+									</label></td>
 							
-							
+						</tr>
+						<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								
+								
+								<tr>
 							<td width="20%" class="alignRight">Remarks &nbsp;</td>
 							<td width="28%"><label> <input name="remarks"
 									type="text" class="myclass" id="remarks" size="26"
 									style="text-transform:uppercase;height: 30px;font-size: 16px;font-weight: bold;border-radius: 5px"
 									>
-							</label></td>
-							
-							<td width="20%" class="alignRight">Created Date &nbsp;</td>
-							<td width="28%"><label> <input name="createddate"
-									type="text"
-									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
-									class="myclass" id="datepickerCD" size="29"
-									style="text-transform:uppercase;height: 30px;font-size: 13px;font-weight: bold;border-radius: 5px"
-									data-validate="validate(required)">
 							</label></td>
 							
 						</tr>
@@ -1307,8 +1355,8 @@ font-family: arial, sans-serif;
 										</c:forEach>
 										</select>
 									</label>
-									<td class="alignRight">Date of leaving the
-										school&nbsp;</td>
+									<td class="alignRight">Date of Leaving the
+										College&nbsp;</td>
 									<td align="left"><label> <input
 											name="dateofleaving" type="text" class="myclass" autocomplete="false"
 											style="text-transform:uppercase;height: 30px;font-size: 13px;font-weight: bold;border-radius: 5px"
@@ -1542,14 +1590,14 @@ font-family: arial, sans-serif;
 								</tr>
 
 
-								<tr>
+								<!--<tr>
 									<td><br /></td>
 								</tr>
 								<tr>
 									<td><br /></td>
 								</tr>
 
-								<tr>
+								 <tr>
 									<td class="alignRight">Fathers Occupation
 										&nbsp;</td>
 									<td><label> <input
@@ -1579,7 +1627,7 @@ font-family: arial, sans-serif;
 											name="fathersqualification" type="text" class="myclass"
 											id="fathersqualification" 
 											style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
-											size="26"> <!-- onkeyup="check(this.value);"  -->
+											size="26"> onkeyup="check(this.value);" 
 									</label></td>
 
 									<td class="alignRight">Mother's
@@ -1588,10 +1636,10 @@ font-family: arial, sans-serif;
 											name="mothersqualification" type="text" class="myclass"
 											id="mothersqualification"
 											style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
-											size="26"> <!-- onkeyup="check(this.value);"  -->
+											size="26"> onkeyup="check(this.value);" 
 									</label></td>
 									
-								</tr>
+								</tr> -->
 
 								<!-- <tr>
 									<td><br /></td>
@@ -1886,7 +1934,7 @@ font-family: arial, sans-serif;
 											<th class="educationtableheaderdescription">Educational Qualification</th>
 											<th class="educationtableheaderdescription">Name of the Board</th>
 											<th class="educationtableheaderdescription">Year of Passing</th>
-											<th class="educationtableheaderdescription">No. of Attempts</th>
+											<!-- <th class="educationtableheaderdescription">No. of Attempts</th> -->
 											<th class="educationtableheaderdescription">Total Marks Scored</th>
 											<th class="educationtableheaderdescription">% Secured</th>
 										
@@ -1910,12 +1958,12 @@ font-family: arial, sans-serif;
 									style="text-transform:uppercase;height: 30px;font-size: 13px;font-weight: bold;border-radius: 5px;font-size: 16px"
 									id="tenthyearofpassing" size="5">
 											</td>
-											<td  class="educationtableheaderdescription" style="font-weight: bold;">
+											<!-- <td  class="educationtableheaderdescription" style="font-weight: bold;">
 												<input
 									name="tenthnoofattempts" type="text" class="myclass"
 									style="text-transform:uppercase;height: 30px;font-size: 13px;font-weight: bold;border-radius: 5px;font-size: 16px"
 									id="tenthnoofattempts" size="5">
-											</td>
+											</td> -->
 											<td  class="educationtableheaderdescription" style="font-weight: bold;">
 												<input
 									name="tenthtotalmarkssecured" type="text" class="myclass"
@@ -1945,12 +1993,12 @@ font-family: arial, sans-serif;
 									style="text-transform:uppercase;height: 30px;font-size: 13px;font-weight: bold;border-radius: 5px;font-size: 16px"
 									id="twelthyearofpassing" size="5">  
 											</td>
-											<td  class="educationtableheaderdescription" style="font-weight: bold;">
+											<!-- <td  class="educationtableheaderdescription" style="font-weight: bold;">
 												<input
 									name="twelthnoofattempts" type="text" class="myclass"
 									style="text-transform:uppercase;height: 30px;font-size: 13px;font-weight: bold;border-radius: 5px;font-size: 16px"
 									id="twelthnoofattempts" size="5">  
-											</td>
+											</td> -->
 											<td  class="educationtableheaderdescription" style="font-weight: bold;">
 												<input
 									name="twelthtotalmarkssecured" type="text" class="myclass"

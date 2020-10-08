@@ -280,7 +280,7 @@ public class DocumentService {
 								studentDetails.getFathersname()+" / "+studentDetails.getMothersname(),
 								studentDetails.getParentsannualincome(),
 								studentDetails.getNoofdependents(),
-								studentDetails.getStudent().getNationality()+","+studentDetails.getStudent().getReligion()+" and "+studentDetails.getStudent().getStudentcaste(),
+								studentDetails.getStudent().getNationality()+","+studentDetails.getStudent().getReligion()+" and "+studentDetails.getStudent().getCaste(),
 								studentDetails.getStudent().getMothertongue(), ""});
 				
 				dataTwo.put(Integer.toString(i),

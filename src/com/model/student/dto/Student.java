@@ -63,8 +63,8 @@ public class Student implements java.io.Serializable {
 	
 	private String studentscastecertno;
 	private String caste;
-	private Integer sts;
-	private Integer rte;
+	private String contactnumber;
+	private String email;
 	private String bankbranch;
 	private String accno;
 	private String bankifsc;
@@ -119,7 +119,7 @@ public class Student implements java.io.Serializable {
 			String classonleaving, Date dateleaving, String reasonleaving,
 			Integer notcissued, Date datetcissued, String guardiandetails, int branchid,
 			Integer passedout, Integer droppedout, Integer leftout,String studentscastecertno,String caste,
-			Integer sts, Integer rte, String bankbranch, String accno, String bankifsc,
+			String contactnumber, String email, String bankbranch, String accno, String bankifsc,
 			String studentdoc1, String studentdoc2, String studentdoc3, String studentdoc4, String studentdoc5,
 			String studentdoc6, String studentdoc7, String studentdoc8, String studentdoc9, String studentdoc10,
 			String tenthboard,String tenthyearofpassing,String tenthnoofattempts,String tenthtotalmarkssecured,String tenthpercentage,String twelthboard,String twelthyearofpassing,String twelthnoofattempts,String twelthtotalmarkssecured,String twelthpercentage,String markscard10,String markscard12,String certificatemigration,String eligibilitycertificate,String transfercertificate,String conductcertificate,String adharcard,String passportsizephotos) {
@@ -156,8 +156,8 @@ public class Student implements java.io.Serializable {
 		this.leftout = leftout;
 		this.studentscastecertno = studentscastecertno;
 		this.caste = caste;
-		this.sts=sts;
-		this.rte=rte;
+		this.contactnumber=contactnumber;
+		this.email=email;
 		this.bankbranch=bankbranch;
 		this.accno=accno;
 		this.bankifsc=bankifsc;
@@ -518,20 +518,20 @@ public class Student implements java.io.Serializable {
 		this.studentscastecertno = studentscastecertno;
 	}
 
-	public Integer getSts() {
-		return sts;
+	public String getContactnumber() {
+		return contactnumber;
 	}
 
-	public void setSts(Integer sts) {
-		this.sts = sts;
+	public void setContactnumber(String contactnumber) {
+		this.contactnumber = contactnumber;
 	}
 
-	public Integer getRte() {
-		return rte;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setRte(Integer rte) {
-		this.rte = rte;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getBankbranch() {

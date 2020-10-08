@@ -110,11 +110,11 @@
         <property name="caste" type="string">
             <column name="caste" />
         </property> 
-        <property name="sts" type="java.lang.Integer">
-            <column name="sts" />
+        <property name="contactnumber" type="string">
+            <column name="contactnumber" />
         </property>
-        <property name="rte" type="java.lang.Integer">
-            <column name="rte" />
+        <property name="email" type="string">
+            <column name="email" />
         </property>
          <!-- <property name="bankname" type="string">
             <column name="bankname" length="500" />

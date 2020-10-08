@@ -19,12 +19,14 @@ public class Branch implements java.io.Serializable {
 
 	private Integer idbranch;
 	private String branchname;
+	private String branchcode;
 
 	public Branch() {
 	}
 
-	public Branch(String branchname) {
+	public Branch(String branchname,String branchcode) {
 		this.branchname = branchname;
+		this.branchcode = branchcode;
 	}
 
 	@Id
@@ -45,6 +47,14 @@ public class Branch implements java.io.Serializable {
 
 	public void setBranchname(String branchname) {
 		this.branchname = branchname;
+	}
+
+	public String getBranchcode() {
+		return branchcode;
+	}
+
+	public void setBranchcode(String branchcode) {
+		this.branchcode = branchcode;
 	}
 
 }

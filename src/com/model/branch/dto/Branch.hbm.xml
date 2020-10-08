@@ -11,5 +11,8 @@
         <property name="branchname" type="string">
             <column name="branchname" length="50" />
         </property>
+         <property name="branchcode" type="string">
+            <column name="branchcode" length="20" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -56,7 +56,19 @@
 	text-transform: capitalize;
 }
 
-<!--
+
+.alignLeft {
+	font-family: Tahoma;
+	font-size: 16px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: black;
+	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+
 .divCSS {
 	overflow: scroll;
 	height: 100%;
@@ -120,7 +132,7 @@
 
 .alignRight {
 	font-family: Tahoma;
-	font-size: 12px;
+	font-size: 14px;
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
@@ -221,7 +233,7 @@
 	vertical-align: middle;
 	color: #325f6d;
 }
--->
+
 </style>
 
 
@@ -234,9 +246,9 @@
 		$("#datepicker").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
 		});
@@ -245,9 +257,9 @@
 		$("#datepicker1").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepicker1" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepicker1").datepicker("option", "showAnim", $(this).val());
 		});
@@ -256,9 +268,9 @@
 		$("#datepickerCD").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
 		});
@@ -267,9 +279,9 @@
 		$("#datepickerleaving").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepickerleaving" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#datepickerleaving").datepicker("option", "showAnim", $(this).val());
 		});
@@ -540,7 +552,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=PersonalProcess&action=add" method="post">
+	<form id="form1" action="Controller?process=PersonalProcess&action=add" method="post" enctype="multipart/form-data">
 		
 		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		
@@ -550,6 +562,7 @@ for(Cookie cookie : cookies){
 				
 				<ul>
 					<li><a href="#tabs-1">Staff Details</a></li>
+					<li><a href="#tabs-4">Upload Documents</a></li>
 					<li><a href="#tabs-2">Bank Details</a></li>
 					<li><a href="#tabs-3">Additional Details</a></li>
 				</ul>
@@ -567,9 +580,9 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRight">Name* &nbsp;</td>
 							<td align="left"><label> <input
-									name="name" type="text" class="myclass" id="name" size="36" 
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+									name="name" type="text" class="myclass" id="name" size="26" required
+									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px">
+									 <!-- onkeyup="check(this.value);"  -->
 							</label></td>
 
 							<td class="alignRight">Gender &nbsp;</td>
@@ -587,72 +600,25 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
+						
 						<tr>
-						<tr>
-
-							<td class="alignRight">Address &nbsp;</td>
-							<td><label> <input name="address"
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="textField" id="address" size="36">
+						
+							<td class="alignRight">Qualification &nbsp;</td>
+							<td><label> <input name="qualification"
+							style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
+									type="text" class="textField" id="qualification" size="26"
+									>
 							</label></td>
-
-							<td class="alignRight">Contact Number &nbsp;</td>
-							<td><label> <input
-									name="contactnumber" type="text" class="textField"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									id="contactnumber" size="36" maxlength="10" minlength="10"/>
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-
-							<td class="alignRight">email &nbsp;</td>
-							<td><label> <input name="email"
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="email" class="textField" id="email" size="36">
-							</label></td>
-
-							<td class="alignRight">Date Of Joining &nbsp;</td>
-							<td><label> <input name="dateofjoining" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-YYYY"/>"
-										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="textField" id="datepicker" size="36"
-									data-validate="validate(required)">
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
+							
 							<td class="alignRight">Total Experience &nbsp;</td>
 							<td align="left"><label> <input
 									name="totalexperience" type="text" class="myclass"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									id="totalexperience" size="36" onblur="validateName();">
+									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
+									id="totalexperience" size="26" onblur="validateName();">
 									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
-
-
-							<td class="alignRight">Qualification &nbsp;</td>
-							<td><label> <input name="qualification"
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="textField" id="qualification" size="36"
-									>
-							</label></td>
-
-
+						
+						
 						</tr>
 
 						<tr>
@@ -662,11 +628,30 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						
 						<tr>
+
+							<td class="alignRight">Designation &nbsp;</td>
+							<td class="alignLeft"><label>
+									<select name="designation" id="designation"
+									style="width: 260px;height: 30px;border-radius: 5px;font-size: 16px;background-color: white">
+										<option selected></option>
+
+										<c:forEach items="${listPosition}" var="listPosition">
+
+											<option>
+												<c:out value="${listPosition.positionname}" />
+											</option>
+
+
+										</c:forEach>
+
+								</select></td>
+								
 							<td class="alignRight">Department &nbsp;</td>
 							<td class="alignLeft"><label>
 									<select name="department" id="department"
-									style="width: 300px">
+									style="width: 260px;height: 30px;border-radius: 5px;font-size: 16px;background-color: white">
 										<option selected></option>
 
 										<c:forEach items="${listDepartment}" var="listDepartment">
@@ -681,22 +666,63 @@ for(Cookie cookie : cookies){
 								</select></label></td>
 
 
-							<td class="alignRight">Designation &nbsp;</td>
-							<td class="alignLeft"><label>
-									<select name="designation" id="designation"
-									style="width: 300px">
-										<option selected></option>
-
-										<c:forEach items="${listPosition}" var="listPosition">
-
-											<option>
-												<c:out value="${listPosition.positionname}" />
-											</option>
+						</tr>
 
 
-										</c:forEach>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+						
+							<td class="alignRight">Contact Number &nbsp;</td>
+							<td><label> <input
+									name="contactnumber" type="text" class="textField"
+									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
+									id="contactnumber" size="26" maxlength="10" minlength="10"/>
+							</label></td>
+							
+							<td class="alignRight">Address &nbsp;</td>
+							<td><label> <input name="address"
+							style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
+									type="text" class="textField" id="address" size="26">
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 
-								</select></td>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+
+							<td class="alignRight">Aadhar Number &nbsp;</td>
+							<td class="alignLeft">
+								<label> <input
+									name="aadharnumber" type="text" class="textField"
+									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
+									id="aadharnumber" size="26" maxlength="12" minlength="12"/>
+							</label>
+							</td>
+								
+							<td class="alignRight">PAN &nbsp;</td>
+							
+								<td class="alignLeft">
+									
+									<label>
+											 <input
+									name="pan" type="text" class="textField"
+									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
+									id="pan" size="26" maxlength="10" minlength="10"/>
+									
+									</label>
+								</td>
+
 
 						</tr>
 
@@ -707,6 +733,30 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+
+						<tr>
+
+							<td class="alignRight">email &nbsp;</td>
+							<td><label> <input name="email"
+							style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
+									type="email" class="textField" id="email" size="26">
+							</label></td>
+
+							<td class="alignRight">Date Of Joining &nbsp;</td>
+							<td><label> <input name="dateofjoining" 
+										style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
+									type="text" class="textField" id="datepicker" size="26"
+									data-validate="validate(required)">
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
 						<tr>
 
 							<!-- <td width="30%" class="alignRight">Salary &nbsp;</td>
@@ -726,17 +776,20 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Remarks &nbsp;</td>
 							<td align="left"><label> <input
 									name="remarks" type="text" class="myclass" id="remarks"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
+									size="26" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
 							</label></td>
 						</tr>
 						<tr>
-							<td><br /></td>
+							<td><br><br><br></td>
 						</tr>
-						
-									<tr>
-										<td></td><td></td>
-										<td align="center"><a class="nexttab"
+					</table>
+					
+						<table align="center">
+							<tr>
+										<td></td>
+										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="nexttab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
 											href="#">Next</a></td>
 									</tr>
@@ -745,7 +798,7 @@ for(Cookie cookie : cookies){
 									<td><br /></td>
 								</tr>
 								<tr>
-									<td></td><td></td>
+									<td></td>
 									<td>
 										<button id="save" class="save" onmouseover="validateNameContact();">Save</button>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -753,12 +806,202 @@ for(Cookie cookie : cookies){
 
 									</td>
 								</tr>
-					</table>
+						
+						</table>
+					</div>
+					
+					<div id="tabs-4">
+
+					<table width="20%" style="float: left">
+								<tr>
+									<td><label style="font-size: 12px;color: #eb6000;font-weight: bold;">Note: Upload only .jpg images</label></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 1</label><br /> <input type="file" name="employeedoc1"
+										id="employeedoc1" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 2</label><br /> <input type="file" name="employeedoc2"
+										id="employeedoc2" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 3</label><br /> <input type="file" name="employeedoc3"
+										id="employeedoc3" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 4</label><br /> <input type="file" name="employeedoc4"
+										id="employeedoc4" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 5</label><br /> <input type="file" name="employeedoc5"
+										id="employeedoc5" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								</table>
+								
+								<table width="50%">
+								
+								<tr>
+									<td></td>
+								</tr>
+								
+								<tr>
+								<td><br><br></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 6</label><br /> <input type="file" name="employeedoc6"
+										id="employeedoc6" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 7</label><br /> <input type="file" name="employeedoc7"
+										id="employeedoc7" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 8</label><br /> <input type="file" name="employeedoc8"
+										id="employeedoc8" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 9</label><br /> <input type="file" name="employeedoc9"
+										id="employeedoc9" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 10</label><br /> <input type="file" name="employeedoc10"
+										id="employeedoc10" accept="image/*"></td>
+								</tr>
+								
+								<!-- 
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 10</label><br /> <input type="file" name="employeedoc10"
+										id="employeedoc10" accept="image/*"></td>
+								</tr> -->
+
+
+							</table>
+
+
+
+							<div>
+								<table width="100%">
+									<tr>
+
+										<td><br /></td>
+									</tr>
+
+									<tr>
+
+										<td align="center"><a class="nexttab"
+											style="font-weight: bold; color: #325F6D; font-size: 13px"
+											href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+											class="prevtab"
+											style="font-weight: bold; color: #325F6D; font-size: 13px"
+											href="#">Previous</a></td>
+									</tr>
+
+									<tr>
+
+										<td><br /></td>
+									</tr>
+
+									<tr>
+										<td align="center">
+
+
+											<button id="savethree" class="save" name="savestudent">Save</button>
+
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<button id="cancelthree" class="cancel">Cancel</button>
+
+										</td>
+
+
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+								</table>
+
+							</div>
 					</div>
 					
 					<div id="tabs-2">
 
-					<table width="100%" border="0" align="center" id="table1">
+					<table width="100%" border="0" style="width: auto;" align="center" id="table1">
 					
 						<tr>
 							<td><br /></td>
@@ -769,15 +1012,15 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRight">Bank Name &nbsp;</td>
 							<td align="left"><label> <input
-									name="bankname" type="text" class="myclass" id="bankname" size="36" 
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									name="bankname" type="text" class="myclass" id="bankname" size="26" 
+									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
 									onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
 							</label></td>
 
 							<td class="alignRight">Bank IFSC &nbsp;</td>
 							<td class="alignLeft"><label> <input
-									name="bankifsc" type="text" class="myclass" id="bankifsc" size="36" 
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									name="bankifsc" type="text" class="myclass" id="bankifsc" size="26" 
+									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
 									onblur="validateName();">
 							</label>
 							</td>
@@ -794,8 +1037,8 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRight">Account Number &nbsp;</td>
 							<td><label> <input name="accno"
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="textField" id="accno" size="36">
+							style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
+									type="text" class="textField" id="accno" size="26">
 							</label></td>
 						</tr>
 						
@@ -832,7 +1075,7 @@ for(Cookie cookie : cookies){
 					
 					<div id="tabs-3">
 
-					<table width="100%" border="0" align="center" id="table1">
+					<table width="100%" border="0" style="width: auto;" align="center" id="table1">
 					
 						<tr>
 							<td><br /></td>
@@ -844,8 +1087,8 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Date Of Leaving &nbsp;</td>
 							<td><label> 
 										<input name="dateofleaving"
-									type="text" class="myclass" id="datepickerleaving" size="30" autocomplete="off"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									type="text" class="myclass" id="datepickerleaving" size="26" autocomplete="off"
+									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
 									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
 									
@@ -864,11 +1107,9 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 									<tr>
-									
-										<td align="right">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<td></td>
+										<td>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<a class="prevtab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
 											href="#">Previous</a></td>

@@ -138,7 +138,13 @@ public class StudentService {
 			        			conClassAdmittedIn = conClassAdmittedIn+addSecE;
 			        		}
 		                }*/
-		              
+		                else if (fieldName.equalsIgnoreCase("studentemail")) {
+                            student.setEmail(DataUtil.emptyString(item.getString()));
+		                }
+		                else if (fieldName.equalsIgnoreCase("studentcontactnumber")) {
+		                	student.setContactnumber(DataUtil.emptyString(item.getString()));
+		                }
+		                
 		                else if (fieldName.equalsIgnoreCase("lastschool")) {
 		                	student.setSchoollastattended(DataUtil.emptyString(item.getString()));
 		                }
@@ -154,6 +160,11 @@ public class StudentService {
 		                else if (fieldName.equalsIgnoreCase("nationality")) {
 		                	student.setNationality(DataUtil.emptyString(item.getString()));
 		                }
+		                
+		                else if (fieldName.equalsIgnoreCase("addnewnationality") && !item.getString().isEmpty()) {
+		                	student.setNationality(DataUtil.emptyString(item.getString()));
+		                }
+		                
 		                else if (fieldName.equalsIgnoreCase("religion")) {
 		                    student.setReligion(DataUtil.emptyString(item.getString()));
 		                }
@@ -607,7 +618,9 @@ public class StudentService {
 		student.setPassedout(0);
 		student.setDroppedout(0);
 		student.setLeftout(0);
-		student.setStudentexternalid("BRF"+DataUtil.generateString(6));
+		String branchCode = httpSession.getAttribute("branchcode").toString();
+		String[] bCode = branchCode.split(":"); 
+		student.setStudentexternalid(bCode[0]+DataUtil.generateString(6)+bCode[1]);
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		puDetails.setOptionalsubjects(optional.toString());
 		puDetails.setCompulsorysubjects(compulsory.toString());
@@ -702,7 +715,7 @@ public class StudentService {
 					request.setAttribute("secstudying", "");
 				}
 
-				String classAdmitted = student.getClassadmittedin();
+				/*String classAdmitted = student.getClassadmittedin();
 				
 				if (!classAdmitted.equalsIgnoreCase("")) {
 
@@ -716,7 +729,7 @@ public class StudentService {
 				} else {
 					request.setAttribute("classadm", classAdmitted);
 					request.setAttribute("secadm", "");
-				}
+				}*/
 
 				httpSession.setAttribute("parents", parents);
 				//httpSession.setAttribute("feesdetails", feesdetails);
@@ -842,7 +855,13 @@ public class StudentService {
 
 	                }
 	              */
+	        		else  if (fieldName.equalsIgnoreCase("studentemail")) {
+	                	student.setEmail(DataUtil.emptyString(item.getString()));
+	                }
 	                
+	        		else  if (fieldName.equalsIgnoreCase("studentcontactnumber")) {
+	                	student.setContactnumber(DataUtil.emptyString(item.getString()));
+	                }
 
 	                else if (fieldName.equalsIgnoreCase("lastschool")) {
 	                	student.setSchoollastattended(DataUtil.emptyString(item.getString()));
@@ -865,6 +884,10 @@ public class StudentService {
 
 
 	                else if (fieldName.equalsIgnoreCase("nationality")) {
+	                	student.setNationality(DataUtil.emptyString(item.getString()));
+	                }
+	                
+	                else if (fieldName.equalsIgnoreCase("addnewnationality") && !item.getString().isEmpty()) {
 	                	student.setNationality(DataUtil.emptyString(item.getString()));
 	                }
 

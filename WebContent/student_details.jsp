@@ -191,16 +191,7 @@
                 width: auto;
                 height: auto;
             }
-            .alignRight {
-                font-family: Tahoma;
-                font-size: 14px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: right;
-                vertical-align: middle;
-                font-weight: bold;
-            }
+           
             .alignRight {
                 font-family: Tahoma;
                 font-size: 14px;
@@ -461,7 +452,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.admissionnumber}" />
                             </td>
                             
-                            <td   class="alignRight" height="30">BRF Number
+                            <td   class="alignRight" height="30">UIN
                             </td>
                             <td class="tablerows">
                                 <c:out default="" value="${student.studentexternalid}" />
@@ -503,20 +494,27 @@ for(Cookie cookie : cookies){
                         
                           
                         <tr>
-                            <td  class="alignRight" height="30" >Studying in class</td>
+                            <td  class="alignRight" height="30" >Class Studying</td>
                             <td   class="tablerows">
                             <c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
 						    ${splt} 
 							</c:forEach>
                                <%--  <c:out default="" value="${student.classstudying}" /> --%>
                             </td>
-                            <td  class="alignRight" height="30">Admitted in class
+                            
+                             <td   class="alignRight" height="30" >Mother Tongue
+                            </td>
+                            <td class="tablerows" >
+                                <c:out default="" value="${student.mothertongue}" />
+                            </td>   
+                            
+                            <%-- <td  class="alignRight" height="30">Admitted in class
                             </td>
                             <td class="tablerows">
 		                            <c:forEach var="splt" items="${fn:split(student.classadmittedin,'--')}">
 								    ${splt} 
 									</c:forEach>
-                            </td>
+                            </td> --%>
                         </tr>
                         
                         
@@ -650,13 +648,27 @@ for(Cookie cookie : cookies){
                          --%>
                         <tr>
                         
-                        	<td   class="alignRight" height="30">Remarks
+                        <td class="alignRight" height="30">Contact Number</td>
+								<td class="tablerows"><c:out default=""
+								value="${student.contactnumber}" /></td>
+                        
+                        	<td class="alignRight" height="30">Email</td>
+								<td class="tablerows"><c:out default=""
+								value="${student.email}" /></td>
+								
+                        
+                        	
+                        </tr>
+                             
+                        <tr>
+                        
+                       		<td   class="alignRight" height="30">Remarks
                             </td>
                             <td class="tablerows" >
                                 <c:out default="" value="${student.remarks}" />
                                 
                             </td>
-                        
+                            
                              <td   class="alignRight" height="30">Created Date
                             </td>
                             <td class="tablerows">
@@ -664,7 +676,7 @@ for(Cookie cookie : cookies){
                                 <fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>
                             </td>
    
-                        </tr>
+                        </tr>           
                                                 
                         <tr>
                             <td   class="alignRight" height="30" >Class of leaving
@@ -673,7 +685,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.classonleaving}" />
                             </td>
                             
-                             <td   class="alignRight" height="30">Date of leaving the school
+                             <td   class="alignRight" height="30">Date of Leaving the College
                             </td>
                             <td class="tablerows">
                                 <fmt:formatDate value="${student.dateleaving}" pattern="dd/MM/yyyy"/>
@@ -731,7 +743,7 @@ for(Cookie cookie : cookies){
 											<th class="educationtableheaderdescription">Educational Qualification</th>
 											<th class="educationtableheaderdescription">Name of the Board</th>
 											<th class="educationtableheaderdescription">Year of Passing</th>
-											<th class="educationtableheaderdescription">No. of Attempts</th>
+											<!-- <th class="educationtableheaderdescription">No. of Attempts</th> -->
 											<th class="educationtableheaderdescription">Total Marks Scored</th>
 											<th class="educationtableheaderdescription">% Secured</th>
 										
@@ -749,9 +761,9 @@ for(Cookie cookie : cookies){
 											<td  class="educationtabledetaildescription" style="font-weight: bold;">
 											<c:out default="" value="${student.tenthyearofpassing}" />
 											</td>
-											<td  class="educationtabledetaildescription" style="font-weight: bold;">
+											<%-- <td  class="educationtabledetaildescription" style="font-weight: bold;">
 												<c:out default="" value="${student.tenthnoofattempts}" />
-											</td>
+											</td> --%>
 											<td  class="educationtabledetaildescription" style="font-weight: bold;">
 												<c:out default="" value="${student.tenthtotalmarkssecured}" />
 											</td>
@@ -769,9 +781,9 @@ for(Cookie cookie : cookies){
 											<td  class="educationtabledetaildescription" style="font-weight: bold;">
 												<c:out default="" value="${student.twelthyearofpassing}" />
 											</td>
-											<td  class="educationtabledetaildescription" style="font-weight: bold;">
+											<%-- <td  class="educationtabledetaildescription" style="font-weight: bold;">
 												<c:out default="" value="${student.twelthnoofattempts}" />
-											</td>
+											</td> --%>
 											<td  class="educationtabledetaildescription" style="font-weight: bold;">
 												<c:out default="" value="${student.twelthtotalmarkssecured}" />
 											</td>
@@ -1165,7 +1177,7 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         
-                                                <tr>
+                       <%-- <tr>
                             <td  class="alignRight" height="30">Fathers Occupation</td>
                             <td class="tablerows" >
                                  <c:out value="${parents.fatherscastecertno}" />
@@ -1190,19 +1202,16 @@ for(Cookie cookie : cookies){
                             <td class="tablerows" style="text-transform:uppercase">
                                 <c:out default="" value="${parents.mothersqualification}" />
                             </td>
-                        </tr>
+                        </tr> --%>
                         
                        
 					<tr>
-					<td class="alignRight" height="30">Email</td>
-						<td class="tablerows"><c:out default=""
-								value="${parents.email}" /></td>
 								
 								<td   class="alignRight" height="30">Notes
                             </td>
                             <td class="tablerows" >
                                 <c:out default="" value="${parents.remarks}" />
-								
+							</td>	
 						<%-- <td class="alignRight" height="30">Number Of
 							Dependents</td>
 						<td class="tablerows"><c:out default=""

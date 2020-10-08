@@ -162,7 +162,7 @@ public class FeesCollectionService {
 		}
 		request.setAttribute("studentfeesdetails", feesMap);
 		request.setAttribute("studentNameDetails", request.getParameter("studentName"));
-		request.setAttribute("admnoDetails", request.getParameter("admno"));
+		request.setAttribute("uindetails", request.getParameter("uin"));
 		request.setAttribute("classandsecDetails", request.getParameter("classandsec"));
 		request.setAttribute("studentIdDetails", request.getParameter("studentId"));
 		request.setAttribute("dateoffeesDetails", request.getParameter("dateoffees"));

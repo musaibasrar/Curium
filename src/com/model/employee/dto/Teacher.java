@@ -24,9 +24,9 @@ public class Teacher implements java.io.Serializable {
 	private Integer tid;
 	private String teachername;
 	private String designation;
-	private String subjectsteaching;
+	private String aadharnumber;
 	private Date dateofjoining;
-	private String classesteaching;
+	private String pan;
 	private String salary;
 	private String department;
 	private String qualification;
@@ -45,7 +45,16 @@ public class Teacher implements java.io.Serializable {
 	private String accno;
 	private String currentemployee;
 	
-	
+	private String doc1;
+	private String doc2;
+	private String doc3;
+	private String doc4;
+	private String doc5;
+	private String doc6;
+	private String doc7;
+	private String doc8;
+	private String doc9;
+	private String doc10;
 	
 	public Teacher() {
 	}
@@ -56,16 +65,17 @@ public class Teacher implements java.io.Serializable {
 	}
 
 	public Teacher(String teachername, String designation,
-			String subjectsteaching, Date dateofjoining,
-			String classesteaching, String salary, String department,
+			String aadharnumber, Date dateofjoining,
+			String pan, String salary, String department,
 			String qualification, String totalexperience, String address,
 			String contactnumber, String email, String remarks, String gender,
-			String teacherexternalid, Date leavingdate, String bankname, String bankbranch, String bankifsc, String accno, String currentemployee) {
+			String teacherexternalid, Date leavingdate, String bankname, String bankbranch, String bankifsc, String accno, String currentemployee,
+			String doc1, String doc2, String doc3, String doc4, String doc5, String doc6, String doc7, String doc8, String doc9, String doc10) {
 		this.teachername = teachername;
 		this.designation = designation;
-		this.subjectsteaching = subjectsteaching;
+		this.aadharnumber = aadharnumber;
 		this.dateofjoining = dateofjoining;
-		this.classesteaching = classesteaching;
+		this.pan = pan;
 		this.salary = salary;
 		this.department = department;
 		this.qualification = qualification;
@@ -82,6 +92,15 @@ public class Teacher implements java.io.Serializable {
 		this.bankifsc = bankifsc;
 		this.accno = accno;
 		this.currentemployee = currentemployee;
+		this.doc1=doc1;
+		this.doc2=doc2;
+		this.doc3=doc3;
+		this.doc4=doc4;
+		this.doc5=doc5;
+		this.doc6=doc7;
+		this.doc8=doc8;
+		this.doc9=doc9;
+		this.doc10=doc10;
 	}
 
 	@Id
@@ -113,13 +132,13 @@ public class Teacher implements java.io.Serializable {
 		this.designation = designation;
 	}
 
-	@Column(name = "subjectsteaching", length = 500)
-	public String getSubjectsteaching() {
-		return this.subjectsteaching;
+	@Column(name = "aadharnumber", length = 500)
+	public String getAadharnumber() {
+		return this.aadharnumber;
 	}
 
-	public void setSubjectsteaching(String subjectsteaching) {
-		this.subjectsteaching = subjectsteaching;
+	public void setAadharnumber(String aadharnumber) {
+		this.aadharnumber = aadharnumber;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -132,13 +151,13 @@ public class Teacher implements java.io.Serializable {
 		this.dateofjoining = dateofjoining;
 	}
 
-	@Column(name = "classesteaching", length = 200)
-	public String getClassesteaching() {
-		return this.classesteaching;
+	@Column(name = "pan", length = 200)
+	public String getPan() {
+		return this.pan;
 	}
 
-	public void setClassesteaching(String classesteaching) {
-		this.classesteaching = classesteaching;
+	public void setPan(String pan) {
+		this.pan = pan;
 	}
 
 	@Column(name = "salary", length = 50)
@@ -286,5 +305,85 @@ public class Teacher implements java.io.Serializable {
 
 	public void setCurrentemployee(String currentemployee) {
 		this.currentemployee = currentemployee;
+	}
+
+	public String getDoc1() {
+		return doc1;
+	}
+
+	public void setDoc1(String doc1) {
+		this.doc1 = doc1;
+	}
+
+	public String getDoc2() {
+		return doc2;
+	}
+
+	public void setDoc2(String doc2) {
+		this.doc2 = doc2;
+	}
+
+	public String getDoc3() {
+		return doc3;
+	}
+
+	public void setDoc3(String doc3) {
+		this.doc3 = doc3;
+	}
+
+	public String getDoc4() {
+		return doc4;
+	}
+
+	public void setDoc4(String doc4) {
+		this.doc4 = doc4;
+	}
+
+	public String getDoc5() {
+		return doc5;
+	}
+
+	public void setDoc5(String doc5) {
+		this.doc5 = doc5;
+	}
+
+	public String getDoc6() {
+		return doc6;
+	}
+
+	public void setDoc6(String doc6) {
+		this.doc6 = doc6;
+	}
+
+	public String getDoc7() {
+		return doc7;
+	}
+
+	public void setDoc7(String doc7) {
+		this.doc7 = doc7;
+	}
+
+	public String getDoc8() {
+		return doc8;
+	}
+
+	public void setDoc8(String doc8) {
+		this.doc8 = doc8;
+	}
+
+	public String getDoc9() {
+		return doc9;
+	}
+
+	public void setDoc9(String doc9) {
+		this.doc9 = doc9;
+	}
+
+	public String getDoc10() {
+		return doc10;
+	}
+
+	public void setDoc10(String doc10) {
+		this.doc10 = doc10;
 	}
 }

@@ -128,7 +128,7 @@ for(Cookie cookie : cookies){
         					<td align="center">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sunrise College of Pharmacy </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=2"> <img
+        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=3"> <img
 									src="images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -157,7 +157,7 @@ for(Cookie cookie : cookies){
         					<td align="center">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sunrise College of Physiotherapy </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=2"> <img
+        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=4"> <img
 									src="images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -193,7 +193,7 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of </label>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Paramedical Sciences </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=2"> <img
+        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=5"> <img
 									src="images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -222,7 +222,7 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of Nursing</label>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (B.Sc. Nursing) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=2"> <img
+        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=6"> <img
 									src="images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -253,7 +253,7 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of Nursing</label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=2"> <img
+        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=7"> <img
 									src="images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -289,7 +289,7 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of Nursing</label>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=2"> <img
+        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=8"> <img
 									src="images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -315,8 +315,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td align="center">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sri Sai School of Nursing </label><br>
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=2"> <img
+        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=9"> <img
 									src="images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -324,8 +325,6 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<label id="labelnumber">${totalstudents}</label><br>
-        						<label id="labelnumber">${totalteachers}</label>	
         					</td>
         				</tr>
         			</table>
@@ -344,8 +343,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td align="center">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Kshatriya School of Nursing </label><br>
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=2"> <img
+        						 href="Controller?process=UserProcess&action=authenticateSuperUser&branchid=10"> <img
 									src="images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -353,8 +353,6 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<label id="labelnumber">${totalstudents}</label><br>
-        						<label id="labelnumber">${totalteachers}</label>	
         					</td>
         				</tr>
         			</table>

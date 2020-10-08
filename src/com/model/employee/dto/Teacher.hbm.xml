@@ -14,14 +14,14 @@
         <property name="designation" type="string">
             <column name="designation" length="45" />
         </property>
-        <property name="subjectsteaching" type="string">
-            <column name="subjectsteaching" length="500" />
+        <property name="aadharnumber" type="string">
+            <column name="aadharnumber" length="500" />
         </property>
         <property name="dateofjoining" type="date">
             <column name="dateofjoining" length="10" />
         </property>
-        <property name="classesteaching" type="string">
-            <column name="classesteaching" length="200" />
+        <property name="pan" type="string">
+            <column name="pan" length="200" />
         </property>
         <property name="salary" type="string">
             <column name="salary" length="50" />
@@ -74,6 +74,36 @@
         </property>
           <property name="branchid" type="int">
             <column name="branchid" />
+        </property>
+        <property name="doc1" type="string">
+            <column name="doc1" />
+        </property>
+        <property name="doc2" type="string">
+            <column name="doc2" />
+        </property>
+        <property name="doc3" type="string">
+            <column name="doc3" />
+        </property>
+        <property name="doc4" type="string">
+            <column name="doc4" />
+        </property>
+        <property name="doc5" type="string">
+            <column name="doc5" />
+        </property>
+        <property name="doc6" type="string">
+            <column name="doc6" />
+        </property>
+        <property name="doc7" type="string">
+            <column name="doc7" />
+        </property>
+        <property name="doc8" type="string">
+            <column name="doc8" />
+        </property>
+        <property name="doc9" type="string">
+            <column name="doc9" />
+        </property>
+        <property name="doc10" type="string">
+            <column name="doc10" />
         </property>
     </class>
 </hibernate-mapping>
