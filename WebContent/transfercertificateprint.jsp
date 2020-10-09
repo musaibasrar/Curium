@@ -187,10 +187,10 @@ span{
 			<tr>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				
-				Divine M.A. English Higher Primary & High School </td>
+				${branchname} </td>
 			</tr>
 			<tr>
-			<td class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</td>
+			<td class="addressLine"></td>
 			</tr>
 
 			<tr>

@@ -490,7 +490,6 @@ for(Cookie cookie : cookies){
     <body>
     <jsp:useBean id="now" class="java.util.Date" scope="page" />
         <form id="form1" action="Controller?process=DocumentsProcess&action=generateTransferCertificate" method="post" onkeypress="if (event.keyCode == 92) datetowords();">
-            <div style="height: 28px">
             <table  width="100%">
                 <thead>
                     <tr>
@@ -500,83 +499,82 @@ for(Cookie cookie : cookies){
                 </thead>
                 <tbody>
                 <tr>
-                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="font-weight: bold;font-size: 15px;color: #4B6A84"> </td>
                     </tr>
                     <tr>
-                    <td style="width: 45%;">&nbsp;&nbsp;&nbsp;&nbsp;<span style="width: 200%;font-weight: bold;font-size: 15px;color: #4B6A84"> GENERAL INFORMATION</span> </td>
+                    <td ><span style="width: 200%;font-weight: bold;font-size: 15px;color: #4B6A84"> GENERAL INFORMATION</span> </td>
                     </tr>
 	                <tr>
-                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="font-weight: bold;font-size: 15px;color: #4B6A84"> </td>
                     </tr>
                     <tr>
-                    <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" onfocusout="datetowords()"/> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
-                    <td >Student Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/></td>    
+                    <td >Admission No:  <input  type="text" name="admno" id="admno" style="width: 200px" onfocusout="datetowords()"/> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
+                    <td >Student Name: <input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/></td>    
                         
                     </tr>
                     
                      <tr>
-                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="font-weight: bold;font-size: 15px;color: #4B6A84"> </td>
                     </tr>
                     <tr>
-                    <td style="width: 45%;">&nbsp;&nbsp;&nbsp;&nbsp;<span style="width: 200%;font-weight: bold;font-size: 15px;color: #4B6A84"> PARENTS / GUARDIAN INFORMATION</span> </td>
+                    <td style=""><br><span style="width: 200%;font-weight: bold;font-size: 15px;color: #4B6A84"> PARENTS / GUARDIAN INFORMATION</span> </td>
                     </tr>
 	                <tr>
-                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="font-weight: bold;font-size: 15px;color: #4B6A84"> </td>
                     </tr>
                     <tr>
-                    <td style="width: 45%">Father Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="fathername" id="fathername" style="width: 200px" /></td>
-                    <td >Mother Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="mothername" id="mothername" style="width: 200px" readonly/></td>    
+                    <td >Father Name:  <input  type="text" name="fathername" id="fathername" style="width: 200px" /></td>
+                    <td >Mother Name: <input  type="text" name="mothername" id="mothername" style="width: 200px" readonly/></td>    
                     </tr>
-                    
-                    
+                    </table>
+                    <table align="center">
                     <tr>
-                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="font-weight: bold;font-size: 15px;color: #4B6A84"> </td>
                     </tr>
                     <tr>
-                    <td style="width: 45%;">&nbsp;&nbsp;&nbsp;&nbsp;<span style="width: 200%;font-weight: bold;font-size: 15px;color: #4B6A84"> STUDENT PERSONAL INFORMATION</span> </td>
+                    <td style=""><br><span style="width: 200%;font-weight: bold;font-size: 15px;color: #4B6A84"> STUDENT PERSONAL INFORMATION</span> </td>
                     </tr>
 	                <tr>
-                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="font-weight: bold;font-size: 15px;color: #4B6A84"> </td>
                     </tr>
                     <tr>
-                    <td style="width: 45%">Gender: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    						<input  type="text" name="gender" id="gender" style="width: 200px" /></td>
-                    <td >Nationality:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="nationality" id="nationality" style="width: 200px" readonly/></td>    
-                    </tr>
-                    <tr>
-                    <td><br></td>
-                    </tr>
-                    <tr>
-                    <td style="width: 45%">Religion:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="religion" id="religion" style="width: 200px" /></td>
-                    <td >Caste:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="caste" id="caste" style="width: 200px" readonly/></td>    
+                    <td align="right">Gender: <input  type="text" name="gender" id="gender" style="width: 200px" /></td>
+                    <td align="right">Nationality: <input  type="text" name="nationality" id="nationality" style="width: 200px" readonly/></td>    
                     </tr>
                     <tr>
                     <td><br></td>
                     </tr>
                     <tr>
-                    <td style="width: 45%">Date of Birth: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="dateofbirth" id="dateofbirth" style="width: 200px" /></td>
-                    <td >Date of Birth (words):&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="dateofbirthwords" id="dateofbirthwords" style="width: 200px" readonly/></td>    
+                    <td align="right">Religion: <input  type="text" name="religion" id="religion" style="width: 200px" /></td>
+                    <td align="right">Caste: <input  type="text" name="caste" id="caste" style="width: 200px" readonly/></td>    
                     </tr>
                     <tr>
                     <td><br></td>
                     </tr>
                     <tr>
-                    <td style="width: 45%">Date of Admission: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="dateofadmission" id="dateofadmission" style="width: 200px" /></td>
-                    <td >Class Admitted In:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="classadmitted" id="classadmitted" style="width: 200px" readonly/></td>    
+                    <td align="right">Date of Birth:  <input  type="text" name="dateofbirth" id="dateofbirth" style="width: 200px" /></td>
+                    <td align="right">Date of Birth (words):<input  type="text" name="dateofbirthwords" id="dateofbirthwords" style="width: 200px" readonly/></td>    
                     </tr>
                     <tr>
                     <td><br></td>
                     </tr>
                     <tr>
-                    <td style="width: 45%">Class Last Studied: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  type="text" name="classandsec" id="classandsec" style="width: 200px" /></td>
-                    <td >Date of issue of TC:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  style="width: 200px" type="text" name="dateoftc" id="dateoftc"  value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" /></td>    
+                    <td align="right">Date of Admission: <input  type="text" name="dateofadmission" id="dateofadmission" style="width: 200px" /></td>
+                    <td align="right">Class Admitted In: <input  type="text" name="classadmitted" id="classadmitted" style="width: 200px" readonly/></td>    
                     </tr>
                     <tr>
                     <td><br></td>
                     </tr>
                     <tr>
-                    <td style="width: 45%">Reason For Leaving the school: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="reason" id="reason" style="width: 200px" /></td>
-                    <td >Passed Examination Details:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="passedexam" id="passedexam" style="width: 200px" readonly/></td>    
+                    <td align="right">Class Last Studied: <input  type="text" name="classandsec" id="classandsec" style="width: 200px" /></td>
+                    <td align="right">Date of issue of TC:<input  style="width: 200px" type="text" name="dateoftc" id="dateoftc"  value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" /></td>    
+                    </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td align="right">Reason For Leaving the College:  <input  type="text" name="reason" id="reason" style="width: 200px" /></td>
+                    <td align="right">Passed Examination Details: <input  type="text" name="passedexam" id="passedexam" style="width: 200px" readonly/></td>    
                     </tr>
                     <tr>
                     <td><br></td>
@@ -589,10 +587,10 @@ for(Cookie cookie : cookies){
                     </tr>
                     
                     <tr>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<td>
+						
+						
+						
 						
 						<input type="submit" value="Generate Transfer Certificate" id="submit"/></td>
 						<td></td>

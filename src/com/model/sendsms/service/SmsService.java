@@ -26,6 +26,7 @@ import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
 import com.model.parents.dto.Parents;
 import com.model.sendsms.dao.SmsDAO;
+import com.model.student.dto.Student;
 import com.util.DataUtil;
 import com.util.Session;
 
@@ -54,8 +55,8 @@ public class SmsService {
 		if(httpSession.getAttribute("branchid")!=null){
 			String queryMain ="From Parents as parents where ";
 			String querySub = "";
-			String addClass = request.getParameter("addclass");
-			String addSec = request.getParameter("addsec");
+			String addClass = DataUtil.emptyString(request.getParameter("addclass"));
+			String addSec = DataUtil.emptyString(request.getParameter("addsec"));
 			String conClassStudying = "";
 			
 			if(addClass.contains("ALL")){
@@ -247,6 +248,79 @@ public class SmsService {
 		logger.info("Error SMS "+e);
 		}
 		return responseCode;
+	}
+
+
+	public boolean sendSMSStudents() {
+		
+		boolean result=false;
+		int noOfRecords = 100;
+		int offset=0;
+		
+		if(httpSession.getAttribute("branchid")!=null){
+			String queryMain ="From Student as student where ";
+			String querySub = "";
+			String addClass = DataUtil.emptyString(request.getParameter("addclass"));
+			String addSec = DataUtil.emptyString(request.getParameter("addsec"));
+			String conClassStudying = "";
+			
+			if(addClass.contains("ALL")){
+				querySub = querySub + "student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0";
+			}else{
+				if (!addClass.equalsIgnoreCase("")) {
+
+					conClassStudying = addClass+"--" +"%";
+
+				}
+				if (!addSec.equalsIgnoreCase("")) {
+					conClassStudying = addClass;
+					conClassStudying = conClassStudying+"--"+addSec+"%";
+				}
+				
+				String classStudying = DataUtil.emptyString(conClassStudying);
+				
+				if(!classStudying.equalsIgnoreCase("")){
+					querySub = querySub + "student.classstudying like '"+classStudying+"' AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+				}	
+			}
+			
+			queryMain = queryMain+querySub;
+
+			double totalNumbers = new SmsDAO().countNumbers(queryMain);
+			int resultSMS=0;
+			int iterations = (int) Math.ceil(totalNumbers/100);
+			
+			logger.info("main query:"+queryMain);
+			
+			for(int i=0;i<iterations;i++){
+				List<Object> pContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
+
+				//List<Parents> parentsContacts = (List<Parents>) Parents.class.cast(pContacts); 
+				
+				String numbers = null;
+					StringBuilder sbN = new StringBuilder();
+
+					if(!pContacts.isEmpty()){
+						for (Object student : pContacts) {
+							Student par = Student.class.cast(student);
+							sbN.append(par.getContactnumber());
+							sbN.append(",");
+						}
+						numbers=sbN.toString();
+						numbers = numbers.substring(0, numbers.length()-1);
+						logger.info("Numbers are *** "+numbers);
+						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebody")));
+					}
+					
+				offset = offset+100;
+			}
+			if(resultSMS==200){
+				result = true;
+			}
+		}
+		
+        return result;
+		
 	}
 	
 }

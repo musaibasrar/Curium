@@ -368,23 +368,18 @@
 
 <tr>
 
-<td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
+<td align="left"><label style="font-size: 18px;font-weight: bold;">In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></label></td>
 <td></td>
 </tr>
 
 <tr>
-<td align="left">Note: Fees once deposited will not be refunded under any Circumstances</td>
-</tr>
+<td align="left">Note: 1. Fees once deposited will not be refunded under any Circumstances</td>
 
-<tr>
-<td><br><br></td>
 </tr>
 <tr>
-
-<td align="Center"><br>Clerks</td>
-
-<td align="left">H.M</td>
-
+<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				2. Any legal dispute will be subject to Bidar jurisdiction</td>
+<td >Cashier</td>
 </tr>
 		</TABLE>
 

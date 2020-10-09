@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -654,7 +655,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 150px">
+									id="classsearch" style="width: 235px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
@@ -665,20 +666,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 120px">
-										<option selected></option>
-
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.section != '')}">
-											<option value="${classdetailslist.section}">
-												<c:out value="${classdetailslist.section}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-
-								</select>
-							</label>
+							</label> 
 						</tr>
 
 						<tr>
@@ -721,7 +709,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">UIN</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
@@ -744,14 +732,17 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataText"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
+										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.fathersname}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.mothersname}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.classstudying}" /></td>				
+							<td class="dataText">
+									<c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>
+							</td>				
 							<td class="dataText"><c:out
 									value="${Parents.student.admissiondate}" /></td>
 

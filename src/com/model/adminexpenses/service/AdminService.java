@@ -279,8 +279,9 @@ public class AdminService {
 			adminExpenseList = new AdminDetailsDAO().searchExpensesbydate(queryMain + querySub);
 			BigDecimal sumOfExpenses = BigDecimal.ZERO;
 			for (Adminexpenses expenseAdmin : adminExpenseList) {
-				BigDecimal fee = new BigDecimal(expenseAdmin.getPriceofitem());
-				sumOfExpenses = sumOfExpenses.add(fee);
+				String bigNumber = expenseAdmin.getPriceofitem();
+				long expadmin = Long.valueOf(bigNumber.replaceAll(",", "").toString());
+				sumOfExpenses = sumOfExpenses.add(BigDecimal.valueOf(expadmin));
 			}
 			totalExpensesSum.add("\"" + sumOfExpenses + "\"");
 			//Date Format
@@ -338,8 +339,9 @@ public class AdminService {
 			adminExpenseList = new AdminDetailsDAO().searchExpensesbydate(queryMain + querySub);
 			BigDecimal sumOfExpenses = BigDecimal.ZERO;
 			for (Adminexpenses expenseAdmin : adminExpenseList) {
-				BigDecimal fee = new BigDecimal(expenseAdmin.getPriceofitem());
-				sumOfExpenses = sumOfExpenses.add(fee);
+				String bigNumber = expenseAdmin.getPriceofitem();
+				long expadmin = Long.valueOf(bigNumber.replaceAll(",", "").toString());
+				sumOfExpenses = sumOfExpenses.add(BigDecimal.valueOf(expadmin));
 			}
 			totalExpensesSum.add("\"" + sumOfExpenses + "\"");
 			//Date Format

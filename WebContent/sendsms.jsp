@@ -129,9 +129,9 @@
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
-	text-align: right;
 	vertical-align: middle;
 	font-weight: bold;
+	text-align: right;
 }
 
 .alignRightHead {
@@ -376,6 +376,11 @@
 			sendSMSAll();
 
 		});
+		
+		$("#sendsmsstudents").button().click(function() {
+			sendSMSStudents();
+
+		});
 
 		$("#sendsmsnumbers").button().click(function() {
 			sendSMSNumbers();
@@ -389,6 +394,10 @@
 
 		
 		$("#reset").button().click(function() {
+			 
+		});
+		
+		$("#resetstudents").button().click(function() {
 			 
 		});
 		
@@ -606,36 +615,33 @@ for(Cookie cookie : cookies){
 			<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Students</a></li>
-					<li><a href="#tabs-2">Staff</a></li>
+					<li><a href="#tabs-2">Parents</a></li>
 					<li><a href="#tabs-3">Selected Numbers</a></li>
+					<li><a href="#tabs-4">Staff</a></li>
 				</ul>
 
-
-
 				<div id="tabs-1">
-					<table width="100%" border="0" align="center" id="table1">
+					<table width="100%" border="0" id="table1">
+					
 						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-
-							<td width="30%" class="alignRight"><label> <font
-									color="red"><div id="mydiv"></div></font>
-							</label></td>
 							<td width="20%" class="alignRight"></td>
-							<td class="alignRight"><font color="red"><div
-										id="mydivmobile"></div></font></td>
+							<td class="alignRight"></td>
+							<td  class="alignRight">
+							<a href="Controller?process=SMSProcess&action=SMSbalanceCheck" title="Click to check SMS balance">SMS Balance</a>
+											: ${smsbalance}
+							</td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
 						</tr>
 
-<tr>
-
-
-							<td class="alignRight">Select&nbsp;</td>
-							<td width="28%"> <label>Class: <select name="addclass" id="addclass"
+						<tr>
+							<td class="alignRight">Select Class: &nbsp;</td>
+							<td> <label><select name="addclass" id="addclass"
 									style="width: 120px">
 										<option selected></option>
 										<option>ALL</option>
@@ -648,7 +654,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 
-							</label> <label>&nbsp;Sec:
+							</label> <%-- <label>&nbsp;Sec:
 									<select name="addsec" id="addsec"
 									style=" width: 120px">
 										<option selected></option>
@@ -662,13 +668,13 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 
 								</select>
-							</label></td>
+							</label> --%></td>
 							<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td width="40%" class="alignRight">Message* &nbsp;</td>
-							<td width="12%" align="center"><label> <textarea  name="messagebody"
+							<td  class="alignRight">Message* &nbsp;</td>
+							<td  ><label> <textarea  name="messagebody"
 											type="text" class="textField" id="messagebody" rows="6" cols="55"
 											></textarea>
 							</label></td>
@@ -676,22 +682,22 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 						
-						<td width="30%" class="alignRight">Count: &nbsp;</td>
-							<td width="12%" align="left"><label name="count" id="count" style="color: #325F6D;font-weight: bold;">
+						<td  class="alignRight">Count: &nbsp;</td>
+							<td  ><label name="count" id="count" style="color: #325F6D;font-weight: bold;">
 							</label></td>
 							
 						</tr>
 
 						<tr>
-							<td width="30%" class="alignRight">No. Of Messages : &nbsp;</td>
-							<td width="12%" align="left"><label name="messagecount" id="messagecount" style="color: #325F6D;font-weight: bold;">
+							<td  class="alignRight">No. Of Messages : &nbsp;</td>
+							<td  ><label name="messagecount" id="messagecount" style="color: #325F6D;font-weight: bold;">
 							</label></td>
 						</tr>
 
 						<tr>
 							<td><br /></td>
 						</tr>
-
+					</table>
 
 						<div>
 							<table width="100%">
@@ -700,7 +706,115 @@ for(Cookie cookie : cookies){
 									<td><br /></td>
 								</tr>
 								<tr>
-									<td align="center">
+									<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+									<td></td><td></td><td></td><td></td><td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>
+
+										<button id="sendsmsstudents">Send</button>
+
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="resetstudents">Reset</button>
+
+									</td>
+
+
+								</tr>
+							</table>
+
+						</div>
+						
+						</div>
+						
+						
+						<div id="tabs-2">
+					<table width="100%" border="0" align="center" id="table1">
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td class="alignRight">Select Class:&nbsp;</td>
+							<td > <label><select name="addclass" id="addclass"
+									style="width: 120px">
+										<option selected></option>
+										<option>ALL</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}" >
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>	
+										</c:forEach>
+								</select>
+
+							</label> <%-- <label>&nbsp;Sec:
+									<select name="addsec" id="addsec"
+									style=" width: 120px">
+										<option selected></option>
+										<option>ALL</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.section != '')}">
+											<option value="${classdetailslist.section}">
+												<c:out value="${classdetailslist.section}" />
+											</option>
+										</c:if>	
+										</c:forEach>
+
+								</select>
+							</label> --%></td>
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td  class="alignRight">Message* &nbsp;</td>
+							<td  ><label> <textarea  name="messagebody"
+											type="text" class="textField" id="messagebody" rows="6" cols="55"
+											></textarea>
+							</label></td>
+							
+						</tr>
+						<tr>
+						
+						<td  class="alignRight">Count: &nbsp;</td>
+							<td ><label name="count" id="count" style="color: #325F6D;font-weight: bold;">
+							</label></td>
+							
+						</tr>
+
+						<tr>
+							<td  class="alignRight">No. Of Messages : &nbsp;</td>
+							<td ><label name="messagecount" id="messagecount" style="color: #325F6D;font-weight: bold;">
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+					</table>
+
+						<div>
+							<table width="100%">
+								<tr>
+
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+									<td></td><td></td><td></td><td></td><td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td >
 
 										<button id="sendsms">Send</button>
 
@@ -715,13 +829,15 @@ for(Cookie cookie : cookies){
 
 						</div>
 						
-						<div id="tabs-2">
+						</div>
+						
+						<div id="tabs-4">
 					<table width="100%" border="0" align="center" id="table1">
 					
 					<tr>
 							<td width="20%" class="alignRight"></td>
 							<td class="alignRight"></td>
-							<td width="30%" class="alignRight">
+							<td  class="alignRight">
 							<a href="Controller?process=SMSProcess&action=SMSbalanceCheck" title="Click to check SMS balance">SMS Balance</a>
 											: ${smsbalance}
 							</td>
@@ -735,8 +851,8 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
-							<td class="alignRight">Select&nbsp;</td>
-							<td width="28%"> <label>Department: <select name="department" id="department"
+							<td class="alignRight">Select Department:&nbsp;</td>
+							<td> <label><select name="department" id="department"
 									style="width: 120px">
 										<option selected></option>
 										<option>ALL</option>
@@ -753,8 +869,8 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
-							<td width="40%" class="alignRight">Message* &nbsp;</td>
-							<td width="12%" align="center"><label> <textarea  name="messagebodystaff"
+							<td  class="alignRight">Message* &nbsp;</td>
+							<td  ><label> <textarea  name="messagebodystaff"
 											type="text" class="textField" id="messagebodystaff" rows="6" cols="55"
 											></textarea>
 							</label></td>
@@ -762,22 +878,22 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 						
-						<td width="30%" class="alignRight">Count: &nbsp;</td>
-							<td width="12%" align="left"><label name="countstaff" id="countstaff" style="color: #325F6D;font-weight: bold;">
+						<td  class="alignRight">Count: &nbsp;</td>
+							<td><label name="countstaff" id="countstaff" style="color: #325F6D;font-weight: bold;">
 							</label></td>
 							
 						</tr>
 
 						<tr>
-							<td width="30%" class="alignRight">No. Of Messages : &nbsp;</td>
-							<td width="12%" align="left"><label name="messagecountstaff" id="messagecountstaff" style="color: #325F6D;font-weight: bold;">
+							<td  class="alignRight">No. Of Messages : &nbsp;</td>
+							<td><label name="messagecountstaff" id="messagecountstaff" style="color: #325F6D;font-weight: bold;">
 							</label></td>
 						</tr>
 
 						<tr>
 							<td><br /></td>
 						</tr>
-
+						</table>
 
 						<div>
 							<table width="100%">
@@ -801,6 +917,8 @@ for(Cookie cookie : cookies){
 
 						</div>
 						
+						</div>
+						
 					<div id="tabs-3">
 					
 					<br><br>
@@ -818,22 +936,9 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
-
-							<td width="30%" class="alignRight"><label> <font
-									color="red"><div id="mydiv"></div></font>
-							</label></td>
-							<td width="20%" class="alignRight"></td>
-							<td class="alignRight"><font color="red"><div
-										id="mydivmobile">
-										</div></font></td>
-						</tr>
-
-					
-
-						<tr>
 										
-							<td width="40%" class="alignRight">Numbers* &nbsp;</td>
-							<td width="12%" align="center"><label> <textarea  name="numbers"
+							<td  class="alignRight">Numbers* &nbsp;</td>
+							<td><label> <textarea  name="numbers"
 											type="text" class="textField" id="numbers" rows="6" cols="55"
 											></textarea>
 							</label></td>
@@ -845,8 +950,8 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
-							<td width="40%" class="alignRight">Message* &nbsp;</td>
-							<td width="12%" align="center"><label> <textarea  name="messagebodynumbers"
+							<td  class="alignRight">Message* &nbsp;</td>
+							<td><label> <textarea  name="messagebodynumbers"
 											type="text" class="textField" id="messagebodynumbers" rows="6" cols="55"
 											></textarea>
 							</label></td>
@@ -856,22 +961,23 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-						<td width="30%" class="alignRight">Count: &nbsp;</td>
-							<td width="12%" align="left"><label name="countnumbers" id="countnumbers" style="color: #325F6D;font-weight: bold;">
+						<tr>
+						<td  class="alignRight">Count: &nbsp;</td>
+							<td><label name="countnumbers" id="countnumbers" style="color: #325F6D;font-weight: bold;">
 							</label></td>
 							
 						</tr>
 
 						<tr>
-							<td width="30%" class="alignRight">No. Of Messages : &nbsp;</td>
-							<td width="12%" align="left"><label name="messagecountnumbers" id="messagecountnumbers" style="color: #325F6D;font-weight: bold;">
+							<td  class="alignRight">No. Of Messages : &nbsp;</td>
+							<td><label name="messagecountnumbers" id="messagecountnumbers" style="color: #325F6D;font-weight: bold;">
 							</label></td>
 						</tr>
 
 						<tr>
 							<td><br /></td>
 						</tr>
-
+						</table>
 
 						<div>
 							<table width="100%">
@@ -894,6 +1000,7 @@ for(Cookie cookie : cookies){
 							</table>
 
 						</div>
+						</div>
 
 						</div>
 						</div>
@@ -904,6 +1011,12 @@ for(Cookie cookie : cookies){
 							function sendSMSAll() {
 								var form1 = document.getElementById("form1");
 								form1.action = "Controller?process=SMSProcess&action=sendAllSMS";
+								form1.submit();
+							}
+							
+							function sendSMSStudents() {
+								var form1 = document.getElementById("form1");
+								form1.action = "Controller?process=SMSProcess&action=sendSMSstudents";
 								form1.submit();
 							}
 							

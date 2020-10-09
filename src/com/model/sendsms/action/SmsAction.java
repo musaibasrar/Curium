@@ -43,14 +43,20 @@ public class SmsAction {
 			url = sendStaffSMS();
 		}else if (action.equalsIgnoreCase("sendSMS")) {
 			url = sendSMS();
+		}else if (action.equalsIgnoreCase("sendSMSstudents")) {
+			url = sendSMSstudents();
 		}
 		
 		return url;
 	}
 
 	
-
-	
+	private String sendSMSstudents() {
+		if(new SmsService(request, response).sendSMSStudents()){
+			return "successsms.jsp";
+		}
+		return "errorsms.jsp";
+	}
 
 	private String sendSMS() {
 		new StandardService(request, response).viewClasses();

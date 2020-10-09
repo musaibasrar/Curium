@@ -38,8 +38,8 @@ public class StampFeesService {
 		
 		String queryMain = "From Parents as parents where";
 		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
-		String addClass = request.getParameter("classsearch");
-		String addSec = request.getParameter("secsearch");
+		String addClass =  DataUtil.emptyString(request.getParameter("classsearch"));
+		String addSec =  DataUtil.emptyString(request.getParameter("secsearch"));
 		String conClassStudying = "";
 
 		if (!addClass.equalsIgnoreCase("")) {

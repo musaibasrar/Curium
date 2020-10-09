@@ -278,8 +278,7 @@
 			style="page-break-after: always; border-collapse: collapse;">
 
 			<tr>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
+			<td colspan="4"><hr width="100%"></td>
 			</tr>
 		<tr>
 			<td><br><br></td>
@@ -287,8 +286,9 @@
 	
 	<tr>
 
-		<td><br>Prepared By</td>
+		<td>Prepared By</td>
 		<td>Approved By</td>
+		<td>Received By</td>
 	</tr>
 		</TABLE>
 
