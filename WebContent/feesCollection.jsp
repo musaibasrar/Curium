@@ -669,11 +669,11 @@
             }
             
             function checkWithDueAmount(duePayment){
-            	var dueAmount = parseInt(document.getElementById("dueamount").value);
-            	var payment = parseInt(duePayment.value);
+            	var dueAmount = parseInt(document.getElementById("dueamount"+duePayment).value);
+            	var payment = parseInt(document.getElementById("amountpaying"+duePayment).value);
             	
             	if(payment>dueAmount){
-            		duePayment.value = 0;
+            		document.getElementById("amountpaying"+duePayment).value = 0;
             		alert('Amount Due to be paid must be lesser than or equals to Due Amount');
             	}
             }
@@ -722,7 +722,7 @@ for(Cookie cookie : cookies){
                     <tr>
                     
                         <td class="alignRight">Student Name:&nbsp;&nbsp;<input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/></td>
-                        <td class="alignRight">Class & SEC:&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" /></td>
+                        <td class="alignRight">Class:&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" /></td>
                         
                     </tr>
                     
@@ -753,7 +753,7 @@ for(Cookie cookie : cookies){
                     <tr>
                     
                         <td class="alignRight">Student Name:&nbsp;&nbsp;<input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" style="width: 200px" readonly/></td>
-                        <td class="alignRight">Class & SEC:&nbsp;&nbsp;<input type="text" name="classandsecDetails" id="classandsecDetails" value="${classandsecDetails}"/></td>
+                        <td class="alignRight">Class:&nbsp;&nbsp;<input type="text" name="classandsecDetails" id="classandsecDetails" value="${classandsecDetails}"/></td>
                         
                     </tr>
                     <tr>
@@ -791,10 +791,10 @@ for(Cookie cookie : cookies){
 							<td class="dataTextInActive" align="center"><a class="dataTextInActive" style="text-transform:uppercase"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
 							<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
-							<input type="hidden" id="dueamount" value="${studentfeesdetails.value}"/>
+							<input type="text" id="dueamount${status.index}" value="${studentfeesdetails.value}"/>
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" class="amountpaying" value="0" id="amountpaying" name="amountpaying" onkeyup="checkWithDueAmount(this)">
+							<input type="text" class="amountpaying" value="0" id="amountpaying${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(${status.index})">
 							</td>
 							<td class="dataText" align="center">
 							<input type="text" id="fine" value="0" class="fine" name="fine" >
