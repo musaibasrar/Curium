@@ -56,43 +56,43 @@ public class UserService {
        int branchId = 0;
        
        
-       if(!request.getParameter("loginNameSuperAdmin").isEmpty() && !request.getParameter("passwordSuperAdmin").isEmpty()) {
+       if(!DataUtil.emptyString(request.getParameter("loginNameSuperAdmin")).isEmpty() && !DataUtil.emptyString(request.getParameter("passwordSuperAdmin")).isEmpty()) {
     	   userName = request.getParameter("loginNameSuperAdmin");
     	   password = request.getParameter("passwordSuperAdmin");
     	   branchId = 1;
-       }else if(!request.getParameter("loginNamescn").isEmpty() && !request.getParameter("passwordscn").isEmpty()) {
+       }else if(!DataUtil.emptyString(request.getParameter("loginNamescn")).isEmpty() && !DataUtil.emptyString(request.getParameter("passwordscn")).isEmpty()) {
     	   userName = request.getParameter("loginNamescn");
     	   password = request.getParameter("passwordscn");
     	   branchId = 2;
-       }else if(!request.getParameter("loginNamescp").isEmpty() && !request.getParameter("passwordscp").isEmpty()) {
+       }else if(!DataUtil.emptyString(request.getParameter("loginNamescp")).isEmpty() && !DataUtil.emptyString(request.getParameter("passwordscp")).isEmpty()) {
     	   userName = request.getParameter("loginNamescp");
     	   password = request.getParameter("passwordscp");
     	   branchId = 3;
-       }else if(!request.getParameter("loginNamescbpt").isEmpty() && !request.getParameter("passwordscbpt").isEmpty()) {
+       }else if(!DataUtil.emptyString(request.getParameter("loginNamescbpt")).isEmpty() && !DataUtil.emptyString(request.getParameter("passwordscbpt")).isEmpty()) {
     	   userName = request.getParameter("loginNamescbpt");
     	   password = request.getParameter("passwordscbpt");
     	   branchId = 4;
-       }else if(!request.getParameter("loginNamesips").isEmpty() && !request.getParameter("passwordsips").isEmpty()) {
+       }else if(!DataUtil.emptyString(request.getParameter("loginNamesips")).isEmpty() && !DataUtil.emptyString(request.getParameter("passwordsips")).isEmpty()) {
     	   userName = request.getParameter("loginNamesips");
     	   password = request.getParameter("passwordsips");
     	   branchId = 5;
-       }else if(!request.getParameter("loginNamehpr").isEmpty() && !request.getParameter("passwordhpr").isEmpty()) {
+       }else if(!DataUtil.emptyString(request.getParameter("loginNamehpr")).isEmpty() && !DataUtil.emptyString(request.getParameter("passwordhpr")).isEmpty()) {
     	   userName = request.getParameter("loginNamehpr");
     	   password = request.getParameter("passwordhpr");
     	   branchId = 6;
-       }else if(!request.getParameter("loginNamekksn").isEmpty() && !request.getParameter("passwordkksn").isEmpty()) {
+       }else if(!DataUtil.emptyString(request.getParameter("loginNamekksn")).isEmpty() && !DataUtil.emptyString(request.getParameter("passwordkksn")).isEmpty()) {
     	   userName = request.getParameter("loginNamekksn");
     	   password = request.getParameter("passwordkksn");
     	   branchId = 7;
-       }else if(!request.getParameter("loginNameksn").isEmpty() && !request.getParameter("passwordksn").isEmpty()) {
+       }else if(!DataUtil.emptyString(request.getParameter("loginNameksn")).isEmpty() && !DataUtil.emptyString(request.getParameter("passwordksn")).isEmpty()) {
     	   userName = request.getParameter("loginNameksn");
     	   password = request.getParameter("passwordksn");
     	   branchId = 8;
-       }else if(!request.getParameter("loginNamesssn").isEmpty() && !request.getParameter("passwordsssn").isEmpty()) {
+       }else if(!DataUtil.emptyString(request.getParameter("loginNamesssn")).isEmpty() && !DataUtil.emptyString(request.getParameter("passwordsssn")).isEmpty()) {
     	   userName = request.getParameter("loginNamesssn");
     	   password = request.getParameter("passwordsssn");
     	   branchId = 9;
-       }else if(!request.getParameter("loginNamekssn").isEmpty() && !request.getParameter("passwordkssn").isEmpty()) {
+       }else if(!DataUtil.emptyString(request.getParameter("loginNamekssn")).isEmpty() && !DataUtil.emptyString(request.getParameter("passwordkssn")).isEmpty()) {
     	   userName = request.getParameter("loginNamekssn");
     	   password = request.getParameter("passwordkssn");
     	   branchId = 10;

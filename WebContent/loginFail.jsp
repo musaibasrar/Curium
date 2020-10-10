@@ -143,298 +143,64 @@
         </script>
         <form action="Controller?process=UserProcess&action=authenticateUser" method="post" id="form1">
                            
-              <div class="row">
+                <div class="row">
         	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        	<div class="col">
-        	</div>
-        	<div class="col"> 
-        			<div id="rcorners0">
-        			<table style="margin-left: auto;margin-right: auto;">
+        	<div class="col" align="center"> 
+        			<div>
+        			<table>
         				<tr>
-        					<td align="center">
-        						<img alt="" src="images/welcomelogo.jpg" style="width:200px;height: 200px">
+        					<td>	
+        					<br><br><br>
+        						<a href="loginsuperadmin.jsp">
+        						<img alt="" src="images/welcomelogo.jpg" style="width:300px;height: 300px">
+        						</a>
+        					</td>
+        					<td>
+        					<br><br><br>
+        						<a style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;" href="loginscn.jsp">
+        						<img alt="" src="images/welcomelogo.jpg" style="width:20px;height: 20px">
+        						Sunrise College of Nursing
+        						</a><br>
+        						<a style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;" href="loginscp.jsp">
+        						<img alt="" src="images/welcomelogo.jpg" style="width:20px;height: 20px">
+        						Sunrise College of Pharmacy
+        						</a><br>
+        						<a style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;" href="loginscpbpt.jsp">
+        						<img alt="" src="images/welcomelogo.jpg" style="width:20px;height: 20px">
+        						Sunrise College of Physiotherapy
+        						</a><br>
+        						<a style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;" href="loginsip.jsp">
+        						<img alt="" src="images/welcomelogo.jpg" style="width:20px;height: 20px">
+        						Sunrise Institute of Paramedical Sciences
+        						</a><br>
+        						<a style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;" href="loginhpr.jsp">
+        						<img alt="" src="images/welcomelogo.jpg" style="width:20px;height: 20px">
+        						HPR College of Nursing (B.Sc. Nursing)
+        						</a><br>
+        						<a style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;" href="loginkksn.jsp">
+        						<img alt="" src="images/welcomelogo.jpg" style="width:20px;height: 20px">
+        						Karnataka School of Nursing (GNM)
+        						</a><br>
+        						<a style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;" href="loginksn.jsp">
+        						<img alt="" src="images/welcomelogo.jpg" style="width:20px;height: 20px">
+        						Koushthubha School of Nursing (GNM)
+        						</a><br>
+        						<a style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;" href="loginssn.jsp">
+        						<img alt="" src="images/welcomelogo.jpg" style="width:20px;height: 20px">
+        						Sri Sai School of Nursing (GNM)
+        						</a><br>
+        						<a style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;" href="loginkssn.jsp">
+        						<img alt="" src="images/welcomelogo.jpg" style="width:20px;height: 20px">
+        						Kshatriya School of Nursing (GNM)
+        						</a><br>
+        						
         					</td>
         				</tr>
         			</table>
         			</div>
         	</div>
-        	
-        	
-        	<div class="col">
-        	
-        	 </div>
         </div>
         
-             <div><br><br></div>
-        
-        <div class="row">
-        	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        	<div class="col">
-        	</div>
-        	<div class="col"> 
-        			<div id="rcorners1">
-        			<table style="margin-left: auto;margin-right: auto;">
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td align="center">
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Super Admin </label><br>
-        						<img src="images/user--filled.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" name="loginNameSuperAdmin" type="text" placeholder="Username"><br>
-        						<img src="images/password.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" name="passwordSuperAdmin" type="password" placeholder="Password"><br>
-        						<input type="image" width="35" height="45" name="Login" src="images/login.svg" />
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-        	
-        	
-        	<div class="col">
-        	
-        	 </div>
-        </div>
-        
-             <div><br><br></div>
-             
-        	<div class="row">
-        	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        	<div class="col">
-        			<div id="rcorners1">
-        			
-        			<table style="margin-left: auto;margin-right: auto;">
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td align="center">
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sunrise College of Nursing </label><br>
-        						<img src="images/user--filled.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" name="loginNamescn" type="text"  placeholder="Username" ><br>
-        						<img src="images/password.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" name="passwordscn" type="password" placeholder="Password"><br>
-        						<input type="image" width="35" height="45" name="Login" src="images/login.svg" />
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-        	<div class="col"> 
-        			<div id="rcorners1">
-        			<table style="margin-left: auto;margin-right: auto;">
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td align="center">
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sunrise College of Pharmacy </label><br>
-        						<img src="images/user--filled.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" name="loginNamescp" type="text"  placeholder="Username" ><br>
-        						<img src="images/password.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" name="passwordscp" type="password" placeholder="Password"><br>
-        						<input type="image" width="35" height="45" name="Login" src="images/login.svg" />
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-        	
-        	
-        	<div class="col">
-        		<div id="rcorners1">
-        			<table style="margin-left: auto;margin-right: auto;">
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td align="center">
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sunrise College of Physiotherapy </label><br>
-        						<img src="images/user--filled.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" style="width: 70%;" name="loginNamescbpt" type="text"  placeholder="Username" ><br>
-        						<img src="images/password.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" style="width: 70%;" name="passwordscbpt" type="password" placeholder="Password"><br>
-        						<input type="image" width="35" height="45" name="Login" src="images/login.svg" />
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        				</tr>
-        			</table>
-        			</div>
-        	 </div>
-        </div>
-        
-             <div><br><br></div>
-             
-             <div class="row">
-        	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        	<div class="col">
-        			<div id="rcorners1">
-        			
-        			<table style="margin-left: auto;margin-right: auto;">
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td align="center">
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sunrise Institute </label>
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of </label>
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Paramedical Sciences </label><br>
-        						<img src="images/user--filled.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" style="width: 60%;" name="loginNamesips" type="text"  placeholder="Username" ><br>
-        						<img src="images/password.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" style="width: 60%;" name="passwordsips" type="password" placeholder="Password"><br>
-        						<input type="image" width="35" height="45" name="Login" src="images/login.svg" />
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-        	<div class="col"> 
-        			<div id="rcorners1">
-        			<table style="margin-left: auto;margin-right: auto;">
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td align="center">
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> HPR College</label>
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of Nursing</label>
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (B.Sc. Nursing) </label><br>
-        						<img src="images/user--filled.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" style="width: 60%;" name="loginNamehpr" type="text"  placeholder="Username" ><br>
-        						<img src="images/password.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" style="width: 60%;" name="passwordhpr" type="password" placeholder="Password"><br>
-        						<input type="image" width="35" height="45" name="Login" src="images/login.svg" />
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-        	
-        	
-        	<div class="col">
-        		<div id="rcorners1">
-        			<table style="margin-left: auto;margin-right: auto;">
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td align="center">
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Karnataka School</label>
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of Nursing</label><br>
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
-        						<img src="images/user--filled.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" name="loginNamekksn" type="text"  placeholder="Username" ><br>
-        						<img src="images/password.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" name="passwordkksn" type="password" placeholder="Password"><br>
-        						<input type="image" width="35" height="45" name="Login" src="images/login.svg" />
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        				</tr>
-        			</table>
-        			</div>
-        	 </div>
-        </div>
-        
-             <div><br><br></div>
-             
-             <div class="row">
-        	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        	<div class="col">
-        			<div id="rcorners1">
-        			
-        			<table style="margin-left: auto;margin-right: auto;">
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td align="center">
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Koushthubha School </label>
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of Nursing</label>
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
-        						<img src="images/user--filled.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" style="width: 60%;"  name="loginNameksn" type="text"  placeholder="Username" ><br>
-        						<img src="images/password.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" style="width: 60%;"  name="passwordksn" type="password" placeholder="Password"><br>
-        						<input type="image" width="35" height="45" name="Login" src="images/login.svg" />
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-        	<div class="col"> 
-        			<div id="rcorners1">
-        			<table style="margin-left: auto;margin-right: auto;">
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td align="center">
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sri Sai School of Nursing </label><br>
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
-        						<img src="images/user--filled.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" name="loginNamesssn" type="text"  placeholder="Username" ><br>
-        						<img src="images/password.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" name="passwordsssn" type="password" placeholder="Password"><br>
-        						<input type="image" width="35" height="45" name="Login" src="images/login.svg" />
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-        	
-        	
-        	<div class="col">
-        		<div id="rcorners1">
-        			<table style="margin-left: auto;margin-right: auto;">
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td align="center">
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Kshatriya School of Nursing </label><br>
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
-        						<img src="images/user--filled.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" name="loginNamekssn" type="text"  placeholder="Username" ><br>
-        						<img src="images/password.svg" width="22" height="22" alt="Login" style="vertical-align: center;" /><input class="inputfield" name="passwordkssn" type="password" placeholder="Password"><br>
-        						<input type="image" width="35" height="45" name="Login" src="images/login.svg" />
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        				</tr>
-        			</table>
-        			</div>
-        	
-        	 </div>
-        </div>
              <div><br><br></div>
              				 <div id="overlay" >
                                     	<div id="text" onclick="off()">Please enter correct username and password<br><br>
