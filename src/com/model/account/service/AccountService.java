@@ -666,10 +666,10 @@ public class AccountService {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null) {
 			
-			Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+			int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 
 				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
-				accountsDetails = new AccountDAO().getAccountdetails();
+				accountsDetails = new AccountDAO().getAccountdetails(branchId);
 				
 				Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
 				
@@ -686,9 +686,20 @@ public class AccountService {
 					accountBalanceMap.put(accountDetails, totalAmount);
 						
 					if(accountDetails.getAccountGroupMaster().getAccountgroupid()==1 || accountDetails.getAccountGroupMaster().getAccountgroupid()==5) {
-						debitAllAcc = debitAllAcc.add(totalAmount);
-					}else{
-						creditAllAcc = creditAllAcc.add(totalAmount);
+						
+						if(totalAmount.signum() >= 0) {
+							debitAllAcc = debitAllAcc.add(totalAmount);
+						}else{
+							creditAllAcc = creditAllAcc.add(totalAmount.negate());
+						}
+						
+					}else if(accountDetails.getAccountGroupMaster().getAccountgroupid()==2 || accountDetails.getAccountGroupMaster().getAccountgroupid()==3 || accountDetails.getAccountGroupMaster().getAccountgroupid()==4){
+						
+						if(totalAmount.signum() >= 0) {
+							creditAllAcc = creditAllAcc.add(totalAmount);
+						}else{
+							debitAllAcc = debitAllAcc.add(totalAmount.negate());
+						}
 					}
 				}
 				request.setAttribute("accountdetailsbalanceMap", accountBalanceMap);
@@ -697,7 +708,7 @@ public class AccountService {
 				
 				totalBalanceAllAccDiff = creditAllAcc.subtract(debitAllAcc);
 				
-				if(totalBalanceAllAccDiff.signum() == 1){
+				/*if(totalBalanceAllAccDiff.signum() == 1){
 					request.setAttribute("differencetotal", "Difference in Balances");
 					request.setAttribute("debitdifference", totalBalanceAllAccDiff.abs());
 					request.setAttribute("debittotal", debitAllAcc.add(totalBalanceAllAccDiff.abs()));
@@ -705,7 +716,7 @@ public class AccountService {
 					request.setAttribute("differencetotal", "Difference in Balances");
 					request.setAttribute("creditdifference", totalBalanceAllAccDiff.abs());
 					request.setAttribute("credittotal", creditAllAcc.add(totalBalanceAllAccDiff.abs()));
-				}
+				}*/
 				return true;
 		}
 		
@@ -854,6 +865,7 @@ public class AccountService {
 		        	if(!accountSSGroupMaster.isEmpty()){
 		        		String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
 			        	for(int i =0; i<accountSSGroupMaster.size();i++){
+			        		buffer = buffer+"<option></option>";
 			        		buffer = buffer +  "<option value="+accountSSGroupMaster.get(i).getSsgroupmasterid()+">"+accountSSGroupMaster.get(i).getSsgroupname()+"</option>";
 			        	}
 			        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option></select>";
@@ -892,5 +904,131 @@ public class AccountService {
 		
 	}
 
+
+	public boolean searchJournalEntries() {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		String accountDetails = DataUtil.emptyString(request.getParameter("accountid"));
+		String[] accountIdName = accountDetails.split(":");
+		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
+		String fromDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("todate")));
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
+		String twoAccounts = null;
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+			
+			if(voucherEntry.getDraccountid() != accountId) {
+				twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+":Dr";
+			}else if(voucherEntry.getCraccountid() != accountId) {
+				twoAccounts = new AccountDAO().getAccountName(voucherEntry.getCraccountid())+":Cr";
+			}
+			//twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		request.setAttribute("ledgertransactions", voucherMap);
+		request.setAttribute("ledgername", accountIdName[1]);
+		
+		return true;
+		
+		}
+		return false;
+	}
+
+
+	public void getAllLedgers() {
+		
+	List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
+	accountDetails = new AccountDAO().getLedgerAccountdetails(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	request.setAttribute("ledgeraccountdetails", accountDetails);
 	
+	}
+
+
+	public boolean getIncomeStatement() {
+		
+		String fromDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("todate")));
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+			
+					int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+
+				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
+				accountsDetails = new AccountDAO().getAccountdetailsIncomeExpense(branchId);
+				
+				Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
+				
+				//Group 1
+				BigDecimal totalIncome = BigDecimal.ZERO;
+				Map<Accountdetails,BigDecimal> incomeLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+				
+				
+				//Group 2
+				BigDecimal totalExpense = BigDecimal.ZERO;
+				Map<Accountdetails,BigDecimal> expenseLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+				
+				for (Accountdetails accountDetails : accountsDetails) {
+					
+					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					
+					if(!voucherTransactions.isEmpty()) {
+					
+						BigDecimal totalAmount = getTotalBalance(accountDetails,voucherTransactions);
+					
+						int groupId = accountDetails.getAccountGroupMaster().getAccountgroupid();
+	
+						switch(groupId){
+						
+						case 4: 
+								totalIncome = totalIncome.add(totalAmount);
+								incomeLedgersAccount.put(accountDetails, totalAmount);
+								break;
+						case 5: 
+								totalExpense = totalExpense.add(totalAmount);
+								expenseLedgersAccount.put(accountDetails, totalAmount);
+								break;
+						default:
+								
+						}
+						
+						}
+					}
+		//group 1
+		request.setAttribute("income", totalIncome);
+		request.setAttribute("incomeledgersaccount", incomeLedgersAccount);
+		
+		//group 2
+		request.setAttribute("expenses", totalExpense);
+		request.setAttribute("expensesledgersaccount", expenseLedgersAccount);
+		
+		request.setAttribute("incometotallabel", "TOTAL");
+		request.setAttribute("expensetotallabel", "TOTAL");
+		request.setAttribute("incometotal", totalIncome);
+		request.setAttribute("expensetotal", totalExpense);
+		
+		request.setAttribute("fromdate", fromDate);
+		request.setAttribute("todate", toDate);
+		
+		
+		BigDecimal profit = totalIncome.subtract(totalExpense);
+		
+		if(profit.compareTo(BigDecimal.ZERO) > 0){
+			request.setAttribute("profitlabel", "Net Profit");
+			request.setAttribute("totalprofit", profit);
+		}else if(profit.compareTo(BigDecimal.ZERO) < 0){
+			request.setAttribute("losslabel", "Net Loss");
+			request.setAttribute("totalloss", profit.negate());
+		}
+		
+		
+	}
+		return true;
+	}
 }
