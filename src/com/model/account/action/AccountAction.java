@@ -73,9 +73,31 @@ public class AccountAction {
 			url = viewCancelledVouchers();
 		}else if ("getSSGroupNames".equalsIgnoreCase(action)) {
 				getSSGroupName();
+		}else if ("generalLedgerReport".equalsIgnoreCase(action)) {
+			url = generalLedgerReport();
+		}else if ("searchLedgerEntries".equalsIgnoreCase(action)) {
+			url = searchLedgerEntries();
+		}else if ("incomeStatement".equalsIgnoreCase(action)) {
+			url = incomeStatement();
 		}
 		return url;
+		}
+
+	private String incomeStatement() {
+		new AccountService(request, response).getIncomeStatement();
+		return "incomestatement.jsp";
 	}
+
+	private String searchLedgerEntries() {
+		new AccountService(request, response).searchJournalEntries();
+		new AccountService(request, response).getAllLedgers();
+		return "generalledgerreport.jsp";
+	}
+
+	private String generalLedgerReport() {
+		new AccountService(request, response).getAllLedgers();
+		return "generalledgerreport.jsp";
+}
 
 	private void getSSGroupName() {
 		

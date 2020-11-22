@@ -2,6 +2,7 @@ package com.model.account.dao;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -363,18 +364,19 @@ public class AccountDAO {
 
 	public String getAccountName(Integer accountid) {
 		Accountdetails accountDetails = new Accountdetails();
+		String accountName = null;
 		try {
 			transaction = session.beginTransaction();
 			Query query =  session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
 			accountDetails = (Accountdetails) query.uniqueResult(); 
 			transaction.commit();
-			return accountDetails.getAccountname();
+			accountName = accountDetails.getAccountname();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
 		}
-		return null;
+		return accountName;
 	}
 
 
@@ -504,11 +506,11 @@ public class AccountDAO {
 		return accountDetails;
 	}
 
-	public List<Accountdetails> getAccountdetails() {
+	public List<Accountdetails> getAccountdetails(int branchId) {
 		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
 		try {
 			transaction = session.beginTransaction();
-			accountDetails =  session.createQuery("from Accountdetails order by accountcode ASC").list();
+			accountDetails =  session.createQuery("from Accountdetails where branchid = "+branchId+" order by accountcode ASC").list();
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
@@ -546,6 +548,37 @@ public class AccountDAO {
 			HibernateUtil.closeSession();
 		}
 		return accountSSGroupMaster;
+	}
+
+	public List<Accountdetails> getLedgerAccountdetails(int branchId) {
+		
+		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
+		
+		try{
+			transaction = session.beginTransaction();
+			accountDetails = session.createQuery("from Accountdetails as accdetails where accdetails.branchid="+branchId).list();
+			transaction.commit();																						   											
+		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
+			hb.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return accountDetails;
+	}
+
+	public List<Accountdetails> getAccountdetailsIncomeExpense(int branchId) {
+		
+		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
+		try {
+			transaction = session.beginTransaction();												  	
+			accountDetails =  session.createQuery("from Accountdetails as accdetails where accdetails.accountGroupMaster.accountgroupid = 4 or accdetails.accountGroupMaster.accountgroupid = 5 and accdetails.branchid = "+branchId+" order by accountcode ASC").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return accountDetails;
 	}
 
 }
