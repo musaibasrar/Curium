@@ -23,6 +23,7 @@ import com.model.feescollection.action.FeesCollectionAction;
 import com.model.feesdetails.action.FeesDetailsAction;
 import com.model.hr.action.HrAction;
 import com.model.marksdetails.action.MarksDetailsAction;
+import com.model.mess.action.MessAction;
 import com.model.periods.action.PeriodAction;
 import com.model.position.action.PositionAction;
 import com.model.printids.action.PrintIdsAction;
@@ -98,9 +99,11 @@ public class Controller extends HttpServlet {
      }else if("HrProcess".equalsIgnoreCase(process)){
          nextUrl= new HrAction(request, response).execute(action);
      }else if("ClassProcess".equalsIgnoreCase(process)){
-         nextUrl= new StandardAction(request, response).execute(action);;
+         nextUrl= new StandardAction(request, response).execute(action);
      }else if("test".equalsIgnoreCase(process)){
          nextUrl= "test.html";
+     }else if("MessProcess".equalsIgnoreCase(process)){
+         nextUrl = new MessAction(request, response).execute(action);
      }
         
         RequestDispatcher reg = request.getRequestDispatcher(nextUrl);
