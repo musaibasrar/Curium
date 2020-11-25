@@ -427,10 +427,10 @@ for(Cookie cookie : cookies){
 }
 %>
     <body onload="StartClock()" onunload="KillClock()">
-        <form name="theClock">
+       <!--  <form name="theClock">
 
             <div id="clock" class="headerTD"></div>
-        </form>
+        </form> -->
         <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div>
 
         <div id="container" style="width: 100%" >
@@ -545,6 +545,14 @@ for(Cookie cookie : cookies){
             <div >
                 <a target="mainFrame" href="Controller?process=HrProcess&action=leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+            </div>
+            
+              <h5 style="font-size: 12px"><a href="#" >Mess Management</a></h5>
+            <div >
+                <a target="mainFrame" href="Controller?process=MessProcess&action=issueItems" style="font-size: 12px;">Issue</a><br/>
+                <a target="mainFrame" href="Controller?process=MessProcess&action=purchaseItems" style="font-size: 12px;">Purchase</a><br/>
+                <a target="mainFrame" href="Controller?process=MessProcess&action=addItems" style="font-size: 12px;">View/Add Items</a><br/>
+                <a target="mainFrame" href="Controller?process=MessProcess&action=addSuppliers" style="font-size: 12px;">View/Add Suppliers</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>

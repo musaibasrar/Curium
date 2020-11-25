@@ -34,7 +34,6 @@ import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Student;
 import com.model.subjectdetails.dao.SubjectDetailsDAO;
 import com.model.subjectdetails.dto.Subject;
-import com.model.subjectdetails.service.SubjectDetailsService;
 import com.util.DataUtil;
 import com.util.ExamsDetails;
 
