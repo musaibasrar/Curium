@@ -284,11 +284,11 @@
 							<td class="datatd"><c:out value="${markslist}" /></td>
 							</c:forEach> --%>
 							<c:forEach items="${resultlist.marksList}" var="markslist">
-							<c:if test="${(markslist == 0 && resultlist.resultclass != 'FAIL' )}">
-							<td class="datatd"></td>
+							<c:if test="${(markslist == 999)}">
+								<td class="datatd"></td>
 							</c:if>
-							<c:if test="${(markslist !=0 || resultlist.resultclass == 'FAIL' )}">
-							<td class="datatd"><c:out value="${markslist}" /></td>
+							<c:if test="${(markslist != 999)}">
+								<td class="datatd"><c:out value="${markslist}" /></td>
 							</c:if>
 							</c:forEach>
 							<td class="datatd"><c:out value="${resultlist.percentage}" /></td>

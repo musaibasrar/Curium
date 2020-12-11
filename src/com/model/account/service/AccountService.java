@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,10 @@ import com.model.account.dao.AccountDAO;
 import com.model.account.dto.Accountdetails;
 import com.model.account.dto.Accountdetailsbalance;
 import com.model.account.dto.Accountgroupmaster;
+import com.model.account.dto.Accountssgroupmaster;
 import com.model.account.dto.Accountsubgroupmaster;
-import com.model.account.dto.Contratransactions;
 import com.model.account.dto.Financialaccountingyear;
-import com.model.account.dto.Journaltransactions;
-import com.model.account.dto.Paymenttransactions;
-import com.model.account.dto.Receipttransactions;
+import com.model.account.dto.VoucherEntrytransactions;
 import com.util.DataUtil;
 import com.util.DateUtil;
 
@@ -58,7 +57,7 @@ public class AccountService {
 	public boolean getCurrentFinancialYear() {
 		Financialaccountingyear financialYear = new Financialaccountingyear();
 		if(httpSession.getAttribute(BRANCHID)!=null){
-			financialYear =  new AccountDAO().getCurrentFinancialYear();
+			financialYear =  new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		}
 		
 		if(financialYear!=null){
@@ -72,15 +71,15 @@ public class AccountService {
 
 	public boolean createAccount() {
 		
+		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
 		List<Accountgroupmaster> accountGroupMaster = new ArrayList<Accountgroupmaster>();
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			
-			accountGroupMaster = new AccountDAO().getListAccountGroupMaster();
+			accountGroupMaster = new AccountDAO().getListAccountGroupMaster(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			request.setAttribute("accountgroupmaster", accountGroupMaster);
 			
-			List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-			accountDetailsBalance = new AccountDAO().getAccountdetailsbalance();
+			accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			request.setAttribute("accountdetailsbalance", accountDetailsBalance);
 		}
 		
@@ -98,7 +97,7 @@ public class AccountService {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			int accountGroupMasterId = Integer.parseInt(request.getParameter("groupname"));
-			accountSubGroupMaster = new AccountDAO().getListAccountSubGroupMaster(accountGroupMasterId);
+			accountSubGroupMaster = new AccountDAO().getListAccountSubGroupMaster(accountGroupMasterId,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			request.setAttribute("accountsubgroupmaster", accountSubGroupMaster);
 			PrintWriter out = response.getWriter(); 
 			response.setContentType("text/xml");
@@ -108,24 +107,20 @@ public class AccountService {
 		        	/*String buffer = "<select name='subgroupname' > <option value='-1'>My option</option>";
 		        	buffer = buffer+"</select>";*/
 		        	if(!accountSubGroupMaster.isEmpty()){
-		        		String buffer = "<select name='subgroupname' style='width: 240px' id='sgname' onchange='dropdowndist()'>";
+		        		String buffer = "<select name='subgroupname' style='width: 240px' id='sgname' onchange='dropdowndist();getSSGroup();'>";
+		        		buffer = buffer +  "<option></option>";
 			        	for(int i =0; i<accountSubGroupMaster.size();i++){
 			        		buffer = buffer +  "<option value="+accountSubGroupMaster.get(i).getAccountsubgroupmasterid()+">"+accountSubGroupMaster.get(i).getAccountsubgroupname()+"</option>";
 			        	}
-			        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option></select>";
+			        	buffer = buffer+"<option value='New Group'>New Group</option></select>";
 			        	response.getWriter().println(buffer);
 		        	}else{
-		        		String buffer = "<select name='subgroupname' style='width: 240px' id='sgname' onchange='dropdowndist()'>";
+		        		String buffer = "<select name='subgroupname' style='width: 240px' id='sgname' onchange='dropdowndist();getSSGroup();'>";
 		        		buffer = buffer+"<option></option>";
-			        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option>";
+			        	buffer = buffer+"<option value='New Group'>New Group</option>";
 			        	buffer = buffer+"</select>";
 			        	response.getWriter().println(buffer);
 		        	}
-		        	
-		           /*out.write("<subgroup> abc </subgroup>");*/
-		        	/*out.write("<subgroup><option value='1'>Product Name 1 For Category 2</option>" +
-		                    "<option value='2'>Product Name 2 For Category 2</option>" +
-		                    "<option value='3'>Product Name 3 For Category 2</option></subgroup>");*/
 		        	
 		        } catch (Exception e) {
 		            out.write("<subgroup>0</subgroup>");
@@ -138,74 +133,116 @@ public class AccountService {
 		
 	}
 
-	public boolean saveAccount() {
+	public String saveAccount() {
 
-		boolean result = false;
+		String result = "false";
 		String newSubGroup = DataUtil.emptyString(request.getParameter("newsubgroup"));
+		String newSSGroup = DataUtil.emptyString(request.getParameter("newssgroup"));
 		String subGroupName = DataUtil.emptyString(request.getParameter("subgroupname"));
+		String ssGroupName = DataUtil.emptyString(request.getParameter("ssgroupname"));
 		String groupName = DataUtil.emptyString(request.getParameter("groupname"));
 		String accountName = DataUtil.emptyString(request.getParameter("accountname"));
-		String openingBalance = DataUtil.emptyString(request.getParameter("openingbalance"));
+		String accountCode = DataUtil.emptyString(request.getParameter("accountcode"));
 		
-		if(!"New Sub-Group".equalsIgnoreCase(subGroupName)){
-			Accountdetails accountDetails = new Accountdetails();
-			accountDetails.setAccountname(accountName);
+		
+		Accountdetails accountDetailsCheck = new AccountDAO().checkAccountDetails(accountName, accountCode);
+		
+		if(accountDetailsCheck==null) {
 			
-			if(getInt(subGroupName)!=null){
-				Accountsubgroupmaster accountSubGroupMaster = new Accountsubgroupmaster();
-				accountSubGroupMaster.setAccountsubgroupmasterid(getInt(subGroupName));
-				accountDetails.setAccountSubGroupMaster(accountSubGroupMaster);
-			}
+		if(!"New Group".equalsIgnoreCase(subGroupName)){
 			
-			Accountgroupmaster accountGroupMaster = new Accountgroupmaster();
-			accountGroupMaster.setAccountgroupid(getInt(groupName));
-			accountDetails.setAccountGroupMaster(accountGroupMaster);
-			accountDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			boolean newAccount = new AccountDAO().saveNewAccount(accountDetails);
-			
-			if(newAccount){
-				// Add account balance
-				Financialaccountingyear financialyear = new AccountDAO().getFinancialAccountingYear();
-				Accountdetailsbalance accountDetailsBalance = new Accountdetailsbalance();
-				accountDetailsBalance.setAccountDetails(accountDetails);
-				if(findCrDr(groupName)){
-					accountDetailsBalance.setCrdr("Cr");
-				}else{
-					accountDetailsBalance.setCrdr("Dr");
-				}
-				accountDetailsBalance.setFinancialid(financialyear.getFinancialid());
-				accountDetailsBalance.setOpeningbalance(new BigDecimal(openingBalance));
-				accountDetailsBalance.setCurrentbalance(new BigDecimal(openingBalance));
-				accountDetailsBalance.setEnteredon(new Date());
-				accountDetailsBalance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				result = new AccountDAO().saveAccountBalance(accountDetailsBalance);
+				Accountdetails accountDetails = new Accountdetails();
+				accountDetails.setAccountname(accountName);
+				accountDetails.setAccountcode(accountCode);
 				
-			}
-		}else if("New Sub-Group".equalsIgnoreCase(subGroupName)){
+				
+				if(getInt(subGroupName)!=null){
+					Accountsubgroupmaster accountSubGroupMaster = new Accountsubgroupmaster();
+					accountSubGroupMaster.setAccountsubgroupmasterid(getInt(subGroupName));
+					accountDetails.setAccountSubGroupMaster(accountSubGroupMaster);
+				}
+				
+				if(!"New Sub-Group".equalsIgnoreCase(ssGroupName)) {
+					if(getInt(ssGroupName)!=null) {
+						Accountssgroupmaster accountSSGroup = new Accountssgroupmaster();
+						accountSSGroup.setSsgroupmasterid(getInt(ssGroupName));
+						accountDetails.setAccountSSGroupMaster(accountSSGroup);
+					}
+				}else if("New Sub-Group".equalsIgnoreCase(ssGroupName)){
+					
+					Accountsubgroupmaster accountSubGroupMaster = new Accountsubgroupmaster();
+					Accountssgroupmaster accountSSGroupMaster = new Accountssgroupmaster();
+					accountSubGroupMaster.setAccountsubgroupmasterid(Integer.parseInt(subGroupName));
+					accountSSGroupMaster.setAccountSubGroupMaster(accountSubGroupMaster);
+					accountSSGroupMaster.setSsgroupname(newSSGroup);
+					accountSSGroupMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					accountSSGroupMaster = new AccountDAO().createSSGroup(accountSSGroupMaster);
+					accountDetails.setAccountSSGroupMaster(accountSSGroupMaster);
+				}
+				
+				Accountgroupmaster accountGroupMaster = new Accountgroupmaster();
+				accountGroupMaster.setAccountgroupid(getInt(groupName));
+				accountDetails.setAccountGroupMaster(accountGroupMaster);
+				accountDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				
+					// Add account balance
+					Financialaccountingyear financialyear = new AccountDAO().getFinancialAccountingYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					Accountdetailsbalance accountDetailsBalance = new Accountdetailsbalance();
+					accountDetailsBalance.setAccountDetails(accountDetails);
+					if(findCrDr(groupName)){
+						accountDetailsBalance.setCrdr("Cr");
+					}else{
+						accountDetailsBalance.setCrdr("Dr");
+					}
+					accountDetailsBalance.setFinancialid(financialyear.getFinancialid());
+					accountDetailsBalance.setOpeningbalance(new BigDecimal(0));
+					accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
+					accountDetailsBalance.setEnteredon(new Date());
+					accountDetailsBalance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					result = new AccountDAO().saveNewAccount(accountDetails, accountDetailsBalance);
+					
+		}else if("New Group".equalsIgnoreCase(subGroupName)){
 
 			Accountsubgroupmaster accountSubGroupMaster = new Accountsubgroupmaster();
+			Accountssgroupmaster accountSSGroupMaster = new Accountssgroupmaster();
 			Accountgroupmaster accountGroup = new Accountgroupmaster();
+			
 			accountGroup.setAccountgroupid(Integer.parseInt(groupName));
 			accountSubGroupMaster.setAccountGroupMaster(accountGroup);
 			accountSubGroupMaster.setAccountsubgroupname(newSubGroup);
 			accountSubGroupMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			accountSubGroupMaster = new AccountDAO().createSubGroup(accountSubGroupMaster);
 			
-			if(accountSubGroupMaster.getAccountsubgroupmasterid()!=null){
+			 if("New Sub-Group".equalsIgnoreCase(ssGroupName)){
+					
+					accountSubGroupMaster.setAccountsubgroupmasterid(accountSubGroupMaster.getAccountsubgroupmasterid());
+					accountSSGroupMaster.setAccountSubGroupMaster(accountSubGroupMaster);
+					accountSSGroupMaster.setSsgroupname(newSSGroup);
+					accountSSGroupMaster.setSsgroupname(newSSGroup);
+					accountSSGroupMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					accountSSGroupMaster = new AccountDAO().createSSGroup(accountSSGroupMaster);
+					
+				}
+			
 				Accountdetails accountDetails = new Accountdetails();
 				Accountgroupmaster accountGroupMaster = new Accountgroupmaster();
+				//Group
 				Accountsubgroupmaster accountSubGroup = new Accountsubgroupmaster();
 				accountSubGroup.setAccountsubgroupmasterid(accountSubGroupMaster.getAccountsubgroupmasterid());
 				accountDetails.setAccountSubGroupMaster(accountSubGroup);
+				//Sub-Group
+				Accountssgroupmaster accountSSGroup = new Accountssgroupmaster();
+				accountSSGroup.setSsgroupmasterid(accountSSGroupMaster.getSsgroupmasterid());
+				accountDetails.setAccountSSGroupMaster(accountSSGroup);
+				//Account Details
 				accountDetails.setAccountname(accountName);
+				accountDetails.setAccountcode(accountCode);
 				accountGroupMaster.setAccountgroupid(Integer.parseInt(groupName));
 				accountDetails.setAccountGroupMaster(accountGroupMaster);
 				accountDetails.setAccountsubgroupmasterid(accountSubGroupMaster.getAccountsubgroupmasterid());
 				accountDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				boolean newAccount = new AccountDAO().saveNewAccount(accountDetails);
 				
-				if(newAccount){
-					Financialaccountingyear financialyear = new AccountDAO().getFinancialAccountingYear();
+					Financialaccountingyear financialyear = new AccountDAO().getFinancialAccountingYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 					Accountdetailsbalance accountDetailsBalance = new Accountdetailsbalance();
 					accountDetailsBalance.setAccountDetails(accountDetails);
 					if(findCrDr(groupName)){ 
@@ -214,12 +251,19 @@ public class AccountService {
 						accountDetailsBalance.setCrdr("Dr");
 					}
 					accountDetailsBalance.setFinancialid(financialyear.getFinancialid());
-					accountDetailsBalance.setOpeningbalance(new BigDecimal(openingBalance));
+					accountDetailsBalance.setOpeningbalance(new BigDecimal(0));
+					accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
+					accountDetailsBalance.setEnteredon(new Date());
 					accountDetailsBalance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-					result = new AccountDAO().saveAccountBalance(accountDetailsBalance);
+					result = new AccountDAO().saveNewAccount(accountDetails, accountDetailsBalance);
+		}}else {
+				if(accountName.equalsIgnoreCase(accountDetailsCheck.getAccountname())) {
+					result = "Error-Account Name already exists";
+				}else if(accountCode.equalsIgnoreCase(accountDetailsCheck.getAccountcode())) {
+					result = "Error-Account Code already exists";
 				}
-			}
 		}
+		request.setAttribute("createaccountalert", result);
 		return result;
 	}
 
@@ -235,7 +279,7 @@ public class AccountService {
 
 
 	private boolean findCrDr(String groupName) {
-		String[] groupOne = {"1","3","5","8","13","11"};
+		String[] groupOne = {"2","3","4"};
 		for (String group : groupOne) {
 			if(group.equalsIgnoreCase(groupName)){
 				return true;
@@ -247,7 +291,6 @@ public class AccountService {
 
 	public boolean deleteAccount() {
 		String[] accountIds = request.getParameterValues("accountids");
-		
 		if (accountIds != null) {
 			List<Integer> balanceIds = new ArrayList<Integer>();
 			List<Integer> accountdetailsIds = new ArrayList<Integer>();
@@ -259,11 +302,9 @@ public class AccountService {
 				if(!checkInTransactions){
 					new AccountDAO().deleteMultipleAccounts(Integer.valueOf(split[0]),Integer.valueOf(split[1]));
 				}
-				
 			}
 			return true;
 		}
-		
 		return false;
 	}
 
@@ -271,16 +312,30 @@ public class AccountService {
 	public boolean createVoucher() {
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-		accountDetailsBalance = new AccountDAO().getAccountdetailsbalanceExBC();
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+			List<Integer> accountIds = new ArrayList<Integer>();
+			accountIds.add(2);
+			accountIds.add(3);
+			accountIds.add(4);
+		accountDetailsBalance = new AccountDAO().getAccountdetailsbalanceExBC(accountIds, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("accountdetailsbalanceexbc", accountDetailsBalance);
+			accountIds.clear();
+			accountIds.add(5);
+		accountDetailsBalance = new AccountDAO().getAccountdetailsbalanceExBC(accountIds, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		request.setAttribute("accountdetailsbalanceexpacc", accountDetailsBalance);
 		
 		List<Accountdetailsbalance> accountDetailsBalanceBankCash = new ArrayList<Accountdetailsbalance>();
-		accountDetailsBalanceBankCash = new AccountDAO().getAccountdetailsbalanceBankCash();
+		accountDetailsBalanceBankCash = new AccountDAO().getAccountdetailsbalanceBankCash(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("accountdetailsbalancecontra", accountDetailsBalanceBankCash);
 		request.setAttribute("accountdetailsbalancereceipt", accountDetailsBalanceBankCash);
 		request.setAttribute("accountdetailsbalancepayment", accountDetailsBalanceBankCash);
-		request.setAttribute("accountdetailsbalancejournal", accountDetailsBalance);
+		
+		List<Accountdetailsbalance> accountDetailsJournalEntry = new ArrayList<Accountdetailsbalance>();
+		accountDetailsJournalEntry = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		request.setAttribute("accountdetailsbalancejournal", accountDetailsJournalEntry);
 		return true;
+		}
+		return false;
 	}
 
 
@@ -294,39 +349,28 @@ public class AccountService {
 		String receiptDate = DataUtil.emptyString(request.getParameter("dateofreceipt"));
 		String receiptNarration = DataUtil.emptyString(request.getParameter("receiptnarration"));
 		
-		Receipttransactions transactions = new Receipttransactions();
+		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 		
 		transactions.setDraccountid(Integer.parseInt(draccountName));
 		transactions.setCraccountid(Integer.parseInt(craccountName));
 		transactions.setDramount(new BigDecimal(drAmount));
 		transactions.setCramount(new BigDecimal(crAmount));
 		transactions.setVouchertype(Integer.parseInt(receiptVoucher));
-		transactions.setDate(DateUtil.dateParserUpdateStd(receiptDate));
+		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(receiptDate));
 		transactions.setNarration(receiptNarration);
 		transactions.setCancelvoucher("no");
-		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear().getFinancialid());
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
-		if(new AccountDAO().saveReceipt(transactions)){
-			List<Accountdetailsbalance> accountBalance = new ArrayList<Accountdetailsbalance>();
-			BigDecimal currentBalance = BigDecimal.ZERO;
-			List<Integer> accountIds = new ArrayList<Integer>();
-			accountIds.add(Integer.parseInt(draccountName));
-			accountIds.add(Integer.parseInt(craccountName));
-			accountBalance = new AccountDAO().getAccountBalanceDetails(accountIds);
-			List<BigDecimal> amounts = new ArrayList<BigDecimal>();
-			amounts.add(new BigDecimal(drAmount));
-			amounts.add(new BigDecimal(crAmount));
-			int i = 0;
-			for (Accountdetailsbalance accBalance : accountBalance) {
-				currentBalance = accBalance.getCurrentbalance().add(amounts.get(i));
-				new AccountDAO().updateAccountCurrentBalance(currentBalance,accBalance.getAccountDetails().getAccountdetailsid());
-				i++;
-			}
-			return true;
-		}
 		
-		return false;
+		BigDecimal drAmountReceipt = new BigDecimal(drAmount);
+		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmountReceipt+" where accountdetailsid="+Integer.parseInt(draccountName);
+
+		BigDecimal crAmountReceipt = new BigDecimal(crAmount);
+		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+crAmountReceipt+" where accountdetailsid="+Integer.parseInt(craccountName);
+		
+		return new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount);
+		
 	}
 
 
@@ -340,39 +384,27 @@ public class AccountService {
 		String paymentDate = DataUtil.emptyString(request.getParameter("dateofpayment"));
 		String paymentNarration = DataUtil.emptyString(request.getParameter("paymentnarration"));
 		
-		Paymenttransactions transactions = new Paymenttransactions();
+		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 		
 		transactions.setDraccountid(Integer.parseInt(draccountNamePayment));
 		transactions.setCraccountid(Integer.parseInt(craccountNamePayment));
 		transactions.setDramount(new BigDecimal(drAmountPayment));
 		transactions.setCramount(new BigDecimal(crAmountPayment));
 		transactions.setVouchertype(Integer.parseInt(paymentVoucher));
-		transactions.setDate(DateUtil.dateParserUpdateStd(paymentDate));
+		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(paymentDate));
 		transactions.setNarration(paymentNarration);
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear().getFinancialid());
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 		
-		if(new AccountDAO().savePayment(transactions)){
-			List<Accountdetailsbalance> accountBalance = new ArrayList<Accountdetailsbalance>();
-			BigDecimal currentBalance = BigDecimal.ZERO;
-			List<Integer> accountIds = new ArrayList<Integer>();
-			accountIds.add(Integer.parseInt(draccountNamePayment));
-			accountIds.add(Integer.parseInt(craccountNamePayment));
-			accountBalance = new AccountDAO().getAccountBalanceDetails(accountIds);
+		BigDecimal drAmount = new BigDecimal(drAmountPayment);
+		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmount+" where accountdetailsid="+Integer.parseInt(draccountNamePayment);
 
-				for (Accountdetailsbalance accountBalanceDetails : accountBalance) {
-					
-					if(accountBalanceDetails.getAccountDetails().getAccountSubGroupMaster().getAccountsubgroupmasterid() == 1 || accountBalanceDetails.getAccountDetails().getAccountSubGroupMaster().getAccountsubgroupmasterid() == 2){
-						new AccountDAO().updateAccountCurrentBalance(accountBalanceDetails.getCurrentbalance().subtract(new BigDecimal(drAmountPayment)),accountBalanceDetails.getAccountDetails().getAccountdetailsid());
-					}else{
-						new AccountDAO().updateAccountCurrentBalance(accountBalanceDetails.getCurrentbalance().add(new BigDecimal(crAmountPayment)),accountBalanceDetails.getAccountDetails().getAccountdetailsid());
-					}
-				}
-			return true;
-		}
+		BigDecimal crAmount = new BigDecimal(crAmountPayment);
+		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmount+" where accountdetailsid="+Integer.parseInt(craccountNamePayment);
 		
-		return false;
+		return new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount);
+		
 	}
 
 
@@ -386,38 +418,27 @@ public class AccountService {
 		String contraDate = DataUtil.emptyString(request.getParameter("dateofcontra"));
 		String contraNarration = DataUtil.emptyString(request.getParameter("contranarration"));
 		
-		Contratransactions transactions = new Contratransactions();
+		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 		
 		transactions.setDraccountid(Integer.parseInt(draccountNameContra));
 		transactions.setCraccountid(Integer.parseInt(craccountNameContra));
 		transactions.setDramount(new BigDecimal(drAmountContra));
 		transactions.setCramount(new BigDecimal(crAmountContra));
 		transactions.setVouchertype(Integer.parseInt(contraVoucher));
-		transactions.setDate(DateUtil.dateParserUpdateStd(contraDate));
+		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(contraDate));
 		transactions.setNarration(contraNarration);
+		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear().getFinancialid());
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 		
-		if(new AccountDAO().saveContra(transactions)){
-			List<Accountdetailsbalance> accountBalance = new ArrayList<Accountdetailsbalance>();
-			BigDecimal currentBalance = BigDecimal.ZERO;
-			List<Integer> accountIds = new ArrayList<Integer>();
-			accountIds.add(Integer.parseInt(draccountNameContra));
-			accountIds.add(Integer.parseInt(craccountNameContra));
-			accountBalance = new AccountDAO().getAccountBalanceDetails(accountIds);
-			List<BigDecimal> amounts = new ArrayList<BigDecimal>();
-			amounts.add(new BigDecimal(drAmountContra));
-			amounts.add(new BigDecimal(crAmountContra));
-			int i = 0;
-			for (Accountdetailsbalance accBalance : accountBalance) {
-				currentBalance = accBalance.getCurrentbalance().subtract(amounts.get(i));
-				new AccountDAO().updateAccountCurrentBalance(currentBalance,accBalance.getAccountDetails().getAccountdetailsid());
-				i++;
-			}
-			return true;
-		}
+		BigDecimal drAmount = new BigDecimal(drAmountContra);
+		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmount+" where accountdetailsid="+Integer.parseInt(draccountNameContra);
+
+		BigDecimal crAmount = new BigDecimal(drAmountContra);
+		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmount+" where accountdetailsid="+Integer.parseInt(craccountNameContra);
 		
-		return false;
+		return new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount);
+		
 	}
 
 
@@ -431,39 +452,44 @@ public class AccountService {
 		String journalDate = DataUtil.emptyString(request.getParameter("dateofjournal"));
 		String journalNarration = DataUtil.emptyString(request.getParameter("journalnarration"));
 		
-		Journaltransactions transactions = new Journaltransactions();
+		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 		
 		transactions.setDraccountid(Integer.parseInt(draccountNameJournal));
 		transactions.setCraccountid(Integer.parseInt(craccountNameJournal));
 		transactions.setDramount(new BigDecimal(drAmountJournal));
 		transactions.setCramount(new BigDecimal(crAmountJournal));
 		transactions.setVouchertype(Integer.parseInt(journalVoucher));
-		transactions.setDate(DateUtil.dateParserUpdateStd(journalDate));
+		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(journalDate));
 		transactions.setNarration(journalNarration);
+		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear().getFinancialid());
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 		
-		if(new AccountDAO().saveJournal(transactions)){
-			List<Accountdetailsbalance> accountBalance = new ArrayList<Accountdetailsbalance>();
-			BigDecimal currentBalance = BigDecimal.ZERO;
-			List<Integer> accountIds = new ArrayList<Integer>();
-			accountIds.add(Integer.parseInt(draccountNameJournal));
-			accountIds.add(Integer.parseInt(craccountNameJournal));
-			accountBalance = new AccountDAO().getAccountBalanceDetails(accountIds);
-			List<BigDecimal> amounts = new ArrayList<BigDecimal>();
-			amounts.add(new BigDecimal(drAmountJournal));
-			amounts.add(new BigDecimal(crAmountJournal));
-			int i = 0;
-			for (Accountdetailsbalance accBalance : accountBalance) {
-				//currentBalance = accBalance.getCurrentbalance().subtract(amounts.get(i));
-				currentBalance = accBalance.getCurrentbalance().add(amounts.get(i));
-				new AccountDAO().updateAccountCurrentBalance(currentBalance,accBalance.getAccountDetails().getAccountdetailsid());
-				i++;
-			}
-			return true;
+
+		// Dr
+		BigDecimal drAmount = new BigDecimal(drAmountJournal);
+		Accountdetails accountDetailsDr = new AccountDAO().getAccountDetails(Integer.parseInt(draccountNameJournal));
+		String updateDrAccount= null;
+		if(accountDetailsDr.getAccountGroupMaster().getAccountgroupid()==1 || accountDetailsDr.getAccountGroupMaster().getAccountgroupid()==5) {
+			updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmount+" where accountdetailsid="+Integer.parseInt(draccountNameJournal);
+		}else {
+			updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+drAmount+" where accountdetailsid="+Integer.parseInt(draccountNameJournal);
 		}
 		
-		return false;
+		//Cr
+		
+		BigDecimal crAmount = new BigDecimal(crAmountJournal);
+		String updateCrAccount= null;
+		Accountdetails accountDetailsCr = new AccountDAO().getAccountDetails(Integer.parseInt(craccountNameJournal));
+		
+		if(accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==2 || accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==3 || accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==4) {
+			updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+crAmount+" where accountdetailsid="+Integer.parseInt(craccountNameJournal);
+		}else {
+			updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmount+" where accountdetailsid="+Integer.parseInt(craccountNameJournal);
+		}
+		
+		return new AccountDAO().saveVoucherwithAccUpdate(transactions,updateDrAccount,updateCrAccount);
+		
 	}
 
 
@@ -500,7 +526,7 @@ public class AccountService {
 		
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-		accountDetailsBalance = new AccountDAO().getAccountdetailsbalance();
+		accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		for (Accountdetailsbalance accountdetails : accountDetailsBalance) {
 			int groupId = accountdetails.getAccountDetails().getAccountGroupMaster().getAccountgroupid();
@@ -604,188 +630,404 @@ public class AccountService {
 	}
 
 
-	public boolean viewVoucherReceipt() {
+	public boolean viewVouchers(int voucherType) {
 		
-		List<Receipttransactions> receiptTransactions = new ArrayList<Receipttransactions>();
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
 		String twoAccounts = null;
-		Map<Receipttransactions,String> receiptMap = new HashMap<Receipttransactions, String>();
-		Financialaccountingyear financialYear = new Financialaccountingyear();
-		financialYear = new AccountDAO().getCurrentFinancialYear();
-		if(financialYear!=null) {
-		    receiptTransactions = new AccountDAO().getReceiptTransactions(financialYear.getFinancialid());
-		}
-		for (Receipttransactions receipttransactionsSingle : receiptTransactions) {
-			twoAccounts = new AccountDAO().getAccountName(receipttransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(receipttransactionsSingle.getCraccountid());
-			receiptMap.put(receipttransactionsSingle, twoAccounts);
-		}
-		request.setAttribute("receipttransactions", receiptMap);
 		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactions(financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), voucherType);
 		
+		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		request.setAttribute("vouchertransactions", voucherMap);
 		
 		return true;
-	}
-
-
-	public boolean viewVoucherPayment() {
 		
-		List<Paymenttransactions> paymentTransactions = new ArrayList<Paymenttransactions>();
-		String twoAccounts = null;
-		Map<Paymenttransactions,String> paymentMap = new HashMap<Paymenttransactions, String>();
-		Financialaccountingyear financialYear = new Financialaccountingyear();
-                financialYear = new AccountDAO().getCurrentFinancialYear();
-               
-                if(financialYear!=null) {
-                    paymentTransactions = new AccountDAO().getPaymentTransactions(financialYear.getFinancialid());    
-                }
-		
-		
-		for (Paymenttransactions paymenttransactionsSingle : paymentTransactions) {
-			twoAccounts = new AccountDAO().getAccountName(paymenttransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(paymenttransactionsSingle.getCraccountid());
-			paymentMap.put(paymenttransactionsSingle, twoAccounts);
 		}
-		request.setAttribute("paymenttransactions", paymentMap);
-		return true;
-	}
-
-
-	public boolean viewVoucherContra() {
-		
-		List<Contratransactions> contraTransactions = new ArrayList<Contratransactions>();
-		String twoAccounts = null;
-		Map<Contratransactions,String> paymentMap = new HashMap<Contratransactions, String>();
-		
-		Financialaccountingyear financialYear = new Financialaccountingyear();
-                financialYear = new AccountDAO().getCurrentFinancialYear();
-               
-                if(financialYear!=null) {
-                    contraTransactions = new AccountDAO().getContraTransactions(financialYear.getFinancialid());
-                }
-		
-		for (Contratransactions paymenttransactionsSingle : contraTransactions) {
-			twoAccounts = new AccountDAO().getAccountName(paymenttransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(paymenttransactionsSingle.getCraccountid());
-			paymentMap.put(paymenttransactionsSingle, twoAccounts);
-		}
-		request.setAttribute("contratransactions", paymentMap);
-		return true;
-	}
-
-
-	public boolean viewVoucherJournal() {
-
-		List<Journaltransactions> journalTransactions = new ArrayList<Journaltransactions>();
-		String twoAccounts = null;
-		Map<Journaltransactions,String> paymentMap = new HashMap<Journaltransactions, String>();
-		
-		Financialaccountingyear financialYear = new Financialaccountingyear();
-                financialYear = new AccountDAO().getCurrentFinancialYear();
-               
-                if(financialYear!=null) {
-                    journalTransactions = new AccountDAO().getJournalTransactions(financialYear.getFinancialid());
-                }
-		
-		for (Journaltransactions journaltransactionsSingle : journalTransactions) {
-			twoAccounts = new AccountDAO().getAccountName(journaltransactionsSingle.getDraccountid())+"--"+new AccountDAO().getAccountName(journaltransactionsSingle.getCraccountid());
-			paymentMap.put(journaltransactionsSingle, twoAccounts);
-		}
-		request.setAttribute("journaltransactions", paymentMap);
-		return true;
-		
+		return false;
 	}
 
 
 	public boolean trialBalance() {
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-		accountDetailsBalance = new AccountDAO().getAccountdetailsbalance();
 		
-		BigDecimal debitTotal = BigDecimal.ZERO;
-		BigDecimal creditTotal = BigDecimal.ZERO;
-		BigDecimal differenceAmont = BigDecimal.ZERO;
+		String fromDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("todate")));
 		
-		if(!accountDetailsBalance.isEmpty()){
-		
-			for (Accountdetailsbalance accountbalance : accountDetailsBalance) {
-				if(accountbalance.getCrdr().equalsIgnoreCase("Cr")){
-					creditTotal = creditTotal.add(accountbalance.getCurrentbalance());
-				}else if(accountbalance.getCrdr().equalsIgnoreCase("Dr")){
-					if(accountbalance.getCurrentbalance().signum() == -1){
-						accountbalance.setCrdr("Cr");
-						accountbalance.setCurrentbalance(accountbalance.getCurrentbalance().abs());
-						creditTotal = creditTotal.add(accountbalance.getCurrentbalance());
-					}else{
-						debitTotal = debitTotal.add(accountbalance.getCurrentbalance());
-					}
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+			
+			int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+
+				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
+				accountsDetails = new AccountDAO().getAccountdetails(branchId);
+				
+				Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
+				
+				BigDecimal debitAllAcc = BigDecimal.ZERO;
+				BigDecimal creditAllAcc = BigDecimal.ZERO;
+				BigDecimal totalBalanceAllAccDiff = BigDecimal.ZERO;
+				
+				for (Accountdetails accountDetails : accountsDetails) {
 					
+					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					
+					BigDecimal totalAmount = getTotalBalance(accountDetails,voucherTransactions);
+					
+					accountBalanceMap.put(accountDetails, totalAmount);
+						
+					if(accountDetails.getAccountGroupMaster().getAccountgroupid()==1 || accountDetails.getAccountGroupMaster().getAccountgroupid()==5) {
+						
+						if(totalAmount.signum() >= 0) {
+							debitAllAcc = debitAllAcc.add(totalAmount);
+						}else{
+							creditAllAcc = creditAllAcc.add(totalAmount.negate());
+						}
+						
+					}else if(accountDetails.getAccountGroupMaster().getAccountgroupid()==2 || accountDetails.getAccountGroupMaster().getAccountgroupid()==3 || accountDetails.getAccountGroupMaster().getAccountgroupid()==4){
+						
+						if(totalAmount.signum() >= 0) {
+							creditAllAcc = creditAllAcc.add(totalAmount);
+						}else{
+							debitAllAcc = debitAllAcc.add(totalAmount.negate());
+						}
+					}
 				}
-			}
-			
-		}
-		
-		request.setAttribute("accountdetailsbalance", accountDetailsBalance);
-		request.setAttribute("credittotal", creditTotal);
-		request.setAttribute("debittotal", debitTotal);
-		
-		differenceAmont = creditTotal.subtract(debitTotal);
-		
-		if(differenceAmont.signum() == -1){
-			request.setAttribute("differencetotal", "Difference in opening balances");
-			request.setAttribute("creditdifference", differenceAmont.abs());
-			request.setAttribute("credittotal", creditTotal.add(differenceAmont.abs()));
-		}else if(differenceAmont.signum() == 1){
-			request.setAttribute("differencetotal", "Difference in opening balances");
-			request.setAttribute("debitdifference", differenceAmont.abs());
-			request.setAttribute("debittotal", debitTotal.add(differenceAmont.abs()));
-		}
-		
-		
-		return true;
-	}
-
-
-	public boolean cancelReceiptVoucher() {
-		
-		String[] receiptIds = request.getParameterValues("receiptids");
-		
-		if (receiptIds != null) {
-			
-			for (String id : receiptIds) {
-				Receipttransactions receiptTransaction = new AccountDAO().getReceiptDetails(id);
-				boolean updateResult = new AccountDAO().updateAccounts(receiptTransaction);
-				if(updateResult){
-					return new AccountDAO().cancelReceipt(id);
-				}else {
-					return false;
-				}
+				request.setAttribute("accountdetailsbalanceMap", accountBalanceMap);
+				request.setAttribute("credittotal", creditAllAcc);
+				request.setAttribute("debittotal", debitAllAcc);
 				
-			}
-			
+				totalBalanceAllAccDiff = creditAllAcc.subtract(debitAllAcc);
+				
+				/*if(totalBalanceAllAccDiff.signum() == 1){
+					request.setAttribute("differencetotal", "Difference in Balances");
+					request.setAttribute("debitdifference", totalBalanceAllAccDiff.abs());
+					request.setAttribute("debittotal", debitAllAcc.add(totalBalanceAllAccDiff.abs()));
+				}else if(totalBalanceAllAccDiff.signum() == -1){
+					request.setAttribute("differencetotal", "Difference in Balances");
+					request.setAttribute("creditdifference", totalBalanceAllAccDiff.abs());
+					request.setAttribute("credittotal", creditAllAcc.add(totalBalanceAllAccDiff.abs()));
+				}*/
+				return true;
 		}
 		
 		return false;
 	}
 
 
-	public boolean cancelPaymentVoucher() {
+	private BigDecimal getTotalBalance(Accountdetails accountDetails, List<VoucherEntrytransactions> voucherTransactions) {
 		
-		String[] paymentIds = request.getParameterValues("paymentids");
+		BigDecimal totalBalanceAcc = BigDecimal.ZERO;
+		BigDecimal debitAcc = BigDecimal.ZERO;
+		BigDecimal creditAcc = BigDecimal.ZERO;
 		
-		if (paymentIds != null) {
+		for (VoucherEntrytransactions voucherTransaction : voucherTransactions) {
 			
-			for (String id : paymentIds) {
-				Paymenttransactions paymentTransaction = new AccountDAO().getPaymentDetails(id);
-				boolean updateResult = new AccountDAO().updateAccountsPayment(paymentTransaction);
-				if(updateResult){
-					return new AccountDAO().cancelReceipt(id);
-				}else {
-					return false;
-				}
-				
+			if(voucherTransaction.getDraccountid() == accountDetails.getAccountdetailsid()) {
+				debitAcc = debitAcc.add(voucherTransaction.getDramount());
+			}else if(voucherTransaction.getCraccountid() == accountDetails.getAccountdetailsid()) {
+				creditAcc = creditAcc.add(voucherTransaction.getCramount());
 			}
-			
 		}
-		
-		return false;
-		
+	
+	if(accountDetails.getAccountGroupMaster().getAccountgroupid()==1 || accountDetails.getAccountGroupMaster().getAccountgroupid()==5) {
+		totalBalanceAcc = debitAcc.subtract(creditAcc);
+	}else{
+		totalBalanceAcc = creditAcc.subtract(debitAcc);
 	}
 	
+	return totalBalanceAcc;
+	
+	}
+
+
+	public boolean cancelVoucher() {
+		
+		String[] receiptIds = request.getParameterValues("transactionids");
+		int voucherType = DataUtil.parseInt(request.getParameter("voucherType"));
+		
+		if (receiptIds != null || voucherType!=0) {
+			
+			for (String id : receiptIds) {
+				VoucherEntrytransactions voucherTransaction = new AccountDAO().getVoucherDetails(id);
+				
+				if(voucherType==1) {
+					
+					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
+					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
+
+					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id;
+					
+					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+				}else if(voucherType==2) {
+
+					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
+					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
+					
+					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id;
+					
+					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+				}else if(voucherType==3) {
+
+					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
+					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
+					
+					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id;
+					
+					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+				}else if(voucherType==4) {
+					
+					// Dr
+					Accountdetails accountDetailsDr = new AccountDAO().getAccountDetails(voucherTransaction.getDraccountid());
+					String updateDrAccount= null;
+					if(accountDetailsDr.getAccountGroupMaster().getAccountgroupid()==1 || accountDetailsDr.getAccountGroupMaster().getAccountgroupid()==5) {
+						updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
+					}else {
+						updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
+					}
+					
+					//Cr
+					
+					Accountdetails accountDetailsCr = new AccountDAO().getAccountDetails(voucherTransaction.getCraccountid());
+					String updateCrAccount= null;
+					
+					if(accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==2 || accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==3 || accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==4) {
+						updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
+					}else {
+						updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
+					}
+					
+					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id;
+					
+					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
+				}
+
+				
+				
+			}
+			
+		}
+		
+		return false;
+	}
+
+
+	public boolean viewCancelledVouchers() {
+		
+		List<VoucherEntrytransactions> cancelledVoucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
+		String twoAccounts = null;
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
+		cancelledVoucherTransactions = new AccountDAO().getCancelledVoucherEntryTransactions(financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		for (VoucherEntrytransactions voucherEntry : cancelledVoucherTransactions) {
+			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		request.setAttribute("cancelledvouchertransactions", voucherMap);
+		
+		return true;
+		
+		}
+		return false;
+	}
+
+
+	public void getSSGroupNames() throws IOException {
+		
+		List<Accountssgroupmaster> accountSSGroupMaster = new ArrayList<Accountssgroupmaster>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			PrintWriter out = response.getWriter(); 
+			response.setContentType("text/xml");
+		    response.setHeader("Cache-Control", "no-cache");
+		        
+			if(!"New Group".equalsIgnoreCase(request.getParameter("subgroupname").toString())) {
+			int accountSubGroupMasterId = DataUtil.parseInt(request.getParameter("subgroupname"));
+			accountSSGroupMaster = new AccountDAO().getListAccountSSGroupMaster(accountSubGroupMasterId,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			request.setAttribute("accountssgroupmaster", accountSSGroupMaster);
+		        try {
+		        	
+		        	if(!accountSSGroupMaster.isEmpty()){
+		        		String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
+			        	for(int i =0; i<accountSSGroupMaster.size();i++){
+			        		buffer = buffer+"<option></option>";
+			        		buffer = buffer +  "<option value="+accountSSGroupMaster.get(i).getSsgroupmasterid()+">"+accountSSGroupMaster.get(i).getSsgroupname()+"</option>";
+			        	}
+			        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option></select>";
+			        	response.getWriter().println(buffer);
+		        	}else{
+		        		String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
+		        		buffer = buffer+"<option></option>";
+			        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option>";
+			        	buffer = buffer+"</select>";
+			        	response.getWriter().println(buffer);
+		        	}
+		        	
+		        } catch (Exception e) {
+		            out.write("<subgroup>0</subgroup>");
+		        } finally {
+		            out.flush();
+		            out.close();
+		        }
+		}else {
+			try {
+	        		String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
+	        		buffer = buffer+"<option></option>";
+		        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option>";
+		        	buffer = buffer+"</select>";
+		        	response.getWriter().println(buffer);
+	        	
+	        } catch (Exception e) {
+	            out.write("<subgroup>0</subgroup>");
+	        } finally {
+	            out.flush();
+	            out.close();
+	        }
+		}
+		}
+		
+		
+	}
+
+
+	public boolean searchJournalEntries() {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		String accountDetails = DataUtil.emptyString(request.getParameter("accountid"));
+		String[] accountIdName = accountDetails.split(":");
+		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
+		String fromDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("todate")));
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
+		String twoAccounts = null;
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+			
+			if(voucherEntry.getDraccountid() != accountId) {
+				twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+":Dr";
+			}else if(voucherEntry.getCraccountid() != accountId) {
+				twoAccounts = new AccountDAO().getAccountName(voucherEntry.getCraccountid())+":Cr";
+			}
+			//twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		request.setAttribute("ledgertransactions", voucherMap);
+		request.setAttribute("ledgername", accountIdName[1]);
+		
+		return true;
+		
+		}
+		return false;
+	}
+
+
+	public void getAllLedgers() {
+		
+	List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
+	accountDetails = new AccountDAO().getLedgerAccountdetails(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	request.setAttribute("ledgeraccountdetails", accountDetails);
+	
+	}
+
+
+	public boolean getIncomeStatement() {
+		
+		String fromDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("todate")));
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+			
+					int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+
+				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
+				accountsDetails = new AccountDAO().getAccountdetailsIncomeExpense(branchId);
+				
+				Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
+				
+				//Group 1
+				BigDecimal totalIncome = BigDecimal.ZERO;
+				Map<Accountdetails,BigDecimal> incomeLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+				
+				
+				//Group 2
+				BigDecimal totalExpense = BigDecimal.ZERO;
+				Map<Accountdetails,BigDecimal> expenseLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+				
+				for (Accountdetails accountDetails : accountsDetails) {
+					
+					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					
+					if(!voucherTransactions.isEmpty()) {
+					
+						BigDecimal totalAmount = getTotalBalance(accountDetails,voucherTransactions);
+					
+						int groupId = accountDetails.getAccountGroupMaster().getAccountgroupid();
+	
+						switch(groupId){
+						
+						case 4: 
+								totalIncome = totalIncome.add(totalAmount);
+								incomeLedgersAccount.put(accountDetails, totalAmount);
+								break;
+						case 5: 
+								totalExpense = totalExpense.add(totalAmount);
+								expenseLedgersAccount.put(accountDetails, totalAmount);
+								break;
+						default:
+								
+						}
+						
+						}
+					}
+		//group 1
+		request.setAttribute("income", totalIncome);
+		request.setAttribute("incomeledgersaccount", incomeLedgersAccount);
+		
+		//group 2
+		request.setAttribute("expenses", totalExpense);
+		request.setAttribute("expensesledgersaccount", expenseLedgersAccount);
+		
+		request.setAttribute("incometotallabel", "TOTAL");
+		request.setAttribute("expensetotallabel", "TOTAL");
+		request.setAttribute("incometotal", totalIncome);
+		request.setAttribute("expensetotal", totalExpense);
+		
+		request.setAttribute("fromdate", fromDate);
+		request.setAttribute("todate", toDate);
+		
+		
+		BigDecimal profit = totalIncome.subtract(totalExpense);
+		
+		if(profit.compareTo(BigDecimal.ZERO) > 0){
+			request.setAttribute("profitlabel", "Net Profit");
+			request.setAttribute("totalprofit", profit);
+		}else if(profit.compareTo(BigDecimal.ZERO) < 0){
+			request.setAttribute("losslabel", "Net Loss");
+			request.setAttribute("totalloss", profit.negate());
+		}
+		
+		
+	}
+		return true;
+	}
 }

@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -449,15 +450,40 @@ for(Cookie cookie : cookies){
 							cellpadding="1" cellspacing="1">
 							<td class="dataText" style="text-align: right"><c:out value="${accountdetailsbalance.accountDetails.accountname}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+							<c:if test="${(accountdetails.key.accountGroupMaster.accountgroupid == 1) || (accountdetails.key.accountGroupMaster.accountgroupid == 5)}">
 							
-							<c:if test="${(accountdetailsbalance.crdr == 'Dr')}">
-							<td class="dataText" style="text-align: right;"><c:out value="${accountdetailsbalance.currentbalance}" /></td>
-							<td class="dataText"></td>
+									<c:if test="${accountdetails.value >=1}">
+										<td class="dataText" style="text-align: right;">
+										<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${accountdetails.value}" />
+										<%-- <c:out value="${accountdetails.value}" /> --%>
+										</td>
+										<td class="dataText"></td>			
+									</c:if>
+									
+									<c:if test="${accountdetails.value < 1}">
+										<td class="dataText" ></td>
+										<td class="dataText" style="text-align: right;">
+										<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${accountdetails.value*-1}" />
+										<%-- <c:out value="${accountdetails.value}" /> --%>
+										</td>			
+									</c:if>
+							
 							</c:if>
 							
-							<c:if test="${(accountdetailsbalance.crdr == 'Cr')}">
-							<td class="dataText"></td>
-							<td class="dataText" style="text-align: right;"><c:out value="${accountdetailsbalance.currentbalance}" /></td>
+							<c:if test="${(accountdetails.key.accountGroupMaster.accountgroupid == 2) || (accountdetails.key.accountGroupMaster.accountgroupid == 3) || (accountdetails.key.accountGroupMaster.accountgroupid == 4)}">
+										
+									<c:if test="${accountdetails.value >= 1}">
+										<td class="dataText"></td>
+										<td class="dataText" style="text-align: right;"><c:out value="${accountdetails.value}" /></td>			
+									</c:if>
+
+									<c:if test="${accountdetails.value < 1}">
+										<td class="dataText" style="text-align: right;"><c:out value="${accountdetails.value*-1}" /></td>
+										<td class="dataText"></td>			
+									</c:if>
+										
+>>>>>>> 300c53f... Added Income statement, changes in trail balance
 							</c:if>
 							
 						</tr>

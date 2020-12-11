@@ -133,6 +133,17 @@ public class DataUtil {
        }
        return "";
        }
+   
+   public static String dateFromatConversion(String ddmmyyyy) {
+	   String date = null;
+	   
+	   if(ddmmyyyy!=null) {
+		   String[] dateToConvert = ddmmyyyy.split("-");
+		   date = dateToConvert[2]+"-"+dateToConvert[1]+"-"+dateToConvert[0];
+	   }
+	   
+	   return date;
+   }
             
     
 

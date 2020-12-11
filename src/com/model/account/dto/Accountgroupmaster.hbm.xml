@@ -11,6 +11,5 @@
         <property name="accountgroupname" type="string">
             <column name="accountgroupname" length="150" not-null="true" />
         </property>
-        
     </class>
 </hibernate-mapping>

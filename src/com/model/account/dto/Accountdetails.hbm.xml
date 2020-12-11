@@ -14,9 +14,15 @@
         <property name="accountname" type="string">
             <column name="accountname" length="100" not-null="true" />
         </property>
+         <property name="accountcode" type="string">
+            <column name="accountcode" length="100" not-null="true" />
+        </property>
           <property name="branchid" type="int">
             <column name="branchid" />
         </property>
+         <many-to-one name="accountSSGroupMaster" class="com.model.account.dto.Accountssgroupmaster"
+            column="ssgroupmasterid" lazy="false"
+            cascade="none" />
         <many-to-one name="accountSubGroupMaster" class="com.model.account.dto.Accountsubgroupmaster"
             column="accountsubgroupmasterid" lazy="false"
             cascade="none" />

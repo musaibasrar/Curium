@@ -1,15 +1,10 @@
 package com.model.account.dto;
 
-// default package
-// Generated 18 Feb, 2018 10:47:34 PM by Hibernate Tools 4.0.0
-
-import java.util.HashSet;
-import java.util.Set;
+import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -22,8 +17,11 @@ public class Accountdetails implements java.io.Serializable {
 
 	private Integer accountdetailsid;
 	private int accountsubgroupmasterid;
+	private int ssgroupmasterid;
 	private int accountgroupid;
 	private String accountname;
+	private String accountcode;
+	private Accountssgroupmaster accountSSGroupMaster;
 	private Accountsubgroupmaster accountSubGroupMaster;
 	private Accountgroupmaster accountGroupMaster;
 	private int branchid;
@@ -32,13 +30,16 @@ public class Accountdetails implements java.io.Serializable {
 	}
 
 	public Accountdetails(int accountsubgroupmasterid, String accountname, Accountsubgroupmaster accountSubGroupMaster,
-			int accountgroupid, Accountgroupmaster accountGroupMaster, int branchid) {
+			int accountgroupid, Accountgroupmaster accountGroupMaster, int branchid, String accountcode, int ssgroupmasterid, Accountssgroupmaster accountSSGroupMaster) {
 		this.accountsubgroupmasterid = accountsubgroupmasterid;
 		this.accountname = accountname;
 		this.accountSubGroupMaster = accountSubGroupMaster;
 		this.accountgroupid = accountgroupid;
 		this.accountGroupMaster = accountGroupMaster;
 		this.branchid = branchid;
+		this.accountcode = accountcode;
+		this.ssgroupmasterid = ssgroupmasterid;
+		this.accountSSGroupMaster = accountSSGroupMaster;
 	}
 
 	@Id
@@ -59,6 +60,15 @@ public class Accountdetails implements java.io.Serializable {
 
 	public void setAccountsubgroupmasterid(int accountsubgroupmasterid) {
 		this.accountsubgroupmasterid = accountsubgroupmasterid;
+	}
+	
+	@Column(name = "ssgroupmasterid", nullable = false)
+	public int getSsgroupmasterid() {
+		return ssgroupmasterid;
+	}
+
+	public void setSsgroupmasterid(int ssgroupmasterid) {
+		this.ssgroupmasterid = ssgroupmasterid;
 	}
 
 	@Column(name = "accountname", nullable = false, length = 100)
@@ -101,6 +111,22 @@ public class Accountdetails implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 		this.branchid = branchid;
+	}
+
+	public String getAccountcode() {
+		return accountcode;
+	}
+
+	public void setAccountcode(String accountcode) {
+		this.accountcode = accountcode;
+	}
+
+	public Accountssgroupmaster getAccountSSGroupMaster() {
+		return accountSSGroupMaster;
+	}
+
+	public void setAccountSSGroupMaster(Accountssgroupmaster accountSSGroupMaster) {
+		this.accountSSGroupMaster = accountSSGroupMaster;
 	}
 
 }

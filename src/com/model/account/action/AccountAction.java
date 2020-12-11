@@ -11,9 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import com.model.academicyear.service.YearService;
 import com.model.account.service.AccountService;
-import com.model.adminexpenses.service.AdminService;
-import com.model.feescategory.service.FeesService;
-import com.model.student.service.StudentService;
 import com.util.DataUtil;
 
 /**
@@ -67,28 +64,59 @@ public class AccountAction {
 			url = viewNextVoucher();
 		}else if ("trialBalance".equalsIgnoreCase(action)) {
 			url = trialBalance();
-		}else if ("cancelReceiptVoucher".equalsIgnoreCase(action)) {
-			url = cancelReceiptVoucher();
-		}else if ("cancelPaymentVoucher".equalsIgnoreCase(action)) {
-			url = cancelPaymentVoucher();
-		}else if ("deletePayHead".equalsIgnoreCase(action)) {
-			url = cancelPaymentVoucher();
+		}else if ("cancelVoucher".equalsIgnoreCase(action)) {
+			url = cancelVoucher();
+		}else if ("viewCancelledVouchers".equalsIgnoreCase(action)) {
+			url = viewCancelledVouchers();
+		}else if ("getSSGroupNames".equalsIgnoreCase(action)) {
+				getSSGroupName();
+		}else if ("generalLedgerReport".equalsIgnoreCase(action)) {
+			url = generalLedgerReport();
+		}else if ("searchLedgerEntries".equalsIgnoreCase(action)) {
+			url = searchLedgerEntries();
+		}else if ("incomeStatement".equalsIgnoreCase(action)) {
+			url = incomeStatement();
 		}
 		return url;
-	}
-
-	private String cancelPaymentVoucher() {
-		
-		if(new AccountService(request, response).cancelPaymentVoucher()){
-			return "Controller?process=AccountProcess&action=viewVoucherReceipt";
 		}
-			return ERRORPAGE;
-	
+
+	private String incomeStatement() {
+		new AccountService(request, response).getIncomeStatement();
+		return "incomestatement.jsp";
 	}
 
-	private String cancelReceiptVoucher() {
+	private String searchLedgerEntries() {
+		new AccountService(request, response).searchJournalEntries();
+		new AccountService(request, response).getAllLedgers();
+		return "generalledgerreport.jsp";
+	}
 
-		if(new AccountService(request, response).cancelReceiptVoucher()){
+	private String generalLedgerReport() {
+		new AccountService(request, response).getAllLedgers();
+		return "generalledgerreport.jsp";
+}
+
+	private void getSSGroupName() {
+		
+		try {
+			new AccountService(request, response).getSSGroupNames();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+}
+
+	private String viewCancelledVouchers() {
+		if(new AccountService(request, response).viewCancelledVouchers()) {
+			return "cancelledvoucher.jsp";
+		}
+		return ERRORPAGE;
+	}
+
+	private String cancelVoucher() {
+
+		if(new AccountService(request, response).cancelVoucher()){
 			return "Controller?process=AccountProcess&action=viewVoucherReceipt";
 		}
 			return ERRORPAGE;
@@ -109,25 +137,25 @@ public class AccountAction {
 		
 		if(nextVoucher.equalsIgnoreCase("Receipt")){
 			
-			if(new AccountService(request, response).viewVoucherReceipt()){
+			if(new AccountService(request, response).viewVouchers(1)){
 				return "receiptdetails.jsp";
 			}
 			
 		}else if(nextVoucher.equalsIgnoreCase("Payment")){
 			
-			if(new AccountService(request, response).viewVoucherPayment()){
+			if(new AccountService(request, response).viewVouchers(2)){
 				return "paymentdetails.jsp";
 			}
 			
 		}else if(nextVoucher.equalsIgnoreCase("Contra")){
 			
-			if(new AccountService(request, response).viewVoucherContra()){
+			if(new AccountService(request, response).viewVouchers(3)){
 				return "contradetails.jsp";
 			}
 			
 		}else if(nextVoucher.equalsIgnoreCase("Journal")){
 			
-			if(new AccountService(request, response).viewVoucherJournal()){
+			if(new AccountService(request, response).viewVouchers(4)){
 				return "journaldetails.jsp";
 			}
 		}
@@ -135,7 +163,7 @@ public class AccountAction {
 	}
 
 	private String viewVoucherReceipt() {
-		new AccountService(request, response).viewVoucherReceipt();
+		new AccountService(request, response).viewVouchers(1);
 			return "receiptdetails.jsp";
 	}
 
@@ -200,9 +228,9 @@ public class AccountAction {
 
 	private String saveAccount() {
 		
-		if(new AccountService(request, response).saveAccount()){
+		if(!"false".equalsIgnoreCase(new AccountService(request, response).saveAccount())){
 			return "Controller?process=AccountProcess&action=createAccount";
-		}
+		} 
 		return ERRORPAGE;
 		
 		
