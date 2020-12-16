@@ -16,6 +16,7 @@
 <title>Add Items</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
+
 <style type="text/css">
 
 .divCSS {
@@ -290,6 +291,84 @@
 	font-weight: bold;
 	height: 22px;
 }
+
+.alert-box {
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;  
+}
+
+.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.update {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.updatefailure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.delete {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.deletefailure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.buttonred {
+  background-color: red; /* Green */
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
 </style>
 
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
@@ -313,39 +392,60 @@
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchForFees() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StampFeesProcess&action=searchForFees";
-		form1.method = "POST";
-		form1.submit();
 
-	}
-
-	$(function() {
-
-		$("#search").button().click(function() {
-			searchForFees();
-		});
-		
-
-	});
 
 	$(function() {
 
 		$("#tabs").tabs();
 
-		$("#search").button().click(function() {
-			getTrialBalance();
+		$("#addItems").button().click(function() {
+			addItems();
 		});
 		$("#effect").hide();
+		
+		$("#deleteitems").button({
+            icons:{
+                primary: "ui-icon-trash"
+            }
+        }).click(function(){
+            deleteItems();
+            return false;
+
+        });
+        $("#updateitems").button({
+            icons:{
+                primary: "ui-icon-note"
+            }
+        }).click(function(){
+            updateItems();
+            return false;
+
+        });
+        
 	});
 	
 	
-	function getTrialBalance(){
+	function addItems(){
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AccountProcess&action=trialBalance";
-		form1.method = "POST";
-		form1.submit();
+		if(form1.checkValidity()) {
+			form1.action = "Controller?process=MessItemsProcess&action=addItems";
+			form1.method = "POST";
+			form1.submit();
+		}
+		
+	}
+	
+	function updateItems(){
+		var form1 = document.getElementById("form1");
+			form1.action = "Controller?process=MessItemsProcess&action=updateItems";
+			form1.method = "POST";
+			form1.submit();	
+	}
+	
+	function deleteItems(){
+			form1.action = "Controller?process=MessItemsProcess&action=deleteItems";
+			form1.method = "POST";
+			form1.submit();	
 	}
 	
 	$(function() {
@@ -366,14 +466,57 @@
 			runEffect();
 			return false;
 		});
+		
+	
 	});
+	
+	
+	function closediv(divid){
+		var x = document.getElementById("div"+divid);
+		  if (x.style.display === "none") {
+		    x.style.display = "block";
+		  } else {
+		    x.style.display = "none";
+		  }
+		
+	}
 
 </script>
 
 
-
-
-
+<script type="text/javascript">
+					
+					var itemsave='<c:out default="" value="${itemsave}"/>';
+		            var itemsupdate='<c:out default="" value="${itemsupdate}"/>';
+		            var itemsdelete='<c:out default="" value="${itemsdelete}"/>';
+		            
+		            if(itemsave == "true"){
+		            	 $(function(){
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 );
+		            	 });
+		            	 }else if(itemsave == "false"){
+		            	  $(function(){
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 );
+		            		 });
+		            	 }else if(itemsupdate == "true"){
+		                   	 $(function(){
+		                   		 $( "div.update" ).fadeIn( 800 ).delay( 2000 );
+		                   	 });
+		                   	 }else if(itemsupdate == "false"){
+		                   	  $(function(){
+		                   		 $( "div.updatefailure" ).fadeIn( 800 ).delay( 2000 );
+		                   		 });
+		                   	 }else if(itemsdelete == "true"){
+			                   	 $(function(){
+			                   		 $( "div.delete" ).fadeIn( 800 ).delay( 2000 );
+			                   	 });
+			                   	 }else if(itemsdelete == "false"){
+			                   	  $(function(){
+			                   		 $( "div.deletefailure" ).fadeIn( 800 ).delay( 2000 );
+			                   		 });
+			                   	 }
+            
+        </script>
 </head>
   <%
 //allow access only if session exists
@@ -392,7 +535,16 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1">
+	<form id="form1" method="post">
+	
+		<div class="alert-box success" id="div1">${itemname} has been added successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box failure" id="div2">Saving Failed, Unable to create new Item(s)!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
+		
+		<div class="alert-box update" id="div3">Item(s) has been updated successfully!!!&nbsp;&nbsp;&nbsp;<button  class="button"  id="3" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box updatefailure" id="div4">Update Failed, Unable to Item Book(s)!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="4" onclick="closedivupdate(this.id);">OK</button></div>
+		
+		<div class="alert-box delete" id="div5">Item(s) has been deleted successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="5" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box deletefailure" id="div6">Deletion Failed, Unable to delete Item(s)!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="6" onclick="closedivdelete(this.id);">OK</button></div>
 	
 	<div style="height: 28px">
 			<button id="add">Add Item</button>
@@ -413,21 +565,36 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td width="20%" class="alignRight">Item Name* &nbsp;</td>
-							<td width="28%"><label> <input name="admnno" required
-									type="text" class="myclass" id="admnno" size="30"
+							<td width="28%"><label> <input name="itemname" required
+									type="text" class="myclass" id="itemname" size="30"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
 
 							</label></td>
 							<td width="16%" class="alignRight">Unit of Measure &nbsp;</td>
 
-									<td width="28%"><label> <select name="nationality"
-									id="nationality" style="width: 100px;height: 20px;" onchange="dropdown()">
+									<td width="2%"><label> <select name="unitofmeasure"
+									id="unitofmeasure" style="width: 100px;height: 20px;" required>
 										<option selected></option>
 										<option>Kilogram</option>
 										<option>Litre</option>
 										<option>Piece</option>
 										<option>Box</option>
-								</select></td>
+										
+								</select></label></td>
+								
+								<td width="16%" class="alignRight">GL Account &nbsp;</td>
+
+									<td width="28%"><label> <select name="glaccount"
+									id="glaccount" style="width: 100px;height: 20px;" required>
+										<option selected></option>
+											<c:forEach items="${accountdetailslist}" var="accountdetails">
+												<option value="${accountdetails.accountdetailsid}">
+													<c:out value="${accountdetails.accountname}" />
+												</option>
+											</c:forEach>
+									</select>
+								
+								</label></td>
 						</tr>
 							
 							
@@ -438,7 +605,7 @@ for(Cookie cookie : cookies){
 					<table id="table2" width="100%" border="0" align="center">
 						<tr>
 							<td align="center">
-								<button id="search">Add</button>
+								<button id="addItems">Add</button>
 							</td>
 						</tr>
 					</table>
@@ -451,48 +618,47 @@ for(Cookie cookie : cookies){
                     <tr>
                         <td  class="headerTD">Items List</td>
                     </tr>
-
-                    
-
                 </table>
-                
-               <br><br>
-                
-			<table width="100%" border="0" style="border-color: #4b6a84;float: left;margin-bottom:50px;">
+			<table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 
-				<thead>
-					<tr>
-						
-						<th title="click to sort" class="headerText" style="font-weight: bold;">Items</th>
-						<th title="click to sort" class="headerText" style="font-weight: bold;">Unit of Measure</th>
-					</tr>
-				</thead>
+                    <thead>
+                        <tr>
+                            <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
+                            <th title="click to sort" class="headerText">Name</th>
+                            <th title="click to sort" class="headerText">Unit of Measure</th>
+                        </tr>
+                    </thead>
 
-				<tbody>
-					
-					<c:forEach items="${itemslist}" var="itemslist">
-
-						<tr class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
-							
-							<td class="dataText" style="text-align: right" width="50%"></td>
-						    <td class="dataText" style="text-align: right"></td>
-							
-						</tr>
-					</c:forEach>
-					
-					
-				</tbody>
-				<tfoot>
-				
-					<tr>
-						<td class="footerTD" colspan="2"><input 
-							type="hidden"  id="delete" />
-							</td>
-							
-
-					</tr>
-				</tfoot>
-			</table>
+                    <tbody>
+                        <c:forEach items="${messitemslist}" var="messitems" varStatus="status">
+											
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${messitems.id}"/>" class = "chcktbl"  name="messitemsids"  value="<c:out value="${messitems.id}:${status.index}"/>"/></td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messitems.name}"/>" id="updateitemname" name="updateitemname"><label style="display: none;"><c:out value="${messitems.name}"/></label>
+                                </td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                 <select name="updateunitofmeasure"
+									id="updateunitofmeasure" style="width: 100px;height: 20px;background-color: #E3EFFF;border-style: none;color: #4B6A84;" >
+										<option selected>${messitems.unitofmeasure}</option>
+										<option>Kilogram</option>
+										<option>Litre</option>
+										<option>Piece</option>
+										<option>Box</option>
+										
+								</select>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                    <tfoot><tr>
+                            <td  class="footerTD" colspan="2" >
+                            		<button id="updateitems">Update</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                           			<button id="deleteitems">Delete</button>
+                           </td>
+                        </tr>
+                    </tfoot>
+                </table>
 			
 
 		</div>
