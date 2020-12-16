@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -653,7 +654,10 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${resultlist.student.examlevel}"/></td>
                                 <td class="dataText"><c:out value="${resultlist.student.qualification}"/></td>
                                 <td class="dataText"><c:out value="${resultlist.student.centercode}"/></td>
-                                <td class="dataText"><c:out value="${resultlist.percentage}" /></td>
+                                <td class="dataText">
+                                	<fmt:formatNumber type = "number" 
+         								pattern = "0.#" value = "${resultlist.percentage}" />%
+                                </td>
                                 <td class="dataText"><c:out value="${resultlist.resultclass}" /></td>
                                  <input type="hidden" id="classstudying" name="classstudying" value="${resultlist.student.examlevel}"/>
 

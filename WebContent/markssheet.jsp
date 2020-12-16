@@ -687,7 +687,10 @@ for(Cookie cookie : cookies){
 							<td class="dataTextInActive"><a class="dataTextInActive"><c:out	value="${markssheetlist.parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${markssheetlist.parents.student.name}" /></td>
 							<td class="dataText"><c:out value="${markssheetlist.parents.student.languageopted}" /></td>
-							<td class="dataText"><c:out value="${markssheetlist.percentage}" /></td>
+							<td class="dataText">
+									<fmt:formatNumber type = "number" 
+         								pattern = "0.#" value = "${markssheetlist.percentage}" />%
+							</td>
 							<td class="dataText"><c:out value="${markssheetlist.resultclass}" /></td>
 							<td class="dataText"><c:out value="${markssheetlist.rank}"/></td>								
 						</tr>

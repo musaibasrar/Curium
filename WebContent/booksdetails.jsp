@@ -403,10 +403,20 @@
 			runEffect();
 			return false;
 		});
+		
+		 $("#printbooks").button({
+				icons : {
+					primary : "ui-icon-print"
+				}
+			}).click(function() {
+				printBooks();
+			});
+			
 	});
 	
 </script>
 <script type="text/javascript">
+
 	function addBooks() {
 		var form1 = document.getElementById("form1");
 		form1.action = "Controller?process=OrderProcess&action=addBooks";
@@ -429,6 +439,13 @@
 		form1.method = "POST";
 		form1.submit();
 
+	}
+	
+	function printBooks() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=OrderProcess&action=printbooks";
+		form1.method = "POST";
+		form1.submit();
 	}
 	
 	$(function() {
@@ -702,7 +719,10 @@ for(Cookie cookie : cookies){
                     <tfoot><tr>
                      		<td  class="footerTD" colspan="2" ><button id="update">Update</button> 
                     		&nbsp;&nbsp;&nbsp;&nbsp;
-                           <button id="deletebooks">Delete</button> </td>
+                           <button id="deletebooks">Delete</button>
+                           &nbsp;&nbsp;&nbsp;&nbsp;
+                           <button id="printbooks">Print</button> 
+                           </td>
                     
                         </tr></tfoot>
                 </table>

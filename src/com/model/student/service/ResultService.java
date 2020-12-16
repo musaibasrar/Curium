@@ -220,7 +220,9 @@ public class ResultService {
 	                    		
 	                    if(totalMarks>0) {
 	                    	percentage = (marksObtained*100)/totalMarks;
-	                        res = getResultClass(percentage);
+	                    	percentage = Math.round(percentage);
+	                    	int percent = (int) percentage;
+	                        res = getResultClass(percent);
 	                    }else {
 	                    	res = "No Result";
 	                    }
@@ -499,9 +501,9 @@ public class ResultService {
                      }
                      
                      double percentage = (marksObtained*100)/totalMarks;
-                     String numberAsString = String.format ("%.2f", percentage);
-                     percentage = Double.valueOf(numberAsString);
-                     String res = getResultClass(percentage);
+                     percentage = Math.round(percentage);
+                     int percent = (int) percentage;
+                     String res = getResultClass(percent);
                      
                      if(finalResult==null) {
                          finalResult = res;
@@ -527,6 +529,12 @@ public class ResultService {
                      
                      
                      if("DISTINCTION".equalsIgnoreCase(result.getResultclass())) {
+                    	 rankListReportList.add(result);
+                     }if("FIRST CLASS".equalsIgnoreCase(result.getResultclass())) {
+                    	 rankListReportList.add(result);
+                     }if("SECOND CLASS".equalsIgnoreCase(result.getResultclass())) {
+                    	 rankListReportList.add(result);
+                     }if("PASS".equalsIgnoreCase(result.getResultclass())) {
                     	 rankListReportList.add(result);
                      }
                      
@@ -775,8 +783,8 @@ public class ResultService {
                  MarksSheet result = new MarksSheet();
                  List<Integer> marksList = new ArrayList<Integer>();
                  List<String> subjectList = new ArrayList<String>();
-                 int marksObtained = 0;
-                 int totalMarks = 0;
+                 double marksObtained = 0;
+                 double totalMarks = 0;
                  String finalResult = null;
                  
                      for (Subexamlevel subexamlevel : subList) {
@@ -805,9 +813,10 @@ public class ResultService {
                      }
                      
                      double percentage = (marksObtained*100)/totalMarks;
-                     String numberAsString = String.format ("%.2f", percentage);
-                     percentage = Double.valueOf(numberAsString);
-                     String res = getResultClass(percentage);
+                     percentage = Math.round(percentage);
+                     int percent = (int) percentage;
+                     String res = getResultClass(percent);
+                     
                      
                      if(finalResult==null) {
                          finalResult = res;
@@ -843,9 +852,9 @@ public class ResultService {
                      result.setMarksList(marksList);
                      result.setPercentage(percentage);
                      result.setResultclass(finalResult);
-                     result.setTotalMarksObtained(marksObtained);
+                     result.setTotalMarksObtained((int)marksObtained);
                      result.setReferenceBooksList(referenceBooksList);
-                     result.setTotalMarks(totalMarks);
+                     result.setTotalMarks((int)totalMarks);
                      
                      if(!"FAIL".equalsIgnoreCase(result.getResultclass()) && !"ABSENT".equalsIgnoreCase(result.getResultclass())) {
                          resultList.add(result);
@@ -955,8 +964,8 @@ public class ResultService {
                  Result result = new Result();
                  List<Integer> marksList = new ArrayList<Integer>();
                  List<String> subjectList = new ArrayList<String>();
-                 int marksObtained = 0;
-                 int totalMarks = 0;
+                 double marksObtained = 0;
+                 double totalMarks = 0;
                  String finalResult = null;
                  
                      for (Subexamlevel subexamlevel : subList) {
@@ -979,7 +988,9 @@ public class ResultService {
                      }
                      
                      double percentage = (marksObtained*100)/totalMarks;
-                     String res = getResultClass(percentage);
+                     percentage = Math.round(percentage);
+                     int percent = (int) percentage;
+                     String res = getResultClass(percent);
                      
                      if(finalResult==null) {
                          finalResult = res;
@@ -1090,7 +1101,9 @@ public class ResultService {
 	       		                    		
 	       		                    if(totalMarks>0) {
 	       		                    	percentage = (marksObtained*100)/totalMarks;
-	       		                        res = getResultClass(percentage);
+	       		                    	percentage = Math.round(percentage);
+	       		                    	int percent = (int) percentage;
+	       		                        res = getResultClass(percent);
 	       		                    }else {
 	       		                    	res = "No Result";
 	       		                    }

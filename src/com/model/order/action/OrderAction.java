@@ -68,11 +68,17 @@ public class OrderAction {
                     url = printOrder();
                 }else if ("postprintOrder".equalsIgnoreCase(action)) {
                     url = postprintOrder();
+                }else if ("printbooks".equalsIgnoreCase(action)) {
+                    url = printBooks();
                 }
 		return url;
 	}
 
 		
+	private String printBooks() {
+		return "printbooks.jsp";
+	}
+
 	private String postprintOrder() {
         return "orderdetails.jsp";
     }

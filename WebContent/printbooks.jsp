@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Print Rank List Report
-    Created on : Aug 09 2018, 01:14 PM
+    Document   : Print Books
+    Created on : Dec 11 2020, 04:44 PM
     Author     : Musaib
 --%>
 
@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Rank List Report</title>
+<title>Print Books</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -62,7 +62,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 28px;
+	font-size: 22px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -71,7 +71,7 @@
 		font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 30px;
+	font-size: 25px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -167,14 +167,16 @@
         
         @page {
               
-           	margin-left:  1cm;
+           	 margin-left:  1cm;
              margin-right: 1cm;
              margin-bottom: 1cm;
              margin-top: 1cm;
              size: auto;
+             
         }
 
         @media screen {
+        
             .fontsize { font-size: 15px;
                         font-weight: bold;
                         font-family: 'Times New Roman'
@@ -195,17 +197,12 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="images/bielogo.png" width="100" height="150"/>
+				<img src="images/bielogo.png" width="50" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				BOARD OF ISLAMIC EDUCATION KARNATAKA<br><br>
-				<label class="addressLine">Rank List<br><br>
+				<label class="addressLine">Books List<br><br>
 				 </label>
-				  <c:out value="${resultcentercode}"/>
-				 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				 <c:out value="${resultexamlevel}"/>
 				</td>
 			</tr>
 			
@@ -221,31 +218,6 @@
             </TABLE>
 
 		<table>
-		<tr>
-			<td></td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr>
-						<td class="dataTextBoldLeft" style="width: 50%"><c:out value="${resultcentername}" />
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<c:out value="${resultlanguage}" /></td>
-			</tr>
-			
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-						<td class="dataTextBoldLeft" style="width: 50%"><c:out value="${resultexamlevel}" />
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<c:out value="${resultqualification}" /></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
 		</table>
 		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -260,33 +232,31 @@
             
             <thead>
 					<tr>
-						<th title="click to sort" class="datath">Admission No.</th>
-						<th title="click to sort" class="datath">Student Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="datath">%&nbsp;</th>
-						<th title="click to sort" class="datath">Result&nbsp;</th>
-						<th title="click to sort" class="datath">Rank</th>
+						<th title="click to sort" class="datath">Title</th>
+						<th title="click to sort" class="datath">Language</th>
+						<th title="click to sort" class="datath">Author</th>
+						<th title="click to sort" class="datath">Quantity</th>
+						<th title="click to sort" class="datath">Price/Book</th>
+						<th title="click to sort" class="datath">Total Price</th>
 					</tr>
 				</thead>
 			<tbody>
 			
-			<c:forEach items="${ranklistreport}" var="resultlist" varStatus="status">
+			<c:forEach items="${bookslist}" var="resultlist" varStatus="status">
 
 						<tr>
-							<td class="datatd"><a class="dataTextInActive"><c:out	value="${resultlist.student.admissionnumber}" /></a></td>
-							<td class="datatd"><c:out value="${resultlist.student.name}" /></td>
-							<td class="datatd">
-								<fmt:formatNumber type = "number" 
-         								pattern = "0.#" value = "${resultlist.percentage}" />%
-							</td>
-							<td class="datatd"><c:out value="${resultlist.resultclass}" /></td>
-							<td class="datatd"><c:out value="${resultlist.rank}" /></td>							
+							<td class="datatd"><a class="dataTextInActive"><c:out	value="${resultlist.title}" /></a></td>
+							<td class="datatd"><c:out value="${resultlist.language}" /></td>
+							<td class="datatd"><c:out value="${resultlist.author}" /></td>
+							<td class="datatd"><c:out value="${resultlist.quantity}" /></td>
+							<td class="datatd"><c:out value="${resultlist.price}" /></td>
+							<td class="datatd"><c:out value="${resultlist.quantity * resultlist.price}" /></td>							
 						</tr>
 					</c:forEach>
 			</tbody>
 				</table>
 			<br><br>
-			<a style="font-weight: bold;color: black;font-size: 20px;">&nbsp;&nbsp;Total: ${totalstudentresult}&nbsp;&nbsp;Distinction: ${distinctioncount}&nbsp;&nbsp;First Class: ${firstcount}
-						  &nbsp;&nbsp;Second Class: ${secondcount}&nbsp;&nbsp;Pass: ${passcount}&nbsp;&nbsp;Fail: ${failcount}</a>
+			
 	</form>
 </body>
 </html>

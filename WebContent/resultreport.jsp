@@ -681,7 +681,10 @@ for(Cookie cookie : cookies){
 							<c:forEach items="${resultlist.marksList}" var="markslist">
 							<td class="dataText"><c:out value="${markslist}" /></td>
 							</c:forEach>
-							<td class="dataText"><c:out value="${resultlist.percentage}" /></td>
+							<td class="dataText">
+								<fmt:formatNumber type = "number" 
+         								pattern = "0.#" value = "${resultlist.percentage}" />%
+							</td>
 							<td class="dataText"><c:out value="${resultlist.resultclass}" /></td>
 							
 						</tr>

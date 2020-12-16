@@ -291,7 +291,10 @@
 								<td class="datatd"><c:out value="${markslist}" /></td>
 							</c:if>
 							</c:forEach>
-							<td class="datatd"><c:out value="${resultlist.percentage}" /></td>
+							<td class="datatd">
+								<fmt:formatNumber type = "number" 
+         								pattern = "0.#" value = "${resultlist.percentage}" />%
+								</td>
 							<td class="datatd"><c:out value="${resultlist.resultclass}" /></td>
 						</tr>
 					</c:forEach>
