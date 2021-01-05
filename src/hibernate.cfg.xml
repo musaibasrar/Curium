@@ -99,5 +99,11 @@
 		<mapping resource="com/model/std/dto/Classhierarchy.hbm.xml"></mapping>
 		<mapping resource="com/model/account/dto/Voucherentrytransactions.hbm.xml"></mapping>
 		<mapping resource="com/model/subjectdetails/dto/Subjectmaster.hbm.xml"></mapping>
+		<mapping resource="com/model/mess/item/dto/MessItems.hbm.xml"></mapping>
+		<mapping resource="com/model/mess/supplier/dto/MessSuppliers.hbm.xml"></mapping>
+		<mapping resource="com/model/mess/stockentry/dto/MessStockEntry.hbm.xml"></mapping>
+		<mapping resource="com/model/mess/stockentry/dto/MessInvoiceDetails.hbm.xml"></mapping>
+		<mapping resource="com/model/mess/stockentry/dto/MessStockAvailability.hbm.xml"></mapping>
+		<mapping resource="com/model/mess/stockmove/dto/MessStockMove.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>
