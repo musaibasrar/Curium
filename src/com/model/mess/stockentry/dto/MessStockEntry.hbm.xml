@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11 Feb, 2015 9:12:10 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.model.mess.stockentry.dto.MessStockEntry" table="mess_stockentry" >
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <!-- <generator class="identity" /> -->
+            <generator class="native" />
+        </id>
+        <property name="externalid" type="string">
+            <column name="externalid" />
+        </property>
+        <property name="batchno" type="string">
+            <column name="batchno" />
+        </property>
+        <property name="quantity" type="java.lang.Float">
+            <column name="quantity" />
+        </property>
+        <property name="itemunitprice" type="java.lang.Float">
+            <column name="itemunitprice" />
+        </property>
+        <property name="branchid" type="java.lang.Integer">
+            <column name="branchid" />
+        </property>
+        <property name="itemid" type="java.lang.Integer">
+            <column name="itemid" />
+        </property>
+         <property name="availablequantity" type="java.lang.Float">
+            <column name="availablequantity" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" />
+        </property>
+            
+        	<many-to-one name="messinvoicedetails" class="com.model.mess.stockentry.dto.MessInvoiceDetails"
+            column="invoicedetailsid" unique="true" not-null="true" lazy="false"
+            cascade="all" />
+                    
+    </class>
+</hibernate-mapping>

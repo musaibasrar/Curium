@@ -5,6 +5,7 @@
 package com.util;
 
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -237,6 +238,12 @@ public class DateUtil {
 
     }
 
+    public static String todaysDateydm() {
+    	Format f = new SimpleDateFormat("yyyyMMdd");
+	    String strDate = f.format(new Date());
+        return strDate;
+    }
+    
     /**
      *
      * @return

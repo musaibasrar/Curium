@@ -1,6 +1,6 @@
 <%--
-    Document   : Add Supplier
-    Created on : Nov 23, 2020, 06:48:28 PM
+    Document   : Add Suppliers
+    Created on : Nov 23, 2020, 10:26:28 AM
     Author     : Musaib
 --%>
 
@@ -13,9 +13,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Add Supplier</title>
+<title>Add Suppliers</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
+
 <style type="text/css">
 
 .divCSS {
@@ -290,6 +291,114 @@
 	font-weight: bold;
 	height: 22px;
 }
+
+.alert-box {
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;  
+}
+
+.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.update {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.updatefailure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.delete {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.deletefailure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.buttonred {
+  background-color: red; /* Green */
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+
+.dropdownlist{
+	width: 220px;
+	height:27px;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.textfieldvalues{
+
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #5d7e9b;
+	border-right-color: #5d7e9b;
+	border-bottom-color: #5d7e9b;
+	border-left-color: #5d7e9b;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	width: 220px;
+	height: 25px;
+	border-radius: 5px;
+	background-color: white;
+	 
+}
+
+
 </style>
 
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
@@ -300,52 +409,81 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
-			"sScrollY" : "380px",
-			"bPaginate" : false,
-			"bLengthChange" : false,
-			"bFilter" : true,
-			"bSort" : true,
-			"bInfo" : false,
-			"bAutoWidth" : false
-		});
+            "sScrollY": "380px",
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": true,
+            "bStateSave": false,
+            "bProcessing": false,
+            "bServerSide": false,
+            "bAutoWidth": false,
+            "iDisplayLength": 20000,
+            "aoColumnDefs":[
+                { 'bSortable': false, 'aTargets': [ 0 ] }
+            ]
+            
+        });
 	});
 </script>
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchForFees() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StampFeesProcess&action=searchForFees";
-		form1.method = "POST";
-		form1.submit();
 
-	}
-
-	$(function() {
-
-		$("#search").button().click(function() {
-			searchForFees();
-		});
-		
-
-	});
 
 	$(function() {
 
 		$("#tabs").tabs();
 
-		$("#search").button().click(function() {
-			getTrialBalance();
+		$("#addSuppliers").button().click(function() {
+			addSuppliers();
 		});
 		$("#effect").hide();
+		
+		$("#deletesuppliers").button({
+            icons:{
+                primary: "ui-icon-trash"
+            }
+        }).click(function(){
+            deleteSuppliers();
+            return false;
+
+        });
+        $("#updatesuppliers").button({
+            icons:{
+                primary: "ui-icon-note"
+            }
+        }).click(function(){
+            updateSuppliers();
+            return false;
+
+        });
+        
 	});
 	
 	
-	function getTrialBalance(){
+	function addSuppliers(){
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AccountProcess&action=trialBalance";
-		form1.method = "POST";
-		form1.submit();
+		if(form1.checkValidity()) {
+			form1.action = "Controller?process=MessSuppliersProcess&action=addSuppliers";
+			form1.method = "POST";
+			form1.submit();
+		}
+		
+	}
+	
+	function updateSuppliers(){
+		var form1 = document.getElementById("form1");
+			form1.action = "Controller?process=MessSuppliersProcess&action=updateSuppliers";
+			form1.method = "POST";
+			form1.submit();	
+	}
+	
+	function deleteSuppliers(){
+			form1.action = "Controller?process=MessSuppliersProcess&action=deleteSuppliers";
+			form1.method = "POST";
+			form1.submit();	
 	}
 	
 	$(function() {
@@ -366,14 +504,57 @@
 			runEffect();
 			return false;
 		});
+		
+	
 	});
+	
+	
+	function closediv(divid){
+		var x = document.getElementById("div"+divid);
+		  if (x.style.display === "none") {
+		    x.style.display = "block";
+		  } else {
+		    x.style.display = "none";
+		  }
+		
+	}
 
 </script>
 
 
-
-
-
+<script type="text/javascript">
+					
+					var suppliersave='<c:out default="" value="${suppliersave}"/>';
+		            var suppliersupdate='<c:out default="" value="${suppliersupdate}"/>';
+		            var suppliersdelete='<c:out default="" value="${suppliersdelete}"/>';
+		            
+		            if(suppliersave == "true"){
+		            	 $(function(){
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 );
+		            	 });
+		            	 }else if(suppliersave == "false"){
+		            	  $(function(){
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 );
+		            		 });
+		            	 }else if(suppliersupdate == "true"){
+		                   	 $(function(){
+		                   		 $( "div.update" ).fadeIn( 800 ).delay( 2000 );
+		                   	 });
+		                   	 }else if(suppliersupdate == "false"){
+		                   	  $(function(){
+		                   		 $( "div.updatefailure" ).fadeIn( 800 ).delay( 2000 );
+		                   		 });
+		                   	 }else if(suppliersdelete == "true"){
+			                   	 $(function(){
+			                   		 $( "div.delete" ).fadeIn( 800 ).delay( 2000 );
+			                   	 });
+			                   	 }else if(suppliersdelete == "false"){
+			                   	  $(function(){
+			                   		 $( "div.deletefailure" ).fadeIn( 800 ).delay( 2000 );
+			                   		 });
+			                   	 }
+            
+        </script>
 </head>
   <%
 //allow access only if session exists
@@ -392,7 +573,16 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1">
+	<form id="form1" method="post">
+	
+		<div class="alert-box success" id="div1">${suppliername} has been added successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box failure" id="div2">Saving Failed, Unable to create new Supplier(s)!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
+		
+		<div class="alert-box update" id="div3">Supplier(s) has been updated successfully!!!&nbsp;&nbsp;&nbsp;<button  class="button"  id="3" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box updatefailure" id="div4">Update Failed, Unable to Update Supplier(s)!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="4" onclick="closediv(this.id);">OK</button></div>
+		
+		<div class="alert-box delete" id="div5">Supplier(s) has been deleted successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="5" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box deletefailure" id="div6">Deletion Failed, Unable to delete Supplier(s)!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="6" onclick="closediv(this.id);">OK</button></div>
 	
 	<div style="height: 28px">
 			<button id="add">Add Supplier</button>
@@ -413,15 +603,13 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td width="20%" class="alignRight">Name* &nbsp;</td>
-							<td width="28%"><label> <input name="admnno" required
-									type="text" class="myclass" id="admnno" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
+							<td width="28%"><label> <input name="suppliername" required
+									type="text" class="textfieldvalues" id="suppliername" style="font-size: 14px;">
 
 							</label></td>
 							<td width="20%" class="alignRight">Contact Number &nbsp;</td>
-							<td width="28%"><label> <input name="admnno" required
-									type="text" class="myclass" id="admnno" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
+							<td width="28%"><label> <input name="contactnumber" 
+									type="text" class="textfieldvalues" id="contactnumber" style="font-size: 14px;">
 
 							</label></td>
 						</tr>
@@ -432,33 +620,35 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 							</tr>
 							<tr>
-								<td width="20%" class="alignRight">Account No &nbsp;</td>
-								<td width="28%"><label> <input name="admnno" required
-										type="text" class="myclass" id="admnno" size="30"
-										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
-	
-								</label></td>
-								<td width="20%" class="alignRight">IFSC Code &nbsp;</td>
-								<td width="28%"><label> <input name="admnno" required
-										type="text" class="myclass" id="admnno" size="30"
-										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
-	
-								</label></td>
-						</tr>
-							<tr>
-							<td><br /></td>
-							</tr>
-							<tr>
-							<td><br /></td>
-							</tr>
-													<tr>
+							<td width="20%" class="alignRight">Pay To &nbsp;</td>
+							<td width="28%"><label> <input name="payto" 
+									type="text" class="textfieldvalues" id="payto" style="font-size: 14px;">
+
+							</label></td>
 							<td width="20%" class="alignRight">Address &nbsp;</td>
-							<td width="28%"><label> <input name="admnno" required
-									type="text" class="myclass" id="admnno" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
+							<td width="28%"><label> <input name="address" 
+									type="text" class="textfieldvalues" id="address" style="font-size: 14px;">
 
 							</label></td>
 							
+						</tr>
+							<tr>
+							<td><br /></td>
+							</tr>
+							<tr>
+							<td><br /></td>
+							</tr>
+							<tr>
+								<td width="20%" class="alignRight">Bank Acc/no&nbsp;</td>
+								<td width="28%"><label> <input name="bankaccountno" 
+										type="text" class="textfieldvalues" id="bankaccountno" style="font-size: 14px;">
+	
+								</label></td>
+								<td width="20%" class="alignRight">IFSC Code &nbsp;</td>
+								<td width="28%"><label> <input name="ifsccode" 
+										type="text" class="textfieldvalues" id="ifsccode" style="font-size: 14px;">
+	
+								</label></td>
 						</tr>
 							<tr>
 							<td><br /></td>
@@ -470,7 +660,7 @@ for(Cookie cookie : cookies){
 					<table id="table2" width="100%" border="0" align="center">
 						<tr>
 							<td align="center">
-								<button id="search">Add</button>
+								<button id="addSuppliers">Add</button>
 							</td>
 						</tr>
 					</table>
@@ -483,51 +673,57 @@ for(Cookie cookie : cookies){
                     <tr>
                         <td  class="headerTD">Suppliers List</td>
                     </tr>
-
-                    
-
                 </table>
-                
-               <br><br>
-                
-			<table width="100%" border="0" style="border-color: #4b6a84;float: left;margin-bottom:50px;">
+			<table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 
-				<thead>
-					<tr>
-						
-						<th title="click to sort" class="headerText" style="font-weight: bold;">Name</th>
-						<th title="click to sort" class="headerText" style="font-weight: bold;">Contact Number</th>
-						<th title="click to sort" class="headerText" style="font-weight: bold;">Account No</th>
-						<th title="click to sort" class="headerText" style="font-weight: bold;">IFSC Code</th>
-						<th title="click to sort" class="headerText" style="font-weight: bold;">Address</th>
-					</tr>
-				</thead>
+                    <thead>
+                        <tr>
+                            <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
+                            <th title="click to sort" class="headerText">Name</th>
+                            <th title="click to sort" class="headerText">Contact Number</th>
+                            <th title="click to sort" class="headerText">Pay To</th>
+                            <th title="click to sort" class="headerText">Bank Acc/no</th>
+                            <th title="click to sort" class="headerText">Ifsc Code</th>
+                            <th title="click to sort" class="headerText">Address</th>
+                        </tr>
+                    </thead>
 
-				<tbody>
-					
-					<c:forEach items="${itemslist}" var="itemslist">
-
-						<tr class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
-							
-							<td class="dataText" style="text-align: right" width="50%"></td>
-						    <td class="dataText" style="text-align: right"></td>
-							
-						</tr>
-					</c:forEach>
-					
-					
-				</tbody>
-				<tfoot>
-				
-					<tr>
-						<td class="footerTD" colspan="2"><input 
-							type="hidden"  id="delete" />
-							</td>
-							
-
-					</tr>
-				</tfoot>
-			</table>
+                    <tbody>
+                        <c:forEach items="${messsupplierslist}" var="messsuppliers" varStatus="status">
+											
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${messsuppliers.id}"/>" class = "chcktbl"  name="messsuppliersids"  value="<c:out value="${messsuppliers.id}"/>"/>
+                                <input type="hidden" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messsuppliers.linkedledgerid}"/>" id="linkedledgerid" name="linkedledgerid_<c:out value="${messsuppliers.id}"/>">
+                                </td>
+                                <td class="dataText" style="text-transform:uppercase" >
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messsuppliers.name}"/>" id="updatesuppliersname" name="updatesuppliersname_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.name}"/></label>
+                                </td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messsuppliers.contactnumber}"/>" id="updatesupplierscontactnumber" name="updatesupplierscontactnumber_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.contactnumber}"/></label>
+                                </td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messsuppliers.payto}"/>" id="updatepayto" name="updatepayto_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.payto}"/></label>
+                                </td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messsuppliers.bankaccountno}"/>" id="updatesuppliersbankaccountno" name="updatesuppliersbankaccountno_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.bankaccountno}"/></label>
+                                </td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messsuppliers.ifsccode}"/>" id="updatesuppliersifsccode" name="updatesuppliersifsccode_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.ifsccode}"/></label>
+                                </td>
+								<td class="dataText" style="text-transform:uppercase">
+                                <textarea cols="20" rows="4" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messsuppliers.address}"/>" id="updatesuppliersaddress" name="updatesuppliersaddress_<c:out value="${messsuppliers.id}"/>"><c:out value="${messsuppliers.address}"/></textarea>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                    <tfoot><tr>
+                            <td  class="footerTD" colspan="2" >
+                            		<button id="updatesuppliers">Update</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                           			<button id="deletesuppliers">Delete</button>
+                           </td>
+                        </tr>
+                    </tfoot>
+                </table>
 			
 
 		</div>

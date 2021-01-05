@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.mess.item.dto.MessItems;
 import com.model.mess.item.service.MessItemsService;
+import com.model.mess.supplier.dao.MessSuppliersDAO;
+import com.model.mess.supplier.service.MessSuppliersService;
 
 /**
  * @author Musaib_2
@@ -29,9 +32,7 @@ public class MessItemsAction {
 
         public String execute(String action) {
                 // TODO Auto-generated method stub
-                if (action.equalsIgnoreCase("issueItems")) {
-                        url = issueItems();
-                }else if (action.equalsIgnoreCase("purchaseItems")) {
+                if (action.equalsIgnoreCase("purchaseItems")) {
                         url = purchaseItems();
                 }else if (action.equalsIgnoreCase("addItems")) {
                         url = addItems();
@@ -39,17 +40,36 @@ public class MessItemsAction {
                     	url = updateItems();
                 }else if (action.equalsIgnoreCase("deleteItems")) {
                 		url = deleteItems();
-                }else if (action.equalsIgnoreCase("addSuppliers")) {
-                        url = addSuppliers();
                 }else if (action.equalsIgnoreCase("viewItems")) {
                     url = viewItems();
-                }                
+                }else if (action.equalsIgnoreCase("savePurchase")) {
+                    url = savePurchase();
+                }else if (action.equalsIgnoreCase("cancelPurchase")) {
+                    url = cancelPurchase();
+                }               
                 return url;
         }
         
 
 
-        private String deleteItems() {
+		private String cancelPurchase() {
+			
+			new MessItemsService(request, response).cancelPurchase();
+			new MessSuppliersService(request, response).viewSuppliersDetails();
+        	new MessItemsService(request, response).viewItemDetails();
+			new MessItemsService(request, response).getInvoiceDetails();
+        	return "purchase.jsp";
+		}
+
+		private String savePurchase() {
+			new MessItemsService(request, response).savePurchase();
+			new MessSuppliersService(request, response).viewSuppliersDetails();
+        	new MessItemsService(request, response).viewItemDetails();
+			new MessItemsService(request, response).getInvoiceDetails();
+        	return "purchase.jsp";
+		}
+
+		private String deleteItems() {
         	new MessItemsService(request, response).deleteMultipleItems();
             return viewItems();
 		}
@@ -69,12 +89,10 @@ public class MessItemsAction {
         		 return viewItems();
         }
 
-        private String issueItems() {
-        	return "issuestock.jsp";
-        }
-
-
         private String purchaseItems() {
+        	new MessSuppliersService(request, response).viewSuppliersDetails();
+        	new MessItemsService(request, response).viewItemDetails();
+        	new MessItemsService(request, response).getInvoiceDetails();
                 return "purchase.jsp";
         }
         

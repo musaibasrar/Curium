@@ -16,6 +16,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Purchase Entry</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
@@ -66,32 +67,24 @@
 	width: auto;
 }
 
-.textField {
-	border-top-style: solid;
-	border-right-style: solid;
-	border-bottom-style: solid;
-	border-left-style: solid;
-	border-top-color: #5d7e9b;
-	border-right-color: #5d7e9b;
-	border-bottom-color: #5d7e9b;
-	border-left-color: #5d7e9b;
-	border-top-width: 1px;
-	border-right-width: 1px;
-	border-bottom-width: 1px;
-	border-left-width: 1px;
-	width: auto;
-	height: auto;
-	color: black;
-	text-transform: capitalize;
-}
-
 .alignRight {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 14px;
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
-	text-align: right;
+	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+.alignRightInvoice {
+	font-family: Tahoma;
+	font-size: 14px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #eb6000;
+	text-align: left;
 	vertical-align: middle;
 	font-weight: bold;
 }
@@ -203,15 +196,13 @@
 
 .headerText {
 	border-radius: 3px;
-	width: 10px;
 	font-family: Tahoma;
-	font-size: 12px;
+	font-size: 14px;
 	background-color: #4b6a84;
 	color: #FFFFFF;
 	font-weight: normal;
 	width: auto;
 	height: 27px;
-	vertical-align: text-top;
 	text-align: center;
 	background-image:
 		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
@@ -304,15 +295,53 @@
 	text-transform: capitalize;
 }
 
-.alignRight {
-	font-family: Tahoma;
-	font-size: 14px;
-	font-style: normal;
-	text-transform: capitalize;
-	color: #325F6D;
-	text-align: right;
-	vertical-align: middle;
-	font-weight: bold;
+.dropdownlist{
+	width: 220px;
+	height:27px;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.textfieldvalues{
+
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #5d7e9b;
+	border-right-color: #5d7e9b;
+	border-bottom-color: #5d7e9b;
+	border-left-color: #5d7e9b;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	width: 220px;
+	height: 25px;
+	border-radius: 5px;
+	background-color: white;
+	 
+}
+
+.textfieldvaluesshorts{
+
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #5d7e9b;
+	border-right-color: #5d7e9b;
+	border-bottom-color: #5d7e9b;
+	border-left-color: #5d7e9b;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	width: 80px;
+	height: 25px;
+	border-radius: 5px;
+	background-color: white;
+	 
 }
 
 </style>
@@ -388,141 +417,251 @@
 		});
 	});
 	$(function() {
-		$("#entrydate").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			yearRange: "-50:+0"
-		});
-		$("#anim").change(function() {
-			$("#entrydate").datepicker("option", "showAnim", $(this).val());
-		});
-		
-		$("#chequedate").datepicker({
+				
+		$("#invoicedate").datepicker({
 			changeYear : true,
 			changeMonth : true,
 			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
 		$("#anim").change(function() {
-			$("#chequedate").datepicker("option", "showAnim", $(this).val());
+			$("#invoicedate").datepicker("option", "showAnim", $(this).val());
 		});
 	});
 </script>
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function addExpenses() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=addExpenses";
-		form1.method = "POST";
-		form1.submit();
-
-	}
 	
-	function deleteRecords() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=deleteMultiple";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-	
-	function printRecords() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=printVoucher";
-		form1.method = "POST";
-		form1.submit();
-	}
-	
-	function approveRecords() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=approveVoucher";
-		form1.method = "POST";
-		form1.submit();
-	}
-	
-	function rejectRecords() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=rejectVoucher";
-		form1.method = "POST";
-		form1.submit();
-	}
-	
-	function displayNewBatch(){
+	function saveInventory() {
 		
-		var x = document.getElementById("newBatchDiv");
-		  if (x.style.display === "none") {
-		    x.style.display = "block";
-		  } else {
-		    x.style.display = "none";
-		  }
-	}	
+		var form1 = document.getElementById("form1");
+		
+		if(form1.checkValidity()) {
+			form1.action = "Controller?process=MessItemsProcess&action=savePurchase";
+			form1.method = "POST";
+			form1.submit();
+		}
+		
+	}
 	
+	function cancelPurchase() {
+			
+				var form1 = document.getElementById("form1");
+				form1.action = "Controller?process=MessItemsProcess&action=cancelPurchase";
+				form1.method = "POST";
+				form1.submit();
+			
+		}
+	
+	function selectAllRow(tableID){
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        if(rowCount==1){
+            var row = table.rows[0];
+            var chkbox = row.cells[0].childNodes[0];
+            chkbox.checked=false;
+            alert('No records to select');
+        }
+        for(var i=1; i<rowCount; i++) {
+            var row = table.rows[i];
+            var chkbox = row.cells[0].childNodes[0];
+            chkbox.checked=true;
+        }
+    }
+	
+	 function calculate(value2) {
+
+      	var price=document.getElementById("price_"+value2).value;
+      	
+      	        	
+          var final1=document.getElementById("linetotal_"+value2);
+          var quantity=document.getElementById("items_quantity_"+value2).value;
+          final1.value=price*quantity;
+         
+      }
+	
+	var itemlist=[
+        <c:forEach varStatus="status" items="${messstockavailabilitylist}" var="itemlist">{
+                value:'<c:out default="0" value="${itemlist.messitems.name}" />',
+                particularname:'<c:out default="0" value="${itemlist.messitems.unitofmeasure}" />',
+                id:'<c:out default="0" value="${itemlist.messitems.id}" />'
+                }<c:if test="${!status.last}">,</c:if>
+        </c:forEach>
+        ];
+	
+	function addRow() {
+        var rowCount = document.getElementById('dataTable').rows.length;    
+        
+        var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=items_"+rowCount+" /><input type='hidden' name='itemids' id=items_id_"+rowCount+" value='' /></td>";
+        var col2="<td class='dataTextInActive'><input type='text' name='itemsname' id=items_name_"+rowCount+" class='textfieldvalues' style='font-size: 14px;'/></td>";
+ 	    var col3="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;'/></td>";
+ 	   	var col4="<td class='dataTextInActive'><input  value='0'   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+        var col5="<td class='dataTextInActive'><input type='text' value='0'  name='price' id=price_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
+        var col6="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+        /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
+        /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
+        /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
+        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+"</tr>");
+        $(function() {
+            $("#dataTable").find('tbody').append(newRow);
+        });
+        $(function() {
+            $("#items_name_"+rowCount).autocomplete({
+                source: itemlist,
+                minLength: 1,
+                change:function(event,ui){
+                	
+                    $("#items_id_"+rowCount ).val( ui.item.id );
+                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
+                },
+                focus: function( event, ui ) {
+                    $( "#items_name_"+rowCount).val( ui.item.name );
+                    $( "#items_id_"+rowCount ).val( ui.item.id );
+                    $("#items_unitofmeasure"+rowCount).val( ui.item.particularname );
+
+                    return true;
+                },
+                select: function( event, ui ) {
+                    $( "#items_name_"+rowCount).val( ui.item.value );
+                    $( "#items_id_"+rowCount ).val( ui.item.id );
+                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
+                   
+                    return true;
+                }
+            }).data( "autocomplete" )._renderItem = function( ul, item ) {
+                return $( "<li></li>" )
+                .data( "item.autocomplete", item )
+                .append( "<a><b> " + item.value +":&nbsp;</b> <b> "+item.particularname +"</b></a>" )
+                .appendTo( ul );
+            };
+
+        });
+    }
 	
 	$(function() {
 
 		$("#tabs").tabs();
-		$("#save").button().click(function() {
-			addExpenses();
-		});
-		$("#addnewbatch").button().click(function() {
-			displayNewBatch();
-		});
 		$("#effect").hide();
+		
+		var addItemsButtonID="#addnewitem";
+        var removeItemsButtonID="#removenewitem";
+        
+        $( addItemsButtonID )
+        .button({
+            icons: {
+                primary: "ui-icon-plus"
+            }
+        })
+        .click(function() {
+            addRow();
+            return false;
+        });
+        
+       $(removeItemsButtonID)
+        .button({
+            icons: {
+                primary: "ui-icon-minus"
+            }
+        })
+        .click(function() {
+            deleteRow('dataTable');
+            return false;
+        }); 
+        
 
 	});
 	
-    function numberWithCommas(annualincome) {
-    	var x=annualincome.value;
-    	x = x.replace (/,/g, "");
-    	
-    	var lastThree = x.substring(x.length-3);
-    	var otherNumbers = x.substring(0,x.length-3);
-    	if(otherNumbers != '')
-    	    lastThree = ',' + lastThree;
-    	var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
-    	annualincome.value = res;
+	function calculateGrandTotal() {
+        var sum = 0.0;
+        var column2 = $('.linetotalAmount')
+        jQuery.each(column2,function(){
+            sum += parseFloat($(this).val());
+        });
+        
+        $('#itemsTotalAmount').val(sum);
+
     }
+	
+	$(document).ready(function() {
+        
+        
+        $("#dataTable").keyup(function(){
+            
+            var sum = 0.0;
+            var totalSum=0.0;
+            var column2 = $('.linetotalAmount')
+            jQuery.each(column2,function(){
+                sum += parseFloat($(this).val());
+            });
+            
+            $('#itemsTotalAmount').val(sum);
+            
+        });
+        $("#dataTable").click(function(){
+            
+            var sum = 0.0;
+            var totalSum=0.0;
+            var column2 = $('.linetotalAmount')
+            jQuery.each(column2,function(){
+                sum += parseFloat($(this).val());
+            });
+            
+            $('#itemsTotalAmount').val(sum);
+           
+        });
+
+
+    });
+	
+	function deleteRow(tableID) {
+        try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            if(rowCount==1){
+                alert('No records to delete');
+            }
+            for(var i=1; i<rowCount-1; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+            }
+           
+            
+            var sum = 0.0;
+            var totalSum=0.0;
+            var column2 = $('.linetotalAmount')
+            jQuery.each(column2,function(){
+                sum += parseFloat($(this).val());
+            });
+            totalSum=sum;
+            
+            $('#itemsTotalAmount').val(totalSum);
+            
+            	calculateGrandTotal();
+            //$('#grandTotalAmount').val(0);
+        }catch(e) {
+            alert(e);
+        }
+    }
+
     
 	 $(function(){
-         $("#delete").button({
-             icons:{
-                 primary: "ui-icon-cancel"
-             }
-         }).click(function(){
-             deleteRecords();
-             return false;
-
-         });
          
-         $("#print").button({
-             icons:{
-                 primary: "ui-icon-print"
-             }
-         }).click(function(){
-             printRecords();
-             return false;
-
-         });
-         
-         $("#approve").button({
+         $("#saveitemsinventory").button({
              icons:{
                  primary: "ui-icon-check"
              }
          }).click(function(){
-             approveRecords();
+             saveInventory();
              return false;
 
          });
          
-         $("#reject").button({
-             icons:{
-                 primary: "ui-icon-closethick"
-             }
-         }).click(function(){
-             rejectRecords();
-             return false;
-
-         });
+         
          $('#chckHead').click(function () {
              var length = $('.chcktbl:checked').length;
              var trLength=$('.trClass').length;
@@ -555,12 +694,85 @@
              }
          });
          
-         $( "#savenewbatch" )
-         .button()
-         
+         $("#print").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         }).click(function(){
+             saveInventory();
+             return false;
 
+         });
+         
+         $("#cancel").button({
+             icons:{
+                 primary: "ui-icon-cancel"
+             }
+         }).click(function(){
+             cancelPurchase();
+             return false;
+
+         });
      });
 </script>
+
+<script type="text/javascript">
+
+            function openPopup(invoicedetailsid,date, supplierrefno, name, invoicetotal){
+            	
+        			 if (typeof XMLHttpRequest != "undefined") {
+        				 xmlHttp = new XMLHttpRequest();
+        	            
+        	         } else if (window.ActiveXObject) {
+        	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        	             
+        	         }
+        			xmlHttp.onreadystatechange = stateChangedSSGroup;
+        			xmlHttp.open("GET", "AjaxController?process=stockentry&action=mrvdetails&invoicedetailsid="+invoicedetailsid+"&entrydate="+date+"&supplierreferenceno="+supplierrefno+"&suppliername="+name+"&invoicetotal="+invoicetotal+"",true);;
+        			xmlHttp.send(null);
+
+        		
+                $( "#dialog" ).dialog( "open" );
+            }
+            
+            function stateChangedSSGroup() {
+
+        		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+        			document.getElementById("mrvdetails").innerHTML = xmlHttp.responseText;
+        		}
+        	}
+            
+            function selectVendor(name,id){
+                var vendorName=document.getElementById('vendorName');
+                var vendorID=document.getElementById("vendorID");
+                vendorName.value=name;
+                vendorID.value=id;
+                $( "#dialog" ).dialog( "close" );
+
+            }
+        </script>
+
+
+        <script type="text/javascript">
+
+            $(function() {
+                $( "#dialog" ).dialog({
+                    autoOpen: false,
+                    height: 400,
+                    width: 600,
+                    modal: true,
+                    buttons: {
+                        Cancel: function() {
+                            $( this ).dialog( "close" );
+                        }
+
+                    }
+                });
+            });
+
+
+
+        </script>
 
 </head>
 <%
@@ -580,14 +792,13 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1"
-		action="Controller?process=DepartmentProcess&action=deleteMultiple" method="POST">
+	<form id="form1" method="POST">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");
 		%>
 		<div style="height: 28px">
-			<button id="add">Purchase Entry</button>
+			<button id="add">Receive Entry</button>
 			<br />
 		</div>
 
@@ -598,215 +809,89 @@ for(Cookie cookie : cookies){
 
 				</ul>
 				<div id="tabs-1">
-				
-				<table width="100%" border="0"  cellpadding="0" 
-						cellspacing="0" id="table1" style="float: left;">
+				<br>
+				<br>
+				<table  style="margin-left: auto;margin-right: auto;">
+						
 						<tr>
-							<td><br><br></td>
+							<td class="alignRight">Supplier &nbsp;</td>
+							<td>
+								<select name="supplierid" id="supplierid" class="dropdownlist" style="font-size: 14px;" required>
+										<c:forEach items="${messsupplierslist}" var="messsupplierslist">
+											<option value="${messsupplierslist.id}:${messsupplierslist.linkedledgerid}">${messsupplierslist.name}</option>
+										</c:forEach>
+								</select>
+							</td>
+							
+							<td class="alignRight">&nbsp;&nbsp;&nbsp;Reference/Invoice No.&nbsp;</td>
+							<td ><input type="text" id="supplierreferenceno" name="supplierreferenceno" class="textfieldvalues" style="font-size: 14px;"  required>
+							</td>
+							
 						</tr>
 						<tr>
-						<td class="alignRight">Date&nbsp;</td>
-							<td><label> <input name="entrydate"
-									style="text-transform:uppercase;height: 30px;font-size: 16px;font-weight: bold;border-radius: 5px"
-									type="text" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
-									class="textField" id="entrydate" size="26"
-									data-validate="validate(required)">
+							<td><br /></td>
+	
+							</tr>
+						<tr>
+						<td class="alignRight">Invoice Date&nbsp;</td>
+							<td><label> <input	name="invoicedate"	type="text" class="textfieldvalues" id="invoicedate" style="font-size: 14px;" autocomplete="false">
 							</label></td>
 							
 							</tr>
 							<tr>
 							<td><br /></td>
-	
 							</tr>
-							</table>
-							
-					<table width="50%" border="0"  cellpadding="0"
-						cellspacing="0" id="table1" style="float: left;width: 550px;height: 50px;padding-left: 150px;">
-						<tr>
-							<td><br><br></td>
-						</tr>
-						
-						<tr>
-							<td  class="alignRight">Supplier &nbsp;</td>
-							<td ><label> <select name="nationality"
-									id="nationality" style="width: 256px;height:30px;" onchange="dropdown()">
-										<option selected></option>
-										<option>New Star Madina Traders</option>
-										<option>Golden Egg</option>
-								</select>
-							</label></td>
-							
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td  class="alignRight">Item &nbsp;</td>
-							<td ><label> <select name="nationality"
-									id="nationality" style="width: 256px;height:30px;" onchange="dropdown()">
-										<option selected></option>
-										<option>Rice</option>
-										<option>Daal</option>
-								</select>
-							</label></td>
-							
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignRight">Price&nbsp;</td>
-							<td ><label> <input id="paidto"
-									name="paidto" type="text" class="textField" 
-									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
-									required size="26">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-					</table>
-					<table width="50%" border="0"  cellpadding="0"
-						cellspacing="0" id="table1" style="float: left;">
-						<tr>
-							<td><br><br></td>
-						</tr>
-						<tr>
-							<td class="alignRight">Reference/Invoice No.&nbsp;</td>
-							<td ><label> <input id="paidto"
-									name="paidto" type="text" class="textField" 
-									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
-									required size="26">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-	
-							</tr>
-						<tr>
-							<td  class="alignRight">Available Quantity &nbsp;</td>
-							<td ><label> <input id="chequeno"
-									name="chequeno" type="text" class="textField" 
-									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
-									required size="6">
-
-							</label><label class="alignRight">&nbsp;&nbsp;&nbsp;Add Quantity &nbsp;</label><label> <input id="chequeno"
-									name="chequeno" type="text" class="textField" 
-									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
-									required size="6">
-
-							</label></td>
-							
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignRight">Batch No&nbsp;</td>
-							<td><label> <select name="nationality"
-									id="nationality" style="width: 256px;height:30px;" onchange="dropdown()">
-										<option selected></option>
-										<option>1</option>
-										<option>2</option>
-								</select>
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						
-					</table>
-					<table  width="100%" border="0" align="center">
-						<tr>
-							<td align="center">
-								<button id="save">Save</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="addnewbatch">+/- New Batch</button>
-							</td>
-						</tr>
 					</table>
 					
-					<div id="newBatchDiv" style="display: none;">
-					<table width="50%" border="0"  cellpadding="0"
-						cellspacing="0" id="table1" style="float: left;width: 550px;height: 50px;padding-left: 150px;">
-						<tr>
-							<td><br><br></td>
-						</tr>
+					<div align="center">
+						<p>
+						<h2 style="text-decoration: underline;color: #eb6000">Item Details</h2>	
+						<label><button id="addnewitem">Add Item</button></label><label><button id="removenewitem">Remove Item</button></label></p>
 						
-						<tr>
-							<td  class="alignRight">Add Quantity &nbsp;</td>
-							<td ><label><input id="paidto"
-									name="paidto" type="text" class="textField" 
-									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
-									required size="26">
-								</select>
-							</label></td>
-							
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignRight">Price&nbsp;</td>
-							<td ><label> <input id="paidto"
-									name="paidto" type="text" class="textField" 
-									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
-									required size="26">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-					</table>
-					<table width="50%" border="0"  cellpadding="0"
-						cellspacing="0" id="table1" style="float: left;">
-						<tr>
-							<td><br><br></td>
-						</tr>
-						
-						<tr>
-							<td class="alignRight">Batch No&nbsp;</td>
-							<td><label> <input name="chequedate"
-									style="text-transform:uppercase;height: 30px;font-size: 16px;font-weight: bold;border-radius: 5px"
-									type="text" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
-									class="textField" id="chequedate" size="26"
-									data-validate="validate(required)">
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-					</table>
-					
-					<table id="table2" width="100%" border="0" align="center">
-						<tr>
-							<td align="center">
-								<button id="savenewbatch">Save New Batch</button>
-							</td>
-						</tr>
-					</table>
-					
+									
 					</div>
-				</div>
-				
-				
+					
+					<br>
+					<table style="margin-left: auto;margin-right: auto;border: 1px solid black;" id="dataTable">
+						<thead>
+							<tr>
+								<th class="headerText"><input type="checkbox"
+									id="selectAll" name="selectAll"
+									onclick="selectAllRow('dataTable')" /> </th>
+								<th class="headerText">Item Name</th>
+								<th class="headerText">Quantity</th>
+								<th class="headerText">Unit</th>
+								<th class="headerText">Unit Price</th>
+								<th class="headerText">Item Total</th>
+							</tr>
+						</thead>
+
+						<tbody>						
+						</tbody>
+							<tfoot>
+							<tr>
+
+								<td colspan="5" align="right" style="font-weight: bold;">Grand Total&nbsp;&nbsp;</td>
+								<td align="center"><input type="text"
+									name="itemsTotalAmount" id="itemsTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" /></td>
+							</tr>
+
+						</tfoot>
+					</table>
+					<div align="center">
+						<p>
+						<label><button id="saveitemsinventory">Save</button></label></p>
+						
+									
+					</div>
+				</div> 
 			</div>
 		</div>
 
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Purchase List</td>
+					<td class="headerTD">Items Received List</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -815,37 +900,27 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Voucher #</th>
-						<th title="click to sort" class="headerText">Date</th>
-						<th title="click to sort" class="headerText">Amount (Rs.)</th>
-						<th title="click to sort" class="headerText">Party Name</th>
-						<th title="click to sort" class="headerText">Being</th>
-						<th title="click to sort" class="headerText">Payment Type</th>
-						<th title="click to sort" class="headerText">Cheque #</th>
-						<th title="click to sort" class="headerText">Cheque Date</th>
-						<th title="click to sort" class="headerText">Bank Name</th>
-						<th title="click to sort" class="headerText">Status</th>	
+						<th title="click to sort" class="headerText">Invoice Date</th>
+						<th title="click to sort" class="headerText">Supplier Reference/Invoice No</th>
+						<th title="click to sort" class="headerText">Supplier</th>
+						<th title="click to sort" class="headerText">Total Amount</th>
+						<th class="headerText">View Details</th>
 					</tr>
 				</thead>
 
 				<tbody>
 
-					<c:forEach items="${adminexpenses}" var="expenses">
+					<c:forEach items="${invoicelist}" var="invoicelist">
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
 							
 							
-                          <td class="dataText"><input type="checkbox" id = "<c:out value="${expenses.idAdminExpenses}"/>" class = "chcktbl"  name="expensesIDs"  value="<c:out value="${expenses.idAdminExpenses}"/>"/></td>
-						  <td class="dataText"><c:out value="${expenses.idAdminExpenses}" /></td>
-						  <td class="dataText"><fmt:formatDate value="${expenses.entrydate}" pattern="dd/MM/yyyy"/></td>
-						  <td class="dataText"><c:out value="${expenses.priceofitem}" /></td>
-						  <td class="dataText"><c:out value="${expenses.paidto}" /></td>
-						  <td class="dataText"><c:out value="${expenses.itemdescription}" /></td>
-						  <td class="dataText"><c:out value="${expenses.paymenttype}" /></td>
-						  <td class="dataText"><c:out value="${expenses.chequeno}" /></td>
-						  <td class="dataText"><fmt:formatDate value="${expenses.chequedate}" pattern="dd/MM/yyyy"/></td>
-						  <td class="dataText"><c:out value="${expenses.bankname}" /></td>
-						  <td class="dataText"><label style="text-transform: capitalize;"><c:out value="${expenses.voucherstatus}" /></label></td>
+                          <td class="dataText"><input type="checkbox" id = "<c:out value="${invoicelist.key.id}"/>" class = "chcktbl"  name="invoiceid"  value="<c:out value="${invoicelist.key.id}:${invoicelist.key.voucherid}:${invoicelist.key.status}"/>"/></td>
+						  <td class="dataText"><fmt:formatDate value="${invoicelist.key.invoicedate}" pattern="dd/MM/yyyy"/></td>
+						  <td class="dataText"><c:out value="${invoicelist.key.supplierreferenceno}" /></td>
+						  <td class="dataText"><c:out value="${invoicelist.value.name}" /></td>
+						  <td class="dataText"><c:out value="${invoicelist.key.invoicetotal}" /></td>
+						  <td class="dataText"><a href="#" onclick="openPopup('<c:out value="${invoicelist.key.id}"/>','<c:out value="${invoicelist.key.invoicedate}"/>','<c:out value="${invoicelist.key.supplierreferenceno}"/>','<c:out value="${invoicelist.value.name}"/>','<c:out value="${invoicelist.key.invoicetotal}"/>')" style="color:#eb6000;">View Details</a></td>
 						</tr>
 					</c:forEach>
 
@@ -855,18 +930,48 @@ for(Cookie cookie : cookies){
                             <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
                     		<td class="footerTD"  colspan="8">
                     		<button id="print">Print</button> 
-                    		&nbsp;&nbsp;&nbsp;
+                    		<!-- &nbsp;&nbsp;&nbsp;
                     		<button id="approve">Approve</button>
                     		&nbsp;&nbsp;&nbsp;
                     		<button id="reject">Reject</button> 
-                    		&nbsp;&nbsp;&nbsp;
-                    		<button id="delete">Cancel</button>
+                    		&nbsp;&nbsp;&nbsp; -->
+                    		<button id="cancel">Cancel</button>
                     		</td>
                         </tr>
                     </tfoot>
 			</table>
 
 		</div>
+
+
+		<div id="dialog" title="Items Receive Details">
+				
+                
+             	 <div id="mrvdetails">
+              			
+              			
+           		 </div>
+           		 
+           		 <!-- <table width="100%" border="0">
+						
+						
+						
+						<tr>
+						<td width="30%" class="alignRight">Sub-Group Name &nbsp;</td>
+						
+							<td width="12%" align="left" id="mrvdetails"><label> <select name="subgroupname" id="sgname"  onchange="dropdowndist()"
+									style="width: 240px" ">
+									<option >UI</option>
+								</select>
+							</label>
+							
+							</td>
+							
+						</tr>
+						
+						</table> -->
+			</div>
+
 
 
 	</form>
