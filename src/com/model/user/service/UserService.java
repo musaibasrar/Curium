@@ -444,7 +444,7 @@ public class UserService {
         boolean result = false;
         try {
             Properties properties = new Properties();
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
             properties.load(inputStream);
             String backupDirectoryIS = properties.getProperty("backupdirectory");
             System.out.println("the backup directory from input stream is " + backupDirectoryIS);

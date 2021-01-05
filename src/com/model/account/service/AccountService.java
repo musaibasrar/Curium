@@ -139,9 +139,11 @@ public class AccountService {
 		String result = "false";
 		String newSubGroup = DataUtil.emptyString(request.getParameter("newsubgroup"));
 		String newSSGroup = DataUtil.emptyString(request.getParameter("newssgroup"));
+		
 		String subGroupName = DataUtil.emptyString(request.getParameter("subgroupname"));
 		String ssGroupName = DataUtil.emptyString(request.getParameter("ssgroupname"));
 		String groupName = DataUtil.emptyString(request.getParameter("groupname"));
+		
 		String accountName = DataUtil.emptyString(request.getParameter("accountname"));
 		String accountCode = DataUtil.emptyString(request.getParameter("accountcode"));
 		

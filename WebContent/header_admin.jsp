@@ -28,19 +28,20 @@
             .style50 {color: #FFFFFF}
             .style6 {font-size: 10; font-family: Arial, Helvetica, sans-serif; color: #FFFFFF; }
             a:link {
-                color: #FFFFFF;
+                color: #000000;
                 text-decoration: none;
                 font-family: arial;
                 font-size: 10px;
             }
-            a:visited {
-                color: #FFFFFF;
-            }
-            a:hover {
-                color: yellow;
-            }
+           a:visited {
+		    color: #383838;
+    
+			}
+			a:hover {
+			text-decoration: underline;
+			}
             a:active {
-                color: #FFFFFF;
+                color: #000000;
             }
             .style5 {font-family: Calibri; font-size: 14px; color: #FFFFFF; }
             .style51 {
@@ -80,13 +81,7 @@
                 height: 16px;
 
             }
-            a:visited {
-    color: #383838;
-    
-}
-a:hover {
-text-decoration: underline;
-}
+            
            
         </style>
         <script type="text/javascript">
@@ -115,7 +110,7 @@ for(Cookie cookie : cookies){
 }
 %>
     <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-        <div class="container-fluid">
+        <div >
         
                         <table width="100%" border="0" align="center"
 						cellpadding="2" cellspacing="0" bordercolor="#FFFFFF">
