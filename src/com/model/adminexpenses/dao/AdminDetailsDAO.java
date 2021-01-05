@@ -86,7 +86,7 @@ public class AdminDetailsDAO {
 		try {
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("update Adminexpenses set voucherstatus='cancelled' where idAdminExpenses IN (:ids)");
+					.createQuery("update Adminexpenses set voucherstatus='CANCELLED' where idAdminExpenses IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();

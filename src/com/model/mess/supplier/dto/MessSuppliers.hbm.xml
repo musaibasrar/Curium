@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 11 Feb, 2015 9:12:10 AM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.mess.item.dto.MessItems" table="mess_items" >
+    <class name="com.model.mess.supplier.dto.MessSuppliers" table="mess_suppliers" >
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <!-- <generator class="identity" /> -->
@@ -21,11 +21,24 @@
         <property name="name" type="string">
             <column name="name" />
         </property>
-        <property name="unitofmeasure" type="string">
-            <column name="unitofmeasure" />
+        <property name="contactnumber" type="string">
+            <column name="contactnumber" />
         </property>
-         <property name="linkedledgeridexpense" type="java.lang.Integer">
-            <column name="linkedledgeridexpense" />
+        <property name="address" type="string">
+            <column name="address" />
         </property>
+        <property name="bankaccountno" type="string">
+            <column name="bankaccountno" />
+        </property>
+        <property name="ifsccode" type="string">
+            <column name="ifsccode" />
+        </property>
+        <property name="payto" type="string">
+            <column name="payto" />
+        </property>
+        
+        <!-- <many-to-one name="AccountDetails" class="com.model.account.dto.Accountdetails"
+            column="linkedledgerid" lazy="false"
+            cascade="none"/> -->
     </class>
 </hibernate-mapping>

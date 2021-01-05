@@ -22,6 +22,7 @@ import com.model.feescollection.action.FeesCollectionAction;
 import com.model.feesdetails.action.FeesDetailsAction;
 import com.model.hr.action.HrAction;
 import com.model.marksdetails.action.MarksDetailsAction;
+import com.model.mess.stockentry.action.MessStockEntryAction;
 import com.model.position.action.PositionAction;
 import com.model.printids.action.PrintIdsAction;
 import com.model.sendemail.action.EmailAction;
@@ -51,6 +52,8 @@ public class AjaxController extends HttpServlet {
         	new AccountAction(request, response).execute(action);
         }else if(process.equalsIgnoreCase("HrProcess")){
         	new HrAction(request, response).execute(action);
+        }else if(process.equalsIgnoreCase("stockentry")){
+        	new MessStockEntryAction(request, response).execute(action);
         }
     }
 

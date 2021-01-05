@@ -1,48 +1,29 @@
 package com.model.mess.item.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import com.model.academicyear.dao.YearDAO;
-import com.model.academicyear.dto.Currentacademicyear;
 import com.model.account.dao.AccountDAO;
-import com.model.account.dto.Accountdetails;
-import com.model.degreedetails.dto.Degreedetails;
-import com.model.feescategory.dao.feesCategoryDAO;
-import com.model.feescollection.dao.feesCollectionDAO;
-import com.model.feescollection.dto.Receiptinfo;
+import com.model.account.dto.VoucherEntrytransactions;
 import com.model.mess.item.dao.MessItemsDAO;
 import com.model.mess.item.dto.MessItems;
-import com.model.parents.dao.parentsDetailsDAO;
-import com.model.parents.dto.Parents;
-import com.model.pudetails.dto.Pudetails;
-import com.model.std.dto.Classsec;
-import com.model.std.service.StandardService;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
-import com.model.student.dto.Studentfeesstructure;
+import com.model.mess.stockentry.dto.MessInvoiceDetails;
+import com.model.mess.stockentry.dto.MessStockAvailability;
+import com.model.mess.stockentry.dto.MessStockEntry;
+import com.model.mess.supplier.dao.MessSuppliersDAO;
+import com.model.mess.supplier.dto.MessSuppliers;
 import com.util.DataUtil;
 import com.util.DateUtil;
 
@@ -62,16 +43,13 @@ public class MessItemsService {
 
 	public String viewItemDetails() {
 		
-		List<MessItems> messItemsList = new ArrayList<MessItems>();
-		List<Accountdetails> accountDetailsList = new ArrayList<Accountdetails>();
+		List<MessStockAvailability> messStockAvailabilityList = new ArrayList<MessStockAvailability>();
 		
 		 if(httpSession.getAttribute(BRANCHID)!=null){
-			 	messItemsList =	new MessItemsDAO().getItemsDetails();
-				accountDetailsList = new AccountDAO().getAccountdetails(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			 	messStockAvailabilityList = new MessItemsDAO().getItemsStockAvailability(); 
 		 }
 		 
-		 request.setAttribute("messitemslist", messItemsList);
-		 request.setAttribute("accountdetailslist", accountDetailsList);
+		 request.setAttribute("messstockavailabilitylist", messStockAvailabilityList);
 		 
 		return "additems.jsp";
 	}
@@ -80,7 +58,7 @@ public class MessItemsService {
 	public String addItemDetails() {
 		
 		MessItems messItems = new MessItems();
-		Accountdetails accountDetails = new Accountdetails();
+		MessStockAvailability messStockAvailability = new MessStockAvailability();
 		String result = "false";
 		 if(httpSession.getAttribute(BRANCHID)!=null){
              
@@ -88,10 +66,16 @@ public class MessItemsService {
 			 messItems.setExternalid(DataUtil.emptyString(request.getParameter("itemname")));
 			 messItems.setUnitofmeasure(DataUtil.emptyString(request.getParameter("unitofmeasure")));
 			 messItems.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			 accountDetails.setAccountdetailsid(DataUtil.parseInt(request.getParameter("glaccount")));
+			 messItems.setLinkedledgerid(getLedgerAccountId("itemaccountid"));
+			 messItems.setLinkedledgeridexpense(getLedgerAccountId("itemaccountidexpense"));
 			 
-			 messItems.setAccountDetails(accountDetails);
-			 messItems= new MessItemsDAO().addNewItem(messItems);
+			 messStockAvailability.setAvailablestock(0.0f);
+			 messStockAvailability.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			 messStockAvailability.setMinstock(DataUtil.parseInt(request.getParameter("minstock")));
+			 
+			 messStockAvailability.setMessitems(messItems);
+			 
+			 messItems= new MessItemsDAO().addNewItem(messStockAvailability);
 			 
 			 if(messItems.getId()!=null) {
 				 request.setAttribute("itemsave", true);
@@ -100,6 +84,28 @@ public class MessItemsService {
 			 }
 		 }
 		return result;
+	}
+
+
+	private Integer getLedgerAccountId(String itemAccount) {
+		
+	 	
+	 	Properties properties = new Properties();
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
+		
+        		try {
+					properties.load(inputStream);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		    
+        		String ItemLedgerId = properties.getProperty(itemAccount);
+		    
+		    if(ItemLedgerId!=null) {
+		    	return Integer.parseInt(ItemLedgerId);
+		    }else {
+		    	return 0;
+		    }
 	}
 
 
@@ -124,25 +130,177 @@ public class MessItemsService {
 		
 
 		String[] messIds = request.getParameterValues("messitemsids");
-        String[] updateItemName = request.getParameterValues("updateitemname");
-        String[] updateUnitOfMeasure = request.getParameterValues("updateunitofmeasure");
         
         if(messIds!=null){
             
-            List<MessItems> messList = new ArrayList<MessItems>();
+            List<MessStockAvailability> messStockAvailabilityList = new ArrayList<MessStockAvailability>();
             
             for(int i=0; i<messIds.length;i++) {
+            	
+            	MessStockAvailability messStockAvailability = new MessStockAvailability();
             	MessItems messItems = new MessItems();
-                String[] itemId = messIds[i].split(":");
-                messItems.setName(updateItemName[Integer.valueOf(itemId[1])]);
-                messItems.setUnitofmeasure(updateUnitOfMeasure[Integer.valueOf(itemId[1])]);
-                messItems.setId(DataUtil.parseInt(itemId[0]));
-                messList.add(messItems);
+            	
+                String itemId = messIds[i];
+                messItems.setName(request.getParameter("updateitemname_"+itemId));
+                messItems.setUnitofmeasure(request.getParameter("updateunitofmeasure_"+itemId));
+                messItems.setId(DataUtil.parseInt(itemId));
+                messStockAvailability.setMessitems(messItems);
+                messStockAvailability.setMinstock(Integer.parseInt(request.getParameter("updateminstock_"+itemId)));
+                messStockAvailabilityList.add(messStockAvailability);
             }
-            boolean result = new MessItemsDAO().updateMultipleItems(messList);
+            boolean result = new MessItemsDAO().updateMultipleItems(messStockAvailabilityList);
             request.setAttribute("itemsupdate", result);
         }
 		
 	}
-	
+
+
+	public void savePurchase() {
+
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			
+			
+				String itemsTotal = request.getParameter("itemsTotalAmount");
+				BigDecimal itemsTotalAmount = new BigDecimal(itemsTotal);
+				itemsTotalAmount = itemsTotalAmount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+				
+				String[] itemIds = request.getParameterValues("itemids");
+				String[] itemsName = request.getParameterValues("itemsname");
+				String[] itemsQuantity = request.getParameterValues("itemsquantity");
+				String[] unitPrice = request.getParameterValues("price");
+				String[] lineTotal = request.getParameterValues("linetotal");
+				String sup = request.getParameter("supplierid");
+				String[] supplieridledgerid = sup.split(":");
+				
+				//Invoice Details
+				MessInvoiceDetails messInvoiceDetails = new MessInvoiceDetails();
+				messInvoiceDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				messInvoiceDetails.setExternalid("MRV");
+				messInvoiceDetails.setInvoicedate(DateUtil.indiandateParser(request.getParameter("invoicedate")));
+				messInvoiceDetails.setEntrydate(DateUtil.todaysDate());
+				messInvoiceDetails.setInvoicetotal(itemsTotalAmount.floatValue());
+				messInvoiceDetails.setSupplierreferenceno(request.getParameter("supplierreferenceno"));
+				messInvoiceDetails.setSuppliersid(DataUtil.parseInt(supplieridledgerid[0]));
+				messInvoiceDetails.setStatus("ACTIVE");
+				
+				List<MessStockEntry> messStockEntryList = new ArrayList<MessStockEntry>();
+				
+					for(int i=0; i < itemIds.length ; i++){
+						
+
+						MessStockEntry messStockEntry = new MessStockEntry();
+						
+						messStockEntry.setItemid(Integer.parseInt(itemIds[i]));
+						messStockEntry.setExternalid(itemsName[i]);
+						messStockEntry.setBatchno(DateUtil.todaysDateydm()+"_"+itemIds[i]+"_"+request.getParameter("supplierid"));
+						messStockEntry.setItemunitprice(Float.parseFloat(unitPrice[i]));
+						messStockEntry.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						messStockEntry.setQuantity(Float.parseFloat(itemsQuantity[i]));
+						messStockEntry.setAvailablequantity(Float.parseFloat(itemsQuantity[i]));
+						messStockEntry.setMessinvoicedetails(messInvoiceDetails);
+						messStockEntry.setStatus("ACTIVE");
+						
+						messStockEntryList.add(messStockEntry);
+					
+				}
+					
+						//Pass J.V. : credit the supplier debit the stock account
+						int supplierLedgerId = DataUtil.parseInt(supplieridledgerid[1]);
+						int stockLedgerId = getLedgerAccountId("itemaccountid");
+						
+						VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+						
+						transactions.setDraccountid(stockLedgerId);
+						transactions.setCraccountid(supplierLedgerId);
+						transactions.setDramount(itemsTotalAmount);
+						transactions.setCramount(itemsTotalAmount);
+						transactions.setVouchertype(1);
+						transactions.setTransactiondate(DateUtil.indiandateParser(request.getParameter("invoicedate")));
+						transactions.setNarration("Towards New Stock Entry");
+						transactions.setCancelvoucher("no");
+						transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+						transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						
+						
+						String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+itemsTotalAmount+" where accountdetailsid="+stockLedgerId;
+
+						String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+itemsTotalAmount+" where accountdetailsid="+supplierLedgerId;
+						
+						boolean result = new MessItemsDAO().addNewStock(messStockEntryList,transactions,updateDrAccount,updateCrAccount);
+
+			}
+		}
+
+
+		public boolean getInvoiceDetails() {
+
+			boolean result = false;
+			//String pages = "1";
+			if(httpSession.getAttribute(BRANCHID)!=null){
+				try {
+					int page = 1;
+					int recordsPerPage = 50;
+						if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
+							page = Integer.parseInt(request.getParameter("page"));
+						}
+
+					List<MessInvoiceDetails> invoicelist = new MessItemsDAO().getInvoiceDetailsPagination((page - 1) * recordsPerPage,
+							recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					
+					Map<MessInvoiceDetails,MessSuppliers> invoiceSuppliersMap = new LinkedHashMap<MessInvoiceDetails,MessSuppliers>();
+					
+					for (MessInvoiceDetails messInvoiceDetails : invoicelist) {
+						MessSuppliers messSuppliers = new MessSuppliers();
+						messSuppliers = new MessSuppliersDAO().getMessSupplierById(messInvoiceDetails.getSuppliersid());
+						invoiceSuppliersMap.put(messInvoiceDetails, messSuppliers);
+					}
+					
+					request.setAttribute("invoicelist", invoiceSuppliersMap);
+					
+					int noOfRecords = new MessItemsDAO().getTotalNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+					request.setAttribute("noOfPages", noOfPages);
+					request.setAttribute("currentPage", page);
+					result = true;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return result;
+		}
+
+
+		public void cancelPurchase() {
+				
+			String[] ids = request.getParameterValues("invoiceid");
+			
+			for (String invIds : ids) {
+				
+				String[] ivids = invIds.split(":");
+				int invoiceId = Integer.parseInt(ivids[0]);
+				int voucherId = Integer.parseInt(ivids[1]);
+				String stockEntrystatus = ivids[2];
+				
+				if(!"MOVED".equalsIgnoreCase(stockEntrystatus)) {
+				
+				List<MessStockEntry> messStockEntryList = new MessItemsDAO().getMessStockEntry(invoiceId);
+				
+				VoucherEntrytransactions voucherTransaction = new AccountDAO().getVoucherDetails(ivids[1]);
+				
+				String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
+				String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
+				String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+voucherId;
+				
+				new MessItemsDAO().cancelPurchase(invoiceId,voucherId,messStockEntryList,updateDrAccount, updateCrAccount, cancelVoucher);
+				
+				}else {
+					System.out.println("Can't cancel receive voucher");
+				}
+			}
+			
+		}
+
+
 }

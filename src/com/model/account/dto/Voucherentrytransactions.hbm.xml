@@ -15,10 +15,10 @@
             <column name="craccountid" />
         </property>
         <property name="dramount" type="big_decimal">
-            <column name="dramount" precision="10" scale="5" />
+            <column name="dramount" precision="18" scale="5" />
         </property>
         <property name="cramount" type="big_decimal">
-            <column name="cramount" precision="10" scale="5" />
+            <column name="cramount" precision="18" scale="5" />
         </property>
         <property name="vouchertype" type="java.lang.Integer">
             <column name="vouchertype" />

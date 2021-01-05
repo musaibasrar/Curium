@@ -220,18 +220,39 @@
 
 .headerText {
 	border-radius: 3px;
-	width: 10px;
+	/* width: 10px; */
 	font-family: Tahoma;
 	font-size: 12px;
 	background-color: #4b6a84;
 	color: #FFFFFF;
 	font-weight: normal;
-	width: auto;
+	/* width: auto; */
 	height: 27px;
 	vertical-align: text-top;
 	text-align: center;
 	background-image:
 		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+}
+
+.textfieldvalues{
+
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #5d7e9b;
+	border-right-color: #5d7e9b;
+	border-bottom-color: #5d7e9b;
+	border-left-color: #5d7e9b;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	width: 220px;
+	height: 25px;
+	border-radius: 5px;
+	background-color: white;
+	 
 }
 
 .dataText {
@@ -369,6 +390,35 @@
   border-radius: 12px;
 }
 
+.dropdownlist{
+	width: 100px;
+	height:27px;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.textfieldvaluesshort{
+
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #5d7e9b;
+	border-right-color: #5d7e9b;
+	border-bottom-color: #5d7e9b;
+	border-left-color: #5d7e9b;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	width: 80px;
+	height: 25px;
+	border-radius: 5px;
+	background-color: white;
+	 
+}
+
+
 </style>
 
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
@@ -379,14 +429,22 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
-			"sScrollY" : "380px",
-			"bPaginate" : false,
-			"bLengthChange" : false,
-			"bFilter" : true,
-			"bSort" : true,
-			"bInfo" : false,
-			"bAutoWidth" : false
-		});
+            "sScrollY": "380px",
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": true,
+            "bStateSave": false,
+            "bProcessing": false,
+            "bServerSide": false,
+            "bAutoWidth": false,
+            "iDisplayLength": 20000,
+            "aoColumnDefs":[
+                { 'bSortable': false, 'aTargets': [ 0 ] }
+            ]
+            
+        });
 	});
 </script>
 
@@ -541,10 +599,10 @@ for(Cookie cookie : cookies){
 		<div class="alert-box failure" id="div2">Saving Failed, Unable to create new Item(s)!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
 		
 		<div class="alert-box update" id="div3">Item(s) has been updated successfully!!!&nbsp;&nbsp;&nbsp;<button  class="button"  id="3" onclick="closediv(this.id);">OK</button></div>
-		<div class="alert-box updatefailure" id="div4">Update Failed, Unable to Item Book(s)!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="4" onclick="closedivupdate(this.id);">OK</button></div>
+		<div class="alert-box updatefailure" id="div4">Update Failed, Unable to Update Item(s)!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="4" onclick="closediv(this.id);">OK</button></div>
 		
 		<div class="alert-box delete" id="div5">Item(s) has been deleted successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="5" onclick="closediv(this.id);">OK</button></div>
-		<div class="alert-box deletefailure" id="div6">Deletion Failed, Unable to delete Item(s)!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="6" onclick="closedivdelete(this.id);">OK</button></div>
+		<div class="alert-box deletefailure" id="div6">Deletion Failed, Unable to delete Item(s)!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="6" onclick="closediv(this.id);">OK</button></div>
 	
 	<div style="height: 28px">
 			<button id="add">Add Item</button>
@@ -558,31 +616,38 @@ for(Cookie cookie : cookies){
 
 				</ul>
 				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
+					<table align="center" >
 						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td width="20%" class="alignRight">Item Name* &nbsp;</td>
-							<td width="28%"><label> <input name="itemname" required
-									type="text" class="myclass" id="itemname" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
+							<td class="alignRight">Item Name &nbsp;</td>
+							<td><label> <input name="itemname" required
+									type="text" class="textfieldvalues" id="itemname" 
+									style="font-size: 14px;">
 
 							</label></td>
-							<td width="16%" class="alignRight">Unit of Measure &nbsp;</td>
+							<td class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;Unit of Measure&nbsp;</td>
 
-									<td width="2%"><label> <select name="unitofmeasure"
-									id="unitofmeasure" style="width: 100px;height: 20px;" required>
+									<td><label> <select name="unitofmeasure"
+									id="unitofmeasure" style="font-size: 14px;" class="dropdownlist" required>
 										<option selected></option>
 										<option>Kilogram</option>
 										<option>Litre</option>
 										<option>Piece</option>
 										<option>Box</option>
+										<option>Packet</option>
 										
 								</select></label></td>
 								
-								<td width="16%" class="alignRight">GL Account &nbsp;</td>
+								<td class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;Min. Stock &nbsp;</td>
+							<td><label> <input name="minstock" required
+									type="text" class="textfieldvaluesshort" id="minstock" 
+									style="font-size: 14px;">
+
+							</label></td>
+								
+								<%-- <td width="16%" class="alignRight">GL Account &nbsp;</td>
 
 									<td width="28%"><label> <select name="glaccount"
 									id="glaccount" style="width: 100px;height: 20px;" required>
@@ -594,7 +659,7 @@ for(Cookie cookie : cookies){
 											</c:forEach>
 									</select>
 								
-								</label></td>
+								</label></td> --%>
 						</tr>
 							
 							
@@ -619,34 +684,39 @@ for(Cookie cookie : cookies){
                         <td  class="headerTD">Items List</td>
                     </tr>
                 </table>
-			<table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+			<table   border="0" style="border-color:#4b6a84;"  id="myTable">
 
                     <thead>
                         <tr>
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">Name</th>
                             <th title="click to sort" class="headerText">Unit of Measure</th>
+                            <th title="click to sort" class="headerText">Min. Stock</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${messitemslist}" var="messitems" varStatus="status">
+                        <c:forEach items="${messstockavailabilitylist}" var="messstock" varStatus="status">
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${messitems.id}"/>" class = "chcktbl"  name="messitemsids"  value="<c:out value="${messitems.id}:${status.index}"/>"/></td>
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${messstock.messitems.id}"/>" class = "chcktbl"  name="messitemsids"  value="<c:out value="${messstock.messitems.id}"/>"/></td>
                                 <td class="dataText" style="text-transform:uppercase">
-                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messitems.name}"/>" id="updateitemname" name="updateitemname"><label style="display: none;"><c:out value="${messitems.name}"/></label>
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messstock.messitems.name}"/>" id="updateitemname" name="updateitemname_<c:out value="${messstock.messitems.id}"/>"><label style="display: none;"><c:out value="${messstock.messitems.name}"/></label>
                                 </td>
                                 <td class="dataText" style="text-transform:uppercase">
-                                 <select name="updateunitofmeasure"
+                                 <select name="updateunitofmeasure_<c:out value="${messstock.messitems.id}"/>"
 									id="updateunitofmeasure" style="width: 100px;height: 20px;background-color: #E3EFFF;border-style: none;color: #4B6A84;" >
-										<option selected>${messitems.unitofmeasure}</option>
+										<option selected>${messstock.messitems.unitofmeasure}</option>
 										<option>Kilogram</option>
 										<option>Litre</option>
 										<option>Piece</option>
 										<option>Box</option>
-										
+										<option>Carton</option>
+										<option>Packet</option>
 								</select>
+                                </td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messstock.minstock}"/>" id="updateminstock" name="updateminstock_<c:out value="${messstock.messitems.id}"/>"><label style="display: none;"><c:out value="${messstock.minstock}"/></label>
                                 </td>
                             </tr>
                         </c:forEach>
