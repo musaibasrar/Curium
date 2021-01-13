@@ -5,9 +5,14 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Properties;
 
@@ -16,16 +21,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.model.account.dao.AccountDAO;
+import com.model.account.dto.Accountdetails;
 import com.model.account.dto.VoucherEntrytransactions;
 import com.model.mess.item.dao.MessItemsDAO;
 import com.model.mess.item.dto.MessItems;
 import com.model.mess.stockentry.dto.MessInvoiceDetails;
 import com.model.mess.stockentry.dto.MessStockAvailability;
 import com.model.mess.stockentry.dto.MessStockEntry;
+import com.model.mess.stockmove.dao.MessStockMoveDAO;
+import com.model.mess.stockmove.dto.MessStockItemDetails;
+import com.model.mess.stockmove.dto.MessStockMove;
 import com.model.mess.supplier.dao.MessSuppliersDAO;
 import com.model.mess.supplier.dto.MessSuppliers;
 import com.util.DataUtil;
 import com.util.DateUtil;
+import com.util.StockIssuance;
 
 public class MessItemsService {
 
@@ -217,6 +227,7 @@ public class MessItemsService {
 						transactions.setCramount(itemsTotalAmount);
 						transactions.setVouchertype(1);
 						transactions.setTransactiondate(DateUtil.indiandateParser(request.getParameter("invoicedate")));
+						transactions.setEntrydate(DateUtil.todaysDate());
 						transactions.setNarration("Towards New Stock Entry");
 						transactions.setCancelvoucher("no");
 						transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
@@ -227,7 +238,37 @@ public class MessItemsService {
 
 						String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+itemsTotalAmount+" where accountdetailsid="+supplierLedgerId;
 						
-						boolean result = new MessItemsDAO().addNewStock(messStockEntryList,transactions,updateDrAccount,updateCrAccount);
+						
+						//Pass J.V to book transportation charges
+						int drTransportationExpense = getLedgerAccountId("transportationexpenses");
+						int crSupplierLedgerId = DataUtil.parseInt(supplieridledgerid[1]);
+						String transportationCharges = request.getParameter("transportationcharges");
+						
+						VoucherEntrytransactions transactionTC = new VoucherEntrytransactions();
+						
+						transactionTC.setDraccountid(drTransportationExpense);
+						transactionTC.setCraccountid(crSupplierLedgerId);
+						transactionTC.setDramount(new BigDecimal(transportationCharges));
+						transactionTC.setCramount(new BigDecimal(transportationCharges));
+						transactionTC.setVouchertype(4);
+						transactionTC.setTransactiondate(DateUtil.indiandateParser(request.getParameter("invoicedate")));
+						transactionTC.setEntrydate(DateUtil.todaysDate());
+						transactionTC.setNarration("Towards transportation/labour charges. Ref. No:"+request.getParameter("supplierreferenceno"));
+						transactionTC.setCancelvoucher("no");
+						transactionTC.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						transactionTC.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+						
+
+						// Dr
+						BigDecimal totalAmount = new BigDecimal(transportationCharges);
+						String updateTransportationDrAccount = "update Accountdetailsbalance set currentbalance=currentbalance+"+totalAmount+" where accountdetailsid="+drTransportationExpense;
+							
+						//Cr
+						String updateTransportationCrAccount = "update Accountdetailsbalance set currentbalance=currentbalance+"+totalAmount+" where accountdetailsid="+crSupplierLedgerId;
+						
+						//End J.V
+						
+						boolean result = new MessItemsDAO().addNewStock(messStockEntryList,transactions,updateDrAccount,updateCrAccount,transactionTC,updateTransportationDrAccount,updateTransportationCrAccount);
 
 			}
 		}
@@ -275,7 +316,10 @@ public class MessItemsService {
 		public void cancelPurchase() {
 				
 			String[] ids = request.getParameterValues("invoiceid");
-			
+			Date now = new Date();
+	        String pattern = "yyyy-MM-dd";
+	        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
+	        String todaysDate = formatter.format(now);
 			for (String invIds : ids) {
 				
 				String[] ivids = invIds.split(":");
@@ -291,14 +335,119 @@ public class MessItemsService {
 				
 				String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
 				String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
-				String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+voucherId;
+				String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+voucherId;
 				
-				new MessItemsDAO().cancelPurchase(invoiceId,voucherId,messStockEntryList,updateDrAccount, updateCrAccount, cancelVoucher);
+				new MessItemsDAO().cancelPurchase(invoiceId,messStockEntryList,updateDrAccount, updateCrAccount, cancelVoucher);
 				
 				}else {
 					System.out.println("Can't cancel receive voucher");
 				}
 			}
+			
+		}
+
+
+		public void getCurrentStock() {
+			List<MessStockAvailability> messStockAvailability = new MessItemsDAO().getItemsStockAvailability();
+			request.setAttribute("currentstocklist", messStockAvailability);
+		}
+
+
+		public void getBatchStock() {
+			List<MessStockEntry> messStockEntryList = new MessItemsDAO().getItemsStockEntry();
+			request.setAttribute("messstockentrylist", messStockEntryList);
+			
+		}
+
+
+		public void getIssuanceStock() {
+			
+			List<MessItems> messItemsList =  new MessItemsDAO().getItemsDetails();
+			request.setAttribute("itemslist", messItemsList);
+			
+		}
+
+
+		public void generateStockIssuanceReport() {
+			
+
+			String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondatefrom"));
+			String toDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondateto"));
+			String issueTo = request.getParameter("issuedto");
+			String purpose = request.getParameter("purpose");
+			String item = request.getParameter("itemname");
+			String queryMain = "from MessStockMove msm where msm.status != 'CANCELLED' and msm.transactiondate between '"+fromDate+"' and '"+toDate+"' ";
+			String subQuery = "";
+					
+			if(!issueTo.isEmpty()) {
+				subQuery = "and issuedto = '"+issueTo+"'";
+				httpSession.setAttribute("issuedtoselected", "Issued To:&nbsp;"+issueTo);
+			}
+			
+			if(!purpose.isEmpty()) {
+				subQuery = subQuery + "and purpose = '"+purpose+"'";
+				httpSession.setAttribute("purposeselected", "Purpose:&nbsp;"+purpose);
+			}
+			
+			if(!item.isEmpty()) {
+				subQuery = subQuery + "and itemid = '"+item+"'";
+				httpSession.setAttribute("itemselected", "Items:&nbsp;"+item);
+			}
+			
+			List<MessStockMove> messStockMoveList = new MessStockMoveDAO().getStockMoveDetailsReport(queryMain+subQuery);
+			
+			if(!messStockMoveList.isEmpty()) {
+				
+			List<Integer> messStockMoveIds = new ArrayList<Integer>();
+			List<Integer> messStockItemIds = new ArrayList<Integer>();
+				
+			for (MessStockMove messStockMove : messStockMoveList) {
+				messStockMoveIds.add(messStockMove.getStockentryid());
+				messStockItemIds.add(messStockMove.getItemid());
+			}
+			
+			List<MessStockEntry> messStockEntryList = new MessItemsDAO().getMessStockEntryByIdList(messStockMoveIds);
+			List<MessItems> messItemsList = new MessItemsDAO().getItemDetailByID(messStockItemIds);
+			
+			List<StockIssuance> stockIssuanceList = new ArrayList<StockIssuance>();
+			
+			for (MessStockMove messStockMove : messStockMoveList) {
+				StockIssuance stockIssuance = new StockIssuance();
+				
+				for (MessStockEntry stockEntry : messStockEntryList) {
+					
+					if(messStockMove.getStockentryid() == stockEntry.getId()) {
+						
+						for (MessItems stockItems : messItemsList) {
+							
+							if(stockEntry.getItemid() == stockItems.getId()) {
+								stockIssuance.setItemname(stockItems.getName());
+								stockIssuance.setQuantity(messStockMove.getQuantity());
+								stockIssuance.setUnitofmeasure(stockItems.getUnitofmeasure());
+								stockIssuance.setItemunitprice(stockEntry.getItemunitprice());
+								stockIssuance.setIssuedto(messStockMove.getIssuedto());
+								stockIssuance.setPurpose(messStockMove.getPurpose());
+								stockIssuance.setTransactiondate(messStockMove.getTransactiondate());
+								stockIssuanceList.add(stockIssuance);
+							}
+							
+						}
+						
+					}
+				}
+			}
+			
+			httpSession.setAttribute("stockissuancelist", stockIssuanceList);
+			httpSession.setAttribute("transactionfromdateselected", "From:"+request.getParameter("transactiondatefrom"));
+			httpSession.setAttribute("transactiontodateselected", "To:"+request.getParameter("transactiondateto"));
+			
+			}
+			getIssuanceStock();
+		}
+
+
+		public void printStockIssuanceReport() {
+			//List<StockIssuance> stockIssuanceList = request.getParameter(name)
 			
 		}
 

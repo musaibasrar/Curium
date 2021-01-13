@@ -218,6 +218,16 @@
 	background-color: #E3EFFF;
 }
 
+.dataTextRight{
+	border-radius: 3px;
+	font-family: Tahoma;
+	color: #4b6a84;
+	font-size: 13px;
+	letter-spacing: normal;
+	text-align: right;
+	background-color: #E3EFFF;
+}
+
 .dataTextInActive {
 	border-radius: 3px;
 	font-family: Tahoma;
@@ -479,6 +489,17 @@
           final1.value=price*quantity;
          
       }
+	 
+	 function calculateTransportationCharges() {
+
+	      	var grandtotal=document.getElementById("itemsTotalAmount").value;
+	      	
+	      	        	
+	          var final1=document.getElementById("itemsGrandTotalAmount");
+	          var transportationcharges=document.getElementById("transportationcharges").value;
+	          final1.value = parseInt(grandtotal) + parseInt(transportationcharges);
+	         
+	      }
 	
 	var itemlist=[
         <c:forEach varStatus="status" items="${messstockavailabilitylist}" var="itemlist">{
@@ -494,7 +515,7 @@
         
         var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=items_"+rowCount+" /><input type='hidden' name='itemids' id=items_id_"+rowCount+" value='' /></td>";
         var col2="<td class='dataTextInActive'><input type='text' name='itemsname' id=items_name_"+rowCount+" class='textfieldvalues' style='font-size: 14px;'/></td>";
- 	    var col3="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;'/></td>";
+ 	    var col3="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
  	   	var col4="<td class='dataTextInActive'><input  value='0'   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
         var col5="<td class='dataTextInActive'><input type='text' value='0'  name='price' id=price_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
         var col6="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
@@ -579,7 +600,6 @@
         });
         
         $('#itemsTotalAmount').val(sum);
-
     }
 	
 	$(document).ready(function() {
@@ -607,7 +627,6 @@
             });
             
             $('#itemsTotalAmount').val(sum);
-           
         });
 
 
@@ -640,7 +659,6 @@
             totalSum=sum;
             
             $('#itemsTotalAmount').val(totalSum);
-            
             	calculateGrandTotal();
             //$('#grandTotalAmount').val(0);
         }catch(e) {
@@ -824,7 +842,7 @@ for(Cookie cookie : cookies){
 							</td>
 							
 							<td class="alignRight">&nbsp;&nbsp;&nbsp;Reference/Invoice No.&nbsp;</td>
-							<td ><input type="text" id="supplierreferenceno" name="supplierreferenceno" class="textfieldvalues" style="font-size: 14px;"  required>
+							<td ><input type="text" id="supplierreferenceno" name="supplierreferenceno" class="textfieldvalues" style="font-size: 14px;">
 							</td>
 							
 						</tr>
@@ -834,7 +852,7 @@ for(Cookie cookie : cookies){
 							</tr>
 						<tr>
 						<td class="alignRight">Invoice Date&nbsp;</td>
-							<td><label> <input	name="invoicedate"	type="text" class="textfieldvalues" id="invoicedate" style="font-size: 14px;" autocomplete="false">
+							<td><label> <input	name="invoicedate"	type="text" class="textfieldvalues" id="invoicedate" style="font-size: 14px;" autocomplete="false" required>
 							</label></td>
 							
 							</tr>
@@ -871,9 +889,21 @@ for(Cookie cookie : cookies){
 							<tfoot>
 							<tr>
 
-								<td colspan="5" align="right" style="font-weight: bold;">Grand Total&nbsp;&nbsp;</td>
+								<td colspan="5" align="right" style="font-weight: bold;">Total&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
 									name="itemsTotalAmount" id="itemsTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" /></td>
+							</tr>
+							<tr>
+
+								<td colspan="5" align="right" style="font-weight: bold;">Transportation & Labour Charges&nbsp;&nbsp;</td>
+								<td align="center"><input type="text"
+									name="transportationcharges" id="transportationcharges" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" onkeyup="calculateTransportationCharges();" value="0" /></td>
+							</tr>
+							<tr>
+
+								<td colspan="5" align="right" style="font-weight: bold;">Grand Total&nbsp;&nbsp;</td>
+								<td align="center"><input type="text"
+									name="itemsGrandTotalAmount" id="itemsGrandTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" /></td>
 							</tr>
 
 						</tfoot>
@@ -901,10 +931,11 @@ for(Cookie cookie : cookies){
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Invoice Date</th>
+						<th class="headerText">View Details</th>
 						<th title="click to sort" class="headerText">Supplier Reference/Invoice No</th>
 						<th title="click to sort" class="headerText">Supplier</th>
 						<th title="click to sort" class="headerText">Total Amount</th>
-						<th class="headerText">View Details</th>
+						
 					</tr>
 				</thead>
 
@@ -917,10 +948,10 @@ for(Cookie cookie : cookies){
 							
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${invoicelist.key.id}"/>" class = "chcktbl"  name="invoiceid"  value="<c:out value="${invoicelist.key.id}:${invoicelist.key.voucherid}:${invoicelist.key.status}"/>"/></td>
 						  <td class="dataText"><fmt:formatDate value="${invoicelist.key.invoicedate}" pattern="dd/MM/yyyy"/></td>
+						  <td class="dataText"><a href="#" onclick="openPopup('<c:out value="${invoicelist.key.id}"/>','<c:out value="${invoicelist.key.invoicedate}"/>','<c:out value="${invoicelist.key.supplierreferenceno}"/>','<c:out value="${invoicelist.value.name}"/>','<c:out value="${invoicelist.key.invoicetotal}"/>')" style="color:#eb6000;">View Details</a></td>
 						  <td class="dataText"><c:out value="${invoicelist.key.supplierreferenceno}" /></td>
 						  <td class="dataText"><c:out value="${invoicelist.value.name}" /></td>
-						  <td class="dataText"><c:out value="${invoicelist.key.invoicetotal}" /></td>
-						  <td class="dataText"><a href="#" onclick="openPopup('<c:out value="${invoicelist.key.id}"/>','<c:out value="${invoicelist.key.invoicedate}"/>','<c:out value="${invoicelist.key.supplierreferenceno}"/>','<c:out value="${invoicelist.value.name}"/>','<c:out value="${invoicelist.key.invoicetotal}"/>')" style="color:#eb6000;">View Details</a></td>
+						  <td class="dataTextRight"><c:out value="${invoicelist.key.invoicetotal}" /></td>
 						</tr>
 					</c:forEach>
 

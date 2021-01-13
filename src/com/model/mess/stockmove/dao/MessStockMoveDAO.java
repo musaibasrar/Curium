@@ -263,5 +263,25 @@ public class MessStockMoveDAO {
 		
 		return result;
 	}
+
+
+
+	public List<MessStockMove> getStockMoveDetailsReport(String stockMoveQuery) {
+		
+        List<MessStockMove> results = new ArrayList<MessStockMove>();
+        
+        try {
+                transaction = session.beginTransaction();
+                results = (List<MessStockMove>) session.createQuery(stockMoveQuery).setCacheable(true).setCacheRegion("commonregion").list();
+                transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                
+                hibernateException.printStackTrace();
+
+        } finally {
+    			HibernateUtil.closeSession();
+        }
+        return results;
+}
 	
 }

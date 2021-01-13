@@ -85,6 +85,7 @@ public class MessStockMoveService {
 						transactions.setCramount(totalValue);
 						transactions.setVouchertype(4);
 						transactions.setTransactiondate(DateUtil.indiandateParser(request.getParameter("transactiondate")));
+						transactions.setEntrydate(DateUtil.todaysDate());
 						transactions.setNarration("Towards Stock Issue");
 						transactions.setCancelvoucher("no");
 						transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
@@ -98,8 +99,8 @@ public class MessStockMoveService {
 						String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmountReceipt+" where accountdetailsid="+crStockLedgerId;
 						
 						result = new MessStockMoveDAO().moveStockSave(messStockMovesList,transactions,updateDrAccount,updateCrAccount);
-			}
-		new MessItemsService(request, response).viewItemDetails();
+					}
+						new MessItemsService(request, response).viewItemDetails();
 		}
 
 
@@ -189,7 +190,8 @@ public class MessStockMoveService {
 		
 		
 		MessStockMove messStockMove = new MessStockMoveDAO().getStockMoveDetails(Integer.parseInt(stockmoveids));
-		float totalValue = messStockMove.getQuantity() * messStockMove.getQuantity();
+		MessStockEntry messStockEntry = new MessItemsDAO().getMessStockEntryByID(messStockMove.getStockentryid());
+		float totalValue = messStockMove.getQuantity() * messStockEntry.getItemunitprice();
 		
 		//Pass J.V. : Debit the assets & credit the Expenses
 		
@@ -203,7 +205,8 @@ public class MessStockMoveService {
 		transactions.setDramount(BigDecimal.valueOf(totalValue));
 		transactions.setCramount(BigDecimal.valueOf(totalValue));
 		transactions.setVouchertype(4);
-		transactions.setTransactiondate(DateUtil.indiandateParser(request.getParameter("transactiondate")));
+		transactions.setTransactiondate(DateUtil.indiandateParser(request.getParameter("transactiondate_"+stockmoveids)));
+		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration("Towards Revarsal of Stock Issue");
 		transactions.setCancelvoucher("no");
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());

@@ -712,6 +712,30 @@
          });
          
      });
+     
+     
+     function deleteRow(tableID) {
+        try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            if(rowCount==1){
+                alert('No records to delete');
+            }
+            for(var i=1; i<rowCount-1; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+            }
+           
+        }catch(e) {
+            alert(e);
+        }
+    }
+    
 </script>
 
 </head>
@@ -734,7 +758,7 @@ for(Cookie cookie : cookies){
 <body>
 
 	<form id="form1"
-		action="Controller?process=DepartmentProcess&action=deleteMultiple" method="POST">
+		 method="POST">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");
@@ -793,7 +817,7 @@ for(Cookie cookie : cookies){
 							<td ><label> <select name="purpose"
 									id="purpose" class="dropdownlist" style="font-size: 14px;" required>
 										<option selected></option>
-										<option>Break Fast</option>
+										<option>Breakfast</option>
 										<option>Lunch</option>
 										<option>Dinner</option>
 										<option>Other</option>
@@ -852,7 +876,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Issue List</td>
+					<td class="headerTD">Items Issue List</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -875,7 +899,7 @@ for(Cookie cookie : cookies){
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${stockmovelist.id}"/>" class = "chcktbl"  name="stockmoveid"  value="<c:out value="${stockmovelist.id}"/>"/></td>
-						  <td class="dataText"><fmt:formatDate value="${stockmovelist.transactiondate}" pattern="dd/MM/yyyy"/></td>
+						  <td class="dataText" style="width: 10%;"><input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: center;" name="transactiondate_${stockmovelist.id}" value="<fmt:formatDate value="${stockmovelist.transactiondate}" pattern="dd/MM/yyyy"/>" readonly></td>
 						  <td class="dataText"><c:out value="${stockmovelist.purpose}" /></td>
 						     <c:set var="itemparts" value="${fn:split(stockmovelist.externalid, '_')}" />
 						  <td class="dataText"><c:out value="${itemparts[0]}" /></td>
@@ -895,7 +919,7 @@ for(Cookie cookie : cookies){
                     		&nbsp;&nbsp;&nbsp;
                     		<button id="reject">Reject</button> 
                     		&nbsp;&nbsp;&nbsp; -->
-                    		<button id="delete">Cancel</button>
+                    		<button id="cancel">Cancel</button>
                     		</td>
                         </tr>
                     </tfoot>

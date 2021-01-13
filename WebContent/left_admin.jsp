@@ -439,11 +439,29 @@ for(Cookie cookie : cookies){
             <div >
                 <a target="mainFrame" href="Controller?process=MessItemsMoveProcess&action=issueItems" style="font-size: 12px;">Issue</a><br/>
                 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=purchaseItems" style="font-size: 12px;">Receive</a><br/>
+                <a target="mainFrame" href="Controller?process=MessItemsProcess&action=currentStock" style="font-size: 12px;">Current Stock</a><br/>
+                <a target="mainFrame" href="Controller?process=MessItemsProcess&action=batchStock" style="font-size: 12px;">Batch Stock</a><br/>
+                <a target="mainFrame" href="Controller?process=MessItemsProcess&action=issuanceStock" style="font-size: 12px;">Stock Issuance</a><br/>
                 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=viewItems" style="font-size: 12px;">View/Add Items</a><br/>
-                <a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a><br/>
-                <a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=viewSuppliers" style="font-size: 12px;">Status</a><br/>
             </div>
             
+              <h5 style="font-size: 12px"><a href="#" >Suppliers</a></h5>
+            <div >
+            	<a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=viewSuppliers" style="font-size: 12px;">Payments</a><br/>
+                <a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a><br/>
+            </div>
+            
+             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
+            <div >
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=createAccount" style="font-size: 12px;">Ledger Account</a><br/>
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a><br/>
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a><br/>
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=generalLedgerReport" style="font-size: 12px;">General Ledger Report</a><br/>
+                <a target="mainFrame" href="incomestatement.jsp" style="font-size: 12px;">Income Statement</a><br/>
+                <a target="mainFrame" href="trialbalance.jsp" style="font-size: 12px;">Trial Balance</a><br/>
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
+            </div>
             
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
@@ -529,18 +547,6 @@ for(Cookie cookie : cookies){
             <div >
                 <a target="mainFrame" href="Controller?process=SMSProcess&action=sendSMS" style="font-size: 12px;">SMS</a><br/>
                 <a target="mainFrame" href="sendemail.jsp" style="font-size: 12px;">Email</a><br/>
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
-            <div >
-                <a target="mainFrame" href="Controller?process=AccountProcess&action=createAccount" style="font-size: 12px;">Ledger Account</a><br/>
-                <a target="mainFrame" href="Controller?process=AccountProcess&action=createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
-                <a target="mainFrame" href="Controller?process=AccountProcess&action=viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a><br/>
-                <a target="mainFrame" href="Controller?process=AccountProcess&action=viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a><br/>
-                <a target="mainFrame" href="Controller?process=AccountProcess&action=generalLedgerReport" style="font-size: 12px;">General Ledger Report</a><br/>
-                <a target="mainFrame" href="incomestatement.jsp" style="font-size: 12px;">Income Statement</a><br/>
-                <a target="mainFrame" href="trialbalance.jsp" style="font-size: 12px;">Trial Balance</a><br/>
-                <a target="mainFrame" href="Controller?process=AccountProcess&action=balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
             </div>
             
              <!-- <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>

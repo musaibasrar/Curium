@@ -46,11 +46,60 @@ public class MessItemsAction {
                     url = savePurchase();
                 }else if (action.equalsIgnoreCase("cancelPurchase")) {
                     url = cancelPurchase();
-                }               
+                }else if (action.equalsIgnoreCase("currentStock")) {
+                    url = currentStock();
+                }else if (action.equalsIgnoreCase("printStockAvailability")) {
+                    url = printStockAvailability();
+                }else if (action.equalsIgnoreCase("batchStock")) {
+                    url = batchStock();
+                }else if (action.equalsIgnoreCase("printBatchStockAvailability")) {
+                    url = printBatchStockAvailability();
+                }else if (action.equalsIgnoreCase("issuanceStock")) {
+                    url = issuanceStock();
+                }else if (action.equalsIgnoreCase("generateStockIssuanceReport")) {
+                    url = generateStockIssuanceReport();
+                }else if (action.equalsIgnoreCase("printStockIssuanceReport")) {
+                    url = printStockIssuanceReport();
+                }                
                 return url;
         }
         
 
+
+		private String printStockIssuanceReport() {
+			new MessItemsService(request, response).printStockIssuanceReport();
+			return "printstockissuancereport.jsp";
+		}
+
+		private String generateStockIssuanceReport() {
+			new MessItemsService(request, response).generateStockIssuanceReport();
+			return "stockissuancereport.jsp";
+		}
+
+		private String issuanceStock() {
+			new MessItemsService(request, response).getIssuanceStock();
+			return "stockissuancereport.jsp";
+		}
+
+		private String printBatchStockAvailability() {
+			new MessItemsService(request, response).getBatchStock();
+			return "printbatchstock.jsp";
+		}
+
+		private String batchStock() {
+			new MessItemsService(request, response).getBatchStock();
+			return "batchstock.jsp";
+		}
+
+		private String printStockAvailability() {
+			new MessItemsService(request, response).getCurrentStock();
+			return "printcurrentstock.jsp";
+		}
+
+		private String currentStock() {
+			new MessItemsService(request, response).getCurrentStock();
+			return "currentstock.jsp";
+		}
 
 		private String cancelPurchase() {
 			

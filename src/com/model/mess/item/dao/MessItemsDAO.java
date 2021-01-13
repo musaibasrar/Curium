@@ -137,17 +137,22 @@ public class MessItemsDAO {
 
 
 
-	public boolean addNewStock(List<MessStockEntry> messStockEntryList, VoucherEntrytransactions transactions, String updateDrAccount, String updateCrAccount) {
+	public boolean addNewStock(List<MessStockEntry> messStockEntryList, VoucherEntrytransactions transactions, String updateDrAccount, String updateCrAccount, VoucherEntrytransactions transactionTC, String updateTransportationDrAccount, String updateTransportationCrAccount) {
 		 
 				boolean result = false; 
 		try {
 	            //this.session = sessionFactory.openCurrentSession();
 	            transaction = session.beginTransaction();
 				session.save(transactions);
+				session.save(transactionTC);
 				Query query = session.createQuery(updateDrAccount);
 				query.executeUpdate();
 				Query query1 = session.createQuery(updateCrAccount);
 				query1.executeUpdate();
+				Query queryDrTc = session.createQuery(updateTransportationDrAccount);
+				queryDrTc.executeUpdate();
+				Query queryCrTc = session.createQuery(updateTransportationCrAccount);
+				queryCrTc.executeUpdate();
 	            
 	            for (MessStockEntry messStockEntry : messStockEntryList) {
 	            	session.save(messStockEntry);
@@ -274,7 +279,7 @@ public class MessItemsDAO {
         List<MessStockEntry> results = new ArrayList<MessStockEntry>();
         try {
                 transaction = session.beginTransaction();
-                results = (List<MessStockEntry>) session.createQuery("From MessStockEntry ms where ms.availablequantity > 0 and ms.status != 'CANCELLED' order by ms.id DESC").setCacheable(true).setCacheRegion("commonregion").list();
+                results = (List<MessStockEntry>) session.createQuery("From MessStockEntry ms where ms.availablequantity > 0 and ms.status != 'CANCELLED' order by ms.itemid DESC").setCacheable(true).setCacheRegion("commonregion").list();
                 transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
                 
@@ -296,7 +301,7 @@ public class MessItemsDAO {
             
             Query queryItems = session.createQuery("from MessItems mi where mi.id IN (:ids)").setCacheable(true).setCacheRegion("commonregion");
             queryItems.setParameterList("ids", itemIds);
-            result = queryItems.list();
+            result = queryItems.getResultList();
             transaction.commit();
             
         } catch (HibernateException hibernateException) {transaction.rollback();
@@ -309,7 +314,7 @@ public class MessItemsDAO {
 
 
 
-	public boolean cancelPurchase(int invoiceId, int voucherId, List<MessStockEntry> messStockEntryList,
+	public boolean cancelPurchase(int invoiceId, List<MessStockEntry> messStockEntryList,
 			String updateDrAccount, String updateCrAccount, String cancelVoucher) {
 		
 		boolean result = false;
@@ -359,6 +364,47 @@ public class MessItemsDAO {
         try {
                 transaction = session.beginTransaction();
                 Query query = session.createQuery("From MessStockEntry mse where mse.messinvoicedetails.id = '"+invIds+"'");
+                results = query.getResultList();
+                transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                
+                hibernateException.printStackTrace();
+
+        } finally {
+    			HibernateUtil.closeSession();
+        }
+        return results;
+}
+
+
+
+	public MessStockEntry getMessStockEntryByID(Integer stockentryid) {
+		
+        MessStockEntry results = new MessStockEntry();
+        try {
+                transaction = session.beginTransaction();
+                Query query = session.createQuery("From MessStockEntry mse where id = '"+stockentryid+"'");
+                results = (MessStockEntry) query.uniqueResult();
+                transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                
+                hibernateException.printStackTrace();
+
+        } finally {
+    			HibernateUtil.closeSession();
+        }
+        return results;
+}
+
+
+
+	public List<MessStockEntry> getMessStockEntryByIdList(List<Integer> messStockMoveIds) {
+		
+        List<MessStockEntry> results = new ArrayList<MessStockEntry>();
+        try {
+                transaction = session.beginTransaction();
+                Query query = session.createQuery("From MessStockEntry mse where mse.id IN (:ids)");
+                query.setParameterList("ids", messStockMoveIds);
                 results = query.getResultList();
                 transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
