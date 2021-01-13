@@ -334,7 +334,7 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
-			"sScrollY" : "380px",
+			"sScrollY" : "340px",
 			"bPaginate" : false,
 			"bLengthChange" : false,
 			"bFilter" : true,
@@ -347,22 +347,6 @@
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchForFees() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StampFeesProcess&action=searchForFees";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-
-	$(function() {
-
-		$("#search").button().click(function() {
-			searchForFees();
-		});
-		
-
-	});
 
 	$(function() {
 
@@ -407,7 +391,7 @@
 			changeMonth : true,
 			yearRange: "-50:+10"
 		});
-		$( "#fromdate" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#fromdate" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#fromdate").datepicker("option", "showAnim", $(this).val());
 		});
@@ -417,7 +401,7 @@
 			changeMonth : true,
 			yearRange: "-50:+10"
 		});
-		$( "#todate" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#todate" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#todate").datepicker("option", "showAnim", $(this).val());
 		});
@@ -468,14 +452,14 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-						<td width="20%" class="alignRight">From Date(MM/DD/YYYY)&nbsp;</td>
+						<td width="20%" class="alignRight">From Date&nbsp;</td>
 							<td width="28%"><label> <input name="fromdate" autocomplete="off"
 									type="text" 
 									class="textField" id="fromdate" size="36" 
 									data-validate="validate(required)">
 							</label></td>
 							
-							<td width="20%" class="alignRight">To Date(MM/DD/YYYY)&nbsp;</td>
+							<td width="20%" class="alignRight">To Date&nbsp;</td>
 							<td width="28%"><label> <input name="todate" autocomplete="off"
 									type="text" 
 									class="textField" id="todate" size="36"
@@ -503,28 +487,21 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 		<table width="100%">
                     <tr>
-                        <td  class="headerTD">Trial Balance</td>
+                        <td  class="headerTD">Trial Balance<br>
+                        From Date: ${fromdatetb}&nbsp;&nbsp;&nbsp;To Date: ${todatetb}</td>
                     </tr>
 
                     
 
                 </table>
                 
-               <br><br>
-                
-			<table width="100%" border="0" style="border-color: #4b6a84;float: left;margin-bottom:50px;">
+			<table width="100%" border="0" style="border-color: #4b6a84;" id="myTable">
 
 				<thead>
 					<tr>
-						
 						<th title="click to sort" class="headerText" style="font-weight: bold;">Particulars</th>
-						
 						<th title="click to sort" class="headerText" style="font-weight: bold;">Debit</th>
 						<th title="click to sort" class="headerText" style="font-weight: bold;">Credit</th>
-						
-						<th ></th>
-
-
 					</tr>
 				</thead>
 
@@ -539,7 +516,7 @@ for(Cookie cookie : cookies){
 							
 							<c:if test="${(accountdetails.key.accountGroupMaster.accountgroupid == 1) || (accountdetails.key.accountGroupMaster.accountgroupid == 5)}">
 							
-									<c:if test="${accountdetails.value >=1}">
+									<c:if test="${accountdetails.value >= 1}">
 										<td class="dataText" style="text-align: right;">
 										<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${accountdetails.value}" />
 										<%-- <c:out value="${accountdetails.value}" /> --%>
@@ -551,7 +528,6 @@ for(Cookie cookie : cookies){
 										<td class="dataText" ></td>
 										<td class="dataText" style="text-align: right;">
 										<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${accountdetails.value*-1}" />
-										<%-- <c:out value="${accountdetails.value}" /> --%>
 										</td>			
 									</c:if>
 							
@@ -573,50 +549,6 @@ for(Cookie cookie : cookies){
 							
 						</tr>
 					</c:forEach>
-					
-					<%-- <c:forEach items="${accountdetailsbalanceCr}" var="accountdetailsbalanceCr">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${accountdetailsbalanceCr.accountDetails.accountname}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-							
-							<c:if test="${(accountdetailsbalanceCr.crdr == 'Cr')}">
-							<td class="dataText"></td>
-							<td class="dataText" style="text-align: right;"><c:out value="${accountdetailsbalanceCr.currentbalance}" /></td>
-							</c:if>
-							
-							<c:if test="${(accountdetailsbalanceCr.crdr == 'Dr')}">
-							<td class="dataText" style="text-align: right;"><c:out value="${accountdetailsbalanceCr.currentbalance}" /></td>
-							<td class="dataText"></td>
-							</c:if>
-							
-						</tr>
-					</c:forEach> --%>
-					<%-- 					
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataTextInActive" style="text-align: left;height: 20px;"><c:out value="${grouponetotallabel}" /></td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${grouponesemitotal}" /></td>
-
-						</tr>
-						
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataTextInActive" style="text-align: left;height: 20px;"><c:out value="${differencelabel}" /></td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${differenceamount}" /></td>
-
-						</tr>
-						
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataTextInActive" style="text-align: left;height: 20px;">TOTAL</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${grouponetotal}" /></td>
-
-						</tr> --%>
 					
 				</tbody>
 				<tfoot>
