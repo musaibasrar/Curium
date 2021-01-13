@@ -28,6 +28,8 @@ public class VoucherEntrytransactions implements java.io.Serializable {
 	private BigDecimal cramount;
 	private Integer vouchertype;
 	private Date transactiondate;
+	private Date entrydate;
+	private Date vouchercancellationdate;
 	private String narration;
 	private int financialyear;
 	private String cancelvoucher;
@@ -38,7 +40,7 @@ public class VoucherEntrytransactions implements java.io.Serializable {
 
 	public VoucherEntrytransactions(Integer draccountid, Integer craccountid,
 			BigDecimal dramount, BigDecimal cramount, Integer vouchertype,
-			Date transactionDate, String narration, int financialyear, String cancelVoucher,
+			Date transactionDate, String narration, int financialyear, String cancelVoucher,Date entrydate,Date vouchercancellationdate,
 			int branchid) {
 		this.draccountid = draccountid;
 		this.craccountid = craccountid;
@@ -49,6 +51,8 @@ public class VoucherEntrytransactions implements java.io.Serializable {
 		this.narration = narration;
 		this.financialyear = financialyear;
 		this.cancelvoucher = cancelVoucher;
+		this.entrydate = entrydate;
+		this.vouchercancellationdate = vouchercancellationdate;
 		this.branchid = branchid;
 	}
 
@@ -141,6 +145,22 @@ public class VoucherEntrytransactions implements java.io.Serializable {
 
 	public void setCancelvoucher(String cancelvoucher) {
 		this.cancelvoucher = cancelvoucher;
+	}
+
+	public Date getEntrydate() {
+		return entrydate;
+	}
+
+	public void setEntrydate(Date entrydate) {
+		this.entrydate = entrydate;
+	}
+
+	public Date getVouchercancellationdate() {
+		return vouchercancellationdate;
+	}
+
+	public void setVouchercancellationdate(Date vouchercancellationdate) {
+		this.vouchercancellationdate = vouchercancellationdate;
 	}
 
 	@Column(name = "branchid")

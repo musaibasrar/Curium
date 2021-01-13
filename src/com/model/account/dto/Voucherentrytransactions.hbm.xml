@@ -26,6 +26,12 @@
         <property name="transactiondate" type="date">
             <column name="transactiondate" length="10" />
         </property>
+        <property name="entrydate" type="date">
+            <column name="entrydate" length="10" />
+        </property>
+        <property name="vouchercancellationdate" type="date">
+            <column name="vouchercancellationdate" length="10" />
+        </property>
         <property name="narration" type="string">
             <column name="narration" length="500" />
         </property>

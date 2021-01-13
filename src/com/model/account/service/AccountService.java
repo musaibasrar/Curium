@@ -3,6 +3,7 @@ package com.model.account.service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -360,6 +361,7 @@ public class AccountService {
 		transactions.setCramount(new BigDecimal(crAmount));
 		transactions.setVouchertype(Integer.parseInt(receiptVoucher));
 		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(receiptDate));
+		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(receiptNarration);
 		transactions.setCancelvoucher("no");
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
@@ -395,6 +397,7 @@ public class AccountService {
 		transactions.setCramount(new BigDecimal(crAmountPayment));
 		transactions.setVouchertype(Integer.parseInt(paymentVoucher));
 		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(paymentDate));
+		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(paymentNarration);
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -429,6 +432,7 @@ public class AccountService {
 		transactions.setCramount(new BigDecimal(crAmountContra));
 		transactions.setVouchertype(Integer.parseInt(contraVoucher));
 		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(contraDate));
+		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(contraNarration);
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -463,6 +467,7 @@ public class AccountService {
 		transactions.setCramount(new BigDecimal(crAmountJournal));
 		transactions.setVouchertype(Integer.parseInt(journalVoucher));
 		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(journalDate));
+		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(journalNarration);
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -663,8 +668,8 @@ public class AccountService {
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
 		
-		String fromDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("fromdate")));
-		String toDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("todate")));
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
 		
 		if(httpSession.getAttribute(BRANCHID)!=null) {
 			
@@ -707,6 +712,8 @@ public class AccountService {
 				request.setAttribute("accountdetailsbalanceMap", accountBalanceMap);
 				request.setAttribute("credittotal", creditAllAcc);
 				request.setAttribute("debittotal", debitAllAcc);
+				request.setAttribute("fromdatetb", fromDate = DataUtil.dateFromatConversionSlash(fromDate));
+				request.setAttribute("todatetb", toDate = DataUtil.dateFromatConversionSlash(toDate));
 				
 				totalBalanceAllAccDiff = creditAllAcc.subtract(debitAllAcc);
 				
@@ -756,6 +763,11 @@ public class AccountService {
 		
 		String[] receiptIds = request.getParameterValues("transactionids");
 		int voucherType = DataUtil.parseInt(request.getParameter("voucherType"));
+		Date now = new Date();
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
+        String todaysDate = formatter.format(now);
+		
 		
 		if (receiptIds != null || voucherType!=0) {
 			
@@ -767,7 +779,7 @@ public class AccountService {
 					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
 					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
 
-					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id;
+					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
 					
 					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
 				}else if(voucherType==2) {
@@ -775,7 +787,7 @@ public class AccountService {
 					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
 					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
 					
-					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id;
+					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
 					
 					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
 				}else if(voucherType==3) {
@@ -783,7 +795,7 @@ public class AccountService {
 					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherTransaction.getDramount()+" where accountdetailsid="+voucherTransaction.getDraccountid();
 					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
 					
-					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id;
+					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
 					
 					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
 				}else if(voucherType==4) {
@@ -808,7 +820,7 @@ public class AccountService {
 						updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherTransaction.getCramount()+" where accountdetailsid="+voucherTransaction.getCraccountid();
 					}
 					
-					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id;
+					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+id;
 					
 					return new AccountDAO().updateAccountsWithVoucherCancel(updateDrAccount, updateCrAccount, cancelVoucher);
 				}
@@ -913,8 +925,8 @@ public class AccountService {
 		String accountDetails = DataUtil.emptyString(request.getParameter("accountid"));
 		String[] accountIdName = accountDetails.split(":");
 		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
-		String fromDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("fromdate")));
-		String toDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("todate")));
+		String fromDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("todate")));
 		if(httpSession.getAttribute(BRANCHID)!=null) {
 
 		String twoAccounts = null;
@@ -955,8 +967,8 @@ public class AccountService {
 
 	public boolean getIncomeStatement() {
 		
-		String fromDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("fromdate")));
-		String toDate = DataUtil.dateFromatConversion(DataUtil.emptyString(request.getParameter("todate")));
+		String fromDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("todate")));
 		
 		if(httpSession.getAttribute(BRANCHID)!=null) {
 			
