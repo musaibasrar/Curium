@@ -79,9 +79,16 @@ public class AccountAction {
 			url = searchLedgerEntries();
 		}else if ("incomeStatement".equalsIgnoreCase(action)) {
 			url = incomeStatement();
+		}else if ("printSearchLedgerEntries".equalsIgnoreCase(action)) {
+			url = printSearchLedgerEntries();
 		}
 		return url;
 		}
+
+	private String printSearchLedgerEntries() {
+		new AccountService(request, response).printSearchJournalEntries();
+		return "printgeneralledgerreport.jsp";
+	}
 
 	private String incomeStatement() {
 		new AccountService(request, response).getIncomeStatement();
