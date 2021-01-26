@@ -58,7 +58,6 @@ public class Student implements java.io.Serializable {
 	private Integer notcissued;
 	private Date datetcissued;
 	private String guardiandetails;
-	private String subsequentprogress;
 	private int branchid;
 	private String languagesstudied;
 	private String instructionmediumlastschool;
@@ -78,16 +77,27 @@ public class Student implements java.io.Serializable {
 	private String studentscaste;
 	private String socialcategory;
 	private Integer belongtobpl;
-	private String bplcardno;
-	private String bhagyalakshmibondnumber;
-	private String disabilitychild;
-	private String specialcategory;
 	private Integer sts;
 	private Integer rte;
 	private String bankname;
 	private String bankbranch;
 	private String accno;
 	private String bankifsc;
+	
+	//for mess private String bplcardno;
+	private String breakfast;
+
+	//for mess private String bhagyalakshmibondnumber;
+	private String lunch;
+	
+	//for mess private String specialcategory;
+	private String dinner;
+	
+	//for mess private String disabilitychild;
+	private String staytype;
+	
+	//for mess private String subsequentprogress;
+	private String campus;
 	
 	public Student() {
 	}
@@ -110,8 +120,8 @@ public class Student implements java.io.Serializable {
 			String languagesstudied, String instructionmediumlastschool,
 			Integer passedout, Integer droppedout, Integer leftout, Integer semester,String stream,String mediumofinstruction,
 			 String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,String studentscaste,
-			 String socialcategory,Integer belongtobpl,String bplcardno,String bhagyalakshmibondnumber,
-			 String disabilitychild,String specialcategory, Integer sts, Integer rte, String bankname, String bankbranch, String accno, String bankifsc) {
+			 String socialcategory,Integer belongtobpl,String breakfast,String lunch,String dinner,String staytype,String campus,
+			 Integer sts, Integer rte, String bankname, String bankbranch, String accno, String bankifsc) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
@@ -159,16 +169,18 @@ public class Student implements java.io.Serializable {
 		this.studentscaste = studentscaste;
 		this.socialcategory = socialcategory;
 		this.belongtobpl = belongtobpl;
-		this.bplcardno = bplcardno;
-		this.bhagyalakshmibondnumber = bhagyalakshmibondnumber;
-		this.disabilitychild = disabilitychild;
-		this.specialcategory = specialcategory;
 		this.sts=sts;
 		this.rte=rte;
 		this.bankname=bankname;
 		this.bankbranch=bankbranch;
 		this.accno=accno;
 		this.bankifsc=bankifsc;
+		this.breakfast = breakfast;
+		this.lunch = lunch;
+		this.dinner = dinner;
+		this.staytype = staytype;
+		this.campus = campus;
+
 	}
 
 	@Id
@@ -468,16 +480,6 @@ public class Student implements java.io.Serializable {
 		this.guardiandetails = guardiandetails;
 	}
 
-	@Column(name = "subsequentprogress", length = 500)
-	public String getSubsequentprogress() {
-		return subsequentprogress;
-	}
-
-	public void setSubsequentprogress(String subsequentprogress) {
-		this.subsequentprogress = subsequentprogress;
-	}
-
-	
 	@Column(name = "branchid")
 	public int getBranchid() {
 	return branchid;
@@ -634,38 +636,6 @@ public class Student implements java.io.Serializable {
 		this.belongtobpl = belongtobpl;
 	}
 
-	public String getBplcardno() {
-		return bplcardno;
-	}
-
-	public void setBplcardno(String bplcardno) {
-		this.bplcardno = bplcardno;
-	}
-
-	public String getBhagyalakshmibondnumber() {
-		return bhagyalakshmibondnumber;
-	}
-
-	public void setBhagyalakshmibondnumber(String bhagyalakshmibondnumber) {
-		this.bhagyalakshmibondnumber = bhagyalakshmibondnumber;
-	}
-
-	public String getDisabilitychild() {
-		return disabilitychild;
-	}
-
-	public void setDisabilitychild(String disabilitychild) {
-		this.disabilitychild = disabilitychild;
-	}
-
-	public String getSpecialcategory() {
-		return specialcategory;
-	}
-
-	public void setSpecialcategory(String specialcategory) {
-		this.specialcategory = specialcategory;
-	}
-
 	public Integer getSts() {
 		return sts;
 	}
@@ -712,6 +682,46 @@ public class Student implements java.io.Serializable {
 
 	public void setBankifsc(String bankifsc) {
 		this.bankifsc = bankifsc;
+	}
+
+	public String getBreakfast() {
+		return breakfast;
+	}
+
+	public void setBreakfast(String breakfast) {
+		this.breakfast = breakfast;
+	}
+
+	public String getLunch() {
+		return lunch;
+	}
+
+	public void setLunch(String lunch) {
+		this.lunch = lunch;
+	}
+
+	public String getDinner() {
+		return dinner;
+	}
+
+	public void setDinner(String dinner) {
+		this.dinner = dinner;
+	}
+
+	public String getStaytype() {
+		return staytype;
+	}
+
+	public void setStaytype(String staytype) {
+		this.staytype = staytype;
+	}
+
+	public String getCampus() {
+		return campus;
+	}
+
+	public void setCampus(String campus) {
+		this.campus = campus;
 	}
 	
 	

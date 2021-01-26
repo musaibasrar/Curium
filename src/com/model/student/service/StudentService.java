@@ -66,7 +66,7 @@ public class StudentService {
 		Parents parents = new Parents();
 		Pudetails puDetails = new Pudetails();
 		Degreedetails degreeDetails = new Degreedetails();
-		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying = null,conClassAdmittedIn=null;
+		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying = null,conClassAdmittedIn=null,campus=null;
 		boolean result=false;
 		
 		try {
@@ -190,9 +190,10 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("classonleaving")) {
 		                	student.setClassonleaving(DataUtil.emptyString(item.getString()));
 		                }
-		                // @UI 'core subjects studied'
-		                if (fieldName.equalsIgnoreCase("progress")) {
-		                	student.setSubsequentprogress(DataUtil.emptyString(item.getString()));
+		                if (fieldName.equalsIgnoreCase("campus")) {
+		                	String[] camp = (DataUtil.emptyString(item.getString())).split("_");
+		                	campus = camp[1];
+		                	student.setCampus(camp[0]);
 		                }
 		                if (fieldName.equalsIgnoreCase("dateofleaving")) {
 		                	student.setDateleaving(DateUtil.indiandateParser(item.getString()));
@@ -237,24 +238,20 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("socialcategory")) {
 		                	student.setSocialcategory(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Was in receipt of any scholarship'
 		                if (fieldName.equalsIgnoreCase("belongtobpl")) {
 		                	student.setBelongtobpl(DataUtil.parseInt(item.getString()));
 		                }
-		                //@UI 'Adhar card no'
-		                if (fieldName.equalsIgnoreCase("bplcardno")) {
-		                	student.setBplcardno(DataUtil.emptyString(item.getString()));
+		                if (fieldName.equalsIgnoreCase("breakfast")) {
+		                	student.setBreakfast(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Whether Vaccinated'
-		                if (fieldName.equalsIgnoreCase("bhagyalakshmibondnumber")) {
-		                	student.setBhagyalakshmibondnumber(DataUtil.emptyString(item.getString()));
+		                if (fieldName.equalsIgnoreCase("lunch")) {
+		                	student.setLunch(DataUtil.emptyString(item.getString()));
 		                }
-		                //@UI 'Marks of Identification on Pupil's body'
-		                if (fieldName.equalsIgnoreCase("disabilitychild")) {
-		                	student.setDisabilitychild(DataUtil.emptyString(item.getString()));
+		                if (fieldName.equalsIgnoreCase("staytype")) {
+		                	student.setStaytype(DataUtil.emptyString(item.getString()));
 		                }
-		                if (fieldName.equalsIgnoreCase("specialcategory")) {
-		                	student.setSpecialcategory(DataUtil.emptyString(item.getString()));
+		                if (fieldName.equalsIgnoreCase("dinner")) {
+		                	student.setDinner(DataUtil.emptyString(item.getString()));
 		                }
 		                if (fieldName.equalsIgnoreCase("sts")) {
 		                	student.setSts(DataUtil.parseInt(item.getString()));
@@ -476,7 +473,9 @@ public class StudentService {
 		student.setPassedout(0);
 		student.setDroppedout(0);
 		student.setLeftout(0);
-		student.setStudentexternalid(DataUtil.generateString(5));
+		String[] academicyear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
+		student.setStudentexternalid("1"+campus+""+academicyear[0].charAt(2)+""+academicyear[0].charAt(3)+""+student.getClassstudying().substring(0, student.getClassstudying().length() - 2));
+		//student.setStudentexternalid(DataUtil.generateString(5));
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		puDetails.setOptionalsubjects(optional.toString());
 		puDetails.setCompulsorysubjects(compulsory.toString());
@@ -804,8 +803,8 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("classonleaving")) {
 	                	student.setClassonleaving(DataUtil.emptyString(item.getString()));
 	                }
-	                if (fieldName.equalsIgnoreCase("progress")) {
-	                	student.setSubsequentprogress(DataUtil.emptyString(item.getString()));
+	                if (fieldName.equalsIgnoreCase("campus")) {
+	                	student.setCampus(DataUtil.emptyString(item.getString()));
 	                }
 	                if (fieldName.equalsIgnoreCase("dateofleaving")) {
 	                	student.setDateleaving(DateUtil.indiandateParser(item.getString()));
@@ -853,21 +852,21 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("belongtobpl")) {
 	                	student.setBelongtobpl(DataUtil.parseInt(item.getString()));
 	                }
-	                if (fieldName.equalsIgnoreCase("bplcardno")) {
-	                	student.setBplcardno(DataUtil.emptyString(item.getString()));
+	                if (fieldName.equalsIgnoreCase("breakfast")) {
+	                	student.setBreakfast(DataUtil.emptyString(item.getString()));
 	                }
-	                if (fieldName.equalsIgnoreCase("bhagyalakshmibondnumber")) {
-	                	student.setBhagyalakshmibondnumber(DataUtil.emptyString(item.getString()));
+	                if (fieldName.equalsIgnoreCase("lunch")) {
+	                	student.setLunch(DataUtil.emptyString(item.getString()));
 	                }
-	                if (fieldName.equalsIgnoreCase("disabilitychild")) {
-	                	student.setDisabilitychild(DataUtil.emptyString(item.getString()));
+	                if (fieldName.equalsIgnoreCase("staytype")) {
+	                	student.setStaytype(DataUtil.emptyString(item.getString()));
 	                }
-	                if (fieldName.equalsIgnoreCase("specialcategory")) {
-	                	dropdowncateg = DataUtil.emptyString(item.getString());
+	                if (fieldName.equalsIgnoreCase("dinner")) {
+	                	student.setDinner(DataUtil.emptyString(item.getString()));
 	                }
-	                if(fieldName.equalsIgnoreCase("newcategory")) {
+	                /*if(fieldName.equalsIgnoreCase("newcategory")) {
 	                	newcateg = DataUtil.emptyString(item.getString());
-	                }
+	                }*/
 	                if (fieldName.equalsIgnoreCase("sts")) {
 	                	student.setSts(DataUtil.parseInt(item.getString()));
 	                }
@@ -1103,11 +1102,11 @@ public class StudentService {
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-		if("".equalsIgnoreCase(newcateg)) {
+		/*if("".equalsIgnoreCase(newcateg)) {
 			student.setSpecialcategory(dropdowncateg);
 		}else {
 			student.setSpecialcategory(newcateg);
-		}
+		}*/
 		 student.setArchive(0);
 		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		 

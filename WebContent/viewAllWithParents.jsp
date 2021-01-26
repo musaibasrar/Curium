@@ -402,11 +402,14 @@ for(Cookie cookie : cookies){
                     <thead>
                         <tr>
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
+                            <th title="click to sort" class="headerText">UID</th>
                             <th title="click to sort" class="headerText">Admission Number</th>
-                            <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th title="click to sort" class="headerText">Name</th>
                             <th title="click to sort" class="headerText">Class</th>
-                            <th title="click to sort" class="headerText">Father's Name&nbsp;</th>
-                            <th title="click to sort" class="headerText">Mother's Name&nbsp;</th>
+                            <th title="click to sort" class="headerText">Father's Name</th>
+                            <th title="click to sort" class="headerText">Breakfast</th>
+                            <th title="click to sort" class="headerText">Lunch</th>
+                            <th title="click to sort" class="headerText">Dinner</th>
                         </tr>
                     </thead>
 
@@ -415,6 +418,7 @@ for(Cookie cookie : cookies){
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.studentexternalid}"/></a></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.name}"/></td>
                                 <td class="dataText" style="text-transform:uppercase">
@@ -423,7 +427,21 @@ for(Cookie cookie : cookies){
 								</c:forEach>
                                 </td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.fathersname}"/></td>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.mothersname}"/></td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                	<input type="checkbox"
+										value="breakfast" name="breakfast" id="breakfast" 
+									${Parents.student.breakfast == 'breakfast' ? 'checked' : ''} />
+                                </td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                	<input type="checkbox"
+										value="lunch" name="lunch" id="lunch" 
+									${Parents.student.lunch == 'lunch' ? 'checked' : ''} />
+                                </td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                	<input type="checkbox"
+										value="dinner" name="dinner" id="dinner" 
+									${Parents.student.dinner == 'dinner' ? 'checked' : ''} />
+                                </td>
                                 <!-- <fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/>  -->
                                 <!-- <td class="dataText"><fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/></td> -->
                                  

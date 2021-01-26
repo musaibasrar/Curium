@@ -35,8 +35,8 @@ public class parentsDetailsDAO {
 	            //this.session = sessionFactory.openCurrentSession();
 	            transaction = session.beginTransaction();
 	            session.save(parents);
-
-
+	            Query query = session.createQuery("update Student set studentexternalid = concat(studentexternalid,"+parents.getStudent().getSid()+") where sid="+parents.getStudent().getSid());
+	            query.executeUpdate();
 	            transaction.commit();
 	           
 	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

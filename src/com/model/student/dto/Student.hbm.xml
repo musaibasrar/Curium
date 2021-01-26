@@ -101,8 +101,8 @@
         <property name="guardiandetails" type="string">
             <column name="guardiandetails" length="200" />
         </property>
-         <property name="subsequentprogress" type="string">
-            <column name="subsequentprogress" length="500" />
+         <property name="campus" type="string">
+            <column name="campus" length="500" />
         </property>
           <property name="branchid" type="int">
             <column name="branchid" />
@@ -153,17 +153,17 @@
         <property name="belongtobpl" type="java.lang.Integer">
             <column name="belongtobpl"/>
         </property> 
-        <property name="bplcardno" type="string">
-            <column name="bplcardno" length="25" />
+        <property name="breakfast" type="string">
+            <column name="breakfast" length="25" />
         </property> 
-        <property name="bhagyalakshmibondnumber" type="string">
-            <column name="bhagyalakshmibondnumber" length="25" />
+        <property name="lunch" type="string">
+            <column name="lunch" length="25" />
         </property>
-        <property name="disabilitychild" type="string">
-            <column name="disabilitychild" length="40" />
+        <property name="staytype" type="string">
+            <column name="staytype" length="40" />
         </property>   
-        <property name="specialcategory" type="string">
-            <column name="specialcategory" length="25" />
+        <property name="dinner" type="string">
+            <column name="dinner" length="25" />
         </property> 
         <property name="sts" type="java.lang.Integer">
             <column name="sts" />
