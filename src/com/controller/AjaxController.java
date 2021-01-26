@@ -23,6 +23,7 @@ import com.model.feesdetails.action.FeesDetailsAction;
 import com.model.hr.action.HrAction;
 import com.model.marksdetails.action.MarksDetailsAction;
 import com.model.mess.stockentry.action.MessStockEntryAction;
+import com.model.mess.supplier.action.MessSuppliersAction;
 import com.model.position.action.PositionAction;
 import com.model.printids.action.PrintIdsAction;
 import com.model.sendemail.action.EmailAction;
@@ -54,6 +55,8 @@ public class AjaxController extends HttpServlet {
         	new HrAction(request, response).execute(action);
         }else if(process.equalsIgnoreCase("stockentry")){
         	new MessStockEntryAction(request, response).execute(action);
+        }else if(process.equalsIgnoreCase("SupplierBalance")){
+        	new MessSuppliersAction(request, response).execute(action);
         }
     }
 

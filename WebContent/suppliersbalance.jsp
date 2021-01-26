@@ -1,6 +1,6 @@
 <%--
-    Document   : currentstock
-    Created on : JAN 8, 2020, 10:22:28 PM
+    Document   : SuppliersBalance
+    Created on : JAN 19, 2021, 10:00:28 PM
     Author     : Musaib
 --%>
 
@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Current Stock</title>
+<title>Suppliers Balances</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -270,6 +270,16 @@
 	background-color: #E3EFFF;
 }
 
+.dataTextRight {
+	border-radius: 3px;
+	font-family: Tahoma;
+	color: #4b6a84;
+	font-size: 13px;
+	letter-spacing: normal;
+	text-align: right;
+	background-color: #E3EFFF;
+}
+
 .dataTextInActive {
 	border-radius: 3px;
 	font-family: Tahoma;
@@ -460,7 +470,7 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MessItemsProcess&action=printStockAvailability";
+		form1.action = "Controller?process=MessSuppliersProcess&action=printSuppliersBalance";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -509,14 +519,14 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-
+	<c:set var="itemTotal" value="${0}" />
 	<form id="form1"
 		 method="POST">
 		
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Current Stock List</td>
+					<td class="headerTD">Suppliers Balances</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -524,42 +534,36 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th title="click to sort" class="headerText"></th>
-						<th title="click to sort" class="headerText">Item Name</th>
-						<th title="click to sort" class="headerText">Available Quantity</th>
-						<th title="click to sort" class="headerText">Status</th>
+						<th title="click to sort" class="headerText">Sl.No.</th>
+						<th title="click to sort" class="headerText">Supplier Name</th>
+						<th title="click to sort" class="headerText">Balance</th>
 					</tr>
 				</thead>
 
 				<tbody>
 
-					<c:forEach items="${currentstocklist}" var="currentstocklist">
+					<c:forEach items="${supplierbalancedetails}" var="supplierbalancedetails" varStatus="status">
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
-						 
-						  <c:if test="${currentstocklist.availablestock > currentstocklist.minstock}">
-						  <td class="dataText"><div class="squareinstock"></div></td>
-						   <td class="dataTextLeft"><span><c:out value="${currentstocklist.messitems.name}" /></span></td>
-						  <td class="dataTextLeft"><c:out value="${currentstocklist.availablestock}" />&nbsp;&nbsp;<c:out value="${currentstocklist.messitems.unitofmeasure}" /></td>
-						  <td class="dataTextLeft"><c:out value="In Stock" /></td>
-						  </c:if>
-						  <c:if test="${currentstocklist.availablestock < currentstocklist.minstock && currentstocklist.availablestock > 0 || currentstocklist.availablestock == currentstocklist.minstock}">
-						  <td class="dataText"><div class="squareminstock"></div></td>
-						  <td class="dataTextLeft"><span><c:out value="${currentstocklist.messitems.name}" /></span></td>
-						  <td class="dataTextLeft"><c:out value="${currentstocklist.availablestock}" />&nbsp;&nbsp;<c:out value="${currentstocklist.messitems.unitofmeasure}" /></td>
-						  <td class="dataTextLeft"><c:out value="Min Stock" /></td>
-						  </c:if>
-						  <c:if test="${currentstocklist.availablestock <=  0}">
-						  <td class="dataText" ><div class="squareoutofstock"></div></td>
-						  <td class="dataTextLeft" ><span><c:out value="${currentstocklist.messitems.name}" /></span></td>
-						  <td class="dataTextLeft" ><c:out value="${currentstocklist.availablestock}" />&nbsp;&nbsp;<c:out value="${currentstocklist.messitems.unitofmeasure}" /></td>
-						  <td class="dataTextLeft" ><c:out value="Out of Stock" /></td>
-						  </c:if>
+						 	<td class="dataTextRight" style="width: 10%">${status.index+1}</td>
+						 	<td class="dataTextLeft"><c:out value="${supplierbalancedetails.accountDetails.accountname}" /></td>
+						 	<td class="dataTextRight">
+						 	<c:set var="itemTotal" value="${itemTotal + supplierbalancedetails.currentbalance}" />
+						 	<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${supplierbalancedetails.currentbalance}" />
+						 	</td>
 						</tr>
 					</c:forEach>
 
 				</tbody>
 					<tfoot>
+						<tr>
+							<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>Grand Total:
+							<fmt:setLocale value="en_IN" scope="request"/>
+							<fmt:formatNumber type="currency"  value="${itemTotal}" /></b>
+							</label> 
+							</td>
+						</tr>
 						<tr>
                             <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
                     		<td class="footerTD"  colspan="8">
@@ -579,9 +583,6 @@ for(Cookie cookie : cookies){
 
 
 	</form>
-	
-	<div id="dialog" title="Quantity not in stock">
-	</div>
 
 </body>
 </html>

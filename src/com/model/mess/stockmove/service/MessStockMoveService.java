@@ -21,6 +21,9 @@ import com.model.mess.stockentry.dto.MessStockEntry;
 import com.model.mess.stockmove.dao.MessStockMoveDAO;
 import com.model.mess.stockmove.dto.MessStockItemDetails;
 import com.model.mess.stockmove.dto.MessStockMove;
+import com.model.parents.dto.Parents;
+import com.model.student.dao.studentDetailsDAO;
+import com.util.DataUtil;
 import com.util.DateUtil;
 
 public class MessStockMoveService {
@@ -37,7 +40,7 @@ public class MessStockMoveService {
 	}
 
 
-	public void saveStockMove() {
+	public boolean saveStockMove() {
 
 		boolean result = false;
 		
@@ -100,7 +103,11 @@ public class MessStockMoveService {
 						
 						result = new MessStockMoveDAO().moveStockSave(messStockMovesList,transactions,updateDrAccount,updateCrAccount);
 					}
+		
 						new MessItemsService(request, response).viewItemDetails();
+						request.setAttribute("itemsissued", result);
+						
+						return result;
 		}
 
 
@@ -169,16 +176,38 @@ public class MessStockMoveService {
 	}
 
 
-	public void viewStockMoveDetails() {
+	public boolean viewStockMoveDetails() {
 		
 		List<MessStockMove> messStockMoveList = new ArrayList<MessStockMove>();
+		boolean result = false;
 		
 		 if(httpSession.getAttribute(BRANCHID)!=null){
-			 messStockMoveList = new MessStockMoveDAO().getStockMoveDetails(); 
+			 
+					try {
+						int page = 1;
+						int recordsPerPage = 50;
+							if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
+								page = Integer.parseInt(request.getParameter("page"));
+							}
+
+						messStockMoveList = new MessStockMoveDAO().getStockMoveDetails((page - 1) * recordsPerPage,
+									recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())); 	
+						int noOfRecords = new MessStockMoveDAO().getNoOfRecordsStockMove(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+						request.setAttribute("noOfPages", noOfPages);
+						request.setAttribute("currentPage", page);
+						
+						result = true;
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				
+			 
 		 }
 		 
 		 request.setAttribute("messstockmovelist", messStockMoveList);
-		 
+			
+		 return result;
 	}
 
 

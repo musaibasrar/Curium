@@ -354,6 +354,58 @@
 	 
 }
 
+
+
+.alert-box {
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;  
+}
+
+.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failure {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.buttonred {
+  background-color: red; /* Green */
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
 </style>
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
@@ -791,6 +843,32 @@
 
 
         </script>
+        
+        <script type="text/javascript">
+					
+					var itemsreceived = '<c:out default="" value="${itemsreceived}"/>';
+		            
+		            if(itemsreceived == "true"){
+		            	 $(function(){
+		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 );
+		            	 });
+		            	 }else if(itemsreceived == "false"){
+		            	  $(function(){
+		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 );
+		            		 });
+		            	 }
+		            
+		        	function closediv(divid){
+		        		var x = document.getElementById("div"+divid);
+		        		  if (x.style.display === "none") {
+		        		    x.style.display = "block";
+		        		  } else {
+		        		    x.style.display = "none";
+		        		  }
+		        		
+		        	}
+		        	
+        </script>
 
 </head>
 <%
@@ -815,6 +893,9 @@ for(Cookie cookie : cookies){
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");
 		%>
+		<div class="alert-box success" id="div1">Items has been received successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box failure" id="div2">Items received failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
+		
 		<div style="height: 28px">
 			<button id="add">Receive Entry</button>
 			<br />
@@ -960,7 +1041,7 @@ for(Cookie cookie : cookies){
 						<tr>
                             <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
                     		<td class="footerTD"  colspan="8">
-                    		<button id="print">Print</button> 
+                    		<!-- <button id="print">Print</button> --> 
                     		<!-- &nbsp;&nbsp;&nbsp;
                     		<button id="approve">Approve</button>
                     		&nbsp;&nbsp;&nbsp;
@@ -971,6 +1052,35 @@ for(Cookie cookie : cookies){
                         </tr>
                     </tfoot>
 			</table>
+			
+				<div align="center">
+             <%--For displaying Previous link except for the 1st page --%>
+                <c:if test="${currentPage != 1}">
+                    <td><a style="color: #4B6A84;font-size: 12px" href="Controller?process=MessItemsProcess&action=purchaseItems&page=${currentPage - 1}">Previous</a></td>
+                </c:if>
+
+                <%--For displaying Page numbers.
+                The when condition does not display a link for the current page--%>
+                <table border="0" cellpadding="5" cellspacing="5">
+                    <tr>
+                        <c:forEach begin="1" end="${noOfPages}" var="i">
+                            <c:choose>
+                                <c:when test="${currentPage eq i}">
+                                    <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="Controller?process=MessItemsProcess&action=purchaseItems&page=${i}">${i}</a></td>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </tr>
+                </table>
+
+                <%--For displaying Next link --%>
+                <c:if test="${currentPage lt noOfPages}">
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="Controller?process=MessItemsProcess&action=purchaseItems&page=${currentPage + 1}">Next</a></td>
+                </c:if>
+                    </div>
 
 		</div>
 

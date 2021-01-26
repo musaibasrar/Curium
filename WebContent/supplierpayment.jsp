@@ -1,6 +1,6 @@
 <%--
-    Document   : Issuestock
-    Created on : Nov 24, 2020, 8:42:28 PM
+    Document   : Supplier Payments
+    Created on : Jan 14, 2021, 8:51:28 PM
     Author     : Musaib
 --%>
 
@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Issue Stock</title>
+<title>Supplier Payments</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -105,6 +105,16 @@
 	border-radius: 5px;
 	background-color: white;
 	 
+}
+
+.dataTextRight {
+	border-radius: 3px;
+	font-family: Tahoma;
+	color: #4b6a84;
+	font-size: 13px;
+	letter-spacing: normal;
+	text-align: right;
+	background-color: #E3EFFF;
 }
 
 
@@ -364,19 +374,62 @@
     border-radius: 4px;  
 }
 
-.success {
+.successsupplierpayment {
     color: #3c763d;
     background-color: #dff0d8;
     border-color: #d6e9c6;
     display: none;
 }
 
-.failure {
+.failuresupplierpayment {
     color: #a94442;
     background-color: #f2dede;
     border-color: #ebccd1;
     display: none;
 }
+
+.successchequedelivered {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failurechequedelivered {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.successchequecleared {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failurechequecleared {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.successchequecancelled {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failurechequecancelled {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
 
 
 .button {
@@ -405,6 +458,28 @@
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 12px;
+}
+
+
+.textfieldvaluesshort{
+
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #5d7e9b;
+	border-right-color: #5d7e9b;
+	border-bottom-color: #5d7e9b;
+	border-left-color: #5d7e9b;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	width: 80px;
+	height: 25px;
+	border-radius: 5px;
+	background-color: white;
+	 
 }
 
 </style>
@@ -489,48 +564,63 @@
 		$("#anim").change(function() {
 			$("#transactiondate").datepicker("option", "showAnim", $(this).val());
 		});
+		$("#delivereddate").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(function() {
+			$("#delivereddate").datepicker("option", "showAnim", $(this).val());
+		});
+		$("#cleareddate").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(function() {
+			$("#cleareddate").datepicker("option", "showAnim", $(this).val());
+		});
 	});
 </script>
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
-	function saveissueentry() {
+	function issuecheque() {
 		var form1 = document.getElementById("form1");
-		
 		if(form1.checkValidity()) {
-			form1.action = "Controller?process=MessItemsMoveProcess&action=saveStockMove";
+			form1.action = "Controller?process=MessSuppliersProcess&action=issueCheque";
 			form1.method = "POST";
 			form1.submit();
 		}
-		
-
 	}
 	
-	function cancelRecords() {
+	function cancelcheque() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MessItemsMoveProcess&action=cancelStockMove";
+		form1.action = "Controller?process=MessSuppliersProcess&action=cancelCheque";
 		form1.method = "POST";
 		form1.submit();
 
 	}
 	
-	function printRecords() {
+	function deliveredcheque(delivereddate) {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=printVoucher";
+		form1.action = "Controller?process=MessSuppliersProcess&action=deliveredCheque&deliverydate="+delivereddate;
 		form1.method = "POST";
 		form1.submit();
 	}
 	
-	function approveRecords() {
+	function clearedcheque(cleareddate,bankname) {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=approveVoucher";
+		form1.action = "Controller?process=MessSuppliersProcess&action=clearedCheque&cleardate="+cleareddate+"&bankname="+bankname+"";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
-	function rejectRecords() {
+	function printRecords(){
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=rejectVoucher";
+		form1.action = "Controller?process=MessSuppliersProcess&action=printSupplierPayment";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -538,10 +628,43 @@
 	$(function() {
 
 		$("#tabs").tabs();
-		$("#saveissueentry").button().click(function() {
-			saveissueentry();
+		$("#issuecheque").button().click(function() {
+			issuecheque();
 		});
 		$("#effect").hide();
+		
+		 $(function() {
+             $( "#dialogdeliverydate" ).dialog({
+                 autoOpen: false,
+                 height: 130,
+                 width: 350,
+                 modal: true,
+                 buttons: {
+                     OK: function() {
+                    	 deliveredcheque(document.getElementById("delivereddate").value);
+                         $( this ).dialog( "close" );
+                     }
+
+                 }
+             });
+         });
+		 
+		 $(function() {
+             $( "#dialogcleardate" ).dialog({
+                 autoOpen: false,
+                 height: 130,
+                 width: 550,
+                 modal: true,
+                 buttons: {
+                     OK: function() {
+                    	 clearedcheque(document.getElementById("cleareddate").value, document.getElementById("bankname").value);
+                         $( this ).dialog( "close" );
+                     }
+
+                 }
+             });
+         });
+
 
 	});
 	
@@ -561,133 +684,49 @@
         }
     }
 	
-	var itemlist=[
-        <c:forEach varStatus="status" items="${messstockitemdetailslist}" var="itemlist">{
-        		availablestock:'<c:out default="0" value="${itemlist.availablequantity}" />',
-        		unitprice:'<c:out default="0" value="${itemlist.itemunitprice}" />',
-                value:'<c:out default="0" value="${itemlist.itemname}" />',
-                batchno:'<c:out default="0" value="${itemlist.batchno}" />',
-                particularname:'<c:out default="Kilogram" value="${itemlist.unitofmeasure}" />',
-                itemid:'<c:out default="0" value="${itemlist.itemid}" />',
-                id:'<c:out default="0" value="${itemlist.stockentryid}" />'
-                }<c:if test="${!status.last}">,</c:if>
-        </c:forEach>
-        ];
 	
-	function addRow() {
-        var rowCount = document.getElementById('dataTable').rows.length;    
-        
-        var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=ids_"+rowCount+" /><input type='hidden' name='ids' id=stockmove_ids_"+rowCount+" value='' /></td>";
-        var col2="<td class='dataTextInActive'><input type='text' name='itemsname' id=items_name_"+rowCount+" class='textfieldvalues' style='font-size: 14px;'/><input type='hidden' name='itemsids' id=items_ids_"+rowCount+" value='' /></td>";
- 	    var col3="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	   	var col4="<td class='dataTextInActive'><input type='text' value=''   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	    var col5="<td class='dataTextInActive'><input type='text' value='0'   name='itemunitprice' id=itemunitprice_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	   	var col6="<td class='dataTextInActive'><input type='text' name='issuequantity' id=issuequantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")' required /></td>";
-        /* var col6="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>"; */
-        /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-        /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-        /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
-        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+"</tr>");
-        $(function() {
-            $("#dataTable").find('tbody').append(newRow);
-        });
-        $(function() {
-            $("#items_name_"+rowCount).autocomplete({
-                source: itemlist,
-                minLength: 1,
-                change:function(event,ui){
-                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
-                    $("#items_ids_"+rowCount ).val( ui.item.itemid );
-                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
-                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
-                    $("#itemunitprice_"+rowCount).val( ui.item.unitprice );
-                },
-                focus: function( event, ui ) {
-                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
-                    $( "#items_name_"+rowCount).val( ui.item.name );
-                    $( "#items_ids_"+rowCount ).val( ui.item.itemid );
-                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
-                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
-                    $("#itemunitprice_"+rowCount).val( ui.item.unitprice );
-                    return true;
-                },
-                select: function( event, ui ) {
-                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
-                    $( "#items_name_"+rowCount).val( ui.item.value );
-                    $( "#items_ids_"+rowCount ).val( ui.item.itemid );
-                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
-                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
-                    $("#itemunitprice_"+rowCount).val( ui.item.unitprice );
-                    return true;
-                }
-            }).data( "autocomplete" )._renderItem = function( ul, item ) {
-                return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +"&nbsp;/&nbsp;</b> <b> "+item.batchno +"</b></a>" )
-                .appendTo( ul );
-            };
+	var xmlHttp;
+    var count;
+    function getBalance() {
 
-        });
-    }
-	
-	 function calculate(value2) {
+		var selected=document.getElementById('supplierid').value;
 
-	      	  var availableQuantity=document.getElementById("items_quantity_"+value2).value;
-	          var issueQuantity=document.getElementById("issuequantity_"+value2).value;
-	          
-	          if(parseFloat(issueQuantity,10)>parseFloat(availableQuantity,10)){
-	        	  $( "#dialog" ).dialog( "open" );
-	        	  document.getElementById("issuequantity_"+value2).value='';
-	          }
-	          
-	         
-	      }
-	 
-	 $(function() {
-         $( "#dialog" ).dialog({
-             autoOpen: false,
-             height: 40,
-             width: 180,
-             modal: true,
-         });
-     });
-
-
-
-	
-	$(function() {
-
-		$("#tabs").tabs();
-		$("#effect").hide();
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "AjaxController?process=SupplierBalance&action=getSupplierBalance&supplierid="+selected,true);
+			xmlHttp.send(null);
 		
-		var addItemsButtonID="#addnewitem";
-        var removeItemsButtonID="#removenewitem";
-        
-        $( addItemsButtonID )
-        .button({
-            icons: {
-                primary: "ui-icon-plus"
-            }
-        })
-        .click(function() {
-            addRow();
-            return false;
-        });
-        
-       $(removeItemsButtonID)
-        .button({
-            icons: {
-                primary: "ui-icon-minus"
-            }
-        })
-        .click(function() {
-            deleteRow('dataTable');
-            return false;
-        }); 
-        
+	}
+    
+	function stateChanged() {
 
-	});
-   
+		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+			document.getElementById("supplierbalance").innerHTML = xmlHttp.responseText;
+			
+            document.getElementById("balanceold").style.display = "none";
+		}
+	}
+	function GetXmlHttpObject() {
+		var xmlHttp = null;
+		try {
+			xmlHttp = new XMLHttpRequest();
+		} catch (e) {
+			try {
+				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+		return xmlHttp;
+	}
+	
+	
 	 $(function(){
 		 
 		
@@ -696,7 +735,7 @@
                  primary: "ui-icon-cancel"
              }
          }).click(function(){
-             cancelRecords();
+             cancelcheque();
              return false;
 
          });
@@ -716,17 +755,17 @@
                  primary: "ui-icon-check"
              }
          }).click(function(){
-             approveRecords();
+        	 $( "#dialogcleardate" ).dialog( "open" );
              return false;
 
          });
          
-         $("#reject").button({
+         $("#deliver").button({
              icons:{
-                 primary: "ui-icon-closethick"
+                 primary: "ui-icon-suitcase"
              }
          }).click(function(){
-             rejectRecords();
+        	 $( "#dialogdeliverydate" ).dialog( "open" );
              return false;
 
          });
@@ -762,6 +801,13 @@
              }
          });
          
+         $("#chequeamount").keypress(function (e) {
+		     //if the letter is not digit then display error and don't type anything
+		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		               return false;
+		    }
+		   });
+         
      });
      
      
@@ -772,7 +818,7 @@
             if(rowCount==1){
                 alert('No records to delete');
             }
-            for(var i=1; i<rowCount; i++) {
+            for(var i=1; i<rowCount-1; i++) {
                 var row = table.rows[i];
                 var chkbox = row.cells[0].childNodes[0];
                 if(null != chkbox && true == chkbox.checked) {
@@ -786,35 +832,74 @@
             alert(e);
         }
     }
+     
+     function numberWithCommas(chequeamount) {
+     	var x=chequeamount.value;
+     	x = x.replace (/,/g, "");
+     	
+     	var lastThree = x.substring(x.length-3);
+     	var otherNumbers = x.substring(0,x.length-3);
+     	if(otherNumbers != '')
+     	    lastThree = ',' + lastThree;
+     	var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+     	chequeamount.value = res;
+     }
     
 </script>
 
-
-
-		<script type="text/javascript">
+ <script type="text/javascript">
 					
-					var itemsissued='<c:out default="" value="${itemsissued}"/>';
-		            
-		            if(itemsissued == "true"){
-		            	 $(function(){
-		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 );
-		            	 });
-		            	 }else if(itemsissued == "false"){
-		            	  $(function(){
-		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 );
-		            		 });
-		            	 }
-		            
-		        	function closediv(divid){
-		        		var x = document.getElementById("div"+divid);
-		        		  if (x.style.display === "none") {
-		        		    x.style.display = "block";
-		        		  } else {
-		        		    x.style.display = "none";
-		        		  }
-		        		
-		        	}
+
+					var supplierpaymentissued = '<c:out default="" value="${supplierpaymentissued}"/>';
+					var chequedelivered = '<c:out default="" value="${chequedelivered}"/>';
+				 	var chequecleared = '<c:out default="" value="${chequecleared}"/>';
+				 	var chequecancelled = '<c:out default="" value="${chequecancelled}"/>';
+				 	
+ 
+				 if(supplierpaymentissued == "true"){
+				 	 $(function(){
+				 		 $( "div.successsupplierpayment" ).fadeIn( 800 ).delay( 2000 );
+				 	 });
+				 	 }else if(supplierpaymentissued == "false"){
+				 	  $(function(){
+				 		 $( "div.failuresupplierpayment" ).fadeIn( 800 ).delay( 2000 );
+				 		 });
+				 	 }else if(chequedelivered == "true"){
+				        	 $(function(){
+				        		 $( "div.successchequedelivered" ).fadeIn( 800 ).delay( 2000 );
+				      	 });
+				     }else if(chequedelivered == "false"){
+				        	  $(function(){
+				        		 $( "div.failurechequedelivered" ).fadeIn( 800 ).delay( 2000 );
+				     	 });
+				     }else if(chequecleared == "true"){
+				           	 $(function(){
+				            		 $( "div.successchequecleared" ).fadeIn( 800 ).delay( 2000 );
+				       	 });
+				     }else if(chequecleared == "false"){
+				         	  $(function(){
+				            		 $( "div.failurechequecleared" ).fadeIn( 800 ).delay( 2000 );
+				       });
+				      }else if(chequecancelled == "true"){
+					        $(function(){
+					            		 $( "div.successchequecancelled" ).fadeIn( 800 ).delay( 2000 );
+					     });
+					    }else if(chequecancelled == "false"){
+					      	  $(function(){
+					            		 $( "div.failurechequecancelled" ).fadeIn( 800 ).delay( 2000 );
+					        		 });
+					    }
 		        	
+				 
+				 function closediv(divid){
+						var x = document.getElementById("div"+divid);
+						  if (x.style.display === "none") {
+						    x.style.display = "block";
+						  } else {
+						    x.style.display = "none";
+						  }
+						
+					}
         </script>
 
 </head>
@@ -843,12 +928,21 @@ for(Cookie cookie : cookies){
 		
 		%>
 		
-		<div class="alert-box success" id="div1">Items has been issued successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
-		<div class="alert-box failure" id="div2">Items issuance failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box successsupplierpayment" id="div1">Supplier Payment has been issued successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box failuresupplierpayment" id="div2">Supplier Payment failed, Please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
+		
+		<div class="alert-box successchequedelivered" id="div3">Cheque delivered successfully!!!&nbsp;&nbsp;&nbsp;<button  class="button"  id="3" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box failurechequedelivered" id="div4">Cheque delivery failed, Please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="4" onclick="closediv(this.id);">OK</button></div>
+		
+		<div class="alert-box successchequecleared" id="div5">Cheque cleared successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="5" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box failurechequecleared" id="div6">Cheque clearance failed, Please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="6" onclick="closediv(this.id);">OK</button></div>
+		
+		<div class="alert-box successchequecancelled" id="div7">Cheque cancelled successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="7" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box failurechequecancelled" id="div8">Cheque cancellation failed, Please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="8" onclick="closediv(this.id);">OK</button></div>
 		
 		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		<div style="height: 28px">
-			<button id="add">Issue Entry</button>
+			<button id="add">Supplier's Payment</button>
 			<br />
 		</div>
 
@@ -871,7 +965,7 @@ for(Cookie cookie : cookies){
 							<td><label> <input type="text"  name="transactiondate"
 									class="textField" style="font-size: 14px;"
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
-									id="transactiondate" autocomplete="false"
+									id="transactiondate" autocomplete="false" required
 									data-validate="validate(required)">
 							</label></td>
 							
@@ -884,26 +978,35 @@ for(Cookie cookie : cookies){
 						<tr>
 						
 						<tr>
-							<td class="alignRight">Issue To&nbsp;</td>
+							<td class="alignRight">Supplier&nbsp;</td>
 							<td ><label>
-									<select name="issuedto"
-									id="issuedto" class="dropdownlist" style="font-size: 14px;" >
-										<option selected="selected">Shaheen Nagar- Mess</option>
-										<option>Gole Khana- Mess</option>
-										<option>Mailoor- Mess</option>
+									<select name="supplierid" id="supplierid" class="dropdownlist" style="font-size: 14px;" onchange="getBalance()" required>
+											<option></option>
+										<c:forEach items="${messsupplierslist}" var="messsupplierslist">
+											<option value="${messsupplierslist.id}:${messsupplierslist.linkedledgerid}:${messsupplierslist.name}">${messsupplierslist.name}</option>
+										</c:forEach>
 								</select>
 							
 							</label></td>
 						
-							<td  class="alignRight">Purpose &nbsp;</td>
-							<td ><label> <select name="purpose"
-									id="purpose" class="dropdownlist" style="font-size: 14px;" required>
-										<option selected></option>
-										<option>Breakfast</option>
-										<option>Lunch</option>
-										<option>Dinner</option>
-										<option>Other</option>
-								</select>
+							<td  class="alignRight">Balance &nbsp;</td>
+							<td ><label id="supplierbalance"> <input name="balanceold" 
+									type="text" class="textfieldvalues" id="balanceold" style="font-size: 14px;">
+							</label></td>
+							
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td  class="alignRight">Cheque No. &nbsp;</td>
+							<td ><label> <input name="chequeno" 
+									type="text" class="textfieldvalues" id="chequeno" style="font-size: 14px;">
+							</label></td>
+						
+							<td  class="alignRight">Amount &nbsp;</td>
+							<td ><label> <input name="chequeamount" onkeyup="numberWithCommas(this);"
+									type="text" class="textfieldvalues" id="chequeamount" style="font-size: 14px;" >
 							</label></td>
 							
 						</tr>
@@ -913,41 +1016,15 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-					</table>
-					
-					<div align="center">
-						<p>
-						<h2 style="text-decoration: underline;color: #eb6000">Item Details</h2>	
-						<label><button id="addnewitem">Add Item</button></label><label><button id="removenewitem">Remove Item</button></label></p>
-					</div>
-					
-					<br>
-					<table style="margin-left: auto;margin-right: auto;border: 1px solid black;" id="dataTable">
-						<thead>
-							<tr>
-								<th class="headerText"><input type="checkbox"
-									id="selectAll" name="selectAll"
-									onclick="selectAllRow('dataTable')" /> </th>
-								<th class="headerText">Item Name</th>
-								<th class="headerText">Available Quantity</th>
-								<th class="headerText">Unit of Measure</th>
-								<th class="headerText">Unit Price</th>
-								<th class="headerText">Issue Quantity</th>
-							</tr>
-						</thead>
-
-						<tbody>						
-						</tbody>
 					</table>
 					<br>
 					<table id="table2" width="100%" border="0" align="center">
 						<tr>
 							<td align="center">
-								<button id="saveissueentry">Issue</button>
+								<button id="issuecheque">Issue</button>
 							</td>
 						</tr>
 					</table>
-					
 					</div>
 				</div>
 				
@@ -958,7 +1035,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Items Issue List</td>
+					<td class="headerTD">Supplier Payment Details</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -968,25 +1045,50 @@ for(Cookie cookie : cookies){
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Issue Date</th>
-						<th title="click to sort" class="headerText">Purpose</th>
-						<th title="click to sort" class="headerText">Item Name</th>
-						<th title="click to sort" class="headerText">Quantity</th>
-						<th title="click to sort" class="headerText">Issued To</th>
+						<th title="click to sort" class="headerText">Status</th>
+						<th title="click to sort" class="headerText">Supplier Name</th>
+						<th title="click to sort" class="headerText">Cheque #</th>
+						<th title="click to sort" class="headerText">Amount</th>
 					</tr>
 				</thead>
 
 				<tbody>
 
-					<c:forEach items="${messstockmovelist}" var="stockmovelist">
+					<c:forEach items="${supplierpaymentlist}" var="supplierpaymentlist">
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
-                          <td class="dataText"><input type="checkbox" id = "<c:out value="${stockmovelist.id}"/>" class = "chcktbl"  name="stockmoveid"  value="<c:out value="${stockmovelist.id}"/>"/></td>
-						  <td class="dataText" style="width: 10%;"><input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: center;" name="transactiondate_${stockmovelist.id}" value="<fmt:formatDate value="${stockmovelist.transactiondate}" pattern="dd/MM/yyyy"/>" readonly></td>
-						  <td class="dataText"><c:out value="${stockmovelist.purpose}" /></td>
-						     <c:set var="itemparts" value="${fn:split(stockmovelist.externalid, '_')}" />
-						  <td class="dataText"><c:out value="${itemparts[0]}" /></td>
-						  <td class="dataText"><c:out value="${stockmovelist.quantity}" /></td>
-						  <td class="dataText"><c:out value="${stockmovelist.issuedto}" /></td>
+							
+							<c:if test="${supplierpaymentlist.status == 'CLEARED'}">
+								<td class="dataText"><input type="checkbox" id = "<c:out value="${supplierpaymentlist.id}"/>" class = "chcktbl"  name="supplierpaymentid"  value="<c:out value="${supplierpaymentlist.id}"/>" disabled="disabled"/></td>
+							</c:if>
+                          	
+                          	<c:if test="${supplierpaymentlist.status == 'DELIVERED'}">
+								<td class="dataText"><input type="checkbox" id = "<c:out value="${supplierpaymentlist.id}"/>" class = "chcktbl"  name="supplierpaymentid"  value="<c:out value="${supplierpaymentlist.id}"/>"/></td>
+							</c:if>
+							
+							<c:if test="${supplierpaymentlist.status == 'ISSUED'}">
+								<td class="dataText"><input type="checkbox" id = "<c:out value="${supplierpaymentlist.id}"/>" class = "chcktbl"  name="supplierpaymentid"  value="<c:out value="${supplierpaymentlist.id}"/>"/></td>
+							</c:if>
+							
+							<c:if test="${supplierpaymentlist.status == 'CANCELLED'}">
+								<td class="dataText"><input type="checkbox" id = "<c:out value="${supplierpaymentlist.id}"/>" class = "chcktbl"  name="supplierpaymentid"  value="<c:out value="${supplierpaymentlist.id}"/>" disabled="disabled"/></td>
+							</c:if>
+							
+						  <td class="dataText" style="width: 10%;"><input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: center;" name="issuedate_${supplierpaymentlist.id}" value="<fmt:formatDate value="${supplierpaymentlist.issuedate}" pattern="dd/MM/yyyy"/>" readonly></td>
+						  <td class="dataText">
+						  <input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: center;" name="status_${supplierpaymentlist.id}" value="<c:out value="${supplierpaymentlist.status}" />" readonly>
+						  </td>
+						  <td class="dataText">
+						  <c:set var="nameparts" value="${fn:split(supplierpaymentlist.externalid, '_')}" />
+						  <input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: center;" name="externalid_${supplierpaymentlist.id}" value="<c:out value="${nameparts[0]}" />" readonly>
+						  <input type="hidden"  name="supplierledgerid_${supplierpaymentlist.id}" value="<c:out value="${nameparts[1]}" />">
+						  <input type="hidden"  name="issuevoucherid_${supplierpaymentlist.id}" value="<c:out value="${supplierpaymentlist.voucherid}" />">
+						  </td>
+						  <td class="dataText"><c:out value="${supplierpaymentlist.chequeno}" /></td>
+						  
+						  <td class="dataTextRight">
+						  	<input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: right;width: 70px;" name="chequeamount_${supplierpaymentlist.id}" value="<fmt:formatNumber type="number"  maxFractionDigits = "2"  value="${supplierpaymentlist.amount}" />" readonly>
+						 </td>
 						</tr>
 					</c:forEach>
 
@@ -995,12 +1097,13 @@ for(Cookie cookie : cookies){
 						<tr>
                             <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
                     		<td class="footerTD"  colspan="8">
-                    		<!-- <button id="print">Print</button> --> 
-                    		<!-- <button id="approve">Approve</button>
+                    		<button id="deliver">Delivered</button> 
                     		&nbsp;&nbsp;&nbsp;
-                    		<button id="reject">Reject</button> 
-                    		&nbsp;&nbsp;&nbsp; -->
-                    		<button id="cancel">Cancel</button>
+                    		<button id="approve">Cleared</button>
+                    		&nbsp;&nbsp;&nbsp;
+                    		<button id="cancel">Cancel</button> 
+                    		&nbsp;&nbsp;&nbsp;
+                    		<button id="print">Print</button>
                     		</td>
                         </tr>
                     </tfoot>
@@ -1009,7 +1112,7 @@ for(Cookie cookie : cookies){
 			<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="Controller?process=MessItemsMoveProcess&action=issueItems&page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="Controller?process=MessSuppliersProcess&action=paymentSuppliers&page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -1022,7 +1125,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="Controller?process=MessItemsMoveProcess&action=issueItems&page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="Controller?process=MessSuppliersProcess&action=paymentSuppliers&page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -1031,16 +1134,64 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="Controller?process=MessItemsMoveProcess&action=issueItems&page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="Controller?process=MessSuppliersProcess&action=paymentSuppliers&page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
-                    
+
 		</div>
+			<div id="dialogdeliverydate" title="Delivery Date">
+				
+           		 
+           		 <table style="width: auto;height: auto;">
+						
+						<tr>
+						<td>Delivery Date &nbsp;</td>
+						
+							<td><label> <input type="text"  name="delivereddate"
+									class="textField" style="font-size: 14px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="delivereddate" autocomplete="false" required
+									data-validate="validate(required)">
+							</label>
+							
+							</td>
+							
+						</tr>
+						
+						</table>
+			</div>
+			
+			<div id="dialogcleardate" title="Clear Date">
+				
+           		 
+           		 <table style="width: auto;height: auto;">
+						
+						<tr>
+							<td>Clear Date &nbsp;</td>
+						
+							<td><label> <input type="text"  name="cleareddate"
+									class="textField" style="font-size: 14px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="cleareddate" autocomplete="false" required
+									data-validate="validate(required)">
+							</label>
+							
+							</td>
+							
+							<td>Bank&nbsp;</td>
+							<td ><label>
+									<select name="bankname" id="bankname" class="dropdownlist" style="font-size: 14px;" required>
+											<option value="axisbank">Axis Bank</option>
+											<option value="canarabank">Canara Bank</option>
+								</select>
+							
+							</label></td>
+							
+						</tr>
+						
+						</table>
+			</div>
 
 	</form>
-	
-	<div id="dialog" title="Quantity not in stock">
-	</div>
-
 </body>
 </html>

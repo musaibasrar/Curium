@@ -67,7 +67,6 @@ public class MessItemsAction {
 
 
 		private String printStockIssuanceReport() {
-			new MessItemsService(request, response).printStockIssuanceReport();
 			return "printstockissuancereport.jsp";
 		}
 

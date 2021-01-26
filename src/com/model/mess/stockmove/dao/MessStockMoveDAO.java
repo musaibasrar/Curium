@@ -185,13 +185,19 @@ public class MessStockMoveDAO {
 
 
 
-	public List<MessStockMove> getStockMoveDetails() {
+	public List<MessStockMove> getStockMoveDetails(int offset,
+			int noOfRecords, int branchId) {
 		
         List<MessStockMove> results = new ArrayList<MessStockMove>();
         
         try {
                 transaction = session.beginTransaction();
-                results = (List<MessStockMove>) session.createQuery("From MessStockMove msm where msm.status != 'CANCELLED' order by msm.id DESC").setCacheable(true).setCacheRegion("commonregion").list();
+                
+                Query query = session.createQuery("From MessStockMove msm where msm.status != 'CANCELLED' order by msm.id DESC").setCacheable(true).setCacheRegion("commonregion");
+    			query.setFirstResult(offset);   
+    			query.setMaxResults(noOfRecords);
+    			results = query.getResultList();
+    			
                 transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
                 
@@ -283,5 +289,32 @@ public class MessStockMoveDAO {
         }
         return results;
 }
+
+
+
+	public int getNoOfRecordsStockMove(int branchId) {
+		List<Student> results = new ArrayList<Student>();
+		int noOfRecords = 0;
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			transaction = session.beginTransaction();
+
+			results = (List<Student>) session.createQuery("From MessStockMove msm where msm.status != 'CANCELLED' AND msm.branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
+					.list();
+			noOfRecords = results.size();
+			logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "+ noOfRecords);
+			
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return noOfRecords;
+		}
+	}
 	
 }

@@ -144,15 +144,19 @@ public class MessItemsDAO {
 	            //this.session = sessionFactory.openCurrentSession();
 	            transaction = session.beginTransaction();
 				session.save(transactions);
-				session.save(transactionTC);
 				Query query = session.createQuery(updateDrAccount);
 				query.executeUpdate();
 				Query query1 = session.createQuery(updateCrAccount);
 				query1.executeUpdate();
-				Query queryDrTc = session.createQuery(updateTransportationDrAccount);
-				queryDrTc.executeUpdate();
-				Query queryCrTc = session.createQuery(updateTransportationCrAccount);
-				queryCrTc.executeUpdate();
+				
+				if(transactionTC != null) {
+					session.save(transactionTC);
+					Query queryDrTc = session.createQuery(updateTransportationDrAccount);
+					queryDrTc.executeUpdate();
+					Query queryCrTc = session.createQuery(updateTransportationCrAccount);
+					queryCrTc.executeUpdate();
+				}
+				
 	            
 	            for (MessStockEntry messStockEntry : messStockEntryList) {
 	            	session.save(messStockEntry);

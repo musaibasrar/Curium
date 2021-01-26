@@ -240,9 +240,12 @@ public class MessItemsService {
 						
 						
 						//Pass J.V to book transportation charges
+						
 						int drTransportationExpense = getLedgerAccountId("transportationexpenses");
 						int crSupplierLedgerId = DataUtil.parseInt(supplieridledgerid[1]);
 						String transportationCharges = request.getParameter("transportationcharges");
+						
+						if(new BigDecimal(transportationCharges).compareTo(BigDecimal.ZERO) > 0) {
 						
 						VoucherEntrytransactions transactionTC = new VoucherEntrytransactions();
 						
@@ -267,8 +270,14 @@ public class MessItemsService {
 						String updateTransportationCrAccount = "update Accountdetailsbalance set currentbalance=currentbalance+"+totalAmount+" where accountdetailsid="+crSupplierLedgerId;
 						
 						//End J.V
-						
 						boolean result = new MessItemsDAO().addNewStock(messStockEntryList,transactions,updateDrAccount,updateCrAccount,transactionTC,updateTransportationDrAccount,updateTransportationCrAccount);
+						request.setAttribute("itemsreceived",result);
+						}else {
+							boolean result = new MessItemsDAO().addNewStock(messStockEntryList,transactions,updateDrAccount,updateCrAccount,null,null,null);
+							request.setAttribute("itemsreceived",result);
+						}
+						
+						
 
 			}
 		}
@@ -349,6 +358,9 @@ public class MessItemsService {
 
 		public void getCurrentStock() {
 			List<MessStockAvailability> messStockAvailability = new MessItemsDAO().getItemsStockAvailability();
+			for (MessStockAvailability messStockAvailability2 : messStockAvailability) {
+				System.out.println("mess stability "+messStockAvailability2.getAvailablestock()+"  minstock "+messStockAvailability2.getMinstock());
+			}
 			request.setAttribute("currentstocklist", messStockAvailability);
 		}
 
@@ -444,12 +456,5 @@ public class MessItemsService {
 			}
 			getIssuanceStock();
 		}
-
-
-		public void printStockIssuanceReport() {
-			//List<StockIssuance> stockIssuanceList = request.getParameter(name)
-			
-		}
-
 
 }
