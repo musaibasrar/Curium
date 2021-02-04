@@ -605,7 +605,7 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
-						<tr>
+						<%-- <tr>
 							<td width="20%" class="alignRight">Date: &nbsp;</td>
 							<td width="28%"><label> <input name="oneday"
 									type="text" class="textField" id="datepicker" size="36"
@@ -616,9 +616,9 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<tr>
-						<td width="20%" class="alignRight">&nbsp;Between Dates</td>
+						<td width="20%" class="alignRight">&nbsp;</td>
 						</tr>
 						
 						<tr>
@@ -631,7 +631,7 @@ for(Cookie cookie : cookies){
 									onfocus="checkFieldsFrom()" value="${datefrom}" autocomplete="false"
 									data-validate="validate(required)">
 							</label></td>
-							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date:</td>
+							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date:  &nbsp;&nbsp;</td>
 							<td ><label> <input name="todate"
 									type="text" class="textField" id="datepickerto" size="36"
 									onfocus="checkFieldsTo()" value="${dateto}" autocomplete="false"
@@ -683,7 +683,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees collected :</label>&#x20B9;${sumofdetailsfees}</td>
+					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees collected :</label>Rs. ${sumofdetailsfees}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"

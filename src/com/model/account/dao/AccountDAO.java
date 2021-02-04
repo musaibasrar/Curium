@@ -363,14 +363,16 @@ public class AccountDAO {
 	}
 
 	public String getAccountName(Integer accountid) {
+		
 		Accountdetails accountDetails = new Accountdetails();
 		String accountName = null;
 		try {
 			transaction = session.beginTransaction();
 			Query query =  session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
 			accountDetails = (Accountdetails) query.uniqueResult(); 
-			transaction.commit();
 			accountName = accountDetails.getAccountname();
+			transaction.commit();
+			
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally {

@@ -1,5 +1,7 @@
 package com.model.feescollection.service;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -10,12 +12,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.account.dao.AccountDAO;
+import com.model.account.dto.VoucherEntrytransactions;
 import com.model.feescollection.dao.feesCollectionDAO;
 import com.model.feescollection.dto.Feescollection;
 import com.model.feescollection.dto.Receiptinfo;
@@ -181,6 +186,25 @@ public class FeesCollectionService {
 		String[] fine = request.getParameterValues("fine");
 		String[] studentSfsIds = request.getParameterValues("studentsfsids");
 		
+		//Get Payment Details
+		String paymentMethod = request.getParameter("paymentmethod");
+		String ackNo = request.getParameter("ackno");
+		String ackNoVoucherNarration = null;
+		String transferDate = request.getParameter("transferdate");
+		String transferBankname = request.getParameter("transferbankname");
+		String chequeNo = request.getParameter("chequeno");
+		String chequeNoVoucherNarration = null;
+		String chequeDate = request.getParameter("chequedate");
+		String chequeBankname = request.getParameter("chequebankname");
+		
+			if("banktransfer".equalsIgnoreCase(paymentMethod)) {
+				ackNoVoucherNarration = " and acknowledgement number is "+ackNo+" and amount transfer date is "+transferDate;
+			}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
+				chequeNoVoucherNarration = " and cheque is "+chequeNoVoucherNarration+" and amount clearance date is "+chequeDate;
+			}
+		
+		//End Payment Details
+		
 		if(studentSfsIds!=null){
 			
 			// create receipt information
@@ -210,7 +234,42 @@ public class FeesCollectionService {
 					feesCollect.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 					feescollection.add(feesCollect);
 				}
-				createFeesCollection = new feesCollectionDAO().create(feescollection);
+				
+				//Pass J.V. : credit the Fees as income & debit the cash
+				
+				int crFees = getLedgerAccountId("feesaccountid");
+				int drAccount = 0;
+				
+				if("cashpayment".equalsIgnoreCase(paymentMethod)) {
+					drAccount = getLedgerAccountId("cashinhandaccountid");
+				}else if("banktransfer".equalsIgnoreCase(paymentMethod)) {
+					drAccount = getLedgerAccountId(transferBankname);
+				}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
+					drAccount = getLedgerAccountId(chequeBankname);
+				} 
+				
+				
+				VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+				
+				transactions.setDraccountid(drAccount);
+				transactions.setCraccountid(crFees);
+				transactions.setDramount(new BigDecimal(receiptInfo.getTotalamount()));
+				transactions.setCramount(new BigDecimal(receiptInfo.getTotalamount()));
+				transactions.setVouchertype(4);
+				transactions.setTransactiondate(receiptInfo.getDate());
+				transactions.setEntrydate(DateUtil.todaysDate());
+				transactions.setNarration("Towards Fees Payment with receipt no "+receiptInfo.getReceiptnumber()+" "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
+				transactions.setCancelvoucher("no");
+				transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+				transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				
+				
+				String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptInfo.getTotalamount()+" where accountdetailsid="+drAccount;
+
+				String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptInfo.getTotalamount()+" where accountdetailsid="+crFees;
+				
+				// End J.V
+				createFeesCollection = new feesCollectionDAO().create(feescollection,transactions,updateDrAccount,updateCrAccount);
 				
 			}
 		}
@@ -231,7 +290,7 @@ public class FeesCollectionService {
 				feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = receiptInfo.getDate();
-			String reDate = new SimpleDateFormat("yyyy-MM-dd").format(receiptDate);
+			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
 			Student student = new studentDetailsDAO().readUniqueObject(receiptInfo.getSid());
 			httpSession.setAttribute("student", student);
 			request.setAttribute("recieptdate", reDate);
@@ -256,7 +315,7 @@ public class FeesCollectionService {
 				feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
-			String reDate = new SimpleDateFormat("yyyy-MM-dd").format(receiptDate);
+			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
 			Student student = new studentDetailsDAO().readUniqueObject(rinfo.getSid());
 			Parents parents = new parentsDetailsDAO().readUniqueObject(rinfo.getSid());
 			httpSession.setAttribute("parents", parents);
@@ -287,7 +346,7 @@ public class FeesCollectionService {
 				feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
-			String reDate = new SimpleDateFormat("yyyy-MM-dd").format(receiptDate);
+			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
 			Student student = new studentDetailsDAO().readUniqueObject(sid);
 			httpSession.setAttribute("student", student);
 			request.setAttribute("recieptdate", reDate);
@@ -609,6 +668,27 @@ public class FeesCollectionService {
 			httpSession.setAttribute("sumOfFeesMonthly", sumOfFeesMonthly);
 			httpSession.setAttribute("Currentmonth", Currentmonth+"'s");
 	
+	}
+	
+	private Integer getLedgerAccountId(String itemAccount) {
+		
+	 	
+	 	Properties properties = new Properties();
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
+		
+        		try {
+					properties.load(inputStream);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		    
+        		String ItemLedgerId = properties.getProperty(itemAccount);
+		    
+		    if(ItemLedgerId!=null) {
+		    	return Integer.parseInt(ItemLedgerId);
+		    }else {
+		    	return 0;
+		    }
 	}
 	
 	}

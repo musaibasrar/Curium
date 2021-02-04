@@ -297,7 +297,6 @@
 	
 }
 </style>
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -311,11 +310,6 @@
 <script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript" src="js/globalize.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/globalize.cultures.js"></script>
-
-<script type="text/javascript"
-	src="js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
@@ -442,6 +436,33 @@
 		});
 
 		$("#go").button()
+		
+		$(function() {
+			$("#validfrom").datepicker({
+				changeYear : true,
+				changeMonth : true,
+				dateFormat: 'dd/mm/yy',
+				yearRange: "-50:+0"
+			});
+			$("#anim").change(
+					function() {
+						$("#validfrom").datepicker("option", "showAnim",$(this).val());
+					});
+		});
+		
+		$(function() {
+			$("#validtill").datepicker({
+				changeYear : true,
+				changeMonth : true,
+				dateFormat: 'dd/mm/yy',
+				yearRange: "-50:+0"
+			});
+			$("#anim").change(
+					function() {
+						$("#validtill").datepicker("option", "showAnim", $(this).val());
+					});
+		});
+		
 	});
 	
 	function deleteFeesStamp(){
@@ -666,6 +687,40 @@
             alert(e);
         }
     }
+    
+    function selectSearch(id){
+    	
+    	
+    	if(id == 'studentnamesearch'){
+    		
+    		document.getElementById('namesearchtr').style.display = '';
+    		document.getElementById('classsearchtr').style.display = "none";
+    		document.getElementById('mealssearchtr').style.display = "none";
+    		document.getElementById('classsearch').selectedIndex = -1;
+    		document.getElementById('breakfast').checked = false;
+    		document.getElementById('lunch').checked = false;
+    		document.getElementById('dinner').checked = false;
+    			
+    	}else if(id == 'classsearch'){
+    		
+    		document.getElementById('classsearchtr').style.display = '';
+    		document.getElementById('namesearchtr').style.display = "none";
+    		document.getElementById('mealssearchtr').style.display = "none";
+    		document.getElementById('namesearch').value = '';
+    		document.getElementById('breakfast').checked = false;
+    		document.getElementById('lunch').checked = false;
+    		document.getElementById('dinner').checked = false;
+    		
+    	}else if(id == 'mealssearch'){
+    		
+    		document.getElementById('mealssearchtr').style.display = '';
+    		document.getElementById('namesearchtr').style.display = "none";
+    		document.getElementById('classsearchtr').style.display = "none";
+    		document.getElementById('namesearch').value = '';
+    		document.getElementById('classsearch').selectedIndex = -1;
+    	}
+    	
+    }
         </script>
 
 </head>
@@ -695,38 +750,42 @@ for(Cookie cookie : cookies){
 
 				</ul>
 				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
+					<table border="0" cellpadding="0"
+						cellspacing="0" id="table1" style="width: auto;height: auto">
 
 						<tr>
-							<td class="alignRightFields">Name &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
-							</label></td>
-							
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
+							<td class="alignRightFields"><h3 style="color: #eb6000">Search:&nbsp;&nbsp;&nbsp;&nbsp;	</h3></td>
+							<td class="alignRightFields">
+							<input type="radio" id="studentnamesearch" name="advancesearch" value="studentname" onclick="selectSearch(this.id)">
+							<label for="studentname">Student Name</label>
+							 &nbsp;</td>
+							 <td class="alignRightFields">
+							<input type="radio" id="classsearch" name="advancesearch" value="class" onclick="selectSearch(this.id)">
+							<label for="class">Class</label>
+							 &nbsp;</td>
+							 <td class="alignRightFields">
+							<input type="radio" id="mealssearch" name="advancesearch" value="meals" onclick="selectSearch(this.id)">
+							<label for="meals">Meals</label>
+							 &nbsp;</td>
 						</tr>
 						
+						</table>
+
+						<table border="0" cellpadding="0"
+						cellspacing="0" id="tab" style="width: auto;height: auto">
+						
 						<tr>
-							<td></td>
+							<td><br></td>
+						</tr>
+						
+						<tr style="display: none;"  id="namesearchtr">
 							
-							<td class="alignRightFields">OR</td>
-
+							<td style="padding-left: 70px;"> <input name="namesearch" id="namesearch" type="text" class="myclass">
+							</td>
 						</tr>
-					
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="90%"><label> 
+						
+						<tr style="display: none;" id="classsearchtr">
+							<td style="padding-left: 70px;"><label > 
 								<select name="classsearch" id="classsearch"
 									style="width: 120px;">
 										<option selected></option>
@@ -739,7 +798,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 
-							</label> <label> 
+							</label> <label style="display: none;"> 
 									<select name="secsearch" id="secsearch"
 									style="width: 120px;">
 										<option selected></option>
@@ -754,36 +813,56 @@ for(Cookie cookie : cookies){
 								</select>
 							</label>
 						</tr>
-
-						<tr>
-							<td><br /></td>
-
+						<tr style="display: none;" id="mealssearchtr">
+							<td style="padding-left: 70px;" height="30" class="alignLeft" >
+								&nbsp;      Breakfast<input type="checkbox" value="breakfast" name="breakfast" id="breakfast"/>
+								&nbsp;&nbsp;Lunch<input type="checkbox" value="lunch" name="lunch" id="lunch"/>
+								&nbsp;&nbsp;Dinner<input type="checkbox" value="dinner" name="dinner" id="dinner"/>
+							</td>
 						</tr>
 
 						<tr>
+							<td><br/></td>
+						</tr>
+						
+						
+						<tr>
 
-							<td width="30%" class="alignRight"></td>
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
+							<td class="alignLeft" style="padding-left: 100px;">
 								<button id="search">Search</button>
 							</td>
 						</tr>
 
 
 						<tr>
-							<td><br /></td>
+							<td><br /><br /><br /></td>
 						</tr>
 
 					</table>
 					<div class="alignRightFields">
 
-						Fees Category:
+						<label style="color: #eb6000;font-size: 12px;">Fees Category:&nbsp;&nbsp;&nbsp;</label>
 						<button id="addFeesCat">Add</button>
 						<button id="removeFeesCat">Remove</button>
 						<input
 									name="currentyear" type="hidden" value="${currentYear}" class="myclass" id="currentyear"
 									size="36"">
+									
+								
+							<label style="color: #eb6000;font-size: 12px;">&nbsp;&nbsp;Mess Card:</label>
+									
+							<label style="color: #466580;font-size: 12px;">&nbsp;&nbsp;Valid From</label>
+							<input name="validfrom" autocomplete="false"
+									type="text" class="myclass" id="validfrom" size="6" autocomplete="off"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									data-validate="validate(required)">
+									
+							<label style="color: #466580;font-size: 12px;">&nbsp;&nbsp;Valid Till</label>
+							<input name="validtill" autocomplete="false"
+									type="text" class="myclass" id="validtill" size="6" autocomplete="off"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									data-validate="validate(required)">									
+									
 					</div>
 					<TABLE id="dataTable" width="100%" border="0">
 						<thead>
@@ -831,14 +910,14 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class &
-							Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Admission Date</th>
-
-
-
+						<th title="click to sort" class="headerText">Class &nbsp;</th>
+						<th title="click to sort" class="headerText">Father's Name</th>
+                        <th title="click to sort" class="headerText">Breakfast</th>
+                        <th title="click to sort" class="headerText">Lunch</th>
+                        <th title="click to sort" class="headerText">Dinner</th>
 					</tr>
 				</thead>
 
@@ -851,6 +930,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
+							<td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.studentexternalid}"/></a></td>	
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
@@ -859,10 +939,17 @@ for(Cookie cookie : cookies){
 							 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 								    ${splt} 
 									</c:forEach>
-							<td class="dataText"><c:out
-									value="${Parents.student.admissiondate}" /></td>
-
-
+							</td>		
+								<td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.fathersname}"/></td>
+                                <td class="dataText" style="text-transform:uppercase" >
+                                	<input type="checkbox" 	${Parents.student.breakfast == 'breakfast' ? 'checked' : ''} />
+                                </td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                	<input type="checkbox" ${Parents.student.lunch == 'lunch' ? 'checked' : ''} />
+                                </td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                	<input type="checkbox" 	${Parents.student.dinner == 'dinner' ? 'checked' : ''} />
+                                </td>
 						</tr>
 					</c:forEach>
 				</tbody>

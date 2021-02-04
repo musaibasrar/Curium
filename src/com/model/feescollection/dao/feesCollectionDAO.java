@@ -14,6 +14,7 @@ import org.hibernate.SessionFactory;
 import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
+import com.model.account.dto.VoucherEntrytransactions;
 import com.model.feescollection.dto.Feescollection;
 import com.model.feescollection.dto.Receiptinfo;
 import com.util.HibernateUtil;
@@ -35,12 +36,19 @@ public class feesCollectionDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public boolean create(List<Feescollection> feescollectionList) {
+	public boolean create(List<Feescollection> feescollectionList, VoucherEntrytransactions transactions, String updateDrAccount, String updateCrAccount) {
 		 
 		boolean result = false;
 		try {
 			 
 			 transaction = session.beginTransaction();
+			 
+				session.save(transactions);
+				Query queryAccounts = session.createQuery(updateDrAccount);
+				queryAccounts.executeUpdate();
+				Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+				queryqueryAccounts1.executeUpdate();
+				
 			
 			for (Feescollection singleFeescollection :  feescollectionList) {
 				Query query = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
