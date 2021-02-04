@@ -171,8 +171,8 @@
         <property name="rte" type="java.lang.Integer">
             <column name="rte" />
         </property>
-         <property name="bankname" type="string">
-            <column name="bankname" length="500" />
+         <property name="college" type="string">
+            <column name="college" length="300" />
         </property>   
          <property name="bankbranch" type="string">
             <column name="bankbranch" length="200" />

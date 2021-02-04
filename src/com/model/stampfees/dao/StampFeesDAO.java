@@ -1,6 +1,7 @@
 package com.model.stampfees.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,10 +11,13 @@ import org.hibernate.SessionFactory;
 import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
+import com.model.mess.card.dto.Card;
 import com.model.parents.dto.Parents;
 import com.model.stampfees.dto.Academicfeesstructure;
 import com.model.student.dto.Student;
 import com.model.user.dto.Login;
+import com.util.DataUtil;
+import com.util.DateUtil;
 import com.util.HibernateUtil;
 
 public class StampFeesDAO {
@@ -130,7 +134,7 @@ public class StampFeesDAO {
 	}
 
 	public void addStampFees(
-			java.util.List<Academicfeesstructure> listOfacademicfessstructure, String currentYear) {
+			java.util.List<Academicfeesstructure> listOfacademicfessstructure, String currentYear, List<Card> cardList) {
 		try {
 			// this.session = sessionFactory.openCurrentSession();
 			transaction = session.beginTransaction();
@@ -153,6 +157,17 @@ public class StampFeesDAO {
 			
 			}
 			
+			for (Card card : cardList) {
+				
+            	Query queryCard = session.createQuery("from Card where sid = "+card.getSid());
+            	Card cardResult = (Card) queryCard.uniqueResult();
+            	if(cardResult!=null) {
+            		Query queryUpdate = session.createQuery("update Card set validfrom = '"+DateUtil.dateParseryyyymmdd(card.getValidfrom())+"', validto = '"+DateUtil.dateParseryyyymmdd(card.getValidto())+"' where sid="+card.getSid());
+            		queryUpdate.executeUpdate();
+            	}else {
+            		session.save(card);
+            	}
+			}
 
 			transaction.commit();
 			System.out.println("in add3");

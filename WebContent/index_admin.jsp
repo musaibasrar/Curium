@@ -74,14 +74,14 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <frameset    rows="50,*"frameborder="0" border="0" framespacing="0"  >
+    <frameset    rows="55,*"frameborder="0" border="0" framespacing="0"  >
     
 		   <c:if test="${(userType == 'admin')}">
 			    <frame   src="header_admin.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
 		   </c:if>
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="left_admin.jsp" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame  src="left_admin_side.jsp" name="leftFrame" scrolling="yes"  frameborder="1"   />
                 <frame src="welcome.jsp" name="mainFrame" scrolling="yes" />
             </frameset>
 

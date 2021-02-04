@@ -39,10 +39,34 @@ public class PrintIdsAction {
 			url = searchDetails();
 		}else if (action.equalsIgnoreCase("generateIds")) {
 			url = generateIds();
+		}else if (action.equalsIgnoreCase("cardvalidity")) {
+			url = cardValidity();
+		}else if (action.equalsIgnoreCase("searchDetailsCardValidity")) {
+			url = searchDetailsCardValidity();
+		}else if (action.equalsIgnoreCase("updateCardValidity")) {
+			url = updateCardValidity();
 		}
 		return url;
 	}
 	
+
+	private String updateCardValidity() {
+		
+		new PrintIdsService(request, response).updateCardValidity();
+        return "cardvalidity.jsp";
+        
+	}
+
+	private String searchDetailsCardValidity() {
+        
+		new PrintIdsService(request, response).searchDetailsCardValidity();
+        return "cardvalidity.jsp";
+	}
+
+	private String cardValidity() {
+		 new StandardService(request, response).viewClasses();
+		return "cardvalidity.jsp";
+	}
 
 	private String generateIds() {
 		 new StandardService(request, response).viewClasses();

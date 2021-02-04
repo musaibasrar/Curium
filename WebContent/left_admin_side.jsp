@@ -13,182 +13,10 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="js/motionpack.js"></script>
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="css/datePicker/demos.css">
-		
         <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
         <script src="js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
         <script src="js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="js/datePicker/ui/sliderAccess.js"></script>
-        <script src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="css/font-awesome.css">
-        <script type="text/javascript">
-            var get;
-            function getdata1() {
-                var startHour, startMin;
-                var tDate = new Date();
-                startHour = tDate.getHours();
-                startMin = tDate.getMinutes();
-
-                if (typeof XMLHttpRequest != "undefined") {
-                    get = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    get = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                get.onreadystatechange = processdata;
-                get.open("POST", "AjaxController?process=VisitProcess&action=getAJaxNextVisit&startHour=" + startHour + "&startMin=" + startMin, true);
-                get.send(null);
-
-            }
-
-            function processdata() {
-                var id, hourID, patientID, reminderTime, visitTime, rating, name, complaint, link;
-                if (get.readyState == 4)
-                {
-                    if (get.status == 200) {
-                        var visits = get.responseXML.getElementsByTagName("Visits")[0];
-                        var visitNodes = visits.getElementsByTagName("Visit");
-                        for (var i = 0; i < visitNodes.length; i++) {
-                            var visit = visitNodes[i];
-
-                            patientID = visit.getElementsByTagName("PatientID")[0].firstChild.nodeValue;
-                            visitTime = visit.getElementsByTagName("VisitTime")[0].firstChild.nodeValue;
-                            name = visit.getElementsByTagName("PatientName")[0].firstChild.nodeValue;
-                            link = "<a target='mainFrame' href='Controller?process=PatientProcess&action=viewDetails&id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
-
-                            $(function() {
-                                $('#Notification').jnotifyAddMessage({
-                                    text: link,
-                                    permanent: false,
-                                    disappearTime: 30000
-                                });
-
-                            });
-
-                        }
-
-
-                        setTimeout('getdata1();', 60000);
-
-
-                    }
-                }
-
-            }
-            /**
-             * Comment
-             */
-            var getExpiringStockCount;
-            function getExpiringStock() {
-                if (typeof XMLHttpRequest != "undefined") {
-                    getExpiringStockCount = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getExpiringStockCount = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                getExpiringStockCount.onreadystatechange = processExpiringStockData;
-                getExpiringStockCount.open("POST", "AjaxController?process=StockProcess&action=getExpiringStock", true);
-                getExpiringStockCount.send(null);
-
-            }
-           
-            var getDepletingStockCount;
-            function getDepletingStock() {
-                if (typeof XMLHttpRequest != "undefined") {
-                    getDepletingStockCount = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getDepletingStockCount = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                getDepletingStockCount.onreadystatechange = processDepletingStockData;
-                getDepletingStockCount.open("POST", "AjaxController?process=StockProcess&action=getDepletingStock", true);
-                getDepletingStockCount.send(null);
-
-            }
-            function processDepletingStockData() {
-
-                if (getDepletingStockCount.readyState == 4)
-                {
-                    if (getDepletingStockCount.status == 200) {
-                        var count = getDepletingStockCount.responseXML.getElementsByTagName("DepletingStockCount")[0];
-                        var depletingStockCount = count.childNodes[0].nodeValue;
-                        var depletingStock = document.getElementById("depletingStock");
-                        depletingStock.innerHTML = " " + depletingStockCount;
-                        setTimeout('getDepletingStock();', 60000);
-
-
-                    }
-                }
-
-            }
-
-        </script>
-        <script type="text/javascript">
-            var req;
-
-
-            function count() {
-
-                var idField = document.getElementById("userid");
-                var url = "AppointmentController";
-                if (typeof XMLHttpRequest != "undefined") {
-                    req = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    req = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                reload(req);
-                //req.open("POST", url, true);
-
-                //req.send();
-                /*req.onreadystatechange = function()
-                 {
-                 if (req.readyState==4)
-                 {
-                 if (req.status==200){
-                 
-                 var count = req.responseXML.getElementsByTagName("count")[0];
-                 var childCount=count.childNodes[0].nodeValue;
-                 var mdiv = document.getElementById("n1");
-                 mdiv.innerHTML=childCount;
-                 mdiv.style.visible='block';
-                 
-                 }
-                 }
-                 }*/
-
-
-
-            }
-            function handleRequest() {
-                if (req.readyState == 4)
-                {
-                    if (req.status == 200) {
-
-                        var count = req.responseXML.getElementsByTagName("count")[0];
-                        var childCount = count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML = childCount;
-                        mdiv.style.visible = 'block';
-
-                    }
-                }
-                setTimeout(function() {
-                    reload(req);
-                }, 100);
-            }
-
-
-
-        </script>
         <style>
 
             .noti_Container {
@@ -278,122 +106,23 @@ Author     : Musaib
             }
 
 
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #cccccc; background: #ffffff url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #1c94c4; }
+.ui-widget-content {
+    border: 1px solid #b6cfe2;
+    background: #ffffff;
+    color: #222222;
+}
+
+.sideaccordian{
+		
+		font-size: 12px;
+		/* border: 0px; */
+		border-radius: 5px;
+		/* border-bottom:  1px solid #010d1c !important; */
+}
 
         </style>
 
-        <script>
-            function f1()
-            {
-                document.getElementById("n1").style.visibility = 'hidden';
-            }
-        </script>
-        <script type="text/javascript">
-            var req;
-
-
-            function count() {
-
-                var idField = document.getElementById("userid");
-                var url = "AppointmentController";
-                if (typeof XMLHttpRequest != "undefined") {
-                    req = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    req = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                var url = "AppointmentController";
-                req.open("POST", url, true);
-
-
-
-                //req.open("POST", url, true);
-
-                req.send();
-                req.onreadystatechange = function()
-                {
-                    if (req.readyState == 4)
-                    {
-                        if (req.status == 200) {
-
-                            var count = req.responseXML.getElementsByTagName("count")[0];
-                            var childCount = count.childNodes[0].nodeValue;
-                            var mdiv = document.getElementById("n1");
-                            mdiv.innerHTML = childCount;
-                            mdiv.style.visible = 'block';
-
-                        }
-                    }
-                }
-
-
-
-            }
-
-
-            var timer = null;
-            function auto_reload()
-            {
-                alert();
-                window.location = 'notication.jsp';
-            }
-
-        </script>
-        <script language="JavaScript">
-            var clockID = 0;
-            function UpdateClock() {
-                if (clockID) {
-                    clearTimeout(clockID);
-                    clockID = 0;
-                }
-                var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                var tDate = new Date();
-                var clockDiv = document.getElementById('clock');
-                var hours, min, sec;
-                if (tDate.getHours() < 10) {
-                    hours = "0" + tDate.getHours();
-
-                }
-                else {
-                    hours = tDate.getHours();
-                }
-                if (tDate.getMinutes() < 10) {
-                    min = "0" + tDate.getMinutes();
-
-                }
-                else {
-                    min = tDate.getMinutes();
-                }
-                if (tDate.getSeconds() < 10) {
-                    sec = "0" + tDate.getSeconds();
-
-                }
-                else {
-                    sec = tDate.getSeconds();
-                }
-                clockDiv.innerHTML = " " + months[tDate.getMonth()] + " " + tDate.getDate() + " " + tDate.getFullYear() + " "
-                        + hours + ":"
-                        + min + ":"
-                        + sec;
-
-                clockID = setTimeout("UpdateClock()", 1000);
-            }
-            function StartClock() {
-                clockID = setTimeout("UpdateClock()", 1);
-            }
-            function KillClock() {
-                if (clockID) {
-                    clearTimeout(clockID);
-                    clockID = 0;
-                }
-
-            }
-            function change(id, image) {
-                var img = document.getElementById(id);
-                img.src = "images/" + image;
-
-            }
-            
-           
-        </script>
 
         <script>
             $(function() {
@@ -426,34 +155,31 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body onload="StartClock()" onunload="KillClock()">
-       <!--  <form name="theClock">
+    <body onload="StartClock()" onunload="KillClock()" >
+        <%--  <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div> --%>
 
-            <div id="clock" class="headerTD"></div>
-        </form> -->
-        <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div>
-
-        <div id="container" style="width: 100%" >
-        
-        	<h5 style="font-size: 12px"><a href="#" >Stock</a></h5>
+        <div id="container" style="width: 95%;">
+        			<!-- border:none;border-bottom: 1px solid #010d1c !important; border-right: 1px solid #010d1c !important;-->
+        	<h5 class="sideaccordian" ><a href="#" >Stock</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=MessItemsMoveProcess&action=issueItems" style="font-size: 12px;">Issue</a><br/>
                 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=purchaseItems" style="font-size: 12px;">Receive</a><br/>
                 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=currentStock" style="font-size: 12px;">Current Stock Report</a><br/>
                 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=batchStock" style="font-size: 12px;">Batch Stock Report</a><br/>
                 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=issuanceStock" style="font-size: 12px;">Stock Issuance Report</a><br/>
+                <a target="mainFrame" href="Controller?process=MessItemsProcess&action=receiveStock" style="font-size: 12px;">Stock Received Report</a><br/>
                 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=viewItems" style="font-size: 12px;">View/Add Items</a><br/>
             </div>
             
-              <h5 style="font-size: 12px"><a href="#" >Suppliers</a></h5>
+              <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
             <div >
             	<a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=paymentSuppliers" style="font-size: 12px;">Payments</a><br/>
-            	<a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=balanceSuppliers" style="font-size: 12px;">Balances</a><br/>
+            	<a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=balanceSuppliers" style="font-size: 12px;">Balance Report</a><br/>
             	<a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=supplierPaymentReport" style="font-size: 12px;">Payment Report</a><br/>
                 <a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a><br/>
             </div>
             
-             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
+             <h5 class="sideaccordian"><a href="#" >Accounts</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=createAccount" style="font-size: 12px;">Ledger Account</a><br/>
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
@@ -465,32 +191,32 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Students</a></h5>
+            <h5 class="sideaccordian"><a href="#">Students</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=viewAll" style="font-size: 12px;">View All</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=addNew" style="font-size: 12px;">Add New</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
+           <!--  <h5 class="sideaccordian"><a href="#">Attendance</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExport" style="font-size: 12px;">Export Attendance</a><br/>
-            </div>
+            </div> -->
             
-            <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
+           <!--  <h5 class="sideaccordian"><a href="#">Staff</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllEmployee" style="font-size: 12px;">View All</a><br/>
                 <a target="mainFrame" href="Controller?process=EmployeeProcess&action=addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
-            </div>
+            </div> -->
 
-            <h5 style="font-size: 12px"><a href="#">Fees</a></h5>
+            <h5 class="sideaccordian"><a href="#">Fees</a></h5>
             
             <div>
-				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesCollect" style="font-size: 12px;">Fees Collect</a><br/>                
+				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesCollect" style="font-size: 12px;">Fees Collection</a><br/>                
 				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesStructure" style="font-size: 12px;">Fees Structure</a><br/>                
 				<a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Fees Collection Details</a><br/>
 				<a target="mainFrame" href="feescancelledreceipts.jsp" style="font-size: 12px;">Cancelled Fees Receipts</a><br/>
@@ -522,13 +248,13 @@ for(Cookie cookie : cookies){
             </div> -->
             
             
-            <h5 style="font-size: 12px"><a href="#" >Mess Cards</a></h5>
+            <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=printids&action=generateIds" style="font-size: 12px;">Generate IDs</a><br/>
                 <a target="mainFrame" href="Controller?process=printids&action=cardValidity" style="font-size: 12px;">Card Validity</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#" >Documents</a></h5>
+            <h5 class="sideaccordian"><a href="#" >Documents</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsReports" style="font-size: 12px;">Student Details</a><br/>
                 <!-- <a target="mainFrame" href="Controller?process=DocumentsProcess&action=admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
@@ -539,14 +265,14 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a><br/> -->
             </div> 
             
-            <h5 style="font-size: 12px"><a href="#" >Expenses</a></h5>
+            <h5 class="sideaccordian"><a href="#" >Expenses</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=AdminProcess&action=viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
 
 
             </div>
             
-            <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
+            <h5 class="sideaccordian"><a href="#" >Send Notifications</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=SMSProcess&action=sendSMS" style="font-size: 12px;">SMS</a><br/>
                 <a target="mainFrame" href="sendemail.jsp" style="font-size: 12px;">Email</a><br/>
@@ -579,56 +305,9 @@ for(Cookie cookie : cookies){
             <!-- END -->
            
        
-        <script type="text/javascript">
-            $(document).ready(function() {
-
-                $('#Notification')
-                        .jnotifyInizialize({
-                    oneAtTime: false,
-                    appendType: 'append'
-
-                })
-                        .css({'position': 'absolute',
-                    'marginTop': '200px',
-                    'left': '0px',
-                    'width': '175px',
-                    'height': '40px',
-                    'z-index': '9999'
-                });
-                // --------------------------------------------------------------------------
-
-                // For add a notification on button click
-                // Parameter:
-                // text: Html do you want to show
-                // type: 'message' or 'error'
-                // permanent: True if you want to make a message permanent
-                // disappearTime: Time spent before closing message
+        
 
 
-
-
-                // -----------------------------------------------------
-            });
-        </script>
-
-
-        <div id="n1" class="noti_bubble">
-            <table width="100%" border="0">
-
-
-                <tr>                   
-
-
-                </tr>
-
-            </table>
-
-        </div>
-
-        <script>
-            getdata1();
-            
-        </script>
-    </body>
+        </body>
 
 </html>

@@ -494,15 +494,19 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 							
-							<td  class="alignLeft">Date Of Admission &nbsp;</td>
-
-							<td ><label> <input
-									name="dateofadmission" type="text" class="textField" autocomplete="false"
-									value="<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>"
-									id="dateofadmission" size="30"
-									data-validate="validate(required)">
-
-							</label></td>
+							<td class="alignLeft">College&nbsp;</td>
+							<td><label> 
+									<select name="collegename"	id="collegename" style="width: 230px;">
+										<option selected>${student.college}</option>
+										<option value="shaheen">Shaheen</option>
+										<option value="maulanaazad">Maulana Azad</option>
+										<option value="allamaiqbal">Allama Iqbal</option>
+										<option value="neatrepeaters">Neat Repeaters</option>
+										<option value="upsc">UPSC</option>
+										<option value="degree">Degree</option>
+										<option value="school">School</option>
+									</select>
+							</label> </td>
 							<%-- <td width="16%" class="alignRight">STS Number &nbsp;</td>
 
 									<td width="16%"><label> <input
@@ -1010,6 +1014,16 @@ for(Cookie cookie : cookies){
 						 --%>
 						 
 						 <tr>
+						 <td  class="alignLeft">Date Of Admission &nbsp;</td>
+
+							<td ><label> <input
+									name="dateofadmission" type="text" class="textField" autocomplete="false"
+									value="<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>"
+									id="dateofadmission" size="30"
+									data-validate="validate(required)">
+
+							</label></td>
+							
 							<td class="alignLeft">Created Date &nbsp;</td>
 							<td ><label> <input name="createddate"
 									type="text" value="<fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>" class="textField"

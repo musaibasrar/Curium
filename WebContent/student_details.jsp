@@ -455,17 +455,17 @@ for(Cookie cookie : cookies){
                             </td>
                             
                             
-                             <td  width="25%"  class="alignLeft" height="50" >Date of admission
+                             <td  width="25%"  class="alignLeft" height="50">College
                             </td>
-                            <td width="25%" class="tablerows" >
-                            	<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.college}" />
                             </td>
                             
                             
                         </tr>
 
 					<tr>
-                            <td width="25%"  class="alignLeft" height="50">Name</td>
+                            <td width="25%"  class="alignLeft" height="50">Student Name</td>
                             <td width="25%" class="tablerows" style="text-transform:uppercase">
                                 <c:out default="" value="${student.name}" />
                             </td>
@@ -727,6 +727,13 @@ for(Cookie cookie : cookies){
                         </tr> --%>
                         
                          <tr>
+                         
+                          <td  width="25%"  class="alignLeft" height="50" >Date of admission
+                            </td>
+                            <td width="25%" class="tablerows" >
+                            	<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>
+                            </td>
+                            
                             <td  width="25%"  class="alignLeft" height="50">Created Date
                             </td>
                             <td width="25%" class="tablerows">
@@ -832,10 +839,10 @@ for(Cookie cookie : cookies){
                 
                 <div>
 					<div align="center">
-					<h class="dataTextFees">Total fees : &#x20B9; ${totalfees}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Total fees paid : &#x20B9; ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
+					<h class="dataTextFees">Total fees : Rs. ${totalfees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total fees paid : Rs. ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Due Amount : </h>
-                <h class="dataTextDueFees"> &#x20B9; ${dueamount}</h>
+                <h class="dataTextDueFees"> Rs. ${dueamount}</h>
                 </div>
                     <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 
@@ -888,10 +895,10 @@ for(Cookie cookie : cookies){
                 <div>
 					<div align="center">
 				<h class="dataTextFees">Academic Year : ${currentAcademicYear}</h>&nbsp;&nbsp;&nbsp;
-				<h class="dataTextFees">Total fees : &#x20B9; ${totalfees}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Total fees paid : &#x20B9; ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
+				<h class="dataTextFees">Total fees : Rs. ${totalfees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total fees paid : Rs. ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Due Amount : </h>
-                <h class="dataTextDueFees"> &#x20B9; ${dueamount}</h>
+                <h class="dataTextDueFees"> Rs. ${dueamount}</h>
                 </div>
                     <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 

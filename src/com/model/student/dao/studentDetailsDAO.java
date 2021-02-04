@@ -11,6 +11,7 @@ import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.degreedetails.dto.Degreedetails;
+import com.model.mess.card.dto.Card;
 import com.model.parents.dto.Parents;
 import com.model.pudetails.dto.Pudetails;
 import com.model.std.dto.Classhierarchy;
@@ -308,7 +309,7 @@ public class studentDetailsDAO {
 			
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("From Parents as parents where parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid = "+branchId+" order by name ASC").setCacheable(true).setCacheRegion("commonregion");
+					.createQuery("From Parents as parents where parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid = "+branchId+" order by parents.Student.sid DESC").setCacheable(true).setCacheRegion("commonregion");
 			query.setFirstResult(offset);   
 			query.setMaxResults(noOfRecords);
 			results = query.getResultList();
@@ -574,6 +575,24 @@ public class studentDetailsDAO {
 	public String getPromotionClass(String classStudying) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public List<Card> getCardDetails(List<Integer> ids){
+		
+		List<Card> cardDetailsList = new ArrayList<Card>();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("From Card as card where card.sid IN (:ids)");
+			query.setParameterList("ids", ids);
+			cardDetailsList = query.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return cardDetailsList;
 	}
 	
 }

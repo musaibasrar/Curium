@@ -173,17 +173,14 @@
 <body style="text-align: center" class="bodymargin">
 	<form method="post" class="bodymargin">
 		<br>
-		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left">
-				<img src="images/cambridgelogo.jpg" width="200" height="150"/>
+				<img src="images/shaheenlogo.png" width="250" height="120"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;Cambridge School Yadgir </label><br>
-				<label class="addressLine">Behind Mohan Complex, Chittapur Road, Yadgir - 585202<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											Dist - Yadgir (K.S.) Cell: 9880012654 
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zaiqa Mess Services </label><br>
+				<label class="addressLine" style="padding-left: 50px;">Shaheen Nagar, Shahpur Gate, Bidar – 585403
 				 </label>
 				</td>
 			</tr>
@@ -276,7 +273,7 @@
 				<tr>
 					<td class="dataText"><c:out
 							value="${feescatmap.key}" /></td>
-					<td class="dataText">&#x20B9; <c:out
+					<td class="dataText">Rs. <c:out
 							value="${feescatmap.value}" /></td>
 					
 					<%-- <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
@@ -354,7 +351,7 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				Total</td>
-				<td class="headerText">&#x20B9; <c:out
+				<td class="headerText">Rs. <c:out
 						value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
@@ -384,7 +381,7 @@
 
 <td align="Center"><br>Clerks</td>
 
-<td align="left">H.M</td>
+<td align="left">Mess Incharge</td>
 
 </tr>
 		</TABLE>

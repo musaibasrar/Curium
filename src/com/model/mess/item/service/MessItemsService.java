@@ -33,6 +33,7 @@ import com.model.mess.stockmove.dto.MessStockItemDetails;
 import com.model.mess.stockmove.dto.MessStockMove;
 import com.model.mess.supplier.dao.MessSuppliersDAO;
 import com.model.mess.supplier.dto.MessSuppliers;
+import com.model.mess.supplier.service.MessSuppliersService;
 import com.util.DataUtil;
 import com.util.DateUtil;
 import com.util.StockIssuance;
@@ -382,7 +383,6 @@ public class MessItemsService {
 
 		public void generateStockIssuanceReport() {
 			
-
 			String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondatefrom"));
 			String toDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondateto"));
 			String issueTo = request.getParameter("issuedto");
@@ -390,6 +390,7 @@ public class MessItemsService {
 			String item = request.getParameter("itemname");
 			String queryMain = "from MessStockMove msm where msm.status != 'CANCELLED' and msm.transactiondate between '"+fromDate+"' and '"+toDate+"' ";
 			String subQuery = "";
+			List<StockIssuance> stockIssuanceList = new ArrayList<StockIssuance>();
 					
 			if(!issueTo.isEmpty()) {
 				subQuery = "and issuedto = '"+issueTo+"'";
@@ -421,17 +422,34 @@ public class MessItemsService {
 			List<MessStockEntry> messStockEntryList = new MessItemsDAO().getMessStockEntryByIdList(messStockMoveIds);
 			List<MessItems> messItemsList = new MessItemsDAO().getItemDetailByID(messStockItemIds);
 			
-			List<StockIssuance> stockIssuanceList = new ArrayList<StockIssuance>();
+			
 			
 			for (MessStockMove messStockMove : messStockMoveList) {
 				StockIssuance stockIssuance = new StockIssuance();
 				
 				for (MessStockEntry stockEntry : messStockEntryList) {
 					
-					if(messStockMove.getStockentryid() == stockEntry.getId()) {
-						
 						for (MessItems stockItems : messItemsList) {
 							
+							
+							if(messStockMove.getItemid() == stockEntry.getItemid()) {
+								
+								if(stockItems.getId() == stockEntry.getItemid()) {
+									stockIssuance.setItemname(stockItems.getName());
+									stockIssuance.setQuantity(messStockMove.getQuantity());
+									stockIssuance.setUnitofmeasure(stockItems.getUnitofmeasure());
+									stockIssuance.setItemunitprice(stockEntry.getItemunitprice());
+									stockIssuance.setIssuedto(messStockMove.getIssuedto());
+									stockIssuance.setPurpose(messStockMove.getPurpose());
+									stockIssuance.setTransactiondate(messStockMove.getTransactiondate());
+									stockIssuanceList.add(stockIssuance);
+								}
+								
+								
+							}
+							
+							/*if(messStockMove.getStockentryid() == stockEntry.getId()) {
+								
 							if(stockEntry.getItemid() == stockItems.getId()) {
 								stockIssuance.setItemname(stockItems.getName());
 								stockIssuance.setQuantity(messStockMove.getQuantity());
@@ -443,18 +461,63 @@ public class MessItemsService {
 								stockIssuanceList.add(stockIssuance);
 							}
 							
-						}
+						}*/
 						
 					}
 				}
 			}
 			
+			}
 			httpSession.setAttribute("stockissuancelist", stockIssuanceList);
 			httpSession.setAttribute("transactionfromdateselected", "From:"+request.getParameter("transactiondatefrom"));
 			httpSession.setAttribute("transactiontodateselected", "To:"+request.getParameter("transactiondateto"));
 			
-			}
 			getIssuanceStock();
+		}
+
+
+		public void receiveStockReport() {
+			
+			new MessSuppliersService(request, response).viewSuppliersDetails();
+			
+			List<MessItems> messItemsList =  new MessItemsDAO().getItemsDetails();
+			request.setAttribute("itemslist", messItemsList);
+		
+		
+		
+		}
+
+
+		public void generateStockReceivedReport() {
+			
+			String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondatefrom"));
+			String toDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondateto"));
+			String supplierid = request.getParameter("supplier");
+			String[] suppNameId = supplierid.split(":");
+			String item = request.getParameter("itemname");
+			String[] itemNameId = item.split(":");
+			String queryMain = "From MessStockEntry ms where ms.status != 'CANCELLED' and ms.messinvoicedetails.entrydate between '"+fromDate+"' and '"+toDate+"' ";
+			String subQuery = "";
+			
+					
+			if(!"ALL".equalsIgnoreCase(suppNameId[0])) {
+				subQuery = "and ms.messinvoicedetails.suppliersid = '"+Integer.parseInt(suppNameId[0])+"'";
+				httpSession.setAttribute("supplierselected", "Supplier :&nbsp;"+suppNameId[1]);
+			}
+			
+			if(!itemNameId[0].isEmpty()) {
+				subQuery = subQuery + "and ms.itemid = '"+itemNameId[0]+"'";
+				httpSession.setAttribute("itemselected", "Item:&nbsp;"+itemNameId[1]);
+			}
+			
+			List<MessStockEntry> messStockEntryList = new MessItemsDAO().getStockReceivedDetailsReport(queryMain+subQuery);
+			
+			httpSession.setAttribute("messstockentrylist", messStockEntryList);
+			httpSession.setAttribute("transactionfromdateselected", "From:"+request.getParameter("transactiondatefrom"));
+			httpSession.setAttribute("transactiontodateselected", "To:"+request.getParameter("transactiondateto"));
+			
+			receiveStockReport();
+			
 		}
 
 }

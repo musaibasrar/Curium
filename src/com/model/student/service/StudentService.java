@@ -28,11 +28,16 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
 import com.model.degreedetails.dto.Degreedetails;
+import com.model.feescategory.dao.feesCategoryDAO;
+import com.model.feescategory.dto.Feescategory;
 import com.model.feescollection.dao.feesCollectionDAO;
 import com.model.feescollection.dto.Receiptinfo;
+import com.model.mess.card.dto.Card;
 import com.model.parents.dao.parentsDetailsDAO;
 import com.model.parents.dto.Parents;
 import com.model.pudetails.dto.Pudetails;
+import com.model.stampfees.dto.Academicfeesstructure;
+import com.model.stampfees.service.StampFeesService;
 import com.model.std.dto.Classsec;
 import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
@@ -66,7 +71,8 @@ public class StudentService {
 		Parents parents = new Parents();
 		Pudetails puDetails = new Pudetails();
 		Degreedetails degreeDetails = new Degreedetails();
-		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying = null,conClassAdmittedIn=null,campus=null;
+		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying = null,conClassAdmittedIn=null,campus=null,collegeName=null,applyFees=null,monthfees=null;
+		Date validFrom = null, validTill = null;
 		boolean result=false;
 		
 		try {
@@ -259,6 +265,11 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("rte")) {
 		                	student.setRte(DataUtil.parseInt(item.getString()));
 		                }
+		                if (fieldName.equalsIgnoreCase("collegename")) {
+		                	String[] colg = (DataUtil.emptyString(item.getString())).split("_");
+		                	collegeName = colg[1];
+		                	student.setCollege(colg[0]);
+		                }
 		                // PU Details
 		                if (fieldName.equalsIgnoreCase("pep")) {
                                     puDetails.setExampassedappearance(DataUtil.parseInt(item.getString()));
@@ -436,9 +447,9 @@ public class StudentService {
 		                //End Degree Details
 		                
 		                //Bank Details
-		                if (fieldName.equalsIgnoreCase("bankname")) {
+		                /*if (fieldName.equalsIgnoreCase("bankname")) {
 		                	student.setBankname(DataUtil.emptyString(item.getString()));
-		                }
+		                }*/
 		                if (fieldName.equalsIgnoreCase("bankifsc")) {
 		                	student.setBankifsc(DataUtil.emptyString(item.getString()));
 		                }
@@ -446,6 +457,20 @@ public class StudentService {
 		                	student.setAccno(DataUtil.emptyString(item.getString()));
 		                }
 		                //End Bank Details
+		                
+		                //Get apply fees 
+		                if (fieldName.equalsIgnoreCase("applyfees")) {
+		                	applyFees = DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("monthfees")) {
+		                	monthfees = DataUtil.emptyString(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("validfrom")) {
+		                	validFrom = DateUtil.indiandateParser(item.getString());
+		                }
+		                if (fieldName.equalsIgnoreCase("validtill")) {
+		                	validTill = DateUtil.indiandateParser(item.getString());
+		                }
 		                
 		            } else {
 		                // Process form file field (input type="file").
@@ -474,7 +499,7 @@ public class StudentService {
 		student.setDroppedout(0);
 		student.setLeftout(0);
 		String[] academicyear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
-		student.setStudentexternalid("1"+campus+""+academicyear[0].charAt(2)+""+academicyear[0].charAt(3)+""+student.getClassstudying().substring(0, student.getClassstudying().length() - 2));
+		student.setStudentexternalid("1"+campus+""+academicyear[0].charAt(2)+""+academicyear[0].charAt(3)+""+student.getClassstudying().substring(0, student.getClassstudying().length() - 2)+""+""+collegeName);
 		//student.setStudentexternalid(DataUtil.generateString(5));
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		puDetails.setOptionalsubjects(optional.toString());
@@ -483,7 +508,50 @@ public class StudentService {
 		student.setDegreedetails(degreeDetails);
 		parents.setStudent(student);
 		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		parents = new parentsDetailsDAO().create(parents);
+		
+		//Stamp fees
+		
+		if("yes".equalsIgnoreCase(applyFees)) {
+			
+			List<Feescategory> feesCategory = new feesCategoryDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			int feesbreakfastid = 0, feeslunchid=0, feesdinnerid=0, feesbreakfast=0, feeslunch = 0, feesdinner = 0, totalFeesAmount = 0;
+			List<Studentfeesstructure> studentFeesStructure = new ArrayList<Studentfeesstructure>();
+			
+			for (Feescategory feescat : feesCategory) {
+					if("breakfast".equalsIgnoreCase(student.getBreakfast()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"breakfast")) {
+						feesbreakfastid = feescat.getIdfeescategory();
+						feesbreakfast = feescat.getAmount() * Integer.parseInt(monthfees);
+						Studentfeesstructure studentFeesBreakFast = new StampFeesService(request, response).stampStudentFeesStructure(feesbreakfastid, new Long(feesbreakfast));
+						studentFeesStructure.add(studentFeesBreakFast);
+					}else if("lunch".equalsIgnoreCase(student.getLunch()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"lunch")) {
+						feeslunchid = feescat.getIdfeescategory();
+						feeslunch = feescat.getAmount() * Integer.parseInt(monthfees);
+						Studentfeesstructure studentFeesLunch = new StampFeesService(request, response).stampStudentFeesStructure(feeslunchid, new Long(feeslunch));
+						studentFeesStructure.add(studentFeesLunch);
+					}else if("dinner".equalsIgnoreCase(student.getDinner()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"dinner")) {
+						feesdinnerid = feescat.getIdfeescategory();
+						feesdinner = feescat.getAmount() * Integer.parseInt(monthfees);
+						Studentfeesstructure studentFeesDinner = new StampFeesService(request, response).stampStudentFeesStructure(feesdinnerid, new Long(feesdinner));
+						studentFeesStructure.add(studentFeesDinner);
+					}
+				}
+			totalFeesAmount = feesbreakfast + feeslunch + feesdinner ;
+			Academicfeesstructure academicFessStructure  = new StampFeesService(request, response).stampAcademicFessStructure(Integer.toString(totalFeesAmount));
+			
+			//Card Details
+				Card cardDetails = new Card();
+				cardDetails.setValidfrom(validFrom);
+				cardDetails.setValidto(validTill);
+			//
+				
+			parents = new parentsDetailsDAO().create(parents,academicFessStructure,studentFeesStructure,httpSession.getAttribute("currentAcademicYear").toString(), cardDetails);
+			
+		}else {
+			parents = new parentsDetailsDAO().create(parents);
+		}
+		
+		//End stamp fees
+		
 
 		if(parents!=null){
 			result=true;
@@ -882,6 +950,9 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("droppedout")) {
 	                	student.setDroppedout(DataUtil.parseInt(item.getString()));
 	                }
+	                if (fieldName.equalsIgnoreCase("collegename")) {
+	                	student.setCollege(DataUtil.emptyString(item.getString()));
+	                }
 	                // Updating paretns information
 	                
 	                parents.setPid(parentsId);
@@ -1062,9 +1133,9 @@ public class StudentService {
                         //End Degree Details
                         
                       //Bank Details
-		                if (fieldName.equalsIgnoreCase("bankname")) {
+		                /*if (fieldName.equalsIgnoreCase("bankname")) {
 		                	student.setBankname(DataUtil.emptyString(item.getString()));
-		                }
+		                }*/
 		                if (fieldName.equalsIgnoreCase("bankifsc")) {
 		                	student.setBankifsc(DataUtil.emptyString(item.getString()));
 		                }

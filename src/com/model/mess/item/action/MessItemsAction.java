@@ -60,11 +60,31 @@ public class MessItemsAction {
                     url = generateStockIssuanceReport();
                 }else if (action.equalsIgnoreCase("printStockIssuanceReport")) {
                     url = printStockIssuanceReport();
-                }                
+                }else if (action.equalsIgnoreCase("receiveStock")) {
+                    url = receiveStockReport();
+                }else if (action.equalsIgnoreCase("generateStockReceivedReport")) {
+                    url = generateStockReceivedReport();
+                }else if (action.equalsIgnoreCase("printStockReceivedReport")) {
+                    url = printStockReceivedReport();
+                }        
                 return url;
         }
         
 
+
+		private String printStockReceivedReport() {
+			return "printstockreceivedreport.jsp";
+		}
+
+		private String generateStockReceivedReport() {
+			new MessItemsService(request, response).generateStockReceivedReport();
+			return "stockreceivedreport.jsp";
+		}
+
+		private String receiveStockReport() {
+			new MessItemsService(request, response).receiveStockReport();
+			return "stockreceivedreport.jsp";
+		}
 
 		private String printStockIssuanceReport() {
 			return "printstockissuancereport.jsp";

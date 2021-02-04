@@ -293,7 +293,7 @@ public class DocumentService {
 								studentDetails.getStudent().getNooftc()+"/"+studentDetails.getStudent().getDateoftc(),
 								studentDetails.getStudent().getClassadmittedin(),
 								getStringDate(studentDetails.getStudent().getAdmissiondate()),
-								studentDetails.getStudent().getSubsequentprogress(),
+								//studentDetails.getStudent().getSubsequentprogress(),
 								studentDetails.getStudent().getClassonleaving(),
 								getStringDate(studentDetails.getStudent().getDateleaving()),
 								studentDetails.getStudent().getReasonleaving(),

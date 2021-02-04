@@ -372,6 +372,31 @@
 		});
 	});
 	
+	$(function() {
+		$("#validfrom").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(
+				function() {
+					$("#validfrom").datepicker("option", "showAnim",$(this).val());
+				});
+	});
+	
+	$(function() {
+		$("#validtill").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(
+				function() {
+					$("#validtill").datepicker("option", "showAnim", $(this).val());
+				});
+	});
 	
 </script>
 
@@ -589,11 +614,22 @@
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
 
 							</label></td>
-							<td   class="alignLeft" style="padding-left: 20px;">Date of admission&nbsp;</td>
-							<td ><label><input name="dateofadmission" autocomplete="false"
-									type="text" class="myclass" id="dateofadmission" size="30"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									data-validate="validate(required)"> </label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">College&nbsp;</td>
+							<td ><label> 
+									<select name="collegename"	id="collegename" style="width: 256px;">
+										<option selected></option>
+										<option value="shaheen_sn">Shaheen School</option>
+										<option value="maulanaazad_ma">Maulana Azad</option>
+										<option value="allamaiqbal_ai">Allama Iqbal</option>
+										<option value="neetrepeaters_nr">NEET Academy</option>
+										<option value="upsc_upsc">UPSC</option>
+										<option value="degree_dg">Shaheen Degree college</option>
+										<option value="degree_dgw">Shaheen Women's Degree college</option>
+										<option value="degree_dgw">Carrier Master</option>
+									</select>
+							</label> </td>
+							
 							<!-- <td width="16%" class="alignRight">STS Number &nbsp;</td>
 
 									<td width="28%"><label> <input
@@ -765,7 +801,7 @@
 							<td ><label> 
 									<select name="staytype"	id="staytype" style="width: 256px;">
 										<option selected>Day Scholar</option>
-										<option>Residential</option>
+										<option>Day Scholar with Bus</option>
 										</select>
 							</label> </td>
 							
@@ -778,6 +814,68 @@
 												</select>
 							</label> </td>
 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							
+							<td   class="alignLeft">Date of admission&nbsp;</td>
+							<td ><label><input name="dateofadmission" autocomplete="false"
+								value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
+									type="text" class="myclass" id="dateofadmission" size="30"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									data-validate="validate(required)"> </label></td>
+									
+							<td class="alignLeft" style="padding-left: 20px;">Apply Fees &nbsp;</td>
+							<td height="30" class="alignLeft">&nbsp;<input
+								type="checkbox" value="yes" name="applyfees" id="yes" checked/>
+								&nbsp;&nbsp;&nbsp;&nbsp;Months
+								<label> 
+									<select name="monthfees" id="monthfees">
+										<option value="1" selected>1 Month</option>
+										<option value="2">2 Months</option>
+										<option value="3">3 Months</option>
+										<option value="4">4 Months</option>
+										<option value="5">5 Months</option>
+										<option value="6">6 Months</option>
+										<option value="7">7 Months</option>
+										<option value="8">8 Months</option>
+										<option value="9">9 Months</option>
+										<option value="10">10 Months</option>
+										<option value="11">11 Months</option>
+										<option value="12">12 Months</option>
+										</select>
+							</label>
+
+							</td>
+							
+						</tr>
+						
+						<tr>
+							
+							<td class="alignLeft">&nbsp;</td>
+							<td ></td>
+									
+							<td class="alignLeft" style="padding-left: 20px;">&nbsp;</td>
+							<td height="30" class="alignLeft">
+							&nbsp;&nbsp;Valid From
+							<input name="validfrom" autocomplete="false"
+									type="text" class="myclass" id="validfrom" size="6"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									data-validate="validate(required)">
+							&nbsp;&nbsp;Valid Till
+							<input name="validtill" autocomplete="false"
+									type="text" class="myclass" id="validtill" size="6"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									data-validate="validate(required)">
+							</td>
+							
 						</tr>
 
 						<tr>
@@ -1058,7 +1156,7 @@
 						</tr>
 						 -->
 						 
-						 <tr>
+						 <tr style="display: none;">
 										
 							<td  class="alignLeft">Created Date &nbsp;</td>
 							<td ><label> <input name="createddate"

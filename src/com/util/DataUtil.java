@@ -162,6 +162,10 @@ public class DataUtil {
        } while (mathrandom >= alphaNumericLength);
        return mathrandom;
    }
+   
+   public static boolean containsIgnoreCase(String str, String subString) {
+       return str.toLowerCase().contains(subString.toLowerCase());
+   }
      
     
 

@@ -13,6 +13,7 @@ import com.model.mess.item.dto.MessItems;
 import com.model.mess.stockentry.dto.MessInvoiceDetails;
 import com.model.mess.stockentry.dto.MessStockAvailability;
 import com.model.mess.stockentry.dto.MessStockEntry;
+import com.model.mess.stockmove.dto.MessStockMove;
 import com.util.HibernateUtil;
 import com.util.Session;
 import com.util.Session.Transaction;
@@ -410,6 +411,26 @@ public class MessItemsDAO {
                 Query query = session.createQuery("From MessStockEntry mse where mse.id IN (:ids)");
                 query.setParameterList("ids", messStockMoveIds);
                 results = query.getResultList();
+                transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                
+                hibernateException.printStackTrace();
+
+        } finally {
+    			HibernateUtil.closeSession();
+        }
+        return results;
+}
+
+
+
+	public List<MessStockEntry> getStockReceivedDetailsReport(String query) {
+		
+        List<MessStockEntry> results = new ArrayList<MessStockEntry>();
+        
+        try {
+                transaction = session.beginTransaction();
+                results = (List<MessStockEntry>) session.createQuery(query).setCacheable(true).setCacheRegion("commonregion").list();
                 transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
                 

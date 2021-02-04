@@ -79,10 +79,12 @@ public class Student implements java.io.Serializable {
 	private Integer belongtobpl;
 	private Integer sts;
 	private Integer rte;
-	private String bankname;
 	private String bankbranch;
 	private String accno;
 	private String bankifsc;
+	
+	//for mess private String bankname;
+	private String college;
 	
 	//for mess private String bplcardno;
 	private String breakfast;
@@ -121,7 +123,7 @@ public class Student implements java.io.Serializable {
 			Integer passedout, Integer droppedout, Integer leftout, Integer semester,String stream,String mediumofinstruction,
 			 String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,String studentscaste,
 			 String socialcategory,Integer belongtobpl,String breakfast,String lunch,String dinner,String staytype,String campus,
-			 Integer sts, Integer rte, String bankname, String bankbranch, String accno, String bankifsc) {
+			 Integer sts, Integer rte, String college, String bankbranch, String accno, String bankifsc) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
@@ -171,7 +173,7 @@ public class Student implements java.io.Serializable {
 		this.belongtobpl = belongtobpl;
 		this.sts=sts;
 		this.rte=rte;
-		this.bankname=bankname;
+		this.college=college;
 		this.bankbranch=bankbranch;
 		this.accno=accno;
 		this.bankifsc=bankifsc;
@@ -652,12 +654,12 @@ public class Student implements java.io.Serializable {
 		this.rte = rte;
 	}
 
-	public String getBankname() {
-		return bankname;
+	public String getCollege() {
+		return college;
 	}
 
-	public void setBankname(String bankname) {
-		this.bankname = bankname;
+	public void setCollege(String college) {
+		this.college = college;
 	}
 
 	public String getBankbranch() {

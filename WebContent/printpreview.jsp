@@ -12,6 +12,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html>
     <head >
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -372,10 +373,11 @@ for(Cookie cookie : cookies){
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
+             margin-bottom: 1cm;
+             margin-top: 1cm;
+             size: 12.2cm 17.5cm;
         }
 
         @media screen {
@@ -389,37 +391,248 @@ for(Cookie cookie : cookies){
             }
         }
         .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
     transition: 0.3s;
-    width: 5.5cm;
-    height: 8.5cm;
+    width: 12.2cm;
+    height: 17.5cm;
 }
 
-.card:hover {
+/* .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
+} */
 
 .container {
     padding: 2px 16px;
 }
+
+.carddetails{
+            	font-size: 23px;
+                font-family: Tahoma;
+                text-align: left;
+                font-weight: bold;
+            }
     </style>
 
 
-    <body class="bodymargin">
-       
+    <body class="bodymargin" onload="window.print();">
+       <%
+			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
+		%>
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
+		
         <form action="" method="post" id="form1" class="bodymargin">
 
            
-            <div>
+            <div style="page-break-before: always;border-collapse: collapse;">
 
 
 
-                <table cellpadding="2"  border="0">
+                <table cellpadding="2"  border="0"   >
+                
+                
+                	<c:forEach items="${messcardstudentlist}" var="studentlist" varStatus="status">
+                			<tr>
+                            <td class="fontsize" >
+		                         <div class="card">
+		                         		<div>
+		                         			<table>
+		                         				<tr>
+		                         					<td style="padding-left: 30px;">
+		                         						<a><img src="images/shaheenlogo.png" style="width:180px;height:90px;vertical-align: baseline;" alt="shaheenlogo">
+		                         							</a>
+		                         					</td>
+		                         					<td style="padding-left: 20px;">
+		                         						<label style="font-size: 28px;color: #466580;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zaiqa <br> Mess Services</label>
+		                         						<br>
+		                         					</td>
+		                         				</tr>
+		                         			</table>
+		                         			</div>
+		                         			<div align="center">
+		                         			<hr style="margin-top: 1px;margin-bottom: 1px;color: black;">
+		                         						<br>
+		                         					<label style="font-size: 18px;">Valid From : <fmt:formatDate type="date" value="${studentlist.value.validfrom}" pattern="dd/MM/yyyy"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valid Till : <fmt:formatDate type="date" value="${studentlist.value.validto}" pattern="dd/MM/yyyy"/></label> <br>
+		                         					<br>
+		                         					<c:if test="${studentlist.key.student.breakfast == 'breakfast'}">
+		                         						<a> <img
+															src="images/breakfast.png" width="30" height="30" 
+															alt="Home" style="vertical-align: baseline;font-size: 180px;" />
+														</a>
+														<label style="font-size: 25px;">${studentlist.key.student.breakfast}</label>
+		                         					
+		                         					</c:if>
+		                         					&nbsp;&nbsp;&nbsp;
+		                         					<c:if test="${studentlist.key.student.lunch == 'lunch'}">
+														<a> <img
+															src="images/lunch.png" width="30" height="30" 
+															alt="Home" style="vertical-align: baseline;font-size: 144px;" />
+															
+														</a>
+														<label style="font-size: 25px;">${studentlist.key.student.lunch}</label>
+		                         					</c:if>
+		                         					
+		                         					&nbsp;&nbsp;&nbsp;
+		                         					<c:if test="${studentlist.key.student.dinner == 'dinner'}">
+		                         						<a > <img
+															src="images/dinner.png" width="30" height="30" 
+															alt="Home" style="vertical-align: baseline;font-size: 144px;" />
+															${studentlist.key.student.dinner}
+														</a>
+		                         					<label style="font-size: 25px;">${studentlist.key.student.dinner}</label>
+		                         					</c:if>
+							
+		                         		<hr style="margin-top: 1px;margin-bottom: 1px;color: black;">
+		                         						 
+		                         		</div>
+		  								<div class="container" align="center">
+		  								
+		  								<table style="width: auto;height: auto;">
+  											<tr>
+  												<td>
+						    							<img src="data:image;base64,${studentlist.key.student.studentpic}" style="height:250px;width:220px;" alt="Student's Photo" />
+  												</td>
+  											</tr>
+  										</table>
+		  								
+		  									<table>	
+  											<tr>
+  												<td class="carddetails" style="width: 50%;padding-left: 10px;">
+  														Name
+  													</td><td class="carddetails">:&nbsp;${studentlist.key.student.name}
+  												</td>
+  											</tr>
+  											<tr>
+  												<td class="carddetails" style="width: 50%;padding-left: 10px;">
+  														Adm. No
+  														</td><td class="carddetails">:&nbsp;${studentlist.key.student.admissionnumber}
+  												</td>
+  											</tr>
+  											<tr>
+  												<td class="carddetails" style="width: 50%;padding-left: 10px;">
+						  								UID
+  														</td><td class="carddetails">:&nbsp;${studentlist.key.student.studentexternalid}
+  												</td>
+  											</tr>
+  											
+  										</table>
+  										
+		  								</div>
+								</div>
+								<TABLE width="100%" border="0"
+			style="page-break-after: always; border-collapse: collapse;">
 
-                        <c:set var="iInitial" value="${iInitial}"/>
+			<tr>
+			<td>
+			<br>
+			<br><br><br></td>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+		<tr>
+		<td></td>
+			<td align="left"></td>	
+			<td align="center"></td>
+			<td align="center"></td>
+		</tr>
+		
+			<tr>
+              <td align="center"></td>
+            </tr>
+		</TABLE>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            
+                            
+                        </tr>
+                	
+                	</c:forEach>
+
+                        <%-- <c:set var="iInitial" value="${iInitial}"/>
                         <c:set var="limit" value="1"/>
                         
-                    <c:forEach begin="1" end="${endValue}">
+                        
+                        <c:forEach begin="1" end="${endValue}">
+                        <%!                        
+                            int i = 1;
+                        %>
+
+                        <tr style="page-break-before: always;">
+                            <c:if test="${limit < iInitial}">
+                            <td class="fontsize" >
+		                         <div class="card">
+		                         		<div>
+		                         			<table>
+		                         				<tr>
+		                         					<td style="padding-left: 30px;">
+		                         						<a><img src="images/shaheenlogo.png" style="width:180px;height:90px;vertical-align: baseline;" alt="shaheenlogo">
+		                         							</a>
+		                         					</td>
+		                         					<td style="padding-left: 20px;">
+		                         						<label style="font-size: 28px;color: #466580;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zaiqa <br> Mess Services</label>
+		                         					</td>
+		                         				</tr>
+		                         			</table>
+		                         			</div>
+		                         			<div align="center">
+		                         			<hr style="margin-top: 0px;margin-bottom: 0px;">
+		                         			<%= request.getSession().getAttribute("meals" + i + "")%>
+		                         		<hr style="margin-top: 0px;margin-bottom: 0px;">
+		                         		</div>
+		  								<div class="container" align="center">
+		  								
+		  								<table style="width: auto;height: auto;">
+  											<tr>
+  												<td>
+						    							<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:250px;width:220px;" alt="Student's Photo" />
+  												</td>
+  											</tr>
+  										</table>
+		  								
+		  									<table>	
+  											<tr>
+  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
+  														Name
+  													</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("studentname" + i + "")%>
+  												</td>
+  											</tr>
+  											<tr>
+  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
+  														Adm. No
+  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "")%>
+  												</td>
+  											</tr>
+  											<tr>
+  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
+						  								UID
+  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("uid" + i + "")%>
+  												</td>
+  											</tr>
+  											
+  										</table>
+  										
+		  								</div>
+								</div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            </c:if>
+                            
+                        </tr>
+                        <% i = i + 1;%>
+                        <c:set var="limit" value="${limit+1}"/>
+                        
+                    </c:forEach> --%>
+                    <%-- <% i = 1;%>
+                    <c:set var="iInitial" value="1"/>
+                        <c:set var="limit" value="1"/>  --%>
+                        
+                        
+                    <%-- <c:forEach begin="1" end="${endValue}">
                         <%!                        
                             int i = 1;
                         %>
@@ -427,15 +640,59 @@ for(Cookie cookie : cookies){
                         <tr>
                             <c:if test="${limit < iInitial}">
                             <td class="fontsize" >
-                         <div class="card">
-  								<img src="images/divine.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
-  								</div>
-						</div>
-                            
-                            
+		                         <div class="card">
+		                         		<div>
+		                         			<table>
+		                         				<tr>
+		                         					<td style="padding-left: 30px;">
+		                         						<a><img src="images/shaheenlogo.png" style="width:180px;height:90px;vertical-align: baseline;" alt="shaheenlogo">
+		                         							</a>
+		                         					</td>
+		                         					<td style="padding-left: 20px;">
+		                         						<label style="font-size: 28px;color: #466580;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zaiqa <br> Mess Services</label>
+		                         					</td>
+		                         				</tr>
+		                         			</table>
+		                         			</div>
+		                         			<div align="center">
+		                         			<hr style="margin-top: 0px;margin-bottom: 0px;">
+		                         			<%= request.getSession().getAttribute("meals" + i + "")%>
+		                         		<hr style="margin-top: 0px;margin-bottom: 0px;">
+		                         		</div>
+		  								<div class="container" align="center">
+		  								
+		  								<table style="width: auto;height: auto;">
+  											<tr>
+  												<td>
+						    							<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:250px;width:220px;" alt="Student's Photo" />
+  												</td>
+  											</tr>
+  										</table>
+		  								
+		  									<table>	
+  											<tr>
+  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
+  														Name
+  													</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("studentname" + i + "")%>
+  												</td>
+  											</tr>
+  											<tr>
+  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
+  														Adm. No
+  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "")%>
+  												</td>
+  											</tr>
+  											<tr>
+  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
+						  								UID
+  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("uid" + i + "")%>
+  												</td>
+  											</tr>
+  											
+  										</table>
+  										
+		  								</div>
+								</div>
                             </td>
                             <td></td>
                             <td></td>
@@ -443,26 +700,100 @@ for(Cookie cookie : cookies){
                             <c:set var="limit" value="${limit+1}"/>
                             <% i = i + 1;%>
                             <c:if test="${limit < iInitial}">
-                            <td  class="fontsize"> <div class="card">
-  								<img src="images/divine.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" alt="Student's Photo" /> 
-  								</div>
-						</div></td>
+                            <td  class="fontsize"> 
+                            	<div class="card">
+		                         		<div align="center">
+		                         			<img src="images/shaheenlogo.png" style="width:100px;height:68px;" alt="shaheenlogo"><br>
+		                         			<label>Zaiqa Mess Services</label>
+		                         		<hr style="margin-top: 0px;margin-bottom: 0px;">
+		                         			<%= request.getSession().getAttribute("meals" + i + "")%>
+		                         		<hr style="margin-top: 0px;margin-bottom: 0px;">
+		                         		</div>
+		  								<div class="container" align="center">
+		  								
+		  								<table style="width: auto;height: auto;">
+  											<tr>
+  												<td>
+						    							<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:120px;" alt="Student's Photo" />
+  												</td>
+  											</tr>
+  										</table>
+		  								
+		  									<table>	
+  											<tr>
+  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
+  														Name
+  													</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("studentname" + i + "")%>
+  												</td>
+  											</tr>
+  											<tr>
+  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
+  														Adm. No
+  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "")%>
+  												</td>
+  											</tr>
+  											<tr>
+  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
+						  								UID
+  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("UID" + i + "")%>
+  												</td>
+  											</tr>
+  											
+  										</table>
+  										
+		  								</div>
+								</div>
+                            </td>
 						 <td></td>
                             <td></td>
                             </c:if>
                             <c:set var="limit" value="${limit+1}"/>
                             <% i = i + 1;%>
                             <c:if test="${limit < iInitial}">
-                            <td  class="fontsize"> <div class="card">
-  								<img src="images/divine.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Student's Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
-  								</div>
-						</div></td>
+                            <td  class="fontsize">
+                            		<div class="card">
+		                         		<div align="center">
+		                         			<img src="images/shaheenlogo.png" style="width:100px;height:68px;" alt="shaheenlogo"><br>
+		                         			<label>Zaiqa Mess Services</label>
+		                         		<hr style="margin-top: 0px;margin-bottom: 0px;">
+		                         			<%= request.getSession().getAttribute("meals" + i + "")%>
+		                         		<hr style="margin-top: 0px;margin-bottom: 0px;">
+		                         		</div>
+		  								<div class="container" align="center">
+		  								
+		  								<table style="width: auto;height: auto;">
+  											<tr>
+  												<td>
+						    							<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:120px;" alt="Student's Photo" />
+  												</td>
+  											</tr>
+  										</table>
+		  								
+		  									<table>	
+  											<tr>
+  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
+  														Name
+  													</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("studentname" + i + "")%>
+  												</td>
+  											</tr>
+  											<tr>
+  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
+  														Adm. No
+  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "")%>
+  												</td>
+  											</tr>
+  											<tr>
+  												<td class="carddetails" style="width: 40px;padding-left: 10px;">
+						  								UID
+  														</td><td class="carddetails">:&nbsp;<%= request.getSession().getAttribute("UID" + i + "")%>
+  												</td>
+  											</tr>
+  											
+  										</table>
+  										
+		  								</div>
+								</div>
+                            </td>
                             </c:if>
                         </tr>
                         <% i = i + 1;%>
@@ -471,10 +802,15 @@ for(Cookie cookie : cookies){
                     </c:forEach>
                     <% i = 1;%>
                     <c:set var="iInitial" value="1"/>
-                        <c:set var="limit" value="1"/>
+                        <c:set var="limit" value="1"/>  --%>
                 </table>
+                
+                
+                
 
-                <table  width="70%"  id="table11" align="left">
+            </div>
+	
+		<!-- <table  width="70%"  id="table11" align="left">
                     <tr>
                         <td width="30%"> 
 
@@ -487,17 +823,9 @@ for(Cookie cookie : cookies){
                     </tr>
 
                 </table>
-
-            </div>
-
-
-
-
-
-
-
-
-
+ -->
+ 
+ 
         </form>
     </body>
 </html>
