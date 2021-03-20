@@ -24,18 +24,20 @@ public class Marks implements java.io.Serializable {
 	private Integer marksobtained;
 	private String academicyear;
 	private int branchid;
+	private int userid;
 	
 	public Marks() {
 	}
 
 	public Marks(Integer sid, Integer subid, Integer examid,
-			Integer marksobtained, String academicyear, int branchid) {
+			Integer marksobtained, String academicyear, int branchid, int userid) {
 		this.sid = sid;
 		this.subid = subid;
 		this.examid = examid;
 		this.marksobtained = marksobtained;
 		this.academicyear = academicyear;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -103,5 +105,12 @@ public class Marks implements java.io.Serializable {
 	this.branchid = branchid;
 	}
 		
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 
 }

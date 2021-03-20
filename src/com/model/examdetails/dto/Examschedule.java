@@ -29,14 +29,14 @@ public class Examschedule implements java.io.Serializable {
 	private String classes;
 	private String academicyear;
 	private	int branchid;
-	
+	private int userid;
 	
 	public Examschedule() {
 	}
 
 	public Examschedule(Date date, String starttime, String endtime,
 			String subject, String examname, String classes, String academicyear,
-			int branchid) {
+			int branchid, int userid) {
 		this.date = date;
 		this.starttime = starttime;
 		this.endtime = endtime;
@@ -45,6 +45,7 @@ public class Examschedule implements java.io.Serializable {
 		this.classes = classes;
 		this.academicyear = academicyear;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -130,6 +131,14 @@ public class Examschedule implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 	
 }

@@ -222,7 +222,7 @@ public class MessItemsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<MessInvoiceDetails>) session.createQuery("From MessInvoiceDetails invoicedetails where invoicedetails.status != 'CANCELLED' and invoicedetails.branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
+			results = (List<MessInvoiceDetails>) session.createQuery("From MessInvoiceDetails as invoicedetails where invoicedetails.status != 'CANCELLED' and invoicedetails.branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			noOfRecords = results.size();
 			logger.info("The size of MessInvoiceDetails is:::::::::::::::::::::::::::::::::::::::::: "+ noOfRecords);
@@ -245,7 +245,7 @@ public class MessItemsDAO {
         List<MessStockAvailability> results = new ArrayList<MessStockAvailability>();
         try {
                 transaction = session.beginTransaction();
-                results = (List<MessStockAvailability>) session.createQuery("From MessStockAvailability ms order by ms.id DESC").setCacheable(true).setCacheRegion("commonregion").list();
+                results = (List<MessStockAvailability>) session.createQuery("From MessStockAvailability ms order by ms.messitems.name ASC").setCacheable(true).setCacheRegion("commonregion").list();
                 transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
                 
@@ -304,7 +304,7 @@ public class MessItemsDAO {
         try {
             transaction = session.beginTransaction();
             
-            Query queryItems = session.createQuery("from MessItems mi where mi.id IN (:ids)").setCacheable(true).setCacheRegion("commonregion");
+            Query queryItems = session.createQuery("from MessItems mi where mi.id IN (:ids) order by mi.id DESC").setCacheable(true).setCacheRegion("commonregion");
             queryItems.setParameterList("ids", itemIds);
             result = queryItems.getResultList();
             transaction.commit();
@@ -431,6 +431,25 @@ public class MessItemsDAO {
         try {
                 transaction = session.beginTransaction();
                 results = (List<MessStockEntry>) session.createQuery(query).setCacheable(true).setCacheRegion("commonregion").list();
+                transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                
+                hibernateException.printStackTrace();
+
+        } finally {
+    			HibernateUtil.closeSession();
+        }
+        return results;
+}
+
+
+
+	public List<MessStockAvailability> getItemsStock() {
+		
+        List<MessStockAvailability> results = new ArrayList<MessStockAvailability>();
+        try {
+                transaction = session.beginTransaction();
+                results = (List<MessStockAvailability>) session.createQuery("From MessStockAvailability ms where availablestock > 0 order by ms.messitems.name ASC").setCacheable(true).setCacheRegion("commonregion").list();
                 transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
                 

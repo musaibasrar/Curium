@@ -1,5 +1,5 @@
 <%-- 
-    Document   : header_superadmin
+    Document   : header_admin
     Created on : Feb 13, 2013, 11:10:08 AM
     Author     : Musaib
 --%>
@@ -10,81 +10,17 @@
 
 <html>
     <head>
-        <title>School Management</title>
+        <title>CURIUM</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <script type="text/javascript">
-            var getMember;
-            //var getVisit;
-            function getdata() {
-
-                if (typeof XMLHttpRequest != "undefined") {
-                    getMember = new XMLHttpRequest();
-                   // getVisit = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getMember = new ActiveXObject("Microsoft.XMLHTTP");
-                    //getVisit = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-                getMember.onreadystatechange = processMemberData;
-                getMember.open("POST", "StudentController",true);
-                getMember.send(null);
-
-                /* getVisit.onreadystatechange = processVisitData;
-                getVisit.open("POST", "AppointmentController",true);
-                getVisit.send(null); */
-            }
-
-            function processMemberData() {
-                if (getMember.readyState==4)
-                {
-                    if (getMember.status==200){
-
-                        var count = getMember.responseXML.getElementsByTagName("count")[0];
-                        var childCount=count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML=childCount;
-                        mdiv.style.visibility='visible';
-                        //setTimeout('getdata();', 6000);
-
-
-                    }
-                }
-
-            }
-          /*   function processVisitData() {
-                if (getVisit.readyState==4)
-                {
-                    if (getVisit.status==200){
-
-                        var visitCount = getVisit.responseXML.getElementsByTagName("visitcount")[0];
-                        var childVisitCount=visitCount.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n2");
-                        mdiv.innerHTML=childVisitCount;
-                        mdiv.style.visibility='visible';
-                        setTimeout('getdata();', 60000);
-
-
-                    }
-                }
-
-            } */
-
-        </script>
-      <!--  <script  type="text/javascript">
-            function hidePatientPopup()
-            {
-                document.getElementById("n1").style.visibility='hidden';
-            }
-            function hideVisitPopup()
-            {
-
-                document.getElementById("n2").style.visibility='hidden';
-            }
-        </script> -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/popper.min.js"></script>
+     
         <style type="text/css">
-            <!--
+            
             .style1 {font-family: Arial, Helvetica, sans-serif;
                      font-size: 12px;
                      color: #666666;
@@ -92,20 +28,20 @@
             .style50 {color: #FFFFFF}
             .style6 {font-size: 10; font-family: Arial, Helvetica, sans-serif; color: #FFFFFF; }
             a:link {
-                color: #FFFFFF;
+                color: #000000;
                 text-decoration: none;
+                font-family: arial;
+                font-size: 13px;
             }
-            a:visited {
-                text-decoration: none;
-                color: #FFFFFF;
-            }
-            a:hover {
-                text-decoration: none;
-                color: #CBE577;
-            }
+           a:visited {
+		    color: #383838;
+    
+			}
+			a:hover {
+			text-decoration: underline;
+			}
             a:active {
-                text-decoration: none;
-                color: #FFFFFF;
+                color: #000000;
             }
             .style5 {font-family: Calibri; font-size: 14px; color: #FFFFFF; }
             .style51 {
@@ -145,7 +81,8 @@
                 height: 16px;
 
             }
-            -->
+            
+           
         </style>
         <script type="text/javascript">
             function logout(){
@@ -173,51 +110,86 @@ for(Cookie cookie : cookies){
 }
 %>
     <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-        <form id="form1" method="post" >
-            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td valign="top" background="images/h_bg.jpg">
-                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
-                            <!-- <tr>
-                               <td width="234" ><div align="center"><img src="images/logo.png" width="200" height="64" /></div></td> 
-                                <td width="700" ><div align="center"><img src="images/SMS.png" width="391" height="50" /></div></td>
-                               
-                            </tr> -->
-                            <tr>
-                            <td style="height: 30px;"></td>  
-                            </tr>
-                            <tr>
-                            				<td width="10"></td>
-                                          	<td align="left"><img src="images/curiumheader.png" /></td>  
-                                          	<!-- <td><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td> -->
-                            				<td width="40" ><div align="center" ><a target="leftFrame" href="left_superadmin.jsp"><img src="images/house_home.png" width="35" height="35" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                            				<td><a target="leftFrame" href="left_superadmin.jsp" style="color:white;font-size: 11px;font-family: arial;">Home</a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            
-                                            <td width="40"><a target="mainFrame" href="feesCollectionDetails.jsp"><div align="center" align="center"><img  alt="Fees Details" src="images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="sendsms_superadmin.jsp"><img   src="images/sendsmsw.png" width="30" height="30" alt="Send SMS" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                			<td><label style="color:white;font-size: 12px;">Send <br>Message</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            
-                                            <td width="40"><a target="mainFrame" href="Controller?process=StudentProcess&action=viewAllSuperAdmin"><div align="center" align="center"><img  alt="View All Students" src="images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">View <br>All</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            
-                                            <td width="40"><a target="mainFrame" href="Controller?process=UserProcess&action=dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="images/dashboardw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">Dash<br> Board</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            <td width="40" ><div align="center" ><a target="_parent" href="Controller?process=UserProcess&action=logout"><img   src="images/logoutw.png" width="30" height="30" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            <td width="60" ><div align="center" ><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                            </tr>
-                            <tr>
-                            <td style="height: 30px;"></td>  
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-            <script>
-                getdata();
-            </script>
-        </form>
+        <div style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); transition: 0.3s; ">
+        
+                        <table width="100%" border="0" align="center"
+						cellpadding="2" cellspacing="0" bordercolor="#FFFFFF">
+						<tr><td></td></tr>
+						<tr>
+						
+							<td style="padding-left: 20px;padding-right: 50px;">
+								<a target="mainFrame" href="welcome.jsp" ><img src="images/logo.png"/></a>
+								</td>
+							<td><a target="leftFrame" href="left_admin_side.jsp"> <img
+									src="images/home.svg" width="18" height="18" 
+									alt="Home" style="vertical-align: bottom;font-size: 144px;" />&nbsp;Home
+							</a></td>
+
+							<td><a target="mainFrame"
+								href="Controller?process=FeesProcess&action=feesCollect"> <img
+									src="images/feescollect.svg" width="18" height="18"
+									alt="Fees Collection" style="vertical-align: bottom;" />&nbsp;Fees Collection
+							</a></td>
+
+							<td>
+								<a target="mainFrame"
+								href="Controller?process=AccountProcess&action=createVoucher"> <img
+									src="images/createvoucher.svg" width="18" height="18"
+									alt="Create Voucher" style="vertical-align: bottom;" />
+									Create Voucher
+								</a>
+							</td>
+
+							<!-- <td ><a target="mainFrame" href="feesCollectionDetails.jsp"><img  alt="Fees Details" src="images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
+
+							<td><a target="mainFrame"
+								href="Controller?process=StudentProcess&action=addNew"> <img
+									src="images/student_header.svg" width="18" height="18"
+									alt="Add New Student" style="vertical-align: bottom;" />Add Student
+							</a></td>
+
+							<td ><a target="leftFrame" href="leftsettings.jsp">
+									<img alt="Settings" src="images/settings.svg" width="18"
+									height="18" style="vertical-align: bottom;" />Master Settings
+							</a></td>
+
+							<td ><a target="mainFrame"
+								href="Controller?process=AdminProcess&action=viewAllExpenses"><img
+									alt="Admin Exp" src="images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+									Admin Expense
+							</a></td>
+
+							<td ><a target="mainFrame" href="sendsms.jsp"><img
+									src="images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+									Send Message		
+							</a></td>
+
+							<td ><a target="mainFrame"
+								href="Controller?process=StudentProcess&action=viewAllStudentsWithParents"><img
+									alt="View All Students" src="images/students.svg" width="18"
+									height="18" style="vertical-align: bottom;"/>
+								View Students
+							</a></td>
+							
+							<td ><a target="mainFrame"
+								href="Controller?process=UserProcess&action=dashBoard"><img
+									alt="Dash Board" src="images/dashboard.svg" width="18"
+									height="18" style="vertical-align: bottom;"/>
+									Dash Board
+									</a></td>
+								
+							<td ><a target="_parent"
+								href="Controller?process=UserProcess&action=logout"><img
+									src="images/logout.svg" width="18" height="18" alt="Log Out" 
+									style="vertical-align: bottom;"/>Logout</a></td>
+							<td width="60"></td>
+						</tr>
+
+					</table>
+					<!-- <hr style="border-top: 1px solid rgba(1,1,1,1);margin-top: 0px;margin-bottom: 0px;"> -->
+            </div>
+        
     </body>
 
 </html>

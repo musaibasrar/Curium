@@ -1024,6 +1024,34 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 							
+							<td class="alignLeft">Nationality &nbsp;</td>
+							<td ><label> 
+										Non-NRI<input type="radio"
+								value="nonnri" name="nationality" id="nonnri" 
+								${student.nationality == 'nonnri' ? 'checked' : ''} />
+								&nbsp;&nbsp;NRI<input type="radio"
+								value="nri" name="nationality" id="nri" 
+								${student.nationality == 'nri' ? 'checked' : ''} />
+								
+							</label></td>
+
+							</tr>
+							
+						<tr>
+
+							<td></td>
+
+						</tr>
+						
+						<tr>
+
+							<td></td>
+
+						</tr>
+						
+						
+						 <tr>
+							
 							<td class="alignLeft">Created Date &nbsp;</td>
 							<td ><label> <input name="createddate"
 									type="text" value="<fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>" class="textField"

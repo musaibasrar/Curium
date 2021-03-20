@@ -15,6 +15,9 @@
          <property generated="never" lazy="false" name="branchid" optimistic-lock="true" type="java.lang.Integer" unique="false">
             <column name="branchid"/>
         </property>      
+        <property name="userid" type="int">
+ <column name="userid" />
+</property>
             
     </class>
 </hibernate-mapping>

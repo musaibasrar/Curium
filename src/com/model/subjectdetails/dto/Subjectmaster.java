@@ -20,13 +20,15 @@ public class Subjectmaster implements java.io.Serializable {
 	private Integer subjectid;
 	private String subjectname;
 	private int branchid;
-
+	private int userid;
+	
 	public Subjectmaster() {
 	}
 
-	public Subjectmaster(String subjectname, int branchid) {
+	public Subjectmaster(String subjectname, int branchid, int userid) {
 		this.subjectname = subjectname;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -57,5 +59,13 @@ public class Subjectmaster implements java.io.Serializable {
 		this.branchid = branchid;
 	}
 	
+
+public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 	
 }

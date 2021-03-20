@@ -82,6 +82,7 @@ public class Student implements java.io.Serializable {
 	private String bankbranch;
 	private String accno;
 	private String bankifsc;
+	private int userid;
 	
 	//for mess private String bankname;
 	private String college;
@@ -123,7 +124,7 @@ public class Student implements java.io.Serializable {
 			Integer passedout, Integer droppedout, Integer leftout, Integer semester,String stream,String mediumofinstruction,
 			 String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,String studentscaste,
 			 String socialcategory,Integer belongtobpl,String breakfast,String lunch,String dinner,String staytype,String campus,
-			 Integer sts, Integer rte, String college, String bankbranch, String accno, String bankifsc) {
+			 Integer sts, Integer rte, String college, String bankbranch, String accno, String bankifsc, int userid) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
@@ -182,7 +183,8 @@ public class Student implements java.io.Serializable {
 		this.dinner = dinner;
 		this.staytype = staytype;
 		this.campus = campus;
-
+		this.userid = userid;
+		
 	}
 
 	@Id
@@ -726,6 +728,12 @@ public class Student implements java.io.Serializable {
 		this.campus = campus;
 	}
 	
-	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 	
 }

@@ -19,17 +19,19 @@ public class MessItems implements java.io.Serializable {
 	private Integer branchid;
 	private Integer linkedledgerid;
 	private Integer linkedledgeridexpense;
+	private int userid;
 	
 	public MessItems() {
 	}
 
-	public MessItems(String externalid, String name, String unitofmeasure, Integer branchid, Integer linkedledgerid, Integer linkedledgeridexpense) {
+	public MessItems(String externalid, String name, String unitofmeasure, Integer branchid, Integer linkedledgerid, Integer linkedledgeridexpense, int userid) {
 		this.externalid = externalid;
 		this.name = name;
 		this.unitofmeasure = unitofmeasure;
 		this.branchid = branchid;
 		this.linkedledgerid = linkedledgerid;
 		this.linkedledgeridexpense = linkedledgeridexpense;
+		this.userid = userid;
 	}
 
 	public Integer getId() {
@@ -88,5 +90,12 @@ public class MessItems implements java.io.Serializable {
 		this.linkedledgeridexpense = linkedledgeridexpense;
 	}
 
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 	
 }

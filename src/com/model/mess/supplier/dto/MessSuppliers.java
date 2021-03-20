@@ -22,12 +22,13 @@ public class MessSuppliers implements java.io.Serializable {
 	private String payto;
 	private Integer branchid;
 	private Integer linkedledgerid;
+	private int userid;
 	
 	public MessSuppliers() {
 	}
 
 	public MessSuppliers(String externalid, String name, String contactnumber,String address,
-			String bankaccountno, String ifsccode, Integer branchid, Integer linkedledgerid, String payto) {
+			String bankaccountno, String ifsccode, Integer branchid, Integer linkedledgerid, String payto, int userid) {
 		this.externalid = externalid;
 		this.name = name;
 		this.contactnumber = contactnumber;
@@ -37,6 +38,7 @@ public class MessSuppliers implements java.io.Serializable {
 		this.branchid = branchid;
 		this.linkedledgerid = linkedledgerid;
 		this.payto = payto;
+		this.userid = userid;
 	}
 
 	public Integer getId() {
@@ -119,4 +121,11 @@ public class MessSuppliers implements java.io.Serializable {
 		this.payto = payto;
 	}
 	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 }

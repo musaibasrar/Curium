@@ -21,14 +21,16 @@ public class Classsec implements java.io.Serializable {
 	private String classdetails;
 	private String section;
 	private int branchid;
+	private int userid;
 
 	public Classsec() {
 	}
 
-	public Classsec(String classdetails, String section, int branchid) {
+	public Classsec(String classdetails, String section, int branchid, int userid) {
 		this.classdetails = classdetails;
 		this.section = section;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -68,5 +70,13 @@ public class Classsec implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

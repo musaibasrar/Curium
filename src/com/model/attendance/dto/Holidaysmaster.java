@@ -26,17 +26,19 @@ public class Holidaysmaster implements java.io.Serializable {
 	private String holidayname;
 	private String academicyear;
 	private int branchid;
+	private int userid;
 
 	public Holidaysmaster() {
 	}
 
 	public Holidaysmaster(Date fromdate, Date todate, String holidayname,
-			String academicyear, int branchid) {
+			String academicyear, int branchid, int userid) {
 		this.fromdate = fromdate;
 		this.todate = todate;
 		this.holidayname = holidayname;
 		this.academicyear = academicyear;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -96,5 +98,13 @@ public class Holidaysmaster implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

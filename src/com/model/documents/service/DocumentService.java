@@ -93,7 +93,7 @@ public class DocumentService {
 			 tc.setApplicationstatus("applied");
 			 tc.setDateofissues(dateOfTc);
 			 tc.setNoofissues(1);
-			 
+			 tc.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
 			 if(transferCertificate != null){
 				 return "studentexists";

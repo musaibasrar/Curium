@@ -17,14 +17,16 @@ public class Classhierarchy implements java.io.Serializable {
 	private String lowerclass;
 	private String upperclass;
 	private Integer branchid;
-
+	private int userid;
+	
 	public Classhierarchy() {
 	}
 
-	public Classhierarchy(String lowerclass, String upperclass, Integer branchid) {
+	public Classhierarchy(String lowerclass, String upperclass, Integer branchid, int userid) {
 		this.lowerclass = lowerclass;
 		this.upperclass = upperclass;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	public Integer getIdclasshierarchy() {
@@ -57,5 +59,13 @@ public class Classhierarchy implements java.io.Serializable {
 
 	public void setBranchid(Integer branchid) {
 		this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

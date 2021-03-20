@@ -37,6 +37,7 @@ public class FeesDetailsService {
 	    private HttpServletResponse response;
 	    private HttpSession httpSession;
 	    private String BRANCHID = "branchid";
+	    private String USERID = "userid";
 	
 	public FeesDetailsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -66,6 +67,7 @@ public class FeesDetailsService {
 			String currentYear = (String) httpSession.getAttribute("currentYear");
 			feesdetails.setAcademicyear(DataUtil.emptyString(currentYear));
 			feesdetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			feesdetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			 feesdetails = new feesDetailsDAO().create(feesdetails);
 		}
 		

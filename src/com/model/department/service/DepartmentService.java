@@ -18,6 +18,7 @@ public class DepartmentService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 
 	public DepartmentService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -36,7 +37,7 @@ public class DepartmentService {
 			
 			department.setDepartmentname(DataUtil.emptyString(request.getParameter("department")));
 			department.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			
+			department.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			if(!department.getDepartmentname().equalsIgnoreCase("")){
 				department =  new departmentDAO().create(department);
 			}

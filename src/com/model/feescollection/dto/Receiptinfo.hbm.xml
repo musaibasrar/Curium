@@ -26,6 +26,12 @@
           <property name="branchid" type="int">
             <column name="branchid" />
         </property>
+        <property name="userid" type="int">
+			 <column name="userid" />
+		</property>
+		<property name="branchreceiptnumber" type="string">
+            <column name="branchreceiptnumber" length="20" />
+        </property>
         <!-- inverse="true" -->
         <set name="feesCollectionRecords" table="feescollecion"
 				 lazy="false" cascade="all">

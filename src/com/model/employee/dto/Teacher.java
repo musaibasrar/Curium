@@ -44,9 +44,8 @@ public class Teacher implements java.io.Serializable {
 	private String bankifsc;
 	private String accno;
 	private String currentemployee;
-	
-	
-	
+	private int userid;
+
 	public Teacher() {
 	}
 
@@ -60,7 +59,7 @@ public class Teacher implements java.io.Serializable {
 			String classesteaching, String salary, String department,
 			String qualification, String totalexperience, String address,
 			String contactnumber, String email, String remarks, String gender,
-			String teacherexternalid, Date leavingdate, String bankname, String bankbranch, String bankifsc, String accno, String currentemployee) {
+			String teacherexternalid, Date leavingdate, String bankname, String bankbranch, String bankifsc, String accno, String currentemployee, int userid) {
 		this.teachername = teachername;
 		this.designation = designation;
 		this.subjectsteaching = subjectsteaching;
@@ -82,6 +81,7 @@ public class Teacher implements java.io.Serializable {
 		this.bankifsc = bankifsc;
 		this.accno = accno;
 		this.currentemployee = currentemployee;
+		this.userid = userid;
 	}
 
 	@Id
@@ -233,11 +233,11 @@ public class Teacher implements java.io.Serializable {
 
 	@Column(name = "branchid")
 	public int getBranchid() {
-	return branchid;
+		return branchid;
 	}
 
 	public void setBranchid(int branchid) {
-	this.branchid = branchid;
+		this.branchid = branchid;
 	}
 
 	public Date getLeavingdate() {
@@ -287,4 +287,13 @@ public class Teacher implements java.io.Serializable {
 	public void setCurrentemployee(String currentemployee) {
 		this.currentemployee = currentemployee;
 	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
 }

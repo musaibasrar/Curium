@@ -44,6 +44,7 @@ public class Parents implements java.io.Serializable {
     	private String motherscastecertno;
     	private String fatherscaste;
     	private String motherscaste;
+    	private int userid;
         
 	public Parents() {
 	}
@@ -53,7 +54,7 @@ public class Parents implements java.io.Serializable {
 			String professsion, String parentsannualincome,
 			Integer noofdependents, Integer sid, Integer tid, String remarks, String contactnumber, String cocontactnumber,
 			int branchid, String fathersqualification, String mothersqualification,String fatherscastecertno,String motherscastecertno,
-			String fatherscaste,String motherscaste) {
+			String fatherscaste,String motherscaste, int userid) {
 		this.fathersname = fathersname;
 		this.mothersname = mothersname;
 		this.addresspermanent = addresspermanent;
@@ -73,6 +74,7 @@ public class Parents implements java.io.Serializable {
 		this.motherscastecertno = motherscastecertno;
 		this.fatherscaste = fatherscaste;
 		this.motherscaste = motherscaste;
+		this.userid = userid;
 	}
 
 	@Id
@@ -278,6 +280,14 @@ public class Parents implements java.io.Serializable {
 
 	public void setMotherscaste(String motherscaste) {
 		this.motherscaste = motherscaste;
+	}
+	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 }

@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +54,7 @@ public class StudentService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
 	/**
@@ -71,7 +74,7 @@ public class StudentService {
 		Parents parents = new Parents();
 		Pudetails puDetails = new Pudetails();
 		Degreedetails degreeDetails = new Degreedetails();
-		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying = null,conClassAdmittedIn=null,campus=null,collegeName=null,applyFees=null,monthfees=null;
+		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying = null,conClassAdmittedIn=null,campus=null,collegeName=null,monthfees=null;
 		Date validFrom = null, validTill = null;
 		boolean result=false;
 		
@@ -459,9 +462,7 @@ public class StudentService {
 		                //End Bank Details
 		                
 		                //Get apply fees 
-		                if (fieldName.equalsIgnoreCase("applyfees")) {
-		                	applyFees = DataUtil.emptyString(item.getString());
-		                }
+		               
 		                if (fieldName.equalsIgnoreCase("monthfees")) {
 		                	monthfees = DataUtil.emptyString(item.getString());
 		                }
@@ -499,36 +500,38 @@ public class StudentService {
 		student.setDroppedout(0);
 		student.setLeftout(0);
 		String[] academicyear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
-		student.setStudentexternalid("1"+campus+""+academicyear[0].charAt(2)+""+academicyear[0].charAt(3)+""+student.getClassstudying().substring(0, student.getClassstudying().length() - 2)+""+""+collegeName);
+		student.setStudentexternalid("1"+campus+""+academicyear[0].charAt(2)+""+academicyear[0].charAt(3)+""+collegeName);
 		//student.setStudentexternalid(DataUtil.generateString(5));
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		student.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		puDetails.setOptionalsubjects(optional.toString());
 		puDetails.setCompulsorysubjects(compulsory.toString());
 		student.setPudetails(puDetails);
 		student.setDegreedetails(degreeDetails);
 		parents.setStudent(student);
 		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		parents.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		
 		//Stamp fees
 		
-		if("yes".equalsIgnoreCase(applyFees)) {
+		if("nonnri".equalsIgnoreCase(student.getNationality())) {
 			
 			List<Feescategory> feesCategory = new feesCategoryDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			int feesbreakfastid = 0, feeslunchid=0, feesdinnerid=0, feesbreakfast=0, feeslunch = 0, feesdinner = 0, totalFeesAmount = 0;
 			List<Studentfeesstructure> studentFeesStructure = new ArrayList<Studentfeesstructure>();
 			
 			for (Feescategory feescat : feesCategory) {
-					if("breakfast".equalsIgnoreCase(student.getBreakfast()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"breakfast")) {
+					if("breakfast".equalsIgnoreCase(student.getBreakfast()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"Breakfast Fee")) {
 						feesbreakfastid = feescat.getIdfeescategory();
 						feesbreakfast = feescat.getAmount() * Integer.parseInt(monthfees);
 						Studentfeesstructure studentFeesBreakFast = new StampFeesService(request, response).stampStudentFeesStructure(feesbreakfastid, new Long(feesbreakfast));
 						studentFeesStructure.add(studentFeesBreakFast);
-					}else if("lunch".equalsIgnoreCase(student.getLunch()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"lunch")) {
+					}else if("lunch".equalsIgnoreCase(student.getLunch()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"Lunch Fee")) {
 						feeslunchid = feescat.getIdfeescategory();
 						feeslunch = feescat.getAmount() * Integer.parseInt(monthfees);
 						Studentfeesstructure studentFeesLunch = new StampFeesService(request, response).stampStudentFeesStructure(feeslunchid, new Long(feeslunch));
 						studentFeesStructure.add(studentFeesLunch);
-					}else if("dinner".equalsIgnoreCase(student.getDinner()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"dinner")) {
+					}else if("dinner".equalsIgnoreCase(student.getDinner()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"Dinner Fee")) {
 						feesdinnerid = feescat.getIdfeescategory();
 						feesdinner = feescat.getAmount() * Integer.parseInt(monthfees);
 						Studentfeesstructure studentFeesDinner = new StampFeesService(request, response).stampStudentFeesStructure(feesdinnerid, new Long(feesdinner));
@@ -542,11 +545,49 @@ public class StudentService {
 				Card cardDetails = new Card();
 				cardDetails.setValidfrom(validFrom);
 				cardDetails.setValidto(validTill);
+				cardDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			//
 				
 			parents = new parentsDetailsDAO().create(parents,academicFessStructure,studentFeesStructure,httpSession.getAttribute("currentAcademicYear").toString(), cardDetails);
 			
-		}else {
+		}else if("nri".equalsIgnoreCase(student.getNationality())) {
+			
+			List<Feescategory> feesCategory = new feesCategoryDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			int feesbreakfastid = 0, feeslunchid=0, feesdinnerid=0, feesbreakfast=0, feeslunch = 0, feesdinner = 0, totalFeesAmount = 0;
+			List<Studentfeesstructure> studentFeesStructure = new ArrayList<Studentfeesstructure>();
+			
+			for (Feescategory feescat : feesCategory) {
+					if("breakfast".equalsIgnoreCase(student.getBreakfast()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"NRI-Breakfast Fee")) {
+						feesbreakfastid = feescat.getIdfeescategory();
+						feesbreakfast = feescat.getAmount() * Integer.parseInt(monthfees);
+						Studentfeesstructure studentFeesBreakFast = new StampFeesService(request, response).stampStudentFeesStructure(feesbreakfastid, new Long(feesbreakfast));
+						studentFeesStructure.add(studentFeesBreakFast);
+					}else if("lunch".equalsIgnoreCase(student.getLunch()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"NRI-Lunch Fee")) {
+						feeslunchid = feescat.getIdfeescategory();
+						feeslunch = feescat.getAmount() * Integer.parseInt(monthfees);
+						Studentfeesstructure studentFeesLunch = new StampFeesService(request, response).stampStudentFeesStructure(feeslunchid, new Long(feeslunch));
+						studentFeesStructure.add(studentFeesLunch);
+					}else if("dinner".equalsIgnoreCase(student.getDinner()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"NRI-Dinner Fee")) {
+						feesdinnerid = feescat.getIdfeescategory();
+						feesdinner = feescat.getAmount() * Integer.parseInt(monthfees);
+						Studentfeesstructure studentFeesDinner = new StampFeesService(request, response).stampStudentFeesStructure(feesdinnerid, new Long(feesdinner));
+						studentFeesStructure.add(studentFeesDinner);
+					}
+				}
+			totalFeesAmount = feesbreakfast + feeslunch + feesdinner ;
+			Academicfeesstructure academicFessStructure  = new StampFeesService(request, response).stampAcademicFessStructure(Integer.toString(totalFeesAmount));
+			
+			//Card Details
+				Card cardDetails = new Card();
+				cardDetails.setValidfrom(validFrom);
+				cardDetails.setValidto(validTill);
+				cardDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			//
+				
+			parents = new parentsDetailsDAO().create(parents,academicFessStructure,studentFeesStructure,httpSession.getAttribute("currentAcademicYear").toString(), cardDetails);
+			
+		}	
+		else {
 			parents = new parentsDetailsDAO().create(parents);
 		}
 		
@@ -1365,24 +1406,26 @@ public class StudentService {
 		boolean successResult = false;
 		
 		List<Parents> listOfStudentRecords = new ArrayList<Parents>();
-
+		List<Card> listOfStudentCards = new ArrayList<Card>();
+		List<Integer> studentids = new ArrayList<Integer>();
+		
 		if (studentIds != null) {
 			for (String id : studentIds) {
-				if (id != null || id != "") {
-					String queryMain = "From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
-					String querySub = " parents.Student.id = "+id+" order by parents.Student.admissionnumber ASC";
-					queryMain = queryMain + querySub;
-
-					List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
-					request.setAttribute("searchStudentList", searchStudentList);
-
-					Parents searchStudentRecords = new studentDetailsDAO().getStudentRecords(queryMain);
-					listOfStudentRecords.add(searchStudentRecords);
-				}
-
+					studentids.add(Integer.parseInt(id));
 			}
+			
+			
+			String queryMain = "From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
+			String querySub = " parents.Student.id IN (:ids) order by parents.Student.admissionnumber ASC";
+			queryMain = queryMain + querySub;
+
+			List<Parents> searchStudentList = new studentDetailsDAO().getParentsStudents(queryMain,studentids);
+			request.setAttribute("searchStudentList", searchStudentList);
+			
+			listOfStudentCards = new studentDetailsDAO().getCardDetails(studentids);
+			
 			try {
-				if (exportDataToExcel(listOfStudentRecords)) {
+				if (exportDataToExcel(searchStudentList,listOfStudentCards)) {
 					successResult = true;
 				} 
 
@@ -1395,10 +1438,18 @@ public class StudentService {
 
 	}
 
-	public boolean exportDataToExcel(List<Parents> listOfStudentRecords)
+	public boolean exportDataToExcel(List<Parents> listOfStudentRecords, List<Card> listOfStudentCards)
 			throws Exception {
 
 		boolean writeSucees = false;
+		Calendar start1 = Calendar.getInstance();
+		Date date = start1.getTime();
+		Calendar endday = Calendar.getInstance();
+		endday.setTime(date);
+		endday.set(Calendar.DAY_OF_MONTH, start1.getActualMaximum(Calendar.DAY_OF_MONTH));
+		Date enddayofmonth = endday.getTime();
+		String toDate = new SimpleDateFormat("YYYY-MM-dd").format(enddayofmonth);
+		Date validityDate = DateUtil.datePars(toDate);
 		
 		try {
 
@@ -1408,23 +1459,47 @@ public class StudentService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
-							"Admitted In Class", "Admission Number", "Admission Date", "Blood Group", "Religion",
-							"Caste", "Fathers Name", "Mothers Name" });
+					new Object[] { "Student Name", "Gender", "Class Studying",
+							"Admission Number", "College", "Breakfast", "Lunch",
+							"Dinner", "Campus", "Fathers Name",  "Card Valid From" , "Card Valid Till" , "Nationality", "Status" });
 			int i = 1;
+			
 			for (Parents studentDetails : listOfStudentRecords) {
-				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
-								 DataUtil.emptyString(DateUtil.getStringDate(studentDetails.getStudent().getDateofbirth())),
-								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
-								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
-								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
-								 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
-								 DataUtil.emptyString(studentDetails.getStudent().getAdmissiondate().toString()),
-								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
-								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
-								 DataUtil.emptyString(studentDetails.getMothersname()) });
-				i++;
+					
+					for (Card cardDetails : listOfStudentCards) {
+						
+						if(cardDetails.getSid().equals(studentDetails.getStudent().getSid()))
+							{
+								String checkValidity = null;
+								int difference = cardDetails.getValidto().compareTo(validityDate);
+								
+								if(difference < 0) {
+									checkValidity = "In Active";
+								}else {
+									checkValidity = "Active";
+								}
+								
+								data.put(Integer.toString(i),
+										new Object[] {
+												 DataUtil.emptyString(studentDetails.getStudent().getName()),
+												 DataUtil.emptyString(studentDetails.getStudent().getGender()),
+												 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
+												 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
+												 DataUtil.emptyString(studentDetails.getStudent().getCollege()),
+												 DataUtil.emptyString(studentDetails.getStudent().getBreakfast()),
+												 DataUtil.emptyString(studentDetails.getStudent().getLunch()),
+												 DataUtil.emptyString(studentDetails.getStudent().getDinner()),
+												 DataUtil.emptyString(studentDetails.getStudent().getCampus()),
+												 DataUtil.emptyString(studentDetails.getFathersname()),
+												 DateUtil.dateParserddMMYYYY(cardDetails.getValidfrom()),
+												 DateUtil.dateParserddMMYYYY(cardDetails.getValidto()),
+												 DataUtil.emptyString(studentDetails.getStudent().getNationality()),
+												 checkValidity
+											});
+								i++;
+							}	
+					}
+			
 			}
 			Row headerRow = sheet.createRow(0);
 			Object[] objArrHeader = headerData.get("Header");
@@ -1453,11 +1528,6 @@ public class StudentService {
 				}
 			}
 				
-				
-				//ClassLoader classLoader = getClass().getClassLoader();
-				//Local 
-				//FileOutputStream out = new FileOutputStream("D:/schoolfiles/test.xlsx");
-				//FileOutputStream out = new FileOutputStream(new File("/usr/local/tomcat/webapps/www.searchmysearch.com/musarpbiabha/studentsdetails.xlsx"));
 				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/studentsdetails.xlsx"));
 				workbook.write(out);
 				out.close();

@@ -67,6 +67,7 @@ public class FeesService {
                         
                         feescategory.setAmount(DataUtil.parseInt(request.getParameter("amount")));
                         feescategory.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                        feescategory.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
                         if(!feescategory.getFeescategoryname().equalsIgnoreCase("") && !feescategory.getParticularname().equalsIgnoreCase("") && feescategory.getAmount() != 0 ){
                                 feescategory =  new feesCategoryDAO().create(feescategory);
                         }

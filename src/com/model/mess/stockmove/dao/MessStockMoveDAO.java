@@ -247,8 +247,8 @@ public class MessStockMoveDAO {
             Query queryStock = session.createQuery("update MessStockEntry set availablequantity = availablequantity+'"+messStockMove.getQuantity()+"' where id = '"+messStockMove.getStockentryid()+"'");
             queryStock.executeUpdate();
             
-            Query queryStockAvailable = session.createQuery("update MessStockAvailability set availablequantity = availablequantity+'"+messStockMove.getQuantity()+"' where itemid = '"+messStockMove.getItemid()+"'");
-            queryStock.executeUpdate();
+            Query queryStockAvailable = session.createQuery("update MessStockAvailability set availablestock = availablestock+'"+messStockMove.getQuantity()+"' where itemid = '"+messStockMove.getItemid()+"'");
+            queryStockAvailable.executeUpdate();
             
             //Accounts
 			session.save(transactions);

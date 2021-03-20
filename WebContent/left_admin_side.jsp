@@ -160,22 +160,26 @@ for(Cookie cookie : cookies){
 
         <div id="container" style="width: 95%;">
         			<!-- border:none;border-bottom: 1px solid #010d1c !important; border-right: 1px solid #010d1c !important;-->
-        	<h5 class="sideaccordian" ><a href="#" >Stock</a></h5>
+        	<h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=MessItemsMoveProcess&action=issueItems" style="font-size: 12px;">Issue</a><br/>
                 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=purchaseItems" style="font-size: 12px;">Receive</a><br/>
-                <a target="mainFrame" href="Controller?process=MessItemsProcess&action=currentStock" style="font-size: 12px;">Current Stock Report</a><br/>
-                <a target="mainFrame" href="Controller?process=MessItemsProcess&action=batchStock" style="font-size: 12px;">Batch Stock Report</a><br/>
+                <a target="mainFrame" href="Controller?process=MessItemsProcess&action=viewItems" style="font-size: 12px;">View/Add Items</a><br/>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
+            <div >
+                <a target="mainFrame" href="Controller?process=MessItemsProcess&action=currentStock" style="font-size: 12px;">Stock Quantity Report</a><br/>
+                <a target="mainFrame" href="Controller?process=MessItemsProcess&action=batchStock" style="font-size: 12px;">Stock Price Report</a><br/>
                 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=issuanceStock" style="font-size: 12px;">Stock Issuance Report</a><br/>
                 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=receiveStock" style="font-size: 12px;">Stock Received Report</a><br/>
-                <a target="mainFrame" href="Controller?process=MessItemsProcess&action=viewItems" style="font-size: 12px;">View/Add Items</a><br/>
             </div>
             
               <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
             <div >
-            	<a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=paymentSuppliers" style="font-size: 12px;">Payments</a><br/>
+            	<a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=paymentSuppliers" style="font-size: 12px;">Make Payment</a><br/>
             	<a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=balanceSuppliers" style="font-size: 12px;">Balance Report</a><br/>
-            	<a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=supplierPaymentReport" style="font-size: 12px;">Payment Report</a><br/>
+            	<a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a><br/>
                 <a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a><br/>
             </div>
             

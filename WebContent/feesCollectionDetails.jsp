@@ -477,11 +477,10 @@
 	 function checkFieldsButton() {
 		 
 			
-			var oneday = document.getElementById('datepicker').value;
 			var fromdate = document.getElementById('datepickerfrom').value;
 			var todate = document.getElementById('datepickerto').value;
 			
-			if(oneday == "" && fromdate == "" && todate == ""){
+			if(fromdate == "" && todate == ""){
 				alert("Please enter the search criteria");
 			}
 		
@@ -491,30 +490,6 @@
 			
 		}
 
-	 
-	 function checkFieldsTo() {
-		 
-			
-				document.getElementById('datepicker').value = "";
-				
-				
-			}
-
-	 
-	 function checkFieldsFrom() {
-		 
-		 document.getElementById('datepicker').value = "";
-		 document.getElementById('datepickerto').value = "";
-		}
-	 
-	 
-	 function checkFields() {
-
-			document.getElementById('datepickerfrom').value = "";
-			document.getElementById('datepickerto').value = "";
-			
-			
-		}
 </script>
 <script>
 	$(function() {
@@ -628,13 +603,13 @@ for(Cookie cookie : cookies){
 							<td width="20%" class="alignRight">From Date:  &nbsp;&nbsp;</td>
 							<td ><label> <input name="fromdate"
 									type="text" class="textField" id="datepickerfrom" size="36"
-									onfocus="checkFieldsFrom()" value="${datefrom}" autocomplete="false"
+									 value="${datefrom}" autocomplete="false"
 									data-validate="validate(required)">
 							</label></td>
 							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date:  &nbsp;&nbsp;</td>
 							<td ><label> <input name="todate"
 									type="text" class="textField" id="datepickerto" size="36"
-									onfocus="checkFieldsTo()" value="${dateto}" autocomplete="false"
+									value="${dateto}" autocomplete="false"
 									data-validate="validate(required)">
 							</label></td>
 						</tr>

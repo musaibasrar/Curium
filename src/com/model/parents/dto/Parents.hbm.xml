@@ -70,6 +70,10 @@
         <property name="motherscaste" type="string">
             <column name="motherscaste" length="15" />
         </property> 
+        <property name="userid" type="int">
+ <column name="userid" />
+</property>
+        
         
         <many-to-one name="Student" class="com.model.student.dto.Student"
             column="sid" unique="true" not-null="true" lazy="false"

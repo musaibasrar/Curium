@@ -18,6 +18,9 @@
         <property name="validto" type="date">
             <column name="validto" />
         </property>
+        <property name="userid" type="int">
+ <column name="userid" />
+</property>
         
     </class>
 </hibernate-mapping>

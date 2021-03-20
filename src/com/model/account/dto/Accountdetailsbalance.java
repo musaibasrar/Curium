@@ -29,13 +29,14 @@ public class Accountdetailsbalance implements java.io.Serializable {
 	private Date enteredon;
 	private Accountdetails accountDetails;
 	private int branchid;
+	private int userid;
 
 	public Accountdetailsbalance() {
 	}
 
 	public Accountdetailsbalance(Integer accountdetailsid, BigDecimal openingbalance,
 			Integer financialid, String crdr, Accountdetails accountDetails, BigDecimal currentbalance, Date enteredon,
-			int branchid) {
+			int branchid, int userid) {
 		this.accountdetailsid = accountdetailsid;
 		this.openingbalance = openingbalance;
 		this.financialid = financialid;
@@ -44,6 +45,7 @@ public class Accountdetailsbalance implements java.io.Serializable {
 		this.currentbalance = currentbalance;
 		this.enteredon = enteredon;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -124,6 +126,14 @@ public class Accountdetailsbalance implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 		this.branchid = branchid;
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 }

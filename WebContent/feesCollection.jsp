@@ -989,7 +989,7 @@ for(Cookie cookie : cookies){
             </TABLE>
  -->
             
-            <input value="submit" id="submitbtn"/>
+            <input type="button" value="submit" id="submitbtn"/>
             
             
             <div id="dialogpaymentmethod" title="Payment Method">

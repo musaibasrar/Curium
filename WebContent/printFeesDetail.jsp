@@ -211,7 +211,7 @@
 				
 
 				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:<c:out
-						value="${recieptinfo.receiptnumber}" />
+						value="${recieptinfo.branchreceiptnumber}" />
 				</td>
 
 			</tr>

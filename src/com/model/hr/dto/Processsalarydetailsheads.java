@@ -25,19 +25,21 @@ public class Processsalarydetailsheads implements java.io.Serializable {
 	private BigDecimal amount;
 	private Processsalarydetails processsalarydetails;
 	private int branchid;
-
+	private int userid;
+	
 	public Processsalarydetailsheads() {
 	}
 
 	public Processsalarydetailsheads(Integer idprocesssalary,
 			String payheadname, String payheadtype, BigDecimal amount, Processsalarydetails processsalarydetails,
-			int branchid) {
+			int branchid, int userid) {
 		this.idprocesssalary = idprocesssalary;
 		this.payheadname = payheadname;
 		this.payheadtype = payheadtype;
 		this.amount = amount;
 		this.processsalarydetails = processsalarydetails;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -104,5 +106,13 @@ public class Processsalarydetailsheads implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

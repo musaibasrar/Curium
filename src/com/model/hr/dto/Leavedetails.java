@@ -27,12 +27,13 @@ public class Leavedetails implements java.io.Serializable {
 	private Teacher teacher;
 	private String academicyear;
 	private int branchid;
+	private int userid;
 	
 	public Leavedetails() {
 	}
 
 	public Leavedetails(Integer idleavetypemaster, Integer idteacher,
-			Integer numberofleaves, Leavetypemaster leaveTypeMaster, Teacher teacher, String academicyear,int branchid) {
+			Integer numberofleaves, Leavetypemaster leaveTypeMaster, Teacher teacher, String academicyear,int branchid, int userid) {
 		this.idleavetypemaster = idleavetypemaster;
 		this.idteacher = idteacher;
 		this.numberofleaves = numberofleaves;
@@ -40,6 +41,7 @@ public class Leavedetails implements java.io.Serializable {
 		this.teacher = teacher;
 		this.academicyear = academicyear;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -112,5 +114,13 @@ public class Leavedetails implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

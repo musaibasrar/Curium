@@ -22,6 +22,7 @@ public class StandardService {
 	HttpSession httpSession;
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 
 	public StandardService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -37,6 +38,7 @@ public class StandardService {
             classsec.setClassdetails(DataUtil.emptyString(request.getParameter("classdetails")));
             classsec.setSection(DataUtil.emptyString(request.getParameter("section")));
             classsec.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+            classsec.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
             new StandardDetailsDAO().create(classsec);
             viewClasses();
             return true;
@@ -77,6 +79,7 @@ public class StandardService {
             classHierarchy.setLowerclass(DataUtil.emptyString(request.getParameter("lowerclass")));
             classHierarchy.setUpperclass(DataUtil.emptyString(request.getParameter("upperclass")));
             classHierarchy.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+            classHierarchy.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
             new StandardDetailsDAO().createClassHierarchy(classHierarchy);
             viewClasses();
             }

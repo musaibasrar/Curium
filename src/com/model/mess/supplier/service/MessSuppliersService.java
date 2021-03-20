@@ -39,6 +39,7 @@ public class MessSuppliersService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 	
 	public MessSuppliersService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -76,6 +77,7 @@ public class MessSuppliersService {
 			 messSuppliers.setAddress(DataUtil.emptyString(request.getParameter("address")));
 			 messSuppliers.setPayto(DataUtil.emptyString(request.getParameter("payto")));
 			 messSuppliers.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			 messSuppliers.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			 messSuppliers.setLinkedledgerid(1);
 			 messSuppliers = createLedgerForSupplierAndSave(messSuppliers);
 			 
@@ -188,6 +190,7 @@ public class MessSuppliersService {
 		accountGroupMaster.setAccountgroupid(Integer.parseInt(groupName));
 		accountDetails.setAccountGroupMaster(accountGroupMaster);
 		accountDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		accountDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		
 			// Add account balance
 			Financialaccountingyear financialyear = new AccountDAO().getFinancialAccountingYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -203,6 +206,7 @@ public class MessSuppliersService {
 			accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
 			accountDetailsBalance.setEnteredon(new Date());
 			accountDetailsBalance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			accountDetailsBalance.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			result = new MessSuppliersDAO().addNewSupplier(accountDetails, accountDetailsBalance, messSuppliers);
 		
 		}
@@ -283,7 +287,7 @@ public class MessSuppliersService {
 			messSuppliersPayment.setStatus("ISSUED");
 			messSuppliersPayment.setEntrydate(DateUtil.todaysDate());
 			messSuppliersPayment.setSupplierid(Integer.parseInt(supplieridledgerid[0]));
-			
+			messSuppliersPayment.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			
 			//Pass J.V. : Credit the Cheque Awaiting Settlement & debit the Payment Awaiting Settlement 
 			int crCasId = getLedgerAccountId("CAS");
@@ -302,7 +306,7 @@ public class MessSuppliersService {
 			transactions.setCancelvoucher("no");
 			transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 			transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			
+			transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			
 			String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+amount+" where accountdetailsid="+crCasId;
 
@@ -416,6 +420,7 @@ public class MessSuppliersService {
 				messSuppliersPayment.setId(Integer.parseInt(supid));
 				messSuppliersPayment.setDelivereddate(DateUtil.indiandateParser(date));
 				messSuppliersPayment.setStatus("CLEARED");
+				messSuppliersPayment.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				
 				//Pass J.V. : Credit the Bank & debit the Cheque Awaiting Settlement 
 				int crBankId = getLedgerAccountId(bankName);
@@ -434,6 +439,7 @@ public class MessSuppliersService {
 				transactions.setCancelvoucher("no");
 				transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 				transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				
 				String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+crBankId;
 				String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+drCasId;
@@ -457,6 +463,7 @@ public class MessSuppliersService {
 				transactionsSupplier.setCancelvoucher("no");
 				transactionsSupplier.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 				transactionsSupplier.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				transactionsSupplier.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				
 				String updateDrAccountSupplier = "update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+crPasId;
 				String updateCrAccountSupplier = "update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+drSupplierLedgerId;
@@ -509,7 +516,7 @@ public class MessSuppliersService {
 						transactions.setCancelvoucher("no");
 						transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 						transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-						
+						transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 						
 						String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+CrPasId;
 

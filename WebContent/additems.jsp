@@ -713,6 +713,8 @@ for(Cookie cookie : cookies){
 										<option>Box</option>
 										<option>Carton</option>
 										<option>Packet</option>
+										<option>Bottle</option>
+										
 								</select>
                                 </td>
                                 <td class="dataText" style="text-transform:uppercase">

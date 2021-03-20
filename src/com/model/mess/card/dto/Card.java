@@ -16,14 +16,16 @@ public class Card implements java.io.Serializable {
 	private Integer sid;
 	private Date validfrom;
 	private Date validto;
+	private int userid;
 	
 	public Card() {
 	}
 
-	public Card(Integer sid, Date validfrom, Date validto) {
+	public Card(Integer sid, Date validfrom, Date validto, int userid) {
 		this.sid = sid;
 		this.validfrom = validfrom;
 		this.validto = validto;
+		this.userid = userid;
 	}
 
 	public Integer getId() {
@@ -56,5 +58,12 @@ public class Card implements java.io.Serializable {
 
 	public void setValidto(Date validto) {
 		this.validto = validto;
+	}
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

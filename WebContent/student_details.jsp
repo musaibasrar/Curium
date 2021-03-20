@@ -734,6 +734,15 @@ for(Cookie cookie : cookies){
                             	<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>
                             </td>
                             
+                            <td  width="25%"  class="alignLeft" height="50">Nationality
+                            </td>
+                            <td width="25%" class="tablerows">
+                                 <c:out default="" value="${student.nationality}" />
+                            </td>
+                        </tr>
+                        
+                        
+                        <tr>
                             <td  width="25%"  class="alignLeft" height="50">Created Date
                             </td>
                             <td width="25%" class="tablerows">

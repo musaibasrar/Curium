@@ -21,11 +21,12 @@ public class MessStockItemDetails implements java.io.Serializable {
 	private String unitofmeasure;
 	private Integer linkedledgeridassets;
 	private Integer linkedledgeridexpenses;
+	private int userid;
 	
 	public MessStockItemDetails() {
 	}
 	
-	public MessStockItemDetails(Integer stockentryid, String stockentryexternalid, String batchno, Float availablequantity, Integer itemid, String itemname, String unitofmeasure, Integer linkedledgeridassets, Integer linkedledgeridexpenses) {
+	public MessStockItemDetails(Integer stockentryid, String stockentryexternalid, String batchno, Float availablequantity, Integer itemid, String itemname, String unitofmeasure, Integer linkedledgeridassets, Integer linkedledgeridexpenses, int userid) {
 		this.stockentryid = stockentryid;
 		this.stockentryexternalid = stockentryexternalid;
 		this.batchno = batchno;
@@ -35,6 +36,7 @@ public class MessStockItemDetails implements java.io.Serializable {
 		this.unitofmeasure = unitofmeasure;
 		this.linkedledgeridassets = linkedledgeridassets;
 		this.linkedledgeridexpenses = linkedledgeridexpenses;
+		this.userid = userid;
 	}
 
 	public Integer getStockentryid() {
@@ -117,5 +119,12 @@ public class MessStockItemDetails implements java.io.Serializable {
 		this.linkedledgeridexpenses = linkedledgeridexpenses;
 	}
 
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 	
 }

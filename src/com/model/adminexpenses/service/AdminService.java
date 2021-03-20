@@ -31,6 +31,7 @@ public class AdminService {
 	    private HttpServletResponse response;
 	    private HttpSession httpSession;
 	    private String BRANCHID = "branchid";
+	    private String USERID = "userloginid";
 	
 	public AdminService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -54,6 +55,7 @@ public class AdminService {
 			adminexpenses.setEntrydate(DateUtil.indiandateParser(request.getParameter("entrydate")));
 			adminexpenses.setVoucherstatus("pending");
 			adminexpenses.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			adminexpenses.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			
 			if(!adminexpenses.getItemdescription().equalsIgnoreCase("") && !adminexpenses.getPriceofitem().equalsIgnoreCase(""))
 				{

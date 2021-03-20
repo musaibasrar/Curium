@@ -44,6 +44,7 @@ public class MessItemsService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 	
 	public MessItemsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -79,10 +80,12 @@ public class MessItemsService {
 			 messItems.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			 messItems.setLinkedledgerid(getLedgerAccountId("itemaccountid"));
 			 messItems.setLinkedledgeridexpense(getLedgerAccountId("itemaccountidexpense"));
+			 messItems.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			 
 			 messStockAvailability.setAvailablestock(0.0f);
 			 messStockAvailability.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			 messStockAvailability.setMinstock(DataUtil.parseInt(request.getParameter("minstock")));
+			 messStockAvailability.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			 
 			 messStockAvailability.setMessitems(messItems);
 			 
@@ -204,13 +207,15 @@ public class MessItemsService {
 						
 						messStockEntry.setItemid(Integer.parseInt(itemIds[i]));
 						messStockEntry.setExternalid(itemsName[i]);
-						messStockEntry.setBatchno(DateUtil.todaysDateydm()+"_"+itemIds[i]+"_"+request.getParameter("supplierid"));
+						messStockEntry.setBatchno(DataUtil.dateFromatConversionSlashToNoSlash(request.getParameter("itementrydate"))+"_"+itemIds[i]+"_"+request.getParameter("supplierid"));
+						messStockEntry.setReceiveddate(DateUtil.indiandateParser(request.getParameter("itementrydate")));
 						messStockEntry.setItemunitprice(Float.parseFloat(unitPrice[i]));
 						messStockEntry.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						messStockEntry.setQuantity(Float.parseFloat(itemsQuantity[i]));
 						messStockEntry.setAvailablequantity(Float.parseFloat(itemsQuantity[i]));
 						messStockEntry.setMessinvoicedetails(messInvoiceDetails);
 						messStockEntry.setStatus("ACTIVE");
+						messStockEntry.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 						
 						messStockEntryList.add(messStockEntry);
 					
@@ -233,7 +238,7 @@ public class MessItemsService {
 						transactions.setCancelvoucher("no");
 						transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 						transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-						
+						transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 						
 						String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+itemsTotalAmount+" where accountdetailsid="+stockLedgerId;
 
@@ -261,7 +266,7 @@ public class MessItemsService {
 						transactionTC.setCancelvoucher("no");
 						transactionTC.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						transactionTC.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
-						
+						transactionTC.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 
 						// Dr
 						BigDecimal totalAmount = new BigDecimal(transportationCharges);
@@ -359,9 +364,7 @@ public class MessItemsService {
 
 		public void getCurrentStock() {
 			List<MessStockAvailability> messStockAvailability = new MessItemsDAO().getItemsStockAvailability();
-			for (MessStockAvailability messStockAvailability2 : messStockAvailability) {
-				System.out.println("mess stability "+messStockAvailability2.getAvailablestock()+"  minstock "+messStockAvailability2.getMinstock());
-			}
+			
 			request.setAttribute("currentstocklist", messStockAvailability);
 		}
 
@@ -422,9 +425,37 @@ public class MessItemsService {
 			List<MessStockEntry> messStockEntryList = new MessItemsDAO().getMessStockEntryByIdList(messStockMoveIds);
 			List<MessItems> messItemsList = new MessItemsDAO().getItemDetailByID(messStockItemIds);
 			
-			
-			
 			for (MessStockMove messStockMove : messStockMoveList) {
+				
+					StockIssuance stockIssuance = new StockIssuance();
+				for (MessStockEntry stockEntry : messStockEntryList) {
+					
+					if(messStockMove.getStockentryid().equals(stockEntry.getId())) {
+						
+							for (MessItems messItems : messItemsList) {
+								
+								if(messItems.getId().equals(messStockMove.getItemid())) {
+									
+									stockIssuance.setItemname(messItems.getName());
+									stockIssuance.setQuantity(messStockMove.getQuantity());
+									stockIssuance.setUnitofmeasure(messItems.getUnitofmeasure());
+									stockIssuance.setItemunitprice(stockEntry.getItemunitprice());
+									stockIssuance.setIssuedto(messStockMove.getIssuedto());
+									stockIssuance.setPurpose(messStockMove.getPurpose());
+									stockIssuance.setTransactiondate(messStockMove.getTransactiondate());
+									stockIssuanceList.add(stockIssuance);	
+									break;
+									
+								}
+								
+							}
+							break;
+					}
+				}
+				
+			}
+			
+			/*for (MessStockMove messStockMove : messStockMoveList) {
 				StockIssuance stockIssuance = new StockIssuance();
 				
 				for (MessStockEntry stockEntry : messStockEntryList) {
@@ -432,9 +463,9 @@ public class MessItemsService {
 						for (MessItems stockItems : messItemsList) {
 							
 							
-							if(messStockMove.getItemid() == stockEntry.getItemid()) {
+							if(messStockMove.getItemid().equals(stockEntry.getItemid())) {
 								
-								if(stockItems.getId() == stockEntry.getItemid()) {
+								if(stockItems.getId().equals(stockEntry.getItemid())) {
 									stockIssuance.setItemname(stockItems.getName());
 									stockIssuance.setQuantity(messStockMove.getQuantity());
 									stockIssuance.setUnitofmeasure(stockItems.getUnitofmeasure());
@@ -442,13 +473,15 @@ public class MessItemsService {
 									stockIssuance.setIssuedto(messStockMove.getIssuedto());
 									stockIssuance.setPurpose(messStockMove.getPurpose());
 									stockIssuance.setTransactiondate(messStockMove.getTransactiondate());
+									System.out.println(" Item Name is "+stockItems.getName());
 									stockIssuanceList.add(stockIssuance);
+									break;
 								}
 								
-								
+								break;
 							}
 							
-							/*if(messStockMove.getStockentryid() == stockEntry.getId()) {
+							if(messStockMove.getStockentryid() == stockEntry.getId()) {
 								
 							if(stockEntry.getItemid() == stockItems.getId()) {
 								stockIssuance.setItemname(stockItems.getName());
@@ -461,11 +494,11 @@ public class MessItemsService {
 								stockIssuanceList.add(stockIssuance);
 							}
 							
-						}*/
+						}
 						
 					}
 				}
-			}
+			}*/
 			
 			}
 			httpSession.setAttribute("stockissuancelist", stockIssuanceList);
@@ -518,6 +551,13 @@ public class MessItemsService {
 			
 			receiveStockReport();
 			
+		}
+
+
+		public void getCurrentStockToIssue() {
+			List<MessStockAvailability> messStockAvailability = new MessItemsDAO().getItemsStock();
+			
+			request.setAttribute("stocklist", messStockAvailability);
 		}
 
 }

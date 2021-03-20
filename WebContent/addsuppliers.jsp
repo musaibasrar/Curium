@@ -680,7 +680,7 @@ for(Cookie cookie : cookies){
                         <tr>
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">Name</th>
-                            <th title="click to sort" class="headerText">Contact Number</th>
+                            <th title="click to sort" class="headerText">Contact #</th>
                             <th title="click to sort" class="headerText">Pay To</th>
                             <th title="click to sort" class="headerText">Bank Acc/no</th>
                             <th title="click to sort" class="headerText">Ifsc Code</th>
@@ -696,19 +696,19 @@ for(Cookie cookie : cookies){
                                 <input type="hidden" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messsuppliers.linkedledgerid}"/>" id="linkedledgerid" name="linkedledgerid_<c:out value="${messsuppliers.id}"/>">
                                 </td>
                                 <td class="dataText" style="text-transform:uppercase" >
-                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messsuppliers.name}"/>" id="updatesuppliersname" name="updatesuppliersname_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.name}"/></label>
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width:180px;" value="<c:out value="${messsuppliers.name}"/>" id="updatesuppliersname" name="updatesuppliersname_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.name}"/></label>
                                 </td>
                                 <td class="dataText" style="text-transform:uppercase">
-                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messsuppliers.contactnumber}"/>" id="updatesupplierscontactnumber" name="updatesupplierscontactnumber_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.contactnumber}"/></label>
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width:90px;" value="<c:out value="${messsuppliers.contactnumber}"/>" id="updatesupplierscontactnumber" name="updatesupplierscontactnumber_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.contactnumber}"/></label>
                                 </td>
                                 <td class="dataText" style="text-transform:uppercase">
-                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messsuppliers.payto}"/>" id="updatepayto" name="updatepayto_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.payto}"/></label>
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width:180px;" value="<c:out value="${messsuppliers.payto}"/>" id="updatepayto" name="updatepayto_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.payto}"/></label>
                                 </td>
                                 <td class="dataText" style="text-transform:uppercase">
-                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messsuppliers.bankaccountno}"/>" id="updatesuppliersbankaccountno" name="updatesuppliersbankaccountno_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.bankaccountno}"/></label>
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width:120px;" value="<c:out value="${messsuppliers.bankaccountno}"/>" id="updatesuppliersbankaccountno" name="updatesuppliersbankaccountno_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.bankaccountno}"/></label>
                                 </td>
                                 <td class="dataText" style="text-transform:uppercase">
-                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messsuppliers.ifsccode}"/>" id="updatesuppliersifsccode" name="updatesuppliersifsccode_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.ifsccode}"/></label>
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width:90px;" value="<c:out value="${messsuppliers.ifsccode}"/>" id="updatesuppliersifsccode" name="updatesuppliersifsccode_<c:out value="${messsuppliers.id}"/>"><label style="display: none;"><c:out value="${messsuppliers.ifsccode}"/></label>
                                 </td>
 								<td class="dataText" style="text-transform:uppercase">
                                 <textarea cols="20" rows="4" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messsuppliers.address}"/>" id="updatesuppliersaddress" name="updatesuppliersaddress_<c:out value="${messsuppliers.id}"/>"><c:out value="${messsuppliers.address}"/></textarea>

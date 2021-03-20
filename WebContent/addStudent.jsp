@@ -542,6 +542,18 @@
 	            document.getElementById("newcateg").style.display = '';
 	        }
 	    }
+	 
+	 function calculateValidity(id){
+		 
+		 var month = document.getElementById(id).value;
+		 var startDate = document.getElementById('dateofadmission').value;
+		 document.getElementById('validfrom').value = startDate;
+		 var dateSplit = startDate.split('/');
+		 var month = parseInt(dateSplit[1])+parseInt(month);
+		 var endDate = dateSplit[0]+'/'+month+'/'+dateSplit[2];
+		 document.getElementById('validtill').value = endDate;
+		 
+	 }
 </script>
 
 <script type="text/javascript">
@@ -833,12 +845,15 @@
 									data-validate="validate(required)"> </label></td>
 									
 							<td class="alignLeft" style="padding-left: 20px;">Apply Fees &nbsp;</td>
-							<td height="30" class="alignLeft">&nbsp;<input
-								type="checkbox" value="yes" name="applyfees" id="yes" checked/>
-								&nbsp;&nbsp;&nbsp;&nbsp;Months
+							<td height="30" class="alignLeft">&nbsp;Non-NRI<input
+								type="radio" value="nonnri" name="nationality" id="yes" checked/>
+								&nbsp;NRI<input
+								type="radio" value="nri" name="nationality" id="nri" />
+								<br><br>Months
 								<label> 
-									<select name="monthfees" id="monthfees">
-										<option value="1" selected>1 Month</option>
+									<select name="monthfees" id="monthfees" onchange="calculateValidity(this.id)">
+										<option></option>
+										<option value="1">1 Month</option>
 										<option value="2">2 Months</option>
 										<option value="3">3 Months</option>
 										<option value="4">4 Months</option>
@@ -864,7 +879,7 @@
 									
 							<td class="alignLeft" style="padding-left: 20px;">&nbsp;</td>
 							<td height="30" class="alignLeft">
-							&nbsp;&nbsp;Valid From
+							Valid From
 							<input name="validfrom" autocomplete="false"
 									type="text" class="myclass" id="validfrom" size="6"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"

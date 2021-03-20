@@ -491,30 +491,7 @@
 			
 		}
 
-	 
-	 function checkFieldsTo() {
-		 
-			
-				document.getElementById('datepicker').value = "";
-				
-				
-			}
-
-	 
-	 function checkFieldsFrom() {
-		 
-		 document.getElementById('datepicker').value = "";
-		 document.getElementById('datepickerto').value = "";
-		}
-	 
-	 
-	 function checkFields() {
-
-			document.getElementById('datepickerfrom').value = "";
-			document.getElementById('datepickerto').value = "";
-			
-			
-		}
+	
 </script>
 <script>
 	$(function() {
@@ -605,7 +582,7 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
-						<tr>
+						<%-- <tr>
 							<td width="20%" class="alignRight">Date: &nbsp;</td>
 							<td width="28%"><label> <input name="oneday"
 									type="text" class="textField" id="datepicker" size="36"
@@ -620,21 +597,21 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td width="20%" class="alignRight">&nbsp;Between Dates</td>
 						</tr>
-						
+						--%>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> 
 						<tr>
 							<td width="20%" class="alignRight">From Date:  &nbsp;&nbsp;</td>
 							<td ><label> <input name="fromdate"
 									type="text" class="textField" id="datepickerfrom" size="36"
-									onfocus="checkFieldsFrom()" value="${datefromcancel}" autocomplete="false"
+									 value="${datefromcancel}" autocomplete="false"
 									data-validate="validate(required)">
 							</label></td>
-							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date:</td>
+							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date: &nbsp;&nbsp;</td>
 							<td ><label> <input name="todate"
 									type="text" class="textField" id="datepickerto" size="36"
-									onfocus="checkFieldsTo()" value="${datetocancel}" autocomplete="false"
+									 value="${datetocancel}" autocomplete="false"
 									data-validate="validate(required)">
 							</label></td>
 						</tr>

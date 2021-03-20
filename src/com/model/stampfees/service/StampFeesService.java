@@ -25,6 +25,7 @@ public class StampFeesService {
 	HttpSession httpSession;
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 
 	public StampFeesService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -223,6 +224,7 @@ public class StampFeesService {
 			academicfessstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			academicfessstructure.setTotalfees(feesTotalAmount);
 			academicfessstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			listOfacademicfessstructure.add(academicfessstructure);
 			// ids.add(Integer.valueOf(id));
 			
@@ -231,6 +233,7 @@ public class StampFeesService {
 			cardDetails.setSid(Integer.valueOf(id));
 			cardDetails.setValidfrom(validFrom);
 			cardDetails.setValidto(validTill);
+			cardDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			cardList.add(cardDetails);
 			//End Mess Card
 
@@ -250,6 +253,7 @@ public class StampFeesService {
 			studentfeesstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));
+			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			listOfstudentfeesstructure.add(studentfeesstructure);
 		}
 			
@@ -291,7 +295,7 @@ public class StampFeesService {
 					academicFessStructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 					academicFessStructure.setTotalfees(feesTotalAmount);
 					academicFessStructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-
+					academicFessStructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				}
 			
 			return academicFessStructure;
@@ -312,6 +316,7 @@ public class StampFeesService {
 				studentfeesstructure.setFeespaid((long) 0);
 				studentfeesstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 				studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				studentfeesstructure.setConcession(0);
 			
 			}

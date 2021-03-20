@@ -46,6 +46,7 @@ public class FeesCollectionService {
 	private HttpSession httpSession;
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 	
 	public FeesCollectionService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -189,18 +190,18 @@ public class FeesCollectionService {
 		//Get Payment Details
 		String paymentMethod = request.getParameter("paymentmethod");
 		String ackNo = request.getParameter("ackno");
-		String ackNoVoucherNarration = null;
+		String ackNoVoucherNarration = "";
 		String transferDate = request.getParameter("transferdate");
 		String transferBankname = request.getParameter("transferbankname");
 		String chequeNo = request.getParameter("chequeno");
-		String chequeNoVoucherNarration = null;
+		String chequeNoVoucherNarration = "";
 		String chequeDate = request.getParameter("chequedate");
 		String chequeBankname = request.getParameter("chequebankname");
 		
 			if("banktransfer".equalsIgnoreCase(paymentMethod)) {
-				ackNoVoucherNarration = " and acknowledgement number is "+ackNo+" and amount transfer date is "+transferDate;
+				ackNoVoucherNarration = " acknowledgement number: "+ackNo+" , Amount transfer date: "+transferDate;
 			}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
-				chequeNoVoucherNarration = " and cheque is "+chequeNoVoucherNarration+" and amount clearance date is "+chequeDate;
+				chequeNoVoucherNarration = " cheque number: "+chequeNoVoucherNarration+" , Amount clearance date: "+chequeDate;
 			}
 		
 		//End Payment Details
@@ -212,15 +213,15 @@ public class FeesCollectionService {
 			receiptInfo.setDate(new Date());
 			receiptInfo.setSid(DataUtil.parseInt(sid));
 			receiptInfo.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			receiptInfo.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			Long grantTotal = 0l;
 			for (int i = 0; i < studentSfsIds.length; i++) {
 				String[] totalAmount = studentSfsIds[i].split("_");
 				grantTotal+=DataUtil.parseLong(amountPaying[Integer.parseInt(totalAmount[1])]);
 			}
 			receiptInfo.setTotalamount(grantTotal);
-			new feesCollectionDAO().createReceipt(receiptInfo);
+			//new feesCollectionDAO().createReceipt(receiptInfo);
 			 
-			if(receiptInfo.getReceiptnumber()!= null){
 				for (int i = 0; i < studentSfsIds.length; i++) {
 					Feescollection feesCollect = new Feescollection();
 					String[] studentSfsIdamount = studentSfsIds[i].split("_");
@@ -230,8 +231,9 @@ public class FeesCollectionService {
 					feesCollect.setFine(DataUtil.parseLong(fine[i]));
 					feesCollect.setDate(new Date());
 					feesCollect.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-					feesCollect.setReceiptnumber(receiptInfo.getReceiptnumber());
+					//HERE feesCollect.setReceiptnumber(receiptInfo.getReceiptnumber());
 					feesCollect.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					feesCollect.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 					feescollection.add(feesCollect);
 				}
 				
@@ -258,21 +260,20 @@ public class FeesCollectionService {
 				transactions.setVouchertype(4);
 				transactions.setTransactiondate(receiptInfo.getDate());
 				transactions.setEntrydate(DateUtil.todaysDate());
-				transactions.setNarration("Towards Fees Payment with receipt no "+receiptInfo.getReceiptnumber()+" "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
+				transactions.setNarration("Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
 				transactions.setCancelvoucher("no");
 				transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 				transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				
+				transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				
 				String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptInfo.getTotalamount()+" where accountdetailsid="+drAccount;
 
 				String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptInfo.getTotalamount()+" where accountdetailsid="+crFees;
 				
 				// End J.V
-				createFeesCollection = new feesCollectionDAO().create(feescollection,transactions,updateDrAccount,updateCrAccount);
+				createFeesCollection = new feesCollectionDAO().create(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount);
 				
 			}
-		}
 		}
 		return receiptInfo;
 	}
@@ -635,6 +636,8 @@ public class FeesCollectionService {
 		
 		String pattern = "yyyy-MM-dd";
 		String todaysDate =new SimpleDateFormat(pattern).format(new Date());
+		String fromDayOne = new SimpleDateFormat(pattern).format(new Date(TimestampFrom.getTime()));
+		String toLastDay = new SimpleDateFormat(pattern).format(new Date(Timestampto.getTime()));
 		
 			String querySubDaily = "";
 			String querySubMonthly = "";
@@ -642,14 +645,12 @@ public class FeesCollectionService {
 			querySubDaily = " feesdetails.date = '"+todaysDate+"'" ;
 			queryMainDaily = queryMainDaily+querySubDaily;
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
-			System.out.println("SEARCH QUERY ***** "+queryMainDaily);
 			feesDetailsListDaily = new UserDAO().getReceiptDetailsList(queryMainDaily);
 			
 			// Monthly Fees
-			    querySubMonthly = " feesdetails.date between '"+TimestampFrom+"' AND '"+Timestampto+"'";
+			    querySubMonthly = " feesdetails.date between '"+fromDayOne+"' AND '"+toLastDay+"'";
 			    queryMainMonthly = queryMainMonthly+querySubMonthly;
 			/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
-			System.out.println("SEARCH QUERY ***** "+queryMainMonthly);
 			feesDetailsListMonthly = new UserDAO().getReceiptDetailsList(queryMainMonthly);
 			
 				}

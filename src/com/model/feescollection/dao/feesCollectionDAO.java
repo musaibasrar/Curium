@@ -36,13 +36,26 @@ public class feesCollectionDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public boolean create(List<Feescollection> feescollectionList, VoucherEntrytransactions transactions, String updateDrAccount, String updateCrAccount) {
+	public boolean create(Receiptinfo receiptInfo, List<Feescollection> feescollectionList, VoucherEntrytransactions transactions, String updateDrAccount, String updateCrAccount) {
 		 
 		boolean result = false;
 		try {
 			 
 			 transaction = session.beginTransaction();
-			 
+
+			 	Query queryReceipt = session.createQuery("from Receiptinfo where branchid = "+receiptInfo.getBranchid()+" order by receiptnumber DESC");
+			 	List<Receiptinfo> ReceiptList = queryReceipt.list();
+			 	  
+			 	
+			 	if(ReceiptList.size() > 0) {
+			 		receiptInfo.setBranchreceiptnumber(Integer.toString(Integer.parseInt(ReceiptList.get(0).getBranchreceiptnumber())+1));
+			 	}else {
+			 		receiptInfo.setBranchreceiptnumber(Integer.toString(1));
+			 	}
+			 	
+			 	session.save(receiptInfo);
+			 	
+			 	transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getReceiptnumber()));
 				session.save(transactions);
 				Query queryAccounts = session.createQuery(updateDrAccount);
 				queryAccounts.executeUpdate();
@@ -51,9 +64,12 @@ public class feesCollectionDAO {
 				
 			
 			for (Feescollection singleFeescollection :  feescollectionList) {
+				
+				singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());
 				Query query = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
 				query.executeUpdate();
-				 session.save(singleFeescollection);
+				session.save(singleFeescollection);
+				
 			}
 	            transaction.commit();
 	            result = true;

@@ -36,7 +36,9 @@
         <property name="payto" type="string">
             <column name="payto" />
         </property>
-        
+        <property name="userid" type="int">
+ <column name="userid" />
+</property>
         <!-- <many-to-one name="AccountDetails" class="com.model.account.dto.Accountdetails"
             column="linkedledgerid" lazy="false"
             cascade="none"/> -->

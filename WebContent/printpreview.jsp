@@ -453,6 +453,11 @@ for(Cookie cookie : cookies){
 		                         						<br>
 		                         					<label style="font-size: 18px;">Valid From : <fmt:formatDate type="date" value="${studentlist.value.validfrom}" pattern="dd/MM/yyyy"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valid Till : <fmt:formatDate type="date" value="${studentlist.value.validto}" pattern="dd/MM/yyyy"/></label> <br>
 		                         					<br>
+		                         					<c:if test="${studentlist.key.student.nationality == 'nri'}">
+														<label style="font-size: 25px;">NRI</label>
+		                         					
+		                         					</c:if>
+		                         					<br>
 		                         					<c:if test="${studentlist.key.student.breakfast == 'breakfast'}">
 		                         						<a> <img
 															src="images/breakfast.png" width="30" height="30" 
@@ -476,7 +481,6 @@ for(Cookie cookie : cookies){
 		                         						<a > <img
 															src="images/dinner.png" width="30" height="30" 
 															alt="Home" style="vertical-align: baseline;font-size: 144px;" />
-															${studentlist.key.student.dinner}
 														</a>
 		                         					<label style="font-size: 25px;">${studentlist.key.student.dinner}</label>
 		                         					</c:if>

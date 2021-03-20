@@ -25,13 +25,13 @@ public class MessInvoiceDetails implements java.io.Serializable {
 	private Date invoicedate;
 	private String status;
 	private Integer voucherid;
-	
+	private int userid;
 
 	public MessInvoiceDetails() {
 	}
 	
 	public MessInvoiceDetails(Integer id, String externalid, Float invoicetotal,
-			String supplierreferenceno, Date entrydate, Date invoicedate, Integer branchid, Integer suppliersid, String status, Integer voucherid) {
+			String supplierreferenceno, Date entrydate, Date invoicedate, Integer branchid, Integer suppliersid, String status, Integer voucherid, int userid) {
 		this.id = id;
 		this.externalid = externalid;
 		this.invoicetotal = invoicetotal;
@@ -42,6 +42,7 @@ public class MessInvoiceDetails implements java.io.Serializable {
 		this.branchid = branchid;
 		this.status = status;
 		this.voucherid = voucherid;
+		this.userid = userid;
 	}
 
 	public Integer getId() {
@@ -123,5 +124,13 @@ public class MessInvoiceDetails implements java.io.Serializable {
 
 	public void setVoucherid(Integer voucherid) {
 		this.voucherid = voucherid;
+	}
+	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

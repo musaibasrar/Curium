@@ -20,13 +20,15 @@ public class Position implements java.io.Serializable {
 	private Integer positionid;
 	private String positionname;
 	private int branchid;
+	private int userid;
 	
 	public Position() {
 	}
 
-	public Position(String positionname, int branchid) {
+	public Position(String positionname, int branchid, int userid) {
 		this.positionname = positionname;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -57,5 +59,13 @@ public class Position implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

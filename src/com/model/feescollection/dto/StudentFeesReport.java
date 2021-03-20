@@ -10,14 +10,16 @@ public class StudentFeesReport {
 	
 	private Student student;
 	private List<Studentfeesstructure> studentFeesStructure;
+	private int userid;
 	
 	public StudentFeesReport() {
 	}
 
 
-	public StudentFeesReport(Student student, List<Studentfeesstructure> studentFeesStructure) {
+	public StudentFeesReport(Student student, List<Studentfeesstructure> studentFeesStructure, int userid) {
 		this.student = student;
 		this.studentFeesStructure = studentFeesStructure;
+		this.userid = userid;
 	}
 	
 
@@ -39,5 +41,11 @@ public class StudentFeesReport {
 		this.studentFeesStructure = studentFeesStructure;
 	}
 
-	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 }

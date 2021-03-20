@@ -36,5 +36,8 @@
         <property generated="never" lazy="false" name="pumediuminstruction" optimistic-lock="true" type="string" unique="false">
             <column length="45" name="pumediuminstruction"/>
         </property>
+        <property name="userid" type="int">
+ <column name="userid" />
+</property>
     </class>
 </hibernate-mapping>

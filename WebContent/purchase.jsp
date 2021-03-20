@@ -484,10 +484,22 @@
 			changeYear : true,
 			changeMonth : true,
 			dateFormat: 'dd/mm/yy',
-			yearRange: "-50:+0"
+			yearRange:   "-0:+1"
 		});
 		$("#anim").change(function() {
 			$("#invoicedate").datepicker("option", "showAnim", $(this).val());
+		});
+	});
+	$(function() {
+		
+		$("#itementrydate").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange:  "-0:+1"
+		});
+		$("#anim").change(function() {
+			$("#itementrydate").datepicker("option", "showAnim", $(this).val());
 		});
 	});
 </script>
@@ -691,7 +703,7 @@
             if(rowCount==1){
                 alert('No records to delete');
             }
-            for(var i=1; i<rowCount-1; i++) {
+            for(var i=1; i<rowCount-3; i++) {
                 var row = table.rows[i];
                 var chkbox = row.cells[0].childNodes[0];
                 if(null != chkbox && true == chkbox.checked) {
@@ -762,16 +774,6 @@
              else {
                  $('.chcktbl:not(:checked)').attr('disabled', false);
              }
-         });
-         
-         $("#print").button({
-             icons:{
-                 primary: "ui-icon-print"
-             }
-         }).click(function(){
-             saveInventory();
-             return false;
-
          });
          
          $("#cancel").button({
@@ -893,6 +895,7 @@ for(Cookie cookie : cookies){
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");
 		%>
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		<div class="alert-box success" id="div1">Items has been received successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
 		<div class="alert-box failure" id="div2">Items received failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
 		
@@ -922,7 +925,7 @@ for(Cookie cookie : cookies){
 								</select>
 							</td>
 							
-							<td class="alignRight">&nbsp;&nbsp;&nbsp;Reference/Invoice No.&nbsp;</td>
+							<td class="alignRight">&nbsp;&nbsp;&nbsp;Ref./Invoice No.&nbsp;</td>
 							<td ><input type="text" id="supplierreferenceno" name="supplierreferenceno" class="textfieldvalues" style="font-size: 14px;">
 							</td>
 							
@@ -933,7 +936,11 @@ for(Cookie cookie : cookies){
 							</tr>
 						<tr>
 						<td class="alignRight">Invoice Date&nbsp;</td>
-							<td><label> <input	name="invoicedate"	type="text" class="textfieldvalues" id="invoicedate" style="font-size: 14px;" autocomplete="false" required>
+							<td><label> <input	name="invoicedate"	type="text" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" class="textfieldvalues" id="invoicedate" style="font-size: 14px;" autocomplete="false" required>
+							</label></td>
+							
+							<td class="alignRight">&nbsp;&nbsp;&nbsp;Receive Date&nbsp;</td>
+							<td><label> <input	name="itementrydate" type="text" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" class="textfieldvalues" id="itementrydate" style="font-size: 14px;" autocomplete="false" required>
 							</label></td>
 							
 							</tr>

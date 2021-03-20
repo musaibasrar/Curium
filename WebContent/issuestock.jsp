@@ -260,6 +260,16 @@
 	background-color: #E3EFFF;
 }
 
+.dataTextLeft {
+	border-radius: 3px;
+	font-family: Tahoma;
+	color: #4b6a84;
+	font-size: 13px;
+	letter-spacing: normal;
+	text-align: left;
+	background-color: #E3EFFF;
+}
+
 .dataTextInActive {
 	border-radius: 3px;
 	font-family: Tahoma;
@@ -430,6 +440,16 @@
 			"bInfo" : false,
 			"bAutoWidth" : false
 		});
+		
+		$('#dataTableOne').dataTable({
+			"sScrollY" : "380px",
+			"bPaginate" : false,
+			"bLengthChange" : true,
+			"bFilter" : true,
+			"bSort" : true,
+			"bInfo" : true,
+			"bAutoWidth" : true,
+		});
 	});
 </script>
 <script type="text/javascript">
@@ -561,131 +581,39 @@
         }
     }
 	
-	var itemlist=[
-        <c:forEach varStatus="status" items="${messstockitemdetailslist}" var="itemlist">{
-        		availablestock:'<c:out default="0" value="${itemlist.availablequantity}" />',
-        		unitprice:'<c:out default="0" value="${itemlist.itemunitprice}" />',
-                value:'<c:out default="0" value="${itemlist.itemname}" />',
-                batchno:'<c:out default="0" value="${itemlist.batchno}" />',
-                particularname:'<c:out default="Kilogram" value="${itemlist.unitofmeasure}" />',
-                itemid:'<c:out default="0" value="${itemlist.itemid}" />',
-                id:'<c:out default="0" value="${itemlist.stockentryid}" />'
-                }<c:if test="${!status.last}">,</c:if>
-        </c:forEach>
-        ];
 	
-	function addRow() {
-        var rowCount = document.getElementById('dataTable').rows.length;    
+	function calculate(value2) {
+		
+		if (value2.which != 8 && value2.which != 0 && (value2.which < 48 || value2.which > 57)) {
+            return false;
+ 		}else{
+
+ 	    	  var availableQuantity=document.getElementById("items_quantity_"+value2).value;
+ 	        var issueQuantity=document.getElementById("issuequantity_"+value2).value;
+ 	        
+ 	        if(parseFloat(issueQuantity,10)>parseFloat(availableQuantity,10)){
+ 	      	  $( "#dialog" ).dialog( "open" );
+ 	      		document.getElementById("errormessage_"+value2).style.display = '';
+ 	      	  document.getElementById("issuequantity_"+value2).value='';
+ 	        }
+ 	        
+ 	        if(parseInt(issueQuantity)>0 && parseFloat(issueQuantity,10)<parseFloat(availableQuantity,10)){
+ 	        	document.getElementById("errormessage_"+value2).style.display = 'none';
+ 	      	  document.getElementById(value2).checked = true;  
+ 	        }else{
+ 	      	  document.getElementById(value2).checked = false;
+ 	        }
+ 			
+ 		}
+
+       
         
-        var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=ids_"+rowCount+" /><input type='hidden' name='ids' id=stockmove_ids_"+rowCount+" value='' /></td>";
-        var col2="<td class='dataTextInActive'><input type='text' name='itemsname' id=items_name_"+rowCount+" class='textfieldvalues' style='font-size: 14px;'/><input type='hidden' name='itemsids' id=items_ids_"+rowCount+" value='' /></td>";
- 	    var col3="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	   	var col4="<td class='dataTextInActive'><input type='text' value=''   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	    var col5="<td class='dataTextInActive'><input type='text' value='0'   name='itemunitprice' id=itemunitprice_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
- 	   	var col6="<td class='dataTextInActive'><input type='text' name='issuequantity' id=issuequantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")' required /></td>";
-        /* var col6="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>"; */
-        /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-        /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-        /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
-        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+"</tr>");
-        $(function() {
-            $("#dataTable").find('tbody').append(newRow);
-        });
-        $(function() {
-            $("#items_name_"+rowCount).autocomplete({
-                source: itemlist,
-                minLength: 1,
-                change:function(event,ui){
-                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
-                    $("#items_ids_"+rowCount ).val( ui.item.itemid );
-                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
-                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
-                    $("#itemunitprice_"+rowCount).val( ui.item.unitprice );
-                },
-                focus: function( event, ui ) {
-                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
-                    $( "#items_name_"+rowCount).val( ui.item.name );
-                    $( "#items_ids_"+rowCount ).val( ui.item.itemid );
-                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
-                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
-                    $("#itemunitprice_"+rowCount).val( ui.item.unitprice );
-                    return true;
-                },
-                select: function( event, ui ) {
-                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
-                    $( "#items_name_"+rowCount).val( ui.item.value );
-                    $( "#items_ids_"+rowCount ).val( ui.item.itemid );
-                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
-                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
-                    $("#itemunitprice_"+rowCount).val( ui.item.unitprice );
-                    return true;
-                }
-            }).data( "autocomplete" )._renderItem = function( ul, item ) {
-                return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +"&nbsp;/&nbsp;</b> <b> "+item.batchno +"</b></a>" )
-                .appendTo( ul );
-            };
-
-        });
     }
-	
-	 function calculate(value2) {
-
-	      	  var availableQuantity=document.getElementById("items_quantity_"+value2).value;
-	          var issueQuantity=document.getElementById("issuequantity_"+value2).value;
-	          
-	          if(parseFloat(issueQuantity,10)>parseFloat(availableQuantity,10)){
-	        	  $( "#dialog" ).dialog( "open" );
-	        	  document.getElementById("issuequantity_"+value2).value='';
-	          }
-	          
-	         
-	      }
 	 
-	 $(function() {
-         $( "#dialog" ).dialog({
-             autoOpen: false,
-             height: 40,
-             width: 180,
-             modal: true,
-         });
-     });
-
-
-
-	
 	$(function() {
 
 		$("#tabs").tabs();
 		$("#effect").hide();
-		
-		var addItemsButtonID="#addnewitem";
-        var removeItemsButtonID="#removenewitem";
-        
-        $( addItemsButtonID )
-        .button({
-            icons: {
-                primary: "ui-icon-plus"
-            }
-        })
-        .click(function() {
-            addRow();
-            return false;
-        });
-        
-       $(removeItemsButtonID)
-        .button({
-            icons: {
-                primary: "ui-icon-minus"
-            }
-        })
-        .click(function() {
-            deleteRow('dataTable');
-            return false;
-        }); 
-        
-
 	});
    
 	 $(function(){
@@ -918,42 +846,53 @@ for(Cookie cookie : cookies){
 					<div align="center">
 						<p>
 						<h2 style="text-decoration: underline;color: #eb6000">Item Details</h2>	
-						<label><button id="addnewitem">Add Item</button></label><label><button id="removenewitem">Remove Item</button></label></p>
+						<!-- <label><button id="addnewitem">Add Item</button></label><label><button id="removenewitem">Remove Item</button></label> --></p>
 					</div>
-					
-					<br>
-					<table style="margin-left: auto;margin-right: auto;border: 1px solid black;" id="dataTable">
-						<thead>
+										
+			 <table style="float:center;border-color: #4b6a84;width: 50%" id="dataTableOne">
+
+					<thead>
 							<tr>
-								<th class="headerText"><input type="checkbox"
-									id="selectAll" name="selectAll"
-									onclick="selectAllRow('dataTable')" /> </th>
+								 <th class="headerText" style="display: none;" ><input type="checkbox" /> </th> 
 								<th class="headerText">Item Name</th>
-								<th class="headerText">Available Quantity</th>
 								<th class="headerText">Unit of Measure</th>
-								<th class="headerText">Unit Price</th>
-								<th class="headerText">Issue Quantity</th>
+								<th class="headerText">Available Quantity</th>
+								<th class="headerText">Issue Quantity</th> 
 							</tr>
 						</thead>
 
-						<tbody>						
-						</tbody>
-					</table>
-					<br>
-					<table id="table2" width="100%" border="0" align="center">
+				<tbody>
+
+						   <c:forEach items="${stocklist}" var="itemlist" varStatus="status">
+           							<tr>
+           									<td class="dataText" style="display: none;"><input type="checkbox" class = "chcktbl" name="itemid" id="<c:out value="${itemlist.id}"/>"  value="<c:out value="${itemlist.id}"/>" /></td>
+                							<td class="dataTextLeft"><c:out value="${itemlist.messitems.name}"/></td>
+											<td class="dataText"><c:out value="${itemlist.messitems.unitofmeasure}"/></td>
+											<td class="dataText"><input type="text" value="<c:out value="${itemlist.availablestock}"/>" id="items_quantity_${itemlist.id}" class="textfieldvaluesshorts" style="font-size: 14px;color: black;" disabled="disabled"/></td>
+											<td class="dataText"><input type="text" name="issuequantity_${itemlist.id}" id="issuequantity_${itemlist.id}" class="textfieldvaluesshorts" style="font-size: 14px;" onkeyup="calculate(${itemlist.id})" onkeypress="calculate(${itemlist.id})" onkeydown="calculate(${itemlist.id})" onfocusout="calculate(${itemlist.id})" /><br>
+											<label id="errormessage_${itemlist.id}" style="font-size: 10px;display: none;color: red;">Quantity not in stock</label></td>
+                					</tr>
+								
+							</c:forEach>
+				</tbody>
+				
+				<tfoot>
 						<tr>
-							<td align="center">
-								<button id="saveissueentry">Issue</button>
-							</td>
-						</tr>
-					</table>
-					
+                            <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
+                    		<td class="footerTD"  colspan="8">
+                    		<!-- <button id="print">Print</button> --> 
+                    		<!-- <button id="approve">Approve</button>
+                    		&nbsp;&nbsp;&nbsp;
+                    		<button id="reject">Reject</button> 
+                    		&nbsp;&nbsp;&nbsp; -->
+                    		<button id="cancel">Cancel</button>
+                    		</td>
+                        </tr>
+                    </tfoot>
+			</table> 
 					</div>
 				</div>
-				
-				
 			</div>
-		</div>
 
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
@@ -1038,9 +977,5 @@ for(Cookie cookie : cookies){
 		</div>
 
 	</form>
-	
-	<div id="dialog" title="Quantity not in stock">
-	</div>
-
 </body>
 </html>

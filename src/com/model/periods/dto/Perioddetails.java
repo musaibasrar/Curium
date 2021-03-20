@@ -25,13 +25,13 @@ public class Perioddetails implements java.io.Serializable {
 	private String subject;
 	private String staff;
 	private int branchid;
-
+	private int userid;
 
 	public Perioddetails() {
 	}
 
 	public Perioddetails(String periods, String timings, String days, Integer periodmasterid, String subject, String staff,
-			int branchid) {
+			int branchid, int userid) {
 		this.periods = periods;
 		this.timings = timings;
 		this.days = days;
@@ -39,6 +39,7 @@ public class Perioddetails implements java.io.Serializable {
 		this.subject = subject;
 		this.staff = staff;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -114,5 +115,13 @@ public class Perioddetails implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

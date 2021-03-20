@@ -72,6 +72,7 @@ public class UserService {
             httpSession.setAttribute("userType", userType[0]);
             httpSession.setAttribute("typeOfUser",userType[0]);
             httpSession.setAttribute("userAuth", userType[0]);
+            httpSession.setAttribute("userloginid", login.getUserid());
 			//setting session to expiry in 60 mins
            	httpSession.setMaxInactiveInterval(60*60);
 			Cookie cookie = new Cookie("user",  login.getUsertype());
@@ -160,7 +161,7 @@ public class UserService {
 		Date dateBefore = null;
 		Date dateAfter = null;
 		
-		String queryMain = "From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and";
+		String queryMain = "From Receiptinfo as feesdetails where feesdetails.branchid = "+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" and feesdetails.cancelreceipt=0 and";
 		
 		try {
 			dateBefore = df.parse(todaysDate);
@@ -207,7 +208,7 @@ public class UserService {
 		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
 		Date dateBefore = null;
 		Date dateAfter = null;
-		String queryMain = "From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and ";
+		String queryMain = "From Receiptinfo as feesdetails where feesdetails.branchid = "+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" and feesdetails.cancelreceipt=0 and ";
 		String toDate = DataUtil.emptyString(request.getParameter("todate"));
 		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
 		

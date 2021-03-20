@@ -70,7 +70,7 @@ public class EmployeeService {
 		}
 		employee.setTeacherexternalid(builder.toString());
 		employee.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		
+		employee.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		if(new EmployeeDAO().create(employee)){
 			if(new UserService(request, response).addUser(employee)){
 				return true;

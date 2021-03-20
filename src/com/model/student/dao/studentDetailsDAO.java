@@ -595,4 +595,26 @@ public class studentDetailsDAO {
 		return cardDetailsList;
 	}
 	
+	
+	public java.util.List<Parents> getParentsStudents(String query, List<Integer> studentids) {
+		java.util.List<Parents> parents = new ArrayList<Parents>();
+        try {
+            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(query);
+            HQLquery.setParameterList("ids", studentids);
+            parents = (java.util.List<Parents>) HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
+            transaction.commit();
+			
+        } catch (Exception hibernateException) {
+        	transaction.rollback(); 
+        	logger.error(hibernateException);
+            hibernateException.printStackTrace();
+        }finally {
+			HibernateUtil.closeSession();
+		 }
+        return parents;
+	}
+	
 }

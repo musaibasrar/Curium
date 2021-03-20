@@ -17,6 +17,9 @@
         <property name="usertype" type="java.lang.String">
             <column name="USERTYPE" />
         </property>
+        <property name="userid" type="int">
+ <column name="userid" />
+</property>
          <many-to-one name="branch" class="com.model.branch.dto.Branch"
             column="branchid" lazy="false"
              />

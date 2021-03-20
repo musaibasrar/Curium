@@ -34,6 +34,7 @@ public class Periodmaster implements java.io.Serializable {
 	private String durationofperiod;
 	private String academicyear;
 	private int branchid;
+	private int userid;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Periodmaster")
 	private Set<Perioddetails> periodDetails =
@@ -44,7 +45,7 @@ public class Periodmaster implements java.io.Serializable {
 
 	public Periodmaster(String class_, Integer totalperiods,
 			Integer totalbreaks, String daystart, String dayend, int branchid,
-			String durationofperiod, String academicyear, Set<Perioddetails> periodDetails) {
+			String durationofperiod, String academicyear, Set<Perioddetails> periodDetails, int userid) {
 		this.class_ = class_;
 		this.totalperiods = totalperiods;
 		this.totalbreaks = totalbreaks;
@@ -54,6 +55,7 @@ public class Periodmaster implements java.io.Serializable {
 		this.academicyear = academicyear;
 		this.periodDetails = periodDetails;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -145,5 +147,13 @@ public class Periodmaster implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

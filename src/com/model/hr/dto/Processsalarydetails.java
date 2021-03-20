@@ -37,6 +37,7 @@ public class Processsalarydetails implements java.io.Serializable {
 	private Teacher teacher;
 	private String paymenttype;
 	private int branchid;
+	private int userid;
 	
 	public Processsalarydetails() {
 	}
@@ -44,7 +45,7 @@ public class Processsalarydetails implements java.io.Serializable {
 	public Processsalarydetails(Integer teacherid, String month, Integer year,
 			BigDecimal netpayment, String status, String academicyear,
 			Date processeddate, Date issueddate, Teacher teacher, String paymenttype,
-			int branchid) {
+			int branchid, int userid) {
 		this.teacherid = teacherid;
 		this.month = month;
 		this.year = year;
@@ -56,6 +57,7 @@ public class Processsalarydetails implements java.io.Serializable {
 		this.teacher = teacher;
 		this.paymenttype = paymenttype;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -167,5 +169,13 @@ public class Processsalarydetails implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }
