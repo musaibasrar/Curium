@@ -465,6 +465,14 @@
 		});
 	});
 	
+    function emptycenter(){
+    	
+    	document.getElementById("centercode").value='';
+    }
+    
+    function emptystate(){
+    	document.getElementById("state").value='';
+    }
 
 	
 </script>
@@ -507,9 +515,35 @@ for(Cookie cookie : cookies){
 								<tr>
 								<td class="alignRightFields"><br></td>
 								</tr>
+								
+								<tr>
+							<td class="alignRightFields" >State&nbsp;&nbsp;&nbsp;</td>
+							<td width="12%" align="left">
+							
+											<label> 
+												<select name="state" id="state" style="width: 240px;" onchange="emptycenter()">
+                                            <option selected>${rankliststatesearch}</option>
+                                            <option></option>
+                                            <option>Andhra Pradesh</option>
+                                            <option>Goa</option>
+                                            <option>Karnataka</option>
+                                            <option>Maharashtra</option>
+                                            <option>Tamil Nadu</option>
+                                            <option>Telangana</option>
+                                        </select>
+									</label>
+								</td>
+							
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
 						<tr>
 							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
-							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
+							<td width="12%" align="left"><label> <select name="centercode" id="centercode" onchange="emptystate()"
 									style="width: 240px;">
 										<option selected>${ranklistcentersearch}</option>
 										<option></option>

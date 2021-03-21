@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -685,7 +686,7 @@ public class MarksDetailsService {
 		                httpSession.setAttribute("studentmarksentryexamyear", "");
 		            }
                     
-		            List<Studentdailyattendance> studentDailyAttendanceOne = new ArrayList<Studentdailyattendance>();
+                    		/*List<Studentdailyattendance> studentDailyAttendanceOne = new ArrayList<Studentdailyattendance>();
 		           
 	                            studentDailyAttendanceOne = new AttendanceDAO().getStudentsAttendance(""
 	                                    + "from Studentdailyattendance where  examlevelcode='"+examLevel+"'"
@@ -698,8 +699,9 @@ public class MarksDetailsService {
 	                            	studentExternalId.add(studentdailyattendance.getAttendeeid());
 								}
 	                            
-	                            List<Parents> parentsList = new studentDetailsDAO().getStudentsListAttendance(searchQuery, studentExternalId);
-		            
+	                            List<Parents> parentsList = new studentDetailsDAO().getStudentsListAttendance(searchQuery, studentExternalId);*/
+                    searchQuery = searchQuery+subQuery;
+                    List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
 		            httpSession.setAttribute("studentslist", parentsList);
 		            
 		            new ExamLevelService(request, response).examLevels();
@@ -718,6 +720,8 @@ public class MarksDetailsService {
 		String result = "false";
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String exam = request.getParameter("examselected");
+		String[] centerCodeSp = request.getParameter("centercodeselected").split(":");
+		String centerCode = centerCodeSp[0];
 		
 		List<Examleveldetails> examLevelDetails = new ExamLevelDetailsDAO().getExamLevelDetails(exam);
 		int examid = examLevelDetails.get(0).getIdexamlevel();
@@ -726,6 +730,7 @@ public class MarksDetailsService {
 		
 		List<Subexamlevel> subjectList = (List<Subexamlevel>) httpSession.getAttribute("subjectsperexam");
 		Map<String,List<Marks>> marksSubjectMap = new HashMap<String,List<Marks>>();
+		List<List<Studentdailyattendance>> studentDailyAttendanceList = new ArrayList<List<Studentdailyattendance>>();
 		
 		for (Subexamlevel subexamlevel : subjectList) {
 			
@@ -734,14 +739,25 @@ public class MarksDetailsService {
 			logger.info("the subject id is " + subject + ", and exam level is " + exam);
 			
 			Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
-
+			Map<String, String> mapOfMarksAttendance = new HashMap<String, String>();
+			
 			if (studentIds != null && subject != null) {
 
 				for (String sid : studentIds) {
 	                        String[] stdId = sid.split(":");
-	                        mapOfMarks.put(Integer.valueOf(stdId[0]), studentsMarks[Integer.parseInt(stdId[1])]);
+	                        String stdMarks = studentsMarks[Integer.parseInt(stdId[1])];
+	                        int marksStudent = Integer.parseInt(stdMarks);
+	                        
+	                        if(marksStudent>0) {
+	                        	mapOfMarks.put(Integer.valueOf(stdId[0]), studentsMarks[Integer.parseInt(stdId[1])]);
+	                        }
+	                        
+	                        mapOfMarksAttendance.put(stdId[2], studentsMarks[Integer.parseInt(stdId[1])]);
 	                }
-			
+				
+				 List<Studentdailyattendance> studentDailyAttendance = markAttendance(mapOfMarksAttendance, subject, exam, centerCode);
+				 studentDailyAttendanceList.add(studentDailyAttendance);
+				 
 				Set mapSet = mapOfMarks.entrySet();
 				Iterator mapIterator = mapSet.iterator();
 				
@@ -771,7 +787,7 @@ public class MarksDetailsService {
 			}
 		}
 		
-			String output = new MarksDetailsDAO().addMarksMap(marksSubjectMap);
+			String output = new MarksDetailsDAO().addMarksMap(marksSubjectMap,studentDailyAttendanceList);
 			
 			if(output=="success"){
 				result = "true";
@@ -780,6 +796,51 @@ public class MarksDetailsService {
 			}
 			
 			return result;
+	}
+
+	private List<Studentdailyattendance> markAttendance(Map<String, String> mapOfMarks, String subject, String exam, String centerCode) {
+
+		List<Studentdailyattendance> studentDailyAttendanceList = new ArrayList<Studentdailyattendance>();
+		
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
+			
+			//New Code 
+			Set mapSet = mapOfMarks.entrySet();
+			Iterator mapIterator = mapSet.iterator();
+			
+			Subject subjectDetails = new SubjectDetailsService(request, response).getSubjectDetails(subject);
+			int subid = subjectDetails.getSubid();
+			
+			List<Marks> marksList = new ArrayList<Marks>();
+
+			while (mapIterator.hasNext()) {
+				
+				Map.Entry mapEntry = (Entry) mapIterator.next();
+				
+				Studentdailyattendance studentDailyAttendance = new Studentdailyattendance();
+				studentDailyAttendance.setAttendeeid((String)mapEntry.getKey());
+				
+				String stringStatus = (String)mapEntry.getValue();
+				int status = Integer.parseInt(stringStatus);
+				
+				if(status >= 0) {
+					studentDailyAttendance.setAttendancestatus("Present");
+				}else if(status < 0) {
+					studentDailyAttendance.setAttendancestatus("Absent");
+				}
+				
+				studentDailyAttendance.setIntime("00:00");
+				studentDailyAttendance.setOuttime("00:00");
+				studentDailyAttendance.setDate(new Date());
+				studentDailyAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+				studentDailyAttendance.setBranchid(Integer.parseInt(centerCode));
+				studentDailyAttendance.setSubject(subject);
+				studentDailyAttendance.setExamlevelcode(exam);
+				studentDailyAttendanceList.add(studentDailyAttendance);
+			}
+		}
+		
+		return studentDailyAttendanceList;
 	}
 
 	public void SearchForEvaluationSheet() {

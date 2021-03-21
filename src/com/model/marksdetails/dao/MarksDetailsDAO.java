@@ -8,6 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 
+import com.model.attendance.dto.Studentdailyattendance;
 import com.model.marksdetails.dto.Marks;
 import com.util.HibernateUtil;
 import com.util.Session;
@@ -23,7 +24,7 @@ public class MarksDetailsDAO {
 	}
 
 	@SuppressWarnings("finally")
-    public String addMarksMap(Map<String, List<Marks>> marksSubjectMap) {
+    public String addMarksMap(Map<String, List<Marks>> marksSubjectMap, List<List<Studentdailyattendance>> studentDailyAttendanceList) {
 		
 		String output = "success";
 		
@@ -36,6 +37,18 @@ public class MarksDetailsDAO {
 					session.save(marks);
 				}
 			}
+			
+			//Mark Attendance 
+			
+			for (List<Studentdailyattendance> studentDailyAttendance : studentDailyAttendanceList) {
+				
+				for (Studentdailyattendance studentAttendance : studentDailyAttendance) {
+					session.save(studentAttendance);
+				}
+			}
+			
+			//End Mark Attendance
+			
 			transaction.commit();
 		}  catch(ConstraintViolationException  e){                                                       
 		    transaction.rollback();

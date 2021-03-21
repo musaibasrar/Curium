@@ -636,8 +636,8 @@ for(Cookie cookie : cookies){
 										<option selected></option>
 										<c:forEach items="${districtsList}" var="districtslist">
 										<c:if test="${(districtslist.districtcode != '')}">
-											<option value="${districtslist.districtcode}- ${districtslist.districtname}" >
-												<c:out value="${districtslist.districtname} - ${districtslist.districtcode}" />
+											<option value="${districtslist.districtcode}-${districtslist.districtname}-${districtslist.state}" >
+												<c:out value="${districtslist.districtname} - ${districtslist.districtcode} - ${districtslist.state}" />
 											</option>
 										</c:if>	
 										</c:forEach>

@@ -354,4 +354,16 @@ public static String dateFromatConversion(String ddmmyyyy) {
 	   return date;
 }
 
+public static String dateFromatConversionSlash(String ddmmyyyy) {
+	   String date = "";
+	   
+	   if(ddmmyyyy!=null && !ddmmyyyy.isEmpty()) {
+		   String[] dateToConvert = ddmmyyyy.split("/");
+		   date = dateToConvert[2]+"-"+dateToConvert[1]+"-"+dateToConvert[0];
+	   }
+	   
+	   return date;
+}
+
+
 }

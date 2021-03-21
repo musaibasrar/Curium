@@ -51,9 +51,7 @@ public class StudentAction {
                 }else if (action.equalsIgnoreCase("viewAllStudentsWithParents")) {
 			url = viewAllStudentsWithParents();
 		}else if (action.equalsIgnoreCase("AddStudent")) {
-			logger.info("********* Action : Add Student ***************** ");
 			url = addStudent();
-			logger.info("********* Action URL : Add Student ***************** "+url);
 		}else if (action.equalsIgnoreCase("ViewDetails")) {
 			url = viewStudent();
 		}else if (action.equalsIgnoreCase("updateStudentDetails")) {

@@ -66,6 +66,7 @@ public class BranchService {
         boolean result = false;
         district.setDistrictcode(DataUtil.emptyString(request.getParameter("districtcode")));
         district.setDistrictname(DataUtil.emptyString(request.getParameter("districtname")));
+        district.setState(DataUtil.emptyString(request.getParameter("state")));
 
         if (!district.getDistrictname().equalsIgnoreCase("")) {
             result = new BranchDAO().checkDistrict(district);
@@ -87,6 +88,7 @@ public class BranchService {
         String[] districtIds = request.getParameterValues("districtids");
         String[] districtNames = request.getParameterValues("distname");
         String[] distcode = request.getParameterValues("distcode");
+        String[] state = request.getParameterValues("stateupdate");
         boolean result = false;
         if(districtIds!=null){
             
@@ -98,6 +100,7 @@ public class BranchService {
                 dist.setIddistrict(Integer.valueOf(distId[0]));
                 dist.setDistrictname(districtNames[Integer.parseInt(distId[1])]);
                 dist.setDistrictcode(distcode[Integer.parseInt(distId[1])]);
+                dist.setState(state[Integer.parseInt(distId[1])]);
                 districtList.add(dist);
             }
            result =  new BranchDAO().updateMultiple(districtList);
@@ -165,11 +168,13 @@ public class BranchService {
         
         Branch branch = new Branch();
         boolean result = false;
+        String[] distCode = DataUtil.emptyString(request.getParameter("districtcode")).split("-");
+        
         branch.setCentercode(DataUtil.emptyString(request.getParameter("centercode")));
         branch.setCentername(DataUtil.emptyString(request.getParameter("centername")));
-        String[] distCode = DataUtil.emptyString(request.getParameter("districtcode")).split("-");
         branch.setDistrictcode(distCode[1]);
-
+        branch.setState(distCode[2]);
+        
         if (!branch.getCentername().equalsIgnoreCase("")) {
             
             result = new BranchDAO().checkBranch(branch);

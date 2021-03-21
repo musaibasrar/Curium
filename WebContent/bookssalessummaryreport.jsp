@@ -1,5 +1,5 @@
 <%--
-    Document   : Place Order
+    Document   : Books Sales Summary Report
     Created on : AUG 14, 2018, 5:52:28 PM
     Author     : Musaib
 --%>
@@ -9,13 +9,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Place Order</title>
+<title>Books Sales Summary Report</title>
 <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -90,11 +91,11 @@
 
 .alignRight {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 14px;
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
-	text-align: right;
+	text-align: left;
 	vertical-align: middle;
 	font-weight: bold;
 }
@@ -224,7 +225,7 @@
 	color: #4b6a84;
 	font-size: 13px;
 	letter-spacing: normal;
-	text-align: center;
+	text-align: left;
 	background-color: #E3EFFF;
 }
 
@@ -262,6 +263,16 @@
 	background-color: #E3EFFF;
 }
 
+.dataTextRight {
+	border-radius: 3px;
+	font-family: Tahoma;
+	color: #4b6a84;
+	font-size: 13px;
+	letter-spacing: normal;
+	text-align: right;
+	background-color: white;
+}
+
 .headerTD {
 	border-radius: 6px;
 	background-color: #4b6a84;
@@ -274,54 +285,6 @@
 	text-align: center;
 	font-weight: bold;
 	height: 22px;
-}
-.alert-box {
-	padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;  
-}
-
-.success {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-    display: none;
-}
-
-.failure {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
-    display: none;
-}
-
-.update {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-    display: none;
-}
-
-.updatefailure {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
-    display: none;
-}
-
-.delete {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-    display: none;
-}
-
-.deletefailure {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
-    display: none;
 }
 
 </style>
@@ -374,8 +337,6 @@
             
         });
 	});
-	
-	
 </script>
 <script type="text/javascript">
 	function select(id, name) {
@@ -405,32 +366,25 @@
 			runEffect();
 			return false;
 		});
+		
+		 $("#printsummaryreport").button({
+				icons : {
+					primary : "ui-icon-print"
+				}
+			}).click(function() {
+				printSummaryReport();
+			});
+			
 	});
 	
 </script>
 <script type="text/javascript">
-	function addBooks() {
+
+	function printSummaryReport() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=OrderProcess&action=addBooks";
+		form1.action = "Controller?process=OrderProcess&action=printSalesSummaryReport";
 		form1.method = "POST";
 		form1.submit();
-
-	}
-	
-	function deleteRecords() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=OrderProcess&action=deleteMultipleBooks";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-	
-	function confirmOrder() {
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=OrderProcess&action=confirmOrder";
-		form1.method = "POST";
-		form1.submit();
-
 	}
 	
 	$(function() {
@@ -457,40 +411,14 @@
              return false;
 
          });
-         $("#placeorder").button({
+         $("#update").button({
              icons:{
                  primary: "ui-icon-note"
              }
          }).click(function(){
+             updateRecords();
+             return false;
 
-        	 var chkds = $("input[name='booksids']:checkbox");
-        	 
-        	       		 
-        	 if (chkds.is(":checked"))  {
-        		 
-        		 for (index = 0, len = chkds.length; index < len; ++index) {
-         		 	var test = chkds[index].value;
-         		 	var splits = test.split(":");
-         		 	var ind = splits[1];
-         		 	
-         		 	if(chkds[index].checked){
-         		 		var quantity = document.getElementById('quantity_'+ind).value;
-         		 		if(quantity == 0){
-         		 			alert('Quantity should be greater than 0');
-         		 			return false;
-         		 		}
-         		 	}
- 	        	}
-        		 
-            	 if(confirm('Are you sure,you want to place the order?')){
-            		 confirmOrder();	
-             	}
-                 //return false;
-        	 } else {
-        		 alert('Select the book(s) to place the order');
-        		 return false;
-        	 }
-        	 
          });
          $('#chckHead').click(function () {
              var length = $('.chcktbl:checked').length;
@@ -523,36 +451,61 @@
                  $('.chcktbl:not(:checked)').attr('disabled', false);
              }
          });
-	 });
+         
+     });
+	 
+	 $(function() {
+			$("#transactiondatefrom").datepicker({
+				changeYear : true,
+				changeMonth : true,
+				dateFormat: 'dd/mm/yy',
+				yearRange: "-50:+0"
+			});
+			$("#anim").change(function() {
+				$("#transactiondatefrom").datepicker("option", "showAnim", $(this).val());
+			});
+			$("#transactiondateto").datepicker({
+				changeYear : true,
+				changeMonth : true,
+				dateFormat: 'dd/mm/yy',
+				yearRange: "-50:+0"
+			});
+			$("#anim").change(function() {
+				$("#transactiondateto").datepicker("option", "showAnim", $(this).val());
+			});
+			
+			 $("#generatereport").button({
+	             icons:{
+	                 primary: "ui-icon-document"
+	             }
+	         }).click(function(){
+	             generateBooksSalesSummaryReport();
+	             return false;
 
+	         });
+			 
+			 $("#print").button({
+	             icons:{
+	                 primary: "ui-icon-print"
+	             }
+	         }).click(function(){
+	             printRecords();
+	             return false;
+
+	         });
+			 
+			 
+		});
 	 
-	 function calculatePrice(value){
-		 var price = document.getElementById("price_"+value).value;
-		 var quantity = document.getElementById("quantity_"+value).value;
-		 var totalAmount = price*quantity;
-		 document.getElementById("totalprice_"+value).value = totalAmount;
-	 }
-	 
+	 function generateBooksSalesSummaryReport() {
+			var form1 = document.getElementById("form1");
+			form1.action = "Controller?process=OrderProcess&action=generateBooksSalesSummaryReport";
+			form1.method = "POST";
+			form1.submit();
+	}
 </script>
 
-		<script type="text/javascript">
-					
-					var ordersave='<c:out default="" value="${ordersave}"/>';
-		            var booksupdate='<c:out default="" value="${booksupdate}"/>';
-		            var booksdelete='<c:out default="" value="${booksdelete}"/>';
-		            
-		            if(ordersave == "true"){
-		            	 $(function(){
-		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
-		            	 });
-		            	 }else if(ordersave == "false"){
-		            	  $(function(){
-		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
-		            		 });
-		            	 }
-            
-        </script>
-        
+		
        
 </head>
 <%
@@ -572,19 +525,106 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
+
 	<form id="form1" method="POST">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");
 		%>
-
-		<div class="alert-box success">Book(s) has been ordered successfully!!!</div>
-		<div class="alert-box failure">Order Failed, Unable to order Book(s)!!!</div>
+		<c:set var="itemTotal" value="${0}" />
 		
+		<div style="height: 28px">
+			<button id="add">Search</button>
+			<br />
+		</div>
+
+		<div id="effect" class="ui-widget-content ui-corner-all">
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-1">Parameters</a></li>
+
+				</ul>
+				<div id="tabs-1">
+				
+					<table style="margin-left: auto;margin-right: auto;">
+					
+						<tr>
+							<td><br><br></td>
+						</tr>
+						
+						<tr>
+						<td class="alignRight">Order From Date&nbsp;</td>
+							<td><label> <input type="text"  name="transactiondatefrom"
+									class="textField" style="font-size: 14px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="transactiondatefrom" autocomplete="false" required
+									data-validate="validate(required)">
+							</label></td>
+							
+							<td class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Order To Date&nbsp;</td>
+							<td><label> <input type="text"  name="transactiondateto"
+									class="textField" style="font-size: 14px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="transactiondateto" autocomplete="false" required
+									data-validate="validate(required)">
+							</label></td>
+							
+							</tr>
+							<tr>
+							<td><br /></td>
+	
+							</tr>
+						
+						<tr>
+						
+						<tr>
+							<td  class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Center Code &nbsp;</td>
+							<td ><label> <select name="centercode" id="centercode" 
+									style="width: 180px;font-size: 14px;" >
+										<option selected></option>
+										<c:forEach items="${branchList}" var="branchlist">
+											<option value="${branchlist.centercode} -- ${branchlist.centername}" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
+												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label></td>
+							<td class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status&nbsp;</td>
+							<td ><label>
+									<select name="status" id="status" 
+									style="width: 180px;font-size: 14px;" required>
+										<option value="" ></option>
+										<option value="DELIVERED" >Delivered</option>
+										<option value="PENDING">Pending</option>
+										<option value="REJECTED">Rejected</option>
+								</select>
+							
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+					</table>
+					
+						<div align="center">
+						<p>
+						<label><button id="generatereport">Generate Report</button></label></p>
+						
+									
+					</div>
+					
+					</div>
+			</div>
+		</div>
+
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Place Order</td>
+					<td class="headerTD">Books Sales Summary Report<br>
+					${fromdateselected}&nbsp;&nbsp;${todateselected}&nbsp;&nbsp;${titleselected}&nbsp;&nbsp;${authorselected}&nbsp;&nbsp;${languageselected}&nbsp;&nbsp;</td>
 				</tr>
 			</table>
 			
@@ -592,34 +632,48 @@ for(Cookie cookie : cookies){
 
                     <thead>
                         <tr>
-                            <th class="headerText" style="width: 10%;"><input  type="checkbox" id = "chckHead" /></th>
-                            <th title="click to sort" class="headerText" style="width: 30%;">Book Title</th>
-                            <th title="click to sort" class="headerText">Language&nbsp;&nbsp;</th>
-                            <th title="click to sort" class="headerText" style="width: 20%;">Author</th>
-                            <th title="click to sort" class="headerText">Price Per Book</th>
-                            <th title="click to sort" class="headerText" style="width: 20%;">Quantity</th>
-                            <th title="click to sort" class="headerText" style="width: 20%;">Total Price</th>
+                            <th title="click to sort" class="headerText">Order Date</th>
+                            <th title="click to sort" class="headerText">Center</th>
+                            <th title="click to sort" class="headerText">Status</th>
+                            <th title="click to sort" class="headerText">Payment Status</th>
+                            <th title="click to sort" class="headerText">Discount</th>
+                            <th title="click to sort" class="headerText">Total Price&nbsp;</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${bookslist}" var="books" varStatus="status">
+                    
+                        <c:forEach items="${ordersummarylist}" var="books" varStatus="status">
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText" style="width: 10%;"><input type="checkbox" id = "<c:out value="${books.id}"/>" class = "chcktbl"  name="booksids"  value="<c:out value="${books.id}:${status.index}"/>"/></td>
-                                <td class="dataText" style="width: 30%;"><c:out value="${books.title}"/></td>
-                                <td class="dataText"><c:out value="${books.language}"/></td>
-                                <td class="dataText" style="width: 20%;"><c:out value="${books.author}"/></td>
-                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.price}"/>" class="price" id="price_${status.index}" name="price" readonly="readonly"></td>
-                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 20%;" value="0" class="quantity" id="quantity_${status.index}" name="quantity" onkeyup="calculatePrice(${status.index});"></td>
-                                <td class="dataText" style="text-transform:uppercase">
-                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 40%;" id="totalprice_${status.index}" name="totalprice">
-                                </td>
+                                <td class="dataText"><c:out value="${books.orderdate}"/></td>
+                                <td class="dataText"><c:out value="${books.centercode}"/></td>
+                                <td class="dataText"><c:out value="${books.narration}"/></td>
+                                <td class="dataText"><c:out value="${books.paymentstatus}"/></td>
+								<td class="dataText"><c:out value="${books.discount}"/></td>
+                                <td class="dataText" style="text-align: right">
+                                <c:set var="itemTotal" value="${itemTotal + books.totalafterdiscount}" />
+                                <fmt:setLocale value="en_IN" scope="request"/>
+								<fmt:formatNumber type="currency"  value="${books.totalafterdiscount}" />
+                               </td>
                             </tr>
                         </c:forEach>
                     </tbody>
-                    <tfoot><tr>
-                     		<td  class="footerTD" colspan="2" ><button id="placeorder">Place Order</button> 
+                    <tfoot>
+                    	<tr>
+							<td class="dataTextRight" colspan="5">
+								<label style="color: #eb6000"><b>Grand Total:
+									<fmt:setLocale value="en_IN" scope="request"/>
+									<fmt:formatNumber type="currency"  value="${itemTotal}" /></b>
+							</label> 
+							</td>
+						</tr>
+                    
+                    <tr>
+                     		<td  class="footerTD" >
+                           <button id="printsummaryreport">Print</button> 
+                           </td>
+                    
                         </tr></tfoot>
                 </table>
 		</div>

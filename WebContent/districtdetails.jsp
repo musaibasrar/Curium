@@ -617,6 +617,56 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
+							
+							<td width="10%" class="alignRight">State &nbsp;</td>
+							<td width="70%"><label> 
+							
+										<select name="state" id="state" style="width: 200px;">
+                                            <option selected></option>
+                                            <option>Andaman and Nicobar Islands</option>
+                                            <option>Andhra Pradesh</option>
+                                            <option>Arunachal Pradesh</option>
+                                            <option>Assam</option>
+                                            <option>Bihar</option>
+                                            <option>Chandigarh</option>
+                                            <option>Chhattisgarh</option>
+                                            <option>Dadra and Nagar Haveli</option>
+                                            <option>Daman and Diu</option>
+                                            <option>Delhi</option>
+                                            <option>Goa</option>
+                                            <option>Gujarat</option>
+                                            <option>Haryana</option>
+                                            <option>Himachal Pradesh</option>
+                                            <option>Jammu and Kashmir</option>
+                                            <option>Jharkhand</option>
+                                            <option>Karnataka</option>
+                                            <option>Kerala</option>
+                                            <option>Lakshadweep</option>
+                                            <option>Madhya Pradesh</option>
+                                            <option>Maharashtra</option>
+                                            <option>Manipur</option>
+                                            <option>Meghalaya</option>
+                                            <option>Mizoram</option>
+                                            <option>Nagaland</option>
+                                            <option>Odisha</option>
+                                            <option>Puducherry</option>
+                                            <option>Punjab</option>
+                                            <option>Rajasthan</option>
+                                            <option>Sikkim</option>
+                                            <option>Tamil Nadu</option>
+                                            <option>Telangana</option>
+                                            <option>Tripura</option>
+                                            <option>Uttar Pradesh</option>
+                                            <option>Uttarakhand</option>
+                                            <option>West Bengal</option>
+                                        </select>
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
 							<td><br /></td>
 						</tr>
 					</table>
@@ -653,6 +703,9 @@ for(Cookie cookie : cookies){
 							<th title="click to sort" class="headerText">District Name<img
 							alt="" style="position: relative; top: 4px;"
 							src="images/sort_both.png" />&nbsp;</th>
+							<th title="click to sort" class="headerText">State<img
+							alt="" style="position: relative; top: 4px;"
+							src="images/sort_both.png" />&nbsp;</th>
 					</tr>
 				</thead>
 
@@ -663,6 +716,53 @@ for(Cookie cookie : cookies){
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${districtslist.iddistrict}"/>" class = "chcktbl"  name="districtids"  value="${districtslist.iddistrict}:${status.index}"/></td>
 						  <td class="dataText"><label style="display: none;"><c:out value="${districtslist.districtcode}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${districtslist.districtcode}" />" id="distcode" name="distcode"></td>
 						  <td class="dataText"><label style="display: none;"><c:out value="${districtslist.districtname}" /></label><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${districtslist.districtname}" />" id="distname" name="distname"></td>
+						  <td class="dataText">
+						  	<label style="display: none;"><c:out value="${districtslist.state}" /></label>
+						  	<label>
+						  		<select name="stateupdate" id="stateupdate" style="width: 150px;height: 20px;background-color: #E3EFFF;border-style: none;color: #4B6A84;">
+                                            <option selected>${districtslist.state}</option>
+                                            <option></option>
+                                            <option>Andaman and Nicobar Islands</option>
+                                            <option>Andhra Pradesh</option>
+                                            <option>Arunachal Pradesh</option>
+                                            <option>Assam</option>
+                                            <option>Bihar</option>
+                                            <option>Chandigarh</option>
+                                            <option>Chhattisgarh</option>
+                                            <option>Dadra and Nagar Haveli</option>
+                                            <option>Daman and Diu</option>
+                                            <option>Delhi</option>
+                                            <option>Goa</option>
+                                            <option>Gujarat</option>
+                                            <option>Haryana</option>
+                                            <option>Himachal Pradesh</option>
+                                            <option>Jammu and Kashmir</option>
+                                            <option>Jharkhand</option>
+                                            <option>Karnataka</option>
+                                            <option>Kerala</option>
+                                            <option>Lakshadweep</option>
+                                            <option>Madhya Pradesh</option>
+                                            <option>Maharashtra</option>
+                                            <option>Manipur</option>
+                                            <option>Meghalaya</option>
+                                            <option>Mizoram</option>
+                                            <option>Nagaland</option>
+                                            <option>Odisha</option>
+                                            <option>Puducherry</option>
+                                            <option>Punjab</option>
+                                            <option>Rajasthan</option>
+                                            <option>Sikkim</option>
+                                            <option>Tamil Nadu</option>
+                                            <option>Telangana</option>
+                                            <option>Tripura</option>
+                                            <option>Uttar Pradesh</option>
+                                            <option>Uttarakhand</option>
+                                            <option>West Bengal</option>
+                                        </select>
+						  	</label>
+						  
+						  
+						  </td>
 						</tr>
 					</c:forEach>
 

@@ -12,12 +12,14 @@ public class Ordersdetails implements java.io.Serializable {
     private Integer bookid;
     private Integer quantity;
     private Integer orderssummaryid;
+    private Integer price;
 
     public Ordersdetails() {}
 
-    public Ordersdetails(Integer bookid, Integer quantity, Integer orderssummaryid) {
+    public Ordersdetails(Integer bookid, Integer quantity, Integer orderssummaryid, Integer price) {
         this.bookid = bookid;
         this.quantity = quantity;
+        this.price = price;
         this.orderssummaryid = orderssummaryid;
     }
 
@@ -53,4 +55,12 @@ public class Ordersdetails implements java.io.Serializable {
     public void setOrderssummaryid(Integer orderssummaryid) {
         this.orderssummaryid = orderssummaryid;
     }
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
 }

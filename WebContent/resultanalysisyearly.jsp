@@ -434,6 +434,7 @@ for(Cookie cookie : cookies){
 											<option value="2013/14" >2013/14</option>
 								</select>
 							</label> 
+							</td>
 						</tr>
 						
 						<tr>

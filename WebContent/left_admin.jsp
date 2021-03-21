@@ -342,7 +342,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=studentsListReport" style="font-size: 12px;">Students Details</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=questionPaperSet" style="font-size: 12px;">Question Paper Set</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=languageListReport" style="font-size: 12px;">Language Report</a><br/>
-                <a target="mainFrame" href="Controller?process=StudentProcess&action=resultReport" style="font-size: 12px;">Result Summary Report</a><br/>
+                <!-- <a target="mainFrame" href="Controller?process=StudentProcess&action=resultReport" style="font-size: 12px;">Result Summary Report</a><br/> -->
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=resultList" style="font-size: 12px;">Result List</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=rankListReport" style="font-size: 12px;">Rank List</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=marksSheet" style="font-size: 12px;">Marks Sheet</a><br/>
@@ -379,10 +379,10 @@ for(Cookie cookie : cookies){
             
             <div>
                 <!-- <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=enterMarks" style="font-size: 12px;">Enter Marks</a><br/> -->
-                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
-				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
                 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getSubjectsExams" style="font-size: 12px;">Enter Marks</a><br/>
                 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=deleteMarks" style="font-size: 12px;">Delete Marks</a><br/>
+				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">Attendance</a><br/>
+<!--                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/> -->
             	<!-- <a target="mainFrame" href="progressreport.jsp" style="font-size: 12px;">Generate Report</a><br/> -->
             </div> 
             

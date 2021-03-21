@@ -12,5 +12,8 @@
         <property generated="never" lazy="false" name="districtcode" optimistic-lock="true" type="string" unique="false">
             <column length="50" name="districtcode"/>
         </property>
+        <property generated="never" lazy="false" name="state" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="state"/>
+        </property>
     </class>
 </hibernate-mapping>

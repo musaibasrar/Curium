@@ -144,6 +144,14 @@ public class DataUtil {
 	   
 	   return date;
    }
+
+   public static String returnValue(Object object) {
+	
+	if(object==null) {
+		return "";
+	}
+	return object.toString();
+}
             
     
 

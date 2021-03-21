@@ -508,7 +508,8 @@ for(Cookie cookie : cookies){
 										<option>2017/18</option>
 										<option>2018/19</option>
 										<option>2019/20</option>
-										
+										<option>2020/21</option>
+										<option>2021/22</option>
 								</select>
 
 							</label> 

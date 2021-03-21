@@ -14,13 +14,15 @@ public class Branch implements java.io.Serializable,Comparable<Branch> {
     private String centername;
     private String centercode;
     private String districtcode;
+    private String state;
 
     public Branch() {}
 
-    public Branch(String centername, String centercode, String districtcode) {
+    public Branch(String centername, String centercode, String districtcode, String state) {
         this.centername = centername;
         this.centercode = centercode;
         this.districtcode = districtcode;
+        this.state = state;
     }
 
     public Integer getIdbranch() {
@@ -60,7 +62,15 @@ public class Branch implements java.io.Serializable,Comparable<Branch> {
         this.districtcode = districtcode;
     }
 
-    @Override
+    public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	@Override
     public int compareTo(Branch result) {
        
         Integer centerCode = Integer.parseInt(((Branch) result).getCentercode());

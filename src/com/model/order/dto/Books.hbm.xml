@@ -45,5 +45,11 @@
         <property generated="never" lazy="false" name="price" optimistic-lock="true" type="java.lang.Integer" unique="false">
             <column name="price"/>
         </property>
+         <property  generated="never" lazy="false" name="purchaseddate" optimistic-lock="true" type="date" unique="false" >
+            <column name="purchaseddate" length="10" />
+        </property>
+        <property  generated="never" lazy="false" name="createddate" optimistic-lock="true" type="date" unique="false" >
+            <column name="createddate" length="10" />
+        </property>
     </class>
 </hibernate-mapping>

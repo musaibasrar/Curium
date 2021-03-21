@@ -1,5 +1,7 @@
 package com.model.order.dto;
 
+import java.util.Date;
+
 // default package
 // Generated 14 Aug, 2018 9:02:51 AM by Hibernate Tools 5.3.0.Beta2
 
@@ -22,6 +24,8 @@ public class Books implements java.io.Serializable {
     private String description;
     private Integer userid;
     private Integer price;
+    private Date purchaseddate;
+    private Date createddate;
 
     public Books() {}
 
@@ -31,7 +35,7 @@ public class Books implements java.io.Serializable {
     }
 
     public Books(String isbn, String language, String author, String publisher, String bookimage, String genre, String title,
-            Integer quantity, String edition, Integer totalpage, String description, Integer userid, Integer price) {
+            Integer quantity, String edition, Integer totalpage, String description, Integer userid, Integer price, Date purchaseddate, Date createddate) {
         this.isbn = isbn;
         this.language = language;
         this.author = author;
@@ -45,6 +49,8 @@ public class Books implements java.io.Serializable {
         this.description = description;
         this.userid = userid;
         this.price = price;
+        this.purchaseddate = purchaseddate;
+        this.createddate = createddate;
     }
 
     public Integer getId() {
@@ -158,5 +164,21 @@ public class Books implements java.io.Serializable {
     public void setPrice(Integer price) {
         this.price = price;
     }
+
+	public Date getPurchaseddate() {
+		return purchaseddate;
+	}
+
+	public void setPurchaseddate(Date purchaseddate) {
+		this.purchaseddate = purchaseddate;
+	}
+
+	public Date getCreateddate() {
+		return createddate;
+	}
+
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
+	}
 
 }

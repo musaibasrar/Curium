@@ -677,6 +677,15 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 									size="36" value='<c:out value="${searchedexamlevel}"></c:out>'>
 							</label></td>
 							
+							<td class="alignRightFields">Center Code &nbsp;</td>
+							
+							
+							<td ><label> <input style="border: none;
+							border-color: transparent;background-color:#E6EEF4;font-size: 18px;font-weight:bold;font-variant: small-caps;color: #EB6000;"
+									readonly="readonly"  name="centercodeselected" type="text" class="myclass" id="centercodeselected"
+									size="36" value='<c:out value="${evaluationsheetcentersearch}"></c:out>'>
+							</label></td>
+							
 						</tr>
 					</table>
 
@@ -713,7 +722,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 							<td class="dataText" style="display: none;"><input type="checkbox" checked 
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
-								value="<c:out value="${Parents.student.sid}:${status.index}"/>" /></td>
+								value="<c:out value="${Parents.student.sid}:${status.index}:${Parents.student.studentexternalid}"/>" /></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>

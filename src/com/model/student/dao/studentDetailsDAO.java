@@ -472,6 +472,29 @@ public class studentDetailsDAO {
         return parents;
 	}
 	
+	public java.util.List<Parents> getStudentsListWithParam(String query, List<String> centerCode) {
+		java.util.List<Parents> parents = new ArrayList<Parents>();
+        try {
+            transaction = session.beginTransaction();
+            
+            if(!centerCode.isEmpty()) {
+            	Query HQLquery = session.createQuery(query).setParameterList("ids", centerCode);
+            	parents = (java.util.List<Parents>) HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
+            }else {
+            	Query HQLquery = session.createQuery(query);
+            	parents = (java.util.List<Parents>) HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
+            }
+            
+            
+            transaction.commit();
+        } catch (HibernateException hibernateException) {transaction.rollback();
+            hibernateException.printStackTrace();
+        }finally {
+			HibernateUtil.closeSession();
+		}
+        return parents;
+	}
+	
 	public List<Student> getListStudents(String query) {
 		java.util.List<Student> student = new ArrayList<Student>();
         try {

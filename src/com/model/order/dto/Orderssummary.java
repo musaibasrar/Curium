@@ -16,16 +16,20 @@ public class Orderssummary implements java.io.Serializable {
     private Date confirmationdate;
     private String paymentstatus;
     private String narration;
+    private Integer discount;
+    private Float totalafterdiscount;
 
     public Orderssummary() {}
 
     public Orderssummary(String centercode, Date orderdate, Date confirmationdate, String paymentstatus,
-            String narration) {
+            String narration, Integer discount, Float totalafterdiscount) {
         this.centercode = centercode;
         this.orderdate = orderdate;
         this.confirmationdate = confirmationdate;
         this.paymentstatus = paymentstatus;
         this.narration = narration;
+        this.discount = discount;
+        this.totalafterdiscount = totalafterdiscount;
     }
 
     public Integer getIdorders() {
@@ -75,5 +79,21 @@ public class Orderssummary implements java.io.Serializable {
     public void setNarration(String narration) {
         this.narration = narration;
     }
+
+	public Integer getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Integer discount) {
+		this.discount = discount;
+	}
+
+	public Float getTotalafterdiscount() {
+		return totalafterdiscount;
+	}
+
+	public void setTotalafterdiscount(Float totalafterdiscount) {
+		this.totalafterdiscount = totalafterdiscount;
+	}
 
 }

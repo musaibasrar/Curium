@@ -714,6 +714,12 @@ for(Cookie cookie : cookies){
 							<th title="click to sort" class="headerText">Order Status<img
 							alt="" style="position: relative; top: 4px;"
 							src="images/sort_both.png" />&nbsp;</th>
+							<th title="click to sort" class="headerText">Discount %<img
+							alt="" style="position: relative; top: 4px;"
+							src="images/sort_both.png" />&nbsp;</th>
+							<th title="click to sort" class="headerText">Grand Total<img
+							alt="" style="position: relative; top: 4px;"
+							src="images/sort_both.png" />&nbsp;</th>
 							<th title="click to sort" class="headerText" style="width:15%">Delivered/Rejected Date<img
 							alt="" style="position: relative; top: 4px;"
 							src="images/sort_both.png" />&nbsp;</th>
@@ -728,12 +734,21 @@ for(Cookie cookie : cookies){
 					<c:forEach items="${ordersummarylist}" var="ordersummarylist" varStatus="status">
 						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
                           <td class="dataText" style="width:10%"><input type="checkbox" id = "<c:out value="${ordersummarylist.key.idorders}"/>" class = "chcktbl"  name="orderids"  value="${ordersummarylist.key.idorders}:${status.index}"/></td>
-						  <td  class="dataTextInActive" style="width:10%"><a class="dataTextInActive" href="Controller?process=OrderProcess&action=viewOrderDetails&id=<c:out value='${ordersummarylist.key.idorders}'/>&centername=<c:out value="${ordersummarylist.value.centername}" />&orderdate=<c:out value="${ordersummarylist.key.orderdate}" />"><c:out value="${ordersummarylist.key.idorders}"/></a></td>
+						  <td  class="dataTextInActive" style="width:10%">
+						  <a class="dataTextInActive" href="Controller?process=OrderProcess&action=viewOrderDetails&id=<c:out value='${ordersummarylist.key.idorders}'/>&centername=<c:out value="${ordersummarylist.value.centername}" />&orderdate=<c:out value="${ordersummarylist.key.orderdate}" />&discount=<c:out value="${ordersummarylist.key.discount}" />&grandtotal=<c:out value="${ordersummarylist.key.totalafterdiscount}" />"><c:out value="${ordersummarylist.key.idorders}"/></a></td>
 						  <td class="dataText"><c:out value="${ordersummarylist.value.centername}" /></td>
 						  <td class="dataText"><c:out value="${ordersummarylist.key.orderdate}" /></td>
-						  <td class="dataText"><c:out value="${ordersummarylist.key.narration}" /></td>
-						  <td class="dataText" style="width:15%"><c:out value="${ordersummarylist.key.confirmationdate}" /></td>
-						  <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${ordersummarylist.key.paymentstatus}" />" id="paymentstatus" name="paymentstatus"></td>
+						  <td class="dataText">
+						  	<input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 100px;" value="<c:out value="${ordersummarylist.key.narration}" />" id="status_${status.index}" name="status_${status.index}">
+						  </td>
+						  <td class="dataText">
+						 	 <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 20px;" value="<c:out value="${ordersummarylist.key.discount}" />" id="discount_${status.index}" name="discount_${status.index}">
+						  </td>
+						  <td class="dataText">
+						  	 <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 50px;" value="<c:out value="${ordersummarylist.key.totalafterdiscount}" />" id="total_${status.index}" name="total_${status.index}">
+						  </td>
+						  <td class="dataText"><c:out value="${ordersummarylist.key.confirmationdate}" /></td>
+						  <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 100px;" value="<c:out value="${ordersummarylist.key.paymentstatus}" />" id="paymentstatus" name="paymentstatus"></td>
 						</tr>
 					</c:forEach>
 

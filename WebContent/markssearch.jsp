@@ -794,7 +794,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 					
 						<td class="footerTD" colspan="2"><input value="Update"
 							type="submit" id="updateMarks" />
-							&nbsp; &nbsp; &nbsp; &nbsp;<button id="delete">Delete</button>
+							<!-- &nbsp; &nbsp; &nbsp; &nbsp;<button id="delete">Delete</button> -->
 							<!-- <input value="Delete Stamp Fees"
 							type="submit" id="deleteStamp" /> --></td>
 							

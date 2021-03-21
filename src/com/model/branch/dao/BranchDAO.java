@@ -283,4 +283,23 @@ try {
           
           return dist;
 }
+
+	public List<Branch> getBranchListByState(String state) {
+        
+		List<Branch> branch = new ArrayList<Branch>();
+                  
+          try {
+              //if
+              transaction = session.beginTransaction();
+              Query query = session.createQuery("From Branch where state = '"+state+"'");
+              branch = query.getResultList();
+              transaction.commit();
+          } catch (HibernateException hibernateException) {transaction.rollback();
+              hibernateException.printStackTrace();
+          } finally {
+              HibernateUtil.closeSession();
+          }
+          
+          return branch;
+}
     }

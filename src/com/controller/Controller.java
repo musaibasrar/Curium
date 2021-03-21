@@ -27,6 +27,7 @@ import com.model.hr.action.HrAction;
 import com.model.language.action.LanguageAction;
 import com.model.marksdetails.action.MarksDetailsAction;
 import com.model.order.action.OrderAction;
+import com.model.order.booksinfo.action.BooksInfoAction;
 import com.model.periods.action.PeriodAction;
 import com.model.position.action.PositionAction;
 import com.model.printids.action.PrintIdsAction;
@@ -113,6 +114,8 @@ public class Controller extends HttpServlet {
          nextUrl= new ReferenceBooksAction(request, response).execute(action);;
      }else if("OrderProcess".equalsIgnoreCase(process)){
          nextUrl= new OrderAction(request, response).execute(action);;
+     }else if("BooksInfoProcess".equalsIgnoreCase(process)){
+         nextUrl= new BooksInfoAction(request, response).execute(action);;
      }else if("test".equalsIgnoreCase(process)){
          nextUrl= "test.html";
      }

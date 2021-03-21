@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -94,7 +95,7 @@
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
-	text-align: right;
+	text-align: left;
 	vertical-align: middle;
 	font-weight: bold;
 }
@@ -260,6 +261,16 @@
 	letter-spacing: normal;
 	text-align: center;
 	background-color: #E3EFFF;
+}
+
+.dataTextRight {
+	border-radius: 3px;
+	font-family: Tahoma;
+	color: #4b6a84;
+	font-size: 13px;
+	letter-spacing: normal;
+	text-align: right;
+	background-color: white;
 }
 
 .headerTD {
@@ -513,7 +524,59 @@
              }
          });
          
+         $("#purchaseddate").datepicker({
+ 			changeYear : true,
+ 			changeMonth : true,
+ 			dateFormat: 'dd/mm/yy',
+ 			yearRange: "0:+2"
+ 		});
+ 		$("#anim").change(
+ 				function() {
+ 					$("#purchaseddate").datepicker("option", "showAnim",
+ 							$(this).val());
+ 				});
+         
      });
+	 
+	 var xmlHttp;
+	    var count;
+	    function getAuthor() {
+
+			var selected=document.getElementById('title').value;
+
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "AjaxController?process=BooksInfoProcess&action=getAuthor&title="+selected,true);
+			xmlHttp.send(null);
+		}
+	    
+		function stateChanged() {
+
+			if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+				document.getElementById("authorslist").innerHTML = xmlHttp.responseText;
+	            document.getElementById("authorslist").style.display = '';
+			}
+		}
+		function GetXmlHttpObject() {
+			var xmlHttp = null;
+			try {
+				xmlHttp = new XMLHttpRequest();
+			} catch (e) {
+				try {
+					xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+				} catch (e) {
+					xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+			}
+			return xmlHttp;
+		}
+		
 </script>
 
 		<script type="text/javascript">
@@ -569,12 +632,14 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
+
 	<form id="form1" method="POST">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");
 		%>
-
+		<c:set var="itemTotal" value="${0}" />
+		
 		<div class="alert-box success">Book(s) has been added successfully!!!</div>
 		<div class="alert-box failure">Saving Failed, Unable to create new Book(s)!!!</div>
 		
@@ -597,8 +662,8 @@ for(Cookie cookie : cookies){
 
 				</ul>
 				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
+					<table border="0" cellpadding="0" align="center"
+						cellspacing="0" id="table1" style="width: auto;height: auto;">
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -606,61 +671,68 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td width="10%" class="alignRight">Book Title &nbsp;</td>
-							<td width="70%"><label> <input id="title"
-									name="title" type="text" class="textField" required size="30">
-
+							<td class="alignRight">Book Title &nbsp;</td>
+							<td><label> 
+							
+							<select name="title" id="title" onchange="getAuthor()"
+									style="width: 200px;" required>
+										<option selected></option>
+										<c:forEach items="${booksinfolist}" var="booksinfo">
+											<option value="${booksinfo.title}">
+												<c:out value="${booksinfo.title}" />
+											</option>
+										</c:forEach>
+								</select>
 							</label></td>
+							<td class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Author &nbsp;</td>
+								<td id="authorslist"><label> <select name="author" id="author"
+									style="width: 200px" >
+									<option ></option>
+								</select>
+							</label>
+							
+							</td>
 						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
+						
 						<tr>
-							<td width="10%" class="alignRight">Author &nbsp;</td>
-							<td width="70%"><label> <input id="author"
-									name="author" type="text" class="textField" required size="30">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="10%" class="alignRight">Language&nbsp;</td>
-							<td width="70%"><label> <input id="language"
-									name="language" type="text" class="textField" required size="30">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="10%" class="alignRight">Edition &nbsp;</td>
-							<td width="70%"><label> <input id="edition" 
-									name="edition" type="text" class="textField" required size="30">
+							<td class="alignRight">Language&nbsp;</td>
+							<td ><label> 
+							
+							 <select name="language" id="language" 
+									style="width: 200px;" required>
+										<option selected value="Urdu" >Urdu</option>
+										<option value="English">English</option>
+										<option value="Kannada">Kannada</option>
+										<option value="Hindi">Hindi</option>
+										<option value="Tamil">Tamil</option>
+										<option value="Telegu">Telegu</option>
+										<option value="Marathi">Marathi</option>
+								</select>
 
 							</label></td>
 							
+							<td class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edition &nbsp;</td>
+							<td ><label> <input id="edition" 
+									name="edition" type="text" class="textField" required size="30">
+
+							</label></td>
 						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td width="10%" class="alignRight">Price &nbsp;</td>
-							<td width="70%"><label> <input id="price" onkeypress="return event.charCode >= 00 && event.charCode <=57"
+							<td class="alignRight">Price &nbsp;</td>
+							<td ><label> <input id="price" onkeypress="return event.charCode >= 00 && event.charCode <=57"
 									name="price" type="text" class="textField" required size="30"
 									required>
 
 							</label></td>
 							
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="10%" class="alignRight">Quantity &nbsp;</td>
-							<td width="70%"><label> <input id="quantity" onkeypress="return event.charCode >= 00 && event.charCode <=57"
+							<td class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantity &nbsp;</td>
+							<td><label> <input id="quantity" onkeypress="return event.charCode >= 00 && event.charCode <=57"
 									name="quantity" type="text" class="textField" required size="30">
 
 							</label></td>
@@ -669,7 +741,21 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						
+						<tr>
+							<td class="alignRight">Purchased Date &nbsp;</td>
+							<td ><label> <input
+									name="purchaseddate" type="text" class="textField" 
+									id="purchaseddate" size="30" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" data-validate="validate(required)">
+
+							</label></td>
+							
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 					</table>
+					
 					<table id="table2" width="100%" border="0" align="center">
 						<tr>
 							<td align="center">
@@ -703,6 +789,7 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
+                    
                         <c:forEach items="${bookslist}" var="books" varStatus="status">
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
@@ -712,11 +799,25 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.author}"/>" id="updateauthor" name="updateauthor"><label style="display: none;"><c:out value="${books.author}"/></label></td>
                                 <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.quantity}"/>" id="updatequantity" name="updatequantity"><label style="display: none;"><c:out value="${books.quantity}"/></label></td>
                                 <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.price}"/>" id="updateprice" name="updateprice"><label style="display: none;"><c:out value="${books.price}"/></label></td>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${books.quantity * books.price}"/></td>
+                                <td class="dataText" style="text-align: right">
+                                <c:set var="itemTotal" value="${itemTotal + books.quantity * books.price}" />
+                                <fmt:setLocale value="en_IN" scope="request"/>
+								<fmt:formatNumber type="currency"  value="${books.quantity * books.price}" />
+                               </td>
                             </tr>
                         </c:forEach>
                     </tbody>
-                    <tfoot><tr>
+                    <tfoot>
+                    	<tr>
+							<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>Grand Total:
+							<fmt:setLocale value="en_IN" scope="request"/>
+							<fmt:formatNumber type="currency"  value="${itemTotal}" /></b>
+							</label> 
+							</td>
+						</tr>
+                    
+                    <tr>
                      		<td  class="footerTD" colspan="2" ><button id="update">Update</button> 
                     		&nbsp;&nbsp;&nbsp;&nbsp;
                            <button id="deletebooks">Delete</button>

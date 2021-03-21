@@ -615,7 +615,7 @@ for(Cookie cookie : cookies){
                             	<td class="dataText"><c:out value="${(status.index)+1}" /></td>
                                 <td class="dataText"><c:out value="${orderdetails.value.title}"/></td>
                                 <td class="dataText"><c:out value="${orderdetails.value.author}"/></td>
-                                <td class="dataText"><c:out value="${orderdetails.value.price}"/></td>
+                                <td class="dataText"><c:out value="${orderdetails.key.price}"/></td>
                                 <td class="dataText"><c:out value="${orderdetails.key.quantity}"/></td>
                                 <td class="dataText"><c:out value="${orderdetails.key.quantity*orderdetails.value.price}"/></td>
                             </tr>
@@ -630,9 +630,29 @@ for(Cookie cookie : cookies){
                                 <td ></td>
                                 <td ></td>
                                 <td ></td>
-                                <td align="right" class="headerText" style="font-size: 15px;">Grand Total</td>
+                                <td align="right" class="headerText" style="font-size: 15px;">Total</td>
                                 <td class="headerText" style="font-size: 15px;">${grandtotal}</td>
                         	</tr>
+                        	
+                        	<c:if test="${discount > 0}">
+                        		<tr>
+                        	<td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td align="right" class="headerText" style="font-size: 15px;">Discount(%)</td>
+                                <td class="headerText" style="font-size: 15px;">${discount}</td>
+                        	</tr>
+                        	<tr>
+                        	<td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td align="right" class="headerText" style="font-size: 15px;">Grand Total</td>
+                                <td class="headerText" style="font-size: 15px;">${grandtotalafterdiscount}</td>
+                        	</tr>
+                        	</c:if>
+                        	
                     </tfoot>
                 </table>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -12,6 +12,7 @@ import com.model.branch.service.BranchService;
 import com.model.examdetails.service.ExamDetailsService;
 import com.model.examlevels.service.ExamLevelService;
 import com.model.language.service.LanguageService;
+import com.model.order.booksinfo.service.BooksInfoService;
 import com.model.order.service.OrderService;
 import com.model.stampfees.service.StampFeesService;
 import com.model.student.service.StudentService;
@@ -70,11 +71,71 @@ public class OrderAction {
                     url = postprintOrder();
                 }else if ("printbooks".equalsIgnoreCase(action)) {
                     url = printBooks();
+                }else if ("booksPurchaseReport".equalsIgnoreCase(action)) {
+                    url = booksPurchaseReport();
+                }else if ("generateBooksPurchasedReport".equalsIgnoreCase(action)) {
+                    url = generateBooksPurchasedReport();
+                }else if ("booksSalesReport".equalsIgnoreCase(action)) {
+                    url = booksSalesReport();
+                }else if ("generateBooksSalesReport".equalsIgnoreCase(action)) {
+                    url = generateBooksSalesReport();
+                }else if ("printSalesReport".equalsIgnoreCase(action)) {
+                    url = printSalesReport();
+                }else if ("booksSalesSummaryReport".equalsIgnoreCase(action)) {
+                    url = booksSalesSummaryReport();
+                }else if ("generateBooksSalesSummaryReport".equalsIgnoreCase(action)) {
+                    url = generateBooksSalesSummaryReport();
+                }else if ("printSalesSummaryReport".equalsIgnoreCase(action)) {
+                    url = printSalesSummaryReport();
                 }
 		return url;
 	}
 
-		
+	private String printSalesSummaryReport() {
+		return "printsalessummaryreport.jsp";
+	}
+	
+	private String generateBooksSalesSummaryReport() {
+		new OrderService(request, response).generateBooksSalesSummaryReport();
+		new BooksInfoService(request, response).viewBooksInfoDetails();
+		 new BranchService(request, response).viewBranches();
+		return "bookssalessummaryreport.jsp";
+	}
+
+	private String booksSalesSummaryReport() {
+		new BooksInfoService(request, response).viewBooksInfoDetails();
+		 new BranchService(request, response).viewBranches();
+		return "bookssalessummaryreport.jsp";
+	}
+
+	private String printSalesReport() {
+		return "printsalesreport.jsp";
+	}
+
+	private String generateBooksSalesReport() {
+		new OrderService(request, response).generateBooksSalesReport();
+		new BooksInfoService(request, response).viewBooksInfoDetails();
+		 new BranchService(request, response).viewBranches();
+		return "bookssalesreport.jsp";
+	}
+
+	private String booksSalesReport() {
+		new BooksInfoService(request, response).viewBooksInfoDetails();
+		 new BranchService(request, response).viewBranches();
+		return "bookssalesreport.jsp";
+	}
+
+	private String generateBooksPurchasedReport() {
+		new OrderService(request, response).generateBooksPurchaseReport();
+		new BooksInfoService(request, response).viewBooksInfoDetails();
+		return "bookspurchasereport.jsp";
+	}
+
+	private String booksPurchaseReport() {
+		new BooksInfoService(request, response).viewBooksInfoDetails();
+		return "bookspurchasereport.jsp";
+	}
+
 	private String printBooks() {
 		return "printbooks.jsp";
 	}

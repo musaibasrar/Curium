@@ -519,7 +519,22 @@ for(Cookie cookie : cookies){
 											</option>
 										</c:forEach>
 								</select>
-							</label></td>
+							</label>
+							
+							<label style="display: none;"> 
+												<select name="state" id="state" style="width: 240px;">
+                                            <option></option>
+                                            <option>Andhra Pradesh</option>
+                                            <option>Goa</option>
+                                            <option>Karnataka</option>
+                                            <option>Maharashtra</option>
+                                            <option>Tamil Nadu</option>
+                                            <option>Telangana</option>
+                                        </select>
+									</label>
+							
+							
+							</td>
 							
 						</tr>
 
@@ -535,7 +550,6 @@ for(Cookie cookie : cookies){
 									style="width: 240px;">
 										<option selected>${ranklistexamlevelsearch}</option>
 										<option></option>
-										<option>ALL</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
 											<option value="${examleveldetails.levelcode}:${examleveldetails.idexamlevel}" >
 												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />

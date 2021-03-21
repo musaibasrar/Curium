@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Print Books
-    Created on : Dec 11 2020, 04:44 PM
+    Document   : PrintSalesReport
+    Created on : Mar 6 1 2021, 04:44 PM
     Author     : Musaib
 --%>
 
@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print Books</title>
+<title>Print Sales Report</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -220,7 +220,7 @@
 				<td class="dataTextBoldCenter" style="width: 100%">
 				BOARD OF ISLAMIC EDUCATION KARNATAKA<br>
 				<label class="addressLine">Books List</label><br>
-				<label class="selectedparameters">${fromdateselected}&nbsp;&nbsp;${todateselected}&nbsp;&nbsp;${titleselected}&nbsp;&nbsp;${authorselected}&nbsp;&nbsp;${languageselected}&nbsp;&nbsp;
+				<label class="selectedparameters">${fromdateselected}&nbsp;&nbsp;${todateselected}&nbsp;&nbsp;${titleselected}&nbsp;&nbsp;${authorselected}&nbsp;&nbsp;${languageselected}&nbsp;&nbsp;${centercodeselected}
 				
 				<br>
 				 </label>
@@ -253,12 +253,14 @@
             
             <thead>
 					<tr>
-						<th title="click to sort" class="datath">Purchased Date</th>
+						<th title="click to sort" class="datath">Order Date</th>
+						<th title="click to sort" class="datath">Center</th>
+						<th title="click to sort" class="datath">Status</th>
 						<th title="click to sort" class="datath">Title</th>
-						<th title="click to sort" class="datath">Language</th>
 						<th title="click to sort" class="datath">Author</th>
-						<th title="click to sort" class="datath">Quantity</th>
-						<th title="click to sort" class="datath">Price/Book</th>
+						<th title="click to sort" class="datath">Language</th>
+						<th title="click to sort" class="datath">Qty</th>
+                        <th title="click to sort" class="datath">Price&nbsp;</th>
 						<th title="click to sort" class="datath">Total Price</th>
 					</tr>
 				</thead>
@@ -267,10 +269,12 @@
 			<c:forEach items="${bookslist}" var="resultlist" varStatus="status">
 
 						<tr>
-							<td class="datatd"><c:out value="${resultlist.purchaseddate}" /></td>
-							<td class="datatd"><a class="dataTextInActive"><c:out	value="${resultlist.title}" /></a></td>
-							<td class="datatd"><c:out value="${resultlist.language}" /></td>
+							<td class="datatd"><c:out value="${resultlist.orderdate}" /></td>
+							<td class="datatd"><c:out value="${resultlist.centercode}" /></td>
+							<td class="datatd"><c:out value="${resultlist.narration}" /></td>
+							<td class="datatd"><c:out value="${resultlist.title}" /></td>
 							<td class="datatd"><c:out value="${resultlist.author}" /></td>
+							<td class="datatd"><c:out value="${resultlist.language}" /></td>
 							<td class="datatd"><c:out value="${resultlist.quantity}" /></td>
 							<td class="datatd"><c:out value="${resultlist.price}" /></td>
 							<td class="datatdright">

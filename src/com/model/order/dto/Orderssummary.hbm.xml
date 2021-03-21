@@ -21,5 +21,11 @@
         <property generated="never" lazy="false" name="narration" optimistic-lock="true" type="string" unique="false">
             <column length="45" name="narration"/>
         </property>
+        <property generated="never" lazy="false" name="discount" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="discount"/>
+        </property>
+        <property generated="never" lazy="false" name="totalafterdiscount" optimistic-lock="true" type="java.lang.Float" unique="false">
+            <column name="totalafterdiscount"/>
+        </property>
     </class>
 </hibernate-mapping>

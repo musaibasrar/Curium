@@ -397,9 +397,13 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
             
-             <h5 style="font-size: 12px"><a href="#" >Order Management</a></h5>
+             <h5 style="font-size: 12px"><a href="#" >Books Management</a></h5>
             <div >
             	<a target="mainFrame" href="Controller?process=OrderProcess&action=booksDetails" style="font-size: 12px;">View/Add/Edit</a><br/>
+            	<a target="mainFrame" href="Controller?process=OrderProcess&action=booksPurchaseReport" style="font-size: 12px;">Purchase Report</a><br/>
+            	<a target="mainFrame" href="Controller?process=OrderProcess&action=booksSalesReport" style="font-size: 12px;">Sales Detail Report</a><br/>
+            	<a target="mainFrame" href="Controller?process=OrderProcess&action=booksSalesSummaryReport" style="font-size: 12px;">Sales Summary Report</a><br/>
+            	<a target="mainFrame" href="Controller?process=BooksInfoProcess&action=viewBooksInfo" style="font-size: 12px;">Books Info</a><br/>
             </div>
             
           <!--    <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>

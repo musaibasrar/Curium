@@ -11,12 +11,14 @@ public class Districts implements java.io.Serializable {
     private Integer iddistrict;
     private String districtname;
     private String districtcode;
+    private String state;
 
     public Districts() {}
 
-    public Districts(String districtname, String districtcode) {
+    public Districts(String districtname, String districtcode, String state) {
         this.districtname = districtname;
         this.districtcode = districtcode;
+        this.state = state;
     }
 
     public Integer getIddistrict() {
@@ -44,5 +46,13 @@ public class Districts implements java.io.Serializable {
     public void setDistrictcode(String districtcode) {
         this.districtcode = districtcode;
     }
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
 
 }

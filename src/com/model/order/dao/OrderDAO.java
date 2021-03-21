@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 
+import com.model.branch.dto.Branch;
 import com.model.order.dto.Books;
 import com.model.order.dto.Ordersdetails;
 import com.model.order.dto.Orderssummary;
@@ -282,6 +283,98 @@ public class OrderDAO {
         }
         return booksList;
      }
+
+	public List<Books> getBooksReport(String query) {
+		
+        List<Books> booksList = new ArrayList<Books>();
+        try {
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(query);
+            booksList = (java.util.List<Books>) HQLquery.list();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {transaction.rollback();
+            hibernateException.printStackTrace();
+        }finally {
+			HibernateUtil.closeSession();
+		}
+        return booksList;
+        }
+
+	public List<Object[]> getBooksSalesReport(String query) {
+		
+		List<Object[]> rows = new ArrayList<Object[]>();
+        try {
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createSQLQuery(query);
+            rows = HQLquery.list();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {transaction.rollback();
+            hibernateException.printStackTrace();
+        }finally {
+			HibernateUtil.closeSession();
+		}
+        return rows;
+        }
+
+	public boolean deliverOrdersConfirmation(List<Orderssummary> orderSummaryList, List<List<Ordersdetails>> listOrderdetails) {
+        
+        boolean result = false;
+        try {
+            transaction = session.beginTransaction();
+            
+            for (Orderssummary orderssummary : orderSummaryList) {
+            	Query query = session.createQuery("update Orderssummary set narration = 'DELIVERED', paymentstatus = '"+orderssummary.getPaymentstatus()+"', discount = '"+orderssummary.getDiscount()+"', totalafterdiscount= '"+orderssummary.getTotalafterdiscount()+"', confirmationdate = current_date()  where idorders = "+orderssummary.getIdorders()+"");
+                query.executeUpdate();
+            }
+            
+            for (List<Ordersdetails> list : listOrderdetails) {
+            	
+            	 for (Ordersdetails ordersdetails : list) {
+                     Query query = session.createQuery("update Books set quantity = quantity-"+ordersdetails.getQuantity()+" where id ="+ordersdetails.getBookid());
+                     query.executeUpdate();
+                 }
+			}
+ 
+            transaction.commit();
+            result = true;
+    } catch (HibernateException hibernateException) {transaction.rollback();
+            hibernateException.printStackTrace();
+    }finally {
+		HibernateUtil.closeSession();
+	}
+            return result;
+}
+
+	public List<Orderssummary> getBooksSalesSummaryReport(String query) {
+		
+        List<Orderssummary> orderSummaryList = new ArrayList<Orderssummary>();
+        try {
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(query);
+            orderSummaryList = (java.util.List<Orderssummary>) HQLquery.list();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {transaction.rollback();
+            hibernateException.printStackTrace();
+        }finally {
+			HibernateUtil.closeSession();
+		}
+        return orderSummaryList;
+        }
+
+	public Branch getBranch(String centerCode) {
+        Branch results = new Branch();
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("From Branch where centercode = '"+centerCode+"'").setCacheable(true).setCacheRegion("commonregion");
+            results = (Branch) query.uniqueResult();
+            transaction.commit();
+        } catch (HibernateException hibernateException) {transaction.rollback();
+            hibernateException.printStackTrace();
+        } finally {
+            HibernateUtil.closeSession();
+            return results;
+        }
+    }
 
 
 }

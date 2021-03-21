@@ -316,6 +316,7 @@ public class ResultService {
 
     public void searchRankListReport() {
         
+    	String state = request.getParameter("state");
         String examLevel = request.getParameter("examlevelcode");
         String examYear = request.getParameter("examyear");
         String centerValue = request.getParameter("centervalue");
@@ -333,9 +334,10 @@ public class ResultService {
         List<List<Result>> resultListFailMain = new ArrayList<List<Result>>();
         List<Subexamlevel> subListMain = new ArrayList<Subexamlevel>();
         String language = null;
+       
         
         
-        if(examLevel.equalsIgnoreCase("ALL")) {
+        if(examLevel.isEmpty()) {
         	
         	 examLevellist = new ExamLevelDetailsDAO().readListOfObjects();
         	 
@@ -351,11 +353,23 @@ public class ResultService {
         		
         		String searchQuery = null;
                 String subQuery =null;
+                String subQueryState = null;
+                List<String> centerCodes = new ArrayList<>();
+                
                 searchQuery = "From Parents as parent where ";
         		
         		String[] examLevelCode = examListIteration.split(":");
         	
-             if(!centerCodeMain.isEmpty()) {
+
+                if(!state.isEmpty()) {
+               	 	List<Branch> branchList = new BranchDAO().getBranchListByState(state);
+               	 	
+               	 	for (Branch branch : branchList) {
+               	 			centerCodes.add(branch.getCentercode());
+					}
+               	  subQueryState = " AND parent.Student.centercode IN (:ids)";
+               	httpSession.setAttribute("rankliststatesearch", state);
+        		}else if(!centerCodeMain.isEmpty()) {
                  String[] centerCode = centerCodeMain.split(":");
                  subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
                  httpSession.setAttribute("ranklistcentersearch", centerCode[0]+":"+centerCode[1]);
@@ -367,6 +381,7 @@ public class ResultService {
                  }
              }else {
                  httpSession.setAttribute("ranklistcentersearch", "");
+                 httpSession.setAttribute("rankliststatesearch", "");
              }
              
              
@@ -436,9 +451,14 @@ public class ResultService {
              }else {
                  httpSession.setAttribute("ranklistacademicsearch","");
              }*/
+             if(subQueryState == null) {
+            	 searchQuery = searchQuery+subQuery+" AND parent.Student.archive = 0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin') Order By parent.Student.admissionnumber ASC";
+             }else {
+            	 searchQuery = searchQuery+subQuery+subQueryState+ " AND parent.Student.archive = 0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin') Order By parent.Student.admissionnumber ASC";
+             }
              
-             searchQuery = searchQuery+subQuery+ " AND parent.Student.archive = 0 AND parent.Student.passedout = 0 AND parent.Student.droppedout = 0 AND (parent.Student.remarks = 'approved' OR parent.Student.remarks = 'admin') Order By parent.Student.admissionnumber ASC";
-             List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
+             
+             List<Parents> parentsList = new studentDetailsDAO().getStudentsListWithParam(searchQuery, centerCodes);
              
              //Query Class Hierarchy to get the exam level (levelcode)
              String subExamYear = examYear.substring(0, 4);

@@ -12,6 +12,7 @@ import com.model.attendance.action.AttendanceAction;
 import com.model.branch.action.BranchAction;
 import com.model.examlevels.action.ExamLevelAction;
 import com.model.hr.action.HrAction;
+import com.model.order.booksinfo.action.BooksInfoAction;
 
 /**
  * Servlet implementation class Controller
@@ -38,9 +39,11 @@ public class AjaxController extends HttpServlet {
             new AttendanceAction(request, response).execute(action);
         }else if("DistrictProcess".equalsIgnoreCase(process)){
             new BranchAction(request, response).execute(action);
+        }else if("BooksInfoProcess".equalsIgnoreCase(process)){
+            new BooksInfoAction(request, response).execute(action);
         }
     }
-
+	
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

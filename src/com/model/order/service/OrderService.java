@@ -18,12 +18,16 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.poi.hpsf.Array;
 
 import com.model.branch.dao.BranchDAO;
 import com.model.branch.dto.Branch;
 import com.model.branch.service.BranchService;
+import com.model.order.booksinfo.dao.BooksInfoDAO;
+import com.model.order.booksinfo.dto.BooksInfo;
 import com.model.order.dao.OrderDAO;
 import com.model.order.dto.Books;
+import com.model.order.dto.BooksSalesReport;
 import com.model.order.dto.Ordersdetails;
 import com.model.order.dto.Orderssummary;
 import com.model.sendsms.service.SmsService;
@@ -51,8 +55,10 @@ public class OrderService {
 	}
 
 	public void bookDetails() {
-                List<Books> booksList = new OrderDAO().readBooks();
+                 List<Books> booksList = new OrderDAO().readBooks();
                  httpSession.setAttribute("bookslist", booksList);
+                 List<BooksInfo> booksInfoList = new BooksInfoDAO().getBooksInfo(); 
+                 request.setAttribute("booksinfolist", booksInfoList);
     }
 
 
@@ -67,6 +73,8 @@ public class OrderService {
         book.setPrice(DataUtil.parseInt(request.getParameter("price")));
         book.setQuantity(DataUtil.parseInt(request.getParameter("quantity")));
         book.setIsbn("DEFAULT");
+        book.setPurchaseddate(DateUtil.datePars(request.getParameter("purchaseddate")));
+        book.setCreateddate(new Date());
         if (!book.getTitle().equalsIgnoreCase("")) {
             result = new OrderDAO().addBooks(book);
         }
@@ -131,17 +139,26 @@ public class OrderService {
         if(httpSession.getAttribute(BRANCHID)!=null) {
             String[] booksIds = request.getParameterValues("booksids");
             String[] quantity = request.getParameterValues("quantity");
-            orderSummary.setCentercode((httpSession.getAttribute(BRANCHID).toString()));
-            orderSummary.setOrderdate(new Date());
-            orderSummary.setNarration("PENDING");
+            String[] price = request.getParameterValues("price");
+            Float grandTotal = 0f;
             
             for (String bookId : booksIds) {
                 Ordersdetails orderDetails = new Ordersdetails();
                 String[] bkId = bookId.split(":");
                 orderDetails.setBookid(Integer.parseInt(bkId[0]));
                 orderDetails.setQuantity(Integer.parseInt(quantity[Integer.parseInt(bkId[1])]));
+                orderDetails.setPrice(Integer.parseInt(price[Integer.parseInt(bkId[1])]));
+                grandTotal = grandTotal + orderDetails.getPrice()*orderDetails.getQuantity();
                 orderDetailsList.add(orderDetails);
             }
+            
+            String centerCodeLogin = httpSession.getAttribute("logincentercode").toString();
+            String[] centerCode = centerCodeLogin.split(":");
+            orderSummary.setCentercode(centerCode[0]);
+            orderSummary.setOrderdate(new Date());
+            orderSummary.setNarration("PENDING");
+            orderSummary.setDiscount(0);
+            orderSummary.setTotalafterdiscount(grandTotal);
             
             boolean confirmation = new OrderDAO().confirmOrderSummary(orderSummary,orderDetailsList);
             if(confirmation) {
@@ -168,7 +185,8 @@ public class OrderService {
        Map<Orderssummary,Branch> SumOrd = new LinkedHashMap<Orderssummary,Branch>();
        
        for (Orderssummary orderssummary : orderSummary) {
-        Branch branch = new BranchDAO().getBranch(Integer.parseInt(orderssummary.getCentercode()));
+        Branch branch = new OrderDAO().getBranch(orderssummary.getCentercode());
+        System.out.println("Branch id is "+branch.getCentername());
         SumOrd.put(orderssummary, branch);
     }
        new BranchService(request, response).viewBranches();
@@ -201,21 +219,48 @@ public class OrderService {
         if(orderIds!=null) {
             List<Integer> ids = new LinkedList<Integer>();
             List<String> paymentStatusList = new LinkedList<String>();
+            List<String> discountList = new LinkedList<String>();
+            List<String> totalList = new LinkedList<String>();
+            List<Orderssummary> orderSummaryList = new ArrayList<Orderssummary>();
+            List<List<Ordersdetails>> listOrderdetails = new ArrayList<List<Ordersdetails>>();
             
             for (String orderid : orderIds) {
                 String[] orId = orderid.split(":");
-                ids.add(Integer.parseInt(orId[0]));
-                paymentStatusList.add(DataUtil.emptyString(paymentStatus[Integer.parseInt(orId[1])]));
+                
+                
+                /*paymentStatusList.add(DataUtil.emptyString(paymentStatus[Integer.parseInt(orId[1])]));
+                discountList.add(DataUtil.emptyString(request.getParameter("discount_"+Integer.parseInt(orId[1]))));
+                totalList.add(DataUtil.emptyString(request.getParameter("total_"+Integer.parseInt(orId[1]))));*/
+                
+                Orderssummary orderSummary = new Orderssummary();
+                Float totalPrice = 0f;
+                orderSummary.setIdorders(Integer.parseInt(orId[0]));
+                orderSummary.setPaymentstatus(DataUtil.emptyString(paymentStatus[Integer.parseInt(orId[1])]));
+                orderSummary.setDiscount(Integer.parseInt(DataUtil.emptyString(request.getParameter("discount_"+Integer.parseInt(orId[1])))));
+                
+                Float discount = (Float.valueOf(DataUtil.emptyString(request.getParameter("total_"+Integer.parseInt(orId[1])))) * Integer.parseInt(DataUtil.emptyString(request.getParameter("discount_"+Integer.parseInt(orId[1])))) ) / 100;
+                totalPrice = Float.valueOf(DataUtil.emptyString(request.getParameter("total_"+Integer.parseInt(orId[1])))) - discount;
+                
+                orderSummary.setTotalafterdiscount(totalPrice);
+                
+                if(!"DELIVERED".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("status_"+Integer.parseInt(orId[1]))))) {
+                	orderSummaryList.add(orderSummary);
+                	ids.add(Integer.parseInt(orId[0]));
+                }
+                
             }
            
               for (Integer id : ids) {
                   List<Ordersdetails> orderDetailsList = new OrderDAO().getOrderDetails(id);
-                   quantityUpdate = new OrderDAO().updateBooksQuantity(orderDetailsList);
+                   //quantityUpdate = new OrderDAO().updateBooksQuantity(orderDetailsList);
+                   listOrderdetails.add(orderDetailsList);
               }
               
-              if(quantityUpdate) {
-                  result = new OrderDAO().deliverOrders(ids,paymentStatusList);
-              }
+                  result = new OrderDAO().deliverOrdersConfirmation(orderSummaryList, listOrderdetails);
+              
+              /*if(quantityUpdate) {
+                  result = new OrderDAO().deliverOrdersConfirmation(orderSummaryList);
+              }*/
         }
         
        request.setAttribute("deliverorders", result);
@@ -301,6 +346,8 @@ public class OrderService {
         httpSession.setAttribute("ordernumber", orderId);
         httpSession.setAttribute("centername", DataUtil.emptyString(request.getParameter("centername")));
         httpSession.setAttribute("orderdate", DataUtil.emptyString(request.getParameter("orderdate")));
+        httpSession.setAttribute("discount", DataUtil.emptyString(request.getParameter("discount")));
+        httpSession.setAttribute("grandtotalafterdiscount", DataUtil.emptyString(request.getParameter("grandtotal")));
         
     }
 
@@ -358,4 +405,248 @@ public class OrderService {
         request.setAttribute("ordersummarylist", SumOrd);
         
         }
+
+	public void generateBooksPurchaseReport() {
+		
+		List<Books> booksList = new ArrayList<Books>();
+		
+		 if(httpSession.getAttribute(BRANCHID)!=null){
+			 
+			 	
+			 	String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondatefrom"));
+			 	String toDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondateto"));
+				String title = request.getParameter("title");
+				String author = request.getParameter("author");
+				String language = request.getParameter("language");
+				
+				String queryMain = "from Books b ";
+				String subQuery = "";
+				
+				if(!fromDate.isEmpty() && !toDate.isEmpty()) {
+					subQuery = "b.purchaseddate between '"+fromDate+"' and '"+toDate+"'";
+					httpSession.setAttribute("fromdateselected", "From:&nbsp;"+fromDate);
+					httpSession.setAttribute("todateselected", "To:&nbsp;"+fromDate);
+				}else {
+					httpSession.setAttribute("fromdateselected", "");
+					httpSession.setAttribute("todateselected", "");
+				}
+				
+				if(!title.isEmpty()) {
+					if(subQuery.isEmpty()) {
+						subQuery = "b.title = '"+title+"'";
+					}else {
+						subQuery = subQuery + " and b.title = '"+title+"'";
+					}
+					httpSession.setAttribute("titleselected", "Title:&nbsp;"+title);
+				}else {
+					httpSession.setAttribute("titleselected", "");
+				}
+				
+				if(!author.isEmpty()) {
+					
+					if(subQuery.isEmpty()) {
+						subQuery = "b.author = '"+author+"'";
+					}else {
+						subQuery = subQuery + " and b.author = '"+author+"'";
+					}
+					httpSession.setAttribute("authorselected", "Author:&nbsp;"+author);
+				}else {
+					httpSession.setAttribute("authorselected", "");
+				}
+				
+				if(!language.isEmpty()) {
+					
+					if(subQuery.isEmpty()) {
+						subQuery = "b.language = '"+language+"'";
+					}else {
+						subQuery = subQuery + " and b.language = '"+language+"'";
+					}
+					httpSession.setAttribute("languageselected", "language:&nbsp;"+language);
+				}else {
+					httpSession.setAttribute("languageselected", "");
+				}
+				
+				if (!subQuery.isEmpty()) {
+					subQuery = " where "+subQuery;
+				}
+				
+				booksList = new OrderDAO().getBooksReport(queryMain+subQuery);
+		 }
+		 
+		 		httpSession.setAttribute("bookslist", booksList);
+		 
+	}
+
+	public void generateBooksSalesReport() {
+		
+		List<BooksSalesReport> booksSalesReportList = new ArrayList<BooksSalesReport>();
+		
+		 if(httpSession.getAttribute(BRANCHID)!=null){
+			 
+			 	
+			 	String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondatefrom"));
+			 	String toDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondateto"));
+				String title = request.getParameter("title");
+				String author = request.getParameter("author");
+				String language = request.getParameter("language");
+				String centercode = request.getParameter("centercode");
+				String status = request.getParameter("status");
+				String[] center = centercode.split("--");
+				
+				String queryMain = "select os.orderdate,os.centercode,b.title,b.author,b.language,od.quantity,od.price,os.narration" + 
+						" from orderssummary os join ordersdetails od on os.idorders = od.orderssummaryid" + 
+						" JOIN books b on od.bookid = b.id ";
+				String subQuery = "";
+				
+				if(!fromDate.isEmpty() && !toDate.isEmpty()) {
+					subQuery = "os.orderdate between '"+fromDate+"' and '"+toDate+"'";
+					httpSession.setAttribute("fromdateselected", "From:&nbsp;"+fromDate);
+					httpSession.setAttribute("todateselected", "To:&nbsp;"+fromDate);
+				}else {
+					httpSession.setAttribute("fromdateselected", "");
+					httpSession.setAttribute("todateselected", "");
+				}
+				
+				if(!title.isEmpty()) {
+					if(subQuery.isEmpty()) {
+						subQuery = "b.title = '"+title+"'";
+					}else {
+						subQuery = subQuery + " and b.title = '"+title+"'";
+					}
+					httpSession.setAttribute("titleselected", "Title:&nbsp;"+title);
+				}else {
+					httpSession.setAttribute("titleselected", "");
+				}
+				
+				if(!author.isEmpty()) {
+					
+					if(subQuery.isEmpty()) {
+						subQuery = "b.author = '"+author+"'";
+					}else {
+						subQuery = subQuery + " and b.author = '"+author+"'";
+					}
+					httpSession.setAttribute("authorselected", "Author:&nbsp;"+author);
+				}else {
+					httpSession.setAttribute("authorselected", "");
+				}
+				
+				if(!language.isEmpty()) {
+					
+					if(subQuery.isEmpty()) {
+						subQuery = "b.language = '"+language+"'";
+					}else {
+						subQuery = subQuery + " and b.language = '"+language+"'";
+					}
+					httpSession.setAttribute("languageselected", "Language:&nbsp;"+language);
+				}else {
+					httpSession.setAttribute("languageselected", "");
+				}
+				
+				if(!centercode.isEmpty()) {
+					
+					if(subQuery.isEmpty()) {
+						subQuery = "os.centercode = '"+center[0]+"'";
+					}else {
+						subQuery = subQuery + " and os.centercode = '"+center[0]+"'";
+					}
+					httpSession.setAttribute("centercodeselected", "Center:&nbsp;"+center[1]);
+				}else {
+					httpSession.setAttribute("centercodeselected", "");
+				}
+				
+				if(!status.isEmpty()) {
+					
+					if(subQuery.isEmpty()) {
+						subQuery = "os.narration = '"+status+"'";
+					}else {
+						subQuery = subQuery + " and os.narration = '"+status+"'";
+					}
+					httpSession.setAttribute("statusselected", "Status:&nbsp;"+status);
+				}else {
+					httpSession.setAttribute("statusselected", "");
+				}
+				
+				if (!subQuery.isEmpty()) {
+					subQuery = " where "+subQuery;
+				}
+				
+				List<Object[]> rows = new OrderDAO().getBooksSalesReport(queryMain+subQuery);
+				
+				for(Object[] row : rows){
+					BooksSalesReport booksSalesReport = new BooksSalesReport();
+					booksSalesReport.setOrderdate(DataUtil.returnValue(row[0]));
+					booksSalesReport.setCentercode(DataUtil.returnValue(row[1]));
+					booksSalesReport.setTitle(DataUtil.returnValue(row[2]));
+					booksSalesReport.setAuthor(DataUtil.returnValue(row[3]));
+					booksSalesReport.setLanguage(DataUtil.returnValue(row[4]));
+					booksSalesReport.setQuantity(DataUtil.returnValue(row[5]));
+					booksSalesReport.setPrice(DataUtil.returnValue(row[6]));
+					booksSalesReport.setNarration(DataUtil.returnValue(row[7]));
+					booksSalesReportList.add(booksSalesReport);
+				}
+		 }
+		 
+		 		httpSession.setAttribute("bookslistreport", booksSalesReportList);
+		 
+	}
+
+	public void generateBooksSalesSummaryReport() {
+		
+		List<Orderssummary> orderSummaryList = new ArrayList<Orderssummary>();
+		
+		 if(httpSession.getAttribute(BRANCHID)!=null){
+			 
+			 	
+			 	String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondatefrom"));
+			 	String toDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondateto"));
+				String centercode = request.getParameter("centercode");
+				String status = request.getParameter("status");
+				String[] center = centercode.split("--");
+				
+				String queryMain = "from Orderssummary os "; 
+				String subQuery = "";
+				
+				if(!fromDate.isEmpty() && !toDate.isEmpty()) {
+					subQuery = "os.orderdate between '"+fromDate+"' and '"+toDate+"'";
+					httpSession.setAttribute("fromdateselected", "From:&nbsp;"+fromDate);
+					httpSession.setAttribute("todateselected", "To:&nbsp;"+fromDate);
+				}else {
+					httpSession.setAttribute("fromdateselected", "");
+					httpSession.setAttribute("todateselected", "");
+				}
+				
+				
+				
+				if(!centercode.isEmpty()) {
+					
+					if(subQuery.isEmpty()) {
+						subQuery = "os.centercode = '"+center[0]+"'";
+					}else {
+						subQuery = subQuery + " and os.centercode = '"+center[0]+"'";
+					}
+					httpSession.setAttribute("centercodeselected", "Center:&nbsp;"+center[1]);
+				}else {
+					httpSession.setAttribute("centercodeselected", "");
+				}
+				
+				if(!status.isEmpty()) {
+					
+					if(subQuery.isEmpty()) {
+						subQuery = "os.narration = '"+status+"'";
+					}else {
+						subQuery = subQuery + " and os.narration = '"+status+"'";
+					}
+					httpSession.setAttribute("statusselected", "Status:&nbsp;"+status);
+				}else {
+					httpSession.setAttribute("statusselected", "");
+				}
+				
+				if (!subQuery.isEmpty()) {
+					subQuery = " where "+subQuery;
+				}
+				
+				orderSummaryList = new OrderDAO().getBooksSalesSummaryReport(queryMain+subQuery);
+		 }
+		 		httpSession.setAttribute("ordersummarylist", orderSummaryList);
+	}
 }
