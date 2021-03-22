@@ -245,7 +245,7 @@
 	width: auto;
 	height: 27px;
 	vertical-align: text-top;
-	text-align: center;
+	text-align: left;
 	background-image:
 		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
@@ -561,6 +561,9 @@
 		$("#saveissueentry").button().click(function() {
 			saveissueentry();
 		});
+		$("#saveissueentry2").button().click(function() {
+			saveissueentry();
+		});
 		$("#effect").hide();
 
 	});
@@ -583,10 +586,6 @@
 	
 	
 	function calculate(value2) {
-		
-		if (value2.which != 8 && value2.which != 0 && (value2.which < 48 || value2.which > 57)) {
-            return false;
- 		}else{
 
  	    	  var availableQuantity=document.getElementById("items_quantity_"+value2).value;
  	        var issueQuantity=document.getElementById("issuequantity_"+value2).value;
@@ -597,17 +596,13 @@
  	      	  document.getElementById("issuequantity_"+value2).value='';
  	        }
  	        
- 	        if(parseInt(issueQuantity)>0 && parseFloat(issueQuantity,10)<parseFloat(availableQuantity,10)){
+ 	        if(parseFloat(issueQuantity)>0 && parseFloat(issueQuantity,10)<parseFloat(availableQuantity,10)){
  	        	document.getElementById("errormessage_"+value2).style.display = 'none';
  	      	  document.getElementById(value2).checked = true;  
  	        }else{
  	      	  document.getElementById(value2).checked = false;
  	        }
  			
- 		}
-
-       
-        
     }
 	 
 	$(function() {
@@ -714,6 +709,21 @@
             alert(e);
         }
     }
+     
+     function writeNumber(number){
+    	 var val = number.id;
+    	 var res = val.split("_")
+    	 document.getElementById("issuequantity_"+res[1]).value += res[0];
+    	 return false;
+     }
+     
+     function deleteNumber(number){
+    	 
+    	 var issueQuantity = document.getElementById("issuequantity_"+number.id).value;
+    	 var newQuantity = issueQuantity.slice(0,-1);
+    	 document.getElementById("issuequantity_"+number.id).value = newQuantity;
+    	 
+     }
     
 </script>
 
@@ -853,11 +863,10 @@ for(Cookie cookie : cookies){
 
 					<thead>
 							<tr>
-								 <th class="headerText" style="display: none;" ><input type="checkbox" /> </th> 
-								<th class="headerText">Item Name</th>
-								<th class="headerText">Unit of Measure</th>
-								<th class="headerText">Available Quantity</th>
-								<th class="headerText">Issue Quantity</th> 
+								 <!-- <th class="headerText" style="display: none;" ><input type="checkbox" /> </th> --> 
+								 <th class="headerText">
+								 	<button id="saveissueentry">Issue</button>
+								</th>
 							</tr>
 						</thead>
 
@@ -865,12 +874,36 @@ for(Cookie cookie : cookies){
 
 						   <c:forEach items="${stocklist}" var="itemlist" varStatus="status">
            							<tr>
-           									<td class="dataText" style="display: none;"><input type="checkbox" class = "chcktbl" name="itemid" id="<c:out value="${itemlist.id}"/>"  value="<c:out value="${itemlist.id}"/>" /></td>
-                							<td class="dataTextLeft"><c:out value="${itemlist.messitems.name}"/></td>
-											<td class="dataText"><c:out value="${itemlist.messitems.unitofmeasure}"/></td>
-											<td class="dataText"><input type="text" value="<c:out value="${itemlist.availablestock}"/>" id="items_quantity_${itemlist.id}" class="textfieldvaluesshorts" style="font-size: 14px;color: black;" disabled="disabled"/></td>
-											<td class="dataText"><input type="text" name="issuequantity_${itemlist.id}" id="issuequantity_${itemlist.id}" class="textfieldvaluesshorts" style="font-size: 14px;" onkeyup="calculate(${itemlist.id})" onkeypress="calculate(${itemlist.id})" onkeydown="calculate(${itemlist.id})" onfocusout="calculate(${itemlist.id})" /><br>
-											<label id="errormessage_${itemlist.id}" style="font-size: 10px;display: none;color: red;">Quantity not in stock</label></td>
+           									<td class="dataText">
+           										<input type="checkbox"  style="display: none;" class = "chcktbl" name="itemids" id="<c:out value="${itemlist.messitems.id}"/>"  value="<c:out value="${itemlist.messitems.id}"/>" /><br>
+	                							<input type="text" value="<c:out value="${itemlist.messitems.name}"/>" name="itemname_${itemlist.messitems.id}" style="display: none;" id="itemname_${itemlist.messitems.id}" />
+	                							<label style="font-size: 14px;font-weight: bold;"><c:out value="${itemlist.messitems.name}"/></label><br><br>
+												<input type="text" value="<c:out value="${itemlist.availablestock}"/>" id="items_quantity_${itemlist.messitems.id}" class="textfieldvaluesshorts" style="font-size: 14px;color: black;" disabled="disabled"/><br>
+												
+													<c:if test="${itemlist.messitems.unitofmeasure == 'Kilogram'}">
+														<c:out value="${itemlist.messitems.unitofmeasure}"/> <label>(10gm=0.01kg, 100gm=0.1kg)</label>
+													</c:if>
+													
+													<c:if test="${itemlist.messitems.unitofmeasure != 'Kilogram'}">
+														<c:out value="${itemlist.messitems.unitofmeasure}"/>
+													</c:if>
+													
+												<br>
+												<input type="button" value="1" id="1_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="button" value="2" id="2_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="button" value="3" id="3_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="button" value="4" id="4_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="button" value="5" id="5_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="button" value="6" id="6_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="button" value="7" id="7_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="button" value="8" id="8_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="button" value="9" id="9_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="button" value="0" id="0_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="button" value="." id="._${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="button" value="Del" id="${itemlist.messitems.id}" onclick="deleteNumber(this);calculate(${itemlist.messitems.id});"/><br>
+												<input type="text" name="issuequantity_${itemlist.messitems.id}" id="issuequantity_${itemlist.messitems.id}" class="textfieldvaluesshorts" style="font-size: 14px;" onkeyup="calculate(${itemlist.messitems.id})" onkeypress="calculate(${itemlist.messitems.id})" onkeydown="calculate(${itemlist.messitems.id})" onfocusout="calculate(${itemlist.messitems.id})" /><br>
+												<label id="errormessage_${itemlist.messitems.id}" style="font-size: 10px;display: none;color: red;">Quantity not in stock</label>
+											</td>
                 					</tr>
 								
 							</c:forEach>
@@ -885,7 +918,7 @@ for(Cookie cookie : cookies){
                     		&nbsp;&nbsp;&nbsp;
                     		<button id="reject">Reject</button> 
                     		&nbsp;&nbsp;&nbsp; -->
-                    		<button id="cancel">Cancel</button>
+                    		<button id="saveissueentry2">Issue</button>
                     		</td>
                         </tr>
                     </tfoot>

@@ -16,6 +16,7 @@ import com.model.account.dto.VoucherEntrytransactions;
 import com.model.mess.item.dao.MessItemsDAO;
 import com.model.mess.item.dto.MessItems;
 import com.model.mess.item.service.MessItemsService;
+import com.model.mess.stockentry.dao.MessStockEntryDAO;
 import com.model.mess.stockentry.dto.MessStockAvailability;
 import com.model.mess.stockentry.dto.MessStockEntry;
 import com.model.mess.stockmove.dao.MessStockMoveDAO;
@@ -48,35 +49,67 @@ public class MessStockMoveService {
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			
 			
-				String[] StockEntryIds = request.getParameterValues("ids");
-				String[] itemsName = request.getParameterValues("itemsname");
+				String[] StockEntryIds = request.getParameterValues("itemids");
+				/*String[] itemsName = request.getParameterValues("itemsname");
 				String[] itemsIds = request.getParameterValues("itemsids");
 				String[] issuequantity = request.getParameterValues("issuequantity");
-				String[] itemunitprice = request.getParameterValues("itemunitprice");
+				String[] itemunitprice = request.getParameterValues("itemunitprice");*/
 				BigDecimal totalValue = BigDecimal.ZERO;
 				
 				List<MessStockMove> messStockMovesList = new ArrayList<MessStockMove>();
 				
 					for(int i=0; i < StockEntryIds.length ; i++){
+						String issueQuantity = request.getParameter("issuequantity_"+StockEntryIds[i]);
+						float reqQty = Float.parseFloat(issueQuantity);
+						//Query stock entry
 						
+							List<MessStockEntry> messStockEntryList = new MessStockEntryDAO().getItemsStockEntry(Integer.parseInt(StockEntryIds[i])); 
+								
+								for (MessStockEntry messStockEntry : messStockEntryList) {
 
-						MessStockMove messStockMove = new MessStockMove();
-						
-						messStockMove.setStockentryid(Integer.parseInt(StockEntryIds[i]));
-						messStockMove.setItemid(Integer.parseInt(itemsIds[i]));
-						messStockMove.setExternalid(itemsName[i]);
-						messStockMove.setQuantity(Float.parseFloat(issuequantity[i]));
-						messStockMove.setPurpose(request.getParameter("purpose"));
-						messStockMove.setTransactiondate(DateUtil.indiandateParser(request.getParameter("transactiondate")));
-						messStockMove.setIssuedto(request.getParameter("issuedto"));
-						messStockMove.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-						messStockMove.setStatus("ACTIVE");
-						messStockMove.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
-						
-						totalValue = totalValue.add(new BigDecimal(issuequantity[i]).multiply(new BigDecimal(itemunitprice[i])));
-						messStockMovesList.add(messStockMove);
+									if(reqQty<messStockEntry.getAvailablequantity()) {
+
+										MessStockMove messStockMove = new MessStockMove();
+										
+										messStockMove.setStockentryid(messStockEntry.getId());
+										messStockMove.setItemid(messStockEntry.getItemid());
+										messStockMove.setExternalid(request.getParameter("itemname_"+StockEntryIds[i]));
+										messStockMove.setQuantity(reqQty);
+										messStockMove.setPurpose(request.getParameter("purpose"));
+										messStockMove.setTransactiondate(DateUtil.indiandateParser(request.getParameter("transactiondate")));
+										messStockMove.setIssuedto(request.getParameter("issuedto"));
+										messStockMove.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+										messStockMove.setStatus("ACTIVE");
+										messStockMove.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+										
+										totalValue = totalValue.add(new BigDecimal(reqQty).multiply(new BigDecimal(messStockEntry.getItemunitprice())));
+										messStockMovesList.add(messStockMove);
+										break;
+									}else if(reqQty>messStockEntry.getAvailablequantity()) {
+
+										MessStockMove messStockMove = new MessStockMove();
+										
+										messStockMove.setStockentryid(messStockEntry.getId());
+										messStockMove.setItemid(messStockEntry.getItemid());
+										messStockMove.setExternalid(request.getParameter("itemname_"+StockEntryIds[i]));
+										messStockMove.setQuantity(messStockEntry.getAvailablequantity());
+										messStockMove.setPurpose(request.getParameter("purpose"));
+										messStockMove.setTransactiondate(DateUtil.indiandateParser(request.getParameter("transactiondate")));
+										messStockMove.setIssuedto(request.getParameter("issuedto"));
+										messStockMove.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+										messStockMove.setStatus("ACTIVE");
+										messStockMove.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+										
+										totalValue = totalValue.add(new BigDecimal(messStockEntry.getAvailablequantity()).multiply(new BigDecimal(messStockEntry.getItemunitprice())));
+										messStockMovesList.add(messStockMove);
+										
+										reqQty -=messStockEntry.getAvailablequantity(); 
+									}
+									
+									
+								}
 					
-				}
+						}
 					
 						//Pass J.V. : credit the assets & debit the Expenses
 						int drStockLedgerIdExpense = getLedgerAccountId("itemaccountidexpense");
