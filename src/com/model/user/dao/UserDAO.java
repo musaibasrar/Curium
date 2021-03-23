@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
+import com.model.branch.dto.Certificateletterhead;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.student.dto.Student;
@@ -222,4 +223,21 @@ public class UserDAO {
    			HibernateUtil.closeSession();
            return login;
        }}
+
+	public Certificateletterhead getCertificateLetterHeadDetails(int branchId) {
+		
+        Certificateletterhead certificateLetterHead = null;
+       try{
+           transaction = session.beginTransaction();
+           Query query = session.createQuery("FROM Certificateletterhead as ch where ch.branchid='"+branchId+"'");
+           certificateLetterHead = (Certificateletterhead) query.uniqueResult();
+           transaction.commit();
+           
+       }catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+           hibernateException.printStackTrace();
+       }finally{
+   			HibernateUtil.closeSession();
+       }
+       return certificateLetterHead;
+	}
 }

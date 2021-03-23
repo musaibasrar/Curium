@@ -481,6 +481,22 @@ public class DocumentService {
 		return result;
 	}
 
+
+	public String generateNoDue() {
+		
+		String[] studentIds = request.getParameterValues("studentIDs");
+		String noDuePage = null;
+		
+		if(studentIds!=null){
+			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
+			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			httpSession.setAttribute("studentdetailsnodue", parents);
+			noDuePage = "noduecertificate.jsp";
+		}
+		
+		return noDuePage;
+	}
+
 	
 	
 }

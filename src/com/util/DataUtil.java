@@ -151,6 +151,18 @@ public class DataUtil {
        } while (mathrandom >= alphaNumericLength);
        return mathrandom;
    }
+   
+   public static String getString(Integer value) {
+       String target="";
+       if(value==null){
+           target="";
+
+       }
+       else{
+           target=Integer.toString(value);
+       }
+       return  target;
+   }
      
     
 

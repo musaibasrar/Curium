@@ -508,7 +508,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 
-							</label> <label> <select name="secsearch" id="secsearch"
+							</label> <%-- <label> <select name="secsearch" id="secsearch"
 									style="width: 100px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -520,7 +520,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 
 								</select>
-							</label>
+							</label> --%>
 						</tr>
 
 						<tr>

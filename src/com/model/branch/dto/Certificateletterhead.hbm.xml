@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23 May, 2018 11:42:50 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.model.branch.dto.Certificateletterhead" table="certificateletterhead">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="institutionname" type="string">
+            <column name="institutionname" />
+        </property>
+         <property name="address" type="string">
+            <column name="address"  />
+        </property>
+        <property name="affiliation" type="string">
+            <column name="affiliation"  />
+        </property>
+        <property name="branchid" type="java.lang.Integer">
+            <column name="branchid"  />
+        </property>
+        <property name="contactnumber" type="string">
+            <column name="contactnumber"  />
+        </property>
+        <property name="email" type="string">
+            <column name="email"  />
+        </property>
+         <property name="logo" type="string">
+            <column name="logo"/>
+        </property>
+    </class>
+</hibernate-mapping>

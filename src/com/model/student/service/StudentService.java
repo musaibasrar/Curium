@@ -1676,22 +1676,48 @@ public class StudentService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
-							"Admitted In Class", "Admission Number", "Admission Date", "Blood Group", "Religion",
-							"Caste", "Fathers Name", "Mothers Name" });
+					new Object[] { "Student Name", "Gender", "Date Of Birth", "Age", "Class Studying","Registration Number", 
+							"Admission Date", "Blood Group", "Nationality", "Religion",	"Caste","Contact Number", 
+								"SSLC Board", "SSLC Registration Number", "SSLC Year Of Passing", "SSLC Total Marks Scored", "SSLC Percentage",
+								"P.U.C/12th Board", "P.U.C/12th Registration Number", "P.U.C/12th Year Of Passing", "P.U.C/12th Total Marks Scored", "P.U.C/12th Percentage",
+								"Father Name", "Father Contact Number", "Mothers Name", "Permanent Address",  "Temporary Address"
+								});
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
+						new Object[] { 
+								
+								 DataUtil.emptyString(studentDetails.getStudent().getName()),  
+								 DataUtil.emptyString(studentDetails.getStudent().getGender()),
 								 DataUtil.emptyString(DateUtil.getStringDate(studentDetails.getStudent().getDateofbirth())),
-								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
+								 DataUtil.emptyString(DataUtil.getString(studentDetails.getStudent().getAge())),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
-								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
 								 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
-								 DataUtil.emptyString(studentDetails.getStudent().getAdmissiondate().toString()),
-								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
-								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
-								 DataUtil.emptyString(studentDetails.getMothersname()) });
+								 DataUtil.emptyString(DateUtil.getStringDate(studentDetails.getStudent().getAdmissiondate())),
+								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  
+								 DataUtil.emptyString(studentDetails.getStudent().getNationality()),
+								 DataUtil.emptyString(studentDetails.getStudent().getReligion()),
+								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),
+								 DataUtil.emptyString(studentDetails.getStudent().getContactnumber()),
+								 
+								 DataUtil.emptyString(studentDetails.getStudent().getTenthboard()),
+								 DataUtil.emptyString(studentDetails.getStudent().getTenthnoofattempts()),
+								 DataUtil.emptyString(studentDetails.getStudent().getTenthyearofpassing()),
+								 DataUtil.emptyString(studentDetails.getStudent().getTenthtotalmarkssecured()),
+								 DataUtil.emptyString(studentDetails.getStudent().getTenthpercentage()),
+								 DataUtil.emptyString(studentDetails.getStudent().getTwelthboard()),
+								 DataUtil.emptyString(studentDetails.getStudent().getTwelthnoofattempts()),
+								 DataUtil.emptyString(studentDetails.getStudent().getTwelthyearofpassing()),
+								 DataUtil.emptyString(studentDetails.getStudent().getTwelthtotalmarkssecured()),
+								 DataUtil.emptyString(studentDetails.getStudent().getTwelthpercentage()),
+								 
+								 DataUtil.emptyString(studentDetails.getFathersname()),
+								 DataUtil.emptyString(studentDetails.getContactnumber()),
+								 DataUtil.emptyString(studentDetails.getMothersname()),
+								 DataUtil.emptyString(studentDetails.getAddresspermanent()),
+								 DataUtil.emptyString(studentDetails.getAddresstemporary())
+				
+							});
 				i++;
 			}
 			Row headerRow = sheet.createRow(0);

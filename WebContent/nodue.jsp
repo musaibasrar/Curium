@@ -1,22 +1,21 @@
 <%--
-    Document   : Stamp Fees
-    Created on : Dec 23, 2011, 5:52:28 PM
+    Document   : nodue
+    Created on : Nov 26, 2016, 10:38:28 AM
     Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>stamp fees</title>
+<title>No Due</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
-
 <style type="text/css">
 <!--
 .divCSS {
@@ -310,12 +309,6 @@
 	src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
 <script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
-
-<script type="text/javascript" src="js/globalize.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/globalize.cultures.js"></script>
-
-<script type="text/javascript"
-	src="js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
@@ -363,9 +356,9 @@
 
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchForFees() {
+	function searchStudentsForNoDue() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StampFeesProcess&action=search";
+		form1.action = "Controller?process=DocumentsProcess&action=searchStudentsForNoDue";
 		form1.method = "POST";
 		form1.submit();
 
@@ -374,7 +367,7 @@
 	$(function() {
 
 		$("#search").button().click(function() {
-			searchForFees();
+			searchStudentsForNoDue();
 		});
 		
 
@@ -384,34 +377,11 @@
 
 		$("#tabs").tabs();
 
-		$("#save").button().click(function() {
-			addDepartment();
-		});
-		/* $("#effect").hide(); */
 
 	});
 	
 	$(function() {
-		$("#delete").button({
-			icons : {
-				primary : "ui-icon-trash"
-			}
-		}).click(function() {
-			deleteRecords();
-			return false;
-
-		});
-		$("#deleteStamp").button({
-			icons : {
-				primary : "ui-icon-trash"
-			}
-		}).click(function() {
-			if (confirm('Are you sure you want to delete the stamp fees?As it can not be revert back.')) {
-			deleteFeesStamp();
-			}
-			return false;
-
-		});
+		
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
 			var trLength = $('.trClass').length;
@@ -441,15 +411,10 @@
 			}
 		});
 
-		$("#go").button()
+		$("#generatecertificate").button()
+
 	});
-	
-	function deleteFeesStamp(){
-		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StampFeesProcess&action=delete";
-		form1.method = "POST";
-		form1.submit();
-	}
+
 </script>
 
 
@@ -462,7 +427,7 @@
                 sum += parseFloat($(this).val());
             });
             
-            $('#feesTotalAmount').val(sum);
+            $('#feesTotalAmount').val(sum.toPrecision(6));
 
         }
         $(document).ready(function() {
@@ -477,7 +442,7 @@
                     sum += parseFloat($(this).val());
                 });
                 
-                $('#feesTotalAmount').val(sum);
+                $('#feesTotalAmount').val(sum.toPrecision(6));
                 
             });
             $("#dataTable").click(function(){
@@ -489,22 +454,14 @@
                     sum += parseFloat($(this).val());
                 });
                 
-                $('#feesTotalAmount').val(sum);
+                $('#feesTotalAmount').val(sum.toPrecision(6));
                
             });
 
 
         });
         
-        var feescat=[
-                     <c:forEach varStatus="status" items="${feescategory}" var="fees">{
-                             value:'<c:out default="0" value="${fees.feescategoryname}" />',
-                             particularname:'<c:out default="0" value="${fees.particularname}" />',
-                             price:'<c:out default="0" value="${fees.amount}" />',
-                             id:'<c:out default="0" value="${fees.idfeescategory}" />'
-                             }<c:if test="${!status.last}">,</c:if>
-                     </c:forEach>
-                     ];
+    
         
         $(function() {
             
@@ -544,78 +501,20 @@
 
         	var feesCount=document.getElementById("feesCount_"+value2).value;
         	
-        	        	
+        	if(feesCount === ''){
+        		
+        		document.getElementById("feesCount_"+value2).value = 1;
+        	}
+        	
+            //var val1=value1.value;
             var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
             var feesCount=document.getElementById("feesCount_"+value2).value;
-            var feesConcession=document.getElementById("feesConcession_"+value2).value;
             var final1=document.getElementById("hiddenfees_full_amount_"+value2);
-            	
-            	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
-            	//feesConcession (direct amount)
-                final1.value=(feesCat*feesCount)-feesConcession;
+            
+                final1.value=(feesCat*feesCount).toPrecision(6);
            
         }
        
-    function addRow() {
-        var rowCount = document.getElementById('dataTable').rows.length;    
-        var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=fees_"+rowCount+" /><input type='hidden' class='feesStatus' name='feesStatuses' id=fees_status_"+rowCount+" value='not set' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+rowCount+" value='' /></td>";
-        var col2="<td class='dataTextInActive'><input class='feesName'   type='text' name='feesNames' id=fees_name_"+rowCount+" onkeyup='calculate("+rowCount+")' onclick='calculate("+rowCount+");'/></td>";
- 	    /* var col3="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'   name='fessCat'  id=hiddenfees_amount_"+rowCount+"/></td>"; */
-        /* var col4="<td class='dataTextInActive'><input type='text' value='0' onclick='SelectAll("+rowCount+");calculate("+rowCount+");' onfocus='SelectAll("+rowCount+")' onkeyup='calculate("+rowCount+")' name='feesCount' id=feesCount_"+rowCount+" /></td>";
-        var col5="<td class='dataTextInActive'><input type='text' value='0' onclick='calculate("+rowCount+");' onkeyup='calculate("+rowCount+")' name='feesConcession' id=feesConcession_"+rowCount+" /></td>"; */
-        var col3="<td class='dataTextInActive'><input class='feesFullAmount' type='text' value='0'   name='fessFullCat'  id=hiddenfees_full_amount_"+rowCount+" /></td>";
-        /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-        /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-        /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
-        var newRow = $("<tr class='trClass'>"+col1+col2+col3+"</tr>");
-        $(function() {
-            $("#dataTable").find('tbody').append(newRow);
-        });
-        $(function() {
-            $("#fees_name_"+rowCount).autocomplete({
-                source: feescat,
-                minLength: 1,
-                change:function(event,ui){
-
-                    $("#fees_id_"+rowCount ).val( ui.item.id );
-                    $( "#fees_status_"+rowCount ).val("set");
-                   /*  $("#hiddenfees_amount_"+rowCount).val( ui.item.price ); */
-                    $("#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
-                   
-
-                },
-                focus: function( event, ui ) {
-                    $( "#fees_name_"+rowCount).val( ui.item.name );
-                    $( "#fees_status_"+rowCount ).val("not set");
-                    $( "#fees_id_"+rowCount ).val( ui.item.id );
-                    /* $( "#hiddenfees_amount_"+rowCount).val( ui.item.price ); */
-                    $( "#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
-                   
-
-                    return true;
-                },
-                select: function( event, ui ) {
-                    $( "#fees_name_"+rowCount).val( ui.item.value );
-                    $( "#fees_id_"+rowCount ).val( ui.item.id );
-                    $( "#fees_status_"+rowCount ).val("set");
-                    /* $( "#hiddenfees_amount_"+rowCount).val( ui.item.price ); */
-                    $( "#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
-                   
-                    return true;
-                }
-            }).data( "autocomplete" )._renderItem = function( ul, item ) {
-                return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +":-</b> <b> "+item.particularname +"</b></a>" )
-                .appendTo( ul );
-            };
-
-        });
-
-
-
-    }
-    
     function selectAllRow(tableID){
         var table = document.getElementById(tableID);
         var rowCount = table.rows.length;
@@ -658,7 +557,7 @@
             });
             totalSum=sum;
             
-            $('#feesTotalAmount').val(totalSum);
+            $('#feesTotalAmount').val(totalSum.toPrecision(6));
             
             calculateGrandTotal();
             //$('#grandTotalAmount').val(0);
@@ -666,7 +565,21 @@
             alert(e);
         }
     }
+    
+	function fileCheck() {
+		
+		if (document.getElementById("fileName").value.length == 0)
+
+		{
+			document.getElementById("fileName").style.background = 'red';
+			alert("Enter The File Name ");
+		}
+
+	}
+
         </script>
+
+
 
 </head>
   <%
@@ -686,12 +599,16 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=StampFeesProcess&action=applyFees" method="POST">
-    
+	<form id="form1" action="Controller?process=DocumentsProcess&action=GenerateNoDue" method="POST">
+		<!-- <div style="height: 28px">
+			<button id="add">Add Department</button>
+			<br />
+		</div> -->
+
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Stamp Fees</a></li>
+					<li><a href="#tabs-1">No Due Certificate</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -711,48 +628,23 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
-						
-						<tr>
-							<td></td>
-							
-							<td class="alignRightFields">OR</td>
 
-						</tr>
-					
-						<tr>
-							<td><br /></td>
-
-						</tr>
 
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="90%"><label> 
-								<select name="classsearch" id="classsearch"
-									style="width: 120px;">
+							<td width="70%"><label> <select name="classsearch"
+									id="classsearch" style="width: 235px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}">
+											<option value="${classdetailslist.classdetails}" >
 												<c:out value="${classdetailslist.classdetails}" />
 											</option>
-										</c:if>
+										</c:if>	
 										</c:forEach>
 								</select>
 
-							</label> <label> 
-									<select name="secsearch" id="secsearch"
-									style="width: 120px;">
-										<option selected></option>
-
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.section != '')}">
-											<option value="${classdetailslist.section}">
-												<c:out value="${classdetailslist.section}" />
-											</option>
-										</c:if>
-										</c:forEach>
-								</select>
-							</label>
+							</label> 
 						</tr>
 
 						<tr>
@@ -776,41 +668,8 @@ for(Cookie cookie : cookies){
 						</tr>
 
 					</table>
-					<div class="alignRightFields">
-
-						Fees Category:
-						<button id="addFeesCat">Add</button>
-						<button id="removeFeesCat">Remove</button>
-						<input
-									name="currentyear" type="hidden" value="${currentYear}" class="myclass" id="currentyear"
-									size="36"">
-					</div>
-					<TABLE id="dataTable" width="100%" border="0">
-						<thead>
-							<tr>
-								<td class="headerText"><INPUT type="checkbox"
-									id="selectAll" name="selectAll"
-									onclick="selectAllRow('dataTable')" /></td>
-								<td class="headerText">Fees Category</td>
-								<td class="headerText">Fees Amount</td>
-
-
-
-							</tr>
-						</thead>
-						<tbody>
-
-						</tbody>
-						<tfoot>
-							<tr>
-
-								<td colspan="2" align="right">Total&nbsp;&nbsp;</td>
-								<td align="center"><input type="text"
-									name="feesTotalAmount" id="feesTotalAmount" value="0" /></td>
-							</tr>
-
-						</tfoot>
-					</TABLE>
+					
+					
 
 				</div>
 			</div>
@@ -828,10 +687,12 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">UIN</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
+						<th title="click to sort" class="headerText">Father's Name</th>
+						<th title="click to sort" class="headerText">Mother's Name</th>	
 						<th title="click to sort" class="headerText">Admission Date</th>
 
 
@@ -848,14 +709,18 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
-							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out
+										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
+							<td class="dataText"><c:out
+									value="${Parents.fathersname}" /></td>
+							<td class="dataText"><c:out
+									value="${Parents.mothersname}" /></td>
 							<td class="dataText">
-							 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
-								    ${splt} 
-									</c:forEach>
+									<c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>
+							</td>				
 							<td class="dataText"><c:out
 									value="${Parents.student.admissiondate}" /></td>
 
@@ -865,10 +730,11 @@ for(Cookie cookie : cookies){
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"><input value="Apply"
-							type="submit" id="delete" />
-							<!-- <input value="Delete Stamp Fees"
-							type="submit" id="deleteStamp" /> --></td>
+													
+						<td class="footerTD" colspan="2"> &nbsp;
+						<input value="Generate Certificate"
+							type="submit" id="generatecertificate"/></td>
+							
 							
 
 					</tr>

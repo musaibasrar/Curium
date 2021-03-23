@@ -1,5 +1,5 @@
 <%-- 
-    Document   : bonafide certificate
+    Document   : No Due Print
     Created on : Mar 17 2018, 12:32 PM
     Author     : Musaib
 --%>
@@ -15,7 +15,6 @@
 <head>
 
 <style type="text/css">
-<!--
 .headerText {
 	width: 10px;
 	font-family: Tahoma;
@@ -49,11 +48,37 @@
 	text-align: center;
 }
 
+
 .dataTextBoldLeft {
 	font-weight: normal;
 	font-family: Tahoma;
 	color: black;
-	font-size: 12px;
+	font-size: 14px;
+	letter-spacing: normal;
+	text-align: left;
+	border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+.dataTextBoldLeftDetails {
+	font-weight: normal;
+	font-family: Tahoma;
+	color: black;
+	font-size: 14px;
+	letter-spacing: normal;
+	text-align: left;
+	border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+  width: 300px;
+}
+
+.dataTextBoldLeftDate {
+	font-weight: normal;
+	font-family: Tahoma;
+	color: black;
+	font-size: 14px;
 	letter-spacing: normal;
 	text-align: left;
 }
@@ -83,7 +108,6 @@
 	letter-spacing: normal;
 	text-align: center;
 }
--->
 
 span{
     display:inline-block;
@@ -97,6 +121,7 @@ span{
     position:absolute;
     bottom:0px;
 }
+
 </style>
 
 
@@ -224,7 +249,6 @@ for(Cookie cookie : cookies){
 					<br>
 					<label class="addressLine">${certaffiliation}</label>
 					</c:if>
-				</td>
 			</tr>
 		</table>
 
@@ -243,7 +267,7 @@ for(Cookie cookie : cookies){
 		</c:if>
 		<table>
 			<tr>
-			<td class="dataTextBoldLeft">
+			<td class="dataTextBoldLeftDate">
 			<br><br>
 				Date:&nbsp;&nbsp;
 				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
@@ -252,9 +276,9 @@ for(Cookie cookie : cookies){
 			</tr>
 			
 			<tr>
-				<td colspan="3" style="font-weight: bold;font-family: Tahoma;color: black;font-size: 22px;letter-spacing: normal;text-align: center;padding-left: 50px;">
+				<td colspan="4" style="font-weight: bold;font-family: Tahoma;color: black;font-size: 22px;letter-spacing: normal;text-align: center;padding-left: 200px;">
 					<br>
-					<u>BONAFIDE CERTIFICATE</u>
+					<u>No Due</u>
 					<br><br>
 				</td>
 			</tr>
@@ -266,71 +290,106 @@ for(Cookie cookie : cookies){
 			<td></td>
 			
 			</tr>
-			
 			<tr>
+				<td>
+					<table style="border-collapse: collapse;margin-left: 150px;">
+			<tr>
+			
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					with Registration Number &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:50px;"><c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span>
-					</h3>
+					Student Name: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeftDetails">
+					 <c:out value="${studentdetailsnodue.student.name}" />
 				</td>
 			</tr>
 			<tr>
-			<td></td>
+			
+				<td class="dataTextBoldLeft" >
+					UIN: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeftDetails">
+					<c:out value="${studentdetailsnodue.student.studentexternalid}" />
+				</td>
 			</tr>
 			<tr>
-				
+			
+				<td class="dataTextBoldLeft" >
+					Registration Number: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeftDetails">
+					<c:out value="${studentdetailsnodue.student.admissionnumber}" />
+				</td>
+			</tr>
+			<tr>
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					is a student of &nbsp;&nbsp; <span style="font-weight: bold;width: 100px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+					Father Name: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeftDetails">
+					<c:out value="${studentdetailsnodue.fathersname}" />
+				</td>
+			</tr>
+			<tr>
+				<td class="dataTextBoldLeft">
+					Course: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeftDetails">
+					
+								
+								<c:forEach var="splt" items="${fn:split(studentdetailsnodue.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
-					</span>
-					
-					</h3>
 				</td>
-			
 			</tr>
 			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft"  >
-				
-				<h3 style="font-weight: normal;" >
-					
-					for the academic year <span style="font-weight: bold;width: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;${currentAcademicYear}</span>
-					He/She is a bonafide student of our college.
-					</h3>
+				<td class="dataTextBoldLeft">
+					College Fees: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeftDetails">
 					
 				</td>
+			</tr>
+			<tr>
+				<td class="dataTextBoldLeft">
+					Exam Fees: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeftDetails">
+					
+				</td>
+			</tr>
+			<tr>
+				<td class="dataTextBoldLeft">
+					Library Due: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeftDetails">
+					
+				</td>
+			</tr>
+			<tr>
+				<td class="dataTextBoldLeft">
+					Laboratory Due: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeftDetails">
+					
+				</td>
+			</tr>
+			</table>
 				
-
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td><br><br><br><br><br><br></td>
-			</tr>
-			<tr>
+				</td>
+			</tr>					
 			
-			<td align="left" style="padding-left: 50px;">
-			<label style="margin-right: 450px;">Clerk</label>
-			<label>Principal</label>
-			</td>	
-		</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
 		</table>
 		
 
-		<!-- <TABLE id="dataTable" width="100%" border="0"
+		<TABLE id="dataTable" width="100%" border="0"
 			style="border-collapse: collapse;">
 
 			<tr>
@@ -346,9 +405,9 @@ for(Cookie cookie : cookies){
 			</tr>
 		<tr>
 		<td></td>
-			<td align="left">Clerk</td>	
-			<td align="center">College Seal</td>
-			<td align="center">Principal</td>
+			<td align="left">Accountant Sign</td>	
+			<td align="center">Librarian Sign</td>
+			<td align="center">Lab Assistant Sign</td>
 		</tr>
 		        <tr>
 			<td>
@@ -399,41 +458,39 @@ for(Cookie cookie : cookies){
 			<br>
 			</td>
 			</tr>
-		</TABLE> -->
+		</TABLE>
 		<c:if test="${(letterheadvalue)}">
 			<div id="letterheadfooter" style="width: 100%">
-					<TABLE  width="100%" border="1" style="border-collapse:collapse;color: #172277;">
-		                <tr>
-		                    <td colspan="4" ></td>
-		                </tr>
-		            </TABLE>
-	            
-		            <table width="100%" style="page-break-after: always; border-collapse:collapse;">
-		         	    <tr>
-		                    <td colspan="4" ></td>
-		                </tr>
-		            	<tr>
-		            		<td>
-		            		<c:if test="${(certaddress != '')}">
-		            		<img src="images/map.svg" width="25" height="25" alt="email" style="vertical-align: bottom;"/>
-							<label style="color: #121298;">${certaddress}</label>
-							</c:if>
-		            		</td>
-		                	<td align="right">
-		                	<p>
-		                	<c:if test="${(certcontactnumber != '')}">
-		                	  <img	src="images/phone.svg" width="25" height="25" alt="phone" style="vertical-align: bottom;"/><label style="color: #121298;">${certcontactnumber}
-		                	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-		                	</c:if>
-		                	<c:if test="${(certemail != '')}">
-		                	<img src="images/email.svg" width="25" height="25" alt="email" style="vertical-align: bottom;"/><label style="color: #121298;">${certemail}</label></p>
-		                	</c:if>
-		                	</td>
-		                	<td align="right">
-		                		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-		                	</td>
-		                </tr>
-		            </table>
+			<TABLE  width="100%" border="1" style="border-collapse:collapse;color: #172277;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
+            <table width="100%" style="page-break-after: always; border-collapse:collapse;">
+            	<tr>
+            		<td>
+            		<c:if test="${(certaddress != '')}">
+            		<img src="images/map.svg" width="25" height="25" alt="email" style="vertical-align: bottom;"/>
+					<label style="color: #121298;">${certaddress}</label>
+					</c:if>
+            		</td>
+                	<td align="right">
+                	<p>
+                	<c:if test="${(certcontactnumber != '')}">
+                	  <img	src="images/phone.svg" width="25" height="25" alt="phone" style="vertical-align: bottom;"/><label style="color: #121298;">${certcontactnumber}
+                	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                	</c:if>
+                	<c:if test="${(certemail != '')}">
+                	<img src="images/email.svg" width="25" height="25" alt="email" style="vertical-align: bottom;"/><label style="color: #121298;">${certemail}</label></p>
+                	</c:if>
+                	</td>
+                	<td align="right">
+                		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                	</td>
+                </tr>
+            </table>
             </div>
             </c:if>
 	</form>

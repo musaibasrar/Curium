@@ -853,11 +853,15 @@ for(Cookie cookie : cookies){
 
 							</label></td>
  --%>
- 							<td  class="alignRight">Caste Certificate No.</td>
-							<td width="28%"><label> <input 
-										style="width: 260px;height: 30px;border-radius: 5px;font-size: 16px;background-color: white"
-									name="studentscastecertno" type="text" class="textField" value="${student.studentscastecertno}"
-									id="studentscastecertno" size="36">
+ 							<td  class="alignRight">State</td>
+							<td width="28%"><label> 
+									
+									<select name="studentscastecertno"
+									id="studentscastecertno" style="width: 260px;height: 30px;border-radius: 5px;font-size: 16px;background-color: white" onkeypress="return validateContactNum(this);">
+										<option selected>${student.studentscastecertno}</option>
+										<option>Karnataka</option>
+										<option>Non-Karnataka</option>
+								</select>
 
 							</label></td>
 
@@ -1540,16 +1544,23 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 
+							
+							<td  class="alignRight">Annual Income &nbsp;</td>
 
+							<td width="28%"><label> <input name="annualincome" style="font-size: 16px;"
+									type="text" class="textField" id="annualincome" size="26"
+									value="<c:out default="" value="${parents.parentsannualincome}" />" onkeyup="numberWithCommas(this);">
 
-							<td  class="alignRight">CO-Contact Number &nbsp;</td>
+							</label></td>
+
+							<%-- <td  class="alignRight">CO-Contact Number &nbsp;</td>
 
 							<td width="28%"><label> <input
 									name="cocontactnumber" type="text" class="textField"
 									id="cocontactnumber" size="26" style="font-size: 16px;"
 									value="<c:out default="" value="${parents.cocontactnumber}" />">
 
-							</label></td>
+							</label></td> --%>
 						</tr>
 
 						<tr>
@@ -1596,15 +1607,12 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 
-
-
-							<td  class="alignRight">Annual Income &nbsp;</td>
-
-							<td width="28%"><label> <input name="annualincome" style="font-size: 16px;"
-									type="text" class="textField" id="annualincome" size="26"
-									value="<c:out default="" value="${parents.parentsannualincome}" />" onkeyup="numberWithCommas(this);">
-
+							<td class="alignRight">Notes &nbsp;</td>
+							<td width="28%"><label> <input name="remarksadditional" style="font-size: 16px;"
+									type="text" class="textField" id="remarksadditional" size="26"
+									value="<c:out default="" value="${parents.remarks}" />">
 							</label></td>
+
 						</tr>
 
 						<tr>
@@ -1662,27 +1670,6 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr> --%>
 
-						<tr>
-
-							<td class="alignRight">Notes &nbsp;</td>
-							<td width="28%"><label> <input name="remarksadditional" style="font-size: 16px;"
-									type="text" class="textField" id="remarksadditional" size="26"
-									value="<c:out default="" value="${parents.remarks}" />">
-							</label></td>
-
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						
-	
 								<tr>
 									<td></td>
 									<td></td>
@@ -2017,7 +2004,7 @@ for(Cookie cookie : cookies){
 											<th class="educationtableheaderdescription">Educational Qualification</th>
 											<th class="educationtableheaderdescription">Name of the Board</th>
 											<th class="educationtableheaderdescription">Year of Passing</th>
-											<!-- <th class="educationtableheaderdescription">No. of Attempts</th> -->
+											<th class="educationtableheaderdescription">Registration No.</th>
 											<th class="educationtableheaderdescription">Total Marks Scored</th>
 											<th class="educationtableheaderdescription">% Secured</th>
 										
@@ -2043,13 +2030,13 @@ for(Cookie cookie : cookies){
 									style="text-transform:uppercase;height: 30px;font-size: 13px;font-weight: bold;border-radius: 5px;font-size: 16px"
 									id="tenthyearofpassing" size="5">
 											</td>
-											<%-- <td  class="educationtableheaderdescription" style="font-weight: bold;">
+											<td  class="educationtableheaderdescription" style="font-weight: bold;">
 												<input
 									name="tenthnoofattempts" type="text" class="myclass"
 									value="<c:out default="" value="${student.tenthnoofattempts}" />"
 									style="text-transform:uppercase;height: 30px;font-size: 13px;font-weight: bold;border-radius: 5px;font-size: 16px"
 									id="tenthnoofattempts" size="5">
-											</td> --%>
+											</td>
 											<td  class="educationtableheaderdescription" style="font-weight: bold;">
 												<input
 									name="tenthtotalmarkssecured" type="text" class="myclass"
@@ -2083,13 +2070,13 @@ for(Cookie cookie : cookies){
 									style="text-transform:uppercase;height: 30px;font-size: 13px;font-weight: bold;border-radius: 5px;font-size: 16px"
 									id="twelthyearofpassing" size="5">  
 											</td>
-											<%-- <td  class="educationtableheaderdescription" style="font-weight: bold;">
+											<td  class="educationtableheaderdescription" style="font-weight: bold;">
 												<input
 									name="twelthnoofattempts" type="text" class="myclass"
 									value="<c:out default="" value="${student.twelthnoofattempts}" />"
 									style="text-transform:uppercase;height: 30px;font-size: 13px;font-weight: bold;border-radius: 5px;font-size: 16px"
 									id="twelthnoofattempts" size="5">  
-											</td> --%>
+											</td>
 											<td  class="educationtableheaderdescription" style="font-weight: bold;">
 												<input
 									name="twelthtotalmarkssecured" type="text" class="myclass"

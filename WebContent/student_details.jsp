@@ -547,7 +547,7 @@ for(Cookie cookie : cookies){
                             </td>
  --%>
                                       
-                            <td   class="alignRight" height="30" >Caste Certificate No.
+                            <td   class="alignRight" height="30" >State
                             </td>
                             <td class="tablerows" >
                                 <c:out default="" value="${student.studentscastecertno}" />
@@ -743,7 +743,7 @@ for(Cookie cookie : cookies){
 											<th class="educationtableheaderdescription">Educational Qualification</th>
 											<th class="educationtableheaderdescription">Name of the Board</th>
 											<th class="educationtableheaderdescription">Year of Passing</th>
-											<!-- <th class="educationtableheaderdescription">No. of Attempts</th> -->
+											<th class="educationtableheaderdescription">Registration No.</th>
 											<th class="educationtableheaderdescription">Total Marks Scored</th>
 											<th class="educationtableheaderdescription">% Secured</th>
 										
@@ -761,9 +761,9 @@ for(Cookie cookie : cookies){
 											<td  class="educationtabledetaildescription" style="font-weight: bold;">
 											<c:out default="" value="${student.tenthyearofpassing}" />
 											</td>
-											<%-- <td  class="educationtabledetaildescription" style="font-weight: bold;">
+											<td  class="educationtabledetaildescription" style="font-weight: bold;">
 												<c:out default="" value="${student.tenthnoofattempts}" />
-											</td> --%>
+											</td>
 											<td  class="educationtabledetaildescription" style="font-weight: bold;">
 												<c:out default="" value="${student.tenthtotalmarkssecured}" />
 											</td>
@@ -781,9 +781,9 @@ for(Cookie cookie : cookies){
 											<td  class="educationtabledetaildescription" style="font-weight: bold;">
 												<c:out default="" value="${student.twelthyearofpassing}" />
 											</td>
-											<%-- <td  class="educationtabledetaildescription" style="font-weight: bold;">
+											<td  class="educationtabledetaildescription" style="font-weight: bold;">
 												<c:out default="" value="${student.twelthnoofattempts}" />
-											</td> --%>
+											</td>
 											<td  class="educationtabledetaildescription" style="font-weight: bold;">
 												<c:out default="" value="${student.twelthtotalmarkssecured}" />
 											</td>
@@ -1142,11 +1142,16 @@ for(Cookie cookie : cookies){
                             <td   class="tablerows">
                                 <c:out default="" value="${parents.contactnumber}" />
                             </td>
-                            <td  class="alignRight" height="30">Co-Contact Number
+                            <td  class="alignRight" height="30" >Annual Income
+                            </td>
+                            <td  class="tablerows">
+                                <c:out default="" value="${parents.parentsannualincome}" />
+                            </td>
+                           <%--  <td  class="alignRight" height="30">Co-Contact Number
                             </td>
                             <td class="tablerows">
                                 <c:out default="" value="${parents.cocontactnumber}" />
-                            </td>
+                            </td> --%>
                         </tr>
                         
                         <tr>
@@ -1170,11 +1175,13 @@ for(Cookie cookie : cookies){
                                  <c:out value="${student.guardiandetails}" />
                                 
                             </td>
-                            <td  class="alignRight" height="30" >Annual Income
+                            
+                            <td   class="alignRight" height="30">Notes
                             </td>
-                            <td  class="tablerows">
-                                <c:out default="" value="${parents.parentsannualincome}" />
-                            </td>
+                            <td class="tablerows" >
+                                <c:out default="" value="${parents.remarks}" />
+							</td>	
+                            
                         </tr>
                         
                        <%-- <tr>
@@ -1205,18 +1212,14 @@ for(Cookie cookie : cookies){
                         </tr> --%>
                         
                        
-					<tr>
+					<%--	<tr>
 								
-								<td   class="alignRight" height="30">Notes
-                            </td>
-                            <td class="tablerows" >
-                                <c:out default="" value="${parents.remarks}" />
-							</td>	
-						<%-- <td class="alignRight" height="30">Number Of
+								
+						 <td class="alignRight" height="30">Number Of
 							Dependents</td>
 						<td class="tablerows"><c:out default=""
-								value="${parents.noofdependents}" /></td> --%>
-					</tr>
+								value="${parents.noofdependents}" /></td> 
+					</tr>--%>
 					
 					
                         <%-- <tr>
@@ -1340,7 +1343,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Fees Paid&nbsp;</th>
                             <th title="click to sort" class="headerText">Due Amount&nbsp;</th>
-                            <th title="click to sort" class="headerText">Concession&nbsp;</th>
+                            <!-- <th title="click to sort" class="headerText">Concession&nbsp;</th> -->
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
@@ -1362,10 +1365,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feespaid}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feesamount-feesstructure.feespaid}"/></td>
-                                <td class="dataText"><c:out value="${feesstructure.concession}"/></td>
-                                
-                                 
-
+                                <%-- <td class="dataText"><c:out value="${feesstructure.concession}"/></td> --%>
                             </tr>
                         </c:forEach>
                         

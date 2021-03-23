@@ -55,7 +55,7 @@ public class PrintIdsService {
 					.getParameter("namesearch"));
 
 			String addClass = request.getParameter("classsearch");
-			String addSec = request.getParameter("secsearch");
+			//String addSec = request.getParameter("secsearch");
 			String conClassStudying = "";
 
 			if (!addClass.equalsIgnoreCase("")) {
@@ -63,10 +63,10 @@ public class PrintIdsService {
 				conClassStudying = addClass+"--" +"%";
 
 			}
-			if (!addSec.equalsIgnoreCase("")) {
+			/*if (!addSec.equalsIgnoreCase("")) {
 				conClassStudying = addClass;
 				conClassStudying = conClassStudying+"--"+addSec+"%";
-			}
+			}*/
 
 			String classStudying = DataUtil.emptyString(conClassStudying);
 			String querySub = "";
@@ -119,10 +119,11 @@ public class PrintIdsService {
                    httpSession.setAttribute("studentname" + i + "", parentsDetails.getStudent().getName());
                    httpSession.setAttribute("fathersname" + i + "", parentsDetails.getFathersname());
                    httpSession.setAttribute("class" + i + "", parentsDetails.getClass());
-                   httpSession.setAttribute("Address" + i + "", parentsDetails.getAddresspermanent());
-                   httpSession.setAttribute("Contactnumber" + i + "", parentsDetails.getContactnumber());
+                   httpSession.setAttribute("address" + i + "", parentsDetails.getAddresspermanent());
+                   httpSession.setAttribute("contactnumber" + i + "", parentsDetails.getContactnumber());
                    httpSession.setAttribute("studentpic" + i + "",parentsDetails.getStudent().getStudentpic());
-                   
+                   httpSession.setAttribute("UID" + i + "",parentsDetails.getStudent().getStudentexternalid());
+                   httpSession.setAttribute("bloodgroup" + i + "",parentsDetails.getStudent().getBloodgroup());
                    //result = true;
                } else {
 

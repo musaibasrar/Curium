@@ -65,9 +65,9 @@ public class FeesService {
                                 feescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass")));
                         }
                         
-                        feescategory.setAmount(DataUtil.parseInt(request.getParameter("amount")));
+                        feescategory.setAmount(0);
                         feescategory.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-                        if(!feescategory.getFeescategoryname().equalsIgnoreCase("") && !feescategory.getParticularname().equalsIgnoreCase("") && feescategory.getAmount() != 0 ){
+                        if(!feescategory.getFeescategoryname().equalsIgnoreCase("") && !feescategory.getParticularname().equalsIgnoreCase("")){
                                 feescategory =  new feesCategoryDAO().create(feescategory);
                         }
                 }

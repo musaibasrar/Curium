@@ -1,5 +1,5 @@
 <%-- 
-    Document   : bonafide certificate
+    Document   : noduecertificate
     Created on : Mar 17 2018, 12:32 PM
     Author     : Musaib
 --%>
@@ -15,7 +15,6 @@
 <head>
 
 <style type="text/css">
-<!--
 .headerText {
 	width: 10px;
 	font-family: Tahoma;
@@ -56,6 +55,18 @@
 	font-size: 14px;
 	letter-spacing: normal;
 	text-align: left;
+	border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+.dataTextBoldLeftDate {
+	font-weight: normal;
+	font-family: Tahoma;
+	color: black;
+	font-size: 14px;
+	letter-spacing: normal;
+	text-align: left;
 }
 
 .dataTextBoldCenter {
@@ -83,7 +94,6 @@
 	letter-spacing: normal;
 	text-align: center;
 }
--->
 
 span{
     display:inline-block;
@@ -92,15 +102,16 @@ span{
     width: 300px;
     font-weight: normal;
 }
+
 </style>
 	<script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <title>Bonafide Certificate</title>
+        <title>No Due Certificate</title>
         
         <script type="text/javascript">
-        function printBonafide() {
+        function printNoDue() {
     		var form1 = document.getElementById("formletterhead");
-    		form1.action = "Controller?process=DocumentsProcess&action=printBonafide";
+    		form1.action = "Controller?process=DocumentsProcess&action=printNoDue";
     		form1.method = "POST";
     		form1.submit();
 
@@ -129,7 +140,7 @@ for(Cookie cookie : cookies){
 		<br>
 		<table>
 			<tr>
-			<td class="dataTextBoldLeft">
+			<td class="dataTextBoldLeftDate">
 			<br><br>
 				Date:&nbsp;&nbsp;
 				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
@@ -140,64 +151,101 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td colspan="4" class="dataTextBoldCenter">
 					<br>
-					<u>BONAFIDE CERTIFICATE</u>
+					<u>No Due</u>
 					<br><br>
 				</td>
 			</tr>
 			<tr>
-			<td></td>
+			<td>
 			
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-			
+			<table style="border-collapse: collapse;">
 			<tr>
 			
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					with Registration Number &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:100px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span>
-					</h3>
+					Student Name: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeft">
+					 <c:out value="${studentdetailsnodue.student.name}" />
 				</td>
 			</tr>
 			<tr>
-			<td></td>
+			
+				<td class="dataTextBoldLeft" >
+					UIN: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeft">
+					<c:out value="${studentdetailsnodue.student.studentexternalid}" />
+				</td>
 			</tr>
 			<tr>
-				
+			
+				<td class="dataTextBoldLeft" >
+					Registration Number: &nbsp;&nbsp;
+				</td>
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					is a student of &nbsp;&nbsp; <span style="font-weight: bold;width: 100px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+					<c:out value="${studentdetailsnodue.student.admissionnumber}" />
+				</td>
+			</tr>
+			<tr>
+				<td class="dataTextBoldLeft">
+					Father Name: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeft">
+					<c:out value="${studentdetailsnodue.fathersname}" />
+				</td>
+			</tr>
+			<tr>
+				<td class="dataTextBoldLeft">
+					Course: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeft">
+					
+								
+								<c:forEach var="splt" items="${fn:split(studentdetailsnodue.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
-					</span>
-					
-					</h3>
 				</td>
+			</tr>
+			<tr>
+				<td class="dataTextBoldLeft">
+					College Fees: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeft">
+					
+				</td>
+			</tr>
+			<tr>
+				<td class="dataTextBoldLeft">
+					Exam Fees: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeft">
+					
+				</td>
+			</tr>
+			<tr>
+				<td class="dataTextBoldLeft">
+					Library Due: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeft">
+					
+				</td>
+			</tr>
+			<tr>
+				<td class="dataTextBoldLeft">
+					Laboratory Due: &nbsp;&nbsp;
+				</td>
+				<td class="dataTextBoldLeft">
+					
+				</td>
+			</tr>
+			</table>
+			</td>
 			
 			</tr>
 			<tr>
 			<td></td>
 			</tr>
-			<tr>
 			
-				<td class="dataTextBoldLeft"  >
-				
-				<h3 style="font-weight: normal;" >
-					
-					for the academic year <span style="font-weight: bold;width: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;${currentAcademicYear}</span>
-					He/She is a bonafide student of our college.
-					</h3>
-					
-				</td>
-				
-
-			</tr>
 			<tr>
 			<td></td>
 			</tr>
@@ -225,17 +273,16 @@ for(Cookie cookie : cookies){
 			<td></td>
 			</tr>
 		<tr>
-		<td></td>
-			<td align="left">Clerk</td>	
-			<td align="center">College Seal</td>
-			<td align="center">Principal</td>
+			<td align="left" style="width: 400px;">Accountant Sign</td>	
+			<td align="left">Librarian Sign</td>
+			<td align="left">Lab Assistant Sign</td>
 		</tr>
 		
 			<tr>
               <td align="center">
               <input type="checkbox" id = "letterhead" name="letterhead"  value="true"/>With Letterhead
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <button onclick="printBonafide();">Print</button>
+              <button onclick="printNoDue();">Print</button>
               </td>
             </tr>
 		</TABLE>

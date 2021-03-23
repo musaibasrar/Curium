@@ -540,15 +540,12 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
-						<tr></tr>
-
-
-						<tr>
+						<!-- <tr>
 							<td width="10%" class="alignRight">Amount &nbsp;</td>
 							<td width="70%"><label> <input name="amount"
 									type="text" class="textField" id="amount" required size="30">
 							</label></td>
-						</tr>
+						</tr> -->
 
 					</table>
 					<table id="table2" width="100%" border="0" align="center">
@@ -580,10 +577,10 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Class<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
-						<th title="click to sort" class="headerText">Amount<img
+						<!-- <th title="click to sort" class="headerText">Amount<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
-						</th>
+						</th> -->
 
 					</tr>
 				</thead>
@@ -600,7 +597,7 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${fees.idfeescategory}"/>" /></td>
 							<td class="dataText"><c:out value="${fees.feescategoryname}" /></td>
 							<td class="dataText"><c:out value="${fees.particularname}" /></td>
-							<td class="dataText"><c:out value="${fees.amount}" /></td>
+							<%-- <td class="dataText"><c:out value="${fees.amount}" /></td> --%>
 
 						</tr>
 					</c:forEach>

@@ -81,7 +81,7 @@
 			a:hover {
 				text-decoration: underline;
 			}
-			            a:visited {
+			a:visited {
     			color: #383838;
     
 			}

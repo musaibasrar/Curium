@@ -1,5 +1,5 @@
 <%-- 
-    Document   : notSaved
+    Document   : Saved
     Created on : Jan 5, 2012, 1:11:53 PM
     Author     : Musaib
 --%>
@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Export Success</title>
+        <title>Save success</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -58,20 +58,20 @@
 
         <script type="text/javascript">
             $(function(){
-                $("#download").button().click(function() {
-        			downloadFile();
+                $("#view").button()
+                
+                $("#addnew").button()
 
-        		});
                 });
 
-            function downloadFile(){
+            function ViewAll(){
                 var form1=document.getElementById("form1");
-                form1.action="Controller?process=StudentProcess&action=download";
+                form1.action="Controller?process=StudentProcess&action=viewAll";
                 form1.submit();
             }
         </script>
 </head>
-<%
+  <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -88,20 +88,15 @@ for(Cookie cookie : cookies){
 }
 %>
     <body background="images/bg.jpg" >
-        <form id="form1" method="post">
+        <form id="form1" action=""  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="50" align="center" valign="middle"><p class="style1"> File Exported Successfully</p>
-        </td>
-        
-      </tr>
-      <tr>
-          <td height="5" align="center" valign="middle"><p class="style1">
-                  
-                  <button id="download">Download</button>
-                                   
-              </p>
-        </td>
+        <td height="250" align="center" valign="middle"><p class="style1" style="color: red;"> Certificate generation failed, Please try again</p>
+        <p class="style1">
+          
+            <!-- <input type="button" id="view" value="View All " onClick="ViewAll()"> -->
+            <!-- <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='addStudent.jsp';"> -->
+        </p></td>
       </tr>
     </table>
             </form>

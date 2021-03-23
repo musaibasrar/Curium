@@ -8,10 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.model.documents.service.DocumentService;
-import com.model.feescategory.service.FeesService;
 import com.model.stampfees.service.StampFeesService;
 import com.model.std.service.StandardService;
-import com.model.student.service.StudentService;
+import com.model.user.service.UserService;
 
 /**
  * @author Musaib_2
@@ -54,10 +53,46 @@ public class DocumentAction {
 			url = generateAdmissionAbstract();
 		}else if ("download".equalsIgnoreCase(action)) {
 			url = downloadAdmissionAbstract();
+		}else if ("noDueCertificate".equalsIgnoreCase(action)) {
+			url = noDueCertificate();
+		}else if ("GenerateNoDue".equalsIgnoreCase(action)) {
+			url = generateNoDue();
+		}else if ("searchStudentsForNoDue".equalsIgnoreCase(action)) {
+			url = searchStudentsForNoDue();
+		}else if ("printNoDue".equalsIgnoreCase(action)) {
+			url = printNoDue();
 		}
 		return url; 
 	} 
 	
+
+	private String printNoDue() {
+		String withHeader = request.getParameter("letterhead");
+		request.setAttribute("letterheadvalue", withHeader);
+		return "nodueprint.jsp";
+	}
+
+	private String searchStudentsForNoDue() {
+        	new StampFeesService(request, response).advanceSearch();
+        	return "nodue.jsp";
+		}
+
+	private String generateNoDue() {
+        
+        String result = new DocumentService(request, response).generateNoDue();
+        if (result!=null) {
+        	return result;
+        	} else {
+        		return "bonafidefailure.jsp";
+		}
+	}
+
+	private String noDueCertificate() {
+		
+		new StandardService(request, response).viewClasses(); 
+		new UserService(request, response).getCertificateDetails();
+		return "nodue.jsp";
+	}
 
 	private String downloadAdmissionAbstract() {
 		if(new DocumentService(request, response).downlaodFile()){
@@ -92,11 +127,14 @@ public class DocumentAction {
 	}
 
 	private String printBonafide() {
+		String withHeader = request.getParameter("letterhead");
+		request.setAttribute("letterheadvalue", withHeader);
 		return "bonafideprint.jsp";
 	}
 
 	private String studentsDetailsBonafide() {
 		new StandardService(request, response).viewClasses(); 
+		new UserService(request, response).getCertificateDetails();
 		return "studentsdetailsbonafide.jsp";
 	}
 

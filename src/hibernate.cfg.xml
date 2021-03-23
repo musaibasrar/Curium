@@ -11,7 +11,7 @@
 		 
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 	 	<property name="hibernate.connection.password">mysql</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/v2dev</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/msgroup</property>
 		<property name="hibernate.connection.username">root</property> 
 		
 		<!--<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
@@ -99,5 +99,6 @@
 		<mapping resource="com/model/std/dto/Classhierarchy.hbm.xml"></mapping>
 		<mapping resource="com/model/account/dto/Voucherentrytransactions.hbm.xml"></mapping>
 		<mapping resource="com/model/subjectdetails/dto/Subjectmaster.hbm.xml"></mapping>
+		<mapping resource="com/model/branch/dto/Certificateletterhead.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>

@@ -23,6 +23,7 @@ import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
 import com.model.adminexpenses.service.AdminService;
 import com.model.branch.dto.Branch;
+import com.model.branch.dto.Certificateletterhead;
 import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
 import com.model.feescollection.dto.Receiptinfo;
@@ -130,6 +131,10 @@ public class UserService {
        return result;
    }
 	
+	private Certificateletterhead getCertificateLetterHeadDetails(int branchId) {
+		return new UserDAO().getCertificateLetterHeadDetails(branchId);
+	}
+
 	public boolean authenticateSuperUser() {
         boolean result = false;
         
@@ -901,11 +906,29 @@ public void feesmonthlysearch() {
 		user.setPassword(builder.toString());
 		user.setUsertype("staff");
 		Branch branch = new Branch();
-		branch.setIdbranch(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		branch.setIdbranch(Integer.parseInt(DataUtil.emptyString(httpSession.getAttribute(BRANCHID).toString())));
 		user.setBranch(branch);
 		
 		return new UserDAO().addUser(user);
 		
+	}
+
+	public void getCertificateDetails() {
+		
+		//getaffiliationdetails
+        Certificateletterhead letterHead = getCertificateLetterHeadDetails(Integer.parseInt(DataUtil.emptyString(httpSession.getAttribute(BRANCHID).toString())));
+        
+        if(letterHead!=null) {
+        	
+        	httpSession.setAttribute("certinstitutionname",letterHead.getInstitutionname());
+        	httpSession.setAttribute("certaddress",letterHead.getAddress());
+        	httpSession.setAttribute("certaffiliation",letterHead.getAffiliation());
+        	httpSession.setAttribute("certlogo",letterHead.getLogo());
+        	httpSession.setAttribute("certcontactnumber",letterHead.getContactnumber());
+        	httpSession.setAttribute("certemail",letterHead.getEmail());
+        	
+        }
+        
 	}
 
 }

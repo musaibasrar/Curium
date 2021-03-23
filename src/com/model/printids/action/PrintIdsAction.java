@@ -12,6 +12,7 @@ import com.model.printids.service.PrintIdsService;
 import com.model.stampfees.service.StampFeesService;
 import com.model.std.service.StandardService;
 import com.model.student.service.StudentService;
+import com.model.user.service.UserService;
 
 /**
  * @author Musaib_2
@@ -58,6 +59,7 @@ public class PrintIdsAction {
 	private String printPreview() {
 
 		new PrintIdsService(request, response).printMultiple();
+		new UserService(request, response).getCertificateDetails();
         return "printpreview.jsp";
 	}
 
