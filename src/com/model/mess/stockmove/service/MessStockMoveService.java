@@ -67,7 +67,7 @@ public class MessStockMoveService {
 								
 								for (MessStockEntry messStockEntry : messStockEntryList) {
 
-									if(reqQty<messStockEntry.getAvailablequantity()) {
+									if(reqQty<=messStockEntry.getAvailablequantity()) {
 
 										MessStockMove messStockMove = new MessStockMove();
 										

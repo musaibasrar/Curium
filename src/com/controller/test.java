@@ -39,6 +39,14 @@ public class test {
 		}*/
 		
 		
+		String issueQuantity = "0";
+		float reqQty = Float.parseFloat(issueQuantity);
+		//Query stock entry
+		
+			if(reqQty == 0) {
+				System.out.println("GREAT");
+			}
+		
 		
 		 SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
 		 String dateBeforeString = "27 01 2018";

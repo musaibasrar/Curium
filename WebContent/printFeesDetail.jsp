@@ -20,7 +20,7 @@
 	width: 10px;
 	font-family: Tahoma;
 	font-size: 12px;
-	color: #FFFFFF;
+	color: black;
 	font-weight: normal;
 	width: auto;
 	height: 22px;
@@ -32,7 +32,7 @@
 	width: 10px;
 	font-family: Tahoma;
 	font-size: 12px;
-	color: #FFFFFF;
+	color: black;
 	font-weight: normal;
 	width: auto;
 	height: 22px;
@@ -179,7 +179,7 @@
 				<img src="images/shaheenlogo.png" width="250" height="120"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zaiqa Mess Services </label><br>
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zaiqa Mess Services </label><br>
 				<label class="addressLine" style="padding-left: 50px;">Shaheen Nagar, Shahpur Gate, Bidar – 585403
 				 </label>
 				</td>
@@ -223,7 +223,11 @@
 					Name: <c:out value="${parents.fathersname}" />
 				</td>
 			
-				<td class="dataTextBoldLeft" style="width: 30%">Class & Sec:<c:out value="${student.classstudying}" />
+				<td class="dataTextBoldLeft" style="width: 30%">Class:
+				
+				<c:set var="classstudying" value="${student.classstudying}"/>  
+				<c:set var = "string2" value = "${fn:replace(classstudying, '--', '')}" />
+				 ${string2}
 				</td>
 
 			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date: <c:out

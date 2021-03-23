@@ -599,7 +599,7 @@ for(Cookie cookie : cookies){
 			<table width="100%">
 				<tr>
 					<td class="headerTD">Stock Received Report <br>
-					${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;${issuedtoselected}&nbsp;&nbsp;${purposeselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp;
+					${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;${supplierselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp;
 					</td>
 				</tr>
 			</table>

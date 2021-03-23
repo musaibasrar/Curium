@@ -398,16 +398,22 @@ public class MessItemsService {
 			if(!issueTo.isEmpty()) {
 				subQuery = "and issuedto = '"+issueTo+"'";
 				httpSession.setAttribute("issuedtoselected", "Issued To:&nbsp;"+issueTo);
+			}else {
+				httpSession.setAttribute("issuedtoselected", "");
 			}
 			
 			if(!purpose.isEmpty()) {
 				subQuery = subQuery + "and purpose = '"+purpose+"'";
 				httpSession.setAttribute("purposeselected", "Purpose:&nbsp;"+purpose);
+			}else {
+			httpSession.setAttribute("purposeselected", "");
 			}
 			
 			if(!item.isEmpty()) {
 				subQuery = subQuery + "and itemid = '"+item+"'";
 				httpSession.setAttribute("itemselected", "Items:&nbsp;"+item);
+			}else {
+				httpSession.setAttribute("itemselected", "");
 			}
 			
 			List<MessStockMove> messStockMoveList = new MessStockMoveDAO().getStockMoveDetailsReport(queryMain+subQuery);
@@ -536,11 +542,15 @@ public class MessItemsService {
 			if(!"ALL".equalsIgnoreCase(suppNameId[0])) {
 				subQuery = "and ms.messinvoicedetails.suppliersid = '"+Integer.parseInt(suppNameId[0])+"'";
 				httpSession.setAttribute("supplierselected", "Supplier :&nbsp;"+suppNameId[1]);
+			}else {
+				httpSession.setAttribute("supplierselected", "");
 			}
 			
 			if(!itemNameId[0].isEmpty()) {
 				subQuery = subQuery + "and ms.itemid = '"+itemNameId[0]+"'";
 				httpSession.setAttribute("itemselected", "Item:&nbsp;"+itemNameId[1]);
+			}else {
+				httpSession.setAttribute("itemselected", "");
 			}
 			
 			List<MessStockEntry> messStockEntryList = new MessItemsDAO().getStockReceivedDetailsReport(queryMain+subQuery);

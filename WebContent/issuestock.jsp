@@ -889,6 +889,9 @@ for(Cookie cookie : cookies){
 													</c:if>
 													
 												<br>
+												<input type="text" name="issuequantity_${itemlist.messitems.id}" id="issuequantity_${itemlist.messitems.id}" class="textfieldvaluesshorts" style="font-size: 14px;" onkeyup="calculate(${itemlist.messitems.id})" onkeypress="calculate(${itemlist.messitems.id})" onkeydown="calculate(${itemlist.messitems.id})" onfocusout="calculate(${itemlist.messitems.id})" /><br>
+												<label id="errormessage_${itemlist.messitems.id}" style="font-size: 10px;display: none;color: red;">Quantity not in stock</label>
+												<br>
 												<input type="button" value="1" id="1_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
 												<input type="button" value="2" id="2_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
 												<input type="button" value="3" id="3_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -900,9 +903,7 @@ for(Cookie cookie : cookies){
 												<input type="button" value="9" id="9_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
 												<input type="button" value="0" id="0_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
 												<input type="button" value="." id="._${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="button" value="Del" id="${itemlist.messitems.id}" onclick="deleteNumber(this);calculate(${itemlist.messitems.id});"/><br>
-												<input type="text" name="issuequantity_${itemlist.messitems.id}" id="issuequantity_${itemlist.messitems.id}" class="textfieldvaluesshorts" style="font-size: 14px;" onkeyup="calculate(${itemlist.messitems.id})" onkeypress="calculate(${itemlist.messitems.id})" onkeydown="calculate(${itemlist.messitems.id})" onfocusout="calculate(${itemlist.messitems.id})" /><br>
-												<label id="errormessage_${itemlist.messitems.id}" style="font-size: 10px;display: none;color: red;">Quantity not in stock</label>
+												<input type="button" value="Del" id="${itemlist.messitems.id}" onclick="deleteNumber(this);calculate(${itemlist.messitems.id});"/>
 											</td>
                 					</tr>
 								
