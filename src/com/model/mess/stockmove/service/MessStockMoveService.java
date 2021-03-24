@@ -58,6 +58,8 @@ public class MessStockMoveService {
 				
 				List<MessStockMove> messStockMovesList = new ArrayList<MessStockMove>();
 				
+				if(StockEntryIds!=null) {
+					
 					for(int i=0; i < StockEntryIds.length ; i++){
 						String issueQuantity = request.getParameter("issuequantity_"+StockEntryIds[i]);
 						float reqQty = Float.parseFloat(issueQuantity);
@@ -141,7 +143,7 @@ public class MessStockMoveService {
 		
 						new MessItemsService(request, response).viewItemDetails();
 						request.setAttribute("itemsissued", result);
-						
+				}	
 						return result;
 		}
 

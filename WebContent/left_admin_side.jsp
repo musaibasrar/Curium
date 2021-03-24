@@ -155,7 +155,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body onload="StartClock()" onunload="KillClock()" >
+    <body >
         <%--  <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div> --%>
 
         <div id="container" style="width: 95%;">

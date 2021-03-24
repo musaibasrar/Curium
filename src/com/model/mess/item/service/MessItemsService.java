@@ -200,6 +200,8 @@ public class MessItemsService {
 				
 				List<MessStockEntry> messStockEntryList = new ArrayList<MessStockEntry>();
 				
+				if(itemIds!=null) {
+					
 					for(int i=0; i < itemIds.length ; i++){
 						
 
@@ -282,9 +284,8 @@ public class MessItemsService {
 							boolean result = new MessItemsDAO().addNewStock(messStockEntryList,transactions,updateDrAccount,updateCrAccount,null,null,null);
 							request.setAttribute("itemsreceived",result);
 						}
-						
-						
-
+				}
+				
 			}
 		}
 

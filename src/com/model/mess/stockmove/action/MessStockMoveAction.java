@@ -47,7 +47,9 @@ public class MessStockMoveAction {
         private String cancelStockMove() {
         	
         	new MessStockMoveService(request, response).cancelStockMove();
-        	new MessStockMoveService(request, response).viewStockEntryDetails();
+        	new MessItemsService(request, response).getCurrentStockToIssue();
+        	/*Batch stock issue 
+        	new MessStockMoveService(request, response).viewStockEntryDetails();*/
         	new MessStockMoveService(request, response).viewStockMoveDetails();
         	return "issuestock.jsp";
 		}

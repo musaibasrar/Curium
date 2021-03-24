@@ -234,7 +234,7 @@
 	width: auto;
 }
 
-.headerText {
+.headerTextLeft {
 	border-radius: 3px;
 	width: 10px;
 	font-family: Tahoma;
@@ -248,6 +248,32 @@
 	text-align: left;
 	background-image:
 		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+}
+
+.headerText {
+	border-radius: 3px;
+	width: 10px;
+	font-family: Tahoma;
+	font-size: 12px;
+	background-color: #4b6a84;
+	color: #FFFFFF;
+	font-weight: normal;
+	width: auto;
+	height: 27px;
+	vertical-align: text-top;
+	text-align: center;
+	background-image:
+		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+}
+
+.dataTextRight {
+	border-radius: 3px;
+	font-family: Tahoma;
+	color: #4b6a84;
+	font-size: 13px;
+	letter-spacing: normal;
+	text-align: right;
+	background-color: #E3EFFF;
 }
 
 .dataText {
@@ -558,6 +584,7 @@
 	$(function() {
 
 		$("#tabs").tabs();
+		
 		$("#saveissueentry").button().click(function() {
 			saveissueentry();
 		});
@@ -591,16 +618,15 @@
  	        var issueQuantity=document.getElementById("issuequantity_"+value2).value;
  	        
  	        if(parseFloat(issueQuantity,10)>parseFloat(availableQuantity,10)){
- 	      	  $( "#dialog" ).dialog( "open" );
  	      		document.getElementById("errormessage_"+value2).style.display = '';
  	      	  document.getElementById("issuequantity_"+value2).value='';
  	        }
  	        
  	        if(parseFloat(issueQuantity)>0 && parseFloat(issueQuantity,10)<parseFloat(availableQuantity,10)){
  	        	document.getElementById("errormessage_"+value2).style.display = 'none';
- 	      	  document.getElementById(value2).checked = true;  
+ 	      	  document.getElementById("item_id_"+value2).checked = true;  
  	        }else{
- 	      	  document.getElementById(value2).checked = false;
+ 	      	  document.getElementById("item_id_"+value2).checked = false;
  	        }
  			
     }
@@ -864,7 +890,7 @@ for(Cookie cookie : cookies){
 					<thead>
 							<tr>
 								 <!-- <th class="headerText" style="display: none;" ><input type="checkbox" /> </th> --> 
-								 <th class="headerText">
+								 <th class="headerTextLeft">
 								 	<button id="saveissueentry">Issue</button>
 								</th>
 							</tr>
@@ -875,7 +901,7 @@ for(Cookie cookie : cookies){
 						   <c:forEach items="${stocklist}" var="itemlist" varStatus="status">
            							<tr>
            									<td class="dataText">
-           										<input type="checkbox"  style="display: none;" class = "chcktbl" name="itemids" id="<c:out value="${itemlist.messitems.id}"/>"  value="<c:out value="${itemlist.messitems.id}"/>" /><br>
+           										<input type="checkbox" style="color: black;" class = "chcktbl" name="itemids" id="item_id_${itemlist.messitems.id}"  value="<c:out value="${itemlist.messitems.id}"/>" disabled="disabled"/><br>
 	                							<input type="text" value="<c:out value="${itemlist.messitems.name}"/>" name="itemname_${itemlist.messitems.id}" style="display: none;" id="itemname_${itemlist.messitems.id}" />
 	                							<label style="font-size: 14px;font-weight: bold;"><c:out value="${itemlist.messitems.name}"/></label><br><br>
 												<input type="text" value="<c:out value="${itemlist.availablestock}"/>" id="items_quantity_${itemlist.messitems.id}" class="textfieldvaluesshorts" style="font-size: 14px;color: black;" disabled="disabled"/><br>
@@ -953,13 +979,13 @@ for(Cookie cookie : cookies){
 					<c:forEach items="${messstockmovelist}" var="stockmovelist">
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
-                          <td class="dataText"><input type="checkbox" id = "<c:out value="${stockmovelist.id}"/>" class = "chcktbl"  name="stockmoveid"  value="<c:out value="${stockmovelist.id}"/>"/></td>
-						  <td class="dataText" style="width: 10%;"><input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: center;" name="transactiondate_${stockmovelist.id}" value="<fmt:formatDate value="${stockmovelist.transactiondate}" pattern="dd/MM/yyyy"/>" readonly></td>
-						  <td class="dataText"><c:out value="${stockmovelist.purpose}" /></td>
+                          <td class="dataTextLeft"><input type="checkbox" id = "<c:out value="${stockmovelist.id}"/>" class = "chcktbl"  name="stockmoveid"  value="<c:out value="${stockmovelist.id}"/>"/></td>
+						  <td class="dataTextLeft" style="width: 10%;"><input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: center;" name="transactiondate_${stockmovelist.id}" value="<fmt:formatDate value="${stockmovelist.transactiondate}" pattern="dd/MM/yyyy"/>" readonly></td>
+						  <td class="dataTextLeft"><c:out value="${stockmovelist.purpose}" /></td>
 						     <c:set var="itemparts" value="${fn:split(stockmovelist.externalid, '_')}" />
-						  <td class="dataText"><c:out value="${itemparts[0]}" /></td>
-						  <td class="dataText"><c:out value="${stockmovelist.quantity}" /></td>
-						  <td class="dataText"><c:out value="${stockmovelist.issuedto}" /></td>
+						  <td class="dataTextLeft"><c:out value="${itemparts[0]}" /></td>
+						  <td class="dataTextRight"><c:out value="${stockmovelist.quantity}" /></td>
+						  <td class="dataTextLeft"><c:out value="${stockmovelist.issuedto}" /></td>
 						</tr>
 					</c:forEach>
 
