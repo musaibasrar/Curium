@@ -133,6 +133,8 @@ public class OrderService {
     }
 
     public void confirmOrder() {
+    	
+    	String orderDate = DateUtil.dateFromatConversionSlash(request.getParameter("orderdate"));
         Orderssummary orderSummary = new Orderssummary();
         List<Ordersdetails> orderDetailsList = new ArrayList<Ordersdetails>();
         
@@ -152,10 +154,11 @@ public class OrderService {
                 orderDetailsList.add(orderDetails);
             }
             
-            String centerCodeLogin = httpSession.getAttribute("logincentercode").toString();
-            String[] centerCode = centerCodeLogin.split(":");
+            //String centerCodeLogin = httpSession.getAttribute("logincentercode").toString();
+            String centerC = request.getParameter("centercode");
+            String[] centerCode = centerC.split(":");
             orderSummary.setCentercode(centerCode[0]);
-            orderSummary.setOrderdate(new Date());
+            orderSummary.setOrderdate(DateUtil.dateParserUpdateStd(orderDate));
             orderSummary.setNarration("PENDING");
             orderSummary.setDiscount(0);
             orderSummary.setTotalafterdiscount(grandTotal);

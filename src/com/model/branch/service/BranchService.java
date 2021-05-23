@@ -238,4 +238,28 @@ public class BranchService {
             return "";            
         }
 
+	public void viewBranchesById() {
+		
+		List<Branch> list = new ArrayList<Branch>();
+		
+        try {
+        	
+        	int branchid = Integer.parseInt(httpSession.getAttribute("branchid").toString());
+        	
+        	if(branchid==1) {
+        		list = new BranchDAO().readListOfObjects();
+                Collections.sort(list);
+        	}else {
+        		list = new BranchDAO().readListOfObjects(branchid);
+        	}
+            
+            httpSession.setAttribute("branchList", list);
+            logger.info("Branch List "+list.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        
+    }
+
 }

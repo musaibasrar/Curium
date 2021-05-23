@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -360,7 +361,7 @@
             "sScrollY": "380px",
             "bPaginate": true,
             "bLengthChange": false,
-            "bFilter": true,
+            "bFilter": false,
             "bSort": true,
             "bInfo": true,
             "bStateSave": false,
@@ -442,6 +443,15 @@
             }
         }).click(function() {
 			addBooks();
+		});
+		$("#orderdate").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(function() {
+			$("#orderdate").datepicker("option", "showAnim", $(this).val());
 		});
 		$("#effect").hide();
 
@@ -533,6 +543,18 @@
 		 document.getElementById("totalprice_"+value).value = totalAmount;
 	 }
 	 
+	 
+	 function checkboxcheck(value){
+		 var quantity = document.getElementById("quantity_"+value).value;
+	               
+	        if(parseFloat(quantity)>0){
+	      	  document.getElementById("booksid_"+value).checked = true;  
+	        }else{
+	      	  document.getElementById("booksid_"+value).checked = false;
+	        }
+			
+	 }
+	 
 </script>
 
 		<script type="text/javascript">
@@ -577,7 +599,7 @@ for(Cookie cookie : cookies){
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");
 		%>
-
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		<div class="alert-box success">Book(s) has been ordered successfully!!!</div>
 		<div class="alert-box failure">Order Failed, Unable to order Book(s)!!!</div>
 		
@@ -606,20 +628,38 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${bookslist}" var="books" varStatus="status">
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText" style="width: 10%;"><input type="checkbox" id = "<c:out value="${books.id}"/>" class = "chcktbl"  name="booksids"  value="<c:out value="${books.id}:${status.index}"/>"/></td>
+                                <td class="dataText" style="width: 10%;"><input type="checkbox" id = "booksid_${status.index}" class = "chcktbl"  name="booksids"  value="<c:out value="${books.id}:${status.index}"/>"/></td>
                                 <td class="dataText" style="width: 30%;"><c:out value="${books.title}"/></td>
                                 <td class="dataText"><c:out value="${books.language}"/></td>
                                 <td class="dataText" style="width: 20%;"><c:out value="${books.author}"/></td>
                                 <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.price}"/>" class="price" id="price_${status.index}" name="price" readonly="readonly"></td>
-                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 20%;" value="0" class="quantity" id="quantity_${status.index}" name="quantity" onkeyup="calculatePrice(${status.index});"></td>
+                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 20%;" value="0" class="quantity" id="quantity_${status.index}" name="quantity" onkeyup="calculatePrice(${status.index});checkboxcheck(${status.index});"></td>
                                 <td class="dataText" style="text-transform:uppercase">
                                 <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 40%;" id="totalprice_${status.index}" name="totalprice">
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
-                    <tfoot><tr>
-                     		<td  class="footerTD" colspan="2" ><button id="placeorder">Place Order</button> 
+                    <tfoot>
+                    <tr>
+                     		<td  class="footerTD" colspan="2" >
+                     		<label> <select name="centercode" id="centercode"
+									style="width: 240px;" required>
+										<c:forEach items="${branchList}" var="branchlist">
+											<option value="${branchlist.centercode}:${branchlist.centername}" >
+												<c:out value="${branchlist.centercode} -- ${branchlist.centername}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label>
+                     		&nbsp;&nbsp;&nbsp;&nbsp;
+                     		<label> <input
+									name="orderdate" type="text" class="textField" style="width: 200px;" 
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
+									id="orderdate" size="25"  data-validate="validate(required)"/>
+							</label>
+                     		&nbsp;&nbsp;&nbsp;&nbsp;
+                     		<button id="placeorder">Place Order</button> 
                         </tr></tfoot>
                 </table>
 		</div>

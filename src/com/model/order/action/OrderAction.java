@@ -195,6 +195,7 @@ public class OrderAction {
 
     private String placeOrder() {
 	    new OrderService(request, response).bookDetails();
+	    new BranchService(request, response).viewBranchesById();
 	        return "placeorder.jsp";
     }
 

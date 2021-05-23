@@ -210,7 +210,7 @@
                 font-family: Tahoma;
                 font-size: 16px;
                 background-color: #4b6a84;
-                color: #FFFFFF;
+                color: black;
                 font-weight: normal;
                 width: auto ;
                 height: 27px;
@@ -594,12 +594,12 @@ for(Cookie cookie : cookies){
 		<div style="overflow:hidden;height: 600px;">
 			<table width="100%">
 				<tr>
-					<td class="headerTD"><u>Order Details</u> <br><br>Order Number: ${ordernumber} &nbsp;&nbsp;&nbsp;&nbsp; Center Name: ${centername}
-					&nbsp;&nbsp;&nbsp;&nbsp; Order Date: ${orderdate}</td>
+					<td class="headerTD"><u>Order Details</u> <br><br>Order No.: ${ordernumber} &nbsp;&nbsp;Center Name: ${centername}
+					&nbsp;&nbsp;Order Date: ${orderdate}</td>
 				</tr>
 			</table> 
 			
-			<table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+			<table   width="100%"  border="0" style="border-color:black;"  id="myTable">
 						
                     <thead>
                         <tr>
@@ -616,7 +616,7 @@ for(Cookie cookie : cookies){
                     	<c:set var="grandtotal" value="0"> </c:set>
                         <c:forEach items="${orderbooksmap}" var="orderdetails" varStatus="status">
 											
-                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                            <tr class="trClass" style="border-color:black" border="1"  cellpadding="1"  cellspacing="1" >
                             	<td class="dataText"><c:out value="${(status.index)+1}" /></td>
                                 <td class="dataText"><c:out value="${orderdetails.value.title}"/></td>
                                 <td class="dataText"><c:out value="${orderdetails.value.author}"/></td>
@@ -635,9 +635,30 @@ for(Cookie cookie : cookies){
                                 <td ></td>
                                 <td ></td>
                                 <td ></td>
-                                <td align="right" class="headerText" style="font-size: 20px;">Grand Total</td>
-                                <td class="headerText" style="font-size: 20px;">${grandtotal}</td>
+                                <td align="right" class="headerText" style="font-size: 16px;">Grand Total</td>
+                                <td class="headerText" style="font-size: 16px;">${grandtotal}</td>
                         	</tr>
+                        	
+                        	
+                        	<c:if test="${discount > 0}">
+                        		<tr>
+                        	<td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td align="right" class="headerText" style="font-size: 15px;">Discount(%)</td>
+                                <td class="headerText" style="font-size: 15px;">${discount}</td>
+                        	</tr>
+                        	<tr>
+                        	<td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td align="right" class="headerText" style="font-size: 15px;">Grand Total</td>
+                                <td class="headerText" style="font-size: 15px;">${grandtotalafterdiscount}</td>
+                        	</tr>
+                        	</c:if>
+                        	
                     </tfoot>
                 </table>
 		</div>

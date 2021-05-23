@@ -510,7 +510,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
 							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
-									style="width: 240px;">
+									style="width: 240px;" required>
 										<option selected>${ranklistcentersearch}</option>
 										<option></option>
 										<c:forEach items="${branchList}" var="branchlist">
@@ -547,7 +547,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="examlevelcode" id="examlevelcode" 
-									style="width: 240px;">
+									style="width: 240px;" required>
 										<option selected>${ranklistexamlevelsearch}</option>
 										<option></option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
