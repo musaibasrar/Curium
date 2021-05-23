@@ -591,7 +591,7 @@ for(Cookie cookie : cookies){
 	<form id="form1" method="POST">
 		
 		
-		<div style="overflow:hidden;height: 600px;">
+		
 			<table width="100%">
 				<tr>
 					<td class="headerTD"><u>Order Details</u> <br><br>Order No.: ${ordernumber} &nbsp;&nbsp;Center Name: ${centername}
@@ -629,7 +629,7 @@ for(Cookie cookie : cookies){
                         
                     </tbody>
                     
-                    <tfoot>
+                    <%-- <tfoot>
                     	<tr>
                         	<td ></td>
                                 <td ></td>
@@ -659,9 +659,30 @@ for(Cookie cookie : cookies){
                         	</tr>
                         	</c:if>
                         	
-                    </tfoot>
+                    </tfoot> --%>
                 </table>
-		</div>
+                <table align="right" style="padding-right: 30px;">
+                	<tr>
+                        	
+                                <td align="right" class="headerText" style="font-size: 16px;">Total&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td class="headerText" style="font-size: 16px;">${grandtotal}</td>
+                        	</tr>
+                        	
+                        	
+                        	<c:if test="${discount > 0}">
+                        		<tr>
+                        	
+                                <td align="right" class="headerText" style="font-size: 15px;">Discount(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td class="headerText" style="font-size: 15px;">${discount}</td>
+                        	</tr>
+                        	<tr>
+                        	<td ></td>
+                                
+                                <td align="right" class="headerText" style="font-size: 15px;">Grand Total&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                <td class="headerText" style="font-size: 15px;">${grandtotalafterdiscount}</td>
+                        	</tr>
+                        	</c:if>
+                </table>
 
 
 	</form>
