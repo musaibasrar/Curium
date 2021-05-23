@@ -586,7 +586,7 @@ for(Cookie cookie : cookies){
 	<form id="form1" method="POST">
 		
 		
-		<div style="overflow:hidden;height: 600px;">
+		<div style="overflow:scroll;height: 600px;">
 			<table width="100%">
 				<tr>
 					<td class="headerTD">Order Details <br>Order Number: ${ordernumber} &nbsp;&nbsp;&nbsp;&nbsp; Center Name: ${centername}
