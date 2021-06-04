@@ -558,10 +558,10 @@ for(Cookie cookie : cookies){
 
             <div id="tabs">
 				<ul>
+					<li><a href="#tabs-4">Journal</a></li>
 					<li><a href="#tabs-1">Receipt</a></li>
 					<li><a href="#tabs-2">Payment</a></li>
 					<li><a href="#tabs-3">Contra</a></li>
-					<li><a href="#tabs-4">Journal</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table  width="100%">

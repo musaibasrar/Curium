@@ -923,7 +923,7 @@ for(Cookie cookie : cookies){
                         <td class="headerText">Fees Category</td>
                         <td class="headerText">Due Amount/Total Amount</td>                       
                         <td class="headerText">Amount</td>
-                        <td class="headerText">Fine</td>
+                        <!-- <td class="headerText">Fine</td> -->
 
                     </tr>
                 </thead>
@@ -943,11 +943,11 @@ for(Cookie cookie : cookies){
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" class="amountpaying"  id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this)">
+							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this)">
 							</td>
-							<td class="dataText" align="center">
+							<!-- <td class="dataText" align="center">
 							<input type="text" id="fine" value="0" class="fine" name="fine" >
-							</td>
+							</td> -->
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -955,7 +955,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
 
-                        <td colspan="4" align="right"><b>Total&nbsp;&nbsp;</b></td>
+                        <td colspan="3" align="right"><b>Total&nbsp;&nbsp;</b></td>
                         <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
                     </tr>
                 </tfoot>

@@ -47,6 +47,7 @@ public class FeesCollectionService {
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
+	private String username = "username";
 	
 	public FeesCollectionService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -228,7 +229,7 @@ public class FeesCollectionService {
 					feesCollect.setSfsid(DataUtil.parseInt(studentSfsIdamount[0]));
 					feesCollect.setAmountpaid(DataUtil.parseLong(amountPaying[Integer.parseInt(studentSfsIdamount[1])]));
 					feesCollect.setSid(DataUtil.parseInt(sid));
-					feesCollect.setFine(DataUtil.parseLong(fine[i]));
+					feesCollect.setFine(DataUtil.parseLong("0"));
 					feesCollect.setDate(new Date());
 					feesCollect.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 					//HERE feesCollect.setReceiptnumber(receiptInfo.getReceiptnumber());
@@ -243,7 +244,7 @@ public class FeesCollectionService {
 				int drAccount = 0;
 				
 				if("cashpayment".equalsIgnoreCase(paymentMethod)) {
-					drAccount = getLedgerAccountId("cashinhandaccountid");
+					drAccount = getLedgerAccountId(httpSession.getAttribute(username).toString());
 				}else if("banktransfer".equalsIgnoreCase(paymentMethod)) {
 					drAccount = getLedgerAccountId(transferBankname);
 				}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
@@ -277,6 +278,7 @@ public class FeesCollectionService {
 		}
 		return receiptInfo;
 	}
+
 
 	public void preview(Receiptinfo receiptInfo) {
 		
@@ -673,6 +675,7 @@ public class FeesCollectionService {
 	
 	private Integer getLedgerAccountId(String itemAccount) {
 		
+		int result = 0;
 	 	
 	 	Properties properties = new Properties();
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
@@ -686,10 +689,13 @@ public class FeesCollectionService {
         		String ItemLedgerId = properties.getProperty(itemAccount);
 		    
 		    if(ItemLedgerId!=null) {
-		    	return Integer.parseInt(ItemLedgerId);
+		    	result = Integer.parseInt(ItemLedgerId);
 		    }else {
-		    	return 0;
+		    	String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
+		    	result = Integer.parseInt(ItemLedger.toLowerCase());
 		    }
+		    
+		    return result;
 	}
 	
 	}

@@ -475,8 +475,19 @@
 			"bSort" : true,
 			"bInfo" : true,
 			"bAutoWidth" : true,
+			/* bJQueryUI: true,
+            sPaginationType: "full_numbers" */
 		});
+		
+		// #myInput is a <input type="text"> element
+		/* $('#myInput').on( 'keyup', function () {
+			$('#dataTableOne').DataTable().search( this.value ).draw();
+		} ); */
 	});
+	
+	var table = $('#example').DataTable();
+	 
+	
 </script>
 <script type="text/javascript">
 	function select(id, name) {
@@ -622,7 +633,7 @@
  	      	  document.getElementById("issuequantity_"+value2).value='';
  	        }
  	        
- 	        if(parseFloat(issueQuantity)>0 && parseFloat(issueQuantity,10)<parseFloat(availableQuantity,10)){
+ 	        if(parseFloat(issueQuantity)>0 && parseFloat(issueQuantity,10)<=parseFloat(availableQuantity,10)){
  	        	document.getElementById("errormessage_"+value2).style.display = 'none';
  	      	  document.getElementById("item_id_"+value2).checked = true;  
  	        }else{
@@ -824,12 +835,8 @@ for(Cookie cookie : cookies){
 				</ul>
 				<div id="tabs-1">
 				
-					<table style="margin-left: auto;margin-right: auto;">
+					<table>
 					
-						<tr>
-							<td><br><br></td>
-						</tr>
-						
 						<tr>
 						<td class="alignRight">Date&nbsp;</td>
 							<td><label> <input type="text"  name="transactiondate"
@@ -848,16 +855,6 @@ for(Cookie cookie : cookies){
 						<tr>
 						
 						<tr>
-							<td class="alignRight">Issue To&nbsp;</td>
-							<td ><label>
-									<select name="issuedto"
-									id="issuedto" class="dropdownlist" style="font-size: 14px;" >
-										<option selected="selected">Shaheen Nagar- Mess</option>
-										<option>Gole Khana- Mess</option>
-										<option>Mailoor- Mess</option>
-								</select>
-							
-							</label></td>
 						
 							<td  class="alignRight">Purpose &nbsp;</td>
 							<td ><label> <select name="purpose"
@@ -870,19 +867,27 @@ for(Cookie cookie : cookies){
 								</select>
 							</label></td>
 							
-						</tr>
-						<tr>
-							<td><br /></td>
+							<td class="alignRight">Issue To&nbsp;</td>
+							<td ><label>
+									<select name="issuedto"
+									id="issuedto" class="dropdownlist" style="font-size: 14px;" >
+										<option selected="selected">Shaheen Nagar- Mess</option>
+										<option>Gole Khana- Mess</option>
+										<option>Mailoor- Mess</option>
+								</select>
+							
+							</label></td>
+							
+							
 						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
 					</table>
 					
-					<div align="center">
-						<p>
-						<h2 style="text-decoration: underline;color: #eb6000">Item Details</h2>	
-						<!-- <label><button id="addnewitem">Add Item</button></label><label><button id="removenewitem">Remove Item</button></label> --></p>
+					<div align="left">
+							<button id="saveissueentry">Issue Stock</button>
+							<br><br>
 					</div>
 										
 			 <table style="float:center;border-color: #4b6a84;width: 50%" id="dataTableOne">
@@ -890,8 +895,8 @@ for(Cookie cookie : cookies){
 					<thead>
 							<tr>
 								 <!-- <th class="headerText" style="display: none;" ><input type="checkbox" /> </th> --> 
-								 <th class="headerTextLeft">
-								 	<button id="saveissueentry">Issue</button>
+								 <th class="headerText">
+								 Item Details
 								</th>
 							</tr>
 						</thead>
@@ -900,36 +905,18 @@ for(Cookie cookie : cookies){
 
 						   <c:forEach items="${stocklist}" var="itemlist" varStatus="status">
            							<tr>
-           									<td class="dataText">
-           										<input type="checkbox" style="color: black;" class = "chcktbl" name="itemids" id="item_id_${itemlist.messitems.id}"  value="<c:out value="${itemlist.messitems.id}"/>" disabled="disabled"/><br>
-	                							<input type="text" value="<c:out value="${itemlist.messitems.name}"/>" name="itemname_${itemlist.messitems.id}" style="display: none;" id="itemname_${itemlist.messitems.id}" />
-	                							<label style="font-size: 14px;font-weight: bold;"><c:out value="${itemlist.messitems.name}"/></label><br><br>
-												<input type="text" value="<c:out value="${itemlist.availablestock}"/>" id="items_quantity_${itemlist.messitems.id}" class="textfieldvaluesshorts" style="font-size: 14px;color: black;" disabled="disabled"/><br>
+           									<td class="dataTextLeft">
+           										<input type="checkbox" class = "chcktbl" name="itemids" id="item_id_${itemlist.messitems.id}"  value="<c:out value="${itemlist.messitems.id}"/>"/>
+	                							<input type="text" value="<c:out value="${itemlist.messitems.name}"/>" name="itemname_${itemlist.messitems.id}" style="display: none;font-size: 21px;" id="itemname_${itemlist.messitems.id}" />
+	                							<label style="font-size: 14px;font-weight: bold;"><c:out value="${itemlist.messitems.name}"/></label>
+												<input type="text" value="<c:out value="${itemlist.availablestock}"/>" id="items_quantity_${itemlist.messitems.id}" class="textfieldvaluesshorts" style="font-size: 14px;color: black;width:45px;" disabled="disabled"/>
 												
-													<c:if test="${itemlist.messitems.unitofmeasure == 'Kilogram'}">
-														<c:out value="${itemlist.messitems.unitofmeasure}"/> <label>(10gm=0.01kg, 100gm=0.1kg)</label>
-													</c:if>
-													
-													<c:if test="${itemlist.messitems.unitofmeasure != 'Kilogram'}">
 														<c:out value="${itemlist.messitems.unitofmeasure}"/>
-													</c:if>
-													
+												<br><br>
+												<input type="text" name="issuequantity_${itemlist.messitems.id}" id="issuequantity_${itemlist.messitems.id}" class="textfieldvaluesshorts" style="font-size: 14px;" onkeyup="calculate(${itemlist.messitems.id})" onkeypress="calculate(${itemlist.messitems.id})" onkeydown="calculate(${itemlist.messitems.id})" onfocusout="calculate(${itemlist.messitems.id})" />
 												<br>
-												<input type="text" name="issuequantity_${itemlist.messitems.id}" id="issuequantity_${itemlist.messitems.id}" class="textfieldvaluesshorts" style="font-size: 14px;" onkeyup="calculate(${itemlist.messitems.id})" onkeypress="calculate(${itemlist.messitems.id})" onkeydown="calculate(${itemlist.messitems.id})" onfocusout="calculate(${itemlist.messitems.id})" /><br>
 												<label id="errormessage_${itemlist.messitems.id}" style="font-size: 10px;display: none;color: red;">Quantity not in stock</label>
 												<br>
-												<input type="button" value="1" id="1_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="button" value="2" id="2_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="button" value="3" id="3_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="button" value="4" id="4_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="button" value="5" id="5_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="button" value="6" id="6_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="button" value="7" id="7_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="button" value="8" id="8_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="button" value="9" id="9_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="button" value="0" id="0_${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="button" value="." id="._${itemlist.messitems.id}" onclick="writeNumber(this);calculate(${itemlist.messitems.id});"/>&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="button" value="Del" id="${itemlist.messitems.id}" onclick="deleteNumber(this);calculate(${itemlist.messitems.id});"/>
 											</td>
                 					</tr>
 								
@@ -938,15 +925,16 @@ for(Cookie cookie : cookies){
 				
 				<tfoot>
 						<tr>
-                            <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
+							<td class="footerTD" colspan="2"><label style="font-size: 14px;color: white;">&nbsp;&nbsp;&nbsp;Note: 10gm=0.01kg, 100gm=0.1kg</label></td>
+                         <!--    <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button> 
                     		<td class="footerTD"  colspan="8">
-                    		<!-- <button id="print">Print</button> --> 
-                    		<!-- <button id="approve">Approve</button>
+                    		<button id="print">Print</button> 
+                    		<button id="approve">Approve</button>
                     		&nbsp;&nbsp;&nbsp;
                     		<button id="reject">Reject</button> 
-                    		&nbsp;&nbsp;&nbsp; -->
-                    		<button id="saveissueentry2">Issue</button>
-                    		</td>
+                    		&nbsp;&nbsp;&nbsp;
+                    		<button id="saveissueentry2">Issue</button></td> -->
+                    		
                         </tr>
                     </tfoot>
 			</table> 
