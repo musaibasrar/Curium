@@ -129,6 +129,17 @@ public class DataUtil {
 	   return date;
    }
    
+   public static String dateFromatConversionSlashToNoSlash(String ddmmyyyy) {
+	   String date = null;
+	   
+	   if(ddmmyyyy!=null) {
+		   String[] dateToConvert = ddmmyyyy.split("/");
+		   date = dateToConvert[2]+""+dateToConvert[1]+""+dateToConvert[0];
+	   }
+	   
+	   return date;
+   }
+   
    public static String generateString(int lengthh) {
 
        // ||, -, *, /, <>, <, >, ,(comma), =, <=, >=, ~=, !=, ^=, (, )
