@@ -25,11 +25,12 @@ public class MessStockMove implements java.io.Serializable {
 	private Integer itemid;
 	private Integer stockentryid;
 	private String status;
+	private int userid;
 	
 	public MessStockMove() {
 	}
 	
-	public MessStockMove(String externalid, Float quantity, String purpose, Date transactiondate, Integer branchid, String issuedto, Integer itemid, Integer stockentryid, String status) {
+	public MessStockMove(String externalid, Float quantity, String purpose, Date transactiondate, Integer branchid, String issuedto, Integer itemid, Integer stockentryid, String status, int userid) {
 		this.externalid = externalid;
 		this.quantity = quantity;
 		this.purpose = purpose;
@@ -39,6 +40,7 @@ public class MessStockMove implements java.io.Serializable {
 		this.itemid = itemid;
 		this.stockentryid = stockentryid;
 		this.status = status;
+		this.userid = userid;
 	}
 
 	public Integer getId() {
@@ -121,5 +123,11 @@ public class MessStockMove implements java.io.Serializable {
 		this.status = status;
 	}
 
+	public int getUserid() {
+		return userid;
+	}
 
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 }

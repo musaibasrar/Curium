@@ -27,5 +27,8 @@
          <property name="linkedledgeridexpense" type="java.lang.Integer">
             <column name="linkedledgeridexpense" />
         </property>
+        <property name="userid" type="int">
+ <column name="userid" />
+</property>
     </class>
 </hibernate-mapping>

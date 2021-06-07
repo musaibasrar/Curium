@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11 Feb, 2015 9:12:10 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.model.mess.supplier.dto.MessSuppliersPayment" table="mess_supplierpaymentdetails" >
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <!-- <generator class="identity" /> -->
+            <generator class="native" />
+        </id>
+        <property name="externalid" type="string">
+            <column name="externalid" />
+        </property>
+        <property name="branchid" type="java.lang.Integer">
+            <column name="branchid" />
+        </property>
+        <property name="supplierid" type="java.lang.Integer">
+            <column name="supplierid" />
+        </property>
+        <property name="chequeno" type="string">
+            <column name="chequeno" />
+        </property>
+        <property name="amount" type="java.lang.Float">
+            <column name="amount" />
+        </property>
+        <property name="voucherid" type="java.lang.Integer">
+            <column name="voucherid" />
+        </property>
+        <property name="issuedate" type="date">
+            <column name="issuedate" />
+        </property>
+        <property name="delivereddate" type="date">
+            <column name="delivereddate" />
+        </property>
+        <property name="cleareddate" type="date">
+            <column name="cleareddate" />
+        </property>
+         <property name="entrydate" type="date">
+            <column name="entrydate" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" />
+        </property>
+        <property name="userid" type="int">
+ 			<column name="userid" />
+		</property>
+
+    </class>
+</hibernate-mapping>

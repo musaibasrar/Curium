@@ -10,8 +10,12 @@ import org.hibernate.query.Query;
 
 import com.model.account.dto.Accountdetails;
 import com.model.account.dto.Accountdetailsbalance;
+import com.model.account.dto.VoucherEntrytransactions;
 import com.model.mess.stockentry.dto.MessInvoiceDetails;
 import com.model.mess.supplier.dto.MessSuppliers;
+import com.model.mess.supplier.dto.MessSuppliersPayment;
+import com.model.student.dto.Student;
+import com.util.DateUtil;
 import com.util.HibernateUtil;
 import com.util.Session;
 import com.util.Session.Transaction;
@@ -174,5 +178,227 @@ public class MessSuppliersDAO {
         }
         return result;
 }
+
+
+
+	public Accountdetailsbalance getSupplierBalance(String supplieridledgerid) {
+		
+		Accountdetailsbalance accountDetailsBalance = new Accountdetailsbalance();
+		
+		try {
+			transaction = session.beginTransaction();
+			
+			
+			Query query = session.createQuery("from Accountdetailsbalance where accountdetailsid ="+supplieridledgerid);
+			accountDetailsBalance = (Accountdetailsbalance) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		
+		return accountDetailsBalance;
+	}
+
+
+
+	public boolean saveIssueCheque(MessSuppliersPayment messSuppliersPayment, VoucherEntrytransactions transactions, String updateCrAccount, String updateDrAccount) {
+		 
+		boolean result = false;
+		try {
+	            //this.session = sessionFactory.openCurrentSession();
+	            transaction = session.beginTransaction();
+	            session.save(transactions);
+	            
+	            messSuppliersPayment.setVoucherid(transactions.getTransactionsid());
+	            session.save(messSuppliersPayment);
+	            
+	            Query queryCrUpdate = session.createQuery(updateCrAccount);
+	            queryCrUpdate.executeUpdate();
+				
+				Query queryDrUpdate = session.createQuery(updateDrAccount);
+				queryDrUpdate.executeUpdate();
+				
+				transaction.commit();
+				result = true;
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            hibernateException.printStackTrace();
+	        } finally {
+	    			HibernateUtil.closeSession();
+	        }
+		return result;
+	}
+
+
+
+	public List<MessSuppliersPayment> readListOfSuppliersPaymentPagination(int offset, int noOfRecords, int branchid) {
+		List<MessSuppliersPayment> results = new ArrayList<MessSuppliersPayment>();
+
+		try {
+			
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("FROM MessSuppliersPayment msp where msp.branchid='"+branchid+"' order by msp.issuedate DESC").setCacheable(true).setCacheRegion("commonregion");
+			query.setFirstResult(offset);
+			query.setMaxResults(noOfRecords);
+			results = query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+
+
+
+	public int getNoOfSuppliersPaymentDetails(int branchId) {
+		
+		List<MessSuppliersPayment> results = new ArrayList<MessSuppliersPayment>();
+		int noOfRecords = 0;
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			transaction = session.beginTransaction();
+
+			results = (List<MessSuppliersPayment>) session.createQuery("FROM MessSuppliersPayment msp where branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
+					.list();
+			noOfRecords = results.size();
+			logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "+ noOfRecords);
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return noOfRecords;
+		}
+	}
+
+
+
+	public boolean updateSupplierPayment(MessSuppliersPayment messSuppliersPayment, VoucherEntrytransactions transactions, String updateCrAccount, String updateDrAccount, VoucherEntrytransactions transactionsSupplier, String updateCrAccountSupplier, String updateDrAccountSupplier) {
+		
+        boolean result = false;
+        try {
+                transaction = session.beginTransaction();
+                
+                session.save(transactions);
+				Query query = session.createQuery(updateDrAccount);
+				query.executeUpdate();
+				Query query1 = session.createQuery(updateCrAccount);
+				query1.executeUpdate();
+				
+				session.save(transactionsSupplier);
+				Query queryDrSupplier = session.createQuery(updateDrAccountSupplier);
+				queryDrSupplier.executeUpdate();
+				Query queryCrSupplier = session.createQuery(updateCrAccountSupplier);
+				queryCrSupplier.executeUpdate();
+                
+                Query querySupplierPayment = session.createQuery("update MessSuppliersPayment set cleareddate = '"+DateUtil.dateParseryyyymmdd(messSuppliersPayment.getDelivereddate())+"', status='CLEARED', voucheridcleared='"+transactionsSupplier.getTransactionsid()+"' where id="+messSuppliersPayment.getId());
+    			querySupplierPayment.executeUpdate();
+                
+                transaction.commit();
+                
+                result = true;
+                
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                
+                hibernateException.printStackTrace();
+
+        } finally {
+    			HibernateUtil.closeSession();
+        }
+        return result;
+}
+
+
+
+	public boolean updateSupplierPaymentDelivered(List<MessSuppliersPayment> messSuppliersPaymentList) {
+		
+		boolean result = false;
+        try {
+                transaction = session.beginTransaction();
+                
+                for (MessSuppliersPayment messSuppliersPayment : messSuppliersPaymentList) {
+                	Query query = session.createQuery("update MessSuppliersPayment set delivereddate = '"+DateUtil.dateParseryyyymmdd(messSuppliersPayment.getDelivereddate())+"', status='DELIVERED' where id="+messSuppliersPayment.getId());
+    				query.executeUpdate();
+				}
+                
+                transaction.commit();
+                result = true;
+                
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                
+                hibernateException.printStackTrace();
+
+        } finally {
+    			HibernateUtil.closeSession();
+        }
+        return result;
+        
+	}
+
+
+
+	public boolean updateSupplierPaymentToIssueed(String updateQuery) {
+		
+		boolean result = false;
+        try {
+                transaction = session.beginTransaction();
+                
+                Query query = session.createQuery(updateQuery);
+    			query.executeUpdate();
+                
+                transaction.commit();
+                
+                result = true;
+                
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                
+                hibernateException.printStackTrace();
+
+        } finally {
+    			HibernateUtil.closeSession();
+        }
+        return result;
+        
+	}
+
+
+
+	public boolean reverseIssueCheque(String updateMessSupplierPayment, VoucherEntrytransactions transactions,
+			String updateCrAccount, String updateDrAccount) {
+		
+		boolean result = false;
+		try {
+	            //this.session = sessionFactory.openCurrentSession();
+	            transaction = session.beginTransaction();
+	            session.save(transactions);
+	            
+	            Query queryCrUpdate = session.createQuery(updateCrAccount);
+	            queryCrUpdate.executeUpdate();
+				
+				Query queryDrUpdate = session.createQuery(updateDrAccount);
+				queryDrUpdate.executeUpdate();
+				
+				Query query = session.createQuery(updateMessSupplierPayment);
+    			query.executeUpdate();
+				
+				transaction.commit();
+				result = true;
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            hibernateException.printStackTrace();
+	        } finally {
+	    			HibernateUtil.closeSession();
+	        }
+		return result;
+	}
 	
 }

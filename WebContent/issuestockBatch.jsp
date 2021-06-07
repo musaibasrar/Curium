@@ -1,6 +1,6 @@
 <%--
-    Document   : Purchase
-    Created on : Dec 23, 2011, 5:52:28 PM
+    Document   : Issuestock
+    Created on : Nov 24, 2020, 8:42:28 PM
     Author     : Musaib
 --%>
 
@@ -16,8 +16,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Purchase Entry</title>
+<title>Issue Stock</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -67,26 +66,67 @@
 	width: auto;
 }
 
-.alignRight {
-	font-family: Tahoma;
-	font-size: 14px;
-	font-style: normal;
-	text-transform: capitalize;
-	color: #325F6D;
-	text-align: left;
-	vertical-align: middle;
-	font-weight: bold;
+.textField {
+
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #5d7e9b;
+	border-right-color: #5d7e9b;
+	border-bottom-color: #5d7e9b;
+	border-left-color: #5d7e9b;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	width: 220px;
+	height: 25px;
+	border-radius: 5px;
+	background-color: white;
 }
 
-.alignRightInvoice {
-	font-family: Tahoma;
-	font-size: 14px;
-	font-style: normal;
-	text-transform: capitalize;
-	color: #eb6000;
-	text-align: left;
-	vertical-align: middle;
-	font-weight: bold;
+.textfieldvaluesshorts{
+
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #5d7e9b;
+	border-right-color: #5d7e9b;
+	border-bottom-color: #5d7e9b;
+	border-left-color: #5d7e9b;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	width: 80px;
+	height: 25px;
+	border-radius: 5px;
+	background-color: white;
+	 
+}
+
+
+.textfieldvalues{
+
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #5d7e9b;
+	border-right-color: #5d7e9b;
+	border-bottom-color: #5d7e9b;
+	border-left-color: #5d7e9b;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	width: 220px;
+	height: 25px;
+	border-radius: 5px;
+	background-color: white;
+	 
 }
 
 .alignRightMultiple {
@@ -196,13 +236,15 @@
 
 .headerText {
 	border-radius: 3px;
+	width: 10px;
 	font-family: Tahoma;
-	font-size: 14px;
+	font-size: 12px;
 	background-color: #4b6a84;
 	color: #FFFFFF;
 	font-weight: normal;
 	width: auto;
 	height: 27px;
+	vertical-align: text-top;
 	text-align: center;
 	background-image:
 		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
@@ -215,16 +257,6 @@
 	font-size: 13px;
 	letter-spacing: normal;
 	text-align: center;
-	background-color: #E3EFFF;
-}
-
-.dataTextRight{
-	border-radius: 3px;
-	font-family: Tahoma;
-	color: #4b6a84;
-	font-size: 13px;
-	letter-spacing: normal;
-	text-align: right;
 	background-color: #E3EFFF;
 }
 
@@ -305,55 +337,24 @@
 	text-transform: capitalize;
 }
 
+
+.alignRight {
+	font-family: Tahoma;
+	font-size: 14px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
 .dropdownlist{
 	width: 220px;
 	height:27px;
 	border-radius: 5px;
 	background-color: white;
 }
-
-.textfieldvalues{
-
-	border-top-style: solid;
-	border-right-style: solid;
-	border-bottom-style: solid;
-	border-left-style: solid;
-	border-top-color: #5d7e9b;
-	border-right-color: #5d7e9b;
-	border-bottom-color: #5d7e9b;
-	border-left-color: #5d7e9b;
-	border-top-width: 1px;
-	border-right-width: 1px;
-	border-bottom-width: 1px;
-	border-left-width: 1px;
-	width: 220px;
-	height: 25px;
-	border-radius: 5px;
-	background-color: white;
-	 
-}
-
-.textfieldvaluesshorts{
-
-	border-top-style: solid;
-	border-right-style: solid;
-	border-bottom-style: solid;
-	border-left-style: solid;
-	border-top-color: #5d7e9b;
-	border-right-color: #5d7e9b;
-	border-bottom-color: #5d7e9b;
-	border-left-color: #5d7e9b;
-	border-top-width: 1px;
-	border-right-width: 1px;
-	border-bottom-width: 1px;
-	border-left-width: 1px;
-	width: 80px;
-	height: 25px;
-	border-radius: 5px;
-	background-color: white;
-	 
-}
-
 
 
 .alert-box {
@@ -479,53 +480,70 @@
 		});
 	});
 	$(function() {
-				
-		$("#invoicedate").datepicker({
+		$("#transactiondate").datepicker({
 			changeYear : true,
 			changeMonth : true,
 			dateFormat: 'dd/mm/yy',
-			yearRange:   "-0:+1"
+			yearRange: "-50:+0"
 		});
 		$("#anim").change(function() {
-			$("#invoicedate").datepicker("option", "showAnim", $(this).val());
-		});
-	});
-	$(function() {
-		
-		$("#itementrydate").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'dd/mm/yy',
-			yearRange:  "-0:+1"
-		});
-		$("#anim").change(function() {
-			$("#itementrydate").datepicker("option", "showAnim", $(this).val());
+			$("#transactiondate").datepicker("option", "showAnim", $(this).val());
 		});
 	});
 </script>
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	
-	function saveInventory() {
-		
+
+	function saveissueentry() {
 		var form1 = document.getElementById("form1");
 		
 		if(form1.checkValidity()) {
-			form1.action = "Controller?process=MessItemsProcess&action=savePurchase";
+			form1.action = "Controller?process=MessItemsMoveProcess&action=saveStockMove";
 			form1.method = "POST";
 			form1.submit();
 		}
 		
+
 	}
 	
-	function cancelPurchase() {
-			
-				var form1 = document.getElementById("form1");
-				form1.action = "Controller?process=MessItemsProcess&action=cancelPurchase";
-				form1.method = "POST";
-				form1.submit();
-			
-		}
+	function cancelRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=MessItemsMoveProcess&action=cancelStockMove";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	
+	function printRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=AdminProcess&action=printVoucher";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
+	function approveRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=AdminProcess&action=approveVoucher";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
+	function rejectRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=AdminProcess&action=rejectVoucher";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
+	$(function() {
+
+		$("#tabs").tabs();
+		$("#saveissueentry").button().click(function() {
+			saveissueentry();
+		});
+		$("#effect").hide();
+
+	});
 	
 	function selectAllRow(tableID){
         var table = document.getElementById(tableID);
@@ -543,33 +561,15 @@
         }
     }
 	
-	 function calculate(value2) {
-
-      	var price=document.getElementById("price_"+value2).value;
-      	
-      	        	
-          var final1=document.getElementById("linetotal_"+value2);
-          var quantity=document.getElementById("items_quantity_"+value2).value;
-          final1.value=price*quantity;
-         
-      }
-	 
-	 function calculateTransportationCharges() {
-
-	      	var grandtotal=document.getElementById("itemsTotalAmount").value;
-	      	
-	      	        	
-	          var final1=document.getElementById("itemsGrandTotalAmount");
-	          var transportationcharges=document.getElementById("transportationcharges").value;
-	          final1.value = parseInt(grandtotal) + parseInt(transportationcharges);
-	         
-	      }
-	
 	var itemlist=[
-        <c:forEach varStatus="status" items="${messstockavailabilitylist}" var="itemlist">{
-                value:'<c:out default="0" value="${itemlist.messitems.name}" />',
-                particularname:'<c:out default="0" value="${itemlist.messitems.unitofmeasure}" />',
-                id:'<c:out default="0" value="${itemlist.messitems.id}" />'
+        <c:forEach varStatus="status" items="${messstockitemdetailslist}" var="itemlist">{
+        		availablestock:'<c:out default="0" value="${itemlist.availablequantity}" />',
+        		unitprice:'<c:out default="0" value="${itemlist.itemunitprice}" />',
+                value:'<c:out default="0" value="${itemlist.itemname}" />',
+                batchno:'<c:out default="0" value="${itemlist.batchno}" />',
+                particularname:'<c:out default="Kilogram" value="${itemlist.unitofmeasure}" />',
+                itemid:'<c:out default="0" value="${itemlist.itemid}" />',
+                id:'<c:out default="0" value="${itemlist.stockentryid}" />'
                 }<c:if test="${!status.last}">,</c:if>
         </c:forEach>
         ];
@@ -577,12 +577,13 @@
 	function addRow() {
         var rowCount = document.getElementById('dataTable').rows.length;    
         
-        var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=items_"+rowCount+" /><input type='hidden' name='itemids' id=items_id_"+rowCount+" value='' /></td>";
-        var col2="<td class='dataTextInActive'><input type='text' name='itemsname' id=items_name_"+rowCount+" class='textfieldvalues' style='font-size: 14px;'/></td>";
-        var col3="<td class='dataTextInActive'><input  value='0'   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
-        var col4="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
-        var col5="<td class='dataTextInActive'><input type='text' value='0'  name='price' id=price_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
-        var col6="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+        var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=ids_"+rowCount+" /><input type='hidden' name='ids' id=stockmove_ids_"+rowCount+" value='' /></td>";
+        var col2="<td class='dataTextInActive'><input type='text' name='itemsname' id=items_name_"+rowCount+" class='textfieldvalues' style='font-size: 14px;'/><input type='hidden' name='itemsids' id=items_ids_"+rowCount+" value='' /></td>";
+ 	    var col3="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+ 	   	var col4="<td class='dataTextInActive'><input type='text' value=''   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+ 	    var col5="<td class='dataTextInActive'><input type='text' value='0'   name='itemunitprice' id=itemunitprice_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+ 	   	var col6="<td class='dataTextInActive'><input type='text' name='issuequantity' id=issuequantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")' onkeypress='calculate("+rowCount+")' onkeydown='calculate("+rowCount+")' required /></td>";
+        /* var col6="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>"; */
         /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
@@ -595,33 +596,64 @@
                 source: itemlist,
                 minLength: 1,
                 change:function(event,ui){
-                	
-                    $("#items_id_"+rowCount ).val( ui.item.id );
+                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
+                    $("#items_ids_"+rowCount ).val( ui.item.itemid );
                     $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
+                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
+                    $("#itemunitprice_"+rowCount).val( ui.item.unitprice );
                 },
                 focus: function( event, ui ) {
+                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
                     $( "#items_name_"+rowCount).val( ui.item.name );
-                    $( "#items_id_"+rowCount ).val( ui.item.id );
-                    $("#items_unitofmeasure"+rowCount).val( ui.item.particularname );
-
+                    $( "#items_ids_"+rowCount ).val( ui.item.itemid );
+                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
+                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
+                    $("#itemunitprice_"+rowCount).val( ui.item.unitprice );
                     return true;
                 },
                 select: function( event, ui ) {
+                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
                     $( "#items_name_"+rowCount).val( ui.item.value );
-                    $( "#items_id_"+rowCount ).val( ui.item.id );
+                    $( "#items_ids_"+rowCount ).val( ui.item.itemid );
                     $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
-                   
+                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
+                    $("#itemunitprice_"+rowCount).val( ui.item.unitprice );
                     return true;
                 }
             }).data( "autocomplete" )._renderItem = function( ul, item ) {
                 return $( "<li></li>" )
                 .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +":&nbsp;</b> <b> "+item.particularname +"</b></a>" )
+                .append( "<a><b> " + item.value +"&nbsp;/&nbsp;</b> <b> "+item.batchno +"</b></a>" )
                 .appendTo( ul );
             };
 
         });
     }
+	
+	 function calculate(value2) {
+
+	      	  var availableQuantity=document.getElementById("items_quantity_"+value2).value;
+	          var issueQuantity=document.getElementById("issuequantity_"+value2).value;
+	          
+	          if(parseFloat(issueQuantity,10)>parseFloat(availableQuantity,10)){
+	        	  $( "#dialog" ).dialog( "open" );
+	        	  document.getElementById("issuequantity_"+value2).value='';
+	          }
+	          
+	         
+	      }
+	 
+	 $(function() {
+         $( "#dialog" ).dialog({
+             autoOpen: false,
+             height: 40,
+             width: 180,
+             modal: true,
+         });
+     });
+
+
+
 	
 	$(function() {
 
@@ -655,111 +687,47 @@
         
 
 	});
-	
-	function calculateGrandTotal() {
-        var sum = 0.0;
-        var column2 = $('.linetotalAmount')
-        jQuery.each(column2,function(){
-            sum += parseFloat($(this).val());
-        });
-        
-        $('#itemsTotalAmount').val(sum);
-    }
-	
-	$(document).ready(function() {
-        
-        
-        $("#dataTable").keyup(function(){
-            
-            var sum = 0.0;
-            var totalSum=0.0;
-            var column2 = $('.linetotalAmount')
-            jQuery.each(column2,function(){
-                sum += parseFloat($(this).val());
-            });
-            
-            $('#itemsTotalAmount').val(sum);
-            
-        });
-        $("#dataTable").click(function(){
-            
-            var sum = 0.0;
-            var totalSum=0.0;
-            var column2 = $('.linetotalAmount')
-            jQuery.each(column2,function(){
-                sum += parseFloat($(this).val());
-            });
-            
-            $('#itemsTotalAmount').val(sum);
-        });
-
-
-    });
-	
-	function deleteRow(tableID) {
-        try {
-            var table = document.getElementById(tableID);
-            var rowCount = table.rows.length;
-            if(rowCount==1){
-                alert('No records to delete');
-            }
-            for(var i=1; i<rowCount-3; i++) {
-                var row = table.rows[i];
-                var chkbox = row.cells[0].childNodes[0];
-                if(null != chkbox && true == chkbox.checked) {
-                    table.deleteRow(i);
-                    rowCount--;
-                    i--;
-                }
-            }
-           
-            
-            var sum = 0.0;
-            var totalSum=0.0;
-            var column2 = $('.linetotalAmount')
-            jQuery.each(column2,function(){
-                sum += parseFloat($(this).val());
-            });
-            totalSum=sum;
-            
-            $('#itemsTotalAmount').val(totalSum);
-            	calculateGrandTotal();
-            //$('#grandTotalAmount').val(0);
-        }catch(e) {
-            alert(e);
-        }
-    }
-
-    
+   
 	 $(function(){
-         
-         $("#saveitemsinventory").button({
+		 
+		
+         $("#cancel").button({
              icons:{
-                 primary: "ui-icon-check"
+                 primary: "ui-icon-cancel"
              }
          }).click(function(){
-             saveInventory();
+             cancelRecords();
              return false;
 
          });
          
-         $('#chckHeadReceived').click(function () {
-             var length = $('.chcktbl:checked').length;
-             var trLength=$('.trClass').length;
-             if(length>0){
-                 $('.chcktbl:checked').attr('checked', false);
-                 this.checked=false;
-
+         $("#print").button({
+             icons:{
+                 primary: "ui-icon-print"
              }
-             else{
-                 if (this.checked == false) {
-                     $('.chcktbl:checked').attr('checked', false);
-                 }
-                 else {
-                     $('.chcktbl:not(:checked)').attr('checked', true);
-                 }
+         }).click(function(){
+             printRecords();
+             return false;
 
+         });
+         
+         $("#approve").button({
+             icons:{
+                 primary: "ui-icon-check"
              }
+         }).click(function(){
+             approveRecords();
+             return false;
+
+         });
+         
+         $("#reject").button({
+             icons:{
+                 primary: "ui-icon-closethick"
+             }
+         }).click(function(){
+             rejectRecords();
+             return false;
 
          });
          $('#chckHead').click(function () {
@@ -794,85 +762,44 @@
              }
          });
          
-         $("#cancel").button({
-             icons:{
-                 primary: "ui-icon-cancel"
-             }
-         }).click(function(){
-             cancelPurchase();
-             return false;
-
-         });
      });
+     
+     
+     function deleteRow(tableID) {
+        try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            if(rowCount==1){
+                alert('No records to delete');
+            }
+            for(var i=1; i<rowCount; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+            }
+           
+        }catch(e) {
+            alert(e);
+        }
+    }
+    
 </script>
 
-<script type="text/javascript">
-
-            function openPopup(invoicedetailsid,date, supplierrefno, name, invoicetotal){
-            	
-        			 if (typeof XMLHttpRequest != "undefined") {
-        				 xmlHttp = new XMLHttpRequest();
-        	            
-        	         } else if (window.ActiveXObject) {
-        	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-        	             
-        	         }
-        			xmlHttp.onreadystatechange = stateChangedSSGroup;
-        			xmlHttp.open("GET", "AjaxController?process=stockentry&action=mrvdetails&invoicedetailsid="+invoicedetailsid+"&entrydate="+date+"&supplierreferenceno="+supplierrefno+"&suppliername="+name+"&invoicetotal="+invoicetotal+"",true);;
-        			xmlHttp.send(null);
-
-        		
-                $( "#dialog" ).dialog( "open" );
-            }
-            
-            function stateChangedSSGroup() {
-
-        		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-        			document.getElementById("mrvdetails").innerHTML = xmlHttp.responseText;
-        		}
-        	}
-            
-            function selectVendor(name,id){
-                var vendorName=document.getElementById('vendorName');
-                var vendorID=document.getElementById("vendorID");
-                vendorName.value=name;
-                vendorID.value=id;
-                $( "#dialog" ).dialog( "close" );
-
-            }
-        </script>
 
 
-        <script type="text/javascript">
-
-            $(function() {
-                $( "#dialog" ).dialog({
-                    autoOpen: false,
-                    height: 400,
-                    width: 600,
-                    modal: true,
-                    buttons: {
-                        Cancel: function() {
-                            $( this ).dialog( "close" );
-                        }
-
-                    }
-                });
-            });
-
-
-
-        </script>
-        
-        <script type="text/javascript">
+		<script type="text/javascript">
 					
-					var itemsreceived = '<c:out default="" value="${itemsreceived}"/>';
+					var itemsissued='<c:out default="" value="${itemsissued}"/>';
 		            
-		            if(itemsreceived == "true"){
+		            if(itemsissued == "true"){
 		            	 $(function(){
 		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 );
 		            	 });
-		            	 }else if(itemsreceived == "false"){
+		            	 }else if(itemsissued == "false"){
 		            	  $(function(){
 		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 );
 		            		 });
@@ -908,17 +835,20 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
+
 	<form id="form1" method="POST">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");
-		%>
-		<jsp:useBean id="now" class="java.util.Date" scope="page" />
-		<div class="alert-box success" id="div1">Items has been received successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
-		<div class="alert-box failure" id="div2">Items received failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
 		
+		%>
+		
+		<div class="alert-box success" id="div1">Items has been issued successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box failure" id="div2">Items issuance failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
+		
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		<div style="height: 28px">
-			<button id="add">Receive Entry</button>
+			<button id="add">Issue Entry</button>
 			<br />
 		</div>
 
@@ -929,107 +859,106 @@ for(Cookie cookie : cookies){
 
 				</ul>
 				<div id="tabs-1">
-				<br>
-				<br>
-				<table  style="margin-left: auto;margin-right: auto;">
+				
+					<table style="margin-left: auto;margin-right: auto;">
+					
+						<tr>
+							<td><br><br></td>
+						</tr>
 						
 						<tr>
-							<td class="alignRight">Supplier &nbsp;</td>
-							<td>
-								<select name="supplierid" id="supplierid" class="dropdownlist" style="font-size: 14px;" required>
-										<c:forEach items="${messsupplierslist}" var="messsupplierslist">
-											<option value="${messsupplierslist.id}:${messsupplierslist.linkedledgerid}">${messsupplierslist.name}</option>
-										</c:forEach>
-								</select>
-							</td>
-							
-							<td class="alignRight">&nbsp;&nbsp;&nbsp;Ref./Invoice No.&nbsp;</td>
-							<td ><input type="text" id="supplierreferenceno" name="supplierreferenceno" class="textfieldvalues" style="font-size: 14px;">
-							</td>
-							
-						</tr>
-						<tr>
-							<td><br /></td>
-	
-							</tr>
-						<tr>
-						<td class="alignRight">Invoice Date&nbsp;</td>
-							<td><label> <input	name="invoicedate"	type="text" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" class="textfieldvalues" id="invoicedate" style="font-size: 14px;" autocomplete="false" required>
-							</label></td>
-							
-							<td class="alignRight">&nbsp;&nbsp;&nbsp;Receive Date&nbsp;</td>
-							<td><label> <input	name="itementrydate" type="text" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" class="textfieldvalues" id="itementrydate" style="font-size: 14px;" autocomplete="false" required>
+						<td class="alignRight">Date&nbsp;</td>
+							<td><label> <input type="text"  name="transactiondate"
+									class="textField" style="font-size: 14px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="transactiondate" autocomplete="false"
+									data-validate="validate(required)">
 							</label></td>
 							
 							</tr>
 							<tr>
 							<td><br /></td>
+	
 							</tr>
+						
+						<tr>
+						
+						<tr>
+							<td class="alignRight">Issue To&nbsp;</td>
+							<td ><label>
+									<select name="issuedto"
+									id="issuedto" class="dropdownlist" style="font-size: 14px;" >
+										<option selected="selected">Shaheen Nagar- Mess</option>
+										<option>Gole Khana- Mess</option>
+										<option>Mailoor- Mess</option>
+								</select>
+							
+							</label></td>
+						
+							<td  class="alignRight">Purpose &nbsp;</td>
+							<td ><label> <select name="purpose"
+									id="purpose" class="dropdownlist" style="font-size: 14px;" required>
+										<option selected></option>
+										<option>Breakfast</option>
+										<option>Lunch</option>
+										<option>Dinner</option>
+										<option>Other</option>
+								</select>
+							</label></td>
+							
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 					</table>
 					
 					<div align="center">
 						<p>
 						<h2 style="text-decoration: underline;color: #eb6000">Item Details</h2>	
 						<label><button id="addnewitem">Add Item</button></label><label><button id="removenewitem">Remove Item</button></label></p>
-						
-									
 					</div>
 					
 					<br>
 					<table style="margin-left: auto;margin-right: auto;border: 1px solid black;" id="dataTable">
 						<thead>
 							<tr>
-								<th class="headerText">
-								<input type="checkbox" id="chckHeadReceived" />
-								<!-- <input type="checkbox"
+								<th class="headerText"><input type="checkbox"
 									id="selectAll" name="selectAll"
-									onclick="selectAllRow('dataTable')" /> --> </th>
+									onclick="selectAllRow('dataTable')" /> </th>
 								<th class="headerText">Item Name</th>
-								<th class="headerText">UOM</th>
-								<th class="headerText">Quantity</th>
+								<th class="headerText">Available Quantity</th>
+								<th class="headerText">Unit of Measure</th>
 								<th class="headerText">Unit Price</th>
-								<th class="headerText">Item Total</th>
+								<th class="headerText">Issue Quantity</th>
 							</tr>
 						</thead>
 
 						<tbody>						
 						</tbody>
-							<tfoot>
-							<tr>
-
-								<td colspan="5" align="right" style="font-weight: bold;">Total&nbsp;&nbsp;</td>
-								<td align="center"><input type="text"
-									name="itemsTotalAmount" id="itemsTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" /></td>
-							</tr>
-							<tr>
-
-								<td colspan="5" align="right" style="font-weight: bold;">Transportation & Labour Charges&nbsp;&nbsp;</td>
-								<td align="center"><input type="text"
-									name="transportationcharges" id="transportationcharges" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" onkeyup="calculateTransportationCharges();" value="0" /></td>
-							</tr>
-							<tr>
-
-								<td colspan="5" align="right" style="font-weight: bold;">Grand Total&nbsp;&nbsp;</td>
-								<td align="center"><input type="text"
-									name="itemsGrandTotalAmount" id="itemsGrandTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" /></td>
-							</tr>
-
-						</tfoot>
 					</table>
-					<div align="center">
-						<p>
-						<label><button id="saveitemsinventory">Save</button></label></p>
-						
-									
+					<br>
+					<table id="table2" width="100%" border="0" align="center">
+						<tr>
+							<td align="center">
+								<button id="saveissueentry">Issue</button>
+							</td>
+						</tr>
+					</table>
+					
 					</div>
-				</div> 
+				</div>
+				
+				
 			</div>
 		</div>
 
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Items Received List</td>
+					<td class="headerTD">Items Issue List</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -1038,28 +967,26 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Invoice Date</th>
-						<th class="headerText">View Details</th>
-						<th title="click to sort" class="headerText">Supplier Reference/Invoice No</th>
-						<th title="click to sort" class="headerText">Supplier</th>
-						<th title="click to sort" class="headerText">Total Amount</th>
-						
+						<th title="click to sort" class="headerText">Issue Date</th>
+						<th title="click to sort" class="headerText">Purpose</th>
+						<th title="click to sort" class="headerText">Item Name</th>
+						<th title="click to sort" class="headerText">Quantity</th>
+						<th title="click to sort" class="headerText">Issued To</th>
 					</tr>
 				</thead>
 
 				<tbody>
 
-					<c:forEach items="${invoicelist}" var="invoicelist">
+					<c:forEach items="${messstockmovelist}" var="stockmovelist">
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
-							
-							
-                          <td class="dataText"><input type="checkbox" id = "<c:out value="${invoicelist.key.id}"/>" class = "chcktbl"  name="invoiceid"  value="<c:out value="${invoicelist.key.id}:${invoicelist.key.voucherid}:${invoicelist.key.status}"/>"/></td>
-						  <td class="dataText"><fmt:formatDate value="${invoicelist.key.invoicedate}" pattern="dd/MM/yyyy"/></td>
-						  <td class="dataText"><a href="#" onclick="openPopup('<c:out value="${invoicelist.key.id}"/>','<c:out value="${invoicelist.key.invoicedate}"/>','<c:out value="${invoicelist.key.supplierreferenceno}"/>','<c:out value="${invoicelist.value.name}"/>','<c:out value="${invoicelist.key.invoicetotal}"/>')" style="color:#eb6000;">View Details</a></td>
-						  <td class="dataText"><c:out value="${invoicelist.key.supplierreferenceno}" /></td>
-						  <td class="dataText"><c:out value="${invoicelist.value.name}" /></td>
-						  <td class="dataTextRight"><c:out value="${invoicelist.key.invoicetotal}" /></td>
+                          <td class="dataText"><input type="checkbox" id = "<c:out value="${stockmovelist.id}"/>" class = "chcktbl"  name="stockmoveid"  value="<c:out value="${stockmovelist.id}"/>"/></td>
+						  <td class="dataText" style="width: 10%;"><input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: center;" name="transactiondate_${stockmovelist.id}" value="<fmt:formatDate value="${stockmovelist.transactiondate}" pattern="dd/MM/yyyy"/>" readonly></td>
+						  <td class="dataText"><c:out value="${stockmovelist.purpose}" /></td>
+						     <c:set var="itemparts" value="${fn:split(stockmovelist.externalid, '_')}" />
+						  <td class="dataText"><c:out value="${itemparts[0]}" /></td>
+						  <td class="dataText"><c:out value="${stockmovelist.quantity}" /></td>
+						  <td class="dataText"><c:out value="${stockmovelist.issuedto}" /></td>
 						</tr>
 					</c:forEach>
 
@@ -1069,8 +996,7 @@ for(Cookie cookie : cookies){
                             <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
                     		<td class="footerTD"  colspan="8">
                     		<!-- <button id="print">Print</button> --> 
-                    		<!-- &nbsp;&nbsp;&nbsp;
-                    		<button id="approve">Approve</button>
+                    		<!-- <button id="approve">Approve</button>
                     		&nbsp;&nbsp;&nbsp;
                     		<button id="reject">Reject</button> 
                     		&nbsp;&nbsp;&nbsp; -->
@@ -1080,10 +1006,10 @@ for(Cookie cookie : cookies){
                     </tfoot>
 			</table>
 			
-				<div align="center">
+			<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="Controller?process=MessItemsProcess&action=purchaseItems&page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="Controller?process=MessItemsMoveProcess&action=issueItems&page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -1096,7 +1022,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="Controller?process=MessItemsProcess&action=purchaseItems&page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="Controller?process=MessItemsMoveProcess&action=issueItems&page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -1105,44 +1031,16 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="Controller?process=MessItemsProcess&action=purchaseItems&page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="Controller?process=MessItemsMoveProcess&action=issueItems&page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
-
+                    
 		</div>
 
-
-		<div id="dialog" title="Items Receive Details">
-				
-                
-             	 <div id="mrvdetails">
-              			
-              			
-           		 </div>
-           		 
-           		 <!-- <table width="100%" border="0">
-						
-						
-						
-						<tr>
-						<td width="30%" class="alignRight">Sub-Group Name &nbsp;</td>
-						
-							<td width="12%" align="left" id="mrvdetails"><label> <select name="subgroupname" id="sgname"  onchange="dropdowndist()"
-									style="width: 240px" ">
-									<option >UI</option>
-								</select>
-							</label>
-							
-							</td>
-							
-						</tr>
-						
-						</table> -->
-			</div>
-
-
-
 	</form>
+	
+	<div id="dialog" title="Quantity not in stock">
+	</div>
 
 </body>
 </html>

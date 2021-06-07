@@ -25,11 +25,13 @@ public class MessStockEntry implements java.io.Serializable {
 	private Float availablequantity;
 	private MessInvoiceDetails messinvoicedetails;
 	private String status;
+	private int userid;
+	private Date receiveddate;
 	
 	public MessStockEntry() {
 	}
 	
-	public MessStockEntry(Integer id, String externalid, String batchno, Float quantity, Float itemunitprice,Integer branchid, Integer itemsid, Float availablequantity, String status) {
+	public MessStockEntry(Integer id, String externalid, String batchno, Float quantity, Float itemunitprice,Integer branchid, Integer itemsid, Float availablequantity, String status, int userid, Date receiveddate) {
 		this.id = id;
 		this.externalid = externalid;
 		this.batchno = batchno;
@@ -39,6 +41,8 @@ public class MessStockEntry implements java.io.Serializable {
 		this.itemid = itemsid;
 		this.availablequantity = availablequantity;
 		this.status = status;
+		this.userid = userid;
+		this.receiveddate = receiveddate;
 	}
 
 	public Integer getId() {
@@ -119,6 +123,22 @@ public class MessStockEntry implements java.io.Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public Date getReceiveddate() {
+		return receiveddate;
+	}
+
+	public void setReceiveddate(Date receiveddate) {
+		this.receiveddate = receiveddate;
 	}
 
 

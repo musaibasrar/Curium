@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.mess.item.dao.MessItemsDAO;
 import com.model.mess.item.service.MessItemsService;
 import com.model.mess.stockmove.service.MessStockMoveService;
 import com.model.mess.supplier.service.MessSuppliersService;
@@ -46,13 +47,17 @@ public class MessStockMoveAction {
         private String cancelStockMove() {
         	
         	new MessStockMoveService(request, response).cancelStockMove();
-        	new MessStockMoveService(request, response).viewStockEntryDetails();
+        	new MessItemsService(request, response).getCurrentStockToIssue();
+        	/*Batch stock issue 
+        	new MessStockMoveService(request, response).viewStockEntryDetails();*/
         	new MessStockMoveService(request, response).viewStockMoveDetails();
         	return "issuestock.jsp";
 		}
 
 		private String issueItems() {
-        	new MessStockMoveService(request, response).viewStockEntryDetails();
+			new MessItemsService(request, response).getCurrentStockToIssue();
+			/*Batch stock issue 
+        	new MessStockMoveService(request, response).viewStockEntryDetails();*/
         	new MessStockMoveService(request, response).viewStockMoveDetails();
         	return "issuestock.jsp";
         }
@@ -60,7 +65,9 @@ public class MessStockMoveAction {
         private String saveStockMove() {
         	
         	new MessStockMoveService(request, response).saveStockMove();
-        	new MessStockMoveService(request, response).viewStockEntryDetails();
+        	new MessItemsService(request, response).getCurrentStockToIssue();
+        	/*Batch stock issue 
+        	new MessStockMoveService(request, response).viewStockEntryDetails();*/
         	new MessStockMoveService(request, response).viewStockMoveDetails();
         	return "issuestock.jsp";
         	

@@ -135,5 +135,24 @@ public class MessStockEntryDAO {
         }
         return results;
 }
+
+
+
+	public List<MessStockEntry> getItemsStockEntry(int itemId) {
+		
+        List<MessStockEntry> results = new ArrayList<MessStockEntry>();
+        try {
+                transaction = session.beginTransaction();
+                results = (List<MessStockEntry>) session.createQuery("From MessStockEntry mse where mse.status != 'CANCELLED' and mse.itemid = '"+itemId+"' and mse.messinvoicedetails.status !='CANCELLED' and mse.availablequantity > 0  order by mse.id ASC").setCacheable(true).setCacheRegion("commonregion").list();
+                transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                
+                hibernateException.printStackTrace();
+
+        } finally {
+    			HibernateUtil.closeSession();
+        }
+        return results;
+}
 	
 }

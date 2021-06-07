@@ -36,5 +36,8 @@
             <property name="voucherid" type="java.lang.Integer">
             <column name="voucherid" />
         </property>
+        <property name="userid" type="int">
+ <column name="userid" />
+</property>
     </class>
 </hibernate-mapping>

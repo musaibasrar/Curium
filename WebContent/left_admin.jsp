@@ -277,6 +277,13 @@ Author     : Musaib
                 height: 22px;
             }
 
+.sideaccordian{
+		
+		font-size: 12px;
+		/* border: 0px; */
+		border-radius: 5px;
+		/* border-bottom:  1px solid #010d1c !important; */
+}
 
 
         </style>
@@ -547,13 +554,111 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=HrProcess&action=leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
             </div>
             
-              <h5 style="font-size: 12px"><a href="#" >Mess Management</a></h5>
-            <div >
-                <a target="mainFrame" href="Controller?process=MessProcess&action=issueItems" style="font-size: 12px;">Issue</a><br/>
-                <a target="mainFrame" href="Controller?process=MessProcess&action=purchaseItems" style="font-size: 12px;">Purchase</a><br/>
-                <a target="mainFrame" href="Controller?process=MessProcess&action=addItems" style="font-size: 12px;">View/Add Items</a><br/>
-                <a target="mainFrame" href="Controller?process=MessProcess&action=addSuppliers" style="font-size: 12px;">View/Add Suppliers</a><br/>
+            <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
+        	
+        	<div style="padding-left: 0px;padding-right: 0px;">
+            
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Controller?process=MessItemsMoveProcess&action=issueItems" style="font-size: 12px;">Issue</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=purchaseItems" style="font-size: 12px;">Receive</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="Controller?process=MessItemsProcess&action=viewItems" style="font-size: 12px;">View/Add Items</a>
+            			</td>
+            		</tr>
+            	</table>
             </div>
+            
+            
+            <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
+            
+            <div style="padding-left: 0px;padding-right: 0px;">
+            
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=currentStock" style="font-size: 12px;">Stock Quantity Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=batchStock" style="font-size: 12px;">Stock Price Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="Controller?process=MessItemsProcess&action=issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=receiveStock" style="font-size: 12px;">Stock Received Report</a>
+            			</td>
+            		</tr>
+            	</table>
+            </div>
+            
+            <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
+              
+              <div style="padding-left: 0px;padding-right: 0px;">
+            
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=paymentSuppliers" style="font-size: 12px;">Make Payment</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=balanceSuppliers" style="font-size: 12px;">Balance Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=MessSuppliersProcess&action=viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
+            			</td>
+            		</tr>
+            	</table>
+            </div>
+            
+            <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
+            
+            <div style="padding-left: 0px;padding-right: 0px;">
+            
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Controller?process=printids&action=generateIds" style="font-size: 12px;">Generate IDs</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=printids&action=cardValidity" style="font-size: 12px;">Card Validity</a>
+            			</td>
+            		</tr>
+            	</table>
+            </div>
+            
+             <!--  <h5 style="font-size: 12px"><a href="#" >Mess Management</a></h5>
+            <div>
+                <a target="mainFrame" href="Controller?process=MessItemsMoveProcess&action=issueItems" style="font-size: 12px;">Issue</a><br/>
+                <a target="mainFrame" href="Controller?process=MessItemsProcess&action=purchaseItems" style="font-size: 12px;">Receive</a><br/>
+                <a target="mainFrame" href="Controller?process=MessItemsProcess&action=viewItems" style="font-size: 12px;">View/Add Items</a><br/>
+                <a target="mainFrame" href="Controller?process=MessProcess&action=addSuppliers" style="font-size: 12px;">View/Add Suppliers</a><br/>
+            </div> -->
             
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>

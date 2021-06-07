@@ -16,21 +16,21 @@ import com.model.mess.supplier.dto.MessSuppliers;
 public class MessStockAvailability implements java.io.Serializable {
 
 	private Integer id;
-	private Integer itemid;
 	private Float availablestock;
 	private Integer minstock;
 	private Integer branchid;
 	private MessItems messitems;
+	private int userid;
 	
 	public MessStockAvailability() {
 	}
 	
-	public MessStockAvailability(Integer id, Float availablestock, Integer minstock,Integer branchid, Integer itemid) {
+	public MessStockAvailability(Integer id, Float availablestock, Integer minstock,Integer branchid, int userid) {
 		this.id = id;
 		this.availablestock = availablestock;
 		this.minstock = minstock;
 		this.branchid = branchid;
-		this.itemid = itemid;
+		this.userid = userid;
 	}
 
 	public Integer getId() {
@@ -39,14 +39,6 @@ public class MessStockAvailability implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Integer getItemid() {
-		return itemid;
-	}
-
-	public void setItemid(Integer itemid) {
-		this.itemid = itemid;
 	}
 
 	public Float getAvailablestock() {
@@ -81,6 +73,12 @@ public class MessStockAvailability implements java.io.Serializable {
 		this.messitems = messitems;
 	}
 
-	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 
 }

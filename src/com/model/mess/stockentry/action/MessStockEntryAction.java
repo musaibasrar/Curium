@@ -77,11 +77,6 @@ public class MessStockEntryAction {
         		 return viewItems();
         }
 
-        private String issueItems() {
-        	return "issuestock.jsp";
-        }
-
-
         private String purchaseItems() {
         	new MessSuppliersService(request, response).viewSuppliersDetails();
         	new MessItemsService(request, response).viewItemDetails();
