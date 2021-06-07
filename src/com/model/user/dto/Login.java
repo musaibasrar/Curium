@@ -28,15 +28,17 @@ public class Login implements java.io.Serializable {
 	private String password;
 	private String usertype;
 	private Branch branch;
+	private int userid;
 	
 	public Login() {
 	}
 
-	public Login(String username, String password, String usertype, Branch branch) {
+	public Login(String username, String password, String usertype, Branch branch, int userid) {
 		this.username = username;
 		this.password = password;
 		this.usertype = usertype;
 		this.branch = branch;
+		this.userid = userid;
 	}
 
 	@Id
@@ -84,4 +86,11 @@ public class Login implements java.io.Serializable {
 		this.branch = branch;
 	}
 
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 }

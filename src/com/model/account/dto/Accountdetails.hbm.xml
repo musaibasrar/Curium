@@ -20,6 +20,9 @@
           <property name="branchid" type="int">
             <column name="branchid" />
         </property>
+        <property name="userid" type="int">
+            <column name="userid" />
+        </property>
          <many-to-one name="accountSSGroupMaster" class="com.model.account.dto.Accountssgroupmaster"
             column="ssgroupmasterid" lazy="false"
             cascade="none" />
