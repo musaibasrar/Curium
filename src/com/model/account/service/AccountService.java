@@ -923,8 +923,8 @@ public class AccountService {
 		String accountDetails = DataUtil.emptyString(request.getParameter("accountid"));
 		String[] accountIdName = accountDetails.split(":");
 		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
-		String fromDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("fromdate")));
-		String toDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("todate")));
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
 		if(httpSession.getAttribute(BRANCHID)!=null) {
 
 		String twoAccounts = null;
@@ -1042,5 +1042,44 @@ public class AccountService {
 		
 	}
 		return true;
+	}
+	
+	
+public boolean printSearchJournalEntries() {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		String accountDetails = DataUtil.emptyString(request.getParameter("accountidselected"));
+		String[] accountIdName = accountDetails.split(":");
+		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
+		String fromDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdateselected")));
+		String toDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todateselected")));
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
+		String twoAccounts = null;
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+			
+			if(voucherEntry.getDraccountid() != accountId) {
+				twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+":Dr";
+			}else if(voucherEntry.getCraccountid() != accountId) {
+				twoAccounts = new AccountDAO().getAccountName(voucherEntry.getCraccountid())+":Cr";
+			}
+			//twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		request.setAttribute("ledgertransactions", voucherMap);
+		request.setAttribute("ledgername", accountIdName[1]);
+		request.setAttribute("fromdateselected", request.getParameter("fromdateselected"));
+		request.setAttribute("todateselected", request.getParameter("todateselected"));
+		
+		return true;
+		
+		}
+		return false;
 	}
 }
