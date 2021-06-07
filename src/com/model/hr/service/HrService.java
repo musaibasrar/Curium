@@ -266,7 +266,7 @@ public class HrService {
 	public void deletePf() {
 		String[] pfids = request.getParameterValues("pfids");
 		if (pfids != null) {
-			List ids = new ArrayList();
+			List<Integer> ids = new ArrayList();
 			for (String id : pfids) {
 				ids.add(Integer.valueOf(id));
 			}
@@ -453,7 +453,7 @@ public class HrService {
 		String[] idleaveapplication = request.getParameterValues("idleaveapplication");
 		
 		if (idleaveapplication != null) {
-			List ids = new ArrayList();
+			List<Integer> ids = new ArrayList();
 			for (String id : idleaveapplication) {
 				ids.add(Integer.valueOf(id));
 			}
@@ -468,7 +468,7 @@ public class HrService {
 		String[] idleaveapplication = request.getParameterValues("idleaveapplication");
 		
 		if (idleaveapplication != null) {
-			List ids = new ArrayList();
+			List<Integer> ids = new ArrayList();
 			for (String id : idleaveapplication) {
 				ids.add(Integer.valueOf(id));
 			}
@@ -699,7 +699,7 @@ public class HrService {
 		String[] StaffId = request.getParameterValues("teacherid");
 		String[] idpayheadstaffdetails = request.getParameterValues("idpayheadstaffdetails");
 		
-		List ids = new ArrayList();
+		List<Integer> ids = new ArrayList();
 		
 		if (idpayheadstaffdetails != null) {
 			for (String id : idpayheadstaffdetails) {
@@ -739,7 +739,7 @@ public class HrService {
 		boolean result = false;
 		
 		if (idProcessSalaryDetails != null) {
-			List ids = new ArrayList();
+			List<Integer> ids = new ArrayList();
 			for (String id : idProcessSalaryDetails) {
 				ids.add(Integer.valueOf(id));
 			}
@@ -755,7 +755,7 @@ public class HrService {
 		boolean result = false;
 		
 		if (idProcessSalaryDetails != null) {
-			List ids = new ArrayList();
+			List<Integer> ids = new ArrayList();
 			for (String id : idProcessSalaryDetails) {
 				ids.add(Integer.valueOf(id));
 			}

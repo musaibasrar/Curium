@@ -60,7 +60,7 @@ public class StandardService {
         
         String[] classIds = request.getParameterValues("classids");
         if (classIds != null) {
-                List ids = new ArrayList();
+                List<Integer> ids = new ArrayList();
                 for (String id : classIds) {
                         ids.add(Integer.valueOf(id));
                 }
@@ -86,7 +86,7 @@ public class StandardService {
         
         String[] classIds = request.getParameterValues("idclasshierarchy");
         if (classIds != null) {
-                List ids = new ArrayList();
+                List<Integer> ids = new ArrayList();
                 for (String id : classIds) {
                         ids.add(Integer.valueOf(id));
                 }
@@ -105,7 +105,7 @@ public class StandardService {
 	public boolean graduateMultiple() {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		boolean result = false;
-			List ids = new ArrayList();
+			List<Integer> ids = new ArrayList();
 			for (String id : studentIds) {
 				System.out.println("id" + id);
 				ids.add(Integer.valueOf(id));
@@ -120,7 +120,7 @@ public class StandardService {
 	public boolean droppedoutMultiple() {
 	String[] studentIds = request.getParameterValues("studentIDs");
 	boolean result = false;
-		List ids = new ArrayList();
+		List<Integer> ids = new ArrayList();
 		for (String id : studentIds) {
 			System.out.println("id" + id);
 			ids.add(Integer.valueOf(id));
@@ -134,7 +134,7 @@ public class StandardService {
 	public boolean leftoutMultiple() {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		boolean result = false;
-		List ids = new ArrayList();
+		List<Integer> ids = new ArrayList();
 		for (String id : studentIds) {
 			System.out.println("id" + id);
 			ids.add(Integer.valueOf(id));
@@ -177,7 +177,7 @@ public class StandardService {
     public void restoreMultipleGraduate() {
         String[] studentIds = request.getParameterValues("studentIDs");
         if (studentIds != null) {
-                List ids = new ArrayList();
+                List<Integer> ids = new ArrayList();
                 for (String id : studentIds) {
                         ids.add(Integer.valueOf(id));
 
@@ -189,7 +189,7 @@ public class StandardService {
     public void restoreMultipleDroppedout() {
         String[] studentIds = request.getParameterValues("studentIDs");
         if (studentIds != null) {
-                List ids = new ArrayList();
+                List<Integer> ids = new ArrayList();
                 for (String id : studentIds) {
                         ids.add(Integer.valueOf(id));
 
@@ -237,7 +237,7 @@ public class StandardService {
 	public void restoreMultipleLeftout() {
         String[] studentIds = request.getParameterValues("studentIDs");
         if (studentIds != null) {
-                List ids = new ArrayList();
+                List<Integer> ids = new ArrayList();
                 for (String id : studentIds) {
                         ids.add(Integer.valueOf(id));
 

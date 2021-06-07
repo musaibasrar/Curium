@@ -58,7 +58,7 @@ public class PositionService {
 	public void deleteMultiple() {
 		 String[] positionIds = request.getParameterValues("positionIDs");
 		 if(positionIds!=null){
-	        List ids = new ArrayList();
+	        List<Integer> ids = new ArrayList();
 	        for (String id : positionIds) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));

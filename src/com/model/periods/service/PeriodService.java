@@ -202,7 +202,7 @@ public class PeriodService {
 		
 		String[] periodMasterid = request.getParameterValues("idperiodmaster");
 		if (periodMasterid != null) {
-			List ids = new ArrayList();
+			List<Integer> ids = new ArrayList();
 			for (String id : periodMasterid) {
 				ids.add(Integer.valueOf(id));
 			}

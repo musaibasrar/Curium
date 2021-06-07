@@ -63,7 +63,7 @@ public class DepartmentService {
 		 if(departmentIds!=null){
 			 
 		 
-	        List ids = new ArrayList();
+	        List<Integer> ids = new ArrayList();
 	        for (String id : departmentIds) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));

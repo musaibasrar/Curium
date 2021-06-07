@@ -188,7 +188,7 @@ public class StampFeesService {
 		String[] feesAmount = request.getParameterValues("fessFullCat");
 		String[] concession = request.getParameterValues("feesConcession");
 		
-		List ids = new ArrayList();
+		List<Integer> ids = new ArrayList();
 		listOfacademicfessstructure.clear();
 		for (String id : studentIds) {
 			System.out.println("id" + id);
@@ -234,7 +234,7 @@ public class StampFeesService {
 		String currentYear = request.getParameter("currentyear");
 		String[] studentIds = request.getParameterValues("studentIDs");
 		if(studentIds!=null){
-			List ids = new ArrayList();
+			List<Integer> ids = new ArrayList();
 	        for (String id : studentIds) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));

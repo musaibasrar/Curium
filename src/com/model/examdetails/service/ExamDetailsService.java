@@ -86,7 +86,7 @@ public class ExamDetailsService {
 		String[] examIds = request.getParameterValues("examIDs");
 		boolean result = false;
 		 if(examIds!=null){
-	        List ids = new ArrayList();
+	        List<Integer> ids = new ArrayList();
 	        for (String id : examIds) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
@@ -209,7 +209,7 @@ public class ExamDetailsService {
 		String[] examIds = request.getParameterValues("idexamschedule");
 		boolean result = false;
 		 if(examIds!=null){
-	        List ids = new ArrayList();
+	        List<Integer> ids = new ArrayList();
 	        for (String id : examIds) {
 	            ids.add(Integer.valueOf(id));
 

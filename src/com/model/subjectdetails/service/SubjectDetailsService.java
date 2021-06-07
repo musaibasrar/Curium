@@ -70,7 +70,7 @@ public class SubjectDetailsService {
 		String[] examIds = request.getParameterValues("subjectIDs");
 		boolean result = false;
 		 if(examIds!=null){
-	        List ids = new ArrayList();
+	        List<Integer> ids = new ArrayList();
 	        for (String id : examIds) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
@@ -114,7 +114,7 @@ public class SubjectDetailsService {
 		String[] examIds = request.getParameterValues("subjectIDs");
 		boolean result = false;
 		 if(examIds!=null){
-	        List ids = new ArrayList();
+	        List<Integer> ids = new ArrayList();
 	        for (String id : examIds) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));

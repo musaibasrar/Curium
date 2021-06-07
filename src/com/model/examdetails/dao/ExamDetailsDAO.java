@@ -70,7 +70,7 @@ public class ExamDetailsDAO {
 
 
 
-	public void deleteMultiple(List ids) {
+	public void deleteMultiple(List<Integer> ids) {
 		try {
 			transaction = session.beginTransaction();
 			Query query = session
@@ -132,7 +132,7 @@ public class ExamDetailsDAO {
 
 
 
-	public void deleteExamSchedule(List ids) {
+	public void deleteExamSchedule(List<Integer> ids) {
 		try {
 			transaction = session.beginTransaction();
 			Query query = session

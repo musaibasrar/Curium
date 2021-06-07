@@ -87,7 +87,7 @@ public class AdminService {
 	public void deleteMultiple() {
 		 String[] expensesIds = request.getParameterValues("expensesIDs");
 		 if(expensesIds!=null){
-	        List ids = new ArrayList();
+	        List<Integer> ids = new ArrayList<>();
 	        for (String id : expensesIds) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
@@ -309,7 +309,7 @@ public class AdminService {
 	public void rejectVoucher() {
 		 String[] expensesIds = request.getParameterValues("expensesIDs");
 		 if(expensesIds!=null){
-	        List ids = new ArrayList();
+	        List<Integer> ids = new ArrayList();
 	        for (String id : expensesIds) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));
@@ -322,7 +322,7 @@ public class AdminService {
 	public void approveVoucher() {
 		 String[] expensesIds = request.getParameterValues("expensesIDs");
 		 if(expensesIds!=null){
-	        List ids = new ArrayList();
+	        List<Integer> ids = new ArrayList();
 	        for (String id : expensesIds) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));

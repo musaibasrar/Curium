@@ -425,8 +425,8 @@ public class MarksDetailsService {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String[] marksIds = request.getParameterValues("marksid");
 		if (marksIds != null) {
-			List marksListids = new ArrayList();
-			List studentListids = new ArrayList();
+			List<Integer> marksListids = new ArrayList();
+			List<Integer> studentListids = new ArrayList();
 
 			for (String studentsIdsdelete : studentIds) {
 				studentListids.add(Integer.valueOf(studentsIdsdelete));

@@ -1156,7 +1156,7 @@ public class StudentService {
 		String[] studentIds = request.getParameterValues("studentIDs");
 
 		if (studentIds != null) {
-			List ids = new ArrayList();
+			List<Integer> ids = new ArrayList();
 			for (String id : studentIds) {
 				ids.add(Integer.valueOf(id));
 
@@ -1182,8 +1182,8 @@ public class StudentService {
 	public void deleteMultiple() {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		if (studentIds != null) {
-			List ids = new ArrayList();
-			List iddetails = new ArrayList();
+			List<Integer> ids = new ArrayList();
+			List<Integer> iddetails = new ArrayList();
 			for (String id : studentIds) {
 			        String[] iddetailsarray = id.split(":");
 				ids.add(Integer.valueOf(iddetailsarray[0]));
@@ -1198,7 +1198,7 @@ public class StudentService {
 	public void restoreMultiple() {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		if (studentIds != null) {
-			List ids = new ArrayList();
+			List<Integer> ids = new ArrayList();
 			for (String id : studentIds) {
 		        String[] iddetailsarray = id.split(":");
 		        ids.add(Integer.valueOf(iddetailsarray[0]));
@@ -1212,7 +1212,7 @@ public class StudentService {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String classStudying = request.getParameter("classstudying");
 		boolean result = false;
-		List ids = new ArrayList();
+		List<Integer> ids = new ArrayList();
 		for (String id : studentIds) {
 			System.out.println("id" + id);
 			ids.add(Integer.valueOf(id));

@@ -165,7 +165,7 @@ public class EmployeeService {
 	public void deleteMultiple() {
 		 String[] employeeIds = request.getParameterValues("employeeIDs");
 		 if(employeeIds!=null){
-	        List ids = new ArrayList();
+	        List<Integer> ids = new ArrayList();
 	        for (String id : employeeIds) {
 	            System.out.println("id" + id);
 	            ids.add(Integer.valueOf(id));

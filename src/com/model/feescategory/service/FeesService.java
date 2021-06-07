@@ -77,7 +77,7 @@ public class FeesService {
         public void deleteMultiple() {
                  String[] idfeescategory = request.getParameterValues("idfeescategory");
                  if(idfeescategory!=null){
-                List ids = new ArrayList();
+                List<Integer> ids = new ArrayList();
                 for (String id : idfeescategory) {
                     System.out.println("id" + id);
                     ids.add(Integer.valueOf(id));
@@ -145,8 +145,8 @@ public class FeesService {
         public String deleteFeesCategory() {
                 
                  String[] idfeescategory = request.getParameterValues("sfsid");
-                 List sfsId = new ArrayList();
-                 List feesCatId = new ArrayList();
+                 List<Integer> sfsId = new ArrayList();
+                 List<Integer> feesCatId = new ArrayList();
                  
                  String studentId = request.getParameter("id");
                  
