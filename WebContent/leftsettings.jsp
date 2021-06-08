@@ -172,6 +172,13 @@ Author     : Musaib
                 font-weight: bold;
                 height: 22px;
             }
+            
+            .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #cccccc; background: #ffffff url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #1c94c4; }
+.ui-widget-content {
+    border: 1px solid #b6cfe2;
+    background: #ffffff;
+    color: #222222;
+}
 
 
 
@@ -323,11 +330,11 @@ for(Cookie cookie : cookies){
 }
 %>
     <body onload="StartClock()" onunload="KillClock()">
-        <form name="theClock">
+        <!-- <form name="theClock">
 
             <div id="clock" class="headerTD"></div>
-        </form>
-        <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div>
+        </form> -->
+        <div class="headerTD">Master Settings<%--  <c:out default="" value="${userAuth}"/> --%> </div>
 
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">General</a></h5>
