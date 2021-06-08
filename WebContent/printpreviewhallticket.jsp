@@ -241,8 +241,8 @@ for(Cookie cookie : cookies){
 				<td><img src="images/curiumheader.png" width="190" height="60"/></td>
 				<td width="5%"></td>
 				<td>
-				<label class="dataTextBoldCenter">Divine M.A. Independent P.U. College </label><br>
-				<label class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</label>
+				<label class="dataTextBoldCenter">Curium School </label><br>
+				<label class="addressLine">XXXX Street, XXXX Road, XXXX. Ph.No- +00-000000</label>
 				</td>
 			</tr>
 			<tr>

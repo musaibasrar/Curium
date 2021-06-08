@@ -203,10 +203,10 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				
-				Divine M.A. English Higher Primary & High School </td>
+				Curium School </td>
 			</tr>
 			<tr>
-			<td class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</td>
+			<td class="addressLine">XXXX Street, XXXX Road, XXXX. Ph.No- +00-000000</td>
 			</tr>
 
 			<tr>

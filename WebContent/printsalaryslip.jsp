@@ -169,7 +169,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				Divine M.A. English Higher Primary & High School </td>
+				Curium School </td>
 			</tr>
 			<tr>
 			<td class="addressLine"><br>PAY SLIP FOR THE MONTH OF <c:out value="${processsalarydetails.month}" /> <c:out value="${processsalarydetails.year}" /></td>
