@@ -113,4 +113,26 @@ public class feesCategoryDAO {
 		}
 	}
 
+	public void waiveOffFees(List<Integer> sfsId, List<Integer> feesCatId, String studentId) {
+		
+		List<Feescollection> feesCollection = new ArrayList<Feescollection>();
+		try {
+			transaction = session.beginTransaction();
+			Query queryOne = session.createQuery("from Feescollection as feescollection where feescollection.sid = '"+studentId+"' and feescollection.sfsid IN (:ids)");
+			queryOne.setParameterList("ids", sfsId);
+			feesCollection = queryOne.list();
+			
+			if(feesCollection.isEmpty()){
+				Query query = session.createQuery("update Studentfeesstructure as fees set fees.waiveoff=fees.feesamount where fees.sid = "+studentId+" and fees.Feescategory.idfeescategory IN (:feescat)");
+				query.setParameterList("feescat", feesCatId);
+				query.executeUpdate();
+			}
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+	}
+
 }
