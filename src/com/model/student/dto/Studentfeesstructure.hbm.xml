@@ -29,6 +29,12 @@
         <property name="concession" type="java.lang.Integer">
             <column name="concession"/>
         </property>
+        <property name="waiveoff" type="java.lang.Long">
+            <column name="waiveoff" precision="10" scale="0" default="0"/>
+        </property>
+         <property name="totalinstallment" type="java.lang.Integer">
+            <column name="totalinstallment"/>
+        </property>
         <many-to-one name="Feescategory" class="com.model.feescategory.dto.Feescategory" lazy="false"
             column="idfeescategory" />
     </class>

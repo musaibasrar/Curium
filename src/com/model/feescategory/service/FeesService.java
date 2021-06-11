@@ -176,4 +176,29 @@ public class FeesService {
         }
         
     }
+
+
+	public String waiveOffFees() {
+        
+        String[] idfeescategory = request.getParameterValues("sfsid");
+        List<Integer> sfsId = new ArrayList();
+        List<Integer> feesCatId = new ArrayList();
+        
+        String studentId = request.getParameter("id");
+        
+        if(idfeescategory!=null){
+                
+                for (String string : idfeescategory) {
+                        String[] test = string.split("_");
+                        sfsId.add(Integer.valueOf(test[0]));
+                        feesCatId.add(Integer.valueOf(test[1]));
+               }
+       new feesCategoryDAO().waiveOffFees(sfsId,feesCatId,studentId);
+       
+       return "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId;
+        }
+        
+       return "error.jsp";
+       
+	}
 }

@@ -42,11 +42,17 @@ public class FeesAction {
                     url = feesStructure();
                 }else if ("feesReport".equalsIgnoreCase(action)) {
                     url = feesReport();
-                }
+                }else if ("waiveOffFees".equalsIgnoreCase(action)) {
+                    url = waiveOffFees();
+            }
                 return url;
         }
 
-        private String feesReport() {
+        private String waiveOffFees() {
+        	return new FeesService(request, response).waiveOffFees();
+		}
+
+		private String feesReport() {
         	new StandardService(request, response).viewClasses();
 			return "feesreport.jsp";
 		}

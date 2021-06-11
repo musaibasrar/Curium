@@ -332,6 +332,18 @@
         	    	 return false;
         		});
                 
+                
+                $("#waiveoff").button({
+        	        icons: {
+        	            primary: "ui-icon-flag"
+        	        }
+        	    }).click(function() {
+        	    	if (confirm('Are you sure you want to waive off the fees?')) {
+        	    		waiveOff();
+        				}
+        	    	 return false;
+        		});
+                
             });
             
             $(function(){
@@ -389,6 +401,13 @@
 
             }
             
+            function waiveOff() {
+
+                var form1 = document.getElementById("form1");
+                form1.action = "Controller?process=FeesProcess&action=waiveOffFees";
+                form1.submit();
+
+            }
            
         </script>
 
@@ -524,19 +543,14 @@ for(Cookie cookie : cookies){
                     <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 
                     <thead>
-                        <tr  >
-                            
-                            <th title="click to sort" class="headerText"></th>
-                            <th title="click to sort" class="headerText"></th>
+                        <tr>
                             <th title="click to sort" class="headerText"><input type="checkbox" id="chckHead" /></th>
                             <th title="click to sort" class="headerText">Fees Category</th>
                             <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
-                            <th title="click to sort" class="headerText"></th>
-                            <th title="click to sort" class="headerText"></th>
-                            <th title="click to sort" class="headerText"></th>
-                             
-
-
+                            <th title="click to sort" class="headerText">Installments&nbsp;</th>
+                            <th title="click to sort" class="headerText">Total Fees Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Concession Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Waive Off Amount&nbsp;</th>
                         </tr>
                     </thead>
 
@@ -544,19 +558,16 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${feesstructure}" var="feesstructure">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                
-                              	<td class="dataText"></td>
-                               	<td class="dataText"></td>
                                 <td class="dataText"><input type="checkbox"  class = "chcktb2"
 								id="<c:out value="${feesstructure.sfsid}"/>" 
 								name="sfsid" 
 								value="<c:out value="${feesstructure.sfsid}"/>_<c:out value="${feesstructure.feescategory.idfeescategory}"/>" /></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.feescategoryname}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
-                               
-                                
-                                 
-
+                                <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.concession}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.waiveoff}"/></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -578,6 +589,7 @@ for(Cookie cookie : cookies){
                                             Delete</button>
 
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                             <button id="waiveoff">Waive Off</button>
 
                                         </td>
 
