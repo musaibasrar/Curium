@@ -224,7 +224,7 @@
 				<img src="images/shaheenlogo.png" width="150" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				Zaiqa Enterprises<br><br>
+				Curium<br><br>
 				<label class="addressLine">Stock Received Report</label><br>
 				<label class="addressLineTwo">${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;${supplierselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp;
 				</label>
