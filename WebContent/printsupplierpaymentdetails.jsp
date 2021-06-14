@@ -223,7 +223,7 @@
 				<img src="images/shaheenlogo.png" width="150" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				Zaiqa Enterprises<br><br>
+				Curium<br><br>
 				<label class="addressLine">Supplier Payment Report</label><br>
 				<label class="addressLineTwo">From: ${fromdateselected}</label><label class="addressLineTwo">&nbsp;&nbsp;&nbsp;To: ${todateselected}</label><br>
 				<label class="addressLineTwo">&nbsp;&nbsp;&nbsp;Supplier Name: ${ledgername}</label>
