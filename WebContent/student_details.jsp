@@ -1040,9 +1040,12 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText">Fees Category</th>
                             <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Total Installments&nbsp;</th>
+                            <th title="click to sort" class="headerText">Total Fees Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Fees Paid&nbsp;</th>
                             <th title="click to sort" class="headerText">Due Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Concession&nbsp;</th>
+                            <th title="click to sort" class="headerText">Waive Off&nbsp;</th>
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
@@ -1061,13 +1064,13 @@ for(Cookie cookie : cookies){
                                	<td class="dataText"></td>
                                 <td class="dataText"></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.feescategoryname}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feespaid}"/></td>
-                                <td class="dataText"><c:out value="${feesstructure.feesamount-feesstructure.feespaid}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.concession}"/></td>
-                                
-                                 
-
+                                <td class="dataText"><c:out value="${feesstructure.waiveoff}"/></td>
                             </tr>
                         </c:forEach>
                         
