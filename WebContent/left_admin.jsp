@@ -489,6 +489,8 @@ for(Cookie cookie : cookies){
 				<a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Fees Collection Details</a><br/>
 				<a target="mainFrame" href="feescancelledreceipts.jsp" style="font-size: 12px;">Cancelled Fees Receipts</a><br/>
 				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesReport" style="font-size: 12px;">Fees Report</a><br/>
+				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a><br/>
+				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>

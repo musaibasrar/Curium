@@ -44,11 +44,51 @@ public class FeesAction {
                     url = feesReport();
                 }else if ("waiveOffFees".equalsIgnoreCase(action)) {
                     url = waiveOffFees();
-            }
+                }else if ("feesWaiveoffReport".equalsIgnoreCase(action)) {
+                    url = feesWaiveoffReport();
+                }else if ("feesConcessionReport".equalsIgnoreCase(action)) {
+                    url = feesConcessionReport();
+                }else if ("searchFeesWaiveoffReport".equalsIgnoreCase(action)) {
+                    url = searchFeesWaiveoffReport();
+                }else if ("printFeesWaiveoffReport".equalsIgnoreCase(action)) {
+                    url = printFeesWaiveoffReport();
+                }else if ("searchFeesConcessionReport".equalsIgnoreCase(action)) {
+                    url = searchFeesConcessionReport();
+                }else if ("printFeesConcessionReport".equalsIgnoreCase(action)) {
+                    url = printFeesConcessionReport();
+                }
                 return url;
         }
 
-        private String waiveOffFees() {
+		private String printFeesWaiveoffReport() {
+			return "printfeeswaiveoffreport.jsp";
+		}
+
+		private String searchFeesWaiveoffReport() {
+            new FeesService(request, response).searchFeesWaiveofforConcessionReport("waiveoff");
+            return "feeswaiveoffreport.jsp";
+		}
+
+		private String feesWaiveoffReport() {
+            new StandardService(request, response).viewClasses();
+        return "feeswaiveoffreport.jsp";
+		}
+		
+		private String printFeesConcessionReport() {
+			return "printfeesconcessionreport.jsp";
+		}
+		
+		 private String searchFeesConcessionReport() {
+	            new FeesService(request, response).searchFeesWaiveofforConcessionReport("concession");
+	            return "feesconcessionreport.jsp";
+			}
+
+		private String feesConcessionReport() {
+            new StandardService(request, response).viewClasses();
+        return "feesconcessionreport.jsp";
+		}
+
+		private String waiveOffFees() {
         	return new FeesService(request, response).waiveOffFees();
 		}
 
