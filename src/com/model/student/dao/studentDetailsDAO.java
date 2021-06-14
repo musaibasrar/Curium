@@ -5,18 +5,18 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.util.Session;
-import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.degreedetails.dto.Degreedetails;
+import com.model.mess.card.dto.Card;
 import com.model.parents.dto.Parents;
 import com.model.pudetails.dto.Pudetails;
 import com.model.std.dto.Classhierarchy;
 import com.model.student.dto.Student;
 import com.model.student.dto.Studentfeesstructure;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class studentDetailsDAO {
 	Session session = null;
@@ -573,7 +573,25 @@ public class studentDetailsDAO {
 
 	public String getPromotionClass(String classStudying) {
 		// TODO Auto-generated method stub
-		return null;
+		return null;	
 	}
+	
+	public List<Card> getCardDetails(List<Integer> ids){
+			
+			List<Card> cardDetailsList = new ArrayList<Card>();
+			try {
+				transaction = session.beginTransaction();
+				Query query = session
+						.createQuery("From Card as card where card.sid IN (:ids)");
+				query.setParameterList("ids", ids);
+				cardDetailsList = query.list();
+				transaction.commit();
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				hibernateException.printStackTrace();
+			}finally {
+				HibernateUtil.closeSession();
+			 }
+			return cardDetailsList;
+		}
 	
 }
