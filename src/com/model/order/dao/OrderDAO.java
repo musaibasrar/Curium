@@ -139,38 +139,24 @@ public class OrderDAO {
 
 
 
-    public boolean rejectOrders(List<Integer> ids) {
+    public boolean rejectOrders(List<Integer> ids, List<ArrayList<Ordersdetails>> ordersList) {
         
         boolean result = false;
         try {
             transaction = session.beginTransaction();
             Query query = session
-                            .createQuery("update Orderssummary set narration = 'REJECTED',confirmationdate = current_date() where idorders IN (:ids)");
+                            .createQuery("update Orderssummary set narration = 'REJECTED',confirmationdate = current_date(),totalafterdiscount=totalafterdiscount*100/(100-discount),discount=0 where idorders IN (:ids)");
             query.setParameterList("ids", ids);
             query.executeUpdate();
-            transaction.commit();
-            result = true;
-    } catch (HibernateException hibernateException) {transaction.rollback();
-            hibernateException.printStackTrace();
-    }finally {
-		HibernateUtil.closeSession();
-	}
-            return result;
-}
-
-
-
-    public boolean deliverOrders(List<Integer> ids, List<String> paymentStatusList) {
-        
-        boolean result = false;
-        try {
-            transaction = session.beginTransaction();
             
-            for (int i=0; i<ids.size(); i++) {
-                Query query = session.createQuery("update Orderssummary set narration = 'DELIVERED', paymentstatus = '"+paymentStatusList.get(i)+"', confirmationdate = current_date()  where idorders = "+ids.get(i)+"");
-                query.executeUpdate();
-            }
-           
+            for (List<Ordersdetails> list : ordersList) {
+            	
+           	 for (Ordersdetails ordersdetails : list) {
+                    Query queryUpdateBooksQuantity = session.createQuery("update Books set quantity = quantity+"+ordersdetails.getQuantity()+" where id ="+ordersdetails.getBookid());
+                    queryUpdateBooksQuantity.executeUpdate();
+                }
+			}
+            
             transaction.commit();
             result = true;
     } catch (HibernateException hibernateException) {transaction.rollback();
@@ -180,6 +166,25 @@ public class OrderDAO {
 	}
             return result;
 }
+
+
+/*
+ * public boolean deliverOrders(List<Integer> ids, List<String>
+ * paymentStatusList) {
+ * 
+ * boolean result = false; try { transaction = session.beginTransaction();
+ * 
+ * for (int i=0; i<ids.size(); i++) { Query query = session.
+ * createQuery("update Orderssummary set narration = 'DELIVERED', paymentstatus = '"
+ * +paymentStatusList.get(i)
+ * +"', confirmationdate = current_date()  where idorders = "+ids.get(i)+"");
+ * query.executeUpdate(); }
+ * 
+ * transaction.commit(); result = true; } catch (HibernateException
+ * hibernateException) {transaction.rollback();
+ * hibernateException.printStackTrace(); }finally {
+ * HibernateUtil.closeSession(); } return result; }
+ */
 
 
 

@@ -434,6 +434,39 @@
 		form1.submit();
 	}
 	
+	
+	function calculatediscount(row){
+		
+		var discount = document.getElementById("discount_"+row).value;
+		var totalbeforediscount = document.getElementById("total_"+row).value;
+		var discountoriginal = document.getElementById("discountoriginal_"+row).value;
+		var totalbeforediscountoriginal = document.getElementById("totaloriginal_"+row).value;
+		var keyPressed = event.keyCode || event.charCode;
+		
+		document.getElementById("discount_"+row).onkeydown = function() {
+		    var key = event.keyCode || event.charCode;
+		    keyPressed = key;
+		    if( key == 8 ){
+		    	document.getElementById("total_"+row).value = totalbeforediscountoriginal;
+		    	document.getElementById("discount_"+row).value = 0;
+		    }
+		};
+		
+		if (keyPressed != 8 && keyPressed != 0 && (keyPressed < 48 || keyPressed > 57)) {
+			document.getElementById("discount_"+row).value = 0;
+ 		}else if (keyPressed >= 48 && keyPressed <= 57){
+				if(discount!='' && discount>0 && discount != discountoriginal){
+					var totalafterdiscount = totalbeforediscountoriginal - (totalbeforediscountoriginal*discount)/100;
+					document.getElementById("total_"+row).value = totalafterdiscount;	
+				}else if(discount == discountoriginal){
+					document.getElementById("total_"+row).value = totalbeforediscountoriginal;
+				}else if(discount==0 || discount == ''){
+					//totalafterdiscount=totalafterdiscount*100/(100-discount)
+					document.getElementById("total_"+row).value = totalbeforediscountoriginal*100/(100-discountoriginal);
+				}
+ 		}
+	}
+	
 	$(function() {
 
 		$("#tabs").tabs();
@@ -742,10 +775,12 @@ for(Cookie cookie : cookies){
 						  	<input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 100px;" value="<c:out value="${ordersummarylist.key.narration}" />" id="status_${status.index}" name="status_${status.index}">
 						  </td>
 						  <td class="dataText">
-						 	 <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 20px;" value="<c:out value="${ordersummarylist.key.discount}" />" id="discount_${status.index}" name="discount_${status.index}">
+						 	 <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 20px;" value="<c:out value="${ordersummarylist.key.discount}" />" id="discount_${status.index}" name="discount_${status.index}" onkeyup="calculatediscount(${status.index})">
+						 	 <input type="hidden" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 20px;" value="<c:out value="${ordersummarylist.key.discount}" />" id="discountoriginal_${status.index}" name="discountoriginal_${status.index}" >
 						  </td>
 						  <td class="dataText">
 						  	 <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 50px;" value="<c:out value="${ordersummarylist.key.totalafterdiscount}" />" id="total_${status.index}" name="total_${status.index}">
+						  	 <input type="hidden" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 50px;" value="<c:out value="${ordersummarylist.key.totalafterdiscount}" />" id="totaloriginal_${status.index}" name="totaloriginal_${status.index}" hidden>
 						  </td>
 						  <td class="dataText"><c:out value="${ordersummarylist.key.confirmationdate}" /></td>
 						  <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 100px;" value="<c:out value="${ordersummarylist.key.paymentstatus}" />" id="paymentstatus" name="paymentstatus"></td>

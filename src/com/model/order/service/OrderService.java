@@ -201,13 +201,18 @@ public class OrderService {
         String[] orderIds = request.getParameterValues("orderids");
         List<Integer> ids = new ArrayList<Integer>();
         boolean result = false;
-        
+        List<ArrayList<Ordersdetails>> ordersList = new ArrayList<ArrayList<Ordersdetails>>();
+        		
         if(orderIds!=null) {
             for (String orderid : orderIds) {
                 String[] orId = orderid.split(":");
                 ids.add(Integer.parseInt(orId[0]));
+                ordersList.add((ArrayList<Ordersdetails>) new OrderDAO().getOrderDetails(Integer.parseInt(orId[0])));
             }
-           result = new OrderDAO().rejectOrders(ids);
+            
+            
+            
+           result = new OrderDAO().rejectOrders(ids,ordersList);
         }
        request.setAttribute("rejectorders", result);
     }
@@ -241,8 +246,10 @@ public class OrderService {
                 orderSummary.setPaymentstatus(DataUtil.emptyString(paymentStatus[Integer.parseInt(orId[1])]));
                 orderSummary.setDiscount(Integer.parseInt(DataUtil.emptyString(request.getParameter("discount_"+Integer.parseInt(orId[1])))));
                 
-                Float discount = (Float.valueOf(DataUtil.emptyString(request.getParameter("total_"+Integer.parseInt(orId[1])))) * Integer.parseInt(DataUtil.emptyString(request.getParameter("discount_"+Integer.parseInt(orId[1])))) ) / 100;
-                totalPrice = Float.valueOf(DataUtil.emptyString(request.getParameter("total_"+Integer.parseInt(orId[1])))) - discount;
+                //Float discount = (Float.valueOf(DataUtil.emptyString(request.getParameter("total_"+Integer.parseInt(orId[1])))) * Integer.parseInt(DataUtil.emptyString(request.getParameter("discount_"+Integer.parseInt(orId[1])))) ) / 100;
+                //totalPrice = Float.valueOf(DataUtil.emptyString(request.getParameter("total_"+Integer.parseInt(orId[1])))) - discount;
+                
+                totalPrice = Float.valueOf(DataUtil.emptyString(request.getParameter("total_"+Integer.parseInt(orId[1]))));
                 
                 orderSummary.setTotalafterdiscount(totalPrice);
                 
