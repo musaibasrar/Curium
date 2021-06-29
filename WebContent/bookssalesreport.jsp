@@ -695,7 +695,6 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Language</th>
                             <th title="click to sort" class="headerText">Qty</th>
                             <th title="click to sort" class="headerText">Price&nbsp;</th>
-                            <th title="click to sort" class="headerText">Total Price&nbsp;</th>
                         </tr>
                     </thead>
 
@@ -710,14 +709,17 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${books.title}"/></td>
                                 <td class="dataText"><c:out value="${books.author}"/></td>
                                 <td class="dataText"><c:out value="${books.language}"/></td>
-								<td class="dataText"><c:out value="${books.quantity}"/></td>
+								<td class="dataText">
+								<c:out value="${books.quantity}"/>
+								 <c:set var="totalQuantity" value="${totalQuantity + books.quantity}" />
+								</td>
                                 <td class="dataText"><c:out value="${books.price}"/></td>
-                                <td class="dataText" style="text-align: right">
+                                <%-- <td class="dataText" style="text-align: right">
                                 <c:set var="totalQuantity" value="${totalQuantity + books.quantity}" />
-                                <c:set var="itemTotal" value="${itemTotal + books.quantity * books.price}" />
-                                <fmt:setLocale value="en_IN" scope="request"/>
-								<fmt:formatNumber type="currency"  value="${books.quantity * books.price}" />
-                               </td>
+                                	<c:set var="itemTotal" value="${itemTotal + books.quantity * books.price}" />
+                                	<fmt:setLocale value="en_IN" scope="request"/>
+									<fmt:formatNumber type="currency"  value="${books.quantity * books.price}" /> 
+                               </td> --%>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -727,10 +729,10 @@ for(Cookie cookie : cookies){
 								<label style="color: #eb6000"><b>Total Quantity:
 									<c:out value="${totalQuantity}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
 								</label> 
-								<label style="color: #eb6000"><b>Grand Total:
+								<%-- <label style="color: #eb6000"><b>Grand Total:
 							<fmt:setLocale value="en_IN" scope="request"/>
 							<fmt:formatNumber type="currency"  value="${itemTotal}" /></b>
-							</label> 
+							</label>  --%>
 							</td>
 						</tr>
                     
