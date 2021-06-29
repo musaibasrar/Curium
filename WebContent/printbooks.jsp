@@ -259,6 +259,7 @@
 						<th title="click to sort" class="datath">Author</th>
 						<th title="click to sort" class="datath">Quantity</th>
 						<th title="click to sort" class="datath">Price/Book</th>
+						<th title="click to sort" class="datath">Disc.</th>
 						<th title="click to sort" class="datath">Total Price</th>
 					</tr>
 				</thead>
@@ -273,11 +274,12 @@
 							<td class="datatd"><c:out value="${resultlist.author}" /></td>
 							<td class="datatd"><c:out value="${resultlist.quantity}" /></td>
 							<td class="datatd"><c:out value="${resultlist.price}" /></td>
+							<td class="datatd"><c:out value="${resultlist.discount}" /></td>
 							<td class="datatdright">
 							<c:set var="totalQuantity" value="${totalQuantity + resultlist.quantity}" />
-							 <c:set var="itemTotal" value="${itemTotal + resultlist.quantity * resultlist.price}" />
+							 <c:set var="itemTotal" value="${itemTotal + ((resultlist.quantity * resultlist.price) - (resultlist.quantity * resultlist.price)*resultlist.discount/100)}" />
                                 <fmt:setLocale value="en_IN" scope="request"/>
-								<fmt:formatNumber type="currency"  value="${resultlist.quantity * resultlist.price}" />
+								<fmt:formatNumber type="currency"  value="${((resultlist.quantity * resultlist.price) - (resultlist.quantity * resultlist.price)*resultlist.discount/100)}" />
 							</td>							
 						</tr>
 					</c:forEach>

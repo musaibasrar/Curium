@@ -98,13 +98,15 @@ public class OrderDAO {
 
 
 
-    public boolean confirmOrderSummary(Orderssummary orderSummary, List<Ordersdetails> orderDetailsList) {
+    public boolean confirmOrderSummary(Orderssummary orderSummary, List<Ordersdetails> orderDetailsList, String currentAcademicYear) {
         boolean result = false;
         
         try {
             transaction = session.beginTransaction();
             session.save(orderSummary);
             Integer orderSum = orderSummary.getIdorders();
+            orderSummary.setInvoicenumber("BIE"+Integer.toString(orderSum)+"/"+currentAcademicYear.replace("/", "-"));
+            session.update(orderSummary);
             
             for (Ordersdetails ordersdetails : orderDetailsList) {
                 ordersdetails.setOrderssummaryid(orderSum);
@@ -127,7 +129,7 @@ public class OrderDAO {
         List<Orderssummary> booksList = new ArrayList<Orderssummary>();
         try {
                 transaction = session.beginTransaction();
-                booksList = session.createQuery("from Orderssummary order by idorders DESC").list();
+                booksList = session.createQuery("from Orderssummary where narration!='REJECTED' order by idorders DESC").list();
                 transaction.commit();
         } catch (Exception e) {transaction.rollback();
                 e.printStackTrace();
@@ -380,6 +382,21 @@ public class OrderDAO {
             return results;
         }
     }
+
+	public List<Orderssummary> viewRejectedOrder() {
+        
+        List<Orderssummary> booksList = new ArrayList<Orderssummary>();
+        try {
+                transaction = session.beginTransaction();
+                booksList = session.createQuery("from Orderssummary where narration='REJECTED' order by idorders DESC").list();
+                transaction.commit();
+        } catch (Exception e) {transaction.rollback();
+                e.printStackTrace();
+        }finally{
+                HibernateUtil.closeSession();
+        }
+        return booksList;
+     }
 
 
 }

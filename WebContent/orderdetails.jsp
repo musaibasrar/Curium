@@ -589,7 +589,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow:scroll;height: 600px;">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Order Details <br>Order Number: ${ordernumber} &nbsp;&nbsp;&nbsp;&nbsp; Center Name: ${centername}
+					<td class="headerTD">Order Details <br>Invoice Number: ${ordernumber} &nbsp;&nbsp;&nbsp;&nbsp; Center Name: ${centername}
 					&nbsp;&nbsp;&nbsp;&nbsp; Order Date: ${orderdate}</td>
 				</tr>
 			</table> 

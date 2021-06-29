@@ -51,6 +51,8 @@ public class OrderAction {
                     url = confirmOrder();
                 }else if ("viewOrder".equalsIgnoreCase(action)) {
                     url = viewOrder();
+                }else if ("rejectedOrder".equalsIgnoreCase(action)) {
+                    url = rejectedOrder();
                 }else if ("rejectOrders".equalsIgnoreCase(action)) {
                     url = rejectOrders();
                 }else if ("deliverOrders".equalsIgnoreCase(action)) {
@@ -90,6 +92,11 @@ public class OrderAction {
                 }
 		return url;
 	}
+
+	private String rejectedOrder() {
+	    new OrderService(request, response).rejectedOrders();
+        return "vieworder.jsp";
+}
 
 	private String printSalesSummaryReport() {
 		return "printsalessummaryreport.jsp";

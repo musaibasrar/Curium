@@ -324,6 +324,26 @@
     display: none;
 }
 
+.dataTextBoldCenter {
+	font-weight: bold;
+	font-family: Tahoma;
+	color: black;
+	font-size: 22px;
+	letter-spacing: normal;
+	text-align: center;
+}
+
+.addressLine{
+		font-weight: bold;
+	font-family: ariel;
+	color: black;
+	font-size: 25px;
+	letter-spacing: normal;
+	text-align: center;
+	text-decoration: underline;
+}
+
+
 </style>
 <style>
 #button {
@@ -590,14 +610,40 @@ for(Cookie cookie : cookies){
 <body>
 	<form id="form1" method="POST">
 		
-		
-		
-			<table width="100%">
+		<br>
+		<table width="100%" style="border-collapse: collapse;">
+			<tr>
+				<td align="center">
+				<img src="images/bielogo.png" width="50" height="80"/>
+				</td>
+				<td class="dataTextBoldCenter" style="width: 100%">
+				BOARD OF ISLAMIC EDUCATION KARNATAKA<br>
+				<label class="selectedparameters">Center Name: ${centername}</label><br>
+				<label class="selectedparameters">
+				Order No.: ${ordernumber} &nbsp;&nbsp;&nbsp;&nbsp;Order Date: ${orderdate}
+				<br>
+				 </label>
+				</td>
+			</tr>
+			
+			<tr></tr>
+	</table>
+
+
+		<!-- <TABLE  width="100%" border="1" style="border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr> -->
+            </TABLE>
+            <br>
+			<%-- <table width="100%">
 				<tr>
 					<td class="headerTD"><u>Order Details</u> <br><br>Order No.: ${ordernumber} &nbsp;&nbsp;Center Name: ${centername}
 					&nbsp;&nbsp;Order Date: ${orderdate}</td>
 				</tr>
-			</table> 
+			</table>  --%>
 			
 			<table   width="100%"  border="0" style="border-color:black;"  id="myTable">
 						

@@ -219,7 +219,7 @@
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				BOARD OF ISLAMIC EDUCATION KARNATAKA<br>
-				<label class="addressLine">Books List</label><br>
+				<label class="addressLine">Books Sales Report</label><br>
 				<label class="selectedparameters">${fromdateselected}&nbsp;&nbsp;${todateselected}&nbsp;&nbsp;${titleselected}&nbsp;&nbsp;${authorselected}&nbsp;&nbsp;${languageselected}&nbsp;&nbsp;${centercodeselected}
 				
 				<br>
@@ -261,12 +261,12 @@
 						<th title="click to sort" class="datath">Language</th>
 						<th title="click to sort" class="datath">Qty</th>
                         <th title="click to sort" class="datath">Price&nbsp;</th>
-						<th title="click to sort" class="datath">Total Price</th>
+						<!-- <th title="click to sort" class="datath">Total Price</th> -->
 					</tr>
 				</thead>
 			<tbody>
 			
-			<c:forEach items="${bookslist}" var="resultlist" varStatus="status">
+			<c:forEach items="${bookslistreport}" var="resultlist" varStatus="status">
 
 						<tr>
 							<td class="datatd"><c:out value="${resultlist.orderdate}" /></td>
@@ -275,14 +275,16 @@
 							<td class="datatd"><c:out value="${resultlist.title}" /></td>
 							<td class="datatd"><c:out value="${resultlist.author}" /></td>
 							<td class="datatd"><c:out value="${resultlist.language}" /></td>
-							<td class="datatd"><c:out value="${resultlist.quantity}" /></td>
+							<td class="datatd"><c:out value="${resultlist.quantity}" />
+							<c:set var="totalQuantity" value="${totalQuantity + resultlist.quantity}" />
+							</td>
 							<td class="datatd"><c:out value="${resultlist.price}" /></td>
-							<td class="datatdright">
+							<%-- <td class="datatdright">
 							<c:set var="totalQuantity" value="${totalQuantity + resultlist.quantity}" />
 							 <c:set var="itemTotal" value="${itemTotal + resultlist.quantity * resultlist.price}" />
                                 <fmt:setLocale value="en_IN" scope="request"/>
 								<fmt:formatNumber type="currency"  value="${resultlist.quantity * resultlist.price}" />
-							</td>							
+							</td>	 --%>						
 						</tr>
 					</c:forEach>
 			</tbody>

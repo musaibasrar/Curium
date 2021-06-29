@@ -458,6 +458,7 @@ for(Cookie cookie : cookies){
             <div >
             	<a target="mainFrame" href="Controller?process=OrderProcess&action=placeOrder" style="font-size: 12px;">Place Order</a><br/>
             	<a target="mainFrame" href="Controller?process=OrderProcess&action=viewOrder" style="font-size: 12px;">View Orders</a><br/>
+            	<a target="mainFrame" href="Controller?process=OrderProcess&action=rejectedOrder" style="font-size: 12px;">Rejected Orders</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Organizers</a></h5>

@@ -33,8 +33,8 @@
         <property generated="never" lazy="false" name="edition" optimistic-lock="true" type="string" unique="false">
             <column length="20" name="edition"/>
         </property>
-        <property generated="never" lazy="false" name="totalpage" optimistic-lock="true" type="java.lang.Integer" unique="false">
-            <column name="totalpage"/>
+        <property generated="never" lazy="false" name="discount" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="discount"/>
         </property>
         <property generated="never" lazy="false" name="description" optimistic-lock="true" type="string" unique="false">
             <column length="500" name="description"/>
@@ -42,7 +42,7 @@
         <property generated="never" lazy="false" name="userid" optimistic-lock="true" type="java.lang.Integer" unique="false">
             <column name="userid"/>
         </property>
-        <property generated="never" lazy="false" name="price" optimistic-lock="true" type="java.lang.Integer" unique="false">
+        <property generated="never" lazy="false" name="price" optimistic-lock="true" type="java.lang.Float" unique="false">
             <column name="price"/>
         </property>
          <property  generated="never" lazy="false" name="purchaseddate" optimistic-lock="true" type="date" unique="false" >

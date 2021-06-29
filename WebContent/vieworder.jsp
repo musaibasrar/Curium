@@ -452,9 +452,10 @@
 		    }
 		};
 		
-		if (keyPressed != 8 && keyPressed != 0 && (keyPressed < 48 || keyPressed > 57)) {
-			document.getElementById("discount_"+row).value = 0;
- 		}else if (keyPressed >= 48 && keyPressed <= 57){
+		if ((keyPressed < 48 || keyPressed > 57) && (keyPressed < 96 || keyPressed > 105) ) {
+			document.getElementById("total_"+row).value = totalbeforediscountoriginal;
+			document.getElementById("discount_"+row).value = '';
+ 		}else if ((keyPressed >= 48 && keyPressed <= 57) || (keyPressed >= 96 && keyPressed <= 105)){
 				if(discount!='' && discount>0 && discount != discountoriginal){
 					var totalafterdiscount = totalbeforediscountoriginal - (totalbeforediscountoriginal*discount)/100;
 					document.getElementById("total_"+row).value = totalafterdiscount;	
@@ -768,7 +769,7 @@ for(Cookie cookie : cookies){
 						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
                           <td class="dataText" style="width:10%"><input type="checkbox" id = "<c:out value="${ordersummarylist.key.idorders}"/>" class = "chcktbl"  name="orderids"  value="${ordersummarylist.key.idorders}:${status.index}"/></td>
 						  <td  class="dataTextInActive" style="width:10%">
-						  <a class="dataTextInActive" href="Controller?process=OrderProcess&action=viewOrderDetails&id=<c:out value='${ordersummarylist.key.idorders}'/>&centername=<c:out value="${ordersummarylist.value.centername}" />&orderdate=<c:out value="${ordersummarylist.key.orderdate}" />&discount=<c:out value="${ordersummarylist.key.discount}" />&grandtotal=<c:out value="${ordersummarylist.key.totalafterdiscount}" />"><c:out value="${ordersummarylist.key.idorders}"/></a></td>
+						  <a class="dataTextInActive" href="Controller?process=OrderProcess&action=viewOrderDetails&id=<c:out value='${ordersummarylist.key.idorders}'/>&centername=<c:out value="${ordersummarylist.value.centername}" />&orderdate=<c:out value="${ordersummarylist.key.orderdate}" />&discount=<c:out value="${ordersummarylist.key.discount}" />&grandtotal=<c:out value="${ordersummarylist.key.totalafterdiscount}" />&invoicenumber=<c:out value="${ordersummarylist.key.invoicenumber}" />"><c:out value="${ordersummarylist.key.idorders}"/></a></td>
 						  <td class="dataText"><c:out value="${ordersummarylist.value.centername}" /></td>
 						  <td class="dataText"><c:out value="${ordersummarylist.key.orderdate}" /></td>
 						  <td class="dataText">

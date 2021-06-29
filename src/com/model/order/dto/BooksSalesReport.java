@@ -14,14 +14,14 @@ public class BooksSalesReport implements java.io.Serializable {
     private String centercode;
     private String title;
     private String author;
-    private String quantity;
-    private String price;
+    private Integer quantity;
+    private Float price;
     private String narration;
     private String language;
 
     public BooksSalesReport() {}
 
-    public BooksSalesReport(String orderdate, String centercode, String title, String author, String quantity, String price, String narration, String language) {
+    public BooksSalesReport(String orderdate, String centercode, String title, String author, Integer quantity, Float price, String narration, String language) {
         this.orderdate = orderdate;
         this.centercode = centercode;
         this.title = title;
@@ -66,19 +66,19 @@ public class BooksSalesReport implements java.io.Serializable {
 		this.author = author;
 	}
 
-	public String getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(String quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
-	public String getPrice() {
+	public Float getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Float price) {
 		this.price = price;
 	}
 

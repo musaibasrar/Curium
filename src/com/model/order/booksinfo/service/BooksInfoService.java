@@ -94,7 +94,7 @@ public class BooksInfoService {
 		        response.setHeader("Cache-Control", "no-cache");
 		        try {
 		        	
-		        		String buffer = "<select name='author' style='width: 200px' id='author'>";
+		        		String buffer = "<select name='author' style='width: 225px' id='author' class='textfieldvalues'>";
 		        		/*buffer = buffer +  "<option></option>";*/
 			        	for(int i =0; i<booksInfo.size();i++){
 			        		buffer = buffer +  "<option value="+booksInfo.get(i).getAuthor()+">"+booksInfo.get(i).getAuthor()+"</option>";

@@ -4,8 +4,8 @@
 body
 {
 	width:100%;
-	margin:0px;
-	padding:0px;
+	margin:1px;
+	padding:1px;
 	
 }
 
@@ -68,4 +68,25 @@ body
 	font-family:Verdana, Geneva, sans-serif;
 	font-size:12px;
 	padding:25px;
+}
+
+.textfieldvalues{
+
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #5d7e9b;
+	border-right-color: #5d7e9b;
+	border-bottom-color: #5d7e9b;
+	border-left-color: #5d7e9b;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	width: 220px;
+	height: 25px;
+	border-radius: 5px;
+	background-color: white;
+	 
 }

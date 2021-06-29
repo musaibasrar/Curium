@@ -70,8 +70,9 @@ public class OrderService {
         book.setAuthor(DataUtil.camelCase(request.getParameter("author")));
         book.setLanguage(DataUtil.camelCase(request.getParameter("language")));
         book.setEdition(DataUtil.camelCase(request.getParameter("edition")));
-        book.setPrice(DataUtil.parseInt(request.getParameter("price")));
+        book.setPrice(Float.parseFloat(request.getParameter("price")));
         book.setQuantity(DataUtil.parseInt(request.getParameter("quantity")));
+        book.setDiscount(DataUtil.parseInt(request.getParameter("discount")));
         book.setIsbn("DEFAULT");
         book.setPurchaseddate(DateUtil.datePars(request.getParameter("purchaseddate")));
         book.setCreateddate(new Date());
@@ -93,6 +94,7 @@ public class OrderService {
         String[] author = request.getParameterValues("updateauthor");
         String[] quantity = request.getParameterValues("updatequantity");
         String[] price = request.getParameterValues("updateprice");
+        String[] discount = request.getParameterValues("updatediscount");
         
         if(booksIds!=null){
             
@@ -105,8 +107,9 @@ public class OrderService {
                 book.setTitle(title[Integer.valueOf(bookId[1])]);
                 book.setAuthor(author[Integer.valueOf(bookId[1])]);
                 book.setQuantity(Integer.parseInt(quantity[Integer.valueOf(bookId[1])]));
-                book.setPrice(Integer.parseInt(price[Integer.valueOf(bookId[1])]));
+                book.setPrice(Float.parseFloat(price[Integer.valueOf(bookId[1])]));
                 book.setLanguage(language[Integer.valueOf(bookId[1])]);
+                book.setDiscount(Integer.parseInt(discount[Integer.valueOf(bookId[1])]));
                 book.setIsbn("DEFAULT");
                 booksList.add(book);
             }
@@ -149,7 +152,7 @@ public class OrderService {
                 String[] bkId = bookId.split(":");
                 orderDetails.setBookid(Integer.parseInt(bkId[0]));
                 orderDetails.setQuantity(Integer.parseInt(quantity[Integer.parseInt(bkId[1])]));
-                orderDetails.setPrice(Integer.parseInt(price[Integer.parseInt(bkId[1])]));
+                orderDetails.setPrice(Float.parseFloat(price[Integer.parseInt(bkId[1])]));
                 grandTotal = grandTotal + orderDetails.getPrice()*orderDetails.getQuantity();
                 orderDetailsList.add(orderDetails);
             }
@@ -163,7 +166,7 @@ public class OrderService {
             orderSummary.setDiscount(0);
             orderSummary.setTotalafterdiscount(grandTotal);
             
-            boolean confirmation = new OrderDAO().confirmOrderSummary(orderSummary,orderDetailsList);
+            boolean confirmation = new OrderDAO().confirmOrderSummary(orderSummary,orderDetailsList,httpSession.getAttribute("currentAcademicYear").toString());
             if(confirmation) {
                 try {
                     Properties properties = new Properties();
@@ -189,7 +192,6 @@ public class OrderService {
        
        for (Orderssummary orderssummary : orderSummary) {
         Branch branch = new OrderDAO().getBranch(orderssummary.getCentercode());
-        System.out.println("Branch id is "+branch.getCentername());
         SumOrd.put(orderssummary, branch);
     }
        new BranchService(request, response).viewBranches();
@@ -353,7 +355,8 @@ public class OrderService {
             orderBooksMap.put(ordersdetails, books);
         }
         httpSession.setAttribute("orderbooksmap", orderBooksMap);
-        httpSession.setAttribute("ordernumber", orderId);
+        //httpSession.setAttribute("ordernumber", orderId);
+        httpSession.setAttribute("ordernumber", DataUtil.emptyString(request.getParameter("invoicenumber")));
         httpSession.setAttribute("centername", DataUtil.emptyString(request.getParameter("centername")));
         httpSession.setAttribute("orderdate", DataUtil.emptyString(request.getParameter("orderdate")));
         httpSession.setAttribute("discount", DataUtil.emptyString(request.getParameter("discount")));
@@ -435,7 +438,7 @@ public class OrderService {
 				if(!fromDate.isEmpty() && !toDate.isEmpty()) {
 					subQuery = "b.purchaseddate between '"+fromDate+"' and '"+toDate+"'";
 					httpSession.setAttribute("fromdateselected", "From:&nbsp;"+fromDate);
-					httpSession.setAttribute("todateselected", "To:&nbsp;"+fromDate);
+					httpSession.setAttribute("todateselected", "To:&nbsp;"+toDate);
 				}else {
 					httpSession.setAttribute("fromdateselected", "");
 					httpSession.setAttribute("todateselected", "");
@@ -511,7 +514,7 @@ public class OrderService {
 				if(!fromDate.isEmpty() && !toDate.isEmpty()) {
 					subQuery = "os.orderdate between '"+fromDate+"' and '"+toDate+"'";
 					httpSession.setAttribute("fromdateselected", "From:&nbsp;"+fromDate);
-					httpSession.setAttribute("todateselected", "To:&nbsp;"+fromDate);
+					httpSession.setAttribute("todateselected", "To:&nbsp;"+toDate);
 				}else {
 					httpSession.setAttribute("fromdateselected", "");
 					httpSession.setAttribute("todateselected", "");
@@ -589,8 +592,8 @@ public class OrderService {
 					booksSalesReport.setTitle(DataUtil.returnValue(row[2]));
 					booksSalesReport.setAuthor(DataUtil.returnValue(row[3]));
 					booksSalesReport.setLanguage(DataUtil.returnValue(row[4]));
-					booksSalesReport.setQuantity(DataUtil.returnValue(row[5]));
-					booksSalesReport.setPrice(DataUtil.returnValue(row[6]));
+					booksSalesReport.setQuantity(DataUtil.parseInt(DataUtil.returnValue(row[5])));
+					booksSalesReport.setPrice(Float.parseFloat(DataUtil.returnValue(row[6])));
 					booksSalesReport.setNarration(DataUtil.returnValue(row[7]));
 					booksSalesReportList.add(booksSalesReport);
 				}
@@ -619,7 +622,7 @@ public class OrderService {
 				if(!fromDate.isEmpty() && !toDate.isEmpty()) {
 					subQuery = "os.orderdate between '"+fromDate+"' and '"+toDate+"'";
 					httpSession.setAttribute("fromdateselected", "From:&nbsp;"+fromDate);
-					httpSession.setAttribute("todateselected", "To:&nbsp;"+fromDate);
+					httpSession.setAttribute("todateselected", "To:&nbsp;"+toDate);
 				}else {
 					httpSession.setAttribute("fromdateselected", "");
 					httpSession.setAttribute("todateselected", "");
@@ -659,4 +662,18 @@ public class OrderService {
 		 }
 		 		httpSession.setAttribute("ordersummarylist", orderSummaryList);
 	}
+
+	
+	public void rejectedOrders() {
+	       List<Orderssummary> orderSummary = new OrderDAO().viewRejectedOrder();
+	       Map<Orderssummary,Branch> SumOrd = new LinkedHashMap<Orderssummary,Branch>();
+	       
+	       for (Orderssummary orderssummary : orderSummary) {
+	        Branch branch = new OrderDAO().getBranch(orderssummary.getCentercode());
+	        SumOrd.put(orderssummary, branch);
+	    }
+	       new BranchService(request, response).viewBranches();
+	       request.setAttribute("ordersummarylist", SumOrd);
+	        
+	    }
 }

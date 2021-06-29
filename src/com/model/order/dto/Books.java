@@ -20,10 +20,10 @@ public class Books implements java.io.Serializable {
     private String title;
     private Integer quantity;
     private String edition;
-    private Integer totalpage;
+    private Integer discount;
     private String description;
     private Integer userid;
-    private Integer price;
+    private Float price;
     private Date purchaseddate;
     private Date createddate;
 
@@ -35,7 +35,7 @@ public class Books implements java.io.Serializable {
     }
 
     public Books(String isbn, String language, String author, String publisher, String bookimage, String genre, String title,
-            Integer quantity, String edition, Integer totalpage, String description, Integer userid, Integer price, Date purchaseddate, Date createddate) {
+            Integer quantity, String edition, Integer discount, String description, Integer userid, Float price, Date purchaseddate, Date createddate) {
         this.isbn = isbn;
         this.language = language;
         this.author = author;
@@ -45,7 +45,7 @@ public class Books implements java.io.Serializable {
         this.title = title;
         this.quantity = quantity;
         this.edition = edition;
-        this.totalpage = totalpage;
+        this.discount = discount;
         this.description = description;
         this.userid = userid;
         this.price = price;
@@ -133,12 +133,12 @@ public class Books implements java.io.Serializable {
         this.edition = edition;
     }
 
-    public Integer getTotalpage() {
-        return this.totalpage;
+    public Integer getDiscount() {
+        return this.discount;
     }
 
-    public void setTotalpage(Integer totalpage) {
-        this.totalpage = totalpage;
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
     }
 
     public String getDescription() {
@@ -157,11 +157,11 @@ public class Books implements java.io.Serializable {
         this.userid = userid;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return this.price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 

@@ -401,7 +401,7 @@ for(Cookie cookie : cookies){
             <div >
             	<a target="mainFrame" href="Controller?process=OrderProcess&action=booksDetails" style="font-size: 12px;">View/Add/Edit</a><br/>
             	<a target="mainFrame" href="Controller?process=OrderProcess&action=booksPurchaseReport" style="font-size: 12px;">Purchase Report</a><br/>
-            	<a target="mainFrame" href="Controller?process=OrderProcess&action=booksSalesReport" style="font-size: 12px;">Sales Detail Report</a><br/>
+            	<a target="mainFrame" href="Controller?process=OrderProcess&action=booksSalesReport" style="font-size: 12px;">Sales Details Report</a><br/>
             	<a target="mainFrame" href="Controller?process=OrderProcess&action=booksSalesSummaryReport" style="font-size: 12px;">Sales Summary Report</a><br/>
             	<a target="mainFrame" href="Controller?process=BooksInfoProcess&action=viewBooksInfo" style="font-size: 12px;">Books Info</a><br/>
             </div>
