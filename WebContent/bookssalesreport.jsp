@@ -648,8 +648,8 @@ for(Cookie cookie : cookies){
 							<td ><label>
 									<select name="status" id="status" 
 									style="width: 180px;font-size: 14px;" required>
+										<option value="DELIVERED" selected="selected">Delivered</option>
 										<option value="" ></option>
-										<option value="DELIVERED" >Delivered</option>
 										<option value="PENDING">Pending</option>
 										<option value="REJECTED">Rejected</option>
 								</select>
