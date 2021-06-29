@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="css/style.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -91,7 +92,7 @@
 
 .alignRight {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 16px;
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
@@ -335,6 +336,7 @@
     display: none;
 }
 
+
 </style>
 <style>
 #button {
@@ -392,6 +394,36 @@
 		var options = {};
 
 		$("#effect").show();
+	}
+	
+	
+	function calculatediscount(){
+		
+		var discount = document.getElementById("discount").value;
+		var totalbeforediscount = document.getElementById("price").value;
+		
+		var keyPressed = event.keyCode || event.charCode;
+		
+		document.getElementById("discount").onkeydown = function() {
+		    var key = event.keyCode || event.charCode;
+		    keyPressed = key;
+		    if( key == 8 ){
+		    	document.getElementById("price").value = totalbeforediscount;
+		    	document.getElementById("discount").value = 0;
+		    }
+		};
+		
+		if ((keyPressed < 48 || keyPressed > 57) && (keyPressed < 96 || keyPressed > 105) ) {
+			document.getElementById("priceafterdiscount").value = totalbeforediscount;
+			document.getElementById("discount").value = '';
+ 		}else if ((keyPressed >= 48 && keyPressed <= 57) || (keyPressed >= 96 && keyPressed <= 105)){
+				if(discount!='' && discount>0){
+					var totalafterdiscount = totalbeforediscount - (totalbeforediscount*discount)/100;
+					document.getElementById("priceafterdiscount").value = totalafterdiscount;	
+				}else if(discount==0 || discount == ''){
+					document.getElementById("priceafterdiscount").value = totalbeforediscount*100/(100-discount);
+				}
+ 		}
 	}
 	
 </script>
@@ -674,8 +706,8 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Book Title &nbsp;</td>
 							<td><label> 
 							
-							<select name="title" id="title" onchange="getAuthor()"
-									style="width: 200px;" required>
+							<select name="title" id="title" onchange="getAuthor()" class="textfieldvalues"
+									style="width: 225px;" required>
 										<option selected></option>
 										<c:forEach items="${booksinfolist}" var="booksinfo">
 											<option value="${booksinfo.title}">
@@ -685,8 +717,8 @@ for(Cookie cookie : cookies){
 								</select>
 							</label></td>
 							<td class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Author &nbsp;</td>
-								<td id="authorslist"><label> <select name="author" id="author"
-									style="width: 200px" >
+								<td id="authorslist"><label> <select name="author" id="author" class="textfieldvalues"
+									style="width: 225px" >
 									<option ></option>
 								</select>
 							</label>
@@ -701,8 +733,8 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Language&nbsp;</td>
 							<td ><label> 
 							
-							 <select name="language" id="language" 
-									style="width: 200px;" required>
+							 <select name="language" id="language"  class="textfieldvalues"
+									style="width: 225px;" required>
 										<option selected value="Urdu" >Urdu</option>
 										<option value="English">English</option>
 										<option value="Kannada">Kannada</option>
@@ -715,7 +747,7 @@ for(Cookie cookie : cookies){
 							</label></td>
 							
 							<td class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edition &nbsp;</td>
-							<td ><label> <input id="edition" 
+							<td ><label> <input id="edition"  class="textfieldvalues"
 									name="edition" type="text" class="textField" required size="30">
 
 							</label></td>
@@ -725,15 +757,15 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td class="alignRight">Price &nbsp;</td>
-							<td ><label> <input id="price" onkeypress="return event.charCode >= 00 && event.charCode <=57"
+							<td ><label> <input id="price" class="textfieldvalues" onkeypress="return event.charCode >= 00 && event.charCode <=57"
 									name="price" type="text" class="textField" required size="30"
 									required>
 
 							</label></td>
 							
-							<td class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantity &nbsp;</td>
-							<td><label> <input id="quantity" onkeypress="return event.charCode >= 00 && event.charCode <=57"
-									name="quantity" type="text" class="textField" required size="30">
+							<td class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discount &nbsp;</td>
+							<td><label> <input id="discount" class="textfieldvalues" onkeyup="calculatediscount()"
+									name="discount" type="text"  required size="30">
 
 							</label></td>
 							
@@ -743,9 +775,27 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
+						
+						<td class="alignRight">Price after discount &nbsp;</td>
+							<td ><label> <input id="priceafterdiscount" class="textfieldvalues" onkeypress="return event.charCode >= 00 && event.charCode <=57"
+									name="priceafterdiscount" type="text" class="textField" required size="30"
+									required>
+
+							</label></td>
+							
+						<td class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantity &nbsp;</td>
+							<td><label> <input id="quantity" class="textfieldvalues" onkeypress="return event.charCode >= 00 && event.charCode <=57"
+									name="quantity" type="text" class="textField" required size="30">
+
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
 							<td class="alignRight">Purchased Date &nbsp;</td>
 							<td ><label> <input
-									name="purchaseddate" type="text" class="textField" 
+									name="purchaseddate" class="textfieldvalues" type="text" class="textField" 
 									id="purchaseddate" size="30" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" data-validate="validate(required)">
 
 							</label></td>
@@ -783,7 +833,8 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Language</th>
                             <th title="click to sort" class="headerText">Author&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Quantity</th>
-                            <th title="click to sort" class="headerText">Price Per Book&nbsp;</th>
+                            <th title="click to sort" class="headerText">Price/Book&nbsp;</th>
+                            <th title="click to sort" class="headerText">Discount&nbsp;</th>
                             <th title="click to sort" class="headerText">Total Price&nbsp;</th>
                         </tr>
                     </thead>
@@ -797,12 +848,13 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.title}"/>" id="updatetitle" name="updatetitle"><label style="display: none;"><c:out value="${books.title}"/></label></td>
                                 <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.language}"/>" id="updatelanguage" name="updatelanguage"><label style="display: none;"><c:out value="${books.language}"/></label></td>
                                 <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.author}"/>" id="updateauthor" name="updateauthor"><label style="display: none;"><c:out value="${books.author}"/></label></td>
-                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.quantity}"/>" id="updatequantity" name="updatequantity"><label style="display: none;"><c:out value="${books.quantity}"/></label></td>
-                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.price}"/>" id="updateprice" name="updateprice"><label style="display: none;"><c:out value="${books.price}"/></label></td>
+                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.quantity}"/>" id="updatequantity" name="updatequantity" onkeypress="return event.charCode >= 00 && event.charCode <=57"><label style="display: none;"><c:out value="${books.quantity}"/></label></td>
+                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.price}"/>" id="updateprice" name="updateprice" onkeypress="return event.charCode >= 00 && event.charCode <=57"><label style="display: none;"><c:out value="${books.price}"/></label></td>
+                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.discount}"/>" id="updatediscount" name="updatediscount" onkeypress="return event.charCode >= 00 && event.charCode <=57"><label style="display: none;"><c:out value="${books.discount}"/></label></td>
                                 <td class="dataText" style="text-align: right">
-                                <c:set var="itemTotal" value="${itemTotal + books.quantity * books.price}" />
-                                <fmt:setLocale value="en_IN" scope="request"/>
-								<fmt:formatNumber type="currency"  value="${books.quantity * books.price}" />
+                                	<c:set var="itemTotal" value="${itemTotal + ((books.quantity * books.price) - (books.quantity * books.price)*books.discount/100)}" />
+                                	<fmt:setLocale value="en_IN" scope="request"/>
+									<fmt:formatNumber type="currency"  value="${(books.quantity * books.price) - (books.quantity * books.price)*books.discount/100}" />
                                </td>
                             </tr>
                         </c:forEach>
