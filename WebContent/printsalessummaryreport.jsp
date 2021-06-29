@@ -219,7 +219,7 @@
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				BOARD OF ISLAMIC EDUCATION KARNATAKA<br>
-				<label class="addressLine">Books List</label><br>
+				<label class="addressLine">Books Sales Summary Report</label><br>
 				<label class="selectedparameters">${fromdateselected}&nbsp;&nbsp;${todateselected}&nbsp;&nbsp;${titleselected}&nbsp;&nbsp;${authorselected}&nbsp;&nbsp;${languageselected}&nbsp;&nbsp;${centercodeselected}
 				
 				<br>
@@ -254,6 +254,7 @@
             <thead>
 					<tr>
 						<th title="click to sort" class="datath">Order Date</th>
+						<th title="click to sort" class="datath">Invoice Date</th>
 						<th title="click to sort" class="datath">Center</th>
 						<th title="click to sort" class="datath">Status</th>
 						<th title="click to sort" class="datath">Payment Status</th>
@@ -266,6 +267,7 @@
 					<c:forEach items="${ordersummarylist}" var="resultlist" varStatus="status">
 						<tr>
 							<td class="datatd"><c:out value="${resultlist.orderdate}" /></td>
+							<td class="datatd"><c:out value="${resultlist.invoicenumber}" /></td>
 							<td class="datatd"><c:out value="${resultlist.centercode}" /></td>
 							<td class="datatd"><c:out value="${resultlist.narration}" /></td>
 							<td class="datatd"><c:out value="${resultlist.paymentstatus}" /></td>

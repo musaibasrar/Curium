@@ -633,6 +633,7 @@ for(Cookie cookie : cookies){
                     <thead>
                         <tr>
                             <th title="click to sort" class="headerText">Order Date</th>
+                            <th title="click to sort" class="headerText">Invoice Number</th>
                             <th title="click to sort" class="headerText">Center</th>
                             <th title="click to sort" class="headerText">Status</th>
                             <th title="click to sort" class="headerText">Payment Status</th>
@@ -647,6 +648,7 @@ for(Cookie cookie : cookies){
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><c:out value="${books.orderdate}"/></td>
+                                <td class="dataText"><c:out value="${books.invoicenumber}"/></td>
                                 <td class="dataText"><c:out value="${books.centercode}"/></td>
                                 <td class="dataText"><c:out value="${books.narration}"/></td>
                                 <td class="dataText"><c:out value="${books.paymentstatus}"/></td>

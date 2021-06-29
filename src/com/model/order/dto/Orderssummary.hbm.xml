@@ -27,5 +27,8 @@
         <property generated="never" lazy="false" name="totalafterdiscount" optimistic-lock="true" type="java.lang.Float" unique="false">
             <column name="totalafterdiscount"/>
         </property>
+        <property generated="never" lazy="false" name="invoicenumber" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="invoicenumber"/>
+        </property>
     </class>
 </hibernate-mapping>

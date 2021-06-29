@@ -18,11 +18,12 @@ public class Orderssummary implements java.io.Serializable {
     private String narration;
     private Integer discount;
     private Float totalafterdiscount;
+    private String invoicenumber;
 
     public Orderssummary() {}
 
     public Orderssummary(String centercode, Date orderdate, Date confirmationdate, String paymentstatus,
-            String narration, Integer discount, Float totalafterdiscount) {
+            String narration, Integer discount, Float totalafterdiscount, String invoicenumber) {
         this.centercode = centercode;
         this.orderdate = orderdate;
         this.confirmationdate = confirmationdate;
@@ -30,6 +31,7 @@ public class Orderssummary implements java.io.Serializable {
         this.narration = narration;
         this.discount = discount;
         this.totalafterdiscount = totalafterdiscount;
+        this.invoicenumber = invoicenumber;
     }
 
     public Integer getIdorders() {
@@ -94,6 +96,14 @@ public class Orderssummary implements java.io.Serializable {
 
 	public void setTotalafterdiscount(Float totalafterdiscount) {
 		this.totalafterdiscount = totalafterdiscount;
+	}
+
+	public String getInvoicenumber() {
+		return invoicenumber;
+	}
+
+	public void setInvoicenumber(String invoicenumber) {
+		this.invoicenumber = invoicenumber;
 	}
 
 }
