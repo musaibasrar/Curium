@@ -663,8 +663,9 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Book Title</th>
                             <th title="click to sort" class="headerText">Author&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Language</th>
-                            <th title="click to sort" class="headerText">Price Per Book&nbsp;</th>
                             <th title="click to sort" class="headerText">Quantity</th>
+                             <th title="click to sort" class="headerText">Price/Book&nbsp;</th>
+                            <th title="click to sort" class="headerText">Discount</th>
                             <th title="click to sort" class="headerText">Total Price&nbsp;</th>
                         </tr>
                     </thead>
@@ -678,13 +679,15 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${books.title}"/></td>
                                 <td class="dataText"><c:out value="${books.author}"/></td>
 								<td class="dataText"><c:out value="${books.language}"/></td>
+								<td class="dataText"><c:out value="${books.quantity}"/></td>
 								<td class="dataText"><c:out value="${books.price}"/></td>
-                                <td class="dataText"><c:out value="${books.quantity}"/></td>
+                                <td class="dataText"><c:out value="${books.discount}"/></td>
                                 <td class="dataText" style="text-align: right">
                                 <c:set var="totalQuantity" value="${totalQuantity + books.quantity}" />
-                                <c:set var="itemTotal" value="${itemTotal + books.quantity * books.price}" />
+                                												
+                                <c:set var="itemTotal" value="${itemTotal + ((books.quantity * books.price) - (books.quantity * books.price)*books.discount/100)}" />
                                 <fmt:setLocale value="en_IN" scope="request"/>
-								<fmt:formatNumber type="currency"  value="${books.quantity * books.price}" />
+								<fmt:formatNumber type="currency"  value="${((books.quantity * books.price) - (books.quantity * books.price)*books.discount/100)}" />
                                </td>
                             </tr>
                         </c:forEach>
