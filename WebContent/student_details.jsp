@@ -1,5 +1,5 @@
 <%-- 
-    Document   : student_details
+    Document   : member_details
     Created on : Jan 4, 2013, 4:39:24 PM
     Author     : Musaib
 --%>
@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Details</title>
+        <title>Member Details</title>
 
         <script type="text/javascript" language="JavaScript" src="js/motionpack.js"></script>
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -434,7 +434,7 @@ for(Cookie cookie : cookies){
             </table>
             <div class="accordion" style="width: 100%;height: 100%">
 		
-                <h3><a href="#">Student Details</a></h3>
+                <h3><a href="#">Member Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
@@ -442,11 +442,11 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Member's Photo" style="width: 200px;height: 200px;">
                     </td>
                     </tr>
                     
-                    	<tr>
+                    	<%-- <tr>
                          
                             <td  width="25%"  class="alignLeft" height="50">Admission Number
                             </td>
@@ -460,44 +460,42 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.sts}" />
                             </td>
                             
-                        </tr>
+                        </tr> --%>
 
 					<tr>
                             <td width="25%"  class="alignLeft" height="50">Name</td>
                             <td width="25%" class="tablerows" style="text-transform:uppercase">
                                 <c:out default="" value="${student.name}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Gender
+                            <td width="25%"  class="alignLeft" height="50" >Referral Name
                             </td>
                             <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.classstudying}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="25%"  class="alignLeft" height="50">Contact Number</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${student.classadmittedin}" />
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50" >Contribution(Rs.)
+                            </td>
+                            <td width="25%"  class="tablerows">
                                 <c:out default="" value="${student.gender}" />
                             </td>
                         </tr>
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
-                            <td width="25%" class="tablerows" >
-                                <%-- <c:out value="${student.dateofbirth}" /> --%>
-                                <fmt:formatDate value="${student.dateofbirth}" pattern="dd/MM/yyyy"/>
-                                
-                            </td>
-                            <td width="25%"  class="alignLeft" height="50" >Age
-                            </td>
-                            <td width="25%"  class="tablerows">
-                                <c:out default="" value="${student.age}" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="25%"  class="alignLeft" height="50" >Place of birth, Tq, Dist.</td>
+                            <td width="25%"  class="alignLeft" height="50" >Address</td>
                             <td width="25%"  class="tablerows" >
-                              <c:out default="" value="${student.placeofbirth}" />
+                              <c:out default="" value="${student.remarks}" />
                             </td>
-                           <td  width="25%"  class="alignLeft" height="50" >Date of admission
+                           <td  width="25%"  class="alignLeft" height="50" >email
                             </td>
                             <td width="25%" class="tablerows" >
-                            	<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>
+                            	<c:out default="" value="${student.bloodgroup}" />
                             </td>
                         </tr>  
-                        
+                        <%-- 
                           
                         <tr>
                             <td width="25%"  class="alignLeft" height="50" >Studying in class</td>
@@ -505,7 +503,7 @@ for(Cookie cookie : cookies){
                             <c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
 						    ${splt} 
 							</c:forEach>
-                               <%--  <c:out default="" value="${student.classstudying}" /> --%>
+                                <c:out default="" value="${student.classstudying}" />
                             </td>
                             <td width="25%"  class="alignLeft" height="50">Admitted in class
                             </td>
@@ -538,13 +536,13 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.religion}" />
                             </td>
-                  <%--           
+                            
                             <td  width="25%"  class="alignLeft" height="50" >Caste
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.caste}" />
                             </td>
- --%>
+
                                       
                             <td  width="25%"  class="alignLeft" height="50" >Students Caste Certificate No.
                             </td>
@@ -649,7 +647,7 @@ for(Cookie cookie : cookies){
                              <td  width="25%"  class="alignLeft" height="50">Created Date
                             </td>
                             <td width="25%" class="tablerows">
-                                <%-- <c:out default="" value="${student.createddate}" /> --%>
+                                <c:out default="" value="${student.createddate}" />
                                 <fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>
                             </td>
    
@@ -687,7 +685,7 @@ for(Cookie cookie : cookies){
                           
                            
                         </tr>
-                        
+                         --%>
            
 
                         <tr>
@@ -706,7 +704,7 @@ for(Cookie cookie : cookies){
                 </div>
     </div>
     
-    	<div class="accordion" style="width: 100%;height: 100%">
+    	<%-- <div class="accordion" style="width: 100%;height: 100%">
 		
                 <h3><a href="#">Previous School Details</a></h3>
                 <div>
@@ -781,9 +779,9 @@ for(Cookie cookie : cookies){
                         </tr>
                     </table>
                 </div>
-    </div>
+    </div> --%>
     
-    <div class="accordion" style="width: 100%;height: 100%">
+    <%-- <div class="accordion" style="width: 100%;height: 100%">
 		
                 <h3><a href="#">Bank Details</a></h3>
                 <div>
@@ -827,9 +825,9 @@ for(Cookie cookie : cookies){
                         
                     </table>
                 </div>
-    </div>
+    </div> --%>
     
-            <div id="accordion1" style="width: 100%;height: 100%">
+            <%-- <div id="accordion1" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Parent's Details</a></h3>
                 <div>
@@ -962,15 +960,15 @@ for(Cookie cookie : cookies){
 
 
 
-            </div>
+            </div> --%>
               <div id="accordion2" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Fees Details</a></h3>
+                <h3><a href="#">Contribution Payment Details</a></h3>
                 
                 <div>
 					<div align="center">
-					<h class="dataTextFees">Total fees : &#x20B9; ${totalfees}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Total fees paid : &#x20B9; ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
+					<h class="dataTextFees">Total Contribution : &#x20B9; ${totalfees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total contribution paid : &#x20B9; ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Due Amount : </h>
                 <h class="dataTextDueFees"> &#x20B9; ${dueamount}</h>
                 </div>
@@ -979,7 +977,7 @@ for(Cookie cookie : cookies){
                     <thead>
                         <tr  >
                             
-                            <th title="click to sort" class="headerText">Date of fees</th>
+                            <th title="click to sort" class="headerText">Date</th>
                             <th title="click to sort" class="headerText">Reference Number</th>
                             <th title="click to sort" class="headerText">Total Amount</th>
                             <th title="click to sort" class="headerText">View Details</th>
@@ -1020,13 +1018,13 @@ for(Cookie cookie : cookies){
             </div>
             <div id="accordion3" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Fees Structure</a></h3>
+                <h3><a href="#">Contribution Details</a></h3>
                 
                 <div>
 					<div align="center">
-				<h class="dataTextFees">Academic Year : ${currentAcademicYear}</h>&nbsp;&nbsp;&nbsp;
-				<h class="dataTextFees">Total fees : &#x20B9; ${totalfees}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Total fees paid : &#x20B9; ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
+				<h class="dataTextFees">Financial Year : ${currentAcademicYear}</h>&nbsp;&nbsp;&nbsp;
+				<h class="dataTextFees">Total Contribution : &#x20B9; ${totalfees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total Contribution paid : &#x20B9; ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Due Amount : </h>
                 <h class="dataTextDueFees"> &#x20B9; ${dueamount}</h>
                 </div>
@@ -1038,13 +1036,13 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
-                            <th title="click to sort" class="headerText">Fees Category</th>
-                            <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
-                            <th title="click to sort" class="headerText">Total Installments&nbsp;</th>
-                            <th title="click to sort" class="headerText">Total Fees Amount&nbsp;</th>
-                            <th title="click to sort" class="headerText">Fees Paid&nbsp;</th>
+                            <th title="click to sort" class="headerText">Category</th>
+                            <th title="click to sort" class="headerText">Amount&nbsp;</th>
+                            <!-- <th title="click to sort" class="headerText">Total Installments&nbsp;</th> -->
+                            <th title="click to sort" class="headerText">Total Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Paid Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Due Amount&nbsp;</th>
-                            <th title="click to sort" class="headerText">Concession&nbsp;</th>
+                            <!-- <th title="click to sort" class="headerText">Concession&nbsp;</th> -->
                             <th title="click to sort" class="headerText">Waive Off&nbsp;</th>
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
@@ -1065,11 +1063,11 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.feescategoryname}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
-                                <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td>
+                                <%-- <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td> --%>
                                 <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feespaid}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff}"/></td>
-                                <td class="dataText"><c:out value="${feesstructure.concession}"/></td>
+                                <%-- <td class="dataText"><c:out value="${feesstructure.concession}"/></td> --%>
                                 <td class="dataText"><c:out value="${feesstructure.waiveoff}"/></td>
                             </tr>
                         </c:forEach>

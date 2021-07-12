@@ -1,5 +1,7 @@
 package com.model.feescollection.service;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -10,12 +12,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.account.dao.AccountDAO;
+import com.model.account.dto.VoucherEntrytransactions;
+import com.model.feescategory.dto.Feescategory;
 import com.model.feescollection.dao.feesCollectionDAO;
 import com.model.feescollection.dto.Feescollection;
 import com.model.feescollection.dto.Receiptinfo;
@@ -24,6 +30,7 @@ import com.model.feesdetails.dao.feesDetailsDAO;
 import com.model.feesdetails.dto.Feesdetails;
 import com.model.parents.dao.parentsDetailsDAO;
 import com.model.parents.dto.Parents;
+import com.model.sendsms.service.SmsService;
 import com.model.std.dto.Classsec;
 import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
@@ -41,6 +48,7 @@ public class FeesCollectionService {
 	private HttpSession httpSession;
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private String BRANCHID = "branchid";
+	private String username = "username";
 	
 	public FeesCollectionService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -130,6 +138,7 @@ public class FeesCollectionService {
 					res.append(str).append(" ");
 				}
 				grandTotal = res.toString().trim();
+				grandTotal = DataUtil.convertToTitleCase(grandTotal);
 				httpSession.setAttribute("grandTotal", grandTotal+" "+"Only");
 				httpSession.setAttribute("feesdetails", feesdetails);
 		
@@ -165,6 +174,7 @@ public class FeesCollectionService {
 		request.setAttribute("classandsecDetails", request.getParameter("classandsec"));
 		request.setAttribute("studentIdDetails", request.getParameter("studentId"));
 		request.setAttribute("dateoffeesDetails", request.getParameter("dateoffees"));
+		request.setAttribute("membercontactnumber", request.getParameter("contactnumber"));
 		
 		}
 	}
@@ -177,6 +187,7 @@ public class FeesCollectionService {
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
 		
 		String sid = request.getParameter("studentIdDetails");
+		String contactNumber = request.getParameter("membercontactnumber");
 		String[] amountPaying = request.getParameterValues("amountpaying");
 		String[] fine = request.getParameterValues("fine");
 		String[] studentSfsIds = request.getParameterValues("studentsfsids");
@@ -194,9 +205,8 @@ public class FeesCollectionService {
 				grantTotal+=DataUtil.parseLong(amountPaying[Integer.parseInt(totalAmount[1])]);
 			}
 			receiptInfo.setTotalamount(grantTotal);
-			new feesCollectionDAO().createReceipt(receiptInfo);
+			//new feesCollectionDAO().createReceipt(receiptInfo);
 			 
-			if(receiptInfo.getReceiptnumber()!= null){
 				for (int i = 0; i < studentSfsIds.length; i++) {
 					Feescollection feesCollect = new Feescollection();
 					String[] studentSfsIdamount = studentSfsIds[i].split("_");
@@ -206,13 +216,44 @@ public class FeesCollectionService {
 					feesCollect.setFine(DataUtil.parseLong(fine[i]));
 					feesCollect.setDate(new Date());
 					feesCollect.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-					feesCollect.setReceiptnumber(receiptInfo.getReceiptnumber());
+					//feesCollect.setReceiptnumber(receiptInfo.getReceiptnumber());
 					feesCollect.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 					feescollection.add(feesCollect);
 				}
-				createFeesCollection = new feesCollectionDAO().create(feescollection);
 				
-			}
+				
+				//Pass J.V. : credit the Fees as income & debit the cash
+				
+				int crFees = getLedgerAccountId("feesaccountid");
+				int drAccount = 0;
+				
+					drAccount = getLedgerAccountId(httpSession.getAttribute(username).toString());
+				
+				VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+				
+				transactions.setDraccountid(drAccount);
+				transactions.setCraccountid(crFees);
+				transactions.setDramount(new BigDecimal(receiptInfo.getTotalamount()));
+				transactions.setCramount(new BigDecimal(receiptInfo.getTotalamount()));
+				transactions.setVouchertype(4);
+				transactions.setTransactiondate(receiptInfo.getDate());
+				transactions.setEntrydate(DateUtil.todaysDate());
+				transactions.setNarration("Towards Contribution");
+				transactions.setCancelvoucher("no");
+				transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+				transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				transactions.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+				
+				String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptInfo.getTotalamount()+" where accountdetailsid="+drAccount;
+
+				String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptInfo.getTotalamount()+" where accountdetailsid="+crFees;
+				
+				// End J.V
+				createFeesCollection = new feesCollectionDAO().create(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount);
+				
+				if(createFeesCollection) {
+					new SmsService(request, response).sendSMSRemiders(contactNumber, "thanksdonation");
+				}
 		}
 		}
 		return receiptInfo;
@@ -231,7 +272,7 @@ public class FeesCollectionService {
 				feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = receiptInfo.getDate();
-			String reDate = new SimpleDateFormat("yyyy-MM-dd").format(receiptDate);
+			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
 			Student student = new studentDetailsDAO().readUniqueObject(receiptInfo.getSid());
 			httpSession.setAttribute("student", student);
 			request.setAttribute("recieptdate", reDate);
@@ -256,7 +297,7 @@ public class FeesCollectionService {
 				feeCatMap.put(studentfeesstructure.get(0).getFeescategory().getFeescategoryname(), feescollectionSingle.getAmountpaid());
 			}
 			Date receiptDate = rinfo.getDate();
-			String reDate = new SimpleDateFormat("yyyy-MM-dd").format(receiptDate);
+			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
 			Student student = new studentDetailsDAO().readUniqueObject(rinfo.getSid());
 			Parents parents = new parentsDetailsDAO().readUniqueObject(rinfo.getSid());
 			httpSession.setAttribute("parents", parents);
@@ -267,6 +308,7 @@ public class FeesCollectionService {
 			request.setAttribute("duplicate", dp);
 			NumberToWord toWord = new NumberToWord();
 			String grandTotal = toWord.convert(rinfo.getTotalamount().intValue());
+			grandTotal = DataUtil.convertToTitleCase(grandTotal);
 			httpSession.setAttribute("grandTotal", grandTotal+" "+"Only");
 		}
 		
@@ -393,29 +435,31 @@ public class FeesCollectionService {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 		
-		String queryMain = "From Parents as parents where";
-		String[] addClass = request.getParameterValues("classsearch");
-		StringBuffer conClassStudying = new StringBuffer();
-
-			int i = 0;
-			for (String classOne : addClass) {
-				
-				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
-				}else {
-					conClassStudying.append(classOne+"--"+"%");
-				}
-				
-				i++;
-			}
-		
-		String classStudying = DataUtil.emptyString(conClassStudying.toString());
+		String queryMain = "From Parents as parents where ";
 		String querySub = "";
-
-		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " parents.Student.classstudying like '"
-					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
-		}
+		/*
+		 * String[] addClass = request.getParameterValues("classsearch"); StringBuffer
+		 * conClassStudying = new StringBuffer();
+		 * 
+		 * int i = 0; for (String classOne : addClass) {
+		 * 
+		 * if(i>0) {
+		 * conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+
+		 * "--"+"%"); }else { conClassStudying.append(classOne+"--"+"%"); }
+		 * 
+		 * i++; }
+		 * 
+		 * String classStudying = DataUtil.emptyString(conClassStudying.toString());
+		 * String querySub = "";
+		 * 
+		 * if (!classStudying.equalsIgnoreCase("")) { querySub = querySub +
+		 * " parents.Student.classstudying like '" + classStudying +
+		 * "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="
+		 * +Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())
+		 * +" order by parents.Student.admissionnumber ASC"; }
+		 */
+		
+		querySub = querySub + " parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
 
 		if(!"".equalsIgnoreCase(querySub)) {
 			queryMain = queryMain + querySub;
@@ -610,6 +654,88 @@ public class FeesCollectionService {
 			httpSession.setAttribute("Currentmonth", Currentmonth+"'s");
 	
 	}
+
+	public void generateInvoice() {
+			
+			List<Feescategory> studentFeesCatgory = new ArrayList<Feescategory>();
+			String studentName = request.getParameter("studentNameDetails");
+			String date = request.getParameter("dateoffees");
+			Integer totalFees = 0;
+			
+			String[] sfsid = request.getParameterValues("studentsfsids");
+			String[] feesCategroy = request.getParameterValues("feescategory");
+			String[] feesAmount = request.getParameterValues("feesamount");
+			
+			for (String sfid : sfsid) {
+				String[] id = sfid.split("_");
+				Feescategory studentFees = new Feescategory();
+				int position = Integer.parseInt(id[1]);
+				studentFees.setFeescategoryname(feesCategroy[position]);
+				studentFees.setAmount(Integer.parseInt(feesAmount[position]));
+				studentFeesCatgory.add(studentFees);
+				totalFees = totalFees + Integer.parseInt(feesAmount[position]);
+			}
+			
+			/*
+			 * for(int i=0;i<feesCategroy.length;i++) {
+			 * 
+			 * Feescategory studentFees = new Feescategory();
+			 * studentFees.setFeescategoryname(feesCategroy[i]);
+			 * studentFees.setAmount(Integer.parseInt(feesAmount[i])); totalFees = totalFees
+			 * + Integer.parseInt(feesAmount[i]); }
+			 */
+			
+			NumberToWord toWord = new NumberToWord();
+			String grandTotal = "";
+			
+			if(totalFees != 0){
+				grandTotal = toWord.convert(totalFees);
+			}
+			
+			StringBuffer res = new StringBuffer();
+			String[] strArr = grandTotal.split(" ");
+			
+			for(String str : strArr){
+				char[] stringArray = str.trim().toCharArray();
+				stringArray[0] = Character.toUpperCase(stringArray[0]);
+				str = new String(stringArray);
+				res.append(str).append(" ");
+			}
+			grandTotal = res.toString().trim();
+			grandTotal = DataUtil.convertToTitleCase(grandTotal);
+			httpSession.setAttribute("grandTotal", grandTotal+" "+"Only");
+			httpSession.setAttribute("feesdetails", studentFeesCatgory);
+			httpSession.setAttribute("name", studentName);
+			httpSession.setAttribute("date", date);
+			httpSession.setAttribute("totalfees", totalFees);
+			
+			
+		}
+	
+		private Integer getLedgerAccountId(String itemAccount) {
+
+			int result = 0;
+
+			Properties properties = new Properties();
+			InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("util.properties");
+
+			try {
+				properties.load(inputStream);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			String ItemLedgerId = properties.getProperty(itemAccount);
+
+			if (ItemLedgerId != null) {
+				result = Integer.parseInt(ItemLedgerId);
+			} else {
+				String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
+				result = Integer.parseInt(ItemLedger.toLowerCase());
+			}
+
+			return result;
+		}
 	
 	}
 

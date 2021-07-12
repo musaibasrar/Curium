@@ -168,7 +168,7 @@ for(Cookie cookie : cookies){
                 <thead>
                     <tr  >
 
-                        <td colspan="4" class="headerText">Fees Details</td>
+                        <td colspan="4" class="headerText">Contribution Details</td>
 
 
                     </tr>
@@ -176,8 +176,8 @@ for(Cookie cookie : cookies){
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="width: 35%">Student Name: <c:out value="${student.name}" /></td>
-                        <td style="width: 20%">Admission No:  <c:out value="${student.admissionnumber}" /></td>
+                        <td style="width: 35%">Member Name: <c:out value="${student.name}" /></td>
+                        <%-- <td style="width: 20%">Admission No:  <c:out value="${student.admissionnumber}" /></td> --%>
                         <td style="width: 20%">Date:  <c:out value="${recieptdate}" /></td>
                         <td style="width: 20%">Receipt No:  <c:out value="${recieptinfo.receiptnumber}" /></td>
 
@@ -190,7 +190,7 @@ for(Cookie cookie : cookies){
                <thead>
                     <tr>
 
-                        <td  class="headerText">Fees Details</td>
+                        <td  class="headerText">Contribution Details</td>
 
 
                     </tr>
@@ -201,8 +201,8 @@ for(Cookie cookie : cookies){
             <TABLE id="dataTable" width="100%" border="1" >
                 <thead>
                     <tr >
-                        <td class="headerText">Fees Category</td>
-                        <td class="headerText">Fees Amount</td>
+                        <td class="headerText">Particulars</td>
+                        <td class="headerText">Amount</td>
                     </tr>
                 </thead>
                 <tbody>

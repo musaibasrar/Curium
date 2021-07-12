@@ -605,8 +605,8 @@ for(Cookie cookie : cookies){
 		<div>
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Students</a></li>
-					<li><a href="#tabs-2">Staff</a></li>
+					<li><a href="#tabs-1">Members</a></li>
+					<!-- <li><a href="#tabs-2">Staff</a></li> -->
 					<li><a href="#tabs-3">Selected Numbers</a></li>
 				</ul>
 
@@ -634,10 +634,10 @@ for(Cookie cookie : cookies){
 <tr>
 
 
-							<td class="alignRight">Select&nbsp;</td>
-							<td width="28%"> <label>Class: <select name="addclass" id="addclass"
+							<td class="alignRight" style="display: none;">Select&nbsp;</td>
+							<td width="28%" style="display: none;"> <label>Class: <select name="addclass" id="addclass"
 									style="width: 120px">
-										<option selected></option>
+										<option selected>ALL</option>
 										<option>ALL</option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
@@ -651,7 +651,7 @@ for(Cookie cookie : cookies){
 							</label> <label>&nbsp;Sec:
 									<select name="addsec" id="addsec"
 									style=" width: 120px">
-										<option selected></option>
+										<option selected>ALL</option>
 										<option>ALL</option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.section != '')}">
@@ -668,13 +668,29 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td width="40%" class="alignRight">Message* &nbsp;</td>
-							<td width="12%" align="center"><label> <textarea  name="messagebody"
+							<td width="12%" align="center"><label> 
+							
+											<select name="messagebody" id="messagebody"
+									style=" width: 350px">
+										<option selected>*Reminder for Your Share of Monthly Donations*
+
+Assalamalikum Rahmatullah hi wa Barkatahu <br>
+
+Your donations for Masjid  makes big difference, without your donations / Financial commitment it becomes difficult to meet monthly expenses. Therefore Kindly pay your donations at the earliest possible. 
+
+*(Please ignore this message If you have already Paid)*
+
+On behalf of *Masjid Ali RA Management Committee*,  We extend our sincere thanks Pray to Allah Subhanahu wa Tala to reward you profusely in this world and in hereafter. Ameen Summa ameen</option>
+										<!-- <option>ALL</option> -->
+								</select>
+							
+										<!-- <textarea  name="messagebody"
 											type="text" class="textField" id="messagebody" rows="6" cols="55"
-											></textarea>
+											></textarea> -->
 							</label></td>
 							
 						</tr>
-						<tr>
+						<!-- <tr>
 						
 						<td width="30%" class="alignRight">Count: &nbsp;</td>
 							<td width="12%" align="left"><label name="count" id="count" style="color: #325F6D;font-weight: bold;">
@@ -686,7 +702,7 @@ for(Cookie cookie : cookies){
 							<td width="30%" class="alignRight">No. Of Messages : &nbsp;</td>
 							<td width="12%" align="left"><label name="messagecount" id="messagecount" style="color: #325F6D;font-weight: bold;">
 							</label></td>
-						</tr>
+						</tr> -->
 
 						<tr>
 							<td><br /></td>
@@ -705,7 +721,7 @@ for(Cookie cookie : cookies){
 										<button id="sendsms">Send</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="reset">Reset</button>
+										<!-- <button id="reset">Reset</button> -->
 
 									</td>
 
@@ -715,7 +731,7 @@ for(Cookie cookie : cookies){
 
 						</div>
 						
-						<div id="tabs-2">
+						<%-- <div id="tabs-2">
 					<table width="100%" border="0" align="center" id="table1">
 					
 					<tr>
@@ -799,7 +815,7 @@ for(Cookie cookie : cookies){
 								</tr>
 							</table>
 
-						</div>
+						</div> --%>
 						
 					<div id="tabs-3">
 					
@@ -846,9 +862,27 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td width="40%" class="alignRight">Message* &nbsp;</td>
-							<td width="12%" align="center"><label> <textarea  name="messagebodynumbers"
+							<td width="12%" align="center"><label> 
+							
+							
+										<select name="messagebodynumbers" id="messagebodynumbers"
+									style=" width: 350px">
+										<option selected>*Reminder for Your Share of Monthly Donations*
+
+Assalamalikum Rahmatullah hi wa Barkatahu <br>
+
+Your donations for Masjid  makes big difference, without your donations / Financial commitment it becomes difficult to meet monthly expenses. Therefore Kindly pay your donations at the earliest possible. 
+
+*(Please ignore this message If you have already Paid)*
+
+On behalf of *Masjid Ali RA Management Committee*,  We extend our sincere thanks Pray to Allah Subhanahu wa Tala to reward you profusely in this world and in hereafter. Ameen Summa ameen</option>
+										<!-- <option>ALL</option> -->
+								</select>
+							
+							
+									<!-- <textarea  name="messagebodynumbers"
 											type="text" class="textField" id="messagebodynumbers" rows="6" cols="55"
-											></textarea>
+											></textarea> -->
 							</label></td>
 							
 						</tr>
@@ -856,6 +890,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						<!-- <tr>
 						<td width="30%" class="alignRight">Count: &nbsp;</td>
 							<td width="12%" align="left"><label name="countnumbers" id="countnumbers" style="color: #325F6D;font-weight: bold;">
 							</label></td>
@@ -867,7 +902,7 @@ for(Cookie cookie : cookies){
 							<td width="12%" align="left"><label name="messagecountnumbers" id="messagecountnumbers" style="color: #325F6D;font-weight: bold;">
 							</label></td>
 						</tr>
-
+ -->
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -885,7 +920,7 @@ for(Cookie cookie : cookies){
 										<button id="sendsmsnumbers">Send</button>
 
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="resetnumbers">Reset</button>
+										<!-- <button id="resetnumbers">Reset</button> -->
 
 									</td>
 

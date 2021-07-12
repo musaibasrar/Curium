@@ -1,5 +1,5 @@
 <%--
-    Document   : fees category
+    Document   : Contribution category
     Created on : Dec 23, 2016, 5:52:28 PM
     Author     : Musaib
 --%>
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Fees Category</title>
+<title>Contribution Category</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -470,7 +470,7 @@ for(Cookie cookie : cookies){
 	<form id="form1"
 		method="POST">
 		<div style="height: 28px">
-			<button id="add">Add Fees Category</button>
+			<button id="add">Add Contribution Category</button>
 			<br />
 		</div>
 
@@ -484,7 +484,7 @@ for(Cookie cookie : cookies){
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
 						<tr>
-							<td width="10%" class="alignRight">Fees Category &nbsp;</td>
+							<td width="10%" class="alignRight">Contribution Category &nbsp;</td>
 							<td width="70%"><label> <input id="feescategory"
 									name="feescategory" type="text" class="textField" required size="30">
 
@@ -496,7 +496,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr></tr>
-						<tr>
+						<tr style="display: none;">
 						
 						<td width="16%" class="alignRight">From Class &nbsp;
 							</td>
@@ -565,7 +565,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Fees Category</td>
+					<td class="headerTD">Contribution Category</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -574,12 +574,12 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Fees Category<img
+						<th title="click to sort" class="headerText">Contribution Category<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
-						<th title="click to sort" class="headerText">Class<img
+						<!-- <th title="click to sort" class="headerText">Class<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="css/dataTable/images/sort_both.png" /></th> -->
 						<th title="click to sort" class="headerText">Amount<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
@@ -599,7 +599,7 @@ for(Cookie cookie : cookies){
 								name="idfeescategory"
 								value="<c:out value="${fees.idfeescategory}"/>" /></td>
 							<td class="dataText"><c:out value="${fees.feescategoryname}" /></td>
-							<td class="dataText"><c:out value="${fees.particularname}" /></td>
+							<%-- <td class="dataText"><c:out value="${fees.particularname}" /></td> --%>
 							<td class="dataText"><c:out value="${fees.amount}" /></td>
 
 						</tr>

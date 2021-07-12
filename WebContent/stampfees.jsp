@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>stamp fees</title>
+<title>stamp Contribution</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 
@@ -560,7 +560,7 @@
         var rowCount = document.getElementById('dataTable').rows.length;    
         var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=fees_"+rowCount+" /><input type='hidden' class='feesStatus' name='feesStatuses' id=fees_status_"+rowCount+" value='not set' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+rowCount+" value='' /></td>";
         var col2="<td class='dataTextInActive'><input class='feesName'   type='text' name='feesNames' id=fees_name_"+rowCount+" onkeyup='calculate("+rowCount+")' onclick='calculate("+rowCount+");'/></td>";
- 	    var col3="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'   name='fessCat'  id=hiddenfees_amount_"+rowCount+" readonly/></td>";
+ 	    var col3="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'   name='fessCat'  id=hiddenfees_amount_"+rowCount+" /></td>";
         var col4="<td class='dataTextInActive'><input type='text' value='0' onclick='SelectAll("+rowCount+");calculate("+rowCount+");' onfocus='SelectAll("+rowCount+")' onkeyup='calculate("+rowCount+")' name='feesCount' id=feesCount_"+rowCount+" /></td>";
         var col5="<td class='dataTextInActive'><input type='text' value='0' onclick='calculate("+rowCount+");' onkeyup='calculate("+rowCount+")' name='feesConcession' id=feesConcession_"+rowCount+" /></td>";
         var col6="<td class='dataTextInActive'><input class='feesFullAmount' type='text' value='0'   name='fessFullCat'  id=hiddenfees_full_amount_"+rowCount+" /></td>";
@@ -691,11 +691,11 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Stamp Fees</a></li>
+					<li><a href="#tabs-1">Stamp Contribution</a></li>
 
 				</ul>
 				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
+					<%-- <table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
@@ -775,10 +775,10 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
-					</table>
+					</table> --%>
 					<div class="alignRightFields">
 
-						Fees Category:
+						Contribution Category:
 						<button id="addFeesCat">Add</button>
 						<button id="removeFeesCat">Remove</button>
 						<input
@@ -791,11 +791,11 @@ for(Cookie cookie : cookies){
 								<td class="headerText"><INPUT type="checkbox"
 									id="selectAll" name="selectAll"
 									onclick="selectAllRow('dataTable')" /></td>
-								<td class="headerText">Fees Category</td>
-								<td class="headerText">Fees Amount</td>
+								<td class="headerText">Contribution Category</td>
+								<td class="headerText">Amount</td>
 								<td class="headerText">No.of installments in a Year</td>
 								<td class="headerText">Concession Amount</td>
-								<td class="headerText">Fees Total Amount</td>
+								<td class="headerText">Total Amount</td>
 
 
 
@@ -831,11 +831,10 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class &
-							Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Admission Date</th>
+						<th title="click to sort" class="headerText">UIN</th>
+						<th title="click to sort" class="headerText">Member Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Mobile Number&nbsp;</th>
+						<!-- <th title="click to sort" class="headerText">Admission Date</th> -->
 
 
 
@@ -853,14 +852,14 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
+										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText">
+							<%-- <td class="dataText">
 							 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 								    ${splt} 
-									</c:forEach>
+									</c:forEach> --%>
 							<td class="dataText"><c:out
-									value="${Parents.student.admissiondate}" /></td>
+									value="${Parents.student.classadmittedin}" /></td>
 
 
 						</tr>

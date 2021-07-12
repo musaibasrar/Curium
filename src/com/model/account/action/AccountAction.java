@@ -79,9 +79,65 @@ public class AccountAction {
 			url = searchLedgerEntries();
 		}else if ("incomeStatement".equalsIgnoreCase(action)) {
 			url = incomeStatement();
+		}else if ("printSearchLedgerEntries".equalsIgnoreCase(action)) {
+			url = printSearchLedgerEntries();
+		}else if ("specialContribution".equalsIgnoreCase(action)) {
+			url = specialContribution();
+		}else if ("saveGuests".equalsIgnoreCase(action)) {
+			url = saveGuests();
+		}else if ("saveEvents".equalsIgnoreCase(action)) {
+			url = saveEvents();
+		}else if ("saveFriday".equalsIgnoreCase(action)) {
+			url = saveFriday();
+		}else if ("printVoucher".equalsIgnoreCase(action)) {
+			url = printVoucher();
+		}else if ("viewAllVouchers".equalsIgnoreCase(action)) {
+			url = viewAllVouchers();
+		}else if ("incomeStatementPrint".equalsIgnoreCase(action)) {
+			url = incomeStatementPrint();
+		}else if ("trialBalancePrint".equalsIgnoreCase(action)) {
+			url = trialBalancePrint();
 		}
 		return url;
 		}
+	
+	private String incomeStatementPrint() {
+		new AccountService(request, response).getIncomeStatement();
+		return "incomestatementprint.jsp";
+	}
+
+	private String printVoucher() {
+		return "voucherdetailsprint.jsp";
+	}
+
+	private String saveFriday() {
+		if(new AccountService(request, response).saveFriday()){
+			return "voucherdetailspreview.jsp";
+		}
+		return ERRORPAGE;
+		
+	}
+
+	private String saveGuests() {
+		if(new AccountService(request, response).saveGuests()){
+			return "voucherdetailspreview.jsp";
+		}
+		return ERRORPAGE;
+		
+	}
+	
+	private String saveEvents() {
+		if(new AccountService(request, response).saveEvents()){
+			return "voucherdetailspreview.jsp";
+		}
+		return ERRORPAGE;
+		
+	}
+
+	private String printSearchLedgerEntries() {
+		new AccountService(request, response).printSearchJournalEntries();
+		return "printgeneralledgerreport.jsp";
+	}
 
 	private String incomeStatement() {
 		new AccountService(request, response).getIncomeStatement();
@@ -134,6 +190,15 @@ public class AccountAction {
 		return ERRORPAGE;
 		
 	}
+	
+	private String trialBalancePrint() {
+		
+		if(new AccountService(request, response).trialBalance()){
+			return "trialbalanceprint.jsp";
+		}
+		return ERRORPAGE;
+		
+	}
 
 	private String viewNextVoucher() {
 		String nextVoucher = DataUtil.emptyString(request.getParameter("voucher"));
@@ -168,6 +233,11 @@ public class AccountAction {
 	private String viewVoucherReceipt() {
 		new AccountService(request, response).viewVouchers(1);
 			return "receiptdetails.jsp";
+	}
+	
+	private String viewAllVouchers() {
+		new AccountService(request, response).viewAllVouchers();
+			return "viewallvouchers.jsp";
 	}
 
 	private String balanceSheet() {
@@ -220,6 +290,15 @@ public class AccountAction {
 		
 	}
 
+	private String specialContribution() {
+
+		if(new AccountService(request, response).createVoucher()){
+			return "specialcontribution.jsp";
+		}
+		return ERRORPAGE;
+		
+	}
+	
 	private String deleteAccount() {
 		
 		if(new AccountService(request, response).deleteAccount()){

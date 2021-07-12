@@ -449,7 +449,7 @@ for(Cookie cookie : cookies){
         <%-- <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div> --%>
 
         <div id="container" style="width: 95%" >
-            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Members</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -465,7 +465,7 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
+           <!--  <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
@@ -479,75 +479,206 @@ for(Cookie cookie : cookies){
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
 				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
+            </div> -->
+            
+             <h5 style="font-size: 12px"><a href="#">Contribution</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesCollect" style="font-size: 12px;">Collection</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=AccountProcess&action=specialContribution" style="font-size: 12px;">Special Contribution</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesStructure" style="font-size: 12px;">Contribution Structure</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Collection Details</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="feescancelledreceipts.jsp" style="font-size: 12px;">Cancelled Collection Receipts</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=FeesCollection&action=searchFeesReport" style="font-size: 12px;">Contribution Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="Controller?process=FeesProcess&action=searchFeesWaiveoffReport" style="font-size: 12px;">Waive off Report</a>
+            			</td>
+            		</tr>
+                </table>
             </div>
 
-            <h5 style="font-size: 12px"><a href="#">Fees</a></h5>
+           <!--  <h5 style="font-size: 12px"><a href="#">Contribution</a></h5>
             
             <div>
-				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesCollect" style="font-size: 12px;">Fees Collect</a><br/>                
-				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesStructure" style="font-size: 12px;">Fees Structure</a><br/>                
-				<a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Fees Collection Details</a><br/>
-				<a target="mainFrame" href="feescancelledreceipts.jsp" style="font-size: 12px;">Cancelled Fees Receipts</a><br/>
-				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesReport" style="font-size: 12px;">Fees Report</a><br/>
-				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a><br/>
-				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a><br/>
-            </div> 
+				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesCollect" style="font-size: 12px;">Collection</a><br/> 
+				<a target="mainFrame" href="Controller?process=AccountProcess&action=specialContribution" style="font-size: 12px;">Special Contribution</a><br/>
+				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesStructure" style="font-size: 12px;">Contribution Structure</a><br/>                
+				<a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Collection Details</a><br/>
+				<a target="mainFrame" href="feescancelledreceipts.jsp" style="font-size: 12px;">Cancelled Collection Receipts</a><br/>
+				<a target="mainFrame" href="Controller?process=FeesCollection&action=searchFeesReport" style="font-size: 12px;">Collection Report</a><br/>
+				<a target="mainFrame" href="Controller?process=FeesProcess&action=searchFeesWaiveoffReport" style="font-size: 12px;">Waive off Report</a><br/>
+				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesReport" style="font-size: 12px;">Collection Report</a><br/>
+				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesWaiveoffReport" style="font-size: 12px;">Waive off Report</a><br/>
+				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesConcessionReport" style="font-size: 12px;">Concession Report</a><br/>
+            </div>  -->
             
-            <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
+         <!--    <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             
             <div>
                 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=marksEntry" style="font-size: 12px;">Enter Marks</a><br/>
                 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
             	<a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=progressReport" style="font-size: 12px;">Generate Report</a><br/>
             	<a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
-            </div> 
+            </div>  -->
             
-            <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=advanceSearchStudents" style="font-size: 12px;">Search</a><br/>
 
 
-            </div>
+            </div> -->
 
-            <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
+			 <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="changePassword.jsp" style="font-size: 12px;">Change Password</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            <!-- <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
                 <a target="mainFrame" href="Backup&Restore.jsp" style="font-size: 12px;">Backup</a><br/>
                 <a target="mainFrame" href="changePassword.jsp" style="font-size: 12px;">Change Password</a><br/>
                 <a target="mainFrame" href="uploadattendance.jsp" style="font-size: 12px;">Upload Attendance File</a><br/>
                 <a target="mainFrame" href="Controller?process=StudentProcess&action=archiveViewAll" style="font-size: 12px;">Archive Students</a><br/>
-            </div>
+            </div> -->
             
             
-            <h5 style="font-size: 12px"><a href="#" >Generate Cards</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#" >Generate Cards</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=printids&action=generateIds" style="font-size: 12px;">Generate IDs</a><br/>
+            </div> -->
+            
+             <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsReports" style="font-size: 12px;">Member Details</a>
+            			</td>
+            		</tr>
+            		
+                </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#" >Documents</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#" >Documents</a></h5>
             <div >
-                <a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsReports" style="font-size: 12px;">Student Details</a><br/>
+                <a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsReports" style="font-size: 12px;">Member Details</a><br/>
                 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
                 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
                 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
                 <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
                 <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTimeTable" style="font-size: 12px;">Class Time Table</a><br/>
                 <a target="mainFrame" href="Controller?process=PeriodProcess&action=generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a><br/>
-            </div> 
+            </div>  -->
             
-            <h5 style="font-size: 12px"><a href="#" >Expenses</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#" >Expenses</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=AdminProcess&action=viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
 
 
+            </div> -->
+            
+            <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Controller?process=SMSProcess&action=sendSMS" style="font-size: 12px;">SMS</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=SMSProcess&action=dueContribution" style="font-size: 12px;">Due Contribution</a>
+            			</td>
+            		</tr>
+                </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=SMSProcess&action=sendSMS" style="font-size: 12px;">SMS</a><br/>
                 <a target="mainFrame" href="sendemail.jsp" style="font-size: 12px;">Email</a><br/>
+            </div> -->
+            
+            
+            <h5 style="font-size: 12px"><a href="#">Accounts</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="Controller?process=AccountProcess&action=createAccount" style="font-size: 12px;">Ledger Account</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=AccountProcess&action=createVoucher" style="font-size: 12px;">Create Voucher</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="Controller?process=AccountProcess&action=viewAllVouchers" style="font-size: 12px;">View/Cancel Voucher</a>
+            				<!-- <a target="mainFrame" href="Controller?process=AccountProcess&action=viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a> -->
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=AccountProcess&action=viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="Controller?process=AccountProcess&action=generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="incomestatement.jsp" style="font-size: 12px;">Income Statement</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="trialbalance.jsp" style="font-size: 12px;">Trial Balance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=AccountProcess&action=balanceSheet" style="font-size: 12px;">Balance Sheet</a>
+            			</td>
+            		</tr>
+                </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=createAccount" style="font-size: 12px;">Ledger Account</a><br/>
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
@@ -557,24 +688,24 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="incomestatement.jsp" style="font-size: 12px;">Income Statement</a><br/>
                 <a target="mainFrame" href="trialbalance.jsp" style="font-size: 12px;">Trial Balance</a><br/>
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
-            </div>
+            </div> -->
             
-             <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
+             <!-- <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=HrProcess&action=advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=processSalary" style="font-size: 12px;">Process Salary</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
-            </div>
+            </div> -->
             
-            <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
+          <!--   <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=HrProcess&action=leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
-            </div>
+            </div> -->
             
-            <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
+         <!--    <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
         	
         	<div style="padding-left: 0px;padding-right: 0px;">
             
@@ -595,10 +726,10 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             	</table>
-            </div>
+            </div> -->
             
             
-            <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
+           <!--  <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
             
             <div style="padding-left: 0px;padding-right: 0px;">
             
@@ -624,9 +755,9 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             	</table>
-            </div>
+            </div> -->
             
-            <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
+            <!-- <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
               
               <div style="padding-left: 0px;padding-right: 0px;">
             
@@ -653,8 +784,8 @@ for(Cookie cookie : cookies){
             		</tr>
             	</table>
             </div>
-            
-            <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
+             -->
+            <!-- <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
             
             <div style="padding-left: 0px;padding-right: 0px;">
             
@@ -670,7 +801,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             	</table>
-            </div>
+            </div> -->
             
              <!--  <h5 style="font-size: 12px"><a href="#" >Mess Management</a></h5>
             <div>
@@ -680,11 +811,11 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=MessProcess&action=addSuppliers" style="font-size: 12px;">View/Add Suppliers</a><br/>
             </div> -->
             
-            <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
+          <!--   <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=ClassProcess&action=promoteClass" style="font-size: 12px;">Promotions</a><br/>
 				
-            </div>
+            </div> -->
             
             </div>
                    

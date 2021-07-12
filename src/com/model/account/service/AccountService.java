@@ -26,6 +26,7 @@ import com.model.account.dto.Financialaccountingyear;
 import com.model.account.dto.VoucherEntrytransactions;
 import com.util.DataUtil;
 import com.util.DateUtil;
+import com.util.NumberToWord;
 
 public class AccountService {
 	
@@ -33,6 +34,7 @@ public class AccountService {
 	    private HttpServletResponse response;
 	    private HttpSession httpSession;
 	    private String BRANCHID = "branchid";
+	    private String USERID = "userloginid";
 	
 	public AccountService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -50,7 +52,8 @@ public class AccountService {
 			financialaccountingyear.setFinancialenddate(DateUtil.dateParserUpdateStd(request.getParameter("todate")));
 			financialaccountingyear.setActive(DataUtil.emptyString(request.getParameter("active")));
 			financialaccountingyear.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			return new AccountDAO().create(financialaccountingyear);
+			financialaccountingyear.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			return new AccountDAO().create(financialaccountingyear, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		}
 
 		return false;
@@ -140,9 +143,11 @@ public class AccountService {
 		String result = "false";
 		String newSubGroup = DataUtil.emptyString(request.getParameter("newsubgroup"));
 		String newSSGroup = DataUtil.emptyString(request.getParameter("newssgroup"));
+		
 		String subGroupName = DataUtil.emptyString(request.getParameter("subgroupname"));
 		String ssGroupName = DataUtil.emptyString(request.getParameter("ssgroupname"));
 		String groupName = DataUtil.emptyString(request.getParameter("groupname"));
+		
 		String accountName = DataUtil.emptyString(request.getParameter("accountname"));
 		String accountCode = DataUtil.emptyString(request.getParameter("accountcode"));
 		
@@ -156,7 +161,7 @@ public class AccountService {
 				Accountdetails accountDetails = new Accountdetails();
 				accountDetails.setAccountname(accountName);
 				accountDetails.setAccountcode(accountCode);
-				
+				accountDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				
 				if(getInt(subGroupName)!=null){
 					Accountsubgroupmaster accountSubGroupMaster = new Accountsubgroupmaster();
@@ -178,6 +183,7 @@ public class AccountService {
 					accountSSGroupMaster.setAccountSubGroupMaster(accountSubGroupMaster);
 					accountSSGroupMaster.setSsgroupname(newSSGroup);
 					accountSSGroupMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					accountSSGroupMaster.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 					accountSSGroupMaster = new AccountDAO().createSSGroup(accountSSGroupMaster);
 					accountDetails.setAccountSSGroupMaster(accountSSGroupMaster);
 				}
@@ -201,6 +207,7 @@ public class AccountService {
 					accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
 					accountDetailsBalance.setEnteredon(new Date());
 					accountDetailsBalance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					accountDetailsBalance.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 					result = new AccountDAO().saveNewAccount(accountDetails, accountDetailsBalance);
 					
 		}else if("New Group".equalsIgnoreCase(subGroupName)){
@@ -213,6 +220,7 @@ public class AccountService {
 			accountSubGroupMaster.setAccountGroupMaster(accountGroup);
 			accountSubGroupMaster.setAccountsubgroupname(newSubGroup);
 			accountSubGroupMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			accountSubGroupMaster.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			accountSubGroupMaster = new AccountDAO().createSubGroup(accountSubGroupMaster);
 			
 			 if("New Sub-Group".equalsIgnoreCase(ssGroupName)){
@@ -222,6 +230,7 @@ public class AccountService {
 					accountSSGroupMaster.setSsgroupname(newSSGroup);
 					accountSSGroupMaster.setSsgroupname(newSSGroup);
 					accountSSGroupMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					accountSSGroupMaster.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 					accountSSGroupMaster = new AccountDAO().createSSGroup(accountSSGroupMaster);
 					
 				}
@@ -364,7 +373,7 @@ public class AccountService {
 		transactions.setCancelvoucher("no");
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		
+		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		
 		BigDecimal drAmountReceipt = new BigDecimal(drAmount);
 		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmountReceipt+" where accountdetailsid="+Integer.parseInt(draccountName);
@@ -400,6 +409,7 @@ public class AccountService {
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		
 		BigDecimal drAmount = new BigDecimal(drAmountPayment);
 		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmount+" where accountdetailsid="+Integer.parseInt(draccountNamePayment);
@@ -435,6 +445,7 @@ public class AccountService {
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		
 		BigDecimal drAmount = new BigDecimal(drAmountContra);
 		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmount+" where accountdetailsid="+Integer.parseInt(draccountNameContra);
@@ -470,7 +481,7 @@ public class AccountService {
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
-		
+		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 
 		// Dr
 		BigDecimal drAmount = new BigDecimal(drAmountJournal);
@@ -498,6 +509,148 @@ public class AccountService {
 		
 	}
 
+	
+public boolean saveGuests() {
+		
+		String draccountName = DataUtil.emptyString(request.getParameter("accountnamepayment"));
+		String craccountName = DataUtil.emptyString(request.getParameter("accountnamepaymentsecond"));
+		String guestsVoucher = DataUtil.emptyString(request.getParameter("paymentvoucher"));
+		String drAmount = DataUtil.emptyString(request.getParameter("dramountpayment"));
+		String crAmount = DataUtil.emptyString(request.getParameter("cramountpaymentsecond"));
+		String guestsDate = DataUtil.emptyString(request.getParameter("dateofpayment"));
+		String guestsNarration = DataUtil.emptyString(request.getParameter("paymentnarration"));
+		
+		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+		
+		transactions.setDraccountid(Integer.parseInt(draccountName));
+		transactions.setCraccountid(Integer.parseInt(craccountName));
+		transactions.setDramount(new BigDecimal(drAmount));
+		transactions.setCramount(new BigDecimal(crAmount));
+		transactions.setVouchertype(Integer.parseInt(guestsVoucher));
+		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(guestsDate));
+		transactions.setEntrydate(DateUtil.todaysDate());
+		transactions.setNarration(guestsNarration);
+		transactions.setCancelvoucher("no");
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+		
+		BigDecimal drAmountGuests = new BigDecimal(drAmount);
+		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmountGuests+" where accountdetailsid="+Integer.parseInt(draccountName);
+
+		BigDecimal crAmountGuests = new BigDecimal(crAmount);
+		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+crAmountGuests+" where accountdetailsid="+Integer.parseInt(craccountName);
+		
+		VoucherEntrytransactions vTransactions = new AccountDAO().saveVoucherwithAccUpdatetransactions(transactions,updateDrAccount,updateCrAccount);
+		if(vTransactions.getTransactionsid()!=null) {
+			httpSession.setAttribute("membername", guestsNarration);
+			httpSession.setAttribute("date", guestsDate);
+			httpSession.setAttribute("vouchernumber", vTransactions.getTransactionsid());
+			httpSession.setAttribute("totalamount", drAmount);
+			NumberToWord toWord = new NumberToWord();
+			String grandTotal = DataUtil.convertToTitleCase(toWord.convert(Integer.parseInt(drAmount)));
+			httpSession.setAttribute("grandTotal", grandTotal+" Only");
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+
+
+	public boolean saveEvents() {
+		
+		String draccountName = DataUtil.emptyString(request.getParameter("accountnamecontra"));
+		String craccountName = DataUtil.emptyString(request.getParameter("accountnamecontrasecond"));
+		String eventsVoucher = DataUtil.emptyString(request.getParameter("contravoucher"));
+		String drAmount = DataUtil.emptyString(request.getParameter("dramountcontra"));
+		String crAmount = DataUtil.emptyString(request.getParameter("cramountcontrasecond"));
+		String eventsDate = DataUtil.emptyString(request.getParameter("dateofcontra"));
+		String eventsNarration = DataUtil.emptyString(request.getParameter("contranarration"));
+		
+		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+		
+		transactions.setDraccountid(Integer.parseInt(draccountName));
+		transactions.setCraccountid(Integer.parseInt(craccountName));
+		transactions.setDramount(new BigDecimal(drAmount));
+		transactions.setCramount(new BigDecimal(crAmount));
+		transactions.setVouchertype(Integer.parseInt(eventsVoucher));
+		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(eventsDate));
+		transactions.setEntrydate(DateUtil.todaysDate());
+		transactions.setNarration(eventsNarration);
+		transactions.setCancelvoucher("no");
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+		
+		BigDecimal drAmountEvents = new BigDecimal(drAmount);
+		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmountEvents+" where accountdetailsid="+Integer.parseInt(draccountName);
+
+		BigDecimal crAmountEvents = new BigDecimal(crAmount);
+		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+crAmountEvents+" where accountdetailsid="+Integer.parseInt(craccountName);
+		
+		VoucherEntrytransactions vTransactions = new AccountDAO().saveVoucherwithAccUpdatetransactions(transactions,updateDrAccount,updateCrAccount);
+		if(vTransactions.getTransactionsid()!=null) {
+			httpSession.setAttribute("membername", eventsNarration);
+			httpSession.setAttribute("date", eventsDate);
+			httpSession.setAttribute("vouchernumber", vTransactions.getTransactionsid());
+			httpSession.setAttribute("totalamount", drAmount);
+			NumberToWord toWord = new NumberToWord();
+			String grandTotal = DataUtil.convertToTitleCase(toWord.convert(Integer.parseInt(drAmount)));
+			httpSession.setAttribute("grandTotal", grandTotal+" Only");
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public boolean saveFriday() {
+		
+		String draccountName = DataUtil.emptyString(request.getParameter("accountname"));
+		String craccountName = DataUtil.emptyString(request.getParameter("accountnamesecond"));
+		String receiptVoucher = DataUtil.emptyString(request.getParameter("receiptvoucher"));
+		String drAmount = DataUtil.emptyString(request.getParameter("dramount"));
+		String crAmount = DataUtil.emptyString(request.getParameter("cramountsecond"));
+		String receiptDate = DataUtil.emptyString(request.getParameter("dateofreceipt"));
+		String receiptNarration = DataUtil.emptyString(request.getParameter("receiptnarration"));
+		
+		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+		
+		transactions.setDraccountid(Integer.parseInt(draccountName));
+		transactions.setCraccountid(Integer.parseInt(craccountName));
+		transactions.setDramount(new BigDecimal(drAmount));
+		transactions.setCramount(new BigDecimal(crAmount));
+		transactions.setVouchertype(Integer.parseInt(receiptVoucher));
+		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(receiptDate));
+		transactions.setEntrydate(DateUtil.todaysDate());
+		transactions.setNarration(receiptNarration);
+		transactions.setCancelvoucher("no");
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+		
+		BigDecimal drAmountReceipt = new BigDecimal(drAmount);
+		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmountReceipt+" where accountdetailsid="+Integer.parseInt(draccountName);
+
+		BigDecimal crAmountReceipt = new BigDecimal(crAmount);
+		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+crAmountReceipt+" where accountdetailsid="+Integer.parseInt(craccountName);
+		
+		VoucherEntrytransactions vTransactions = new AccountDAO().saveVoucherwithAccUpdatetransactions(transactions,updateDrAccount,updateCrAccount);
+		if(vTransactions.getTransactionsid()!=null) {
+			httpSession.setAttribute("membername", receiptNarration);
+			httpSession.setAttribute("date", receiptDate);
+			httpSession.setAttribute("vouchernumber", vTransactions.getTransactionsid());
+			httpSession.setAttribute("totalamount", drAmount);
+			NumberToWord toWord = new NumberToWord();
+			String grandTotal = DataUtil.convertToTitleCase(toWord.convert(Integer.parseInt(drAmount)));
+			httpSession.setAttribute("grandTotal", grandTotal+" Only");
+			
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
 
 	public boolean balanceSheet() {
 		
@@ -666,6 +819,9 @@ public class AccountService {
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
 		
+		String dateFrom = request.getParameter("fromdate");
+	    String dateto =   request.getParameter("todate");
+		
 		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
 		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
 		
@@ -712,6 +868,8 @@ public class AccountService {
 				request.setAttribute("debittotal", debitAllAcc);
 				request.setAttribute("fromdatetb", fromDate = DataUtil.dateFromatConversionSlash(fromDate));
 				request.setAttribute("todatetb", toDate = DataUtil.dateFromatConversionSlash(toDate));
+				request.setAttribute("datefrom", dateFrom);
+				request.setAttribute("dateto", dateto);
 				
 				totalBalanceAllAccDiff = creditAllAcc.subtract(debitAllAcc);
 				
@@ -876,8 +1034,8 @@ public class AccountService {
 		        	
 		        	if(!accountSSGroupMaster.isEmpty()){
 		        		String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
+		        		buffer = buffer+"<option></option>";
 			        	for(int i =0; i<accountSSGroupMaster.size();i++){
-			        		buffer = buffer+"<option></option>";
 			        		buffer = buffer +  "<option value="+accountSSGroupMaster.get(i).getSsgroupmasterid()+">"+accountSSGroupMaster.get(i).getSsgroupname()+"</option>";
 			        	}
 			        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option></select>";
@@ -923,8 +1081,8 @@ public class AccountService {
 		String accountDetails = DataUtil.emptyString(request.getParameter("accountid"));
 		String[] accountIdName = accountDetails.split(":");
 		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
-		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
-		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
+		String fromDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
 		if(httpSession.getAttribute(BRANCHID)!=null) {
 
 		String twoAccounts = null;
@@ -947,6 +1105,10 @@ public class AccountService {
 		request.setAttribute("ledgertransactions", voucherMap);
 		request.setAttribute("ledgername", accountIdName[1]);
 		
+		request.setAttribute("accountid", accountDetails);
+		request.setAttribute("fromdate", DataUtil.emptyString(request.getParameter("fromdate")));
+		request.setAttribute("todate", DataUtil.emptyString(request.getParameter("todate")));
+		
 		return true;
 		
 		}
@@ -965,8 +1127,10 @@ public class AccountService {
 
 	public boolean getIncomeStatement() {
 		
-		String fromDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("fromdate")));
-		String toDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("todate")));
+		String dateFrom = request.getParameter("fromdate");
+		String dateTo =request.getParameter("todate");  
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(dateFrom));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(dateTo));
 		
 		if(httpSession.getAttribute(BRANCHID)!=null) {
 			
@@ -1028,6 +1192,9 @@ public class AccountService {
 		request.setAttribute("fromdate", fromDate);
 		request.setAttribute("todate", toDate);
 		
+		request.setAttribute("datefrom", dateFrom);
+		request.setAttribute("dateto", dateTo);
+		
 		
 		BigDecimal profit = totalIncome.subtract(totalExpense);
 		
@@ -1043,9 +1210,9 @@ public class AccountService {
 	}
 		return true;
 	}
-	
-	
-public boolean printSearchJournalEntries() {
+
+
+	public boolean printSearchJournalEntries() {
 		
 		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
 		String accountDetails = DataUtil.emptyString(request.getParameter("accountidselected"));
@@ -1076,6 +1243,32 @@ public boolean printSearchJournalEntries() {
 		request.setAttribute("ledgername", accountIdName[1]);
 		request.setAttribute("fromdateselected", request.getParameter("fromdateselected"));
 		request.setAttribute("todateselected", request.getParameter("todateselected"));
+		
+		return true;
+		
+		}
+		return false;
+	}
+
+
+	public boolean viewAllVouchers() {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
+		String twoAccounts = null;
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
+		voucherTransactions = new AccountDAO().getAllVoucherEntryTransactions(financialYearId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+			twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		request.setAttribute("vouchertransactions", voucherMap);
 		
 		return true;
 		

@@ -55,7 +55,7 @@ public class VoucherEntrytransactions implements java.io.Serializable {
 		this.entrydate = entrydate;
 		this.vouchercancellationdate = vouchercancellationdate;
 		this.branchid = branchid;
-		this.userid = userid;	
+		this.userid = userid;
 	}
 
 	@Id
@@ -173,7 +173,7 @@ public class VoucherEntrytransactions implements java.io.Serializable {
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
 	}
-	
+
 	public int getUserid() {
 		return userid;
 	}

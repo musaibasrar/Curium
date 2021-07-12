@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Details Fees Structure</title>
+        <title>Member Details Contribution Structure</title>
 
         <script type="text/javascript" language="JavaScript" src="js/motionpack.js"></script>
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -326,7 +326,7 @@
         	            primary: "ui-icon-trash"
         	        }
         	    }).click(function() {
-        	    	if (confirm('Are you sure you want to delete the fees category?')) {
+        	    	if (confirm('Are you sure you want to delete?')) {
         	    		deleteRecord();
         				}
         	    	 return false;
@@ -338,7 +338,7 @@
         	            primary: "ui-icon-flag"
         	        }
         	    }).click(function() {
-        	    	if (confirm('Are you sure you want to waive off the fees?')) {
+        	    	if (confirm('Are you sure you want to waive off the contribution?')) {
         	    		waiveOff();
         				}
         	    	 return false;
@@ -445,7 +445,7 @@ for(Cookie cookie : cookies){
             </table>
             <div id="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Fees Structure</a></h3>
+                <h3><a href="#">Contribution Structure</a></h3>
                 
                 <div>
                 
@@ -455,7 +455,7 @@ for(Cookie cookie : cookies){
 						<tr>
 		               <td width="26%"  class="alignRight" >
                                     
-                                    Current Academic Year :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td>
+                                    Financial Year :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td>
 
                                 <td width="28%"  >
                                     <label style="font-weight: bold;color: #325F85">
@@ -470,19 +470,20 @@ for(Cookie cookie : cookies){
 						<tr>
 		               <td width="26%"  class="alignRight" >
                                     
-                                    Academic Year*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td>
+                                    Financial Year*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td>
 
                                 <td width="28%"  >
                                     <label>
                                         <label> <select name="academicyear" id="academicyear" required
 									style="width: 120px">
 										<option selected></option>
-										<option>2015/16</option>
-										<option>2016/17</option>
-										<option>2017/18</option>
-										<option>2018/19</option>
+										<option>2021/22</option>
+										<option>2020/21</option>
 										<option>2019/20</option>
-										
+										<option>2018/19</option>
+										<option>2017/18</option>
+										<option>2016/17</option>
+										<option>2015/16</option>
 								</select>
 
 							</label> 
@@ -534,9 +535,9 @@ for(Cookie cookie : cookies){
                                     </tr>
                                 </table>
 					<div align="center">
-				<h class="dataTextFees">Academic Year : ${academicPerYear}</h>&nbsp;&nbsp;&nbsp;
-				<h class="dataTextFees">Total fees : &#x20B9; ${totalfees}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Total fees paid : &#x20B9; ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
+				<h class="dataTextFees">Financial Year : ${academicPerYear}</h>&nbsp;&nbsp;&nbsp;
+				<h class="dataTextFees">Total Contribution : &#x20B9; ${totalfees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total Contribution paid : &#x20B9; ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Due Amount : </h>
                 <h class="dataTextDueFees"> &#x20B9; ${dueamount}</h>
                 </div>
@@ -545,10 +546,10 @@ for(Cookie cookie : cookies){
                     <thead>
                         <tr>
                             <th title="click to sort" class="headerText"><input type="checkbox" id="chckHead" /></th>
-                            <th title="click to sort" class="headerText">Fees Category</th>
-                            <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
-                            <th title="click to sort" class="headerText">Installments&nbsp;</th>
-                            <th title="click to sort" class="headerText">Total Fees Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Particulars</th>
+                            <!-- <th title="click to sort" class="headerText">Amount&nbsp;</th> -->
+                            <!-- <th title="click to sort" class="headerText">Installments&nbsp;</th> -->
+                            <th title="click to sort" class="headerText">Total Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Concession Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Waive Off Amount&nbsp;</th>
                         </tr>
@@ -563,8 +564,8 @@ for(Cookie cookie : cookies){
 								name="sfsid" 
 								value="<c:out value="${feesstructure.sfsid}"/>_<c:out value="${feesstructure.feescategory.idfeescategory}"/>" /></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.feescategoryname}"/></td>
-                                <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
-                                <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td>
+                                <%-- <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td> --%>
+                                <%-- <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td> --%>
                                 <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.concession}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.waiveoff}"/></td>

@@ -73,7 +73,7 @@ for(Cookie cookie : cookies){
         <div class="row">
         	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         	<div class="col">
-        			<div id="rcorners1">
+        			<div id="rcorners1" style="background-color: #ffd09f">
         			
         			<table>
         				<tr>
@@ -83,25 +83,25 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="images/student.svg"  height="20" width="20"/>
-        						<label id="labelname">Total Students </label>
+        						<img src="images/member.svg"  height="20" width="20"/>
+        						<label id="labelname">Total Members </label>
         						<br>		
         						<img src="images/teacher.svg" height="20" width="20"/>
-        						<label id="labelname">Total Teachers </label>
+        						<label id="labelname">Total Contribution </label>
         					</td>
         					<td></td>
         					<td></td>
         					<td></td>
         					<td>
         						<label id="labelnumber">${totalstudents}</label><br>
-        						<label id="labelnumber">${totalteachers}</label>	
+        						<label id="labelnumber">${totalFeesAmountDashBoard}</label>	
         					</td>
         				</tr>
         			</table>
         			</div>
         	</div>
         	<div class="col"> 
-        			<div id="rcorners1">
+        			<div id="rcorners1" style="background-color: #e2e9fc">
         			<table>
         				<tr>
         					<td></td>
@@ -110,17 +110,20 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="images/totalfees.svg" height="20" width="20"/>
-        						<label id="labelname">Total Fees&nbsp;&nbsp;&nbsp;</label><br>
+        						<!-- <img src="images/totalfees.svg" height="20" width="20"/>
+        						<label id="labelname">Total Fees&nbsp;&nbsp;&nbsp;</label><br> -->
         						<img src="images/monthlyfees.svg"  height="20" width="20"/>	
-        						<label id="labelname">${Currentmonth} Fees</label>
+        						<label id="labelname">${Currentmonth} Contribution</label><br>
+        						<img src="images/todayscollection.svg" height="20" width="20"/>
+        						<label id="labelname">Today's Contribution</label>
         					</td>
         					<td></td>
         					<td></td>
         					<td></td>
         					<td>
-        						<label id="labelnumber">${totalFeesAmountDashBoard}</label><br>
-        						<label id="labelnumber">${sumOfFeesMonthly}</label>	
+        						<%-- <label id="labelnumber">${totalFeesAmountDashBoard}</label><br> --%>
+        						<label id="labelnumber">${sumOfFeesMonthly}</label>	<br>
+        						<label id="labelnumber">${sumOfFeesDaily}</label>
         					</td>
         				</tr>
         			</table>
@@ -129,7 +132,7 @@ for(Cookie cookie : cookies){
         	
         	
         	<div class="col">
-        		<div id="rcorners1">
+        		<div id="rcorners1" style="background-color: #dcffe5">
         			<table>
         				<tr>
         					<td></td>
@@ -139,9 +142,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td>
         					<img src="images/feespaid.svg" height="20" width="20"/>	
-        						<label id="labelname">Total Fees Paid</label><br>
+        						<label id="labelname">Paid Contribution</label><br>
         						<img src="images/feesdue.svg"  height="20" width="20"/>
-        						<label id="labelname">Total Fees Due&nbsp;</label>
+        						<label id="labelname">Due Contribution&nbsp;</label>
         					</td>
         					<td></td>
         					<td></td>
@@ -156,7 +159,7 @@ for(Cookie cookie : cookies){
         	
         	 </div>
         	 
-        	 <div class="col">
+        	 <%-- <div class="col">
         		<div id="rcorners1">
         			<table>
         				<tr>
@@ -167,7 +170,7 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td>
         						<img src="images/todayscollection.svg" height="20" width="20"/>
-        						<label id="labelname">Today's Fees</label>
+        						<label id="labelname">Today's Contribution</label>
         						<br>		
         						<img src="images/todaysexpenses.svg" height="20" width="20"/>	
         						<label id="labelname">Today's Expenses</label>	
@@ -183,7 +186,7 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	
-        	 </div>
+        	 </div> --%>
         	 
         </div>
         
@@ -192,15 +195,15 @@ for(Cookie cookie : cookies){
              <div class="row">
              	
              	<div class="col">
-             		<canvas id="student-monthlyfeeschart" height="200"></canvas>
+             		<canvas id="student-monthlyfeeschart" height="300"></canvas>
              	</div>
              	
             	<div class="col">
-            		<canvas id="student-expensechart" height="200"></canvas>
+            		<canvas id="student-expensechart" height="300"></canvas>
             	</div>	
              </div>
              
-             <div class="row">
+             <%-- <div class="row">
              	
              	<div class="col">
              		<canvas id="student-chart" height="200"></canvas>
@@ -210,7 +213,7 @@ for(Cookie cookie : cookies){
             		<canvas id="student-male-female" height="300"></canvas>
             	</div>	
              </div>
-			
+			 --%>
 			
 			
 		
@@ -231,7 +234,7 @@ for(Cookie cookie : cookies){
 	     
 	     
 	     <script>
-        	var totalclasses = document.getElementById("classesstudying").innerHTML;
+        	/* var totalclasses = document.getElementById("classesstudying").innerHTML;
         	var classlabel = JSON.parse(totalclasses);
         	
         	var totalStudents = document.getElementById("students").innerHTML;
@@ -362,7 +365,7 @@ for(Cookie cookie : cookies){
                             }]
                 }
                 } 
-            });
+            }); */
             
           		//Bar Chart for Daily Expense
         	var totalExpenses = document.getElementById("monthlytotalexpenses").innerHTML;
@@ -455,7 +458,7 @@ for(Cookie cookie : cookies){
                 	   yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: 20000,
+                                max: 50000,
                                 stepSize: 2000
                                }
                         
@@ -550,13 +553,13 @@ for(Cookie cookie : cookies){
                     
                   title: {
                     display: true,
-                    text: 'Monthly Fees Collection'
+                    text: 'Monthly Collection'
                   } ,
                    scales: {
                 	   yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: 25000,
+                                max: 100000,
                                 stepSize: 5000
                                }
                         
@@ -567,7 +570,7 @@ for(Cookie cookie : cookies){
             
             //Boys & Girls
             
-            var boysgirls = document.getElementById("totalboysgirls").innerHTML;
+            /* var boysgirls = document.getElementById("totalboysgirls").innerHTML;
         	var boysGirlsGraph = JSON.parse(boysgirls);
             
             var ctx = document.getElementById("student-male-female");
@@ -605,7 +608,7 @@ for(Cookie cookie : cookies){
                 	  }
 
               }
-            });
+            }); */
      
             
 	</script> 

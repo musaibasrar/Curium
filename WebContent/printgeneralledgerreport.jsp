@@ -223,7 +223,7 @@
 				<img src="images/shaheenlogo.png" width="150" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				Curium<br><br>
+				Zaiqa Enterprises<br><br>
 				<label class="addressLine">General Ledger Report</label><br>
 				<label class="addressLineTwo">From: ${fromdateselected}</label><label class="addressLineTwo">&nbsp;&nbsp;&nbsp;To: ${todateselected}</label><br>
 				<label class="addressLineTwo">&nbsp;&nbsp;&nbsp;Ledger Name: ${ledgername}</label>

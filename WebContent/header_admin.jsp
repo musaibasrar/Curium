@@ -31,7 +31,7 @@
                 color: #000000;
                 text-decoration: none;
                 font-family: arial;
-                font-size: 10px;
+                font-size: 13px;
             }
             a:visited {
                 color: #383838;
@@ -125,7 +125,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							
 									<td style="padding-left: 20px;padding-right: 50px;">
-								<a target="mainFrame" href="welcome.jsp" ><img src="images/logo.jpg"/></a>
+								<a target="mainFrame" href="welcome.jsp" ><img src="images/aliwhite.jpg" style="width: 130px;height: 40px;"/></a>
 								</td>
 								
 							<!-- <td align="left"><img src="images/curiumheader.png"
@@ -138,7 +138,7 @@ for(Cookie cookie : cookies){
 							<td><a target="mainFrame"
 								href="Controller?process=FeesProcess&action=feesCollect"> <img
 									src="images/feescollect.svg" width="18" height="18"
-									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
+									alt="Fees Collection" style="vertical-align: bottom;" />Collection
 							</a></td>
 
 							<td>
@@ -155,8 +155,8 @@ for(Cookie cookie : cookies){
 
 							<td><a target="mainFrame"
 								href="Controller?process=StudentProcess&action=addNew"> <img
-									src="images/student_header.svg" width="18" height="18"
-									alt="Add New Student" style="vertical-align: bottom;" />Add Student
+									src="images/member.svg" width="18" height="18"
+									alt="Add New Student" style="vertical-align: bottom;" />Add Member
 							</a></td>
 
 							<td ><a target="leftFrame" href="leftsettings.jsp">
@@ -164,11 +164,11 @@ for(Cookie cookie : cookies){
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
-							<td ><a target="mainFrame"
+							<!-- <td ><a target="mainFrame"
 								href="Controller?process=AdminProcess&action=viewAllExpenses"><img
 									alt="Admin Exp" src="images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
-							</a></td>
+							</a></td> -->
 
 							<td ><a target="mainFrame" href="sendsms.jsp"><img
 									src="images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
@@ -179,7 +179,7 @@ for(Cookie cookie : cookies){
 								href="Controller?process=StudentProcess&action=viewAllStudentsWithParents"><img
 									alt="View All Students" src="images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
-								View Students
+								View Members
 							</a></td>
 							
 							<td ><a target="mainFrame"

@@ -37,12 +37,12 @@ public class AccountDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public boolean create(Financialaccountingyear financialaccountingyear) {
+	public boolean create(Financialaccountingyear financialaccountingyear, int branchId) {
 		boolean result = false;
 		Financialaccountingyear financialYear = new Financialaccountingyear();
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Financialaccountingyear where active='yes'");
+			Query query = session.createQuery("from Financialaccountingyear where active='yes' and branchid="+branchId);
 			financialYear = (Financialaccountingyear) query.uniqueResult();
 			if(financialYear!=null && financialYear.getActive().equalsIgnoreCase(financialaccountingyear.getActive())){
 				financialYear.setActive("no");
@@ -264,6 +264,25 @@ public class AccountDAO {
 		}
 		return false;
 	}
+	
+	
+	public VoucherEntrytransactions saveVoucherwithAccUpdatetransactions(VoucherEntrytransactions transactions, String drAmount, String crAmount) {
+		
+		try{
+			transaction = session.beginTransaction();
+			session.save(transactions);
+			Query query = session.createQuery(drAmount);
+			query.executeUpdate();
+			Query query1 = session.createQuery(crAmount);
+			query1.executeUpdate();
+			transaction.commit();
+		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
+			hb.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return transactions;
+	}
 
 	
 	public List<Accountdetailsbalance> getAccountBalanceDetails(List<Integer> accountIds, int branchId) {
@@ -363,14 +382,16 @@ public class AccountDAO {
 	}
 
 	public String getAccountName(Integer accountid) {
+		
 		Accountdetails accountDetails = new Accountdetails();
 		String accountName = null;
 		try {
 			transaction = session.beginTransaction();
 			Query query =  session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
 			accountDetails = (Accountdetails) query.uniqueResult(); 
-			transaction.commit();
 			accountName = accountDetails.getAccountname();
+			transaction.commit();
+			
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally {
@@ -579,6 +600,21 @@ public class AccountDAO {
 			HibernateUtil.closeSession();
 		}
 		return accountDetails;
+	}
+
+	public List<VoucherEntrytransactions> getAllVoucherEntryTransactions(int financialYear, int branchId) {
+		
+		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
+		try {
+			transaction = session.beginTransaction();
+			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where financialyear='"+financialYear+"'and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}	finally {
+			HibernateUtil.closeSession();
+		}	
+		return voucherEntrytransactions;
 	}
 
 }

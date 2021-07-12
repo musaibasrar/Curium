@@ -143,7 +143,7 @@ public class DataUtil {
    public static String generateString(int lengthh) {
 
        // ||, -, *, /, <>, <, >, ,(comma), =, <=, >=, ~=, !=, ^=, (, )
-       String alphaNumeric = new String("hijklmno0123459ABEFGHIJKL678MNOPQZabcdefgpqCDrstuvwxyz@#$&-+[]{RSTUVWXY}");
+       String alphaNumeric = new String("1324567890987654321");
        int alphaNumericLength = alphaNumeric.length();
 
        String generatedRandomNumber = new String();
@@ -173,6 +173,33 @@ public class DataUtil {
        } while (mathrandom >= alphaNumericLength);
        return mathrandom;
    }
+   
+   public static boolean containsIgnoreCase(String str, String subString) {
+       return str.toLowerCase().contentEquals(subString.toLowerCase());
+   }
+   
+   public static String convertToTitleCase(String text) {
+	    if (text == null || text.isEmpty()) {
+	        return text;
+	    }
+
+	    StringBuilder converted = new StringBuilder();
+
+	    boolean convertNext = true;
+	    for (char ch : text.toCharArray()) {
+	        if (Character.isSpaceChar(ch)) {
+	            convertNext = true;
+	        } else if (convertNext) {
+	            ch = Character.toTitleCase(ch);
+	            convertNext = false;
+	        } else {
+	            ch = Character.toLowerCase(ch);
+	        }
+	        converted.append(ch);
+	    }
+
+	    return converted.toString();
+	}
      
     
 

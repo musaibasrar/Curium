@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Students Details Reports</title>
+<title>Members Details Reports</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -516,14 +516,14 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Students Details Report</a></li>
+					<li><a href="#tabs-1">Members Details Report</a></li>
 
 				</ul>
 				<div id="tabs-1">
 					<table>
 
 						<tr>
-							<td class="alignRight">Name &nbsp;</td>
+							<td class="alignRight">Member Name &nbsp;</td>
 							<td><label> <input
 									name="namesearch" type="text" class="myclass" id="namesearch"
 									size="36">
@@ -537,7 +537,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 
-						<tr>
+						<%-- <tr>
 							<td class="alignRight">Class &nbsp;</td>
 							<td>
 							<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -547,7 +547,7 @@ for(Cookie cookie : cookies){
 										</c:if>	
 										
 							</c:forEach>
-							<%-- <label> <select name="classsearch"
+							<label> <select name="classsearch"
 									id="classsearch" style="width: 150px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -559,7 +559,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 
-							</label>  --%><label style="visibility: hidden;"> <select name="secsearch" id="secsearch"
+							</label> <label style="visibility: hidden;"> <select name="secsearch" id="secsearch"
 									style="width: 120px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -572,7 +572,7 @@ for(Cookie cookie : cookies){
 
 								</select>
 							</label>
-						</tr>
+						</tr> --%>
 
 						<tr>
 							<td><br /></td>
@@ -614,11 +614,10 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class &
-							Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Admission Date</th>
+						<th title="click to sort" class="headerText">Member Name</th>
+						<th title="click to sort" class="headerText">Referral Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Contact Number&nbsp;</th>
+						<th title="click to sort" class="headerText">Monthly Contribution</th>
 
 
 
@@ -634,16 +633,13 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
-							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
+							<td class="dataTextInActive"><c:out
+									value="${Parents.student.name}" /></td>
+							<td class="dataText"><c:out value="${Parents.student.classstudying}" /></td>
 							<td class="dataText"><c:out
-									value="${Parents.student.classstudying}" /></td>
+									value="${Parents.student.classadmittedin}" /></td>
 							<td class="dataText"><c:out
-									value="${Parents.student.admissiondate}" /></td>
-
-
+									value="${Parents.student.gender}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>

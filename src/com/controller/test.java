@@ -1,33 +1,38 @@
 package com.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.awt.Desktop;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.SocketException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.charset.MalformedInputException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.commons.net.ftp.FTPClient;
-
-import com.model.sendsms.dao.SmsDAO;
 
 public class test {
 
 	
 	public static void main(String[] args) throws SocketException, IOException{
 		
+		
+		
+		
+		 Desktop desk = Desktop.getDesktop();
+	        
+	        // now we enter our URL that we want to open in our
+	        // default browser
+	        try {
+				desk.browse(new URI("https://ideoholic.com"));
+			} catch (IOException | URISyntaxException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	        
 	/*	Map<Date,Integer> myMap = new HashMap<Date, Integer>();
 		myMap.put(new Date(), 1);
 		myMap.put(new Date(), 2);
@@ -37,6 +42,18 @@ public class test {
 		for (Map.Entry<Date, Integer> string : myMap.entrySet()) {
 			System.out.println("key is "+string.getKey());
 		}*/
+		
+		String date1 = "20/12/2011";
+	    String date2 = "22/08/2012";
+
+	    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+	    DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MMMM");
+	    YearMonth endMonth = YearMonth.parse(date2, dateFormatter);
+	    for (YearMonth month = YearMonth.parse(date1, dateFormatter);
+	            ! month.isAfter(endMonth);
+	            month = month.plusMonths(1)) {
+	        System.out.println(month.format(monthFormatter));
+	    }
 		
 		
 		

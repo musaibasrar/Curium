@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Fees Waive Off Report</title>
+<title>Contribution Waive Off Report</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -454,10 +454,10 @@ for(Cookie cookie : cookies){
 <body>
 	<form id="form1">
 
-		<div id="effect" class="ui-widget-content ui-corner-all">
+		<%-- <div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Fees Waive Off Report</a></li>
+					<li><a href="#tabs-1">Contribution Waive Off Report</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -468,15 +468,14 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td class="alignRightFields"><h3 style="color: #eb6000">Search:&nbsp;&nbsp;&nbsp;&nbsp;	</h3></td>
-							<td class="alignRightFields">
+							<!-- <td class="alignRightFields">
 							<input type="radio" id="studentnamesearch" name="advancesearch" value="studentname" onclick="selectSearch(this.id)">
-							<label for="studentname">Student Name</label>
+							<label for="studentname">Member Name</label>
 							 &nbsp;</td>
-							 <td class="alignRightFields">
+							 <td class="alignRightFields" style="display: none;">
 							<input type="radio" id="classsearch" name="advancesearch" value="class" onclick="selectSearch(this.id)">
 							<label for="class">Class</label>
-							 &nbsp;</td>
-							 
+							 &nbsp;</td> -->
 						</tr>
 						
 						<tr>
@@ -491,8 +490,8 @@ for(Cookie cookie : cookies){
 					<table border="0" cellpadding="0"
 						cellspacing="0" id="table1" style="width: auto;height: auto;">
 
-						<tr style="display: none;" id="studentsearchtr">
-							<td class="alignRightFields">Student Name &nbsp;</td>
+						<tr style="display: '';" id="studentsearchtr">
+							<td class="alignRightFields">Member Name &nbsp;</td>
 							<td align="left"><label> <input
 									name="namesearch" type="text" class="myclass" id="namesearch"
 									size="36">
@@ -554,12 +553,12 @@ for(Cookie cookie : cookies){
 
 				</div>
 			</div>
-		</div>
+		</div> --%>
 
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Fees Waive Off Report</td>
+					<td class="headerTD">Contribution Waive Off Report</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -568,13 +567,13 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
-						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">UIN</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Fees Category</th>
-						<th title="click to sort" class="headerText">Fees Amount</th>
-						<th title="click to sort" class="headerText">Installment</th>
-						<th title="click to sort" class="headerText">Total Fees Amount</th>
+						<!-- <th title="click to sort" class="headerText">Class & Sec&nbsp;</th> -->
+						<th title="click to sort" class="headerText">Particulars</th>
+						<th title="click to sort" class="headerText">Amount</th>
+						<!-- <th title="click to sort" class="headerText">Installment</th> -->
+						<th title="click to sort" class="headerText">Total Amount</th>
 						<th title="click to sort" class="headerText">Waive Off Amount</th>
 
 					</tr>
@@ -592,12 +591,12 @@ for(Cookie cookie : cookies){
 									value="<c:out value="${Parents.student.sid}"/>" /></td> --%>
 								<td class="dataTextInActive"><a class="dataTextInActive"
 									href="Controller?process=StudentProcess&action=ViewFeesStructure&id=<c:out value='${students.key.student.sid}'/>"><c:out
-											value="${students.key.student.admissionnumber}" /></a></td>
+											value="${students.key.student.studentexternalid}" /></a></td>
 								<td class="dataText"><c:out value="${students.key.student.name}" /></td>
-								<td class="dataText"><c:out	value="${students.key.student.classstudying}" /></td>
+								<%-- <td class="dataText"><c:out	value="${students.key.student.classstudying}" /></td> --%>
 								<td class="dataText"><c:out value="${fees.feescategory.feescategoryname}"/></td>
                                 <td class="dataText"><c:out value="${fees.feescategory.amount}"/></td>
-								<td class="dataText"><c:out	value="${fees.totalinstallment}" /></td>
+								<%-- <td class="dataText"><c:out	value="${fees.totalinstallment}" /></td> --%>
 								<td class="dataText"><c:out	value="${fees.feesamount}" /></td>
 								<td class="dataText"><c:out	value="${fees.waiveoff}" /></td>
 							</tr>

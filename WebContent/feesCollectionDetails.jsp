@@ -1,5 +1,5 @@
 <%--
-    Document   : Fees Collecion Details
+    Document   : Contribution Collecion Details
     Created on : Dec 23, 2011, 5:52:28 PM
     Author     : Musaib
 --%>
@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Fees Collecion Details</title>
+<title>Contribution Collection Details</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <link rel="stylesheet" href="css/font-awesome.css">
@@ -592,7 +592,7 @@ for(Cookie cookie : cookies){
 		
 		
 		<div style="height: 28px">
-			<button id="add">Search Fees Collection Details</button>
+			<button id="add">Search Contribution Collection Details</button>
 			<br />
 		</div>
 
@@ -683,7 +683,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees collected :</label>&#x20B9;${sumofdetailsfees}</td>
+					<td class="headerTD"> <label style="color: #EB6000;">total contribution collected :</label>&#x20B9;${sumofdetailsfees}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -692,8 +692,8 @@ for(Cookie cookie : cookies){
 				<thead>
                         <tr>
                             <th class="headerText"><input type="checkbox" id="chckHead" /></th>
-                            <th title="click to sort" class="headerText">Date of fees</th>
-                            <th title="click to sort" class="headerText">Reference Number</th>
+                            <th title="click to sort" class="headerText">Date</th>
+                            <th title="click to sort" class="headerText">Receipt Number</th>
                             <th title="click to sort" class="headerText">Total Amount</th>
                             <th title="click to sort" class="headerText">View Details</th>
                             <th title="click to sort" class="headerText">Cancel Receipt</th>

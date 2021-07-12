@@ -1,5 +1,6 @@
 package com.model.feescategory.dao;
 
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,6 +134,50 @@ public class feesCategoryDAO {
 		}finally {
 			HibernateUtil.closeSession();
 		}
+	}
+
+	public List<Feescategory> getFeesCatgoryByName(int branchId) {
+		
+		List<Feescategory> results = new ArrayList<Feescategory>();
+        try {
+            
+            transaction = session.beginTransaction();
+            results = (List<Feescategory>) session.createQuery("From Feescategory where branchid="+branchId).list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return results;
+        }
+	}
+
+	public List<Feescategory> getFeesCatgoryByName(int branchId, List<String> months) {
+		
+		List<Feescategory> results = new ArrayList<Feescategory>();
+        try {
+            
+            transaction = session.beginTransaction();
+            
+            for (String feesMonth : months) {
+            	Feescategory feesCat = (Feescategory) session.createQuery("From Feescategory where branchid="+branchId+" and feescategoryname='"+feesMonth+"'").uniqueResult();
+            	results.add(feesCat);
+			}
+            
+			/*
+			 * results = (List<Feescategory>)
+			 * session.createQuery("From Feescategory where branchid="
+			 * +branchId+" and feescategoryname='"+months.toString()+"'").list();
+			 */
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return results;
+        }
 	}
 
 }

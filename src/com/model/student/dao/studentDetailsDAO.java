@@ -396,7 +396,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("from Studentfeesstructure sfs where sfs.sid = '"+id+"' and sfs.academicyear = '"+currentYear+"'");
+					.createQuery("from Studentfeesstructure sfs where sfs.sid = '"+id+"' and sfs.waiveoff=0 and sfs.academicyear = '"+currentYear+"'");
 			
 			results = query.list();
 			transaction.commit();
@@ -593,5 +593,31 @@ public class studentDetailsDAO {
 			 }
 			return cardDetailsList;
 		}
+
+	public List<Studentfeesstructure> getStudentFeesStructureByFeesCategory(long id, String currentYear,
+			List<Integer> feesId) {
+		List<Studentfeesstructure> results = new ArrayList<Studentfeesstructure>();
+
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			transaction = session.beginTransaction();
+
+			// results = (List<PersonalDetails>)
+			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
+			Query query = session.createQuery("from Studentfeesstructure sfs where sfs.sid = '"+id+"' and sfs.Feescategory.idfeescategory IN (:feesId) and sfs.feespaid<sfs.feesamount and sfs.waiveoff=0 and sfs.academicyear = '"+currentYear+"'");
+			query.setParameter("feesId", feesId);
+			results = query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
 	
 }

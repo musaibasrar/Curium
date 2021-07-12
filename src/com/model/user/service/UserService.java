@@ -33,6 +33,7 @@ import com.model.std.dao.StandardDetailsDAO;
 import com.model.std.dto.Classsec;
 import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
+import com.model.student.service.StudentService;
 import com.model.user.dao.UserDAO;
 import com.model.user.dto.Login;
 import com.util.DataUtil;
@@ -73,10 +74,18 @@ public class UserService {
             httpSession.setAttribute("typeOfUser",userType[0]);
             httpSession.setAttribute("userAuth", userType[0]);
             httpSession.setAttribute("userloginid", login.getUserid());
+            
+            //Get Member Details
+            	if("member".equalsIgnoreCase(userType[0])) {
+            		new StudentService(request, response).viewDetailsOfStudentById(password);
+            	}
+            
+            //
+            
 			//setting session to expiry in 60 mins
            	httpSession.setMaxInactiveInterval(60*60);
 			Cookie cookie = new Cookie("user",  login.getUsertype());
-			cookie.setMaxAge(30*60);
+			cookie.setMaxAge(300*600);
 			response.addCookie(cookie);
            result = true;
        } else {
@@ -617,6 +626,20 @@ public class UserService {
 		user.setBranch(branch);
 		
 		return new UserDAO().addUser(user);
+		
+	}
+	
+	public Login addUserMember(Parents parents) {
+		
+		Login user = new Login();
+		String[] memberName = parents.getStudent().getName().split(" ");
+		user.setUsername(memberName[0]);
+		user.setUsertype("member");
+		Branch branch = new Branch();
+		branch.setIdbranch(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		user.setBranch(branch);
+		
+		return user;
 		
 	}
 

@@ -44,11 +44,26 @@ public class FeesCollectionAction {
                             url = undoFeesReceipt();
                         }else if (action.equalsIgnoreCase("searchFeesReport")) {
                             url = searchFeesReport();
-                    }
+                        }else if (action.equalsIgnoreCase("searchFeesReport")) {
+                            url = searchFeesReport();
+                        }else if (action.equalsIgnoreCase("generateInvoice")) {
+                            url = generateInvoice();
+                        }else if (action.equalsIgnoreCase("printInvoice")) {
+                            url = printInvoice();
+                        }
                 return url;
         }
 
-        private String searchFeesReport() {
+        private String printInvoice() {
+			return "printinvoice.jsp";
+		}
+
+		private String generateInvoice() {
+        	new FeesCollectionService(request, response).generateInvoice();
+			return "invoice.jsp";
+		}
+
+		private String searchFeesReport() {
             new FeesCollectionService(request, response).getFeesReport();
             return "feesreport.jsp";
     }

@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>fees structure</title>
+<title>contribution structure</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -416,7 +416,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Fees Structure</a></li>
+					<li><a href="#tabs-1">Contribution Structure</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -424,12 +424,10 @@ for(Cookie cookie : cookies){
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
-							<td class="alignRightFields">Student Name &nbsp;</td>
-							<td width="12%" align="left"><label> <input
+							<td class="alignRightFields">Member Name &nbsp;&nbsp;<label> <input
 									name="namesearch" type="text" class="myclass" id="namesearch"
 									size="36"">
 							</label></td>
-							
 						</tr>
 
 						<tr>
@@ -438,7 +436,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 
-						<tr>
+						 <tr style="display: none;">
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="70%"><label> 
 							<select name="classsearch" id="classsearch"
@@ -468,7 +466,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 							</label>
-						</tr>
+						</tr> 
 
 						<tr>
 							<td><br /></td>
@@ -476,11 +474,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
-
-							<td width="30%" class="alignRight"></td>
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
+							<td style="padding-left: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;
 								<button id="search">Search</button>
 							</td>
 						</tr>
@@ -510,11 +504,10 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">UIN</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class &
-							Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Admission Date</th>
+						<th title="click to sort" class="headerText">Reference&nbsp;</th>
+						<!-- <th title="click to sort" class="headerText">Admission Date</th> -->
 
 
 
@@ -532,12 +525,12 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="Controller?process=StudentProcess&action=ViewFeesStructure&id=<c:out value='${Parents.student.sid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
+										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.student.classstudying}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.admissiondate}" /></td>
+							<%-- <td class="dataText"><c:out
+									value="${Parents.student.admissiondate}" /></td> --%>
 
 
 						</tr>

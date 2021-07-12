@@ -1,5 +1,5 @@
 <%-- 
-    Document   : Print Fees Waiveoff Report
+    Document   : Print Waiveoff Report
     Created on : JAN 8 2021, 2:01 PM
     Author     : Musaib
 --%>
@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Fees Waive off Report</title>
+<title>Contribution Waive off Report</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -250,10 +250,10 @@
  				 		<th class=datath>Adm. No.</th>
  				 		<th class="datath">Student Name</th>
 						<th class="datath">Class</th>
-						<th class="datath">Fees Cat.</th>
-						<th class="datath">Fees Amount</th>
-						<th class="datath">Inst.</th>
-						<th class="datath">Total Fees Amount</th>
+						<th class="datath">Particular</th>
+						<th class="datath">Amount</th>
+						<!-- <th class="datath">Inst.</th> -->
+						<th class="datath">Total Amount</th>
 						<th class="datath">Waive Off Amount</th>
  				 </tr>
  				 
@@ -271,7 +271,7 @@
 									<td class="datatd" style="font-size: 9px;"><c:out value="${students.key.student.classstudying}" /></td>
 									<td class="datatd" style="font-size: 9px;"><c:out value="${fees.feescategory.feescategoryname}" /></td>
 									<td class="datatdright" style="font-size: 9px;"><c:out value="${fees.feescategory.amount}" /></td>
-									<td class="datatd" style="font-size: 9px;"><c:out value="${fees.totalinstallment}" /></td>
+									<%-- <td class="datatd" style="font-size: 9px;"><c:out value="${fees.totalinstallment}" /></td> --%>
 									<td class="datatdright" style="font-size: 9px;"><c:out value="${fees.feesamount}" /></td>
 									<td class="datatdright" style="font-size: 9px;">
 									<c:set var="itemTotal" value="${itemTotal + fees.waiveoff}" />

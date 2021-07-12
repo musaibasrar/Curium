@@ -57,6 +57,7 @@ public class StampFeesAction {
 		new FeesService(request, response).viewFees();
 		new YearService(request, response).getYear();
 		new StandardService(request, response).viewClasses();
+		new StampFeesService(request, response).advanceSearch();
 		return "stampfees.jsp";
 	}
 

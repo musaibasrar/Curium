@@ -1,5 +1,5 @@
 <%--
-    Document   : Fees Report
+    Document   : Contribution Report
     Created on : MAR 24, 2020, 12:58:28 PM
     Author     : Musaib
 --%>
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Fees Report</title>
+<title>Contribution Report</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -516,10 +516,10 @@ for(Cookie cookie : cookies){
 			<br />
 		</div> -->
 
-		<div id="effect" class="ui-widget-content ui-corner-all">
+		<%-- <div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Fees Report</a></li>
+					<li><a href="#tabs-1">Contribution Report</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -573,12 +573,12 @@ for(Cookie cookie : cookies){
 
 				</div>
 			</div>
-		</div>
+		</div> --%>
 
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search result</td>
+					<td class="headerTD">Contribution Report</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -587,11 +587,11 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
-						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">UIN</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Fees Details(Due Amount/Total Amount)</th>
-						<th title="click to sort" class="headerText">Fees Summary(Due Amount/Total Amount)</th>
+						<!-- <th title="click to sort" class="headerText">Class & Sec&nbsp;</th> -->
+						<th title="click to sort" class="headerText">Contribution Details(Due Amount/Total Amount)</th>
+						<th title="click to sort" class="headerText">Contribution Summary(Due Amount/Total Amount)</th>
 					</tr>
 				</thead>
 
@@ -609,10 +609,10 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${studentfeesreportlist.student.sid}"/>" /></td> --%>
 							<td class="dataText"><c:out
-										value="${studentfeesreportlist.student.admissionnumber}" /></a></td>
+										value="${studentfeesreportlist.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${studentfeesreportlist.student.name}" /></td>
-							<td class="dataText"><c:out
-									value="${studentfeesreportlist.student.classstudying}" /></td>
+							<%-- <td class="dataText"><c:out
+									value="${studentfeesreportlist.student.classstudying}" /></td> --%>
 							<td class="dataText">
 									<c:set var="DueAmount" value="0" />
 									<c:set var="TotalAmount" value="0" />

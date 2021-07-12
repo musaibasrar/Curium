@@ -558,12 +558,12 @@ for(Cookie cookie : cookies){
 
             <div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Receipt</a></li>
+					<!-- <li><a href="#tabs-1">Receipt</a></li>
 					<li><a href="#tabs-2">Payment</a></li>
-					<li><a href="#tabs-3">Contra</a></li>
+					<li><a href="#tabs-3">Contra</a></li> -->
 					<li><a href="#tabs-4">Journal</a></li>
 				</ul>
-				<div id="tabs-1">
+				<%-- <div id="tabs-1">
 					<table  width="100%">
                
                 <tbody>
@@ -744,9 +744,9 @@ for(Cookie cookie : cookies){
 							</tr>						
                 </tfoot>
 			</table>
-				</div>
+				</div> --%>
 
-				<div id="tabs-2">
+				<%-- <div id="tabs-2">
 					<table  width="100%">
                
                 <tbody>
@@ -929,10 +929,10 @@ for(Cookie cookie : cookies){
 							</tr>						
                 </tfoot>
 			</table>
-				</div>
+				</div> --%>
 				
 				
-				<div id="tabs-3">
+				<%-- <div id="tabs-3">
 					<table  width="100%">
                
                 <tbody>
@@ -1113,7 +1113,7 @@ for(Cookie cookie : cookies){
 							</tr>						
                 </tfoot>
 			</table>
-				</div>
+				</div> --%>
 				
 				<div id="tabs-4">
 					<table  width="100%">

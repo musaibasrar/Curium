@@ -431,22 +431,22 @@
                 else {
                     day=day;
                 }
-                return month+"/"+day+"/"+year;
+                return day+"/"+month+"/"+year;
 
             }
            
             var students = [
             <c:forEach varStatus="status" items="${studentListFeesCollection}" var="student">{
-                value:'<c:out default="0" value="${student.admissionnumber}" />',
-                name:'<c:out default="0" value="${student.name}" />',
+            	name:'<c:out default="0" value="${student.admissionnumber}" />',
+                value:'<c:out default="0" value="${student.name}" />',
                 classandsec:'<c:out default="0" value="${student.classstudying}" />',
                 id:'<c:out default="0" value="${student.sid}" />',
-                
+                phone:'<c:out default="0" value="${student.classadmittedin}" />',
             }<c:if test="${!status.last}">,</c:if>
             </c:forEach>
         ];
         $(function() {
-            $( "#admno").autocomplete({
+            $( "#studentName").autocomplete({
                 source: students,
                 minLength: 1,
                 change:function(event,ui){
@@ -460,7 +460,8 @@
                 },
                 select: function( event, ui ) {
                     $( "#studentId").val( ui.item.id );
-       			  $( "#studentName").val( ui.item.name );
+                    $( "#contactnumber").val( ui.item.phone );
+       			  /* $( "#studentName").val( ui.item.name ); */
        			$( "#classandsec").val( ui.item.classandsec );
                     /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
                     return true;
@@ -629,8 +630,19 @@
         });
         $( "#submit" ).button();
         $( "#effect" ).hide();
+        $(".invoice").button().click(function() {
+			generateInvoice();
+
+		});
     });
             
+    
+    function generateInvoice() {
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=FeesCollection&action=generateInvoice";
+		form1.submit();
+	}
+    
         </script>
                 <script type="text/javascript">
             $(function() {
@@ -666,8 +678,8 @@
             	var payment = parseInt(duePayment.value);
             	
             	if(payment>dueAmount){
-            		duePayment.value = 0;
-            		alert('Amount Due to be paid must be lesser than or equals to Due Amount');
+            		//duePayment.value = 0;
+            		alert('Amount due is greater than total amount');
             	}
             }
             
@@ -698,25 +710,36 @@ for(Cookie cookie : cookies){
             <table  width="100%">
                 <thead>
                     <tr>
-                        <th colspan="3" class="headerTD"> Fees Collection</th>
+                        <th colspan="3" class="headerTD"> Donation Collection</th>
 
                     </tr>
                 </thead>
                 <tbody>
-	                <tr>
-                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">Search Student:&nbsp;&nbsp;&nbsp;&nbsp; 
+                	
+                	<tr>
+	               	
+	                <td><br>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" style="border: white;" name="dateoffees" id="dateoffees"  readonly="readonly"/><br><br></td>
+	                
                     </tr>
-                    <tr>
-                    <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
+	                <tr>
+	                
+                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">Member Search:&nbsp;&nbsp;&nbsp;&nbsp; <br>	
+                    <br>
+                    </tr>
+                     <!--<tr>
+                    	<td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
                         
                         <td>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
                         
-                    </tr>
+                    </tr>--> 
                     
                     <tr>
                     
-                        <td style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/></td>
-                        <td>Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" /></td>
+                        <td style="width: 45%">Member Name:&nbsp;&nbsp;&nbsp;&nbsp;<input  type="text" name="studentName" id="studentName" style="width: 200px" />
+                         <input name="studentId" type="hidden" id="studentId" value="" />
+                         <input name="contactnumber" type="hidden" id="contactnumber" value="" />
+                        </td>
+                        <td>Reference : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" /></td>
                         
                     </tr>
                     
@@ -726,7 +749,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     	
-                        <td><button id="addFees">Search Fees</button>&nbsp;&nbsp;&nbsp;</td>
+                        <td><button id="addFees">Search</button>&nbsp;&nbsp;&nbsp;</td>
                         
                     </tr>
                     
@@ -735,19 +758,23 @@ for(Cookie cookie : cookies){
                     </tr>
 
 					<tr>
-                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">Student Details:&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">Member Details:&nbsp;&nbsp;&nbsp;&nbsp;<br><br></td> 
                     </tr>
-                    <tr>
+                    <%-- <tr>
                     <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" style="width: 200px" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
                         
                         <td>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" value="${dateoffeesDetails}" readonly="readonly"/></td>
                         
-                    </tr>
+                    </tr> --%>
                     
                     <tr>
                     
-                        <td style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" style="width: 200px" readonly/></td>
-                        <td>Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsecDetails" id="classandsecDetails" value="${classandsecDetails}"/></td>
+                        <td style="width: 45%">Member Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" style="width: 200px" readonly/>
+                        
+                        <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" />
+                        <input name="membercontactnumber" type="hidden" id="membercontactnumber" value="${membercontactnumber}" />
+                        </td>
+                        <td>Referral Name: &nbsp;&nbsp;&nbsp;<input type="text" name="classandsecDetails" id="classandsecDetails" value="${classandsecDetails}"/></td>
                         
                     </tr>
                     <tr>
@@ -758,17 +785,18 @@ for(Cookie cookie : cookies){
                     </tr>
                 </tbody>
             </table>
-            
+ 
+ 			           
             <table width="100%" border="0" style="border-color: #4b6a84;"
 				id="myTable">
 
 				<thead>
                     <tr >
                     	<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-                        <td class="headerText">Fees Category</td>
-                        <td class="headerText">Total Amount/Due Amount</td>                       
-                        <td class="headerText">Amount Due to be paid</td>
-                        <td class="headerText">Fine</td>
+                        <th class="headerText">Particulars</th>
+                        <th class="headerText">Total Amount/Due Amount</th>                       
+                        <th class="headerText">Amount Due to be paid</th>
+                        <!-- <td class="headerText">Extra Donation</td> -->
 
                     </tr>
                 </thead>
@@ -782,15 +810,26 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
 								name="studentsfsids" checked
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
-							<td class="dataTextInActive" align="center"><a class="dataTextInActive" style="text-transform:uppercase"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
+							<td class="dataTextInActive" align="center">
+								<a class="dataTextInActive" style="text-transform:uppercase">
+								<input name="feescategory" type="hidden" id="feescategory" value="${studentfeesdetails.key.feescategory.feescategoryname}" />
+								<c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
-							<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
-							<input type="hidden" id="dueamount" value="${studentfeesdetails.value}"/>
+								<c:if test="${studentfeesdetails.value < 0}">
+								
+									<c:out value="${studentfeesdetails.key.feesamount}/Extra:${studentfeesdetails.value}" />
+								</c:if>
+								<c:if test="${studentfeesdetails.value >= 0}">
+									<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
+								</c:if>
+								
+								<input type="hidden" id="dueamount" value="${studentfeesdetails.value}"/>
+								<input type="hidden" id="feesamount" name="feesamount" value="${studentfeesdetails.key.feesamount}"/>
 							</td>
 							<td class="dataText" align="center">
 							<input type="text" class="amountpaying" value="0" id="amountpaying" name="amountpaying" onkeyup="checkWithDueAmount(this)">
 							</td>
-							<td class="dataText" align="center">
+							<td class="dataText" align="center" style="display: none;">
 							<input type="text" id="fine" value="0" class="fine" name="fine" >
 							</td>
 						</tr>
@@ -800,7 +839,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
 
-                        <td colspan="4" align="right"><b>Total&nbsp;&nbsp;</b></td>
+                        <td colspan="3" align="right"><b>Total&nbsp;&nbsp;</b></td>
                         <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
                     </tr>
                 </tfoot>
@@ -834,7 +873,8 @@ for(Cookie cookie : cookies){
             </TABLE>
  -->
             
-            <input type="submit" value="submit" id="submit"/>
+            <input type="submit" value="Receipt" id="submit"/>
+            <button id="invoice" class="invoice">Invoice</button>
             
         </form>
 

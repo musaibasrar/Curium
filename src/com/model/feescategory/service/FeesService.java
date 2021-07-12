@@ -219,38 +219,42 @@ public class FeesService {
 		
 		if(httpSession.getAttribute("branchid")!=null){
 			String queryMain = "From Parents as parents where";
-			String studentname = DataUtil.emptyString(request
-					.getParameter("namesearch"));
-
-			String addClass = request.getParameter("classsearch");
-			String addSec = request.getParameter("secsearch");
-			String conClassStudying = "";
-
-			if (!addClass.equalsIgnoreCase("")) {
-
-				conClassStudying = addClass+"--" +"%";
-
-			}
-			if (!addSec.equalsIgnoreCase("")) {
-				conClassStudying = addClass;
-				conClassStudying = conClassStudying+"--"+addSec+"%";
-			}
-
-			String classStudying = DataUtil.emptyString(conClassStudying);
 			String querySub = "";
-
-			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
-			}
-
-			if (!classStudying.equalsIgnoreCase("")
-					&& !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
-			} else if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
-			}
+			
+			/*
+			 * String studentname = DataUtil.emptyString(request
+			 * .getParameter("namesearch"));
+			 * 
+			 * String addClass = request.getParameter("classsearch"); String addSec =
+			 * request.getParameter("secsearch"); String conClassStudying = "";
+			 * 
+			 * if (!addClass.equalsIgnoreCase("")) {
+			 * 
+			 * conClassStudying = addClass+"--" +"%";
+			 * 
+			 * } if (!addSec.equalsIgnoreCase("")) { conClassStudying = addClass;
+			 * conClassStudying = conClassStudying+"--"+addSec+"%"; }
+			 * 
+			 * String classStudying = DataUtil.emptyString(conClassStudying); String
+			 * querySub = "";
+			 * 
+			 * if (!studentname.equalsIgnoreCase("")) { querySub =
+			 * " parents.Student.name like '%" + studentname +
+			 * "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="
+			 * +Integer.parseInt(httpSession.getAttribute("branchid").toString()); }
+			 * 
+			 * if (!classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
+			 * querySub = querySub + " AND parents.Student.classstudying like '" +
+			 * classStudying +
+			 * "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="
+			 * +Integer.parseInt(httpSession.getAttribute("branchid").toString()); } else if
+			 * (!classStudying.equalsIgnoreCase("")) { querySub = querySub +
+			 * " parents.Student.classstudying like '" + classStudying +
+			 * "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="
+			 * +Integer.parseInt(httpSession.getAttribute("branchid").toString()); }
+			 */
+			
+			querySub = querySub + " parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
 
 			queryMain = queryMain + querySub;
 			/*

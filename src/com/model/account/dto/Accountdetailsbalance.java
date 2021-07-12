@@ -127,7 +127,7 @@ public class Accountdetailsbalance implements java.io.Serializable {
 	public void setBranchid(int branchid) {
 		this.branchid = branchid;
 	}
-	
+
 	public int getUserid() {
 		return userid;
 	}

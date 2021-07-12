@@ -130,7 +130,7 @@ public class Accountdetails implements java.io.Serializable {
 	public void setAccountSSGroupMaster(Accountssgroupmaster accountSSGroupMaster) {
 		this.accountSSGroupMaster = accountSSGroupMaster;
 	}
-	
+
 	public int getUserid() {
 		return userid;
 	}

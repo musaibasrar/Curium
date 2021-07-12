@@ -19,7 +19,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Academic Year</title>
+        <title>Year</title>
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 
@@ -440,7 +440,7 @@ for(Cookie cookie : cookies){
             <div >
                 <div id="tabs">
                     <ul>
-                        <li><a href="#tabs-1">Academic Year</a></li>
+                        <li><a href="#tabs-1">Year</a></li>
                         
                     </ul>
 
@@ -450,7 +450,7 @@ for(Cookie cookie : cookies){
                     
                     <div align="center">
                     
-                    <h class="alignRightHeader">Enter the academic year</h>
+                    <h class="alignRightHeader">Enter the current year</h>
                     
                     
                     </div>
@@ -482,7 +482,7 @@ for(Cookie cookie : cookies){
 							<tr>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 							<td width="26%"  class="alignRightYear">
-                             Current academic year is: ${currentyear}
+                             Current year is: ${currentyear}
                             </td>
 							</tr>
 
@@ -496,7 +496,7 @@ for(Cookie cookie : cookies){
 
                                 <td width="26%"  class="alignRight" >
                                     
-                                    Current Academic Year*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td>
+                                    Current Year*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td>
 
                                 <td width="28%"  >
                                     <label>
@@ -535,7 +535,7 @@ for(Cookie cookie : cookies){
                             
                             <tr id="mandatory">
                                 
-                                <td width="16%"  class="mandatoryClass"  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * Please enter the current academic year</td>
+                                <td width="16%"  class="mandatoryClass"  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * Please enter the current year</td>
                             </tr>
                             
                                 <table width="100%" >

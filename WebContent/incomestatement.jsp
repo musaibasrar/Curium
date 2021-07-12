@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Balance Sheet</title>
+<title>Income Statement</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -390,7 +390,7 @@
 			changeMonth : true,
 			yearRange: "-50:+10"
 		});
-		$( "#fromdate" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#fromdate" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#fromdate").datepicker("option", "showAnim", $(this).val());
 		});
@@ -400,12 +400,20 @@
 			changeMonth : true,
 			yearRange: "-50:+10"
 		});
-		$( "#todate" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#todate" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#todate").datepicker("option", "showAnim", $(this).val());
 		});
 	});
 
+	 $(function(){
+         $("#print").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         });
+         
+     });
 
 </script>
 <script type="text/javascript" src="js/datetimepicker_css.js"></script>
@@ -447,14 +455,14 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-						<td width="20%" class="alignRight">From Date(MM/DD/YYYY)&nbsp;</td>
+						<td width="20%" class="alignRight">From Date(DD/MM/YYYY)&nbsp;</td>
 							<td width="28%"><label> <input name="fromdate" autocomplete="off"
 									type="text" 
 									class="textField" id="fromdate" size="36" 
 									data-validate="validate(required)">
 							</label></td>
 							
-							<td width="20%" class="alignRight">To Date(MM/DD/YYYY)&nbsp;</td>
+							<td width="20%" class="alignRight">To Date(DD/MM/YYYY)&nbsp;</td>
 							<td width="28%"><label> <input name="todate" autocomplete="off"
 									type="text" 
 									class="textField" id="todate" size="36"
@@ -637,8 +645,8 @@ for(Cookie cookie : cookies){
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="3"><input 
-							type="hidden"  id="delete" />
+						<td class="footerTD" colspan="3">
+							<a id="print" href="Controller?process=AccountProcess&action=incomeStatementPrint&fromdate=<c:out value="${datefrom}" />&todate=<c:out value="${dateto}"/>">Print</a>
 							</td>
 							
 

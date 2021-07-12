@@ -11,6 +11,7 @@ import com.model.academicyear.service.YearService;
 import com.model.adminexpenses.service.AdminService;
 import com.model.employee.service.EmployeeService;
 import com.model.feescategory.service.FeesService;
+import com.model.feescollection.service.FeesCollectionService;
 import com.model.sendsms.service.SmsService;
 import com.model.std.service.StandardService;
 import com.model.student.service.StudentService;
@@ -43,14 +44,27 @@ public class SmsAction {
 			url = sendStaffSMS();
 		}else if (action.equalsIgnoreCase("sendSMS")) {
 			url = sendSMS();
+		}else if (action.equalsIgnoreCase("dueContribution")) {
+			url = dueContribution();
+		}else if (action.equalsIgnoreCase("dueContributionSendSMS")) {
+			url = dueContributionSendSMS();
 		}
 		
 		return url;
 	}
 
-	
 
-	
+	private String dueContributionSendSMS() {
+		if(new SmsService(request, response).dueContributionSendSMS()){
+			return "successsms.jsp";
+		}
+		return "errorsms.jsp";
+	}
+
+	private String dueContribution() {
+        new SmsService(request, response).getDueContribution();
+        return "duescollection.jsp";
+}
 
 	private String sendSMS() {
 		new StandardService(request, response).viewClasses();
