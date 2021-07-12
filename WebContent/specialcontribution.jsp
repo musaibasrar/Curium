@@ -601,7 +601,7 @@ for(Cookie cookie : cookies){
                     <tr >
                         <!-- <td class="headerText">Cr/Dr</td> -->
                         <td class="headerText">Account Name</td>                       
-                        <td class="headerText">Balance</td>
+                        <!-- <td class="headerText">Balance</td> -->
                         <td class="headerText">Amount</td>
 						<td class="headerText">Amount</td>
                     </tr>
@@ -616,16 +616,33 @@ for(Cookie cookie : cookies){
 										
 
 										<c:forEach items="${accountdetailsbalancereceipt}" var="accountdetailsbalance">
-											<c:if test="${accountdetailsbalance.accountDetails.accountname == 'Petty Cash'}">
-												<option value="${accountdetailsbalance.accountDetails.accountdetailsid}" data-sync="${accountdetailsbalance.accountDetails.accountdetailsid}">
-													<c:out value="${accountdetailsbalance.accountDetails.accountname}" />
-												</option>
+										
+											<c:if test="${userType.equalsIgnoreCase('admin')}">
+													
+												<c:if test="${accountdetailsbalance.accountDetails.accountname.equalsIgnoreCase('Petty Cash')}">
+													<option value="${accountdetailsbalance.accountDetails.accountdetailsid}" data-sync="${accountdetailsbalance.accountDetails.accountdetailsid}">
+														<c:out value="${accountdetailsbalance.accountDetails.accountname}" />
+													</option>
 
+												</c:if>
+											
 											</c:if>
+											
+											<c:if test="${userType.equalsIgnoreCase('collector')}">
+													
+												<c:if test="${accountdetailsbalance.accountDetails.accountname.equalsIgnoreCase(username)}">
+													<option value="${accountdetailsbalance.accountDetails.accountdetailsid}" data-sync="${accountdetailsbalance.accountDetails.accountdetailsid}">
+														<c:out value="${accountdetailsbalance.accountDetails.accountname}" />
+													</option>
+
+												</c:if>
+											
+											</c:if>
+											
 										</c:forEach>
 
 								</select></label></td>
-					<td align="center"><label>
+					<td align="center" style="display: none;"><label>
 									<select name="accountbalance" id="accountbalance" disabled="true"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
@@ -664,7 +681,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 
 								</select></label></td>
-					<td align="center"><label>
+					<td align="center" style="display: none;"><label>
 									<select name="accountbalancesecond" id="accountbalancesecond" disabled="true"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
@@ -696,7 +713,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
 
-                        <td colspan="2" align="right"><b>Total&nbsp;&nbsp;</b></td>
+                        <td colspan="1" align="right"><b>Total&nbsp;&nbsp;</b></td>
                         <td align="center"><b><input type="text" name="grandTotalAmountDr" id="grandTotalAmountDr" value="0" readonly /></b></td>
                         <td align="center"><b><input type="text" name="grandTotalAmountCr" id="grandTotalAmountCr" value="0" readonly /></b></td>
                     </tr>
@@ -762,7 +779,7 @@ for(Cookie cookie : cookies){
                     <tr >
                        <!--  <td class="headerText">Cr/Dr</td> -->
                         <td class="headerText">Account Name</td>                       
-                        <td class="headerText">Balance</td>
+                        <!-- <td class="headerText">Balance</td> -->
                         <td class="headerText">Amount</td>
 						<td class="headerText">Amount</td>
                     </tr>
@@ -777,11 +794,27 @@ for(Cookie cookie : cookies){
 										
 											
 											<c:forEach items="${accountdetailsbalancereceipt}" var="accountdetailsbalance">
-												<c:if test="${accountdetailsbalance.accountDetails.accountname == 'Petty Cash'}">
-													<option value="${accountdetailsbalance.accountDetails.accountdetailsid}" data-sync-payment="${accountdetailsbalance.accountDetails.accountdetailsid}">
+											
+											
+													<c:if test="${userType.equalsIgnoreCase('admin')}">
+													  <c:if test="${accountdetailsbalance.accountDetails.accountname.equalsIgnoreCase('Petty Cash')}">
+													     <option value="${accountdetailsbalance.accountDetails.accountdetailsid}" data-sync-payment="${accountdetailsbalance.accountDetails.accountdetailsid}">
 														<c:out value="${accountdetailsbalance.accountDetails.accountname}" />
-													</option>
-												</c:if>
+													     </option>
+													   </c:if>
+													</c:if>
+													
+													
+																							
+													<c:if test="${userType.equalsIgnoreCase('collector')}">
+													 <c:if test="${accountdetailsbalance.accountDetails.accountname.equalsIgnoreCase(username)}">
+													  <option value="${accountdetailsbalance.accountDetails.accountdetailsid}" data-sync-payment="${accountdetailsbalance.accountDetails.accountdetailsid}">
+													    <c:out value="${accountdetailsbalance.accountDetails.accountname}" />
+													  </option>
+												         </c:if>
+												       </c:if>
+       
+												
 										</c:forEach>
 										<%-- <c:forEach items="${accountdetailsbalanceexpacc}" var="accountdetailsbalance">
 
@@ -793,7 +826,7 @@ for(Cookie cookie : cookies){
 										</c:forEach> --%>
 
 								</select></label></td>
-					<td align="center"><label><select name="accountbalancepayment" id="accountbalancepayment" disabled="true"
+					<td align="center" style="display: none;"><label><select name="accountbalancepayment" id="accountbalancepayment" disabled="true"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
     text-indent: 1px;
@@ -852,7 +885,7 @@ for(Cookie cookie : cookies){
 
 								</select>
 									</label></td>
-					<td align="center"><label>
+					<td align="center" style="display: none;"><label>
 					<select name="accountbalancepaymentsecond" id="accountbalancepaymentsecond" disabled="true"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
@@ -886,7 +919,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
 
-                        <td colspan="2" align="right"><b>Total&nbsp;&nbsp;</b></td>
+                        <td colspan="1" align="right"><b>Total&nbsp;&nbsp;</b></td>
                         <td align="center"><b><input type="text" name="grandTotalAmountDrPayment" id="grandTotalAmountDrPayment" value="0" readonly /></b></td>
                         <td align="center"><b><input type="text" name="grandTotalAmountCrPayment" id="grandTotalAmountCrPayment" value="0" readonly /></b></td>
                     </tr>
@@ -950,7 +983,7 @@ for(Cookie cookie : cookies){
                     <tr >
                        <!--  <td class="headerText">Cr/Dr</td> -->
                         <td class="headerText">Account Name</td>                       
-                        <td class="headerText">Balance</td>
+                        <!-- <td class="headerText">Balance</td> -->
                         <td class="headerText">Amount</td>
 						<td class="headerText">Amount</td>
                     </tr>
@@ -966,11 +999,24 @@ for(Cookie cookie : cookies){
 
 
 										<c:forEach items="${accountdetailsbalancereceipt}" var="accountdetailsbalance">
-											<c:if test="${accountdetailsbalance.accountDetails.accountname == 'Petty Cash'}">
-												<option value="${accountdetailsbalance.accountDetails.accountdetailsid}" data-sync-contra="${accountdetailsbalance.accountDetails.accountdetailsid}">
-													<c:out value="${accountdetailsbalance.accountDetails.accountname}" />
-												</option>
-											</c:if>
+										
+													<c:if test="${userType.equalsIgnoreCase('admin')}">
+													  <c:if test="${accountdetailsbalance.accountDetails.accountname.equalsIgnoreCase('Petty Cash')}">
+													     <option value="${accountdetailsbalance.accountDetails.accountdetailsid}" data-sync-contra="${accountdetailsbalance.accountDetails.accountdetailsid}">
+														<c:out value="${accountdetailsbalance.accountDetails.accountname}" />
+													     </option>
+													   </c:if>
+													</c:if>
+													
+													
+																							
+													<c:if test="${userType.equalsIgnoreCase('collector')}">
+													 <c:if test="${accountdetailsbalance.accountDetails.accountname.equalsIgnoreCase(username)}">
+													  <option value="${accountdetailsbalance.accountDetails.accountdetailsid}" data-sync-contra="${accountdetailsbalance.accountDetails.accountdetailsid}">
+													    <c:out value="${accountdetailsbalance.accountDetails.accountname}" />
+													  </option>
+												         </c:if>
+												       </c:if>
 										</c:forEach>
 										
 										<%-- <c:forEach items="${accountdetailsbalancecontra}" var="accountdetailsbalance">
@@ -983,7 +1029,7 @@ for(Cookie cookie : cookies){
 										</c:forEach> --%>
 
 								</select></label></td>
-					<td align="center"><label>
+					<td align="center" style="display: none;"><label>
 									<select name="accountbalancecontra" id="accountbalancecontra" disabled="true"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
@@ -1041,7 +1087,7 @@ for(Cookie cookie : cookies){
 										</c:forEach> --%>
 
 								</select></label></td>
-					<td align="center"><label>
+					<td align="center" style="display: none;"><label>
 									<select name="accountbalancecontrasecond" id="accountbalancecontrasecond" disabled="true"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
@@ -1079,7 +1125,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
 
-                        <td colspan="2" align="right"><b>Total&nbsp;&nbsp;</b></td>
+                        <td colspan="1" align="right"><b>Total&nbsp;&nbsp;</b></td>
                         <td align="center"><b><input type="text" name="grandTotalAmountDrcontra" id="grandTotalAmountDrcontra" value="0" readonly /></b></td>
                         <td align="center"><b><input type="text" name="grandTotalAmountCrcontra" id="grandTotalAmountCrcontra" value="0" readonly /></b></td>
                     </tr>

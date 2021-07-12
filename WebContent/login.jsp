@@ -126,6 +126,8 @@ form{
                     window.open('index_admin.jsp','_self');
                 }else if(type=='member'){
                 	window.open('index_member.jsp','_self');
+                }else if(type=='collector'){
+                	window.open('index_collector.jsp','_self');
                 }
             }
             else if(!flag1){

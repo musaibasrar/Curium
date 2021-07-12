@@ -354,11 +354,6 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="Controller?process=YearProcess&action=updateYear" style="font-size: 12px;">Year</a>
             			</td>
             		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="Controller?process=StudentProcess&action=addNew" style="font-size: 12px;">Add New</a>
-            			</td>
-            		</tr>
                 </table>
             </div>
             
