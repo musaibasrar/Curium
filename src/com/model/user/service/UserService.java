@@ -25,18 +25,17 @@ import com.model.adminexpenses.service.AdminService;
 import com.model.branch.dto.Branch;
 import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
-import com.model.feescollection.action.FeesCollectionAction;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.feescollection.service.FeesCollectionService;
 import com.model.parents.dto.Parents;
 import com.model.std.dao.StandardDetailsDAO;
 import com.model.std.dto.Classsec;
-import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.service.StudentService;
 import com.model.user.dao.UserDAO;
 import com.model.user.dto.Login;
 import com.util.DataUtil;
+import com.util.DateUtil;
 
 public class UserService {
 	
@@ -567,8 +566,8 @@ public class UserService {
 	        }
 	        
 		String queryMain ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
-		String toDate= DataUtil.emptyString(request.getParameter("todate"));
-		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
+		String toDate= DateUtil.dateFromatConversionSlash(request.getParameter("todate"));
+		String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("fromdate"));
 		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
 		
 		
@@ -583,11 +582,11 @@ public class UserService {
 				querySub = " feesdetails.date = '"+(String) httpSession.getAttribute("dayone")+"'" ;
 			}
 			
-			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
+			if(fromDate !=null  && toDate !=null){
 				querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
-				httpSession.setAttribute("datefrom", fromDate);
-				httpSession.setAttribute("dateto", toDate);
-				httpSession.setAttribute("dayone", "");
+				request.setAttribute("datefrom", request.getParameter("fromdate"));
+				request.setAttribute("dateto", request.getParameter("todate"));
+				request.setAttribute("dayone", "");
 			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("datefrom"))) && 
 					!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("dateto"))) ) {
 				querySub = " feesdetails.date between '"+(String) httpSession.getAttribute("datefrom")+"' AND '"+(String) httpSession.getAttribute("dateto")+"'";

@@ -114,7 +114,7 @@ public class FeesService {
                 boolean result = false;
                 try {
 
-                        File downloadFile = new File(System.getProperty("java.io.tmpdir")+"feesdetails.xlsx");
+                        File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/collectiondetails.xlsx");
                 FileInputStream inStream = new FileInputStream(downloadFile);
 
                 // get MIME type of the file
@@ -127,7 +127,7 @@ public class FeesService {
                         // set headers for the response
                         String headerKey = "Content-Disposition";
                         String headerValue = String.format("attachment; filename=\"%s\"",
-                                        "feesdetails.xlsx");
+                                        "collectiondetails.xlsx");
                         response.setHeader(headerKey, headerValue);
 
                         // get output stream of the response

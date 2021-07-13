@@ -929,15 +929,15 @@ for(Cookie cookie : cookies){
 						</tr>
 
 
-
-						<tr>
+--%>
+						<tr style="display: none;">
 							<td width="20%" class="alignRight">Created Date &nbsp;</td>
 							<td width="28%"><label> <input name="createddate"
 									type="text" value="<fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>" class="textField"
 									id="datepickerCD" size="30" data-validate="validate(required)">
 							</label></td>
 
-							</tr> --%>
+							</tr> 
 							
 						<tr>
 

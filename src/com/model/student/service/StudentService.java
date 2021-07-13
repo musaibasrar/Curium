@@ -802,7 +802,10 @@ public class StudentService {
 		                
 		                if(fieldName.equalsIgnoreCase("studentexternalid")){
 							 student.setStudentexternalid(DataUtil.emptyString(item.getString())); 
-							 } 
+							 }
+		                if (fieldName.equalsIgnoreCase("createddate")) {
+							 student.setCreateddate(DateUtil.indiandateParser(item.getString())); 
+							 }
 						/*
 						 * 
 						 * if (fieldName.equalsIgnoreCase("name")) {
@@ -1159,6 +1162,9 @@ public class StudentService {
 			student.setSpecialcategory(newcateg);
 		}
 		 student.setArchive(0);
+		 student.setPassedout(0);
+		 student.setDroppedout(0);
+		 student.setLeftout(0);
 		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		 
 		 if(puDetails.getIdpudetails()!=null) {

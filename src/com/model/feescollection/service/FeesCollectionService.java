@@ -372,8 +372,8 @@ public class FeesCollectionService {
 	        }
 	        
 		String queryMain ="From Receiptinfo as feesdetails where cancelreceipt=1 and feesdetails.branchid="+idBranch+" AND";
-		String toDate= DataUtil.emptyString(request.getParameter("todate"));
-		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
+		String toDate= DateUtil.dateFromatConversionSlash(request.getParameter("todate"));
+		String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("fromdate"));
 		String oneDay = DataUtil.emptyString(request.getParameter("oneday"));
 		
 		
@@ -388,11 +388,11 @@ public class FeesCollectionService {
 				querySub = " feesdetails.date = '"+(String) httpSession.getAttribute("dayonecancel")+"'" ;
 			}
 			
-			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
+			if(fromDate !=null  && toDate !=null){
 				querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
-				httpSession.setAttribute("datefromcancel", fromDate);
-				httpSession.setAttribute("datetocancel", toDate);
-				 httpSession.setAttribute("dayonecancel", "");
+				request.setAttribute("datefromcancel", request.getParameter("fromdate"));
+				request.setAttribute("datetocancel", request.getParameter("todate"));
+				 request.setAttribute("dayonecancel", "");
 				
 			}else if(!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("datefromcancel"))) && 
 					!"".equalsIgnoreCase(DataUtil.emptyString((String) httpSession.getAttribute("datetocancel"))) ) {

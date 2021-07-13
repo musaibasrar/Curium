@@ -475,7 +475,7 @@ public class AccountService {
 		transactions.setDramount(new BigDecimal(drAmountJournal));
 		transactions.setCramount(new BigDecimal(crAmountJournal));
 		transactions.setVouchertype(Integer.parseInt(journalVoucher));
-		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(journalDate));
+		transactions.setTransactiondate(DateUtil.indiandateParser(journalDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(journalNarration);
 		transactions.setCancelvoucher("no");
@@ -527,7 +527,7 @@ public boolean saveGuests() {
 		transactions.setDramount(new BigDecimal(drAmount));
 		transactions.setCramount(new BigDecimal(crAmount));
 		transactions.setVouchertype(Integer.parseInt(guestsVoucher));
-		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(guestsDate));
+		transactions.setTransactiondate(DateUtil.indiandateParser(guestsDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(guestsNarration);
 		transactions.setCancelvoucher("no");
@@ -575,7 +575,7 @@ public boolean saveGuests() {
 		transactions.setDramount(new BigDecimal(drAmount));
 		transactions.setCramount(new BigDecimal(crAmount));
 		transactions.setVouchertype(Integer.parseInt(eventsVoucher));
-		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(eventsDate));
+		transactions.setTransactiondate(DateUtil.indiandateParser(eventsDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(eventsNarration);
 		transactions.setCancelvoucher("no");
@@ -621,7 +621,7 @@ public boolean saveGuests() {
 		transactions.setDramount(new BigDecimal(drAmount));
 		transactions.setCramount(new BigDecimal(crAmount));
 		transactions.setVouchertype(Integer.parseInt(receiptVoucher));
-		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(receiptDate));
+		transactions.setTransactiondate(DateUtil.indiandateParser(receiptDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(receiptNarration);
 		transactions.setCancelvoucher("no");

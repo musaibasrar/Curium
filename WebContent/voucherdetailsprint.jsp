@@ -230,11 +230,11 @@
 
 				<tr>
 				
-					<td align="left" style="padding-left: 60px;"><br><br><label style="border-style: solid;padding:15px;font-size: 22px; ">&nbsp; Rs. <c:out value="${totalamount}" />&nbsp;&nbsp;</label></td>
+					<td align="left" style="padding-left: 60px;"><br><br><label style="border-style: solid;padding:15px;font-size: 22px; ">&nbsp; Rs. <c:out value="${totalamount}" />&nbsp;&nbsp;</label><br><br></td>
 					 
-					 <td align="left" style="padding-left: 60px;"><br><br><label style="padding-left: 600;font-size: 22px;">Collector</label></td>
+					 <td align="left" style="padding-left: 60px;"><br><br><label style="padding-left: 600;font-size: 22px;">Collector</label><br><br></td>
 					 
-					 <td align="left" style="padding-left: 60px;"><br><br><label style="font-size: 22px;">President/Secretary</label></td>
+					 <td align="left" style="padding-left: 60px;"><br><br><label style="font-size: 22px;">President/Secretary</label><br><br></td>
 
 				</tr>
 			</TABLE>

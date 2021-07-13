@@ -352,28 +352,28 @@
                 $("#dateofreceipt").datepicker({
         			changeYear : true,
         			changeMonth : true,
-        			dateFormat: 'yy-mm-dd',
+        			dateFormat: 'dd/mm/yy',
         			yearRange: "-50:+0"
         		});
                 
                 $("#dateofpayment").datepicker({
         			changeYear : true,
         			changeMonth : true,
-        			dateFormat: 'yy-mm-dd',
+        			dateFormat: 'dd/mm/yy',
         			yearRange: "-50:+0"
         		});
                 
                 $("#dateofcontra").datepicker({
         			changeYear : true,
         			changeMonth : true,
-        			dateFormat: 'yy-mm-dd',
+        			dateFormat: 'dd/mm/yy',
         			yearRange: "-50:+0"
         		});
                 
                 $("#dateofjournal").datepicker({
         			changeYear : true,
         			changeMonth : true,
-        			dateFormat: 'yy-mm-dd',
+        			dateFormat: 'dd/mm/yy',
         			yearRange: "-50:+0"
         		});
                 
@@ -1131,7 +1131,7 @@ for(Cookie cookie : cookies){
                         <input
 									name="dateofjournal" type="text" class="textField"
 									id="dateofjournal" size="25" 
-									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" 
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									required/> </td>
                         
                     </tr>

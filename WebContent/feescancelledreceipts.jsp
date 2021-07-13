@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 
 <html>
@@ -521,7 +522,7 @@
 		$("#datepicker").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'dd/mm/yy'
 		});
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
@@ -531,7 +532,7 @@
 		$("#datepickerfrom").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'dd/mm/yy'
 		});
 		$("#anim").change(function() {
 			$("#datepickerfrom").datepicker("option", "showAnim", $(this).val());
@@ -541,7 +542,7 @@
 		$("#datepickerto").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd'
+			dateFormat: 'dd/mm/yy'
 		});
 		$("#anim").change(function() {
 			$("#datepickerto").datepicker("option", "showAnim", $(this).val());
@@ -605,7 +606,7 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
-						<tr>
+						<tr style="display: none;">
 							<td width="20%" class="alignRight">Date: &nbsp;</td>
 							<td width="28%"><label> <input name="oneday"
 									type="text" class="textField" id="datepicker" size="36"
@@ -614,10 +615,10 @@ for(Cookie cookie : cookies){
 							</label></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 						<td width="20%" class="alignRight">&nbsp;Between Dates</td>
 						</tr>
 						
@@ -683,7 +684,8 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD"><label style="color: #EB6000;">total Contribution amount cancelled :</label>&#x20B9;${sumofdetailsfeescancelled}</td>
+					<td class="headerTD"><label style="color: #EB6000;">total Contribution amount cancelled :</label>&#x20B9;${sumofdetailsfeescancelled}<br>
+					<label style="color: white;">From Date :</label>${datefromcancel} &nbsp;&nbsp;&nbsp;<label style="color: white;">To Date :</label>${datetocancel}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -710,7 +712,9 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${feesdetails.receiptnumber}"/>" class="chcktbl"
 								name="feesIDs"
 								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
-                                <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
+                                <td  class="dataText">
+                                <fmt:formatDate type="date" value="${feesdetails.date}" pattern="dd/MM/yyyy"/>
+                                </td>
                                 <td  class="dataText"><c:out value="${feesdetails.receiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
