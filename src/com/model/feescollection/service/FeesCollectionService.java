@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -147,9 +148,11 @@ public class FeesCollectionService {
 	public void getStampFees() {
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
 		long id = Long.parseLong(request.getParameter("studentId"));
-		List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		List<Studentfeesstructure> feesstructure = new LinkedList<Studentfeesstructure>();
+		feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		
 		//List<Feescollection> feesCollection = new feesCollectionDAO().getFeesForTheCurrentYear(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-		Map<Studentfeesstructure,Long> feesMap = new HashMap<Studentfeesstructure, Long>();
+		/*Map<Studentfeesstructure,Long> feesMap = new HashMap<Studentfeesstructure, Long>();
 		
 		for (Map.Entry<Studentfeesstructure, Long> feescollection2 : feesMap.entrySet()) {
 			Studentfeesstructure sf = feescollection2.getKey();
@@ -165,10 +168,10 @@ public class FeesCollectionService {
 				}
 				
 			}*/
-			Long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid();
+			/*Long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid();
 			feesMap.put(singleFeesStructure,totalDueAmount);
-		}
-		request.setAttribute("studentfeesdetails", feesMap);
+		}*/
+		request.setAttribute("studentfeesdetails", feesstructure);
 		request.setAttribute("studentNameDetails", request.getParameter("studentName"));
 		request.setAttribute("admnoDetails", request.getParameter("admno"));
 		request.setAttribute("classandsecDetails", request.getParameter("classandsec"));
@@ -190,9 +193,90 @@ public class FeesCollectionService {
 		String contactNumber = request.getParameter("membercontactnumber");
 		String[] amountPaying = request.getParameterValues("amountpaying");
 		String[] fine = request.getParameterValues("fine");
-		String[] studentSfsIds = request.getParameterValues("studentsfsids");
+		String[] SfsIds = request.getParameterValues("sfsids");
+		//String[] studentSfsIds = request.getParameterValues("studentsfsids");
 		
-		if(studentSfsIds!=null){
+		
+		if(amountPaying!=null) {
+			
+			// create receipt information
+				receiptInfo.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+				receiptInfo.setDate(new Date());
+				receiptInfo.setSid(DataUtil.parseInt(sid));
+				receiptInfo.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					Long grantTotal = 0l;
+						for (int i = 0; i < amountPaying.length; i++) {
+							grantTotal+=DataUtil.parseLong(amountPaying[i]);
+				  }
+					receiptInfo.setTotalamount(grantTotal);
+				
+					if(grantTotal<=0) {
+						return receiptInfo;
+					}
+			//End receipt creation
+			
+					
+			//
+					for (int i = 0; i < amountPaying.length; i++) {
+						
+						Feescollection feesCollect = new Feescollection();
+						
+							if(Integer.parseInt(amountPaying[i]) > 0) {
+								
+								feesCollect.setSfsid(DataUtil.parseInt(SfsIds[i]));
+								feesCollect.setAmountpaid(DataUtil.parseLong(amountPaying[i]));
+								feesCollect.setSid(DataUtil.parseInt(sid));
+								feesCollect.setFine(DataUtil.parseLong(fine[i]));
+								feesCollect.setDate(new Date());
+								feesCollect.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+								//feesCollect.setReceiptnumber(receiptInfo.getReceiptnumber());
+								feesCollect.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+								feescollection.add(feesCollect);
+								
+							}
+						
+						
+					}
+					
+					
+					
+					//Pass J.V. : credit the Fees as income & debit the cash
+					
+					int crFees = getLedgerAccountId("feesaccountid");
+					int drAccount = 0;
+					
+						drAccount = getLedgerAccountId(httpSession.getAttribute(username).toString());
+					
+					VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+					
+					transactions.setDraccountid(drAccount);
+					transactions.setCraccountid(crFees);
+					transactions.setDramount(new BigDecimal(receiptInfo.getTotalamount()));
+					transactions.setCramount(new BigDecimal(receiptInfo.getTotalamount()));
+					transactions.setVouchertype(4);
+					transactions.setTransactiondate(receiptInfo.getDate());
+					transactions.setEntrydate(DateUtil.todaysDate());
+					transactions.setNarration("Towards Contribution");
+					transactions.setCancelvoucher("no");
+					transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+					transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					transactions.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+					
+					String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptInfo.getTotalamount()+" where accountdetailsid="+drAccount;
+
+					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptInfo.getTotalamount()+" where accountdetailsid="+crFees;
+					
+					// End J.V
+					createFeesCollection = new feesCollectionDAO().create(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount);
+					
+					if(createFeesCollection) {
+						new SmsService(request, response).sendSMSRemiders(contactNumber, "thanksdonation");
+					}
+					
+						
+		}
+		
+		/*if(studentSfsIds!=null){
 			
 			// create receipt information
 			receiptInfo.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
@@ -254,7 +338,7 @@ public class FeesCollectionService {
 				if(createFeesCollection) {
 					new SmsService(request, response).sendSMSRemiders(contactNumber, "thanksdonation");
 				}
-		}
+		}*/
 		}
 		return receiptInfo;
 	}
@@ -661,12 +745,30 @@ public class FeesCollectionService {
 			String studentName = request.getParameter("studentNameDetails");
 			String date = request.getParameter("dateoffees");
 			Integer totalFees = 0;
+			Integer totalDues = 0;
+			Integer totalAmountPaying = 0;
 			
-			String[] sfsid = request.getParameterValues("studentsfsids");
+			String[] sfsid = request.getParameterValues("sfsids");
 			String[] feesCategroy = request.getParameterValues("feescategory");
 			String[] feesAmount = request.getParameterValues("feesamount");
+			String[] dueamount = request.getParameterValues("dueamount");
+			String[] amountPaying = request.getParameterValues("amountpaying");
 			
-			for (String sfid : sfsid) {
+			for(int i=0;i<amountPaying.length;i++) {
+				
+				if(Integer.parseInt(amountPaying[i]) > 0) {
+					
+					Feescategory studentFees = new Feescategory();
+					studentFees.setFeescategoryname(feesCategroy[i]);
+					studentFees.setAmount(Integer.parseInt(feesAmount[i]));
+					studentFeesCatgory.add(studentFees);
+					totalFees = totalFees + Integer.parseInt(feesAmount[i]);
+					totalDues = totalDues + Integer.parseInt(dueamount[i]);
+					totalAmountPaying = totalAmountPaying + Integer.parseInt(amountPaying[i]);
+				}
+			}
+			
+			/*for (String sfid : sfsid) {
 				String[] id = sfid.split("_");
 				Feescategory studentFees = new Feescategory();
 				int position = Integer.parseInt(id[1]);
@@ -674,7 +776,8 @@ public class FeesCollectionService {
 				studentFees.setAmount(Integer.parseInt(feesAmount[position]));
 				studentFeesCatgory.add(studentFees);
 				totalFees = totalFees + Integer.parseInt(feesAmount[position]);
-			}
+				totalDues = totalDues + Integer.parseInt(dueamount[position]);
+			}*/
 			
 			/*
 			 * for(int i=0;i<feesCategroy.length;i++) {
@@ -688,8 +791,8 @@ public class FeesCollectionService {
 			NumberToWord toWord = new NumberToWord();
 			String grandTotal = "";
 			
-			if(totalFees != 0){
-				grandTotal = toWord.convert(totalFees);
+			if(totalAmountPaying != 0){
+				grandTotal = toWord.convert(totalAmountPaying);
 			}
 			
 			StringBuffer res = new StringBuffer();
@@ -704,10 +807,33 @@ public class FeesCollectionService {
 			grandTotal = res.toString().trim();
 			grandTotal = DataUtil.convertToTitleCase(grandTotal);
 			httpSession.setAttribute("grandTotal", grandTotal+" "+"Only");
+			
+			// Dues Total
+			String grandTotalDues = "";
+			
+			if(totalDues != 0){
+				grandTotalDues = toWord.convert(totalDues);
+			}
+			
+			StringBuffer resDue = new StringBuffer();
+			String[] strArrDue = grandTotalDues.split(" ");
+			
+			for(String str : strArrDue){
+				char[] stringArray = str.trim().toCharArray();
+				stringArray[0] = Character.toUpperCase(stringArray[0]);
+				str = new String(stringArray);
+				resDue.append(str).append(" ");
+			}
+			grandTotalDues = resDue.toString().trim();
+			grandTotalDues = DataUtil.convertToTitleCase(grandTotalDues);
+			httpSession.setAttribute("grandTotalDues", grandTotalDues+" "+"Only");
+			//
 			httpSession.setAttribute("feesdetails", studentFeesCatgory);
 			httpSession.setAttribute("name", studentName);
 			httpSession.setAttribute("date", date);
 			httpSession.setAttribute("totalfees", totalFees);
+			httpSession.setAttribute("totaldues", totalDues);
+			httpSession.setAttribute("totalamountpaying", totalAmountPaying);
 			
 			
 		}

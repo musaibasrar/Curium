@@ -180,29 +180,19 @@
 
 
 <body style="text-align: center" class="bodymargin">
+<div style="border: 1px solid;border-radius: 15px">
 	<form method="post" class="bodymargin">
 		<br>
-		<br>
-		<table width="100%" style="border-collapse: collapse;">
+	<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 130px;">
-				<img src="images/logo.jpg" width="150" height="50"/>
+				<td>
+				<img src="images/bill.jpg" width="600" height="100"/>
 				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Masji-e-Ali</label><br>
-				<label class="addressLine">Arkat Galli, Noor Khan Taleem, Bidar - 585401<br>
-				 </label>
-				 <label class="addressLine" style="text-align: center;padding-left: 100px;">Invoice</label><br>
-				</td>
+				
 			</tr>
-</table>
-
-<TABLE  width="100%" border="1" style="border-collapse:collapse;">
-                <tr>
-                    <td colspan="4" ></td>
-                </tr>
-            </TABLE>
-
+		</table>
+		
+		
 		<table>
 		
 			<tr>
@@ -211,188 +201,51 @@
 			</tr>
 			<tr>
 			
-				<td class="dataTextBoldLeft" style="padding-left: 50px;">Member Name: <c:out value="${name}" />
-				</td>
-				<!-- <td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Invoice
-				</td> -->
-				
-				<td class="dataTextBoldLeft" style="padding-left: 250px;" >Date: <c:out
-						value="${date}" />
+							
+				<td class="dataTextBoldLeft" style="padding-left: 350px;">
+					&nbsp;&nbsp;&nbsp;Date: <c:out value="${date}" />
 				</td>
 
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<%-- <td class="dataTextBoldLeft" style="width: 50%">Fathers
-					Name: <c:out value="${parents.fathersname}" />
-				</td>
-			
-				<td class="dataTextBoldLeft" style="width: 30%">Class & Sec:<c:out value="${student.classstudying}" />
-				</td> --%>
-
-			<%-- <td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date: <c:out
-						value="${date}" />
-				</td> --%>
-			</tr>
-
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
 
 		</table>
-		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
-                <tr>
-
-                    <td colspan="4" ></td>
-
-                </tr>
-            </TABLE>
-
-		<TABLE id="dataTable" width="100%" border="0"
-			style="page-break-after: always; border-collapse: collapse;">
 
 
+			<table>
+		
 			<tr>
-
-				<td class="headerText" style="font-weight: bold">Particulars</td>
-				<td class="headerText" style="font-weight: bold">Amount</td>
-				
-
-			</tr>
+			<td></td>
 			
+			</tr>
 			<tr>
 			
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
+				<td class="dataTextBoldLeft" style="padding-left: 50px;">
+				<br>
+				<label style="font-size: 26px;font-weight: normal;">Received with thanks from&nbsp;</label> 
+					<label style="font-size: 26px;border-bottom: 1px dotted #000;text-decoration: none;">
+					<c:out value="${name}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><br><br>
+					<label style="font-size: 26px;font-weight: normal;">the sum of rupees&nbsp; </label>
+					<label style="font-size: 26px;border-bottom: 1px dotted #000;text-decoration: none;font-weight: bold;">
+					 <c:out value="${grandTotal}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><br>
+				</td>
 			</tr>
+			<tr>
+			<td></td>
+			</tr>
+		</table>
+		
+		<TABLE width="100%" border="0" style="page-break-after: always;">
 
-
-			<c:forEach items="${feesdetails}" var="feesdetails">
 				<tr>
-					<td class="dataText"><c:out
-							value="${feesdetails.feescategoryname}" /></td>
-					<td class="dataText">&#x20B9; <c:out
-							value="${feesdetails.amount}" /></td>
-					
-					<%-- <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
+				
+					<td align="left" style="padding-left: 60px;"><br><br><label style="border-style: solid;padding:15px;font-size: 22px; ">&nbsp; Rs. <c:out value="${totalamountpaying}" />&nbsp;&nbsp;</label><br><br></td>
+					 
+					 <td align="left" style="padding-left: 60px;"><br><br><label style="padding-left: 600;font-size: 22px;">Collector</label><br><br></td>
+					 
+					 <td align="left" style="padding-left: 60px;"><br><br><label style="font-size: 22px;">President/Secretary</label><br><br></td>
+
 				</tr>
-			</c:forEach>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			
-			<tr>
-			
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			</tr>
-			
-			
-			<tr>
-				<!-- <td>&nbsp;</td> -->
-				<td class="headerText" style="font-weight: bold;" >
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				Total</td>
-				<td class="headerText">&#x20B9; <c:out
-						value="${totalfees}" /></td>
-			</tr>
-			
-
-<tr>
-			
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			</tr>
-
-
-<tr>
-
-<td >In Words: Rupees <c:out value="${grandTotal}" /><%-- <c:out value="${duplicate}" /> --%></td>
-<td></td>
-</tr>
-
-<!-- <tr>
-<td align="left">Note: Fees once deposited will not be refunded under any Circumstances</td>
-</tr>
- -->
-<tr>
-<td><br><br></td>
-</tr>
-<tr>
-
-<td><br>Accountant</td>
-
-<td style="padding-right: 200px;">Chairman</td>
-
-</tr>
-		</TABLE>
-
-
-	</form>
+			</TABLE>
+																</form>
+	</div>
 </body>
 </html>

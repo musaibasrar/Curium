@@ -315,7 +315,11 @@
                     var totalSum=0.0;
                     var amountp = $('.amountpaying');
                     jQuery.each(amountp,function(){
-                        sum += parseFloat($(this).val());
+                    	if($(this).val() == '' || $(this).val() == null){
+                    		sum += parseFloat(0);	
+                    	}else{
+                    		sum += parseFloat($(this).val());
+                    	}
                     });
                     var finep = $('.fine');
                     jQuery.each(finep,function(){
@@ -792,7 +796,7 @@ for(Cookie cookie : cookies){
 
 				<thead>
                     <tr >
-                    	<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+                    	<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
                         <th class="headerText">Particulars</th>
                         <th class="headerText">Total Amount/Due Amount</th>                       
                         <th class="headerText">Amount Due to be paid</th>
@@ -806,25 +810,26 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
-								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
+							<%-- <td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
+								id="<c:out value="${studentfeesdetails.sfsid}"/>" 
 								name="studentsfsids" checked
-								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
+								value="<c:out value="${studentfeesdetails.sfsid}"/>_${status.index}" /></td> --%>
 							<td class="dataTextInActive" align="center">
 								<a class="dataTextInActive" style="text-transform:uppercase">
-								<input name="feescategory" type="hidden" id="feescategory" value="${studentfeesdetails.key.feescategory.feescategoryname}" />
-								<c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
+								<input name="feescategory" type="hidden" id="feescategory" value="${studentfeesdetails.feescategory.feescategoryname}" />
+								<c:out	value="${studentfeesdetails.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.idfeescategory}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
-								<c:if test="${studentfeesdetails.value < 0}">
+								<c:if test="${studentfeesdetails.feesamount-studentfeesdetails.feespaid-studentfeesdetails.waiveoff-studentfeesdetails.concession < 0}">
 								
-									<c:out value="${studentfeesdetails.key.feesamount}/Extra:${studentfeesdetails.value}" />
+									<c:out value="${studentfeesdetails.feesamount}/Extra:${studentfeesdetails.feesamount-studentfeesdetails.feespaid-studentfeesdetails.waiveoff-studentfeesdetails.concession}" />
 								</c:if>
-								<c:if test="${studentfeesdetails.value >= 0}">
-									<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
+								<c:if test="${studentfeesdetails.feesamount-studentfeesdetails.feespaid-studentfeesdetails.waiveoff-studentfeesdetails.concession >= 0}">
+									<c:out value="${studentfeesdetails.feesamount}/${studentfeesdetails.feesamount-studentfeesdetails.feespaid-studentfeesdetails.waiveoff-studentfeesdetails.concession}" />
 								</c:if>
 								
-								<input type="hidden" id="dueamount" value="${studentfeesdetails.value}"/>
-								<input type="hidden" id="feesamount" name="feesamount" value="${studentfeesdetails.key.feesamount}"/>
+								<input type="hidden" id="dueamount" name="dueamount" value="${studentfeesdetails.feesamount-studentfeesdetails.feespaid-studentfeesdetails.waiveoff-studentfeesdetails.concession}"/>
+								<input type="hidden" id="feesamount" name="feesamount" value="${studentfeesdetails.feesamount}"/>
+								<input type="hidden" id="sfsids" name="sfsids" value="${studentfeesdetails.sfsid}"/>
 							</td>
 							<td class="dataText" align="center">
 							<input type="text" class="amountpaying" value="0" id="amountpaying" name="amountpaying" onkeyup="checkWithDueAmount(this)">
@@ -839,7 +844,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
 
-                        <td colspan="3" align="right"><b>Total&nbsp;&nbsp;</b></td>
+                        <td colspan="2" align="right"><label style="font-size: 14px;font-weight: bold;">Total&nbsp;&nbsp;</label></td>
                         <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
                     </tr>
                 </tfoot>

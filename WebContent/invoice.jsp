@@ -185,7 +185,7 @@ for(Cookie cookie : cookies){
 
                 </tbody>
             </table>
-            <table width="100%">
+            <!-- <table width="100%">
                <thead>
                     <tr>
 
@@ -196,9 +196,9 @@ for(Cookie cookie : cookies){
 
                 </thead>
 
-            </table>
+            </table> -->
             <TABLE id="dataTable" width="100%" border="1" >
-                <thead>
+                <%-- <thead>
                     <tr >
                         <td class="headerText">Particulars</td>
                         <td class="headerText">Amount</td>
@@ -212,14 +212,14 @@ for(Cookie cookie : cookies){
                         </tr>
                     </c:forEach>
 
-                </tbody>
+                </tbody> --%>
                 <tfoot>
                     <%-- <c:forEach end="1" items="${dispense.dispensedmedicinebills}" var="dispensedmedicinebill"> --%>
-                        <tr>
+                       <%--  <tr>
 
                             <td colspan="3" align="right">Total Amount</td>
                             <td align="center"><c:out value="${totalfees}" /></td>
-                        </tr>
+                        </tr> --%>
                         
                     <%-- </c:forEach> --%>
                     <tr>

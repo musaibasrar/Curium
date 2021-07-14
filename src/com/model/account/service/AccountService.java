@@ -24,6 +24,8 @@ import com.model.account.dto.Accountssgroupmaster;
 import com.model.account.dto.Accountsubgroupmaster;
 import com.model.account.dto.Financialaccountingyear;
 import com.model.account.dto.VoucherEntrytransactions;
+import com.model.sendsms.dao.SmsDAO;
+import com.model.sendsms.service.SmsService;
 import com.util.DataUtil;
 import com.util.DateUtil;
 import com.util.NumberToWord;
@@ -519,6 +521,7 @@ public boolean saveGuests() {
 		String crAmount = DataUtil.emptyString(request.getParameter("cramountpaymentsecond"));
 		String guestsDate = DataUtil.emptyString(request.getParameter("dateofpayment"));
 		String guestsNarration = DataUtil.emptyString(request.getParameter("paymentnarration"));
+		String contactNumber = DataUtil.emptyString(request.getParameter("contactnumber"));
 		
 		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 		
@@ -529,7 +532,7 @@ public boolean saveGuests() {
 		transactions.setVouchertype(Integer.parseInt(guestsVoucher));
 		transactions.setTransactiondate(DateUtil.indiandateParser(guestsDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
-		transactions.setNarration(guestsNarration);
+		transactions.setNarration(guestsNarration+" Contact No: "+contactNumber);
 		transactions.setCancelvoucher("no");
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -550,6 +553,9 @@ public boolean saveGuests() {
 			NumberToWord toWord = new NumberToWord();
 			String grandTotal = DataUtil.convertToTitleCase(toWord.convert(Integer.parseInt(drAmount)));
 			httpSession.setAttribute("grandTotal", grandTotal+" Only");
+			
+			//send SMS
+			new SmsService(request, response).sendSMSRemiders(contactNumber, "thanksdonation");
 			return true;
 		}else {
 			return false;

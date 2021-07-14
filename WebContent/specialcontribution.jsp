@@ -924,11 +924,15 @@ for(Cookie cookie : cookies){
                         <td align="center"><b><input type="text" name="grandTotalAmountCrPayment" id="grandTotalAmountCrPayment" value="0" readonly /></b></td>
                     </tr>
 					<tr>
-						<td><b>Narration&nbsp;&nbsp;</b>
+						<td><b>Guest Name&nbsp;&nbsp;</b>
                         <label><textarea  name="paymentnarration" style="vertical-align: middle;"
-											type="text" class="textField" id="paymentnarration" rows="4" cols="25"
+											type="text" class="textField" id="paymentnarration" rows="2" cols="25"
 											
-											onkeypress="return validateContactNum(this);"></textarea></label></td>
+											onkeypress="return validateContactNum(this);"></textarea></label>
+											&nbsp;&nbsp;<b>Contact Number</b>&nbsp;&nbsp;<input
+									name="contactnumber" type="text" class="textField" id="contactnumber" size="30" maxlength="10" required
+									style="text-transform:uppercase;height: 20px;font-size: 13px;font-weight: bold;"
+									required></td>					
                     </tr>
                     <tr>
                     <td>
