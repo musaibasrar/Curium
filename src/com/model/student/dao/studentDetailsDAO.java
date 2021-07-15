@@ -396,7 +396,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("from Studentfeesstructure sfs where sfs.sid = '"+id+"' and sfs.waiveoff=0 and sfs.academicyear = '"+currentYear+"' order by sfs.sfsid");
+					.createQuery("from Studentfeesstructure sfs where sfs.sid = '"+id+"' and sfs.academicyear = '"+currentYear+"' order by sfs.sfsid");
 			
 			results = query.list();
 			transaction.commit();

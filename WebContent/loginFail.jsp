@@ -171,14 +171,14 @@ form{
 		</div>
 	</div>
 	<!-- Footer -->
-	<div class="container-fluid text-center footer">
+	<!-- <div class="container-fluid text-center footer">
 		<p>
-			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="images/ideoholic.png"> image with a default alignment.</p> --> 
+			<p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="images/ideoholic.png"> image with a default alignment.</p> 
 			
 			<a href="http://www.ideoholic.com" >
 				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="images/ideoholic.png">
 			</a>
 			
-	</div>
+	</div> -->
 </body>
 </html>

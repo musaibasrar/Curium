@@ -678,7 +678,8 @@
             }
             
             function checkWithDueAmount(duePayment){
-            	var dueAmount = parseInt(document.getElementById("dueamount").value);
+            	var rowIndex = duePayment.parentNode.parentNode.rowIndex -1;  
+            	var dueAmount = parseInt(document.getElementById("dueamount_"+rowIndex).value);
             	var payment = parseInt(duePayment.value);
             	
             	if(payment>dueAmount){
@@ -830,6 +831,7 @@ for(Cookie cookie : cookies){
 								<input type="hidden" id="dueamount" name="dueamount" value="${studentfeesdetails.feesamount-studentfeesdetails.feespaid-studentfeesdetails.waiveoff-studentfeesdetails.concession}"/>
 								<input type="hidden" id="feesamount" name="feesamount" value="${studentfeesdetails.feesamount}"/>
 								<input type="hidden" id="sfsids" name="sfsids" value="${studentfeesdetails.sfsid}"/>
+								<input type="hidden" id="dueamount_${status.index}" name="dueamount_${status.index}" value="${studentfeesdetails.feesamount-studentfeesdetails.feespaid-studentfeesdetails.waiveoff-studentfeesdetails.concession}"/>
 							</td>
 							<td class="dataText" align="center">
 							<input type="text" class="amountpaying" value="0" id="amountpaying" name="amountpaying" onkeyup="checkWithDueAmount(this)">

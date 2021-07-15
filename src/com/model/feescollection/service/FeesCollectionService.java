@@ -592,11 +592,11 @@ public class FeesCollectionService {
 		if (httpSession.getAttribute(BRANCHID) != null) {
 
 			String queryMain = "From Parents as parents where";
-			new StandardService(request, response).viewClasses();
-			List<Classsec> classList = (List<Classsec>) httpSession.getAttribute("classdetailslist");
+			//new StandardService(request, response).viewClasses();
+			//List<Classsec> classList = (List<Classsec>) httpSession.getAttribute("classdetailslist");
 			
 			
-			StringBuffer conClassStudying = new StringBuffer();
+			/*StringBuffer conClassStudying = new StringBuffer();
 
 			int i = 0;
 			for (Classsec classOne : classList) {
@@ -610,15 +610,13 @@ public class FeesCollectionService {
 				i++;
 			}
 
-			String classStudying = DataUtil.emptyString(conClassStudying.toString());
+			String classStudying = DataUtil.emptyString(conClassStudying.toString());*/
 			String querySub = "";
 
-			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " parents.Student.classstudying like '" + classStudying
-						+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="
+				querySub = querySub
+						+ " parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="
 						+ Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())
 						+ " order by parents.Student.admissionnumber ASC";
-			}
 
 			if (!"".equalsIgnoreCase(querySub)) {
 				queryMain = queryMain + querySub;
@@ -652,7 +650,7 @@ public class FeesCollectionService {
 				for (Studentfeesstructure studentFeesStructure : studentFeesReport.getStudentFeesStructure()) {
 					totalFeesAmount+=studentFeesStructure.getFeesamount();
 					totalPaidAmount+=studentFeesStructure.getFeespaid();
-					totalDueAmount = totalDueAmount + (studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid());
+					totalDueAmount = totalDueAmount + (studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid()-studentFeesStructure.getConcession()-studentFeesStructure.getWaiveoff());
 				}
 			}
 

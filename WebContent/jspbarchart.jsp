@@ -195,12 +195,12 @@ for(Cookie cookie : cookies){
              <div class="row">
              	
              	<div class="col">
-             		<canvas id="student-monthlyfeeschart" height="300"></canvas>
+             		<canvas id="student-monthlyfeeschart" height="100"></canvas>
              	</div>
              	
-            	<div class="col">
+            	<%-- <div class="col">
             		<canvas id="student-expensechart" height="300"></canvas>
-            	</div>	
+            	</div>	 --%>
              </div>
              
              <%-- <div class="row">
@@ -368,7 +368,7 @@ for(Cookie cookie : cookies){
             }); */
             
           		//Bar Chart for Daily Expense
-        	var totalExpenses = document.getElementById("monthlytotalexpenses").innerHTML;
+        	/* var totalExpenses = document.getElementById("monthlytotalexpenses").innerHTML;
         	var expenselabel = JSON.parse(totalExpenses);
         	
       	 	var currdate = document.getElementById("monthlisttotalexpenses").innerHTML;
@@ -466,7 +466,7 @@ for(Cookie cookie : cookies){
                 } 
                 } 
             });
-            
+             */
             
           //Bar Chart for Monthly fees
         	var monthlyfees = document.getElementById("monthlystudentsfees").innerHTML;
