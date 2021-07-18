@@ -699,7 +699,7 @@ public class AccountService {
 					BigDecimal totalAmount = getTotalBalance(accountDetails,voucherTransactions);
 					
 					accountBalanceMap.put(accountDetails, totalAmount);
-						
+					
 					if(accountDetails.getAccountGroupMaster().getAccountgroupid()==1 || accountDetails.getAccountGroupMaster().getAccountgroupid()==5) {
 						
 						if(totalAmount.signum() >= 0) {
@@ -749,9 +749,9 @@ public class AccountService {
 		
 		for (VoucherEntrytransactions voucherTransaction : voucherTransactions) {
 			
-			if(voucherTransaction.getDraccountid() == accountDetails.getAccountdetailsid()) {
+			if(voucherTransaction.getDraccountid().equals(accountDetails.getAccountdetailsid())) {
 				debitAcc = debitAcc.add(voucherTransaction.getDramount());
-			}else if(voucherTransaction.getCraccountid() == accountDetails.getAccountdetailsid()) {
+			}else if(voucherTransaction.getCraccountid().equals( accountDetails.getAccountdetailsid())) {
 				creditAcc = creditAcc.add(voucherTransaction.getCramount());
 			}
 		}
