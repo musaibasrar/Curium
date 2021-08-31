@@ -12,7 +12,7 @@
     <head>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Curium - School ERP</title>
+        <title>Curium - Educational Institution ERP</title>
         <script type="text/javascript" src="js/openWindow.js"></script>
         <style type="text/css">
             <!--
