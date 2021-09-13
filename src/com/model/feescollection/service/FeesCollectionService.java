@@ -5,6 +5,10 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.model.account.dao.AccountDAO;
+import com.model.account.dto.Financialaccountingyear;
 import com.model.account.dto.VoucherEntrytransactions;
 import com.model.feescategory.dto.Feescategory;
 import com.model.feescollection.dao.feesCollectionDAO;
@@ -32,6 +37,7 @@ import com.model.feesdetails.dto.Feesdetails;
 import com.model.parents.dao.parentsDetailsDAO;
 import com.model.parents.dto.Parents;
 import com.model.sendsms.service.SmsService;
+import com.model.stampfees.service.StampFeesService;
 import com.model.std.dto.Classsec;
 import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
@@ -171,7 +177,47 @@ public class FeesCollectionService {
 			/*Long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid();
 			feesMap.put(singleFeesStructure,totalDueAmount);
 		}*/
-		request.setAttribute("studentfeesdetails", feesstructure);
+		
+		//if the user is collector
+				if("collector".equalsIgnoreCase(httpSession.getAttribute("typeOfUser").toString())) {
+					
+						List<Studentfeesstructure> feesstructureCollector = new LinkedList<Studentfeesstructure>();
+								        
+				        Financialaccountingyear financialYear = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						
+						List<String> months = new ArrayList<String>();
+						String startDate = DateUtil.dateParserddMMYYYY(financialYear.getFinancialstartdate());
+						String endDate = DateUtil.dateParserddMMYYYY(new Date());
+						DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+					    DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MMMM");
+					    YearMonth endMonth = YearMonth.parse(endDate, dateFormatter);
+					    for (YearMonth month = YearMonth.parse(startDate, dateFormatter);! month.isAfter(endMonth); month = month.plusMonths(1)) {
+					    	months.add(month.format(monthFormatter));
+					    }
+						
+						for (Studentfeesstructure studentfeesstructure : feesstructure) {
+								Studentfeesstructure sfs = new Studentfeesstructure();
+								
+									 for (String monthS : months) {
+										 
+										 if(monthS.equalsIgnoreCase(studentfeesstructure.getFeescategory().getFeescategoryname()) && studentfeesstructure.getFeespaid() < studentfeesstructure.getFeesamount()) {
+											 	feesstructureCollector.add(studentfeesstructure);
+										 }
+									}
+						}
+						request.setAttribute("studentfeesdetails", feesstructureCollector);
+					
+				}
+		//End Collector
+		
+		
+		//if the user is Admin
+				if("admin".equalsIgnoreCase(httpSession.getAttribute("typeOfUser").toString())) {
+					request.setAttribute("studentfeesdetails", feesstructure);
+				}
+		
+		//End Admin
+		
 		request.setAttribute("studentNameDetails", request.getParameter("studentName"));
 		request.setAttribute("admnoDetails", request.getParameter("admno"));
 		request.setAttribute("classandsecDetails", request.getParameter("classandsec"));
