@@ -37,13 +37,18 @@ $(document).ready(function() {
 </script>
 
 </head>
-<body>
-
+<body background="images/bg.jpg">
 
 <form id="form1" action="Controller?process=ImportProcess&action=readFile" method="post"  enctype="multipart/form-data">
-<input type="file" name="file" size="50" />
-<br />
+<table width="100%" border="0" align="center">
+<tr>								
+<td><br /><br />
+<input type="file" name="fileToImport" id="fileToImport" accept=".xls,.xlsx"/>
+<br /><br />
 <input type="submit" value="Upload File" />
+</td>
+</tr>
+</table>
 </form>
 </body>
 </html>

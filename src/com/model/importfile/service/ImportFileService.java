@@ -1,25 +1,30 @@
 package com.model.importfile.service;
 
 
-
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.fileupload.FileItem;
@@ -37,6 +42,7 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -59,6 +65,8 @@ public class ImportFileService {
     private static HttpServletResponse response;
     private HttpSession httpSession;
     private String BRANCHID = "branchid";
+    
+
 
 public ImportFileService(HttpServletRequest request, HttpServletResponse response) {
 
@@ -68,16 +76,24 @@ public ImportFileService(HttpServletRequest request, HttpServletResponse respons
     }
 
 XSSFRow row;
-ImportFileDTO importdto = new ImportFileDTO();
 
-public boolean readFile(String fileName) throws FileNotFoundException, IOException {
-    FileInputStream fis;
-    
+public boolean readFile() throws FileNotFoundException, IOException {
+	// Student student = new Student();
+	DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
     List<Student> listStudent = new ArrayList<Student>();
     try {
         System.out.println("-------------------------------READING THE SPREADSHEET-------------------------------------");
-        fis = new FileInputStream("C:/Users/Adeeba/importfile_curium.xlsx");
-        XSSFWorkbook workbookRead = new XSSFWorkbook(fis);
+              
+        List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+		
+		 for (FileItem item : items) {
+	                // Process form file field (input type="file").
+	                String fieldName = item.getFieldName();
+
+	                if (fieldName.equalsIgnoreCase("fileToImport")) {
+        
+        
+        XSSFWorkbook workbookRead = new XSSFWorkbook(item.getInputStream());
         XSSFSheet spreadsheetRead = workbookRead.getSheetAt(0);
 
         Iterator< Row> rowIterator = spreadsheetRead.iterator();
@@ -121,10 +137,10 @@ public boolean readFile(String fileName) throws FileNotFoundException, IOExcepti
             student.setSts(Integer.parseInt(row.getCell(1).getStringCellValue()));
             student.setName(row.getCell(2).getStringCellValue());
             student.setGender(row.getCell(3).getStringCellValue());
-            //student.setDateofbirth(DateUtil.indiandateParser(row.getCell(4).getStringCellValue()));
+            student.setDateofbirth(DateUtil.simpleDateParser((row.getCell(25).getStringCellValue())+"/"+(row.getCell(26).getStringCellValue())+"/"+(row.getCell(27).getStringCellValue())));
             student.setAge(Integer.parseInt(row.getCell(5).getStringCellValue()));
-            student.setPlaceofbirth(row.getCell(6).getStringCellValue());
-           // student.setAdmissiondate(DateUtil.indiandateParser(row.getCell(7).getStringCellValue()));
+            student.setPlaceofbirth (row.getCell(6).getStringCellValue());
+            student.setAdmissiondate(DateUtil.simpleDateParser((row.getCell(28).getStringCellValue())+"/"+(row.getCell(29).getStringCellValue())+"/"+(row.getCell(30).getStringCellValue())));
             student.setClassstudying(row.getCell(8).getStringCellValue());
             student.setClassadmittedin(row.getCell(9).getStringCellValue());
             student.setBloodgroup(row.getCell(10).getStringCellValue());
@@ -140,29 +156,31 @@ public boolean readFile(String fileName) throws FileNotFoundException, IOExcepti
             student.setSpecialcategory(row.getCell(20).getStringCellValue());
             student.setMothertongue(row.getCell(21).getStringCellValue());
             student.setRte(Integer.parseInt(row.getCell(22).getStringCellValue()));
-            //student.setCreateddate(DateUtil.indiandateParser(row.getCell(23).getStringCellValue()));
+            student.setCreateddate(DateUtil.simpleDateParser((row.getCell(31).getStringCellValue())+"/"+(row.getCell(32).getStringCellValue())+"/"+(row.getCell(33).getStringCellValue())));
             student.setRemarks(row.getCell(24).getStringCellValue());
             
            listStudent.add(student);
-          // System.out.println("date of birth***" +row.getCell(4).getCellType());
+           //System.out.println("date of birth***" +((row.getCell(25).getStringCellValue())+"/"+(row.getCell(26).getStringCellValue())+"/"+(row.getCell(27).getStringCellValue())));
         }
         
         
         System.out.println("Values Inserted Successfully");
-        fis.close();
-        
-    } catch (IOException e) {
+	        }
+		 }
+    } catch (FileUploadException e) {
         e.printStackTrace();
     }
      Student student = new Student();
-     student.setStudentexternalid(DataUtil.generateString(1));
+     student.setStudentexternalid(DataUtil.generateString(5));
 	 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	 student.setAdmissionnumber(row.getCell(0).getStringCellValue());
      student.setSts(Integer.parseInt(row.getCell(1).getStringCellValue()));
      student.setName(row.getCell(2).getStringCellValue());
      student.setGender(row.getCell(3).getStringCellValue());
+     student.setDateofbirth(DateUtil.simpleDateParser((row.getCell(25).getStringCellValue())+"/"+(row.getCell(26).getStringCellValue())+"/"+(row.getCell(27).getStringCellValue())));
      student.setAge(Integer.parseInt(row.getCell(5).getStringCellValue()));
      student.setPlaceofbirth(row.getCell(6).getStringCellValue());
+     student.setAdmissiondate(DateUtil.simpleDateParser((row.getCell(28).getStringCellValue())+"/"+(row.getCell(29).getStringCellValue())+"/"+(row.getCell(30).getStringCellValue())));
      student.setClassstudying(row.getCell(8).getStringCellValue());
      student.setClassadmittedin(row.getCell(9).getStringCellValue());
      student.setBloodgroup(row.getCell(10).getStringCellValue());
@@ -174,6 +192,7 @@ public boolean readFile(String fileName) throws FileNotFoundException, IOExcepti
      student.setSpecialcategory(row.getCell(20).getStringCellValue());
      student.setMothertongue(row.getCell(21).getStringCellValue());
      student.setRte(Integer.parseInt(row.getCell(22).getStringCellValue()));
+     student.setCreateddate(DateUtil.simpleDateParser((row.getCell(31).getStringCellValue())+"/"+(row.getCell(32).getStringCellValue())+"/"+(row.getCell(33).getStringCellValue())));
      student.setRemarks(row.getCell(24).getStringCellValue());
     
 	student = new studentDetailsDAO().create(student);
