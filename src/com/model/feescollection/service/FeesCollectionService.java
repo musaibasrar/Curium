@@ -618,6 +618,7 @@ public class FeesCollectionService {
 			}
 		
 			request.setAttribute("studentfeesreportlist", studentFeesReportList);
+			request.setAttribute("reporttype", "For the Year "+httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 		}
 		
 	  }
@@ -906,6 +907,130 @@ public class FeesCollectionService {
 
 			return result;
 		}
+
+		public void getFeesReportMonthly() {
+			
+			
+			//Get Students
+			
+			List<Parents> searchStudentList = new ArrayList<Parents>();
+			
+			if(httpSession.getAttribute(BRANCHID)!=null){
+			
+			String queryMain = "From Parents as parents where ";
+			String querySub = "";
+			
+			
+			querySub = querySub + " parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+
+			if(!"".equalsIgnoreCase(querySub)) {
+				queryMain = queryMain + querySub;
+				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			}
+			
+		}
+			//End Students
+			LocalDate currentDate = LocalDate.now();
+			
+			if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+				
+				List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
+				
+				for (Parents parents : searchStudentList) {
+					
+					StudentFeesReport studentFeesReport = new StudentFeesReport();
+					
+					long id = parents.getStudent().getSid();
+					
+					List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructureMonthly(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), currentDate.getMonth().toString());
+					
+					studentFeesReport.setStudent(parents.getStudent());
+					studentFeesReport.setStudentFeesStructure(feesstructure);
+					
+					studentFeesReportList.add(studentFeesReport);
+				}
+			
+				request.setAttribute("studentfeesreportlist", studentFeesReportList);
+				request.setAttribute("reporttype", "For the month of "+currentDate.getMonth().toString());
+			}
+			
+		  }
+
+		public void getFeesReportDue() {
+			
+			if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+				
+				LocalDate currentDate = LocalDate.now();
+				List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
+				//Get Students
+				
+				List<Parents> searchStudentList = new ArrayList<Parents>();
+				
+				if(httpSession.getAttribute(BRANCHID)!=null){
+				
+				String queryMain = "From Parents as parents where ";
+				String querySub = "";
+				
+				
+				querySub = querySub + " parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+
+				if(!"".equalsIgnoreCase(querySub)) {
+					queryMain = queryMain + querySub;
+					searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+				}
+				
+					}
+				//End Students
+				for (Parents parents : searchStudentList) {
+				
+					
+					StudentFeesReport studentFeesReport = new StudentFeesReport();
+					
+				List<Studentfeesstructure> feesstructure = new LinkedList<Studentfeesstructure>();
+				feesstructure = new studentDetailsDAO().getStudentFeesStructure(parents.getStudent().getSid(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+								
+				
+
+								List<Studentfeesstructure> feesstructureCollector = new LinkedList<Studentfeesstructure>();
+										        
+						        Financialaccountingyear financialYear = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+								
+								List<String> months = new ArrayList<String>();
+								String startDate = DateUtil.dateParserddMMYYYY(financialYear.getFinancialstartdate());
+								
+								Calendar calendar = Calendar.getInstance();
+						        calendar.add(Calendar.MONTH, -1);
+						        
+								String endDate = DateUtil.dateParserddMMYYYY(calendar.getTime());
+								DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+							    DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MMMM");
+							    YearMonth endMonth = YearMonth.parse(endDate, dateFormatter);
+							    for (YearMonth month = YearMonth.parse(startDate, dateFormatter);! month.isAfter(endMonth); month = month.plusMonths(1)) {
+							    	months.add(month.format(monthFormatter));
+							    }
+								
+
+								for (Studentfeesstructure studentfeesstructure : feesstructure) {
+										
+											 for (String monthS : months) {
+												 
+												 if(monthS.equalsIgnoreCase(studentfeesstructure.getFeescategory().getFeescategoryname()) && studentfeesstructure.getFeespaid() < studentfeesstructure.getFeesamount()) {
+													 	
+													    feesstructureCollector.add(studentfeesstructure);
+												 }
+											}
+								}
+								
+								studentFeesReport.setStudent(parents.getStudent());
+								studentFeesReport.setStudentFeesStructure(feesstructureCollector);
+								
+								studentFeesReportList.add(studentFeesReport);
+								request.setAttribute("studentfeesreportlist", studentFeesReportList);
+								String date = new SimpleDateFormat("MMM").format(calendar.getTime());
+								request.setAttribute("reporttype", "Dues Till "+date);
+						}
+				}
+			}
 	
 	}
 

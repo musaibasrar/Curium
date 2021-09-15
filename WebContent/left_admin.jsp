@@ -494,6 +494,14 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="Controller?process=AccountProcess&action=specialContribution" style="font-size: 12px;">Special Contribution</a>
             			</td>
             		</tr>
+            		
+                </table>
+            </div>
+            
+             <h5 style="font-size: 12px"><a href="#">Reports</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesStructure" style="font-size: 12px;">Contribution Structure</a>
@@ -511,11 +519,21 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="Controller?process=FeesCollection&action=searchFeesReport" style="font-size: 12px;">Contribution Report</a>
+            				 <a target="mainFrame" href="Controller?process=FeesCollection&action=searchFeesReportMonthly" style="font-size: 12px;">Monthly Contribution</a>
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Controller?process=FeesCollection&action=searchFeesReport" style="font-size: 12px;">Yearly Contribution</a>
+            			</td>
+            		</tr>
+            		            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px;">
+            				 <a target="mainFrame" href="Controller?process=FeesCollection&action=searchFeesReportDue" style="font-size: 12px;">Due Contribution</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px;background-color: #f5f8f9;">
             				<a target="mainFrame" href="Controller?process=FeesProcess&action=searchFeesWaiveoffReport" style="font-size: 12px;">Waive off Report</a>
             			</td>
             		</tr>

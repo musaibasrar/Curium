@@ -578,7 +578,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Contribution Report</td>
+					<td class="headerTD">Contribution Report : ${reporttype}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -623,15 +623,27 @@ for(Cookie cookie : cookies){
 												${studentfeescatagorydetails.feescategory.feescategoryname}:&nbsp;&nbsp;&nbsp;	
 											</td>
 											<td align="left">
-												${studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid}/${studentfeescatagorydetails.feesamount}
+												<c:if test="${studentfeescatagorydetails.feespaid > studentfeescatagorydetails.feesamount}">
+													0/${studentfeescatagorydetails.feesamount} Additional: ${studentfeescatagorydetails.feespaid-studentfeescatagorydetails.feesamount}
+												</c:if>
+												<c:if test="${studentfeescatagorydetails.feespaid <= studentfeescatagorydetails.feesamount}">
+													${studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid}/${studentfeescatagorydetails.feesamount}
+												</c:if>
+												
 											</td>
 										</tr>
 									</table>
-									<c:set var="DueAmount" value="${DueAmount+studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid}" />
+									
+									<c:if test="${studentfeescatagorydetails.feespaid <= studentfeescatagorydetails.feesamount}">
+										<c:set var="DueAmount" value="${DueAmount+studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid}" />
+									</c:if>
+									
 									<c:set var="TotalAmount" value="${TotalAmount+studentfeescatagorydetails.feesamount}" />
 									
 									<c:set var="TotalPaidAmount" value="${TotalPaidAmount+studentfeescatagorydetails.feespaid}" />
-									<c:set var="TotalDueAmount" value="${TotalDueAmount+(studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid)}" />
+									<c:if test="${studentfeescatagorydetails.feespaid <= studentfeescatagorydetails.feesamount}">
+										<c:set var="TotalDueAmount" value="${TotalDueAmount+(studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid)}" />
+									</c:if>
 									<c:set var="TotalSum" value="${TotalSum+studentfeescatagorydetails.feesamount}" />
 								</c:forEach>
 							</td>

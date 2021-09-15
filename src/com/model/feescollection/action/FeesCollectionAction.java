@@ -44,17 +44,29 @@ public class FeesCollectionAction {
                             url = undoFeesReceipt();
                         }else if (action.equalsIgnoreCase("searchFeesReport")) {
                             url = searchFeesReport();
-                        }else if (action.equalsIgnoreCase("searchFeesReport")) {
-                            url = searchFeesReport();
+                        }else if (action.equalsIgnoreCase("searchFeesReportMonthly")) {
+                            url = searchFeesReportMonthly();
                         }else if (action.equalsIgnoreCase("generateInvoice")) {
                             url = generateInvoice();
                         }else if (action.equalsIgnoreCase("printInvoice")) {
                             url = printInvoice();
+                        }else if (action.equalsIgnoreCase("searchFeesReportDue")) {
+                            url = searchFeesReportDue();
                         }
                 return url;
         }
 
-        private String printInvoice() {
+        private String searchFeesReportDue() {
+        	new FeesCollectionService(request, response).getFeesReportDue();
+            return "feesreport.jsp";
+		}
+
+		private String searchFeesReportMonthly() {
+            new FeesCollectionService(request, response).getFeesReportMonthly();
+            return "feesreport.jsp";
+    }
+
+		private String printInvoice() {
 			return "printinvoice.jsp";
 		}
 
