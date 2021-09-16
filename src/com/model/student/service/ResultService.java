@@ -651,7 +651,7 @@ public class ResultService {
                  httpSession.setAttribute("resultcentername",  "Center Code/Name:  ALL");
              }
              
-             if(examLevel.equalsIgnoreCase("ALL")) {
+             if(examLevel.equalsIgnoreCase("ALL") || "".equalsIgnoreCase(examLevel)) {
             	 httpSession.setAttribute("resultexamlevel", "Examination Code:  ALL");
              }else {
             	 httpSession.setAttribute("resultexamlevel", "Examination Code:  "+examLevelCodeName[0]);

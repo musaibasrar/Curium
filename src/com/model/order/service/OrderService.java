@@ -95,6 +95,8 @@ public class OrderService {
         String[] quantity = request.getParameterValues("updatequantity");
         String[] price = request.getParameterValues("updateprice");
         String[] discount = request.getParameterValues("updatediscount");
+        String[] purchaseddate = request.getParameterValues("updatepurchaseddate");
+        String[] createddate = request.getParameterValues("updatecreateddate");
         
         if(booksIds!=null){
             
@@ -110,6 +112,8 @@ public class OrderService {
                 book.setPrice(Float.parseFloat(price[Integer.valueOf(bookId[1])]));
                 book.setLanguage(language[Integer.valueOf(bookId[1])]);
                 book.setDiscount(Integer.parseInt(discount[Integer.valueOf(bookId[1])]));
+                book.setPurchaseddate(DateUtil.datePars(purchaseddate[Integer.valueOf(bookId[1])]));
+                book.setCreateddate(DateUtil.datePars(createddate[Integer.valueOf(bookId[1])]));
                 book.setIsbn("DEFAULT");
                 booksList.add(book);
             }

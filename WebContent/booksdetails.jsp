@@ -835,6 +835,8 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Quantity</th>
                             <th title="click to sort" class="headerText">Price/Book&nbsp;</th>
                             <th title="click to sort" class="headerText">Discount&nbsp;</th>
+                            <th title="click to sort" class="headerText" style="display: none;">Purchased Date&nbsp;</th>
+                            <th title="click to sort" class="headerText" style="display: none;">Created Date &nbsp;</th>
                             <th title="click to sort" class="headerText">Total Price&nbsp;</th>
                         </tr>
                     </thead>
@@ -851,6 +853,8 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.quantity}"/>" id="updatequantity" name="updatequantity" onkeypress="return event.charCode >= 00 && event.charCode <=57"><label style="display: none;"><c:out value="${books.quantity}"/></label></td>
                                 <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.price}"/>" id="updateprice" name="updateprice" onkeypress="return event.charCode >= 00 && event.charCode <=57"><label style="display: none;"><c:out value="${books.price}"/></label></td>
                                 <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.discount}"/>" id="updatediscount" name="updatediscount" onkeypress="return event.charCode >= 00 && event.charCode <=57"><label style="display: none;"><c:out value="${books.discount}"/></label></td>
+                                <td class="dataText" style="display: none;"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.purchaseddate}"/>" id="updatepurchaseddate" name="updatepurchaseddate" ></td>
+                                <td class="dataText" style="display: none;"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.createddate}"/>" id="updatecreateddate" name="updatecreateddate" ></td>
                                 <td class="dataText" style="text-align: right">
                                 	<c:set var="itemTotal" value="${itemTotal + ((books.quantity * books.price) - (books.quantity * books.price)*books.discount/100)}" />
                                 	<fmt:setLocale value="en_IN" scope="request"/>
