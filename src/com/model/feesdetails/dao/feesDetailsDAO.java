@@ -327,4 +327,31 @@ public class feesDetailsDAO {
 			
 		}
 
+		public List<Student> readListOfStudentsByUserName(int branchId, String user) {
+            List<Student> results = new ArrayList<Student>();
+
+            try {
+                    // this.session =
+                    // HibernateUtil.getSessionFactory().openCurrentSession();
+                    transaction = session.beginTransaction();
+                    if("admin".equalsIgnoreCase(user)) {
+                    	results = (List<Student>) session.createQuery("FROM Student s where s.archive=0 and s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")")
+                                .list();
+                    }else {
+                    	results = (List<Student>) session.createQuery("FROM Student s where s.archive=0 and s.nationality='"+user+"' and s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")")
+                                .list();
+                    }
+                    
+                    transaction.commit();
+
+            } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                    
+                    hibernateException.printStackTrace();
+
+            } finally {
+        			HibernateUtil.closeSession();
+                    return results;
+            }
+    }
+
 }

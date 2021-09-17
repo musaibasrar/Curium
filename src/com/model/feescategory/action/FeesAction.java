@@ -114,7 +114,7 @@ public class FeesAction {
         private String feesCollect() {
                 
         new FeesService(request, response).viewFees();
-        new FeesService(request, response).viewAllStudentsList();
+        new FeesService(request, response).viewAllStudentsListByUserName();
         return "feesCollection.jsp";
     
         }

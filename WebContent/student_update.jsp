@@ -553,7 +553,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 
-<tr>
+						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
@@ -576,6 +576,24 @@ for(Cookie cookie : cookies){
 									id="email" size="30" data-validate="validate(required)">
 
 							</label></td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td width="16%" class="alignRight">Collector&nbsp;</td>
+							<td align="left"><label>
+										<select name="collector" style="width: 210px;">
+										<option value="${student.nationality}">${student.nationality}</option>
+										<option value="Collector1">Collector 1</option>
+										<option value="Collector2">Collector 2</option>
+										</select>
+							</label></td>
+							
 						</tr>
 
 

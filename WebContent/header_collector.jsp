@@ -147,6 +147,24 @@ for(Cookie cookie : cookies){
 									Special Collection
 								</a>
 							</td>
+							
+							<td>
+								<a target="mainFrame"
+								href="Controller?process=FeesCollection&action=searchFeesReportMonthly"> <img
+									src="images/monthly.svg" width="18" height="18"
+									alt="Create Voucher" style="vertical-align: bottom;" />
+									Monthly Contribution
+								</a>
+							</td>
+							
+							<td>
+								<a target="mainFrame"
+								href="Controller?process=FeesCollection&action=searchFeesReportDue"> <img
+									src="images/due.svg" width="18" height="18"
+									alt="Create Voucher" style="vertical-align: bottom;" />
+									Due Collection
+								</a>
+							</td>
 
 
 							<!-- <td><a target="mainFrame"

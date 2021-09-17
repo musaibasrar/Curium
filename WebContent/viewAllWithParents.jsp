@@ -315,6 +315,29 @@
                     return false;
 
                 });
+                
+                $(".download").button().click(function() {
+        			downloadMember();
+
+        		});
+                
+                function downloadMember() {
+            		var form1 = document.getElementById("form1");
+            		form1.action = "Controller?process=StudentProcess&action=multiClassSearch";
+            		form1.submit();
+            	}
+                
+                $(".update").button().click(function() {
+        			updateMember();
+
+        		});
+                
+                function updateMember() {
+            		var form1 = document.getElementById("form1");
+            		form1.action = "Controller?process=StudentProcess&action=updateMember";
+            		form1.submit();
+            	}
+                
                 $('#chckHead').click(function () {
                     var length = $('.chcktbl:checked').length;
                     var trLength=$('.trClass').length;
@@ -407,6 +430,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Referral</th>
                             <th title="click to sort" class="headerText">Contact Number&nbsp;</th>
                             <th title="click to sort" class="headerText">Contribution&nbsp;</th>
+                            <th title="click to sort" class="headerText">Collector&nbsp;</th>
                         </tr>
                     </thead>
 
@@ -420,12 +444,22 @@ for(Cookie cookie : cookies){
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.classstudying}"/></td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.classadmittedin}"/></td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.gender}"/></td>
+                                <td class="dataText" style="text-transform:uppercase">
+                                <select name="collector_${Parents.student.sid}" style="background: #E3EFFF;">
+										<option selected value="${Parents.student.nationality}">${Parents.student.nationality}</option>
+										<option value="Collector1">Collector 1</option>
+										<option value="Collector2">Collector 2</option>
+										</select>
+                               </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                     <tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><input value="Archive" type="submit" id="delete"/> </td>
-                    
+                    			
+                            <td  class="footerTD" colspan="2" >
+                            <button id="update"  class="update">Update</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input value="Archive" type="submit" id="delete"/> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button id="download"  class="download">Download</button> </td>
                         </tr></tfoot>
                 </table>
 

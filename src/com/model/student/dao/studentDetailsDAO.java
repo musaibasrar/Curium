@@ -645,5 +645,29 @@ public class studentDetailsDAO {
 			return results;
 		}
 	}
+
+	
+	public boolean updateMultiple(List<Student> studentList) {
+		
+			boolean result = false;
+		try {
+			// this.session = sessionFactory.openCurrentSession();
+			transaction = session.beginTransaction();
+			
+			for (Student student2 : studentList) {
+				Query queryUpdate = session
+						.createQuery("update Student set nationality = '"+student2.getNationality()+"'  where sid = '"+student2.getSid()+"'");
+				queryUpdate.executeUpdate();
+			}
+			transaction.commit();
+			result = true;
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return result;
+		}
+	}
 	
 }

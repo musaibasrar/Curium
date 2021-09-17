@@ -9,8 +9,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -132,6 +134,12 @@ public class StudentService {
 		                	student.setCreateddate(DateUtil.indiandateParser(item.getString())); 
 						  
 		                } 
+		                
+		                if (fieldName.equalsIgnoreCase("collector")) {
+		                    
+		                	student.setNationality(DataUtil.emptyString(item.getString()));
+
+		                }
 
 						/*
 						 * if (fieldName.equalsIgnoreCase("addclass")) {
@@ -806,6 +814,12 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("createddate")) {
 							 student.setCreateddate(DateUtil.indiandateParser(item.getString())); 
 							 }
+		                
+		                if (fieldName.equalsIgnoreCase("collector")) {
+		                    
+		                	student.setNationality(DataUtil.emptyString(item.getString()));
+
+		                }
 						/*
 						 * 
 						 * if (fieldName.equalsIgnoreCase("name")) {
@@ -1638,5 +1652,23 @@ public class StudentService {
 		}
 		return result;
 	}
+
+	public boolean updateMember() {
+		
+		String[] studentIds = request.getParameterValues("studentIDs");
+		List<Student> studentList = new ArrayList<Student>();
+		
+		int i=0;
+		if (studentIds != null) {
+			List<Integer> ids = new ArrayList();
+			for (String id : studentIds) {
+				Student student = new Student();
+				student.setSid(Integer.valueOf(id));
+				student.setNationality(request.getParameter("collector_"+id));
+				studentList.add(student);
+			}
+		}
+ 			return new studentDetailsDAO().updateMultiple(studentList);
+		}
 	
 }

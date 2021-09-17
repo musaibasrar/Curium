@@ -300,4 +300,26 @@ public class FeesService {
 		
 		
 	}
+
+
+	public boolean viewAllStudentsListByUserName() {
+
+        boolean result = false;
+        List<Student> list = new ArrayList<Student>();
+        try {
+        	
+        	
+        	if("collector".equalsIgnoreCase(httpSession.getAttribute("typeOfUser").toString())) {
+				
+				list = new feesDetailsDAO().readListOfStudentsByUserName(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),httpSession.getAttribute("username").toString());
+        	}else {
+        		list = new feesDetailsDAO().readListOfStudentsByUserName(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),"admin");
+        	}
+                request.setAttribute("studentListFeesCollection", list);
+                result = true;
+        } catch (Exception e) {
+                result = false;
+        }
+        return result;
+}
 }

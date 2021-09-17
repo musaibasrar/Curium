@@ -916,17 +916,33 @@ public class FeesCollectionService {
 			List<Parents> searchStudentList = new ArrayList<Parents>();
 			
 			if(httpSession.getAttribute(BRANCHID)!=null){
-			
-			String queryMain = "From Parents as parents where ";
-			String querySub = "";
-			
-			
-			querySub = querySub + " parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+				
+				
+				if("collector".equalsIgnoreCase(httpSession.getAttribute("typeOfUser").toString())) {
+					String queryMain = "From Parents as parents where ";
+					String querySub = "";
+					
+					
+					querySub = querySub + " parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" and  parents.Student.nationality='"+httpSession.getAttribute(username).toString()+"' order by parents.Student.admissionnumber ASC";
 
-			if(!"".equalsIgnoreCase(querySub)) {
-				queryMain = queryMain + querySub;
-				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
-			}
+					if(!"".equalsIgnoreCase(querySub)) {
+						queryMain = queryMain + querySub;
+						searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+					}
+				}else {
+					String queryMain = "From Parents as parents where ";
+					String querySub = "";
+					
+					
+					querySub = querySub + " parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+
+					if(!"".equalsIgnoreCase(querySub)) {
+						queryMain = queryMain + querySub;
+						searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+					}
+				}
+			
+			
 			
 		}
 			//End Students
@@ -968,19 +984,65 @@ public class FeesCollectionService {
 				
 				if(httpSession.getAttribute(BRANCHID)!=null){
 				
-				String queryMain = "From Parents as parents where ";
-				String querySub = "";
+			
 				
-				
-				querySub = querySub + " parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+				if("collector".equalsIgnoreCase(httpSession.getAttribute("typeOfUser").toString())) {
+					String queryMain = "From Parents as parents where ";
+					String querySub = "";
+					
+					
+					querySub = querySub + " parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" and  parents.Student.nationality='"+httpSession.getAttribute(username).toString()+"' order by parents.Student.admissionnumber ASC";
 
-				if(!"".equalsIgnoreCase(querySub)) {
-					queryMain = queryMain + querySub;
-					searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+					if(!"".equalsIgnoreCase(querySub)) {
+						queryMain = queryMain + querySub;
+						searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+					}
+					
+				}else {
+					String queryMain = "From Parents as parents where ";
+					String querySub = "";
+					
+					
+					querySub = querySub + " parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+
+					if(!"".equalsIgnoreCase(querySub)) {
+						queryMain = queryMain + querySub;
+						searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+					}
+					
 				}
+				
+				
+				
 				
 					}
 				//End Students
+				
+				//get months
+				
+				Financialaccountingyear financialYear = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				
+				List<String> months = new ArrayList<String>();
+				String startDate = DateUtil.dateParserddMMYYYY(financialYear.getFinancialstartdate());
+				
+				Calendar calendar = Calendar.getInstance();
+		        calendar.add(Calendar.MONTH, -1);
+		        
+				String endDate = DateUtil.dateParserddMMYYYY(calendar.getTime());
+				DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			    DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MMMM");
+			    YearMonth endMonth = YearMonth.parse(endDate, dateFormatter);
+			    for (YearMonth month = YearMonth.parse(startDate, dateFormatter);! month.isAfter(endMonth); month = month.plusMonths(1)) {
+			    	months.add(month.format(monthFormatter));
+			    }
+			    
+
+			    String date = new SimpleDateFormat("MMM").format(calendar.getTime());
+				request.setAttribute("reporttype", "Dues Till "+date);
+			    
+			    //
+				
+				
 				for (Parents parents : searchStudentList) {
 				
 					
@@ -992,23 +1054,6 @@ public class FeesCollectionService {
 				
 
 								List<Studentfeesstructure> feesstructureCollector = new LinkedList<Studentfeesstructure>();
-										        
-						        Financialaccountingyear financialYear = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-								
-								List<String> months = new ArrayList<String>();
-								String startDate = DateUtil.dateParserddMMYYYY(financialYear.getFinancialstartdate());
-								
-								Calendar calendar = Calendar.getInstance();
-						        calendar.add(Calendar.MONTH, -1);
-						        
-								String endDate = DateUtil.dateParserddMMYYYY(calendar.getTime());
-								DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-							    DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MMMM");
-							    YearMonth endMonth = YearMonth.parse(endDate, dateFormatter);
-							    for (YearMonth month = YearMonth.parse(startDate, dateFormatter);! month.isAfter(endMonth); month = month.plusMonths(1)) {
-							    	months.add(month.format(monthFormatter));
-							    }
-								
 
 								for (Studentfeesstructure studentfeesstructure : feesstructure) {
 										
@@ -1020,15 +1065,20 @@ public class FeesCollectionService {
 												 }
 											}
 								}
+									
+									if(!feesstructureCollector.isEmpty()) {
+										
+										studentFeesReport.setStudent(parents.getStudent());
+										studentFeesReport.setStudentFeesStructure(feesstructureCollector);
+									    studentFeesReportList.add(studentFeesReport);
+									    
+									}
 								
-								studentFeesReport.setStudent(parents.getStudent());
-								studentFeesReport.setStudentFeesStructure(feesstructureCollector);
-								
-								studentFeesReportList.add(studentFeesReport);
-								request.setAttribute("studentfeesreportlist", studentFeesReportList);
-								String date = new SimpleDateFormat("MMM").format(calendar.getTime());
-								request.setAttribute("reporttype", "Dues Till "+date);
+									
+
 						}
+						
+						request.setAttribute("studentfeesreportlist", studentFeesReportList);
 				}
 			}
 	

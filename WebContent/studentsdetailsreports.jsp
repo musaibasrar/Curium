@@ -514,12 +514,12 @@ for(Cookie cookie : cookies){
 		</div> -->
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
-			<div id="tabs">
+			<%-- <div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Members Details Report</a></li>
 
 				</ul>
-				<div id="tabs-1">
+				 <div id="tabs-1">
 					<table>
 
 						<tr>
@@ -537,7 +537,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 
-						<%-- <tr>
+						<tr>
 							<td class="alignRight">Class &nbsp;</td>
 							<td>
 							<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -572,7 +572,7 @@ for(Cookie cookie : cookies){
 
 								</select>
 							</label>
-						</tr> --%>
+						</tr>
 
 						<tr>
 							<td><br /></td>
@@ -598,14 +598,14 @@ for(Cookie cookie : cookies){
 					
 					
 
-				</div>
+				</div> --%>
 			</div>
 		</div>
 
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Search result</td>
+					<td class="headerTD">Members Details Report</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"

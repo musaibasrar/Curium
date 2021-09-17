@@ -799,6 +799,25 @@
 							</label> </td>
 
 						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						
+						<tr>
+							<td class="alignLeft">Collector&nbsp;</td>
+							<td ><label> 
+									<select name="collector" id="collector"  style="width: 240px;font-size: 13px;">
+										<option></option>
+										<option value="Collector1">Collector 1</option>
+										<option value="Collector2">Collector 2</option>
+										</select>
+							</label> </td>
+						</tr>
 
 						<tr>
 							<td><br /></td>
@@ -806,7 +825,6 @@
 						<!-- <tr>
 							<td><br /></td>
 						</tr> -->
-						
 						<%-- <tr>
 							
 							<td   class="alignLeft">Date of admission&nbsp;</td>

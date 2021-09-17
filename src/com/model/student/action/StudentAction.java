@@ -77,12 +77,23 @@ public class StudentAction {
                     url = advanceSearchStudents();
                 }else if (action.equalsIgnoreCase("multiClassSearch")) {
                     url = multiClassSearch();
+                }else if (action.equalsIgnoreCase("updateMember")) {
+                    url = updateMember();
             }
                 return url;
         }
         
 
-    private String multiClassSearch() {
+    private String updateMember() {
+        if(new StudentService(request, response).updateMember()) {
+        	return "Controller?process=StudentProcess&action=viewAll";
+        }else {
+        	return "error.jsp";
+        }
+        
+    	}
+
+	private String multiClassSearch() {
 
         new StampFeesService(request, response).multiClassSearch();
         return "studentsdetailsreports.jsp";

@@ -601,7 +601,8 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsReports" style="font-size: 12px;">Member Details</a>
+            				 <!-- <a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsReports" style="font-size: 12px;">Member Details</a> -->
+            				 <a target="mainFrame" href="Controller?process=StudentProcess&action=multiClassSearch" style="font-size: 12px;">Member Details</a>
             			</td>
             		</tr>
             		

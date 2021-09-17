@@ -495,6 +495,12 @@ for(Cookie cookie : cookies){
                             	<c:out default="" value="${student.bloodgroup}" />
                             </td>
                         </tr>  
+                        <tr>
+                            <td width="25%"  class="alignLeft" height="50" >Collector</td>
+                            <td width="25%"  class="tablerows" >
+                              <c:out default="" value="${student.nationality}" />
+                            </td>
+                        </tr>  
                         <%-- 
                           
                         <tr>
