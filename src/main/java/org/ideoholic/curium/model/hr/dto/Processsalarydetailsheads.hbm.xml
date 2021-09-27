@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 30 Apr, 2018 6:08:18 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.hr.dto.Processsalarydetailsheads" table="hr_processsalarydetailsheads">
+    <class name="org.ideoholic.curium.model.hr.dto.Processsalarydetailsheads" table="hr_processsalarydetailsheads">
         <id name="idprocesssalarydetailsheads" type="java.lang.Integer">
             <column name="idprocesssalarydetailsheads" />
             <generator class="identity" />
@@ -23,7 +23,7 @@
           <property name="branchid" type="int">
             <column name="branchid" />
         </property>
-         <many-to-one name="processsalarydetails" class="com.model.hr.dto.Processsalarydetails"
+         <many-to-one name="processsalarydetails" class="org.ideoholic.curium.model.hr.dto.Processsalarydetails"
             column="idprocesssalary" lazy="false" />
     </class>
 </hibernate-mapping>

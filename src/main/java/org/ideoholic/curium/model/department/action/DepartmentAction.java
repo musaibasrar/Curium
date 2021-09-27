@@ -1,12 +1,12 @@
-package com.model.department.action;
+package org.ideoholic.curium.model.department.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.department.service.DepartmentService;
-import com.model.employee.service.EmployeeService;
-import com.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.department.service.DepartmentService;
+import org.ideoholic.curium.model.employee.service.EmployeeService;
+import org.ideoholic.curium.model.feescategory.service.FeesService;
 
 public class DepartmentAction {
 

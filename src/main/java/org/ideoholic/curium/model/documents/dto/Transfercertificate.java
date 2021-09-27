@@ -1,4 +1,4 @@
-package com.model.documents.dto;
+package org.ideoholic.curium.model.documents.dto;
 
 // default package
 // Generated 21 Mar, 2018 9:55:30 AM by Hibernate Tools 4.0.0

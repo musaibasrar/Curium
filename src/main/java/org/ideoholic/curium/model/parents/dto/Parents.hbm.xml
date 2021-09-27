@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 25 Sep, 2014 6:35:53 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.model.parents.dto.Parents" table="parents">
+    <class name="org.ideoholic.curium.model.parents.dto.Parents" table="parents">
         <id name="pid" type="java.lang.Integer">
             <column name="PID" />
             <!-- <generator class="assigned" /> -->
@@ -71,7 +71,7 @@
             <column name="motherscaste" length="15" />
         </property> 
         
-        <many-to-one name="Student" class="com.model.student.dto.Student"
+        <many-to-one name="Student" class="org.ideoholic.curium.model.student.dto.Student"
             column="sid" unique="true" not-null="true" lazy="false"
             cascade="all" />
     </class>

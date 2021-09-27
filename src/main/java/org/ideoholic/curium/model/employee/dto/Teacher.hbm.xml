@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 20 Jan, 2018 9:49:29 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.employee.dto.Teacher" table="teacher">
+    <class name="org.ideoholic.curium.model.employee.dto.Teacher" table="teacher">
         <id name="tid" type="java.lang.Integer">
             <column name="tid" />
             <generator class="identity" />

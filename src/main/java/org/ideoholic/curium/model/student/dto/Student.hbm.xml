@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 14 Feb, 2018 12:05:33 AM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.student.dto.Student" table="student" >
+    <class name="org.ideoholic.curium.model.student.dto.Student" table="student" >
         <id name="sid" type="java.lang.Integer">
             <column name="sid" />
             <generator class="identity" />
@@ -183,10 +183,10 @@
          <property name="bankifsc" type="string">
             <column name="bankifsc" length="50" />
         </property>   
-         <!-- <many-to-one name="Pudetails" class="com.model.pudetails.dto.Pudetails"
+         <!-- <many-to-one name="Pudetails" class="org.ideoholic.curium.model.pudetails.dto.Pudetails"
             column="pudetailsid" unique="true" not-null="true" lazy="false"
             cascade="all" />
-          <many-to-one name="degreedetails" class="com.model.degreedetails.dto.Degreedetails"
+          <many-to-one name="degreedetails" class="org.ideoholic.curium.model.degreedetails.dto.Degreedetails"
             column="degreedetailsid" unique="true" not-null="true" lazy="false"
             cascade="all" /> -->
     </class>

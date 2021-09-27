@@ -1,4 +1,4 @@
-package com.model.mess.card.dto;
+package org.ideoholic.curium.model.mess.card.dto;
 
 import java.util.Date;
 

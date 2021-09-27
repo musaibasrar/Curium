@@ -1,4 +1,4 @@
-package com.model.feesdetails.service;
+package org.ideoholic.curium.model.feesdetails.service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,14 +22,14 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.model.feescollection.dto.Receiptinfo;
-import com.model.feesdetails.dao.feesDetailsDAO;
-import com.model.feesdetails.dto.Feesdetails;
-import com.model.parents.dto.Parents;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
-import com.model.user.dao.UserDAO;
-import com.util.DataUtil;
+import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
+import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.user.dao.UserDAO;
+import org.ideoholic.curium.util.DataUtil;
 
 public class FeesDetailsService {
 	

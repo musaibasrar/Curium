@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 16 Jan, 2015 12:53:36 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.department.dto.Department" table="department" >
+    <class name="org.ideoholic.curium.model.department.dto.Department" table="department" >
         <id name="depid" type="java.lang.Integer">
             <column name="depid" />
             <generator class="identity" />

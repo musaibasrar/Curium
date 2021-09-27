@@ -1,4 +1,4 @@
-package com.controller;
+package org.ideoholic.curium.controller;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -21,7 +21,7 @@ import java.util.Map;
 
 import org.apache.commons.net.ftp.FTPClient;
 
-import com.model.sendsms.dao.SmsDAO;
+import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
 
 public class test {
 

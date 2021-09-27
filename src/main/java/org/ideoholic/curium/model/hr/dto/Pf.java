@@ -1,4 +1,4 @@
-package com.model.hr.dto;
+package org.ideoholic.curium.model.hr.dto;
 
 // default package
 // Generated 24 Apr, 2018 1:06:54 AM by Hibernate Tools 4.0.0

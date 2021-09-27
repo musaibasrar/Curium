@@ -1,4 +1,4 @@
-package com.model.std.dao;
+package org.ideoholic.curium.model.std.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,15 +6,15 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.util.Session;
+import org.ideoholic.curium.util.Session;
 import org.hibernate.SessionFactory;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
 
-import com.model.std.dto.Classhierarchy;
-import com.model.std.dto.Classsec;
-import com.model.student.dto.Student;
-import com.util.HibernateUtil;
+import org.ideoholic.curium.model.std.dto.Classhierarchy;
+import org.ideoholic.curium.model.std.dto.Classsec;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.util.HibernateUtil;
 
 public class StandardDetailsDAO {
 

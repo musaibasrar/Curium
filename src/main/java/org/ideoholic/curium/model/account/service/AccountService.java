@@ -1,4 +1,4 @@
-package com.model.account.service;
+package org.ideoholic.curium.model.account.service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,16 +16,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.account.dao.AccountDAO;
-import com.model.account.dto.Accountdetails;
-import com.model.account.dto.Accountdetailsbalance;
-import com.model.account.dto.Accountgroupmaster;
-import com.model.account.dto.Accountssgroupmaster;
-import com.model.account.dto.Accountsubgroupmaster;
-import com.model.account.dto.Financialaccountingyear;
-import com.model.account.dto.VoucherEntrytransactions;
-import com.util.DataUtil;
-import com.util.DateUtil;
+import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.Accountdetails;
+import org.ideoholic.curium.model.account.dto.Accountdetailsbalance;
+import org.ideoholic.curium.model.account.dto.Accountgroupmaster;
+import org.ideoholic.curium.model.account.dto.Accountssgroupmaster;
+import org.ideoholic.curium.model.account.dto.Accountsubgroupmaster;
+import org.ideoholic.curium.model.account.dto.Financialaccountingyear;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 
 public class AccountService {
 	

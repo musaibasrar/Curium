@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 18 Apr, 2018 3:59:02 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.hr.dto.Leavetypemaster" table="hr_leavetypemaster" >
+    <class name="org.ideoholic.curium.model.hr.dto.Leavetypemaster" table="hr_leavetypemaster" >
         <id name="idleavetypemaster" type="java.lang.Integer">
             <column name="idleavetypemaster" />
             <generator class="identity" />

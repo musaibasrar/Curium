@@ -1,4 +1,4 @@
-package com.model.documents.service;
+package org.ideoholic.curium.model.documents.service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,14 +31,14 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.model.documents.dao.DocumentDAO;
-import com.model.documents.dto.Transfercertificate;
-import com.model.parents.dto.Parents;
-import com.model.std.service.StandardService;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
-import com.util.DataUtil;
-import com.util.DateUtil;
+import org.ideoholic.curium.model.documents.dao.DocumentDAO;
+import org.ideoholic.curium.model.documents.dto.Transfercertificate;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 
 public class DocumentService {
 

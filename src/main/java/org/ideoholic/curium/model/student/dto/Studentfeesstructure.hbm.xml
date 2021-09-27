@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 24 Jul, 2015 12:41:35 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.student.dto.Studentfeesstructure" table="fee_studentfeesstructure">
+    <class name="org.ideoholic.curium.model.student.dto.Studentfeesstructure" table="fee_studentfeesstructure">
         <id name="sfsid" type="java.lang.Integer">
             <column name="sfsid" />
            <generator class="native" />
@@ -35,7 +35,7 @@
          <property name="totalinstallment" type="java.lang.Integer">
             <column name="totalinstallment"/>
         </property>
-        <many-to-one name="Feescategory" class="com.model.feescategory.dto.Feescategory" lazy="false"
+        <many-to-one name="Feescategory" class="org.ideoholic.curium.model.feescategory.dto.Feescategory" lazy="false"
             column="idfeescategory" />
     </class>
 </hibernate-mapping>

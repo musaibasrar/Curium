@@ -1,4 +1,4 @@
-package com.model.account.dto;
+package org.ideoholic.curium.model.account.dto;
 
 import static javax.persistence.GenerationType.IDENTITY;
 

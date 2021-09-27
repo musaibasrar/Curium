@@ -1,4 +1,4 @@
-package com.model.account.dao;
+package org.ideoholic.curium.model.account.dao;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -9,16 +9,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
 
-import com.model.account.dto.Accountdetails;
-import com.model.account.dto.Accountdetailsbalance;
-import com.model.account.dto.Accountgroupmaster;
-import com.model.account.dto.Accountssgroupmaster;
-import com.model.account.dto.Accountsubgroupmaster;
-import com.model.account.dto.Financialaccountingyear;
-import com.model.account.dto.VoucherEntrytransactions;
-import com.util.HibernateUtil;
-import com.util.Session;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.model.account.dto.Accountdetails;
+import org.ideoholic.curium.model.account.dto.Accountdetailsbalance;
+import org.ideoholic.curium.model.account.dto.Accountgroupmaster;
+import org.ideoholic.curium.model.account.dto.Accountssgroupmaster;
+import org.ideoholic.curium.model.account.dto.Accountsubgroupmaster;
+import org.ideoholic.curium.model.account.dto.Financialaccountingyear;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
 
 public class AccountDAO {
 	Session session = null;

@@ -1,4 +1,4 @@
-package com.model.pudetails.dto;
+package org.ideoholic.curium.model.pudetails.dto;
 
 // default package
 // Generated 20 Jun, 2018 1:03:58 PM by Hibernate Tools 5.3.0.Beta2

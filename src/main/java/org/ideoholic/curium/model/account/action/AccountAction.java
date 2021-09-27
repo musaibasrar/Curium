@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.model.account.action;
+package org.ideoholic.curium.model.account.action;
 
 import java.io.IOException;
 
@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.academicyear.service.YearService;
-import com.model.account.service.AccountService;
-import com.model.adminexpenses.service.AdminService;
-import com.model.feescategory.service.FeesService;
-import com.model.student.service.StudentService;
-import com.util.DataUtil;
+import org.ideoholic.curium.model.academicyear.service.YearService;
+import org.ideoholic.curium.model.account.service.AccountService;
+import org.ideoholic.curium.model.adminexpenses.service.AdminService;
+import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.student.service.StudentService;
+import org.ideoholic.curium.util.DataUtil;
 
 /**
  * @author Musaib_2

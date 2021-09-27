@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 16 Jan, 2018 9:20:32 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.attendance.dto.Holidaysmaster" table="att_holidaysmaster">
+    <class name="org.ideoholic.curium.model.attendance.dto.Holidaysmaster" table="att_holidaysmaster">
         <id name="shid" type="java.lang.Integer">
             <column name="shid" />
             <generator class="identity" />

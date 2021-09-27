@@ -1,12 +1,12 @@
-package com.model.academicyear.service;
+package org.ideoholic.curium.model.academicyear.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.academicyear.dao.YearDAO;
-import com.model.academicyear.dto.Currentacademicyear;
-import com.util.DataUtil;
+import org.ideoholic.curium.model.academicyear.dao.YearDAO;
+import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.util.DataUtil;
 
 public class YearService {
 	

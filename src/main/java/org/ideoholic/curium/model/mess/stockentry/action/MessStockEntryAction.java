@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.model.mess.stockentry.action;
+package org.ideoholic.curium.model.mess.stockentry.action;
 
 import java.io.IOException;
 
@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.account.service.AccountService;
-import com.model.mess.item.service.MessItemsService;
-import com.model.mess.stockentry.service.MessStockEntryService;
-import com.model.mess.supplier.service.MessSuppliersService;
+import org.ideoholic.curium.model.account.service.AccountService;
+import org.ideoholic.curium.model.mess.item.service.MessItemsService;
+import org.ideoholic.curium.model.mess.stockentry.service.MessStockEntryService;
+import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
 
 /**
  * @author Musaib_2

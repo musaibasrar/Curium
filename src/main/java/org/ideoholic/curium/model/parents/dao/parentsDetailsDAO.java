@@ -1,15 +1,15 @@
-package com.model.parents.dao;
+package org.ideoholic.curium.model.parents.dao;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.util.Session;
+import org.ideoholic.curium.util.Session;
 import org.hibernate.SessionFactory;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
 
-import com.model.parents.dto.Parents;
-import com.util.HibernateUtil;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.util.HibernateUtil;
 
 public class parentsDetailsDAO {
 	 Session session = null;

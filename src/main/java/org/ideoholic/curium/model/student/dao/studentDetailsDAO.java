@@ -1,4 +1,4 @@
-package com.model.student.dao;
+package org.ideoholic.curium.model.student.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,16 +7,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
 
-import com.model.degreedetails.dto.Degreedetails;
-import com.model.mess.card.dto.Card;
-import com.model.parents.dto.Parents;
-import com.model.pudetails.dto.Pudetails;
-import com.model.std.dto.Classhierarchy;
-import com.model.student.dto.Student;
-import com.model.student.dto.Studentfeesstructure;
-import com.util.HibernateUtil;
-import com.util.Session;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
+import org.ideoholic.curium.model.mess.card.dto.Card;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.pudetails.dto.Pudetails;
+import org.ideoholic.curium.model.std.dto.Classhierarchy;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
 
 public class studentDetailsDAO {
 	Session session = null;

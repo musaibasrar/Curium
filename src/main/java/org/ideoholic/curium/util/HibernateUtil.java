@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.util;
+package org.ideoholic.curium.util;
  
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -1,4 +1,4 @@
-package com.model.std.dto;
+package org.ideoholic.curium.model.std.dto;
 
 // default package
 // Generated 6 Nov, 2014 12:17:14 PM by Hibernate Tools 4.0.0

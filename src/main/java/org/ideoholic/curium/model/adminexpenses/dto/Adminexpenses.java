@@ -1,4 +1,4 @@
-package com.model.adminexpenses.dto;
+package org.ideoholic.curium.model.adminexpenses.dto;
 
 // default package
 // Generated 24 Mar, 2015 1:00:53 PM by Hibernate Tools 4.0.0

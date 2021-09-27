@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 31 Jan, 2018 9:02:38 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.attendance.dto.Staffdailyattendance" table="att_staffdailyattendance">
+    <class name="org.ideoholic.curium.model.attendance.dto.Staffdailyattendance" table="att_staffdailyattendance">
         <id name="attendanceid" type="int">
             <column name="attendanceid" />
             <generator class="assigned" />

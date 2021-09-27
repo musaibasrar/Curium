@@ -1,4 +1,4 @@
-package com.model.hr.service;
+package org.ideoholic.curium.model.hr.service;
 
 
 import java.io.IOException;
@@ -18,28 +18,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.academicyear.dao.YearDAO;
-import com.model.academicyear.dto.Currentacademicyear;
-import com.model.attendance.dao.AttendanceDAO;
-import com.model.attendance.dto.Attendancemaster;
-import com.model.attendance.dto.Holidaysmaster;
-import com.model.attendance.dto.Weeklyoff;
-import com.model.employee.dao.EmployeeDAO;
-import com.model.employee.dto.Teacher;
-import com.model.employee.service.EmployeeService;
-import com.model.hr.dao.HrDAO;
-import com.model.hr.dto.Leaveapplication;
-import com.model.hr.dto.Leavedetails;
-import com.model.hr.dto.Leavetypemaster;
-import com.model.hr.dto.Payadvancesalary;
-import com.model.hr.dto.Paybasic;
-import com.model.hr.dto.Payhead;
-import com.model.hr.dto.Payheadstaffdetails;
-import com.model.hr.dto.Pf;
-import com.model.hr.dto.Processsalarydetails;
-import com.model.hr.dto.Processsalarydetailsheads;
-import com.util.DataUtil;
-import com.util.DateUtil;
+import org.ideoholic.curium.model.academicyear.dao.YearDAO;
+import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
+import org.ideoholic.curium.model.attendance.dto.Attendancemaster;
+import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
+import org.ideoholic.curium.model.attendance.dto.Weeklyoff;
+import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
+import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.employee.service.EmployeeService;
+import org.ideoholic.curium.model.hr.dao.HrDAO;
+import org.ideoholic.curium.model.hr.dto.Leaveapplication;
+import org.ideoholic.curium.model.hr.dto.Leavedetails;
+import org.ideoholic.curium.model.hr.dto.Leavetypemaster;
+import org.ideoholic.curium.model.hr.dto.Payadvancesalary;
+import org.ideoholic.curium.model.hr.dto.Paybasic;
+import org.ideoholic.curium.model.hr.dto.Payhead;
+import org.ideoholic.curium.model.hr.dto.Payheadstaffdetails;
+import org.ideoholic.curium.model.hr.dto.Pf;
+import org.ideoholic.curium.model.hr.dto.Processsalarydetails;
+import org.ideoholic.curium.model.hr.dto.Processsalarydetailsheads;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 
 public class HrService {
 

@@ -1,4 +1,4 @@
-package com.model.marksdetails.service;
+package org.ideoholic.curium.model.marksdetails.service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,17 +25,17 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
-import com.model.examdetails.dao.ExamDetailsDAO;
-import com.model.examdetails.dto.Exams;
-import com.model.marksdetails.dao.MarksDetailsDAO;
-import com.model.marksdetails.dto.Marks;
-import com.model.parents.dto.Parents;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
-import com.model.subjectdetails.dao.SubjectDetailsDAO;
-import com.model.subjectdetails.dto.Subject;
-import com.util.DataUtil;
-import com.util.ExamsDetails;
+import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
+import org.ideoholic.curium.model.examdetails.dto.Exams;
+import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
+import org.ideoholic.curium.model.marksdetails.dto.Marks;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
+import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.ExamsDetails;
 
 public class MarksDetailsService {
 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.util;
+package org.ideoholic.curium.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

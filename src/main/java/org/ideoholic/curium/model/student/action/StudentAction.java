@@ -1,15 +1,15 @@
 /**
  * 
  */
-package com.model.student.action;
+package org.ideoholic.curium.model.student.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.stampfees.service.StampFeesService;
-import com.model.std.service.StandardService;
-import com.model.student.service.StudentService;
+import org.ideoholic.curium.model.stampfees.service.StampFeesService;
+import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.service.StudentService;
 
 /**
  * @author Musaib_2

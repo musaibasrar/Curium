@@ -1,4 +1,4 @@
-package com.model.academicyear.dto;
+package org.ideoholic.curium.model.academicyear.dto;
 
 // default package
 // Generated 8 May, 2015 5:04:47 PM by Hibernate Tools 4.0.0

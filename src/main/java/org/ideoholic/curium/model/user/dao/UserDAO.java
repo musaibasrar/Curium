@@ -1,20 +1,20 @@
-package com.model.user.dao;
+package org.ideoholic.curium.model.user.dao;
 
 import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.util.Session;
+import org.ideoholic.curium.util.Session;
 import org.hibernate.SessionFactory;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
 
-import com.model.feescollection.dto.Receiptinfo;
-import com.model.feesdetails.dto.Feesdetails;
-import com.model.student.dto.Student;
-import com.model.user.dto.Login;
-import com.util.HibernateUtil;
+import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.user.dto.Login;
+import org.ideoholic.curium.util.HibernateUtil;
 
 public class UserDAO {
 	 Session session = null;

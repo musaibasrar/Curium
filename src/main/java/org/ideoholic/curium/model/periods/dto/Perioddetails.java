@@ -1,4 +1,4 @@
-package com.model.periods.dto;
+package org.ideoholic.curium.model.periods.dto;
 
 // default package
 // Generated 7 Apr, 2018 6:09:10 PM by Hibernate Tools 4.0.0

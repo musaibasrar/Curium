@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.util;
+package org.ideoholic.curium.util;
 
 import java.text.DateFormat;
 import java.text.Format;

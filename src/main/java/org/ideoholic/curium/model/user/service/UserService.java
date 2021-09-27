@@ -1,4 +1,4 @@
-package com.model.user.service;
+package org.ideoholic.curium.model.user.service;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -19,23 +19,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.academicyear.dao.YearDAO;
-import com.model.academicyear.dto.Currentacademicyear;
-import com.model.adminexpenses.service.AdminService;
-import com.model.branch.dto.Branch;
-import com.model.employee.dao.EmployeeDAO;
-import com.model.employee.dto.Teacher;
-import com.model.feescollection.action.FeesCollectionAction;
-import com.model.feescollection.dto.Receiptinfo;
-import com.model.feescollection.service.FeesCollectionService;
-import com.model.parents.dto.Parents;
-import com.model.std.dao.StandardDetailsDAO;
-import com.model.std.dto.Classsec;
-import com.model.std.service.StandardService;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.user.dao.UserDAO;
-import com.model.user.dto.Login;
-import com.util.DataUtil;
+import org.ideoholic.curium.model.academicyear.dao.YearDAO;
+import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.model.adminexpenses.service.AdminService;
+import org.ideoholic.curium.model.branch.dto.Branch;
+import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
+import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.feescollection.action.FeesCollectionAction;
+import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
+import org.ideoholic.curium.model.std.dto.Classsec;
+import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.user.dao.UserDAO;
+import org.ideoholic.curium.model.user.dto.Login;
+import org.ideoholic.curium.util.DataUtil;
 
 public class UserService {
 	

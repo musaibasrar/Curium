@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.model.examdetails.service;
+package org.ideoholic.curium.model.examdetails.service;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -15,16 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.adminexpenses.dao.AdminDetailsDAO;
-import com.model.examdetails.action.ExamDetailsAction;
-import com.model.examdetails.dao.ExamDetailsDAO;
-import com.model.examdetails.dto.Exams;
-import com.model.examdetails.dto.Examschedule;
-import com.model.parents.dto.Parents;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
-import com.util.DataUtil;
-import com.util.DateUtil;
+import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
+import org.ideoholic.curium.model.examdetails.action.ExamDetailsAction;
+import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
+import org.ideoholic.curium.model.examdetails.dto.Exams;
+import org.ideoholic.curium.model.examdetails.dto.Examschedule;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 
 /**
  * @author Musaib_2

@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 16 Feb, 2018 11:28:08 AM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.account.dto.Accountsubgroupmaster" table="acc_accountsubgroupmaster">
+    <class name="org.ideoholic.curium.model.account.dto.Accountsubgroupmaster" table="acc_accountsubgroupmaster">
         <id name="accountsubgroupmasterid" type="java.lang.Integer">
             <column name="accountsubgroupmasterid" />
             <generator class="identity" />
@@ -18,7 +18,7 @@
       <!--   <property name="accountgroupid" type="java.lang.Integer">
             <column name="accountgroupid" />
         </property> -->
-        <many-to-one name="accountGroupMaster" class="com.model.account.dto.Accountgroupmaster"
+        <many-to-one name="accountGroupMaster" class="org.ideoholic.curium.model.account.dto.Accountgroupmaster"
             column="accountgroupid" lazy="false"
             cascade="none" />
     </class>

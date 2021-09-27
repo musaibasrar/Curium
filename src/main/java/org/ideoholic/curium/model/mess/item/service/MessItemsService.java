@@ -1,4 +1,4 @@
-package com.model.mess.item.service;
+package org.ideoholic.curium.model.mess.item.service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,23 +20,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.account.dao.AccountDAO;
-import com.model.account.dto.Accountdetails;
-import com.model.account.dto.VoucherEntrytransactions;
-import com.model.mess.item.dao.MessItemsDAO;
-import com.model.mess.item.dto.MessItems;
-import com.model.mess.stockentry.dto.MessInvoiceDetails;
-import com.model.mess.stockentry.dto.MessStockAvailability;
-import com.model.mess.stockentry.dto.MessStockEntry;
-import com.model.mess.stockmove.dao.MessStockMoveDAO;
-import com.model.mess.stockmove.dto.MessStockItemDetails;
-import com.model.mess.stockmove.dto.MessStockMove;
-import com.model.mess.supplier.dao.MessSuppliersDAO;
-import com.model.mess.supplier.dto.MessSuppliers;
-import com.model.mess.supplier.service.MessSuppliersService;
-import com.util.DataUtil;
-import com.util.DateUtil;
-import com.util.StockIssuance;
+import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.Accountdetails;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
+import org.ideoholic.curium.model.mess.item.dto.MessItems;
+import org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails;
+import org.ideoholic.curium.model.mess.stockentry.dto.MessStockAvailability;
+import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
+import org.ideoholic.curium.model.mess.stockmove.dao.MessStockMoveDAO;
+import org.ideoholic.curium.model.mess.stockmove.dto.MessStockItemDetails;
+import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
+import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
+import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
+import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.StockIssuance;
 
 public class MessItemsService {
 

@@ -1,4 +1,4 @@
-package com.model.stampfees.dto;
+package org.ideoholic.curium.model.stampfees.dto;
 
 // default package
 // Generated 12 May, 2015 11:31:40 AM by Hibernate Tools 4.0.0

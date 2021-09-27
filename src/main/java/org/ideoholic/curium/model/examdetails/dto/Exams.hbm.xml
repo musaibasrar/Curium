@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 19 Aug, 2016 8:15:23 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.examdetails.dto.Exams" table="exams">
+    <class name="org.ideoholic.curium.model.examdetails.dto.Exams" table="exams">
         <id name="exid" type="java.lang.Integer">
             <column name="exid" />
             <generator class="identity" />

@@ -1,17 +1,17 @@
 /**
  * 
  */
-package com.model.documents.action;
+package org.ideoholic.curium.model.documents.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.documents.service.DocumentService;
-import com.model.feescategory.service.FeesService;
-import com.model.stampfees.service.StampFeesService;
-import com.model.std.service.StandardService;
-import com.model.student.service.StudentService;
+import org.ideoholic.curium.model.documents.service.DocumentService;
+import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.stampfees.service.StampFeesService;
+import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.service.StudentService;
 
 /**
  * @author Musaib_2

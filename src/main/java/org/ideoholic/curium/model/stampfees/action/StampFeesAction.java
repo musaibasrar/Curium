@@ -1,16 +1,16 @@
-package com.model.stampfees.action;
+package org.ideoholic.curium.model.stampfees.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.model.academicyear.service.YearService;
-import com.model.feescategory.service.FeesService;
-import com.model.stampfees.service.StampFeesService;
-import com.model.std.service.StandardService;
-import com.model.student.service.StudentService;
-import com.model.user.dao.UserDAO;
-import com.model.user.dto.Login;
-import com.model.user.service.UserService;
+import org.ideoholic.curium.model.academicyear.service.YearService;
+import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.stampfees.service.StampFeesService;
+import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.service.StudentService;
+import org.ideoholic.curium.model.user.dao.UserDAO;
+import org.ideoholic.curium.model.user.dto.Login;
+import org.ideoholic.curium.model.user.service.UserService;
 
 public class StampFeesAction {
 	HttpServletRequest request;

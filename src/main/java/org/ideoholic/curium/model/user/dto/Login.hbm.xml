@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 25 Sep, 2014 6:14:25 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.model.user.dto.Login" table="login">
+    <class name="org.ideoholic.curium.model.user.dto.Login" table="login">
         <id name="lid" type="java.lang.Integer">
             <column name="LID" />
             <generator class="identity" />
@@ -20,7 +20,7 @@
         <property name="userid" type="int">
  <column name="userid" />
 </property>
-         <many-to-one name="branch" class="com.model.branch.dto.Branch"
+         <many-to-one name="branch" class="org.ideoholic.curium.model.branch.dto.Branch"
             column="branchid" lazy="false"
              />
     </class>

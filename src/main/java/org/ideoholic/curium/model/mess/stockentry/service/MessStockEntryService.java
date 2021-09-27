@@ -1,4 +1,4 @@
-package com.model.mess.stockentry.service;
+package org.ideoholic.curium.model.mess.stockentry.service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.mess.item.dao.MessItemsDAO;
-import com.model.mess.item.dto.MessItems;
-import com.model.mess.stockentry.dao.MessStockEntryDAO;
-import com.model.mess.stockentry.dto.MessStockEntry;
+import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
+import org.ideoholic.curium.model.mess.item.dto.MessItems;
+import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
+import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
 
 public class MessStockEntryService {
 

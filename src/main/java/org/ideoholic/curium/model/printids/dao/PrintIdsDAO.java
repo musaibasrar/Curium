@@ -1,4 +1,4 @@
-package com.model.printids.dao;
+package org.ideoholic.curium.model.printids.dao;
 
 import java.util.List;
 
@@ -7,12 +7,12 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
-import com.model.mess.card.dto.Card;
-import com.model.parents.dto.Parents;
-import com.util.DateUtil;
-import com.util.HibernateUtil;
-import com.util.Session;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.model.mess.card.dto.Card;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
 
 public class PrintIdsDAO {
 	Session session = null;

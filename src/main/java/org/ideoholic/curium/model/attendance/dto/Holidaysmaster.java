@@ -1,4 +1,4 @@
-package com.model.attendance.dto;
+package org.ideoholic.curium.model.attendance.dto;
 
 // default package
 // Generated 16 Jan, 2018 9:20:32 PM by Hibernate Tools 4.0.0

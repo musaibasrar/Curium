@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 8 May, 2015 5:04:47 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.academicyear.dto.Currentacademicyear" table="currentacademicyear">
+    <class name="org.ideoholic.curium.model.academicyear.dto.Currentacademicyear" table="currentacademicyear">
         <id name="cayid" type="java.lang.Integer">
             <column name="cayid" />
             <generator class="identity" />

@@ -1,4 +1,4 @@
-package com.model.multitenant;
+package org.ideoholic.curium.model.multitenant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

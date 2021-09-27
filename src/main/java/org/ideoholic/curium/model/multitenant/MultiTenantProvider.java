@@ -1,4 +1,4 @@
-package com.model.multitenant;
+package org.ideoholic.curium.model.multitenant;
 
 import java.sql.Connection;
 import java.sql.SQLException;

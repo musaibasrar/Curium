@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 5 Feb, 2018 11:54:02 AM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.feescollection.dto.Feescollection" table="fee_feescollection">
+    <class name="org.ideoholic.curium.model.feescollection.dto.Feescollection" table="fee_feescollection">
         <id name="feecollectionid" type="java.lang.Integer">
             <column name="feecollectionid" />
             <generator class="identity" />

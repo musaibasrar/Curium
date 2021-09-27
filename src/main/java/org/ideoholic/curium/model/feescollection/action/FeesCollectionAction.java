@@ -1,15 +1,15 @@
 /**
  * 
  */
-package com.model.feescollection.action;
+package org.ideoholic.curium.model.feescollection.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.feescategory.service.FeesService;
-import com.model.feescollection.dto.Receiptinfo;
-import com.model.feescollection.service.FeesCollectionService;
+import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 
 /**
  * @author Musaib_2

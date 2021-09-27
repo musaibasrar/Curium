@@ -1,18 +1,18 @@
 /**
  * 
  */
-package com.model.periods.action;
+package org.ideoholic.curium.model.periods.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.documents.service.DocumentService;
-import com.model.employee.service.EmployeeService;
-import com.model.feescategory.service.FeesService;
-import com.model.periods.service.PeriodService;
-import com.model.stampfees.service.StampFeesService;
-import com.model.student.service.StudentService;
+import org.ideoholic.curium.model.documents.service.DocumentService;
+import org.ideoholic.curium.model.employee.service.EmployeeService;
+import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.periods.service.PeriodService;
+import org.ideoholic.curium.model.stampfees.service.StampFeesService;
+import org.ideoholic.curium.model.student.service.StudentService;
 
 /**
  * @author Musaib_2

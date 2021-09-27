@@ -1,4 +1,4 @@
-package com.model.account.dto;
+package org.ideoholic.curium.model.account.dto;
 
 // default package
 // Generated 18 Feb, 2018 10:47:48 PM by Hibernate Tools 4.0.0

@@ -1,9 +1,9 @@
-package com.controller;
+package org.ideoholic.curium.controller;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import com.model.attendance.service.AttendanceService;
+import org.ideoholic.curium.model.attendance.service.AttendanceService;
 
  public class StudentsAttendanceJob implements Job {
 

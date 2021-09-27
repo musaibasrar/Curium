@@ -1,4 +1,4 @@
-package com.model.sendsms.dao;
+package org.ideoholic.curium.model.sendsms.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,12 +6,12 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.util.Session;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
 
-import com.model.parents.dto.Parents;
-import com.util.HibernateUtil;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.util.HibernateUtil;
 
 public class SmsDAO {
 	Session session = null;

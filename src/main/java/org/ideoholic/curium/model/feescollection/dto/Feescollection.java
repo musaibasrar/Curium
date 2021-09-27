@@ -1,4 +1,4 @@
-package com.model.feescollection.dto;
+package org.ideoholic.curium.model.feescollection.dto;
 
 // default package
 // Generated 5 Feb, 2018 11:54:01 AM by Hibernate Tools 4.0.0

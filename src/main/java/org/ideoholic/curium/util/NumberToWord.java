@@ -1,4 +1,4 @@
-package com.util;
+package org.ideoholic.curium.util;
 
 
 

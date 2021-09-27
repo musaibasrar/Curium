@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.model.subjectdetails.dao;
+package org.ideoholic.curium.model.subjectdetails.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +9,13 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.util.Session;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
 
-import com.model.subjectdetails.dto.Subject;
-import com.model.subjectdetails.dto.Subjectmaster;
-import com.util.HibernateUtil;
+import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
+import org.ideoholic.curium.util.HibernateUtil;
 
 /**
  * @author Musaib_2

@@ -1,4 +1,4 @@
-package com.model.mess.stockmove.service;
+package org.ideoholic.curium.model.mess.stockmove.service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,21 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.account.dao.AccountDAO;
-import com.model.account.dto.VoucherEntrytransactions;
-import com.model.mess.item.dao.MessItemsDAO;
-import com.model.mess.item.dto.MessItems;
-import com.model.mess.item.service.MessItemsService;
-import com.model.mess.stockentry.dao.MessStockEntryDAO;
-import com.model.mess.stockentry.dto.MessStockAvailability;
-import com.model.mess.stockentry.dto.MessStockEntry;
-import com.model.mess.stockmove.dao.MessStockMoveDAO;
-import com.model.mess.stockmove.dto.MessStockItemDetails;
-import com.model.mess.stockmove.dto.MessStockMove;
-import com.model.parents.dto.Parents;
-import com.model.student.dao.studentDetailsDAO;
-import com.util.DataUtil;
-import com.util.DateUtil;
+import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
+import org.ideoholic.curium.model.mess.item.dto.MessItems;
+import org.ideoholic.curium.model.mess.item.service.MessItemsService;
+import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
+import org.ideoholic.curium.model.mess.stockentry.dto.MessStockAvailability;
+import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
+import org.ideoholic.curium.model.mess.stockmove.dao.MessStockMoveDAO;
+import org.ideoholic.curium.model.mess.stockmove.dto.MessStockItemDetails;
+import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 
 public class MessStockMoveService {
 

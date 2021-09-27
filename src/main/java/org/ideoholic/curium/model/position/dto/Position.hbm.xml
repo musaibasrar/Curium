@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 16 Jan, 2015 12:53:58 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.position.dto.Position" table="position" >
+    <class name="org.ideoholic.curium.model.position.dto.Position" table="position" >
         <id name="positionid" type="java.lang.Integer">
             <column name="positionid" />
             <generator class="identity" />

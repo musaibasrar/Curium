@@ -1,4 +1,4 @@
-package com.model.multitenant;
+package org.ideoholic.curium.model.multitenant;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 
 public class SchemaResolver implements CurrentTenantIdentifierResolver {

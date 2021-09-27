@@ -1,16 +1,16 @@
 /**
  * 
  */
-package com.model.mess.stockmove.action;
+package org.ideoholic.curium.model.mess.stockmove.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.mess.item.dao.MessItemsDAO;
-import com.model.mess.item.service.MessItemsService;
-import com.model.mess.stockmove.service.MessStockMoveService;
-import com.model.mess.supplier.service.MessSuppliersService;
+import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
+import org.ideoholic.curium.model.mess.item.service.MessItemsService;
+import org.ideoholic.curium.model.mess.stockmove.service.MessStockMoveService;
+import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
 
 /**
  * @author Musaib_2

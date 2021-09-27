@@ -1,4 +1,4 @@
-package com.model.examdetails.dto;
+package org.ideoholic.curium.model.examdetails.dto;
 
 // default package
 // Generated 31 Mar, 2018 10:55:17 AM by Hibernate Tools 4.0.0

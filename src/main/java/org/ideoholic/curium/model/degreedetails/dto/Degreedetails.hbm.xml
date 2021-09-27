@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generated 5 Jul, 2018 7:53:05 PM by Hibernate Tools 5.3.0.Beta2 --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
-    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="com.model.degreedetails.dto.Degreedetails" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="degreedetails">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="org.ideoholic.curium.model.degreedetails.dto.Degreedetails" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="degreedetails">
         <id name="iddegreedetails" type="java.lang.Integer">
             <column name="iddegreedetails"/>
             <generator class="identity"/>

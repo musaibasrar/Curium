@@ -1,9 +1,9 @@
-package com.model.user.action;
+package org.ideoholic.curium.model.user.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.model.user.service.UserService;
+import org.ideoholic.curium.model.user.service.UserService;
 
 public class UserAction {
 	HttpServletRequest request;

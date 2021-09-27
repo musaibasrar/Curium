@@ -1,4 +1,4 @@
-package com.model.hr.action;
+package org.ideoholic.curium.model.hr.action;
 
 import java.io.IOException;
 
@@ -6,14 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.account.service.AccountService;
-import com.model.attendance.service.AttendanceService;
-import com.model.department.service.DepartmentService;
-import com.model.employee.service.EmployeeService;
-import com.model.feescategory.service.FeesService;
-import com.model.hr.dao.HrDAO;
-import com.model.hr.service.HrService;
-import com.model.student.service.StudentService;
+import org.ideoholic.curium.model.account.service.AccountService;
+import org.ideoholic.curium.model.attendance.service.AttendanceService;
+import org.ideoholic.curium.model.department.service.DepartmentService;
+import org.ideoholic.curium.model.employee.service.EmployeeService;
+import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.hr.dao.HrDAO;
+import org.ideoholic.curium.model.hr.service.HrService;
+import org.ideoholic.curium.model.student.service.StudentService;
 
 public class HrAction {
 

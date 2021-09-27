@@ -1,4 +1,4 @@
-package com.model.attendance.dao;
+package org.ideoholic.curium.model.attendance.dao;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -11,17 +11,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import org.hibernate.query.Query;
-import com.util.Session;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
 
-import com.model.attendance.dto.Attendancemaster;
-import com.model.attendance.dto.Holidaysmaster;
-import com.model.attendance.dto.Staffdailyattendance;
-import com.model.attendance.dto.Studentdailyattendance;
-import com.model.attendance.dto.Weeklyoff;
-import com.model.employee.dto.Teacher;
-import com.model.student.dto.Student;
-import com.util.HibernateUtil;
+import org.ideoholic.curium.model.attendance.dto.Attendancemaster;
+import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
+import org.ideoholic.curium.model.attendance.dto.Staffdailyattendance;
+import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
+import org.ideoholic.curium.model.attendance.dto.Weeklyoff;
+import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.util.HibernateUtil;
 
 public class AttendanceDAO {
 	Session session = null;

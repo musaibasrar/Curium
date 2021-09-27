@@ -1,4 +1,4 @@
-package com.model.mess.supplier.dao;
+package org.ideoholic.curium.model.mess.supplier.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,17 +8,17 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 
-import com.model.account.dto.Accountdetails;
-import com.model.account.dto.Accountdetailsbalance;
-import com.model.account.dto.VoucherEntrytransactions;
-import com.model.mess.stockentry.dto.MessInvoiceDetails;
-import com.model.mess.supplier.dto.MessSuppliers;
-import com.model.mess.supplier.dto.MessSuppliersPayment;
-import com.model.student.dto.Student;
-import com.util.DateUtil;
-import com.util.HibernateUtil;
-import com.util.Session;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.model.account.dto.Accountdetails;
+import org.ideoholic.curium.model.account.dto.Accountdetailsbalance;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails;
+import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
+import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliersPayment;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
 
 public class MessSuppliersDAO {
 	Session session = null;

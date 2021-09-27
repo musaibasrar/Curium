@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 11 Feb, 2015 9:12:10 AM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.mess.stockentry.dto.MessStockEntry" table="mess_stockentry" >
+    <class name="org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry" table="mess_stockentry" >
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <!-- <generator class="identity" /> -->
@@ -39,7 +39,7 @@
 			<property name="receiveddate" type="date">
           		  <column name="receiveddate" />
        		 </property>
-        	<many-to-one name="messinvoicedetails" class="com.model.mess.stockentry.dto.MessInvoiceDetails"
+        	<many-to-one name="messinvoicedetails" class="org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails"
             column="invoicedetailsid" unique="true" not-null="true" lazy="false"
             cascade="all" />
                     

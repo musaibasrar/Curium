@@ -1,4 +1,4 @@
-package com.model.stampfees.service;
+package org.ideoholic.curium.model.stampfees.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,14 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.feescategory.dto.Feescategory;
-import com.model.parents.dto.Parents;
-import com.model.stampfees.dao.StampFeesDAO;
-import com.model.stampfees.dto.Academicfeesstructure;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Studentfeesstructure;
-import com.model.user.dao.UserDAO;
-import com.util.DataUtil;
+import org.ideoholic.curium.model.feescategory.dto.Feescategory;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
+import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.user.dao.UserDAO;
+import org.ideoholic.curium.util.DataUtil;
 
 public class StampFeesService {
 

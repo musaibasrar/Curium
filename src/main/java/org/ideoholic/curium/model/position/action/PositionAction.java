@@ -1,12 +1,12 @@
-package com.model.position.action;
+package org.ideoholic.curium.model.position.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.department.service.DepartmentService;
-import com.model.position.service.PositionService;
-import com.model.student.service.StudentService;
+import org.ideoholic.curium.model.department.service.DepartmentService;
+import org.ideoholic.curium.model.position.service.PositionService;
+import org.ideoholic.curium.model.student.service.StudentService;
 
 public class PositionAction {
 

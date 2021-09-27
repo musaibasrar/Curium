@@ -1,4 +1,4 @@
-package com.model.employee.service;
+package org.ideoholic.curium.model.employee.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.department.dao.departmentDAO;
-import com.model.department.dto.Department;
-import com.model.employee.dao.EmployeeDAO;
-import com.model.employee.dto.Teacher;
-import com.model.hr.dao.HrDAO;
-import com.model.hr.dto.Paybasic;
-import com.model.position.dao.positionDAO;
-import com.model.position.dto.Position;
-import com.model.user.dao.UserDAO;
-import com.model.user.dto.Login;
-import com.model.user.service.UserService;
-import com.util.DataUtil;
-import com.util.DateUtil;
+import org.ideoholic.curium.model.department.dao.departmentDAO;
+import org.ideoholic.curium.model.department.dto.Department;
+import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
+import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.hr.dao.HrDAO;
+import org.ideoholic.curium.model.hr.dto.Paybasic;
+import org.ideoholic.curium.model.position.dao.positionDAO;
+import org.ideoholic.curium.model.position.dto.Position;
+import org.ideoholic.curium.model.user.dao.UserDAO;
+import org.ideoholic.curium.model.user.dto.Login;
+import org.ideoholic.curium.model.user.service.UserService;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 
 public class EmployeeService {
 

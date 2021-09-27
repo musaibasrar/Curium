@@ -1,4 +1,4 @@
-package com.model.department.dao;
+package org.ideoholic.curium.model.department.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,13 +6,13 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.util.Session;
+import org.ideoholic.curium.util.Session;
 import org.hibernate.SessionFactory;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
 
-import com.model.department.dto.Department;
-import com.util.HibernateUtil;
+import org.ideoholic.curium.model.department.dto.Department;
+import org.ideoholic.curium.util.HibernateUtil;
 
 public class departmentDAO {
 

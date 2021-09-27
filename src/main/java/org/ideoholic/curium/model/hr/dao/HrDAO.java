@@ -1,4 +1,4 @@
-package com.model.hr.dao;
+package org.ideoholic.curium.model.hr.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,22 +6,22 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.util.Session;
+import org.ideoholic.curium.util.Session;
 import org.hibernate.SessionFactory;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
 
-import com.model.hr.dto.Leaveapplication;
-import com.model.hr.dto.Leavedetails;
-import com.model.hr.dto.Leavetypemaster;
-import com.model.hr.dto.Payadvancesalary;
-import com.model.hr.dto.Paybasic;
-import com.model.hr.dto.Payhead;
-import com.model.hr.dto.Payheadstaffdetails;
-import com.model.hr.dto.Pf;
-import com.model.hr.dto.Processsalarydetails;
-import com.model.hr.dto.Processsalarydetailsheads;
-import com.util.HibernateUtil;
+import org.ideoholic.curium.model.hr.dto.Leaveapplication;
+import org.ideoholic.curium.model.hr.dto.Leavedetails;
+import org.ideoholic.curium.model.hr.dto.Leavetypemaster;
+import org.ideoholic.curium.model.hr.dto.Payadvancesalary;
+import org.ideoholic.curium.model.hr.dto.Paybasic;
+import org.ideoholic.curium.model.hr.dto.Payhead;
+import org.ideoholic.curium.model.hr.dto.Payheadstaffdetails;
+import org.ideoholic.curium.model.hr.dto.Pf;
+import org.ideoholic.curium.model.hr.dto.Processsalarydetails;
+import org.ideoholic.curium.model.hr.dto.Processsalarydetailsheads;
+import org.ideoholic.curium.util.HibernateUtil;
 
 public class HrDAO {
 

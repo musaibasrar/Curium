@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 24 Apr, 2018 1:06:55 AM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.hr.dto.Pf" table="hr_pf">
+    <class name="org.ideoholic.curium.model.hr.dto.Pf" table="hr_pf">
         <id name="idpf" type="java.lang.Integer">
             <column name="idpf" />
             <generator class="identity" />

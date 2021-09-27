@@ -1,15 +1,15 @@
 /**
  * 
  */
-package com.model.sendemail.action;
+package org.ideoholic.curium.model.sendemail.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.academicyear.service.YearService;
-import com.model.sendemail.service.EmailService;
-import com.model.sendsms.service.SmsService;
+import org.ideoholic.curium.model.academicyear.service.YearService;
+import org.ideoholic.curium.model.sendemail.service.EmailService;
+import org.ideoholic.curium.model.sendsms.service.SmsService;
 
 /**
  * @author Musaib_2

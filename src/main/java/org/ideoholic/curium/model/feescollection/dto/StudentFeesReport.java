@@ -1,9 +1,9 @@
-package com.model.feescollection.dto;
+package org.ideoholic.curium.model.feescollection.dto;
 
 import java.util.List;
 
-import com.model.student.dto.Student;
-import com.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 
 public class StudentFeesReport {
 

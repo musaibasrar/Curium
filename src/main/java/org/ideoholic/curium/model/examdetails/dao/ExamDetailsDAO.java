@@ -1,4 +1,4 @@
-package com.model.examdetails.dao;
+package org.ideoholic.curium.model.examdetails.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +7,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
 
-import com.model.examdetails.dto.Exams;
-import com.model.examdetails.dto.Examschedule;
-import com.model.subjectdetails.dto.Subject;
-import com.util.HibernateUtil;
-import com.util.Session;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.model.examdetails.dto.Exams;
+import org.ideoholic.curium.model.examdetails.dto.Examschedule;
+import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
 
 public class ExamDetailsDAO {
 

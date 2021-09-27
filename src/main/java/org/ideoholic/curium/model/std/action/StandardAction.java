@@ -1,14 +1,14 @@
 /**
  * 
  */
-package com.model.std.action;
+package org.ideoholic.curium.model.std.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.std.service.StandardService;
-import com.model.student.service.StudentService;
+import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.service.StudentService;
 
 /**
  * @author Musaib_2

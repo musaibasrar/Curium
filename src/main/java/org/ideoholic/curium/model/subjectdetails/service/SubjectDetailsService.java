@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.model.subjectdetails.service;
+package org.ideoholic.curium.model.subjectdetails.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.subjectdetails.dao.SubjectDetailsDAO;
-import com.model.subjectdetails.dto.Subject;
-import com.model.subjectdetails.dto.Subjectmaster;
-import com.util.DataUtil;
+import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
+import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
+import org.ideoholic.curium.util.DataUtil;
 
 /**
  * @author Musaib_2

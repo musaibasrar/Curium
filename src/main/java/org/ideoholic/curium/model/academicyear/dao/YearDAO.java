@@ -1,14 +1,14 @@
-package com.model.academicyear.dao;
+package org.ideoholic.curium.model.academicyear.dao;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.util.Session;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
 
-import com.model.academicyear.dto.Currentacademicyear;
-import com.util.HibernateUtil;
+import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.util.HibernateUtil;
 
 public class YearDAO {
 	Session session = null;

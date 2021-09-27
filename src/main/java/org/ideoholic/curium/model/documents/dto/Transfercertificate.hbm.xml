@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 21 Mar, 2018 9:55:31 AM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.documents.dto.Transfercertificate" table="transfercertificate" >
+    <class name="org.ideoholic.curium.model.documents.dto.Transfercertificate" table="transfercertificate" >
         <id name="tcid" type="java.lang.Integer">
             <column name="tcid" />
             <generator class="identity" />

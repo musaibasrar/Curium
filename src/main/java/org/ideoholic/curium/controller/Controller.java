@@ -1,4 +1,4 @@
-package com.controller;
+package org.ideoholic.curium.controller;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -10,32 +10,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.model.academicyear.action.YearAction;
-import com.model.account.action.AccountAction;
-import com.model.adminexpenses.action.AdminAction;
-import com.model.attendance.action.AttendanceAction;
-import com.model.department.action.DepartmentAction;
-import com.model.documents.action.DocumentAction;
-import com.model.employee.action.EmployeeAction;
-import com.model.examdetails.action.ExamDetailsAction;
-import com.model.feescategory.action.FeesAction;
-import com.model.feescollection.action.FeesCollectionAction;
-import com.model.feesdetails.action.FeesDetailsAction;
-import com.model.hr.action.HrAction;
-import com.model.marksdetails.action.MarksDetailsAction;
-import com.model.mess.item.action.MessItemsAction;
-import com.model.mess.stockmove.action.MessStockMoveAction;
-import com.model.mess.supplier.action.MessSuppliersAction;
-import com.model.periods.action.PeriodAction;
-import com.model.position.action.PositionAction;
-import com.model.printids.action.PrintIdsAction;
-import com.model.sendemail.action.EmailAction;
-import com.model.sendsms.action.SmsAction;
-import com.model.stampfees.action.StampFeesAction;
-import com.model.std.action.StandardAction;
-import com.model.student.action.StudentAction;
-import com.model.subjectdetails.action.SubjectDetailsAction;
-import com.model.user.action.UserAction;
+import org.ideoholic.curium.model.academicyear.action.YearAction;
+import org.ideoholic.curium.model.account.action.AccountAction;
+import org.ideoholic.curium.model.adminexpenses.action.AdminAction;
+import org.ideoholic.curium.model.attendance.action.AttendanceAction;
+import org.ideoholic.curium.model.department.action.DepartmentAction;
+import org.ideoholic.curium.model.documents.action.DocumentAction;
+import org.ideoholic.curium.model.employee.action.EmployeeAction;
+import org.ideoholic.curium.model.examdetails.action.ExamDetailsAction;
+import org.ideoholic.curium.model.feescategory.action.FeesAction;
+import org.ideoholic.curium.model.feescollection.action.FeesCollectionAction;
+import org.ideoholic.curium.model.feesdetails.action.FeesDetailsAction;
+import org.ideoholic.curium.model.hr.action.HrAction;
+import org.ideoholic.curium.model.marksdetails.action.MarksDetailsAction;
+import org.ideoholic.curium.model.mess.item.action.MessItemsAction;
+import org.ideoholic.curium.model.mess.stockmove.action.MessStockMoveAction;
+import org.ideoholic.curium.model.mess.supplier.action.MessSuppliersAction;
+import org.ideoholic.curium.model.periods.action.PeriodAction;
+import org.ideoholic.curium.model.position.action.PositionAction;
+import org.ideoholic.curium.model.printids.action.PrintIdsAction;
+import org.ideoholic.curium.model.sendemail.action.EmailAction;
+import org.ideoholic.curium.model.sendsms.action.SmsAction;
+import org.ideoholic.curium.model.stampfees.action.StampFeesAction;
+import org.ideoholic.curium.model.std.action.StandardAction;
+import org.ideoholic.curium.model.student.action.StudentAction;
+import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsAction;
+import org.ideoholic.curium.model.user.action.UserAction;
 
 /**
  * Servlet implementation class Controller

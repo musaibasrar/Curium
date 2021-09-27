@@ -1,15 +1,15 @@
-package com.model.feescategory.action;
+package org.ideoholic.curium.model.feescategory.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.feescategory.dto.Feescategory;
-import com.model.feescategory.service.FeesService;
-import com.model.std.service.StandardService;
-import com.model.student.service.StudentService;
-import com.util.DataUtil;
-import com.util.DateUtil;
+import org.ideoholic.curium.model.feescategory.dto.Feescategory;
+import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.service.StudentService;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 
 public class FeesAction {
         HttpServletRequest request;

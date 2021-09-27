@@ -1,4 +1,4 @@
-package com.model.position.dto;
+package org.ideoholic.curium.model.position.dto;
 
 // default package
 // Generated 16 Jan, 2015 12:53:58 PM by Hibernate Tools 4.0.0

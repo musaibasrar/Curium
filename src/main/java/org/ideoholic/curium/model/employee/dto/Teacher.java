@@ -1,4 +1,4 @@
-package com.model.employee.dto;
+package org.ideoholic.curium.model.employee.dto;
 
 // default package
 // Generated 20 Jan, 2018 9:49:29 PM by Hibernate Tools 4.0.0

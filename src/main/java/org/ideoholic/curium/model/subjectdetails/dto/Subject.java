@@ -1,4 +1,4 @@
-package com.model.subjectdetails.dto;
+package org.ideoholic.curium.model.subjectdetails.dto;
 
 // default package
 // Generated 15 Aug, 2016 12:22:36 AM by Hibernate Tools 4.0.0

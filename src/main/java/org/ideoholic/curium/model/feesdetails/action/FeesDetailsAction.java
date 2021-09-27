@@ -1,12 +1,12 @@
-package com.model.feesdetails.action;
+package org.ideoholic.curium.model.feesdetails.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.feescategory.service.FeesService;
-import com.model.feesdetails.service.FeesDetailsService;
-import com.model.student.service.StudentService;
+import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.feesdetails.service.FeesDetailsService;
+import org.ideoholic.curium.model.student.service.StudentService;
 
 public class FeesDetailsAction {
 	HttpServletRequest request;

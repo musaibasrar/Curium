@@ -1,4 +1,4 @@
-package com.model.printids.service;
+package org.ideoholic.curium.model.printids.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.mess.card.dto.Card;
-import com.model.parents.dto.Parents;
-import com.model.printids.dao.PrintIdsDAO;
-import com.model.student.dao.studentDetailsDAO;
-import com.util.DataUtil;
-import com.util.DateUtil;
+import org.ideoholic.curium.model.mess.card.dto.Card;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.printids.dao.PrintIdsDAO;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 
 public class PrintIdsService {
 

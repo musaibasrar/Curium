@@ -1,4 +1,4 @@
-package com.model.department.dto;
+package org.ideoholic.curium.model.department.dto;
 
 // default package
 // Generated 16 Jan, 2015 12:53:36 PM by Hibernate Tools 4.0.0

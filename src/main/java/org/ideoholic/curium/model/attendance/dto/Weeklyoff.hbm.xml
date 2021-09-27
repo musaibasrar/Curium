@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 22 Dec, 2017 4:15:19 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.attendance.dto.Weeklyoff" table="att_weeklyoff">
+    <class name="org.ideoholic.curium.model.attendance.dto.Weeklyoff" table="att_weeklyoff">
         <id name="wid" type="java.lang.Integer">
             <column name="wid" />
             <generator class="identity" />

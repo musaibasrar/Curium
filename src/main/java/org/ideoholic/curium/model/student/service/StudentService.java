@@ -1,4 +1,4 @@
-package com.model.student.service;
+package org.ideoholic.curium.model.student.service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,21 +25,21 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.model.academicyear.dao.YearDAO;
-import com.model.academicyear.dto.Currentacademicyear;
-import com.model.degreedetails.dto.Degreedetails;
-import com.model.feescollection.dao.feesCollectionDAO;
-import com.model.feescollection.dto.Receiptinfo;
-import com.model.parents.dao.parentsDetailsDAO;
-import com.model.parents.dto.Parents;
-import com.model.pudetails.dto.Pudetails;
-import com.model.std.dto.Classsec;
-import com.model.std.service.StandardService;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
-import com.model.student.dto.Studentfeesstructure;
-import com.util.DataUtil;
-import com.util.DateUtil;
+import org.ideoholic.curium.model.academicyear.dao.YearDAO;
+import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
+import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
+import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.pudetails.dto.Pudetails;
+import org.ideoholic.curium.model.std.dto.Classsec;
+import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 
 public class StudentService {
 

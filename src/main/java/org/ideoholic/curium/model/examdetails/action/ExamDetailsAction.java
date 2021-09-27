@@ -1,18 +1,18 @@
 /**
  * 
  */
-package com.model.examdetails.action;
+package org.ideoholic.curium.model.examdetails.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.model.academicyear.service.YearService;
-import com.model.examdetails.service.ExamDetailsService;
-import com.model.stampfees.service.StampFeesService;
-import com.model.std.service.StandardService;
-import com.model.student.service.StudentService;
-import com.model.subjectdetails.service.SubjectDetailsService;
-import com.util.DataUtil;
+import org.ideoholic.curium.model.academicyear.service.YearService;
+import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
+import org.ideoholic.curium.model.stampfees.service.StampFeesService;
+import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.service.StudentService;
+import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
+import org.ideoholic.curium.util.DataUtil;
 
 /**
  * @author Musaib_2

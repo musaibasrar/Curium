@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.model.mess.stockentry.dto.MessInvoiceDetails" table="mess_invoicedetails" >
+    <class name="org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails" table="mess_invoicedetails" >
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <!-- <generator class="identity" /> -->

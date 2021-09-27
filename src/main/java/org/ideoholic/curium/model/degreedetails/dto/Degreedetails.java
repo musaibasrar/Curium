@@ -1,4 +1,4 @@
-package com.model.degreedetails.dto;
+package org.ideoholic.curium.model.degreedetails.dto;
 
 // default package
 // Generated 5 Jul, 2018 7:53:04 PM by Hibernate Tools 5.3.0.Beta2

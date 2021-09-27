@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 18 Feb, 2018 10:47:48 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.account.dto.Accountdetailsbalance" table="acc_accountdetailsbalance" >
+    <class name="org.ideoholic.curium.model.account.dto.Accountdetailsbalance" table="acc_accountdetailsbalance" >
         <id name="accountdetailsbalanceid" type="java.lang.Integer">
             <column name="accountdetailsbalanceid" />
             <generator class="identity" />
@@ -32,7 +32,7 @@
         <property name="userid" type="int">
 			<column name="userid" />
 		</property>
-         <many-to-one name="accountDetails" class="com.model.account.dto.Accountdetails"
+         <many-to-one name="accountDetails" class="org.ideoholic.curium.model.account.dto.Accountdetails"
             column="accountdetailsid" lazy="false"
             cascade="none" />
     </class>

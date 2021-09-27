@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 15 Aug, 2016 11:42:58 AM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.marksdetails.dto.Marks" table="marks">
+    <class name="org.ideoholic.curium.model.marksdetails.dto.Marks" table="marks">
         <id name="marksid" type="java.lang.Integer">
             <column name="marksid" />
             <generator class="identity" />
