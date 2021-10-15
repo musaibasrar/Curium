@@ -25,7 +25,7 @@
             <column name="photo"/>
         </property>
         <property generated="never" lazy="false" name="gender" optimistic-lock="true" type="string" unique="false">
-            <column length="10" name="gender"/>
+            <column length="45" name="gender"/>
         </property>
         <property generated="never" lazy="false" name="fathername" optimistic-lock="true" type="string" unique="false">
             <column length="100" name="fathername"/>

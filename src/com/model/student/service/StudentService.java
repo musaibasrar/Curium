@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -1754,15 +1755,47 @@ public class StudentService {
 	public boolean approveRecords() {
 		
 		String[] studentIds = request.getParameterValues("studentIDs");
+		Map<String,String> idAdmissionNo = new HashMap<String, String>();
+		
 		if (studentIds != null) {
+			
+			//Start update correct admission number
+			
+			String admissionNo = request.getParameter("admissionno_"+studentIds[0]);
+			String admNo = admissionNo.substring(0, admissionNo.length() - 3);
+			String admissionNumber = null;
+			
+			List<Student> lastSid = new studentDetailsDAO().getListStudents("From Student where admissionnumber like '"+admNo+"%'AND (remarks = 'approved' OR remarks = 'admin') order by sid DESC");
+			
+			int admission = 1;
+	        if(lastSid.size() > 0) {
+	            //admission = lastSid.get(0).getSid();
+	            admission = Integer.parseInt(lastSid.get(0).getAdmissionnumber().substring(lastSid.get(0).getAdmissionnumber().length()-3));
+	            admission++;
+	        }
+	        
+	        admissionNumber = admNo+String.format("%03d", admission);
+	        System.out.println("AdmissionNumber "+admissionNumber);
+			
+		
+		//End update correct admission number
+			
 			List ids = new ArrayList();
+			
 			for (String id : studentIds) {
 				ids.add(Integer.valueOf(id));
+				String adno = request.getParameter("admissionno_"+id);
+				String admNoParam = admissionNo.substring(0, admissionNo.length() - 3);
+				 admissionNumber = admNoParam+String.format("%03d", admission);
+				idAdmissionNo.put(id, admissionNumber);
+				admission++;
 			}
-			if(new studentDetailsDAO().approveRecords(ids)) {
+			
+			if(new studentDetailsDAO().approveRecords(idAdmissionNo)) {
 			    return true;
 			}
 		}
+		
 		return false;
 	}
 

@@ -474,9 +474,9 @@ for(Cookie cookie : cookies){
                                         <label> <select name="searchacademicyear" id="searchacademicyear"
 									style="width: 180px;display: none;">
 										<option selected value="${currentYear}">${currentYear}(Current Year)</option>
-										<option value="2018/19">2018/19</option>
-										<option value="2019/20">2019/20</option>
-										<option value="2019/20">2020/21</option>
+										<option value="2020/21" >2020/21</option>
+										<option value="2019/20" >2019/20</option>
+										<option value="2018/19" >2018/19</option>
 								</select>
 							</label> 
                                     </label>
@@ -555,12 +555,9 @@ for(Cookie cookie : cookies){
 										<option selected value="${selectedexamyear}">${selectedexamyear}</option>
 											<option ></option>
 											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2020/21" >2020/21</option>
+											<option value="2019/20" >2019/20</option>
 											<option value="2018/19" >2018/19</option>
-											<option value="2017/18" >2017/18</option>
-											<option value="2016/17" >2016/17</option>
-											<option value="2015/16" >2015/16</option>
-											<option value="2014/15" >2014/15</option>
-											<option value="2013/14" >2013/14</option>
 								</select>
 							</label> 
 								</td>

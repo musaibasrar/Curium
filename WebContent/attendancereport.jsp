@@ -361,10 +361,14 @@
 
 	
 	function searchAttendanceStatus() {
+		
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=searchAttendanceStatus";
-		form1.method = "POST";
-		form1.submit();
+		
+		if(form1.checkValidity()) {
+			form1.action = "Controller?process=AttendanceProcess&action=searchAttendanceStatus";
+			form1.method = "POST";
+			form1.submit();			
+		}
 	}
 
 	$(function() {
@@ -553,7 +557,7 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 							<td class="alignRightFields" >Center&nbsp;&nbsp;&nbsp;</td>
-							<td width="12%" align="left"><label> <select name="centercode" id="centercode"
+							<td width="12%" align="left"><label> <select name="centercode" id="centercode" required
 									style="width: 200px;">
 										<option selected>${attendancecenternamesearch}</option>
 										<c:forEach items="${branchList}" var="branchlist">
@@ -574,7 +578,7 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="examlevel" id="examlevel" 
+										<select name="examlevel" id="examlevel" required
 									style="width: 200px;">
 										<option selected>${searchedexamlevel}</option>
 										<c:forEach items="${examleveldetails}" var="examleveldetails">
@@ -611,7 +615,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Subject&nbsp;</td>
 							<td width="70%"><label> 
-										<select name="subjectnameAjax" id="subjectnameAjax"
+										<select name="subjectnameAjax" id="subjectnameAjax" required
 									style="width: 200px;">
 										<option selected>${searchedsubject}</option>
 										<option>Paper 1</option>
@@ -648,12 +652,9 @@ for(Cookie cookie : cookies){
 										<option selected value="${attendanceacademicsearch}">${attendanceacademicsearch}</option>
 											<option ></option>
 											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2020/21" >2020/21</option>
+											<option value="2019/20" >2019/20</option>
 											<option value="2018/19" >2018/19</option>
-											<option value="2017/18" >2017/18</option>
-											<option value="2016/17" >2016/17</option>
-											<option value="2015/16" >2015/16</option>
-											<option value="2014/15" >2014/15</option>
-											<option value="2013/14" >2013/14</option>
 								</select>
 							</label> 
 							</td>

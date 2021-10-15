@@ -380,7 +380,9 @@ for(Cookie cookie : cookies){
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a>
+                                <input type="hidden" name="admissionno_${Parents.student.sid}"  value="<c:out value="${Parents.student.admissionnumber}"/>"/>
+                                </td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.name}"/></td>
                                 <td class="dataText">
 								<c:if test="${(Parents.mothersname != '')}">

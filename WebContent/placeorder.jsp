@@ -361,13 +361,13 @@
             "sScrollY": "380px",
             "bPaginate": true,
             "bLengthChange": false,
-            "bFilter": false,
-            "bSort": true,
+            "bFilter": true,
+            "bSort": false,
             "bInfo": true,
             "bStateSave": false,
             "bProcessing": false,
             "bServerSide": false,
-            "bAutoWidth": false,
+            "bAutoWidth": true,
             "iDisplayLength": 2000,
             "aoColumnDefs":[
                 { 'bSortable': false, 'aTargets': [ 0 ] }
@@ -435,7 +435,8 @@
 	}
 	
 	$(function() {
-
+	
+		
 		$("#tabs").tabs();
 		$("#save").button({
             icons:{
@@ -472,6 +473,9 @@
                  primary: "ui-icon-note"
              }
          }).click(function(){
+        	 
+        	 $('#myTable').dataTable().fnFilter('');
+        	 
 
         	 var chkds = $("input[name='booksids']:checkbox");
         	 
@@ -632,7 +636,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText" style="width: 30%;"><c:out value="${books.title}"/></td>
                                 <td class="dataText"><c:out value="${books.language}"/></td>
                                 <td class="dataText" style="width: 20%;"><c:out value="${books.author}"/></td>
-                                <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.price}"/>" class="price" id="price_${status.index}" name="price" readonly="readonly"></td>
+                                <td class="dataText"><input type="hidden" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${books.price}"/>" class="price" id="price_${status.index}" name="price" readonly="readonly"><c:out value="${books.price}"/></td>
                                 <td class="dataText"><input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 20%;" value="0" class="quantity" id="quantity_${status.index}" name="quantity" onkeyup="calculatePrice(${status.index});checkboxcheck(${status.index});"></td>
                                 <td class="dataText" style="text-transform:uppercase">
                                 <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;width: 40%;" id="totalprice_${status.index}" name="totalprice">

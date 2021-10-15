@@ -4,7 +4,9 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -794,14 +796,24 @@ public class studentDetailsDAO {
 
   }
 
-		public boolean approveRecords(List ids) {
+		public boolean approveRecords(Map<String, String> idAdmissionNo) {
 			try {
 				transaction = session.beginTransaction();
-				Query query = session
-						.createQuery("update Student set remarks='approved',approvedon=current_date() where sid IN (:ids)");
-				query.setParameterList("ids", ids);
-				query.executeUpdate();
+				
+				
+				for (Map.Entry<String,String> admnoid : idAdmissionNo.entrySet()) {
+					Query query = session.createQuery("update Student set admissionnumber = '"+admnoid.getValue()+"' , remarks='approved',approvedon=current_date() where sid = "+admnoid.getKey()+"");
+					query.executeUpdate();
+				}
+				
+				/*
+				 * Query query = session
+				 * .createQuery("update Student set remarks='approved',approvedon=current_date() where sid IN (:ids)"
+				 * ); query.setParameterList("ids", idAdmissionNo); query.executeUpdate();
+				 */
+				
 				transaction.commit();
+				
 				return true;
 			} catch (HibernateException hibernateException) {transaction.rollback();
 				hibernateException.printStackTrace();

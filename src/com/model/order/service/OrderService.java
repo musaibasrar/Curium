@@ -150,16 +150,22 @@ public class OrderService {
             String[] quantity = request.getParameterValues("quantity");
             String[] price = request.getParameterValues("price");
             Float grandTotal = 0f;
+            boolean confirmation = true;
             
             for (String bookId : booksIds) {
                 Ordersdetails orderDetails = new Ordersdetails();
                 String[] bkId = bookId.split(":");
                 orderDetails.setBookid(Integer.parseInt(bkId[0]));
+                if(Integer.parseInt(quantity[Integer.parseInt(bkId[1])]) == 0) {
+                	confirmation = false;
+                }
                 orderDetails.setQuantity(Integer.parseInt(quantity[Integer.parseInt(bkId[1])]));
                 orderDetails.setPrice(Float.parseFloat(price[Integer.parseInt(bkId[1])]));
                 grandTotal = grandTotal + orderDetails.getPrice()*orderDetails.getQuantity();
                 orderDetailsList.add(orderDetails);
             }
+            
+            if(confirmation) {
             
             //String centerCodeLogin = httpSession.getAttribute("logincentercode").toString();
             String centerC = request.getParameter("centercode");
@@ -170,7 +176,7 @@ public class OrderService {
             orderSummary.setDiscount(0);
             orderSummary.setTotalafterdiscount(grandTotal);
             
-            boolean confirmation = new OrderDAO().confirmOrderSummary(orderSummary,orderDetailsList,httpSession.getAttribute("currentAcademicYear").toString());
+            confirmation = new OrderDAO().confirmOrderSummary(orderSummary,orderDetailsList,httpSession.getAttribute("currentAcademicYear").toString());
             if(confirmation) {
                 try {
                     Properties properties = new Properties();
@@ -181,6 +187,7 @@ public class OrderService {
                 } catch (Exception e) {
                     logger.error(e);
                 }
+            }
             }
             request.setAttribute("ordersave", confirmation);
         }

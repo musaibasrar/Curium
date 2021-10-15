@@ -233,7 +233,7 @@ public class StudentAction {
         }
 
 	private String searchResultList() {
-	    new ResultService(request, response).searchRankListReport();
+	    new ResultService(request, response).searchRankListReportNew();
 	    
 	    if("true".equalsIgnoreCase(request.getParameter("centervalue"))) {
 	    	return "resultlistcenter.jsp";
@@ -504,7 +504,8 @@ public class StudentAction {
 	}
 
 	private String searchForPromotion() {
-		new ResultService(request, response).searchResultReport();
+		//new ResultService(request, response).searchResultReport();
+		new ResultService(request, response).searchForPromotion();
 	    return "Promotion.jsp";
 	}
 
