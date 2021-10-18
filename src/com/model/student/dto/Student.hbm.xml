@@ -35,8 +35,8 @@
         <property name="religion" type="string">
             <column name="religion" length="45" />
         </property>
-        <property name="caste" type="string">
-            <column name="caste" length="45" />
+        <property name="secondlanguage" type="string">
+            <column name="secondlanguage" length="45" />
         </property>
         <property name="admissiondate" type="date">
             <column name="admissiondate" length="10" />
@@ -68,8 +68,8 @@
         <property name="studentexternalid" type="string">
             <column name="studentexternalid" length="45" not-null="true" unique="true" />
         </property>
-        <property name="crecord" type="string">
-            <column name="crecord" length="45" />
+        <property name="percentage" type="string">
+            <column name="percentage" length="45" />
         </property>
         <property name="crecorddate" type="date">
             <column name="crecorddate" length="10" />
@@ -77,8 +77,8 @@
         <property name="placeofbirth" type="string">
             <column name="placeofbirth" length="100" />
         </property>
-        <property name="nooftc" type="java.lang.Integer">
-            <column name="nooftc" />
+        <property name="totalmarks" type="java.lang.Integer">
+            <column name="totalmarks" />
         </property>
         <property name="dateoftc" type="date">
             <column name="dateoftc" length="10" />
@@ -101,8 +101,8 @@
         <property name="guardiandetails" type="string">
             <column name="guardiandetails" length="200" />
         </property>
-         <property name="subsequentprogress" type="string">
-            <column name="subsequentprogress" length="500" />
+         <property name="lastschooladdress" type="string">
+            <column name="lastschooladdress" length="200" />
         </property>
           <property name="branchid" type="int">
             <column name="branchid" />
@@ -153,20 +153,20 @@
         <property name="belongtobpl" type="java.lang.Integer">
             <column name="belongtobpl"/>
         </property> 
-        <property name="bplcardno" type="string">
-            <column name="bplcardno" length="25" />
+        <property name="lastcourse" type="string">
+            <column name="lastcourse" length="25" />
         </property> 
-        <property name="bhagyalakshmibondnumber" type="string">
-            <column name="bhagyalakshmibondnumber" length="25" />
+        <property name="lastfirstlanguage" type="string">
+            <column name="lastfirstlanguage" length="25" />
         </property>
-        <property name="disabilitychild" type="string">
-            <column name="disabilitychild" length="40" />
+        <property name="lastsecondlanguage" type="string">
+            <column name="lastsecondlanguage" length="40" />
         </property>   
         <property name="specialcategory" type="string">
             <column name="specialcategory" length="25" />
         </property> 
-        <property name="sts" type="java.lang.Integer">
-            <column name="sts" />
+        <property name="registrationnumber" type="string">
+            <column name="registrationnumber" />
         </property>
         <property name="rte" type="java.lang.Integer">
             <column name="rte" />

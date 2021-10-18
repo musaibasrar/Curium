@@ -1,6 +1,6 @@
 <%-- 
-    Document   : student_details_pu
-    Created on : JUN 20, 2018, 6:41:24 PM
+    Document   : student_details
+    Created on : Jan 4, 2013, 4:39:24 PM
     Author     : Musaib
 --%>
 
@@ -9,11 +9,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Details PU</title>
+        <title>Student Details</title>
 
         <script type="text/javascript" language="JavaScript" src="js/motionpack.js"></script>
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -202,7 +203,7 @@
             }
             .alignLeft {
                 font-family: Tahoma;
-                font-size: 13px;
+                font-size: 16px;
                 font-style: normal;
                 text-transform: capitalize;
                 color: #325F6D;
@@ -285,13 +286,24 @@
                 color: #325f6d;
             }
             .tablerows{
-                font-size: 12px;
+                font-size: 16px;
                 font-family: Tahoma;
                 text-align: left;
                 font-weight: bold;
 
             }
             -->
+            table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #b6cfe2;
+  text-align: left;
+  padding: 8px;
+}
         </style>
         
         <script type="text/javascript">
@@ -320,7 +332,7 @@
         <script type="text/javascript">
             $(function() {
 
-                $("#accordion").accordion({
+                $(".accordion").accordion({
                     collapsible: true,
                     navigation: true,
                     active: false,
@@ -361,7 +373,17 @@
             	}
             }
         </script>
+ <script type="text/javascript">
+                                $(function() {
+                                    $( "#modify" )
+                                    .button()
+                                    .click(function() {
+                                        updateStudent();
 
+                                    });
+                                });
+                                
+                            </script>
 
     </head>
       <%
@@ -380,47 +402,10 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="images/bg.jpg" onload="checkUsertype();">
+    <body onload="checkUsertype();">
         <jsp:useBean id="now" class="java.util.Date" />
         <fmt:formatDate var="today" type="date" value="${now}" />
         <form  method="post" id="form1">
-
-            <div>
-                <table id="table3" width="100%" border="0" cellpadding="1" cellspacing="1" align="center"  >
-                    <tr><td >
-
-
-                            <%--<button id="fullSummary">Full Summary</button>--%>
-                            <script type="text/javascript">
-                                $(function() {
-                                    $( "#set" )
-                                    .button()
-                                    .click(function() {
-                                        setAppointment();
-
-                                    });
-                                    $( "#modify" )
-                                    .button()
-                                    .click(function() {
-                                        updateStudent();
-
-                                    });
-                                    $( "#fullSummary" )
-                                    .button()
-                                    .click(function() {
-                                        fullSummary();
-
-                                    });
-                                });
-                                
-                                function calIssues(){
-                                    var fromIss = document.getElementById("").value;
-                                }
-                            </script>
-                        </td></tr>
-
-                </table>
-            </div>
 
             <table width="100%">
                 <tr>
@@ -431,189 +416,166 @@ for(Cookie cookie : cookies){
                 </tr>
 
             </table>
-            <div id="accordion" style="width: 100%;height: 100%">
+            <div class="accordion" style="width: 100%;height: 100%">
 		
                 <h3><a href="#">Student Details</a></h3>
                 <div>
 
-                    <table  border="0px" width="100%"  id="table1" align="center">
+                    <table  border="0px" style="width: auto;height: auto;"  id="table1" align="center">
                     
                     
                     <tr>
-                    <td>
+                    <td style="border: 0px;"></td>
+                    <td style="border: 0px;">
                     <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
                     </td>
+                    <td style="border: 0px;"></td>
+                    <td style="width: 200px;border: 0px;"></td>
                     </tr>
                     
                     	<tr>
-                        
                          
-                            <td  width="25%"  class="alignLeft" height="50">Admission Number
+                            <td   class="alignLeft" height="50">Admission Number
                             </td>
-                            <td width="25%" class="tablerows">
+                            <td class="tablerows">
                                 <c:out default="" value="${student.admissionnumber}" />
                             </td>
                             
-                        
-                            <td width="25%"   class="alignLeft" height="50" >Cumulative record no. with date of opening</td>
-                             <td width="25%" class="tablerows">
-                                <c:out default="" value="${student.crecord}" /> : 
-                                <fmt:formatDate value="${student.crecorddate}" pattern="dd/MM/yyyy"/>
+                        <td class="alignLeft" height="50">Registration No.
+								</td>
+                            <td class="tablerows">
+                                <c:out default="" value="${student.registrationnumber}" />&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </td>
+                            
                         </tr>
 
-                        <tr>
-
-                            <td width="25%"  class="alignLeft" height="50">Name</td>
-                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+					<tr>
+                            <td  class="alignLeft" height="50">Name</td>
+                            <td class="tablerows" style="text-transform:uppercase">
                                 <c:out default="" value="${student.name}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Gender
+                            <td  class="alignLeft" height="50" >Gender
                             </td>
-                            <td width="25%" class="tablerows" >
+                            <td class="tablerows" >
                                 <c:out default="" value="${student.gender}" />
                             </td>
                         </tr>
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
-                            <td width="25%" class="tablerows" >
+                            <td  class="alignLeft" height="50">Date Of Birth</td>
+                            <td class="tablerows" >
                                 <%-- <c:out value="${student.dateofbirth}" /> --%>
                                 <fmt:formatDate value="${student.dateofbirth}" pattern="dd/MM/yyyy"/>
                                 
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Age
+                            <td  class="alignLeft" height="50" >Age
                             </td>
-                            <td width="25%"  class="tablerows">
+                            <td  class="tablerows">
                                 <c:out default="" value="${student.age}" />
                             </td>
                         </tr>
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50" >Place of birth, Tq, Dist.</td>
-                            <td width="25%"  class="tablerows" >
+                            <td  class="alignLeft" height="50" >Place of birth</td>
+                            <td  class="tablerows" >
                               <c:out default="" value="${student.placeofbirth}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50">No. & date of Transfer Certificate
+                           <td   class="alignLeft" height="50" >Date of admission
                             </td>
-                            <td  width="25%" class="tablerows" >
-                               <c:out default="" value="${student.nooftc}" />:
-                               <fmt:formatDate value="${student.crecorddate}" pattern="dd/MM/yyyy"/>
+                            <td class="tablerows" >
+                            	<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>
                             </td>
-                        </tr>
-                        <tr>
-                            <td width="25%"  class="alignLeft" height="50" >Studying in class</td>
-                            <td  width="25%"  class="tablerows">
-                                <c:out default="" value="${student.classstudying}" />
-                            </td>
-                            <td width="25%"  class="alignLeft" height="50">Admitted in class
-                            </td>
-                            <td width="25%" class="tablerows">
-                                <c:out default="" value="${student.classadmittedin}" />
-                            </td>
-                        </tr>
-                        <tr>
-                        <td width="25%"   class="alignLeft" height="50" >Last Class Studied</td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.stdlaststudied}" />
-                            </td>
-                            
-                            
-                            <td width="25%"   class="alignLeft" height="50" >Last School Attended</td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.schoollastattended}" />
-                            </td>
-                           
-                           
+                        </tr>  
                         
-                        </tr>
-                        
+                          
                         <tr>
-                            <td  width="25%"  class="alignLeft" height="50">Subsequent progress of the student
+                            <td  class="alignLeft" height="50" >Course</td>
+                            <td   class="tablerows">
+                            <c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
+						    ${splt} 
+							</c:forEach>
+                               <%--  <c:out default="" value="${student.classstudying}" /> --%>
                             </td>
-                            <td width="25%" class="tablerows">
-                                <c:out default="" value="${student.subsequentprogress}" />
+                            <td   class="alignLeft" height="50">Blood Group
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50">Blood Group
-                            </td>
-                            <td width="25%" class="tablerows">
+                            <td class="tablerows">
                                 <c:out default="" value="${student.bloodgroup}" />
                             </td>
                         </tr>
                         
-                        </tr>
-                        
-                         
                         <tr>
-                        
-                          <td  width="25%"  class="alignLeft" height="50" >Mother Tongue
+                          <td   class="alignLeft" height="50" >Mother Tongue
                             </td>
-                            <td width="25%" class="tablerows" >
+                            <td class="tablerows" >
                                 <c:out default="" value="${student.mothertongue}" />
-                            </td>
+                            </td>          
                             
-                            <td  width="25%"  class="alignLeft" height="50" >Nationality
+                            <td   class="alignLeft" height="50" >Religion
                             </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.nationality}" />
-                            </td>
-
-                            
-                        </tr>
-
-                        <tr>
-                        <td  width="25%"  class="alignLeft" height="50" >Religion
-                            </td>
-                            <td width="25%" class="tablerows" >
+                            <td class="tablerows" >
                                 <c:out default="" value="${student.religion}" />
                             </td>
-                            
-                            <td  width="25%"  class="alignLeft" height="50" >Caste
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.caste}" />
-                            </td>
-
-                            
-
-
+                                             
                         </tr>
-
+                        
+                         <tr>
+                            
+                            <td   class="alignLeft" height="50" >Caste/Category
+                            </td>
+                            <td class="tablerows" >
+                                <c:out default="" value="${student.studentscaste}" />
+                            </td>
+                                                        
+                            <td   class="alignLeft" height="50" >Nationality
+                            </td>
+                            <td class="tablerows" >
+                                <c:out default="" value="${student.nationality}" />
+                            </td>
+                        </tr>
+                        
                         <tr>
                         
-                        <td  width="25%"  class="alignLeft" height="50" >Date of admission
+                      
+                            <td   class="alignLeft" height="50" >Aadhaar Card
                             </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.admissiondate}" />
+                            <td class="tablerows" >
+                                <c:out default="" value="${student.studentscastecertno}" />
                             </td>
-                             <td  width="25%"  class="alignLeft" height="50">Created Date
+                            
+                             <td   class="alignLeft" height="50" >Second Language
                             </td>
-                            <td width="25%" class="tablerows">
+                            <td class="tablerows" >
+                                <c:out default="" value="${student.secondlanguage}" />
+                            </td> 
+                         
+                        </tr>
+                                            
+                        <tr>
+                        
+                             <td   class="alignLeft" height="50">Created Date
+                            </td>
+                            <td class="tablerows">
                                 <%-- <c:out default="" value="${student.createddate}" /> --%>
                                 <fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>
                             </td>
-                          
-                           
-                        </tr>
-
-						
-						<tr>
-                            <td  width="25%"  class="alignLeft" height="50">Remakrs
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.remarks}" />
-                                
-                            </td>
+   
                         </tr>
                                                 
+                                                
+                         <tr>
+								<td style="border: 0px;">
+									<div align="left"><h3 style="text-decoration: underline;color: #eb6000;margin-left: 4px;">Additional Details</h3></div>
+								</td>
+						</tr>
                         <tr>
-                            <td  width="25%"  class="alignLeft" height="50" >Class of leaving
+                            <td   class="alignLeft" height="50" >Class of leaving
                             </td>
-                            <td width="25%" class="tablerows" >
+                            <td class="tablerows" >
                                 <c:out default="" value="${student.classonleaving}" />
                             </td>
                             
-                             <td  width="25%"  class="alignLeft" height="50">Date of leaving the school
+                             <td   class="alignLeft" height="50">Date of leaving<br> the school
                             </td>
-                            <td width="25%" class="tablerows">
+                            <td class="tablerows">
                                 <fmt:formatDate value="${student.dateleaving}" pattern="dd/MM/yyyy"/>
                             </td>
                           
@@ -621,207 +583,173 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                            <td  width="25%"  class="alignLeft" height="50" >Reason for leaving
+                            <td   class="alignLeft" height="50" >Reason for leaving
                             </td>
-                            <td width="25%" class="tablerows" >
+                            <td class="tablerows" >
                                 <c:out default="" value="${student.reasonleaving}" />
                             </td>
                             
-                             <td  width="25%"  class="alignLeft" height="50">No. & date of transfer certificate issued
+                             <td   class="alignLeft" height="50">No. & date of <br>transfer certificate<br> issued
                             </td>
-                            <td width="25%" class="tablerows">
+                            <td class="tablerows">
                             <c:out default="" value="${student.notcissued}" /> :
                                 <fmt:formatDate value="${student.datetcissued}" pattern="dd/MM/yyyy"/>
                             </td>
+                          
+                           
                         </tr>
                         
-                        
-                          <tr>
-                            <td  width="25%"  class="alignLeft" height="50" >Particulars of the Examination passed
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <label> First appearance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" value="1" name="pep" id="firstappearance"
-								onclick="Check1();" ${student.pudetails.exampassedappearance == '1' ? 'checked' : ''}/>&nbsp;&nbsp;<br>Subsequent appearance&nbsp;<input
-								type="checkbox" value="0" ${student.pudetails.exampassedappearance == '0' ? 'checked' : ''} name="pep" id="subsequentappearance"
-								onclick="Check2()" />
-							</label>
+                    </table>
+                </div>
+    </div>
+    
+    	<div class="accordion" style="width: 100%;height: 100%">
+		
+                <h3><a href="#">Previous School Details</a></h3>
+                <div>
+					<br>
+                    <table  border="0px" style="width: auto;height: auto;"  id="table1" align="center">
+                    
+                    
+                    	<tr>
+                    	
+                    	<td   class="alignLeft" height="50" >Previous School Name</td>
+                            <td class="tablerows" width="200px;">
+                                <c:out default="" value="${student.schoollastattended}" />
                             </td>
                             
-                             <td  width="25%"  class="alignLeft" height="50">Year
+                            <td  class="alignLeft" height="50">Address
                             </td>
-                            <td width="25%" class="tablerows">
-                            <c:out default="" value="${student.pudetails.exampassedyear}" />
+                            <td  class="tablerows"  width="200px;">
+                               <c:out default="" value="${student.lastschooladdress}" />
+                            </td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            
+                             <td   class="alignLeft" height="50" >Total Marks</td>
+                            <td class="tablerows" >
+                                <c:out default="" value="${student.totalmarks}" />
+                            </td>
+                            
+                            <td   class="alignLeft" height="50" >GPA/Percentage</td>
+                            <td class="tablerows" >
+                                <c:out default="" value="${student.percentage}" />
                             </td>
                         </tr>
                         
                       <tr>
-                            <td  width="25%"  class="alignLeft" height="50" >Reg. No.
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.pudetails.exampassedregno}" />
+                             <td   class="alignLeft" height="50" >Admission In Class</td>
+                            <td class="tablerows" >
+                                <c:out default="" value="${student.stdlaststudied}" />
                             </td>
                             
-                             <td  width="25%"  class="alignLeft" height="50">Result With Class
-                            </td>
-                            <td width="25%" class="tablerows">
-                            <c:out default="" value="${student.pudetails.exampassedresultwithclass}" />
+                            <td   class="alignLeft" height="50" >Course</td>
+                            <td class="tablerows" >
+                                <c:out default="" value="${student.lastcourse}" />
                             </td>
                         </tr>
                         
-                        <tr>
-                            <td  width="25%"  class="alignLeft" height="50" >Second Language Offered in SSLC/HSC(X std.) or Equivalent Examination
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.pudetails.secondlanguage}" />
-                            </td>
-                            
-                             <td  width="25%"  class="alignLeft" height="50">Aggregate Marks in SSLC/HSC(X std.) or Equivalent Examination
-                            </td>
-                            <td width="25%" class="tablerows">
-                            <c:out default="" value="${student.pudetails.aggregatemarkssslc}" />
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                            <td  width="25%"  class="alignLeft" height="50" >Subjects Selected
-                            </td>
-                            <td width="25%" class="tablerows" ><label style="color: #325F6D;">Part-I</label> <br>
-                                <c:out default="" value="${student.pudetails.optionalsubjects}" /> <br>
-                                <label style="color: #325F6D;">Part-II</label><br>
-                                <c:out default="" value="${student.pudetails.compulsorysubjects}" /> 
-                                
+                         <tr>
+                        	<td   class="alignLeft" height="50" >First Language</td>
+                            <td class="tablerows" >
+                                <c:out default="" value="${student.lastfirstlanguage}" />
                             </td>
                             
-                             <td  width="25%"  class="alignLeft" height="50">Medium of instruction at the SSLC/SSC/HSC (X std.) or Equivalent Examination
-                            </td>
-                            <td width="25%" class="tablerows">
-                            <c:out default="" value="${student.pudetails.sslcmediuminstruction}" />
-                            </td>
-                        </tr>
-                        
-                          
-                        <tr>
-                            <td  width="25%"  class="alignLeft" height="50" >Medium of instruction selected for Pre-University Course
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.pudetails.pumediuminstruction}" />
-                            </td>
                             
-                             
-                        </tr>
-                        
-                        
-                        <tr>
-                            <td  width="25%"  class="alignLeft" height="50">
+                            <td   class="alignLeft" height="50" >Second Language</td>
+                            <td class="tablerows" >
+                                <c:out default="" value="${student.lastsecondlanguage}" />
                             </td>
-                            <td width="25%" class="tablerows" >
+                        </tr>
 
-                            </td>
-                            <td  width="25%"  class="alignLeft" height="50">
-                            </td>
-                            <td width="25%" class="tablerows">
-
-                            </td>
-                        </tr>
                     </table>
-
-                   
+                    <br>
+                    <br>
                 </div>
-
-
-
-
-
-
-            </div>
+    </div>
+    
+        
             <div id="accordion1" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Parent's Details</a></h3>
                 <div>
-
-                    <table  border="0px" width="100%"  id="table1" align="center">
-
+					
+                    <table  border="0px" style="width: auto;height: auto;" id="table1" align="center">
+						
+						
+							<tr >
+								<td style="border: 0px;">
+									<div align="left"><h3 style="text-decoration: underline;color: #eb6000;margin-left: 4px;">Father's / Guardian's Details</h3></div>
+								</td>
+							</tr>
                         <tr>
 
-                            <td width="25%"  class="alignLeft" height="50">Father's Name</td>
-                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                            <td  class="alignLeft" height="50">Father Name</td>
+                            <td class="tablerows" style="text-transform:uppercase;width: 200px;">
                                 <c:out default="" value="${parents.fathersname}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Mother's Name
-                            </td>
-                            <td width="25%" class="tablerows" style="text-transform:uppercase">
-                                <c:out default="" value="${parents.mothersname}" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="25%"  class="alignLeft" height="50">Guardian's name & address</td>
-                            <td width="25%" class="tablerows" >
-                                 <c:out value="${student.guardiandetails}" />
+                            <td  class="alignLeft" height="50">Occupation</td>
+                            <td class="tablerows" width="200px;">
+                                 <c:out value="${parents.fatheroccupation}" />
                                 
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Annual Income
-                            </td>
-                            <td width="25%"  class="tablerows">
-                                <c:out default="" value="${parents.parentsannualincome}" />
-                            </td>
+
                         </tr>
-                        <!--<tr>
-                            <td width="25%"  class="alignLeft" height="50" >Address line 2</td>
-                            <td width="25%"  class="tablerows" >
-                              <%--  <c:out default="" value="${personal.addressline2}" /> --%>
-                            </td>
-                            <td width="25%"  class="alignLeft" height="50">City
-                            </td>
-                            <td  width="25%" class="tablerows" >
-                               <%-- <c:out default="" value="${personal.city}" /> --%>
-                            </td>
-                        </tr> -->
+                        
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50" >Contact Number</td>
-                            <td  width="25%"  class="tablerows">
+
+                            <td  class="alignLeft" height="50">Qualification</td>
+                            <td class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.fathersqualification}" />
+                            </td>
+                            <td  class="alignLeft" height="50" >Contact Number</td>
+                            <td   class="tablerows">
                                 <c:out default="" value="${parents.contactnumber}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50">Co-Contact Number
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td  class="alignLeft" height="50" >Annual Income
                             </td>
-                            <td width="25%" class="tablerows">
-                                <c:out default="" value="${parents.cocontactnumber}" />
+                            <td  class="tablerows">
+                                <c:out default="" value="${parents.parentsannualincome}" />
+                            </td>
+                            
+                           <td  class="alignLeft" height="50">Emergency Contact Number
+                            </td>
+                            <td class="tablerows">
+                                <c:out default="" value="${parents.emergencycontactno}" />
                             </td>
                         </tr>
-					<tr>
-					<td width="25%" class="alignLeft" height="50">Email</td>
-						<td width="25%" class="tablerows"><c:out default=""
-								value="${parents.email}" /></td>
-								
-						<td width="25%" class="alignLeft" height="50">Number Of
-							Dependents</td>
-						<td width="25%" class="tablerows"><c:out default=""
-								value="${parents.noofdependents}" /></td>
-					</tr>
-					
-					<tr>
-                            <td width="25%"   class="alignLeft" height="50" >Parmanent Address</td>
-                            <td width="25%" class="tablerows" >
+                        
+                        <tr>
+                            <td   class="alignLeft" height="50" >Parmanent Address</td>
+                            <td class="tablerows" >
                                 <c:out default="" value="${parents.addresspermanent}" />
                             </td>
                            
                             
-                            <td  width="25%"  class="alignLeft" height="50">Temporary Address
+                            <td   class="alignLeft" height="50">Temporary Address
                             </td>
-                            <td width="25%" class="tablerows">
+                            <td class="tablerows">
                                 <c:out default="" value="${parents.addresstemporary}" />
                             </td>
                         
                         </tr>
+                        
+                        
                         <tr>
-                            <td width="25%"   class="alignLeft" height="50" >Number Of Dependents</td>
-                            <td width="25%" class="tablerows"  >
-                                 <c:out default="" value="${parents.noofdependents}" />
+                             <td  class="alignLeft" height="50">Guardian's name & address</td>
+                            <td class="tablerows" >
+                                 <c:out value="${student.guardiandetails}" />
                                 
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50">Notes
+                            <td   class="alignLeft" height="50">Notes
                             </td>
-                            <td width="25%" class="tablerows" >
+                            <td class="tablerows" >
                                 <c:out default="" value="${parents.remarks}" />
                                 
                             </td>
@@ -829,22 +757,42 @@ for(Cookie cookie : cookies){
 
                         </tr>
                         
-
-
                         <tr>
-                            <td  width="25%"  class="alignLeft" height="50">
-                            </td>
-                            <td width="25%" class="tablerows" >
+								<td style="border: 0px;">
+									<div align="left"><h3 style="text-decoration: underline;color: #eb6000;margin-left: 4px;">Mother's Details</h3></div>
+								</td>
+							</tr>
+                        
+                        
+                         <tr>
 
+                            <td  class="alignLeft" height="50">Mother Name</td>
+                            <td class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.mothersname}" />
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50">
+                            <td  class="alignLeft" height="50">Occupation</td>
+                            <td class="tablerows" >
+                                 <c:out value="${parents.profession}" />
+                                
                             </td>
-                            <td width="25%" class="tablerows">
 
+                        </tr>
+                        
+                        <tr>
+
+                            <td  class="alignLeft" height="50">Qualification</td>
+                            <td class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.mothersqualification}" />
+                            </td>
+                            <td  class="alignLeft" height="50">Co-Contact Number
+                            </td>
+                            <td class="tablerows">
+                                <c:out default="" value="${parents.cocontactnumber}" />
                             </td>
                         </tr>
-                    </table>
 
+                    </table>
+<br>
                     
 
                 </div>
@@ -932,7 +880,12 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText">Fees Category</th>
                             <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
-                            <th title="click to sort" class="headerText">Concession %&nbsp;</th>
+                            <th title="click to sort" class="headerText">Total Installments&nbsp;</th>
+                            <th title="click to sort" class="headerText">Total Fees Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Fees Paid&nbsp;</th>
+                            <th title="click to sort" class="headerText">Due Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Concession&nbsp;</th>
+                            <th title="click to sort" class="headerText">Waive Off&nbsp;</th>
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
@@ -952,10 +905,12 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.feescategoryname}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
-                               	<td class="dataText"><c:out value="${feesstructure.concession}"/>%</td>
-                                
-                                 
-
+                                <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feespaid}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.concession}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.waiveoff}"/></td>
                             </tr>
                         </c:forEach>
                         
@@ -976,10 +931,10 @@ for(Cookie cookie : cookies){
             </div>
             <table  width="70%"  id="table11" align="center">
                         <tr>
-                            <td width="30%"> 
+                            <td width="30%" style="border: 0px;"> 
 
                             </td>
-                            <td>
+                            <td style="border: 0px;">
                                 <button id="modify" type="submit">Modify</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button id="cancel" >Cancel</button>

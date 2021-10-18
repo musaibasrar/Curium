@@ -200,10 +200,10 @@ public class StudentAction {
             
                 if (new StudentService(request, response).viewDetailsOfStudent()) {
                     String urlBranchId = request.getParameter("urlbranchid");
-                    if("1".equalsIgnoreCase(urlBranchId) || "2".equalsIgnoreCase(urlBranchId) || "3".equalsIgnoreCase(urlBranchId)) {
+                    if("1".equalsIgnoreCase(urlBranchId) ) {
                         return "student_update.jsp";
-                    }else if(request.getParameter("urlbranchid").equalsIgnoreCase("4")) {
-                        return "student_update.jsp";
+                    }else if("3".equalsIgnoreCase(urlBranchId)) {
+                        return "student_update_pu.jsp";
                     }else if(request.getParameter("urlbranchid").equalsIgnoreCase("5")) {
                         return "student_update.jsp";
                     }
@@ -221,7 +221,7 @@ public class StudentAction {
             }else if(request.getParameter("urlbranchid").equalsIgnoreCase("2")) {
                 return "student_details.jsp";
             }else if(request.getParameter("urlbranchid").equalsIgnoreCase("3")) {
-                return "student_details.jsp";
+                return "student_details_pu.jsp";
             }else if(request.getParameter("urlbranchid").equalsIgnoreCase("4")) {
                 return "student_details.jsp";
             }else if(request.getParameter("urlbranchid").equalsIgnoreCase("5")) {

@@ -68,6 +68,7 @@ public class UserService {
             httpSession.setAttribute("username",login.getUsername());
             httpSession.setAttribute("branchid",login.getBranch().getIdbranch());
             httpSession.setAttribute("branchname",login.getBranch().getBranchname());
+            httpSession.setAttribute("branchcode",login.getBranch().getBranchcode());
             String[] userType = login.getUsertype().split("-");
             httpSession.setAttribute("userType", userType[0]);
             httpSession.setAttribute("typeOfUser",userType[0]);
