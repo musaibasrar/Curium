@@ -87,7 +87,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="images/bg.jpg" >
+    <body background="/images/bg.jpg" >
         <form id="form1" action=""  method="post">
     <table height="462" class="tableCSS"  >
       <tr>

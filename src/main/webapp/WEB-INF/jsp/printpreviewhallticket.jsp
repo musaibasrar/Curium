@@ -238,7 +238,7 @@ for(Cookie cookie : cookies){
                         	<table style="page-break-inside: avoid;border-collapse: collapse;">
 			<tr>
 				<td width="10%"></td>
-				<td><img src="images/curiumheader.png" width="190" height="60"/></td>
+				<td><img src="/images/curiumheader.png" width="190" height="60"/></td>
 				<td width="5%"></td>
 				<td>
 				<label class="dataTextBoldCenter">Curium School </label><br>

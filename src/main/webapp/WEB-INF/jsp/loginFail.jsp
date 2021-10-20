@@ -71,17 +71,17 @@
                                     	</td>
                                     	</tr>
                                     	<tr>
-                                    	<td> <img alt="" src="images/curiumlogin.jpg" style="width:300px;height: 300px"></td>
+                                    	<td> <img alt="" src="/images/curiumlogin.jpg" style="width:300px;height: 300px"></td>
                                     	<td></td><td></td><td></td>
                                     	 <td>
                                     	 <p align="left" style="color: red;">Please enter correct username and password</p>
-                                            <img src="images/username.png" height="30" name="login" style="vertical-align: bottom;"/>
+                                            <img src="/images/username.png" height="30" name="login" style="vertical-align: bottom;"/>
                                                     <input name="loginName" type="text"  placeholder="UserName" >
                                                 <br><br><br>
-                                                <img type="image" src="images/lock.png" height="28" name="login" style="vertical-align: bottom;"/>
+                                                <img type="image" src="/images/lock.png" height="28" name="login" style="vertical-align: bottom;"/>
                                                 <input name="password" type="password" placeholder="Password">
                                                 <br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <input type="image" src="images/loginbutton.png" name="login" border="0" />
+                                                <input type="image" src="/images/loginbutton.png" name="login" border="0" />
                                                 </td>
                                     	</tr>
                                     </table>

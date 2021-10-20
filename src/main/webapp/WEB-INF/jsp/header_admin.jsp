@@ -125,73 +125,73 @@ for(Cookie cookie : cookies){
 						<tr>
 							
 									<td style="padding-left: 20px;padding-right: 50px;">
-								<a target="mainFrame" href="welcome.jsp" ><img src="images/logo.jpg"/></a>
+								<a target="mainFrame" href="welcome.jsp" ><img src="/images/logo.jpg"/></a>
 								</td>
 								
-							<!-- <td align="left"><img src="images/curiumheader.png"
+							<!-- <td align="left"><img src="/images/curiumheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
 							<td><a target="leftFrame" href="left_admin.jsp"> <img
-									src="images/home.svg" width="18" height="18" 
+									src="/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
 								href="Controller?process=FeesProcess&action=feesCollect"> <img
-									src="images/feescollect.svg" width="18" height="18"
+									src="/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
 							<td>
 								<a target="mainFrame"
 								href="Controller?process=AccountProcess&action=createVoucher"> <img
-									src="images/createvoucher.svg" width="18" height="18"
+									src="/images/createvoucher.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="feesCollectionDetails.jsp"><img  alt="Fees Details" src="images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+							<!-- <td ><a target="mainFrame" href="feesCollectionDetails.jsp"><img  alt="Fees Details" src="/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
 								href="Controller?process=StudentProcess&action=addNew"> <img
-									src="images/student_header.svg" width="18" height="18"
+									src="/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
 							<td ><a target="leftFrame" href="leftsettings.jsp">
-									<img alt="Settings" src="images/settings.svg" width="18"
+									<img alt="Settings" src="/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
 							<td ><a target="mainFrame"
 								href="Controller?process=AdminProcess&action=viewAllExpenses"><img
-									alt="Admin Exp" src="images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+									alt="Admin Exp" src="/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
 
 							<td ><a target="mainFrame" href="sendsms.jsp"><img
-									src="images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+									src="/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a></td>
 
 							<td ><a target="mainFrame"
 								href="Controller?process=StudentProcess&action=viewAllStudentsWithParents"><img
-									alt="View All Students" src="images/students.svg" width="18"
+									alt="View All Students" src="/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
 							</a></td>
 							
 							<td ><a target="mainFrame"
 								href="Controller?process=UserProcess&action=dashBoard"><img
-									alt="Dash Board" src="images/dashboard.svg" width="18"
+									alt="Dash Board" src="/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td>
 								
 							<td ><a target="_parent"
 								href="Controller?process=UserProcess&action=logout"><img
-									src="images/logout.svg" width="18" height="18" alt="Log Out" 
+									src="/images/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>

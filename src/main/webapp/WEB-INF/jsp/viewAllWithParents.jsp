@@ -107,7 +107,7 @@
             .headerTD{
                 border-radius:6px;
                 background-color:#4b6a84;
-                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
                 color: #FFFFFF;
                 font-family: Tahoma;
                 font-size: 13px;

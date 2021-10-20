@@ -80,7 +80,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="images/bg.jpg" >
+    <body background="/images/bg.jpg" >
         <form id="form1" action="Controller?process=SMSProcess&action=sendSMS"  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
