@@ -23,15 +23,15 @@
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="js/datePicker/jquery-1.7.1.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.tabs.js"></script>
-        <script src="js/datePicker/ui/sliderAccess.js"></script>
-        <script src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.button.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/js/datePicker/jquery-1.7.1.js"></script>
+        <script src="/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/js/datePicker/ui/jquery.ui.tabs.js"></script>
+        <script src="/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.button.js"></script>
         <link rel="stylesheet" href="css/datePicker/demos.css">
 
 
@@ -269,7 +269,7 @@
     font-weight: bold;
 }
         </style>
-        <script type="text/javascript" src="js/datetimepicker_css.js"></script>
+        <script type="text/javascript" src="/js/datetimepicker_css.js"></script>
         <script>
             $(function() {
                 $("#datepicker").datepicker({changeYear: true, changeMonth: true});

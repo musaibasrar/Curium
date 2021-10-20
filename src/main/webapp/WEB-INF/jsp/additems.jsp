@@ -421,10 +421,10 @@
 
 </style>
 
-<script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
-<script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script type="text/javascript" src="js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script type="text/javascript" src="/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -448,7 +448,7 @@
 	});
 </script>
 
-<script type="text/javascript" src="js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 
