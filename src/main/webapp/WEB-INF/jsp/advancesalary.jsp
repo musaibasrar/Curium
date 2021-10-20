@@ -67,7 +67,7 @@
                 height: 22px;
                 vertical-align: middle;
                 text-align: center;
-                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
             }
             .headerTD{
                 background-color:#4b6a84;
@@ -487,7 +487,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="images/bg.jpg">
+    <body background="/images/bg.jpg">
     <jsp:useBean id="now" class="java.util.Date" scope="page" />
         <form id="form1" method="post">
             <div style="height: 28px">

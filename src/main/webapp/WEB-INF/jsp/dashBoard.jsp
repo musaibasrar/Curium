@@ -130,7 +130,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="images/bg.jpg" onload='drawChart()'>
+    <body background="/images/bg.jpg" onload='drawChart()'>
     <div id="chartDivId" style="margin-top:20px; margin-left:20px; width:600px; height:300px;"></div>
         <form id="form1" method="post">
             

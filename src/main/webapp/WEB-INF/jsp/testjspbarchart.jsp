@@ -72,7 +72,7 @@
                 height: 22px;
                 vertical-align: middle;
                 text-align: center;
-                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
             }
             .headerTD{
                 background-color:#4b6a84;
@@ -283,7 +283,7 @@
 
     </head>
    
-    <body background="images/bg.jpg" >
+    <body background="/images/bg.jpg" >
     <div  align="center">
     <label   style="font-family: Tahoma;
 	font-weight: bolder;

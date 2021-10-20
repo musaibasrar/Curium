@@ -185,7 +185,7 @@ Author     : Musaib
             .headerTD{
                 border-radius:1px;
                 background-color:#4b6a84;
-                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
                 color: #FFFFFF;
                 font-family: Tahoma;
                 font-size: 13px;
@@ -306,7 +306,7 @@ Author     : Musaib
             }
             function change(id, image) {
                 var img = document.getElementById(id);
-                img.src = "images/" + image;
+                img.src = "/images/" + image;
 
             }
             

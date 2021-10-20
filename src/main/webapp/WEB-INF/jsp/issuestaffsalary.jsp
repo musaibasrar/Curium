@@ -241,7 +241,7 @@
 	vertical-align: text-top;
 	text-align: center;
 	background-image:
-		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .dataText {
@@ -292,7 +292,7 @@
 	border-radius: 6px;
 	background-color: #4b6a84;
 	background-image:
-		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 	color: #FFFFFF;
 	font-family: Tahoma;
 	font-size: 13px;
@@ -519,7 +519,7 @@ for(Cookie cookie : cookies){
 						<th class="headerText" ><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="images/sort_both.png" /></th>
+							src="/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Department&nbsp;</th>
 							<th title="click to sort" class="headerText">Designation&nbsp;</th>
 							<th title="click to sort" class="headerText">Processed Date&nbsp;</th>
@@ -560,7 +560,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${processsalarydetailslist.netpayment}"/></td>
                                 <td class="dataText"><c:out value="${processsalarydetailslist.paymenttype}"/></td>
                                 <td class="dataText"><c:out value="${processsalarydetailslist.status}"/></td>
-                                <td class="dataText"><a id="print" href="Controller?process=HrProcess&action=printSalarySlip&salaryid=<c:out value="${processsalarydetailslist.idprocesssalarydetails}" />"><div align="center" align="center"><img  alt="Printsalaryslip" src="images/printer.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
+                                <td class="dataText"><a id="print" href="Controller?process=HrProcess&action=printSalarySlip&salaryid=<c:out value="${processsalarydetailslist.idprocesssalarydetails}" />"><div align="center" align="center"><img  alt="Printsalaryslip" src="/images/printer.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
                             </tr>
                         </c:forEach>
 				</tbody>

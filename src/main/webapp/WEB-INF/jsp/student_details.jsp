@@ -103,7 +103,7 @@
                 height: 22px;
                 vertical-align: middle;
                 text-align: center;
-                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
             }
             .headerTD{
                 background-color:#4b6a84;
@@ -381,7 +381,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="images/bg.jpg" onload="checkUsertype();">
+    <body background="/images/bg.jpg" onload="checkUsertype();">
         <jsp:useBean id="now" class="java.util.Date" />
         <fmt:formatDate var="today" type="date" value="${now}" />
         <form  method="post" id="form1">

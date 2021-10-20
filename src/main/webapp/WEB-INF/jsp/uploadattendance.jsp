@@ -88,7 +88,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="images/bg.jpg" >
+    <body background="/images/bg.jpg" >
 
 
         <form action="Controller?process=AttendanceProcess&action=uploadAttendanceFile" method="post" enctype="multipart/form-data">
