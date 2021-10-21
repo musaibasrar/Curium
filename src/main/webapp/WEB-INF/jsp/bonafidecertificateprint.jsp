@@ -93,8 +93,8 @@ span{
     font-weight: normal;
 }
 </style>
-	<script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Bonafide Certificate</title>
 </head>
 <%
