@@ -22,6 +22,7 @@ import com.model.feescategory.action.FeesAction;
 import com.model.feescollection.action.FeesCollectionAction;
 import com.model.feesdetails.action.FeesDetailsAction;
 import com.model.hr.action.HrAction;
+import com.model.importfile.action.ImportFileAction;
 import com.model.marksdetails.action.MarksDetailsAction;
 import com.model.mess.item.action.MessItemsAction;
 import com.model.mess.stockmove.action.MessStockMoveAction;
@@ -110,6 +111,8 @@ public class Controller extends HttpServlet {
          nextUrl = new MessSuppliersAction(request, response).execute(action);
      }else if("MessItemsMoveProcess".equalsIgnoreCase(process)){
          nextUrl = new MessStockMoveAction(request, response).execute(action);
+     }else if("ImportProcess".equalsIgnoreCase(process)){
+         nextUrl = new ImportFileAction(request, response).execute(action);
      }
         
         RequestDispatcher reg = request.getRequestDispatcher(nextUrl);
