@@ -32,6 +32,7 @@ public class Adminexpenses implements java.io.Serializable {
 	private String paymenttype;
 	private String bankname;
 	private Date chequedate;
+	private int userid;
 
 	public Adminexpenses() {
 	}
@@ -43,7 +44,7 @@ public class Adminexpenses implements java.io.Serializable {
 	public Adminexpenses(String itemdescription, String priceofitem,
 			Date entrydate, Integer vno, int branchid,String paidto,
 			String chequeno,
-			String voucherstatus,Date chequedate,String paymenttype,String bankname) {
+			String voucherstatus,Date chequedate,String paymenttype,String bankname, int userid) {
 		this.itemdescription = itemdescription;
 		this.priceofitem = priceofitem;
 		this.entrydate = entrydate;
@@ -55,6 +56,7 @@ public class Adminexpenses implements java.io.Serializable {
 		this.chequedate = chequedate;
 		this.paymenttype = paymenttype;
 		this.bankname = bankname;
+		this.userid = userid;
 	}
 
 	@Id
@@ -161,4 +163,12 @@ public class Adminexpenses implements java.io.Serializable {
 	public void setChequedate(Date chequedate) {
 		this.chequedate = chequedate;
 	}
+	
+	public int getUserid() {
+		return userid;
+}
+
+public void setUserid(int userid) {
+	this.userid = userid;
+}
 }

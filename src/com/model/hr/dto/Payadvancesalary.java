@@ -37,6 +37,7 @@ public class Payadvancesalary implements java.io.Serializable {
 	private String reason;
 	private Date date;
 	private int branchid;
+	private int userid;
 	
 	public Payadvancesalary() {
 	}
@@ -45,7 +46,7 @@ public class Payadvancesalary implements java.io.Serializable {
 			Integer salaryfordays, BigDecimal deductionpermonth,
 			BigDecimal amount, String deductionstartmonth,
 			String deductionstartyear, Teacher teacher, String status, String reason, Date date,
-			int branchid) {
+			int branchid, int userid) {
 		this.idteacher = idteacher;
 		this.year = year;
 		this.month = month;
@@ -59,6 +60,7 @@ public class Payadvancesalary implements java.io.Serializable {
 		this.reason = reason;
 		this.date = date;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -187,5 +189,14 @@ public class Payadvancesalary implements java.io.Serializable {
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
 	}
+	
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
 
 }

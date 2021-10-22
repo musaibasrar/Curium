@@ -183,6 +183,9 @@
          <property name="bankifsc" type="string">
             <column name="bankifsc" length="50" />
         </property>   
+         <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
          <!-- <many-to-one name="Pudetails" class="com.model.pudetails.dto.Pudetails"
             column="pudetailsid" unique="true" not-null="true" lazy="false"
             cascade="all" />

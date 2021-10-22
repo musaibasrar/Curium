@@ -26,5 +26,8 @@
          <property name="examclass" type="string">
             <column name="examclass" length="10" />
         </property>
+         <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
     </class>
 </hibernate-mapping>

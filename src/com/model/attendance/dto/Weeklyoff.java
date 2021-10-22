@@ -21,6 +21,7 @@ public class Weeklyoff implements java.io.Serializable {
 	private String weeklyoffday;
 	private String academicyear;
 	private int branchid;
+	private int userid;
 	
 	public Weeklyoff() {
 	}
@@ -29,10 +30,11 @@ public class Weeklyoff implements java.io.Serializable {
 		this.weeklyoffday = weeklyoffday;
 	}
 
-	public Weeklyoff(String weeklyoffday, String academicyear, int branchid) {
+	public Weeklyoff(String weeklyoffday, String academicyear, int branchid, int userid) {
 		this.weeklyoffday = weeklyoffday;
 		this.academicyear = academicyear;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -71,5 +73,13 @@ public class Weeklyoff implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

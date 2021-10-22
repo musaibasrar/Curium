@@ -33,6 +33,8 @@ public class Receiptinfo implements java.io.Serializable {
 	private String academicyear;
 	private int branchid;
 	private int cancelreceipt;
+	private int userid;
+	private String branchreceiptnumber;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Receiptinfo")
 	private Set<Feescollection> feesCollectionRecords =
@@ -46,7 +48,7 @@ public class Receiptinfo implements java.io.Serializable {
 	}
 
 	public Receiptinfo(int sid, Date date, Long totalamount, String academicyear, 
-			Set<Feescollection> feesCollecionRecords, int branchid, int cancelreceipt) {
+			Set<Feescollection> feesCollecionRecords, int branchid, int cancelreceipt, int userid, String branchreceiptnumber) {
 		this.sid = sid;
 		this.date = date;
 		this.totalamount = totalamount;
@@ -54,6 +56,8 @@ public class Receiptinfo implements java.io.Serializable {
 		this.feesCollectionRecords = feesCollecionRecords;
 		this.branchid = branchid;
 		this.cancelreceipt = cancelreceipt;
+		this.userid = userid;
+		this.branchreceiptnumber = branchreceiptnumber;
 	}
 
 	@Id
@@ -128,6 +132,22 @@ public class Receiptinfo implements java.io.Serializable {
 
 	public void setCancelreceipt(int cancelreceipt) {
 		this.cancelreceipt = cancelreceipt;
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public String getBranchreceiptnumber() {
+		return branchreceiptnumber;
+	}
+
+	public void setBranchreceiptnumber(String branchreceiptnumber) {
+		this.branchreceiptnumber = branchreceiptnumber;
 	}
 	
 }
