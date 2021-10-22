@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Suppliers</title>
-<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="css/datePicker/demos.css">
+<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/css/datePicker/demos.css">
 
 <style type="text/css">
 
@@ -592,7 +592,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Supplier Details</a></li>
+					<li><a href="/#tabs-1">Supplier Details</a></li>
 
 				</ul>
 				<div id="tabs-1">

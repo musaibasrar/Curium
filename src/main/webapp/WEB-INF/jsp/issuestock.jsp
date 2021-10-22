@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Issue Stock</title>
-<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="css/datePicker/demos.css">
+<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -830,7 +830,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Details</a></li>
+					<li><a href="/#tabs-1">Details</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -996,7 +996,7 @@ for(Cookie cookie : cookies){
 			<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="Controller?process=MessItemsMoveProcess&action=issueItems&page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/Controller?process=MessItemsMoveProcess&action=issueItems&page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -1009,7 +1009,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="Controller?process=MessItemsMoveProcess&action=issueItems&page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/Controller?process=MessItemsMoveProcess&action=issueItems&page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -1018,7 +1018,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="Controller?process=MessItemsMoveProcess&action=issueItems&page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/Controller?process=MessItemsMoveProcess&action=issueItems&page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
                     

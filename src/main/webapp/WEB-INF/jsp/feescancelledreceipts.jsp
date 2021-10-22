@@ -12,9 +12,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Fees Collecion Details</title>
-<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="css/datePicker/demos.css">
-<link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/css/datePicker/demos.css">
+<link rel="stylesheet" href="/css/font-awesome.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -306,7 +306,7 @@
 	
 }
 </style>
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -599,7 +599,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Dates</a></li>
+					<li><a href="/#tabs-1">Dates</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -713,8 +713,8 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
                                 <td  class="dataText"><c:out value="${feesdetails.receiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=UndoFeesReceipt&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>"><i class="fa fa-undo" style="color:#1b5605;font-size: 18px;"></i></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/Controller?process=FeesCollection&action=UndoFeesReceipt&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>"><i class="fa fa-undo" style="color:#1b5605;font-size: 18px;"></i></a></td>
 
                             </tr>
                         </c:forEach>

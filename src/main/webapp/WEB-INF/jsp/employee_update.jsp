@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Employee Update</title>
-<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
 	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -29,7 +29,7 @@
 <script src="/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
 	src="/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="css/datePicker/demos.css">
+<link rel="stylesheet" href="/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -314,9 +314,9 @@ for(Cookie cookie : cookies){
 		<div>
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Employee Details</a></li>
-					<li><a href="#tabs-2">Bank Details</a></li>
-					<li><a href="#tabs-3">Additional Details</a></li>
+					<li><a href="/#tabs-1">Employee Details</a></li>
+					<li><a href="/#tabs-2">Bank Details</a></li>
+					<li><a href="/#tabs-3">Additional Details</a></li>
 
 				</ul>
 
@@ -558,7 +558,7 @@ for(Cookie cookie : cookies){
 						<tr>
 										<td align="center"><a class="nexttab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Next</a></td>
+											href="/#">Next</a></td>
 									</tr>
 						<tr>
 
@@ -647,10 +647,10 @@ for(Cookie cookie : cookies){
 										<td align="center">
 										<a class="nexttab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;
+											href="/#">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;
 										<a class="prevtab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Previous</a></td>
+											href="/#">Previous</a></td>
 									</tr>
 						<tr>
 
@@ -718,7 +718,7 @@ for(Cookie cookie : cookies){
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<a class="prevtab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Previous</a></td>
+											href="/#">Previous</a></td>
 									</tr>
 									
 						<tr>

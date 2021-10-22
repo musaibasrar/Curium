@@ -14,10 +14,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JSP Page</title>
-<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
 
 
-<link rel="stylesheet" href="css/datePicker/demos.css">
+<link rel="stylesheet" href="/css/datePicker/demos.css">
 <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -570,7 +570,7 @@
 		action="Controller?process=FeesCollection&action=feesAdd"
 		method="post" onkeypress="if (event.keyCode == 92) addRow();">
 		<div style="height: 28px">
-			<!--<a href="#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
+			<!--<a href="/#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
 
 
 			<table width="100%">
@@ -732,7 +732,7 @@
 									name="studentIDs"
 									value="<c:out value="${Parents.student.sid}"/>" /></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
-									href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>"><c:out
+									href="/Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>"><c:out
 											value="${Parents.student.admissionnumber}" /></a></td>
 								<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 								<td class="dataText"><c:out

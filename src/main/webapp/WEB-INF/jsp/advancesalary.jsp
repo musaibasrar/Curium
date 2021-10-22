@@ -14,10 +14,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Advance Salary</title>
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="css/graph/jquery.jqplot.css">
+        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <link rel="stylesheet" href="/css/datePicker/demos.css">
         <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.dialog.js"></script>
@@ -491,7 +491,7 @@ for(Cookie cookie : cookies){
     <jsp:useBean id="now" class="java.util.Date" scope="page" />
         <form id="form1" method="post">
             <div style="height: 28px">
-                <!--<a href="#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
+                <!--<a href="/#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
 
                
             <table  width="100%">

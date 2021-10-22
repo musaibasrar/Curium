@@ -20,8 +20,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Student</title>
-<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
 	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -35,7 +35,7 @@
 <script src="/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
 	src="/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="css/datePicker/demos.css">
+<link rel="stylesheet" href="/css/datePicker/demos.css">
 
 
 
@@ -551,12 +551,12 @@
 		<div>
 			<div id="tabs">
 				<ul>
-					<li><a href="#fragment-1">Student's Details</a></li>
-					<li><a href="#fragment-2">Parent's Details</a></li>
-					<li><a href="#fragment-3">Upload Photo</a></li>
-					<li><a href="#fragment-5">Previous School Details</a></li>
-					<li><a href="#fragment-4">Additional Details</a></li>
-					<li><a href="#fragment-6">Bank Details</a></li>
+					<li><a href="/#fragment-1">Student's Details</a></li>
+					<li><a href="/#fragment-2">Parent's Details</a></li>
+					<li><a href="/#fragment-3">Upload Photo</a></li>
+					<li><a href="/#fragment-5">Previous School Details</a></li>
+					<li><a href="/#fragment-4">Additional Details</a></li>
+					<li><a href="/#fragment-6">Bank Details</a></li>
 				</ul>
 
 
@@ -1017,7 +1017,7 @@
 
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Next</a></td>
+										href="/#">Next</a></td>
 								</tr>
 
 								<tr>
@@ -1067,10 +1067,10 @@
 
 										<td align="center"><a class="nexttab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+											href="/#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 											class="prevtab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Previous</a></td>
+											href="/#">Previous</a></td>
 									</tr>
 
 									<tr>
@@ -1205,10 +1205,10 @@
 
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+										href="/#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Previous</a></td>
+										href="/#">Previous</a></td>
 								</tr>
 								
 								<tr>
@@ -1489,10 +1489,10 @@
 									<td class="alignRight">&nbsp;</td>
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+										href="/#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Previous</a></td>
+										href="/#">Previous</a></td>
 								</tr>
 
 
@@ -1654,10 +1654,10 @@
 									<td class="alignRight">&nbsp;</td>
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+										href="/#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Previous</a></td>
+										href="/#">Previous</a></td>
 								</tr>
 
 
@@ -1753,7 +1753,7 @@
 								 <a
 										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Previous</a></td>
+										href="/#">Previous</a></td>
 								</tr>
 								<tr><td><br></td></tr>
 									<tr>
