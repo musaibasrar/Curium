@@ -222,7 +222,7 @@ for(Cookie cookie : cookies){
 		</tr>
 		
 			<tr>
-              <td align="center"><a id="print" href="/Controller?process=DocumentsProcess/printBonafide">Print</a></td>
+              <td align="center"><a id="print" href="/DocumentsProcess/printBonafide">Print</a></td>
             </tr>
 		</TABLE>
 	</form>

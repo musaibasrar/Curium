@@ -560,7 +560,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${processsalarydetailslist.netpayment}"/></td>
                                 <td class="dataText"><c:out value="${processsalarydetailslist.paymenttype}"/></td>
                                 <td class="dataText"><c:out value="${processsalarydetailslist.status}"/></td>
-                                <td class="dataText"><a id="print" href="/Controller?process=HrProcess/printSalarySlip?salaryid=<c:out value="${processsalarydetailslist.idprocesssalarydetails}" />"><div align="center" align="center"><img  alt="Printsalaryslip" src="/images/printer.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
+                                <td class="dataText"><a id="print" href="/HrProcess/printSalarySlip?salaryid=<c:out value="${processsalarydetailslist.idprocesssalarydetails}" />"><div align="center" align="center"><img  alt="Printsalaryslip" src="/images/printer.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
                             </tr>
                         </c:forEach>
 				</tbody>

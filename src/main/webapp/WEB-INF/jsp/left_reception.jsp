@@ -453,32 +453,32 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="/#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/Controller?process=StudentProcess/viewAll" >View All</a><br/>
+                <a target="mainFrame" href="/StudentProcess/viewAll" >View All</a><br/>
                 <a target="mainFrame" href="/feesstructure.jsp" >Fees Structure</a><br/>
                 
 
             </div>
             <!-- <h5 style="font-size: 12px"><a href="/#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="/Controller?process=EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/Controller?process=EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/Controller?process=DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/Controller?process=PositionProcess/positionView" >Add Position</a>
+                <a target="mainFrame" href="/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="/EmployeeProcess/addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="/DepartmentProcess/departmentView" >Add Department</a>
+                <a target="mainFrame" href="/PositionProcess/positionView" >Add Position</a>
 
             </div> -->
 
             <h5 style="font-size: 12px"><a href="/#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="/Controller?process=FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/Controller?process=FeesProcess/feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="/FeesProcess/feesView" >Fees Category</a>
+                <a target="mainFrame" href="/FeesProcess/feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
             <!-- <h5 style="font-size: 12px"><a href="/#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/Controller?process=AdminProcess/viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="/AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
@@ -499,15 +499,15 @@ for(Cookie cookie : cookies){
 
             <!-- <h5 style="font-size: 12px"><a href="/#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/Controller?process=StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
             <!--  <h5 style="font-size: 12px"><a href="/#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="/Controller?process=StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/Controller?process=YearProcess/updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="/YearProcess/updateYear" >Academic year</a><br/>
                 
 
             </div> -->

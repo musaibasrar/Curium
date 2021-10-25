@@ -172,10 +172,10 @@
                                 <td width="150" height="34" background="/images/tab1.png"><table width="153" border="0" align="center" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td width="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                            <td width="40"><a target="mainFrame" href="/Controller?process=StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Studets" src="/images/Users.png" width="40" height="30" /> <div id="n1" class="noti_bubble"></div></div></a></td>
-                                            <td width="40"><a target="mainFrame" href="/Controller?process=PersonalProcess/viewAll"><div align="center"  align="center"></div></div></a></td>
-                                            <td width="40"><a target="mainFrame" href="/Controller?process=UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="/images/dashboard.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
-                                            <td width="40" ><div align="center" ><a target="_parent" href="/Controller?process=UserProcess/logout"><img   src="/images/logout_icon.png" width="24" height="24" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div></div></td>
+                                            <td width="40"><a target="mainFrame" href="/StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Studets" src="/images/Users.png" width="40" height="30" /> <div id="n1" class="noti_bubble"></div></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/PersonalProcess/viewAll"><div align="center"  align="center"></div></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="/images/dashboard.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
+                                            <td width="40" ><div align="center" ><a target="_parent" href="/UserProcess/logout"><img   src="/images/logout_icon.png" width="24" height="24" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div></div></td>
                                         </tr>
                                     </table></td>
                             </tr>
