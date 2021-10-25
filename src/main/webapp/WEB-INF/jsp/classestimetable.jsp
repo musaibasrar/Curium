@@ -524,7 +524,7 @@
 	 
 	function savePeriods() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=PeriodProcess&action=savePeriods";
+		form1.action = "/PeriodProcess/savePeriods";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -574,7 +574,7 @@
 	
 	function deleteRecord(){
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=PeriodProcess&action=deletePeriods";
+		form1.action = "/PeriodProcess/deletePeriods";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -586,7 +586,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -635,7 +635,7 @@ for(Cookie cookie : cookies){
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
 							<td class="dataText"><input type="checkbox" id="<c:out value="${periodmasterlist.idperiodmaster}"/>" class="chcktbl" name="idperiodmaster" value="<c:out value="${periodmasterlist.idperiodmaster}"/>" /></td>
-							<td class="dataText"><a class="dataTextInActive" href="/Controller?process=PeriodProcess&action=viewTimeTable&id=<c:out value="${periodmasterlist.idperiodmaster}" />"><c:out value="${periodmasterlist.class_}" /></a></td>
+							<td class="dataText"><a class="dataTextInActive" href="/Controller?process=PeriodProcess/viewTimeTable?id=<c:out value="${periodmasterlist.idperiodmaster}" />"><c:out value="${periodmasterlist.class_}" /></a></td>
 							<td class="dataText"><c:out value="${periodmasterlist.daystart}" /></td>
 							<td class="dataText"><c:out value="${periodmasterlist.dayend}" /></td>
 							<td class="dataText"><c:out value="${periodmasterlist.totalperiods}" /></td>

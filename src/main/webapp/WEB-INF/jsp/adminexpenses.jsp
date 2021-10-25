@@ -437,7 +437,7 @@
 <script type="text/javascript">
 	function addExpenses() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=addExpenses";
+		form1.action = "/AdminProcess/addExpenses";
 		form1.method = "POST";
 		form1.submit();
 
@@ -445,7 +445,7 @@
 	
 	function deleteRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=deleteMultiple";
+		form1.action = "/AdminProcess/deleteMultiple";
 		form1.method = "POST";
 		form1.submit();
 
@@ -453,21 +453,21 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=printVoucher";
+		form1.action = "/AdminProcess/printVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function approveRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=approveVoucher";
+		form1.action = "/AdminProcess/approveVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function rejectRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=rejectVoucher";
+		form1.action = "/AdminProcess/rejectVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -589,7 +589,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -603,7 +603,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1"
-		action="Controller?process=DepartmentProcess&action=deleteMultiple" method="POST">
+		action="/DepartmentProcess/deleteMultiple" method="POST">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");

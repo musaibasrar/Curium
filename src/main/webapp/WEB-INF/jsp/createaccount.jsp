@@ -364,7 +364,7 @@
 <script type="text/javascript">
 	function addFeesCategory() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=FeesProcess&action=addFeesParticular";
+		form1.action = "/FeesProcess/addFeesParticular";
 		form1.method = "POST";
 		form1.submit();
 
@@ -439,7 +439,7 @@
 		 
 			if(form1.checkValidity()) {
 				var form1=document.getElementById("form1");
-		        form1.action="Controller?process=AccountProcess&action=saveAccount";
+		        form1.action="/AccountProcess/saveAccount";
 		        form1.submit();
 			  }
 		 $("#save").attr("disabled", false);
@@ -449,7 +449,7 @@
          
 		if(confirm('Are you sure, you want to delete the account?')){
 			var form1=document.getElementById("form1");
-	         form1.action="Controller?process=AccountProcess&action=deleteAccount";
+	         form1.action="/AccountProcess/deleteAccount";
 	        form1.submit();
 		}
          
@@ -498,7 +498,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "AjaxController?process=SubGroupName&action=getSubGroupNames&groupname="+selected,true);
+			xmlHttp.open("GET", "AjaxController?process=SubGroupName/getSubGroupNames&groupname="+selected,true);
 			xmlHttp.send(null);
 		}
 		
@@ -553,7 +553,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChangedSSGroup;
-			xmlHttp.open("GET", "AjaxController?process=SubGroupName&action=getSSGroupNames&subgroupname="+selected,true);
+			xmlHttp.open("GET", "AjaxController?process=SubGroupName/getSSGroupNames&subgroupname="+selected,true);
 			xmlHttp.send(null);
 		}
 
@@ -601,7 +601,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

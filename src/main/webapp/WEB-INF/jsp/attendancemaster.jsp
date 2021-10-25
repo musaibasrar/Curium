@@ -357,7 +357,7 @@
 	function addHolidays() {
 
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=addHolidays";
+		form1.action = "/AttendanceProcess/addHolidays";
 		form1.method = "POST";
 		form1.submit();
 
@@ -365,7 +365,7 @@
 
 	function searchForEmployees(staffName, staffDepartment){
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=searchEmployees&staffName="+staffName+"&staffDepartment="+staffDepartment+"";
+		form1.action = "/AttendanceProcess/searchEmployees?staffName="+staffName+"&staffDepartment="+staffDepartment+"";
 		form1.method = "POST";
 		form1.submit();
 
@@ -432,14 +432,14 @@
 
 	function addStudentAttendanceMaster() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=addStudentAttendanceMaster";
+		form1.action = "/AttendanceProcess/addStudentAttendanceMaster";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function addStaffAttendanceMaster() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=addStaffAttendanceMaster";
+		form1.action = "/AttendanceProcess/addStaffAttendanceMaster";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -451,7 +451,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -464,7 +464,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=MarksDetailsProcess&action=updateMarks" method="POST">
+	<form id="form1" action="/MarksDetailsProcess/updateMarks" method="POST">
 		
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -706,7 +706,7 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/Controller?process=EmployeeProcess&action=ViewDetails&id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
+                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/Controller?process=EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.contactnumber}"/></td>
                                 <td class="dataText"><c:out value="${employee.department}"/></td>
                                 
