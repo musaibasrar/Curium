@@ -226,7 +226,7 @@ for(Cookie cookie : cookies){
                     <tr>
 
 
-                        <td align="center"><a id="print" href="Controller?process=FeesCollection&action=printReceipt&id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td align="center"><a id="print" href="/Controller?process=FeesCollection&action=printReceipt&id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </TABLE>

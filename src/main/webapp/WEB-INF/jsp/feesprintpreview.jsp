@@ -18,10 +18,10 @@
         <title>Please wait...</title> 
 
         <script type="text/javascript" language="JavaScript" src="/js/motionpack.js"></script>
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="css/graph/jquery.jqplot.css">
+        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <link rel="stylesheet" href="/css/datePicker/demos.css">
         <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.dialog.js"></script>

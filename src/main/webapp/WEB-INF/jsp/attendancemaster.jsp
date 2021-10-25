@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Holiday</title>
-<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="css/datePicker/demos.css">
+<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -291,7 +291,7 @@
 }
 </style>
 
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -469,8 +469,8 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Staff Attendance Configuration</a></li>
-					<li><a href="#tabs-2">Student Attendance Configuration</a></li>
+					<li><a href="/#tabs-1">Staff Attendance Configuration</a></li>
+					<li><a href="/#tabs-2">Student Attendance Configuration</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
@@ -706,7 +706,7 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="Controller?process=EmployeeProcess&action=ViewDetails&id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
+                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/Controller?process=EmployeeProcess&action=ViewDetails&id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.contactnumber}"/></td>
                                 <td class="dataText"><c:out value="${employee.department}"/></td>
                                 

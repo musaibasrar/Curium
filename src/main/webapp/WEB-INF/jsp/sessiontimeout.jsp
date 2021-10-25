@@ -17,8 +17,8 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/css/datePicker/demos.css">
         <!--<script type="text/javascript" language="javascript" src="/js/dataTable/jquery.js"></script>-->
         <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" language="javascript" src="/js/dataTable/jquery.dataTables.js"></script>
@@ -71,7 +71,7 @@
         <td height="250" align="center" valign="middle"><p class="style1">Session time out, Please login again</p>
         <p class="style1">
           	<!-- <input type="button" value="Login" id="login" > -->
-          	<a href="Controller?process=UserProcess&action=logout" target="_parent" id="login">Login</a>
+          	<a href="/Controller?process=UserProcess&action=logout" target="_parent" id="login">Login</a>
         </p></td>
       </tr>
     </table>

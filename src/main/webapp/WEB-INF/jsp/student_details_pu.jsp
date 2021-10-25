@@ -16,10 +16,10 @@
         <title>Student Details PU</title>
 
         <script type="text/javascript" language="JavaScript" src="/js/motionpack.js"></script>
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="css/graph/jquery.jqplot.css">
+        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <link rel="stylesheet" href="/css/datePicker/demos.css">
         <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.dialog.js"></script>
@@ -433,7 +433,7 @@ for(Cookie cookie : cookies){
             </table>
             <div id="accordion" style="width: 100%;height: 100%">
 		
-                <h3><a href="#">Student Details</a></h3>
+                <h3><a href="/#">Student Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
@@ -737,7 +737,7 @@ for(Cookie cookie : cookies){
             </div>
             <div id="accordion1" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Parent's Details</a></h3>
+                <h3><a href="/#">Parent's Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
@@ -857,7 +857,7 @@ for(Cookie cookie : cookies){
             </div>
               <div id="accordion2" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Fees Details</a></h3>
+                <h3><a href="/#">Fees Details</a></h3>
                 
                 <div>
 					<div align="center">
@@ -889,7 +889,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${receiptinfo.date}"/></a></td>
                                 <td  class="dataText"><c:out value="${receiptinfo.receiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  
 
                             </tr>
@@ -912,7 +912,7 @@ for(Cookie cookie : cookies){
             </div>
             <div id="accordion3" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Fees Structure</a></h3>
+                <h3><a href="/#">Fees Structure</a></h3>
                 
                 <div>
 					<div align="center">

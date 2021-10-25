@@ -14,9 +14,9 @@ Author     : Musaib
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
         <script language="JavaScript" src="/js/motionpack.js"></script>
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-         <link rel="stylesheet" href="css/scss.css">
-        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+         <link rel="stylesheet" href="/css/scss.css">
+        <link rel="stylesheet" href="/css/datePicker/demos.css">
 
         <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
@@ -25,7 +25,7 @@ Author     : Musaib
         <script src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
         <script src="/js/datePicker/ui/sliderAccess.js"></script>
         <script src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <link href="/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">

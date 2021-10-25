@@ -15,9 +15,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Voucher</title>
 
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
 
-        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <link rel="stylesheet" href="/css/datePicker/demos.css">
         <script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
         <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
@@ -217,7 +217,7 @@
                 height: auto;
                 display: inline;
             }
-            .style1 { <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+            .style1 { <link rel="stylesheet" href="/https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
                 font-family: Tahoma;
                 font-size: 14px;
@@ -558,10 +558,10 @@ for(Cookie cookie : cookies){
 
             <div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Receipt</a></li>
-					<li><a href="#tabs-2">Payment</a></li>
-					<li><a href="#tabs-3">Contra</a></li>
-					<li><a href="#tabs-4">Journal</a></li>
+					<li><a href="/#tabs-1">Receipt</a></li>
+					<li><a href="/#tabs-2">Payment</a></li>
+					<li><a href="/#tabs-3">Contra</a></li>
+					<li><a href="/#tabs-4">Journal</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table  width="100%">

@@ -16,10 +16,10 @@
         <title>JSP Page</title>
 
         <script type="text/javascript" language="JavaScript" src="/js/motionpack.js"></script>
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="css/graph/jquery.jqplot.css">
+        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <link rel="stylesheet" href="/css/datePicker/demos.css">
         <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.dialog.js"></script>
@@ -353,7 +353,7 @@ for(Cookie cookie : cookies){
             </table>
             <div class="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Personal Details</a></h3>
+                <h3><a href="/#">Personal Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
@@ -487,7 +487,7 @@ for(Cookie cookie : cookies){
             
             <div class="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Bank Details</a></h3>
+                <h3><a href="/#">Bank Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
@@ -532,7 +532,7 @@ for(Cookie cookie : cookies){
             
             <div class="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Additional Details</a></h3>
+                <h3><a href="/#">Additional Details</a></h3>
                 <div>
 
                     <table border="0px" width="100%"  id="table1" align="center">

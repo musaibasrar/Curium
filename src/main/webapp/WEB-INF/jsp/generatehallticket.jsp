@@ -16,8 +16,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Generate Hall Ticket</title>
-<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="css/datePicker/demos.css">
+<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -298,7 +298,7 @@ background-color:rgba(0, 0, 0, 0);
 	
 }
 </style>
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -500,7 +500,7 @@ for(Cookie cookie : cookies){
 				
 				<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Hall Ticket</a></li>
+					<li><a href="/#tabs-1">Hall Ticket</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"

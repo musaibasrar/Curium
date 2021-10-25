@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>view/edit Basic Pay</title>
-<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="css/datePicker/demos.css">
+<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -565,7 +565,7 @@ for(Cookie cookie : cookies){
 					   <c:forEach items="${vieweditbasicpay}" var="employee" varStatus="status">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.teacher.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.teacher.tid}:${status.index}:${employee.idpaybasic}"/>"/></td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="Controller?process=HrProcess&action=viewLeavesDetails&id=<c:out value='${employee.teacher.tid}'/>"><c:out value="${employee.teacher.teachername}"/></a></td>
+                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/Controller?process=HrProcess&action=viewLeavesDetails&id=<c:out value='${employee.teacher.tid}'/>"><c:out value="${employee.teacher.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.teacher.department}"/></td>
                                 <td class="dataText"><c:out value="${employee.teacher.designation}"/></td>
                                 <td class="dataText"><input type="text"	id="basicpay" name="basicpay" value="${employee.basicpay}"

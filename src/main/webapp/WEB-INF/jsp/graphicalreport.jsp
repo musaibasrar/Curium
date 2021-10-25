@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Progress Card</title>
-<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="css/datePicker/demos.css">
+<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -296,7 +296,7 @@
 	
 }
 </style>
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -510,7 +510,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Graphical Report</a></li>
+					<li><a href="/#tabs-1">Graphical Report</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -636,7 +636,7 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><c:out value="${Parents.student.admissionnumber}" /></td>
 							<%-- 					<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'
+								href="/Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'
 								/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 									value="${Parents.student.admissionnumber}" /></a></td> 
 									Controller?process=MarksDetailsProcess&action=getStudentGraph--%>
