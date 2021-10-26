@@ -61,7 +61,7 @@ Author     : Musaib
                             patientID = visit.getElementsByTagName("PatientID")[0].firstChild.nodeValue;
                             visitTime = visit.getElementsByTagName("VisitTime")[0].firstChild.nodeValue;
                             name = visit.getElementsByTagName("PatientName")[0].firstChild.nodeValue;
-                            link = "<a target='mainFrame' href='Controller?process=PatientProcess/viewDetails?id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
+                            link = "<a target='mainFrame' href='/PatientProcess/viewDetails?id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
 
                             $(function() {
                                 $('#Notification').jnotifyAddMessage({
