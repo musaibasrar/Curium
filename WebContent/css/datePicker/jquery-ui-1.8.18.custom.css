@@ -56,7 +56,7 @@
 .ui-widget { font-family: Tahoma; font-size: 1.1em; }
 .ui-widget .ui-widget { font-size: 1em; }
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Tahoma; font-size: 1.3em; }
-.ui-widget-content { border: 1px solid #b6cfe2; /* background: #e6eef4 url(images/ui-bg_flat_100_e6eef4_40x100.png) 50% 50% repeat-x; */ color: #222222; }
+.ui-widget-content { border: 1px solid #b6cfe2; background: #ffffff /* #e6eef4 */ url(images/ui-bg_flat_100_e6eef4_40x100.png) 50% 50% repeat-x; color: #222222; }
 .ui-widget-content a { color: #222222; }
 .ui-widget-header { border: 1px solid #466580; background: #466580 url(images/ui-bg_diagonals-small_50_466580_40x40.png) 50% 50% repeat; color: #ffffff; font-weight: bold; }
 .ui-widget-header a { color: #ffffff; }

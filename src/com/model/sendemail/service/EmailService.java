@@ -92,7 +92,7 @@ public class EmailService {
 
 					if(!parentsEmails.isEmpty()){
 						for (Parents parents : parentsEmails) {
-							sbN.append(parents.getEmail());
+							//sbN.append(parents.getEmail());
 							sbN.append(",");
 						}
 						emails=sbN.toString();
@@ -117,7 +117,7 @@ public class EmailService {
 		boolean result = false;
 		try {
 			Properties properties = new Properties();
-	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
+	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("util.properties");
 	        properties.load(inputStream);
 	        String smtpHost = properties.getProperty("HOSTNAME");
 			String smtpPort = properties.getProperty("SMTPPORT");

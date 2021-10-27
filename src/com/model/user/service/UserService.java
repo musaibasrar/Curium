@@ -66,14 +66,18 @@ public class UserService {
             }
             httpSession.setAttribute("currentAcademicYear",academicyear);
             httpSession.setAttribute("username",login.getUsername());
-            httpSession.setAttribute("branchid",login.getBranch().getIdbranch());
-            httpSession.setAttribute("branchname",login.getBranch().getBranchname());
-            httpSession.setAttribute("branchcode",login.getBranch().getBranchcode());
             String[] userType = login.getUsertype().split("-");
             httpSession.setAttribute("userType", userType[0]);
             httpSession.setAttribute("typeOfUser",userType[0]);
             httpSession.setAttribute("userAuth", userType[0]);
             httpSession.setAttribute("userloginid", login.getUserid());
+            
+            httpSession.setAttribute("branchid",login.getBranch().getIdbranch());
+            httpSession.setAttribute("branchname",login.getBranch().getBranchname());
+            httpSession.setAttribute("branchcode",login.getBranch().getBranchcode());
+            httpSession.setAttribute("branchaddress",login.getBranch().getAddress());
+            httpSession.setAttribute("branchcontact",login.getBranch().getContact());
+            
 			//setting session to expiry in 60 mins
            	httpSession.setMaxInactiveInterval(60*60);
 			Cookie cookie = new Cookie("user",  login.getUsertype());
@@ -446,7 +450,7 @@ public class UserService {
         boolean result = false;
         try {
             Properties properties = new Properties();
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("util.properties");
             properties.load(inputStream);
             String backupDirectoryIS = properties.getProperty("backupdirectory");
             System.out.println("the backup directory from input stream is " + backupDirectoryIS);
@@ -454,11 +458,11 @@ public class UserService {
 
             int processComplete; // to verify that either process completed or not
             String sqlExtension = ".sql";
-            String backupLocation = backupDirectoryIS + fileName + sqlExtension;
+            String util = backupDirectoryIS + fileName + sqlExtension;
             String mysqlPath = properties.getProperty("mysqlpath");
-            System.out.println("the back up for  the backuplocation " + backupLocation);
-            request.setAttribute("Backuplocation", backupLocation);
-            Process runtimeProcess = Runtime.getRuntime().exec(mysqlPath + backupLocation);
+            System.out.println("the back up for  the util " + util);
+            request.setAttribute("util", util);
+            Process runtimeProcess = Runtime.getRuntime().exec(mysqlPath + util);
 
 
             // call the mysqldump in terminal and execute it

@@ -277,23 +277,23 @@ public class DocumentService {
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
-						new Object[] { studentDetails.getStudent().getAdmissionnumber(), studentDetails.getStudent().getCrecord()+"/"+studentDetails.getStudent().getCrecorddate(),
+						new Object[] { studentDetails.getStudent().getAdmissionnumber(), studentDetails.getStudent().getAdmissionnumber()+"/"+studentDetails.getStudent().getCrecorddate(),
 								studentDetails.getStudent().getName(),
 								studentDetails.getStudent().getGender(),
 								getStringDate(studentDetails.getStudent().getDateofbirth()),
 								studentDetails.getFathersname()+" / "+studentDetails.getMothersname(),
 								studentDetails.getParentsannualincome(),
 								studentDetails.getNoofdependents(),
-								studentDetails.getStudent().getNationality()+","+studentDetails.getStudent().getReligion()+" and "+studentDetails.getStudent().getCaste(),
+								studentDetails.getStudent().getNationality()+","+studentDetails.getStudent().getReligion()+" and "+studentDetails.getStudent().getStudentscaste(),
 								studentDetails.getStudent().getMothertongue(), ""});
 				
 				dataTwo.put(Integer.toString(i),
 						new Object[] { studentDetails.getAddresspermanent(), studentDetails.getStudent().getSchoollastattended(),
 								studentDetails.getStudent().getStdlaststudied(),
-								studentDetails.getStudent().getNooftc()+"/"+studentDetails.getStudent().getDateoftc(),
+								studentDetails.getStudent().getNotcissued()+"/"+studentDetails.getStudent().getDateoftc(),
 								studentDetails.getStudent().getClassadmittedin(),
 								getStringDate(studentDetails.getStudent().getAdmissiondate()),
-								studentDetails.getStudent().getSubsequentprogress(),
+								studentDetails.getStudent().getAdmissionnumber(),
 								studentDetails.getStudent().getClassonleaving(),
 								getStringDate(studentDetails.getStudent().getDateleaving()),
 								studentDetails.getStudent().getReasonleaving(),

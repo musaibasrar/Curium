@@ -84,14 +84,14 @@ public class FeesCollectionAction {
                 new FeesCollectionService(request, response).previewDetails();
                 
                 if(httpSession.getAttribute("branchid")!=null){
-                    String branchId = httpSession.getAttribute("branchid").toString();
-                    if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
-                        return "printFeesDetail.jsp";
-                    }else if("4".equalsIgnoreCase(branchId)) {
-                        return "printFeesDetail_pu.jsp";
-                    }else if("5".equalsIgnoreCase(branchId)) {
-                        return "printFeesDetail_dc.jsp";
-                    }
+                	return "printFeesDetail.jsp";
+					/*
+					 * String branchId = httpSession.getAttribute("branchid").toString();
+					 * if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) ||
+					 * "3".equalsIgnoreCase(branchId)) { return "printFeesDetail.jsp"; }else
+					 * if("4".equalsIgnoreCase(branchId)) { return "printFeesDetail_pu.jsp"; }else
+					 * if("5".equalsIgnoreCase(branchId)) { return "printFeesDetail_dc.jsp"; }
+					 */
                 }
                 
                 return "printFeesDetail.jsp";

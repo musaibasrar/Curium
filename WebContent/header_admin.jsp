@@ -125,7 +125,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							
 									<td style="padding-left: 20px;padding-right: 50px;">
-								<a target="mainFrame" href="welcome.jsp" ><img src="images/logo.jpg"/></a>
+								<a target="mainFrame" href="welcome.jsp" ><img src="images/logo.png"/></a>
 								</td>
 								
 							<!-- <td align="left"><img src="images/curiumheader.png"

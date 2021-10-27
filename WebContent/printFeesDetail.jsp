@@ -15,6 +15,13 @@
 <title>FEES RECIEPT</title>
 <head>
 <style type="text/css">
+.dataText {
+	font-family: Tahoma;
+	color: black;
+	font-size: 12px;
+	letter-spacing: normal;
+	text-align: center;
+}
 <!--
 .headerText {
 	width: 10px;
@@ -76,14 +83,8 @@
 	text-align: center;
 }
 
-.dataText {
-	font-family: Tahoma;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: center;
-}
 -->
+
 </style>
 
 
@@ -171,19 +172,19 @@
 
 
 <body style="text-align: center" class="bodymargin">
+<div style="border: 1px solid;border-radius: 15px">
 	<form method="post" class="bodymargin">
 		<br>
 		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
-				<img src="images/logo.jpg" width="150" height="50"/>
+				<img src="images/shaheenlogo.png" width="200" height="100"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;Curium School</label><br>
-				<label class="addressLine">XXXXX street, XXXXX Road, XXXXX - 000000<br>
-				
-				 </label>
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 100px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 70px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 			</tr>
 </table>
@@ -194,26 +195,26 @@
                 </tr>
             </TABLE>
 
-		<table>
+		<table style="padding-left: 30px;">
 		
 			<tr>
 			<td></td>
 			
 			</tr>
-			<tr>
+			<tr >
 			
 				<td class="dataTextBoldLeft" style="width: 50%">Student
-					Name: <c:out value="${student.name}" />
+					Name:&nbsp;<c:out value="${student.name}" />
 				</td>
 			
-				<td class="dataTextBoldLeft" style="width: 30%">Admission No:<c:out value="${student.admissionnumber}" />
+				<td class="dataTextBoldLeft" style="width: 30%">Admission No:&nbsp;<c:out value="${student.admissionnumber}" />
 				</td>
 				
 
 				
 
-				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:<c:out
-						value="${recieptinfo.receiptnumber}" />
+				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
+						value="${recieptinfo.branchreceiptnumber}" />
 				</td>
 
 			</tr>
@@ -222,13 +223,16 @@
 			</tr>
 			<tr>
 			<td class="dataTextBoldLeft" style="width: 50%">Fathers
-					Name: <c:out value="${parents.fathersname}" />
+					Name:&nbsp;<c:out value="${parents.fathersname}" />
 				</td>
 			
-				<td class="dataTextBoldLeft" style="width: 30%">Class & Sec:<c:out value="${student.classstudying}" />
+				<td class="dataTextBoldLeft" style="width: 30%">
+				 <c:set var = "string1" value = "${student.classstudying}"/>
+			     <c:set var = "string2" value = "${fn:replace(string1, '--', '')}" />
+					Class & Sec:&nbsp;<c:out value="${string2}" />
 				</td>
 
-			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date: <c:out
+			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
 						value="${recieptdate}" />
 				</td>
 			</tr>
@@ -275,10 +279,10 @@
 				<tr>
 					<td class="dataText"><c:out
 							value="${feescatmap.key}" /></td>
-					<td class="dataText">&#x20B9; <c:out
+					<td class="dataText">Rs. <c:out
 							value="${feescatmap.value}" /></td>
 					
-					<%-- <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
+					<%-- &#x20B9;<td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
 			<tr>
@@ -365,9 +369,10 @@
 			<td><hr width="100%"></td>
 			</tr>
 
-
 <tr>
-
+<td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}</td>
+</tr>
+<tr>
 <td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
 <td></td>
 </tr>
@@ -380,15 +385,17 @@
 <td><br><br></td>
 </tr>
 <tr>
-
-<td align="Center"><br>Clerks</td>
-
-<td align="left">H.M</td>
+<td></td>
+<td align="left"><br>Signature of Cashier/Accountant</td>
+<!-- 
+<td align="left">H.M</td> -->
 
 </tr>
 		</TABLE>
 
 
 	</form>
+	
+	</div>
 </body>
 </html>

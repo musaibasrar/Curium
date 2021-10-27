@@ -98,7 +98,7 @@ for(Cookie cookie : cookies){
       <tr>
           <td height="5" align="center" valign="middle"><p class="style1">
                   Backup Location --> 
-                 <%= request.getAttribute("Backuplocation") %>
+                 <%= request.getAttribute("util") %>
                   
               </p>
         </td>
