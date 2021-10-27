@@ -650,9 +650,105 @@
        		               return false;
        		    }
        		   });
+                
+                
+                $("#submitbtn").button().click(function(){
+                  	 $( "#dialogpaymentmethod" ).dialog( "open" );
+                       return false;
+
+                   });
+                   
+                   $(function() {
+                       $( "#dialogpaymentmethod" ).dialog({
+                           autoOpen: false,
+                           height: 230,
+                           width: 550,
+                           modal: true,
+                           buttons: {
+                               OK: function() {
+                               	
+                               			submitfees(document.getElementById("cashpayment"),document.getElementById("banktransfer"),
+                               					document.getElementById("chequetransfer"), document.getElementById("ackno"), 
+                               			document.getElementById("transferdate"), document.getElementById("transferbankname"),
+                               			document.getElementById("chequeno"), document.getElementById("chequedate"), document.getElementById("chequebankname"));
+                                   		$( this ).dialog( "close" );
+                            		   }
+                           }
+                       });
+                   });
+                   
+                   $("#transferdate").datepicker({
+           			changeYear : true,
+           			changeMonth : true,
+           			dateFormat: 'dd/mm/yy',
+           			yearRange: "-50:+0"
+           		});
+           		$("#anim").change(function() {
+           			$("#transferdate").datepicker("option", "showAnim", $(this).val());
+           		});
+                   
+                   $("#chequedate").datepicker({
+           			changeYear : true,
+           			changeMonth : true,
+           			dateFormat: 'dd/mm/yy',
+           			yearRange: "-50:+0"
+           		});
+           		$("#anim").change(function() {
+           			$("#chequedate").datepicker("option", "showAnim", $(this).val());
+           		});
+                   
             });
 
-            
+ function submitfees(cashpayment,banktransfer,chequetransfer,ackno,transferdate,transferbankname,chequeno,chequedate,chequebankname){
+            	
+            	var paymentmethodvalue = '';
+            	var cashpaymentvalue = '';
+            	var acknovalue = '';
+            	var transferdatevalue = '';
+            	var transferbanknamevalue = '';
+            	var chequenovalue = '';
+            	var chequedatevalue = '';
+            	var chequebanknamevalue = '';
+            	
+            	if(banktransfer.checked == true ){
+            		paymentmethodvalue = 'banktransfer';
+            	}
+            	
+            	if(chequetransfer.checked == true){
+            		paymentmethodvalue = 'chequetransfer';
+            	}
+            	
+            	if(cashpayment.checked == true){
+            		paymentmethodvalue = 'cashpayment';
+            	}
+            	
+            	if(ackno!=null){
+            		acknovalue = ackno.value;
+            	}
+            	
+            	if(transferdate!=null){
+            		transferdatevalue = transferdate.value;
+            	}
+            	
+            	if(transferbankname!=null){
+            		transferbanknamevalue = transferbankname.value;
+            	}
+            	if(chequeno!=null){
+            		chequenovalue = chequeno.value;
+            	}
+            	if(chequedate!=null){
+            		chequedatevalue = chequedate.value;
+            	}
+            	if(chequebankname!=null){
+            		chequebanknamevalue = chequebankname.value;
+            	}
+            	
+            	var form1 = document.getElementById("form1");
+        		form1.action = "Controller?process=FeesCollection&action=feesAdd&paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
+        		form1.method = "POST";
+        		form1.submit();
+        		
+            }
             
             function getstampfees(){
             	var form1 = document.getElementById("form1");
@@ -669,6 +765,62 @@
             		duePayment.value = 0;
             		alert('Amount Due to be paid must be lesser than or equals to Due Amount');
             	}
+            }
+            
+ function selectPayment(id){
+            	
+            	
+            	if(id == 'cashpayment'){
+            		
+            		
+            		document.getElementById('onlinechequeack').style.display = "none";
+            		document.getElementById('onlinechequedate').style.display = "none";
+            		document.getElementById('onlinechequebank').style.display = "none";
+            		
+            		document.getElementById('onlinetransferack').style.display = "none";
+            		document.getElementById('onlinetransferdate').style.display = "none";
+            		document.getElementById('onlinetransferbank').style.display = "none";
+            		
+            		document.getElementById('ackno').style.display = '';
+            		document.getElementById('transferdate').style.display = '';
+            		document.getElementById('transferbankname').style.display = '';
+            		document.getElementById('chequeno').style.display = '';
+            		document.getElementById('chequedate').style.display = '';
+            		document.getElementById('chequebankname').style.display = '';
+            		
+            			
+            	}else if(id == 'banktransfer'){
+            		
+            		
+            		document.getElementById('onlinechequeack').style.display = "none";
+            		document.getElementById('onlinechequedate').style.display = "none";
+            		document.getElementById('onlinechequebank').style.display = "none";
+            		
+            		document.getElementById('onlinetransferack').style.display = '';
+            		document.getElementById('onlinetransferdate').style.display = '';
+            		document.getElementById('onlinetransferbank').style.display = '';
+            		
+            		
+            		document.getElementById('chequeno').style.display = '';
+            		document.getElementById('chequedate').style.display = '';
+            		document.getElementById('chequebankname').style.display = '';
+            		
+            		
+            	}else if(id == 'chequetransfer'){
+            		
+            		document.getElementById('onlinechequeack').style.display = '';
+            		document.getElementById('onlinechequedate').style.display = '';
+            		document.getElementById('onlinechequebank').style.display = '';
+            		
+            		document.getElementById('onlinetransferack').style.display = "none";
+            		document.getElementById('onlinetransferdate').style.display = "none";
+            		document.getElementById('onlinetransferbank').style.display = "none";
+            		
+            		document.getElementById('ackno').style.display = '';
+            		document.getElementById('transferdate').style.display = '';
+            		document.getElementById('transferbankname').style.display = '';
+            	}
+            	
             }
             
         </script>
@@ -690,11 +842,8 @@ for(Cookie cookie : cookies){
 }
 %>
     <body>
-        <form id="form1" action="Controller?process=FeesCollection&action=feesAdd" method="post" onkeypress="if (event.keyCode == 92) addRow();">
+        <form id="form1" method="post" onkeypress="if (event.keyCode == 92) addRow();">
             <div style="height: 28px">
-                <!--<a href="#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
-
-               
             <table  width="100%">
                 <thead>
                     <tr>
@@ -834,7 +983,125 @@ for(Cookie cookie : cookies){
             </TABLE>
  -->
             
-            <input type="submit" value="submit" id="submit"/>
+            <!-- <input type="submit" value="submit" id="submit"/> -->
+            
+              
+            <input type="button" value="submit" id="submitbtn"/>
+            
+            
+            <div id="dialogpaymentmethod" title="Payment Method">
+				
+           		 
+           		 <table style="width: auto;height: auto;">
+						
+						<tr>
+							<td>Payment method &nbsp;</td>
+						
+							<td>
+							
+								<input type="radio" id="cashpayment" name="paymentmethod" value="cashpayment" onclick="selectPayment(this.id)">
+								<label for="cashpayment">Cash</label>
+									
+								<input type="radio" id="banktransfer" name="paymentmethod" value="banktransfer" onclick="selectPayment(this.id)">
+								<label for="banktransfer">Bank Transfer</label>
+								
+								<input type="radio" id="chequetransfer" name="paymentmethod" value="chequetransfer" onclick="selectPayment(this.id)">
+								<label for="chequetransfer">Cheque</label>							
+							
+							</td>
+							
+							
+						</tr>
+						
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr id="onlinetransferack" style="display: none;">
+							<td></td>
+						
+							<td>
+								Acknowledgement # &nbsp;<input type="text" id="ackno" name="ackno" style="width: 175px;">														
+							</td>
+							
+						</tr>
+						<tr id="onlinetransferdate" style="display: none;">
+							<td></td>
+						
+							<td>
+							Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="text"  name="transferdate"
+									class="textField" style="font-size: 14px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="transferdate" autocomplete="false" required
+									data-validate="validate(required)">
+								
+							</td>
+							
+						</tr>
+						
+						<tr id="onlinetransferbank" style="display: none;">
+							<td></td>
+						
+							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label>
+									<select name="transferbankname" id="transferbankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
+											<option value="axisbank">Axis Bank</option>
+											<option value="canarabank">Canara Bank</option>
+								</select>
+							
+							</label>
+							
+							</td>
+							
+						</tr>
+						
+						
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr id="onlinechequeack" style="display: none;">
+							<td></td>
+						
+							<td>
+								Cheque # &nbsp;<input type="text" id="chequeno" name="chequeno" style="width: 175px;">														
+							</td>
+							
+						</tr>
+						<tr id="onlinechequedate" style="display: none;">
+							<td></td>
+						
+							<td>
+							Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="text"  name="chequedate"
+									class="textField" style="font-size: 14px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="chequedate" autocomplete="false" required
+									data-validate="validate(required)">
+								
+							</td>
+							
+						</tr>
+						
+						<tr id="onlinechequebank" style="display: none;">
+							<td></td>
+						
+							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label>
+									<select name="chequebankname" id="chequebankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
+											<option value="axisbank">Axis Bank</option>
+											<option value="canarabank">Canara Bank</option>
+								</select>
+							
+							</label>
+							
+							</td>
+							
+						</tr>
+						
+					</table>
+			</div>
             
         </form>
 
