@@ -459,7 +459,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "AjaxController?process=HrProcess&action=getPayHead&payHeadType="+selected,true);
+			xmlHttp.open("GET", "/HrProcess&action=getPayHead&payHeadType="+selected,true);
 			xmlHttp.send(null);
 		}
 	    

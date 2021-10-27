@@ -43,7 +43,7 @@ Author     : Musaib
 
 
                 get.onreadystatechange = processdata;
-                get.open("POST", "AjaxController?process=VisitProcess&action=getAJaxNextVisit&startHour=" + startHour + "&startMin=" + startMin, true);
+                get.open("POST", "/VisitProcess&action=getAJaxNextVisit&startHour=" + startHour + "&startMin=" + startMin, true);
                 get.send(null);
 
             }
@@ -95,7 +95,7 @@ Author     : Musaib
 
 
                 getExpiringStockCount.onreadystatechange = processExpiringStockData;
-                getExpiringStockCount.open("POST", "AjaxController?process=StockProcess&action=getExpiringStock", true);
+                getExpiringStockCount.open("POST", "/StockProcess&action=getExpiringStock", true);
                 getExpiringStockCount.send(null);
 
             }
@@ -127,7 +127,7 @@ Author     : Musaib
 
 
                 getDepletingStockCount.onreadystatechange = processDepletingStockData;
-                getDepletingStockCount.open("POST", "AjaxController?process=StockProcess&action=getDepletingStock", true);
+                getDepletingStockCount.open("POST", "/StockProcess&action=getDepletingStock", true);
                 getDepletingStockCount.send(null);
 
             }

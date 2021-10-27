@@ -699,7 +699,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "AjaxController?process=SupplierBalance&action=getSupplierBalance&supplierid="+selected,true);
+			xmlHttp.open("GET", "/SupplierBalance&action=getSupplierBalance&supplierid="+selected,true);
 			xmlHttp.send(null);
 		
 	}

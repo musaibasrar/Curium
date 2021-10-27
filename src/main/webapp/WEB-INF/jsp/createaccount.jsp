@@ -498,7 +498,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "AjaxController?process=SubGroupName&action=getSubGroupNames&groupname="+selected,true);
+			xmlHttp.open("GET", "/SubGroupName&action=getSubGroupNames&groupname="+selected,true);
 			xmlHttp.send(null);
 		}
 		
@@ -553,7 +553,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChangedSSGroup;
-			xmlHttp.open("GET", "AjaxController?process=SubGroupName&action=getSSGroupNames&subgroupname="+selected,true);
+			xmlHttp.open("GET", "/SubGroupName&action=getSSGroupNames&subgroupname="+selected,true);
 			xmlHttp.send(null);
 		}
 
