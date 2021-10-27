@@ -127,13 +127,21 @@ public boolean readFile() throws FileNotFoundException, IOException {
             student.setSecondlanguage(row.getCell(15).getStringCellValue());
             student.setCreateddate(DateUtil.simpleDateParser((row.getCell(22).getStringCellValue())+"/"+(row.getCell(23).getStringCellValue())+"/"+(row.getCell(24).getStringCellValue())));
             
+            
+            student.setSchoollastattended(row.getCell(38).getStringCellValue());
+            student.setLastschooladdress(row.getCell(39).getStringCellValue());
+            //student.setTotalmarks(Integer.parseInt(row.getCell(40).getStringCellValue()));
+            student.setPercentage(row.getCell(41).getStringCellValue());
+            student.setLastfirstlanguage(row.getCell(44).getStringCellValue());
+            student.setUserid(Integer.parseInt(row.getCell(46).getStringCellValue()));
+            
             student.setBranchid(3);
             student.setArchive(0);
     		student.setPassedout(0);
     		student.setDroppedout(0);
     		student.setLeftout(0);
     		student.setStudentexternalid(DataUtil.generateString(5));
-           
+    		student.setLeftout(0);
            
            
            parent.setFathersname(row.getCell(25).getStringCellValue());
@@ -148,8 +156,8 @@ public boolean readFile() throws FileNotFoundException, IOException {
            parent.setRemarks(row.getCell(34).getStringCellValue());
            parent.setMothersname(row.getCell(35).getStringCellValue());
            parent.setProfession(row.getCell(36).getStringCellValue());
-           parent.setMothersqualification(row.getCell(37).getStringCellValue());
-           parent.setCocontactnumber(row.getCell(38).getStringCellValue());
+           //parent.setMothersqualification(row.getCell(37).getStringCellValue());
+           parent.setCocontactnumber(row.getCell(37).getStringCellValue());
            
            parent.setStudent(student);
    		   parent.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
