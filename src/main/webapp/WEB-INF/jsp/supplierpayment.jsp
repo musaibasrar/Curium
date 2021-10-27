@@ -590,7 +590,7 @@
 	function issuecheque() {
 		var form1 = document.getElementById("form1");
 		if(form1.checkValidity()) {
-			form1.action = "Controller?process=MessSuppliersProcess&action=issueCheque";
+			form1.action = "Controller?process=MessSuppliersProcess/issueCheque";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -598,7 +598,7 @@
 	
 	function cancelcheque() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MessSuppliersProcess&action=cancelCheque";
+		form1.action = "Controller?process=MessSuppliersProcess/cancelCheque";
 		form1.method = "POST";
 		form1.submit();
 
@@ -606,21 +606,21 @@
 	
 	function deliveredcheque(delivereddate) {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MessSuppliersProcess&action=deliveredCheque&deliverydate="+delivereddate;
+		form1.action = "Controller?process=MessSuppliersProcess/deliveredCheque?deliverydate="+delivereddate;
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function clearedcheque(cleareddate,bankname) {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MessSuppliersProcess&action=clearedCheque&cleardate="+cleareddate+"&bankname="+bankname+"";
+		form1.action = "Controller?process=MessSuppliersProcess/clearedCheque?cleardate="+cleareddate+"&bankname="+bankname+"";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function printRecords(){
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MessSuppliersProcess&action=printSupplierPayment";
+		form1.action = "Controller?process=MessSuppliersProcess/printSupplierPayment";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -699,7 +699,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/SupplierBalance&action=getSupplierBalance&supplierid="+selected,true);
+			xmlHttp.open("GET", "/SupplierBalance/getSupplierBalance?supplierid="+selected,true);
 			xmlHttp.send(null);
 		
 	}
@@ -907,7 +907,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -1112,7 +1112,7 @@ for(Cookie cookie : cookies){
 			<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/Controller?process=MessSuppliersProcess&action=paymentSuppliers&page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/Controller?process=MessSuppliersProcess/paymentSuppliers?page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -1125,7 +1125,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/Controller?process=MessSuppliersProcess&action=paymentSuppliers&page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/Controller?process=MessSuppliersProcess/paymentSuppliers?page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -1134,7 +1134,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/Controller?process=MessSuppliersProcess&action=paymentSuppliers&page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/Controller?process=MessSuppliersProcess/paymentSuppliers?page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
 

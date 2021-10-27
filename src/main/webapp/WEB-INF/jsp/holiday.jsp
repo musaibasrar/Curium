@@ -332,7 +332,7 @@
 <script type="text/javascript">
 	function addHolidays() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=addHolidays";
+		form1.action = "Controller?process=AttendanceProcess/addHolidays";
 		form1.method = "POST";
 		form1.submit();
 
@@ -340,7 +340,7 @@
 	
 	function addWeekOff() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=addWeekOff";
+		form1.action = "Controller?process=AttendanceProcess/addWeekOff";
 		form1.method = "POST";
 		form1.submit();
 
@@ -348,7 +348,7 @@
 	
 	function deleteRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=deleteMultiple";
+		form1.action = "Controller?process=AttendanceProcess/deleteMultiple";
 		form1.method = "POST";
 		form1.submit();
 
@@ -493,7 +493,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

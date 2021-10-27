@@ -353,7 +353,7 @@ background-color:rgba(0, 0, 0, 0);
 	
 	function search() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=ExamDetailsProcess&action=searchHallTicketDetails";
+		form1.action = "Controller?process=ExamDetailsProcess/searchHallTicketDetails";
 		form1.method = "POST";
 		form1.submit();
 
@@ -361,7 +361,7 @@ background-color:rgba(0, 0, 0, 0);
 	
 	function printPreview() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=ExamDetailsProcess&action=printPreviewHallTicket";
+		form1.action = "Controller?process=ExamDetailsProcess/printPreviewHallTicket";
 		form1.method = "POST";
 		form1.submit();
 
@@ -479,7 +479,7 @@ background-color:rgba(0, 0, 0, 0);
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

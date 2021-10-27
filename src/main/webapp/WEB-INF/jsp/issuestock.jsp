@@ -555,7 +555,7 @@
 		var form1 = document.getElementById("form1");
 		
 		if(form1.checkValidity()) {
-			form1.action = "Controller?process=MessItemsMoveProcess&action=saveStockMove";
+			form1.action = "Controller?process=MessItemsMoveProcess/saveStockMove";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -565,7 +565,7 @@
 	
 	function cancelRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MessItemsMoveProcess&action=cancelStockMove";
+		form1.action = "Controller?process=MessItemsMoveProcess/cancelStockMove";
 		form1.method = "POST";
 		form1.submit();
 
@@ -573,21 +573,21 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=printVoucher";
+		form1.action = "Controller?process=AdminProcess/printVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function approveRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=approveVoucher";
+		form1.action = "Controller?process=AdminProcess/approveVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function rejectRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AdminProcess&action=rejectVoucher";
+		form1.action = "Controller?process=AdminProcess/rejectVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -797,7 +797,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -996,7 +996,7 @@ for(Cookie cookie : cookies){
 			<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/Controller?process=MessItemsMoveProcess&action=issueItems&page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/Controller?process=MessItemsMoveProcess/issueItems?page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -1009,7 +1009,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/Controller?process=MessItemsMoveProcess&action=issueItems&page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/Controller?process=MessItemsMoveProcess/issueItems?page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -1018,7 +1018,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/Controller?process=MessItemsMoveProcess&action=issueItems&page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/Controller?process=MessItemsMoveProcess/issueItems?page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
                     

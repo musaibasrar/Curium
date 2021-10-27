@@ -376,14 +376,14 @@
 <script type="text/javascript">
 	function addPosition() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=PositionProcess&action=addPosition";
+		form1.action = "Controller?process=PositionProcess/addPosition";
 		form1.method = "POST";
 		form1.submit();
 
 	}
 	function deletePosition() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=PositionProcess&action=deleteMultiple";
+		form1.action = "Controller?process=PositionProcess/deleteMultiple";
 		form1.method = "POST";
 		form1.submit();
 
@@ -460,7 +460,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -474,7 +474,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1"
-		action="Controller?process=PositionProcess&action=deleteMultiple" method="POST">
+		action="Controller?process=PositionProcess/deleteMultiple" method="POST">
 		<div style="height: 28px">
 			<button id="add">Add Position</button>
 			<br />

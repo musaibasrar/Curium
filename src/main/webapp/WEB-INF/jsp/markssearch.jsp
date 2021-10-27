@@ -365,7 +365,7 @@
 		document.getElementById('subjectselected').value = subName;
 		document.getElementById('examselected').value = examName;
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MarksDetailsProcess&action=viewMarks";
+		form1.action = "Controller?process=MarksDetailsProcess/viewMarks";
 		form1.method = "POST";
 		form1.submit();
 
@@ -445,7 +445,7 @@
 	
 	function deleteRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MarksDetailsProcess&action=deleteMultiple";
+		form1.action = "Controller?process=MarksDetailsProcess/deleteMultiple";
 		form1.method = "POST";
 		form1.submit();
 
@@ -484,7 +484,7 @@ function checkMandatoryandSubmit(){
     		alert('Select the student(s) to update the marks');
     	}else{
     		var form1 = document.getElementById("form1");
-    		form1.action = "Controller?process=MarksDetailsProcess&action=addMarks";
+    		form1.action = "Controller?process=MarksDetailsProcess/addMarks";
     		form1.method = "POST";
     		form1.submit();
 
@@ -502,7 +502,7 @@ function checkMandatoryandSubmit(){
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -515,7 +515,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=MarksDetailsProcess&action=updateMarks" method="POST">
+	<form id="form1" action="Controller?process=MarksDetailsProcess/updateMarks" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />

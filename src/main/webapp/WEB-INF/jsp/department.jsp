@@ -376,14 +376,14 @@
 <script type="text/javascript">
 	function addDepartment() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=DepartmentProcess&action=addDepartment";
+		form1.action = "Controller?process=DepartmentProcess/addDepartment";
 		form1.method = "POST";
 		form1.submit();
 
 	}
 	function deleteDepartment() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=DepartmentProcess&action=deleteMultiple";
+		form1.action = "Controller?process=DepartmentProcess/deleteMultiple";
 		form1.method = "POST";
 		form1.submit();
 
@@ -461,7 +461,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -475,7 +475,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1"
-		action="Controller?process=DepartmentProcess&action=deleteMultiple" method="POST">
+		action="Controller?process=DepartmentProcess/deleteMultiple" method="POST">
 		<div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />

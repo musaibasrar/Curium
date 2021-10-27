@@ -67,7 +67,7 @@
 
             function ViewAll(){
                 var form1=document.getElementById("form1");
-                form1.action="Controller?process=PersonalProcess&action=viewAll";
+                form1.action="Controller?process=PersonalProcess/viewAll";
                 form1.submit();
             }
         </script>
@@ -76,7 +76,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -91,7 +91,7 @@ for(Cookie cookie : cookies){
     <body background="/images/bg.jpg" >
 
 
-        <form action="Controller?process=AttendanceProcess&action=uploadAttendanceFile" method="post" enctype="multipart/form-data">
+        <form action="Controller?process=AttendanceProcess/uploadAttendanceFile" method="post" enctype="multipart/form-data">
                 
         
     <table height="400" class="tableCSS"  >

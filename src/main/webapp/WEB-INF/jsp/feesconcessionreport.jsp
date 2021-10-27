@@ -360,7 +360,7 @@
 <script type="text/javascript">
 	function searchForFeesConcession() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=FeesProcess&action=searchFeesConcessionReport";
+		form1.action = "Controller?process=FeesProcess/searchFeesConcessionReport";
 		form1.method = "POST";
 		form1.submit();
 
@@ -409,7 +409,7 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=FeesProcess&action=printFeesConcessionReport";
+		form1.action = "Controller?process=FeesProcess/printFeesConcessionReport";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -439,7 +439,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -591,7 +591,7 @@ for(Cookie cookie : cookies){
 									name="studentIDs"
 									value="<c:out value="${Parents.student.sid}"/>" /></td> --%>
 								<td class="dataTextInActive"><a class="dataTextInActive"
-									href="/Controller?process=StudentProcess&action=ViewFeesStructure&id=<c:out value='${students.key.student.sid}'/>"><c:out
+									href="/Controller?process=StudentProcess/ViewFeesStructure?id=<c:out value='${students.key.student.sid}'/>"><c:out
 											value="${students.key.student.admissionnumber}" /></a></td>
 								<td class="dataText"><c:out value="${students.key.student.name}" /></td>
 								<td class="dataText"><c:out	value="${students.key.student.classstudying}" /></td>

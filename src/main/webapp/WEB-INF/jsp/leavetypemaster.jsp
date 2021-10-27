@@ -343,7 +343,7 @@
 <script type="text/javascript">
 	function addFeesCategory() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=FeesProcess&action=addFeesParticular";
+		form1.action = "Controller?process=FeesProcess/addFeesParticular";
 		form1.method = "POST";
 		form1.submit();
 
@@ -406,7 +406,7 @@
 	 
 	 function saveLeaveType(){
 		 var form1=document.getElementById("form1");
-         form1.action="Controller?process=HrProcess&action=saveLeaveType";
+         form1.action="Controller?process=HrProcess/saveLeaveType";
          form1.submit();
      }
 	 
@@ -414,7 +414,7 @@
          
 		if(confirm('Are you sure, you want to delete the leave type?')){
 			var form1=document.getElementById("form1");
-	         form1.action="Controller?process=HrProcess&action=deleteLeaveType";
+	         form1.action="Controller?process=HrProcess/deleteLeaveType";
 	        form1.submit();
 		}
          
@@ -427,7 +427,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

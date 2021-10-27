@@ -357,7 +357,7 @@
 	function searchForEmployees() {
 		
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=viewAllEmployees";
+		form1.action = "Controller?process=AttendanceProcess/viewAllEmployees";
 		form1.method = "POST";
 		form1.submit();
 
@@ -366,7 +366,7 @@
 function addHolidays() {
 		
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=addHolidays";
+		form1.action = "Controller?process=AttendanceProcess/addHolidays";
 		form1.method = "POST";
 		form1.submit();
 
@@ -475,7 +475,7 @@ $(function() {
 
 </head>
 <body>
-	<form id="form1" action="Controller?process=MarksDetailsProcess&action=updateMarks" method="POST">
+	<form id="form1" action="Controller?process=MarksDetailsProcess/updateMarks" method="POST">
 		
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">

@@ -355,14 +355,14 @@
             
             function refreshPage(){
                  var form1=document.getElementById("form1");
-                form1.action="Controller?process=PersonalProcess&action=ViewAllGo";
+                form1.action="Controller?process=PersonalProcess/ViewAllGo";
                 form1.submit();
                 
                 //window.location.reload();
             } 
             function redirect(){
                  var form1=document.getElementById("form1");
-                    form1.action="Controller?process=PersonalProcess&action=redirect";
+                    form1.action="Controller?process=PersonalProcess/redirect";
                     form1.submit();
                 
                 //window.location.reload();
@@ -373,7 +373,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -387,7 +387,7 @@ for(Cookie cookie : cookies){
 %>
     <body>
 
-        <form name="form1" id="form1"action="Controller?process=StudentProcess&action=archiveMultiple" method="post">
+        <form name="form1" id="form1"action="Controller?process=StudentProcess/archiveMultiple" method="post">
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>
@@ -417,7 +417,7 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/Controller?process=StudentProcess/ViewDetails?id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Student.name}"/></td>
                                 <td id="studyclass" class="dataText"><c:out value="${Student.classstudying}"/></td>
                                 <td class="dataText"><fmt:formatDate value="${student.admissiondate}" pattern="yyyy-MM-dd"/></td>

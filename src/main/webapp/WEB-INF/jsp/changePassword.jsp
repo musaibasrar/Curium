@@ -324,7 +324,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -506,14 +506,14 @@ for(Cookie cookie : cookies){
             function changePassword() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "Controller?process=UserProcess&action=changePassword";
+                form1.action = "Controller?process=UserProcess/changePassword";
                 form1.submit();
 
             }
          
             function Cancel() {
                 var form1 = document.getElementById("form1");
-                form1.action = "Controller?process=StudentProcess&action=viewAll";
+                form1.action = "Controller?process=StudentProcess/viewAll";
                 form1.submit();
             }
 
