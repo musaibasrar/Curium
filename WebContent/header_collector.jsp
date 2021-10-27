@@ -153,7 +153,7 @@ for(Cookie cookie : cookies){
 								href="Controller?process=FeesCollection&action=searchFeesReportMonthly"> <img
 									src="images/monthly.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
-									Monthly Contribution
+									Monthly Collection
 								</a>
 							</td>
 							

@@ -645,16 +645,39 @@ for(Cookie cookie : cookies){
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
-						<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>
+					<td class="dataTextRight" >
+						<label style="color: #eb6000"><b>
 							<fmt:formatNumber type="currency"  value="${drtotal}" /></b>
-							</label> 
-							</td>
-							<td class="dataTextRight">
-							<label style="color: #eb6000"><b>
+						</label> 
+					</td>
+						<td class="dataTextRight">
+						  <label style="color: #eb6000"><b>
 							<fmt:formatNumber type="currency"  value="${crtotal}" /></b>
-							</label>
-							</td>
+						  </label>
+						</td>
+					</tr>
+					<tr>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataTextRight" >
+						<label style="color: #eb6000"><b>Balance</b>
+						</label> 
+					</td>
+						<td class="dataTextRight">
+						  <label style="color: #eb6000">
+						  		<b>
+							  		<c:if test="${drtotal > crtotal}">
+							  			<fmt:formatNumber type="currency"  value="${drtotal - crtotal}" />
+							  		</c:if>
+							  		<c:if test="${crtotal > drtotal}">
+							  			<fmt:formatNumber type="currency"  value="${crtotal - drtotal}" />
+							  		</c:if>
+						  		</b>
+						  </label>
+						</td>
 					</tr>
 				</tbody>
 				<tfoot>

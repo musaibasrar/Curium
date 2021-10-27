@@ -695,6 +695,8 @@ for(Cookie cookie : cookies){
                         <tr>
                             <th class="headerText"><input type="checkbox" id="chckHead" /></th>
                             <th title="click to sort" class="headerText">Date</th>
+                            <th title="click to sort" class="headerText">Collector</th>
+                            <th title="click to sort" class="headerText">Member Name</th>
                             <th title="click to sort" class="headerText">Receipt Number</th>
                             <th title="click to sort" class="headerText">Total Amount</th>
                             <th title="click to sort" class="headerText">View Details</th>
@@ -709,16 +711,18 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox"
-								id="<c:out value="${feesdetails.receiptnumber}"/>" class="chcktbl"
+								id="<c:out value="${feesdetails.value.receiptnumber}"/>" class="chcktbl"
 								name="feesIDs"
-								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
+								value="<c:out value="${feesdetails.value.receiptnumber}"/>" /></td>
                                 <td  class="dataText">
-                                <fmt:formatDate type="date" value="${feesdetails.date}" pattern="dd/MM/yyyy"/>
+                                <fmt:formatDate type="date" value="${feesdetails.value.date}" pattern="dd/MM/yyyy"/>
                                 </td>
-                                <td  class="dataText"><c:out value="${feesdetails.receiptnumber}"/></a></td>
-                                <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=CancelFeesReceipt&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+                                <td  class="dataText"><c:out value="${feesdetails.key.nationality}"/></a></td>
+                                <td  class="dataText"><c:out value="${feesdetails.key.name}"/></a></td>
+                                <td  class="dataText"><c:out value="${feesdetails.value.receiptnumber}"/></a></td>
+                                <td class="dataText"><c:out value="${feesdetails.value.totalamount}"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=CancelFeesReceipt&id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
 
                             </tr>
                         </c:forEach>

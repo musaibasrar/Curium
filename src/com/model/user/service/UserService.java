@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.Cookie;
@@ -23,14 +25,12 @@ import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
 import com.model.adminexpenses.service.AdminService;
 import com.model.branch.dto.Branch;
-import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.feescollection.service.FeesCollectionService;
 import com.model.parents.dto.Parents;
-import com.model.std.dao.StandardDetailsDAO;
-import com.model.std.dto.Classsec;
 import com.model.student.dao.studentDetailsDAO;
+import com.model.student.dto.Student;
 import com.model.student.service.StudentService;
 import com.model.user.dao.UserDAO;
 import com.model.user.dto.Login;
@@ -553,6 +553,7 @@ public class UserService {
 
 		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
 		String branchId = request.getParameter("selectedbranchid");
+		Map<Student,Receiptinfo> mapReceipt = new HashMap<Student, Receiptinfo>();
 		int idBranch = 0;
 
 		if (httpSession.getAttribute(BRANCHID) != null) {
@@ -605,10 +606,12 @@ public class UserService {
 		}
 		long sumOfFees = 0l;
 		for (Receiptinfo receiptinfo : feesDetailsList) {
+			Student student = new studentDetailsDAO().readUniqueObject(receiptinfo.getSid());
+			mapReceipt.put(student, receiptinfo);
 			sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 		}
 
-		httpSession.setAttribute("searchfeesdetailslist", feesDetailsList);
+		httpSession.setAttribute("searchfeesdetailslist", mapReceipt);
 		httpSession.setAttribute("sumofdetailsfees", sumOfFees);
 	}
 

@@ -509,7 +509,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Collection Details</a>
+            				 <a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Contribution Collection Details</a>
             			</td>
             		</tr>
             		<tr>
