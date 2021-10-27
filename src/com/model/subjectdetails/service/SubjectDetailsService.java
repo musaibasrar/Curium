@@ -56,6 +56,7 @@ public class SubjectDetailsService {
 			subject.setExamname(DataUtil.emptyString(request.getParameter("examname")));
 			subject.setExamclass(DataUtil.emptyString(request.getParameter("examclass")));
 			subject.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+			subject.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			subject = new SubjectDetailsDAO().addSubject(subject);
 			 
 			if(subject == null){
@@ -92,6 +93,7 @@ public class SubjectDetailsService {
 		if(httpSession.getAttribute("branchid")!=null){
 			subject.setSubjectname(DataUtil.emptyString(request.getParameter("subjectname")));
 			subject.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+			subject.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			subject = new SubjectDetailsDAO().addSubjectMaster(subject);
 			 
 			if(subject == null){

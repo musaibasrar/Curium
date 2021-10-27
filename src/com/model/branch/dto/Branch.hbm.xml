@@ -14,5 +14,11 @@
          <property name="branchcode" type="string">
             <column name="branchcode" length="50" />
         </property>
+         <property name="address" type="string">
+            <column name="address" length="500" />
+        </property>
+         <property name="contact" type="string">
+            <column name="contact" length="200" />
+        </property>
     </class>
 </hibernate-mapping>

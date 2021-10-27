@@ -53,6 +53,7 @@ public class AdminService {
 			adminexpenses.setChequedate(DateUtil.indiandateParser(request.getParameter("chequedate")));
 			adminexpenses.setEntrydate(DateUtil.indiandateParser(request.getParameter("entrydate")));
 			adminexpenses.setVoucherstatus("pending");
+			adminexpenses.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			adminexpenses.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			
 			if(!adminexpenses.getItemdescription().equalsIgnoreCase("") && !adminexpenses.getPriceofitem().equalsIgnoreCase(""))
