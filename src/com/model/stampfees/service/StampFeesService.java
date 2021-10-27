@@ -1,20 +1,27 @@
 package com.model.stampfees.service;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.account.dao.AccountDAO;
+import com.model.account.dto.VoucherEntrytransactions;
 import com.model.feescategory.dto.Feescategory;
+import com.model.feescollection.dao.feesCollectionDAO;
 import com.model.parents.dto.Parents;
 import com.model.stampfees.dao.StampFeesDAO;
 import com.model.stampfees.dto.Academicfeesstructure;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.student.dto.Studentfeesstructure;
-import com.model.user.dao.UserDAO;
 import com.util.DataUtil;
+import com.util.DateUtil;
 
 public class StampFeesService {
 
@@ -23,6 +30,7 @@ public class StampFeesService {
 	HttpSession httpSession;
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 
 	public StampFeesService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -183,6 +191,7 @@ public class StampFeesService {
 		List<Studentfeesstructure> listOfstudentfeesstructure = new ArrayList<Studentfeesstructure>();
 		
 		String feesTotalAmount = request.getParameter("feesTotalAmount");
+		Long grandTotal = 0l;
 
 		String[] feesCategoryIds = request.getParameterValues("feesIDS");
 		String[] feesAmount = request.getParameterValues("fessFullCat");
@@ -196,7 +205,9 @@ public class StampFeesService {
 			academicfessstructure = new Academicfeesstructure();
 			academicfessstructure.setSid(Integer.valueOf(id));
 			academicfessstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			academicfessstructure.setTotalfees(feesTotalAmount);
+			grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
 			academicfessstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			listOfacademicfessstructure.add(academicfessstructure);
 			// ids.add(Integer.valueOf(id));
@@ -218,6 +229,7 @@ public class StampFeesService {
 			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[i]));
 			studentfeesstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));
 			listOfstudentfeesstructure.add(studentfeesstructure);
 		}
@@ -226,11 +238,62 @@ public class StampFeesService {
 			
 		}
 		
-		new StampFeesDAO().addStampFees(listOfacademicfessstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-		new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		//Accounts
+		//Pass J.V. : credit the Fees as income & debit the cash
+		
+		int crFees = getLedgerAccountId("unearnedstudentfeesincome");
+		int drAccount = getLedgerAccountId("studentfeesreceivable");;
+		
+		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+		
+		transactions.setDraccountid(drAccount);
+		transactions.setCraccountid(crFees);
+		transactions.setDramount(new BigDecimal(grandTotal));
+		transactions.setCramount(new BigDecimal(grandTotal));
+		transactions.setVouchertype(4);
+		transactions.setTransactiondate(DateUtil.todaysDate());
+		transactions.setEntrydate(DateUtil.todaysDate());
+		transactions.setNarration("Towards Fees Stamp");
+		transactions.setCancelvoucher("no");
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+		
+		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+drAccount;
+
+		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+crFees;
+		
+		// End J.V
+		new StampFeesDAO().addStampFees(listOfacademicfessstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
+		//new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
 		}
 		}
+	}
+
+	private int getLedgerAccountId(String itemAccount) {
+		
+		int result = 0;
+	 	
+	 	Properties properties = new Properties();
+		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("util.properties");
+		
+        		try {
+					properties.load(inputStream);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		    
+        		String ItemLedgerId = properties.getProperty(itemAccount);
+		    
+		    if(ItemLedgerId!=null) {
+		    	result = Integer.parseInt(ItemLedgerId);
+		    }else {
+		    	String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
+		    	result = Integer.parseInt(ItemLedger.toLowerCase());
+		    }
+		    
+		    return result;
 	}
 
 	public void deleteFeesStamp() {

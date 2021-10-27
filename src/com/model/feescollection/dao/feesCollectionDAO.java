@@ -14,6 +14,7 @@ import org.hibernate.SessionFactory;
 import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
+import com.model.account.dto.VoucherEntrytransactions;
 import com.model.feescollection.dto.Feescollection;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.student.dto.Studentfeesstructure;
@@ -36,18 +37,51 @@ public class feesCollectionDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public boolean create(List<Feescollection> feescollectionList) {
+	public boolean create(Receiptinfo receiptInfo, List<Feescollection> feescollectionList, VoucherEntrytransactions transactions, String updateCrAccount,
+			String updateDrAccount, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome) {
 		 
 		boolean result = false;
 		try {
 			 
 			 transaction = session.beginTransaction();
 			
+			 Query queryReceipt = session.createQuery("from Receiptinfo where branchid = "+receiptInfo.getBranchid()+" order by receiptnumber DESC");
+			 	List<Receiptinfo> ReceiptList = queryReceipt.list();
+			 	
+			 	if(ReceiptList.size() > 0) {
+			 		receiptInfo.setBranchreceiptnumber(Integer.toString(Integer.parseInt(ReceiptList.get(0).getBranchreceiptnumber())+1));
+			 	}else {
+			 		receiptInfo.setBranchreceiptnumber(Integer.toString(1));
+			 	}
+			 	
+			 	session.save(receiptInfo);
+			 	
+			 	//Receipts
+			 	transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+				session.save(transactions);
+				Query queryAccounts = session.createQuery(updateDrAccount);
+				queryAccounts.executeUpdate();
+				Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+				queryqueryAccounts1.executeUpdate();
+				//
+				
+				// J.V
+				transactionsIncome.setNarration(transactionsIncome.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+				session.save(transactionsIncome);
+				Query queryAccountsIncome = session.createQuery(updateDrAccountIncome);
+				queryAccountsIncome.executeUpdate();
+				Query queryqueryAccountsIncome1 = session.createQuery(updateCrAccountIncome);
+				queryqueryAccountsIncome1.executeUpdate();
+				//
+				
 			for (Feescollection singleFeescollection :  feescollectionList) {
+				singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());
 				Query query = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
 				query.executeUpdate();
 				 session.save(singleFeescollection);
 			}
+			
+			
 	            transaction.commit();
 	            result = true;
 			 
@@ -110,14 +144,14 @@ public class feesCollectionDAO {
 			}
 	}
 
-	public Receiptinfo getReceiptInfoDetails(Integer receiptNumber, String currentAcademicYear) {
+	public Receiptinfo getReceiptInfoDetails(Integer receiptNumber, String currentAcademicYear, String branchId) {
 		
 		Receiptinfo receiptDetails = new Receiptinfo();
 		
 		try {
 			 
 			 transaction = session.beginTransaction();
-			 Query query = session.createQuery("from Receiptinfo where receiptnumber = '"+receiptNumber+"' and academicyear = '"+currentAcademicYear+"'");
+			 Query query = session.createQuery("from Receiptinfo where receiptnumber = '"+receiptNumber+"' and branchid='"+branchId+"' and academicyear = '"+currentAcademicYear+"'");
 			 receiptDetails = (Receiptinfo) query.uniqueResult();
 			 transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
