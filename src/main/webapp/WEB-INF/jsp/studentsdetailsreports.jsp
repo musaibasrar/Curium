@@ -365,7 +365,7 @@
 <script type="text/javascript">
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StudentProcess&action=multiClassSearch";
+		form1.action = "/StudentProcess/multiClassSearch";
 		form1.method = "POST";
 		form1.submit();
 
@@ -494,7 +494,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -507,7 +507,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=StudentProcess&action=exportDataForStudents" method="POST">
+	<form id="form1" action="/StudentProcess/exportDataForStudents" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -635,7 +635,7 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>"><c:out
+								href="/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out

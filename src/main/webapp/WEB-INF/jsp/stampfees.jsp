@@ -365,7 +365,7 @@
 <script type="text/javascript">
 	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StampFeesProcess&action=search";
+		form1.action = "/StampFeesProcess/search";
 		form1.method = "POST";
 		form1.submit();
 
@@ -446,7 +446,7 @@
 	
 	function deleteFeesStamp(){
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=StampFeesProcess&action=delete";
+		form1.action = "/StampFeesProcess/delete";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -673,7 +673,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -686,7 +686,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=StampFeesProcess&action=applyFees" method="POST">
+	<form id="form1" action="/StampFeesProcess/applyFees" method="POST">
     
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -852,7 +852,7 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
+								href="/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">

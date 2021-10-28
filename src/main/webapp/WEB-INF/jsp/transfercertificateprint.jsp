@@ -316,7 +316,7 @@ span{
 			
 		</TABLE>
 		
-		<%-- <a id="print" href="/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
+		<%-- <a id="print" href="/StudentProcess/GenerateBonafide?id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
 	</form>
 	
 	

@@ -455,7 +455,7 @@
 
 function issueStaffSalary(){
 	var form1 = document.getElementById("form1");
-	form1.action = "Controller?process=HrProcess&action=issueProcessedSalary";
+	form1.action = "/HrProcess/issueProcessedSalary";
 	form1.method = "POST";
 	form1.submit();
 
@@ -463,7 +463,7 @@ function issueStaffSalary(){
 
 function cancelStaffSalary(){
 	var form1 = document.getElementById("form1");
-	form1.action = "Controller?process=HrProcess&action=cancelStaffSalary";
+	form1.action = "/HrProcess/cancelStaffSalary";
 	form1.method = "POST";
 	form1.submit();
 
@@ -481,7 +481,7 @@ function cancelStaffSalary(){
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -560,7 +560,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${processsalarydetailslist.netpayment}"/></td>
                                 <td class="dataText"><c:out value="${processsalarydetailslist.paymenttype}"/></td>
                                 <td class="dataText"><c:out value="${processsalarydetailslist.status}"/></td>
-                                <td class="dataText"><a id="print" href="/Controller?process=HrProcess&action=printSalarySlip&salaryid=<c:out value="${processsalarydetailslist.idprocesssalarydetails}" />"><div align="center" align="center"><img  alt="Printsalaryslip" src="/images/printer.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
+                                <td class="dataText"><a id="print" href="/HrProcess/printSalarySlip?salaryid=<c:out value="${processsalarydetailslist.idprocesssalarydetails}" />"><div align="center" align="center"><img  alt="Printsalaryslip" src="/images/printer.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
                             </tr>
                         </c:forEach>
 				</tbody>

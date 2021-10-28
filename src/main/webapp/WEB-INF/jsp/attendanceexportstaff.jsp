@@ -401,7 +401,7 @@
 	
 	function exportMonthlyData() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess&action=exportMonthlyDataStaff";
+		form1.action = "/AttendanceProcess/exportMonthlyDataStaff";
 		form1.method = "POST";
 		form1.submit();
 
@@ -449,7 +449,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -463,7 +463,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form id="form1" action="Controller?process=StampFeesProcess&action=applyFees" method="POST">
+	<form id="form1" action="/StampFeesProcess/applyFees" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />

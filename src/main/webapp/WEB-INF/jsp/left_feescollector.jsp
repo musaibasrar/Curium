@@ -43,7 +43,7 @@ Author     : Musaib
 
 
                 get.onreadystatechange = processdata;
-                get.open("POST", "AjaxController?process=VisitProcess&action=getAJaxNextVisit&startHour=" + startHour + "&startMin=" + startMin, true);
+                get.open("POST", "/VisitProcess/getAJaxNextVisit?startHour=" + startHour + "&startMin=" + startMin, true);
                 get.send(null);
 
             }
@@ -61,7 +61,7 @@ Author     : Musaib
                             patientID = visit.getElementsByTagName("PatientID")[0].firstChild.nodeValue;
                             visitTime = visit.getElementsByTagName("VisitTime")[0].firstChild.nodeValue;
                             name = visit.getElementsByTagName("PatientName")[0].firstChild.nodeValue;
-                            link = "<a target='mainFrame' href='Controller?process=PatientProcess&action=viewDetails&id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
+                            link = "<a target='mainFrame' href='/PatientProcess/viewDetails?id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
 
                             $(function() {
                                 $('#Notification').jnotifyAddMessage({
@@ -95,7 +95,7 @@ Author     : Musaib
 
 
                 getExpiringStockCount.onreadystatechange = processExpiringStockData;
-                getExpiringStockCount.open("POST", "AjaxController?process=StockProcess&action=getExpiringStock", true);
+                getExpiringStockCount.open("POST", "/StockProcess/getExpiringStock", true);
                 getExpiringStockCount.send(null);
 
             }
@@ -110,7 +110,7 @@ Author     : Musaib
 
 
                 getDepletingStockCount.onreadystatechange = processDepletingStockData;
-                getDepletingStockCount.open("POST", "AjaxController?process=StockProcess&action=getDepletingStock", true);
+                getDepletingStockCount.open("POST", "/StockProcess/getDepletingStock", true);
                 getDepletingStockCount.send(null);
 
             }
@@ -414,7 +414,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -436,14 +436,14 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="/#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/Controller?process=StudentProcess&action=viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/StudentProcess/viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
             </div>
             
 
             <h5 style="font-size: 12px"><a href="/#">FEES</a></h5>
             
             <div>
-                <a target="mainFrame" href="/Controller?process=FeesProcess&action=feesCollectAllBranches" style="font-size: 12px;">Fees Collect</a><br/>
+                <a target="mainFrame" href="/FeesProcess/feesCollectAllBranches" style="font-size: 12px;">Fees Collect</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="/#" >Send Notifications</a></h5>

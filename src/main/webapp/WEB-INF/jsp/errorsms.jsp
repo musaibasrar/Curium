@@ -68,7 +68,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -81,7 +81,7 @@ for(Cookie cookie : cookies){
 }
 %>
     <body background="/images/bg.jpg" >
-        <form id="form1" action="Controller?process=SMSProcess&action=sendSMS"  method="post">
+        <form id="form1" action="/SMSProcess/sendSMS"  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
         <td height="250" align="center" valign="middle"><p class="style1" style="color:red;font-size: 20px;">SMS sending failed</p>

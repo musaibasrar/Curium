@@ -587,7 +587,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -722,7 +722,7 @@ for(Cookie cookie : cookies){
 							<td width="20%" class="alignRight"></td>
 							<td class="alignRight"></td>
 							<td width="30%" class="alignRight">
-							<a href="/Controller?process=SMSProcess&action=SMSbalanceCheck" title="Click to check SMS balance">SMS Balance</a>
+							<a href="/SMSProcess/SMSbalanceCheck" title="Click to check SMS balance">SMS Balance</a>
 											: ${smsbalance}
 							</td>
 						</tr>
@@ -903,19 +903,19 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function sendSMSAll() {
 								var form1 = document.getElementById("form1");
-								form1.action = "Controller?process=SMSProcess&action=sendAllSMS";
+								form1.action = "/SMSProcess/sendAllSMS";
 								form1.submit();
 							}
 							
 							function sendSMSNumbers() {
 								var form1 = document.getElementById("form1");
-								form1.action = "Controller?process=SMSProcess&action=sendNumbersSMS";
+								form1.action = "/SMSProcess/sendNumbersSMS";
 								form1.submit();
 							}
 							
 							function sendSMSStaff() {
 								var form1 = document.getElementById("form1");
-								form1.action = "Controller?process=SMSProcess&action=sendStaffSMS";
+								form1.action = "/SMSProcess/sendStaffSMS";
 								form1.submit();
 							}
 							

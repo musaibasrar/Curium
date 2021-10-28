@@ -101,7 +101,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -222,7 +222,7 @@ for(Cookie cookie : cookies){
 		</tr>
 		
 			<tr>
-              <td align="center"><a id="print" href="/Controller?process=DocumentsProcess&action=printBonafide">Print</a></td>
+              <td align="center"><a id="print" href="/DocumentsProcess/printBonafide">Print</a></td>
             </tr>
 		</TABLE>
 	</form>
