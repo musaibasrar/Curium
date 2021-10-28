@@ -333,7 +333,7 @@
             function saveFinancialYear() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "Controller?process=AccountProcess/saveFinancialYear";
+                form1.action = "/AccountProcess/saveFinancialYear";
                 form1.submit();
 
             }

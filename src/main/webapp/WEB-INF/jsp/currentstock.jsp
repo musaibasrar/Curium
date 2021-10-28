@@ -460,7 +460,7 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MessItemsProcess/printStockAvailability";
+		form1.action = "/MessItemsProcess/printStockAvailability";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -496,7 +496,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

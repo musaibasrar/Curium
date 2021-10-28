@@ -360,7 +360,7 @@
 <script type="text/javascript">
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=DocumentsProcess/searchForStudents";
+		form1.action = "/DocumentsProcess/searchForStudents";
 		form1.method = "POST";
 		form1.submit();
 
@@ -521,7 +521,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -534,7 +534,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=DocumentsProcess/generateAdmissionAbstract" method="POST">
+	<form id="form1" action="/DocumentsProcess/generateAdmissionAbstract" method="POST">
 		
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">

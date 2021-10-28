@@ -415,7 +415,7 @@
 
 	function searchForEmployees(staffName, staffDepartment){
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=HrProcess/searchEmployeesForbasicpay?staffName="+staffName+"&staffDepartment="+staffDepartment+"";
+		form1.action = "/HrProcess/searchEmployeesForbasicpay?staffName="+staffName+"&staffDepartment="+staffDepartment+"";
 		form1.method = "POST";
 		form1.submit();
 
@@ -476,7 +476,7 @@
 	
 	function updateBasicPay() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=HrProcess/updateBasicPay";
+		form1.action = "/HrProcess/updateBasicPay";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -514,7 +514,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -565,7 +565,7 @@ for(Cookie cookie : cookies){
 					   <c:forEach items="${vieweditbasicpay}" var="employee" varStatus="status">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.teacher.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.teacher.tid}:${status.index}:${employee.idpaybasic}"/>"/></td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/Controller?process=HrProcess/viewLeavesDetails?id=<c:out value='${employee.teacher.tid}'/>"><c:out value="${employee.teacher.teachername}"/></a></td>
+                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="//HrProcess/viewLeavesDetails?id=<c:out value='${employee.teacher.tid}'/>"><c:out value="${employee.teacher.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.teacher.department}"/></td>
                                 <td class="dataText"><c:out value="${employee.teacher.designation}"/></td>
                                 <td class="dataText"><input type="text"	id="basicpay" name="basicpay" value="${employee.basicpay}"

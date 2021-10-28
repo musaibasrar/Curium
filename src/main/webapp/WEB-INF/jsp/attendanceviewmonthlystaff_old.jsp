@@ -551,7 +551,7 @@
 	
 	function searchStudentAttendanceDetailsMonthly() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess/searchStudentAttendanceDetailsMonthly";
+		form1.action = "/AttendanceProcess/searchStudentAttendanceDetailsMonthly";
 		form1.method = "POST";
 		form1.submit();
 
@@ -559,7 +559,7 @@
 	
 	function searchStudentAttendanceDetailsMonthlyGraph() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess/searchStudentAttendanceDetailsMonthlyGraph";
+		form1.action = "/AttendanceProcess/searchStudentAttendanceDetailsMonthlyGraph";
 		form1.method = "POST";
 		form1.submit();
 
@@ -567,7 +567,7 @@
 	
 	function searchStudentAttendanceDetails() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess/searchStudentAttendanceDetails";
+		form1.action = "/AttendanceProcess/searchStudentAttendanceDetails";
 		form1.method = "POST";
 		form1.submit();
 
@@ -727,7 +727,7 @@
 	   
 	function updateRecords(){
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=AttendanceProcess/updateStudentAttendanceDetails";
+		form1.action = "/AttendanceProcess/updateStudentAttendanceDetails";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -739,7 +739,7 @@
 </head>
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form id="form1" action="Controller?process=StampFeesProcess/applyFees" method="POST">
+	<form id="form1" action="/StampFeesProcess/applyFees" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />

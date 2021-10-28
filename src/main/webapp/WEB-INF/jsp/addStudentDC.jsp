@@ -625,7 +625,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -638,7 +638,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=PersonalProcess/add"
+	<form id="form1" action="/PersonalProcess/add"
 		method="post"  enctype="multipart/form-data">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
@@ -1529,14 +1529,14 @@ for(Cookie cookie : cookies){
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "Controller?process=StudentProcess/AddStudent";
+									form1.action = "/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "Controller?process=StudentProcess/viewAll";
+								form1.action = "/StudentProcess/viewAll";
 								form1.submit();
 							}
 

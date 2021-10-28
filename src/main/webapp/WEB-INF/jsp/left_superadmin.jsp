@@ -61,7 +61,7 @@ Author     : Musaib
                             patientID = visit.getElementsByTagName("PatientID")[0].firstChild.nodeValue;
                             visitTime = visit.getElementsByTagName("VisitTime")[0].firstChild.nodeValue;
                             name = visit.getElementsByTagName("PatientName")[0].firstChild.nodeValue;
-                            link = "<a target='mainFrame' href='Controller?process=PatientProcess/viewDetails?id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
+                            link = "<a target='mainFrame' href='/PatientProcess/viewDetails?id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
 
                             $(function() {
                                 $('#Notification').jnotifyAddMessage({
@@ -414,7 +414,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -436,7 +436,7 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="/#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/Controller?process=StudentProcess/viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="//StudentProcess/viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="/#">FEES</a></h5>
@@ -447,10 +447,10 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="/#" style="font-size: 12px;">Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/Controller?process=StudentProcess/archiveViewAll" >Archive Students</a><br/>
-                <a target="mainFrame" href="/Controller?process=ClassProcess/viewGraduated" >Graduated Students</a><br/>
-                <a target="mainFrame" href="/Controller?process=ClassProcess/viewDropped" >Dropped Out Students</a><br/>
-                <a target="mainFrame" href="/Controller?process=ClassProcess/viewLeftOut" >Left Out Students</a><br/>
+                <a target="mainFrame" href="//StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="//ClassProcess/viewGraduated" >Graduated Students</a><br/>
+                <a target="mainFrame" href="//ClassProcess/viewDropped" >Dropped Out Students</a><br/>
+                <a target="mainFrame" href="//ClassProcess/viewLeftOut" >Left Out Students</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="/#" >Extras</a></h5>

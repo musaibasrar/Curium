@@ -61,7 +61,7 @@ Author     : Musaib
                             patientID = visit.getElementsByTagName("PatientID")[0].firstChild.nodeValue;
                             visitTime = visit.getElementsByTagName("VisitTime")[0].firstChild.nodeValue;
                             name = visit.getElementsByTagName("PatientName")[0].firstChild.nodeValue;
-                            link = "<a target='mainFrame' href='Controller?process=PatientProcess/viewDetails?id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
+                            link = "<a target='mainFrame' href='/PatientProcess/viewDetails?id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
 
                             $(function() {
                                 $('#Notification').jnotifyAddMessage({
@@ -431,7 +431,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -453,32 +453,32 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="/#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/Controller?process=StudentProcess/viewAll" >View All</a><br/>
+                <a target="mainFrame" href="//StudentProcess/viewAll" >View All</a><br/>
                 <a target="mainFrame" href="/feesstructure.jsp" >Fees Structure</a><br/>
                 
 
             </div>
             <!-- <h5 style="font-size: 12px"><a href="/#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="/Controller?process=EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/Controller?process=EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/Controller?process=DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/Controller?process=PositionProcess/positionView" >Add Position</a>
+                <a target="mainFrame" href="//EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="//EmployeeProcess/addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="//DepartmentProcess/departmentView" >Add Department</a>
+                <a target="mainFrame" href="//PositionProcess/positionView" >Add Position</a>
 
             </div> -->
 
             <h5 style="font-size: 12px"><a href="/#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="/Controller?process=FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/Controller?process=FeesProcess/feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="//FeesProcess/feesView" >Fees Category</a>
+                <a target="mainFrame" href="//FeesProcess/feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
             <!-- <h5 style="font-size: 12px"><a href="/#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/Controller?process=AdminProcess/viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="//AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
@@ -499,15 +499,15 @@ for(Cookie cookie : cookies){
 
             <!-- <h5 style="font-size: 12px"><a href="/#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/Controller?process=StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="//StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
             <!--  <h5 style="font-size: 12px"><a href="/#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="/Controller?process=StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/Controller?process=YearProcess/updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="//StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="//YearProcess/updateYear" >Academic year</a><br/>
                 
 
             </div> -->

@@ -414,7 +414,7 @@
 
 	function searchDetails() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=printids/searchDetailsCardValidity";
+		form1.action = "/printids/searchDetailsCardValidity";
 		form1.method = "POST";
 		form1.submit();
 
@@ -422,7 +422,7 @@
 
 	function updateCardValidity() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=Printids/updateCardValidity";
+		form1.action = "/Printids/updateCardValidity";
 		form1.method = "POST";
 		form1.submit();
 
@@ -523,7 +523,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

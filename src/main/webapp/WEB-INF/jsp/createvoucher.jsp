@@ -280,7 +280,7 @@
         	if(confirm('Are you sure,you want to save the receipt voucher?')){
         		
         		var form1 = document.getElementById("form1");
-                form1.action = "Controller?process=AccountProcess/saveReceipt";
+                form1.action = "/AccountProcess/saveReceipt";
                 form1.submit();	
         	}
         	
@@ -299,7 +299,7 @@
         	  if(confirm('Are you sure,you want to save the payment voucher?')){
         	  
         		  var form1 = document.getElementById("form1");
-              	  form1.action = "Controller?process=AccountProcess/savePayment";
+              	  form1.action = "/AccountProcess/savePayment";
               	  form1.submit();
         	  
         	  }
@@ -318,7 +318,7 @@
       }else{
     	  if(confirm('Are you sure,you want to save the contra voucher?')){
     	  var form1 = document.getElementById("form1");
-          form1.action = "Controller?process=AccountProcess/saveContra";
+          form1.action = "/AccountProcess/saveContra";
           form1.submit();
     	  }
       }
@@ -335,7 +335,7 @@
         }else{
         	if(confirm('Are you sure,you want to save the journal voucher?')){
         	 var form1 = document.getElementById("form1");
-             form1.action = "Controller?process=AccountProcess/saveJournal";
+             form1.action = "/AccountProcess/saveJournal";
              form1.submit();
         	}
         }
@@ -540,7 +540,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

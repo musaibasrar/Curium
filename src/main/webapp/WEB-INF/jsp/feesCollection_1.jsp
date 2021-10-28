@@ -403,7 +403,7 @@
                 var rowfeesDurationString=document.getElementById('rowfeesDurationString');
                 var rowfeesDosingString=document.getElementById('rowfeesDosingString');
                 var rowfeesRemarkString=document.getElementById('rowfeesRemarkString');
-                form1.action="Controller?process=PrescriptionProcess/add?visitId="+visitId+"&rowIdString="+rowIdString.value+"&rowfeesIdString="+rowfeesIdString.value+"&rowfeesNatureString="+rowfeesNatureString.value+"&rowfeesStrengthString="+rowfeesStrengthString.value+"&rowfeesDurationString="+rowfeesDurationString.value+"&rowfeesDosingString="+rowfeesDosingString.value+"&rowfeesRemarkString="+rowfeesRemarkString.value;
+                form1.action="/PrescriptionProcess/add?visitId="+visitId+"&rowIdString="+rowIdString.value+"&rowfeesIdString="+rowfeesIdString.value+"&rowfeesNatureString="+rowfeesNatureString.value+"&rowfeesStrengthString="+rowfeesStrengthString.value+"&rowfeesDurationString="+rowfeesDurationString.value+"&rowfeesDosingString="+rowfeesDosingString.value+"&rowfeesRemarkString="+rowfeesRemarkString.value;
                 form1.submit();
             }
             function getCurrentDate(){
@@ -660,7 +660,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -673,7 +673,7 @@ for(Cookie cookie : cookies){
 }
 %>
     <body>
-        <form id="form1" action="Controller?process=FeesCollection/feesAdd" method="post" onkeypress="if (event.keyCode == 92) addRow();">
+        <form id="form1" action="/FeesCollection/feesAdd" method="post" onkeypress="if (event.keyCode == 92) addRow();">
             <div style="height: 28px">
                 <!--<a href="/#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
 

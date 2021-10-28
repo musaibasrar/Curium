@@ -65,7 +65,7 @@
         </script>
 </head>
     <body background="/images/bg.jpg" >
-        <form id="form1" action="Controller?process=SMSProcess/sendSMS"  method="post">
+        <form id="form1" action="/SMSProcess/sendSMS"  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
         <td height="250" align="center" valign="middle"><p class="style1">SMS sent successfully</p>

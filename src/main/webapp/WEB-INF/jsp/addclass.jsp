@@ -343,7 +343,7 @@
 <script type="text/javascript">
 	function addFeesCategory() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=FeesProcess/addFeesParticular";
+		form1.action = "/FeesProcess/addFeesParticular";
 		form1.method = "POST";
 		form1.submit();
 
@@ -417,7 +417,7 @@
 	 function saveClass(){
 
 		 var form1=document.getElementById("form1");
-         form1.action="Controller?process=ClassProcess/createClass";
+         form1.action="/ClassProcess/createClass";
          form1.submit();
          
      }
@@ -426,7 +426,7 @@
          
 		if(confirm('Are you sure, you want to delete the class?')){
 			var form1=document.getElementById("form1");
-	         form1.action="Controller?process=ClassProcess/deleteClass";
+	         form1.action="/ClassProcess/deleteClass";
 	        form1.submit();
 		}
          
@@ -458,7 +458,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess/sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

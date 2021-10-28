@@ -30,7 +30,7 @@
             function redirect(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="Controller?process=UserProcess/authenticate";
+                form1.action="/UserProcess/authenticate";
                 form1.submit();
             }
         </script>
@@ -57,7 +57,7 @@
             	window.open('loginFail.jsp','_self');
             }
         </script>
-        <form action="Controller?process=UserProcess/authenticateUser" method="post" id="form1">
+        <form action="/UserProcess/authenticateUser" method="post" id="form1">
                     	
                                     <table align="center">
                                     	<tr>
