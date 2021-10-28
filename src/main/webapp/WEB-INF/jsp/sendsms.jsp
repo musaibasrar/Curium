@@ -722,7 +722,7 @@ for(Cookie cookie : cookies){
 							<td width="20%" class="alignRight"></td>
 							<td class="alignRight"></td>
 							<td width="30%" class="alignRight">
-							<a href="//SMSProcess/SMSbalanceCheck" title="Click to check SMS balance">SMS Balance</a>
+							<a href="/SMSProcess/SMSbalanceCheck" title="Click to check SMS balance">SMS Balance</a>
 											: ${smsbalance}
 							</td>
 						</tr>

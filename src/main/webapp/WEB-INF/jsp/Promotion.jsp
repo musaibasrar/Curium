@@ -594,7 +594,7 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="//StudentProcess/ViewDetails?id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/StudentProcess/ViewDetails?id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Student.name}"/></td>
                                 <td class="dataText">
                                 <c:forEach var="splt" items="${fn:split(Student.classstudying,'--')}">

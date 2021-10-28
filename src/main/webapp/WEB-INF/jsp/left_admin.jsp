@@ -454,12 +454,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="//StudentProcess/viewAll" style="font-size: 12px;">View All</a>
+            				 <a target="mainFrame" href="/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="//StudentProcess/addNew" style="font-size: 12px;">Add New</a>
+            				 <a target="mainFrame" href="/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
             			</td>
             		</tr>
                 </table>
@@ -467,44 +467,44 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="/#">Attendance</a></h5>
             <div>
-                <a target="mainFrame" href="//AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
-                <a target="mainFrame" href="//AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
-                <a target="mainFrame" href="//AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
+                <a target="mainFrame" href="/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
+                <a target="mainFrame" href="/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="/#">Staff</a></h5>
             <div>
-                <a target="mainFrame" href="//EmployeeProcess/viewAllEmployee" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="//EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
-				<a target="mainFrame" href="//AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
-				<a target="mainFrame" href="//AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
-				<a target="mainFrame" href="//AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="/EmployeeProcess/viewAllEmployee" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
+				<a target="mainFrame" href="/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
+				<a target="mainFrame" href="/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
+				<a target="mainFrame" href="/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="/#">Fees</a></h5>
             
             <div>
-				<a target="mainFrame" href="//FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>                
-				<a target="mainFrame" href="//FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a><br/>                
+				<a target="mainFrame" href="/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>                
+				<a target="mainFrame" href="/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a><br/>                
 				<a target="mainFrame" href="/feesCollectionDetails.jsp" style="font-size: 12px;">Fees Collection Details</a><br/>
 				<a target="mainFrame" href="/feescancelledreceipts.jsp" style="font-size: 12px;">Cancelled Fees Receipts</a><br/>
-				<a target="mainFrame" href="//FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a><br/>
-				<a target="mainFrame" href="//FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a><br/>
-				<a target="mainFrame" href="//FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a><br/>
+				<a target="mainFrame" href="/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a><br/>
+				<a target="mainFrame" href="/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a><br/>
+				<a target="mainFrame" href="/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="/#">Exams</a></h5>
             
             <div>
-                <a target="mainFrame" href="//MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a><br/>
-                <a target="mainFrame" href="//MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
-            	<a target="mainFrame" href="//MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a><br/>
-            	<a target="mainFrame" href="//MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
+                <a target="mainFrame" href="/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a><br/>
+                <a target="mainFrame" href="/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
+            	<a target="mainFrame" href="/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a><br/>
+            	<a target="mainFrame" href="/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="/#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="//StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a><br/>
+                <a target="mainFrame" href="/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a><br/>
 
 
             </div>
@@ -514,64 +514,64 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/Backup&Restore.jsp" style="font-size: 12px;">Backup</a><br/>
                 <a target="mainFrame" href="/changePassword.jsp" style="font-size: 12px;">Change Password</a><br/>
                 <a target="mainFrame" href="/uploadattendance.jsp" style="font-size: 12px;">Upload Attendance File</a><br/>
-                <a target="mainFrame" href="//StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a><br/>
+                <a target="mainFrame" href="/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a><br/>
             </div>
             
             
             <h5 style="font-size: 12px"><a href="/#" >Generate Cards</a></h5>
             <div >
-                <a target="mainFrame" href="//printids/generateIds" style="font-size: 12px;">Generate IDs</a><br/>
+                <a target="mainFrame" href="/printids/generateIds" style="font-size: 12px;">Generate IDs</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="/#" >Documents</a></h5>
             <div >
-                <a target="mainFrame" href="//DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a><br/>
-                <a target="mainFrame" href="//DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
-                <a target="mainFrame" href="//DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
-                <a target="mainFrame" href="//DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
-                <a target="mainFrame" href="//ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
-                <a target="mainFrame" href="//PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a><br/>
-                <a target="mainFrame" href="//PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a><br/>
+                <a target="mainFrame" href="/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a><br/>
+                <a target="mainFrame" href="/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
+                <a target="mainFrame" href="/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
+                <a target="mainFrame" href="/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
+                <a target="mainFrame" href="/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
+                <a target="mainFrame" href="/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a><br/>
+                <a target="mainFrame" href="/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="/#" >Expenses</a></h5>
             <div>
-                <a target="mainFrame" href="//AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
+                <a target="mainFrame" href="/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
 
 
             </div>
             
             <h5 style="font-size: 12px"><a href="/#" >Send Notifications</a></h5>
             <div >
-                <a target="mainFrame" href="//SMSProcess/sendSMS" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a><br/>
                 <a target="mainFrame" href="/sendemail.jsp" style="font-size: 12px;">Email</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="/#" >Accounts</a></h5>
             <div >
-                <a target="mainFrame" href="//AccountProcess/createAccount" style="font-size: 12px;">Ledger Account</a><br/>
-                <a target="mainFrame" href="//AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
-                <a target="mainFrame" href="//AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a><br/>
-                <a target="mainFrame" href="//AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a><br/>
-                <a target="mainFrame" href="//AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a><br/>
+                <a target="mainFrame" href="/AccountProcess/createAccount" style="font-size: 12px;">Ledger Account</a><br/>
+                <a target="mainFrame" href="/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
+                <a target="mainFrame" href="/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a><br/>
+                <a target="mainFrame" href="/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a><br/>
+                <a target="mainFrame" href="/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a><br/>
                 <a target="mainFrame" href="/incomestatement.jsp" style="font-size: 12px;">Income Statement</a><br/>
                 <a target="mainFrame" href="/trialbalance.jsp" style="font-size: 12px;">Trial Balance</a><br/>
-                <a target="mainFrame" href="//AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
+                <a target="mainFrame" href="/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
             </div>
             
              <h5 style="font-size: 12px"><a href="/#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="//HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="//HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="//HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
-                <a target="mainFrame" href="//HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="//HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
+                <a target="mainFrame" href="/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
+                <a target="mainFrame" href="/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
+                <a target="mainFrame" href="/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
+                <a target="mainFrame" href="/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
+                <a target="mainFrame" href="/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="/#" >Leave Management</a></h5>
             <div >
-                <a target="mainFrame" href="//HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="//HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+                <a target="mainFrame" href="/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
+                <a target="mainFrame" href="/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
             </div>
             
             <h5 class="sideaccordian" ><a href="/#" >Stock Management</a></h5>
@@ -581,17 +581,17 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="//MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
+            				 <a target="mainFrame" href="/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="//MessItemsProcess/purchaseItems" style="font-size: 12px;">Receive</a>
+            				 <a target="mainFrame" href="/MessItemsProcess/purchaseItems" style="font-size: 12px;">Receive</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="//MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
+            				<a target="mainFrame" href="/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
             			</td>
             		</tr>
             	</table>
@@ -605,22 +605,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="//MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
+            				 <a target="mainFrame" href="/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="//MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
+            				 <a target="mainFrame" href="/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="//MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
+            				<a target="mainFrame" href="/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="//MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
+            				 <a target="mainFrame" href="/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
             			</td>
             		</tr>
             	</table>
@@ -633,22 +633,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="//MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
+            				 <a target="mainFrame" href="/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="//MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
+            				 <a target="mainFrame" href="/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="//MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
+            				<a target="mainFrame" href="/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="//MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
+            				 <a target="mainFrame" href="/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
             			</td>
             		</tr>
             	</table>
@@ -661,12 +661,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="//printids/generateIds" style="font-size: 12px;">Generate IDs</a>
+            				 <a target="mainFrame" href="/printids/generateIds" style="font-size: 12px;">Generate IDs</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="//printids/cardValidity" style="font-size: 12px;">Card Validity</a>
+            				 <a target="mainFrame" href="/printids/cardValidity" style="font-size: 12px;">Card Validity</a>
             			</td>
             		</tr>
             	</table>
@@ -674,15 +674,15 @@ for(Cookie cookie : cookies){
             
              <!--  <h5 style="font-size: 12px"><a href="/#" >Mess Management</a></h5>
             <div>
-                <a target="mainFrame" href="//MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a><br/>
-                <a target="mainFrame" href="//MessItemsProcess/purchaseItems" style="font-size: 12px;">Receive</a><br/>
-                <a target="mainFrame" href="//MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a><br/>
-                <a target="mainFrame" href="//MessProcess/addSuppliers" style="font-size: 12px;">View/Add Suppliers</a><br/>
+                <a target="mainFrame" href="/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a><br/>
+                <a target="mainFrame" href="/MessItemsProcess/purchaseItems" style="font-size: 12px;">Receive</a><br/>
+                <a target="mainFrame" href="/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a><br/>
+                <a target="mainFrame" href="/MessProcess/addSuppliers" style="font-size: 12px;">View/Add Suppliers</a><br/>
             </div> -->
             
             <h5 style="font-size: 12px"><a href="/#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="//ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a><br/>
+                <a target="mainFrame" href="/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a><br/>
 				
             </div>
             

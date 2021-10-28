@@ -436,7 +436,7 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="/#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="//StudentProcess/viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/StudentProcess/viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="/#">FEES</a></h5>
@@ -447,10 +447,10 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="/#" style="font-size: 12px;">Archive</a></h5>
             <div>
-                <a target="mainFrame" href="//StudentProcess/archiveViewAll" >Archive Students</a><br/>
-                <a target="mainFrame" href="//ClassProcess/viewGraduated" >Graduated Students</a><br/>
-                <a target="mainFrame" href="//ClassProcess/viewDropped" >Dropped Out Students</a><br/>
-                <a target="mainFrame" href="//ClassProcess/viewLeftOut" >Left Out Students</a><br/>
+                <a target="mainFrame" href="/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/ClassProcess/viewGraduated" >Graduated Students</a><br/>
+                <a target="mainFrame" href="/ClassProcess/viewDropped" >Dropped Out Students</a><br/>
+                <a target="mainFrame" href="/ClassProcess/viewLeftOut" >Left Out Students</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="/#" >Extras</a></h5>

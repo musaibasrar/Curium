@@ -1136,7 +1136,7 @@ for(Cookie cookie : cookies){
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
 							<td class="dataText"><input type="checkbox" id="<c:out value="${periodmasterlist.idperiodmaster}"/>" class="chcktbl" name="idperiodmaster" value="<c:out value="${periodmasterlist.idperiodmaster}"/>" /></td>
-							<td class="dataText"><a class="dataTextInActive" href="//PeriodProcess/viewTimeTable?id=<c:out value="${periodmasterlist.idperiodmaster}" />"><c:out value="${periodmasterlist.class_}" /></a></td>
+							<td class="dataText"><a class="dataTextInActive" href="/PeriodProcess/viewTimeTable?id=<c:out value="${periodmasterlist.idperiodmaster}" />"><c:out value="${periodmasterlist.class_}" /></a></td>
 							<td class="dataText"><c:out value="${periodmasterlist.daystart}" /></td>
 							<td class="dataText"><c:out value="${periodmasterlist.dayend}" /></td>
 							<td class="dataText"><c:out value="${periodmasterlist.totalperiods}" /></td>

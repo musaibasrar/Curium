@@ -71,7 +71,7 @@
         <td height="250" align="center" valign="middle"><p class="style1">Session time out, Please login again</p>
         <p class="style1">
           	<!-- <input type="button" value="Login" id="login" > -->
-          	<a href="//UserProcess/logout" target="_parent" id="login">Login</a>
+          	<a href="/UserProcess/logout" target="_parent" id="login">Login</a>
         </p></td>
       </tr>
     </table>

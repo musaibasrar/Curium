@@ -136,14 +136,14 @@ for(Cookie cookie : cookies){
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="//FeesProcess/feesCollect"> <img
+								href="/FeesProcess/feesCollect"> <img
 									src="/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
 							<td>
 								<a target="mainFrame"
-								href="//AccountProcess/createVoucher"> <img
+								href="/AccountProcess/createVoucher"> <img
 									src="/images/createvoucher.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
@@ -154,7 +154,7 @@ for(Cookie cookie : cookies){
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
-								href="//StudentProcess/addNew"> <img
+								href="/StudentProcess/addNew"> <img
 									src="/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
@@ -165,7 +165,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 
 							<td ><a target="mainFrame"
-								href="//AdminProcess/viewAllExpenses"><img
+								href="/AdminProcess/viewAllExpenses"><img
 									alt="Admin Exp" src="/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
@@ -176,21 +176,21 @@ for(Cookie cookie : cookies){
 							</a></td>
 
 							<td ><a target="mainFrame"
-								href="//StudentProcess/viewAllStudentsWithParents"><img
+								href="/StudentProcess/viewAllStudentsWithParents"><img
 									alt="View All Students" src="/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="//UserProcess/dashBoard"><img
+								href="/UserProcess/dashBoard"><img
 									alt="Dash Board" src="/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td>
 								
 							<td ><a target="_parent"
-								href="//UserProcess/logout"><img
+								href="/UserProcess/logout"><img
 									src="/images/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>

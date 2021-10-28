@@ -680,7 +680,7 @@ for(Cookie cookie : cookies){
 					   <c:forEach items="${employeeList}" var="employee">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText" style="display:none"><input type="checkbox"  checked id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="//HrProcess/viewLeavesDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
+                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/HrProcess/viewLeavesDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.department}"/></td>
                                 <td class="dataText"><c:out value="${employee.designation}"/></td>
                                 <td class="dataText"><input type="text"	id="values" name="values" value="0"
