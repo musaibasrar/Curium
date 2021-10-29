@@ -44,22 +44,22 @@
             if(flag1){
             	
             	if(type=='superadmin'){
-                    window.open('index_superadmin.jsp','_self');
+                    window.open('/index_superadmin','_self');
                 }else if(type=='admin'){
-                    window.open('index_admin.jsp','_self');
+                    window.open('/index_admin','_self');
                 }else if(type=='feescollector'){
-                    window.open('index_feescollector.jsp','_self');
+                    window.open('/index_feescollector','_self');
                 }else if(type=='reception'){                    
                    window.open('','_self');
                     window.close();
-                    openIndexPage('index_reception.jsp',screen.width,screen.height);
+                    openIndexPage('/index_reception',screen.width,screen.height);
                 }
                 else if(type=='staff'){
-                	window.open('index.jsp','_self');
+                	window.open('/index','_self');
                 }
             }
             else if(!flag1){
-            	window.open('loginFail.jsp','_self');
+            	window.open('/loginFail','_self');
             }
         </script>
         <form action="/UserProcess/authenticateUser" method="post" id="form1">
