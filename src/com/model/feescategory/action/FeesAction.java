@@ -44,6 +44,8 @@ public class FeesAction {
                     url = feesReport();
                 }else if ("waiveOffFees".equalsIgnoreCase(action)) {
                     url = waiveOffFees();
+                }else if ("applyConcession".equalsIgnoreCase(action)) {
+                    url = applyConcession();
                 }else if ("feesWaiveoffReport".equalsIgnoreCase(action)) {
                     url = feesWaiveoffReport();
                 }else if ("feesConcessionReport".equalsIgnoreCase(action)) {
@@ -59,6 +61,10 @@ public class FeesAction {
                 }
                 return url;
         }
+
+		private String applyConcession() {
+        	return new FeesService(request, response).applyConcession();
+    		}
 
 		private String printFeesWaiveoffReport() {
 			return "printfeeswaiveoffreport.jsp";

@@ -238,6 +238,7 @@ public class FeesCollectionService {
 					feesCollect.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 					//feesCollect.setReceiptnumber(receiptInfo.getReceiptnumber());
 					feesCollect.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					feesCollect.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 					feescollection.add(feesCollect);
 				}
 				/* createFeesCollection = new feesCollectionDAO().create(feescollection); */
