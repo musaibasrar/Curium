@@ -666,7 +666,7 @@ for(Cookie cookie : cookies){
 							</td>
 							<td width="12%" align="left" id="newsubgr" style="display:none;">
 							<label>
-                               <input name="newsubgroup" id="newsubgroup" type="text" size="36"  placeholder="Add New Group" />
+                               <input name="newsubgroup" id="newsubgroup" type="text" size="27"  placeholder="Add New Group" />
                             </label>
 							</td>
 							
@@ -687,9 +687,9 @@ for(Cookie cookie : cookies){
 							
 							</td>
 							<td width="12%" align="left" id="newssgrouptd" style="display: none;">
-							<label>
-                               <input name="newssgroup" id="newssgroupname" type="text" size="36"  placeholder="Add New Sub-Group" />
-                            </label>
+								<label>
+                              		 <input name="newssgroup" id="newssgroupname" type="text" size="27"  placeholder="Add New Sub-Group" />
+                          		</label>
 							</td>
 						</tr>
 						
@@ -700,7 +700,7 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td width="30%" class="alignRight">Account Name* &nbsp;</td>
 							<td width="12%" align="left">
-							<input type="text" name="accountname" id="accountname" size="36" required/>
+							<input type="text" name="accountname" id="accountname" size="27" required/>
 							</td>
 						</tr>
 						
@@ -711,7 +711,7 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td width="30%" class="alignRight">Account Code* &nbsp;</td>
 							<td width="12%" align="left">
-							<input type="text" name="accountcode" id="accountcode" size="36" required/>
+							<input type="text" name="accountcode" id="accountcode" size="27" required/>
 							</td>
 						</tr>
 						
@@ -767,9 +767,9 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Account Name<img
 							alt=" " style="position: relative; top: 4px;"
 							src="css/dataTable/images/sort_both.png" /></th>
-						<th title="click to sort" class="headerText">Balance<img
+						<!-- <th title="click to sort" class="headerText">Balance<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="css/dataTable/images/sort_both.png" /></th> -->
 					</tr>
 				</thead>
 
@@ -788,7 +788,7 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountSSGroupMaster.ssgroupname}" /></td>
 							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountcode}" /></td>
 							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountname}" /></td>
-							<td class="dataText">&#8377;&nbsp<c:out value="${accountdetailsbalance.currentbalance}" /></td>
+							<%-- <td class="dataText">&#8377;&nbsp<c:out value="${accountdetailsbalance.currentbalance}" /></td> --%>
 						</tr>
 					</c:forEach>
 
