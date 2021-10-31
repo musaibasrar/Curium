@@ -511,7 +511,7 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${accountdetails.key.accountname}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<td class="dataText" style="text-align: left"><c:out value="${accountdetails.key.accountname}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
 							<c:if test="${(accountdetails.key.accountGroupMaster.accountgroupid == 1) || (accountdetails.key.accountGroupMaster.accountgroupid == 5)}">
@@ -537,11 +537,17 @@ for(Cookie cookie : cookies){
 										
 									<c:if test="${accountdetails.value >= 1}">
 										<td class="dataText"></td>
-										<td class="dataText" style="text-align: right;"><c:out value="${accountdetails.value}" /></td>			
+										<td class="dataText" style="text-align: right;">
+										
+											<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${accountdetails.value}" />
+											
+										</td>			
 									</c:if>
 
 									<c:if test="${accountdetails.value < 1}">
-										<td class="dataText" style="text-align: right;"><c:out value="${accountdetails.value*-1}" /></td>
+										<td class="dataText" style="text-align: right;">
+											<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${accountdetails.value*-1}" />
+										</td>
 										<td class="dataText"></td>			
 									</c:if>
 										

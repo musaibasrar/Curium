@@ -50,6 +50,7 @@ public class AccountService {
 			financialaccountingyear.setFinancialenddate(DateUtil.dateParserUpdateStd(request.getParameter("todate")));
 			financialaccountingyear.setActive(DataUtil.emptyString(request.getParameter("active")));
 			financialaccountingyear.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			financialaccountingyear.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			return new AccountDAO().create(financialaccountingyear);
 		}
 
@@ -178,6 +179,7 @@ public class AccountService {
 					accountSSGroupMaster.setAccountSubGroupMaster(accountSubGroupMaster);
 					accountSSGroupMaster.setSsgroupname(newSSGroup);
 					accountSSGroupMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					accountSSGroupMaster.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 					accountSSGroupMaster = new AccountDAO().createSSGroup(accountSSGroupMaster);
 					accountDetails.setAccountSSGroupMaster(accountSSGroupMaster);
 				}
@@ -201,6 +203,7 @@ public class AccountService {
 					accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
 					accountDetailsBalance.setEnteredon(new Date());
 					accountDetailsBalance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					accountDetailsBalance.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 					result = new AccountDAO().saveNewAccount(accountDetails, accountDetailsBalance);
 					
 		}else if("New Group".equalsIgnoreCase(subGroupName)){
@@ -213,6 +216,7 @@ public class AccountService {
 			accountSubGroupMaster.setAccountGroupMaster(accountGroup);
 			accountSubGroupMaster.setAccountsubgroupname(newSubGroup);
 			accountSubGroupMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			accountSubGroupMaster.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			accountSubGroupMaster = new AccountDAO().createSubGroup(accountSubGroupMaster);
 			
 			 if("New Sub-Group".equalsIgnoreCase(ssGroupName)){
@@ -222,6 +226,7 @@ public class AccountService {
 					accountSSGroupMaster.setSsgroupname(newSSGroup);
 					accountSSGroupMaster.setSsgroupname(newSSGroup);
 					accountSSGroupMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					accountSSGroupMaster.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 					accountSSGroupMaster = new AccountDAO().createSSGroup(accountSSGroupMaster);
 					
 				}
@@ -243,6 +248,7 @@ public class AccountService {
 				accountDetails.setAccountGroupMaster(accountGroupMaster);
 				accountDetails.setAccountsubgroupmasterid(accountSubGroupMaster.getAccountsubgroupmasterid());
 				accountDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				accountDetails.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 				
 					Financialaccountingyear financialyear = new AccountDAO().getFinancialAccountingYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 					Accountdetailsbalance accountDetailsBalance = new Accountdetailsbalance();
@@ -257,6 +263,7 @@ public class AccountService {
 					accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
 					accountDetailsBalance.setEnteredon(new Date());
 					accountDetailsBalance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					accountDetailsBalance.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 					result = new AccountDAO().saveNewAccount(accountDetails, accountDetailsBalance);
 		}}else {
 				if(accountName.equalsIgnoreCase(accountDetailsCheck.getAccountname())) {
@@ -364,7 +371,7 @@ public class AccountService {
 		transactions.setCancelvoucher("no");
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		
+		transactions.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		
 		BigDecimal drAmountReceipt = new BigDecimal(drAmount);
 		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmountReceipt+" where accountdetailsid="+Integer.parseInt(draccountName);
@@ -399,6 +406,7 @@ public class AccountService {
 		transactions.setNarration(paymentNarration);
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		transactions.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 		
 		BigDecimal drAmount = new BigDecimal(drAmountPayment);
@@ -434,6 +442,7 @@ public class AccountService {
 		transactions.setNarration(contraNarration);
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		transactions.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 		
 		BigDecimal drAmount = new BigDecimal(drAmountContra);
@@ -469,6 +478,7 @@ public class AccountService {
 		transactions.setNarration(journalNarration);
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		transactions.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 		
 
@@ -876,8 +886,8 @@ public class AccountService {
 		        	
 		        	if(!accountSSGroupMaster.isEmpty()){
 		        		String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
+		        		buffer = buffer+"<option></option>";
 			        	for(int i =0; i<accountSSGroupMaster.size();i++){
-			        		buffer = buffer+"<option></option>";
 			        		buffer = buffer +  "<option value="+accountSSGroupMaster.get(i).getSsgroupmasterid()+">"+accountSSGroupMaster.get(i).getSsgroupname()+"</option>";
 			        	}
 			        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option></select>";

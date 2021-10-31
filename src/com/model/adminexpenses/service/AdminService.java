@@ -55,6 +55,7 @@ public class AdminService {
 			adminexpenses.setVoucherstatus("pending");
 			adminexpenses.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			adminexpenses.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			adminexpenses.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			
 			if(!adminexpenses.getItemdescription().equalsIgnoreCase("") && !adminexpenses.getPriceofitem().equalsIgnoreCase(""))
 				{

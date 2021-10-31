@@ -36,6 +36,7 @@ public class DepartmentService {
 			
 			department.setDepartmentname(DataUtil.emptyString(request.getParameter("department")));
 			department.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			department.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			
 			if(!department.getDepartmentname().equalsIgnoreCase("")){
 				department =  new departmentDAO().create(department);

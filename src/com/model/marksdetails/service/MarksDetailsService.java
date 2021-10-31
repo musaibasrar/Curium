@@ -408,6 +408,8 @@ public class MarksDetailsService {
 					String currentYear = currentAcademicYear;
 					marks.setAcademicyear(currentYear);
 					marks.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					marks.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+					
 					marksList.add(marks);
 				}
 

@@ -108,6 +108,7 @@ public class AttendanceService {
 			holidayMaster.setHolidayname(holidayName[i]);
 			holidayMaster.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			holidayMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			holidayMaster.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			result = new AttendanceDAO().saveHolidays(holidayMaster);
 		}
 			}catch(Exception e){
@@ -125,6 +126,7 @@ public class AttendanceService {
 			weeklyOff.setWeeklyoffday(weekOff[i]);
 			weeklyOff.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			weeklyOff.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			weeklyOff.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			return new AttendanceDAO().saveWeeklyOff(weeklyOff);
 		}
 		}
@@ -180,6 +182,7 @@ public class AttendanceService {
 		attendanceMaster.setWeeklyoff(sbWeek.toString());
 		attendanceMaster.setHolidayname(sbHoliday.toString());
 		attendanceMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		attendanceMaster.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		return new AttendanceDAO().addAttendanceMaster(attendanceMaster);
 		
 		/*List<Integer> weeklyOffList = new ArrayList<Integer>();
@@ -226,6 +229,7 @@ public class AttendanceService {
 			attendanceMaster.setWeeklyoff(sbWeek.toString());
 			attendanceMaster.setHolidayname(sbHoliday.toString());
 			attendanceMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			attendanceMaster.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			attendanceMasterList.add(attendanceMaster);
 		}
 		return new AttendanceDAO().addAttendanceMaster(attendanceMasterList);
@@ -325,6 +329,7 @@ public class AttendanceService {
 			       		              	 studentAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			       		              	 studentAttendance.setDate(new Date());
 			       		              	 studentAttendance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			       		              	 studentAttendance.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			       		              	 listStudentAttendance.add(studentAttendance);
 			       		              	 
 		       		                }else if(staffExternalId.contains(formatter.formatCellValue(row.getCell(0)))){
@@ -346,6 +351,7 @@ public class AttendanceService {
 			       		              	 	staffAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			       		              		staffAttendance.setDate(new Date());
 			       		              		staffAttendance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			       		              		staffAttendance.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			       		           			listStaffAttendance.add(staffAttendance);
 		       		                }
 		       		                	
@@ -745,6 +751,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				studentDailyAttendance.setDate(new Date());
 				studentDailyAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 				studentDailyAttendance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				studentDailyAttendance.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 				studentDailyAttendanceList.add(studentDailyAttendance);
 			}
 					
@@ -1221,6 +1228,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 				staffDailyAttendance.setDate(new Date());
 				staffDailyAttendance.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 				staffDailyAttendance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				staffDailyAttendance.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 				staffdailyattendanceList.add(staffDailyAttendance);
 			}
 			result = new AttendanceDAO().checkStaffAttendance(staffdailyattendanceList);

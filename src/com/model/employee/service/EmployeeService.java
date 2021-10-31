@@ -70,6 +70,7 @@ public class EmployeeService {
 		}
 		employee.setTeacherexternalid(builder.toString());
 		employee.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		employee.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		
 		if(new EmployeeDAO().create(employee)){
 			if(new UserService(request, response).addUser(employee)){
@@ -145,6 +146,7 @@ public class EmployeeService {
 		employee.setRemarks(DataUtil.emptyString(request.getParameter("remarks")));
 		employee.setTeacherexternalid(DataUtil.emptyString(request.getParameter("teacherexternalid")));
 		employee.setBranchid(DataUtil.parseInt(request.getParameter("branchid")));		
+		employee.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		employee.setCurrentemployee(DataUtil.emptyString(request.getParameter("currentemployee")));
 
 		//Bank Details

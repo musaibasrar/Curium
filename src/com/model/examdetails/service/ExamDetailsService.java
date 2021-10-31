@@ -54,6 +54,7 @@ public class ExamDetailsService {
 
 		exams.setExamname(DataUtil.emptyString(request.getParameter("examname")));
 		exams.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		exams.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		exams = new ExamDetailsDAO().addExams(exams);
 
 		}
@@ -177,6 +178,7 @@ public class ExamDetailsService {
 					examschedule.setEndtime(outputEndTime+" "+endmeridian);
 					examschedule.setSubject(DataUtil.emptyString(subject[i]));
 					examschedule.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					examschedule.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 					examScheduleList.add(examschedule);
 				}
 			}

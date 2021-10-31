@@ -326,6 +326,7 @@ public class HrService {
 		payAdvance.setReason(DataUtil.emptyString(reason));
 		payAdvance.setStatus(DataUtil.emptyString(status));
 		payAdvance.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		payAdvance.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		
 		return new HrDAO().saveAdvanceSalaryApproval(payAdvance);
 		}
@@ -518,6 +519,7 @@ public class HrService {
 				processHeadsBasic.setPayheadtype("Earning");
 				processHeadsBasic.setAmount(basicPay.getBasicpay());
 				processHeadsBasic.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				processHeadsBasic.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 				processSalarydetailsheadList.add(processHeadsBasic);   
 	               
 				// earning/deduction calculations
@@ -813,6 +815,7 @@ public void updateBasicpayEmployees() {
 			}
 			payBasic.setPaymenttype(paymentType[Integer.parseInt(splitId[1])]);
 			payBasic.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			payBasic.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			
 			payBasicList.add(payBasic);
 		}
