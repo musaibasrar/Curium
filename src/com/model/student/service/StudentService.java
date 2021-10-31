@@ -551,7 +551,7 @@ public class StudentService {
 			
 			long totalFeesAmount = 0l;
 			for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
-				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff();
+				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
 			}
 			
 			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
@@ -1114,6 +1114,7 @@ public class StudentService {
 		}
 		 student.setArchive(0);
 		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		 student.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		 
 		 if(puDetails.getIdpudetails()!=null) {
 			 new studentDetailsDAO().updatePuDetails(puDetails);
@@ -1128,6 +1129,8 @@ public class StudentService {
  		if (pid != "") {
  			parents.setStudent(student);
  			parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+ 			parents.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+ 			
  			parents = new parentsDetailsDAO().update(parents);
  		}
 		String stId = student.getSid().toString();
