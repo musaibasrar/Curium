@@ -208,6 +208,8 @@ public class StampFeesService {
 			academicfessstructure.setTotalfees(feesTotalAmount);
 			grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
 			academicfessstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+			
 			listOfacademicfessstructure.add(academicfessstructure);
 			// ids.add(Integer.valueOf(id));
 
