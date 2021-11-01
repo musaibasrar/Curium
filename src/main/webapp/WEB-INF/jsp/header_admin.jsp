@@ -125,12 +125,12 @@ for(Cookie cookie : cookies){
 						<tr>
 							
 									<td style="padding-left: 20px;padding-right: 50px;">
-								<a target="mainFrame" href="/welcome.jsp" ><img src="/images/logo.jpg"/></a>
+								<a target="mainFrame" href="/welcome" ><img src="/images/logo.jpg"/></a>
 								</td>
 								
 							<!-- <td align="left"><img src="/images/curiumheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/left_admin.jsp"> <img
+							<td><a target="leftFrame" href="/left_admin"> <img
 									src="/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
@@ -150,7 +150,7 @@ for(Cookie cookie : cookies){
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/feesCollectionDetails.jsp"><img  alt="Fees Details" src="/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+							<!-- <td ><a target="mainFrame" href="/feesCollectionDetails"><img  alt="Fees Details" src="/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
@@ -159,7 +159,7 @@ for(Cookie cookie : cookies){
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/leftsettings.jsp">
+							<td ><a target="leftFrame" href="/leftsettings">
 									<img alt="Settings" src="/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
@@ -170,7 +170,7 @@ for(Cookie cookie : cookies){
 									Admin Expense
 							</a></td>
 
-							<td ><a target="mainFrame" href="/sendsms.jsp"><img
+							<td ><a target="mainFrame" href="/sendsms"><img
 									src="/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a></td>

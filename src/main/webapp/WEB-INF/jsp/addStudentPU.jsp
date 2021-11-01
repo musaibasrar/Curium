@@ -428,7 +428,7 @@
 	function check(value) {
 
 		xmlHttp = GetXmlHttpObject()
-		var url = "check.jsp";
+		var url = "/check";
 		url = url + "?name=" + value;
 		xmlHttp.onreadystatechange = stateChanged
 		xmlHttp.open("GET", url, true)
@@ -510,7 +510,7 @@
 	function checkmobile(value) {
 
 		xmlHttp = GetXmlHttpObject()
-		var url = "mobilecheck.jsp";
+		var url = "/mobilecheck";
 		url = url + "?contactNO=" + value;
 		xmlHttp.onreadystatechange = stateChangedmobile
 		xmlHttp.open("GET", url, true)

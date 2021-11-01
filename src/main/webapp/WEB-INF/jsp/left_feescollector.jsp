@@ -333,7 +333,7 @@ Author     : Musaib
             function auto_reload()
             {
                 alert();
-                window.location = 'notication.jsp';
+                window.location = '/notication';
             }
 
         </script>
@@ -448,7 +448,7 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="/#" >Send Notifications</a></h5>
             <div >
-                <a target="mainFrame" href="/sendsms_superadmin.jsp" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="/sendsms_superadmin" style="font-size: 12px;">SMS</a><br/>
             </div>
             
             </div>

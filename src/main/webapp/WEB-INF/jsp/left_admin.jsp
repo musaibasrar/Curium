@@ -348,7 +348,7 @@ Author     : Musaib
             function auto_reload()
             {
                 alert();
-                window.location = 'notication.jsp';
+                window.location = '/notication';
             }
 
         </script>
@@ -486,8 +486,8 @@ for(Cookie cookie : cookies){
             <div>
 				<a target="mainFrame" href="/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>                
 				<a target="mainFrame" href="/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a><br/>                
-				<a target="mainFrame" href="/feesCollectionDetails.jsp" style="font-size: 12px;">Fees Collection Details</a><br/>
-				<a target="mainFrame" href="/feescancelledreceipts.jsp" style="font-size: 12px;">Cancelled Fees Receipts</a><br/>
+				<a target="mainFrame" href="/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a><br/>
+				<a target="mainFrame" href="/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a><br/>
 				<a target="mainFrame" href="/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a><br/>
 				<a target="mainFrame" href="/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a><br/>
 				<a target="mainFrame" href="/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a><br/>
@@ -511,9 +511,9 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="/#" >Extras</a></h5>
             <div >
-                <a target="mainFrame" href="/Backup&Restore.jsp" style="font-size: 12px;">Backup</a><br/>
-                <a target="mainFrame" href="/changePassword.jsp" style="font-size: 12px;">Change Password</a><br/>
-                <a target="mainFrame" href="/uploadattendance.jsp" style="font-size: 12px;">Upload Attendance File</a><br/>
+                <a target="mainFrame" href="/Backup&Restore" style="font-size: 12px;">Backup</a><br/>
+                <a target="mainFrame" href="/changePassword" style="font-size: 12px;">Change Password</a><br/>
+                <a target="mainFrame" href="/uploadattendance" style="font-size: 12px;">Upload Attendance File</a><br/>
                 <a target="mainFrame" href="/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a><br/>
             </div>
             
@@ -544,7 +544,7 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="/#" >Send Notifications</a></h5>
             <div >
                 <a target="mainFrame" href="/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a><br/>
-                <a target="mainFrame" href="/sendemail.jsp" style="font-size: 12px;">Email</a><br/>
+                <a target="mainFrame" href="/sendemail" style="font-size: 12px;">Email</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="/#" >Accounts</a></h5>
@@ -554,8 +554,8 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a><br/>
                 <a target="mainFrame" href="/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a><br/>
                 <a target="mainFrame" href="/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a><br/>
-                <a target="mainFrame" href="/incomestatement.jsp" style="font-size: 12px;">Income Statement</a><br/>
-                <a target="mainFrame" href="/trialbalance.jsp" style="font-size: 12px;">Trial Balance</a><br/>
+                <a target="mainFrame" href="/incomestatement" style="font-size: 12px;">Income Statement</a><br/>
+                <a target="mainFrame" href="/trialbalance" style="font-size: 12px;">Trial Balance</a><br/>
                 <a target="mainFrame" href="/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
             </div>
             

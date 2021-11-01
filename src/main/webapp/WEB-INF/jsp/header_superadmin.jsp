@@ -190,13 +190,13 @@ for(Cookie cookie : cookies){
                             				<td width="10"></td>
                                           	<td align="left"><img src="/images/curiumheader.png" /></td>  
                                           	<!-- <td><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td> -->
-                            				<td width="40" ><div align="center" ><a target="leftFrame" href="/left_superadmin.jsp"><img src="/images/house_home.png" width="35" height="35" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                            				<td><a target="leftFrame" href="/left_superadmin.jsp" style="color:white;font-size: 11px;font-family: arial;">Home</a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                            				<td width="40" ><div align="center" ><a target="leftFrame" href="/left_superadmin"><img src="/images/house_home.png" width="35" height="35" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                            				<td><a target="leftFrame" href="/left_superadmin" style="color:white;font-size: 11px;font-family: arial;">Home</a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40"><a target="mainFrame" href="/feesCollectionDetails.jsp"><div align="center" align="center"><img  alt="Fees Details" src="/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/feesCollectionDetails"><div align="center" align="center"><img  alt="Fees Details" src="/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/sendsms_superadmin.jsp"><img   src="/images/sendsmsw.png" width="30" height="30" alt="Send SMS" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/sendsms_superadmin"><img   src="/images/sendsmsw.png" width="30" height="30" alt="Send SMS" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                 			<td><label style="color:white;font-size: 12px;">Send <br>Message</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
                                             <td width="40"><a target="mainFrame" href="/StudentProcess/viewAllSuperAdmin"><div align="center" align="center"><img  alt="View All Students" src="/images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>

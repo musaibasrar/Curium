@@ -74,10 +74,10 @@ for(Cookie cookie : cookies){
 }
 %>
     <frameset    rows="70,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="header.jsp"   name="topFrame" scrolling="NO" noresize frameborder="0">
+        <frame   src="/header"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="left.jsp" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame  src="/left" name="leftFrame" scrolling="yes"  frameborder="1"   />
                 <frame src="/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
             </frameset>
 
