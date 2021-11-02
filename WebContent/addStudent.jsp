@@ -925,7 +925,7 @@
 								onclick="noCheck(this.id);" />
 
 							</td>
-							<td width="20%" class="alignRight">Student's adhar Card No.
+							<td width="20%" class="alignRight">Student's aadhaar Card No.
 								&nbsp;</td>
 							<td width="28%"><label> <input
 									name="bplcardno" type="text" class="myclass"

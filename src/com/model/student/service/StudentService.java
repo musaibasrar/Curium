@@ -1629,17 +1629,24 @@ public class StudentService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Admission No.", "Student Name", "Studying In Class",
-									"Fathers Name", "Fees Due Amount" });
+					new Object[] { "Admission No.","STS", "Student Name", "Studying In Class",
+									"Date Of Birth", "Age", "Blood Group", "UID(Aadhaar No.)", "Date of Admission", 
+									"Fathers Name", 
+									"Contact Number",			
+									"Fees Due Amount" });
 			int i = 1;
 			
 			for (Entry<Parents, Long> studentDetails : listOfStudentRecords.entrySet()) {
 			
 				data.put(Integer.toString(i),
 						new Object[] { DataUtil.emptyString(studentDetails.getKey().getStudent().getStudentexternalid()),
+								 DataUtil.emptyString(Integer.toString(studentDetails.getKey().getStudent().getSts())),
 								 DataUtil.emptyString(studentDetails.getKey().getStudent().getName()), 
 								 DataUtil.emptyString(studentDetails.getKey().getStudent().getClassstudying().replace("--", " ")),
-								 DataUtil.emptyString(studentDetails.getKey().getFathersname()),
+								 DateUtil.getStringDate(studentDetails.getKey().getStudent().getDateofbirth()),
+								 DataUtil.emptyString(Integer.toString( studentDetails.getKey().getStudent().getAge())),DataUtil.emptyString(studentDetails.getKey().getStudent().getBloodgroup()),
+								 DataUtil.emptyString(studentDetails.getKey().getStudent().getBplcardno()),DateUtil.getStringDate(studentDetails.getKey().getStudent().getAdmissiondate()),
+								 DataUtil.emptyString(studentDetails.getKey().getFathersname()),DataUtil.emptyString(studentDetails.getKey().getContactnumber()),
 								 studentDetails.getValue()});
 				i++;
 			}
