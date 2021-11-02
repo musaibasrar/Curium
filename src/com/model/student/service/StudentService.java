@@ -1091,7 +1091,7 @@ public class StudentService {
             
             if(!request.getParameter("districtcode").equalsIgnoreCase("")) {
                 if(subQuery!=null) {
-                    subQuery = subQuery+"AND parent.Student.districtcode = '"+request.getParameter("districtcode")+"'";
+                    subQuery = subQuery+" AND parent.Student.districtcode = '"+request.getParameter("districtcode")+"'";
                 }else {
                     subQuery = "parent.Student.districtcode = '"+request.getParameter("districtcode")+"'";
                 }
@@ -1102,7 +1102,7 @@ public class StudentService {
             
             if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
                 if(subQuery!=null) {
-                    subQuery = subQuery+"AND parent.Student.examlevel = '"+request.getParameter("examlevel")+"'";
+                    subQuery = subQuery+" AND parent.Student.examlevel = '"+request.getParameter("examlevel")+"'";
                 }else {
                     subQuery = "parent.Student.examlevel = '"+request.getParameter("examlevel")+"'";
                 }
@@ -1114,7 +1114,7 @@ public class StudentService {
             
             if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
                 if(subQuery!=null) {
-                    subQuery = subQuery+"AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+                    subQuery = subQuery+" AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                 }else {
                     subQuery = "parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
                 }
@@ -1126,7 +1126,7 @@ public class StudentService {
             
             if(!request.getParameter("qualification").equalsIgnoreCase("")) {
                 if(subQuery!=null) {
-                    subQuery = subQuery+"AND parent.Student.qualification = '"+request.getParameter("qualification")+"'";
+                    subQuery = subQuery+" AND parent.Student.qualification = '"+request.getParameter("qualification")+"'";
                 }else {
                     subQuery = "parent.Student.qualification = '"+request.getParameter("qualification")+"'";
                 }
@@ -1138,7 +1138,7 @@ public class StudentService {
             
             if(!DataUtil.emptyString(request.getParameter("religion")).equalsIgnoreCase("")) {
                 if(subQuery!=null) {
-                    subQuery = subQuery+"AND parent.Student.religion = '"+request.getParameter("religion")+"'";
+                    subQuery = subQuery+" AND parent.Student.religion = '"+request.getParameter("religion")+"'";
                 }else {
                     subQuery = "parent.Student.religion = '"+request.getParameter("religion")+"'";
                 }
@@ -1152,7 +1152,7 @@ public class StudentService {
                 if(subQuery!=null) {
                     String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
                     
-                    subQuery = subQuery+"AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
+                    subQuery = subQuery+" AND parent.Student.admissionnumber like '"+subAcademicYear+"%'";
                 }else {
                     subQuery = "parent.Student.admissionnumber like '\"+subAcademicYear+\"%'";
                 }

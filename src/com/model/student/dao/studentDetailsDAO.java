@@ -270,7 +270,7 @@ public class studentDetailsDAO {
 		
 		  String stringclassStudying = classStudying;
 		  String[] temp;
-		  int previousAcademicYear = Integer.parseInt(currentAcademicYear)-1;
+		  //int previousAcademicYear = Integer.parseInt(currentAcademicYear)-1;
 		 
 		  /* delimiter */
 		  String delimiter = " ";
@@ -295,8 +295,8 @@ public class studentDetailsDAO {
 				    
 				    for (Student student : studentList) {
 				        String hql = "UPDATE student set examlevel = '"+ch.getUpperclass()+"',"
-				        		+ " admissionnumber = CONCAT(REPLACE(LEFT(admissionnumber,2),"
-            					+ " '"+previousAcademicYear+"', '"+currentAcademicYear+"'),SUBSTRING(admissionnumber, 3, CHAR_LENGTH(admissionnumber))),"
+				        		+ " admissionnumber = CONCAT(REPLACE(LEFT(admissionnumber,2),LEFT('"+student.getAdmissionnumber()+"',2)"
+            					+ " , '"+currentAcademicYear+"'),SUBSTRING(admissionnumber, 3, CHAR_LENGTH(admissionnumber))),"
 			                     		+ " admissionnumber = replace(admissionnumber, '"+classStudying+"', '"+ch.getUpperclass()+"'),"
 				                        + " age = age+1, qualification = '"+student.getQualification()+"' WHERE sid ="+student.getSid()+"";
 	                                Query query = session.createSQLQuery(hql);
@@ -311,7 +311,7 @@ public class studentDetailsDAO {
 				if(ch!=null) {
 				    for (Student student : studentList) {
 				        String hql = "UPDATE student set examlevel = :demotedclass,"
-				                		+ "admissionnumber = CONCAT(REPLACE(LEFT(admissionnumber,2), '"+currentAcademicYear+"', '"+previousAcademicYear+"'),"
+				                		+ "admissionnumber = CONCAT(REPLACE(LEFT(admissionnumber,2), LEFT('"+student.getAdmissionnumber()+"',2), LEFT('"+student.getAdmissionnumber()+"',2)),"
 		        	                    + "SUBSTRING(admissionnumber, 3, CHAR_LENGTH(admissionnumber))),"
 		        	                    + " admissionnumber = replace(admissionnumber, '"+classStudying+"', '"+ch.getLowerclass()+"'),"
 				                        + " age = age-1, qualification = '"+student.getQualification()+"' WHERE sid ="+student.getSid();
