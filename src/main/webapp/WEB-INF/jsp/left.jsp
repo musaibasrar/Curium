@@ -333,7 +333,7 @@ Author     : Musaib
             function auto_reload()
             {
                 alert();
-                window.location = 'notication.jsp';
+                window.location = '/notication';
             }
 
         </script>
@@ -460,8 +460,8 @@ for(Cookie cookie : cookies){
             
             <div>
                 <a target="mainFrame" href="/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>
-				<a target="mainFrame" href="/feesstructure.jsp" style="font-size: 12px;">Fees Structure</a><br/>                
-				<a target="mainFrame" href="/feesCollectionDetails.jsp" style="font-size: 12px;">Fees Details</a><br/>
+				<a target="mainFrame" href="/feesstructure" style="font-size: 12px;">Fees Structure</a><br/>                
+				<a target="mainFrame" href="/feesCollectionDetails" style="font-size: 12px;">Fees Details</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="/#">Exams</a></h5>
@@ -482,14 +482,14 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="/#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/AdvanceSearch.jsp" style="font-size: 12px;">Search</a><br/>
+                <a target="mainFrame" href="/AdvanceSearch" style="font-size: 12px;">Search</a><br/>
 
 
             </div>
 
             <h5 style="font-size: 12px"><a href="/#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/Promotion.jsp" style="font-size: 12px;">Promotions</a><br/>
+                <a target="mainFrame" href="/Promotion" style="font-size: 12px;">Promotions</a><br/>
 
 
             </div>
@@ -501,9 +501,9 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="/#" >Extras</a></h5>
             <div >
-                <a target="mainFrame" href="/Backup&Restore.jsp" style="font-size: 12px;">Backup</a><br/>
-                <a target="mainFrame" href="/changePassword.jsp" style="font-size: 12px;">Change Password</a><br/>
-                <a target="mainFrame" href="/uploadattendance.jsp" style="font-size: 12px;">upload attendance file</a><br/>
+                <a target="mainFrame" href="/Backup&Restore" style="font-size: 12px;">Backup</a><br/>
+                <a target="mainFrame" href="/changePassword" style="font-size: 12px;">Change Password</a><br/>
+                <a target="mainFrame" href="/uploadattendance" style="font-size: 12px;">upload attendance file</a><br/>
             </div>
             
             
@@ -524,8 +524,8 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="/#" >Send Notifications</a></h5>
             <div >
-                <a target="mainFrame" href="/sendsms.jsp" style="font-size: 12px;">SMS</a><br/>
-                <a target="mainFrame" href="/sendemail.jsp" style="font-size: 12px;">Email</a><br/>
+                <a target="mainFrame" href="/sendsms" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="/sendemail" style="font-size: 12px;">Email</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="/#" >Accounts</a></h5>
