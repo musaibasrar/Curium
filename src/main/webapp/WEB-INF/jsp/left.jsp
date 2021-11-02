@@ -443,8 +443,8 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="/#">Attendance</a></h5>
             <div>
                 <a target="mainFrame" href="/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
-                <a target="mainFrame" href="/attendancemark.jsp" style="font-size: 12px;">Mark Attendance</a><br/>
-                <a target="mainFrame" href="/attendanceexport.jsp" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="/attendancemark" style="font-size: 12px;">Mark Attendance</a><br/>
+                <a target="mainFrame" href="/attendanceexport" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="/#">Staff</a></h5>
@@ -514,9 +514,9 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="/#" >Documents</a></h5>
             <div >
-                <a target="mainFrame" href="/studentsdetailsreports.jsp" style="font-size: 12px;">Student Details</a><br/>
+                <a target="mainFrame" href="/studentsdetailsreports" style="font-size: 12px;">Student Details</a><br/>
                 <a target="mainFrame" href="/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
-                <a target="mainFrame" href="/studentsdetailsbonafide.jsp" style="font-size: 12px;">Bonafide Certificate</a><br/>
+                <a target="mainFrame" href="/studentsdetailsbonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
                 <a target="mainFrame" href="/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
                 <a target="mainFrame" href="/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
                 <a target="mainFrame" href="/PeriodProcess/generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
