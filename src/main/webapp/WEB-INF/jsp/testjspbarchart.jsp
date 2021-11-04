@@ -301,7 +301,7 @@
         <p class="style1">
             <label>${noOfRecordsOfSubscribers}</label>
             <input type="button" id="view" value="View All " onClick="ViewAll()">
-            <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='addContact.jsp';">
+            <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='/addContact';">
         </p></
             </table> -->
             

@@ -89,7 +89,7 @@ for(Cookie cookie : cookies){
         <p class="style1">
           
             
-            <input type="button" value="Back" id="addnew" onClick="JavaScript:window.location='addEmployee.jsp';">
+            <input type="button" value="Back" id="addnew" onClick="JavaScript:window.location='/addEmployee';">
         </p></td>
       </tr>
     </table>

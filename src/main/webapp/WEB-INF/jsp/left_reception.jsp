@@ -350,7 +350,7 @@ Author     : Musaib
             function auto_reload()
             {
                 alert();
-                window.location = 'notication.jsp';
+                window.location = '/notication';
             }
 
         </script>
@@ -454,7 +454,7 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="/#">Students</a></h5>
             <div>
                 <a target="mainFrame" href="/StudentProcess/viewAll" >View All</a><br/>
-                <a target="mainFrame" href="/feesstructure.jsp" >Fees Structure</a><br/>
+                <a target="mainFrame" href="/feesstructure" >Fees Structure</a><br/>
                 
 
             </div>
@@ -485,14 +485,14 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="/#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/AdvanceSearch.jsp" >Search</a><br/>
+                <a target="mainFrame" href="/AdvanceSearch" >Search</a><br/>
 
 
             </div>
 			<!--
             <h5 style="font-size: 12px"><a href="/#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/Promotion.jsp" >Promotions</a><br/>
+                <a target="mainFrame" href="/Promotion" >Promotions</a><br/>
 
 
             </div> -->
@@ -515,15 +515,15 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="/#" >Extras</a></h5>
             <div >
-               <!--  <a target="mainFrame" href="/Backup&Restore.jsp" >Backup</a><br/>
-                <a target="mainFrame" href="/currentIssue.jsp" >Current Issue</a><br/>
-                <a target="mainFrame" href="/changePassword.jsp" >Change Password</a><br/> -->
-                <a target="mainFrame" href="/feesCollectionDetails.jsp" >Fees Collection Details</a><br/>
+               <!--  <a target="mainFrame" href="/Backup&Restore" >Backup</a><br/>
+                <a target="mainFrame" href="/currentIssue" >Current Issue</a><br/>
+                <a target="mainFrame" href="/changePassword" >Change Password</a><br/> -->
+                <a target="mainFrame" href="/feesCollectionDetails" >Fees Collection Details</a><br/>
             </div>
             
            <!--  <h5 style="font-size: 12px"><a href="/#" >Reports</a></h5>
             <div >
-                <a target="mainFrame" href="/studentsdetailsreports.jsp" >Student Details</a><br/>
+                <a target="mainFrame" href="/studentsdetailsreports" >Student Details</a><br/>
                 
             </div>  -->
             

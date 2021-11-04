@@ -95,7 +95,7 @@ for(Cookie cookie : cookies){
         <p class="style1">
           
             
-            <input type="button" value="Back" id="addnew" onClick="JavaScript:window.location='adminexpenses.jsp';">
+            <input type="button" value="Back" id="addnew" onClick="JavaScript:window.location='/adminexpenses';">
         </p></td>
       </tr>
     </table>
