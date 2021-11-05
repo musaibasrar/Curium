@@ -33,9 +33,8 @@ import org.ideoholic.curium.model.sendemail.action.EmailAction;
 import org.ideoholic.curium.model.sendsms.action.SmsAction;
 import org.ideoholic.curium.model.stampfees.action.StampFeesAction;
 import org.ideoholic.curium.model.std.action.StandardAction;
-import org.ideoholic.curium.model.student.action.StudentAction;
 import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsAction;
-import org.ideoholic.curium.model.user.action.UserAction;
+import org.ideoholic.curium.model.student.action.StudentAction;
 
 /**
  * Servlet implementation class Controller
@@ -56,9 +55,7 @@ public class Controller extends HttpServlet {
         String page = request.getParameter("page");
        
         String nextUrl = "";
-        if ("UserProcess".equalsIgnoreCase(process)) {
-            nextUrl = new UserAction(request, response).execute(action);
-        }else if("StudentProcess".equalsIgnoreCase(process)){
+        if("StudentProcess".equalsIgnoreCase(process)){
             nextUrl= new StudentAction(request, response).execute(action,page);
         }else if("FeesProcess".equalsIgnoreCase(process)){
          nextUrl= new FeesAction(request, response).execute(action,page);

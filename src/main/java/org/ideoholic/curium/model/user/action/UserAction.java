@@ -4,97 +4,87 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ideoholic.curium.model.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+@Controller
+@RequestMapping("/UserProcess")
 public class UserAction {
+
+	@Autowired
 	HttpServletRequest request;
-    HttpServletResponse response;
-    private String url;
-	
-	public UserAction(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response=response;
+	@Autowired
+	HttpServletResponse response;
+
+	@GetMapping("/sessionTimeOut")
+	public String sessionTimeOut() {
+		return "sessiontimeout";
 	}
 
-	public String execute(String action) {
-	       if (action.equalsIgnoreCase("authenticateUser")) {
-	            url = authenticateUser();
-	        }else if (action.equalsIgnoreCase("logout")) {
-	            url = logOutUser();
-	        }else if (action.equalsIgnoreCase("changePassword")) {
-	            url = changePassword();
-	        }else if (action.equalsIgnoreCase("dashBoard")) {
-				url = dashBoard();
-			}else if (action.equalsIgnoreCase("advanceSearch")) {
-				url = advanceSearch();
-			}else if (action.equalsIgnoreCase("advanceSearchByParents")) {
-				url = advanceSearchByParents();
-			}else if (action.equalsIgnoreCase("backup")) {
-				url = backup();
-			}else if (action.equalsIgnoreCase("searchByDate")) {
-				url = searchByDate();
-			} else if (action.equalsIgnoreCase("sessionTimeOut")) {
-	            url = sessionTimeOut();
-	        }
-	       return url;
-	       
-	}
-
-	private String sessionTimeOut() {
-		return "sessiontimeout.jsp";
-	}
-
-	private String searchByDate() {
+	@PostMapping("/searchByDate")
+	public String searchByDate() {
 		new UserService(request, response).searchByDate();
-        return "feesCollectionDetails.jsp";
+		return "feesCollectionDetails";
 	}
 
-	private String advanceSearchByParents() {
+	@PostMapping("/advanceSearchByParents")
+	public String advanceSearchByParents() {
 		new UserService(request, response).advanceSearchByParents();
-        return "viewAllWithParents.jsp";
+		return "viewAllWithParents";
 	}
 
-	private String backup() {
-		 String fileName = request.getParameter("filename");
-		if(new UserService(request, response).backupData(fileName)){
-			
-			return"BackupSuccess.jsp";
-	       }else{
-	           return"BackupFailed.jsp";
+	@PostMapping("/backup")
+	public String backup() {
+		String fileName = request.getParameter("filename");
+		if (new UserService(request, response).backupData(fileName)) {
+			return "BackupSuccess";
+		} else {
+			return "BackupFailed";
 		}
 	}
 
-	private String advanceSearch() {
+	@PostMapping("/advanceSearch")
+	public String advanceSearch() {
 		new UserService(request, response).advanceSearch();
-        return "advanceSearchResult.jsp";
+		return "advanceSearchResult";
 	}
 
-	private String dashBoard() {
+	@GetMapping("/dashBoard")
+	public String dashBoard() {
 		new UserService(request, response).dashBoard();
-        //return "dashBoard.jsp";
-		return "jspbarchart.jsp";
+		return "jspbarchart";
 	}
 
-	private String authenticateUser() {
+	@PostMapping("/authenticateUser")
+	public String authenticateUser(Model model) {
 		if (new UserService(request, response).authenticateUser()) {
-			
-        return "login.jsp?login_success=true";
-    } else {
-        return "login.jsp?login_success=false";
-    }
+			model.addAttribute("login_success", true);
+			return "login";
+		} else {
+			model.addAttribute("login_success", false);
+			return "login";
+		}
 	}
 
-	private String logOutUser() {
+	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
+	public String logOutUser(Model model) {
 		new UserService(request, response).logOutUser();
-        return "login.jsp?logout=true";
+		model.addAttribute("logout", true);
+		return "login";
 	}
-	
-	private String changePassword() {
-		
-		if(new UserService(request, response).ChangePassword()){
-	        return "passwordSuccess.jsp";
-	    }else{
-	        return "passwordFail.jsp";
-	    }
+
+	@GetMapping("/changePassword")
+	public String changePassword() {
+		if (new UserService(request, response).ChangePassword()) {
+			return "passwordSuccess";
+		} else {
+			return "passwordFail";
+		}
 	}
 
 }
