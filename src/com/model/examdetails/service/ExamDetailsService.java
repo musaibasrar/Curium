@@ -278,7 +278,7 @@ public class ExamDetailsService {
 		classStudying = classStudying+"--" +"%";
 		
 		if(admNo==""){
-			studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.classstudying LIKE '"+classStudying+"'");
+			studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.classstudying LIKE '"+classStudying+"' and parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid = "+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by registrationnumber desc");
 		}else{
 			Parents parent = new Parents();
 			Student student = new Student();
