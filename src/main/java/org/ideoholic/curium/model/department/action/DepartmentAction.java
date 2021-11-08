@@ -9,6 +9,7 @@ import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,10 +27,10 @@ public class DepartmentAction {
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
 		new DepartmentService(request, response).deleteMultiple();
-        return "Controller?process=DepartmentProcess&action=departmentView";
+        return "/DepartmentProcess/departmentView";
 	}
 
-	@PostMapping("/departmentView")
+	@GetMapping("/departmentView")
 	public String departmentView() {
 		new DepartmentService(request, response).viewDepartment();
         System.out.println("IN action's department view");
@@ -41,7 +42,7 @@ public class DepartmentAction {
 
 		new DepartmentService(request, response).addDepartment();
 		System.out.println("IN action's add department");
-		return "Controller?process=DepartmentProcess&action=departmentView";
+		return "/DepartmentProcess/departmentView";
 	}
 
 }
