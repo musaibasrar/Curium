@@ -431,7 +431,7 @@
                 else {
                     day=day;
                 }
-                return month+"/"+day+"/"+year;
+                return day+"/"+month+"/"+year;
 
             }
            
@@ -889,7 +889,7 @@ for(Cookie cookie : cookies){
                     <tr>
                     <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" style="width: 200px" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
                         
-                        <td>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" value="${dateoffeesDetails}" readonly="readonly"/></td>
+                        <td>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" value="${dateoffeesDetails}" /></td>
                         
                     </tr>
                     

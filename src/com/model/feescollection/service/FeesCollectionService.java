@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -147,7 +148,7 @@ public class FeesCollectionService {
 		long id = Long.parseLong(request.getParameter("studentId"));
 		List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 		//List<Feescollection> feesCollection = new feesCollectionDAO().getFeesForTheCurrentYear(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-		Map<Studentfeesstructure,Long> feesMap = new HashMap<Studentfeesstructure, Long>();
+		Map<Studentfeesstructure,Long> feesMap = new LinkedHashMap<Studentfeesstructure, Long>();
 		
 		for (Map.Entry<Studentfeesstructure, Long> feescollection2 : feesMap.entrySet()) {
 			Studentfeesstructure sf = feescollection2.getKey();
@@ -164,7 +165,11 @@ public class FeesCollectionService {
 				
 			}*/
 			Long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid();
-			feesMap.put(singleFeesStructure,totalDueAmount);
+			
+				if(totalDueAmount>0) {
+					feesMap.put(singleFeesStructure,totalDueAmount);
+				}
+			
 		}
 		request.setAttribute("studentfeesdetails", feesMap);
 		request.setAttribute("studentNameDetails", request.getParameter("studentName"));
@@ -214,7 +219,7 @@ public class FeesCollectionService {
 			
 			// create receipt information
 			receiptInfo.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-			receiptInfo.setDate(new Date());
+			receiptInfo.setDate(DateUtil.indiandateParser(request.getParameter("dateoffeesDetails")));
 			receiptInfo.setSid(DataUtil.parseInt(sid));
 			receiptInfo.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			receiptInfo.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
@@ -234,7 +239,7 @@ public class FeesCollectionService {
 					feesCollect.setAmountpaid(DataUtil.parseLong(amountPaying[Integer.parseInt(studentSfsIdamount[1])]));
 					feesCollect.setSid(DataUtil.parseInt(sid));
 					feesCollect.setFine(DataUtil.parseLong(fine[i]));
-					feesCollect.setDate(new Date());
+					feesCollect.setDate(DateUtil.indiandateParser(request.getParameter("dateoffeesDetails")));
 					feesCollect.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 					//feesCollect.setReceiptnumber(receiptInfo.getReceiptnumber());
 					feesCollect.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
