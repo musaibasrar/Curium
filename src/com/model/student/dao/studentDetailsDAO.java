@@ -469,7 +469,7 @@ public class studentDetailsDAO {
 
 		try {
 			transaction = session.beginTransaction();
-			studentFeesStructure = session.createQuery("from Studentfeesstructure sfs where sfs.sfsid = '"+sfsid+"'").list();
+			studentFeesStructure = session.createQuery("from Studentfeesstructure sfs where sfs.sfsid = '"+sfsid+"' order by sfs.sfsid ASC").list();
 			transaction.commit();
 
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
