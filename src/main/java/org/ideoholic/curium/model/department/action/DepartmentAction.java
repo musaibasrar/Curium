@@ -27,7 +27,6 @@ public class DepartmentAction {
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
 		new DepartmentService(request, response).deleteMultiple();
-        //return "/DepartmentProcess/departmentView";
        return departmentView();
 	}
 
@@ -43,7 +42,7 @@ public class DepartmentAction {
 
 		new DepartmentService(request, response).addDepartment();
 		System.out.println("IN action's add department");
-		return "/DepartmentProcess/departmentView";
+		return departmentView();
 	}
 
 }
