@@ -65,8 +65,6 @@ public class Controller extends HttpServlet {
          nextUrl= new FeesCollectionAction(request, response).execute(action,page);
      }else if("AdminProcess".equalsIgnoreCase(process)){
          nextUrl= new AdminAction(request, response).execute(action,page);
-     }else if("YearProcess".equalsIgnoreCase(process)){
-         nextUrl= new YearAction(request, response).execute(action);
      }else if("StampFeesProcess".equalsIgnoreCase(process)){
          nextUrl= new StampFeesAction(request, response).execute(action);
      }else if("ExamDetailsProcess".equalsIgnoreCase(process)){
