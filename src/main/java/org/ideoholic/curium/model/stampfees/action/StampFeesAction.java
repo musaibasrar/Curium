@@ -11,58 +11,54 @@ import org.ideoholic.curium.model.student.service.StudentService;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.model.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+
+@Controller
+@RequestMapping("/StampFeesProcess")
 
 public class StampFeesAction {
-	HttpServletRequest request;
-    HttpServletResponse response;
-    private String url;
 	
-	public StampFeesAction(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response=response;
-	}
+	@Autowired
+	HttpServletRequest request;
+	@Autowired
+	HttpServletResponse response;
 
-	public String execute(String action) {
-	       if (action.equalsIgnoreCase("search")) {
-	            url = search();
-	        }else if (action.equalsIgnoreCase("showFeesDetails")) {
-	            url = showFeesDetails();
-	        }else if (action.equalsIgnoreCase("applyFees")) {
-	            url = applyFees();
-	        }else if (action.equalsIgnoreCase("delete")) {
-	        	url = deleteFeesStructure();
-	        }else if (action.equalsIgnoreCase("searchForFees")) {
-	        	url = searchForFees();
-	        }
-	       return url;
-	       
-	}
-
+	@PostMapping("/searchForFees")
 	private String searchForFees() {
 		new StampFeesService(request, response).advanceSearch();
-        return "feesstructure.jsp";
+        return "feesstructure";
 	}
 
+	@PostMapping("/delete")
 	private String deleteFeesStructure() {
 		new StampFeesService(request, response).deleteFeesStamp();
-        return "feesstampsuccess.jsp";
+        return "feesstampsuccess";
 	}
 
+	@PostMapping("/applyFees")
 	private String applyFees() {
 		new StampFeesService(request, response).addFeesStamp();
-        return "feesstampsuccess.jsp";
+        return "feesstampsuccess";
 	}
 
+	@GetMapping("/showFeesDetails")
 	private String showFeesDetails() {
 		new FeesService(request, response).viewFees();
 		new YearService(request, response).getYear();
 		new StandardService(request, response).viewClasses();
-		return "stampfees.jsp";
+		return "stampfees";
 	}
 
+
+	@PostMapping("/search")
 	private String search() {
 		new StampFeesService(request, response).advanceSearch();
-        return "stampfees.jsp";
+        return "stampfees";
 	}
 
 	
