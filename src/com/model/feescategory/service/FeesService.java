@@ -106,7 +106,7 @@ public class FeesService {
                 boolean result = false;
                 try {
 
-                        File downloadFile = new File(System.getProperty("java.io.tmpdir")+"feesdetails.xlsx");
+                        File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/feesdetails.xlsx");
                 FileInputStream inStream = new FileInputStream(downloadFile);
 
                 // get MIME type of the file

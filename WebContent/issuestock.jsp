@@ -597,9 +597,11 @@
 		$("#tabs").tabs();
 		
 		$("#saveissueentry").button().click(function() {
+			 $('#myTable').dataTable().fnFilter('');
 			saveissueentry();
 		});
 		$("#saveissueentry2").button().click(function() {
+			 $('#myTable').dataTable().fnFilter('');
 			saveissueentry();
 		});
 		$("#effect").hide();

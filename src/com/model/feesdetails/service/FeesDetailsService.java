@@ -125,15 +125,18 @@ public class FeesDetailsService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Admission Number", "Date of Fees", "Total"});
+					new Object[] { "Admission Number", "Student Name", "Father Name", "Date of Fees", "Total"});
 			int i = 1;
 			for (Receiptinfo feesDetails : listOfFeesDetails) {
 				
 				for (Student studentDetails : listOfStudent) {
 				
-					data.put(Integer.toString(i),new Object[] { 
-						studentDetails.getAdmissionnumber(), feesDetails.getDate().toString(),
-						feesDetails.getTotalamount() });
+					if(studentDetails.getSid() == feesDetails.getSid()) {
+						data.put(Integer.toString(i),new Object[] { 
+								studentDetails.getAdmissionnumber(),studentDetails.getName(),
+								feesDetails.getDate().toString(),
+								feesDetails.getTotalamount() });	
+					}
 				}
 				i++;
 			}
@@ -165,7 +168,7 @@ public class FeesDetailsService {
 						cell.setCellValue((Long) obj);
 				}
 			}
-				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"feesdetails.xlsx"));
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/feesdetails.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;

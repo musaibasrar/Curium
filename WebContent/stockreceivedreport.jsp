@@ -378,6 +378,8 @@
 <script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
+	<link href="css/select2.min.css" rel="stylesheet" />
+<script src="js/select2.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -552,7 +554,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Supplier&nbsp;</td>
 							<td ><label>
 									<select name="supplier"
-									id="supplier" class="dropdownlist" style="font-size: 14px;" >
+									id="supplier" class="dropdownlist select2" style="font-size: 14px;" >
 										<option value="ALL"></option>
 										<c:forEach items="${messsupplierslist}" var="messsupplierslist">
 											<option value="${messsupplierslist.id}:${messsupplierslist.name}">${messsupplierslist.name}</option>
@@ -563,7 +565,7 @@ for(Cookie cookie : cookies){
 						
 							<td class="alignRight">Item&nbsp;</td>
 							<td ><label>
-									<select name="itemname" id="itemname" class="dropdownlist" style="font-size: 14px;">
+									<select name="itemname" id="itemname" class="dropdownlist select2" style="font-size: 14px;">
 											<option></option>
 										<c:forEach items="${itemslist}" var="itemslist">
 											<option value="${itemslist.id}:${itemslist.name}">${itemslist.name}</option>
@@ -666,6 +668,8 @@ for(Cookie cookie : cookies){
 
 		</div>
 	</form>
-	
+	<script>
+    $('.select2').select2();
+</script>
 </body>
 </html>

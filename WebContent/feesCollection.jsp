@@ -992,7 +992,7 @@ for(Cookie cookie : cookies){
             <input type="button" value="submit" id="submitbtn"/>
             
             
-            <div id="dialogpaymentmethod" title="Payment Method">
+            <div id="dialogpaymentmethod" title="Payment Method" style="background: blue;">
 				
            		 
            		 <table style="width: auto;height: auto;">

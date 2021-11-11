@@ -641,8 +641,8 @@ for(Cookie cookie : cookies){
 								</select></label></td>
 								
 								<td class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;Min. Stock &nbsp;</td>
-							<td><label> <input name="minstock" required
-									type="text" class="textfieldvaluesshort" id="minstock" 
+							<td><label> <input name="minstock" required value="1" min="1"
+									type="number" class="textfieldvaluesshort" id="minstock" 
 									style="font-size: 14px;">
 
 							</label></td>

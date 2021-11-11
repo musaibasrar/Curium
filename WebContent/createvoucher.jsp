@@ -21,6 +21,9 @@
         <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <link href="css/select2.min.css" rel="stylesheet" />
+<script src="js/select2.min.js"></script>
+        
   
         <style type="text/css">
             <!--
@@ -611,7 +614,7 @@ for(Cookie cookie : cookies){
 				<tr>
 					<td align="center" ><input size="2" style="font-weight: bold;background-color: #EEEEEE;font-size: 12px;" type="text" value="Dr" readonly /></td>
 					<td align="center"><label>
-									<select name="accountname" id="accountname" 
+									<select name="accountname" id="accountname" class="select2"
 									style="width: 240px;"">
 										
 
@@ -626,7 +629,7 @@ for(Cookie cookie : cookies){
 
 								</select></label></td>
 					<td align="center"><label>
-									<select name="accountbalance" id="accountbalance" disabled="true"
+									<select name="accountbalance" id="accountbalance" disabled="true" class="select2"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
     text-indent: 1px;
@@ -649,7 +652,7 @@ for(Cookie cookie : cookies){
 					<tr>
 					<td align="center" ><input size="2" style="font-weight: bold;background-color: #EEEEEE;font-size: 12px;" type="text" value="Cr" readonly /></td>
 					<td align="center"><label>
-									<select name="accountnamesecond" id="accountnamesecond" 
+									<select name="accountnamesecond" id="accountnamesecond"  class="select2"
 									style="width: 240px;"">
 										
 
@@ -664,7 +667,7 @@ for(Cookie cookie : cookies){
 
 								</select></label></td>
 					<td align="center"><label>
-									<select name="accountbalancesecond" id="accountbalancesecond" disabled="true"
+									<select name="accountbalancesecond" id="accountbalancesecond" disabled="true" class="select2"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
     text-indent: 1px;
@@ -794,7 +797,7 @@ for(Cookie cookie : cookies){
 				<tr>
 					<td align="center" ><input size="2" style="font-weight: bold;background-color: #EEEEEE;font-size: 12px;" type="text" value="Dr" readonly /></td>
 					<td align="center"><label>
-									<select name="accountnamepayment" id="accountnamepayment" 
+									<select name="accountnamepayment" id="accountnamepayment" class="select2"
 									style="width: 240px;"">
 										
 
@@ -808,7 +811,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 
 								</select></label></td>
-					<td align="center"><label><select name="accountbalancepayment" id="accountbalancepayment" disabled="true"
+					<td align="center"><label><select name="accountbalancepayment" id="accountbalancepayment" disabled="true" class="select2"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
     text-indent: 1px;
@@ -831,7 +834,7 @@ for(Cookie cookie : cookies){
 					<tr>
 					<td align="center" ><input size="2" style="font-weight: bold;background-color: #EEEEEE;font-size: 12px;" type="text" value="Cr" readonly /></td>
 					<td align="center"><label>
-										<select name="accountnamepaymentsecond" id="accountnamepaymentsecond" 
+										<select name="accountnamepaymentsecond" id="accountnamepaymentsecond" class="select2"
 									style="width: 240px;"">
 										
 
@@ -847,7 +850,7 @@ for(Cookie cookie : cookies){
 								</select>
 									</label></td>
 					<td align="center"><label>
-					<select name="accountbalancepaymentsecond" id="accountbalancepaymentsecond" disabled="true"
+					<select name="accountbalancepaymentsecond" id="accountbalancepaymentsecond" disabled="true" class="select2"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
     text-indent: 1px;
@@ -980,7 +983,7 @@ for(Cookie cookie : cookies){
 				<tr>
 					<td align="center" ><input size="2" style="font-weight: bold;background-color: #EEEEEE;font-size: 12px;" type="text" value="Dr" readonly /></td>
 					<td align="center"><label>
-									<select name="accountnamecontra" id="accountnamecontra" 
+									<select name="accountnamecontra" id="accountnamecontra" class="select2"
 									style="width: 240px;"">
 										
 
@@ -995,7 +998,7 @@ for(Cookie cookie : cookies){
 
 								</select></label></td>
 					<td align="center"><label>
-									<select name="accountbalancecontra" id="accountbalancecontra" disabled="true"
+									<select name="accountbalancecontra" id="accountbalancecontra" disabled="true" class="select2"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
     text-indent: 1px;
@@ -1018,7 +1021,7 @@ for(Cookie cookie : cookies){
 					<tr>
 					<td align="center" ><input size="2" style="font-weight: bold;background-color: #EEEEEE;font-size: 12px;" type="text" value="Cr" readonly /></td>
 					<td align="center"><label>
-									<select name="accountnamecontrasecond" id="accountnamecontrasecond" 
+									<select name="accountnamecontrasecond" id="accountnamecontrasecond" class="select2"
 									style="width: 240px;"">
 										
 
@@ -1033,7 +1036,7 @@ for(Cookie cookie : cookies){
 
 								</select></label></td>
 					<td align="center"><label>
-									<select name="accountbalancecontrasecond" id="accountbalancecontrasecond" disabled="true"
+									<select name="accountbalancecontrasecond" id="accountbalancecontrasecond" disabled="true" class="select2"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
     text-indent: 1px;
@@ -1163,7 +1166,7 @@ for(Cookie cookie : cookies){
 				<tr>
 					<td align="center" ><input size="2" style="font-weight: bold;background-color: #EEEEEE;font-size: 12px;" type="text" value="Dr" readonly /></td>
 					<td align="center"><label>
-									<select name="accountnamejournal" id="accountnamejournal" 
+									<select name="accountnamejournal" id="accountnamejournal" class="select2"
 									style="width: 240px;"">
 										
 
@@ -1178,7 +1181,7 @@ for(Cookie cookie : cookies){
 
 								</select></label></td>
 					<td align="center"><label>
-									<select name="accountbalancejournal" id="accountbalancejournal" disabled="true"
+									<select name="accountbalancejournal" id="accountbalancejournal" disabled="true" class="select2"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
     text-indent: 1px;
@@ -1201,7 +1204,7 @@ for(Cookie cookie : cookies){
 					<tr>
 					<td align="center" ><input size="2" style="font-weight: bold;background-color: #EEEEEE;font-size: 12px;" type="text" value="Cr" readonly /></td>
 					<td align="center"><label>
-									<select name="accountnamejournalsecond" id="accountnamejournalsecond" 
+									<select name="accountnamejournalsecond" id="accountnamejournalsecond" class="select2"
 									style="width: 240px;"">
 										
 
@@ -1216,7 +1219,7 @@ for(Cookie cookie : cookies){
 
 								</select></label></td>
 					<td align="center"><label>
-									<select name="accountbalancejournalsecond" id="accountbalancejournalsecond" disabled="true"
+									<select name="accountbalancejournalsecond" id="accountbalancejournalsecond" disabled="true" class="select2"
 									style="width: 240px;-webkit-appearance: none;
     -moz-appearance: none;background-color: #E3E3E3;
     text-indent: 1px;
@@ -1300,6 +1303,8 @@ for(Cookie cookie : cookies){
 				
 			</div>
         </form>
-
+<script>
+    $('.select2').select2();
+</script>
     </body>
 </html>

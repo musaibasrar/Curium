@@ -378,6 +378,9 @@
 <script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
 	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
+	<link href="css/select2.min.css" rel="stylesheet" />
+<script src="js/select2.min.js"></script>
+	
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -579,7 +582,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRight">Item&nbsp;</td>
 							<td ><label>
-									<select name="itemname" id="itemname" class="dropdownlist" style="font-size: 14px;" required>
+									<select name="itemname" id="itemname" class="dropdownlist select2" style="font-size: 16px;" required>
 											<option></option>
 										<c:forEach items="${itemslist}" var="itemslist">
 											<option value="${itemslist.id}">${itemslist.name}</option>
@@ -683,6 +686,9 @@ for(Cookie cookie : cookies){
 
 		</div>
 	</form>
+<script>
+    $('.select2').select2();
+</script>
 	
 </body>
 </html>

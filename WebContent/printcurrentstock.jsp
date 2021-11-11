@@ -243,7 +243,7 @@
 								<td class="datatd"><c:out value="In Stock" /></td>
 							</c:if>
 							
-							<c:if test="${currentstocklist.availablestock < currentstocklist.minstock && currentstocklist.availablestock > 0}">
+							<c:if test="${currentstocklist.availablestock < currentstocklist.minstock && currentstocklist.availablestock > 0.005}">
 								<td class="datatd" style="font-size: 12px;">${status.index+1}</td>
 								<td class="datatd" style="font-size: 12px;"><c:out value="${currentstocklist.messitems.name}" /></td>
 								<td class="datatd" style="font-size: 12px;"><c:out value="${currentstocklist.availablestock}" />&nbsp;&nbsp;<c:out value="${currentstocklist.messitems.unitofmeasure}" /></td>
@@ -251,10 +251,10 @@
 							</c:if>
 							
 							
-							<c:if test="${currentstocklist.availablestock ==  0}">
+							<c:if test="${currentstocklist.availablestock <=  0.005}">
 								<td class="datatd" style="font-size: 12px;">${status.index+1}</td>
 								<td class="datatd" style="font-size: 12px;"><c:out value="${currentstocklist.messitems.name}" /></td>
-								<td class="datatd" style="font-size: 12px;"><c:out value="${currentstocklist.availablestock}" />&nbsp;&nbsp;<c:out value="${currentstocklist.messitems.unitofmeasure}" /></td>
+								<td class="datatd" style="font-size: 12px;"><c:out value="0.0" />&nbsp;&nbsp;<c:out value="${currentstocklist.messitems.unitofmeasure}" /></td>
 								<td class="datatd"><c:out value="Out of Stock" /></td>
 							</c:if>
 							

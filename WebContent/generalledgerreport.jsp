@@ -338,6 +338,8 @@
 	src="js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
 	src="js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	<link href="css/select2.min.css" rel="stylesheet" />
+<script src="js/select2.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -498,7 +500,7 @@ for(Cookie cookie : cookies){
 						<tr>
 						
 						<td class="alignRight">Select Account</td>
-							<td><label> <select name="accountid" id="accountid" style="width: 230px" required>
+							<td><label> <select name="accountid" id="accountid" class="select2" style="width: 230px" required>
 										<option selected></option>
 									
 									  <c:forEach items="${ledgeraccountdetails}" var="ledger">
@@ -671,6 +673,9 @@ for(Cookie cookie : cookies){
 
 
 	</form>
+<script>
+    $('.select2').select2();
+</script>
 
 </body>
 </html>

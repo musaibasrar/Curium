@@ -437,13 +437,17 @@ for(Cookie cookie : cookies){
 					
 					<c:forEach items="${liabilitiesLedgeraccount}" var="currentliabilitiesledgeraccount">
 
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: left"><c:out value="${currentliabilitiesledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-							<td class="dataText" style="text-align: right;"><c:out value="${currentliabilitiesledgeraccount.value}" /></td>
-
-						</tr>
+						<c:if test="${currentliabilitiesledgeraccount.value != 0}">
+						
+							<tr class="trClass" style="border-color: #000000" border="1"
+								cellpadding="1" cellspacing="1">
+								<td class="dataText" style="text-align: left"><c:out value="${currentliabilitiesledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td class="dataText" style="text-align: right;"><c:out value="${currentliabilitiesledgeraccount.value}" /></td>
+	
+							</tr>
+						
+						</c:if>
 					</c:forEach>
 					
 					<tr class="trClass" style="border-color: #000000" border="1"

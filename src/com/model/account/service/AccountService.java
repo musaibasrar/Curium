@@ -533,16 +533,22 @@ public class AccountService {
 			switch(groupId){
 			case 1: 
 					assets = assets.add(accountdetails.getCurrentbalance());
-					assetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+						assetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					}
 					break;
 			case 2: 
 					liabilities = liabilities.add(accountdetails.getCurrentbalance());
-					liabilitiesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+						liabilitiesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					}	
 					break;
 					
 			case 3:
 					reserves = reserves.add(accountdetails.getCurrentbalance());
-					reservesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+						reservesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					}
 					break;
 
 			default:
@@ -747,24 +753,28 @@ public class AccountService {
 					
 					BigDecimal totalAmount = getTotalBalance(accountDetails,voucherTransactions);
 					
-					accountBalanceMap.put(accountDetails, totalAmount);
+					if(totalAmount.compareTo(BigDecimal.ZERO) != 0 ) {
 					
-					if(accountDetails.getAccountGroupMaster().getAccountgroupid()==1 || accountDetails.getAccountGroupMaster().getAccountgroupid()==5) {
+						accountBalanceMap.put(accountDetails, totalAmount);
 						
-						if(totalAmount.signum() >= 0) {
-							debitAllAcc = debitAllAcc.add(totalAmount);
-						}else{
-							creditAllAcc = creditAllAcc.add(totalAmount.negate());
+						if(accountDetails.getAccountGroupMaster().getAccountgroupid()==1 || accountDetails.getAccountGroupMaster().getAccountgroupid()==5) {
+							
+							if(totalAmount.signum() >= 0) {
+								debitAllAcc = debitAllAcc.add(totalAmount);
+							}else{
+								creditAllAcc = creditAllAcc.add(totalAmount.negate());
+							}
+							
+						}else if(accountDetails.getAccountGroupMaster().getAccountgroupid()==2 || accountDetails.getAccountGroupMaster().getAccountgroupid()==3 || accountDetails.getAccountGroupMaster().getAccountgroupid()==4){
+							
+							if(totalAmount.signum() >= 0) {
+								creditAllAcc = creditAllAcc.add(totalAmount);
+							}else{
+								debitAllAcc = debitAllAcc.add(totalAmount.negate());
+							}
 						}
 						
-					}else if(accountDetails.getAccountGroupMaster().getAccountgroupid()==2 || accountDetails.getAccountGroupMaster().getAccountgroupid()==3 || accountDetails.getAccountGroupMaster().getAccountgroupid()==4){
-						
-						if(totalAmount.signum() >= 0) {
-							creditAllAcc = creditAllAcc.add(totalAmount);
-						}else{
-							debitAllAcc = debitAllAcc.add(totalAmount.negate());
-						}
-					}
+					 }
 				}
 				request.setAttribute("accountdetailsbalanceMap", accountBalanceMap);
 				request.setAttribute("credittotal", creditAllAcc);
@@ -1057,22 +1067,24 @@ public class AccountService {
 					
 						BigDecimal totalAmount = getTotalBalance(accountDetails,voucherTransactions);
 					
-						int groupId = accountDetails.getAccountGroupMaster().getAccountgroupid();
-	
-						switch(groupId){
+						if(totalAmount.compareTo(BigDecimal.ZERO) != 0 ) {
 						
-						case 4: 
-								totalIncome = totalIncome.add(totalAmount);
-								incomeLedgersAccount.put(accountDetails, totalAmount);
-								break;
-						case 5: 
-								totalExpense = totalExpense.add(totalAmount);
-								expenseLedgersAccount.put(accountDetails, totalAmount);
-								break;
-						default:
-								
-						}
-						
+							int groupId = accountDetails.getAccountGroupMaster().getAccountgroupid();
+		
+							switch(groupId){
+							
+							case 4: 
+									totalIncome = totalIncome.add(totalAmount);
+									incomeLedgersAccount.put(accountDetails, totalAmount);
+									break;
+							case 5: 
+									totalExpense = totalExpense.add(totalAmount);
+									expenseLedgersAccount.put(accountDetails, totalAmount);
+									break;
+							default:
+									
+							}
+						  }
 						}
 					}
 		//group 1

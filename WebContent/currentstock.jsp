@@ -543,16 +543,16 @@ for(Cookie cookie : cookies){
 						  <td class="dataTextLeft"><c:out value="${currentstocklist.availablestock}" />&nbsp;&nbsp;<c:out value="${currentstocklist.messitems.unitofmeasure}" /></td>
 						  <td class="dataTextLeft"><c:out value="In Stock" /></td>
 						  </c:if>
-						  <c:if test="${currentstocklist.availablestock < currentstocklist.minstock && currentstocklist.availablestock > 0 || currentstocklist.availablestock == currentstocklist.minstock}">
+						  <c:if test="${currentstocklist.availablestock < currentstocklist.minstock && currentstocklist.availablestock > 0.005 || currentstocklist.availablestock == currentstocklist.minstock}">
 						  <td class="dataText"><div class="squareminstock"></div></td>
 						  <td class="dataTextLeft"><span><c:out value="${currentstocklist.messitems.name}" /></span></td>
 						  <td class="dataTextLeft"><c:out value="${currentstocklist.availablestock}" />&nbsp;&nbsp;<c:out value="${currentstocklist.messitems.unitofmeasure}" /></td>
 						  <td class="dataTextLeft"><c:out value="Min Stock" /></td>
 						  </c:if>
-						  <c:if test="${currentstocklist.availablestock <=  0}">
+						  <c:if test="${currentstocklist.availablestock <=  0.005}">
 						  <td class="dataText" ><div class="squareoutofstock"></div></td>
 						  <td class="dataTextLeft" ><span><c:out value="${currentstocklist.messitems.name}" /></span></td>
-						  <td class="dataTextLeft" ><c:out value="${currentstocklist.availablestock}" />&nbsp;&nbsp;<c:out value="${currentstocklist.messitems.unitofmeasure}" /></td>
+						  <td class="dataTextLeft" ><c:out value="0.0" />&nbsp;&nbsp;<c:out value="${currentstocklist.messitems.unitofmeasure}" /></td>
 						  <td class="dataTextLeft" ><c:out value="Out of Stock" /></td>
 						  </c:if>
 						</tr>

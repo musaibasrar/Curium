@@ -377,7 +377,7 @@
 			changeYear : true,
 			changeMonth : true,
 			dateFormat: 'dd/mm/yy',
-			yearRange: "-50:+0"
+			yearRange: "-2:+2"
 		});
 		$("#anim").change(
 				function() {
@@ -390,7 +390,7 @@
 			changeYear : true,
 			changeMonth : true,
 			dateFormat: 'dd/mm/yy',
-			yearRange: "-50:+0"
+			yearRange: "-2:+2"
 		});
 		$("#anim").change(
 				function() {
