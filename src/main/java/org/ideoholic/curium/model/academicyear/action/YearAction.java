@@ -34,7 +34,7 @@ public class YearAction {
 	
 	@PostMapping("/saveYear")
 	public String saveYear() { 
-		
+		System.out.println("Action is viewAllExpenses");
 		if(new YearService(request, response).saveYear()){
 			return "yearsaved";
 		}else{
@@ -46,6 +46,7 @@ public class YearAction {
 	
 	@GetMapping("/updateYear")
 	private String updateYear() {
+		System.out.println("Action is addExpenses");
 		 new YearService(request, response).updateYear();
 	            return "academicyear";
 	       
