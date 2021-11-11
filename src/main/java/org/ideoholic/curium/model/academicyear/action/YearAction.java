@@ -11,58 +11,46 @@ import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.student.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Musaib_2
  * 
  */
+
+@Controller
+@RequestMapping("/YearProcess")
 public class YearAction {
 
+	@Autowired
 	HttpServletRequest request;
+	@Autowired
 	HttpServletResponse response;
-	HttpSession httpSession;
-	String url;
-
-	public YearAction(HttpServletRequest request,
-			HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
-	public String execute(String action) {
-		// TODO Auto-generated method stub
-		if (action.equalsIgnoreCase("saveYear")) {
-			System.out.println("Action is viewAllExpenses");
-			url = saveYear();
-		} else if (action.equalsIgnoreCase("updateYear")) {
-			System.out.println("Action is addExpenses");
-			url = updateYear();
-		}
-		return url;
-	}
-
 	
-
 	
-
-	private String saveYear() { 
-		
+	@PostMapping("/saveYear")
+	public String saveYear() { 
+		System.out.println("Action is viewAllExpenses");
 		if(new YearService(request, response).saveYear()){
-			return "yearsaved.jsp";
+			return "yearsaved";
 		}else{
-		return "error.jsp";
+		return "error";
 		}
 		
     }
 
+	
+	@GetMapping("/updateYear")
 	private String updateYear() {
+		System.out.println("Action is addExpenses");
 		 new YearService(request, response).updateYear();
-	            return "academicyear.jsp";
+	            return "academicyear";
 	       
 		
 	}
-
-	
 
 }
