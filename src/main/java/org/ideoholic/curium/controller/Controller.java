@@ -70,8 +70,6 @@ public class Controller extends HttpServlet {
      }else if("SubjectDetailsProcess".equalsIgnoreCase(process)){
          nextUrl= new SubjectDetailsAction(request, response).execute(action);
      }else if("printids".equalsIgnoreCase(process)){
-         nextUrl= new PrintIdsAction(request, response).execute(action,page);
-     }else if("FeesDetails".equalsIgnoreCase(process)){
          nextUrl= new FeesDetailsAction(request, response).execute(action,page);
      }else if("SMSProcess".equalsIgnoreCase(process)){
          nextUrl= new SmsAction(request, response).execute(action);
