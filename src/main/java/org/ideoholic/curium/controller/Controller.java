@@ -69,7 +69,7 @@ public class Controller extends HttpServlet {
          nextUrl= new ExamDetailsAction(request, response).execute(action);
      }else if("SubjectDetailsProcess".equalsIgnoreCase(process)){
          nextUrl= new SubjectDetailsAction(request, response).execute(action);
-     }else if("printids".equalsIgnoreCase(process)){
+     }else if("FeesDetails".equalsIgnoreCase(process)){
          nextUrl= new FeesDetailsAction(request, response).execute(action,page);
      }else if("SMSProcess".equalsIgnoreCase(process)){
          nextUrl= new SmsAction(request, response).execute(action);

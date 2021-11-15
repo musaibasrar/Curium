@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 
  */
 @Controller
-@RequestMapping("/Printids")
+@RequestMapping("/printids")
 public class PrintIdsAction {
 
 	@Autowired
@@ -66,7 +66,7 @@ public class PrintIdsAction {
         return "generateids";
 	}
 
-	@PostMapping("/searchDetails")
+	@PostMapping("/printPreview")
 	public String printPreview() {
 
 		new PrintIdsService(request, response).printMultiple();
