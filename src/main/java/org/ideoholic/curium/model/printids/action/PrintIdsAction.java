@@ -12,77 +12,63 @@ import org.ideoholic.curium.model.printids.service.PrintIdsService;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Musaib_2
  * 
  */
+@Controller
+@RequestMapping("/printids")
 public class PrintIdsAction {
 
+	@Autowired
 	HttpServletRequest request;
+	@Autowired
 	HttpServletResponse response;
-	HttpSession httpSession;
-	String url;
 
-	public PrintIdsAction(HttpServletRequest request,
-			HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
+	@PostMapping("/updateCardValidity")
+	public String updateCardValidity() {
 
-	public String execute(String action, String page) {
-		// TODO Auto-generated method stub
-		if (action.equalsIgnoreCase("printpreview")) {
-			url = printPreview();
-		}else if (action.equalsIgnoreCase("searchDetails")) {
-			url = searchDetails();
-		}else if (action.equalsIgnoreCase("generateIds")) {
-			url = generateIds();
-		}else if (action.equalsIgnoreCase("cardvalidity")) {
-			url = cardValidity();
-		}else if (action.equalsIgnoreCase("searchDetailsCardValidity")) {
-			url = searchDetailsCardValidity();
-		}else if (action.equalsIgnoreCase("updateCardValidity")) {
-			url = updateCardValidity();
-		}
-		return url;
-	}
-	
-	
-	private String updateCardValidity() {
-		
 		new PrintIdsService(request, response).updateCardValidity();
-        return "cardvalidity.jsp";
-        
+		return "cardvalidity";
+
 	}
 
-	private String searchDetailsCardValidity() {
-        
+	@PostMapping("/searchDetailsCardValidity")
+	public String searchDetailsCardValidity() {
+
 		new PrintIdsService(request, response).searchDetailsCardValidity();
-        return "cardvalidity.jsp";
+		return "cardvalidity";
 	}
 
-	private String cardValidity() {
-		 new StandardService(request, response).viewClasses();
-		return "cardvalidity.jsp";
+	@GetMapping("/cardValidity")
+	public String cardValidity() {
+		new StandardService(request, response).viewClasses();
+		return "cardvalidity";
 	}
 
-	private String generateIds() {
-		 new StandardService(request, response).viewClasses();
-		return "generateids.jsp";
+	@GetMapping("/generateIds")
+	public String generateIds() {
+		new StandardService(request, response).viewClasses();
+		return "generateids";
 	}
 
-	private String searchDetails() {
-        
+	@PostMapping("/searchDetails")
+	public String searchDetails() {
+
 		new PrintIdsService(request, response).searchDetails();
-        return "generateids.jsp";
+		return "generateids";
 	}
 
-	private String printPreview() {
+	@PostMapping("/printPreview")
+	public String printPreview() {
 
 		new PrintIdsService(request, response).printMultiple();
-        return "printpreview.jsp";
-	}
-
+		return "printpreview";
+	}
 }
