@@ -29,48 +29,46 @@ public class PrintIdsAction {
 	@Autowired
 	HttpServletRequest request;
 	@Autowired
-	HttpServletResponse response;	
-	
-	
+	HttpServletResponse response;
+
 	@PostMapping("/updateCardValidity")
 	public String updateCardValidity() {
-		
+
 		new PrintIdsService(request, response).updateCardValidity();
-        return "cardvalidity";
-        
+		return "cardvalidity";
+
 	}
 
 	@PostMapping("/searchDetailsCardValidity")
 	public String searchDetailsCardValidity() {
-        
+
 		new PrintIdsService(request, response).searchDetailsCardValidity();
-        return "cardvalidity";
+		return "cardvalidity";
 	}
 
 	@GetMapping("/cardValidity")
 	public String cardValidity() {
-		 new StandardService(request, response).viewClasses();
+		new StandardService(request, response).viewClasses();
 		return "cardvalidity";
 	}
 
 	@GetMapping("/generateIds")
 	public String generateIds() {
-		 new StandardService(request, response).viewClasses();
+		new StandardService(request, response).viewClasses();
 		return "generateids";
 	}
 
 	@PostMapping("/searchDetails")
 	public String searchDetails() {
-        
+
 		new PrintIdsService(request, response).searchDetails();
-        return "generateids";
+		return "generateids";
 	}
 
 	@PostMapping("/printPreview")
 	public String printPreview() {
 
 		new PrintIdsService(request, response).printMultiple();
-        return "printpreview";
-	}
-
+		return "printpreview";
+	}
 }
