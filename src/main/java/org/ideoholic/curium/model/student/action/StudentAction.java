@@ -10,256 +10,216 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @author Musaib_2
  * 
  */
+@Controller
+@RequestMapping("/StudentProcess")
 public class StudentAction {
+	@Autowired
+	HttpServletRequest request;
+	@Autowired
+	HttpServletResponse response;
+	@Autowired
+	HttpSession httpSession;
 
-        HttpServletRequest request;
-        HttpServletResponse response;
-        HttpSession httpSession;
-        String url;
+	@PostMapping("/multiClassSearch")
+	public String multiClassSearch() {
+		new StampFeesService(request, response).multiClassSearch();
+		return "studentsdetailsreports";
+	}
 
-        public StudentAction(HttpServletRequest request,
-                        HttpServletResponse response) {
-                this.request = request;
-                this.response = response;
-                this.httpSession = request.getSession();
-        }
+	@GetMapping("/advanceSearchStudents")
+	public String advanceSearchStudents() {
+		new StandardService(request, response).viewClasses();
+		return "AdvanceSearch";
+	}
 
-        public String execute(String action, String page) {
-                // TODO Auto-generated method stub
-                if (action.equalsIgnoreCase("viewAll")) {
-                        url = viewAll();
-                }else if (action.equalsIgnoreCase("viewAllStudents")) {
-                        url = viewAllStudents();
-                }else if (action.equalsIgnoreCase("viewAllStudentsWithParents")) {
-                        url = viewAllStudentsWithParents();
-                }else if (action.equalsIgnoreCase("AddStudent")) {
-                        url = addStudent();
-                }else if (action.equalsIgnoreCase("ViewDetails")) {
-                        url = viewStudent();
-                }else if (action.equalsIgnoreCase("updateStudentDetails")) {
-                        url = updateStudentDetails();
-                }else if (action.equalsIgnoreCase("updateStudent")) {
-                        url = updateStudent();
-                }else if (action.equalsIgnoreCase("archiveMultiple")) {
-                        url = archiveMultiple();
-                }else if (action.equalsIgnoreCase("archiveViewAll")) {
-                        url = archiveViewAll();
-                }else if (action.equalsIgnoreCase("deleteMultiple")) {
-                        url = deleteMultiple();
-                }else if (action.equalsIgnoreCase("restoreMultiple")) {
-                        url = restoreMultiple();
-                }else if (action.equalsIgnoreCase("promoteClass")) {
-                        url = promoteClass();
-                }else if (action.equalsIgnoreCase("ViewFeesStructure")) {
-                        url = ViewFeesStructure();
-                }else if (action.equalsIgnoreCase("feesStructurePerYear")) {
-                        url = feesStructurePerYear();
-                }else if (action.equalsIgnoreCase("exportDataForStudents")) {
-                        url = exportDataForStudents();
-                }else if (action.equalsIgnoreCase("searchForStudents")) {
-                        url = searchForStudents();
-                }else if (action.equalsIgnoreCase("searchStudentsForBonafide")) {
-                        url = searchStudentsForBonafide();
-                }else if (action.equalsIgnoreCase("GenerateBonafide")) {
-                        url = generateBonafide();
-                }else if (action.equalsIgnoreCase("download")) {
-                        url = downlaodFile();
-                }else if (action.equalsIgnoreCase("addNew")) {
-                    url = addNew();
-                }else if (action.equalsIgnoreCase("viewAllSuperAdmin")) {
-                    url = viewAllSuperAdmin();
-                }else if (action.equalsIgnoreCase("advanceSearchStudents")) {
-                    url = advanceSearchStudents();
-                }else if (action.equalsIgnoreCase("multiClassSearch")) {
-                    url = multiClassSearch();
-            }
-                return url;
-        }
-        
+	@RequestMapping(value = "/viewAllSuperAdmin", method = { RequestMethod.GET, RequestMethod.POST })
+	public String viewAllSuperAdmin() {
+		new StudentService(request, response).viewAllStudentsSuperAdmin();
+		return "viewAllWithParents";
+	}
 
-    private String multiClassSearch() {
+	@PostMapping("/addNew")
+	public String addNew() {
+		new StandardService(request, response).viewClasses();
+		return new StudentService(request, response).addNew();
+	}
 
-        new StampFeesService(request, response).multiClassSearch();
-        return "studentsdetailsreports.jsp";
-
+	@PostMapping("/download")
+	public String downlaodFile() {
+		if (new StudentService(request, response).downlaodFile()) {
+			return "exportsuccess";
 		}
+		return "exportfailure";
+	}
 
-	private String advanceSearchStudents() {
-    		new StandardService(request, response).viewClasses();
-			return "AdvanceSearch.jsp";
+	@GetMapping("/GenerateBonafide")
+	public String generateBonafide() {
+		String result = new StudentService(request, response).generateBonafide();
+		if (result != null) {
+			return result;
+		} else {
+			return "bonafidefailure";
 		}
+	}
 
-	private String viewAllSuperAdmin() {
-            new StudentService(request, response).viewAllStudentsSuperAdmin();
-                return "viewAllWithParents.jsp";
-        }
+	@PostMapping("/searchStudentsForBonafide")
+	public String searchStudentsForBonafide() {
+		new StampFeesService(request, response).advanceSearch();
+		return "studentsdetailsbonafide";
+	}
 
-    private String addNew() {
-            new StandardService(request, response).viewClasses();
-            return new StudentService(request, response).addNew();
-        }
+	@GetMapping("/searchForStudents")
+	public String searchForStudents() {
+		new StampFeesService(request, response).advanceSearch();
+		return "studentsdetailsreports";
+	}
 
-        private String downlaodFile() {
-                if(new StudentService(request, response).downlaodFile()){
-                        return "exportsuccess.jsp";
-                }
-        return "exportfailure.jsp";
-        }
+	@GetMapping("/feesStructurePerYear")
+	public String feesStructurePerYear() {
+		new StudentService(request, response).viewfeesStructurePerYear();
+		return "student_details_feesstructure";
+	}
 
-        private String generateBonafide() {
-                
-                String result = new StudentService(request, response).generateBonafide();
-                if (result!=null) {
-            return result;
-        } else {
-            return "bonafidefailure.jsp";
-        }
-        }
+	@GetMapping("/ViewFeesStructure")
+	public String ViewFeesStructure() {
+		if (new StudentService(request, response).viewDetailsOfStudent()) {
+			return "student_details_feesstructure";
+		} else {
+			return "viewAll";
+		}
+	}
 
-        private String searchStudentsForBonafide() {
-                new StampFeesService(request, response).advanceSearch();
-        return "studentsdetailsbonafide.jsp";
-        }
+	@GetMapping("/viewAllStudentsWithParents")
+	public String viewAllStudentsWithParents() {
+		new StudentService(request, response).viewAllStudentsParents();
+		return "viewAllWithParents";
+	}
 
-        private String searchForStudents() {
-                new StampFeesService(request, response).advanceSearch();
-        return "studentsdetailsreports.jsp";
-        }
+	@GetMapping("/viewAllStudents")
+	public String viewAllStudents() {
+		new StudentService(request, response).viewAllStudentsParents();
+		return "viewAllWithParents";
+	}
 
-        private String feesStructurePerYear() {
-                
-                
-                new StudentService(request, response).viewfeesStructurePerYear();
-        return "student_details_feesstructure.jsp";
-        
-        }
+	@PostMapping("/promoteClass")
+	public String promoteClass() {
+		if (new StudentService(request, response).promoteMultiple()) {
+			return "successpromote";
+		}
+		return "failurepromote";
+	}
 
-        private String ViewFeesStructure() {
-                
-                if (new StudentService(request, response).viewDetailsOfStudent()) {
-            return "student_details_feesstructure.jsp";
-        } else {
-            return "viewAll.jsp";
-        }
-        }
+	@PostMapping("/restoreMultiple")
+	public String restoreMultiple() {
+		new StudentService(request, response).restoreMultiple();
+		return viewAll();
+	}
 
-        private String viewAllStudentsWithParents() {
-                new StudentService(request, response).viewAllStudentsParents();
-        return "viewAllWithParents.jsp";
-        }
+	@PostMapping("/deleteMultiple")
+	public String deleteMultiple() {
+		new StudentService(request, response).deleteMultiple();
+		return archiveViewAll();
+	}
 
-        private String viewAllStudents() {
-                
-                new StudentService(request, response).viewAllStudentsParents();
-        return "viewAllWithParents.jsp";
-        }
+	@GetMapping("/archiveViewAll")
+	public String archiveViewAll() {
+		new StudentService(request, response).viewAllStudentsArchive();
+		System.out.println("IN action's view all Archive");
+		return "ArchiveviewAll";
+	}
 
-        private String promoteClass() {
-                if( new StudentService(request, response).promoteMultiple()){
-                        return "successpromote.jsp";
-                }
-               return "failurepromote.jsp"; 
-        }
+	@PostMapping("/archiveMultiple")
+	public String archiveMultiple() {
+		new StudentService(request, response).archiveMultiple();
+		return viewAll();
+	}
 
-        private String restoreMultiple() {
-                new StudentService(request, response).restoreMultiple();
-            return "Controller?process=StudentProcess&action=viewAll";// TODO Auto-generated method stub
-                
-        }
+	@PostMapping("/updateStudent")
+	public String updateStudent(HttpServletRequest request, HttpServletResponse response) {
+		String idbranchid = new StudentService(request, response).updateStudent();
+		String id[] = idbranchid.split("_");
+		return viewStudent(id[0], id[1]);
+	}
 
-        private String deleteMultiple() {
-                 new StudentService(request, response).deleteMultiple();
-                return "Controller?process=StudentProcess&action=archiveViewAll";
-        }
+	@PostMapping("/updateStudentDetails")
+	public String updateStudentDetails(HttpServletRequest request, HttpServletResponse response) {
+		if (new StudentService(request, response).viewDetailsOfStudent()) {
+			String urlBranchId = request.getParameter("urlbranchid");
+			if ("1".equalsIgnoreCase(urlBranchId) || "2".equalsIgnoreCase(urlBranchId)
+					|| "3".equalsIgnoreCase(urlBranchId)) {
+				return "student_update";
+			} else if (request.getParameter("urlbranchid").equalsIgnoreCase("4")) {
+				return "student_update";
+			} else if (request.getParameter("urlbranchid").equalsIgnoreCase("5")) {
+				return "student_update";
+			}
+			return "student_update";
+		}
+		return "viewAll";
+	}
 
-        private String archiveViewAll() {
-                new StudentService(request, response).viewAllStudentsArchive();
-        System.out.println("IN action's view all Archive");
-        return "ArchiveviewAll.jsp";
-        }
+	@GetMapping("/ViewDetails")
+	public String viewStudent() {
 
-        private String archiveMultiple() {
-        
-    
-    new StudentService(request, response).archiveMultiple();
-    return "Controller?process=StudentProcess&action=viewAll";
-    }
+		if (new StudentService(request, response).viewDetailsOfStudent()) {
+			if (request.getParameter("urlbranchid").equalsIgnoreCase("1")) {
+				return "student_details";
+			} else if (request.getParameter("urlbranchid").equalsIgnoreCase("2")) {
+				return "student_details";
+			} else if (request.getParameter("urlbranchid").equalsIgnoreCase("3")) {
+				return "student_details";
+			} else if (request.getParameter("urlbranchid").equalsIgnoreCase("4")) {
+				return "student_details";
+			} else if (request.getParameter("urlbranchid").equalsIgnoreCase("5")) {
+				return "student_details";
+			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
+				return "student_details_withoutmodify";
+			}
+			return "student_details";
+		} else {
+			return "error";
+		}
+	}
 
-        private String updateStudent() {
-                String idbranchid = new StudentService(request, response).updateStudent();
-                String id[] = idbranchid.split("_");
-                return "Controller?process=StudentProcess&action=viewDetails&id="+id[0]+"&urlbranchid="+id[1];
-        }
+	@PostMapping("/AddStudent")
+	public String addStudent() {
+		if (new StudentService(request, response).addStudent()) {
+			return "saved";
+		} else {
+			return "notSaved";
+		}
+	}
 
-        private String updateStudentDetails() {
-            
-                if (new StudentService(request, response).viewDetailsOfStudent()) {
-                    String urlBranchId = request.getParameter("urlbranchid");
-                    if("1".equalsIgnoreCase(urlBranchId) || "2".equalsIgnoreCase(urlBranchId) || "3".equalsIgnoreCase(urlBranchId)) {
-                        return "student_update.jsp";
-                    }else if(request.getParameter("urlbranchid").equalsIgnoreCase("4")) {
-                        return "student_update.jsp";
-                    }else if(request.getParameter("urlbranchid").equalsIgnoreCase("5")) {
-                        return "student_update.jsp";
-                    }
-                    return "student_update.jsp";
-                }
-                
-        return "viewAll.jsp";
-        }
+	@RequestMapping(value = "/viewAll", method = { RequestMethod.GET, RequestMethod.POST })
+	public String viewAll() {
+		new StudentService(request, response).viewAllStudentsParents();
+		return "viewAllWithParents";
+	}
 
-        private String viewStudent() {
-            
-        if (new StudentService(request, response).viewDetailsOfStudent()) {
-            if(request.getParameter("urlbranchid").equalsIgnoreCase("1")) {
-                return "student_details.jsp";
-            }else if(request.getParameter("urlbranchid").equalsIgnoreCase("2")) {
-                return "student_details.jsp";
-            }else if(request.getParameter("urlbranchid").equalsIgnoreCase("3")) {
-                return "student_details.jsp";
-            }else if(request.getParameter("urlbranchid").equalsIgnoreCase("4")) {
-                return "student_details.jsp";
-            }else if(request.getParameter("urlbranchid").equalsIgnoreCase("5")) {
-                return "student_details.jsp";
-            }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
-                return "student_details_withoutmodify.jsp";
-            }
-            
-            return "student_details.jsp";
-        } else {
-            return "error.jsp";
-        }
-        }
+	@PostMapping("/exportDataForStudents")
+	public String exportDataForStudents() {
+		if (new StudentService(request, response).exportDataForStudents()) {
+			return "exportsuccess";
+		} else {
+			return "exportfailure";
+		}
+	}
 
-        private String addStudent() {
-                 if (new StudentService(request, response).addStudent()) {
-                    return "saved.jsp";
-                } else {
-                    return "notSaved.jsp";
-                }
-                
-        }
-
-        private String viewAll() {
-
-                new StudentService(request, response).viewAllStudentsParents();
-        return "viewAllWithParents.jsp";
-        }
-
-
-        private String exportDataForStudents() {
-                if(new StudentService(request, response).exportDataForStudents()){
-                        return "exportsuccess.jsp";
-                }else{
-                        return "exportfailure.jsp";
-                }
-                
-        }
-
+	private String viewStudent(String id, String branchId) {
+		request.setAttribute("id", id);
+		request.setAttribute("urlbranchid", branchId);
+		return viewStudent();
+	}
 
 }
