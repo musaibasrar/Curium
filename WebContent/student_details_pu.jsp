@@ -835,7 +835,7 @@ for(Cookie cookie : cookies){
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 
                                 <td  class="dataText"><c:out value="${receiptinfo.date}"/></a></td>
-                                <td  class="dataText"><c:out value="${receiptinfo.receiptnumber}"/></a></td>
+                                <td  class="dataText"><c:out value="${receiptinfo.branchreceiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  

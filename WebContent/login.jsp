@@ -130,8 +130,10 @@ form{
                     window.open('index_finance.jsp','_self');
                 }else if(type=='clerk'){
                     window.open('index_clerk.jsp','_self');
-                }else if(type=='finclerk'){
-                    window.open('index_finclerk.jsp','_self');
+                }else if(type=='officeadmin'){
+                    window.open('index_officeadmin.jsp','_self');
+                }else if(type=='officeincharge'){
+                    window.open('index_officeincharge.jsp','_self');
                 }
             }
             else if(!flag1){

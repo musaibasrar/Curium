@@ -308,7 +308,7 @@ public class studentDetailsDAO {
 			
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("From Parents as parents where parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid = "+branchId+" order by registrationnumber desc").setCacheable(true).setCacheRegion("commonregion");
+					.createQuery("From Parents as parents where parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid = "+branchId+" order by registrationnumber ASC").setCacheable(true).setCacheRegion("commonregion");
 			query.setFirstResult(offset);   
 			query.setMaxResults(noOfRecords);
 			results = query.getResultList();
