@@ -32,6 +32,9 @@
           <property name="branchid" type="int">
             <column name="branchid" />
         </property>
+        <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
         <set name="periodDetails" table="perioddetails"
 				 lazy="false" cascade="all" >
             <key>

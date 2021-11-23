@@ -24,17 +24,19 @@ public class Subject implements java.io.Serializable {
 	private int branchid;
 	private String examname;
 	private String examclass;
-
+	private int userid;
+	
 	public Subject() {
 	}
 
-	public Subject(String subjectname, Integer minmarks, Integer maxmarks,int branchid, String examname, String examclass) {
+	public Subject(String subjectname, Integer minmarks, Integer maxmarks,int branchid, String examname, String examclass, int userid) {
 		this.subjectname = subjectname;
 		this.minmarks = minmarks;
 		this.maxmarks = maxmarks;
 		this.branchid = branchid;
 		this.examname = examname;
 		this.examclass = examclass;
+		this.userid = userid;
 	}
 
 	@Id
@@ -99,5 +101,13 @@ public class Subject implements java.io.Serializable {
 
 	public void setExamclass(String examclass) {
 		this.examclass = examclass;
+	}
+
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

@@ -37,13 +37,14 @@ public class Leaveapplication implements java.io.Serializable {
 	private Date dateofapproval;
 	private Teacher teacher;
 	private int branchid;
+	private int userid;
 	
 	public Leaveapplication() {
 	}
 
 	public Leaveapplication(Integer idteacher, Date fromdate, Date todate,
 			String leavetype, String reason, String academicyear, String status, Integer totalleaves, Date dateofapply, Date dateofapproval,
-			Teacher teacher, int branchid) {
+			Teacher teacher, int branchid, int userid) {
 		this.idteacher = idteacher;
 		this.fromdate = fromdate;
 		this.todate = todate;
@@ -56,6 +57,7 @@ public class Leaveapplication implements java.io.Serializable {
 		this.dateofapproval = dateofapproval;
 		this.teacher = teacher;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -176,5 +178,13 @@ public class Leaveapplication implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

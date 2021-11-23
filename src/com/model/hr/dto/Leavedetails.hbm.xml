@@ -23,6 +23,9 @@
         <property name="branchid" type="int">
             <column name="branchid" />
         </property>
+        <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
         <many-to-one name="leaveTypeMaster" class="com.model.hr.dto.Leavetypemaster"
             column="idleavetypemaster" lazy="false" />
        <many-to-one name="teacher" class="com.model.employee.dto.Teacher"

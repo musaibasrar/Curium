@@ -20,13 +20,15 @@ public class Exams implements java.io.Serializable {
 	private Integer exid;
 	private String examname;
 	private int branchid;
+	private int userid;
 	
 	public Exams() {
 	}
 
-	public Exams(String examname, int branchid) {
+	public Exams(String examname, int branchid, int userid) {
 		this.examname = examname;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -56,5 +58,14 @@ public class Exams implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+	
+
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }
