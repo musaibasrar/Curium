@@ -590,15 +590,15 @@ public class StudentService {
 				String classStudying = student.getClassstudying();
 				if (!classStudying.equalsIgnoreCase("")) {
 					String[] classParts = classStudying.split("--");
-					request.setAttribute("classstudying", classParts[0]);
-					request.setAttribute("secstudying", "");
+					httpSession.setAttribute("classstudying", classParts[0]);
+					httpSession.setAttribute("secstudying", "");
 					if(classParts.length>1) {
-						request.setAttribute("secstudying", classParts[1]);
+						httpSession.setAttribute("secstudying", classParts[1]);
 					}
 					
 				} else {
-					request.setAttribute("classstudying", classStudying);
-					request.setAttribute("secstudying", "");
+					httpSession.setAttribute("classstudying", classStudying);
+					httpSession.setAttribute("secstudying", "");
 				}
 
 				/*
