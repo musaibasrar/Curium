@@ -110,14 +110,9 @@ public class Student implements java.io.Serializable {
 			Integer notcissued, Date datetcissued, String guardiandetails, int branchid,
 			String languagesstudied, String instructionmediumlastschool,
 			Integer passedout, Integer droppedout, Integer leftout, Integer semester,String stream,String mediumofinstruction,
-			 String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,String studentscaste,
-<<<<<<< HEAD
-			 String socialcategory,Integer belongtobpl,String bplcardno,String bhagyalakshmibondnumber,
-			 String disabilitychild,String specialcategory, Integer sts, Integer rte, String bankname, String bankbranch, String accno, String bankifsc) {
-=======
-			 String socialcategory,Integer belongtobpl,String lastcourse,String lastfirstlanguage,
-			 String lastsecondlanguage,String specialcategory, String registrationnumber, Integer rte, String bankname, String bankbranch, String accno, String bankifsc, int userid) {
->>>>>>> 532ef6e... added userid
+			String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,String studentscaste,
+			String socialcategory,Integer belongtobpl,String lastcourse,String lastfirstlanguage,
+			String lastsecondlanguage,String specialcategory, String registrationnumber, Integer rte, String bankname, String bankbranch, String accno, String bankifsc, int userid) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
