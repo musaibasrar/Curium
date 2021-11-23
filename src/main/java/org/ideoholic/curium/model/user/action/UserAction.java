@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/UserProcess")
@@ -61,14 +62,14 @@ public class UserAction {
 	}
 
 	@PostMapping("/authenticateUser")
-	public String authenticateUser(Model model) {
+	public ModelAndView authenticateUser() {
+		ModelAndView model = new ModelAndView("login");
 		if (new UserService(request, response).authenticateUser()) {
-			model.addAttribute("login_success", true);
-			return "login";
+			model.addObject("login_success", true);
 		} else {
-			model.addAttribute("login_success", false);
-			return "login";
+			model.addObject("login_success", false);
 		}
+		return model;
 	}
 
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })

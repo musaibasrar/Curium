@@ -32,6 +32,11 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+
 		<!-- Hibernate related dependencies -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -45,6 +50,11 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-ehcache</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+		</dependency>
+
 		<!-- EHCache Core APIs -->
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
@@ -92,16 +102,6 @@
 			<artifactId>jfreechart</artifactId>
 			<version>1.5.0</version>
 		</dependency>
-		<!-- Logger related packages
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-		</dependency>
-		 -->
 
 		<!-- Commonly used commons packages -->
 		<dependency>
@@ -141,14 +141,27 @@
 		</dependency>
 
 		<!-- Dependency to auto-trigger an application restart or live reload in 
-			dev environment whenever Java class or static files on class-path change -->
+			dev environment whenever Java class or static files on class-path change
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
-		</dependency>
+		</dependency>  -->
 
+		<!-- Used for in-memory db for testing -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+        </dependency>
 		<!-- Support for unit and integration test-cases -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
