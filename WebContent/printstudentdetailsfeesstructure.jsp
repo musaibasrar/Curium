@@ -1,5 +1,5 @@
 <%-- 
-    Document   : Print Fees Concession Report
+    Document   : Print Student details fees structure Report
     Created on : JAN 8 2021, 2:01 PM
     Author     : Musaib
 --%>
@@ -13,19 +13,20 @@
 
 <html >
 <head>
-<title>Fees Concession Report</title>
+<title>Students Details Fees Structure Report</title>
 <style type="text/css">
 <!--
 .headerText {
 	width: 10px;
 	font-family: Tahoma;
 	font-size: 12px;
-	color: #FFFFFF;
+	color: black;
 	font-weight: normal;
 	width: auto;
 	height: 22px;
 	vertical-align: middle;
 	text-align: center;
+	border: 1px solid #000000;
 }
 
 .headerTextLeft {
@@ -91,7 +92,10 @@
 	font-size: 12px;
 	letter-spacing: normal;
 	text-align: center;
+	border: 1px solid #000000;
 }
+
+
 -->
 .datatable {
     font-family: arial, sans-serif;
@@ -215,9 +219,10 @@
 
 
 
-<body style="text-align: center" class="bodymargin">
-<c:set var="itemTotal" value="${0}" />
-	<form method="post" class="bodymargin">
+<body>
+        <jsp:useBean id="now" class="java.util.Date" />
+        <fmt:formatDate var="today" type="date" value="${now}" />
+        <form  method="post" id="form1">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
@@ -228,12 +233,12 @@
 				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
 				<label class="addressLine" style="padding-left: 20px;">${branchaddress}</label><br>
 				<label class="addressLine" style="padding-left: 30px;">Contact:&nbsp;${branchcontact}</label><br>
-				<label class="addressLine" style="text-decoration: underline;">Concession Report</label><br>
+				<label class="addressLine" style="text-decoration: underline;">Fees Card</label><br>
 				<%-- <label class="addressLineTwo">${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;${issuedtoselected}&nbsp;&nbsp;${purposeselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp;
 				</label> --%>
 				</td>
 			</tr>
-	</table>
+		</table>
 
 			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -244,67 +249,76 @@
 
                 </tr>
             </TABLE>
-		
-            <table class="datatable">
-            <thead>
-            	
- 				 <tr>
- 				 		<th class=datath>Sl.No</th>
- 				 		<th class=datath>Adm. No.</th>
- 				 		<th class="datath">Student Name</th>
-						<th class="datath">Class</th>
-						<th class="datath">Fees Cat.</th>
-						<th class="datath">Fees Amount</th>
-						<th class="datath">Inst.</th>
-						<th class="datath">Total Fees Amount</th>
-						<th class="datath">Concession Amount</th>
- 				 </tr>
- 				 
- 			 </thead>
- 		 
-			<tbody>
-					<c:forEach items="${studentsfeesstructuredetailsconcession}" var="students" >
-						
-						<c:forEach items="${students.value}" var="fees" varStatus="status">
 
-							<tr>
-									<td class="datatd" style="font-size: 9px;">${status.index+1}</td>
-									<td class="datatd" style="font-size: 9px;"><c:out value="${students.key.student.admissionnumber}" /></td>
-									<td class="datatd" style="font-size: 9px;"><c:out value="${students.key.student.name}" /></td>
-									<td class="datatd" style="font-size: 9px;"><c:out value="${students.key.student.classstudying}" /></td>
-									<td class="datatd" style="font-size: 9px;"><c:out value="${fees.feescategory.feescategoryname}" /></td>
-									<td class="datatdright" style="font-size: 9px;"><c:out value="${fees.feescategory.amount}" /></td>
-									<td class="datatd" style="font-size: 9px;"><c:out value="${fees.totalinstallment}" /></td>
-									<td class="datatdright" style="font-size: 9px;"><c:out value="${fees.feesamount}" /></td>
-									<td class="datatdright" style="font-size: 9px;">
-									<c:set var="itemTotal" value="${itemTotal + fees.concession}" />
-										<c:out value="${fees.concession}" /></td>
-							</tr>	
-						</c:forEach>
-					</c:forEach>
-			</tbody>
-				</table>
-			<br>
-			<div style="page-break-inside: avoid;" align="center">
-				<table align="right">
-						<tr>
-							<td align="right">
-							<label style="font-weight: bold;">
-							Grand Total: 
-							<fmt:setLocale value="en_IN" scope="request"/>
-							<fmt:formatNumber type="currency"  value="${itemTotal}" />
-							</label>
-							</td>
-						</tr>
-				</table>
-				<table>
-						<tr>
-							<td>
-								<p><h4>------------- End of The Report ---------- </h4></p>
-							</td>
-						</tr>				
-				</table>
-			</div>
-	</form>
-</body>
+            <table width="100%">
+                <tr>
+                    <td  class="headerTD">Name: &nbsp;<c:out value="${student.name}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td  class="headerTD">Class: &nbsp;<c:out value="${student.classstudying}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                </tr>
+                
+            </table>
+            
+            <TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
+            <div id="accordion" style="width: 100%;height: 100%">
+
+                <div>
+                
+					<div align="center">
+				<h class="dataTextFees">Academic Year : ${academicPerYear}</h>&nbsp;&nbsp;&nbsp;
+				<h class="dataTextFees">Total fees : &#x20B9; ${totalfees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total fees paid : &#x20B9; ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Due Amount : </h>
+                <h class="dataTextDueFees"> &#x20B9; ${dueamount}</h>
+                </div>
+                
+                <TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
+                    <table class="datatable">
+
+                    <thead>
+                        <tr>
+                            <th class="datath" style="text-align: center;">Fees Category</th>
+                            <th class="datath" style="text-align: center;">Fees Amount&nbsp;</th>
+                            <!-- <th class="datath" style="text-align: center;">Installments&nbsp;</th> -->
+                            <th class="datath" style="text-align: center;">Total Fees Amount&nbsp;</th>
+                            <th class="datath" style="text-align: center;">Fees Paid&nbsp;</th>
+                            <th class="datath" style="text-align: center;">Fees Due&nbsp;</th>
+                            <th class="datath" style="text-align: center;">Concession Amount&nbsp;</th>
+                            <th class="datath" style="text-align: center;">Waive Off Amount&nbsp;</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <c:forEach items="${feesstructure}" var="feesstructure">
+                            <tr>
+                                <td class="datatd" style="text-align: left">${feesstructure.feescategory.feescategoryname}</td>
+                                <td class="datatd" style="text-align: right">${feesstructure.feescategory.amount}</td>
+                                <%-- <td class="datatd" style="text-align: center;">${feesstructure.totalinstallment}</td> --%>
+                                <td class="datatd" style="text-align: right">${feesstructure.feesamount}</td>
+                                <td class="datatd" style="text-align: right">${feesstructure.feespaid}</td>
+                                <td class="datatd" style="text-align: right">${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff}</td>
+                                <td class="datatd" style="text-align: right">${feesstructure.concession}</td>
+                                <td class="datatd" style="text-align: right">${feesstructure.waiveoff}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                   
+                </table>
+				
+				
+                </div>
+            </div>
+        </form>
+    </body>
 </html>

@@ -179,7 +179,7 @@ for(Cookie cookie : cookies){
                         <td style="width: 35%">Student Name: <c:out value="${student.name}" /></td>
                         <td style="width: 20%">Admission No:  <c:out value="${student.admissionnumber}" /></td>
                         <td style="width: 20%">Date:  <c:out value="${recieptdate}" /></td>
-                        <td style="width: 20%">Receipt No:  <c:out value="${recieptinfo.receiptnumber}" /></td>
+                        <td style="width: 20%">Receipt No:  <c:out value="${recieptinfo.branchreceiptnumber}" /></td>
 
                     </tr>
 

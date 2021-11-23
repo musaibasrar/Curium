@@ -437,7 +437,9 @@
            
             var students = [
             <c:forEach varStatus="status" items="${studentListFeesCollection}" var="student">{
-                value:'<c:out default="0" value="${student.admissionnumber}" />',
+            	value:'<c:out default="0" value="${student.name}" />',
+                admissionno:'<c:out default="0" value="${student.admissionnumber}" />',
+                regno:'<c:out default="0" value="${student.registrationnumber}" />',
                 name:'<c:out default="0" value="${student.name}" />',
                 classandsec:'<c:out default="0" value="${student.classstudying}" />',
                 id:'<c:out default="0" value="${student.sid}" />',
@@ -446,7 +448,7 @@
             </c:forEach>
         ];
         $(function() {
-            $( "#admno").autocomplete({
+            $( "#studentname").autocomplete({
                 source: students,
                 minLength: 1,
                 change:function(event,ui){
@@ -462,13 +464,14 @@
                     $( "#studentId").val( ui.item.id );
        			  $( "#studentName").val( ui.item.name );
        			$( "#classandsec").val( ui.item.classandsec );
+       			$( "#admissionno").val( ui.item.admissionno );
                     /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
                     return true;
                 }
             }).data( "autocomplete" )._renderItem = function( ul, item ) {
                 return $( "<li></li>" )
                 .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +" </b> </a>" )
+                .append( "<a><b> " + item.value +" / "+item.regno+" </b> </a>" )
                 .appendTo( ul );
             };
             var addFeesButtonID="#addFees";
@@ -757,14 +760,31 @@
         		form1.submit();
             }
             
-            function checkWithDueAmount(duePayment){
-            	var dueAmount = parseInt(document.getElementById("dueamount").value);
-            	var payment = parseInt(duePayment.value);
+            function checkWithDueAmount(duePayment,sfsid){
+            	
+            	var str = duePayment.id;
+            	var res = str.split("_");
+            	
+            	var dueAmount = parseInt(document.getElementById("dueamount_"+res[1]).value);
+            	var payment = parseInt(duePayment.value,10);
+            	document.getElementById(sfsid).checked = true; 
+            	
+            	if(payment<=9 && payment>=1){
+            		duePayment.value = payment;
+            	}
             	
             	if(payment>dueAmount){
             		duePayment.value = 0;
+            		document.getElementById(sfsid).checked = false; 
             		alert('Amount Due to be paid must be lesser than or equals to Due Amount');
             	}
+            	
+            	if(payment<1 || isNaN(payment)){
+            		duePayment.value = 0;
+            		document.getElementById(sfsid).checked = false; 
+            	}
+            	
+            	
             }
             
  function selectPayment(id){
@@ -842,7 +862,7 @@ for(Cookie cookie : cookies){
 }
 %>
     <body>
-        <form id="form1" method="post" onkeypress="if (event.keyCode == 92) addRow();">
+        <form id="form1" method="post">
             <div style="height: 28px">
             <table  width="100%">
                 <thead>
@@ -856,7 +876,7 @@ for(Cookie cookie : cookies){
                     <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">Search Student:&nbsp;&nbsp;&nbsp;&nbsp; 
                     </tr>
                     <tr>
-                    <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
+                    <td style="width: 45%">Student Name: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentname" id="studentname" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
                         
                         <td>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
                         
@@ -864,7 +884,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     
-                        <td style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/></td>
+                        <td style="width: 45%">Admission No:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admissionno" id="admissionno" style="width: 200px" readonly/></td>
                         <td>Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" /></td>
                         
                     </tr>
@@ -917,7 +937,7 @@ for(Cookie cookie : cookies){
                         <td class="headerText">Fees Category</td>
                         <td class="headerText">Total Amount/Due Amount</td>                       
                         <td class="headerText">Amount Due to be paid</td>
-                        <td class="headerText">Fine</td>
+                        <!-- <td class="headerText">Fine</td> -->
 
                     </tr>
                 </thead>
@@ -929,19 +949,20 @@ for(Cookie cookie : cookies){
 							cellpadding="1" cellspacing="1">
 							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
-								name="studentsfsids" checked
+								name="studentsfsids" 
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
 							<td class="dataTextInActive" align="center"><a class="dataTextInActive" style="text-transform:uppercase"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
 							<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
-							<input type="hidden" id="dueamount" value="${studentfeesdetails.value}"/>
+							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" class="amountpaying" value="0" id="amountpaying" name="amountpaying" onkeyup="checkWithDueAmount(this)">
+							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
+							<input type="hidden" id="fine" value="0" class="fine" name="fine" >
 							</td>
-							<td class="dataText" align="center">
+							<!-- <td class="dataText" align="center">
 							<input type="text" id="fine" value="0" class="fine" name="fine" >
-							</td>
+							</td> -->
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -949,7 +970,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
 
-                        <td colspan="4" align="right"><b>Total&nbsp;&nbsp;</b></td>
+                        <td colspan="3" align="right"><b>Total&nbsp;&nbsp;</b></td>
                         <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
                     </tr>
                 </tfoot>

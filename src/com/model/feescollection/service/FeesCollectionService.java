@@ -164,7 +164,7 @@ public class FeesCollectionService {
 				}
 				
 			}*/
-			Long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid();
+			Long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid() - singleFeesStructure.getConcession() - singleFeesStructure.getWaiveoff();
 			
 				if(totalDueAmount>0) {
 					feesMap.put(singleFeesStructure,totalDueAmount);
@@ -172,8 +172,9 @@ public class FeesCollectionService {
 			
 		}
 		request.setAttribute("studentfeesdetails", feesMap);
-		request.setAttribute("studentNameDetails", request.getParameter("studentName"));
-		request.setAttribute("admnoDetails", request.getParameter("admno"));
+		request.setAttribute("studentNameDetails", request.getParameter("studentname"));
+		//request.setAttribute("admnoDetails", request.getParameter("admno"));
+		request.setAttribute("admnoDetails", request.getParameter("admissionno"));
 		request.setAttribute("classandsecDetails", request.getParameter("classandsec"));
 		request.setAttribute("studentIdDetails", request.getParameter("studentId"));
 		request.setAttribute("dateoffeesDetails", request.getParameter("dateoffees"));
