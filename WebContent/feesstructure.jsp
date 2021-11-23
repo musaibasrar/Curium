@@ -509,7 +509,7 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class &
@@ -526,10 +526,10 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox"
+							<%-- <td class="dataText"><input type="checkbox"
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
-								value="<c:out value="${Parents.student.sid}"/>" /></td>
+								value="<c:out value="${Parents.student.sid}"/>" /></td> --%>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="Controller?process=StudentProcess&action=ViewFeesStructure&id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>

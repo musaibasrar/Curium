@@ -370,7 +370,7 @@
 			</tr>
 
 <tr>
-<td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}</td>
+<td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
 </tr>
 <tr>
 <td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>

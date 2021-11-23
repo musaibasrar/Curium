@@ -639,7 +639,7 @@ for(Cookie cookie : cookies){
                                     </tr>
                                     <tr>
                                         <td align="left">
-											<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <button id="delete" >
                                             Delete</button>
@@ -648,7 +648,7 @@ for(Cookie cookie : cookies){
                                              <button id="waiveoff">Waive Off</button>
                                              
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                             <button id="applyconcession">Apply Concession</button> -->
+                                             <button id="applyconcession">Apply Concession</button>
                                              
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                              <button id="print" onclick="window.location.href='printstudentdetailsfeesstructure.jsp'">Print</button>

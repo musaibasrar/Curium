@@ -142,7 +142,15 @@ public class StudentAction {
         private String ViewFeesStructure() {
                 
                 if (new StudentService(request, response).viewDetailsOfStudent()) {
-            return "student_details_feesstructure.jsp";
+                	
+
+                    if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+                        return "student_details_feesstructure_admin.jsp";
+                    }else if(!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+                        return "student_details_feesstructure.jsp";
+                    }else {
+                    	return "student_details_feesstructure.jsp";
+                    }
         } else {
             return "viewAll.jsp";
         }
