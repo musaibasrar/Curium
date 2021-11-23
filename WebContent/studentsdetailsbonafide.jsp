@@ -747,15 +747,13 @@ for(Cookie cookie : cookies){
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out
+									value="${Parents.student.classstudying}" /></td>
+							<td class="dataText"><c:out
 									value="${Parents.fathersname}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.mothersname}" /></td>
 							<td class="dataText"><c:out
-									value="${Parents.student.classstudying}" /></td>				
-							<td class="dataText"><c:out
 									value="${Parents.student.admissiondate}" /></td>
-
-
 						</tr>
 					</c:forEach>
 				</tbody>
