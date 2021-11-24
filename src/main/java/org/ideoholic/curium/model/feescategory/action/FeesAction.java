@@ -2,143 +2,111 @@ package org.ideoholic.curium.model.feescategory.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.student.service.StudentService;
-import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@Controller
+@RequestMapping("/FeesProcess")
 public class FeesAction {
-        HttpServletRequest request;
-        HttpServletResponse response;
-        HttpSession httpSession;
-        String url;
-        String error = "error.jsp";
-        
-        public FeesAction(HttpServletRequest request, HttpServletResponse response) {
-                this.request = request;
-                this.response = response;
-                this.httpSession = request.getSession();
-        }
+	@Autowired
+	HttpServletRequest request;
+	@Autowired
+	HttpServletResponse response;
 
-        public String execute(String action, String page) {
-                
-                 if ("feesView".equalsIgnoreCase(action)) {
-                        url = viewFees();
-                }else if ("addFeesParticular".equalsIgnoreCase(action)) {
-                        url = addFeesParticular();
-                }else if ("feesCollect".equalsIgnoreCase(action)) {
-                        url = feesCollect();
-                }else if ("deleteMultiple".equalsIgnoreCase(action)) {
-                        url = deleteMultiple();
-                }else if ("deleteFeesCategory".equalsIgnoreCase(action)) {
-                        url = deleteFeesCategory();
-                }else if ("feesCollectAllBranches".equalsIgnoreCase(action)) {
-                    url = feesCollectAllBranches();
-                }else if ("feesStructure".equalsIgnoreCase(action)) {
-                    url = feesStructure();
-                }else if ("feesReport".equalsIgnoreCase(action)) {
-                    url = feesReport();
-                }else if ("waiveOffFees".equalsIgnoreCase(action)) {
-                    url = waiveOffFees();
-                }else if ("feesWaiveoffReport".equalsIgnoreCase(action)) {
-                    url = feesWaiveoffReport();
-                }else if ("feesConcessionReport".equalsIgnoreCase(action)) {
-                    url = feesConcessionReport();
-                }else if ("searchFeesWaiveoffReport".equalsIgnoreCase(action)) {
-                    url = searchFeesWaiveoffReport();
-                }else if ("printFeesWaiveoffReport".equalsIgnoreCase(action)) {
-                    url = printFeesWaiveoffReport();
-                }else if ("searchFeesConcessionReport".equalsIgnoreCase(action)) {
-                    url = searchFeesConcessionReport();
-                }else if ("printFeesConcessionReport".equalsIgnoreCase(action)) {
-                    url = printFeesConcessionReport();
-                }
-                return url;
-        }
+	@PostMapping("/printFeesWaiveoffReport")
+	public String printFeesWaiveoffReport() {
+		return "printfeeswaiveoffreport";
+	}
 
-		private String printFeesWaiveoffReport() {
-			return "printfeeswaiveoffreport.jsp";
-		}
+	@PostMapping("/searchFeesWaiveoffReport")
+	public String searchFeesWaiveoffReport() {
+		new FeesService(request, response).searchFeesWaiveofforConcessionReport("waiveoff");
+		return "feeswaiveoffreport";
+	}
 
-		private String searchFeesWaiveoffReport() {
-            new FeesService(request, response).searchFeesWaiveofforConcessionReport("waiveoff");
-            return "feeswaiveoffreport.jsp";
-		}
+	@GetMapping("/feesWaiveoffReport")
+	public String feesWaiveoffReport() {
+		new StandardService(request, response).viewClasses();
+		return "feeswaiveoffreport";
+	}
 
-		private String feesWaiveoffReport() {
-            new StandardService(request, response).viewClasses();
-        return "feeswaiveoffreport.jsp";
-		}
-		
-		private String printFeesConcessionReport() {
-			return "printfeesconcessionreport.jsp";
-		}
-		
-		 private String searchFeesConcessionReport() {
-	            new FeesService(request, response).searchFeesWaiveofforConcessionReport("concession");
-	            return "feesconcessionreport.jsp";
-			}
+	@PostMapping("/printFeesConcessionReport")
+	public String printFeesConcessionReport() {
+		return "printfeesconcessionreport";
+	}
 
-		private String feesConcessionReport() {
-            new StandardService(request, response).viewClasses();
-        return "feesconcessionreport.jsp";
-		}
+	@PostMapping("/searchFeesConcessionReport")
+	public String searchFeesConcessionReport() {
+		new FeesService(request, response).searchFeesWaiveofforConcessionReport("concession");
+		return "feesconcessionreport";
+	}
 
-		private String waiveOffFees() {
-        	return new FeesService(request, response).waiveOffFees();
-		}
+	@GetMapping("/feesConcessionReport")
+	public String feesConcessionReport() {
+		new StandardService(request, response).viewClasses();
+		return "feesconcessionreport";
+	}
 
-		private String feesReport() {
-        	new StandardService(request, response).viewClasses();
-			return "feesreport.jsp";
-		}
+	@PostMapping("/waiveOffFees")
+	public String waiveOffFees() {
+		return new FeesService(request, response).waiveOffFees();
+	}
 
-		private String feesStructure() {
-            new StandardService(request, response).viewClasses();
-        return "feesstructure.jsp";
-    }
+	@GetMapping("/feesReport")
+	public String feesReport() {
+		new StandardService(request, response).viewClasses();
+		return "feesreport";
+	}
 
-    private String deleteFeesCategory() {
-                        return new FeesService(request, response).deleteFeesCategory();
-        }
+	@GetMapping("/feesStructure")
+	public String feesStructure() {
+		new StandardService(request, response).viewClasses();
+		return "feesstructure";
+	}
 
-        private String deleteMultiple() {
-                new FeesService(request, response).deleteMultiple();
-        return "Controller?process=FeesProcess&action=feesView";
-        }
+	@PostMapping("/deleteFeesCategory")
+	public String deleteFeesCategory() {
+		return new FeesService(request, response).deleteFeesCategory();
+	}
 
-        private String feesCollect() {
-                
-        new FeesService(request, response).viewFees();
-        new FeesService(request, response).viewAllStudentsList();
-        return "feesCollection.jsp";
-    
-        }
+	@PostMapping("/deleteMultiple")
+	public String deleteMultiple() {
+		new FeesService(request, response).deleteMultiple();
+		return viewFees();
+	}
 
-        private String feesCollectAllBranches() {
-            
-                new FeesService(request, response).viewFees();
-                new FeesService(request, response).viewAllBranchStudents();
-                return "feesCollection.jsp";
-            
-                }
-        
-        private String addFeesParticular() {
-                
-                
-                new FeesService(request, response).addFeesParticular();
-        return "Controller?process=FeesProcess&action=feesView";
-                
-        }
+	@GetMapping("/feesCollect")
+	public String feesCollect() {
+		new FeesService(request, response).viewFees();
+		new FeesService(request, response).viewAllStudentsList();
+		return "feesCollection";
 
-        private String viewFees() {
-                new FeesService(request, response).viewFees();
-                new StandardService(request, response).viewClasses();
-                return "feesCategory.jsp";
-        }
+	}
+
+	@GetMapping("/feesCollectAllBranches")
+	public String feesCollectAllBranches() {
+		new FeesService(request, response).viewFees();
+		new FeesService(request, response).viewAllBranchStudents();
+		return "feesCollection";
+	}
+
+	@PostMapping("/addFeesParticular")
+	public String addFeesParticular() {
+		new FeesService(request, response).addFeesParticular();
+		return viewFees();
+	}
+
+	@GetMapping("/feesView")
+	public String viewFees() {
+		new FeesService(request, response).viewFees();
+		new StandardService(request, response).viewClasses();
+		return "feesCategory";
+	}
 
 }
