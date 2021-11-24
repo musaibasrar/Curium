@@ -55,9 +55,7 @@ public class Controller extends HttpServlet {
         String page = request.getParameter("page");
        
         String nextUrl = "";
-     if("FeesProcess".equalsIgnoreCase(process)){
-         nextUrl= new FeesAction(request, response).execute(action,page);
-     }else if("EmployeeProcess".equalsIgnoreCase(process)){
+     if("EmployeeProcess".equalsIgnoreCase(process)){
          nextUrl= new EmployeeAction(request, response).execute(action,page);
      }else if("FeesCollection".equalsIgnoreCase(process)){
          nextUrl= new FeesCollectionAction(request, response).execute(action,page);
