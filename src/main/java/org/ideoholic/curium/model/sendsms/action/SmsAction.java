@@ -14,79 +14,63 @@ import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Musaib_2
  * 
  */
+
+@Controller
+@RequestMapping("/SMSProcess")
 public class SmsAction {
 
+	@Autowired
 	HttpServletRequest request;
+	@Autowired
 	HttpServletResponse response;
-	HttpSession httpSession;
-	String url;
 
-	public SmsAction(HttpServletRequest request,
-			HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
-	public String execute(String action) {
-		// TODO Auto-generated method stub
-		if (action.equalsIgnoreCase("sendAllSMS")) {
-			url = sendAllSMS();
-		} else if (action.equalsIgnoreCase("sendNumbersSMS")) {
-			url = sendNumbersSMS();
-		}else if (action.equalsIgnoreCase("sendStaffSMS")) {
-			url = sendStaffSMS();
-		}else if (action.equalsIgnoreCase("sendSMS")) {
-			url = sendSMS();
-		}
-		
-		return url;
-	}
-
-	
-
-	
-
-	private String sendSMS() {
+	@PostMapping("/sendSMS")
+	public String sendSMS() {
 		new StandardService(request, response).viewClasses();
 		new EmployeeService(request, response).viewDepartments();
-		return "sendsms.jsp";
+		return "sendsms";
 	}
 
-	private String sendStaffSMS() {
-		if(new SmsService(request, response).sendStaffSMS()){
-			return "successsms.jsp";
+	@PostMapping("/sendStaffSMS")
+	public String sendStaffSMS() {
+		if (new SmsService(request, response).sendStaffSMS()) {
+			return "successsms";
 		}
-		return "errorsms.jsp";
+		return "errorsms";
 	}
 
-	private String sendAllSMS() {
-		if(new SmsService(request, response).sendAllSMS()){
-			return "successsms.jsp";
+	@PostMapping("/sendAllSMS")
+	public String sendAllSMS() {
+		if (new SmsService(request, response).sendAllSMS()) {
+			return "successsms";
 		}
-		return "errorsms.jsp";
+		return "errorsms";
 	}
 
-	private String sendNumbersSMS() { 
-		
-		if(new SmsService(request, response).sendNumbersSMS()){
-			return "successsms.jsp";
+	@PostMapping("/sendNumbersSMS")
+	public String sendNumbersSMS() {
+
+		if (new SmsService(request, response).sendNumbersSMS()) {
+			return "successsms";
 		}
-		return "errorsms.jsp";		
-    }
-
-	private String updateYear() {
-		 new YearService(request, response).updateYear();
-	            return "academicyear.jsp";
-	       
-		
+		return "errorsms";
 	}
 
-	
+	@GetMapping("/updateYear")
+	public String updateYear() {
+		new YearService(request, response).updateYear();
+		return "academicyear";
+
+	}
 
 }
