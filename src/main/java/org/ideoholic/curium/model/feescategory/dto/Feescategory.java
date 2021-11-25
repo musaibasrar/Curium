@@ -26,16 +26,18 @@ public class Feescategory implements java.io.Serializable {
 	private Integer amount;
 	private String particularname;
 	private int branchid;
+	private int userid;
 	
 	public Feescategory() {
 	}
 
 	public Feescategory(String feescategoryname, Integer amount, String particularname,
-			int branchid) {
+			int branchid, 	int userid) {
 		this.feescategoryname = feescategoryname;
 		this.amount = amount;
 		this.particularname = particularname;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -84,4 +86,13 @@ public class Feescategory implements java.io.Serializable {
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
 	}
+	
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
 }

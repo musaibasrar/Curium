@@ -30,6 +30,7 @@ public class Payheadstaffdetails implements java.io.Serializable {
 	private Teacher teacher;
 	private Payhead payhead;
 	private int branchid;
+	private int userid;
 	
 	public Payheadstaffdetails() {
 	}
@@ -39,7 +40,7 @@ public class Payheadstaffdetails implements java.io.Serializable {
 	}
 
 	public Payheadstaffdetails(int idteacher, BigDecimal value, String amountperc,
-			String academicyear, Teacher teacher, Payhead payhead, int branchid) {
+			String academicyear, Teacher teacher, Payhead payhead, int branchid, int userid) {
 		this.idteacher = idteacher;
 		this.value = value;
 		this.amountperc = amountperc;
@@ -47,6 +48,7 @@ public class Payheadstaffdetails implements java.io.Serializable {
 		this.teacher = teacher;
 		this.payhead = payhead;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -119,6 +121,14 @@ public class Payheadstaffdetails implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 }

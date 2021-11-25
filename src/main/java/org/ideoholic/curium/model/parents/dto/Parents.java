@@ -26,7 +26,7 @@ public class Parents implements java.io.Serializable {
 	private String mothersname;
 	private String addresspermanent;
 	private String addresstemporary;
-	private String professsion;
+	private String profession;
 	private String parentsannualincome;
 	private Integer noofdependents;
 	private Integer sid;
@@ -34,31 +34,31 @@ public class Parents implements java.io.Serializable {
 	private String remarks;
 	private String contactnumber;
 	private String cocontactnumber;
-	private String email;
+	private String emergencycontactno;
 	private Student student;
 	private int branchid;
-        private String fathersqualification;
-        private String mothersqualification;
-        
-    	private String fatherscastecertno;
-    	private String motherscastecertno;
-    	private String fatherscaste;
-    	private String motherscaste;
+    private String fathersqualification;
+    private String mothersqualification;
+    private String fatheroccupation;
+    private String motherscastecertno;
+    private String fatherscaste;
+    private String motherscaste;
+    private int userid;
         
 	public Parents() {
 	}
 
 	public Parents(String fathersname, String mothersname,
 			String addresspermanent, String addresstemporary,
-			String professsion, String parentsannualincome,
+			String profession, String parentsannualincome,
 			Integer noofdependents, Integer sid, Integer tid, String remarks, String contactnumber, String cocontactnumber,
-			int branchid, String fathersqualification, String mothersqualification,String fatherscastecertno,String motherscastecertno,
-			String fatherscaste,String motherscaste) {
+			int branchid, String fathersqualification, String mothersqualification,String fatheroccupation,String motherscastecertno,
+			String fatherscaste,String motherscaste, int userid) {
 		this.fathersname = fathersname;
 		this.mothersname = mothersname;
 		this.addresspermanent = addresspermanent;
 		this.addresstemporary = addresstemporary;
-		this.professsion = professsion;
+		this.profession = profession;
 		this.parentsannualincome = parentsannualincome;
 		this.noofdependents = noofdependents;
 		this.sid = sid;
@@ -69,10 +69,11 @@ public class Parents implements java.io.Serializable {
 		this.branchid = branchid;
 		this.fathersqualification = fathersqualification;
 		this.mothersqualification = mothersqualification;
-		this.fatherscastecertno = fatherscastecertno;
+		this.fatheroccupation = fatheroccupation;
 		this.motherscastecertno = motherscastecertno;
 		this.fatherscaste = fatherscaste;
 		this.motherscaste = motherscaste;
+		this.userid = userid;
 	}
 
 	@Id
@@ -122,13 +123,13 @@ public class Parents implements java.io.Serializable {
 		this.addresstemporary = addresstemporary;
 	}
 
-	@Column(name = "professsion", length = 100)
-	public String getProfesssion() {
-		return this.professsion;
+	@Column(name = "profession", length = 100)
+	public String getProfession() {
+		return this.profession;
 	}
 
-	public void setProfesssion(String professsion) {
-		this.professsion = professsion;
+	public void setProfession(String profession) {
+		this.profession = profession;
 	}
 
 	@Column(name = "parentsannualincome")
@@ -195,18 +196,18 @@ public class Parents implements java.io.Serializable {
 	}
 
 	/**
-	 * @return the email
+	 * @return the emergencycontactno
 	 */
-	@Column(name = "email")
-	public String getEmail() {
-		return email;
+	@Column(name = "emergencycontactno")
+	public String getEmergencycontactno() {
+		return emergencycontactno;
 	}
 
 	/**
-	 * @param email the email to set
+	 * @param emergencycontactno the emergencycontactno to set
 	 */
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmergencycontactno(String emergencycontactno) {
+		this.emergencycontactno = emergencycontactno;
 	}
 
 	public Student getStudent() {
@@ -247,12 +248,12 @@ public class Parents implements java.io.Serializable {
     }
     
 	
-	public String getFatherscastecertno() {
-		return fatherscastecertno;
+	public String getFatheroccupation() {
+		return fatheroccupation;
 	}
 
-	public void setFatherscastecertno(String fatherscastecertno) {
-		this.fatherscastecertno = fatherscastecertno;
+	public void setFatheroccupation(String fatheroccupation) {
+		this.fatheroccupation = fatheroccupation;
 	}
 
 	public String getMotherscastecertno() {
@@ -278,6 +279,15 @@ public class Parents implements java.io.Serializable {
 
 	public void setMotherscaste(String motherscaste) {
 		this.motherscaste = motherscaste;
+	}
+	
+
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 }

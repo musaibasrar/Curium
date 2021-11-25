@@ -20,13 +20,15 @@ public class Department implements java.io.Serializable {
 	private Integer depid;
 	private String departmentname;
 	private int branchid;
+	private int userid;
 	
 	public Department() {
 	}
 
-	public Department(String departmentname, int branchid) {
+	public Department(String departmentname, int branchid, int userid) {
 		this.departmentname = departmentname;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -56,5 +58,13 @@ public class Department implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

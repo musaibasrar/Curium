@@ -23,6 +23,9 @@
           <property name="branchid" type="int">
             <column name="branchid" />
         </property>
+         <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
         <many-to-one name="teacher" class="org.ideoholic.curium.model.employee.dto.Teacher"
             column="idteacher" lazy="false" />
         <many-to-one name="payhead" class="org.ideoholic.curium.model.hr.dto.Payhead"

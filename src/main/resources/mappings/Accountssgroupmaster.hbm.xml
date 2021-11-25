@@ -14,6 +14,9 @@
           <property name="branchid" type="int">
             <column name="branchid" />
         </property>
+         <property name="userid" type="int">
+ 			<column name="userid" />
+		</property>
         <many-to-one name="accountSubGroupMaster" class="org.ideoholic.curium.model.account.dto.Accountsubgroupmaster"
             column="subgroupmasterid" lazy="false"
             cascade="none" />

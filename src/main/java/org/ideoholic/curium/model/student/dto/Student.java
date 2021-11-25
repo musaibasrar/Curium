@@ -36,7 +36,7 @@ public class Student implements java.io.Serializable {
 	private String bloodgroup;
 	private String nationality;
 	private String religion;
-	private String caste;
+	private String secondlanguage;
 	private Date admissiondate;
 	private String admissionnumber;
 	private String mothertongue;
@@ -47,10 +47,10 @@ public class Student implements java.io.Serializable {
 	private Integer archive;
 	private String studentpic;
 	private String studentexternalid;
-	private String crecord;
+	private String percentage;
 	private Date crecorddate;
 	private String placeofbirth;
-	private Integer nooftc;
+	private Integer totalmarks;
 	private Date dateoftc;
 	private String classonleaving;
 	private Date dateleaving;
@@ -58,7 +58,7 @@ public class Student implements java.io.Serializable {
 	private Integer notcissued;
 	private Date datetcissued;
 	private String guardiandetails;
-	private String subsequentprogress;
+	private String lastschooladdress;
 	private int branchid;
 	private String languagesstudied;
 	private String instructionmediumlastschool;
@@ -78,16 +78,17 @@ public class Student implements java.io.Serializable {
 	private String studentscaste;
 	private String socialcategory;
 	private Integer belongtobpl;
-	private String bplcardno;
-	private String bhagyalakshmibondnumber;
-	private String disabilitychild;
+	private String lastcourse;
+	private String lastfirstlanguage;
+	private String lastsecondlanguage;
 	private String specialcategory;
-	private Integer sts;
+	private String registrationnumber;
 	private Integer rte;
 	private String bankname;
 	private String bankbranch;
 	private String accno;
 	private String bankifsc;
+	private int userid;
 	
 	public Student() {
 	}
@@ -99,19 +100,19 @@ public class Student implements java.io.Serializable {
 
 	public Student(String name, String classstudying, String classadmittedin,
 			Integer age, String gender, Date dateofbirth, String bloodgroup,
-			String nationality, String religion, String caste,
+			String nationality, String religion, String secondlanguage,
 			Date admissiondate, String admissionnumber, String mothertongue,
 			String remarks, String schoollastattended, String stdlaststudied,
 			Date createddate, Integer archive, String studentpic,
-			String studentexternalid, String crecord, Date crecorddate,
-			String placeofbirth, Integer nooftc, Date dateoftc,
+			String studentexternalid, String percentage, Date crecorddate,
+			String placeofbirth, Integer totalmarks, Date dateoftc,
 			String classonleaving, Date dateleaving, String reasonleaving,
 			Integer notcissued, Date datetcissued, String guardiandetails, int branchid,
 			String languagesstudied, String instructionmediumlastschool,
 			Integer passedout, Integer droppedout, Integer leftout, Integer semester,String stream,String mediumofinstruction,
 			 String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,String studentscaste,
-			 String socialcategory,Integer belongtobpl,String bplcardno,String bhagyalakshmibondnumber,
-			 String disabilitychild,String specialcategory, Integer sts, Integer rte, String bankname, String bankbranch, String accno, String bankifsc) {
+			 String socialcategory,Integer belongtobpl,String lastcourse,String lastfirstlanguage,
+			 String lastsecondlanguage,String specialcategory, String registrationnumber, Integer rte, String bankname, String bankbranch, String accno, String bankifsc, int userid) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
@@ -121,7 +122,7 @@ public class Student implements java.io.Serializable {
 		this.bloodgroup = bloodgroup;
 		this.nationality = nationality;
 		this.religion = religion;
-		this.caste = caste;
+		this.secondlanguage = secondlanguage;
 		this.admissiondate = admissiondate;
 		this.admissionnumber = admissionnumber;
 		this.mothertongue = mothertongue;
@@ -132,10 +133,10 @@ public class Student implements java.io.Serializable {
 		this.archive = archive;
 		this.studentpic = studentpic;
 		this.studentexternalid = studentexternalid;
-		this.crecord = crecord;
+		this.percentage = percentage;
 		this.crecorddate = crecorddate;
 		this.placeofbirth = placeofbirth;
-		this.nooftc = nooftc;
+		this.totalmarks = totalmarks;
 		this.dateoftc = dateoftc;
 		this.classonleaving = classonleaving;
 		this.dateleaving = dateleaving;
@@ -159,16 +160,17 @@ public class Student implements java.io.Serializable {
 		this.studentscaste = studentscaste;
 		this.socialcategory = socialcategory;
 		this.belongtobpl = belongtobpl;
-		this.bplcardno = bplcardno;
-		this.bhagyalakshmibondnumber = bhagyalakshmibondnumber;
-		this.disabilitychild = disabilitychild;
+		this.lastcourse = lastcourse;
+		this.lastfirstlanguage = lastfirstlanguage;
+		this.lastsecondlanguage = lastsecondlanguage;
 		this.specialcategory = specialcategory;
-		this.sts=sts;
+		this.registrationnumber=registrationnumber;
 		this.rte=rte;
 		this.bankname=bankname;
 		this.bankbranch=bankbranch;
 		this.accno=accno;
 		this.bankifsc=bankifsc;
+		this.userid = userid;
 	}
 
 	@Id
@@ -264,13 +266,13 @@ public class Student implements java.io.Serializable {
 		this.religion = religion;
 	}
 
-	@Column(name = "caste", length = 45)
-	public String getCaste() {
-		return this.caste;
+	@Column(name = "secondlanguage", length = 45)
+	public String getSecondlanguage() {
+		return this.secondlanguage;
 	}
 
-	public void setCaste(String caste) {
-		this.caste = caste;
+	public void setSecondlanguage(String secondlanguage) {
+		this.secondlanguage = secondlanguage;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -365,13 +367,13 @@ public class Student implements java.io.Serializable {
 		this.studentexternalid = studentexternalid;
 	}
 
-	@Column(name = "crecord", length = 45)
-	public String getCrecord() {
-		return this.crecord;
+	@Column(name = "percentage", length = 45)
+	public String getPercentage() {
+		return this.percentage;
 	}
 
-	public void setCrecord(String crecord) {
-		this.crecord = crecord;
+	public void setPercentage(String percentage) {
+		this.percentage = percentage;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -393,13 +395,13 @@ public class Student implements java.io.Serializable {
 		this.placeofbirth = placeofbirth;
 	}
 
-	@Column(name = "nooftc")
-	public Integer getNooftc() {
-		return this.nooftc;
+	@Column(name = "totalmarks")
+	public Integer getTotalmarks() {
+		return this.totalmarks;
 	}
 
-	public void setNooftc(Integer nooftc) {
-		this.nooftc = nooftc;
+	public void setTotalmarks(Integer totalmarks) {
+		this.totalmarks = totalmarks;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -468,13 +470,13 @@ public class Student implements java.io.Serializable {
 		this.guardiandetails = guardiandetails;
 	}
 
-	@Column(name = "subsequentprogress", length = 500)
-	public String getSubsequentprogress() {
-		return subsequentprogress;
+	@Column(name = "lastschooladdress", length = 500)
+	public String getLastschooladdress() {
+		return lastschooladdress;
 	}
 
-	public void setSubsequentprogress(String subsequentprogress) {
-		this.subsequentprogress = subsequentprogress;
+	public void setLastschooladdress(String lastschooladdress) {
+		this.lastschooladdress = lastschooladdress;
 	}
 
 	
@@ -634,28 +636,28 @@ public class Student implements java.io.Serializable {
 		this.belongtobpl = belongtobpl;
 	}
 
-	public String getBplcardno() {
-		return bplcardno;
+	public String getLastcourse() {
+		return lastcourse;
 	}
 
-	public void setBplcardno(String bplcardno) {
-		this.bplcardno = bplcardno;
+	public void setLastcourse(String lastcourse) {
+		this.lastcourse = lastcourse;
 	}
 
-	public String getBhagyalakshmibondnumber() {
-		return bhagyalakshmibondnumber;
+	public String getLastfirstlanguage() {
+		return lastfirstlanguage;
 	}
 
-	public void setBhagyalakshmibondnumber(String bhagyalakshmibondnumber) {
-		this.bhagyalakshmibondnumber = bhagyalakshmibondnumber;
+	public void setLastfirstlanguage(String lastfirstlanguage) {
+		this.lastfirstlanguage = lastfirstlanguage;
 	}
 
-	public String getDisabilitychild() {
-		return disabilitychild;
+	public String getLastsecondlanguage() {
+		return lastsecondlanguage;
 	}
 
-	public void setDisabilitychild(String disabilitychild) {
-		this.disabilitychild = disabilitychild;
+	public void setLastsecondlanguage(String lastsecondlanguage) {
+		this.lastsecondlanguage = lastsecondlanguage;
 	}
 
 	public String getSpecialcategory() {
@@ -666,12 +668,12 @@ public class Student implements java.io.Serializable {
 		this.specialcategory = specialcategory;
 	}
 
-	public Integer getSts() {
-		return sts;
+	public String getRegistrationnumber() {
+		return registrationnumber;
 	}
 
-	public void setSts(Integer sts) {
-		this.sts = sts;
+	public void setRegistrationnumber(String registrationnumber) {
+		this.registrationnumber = registrationnumber;
 	}
 
 	public Integer getRte() {
@@ -714,6 +716,13 @@ public class Student implements java.io.Serializable {
 		this.bankifsc = bankifsc;
 	}
 	
-	
+
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 	
 }
