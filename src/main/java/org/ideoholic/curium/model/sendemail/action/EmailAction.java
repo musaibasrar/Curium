@@ -10,71 +10,57 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.sendemail.service.EmailService;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Musaib_2
  * 
  */
+
+@Controller
+@RequestMapping("/EmailProcess")
 public class EmailAction {
 
+	@Autowired
 	HttpServletRequest request;
+	@Autowired
 	HttpServletResponse response;
-	HttpSession httpSession;
-	String url;
 
-	public EmailAction(HttpServletRequest request,
-			HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
-	public String execute(String action) {
-		// TODO Auto-generated method stub
-		if (action.equalsIgnoreCase("sendAllEmail")) {
-			url = sendAllEmail();
-		} else if (action.equalsIgnoreCase("sendNumbersSMS")) {
-			url = sendNumbersSMS();
-		}else if (action.equalsIgnoreCase("sendStaffSMS")) {
-			url = sendStaffSMS();
+	@PostMapping("/sendStaffSMS")
+	public String sendStaffSMS() {
+		if (new SmsService(request, response).sendStaffSMS()) {
+			return "successsms";
 		}
-		
-		return url;
+		return "errorsms";
 	}
 
 	
-
-	
-
-	private String sendStaffSMS() {
-		if(new SmsService(request, response).sendStaffSMS()){
-			return "successsms.jsp";
+	@PostMapping("/sendAllEmail")
+	public String sendAllEmail() {
+		if (new EmailService(request, response).sendAllEmail()) {
+			return "successsms";
 		}
-		return "errorsms.jsp";
+		return "errorsms";
 	}
 
-	private String sendAllEmail() {
-		if(new EmailService(request, response).sendAllEmail()){
-			return "successsms.jsp";
+	@PostMapping("/sendNumbersSMS")
+	public String sendNumbersSMS() {
+
+		if (new SmsService(request, response).sendNumbersSMS()) {
+			return "successsms";
 		}
-		return "errorsms.jsp";
+		return "errorsms";
 	}
 
-	private String sendNumbersSMS() { 
-		
-		if(new SmsService(request, response).sendNumbersSMS()){
-			return "successsms.jsp";
-		}
-		return "errorsms.jsp";		
-    }
+	@GetMapping("/updateYear")
+	public String updateYear() {
+		new YearService(request, response).updateYear();
+		return "academicyear";
 
-	private String updateYear() {
-		 new YearService(request, response).updateYear();
-	            return "academicyear.jsp";
-	       
-		
 	}
-
-	
 
 }
