@@ -41,6 +41,7 @@ public class Parents implements java.io.Serializable {
     private String mothersqualification;
     private String fatheroccupation;
     private String motherscastecertno;
+    private String fatherscastecertno;
     private String fatherscaste;
     private String motherscaste;
     private int userid;
