@@ -47,8 +47,10 @@ public class StudentService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
+	
 	/**
     * Size of a byte buffer to read/write file
     */
@@ -478,12 +480,14 @@ public class StudentService {
 		student.setLeftout(0);
 		student.setStudentexternalid(DataUtil.generateString(5));
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		student.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		puDetails.setOptionalsubjects(optional.toString());
 		puDetails.setCompulsorysubjects(compulsory.toString());
 		student.setPudetails(puDetails);
 		student.setDegreedetails(degreeDetails);
 		parents.setStudent(student);
 		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		parents.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		parents = new parentsDetailsDAO().create(parents);
 
 		if(parents!=null){

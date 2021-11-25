@@ -35,6 +35,9 @@
          <property name="totalinstallment" type="java.lang.Integer">
             <column name="totalinstallment"/>
         </property>
+         <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
         <many-to-one name="Feescategory" class="com.model.feescategory.dto.Feescategory" lazy="false"
             column="idfeescategory" />
     </class>
