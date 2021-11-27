@@ -620,9 +620,9 @@ public class FeesCollectionService {
 			for (StudentFeesReport studentFeesReport : studentFeesReportList) {
 				
 				for (Studentfeesstructure studentFeesStructure : studentFeesReport.getStudentFeesStructure()) {
-					totalFeesAmount+=studentFeesStructure.getFeesamount();
+					totalFeesAmount+=studentFeesStructure.getFeesamount() - studentFeesStructure.getConcession() - studentFeesStructure.getWaiveoff();
 					totalPaidAmount+=studentFeesStructure.getFeespaid();
-					totalDueAmount = totalDueAmount + (studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid());
+					totalDueAmount = totalDueAmount + (studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid()  - studentFeesStructure.getConcession() - studentFeesStructure.getWaiveoff());
 				}
 			}
 
