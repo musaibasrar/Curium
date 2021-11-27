@@ -239,7 +239,7 @@ for(Cookie cookie : cookies){
                         		
 			<tr>
 				<td width="30%"></td>
-				<td><img src="images/shaheenlogo.png" width="140" height="70"/></td>
+				<td><img src="images/logo.jpg" width="140" height="70"/></td>
 				<td>
 				<label class="dataTextBoldCenter">${branchname} </label><br>
 				<label class="addressLine">${branchaddress}</label><br>

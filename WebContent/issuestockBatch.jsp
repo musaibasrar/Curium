@@ -888,9 +888,8 @@ for(Cookie cookie : cookies){
 							<td ><label>
 									<select name="issuedto"
 									id="issuedto" class="dropdownlist" style="font-size: 14px;" >
-										<option selected="selected">Shaheen Nagar- Mess</option>
-										<option>Gole Khana- Mess</option>
-										<option>Mailoor- Mess</option>
+										<option selected="selected">Mess Location 1</option>
+										<option>Mess Location 2</option>
 								</select>
 							
 							</label></td>
