@@ -94,7 +94,7 @@ public class DataUtil {
      public String getPropertiesValue(String key){
     	 String value= null;
     	 Properties properties = new Properties();
-         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
+         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
          try {
  			properties.load(inputStream);
  		} catch (IOException e1) {
