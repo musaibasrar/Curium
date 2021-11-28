@@ -623,7 +623,7 @@ for(Cookie cookie : cookies){
 												${studentfeescatagorydetails.feescategory.feescategoryname}:&nbsp;&nbsp;&nbsp;	
 											</td>
 											<td align="left">
-												${studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid}/${studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}
+												${studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}/${studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}
 											</td>
 										</tr>
 									</table>
