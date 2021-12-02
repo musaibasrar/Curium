@@ -507,6 +507,7 @@ for(Cookie cookie : cookies){
             <div >
                 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsReports" style="font-size: 12px;">Student Details</a><br/>
                 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
+				<a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsStudyCertificate" style="font-size: 12px;">Study Certificate</a><br/>
                 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
                 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
                 <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>

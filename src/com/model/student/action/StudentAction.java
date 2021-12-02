@@ -118,12 +118,21 @@ public class StudentAction {
 
         private String generateBonafide() {
                 
-                String result = new StudentService(request, response).generateBonafide();
-                if (result!=null) {
-            return result;
-        } else {
-            return "bonafidefailure.jsp";
-        }
+        	String result = new StudentService(request, response).generateBonafide();
+        	
+        	if (result!=null) {
+        		if(httpSession.getAttribute("branchid").toString().equalsIgnoreCase("1")) {
+                    return "bonafidecertificateprint.jsp";
+                }else if(httpSession.getAttribute("branchid").toString().equalsIgnoreCase("2")) {
+                    return "bonafidecertificateprint.jsp";
+                }else if(httpSession.getAttribute("branchid").toString().equalsIgnoreCase("3")) {
+                    return "bonafidecertificateprint_pu.jsp";
+                }
+        	}
+            
+            
+            return "bonafidecertificateprint.jsp";
+            
         }
 
         private String searchStudentsForBonafide() {

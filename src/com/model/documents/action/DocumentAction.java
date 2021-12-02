@@ -54,10 +54,61 @@ public class DocumentAction {
 			url = generateAdmissionAbstract();
 		}else if ("download".equalsIgnoreCase(action)) {
 			url = downloadAdmissionAbstract();
-		}
+		}else if ("studentsDetailsStudyCertificate".equalsIgnoreCase(action)) {
+			url = studentsDetailsStudyCertificate();
+		}else if ("generateStudyCertificate".equalsIgnoreCase(action)) {
+			url = generateStudyCertificate();
+		}else if ("printStudyCertificate".equalsIgnoreCase(action)) {
+			url = printStudyCertificate();
+		}else if ("searchStudentsForStudyCertificate".equalsIgnoreCase(action)) {
+            url = searchStudentsForStudyCertificate();
+    }
 		return url; 
 	} 
 	
+
+	private String searchStudentsForStudyCertificate() {
+        new StampFeesService(request, response).advanceSearch();
+        return "studentsdetailsstudycertificate.jsp";
+		}
+
+	private String printStudyCertificate() {
+		
+		if(httpSession.getAttribute("branchid").toString().equalsIgnoreCase("1")) {
+            return "printstudycertificate.jsp";
+        }else if(httpSession.getAttribute("branchid").toString().equalsIgnoreCase("2")) {
+            return "printstudycertificate.jsp";
+        }else if(httpSession.getAttribute("branchid").toString().equalsIgnoreCase("3")) {
+            return "printstudycertificate_pu.jsp";
+        }else {
+        	return "printstudycertificateprint.jsp";
+        }
+		
+		}
+
+	private String generateStudyCertificate() {
+        
+	String result = new DocumentService(request, response).generateStudyCertificate();
+	
+	if (result!=null) {
+		if(httpSession.getAttribute("branchid").toString().equalsIgnoreCase("1")) {
+            return "studycertificateprint.jsp";
+        }else if(httpSession.getAttribute("branchid").toString().equalsIgnoreCase("2")) {
+            return "studycertificateprint.jsp";
+        }else if(httpSession.getAttribute("branchid").toString().equalsIgnoreCase("3")) {
+            return "studycertificateprint_pu.jsp";
+        }
+	}
+    
+    
+    return "studycertificateprint.jsp";
+    
+}
+
+	private String studentsDetailsStudyCertificate() {
+		new StandardService(request, response).viewClasses(); 
+		return "studentsdetailsstudycertificate.jsp";
+	}
 
 	private String downloadAdmissionAbstract() {
 		if(new DocumentService(request, response).downlaodFile()){
