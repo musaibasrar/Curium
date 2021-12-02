@@ -509,7 +509,7 @@ for(Cookie cookie : cookies){
 									id="subjectname" style="width: 200px;">
 										<option selected></option>
 										<c:forEach items="${listSubjectNames}" var="subjectnames">
-												<option value="${subjectnames.subjectname}">
+												<option value="${subjectnames.subjectname}:${subjectnames.subjectid}">
 													<c:out value="${subjectnames.subjectname}" />
 												</option>
 										</c:forEach>

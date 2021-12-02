@@ -755,7 +755,17 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.student.classstudying}" /></td>
-							<td class="dataText"><input type="text" id="studentMarks" name="studentMarks" value="<c:out value="${newMarksDetails[status.index].marksobtained}" />"><%-- <input type="text"
+							<td class="dataText">
+									<c:if test="${newMarksDetails[status.index].marksobtained <= 100}">
+											<c:set var="marksobtained" value="${newMarksDetails[status.index].marksobtained}" />
+									</c:if>
+									<c:if test="${newMarksDetails[status.index].marksobtained > 100}">
+											<c:set var="marksobtained" value="A" />
+									</c:if>
+							<input type="text" id="studentMarks" name="studentMarks" value="<c:out value="${marksobtained}" />"
+								onkeypress="return (event.charCode >= 00 && event.charCode <=57) || event.charCode == 65"
+								maxlength="3"
+							><%-- <input type="text"
 								id="studentMarks" 
 								name="studentMarks"
 								onkeyup="checkMandatory();"

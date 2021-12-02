@@ -682,7 +682,7 @@ for(Cookie cookie : cookies){
 								id="studentMarks" 
 								name="studentMarks"
 								onkeyup="checkMandatory();" value="0"
-								onkeypress="return event.charCode >= 00 && event.charCode <=57"
+								onkeypress="return (event.charCode >= 00 && event.charCode <=57) || event.charCode == 65"
 								maxlength="3"
 								 /></td>
 
