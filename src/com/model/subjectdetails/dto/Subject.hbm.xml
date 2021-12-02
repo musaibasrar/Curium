@@ -20,6 +20,9 @@
           <property name="branchid" type="int">
             <column name="branchid" />
         </property>
+        <property name="subjectid" type="int">
+            <column name="subjectid" />
+        </property>
         <property name="examname" type="string">
             <column name="examname" length="150" />
         </property>

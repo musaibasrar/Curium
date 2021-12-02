@@ -89,7 +89,8 @@ public class MarksDetailsAction {
 
 	private String generateReport() {
 		if (new MarksDetailsService(request, response).generateReport()) {
-            return "reportcardsaved.jsp";
+			return "markssheet.jsp";
+            //return "reportcardsaved.jsp";
         } else {
             return "error.jsp";
         }
@@ -113,6 +114,7 @@ public class MarksDetailsAction {
 
 	private String getSubjectsExams() {
 		new MarksDetailsService(request, response).getSubjectExams();
+		new StandardService(request, response).viewClasses();
         return "markssearch.jsp";
 	}
 
