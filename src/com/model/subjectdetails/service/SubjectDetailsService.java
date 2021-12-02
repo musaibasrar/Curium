@@ -50,7 +50,9 @@ public class SubjectDetailsService {
 		boolean result = true;
 		
 		if(httpSession.getAttribute("branchid")!=null){
-			subject.setSubjectname(DataUtil.emptyString(request.getParameter("subjectname")));
+			String[] subjectNameId = DataUtil.emptyString(request.getParameter("subjectname")).split(":");
+			subject.setSubjectname(subjectNameId[0]);
+			subject.setSubjectid(Integer.parseInt(subjectNameId[1]));	
 			subject.setMinmarks(DataUtil.parseInt(request.getParameter("minmarks")));
 			subject.setMaxmarks(DataUtil.parseInt(request.getParameter("maxmarks")));
 			subject.setExamname(DataUtil.emptyString(request.getParameter("examname")));

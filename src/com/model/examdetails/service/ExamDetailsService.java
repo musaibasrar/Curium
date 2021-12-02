@@ -304,6 +304,7 @@ public class ExamDetailsService {
 		}
 		request.setAttribute("examname", examName[0]);
 		request.setAttribute("examschedulelist", examscheduleList);
+		request.setAttribute("urlbranchid",httpSession.getAttribute(BRANCHID).toString());
 		
 	}
 		
