@@ -58,7 +58,18 @@ public class ExamDetailsAction {
 	private String printPreviewHallTicket() {
 		
 		new ExamDetailsService(request, response).printPreviewHallTicket();
-		return "printpreviewhallticket.jsp";
+		
+		if(request.getAttribute("urlbranchid").toString().equalsIgnoreCase("1")) {
+			return "printpreviewhallticket.jsp";
+	      }else if(request.getAttribute("urlbranchid").toString().equalsIgnoreCase("2")) {
+	        	return "printpreviewhallticket.jsp";
+        }else if(request.getAttribute("urlbranchid").toString().equalsIgnoreCase("3")) {
+        	return "printpreviewhallticket_pu.jsp";
+        }else {
+        	return "printpreviewhallticket.jsp";
+        }
+        
+		
 	}
 
 	private String searchHallTicketDetails() {

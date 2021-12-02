@@ -67,8 +67,6 @@ public class StudentService {
 
 	public boolean addStudent() {
 		
-		logger.info("*******Student Service: Add Student ****** ");
-	    
 		Student student = new Student();
 		Parents parents = new Parents();
 		Pudetails puDetails = new Pudetails();
@@ -77,7 +75,6 @@ public class StudentService {
 		boolean result=false;
 		
 		try {
-			logger.info("*******Student Service: TRY Add Student ****** ");
 			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 		
 			 for (FileItem item : items) {

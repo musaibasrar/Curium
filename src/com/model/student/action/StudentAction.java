@@ -239,7 +239,6 @@ public class StudentAction {
         }
 
         private String addStudent() {
-        		logger.info("************* ADD STUDENT *************** ");
                  if (new StudentService(request, response).addStudent()) {
                     return "saved.jsp";
                 } else {

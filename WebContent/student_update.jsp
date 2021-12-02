@@ -433,7 +433,7 @@ for(Cookie cookie : cookies){
                     <input type="hidden" value="<c:out value="${student.archive}"/>" id="studentarchiveupdate" name="studentarchiveupdate">
                     <input type="hidden" value="<c:out value="${student.droppedout}"/>" id="studentdroppedoutupdate" name="studentdroppedoutupdate">
                     <input type="hidden" value="<c:out value="${student.passedout}"/>" id="studentpassedoutupdate" name="studentpassedoutupdate">
-                    <input type="hidden" value="<c:out value="${student.leftout}"/>" id="studentpassedoutupdate" name="studentpassedoutupdate">
+                    <input type="hidden" value="<c:out value="${student.leftout}"/>" id="studentleftoutupdate" name="studentleftoutupdate">
                     </td>
                     </tr>
 				
