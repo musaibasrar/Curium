@@ -19,7 +19,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Add contact Page</title>
+<title>Addvance Search</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 
@@ -624,7 +624,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						
-						<tr>
+						<!-- <tr>
 							<td width="30%" class="alignRight">STS Number&nbsp;</td>
 							<td width="12%" align="left"><label>
 										<input
@@ -649,7 +649,7 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 
 						<tr>
 							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
@@ -748,7 +748,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<%-- <tr>
 
 
 							<td width="16%" class="alignRight">Last Class Studied &nbsp;</td>
@@ -783,7 +783,7 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<tr>
 
 
