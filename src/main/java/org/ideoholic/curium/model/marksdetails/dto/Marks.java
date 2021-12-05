@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.marksdetails.dto;
+package com.model.marksdetails.dto;
 
 // default package
 // Generated 15 Aug, 2016 11:42:58 AM by Hibernate Tools 4.0.0
@@ -24,18 +24,21 @@ public class Marks implements java.io.Serializable {
 	private Integer marksobtained;
 	private String academicyear;
 	private int branchid;
+	private int userid;
+	
 	
 	public Marks() {
 	}
 
 	public Marks(Integer sid, Integer subid, Integer examid,
-			Integer marksobtained, String academicyear, int branchid) {
+			Integer marksobtained, String academicyear, int branchid, int userid) {
 		this.sid = sid;
 		this.subid = subid;
 		this.examid = examid;
 		this.marksobtained = marksobtained;
 		this.academicyear = academicyear;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -92,6 +95,16 @@ public class Marks implements java.io.Serializable {
 
 	public void setAcademicyear(String academicyear) {
 		this.academicyear = academicyear;
+	}
+	
+	
+
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 	@Column(name = "branchid")

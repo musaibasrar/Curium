@@ -15,39 +15,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Mark Attendance</title>
-<script src="/js/Chart.js"></script>
-<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/css/datePicker/demos.css">
-<link rel="stylesheet" href="/css/graph/jquery.jqplot.css">
-<link rel="stylesheet" href="/css/graph/jquery.jqplot.min.css">
+<script src="js/Chart.js"></script>
+<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="css/datePicker/demos.css">
+<link rel="stylesheet" href="css/graph/jquery.jqplot.css">
+<link rel="stylesheet" href="css/graph/jquery.jqplot.min.css">
 
 
-  <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+  <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         
         
-         <script  type="text/javascript" src="/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.trendline.min.js"></script>
-        <script src="/js/jquery.jqplot.min.js" ></script>
-        <script src="/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
+         <script  type="text/javascript" src="js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="js/graph/jquery.jqplot.js"></script>        
+        <script  type="text/javascript" src="js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script src="js/jquery.jqplot.min.js" ></script>
+        <script src="js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
         
 <style type="text/css">
 <!--
@@ -263,7 +263,7 @@
 	vertical-align: text-top;
 	text-align: center;
 	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .dataText {
@@ -314,7 +314,7 @@
 	border-radius: 6px;
 	background-color: #4b6a84;
 	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
 	color: #FFFFFF;
 	font-family: Tahoma;
 	font-size: 13px;
@@ -350,42 +350,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/sliderAccess.js"></script>
+	src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/js/validation/jquery.ketchup.all.min.js"></script>
+	src="js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -411,7 +411,7 @@
 	
 </script>
 
-<script type="text/javascript" src="/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -432,7 +432,7 @@
 	
 	function searchStudentAttendanceDetailsMonthly() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/AttendanceProcess/searchStudentAttendanceDetailsMonthly";
+		form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetailsMonthly";
 		form1.method = "POST";
 		form1.submit();
 
@@ -440,7 +440,7 @@
 	
 	function searchStudentAttendanceDetailsMonthlyGraph() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/AttendanceProcess/searchStudentAttendanceDetailsMonthlyGraph";
+		form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetailsMonthlyGraph";
 		form1.method = "POST";
 		form1.submit();
 
@@ -448,7 +448,7 @@
 	
 	function searchStudentAttendanceDetailsMark() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/AttendanceProcess/searchStudentAttendanceDetailsMark";
+		form1.action = "Controller?process=AttendanceProcess&action=searchStudentAttendanceDetailsMark";
 		form1.method = "POST";
 		form1.submit();
 
@@ -499,7 +499,7 @@
 	
 	function updateRecords(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/AttendanceProcess/markStudentsAttendance";
+		form1.action = "Controller?process=AttendanceProcess&action=markStudentsAttendance";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -556,7 +556,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -578,7 +578,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Mark Attendance</a></li>
+					<li><a href="#tabs-1">Mark Attendance</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"

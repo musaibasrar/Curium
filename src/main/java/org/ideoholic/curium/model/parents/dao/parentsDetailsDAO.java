@@ -1,15 +1,17 @@
-package org.ideoholic.curium.model.parents.dao;
+package com.model.parents.dao;
+
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import org.ideoholic.curium.util.Session;
+import com.util.HibernateUtil;
+import com.util.Session;
 import org.hibernate.SessionFactory;
-import org.ideoholic.curium.util.Session.Transaction;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
-import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.util.HibernateUtil;
+import com.model.parents.dto.Parents;
 
 public class parentsDetailsDAO {
 	 Session session = null;
@@ -82,6 +84,29 @@ public class parentsDetailsDAO {
     			HibernateUtil.closeSession();
             return parents;
         }
+	}
+
+		@SuppressWarnings("finally")
+	public boolean createMultiple(List<Parents> parents) {
+		
+			boolean result = false;
+		 try {
+	            //this.session = sessionFactory.openCurrentSession();
+	            transaction = session.beginTransaction();
+	            
+	            for (Parents parent : parents) {
+	            	session.save(parent);	
+				}
+
+	            transaction.commit();
+	           result = true;
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
+	            hibernateException.printStackTrace();
+	        } finally {
+	    			HibernateUtil.closeSession();
+	            return result;
+	        }
 	}
 
 }

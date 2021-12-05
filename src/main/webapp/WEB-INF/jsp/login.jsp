@@ -13,7 +13,7 @@
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Curium - School ERP</title>
-        <script type="text/javascript" src="/js/openWindow.js"></script>
+        <script type="text/javascript" src="js/openWindow.js"></script>
         <style type="text/css">
             <!--
             .style6 {font-size: 12}
@@ -30,7 +30,7 @@
             function redirect(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="/UserProcess/authenticate";
+                form1.action="Controller?process=UserProcess&action=authenticate";
                 form1.submit();
             }
         </script>
@@ -38,26 +38,26 @@
       
     <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
         <script type="text/javascript">
-            var flag1=<c:out default="" value="${login_success}"/>;
+            var flag1=<c:out default="" value="${param.login_success}"/>;
             var type='<c:out default="" value="${userType}"/>';
             
             if(flag1){
             	
             	if(type=='superadmin'){
-                    window.open('/index_superadmin','_self');
+                    window.open('index_superadmin.jsp','_self');
                 }else if(type=='admin'){
-                    window.open('/index_admin','_self');
+                    window.open('index_admin.jsp','_self');
                 }else if(type=='feescollector'){
-                    window.open('/index_feescollector','_self');
+                    window.open('index_feescollector.jsp','_self');
                 }else if(type=='staff'){
-                	window.open('/index','_self');
+                	window.open('index.jsp','_self');
                 }
             }
             else if(!flag1){
-            	window.open('/loginFail','_self');
+            	window.open('loginFail.jsp','_self');
             }
         </script>
-        <form action="/UserProcess/authenticateUser" method="post" id="form1">
+        <form action="Controller?process=UserProcess&action=authenticateUser" method="post" id="form1">
                     	
                                     <table align="center">
                                     	<tr>
@@ -66,16 +66,16 @@
                                     	</td>
                                     	</tr>
                                     	<tr>
-                                    	<td> <img alt="" src="/images/curiumlogin.jpg" style="width:300px;height: 300px"></td>
+                                    	<td> <img alt="" src="images/curiumlogin.jpg" style="width:300px;height: 300px"></td>
                                     	<td></td><td></td><td></td>
                                     	 <td>
-                                            <img src="/images/username.png" height="30" name="login" style="vertical-align: bottom;"/>
+                                            <img src="images/username.png" height="30" name="login" style="vertical-align: bottom;"/>
                                                     <input name="loginName" type="text"  placeholder="UserName" >
                                                 <br><br><br>
-                                                <img type="image" src="/images/lock.png" height="28" name="login" style="vertical-align: bottom;"/>
+                                                <img type="image" src="images/lock.png" height="28" name="login" style="vertical-align: bottom;"/>
                                                 <input name="password" type="password" placeholder="Password">
                                                 <br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <input type="image" src="/images/loginbutton.png" name="login" border="0" />
+                                                <input type="image" src="images/loginbutton.png" name="login" border="0" />
                                                 </td>
                                     	</tr>
                                     </table>

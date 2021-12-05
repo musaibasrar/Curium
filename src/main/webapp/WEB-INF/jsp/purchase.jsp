@@ -18,8 +18,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Purchase Entry</title>
-<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/css/datePicker/demos.css">
+<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -205,7 +205,7 @@
 	height: 27px;
 	text-align: center;
 	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .dataText {
@@ -266,7 +266,7 @@
 	border-radius: 6px;
 	background-color: #4b6a84;
 	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
 	color: #FFFFFF;
 	font-family: Tahoma;
 	font-size: 13px;
@@ -407,17 +407,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -503,7 +503,7 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	
 	function saveInventory() {
@@ -511,7 +511,7 @@
 		var form1 = document.getElementById("form1");
 		
 		if(form1.checkValidity()) {
-			form1.action = "/MessItemsProcess/savePurchase";
+			form1.action = "Controller?process=MessItemsProcess&action=savePurchase";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -521,7 +521,7 @@
 	function cancelPurchase() {
 			
 				var form1 = document.getElementById("form1");
-				form1.action = "/MessItemsProcess/cancelPurchase";
+				form1.action = "Controller?process=MessItemsProcess&action=cancelPurchase";
 				form1.method = "POST";
 				form1.submit();
 			
@@ -818,7 +818,7 @@
         	             
         	         }
         			xmlHttp.onreadystatechange = stateChangedSSGroup;
-        			xmlHttp.open("GET", "/stockentry/mrvdetails?invoicedetailsid="+invoicedetailsid+"&entrydate="+date+"&supplierreferenceno="+supplierrefno+"&suppliername="+name+"&invoicetotal="+invoicetotal+"",true);;
+        			xmlHttp.open("GET", "AjaxController?process=stockentry&action=mrvdetails&invoicedetailsid="+invoicedetailsid+"&entrydate="+date+"&supplierreferenceno="+supplierrefno+"&suppliername="+name+"&invoicetotal="+invoicetotal+"",true);;
         			xmlHttp.send(null);
 
         		
@@ -895,7 +895,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -925,7 +925,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Details</a></li>
+					<li><a href="#tabs-1">Details</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -1056,7 +1056,7 @@ for(Cookie cookie : cookies){
 							
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${invoicelist.key.id}"/>" class = "chcktbl"  name="invoiceid"  value="<c:out value="${invoicelist.key.id}:${invoicelist.key.voucherid}:${invoicelist.key.status}"/>"/></td>
 						  <td class="dataText"><fmt:formatDate value="${invoicelist.key.invoicedate}" pattern="dd/MM/yyyy"/></td>
-						  <td class="dataText"><a href="/#" onclick="openPopup('<c:out value="${invoicelist.key.id}"/>','<c:out value="${invoicelist.key.invoicedate}"/>','<c:out value="${invoicelist.key.supplierreferenceno}"/>','<c:out value="${invoicelist.value.name}"/>','<c:out value="${invoicelist.key.invoicetotal}"/>')" style="color:#eb6000;">View Details</a></td>
+						  <td class="dataText"><a href="#" onclick="openPopup('<c:out value="${invoicelist.key.id}"/>','<c:out value="${invoicelist.key.invoicedate}"/>','<c:out value="${invoicelist.key.supplierreferenceno}"/>','<c:out value="${invoicelist.value.name}"/>','<c:out value="${invoicelist.key.invoicetotal}"/>')" style="color:#eb6000;">View Details</a></td>
 						  <td class="dataText"><c:out value="${invoicelist.key.supplierreferenceno}" /></td>
 						  <td class="dataText"><c:out value="${invoicelist.value.name}" /></td>
 						  <td class="dataTextRight"><c:out value="${invoicelist.key.invoicetotal}" /></td>
@@ -1083,7 +1083,7 @@ for(Cookie cookie : cookies){
 				<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/MessItemsProcess/purchaseItems?page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="Controller?process=MessItemsProcess&action=purchaseItems&page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -1096,7 +1096,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/MessItemsProcess/purchaseItems?page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="Controller?process=MessItemsProcess&action=purchaseItems&page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -1105,7 +1105,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/MessItemsProcess/purchaseItems?page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="Controller?process=MessItemsProcess&action=purchaseItems&page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
 

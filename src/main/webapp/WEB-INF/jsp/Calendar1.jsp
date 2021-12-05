@@ -8,7 +8,7 @@ pageEncoding="ISO-8859-1"%>
 <head>
 <title>CBSE Calendar</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/resources/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/screen.css" />
 
 
 <link rel='stylesheet' type='text/css' href='resources/fullcalendar/fullcalendar.css' />
@@ -76,7 +76,7 @@ return value;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -93,8 +93,8 @@ for(Cookie cookie : cookies){
 <div id="container">
 <h1>appointment</h1>
 <div id=navigation>
-<a href="/#" class="navi"><div id="naviElement" class="hovered">Calendar</div></a>
-<a href="/logout" class="navi"><div id="naviElement">Logout</div></a>
+<a href="#" class="navi"><div id="naviElement" class="hovered">Calendar</div></a>
+<a href="logout" class="navi"><div id="naviElement">Logout</div></a>
 </div>
 
 
@@ -180,7 +180,7 @@ pageEncoding="ISO-8859-1"%>
 <head>
 <title>CBSE Calendar</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/resources/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/screen.css" />
 
 
 <link rel='stylesheet' type='text/css' href='resources/fullcalendar/fullcalendar.css' />
@@ -249,8 +249,8 @@ return value;
 <div id="container">
 <h1>appointment</h1>
 <div id=navigation>
-<a href="/#" class="navi"><div id="naviElement" class="hovered">Calendar</div></a>
-<a href="/logout" class="navi"><div id="naviElement">Logout</div></a>
+<a href="#" class="navi"><div id="naviElement" class="hovered">Calendar</div></a>
+<a href="logout" class="navi"><div id="naviElement">Logout</div></a>
 </div>
 
 

@@ -21,20 +21,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Employee</title>
-<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/css/datePicker/demos.css">
+	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="js/datePicker/jquery-1.7.1.js"></script>
+<script src="js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="js/datePicker/ui/sliderAccess.js"></script>
+<script src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="css/datePicker/demos.css">
 
 <style type="text/css">
 .myclass {
@@ -225,7 +225,7 @@
 </style>
 
 
-<script type="text/javascript" src="/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script src="JavaScript/actb.js"></script>
 <script src="JavaScript/common.js"></script>
 
@@ -432,7 +432,7 @@
 	function check(value) {
 
 		xmlHttp = GetXmlHttpObject()
-		var url = "/check";
+		var url = "check.jsp";
 		url = url + "?name=" + value;
 		xmlHttp.onreadystatechange = stateChanged
 		xmlHttp.open("GET", url, true)
@@ -494,7 +494,7 @@
 	function checkmobile(value) {
 
 		xmlHttp = GetXmlHttpObject()
-		var url = "/mobilecheck";
+		var url = "mobilecheck.jsp";
 		url = url + "?contactNO=" + value;
 		xmlHttp.onreadystatechange = stateChangedmobile
 		xmlHttp.open("GET", url, true)
@@ -527,7 +527,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -540,7 +540,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/PersonalProcess/add" method="post">
+	<form id="form1" action="Controller?process=PersonalProcess&action=add" method="post">
 		
 		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		
@@ -549,9 +549,9 @@ for(Cookie cookie : cookies){
 			<div id="tabs">
 				
 				<ul>
-					<li><a href="/#tabs-1">Staff Details</a></li>
-					<li><a href="/#tabs-2">Bank Details</a></li>
-					<li><a href="/#tabs-3">Additional Details</a></li>
+					<li><a href="#tabs-1">Staff Details</a></li>
+					<li><a href="#tabs-2">Bank Details</a></li>
+					<li><a href="#tabs-3">Additional Details</a></li>
 				</ul>
 
 				<div id="tabs-1">
@@ -738,7 +738,7 @@ for(Cookie cookie : cookies){
 										<td></td><td></td>
 										<td align="center"><a class="nexttab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="/#">Next</a></td>
+											href="#">Next</a></td>
 									</tr>
 									
 								<tr>
@@ -808,10 +808,10 @@ for(Cookie cookie : cookies){
 										<td align="center">
 										<a class="nexttab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="/#">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;
+											href="#">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;
 										<a class="prevtab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="/#">Previous</a></td>
+											href="#">Previous</a></td>
 									</tr>
 									
 									
@@ -871,7 +871,7 @@ for(Cookie cookie : cookies){
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<a class="prevtab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="/#">Previous</a></td>
+											href="#">Previous</a></td>
 									</tr>
 									
 									
@@ -898,13 +898,13 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function addEmployee() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/EmployeeProcess/AddEmployee";
+								form1.action = "Controller?process=EmployeeProcess&action=AddEmployee";
 								form1.submit();
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/EmployeeProcess/viewAllEmployee";
+								form1.action = "Controller?process=EmployeeProcess&action=viewAllEmployee";
 								form1.submit();
 							}
 

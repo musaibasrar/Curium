@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.adminexpenses.service;
+package com.model.adminexpenses.service;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -16,14 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
-import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
-import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.model.user.dao.UserDAO;
-import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.DateUtil;
+import com.model.adminexpenses.dao.AdminDetailsDAO;
+import com.model.adminexpenses.dto.Adminexpenses;
+import com.model.feescollection.dto.Receiptinfo;
+import com.model.student.dao.studentDetailsDAO;
+import com.model.student.dto.Student;
+import com.model.user.dao.UserDAO;
+import com.util.DataUtil;
+import com.util.DateUtil;
 
 public class AdminService {
 	
@@ -53,6 +53,7 @@ public class AdminService {
 			adminexpenses.setChequedate(DateUtil.indiandateParser(request.getParameter("chequedate")));
 			adminexpenses.setEntrydate(DateUtil.indiandateParser(request.getParameter("entrydate")));
 			adminexpenses.setVoucherstatus("pending");
+			adminexpenses.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			adminexpenses.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			
 			if(!adminexpenses.getItemdescription().equalsIgnoreCase("") && !adminexpenses.getPriceofitem().equalsIgnoreCase(""))

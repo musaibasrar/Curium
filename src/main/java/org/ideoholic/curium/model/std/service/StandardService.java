@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.std.service;
+package com.model.std.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
-import org.ideoholic.curium.model.std.dto.Classhierarchy;
-import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.util.DataUtil;
+import com.model.std.dao.StandardDetailsDAO;
+import com.model.std.dto.Classhierarchy;
+import com.model.std.dto.Classsec;
+import com.model.student.dao.studentDetailsDAO;
+import com.model.student.dto.Student;
+import com.util.DataUtil;
 
 public class StandardService {
 
@@ -22,6 +22,7 @@ public class StandardService {
 	HttpSession httpSession;
 	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 
 	public StandardService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -37,6 +38,7 @@ public class StandardService {
             classsec.setClassdetails(DataUtil.emptyString(request.getParameter("classdetails")));
             classsec.setSection(DataUtil.emptyString(request.getParameter("section")));
             classsec.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+            classsec.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
             new StandardDetailsDAO().create(classsec);
             viewClasses();
             return true;
@@ -77,6 +79,7 @@ public class StandardService {
             classHierarchy.setLowerclass(DataUtil.emptyString(request.getParameter("lowerclass")));
             classHierarchy.setUpperclass(DataUtil.emptyString(request.getParameter("upperclass")));
             classHierarchy.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+            classHierarchy.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
             new StandardDetailsDAO().createClassHierarchy(classHierarchy);
             viewClasses();
             }

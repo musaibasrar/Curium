@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.stampfees.dto;
+package com.model.stampfees.dto;
 
 // default package
 // Generated 12 May, 2015 11:31:40 AM by Hibernate Tools 4.0.0
@@ -27,6 +27,7 @@ public class Academicfeesstructure implements java.io.Serializable {
 	private String paidfees;
 	private String academicyear;
 	private int branchid;
+	private int userid;
 	
 	public Academicfeesstructure() {
 	}
@@ -36,12 +37,13 @@ public class Academicfeesstructure implements java.io.Serializable {
 	}
 
 	public Academicfeesstructure(int sid, String totalfees, String paidfees,
-			String academicyear,int branchid) {
+			String academicyear,int branchid, int userid) {
 		this.sid = sid;
 		this.totalfees = totalfees;
 		this.paidfees = paidfees;
 		this.academicyear = academicyear;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -98,5 +100,13 @@ public class Academicfeesstructure implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

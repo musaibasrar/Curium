@@ -13,11 +13,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Dash Board</title>
-        <script src="/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/popper.min.js"></script>
+        <script src="js/Chart.min.js"></script>
+         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
@@ -51,7 +51,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -83,10 +83,10 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/images/student.svg"  height="20" width="20"/>
+        						<img src="images/student.svg"  height="20" width="20"/>
         						<label id="labelname">Total Students </label>
         						<br>		
-        						<img src="/images/teacher.svg" height="20" width="20"/>
+        						<img src="images/teacher.svg" height="20" width="20"/>
         						<label id="labelname">Total Teachers </label>
         					</td>
         					<td></td>
@@ -110,9 +110,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/images/totalfees.svg" height="20" width="20"/>
+        						<img src="images/totalfees.svg" height="20" width="20"/>
         						<label id="labelname">Total Fees&nbsp;&nbsp;&nbsp;</label><br>
-        						<img src="/images/monthlyfees.svg"  height="20" width="20"/>	
+        						<img src="images/monthlyfees.svg"  height="20" width="20"/>	
         						<label id="labelname">${Currentmonth} Fees</label>
         					</td>
         					<td></td>
@@ -138,9 +138,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        					<img src="/images/feespaid.svg" height="20" width="20"/>	
+        					<img src="images/feespaid.svg" height="20" width="20"/>	
         						<label id="labelname">Total Fees Paid</label><br>
-        						<img src="/images/feesdue.svg"  height="20" width="20"/>
+        						<img src="images/feesdue.svg"  height="20" width="20"/>
         						<label id="labelname">Total Fees Due&nbsp;</label>
         					</td>
         					<td></td>
@@ -166,10 +166,10 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/images/todayscollection.svg" height="20" width="20"/>
+        						<img src="images/todayscollection.svg" height="20" width="20"/>
         						<label id="labelname">Today's Fees</label>
         						<br>		
-        						<img src="/images/todaysexpenses.svg" height="20" width="20"/>	
+        						<img src="images/todaysexpenses.svg" height="20" width="20"/>	
         						<label id="labelname">Today's Expenses</label>	
         					</td>
         					<td></td>
@@ -192,11 +192,11 @@ for(Cookie cookie : cookies){
              <div class="row">
              	
              	<div class="col">
-             		<canvas id="student-monthlyfeeschart" height="200"></canvas>
+             		<canvas id="student-monthlyfeeschart" height="300"></canvas>
              	</div>
              	
             	<div class="col">
-            		<canvas id="student-expensechart" height="200"></canvas>
+            		<canvas id="student-expensechart" height="300"></canvas>
             	</div>	
              </div>
              
@@ -455,8 +455,8 @@ for(Cookie cookie : cookies){
                 	   yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: 20000,
-                                stepSize: 2000
+                                max: 500000,
+                                stepSize: 20000
                                }
                         
                             }]
@@ -556,8 +556,8 @@ for(Cookie cookie : cookies){
                 	   yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: 25000,
-                                stepSize: 5000
+                                max: 500000,
+                                stepSize: 20000
                                }
                         
                             }]

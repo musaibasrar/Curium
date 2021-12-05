@@ -39,7 +39,7 @@
                 height: 22px;
                 vertical-align: middle;
                 text-align: center;
-                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
             }
             .dataText {
                 border-radius:3px;
@@ -130,9 +130,9 @@
             }
             -->
         </style>
-        <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/js/print/jquery.printPage.js" type="text/javascript"></script>
+        <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {
@@ -141,7 +141,7 @@
              
              function printReceipt(){
             	 document.getElementById("print").click();
-            	 //document.location.href = "/FeesProcess/feesCollect"; 
+            	 //document.location.href = "Controller?process=FeesProcess&action=feesCollect"; 
              }
         </script>
     </head>
@@ -149,7 +149,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -179,7 +179,7 @@ for(Cookie cookie : cookies){
                         <td style="width: 35%">Student Name: <c:out value="${student.name}" /></td>
                         <td style="width: 20%">Admission No:  <c:out value="${student.admissionnumber}" /></td>
                         <td style="width: 20%">Date:  <c:out value="${recieptdate}" /></td>
-                        <td style="width: 20%">Receipt No:  <c:out value="${recieptinfo.receiptnumber}" /></td>
+                        <td style="width: 20%">Receipt No:  <c:out value="${recieptinfo.branchreceiptnumber}" /></td>
 
                     </tr>
 
@@ -226,7 +226,7 @@ for(Cookie cookie : cookies){
                     <tr>
 
 
-                        <td align="center"><a id="print" href="/FeesCollection/printReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td align="center"><a id="print" href="Controller?process=FeesCollection&action=printReceipt&id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </TABLE>

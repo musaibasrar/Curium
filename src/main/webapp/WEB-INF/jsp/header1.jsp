@@ -150,7 +150,7 @@
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/UserProcess/logout";
+                form1.action="Controller?process=UserProcess&action=logout";
                 form1.submit();
             }
 
@@ -160,22 +160,22 @@
         <form id="form1" method="post" >
             <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
                 <tr>
-                    <td height="10" valign="top" background="/images/headerBook.png">
+                    <td height="10" valign="top" background="images/headerBook.png">
                         <table width="100%" height="137" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
                             <tr>
-                               <td width="234" rowspan="2"><!--<div align="center"><img src="/images/logo.png" width="200" height="64" /></div> --></td> 
-                                <!-- <td width="548" rowspan="2"><div align="center"><img src="/images/SMS.png" width="391" height="92" /></div></td> -->
+                               <td width="234" rowspan="2"><!--<div align="center"><img src="images/logo.png" width="200" height="64" /></div> --></td> 
+                                <!-- <td width="548" rowspan="2"><div align="center"><img src="images/SMS.png" width="391" height="92" /></div></td> -->
                                 <!-- <td width="210" height="104">&nbsp;</td> -->
                             </tr>
                             <tr>
                                 <td></td>
-                                <td width="150" height="34" background="/images/tab1.png"><table width="153" border="0" align="center" cellpadding="0" cellspacing="0">
+                                <td width="150" height="34" background="images/tab1.png"><table width="153" border="0" align="center" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td width="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                            <td width="40"><a target="mainFrame" href="/StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Studets" src="/images/Users.png" width="40" height="30" /> <div id="n1" class="noti_bubble"></div></div></a></td>
-                                            <td width="40"><a target="mainFrame" href="/PersonalProcess/viewAll"><div align="center"  align="center"></div></div></a></td>
-                                            <td width="40"><a target="mainFrame" href="/UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="/images/dashboard.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
-                                            <td width="40" ><div align="center" ><a target="_parent" href="/UserProcess/logout"><img   src="/images/logout_icon.png" width="24" height="24" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div></div></td>
+                                            <td width="40"><a target="mainFrame" href="Controller?process=StudentProcess&action=viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Studets" src="images/Users.png" width="40" height="30" /> <div id="n1" class="noti_bubble"></div></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="Controller?process=PersonalProcess&action=viewAll"><div align="center"  align="center"></div></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="Controller?process=UserProcess&action=dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="images/dashboard.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
+                                            <td width="40" ><div align="center" ><a target="_parent" href="Controller?process=UserProcess&action=logout"><img   src="images/logout_icon.png" width="24" height="24" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div></div></td>
                                         </tr>
                                     </table></td>
                             </tr>

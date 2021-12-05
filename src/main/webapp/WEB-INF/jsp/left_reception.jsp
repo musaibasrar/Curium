@@ -13,19 +13,19 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/css/datePicker/demos.css">
+        <script language="JavaScript" src="js/motionpack.js"></script>
+        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="css/datePicker/demos.css">
 
-        <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="js/datePicker/ui/sliderAccess.js"></script>
+        <script src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             var get;
@@ -43,7 +43,7 @@ Author     : Musaib
 
 
                 get.onreadystatechange = processdata;
-                get.open("POST", "/VisitProcess/getAJaxNextVisit?startHour=" + startHour + "&startMin=" + startMin, true);
+                get.open("POST", "AjaxController?process=VisitProcess&action=getAJaxNextVisit&startHour=" + startHour + "&startMin=" + startMin, true);
                 get.send(null);
 
             }
@@ -61,7 +61,7 @@ Author     : Musaib
                             patientID = visit.getElementsByTagName("PatientID")[0].firstChild.nodeValue;
                             visitTime = visit.getElementsByTagName("VisitTime")[0].firstChild.nodeValue;
                             name = visit.getElementsByTagName("PatientName")[0].firstChild.nodeValue;
-                            link = "<a target='mainFrame' href='/PatientProcess/viewDetails?id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
+                            link = "<a target='mainFrame' href='Controller?process=PatientProcess&action=viewDetails&id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
 
                             $(function() {
                                 $('#Notification').jnotifyAddMessage({
@@ -95,7 +95,7 @@ Author     : Musaib
 
 
                 getExpiringStockCount.onreadystatechange = processExpiringStockData;
-                getExpiringStockCount.open("POST", "/StockProcess/getExpiringStock", true);
+                getExpiringStockCount.open("POST", "AjaxController?process=StockProcess&action=getExpiringStock", true);
                 getExpiringStockCount.send(null);
 
             }
@@ -127,7 +127,7 @@ Author     : Musaib
 
 
                 getDepletingStockCount.onreadystatechange = processDepletingStockData;
-                getDepletingStockCount.open("POST", "/StockProcess/getDepletingStock", true);
+                getDepletingStockCount.open("POST", "AjaxController?process=StockProcess&action=getDepletingStock", true);
                 getDepletingStockCount.send(null);
 
             }
@@ -284,7 +284,7 @@ Author     : Musaib
             .headerTD{
                 border-radius:1px;
                 background-color:#4b6a84;
-                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
                 color: #FFFFFF;
                 font-family: Tahoma;
                 font-size: 13px;
@@ -350,7 +350,7 @@ Author     : Musaib
             function auto_reload()
             {
                 alert();
-                window.location = '/notication';
+                window.location = 'notication.jsp';
             }
 
         </script>
@@ -405,7 +405,7 @@ Author     : Musaib
             }
             function change(id, image) {
                 var img = document.getElementById(id);
-                img.src = "/images/" + image;
+                img.src = "images/" + image;
 
             }
             
@@ -431,7 +431,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -451,79 +451,79 @@ for(Cookie cookie : cookies){
         <div class="headerTD">Welcome <c:out default="" value="${executive}"/> </div>
 
         <div id="container" style="width: 100%" >
-            <h5 style="font-size: 12px"><a href="/#">Students</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/StudentProcess/viewAll" >View All</a><br/>
-                <a target="mainFrame" href="/feesstructure" >Fees Structure</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=viewAll" >View All</a><br/>
+                <a target="mainFrame" href="feesstructure.jsp" >Fees Structure</a><br/>
                 
 
             </div>
-            <!-- <h5 style="font-size: 12px"><a href="/#">Human Resource</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/PositionProcess/positionView" >Add Position</a>
+                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="Controller?process=DepartmentProcess&action=departmentView" >Add Department</a>
+                <a target="mainFrame" href="Controller?process=PositionProcess&action=positionView" >Add Position</a>
 
             </div> -->
 
-            <h5 style="font-size: 12px"><a href="/#">FEES</a></h5>
+            <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="/FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/FeesProcess/feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="Controller?process=FeesProcess&action=feesView" >Fees Category</a>
+                <a target="mainFrame" href="Controller?process=FeesProcess&action=feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
-            <!-- <h5 style="font-size: 12px"><a href="/#" >Administration</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/AdminProcess/viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="Controller?process=AdminProcess&action=viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
             
-            <h5 style="font-size: 12px"><a href="/#" >Advance Search</a></h5>
+            <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/AdvanceSearch" >Search</a><br/>
+                <a target="mainFrame" href="AdvanceSearch.jsp" >Search</a><br/>
 
 
             </div>
 			<!--
-            <h5 style="font-size: 12px"><a href="/#" >Promotion</a></h5>
+            <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/Promotion" >Promotions</a><br/>
+                <a target="mainFrame" href="Promotion.jsp" >Promotions</a><br/>
 
 
             </div> -->
 
-            <!-- <h5 style="font-size: 12px"><a href="/#" >Archive</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="Controller?process=StudentProcess&action=archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
-            <!--  <h5 style="font-size: 12px"><a href="/#" >Configurations</a></h5>
+            <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/YearProcess/updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="Controller?process=StampFeesProcess&action=showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="Controller?process=YearProcess&action=updateYear" >Academic year</a><br/>
                 
 
             </div> -->
             
 
-            <h5 style="font-size: 12px"><a href="/#" >Extras</a></h5>
+            <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-               <!--  <a target="mainFrame" href="/Backup&Restore" >Backup</a><br/>
-                <a target="mainFrame" href="/currentIssue" >Current Issue</a><br/>
-                <a target="mainFrame" href="/changePassword" >Change Password</a><br/> -->
-                <a target="mainFrame" href="/feesCollectionDetails" >Fees Collection Details</a><br/>
+               <!--  <a target="mainFrame" href="Backup&Restore.jsp" >Backup</a><br/>
+                <a target="mainFrame" href="currentIssue.jsp" >Current Issue</a><br/>
+                <a target="mainFrame" href="changePassword.jsp" >Change Password</a><br/> -->
+                <a target="mainFrame" href="feesCollectionDetails.jsp" >Fees Collection Details</a><br/>
             </div>
             
-           <!--  <h5 style="font-size: 12px"><a href="/#" >Reports</a></h5>
+           <!--  <h5 style="font-size: 12px"><a href="#" >Reports</a></h5>
             <div >
-                <a target="mainFrame" href="/studentsdetailsreports" >Student Details</a><br/>
+                <a target="mainFrame" href="studentsdetailsreports.jsp" >Student Details</a><br/>
                 
             </div>  -->
             

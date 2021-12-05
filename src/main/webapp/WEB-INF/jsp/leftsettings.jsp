@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/css/datePicker/demos.css">
+        <script language="JavaScript" src="js/motionpack.js"></script>
+        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/css/font-awesome.css">
+        <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="js/datePicker/ui/sliderAccess.js"></script>
+        <script src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="css/font-awesome.css">
       
         <script type="text/javascript">
             var req;
@@ -163,7 +163,7 @@ Author     : Musaib
             .headerTD{
                 border-radius:1px;
                 background-color:#4b6a84;
-                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
                 color: #FFFFFF;
                 font-family: Tahoma;
                 font-size: 13px;
@@ -236,7 +236,7 @@ Author     : Musaib
             function auto_reload()
             {
                 alert();
-                window.location = '/notication';
+                window.location = 'notication.jsp';
             }
 
         </script>
@@ -291,7 +291,7 @@ Author     : Musaib
             }
             function change(id, image) {
                 var img = document.getElementById(id);
-                img.src = "/images/" + image;
+                img.src = "images/" + image;
 
             }
             
@@ -317,7 +317,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -334,73 +334,73 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-        <div class="headerTD">Master Settings<%--  <c:out default="" value="${userAuth}"/> --%> </div>
+        <div class="headerTD" style="width: 95%">Master Settings<%--  <c:out default="" value="${userAuth}"/> --%> </div>
 
-        <div id="container" style="width: 100%" >
-            <h5 style="font-size: 12px"><a href="/#">General</a></h5>
+        <div id="container" style="width: 95%" >
+            <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
-                <a target="mainFrame" href="/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/>
-                <a target="mainFrame" href="/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
+                <a target="mainFrame" href="Controller?process=YearProcess&action=updateYear" style="font-size: 12px;">Academic year</a><br/>
+                <a target="mainFrame" href="Controller?process=PeriodProcess&action=periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#">Class</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Class</a></h5>
             <div>
-                <a target="mainFrame" href="/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
+                <a target="mainFrame" href="Controller?process=ClassProcess&action=viewClasses" style="font-size: 12px;">Add Classes</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#">FEES</a></h5>
+            <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             <div>
-                <a target="mainFrame" href="/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
-                <a target="mainFrame" href="/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+                <a target="mainFrame" href="Controller?process=FeesProcess&action=feesView" style="font-size: 12px;">Fees Category</a><br/>
+                <a target="mainFrame" href="Controller?process=StampFeesProcess&action=showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#">Exams</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             <div>
-                <a target="mainFrame" href="/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
-                <a target="mainFrame" href="/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
-                <a target="mainFrame" href="/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
-                <a target="mainFrame" href="/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
+                <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
+                <a target="mainFrame" href="Controller?process=ExamDetailsProcess&action=readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
+                <a target="mainFrame" href="Controller?process=SubjectDetailsProcess&action=readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
+                <a target="mainFrame" href="Controller?process=SubjectDetailsProcess&action=readListOfSubjects" style="font-size: 12px;">Subject Details</a>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#">Attendance</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
-                <a target="mainFrame" href="/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div>
             
-              <h5 style="font-size: 12px"><a href="/#" >Promotion</a></h5>
+              <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-				<a target="mainFrame" href="/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
+				<a target="mainFrame" href="Controller?process=ClassProcess&action=classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#">Staff</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
                 
-                <a target="mainFrame" href="/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
-                <a target="mainFrame" href="/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
+                <a target="mainFrame" href="Controller?process=DepartmentProcess&action=departmentView" style="font-size: 12px;">Add Department</a><br/>
+                <a target="mainFrame" href="Controller?process=PositionProcess&action=positionView" style="font-size: 12px;">Add Position</a><br/>
             </div>
 
-            <h5 style="font-size: 12px"><a href="/#" >Accounts</a></h5>
+            <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
-                <a target="mainFrame" href="/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
+                <a target="mainFrame" href="Controller?process=AccountProcess&action=getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
             
-             <h5 style="font-size: 12px"><a href="/#" >H.R.</a></h5>
+             <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
-                <a target="mainFrame" href="/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
-                <a target="mainFrame" href="/HrProcess/payHead" style="font-size: 12px;">Pay Head</a><br/>
-                <a target="mainFrame" href="/HrProcess/addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
-                <a target="mainFrame" href="/HrProcess/deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
-                <a target="mainFrame" href="/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
-                <a target="mainFrame" href="/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
-                <a target="mainFrame" href="/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=leaveType" style="font-size: 12px;">Leave Type</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=payHead" style="font-size: 12px;">Pay Head</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
+                <a target="mainFrame" href="Controller?process=HrProcess&action=pfSettings" style="font-size: 12px;">PF Settings</a><br/>
             </div>
             
-              <!--  <h5 style="font-size: 12px"><a href="/#">Extras</a></h5>
+              <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
             <div>
-                <a target="mainFrame" href="/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div> -->
             
             </div>

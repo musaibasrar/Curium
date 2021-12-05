@@ -66,7 +66,8 @@ public class MarksDetailsAction {
 	@PostMapping("/generateReport")
 	public String generateReport() {
 		if (new MarksDetailsService(request, response).generateReport()) {
-            return "reportcardsaved";
+              return "markssheet.jsp";	
+            //return "reportcardsaved";
         } else {
             return "error";
         }
@@ -93,6 +94,7 @@ public class MarksDetailsAction {
 	@GetMapping("/getSubjectsExams")
 	public String getSubjectsExams() {
 		new MarksDetailsService(request, response).getSubjectExams();
+		new StandardService(request, response).viewClasses();
         return "markssearch";
 	}
 

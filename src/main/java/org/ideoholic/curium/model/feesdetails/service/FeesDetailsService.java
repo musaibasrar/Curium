@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.feesdetails.service;
+package com.model.feesdetails.service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,14 +22,14 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
-import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
-import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
-import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.model.user.dao.UserDAO;
-import org.ideoholic.curium.util.DataUtil;
+import com.model.feescollection.dto.Receiptinfo;
+import com.model.feesdetails.dao.feesDetailsDAO;
+import com.model.feesdetails.dto.Feesdetails;
+import com.model.parents.dto.Parents;
+import com.model.student.dao.studentDetailsDAO;
+import com.model.student.dto.Student;
+import com.model.user.dao.UserDAO;
+import com.util.DataUtil;
 
 public class FeesDetailsService {
 	
@@ -37,6 +37,7 @@ public class FeesDetailsService {
 	    private HttpServletResponse response;
 	    private HttpSession httpSession;
 	    private String BRANCHID = "branchid";
+	    private String USERID = "userid";
 	
 	public FeesDetailsService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -66,7 +67,8 @@ public class FeesDetailsService {
 			String currentYear = (String) httpSession.getAttribute("currentYear");
 			feesdetails.setAcademicyear(DataUtil.emptyString(currentYear));
 			feesdetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			 feesdetails = new feesDetailsDAO().create(feesdetails);
+			feesdetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			feesdetails = new feesDetailsDAO().create(feesdetails);
 		}
 		
 		 return feesdetails;

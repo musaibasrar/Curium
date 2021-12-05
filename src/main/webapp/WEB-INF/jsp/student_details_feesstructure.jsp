@@ -15,34 +15,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Details Fees Structure</title>
 
-        <script type="text/javascript" language="JavaScript" src="/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="js/motionpack.js"></script>
+        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/css/datePicker/demos.css">
-        <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
         .dataText {
@@ -102,7 +102,7 @@
                 height: 22px;
                 vertical-align: middle;
                 text-align: center;
-                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
             }
             .headerTD{
                 background-color:#4b6a84;
@@ -344,6 +344,31 @@
         	    	 return false;
         		});
                 
+                $("#print").button({
+        	        icons: {
+        	            primary: "ui-icon-print"
+        	        }
+        	    });
+                
+                
+                $("#applyconcession").button({
+        	        icons: {
+        	            primary: "ui-icon-flag"
+        	        }
+        	    }).click(function() {
+        	    	if (confirm('Are you sure you want to apply the concession?')) {
+        	    		applyConcession();
+        				}
+        	    	 return false;
+        		});
+                
+                $(".concession").keypress(function (e) {
+       		     //if the letter is not digit then display error and don't type anything
+       		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+       		               return false;
+       		    }
+       		   });
+                
             });
             
             $(function(){
@@ -381,14 +406,14 @@
                 });
 
             });
-                       
+                      
             
             function searchFeesStructure() {
 
                 var form1 = document.getElementById("form1");
                 var id = document.getElementById("id").value;
                 
-                form1.action = "/StudentProcess/feesStructurePerYear&id="+id;
+                form1.action = "Controller?process=StudentProcess&action=feesStructurePerYear&id="+id;
                 form1.submit();
 
             }
@@ -396,7 +421,7 @@
             function deleteRecord() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/FeesProcess/deleteFeesCategory";
+                form1.action = "Controller?process=FeesProcess&action=deleteFeesCategory";
                 form1.submit();
 
             }
@@ -404,9 +429,29 @@
             function waiveOff() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/FeesProcess/waiveOffFees";
+                form1.action = "Controller?process=FeesProcess&action=waiveOffFees";
                 form1.submit();
 
+            }
+            
+            function applyConcession() {
+
+                var form1 = document.getElementById("form1");
+                form1.action = "Controller?process=FeesProcess&action=applyConcession";
+                form1.submit();
+
+            }
+            
+            function checkConcession(dueAmount,concession,sfsid){
+            	var due = dueAmount;
+            	var con = concession;
+            	
+            	if(con>due){
+            		document.getElementById("concession:"+sfsid).value="";
+            		document.getElementById(sfsid).checked = false;
+            	}else if(con<=due){
+            		document.getElementById(sfsid).checked = true;
+            	}
             }
            
         </script>
@@ -416,7 +461,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -428,7 +473,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="/images/bg.jpg">
+    <body background="images/bg.jpg">
         <jsp:useBean id="now" class="java.util.Date" />
         <fmt:formatDate var="today" type="date" value="${now}" />
         <form  method="post" id="form1">
@@ -445,7 +490,7 @@ for(Cookie cookie : cookies){
             </table>
             <div id="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="/#">Fees Structure</a></h3>
+                <h3><a href="#">Fees Structure</a></h3>
                 
                 <div>
                 
@@ -549,6 +594,8 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Installments&nbsp;</th>
                             <th title="click to sort" class="headerText">Total Fees Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Fees Paid&nbsp;</th>
+                            <th title="click to sort" class="headerText">Fees Due&nbsp;</th>
                             <th title="click to sort" class="headerText">Concession Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Waive Off Amount&nbsp;</th>
                         </tr>
@@ -566,8 +613,17 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
-                                <td class="dataText"><c:out value="${feesstructure.concession}"/></td>
-                                <td class="dataText"><c:out value="${feesstructure.waiveoff}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feespaid}"/></td>
+                                <td class="dataText"><input type="text" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" name="dueamount:${feesstructure.sfsid}" value="${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff}" readonly></td>
+                                <td class="dataText">
+                                <input type="hidden" id="concessionold:${feesstructure.sfsid}" name="concessionold:${feesstructure.sfsid}" value="${feesstructure.concession}">
+                                <input type="text" id="concession:${feesstructure.sfsid}" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" onkeyup="checkConcession(${feesstructure.feesamount-feesstructure.feespaid - feesstructure.concession - feesstructure.waiveoff},this.value,${feesstructure.sfsid})" 
+                                name="concession:${feesstructure.sfsid}" class="concession"
+                                value="${feesstructure.concession}"></td>
+                                <td class="dataText">
+                                
+                                <input type="hidden" name="waiveoff:${feesstructure.sfsid}" value="${feesstructure.waiveoff}" >
+                                <c:out value="${feesstructure.waiveoff}"/></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -583,13 +639,19 @@ for(Cookie cookie : cookies){
                                     </tr>
                                     <tr>
                                         <td align="left">
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <button id="delete" >
                                             Delete</button>
 
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                              <button id="waiveoff">Waive Off</button>
+                                             
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                             <button id="applyconcession">Apply Concession</button> -->
+                                             
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                             <button id="print" onclick="window.location.href='printstudentdetailsfeesstructure.jsp'">Print</button>
 
                                         </td>
 
@@ -643,7 +705,7 @@ for(Cookie cookie : cookies){
         
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/StudentProcess/ViewAll";
+                form1.action="Controller?process=StudentProcess&action=ViewAll";
                 form1.submit();
             }
         </script>

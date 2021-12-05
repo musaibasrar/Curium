@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.student.dao;
+package com.model.student.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,16 +7,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
 
-import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
-import org.ideoholic.curium.model.mess.card.dto.Card;
-import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.pudetails.dto.Pudetails;
-import org.ideoholic.curium.model.std.dto.Classhierarchy;
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
-import org.ideoholic.curium.util.HibernateUtil;
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
+import com.model.degreedetails.dto.Degreedetails;
+import com.model.mess.card.dto.Card;
+import com.model.parents.dto.Parents;
+import com.model.pudetails.dto.Pudetails;
+import com.model.std.dto.Classhierarchy;
+import com.model.student.dto.Student;
+import com.model.student.dto.Studentfeesstructure;
+import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class studentDetailsDAO {
 	Session session = null;
@@ -127,6 +127,27 @@ public class studentDetailsDAO {
 			HibernateUtil.closeSession();
 		 }
 		return student;
+	}
+	
+	public Parents readUniqueObjectParents(long id) {
+		Parents parents = new Parents();
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from Parents as parent where parent.Student.sid="
+							+ id);
+			parents = (Parents) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return parents;
 	}
 
 	@SuppressWarnings("finally")
@@ -308,7 +329,7 @@ public class studentDetailsDAO {
 			
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("From Parents as parents where parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid = "+branchId+" order by name ASC").setCacheable(true).setCacheRegion("commonregion");
+					.createQuery("From Parents as parents where parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid = "+branchId+" order by admissionnumber desc").setCacheable(true).setCacheRegion("commonregion");
 			query.setFirstResult(offset);   
 			query.setMaxResults(noOfRecords);
 			results = query.getResultList();

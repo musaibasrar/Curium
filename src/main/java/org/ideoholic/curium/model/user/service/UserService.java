@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.user.service;
+package com.model.user.service;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -19,23 +19,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.academicyear.dao.YearDAO;
-import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
-import org.ideoholic.curium.model.adminexpenses.service.AdminService;
-import org.ideoholic.curium.model.branch.dto.Branch;
-import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
-import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.feescollection.action.FeesCollectionAction;
-import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
-import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
-import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
-import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.user.dao.UserDAO;
-import org.ideoholic.curium.model.user.dto.Login;
-import org.ideoholic.curium.util.DataUtil;
+import com.model.academicyear.dao.YearDAO;
+import com.model.academicyear.dto.Currentacademicyear;
+import com.model.adminexpenses.service.AdminService;
+import com.model.branch.dto.Branch;
+import com.model.employee.dao.EmployeeDAO;
+import com.model.employee.dto.Teacher;
+import com.model.feescollection.action.FeesCollectionAction;
+import com.model.feescollection.dto.Receiptinfo;
+import com.model.feescollection.service.FeesCollectionService;
+import com.model.parents.dto.Parents;
+import com.model.std.dao.StandardDetailsDAO;
+import com.model.std.dto.Classsec;
+import com.model.std.service.StandardService;
+import com.model.student.dao.studentDetailsDAO;
+import com.model.user.dao.UserDAO;
+import com.model.user.dto.Login;
+import com.util.DataUtil;
 
 public class UserService {
 	
@@ -302,8 +302,8 @@ public class UserService {
 			}
 			
 			String classAdmitted = DataUtil.emptyString(conClassAdmittedIn);
-			String lastClass = DataUtil.emptyString(request.getParameter("lastclass"));
-			String lastSchool =  DataUtil.emptyString(request.getParameter("lastschool"));
+			//String lastClass = DataUtil.emptyString(request.getParameter("lastclass"));
+			//String lastSchool =  DataUtil.emptyString(request.getParameter("lastschool"));
 			String admissionNo =  DataUtil.emptyString(request.getParameter("admnno"));
 			String dateOfAdmission =  DataUtil.emptyString(request.getParameter("dateofadmission"));
 			String bloodGroup =  DataUtil.emptyString(request.getParameter("bloodgroup"));
@@ -313,8 +313,8 @@ public class UserService {
 			String motherT =  DataUtil.emptyString(request.getParameter("motherT"));
 			String createdDate =  DataUtil.emptyString(request.getParameter("createddate"));
 			String remarks =  DataUtil.emptyString(request.getParameter("remarks"));
-			String stsNumber = DataUtil.emptyString(request.getParameter("sts"));
-			String rte = DataUtil.emptyString(request.getParameter("rte"));
+			//String stsNumber = DataUtil.emptyString(request.getParameter("sts"));
+			//String rte = DataUtil.emptyString(request.getParameter("rte"));
 			
 			String querySub = "";
 			
@@ -329,16 +329,17 @@ public class UserService {
 			}
 			
 			if(!gender.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
-				querySub = querySub + " parents.Student.gender like '%"+gender+"%'";
+				querySub = querySub + " parents.Student.gender like '"+gender+"%'";
 			}else if(!gender.equalsIgnoreCase("")){
-				querySub = querySub + " parents.Student.gender like '%"+gender+"%'";
+				querySub = querySub + " parents.Student.gender like '"+gender+"%'";
 			}
 			
-			if(!lastClass.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
-				querySub = querySub + " parents.Student.stdlaststudied = '"+lastClass+"'";
-			}else if(!lastClass.equalsIgnoreCase("")){
-				querySub = querySub + " parents.Student.stdlaststudied = '"+lastClass+"'";
-			}
+			/*
+			 * if(!lastClass.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
+			 * querySub = querySub + " parents.Student.stdlaststudied = '"+lastClass+"'";
+			 * }else if(!lastClass.equalsIgnoreCase("")){ querySub = querySub +
+			 * " parents.Student.stdlaststudied = '"+lastClass+"'"; }
+			 */
 			
 			if(!dateOfBirth.equalsIgnoreCase("") &&  !querySub.equalsIgnoreCase("") ){
 				querySub = querySub + " parents.Student.dateofbirth = '"+dateOfBirth+"'";
@@ -358,11 +359,13 @@ public class UserService {
 				querySub = querySub + " parents.Student.classadmittedin like '"+classAdmitted+"'";
 			}
 			
-			if(!lastSchool.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
-				querySub = querySub + " parents.Student.schoollastattended like '%"+lastSchool+"%'";
-			}else if(!lastSchool.equalsIgnoreCase("")){
-				querySub = querySub + " parents.Student.schoollastattended like '%"+lastSchool+"%'";
-			}
+			/*
+			 * if(!lastSchool.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
+			 * querySub = querySub +
+			 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }else
+			 * if(!lastSchool.equalsIgnoreCase("")){ querySub = querySub +
+			 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }
+			 */
 			
 			
 			if(!admissionNo.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
@@ -419,17 +422,17 @@ public class UserService {
 				querySub = querySub + " parents.Student.remarks like '%"+remarks+"%'";
 			}
 			
-			if(!stsNumber.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
-				querySub = querySub + " parents.Student.sts = '"+stsNumber+"'";
-			}else if(!stsNumber.equalsIgnoreCase("")){
-				querySub = querySub + " parents.Student.sts = '"+stsNumber+"'";
-			}
-			
-			if(!rte.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
-				querySub = querySub + " parents.Student.rte = '"+rte+"'";
-			}else if(!rte.equalsIgnoreCase("")){
-				querySub = querySub + " parents.Student.rte = '"+rte+"'";
-			}
+			/*
+			 * if(!stsNumber.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
+			 * querySub = querySub + " parents.Student.sts = '"+stsNumber+"'"; }else
+			 * if(!stsNumber.equalsIgnoreCase("")){ querySub = querySub +
+			 * " parents.Student.sts = '"+stsNumber+"'"; }
+			 * 
+			 * if(!rte.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){ querySub =
+			 * querySub + " parents.Student.rte = '"+rte+"'"; }else
+			 * if(!rte.equalsIgnoreCase("")){ querySub = querySub +
+			 * " parents.Student.rte = '"+rte+"'"; }
+			 */
 			
 			queryMain = queryMain+querySub+" AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
 			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
@@ -445,7 +448,7 @@ public class UserService {
         boolean result = false;
         try {
             Properties properties = new Properties();
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
             properties.load(inputStream);
             String backupDirectoryIS = properties.getProperty("backupdirectory");
             System.out.println("the backup directory from input stream is " + backupDirectoryIS);
@@ -455,7 +458,6 @@ public class UserService {
             String sqlExtension = ".sql";
             String backupLocation = backupDirectoryIS + fileName + sqlExtension;
             String mysqlPath = properties.getProperty("mysqlpath");
-            System.out.println("the back up for  the backuplocation " + backupLocation);
             request.setAttribute("Backuplocation", backupLocation);
             Process runtimeProcess = Runtime.getRuntime().exec(mysqlPath + backupLocation);
 

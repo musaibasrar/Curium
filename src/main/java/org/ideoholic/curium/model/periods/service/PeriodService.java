@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.periods.service;
+package com.model.periods.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.academicyear.dao.YearDAO;
-import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
-import org.ideoholic.curium.model.employee.service.EmployeeService;
-import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.periods.dao.PeriodDAO;
-import org.ideoholic.curium.model.periods.dto.Perioddetails;
-import org.ideoholic.curium.model.periods.dto.Periodmaster;
-import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
-import org.ideoholic.curium.util.DataUtil;
+import com.model.academicyear.dao.YearDAO;
+import com.model.academicyear.dto.Currentacademicyear;
+import com.model.employee.service.EmployeeService;
+import com.model.parents.dto.Parents;
+import com.model.periods.dao.PeriodDAO;
+import com.model.periods.dto.Perioddetails;
+import com.model.periods.dto.Periodmaster;
+import com.model.std.service.StandardService;
+import com.model.subjectdetails.service.SubjectDetailsService;
+import com.util.DataUtil;
 
 public class PeriodService {
 
@@ -28,6 +28,7 @@ public class PeriodService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 	/**
     * Size of a byte buffer to read/write file
     */
@@ -104,6 +105,7 @@ public class PeriodService {
 				periodDetails.setStaff(staff[getPeriod]);
 				periodDetails.setTimings(periodStartTimeHr[getPeriod]+":"+periodStartTimeMin[getPeriod]+": "+periodStartTimeAm[getPeriod]+ " To "+periodEndTimeHr[getPeriod]+":"+periodEndTimeMin[getPeriod]+" "+periodEndTimeAm[getPeriod]);
 				periodDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				periodDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				getPeriod++;
 				periodList.add(periodDetails);
 			}
@@ -119,6 +121,7 @@ public class PeriodService {
 		periodMaster.setDurationofperiod(durationOfPeriodsHr+":"+durationOfPeriodsMin);
 		periodMaster.setTotalperiods(Integer.parseInt(totalNoOfPeriods));
 		periodMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		periodMaster.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		return new PeriodDAO().save(periodMaster,periodMap);
 	}
 

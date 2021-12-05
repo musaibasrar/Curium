@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.feescategory.service;
+package com.model.feescategory.service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,18 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.academicyear.dao.YearDAO;
-import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
-import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
-import org.ideoholic.curium.model.feescategory.dto.Feescategory;
-import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
-import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
-import org.ideoholic.curium.model.mess.card.dto.Card;
-import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
-import org.ideoholic.curium.util.DataUtil;
+import com.model.academicyear.dao.YearDAO;
+import com.model.academicyear.dto.Currentacademicyear;
+import com.model.feescategory.dao.feesCategoryDAO;
+import com.model.feescategory.dto.Concession;
+import com.model.feescategory.dto.Feescategory;
+import com.model.feescollection.dao.feesCollectionDAO;
+import com.model.feesdetails.dao.feesDetailsDAO;
+import com.model.mess.card.dto.Card;
+import com.model.parents.dto.Parents;
+import com.model.student.dao.studentDetailsDAO;
+import com.model.student.dto.Student;
+import com.model.student.dto.Studentfeesstructure;
+import com.util.DataUtil;
 
 public class FeesService {
         
@@ -76,6 +77,7 @@ public class FeesService {
                         
                         feescategory.setAmount(DataUtil.parseInt(request.getParameter("amount")));
                         feescategory.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                        feescategory.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
                         if(!feescategory.getFeescategoryname().equalsIgnoreCase("") && !feescategory.getParticularname().equalsIgnoreCase("") && feescategory.getAmount() != 0 ){
                                 feescategory =  new feesCategoryDAO().create(feescategory);
                         }
@@ -187,24 +189,58 @@ public class FeesService {
     }
 
 
-	public String waiveOffFees() {
+	/*
+	 * public String waiveOffFeesOld() {
+	 * 
+	 * String[] idfeescategory = request.getParameterValues("sfsid"); List<Integer>
+	 * sfsId = new ArrayList(); List<Integer> feesCatId = new ArrayList();
+	 * 
+	 * String studentId = request.getParameter("id");
+	 * 
+	 * if(idfeescategory!=null){
+	 * 
+	 * for (String string : idfeescategory) { String[] test = string.split("_");
+	 * sfsId.add(Integer.valueOf(test[0])); feesCatId.add(Integer.valueOf(test[1]));
+	 * } new feesCategoryDAO().waiveOffFees(sfsId,feesCatId,studentId);
+	 * 
+	 * return
+	 * "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId; }
+	 * 
+	 * return "error.jsp";
+	 * 
+	 * }
+	 */
+    
+    public String waiveOffFees() {
         
         String[] idfeescategory = request.getParameterValues("sfsid");
-        List<Integer> sfsId = new ArrayList();
-        List<Integer> feesCatId = new ArrayList();
+        List<Integer> sfsId = new ArrayList<Integer>();
+        List<Integer> feesCatId = new ArrayList<Integer>();
+        List<String> consession = new ArrayList<String>();
+        List<Concession> concessionList = new ArrayList<Concession>();
         
         String studentId = request.getParameter("id");
         
         if(idfeescategory!=null){
                 
                 for (String string : idfeescategory) {
-                        String[] test = string.split("_");
+                	
+                		Concession con = new Concession();
+                		String[] test = string.split("_");
                         sfsId.add(Integer.valueOf(test[0]));
-                        feesCatId.add(Integer.valueOf(test[1]));
+                		String dueAmount = request.getParameter("dueamount:"+Integer.valueOf(test[0]));
+                        //String concessionAmount = request.getParameter("waiveoff:"+Integer.valueOf(test[0]));
+                        
+                        	feesCatId.add(Integer.valueOf(test[1]));
+                            con.setSfsid(Integer.valueOf(test[0]));
+                            con.setFeescatid(Integer.valueOf(test[1]));
+                            con.setConcessionOld(request.getParameter("waiveoff:"+Integer.valueOf(test[0])));
+                            con.setConcession(dueAmount);
+                            concessionList.add(con);
+                        
                }
-       new feesCategoryDAO().waiveOffFees(sfsId,feesCatId,studentId);
-       
-       return "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId;
+           new feesCategoryDAO().waiveOffFees(concessionList,studentId);
+           return "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId;
         }
         
        return "error.jsp";
@@ -295,5 +331,44 @@ public class FeesService {
 		}
 		
 		
+	}
+
+
+	public String applyConcession() {
+        
+        String[] idfeescategory = request.getParameterValues("sfsid");
+        List<Integer> sfsId = new ArrayList<Integer>();
+        List<Integer> feesCatId = new ArrayList<Integer>();
+        List<String> consession = new ArrayList<String>();
+        List<Concession> concessionList = new ArrayList<Concession>();
+        
+        String studentId = request.getParameter("id");
+        
+        if(idfeescategory!=null){
+                
+                for (String string : idfeescategory) {
+                	
+                		Concession con = new Concession();
+                		String[] test = string.split("_");
+                        sfsId.add(Integer.valueOf(test[0]));
+                		String dueAmount = request.getParameter("dueamount:"+Integer.valueOf(test[0]));
+                        String concessionAmount = request.getParameter("concession:"+Integer.valueOf(test[0]));
+                        
+                        if(Integer.parseInt(concessionAmount)<=Integer.parseInt(dueAmount)) {
+                        	feesCatId.add(Integer.valueOf(test[1]));
+                            con.setSfsid(Integer.valueOf(test[0]));
+                            con.setFeescatid(Integer.valueOf(test[1]));
+                            con.setConcessionOld(request.getParameter("concessionold:"+Integer.valueOf(test[0])));
+                            con.setConcession(request.getParameter("concession:"+Integer.valueOf(test[0])));
+                            concessionList.add(con);
+                        }
+                        
+               }
+           new feesCategoryDAO().applyConcession(concessionList,studentId);
+           return "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId;
+        }
+        
+       return "error.jsp";
+       
 	}
 }

@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.attendance.service;
+package com.model.attendance.service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,25 +42,25 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import org.ideoholic.curium.model.academicyear.dao.YearDAO;
-import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
-import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
-import org.ideoholic.curium.model.attendance.dto.Attendancemaster;
-import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
-import org.ideoholic.curium.model.attendance.dto.Staffdailyattendance;
-import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
-import org.ideoholic.curium.model.attendance.dto.Weeklyoff;
-import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
-import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
-import org.ideoholic.curium.model.marksdetails.dto.Marks;
-import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.sendsms.service.SmsService;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.model.user.dao.UserDAO;
-import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.DateUtil;
+import com.model.academicyear.dao.YearDAO;
+import com.model.academicyear.dto.Currentacademicyear;
+import com.model.attendance.dao.AttendanceDAO;
+import com.model.attendance.dto.Attendancemaster;
+import com.model.attendance.dto.Holidaysmaster;
+import com.model.attendance.dto.Staffdailyattendance;
+import com.model.attendance.dto.Studentdailyattendance;
+import com.model.attendance.dto.Weeklyoff;
+import com.model.employee.dao.EmployeeDAO;
+import com.model.employee.dto.Teacher;
+import com.model.marksdetails.dao.MarksDetailsDAO;
+import com.model.marksdetails.dto.Marks;
+import com.model.parents.dto.Parents;
+import com.model.sendsms.service.SmsService;
+import com.model.student.dao.studentDetailsDAO;
+import com.model.student.dto.Student;
+import com.model.user.dao.UserDAO;
+import com.util.DataUtil;
+import com.util.DateUtil;
 
 public class AttendanceService {
 	
@@ -765,7 +765,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList) {
 		
 		Properties properties = new Properties();
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
         
 			        try {
 						properties.load(inputStream);

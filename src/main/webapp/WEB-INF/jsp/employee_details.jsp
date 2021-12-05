@@ -15,26 +15,26 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
 
-        <script type="text/javascript" language="JavaScript" src="/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="js/motionpack.js"></script>
+        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/css/datePicker/demos.css">
-        <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script  type="text/javascript" src="js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
 
         <style type="text/css">
             <!--
@@ -60,7 +60,7 @@
                 height: 22px;
                 vertical-align: middle;
                 text-align: center;
-                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
             }
             .headerTD{
                 background-color:#4b6a84;
@@ -255,7 +255,7 @@
             
             function updateStaff(){
                 var form1=document.getElementById("form1");
-                form1.action="/EmployeeProcess/updateEmployeeDetails?id=<c:out value='${employee.tid}'/>";
+                form1.action="Controller?process=EmployeeProcess&action=updateEmployeeDetails&id=<c:out value='${employee.tid}'/>";
                 form1.submit();
             }
             
@@ -317,7 +317,7 @@
                                 
                                 function Cancel(){
                                     var form1=document.getElementById("form1");
-                                    form1.action="/EmployeeProcess/viewAllEmployee";
+                                    form1.action="Controller?process=EmployeeProcess&action=viewAllEmployee";
                                     form1.submit();
                                 }
                             </script>
@@ -327,7 +327,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -339,7 +339,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="/images/bg.jpg">
+    <body background="images/bg.jpg">
         <form  method="post" id="form1">
 
             <table width="100%">
@@ -353,7 +353,7 @@ for(Cookie cookie : cookies){
             </table>
             <div class="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="/#">Personal Details</a></h3>
+                <h3><a href="#">Personal Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
@@ -487,7 +487,7 @@ for(Cookie cookie : cookies){
             
             <div class="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="/#">Bank Details</a></h3>
+                <h3><a href="#">Bank Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
@@ -532,7 +532,7 @@ for(Cookie cookie : cookies){
             
             <div class="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="/#">Additional Details</a></h3>
+                <h3><a href="#">Additional Details</a></h3>
                 <div>
 
                     <table border="0px" width="100%"  id="table1" align="center">

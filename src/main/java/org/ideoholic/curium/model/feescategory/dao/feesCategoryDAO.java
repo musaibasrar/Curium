@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.feescategory.dao;
+package com.model.feescategory.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,14 +6,15 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import org.ideoholic.curium.util.Session;
+import com.util.Session;
 import org.hibernate.SessionFactory;
-import org.ideoholic.curium.util.Session.Transaction;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
-import org.ideoholic.curium.model.feescategory.dto.Feescategory;
-import org.ideoholic.curium.model.feescollection.dto.Feescollection;
-import org.ideoholic.curium.util.HibernateUtil;
+import com.model.feescategory.dto.Concession;
+import com.model.feescategory.dto.Feescategory;
+import com.model.feescollection.dto.Feescollection;
+import com.util.HibernateUtil;
 
 public class feesCategoryDAO {
 	Session session = null;
@@ -113,22 +114,65 @@ public class feesCategoryDAO {
 		}
 	}
 
-	public void waiveOffFees(List<Integer> sfsId, List<Integer> feesCatId, String studentId) {
+	/*
+	 * public void waiveOffFeesOld(List<Integer> sfsId, List<Integer> feesCatId,
+	 * String studentId) {
+	 * 
+	 * List<Feescollection> feesCollection = new ArrayList<Feescollection>(); try {
+	 * transaction = session.beginTransaction(); Query queryOne = session.
+	 * createQuery("from Feescollection as feescollection where feescollection.sid = '"
+	 * +studentId+"' and feescollection.sfsid IN (:ids)");
+	 * queryOne.setParameterList("ids", sfsId); feesCollection = queryOne.list();
+	 * 
+	 * if(feesCollection.isEmpty()){ Query query = session.
+	 * createQuery("update Studentfeesstructure as fees set fees.waiveoff=fees.feesamount where fees.sid = "
+	 * +studentId+" and fees.Feescategory.idfeescategory IN (:feescat)");
+	 * query.setParameterList("feescat", feesCatId); query.executeUpdate();
+	 * 
+	 * Query queryAcademicFees = session.
+	 * createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"
+	 * +Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(
+	 * concession.getConcession())+"' where fees.sfsid='"+concession.getSfsid()+"'")
+	 * ; queryAcademicFees.executeUpdate(); } transaction.commit(); } catch
+	 * (Exception hibernateException) { transaction.rollback();
+	 * logger.error(hibernateException); hibernateException.printStackTrace();
+	 * }finally { HibernateUtil.closeSession(); } }
+	 */
+	
+	public void waiveOffFees(List<Concession> concessionList, String sid) {
 		
-		List<Feescollection> feesCollection = new ArrayList<Feescollection>();
 		try {
 			transaction = session.beginTransaction();
-			Query queryOne = session.createQuery("from Feescollection as feescollection where feescollection.sid = '"+studentId+"' and feescollection.sfsid IN (:ids)");
-			queryOne.setParameterList("ids", sfsId);
-			feesCollection = queryOne.list();
-			
-			if(feesCollection.isEmpty()){
-				Query query = session.createQuery("update Studentfeesstructure as fees set fees.waiveoff=fees.feesamount where fees.sid = "+studentId+" and fees.Feescategory.idfeescategory IN (:feescat)");
-				query.setParameterList("feescat", feesCatId);
+			for (Concession concession : concessionList) {
+				Query query = session.createQuery("update Studentfeesstructure as fees set fees.waiveoff='"+Integer.parseInt(concession.getConcession())+"' where fees.sfsid='"+concession.getSfsid()+"'");
 				query.executeUpdate();
+				Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
+				queryAcademicFees.executeUpdate();
 			}
 			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) {
+			transaction.rollback(); 
+			logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+	}
+
+	public void applyConcession(List<Concession> concessionList, String sid) {
+		
+		try {
+			transaction = session.beginTransaction();
+			for (Concession concession : concessionList) {
+				Query query = session.createQuery("update Studentfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"' where fees.sfsid='"+concession.getSfsid()+"'");
+				query.executeUpdate();
+				Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
+				queryAcademicFees.executeUpdate();
+			}
+			transaction.commit();
+		} catch (Exception hibernateException) {
+			transaction.rollback(); 
+			logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();

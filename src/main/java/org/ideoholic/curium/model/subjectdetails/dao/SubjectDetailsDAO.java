@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.ideoholic.curium.model.subjectdetails.dao;
+package com.model.subjectdetails.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +9,13 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
+import com.util.Session;
+import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
-import org.ideoholic.curium.model.subjectdetails.dto.Subject;
-import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
-import org.ideoholic.curium.util.HibernateUtil;
+import com.model.subjectdetails.dto.Subject;
+import com.model.subjectdetails.dto.Subjectmaster;
+import com.util.HibernateUtil;
 
 /**
  * @author Musaib_2
@@ -165,6 +165,25 @@ public class SubjectDetailsDAO {
 
 			transaction = session.beginTransaction();
 			results = (List<Subject>) session.createQuery("From Subject where branchid="+branchId)
+					.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+	
+	
+	public List<Subject> readAllSubjectsClassWise(int branchId, String examClass) {
+		
+		List<Subject> results = new ArrayList<Subject>();
+		try {
+
+			transaction = session.beginTransaction();
+			results = (List<Subject>) session.createQuery("From Subject where examclass='"+examClass+"' and branchid="+branchId)
 					.list();
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

@@ -15,34 +15,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>student_details</title>
 
-        <script type="text/javascript" language="JavaScript" src="/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="js/motionpack.js"></script>
+        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/css/datePicker/demos.css">
-        <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
         .dataText {
@@ -102,7 +102,7 @@
                 height: 22px;
                 vertical-align: middle;
                 text-align: center;
-                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
             }
             .headerTD{
                 background-color:#4b6a84;
@@ -299,7 +299,7 @@
             function updateStudent(){
                
                 var form1=document.getElementById("form1");
-                form1.action="/StudentProcess/updateStudentDetails?id=<c:out value='${student.sid}'/>";
+                form1.action="Controller?process=StudentProcess&action=updateStudentDetails&id=<c:out value='${student.sid}'/>";
                 form1.submit();
             }
             
@@ -368,7 +368,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -380,7 +380,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="/images/bg.jpg" onload="checkUsertype();">
+    <body background="images/bg.jpg" onload="checkUsertype();">
         <jsp:useBean id="now" class="java.util.Date" />
         <fmt:formatDate var="today" type="date" value="${now}" />
         <form  method="post" id="form1">
@@ -433,7 +433,7 @@ for(Cookie cookie : cookies){
             </table>
             <div id="accordion" style="width: 100%;height: 100%">
 		
-                <h3><a href="/#">Student Details</a></h3>
+                <h3><a href="#">Student Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
@@ -527,7 +527,7 @@ for(Cookie cookie : cookies){
             </div>
             <div id="accordion1" style="width: 100%;height: 100%">
 
-                <h3><a href="/#">Parent's Details</a></h3>
+                <h3><a href="#">Parent's Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
@@ -607,7 +607,7 @@ for(Cookie cookie : cookies){
             </div>
               <div id="accordion2" style="width: 100%;height: 100%">
 
-                <h3><a href="/#">Fees Details</a></h3>
+                <h3><a href="#">Fees Details</a></h3>
                 
                 <div>
 					<div align="center">
@@ -639,7 +639,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${receiptinfo.date}"/></a></td>
                                 <td  class="dataText"><c:out value="${receiptinfo.receiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  
 
                             </tr>
@@ -662,7 +662,7 @@ for(Cookie cookie : cookies){
             </div>
             <div id="accordion3" style="width: 100%;height: 100%">
 
-                <h3><a href="/#">Fees Structure</a></h3>
+                <h3><a href="#">Fees Structure</a></h3>
                 
                 <div>
 					<div align="center">
@@ -745,7 +745,7 @@ for(Cookie cookie : cookies){
         
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/StudentProcess/viewAllSuperAdmin";
+                form1.action="Controller?process=StudentProcess&action=viewAllSuperAdmin";
                 form1.submit();
             }
         </script>

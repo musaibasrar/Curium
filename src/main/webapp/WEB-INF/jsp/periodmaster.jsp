@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Period Master</title>
-<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/css/datePicker/demos.css">
+<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -239,7 +239,7 @@
 	vertical-align: text-top;
 	text-align: center;
 	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .dataText {
@@ -290,7 +290,7 @@
 	border-radius: 6px;
 	background-color: #4b6a84;
 	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
 	color: #FFFFFF;
 	font-family: Tahoma;
 	font-size: 13px;
@@ -317,42 +317,42 @@
 }
 </style>
 
-<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/sliderAccess.js"></script>
+	src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/js/validation/jquery.ketchup.all.min.js"></script>
+	src="js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -378,7 +378,7 @@
 	
 </script>
 
-<script type="text/javascript" src="/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -526,7 +526,7 @@
 		
 		var form1 = document.getElementById("form1");
 		if(form1.checkValidity()) {
-			form1.action = "/PeriodProcess/savePeriods";
+			form1.action = "Controller?process=PeriodProcess&action=savePeriods";
 			form1.method = "POST";
 			form1.submit();
 		  }
@@ -577,7 +577,7 @@
 	
 	function deleteRecord(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/PeriodProcess/deletePeriods";
+		form1.action = "Controller?process=PeriodProcess&action=deletePeriods";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -589,7 +589,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -607,7 +607,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Period Master</a></li>
+					<li><a href="#tabs-1">Period Master</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
@@ -1136,7 +1136,7 @@ for(Cookie cookie : cookies){
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
 							<td class="dataText"><input type="checkbox" id="<c:out value="${periodmasterlist.idperiodmaster}"/>" class="chcktbl" name="idperiodmaster" value="<c:out value="${periodmasterlist.idperiodmaster}"/>" /></td>
-							<td class="dataText"><a class="dataTextInActive" href="/PeriodProcess/viewTimeTable?id=<c:out value="${periodmasterlist.idperiodmaster}" />"><c:out value="${periodmasterlist.class_}" /></a></td>
+							<td class="dataText"><a class="dataTextInActive" href="Controller?process=PeriodProcess&action=viewTimeTable&id=<c:out value="${periodmasterlist.idperiodmaster}" />"><c:out value="${periodmasterlist.class_}" /></a></td>
 							<td class="dataText"><c:out value="${periodmasterlist.daystart}" /></td>
 							<td class="dataText"><c:out value="${periodmasterlist.dayend}" /></td>
 							<td class="dataText"><c:out value="${periodmasterlist.totalperiods}" /></td>

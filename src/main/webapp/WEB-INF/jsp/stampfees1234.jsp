@@ -14,44 +14,44 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JSP Page</title>
-<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 
 
-<link rel="stylesheet" href="/css/datePicker/demos.css">
-<script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="css/datePicker/demos.css">
+<script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.dialog.js"></script>
+	src="js/datePicker/ui/jquery.ui.dialog.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="js/datePicker/ui/jquery.ui.widget.js"></script>
 
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/sliderAccess.js"></script>
+	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+	src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.position.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.mouse.js"></script>
+	src="js/datePicker/ui/jquery.ui.position.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.draggable.js"></script>
+	src="js/datePicker/ui/jquery.ui.draggable.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.resizable.js"></script>
+	src="js/datePicker/ui/jquery.ui.resizable.js"></script>
 
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="js/datePicker/ui/jquery.effects.blind.js"></script>
 <style type="text/css">
 .alignRightFields {
 	font-family: Tahoma;
@@ -95,12 +95,12 @@
 	vertical-align: middle;
 	text-align: center;
 	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .headerTD {
 	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
 	color: #FFFFFF;
 	font-family: Tahoma;
 	font-size: 13px;
@@ -538,7 +538,7 @@
     });
              function addPatient(){
                 var form1=document.getElementById("form1");
-                form1.action="/PatientProcess/add";
+                form1.action="Controller?process=PatientProcess&action=add";
                 form1.submit();
             }
         </script>
@@ -549,7 +549,7 @@
 
             function searchForFees() {
         		var form1 = document.getElementById("form1");
-        		form1.action = "/StampFeesProcess/search";
+        		form1.action = "Controller?process=StampFeesProcess&action=search";
         		form1.method = "POST";
         		form1.submit();
 
@@ -567,10 +567,10 @@
 </head>
 <body>
 	<form id="form1"
-		action="/FeesCollection/feesAdd"
+		action="Controller?process=FeesCollection&action=feesAdd"
 		method="post" onkeypress="if (event.keyCode == 92) addRow();">
 		<div style="height: 28px">
-			<!--<a href="/#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
+			<!--<a href="#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
 
 
 			<table width="100%">
@@ -732,7 +732,7 @@
 									name="studentIDs"
 									value="<c:out value="${Parents.student.sid}"/>" /></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
-									href="/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
+									href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>"><c:out
 											value="${Parents.student.admissionnumber}" /></a></td>
 								<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 								<td class="dataText"><c:out

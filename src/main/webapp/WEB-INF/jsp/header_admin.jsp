@@ -14,10 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/popper.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -92,7 +92,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/UserProcess/logout";
+                form1.action="Controller?process=UserProcess&action=logout";
                 form1.submit();
             }
 
@@ -102,7 +102,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -125,73 +125,79 @@ for(Cookie cookie : cookies){
 						<tr>
 							
 									<td style="padding-left: 20px;padding-right: 50px;">
-								<a target="mainFrame" href="/welcome" ><img src="/images/logo.jpg"/></a>
+								<a target="mainFrame" href="welcome.jsp" ><img src="images/logo.jpg"/></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/images/curiumheader.png"
+							<!-- <td align="left"><img src="images/curiumheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/left_admin"> <img
-									src="/images/home.svg" width="18" height="18" 
+							<td><a target="leftFrame" href="left_admin.jsp"> <img
+									src="images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="/FeesProcess/feesCollect"> <img
-									src="/images/feescollect.svg" width="18" height="18"
+								href="Controller?process=FeesProcess&action=feesCollect"> <img
+									src="images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
 							<td>
 								<a target="mainFrame"
-								href="/AccountProcess/createVoucher"> <img
-									src="/images/createvoucher.svg" width="18" height="18"
+								href="Controller?process=AccountProcess&action=createVoucher"> <img
+									src="images/createvoucher.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/feesCollectionDetails"><img  alt="Fees Details" src="/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+							<!-- <td ><a target="mainFrame" href="feesCollectionDetails.jsp"><img  alt="Fees Details" src="images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
-								href="/StudentProcess/addNew"> <img
-									src="/images/student_header.svg" width="18" height="18"
+								href="Controller?process=StudentProcess&action=addNew"> <img
+									src="images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/leftsettings">
-									<img alt="Settings" src="/images/settings.svg" width="18"
+							<td ><a target="leftFrame" href="leftsettings.jsp">
+									<img alt="Settings" src="images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
 							<td ><a target="mainFrame"
-								href="/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+								href="Controller?process=AdminProcess&action=viewAllExpenses"><img
+									alt="Admin Exp" src="images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
 
-							<td ><a target="mainFrame" href="/sendsms"><img
-									src="/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+							<td ><!-- <a target="mainFrame" href="sendsms.jsp"><img
+									src="images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
-							</a></td>
+							</a> -->
+								<a target="leftFrame" href="reports.jsp"><img
+									src="images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a>
+							
+							</td>
 
 							<td ><a target="mainFrame"
-								href="/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/images/students.svg" width="18"
+								href="Controller?process=StudentProcess&action=viewAllStudentsWithParents"><img
+									alt="View All Students" src="images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/images/dashboard.svg" width="18"
+								href="Controller?process=UserProcess&action=dashBoard"><img
+									alt="Dash Board" src="images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td>
 								
 							<td ><a target="_parent"
-								href="/UserProcess/logout"><img
-									src="/images/logout.svg" width="18" height="18" alt="Log Out" 
+								href="Controller?process=UserProcess&action=logout"><img
+									src="images/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>

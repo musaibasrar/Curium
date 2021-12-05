@@ -15,12 +15,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Voucher</title>
 
-        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 
-        <link rel="stylesheet" href="/css/datePicker/demos.css">
-        <script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
   
         <style type="text/css">
             <!--
@@ -51,7 +51,7 @@
                 height: 22px;
                 vertical-align: middle;
                 text-align: center;
-                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
             }
             .headerTD{
                 background-color:#4b6a84;
@@ -217,7 +217,7 @@
                 height: auto;
                 display: inline;
             }
-            .style1 { <link rel="stylesheet" href="/https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+            .style1 { <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
                 font-family: Tahoma;
                 font-size: 14px;
@@ -280,7 +280,7 @@
         	if(confirm('Are you sure,you want to save the receipt voucher?')){
         		
         		var form1 = document.getElementById("form1");
-                form1.action = "/AccountProcess/saveReceipt";
+                form1.action = "Controller?process=AccountProcess&action=saveReceipt";
                 form1.submit();	
         	}
         	
@@ -299,7 +299,7 @@
         	  if(confirm('Are you sure,you want to save the payment voucher?')){
         	  
         		  var form1 = document.getElementById("form1");
-              	  form1.action = "/AccountProcess/savePayment";
+              	  form1.action = "Controller?process=AccountProcess&action=savePayment";
               	  form1.submit();
         	  
         	  }
@@ -318,7 +318,7 @@
       }else{
     	  if(confirm('Are you sure,you want to save the contra voucher?')){
     	  var form1 = document.getElementById("form1");
-          form1.action = "/AccountProcess/saveContra";
+          form1.action = "Controller?process=AccountProcess&action=saveContra";
           form1.submit();
     	  }
       }
@@ -335,7 +335,7 @@
         }else{
         	if(confirm('Are you sure,you want to save the journal voucher?')){
         	 var form1 = document.getElementById("form1");
-             form1.action = "/AccountProcess/saveJournal";
+             form1.action = "Controller?process=AccountProcess&action=saveJournal";
              form1.submit();
         	}
         }
@@ -540,7 +540,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -558,10 +558,10 @@ for(Cookie cookie : cookies){
 
             <div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Receipt</a></li>
-					<li><a href="/#tabs-2">Payment</a></li>
-					<li><a href="/#tabs-3">Contra</a></li>
-					<li><a href="/#tabs-4">Journal</a></li>
+					<li><a href="#tabs-1">Receipt</a></li>
+					<li><a href="#tabs-2">Payment</a></li>
+					<li><a href="#tabs-3">Contra</a></li>
+					<li><a href="#tabs-4">Journal</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table  width="100%">

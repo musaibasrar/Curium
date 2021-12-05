@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.hr.service;
+package com.model.hr.service;
 
 
 import java.io.IOException;
@@ -18,28 +18,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.academicyear.dao.YearDAO;
-import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
-import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
-import org.ideoholic.curium.model.attendance.dto.Attendancemaster;
-import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
-import org.ideoholic.curium.model.attendance.dto.Weeklyoff;
-import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
-import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.employee.service.EmployeeService;
-import org.ideoholic.curium.model.hr.dao.HrDAO;
-import org.ideoholic.curium.model.hr.dto.Leaveapplication;
-import org.ideoholic.curium.model.hr.dto.Leavedetails;
-import org.ideoholic.curium.model.hr.dto.Leavetypemaster;
-import org.ideoholic.curium.model.hr.dto.Payadvancesalary;
-import org.ideoholic.curium.model.hr.dto.Paybasic;
-import org.ideoholic.curium.model.hr.dto.Payhead;
-import org.ideoholic.curium.model.hr.dto.Payheadstaffdetails;
-import org.ideoholic.curium.model.hr.dto.Pf;
-import org.ideoholic.curium.model.hr.dto.Processsalarydetails;
-import org.ideoholic.curium.model.hr.dto.Processsalarydetailsheads;
-import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.DateUtil;
+import com.model.academicyear.dao.YearDAO;
+import com.model.academicyear.dto.Currentacademicyear;
+import com.model.attendance.dao.AttendanceDAO;
+import com.model.attendance.dto.Attendancemaster;
+import com.model.attendance.dto.Holidaysmaster;
+import com.model.attendance.dto.Weeklyoff;
+import com.model.employee.dao.EmployeeDAO;
+import com.model.employee.dto.Teacher;
+import com.model.employee.service.EmployeeService;
+import com.model.hr.dao.HrDAO;
+import com.model.hr.dto.Leaveapplication;
+import com.model.hr.dto.Leavedetails;
+import com.model.hr.dto.Leavetypemaster;
+import com.model.hr.dto.Payadvancesalary;
+import com.model.hr.dto.Paybasic;
+import com.model.hr.dto.Payhead;
+import com.model.hr.dto.Payheadstaffdetails;
+import com.model.hr.dto.Pf;
+import com.model.hr.dto.Processsalarydetails;
+import com.model.hr.dto.Processsalarydetailsheads;
+import com.util.DataUtil;
+import com.util.DateUtil;
 
 public class HrService {
 
@@ -47,6 +47,7 @@ public class HrService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 
 	public HrService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -74,6 +75,7 @@ public class HrService {
 		Leavetypemaster leaveMaster = new Leavetypemaster();
 		leaveMaster.setLeavetypename(DataUtil.emptyString(request.getParameter("leavetypename")));
 		leaveMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		leaveMaster.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		return new HrDAO().saveLeaveType(leaveMaster);
 	}
 
@@ -103,6 +105,7 @@ public class HrService {
 				leaveDetails.setNumberofleaves(Integer.parseInt(totalLeaves[i]));
 				leaveDetails.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
 				leaveDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				leaveDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				leaveDetailsList.add(leaveDetails);
 			}
 			
@@ -158,6 +161,7 @@ public class HrService {
 		payHead.setDescription(DataUtil.emptyString(request.getParameter("description")));
 		payHead.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
 		payHead.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		payHead.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		return new HrDAO().savePayHead(payHead);
 		}
 		return false;
@@ -185,6 +189,7 @@ public class HrService {
 				payHeadStaffDetails.setPayhead(payHead);
 				payHeadStaffDetails.setValue(new BigDecimal(values[i]));
 				payHeadStaffDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				payHeadStaffDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				payHeadStaffDetailsList.add(payHeadStaffDetails);
 			}
 			
@@ -228,7 +233,7 @@ public class HrService {
 			}
 			payBasic.setPaymenttype(paymentType[i]);
 			payBasic.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			
+			payBasic.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			payBasicList.add(payBasic);
 		}
 		return new HrDAO().savePayBasic(payBasicList);
@@ -247,6 +252,7 @@ public class HrService {
 		pf.setPaidbyemployee(Integer.parseInt(paidByStaff));
 		pf.setPaidbymanagement(Integer.parseInt(paidByManagement));
 		pf.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		pf.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		new HrDAO().addPf(pf);
 		
 	}
@@ -292,6 +298,7 @@ public class HrService {
 			payAdvanceSalary.setStatus("apply");
 			payAdvanceSalary.setDate(DateUtil.dateParserUpdateStd(DataUtil.emptyString(request.getParameter("dateadvance"))));
 			payAdvanceSalary.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			payAdvanceSalary.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			return new HrDAO().saveAdvanceSalary(payAdvanceSalary);	
 		}
 		return false;
@@ -371,6 +378,7 @@ public class HrService {
 				leaveApplication.setTotalleaves(totalLeaves);
 				leaveApplication.setDateofapply(new Date());
 				leaveApplication.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				leaveApplication.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				return new HrDAO().applyLeave(leaveApplication);
 		}
 		
@@ -553,6 +561,7 @@ public class HrService {
 							}
 						}
 						processHeads.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						processHeads.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 						processSalarydetailsheadList.add(processHeads);
 					}
 				}else{
@@ -575,7 +584,7 @@ public class HrService {
 			       netPayment = netPayment.subtract(totalDeduction);
 			       processSalary.setNetpayment(netPayment);	
 			       processSalary.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			       
+			       processSalary.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			       processsalarydetailsList.add(processSalary);
 			       
 			}

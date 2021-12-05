@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>stamp fees</title>
-<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/css/datePicker/demos.css">
+<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="css/datePicker/demos.css">
 
 <style type="text/css">
 <!--
@@ -231,7 +231,7 @@
 	vertical-align: text-top;
 	text-align: center;
 	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .dataText {
@@ -282,7 +282,7 @@
 	border-radius: 6px;
 	background-color: #4b6a84;
 	background-image:
-		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
 	color: #FFFFFF;
 	font-family: Tahoma;
 	font-size: 13px;
@@ -297,45 +297,45 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/sliderAccess.js"></script>
+	src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript" src="/js/globalize.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/js/globalize.cultures.js"></script>
+<script type="text/javascript" src="js/globalize.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/globalize.cultures.js"></script>
 
 <script type="text/javascript"
-	src="/js/validation/jquery.ketchup.all.min.js"></script>
+	src="js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -361,11 +361,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/StampFeesProcess/search";
+		form1.action = "Controller?process=StampFeesProcess&action=search";
 		form1.method = "POST";
 		form1.submit();
 
@@ -446,7 +446,7 @@
 	
 	function deleteFeesStamp(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/StampFeesProcess/delete";
+		form1.action = "Controller?process=StampFeesProcess&action=delete";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -673,7 +673,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -686,12 +686,12 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/StampFeesProcess/applyFees" method="POST">
+	<form id="form1" action="Controller?process=StampFeesProcess&action=applyFees" method="POST">
     
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Stamp Fees</a></li>
+					<li><a href="#tabs-1">Stamp Fees</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -852,7 +852,7 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
+								href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">

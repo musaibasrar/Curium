@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.student.service;
+package com.model.student.service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,21 +25,21 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import org.ideoholic.curium.model.academicyear.dao.YearDAO;
-import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
-import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
-import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
-import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
-import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
-import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.pudetails.dto.Pudetails;
-import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
-import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.DateUtil;
+import com.model.academicyear.dao.YearDAO;
+import com.model.academicyear.dto.Currentacademicyear;
+import com.model.degreedetails.dto.Degreedetails;
+import com.model.feescollection.dao.feesCollectionDAO;
+import com.model.feescollection.dto.Receiptinfo;
+import com.model.parents.dao.parentsDetailsDAO;
+import com.model.parents.dto.Parents;
+import com.model.pudetails.dto.Pudetails;
+import com.model.std.dto.Classsec;
+import com.model.std.service.StandardService;
+import com.model.student.dao.studentDetailsDAO;
+import com.model.student.dto.Student;
+import com.model.student.dto.Studentfeesstructure;
+import com.util.DataUtil;
+import com.util.DateUtil;
 
 public class StudentService {
 
@@ -47,8 +47,10 @@ public class StudentService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
+	
 	/**
     * Size of a byte buffer to read/write file
     */
@@ -478,12 +480,14 @@ public class StudentService {
 		student.setLeftout(0);
 		student.setStudentexternalid(DataUtil.generateString(5));
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		student.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		puDetails.setOptionalsubjects(optional.toString());
 		puDetails.setCompulsorysubjects(compulsory.toString());
 		student.setPudetails(puDetails);
 		student.setDegreedetails(degreeDetails);
 		parents.setStudent(student);
 		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		parents.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		parents = new parentsDetailsDAO().create(parents);
 
 		if(parents!=null){
@@ -547,7 +551,7 @@ public class StudentService {
 			
 			long totalFeesAmount = 0l;
 			for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
-				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff();
+				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
 			}
 			
 			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
@@ -560,15 +564,15 @@ public class StudentService {
 				String classStudying = student.getClassstudying();
 				if (!classStudying.equalsIgnoreCase("")) {
 					String[] classParts = classStudying.split("--");
-					request.setAttribute("classstudying", classParts[0]);
-					request.setAttribute("secstudying", "");
+					httpSession.setAttribute("classstudying", classParts[0]);
+					httpSession.setAttribute("secstudying", "");
 					if(classParts.length>1) {
-						request.setAttribute("secstudying", classParts[1]);
+						httpSession.setAttribute("secstudying", classParts[1]);
 					}
 					
 				} else {
-					request.setAttribute("classstudying", classStudying);
-					request.setAttribute("secstudying", "");
+					httpSession.setAttribute("classstudying", classStudying);
+					httpSession.setAttribute("secstudying", "");
 				}
 
 				String classAdmitted = student.getClassadmittedin();
@@ -1110,6 +1114,7 @@ public class StudentService {
 		}
 		 student.setArchive(0);
 		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		 student.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		 
 		 if(puDetails.getIdpudetails()!=null) {
 			 new studentDetailsDAO().updatePuDetails(puDetails);
@@ -1124,6 +1129,8 @@ public class StudentService {
  		if (pid != "") {
  			parents.setStudent(student);
  			parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+ 			parents.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+ 			
  			parents = new parentsDetailsDAO().update(parents);
  		}
 		String stId = student.getSid().toString();

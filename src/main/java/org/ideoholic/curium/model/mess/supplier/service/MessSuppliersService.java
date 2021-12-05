@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.mess.supplier.service;
+package com.model.mess.supplier.service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,22 +16,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.account.dao.AccountDAO;
-import org.ideoholic.curium.model.account.dto.Accountdetails;
-import org.ideoholic.curium.model.account.dto.Accountdetailsbalance;
-import org.ideoholic.curium.model.account.dto.Accountgroupmaster;
-import org.ideoholic.curium.model.account.dto.Accountssgroupmaster;
-import org.ideoholic.curium.model.account.dto.Accountsubgroupmaster;
-import org.ideoholic.curium.model.account.dto.Financialaccountingyear;
-import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
-import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
-import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
-import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
-import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliersPayment;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.DateUtil;
+import com.model.account.dao.AccountDAO;
+import com.model.account.dto.Accountdetails;
+import com.model.account.dto.Accountdetailsbalance;
+import com.model.account.dto.Accountgroupmaster;
+import com.model.account.dto.Accountssgroupmaster;
+import com.model.account.dto.Accountsubgroupmaster;
+import com.model.account.dto.Financialaccountingyear;
+import com.model.account.dto.VoucherEntrytransactions;
+import com.model.mess.item.dao.MessItemsDAO;
+import com.model.mess.supplier.dao.MessSuppliersDAO;
+import com.model.mess.supplier.dto.MessSuppliers;
+import com.model.mess.supplier.dto.MessSuppliersPayment;
+import com.model.student.dao.studentDetailsDAO;
+import com.model.student.dto.Student;
+import com.util.DataUtil;
+import com.util.DateUtil;
 
 public class MessSuppliersService {
 
@@ -159,7 +159,7 @@ public class MessSuppliersService {
 			
 		
 		Properties properties = new Properties();
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 		        try {
 					properties.load(inputStream);
 				} catch (IOException e) {
@@ -325,7 +325,7 @@ public class MessSuppliersService {
 		
 	 	
 	 	Properties properties = new Properties();
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 		
         		try {
 					properties.load(inputStream);

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.ideoholic.curium.model.subjectdetails.service;
+package com.model.subjectdetails.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
-import org.ideoholic.curium.model.subjectdetails.dto.Subject;
-import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
-import org.ideoholic.curium.util.DataUtil;
+import com.model.subjectdetails.dao.SubjectDetailsDAO;
+import com.model.subjectdetails.dto.Subject;
+import com.model.subjectdetails.dto.Subjectmaster;
+import com.util.DataUtil;
 
 /**
  * @author Musaib_2
@@ -50,12 +50,15 @@ public class SubjectDetailsService {
 		boolean result = true;
 		
 		if(httpSession.getAttribute("branchid")!=null){
-			subject.setSubjectname(DataUtil.emptyString(request.getParameter("subjectname")));
+			String[] subjectNameId = DataUtil.emptyString(request.getParameter("subjectname")).split(":");
+			subject.setSubjectname(subjectNameId[0]);
+			subject.setSubjectid(Integer.parseInt(subjectNameId[1]));	
 			subject.setMinmarks(DataUtil.parseInt(request.getParameter("minmarks")));
 			subject.setMaxmarks(DataUtil.parseInt(request.getParameter("maxmarks")));
 			subject.setExamname(DataUtil.emptyString(request.getParameter("examname")));
 			subject.setExamclass(DataUtil.emptyString(request.getParameter("examclass")));
 			subject.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+			subject.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			subject = new SubjectDetailsDAO().addSubject(subject);
 			 
 			if(subject == null){
@@ -92,6 +95,7 @@ public class SubjectDetailsService {
 		if(httpSession.getAttribute("branchid")!=null){
 			subject.setSubjectname(DataUtil.emptyString(request.getParameter("subjectname")));
 			subject.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+			subject.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 			subject = new SubjectDetailsDAO().addSubjectMaster(subject);
 			 
 			if(subject == null){
