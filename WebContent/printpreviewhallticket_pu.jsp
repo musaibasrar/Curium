@@ -272,7 +272,7 @@ for(Cookie cookie : cookies){
 			<table style="border-collapse: collapse;width: 70%;float: left">
 											
                             <tr style="border-color:#000000">
-                                <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.name}"/></label></td>
+                                <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;text-transform: uppercase;"><c:out value="${Parents.student.name}"/></label></td>
                                 <td class="namedetails"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 						    ${splt} 
@@ -283,7 +283,7 @@ for(Cookie cookie : cookies){
                              
                              
                              <tr>   
-				<td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.fathersname}"/></label></td>	
+				<td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;text-transform: uppercase;"><c:out value="${Parents.fathersname}"/></label></td>	
                                 <td class="namedetails"><label>Exam Reg. No.:&nbsp;&nbsp;&nbsp;</label><!--<c:out value="${Parents.student.admissionnumber}"/>--></td>
                                 <!--<td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
 									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
@@ -332,7 +332,7 @@ for(Cookie cookie : cookies){
 			style="page-break-inside:avoid; border-collapse: collapse;">
 
 						<tr>
-							<td><br></td>
+							<td><br><br><br><br></td>
 						</tr>
 				<tr>
 				<td></td>
