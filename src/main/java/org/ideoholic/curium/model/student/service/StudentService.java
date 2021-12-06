@@ -1218,14 +1218,18 @@ public class StudentService {
 	public boolean promoteMultiple() {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String classStudying = request.getParameter("classstudying");
+		List<Student> studentList = new ArrayList<Student>();
+		
 		boolean result = false;
-		List<Integer> ids = new ArrayList();
+		
 		for (String id : studentIds) {
-			System.out.println("id" + id);
-			ids.add(Integer.valueOf(id));
-
+			Student student = new Student();
+			student.setSid(Integer.valueOf(id));
+			student.setClassstudying(request.getParameter("classstudying_"+id));
+			studentList.add(student);
 		}
-		if (new studentDetailsDAO().promoteMultiple(ids, classStudying)) {
+		
+		if (new studentDetailsDAO().promoteMultiple(studentList, classStudying)) {
 			result = true;
 		}
 		return result;
