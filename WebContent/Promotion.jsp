@@ -600,9 +600,11 @@ for(Cookie cookie : cookies){
                                 <c:forEach var="splt" items="${fn:split(Student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
+								<input type="hidden" id="classstudyingone" name="classstudying" value="${Student.classstudying}"/>
+								 <input type="hidden" id="classstudying" name="classstudying_${Student.sid}" value="${Student.classstudying}"/>
                                 </td>
                                 <td class="dataText"><c:out  value="${Student.admissiondate}"/></td>
-                                 <input type="hidden" id="classstudying" name="classstudying" value="${Student.classstudying}"/>
+                                
 
                             </tr>
                         </c:forEach>

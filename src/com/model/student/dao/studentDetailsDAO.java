@@ -278,17 +278,14 @@ public class studentDetailsDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public boolean promoteMultiple(List ids, String classStudying) {
+	public boolean promoteMultiple(List<Student> students, String classStudying) {
 		boolean result = false;
 		
 		  String stringclassStudying = classStudying;
 		  String[] temp;
 		 
-		  /* delimiter */
 		  String delimiter = "--";
-		  /* given string will be split by the argument delimiter provided. */
 		  temp = stringclassStudying.split(delimiter);
-		  /* print substrings */
 		 classStudying = temp[0];
 		 String sec = "";
 		 if(temp.length>=2){
@@ -302,11 +299,21 @@ public class studentDetailsDAO {
 			Classhierarchy ch = (Classhierarchy) query1.uniqueResult();
 			
 			if(ch!=null) {
-				String hql = "UPDATE Student set classstudying = :promotedclass WHERE sid IN (:ids)";
-				Query query = session.createQuery(hql);
-				query.setParameter("promotedclass", ch.getUpperclass()+sec);
-				query.setParameterList("ids", ids);
-				query.executeUpdate();
+				
+				for (Student student : students) {
+					
+					 String[] tempstudent = student.getClassstudying().split(delimiter);
+					 String sect = "";
+					 
+					 if(tempstudent.length>=2){
+						  sect = tempstudent[1];
+					 }
+					 
+					String hql = "UPDATE Student set classstudying = '"+ch.getUpperclass()+"--"+sect+"' WHERE sid = "+student.getSid()+"";
+					Query query = session.createQuery(hql);
+					query.executeUpdate();
+				}
+				
 			}
 	
 			transaction.commit();
