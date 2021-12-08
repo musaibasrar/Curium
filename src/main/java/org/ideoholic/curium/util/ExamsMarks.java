@@ -1,10 +1,10 @@
-package com.util;
+package org.ideoholic.curium.util;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class ExamsMarks implements Serializable,Comparable<ExamsMarks>{
+public class ExamsMarks implements Serializable,comparable<ExamsMarks>{
 	
 	String examName;
 	Map<String,String> subMarks;

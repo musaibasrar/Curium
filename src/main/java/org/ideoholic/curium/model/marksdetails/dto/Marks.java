@@ -1,4 +1,4 @@
-package com.model.marksdetails.dto;
+package org.ideoholic.curium.model.marksdetails.dto;
 
 // default package
 // Generated 15 Aug, 2016 11:42:58 AM by Hibernate Tools 4.0.0

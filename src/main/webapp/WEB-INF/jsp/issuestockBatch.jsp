@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Issue Stock</title>
-<link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="css/datePicker/demos.css">
+<link rel="stylesheet" href="/css/datepicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/css/datepicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -408,17 +408,17 @@
 }
 
 </style>
-<script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
 	src="js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
+<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({

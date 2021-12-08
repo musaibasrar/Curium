@@ -1,4 +1,4 @@
-package com.model.importfile.action;
+package org.ideoholic.curium.model.importfile.action;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.importfile.service.ImportFileService;;
+import org.ideoholic.curium.model.importfile.service.ImportFileService;;
 
 public class ImportFileAction {
 	

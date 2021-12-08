@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package com.util;
+package org.ideoholic.curium.util;
 
 import java.io.IOException;
 import java.io.InputStream;

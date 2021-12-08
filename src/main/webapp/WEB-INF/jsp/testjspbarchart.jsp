@@ -17,26 +17,26 @@
 
         <script type="text/javascript" language="JavaScript" src="js/motionpack.js"></script>
         <script src="js/Chart.js"></script>
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/css/datepicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="css/graph/jquery.jqplot.css">
         <link rel="stylesheet" href="css/graph/jquery.jqplot.min.css">
 
-        <link rel="stylesheet" href="css/datePicker/demos.css">
-        <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/css/datepicker/demos.css">
+        <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script  type="text/javascript" src="/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.resizable.js"></script>
         <script type="text/javascript" src="js/graph/jquery.jqplot.js"></script>        
         <script  type="text/javascript" src="js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
         <script type="text/javascript" src="js/graph/plugins/jqplot.barRenderer.min.js"></script>
@@ -301,7 +301,7 @@
         <p class="style1">
             <label>${noOfRecordsOfSubscribers}</label>
             <input type="button" id="view" value="View All " onClick="ViewAll()">
-            <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='addContact.jsp';">
+            <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='/addContact';">
         </p></
             </table> -->
             

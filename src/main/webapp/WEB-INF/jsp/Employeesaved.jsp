@@ -16,15 +16,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <link rel="stylesheet" href="/css/datepicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/css/datepicker/demos.css">
         <!--<script type="text/javascript" language="javascript" src="js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" language="javascript" src="js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.button.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.button.js"></script>
         
         
         
@@ -95,7 +95,7 @@ for(Cookie cookie : cookies){
         <p class="style1">
           
             <input type="button" id="view" value="View All " onClick="ViewAll()">
-            <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='addEmployee.jsp';">
+            <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='/addEmployee';">
         </p></td>
       </tr>
     </table>

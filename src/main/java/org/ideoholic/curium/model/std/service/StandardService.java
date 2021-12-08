@@ -1,4 +1,4 @@
-package com.model.std.service;
+package org.ideoholic.curium.model.std.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.std.dao.StandardDetailsDAO;
-import com.model.std.dto.Classhierarchy;
-import com.model.std.dto.Classsec;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
-import com.util.DataUtil;
+import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
+import org.ideoholic.curium.model.std.dto.Classhierarchy;
+import org.ideoholic.curium.model.std.dto.Classsec;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.util.DataUtil;
 
 public class StandardService {
 

@@ -1,4 +1,4 @@
-package com.model.feescollection.service;
+package org.ideoholic.curium.model.feescollection.service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,25 +20,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.account.dao.AccountDAO;
-import com.model.account.dto.VoucherEntrytransactions;
-import com.model.feescollection.dao.feesCollectionDAO;
-import com.model.feescollection.dto.Feescollection;
-import com.model.feescollection.dto.Receiptinfo;
-import com.model.feescollection.dto.StudentFeesReport;
-import com.model.feesdetails.dao.feesDetailsDAO;
-import com.model.feesdetails.dto.Feesdetails;
-import com.model.parents.dao.parentsDetailsDAO;
-import com.model.parents.dto.Parents;
-import com.model.std.dto.Classsec;
-import com.model.std.service.StandardService;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
-import com.model.student.dto.Studentfeesstructure;
-import com.model.user.dao.UserDAO;
-import com.util.DataUtil;
-import com.util.DateUtil;
-import com.util.NumberToWord;
+import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
+import org.ideoholic.curium.model.feescollection.dto.Feescollection;
+import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
+import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
+import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
+import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.std.dto.Classsec;
+import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.user.dao.UserDAO;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.NumberToWord;
 
 public class FeesCollectionService {
 

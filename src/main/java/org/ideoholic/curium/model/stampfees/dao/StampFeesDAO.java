@@ -1,4 +1,4 @@
-package com.model.stampfees.dao;
+package org.ideoholic.curium.model.stampfees.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,18 +6,18 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.util.Session;
+import org.ideoholic.curium.util.Session;
 import org.hibernate.SessionFactory;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
 
-import com.model.account.dto.VoucherEntrytransactions;
-import com.model.parents.dto.Parents;
-import com.model.stampfees.dto.Academicfeesstructure;
-import com.model.student.dto.Student;
-import com.model.student.dto.Studentfeesstructure;
-import com.model.user.dto.Login;
-import com.util.HibernateUtil;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.user.dto.Login;
+import org.ideoholic.curium.util.HibernateUtil;
 
 public class StampFeesDAO {
 	 Session session = null;

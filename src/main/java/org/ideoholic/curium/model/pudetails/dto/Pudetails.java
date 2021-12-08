@@ -103,11 +103,11 @@ public class Pudetails implements java.io.Serializable {
         this.optionalsubjects = optionalsubjects;
     }
 
-    public String getCompulsorysubjects() {
+    public String getcompulsorysubjects() {
         return this.compulsorysubjects;
     }
 
-    public void setCompulsorysubjects(String compulsorysubjects) {
+    public void setcompulsorysubjects(String compulsorysubjects) {
         this.compulsorysubjects = compulsorysubjects;
     }
 

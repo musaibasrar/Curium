@@ -1,4 +1,4 @@
-package com.model.sendsms.service;
+package org.ideoholic.curium.model.sendsms.service;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -20,14 +20,14 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.model.academicyear.dao.YearDAO;
-import com.model.academicyear.dto.Currentacademicyear;
-import com.model.employee.dao.EmployeeDAO;
-import com.model.employee.dto.Teacher;
-import com.model.parents.dto.Parents;
-import com.model.sendsms.dao.SmsDAO;
-import com.util.DataUtil;
-import com.util.Session;
+import org.ideoholic.curium.model.academicyear.dao.YearDAO;
+import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
+import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.Session;
 
 public class SmsService {
 	

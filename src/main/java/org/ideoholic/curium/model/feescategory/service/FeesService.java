@@ -1,4 +1,4 @@
-package com.model.feescategory.service;
+package org.ideoholic.curium.model.feescategory.service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,19 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.academicyear.dao.YearDAO;
-import com.model.academicyear.dto.Currentacademicyear;
-import com.model.feescategory.dao.feesCategoryDAO;
-import com.model.feescategory.dto.Concession;
-import com.model.feescategory.dto.Feescategory;
-import com.model.feescollection.dao.feesCollectionDAO;
-import com.model.feesdetails.dao.feesDetailsDAO;
-import com.model.mess.card.dto.Card;
-import com.model.parents.dto.Parents;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
-import com.model.student.dto.Studentfeesstructure;
-import com.util.DataUtil;
+import org.ideoholic.curium.model.academicyear.dao.YearDAO;
+import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
+import org.ideoholic.curium.model.feescategory.dto.Concession;
+import org.ideoholic.curium.model.feescategory.dto.Feescategory;
+import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
+import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
+import org.ideoholic.curium.model.mess.card.dto.Card;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.util.DataUtil;
 
 public class FeesService {
         
@@ -173,7 +173,7 @@ public class FeesService {
                 return "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId;
                  }
                  
-                return "error.jsp";
+                return "error";
                 
         }
 
@@ -243,7 +243,7 @@ public class FeesService {
            return "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId;
         }
         
-       return "error.jsp";
+       return "error";
        
 	}
 
@@ -368,7 +368,7 @@ public class FeesService {
            return "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId;
         }
         
-       return "error.jsp";
+       return "error";
        
 	}
 }

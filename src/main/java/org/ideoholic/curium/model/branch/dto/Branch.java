@@ -1,4 +1,4 @@
-package com.model.branch.dto;
+package org.ideoholic.curium.model.branch.dto;
 
 // default package
 // Generated 23 May, 2018 11:42:50 AM by Hibernate Tools 4.0.0

@@ -1,4 +1,4 @@
-package com.model.position.service;
+package org.ideoholic.curium.model.position.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.department.dao.departmentDAO;
-import com.model.department.dto.Department;
-import com.model.position.dao.positionDAO;
-import com.model.position.dto.Position;
-import com.model.student.dao.studentDetailsDAO;
-import com.util.DataUtil;
+import org.ideoholic.curium.model.department.dao.departmentDAO;
+import org.ideoholic.curium.model.department.dto.Department;
+import org.ideoholic.curium.model.position.dao.positionDAO;
+import org.ideoholic.curium.model.position.dto.Position;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.util.DataUtil;
 
 public class PositionService {
 

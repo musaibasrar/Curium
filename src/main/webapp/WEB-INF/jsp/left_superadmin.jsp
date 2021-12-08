@@ -14,16 +14,16 @@ Author     : Musaib
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
         <script language="JavaScript" src="js/motionpack.js"></script>
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <link rel="stylesheet" href="/css/datepicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/css/datepicker/demos.css">
 		
-        <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="js/datePicker/ui/sliderAccess.js"></script>
-        <script src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="js/notification/jquery.jnotify.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="css/font-awesome.css">
@@ -333,7 +333,7 @@ Author     : Musaib
             function auto_reload()
             {
                 alert();
-                window.location = 'notication.jsp';
+                window.location = '/notication';
             }
 
         </script>
@@ -442,7 +442,7 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-				<a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Fees Details</a><br/>
+				<a target="mainFrame" href="/feesCollectionDetails" style="font-size: 12px;">Fees Details</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Archive</a></h5>
@@ -455,12 +455,12 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-                <a target="mainFrame" href="changePassword.jsp" style="font-size: 12px;">Change Password</a><br/>
+                <a target="mainFrame" href="/changePassword" style="font-size: 12px;">Change Password</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
             <div >
-                <a target="mainFrame" href="sendsms_superadmin.jsp" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="/sendsms_superadmin" style="font-size: 12px;">SMS</a><br/>
             </div>
            
             </div>

@@ -1,4 +1,4 @@
-package com.model.periods.service;
+package org.ideoholic.curium.model.periods.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.academicyear.dao.YearDAO;
-import com.model.academicyear.dto.Currentacademicyear;
-import com.model.employee.service.EmployeeService;
-import com.model.parents.dto.Parents;
-import com.model.periods.dao.PeriodDAO;
-import com.model.periods.dto.Perioddetails;
-import com.model.periods.dto.Periodmaster;
-import com.model.std.service.StandardService;
-import com.model.subjectdetails.service.SubjectDetailsService;
-import com.util.DataUtil;
+import org.ideoholic.curium.model.academicyear.dao.YearDAO;
+import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.model.employee.service.EmployeeService;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.periods.dao.PeriodDAO;
+import org.ideoholic.curium.model.periods.dto.Perioddetails;
+import org.ideoholic.curium.model.periods.dto.Periodmaster;
+import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
+import org.ideoholic.curium.util.DataUtil;
 
 public class PeriodService {
 

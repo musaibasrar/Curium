@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.model.feescollection.dao;
+package org.ideoholic.curium.model.feescollection.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,16 +9,16 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.util.Session;
+import org.ideoholic.curium.util.Session;
 import org.hibernate.SessionFactory;
-import com.util.Session.Transaction;
+import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
 
-import com.model.account.dto.VoucherEntrytransactions;
-import com.model.feescollection.dto.Feescollection;
-import com.model.feescollection.dto.Receiptinfo;
-import com.model.student.dto.Studentfeesstructure;
-import com.util.HibernateUtil;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.feescollection.dto.Feescollection;
+import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.util.HibernateUtil;
 
 /**
  * @author Musaib_2

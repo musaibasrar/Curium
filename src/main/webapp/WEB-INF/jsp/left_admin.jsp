@@ -14,16 +14,16 @@ Author     : Musaib
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
         <script language="JavaScript" src="js/motionpack.js"></script>
-        <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <link rel="stylesheet" href="/css/datepicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/css/datepicker/demos.css">
 		
-        <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="js/datePicker/ui/sliderAccess.js"></script>
-        <script src="js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="js/notification/jquery.jnotify.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="css/font-awesome.css">
@@ -348,7 +348,7 @@ Author     : Musaib
             function auto_reload()
             {
                 alert();
-                window.location = 'notication.jsp';
+                window.location = '/notication';
             }
 
         </script>
@@ -492,12 +492,12 @@ for(Cookie cookie : cookies){
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Fees Collection Details</a>
+            				 <a target="mainFrame" href="/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="feescancelledreceipts.jsp" style="font-size: 12px;">Cancelled Fees Receipts</a>
+            				<a target="mainFrame" href="/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
             			</td>
             		</tr>
             		<!-- <tr>
@@ -562,12 +562,12 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="incomestatement.jsp" style="font-size: 12px;">Income Statement</a>
+            				<a target="mainFrame" href="/incomestatement" style="font-size: 12px;">Income Statement</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="trialbalance.jsp" style="font-size: 12px;">Trial Balance</a>
+            				 <a target="mainFrame" href="/trialbalance" style="font-size: 12px;">Trial Balance</a>
             			</td>
             		</tr>
             		<tr>
@@ -732,17 +732,17 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="Backup&Restore.jsp" style="font-size: 12px;">Backup</a>
+            				 <a target="mainFrame" href="/Backup&Restore" style="font-size: 12px;">Backup</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="changePassword.jsp" style="font-size: 12px;">Change Password</a>
+            				<a target="mainFrame" href="/changePassword" style="font-size: 12px;">Change Password</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="uploadattendance.jsp" style="font-size: 12px;">Upload Attendance File</a>
+            				<a target="mainFrame" href="/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
             			</td>
             		</tr>
             		<tr>
@@ -876,7 +876,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="sendemail.jsp" style="font-size: 12px;">Email</a>
+            				<a target="mainFrame" href="/sendemail" style="font-size: 12px;">Email</a>
             			</td>
             		</tr>
                 </table>
@@ -899,7 +899,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                              <a target="mainFrame" href="importfile.jsp" style="font-size: 12px;">Import Files</a><br/>
+                              <a target="mainFrame" href="/importfile" style="font-size: 12px;">Import Files</a><br/>
 				        </td>
 				     </tr>
 				 </table>

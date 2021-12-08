@@ -66,7 +66,7 @@ public class MarksDetailsAction {
 	@PostMapping("/generateReport")
 	public String generateReport() {
 		if (new MarksDetailsService(request, response).generateReport()) {
-              return "markssheet.jsp";	
+              return "markssheet";	
             //return "reportcardsaved";
         } else {
             return "error";

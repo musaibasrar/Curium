@@ -1,4 +1,4 @@
-package com.model.importfile.service;
+package org.ideoholic.curium.model.importfile.service;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,11 +23,11 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.model.parents.dao.parentsDetailsDAO;
-import com.model.parents.dto.Parents;
-import com.model.student.dto.Student;
-import com.util.DataUtil;
-import com.util.DateUtil;
+import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 
 public class ImportFileService {
 

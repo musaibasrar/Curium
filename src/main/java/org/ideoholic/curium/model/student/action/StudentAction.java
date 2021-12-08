@@ -96,11 +96,11 @@ public class StudentAction {
 		if (new StudentService(request, response).viewDetailsOfStudent()) {
 		
 			if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
-                        return "student_details_feesstructure_admin.jsp";
+                        return "student_details_feesstructure_admin";
                     	}else if(!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
-                        return "student_details_feesstructure.jsp";
+                        return "student_details_feesstructure";
                     	}else {
-                    	return "student_details_feesstructure.jsp";
+                    	return "student_details_feesstructure";
                     	}
 		} else {
 			return "viewAll";

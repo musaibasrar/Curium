@@ -1,4 +1,4 @@
-package com.model.adminexpenses.service;
+package org.ideoholic.curium.model.adminexpenses.service;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -16,14 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.model.adminexpenses.dao.AdminDetailsDAO;
-import com.model.adminexpenses.dto.Adminexpenses;
-import com.model.feescollection.dto.Receiptinfo;
-import com.model.student.dao.studentDetailsDAO;
-import com.model.student.dto.Student;
-import com.model.user.dao.UserDAO;
-import com.util.DataUtil;
-import com.util.DateUtil;
+import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
+import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
+import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.user.dao.UserDAO;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 
 public class AdminService {
 	

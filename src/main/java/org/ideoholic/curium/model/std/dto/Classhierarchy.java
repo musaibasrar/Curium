@@ -1,9 +1,9 @@
-package com.model.std.dto;
+package org.ideoholic.curium.model.std.dto;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.model.feescollection.dto.Feescollection;
+import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 
 // default package
 // Generated 29 Oct, 2018 4:21:55 PM by Hibernate Tools 5.3.0.Beta2

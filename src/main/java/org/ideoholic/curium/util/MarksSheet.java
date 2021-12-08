@@ -1,8 +1,8 @@
-package com.util;
+package org.ideoholic.curium.util;
 
 import java.util.List;
 
-import com.model.parents.dto.Parents;
+import org.ideoholic.curium.model.parents.dto.Parents;
 
 public class MarksSheet  implements java.io.Serializable {
     

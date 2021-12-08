@@ -1,4 +1,4 @@
-package com.model.sendemail.service;
+package org.ideoholic.curium.model.sendemail.service;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -19,14 +19,14 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.SimpleEmail;
 
-import com.model.academicyear.dao.YearDAO;
-import com.model.academicyear.dto.Currentacademicyear;
-import com.model.employee.dao.EmployeeDAO;
-import com.model.employee.dto.Teacher;
-import com.model.parents.dto.Parents;
-import com.model.sendemail.dao.EmailDAO;
-import com.model.sendsms.dao.SmsDAO;
-import com.util.DataUtil;
+import org.ideoholic.curium.model.academicyear.dao.YearDAO;
+import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
+import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.sendemail.dao.EmailDAO;
+import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
+import org.ideoholic.curium.util.DataUtil;
 
 public class EmailService {
 	

@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 6 Nov, 2014 12:17:14 PM by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="com.model.std.dto.Classsec" table="classsec">
+    <class name="org.ideoholic.curium.model.std.dto.Classsec" table="classsec">
         <id name="stdrdid" type="java.lang.Integer">
             <column name="stdrdid" />
             <generator class="identity" />
