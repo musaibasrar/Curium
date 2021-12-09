@@ -538,7 +538,7 @@
     });
              function addPatient(){
                 var form1=document.getElementById("form1");
-                form1.action="Controller?process=PatientProcess&action=add";
+                form1.action="/PatientProcess/add";
                 form1.submit();
             }
         </script>
@@ -549,7 +549,7 @@
 
             function searchForFees() {
         		var form1 = document.getElementById("form1");
-        		form1.action = "Controller?process=StampFeesProcess&action=search";
+        		form1.action = "/StampFeesProcess/search";
         		form1.method = "POST";
         		form1.submit();
 
@@ -567,7 +567,7 @@
 </head>
 <body>
 	<form id="form1"
-		action="Controller?process=FeesCollection&action=feesAdd"
+		action="/FeesCollection/feesAdd"
 		method="post" onkeypress="if (event.keyCode == 92) addRow();">
 		<div style="height: 28px">
 			<!--<a href="#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
@@ -732,7 +732,7 @@
 									name="studentIDs"
 									value="<c:out value="${Parents.student.sid}"/>" /></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
-									href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>"><c:out
+									href="/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
 											value="${Parents.student.admissionnumber}" /></a></td>
 								<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 								<td class="dataText"><c:out

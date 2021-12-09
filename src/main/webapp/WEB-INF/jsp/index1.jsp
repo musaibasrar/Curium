@@ -61,7 +61,7 @@
 
             <frameset  cols="175,*" frameborder="0" border="0" framespacing="0">
                 <frame  src="/left" name="leftFrame" scrolling="NO"  frameborder="1"   />
-                <frame src="Controller?process=StudentProcess&action=viewAll" name="mainFrame" scrolling="yes" />
+                <frame src="/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
             </frameset>
 
    

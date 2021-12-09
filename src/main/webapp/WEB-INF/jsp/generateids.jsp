@@ -360,7 +360,7 @@
 <script type="text/javascript">
 	function searchDetails() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=printids&action=searchDetails";
+		form1.action = "/printids/searchDetails";
 		form1.method = "POST";
 		form1.submit();
 
@@ -368,7 +368,7 @@
 
 	function printPreview() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=Printids&action=printpreview";
+		form1.action = "/Printids/printpreview";
 		form1.method = "POST";
 		form1.submit();
 
@@ -450,7 +450,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -463,7 +463,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=Printids&action=printpreview" method="POST">
+	<form id="form1" action="/Printids/printpreview" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -584,7 +584,7 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=StudentProcess&action=ViewFeesStructure&id=<c:out value='${Parents.student.sid}'/>"><c:out
+								href="/StudentProcess/ViewFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out

@@ -408,7 +408,7 @@ $(function() {
 		
 		
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=MarksDetailsProcess&action=searchForGraphicalReport";
+		form1.action = "/MarksDetailsProcess/searchForGraphicalReport";
 		form1.method = "POST";
 		form1.submit();
 
@@ -488,7 +488,7 @@ $(function() {
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -501,7 +501,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=MarksDetailsProcess&action=getStudentGraph" method="POST">
+	<form id="form1" action="/MarksDetailsProcess/getStudentGraph" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -639,7 +639,7 @@ for(Cookie cookie : cookies){
 								href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'
 								/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 									value="${Parents.student.admissionnumber}" /></a></td> 
-									Controller?process=MarksDetailsProcess&action=getStudentGraph--%>
+									Controller?process=MarksDetailsProcess/getStudentGraph--%>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">
 							<input type="hidden" id="examclass" name="examclass"

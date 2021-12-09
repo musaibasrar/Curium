@@ -407,7 +407,7 @@
 <script type="text/javascript">
 	function searchByDate() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=UserProcess&action=searchByDate";
+		form1.action = "/UserProcess/searchByDate";
 		form1.method = "POST";
 		form1.submit();
 
@@ -571,7 +571,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -585,7 +585,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1"
-		action="Controller?process=FeesDetails&action=exportDataForFees" method="POST">
+		action="/FeesDetails/exportDataForFees" method="POST">
 		
 		<div class="alert-box success">Receipt has been cancelled successfully!!!</div>
 		<div class="alert-box failure">Receipt cancellation failed, Please try again!!!</div>
@@ -713,8 +713,8 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
                                 <td  class="dataText"><c:out value="${feesdetails.branchreceiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=CancelFeesReceipt&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
 
                             </tr>
                         </c:forEach>

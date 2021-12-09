@@ -141,7 +141,7 @@
              
              function printReceipt(){
             	 document.getElementById("print").click();
-            	 //document.location.href = "Controller?process=FeesProcess&action=feesCollect"; 
+            	 //document.location.href = "/FeesProcess/feesCollect"; 
              }
         </script>
     </head>
@@ -149,7 +149,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -226,7 +226,7 @@ for(Cookie cookie : cookies){
                     <tr>
 
 
-                        <td align="center"><a id="print" href="Controller?process=FeesCollection&action=printReceipt&id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td align="center"><a id="print" href="/FeesCollection/printReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </TABLE>

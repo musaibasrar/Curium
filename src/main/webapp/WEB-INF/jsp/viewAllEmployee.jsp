@@ -357,14 +357,14 @@
             
             function refreshPage(){
                  var form1=document.getElementById("form1");
-                form1.action="Controller?process=PersonalProcess&action=ViewAllGo";
+                form1.action="/PersonalProcess/ViewAllGo";
                 form1.submit();
                 
                 //window.location.reload();
             } 
             function redirect(){
                  var form1=document.getElementById("form1");
-                    form1.action="Controller?process=PersonalProcess&action=redirect";
+                    form1.action="/PersonalProcess/redirect";
                     form1.submit();
                 
                 //window.location.reload();
@@ -375,7 +375,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -389,7 +389,7 @@ for(Cookie cookie : cookies){
 %>
     <body  >
 
-        <form name="form1" id="form1"action="Controller?process=EmployeeProcess&action=deleteMultiple" method="post">
+        <form name="form1" id="form1"action="/EmployeeProcess/deleteMultiple" method="post">
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>
@@ -419,7 +419,7 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="Controller?process=EmployeeProcess&action=ViewDetails&id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
+                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.contactnumber}"/></td>
                                 <td class="dataText"><c:out value="${employee.department}"/></td>
                                 
@@ -439,7 +439,7 @@ for(Cookie cookie : cookies){
             <div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="Controller?process=PersonalProcessPages&page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/PersonalProcessPages&page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -452,7 +452,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="Controller?process=PersonalProcessPages&page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/PersonalProcessPages&page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -461,7 +461,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="Controller?process=PersonalProcessPages&page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/PersonalProcessPages&page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
             

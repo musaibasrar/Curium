@@ -466,7 +466,7 @@
 	function addSuppliers(){
 		var form1 = document.getElementById("form1");
 		if(form1.checkValidity()) {
-			form1.action = "Controller?process=MessSuppliersProcess&action=addSuppliers";
+			form1.action = "/MessSuppliersProcess/addSuppliers";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -475,13 +475,13 @@
 	
 	function updateSuppliers(){
 		var form1 = document.getElementById("form1");
-			form1.action = "Controller?process=MessSuppliersProcess&action=updateSuppliers";
+			form1.action = "/MessSuppliersProcess/updateSuppliers";
 			form1.method = "POST";
 			form1.submit();	
 	}
 	
 	function deleteSuppliers(){
-			form1.action = "Controller?process=MessSuppliersProcess&action=deleteSuppliers";
+			form1.action = "/MessSuppliersProcess/deleteSuppliers";
 			form1.method = "POST";
 			form1.submit();	
 	}
@@ -560,7 +560,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

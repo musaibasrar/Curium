@@ -330,7 +330,7 @@
            
             function Update() {
                 var form1 = document.getElementById("form1");
-                form1.action = "Controller?process=UserProcess&action=updateYear";
+                form1.action = "/UserProcess/updateYear";
                 form1.submit();
             }
 
@@ -400,7 +400,7 @@
             function changeYear() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "Controller?process=YearProcess&action=saveYear";
+                form1.action = "/YearProcess/saveYear";
                 form1.submit();
 
             }

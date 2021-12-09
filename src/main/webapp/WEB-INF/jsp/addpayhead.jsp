@@ -380,7 +380,7 @@
 
 	function searchForEmployees(staffName, staffDepartment){
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=HrProcess&action=searchEmployeesForPayHead&staffName="+staffName+"&staffDepartment="+staffDepartment+"";
+		form1.action = "/HrProcess/searchEmployeesForPayHead?staffName="+staffName+"&staffDepartment="+staffDepartment+"";
 		form1.method = "POST";
 		form1.submit();
 
@@ -439,7 +439,7 @@
 
 	function addPayHeadStaff() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=HrProcess&action=addPayHeadStaffDetails";
+		form1.action = "/HrProcess/addPayHeadStaffDetails";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -459,7 +459,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "AjaxController?process=HrProcess&action=getPayHead&payHeadType="+selected,true);
+			xmlHttp.open("GET", "/HrProcess/getPayHead?payHeadType="+selected,true);
 			xmlHttp.send(null);
 		}
 	    
@@ -502,7 +502,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -680,7 +680,7 @@ for(Cookie cookie : cookies){
 					   <c:forEach items="${employeeList}" var="employee">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText" style="display:none"><input type="checkbox"  checked id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="Controller?process=HrProcess&action=viewLeavesDetails&id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
+                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/HrProcess/viewLeavesDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.department}"/></td>
                                 <td class="dataText"><c:out value="${employee.designation}"/></td>
                                 <td class="dataText"><input type="text"	id="values" name="values" value="0"

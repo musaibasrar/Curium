@@ -43,7 +43,7 @@ Author     : Musaib
 
 
                 get.onreadystatechange = processdata;
-                get.open("POST", "AjaxController?process=VisitProcess&action=getAJaxNextVisit&startHour=" + startHour + "&startMin=" + startMin, true);
+                get.open("POST", "/VisitProcess/getAJaxNextVisit?startHour=" + startHour + "&startMin=" + startMin, true);
                 get.send(null);
 
             }
@@ -61,7 +61,7 @@ Author     : Musaib
                             patientID = visit.getElementsByTagName("PatientID")[0].firstChild.nodeValue;
                             visitTime = visit.getElementsByTagName("VisitTime")[0].firstChild.nodeValue;
                             name = visit.getElementsByTagName("PatientName")[0].firstChild.nodeValue;
-                            link = "<a target='mainFrame' href='Controller?process=PatientProcess&action=viewDetails&id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
+                            link = "<a target='mainFrame' href="/PatientProcess/viewDetails?id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
 
                             $(function() {
                                 $('#Notification').jnotifyAddMessage({
@@ -95,7 +95,7 @@ Author     : Musaib
 
 
                 getExpiringStockCount.onreadystatechange = processExpiringStockData;
-                getExpiringStockCount.open("POST", "AjaxController?process=StockProcess&action=getExpiringStock", true);
+                getExpiringStockCount.open("POST", "/StockProcess/getExpiringStock", true);
                 getExpiringStockCount.send(null);
 
             }
@@ -127,7 +127,7 @@ Author     : Musaib
 
 
                 getDepletingStockCount.onreadystatechange = processDepletingStockData;
-                getDepletingStockCount.open("POST", "AjaxController?process=StockProcess&action=getDepletingStock", true);
+                getDepletingStockCount.open("POST", "/StockProcess/getDepletingStock", true);
                 getDepletingStockCount.send(null);
 
             }
@@ -431,7 +431,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -453,32 +453,32 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="Controller?process=StudentProcess&action=viewAll" >View All</a><br/>
+                <a target="mainFrame" href="/StudentProcess/viewAll" >View All</a><br/>
                 <a target="mainFrame" href="/feesstructure" >Fees Structure</a><br/>
                 
 
             </div>
             <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="Controller?process=EmployeeProcess&action=addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="Controller?process=DepartmentProcess&action=departmentView" >Add Department</a>
-                <a target="mainFrame" href="Controller?process=PositionProcess&action=positionView" >Add Position</a>
+                <a target="mainFrame" href="/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="/EmployeeProcess/addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="/DepartmentProcess/departmentView" >Add Department</a>
+                <a target="mainFrame" href="/PositionProcess/positionView" >Add Position</a>
 
             </div> -->
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="Controller?process=FeesProcess&action=feesView" >Fees Category</a>
-                <a target="mainFrame" href="Controller?process=FeesProcess&action=feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="/FeesProcess/feesView" >Fees Category</a>
+                <a target="mainFrame" href="/FeesProcess/feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
             <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="Controller?process=AdminProcess&action=viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="/AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
@@ -499,15 +499,15 @@ for(Cookie cookie : cookies){
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="Controller?process=StudentProcess&action=archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
             <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="Controller?process=StampFeesProcess&action=showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="Controller?process=YearProcess&action=updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="/YearProcess/updateYear" >Academic year</a><br/>
                 
 
             </div> -->
