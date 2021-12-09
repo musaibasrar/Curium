@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class ExamsMarks implements Serializable,comparable<ExamsMarks>{
+public class ExamsMarks implements Serializable,Comparable<ExamsMarks>{
 	
 	String examName;
 	Map<String,String> subMarks;
