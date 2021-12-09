@@ -14,7 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Graph</title>
-        <script src="js/Chart.min.js"></script>
+        <script src="/js/Chart.min.js"></script>
     </head>
     <%
 //allow access only if session exists

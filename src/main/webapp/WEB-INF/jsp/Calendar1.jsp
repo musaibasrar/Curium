@@ -8,10 +8,10 @@ pageEncoding="ISO-8859-1"%>
 <head>
 <title>CBSE Calendar</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="resources/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="/css/screen.css" />
 
 
-<link rel='stylesheet' type='text/css' href='resources/fullcalendar/fullcalendar.css' />
+<link rel='stylesheet' type='text/css' href='/css/fullcalendar.css' />
 <script type='text/javascript' src='resources/jquery/jquery-1.7.1.min.js'></script>
 <script type='text/javascript' src='resources/jquery/jquery-ui-1.8.17.custom.min.js'></script>
 <script type='text/javascript' src='resources/fullcalendar/fullcalendar.js'></script>
@@ -180,7 +180,7 @@ pageEncoding="ISO-8859-1"%>
 <head>
 <title>CBSE Calendar</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="resources/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="/css/screen.css" />
 
 
 <link rel='stylesheet' type='text/css' href='resources/fullcalendar/fullcalendar.css' />

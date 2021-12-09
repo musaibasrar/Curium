@@ -15,11 +15,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
 
-        <script type="text/javascript" language="JavaScript" src="js/motionpack.js"></script>
-        <link rel="stylesheet" href="/css/datepicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/css/datepicker/demos.css">
+        <link rel="stylesheet" href="/css/datePicker/demos.css">
         <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.dialog.js"></script>
@@ -60,7 +60,7 @@
                 height: 22px;
                 vertical-align: middle;
                 text-align: center;
-                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
             }
             .headerTD{
                 background-color:#4b6a84;
@@ -339,7 +339,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="images/bg.jpg">
+    <body background="/images/bg.jpg">
         <form  method="post" id="form1">
 
             <table width="100%">

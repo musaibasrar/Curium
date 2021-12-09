@@ -176,11 +176,11 @@ for(Cookie cookie : cookies){
         <form id="form1" method="post" >
             <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
                 <tr>
-                    <td valign="top" background="images/h_bg.jpg">
+                    <td valign="top" background="/images/h_bg.jpg">
                         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
                             <!-- <tr>
-                               <td width="234" ><div align="center"><img src="images/logo.png" width="200" height="64" /></div></td> 
-                                <td width="700" ><div align="center"><img src="images/SMS.png" width="391" height="50" /></div></td>
+                               <td width="234" ><div align="center"><img src="/images/logo.png" width="200" height="64" /></div></td> 
+                                <td width="700" ><div align="center"><img src="/images/SMS.png" width="391" height="50" /></div></td>
                                
                             </tr> -->
                             <tr>
@@ -188,15 +188,15 @@ for(Cookie cookie : cookies){
                             </tr>
                             <tr>
                             				<td width="10"></td>
-                                          	<td align="left"><img src="images/curiumheader.png" /></td>  
+                                          	<td align="left"><img src="/images/curiumheader.png" /></td>  
                             				                           				
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/FeesProcess/feesCollectAllBranches"><img   src="images/feescollectw.png" width="40" height="40" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/FeesProcess/feesCollectAllBranches"><img   src="/images/feescollectw.png" width="40" height="40" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><label style="color:white;font-size: 11px;font-family: arial;">Fees <br>Collect</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				
-                                            <td width="40"><a target="mainFrame" href="/StudentProcess/viewAllSuperAdmin"><div align="center" align="center"><img  alt="View All Students" src="images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/StudentProcess/viewAllSuperAdmin"><div align="center" align="center"><img  alt="View All Students" src="/images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">View <br>All</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40" ><div align="center" ><a target="_parent" href="/UserProcess/logout"><img   src="images/logoutw.png" width="30" height="30" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="_parent" href="/UserProcess/logout"><img   src="/images/logoutw.png" width="30" height="30" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
                                             <td width="60" ><div align="center" ><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             </tr>

@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Holiday</title>
-<link rel="stylesheet" href="/css/datepicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/css/datepicker/demos.css">
+<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -229,7 +229,7 @@
 	vertical-align: text-top;
 	text-align: center;
 	background-image:
-		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .dataText {
@@ -280,7 +280,7 @@
 	border-radius: 6px;
 	background-color: #4b6a84;
 	background-image:
-		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 	color: #FFFFFF;
 	font-family: Tahoma;
 	font-size: 13px;
@@ -291,12 +291,12 @@
 }
 </style>
 
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="js/dataTable/jquery.dataTables.js"></script>
+	src="/js/dataTable/jquery.dataTables.js"></script>
 <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
 	src="/js/datePicker/ui/jquery.ui.widget.js"></script>
@@ -306,7 +306,7 @@
 <script type="text/javascript" src="/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="js/validation/jquery.ketchup.all.min.js"></script>
+	src="/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
 	src="/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
@@ -351,7 +351,7 @@
 	}
 	
 </script>
-<script type="text/javascript" src="js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function addHolidays() {
@@ -694,7 +694,7 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="images/sort_both.png" /></th>
+							src="/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Contact Number&nbsp;</th>
 							<th title="click to sort" class="headerText">Department&nbsp;</th>
 						</tr>

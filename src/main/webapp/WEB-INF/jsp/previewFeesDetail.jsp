@@ -39,7 +39,7 @@
                 height: 22px;
                 vertical-align: middle;
                 text-align: center;
-                background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
             }
             .dataText {
                 border-radius:3px;
@@ -132,7 +132,7 @@
         </style>
         <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="js/print/jquery.printPage.js" type="text/javascript"></script>
+        <script src="/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {

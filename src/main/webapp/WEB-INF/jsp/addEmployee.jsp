@@ -21,8 +21,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Employee</title>
-<link rel="stylesheet" href="/css/datepicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
 	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -34,7 +34,7 @@
 <script src="/js/datePicker/ui/sliderAccess.js"></script>
 <script src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/css/datepicker/demos.css">
+<link rel="stylesheet" href="/css/datePicker/demos.css">
 
 <style type="text/css">
 .myclass {
@@ -225,7 +225,7 @@
 </style>
 
 
-<script type="text/javascript" src="js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/js/datetimepicker_css.js"></script>
 <script src="JavaScript/actb.js"></script>
 <script src="JavaScript/common.js"></script>
 
