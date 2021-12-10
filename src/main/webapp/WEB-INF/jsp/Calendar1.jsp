@@ -8,10 +8,10 @@ pageEncoding="ISO-8859-1"%>
 <head>
 <title>CBSE Calendar</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/resources/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="/css/screen.css" />
 
 
-<link rel='stylesheet' type='text/css' href='resources/fullcalendar/fullcalendar.css' />
+<link rel='stylesheet' type='text/css' href='/css/fullcalendar.css' />
 <script type='text/javascript' src='resources/jquery/jquery-1.7.1.min.js'></script>
 <script type='text/javascript' src='resources/jquery/jquery-ui-1.8.17.custom.min.js'></script>
 <script type='text/javascript' src='resources/fullcalendar/fullcalendar.js'></script>
@@ -93,8 +93,8 @@ for(Cookie cookie : cookies){
 <div id="container">
 <h1>appointment</h1>
 <div id=navigation>
-<a href="/#" class="navi"><div id="naviElement" class="hovered">Calendar</div></a>
-<a href="/logout" class="navi"><div id="naviElement">Logout</div></a>
+<a href="#" class="navi"><div id="naviElement" class="hovered">Calendar</div></a>
+<a href="logout" class="navi"><div id="naviElement">Logout</div></a>
 </div>
 
 
@@ -180,7 +180,7 @@ pageEncoding="ISO-8859-1"%>
 <head>
 <title>CBSE Calendar</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/resources/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="/css/screen.css" />
 
 
 <link rel='stylesheet' type='text/css' href='resources/fullcalendar/fullcalendar.css' />
@@ -249,8 +249,8 @@ return value;
 <div id="container">
 <h1>appointment</h1>
 <div id=navigation>
-<a href="/#" class="navi"><div id="naviElement" class="hovered">Calendar</div></a>
-<a href="/logout" class="navi"><div id="naviElement">Logout</div></a>
+<a href="#" class="navi"><div id="naviElement" class="hovered">Calendar</div></a>
+<a href="logout" class="navi"><div id="naviElement">Logout</div></a>
 </div>
 
 

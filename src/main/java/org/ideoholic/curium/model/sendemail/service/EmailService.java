@@ -117,7 +117,7 @@ public class EmailService {
 		boolean result = false;
 		try {
 			Properties properties = new Properties();
-	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
+	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 	        properties.load(inputStream);
 	        String smtpHost = properties.getProperty("HOSTNAME");
 			String smtpPort = properties.getProperty("SMTPPORT");

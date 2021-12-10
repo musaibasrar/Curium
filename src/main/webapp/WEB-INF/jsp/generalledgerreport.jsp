@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -381,9 +382,9 @@
 		$("#fromdate").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			yearRange: "-50:+10"
+			yearRange: "-5:+4"
 		});
-		$( "#fromdate" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#fromdate" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#fromdate").datepicker("option", "showAnim", $(this).val());
 		});
@@ -391,9 +392,9 @@
 		$("#todate").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			yearRange: "-50:+10"
+			yearRange: "-5:+4"
 		});
-		$( "#todate" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#todate" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#todate").datepicker("option", "showAnim", $(this).val());
 		});
@@ -429,7 +430,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Search Journal Entries</a></li>
+					<li><a href="#tabs-1">Search Journal Entries</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -443,7 +444,7 @@ for(Cookie cookie : cookies){
 
 						<tr>
 						
-						<td class="alignRight">Select Account</td>
+						<td class="alignRight">Select Account&nbsp;&nbsp;</td>
 							<td><label> <select name="accountid" id="accountid" style="width: 230px" required>
 										<option selected></option>
 									
@@ -467,11 +468,11 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-						<td class="alignRight">From Date(MM/DD/YYYY)&nbsp;</td>
+						<td class="alignRight">From Date&nbsp;&nbsp;</td>
 							<td><label> <input name="fromdate" autocomplete="off" type="text" class="textField" id="fromdate" size="36" required>
 							</label></td>
 							
-							<td  class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;To Date(MM/DD/YYYY)&nbsp;</td>
+							<td  class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;To Date&nbsp;&nbsp;</td>
 							<td ><label> <input name="todate" autocomplete="off" type="text" class="textField" id="todate" size="36" required>
 							</label></td>
 							
@@ -526,9 +527,9 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Voucher Number</th>
 						<th title="click to sort" class="headerText">Date</th>
 						<th title="click to sort" class="headerText">Account Description&nbsp;</th>
+						<th title="click to sort" class="headerText">Narration</th>
 						<th title="click to sort" class="headerText">Debits&nbsp;</th>
 						<th title="click to sort" class="headerText">Credits&nbsp;</th>
-						<th title="click to sort" class="headerText">Narration</th>
 					</tr>
 				</thead>
 
@@ -550,6 +551,8 @@ for(Cookie cookie : cookies){
 							<td class="dataText">
 							<c:set var="ledgername" value="${fn:split(ledgertransactions.value,':')}"></c:set>
 							${ledgername[0]}<%-- <c:out value="${ledgertransactions.value}" /> --%></td>
+							  <td class="dataText"><c:out	value="${ledgertransactions.key.narration}" /></td>
+							
 							<c:if test="${ledgername[1] == 'Dr'}">
 								<td class="dataText"></td>
 								<td class="dataText"><c:out	value="${ledgertransactions.key.cramount}" /></td>
@@ -559,11 +562,51 @@ for(Cookie cookie : cookies){
 								<td class="dataText"></td>
 							</c:if>
 							
-						    <td class="dataText"><c:out	value="${ledgertransactions.key.narration}" /></td>
+						  
 
 
 						</tr>
 					</c:forEach>
+					<tr>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataTextRight" >
+						<label style="color: #eb6000"><b>
+							<fmt:formatNumber type="currency"  value="${drtotal}" /></b>
+						</label> 
+					</td>
+						<td class="dataTextRight">
+						  <label style="color: #eb6000"><b>
+							<fmt:formatNumber type="currency"  value="${crtotal}" /></b>
+						  </label>
+						</td>
+					</tr>
+					<tr>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataTextRight" >
+						<label style="color: #eb6000"><b>Balance</b>
+						</label> 
+					</td>
+						<td class="dataTextRight">
+						  <label style="color: #eb6000">
+						  		<b>
+							  		<c:if test="${drtotal > crtotal}">
+							  			<fmt:formatNumber type="currency"  value="${drtotal - crtotal}" />
+							  		</c:if>
+							  		<c:if test="${crtotal > drtotal}">
+							  			<fmt:formatNumber type="currency"  value="${crtotal - drtotal}" />
+							  		</c:if>
+						  		</b>
+						  </label>
+						</td>
+					</tr>
 				</tbody>
 				<tfoot>
 					<tr>

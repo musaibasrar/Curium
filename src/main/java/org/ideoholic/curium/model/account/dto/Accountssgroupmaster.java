@@ -25,16 +25,18 @@ public class Accountssgroupmaster implements java.io.Serializable {
 	private Integer subgroupmasterid;
 	private Accountsubgroupmaster accountSubGroupMaster;
 	private int branchid;
+	private int userid;
 	
 	public Accountssgroupmaster() {
 	}
 
 	public Accountssgroupmaster(String ssgroupname,
-			Integer subgroupmasterid, Accountsubgroupmaster accountSubGroupMaster, int branchid) {
+			Integer subgroupmasterid, Accountsubgroupmaster accountSubGroupMaster, int branchid, int userid) {
 		this.ssgroupname = ssgroupname;
 		this.subgroupmasterid = subgroupmasterid;
 		this.accountSubGroupMaster = accountSubGroupMaster;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -81,6 +83,14 @@ public class Accountssgroupmaster implements java.io.Serializable {
 
 	public void setSubgroupmasterid(Integer subgroupmasterid) {
 		this.subgroupmasterid = subgroupmasterid;
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 }

@@ -62,7 +62,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 18px;
+	font-size: 22px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -71,7 +71,7 @@
 	font-weight: bold;
 	font-family: ariel;
 	color: black;
-	font-size: 22px;
+	font-size: 16px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -224,8 +224,11 @@
 				<img src="/images/logo.jpg" width="150" height="50"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				Curium<br><br>
-				<label class="addressLine">Concession Report</label><br>
+				
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 20px;">${branchaddress}</label><br>
+				<label class="addressLine" style="padding-left: 30px;">Contact:&nbsp;${branchcontact}</label><br>
+				<label class="addressLine" style="text-decoration: underline;">Concession Report</label><br>
 				<%-- <label class="addressLineTwo">${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;${issuedtoselected}&nbsp;&nbsp;${purposeselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp;
 				</label> --%>
 				</td>

@@ -629,7 +629,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Bonafide Certificate</a></li>
+					<li><a href="#tabs-1">Bonafide Certificate</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -747,15 +747,13 @@ for(Cookie cookie : cookies){
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out
+									value="${Parents.student.classstudying}" /></td>
+							<td class="dataText"><c:out
 									value="${Parents.fathersname}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.mothersname}" /></td>
 							<td class="dataText"><c:out
-									value="${Parents.student.classstudying}" /></td>				
-							<td class="dataText"><c:out
 									value="${Parents.student.admissiondate}" /></td>
-
-
 						</tr>
 					</c:forEach>
 				</tbody>

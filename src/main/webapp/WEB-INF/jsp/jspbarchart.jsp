@@ -192,11 +192,11 @@ for(Cookie cookie : cookies){
              <div class="row">
              	
              	<div class="col">
-             		<canvas id="student-monthlyfeeschart" height="200"></canvas>
+             		<canvas id="student-monthlyfeeschart" height="300"></canvas>
              	</div>
              	
             	<div class="col">
-            		<canvas id="student-expensechart" height="200"></canvas>
+            		<canvas id="student-expensechart" height="300"></canvas>
             	</div>	
              </div>
              
@@ -455,8 +455,8 @@ for(Cookie cookie : cookies){
                 	   yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: 20000,
-                                stepSize: 2000
+                                max: 500000,
+                                stepSize: 20000
                                }
                         
                             }]
@@ -556,8 +556,8 @@ for(Cookie cookie : cookies){
                 	   yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: 25000,
-                                stepSize: 5000
+                                max: 500000,
+                                stepSize: 20000
                                }
                         
                             }]

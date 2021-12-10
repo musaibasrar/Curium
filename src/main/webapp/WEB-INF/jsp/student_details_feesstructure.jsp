@@ -344,6 +344,31 @@
         	    	 return false;
         		});
                 
+                $("#print").button({
+        	        icons: {
+        	            primary: "ui-icon-print"
+        	        }
+        	    });
+                
+                
+                $("#applyconcession").button({
+        	        icons: {
+        	            primary: "ui-icon-flag"
+        	        }
+        	    }).click(function() {
+        	    	if (confirm('Are you sure you want to apply the concession?')) {
+        	    		applyConcession();
+        				}
+        	    	 return false;
+        		});
+                
+                $(".concession").keypress(function (e) {
+       		     //if the letter is not digit then display error and don't type anything
+       		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+       		               return false;
+       		    }
+       		   });
+                
             });
             
             $(function(){
@@ -381,14 +406,14 @@
                 });
 
             });
-                       
+                      
             
             function searchFeesStructure() {
 
                 var form1 = document.getElementById("form1");
                 var id = document.getElementById("id").value;
                 
-                form1.action = "/StudentProcess/feesStructurePerYear&id="+id;
+                form1.action = "/StudentProcess/feesStructurePerYear?id="+id;
                 form1.submit();
 
             }
@@ -407,6 +432,26 @@
                 form1.action = "/FeesProcess/waiveOffFees";
                 form1.submit();
 
+            }
+            
+            function applyConcession() {
+
+                var form1 = document.getElementById("form1");
+                form1.action = "/FeesProcess/applyConcession";
+                form1.submit();
+
+            }
+            
+            function checkConcession(dueAmount,concession,sfsid){
+            	var due = dueAmount;
+            	var con = concession;
+            	
+            	if(con>due){
+            		document.getElementById("concession:"+sfsid).value="";
+            		document.getElementById(sfsid).checked = false;
+            	}else if(con<=due){
+            		document.getElementById(sfsid).checked = true;
+            	}
             }
            
         </script>
@@ -445,7 +490,7 @@ for(Cookie cookie : cookies){
             </table>
             <div id="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="/#">Fees Structure</a></h3>
+                <h3><a href="#">Fees Structure</a></h3>
                 
                 <div>
                 
@@ -549,6 +594,8 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Fees Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Installments&nbsp;</th>
                             <th title="click to sort" class="headerText">Total Fees Amount&nbsp;</th>
+                            <th title="click to sort" class="headerText">Fees Paid&nbsp;</th>
+                            <th title="click to sort" class="headerText">Fees Due&nbsp;</th>
                             <th title="click to sort" class="headerText">Concession Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Waive Off Amount&nbsp;</th>
                         </tr>
@@ -566,8 +613,17 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesstructure.feescategory.amount}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.totalinstallment}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
-                                <td class="dataText"><c:out value="${feesstructure.concession}"/></td>
-                                <td class="dataText"><c:out value="${feesstructure.waiveoff}"/></td>
+                                <td class="dataText"><c:out value="${feesstructure.feespaid}"/></td>
+                                <td class="dataText"><input type="text" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" name="dueamount:${feesstructure.sfsid}" value="${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff}" readonly></td>
+                                <td class="dataText">
+                                <input type="hidden" id="concessionold:${feesstructure.sfsid}" name="concessionold:${feesstructure.sfsid}" value="${feesstructure.concession}">
+                                <input type="text" id="concession:${feesstructure.sfsid}" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" onkeyup="checkConcession(${feesstructure.feesamount-feesstructure.feespaid - feesstructure.concession - feesstructure.waiveoff},this.value,${feesstructure.sfsid})" 
+                                name="concession:${feesstructure.sfsid}" class="concession"
+                                value="${feesstructure.concession}"></td>
+                                <td class="dataText">
+                                
+                                <input type="hidden" name="waiveoff:${feesstructure.sfsid}" value="${feesstructure.waiveoff}" >
+                                <c:out value="${feesstructure.waiveoff}"/></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -583,13 +639,19 @@ for(Cookie cookie : cookies){
                                     </tr>
                                     <tr>
                                         <td align="left">
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <button id="delete" >
                                             Delete</button>
 
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                              <button id="waiveoff">Waive Off</button>
+                                             
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                             <button id="applyconcession">Apply Concession</button> -->
+                                             
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                             <button id="print" onclick="window.location.href='/printstudentdetailsfeesstructure'">Print</button>
 
                                         </td>
 

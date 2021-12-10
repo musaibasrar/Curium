@@ -450,7 +450,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Add New</a></li>
+					<li><a href="#tabs-1">Add New</a></li>
 				</ul>
 
 

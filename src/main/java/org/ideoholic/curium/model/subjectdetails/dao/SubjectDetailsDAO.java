@@ -175,5 +175,24 @@ public class SubjectDetailsDAO {
 			return results;
 		}
 	}
+	
+	
+	public List<Subject> readAllSubjectsClassWise(int branchId, String examClass) {
+		
+		List<Subject> results = new ArrayList<Subject>();
+		try {
+
+			transaction = session.beginTransaction();
+			results = (List<Subject>) session.createQuery("From Subject where examclass='"+examClass+"' and branchid="+branchId)
+					.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
 
 }

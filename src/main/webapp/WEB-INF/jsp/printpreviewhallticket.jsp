@@ -236,18 +236,16 @@ for(Cookie cookie : cookies){
                         
                         <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
                         	<table style="page-break-inside: avoid;border-collapse: collapse;">
+                        		
 			<tr>
-				<td width="10%"></td>
-				<td><img src="/images/curiumheader.png" width="190" height="60"/></td>
-				<td width="5%"></td>
+				<td width="30%"></td>
+				<td><img src="/images/logo.jpg" width="140" height="70"/></td>
 				<td>
-				<label class="dataTextBoldCenter">Curium School </label><br>
-				<label class="addressLine">XXXX Street, XXXX Road, XXXX. Ph.No- +00-000000</label>
+				<label class="dataTextBoldCenter">${branchname} </label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
 			</tr>
-			<tr>
-			<td></td></tr>
-			<tr></tr>
 </table>
 
 <TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
@@ -273,7 +271,7 @@ for(Cookie cookie : cookies){
 			<table style=" border-collapse: collapse;width: 100%;">
 											
                             <tr style="border-color:#000000">
-                                <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.student.name}"/></label></td>
+                                <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;text-transform: capitalize;"><c:out value="${Parents.student.name}"/></label></td>
                                 <td class="namedetails"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 						    ${splt} 
@@ -284,7 +282,7 @@ for(Cookie cookie : cookies){
                              
                              
                              <tr>   
-				<td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.fathersname}"/></label></td>	
+				<td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;text-transform: capitalize;"><c:out value="${Parents.fathersname}"/></label></td>	
                                 <td class="namedetails"><label>Exam Reg. No.:&nbsp;&nbsp;&nbsp;</label><!--<c:out value="${Parents.student.admissionnumber}"/>--></td>
                                 <!--<td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
 									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"

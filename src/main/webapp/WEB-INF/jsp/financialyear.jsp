@@ -378,7 +378,7 @@ for(Cookie cookie : cookies){
             <div >
                 <div id="tabs">
                     <ul>
-                        <li><a href="/#tabs-1">Financial Accounting Year</a></li>
+                        <li><a href="#tabs-1">Financial Accounting Year</a></li>
                         
                     </ul>
 

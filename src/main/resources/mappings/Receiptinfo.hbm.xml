@@ -23,9 +23,19 @@
          <property name="cancelreceipt" type="int">
             <column name="cancelreceipt" default="0" />
         </property>
+        <property name="branchreceiptnumber" type="string">
+            <column name="branchreceiptnumber" length="20" />
+        </property>
+         <property name="userid" type="int">
+            <column name="userid" />
+        </property>
           <property name="branchid" type="int">
             <column name="branchid" />
         </property>
+        <property name="paymenttype" type="string">
+            <column name="paymenttype" length="100" />
+        </property>
+       
         <!-- inverse="true" -->
         <set name="feesCollectionRecords" table="feescollecion"
 				 lazy="false" cascade="all">

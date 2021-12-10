@@ -648,9 +648,9 @@ for(Cookie cookie : cookies){
 		<div>
 			<div id="tabs">
 				<ul>
-					<li><a href="/#fragment-1">Student's Details</a></li>
-					<li><a href="/#fragment-2">Parent's Details</a></li>
-					<li><a href="/#fragment-3">Upload Photo</a></li>
+					<li><a href="#fragment-1">Student's Details</a></li>
+					<li><a href="#fragment-2">Parent's Details</a></li>
+					<li><a href="#fragment-3">Upload Photo</a></li>
 				</ul>
 
 
@@ -1161,7 +1161,7 @@ for(Cookie cookie : cookies){
 								<tr>
 
 									<td align="center">
-									<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="/#">Next</a>
+									<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
 									</td>
 								</tr>
 
@@ -1214,7 +1214,7 @@ for(Cookie cookie : cookies){
 									<td align="center">
 									
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-									<a class="prevtab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="/#">Previous</a>
+									<a class="prevtab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Previous</a>
 									</td>
 								</tr>
 
@@ -1465,9 +1465,9 @@ for(Cookie cookie : cookies){
 								<tr align="center">
 									<td width="40%" class="alignRight"> &nbsp;</td>
 									<td align="center">
-									<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="/#">Next</a>
+									<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-									<a class="prevtab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="/#">Previous</a>
+									<a class="prevtab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Previous</a>
 									</td>
 								</tr>
 								

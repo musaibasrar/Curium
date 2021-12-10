@@ -925,7 +925,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Details</a></li>
+					<li><a href="#tabs-1">Details</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -1056,7 +1056,7 @@ for(Cookie cookie : cookies){
 							
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${invoicelist.key.id}"/>" class = "chcktbl"  name="invoiceid"  value="<c:out value="${invoicelist.key.id}:${invoicelist.key.voucherid}:${invoicelist.key.status}"/>"/></td>
 						  <td class="dataText"><fmt:formatDate value="${invoicelist.key.invoicedate}" pattern="dd/MM/yyyy"/></td>
-						  <td class="dataText"><a href="/#" onclick="openPopup('<c:out value="${invoicelist.key.id}"/>','<c:out value="${invoicelist.key.invoicedate}"/>','<c:out value="${invoicelist.key.supplierreferenceno}"/>','<c:out value="${invoicelist.value.name}"/>','<c:out value="${invoicelist.key.invoicetotal}"/>')" style="color:#eb6000;">View Details</a></td>
+						  <td class="dataText"><a href="#" onclick="openPopup('<c:out value="${invoicelist.key.id}"/>','<c:out value="${invoicelist.key.invoicedate}"/>','<c:out value="${invoicelist.key.supplierreferenceno}"/>','<c:out value="${invoicelist.value.name}"/>','<c:out value="${invoicelist.key.invoicetotal}"/>')" style="color:#eb6000;">View Details</a></td>
 						  <td class="dataText"><c:out value="${invoicelist.key.supplierreferenceno}" /></td>
 						  <td class="dataText"><c:out value="${invoicelist.value.name}" /></td>
 						  <td class="dataTextRight"><c:out value="${invoicelist.key.invoicetotal}" /></td>

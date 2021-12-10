@@ -31,6 +31,7 @@ public class Paybasic implements java.io.Serializable {
 	private String academicyear;
 	private Teacher teacher;
 	private int branchid;
+	private int userid;
 	
 	public Paybasic() {
 	}
@@ -40,7 +41,7 @@ public class Paybasic implements java.io.Serializable {
 	}
 
 	public Paybasic(int idteacher, BigDecimal basicpay, String paymenttype,
-			String accountno, String overtime, String academicyear, Teacher teacher,int branchid) {
+			String accountno, String overtime, String academicyear, Teacher teacher,int branchid, int userid) {
 		this.idteacher = idteacher;
 		this.basicpay = basicpay;
 		this.paymenttype = paymenttype;
@@ -49,6 +50,7 @@ public class Paybasic implements java.io.Serializable {
 		this.academicyear = academicyear;
 		this.teacher = teacher;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -131,5 +133,13 @@ public class Paybasic implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

@@ -170,10 +170,16 @@ for(Cookie cookie : cookies){
 									Admin Expense
 							</a></td>
 
-							<td ><a target="mainFrame" href="/sendsms"><img
+							<td ><!-- <a target="mainFrame" href="/sendsms"><img
 									src="/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
-							</a></td>
+							</a> -->
+								<a target="leftFrame" href="/reports"><img
+									src="/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a>
+							
+							</td>
 
 							<td ><a target="mainFrame"
 								href="/StudentProcess/viewAllStudentsWithParents"><img

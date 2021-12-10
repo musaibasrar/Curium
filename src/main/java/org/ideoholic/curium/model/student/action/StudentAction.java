@@ -94,7 +94,14 @@ public class StudentAction {
 	@GetMapping("/ViewFeesStructure")
 	public String ViewFeesStructure() {
 		if (new StudentService(request, response).viewDetailsOfStudent()) {
-			return "student_details_feesstructure";
+		
+			if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+                        return "student_details_feesstructure_admin";
+                    	}else if(!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+                        return "student_details_feesstructure";
+                    	}else {
+                    	return "student_details_feesstructure";
+                    	}
 		} else {
 			return "viewAll";
 		}

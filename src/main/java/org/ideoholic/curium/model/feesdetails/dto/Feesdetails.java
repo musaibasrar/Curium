@@ -26,13 +26,14 @@ public class Feesdetails implements java.io.Serializable {
 	private String amountpercat;
 	private String academicyear;
 	private int branchid;
+	private int userid;
 	
 	public Feesdetails() {
 	}
 
 	public Feesdetails(Integer sid, String dateoffees, String grandtotal,
 			String miscamount, String balamount, String amountpercat, String academicyear,
-			int branchid) {
+			int branchid, int userid) {
 		this.sid = sid;
 		this.dateoffees = dateoffees;
 		this.grandtotal = grandtotal;
@@ -41,6 +42,7 @@ public class Feesdetails implements java.io.Serializable {
 		this.amountpercat = amountpercat;
 		this.academicyear = academicyear;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -130,4 +132,13 @@ public class Feesdetails implements java.io.Serializable {
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
 	}
+	
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
 }

@@ -451,14 +451,14 @@ for(Cookie cookie : cookies){
         <div class="headerTD">Welcome <c:out default="" value="${executive}"/> </div>
 
         <div id="container" style="width: 100%" >
-            <h5 style="font-size: 12px"><a href="/#">Students</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
                 <a target="mainFrame" href="/StudentProcess/viewAll" >View All</a><br/>
                 <a target="mainFrame" href="/feesstructure" >Fees Structure</a><br/>
                 
 
             </div>
-            <!-- <h5 style="font-size: 12px"><a href="/#">Human Resource</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
                 <a target="mainFrame" href="/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
                 <a target="mainFrame" href="/EmployeeProcess/addEmployeePage" >Add Employee</a>
@@ -467,7 +467,7 @@ for(Cookie cookie : cookies){
 
             </div> -->
 
-            <h5 style="font-size: 12px"><a href="/#">FEES</a></h5>
+            <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
             	<a target="mainFrame" href="/FeesProcess/feesView" >Fees Category</a>
@@ -476,35 +476,35 @@ for(Cookie cookie : cookies){
 
             </div> 
             
-            <!-- <h5 style="font-size: 12px"><a href="/#" >Administration</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
                 <a target="mainFrame" href="/AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
             
-            <h5 style="font-size: 12px"><a href="/#" >Advance Search</a></h5>
+            <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
                 <a target="mainFrame" href="/AdvanceSearch" >Search</a><br/>
 
 
             </div>
 			<!--
-            <h5 style="font-size: 12px"><a href="/#" >Promotion</a></h5>
+            <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
                 <a target="mainFrame" href="/Promotion" >Promotions</a><br/>
 
 
             </div> -->
 
-            <!-- <h5 style="font-size: 12px"><a href="/#" >Archive</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
             <div>
                 <a target="mainFrame" href="/StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
-            <!--  <h5 style="font-size: 12px"><a href="/#" >Configurations</a></h5>
+            <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
             	<a target="mainFrame" href="/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
                 <a target="mainFrame" href="/YearProcess/updateYear" >Academic year</a><br/>
@@ -513,7 +513,7 @@ for(Cookie cookie : cookies){
             </div> -->
             
 
-            <h5 style="font-size: 12px"><a href="/#" >Extras</a></h5>
+            <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
                <!--  <a target="mainFrame" href="/Backup&Restore" >Backup</a><br/>
                 <a target="mainFrame" href="/currentIssue" >Current Issue</a><br/>
@@ -521,7 +521,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/feesCollectionDetails" >Fees Collection Details</a><br/>
             </div>
             
-           <!--  <h5 style="font-size: 12px"><a href="/#" >Reports</a></h5>
+           <!--  <h5 style="font-size: 12px"><a href="#" >Reports</a></h5>
             <div >
                 <a target="mainFrame" href="/studentsdetailsreports" >Student Details</a><br/>
                 

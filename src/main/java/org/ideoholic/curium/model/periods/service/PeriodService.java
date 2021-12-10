@@ -28,6 +28,7 @@ public class PeriodService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 	/**
     * Size of a byte buffer to read/write file
     */
@@ -104,6 +105,7 @@ public class PeriodService {
 				periodDetails.setStaff(staff[getPeriod]);
 				periodDetails.setTimings(periodStartTimeHr[getPeriod]+":"+periodStartTimeMin[getPeriod]+": "+periodStartTimeAm[getPeriod]+ " To "+periodEndTimeHr[getPeriod]+":"+periodEndTimeMin[getPeriod]+" "+periodEndTimeAm[getPeriod]);
 				periodDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				periodDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				getPeriod++;
 				periodList.add(periodDetails);
 			}
@@ -119,6 +121,7 @@ public class PeriodService {
 		periodMaster.setDurationofperiod(durationOfPeriodsHr+":"+durationOfPeriodsMin);
 		periodMaster.setTotalperiods(Integer.parseInt(totalNoOfPeriods));
 		periodMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		periodMaster.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		return new PeriodDAO().save(periodMaster,periodMap);
 	}
 

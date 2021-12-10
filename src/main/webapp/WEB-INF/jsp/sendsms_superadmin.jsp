@@ -601,7 +601,7 @@ for(Cookie cookie : cookies){
 		<div>
 			<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-3">Numbers</a></li>
+					<li><a href="#tabs-3">Numbers</a></li>
 				</ul>
 
 					<div id="tabs-3">

@@ -449,7 +449,7 @@ for(Cookie cookie : cookies){
         <%-- <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div> --%>
 
         <div id="container" style="width: 95%" >
-            <h5 class="sideaccordian" ><a href="/#">Students</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -462,104 +462,298 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            			</td>
+            		</tr>
                 </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#">Attendance</a></h5>
-            <div>
-                <a target="mainFrame" href="/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
-                <a target="mainFrame" href="/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
-                <a target="mainFrame" href="/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a><br/>
+            
+			
+              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
+            			</td>
+            		</tr> -->
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
+            			</td>
+            		</tr> -->
+                </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#">Staff</a></h5>
-            <div>
-                <a target="mainFrame" href="/EmployeeProcess/viewAllEmployee" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
-				<a target="mainFrame" href="/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
-				<a target="mainFrame" href="/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
-				<a target="mainFrame" href="/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
-            </div>
-
-            <h5 style="font-size: 12px"><a href="/#">Fees</a></h5>
-            
-            <div>
-				<a target="mainFrame" href="/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>                
-				<a target="mainFrame" href="/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a><br/>                
-				<a target="mainFrame" href="/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a><br/>
-				<a target="mainFrame" href="/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a><br/>
-				<a target="mainFrame" href="/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a><br/>
-				<a target="mainFrame" href="/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a><br/>
-				<a target="mainFrame" href="/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a><br/>
-            </div> 
-            
-            <h5 style="font-size: 12px"><a href="/#">Exams</a></h5>
-            
-            <div>
-                <a target="mainFrame" href="/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a><br/>
-                <a target="mainFrame" href="/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
-            	<a target="mainFrame" href="/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a><br/>
-            	<a target="mainFrame" href="/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
-            </div> 
-            
-            <h5 style="font-size: 12px"><a href="/#" >Advance Search</a></h5>
-            <div>
-                <a target="mainFrame" href="/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a><br/>
-
-
-            </div>
-
-            <h5 style="font-size: 12px"><a href="/#" >Extras</a></h5>
-            <div >
-                <a target="mainFrame" href="/Backup&Restore" style="font-size: 12px;">Backup</a><br/>
-                <a target="mainFrame" href="/changePassword" style="font-size: 12px;">Change Password</a><br/>
-                <a target="mainFrame" href="/uploadattendance" style="font-size: 12px;">Upload Attendance File</a><br/>
-                <a target="mainFrame" href="/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a><br/>
+            <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
+            			</td>
+            		</tr>
+                </table>
             </div>
             
             
-            <h5 style="font-size: 12px"><a href="/#" >Generate Cards</a></h5>
-            <div >
-                <a target="mainFrame" href="/printids/generateIds" style="font-size: 12px;">Generate IDs</a><br/>
+            
+            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a>
+            			</td>
+            			            		
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/incomestatement" style="font-size: 12px;">Income Statement</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
+            			</td>
+            		</tr> -->
+                </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#" >Documents</a></h5>
-            <div >
-                <a target="mainFrame" href="/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a><br/>
-                <a target="mainFrame" href="/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
-                <a target="mainFrame" href="/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
-                <a target="mainFrame" href="/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
-                <a target="mainFrame" href="/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
-                <a target="mainFrame" href="/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a><br/>
-                <a target="mainFrame" href="/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a><br/>
-            </div> 
             
-            <h5 style="font-size: 12px"><a href="/#" >Expenses</a></h5>
-            <div>
-                <a target="mainFrame" href="/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
-
-
+            <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
+            			</td>
+            		</tr> -->
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
+            			</td>
+            		</tr>
+                </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#" >Send Notifications</a></h5>
-            <div >
-                <a target="mainFrame" href="/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a><br/>
-                <a target="mainFrame" href="/sendemail" style="font-size: 12px;">Email</a><br/>
+            
+            <!--  <h5 class="sideaccordian" ><a href="#">Attendance</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+             -->
+            
+            <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
+            			</td>
+            		</tr> -->
+                </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#" >Accounts</a></h5>
-            <div >
-                <a target="mainFrame" href="/AccountProcess/createAccount" style="font-size: 12px;">Ledger Account</a><br/>
-                <a target="mainFrame" href="/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
-                <a target="mainFrame" href="/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a><br/>
-                <a target="mainFrame" href="/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a><br/>
-                <a target="mainFrame" href="/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a><br/>
-                <a target="mainFrame" href="/incomestatement" style="font-size: 12px;">Income Statement</a><br/>
-                <a target="mainFrame" href="/trialbalance" style="font-size: 12px;">Trial Balance</a><br/>
-                <a target="mainFrame" href="/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
+            
+                  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
+            			</td>
+            		</tr>
+                </table>
             </div>
             
-             <h5 style="font-size: 12px"><a href="/#" >H.R.</a></h5>
+             <h5 class="sideaccordian" ><a href="#">Generate Cards</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/printids/generateIds" style="font-size: 12px;">Generate IDs</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            
+               
+              <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/EmployeeProcess/viewAllEmployee" style="font-size: 12px;">View All</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+								<a target="mainFrame" href="/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
+            			</td>
+            		</tr> -->
+                </table>
+            </div>
+            
+            
+            
+            <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/Backup&Restore" style="font-size: 12px;">Backup</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/changePassword" style="font-size: 12px;">Change Password</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+           <!--   <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
                 <a target="mainFrame" href="/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
                 <a target="mainFrame" href="/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
@@ -568,13 +762,13 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#" >Leave Management</a></h5>
+            <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
             <div >
                 <a target="mainFrame" href="/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
                 <a target="mainFrame" href="/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
-            </div>
+            </div> -->
             
-            <h5 class="sideaccordian" ><a href="/#" >Stock Management</a></h5>
+            <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
         	
         	<div style="padding-left: 0px;padding-right: 0px;">
             
@@ -598,7 +792,7 @@ for(Cookie cookie : cookies){
             </div>
             
             
-            <h5 class="sideaccordian" ><a href="/#" >Stock Reports</a></h5>
+           <!--  <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
             
             <div style="padding-left: 0px;padding-right: 0px;">
             
@@ -624,9 +818,9 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             	</table>
-            </div>
+            </div> -->
             
-            <h5 class="sideaccordian"><a href="/#" >Suppliers</a></h5>
+            <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
               
               <div style="padding-left: 0px;padding-right: 0px;">
             
@@ -654,7 +848,7 @@ for(Cookie cookie : cookies){
             	</table>
             </div>
             
-            <h5 class="sideaccordian"><a href="/#" >Mess Cards</a></h5>
+           <!--  <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
             
             <div style="padding-left: 0px;padding-right: 0px;">
             
@@ -670,20 +864,45 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             	</table>
-            </div>
-            
-             <!--  <h5 style="font-size: 12px"><a href="/#" >Mess Management</a></h5>
-            <div>
-                <a target="mainFrame" href="/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a><br/>
-                <a target="mainFrame" href="/MessItemsProcess/purchaseItems" style="font-size: 12px;">Receive</a><br/>
-                <a target="mainFrame" href="/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a><br/>
-                <a target="mainFrame" href="/MessProcess/addSuppliers" style="font-size: 12px;">View/Add Suppliers</a><br/>
             </div> -->
             
-            <h5 style="font-size: 12px"><a href="/#" >Promotion</a></h5>
-            <div>
-                <a target="mainFrame" href="/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a><br/>
-				
+            <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/sendemail" style="font-size: 12px;">Email</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+               <h5 class="sideaccordian" ><a href="#">Promotion</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            
+            <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+                              <a target="mainFrame" href="/importfile" style="font-size: 12px;">Import Files</a><br/>
+				        </td>
+				     </tr>
+				 </table>
             </div>
             
             </div>

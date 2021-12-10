@@ -25,16 +25,18 @@ public class Financialaccountingyear implements java.io.Serializable {
 	private Date financialenddate;
 	private String active;
 	private int branchid;
+	private int userid;
 	
 	public Financialaccountingyear() {
 	}
 
 	public Financialaccountingyear(Date financialstartdate,
-			Date financialenddate, String active, int branchid) {
+			Date financialenddate, String active, int branchid, int userid) {
 		this.financialstartdate = financialstartdate;
 		this.financialenddate = financialenddate;
 		this.active = active;
 		this.branchid  = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -84,6 +86,14 @@ public class Financialaccountingyear implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+	this.userid = userid;
 	}
 
 }

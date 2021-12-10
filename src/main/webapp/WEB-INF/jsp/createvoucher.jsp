@@ -217,7 +217,7 @@
                 height: auto;
                 display: inline;
             }
-            .style1 { <link rel="stylesheet" href="/https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+            .style1 { <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
                 font-family: Tahoma;
                 font-size: 14px;
@@ -558,10 +558,10 @@ for(Cookie cookie : cookies){
 
             <div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Receipt</a></li>
-					<li><a href="/#tabs-2">Payment</a></li>
-					<li><a href="/#tabs-3">Contra</a></li>
-					<li><a href="/#tabs-4">Journal</a></li>
+					<li><a href="#tabs-1">Receipt</a></li>
+					<li><a href="#tabs-2">Payment</a></li>
+					<li><a href="#tabs-3">Contra</a></li>
+					<li><a href="#tabs-4">Journal</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table  width="100%">

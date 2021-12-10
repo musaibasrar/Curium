@@ -20,13 +20,15 @@ public class Leavetypemaster implements java.io.Serializable {
 	private Integer idleavetypemaster;
 	private String leavetypename;
 	private int branchid;
+	private int userid;
 	
 	public Leavetypemaster() {
 	}
 
-	public Leavetypemaster(String leavetypename, int branchid) {
+	public Leavetypemaster(String leavetypename, int branchid, int userid) {
 		this.leavetypename = leavetypename;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -56,5 +58,13 @@ public class Leavetypemaster implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

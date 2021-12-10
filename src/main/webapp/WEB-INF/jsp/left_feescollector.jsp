@@ -434,19 +434,19 @@ for(Cookie cookie : cookies){
         <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div>
 
         <div id="container" style="width: 100%" >
-            <h5 style="font-size: 12px"><a href="/#">Students</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
                 <a target="mainFrame" href="/StudentProcess/viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
             </div>
             
 
-            <h5 style="font-size: 12px"><a href="/#">FEES</a></h5>
+            <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
                 <a target="mainFrame" href="/FeesProcess/feesCollectAllBranches" style="font-size: 12px;">Fees Collect</a><br/>
             </div> 
             
-            <h5 style="font-size: 12px"><a href="/#" >Send Notifications</a></h5>
+            <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
             <div >
                 <a target="mainFrame" href="/sendsms_superadmin" style="font-size: 12px;">SMS</a><br/>
             </div>

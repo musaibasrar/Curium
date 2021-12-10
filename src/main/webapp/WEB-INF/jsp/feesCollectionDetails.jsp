@@ -599,7 +599,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Dates</a></li>
+					<li><a href="#tabs-1">Dates</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -711,7 +711,7 @@ for(Cookie cookie : cookies){
 								name="feesIDs"
 								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
                                 <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
-                                <td  class="dataText"><c:out value="${feesdetails.receiptnumber}"/></a></td>
+                                <td  class="dataText"><c:out value="${feesdetails.branchreceiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>

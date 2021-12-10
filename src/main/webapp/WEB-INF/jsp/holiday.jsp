@@ -514,7 +514,7 @@ for(Cookie cookie : cookies){
 				
 				<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Set Holidays & Weeklyoff</a></li>
+					<li><a href="#tabs-1">Set Holidays & Weeklyoff</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"

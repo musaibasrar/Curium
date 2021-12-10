@@ -353,7 +353,7 @@ for(Cookie cookie : cookies){
             </table>
             <div class="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="/#">Personal Details</a></h3>
+                <h3><a href="#">Personal Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
@@ -487,7 +487,7 @@ for(Cookie cookie : cookies){
             
             <div class="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="/#">Bank Details</a></h3>
+                <h3><a href="#">Bank Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
@@ -532,7 +532,7 @@ for(Cookie cookie : cookies){
             
             <div class="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="/#">Additional Details</a></h3>
+                <h3><a href="#">Additional Details</a></h3>
                 <div>
 
                     <table border="0px" width="100%"  id="table1" align="center">

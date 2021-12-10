@@ -29,6 +29,7 @@ public class Feescollection implements java.io.Serializable {
 	private String academicyear;
 	private int receiptnumber;
 	private int branchid;
+	private int userid;
 	
 	public Feescollection() {
 	}
@@ -39,7 +40,7 @@ public class Feescollection implements java.io.Serializable {
 	}
 
 	public Feescollection(int sfsid, Long amountpaid, int sid, Long fine,
-			Date date, String academicyear, int receiptnumber, int branchid) {
+			Date date, String academicyear, int receiptnumber, int branchid, int userid) {
 		this.sfsid = sfsid;
 		this.amountpaid = amountpaid;
 		this.sid = sid;
@@ -48,6 +49,7 @@ public class Feescollection implements java.io.Serializable {
 		this.academicyear = academicyear;
 		this.receiptnumber = receiptnumber;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -134,6 +136,12 @@ public class Feescollection implements java.io.Serializable {
 	this.branchid = branchid;
 	}
 	
-	
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 
 }

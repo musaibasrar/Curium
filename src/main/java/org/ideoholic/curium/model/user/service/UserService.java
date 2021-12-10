@@ -302,8 +302,8 @@ public class UserService {
 			}
 			
 			String classAdmitted = DataUtil.emptyString(conClassAdmittedIn);
-			String lastClass = DataUtil.emptyString(request.getParameter("lastclass"));
-			String lastSchool =  DataUtil.emptyString(request.getParameter("lastschool"));
+			//String lastClass = DataUtil.emptyString(request.getParameter("lastclass"));
+			//String lastSchool =  DataUtil.emptyString(request.getParameter("lastschool"));
 			String admissionNo =  DataUtil.emptyString(request.getParameter("admnno"));
 			String dateOfAdmission =  DataUtil.emptyString(request.getParameter("dateofadmission"));
 			String bloodGroup =  DataUtil.emptyString(request.getParameter("bloodgroup"));
@@ -313,8 +313,8 @@ public class UserService {
 			String motherT =  DataUtil.emptyString(request.getParameter("motherT"));
 			String createdDate =  DataUtil.emptyString(request.getParameter("createddate"));
 			String remarks =  DataUtil.emptyString(request.getParameter("remarks"));
-			String stsNumber = DataUtil.emptyString(request.getParameter("sts"));
-			String rte = DataUtil.emptyString(request.getParameter("rte"));
+			//String stsNumber = DataUtil.emptyString(request.getParameter("sts"));
+			//String rte = DataUtil.emptyString(request.getParameter("rte"));
 			
 			String querySub = "";
 			
@@ -329,16 +329,17 @@ public class UserService {
 			}
 			
 			if(!gender.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
-				querySub = querySub + " parents.Student.gender like '%"+gender+"%'";
+				querySub = querySub + " parents.Student.gender like '"+gender+"%'";
 			}else if(!gender.equalsIgnoreCase("")){
-				querySub = querySub + " parents.Student.gender like '%"+gender+"%'";
+				querySub = querySub + " parents.Student.gender like '"+gender+"%'";
 			}
 			
-			if(!lastClass.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
-				querySub = querySub + " parents.Student.stdlaststudied = '"+lastClass+"'";
-			}else if(!lastClass.equalsIgnoreCase("")){
-				querySub = querySub + " parents.Student.stdlaststudied = '"+lastClass+"'";
-			}
+			/*
+			 * if(!lastClass.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
+			 * querySub = querySub + " parents.Student.stdlaststudied = '"+lastClass+"'";
+			 * }else if(!lastClass.equalsIgnoreCase("")){ querySub = querySub +
+			 * " parents.Student.stdlaststudied = '"+lastClass+"'"; }
+			 */
 			
 			if(!dateOfBirth.equalsIgnoreCase("") &&  !querySub.equalsIgnoreCase("") ){
 				querySub = querySub + " parents.Student.dateofbirth = '"+dateOfBirth+"'";
@@ -358,11 +359,13 @@ public class UserService {
 				querySub = querySub + " parents.Student.classadmittedin like '"+classAdmitted+"'";
 			}
 			
-			if(!lastSchool.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
-				querySub = querySub + " parents.Student.schoollastattended like '%"+lastSchool+"%'";
-			}else if(!lastSchool.equalsIgnoreCase("")){
-				querySub = querySub + " parents.Student.schoollastattended like '%"+lastSchool+"%'";
-			}
+			/*
+			 * if(!lastSchool.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
+			 * querySub = querySub +
+			 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }else
+			 * if(!lastSchool.equalsIgnoreCase("")){ querySub = querySub +
+			 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }
+			 */
 			
 			
 			if(!admissionNo.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
@@ -419,17 +422,17 @@ public class UserService {
 				querySub = querySub + " parents.Student.remarks like '%"+remarks+"%'";
 			}
 			
-			if(!stsNumber.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
-				querySub = querySub + " parents.Student.sts = '"+stsNumber+"'";
-			}else if(!stsNumber.equalsIgnoreCase("")){
-				querySub = querySub + " parents.Student.sts = '"+stsNumber+"'";
-			}
-			
-			if(!rte.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
-				querySub = querySub + " parents.Student.rte = '"+rte+"'";
-			}else if(!rte.equalsIgnoreCase("")){
-				querySub = querySub + " parents.Student.rte = '"+rte+"'";
-			}
+			/*
+			 * if(!stsNumber.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
+			 * querySub = querySub + " parents.Student.sts = '"+stsNumber+"'"; }else
+			 * if(!stsNumber.equalsIgnoreCase("")){ querySub = querySub +
+			 * " parents.Student.sts = '"+stsNumber+"'"; }
+			 * 
+			 * if(!rte.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){ querySub =
+			 * querySub + " parents.Student.rte = '"+rte+"'"; }else
+			 * if(!rte.equalsIgnoreCase("")){ querySub = querySub +
+			 * " parents.Student.rte = '"+rte+"'"; }
+			 */
 			
 			queryMain = queryMain+querySub+" AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
 			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
@@ -445,30 +448,29 @@ public class UserService {
         boolean result = false;
         try {
             Properties properties = new Properties();
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
             properties.load(inputStream);
             String backupDirectoryIS = properties.getProperty("backupdirectory");
             System.out.println("the backup directory from input stream is " + backupDirectoryIS);
 
 
-            int processComplete; // to verify that either process completed or not
+            int processcomplete; // to verify that either process completed or not
             String sqlExtension = ".sql";
             String backupLocation = backupDirectoryIS + fileName + sqlExtension;
             String mysqlPath = properties.getProperty("mysqlpath");
-            System.out.println("the back up for  the backuplocation " + backupLocation);
             request.setAttribute("Backuplocation", backupLocation);
             Process runtimeProcess = Runtime.getRuntime().exec(mysqlPath + backupLocation);
 
 
             // call the mysqldump in terminal and execute it
 
-            processComplete = runtimeProcess.waitFor();//store the state in variable
+            processcomplete = runtimeProcess.waitFor();//store the state in variable
 
-            if (processComplete == 1) {//if values equal 1 process failed
+            if (processcomplete == 1) {//if values equal 1 process failed
                 System.out.println("FAILED");
                 result = false;
 
-            } else if (processComplete == 0) {//if values equal 0 process failed
+            } else if (processcomplete == 0) {//if values equal 0 process failed
                 System.out.println("success");
 
                 //display message

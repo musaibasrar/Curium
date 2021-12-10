@@ -26,7 +26,7 @@ public class Staffdailyattendance implements java.io.Serializable {
 	private String attendancestatus;
 	private String academicyear;
 	private int branchid;
-	
+	private int userid;
 	
 	public Staffdailyattendance() {
 	}
@@ -39,7 +39,7 @@ public class Staffdailyattendance implements java.io.Serializable {
 
 	public Staffdailyattendance(int attendanceid, String attendeeid,
 			String intime, String outtime, Date date, String attendancestatus,
-			String academicyear, Integer branchid) {
+			String academicyear, Integer branchid, int userid) {
 		this.attendanceid = attendanceid;
 		this.attendeeid = attendeeid;
 		this.intime = intime;
@@ -48,6 +48,7 @@ public class Staffdailyattendance implements java.io.Serializable {
 		this.attendancestatus = attendancestatus;
 		this.academicyear = academicyear;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -122,5 +123,13 @@ public class Staffdailyattendance implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

@@ -496,7 +496,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Add Subject Details</a></li>
+					<li><a href="#tabs-1">Add Subject Details</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -509,7 +509,7 @@ for(Cookie cookie : cookies){
 									id="subjectname" style="width: 200px;">
 										<option selected></option>
 										<c:forEach items="${listSubjectNames}" var="subjectnames">
-												<option value="${subjectnames.subjectname}">
+												<option value="${subjectnames.subjectname}:${subjectnames.subjectid}">
 													<c:out value="${subjectnames.subjectname}" />
 												</option>
 										</c:forEach>

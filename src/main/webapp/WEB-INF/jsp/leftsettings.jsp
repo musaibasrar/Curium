@@ -334,27 +334,27 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-        <div class="headerTD">Master Settings<%--  <c:out default="" value="${userAuth}"/> --%> </div>
+        <div class="headerTD" style="width: 95%">Master Settings<%--  <c:out default="" value="${userAuth}"/> --%> </div>
 
-        <div id="container" style="width: 100%" >
-            <h5 style="font-size: 12px"><a href="/#">General</a></h5>
+        <div id="container" style="width: 95%" >
+            <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
                 <a target="mainFrame" href="/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/>
                 <a target="mainFrame" href="/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#">Class</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Class</a></h5>
             <div>
                 <a target="mainFrame" href="/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#">FEES</a></h5>
+            <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             <div>
                 <a target="mainFrame" href="/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
                 <a target="mainFrame" href="/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#">Exams</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             <div>
                 <a target="mainFrame" href="/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
                 <a target="mainFrame" href="/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
@@ -362,30 +362,30 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#">Attendance</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
                 <a target="mainFrame" href="/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
                 <a target="mainFrame" href="/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div>
             
-              <h5 style="font-size: 12px"><a href="/#" >Promotion</a></h5>
+              <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
 				<a target="mainFrame" href="/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="/#">Staff</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
                 
                 <a target="mainFrame" href="/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
                 <a target="mainFrame" href="/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
             </div>
 
-            <h5 style="font-size: 12px"><a href="/#" >Accounts</a></h5>
+            <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
                 <a target="mainFrame" href="/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
             
-             <h5 style="font-size: 12px"><a href="/#" >H.R.</a></h5>
+             <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
                 <a target="mainFrame" href="/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
                 <a target="mainFrame" href="/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
@@ -397,7 +397,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
             </div>
             
-              <!--  <h5 style="font-size: 12px"><a href="/#">Extras</a></h5>
+              <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
             <div>
                 <a target="mainFrame" href="/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
                 <a target="mainFrame" href="/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>

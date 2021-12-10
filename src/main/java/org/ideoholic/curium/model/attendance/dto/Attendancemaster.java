@@ -24,7 +24,7 @@ public class Attendancemaster implements java.io.Serializable {
 	private String weeklyoff;
 	private String holidayname;
 	private int branchid;
-	
+	private int userid;
 
 	public Attendancemaster() {
 	}
@@ -34,13 +34,14 @@ public class Attendancemaster implements java.io.Serializable {
 	}
 
 	public Attendancemaster(String attendeeid, String intime, String outtime,
-			String weeklyoff, String holidayname, int branchid) {
+			String weeklyoff, String holidayname, int branchid,int userid) {
 		this.attendeeid = attendeeid;
 		this.intime = intime;
 		this.outtime = outtime;
 		this.weeklyoff = weeklyoff;
 		this.holidayname = holidayname;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -107,4 +108,13 @@ public class Attendancemaster implements java.io.Serializable {
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
 	}
+	
+	public int getUserid() {
+		return userid;
+}
+
+public void setUserid(int userid) {
+	this.userid = userid;
+}
+
 }

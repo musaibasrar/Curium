@@ -764,9 +764,9 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Daily Attendance</a></li>
-					<li><a href="/#tabs-2">Attendance Between Dates</a></li>
-					<li><a href="/#tabs-3">Monthly Attendance Graph</a></li>
+					<li><a href="#tabs-1">Daily Attendance</a></li>
+					<li><a href="#tabs-2">Attendance Between Dates</a></li>
+					<li><a href="#tabs-3">Monthly Attendance Graph</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"

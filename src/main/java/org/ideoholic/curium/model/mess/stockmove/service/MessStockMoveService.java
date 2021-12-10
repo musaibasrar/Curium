@@ -199,7 +199,7 @@ public class MessStockMoveService {
 		
 	 	
 	 	Properties properties = new Properties();
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Backuplocation.properties");
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 		
         		try {
 					properties.load(inputStream);

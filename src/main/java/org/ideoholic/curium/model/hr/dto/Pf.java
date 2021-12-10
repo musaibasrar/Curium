@@ -25,16 +25,17 @@ public class Pf implements java.io.Serializable {
 	private Integer paidbyemployee;
 	private Date date;
 	private int branchid;
-
+	private int userid;
 
 	public Pf() {
 	}
 
-	public Pf(Integer paidbymanagement, Integer paidbyemployee, Date date, int branchid) {
+	public Pf(Integer paidbymanagement, Integer paidbyemployee, Date date, int branchid, int userid) {
 		this.paidbymanagement = paidbymanagement;
 		this.paidbyemployee = paidbyemployee;
 		this.date = date;
 		this.branchid = branchid;
+		this.userid = userid;
 	}
 
 	@Id
@@ -83,6 +84,14 @@ public class Pf implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+	
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 }

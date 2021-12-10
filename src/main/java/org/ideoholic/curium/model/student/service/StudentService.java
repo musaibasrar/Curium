@@ -47,8 +47,10 @@ public class StudentService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
+	
 	/**
     * Size of a byte buffer to read/write file
     */
@@ -478,12 +480,14 @@ public class StudentService {
 		student.setLeftout(0);
 		student.setStudentexternalid(DataUtil.generateString(5));
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		student.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		puDetails.setOptionalsubjects(optional.toString());
-		puDetails.setCompulsorysubjects(compulsory.toString());
+		puDetails.setcompulsorysubjects(compulsory.toString());
 		student.setPudetails(puDetails);
 		student.setDegreedetails(degreeDetails);
 		parents.setStudent(student);
 		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		parents.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		parents = new parentsDetailsDAO().create(parents);
 
 		if(parents!=null){
@@ -547,7 +551,7 @@ public class StudentService {
 			
 			long totalFeesAmount = 0l;
 			for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
-				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff();
+				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
 			}
 			
 			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
@@ -560,15 +564,15 @@ public class StudentService {
 				String classStudying = student.getClassstudying();
 				if (!classStudying.equalsIgnoreCase("")) {
 					String[] classParts = classStudying.split("--");
-					request.setAttribute("classstudying", classParts[0]);
-					request.setAttribute("secstudying", "");
+					httpSession.setAttribute("classstudying", classParts[0]);
+					httpSession.setAttribute("secstudying", "");
 					if(classParts.length>1) {
-						request.setAttribute("secstudying", classParts[1]);
+						httpSession.setAttribute("secstudying", classParts[1]);
 					}
 					
 				} else {
-					request.setAttribute("classstudying", classStudying);
-					request.setAttribute("secstudying", "");
+					httpSession.setAttribute("classstudying", classStudying);
+					httpSession.setAttribute("secstudying", "");
 				}
 
 				String classAdmitted = student.getClassadmittedin();
@@ -959,7 +963,7 @@ public class StudentService {
                             puDetails.setOptionalsubjects(DataUtil.emptyString(item.getString()));
                         }
                         if (fieldName.equalsIgnoreCase("subjectspart2")) {
-                            puDetails.setCompulsorysubjects(DataUtil.emptyString(item.getString()));
+                            puDetails.setcompulsorysubjects(DataUtil.emptyString(item.getString()));
                         }
                         if (fieldName.equalsIgnoreCase("Xmediuminstruction")) {
                             puDetails.setSslcmediuminstruction(DataUtil.emptyString(item.getString()));
@@ -1110,6 +1114,7 @@ public class StudentService {
 		}
 		 student.setArchive(0);
 		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		 student.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		 
 		 if(puDetails.getIdpudetails()!=null) {
 			 new studentDetailsDAO().updatePuDetails(puDetails);
@@ -1124,6 +1129,8 @@ public class StudentService {
  		if (pid != "") {
  			parents.setStudent(student);
  			parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+ 			parents.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+ 			
  			parents = new parentsDetailsDAO().update(parents);
  		}
 		String stId = student.getSid().toString();
@@ -1211,14 +1218,18 @@ public class StudentService {
 	public boolean promoteMultiple() {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String classStudying = request.getParameter("classstudying");
+		List<Student> studentList = new ArrayList<Student>();
+		
 		boolean result = false;
-		List<Integer> ids = new ArrayList();
+		
 		for (String id : studentIds) {
-			System.out.println("id" + id);
-			ids.add(Integer.valueOf(id));
-
+			Student student = new Student();
+			student.setSid(Integer.valueOf(id));
+			student.setClassstudying(request.getParameter("classstudying_"+id));
+			studentList.add(student);
 		}
-		if (new studentDetailsDAO().promoteMultiple(ids, classStudying)) {
+		
+		if (new studentDetailsDAO().promoteMultiple(studentList, classStudying)) {
 			result = true;
 		}
 		return result;

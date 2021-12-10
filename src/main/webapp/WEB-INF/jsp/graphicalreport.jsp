@@ -510,7 +510,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Graphical Report</a></li>
+					<li><a href="#tabs-1">Graphical Report</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -636,10 +636,10 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><c:out value="${Parents.student.admissionnumber}" /></td>
 							<%-- 					<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'
+								href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'
 								/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 									value="${Parents.student.admissionnumber}" /></a></td> 
-									/MarksDetailsProcess/getStudentGraph--%>
+									Controller?process=MarksDetailsProcess/getStudentGraph--%>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">
 							<input type="hidden" id="examclass" name="examclass"

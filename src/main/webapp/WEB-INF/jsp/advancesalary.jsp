@@ -491,7 +491,7 @@ for(Cookie cookie : cookies){
     <jsp:useBean id="now" class="java.util.Date" scope="page" />
         <form id="form1" method="post">
             <div style="height: 28px">
-                <!--<a href="/#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
+                <!--<a href="#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
 
                
             <table  width="100%">

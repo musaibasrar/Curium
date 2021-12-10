@@ -424,7 +424,7 @@ for(Cookie cookie : cookies){
             </table>
             <div id="accordion" style="width: 100%;height: 100%">
 
-                <h3><a href="/#">Staff Leave Details</a></h3>
+                <h3><a href="#">Staff Leave Details</a></h3>
                 
                 <div>
                 

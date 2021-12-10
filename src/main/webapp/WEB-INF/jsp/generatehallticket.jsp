@@ -500,7 +500,7 @@ for(Cookie cookie : cookies){
 				
 				<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Hall Ticket</a></li>
+					<li><a href="#tabs-1">Hall Ticket</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"

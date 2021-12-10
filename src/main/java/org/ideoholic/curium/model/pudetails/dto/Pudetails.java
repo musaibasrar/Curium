@@ -19,12 +19,13 @@ public class Pudetails implements java.io.Serializable {
     private String compulsorysubjects;
     private String sslcmediuminstruction;
     private String pumediuminstruction;
-
+    private int userid;
+    
     public Pudetails() {}
 
     public Pudetails(Integer exampassedappearance, String exampassedyear, String exampassedregno, String exampassedresultwithclass,
             String secondlanguage, String aggregatemarkssslc, String optionalsubjects, String compulsorysubjects,
-            String sslcmediuminstruction, String pumediuminstruction) {
+            String sslcmediuminstruction, String pumediuminstruction, int userid) {
         this.exampassedappearance = exampassedappearance;
         this.exampassedyear = exampassedyear;
         this.exampassedregno = exampassedregno;
@@ -35,6 +36,7 @@ public class Pudetails implements java.io.Serializable {
         this.compulsorysubjects = compulsorysubjects;
         this.sslcmediuminstruction = sslcmediuminstruction;
         this.pumediuminstruction = pumediuminstruction;
+        this.userid = userid;
     }
 
     public Integer getIdpudetails() {
@@ -101,11 +103,11 @@ public class Pudetails implements java.io.Serializable {
         this.optionalsubjects = optionalsubjects;
     }
 
-    public String getCompulsorysubjects() {
+    public String getcompulsorysubjects() {
         return this.compulsorysubjects;
     }
 
-    public void setCompulsorysubjects(String compulsorysubjects) {
+    public void setcompulsorysubjects(String compulsorysubjects) {
         this.compulsorysubjects = compulsorysubjects;
     }
 
@@ -125,4 +127,11 @@ public class Pudetails implements java.io.Serializable {
         this.pumediuminstruction = pumediuminstruction;
     }
 
+    public int getUserid() {
+    		return userid;
+    }
+
+    public void setUserid(int userid) {
+    	this.userid = userid;
+    }
 }

@@ -47,6 +47,7 @@ public class HrService {
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
+	private String USERID = "userloginid";
 
 	public HrService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -74,6 +75,7 @@ public class HrService {
 		Leavetypemaster leaveMaster = new Leavetypemaster();
 		leaveMaster.setLeavetypename(DataUtil.emptyString(request.getParameter("leavetypename")));
 		leaveMaster.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		leaveMaster.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		return new HrDAO().saveLeaveType(leaveMaster);
 	}
 
@@ -103,6 +105,7 @@ public class HrService {
 				leaveDetails.setNumberofleaves(Integer.parseInt(totalLeaves[i]));
 				leaveDetails.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
 				leaveDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				leaveDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				leaveDetailsList.add(leaveDetails);
 			}
 			
@@ -158,6 +161,7 @@ public class HrService {
 		payHead.setDescription(DataUtil.emptyString(request.getParameter("description")));
 		payHead.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
 		payHead.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		payHead.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		return new HrDAO().savePayHead(payHead);
 		}
 		return false;
@@ -185,6 +189,7 @@ public class HrService {
 				payHeadStaffDetails.setPayhead(payHead);
 				payHeadStaffDetails.setValue(new BigDecimal(values[i]));
 				payHeadStaffDetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				payHeadStaffDetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				payHeadStaffDetailsList.add(payHeadStaffDetails);
 			}
 			
@@ -228,7 +233,7 @@ public class HrService {
 			}
 			payBasic.setPaymenttype(paymentType[i]);
 			payBasic.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			
+			payBasic.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			payBasicList.add(payBasic);
 		}
 		return new HrDAO().savePayBasic(payBasicList);
@@ -247,6 +252,7 @@ public class HrService {
 		pf.setPaidbyemployee(Integer.parseInt(paidByStaff));
 		pf.setPaidbymanagement(Integer.parseInt(paidByManagement));
 		pf.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		pf.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		new HrDAO().addPf(pf);
 		
 	}
@@ -292,6 +298,7 @@ public class HrService {
 			payAdvanceSalary.setStatus("apply");
 			payAdvanceSalary.setDate(DateUtil.dateParserUpdateStd(DataUtil.emptyString(request.getParameter("dateadvance"))));
 			payAdvanceSalary.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			payAdvanceSalary.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			return new HrDAO().saveAdvanceSalary(payAdvanceSalary);	
 		}
 		return false;
@@ -371,6 +378,7 @@ public class HrService {
 				leaveApplication.setTotalleaves(totalLeaves);
 				leaveApplication.setDateofapply(new Date());
 				leaveApplication.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				leaveApplication.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				return new HrDAO().applyLeave(leaveApplication);
 		}
 		
@@ -553,6 +561,7 @@ public class HrService {
 							}
 						}
 						processHeads.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						processHeads.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 						processSalarydetailsheadList.add(processHeads);
 					}
 				}else{
@@ -575,7 +584,7 @@ public class HrService {
 			       netPayment = netPayment.subtract(totalDeduction);
 			       processSalary.setNetpayment(netPayment);	
 			       processSalary.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			       
+			       processSalary.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			       processsalarydetailsList.add(processSalary);
 			       
 			}

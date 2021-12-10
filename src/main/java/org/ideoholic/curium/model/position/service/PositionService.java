@@ -34,6 +34,7 @@ public class PositionService {
 		position.setPositionname(DataUtil.emptyString(request
 				.getParameter("position")));
 		position.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+		position.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 		if(!position.getPositionname().equalsIgnoreCase("")){
 			position = new positionDAO().create(position);
 		}

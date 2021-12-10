@@ -501,7 +501,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="/#tabs-1">Enter Marks</a></li>
+					<li><a href="#tabs-1">Enter Marks</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -682,7 +682,7 @@ for(Cookie cookie : cookies){
 								id="studentMarks" 
 								name="studentMarks"
 								onkeyup="checkMandatory();" value="0"
-								onkeypress="return event.charCode >= 00 && event.charCode <=57"
+								onkeypress="return (event.charCode >= 00 && event.charCode <=57) || event.charCode == 65"
 								maxlength="3"
 								 /></td>
 

@@ -675,7 +675,7 @@ for(Cookie cookie : cookies){
     <body>
         <form id="form1" action="/FeesCollection/feesAdd" method="post" onkeypress="if (event.keyCode == 92) addRow();">
             <div style="height: 28px">
-                <!--<a href="/#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
+                <!--<a href="#" id="button" class="ui-state-default ui-corner-all">Add Medicine</a>-->
 
                
             <table  width="100%">

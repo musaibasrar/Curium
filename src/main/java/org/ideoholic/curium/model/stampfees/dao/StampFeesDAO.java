@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.stampfees.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,9 +11,11 @@ import org.hibernate.SessionFactory;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
 
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.HibernateUtil;
 
@@ -130,7 +133,7 @@ public class StampFeesDAO {
 	}
 
 	public void addStampFees(
-			java.util.List<Academicfeesstructure> listOfacademicfessstructure, String currentYear) {
+			java.util.List<Academicfeesstructure> listOfacademicfessstructure, String currentYear, List<Studentfeesstructure> listOfstudentfeesstructure, VoucherEntrytransactions transactions, String updateDrAccount, String updateCrAccount) {
 		try {
 			// this.session = sessionFactory.openCurrentSession();
 			transaction = session.beginTransaction();
@@ -152,6 +155,30 @@ public class StampFeesDAO {
 			
 			
 			}
+			
+			for (Studentfeesstructure studentfeesstructure : listOfstudentfeesstructure) {
+				
+				Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.Feescategory.idfeescategory = '"+studentfeesstructure.getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
+				Studentfeesstructure feesStructure = (Studentfeesstructure) query.uniqueResult();
+				if(feesStructure != null){
+					
+					Query queryUpdate = session
+							.createQuery("update Studentfeesstructure set idfeescategory = '"+studentfeesstructure.getIdfeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and academicyear = '"+currentYear+"'");
+					
+					
+					queryUpdate.executeUpdate();
+				}else if(feesStructure == null){
+					session.save(studentfeesstructure);
+				}
+		}
+			
+			//accounts
+			
+			session.save(transactions);
+			Query queryAccounts = session.createQuery(updateDrAccount);
+			queryAccounts.executeUpdate();
+			Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+			queryqueryAccounts1.executeUpdate();
 			
 
 			transaction.commit();

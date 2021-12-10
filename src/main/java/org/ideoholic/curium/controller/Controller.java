@@ -22,6 +22,7 @@ import org.ideoholic.curium.model.feescategory.action.FeesAction;
 import org.ideoholic.curium.model.feescollection.action.FeesCollectionAction;
 import org.ideoholic.curium.model.feesdetails.action.FeesDetailsAction;
 import org.ideoholic.curium.model.hr.action.HrAction;
+import org.ideoholic.curium.model.importfile.action.ImportFileAction;
 import org.ideoholic.curium.model.marksdetails.action.MarksDetailsAction;
 import org.ideoholic.curium.model.mess.item.action.MessItemsAction;
 import org.ideoholic.curium.model.mess.stockmove.action.MessStockMoveAction;
@@ -87,6 +88,8 @@ public class Controller extends HttpServlet {
          nextUrl = new MessSuppliersAction(request, response).execute(action);
      }else if("MessItemsMoveProcess".equalsIgnoreCase(process)){
          nextUrl = new MessStockMoveAction(request, response).execute(action);
+     }else if("ImportProcess".equalsIgnoreCase(process)){
+         nextUrl = new ImportFileAction(request, response).execute(action);
      }
         
         RequestDispatcher reg = request.getRequestDispatcher(nextUrl);

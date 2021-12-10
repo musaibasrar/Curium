@@ -19,6 +19,11 @@ public class FeesAction {
 	@Autowired
 	HttpServletResponse response;
 
+	@PostMapping("/applyConcession")
+	private String applyConcession() {
+        	return new FeesService(request, response).applyConcession();
+    	}
+    		
 	@PostMapping("/printFeesWaiveoffReport")
 	public String printFeesWaiveoffReport() {
 		return "printfeeswaiveoffreport";

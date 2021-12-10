@@ -440,7 +440,7 @@ for(Cookie cookie : cookies){
             <div >
                 <div id="tabs">
                     <ul>
-                        <li><a href="/#tabs-1">Academic Year</a></li>
+                        <li><a href="#tabs-1">Academic Year</a></li>
                         
                     </ul>
 
