@@ -32,9 +32,10 @@ public class PeriodAction {
 	HttpServletRequest request;
 	@Autowired
 	HttpServletResponse response;
+	@Autowired
 	HttpSession httpSession;
 	String url;
-	private String error ="error.jsp";
+	private String error ="error";
 
 	
 
