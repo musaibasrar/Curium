@@ -73,8 +73,6 @@ public class Controller extends HttpServlet {
          nextUrl= new AccountAction(request, response).execute(action);
      }else if("DocumentsProcess".equalsIgnoreCase(process)){
          nextUrl= new DocumentAction(request, response).execute(action);
-     }else if("PeriodProcess".equalsIgnoreCase(process)){
-         nextUrl= new PeriodAction(request, response).execute(action);
      }else if("HrProcess".equalsIgnoreCase(process)){
          nextUrl= new HrAction(request, response).execute(action);
      }else if("ClassProcess".equalsIgnoreCase(process)){

@@ -13,73 +13,61 @@ import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.periods.service.PeriodService;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.student.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Musaib_2
  * 
  */
+
+@Controller
+@RequestMapping("/PeriodProcess")
 public class PeriodAction {
 
+	@Autowired
 	HttpServletRequest request;
+	@Autowired
 	HttpServletResponse response;
 	HttpSession httpSession;
 	String url;
 	private String error ="error.jsp";
 
-	public PeriodAction(HttpServletRequest request,
-			HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
-	public String execute(String action) {
-
-		if ("periodConfiguration".equalsIgnoreCase(action)) {
-			url = periodConfiguration();
-		}else if ("savePeriods".equalsIgnoreCase(action)) {
-			url = savePeriods();
-		}else if ("viewTimeTable".equalsIgnoreCase(action)) {
-			url = viewTimeTable();
-		}else if ("deletePeriods".equalsIgnoreCase(action)) {
-			url = deletePeriods();
-		}else if ("generateTimeTable".equalsIgnoreCase(action)) {
-			url = generateTimeTable();
-		}else if ("generateTeacherTimeTable".equalsIgnoreCase(action)) {
-			url = generateTeacherTimeTable();
-		}else if ("viewTeacherTimeTable".equalsIgnoreCase(action)) {
-			url = viewTeacherTimeTable();
-		}
-		return url;
-	}
 	
 
-	private String viewTeacherTimeTable() {
+	@GetMapping("/viewTeacherTimeTable")
+	public String viewTeacherTimeTable() {
 		
 		if(new PeriodService(request, response).viewTeacherTimeTable()){
-			return "teachertimetableview.jsp";
+			return "teachertimetableview";
 		}
 		return error;
 		
 	}
 
-	private String generateTeacherTimeTable() {
+	@GetMapping("/generateTeacherTimeTable")
+	public String generateTeacherTimeTable() {
 		
 		if(new EmployeeService(request, response).ViewAllEmployee()){
-			return "teachertimetable.jsp";
+			return "teachertimetable";
 		}
 		return error;
 	}
 
-	private String generateTimeTable() {
+	@GetMapping("/generateTimeTable")
+	public String generateTimeTable() {
 		
 		if(new PeriodService(request, response).generateTimeTable()){
-			return "classestimetable.jsp";
+			return "classestimetable";
 		}
 		return error;
 	}
 
-	private String deletePeriods() {
+	@PostMapping("/deletePeriods")
+	public String deletePeriods() {
 		if(new PeriodService(request, response).deletePeriods()){
 			return periodConfiguration();
 		}
@@ -87,16 +75,18 @@ public class PeriodAction {
 		return error;
 	}
 
-	private String viewTimeTable() {
+	@GetMapping("/viewTimeTable")
+	public String viewTimeTable() {
 		
 		if(new PeriodService(request, response).viewTimeTable()){
-			return "timetable.jsp";
+			return "timetable";
 		}
 		
 		return error;
 	}
 
-	private String savePeriods() {
+	@PostMapping("/savePeriods")
+	public String savePeriods() {
 		
 		if(new PeriodService(request, response).savePeriods()){
 			return periodConfiguration();
@@ -104,18 +94,20 @@ public class PeriodAction {
 		return error;
 	}
 
-	private String periodConfiguration() {
+	@GetMapping("/periodConfiguration")
+	public String periodConfiguration() {
 		
 		if(new PeriodService(request, response).periodConfiguration()){
-			return "periodmaster.jsp";
+			return "periodmaster";
 		}
 		return error;
 	}
 
 
-	private String transferCertificate() {
+	@GetMapping("/transferCertificate")
+	public String transferCertificate() {
 		if(new DocumentService(request, response).transferCertificate()){
-			return "transfercertificate.jsp";
+			return "transfercertificate";
 		}
         return error;
 	}
