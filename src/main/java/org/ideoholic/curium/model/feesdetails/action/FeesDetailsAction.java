@@ -7,68 +7,40 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.feesdetails.service.FeesDetailsService;
 import org.ideoholic.curium.model.student.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+
+@Controller
+@RequestMapping("/FeesDetails")
 public class FeesDetailsAction {
+	
+	@Autowired
 	HttpServletRequest request;
+	
+	@Autowired
 	HttpServletResponse response;
+	
+	@Autowired
 	HttpSession httpSession;
-	String url;
 
-	public FeesDetailsAction(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
-	public String execute(String action, String page) {
-		 if (action.equalsIgnoreCase("feesView")) {
-			url = viewFees();
-		}else if (action.equalsIgnoreCase("addFeesParticular")) {
-			url = addFeesParticular();
-		}else if (action.equalsIgnoreCase("feesCollect")) {
-			url = feesCollect();
-		}else if (action.equalsIgnoreCase("exportDataForFees")) {
-			url = exportFeesData();
-		}else if (action.equalsIgnoreCase("download")) {
-			url = downloadFile();
-		}
-		return url;
-	}
-
-	private String downloadFile() {
+	@PostMapping("/download")
+	public String downloadFile() {
 		if(new FeesService(request, response).downlaodFile()){
-			return "feesexportsuccess.jsp";
+			return "feesexportsuccess";
 		}
-        return "exportfailure.jsp";
+        return "exportfailure";
 	}
 
-	private String feesCollect() {
-		
-	new FeesService(request, response).viewFees();    
-    new StudentService(request, response).viewAllStudentsList();
-    return "feesCollection.jsp";
-    
-	}
-
-	private String addFeesParticular() {
-		
-		
-		new FeesService(request, response).addFeesParticular();
-        return "Controller?process=FeesProcess&action=feesView";
-		
-	}
-
-	private String viewFees() {
-		new FeesService(request, response).viewFees();
-        return "feesCategory.jsp";
-	}
-
-	private String exportFeesData() {
+	@PostMapping("/exportDataForFees")
+	public String exportFeesData() {
 		
 		if(new FeesDetailsService(request, response).exportDataForFees()){
-			return "feesexportsuccess.jsp";
+			return "feesexportsuccess";
 		}else{
-			return "exportfailure.jsp";
+			return "exportfailure";
 		}
 		
 	}
