@@ -79,7 +79,7 @@ public class ExamDetailsAction {
 	public String deleteExamSchedule() {
 		
 		if(new ExamDetailsService(request, response).deleteExamSchedule()){
-			return "Controller?process=ExamDetailsProcess&action=examSchedule";
+			return examSchedule();
 		}else{
 			return "error";
 		}
@@ -89,7 +89,7 @@ public class ExamDetailsAction {
 	public String addSchedule() {
 		
 		if(new ExamDetailsService(request, response).addSchedule()){
-			return "Controller?process=ExamDetailsProcess&action=examSchedule";
+			return examSchedule();
 		}else{
 			return "error";
 		}
@@ -124,7 +124,7 @@ public class ExamDetailsAction {
 	@PostMapping("/deleteMultiple")
 	public String deleteMultiple() {
 		if(new ExamDetailsService(request, response).deleteMultiple()){
-			return "Controller?process=ExamDetailsProcess&action=readListOfExams";
+			return readListOfExams();
 		}else{
 			return "error";
 		}
@@ -143,7 +143,7 @@ public class ExamDetailsAction {
 	public String addExam() {
 		
 		if(new ExamDetailsService(request, response).addExam()){
-			return "Controller?process=ExamDetailsProcess&action=readListOfExams";
+			return readListOfExams();
 		}else{
 			return "error";
 		}

@@ -26,7 +26,7 @@ public class SubjectDetailsAction {
 	@PostMapping("/deleteMultipleSubjects")
 	private String deleteMultipleSubjects() {
 		if(new SubjectDetailsService(request, response).deleteMultipleSubjects()){
-			return "Controller?process=SubjectDetailsProcess&action=readListOfSubjectNames";
+			return readListOfSubjectNames();
 		}else{
 			return "error.jsp";
 		}
@@ -41,7 +41,7 @@ public class SubjectDetailsAction {
 	@PostMapping("/addSubjectMaster")
 	private String addSubjectMaster() {
 		if(new SubjectDetailsService(request, response).addSubjectMaster()){
-			return "Controller?process=SubjectDetailsProcess&action=readListOfSubjectNames";
+			return readListOfSubjectNames();
 		}else{
 			return "error.jsp";
 		}
@@ -50,7 +50,7 @@ public class SubjectDetailsAction {
 	@PostMapping("/deleteMultiple")
 	private String deleteMultiple() {
 		if(new SubjectDetailsService(request, response).deleteMultiple()){
-			return "Controller?process=SubjectDetailsProcess&action=readListOfSubjects";
+			return readListOfSubjectsExams();
 		}else{
 			return "error.jsp";
 		}
@@ -59,7 +59,7 @@ public class SubjectDetailsAction {
 	@PostMapping("/addSubject")
 	private String addSubject() {
 		if(new SubjectDetailsService(request, response).addSubject()){
-			return "Controller?process=SubjectDetailsProcess&action=readListOfSubjects";
+			return readListOfSubjectsExams();
 		}else{
 			return "error.jsp";
 		}
@@ -71,7 +71,6 @@ public class SubjectDetailsAction {
 		new SubjectDetailsService(request, response).readListOfSubjectNames();
 		new ExamDetailsService(request, response).readListOfExams();
 		new StandardService(request, response).viewClasses();
-        System.out.println("IN action's view all Subjects");
         return "SubjectDetails.jsp";
 	}
 	
