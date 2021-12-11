@@ -2,96 +2,75 @@ package org.ideoholic.curium.model.employee.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.department.service.DepartmentService;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
-import org.ideoholic.curium.model.position.service.PositionService;
-import org.ideoholic.curium.model.student.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@Controller
+@RequestMapping("/EmployeeProcess")
 public class EmployeeAction {
 
+	@Autowired
 	HttpServletRequest request;
+	@Autowired
 	HttpServletResponse response;
-	HttpSession httpSession;
-	String url;
 
-	public EmployeeAction(HttpServletRequest request,
-			HttpServletResponse response) {
-
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-
-	}
-
-	public String execute(String action, String page) {
-		if (action.equalsIgnoreCase("addEmployee")) {
-			url = addEmployee();
-		} else if (action.equalsIgnoreCase("ViewAllEmployee")) {
-			url = viewEmployee();
-		}else if (action.equalsIgnoreCase("ViewDetails")) {
-			url = viewDetails();
-		}else if (action.equalsIgnoreCase("updateEmployeeDetails")) {
-			url = updateEmployeeDetails();
-		}else if (action.equalsIgnoreCase("updateEmployee")) {
-			url = updateEmployee();
-		}else if (action.equalsIgnoreCase("deleteMultiple")) {
-			url = deleteMultiple();
-		}else if (action.equalsIgnoreCase("addEmployeePage")) {
-			url = addEmployeePage();
-		}else if ("searchEmployee".equalsIgnoreCase(action)) {
-			url = searchEmployee();
-		}
-		return url;
-	}
-
-	private String searchEmployee() {
+	@PostMapping("/searchEmployee")
+	public String searchEmployee() {
 		new EmployeeService(request, response).searchEmployee();
 		return "";
 	}
 
-	private String addEmployeePage() {
-		
+	@GetMapping("/addEmployeePage")
+	public String addEmployeePage() {
 		new EmployeeService(request, response).viewAllRelations();
-       return "addEmployee.jsp";
-		
+		return "addEmployee";
 	}
 
-	private String deleteMultiple() {
+	@PostMapping("/deleteMultiple")
+	public String deleteMultiple() {
 		new EmployeeService(request, response).deleteMultiple();
-        return "Controller?process=EmployeeProcess&action=ViewAllEmployee";
+		return viewEmployee();
 	}
 
-	private String updateEmployee() {
-		return "Controller?process=EmployeeProcess&action=viewDetails&id=" + new EmployeeService(request, response).updateEmployee();
+	@PostMapping("/updateEmployee")
+	public String updateEmployee() {
+		request.setAttribute("id", new EmployeeService(request, response).updateEmployee());
+		return viewDetails();
 	}
 
-	private String updateEmployeeDetails() {
+	@PostMapping("/updateEmployeeDetails")
+	public String updateEmployeeDetails() {
 		if (new EmployeeService(request, response).viewDetailsEmployee()) {
-            //return "patientDetails_1.jsp";
-            return "employee_update.jsp";
-        } else {
-            return "viewAll.jsp";
-        }
-	}
-
-	private String viewDetails() {
-		new EmployeeService(request, response).viewDetailsEmployee();
-		return "employee_details.jsp";
-	}
-
-	private String viewEmployee() {
-		new EmployeeService(request, response).ViewAllEmployee();
-		return "viewAllEmployee.jsp";
-	}
-
-	private String addEmployee() {
-
-		if (new EmployeeService(request, response).addEmployee()) {
-			return "Employeesaved.jsp";
+			// return "patientDetails_1";
+			return "employee_update";
 		} else {
-			return "EmployeenotSaved.jsp";
+			return "viewAll";
+		}
+	}
+
+	@GetMapping("/ViewDetails")
+	public String viewDetails() {
+		new EmployeeService(request, response).viewDetailsEmployee();
+		return "employee_details";
+	}
+
+	@PostMapping("/ViewAllEmployee")
+	public String viewEmployee() {
+		new EmployeeService(request, response).ViewAllEmployee();
+		return "viewAllEmployee";
+	}
+
+	@GetMapping("/addEmployee")
+	public String addEmployee() {
+		if (new EmployeeService(request, response).addEmployee()) {
+			return "Employeesaved";
+		} else {
+			return "EmployeenotSaved";
 		}
 	}
 
