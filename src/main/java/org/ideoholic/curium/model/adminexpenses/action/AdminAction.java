@@ -8,92 +8,78 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
-import org.ideoholic.curium.model.feescategory.service.FeesService;
-import org.ideoholic.curium.model.student.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Musaib_2
  * 
  */
+@Controller
+@RequestMapping("/AdminProcess")
 public class AdminAction {
 
+	@Autowired
 	HttpServletRequest request;
+	
+	@Autowired
 	HttpServletResponse response;
+	
+	@Autowired
 	HttpSession httpSession;
-	String url;
-
-	public AdminAction(HttpServletRequest request,
-			HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
-	public String execute(String action, String page) {
-		// TODO Auto-generated method stub
-		if (action.equalsIgnoreCase("viewAllExpenses")) {
-			url = viewAllExpenses();
-		} else if (action.equalsIgnoreCase("addExpenses")) {
-			url = addExpenses();
-		}else if (action.equalsIgnoreCase("deleteMultiple")) {
-			url = deleteMultiple();
-		}else if ("searchExpenses".equalsIgnoreCase(action)) {
-			url = searchExpensesbydate();
-		}else if (action.equalsIgnoreCase("printVoucher")) {
-			url = printVoucher();
-		}else if (action.equalsIgnoreCase("approveVoucher")) {
-			url = approveVoucher();
-		}else if (action.equalsIgnoreCase("rejectVoucher")) {
-			url = rejectVoucher();
-		}
-		return url;
-	}
 
 	
-
-	
-
-	private String rejectVoucher() {
+	@PostMapping("/rejectVoucher")
+	public String rejectVoucher() {
 		
 			new AdminService(request, response).rejectVoucher();
-            return "Controller?process=AdminProcess&action=viewAllExpenses";
+            return viewAllExpenses();
 	}
 
-	private String approveVoucher() {
+	@PostMapping("/approveVoucher")
+	public String approveVoucher() {
 		new AdminService(request, response).approveVoucher();
-        return "Controller?process=AdminProcess&action=viewAllExpenses";
+        return viewAllExpenses();
 	}
 
-	private String printVoucher() {
+	@PostMapping("/printVoucher")
+	public String printVoucher() {
 		 new AdminService(request, response).printVoucher();
-	        return "paymentvoucherprint.jsp";
+	        return "paymentvoucherprint";
 	}
 
-	private String searchExpensesbydate() {
+	@PostMapping("/searchExpenses")
+	public String searchExpensesbydate() {
 		
 		new AdminService(request, response).searchExpensesbydate();
-		return "adminexpenses.jsp";
+		return "adminexpenses";
 	}
 
-	private String viewAllExpenses() { 
+	@GetMapping("/viewAllExpenses")
+	public String viewAllExpenses() { 
 		
 		new AdminService(request, response).viewAllExpenses();
-		return "adminexpenses.jsp";
+		return "adminexpenses";
 		
     }
 
-	private String addExpenses() {
+	@PostMapping("/addExpenses")
+	public String addExpenses() {
 		 if (new AdminService(request, response).addExpenses()) {
-	            return "Controller?process=AdminProcess&action=viewAllExpenses";
+	            return viewAllExpenses();
 	        } else {
-	            return "notSavedExpenses.jsp";
+	            return "notSavedExpenses";
 	        }
 		
 	}
 
-	private String deleteMultiple() {
+	@PostMapping("/deleteMultiple")
+	public String deleteMultiple() {
 		 new AdminService(request, response).deleteMultiple();
-	        return "Controller?process=AdminProcess&action=viewAllExpenses";
+	        return viewAllExpenses();
 	}
 
 	

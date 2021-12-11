@@ -87,5 +87,10 @@ public class UserAction {
 			return "passwordFail";
 		}
 	}
+	
+	public void setHttpobjects(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+		this.response = response;
+	}
 
 }

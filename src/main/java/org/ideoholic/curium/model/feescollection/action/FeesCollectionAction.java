@@ -10,103 +10,100 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
+import org.ideoholic.curium.model.user.action.UserAction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Musaib_2
  *
  */
+
+@Controller
+@RequestMapping("/FeesCollection")
 public class FeesCollectionAction {
+	
+		@Autowired
         HttpServletRequest request;
-        HttpServletResponse response;
-        HttpSession httpSession;
-        String url;
+        
+		@Autowired
+		HttpServletResponse response;
+        
+		@Autowired
+		HttpSession httpSession;
 
-        public FeesCollectionAction(HttpServletRequest request,
-                        HttpServletResponse response) {
-                        this.request = request;
-                        this.response = response;
-                        this.httpSession = request.getSession();}
-
-        public String execute(String action, String page) {
-                 if (action.equalsIgnoreCase("feesAdd")) {
-                                url = feesAdd();
-                        }else if (action.equalsIgnoreCase("printReceipt")) {
-                                url = printReceipt();
-                        }else if (action.equalsIgnoreCase("ViewDetails")) {
-                                url = ViewDetails();
-                        }else if (action.equalsIgnoreCase("StampFees")) {
-                                url = StampFees();
-                        }else if (action.equalsIgnoreCase("CancelFeesReceipt")) {
-                            url = cancelFeesReceipt();
-                        }else if (action.equalsIgnoreCase("viewCancelledReceipts")) {
-                            url = viewCancelledReceipts();
-                        }else if (action.equalsIgnoreCase("UndoFeesReceipt")) {
-                            url = undoFeesReceipt();
-                        }else if (action.equalsIgnoreCase("searchFeesReport")) {
-                            url = searchFeesReport();
-                    }
-                return url;
+        @PostMapping("/searchFeesReport")
+        public String searchFeesReport() {
+            new FeesCollectionService(request, response).getFeesReport();
+            return "feesreport";
         }
 
-        private String searchFeesReport() {
-            new FeesCollectionService(request, response).getFeesReport();
-            return "feesreport.jsp";
-    }
-
-		private String undoFeesReceipt() {
+        @GetMapping("/UndoFeesReceipt")
+		public String undoFeesReceipt() {
         	new FeesCollectionService(request, response).undoFeesReceipt();
-			return "Controller?process=FeesCollection&action=viewCancelledReceipts";
+			return viewCancelledReceipts();
 		}
 
-		private String viewCancelledReceipts() {
+		@PostMapping("/viewCancelledReceipts")
+		public String viewCancelledReceipts() {
         	new FeesCollectionService(request, response).viewCancelledReceipts();
-			return "feescancelledreceipts.jsp";
+			return "feescancelledreceipts";
 		}
 
-		private String cancelFeesReceipt() {
+		@GetMapping("/CancelFeesReceipt")
+		public String cancelFeesReceipt() {
 			new FeesCollectionService(request, response).cancelFeesReceipt();
-			return "Controller?process=UserProcess&action=searchByDate";
+			UserAction userAction = new UserAction();
+			userAction.setHttpobjects(request, response);
+			return userAction.searchByDate();
 		}
 
-		private String StampFees() {
+		@PostMapping("/StampFees")
+		public String StampFees() {
                 new FeesCollectionService(request, response).getStampFees();
                 new FeesService(request, response).viewAllBranchStudents();
-                return "feesCollection.jsp";
+                return "feesCollection";
         }
 
-        private String ViewDetails() {
+		@GetMapping("/ViewDetails")
+        public String ViewDetails() {
                 //new FeesCollectionService(request, response).preview();
                 new FeesCollectionService(request, response).previewFeesDetails();
-                return "previewFeesDetail.jsp";
+                return "previewFeesDetail";
         }
 
-        private String printReceipt() {
+        @GetMapping("/printReceipt")
+        public String printReceipt() {
                 new FeesCollectionService(request, response).previewDetails();
                 
                 if(httpSession.getAttribute("branchid")!=null){
                     String branchId = httpSession.getAttribute("branchid").toString();
                     if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
-                        return "printFeesDetail.jsp";
+                        return "printFeesDetail";
                     }else if("4".equalsIgnoreCase(branchId)) {
-                        return "printFeesDetail_pu.jsp";
+                        return "printFeesDetail_pu";
                     }else if("5".equalsIgnoreCase(branchId)) {
-                        return "printFeesDetail_dc.jsp";
+                        return "printFeesDetail_dc";
                     }
                 }
                 
-                return "printFeesDetail.jsp";
+                return "printFeesDetail";
         }
 
-        private String feesAdd() {
+        @PostMapping("/feesAdd")	
+        public String feesAdd() {
                 Receiptinfo receiptInfo = new FeesCollectionService(request, response).add();
                 if(receiptInfo.getReceiptnumber()!=null){
                         //under implementation
                         /*SmsService smsSerivce = new SmsService(request, response);
                         smsSerivce.sendSMS(DataUtil.emptyString(request.getParameter("contactnumber")),"We have received Rs."+DataUtil.emptyString(request.getParameter("grandTotalAmount"))+" towards fees collection.");*/
                         new FeesCollectionService(request, response).preview(receiptInfo);
-                        return "previewFeesDetail.jsp";
+                        return "previewFeesDetail";
                 }else{
-                        return "error.jsp";
+                        return "error";
                 }
                 
         }
