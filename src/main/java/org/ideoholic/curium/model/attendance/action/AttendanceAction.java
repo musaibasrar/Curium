@@ -3,330 +3,276 @@
  */
 package org.ideoholic.curium.model.attendance.action;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.academicyear.service.YearService;
-import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.attendance.service.AttendanceService;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
-import org.ideoholic.curium.model.feescategory.service.FeesService;
-import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.model.student.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Musaib_2
  * 
  */
+@Controller
+@RequestMapping("/AttendanceProcess")
 public class AttendanceAction {
 
+	@Autowired
 	HttpServletRequest request;
+	@Autowired
 	HttpServletResponse response;
-	HttpSession httpSession;
-	String url;
-	String errorPage = "error.jsp";
 
-	public AttendanceAction(HttpServletRequest request,
-			HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
-	public String execute(String action) {
-
-		if ("attendanceConfiguration".equalsIgnoreCase(action)) {
-			url = attendanceConfiguration();
-		} else if ("viewAllHolidays".equalsIgnoreCase(action)) {
-			url = viewAllHolidays();
-		}else if ("addHolidays".equalsIgnoreCase(action)) {
-			url = addHolidays();
-		}else if ("addWeekOff".equalsIgnoreCase(action)) {
-			url = addWeekOff();
-		}else if ("deleteMultiple".equalsIgnoreCase(action)) {
-			url = deleteMultiple();
-		}else if ("addStudentAttendanceMaster".equalsIgnoreCase(action)) {
-			url = addStudentAttendanceMaster();
-		}else if ("addStaffAttendanceMaster".equalsIgnoreCase(action)) {
-			url = addStaffAttendanceMaster();
-		}else if ("searchEmployees".equalsIgnoreCase(action)) {
-			url = searchEmployees();
-		}else if ("uploadAttendanceFile".equalsIgnoreCase(action)) {
-			url = uploadAttendanceFile();
-		}else if ("searchStudentAttendanceDetails".equalsIgnoreCase(action)) {
-			url = searchStudentAttendanceDetails();
-		}else if ("viewAttendance".equalsIgnoreCase(action)) {
-			url = viewAttendance();
-		}else if ("searchStudentAttendanceDetailsMonthly".equalsIgnoreCase(action)) {
-			url = searchStudentAttendanceDetailsMonthly();
-		}else if ("updateStudentAttendanceDetails".equalsIgnoreCase(action)) {
-			url = updateStudentAttendanceDetails();
-		}else if ("searchStudentAttendanceDetailsMonthlyGraph".equalsIgnoreCase(action)) {
-			url = searchStudentAttendanceDetailsMonthlyGraph();
-		}else if ("searchStudentAttendanceDetailsMark".equalsIgnoreCase(action)) {
-			url = searchStudentAttendanceDetailsMark();
-		}else if ("markStudentsAttendance".equalsIgnoreCase(action)) {
-			url = markStudentsAttendance();
-		}else if ("exportMonthlyData".equalsIgnoreCase(action)) {
-			url = exportMonthlyData();
-		}else if ("download".equalsIgnoreCase(action)) {
-			url = download();
-		}else if ("viewAttendanceStaff".equalsIgnoreCase(action)) {
-			url = viewAttendanceStaff();
-		}else if ("searchStaffAttendanceDetails".equalsIgnoreCase(action)) {
-			url = searchStaffAttendanceDetails();
-		}else if ("updateStaffAttendanceDetails".equalsIgnoreCase(action)) {
-			url = updateStaffAttendanceDetails();
-		}else if ("searchStaffAttendanceDetailsMonthly".equalsIgnoreCase(action)) {
-			url = searchStaffAttendanceDetailsMonthly();
-		}else if ("attendanceMarkStaff".equalsIgnoreCase(action)) {
-			url = attendanceMarkStaff();
-		}else if ("markStaffAttendance".equalsIgnoreCase(action)) {
-			url = markStaffAttendance();
-		}else if ("attendanceExportViewStaff".equalsIgnoreCase(action)) {
-			url = attendanceExportViewStaff();
-		}else if ("exportMonthlyDataStaff".equalsIgnoreCase(action)) {
-			url = exportMonthlyAttendanceStaff();
-		}else if ("downloadStaffAttendance".equalsIgnoreCase(action)) {
-			url = downloadStaffAttendance();
-		}else if ("markAttendance".equalsIgnoreCase(action)) {
-			url = markAttendance();
-		}else if ("attendanceExport".equalsIgnoreCase(action)) {
-			url = attendanceExport();
-		}
-		return url;
-	}
-	
-	
-	private String attendanceExport() {
+	@GetMapping("/attendanceExport")
+	public String attendanceExport() {
 		new StandardService(request, response).viewClasses();
-		return "attendanceexport.jsp";
+		return "attendanceexport";
 	}
 
-	private String markAttendance() {
+	@GetMapping("/markAttendance")
+	public String markAttendance() {
 		new StandardService(request, response).viewClasses();
-		return "attendancemark.jsp";
+		return "attendancemark";
 	}
 
-	private String downloadStaffAttendance() {
-		
-		if(new AttendanceService(request, response).downloadFileStaff()){
-			return "attendanceexportsuccessstaff.jsp";
+	@PostMapping("/downloadStaffAttendance")
+	public String downloadStaffAttendance() {
+
+		if (new AttendanceService(request, response).downloadFileStaff()) {
+			return "attendanceexportsuccessstaff";
 		}
-		return "exportfailure.jsp";
-		
+		return "exportfailure";
 	}
 
-	private String exportMonthlyAttendanceStaff() {
-		
-		if(new AttendanceService(request, response).exportMonthlyDataStaff()){
-			return "attendanceexportsuccessstaff.jsp";
+	@PostMapping("/exportMonthlyDataStaff")
+	public String exportMonthlyAttendanceStaff() {
+
+		if (new AttendanceService(request, response).exportMonthlyDataStaff()) {
+			return "attendanceexportsuccessstaff";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String attendanceExportViewStaff() {
-		
-		if(new AttendanceService(request, response).viewAttendanceStaff()){
-			return "attendanceexportstaff.jsp";
+	@GetMapping("/attendanceExportViewStaff")
+	public String attendanceExportViewStaff() {
+
+		if (new AttendanceService(request, response).viewAttendanceStaff()) {
+			return "attendanceexportstaff";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String markStaffAttendance() {
-		
-		if(new AttendanceService(request, response).markStaffAttendance()){
-			return "attendancemarkstaffsuccess.jsp";
+	@PostMapping("/markStaffAttendance")
+	public String markStaffAttendance() {
+
+		if (new AttendanceService(request, response).markStaffAttendance()) {
+			return "attendancemarkstaffsuccess";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String attendanceMarkStaff() {
+	@GetMapping("/attendanceMarkStaff")
+	public String attendanceMarkStaff() {
 
-		if(new AttendanceService(request, response).viewAttendanceStaff()){
-			return "attendancemarkstaff.jsp";
+		if (new AttendanceService(request, response).viewAttendanceStaff()) {
+			return "attendancemarkstaff";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String searchStaffAttendanceDetailsMonthly() {
-		if(new AttendanceService(request, response).viewStaffAttendanceDetailsMonthly()){
-			return "attendanceviewmonthlystaff.jsp";
+	@PostMapping("/searchStaffAttendanceDetailsMonthly")
+	public String searchStaffAttendanceDetailsMonthly() {
+		if (new AttendanceService(request, response).viewStaffAttendanceDetailsMonthly()) {
+			return "attendanceviewmonthlystaff";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String updateStaffAttendanceDetails() {
-		if(new AttendanceService(request, response).updateStaffAttendanceDetails()){
-			return "attendanceviewstaff.jsp";
+	@PostMapping("/updateStaffAttendanceDetails")
+	public String updateStaffAttendanceDetails() {
+		if (new AttendanceService(request, response).updateStaffAttendanceDetails()) {
+			return "attendanceviewstaff";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String searchStaffAttendanceDetails() {
-		if(new AttendanceService(request, response).searchStaffAttendanceDetails()){
-			return "attendanceviewstaff.jsp";
+	@PostMapping("/searchStaffAttendanceDetails")
+	public String searchStaffAttendanceDetails() {
+		if (new AttendanceService(request, response).searchStaffAttendanceDetails()) {
+			return "attendanceviewstaff";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String viewAttendanceStaff() {
+	@GetMapping("/viewAttendanceStaff")
+	public String viewAttendanceStaff() {
 
-		if(new AttendanceService(request, response).viewAttendanceStaff()){
-			return "attendanceviewstaff.jsp";
+		if (new AttendanceService(request, response).viewAttendanceStaff()) {
+			return "attendanceviewstaff";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String download() {
-		if(new AttendanceService(request, response).downloadFile()){
-			return "attendanceexportsuccess.jsp";
+	@PostMapping("/download")
+	public String download() {
+		if (new AttendanceService(request, response).downloadFile()) {
+			return "attendanceexportsuccess";
 		}
-		return "exportfailure.jsp";
+		return "exportfailure";
 	}
 
-	private String exportMonthlyData() {
-		
-		if(new AttendanceService(request, response).exportMonthlyData()){
-			return "attendanceexportsuccess.jsp";
+	@PostMapping("/exportMonthlyData")
+	public String exportMonthlyData() {
+
+		if (new AttendanceService(request, response).exportMonthlyData()) {
+			return "attendanceexportsuccess";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String markStudentsAttendance() {
-		
-		if(new AttendanceService(request, response).markStudentsAttendance()){
-			return "attendancemark.jsp";
+	@PostMapping("/markStudentsAttendance")
+	public String markStudentsAttendance() {
+
+		if (new AttendanceService(request, response).markStudentsAttendance()) {
+			return "attendancemark";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String searchStudentAttendanceDetailsMark() {
-		
-		if(new AttendanceService(request, response).viewStudentAttendanceDetailsMark()){
-			return "attendancemark.jsp";
+	@PostMapping("/searchStudentAttendanceDetailsMark")
+	public String searchStudentAttendanceDetailsMark() {
+
+		if (new AttendanceService(request, response).viewStudentAttendanceDetailsMark()) {
+			return "attendancemark";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String searchStudentAttendanceDetailsMonthlyGraph() {
-		
-		if(new AttendanceService(request, response).viewStudentAttendanceDetailsMonthlyGraph()){
-			return "viewattendancegraph.jsp";
+	@PostMapping("/searchStudentAttendanceDetailsMonthlyGraph")
+	public String searchStudentAttendanceDetailsMonthlyGraph() {
+
+		if (new AttendanceService(request, response).viewStudentAttendanceDetailsMonthlyGraph()) {
+			return "viewattendancegraph";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String updateStudentAttendanceDetails() {
-		if(new AttendanceService(request, response).updateStudentAttendanceDetails()){
-			return "viewattendance.jsp";
+	@PostMapping("/updateStudentAttendanceDetails")
+	public String updateStudentAttendanceDetails() {
+		if (new AttendanceService(request, response).updateStudentAttendanceDetails()) {
+			return "viewattendance";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String searchStudentAttendanceDetailsMonthly() {
-		
-		if(new AttendanceService(request, response).viewStudentAttendanceDetailsMonthly()){
-			return "viewattendancemonthly.jsp";
+	@PostMapping("/searchStudentAttendanceDetailsMonthly")
+	public String searchStudentAttendanceDetailsMonthly() {
+
+		if (new AttendanceService(request, response).viewStudentAttendanceDetailsMonthly()) {
+			return "viewattendancemonthly";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String viewAttendance() {
+	@GetMapping("/viewAttendance")
+	public String viewAttendance() {
 
-		if(new AttendanceService(request, response).viewAttendance()){
+		if (new AttendanceService(request, response).viewAttendance()) {
 			new StandardService(request, response).viewClasses();
-			return "viewattendance.jsp";
+			return "viewattendance";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String searchStudentAttendanceDetails() {
-		if(new AttendanceService(request, response).searchStudentAttendanceDetails()){
-			return "viewattendance.jsp";
+	@PostMapping("/searchStudentAttendanceDetails")
+	public String searchStudentAttendanceDetails() {
+		if (new AttendanceService(request, response).searchStudentAttendanceDetails()) {
+			return "viewattendance";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String uploadAttendanceFile(){
+	@PostMapping("/uploadAttendanceFile")
+	public String uploadAttendanceFile() {
 		try {
-			if(new AttendanceService(request, response).uploadAttendanceFile()){
-				return "studentdailyattendancesuccess.jsp";
+			if (new AttendanceService(request, response).uploadAttendanceFile()) {
+				return "studentdailyattendancesuccess";
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String addStaffAttendanceMaster() {
-		if(new AttendanceService(request, response).addStaffAttendanceMaster()){
-			return "staffattendancesuccess.jsp";
+	@PostMapping("/addStaffAttendanceMaster")
+	public String addStaffAttendanceMaster() {
+		if (new AttendanceService(request, response).addStaffAttendanceMaster()) {
+			return "staffattendancesuccess";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String searchEmployees() {
+	@PostMapping("/searchEmployees")
+	public String searchEmployees() {
 		new EmployeeService(request, response).searchEmployee();
 		new EmployeeService(request, response).viewAllRelations();
 		new AttendanceService(request, response).viewAllHolidays();
 		new AttendanceService(request, response).viewAllWeekOffs();
-		return "attendancemaster.jsp";
+		return "attendancemaster";
 	}
 
-	private String addStudentAttendanceMaster() {
-		if(new AttendanceService(request, response).addStudentAttendanceMaster()){
-			return "studentattendancesuccess.jsp";
+	@PostMapping("/addStudentAttendanceMaster")
+	public String addStudentAttendanceMaster() {
+		if (new AttendanceService(request, response).addStudentAttendanceMaster()) {
+			return "studentattendancesuccess";
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String deleteMultiple() {
-		if(new AttendanceService(request, response).deleteMultiple()){
+	@PostMapping("/deleteMultiple")
+	public String deleteMultiple() {
+		if (new AttendanceService(request, response).deleteMultiple()) {
 			return viewAllHolidays();
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String addWeekOff() {
-		if(new AttendanceService(request, response).addWeekOff()){
+	@PostMapping("/addWeekOff")
+	public String addWeekOff() {
+		if (new AttendanceService(request, response).addWeekOff()) {
 			return viewAllHolidays();
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String addHolidays() {
-		if(new AttendanceService(request, response).addHolidays()){
+	@PostMapping("/addHolidays")
+	public String addHolidays() {
+		if (new AttendanceService(request, response).addHolidays()) {
 			return viewAllHolidays();
 		}
-		return errorPage;
+		return "error";
 	}
 
-	private String viewAllHolidays() {
+	@GetMapping("/viewAllHolidays")
+	public String viewAllHolidays() {
 		new AttendanceService(request, response).viewAllHolidays();
-		return "holiday.jsp";
-	
+		return "holiday";
 	}
 
-	private String attendanceConfiguration() {
+	@GetMapping("/attendanceConfiguration")
+	public String attendanceConfiguration() {
 		new EmployeeService(request, response).viewAllRelations();
 		new AttendanceService(request, response).viewAllHolidays();
 		new AttendanceService(request, response).viewAllWeekOffs();
 		new EmployeeService(request, response).ViewAllEmployee();
-	       return "attendancemaster.jsp";
+		return "attendancemaster";
 	}
-
-	
-
 }

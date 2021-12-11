@@ -56,16 +56,12 @@ public class Controller extends HttpServlet {
         String page = request.getParameter("page");
        
         String nextUrl = "";
-     if("EmployeeProcess".equalsIgnoreCase(process)){
-         nextUrl= new EmployeeAction(request, response).execute(action,page);
-     }else if("ExamDetailsProcess".equalsIgnoreCase(process)){
+     if("ExamDetailsProcess".equalsIgnoreCase(process)){
          nextUrl= new ExamDetailsAction(request, response).execute(action);
      }else if("SubjectDetailsProcess".equalsIgnoreCase(process)){
          nextUrl= new SubjectDetailsAction(request, response).execute(action);
      }else if("FeesDetails".equalsIgnoreCase(process)){
          nextUrl= new FeesDetailsAction(request, response).execute(action,page);
-     }else if("AttendanceProcess".equalsIgnoreCase(process)){
-         nextUrl= new AttendanceAction(request, response).execute(action);
      }else if("AccountProcess".equalsIgnoreCase(process)){
          nextUrl= new AccountAction(request, response).execute(action);
      }else if("DocumentsProcess".equalsIgnoreCase(process)){
