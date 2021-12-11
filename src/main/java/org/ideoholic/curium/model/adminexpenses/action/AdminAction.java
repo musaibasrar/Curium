@@ -32,14 +32,14 @@ public class AdminAction {
 	HttpSession httpSession;
 
 	
-	@PostMapping("/printVoucher")
+	@PostMapping("/rejectVoucher")
 	public String rejectVoucher() {
 		
 			new AdminService(request, response).rejectVoucher();
             return viewAllExpenses();
 	}
 
-	@PostMapping("/printVoucher")
+	@PostMapping("/approveVoucher")
 	public String approveVoucher() {
 		new AdminService(request, response).approveVoucher();
         return viewAllExpenses();
