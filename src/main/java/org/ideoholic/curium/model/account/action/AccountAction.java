@@ -11,95 +11,55 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.account.service.AccountService;
-import org.ideoholic.curium.model.adminexpenses.service.AdminService;
-import org.ideoholic.curium.model.feescategory.service.FeesService;
-import org.ideoholic.curium.model.student.service.StudentService;
 import org.ideoholic.curium.util.DataUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @author Musaib_2
  * 
  */
+
+@Controller
+@RequestMapping("/AccountProcess")
 public class AccountAction {
 
+	@Autowired
 	HttpServletRequest request;
+	
+	@Autowired
 	HttpServletResponse response;
+	
+	@Autowired
 	HttpSession httpSession;
-	String url;
-	private String ERRORPAGE = "error.jsp";
+	
+	public String ERRORPAGE = "error";
 
-	public AccountAction(HttpServletRequest request,
-			HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
-	public String execute(String action) {
-
-		if ("saveFinancialYear".equalsIgnoreCase(action)) {
-			url = saveFinancialYear();
-		}else if ("createAccount".equalsIgnoreCase(action)) {
-			url = createAccount();
-		}else if ("getCurrentFinancialYear".equalsIgnoreCase(action)) {
-			url = getCurrentFinancialYear();
-		}else if ("getSubGroupNames".equalsIgnoreCase(action)) {
-			 getSubGroupNames();
-		}else if ("saveAccount".equalsIgnoreCase(action)) {
-			url = saveAccount();
-		}else if ("deleteAccount".equalsIgnoreCase(action)) {
-			url = deleteAccount();
-		}else if ("createVoucher".equalsIgnoreCase(action)) {
-			url = createVoucher();
-		}else if ("saveReceipt".equalsIgnoreCase(action)) {
-			url = saveReceipt();
-		}else if ("savePayment".equalsIgnoreCase(action)) {
-			url = savePayment();
-		}else if ("saveContra".equalsIgnoreCase(action)) {
-			url = saveContra();
-		}else if ("saveJournal".equalsIgnoreCase(action)) {
-			url = saveJournal();
-		}else if ("balanceSheet".equalsIgnoreCase(action)) {
-			url = balanceSheet();
-		}else if ("viewVoucherReceipt".equalsIgnoreCase(action)) {
-			url = viewVoucherReceipt();
-		}else if ("viewNextVoucher".equalsIgnoreCase(action)) {
-			url = viewNextVoucher();
-		}else if ("trialBalance".equalsIgnoreCase(action)) {
-			url = trialBalance();
-		}else if ("cancelVoucher".equalsIgnoreCase(action)) {
-			url = cancelVoucher();
-		}else if ("viewCancelledVouchers".equalsIgnoreCase(action)) {
-			url = viewCancelledVouchers();
-		}else if ("getSSGroupNames".equalsIgnoreCase(action)) {
-				getSSGroupName();
-		}else if ("generalLedgerReport".equalsIgnoreCase(action)) {
-			url = generalLedgerReport();
-		}else if ("searchLedgerEntries".equalsIgnoreCase(action)) {
-			url = searchLedgerEntries();
-		}else if ("incomeStatement".equalsIgnoreCase(action)) {
-			url = incomeStatement();
-		}
-		return url;
-		}
-
-	private String incomeStatement() {
+	@PostMapping("/incomeStatement")
+	public String incomeStatement() {
 		new AccountService(request, response).getIncomeStatement();
-		return "incomestatement.jsp";
+		return "incomestatement";
 	}
 
-	private String searchLedgerEntries() {
+	@PostMapping("/searchLedgerEntries")
+	public String searchLedgerEntries() {
 		new AccountService(request, response).searchJournalEntries();
 		new AccountService(request, response).getAllLedgers();
-		return "generalledgerreport.jsp";
+		return "generalledgerreport";
 	}
 
-	private String generalLedgerReport() {
+	@GetMapping("/generalLedgerReport")
+	public String generalLedgerReport() {
 		new AccountService(request, response).getAllLedgers();
-		return "generalledgerreport.jsp";
+		return "generalledgerreport";
 }
 
-	private void getSSGroupName() {
+	@GetMapping("/getSSGroupNames")
+	public void getSSGroupName() {
 		
 		try {
 			new AccountService(request, response).getSSGroupNames();
@@ -110,136 +70,150 @@ public class AccountAction {
 	
 }
 
-	private String viewCancelledVouchers() {
+	@GetMapping("/viewCancelledVouchers")
+	public String viewCancelledVouchers() {
 		if(new AccountService(request, response).viewCancelledVouchers()) {
-			return "cancelledvoucher.jsp";
+			return "cancelledvoucher";
 		}
 		return ERRORPAGE;
 	}
 
-	private String cancelVoucher() {
+	@PostMapping("/cancelVoucher")
+	public String cancelVoucher() {
 
 		if(new AccountService(request, response).cancelVoucher()){
-			return "Controller?process=AccountProcess&action=viewVoucherReceipt";
+			return viewVoucherReceipt();
 		}
 			return ERRORPAGE;
 		
 	}
 
-	private String trialBalance() {
+	@RequestMapping( value = "/trialBalance", method = { RequestMethod.GET, RequestMethod.POST } )
+	public String trialBalance() {
 		
 		if(new AccountService(request, response).trialBalance()){
-			return "trialbalance.jsp";
+			return "trialbalance";
 		}
 		return ERRORPAGE;
 		
 	}
 
-	private String viewNextVoucher() {
+	@PostMapping("/viewNextVoucher")
+	public String viewNextVoucher() {
 		String nextVoucher = DataUtil.emptyString(request.getParameter("voucher"));
 		
 		if(nextVoucher.equalsIgnoreCase("Receipt")){
 			
 			if(new AccountService(request, response).viewVouchers(1)){
-				return "receiptdetails.jsp";
+				return "receiptdetails";
 			}
 			
 		}else if(nextVoucher.equalsIgnoreCase("Payment")){
 			
 			if(new AccountService(request, response).viewVouchers(2)){
-				return "paymentdetails.jsp";
+				return "paymentdetails";
 			}
 			
 		}else if(nextVoucher.equalsIgnoreCase("Contra")){
 			
 			if(new AccountService(request, response).viewVouchers(3)){
-				return "contradetails.jsp";
+				return "contradetails";
 			}
 			
 		}else if(nextVoucher.equalsIgnoreCase("Journal")){
 			
 			if(new AccountService(request, response).viewVouchers(4)){
-				return "journaldetails.jsp";
+				return "journaldetails";
 			}
 		}
 		return ERRORPAGE;
 	}
 
-	private String viewVoucherReceipt() {
+	@GetMapping("/viewVoucherReceipt")
+	public String viewVoucherReceipt() {
 		new AccountService(request, response).viewVouchers(1);
-			return "receiptdetails.jsp";
+			return "receiptdetails";
 	}
 
-	private String balanceSheet() {
+	@GetMapping("/balanceSheet")
+	public String balanceSheet() {
 		if(new AccountService(request, response).balanceSheet()){
-			return "balancesheet.jsp";
+			return "balancesheet";
 		}
 		return ERRORPAGE;
 		
 	}
 
-	private String saveJournal() {
+	@PostMapping("/saveJournal")
+	public String saveJournal() {
 		if(new AccountService(request, response).saveJournal()){
-			return "Controller?process=AccountProcess&action=createVoucher";
+			return createVoucher();
 		}
 		return ERRORPAGE;
 		
 	}
 
-	private String saveContra() {
+	@PostMapping("/saveContra")
+	public String saveContra() {
 		if(new AccountService(request, response).saveContra()){
-			return "Controller?process=AccountProcess&action=createVoucher";
+			return createVoucher();
 		}
 		return ERRORPAGE;
 		
 	}
 
-	private String savePayment() {
+	@PostMapping("/savePayment")
+	public String savePayment() {
 		
 		if(new AccountService(request, response).savePayment()){
-			return "Controller?process=AccountProcess&action=createVoucher";
+			return createVoucher();
 		}
 		return ERRORPAGE;
 		
 	}
 
-	private String saveReceipt() {
+	@PostMapping("/saveReceipt")
+	public String saveReceipt() {
 		if(new AccountService(request, response).saveReceipt()){
-			return "Controller?process=AccountProcess&action=createVoucher";
+			return createVoucher();
 		}
 		return ERRORPAGE;
 		
 	}
 
-	private String createVoucher() {
+	@GetMapping("/createVoucher")
+	public String createVoucher() {
 
 		if(new AccountService(request, response).createVoucher()){
-			return "createvoucher.jsp";
+			return "createvoucher";
 		}
 		return ERRORPAGE;
 		
 	}
 
-	private String deleteAccount() {
+	@PostMapping("/deleteAccount")
+	public String deleteAccount() {
 		
 		if(new AccountService(request, response).deleteAccount()){
-			return "Controller?process=AccountProcess&action=createAccount";
+			return createVoucher();
 		}
 		return ERRORPAGE;
 		
 	}
 
-	private String saveAccount() {
+	@PostMapping("/saveAccount")
+	public String saveAccount() {
 		
 		if(!"false".equalsIgnoreCase(new AccountService(request, response).saveAccount())){
-			return "Controller?process=AccountProcess&action=createAccount";
+			return createVoucher();
 		} 
 		return ERRORPAGE;
 		
 		
 	}
 
-	private void getSubGroupNames() {
+	@PostMapping("/getSubGroupNames")
+	public void getSubGroupNames() {
 		
 			try {
 				new AccountService(request, response).getSubGroupNames();
@@ -249,36 +223,39 @@ public class AccountAction {
 		
 	}
 
-	private String createAccount() {
+	@GetMapping("/createAccount")
+	public String createAccount() {
 		
 		if(new AccountService(request, response).createAccount()){
-			return "createaccount.jsp";
+			return "createaccount";
 		}
 		return ERRORPAGE;
 		
 	}
 
-	private String getCurrentFinancialYear() {
+	@GetMapping("/getCurrentFinancialYear")
+	public String getCurrentFinancialYear() {
 		if(new AccountService(request, response).getCurrentFinancialYear()){
-			return "financialyear.jsp";
+			return "financialyear";
 		}
 		return ERRORPAGE;
 		
 	}
 
-	private String saveFinancialYear() { 
+	@PostMapping("/saveFinancialYear")
+	public String saveFinancialYear() { 
 		
 		if(new AccountService(request, response).saveFinancialYear()){
-			return "financialyearsaved.jsp";
+			return "financialyearsaved";
 		}
 		return ERRORPAGE;
 		
 		
     }
 
-	private String updateYear() {
+	public String updateYear() {
 		 new YearService(request, response).updateYear();
-	            return "academicyear.jsp";
+	            return "academicyear";
 	       
 		
 	}
