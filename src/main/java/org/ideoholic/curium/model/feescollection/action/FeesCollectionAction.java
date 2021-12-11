@@ -56,7 +56,9 @@ public class FeesCollectionAction {
 		@GetMapping("/CancelFeesReceipt")
 		public String cancelFeesReceipt() {
 			new FeesCollectionService(request, response).cancelFeesReceipt();
-			return new UserAction().searchByDate();
+			UserAction userAction = new UserAction();
+			userAction.setHttpobjects(request, response);
+			return userAction.searchByDate();
 		}
 
 		@PostMapping("/StampFees")
