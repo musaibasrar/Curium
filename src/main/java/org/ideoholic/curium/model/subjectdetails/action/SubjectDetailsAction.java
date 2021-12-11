@@ -28,14 +28,14 @@ public class SubjectDetailsAction {
 		if(new SubjectDetailsService(request, response).deleteMultipleSubjects()){
 			return readListOfSubjectNames();
 		}else{
-			return "error.jsp";
+			return "error";
 		}
 	}
 
 	@GetMapping("/readListOfSubjectNames")
 	private String readListOfSubjectNames() {
 		new SubjectDetailsService(request, response).readListOfSubjectNames();
-        return "SubjectMaster.jsp";
+        return "SubjectMaster";
 	}
 
 	@PostMapping("/addSubjectMaster")
@@ -43,7 +43,7 @@ public class SubjectDetailsAction {
 		if(new SubjectDetailsService(request, response).addSubjectMaster()){
 			return readListOfSubjectNames();
 		}else{
-			return "error.jsp";
+			return "error";
 		}
 	}
 
@@ -52,7 +52,7 @@ public class SubjectDetailsAction {
 		if(new SubjectDetailsService(request, response).deleteMultiple()){
 			return readListOfSubjectsExams();
 		}else{
-			return "error.jsp";
+			return "error";
 		}
 	}
 
@@ -61,7 +61,7 @@ public class SubjectDetailsAction {
 		if(new SubjectDetailsService(request, response).addSubject()){
 			return readListOfSubjectsExams();
 		}else{
-			return "error.jsp";
+			return "error";
 		}
 	}
 
@@ -71,7 +71,7 @@ public class SubjectDetailsAction {
 		new SubjectDetailsService(request, response).readListOfSubjectNames();
 		new ExamDetailsService(request, response).readListOfExams();
 		new StandardService(request, response).viewClasses();
-        return "SubjectDetails.jsp";
+        return "SubjectDetails";
 	}
 	
 }
