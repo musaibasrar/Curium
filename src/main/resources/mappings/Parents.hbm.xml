@@ -31,8 +31,8 @@
         <property name="profession" type="java.lang.String">
             <column name="PROFESSION" />
         </property>
-        <property name="parentsannualinorg.ideoholic.curiume" type="java.lang.String">
-            <column name="PARENTSANNUALINorg.ideoholic.curiumE" />
+        <property name="parentsannualincome" type="java.lang.String">
+            <column name="PARENTSANNUALINCOME" />
         </property>
         <property name="noofdependents" type="java.lang.Integer">
             <column name="NOOFDEPENDENTS" />

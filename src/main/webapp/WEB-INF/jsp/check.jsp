@@ -5,11 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.model.user.dto.Login" %>
-<%@page import="com.model.user.dao.UserDAO" %>
-<%@page import="com.model.personal.dto.PersonalDetails" %>
-<%@page import="com.model.personal.dao.PersonalDetailsDAO" %>
-<%@page import="com.util.*" %>
+<%@page import="org.ideoholic.curium.model.user.dto.Login" %>
+<%@page import="org.ideoholic.curium.model.user.dao.UserDAO" %>
+<%@page import="org.ideoholic.curium.model.personal.dto.PersonalDetails" %>
+<%@page import="org.ideoholic.curium.model.personal.dao.PersonalDetailsDAO" %>
+<%@page import="org.ideoholic.curium.util.*" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <%

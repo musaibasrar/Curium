@@ -27,8 +27,8 @@
         <property generated="never" lazy="false" name="optionalsubjects" optimistic-lock="true" type="string" unique="false">
             <column length="200" name="optionalsubjects"/>
         </property>
-        <property generated="never" lazy="false" name="org.ideoholic.curiumpulsorysubjects" optimistic-lock="true" type="string" unique="false">
-            <column length="500" name="org.ideoholic.curiumpulsorysubjects"/>
+        <property generated="never" lazy="false" name="compulsorysubjects" optimistic-lock="true" type="string" unique="false">
+            <column length="500" name="compulsorysubjects"/>
         </property>
         <property generated="never" lazy="false" name="sslcmediuminstruction" optimistic-lock="true" type="string" unique="false">
             <column length="45" name="sslcmediuminstruction"/>
