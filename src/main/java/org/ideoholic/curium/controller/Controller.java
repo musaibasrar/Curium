@@ -57,13 +57,7 @@ public class Controller extends HttpServlet {
        
         String nextUrl = "";
 
-     if("DocumentsProcess".equalsIgnoreCase(process)){
-         nextUrl= new DocumentAction(request, response).execute(action);
-     }else if("HrProcess".equalsIgnoreCase(process)){
-         nextUrl= new HrAction(request, response).execute(action);
-     }else if("ClassProcess".equalsIgnoreCase(process)){
-         nextUrl= new StandardAction(request, response).execute(action);
-     }else if("test".equalsIgnoreCase(process)){
+     if("test".equalsIgnoreCase(process)){
          nextUrl= "test.html";
      }else if("MessItemsProcess".equalsIgnoreCase(process)){
          nextUrl = new MessItemsAction(request, response).execute(action);
@@ -71,8 +65,6 @@ public class Controller extends HttpServlet {
          nextUrl = new MessSuppliersAction(request, response).execute(action);
      }else if("MessItemsMoveProcess".equalsIgnoreCase(process)){
          nextUrl = new MessStockMoveAction(request, response).execute(action);
-     }else if("ImportProcess".equalsIgnoreCase(process)){
-         nextUrl = new ImportFileAction(request, response).execute(action);
      }
         
         RequestDispatcher reg = request.getRequestDispatcher(nextUrl);

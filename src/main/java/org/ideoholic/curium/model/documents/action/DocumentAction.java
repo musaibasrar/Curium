@@ -8,126 +8,112 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.service.DocumentService;
-import org.ideoholic.curium.model.feescategory.service.FeesService;
-import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.student.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Musaib_2
  * 
  */
+@Controller
+@RequestMapping("/DocumentsProcess")
 public class DocumentAction {
 
+	@Autowired
 	HttpServletRequest request;
-	HttpServletResponse response;
-	HttpSession httpSession;
-	String url;
-	private String error ="error.jsp";
-
-	public DocumentAction(HttpServletRequest request,
-			HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
-	public String execute(String action) {
-
-		if ("transferCertificate".equalsIgnoreCase(action)) {
-			url = transferCertificate();
-		}else if ("generateTransferCertificate".equalsIgnoreCase(action)) {
-			url = generateTransferCertificate();
-		}else if ("PrintTransferCertificate".equalsIgnoreCase(action)) {
-			url = printTransferCertificate();
-		}else if ("studentsDetailsReports".equalsIgnoreCase(action)) {
-			url = studentsDetailsReports();
-		}else if ("studentsDetailsBonafide".equalsIgnoreCase(action)) {
-			url = studentsDetailsBonafide();
-		}else if ("printBonafide".equalsIgnoreCase(action)) {
-			url = printBonafide();
-		}else if ("admissionAbstract".equalsIgnoreCase(action)) {
-			url = admissionAbstract();
-		}else if ("searchForStudents".equalsIgnoreCase(action)) {
-			url = searchForStudents();
-		}else if ("generateAdmissionAbstract".equalsIgnoreCase(action)) {
-			url = generateAdmissionAbstract();
-		}else if ("download".equalsIgnoreCase(action)) {
-			url = downloadAdmissionAbstract();
-		}
-		return url; 
-	} 
 	
+	@Autowired
+	HttpServletResponse response;
+	
+	@Autowired
+	HttpSession httpSession;
+	
+	public String error ="error";
 
-	private String downloadAdmissionAbstract() {
+	
+	@PostMapping("/download")
+	public String downloadAdmissionAbstract() {
 		if(new DocumentService(request, response).downlaodFile()){
-            return "exportsuccessaa.jsp";
+            return "exportsuccessaa";
     }
-		return "exportfailure.jsp";
+		return "exportfailure";
 	}
 
-	private String generateAdmissionAbstract() {
+	@PostMapping("/generateAdmissionAbstract")
+	public String generateAdmissionAbstract() {
 		
         if(new DocumentService(request, response).exportAdmissionAbstract()){
-                return "exportsuccessaa.jsp";
+                return "exportsuccessaa";
         }else{
-                return "exportfailure.jsp";
+                return "exportfailure";
         }
         
 	}
 
-	private String searchForStudents() {
+	@PostMapping("/searchForStudents")
+	public String searchForStudents() {
 		if(new DocumentService(request, response).searchForStudents()){
 			new DocumentService(request, response).admissionAbstract();
-			return "admissionabstract.jsp";
+			return "admissionabstract";
 		}
         return error;
 	}
 
-	private String admissionAbstract() {
+	@GetMapping("/admissionAbstract")
+	public String admissionAbstract() {
 		if(new DocumentService(request, response).admissionAbstract()){
-			return "admissionabstract.jsp";
+			return "admissionabstract";
 		}
         return error;
 	}
 
-	private String printBonafide() {
-		return "bonafideprint.jsp";
+	@GetMapping("/printBonafide")
+	public String printBonafide() {
+		return "bonafideprint";
 	}
 
-	private String studentsDetailsBonafide() {
+	@GetMapping("/studentsDetailsBonafide")
+	public String studentsDetailsBonafide() {
 		new StandardService(request, response).viewClasses(); 
-		return "studentsdetailsbonafide.jsp";
+		return "studentsdetailsbonafide";
 	}
 
-	private String studentsDetailsReports() {
+	@GetMapping("/studentsDetailsReports")
+	public String studentsDetailsReports() {
 		new StandardService(request, response).viewClasses(); 
-		return "studentsdetailsreports.jsp";
+		return "studentsdetailsreports";
 	}
 
-	private String printTransferCertificate() {
+	@GetMapping("/PrintTransferCertificate")
+	public String printTransferCertificate() {
 		
 		if(new DocumentService(request, response).printTransferCertificate()){
-			return "transfercertificateprint.jsp";
+			return "transfercertificateprint";
 		}
         return error;
 	}
 
-	private String generateTransferCertificate() {
+	@PostMapping("/generateTransferCertificate")
+	public String generateTransferCertificate() {
 		
 		String result = new DocumentService(request, response).generateTransferCertificate();
 		
 		if("true".equalsIgnoreCase(result)){
-			return "transfercertificatepreview.jsp";
+			return "transfercertificatepreview";
 		}else if("studentexists".equalsIgnoreCase(result)){
-        return "transfercertificatefail.jsp";
+        return "transfercertificatefail";
 		}
 		return error;
 	}
 
-	private String transferCertificate() {
+	@GetMapping("/transferCertificate")
+	public String transferCertificate() {
 		if(new DocumentService(request, response).transferCertificate()){
-			return "transfercertificate.jsp";
+			return "transfercertificate";
 		}
         return error;
 	}

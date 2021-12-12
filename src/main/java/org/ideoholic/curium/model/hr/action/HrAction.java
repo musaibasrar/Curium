@@ -6,181 +6,98 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.account.service.AccountService;
-import org.ideoholic.curium.model.attendance.service.AttendanceService;
-import org.ideoholic.curium.model.department.service.DepartmentService;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
-import org.ideoholic.curium.model.feescategory.service.FeesService;
-import org.ideoholic.curium.model.hr.dao.HrDAO;
 import org.ideoholic.curium.model.hr.service.HrService;
-import org.ideoholic.curium.model.student.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+@Controller
+@RequestMapping("/HrProcess")
 public class HrAction {
 
+	@Autowired
 	HttpServletRequest request;
-	HttpServletResponse response;
-	HttpSession httpSession;
-	String url;
-	String error = "error.jsp";
 	
-	public HrAction(HttpServletRequest request,
-			HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
+	@Autowired
+	HttpServletResponse response;
+	
+	@Autowired
+	HttpSession httpSession;
 
-	}
-
-	public String execute(String action) {
-		if ("leaveType".equalsIgnoreCase(action)) {
-			url = leaveType();
-		}else if ("saveLeaveType".equalsIgnoreCase(action)) {
-			url = saveLeaveType();
-		}else if ("deleteLeaveType".equalsIgnoreCase(action)) {
-			url = deleteLeaveType();
-		}else if ("assignLeave".equalsIgnoreCase(action)) {
-			url = assignLeave();
-		}else if ("searchEmployees".equalsIgnoreCase(action)) {
-			url = searchEmployees();
-		}else if ("addLeaves".equalsIgnoreCase(action)) {
-			url = addLeaves();
-		}else if ("viewLeavesDetails".equalsIgnoreCase(action)) {
-			url = viewLeavesDetails();
-		}else if ("leaveDetailsPerYear".equalsIgnoreCase(action)) {
-			url = leaveDetailsPerYear();
-		}else if ("payHead".equalsIgnoreCase(action)) {
-			url = payHead();
-		}else if ("savePayHead".equalsIgnoreCase(action)) {
-			url = savePayHead();
-		}else if ("addPayHead".equalsIgnoreCase(action)) {
-			url = addPayHeadStaff();
-		}else if ("searchEmployeesForPayHead".equalsIgnoreCase(action)) {
-			url = searchEmployeesForPayHead();
-		}else if ("addPayHeadStaffDetails".equalsIgnoreCase(action)) {
-			url = addPayHeadStaffDetails();
-		}else if ("basicPaySettings".equalsIgnoreCase(action)) {
-			url = basicPaySettings();
-		}else if ("searchEmployeesForbasicpay".equalsIgnoreCase(action)) {
-			url = searchEmployeesForbasicpay();
-		}else if ("addBasicPay".equalsIgnoreCase(action)) {
-			url = addBasicPay();
-		}else if ("pfSettings".equalsIgnoreCase(action)) {
-			url = pfSettings();
-		}else if ("addPf".equalsIgnoreCase(action)) {
-			url = addPf();
-		}else if ("deletePf".equalsIgnoreCase(action)) {
-			url = deletePf();
-		}else if ("advanceSalary".equalsIgnoreCase(action)) {
-			url = advanceSalary();
-		}else if ("saveAdvanceSalary".equalsIgnoreCase(action)) {
-			url = saveAdvanceSalary();
-		}else if ("salaryApproval".equalsIgnoreCase(action)) {
-			url = salaryApproval();
-		}else if ("saveAdvaceSalaryApproval".equalsIgnoreCase(action)) {
-			url = saveAdvaceSalaryApproval();
-		}else if ("deleteAdvaceSalaryApproval".equalsIgnoreCase(action)) {
-			url = deleteAdvaceSalaryApproval();
-		}else if ("salaryIssue".equalsIgnoreCase(action)) {
-			url = salaryIssue();
-		}else if ("leaveApplication".equalsIgnoreCase(action)) {
-			url = leaveApplication();
-		}else if ("applyLeave".equalsIgnoreCase(action)) {
-			url = applyLeave();
-		}else if ("leaveApprovals".equalsIgnoreCase(action)) {
-			url = leaveApprovals();
-		}else if ("approveLeave".equalsIgnoreCase(action)) {
-			url = approveLeave();
-		}else if ("rejectLeave".equalsIgnoreCase(action)) {
-			url = rejectLeave();
-		}else if ("processSalary".equalsIgnoreCase(action)) {
-			url = processSalary();
-		}else if ("searchEmployeesForProcessSalary".equalsIgnoreCase(action)) {
-			url = searchEmployeesForProcessSalary();
-		}else if ("processStaffSalary".equalsIgnoreCase(action)) {
-			url = processStaffSalary();
-		}else if ("getPayHead".equalsIgnoreCase(action)) {
-			url = getPayHead();
-		}else if ("issueStaffSalary".equalsIgnoreCase(action)) {
-			url = issueStaffSalary();
-		}else if ("printSalarySlip".equalsIgnoreCase(action)) {
-			url = printSalarySlip();
-		}else if ("deletePayHead".equalsIgnoreCase(action)) {
-			url = deletePayHead();
-		}else if ("getStaffDetails".equalsIgnoreCase(action)) {
-			url = getStaffDetails();
-		}else if ("deletePayHeadStaff".equalsIgnoreCase(action)) {
-			url = deletePayHeadStaff();
-		}else if ("issueProcessedSalary".equalsIgnoreCase(action)) {
-			url = issueProcessedSalary();
-		}else if ("cancelStaffSalary".equalsIgnoreCase(action)) {
-			url = cancelStaffSalary();
-		}else if ("viewEditbasicPay".equalsIgnoreCase(action)) {
-			url = viewEditbasicPay();
-		}else if ("updateBasicPay".equalsIgnoreCase(action)) {
-			url = updateBasicPay();
-		}
-		return url;
-	}
-
-	private String updateBasicPay() {
+	String error = "error";
+	
+	@PostMapping("/updateBasicPay")
+	public String updateBasicPay() {
 		new HrService(request, response).updateBasicpayEmployees();
-		return "vieweditbasicpay.jsp";
+		return "vieweditbasicpay";
 	}
 
-	private String viewEditbasicPay() {
+	@GetMapping("/viewEditbasicPay")
+	public String viewEditbasicPay() {
 		new EmployeeService(request, response).basicpayEmployees();
-		return "vieweditbasicpay.jsp";
+		return "vieweditbasicpay";
 	}
 
-	private String cancelStaffSalary() {
+	@PostMapping("/cancelStaffSalary")
+	public String cancelStaffSalary() {
 		
 		if(new HrService(request, response).cancelProcessedSalary()){
-			return "issuestaffsalary.jsp";
+			return "issuestaffsalary";
 		}
 		return error;
 	}
 
-	private String issueProcessedSalary() {
+	@PostMapping("/issueProcessedSalary")
+	public String issueProcessedSalary() {
 		
 		if(new HrService(request, response).issueProcessedSalary()){
-			return "issuestaffsalary.jsp";
+			return "issuestaffsalary";
 		}
 		return error;
 	}
 
-	private String deletePayHeadStaff() {
+	@PostMapping("/deletePayHeadStaff")
+	public String deletePayHeadStaff() {
 		if(new HrService(request, response).deletePayHeadStaff()){
-			return "deletepayhead.jsp";
+			return "deletepayhead";
 		}
-		return "deletepayheadfailed.jsp";
+		return "deletepayheadfailed";
 	}
 
-	private String getStaffDetails() {
+	@PostMapping("/getStaffDetails")
+	public String getStaffDetails() {
 		
 		new HrService(request, response).getStaffDetails();
-		return "deletepayhead.jsp";
+		return "deletepayhead";
 	}
 
-	private String deletePayHead() {
+	@RequestMapping(value= "/deletePayHead", method= { RequestMethod.GET, RequestMethod.POST })
+	public String deletePayHead() {
 		new EmployeeService(request, response).ViewAllEmployee();
-		return "deletepayhead.jsp";
+		return "deletepayhead";
 	}
 	
-	
-	private String printSalarySlip() {
+	@GetMapping("/printSalarySlip")
+	public String printSalarySlip() {
 		new HrService(request, response).printSalarySlip();
-		return "printsalaryslip.jsp";
+		return "printsalaryslip";
 	}
 
-	private String issueStaffSalary() {
+	@GetMapping("/issueStaffSalary")
+	public String issueStaffSalary() {
 		
 		if(new HrService(request, response).issueStaffSalary()){
-			return "issuestaffsalary.jsp";
+			return "issuestaffsalary";
 		}
 		return error;
 	}
 
-	private String getPayHead() {
+	@GetMapping("/getPayHead")
+	public String getPayHead() {
 
 			try {
 				new HrService(request, response).getPayHead();
@@ -188,230 +105,263 @@ public class HrAction {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return "payhead.jsp";
+			return "payhead";
 		
 	}
 
-	private String processStaffSalary() {
+	@PostMapping("/processStaffSalary")
+	public String processStaffSalary() {
 		if(new HrService(request, response).processStaffSalary()){
-			return "processstaffsalarysuccess.jsp";
+			return "processstaffsalarysuccess";
 		}
 		return error;
 	}
 
-	private String searchEmployeesForProcessSalary() {
+	@PostMapping("/searchEmployeesForProcessSalary")
+	public String searchEmployeesForProcessSalary() {
 		new EmployeeService(request, response).searchEmployee();
 		new EmployeeService(request, response).viewAllRelations();
-		return "processsalary.jsp";
+		return "processsalary";
 	}
 
-	private String processSalary() {
+	@GetMapping("/processSalary")
+	public String processSalary() {
 		new EmployeeService(request, response).viewAllRelations();
 		new EmployeeService(request, response).ViewAllEmployee();
-		return "processsalary.jsp";
+		return "processsalary";
 	}
 
-	private String rejectLeave() {
+	@PostMapping("/rejectLeave")
+	public String rejectLeave() {
 		
 		if(new HrService(request, response).rejectLeave()){
 			new HrService(request, response).leaveApprovals();
-			return "leaveapprovals.jsp";
+			return "leaveapprovals";
 		}
 		return error;
 		
 	}
 
-	private String approveLeave() {
+	@PostMapping("/approveLeave")
+	public String approveLeave() {
 		
 		if(new HrService(request, response).approveLeave()){
 			new HrService(request, response).leaveApprovals();
-			return "leaveapprovals.jsp";
+			return "leaveapprovals";
 		}
 		return error;
 	}
 
-	private String leaveApprovals() {
+	@GetMapping("/leaveApprovals")
+	public String leaveApprovals() {
 		if(new HrService(request, response).leaveApprovals()){
-			return "leaveapprovals.jsp";
+			return "leaveapprovals";
 		}
 		return error;
 	}
 
-	private String applyLeave() {
+	@PostMapping("/applyLeave")
+	public String applyLeave() {
 		if(new HrService(request, response).applyLeave()){
-			return "leaveapplicationsuccess.jsp";
+			return "leaveapplicationsuccess";
 		}
 		return error;
 	}
 
-	private String leaveApplication() {
+	@GetMapping("/leaveApplication")
+	public String leaveApplication() {
 		
 		new HrService(request, response).leaveType();
-		return "leaveapplication.jsp";
+		return "leaveapplication";
 		
 	}
 
-	private String salaryIssue() {
+	@GetMapping("/salaryIssue")
+	public String salaryIssue() {
 		if(new HrService(request, response).salaryIssue()){
-			return "salaryissue.jsp";	
+			return "salaryissue";	
 		}
 		return error;
 	}
 
-	private String deleteAdvaceSalaryApproval() {
+	@PostMapping("/deleteAdvaceSalaryApproval")
+	public String deleteAdvaceSalaryApproval() {
 		if(new HrService(request, response).deleteAdvaceSalaryApproval()){
-			return "advancesalaryapproval.jsp";	
+			return "advancesalaryapproval";	
 		}
 		return error;
 	}
 
-	private String saveAdvaceSalaryApproval() {
+	@PostMapping("/saveAdvaceSalaryApproval")
+	public String saveAdvaceSalaryApproval() {
 		if(new HrService(request, response).saveAdvanceSalaryApproval()){
-			return "advancesalaryapproval.jsp";	
+			return "advancesalaryapproval";	
 		}
 		return error;
 	}
 
-	private String salaryApproval() {
+	@GetMapping("/salaryApproval")
+	public String salaryApproval() {
 		new HrService(request, response).salaryApprovalDispaly();
-		return "advancesalaryapproval.jsp";
+		return "advancesalaryapproval";
 	}
 
-	private String saveAdvanceSalary() {
+	@PostMapping("/saveAdvanceSalary")
+	public String saveAdvanceSalary() {
 		if(new HrService(request, response).saveAdvanceSalary()){
-			return "advancesalarysave.jsp";
+			return "advancesalarysave";
 		}
 		return error;
 	}
 
-	private String advanceSalary() {
+	@GetMapping("/advanceSalary")
+	public String advanceSalary() {
 		new EmployeeService(request, response).ViewAllEmployee();
-		return "advancesalary.jsp";
+		return "advancesalary";
 	}
 
-	private String deletePf() {
+	@PostMapping("/deletePf")
+	public String deletePf() {
 		new HrService(request, response).deletePf();
 		return pfSettings();
 	}
 
-	private String addPf() {
+	@PostMapping("/addPf")
+	public String addPf() {
 		new HrService(request, response).addPf();
 		return pfSettings();
 	}
 
-	private String pfSettings() {
+	@GetMapping("/pfSettings")
+	public String pfSettings() {
 		new HrService(request, response).pfSettings();
-		return "pfsettings.jsp";
+		return "pfsettings";
 	}
 
-	private String addBasicPay() {
+	@PostMapping("/addBasicPay")
+	public String addBasicPay() {
 		if(new HrService(request, response).addBasicPay()){
-			return "addbasicpaysuccess.jsp";
+			return "addbasicpaysuccess";
 		}
 		return error;
 	}
 
-	private String searchEmployeesForbasicpay() {
+	@PostMapping("/searchEmployeesForbasicpay")
+	public String searchEmployeesForbasicpay() {
 		new EmployeeService(request, response).searchEmployee();
 		new EmployeeService(request, response).viewAllRelations();
-		return "basicpaysettings.jsp";
+		return "basicpaysettings";
 	}
 
-	private String basicPaySettings() {
+	@GetMapping("/basicPaySettings")
+	public String basicPaySettings() {
 		new EmployeeService(request, response).ViewAllEmployee();
 		new EmployeeService(request, response).viewAllRelations();
-		return "basicpaysettings.jsp";
+		return "basicpaysettings";
 	}
 
-	private String addPayHeadStaffDetails() {
+	@PostMapping("/addPayHeadStaffDetails")
+	public String addPayHeadStaffDetails() {
 		
 		if(new HrService(request, response).addPayHeadStaffDetails()){
-			return "addpayheadsuccess.jsp";
+			return "addpayheadsuccess";
 		}
 		return error;
 	}
 
-	private String searchEmployeesForPayHead() {
+	@PostMapping("/searchEmployeesForPayHead")
+	public String searchEmployeesForPayHead() {
 		new EmployeeService(request, response).searchEmployee();
 		new EmployeeService(request, response).viewAllRelations();
-		return "addpayhead.jsp";
+		return "addpayhead";
 	}
 
-	private String addPayHeadStaff() {
+	@RequestMapping(value="/addPayHead", method= { RequestMethod.GET, RequestMethod.POST })
+	public String addPayHeadStaff() {
 		new EmployeeService(request, response).ViewAllEmployee();
 		new EmployeeService(request, response).viewAllRelations();
 		new HrService(request, response).payHead();
-		return "addpayhead.jsp";
+		return "addpayhead";
 	}
 
-	private String savePayHead() {
+	@PostMapping("/savePayHead")
+	public String savePayHead() {
 		if(new HrService(request, response).savePayHead()){
 			return payHead();
 		}
 		return error;
 	}
 
-	private String payHead() {
+	@GetMapping("/payHead")
+	public String payHead() {
 		new HrService(request, response).payHead();
-		return "payhead.jsp";
+		return "payhead";
 	}
 
-	private String leaveDetailsPerYear() {
+	@PostMapping("/leaveDetailsPerYear")
+	public String leaveDetailsPerYear() {
 		
 		if(new HrService(request, response).leaveDetailsPerYear()){
-			return "leavedetails.jsp";
+			return "leavedetails";
 		}
 		return error;
 	}
 	
-	private String viewLeavesDetails() {
+	@GetMapping("/viewLeavesDetails")
+	public String viewLeavesDetails() {
 		
 		if(new HrService(request, response).viewLeavesDetails()){
-			return "leavedetails.jsp";
+			return "leavedetails";
 		}
 		return error;
 	}
 
-	private String addLeaves() {
+	@PostMapping("/addLeaves")
+	public String addLeaves() {
 		if(new HrService(request, response).addLeaves()){
-			return "addleavessuccess.jsp";
+			return "addleavessuccess";
 		}
 		return error;
 	}
 
-	private String searchEmployees() {
+	@GetMapping("/searchEmployees")
+	public String searchEmployees() {
 		new EmployeeService(request, response).searchEmployee();
 		new EmployeeService(request, response).viewAllRelations();
 		new HrService(request, response).leaveType();
-		return "assignleave.jsp";
+		return "assignleave";
 	}
 
-	private String assignLeave() {
+	@GetMapping("/assignLeave")
+	public String assignLeave() {
 		new EmployeeService(request, response).viewAllRelations();
 		new EmployeeService(request, response).ViewAllEmployee();
 		new HrService(request, response).leaveType();
-		return "assignleave.jsp";
+		return "assignleave";
 	}
 
-	private String deleteLeaveType() {
+	@PostMapping("/deleteLeaveType")
+	public String deleteLeaveType() {
 		if(new HrService(request, response).deleteLeaveType()){
-			return "Controller?process=HrProcess&action=leaveType";
+			return leaveType();
 		}
 		return error;
 	}
 
-	private String saveLeaveType() {
+	@PostMapping("/saveLeaveType")
+	public String saveLeaveType() {
 		
 		if(new HrService(request, response).saveLeaveType()){
-			return "Controller?process=HrProcess&action=leaveType";
+			return leaveType();
 		}
 		return error;
 	}
 
-	private String leaveType() {
+	@GetMapping("/leaveType")
+	public String leaveType() {
 		
 		if(new HrService(request, response).leaveType()){
-			return "leavetypemaster.jsp";
+			return "leavetypemaster";
 		}
 		return error;
 	}

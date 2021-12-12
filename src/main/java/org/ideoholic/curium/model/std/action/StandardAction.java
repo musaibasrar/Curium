@@ -8,165 +8,147 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.student.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Musaib_2
  * 
  */
+
+
+@Controller
+@RequestMapping("/ClassProcess")
 public class StandardAction {
 
+	@Autowired
 	HttpServletRequest request;
+	
+	@Autowired
 	HttpServletResponse response;
+	
+	@Autowired
 	HttpSession httpSession;
-	String url;
-
-	public StandardAction(HttpServletRequest request,
-			HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
-
-	public String execute(String action) {
-		if (action.equalsIgnoreCase("viewClasses")) {
-			url = viewClasses();
-		}else if (action.equalsIgnoreCase("createClass")) {
-                        url = createClass();
-        }else if (action.equalsIgnoreCase("deleteClass")) {
-                        url = deleteClass();
-        }else if (action.equalsIgnoreCase("promoteClass")) {
-                   url = promoteClass();
-        }else if (action.equalsIgnoreCase("classHierarchy")) {
-            url = classHierarchy();
-        }else if (action.equalsIgnoreCase("addClassHierarchy")) {
-            url = addClassHierarchy();
-        }else if (action.equalsIgnoreCase("deleteClassHierarchy")) {
-        	url = deleteClassHierarchy();
-        }else if (action.equalsIgnoreCase("graduateMultiple")) {
-        	url = graduateMultiple();
-        }else if (action.equalsIgnoreCase("dropoutMultiple")) {
-        	url = droppedoutMultiple();
-        }else if (action.equalsIgnoreCase("leftoutMultiple")) {
-            url = leftoutMultiple();
-        }else if (action.equalsIgnoreCase("viewGraduated")) {
-            url = viewGraduated();
-        }else if (action.equalsIgnoreCase("viewDropped")) {
-            url = viewDropped();
-        }else if (action.equalsIgnoreCase("viewLeftOut")) {
-            url = viewLeftOut();
-        }else if (action.equalsIgnoreCase("restoreMultipleGraduate")) {
-            url = restoreMultipleGraduate();
-        }else if (action.equalsIgnoreCase("restoreMultipleDroppedout")) {
-            url = restoreMultipleDroppedout();
-        }else if (action.equalsIgnoreCase("restoreMultipleLeftout")) {
-            url = restoreMultipleLeftout();
-        }else if (action.equalsIgnoreCase("searchByClass")) {
-            url = searchByClass();
-        }
-		return url;
-	}
+		
 	
-	
-		 private String restoreMultipleLeftout() { 
+		@PostMapping("/restoreMultipleLeftout")
+		 public String restoreMultipleLeftout() { 
 		        new StandardService(request, response).restoreMultipleLeftout();
-		        return "Controller?process=ClassProcess&action=viewLeftOut";
+		        return viewLeftOut();
 		    }
-
-		private String viewLeftOut() {
+		 
+		 @GetMapping("/viewLeftOut")
+		public String viewLeftOut() {
 		        new StandardService(request, response).viewleft();
-		        return "leftout.jsp";
+		        return "leftout";
 		    }
 
-		private String searchByClass() {
+		@PostMapping("/searchByClass")
+		public String searchByClass() {
 	         new StandardService(request, response).searchByClass();
-	         return "Promotion.jsp";
+	         return "Promotion";
 		 	}
 
-		private String restoreMultipleDroppedout() { 
+		@PostMapping("/restoreMultipleDroppedout")
+		public String restoreMultipleDroppedout() { 
 	        new StandardService(request, response).restoreMultipleDroppedout();
-	        return "Controller?process=ClassProcess&action=viewDropped";
+	        return viewDropped();
 	    }
 
-	    private String restoreMultipleGraduate() {
+		@PostMapping("/restoreMultipleGraduate")
+	    public String restoreMultipleGraduate() {
 	        new StandardService(request, response).restoreMultipleGraduate();
-	        return "Controller?process=ClassProcess&action=viewGraduated";
+	        return viewGraduated();
 	    }
 	    
-	    private String viewDropped() {
+	    @GetMapping("/viewDropped")
+	    public String viewDropped() {
 	        new StandardService(request, response).viewDropped();
-	        return "droppedout.jsp";
+	        return "droppedout";
 	    }
 
-		private String viewGraduated() {
+	    @GetMapping("/viewGraduated")
+		public String viewGraduated() {
 	        new StandardService(request, response).viewGraduated();
-	        return "graduated.jsp";
+	        return "graduated";
 		}
 
-	  private String leftoutMultiple() {
+		@PostMapping("/leftoutMultiple")
+	  public String leftoutMultiple() {
 		  if(new StandardService(request, response).leftoutMultiple()) {  
-			  return "successleftout.jsp";
+			  return "successleftout";
 		  }
-		  return "failureleftout.jsp"; 
+		  return "failureleftout"; 
 		  }
 
-	private String droppedoutMultiple() {
+	  @PostMapping("/dropoutMultiple")
+	public String droppedoutMultiple() {
 		  if(new StandardService(request, response).droppedoutMultiple()) { 
-			  return "successdroppedout.jsp";
+			  return "successdroppedout";
 		  }
-		  return "failuredroppedout.jsp"; 
+		  return "failuredroppedout"; 
 		  }
 
-	private String graduateMultiple() {
+	@PostMapping("/graduateMultiple")
+	public String graduateMultiple() {
 		  if(new StandardService(request, response).graduateMultiple()) { 
-			     return "successgraduate.jsp";
+			     return "successgraduate";
 		  }
-		  return "failuregraduate.jsp"; 
+		  return "failuregraduate"; 
 	}
 
 	
-	
-	private String deleteClassHierarchy() {
+	@PostMapping("/deleteClassHierarchy")
+	public String deleteClassHierarchy() {
 		  new StandardService(request, response).deleteClassHierarchy();
-	      return "Controller?process=ClassProcess&action=classHierarchy";
+		  return classHierarchy();
 	}
 
-	private String addClassHierarchy() {
+	@PostMapping("/addClassHierarchy")
+	public String addClassHierarchy() {
 		  	new StandardService(request, response).addClassHierarchy();
-	        return "Controller?process=ClassProcess&action=classHierarchy";
+		  	return classHierarchy();
 	}
 
-	private String classHierarchy() {
+	@GetMapping("/classHierarchy")
+	public String classHierarchy() {
 		  new StandardService(request, response).viewClasses();
 		  new StandardService(request, response).viewClassHierarchy();
-			return "classhierarchy.jsp";
+			return "classhierarchy";
 	}
 
-	private String promoteClass() {
+	@GetMapping("/promoteClass")
+	public String promoteClass() {
 		  new StandardService(request, response).viewClasses();
-		return "Promotion.jsp";
+		return "Promotion";
 	}
 
-	private String deleteClass() {
+	@PostMapping("/deleteClass")
+	public String deleteClass() {
 	      
 	      if( new StandardService(request, response).deleteClasses()) {
-	          return "addclass.jsp";
+	          return "addclass";
 	      }
-	      return "error.jsp";
+	      return "error";
     }
 
-    private String viewClasses() {
+	@GetMapping("/viewClasses")
+    public String viewClasses() {
 	        if(new StandardService(request, response).viewClasses()) {
-	            return "addclass.jsp";
+	            return "addclass";
 	        }
-	        return "error.jsp";
+	        return "error";
 	    }
 
-    private String createClass() {
+    @PostMapping("/createClass")
+    public String createClass() {
         if(new StandardService(request, response).createClass()) {
-            return "addclass.jsp";
+            return "addclass";
         }
-        return "error.jsp";
+        return "error";
     }
 
 }
