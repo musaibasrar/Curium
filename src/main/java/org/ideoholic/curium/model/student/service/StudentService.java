@@ -331,7 +331,7 @@ public class StudentService {
                                         parents.setMothersname(DataUtil.emptyString(item.getString()));
                                 }
                                 if (fieldName.equalsIgnoreCase("profession")) {
-                                    parents.setProfesssion(DataUtil.emptyString(item.getString()));
+                                    parents.setProfession(DataUtil.emptyString(item.getString()));
                                 }
                                 if (fieldName.equalsIgnoreCase("parentsannualincome")) {
                                         parents.setParentsannualincome(DataUtil.emptyString(item.getString()));
@@ -902,7 +902,7 @@ public class StudentService {
 	                }
 
 	                if (fieldName.equalsIgnoreCase("profession")) {
-	                    parents.setProfesssion(DataUtil.emptyString(item.getString()));
+	                    parents.setProfession(DataUtil.emptyString(item.getString()));
 
 	                }
 

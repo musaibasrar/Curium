@@ -39,8 +39,8 @@
         <property generated="never" lazy="false" name="medicalreport" optimistic-lock="true" type="java.lang.Integer" unique="false">
             <column name="medicalreport"/>
         </property>
-        <property generated="never" lazy="false" name="inorg.ideoholic.curiumecertificate" optimistic-lock="true" type="java.lang.Integer" unique="false">
-            <column name="inorg.ideoholic.curiumecertificate"/>
+        <property generated="never" lazy="false" name="incomecertificate" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="incomecertificate"/>
         </property>
         <property generated="never" lazy="false" name="migrationcertificate" optimistic-lock="true" type="java.lang.Integer" unique="false">
             <column name="migrationcertificate"/>

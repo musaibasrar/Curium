@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 
 @Controller
-@RequestMapping("/AccountProcess")
+@RequestMapping({"/AccountProcess", "/SubGroupName"})
 public class AccountAction {
 
 	@Autowired
