@@ -242,5 +242,6 @@ public class Student implements java.io.Serializable {
 	@Column(name = "bankifsc", length = 50)
 	private String bankifsc;
 
+	@Column(name = "userid")
 	private int userid;
 }
