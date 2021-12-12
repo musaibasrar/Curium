@@ -22,7 +22,7 @@ public class Parents implements java.io.Serializable {
 	private String mothersname;
 	private String addresspermanent;
 	private String addresstemporary;
-	private String profesion;
+	private String profession;
 	private String parentsannualincome;
 	private Integer noofdependents;
 	private Integer sid;
@@ -56,7 +56,7 @@ public class Parents implements java.io.Serializable {
 		this.mothersname = mothersname;
 		this.addresspermanent = addresspermanent;
 		this.addresstemporary = addresstemporary;
-		this.profesion = profesion;
+		this.profession = profesion;
 		this.parentsannualincome = parentsannualincome;
 		this.noofdependents = noofdependents;
 		this.sid = sid;
@@ -127,11 +127,11 @@ public class Parents implements java.io.Serializable {
 
 	@Column(name = "profession", length = 100)
 	public String getProfession() {
-		return this.profesion;
+		return this.profession;
 	}
 
 	public void setProfession(String profession) {
-		this.profesion = profession;
+		this.profession = profession;
 	}
 
 	@Column(name = "parentsannualincome")
