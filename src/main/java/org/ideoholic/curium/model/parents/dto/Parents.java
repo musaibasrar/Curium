@@ -47,7 +47,7 @@ public class Parents implements java.io.Serializable {
 	}
 
 	public Parents(String fathersname, String mothersname, String addresspermanent, String addresstemporary,
-			String profesion, String parentsannualincome, Integer noofdependents, Integer sid, Integer tid,
+			String profession, String parentsannualincome, Integer noofdependents, Integer sid, Integer tid,
 			String remarks, String contactnumber, String cocontactnumber, String emergencycontactno, String email,
 			Student student, int branchid, String fathersqualification, String mothersqualification,
 			String fatheroccupation, String motherscastecertno, String fatherscastecertno, String fatherscaste,
@@ -56,7 +56,7 @@ public class Parents implements java.io.Serializable {
 		this.mothersname = mothersname;
 		this.addresspermanent = addresspermanent;
 		this.addresstemporary = addresstemporary;
-		this.profession = profesion;
+		this.profession = profession;
 		this.parentsannualincome = parentsannualincome;
 		this.noofdependents = noofdependents;
 		this.sid = sid;
