@@ -5,168 +5,140 @@ package org.ideoholic.curium.model.mess.item.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.mess.item.dto.MessItems;
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
-import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
 import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Musaib_2
  * 
  */
+@Controller
+@RequestMapping("/MessItemsProcess")
 public class MessItemsAction {
 
-        HttpServletRequest request;
-        HttpServletResponse response;
-        HttpSession httpSession;
-        String url;
+	@Autowired
+	HttpServletRequest request;
+	@Autowired
+	HttpServletResponse response;
 
-        public MessItemsAction(HttpServletRequest request,
-                        HttpServletResponse response) {
-                this.request = request;
-                this.response = response;
-                this.httpSession = request.getSession();
-        }
+	@PostMapping("/printStockReceivedReport")
+	public String printStockReceivedReport() {
+		return "printstockreceivedreport";
+	}
 
-        public String execute(String action) {
-                // TODO Auto-generated method stub
-                if (action.equalsIgnoreCase("purchaseItems")) {
-                        url = purchaseItems();
-                }else if (action.equalsIgnoreCase("addItems")) {
-                        url = addItems();
-                }else if (action.equalsIgnoreCase("updateItems")) {
-                    	url = updateItems();
-                }else if (action.equalsIgnoreCase("deleteItems")) {
-                		url = deleteItems();
-                }else if (action.equalsIgnoreCase("viewItems")) {
-                    url = viewItems();
-                }else if (action.equalsIgnoreCase("savePurchase")) {
-                    url = savePurchase();
-                }else if (action.equalsIgnoreCase("cancelPurchase")) {
-                    url = cancelPurchase();
-                }else if (action.equalsIgnoreCase("currentStock")) {
-                    url = currentStock();
-                }else if (action.equalsIgnoreCase("printStockAvailability")) {
-                    url = printStockAvailability();
-                }else if (action.equalsIgnoreCase("batchStock")) {
-                    url = batchStock();
-                }else if (action.equalsIgnoreCase("printBatchStockAvailability")) {
-                    url = printBatchStockAvailability();
-                }else if (action.equalsIgnoreCase("issuanceStock")) {
-                    url = issuanceStock();
-                }else if (action.equalsIgnoreCase("generateStockIssuanceReport")) {
-                    url = generateStockIssuanceReport();
-                }else if (action.equalsIgnoreCase("printStockIssuanceReport")) {
-                    url = printStockIssuanceReport();
-                }else if (action.equalsIgnoreCase("receiveStock")) {
-                    url = receiveStockReport();
-                }else if (action.equalsIgnoreCase("generateStockReceivedReport")) {
-                    url = generateStockReceivedReport();
-                }else if (action.equalsIgnoreCase("printStockReceivedReport")) {
-                    url = printStockReceivedReport();
-                }        
-                return url;
-        }
-        
+	@PostMapping("/generateStockReceivedReport")
+	public String generateStockReceivedReport() {
+		new MessItemsService(request, response).generateStockReceivedReport();
+		return "stockreceivedreport";
+	}
 
+	@GetMapping("/receiveStock")
+	public String receiveStockReport() {
+		new MessItemsService(request, response).receiveStockReport();
+		return "stockreceivedreport";
+	}
 
-		private String printStockReceivedReport() {
-			return "printstockreceivedreport.jsp";
-		}
+	@PostMapping("/printStockIssuanceReport")
+	public String printStockIssuanceReport() {
+		return "printstockissuancereport";
+	}
 
-		private String generateStockReceivedReport() {
-			new MessItemsService(request, response).generateStockReceivedReport();
-			return "stockreceivedreport.jsp";
-		}
+	@PostMapping("/generateStockIssuanceReport")
+	public String generateStockIssuanceReport() {
+		new MessItemsService(request, response).generateStockIssuanceReport();
+		return "stockissuancereport";
+	}
 
-		private String receiveStockReport() {
-			new MessItemsService(request, response).receiveStockReport();
-			return "stockreceivedreport.jsp";
-		}
+	@GetMapping("/issuanceStock")
+	public String issuanceStock() {
+		new MessItemsService(request, response).getIssuanceStock();
+		return "stockissuancereport";
+	}
 
-		private String printStockIssuanceReport() {
-			return "printstockissuancereport.jsp";
-		}
+	@PostMapping("/printBatchStockAvailability")
+	public String printBatchStockAvailability() {
+		new MessItemsService(request, response).getBatchStock();
+		return "printbatchstock";
+	}
 
-		private String generateStockIssuanceReport() {
-			new MessItemsService(request, response).generateStockIssuanceReport();
-			return "stockissuancereport.jsp";
-		}
+	@GetMapping("/batchStock")
+	public String batchStock() {
+		new MessItemsService(request, response).getBatchStock();
+		return "batchstock";
+	}
 
-		private String issuanceStock() {
-			new MessItemsService(request, response).getIssuanceStock();
-			return "stockissuancereport.jsp";
-		}
+	@PostMapping("/printStockAvailability")
+	public String printStockAvailability() {
+		new MessItemsService(request, response).getCurrentStock();
+		return "printcurrentstock";
+	}
 
-		private String printBatchStockAvailability() {
-			new MessItemsService(request, response).getBatchStock();
-			return "printbatchstock.jsp";
-		}
+	@GetMapping("/currentStock")
+	public String currentStock() {
+		new MessItemsService(request, response).getCurrentStock();
+		return "currentstock";
+	}
 
-		private String batchStock() {
-			new MessItemsService(request, response).getBatchStock();
-			return "batchstock.jsp";
-		}
+	@PostMapping("/cancelPurchase")
+	public String cancelPurchase() {
 
-		private String printStockAvailability() {
-			new MessItemsService(request, response).getCurrentStock();
-			return "printcurrentstock.jsp";
-		}
+		new MessItemsService(request, response).cancelPurchase();
+		new MessSuppliersService(request, response).viewSuppliersDetails();
+		new MessItemsService(request, response).viewItemDetails();
+		new MessItemsService(request, response).getInvoiceDetails();
+		return "purchase";
+	}
 
-		private String currentStock() {
-			new MessItemsService(request, response).getCurrentStock();
-			return "currentstock.jsp";
-		}
+	@PostMapping("/savePurchase")
+	public String savePurchase() {
+		new MessItemsService(request, response).savePurchase();
+		new MessSuppliersService(request, response).viewSuppliersDetails();
+		new MessItemsService(request, response).viewItemDetails();
+		new MessItemsService(request, response).getInvoiceDetails();
+		return "purchase";
+	}
 
-		private String cancelPurchase() {
-			
-			new MessItemsService(request, response).cancelPurchase();
-			new MessSuppliersService(request, response).viewSuppliersDetails();
-        	new MessItemsService(request, response).viewItemDetails();
-			new MessItemsService(request, response).getInvoiceDetails();
-        	return "purchase.jsp";
-		}
+	@PostMapping("/deleteItems")
+	public String deleteItems() {
+		new MessItemsService(request, response).deleteMultipleItems();
+		return viewItems();
+	}
 
-		private String savePurchase() {
-			new MessItemsService(request, response).savePurchase();
-			new MessSuppliersService(request, response).viewSuppliersDetails();
-        	new MessItemsService(request, response).viewItemDetails();
-			new MessItemsService(request, response).getInvoiceDetails();
-        	return "purchase.jsp";
-		}
+	@PostMapping("/updateItems")
+	public String updateItems() {
 
-		private String deleteItems() {
-        	new MessItemsService(request, response).deleteMultipleItems();
-            return viewItems();
-		}
+		new MessItemsService(request, response).updateItems();
+		return viewItems();
+	}
 
-		private String updateItems() {
-			
-			new MessItemsService(request, response).updateItems();
-            return viewItems();
-		}
+	@GetMapping("/viewItems")
+	public String viewItems() {
+		return new MessItemsService(request, response).viewItemDetails();
+	}
 
-		private String viewItems() {
-        	return new MessItemsService(request, response).viewItemDetails();
-		}
+	@PostMapping("/addItems")
+	public String addItems() {
+		new MessItemsService(request, response).addItemDetails();
+		return viewItems();
+	}
 
-		private String addItems() {
-        		 new MessItemsService(request, response).addItemDetails();
-        		 return viewItems();
-        }
+	@GetMapping("/MessItemsProcess")
+	public String purchaseItems() {
+		new MessSuppliersService(request, response).viewSuppliersDetails();
+		new MessItemsService(request, response).viewItemDetails();
+		new MessItemsService(request, response).getInvoiceDetails();
+		return "purchase";
+	}
 
-        private String purchaseItems() {
-        	new MessSuppliersService(request, response).viewSuppliersDetails();
-        	new MessItemsService(request, response).viewItemDetails();
-        	new MessItemsService(request, response).getInvoiceDetails();
-                return "purchase.jsp";
-        }
-        
-        private String addSuppliers() {
-            return "addsuppliers.jsp";
-    }
-
+	@GetMapping("/addsuppliers")
+	public String addSuppliers() {
+		return "addsuppliers";
+	}
 
 }
