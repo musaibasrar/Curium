@@ -51,8 +51,6 @@ public class AjaxController extends HttpServlet {
        System.out.println("AJAX CONTROLLER");
        if(process.equalsIgnoreCase("stockentry")){
         	new MessStockEntryAction(request, response).execute(action);
-        }else if(process.equalsIgnoreCase("SupplierBalance")){
-        	new MessSuppliersAction(request, response).execute(action);
         }
     }
 
