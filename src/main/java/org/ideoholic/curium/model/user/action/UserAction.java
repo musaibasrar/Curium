@@ -62,14 +62,14 @@ public class UserAction {
 	}
 
 	@PostMapping("/authenticateUser")
-	public ModelAndView authenticateUser() {
-		ModelAndView model = new ModelAndView("login");
+	public String authenticateUser(Model model) {
+		// ModelAndView model = new ModelAndView("/");
 		if (new UserService(request, response).authenticateUser()) {
-			model.addObject("login_success", true);
+			model.addAttribute("login_success", true);
 		} else {
-			model.addObject("login_success", false);
+			model.addAttribute("login_success", false);
 		}
-		return model;
+		return "index_admin";
 	}
 
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })

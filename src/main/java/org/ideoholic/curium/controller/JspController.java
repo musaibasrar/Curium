@@ -13,7 +13,7 @@ public class JspController {
 		return "index_superadmin";
 	}
 
-	@RequestMapping(value = {"/", "/index_admin"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/index_admin" }, method = RequestMethod.GET)
 	public String getIndexAdmin() {
 		return "index_admin";
 	}
@@ -26,6 +26,11 @@ public class JspController {
 	@GetMapping("/index")
 	public String getIndex() {
 		return "index";
+	}
+
+	@GetMapping("/login")
+	public String getLogin() {
+		return "login";
 	}
 
 	@GetMapping("/loginFail")
@@ -107,17 +112,17 @@ public class JspController {
 	public String getLeftReception() {
 		return "left_reception";
 	}
-	
+
 	@GetMapping("/header")
 	public String getHeader() {
 		return "header";
 	}
-	
+
 	@GetMapping("/header_feescollector")
 	public String getHeaderFeescollector() {
 		return "header_feescollector";
 	}
-	
+
 	@GetMapping("/header_admin")
 	public String getHeaderAdmin() {
 		return "header_admin";

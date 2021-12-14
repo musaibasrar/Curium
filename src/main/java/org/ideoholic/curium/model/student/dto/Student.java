@@ -66,18 +66,6 @@ public class Student implements java.io.Serializable {
 	@Column(name = "religion", length = 45)
 	private String religion;
 
-	@Column(name = "secondlanguage")
-	private String secondlanguage;
-
-	@Column(name = "lastcourse", length = 25)
-	private String lastcourse;
-
-	@Column(name = "lastfirstlanguage", length = 25)
-	private String lastfirstlanguage;
-
-	@Column(name = "lastsecondlanguage", length = 40)
-	private String lastsecondlanguage;
-
 	@Column(name = "caste", length = 45)
 	private String caste;
 
@@ -123,8 +111,6 @@ public class Student implements java.io.Serializable {
 	@Column(name = "placeofbirth", length = 100)
 	private String placeofbirth;
 
-	private Integer totalmarks;
-
 	@Column(name = "nooftc")
 	private Integer nooftc;
 
@@ -152,8 +138,6 @@ public class Student implements java.io.Serializable {
 	@Column(name = "guardiandetails", length = 200)
 	private String guardiandetails;
 
-	private String lastschooladdress;
-
 	@Column(name = "subsequentprogress", length = 500)
 	private String subsequentprogress;
 
@@ -165,9 +149,6 @@ public class Student implements java.io.Serializable {
 
 	@Column(name = "instructionmediumlastschool", length = 45)
 	private String instructionmediumlastschool;
-
-	private Pudetails pudetails;
-	private Degreedetails degreedetails;
 
 	@Column(name = "passedout")
 	private Integer passedout;
@@ -202,7 +183,7 @@ public class Student implements java.io.Serializable {
 	@Column(name = "studentscaste", length = 15)
 	private String studentscaste;
 
-	@Column(name = "studentscastecertno", length = 10)
+	@Column(name = "socialcategory", length = 10)
 	private String socialcategory;
 
 	@Column(name = "belongtobpl")
@@ -223,9 +204,6 @@ public class Student implements java.io.Serializable {
 	@Column(name = "specialcategory", length = 25)
 	private String specialcategory;
 
-	@Column(name = "registrationnumber")
-	private String registrationnumber;
-
 	@Column(name = "rte")
 	private Integer rte;
 
@@ -243,4 +221,13 @@ public class Student implements java.io.Serializable {
 
 	@Column(name = "userid")
 	private int userid;
+	
+	private String lastcourse;
+	private Integer totalmarks;
+	private String lastfirstlanguage;
+	private String lastsecondlanguage;
+	private String lastschooladdress;
+	private String registrationnumber;
+	private Pudetails pudetails;
+	private Degreedetails degreedetails;
 }
