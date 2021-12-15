@@ -59,12 +59,6 @@ public class Controller extends HttpServlet {
 
      if("test".equalsIgnoreCase(process)){
          nextUrl= "test.html";
-     }else if("MessItemsProcess".equalsIgnoreCase(process)){
-         nextUrl = new MessItemsAction(request, response).execute(action);
-     }else if("MessSuppliersProcess".equalsIgnoreCase(process)){
-         nextUrl = new MessSuppliersAction(request, response).execute(action);
-     }else if("MessItemsMoveProcess".equalsIgnoreCase(process)){
-         nextUrl = new MessStockMoveAction(request, response).execute(action);
      }
         
         RequestDispatcher reg = request.getRequestDispatcher(nextUrl);

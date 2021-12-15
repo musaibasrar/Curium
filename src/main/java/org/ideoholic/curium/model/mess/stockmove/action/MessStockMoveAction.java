@@ -5,72 +5,64 @@ package org.ideoholic.curium.model.mess.stockmove.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.model.mess.stockmove.service.MessStockMoveService;
-import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author Musaib_2
  * 
  */
+@Controller
+@RequestMapping("/MessItemsMoveProcess")
 public class MessStockMoveAction {
 
-        HttpServletRequest request;
-        HttpServletResponse response;
-        HttpSession httpSession;
-        String url = null;
+	@Autowired
+	HttpServletRequest request;
+	@Autowired
+	HttpServletResponse response;
 
-        public MessStockMoveAction(HttpServletRequest request,
-                        HttpServletResponse response) {
-                this.request = request;
-                this.response = response;
-                this.httpSession = request.getSession();
-        }
+	@PostMapping("/cancelStockMove")
+	public String cancelStockMove() {
 
-        public String execute(String action) {
-        	
-               if (action.equalsIgnoreCase("saveStockMove")) {
-            	   		url = saveStockMove();
-                }else if(action.equalsIgnoreCase("issueItems")) {
-                	   url = issueItems();
-                }else if(action.equalsIgnoreCase("cancelStockMove")) {
-             	   url = cancelStockMove();
-                }
-                return url;
-        }
-        
+		new MessStockMoveService(request, response).cancelStockMove();
+		new MessItemsService(request, response).getCurrentStockToIssue();
+		/*
+		 * Batch stock issue new MessStockMoveService(request,
+		 * response).viewStockEntryDetails();
+		 */
+		new MessStockMoveService(request, response).viewStockMoveDetails();
+		return "issuestock";
+	}
 
+	@GetMapping("/issueItems")
+	public String issueItems() {
+		new MessItemsService(request, response).getCurrentStockToIssue();
+		/*
+		 * Batch stock issue new MessStockMoveService(request,
+		 * response).viewStockEntryDetails();
+		 */
+		new MessStockMoveService(request, response).viewStockMoveDetails();
+		return "issuestock";
+	}
 
-        private String cancelStockMove() {
-        	
-        	new MessStockMoveService(request, response).cancelStockMove();
-        	new MessItemsService(request, response).getCurrentStockToIssue();
-        	/*Batch stock issue 
-        	new MessStockMoveService(request, response).viewStockEntryDetails();*/
-        	new MessStockMoveService(request, response).viewStockMoveDetails();
-        	return "issuestock.jsp";
-		}
+	@PostMapping("/saveStockMove")
+	public String saveStockMove() {
 
-		private String issueItems() {
-			new MessItemsService(request, response).getCurrentStockToIssue();
-			/*Batch stock issue 
-        	new MessStockMoveService(request, response).viewStockEntryDetails();*/
-        	new MessStockMoveService(request, response).viewStockMoveDetails();
-        	return "issuestock.jsp";
-        }
-        
-        private String saveStockMove() {
-        	
-        	new MessStockMoveService(request, response).saveStockMove();
-        	new MessItemsService(request, response).getCurrentStockToIssue();
-        	/*Batch stock issue 
-        	new MessStockMoveService(request, response).viewStockEntryDetails();*/
-        	new MessStockMoveService(request, response).viewStockMoveDetails();
-        	return "issuestock.jsp";
-        	
-		}
+		new MessStockMoveService(request, response).saveStockMove();
+		new MessItemsService(request, response).getCurrentStockToIssue();
+		/*
+		 * Batch stock issue new MessStockMoveService(request,
+		 * response).viewStockEntryDetails();
+		 */
+		new MessStockMoveService(request, response).viewStockMoveDetails();
+		return "issuestock";
+
+	}
 
 }

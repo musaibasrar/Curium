@@ -112,8 +112,7 @@ public class Student implements java.io.Serializable {
 
 	@Column(name = "studentexternalid", unique = true, nullable = false, length = 45)
 	private String studentexternalid;
-	private String percentage;
-
+	
 	@Column(name = "crecord", length = 45)
 	private String crecord;
 
