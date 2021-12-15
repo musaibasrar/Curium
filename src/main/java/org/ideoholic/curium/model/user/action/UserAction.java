@@ -69,7 +69,7 @@ public class UserAction {
 		} else {
 			model.addAttribute("login_success", false);
 		}
-		return "index_admin";
+		return "login";
 	}
 
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })

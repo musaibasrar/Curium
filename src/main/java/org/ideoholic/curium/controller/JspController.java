@@ -2,18 +2,21 @@ package org.ideoholic.curium.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class JspController {
+
+	@GetMapping("/")
+	public String getLogin() {
+		return "login";
+	}
 
 	@GetMapping("/index_superadmin")
 	public String getIndexSuperadmin() {
 		return "index_superadmin";
 	}
 
-	@RequestMapping(value = { "/", "/index_admin" }, method = RequestMethod.GET)
+	@GetMapping("/index_admin")
 	public String getIndexAdmin() {
 		return "index_admin";
 	}
@@ -26,11 +29,6 @@ public class JspController {
 	@GetMapping("/index")
 	public String getIndex() {
 		return "index";
-	}
-
-	@GetMapping("/login")
-	public String getLogin() {
-		return "login";
 	}
 
 	@GetMapping("/loginFail")
