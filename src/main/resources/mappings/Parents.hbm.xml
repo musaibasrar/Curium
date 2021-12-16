@@ -29,7 +29,7 @@
             <column name="ADDRESSTEMPORARY" />
         </property>
         <property name="profession" type="java.lang.String">
-            <column name="PROFESSION" />
+            <column name="PROFESSSION" />
         </property>
         <property name="parentsannualincome" type="java.lang.String">
             <column name="PARENTSANNUALINCOME" />
@@ -52,14 +52,14 @@
         <property name="cocontactnumber" type="java.lang.String">
             <column name="COCONTACTNUMBER" />
         </property>
-        <property name="emergencycontactno" type="java.lang.String">
-            <column name="emergencycontactno" />
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" />
         </property>
           <property name="branchid" type="int">
             <column name="branchid" />
         </property>        
-        <property name="fatheroccupation" type="string">
-            <column name="fatheroccupation" length="25" />
+        <property name="fatherscastecertno" type="string">
+            <column name="fatherscastecertno" length="25" />
         </property>
         <property name="motherscastecertno" type="string">
             <column name="motherscastecertno" length="25" />
