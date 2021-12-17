@@ -49,7 +49,7 @@ public class StudentAction {
 		return "viewAllWithParents";
 	}
 
-	@PostMapping("/addNew")
+	@GetMapping("/addNew")
 	public String addNew() {
 		new StandardService(request, response).viewClasses();
 		return new StudentService(request, response).addNew();
@@ -63,7 +63,7 @@ public class StudentAction {
 		return "exportfailure";
 	}
 
-	@GetMapping("/GenerateBonafide")
+	@PostMapping("/GenerateBonafide")
 	public String generateBonafide() {
 		String result = new StudentService(request, response).generateBonafide();
 		if (result != null) {
@@ -85,7 +85,7 @@ public class StudentAction {
 		return "studentsdetailsreports";
 	}
 
-	@GetMapping("/feesStructurePerYear")
+	@PostMapping("/feesStructurePerYear")
 	public String feesStructurePerYear() {
 		new StudentService(request, response).viewfeesStructurePerYear();
 		return "student_details_feesstructure";

@@ -1420,7 +1420,7 @@ public class StudentService {
 			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
 			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			httpSession.setAttribute("studentdetailsbonafide", parents);
-			bonafidePage = "bonafidecertificateprint.jsp";
+			bonafidePage = "bonafidecertificateprint";
 		}
 		
 		return bonafidePage;
@@ -1470,7 +1470,7 @@ public class StudentService {
         
         if(httpSession.getAttribute(BRANCHID)!=null){
             String branchId = httpSession.getAttribute(BRANCHID).toString();
-            return "addStudent.jsp";
+            return "addStudent";
            /* if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
                 return "addStudent.jsp";
             }else if("4".equalsIgnoreCase(branchId)) {
@@ -1479,7 +1479,7 @@ public class StudentService {
                 return "addStudentDC.jsp";
             }*/
         }
-        return "sessiontimeout.jsp";
+        return "sessiontimeout";
     }
 
     public void viewAllStudentsSuperAdmin() {

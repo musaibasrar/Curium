@@ -58,7 +58,7 @@ public class MessSuppliersService {
 		 
 		 request.setAttribute("messsupplierslist", messSuppliersList);
 		 
-		return "addsuppliers.jsp";
+		return "addsuppliers";
 	}
 
 

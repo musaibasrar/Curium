@@ -63,7 +63,7 @@ public class MessItemsService {
 		 
 		 request.setAttribute("messstockavailabilitylist", messStockAvailabilityList);
 		 
-		return "additems.jsp";
+		return "additems";
 	}
 
 
