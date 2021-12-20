@@ -54,7 +54,7 @@ public class MessStockEntryAction {
 
 		private String savePurchase() {
 			
-        	return "purchase.jsp";
+        	return "purchase";
 		}
 
 		private String deleteItems() {
@@ -80,11 +80,11 @@ public class MessStockEntryAction {
         private String purchaseItems() {
         	new MessSuppliersService(request, response).viewSuppliersDetails();
         	new MessItemsService(request, response).viewItemDetails();
-                return "purchase.jsp";
+                return "purchase";
         }
         
         private String addSuppliers() {
-            return "addsuppliers.jsp";
+            return "addsuppliers";
     }
 
 
