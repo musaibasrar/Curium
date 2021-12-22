@@ -170,10 +170,9 @@ public class FeesService {
                         }
                 new feesCategoryDAO().deleteFeesCategory(sfsId,feesCatId,studentId);
                 
-                return "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId;
+                return studentId;
                  }
-                 
-                return "error";
+                throw new IllegalArgumentException("Fees category for the given student does not exist");
                 
         }
 
@@ -240,10 +239,10 @@ public class FeesService {
                         
                }
            new feesCategoryDAO().waiveOffFees(concessionList,studentId);
-           return "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId;
+           return studentId;
         }
         
-       return "error";
+        throw new IllegalArgumentException("Fees category for the given student does not exist");
        
 	}
 
@@ -365,10 +364,10 @@ public class FeesService {
                         
                }
            new feesCategoryDAO().applyConcession(concessionList,studentId);
-           return "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId;
+           return studentId;
         }
         
-       return "error";
+        throw new IllegalArgumentException("Fees category for the given student does not exist");
        
 	}
 }

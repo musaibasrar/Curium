@@ -2,9 +2,11 @@ package org.ideoholic.curium.model.feescategory.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +20,15 @@ public class FeesAction {
 	HttpServletRequest request;
 	@Autowired
 	HttpServletResponse response;
+	@Autowired
+	HttpSession httpSession;
 
 	@PostMapping("/applyConcession")
-	private String applyConcession() {
-        	return new FeesService(request, response).applyConcession();
-    	}
-    		
+	public String applyConcession() {
+		String studentId = new FeesService(request, response).applyConcession();
+		return studentFeePage(studentId);
+	}
+
 	@PostMapping("/printFeesWaiveoffReport")
 	public String printFeesWaiveoffReport() {
 		return "printfeeswaiveoffreport";
@@ -60,7 +65,8 @@ public class FeesAction {
 
 	@PostMapping("/waiveOffFees")
 	public String waiveOffFees() {
-		return new FeesService(request, response).waiveOffFees();
+		String studentId = new FeesService(request, response).waiveOffFees();
+		return studentFeePage(studentId);
 	}
 
 	@GetMapping("/feesReport")
@@ -77,7 +83,8 @@ public class FeesAction {
 
 	@PostMapping("/deleteFeesCategory")
 	public String deleteFeesCategory() {
-		return new FeesService(request, response).deleteFeesCategory();
+		String studentId = new FeesService(request, response).deleteFeesCategory();
+		return studentFeePage(studentId);
 	}
 
 	@PostMapping("/deleteMultiple")
@@ -91,7 +98,6 @@ public class FeesAction {
 		new FeesService(request, response).viewFees();
 		new FeesService(request, response).viewAllStudentsList();
 		return "feesCollection";
-
 	}
 
 	@GetMapping("/feesCollectAllBranches")
@@ -114,4 +120,17 @@ public class FeesAction {
 		return "feesCategory";
 	}
 
+	private String studentFeePage(String studentId) {
+		if (new StudentService(request, response).viewDetailsOfStudent(studentId)) {
+			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				return "student_details_feesstructure_admin";
+			} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				return "student_details_feesstructure";
+			} else {
+				return "student_details_feesstructure";
+			}
+		} else {
+			return "viewAll";
+		}
+	}
 }

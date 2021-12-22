@@ -30,27 +30,23 @@ public class YearAction {
 	HttpServletRequest request;
 	@Autowired
 	HttpServletResponse response;
-	
-	
-	@PostMapping("/saveYear")
-	public String saveYear() { 
-		System.out.println("Action is viewAllExpenses");
-		if(new YearService(request, response).saveYear()){
-			return "yearsaved";
-		}else{
-		return "error";
-		}
-		
-    }
 
-	
+	@PostMapping("/saveYear")
+	public String saveYear() {
+		System.out.println("Action is viewAllExpenses");
+		if (new YearService(request, response).saveYear()) {
+			return "yearsaved";
+		} else {
+			return "error";
+		}
+
+	}
+
 	@GetMapping("/updateYear")
-	private String updateYear() {
+	public String updateYear() {
 		System.out.println("Action is addExpenses");
-		 new YearService(request, response).updateYear();
-	            return "academicyear";
-	       
-		
+		new YearService(request, response).updateYear();
+		return "academicyear";
 	}
 
 }
