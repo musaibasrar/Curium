@@ -7,60 +7,50 @@ import org.ideoholic.curium.model.academicyear.service.YearService;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.student.service.StudentService;
-import org.ideoholic.curium.model.user.dao.UserDAO;
-import org.ideoholic.curium.model.user.dto.Login;
-import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @Controller
 @RequestMapping("/StampFeesProcess")
-
 public class StampFeesAction {
-	
+
 	@Autowired
 	HttpServletRequest request;
 	@Autowired
 	HttpServletResponse response;
 
 	@PostMapping("/searchForFees")
-	private String searchForFees() {
+	public String searchForFees() {
 		new StampFeesService(request, response).advanceSearch();
-        return "feesstructure";
+		return "feesstructure";
 	}
 
 	@PostMapping("/delete")
-	private String deleteFeesStructure() {
+	public String deleteFeesStructure() {
 		new StampFeesService(request, response).deleteFeesStamp();
-        return "feesstampsuccess";
+		return "feesstampsuccess";
 	}
 
 	@PostMapping("/applyFees")
-	private String applyFees() {
+	public String applyFees() {
 		new StampFeesService(request, response).addFeesStamp();
-        return "feesstampsuccess";
+		return "feesstampsuccess";
 	}
 
 	@GetMapping("/showFeesDetails")
-	private String showFeesDetails() {
+	public String showFeesDetails() {
 		new FeesService(request, response).viewFees();
 		new YearService(request, response).getYear();
 		new StandardService(request, response).viewClasses();
 		return "stampfees";
 	}
 
-
 	@PostMapping("/search")
-	private String search() {
+	public String search() {
 		new StampFeesService(request, response).advanceSearch();
-        return "stampfees";
+		return "stampfees";
 	}
-
-	
-
 }

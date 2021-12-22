@@ -523,11 +523,15 @@ public class StudentService {
 		}
 		return result;
 	}
-
+	
 	public boolean viewDetailsOfStudent() {
+		return viewDetailsOfStudent(request.getParameter("id"));
+	}
+
+	public boolean viewDetailsOfStudent(String studentId) {
 		boolean result = false;
 		try {
-			long id = Long.parseLong(request.getParameter("id"));
+			long id = Long.parseLong(studentId);
 			Student student = new studentDetailsDAO().readUniqueObject(id);
 			Parents parents = new parentsDetailsDAO().readUniqueObject(id);
 

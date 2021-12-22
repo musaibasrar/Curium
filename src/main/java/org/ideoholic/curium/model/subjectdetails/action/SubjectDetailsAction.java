@@ -24,7 +24,7 @@ public class SubjectDetailsAction {
 	
 	
 	@PostMapping("/deleteMultipleSubjects")
-	private String deleteMultipleSubjects() {
+	public String deleteMultipleSubjects() {
 		if(new SubjectDetailsService(request, response).deleteMultipleSubjects()){
 			return readListOfSubjectNames();
 		}else{
@@ -33,13 +33,13 @@ public class SubjectDetailsAction {
 	}
 
 	@GetMapping("/readListOfSubjectNames")
-	private String readListOfSubjectNames() {
+	public String readListOfSubjectNames() {
 		new SubjectDetailsService(request, response).readListOfSubjectNames();
         return "SubjectMaster";
 	}
 
 	@PostMapping("/addSubjectMaster")
-	private String addSubjectMaster() {
+	public String addSubjectMaster() {
 		if(new SubjectDetailsService(request, response).addSubjectMaster()){
 			return readListOfSubjectNames();
 		}else{
@@ -48,7 +48,7 @@ public class SubjectDetailsAction {
 	}
 
 	@PostMapping("/deleteMultiple")
-	private String deleteMultiple() {
+	public String deleteMultiple() {
 		if(new SubjectDetailsService(request, response).deleteMultiple()){
 			return readListOfSubjectsExams();
 		}else{
@@ -57,7 +57,7 @@ public class SubjectDetailsAction {
 	}
 
 	@PostMapping("/addSubject")
-	private String addSubject() {
+	public String addSubject() {
 		if(new SubjectDetailsService(request, response).addSubject()){
 			return readListOfSubjectsExams();
 		}else{
@@ -66,7 +66,7 @@ public class SubjectDetailsAction {
 	}
 
 	@GetMapping("/readListOfSubjects")
-	private String readListOfSubjectsExams() {
+	public String readListOfSubjectsExams() {
 		new SubjectDetailsService(request, response).readListOfSubjects();
 		new SubjectDetailsService(request, response).readListOfSubjectNames();
 		new ExamDetailsService(request, response).readListOfExams();
