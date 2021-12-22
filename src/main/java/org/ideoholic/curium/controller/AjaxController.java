@@ -49,9 +49,6 @@ public class AjaxController extends HttpServlet {
         String process = request.getParameter("process");
         String action = request.getParameter("action");
        System.out.println("AJAX CONTROLLER");
-       if(process.equalsIgnoreCase("stockentry")){
-        	new MessStockEntryAction(request, response).execute(action);
-        }
     }
 
 

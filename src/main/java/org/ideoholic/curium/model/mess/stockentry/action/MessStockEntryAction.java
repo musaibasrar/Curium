@@ -13,36 +13,32 @@ import org.ideoholic.curium.model.account.service.AccountService;
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.model.mess.stockentry.service.MessStockEntryService;
 import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @author Musaib_2
  * 
  */
+
+@Controller
+@RequestMapping("/MessStockEntry")
 public class MessStockEntryAction {
 
-        HttpServletRequest request;
-        HttpServletResponse response;
-        HttpSession httpSession;
-        String url = null;
-
-        public MessStockEntryAction(HttpServletRequest request,
-                        HttpServletResponse response) {
-                this.request = request;
-                this.response = response;
-                this.httpSession = request.getSession();
-        }
-
-        public String execute(String action) {
-        	
-               if (action.equalsIgnoreCase("mrvdetails")) {
-                    	mrvDetails();
-                }                
-                return url;
-        }
-        
+	@Autowired
+	HttpServletRequest request;
+	@Autowired
+	HttpServletResponse response;
+	@Autowired
+	HttpSession httpSession;        
 
 
-        private void mrvDetails() {
+	    @GetMapping("/mrvDetails")
+        public void mrvDetails() {
 
 			try {
 				new MessStockEntryService(request, response).getMRVDetails();
@@ -52,38 +48,45 @@ public class MessStockEntryAction {
 		
 		}
 
-		private String savePurchase() {
+        @PostMapping("/savePurchase")
+		public String savePurchase() {
 			
         	return "purchase";
 		}
 
-		private String deleteItems() {
+        @PostMapping("/deleteItems")
+		public String deleteItems() {
         	new MessItemsService(request, response).deleteMultipleItems();
             return viewItems();
 		}
 
-		private String updateItems() {
+        @PostMapping("/updateItems")
+		public String updateItems() {
 			
 			new MessItemsService(request, response).updateItems();
             return viewItems();
 		}
 
-		private String viewItems() {
+        @GetMapping("/viewItems")
+		public String viewItems() {
         	return new MessItemsService(request, response).viewItemDetails();
 		}
 
-		private String addItems() {
+        @PostMapping("/addItems")
+		public String addItems() {
         		 new MessItemsService(request, response).addItemDetails();
         		 return viewItems();
         }
 
-        private String purchaseItems() {
+        @GetMapping("/purchaseItems")
+        public String purchaseItems() {
         	new MessSuppliersService(request, response).viewSuppliersDetails();
         	new MessItemsService(request, response).viewItemDetails();
                 return "purchase";
         }
         
-        private String addSuppliers() {
+        @RequestMapping(value = "/addSuppliers", method = { RequestMethod.GET, RequestMethod.POST })
+        public String addSuppliers() {
             return "addsuppliers";
     }
 
