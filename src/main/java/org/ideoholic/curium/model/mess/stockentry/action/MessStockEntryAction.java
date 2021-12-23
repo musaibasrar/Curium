@@ -9,83 +9,82 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.account.service.AccountService;
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.model.mess.stockentry.service.MessStockEntryService;
 import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @author Musaib_2
  * 
  */
+
+@Controller
+@RequestMapping("/stockentry")
 public class MessStockEntryAction {
 
-        HttpServletRequest request;
-        HttpServletResponse response;
-        HttpSession httpSession;
-        String url = null;
+	@Autowired
+	HttpServletRequest request;
+	@Autowired
+	HttpServletResponse response;
+	@Autowired
+	HttpSession httpSession;
 
-        public MessStockEntryAction(HttpServletRequest request,
-                        HttpServletResponse response) {
-                this.request = request;
-                this.response = response;
-                this.httpSession = request.getSession();
-        }
+	@GetMapping("/mrvDetails")
+	public void mrvDetails() {
 
-        public String execute(String action) {
-        	
-               if (action.equalsIgnoreCase("mrvdetails")) {
-                    	mrvDetails();
-                }                
-                return url;
-        }
-        
-
-
-        private void mrvDetails() {
-
-			try {
-				new MessStockEntryService(request, response).getMRVDetails();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		
+		try {
+			new MessStockEntryService(request, response).getMRVDetails();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
-		private String savePurchase() {
-			
-        	return "purchase";
-		}
+	}
 
-		private String deleteItems() {
-        	new MessItemsService(request, response).deleteMultipleItems();
-            return viewItems();
-		}
+	@PostMapping("/savePurchase")
+	public String savePurchase() {
 
-		private String updateItems() {
-			
-			new MessItemsService(request, response).updateItems();
-            return viewItems();
-		}
+		return "purchase";
+	}
 
-		private String viewItems() {
-        	return new MessItemsService(request, response).viewItemDetails();
-		}
+	@PostMapping("/deleteItems")
+	public String deleteItems() {
+		new MessItemsService(request, response).deleteMultipleItems();
+		return viewItems();
+	}
 
-		private String addItems() {
-        		 new MessItemsService(request, response).addItemDetails();
-        		 return viewItems();
-        }
+	@PostMapping("/updateItems")
+	public String updateItems() {
+		new MessItemsService(request, response).updateItems();
+		return viewItems();
+	}
 
-        private String purchaseItems() {
-        	new MessSuppliersService(request, response).viewSuppliersDetails();
-        	new MessItemsService(request, response).viewItemDetails();
-                return "purchase";
-        }
-        
-        private String addSuppliers() {
-            return "addsuppliers";
-    }
+	@GetMapping("/viewItems")
+	public String viewItems() {
+		return new MessItemsService(request, response).viewItemDetails();
+	}
 
+	@PostMapping("/addItems")
+	public String addItems() {
+		new MessItemsService(request, response).addItemDetails();
+		return viewItems();
+	}
+
+	@GetMapping("/purchaseItems")
+	public String purchaseItems() {
+		new MessSuppliersService(request, response).viewSuppliersDetails();
+		new MessItemsService(request, response).viewItemDetails();
+		return "purchase";
+	}
+
+	@RequestMapping(value = "/addSuppliers", method = { RequestMethod.GET, RequestMethod.POST })
+	public String addSuppliers() {
+		return "addsuppliers";
+	}
 
 }
