@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23 May, 2018 11:42:50 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.model.appointment.dto.Appointment" table="h_appointment">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+       <!--  <property name="stdid" type="java.lang.Integer">
+            <column name="stdid"  />
+        </property> -->
+         <property name="externalid" type="string">
+            <column name="externalid" length="100" />
+        </property>
+        <property name="appointmentdate" type="date">
+            <column name="appointmentdate" />
+        </property>
+         <property name="appointmenttime" type="string">
+            <column name="appointmenttime" length="100" />
+        </property>
+        <property name="createduserid" type="java.lang.Integer">
+            <column name="createduserid"  />
+        </property>
+        <property name="updateduserid" type="java.lang.Integer">
+            <column name="updateduserid"  />
+        </property>
+        <property name="createddate" type="date">
+            <column name="createddate" />
+        </property>        
+        <property name="branchid" type="java.lang.Integer">
+            <column name="branchid"  />
+        </property>
+        <property name="academicyear" type="string">
+            <column name="academicyear" length="20" />
+        </property>
+         <property name="status" type="string">
+            <column name="status" length="100" />
+        </property>
+        <many-to-one name="parent" class="com.model.parents.dto.Parents"
+            column="stdid" lazy="false" />
+            
+            
+    </class>
+</hibernate-mapping>

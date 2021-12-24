@@ -882,8 +882,10 @@
 		        		var x = document.getElementById("div"+divid);
 		        		  if (x.style.display === "none") {
 		        		    x.style.display = "block";
+		        		    return false;
 		        		  } else {
 		        		    x.style.display = "none";
+		        		    return false;
 		        		  }
 		        		
 		        	}

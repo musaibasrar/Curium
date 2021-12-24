@@ -1,6 +1,5 @@
 package com.model.employee.service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import com.model.department.dao.departmentDAO;
 import com.model.department.dto.Department;
 import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
-import com.model.hr.dao.HrDAO;
 import com.model.hr.dto.Paybasic;
 import com.model.position.dao.positionDAO;
 import com.model.position.dto.Position;
@@ -38,31 +36,31 @@ public class EmployeeService {
 
 	public boolean addEmployee() {
 		Teacher employee = new Teacher();
-		
+		boolean result = false;
 		if(httpSession.getAttribute(BRANCHID)!=null){
 		employee.setTeachername(DataUtil.emptyString(request.getParameter("name")));
 		employee.setGender(DataUtil.emptyString(request.getParameter("gender")));
-		employee.setAddress(DataUtil.emptyString(request.getParameter("address")));
-		employee.setContactnumber(DataUtil.emptyString(request.getParameter("contactnumber")));
-		employee.setEmail(DataUtil.emptyString(request.getParameter("email")));
-		employee.setDateofjoining(DateUtil.dateParserddmmyyyy(request.getParameter("dateofjoining")));
-		employee.setTotalexperience(DataUtil.emptyString(request.getParameter("totalexperience")));
-		employee.setQualification(DataUtil.emptyString(request.getParameter("qualification")));
+		//employee.setAddress(DataUtil.emptyString(request.getParameter("address")));
+		//employee.setContactnumber(DataUtil.emptyString(request.getParameter("contactnumber")));
+		//employee.setEmail(DataUtil.emptyString(request.getParameter("email")));
+		//employee.setDateofjoining(DateUtil.dateParserddmmyyyy(request.getParameter("dateofjoining")));
+		//employee.setTotalexperience(DataUtil.emptyString(request.getParameter("totalexperience")));
+		//employee.setQualification(DataUtil.emptyString(request.getParameter("qualification")));
 		employee.setDepartment(DataUtil.emptyString(request.getParameter("department")));
-		employee.setDesignation(DataUtil.emptyString(request.getParameter("designation")));
-		employee.setSalary(DataUtil.emptyString(request.getParameter("salary")));
+		//employee.setDesignation(DataUtil.emptyString(request.getParameter("designation")));
+		//employee.setSalary(DataUtil.emptyString(request.getParameter("salary")));
 		employee.setRemarks(DataUtil.emptyString(request.getParameter("remarks")));
 		employee.setCurrentemployee(DataUtil.emptyString(request.getParameter("currentemployee")));
 		
 		//Bank Details
-		employee.setBankname(DataUtil.emptyString(request.getParameter("bankname")));
-		employee.setBankifsc(DataUtil.emptyString(request.getParameter("bankifsc")));
-		employee.setAccno(DataUtil.emptyString(request.getParameter("accno")));
+		//employee.setBankname(DataUtil.emptyString(request.getParameter("bankname")));
+		//employee.setBankifsc(DataUtil.emptyString(request.getParameter("bankifsc")));
+		//employee.setAccno(DataUtil.emptyString(request.getParameter("accno")));
 		//End Bank Details
 		
 		
 		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-		int count =4;
+		int count =3;
 		StringBuilder builder = new StringBuilder();
 		while (count-- != 0) {
 		int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
@@ -71,15 +69,10 @@ public class EmployeeService {
 		employee.setTeacherexternalid(builder.toString());
 		employee.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
-		if(new EmployeeDAO().create(employee)){
-			if(new UserService(request, response).addUser(employee)){
-				return true;
-			}else{
-				new EmployeeDAO().delete(employee);
-			}
+		Login user = new UserService(request, response).addUser(employee);
+		result = new EmployeeDAO().create(employee,user);
 		}
-		}
-		return false;
+		return  result;
 	}
 
 	public boolean ViewAllEmployee() {
@@ -101,7 +94,8 @@ public class EmployeeService {
 	        try {
 	            long id = Long.parseLong(request.getParameter("id"));
 	            Teacher employee = new EmployeeDAO().readUniqueObject(id);
-	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
+	            String[] teacherName = employee.getTeachername().split(" ");
+	            Login employeeLogin = new UserDAO().getUserDetails(teacherName[0]+"."+employee.getTeacherexternalid());
 	           
 	            if (employee.getTid() != null) {
 	            	httpSession.setAttribute("employee", employee);

@@ -120,6 +120,16 @@
 
             }
             -->
+            .alignLeft {
+				font-family: Tahoma;
+				font-size: 14px;
+				font-style: normal;
+				text-transform: capitalize;
+				color: #325F6D;
+				text-align: left;
+				vertical-align: middle;
+				font-weight: bold;
+			}
         </style>
         <script type="text/javascript">
             var getMember;
@@ -309,6 +319,60 @@
                     return false;
 
                 });
+                
+                
+                $("#query").button({
+                    icons:{
+                        primary: "ui-icon-pencil"
+                    }
+                }).click(function(){
+	                	$( "#dialogquery" ).dialog( "open" );
+	                    return false;
+                	});
+                
+                $(function() {
+                    $( "#dialogquery" ).dialog({
+                        autoOpen: false,
+                        height: 230,
+                        width: 550,
+                        modal: true,
+                        buttons: {
+                            OK: function() {                              	
+                            	writeQuery(document.getElementById("department"),document.getElementById("parentquery"));
+                                		$( this ).dialog( "close" );
+                         		   }
+                        }
+                    });
+                });
+                
+                
+                $("#appointment").button({
+                    icons:{
+                        primary: " ui-icon-calendar"
+                    }
+                }).click(function(){
+                	$( "#dialogappointment" ).dialog( "open" );
+                    return false;
+                	});
+                
+                  $(function() {
+                      $( "#dialogappointment" ).dialog({
+                          autoOpen: false,
+                          height: 230,
+                          width: 550,
+                          modal: true,
+                          buttons: {
+                              OK: function() {                              	
+                            	  fixAppointment(document.getElementById("appointmentdate"),document.getElementById("appointmenttime"));
+                                  		$( this ).dialog( "close" );
+                           		   }
+                          }
+                      });
+                  });
+                
+                
+                
+                
                 $('#chckHead').click(function () {
                     var length = $('.chcktbl:checked').length;
                     var trLength=$('.trClass').length;
@@ -346,6 +410,34 @@
                 
 
             });
+            
+            
+				function fixAppointment(appointmentdate,appointmenttime){
+		            	  
+						var appointmentDate = appointmentdate.value;
+						var appointmentTime = appointmenttime.value;
+		            	var form1 = document.getElementById("form1");
+		        		form1.action = "Controller?process=AppointmentProcess&action=addAppointment&appointmentdate="+appointmentDate+"&appointmenttime="+appointmentTime+"";
+		        		form1.method = "POST";
+		        		form1.submit();
+		            }
+		
+		
+				function writeQuery(department,query){
+		      	  
+					var departmentValue = department.value;
+					var queryValue = query.value;
+		        	var form1 = document.getElementById("form1");
+		    		form1.action = "Controller?process=QueryProcess&action=addQuery&department="+departmentValue+"&parentquery="+queryValue+"";
+		    		form1.method = "POST";
+		    		form1.submit();
+		    		
+		        }
+            
+            function check(studentid){
+            	
+      	      	  document.getElementById("studentid_"+studentid).checked = true;  
+            }
             
             function refreshPage(){
                  var form1=document.getElementById("form1");
@@ -397,9 +489,11 @@ for(Cookie cookie : cookies){
                         <tr  >
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">Admission Number</th>
-                            <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            <th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
-                            <th title="click to sort" class="headerText">Fathers Name&nbsp;</th>
+                            <th title="click to sort" class="headerText">Name</th>
+                            <th title="click to sort" class="headerText">Class & Sec</th>
+                            <th title="click to sort" class="headerText">Father Name</th>
+                             <th title="click to sort" class="headerText">Mother Name</th>
+                             <th title="click to sort" class="headerText">Action</th>
                         </tr>
                     </thead>
 
@@ -407,11 +501,13 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${searchStudentList}" var="Parents">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td>
+                                <td class="dataText"><input type="checkbox" id = "studentid_${Parents.student.sid}" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.pid}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Parents.student.name}"/></td>
                                 <td class="dataText"><c:out value="${Parents.student.classstudying}"/></td>
                                 <td class="dataText"><c:out value="${Parents.fathersname}"/></td>
+                                <td class="dataText"><c:out value="${Parents.mothersname}"/></td>
+                                <td class="dataText"><button id="query" onclick="check(${Parents.student.sid})">Q</button>&nbsp;&nbsp;&nbsp;<button id="appointment" onclick="check(${Parents.student.sid})">A</button></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -451,6 +547,75 @@ for(Cookie cookie : cookies){
                     <td ><a style="color: #4B6A84;font-size: 12px" href="Controller?process=PersonalProcessPages&page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
+                    
+                    
+                    <div id="dialogappointment" title="Appointment">
+				
+           		 
+		           		<table style="width: auto;height: auto;">
+								
+								<tr>
+									<td>
+										<label style="font-size: 14px;"> Date :</label>
+										<input type="date" name="appointmentdate" id="appointmentdate"/>
+										
+										
+										<label style="font-size: 14px;padding-left: 40px;">Time :</label>
+										<input type="time" name="appointmenttime" id="appointmenttime" />								
+									</td>
+								</tr>
+								
+								<tr>
+									<td><br></td>
+								</tr>
+						</table>
+						
+					</div>
+					
+					
+					<div id="dialogquery" title="Query">
+				
+           		 
+		           		<table style="width: auto;height: auto;">
+		           		
+		           		
+		           				<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+									<td class="alignLeft">Department:</td>
+									<td><label> <select name="department" id="department" style="width: 250px;height: 25px;">
+											<option selected></option>
+
+												<c:forEach items="${listDepartment}" var="listDepartment">
+
+													<option value="${listDepartment.depid}">
+														<c:out value="${listDepartment.departmentname}" />
+													</option>
+
+
+											</c:forEach>
+
+										</select>
+									</label></td>
+								</tr>
+								
+								<tr>
+									<td><br></td>
+								</tr>
+								
+									<tr>
+										
+										<td class="alignLeft">Query: &nbsp;</td>
+	
+										<td ><label> 
+												<textarea name="parentquery" id="parentquery" rows="5" cols="38"></textarea>
+										</label></td>
+								</tr>
+						</table>
+						
+					</div>
             
             
         </form>

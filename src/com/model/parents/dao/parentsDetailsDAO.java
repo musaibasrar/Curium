@@ -12,6 +12,7 @@ import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.parents.dto.Parents;
+import com.model.student.dto.Student;
 
 public class parentsDetailsDAO {
 	 Session session = null;
@@ -95,7 +96,19 @@ public class parentsDetailsDAO {
 	            transaction = session.beginTransaction();
 	            
 	            for (Parents parent : parents) {
-	            	session.save(parent);	
+	            	Student student = new Student();
+	            	Query query = session.createQuery("from Student where admissionnumber='"+parent.getStudent().getAdmissionnumber()+"'");
+	            	student = (Student) query.uniqueResult();
+	            	
+	            	if(student==null) {
+	            		session.save(parent);
+	            	}else {
+	            		Query queryParentUpdate = session.createQuery("update Parents set fathersname='"+parent.getFathersname()+"', mothersname='"+parent.getMothersname()+"', contactnumber='"+parent.getContactnumber()+"' where sid="+student.getSid());
+	            		queryParentUpdate.executeUpdate();
+	            		Query queryStudentUpdate = session.createQuery("update Student set name='"+parent.getStudent().getName()+"', classstudying='"+parent.getStudent().getClassstudying()+"' where sid="+student.getSid());
+	            		queryStudentUpdate.executeUpdate();
+	            	}
+	            		
 				}
 
 	            transaction.commit();

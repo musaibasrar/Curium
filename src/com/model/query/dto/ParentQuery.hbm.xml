@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23 May, 2018 11:42:50 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="com.model.query.dto.ParentQuery" table="h_queries">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+       <!--  <property name="stdid" type="java.lang.Integer">
+            <column name="stdid"  />
+        </property> -->
+         <property name="externalid" type="string">
+            <column name="externalid" length="100" />
+        </property>
+         <property name="query" type="string">
+            <column name="query" length="1000" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="20" />
+        </property>
+        <property name="response" type="string">
+            <column name="response" length="500" />
+        </property>
+        <property name="createduserid" type="java.lang.Integer">
+            <column name="createduserid"  />
+        </property>
+        <property name="updateduserid" type="java.lang.Integer">
+            <column name="updateduserid"  />
+        </property>
+        <property name="createddate" type="date">
+            <column name="createddate" />
+        </property>  
+        <property name="updateddate" type="date">
+            <column name="updateddate" />
+        </property>        
+        <property name="branchid" type="java.lang.Integer">
+            <column name="branchid"  />
+        </property>
+        <property name="academicyear" type="string">
+            <column name="academicyear" length="20" />
+        </property>
+         <property name="feedback" type="string">
+            <column name="feedback" length="500" />
+        </property>
+        <many-to-one name="parent" class="com.model.parents.dto.Parents"
+            column="stdid" lazy="false" />
+        <many-to-one name="department" class="com.model.department.dto.Department"
+            column="departmentid" lazy="false" />    
+    </class>
+</hibernate-mapping>

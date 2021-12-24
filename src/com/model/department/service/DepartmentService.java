@@ -57,6 +57,23 @@ public class DepartmentService {
         }
         return result;
 	}
+	
+	
+	public boolean viewAlldepartments() {
+
+		boolean result = false;
+        try {
+        	List<Department> list = new departmentDAO().readListOfObjects();
+            httpSession.setAttribute("departmentList", list);
+
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = false;
+        }
+        return result;
+	
+	}
 
 	public void deleteMultiple() {
 		 String[] departmentIds = request.getParameterValues("departmentIDs");

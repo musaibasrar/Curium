@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.model.academicyear.action.YearAction;
 import com.model.account.action.AccountAction;
 import com.model.adminexpenses.action.AdminAction;
+import com.model.appointment.action.AppointmentAction;
 import com.model.attendance.action.AttendanceAction;
 import com.model.department.action.DepartmentAction;
 import com.model.documents.action.DocumentAction;
@@ -30,6 +31,7 @@ import com.model.mess.supplier.action.MessSuppliersAction;
 import com.model.periods.action.PeriodAction;
 import com.model.position.action.PositionAction;
 import com.model.printids.action.PrintIdsAction;
+import com.model.query.action.QueryAction;
 import com.model.sendemail.action.EmailAction;
 import com.model.sendsms.action.SmsAction;
 import com.model.stampfees.action.StampFeesAction;
@@ -113,6 +115,10 @@ public class Controller extends HttpServlet {
          nextUrl = new MessStockMoveAction(request, response).execute(action);
      }else if("ImportProcess".equalsIgnoreCase(process)){
          nextUrl = new ImportFileAction(request, response).execute(action);
+     }else if("AppointmentProcess".equalsIgnoreCase(process)){
+         nextUrl = new AppointmentAction(request, response).execute(action);
+     }else if("QueryProcess".equalsIgnoreCase(process)){
+         nextUrl = new QueryAction(request, response).execute(action);
      }
         
         RequestDispatcher reg = request.getRequestDispatcher(nextUrl);

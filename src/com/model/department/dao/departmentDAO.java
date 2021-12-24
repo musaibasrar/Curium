@@ -72,6 +72,24 @@ public class departmentDAO {
             return results;
         }
 	}
+	
+	@SuppressWarnings({ "unchecked", "finally" })
+	public List<Department> readListOfObjects() {
+		
+		List<Department> results = new ArrayList<Department>();
+        try {
+            
+            transaction = session.beginTransaction();
+            results = (List<Department>) session.createQuery("From Department").list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return results;
+        }
+	}
 
 
 	public void deleteMultiple(List ids) {

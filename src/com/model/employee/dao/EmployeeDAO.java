@@ -12,6 +12,7 @@ import org.hibernate.query.Query;
 
 import com.model.employee.dto.Teacher;
 import com.model.hr.dto.Paybasic;
+import com.model.user.dto.Login;
 import com.util.HibernateUtil;
 
 public class EmployeeDAO {
@@ -34,11 +35,12 @@ public class EmployeeDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public boolean create(Teacher employee) {
+	public boolean create(Teacher employee, Login user) {
 		boolean result = false;
 		try {
 			transaction = session.beginTransaction();
 			session.save(employee);
+			session.save(user);
 			transaction.commit();
 			result = true;
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

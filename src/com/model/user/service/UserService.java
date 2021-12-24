@@ -22,16 +22,18 @@ import javax.servlet.http.HttpSession;
 import com.model.academicyear.dao.YearDAO;
 import com.model.academicyear.dto.Currentacademicyear;
 import com.model.adminexpenses.service.AdminService;
+import com.model.appointment.dao.AppointmentDAO;
+import com.model.appointment.service.AppointmentService;
 import com.model.branch.dto.Branch;
 import com.model.employee.dao.EmployeeDAO;
 import com.model.employee.dto.Teacher;
-import com.model.feescollection.action.FeesCollectionAction;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.feescollection.service.FeesCollectionService;
 import com.model.parents.dto.Parents;
+import com.model.query.dao.QueryDAO;
+import com.model.query.service.QueryService;
 import com.model.std.dao.StandardDetailsDAO;
 import com.model.std.dto.Classsec;
-import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.user.dao.UserDAO;
 import com.model.user.dto.Login;
@@ -72,6 +74,7 @@ public class UserService {
             httpSession.setAttribute("userType", userType[0]);
             httpSession.setAttribute("typeOfUser",userType[0]);
             httpSession.setAttribute("userAuth", userType[0]);
+            httpSession.setAttribute("usertypedetails", login.getUsertype());
             httpSession.setAttribute("userloginid", login.getUserid());
 			//setting session to expiry in 60 mins
            	httpSession.setMaxInactiveInterval(60*60);
@@ -127,25 +130,83 @@ public class UserService {
         	request.setAttribute("totalteachers", teacher.size());
         	// End Total Teachers
         	
-        	//Fees Details
-        	new FeesCollectionService(request, response).getFeesDetailsDashBoard();
-        	//End Fees Details
         	
-        	//Daily Expenses
-        		new AdminService(request, response).dailyExpenses();
-        		
-        	//Monthly Expenses
-        		new AdminService(request, response).getMonthlyExpenses();
-        		
-        	//Get Boys & Girls
-        		new AdminService(request, response).getTotalBoysGirls();
-        		
+        	//total queries
+        	int totalQueries = new QueryDAO().getNoOfRecords();
+        	request.setAttribute("totalqueries", totalQueries);
+        	new QueryService(request, response).getMonthlyQueries();
+        	//
         	
-        request.setAttribute("studentxaxis", xaxisList);
-        request.setAttribute("studentyaxis", yaxisList);
-        request.setAttribute("totalstudents", totalStudents);
-        feesdailysearch();
-		feesmonthlysearch();
+        	//total appointments
+        	int totalAppointments = new AppointmentDAO().getNoOfRecords();
+        	request.setAttribute("totalappointments", totalAppointments);
+        	//
+        	
+        	
+        	//Current Months Queries
+        	int monthlyQueries = new QueryService(request, response).getNoOfRecordsMonthly();
+        	request.setAttribute("monthlyqueries", monthlyQueries);
+        	//
+        	
+        	//Current Months Appointments
+        	int monthlyAppointments = new AppointmentService(request, response).getNoOfRecordsMonthly();
+        	request.setAttribute("monthlyappointments", monthlyAppointments);
+        	//
+        	
+        	
+        	//Total Resolved Queries
+        	int totalResolvedQueries = new QueryDAO().getNoOfRecordsResolvedQueries();
+        	request.setAttribute("totalresolvedqueries", totalResolvedQueries);
+        	//
+        	
+        	
+        	//Total Unresolved Queries
+        	int totalUnresolvedQueries = new QueryDAO().getNoOfRecordsUnResolvedQueries();
+        	request.setAttribute("totalunresolvedqueries", totalUnresolvedQueries);
+        	//
+        	
+
+        	//Today Resolved Queries
+        	int todayResolvedQueries = new QueryDAO().getNoOfRecordsTodayResolvedQueries();
+        	request.setAttribute("todayresolvequeries", todayResolvedQueries);
+        	//
+        	
+        	
+        	//Today Unresolved Queries
+        	int todayUnresolvedQueries = new QueryDAO().getNoOfRecordsTodayUnResolvedQueries();
+        	request.setAttribute("todayunresolvequeries", todayUnresolvedQueries);
+        	//
+        	
+        	//Total Completed Appointments
+        	int totalCompletedAppointments = new AppointmentDAO().getNoOfRecordsCompletedAppointments();
+        	request.setAttribute("totalcompletedappointments", totalCompletedAppointments);
+        	//
+        	
+        	
+        	//Total Incomplete Appointments
+        	int totalIncompleteAppointments = new AppointmentDAO().getNoOfRecordsIncompleteAppointments ();
+        	request.setAttribute("totalincompleteappointments", totalIncompleteAppointments );
+        	//
+        	
+        	
+        	//Today Completed Appointments
+        	int todayCompletedAppointments = new AppointmentDAO().getNoOfRecordsTodayCompletedAppointments();
+        	request.setAttribute("todaycompletedappointments", todayCompletedAppointments);
+        	//
+        	
+        	
+        	//Today Incomplete Appointments
+        	int todayIncompleteAppointments = new AppointmentDAO().getNoOfRecordsTodayIncompleteAppointments ();
+        	request.setAttribute("todayincompleteappointments", todayIncompleteAppointments );
+        	//
+        	
+        	request.setAttribute("studentxaxis", xaxisList);
+        	request.setAttribute("studentyaxis", yaxisList);
+        	request.setAttribute("totalstudents", totalStudents);
+        	new QueryService(request, response).getMonthlyQueries();
+        	new AppointmentService(request, response).getMonthlyAppointments();
+        	//feesdailysearch();
+        	//feesmonthlysearch();
 		}
 		
 	}
@@ -601,10 +662,11 @@ public class UserService {
 			httpSession.setAttribute("sumofdetailsfees", sumOfFees);
 	}
 
-	public boolean addUser(Teacher employee) {
+	public Login addUser(Teacher employee) {
 		
 		Login user = new Login();
-		user.setUsername(employee.getTeacherexternalid());
+		String[] teacherName = employee.getTeachername().split(" ");
+		user.setUsername(teacherName[0]+"."+employee.getTeacherexternalid());
 		final String ALPHA_NUMERIC_STRING = "RSTUABCDJKL6789MNOPQRSTUVWXYZ012345EFGHI";
 		int count =4;
 		StringBuilder builder = new StringBuilder();
@@ -613,13 +675,75 @@ public class UserService {
 		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
 		}
 		user.setPassword(builder.toString());
-		user.setUsertype("staff");
+		user.setUsertype(employee.getGender()+"-"+employee.getDepartment());
 		Branch branch = new Branch();
 		branch.setIdbranch(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		user.setBranch(branch);
 		
-		return new UserDAO().addUser(user);
+		return user;
+				//new UserDAO().addUser(user);
 		
+	}
+	
+	
+	public void mainAdvanceSearch() {
+		
+
+		
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		String queryMain ="From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
+		String studentname= DataUtil.emptyString(request.getParameter("name"));
+		
+		String addClass = request.getParameter("addclass");
+		String addSec = request.getParameter("addsec");
+		String conClassStudying = "";
+		
+		
+		if (!addClass.equalsIgnoreCase("")) {
+
+			conClassStudying = addClass+"--" +"%";
+
+		}
+		if (!addSec.equalsIgnoreCase("")) {
+			conClassStudying = addClass;
+			conClassStudying = conClassStudying+"--"+addSec+"%";
+		}
+			
+		
+			
+			String classStudying = DataUtil.emptyString(conClassStudying);
+			
+		
+			String admissionNo =  DataUtil.emptyString(request.getParameter("admnno"));
+			
+			String querySub = "";
+			
+			if(!studentname.equalsIgnoreCase("")){
+				querySub = " parents.Student.name like '%"+studentname+"%'" ;
+			}
+			
+			if(!classStudying.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
+				querySub = querySub + " parents.Student.classstudying like '"+classStudying+"'";
+			}else if(!classStudying.equalsIgnoreCase("")){
+				querySub = querySub + " parents.Student.classstudying like '"+classStudying+"'";
+			}
+			
+			if(!admissionNo.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
+				querySub = querySub + " parents.Student.admissionnumber like '%"+admissionNo+"%'";
+			}else if(!admissionNo.equalsIgnoreCase("")){
+				querySub = querySub + " parents.Student.admissionnumber like '%"+admissionNo+"%'";
+			}
+			
+			queryMain = queryMain+querySub+" AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+	}
+			
+			request.setAttribute("searchStudentList", searchStudentList);
+		
+		
+	
 	}
 
 }

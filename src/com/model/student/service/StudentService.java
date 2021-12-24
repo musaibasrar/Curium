@@ -3,7 +3,9 @@ package com.model.student.service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,6 +24,8 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -577,7 +581,7 @@ public class StudentService {
 
 				String classAdmitted = student.getClassadmittedin();
 				
-				if (!classAdmitted.equalsIgnoreCase("")) {
+				if (classAdmitted != null && !classAdmitted.equalsIgnoreCase("")) {
 
 					String[] classAdmittedParts = classAdmitted.split("--");
 					request.setAttribute("classadm", classAdmittedParts[0]);
@@ -1505,5 +1509,58 @@ public class StudentService {
                 }
         
 }
+
+	public boolean downlaodImportTemplate() {
+		boolean result = false;
+		try {
+
+			
+			/*
+			 * InputStream is =
+			 * this.getClass().getClassLoader().getResourceAsStream("ReportCard.xlsx");
+			 * 
+			 * Workbook workbook = WorkbookFactory.create(is);
+			 */
+			
+			
+			URL resource = this.getClass().getClassLoader().getResource("curiumimportfile.xlsx");
+			File file = new File(resource.toURI());
+			//FileInputStream input = new FileInputStream(file);
+			
+			File downloadFile = new File(resource.toURI());
+	        FileInputStream inStream = new FileInputStream(downloadFile);
+
+	        // get MIME type of the file
+			String mimeType = "application/vnd.ms-excel";
+
+			// set content attributes for the response
+			response.setContentType(mimeType);
+			// response.setContentLength((int) bis.length());
+
+			// set headers for the response
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"",
+					"curiumimportfile.xlsx");
+			response.setHeader(headerKey, headerValue);
+
+			// get output stream of the response
+			OutputStream outStream = response.getOutputStream();
+
+			byte[] buffer = new byte[BUFFER_SIZE];
+			int bytesRead = -1;
+
+			// write bytes read from the input stream into the output stream
+			while ((bytesRead = inStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+
+			inStream.close();
+			outStream.close();
+			result = true;
+		} catch (Exception e) {
+			System.out.println("" + e);
+		}
+		return result;
+	}
 	
 }

@@ -38,6 +38,7 @@
 
 <style type="text/css">
 .myclass {
+	font-size: 1.3em;
 	border-top-style: solid;
 	border-right-style: solid;
 	border-bottom-style: solid;
@@ -51,9 +52,10 @@
 	border-bottom-width: 1px;
 	border-left-width: 1px;
 	width: auto;
-	height: auto;
+	height: 28px;
 	color: black;
 	text-transform: capitalize;
+	border-radius: 4px;
 }
 
 <!--
@@ -222,6 +224,16 @@
 	color: #325f6d;
 }
 -->
+.alignLeft {
+	font-family: Tahoma;
+	font-size: 14px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
+}
 </style>
 
 
@@ -229,54 +241,7 @@
 <script src="JavaScript/actb.js"></script>
 <script src="JavaScript/common.js"></script>
 
-<script>
-	$(function() {
-		$("#datepicker").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			yearRange: "-50:+0"
-		});
-		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
-		$("#anim").change(function() {
-			$("#datepicker").datepicker("option", "showAnim", $(this).val());
-		});
-	});
-	$(function() {
-		$("#datepicker1").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			yearRange: "-50:+0"
-		});
-		$( "#datepicker1" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
-		$("#anim").change(function() {
-			$("#datepicker1").datepicker("option", "showAnim", $(this).val());
-		});
-	});
-	$(function() {
-		$("#datepickerCD").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			yearRange: "-50:+0"
-		});
-		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
-		$("#anim").change(function() {
-			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
-		});
-	});
-	$(function() {
-		$("#datepickerleaving").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			yearRange: "-50:+0"
-		});
-		$( "#datepickerleaving" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
-		$("#anim").change(function() {
-			$("#datepickerleaving").datepicker("option", "showAnim", $(this).val());
-		});
-	});
-	
-	
-</script>
+
 
 
 
@@ -429,34 +394,7 @@
 
 
 <script type="text/javascript">
-	function check(value) {
-
-		xmlHttp = GetXmlHttpObject()
-		var url = "check.jsp";
-		url = url + "?name=" + value;
-		xmlHttp.onreadystatechange = stateChanged
-		xmlHttp.open("GET", url, true)
-		xmlHttp.send(null)
-	}
-	function stateChanged() {
-		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-			var showdata = xmlHttp.responseText;
-			document.getElementById("mydiv").innerHTML = showdata;
-		}
-	}
-	function GetXmlHttpObject() {
-		var xmlHttp = null;
-		try {
-			xmlHttp = new XMLHttpRequest();
-		} catch (e) {
-			try {
-				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-			} catch (e) {
-				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-		}
-		return xmlHttp;
-	}
+	
 	
 	function yesCheck(id) {
 
@@ -475,6 +413,13 @@
 
 	}
 	
+	function disableDepartment() {
+		document.getElementById('department').disabled = true;
+	}
+	
+	function enableDepartment() {
+		document.getElementById('department').disabled = false;
+	}
 
 	function CalculateAge(value) {
 		var test = document.getElementById('datepicker').value;
@@ -490,38 +435,7 @@
 	}
 </script>
 
-<script type="text/javascript">
-	function checkmobile(value) {
 
-		xmlHttp = GetXmlHttpObject()
-		var url = "mobilecheck.jsp";
-		url = url + "?contactNO=" + value;
-		xmlHttp.onreadystatechange = stateChangedmobile
-		xmlHttp.open("GET", url, true)
-		xmlHttp.send(null)
-	}
-	function stateChangedmobile() {
-
-		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-			var showdata = xmlHttp.responseText;
-			document.getElementById("mydivmobile").innerHTML = showdata;
-		}
-	}
-	function GetXmlHttpObject() {
-		var xmlHttp = null;
-		try {
-			xmlHttp = new XMLHttpRequest();
-		} catch (e) {
-			try {
-				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-			} catch (e) {
-				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-		}
-		return xmlHttp;
-	}
-
-</script>
 </head>
 <%
 //allow access only if session exists
@@ -549,14 +463,12 @@ for(Cookie cookie : cookies){
 			<div id="tabs">
 				
 				<ul>
-					<li><a href="#tabs-1">Staff Details</a></li>
-					<li><a href="#tabs-2">Bank Details</a></li>
-					<li><a href="#tabs-3">Additional Details</a></li>
+					<li><a href="#tabs-1">Details</a></li>
 				</ul>
 
 				<div id="tabs-1">
 
-					<table width="100%" border="0" align="center" id="table1">
+					<table style="width: auto;height: auto;" border="0" align="center" id="table1">
 					
 						<tr>
 							<td><br /></td>
@@ -565,19 +477,19 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignRight">Name* &nbsp;</td>
-							<td align="left"><label> <input
+							<td class="alignLeft">Name* &nbsp;</td>
+							<td><label> <input
 									name="name" type="text" class="myclass" id="name" size="36" 
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
 							</label></td>
 
-							<td class="alignRight">Gender &nbsp;</td>
-							<td class="alignLeft">&nbsp;Male<input
-								type="checkbox" value="male" name="gender" id="yes:male"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
-								type="checkbox" value="female" name="gender" id="no:male"
-								onclick="noCheck(this.id)" />
+							<td class="alignLeft" style="padding-left: 20px;">Module &nbsp;</td>
+							<td>&nbsp;Queries<input
+								type="checkbox" value="queries" name="gender" id="yes:queries"
+								onclick="yesCheck(this.id);enableDepartment()" />&nbsp; &nbsp;Appointments<input
+								type="checkbox" value="appointments" name="gender" id="no:queries"
+								onclick="noCheck(this.id);disableDepartment()" />
 							</td>
 						</tr>
 						<tr>
@@ -589,84 +501,12 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
+						
 						<tr>
-
-							<td class="alignRight">Address &nbsp;</td>
-							<td><label> <input name="address"
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="textField" id="address" size="36">
-							</label></td>
-
-							<td class="alignRight">Contact Number &nbsp;</td>
-							<td><label> <input
-									name="contactnumber" type="text" class="textField"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									id="contactnumber" size="36" maxlength="10" minlength="10"/>
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-
-							<td class="alignRight">email &nbsp;</td>
-							<td><label> <input name="email"
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="email" class="textField" id="email" size="36">
-							</label></td>
-
-							<td class="alignRight">Date Of Joining &nbsp;</td>
-							<td><label> <input name="dateofjoining" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-YYYY"/>"
-										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="textField" id="datepicker" size="36"
-									data-validate="validate(required)">
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td class="alignRight">Total Experience &nbsp;</td>
-							<td align="left"><label> <input
-									name="totalexperience" type="text" class="myclass"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									id="totalexperience" size="36" onblur="validateName();">
-									<!-- onkeyup="check(this.value);"  -->
-							</label></td>
-
-
-							<td class="alignRight">Qualification &nbsp;</td>
-							<td><label> <input name="qualification"
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="textField" id="qualification" size="36"
-									>
-							</label></td>
-
-
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignRight">Department &nbsp;</td>
-							<td class="alignLeft"><label>
+							<td class="alignLeft">Department &nbsp;</td>
+							<td><label>
 									<select name="department" id="department"
-									style="width: 300px">
+									style="width: 290px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${listDepartment}" var="listDepartment">
@@ -679,52 +519,28 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 
 								</select></label></td>
-
-
-							<td class="alignRight">Designation &nbsp;</td>
-							<td class="alignLeft"><label>
-									<select name="designation" id="designation"
-									style="width: 300px">
-										<option selected></option>
-
-										<c:forEach items="${listPosition}" var="listPosition">
-
-											<option>
-												<c:out value="${listPosition.positionname}" />
-											</option>
-
-
-										</c:forEach>
-
-								</select></td>
-
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<!-- <td width="30%" class="alignRight">Salary &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="salary" type="text" class="myclass"
-									id="salary" size="36" onblur="validateName();">
-									onkeyup="check(this.value);" 
-							</label></td> -->
-							<td class="alignRight">Current Employee &nbsp;</td>
-							<td class="alignLeft">&nbsp;Yes<input
+								
+								<td class="alignLeft" style="padding-left: 20px;">Current Employee &nbsp;</td>
+							<td>&nbsp;Yes<input
 								type="checkbox" value="1" name="currentemployee" id="yes:employee"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
 								type="checkbox" value="0" name="currentemployee" id="no:employee"
 								onclick="noCheck(this.id)" />
 							</td>
+								
 
-							<td class="alignRight">Remarks &nbsp;</td>
-							<td align="left"><label> <input
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignLeft">Remarks &nbsp;</td>
+							<td><label> <input
 									name="remarks" type="text" class="myclass" id="remarks"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
@@ -734,16 +550,6 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						
-									<tr>
-										<td></td><td></td>
-										<td align="center"><a class="nexttab"
-											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Next</a></td>
-									</tr>
-									
-								<tr>
-									<td><br /></td>
-								</tr>
 								<tr>
 									<td></td><td></td>
 									<td>
@@ -756,139 +562,6 @@ for(Cookie cookie : cookies){
 					</table>
 					</div>
 					
-					<div id="tabs-2">
-
-					<table width="100%" border="0" align="center" id="table1">
-					
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignRight">Bank Name &nbsp;</td>
-							<td align="left"><label> <input
-									name="bankname" type="text" class="myclass" id="bankname" size="36" 
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
-							</label></td>
-
-							<td class="alignRight">Bank IFSC &nbsp;</td>
-							<td class="alignLeft"><label> <input
-									name="bankifsc" type="text" class="myclass" id="bankifsc" size="36" 
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									onblur="validateName();">
-							</label>
-							</td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-						<tr>
-							<td class="alignRight">Account Number &nbsp;</td>
-							<td><label> <input name="accno"
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="textField" id="accno" size="36">
-							</label></td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-										<td></td><td></td>		
-										<td align="center">
-										<a class="nexttab"
-											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;
-										<a class="prevtab"
-											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Previous</a></td>
-									</tr>
-									
-									
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td></td><td></td>
-									<td>
-										<button id="save" class="save" onmouseover="validateNameContact();">Save</button>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="cancel" class="cancel">Cancel</button>
-
-									</td>
-								</tr>
-					</table>
-					</div>
-					
-					<div id="tabs-3">
-
-					<table width="100%" border="0" align="center" id="table1">
-					
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignRight">Date Of Leaving &nbsp;</td>
-							<td><label> 
-										<input name="dateofleaving"
-									type="text" class="myclass" id="datepickerleaving" size="30" autocomplete="off"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
-									
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-									<tr>
-									
-										<td align="right">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<a class="prevtab"
-											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Previous</a></td>
-									</tr>
-									
-									
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td>
-										<button id="save" class="save" onmouseover="validateNameContact();">Save</button>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button id="cancel" class="cancel">Cancel</button>
-
-									</td>
-								</tr>
-					</table>
-					</div>
 					
 					
 					</div>

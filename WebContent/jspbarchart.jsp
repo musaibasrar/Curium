@@ -31,7 +31,7 @@
 		  border-radius: 25px;
 		  border: 0px solid;
 		  padding: 10px; 
-		  width: 240px;
+		  width: 280px;
 		  height: 80px; 
 		  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		}
@@ -70,9 +70,8 @@ for(Cookie cookie : cookies){
         </div>
         
                
-        <div class="row">
-        	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        	<div class="col">
+        <div class="row" style="padding-left: 20px;">
+        	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1">
         			
         			<table>
@@ -87,7 +86,7 @@ for(Cookie cookie : cookies){
         						<label id="labelname">Total Students </label>
         						<br>		
         						<img src="images/teacher.svg" height="20" width="20"/>
-        						<label id="labelname">Total Teachers </label>
+        						<label id="labelname">Total Users </label>
         					</td>
         					<td></td>
         					<td></td>
@@ -100,7 +99,7 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	<div class="col"> 
+        	<div class="col" style="padding-bottom: 40px;"> 
         			<div id="rcorners1">
         			<table>
         				<tr>
@@ -111,52 +110,23 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td>
         						<img src="images/totalfees.svg" height="20" width="20"/>
-        						<label id="labelname">Total Fees&nbsp;&nbsp;&nbsp;</label><br>
-        						<img src="images/monthlyfees.svg"  height="20" width="20"/>	
-        						<label id="labelname">${Currentmonth} Fees</label>
+        						<label id="labelname">Total Queries&nbsp;&nbsp;&nbsp;</label><br>
+        						<img src="images/totalfees.svg" height="20" width="20"/>
+        						<label id="labelname">Total Appt.&nbsp;&nbsp;&nbsp;</label><br>
         					</td>
         					<td></td>
         					<td></td>
         					<td></td>
         					<td>
-        						<label id="labelnumber">${totalFeesAmountDashBoard}</label><br>
-        						<label id="labelnumber">${sumOfFeesMonthly}</label>	
+        						<label id="labelnumber">${totalqueries}</label><br>
+        						<label id="labelnumber">${totalappointments}</label>	
         					</td>
         				</tr>
         			</table>
         			</div>
         	</div>
         	
-        	
-        	<div class="col">
-        		<div id="rcorners1">
-        			<table>
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td>
-        					<img src="images/feespaid.svg" height="20" width="20"/>	
-        						<label id="labelname">Total Fees Paid</label><br>
-        						<img src="images/feesdue.svg"  height="20" width="20"/>
-        						<label id="labelname">Total Fees Due&nbsp;</label>
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td>
-        						<label id="labelnumber">${totalPaidAmountDashBoard}</label><br>
-        						<label id="labelnumber">${totalDueAmountDashBoard}</label>
-        					</td>
-        				</tr>
-        			</table>
-        			</div>
-        	
-        	 </div>
-        	 
-        	 <div class="col">
+        	<div class="col" style="padding-bottom: 40px;">
         		<div id="rcorners1">
         			<table>
         				<tr>
@@ -167,10 +137,154 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td>
         						<img src="images/todayscollection.svg" height="20" width="20"/>
-        						<label id="labelname">Today's Fees</label>
+        						<label id="labelname">Total Completed Appt.</label>
         						<br>		
         						<img src="images/todaysexpenses.svg" height="20" width="20"/>	
-        						<label id="labelname">Today's Expenses</label>	
+        						<label id="labelname">Total Incomplete Appt.</label>	
+        					</td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td>
+        						<label id="labelnumber">${totalcompletedappointments}</label><br>
+        						<label id="labelnumber">${totalincompleteappointments}</label>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	
+        	 </div>
+        	 
+        	<div class="col" style="padding-bottom: 40px;">
+        		<div id="rcorners1">
+        			<table>
+        				<tr>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td>
+        					<img src="images/feespaid.svg" height="20" width="20"/>	
+        						<label id="labelname">Total Resolved Queries</label><br>
+        						<img src="images/feesdue.svg"  height="20" width="20"/>
+        						<label id="labelname">Total Unresolved Queries&nbsp;</label>
+        					</td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td>
+        						<label id="labelnumber">${totalresolvedqueries}</label><br>
+        						<label id="labelnumber">${totalunresolvedqueries}</label>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	
+        	 </div>
+        	 
+        	 
+        	 <div class="col" style="padding-bottom: 40px;"> 
+        			<div id="rcorners1">
+        			<table>
+        				<tr>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td>
+        						<img src="images/totalfees.svg" height="20" width="20"/>
+        						<label id="labelname">${Currentmonth} Queries&nbsp;&nbsp;&nbsp;</label><br>
+        						<img src="images/totalfees.svg" height="20" width="20"/>
+        						<label id="labelname">${Currentmonth} Appt.&nbsp;&nbsp;&nbsp;</label><br>
+        					</td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td>
+        						<label id="labelnumber">${monthlyqueries}</label><br>
+        						<label id="labelnumber">${monthlyappointments}</label>	
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	</div>
+        	
+        	 
+        	 <div class="col" style="padding-bottom: 40px;">
+        		<div id="rcorners1">
+        			<table>
+        				<tr>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td>
+        						<img src="images/todayscollection.svg" height="20" width="20"/>
+        						<label id="labelname">Today's Resolved Queries</label>
+        						<br>		
+        						<img src="images/todaysexpenses.svg" height="20" width="20"/>	
+        						<label id="labelname">Today's Unresolved Queries</label>	
+        					</td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td>
+        						<label id="labelnumber">${todayresolvequeries}</label><br>
+        						<label id="labelnumber">${todayunresolvequeries}</label>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	
+        	 </div>
+        	 
+        	 <div class="col" style="padding-bottom: 40px;">
+        		<div id="rcorners1">
+        			<table>
+        				<tr>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td>
+        						<img src="images/todayscollection.svg" height="20" width="20"/>
+        						<label id="labelname">Today's Completed Appt.</label>
+        						<br>		
+        						<img src="images/todaysexpenses.svg" height="20" width="20"/>	
+        						<label id="labelname">Today's Incomplete Appt.</label>	
+        					</td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td>
+        						<label id="labelnumber">${todaycompletedappointments}</label><br>
+        						<label id="labelnumber">${todayincompleteappointments}</label>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	
+        	 </div>
+        	 
+        	 <div class="col" style="padding-bottom: 40px;">
+        		<div id="rcorners1">
+        			<table>
+        				<tr>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td>
+        						<img src="images/todayscollection.svg" height="20" width="20"/>
+        						<label id="labelname">Average Feedback Point</label>
+        						<br>		
+        						<img src="images/todaysexpenses.svg" height="20" width="20"/>	
+        						<label id="labelname">Today's Avg. Feedback Pt.</label>	
         					</td>
         					<td></td>
         					<td></td>
@@ -192,12 +306,12 @@ for(Cookie cookie : cookies){
              <div class="row">
              	
              	<div class="col">
-             		<canvas id="student-monthlyfeeschart" height="300"></canvas>
+             		<canvas id="student-monthlyquerieschart" height="200"></canvas>
              	</div>
              	
             	<div class="col">
-            		<canvas id="student-expensechart" height="300"></canvas>
-            	</div>	
+            		<canvas id="student-expensechart" height="200"></canvas>
+            	</div>	 
              </div>
              
              <div class="row">
@@ -206,9 +320,9 @@ for(Cookie cookie : cookies){
              		<canvas id="student-chart" height="200"></canvas>
              	</div>
              	
-            	<div class="col" align="center">
+            	<%-- <div class="col" align="center">
             		<canvas id="student-male-female" height="300"></canvas>
-            	</div>	
+            	</div>	 --%>
              </div>
 			
 			
@@ -218,12 +332,12 @@ for(Cookie cookie : cookies){
    		<form id="form1" method="post">
 				<label id="classesstudying" style="display: none;">${studentxaxis}</label>
 				<label id="students" style="display: none;">${studentyaxis}</label>
-				<label id = "studentsfees" style="display: none;">${studenttotalfees}</label>
+				<label id = "studentsqueries" style="display: none;">${studenttotalqueries}</label>
 				<label id = "currentdate" style="display: none;">${currentdate}</label>
-				<label id = "monthlystudentsfees" style="display: none;">${monthlystudentsfees}</label>
+				<label id = "monthlystudentsqueries" style="display: none;">${monthlystudentsqueries}</label>
 				<label id = "monthlist" style="display: none;">${monthlist}</label>
-				<label id = "monthlytotalexpenses" style="display: none;">${monthlyexpenses}</label>
-				<label id = "monthlisttotalexpenses" style="display: none;">${monthlistexpenses}</label>
+				<label id = "monthlytotalexpenses" style="display: none;">${monthlytotalappointments}</label>
+				<label id = "monthlisttotalexpenses" style="display: none;">${monthlistappointment}</label>
 				<label id = "totalboysgirls" style="display: none;">${totalboysgirls}</label>
         </form>
 	     
@@ -364,7 +478,7 @@ for(Cookie cookie : cookies){
                 } 
             });
             
-          		//Bar Chart for Daily Expense
+          		 //Bar Chart for Daily Expense
         	var totalExpenses = document.getElementById("monthlytotalexpenses").innerHTML;
         	var expenselabel = JSON.parse(totalExpenses);
         	
@@ -449,30 +563,30 @@ for(Cookie cookie : cookies){
                     
                   title: {
                     display: true,
-                    text: 'Monthly Expenses'
+                    text: 'Monthly Appointments'
                   } ,
                    scales: {
                 	   yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: 500000,
-                                stepSize: 20000
+                                max: 10000,
+                                stepSize: 500
                                }
                         
                             }]
                 } 
                 } 
-            });
+            }); 
             
             
-          //Bar Chart for Monthly fees
-        	var monthlyfees = document.getElementById("monthlystudentsfees").innerHTML;
-        	var monthlyfeeslabel = JSON.parse(monthlyfees);
+          //Bar Chart for Monthly Queries
+        	var monthlyqueries = document.getElementById("monthlystudentsqueries").innerHTML;
+        	var monthlyquerieslabel = JSON.parse(monthlyqueries);
         	
       	 	var monthlist = document.getElementById("monthlist").innerHTML;
       		var monthlistlabel = JSON.parse(monthlist);
         	
-            new Chart(document.getElementById("student-monthlyfeeschart"), {
+            new Chart(document.getElementById("student-monthlyquerieschart"), {
                 type: 'bar',
                 data: {
                   labels: monthlistlabel,
@@ -517,7 +631,7 @@ for(Cookie cookie : cookies){
       	            ],
       	            maintainAspectRatio: false,
       	            borderWidth: 1,
-                      data: monthlyfeeslabel
+                      data: monthlyquerieslabel
                     }
                   ]
                 },
@@ -550,14 +664,14 @@ for(Cookie cookie : cookies){
                     
                   title: {
                     display: true,
-                    text: 'Monthly Fees Collection'
+                    text: 'Monthly Queries'
                   } ,
                    scales: {
                 	   yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: 500000,
-                                stepSize: 20000
+                                max: 10000,
+                                stepSize: 500
                                }
                         
                             }]
@@ -567,7 +681,7 @@ for(Cookie cookie : cookies){
             
             //Boys & Girls
             
-            var boysgirls = document.getElementById("totalboysgirls").innerHTML;
+            /* var boysgirls = document.getElementById("totalboysgirls").innerHTML;
         	var boysGirlsGraph = JSON.parse(boysgirls);
             
             var ctx = document.getElementById("student-male-female");
@@ -605,7 +719,7 @@ for(Cookie cookie : cookies){
                 	  }
 
               }
-            });
+            }); */
      
             
 	</script> 

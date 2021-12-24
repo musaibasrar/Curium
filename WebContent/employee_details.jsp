@@ -264,21 +264,14 @@
         <script type="text/javascript">
             $(function() {
 
-                $(".accordion").accordion({
-                    collapsible: true,
-                    navigation: true,
-                    active: false,
-                    autoHeight: false});
-                $("#accordion1").accordion({
-                    collapsible: true,
-                    navigation: true,
-                    active: false,
-                    autoHeight: false});
+                $(".accordion").accordion();
+                $("#accordion1").accordion();
                 /*$("#set")
                 .button()
                 .click(function() {
                     updateVisit();
                 });  */
+                
                 $( "#cancel" )
                 .button()
                 .click(function() {
@@ -364,51 +357,10 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows"  style="text-transform:uppercase">
                                 <c:out default="" value="${employee.teachername}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Gender
+                            <td width="25%"  class="alignLeft" height="50" >Module
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${employee.gender}" />
-                            </td>
-                        </tr>
-                        
-                          <tr>
-                        <td  width="25%"  class="alignLeft" height="50">Address
-                            </td>
-                            <td width="25%" class="tablerows">
-                                <c:out default="" value="${employee.address}" />
-                            </td>
-                        
-                            <td  width="25%"  class="alignLeft" height="50" >Contact Number
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${employee.contactnumber}" />
-                            </td>
-
-                            
-                        </tr>
-                        
-                        <tr>
-                        <td width="25%"  class="alignLeft" height="50" >Email
-                            </td>
-                            <td width="25%"  class="tablerows">
-                                <c:out default="" value="${employee.email}" />
-                            </td>
-                            <td width="25%"  class="alignLeft" height="50">Date Of Joining</td>
-                            <td width="25%" class="tablerows" >
-                                <fmt:formatDate pattern="dd-MM-yyyy" value="${employee.dateofjoining}"/>
-                            </td>
-                            
-                        </tr>
-                        
-                        <tr>
-                            <td width="25%"  class="alignLeft" height="50" >Total Experience</td>
-                            <td  width="25%"  class="tablerows">
-                                <c:out default="" value="${employee.totalexperience}" />
-                            </td>
-                            <td width="25%"  class="alignLeft" height="50">Qualification
-                            </td>
-                            <td width="25%" class="tablerows">
-                                <c:out default="" value="${employee.qualification}" />
                             </td>
                         </tr>
                         
@@ -420,18 +372,7 @@ for(Cookie cookie : cookies){
                             </td>
                             
                             
-                            <td width="25%"   class="alignLeft" height="50" >Designation</td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${employee.designation}" />
-                            </td>
-                           
-                           
-                        
-                        </tr>
-                        
-                        <tr>
-                         
-                            <td  width="25%"  class="alignLeft" height="50">Current Employee</td>
+                           <td  width="25%"  class="alignLeft" height="50">Current Employee</td>
                             
                             <td width="25%" class="tablerows">
                             	<c:if test="${(employee.currentemployee ==1)}">    
@@ -441,7 +382,13 @@ for(Cookie cookie : cookies){
            						  <c:out default="" value="No" />
            						 </c:if>
                             </td>
+                           
+                           
                         
+                        </tr>
+                        
+                        <tr>
+                         
                             <td width="25%" class="alignLeft" height="50" >Remarks</td>
                             <td width="25%" class="tablerows"  >
                                  <c:out default="" value="${employee.remarks}" />
@@ -453,7 +400,7 @@ for(Cookie cookie : cookies){
                         <tr>
                         
                          
-                            <td  width="25%"  class="alignLeft" height="50">Staff User ID
+                            <td  width="25%"  class="alignLeft" height="50">User ID
                             </td>
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${stafflogin.username}" />
@@ -485,87 +432,13 @@ for(Cookie cookie : cookies){
                 </div>
             </div>
             
-            <div class="accordion" style="width: 100%;height: 100%">
-
-                <h3><a href="#">Bank Details</a></h3>
-                <div>
-
-                    <table  border="0px" width="100%"  id="table1" align="center">
-
-                        <tr>
-
-                            <td width="25%"  class="alignLeft" height="50">Bank Name</td>
-                            <td width="25%" class="tablerows"  style="text-transform:uppercase">
-                                <c:out default="" value="${employee.bankname}" />
-                            </td>
-                            <td width="25%"  class="alignLeft" height="50" >Bank IFSC
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${employee.bankifsc}" />
-                            </td>
-                        </tr>
-                        
-                          <tr>
-                        <td  width="25%"  class="alignLeft" height="50">Account Number
-                            </td>
-                            <td width="25%" class="tablerows">
-                                <c:out default="" value="${employee.accno}" />
-                            </td>
-                                                    
-                        </tr>
-                        
-                        <tr>
-                            <td  width="25%"  class="alignLeft" height="50">
-                            </td>
-                            <td width="25%" class="tablerows" >
-
-                            </td>
-                            <td  width="25%"  class="alignLeft" height="50">
-                            </td>
-                            <td width="25%" class="tablerows">
-
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            
-            <div class="accordion" style="width: 100%;height: 100%">
-
-                <h3><a href="#">Additional Details</a></h3>
-                <div>
-
-                    <table border="0px" width="100%"  id="table1" align="center">
-
-                        <tr>
-                            <td width="25%"  class="alignLeft" height="50">Date of Leaving&nbsp;</td>
-                            <td width="25%" class="tablerows"  style="text-transform:uppercase">
-                            <fmt:formatDate pattern="dd-MM-yyyy" value="${employee.leavingdate}"/>
-                            </td>
-                        </tr>
-                        
-                        <tr>
-                            <td  width="25%"  class="alignLeft" height="50">
-                            </td>
-                            <td width="25%" class="tablerows" >
-
-                            </td>
-                            <td  width="25%"  class="alignLeft" height="50">
-                            </td>
-                            <td width="25%" class="tablerows">
-
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
             
             <table  width="70%"  id="table11" align="center">
                         <tr>
                             <td width="30%"></td>
                             <td>
-                                <button id="modify" type="submit">Modify</button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <!-- <button id="modify" type="submit">Modify</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
                                 <button id="cancel" >Cancel</button>
                             </td>
                         </tr>

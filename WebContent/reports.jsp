@@ -449,193 +449,81 @@ for(Cookie cookie : cookies){
         <%-- <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div> --%>
          <div class="headerTD" style="width: 95%">Reports</div>
 
-        <div id="container" style="width: 95%" >
-            
-             
-            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsReports" style="font-size: 12px;">Student Details Report</a>
-            			</td>
-            		</tr>
-            		
-                </table>
-            </div>
-            
-            
-              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Fees Collection Details</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="Controller?process=FeesProcess&action=feesReport" style="font-size: 12px;">Fees Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="Controller?process=FeesProcess&action=feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="feescancelledreceipts.jsp" style="font-size: 12px;">Cancelled Fees Receipts</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            
-             <h5 class="sideaccordian" ><a href="#">Student Attendance</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExport" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            
-              <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
+	<div id="container" style="width: 95%">
 
-            <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=progressReport" style="font-size: 12px;">Generate Marks Card</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="Controller?process=AccountProcess&action=generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="incomestatement.jsp" style="font-size: 12px;">Income Statement</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="trialbalance.jsp" style="font-size: 12px;">Trial Balance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="Controller?process=AccountProcess&action=balanceSheet" style="font-size: 12px;">Balance Sheet</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-                       
-            
-            <h5 class="sideaccordian" ><a href="#" >Stock</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=currentStock" style="font-size: 12px;">Stock Quantity Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=batchStock" style="font-size: 12px;">Stock Price Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="Controller?process=MessItemsProcess&action=issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=receiveStock" style="font-size: 12px;">Stock Received Report</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div>
-            
-            </div>
-                   
-            
-            <!-- END -->
+
+
+		<h5 class="sideaccordian">
+			<a href="#">Queries</a>
+		</h5>
+		<div style="padding-left: 0px; padding-right: 0px;">
+			<table style="border-collapse: collapse; width: 100%">
+
+				<tr>
+					<td
+						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
+						<a target="mainFrame"
+						href="Controller?process=QueryProcess&action=queryReport"
+						style="font-size: 12px;">Queries Report</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+
+
+
+
+		<h5 class="sideaccordian">
+			<a href="#">Appointments</a>
+		</h5>
+		<div style="padding-left: 0px; padding-right: 0px;">
+			<table style="border-collapse: collapse; width: 100%">
+
+				<tr>
+					<td
+						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
+						<a target="mainFrame"
+						href="Controller?process=AppointmentProcess&action=appointmentReport"
+						style="font-size: 12px;">Appointments Report</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
+
+
+	<!-- END -->
            
        
         <script type="text/javascript">
-            $(document).ready(function() {
+									$(document).ready(function() {
 
-                $('#Notification')
-                        .jnotifyInizialize({
-                    oneAtTime: false,
-                    appendType: 'append'
+										$('#Notification').jnotifyInizialize({
+											oneAtTime : false,
+											appendType : 'append'
 
-                })
-                        .css({'position': 'absolute',
-                    'marginTop': '200px',
-                    'left': '0px',
-                    'width': '175px',
-                    'height': '40px',
-                    'z-index': '9999'
-                });
-                // --------------------------------------------------------------------------
+										}).css({
+											'position' : 'absolute',
+											'marginTop' : '200px',
+											'left' : '0px',
+											'width' : '175px',
+											'height' : '40px',
+											'z-index' : '9999'
+										});
+										// --------------------------------------------------------------------------
 
-                // For add a notification on button click
-                // Parameter:
-                // text: Html do you want to show
-                // type: 'message' or 'error'
-                // permanent: True if you want to make a message permanent
-                // disappearTime: Time spent before closing message
+										// For add a notification on button click
+										// Parameter:
+										// text: Html do you want to show
+										// type: 'message' or 'error'
+										// permanent: True if you want to make a message permanent
+										// disappearTime: Time spent before closing message
 
-
-
-
-                // -----------------------------------------------------
-            });
-        </script>
+										// -----------------------------------------------------
+									});
+								</script>
 
 
         <div id="n1" class="noti_bubble">

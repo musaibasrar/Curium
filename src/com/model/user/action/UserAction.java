@@ -34,9 +34,16 @@ public class UserAction {
 				url = searchByDate();
 			} else if (action.equalsIgnoreCase("sessionTimeOut")) {
 	            url = sessionTimeOut();
-	        }
+	        }else if (action.equalsIgnoreCase("advanceMainSearch")) {
+				url = advanceMainSearch();
+			}
 	       return url;
 	       
+	}
+
+	private String advanceMainSearch() {
+		new UserService(request, response).mainAdvanceSearch();
+        return "advanceSearchResult.jsp";
 	}
 
 	private String sessionTimeOut() {

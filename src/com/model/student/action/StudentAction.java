@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.employee.service.EmployeeService;
 import com.model.stampfees.service.StampFeesService;
 import com.model.std.service.StandardService;
 import com.model.student.service.StudentService;
@@ -77,12 +78,29 @@ public class StudentAction {
                     url = advanceSearchStudents();
                 }else if (action.equalsIgnoreCase("multiClassSearch")) {
                     url = multiClassSearch();
+                }else if (action.equalsIgnoreCase("mainAdvanceSearchStudents")) {
+                    url = mainAdvanceSearchStudents();
+                }else if (action.equalsIgnoreCase("downloadImportTemplate")) {
+                    url = downlaodImportTemplate();
             }
                 return url;
         }
         
 
-    private String multiClassSearch() {
+		private String downlaodImportTemplate() {
+			if (new StudentService(request, response).downlaodImportTemplate()) {
+				return "exportsuccess.jsp";
+					}
+				return "exportfailure.jsp";
+			}
+
+	private String mainAdvanceSearchStudents() {
+		new StandardService(request, response).viewClasses();
+		new EmployeeService(request, response).viewDepartments();
+		return "MainSearch.jsp";
+	}
+
+	private String multiClassSearch() {
 
         new StampFeesService(request, response).multiClassSearch();
         return "studentsdetailsreports.jsp";

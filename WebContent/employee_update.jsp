@@ -290,6 +290,13 @@
 		});
 
 	});
+	function disableDepartment() {
+		document.getElementById('department').disabled = true;
+	}
+	
+	function enableDepartment() {
+		document.getElementById('department').disabled = false;
+	}
 </script>
 </head>
 <%
@@ -315,9 +322,6 @@ for(Cookie cookie : cookies){
 			<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Employee Details</a></li>
-					<li><a href="#tabs-2">Bank Details</a></li>
-					<li><a href="#tabs-3">Additional Details</a></li>
-
 				</ul>
 
 
@@ -350,14 +354,14 @@ for(Cookie cookie : cookies){
 									data-validate="validate(required)">
 							</label></td>
 
-							<td width="16%" class="alignRight">Gender &nbsp;</td>
+							<td width="16%" class="alignRight">Module &nbsp;</td>
 
-							<td width="16%" class="alignLeft">Male<input type="checkbox"
-								value="male" name="gender" id="yes:male" onclick="yesCheck();"
-								${employee.gender == 'male' ? 'checked' : ''} />&nbsp;
-								&nbsp;Female<input type="checkbox" value="female" name="gender"
-								id="no:female" onclick="noCheck()"
-								${employee.gender == 'female' ? 'checked' : ''} />
+							<td width="16%" class="alignLeft">Queries<input type="checkbox"
+								value="queries" name="gender" id="yes:queries" onclick="yesCheck();enableDepartment()"
+								${employee.gender == 'queries' ? 'checked' : ''} />&nbsp;
+								&nbsp;Female<input type="checkbox" value="appointments" name="gender"
+								id="no:queries" onclick="noCheck();disableDepartment()"
+								${employee.gender == 'appointments' ? 'checked' : ''} />
 							</td>
 
 						</tr>
@@ -368,99 +372,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
-						<tr>
-							<td width="20%" class="alignRight">Address &nbsp;</td>
-							<td width="28%"><label> <input name="address"
-									type="text" class="textField"
-									value="<c:out default="" value="${employee.address}" />"
-									id="address" size="30">
-
-							</label></td>
-
-							<td width="16%" class="alignRight">Contact Number&nbsp;</td>
-
-							<td align="left"><label> <input name="contactnumber"
-									type="text" class="textField"
-									value="<c:out default="" value="${employee.contactnumber}" />"
-									id="contactnumber" size="30">
-
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td width="16%" class="alignRight">Email&nbsp;</td>
-
-							<td align="left"><label> <input name="email"
-									type="text" class="textField"
-									value="<c:out default="" value="${employee.email}" />"
-									id="email" size="30">
-
-							</label></td>
-							<td width="20%" class="alignRight">Date Of Joining &nbsp;</td>
-							<td width="28%"><label> 
-										<input name="dateofjoining"
-									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="yyyy-MM-dd"/>"
-									class="textField" id="datepicker" size="36"
-									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
-							
-						<%-- 	<input name="dateofjoining"
-									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd-MM-yyyy"/>" 
-									class="textField" id="datepicker" size="30"
-									data-validate="validate(required)"> --%>
-							</label></td>
-
-
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-
-						<tr>
-
-
-							<td width="16%" class="alignRight">Total Eperience&nbsp;</td>
-							<td align="left"><label> <input
-									name="totalexperience" type="text" class="textField"
-									value="<c:out default="" value="${employee.totalexperience}" />"
-									id="totalexperience" size="30"
-									data-validate="validate(required)">
-
-							</label></td>
-							<td width="16%" class="alignRight">Qualification &nbsp;</td>
-
-							<td align="left"><label> <input name="qualification"
-									type="text" class="textField"
-									value="<c:out default="" value="${employee.qualification}" />"
-									id="qualification" size="30" data-validate="validate(required)">
-
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-
+						
 
 						<tr>
 							<td width="16%" class="alignRight">Department&nbsp;</td>
@@ -482,45 +394,7 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 
-
-
-							<td width="20%" class="alignRight">Designation &nbsp;</td>
-
-							<td width="28%"><label> <select name="designation"
-									id="designation" style="width: 240px"">
-										<option selected>
-											<c:out default="" value="${employee.designation}" />
-										</option>
-
-										<c:forEach items="${listPosition}" var="listPosition">
-
-											<option>
-												<c:out value="${listPosition.positionname}" />
-											</option>
-
-
-										</c:forEach>
-
-								</select>
-
-							</label></td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-
-
-
-						<tr>
-
-							<td width="16%" class="alignRight">Current Employee &nbsp;</td>
+						<td width="16%" class="alignRight">Current Employee &nbsp;</td>
 
 							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
 								type="checkbox" value="1" name="currentemployee" id="yes:employee"
@@ -528,6 +402,24 @@ for(Cookie cookie : cookies){
 								type="checkbox" value="0" name="currentemployee" id="no:employee"
 								onclick="noCheck(this.id);" ${employee.currentemployee == '0' ? 'checked' : ''}/>
 							</td>
+
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+
+
+
+						<tr>
+
+							
 
 							<td width="16%" class="alignRight">Remarks&nbsp;</td>
 
@@ -551,21 +443,6 @@ for(Cookie cookie : cookies){
 					<table id="table2" width="30%" border="0" align="center">
 
 						<tr>
-
-							<td></td>
-
-						</tr>
-						<tr>
-										<td align="center"><a class="nexttab"
-											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Next</a></td>
-									</tr>
-						<tr>
-
-							<td></td>
-
-						</tr>
-						<tr>
 							<td align="center">
 
 								<button id="set1" class="set">Update</button>
@@ -577,168 +454,6 @@ for(Cookie cookie : cookies){
 
 					</table>
 				</div>
-
-				<div id="tabs-2">
-					<table width="70%" border="0" align="center" id="table1">
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td width="16%" class="alignRight">Bank Name &nbsp;</td>
-							<td width="28%">
-								<label><input
-									name="bankname" type="text" style="text-transform:uppercase"
-									value="<c:out value="${employee.bankname}" />"
-									class="textField" id="bankname" size="30"
-									data-validate="validate(required)">
-							</label></td>
-
-							<td width="16%" class="alignRight">Bank IFSC &nbsp;</td>
-
-							<td width="16%" class="alignLeft"><label><input
-									name="bankifsc" type="text" style="text-transform:uppercase"
-									value="<c:out value="${employee.bankifsc}" />"
-									class="textField" id="bankifsc" size="30"
-									data-validate="validate(required)">
-							</label>
-							</td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td width="20%" class="alignRight">Account Number &nbsp;</td>
-							<td width="28%"><label> <input name="accno"
-									type="text" class="textField"
-									value="<c:out default="" value="${employee.accno}" />"
-									id="accno" size="30">
-							</label></td>
-						</tr>
-
-						<tr>
-							<td></td>
-						</tr>
-						
-					</table>
-
-					<table id="table2" width="30%" border="0" align="center">
-
-						<tr>
-
-							<td></td>
-
-						</tr>
-						<tr>
-											
-										<td align="center">
-										<a class="nexttab"
-											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;
-										<a class="prevtab"
-											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Previous</a></td>
-									</tr>
-						<tr>
-
-							<td></td>
-
-						</tr>
-						<tr>
-							<td align="center">
-
-								<button id="set2" class="set">Update</button>
-
-							</td>
-							<td><button type="submit" id="cancel" class="cancel">Cancel</button></td>
-						</tr>
-
-
-					</table>
-				</div>
-				
-				<div id="tabs-3">
-					<table width="70%" border="0" align="center" id="table1">
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td width="16%" class="alignRight">Date of Leaving &nbsp;</td>
-							<td width="28%">
-								<label>
-								<input name="leavingdate"
-									type="text" value="${employee.leavingdate}"
-									class="textField" id="datepickerleaving" size="30"
-									data-validate="validate(required)">
-							</label></td>
-
-						</tr>
-						
-						<tr>
-							<td></td>
-						</tr>
-						
-					</table>
-
-					<table id="table2" width="30%" border="0" align="center">
-
-						<tr>
-
-							<td></td>
-
-						</tr>
-						
-						<tr>
-									
-										<td align="right">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<a class="prevtab"
-											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="#">Previous</a></td>
-									</tr>
-									
-						<tr>
-
-							<td></td>
-
-						</tr>
-						<tr>
-							<td align="center">
-
-								<button id="set3" class="set">Update</button>
-
-							</td>
-							<td><button type="submit" id="cancel3" class="cancel">Cancel</button></td>
-						</tr>
-
-
-					</table>
-				</div>
-				
 			</div>
 
 
