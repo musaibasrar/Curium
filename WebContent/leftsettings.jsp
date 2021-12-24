@@ -340,14 +340,13 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=YearProcess&action=updateYear" style="font-size: 12px;">Academic year</a><br/>
-                <a target="mainFrame" href="Controller?process=PeriodProcess&action=periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Class</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=ClassProcess&action=viewClasses" style="font-size: 12px;">Add Classes</a><br/>
             </div>
-            
+            <!-- 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             <div>
                 <a target="mainFrame" href="Controller?process=FeesProcess&action=feesView" style="font-size: 12px;">Fees Category</a><br/>
@@ -367,20 +366,20 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div>
-            
+             
               <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
 				<a target="mainFrame" href="Controller?process=ClassProcess&action=classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
             </div>
-            
-            <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
+            -->
+            <h5 style="font-size: 12px"><a href="#">Login</a></h5>
             <div>
                 
                 <a target="mainFrame" href="Controller?process=DepartmentProcess&action=departmentView" style="font-size: 12px;">Add Department</a><br/>
-                <a target="mainFrame" href="Controller?process=PositionProcess&action=positionView" style="font-size: 12px;">Add Position</a><br/>
+                <!-- <a target="mainFrame" href="Controller?process=PositionProcess&action=positionView" style="font-size: 12px;">Add Position</a><br/> -->
             </div>
 
-            <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
                 <a target="mainFrame" href="Controller?process=AccountProcess&action=getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
@@ -395,7 +394,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="Controller?process=HrProcess&action=basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
                 <a target="mainFrame" href="Controller?process=HrProcess&action=pfSettings" style="font-size: 12px;">PF Settings</a><br/>
-            </div>
+            </div> -->
             
               <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
             <div>

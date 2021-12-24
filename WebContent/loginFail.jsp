@@ -124,10 +124,10 @@ form{
                     window.open('index_superadmin.jsp','_self');
                 }else if(type=='admin'){
                     window.open('index_admin.jsp','_self');
-                }else if(type=='feescollector'){
-                    window.open('index_feescollector.jsp','_self');
-                }else if(type=='staff'){
-                	window.open('index.jsp','_self');
+                }else if(type=='queries'){
+                	window.open('index_queries.jsp','_self');
+                }else if(type=='appointments'){
+                    window.open('index_appointments.jsp','_self');
                 }
             }
             else if(!flag1){
