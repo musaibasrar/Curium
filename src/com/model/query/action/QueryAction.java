@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.appointment.service.AppointmentService;
 import com.model.department.service.DepartmentService;
 import com.model.query.service.QueryService;
 import com.model.student.service.StudentService;
@@ -55,11 +56,38 @@ public class QueryAction {
 			url = generateQueriesReport();
 		}else if (action.equalsIgnoreCase("printQueriesReport")) {
 			url = printQueriesReport();
+		}else if (action.equalsIgnoreCase("feedback")) {
+			url = feedback();
+		}else if (action.equalsIgnoreCase("download")) {
+			url = download();
+		}else if (action.equalsIgnoreCase("exportQueriesReport")) {
+			url = exportQueriesReport();
 		}
 		return url;
 	}
 	
 	
+	private String download() {
+		if(new QueryService(request, response).download()) {
+			return "exportsuccessquery.jsp";
+		}
+		return "exportfailure.jsp";
+	}
+
+	private String exportQueriesReport() {
+		new QueryService(request, response).exportQueriesReport();
+		return "exportsuccessquery.jsp";
+	}
+
+	private String feedback() {
+		
+		if(new QueryService(request, response).feedback()) {
+			return "feedbackthankyou.jsp";	
+		}else {
+		return "feedbackthankyoufail.jsp";
+		}
+	}
+
 	private String printQueriesReport() {
 		return "printqueriesreport.jsp";
 	}

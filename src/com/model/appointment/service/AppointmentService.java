@@ -1,5 +1,9 @@
 package com.model.appointment.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -7,18 +11,26 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import com.model.appointment.dao.AppointmentDAO;
 import com.model.appointment.dto.Appointment;
 import com.model.parents.dto.Parents;
-import com.model.query.dao.QueryDAO;
+import com.model.sendsms.service.SmsService;
 import com.util.DataUtil;
 import com.util.DateUtil;
 
@@ -27,6 +39,7 @@ public class AppointmentService {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession httpSession;
+	private static final int BUFFER_SIZE = 4096;
 
 	public AppointmentService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -41,6 +54,10 @@ public class AppointmentService {
 		String[] studentId = request.getParameterValues("studentIDs");
 		String appointmentDate = request.getParameter("appointmentdate");
 		String appointmentTime = request.getParameter("appointmenttime");
+		String[] pidContact = studentId[0].split(":");
+		String[] apptDate = appointmentDate.split("-");
+		String appointmentDateParent = apptDate[2]+"/"+apptDate[1]+"/"+apptDate[0];
+		System.out.println("Date "+appointmentDateParent);
 		
 		if(httpSession.getAttribute("branchid")!=null){
 	
@@ -53,7 +70,7 @@ public class AppointmentService {
 					appointment.setStatus("Scheduled");
 					//appointment.setStdid(1);
 					Parents parent = new Parents();
-					parent.setPid(Integer.parseInt(studentId[0]));
+					parent.setPid(Integer.parseInt(pidContact[0]));
 					appointment.setParent(parent);
 					
 					String[] starttimeSplit = appointmentTime.split(":");
@@ -80,7 +97,16 @@ public class AppointmentService {
 						    meridian = "PM";
 						  }
 				appointment.setAppointmenttime(outputStartTime+" "+meridian);		  
-				result = new AppointmentDAO().addAppointment(appointment);
+				String resultQuery = new AppointmentDAO().addAppointment(appointment);
+				String sendAppointmentSMS = new DataUtil().getPropertiesValue("sendappointmentsms");
+				
+				if(resultQuery!=null && "yes".equalsIgnoreCase(sendAppointmentSMS)) {
+					result = true;
+					 String feedbacklink = new DataUtil().getPropertiesValue("feedbacklink");
+					 String message = "Your appt. with appt. no "+resultQuery+" has been scheduled on "+appointmentDateParent+" at "+appointment.getAppointmenttime()+".";
+					 new SmsService(request, response).sendSMS("91"+pidContact[1], message);
+				}
+				
 				}
 		
 		return result;
@@ -136,7 +162,7 @@ public class AppointmentService {
 		
 		String[] appointmentIds = request.getParameterValues("appointmentids");
 		List<Integer> appointmentIdsList = new ArrayList<Integer>();
-		boolean result = false;
+		List<Appointment> result = new ArrayList<Appointment>();
 		
 		if(appointmentIds!=null) {
 			for (String ids : appointmentIds) {
@@ -144,7 +170,15 @@ public class AppointmentService {
 			}
 			
 			result = new AppointmentDAO().cancelAppointments(appointmentIdsList);
-			request.setAttribute("appointmentstatus",result);
+			String sendCancelAppointmentSMS = new DataUtil().getPropertiesValue("sendcancelappointmentsms");
+			if(!result.isEmpty() && "yes".equalsIgnoreCase(sendCancelAppointmentSMS)) {
+				for (Appointment appointment : result) {
+					 String message = "Your appointment with appt. no. "+appointment.getExternalid()+" has been cancelled.";
+					 new SmsService(request, response).sendSMS("91"+appointment.getParent().getContactnumber(), message);
+				}
+				request.setAttribute("appointmentstatus",true);
+			}
+			
 		}
 		
 	}
@@ -259,6 +293,113 @@ public class AppointmentService {
 		
 		request.setAttribute("monthlytotalappointments", totalAppointments);
 		request.setAttribute("monthlistappointment", monthList);
+	}
+
+	public boolean exportAppointmentsReport() {
+		
+		
+		List<Appointment> apptList = (List<Appointment>) httpSession.getAttribute("appointmentList");
+	
+			boolean writeSucees = false;
+			
+			try {
+
+				// Creating an excel file
+				XSSFWorkbook workbook = new XSSFWorkbook();
+				XSSFSheet sheet = workbook.createSheet("ListOfAppointments");
+				Map<String, Object[]> data = new HashMap<String, Object[]>();
+				Map<String, Object[]> headerData = new HashMap<String, Object[]>();
+				headerData.put("Header",
+						new Object[] { "Appt. UID", "Appt. No.", "Appointment Date", "Admission Number", "Student Name",
+								"Class", "Father Name", "Status"});
+				int i = 1;
+				for (Appointment appointmentDetails : apptList) {
+					data.put(Integer.toString(i),
+							new Object[] { DataUtil.emptyString(Integer.toString(appointmentDetails.getId())),  DataUtil.emptyString(appointmentDetails.getExternalid()),
+									 DataUtil.emptyString(DateUtil.getStringDate(appointmentDetails.getAppointmentdate())),
+									 DataUtil.emptyString(appointmentDetails.getParent().getStudent().getAdmissionnumber()),
+									 DataUtil.emptyString(appointmentDetails.getParent().getStudent().getName()),
+									 DataUtil.emptyString(appointmentDetails.getParent().getStudent().getClassstudying().replace("--", " ")),
+									 DataUtil.emptyString(appointmentDetails.getParent().getFathersname()),
+									 DataUtil.emptyString(appointmentDetails.getStatus()) });
+					i++;
+				}
+				Row headerRow = sheet.createRow(0);
+				Object[] objArrHeader = headerData.get("Header");
+				int cellnum1 = 0;
+				for (Object obj : objArrHeader) {
+					Cell cell = headerRow.createCell(cellnum1++);
+					if (obj instanceof String)
+						cell.setCellValue((String) obj);
+				}
+				Set<String> keyset = data.keySet();
+				int rownum = 1;
+				for (String key : keyset) {
+					Row row = sheet.createRow(rownum++);
+					Object[] objArr = data.get(key);
+					int cellnum = 0;
+					for (Object obj : objArr) {
+						Cell cell = row.createCell(cellnum++);
+						if (obj instanceof Date)
+							cell.setCellValue((Date) obj);
+						else if (obj instanceof Boolean)
+							cell.setCellValue((Boolean) obj);
+						else if (obj instanceof String)
+							cell.setCellValue((String) obj);
+						else if (obj instanceof Double)
+							cell.setCellValue((Double) obj);
+					}
+				}
+					FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/appointmentreport.xlsx"));
+					workbook.write(out);
+					out.close();
+					writeSucees = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return writeSucees;
+			// getFile(name, path);
+		
+	}
+
+	public boolean download() {
+		boolean result = false;
+		try {
+
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/appointmentreport.xlsx");
+	        FileInputStream inStream = new FileInputStream(downloadFile);
+
+	        // get MIME type of the file
+			String mimeType = "application/vnd.ms-excel";
+
+			// set content attributes for the response
+			response.setContentType(mimeType);
+			// response.setContentLength((int) bis.length());
+
+			// set headers for the response
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"",
+					"appointmentreport.xlsx");
+			response.setHeader(headerKey, headerValue);
+
+			// get output stream of the response
+			OutputStream outStream = response.getOutputStream();
+
+			byte[] buffer = new byte[BUFFER_SIZE];
+			int bytesRead = -1;
+
+			// write bytes read from the input stream into the output stream
+			while ((bytesRead = inStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+
+			inStream.close();
+			outStream.close();
+			result = true;
+		} catch (Exception e) {
+			System.out.println("" + e);
+		}
+		return result;
 	}
 	
 }

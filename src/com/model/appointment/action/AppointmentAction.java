@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.model.appointment.service.AppointmentService;
+import com.model.query.service.QueryService;
 import com.model.student.service.StudentService;
 
 /**
@@ -44,11 +45,27 @@ public class AppointmentAction {
 			url = generateAppointmentsReport();
 		}else if (action.equalsIgnoreCase("printAppointmentsReport")) {
 			url = printAppointmentsReport();
+		}else if (action.equalsIgnoreCase("exportAppointmentsReport")) {
+			url = exportAppointmentsReport();
+		}else if (action.equalsIgnoreCase("download")) {
+			url = download();
 		}
 		return url;
 	}
 	
 	
+	private String download() {
+		if(new AppointmentService(request, response).download()) {
+			return "exportsuccessappointment.jsp";
+		}
+		return "exportfailure.jsp";
+	}
+
+	private String exportAppointmentsReport() {
+		new AppointmentService(request, response).exportAppointmentsReport();
+		return "exportsuccessappointment.jsp";
+	}
+
 	private String printAppointmentsReport() {
 		return "printappointmentsreport.jsp";
 	}

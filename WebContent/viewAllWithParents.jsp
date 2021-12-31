@@ -6,9 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -449,7 +449,10 @@ for(Cookie cookie : cookies){
                 The when condition does not display a link for the current page--%>
                 <table border="0" cellpadding="5" cellspacing="5">
                     <tr>
-                        <c:forEach begin="1" end="${noOfPages}" var="i">
+                        <c:forEach begin="1" end="${noOfPages}" var="i" varStatus="status">
+                         <c:if test="${status.index % 30 == 1}">
+                       		 <tr>
+ 								</c:if>
                             <c:choose>
                                 <c:when test="${currentPage eq i}">
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
@@ -458,6 +461,9 @@ for(Cookie cookie : cookies){
                                     <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="Controller?process=StudentProcess&action=viewAll&page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
+                              <c:if test="${status.index % 30 == 0 || status.index == noOfPages}">
+ 								   	 </tr>
+ 								   </c:if>
                         </c:forEach>
                     </tr>
                 </table>

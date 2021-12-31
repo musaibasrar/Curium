@@ -466,9 +466,30 @@
 
          });
 		 
+		 
+		 $("#export").button({
+             icons:{
+                 primary: "ui-icon-document"
+             }
+         }).click(function(){
+             exportRecords();
+             return false;
+
+         });
+		 
          
      });
      
+	 
+	 
+	 function exportRecords() {
+			var form1 = document.getElementById("form1");
+			form1.action = "Controller?process=AppointmentProcess&action=exportAppointmentsReport";
+			form1.method = "POST";
+			form1.submit();
+		}
+	 
+	 
 	 function printRecords() {
 			var form1 = document.getElementById("form1");
 			form1.action = "Controller?process=AppointmentProcess&action=printAppointmentsReport";
@@ -652,6 +673,8 @@ for(Cookie cookie : cookies){
 				<thead>
 				
                         <tr>
+                        	<th title="click to sort" class="headerText">Appt. UID</th>
+                        	<th title="click to sort" class="headerText">Appt. No.</th>
                             <th title="click to sort" class="headerText">Appointment Date</th>
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Student Name</th>
@@ -664,8 +687,10 @@ for(Cookie cookie : cookies){
                     <tbody>
                         <c:forEach items="${appointmentList}" var="appointment">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                            	<td class="dataText"><c:out value="${appointment.id}"/></td>
+                            	<td class="dataText"><c:out value="${appointment.externalid}"/></td>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${appointment.appointmentdate}"/></td>
-                                 <td class="dataText"><c:out value="${appointment.parent.student.admissionnumber}"/></td>
+                                <td class="dataText"><c:out value="${appointment.parent.student.admissionnumber}"/></td>
                                 <td class="dataText"><c:out value="${appointment.parent.student.name}"/></td>
                                 <td class="dataText">
 		                                <c:forEach var="splt" items="${fn:split(appointment.parent.student.classstudying,'--')}">
@@ -685,6 +710,7 @@ for(Cookie cookie : cookies){
 						<tr>
                     		<td class="footerTD"  colspan="8">
                     		<button id="print">Print</button> 
+                    		<button id="export">export</button> 
                     		&nbsp;&nbsp;&nbsp;
                     		<!-- <button id="approve">Approve</button>
                     		&nbsp;&nbsp;&nbsp;

@@ -39,8 +39,9 @@ public class AppointmentDAO {
 	}
 
 
-		public boolean addAppointment(Appointment appointment) {
+		public String addAppointment(Appointment appointment) {
 		
+			String resultString = null;
 			try {
 					transaction = session.beginTransaction();
 					
@@ -64,13 +65,13 @@ public class AppointmentDAO {
 					 	
 					session.save(appointment);
 					transaction.commit();
-				return true;
+					resultString = appointment.getExternalid();
 			} catch (Exception e) { transaction.rollback(); logger.error(e);
 				e.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
 			}
-			return false;
+			return resultString;
 		}
 
 
@@ -82,7 +83,7 @@ public class AppointmentDAO {
 			try {
 				
 				transaction = session.beginTransaction();
-				Query query = session.createQuery("From Appointment as appointment where appointment.branchid = "+branchId+" order by appointment.appointmentdate desc").setCacheable(true).setCacheRegion("commonregion");
+				Query query = session.createQuery("From Appointment as appointment where appointment.branchid = "+branchId+" order by appointment.id desc").setCacheable(true).setCacheRegion("commonregion");
 				query.setFirstResult(offset);   
 				query.setMaxResults(noOfRecords);
 				results = query.getResultList();
@@ -172,19 +173,22 @@ public class AppointmentDAO {
 		}
 
 
-		public boolean cancelAppointments(List<Integer> appointmentIdsList) {
+		public List<Appointment> cancelAppointments(List<Integer> appointmentIdsList) {
 			
-			boolean result = false;
+			List<Appointment> result = new ArrayList<Appointment>();
 			try {
 				transaction = session.beginTransaction();
 				
 				for (Integer appId : appointmentIdsList) {
+					Appointment app = new Appointment();
 					Query query = session.createQuery("update Appointment set status = 'Cancelled' where id="+appId+"");
 					query.executeUpdate();
+					Query queryApp = session.createQuery("from Appointment where id="+appId+"");
+					app = (Appointment) queryApp.uniqueResult();
+					result.add(app);
 				}
 				
 				transaction.commit();
-				result = true;
 			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 				hibernateException.printStackTrace();
 			}finally {

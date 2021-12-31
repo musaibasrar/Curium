@@ -417,8 +417,7 @@
 			form1.method = "POST";
 			form1.submit();
 		}
-		
-		
+
 	</script>
 	
 	 <script type="text/javascript">
@@ -607,7 +606,10 @@ for(Cookie cookie : cookies){
                     <thead>
                         <tr  >
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
-                            <th title="click to sort" class="headerText">Date</th>
+                            <th title="click to sort" class="headerText">Query UID</th>
+                            <th title="click to sort" class="headerText">Query No.</th>
+                            <th title="click to sort" class="headerText">Created Date</th>
+                            <th title="click to sort" class="headerText">Updated Date</th>
                             <th title="click to sort" class="headerText">Department</th>
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Student Name</th>
@@ -623,10 +625,15 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${queryList}" var="query">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${query.id}"/>" class = "chcktbl"  name="queryids"  value="<c:out value="${query.id}"/>"/></td>
+                                 <td class="dataText"><c:out value="${query.id}"/></td>
+                                 <td class="dataText"><c:out value="${query.externalid}"/></td>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
-                                 <td class="dataText"><c:out value="${query.department.departmentname}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
+                                <td class="dataText"><c:out value="${query.department.departmentname}"/></td>
                                 <td class="dataText"><c:out value="${query.parent.student.admissionnumber}"/></td>
-                                <td class="dataText"><c:out value="${query.parent.student.name}"/></td>
+                                <td class="dataText"><c:out value="${query.parent.student.name}"/>
+	                                <input type="hidden" id="contactno_${query.id}" name="contactno_${query.id}" value="${query.parent.contactnumber}">
+                                </td>
                                 <td class="dataText">
                                 <c:forEach var="splt" items="${fn:split(query.parent.student.classstudying,'--')}">
 						    		${splt} 

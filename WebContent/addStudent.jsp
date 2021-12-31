@@ -553,10 +553,10 @@
 				<ul>
 					<li><a href="#fragment-1">Student's Details</a></li>
 					<li><a href="#fragment-2">Parent's Details</a></li>
-					<li><a href="#fragment-3">Upload Photo</a></li>
-					<li><a href="#fragment-5">Previous School Details</a></li>
-					<li><a href="#fragment-4">Additional Details</a></li>
-					<li><a href="#fragment-6">Bank Details</a></li>
+					<li style="display: none;"><a href="#fragment-3">Upload Photo</a></li>
+					<li style="display: none;"><a href="#fragment-5">Previous School Details</a></li>
+					<li style="display: none;"><a href="#fragment-4">Additional Details</a></li>
+					<li style="display: none;"><a href="#fragment-6">Bank Details</a></li>
 				</ul>
 
 
@@ -577,29 +577,23 @@
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
 
 							</label></td>
-							<td width="16%" class="alignRight">STS Number &nbsp;</td>
-
-									<td width="28%"><label> <input
-											name="sts" type="text" class="myclass" size="30"
-											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-											id="sts" size="30">
-
-									</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
 							<td width="30%" class="alignRight">Student Name* &nbsp;</td>
 							<td width="30%" align="left"><label> <input
 									name="name" type="text" class="myclass" id="name" size="30" required
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									required>
 							</label></td>
+							
+						</tr>
+						<tr style="display: none;">
+							<td><br /></td>
+						</tr>
+						<tr style="display: none;">
+							<td><br /></td>
+						</tr>
+						
+						<tr style="display: none;">
+							
 
 							<td width="30%" class="alignRight">Gender &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft">&nbsp;Male<input
@@ -612,16 +606,15 @@
 
 
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 
-						<tr>
-						<tr>
+						<tr style="display: none;">
 							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
 							<td width="28%"><label> <input name="dateofbirth"
 									type="text" class="myclass" id="datepicker" size="30" autocomplete="false"
@@ -648,7 +641,7 @@
 						</tr>
 
 
-						<tr>
+						<tr style="display: none;">
 
 							<td width="30%" class="alignRight">Place Of Birth, Tq,
 								Dist.&nbsp;</td>
@@ -663,16 +656,14 @@
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									data-validate="validate(required)"> </label></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 
 						<tr>
-
-
 							<td class="alignRight">Studying in Class&nbsp;</td>
 							<td width="28%"><label> <select name="addclass"
 									id="addclass" style="width: 128px;">
@@ -700,10 +691,10 @@
 								</select>
 							</label></td>
 
-							<td width="16%" class="alignRight">Admitted in Class &nbsp;
+							<td style="display: none;" width="16%" class="alignRight">Admitted in Class &nbsp;
 							</td>
 
-							<td width="28%"><label> <select name="admclassE"
+							<td width="28%"  style="display: none;"><label> <select name="admclassE"
 									id="admclassE" style="width: 128px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -729,14 +720,14 @@
 
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td width="16%" class="alignRight">Blood Group &nbsp;</td>
 
 							<td><label> <select name="bloodgroup"
@@ -771,14 +762,14 @@
 
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 
 
 							<td width="16%" class="alignRight">Religion &nbsp;</td>
@@ -824,13 +815,13 @@
 							</label></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td width="20%" class="alignRight">Students Caste &nbsp;</td>
 							<td width="28%"><label> <input name="studentscaste"
 							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
@@ -850,13 +841,13 @@
 
 							</label></td>
 						</tr>
-						<tr>
+						<tr  style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td width="30%" class="alignRight">Was in receipt of any scholarship&nbsp;</td>
 							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
@@ -874,13 +865,13 @@
 
 							</label></td>
 						</tr>	
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td width="20%" class="alignRight">Whether Vaccinated
 								&nbsp;</td>
 								<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
@@ -898,14 +889,14 @@
 
 							</label></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 						
-						<tr>
+						<tr style="display: none;">
 							<td width="20%" class="alignRight">Special Category&nbsp;</td>
 
 							<td id="categoryname"><label> <select
@@ -950,14 +941,14 @@
 							</label>
 							</td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 									<td><br /></td>
 								</tr>
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
 
-						<tr>
+						<tr style="display: none;">
 						
 							<td width="20%" class="alignRight">RTE
 										&nbsp;</td>
@@ -977,13 +968,13 @@
 							</label></td>
 						</tr>
 
-<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 										
 							<td width="20%" class="alignRight">Created Date &nbsp;</td>
 							<td width="28%"><label> <input name="createddate"
@@ -1013,19 +1004,19 @@
 									<td><br /></td>
 								</tr>
 
-								<tr>
+								<tr style="display: none;">
 
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
 										href="#">Next</a></td>
 								</tr>
 
-								<tr>
+								<tr style="display: none;">
 
 									<td><br /></td>
 								</tr>
 
-								<tr>
+								<tr style="display: none;">
 									<td align="center">
 
 
@@ -1044,7 +1035,7 @@
 
 
 
-						<div id="fragment-3">
+						<div id="fragment-3"  style="display: none;">
 							<table width="100%" border="0" align="center">
 								<tr>
 									<td><br /> <input type="file" name="fileToUpload"
@@ -1110,7 +1101,7 @@
 						</div>
 
 
-						<div id="fragment-4">
+						<div id="fragment-4"  style="display: none;">
 							<table width="100%" border="0" align="center" id="table1">
 								<tr>
 									<td><br /></td>
@@ -1253,7 +1244,7 @@
 						</div>
 
 
-						<div id="fragment-2">
+						<div id="fragment-2" >
 							<table width="100%" border="0" align="center" id="table1">
 								<tr>
 									<td><br /></td>
@@ -1281,8 +1272,6 @@
 
 								</tr>
 
-
-
 								<tr>
 									<td><br /></td>
 								</tr>
@@ -1290,7 +1279,14 @@
 									<td><br /></td>
 								</tr>
 
-								<tr>
+								<tr style="display: none;">
+									<td><br /></td>
+								</tr>
+								<tr style="display: none;">
+									<td><br /></td>
+								</tr>
+
+								<tr style="display: none;">
 									<td class="alignRight">Father's Qualification
 										&nbsp;</td>
 									<td align="left"><label> <input
@@ -1311,13 +1307,13 @@
 
 
 								</tr>
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
-								<tr>
+								<tr style="display: none;">
 									<td class="alignRight">Fathers Occupation
 										&nbsp;</td>
 									<td><label> <input
@@ -1335,14 +1331,14 @@
 									</label></td>
 								</tr>
 
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
 
-								<tr>
+								<tr style="display: none;">
 
 									<td class="alignRight">Guardian's Name &
 										Address &nbsp;</td>
@@ -1366,10 +1362,10 @@
 
 								</tr>
 
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
 
@@ -1397,15 +1393,15 @@
 									</label></td>
 								</tr>
 
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
 
 
-								<tr>
+								<tr style="display: none;">
 
 									<td class="alignRight">Email &nbsp;</td>
 
@@ -1429,14 +1425,13 @@
 
 								</tr>
 
-								<tr>
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
-
+								<tr style="display: none;">
 								<td class="alignRight">Permanent Address &nbsp;</td>
 
 								<td ><label> <textarea
@@ -1456,15 +1451,15 @@
 
 
 
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
-								<tr>
+								<tr style="display: none;">
 									<td><br /></td>
 								</tr>
 
 
-								<tr>
+								<tr style="display: none;">
 
 									<td class="alignRight">Notes &nbsp;</td>
 									<td ><label> <input name="remarksadditional"
@@ -1485,7 +1480,7 @@
 
 
 
-								<tr align="center">
+								<tr align="center" style="display: none;">
 									<td class="alignRight">&nbsp;</td>
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
@@ -1520,7 +1515,7 @@
 							</table>
 						</div>
 						
-						<div id="fragment-5">
+						<div id="fragment-5"  style="display: none;">
 
 							<div>
 								<table width="100%">
@@ -1698,7 +1693,7 @@
 
 						</div>
 						
-						<div id="fragment-6">
+						<div id="fragment-6"  style="display: none;">
 
 							<div>
 								<table width="100%">

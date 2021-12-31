@@ -659,7 +659,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 
-							</label> <label> 
+							</label> <label style="display: none;"> 
 									<select name="addsec" id="addsec" class="dropdown" style="width: 70px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 

@@ -188,12 +188,12 @@ for(Cookie cookie : cookies){
 								View Students
 							</a></td>
 							
-							<td ><a target="mainFrame"
+							<!-- <td ><a target="mainFrame"
 								href="Controller?process=UserProcess&action=dashBoard"><img
 									alt="Dash Board" src="images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
-									</a></td>
+									</a></td> -->
 								
 							<td ><a target="_parent"
 								href="Controller?process=UserProcess&action=logout"><img

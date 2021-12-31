@@ -613,9 +613,7 @@ for(Cookie cookie : cookies){
 						<tr>
 
 							<td width="12%" align="left" class="alignRightFields">In Time &nbsp;</td>
-							<td><label> <input name="intime" id="intime" type="time"
-							</input>
-							
+							<td><label> <input name="intime" id="intime" type="time">
 							 </td>
 						</tr>
 						
@@ -801,8 +799,7 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td class="alignRightFields">Cutoff Time &nbsp;</td>
-							<td width="70%"><label> <input name="cutoff" id="cutoff" type="time"
-								</input>
+							<td width="70%"><label> <input name="cutoff" id="cutoff" type="time">
 							</label>
 							</td>
 						</tr>

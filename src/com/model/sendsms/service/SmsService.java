@@ -190,62 +190,52 @@ public class SmsService {
 	
 	public int sendSMS(String numbers, String message) {
 		int responseCode = 0;
-		try 
-		{
+		try {
 			Properties properties = new Properties();
-	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-	        properties.load(inputStream);
-	        String smsuser = properties.getProperty("smsuser");
-	        String smssender = properties.getProperty("smssender");
-	        String apikey = properties.getProperty("apikey");
-	        
-	      
-		// Construct data
-		String phonenumbers=numbers;
-		String data="username=" + URLEncoder.encode(smsuser, "UTF-8");
-		data +="&message=" + URLEncoder.encode(message, "UTF-8");
-		data +="&sendername=" + URLEncoder.encode(smssender, "UTF-8");
-		data +="&smstype=" + "TRANS";
-		data +="&numbers=" + URLEncoder.encode(phonenumbers, "UTF-8");
-		data +="&apikey=" + apikey;
-		// Send data
-		
-		String POST_URL = "http://sms.bulksmsind.in/sendSMS?"+data;
-        URL obj = new URL(POST_URL);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		con.setRequestMethod("POST");
+			InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
+			properties.load(inputStream);
+			// String smsuser = properties.getProperty("smsuser");
+			String smssender = properties.getProperty("smssender");
+			String apikey = properties.getProperty("apikey");
+			String smsURL = properties.getProperty("smsurl");
+			String channel = properties.getProperty("channel");
+			String route = properties.getProperty("route");
+			String templateString = properties.getProperty("templatestring");
+			String[] templateStringParts = templateString.split(":");
+			int maxChar = Integer.parseInt(properties.getProperty("maxcharacters"));
+			char[] messageChar = message.toCharArray();
+			int messageCharCount = messageChar.length;
+			String rsp = "";
 
-		// For POST only - START
-		con.setDoOutput(true);
-		OutputStream os = con.getOutputStream();
-		os.write("CURIUM".getBytes());
-		os.flush();
-		os.close();
-		// For POST only - END
+			if (messageCharCount <= maxChar) {
 
-		responseCode = con.getResponseCode();
-		logger.info("POST Response Code :: " + responseCode);
-
-		if (responseCode == HttpURLConnection.HTTP_OK) { //success
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					con.getInputStream()));
-			String inputLine;
-			StringBuffer response = new StringBuffer();
-
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
+				String smsMessage = templateStringParts[0] + "," + message;
+				
+				
+				String data = URLEncoder.encode("APIKey", "UTF-8") + "=" + URLEncoder.encode(apikey, "UTF-8");
+				data += "&" + URLEncoder.encode("senderid", "UTF-8") + "=" + URLEncoder.encode(smssender, "UTF-8");
+				data += "&" + URLEncoder.encode("channel", "UTF-8") + "=" + URLEncoder.encode(channel, "UTF-8");
+				data += "&" + URLEncoder.encode("DCS", "UTF-8") + "=" + URLEncoder.encode("0", "UTF-8");
+				data += "&" + URLEncoder.encode("flashsms", "UTF-8") + "=" + URLEncoder.encode("0", "UTF-8");
+				data += "&" + URLEncoder.encode("number", "UTF-8") + "=" + URLEncoder.encode(numbers, "UTF-8");
+				data += "&" + URLEncoder.encode("text", "UTF-8") + "=" + URLEncoder.encode(smsMessage, "UTF-8");
+				data += "&" + URLEncoder.encode("route", "UTF-8") + "=" + URLEncoder.encode(route, "UTF-8");
+				String url1 = smsURL;
+				url1 += "?" + data;
+				URL url = new URL(url1);
+				URLConnection connection = url.openConnection();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				StringBuilder sb = new StringBuilder();
+				String line;
+				  while ((line = reader.readLine()) != null) {
+					  		sb = sb.append(line);
+				  		}
+				  			rsp = sb.toString();
 			}
-			in.close();
-
-			// print result
-			logger.info(response.toString());
-		} else {
-			logger.info("POST request not worked");
-		}}
-		catch (Exception e)
-		{
-		logger.info("Error SMS "+e);
+		} catch (Exception e) {
+			logger.info("Error SMS " + e);
 		}
+
 		return responseCode;
 	}
 	

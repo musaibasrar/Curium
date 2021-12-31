@@ -434,11 +434,11 @@ for(Cookie cookie : cookies){
 			<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Student Details</a></li>
-					<li><a href="#tabs-5">Previous School Details</a></li>
+					<li style="display: none;"><a href="#tabs-5">Previous School Details</a></li>
 					<li><a href="#tabs-2">Parent's Details</a></li>
-					<li><a href="#tabs-3">Upload Photo</a></li>
-					<li><a href="#tabs-4">Additional Details</a></li>
-					<li><a href="#tabs-6">Bank Details</a></li>
+					<li style="display: none;"><a href="#tabs-3">Upload Photo</a></li>
+					<li style="display: none;"><a href="#tabs-4">Additional Details</a></li>
+					<li style="display: none;"><a href="#">Bank Details</a></li>
 				</ul>
 
 
@@ -449,7 +449,7 @@ for(Cookie cookie : cookies){
 				
 				<tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
+                    <%-- <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;"> --%>
                     <input type="hidden" value="<c:out value="${student.studentpic}"/>" id="studentpicupdate" name="studentpicupdate">
                     <input type="hidden" value="<c:out value="${student.passedout}"/>" id="passedout" name="passedout">
                     <input type="hidden" value="<c:out value="${student.droppedout}"/>" id="droppedout" name="droppedout">
@@ -482,18 +482,7 @@ for(Cookie cookie : cookies){
 									id="admnno" size="30" data-validate="validate(required)">
 
 							</label></td>
-							<td width="16%" class="alignRight">STS Number &nbsp;</td>
-
-									<td width="16%"><label> <input
-											name="sts" type="text" class="textField"
-											id="sts" size="36" value="${student.sts}">
-
-									</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
+							
 							<td width="16%" class="alignRight">Name &nbsp;</td>
 							<td width="28%"><input type="hidden" name="id" id="id"
 								value="<c:out value="${student.sid}" />" /><input type="hidden" name="studentexternalid" id="studentexternalid"
@@ -502,86 +491,13 @@ for(Cookie cookie : cookies){
 									value="<c:out value="${student.name}" />" class="textField"
 									id="name" size="30" data-validate="validate(required)">
 							</label></td>
-
-							<td width="16%" class="alignRight">Gender &nbsp;</td>
-
-							<td width="16%" class="alignLeft">Male<input type="checkbox"
-								value="Male" name="gender" id="yes:male" onclick="yesCheck(this.id);"
-								${student.gender == 'Male' ? 'checked' : ''} />&nbsp;
-								&nbsp;Female<input type="checkbox" value="Female" name="gender"
-								id="no:male" onclick="noCheck(this.id);"
-								${student.gender == 'Female' ? 'checked' : ''} />
-
-							</td>
-
-
+							
+							
+							
 						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-
-
-						<tr>
-							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
-							<td width="28%"><label> <input name="dateofbirth" autocomplete="false"
-									type="text" value="<fmt:formatDate value="${student.dateofbirth}" pattern="dd/MM/yyyy"/>"
-									class="textField" id="datepicker" size="30"
-									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
-									
-									
-							</label></td>
-
-							<td width="16%" class="alignRight">Age&nbsp;</td>
-
-							<td align="left"><label> <input name="age"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.age}" />" id="age"
-									size="30">
-
-							</label></td>
-						</tr>
-
-
-<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-							<td width="16%" class="alignRight">Place of birth, Tq, Dist.&nbsp;</td>
-							<td align="left"><label> <input name="place"
-									type="text" class="textField"
-									value="<c:out default="" value="${student.placeofbirth}" />"
-									id="place" size="30" data-validate="validate(required)">
-
-							</label></td>
-							<td width="16%" class="alignRight">Date Of Admission &nbsp;</td>
-
-							<td align="left"><label> <input
-									name="dateofadmission" type="text" class="textField" autocomplete="false"
-									value="<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>"
-									id="dateofadmission" size="30"
-									data-validate="validate(required)">
-
-							</label></td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>		
-						
 						
 						<tr>
 							<td width="16%" class="alignRight">Studying in Class&nbsp;</td>
@@ -618,12 +534,31 @@ for(Cookie cookie : cookies){
 							</label>
 							
 							</td>
+							
+							<%-- <td width="16%" class="alignRight">Remarks&nbsp;</td>
 
+							<td align="left"><label> <input name="remarks"
+									type="text" class="textField"
+									value="<c:out default="" value="${student.remarks}" />"
+									id="remarks" size="30">
 
-
-							<td width="20%" class="alignRight">Admitted in class &nbsp;</td>
-
-							<td width="28%">
+							</label></td> --%>
+							
+						</tr>
+						
+						
+						<tr>
+							<td>
+								<br>
+							</td>
+							
+						</tr>
+						
+						<tr style="display: none;">
+						<td width="20%" class="alignRight">Admitted in class &nbsp;</td>
+						
+						<td width="28%">
+						
 							<label> 
 								<select name="admclass" id="admclass"
 									style="width: 115px;">
@@ -655,18 +590,107 @@ for(Cookie cookie : cookies){
 							
 							
 							</td>
+							
+							<td width="16%" class="alignRight">STS Number &nbsp;</td>
+
+									<td width="16%"><label> <input
+											name="sts" type="text" class="textField"
+											id="sts" size="36" value="${student.sts}">
+
+									</label></td>
+
+							<td width="16%" class="alignRight">Gender &nbsp;</td>
+
+							<td width="16%" class="alignLeft">Male<input type="checkbox"
+								value="Male" name="gender" id="yes:male" onclick="yesCheck(this.id);"
+								${student.gender == 'Male' ? 'checked' : ''} />&nbsp;
+								&nbsp;Female<input type="checkbox" value="Female" name="gender"
+								id="no:male" onclick="noCheck(this.id);"
+								${student.gender == 'Female' ? 'checked' : ''} />
+
+							</td>
+
+
 						</tr>
-
-
-						<tr>
+						<tr style="display: none;">
+							<td><br /></td>
+						</tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 
-						<tr>
+
+
+						<tr style="display: none;">
+							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
+							<td width="28%"><label> <input name="dateofbirth" autocomplete="false"
+									type="text" value="<fmt:formatDate value="${student.dateofbirth}" pattern="dd/MM/yyyy"/>"
+									class="textField" id="datepicker" size="30"
+									onchange="CalculateAge(this)"
+									data-validate="validate(required)">
+									
+									
+							</label></td>
+
+							<td width="16%" class="alignRight">Age&nbsp;</td>
+
+							<td align="left"><label> <input name="age"
+									type="text" class="textField"
+									value="<c:out default="" value="${student.age}" />" id="age"
+									size="30">
+
+							</label></td>
+						</tr>
+
+
+						<tr style="display: none;">
+							<td><br /></td>
+						</tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 						
+						<tr style="display: none;">
+							<td width="16%" class="alignRight">Place of birth, Tq, Dist.&nbsp;</td>
+							<td align="left"><label> <input name="place"
+									type="text" class="textField"
+									value="<c:out default="" value="${student.placeofbirth}" />"
+									id="place" size="30" data-validate="validate(required)">
+
+							</label></td>
+							<td width="16%" class="alignRight">Date Of Admission &nbsp;</td>
+
+							<td align="left"><label> <input
+									name="dateofadmission" type="text" class="textField" autocomplete="false"
+									value="<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>"
+									id="dateofadmission" size="30"
+									data-validate="validate(required)">
+
+							</label></td>
+						</tr>
+
+
 						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>		
+						
+						
+						
+
+
+						<tr style="display: none;">
+							<td><br /></td>
+						</tr>
+
+						<tr style="display: none;">
+							<td><br /></td>
+						</tr>
+						
+						<tr style="display: none;">
 							<td width="16%" class="alignRight">Blood Group &nbsp;</td>
 
 							<td><label> <select name="bloodgroup"
@@ -695,17 +719,17 @@ for(Cookie cookie : cookies){
 							</label></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 
 							<td><br /></td>
 						</tr>
 
 
 
-						<tr>
+						<tr style="display: none;">
 
 
 							<td width="16%" class="alignRight">Religion &nbsp;</td>
@@ -750,14 +774,14 @@ for(Cookie cookie : cookies){
 							</label></td>
 
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 		<td width="20%" class="alignRight">Students Caste &nbsp;</td>
 							<td width="28%"><label> <input name="studentscaste"
 									type="text" class="textField" id="studentscaste" value="${student.studentscaste}" size="36">
@@ -776,16 +800,16 @@ for(Cookie cookie : cookies){
 							</label></td>
 
 	</tr>
-	<tr>
+	<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 
 							<td><br /></td>
 						</tr>
 						
 						
-												<tr>
+												<tr style="display: none;">
 						<td width="30%" class="alignRight">Was in receipt of any scholarship &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
@@ -804,14 +828,14 @@ for(Cookie cookie : cookies){
 						
 						</tr>
 						
-							<tr>
+							<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td width="20%" class="alignRight">Whether Vaccinated
 								&nbsp;</td>
 								<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
@@ -829,15 +853,15 @@ for(Cookie cookie : cookies){
 							</label></td>
 						</tr>
 												
-							<tr>
+							<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td width="20%" class="alignRight">Special Category&nbsp;</td>
 
 							<td id="categoryname"><label> <select
@@ -886,15 +910,15 @@ for(Cookie cookie : cookies){
 
 
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 
 							<td><br /></td>
 						</tr>
 						
-						<tr>
+						<tr style="display: none;">
 
 							<td width="30%" class="alignRight">RTE &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
@@ -915,17 +939,17 @@ for(Cookie cookie : cookies){
 							</tr>
 							
 							
-							<tr>
+							<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 
 							<td><br /></td>
 						</tr>
 
 
 
-						<tr>
+						<tr style="display: none;">
 							<td width="20%" class="alignRight">Created Date &nbsp;</td>
 							<td width="28%"><label> <input name="createddate"
 									type="text" value="<fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>" class="textField"
@@ -934,18 +958,18 @@ for(Cookie cookie : cookies){
 
 							</tr>
 							
-						<tr>
+						<tr style="display: none;">
 
 							<td></td>
 
 						</tr>
-						<tr>
+						<tr style="display: none;">
 
 							<td></td>
 
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 
 							<td></td>
 
@@ -958,7 +982,7 @@ for(Cookie cookie : cookies){
 
 
 
-					<table id="table2" width="30%" border="0" align="center">
+					<!-- <table id="table2" width="30%" border="0" align="center">
 <tr>
 
 									<td><br /></td>
@@ -985,11 +1009,11 @@ for(Cookie cookie : cookies){
 						</tr>
 
 
-					</table>
+					</table> -->
 				</div>
 				
 				
-				<div id="tabs-3">
+				<div id="tabs-3"  style="display: none;">
 					<table width="100%" border="0" align="center" >
 						<tr>
 							<td><br />
@@ -1055,28 +1079,16 @@ for(Cookie cookie : cookies){
 </div>
 
 
-						<div id="tabs-4">
+						<div id="tabs-4"  style="display: none;">
 							<table width="100%" border="0" align="center" id="table1">
-								<tr>
+								<tr  style="display: none;">
 									<td><br /></td>
 								</tr>
 								<tr>
 									<td><br /></td>
 								</tr>
 
-								<tr>
-
-									<td width="30%" class="alignRight"><label> <font
-											color="red"><div id="mydiv"></div></font>
-									</label></td>
-									<td width="20%" class="alignRight"></td>
-									<td class="alignRight"><font color="red"><div
-												id="mydivmobile"></div></font></td>
-								</tr>
-
-
-
-								<tr>
+								<tr  style="display: none;">
 									<td width="30%" class="alignRight">Class on leaving&nbsp;</td>
 									<td width="12%" align="left"><label> <input
 											name="classonleaving" type="text"
@@ -1200,18 +1212,6 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
-
-							<td width="30%" class="alignRight"><label> <font
-									color="red"><div id="mydiv"></div></font>
-							</label></td>
-							<td width="20%" class="alignRight"></td>
-							<td class="alignRight"><font color="red"><div
-										id="mydivmobile"></div></font></td>
-						</tr>
-
-
-
-						<tr>
 							<td width="30%" class="alignRight">Father's Name* &nbsp;</td>
 							<td width="12%" align="left"><input type="hidden"
 								name="idparents" id="idparents"
@@ -1235,14 +1235,14 @@ for(Cookie cookie : cookies){
 
 
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr  style="display: none;">
 							<td><br /></td>
 						</tr>
 						
-						<tr>
+						<tr style="display: none;">
 							<td width="30%" class="alignRight">Father's Qualification &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="fathersqualification" type="text" class="myclass" id="fathersqualification"
@@ -1262,13 +1262,13 @@ for(Cookie cookie : cookies){
 
 
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 						<td width="20%" class="alignRight">Fathers Occupation&nbsp;</td>
 							<td width="28%"><label> <input
 									name="fatherscastecertno" type="text" class="textField" value="${parents.fatherscastecertno}"
@@ -1284,13 +1284,13 @@ for(Cookie cookie : cookies){
 							</label></td>
 						</tr>
 						
-												<tr>
+												<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 
 							<td width="16%" class="alignRight">Guardian's name & address
 								&nbsp;</td>
@@ -1312,10 +1312,10 @@ for(Cookie cookie : cookies){
 							</label></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 
@@ -1349,7 +1349,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 
-						<tr>
+						<tr style="display: none;">
 							<td width="16%" class="alignRight">Email
 								&nbsp;</td>
 
@@ -1369,15 +1369,15 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 
+						</tr>
 
-
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td width="16%" class="alignRight">Permanent Address &nbsp;</td>
 							<td width="28%"><label> <textarea
 										name="permanentaddress" type="text" class="textField"
@@ -1396,15 +1396,15 @@ for(Cookie cookie : cookies){
 
 
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 
 
-						<tr>
+						<tr style="display: none;">
 							
 							<td width="20%" class="alignRight">Notes &nbsp;</td>
 							<td width="28%"><label> <input name="remarksadditional"
@@ -1413,24 +1413,21 @@ for(Cookie cookie : cookies){
 							</label></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<tr style="display: none;">
 							<td><br /></td>
 						</tr>
-
-						
-	
-								<tr align="center">
+								<!-- <tr align="center">
 									<td width="40%" class="alignRight"> &nbsp;</td>
 									<td align="center">
 									<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 									<a class="prevtab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Previous</a>
 									</td>
-								</tr>
+								</tr> -->
 								
 
 						<tr>
@@ -1466,7 +1463,7 @@ for(Cookie cookie : cookies){
 
 						</div>
 
-							<div id="tabs-5">
+							<div id="tabs-5" style="display: none;">
 				
 						<table style="width:70%;" align="center">
 								<tr>
@@ -1665,7 +1662,7 @@ for(Cookie cookie : cookies){
 
 				</div>
 				
-				<div id="tabs-6">
+				<div id="tabs-6"  style="display: none;">
 
 							<div>
 								<table width="100%">

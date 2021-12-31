@@ -500,7 +500,7 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-                  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
+                  <!-- <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -509,17 +509,17 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div>
+            </div> -->
             
             
             <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
+            		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="Backup&Restore.jsp" style="font-size: 12px;">Backup</a>
             			</td>
-            		</tr>
+            		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="changePassword.jsp" style="font-size: 12px;">Change Password</a>
@@ -549,7 +549,7 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
+            <!-- <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -558,7 +558,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div>
+            </div> -->
             
             <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -573,11 +573,11 @@ for(Cookie cookie : cookies){
                               <a target="mainFrame" href="importfile.jsp" style="font-size: 12px;">Import Files</a><br/>
 				        </td>
 				     </tr>
-				     <tr>
+				     <!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
                               <a target="_blank" href="feedback.jsp" style="font-size: 12px;">Feedback</a><br/>
 				        </td>
-				     </tr>
+				     </tr> -->
 				 </table>
             </div>
             

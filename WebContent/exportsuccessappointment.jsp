@@ -1,5 +1,5 @@
 <%-- 
-    Document   : Saved
+    Document   : Export Success
     Created on : Jan 5, 2012, 1:11:53 PM
     Author     : Musaib
 --%>
@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Save success</title>
+        <title>Export Success</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -58,15 +58,15 @@
 
         <script type="text/javascript">
             $(function(){
-                $("#view").button()
-                
-                $("#addnew").button()
+                $("#download").button().click(function() {
+        			downloadFile();
 
+        		});
                 });
 
-            function ViewAll(){
+            function downloadFile(){
                 var form1=document.getElementById("form1");
-                form1.action="Controller?process=EmployeeProcess&action=ViewAllEmployee";
+                form1.action="Controller?process=AppointmentProcess&action=download";
                 form1.submit();
             }
         </script>
@@ -88,15 +88,20 @@ for(Cookie cookie : cookies){
 }
 %>
     <body background="images/bg.jpg" >
-        <form id="form1" action=""  method="post">
+        <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="250" align="center" valign="middle"><p class="style1"> User Added Successfully</p>
-        <p class="style1">
-          
-            <input type="button" id="view" value="View All " onClick="ViewAll()">
-            <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='addEmployee.jsp';">
-        </p></td>
+        <td height="50" align="center" valign="middle"><p class="style1"> File Exported Successful</p>
+        </td>
+        
+      </tr>
+      <tr>
+          <td height="5" align="center" valign="middle"><p class="style1">
+                  
+                  <button id="download">Download</button>
+                                   
+              </p>
+        </td>
       </tr>
     </table>
             </form>

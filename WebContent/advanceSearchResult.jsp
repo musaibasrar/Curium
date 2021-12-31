@@ -63,7 +63,7 @@
                 color: #4b6a84;
                 font-size: 13px;
                 letter-spacing: normal;
-                text-align: center;
+                text-align: left;
                 background-color: #E3EFFF;
 
             }
@@ -74,7 +74,7 @@
                 font-size: 12px;
                 font-weight: bold;
                 letter-spacing: normal;
-                text-align: center;
+                text-align: left;
                 background-color: #E3EFFF;
                 text-decoration:none;
             }
@@ -321,7 +321,7 @@
                 });
                 
                 
-                $("#query").button({
+                $(".querybutton").button({
                     icons:{
                         primary: "ui-icon-pencil"
                     }
@@ -346,7 +346,7 @@
                 });
                 
                 
-                $("#appointment").button({
+                $(".appointmentbutton").button({
                     icons:{
                         primary: " ui-icon-calendar"
                     }
@@ -436,7 +436,23 @@
             
             function check(studentid){
             	
+            	var length = $('.chcktbl:checked').length;
+                var trLength=$('.trClass').length;
+                if(length>0){
+                    $('.chcktbl:checked').attr('checked', false);
+                    this.checked=false;
+
+                }
+                else{
+                    if (this.checked == false) {
+                        $('.chcktbl:checked').attr('checked', false);
+                    }
+                }
+
+            	
       	      	  document.getElementById("studentid_"+studentid).checked = true;  
+      	      	  
+      	      	  
             }
             
             function refreshPage(){
@@ -492,8 +508,8 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Name</th>
                             <th title="click to sort" class="headerText">Class & Sec</th>
                             <th title="click to sort" class="headerText">Father Name</th>
-                             <th title="click to sort" class="headerText">Mother Name</th>
-                             <th title="click to sort" class="headerText">Action</th>
+                             <!-- <th title="click to sort" class="headerText">Mother Name</th> -->
+                             <th title="click to sort" class="headerText">Queries/Appt. </th>
                         </tr>
                     </thead>
 
@@ -501,13 +517,13 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${searchStudentList}" var="Parents">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "studentid_${Parents.student.sid}" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.pid}"/>"/></td>
+                                <td class="dataText" style="text-align: center;"><input type="checkbox" id = "studentid_${Parents.student.sid}" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.pid}:${Parents.contactnumber}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Parents.student.name}"/></td>
                                 <td class="dataText"><c:out value="${Parents.student.classstudying}"/></td>
                                 <td class="dataText"><c:out value="${Parents.fathersname}"/></td>
-                                <td class="dataText"><c:out value="${Parents.mothersname}"/></td>
-                                <td class="dataText"><button id="query" onclick="check(${Parents.student.sid})">Q</button>&nbsp;&nbsp;&nbsp;<button id="appointment" onclick="check(${Parents.student.sid})">A</button></td>
+                                <%-- <td class="dataText"><c:out value="${Parents.mothersname}"/></td> --%>
+                                <td class="dataText" style='white-space: nowrap'><button id="query_${Parents.student.sid}" class="querybutton" onclick="check(${Parents.student.sid})">Q</button><button id="appointment_${Parents.student.sid}" class="appointmentbutton" onclick="check(${Parents.student.sid})">A</button></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -519,14 +535,14 @@ for(Cookie cookie : cookies){
 
             </div>
             
-            <div align="center">
-             <%--For displaying Previous link except for the 1st page --%>
+            <%-- <div align="center">
+             For displaying Previous link except for the 1st page
                 <c:if test="${currentPage != 1}">
                     <td><a style="color: #4B6A84;font-size: 12px" href="Controller?process=PersonalProcessPages&page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
-                <%--For displaying Page numbers.
-                The when condition does not display a link for the current page--%>
+                For displaying Page numbers.
+                The when condition does not display a link for the current page
                 <table border="0" cellpadding="5" cellspacing="5">
                     <tr>
                         <c:forEach begin="1" end="${noOfPages}" var="i">
@@ -542,11 +558,11 @@ for(Cookie cookie : cookies){
                     </tr>
                 </table>
 
-                <%--For displaying Next link --%>
+                For displaying Next link
                 <c:if test="${currentPage lt noOfPages}">
                     <td ><a style="color: #4B6A84;font-size: 12px" href="Controller?process=PersonalProcessPages&page=${currentPage + 1}">Next</a></td>
                 </c:if>
-                    </div>
+                    </div> --%>
                     
                     
                     <div id="dialogappointment" title="Appointment">
@@ -590,7 +606,7 @@ for(Cookie cookie : cookies){
 
 												<c:forEach items="${listDepartment}" var="listDepartment">
 
-													<option value="${listDepartment.depid}">
+													<option value="${listDepartment.depid}:${listDepartment.departmentname}">
 														<c:out value="${listDepartment.departmentname}" />
 													</option>
 

@@ -102,13 +102,31 @@ public class ImportFileService {
 							}
 						}
 						
-						
-						student.setAdmissionnumber(row.getCell(0).getStringCellValue());
-						student.setName(row.getCell(1).getStringCellValue());
-						String classStudying = row.getCell(2).getStringCellValue();
-						Cell cell = row.getCell(3);
-						String sec = null;
+						Cell cell = row.getCell(0);
 						if(cell!=null) {
+							student.setAdmissionnumber(row.getCell(0).getStringCellValue());
+						}else {
+							student.setAdmissionnumber("");
+						}
+						
+						Cell cell1 = row.getCell(1);
+						if(cell1!=null) {
+							student.setName(row.getCell(1).getStringCellValue());
+						}else {
+							student.setName("");
+						}
+						
+						String classStudying = null;
+						Cell cell2 = row.getCell(2);
+						if(cell2!=null) {
+							classStudying = row.getCell(2).getStringCellValue();
+						}else {
+							classStudying = "";
+						}
+						
+						Cell cell3 = row.getCell(3);
+						String sec = null;
+						if(cell3!=null) {
 							sec = row.getCell(3).getStringCellValue();
 						}
 						
@@ -118,7 +136,7 @@ public class ImportFileService {
 						}
 						
 						student.setClassstudying(classStudying);
-						student.setBranchid(1);
+						student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						student.setArchive(0);
 						student.setPassedout(0);
 						student.setDroppedout(0);
@@ -126,9 +144,35 @@ public class ImportFileService {
 						student.setStudentexternalid(DataUtil.generateString(5));
 						student.setLeftout(0);
 
-						parent.setFathersname(row.getCell(4).getStringCellValue());
-						parent.setMothersname(row.getCell(5).getStringCellValue());
-						parent.setContactnumber(row.getCell(6).getStringCellValue());
+						Cell cell4 = row.getCell(4);
+						if(cell4!=null) {
+							parent.setFathersname(row.getCell(4).getStringCellValue());
+						}else {
+							parent.setFathersname("");
+						}
+						
+						Cell cell5 = row.getCell(5);
+						if(cell5!=null) {
+							parent.setMothersname(row.getCell(5).getStringCellValue());
+						}else {
+							parent.setMothersname("");
+						}
+						
+						
+						Cell cell6 = row.getCell(6);
+						if(cell6!=null) {
+							parent.setContactnumber(row.getCell(6).getStringCellValue());
+						}else {
+							parent.setContactnumber("");
+						}
+						
+						
+						Cell cell7 = row.getCell(7);
+						if(cell7!=null) {
+							parent.setCocontactnumber(row.getCell(7).getStringCellValue());
+						}else {
+							parent.setCocontactnumber("");
+						}
 						
 						parent.setStudent(student);
 						parent.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));

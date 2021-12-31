@@ -39,7 +39,9 @@ public class QueryDAO {
 	}
 
 
-		public boolean addQuery(ParentQuery query) {
+		public String addQuery(ParentQuery query) {
+			
+			String queryNo = null;
 		
 			try {
 					transaction = session.beginTransaction();
@@ -49,11 +51,11 @@ public class QueryDAO {
 					 	List<ParentQuery> queryList = queryParentQuery.list();
 					 	
 					 	if(queryList.size() > 0) {
-					 		String appNo = queryList.get(0).getExternalid();
-					 		String splitAppNo = appNo.substring(2);
+					 		String qNo = queryList.get(0).getExternalid();
+					 		String splitqNo = qNo.substring(2);
 					 		
-					 		if(Integer.parseInt(splitAppNo) < 1000) {
-					 			query.setExternalid("EN"+String.format("%03d", Integer.parseInt(splitAppNo)+1));
+					 		if(Integer.parseInt(splitqNo) < 1000) {
+					 			query.setExternalid("EN"+String.format("%03d", Integer.parseInt(splitqNo)+1));
 					 		}else {
 					 			query.setExternalid("EN"+String.format("%03d", 1));
 					 		}
@@ -64,13 +66,13 @@ public class QueryDAO {
 					 	
 					session.save(query);
 					transaction.commit();
-				return true;
+					queryNo=query.getExternalid()+":"+query.getId();
 			} catch (Exception e) { transaction.rollback(); logger.error(e);
 				e.printStackTrace();
 			}finally {
 				HibernateUtil.closeSession();
 			}
-			return false;
+			return queryNo;
 		}
 
 
@@ -82,7 +84,7 @@ public class QueryDAO {
 			try {
 				
 				transaction = session.beginTransaction();
-				Query query = session.createQuery("From ParentQuery as query where query.branchid = "+branchId+" order by query.createddate desc").setCacheable(true).setCacheRegion("commonregion");
+				Query query = session.createQuery("From ParentQuery as query where query.branchid = "+branchId+" order by query.id desc").setCacheable(true).setCacheRegion("commonregion");
 				query.setFirstResult(offset);   
 				query.setMaxResults(noOfRecords);
 				results = query.getResultList();
@@ -150,19 +152,22 @@ public class QueryDAO {
 		}
 
 
-		public boolean completeQueries(List<Integer> queryIdsList, int userId) {
+		public List<ParentQuery> completeQueries(List<Integer> queryIdsList, int userId) {
 			
-			boolean result = false;
+			List<ParentQuery> result = new ArrayList<ParentQuery>();
 			try {
 				transaction = session.beginTransaction();
 				
 				for (Integer appId : queryIdsList) {
 					Query query = session.createQuery("update ParentQuery set status = 'Completed', updateddate = CURDATE(), updateduserid= "+userId+" where id="+appId+"");
 					query.executeUpdate();
+					ParentQuery pq = new ParentQuery();
+					Query queryGet = session.createQuery("From ParentQuery as query where query.id = "+appId+"");
+					pq = (ParentQuery) queryGet.uniqueResult();
+					result.add(pq);
 				}
 				
 				transaction.commit();
-				result = true;
 			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 				hibernateException.printStackTrace();
 			}finally {
@@ -179,7 +184,7 @@ public class QueryDAO {
 				transaction = session.beginTransaction();
 				
 				for (Integer appId : queryIdsList) {
-					Query query = session.createQuery("update ParentQuery set status = 'Cancelled',  updateduserid= "+userId+"  where id="+appId+"");
+					Query query = session.createQuery("update ParentQuery set status = 'Cancelled',  updateduserid= "+userId+", updateddate=CURDATE()  where id="+appId+"");
 					query.executeUpdate();
 				}
 				
@@ -200,7 +205,7 @@ public class QueryDAO {
 				transaction = session.beginTransaction();
 				
 				for (Integer appId : queryIdsList) {
-					Query query = session.createQuery("update ParentQuery set status = 'In Progress', updateduserid= "+userId+"   where id="+appId+"");
+					Query query = session.createQuery("update ParentQuery set status = 'In Progress', updateduserid= "+userId+", updateddate=CURDATE()   where id="+appId+"");
 					query.executeUpdate();
 				}
 				
@@ -264,7 +269,7 @@ public class QueryDAO {
 				transaction = session.beginTransaction();
 				Query queryDepartment = session.createQuery("From Department as dep where dep.departmentname = '"+department+"'").setCacheable(true).setCacheRegion("commonregion");
 				Department dep = (Department) queryDepartment.uniqueResult();
-				Query query = session.createQuery("From ParentQuery as query where query.branchid = "+branchId+" and query.department.id='"+dep.getDepid()+"' order by query.createddate desc").setCacheable(true).setCacheRegion("commonregion");
+				Query query = session.createQuery("From ParentQuery as query where query.branchid = "+branchId+" and query.department.id='"+dep.getDepid()+"' order by query.id desc").setCacheable(true).setCacheRegion("commonregion");
 				query.setFirstResult(offset);   
 				query.setMaxResults(noOfRecords);
 				results = query.getResultList();
@@ -462,5 +467,25 @@ public class QueryDAO {
 	        }
 	        return results;
 }
+
+
+		public boolean feedback(int queryId, String pid, String feedbackpoints) {
+			
+			boolean result = false;
+			try {
+				transaction = session.beginTransaction();
+				
+					Query query = session.createQuery("update ParentQuery set feedback = '"+feedbackpoints+"' where id="+queryId+" and stdid="+pid+"");
+					query.executeUpdate();
+				
+				transaction.commit();
+				result = true;
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				hibernateException.printStackTrace();
+			}finally {
+				HibernateUtil.closeSession();
+			 }
+			return result;
+		}
 
 }

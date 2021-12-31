@@ -5,15 +5,14 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.util.Session;
-import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.employee.dto.Teacher;
 import com.model.hr.dto.Paybasic;
 import com.model.user.dto.Login;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class EmployeeDAO {
 
@@ -40,6 +39,16 @@ public class EmployeeDAO {
 		try {
 			transaction = session.beginTransaction();
 			session.save(employee);
+			
+			 Query queryUser = session.createQuery("from Login order by id DESC");
+			 	List<Login> userList = queryUser.list();
+			 	int userId = 0;
+			 	
+			 	if(userList.size() > 0) {
+			 		userId = userList.get(0).getUserid();
+			 	}
+			 	
+			 user.setUserid(userId+1);
 			session.save(user);
 			transaction.commit();
 			result = true;

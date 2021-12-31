@@ -80,51 +80,7 @@ p {
 <form action="Controller?process=QueryProcess&action=feedback" method="post">
 	<div class="app">
 	 
-	 
-	 <input type="hidden" id="no" name="no" value="<%= request.getParameter("no")%>">
-	 <input type="hidden" id="id" name="id" value="<%= request.getParameter("id")%>">
-  <h1>How happy are you with the response from our staff?</h1>
-  <p>Let us know</p>
-
-  <div class="container">
-    <div class="item">
-      <label for="0">
-      <input class="radio" type="radio" name="feedback" id="0" value="1">
-      <span>1</span>
-    </label>
-    </div>
-
-    <div class="item">
-      <label for="1">
-      <input class="radio" type="radio" name="feedback" id="1" value="2">
-      <span>2</span>
-    </label>
-    </div>
-
-    <div class="item">
-      <label for="2">
-      <input class="radio" type="radio" name="feedback" id="2" value="3">
-      <span>3</span>
-    </label>
-    </div>
-
-    <div class="item">
-      <label for="3">
-      <input class="radio" type="radio" name="feedback" id="3" value="4">
-      <span>4</span>
-    </label>
-    </div>
-
-    <div class="item">
-      <label for="4">
-      <input class="radio" type="radio" name="feedback" id="4" value="5">
-      <span>5</span>
-    </label>
-    </div>
-
-  </div>
-  
-  <button type="submit" class="btn btn-primary">Sumbit</button>
+  <h1>Thank you for your response</h1>
 </div>
  </form>
 </body>

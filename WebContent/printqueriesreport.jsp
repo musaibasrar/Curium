@@ -248,7 +248,10 @@
             	
             	  		<tr>
                            	<th class="datath">Sl.No</th>
-                            <th class="datath">Date</th>
+                           	<th class="datath">Query UID</th>
+                           	<th class="datath">Query No.</th>
+                            <th class="datath">Created Date</th>
+                            <th class="datath">Updated Date</th>
                             <th class="datath">Dept.</th>
                             <th class="datath">Admn. No.</th>
                             <th class="datath">Student Name</th>
@@ -265,7 +268,10 @@
 						<c:forEach items="${parentquerylist}" var="query" varStatus="status">
                             <tr>
                                 <td class="datatd" style="font-size: 9px;">${status.index+1}</td>
+                                <td class="datatd" style="font-size: 9px;"><c:out value="${query.id}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><c:out value="${query.externalid}"/></td>
                                 <td class="datatd" style="font-size: 9px;"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
                                 <td class="datatd" style="font-size: 9px;"><c:out value="${query.department.departmentname}"/></td>
                                 <td class="datatd" style="font-size: 9px;"><c:out value="${query.parent.student.admissionnumber}"/></td>
                                 <td class="datatd" style="font-size: 9px;"><c:out value="${query.parent.student.name}"/></td>

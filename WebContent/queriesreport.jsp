@@ -519,10 +519,27 @@
              .append( "<a><b> " + item.value +" / "+item.name+" </b> </a>" )
              .appendTo( ul );
          };
-                 
+         
 
+		 $("#export").button({
+             icons:{
+                 primary: "ui-icon-document"
+             }
+         }).click(function(){
+             exportRecords();
+             return false;
+
+         });
      });
-    
+ 
+
+	 function exportRecords() {
+			var form1 = document.getElementById("form1");
+			form1.action = "Controller?process=QueryProcess&action=exportQueriesReport";
+			form1.method = "POST";
+			form1.submit();
+		}
+	 
 </script>
 
 </head>
@@ -672,7 +689,10 @@ for(Cookie cookie : cookies){
 
 				<thead>
                         <tr>
-                            <th title="click to sort" class="headerText">Date</th>
+                        	<th title="click to sort" class="headerText">Query UID</th>
+                        	<th title="click to sort" class="headerText">Query No.</th>
+                            <th title="click to sort" class="headerText">Created Date</th>
+                            <th title="click to sort" class="headerText">Updated Date</th>
                             <th title="click to sort" class="headerText">Department</th>
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Student Name</th>
@@ -686,7 +706,10 @@ for(Cookie cookie : cookies){
                     <tbody>
                         <c:forEach items="${parentquerylist}" var="query">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                            <td class="dataText"><c:out value="${query.id}"/></td>
+                            <td class="dataText"><c:out value="${query.externalid}"/></td>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
                                  <td class="dataText"><c:out value="${query.department.departmentname}"/></td>
                                 <td class="dataText"><c:out value="${query.parent.student.admissionnumber}"/></td>
                                 <td class="dataText"><c:out value="${query.parent.student.name}"/></td>
@@ -694,8 +717,6 @@ for(Cookie cookie : cookies){
                                 <c:forEach var="splt" items="${fn:split(query.parent.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
-									<%-- <input type="hidden" id="classstudyingone" name="classstudying" value="${Student.classstudying}"/>
-									 <input type="hidden" id="classstudying" name="classstudying_${Student.sid}" value="${Student.classstudying}"/> --%>
                                 </td>
                                 <td class="dataText"><c:out value="${query.parent.fathersname}"/></td>
                                 <td class="dataText"><c:out  value="${query.status}"/></td>
@@ -715,7 +736,8 @@ for(Cookie cookie : cookies){
 						<tr>
                             <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
                     		<td class="footerTD"  colspan="8">
-                    		<button id="print">Print</button> 
+                    		<button id="print">Print</button>
+                    		<button id="export">Export</button> 
                     		&nbsp;&nbsp;&nbsp;
                     		<!-- <button id="approve">Approve</button>
                     		&nbsp;&nbsp;&nbsp;

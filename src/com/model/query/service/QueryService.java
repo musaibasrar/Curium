@@ -1,6 +1,10 @@
 package com.model.query.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -15,11 +19,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.model.appointment.dto.Appointment;
 import com.model.department.dto.Department;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.mess.card.dto.Card;
@@ -33,6 +44,7 @@ import com.model.parents.dto.Parents;
 import com.model.printids.dao.PrintIdsDAO;
 import com.model.query.dao.QueryDAO;
 import com.model.query.dto.ParentQuery;
+import com.model.sendsms.service.SmsService;
 import com.model.student.dao.studentDetailsDAO;
 import com.model.user.dao.UserDAO;
 import com.util.DataUtil;
@@ -44,6 +56,7 @@ public class QueryService {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession httpSession;
+	private static final int BUFFER_SIZE = 4096;
 
 	public QueryService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -58,9 +71,8 @@ public class QueryService {
 		String[] studentId = request.getParameterValues("studentIDs");
 		String department = request.getParameter("department");
 		String queryString = request.getParameter("parentquery");
-		
-		System.out.println("deparment is "+request.getParameter("department"));
-		System.out.println("Query is "+request.getParameter("parentquery"));
+		String[] dep = department.split(":");
+		String[] pidContact = studentId[0].split(":");
 		
 		if(httpSession.getAttribute("branchid")!=null){
 	
@@ -74,14 +86,27 @@ public class QueryService {
 					query.setStatus("Assigned");
 					//Query.setStdid(1);
 					Parents parent = new Parents();
-					parent.setPid(Integer.parseInt(studentId[0]));
+					parent.setPid(Integer.parseInt(pidContact[0]));
 					query.setParent(parent);
 					
 					Department departmnet = new Department();
-					departmnet.setDepid(Integer.parseInt(department));
+					departmnet.setDepid(Integer.parseInt(dep[0]));
 					query.setDepartment(departmnet);
 						  
-				result = new QueryDAO().addQuery(query);
+					String resultQuery = new QueryDAO().addQuery(query);
+					String sendQuerySMS = new DataUtil().getPropertiesValue("sendquerysms");
+									
+					if(resultQuery!=null && "yes".equalsIgnoreCase(sendQuerySMS)) {
+						result = true;
+						 String feedbacklink = new DataUtil().getPropertiesValue("feedbacklink");
+						 String[] queryValues = resultQuery.split(":");
+						 String param = "?id="+queryValues[1]+"&no="+pidContact[0]+"";
+						 feedbacklink = feedbacklink+param;
+						 String messageOne = "Your enquiry related to "+dep[1]+" has been submitted successfully";
+						 String message = "Your enquiry no. is "+queryValues[0]+".Please click the link to give your feedback. "+feedbacklink+"";
+						 new SmsService(request, response).sendSMS("91"+pidContact[1], messageOne);
+						 new SmsService(request, response).sendSMS("91"+pidContact[1], message);
+					}
 				}
 		
 		return result;
@@ -122,7 +147,7 @@ public class QueryService {
 		String[] QueryIds = request.getParameterValues("queryids");
 		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
 		List<Integer> QueryIdsList = new ArrayList<Integer>();
-		boolean result = false;
+		List<ParentQuery> result = new ArrayList<ParentQuery>();;
 		
 		if(QueryIds!=null) {
 			for (String ids : QueryIds) {
@@ -130,7 +155,16 @@ public class QueryService {
 			}
 			
 			result = new QueryDAO().completeQueries(QueryIdsList, userId);
-			request.setAttribute("querystatus",result);
+			String sendCompletedQuerySMS = new DataUtil().getPropertiesValue("sendcompletedquerysms");
+			
+			if(!result.isEmpty() && "yes".equalsIgnoreCase(sendCompletedQuerySMS)) {
+				request.setAttribute("querycompleted","success");
+				request.setAttribute("querystatus",true);
+				for (ParentQuery parentQuery : result) {
+					 String message = "Your enquiry with enq. no "+parentQuery.getExternalid()+" related to "+parentQuery.getDepartment().getDepartmentname()+" has been solved.";
+					 new SmsService(request, response).sendSMS("91"+parentQuery.getParent().getContactnumber(), message);
+				}
+			}
 		}
 	}
 
@@ -398,5 +432,125 @@ public class QueryService {
 		
 		request.setAttribute("monthlystudentsqueries", totalQueries);
 		request.setAttribute("monthlist", monthList);
+	}
+
+	  public boolean feedback() {
+		
+		  boolean result =false;
+		String id = request.getParameter("id");
+		String pid = request.getParameter("no");
+		String feedbackpoints = request.getParameter("feedback");
+		
+		result = new QueryDAO().feedback(Integer.parseInt(id), pid, feedbackpoints);
+		
+		return result;
+	}
+
+	public boolean download() {
+		boolean result = false;
+		try {
+
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/queriesreport.xlsx");
+	        FileInputStream inStream = new FileInputStream(downloadFile);
+
+	        // get MIME type of the file
+			String mimeType = "application/vnd.ms-excel";
+
+			// set content attributes for the response
+			response.setContentType(mimeType);
+			// response.setContentLength((int) bis.length());
+
+			// set headers for the response
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"",
+					"queriesreport.xlsx");
+			response.setHeader(headerKey, headerValue);
+
+			// get output stream of the response
+			OutputStream outStream = response.getOutputStream();
+
+			byte[] buffer = new byte[BUFFER_SIZE];
+			int bytesRead = -1;
+
+			// write bytes read from the input stream into the output stream
+			while ((bytesRead = inStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+
+			inStream.close();
+			outStream.close();
+			result = true;
+		} catch (Exception e) {
+			System.out.println("" + e);
+		}
+		return result;
+	}
+
+	public boolean exportQueriesReport() {
+		
+		
+		List<ParentQuery> queriesList = (List<ParentQuery>) httpSession.getAttribute("parentquerylist");
+	
+			boolean writeSucees = false;
+			
+			try {
+
+				// Creating an excel file
+				XSSFWorkbook workbook = new XSSFWorkbook();
+				XSSFSheet sheet = workbook.createSheet("ListOfQueries");
+				Map<String, Object[]> data = new HashMap<String, Object[]>();
+				Map<String, Object[]> headerData = new HashMap<String, Object[]>();
+				headerData.put("Header",
+						new Object[] { "Query UID", "Query No.", "Created Date","Updated Date","Department", "Admission Number", "Student Name",
+								"Class", "Father Name", "Status", "Feedback"});
+				int i = 1;
+				for (ParentQuery queryDetails : queriesList) {
+					data.put(Integer.toString(i),
+							new Object[] { DataUtil.emptyString(Integer.toString(queryDetails.getId())),  DataUtil.emptyString(queryDetails.getExternalid()),
+									 DataUtil.emptyString(DateUtil.getStringDate(queryDetails.getCreateddate())),
+									 DataUtil.emptyString(DateUtil.getStringDate(queryDetails.getUpdateddate())),
+									 DataUtil.emptyString(queryDetails.getDepartment().getDepartmentname()),
+									 DataUtil.emptyString(queryDetails.getParent().getStudent().getAdmissionnumber()),
+									 DataUtil.emptyString(queryDetails.getParent().getStudent().getName()),
+									 DataUtil.emptyString(queryDetails.getParent().getStudent().getClassstudying().replace("--", " ")),
+									 DataUtil.emptyString(queryDetails.getParent().getFathersname()),
+									 DataUtil.emptyString(queryDetails.getStatus()), DataUtil.emptyString(queryDetails.getFeedback())});
+					i++;
+				}
+				Row headerRow = sheet.createRow(0);
+				Object[] objArrHeader = headerData.get("Header");
+				int cellnum1 = 0;
+				for (Object obj : objArrHeader) {
+					Cell cell = headerRow.createCell(cellnum1++);
+					if (obj instanceof String)
+						cell.setCellValue((String) obj);
+				}
+				Set<String> keyset = data.keySet();
+				int rownum = 1;
+				for (String key : keyset) {
+					Row row = sheet.createRow(rownum++);
+					Object[] objArr = data.get(key);
+					int cellnum = 0;
+					for (Object obj : objArr) {
+						Cell cell = row.createCell(cellnum++);
+						if (obj instanceof Date)
+							cell.setCellValue((Date) obj);
+						else if (obj instanceof Boolean)
+							cell.setCellValue((Boolean) obj);
+						else if (obj instanceof String)
+							cell.setCellValue((String) obj);
+						else if (obj instanceof Double)
+							cell.setCellValue((Double) obj);
+					}
+				}
+					FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/queriesreport.xlsx"));
+					workbook.write(out);
+					out.close();
+					writeSucees = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return writeSucees;
+			// getFile(name, path);
 	}
 }

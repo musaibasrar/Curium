@@ -31,6 +31,7 @@ import com.model.feescollection.dto.Receiptinfo;
 import com.model.feescollection.service.FeesCollectionService;
 import com.model.parents.dto.Parents;
 import com.model.query.dao.QueryDAO;
+import com.model.query.dto.ParentQuery;
 import com.model.query.service.QueryService;
 import com.model.std.dao.StandardDetailsDAO;
 import com.model.std.dto.Classsec;
@@ -198,6 +199,29 @@ public class UserService {
         	//Today Incomplete Appointments
         	int todayIncompleteAppointments = new AppointmentDAO().getNoOfRecordsTodayIncompleteAppointments ();
         	request.setAttribute("todayincompleteappointments", todayIncompleteAppointments );
+        	//
+        	
+        	//Total Feedback Points
+        	List<ParentQuery> parentQueryList = new QueryDAO().generateQueriesReport("from ParentQuery where status !='Cancelled'");
+        	double feedbackPt = 0l;
+        	for (ParentQuery parentQuery : parentQueryList) {
+        		int feedback = DataUtil.parseInt(parentQuery.getFeedback());
+        		feedbackPt = feedbackPt+feedback;
+			}
+        	double average = feedbackPt/parentQueryList.size();
+        	request.setAttribute("totalaveragefeedbackpt", average );
+        	//
+        	
+        	
+        	//Today Feedback Points
+        	List<ParentQuery> parentQueryListToday = new QueryDAO().generateQueriesReport("from ParentQuery where status !='Cancelled' and createddate=CURDATE()");
+        	double feedbackPtToday = 0l;
+        	for (ParentQuery parentQueryToday : parentQueryListToday) {
+        		int feedbackToday = DataUtil.parseInt(parentQueryToday.getFeedback());
+        		feedbackPtToday = feedbackPt+feedbackToday;
+			}
+        	double averageToday = feedbackPtToday/parentQueryListToday.size();
+        	request.setAttribute("todayaveragefeedbackpt", averageToday );
         	//
         	
         	request.setAttribute("studentxaxis", xaxisList);
