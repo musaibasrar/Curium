@@ -186,6 +186,21 @@
          <property name="userid" type="int">
 	 			<column name="userid" />
 			</property>
+			<property name="studentdoc1" type="string">
+            <column name="studentdoc1" />
+        </property>
+        <property name="studentdoc2" type="string">
+            <column name="studentdoc2" />
+        </property>
+        <property name="studentdoc3" type="string">
+            <column name="studentdoc3" />
+        </property>
+        <property name="studentdoc4" type="string">
+            <column name="studentdoc4" />
+        </property>
+        <property name="studentdoc5" type="string">
+            <column name="studentdoc5" />
+        </property>
          <!-- <many-to-one name="Pudetails" class="com.model.pudetails.dto.Pudetails"
             column="pudetailsid" unique="true" not-null="true" lazy="false"
             cascade="all" />

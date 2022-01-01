@@ -706,6 +706,62 @@ for(Cookie cookie : cookies){
                 </div>
     </div>
     
+    
+    <div class="accordion" style="width: 100%;height: 100%">
+		
+                <h3><a href="#">Documents</a></h3>
+                <div>
+
+                    <table  border="0px" width="100%"  id="table1" align="center">
+                    
+                        <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc1.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc2.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc3.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc4.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc5.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
+                    </td>
+                    </tr>
+                    </table>
+                </div>
+    </div>
+    
     	<div class="accordion" style="width: 100%;height: 100%">
 		
                 <h3><a href="#">Previous School Details</a></h3>

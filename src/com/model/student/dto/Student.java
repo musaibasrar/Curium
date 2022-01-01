@@ -90,6 +90,12 @@ public class Student implements java.io.Serializable {
 	private String bankifsc;
 	private int userid;
 	
+	private String studentdoc1;
+	private String studentdoc2;
+	private String studentdoc3;
+	private String studentdoc4;
+	private String studentdoc5;
+	
 	public Student() {
 	}
 
@@ -112,7 +118,8 @@ public class Student implements java.io.Serializable {
 			Integer passedout, Integer droppedout, Integer leftout, Integer semester,String stream,String mediumofinstruction,
 			String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,String studentscaste,
 			String socialcategory,Integer belongtobpl,String lastcourse,String lastfirstlanguage,
-			String lastsecondlanguage,String specialcategory, Integer rte, String bankname, String bankbranch, String accno, String bankifsc, int userid) {
+			String lastsecondlanguage,String specialcategory, Integer rte, String bankname, String bankbranch, String accno, String bankifsc, int userid,
+			String studentdoc1, String studentdoc2, String studentdoc3, String studentdoc4, String studentdoc5) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
@@ -171,6 +178,11 @@ public class Student implements java.io.Serializable {
 		this.accno=accno;
 		this.bankifsc=bankifsc;
 		this.userid = userid;
+		this.studentdoc1=studentdoc1;
+		this.studentdoc2=studentdoc2;
+		this.studentdoc3=studentdoc3;
+		this.studentdoc4=studentdoc4;
+		this.studentdoc5=studentdoc5;
 	}
 
 	@Id
@@ -723,6 +735,46 @@ public class Student implements java.io.Serializable {
 
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+	
+	public String getStudentdoc1() {
+		return studentdoc1;
+	}
+
+	public void setStudentdoc1(String studentdoc1) {
+		this.studentdoc1 = studentdoc1;
+	}
+
+	public String getStudentdoc2() {
+		return studentdoc2;
+	}
+
+	public void setStudentdoc2(String studentdoc2) {
+		this.studentdoc2 = studentdoc2;
+	}
+
+	public String getStudentdoc3() {
+		return studentdoc3;
+	}
+
+	public void setStudentdoc3(String studentdoc3) {
+		this.studentdoc3 = studentdoc3;
+	}
+
+	public String getStudentdoc4() {
+		return studentdoc4;
+	}
+
+	public void setStudentdoc4(String studentdoc4) {
+		this.studentdoc4 = studentdoc4;
+	}
+
+	public String getStudentdoc5() {
+		return studentdoc5;
+	}
+
+	public void setStudentdoc5(String studentdoc5) {
+		this.studentdoc5 = studentdoc5;
 	}
 	
 }
