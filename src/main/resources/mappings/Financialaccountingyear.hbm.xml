@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15 Feb, 2018 11:56:26 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.account.dto.Financialaccountingyear" table="acc_financialaccountingyear" >
+        <id name="financialid" type="java.lang.Integer">
+            <column name="financialid" />
+            <generator class="identity" />
+        </id>
+        <property name="financialstartdate" type="date">
+            <column name="financialstartdate" length="10" not-null="true" />
+        </property>
+        <property name="financialenddate" type="date">
+            <column name="financialenddate" length="10" not-null="true" />
+        </property>
+        <property name="active" type="string">
+            <column name="active" length="10" not-null="true" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        	 <property name="userid" type="int">
+ 			<column name="userid" />
+		</property>
+    </class>
+</hibernate-mapping>

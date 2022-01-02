@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 18 Feb, 2018 10:47:35 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.account.dto.Accountdetails" table="acc_accountdetails">
+        <id name="accountdetailsid" type="java.lang.Integer">
+            <column name="accountdetailsid" />
+            <generator class="identity" />
+        </id>
+        <!-- <property name="accountsubgroupmasterid" type="int">
+            <column name="accountsubgroupmasterid" not-null="true" />
+        </property> -->
+        <property name="accountname" type="string">
+            <column name="accountname" length="100" not-null="true" />
+        </property>
+         <property name="accountcode" type="string">
+            <column name="accountcode" length="100" not-null="true" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        <property name="userid" type="int">
+            <column name="userid" />
+        </property>
+         <many-to-one name="accountSSGroupMaster" class="org.ideoholic.curium.model.account.dto.Accountssgroupmaster"
+            column="ssgroupmasterid" lazy="false"
+            cascade="none" />
+        <many-to-one name="accountSubGroupMaster" class="org.ideoholic.curium.model.account.dto.Accountsubgroupmaster"
+            column="accountsubgroupmasterid" lazy="false"
+            cascade="none" />
+       <many-to-one name="accountGroupMaster" class="org.ideoholic.curium.model.account.dto.Accountgroupmaster"
+            column="accountgroupid" lazy="false"
+            cascade="none" />
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24 Mar, 2015 1:00:53 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses" table="adminexpenses" >
+        <id name="idAdminExpenses" type="java.lang.Integer">
+            <column name="idAdminExpenses" />
+            <generator class="native" />
+        </id>
+        <property name="itemdescription" type="string">
+            <column name="itemdescription" length="500" />
+        </property>
+        <property name="priceofitem" type="string">
+            <column name="priceofitem" />
+        </property>
+        <property name="entrydate" type="timestamp">
+            <column name="entrydate" length="19" not-null="true" />
+        </property>
+        <property name="vno" type="java.lang.Integer">
+            <column name="vno" />
+        </property>
+         <property name="paidto" type="string">
+            <column name="paidto"/>
+        </property>
+         <property name="chequeno" type="string">
+            <column name="chequeno" />
+        </property>
+        <property name="paymenttype" type="string">
+            <column name="paymenttype" />
+        </property>
+        <property name="bankname" type="string">
+            <column name="bankname" />
+        </property>
+         <property name="chequedate" type="timestamp">
+            <column name="chequedate" />
+        </property>
+         <property name="voucherstatus" type="string">
+            <column name="voucherstatus" length="500" />
+        </property>
+        <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+         <property name="userid" type="int">
+ 			<column name="userid" />
+		</property>
+    </class>
+</hibernate-mapping>

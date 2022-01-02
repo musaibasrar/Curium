@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 30 Apr, 2018 6:08:18 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.hr.dto.Processsalarydetailsheads" table="hr_processsalarydetailsheads">
+        <id name="idprocesssalarydetailsheads" type="java.lang.Integer">
+            <column name="idprocesssalarydetailsheads" />
+            <generator class="identity" />
+        </id>
+        <!-- <property name="idprocesssalary" type="java.lang.Integer">
+            <column name="idprocesssalary" />
+        </property> -->
+        <property name="payheadname" type="string">
+            <column name="payheadname" length="45" />
+        </property>
+        <property name="payheadtype" type="string">
+            <column name="payheadtype" length="45" />
+        </property>
+        <property name="amount" type="big_decimal">
+            <column name="amount" precision="20" scale="0" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+         <many-to-one name="processsalarydetails" class="org.ideoholic.curium.model.hr.dto.Processsalarydetails"
+            column="idprocesssalary" lazy="false" />
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 20 Jun, 2018 1:03:58 PM by Hibernate Tools 5.3.0.Beta2 --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="org.ideoholic.curium.model.pudetails.dto.Pudetails" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="pudetails">
+        <id name="idpudetails" type="java.lang.Integer">
+            <column name="idpudetails"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="exampassedappearance" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="exampassedappearance"/>
+        </property>
+        <property generated="never" lazy="false" name="exampassedyear" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="exampassedyear"/>
+        </property>
+        <property generated="never" lazy="false" name="exampassedregno" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="exampassedregno"/>
+        </property>
+        <property generated="never" lazy="false" name="exampassedresultwithclass" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="exampassedresultwithclass"/>
+        </property>
+        <property generated="never" lazy="false" name="secondlanguage" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="secondlanguage"/>
+        </property>
+        <property generated="never" lazy="false" name="aggregatemarkssslc" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="aggregatemarkssslc"/>
+        </property>
+        <property generated="never" lazy="false" name="optionalsubjects" optimistic-lock="true" type="string" unique="false">
+            <column length="200" name="optionalsubjects"/>
+        </property>
+        <property generated="never" lazy="false" name="compulsorysubjects" optimistic-lock="true" type="string" unique="false">
+            <column length="500" name="compulsorysubjects"/>
+        </property>
+        <property generated="never" lazy="false" name="sslcmediuminstruction" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="sslcmediuminstruction"/>
+        </property>
+        <property generated="never" lazy="false" name="pumediuminstruction" optimistic-lock="true" type="string" unique="false">
+            <column length="45" name="pumediuminstruction"/>
+        </property>
+         <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+    </class>
+</hibernate-mapping>

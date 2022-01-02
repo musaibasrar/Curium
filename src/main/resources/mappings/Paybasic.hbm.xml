@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23 Apr, 2018 7:33:24 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.hr.dto.Paybasic" table="hr_paybasic">
+        <id name="idpaybasic" type="java.lang.Integer">
+            <column name="idpaybasic" />
+            <generator class="identity" />
+        </id>
+        <!-- <property name="idteacher" type="int">
+            <column name="idteacher" not-null="true" />
+        </property> -->
+        <property name="basicpay" type="big_decimal">
+            <column name="basicpay" precision="20" scale="4" />
+        </property>
+        <property name="paymenttype" type="string">
+            <column name="paymenttype" length="45" />
+        </property>
+        <property name="accountno" type="string">
+            <column name="accountno" length="40" />
+        </property>
+        <property name="overtime" type="string">
+            <column name="overtime" length="10" />
+        </property>
+        <property name="academicyear" type="string">
+            <column name="academicyear" length="45" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+         <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+        <many-to-one name="teacher" class="org.ideoholic.curium.model.employee.dto.Teacher"
+            column="idteacher" lazy="false" />
+    </class>
+</hibernate-mapping>

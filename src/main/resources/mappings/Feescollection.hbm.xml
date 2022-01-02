@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 5 Feb, 2018 11:54:02 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.feescollection.dto.Feescollection" table="fee_feescollection">
+        <id name="feecollectionid" type="java.lang.Integer">
+            <column name="feecollectionid" />
+            <generator class="identity" />
+        </id>
+        <property name="sfsid" type="int">
+            <column name="sfsid" not-null="true" />
+        </property>
+        <property name="amountpaid" type="java.lang.Long">
+            <column name="amountpaid" precision="10" scale="0" />
+        </property>
+        <property name="sid" type="int">
+            <column name="sid" not-null="true" />
+        </property>
+        <property name="fine" type="java.lang.Long">
+            <column name="fine" precision="10" scale="0" />
+        </property>
+        <property name="date" type="date">
+            <column name="date" length="10" />
+        </property>
+        <property name="academicyear" type="string">
+            <column name="academicyear" length="45" />
+        </property>
+        <property name="receiptnumber" type="int">
+            <column name="receiptnumber" not-null="true" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11 Feb, 2015 9:12:10 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove" table="mess_stockmoves" >
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <!-- <generator class="identity" /> -->
+            <generator class="native" />
+        </id>
+        <property name="externalid" type="string">
+            <column name="externalid" />
+        </property>
+        <property name="quantity" type="java.lang.Float">
+            <column name="quantity" />
+        </property>
+        <property name="purpose" type="string">
+            <column name="purpose" />
+        </property>
+        <property name="branchid" type="java.lang.Integer">
+            <column name="branchid" />
+        </property>
+        <property name="itemid" type="java.lang.Integer">
+            <column name="itemid" />
+        </property>
+         <property name="stockentryid" type="java.lang.Integer">
+            <column name="stockentryid" />
+        </property>
+        <property name="transactiondate" type="date">
+            <column name="transactiondate" />
+        </property>
+        <property name="issuedto" type="string">
+            <column name="issuedto" />
+        </property>    
+        <property name="status" type="string">
+            <column name="status" />
+        </property>
+         <property name="userid" type="int">
+			 <column name="userid" />
+		</property>
+                    
+    </class>
+</hibernate-mapping>

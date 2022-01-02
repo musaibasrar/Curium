@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11 Feb, 2015 9:12:10 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.mess.item.dto.MessItems" table="mess_items" >
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <!-- <generator class="identity" /> -->
+            <generator class="native" />
+        </id>
+        <property name="externalid" type="string">
+            <column name="externalid" />
+        </property>
+        <property name="branchid" type="java.lang.Integer">
+            <column name="branchid" />
+        </property>
+        <property name="linkedledgerid" type="java.lang.Integer">
+            <column name="linkedledgerid" />
+        </property>
+        <property name="name" type="string">
+            <column name="name" />
+        </property>
+        <property name="unitofmeasure" type="string">
+            <column name="unitofmeasure" />
+        </property>
+         <property name="linkedledgeridexpense" type="java.lang.Integer">
+            <column name="linkedledgeridexpense" />
+        </property>
+        <property name="userid" type="int">
+ <column name="userid" />
+</property>
+    </class>
+</hibernate-mapping>

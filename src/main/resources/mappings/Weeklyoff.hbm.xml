@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 22 Dec, 2017 4:15:19 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.attendance.dto.Weeklyoff" table="att_weeklyoff">
+        <id name="wid" type="java.lang.Integer">
+            <column name="wid" />
+            <generator class="identity" />
+        </id>
+        <property name="weeklyoffday" type="string">
+            <column name="weeklyoffday" length="100" not-null="true" />
+        </property>
+        <property name="academicyear" type="string">
+            <column name="academicyear" length="10" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+	 <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+    </class>
+</hibernate-mapping>

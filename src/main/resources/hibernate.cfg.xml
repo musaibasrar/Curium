@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory name="multibranch">
+		
+		 <!-- <property name="hibernate.multiTenancy">SCHEMA</property>
+         	<property name="hibernate.tenant_identifier_resolver">com.model.multitenant.SchemaResolver</property>
+            <property name="hibernate.multi_tenant_connection_provider">com.model.multitenant.MultiTenantProvider</property> -->
+		 
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+	 	<property name="hibernate.connection.password">root</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/curium</property>
+		<property name="hibernate.connection.username">root</property> 
+		
+		<!--<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">cmuursaiuibm@123#</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cambridgelive</property>
+        <property name="hibernate.connection.username">curium</property> -->
+		
+		
+		
+		<!-- <property name="hibernate.default_schema">school</property> -->
+        <!-- <property name="hibernate.hbm2ddl.auto">create-drop</property> -->
+            
+		<!-- <property name="hibernate.connection.password">schoolschool</property>
+		<property name="hibernate.connection.url">jdbc:mysql://118.67.248.230:3306/schoolschool?sessionVariables=wait_timeout=3600</property>
+		<property name="hibernate.connection.username">schoolschool</property>
+		<property name="hibernate.default_schema">schoolschool</property>
+		 -->
+		
+		 <property name="hibernate.c3p0.min_size">5</property>
+		  <property name="hibernate.c3p0.max_size">20</property>
+		  <property name="hibernate.c3p0.timeout">3000</property>
+		  <property name="hibernate.c3p0.max_statements">50</property>
+		  <property name="hibernate.c3p0.idle_test_period">300</property>
+		  
+		  
+		  
+			<!-- Query Cache -->
+			<!-- <property name="hibernate.cache.use_second_level_cache">true</property> -->
+			<!-- <property name="hibernate.show_sql">true</property>  -->
+			<property name="cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+		 	<property name="cache.use_query_cache">true</property>
+ 		 	<property name="net.sf.ehcache.configurationResourceName">myehcache.xml</property>
+			<!-- End Query Cache-->
+			
+			
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="current_session_context_class">thread</property>
+		<!-- <mapping class="com.model.user.dto.Login"/> -->
+		<mapping resource="mappings/Login.hbm.xml"></mapping>
+		<mapping resource="mappings/Parents.hbm.xml"></mapping>
+		<mapping resource="mappings/Student.hbm.xml"></mapping>
+		<mapping resource="mappings/Classsec.hbm.xml"></mapping>
+		<mapping resource="mappings/Feescategory.hbm.xml"></mapping>
+		<mapping resource="mappings/Department.hbm.xml"></mapping>
+		<mapping resource="mappings/Position.hbm.xml"></mapping>
+		<mapping resource="mappings/Teacher.hbm.xml"></mapping>
+		<mapping resource="mappings/Feescollection.hbm.xml"></mapping>
+		<mapping resource="mappings/Feesdetails.hbm.xml"></mapping>
+		<mapping resource="mappings/Adminexpenses.hbm.xml"></mapping>
+		<mapping resource="mappings/Currentacademicyear.hbm.xml"></mapping>
+		<mapping resource="mappings/Subject.hbm.xml"></mapping>
+		<mapping resource="mappings/Marks.hbm.xml"></mapping>
+		<mapping resource="mappings/Academicfeesstructure.hbm.xml"></mapping>
+		<mapping resource="mappings/Studentfeesstructure.hbm.xml"></mapping>
+		<mapping resource="mappings/Holidaysmaster.hbm.xml"></mapping>
+		<mapping resource="mappings/Weeklyoff.hbm.xml"></mapping>
+		<mapping resource="mappings/Attendancemaster.hbm.xml"></mapping>
+		<mapping resource="mappings/Studentdailyattendance.hbm.xml"></mapping>
+		<mapping resource="mappings/Staffdailyattendance.hbm.xml"></mapping>
+		<mapping resource="mappings/Receiptinfo.hbm.xml"></mapping>
+		<mapping resource="mappings/Financialaccountingyear.hbm.xml"></mapping>
+		<mapping resource="mappings/Accountgroupmaster.hbm.xml"></mapping>
+		<mapping resource="mappings/Accountsubgroupmaster.hbm.xml"></mapping>
+		<mapping resource="mappings/Accountssgroupmaster.hbm.xml"></mapping>
+		<mapping resource="mappings/Accountdetails.hbm.xml"></mapping>
+		<mapping resource="mappings/Accountdetailsbalance.hbm.xml"></mapping>
+		<mapping resource="mappings/Transfercertificate.hbm.xml"></mapping>
+		<mapping resource="mappings/Exams.hbm.xml"></mapping>
+		<mapping resource="mappings/Examschedule.hbm.xml"></mapping>
+		<mapping resource="mappings/Perioddetails.hbm.xml"></mapping>
+		<mapping resource="mappings/Periodmaster.hbm.xml"></mapping>
+		<mapping resource="mappings/Leavetypemaster.hbm.xml"></mapping>
+		<mapping resource="mappings/Leavedetails.hbm.xml"></mapping>
+		<mapping resource="mappings/Payhead.hbm.xml"></mapping>
+		<mapping resource="mappings/Payheadstaffdetails.hbm.xml"></mapping>
+		<mapping resource="mappings/Paybasic.hbm.xml"></mapping>	
+		<mapping resource="mappings/Pf.hbm.xml"></mapping>
+		<mapping resource="mappings/Payadvancesalary.hbm.xml"></mapping>
+		<mapping resource="mappings/Leaveapplication.hbm.xml"></mapping>
+		<mapping resource="mappings/Processsalarydetails.hbm.xml"></mapping>
+		<mapping resource="mappings/Processsalarydetailsheads.hbm.xml"></mapping>
+		<mapping resource="mappings/Branch.hbm.xml"></mapping>
+		<mapping resource="mappings/Pudetails.hbm.xml"></mapping>
+		<mapping resource="mappings/Degreedetails.hbm.xml"></mapping>
+		<mapping resource="mappings/Classhierarchy.hbm.xml"></mapping>
+		<mapping resource="mappings/Voucherentrytransactions.hbm.xml"></mapping>
+		<mapping resource="mappings/Subjectmaster.hbm.xml"></mapping>
+		<mapping resource="mappings/mess/MessItems.hbm.xml"></mapping>
+		<mapping resource="mappings/mess/MessSuppliers.hbm.xml"></mapping>
+		<mapping resource="mappings/mess/MessStockEntry.hbm.xml"></mapping>
+		<mapping resource="mappings/mess/MessInvoiceDetails.hbm.xml"></mapping>
+		<mapping resource="mappings/mess/MessStockAvailability.hbm.xml"></mapping>
+		<mapping resource="mappings/mess/MessStockMove.hbm.xml"></mapping>
+		<mapping resource="mappings/mess/MessSuppliersPayment.hbm.xml"></mapping>
+		<mapping resource="mappings/mess/Card.hbm.xml"></mapping>
+	</session-factory>
+</hibernate-configuration>

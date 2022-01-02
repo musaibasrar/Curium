@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15 Aug, 2016 12:22:36 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster" table="subjectmaster" >
+        <id name="subjectid" type="java.lang.Integer">
+            <column name="subjectid" />
+            <generator class="native" />
+        </id>
+        <property name="subjectname" type="string">
+            <column name="subjectname" length="100" />
+        </property>
+         <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+         <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+    </class>
+</hibernate-mapping>

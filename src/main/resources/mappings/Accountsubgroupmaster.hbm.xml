@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16 Feb, 2018 11:28:08 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.account.dto.Accountsubgroupmaster" table="acc_accountsubgroupmaster">
+        <id name="accountsubgroupmasterid" type="java.lang.Integer">
+            <column name="accountsubgroupmasterid" />
+            <generator class="identity" />
+        </id>
+        <property name="accountsubgroupname" type="string">
+            <column name="accountsubgroupname" length="100" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+		 <property name="userid" type="int">
+ 			<column name="userid" />
+		</property>
+      <!--   <property name="accountgroupid" type="java.lang.Integer">
+            <column name="accountgroupid" />
+        </property> -->
+        <many-to-one name="accountGroupMaster" class="org.ideoholic.curium.model.account.dto.Accountgroupmaster"
+            column="accountgroupid" lazy="false"
+            cascade="none" />
+    </class>
+</hibernate-mapping>

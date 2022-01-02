@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 25 Sep, 2014 6:35:53 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.parents.dto.Parents" table="parents">
+        <id name="pid" type="java.lang.Integer">
+            <column name="PID" />
+            <!-- <generator class="assigned" /> -->
+            <generator class="native" />
+          
+        </id>
+        <property name="fathersname" type="java.lang.String">
+            <column name="FATHERSNAME" />
+        </property>
+        <property name="fathersqualification" type="java.lang.String">
+            <column name="FATHERSQUALIFICATION" />
+        </property>
+        <property name="mothersname" type="java.lang.String">
+            <column name="MOTHERSNAME" />
+        </property>
+        <property name="mothersqualification" type="java.lang.String">
+            <column name="MOTHERSQUALIFICATION" />
+        </property>
+        <property name="addresspermanent" type="java.lang.String">
+            <column name="ADDRESSPERMANENT" />
+        </property>
+        <property name="addresstemporary" type="java.lang.String">
+            <column name="ADDRESSTEMPORARY" />
+        </property>
+        <property name="profession" type="java.lang.String">
+            <column name="PROFESSSION" />
+        </property>
+        <property name="parentsannualincome" type="java.lang.String">
+            <column name="PARENTSANNUALINCOME" />
+        </property>
+        <property name="noofdependents" type="java.lang.Integer">
+            <column name="NOOFDEPENDENTS" />
+        </property>
+        <!-- <property name="sid" type="java.lang.Integer">
+            <column name="SID" />
+        </property> -->
+        <property name="tid" type="java.lang.Integer">
+            <column name="TID" />
+        </property>
+         <property name="remarks" type="java.lang.String">
+            <column name="REMARKS" />
+        </property>
+        <property name="contactnumber" type="java.lang.String">
+            <column name="CONTACTNUMBER" />
+        </property>
+        <property name="cocontactnumber" type="java.lang.String">
+            <column name="COCONTACTNUMBER" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>        
+        <property name="fatherscastecertno" type="string">
+            <column name="fatherscastecertno" length="25" />
+        </property>
+        <property name="motherscastecertno" type="string">
+            <column name="motherscastecertno" length="25" />
+        </property>
+        <property name="fatherscaste" type="string">
+            <column name="fatherscaste" length="15" />
+        </property>    
+        <property name="motherscaste" type="string">
+            <column name="motherscaste" length="15" />
+        </property> 
+        	 <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+        <many-to-one name="Student" class="org.ideoholic.curium.model.student.dto.Student"
+            column="sid" unique="true" not-null="true" lazy="false"
+            cascade="all" />
+    </class>
+</hibernate-mapping>

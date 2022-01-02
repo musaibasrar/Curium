@@ -1,0 +1,43 @@
+TO DO
+-------------------------------------------------------
+1. Delete from archive (currently it is only for pudetails)
+
+
+
+
+User Roles
+-----------------------------
+
+1. Super Admin: View all branch students, fees details per branch, send notifications, Dash Board
+				Archive Students, password change.
+				  
+2. Admin: Removed Archive only & it is per branch.
+
+3. Fees Collector: Only fees collection from all the branches.
+ 
+ file changes (Role wise)
+ ------------------------------------------------------------
+ 1.Header
+ 2.index
+ 3.left
+ 4.sendsms (for super admin)
+
+ File changes (Branch Wise)
+ ----------------------------------------------------------------
+ addstudent.jsp
+ student_details.jsp
+ student_update.jsp
+ printfeesdetails.jsp 
+
+ ---------------- Manual changes for the DEV branch ---------------------------
+
+ Feesdetailsdao.java : remove extra transaction = session.begintrasaction() from the file from feesdetailsdao.java
+ Studentservice.java : take only conclass
+ Feesaction.java     : take feesstructure 
+ Feescollectionaction.java : remove .viewfees() from stampfees method
+ studentaction.java  : take addnew method
+ student.hbm.xml     : take two additional fields
+ userservice.java    : increase the session time to 60
+ 
+ 
+ 

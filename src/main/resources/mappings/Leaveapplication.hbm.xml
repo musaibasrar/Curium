@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 Apr, 2018 8:10:09 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.hr.dto.Leaveapplication" table="hr_leaveapplication">
+        <id name="idleaveapplication" type="java.lang.Integer">
+            <column name="idleaveapplication" />
+            <generator class="identity" />
+        </id>
+        <!-- <property name="idteacher" type="java.lang.Integer">
+            <column name="idteacher" />
+        </property> -->
+        <property name="fromdate" type="date">
+            <column name="fromdate" length="10" />
+        </property>
+        <property name="todate" type="date">
+            <column name="todate" length="10" />
+        </property>
+        <property name="leavetype" type="string">
+            <column name="leavetype" length="45" />
+        </property>
+        <property name="reason" type="string">
+            <column name="reason" length="500" />
+        </property>
+        <property name="academicyear" type="string">
+            <column name="academicyear" length="45" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="45" />
+        </property>
+        <property name="totalleaves" type="java.lang.Integer">
+            <column name="totalleaves" />
+        </property>
+        <property name="dateofapply" type="date">
+            <column name="dateofapply" length="10" />
+        </property>
+        <property name="dateofapproval" type="date">
+            <column name="dateofapproval" length="10" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+         <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+        <many-to-one name="teacher" class="org.ideoholic.curium.model.employee.dto.Teacher"
+            column="idteacher" lazy="false" />
+    </class>
+</hibernate-mapping>

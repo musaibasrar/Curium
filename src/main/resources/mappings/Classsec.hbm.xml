@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 6 Nov, 2014 12:17:14 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.std.dto.Classsec" table="classsec">
+        <id name="stdrdid" type="java.lang.Integer">
+            <column name="stdrdid" />
+            <generator class="identity" />
+        </id>
+        <property name="classdetails" type="java.lang.String">
+            <column name="classdetails" />
+        </property>
+        <property name="section" type="java.lang.String">
+            <column name="section" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+    </class>
+</hibernate-mapping>

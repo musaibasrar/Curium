@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 Apr, 2018 6:09:10 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.periods.dto.Perioddetails" table="perioddetails">
+        <id name="idperioddetails" type="java.lang.Integer">
+            <column name="idperioddetails" />
+            <generator class="identity" />
+        </id>
+        <property name="periodmasterid" type="java.lang.Integer">
+            <column name="periodmasterid" />
+        </property>
+        <property name="periods" type="string">
+            <column name="periods" length="45" />
+        </property>
+        <property name="timings" type="string">
+            <column name="timings" length="100" />
+        </property>
+        <property name="days" type="string">
+            <column name="days" length="60" />
+        </property>
+	        <property name="subject" type="string">
+	            <column name="subject" length="50" />
+	        </property>
+	        <property name="staff" type="string">
+	            <column name="staff" length="200" />
+	        </property>
+	         <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+         <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 25 Sep, 2014 6:14:25 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.user.dto.Login" table="login">
+        <id name="lid" type="java.lang.Integer">
+            <column name="LID" />
+            <generator class="identity" />
+        </id>
+        <property name="username" type="java.lang.String" access="field">
+            <column name="USERNAME" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <property name="usertype" type="java.lang.String">
+            <column name="USERTYPE" />
+        </property>
+        <property name="userid" type="int">
+ <column name="userid" />
+</property>
+         <many-to-one name="branch" class="org.ideoholic.curium.model.branch.dto.Branch"
+            column="branchid" lazy="false"
+             />
+    </class>
+</hibernate-mapping>

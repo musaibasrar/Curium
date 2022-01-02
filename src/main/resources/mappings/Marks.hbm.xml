@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15 Aug, 2016 11:42:58 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.marksdetails.dto.Marks" table="marks">
+        <id name="marksid" type="java.lang.Integer">
+            <column name="marksid" />
+            <generator class="identity" />
+        </id>
+        <property name="sid" type="java.lang.Integer">
+            <column name="sid" />
+        </property>
+        <property name="subid" type="java.lang.Integer">
+            <column name="subid" />
+        </property>
+        <property name="examid" type="java.lang.Integer">
+            <column name="examid" />
+        </property>
+        <property name="marksobtained" type="java.lang.Integer">
+            <column name="marksobtained" />
+        </property>
+         <property name="academicyear" type="java.lang.String">
+            <column name="ACADEMICYEAR" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+    </class>
+</hibernate-mapping>

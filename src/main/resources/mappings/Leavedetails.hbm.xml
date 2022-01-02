@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19 Apr, 2018 11:15:03 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.hr.dto.Leavedetails" table="hr_leavedetails">
+        <id name="idleavedetails" type="java.lang.Integer">
+            <column name="idleavedetails" />
+            <generator class="identity" />
+        </id>
+        <!-- <property name="idleavetypemaster" type="java.lang.Integer">
+            <column name="idleavetypemaster" />
+        </property> -->
+        <!-- <property name="idteacher" type="java.lang.Integer">
+            <column name="idteacher" />
+        </property> -->
+        <property name="numberofleaves" type="java.lang.Integer">
+            <column name="numberofleaves" />
+        </property>
+        <property name="academicyear" type="string">
+            <column name="academicyear" length="45" />
+        </property>
+        <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+        <many-to-one name="leaveTypeMaster" class="org.ideoholic.curium.model.hr.dto.Leavetypemaster"
+            column="idleavetypemaster" lazy="false" />
+       <many-to-one name="teacher" class="org.ideoholic.curium.model.employee.dto.Teacher"
+            column="idteacher" lazy="false" />
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 Feb, 2018 12:05:33 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.student.dto.Student" table="student" >
+        <id name="sid" type="java.lang.Integer">
+            <column name="sid" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="200" not-null="true" />
+        </property>
+        <property name="classstudying" type="string">
+            <column name="classstudying" length="45" />
+        </property>
+        <property name="classadmittedin" type="string">
+            <column name="classadmittedin" length="45" />
+        </property>
+        <property name="age" type="java.lang.Integer">
+            <column name="age" />
+        </property>
+        <property name="gender" type="string">
+            <column name="gender" length="45" />
+        </property>
+        <property name="dateofbirth" type="date">
+            <column name="dateofbirth" length="10" />
+        </property>
+        <property name="bloodgroup" type="string">
+            <column name="bloodgroup" length="45" />
+        </property>
+        <property name="nationality" type="string">
+            <column name="nationality" length="45" />
+        </property>
+        <property name="religion" type="string">
+            <column name="religion" length="45" />
+        </property>
+        <property name="caste" type="string">
+            <column name="caste" length="45" />
+        </property>
+        <property name="admissiondate" type="date">
+            <column name="admissiondate" length="10" />
+        </property>
+        <property name="admissionnumber" type="string">
+            <column name="admissionnumber" length="20" />
+        </property>
+        <property name="mothertongue" type="string">
+            <column name="mothertongue" length="45" />
+        </property>
+        <property name="remarks" type="string">
+            <column name="Remarks" length="500" />
+        </property>
+        <property name="schoollastattended" type="string">
+            <column name="schoollastattended" length="100" />
+        </property>
+        <property name="stdlaststudied" type="string">
+            <column name="stdlaststudied" length="45" />
+        </property>
+        <property name="createddate" type="date">
+            <column name="createddate" length="10" />
+        </property>
+        <property name="archive" type="java.lang.Integer">
+            <column name="archive" />
+        </property>
+        <property name="studentpic" type="string">
+            <column name="studentpic" />
+        </property>
+        <property name="studentexternalid" type="string">
+            <column name="studentexternalid" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="crecord" type="string">
+            <column name="crecord" length="45" />
+        </property>
+        <property name="crecorddate" type="date">
+            <column name="crecorddate" length="10" />
+        </property>
+        <property name="placeofbirth" type="string">
+            <column name="placeofbirth" length="100" />
+        </property>
+        <property name="nooftc" type="java.lang.Integer">
+            <column name="nooftc" />
+        </property>
+        <property name="dateoftc" type="date">
+            <column name="dateoftc" length="10" />
+        </property>
+        <property name="classonleaving" type="string">
+            <column name="classonleaving" length="45" />
+        </property>
+        <property name="dateleaving" type="date">
+            <column name="dateleaving" length="10" />
+        </property>
+        <property name="reasonleaving" type="string">
+            <column name="reasonleaving" length="500" />
+        </property>
+        <property name="notcissued" type="java.lang.Integer">
+            <column name="notcissued" />
+        </property>
+        <property name="datetcissued" type="date">
+            <column name="datetcissued" length="10" />
+        </property>
+        <property name="guardiandetails" type="string">
+            <column name="guardiandetails" length="200" />
+        </property>
+         <property name="subsequentprogress" type="string">
+            <column name="subsequentprogress" length="500" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        <property name="languagesstudied" type="string">
+            <column name="languagesstudied" length="80" />
+        </property>
+        <property name="instructionmediumlastschool" type="string">
+            <column name="instructionmediumlastschool" length="45" />
+        </property>
+         <property name="passedout" type="java.lang.Integer">
+            <column name="passedout" />
+        </property>
+         <property name="droppedout" type="java.lang.Integer">
+            <column name="droppedout" />
+        </property>
+          <property name="leftout" type="java.lang.Integer">
+            <column name="leftout" />
+        </property>
+        
+        <property name="semester" type="java.lang.Integer">
+            <column name="semester" />
+        </property>
+        <property name="stream" type="string">
+            <column name="stream" length="25" />
+        </property>
+        <property name="mediumofinstruction" type="string">
+            <column name="mediumofinstruction" length="15" />
+        </property>
+        <property name="previousschooltype" type="string">
+            <column name="previousschooltype" length="30" />
+        </property>
+        <property name="previouschooladdress" type="string">
+            <column name="previouschooladdress" length="250" />
+        </property>
+        <property name="urbanrural" type="string">
+            <column name="urbanrural" length="5" />
+        </property>
+        <property name="studentscastecertno" type="string">
+            <column name="studentscastecertno" length="25" />
+        </property>
+        <property name="studentscaste" type="string">
+            <column name="studentscaste" length="15" />
+        </property> 
+        <property name="socialcategory" type="string">
+            <column name="socialcategory" length="10" />
+        </property>    
+        <property name="belongtobpl" type="java.lang.Integer">
+            <column name="belongtobpl"/>
+        </property> 
+        <property name="bplcardno" type="string">
+            <column name="bplcardno" length="25" />
+        </property> 
+        <property name="bhagyalakshmibondnumber" type="string">
+            <column name="bhagyalakshmibondnumber" length="25" />
+        </property>
+        <property name="disabilitychild" type="string">
+            <column name="disabilitychild" length="40" />
+        </property>   
+        <property name="specialcategory" type="string">
+            <column name="specialcategory" length="25" />
+        </property> 
+        <property name="sts" type="java.lang.Integer">
+            <column name="sts" />
+        </property>
+        <property name="rte" type="java.lang.Integer">
+            <column name="rte" />
+        </property>
+         <property name="bankname" type="string">
+            <column name="bankname" length="500" />
+        </property>   
+         <property name="bankbranch" type="string">
+            <column name="bankbranch" length="200" />
+        </property>   
+         <property name="accno" type="string">
+            <column name="accno" length="50" />
+        </property>   
+         <property name="bankifsc" type="string">
+            <column name="bankifsc" length="50" />
+        </property>   
+         <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+         <!-- <many-to-one name="Pudetails" class="org.ideoholic.curium.model.pudetails.dto.Pudetails"
+            column="pudetailsid" unique="true" not-null="true" lazy="false"
+            cascade="all" />
+          <many-to-one name="degreedetails" class="org.ideoholic.curium.model.degreedetails.dto.Degreedetails"
+            column="degreedetailsid" unique="true" not-null="true" lazy="false"
+            cascade="all" /> -->
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 22 Jan, 2018 4:35:51 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.attendance.dto.Studentdailyattendance" table="att_studentdailyattendance">
+        <id name="attendanceid" type="java.lang.Integer">
+            <column name="attendanceid" />
+            <generator class="identity" />
+        </id>
+        <property name="attendeeid" type="string">
+            <column name="attendeeid" length="45" not-null="true" />
+        </property>
+        <property name="intime" type="string">
+            <column name="intime" length="45" />
+        </property>
+        <property name="outtime" type="string">
+            <column name="outtime" length="45" />
+        </property>
+        <property name="date" type="date">
+            <column name="date" length="10" />
+        </property>
+        <property name="attendancestatus" type="string">
+            <column name="attendancestatus" length="15" />
+        </property>
+        <property name="academicyear" type="string">
+            <column name="academicyear" length="10" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+         <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+    </class>
+</hibernate-mapping>

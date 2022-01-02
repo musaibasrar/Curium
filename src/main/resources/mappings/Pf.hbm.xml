@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24 Apr, 2018 1:06:55 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.hr.dto.Pf" table="hr_pf">
+        <id name="idpf" type="java.lang.Integer">
+            <column name="idpf" />
+            <generator class="identity" />
+        </id>
+        <property name="paidbymanagement" type="java.lang.Integer">
+            <column name="paidbymanagement" />
+        </property>
+        <property name="paidbyemployee" type="java.lang.Integer">
+            <column name="paidbyemployee" />
+        </property>
+        <property name="date" type="date">
+            <column name="date" length="10" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+         <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+    </class>
+</hibernate-mapping>

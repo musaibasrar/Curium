@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11 Feb, 2015 9:12:10 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.mess.stockentry.dto.MessStockAvailability" table="mess_stockavailable" >
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <!-- <generator class="identity" /> -->
+            <generator class="native" />
+        </id>
+         <!-- <property name="itemid" type="java.lang.Integer">
+            <column name="itemid" />
+        </property> -->
+        <property name="availablestock" type="java.lang.Float">
+            <column name="availablestock" />
+        </property>
+        <property name="minstock" type="java.lang.Integer">
+            <column name="minstock" />
+        </property>
+        <property name="branchid" type="java.lang.Integer">
+            <column name="branchid" />
+        </property>
+        <property name="userid" type="int">
+ <column name="userid" />
+</property>
+			<!-- Many-to-one is unidirectional one-to-one -->             
+             <many-to-one name="messitems" class="org.ideoholic.curium.model.mess.item.dto.MessItems"
+            column="itemid" unique="true" not-null="true" lazy="false"
+            cascade="all" />
+                    
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 Mar, 2018 10:58:19 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.account.dto.VoucherEntrytransactions" table="acc_voucherentrytransactions" >
+        <id name="transactionsid" type="java.lang.Integer">
+            <column name="transactionsid" />
+            <generator class="identity" />
+        </id>
+        <property name="draccountid" type="java.lang.Integer">
+            <column name="draccountid" />
+        </property>
+        <property name="craccountid" type="java.lang.Integer">
+            <column name="craccountid" />
+        </property>
+        <property name="dramount" type="big_decimal">
+            <column name="dramount" precision="18" scale="5" />
+        </property>
+        <property name="cramount" type="big_decimal">
+            <column name="cramount" precision="18" scale="5" />
+        </property>
+        <property name="vouchertype" type="java.lang.Integer">
+            <column name="vouchertype" />
+        </property>
+        <property name="transactiondate" type="date">
+            <column name="transactiondate" length="10" />
+        </property>
+        <property name="entrydate" type="date">
+            <column name="entrydate" length="10" />
+        </property>
+        <property name="vouchercancellationdate" type="date">
+            <column name="vouchercancellationdate" length="10" />
+        </property>
+        <property name="narration" type="string">
+            <column name="narration" length="500" />
+        </property>
+        <property name="cancelvoucher" type="string">
+            <column name="cancelvoucher" length="5" />
+        </property>
+        <property name="financialyear" type="java.lang.Integer" not-null="true">
+            <column name="financialyear" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+         <property name="userid" type="int">
+ 			<column name="userid" />
+		</property>
+    </class>
+</hibernate-mapping>

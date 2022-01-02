@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 18 Feb, 2018 10:47:48 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.account.dto.Accountdetailsbalance" table="acc_accountdetailsbalance" >
+        <id name="accountdetailsbalanceid" type="java.lang.Integer">
+            <column name="accountdetailsbalanceid" />
+            <generator class="identity" />
+        </id>
+        <!-- <property name="accountdetailsid" type="java.lang.Integer">
+            <column name="accountdetailsid" />
+        </property> -->
+        <property name="openingbalance" type="big_decimal">
+            <column name="openingbalance" precision="20" scale="4" />
+        </property>
+         <property name="currentbalance" type="big_decimal">
+            <column name="currentbalance" precision="20" scale="4" />
+        </property>
+        <property name="financialid" type="java.lang.Integer">
+            <column name="financialid" />
+        </property>
+        <property name="crdr" type="string">
+            <column name="crdr" length="40" />
+        </property>
+        <property name="enteredon" type="date">
+            <column name="enteredon" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        <property name="userid" type="int">
+			<column name="userid" />
+		</property>
+         <many-to-one name="accountDetails" class="org.ideoholic.curium.model.account.dto.Accountdetails"
+            column="accountdetailsid" lazy="false"
+            cascade="none" />
+    </class>
+</hibernate-mapping>

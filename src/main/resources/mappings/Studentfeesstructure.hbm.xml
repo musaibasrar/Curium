@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24 Jul, 2015 12:41:35 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.student.dto.Studentfeesstructure" table="fee_studentfeesstructure">
+        <id name="sfsid" type="java.lang.Integer">
+            <column name="sfsid" />
+           <generator class="native" />
+        </id>
+        <property name="sid" type="java.lang.Integer">
+            <column name="sid"/>
+        </property>
+        <!-- <property name="idfeescategory" type="java.lang.Integer">
+            <column name="idfeescategory" length="100" />
+        </property> -->
+        <property name="feesamount" type="java.lang.Long">
+            <column name="feesamount" precision="10" scale="0" />
+        </property>
+        <property name="feespaid" type="java.lang.Long">
+            <column name="feespaid" precision="10" scale="0" default="0"/>
+        </property>
+        <property name="academicyear" type="string">
+            <column name="academicyear" length="45" />
+        </property>
+          <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        <property name="concession" type="java.lang.Integer">
+            <column name="concession"/>
+        </property>
+        <property name="waiveoff" type="java.lang.Long">
+            <column name="waiveoff" precision="10" scale="0" default="0"/>
+        </property>
+         <property name="totalinstallment" type="java.lang.Integer">
+            <column name="totalinstallment"/>
+        </property>
+         <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+        <many-to-one name="Feescategory" class="org.ideoholic.curium.model.feescategory.dto.Feescategory" lazy="false"
+            column="idfeescategory" />
+    </class>
+</hibernate-mapping>

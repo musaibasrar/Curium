@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 16 Jan, 2018 9:20:32 PM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.attendance.dto.Holidaysmaster" table="att_holidaysmaster">
+        <id name="shid" type="java.lang.Integer">
+            <column name="shid" />
+            <generator class="identity" />
+        </id>
+        <property name="fromdate" type="date">
+            <column name="fromdate" length="10" not-null="true" />
+        </property>
+        <property name="todate" type="date">
+            <column name="todate" length="10" not-null="true" />
+        </property>
+        <property name="holidayname" type="string">
+            <column name="holidayname" length="40" not-null="true" />
+        </property>
+        <property name="academicyear" type="string">
+            <column name="academicyear" length="10" not-null="true" />
+        </property>
+        <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        
+         <property name="userid" type="int">
+ 			<column name="userid" />
+		</property>
+    </class>
+</hibernate-mapping>
