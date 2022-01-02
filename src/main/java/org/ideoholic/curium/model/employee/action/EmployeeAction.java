@@ -65,7 +65,7 @@ public class EmployeeAction {
 		return "viewAllEmployee";
 	}
 
-	@GetMapping("/addEmployee")
+	@PostMapping("/addEmployee")
 	public String addEmployee() {
 		if (new EmployeeService(request, response).addEmployee()) {
 			return "Employeesaved";
