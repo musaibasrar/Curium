@@ -82,7 +82,7 @@ public class StudentService {
 
 		                if (fieldName.equalsIgnoreCase("name")) {
 		                    
-		                    student.setName(DataUtil.emptyString(fieldName));
+		                    student.setName(DataUtil.emptyString(request.getParameter(fieldName)));
 		                    System.out.println("name==" + request.getParameter(fieldName));
 		                }
 
