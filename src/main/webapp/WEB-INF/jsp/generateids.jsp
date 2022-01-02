@@ -360,7 +360,7 @@
 <script type="text/javascript">
 	function searchDetails() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/printids/searchDetails";
+		form1.action = "/Printids/searchDetails";
 		form1.method = "POST";
 		form1.submit();
 
@@ -368,7 +368,7 @@
 
 	function printPreview() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/Printids/printpreview";
+		form1.action = "/Printids/printPreview";
 		form1.method = "POST";
 		form1.submit();
 
@@ -463,7 +463,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/Printids/printpreview" method="POST">
+	<form id="form1" action="/Printids/printPreview" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />

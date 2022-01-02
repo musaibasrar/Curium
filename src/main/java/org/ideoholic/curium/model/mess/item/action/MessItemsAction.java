@@ -128,7 +128,7 @@ public class MessItemsAction {
 		return viewItems();
 	}
 
-	@GetMapping("/MessItemsProcess")
+	@GetMapping("/purchaseItems")
 	public String purchaseItems() {
 		new MessSuppliersService(request, response).viewSuppliersDetails();
 		new MessItemsService(request, response).viewItemDetails();

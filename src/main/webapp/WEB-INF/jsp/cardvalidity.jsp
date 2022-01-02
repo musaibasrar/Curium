@@ -414,7 +414,7 @@
 
 	function searchDetails() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/printids/searchDetailsCardValidity";
+		form1.action = "/Printids/searchDetailsCardValidity";
 		form1.method = "POST";
 		form1.submit();
 
