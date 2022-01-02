@@ -3,9 +3,11 @@ package org.ideoholic.curium.model.student.service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +26,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
@@ -40,6 +41,7 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.web.multipart.MultipartFile;
 
 public class StudentService {
 
@@ -62,7 +64,7 @@ public class StudentService {
 		this.httpSession = request.getSession();
 	}
 
-	public boolean addStudent() {
+	public boolean addStudent(MultipartFile[] listOfFiles) {
 	    
 		Student student = new Student();
 		Parents parents = new Parents();
@@ -72,41 +74,40 @@ public class StudentService {
 		boolean result=false;
 		
 		try {
-			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+			Enumeration<String> enumeration = request.getParameterNames();
 		
-			 for (FileItem item : items) {
-		            if (item.isFormField()) {
+			 while (enumeration.hasMoreElements()) {
 		                // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
-		                String fieldName = item.getFieldName();
+		                String fieldName = enumeration.nextElement();
 
 		                if (fieldName.equalsIgnoreCase("name")) {
 		                    
-		                    student.setName(DataUtil.emptyString(item.getString()));
-		                    System.out.println("name==" + item.getString());
+		                    student.setName(DataUtil.emptyString(request.getParameter(fieldName)));
+		                    System.out.println("name==" + request.getParameter(fieldName));
 		                }
 
 		                
 		                if (fieldName.equalsIgnoreCase("gender")) {
 		                    
-		                    student.setGender(DataUtil.emptyString(item.getString()));
+		                    student.setGender(DataUtil.emptyString(request.getParameter(fieldName)));
 
 		                }
 
 		                if (fieldName.equalsIgnoreCase("dateofbirth")) {
 
-		                	student.setDateofbirth(DateUtil.indiandateParser(item.getString()));
+		                	student.setDateofbirth(DateUtil.indiandateParser(request.getParameter(fieldName)));
 
 		                }
 
 		                if (fieldName.equalsIgnoreCase("age")) {
 		                    
-		                    student.setAge(DataUtil.parseInt(item.getString()));
+		                    student.setAge(DataUtil.parseInt(request.getParameter(fieldName)));
 
 		                }
 
 		                if (fieldName.equalsIgnoreCase("addclass")) {
 		                    
-		                    addClass = DataUtil.emptyString(item.getString());
+		                    addClass = DataUtil.emptyString(request.getParameter(fieldName));
 		                    if (!addClass.equalsIgnoreCase("")) {
 		                            conClassStudying = addClass+"--";
 
@@ -115,7 +116,7 @@ public class StudentService {
 
 		                if (fieldName.equalsIgnoreCase("addsec")) {
 
-		                    addSec = DataUtil.emptyString(item.getString());
+		                    addSec = DataUtil.emptyString(request.getParameter(fieldName));
 		                    if (!addSec.equalsIgnoreCase("")) {
 			        			conClassStudying = conClassStudying+addSec;
 			        		}
@@ -124,7 +125,7 @@ public class StudentService {
 		                
 		                if (fieldName.equalsIgnoreCase("admclassE")) {
 		                    
-		                    addClassE = DataUtil.emptyString(item.getString());
+		                    addClassE = DataUtil.emptyString(request.getParameter(fieldName));
 
 		                    if (!addClassE.equalsIgnoreCase("")) {
 			        			conClassAdmittedIn = addClassE+"--";
@@ -133,7 +134,7 @@ public class StudentService {
 
 		                if (fieldName.equalsIgnoreCase("admsecE")) {
 		                    
-		                    addSecE = DataUtil.emptyString(item.getString());
+		                    addSecE = DataUtil.emptyString(request.getParameter(fieldName));
 			        		if (!addSecE.equalsIgnoreCase("")) {
 			        			conClassAdmittedIn = conClassAdmittedIn+addSecE;
 			        		}
@@ -142,335 +143,331 @@ public class StudentService {
 		                student.setClassadmittedin(DataUtil.emptyString(conClassAdmittedIn));
 
 		                if (fieldName.equalsIgnoreCase("lastclass")) {
-		                    student.setStdlaststudied(DataUtil.emptyString(item.getString()));
+		                    student.setStdlaststudied(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("lastschool")) {
-		                	student.setSchoollastattended(DataUtil.emptyString(item.getString()));
+		                	student.setSchoollastattended(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("admnno")) {
-		                	student.setAdmissionnumber(DataUtil.emptyString(item.getString()));
+		                	student.setAdmissionnumber(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("dateofadmission")) {
-		                	student.setAdmissiondate(DateUtil.indiandateParser(item.getString()));
+		                	student.setAdmissiondate(DateUtil.indiandateParser(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("bloodgroup")) {
-		                    student.setBloodgroup(DataUtil.emptyString(item.getString()));
+		                    student.setBloodgroup(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("nationality")) {
-		                	student.setNationality(DataUtil.emptyString(item.getString()));
+		                	student.setNationality(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("religion")) {
-		                    student.setReligion(DataUtil.emptyString(item.getString()));
+		                    student.setReligion(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("caste")) {
-		                    student.setCaste(DataUtil.emptyString(item.getString()));
+		                    student.setCaste(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("motherT")) {
-		                    student.setMothertongue(DataUtil.emptyString(item.getString()));
+		                    student.setMothertongue(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("createddate")) {
-		                    student.setCreateddate(DateUtil.indiandateParser(item.getString()));
+		                    student.setCreateddate(DateUtil.indiandateParser(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("remarks")) {
-		                	student.setRemarks(DataUtil.emptyString(item.getString()));
+		                	student.setRemarks(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("crecord")) {
-		                	student.setCrecord(DataUtil.emptyString(item.getString()));
+		                	student.setCrecord(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("dateofcr")) {
-		                	student.setCrecorddate(DateUtil.indiandateParser(item.getString()));
+		                	student.setCrecorddate(DateUtil.indiandateParser(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("place")) {
-		                	student.setPlaceofbirth(DataUtil.emptyString(item.getString()));
+		                	student.setPlaceofbirth(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("tcno")) {
-		                	student.setNooftc(DataUtil.parseInt(item.getString()));
+		                	student.setNooftc(DataUtil.parseInt(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("dateoftc")) {
-		                	student.setDateoftc(DateUtil.indiandateParser(item.getString()));
+		                	student.setDateoftc(DateUtil.indiandateParser(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("classonleaving")) {
-		                	student.setClassonleaving(DataUtil.emptyString(item.getString()));
+		                	student.setClassonleaving(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                // @UI 'core subjects studied'
 		                if (fieldName.equalsIgnoreCase("progress")) {
-		                	student.setSubsequentprogress(DataUtil.emptyString(item.getString()));
+		                	student.setSubsequentprogress(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("dateofleaving")) {
-		                	student.setDateleaving(DateUtil.indiandateParser(item.getString()));
+		                	student.setDateleaving(DateUtil.indiandateParser(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("reasonforleaving")) {
-		                	student.setReasonleaving(DataUtil.emptyString(item.getString()));
+		                	student.setReasonleaving(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("notcissued")) {
-		                	student.setNotcissued(DataUtil.parseInt(item.getString()));
+		                	student.setNotcissued(DataUtil.parseInt(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("dateoftcissued")) {
-		                	student.setDatetcissued(DateUtil.indiandateParser(item.getString()));
+		                	student.setDatetcissued(DateUtil.indiandateParser(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("guardian")) {
-		                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
+		                	student.setGuardiandetails(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                
 		                if (fieldName.equalsIgnoreCase("semester")) {
-		                	student.setSemester(DataUtil.parseInt(item.getString()));
+		                	student.setSemester(DataUtil.parseInt(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("stream")) {
-		                	student.setStream(DataUtil.emptyString(item.getString()));
+		                	student.setStream(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }		                
 		                if (fieldName.equalsIgnoreCase("mediumofinstruction")) {
-		                	student.setMediumofinstruction(DataUtil.emptyString(item.getString()));
+		                	student.setMediumofinstruction(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }	
 		                if (fieldName.equalsIgnoreCase("previousschooltype")) {
-		                	student.setPreviousschooltype(DataUtil.emptyString(item.getString()));
+		                	student.setPreviousschooltype(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("previouschooladdress")) {
-		                	student.setPreviouschooladdress(DataUtil.emptyString(item.getString()));
+		                	student.setPreviouschooladdress(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("urbanrural")) {
-		                	student.setUrbanrural(DataUtil.emptyString(item.getString()));
+		                	student.setUrbanrural(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("studentscastecertno")) {
-		                	student.setStudentscastecertno(DataUtil.emptyString(item.getString()));
+		                	student.setStudentscastecertno(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("studentscaste")) {
-		                	student.setStudentscaste(DataUtil.emptyString(item.getString()));
+		                	student.setStudentscaste(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("socialcategory")) {
-		                	student.setSocialcategory(DataUtil.emptyString(item.getString()));
+		                	student.setSocialcategory(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                //@UI 'Was in receipt of any scholarship'
 		                if (fieldName.equalsIgnoreCase("belongtobpl")) {
-		                	student.setBelongtobpl(DataUtil.parseInt(item.getString()));
+		                	student.setBelongtobpl(DataUtil.parseInt(request.getParameter(fieldName)));
 		                }
 		                //@UI 'Adhar card no'
 		                if (fieldName.equalsIgnoreCase("bplcardno")) {
-		                	student.setBplcardno(DataUtil.emptyString(item.getString()));
+		                	student.setBplcardno(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                //@UI 'Whether Vaccinated'
 		                if (fieldName.equalsIgnoreCase("bhagyalakshmibondnumber")) {
-		                	student.setBhagyalakshmibondnumber(DataUtil.emptyString(item.getString()));
+		                	student.setBhagyalakshmibondnumber(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                //@UI 'Marks of Identification on Pupil's body'
 		                if (fieldName.equalsIgnoreCase("disabilitychild")) {
-		                	student.setDisabilitychild(DataUtil.emptyString(item.getString()));
+		                	student.setDisabilitychild(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("specialcategory")) {
-		                	student.setSpecialcategory(DataUtil.emptyString(item.getString()));
+		                	student.setSpecialcategory(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("sts")) {
-		                	student.setSts(DataUtil.parseInt(item.getString()));
+		                	student.setSts(DataUtil.parseInt(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("rte")) {
-		                	student.setRte(DataUtil.parseInt(item.getString()));
+		                	student.setRte(DataUtil.parseInt(request.getParameter(fieldName)));
 		                }
 		                // PU Details
 		                if (fieldName.equalsIgnoreCase("pep")) {
-                                    puDetails.setExampassedappearance(DataUtil.parseInt(item.getString()));
+                                    puDetails.setExampassedappearance(DataUtil.parseInt(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("passedyear")) {
-                                    puDetails.setExampassedyear(DataUtil.emptyString(item.getString()));
+                                    puDetails.setExampassedyear(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("regno")) {
-                                    puDetails.setExampassedregno(DataUtil.emptyString(item.getString()));
+                                    puDetails.setExampassedregno(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("resultclass")) {
-                                    puDetails.setExampassedresultwithclass(DataUtil.emptyString(item.getString()));
+                                    puDetails.setExampassedresultwithclass(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("Xsecondlanguage")) {
-                                    puDetails.setSecondlanguage(DataUtil.emptyString(item.getString()));
+                                    puDetails.setSecondlanguage(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("aggmarks")) {
-                                    puDetails.setAggregatemarkssslc(DataUtil.emptyString(item.getString()));
+                                    puDetails.setAggregatemarkssslc(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("arts1")) {
-		                    if(!DataUtil.emptyString(item.getString()).isEmpty()) {
-		                        optional.append(DataUtil.emptyString(item.getString())+"-");
+		                    if(!DataUtil.emptyString(request.getParameter(fieldName)).isEmpty()) {
+		                        optional.append(DataUtil.emptyString(request.getParameter(fieldName))+"-");
 		                    }
                                 }
 		                if (fieldName.equalsIgnoreCase("arts2")) {
-                                    if(!DataUtil.emptyString(item.getString()).isEmpty()) {
-                                        compulsory.append(DataUtil.emptyString(item.getString())+"-");
+                                    if(!DataUtil.emptyString(request.getParameter(fieldName)).isEmpty()) {
+                                        compulsory.append(DataUtil.emptyString(request.getParameter(fieldName))+"-");
                                     }
                                 }
 		                if (fieldName.equalsIgnoreCase("science1")) {
 		                    
-                                    if(!DataUtil.emptyString(item.getString()).isEmpty()) {
-                                        optional.append(DataUtil.emptyString(item.getString())+"-");
+                                    if(!DataUtil.emptyString(request.getParameter(fieldName)).isEmpty()) {
+                                        optional.append(DataUtil.emptyString(request.getParameter(fieldName))+"-");
                                     }
                                     
                                 }
 		                if (fieldName.equalsIgnoreCase("science2")) {
-                                    if(!DataUtil.emptyString(item.getString()).isEmpty()) {
-                                        compulsory.append(DataUtil.emptyString(item.getString())+"-");
+                                    if(!DataUtil.emptyString(request.getParameter(fieldName)).isEmpty()) {
+                                        compulsory.append(DataUtil.emptyString(request.getParameter(fieldName))+"-");
                                     }
                                    
                                 }
 		                if (fieldName.equalsIgnoreCase("Xmediuminstruction")) {
-		                    puDetails.setSslcmediuminstruction(DataUtil.emptyString(item.getString()));
+		                    puDetails.setSslcmediuminstruction(DataUtil.emptyString(request.getParameter(fieldName)));
                                    
                                 }
 		                if (fieldName.equalsIgnoreCase("PUmediuminstruction")) {
-		                    puDetails.setPumediuminstruction(DataUtil.emptyString(item.getString()));
+		                    puDetails.setPumediuminstruction(DataUtil.emptyString(request.getParameter(fieldName)));
                                    
                                 }
 		                // End PU Details
 		                
 		                if (fieldName.equalsIgnoreCase("languagesstudied")) {
-                                    student.setLanguagesstudied(DataUtil.emptyString(item.getString()));
+                                    student.setLanguagesstudied(DataUtil.emptyString(request.getParameter(fieldName)));
                                    
                                 }
 		                if (fieldName.equalsIgnoreCase("mediumofinstructionlastschool")) {
-		                    student.setInstructionmediumlastschool(DataUtil.emptyString(item.getString()));
+		                    student.setInstructionmediumlastschool(DataUtil.emptyString(request.getParameter(fieldName)));
                                    
                                 }
 		                if (fieldName.equalsIgnoreCase("fathersname")) {
-                                    parents.setFathersname(DataUtil.emptyString(item.getString()));
+                                    parents.setFathersname(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
                                 if (fieldName.equalsIgnoreCase("mothersname")) {
-                                        parents.setMothersname(DataUtil.emptyString(item.getString()));
+                                        parents.setMothersname(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
                                 if (fieldName.equalsIgnoreCase("profession")) {
-                                    parents.setProfession(DataUtil.emptyString(item.getString()));
+                                    parents.setProfession(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
                                 if (fieldName.equalsIgnoreCase("parentsannualincome")) {
-                                        parents.setParentsannualincome(DataUtil.emptyString(item.getString()));
+                                        parents.setParentsannualincome(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
                                 if (fieldName.equalsIgnoreCase("permanentaddress")) {
-                                    parents.setAddresspermanent(DataUtil.emptyString(item.getString()));
+                                    parents.setAddresspermanent(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
                                 if (fieldName.equalsIgnoreCase("temporaryaddress")) {
-                                    parents.setAddresstemporary(DataUtil.emptyString(item.getString()));
+                                    parents.setAddresstemporary(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
                                 if (fieldName.equalsIgnoreCase("noofdependents")) {
-                                        parents.setNoofdependents(DataUtil.parseInt(item.getString()));
+                                        parents.setNoofdependents(DataUtil.parseInt(request.getParameter(fieldName)));
                                 }
                                 if (fieldName.equalsIgnoreCase("contactnumber")) {
-                                        parents.setContactnumber(DataUtil.emptyString(item.getString()));
+                                        parents.setContactnumber(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
                                 if (fieldName.equalsIgnoreCase("cocontactnumber")) {
-                                        parents.setCocontactnumber(DataUtil.emptyString(item.getString()));
+                                        parents.setCocontactnumber(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
                                 if (fieldName.equalsIgnoreCase("email")) {
-                                        parents.setEmail(DataUtil.emptyString(item.getString()));
+                                        parents.setEmail(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("fathersqualification")) {
-		                    parents.setFathersqualification(DataUtil.emptyString(item.getString()));
+		                    parents.setFathersqualification(DataUtil.emptyString(request.getParameter(fieldName)));
                                    
                                 }
 		                if (fieldName.equalsIgnoreCase("mothersqualification")) {
-		                    parents.setMothersqualification(DataUtil.emptyString(item.getString()));
+		                    parents.setMothersqualification(DataUtil.emptyString(request.getParameter(fieldName)));
                                    
                                 }
 		                //@UI 'Fathers Occupation'
 		                if(fieldName.equalsIgnoreCase("fatherscastecertno")){
-		                	parents.setFatherscastecertno(DataUtil.emptyString(item.getString()));
+		                	parents.setFatherscastecertno(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		              //@UI 'Mothers Occupation'
 		                if(fieldName.equalsIgnoreCase("motherscastecertno")){
-		                	parents.setMotherscastecertno(DataUtil.emptyString(item.getString()));
+		                	parents.setMotherscastecertno(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if(fieldName.equalsIgnoreCase("fatherscaste")){
-		                	parents.setFatherscaste(DataUtil.emptyString(item.getString()));
+		                	parents.setFatherscaste(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if(fieldName.equalsIgnoreCase("motherscaste")){
-		                	parents.setMotherscaste(DataUtil.emptyString(item.getString()));
+		                	parents.setMotherscaste(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("remarksadditional")) {
-		                	parents.setRemarks(DataUtil.emptyString(item.getString()));
+		                	parents.setRemarks(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                // Adding Degree Details
 		                if (fieldName.equalsIgnoreCase("pepdc")) {
-                                    degreeDetails.setExampassedappearance(DataUtil.parseInt(item.getString()));
+                                    degreeDetails.setExampassedappearance(DataUtil.parseInt(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("passedyeardc")) {
-                                    degreeDetails.setExampassedyear(DataUtil.emptyString(item.getString()));
+                                    degreeDetails.setExampassedyear(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("regnodc")) {
-                                    degreeDetails.setExampassedregno(DataUtil.emptyString(item.getString()));
+                                    degreeDetails.setExampassedregno(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("resultclassdc")) {
-                                    degreeDetails.setExampassedresultwithclass(DataUtil.emptyString(item.getString()));
+                                    degreeDetails.setExampassedresultwithclass(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("mediumofinstructiondc")) {
-                                    degreeDetails.setPumediuminstruction(DataUtil.emptyString(item.getString()));
+                                    degreeDetails.setPumediuminstruction(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("qpartone")) {
-                                    degreeDetails.setSubjectsqualifingexampartone(DataUtil.emptyString(item.getString()));
+                                    degreeDetails.setSubjectsqualifingexampartone(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("qparttwo")) {
-                                    degreeDetails.setSubjectsqualifingexamparttwo(DataUtil.emptyString(item.getString()));
+                                    degreeDetails.setSubjectsqualifingexamparttwo(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("ppartone")) {
-                                    degreeDetails.setSubjectsdegreecoursepartone(DataUtil.emptyString(item.getString()));
+                                    degreeDetails.setSubjectsdegreecoursepartone(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("pparttwo")) {
-                                    degreeDetails.setSubjectsdegreecourseparttwo(DataUtil.emptyString(item.getString()));
+                                    degreeDetails.setSubjectsdegreecourseparttwo(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("pumarkscard")) {
-                                    degreeDetails.setPumarkscard(DataUtil.parseInt(item.getString()));
+                                    degreeDetails.setPumarkscard(DataUtil.parseInt(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("medicalreport")) {
-                                    degreeDetails.setMedicalreport(DataUtil.parseInt(item.getString()));
+                                    degreeDetails.setMedicalreport(DataUtil.parseInt(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("incomecertificate")) {
-                                    degreeDetails.setIncomecertificate(DataUtil.parseInt(item.getString()));
+                                    degreeDetails.setIncomecertificate(DataUtil.parseInt(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("migrationcertificate")) {
-                                    degreeDetails.setMigrationcertificate(DataUtil.parseInt(item.getString()));
+                                    degreeDetails.setMigrationcertificate(DataUtil.parseInt(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("originaltc")) {
-                                    degreeDetails.setTransfercertificate(DataUtil.parseInt(item.getString()));
+                                    degreeDetails.setTransfercertificate(DataUtil.parseInt(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("castecertificate")) {
-                                    degreeDetails.setCastecertificate(DataUtil.parseInt(item.getString()));
+                                    degreeDetails.setCastecertificate(DataUtil.parseInt(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("games")) {
-                                    degreeDetails.setProficiencysports(DataUtil.emptyString(item.getString()));
+                                    degreeDetails.setProficiencysports(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("extracurricular")) {
-                                    degreeDetails.setExtracurricular(DataUtil.emptyString(item.getString()));
+                                    degreeDetails.setExtracurricular(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("employer")) {
-                                    degreeDetails.setAreyouemployee(DataUtil.emptyString(item.getString()));
+                                    degreeDetails.setAreyouemployee(DataUtil.emptyString(request.getParameter(fieldName)));
                                 }
 		                if (fieldName.equalsIgnoreCase("karnataka")) {
-                                    degreeDetails.setKarnataka(DataUtil.parseInt(item.getString()));
+                                    degreeDetails.setKarnataka(DataUtil.parseInt(request.getParameter(fieldName)));
                                 }
 		                
 		                //End Degree Details
 		                
 		                //Bank Details
 		                if (fieldName.equalsIgnoreCase("bankname")) {
-		                	student.setBankname(DataUtil.emptyString(item.getString()));
+		                	student.setBankname(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("bankifsc")) {
-		                	student.setBankifsc(DataUtil.emptyString(item.getString()));
+		                	student.setBankifsc(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("accno")) {
-		                	student.setAccno(DataUtil.emptyString(item.getString()));
+		                	student.setAccno(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                //End Bank Details
-		                
-		            } else {
-		                // Process form file field (input type="file").
-		                String fieldName = item.getFieldName();
-
-		                if (fieldName.equalsIgnoreCase("fileToUpload")) {
-
-		                    String fileName = (DataUtil.emptyString(item.getName()));
-		                    String fileValue = (DataUtil.emptyString(item.getString()));
+		            }
+			// Process form file field (input type="file")
+			 if(listOfFiles != null && listOfFiles.length != 0) 
+				 {
+					 for (MultipartFile fileItem : listOfFiles) {
+						  String fileName = (DataUtil.emptyString(fileItem.getOriginalFilename()));
+		                    String fileValue = (DataUtil.emptyString(fileItem.getName()));
 		                    if (!fileName.equalsIgnoreCase("")) {
-		                    	// encode data on your side using BASE64
-		                    	byte[]   bytesEncoded = Base64.encodeBase64(item.get());
+		                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
 		                    	String saveFile = new String(bytesEncoded);
 		                    	student.setStudentpic(saveFile);
+		                    }
+					 }
+				 }
 
-		                    } 
-		                }
-		            }
-		        }
-		} catch (FileUploadException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
@@ -615,7 +612,7 @@ public class StudentService {
 		return result;
 	}
 
-	public String updateStudent() {
+	public String updateStudent(MultipartFile[] listOfFiles) {
 		Student student = new Student();
 		Classsec classsec = new Classsec();
 		Parents parents = new Parents();
@@ -632,21 +629,20 @@ public class StudentService {
 		
 		try{
 			
-		List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+			Enumeration<String> enumeration = request.getParameterNames();
 	
-		 for (FileItem item : items) {
-	            if (item.isFormField()) {
+			while (enumeration.hasMoreElements()) {
 	                // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
-	                String fieldName = item.getFieldName();
+	            	 String fieldName = enumeration.nextElement();
 	               
 	                System.out.println("field name is "+fieldName);
 	                if (fieldName.equalsIgnoreCase("id")) {	                
-	                id = DataUtil.emptyString(item.getString());
+	                id = DataUtil.emptyString(request.getParameter(fieldName));
 	                
 	                }
 	                
 	                if (fieldName.equalsIgnoreCase("idparents")) {	                
-	        		pid = DataUtil.emptyString(item.getString());
+	        		pid = DataUtil.emptyString(request.getParameter(fieldName));
 	                }
 	                
 	        		System.out.println("THE ID IS: " + id + "," + pid);
@@ -663,32 +659,32 @@ public class StudentService {
 	                
 	                if (fieldName.equalsIgnoreCase("name")) {
 	                    
-	                    student.setName(DataUtil.emptyString(item.getString()));
-	                    System.out.println("name==" + item.getString());
+	                    student.setName(DataUtil.emptyString(request.getParameter(fieldName)));
+	                    System.out.println("name==" + request.getParameter(fieldName));
 	                }
 
 	                
 	                if (fieldName.equalsIgnoreCase("gender")) {
 	                    
-	                    student.setGender(DataUtil.emptyString(item.getString()));
+	                    student.setGender(DataUtil.emptyString(request.getParameter(fieldName)));
 
 	                }
 
 	                if (fieldName.equalsIgnoreCase("dateofbirth")) {
 
-	                	student.setDateofbirth(DateUtil.indiandateParser(item.getString()));
+	                	student.setDateofbirth(DateUtil.indiandateParser(request.getParameter(fieldName)));
 
 	                }
 
 	                if (fieldName.equalsIgnoreCase("age")) {
 	                    
-	                    student.setAge(DataUtil.parseInt(item.getString()));
+	                    student.setAge(DataUtil.parseInt(request.getParameter(fieldName)));
 
 	                }
 
 	                if (fieldName.equalsIgnoreCase("classsec")) {
 	                    
-	                    addClass = DataUtil.emptyString(item.getString());
+	                    addClass = DataUtil.emptyString(request.getParameter(fieldName));
 	                    if (!addClass.equalsIgnoreCase("")) {
 		        			conClassStudying = addClass+"--";
 
@@ -699,7 +695,7 @@ public class StudentService {
 
 	                if (fieldName.equalsIgnoreCase("secstudying")) {
 
-	                    addSec = DataUtil.emptyString(item.getString());
+	                    addSec = DataUtil.emptyString(request.getParameter(fieldName));
 	                    if (!addSec.equalsIgnoreCase("")) {
 		        			conClassStudying = conClassStudying+addSec;
 		        		}
@@ -710,7 +706,7 @@ public class StudentService {
 	                
 	                if (fieldName.equalsIgnoreCase("admclass")) {
 	                    
-	                    addClassE = DataUtil.emptyString(item.getString());
+	                    addClassE = DataUtil.emptyString(request.getParameter(fieldName));
 
 	                    if (!addClassE.equalsIgnoreCase("")) {
 		        			conClassAdmittedIn = addClassE+"--";
@@ -724,7 +720,7 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("admsec")) {
 
 	                    
-	                    addSecE = DataUtil.emptyString(item.getString());
+	                    addSecE = DataUtil.emptyString(request.getParameter(fieldName));
 		        		if (!addSecE.equalsIgnoreCase("")) {
 		        			conClassAdmittedIn = conClassAdmittedIn+addSecE;
 		        		}
@@ -737,159 +733,159 @@ public class StudentService {
 
 
 	                if (fieldName.equalsIgnoreCase("lastclass")) {
-	                    student.setStdlaststudied(DataUtil.emptyString(item.getString()));
+	                    student.setStdlaststudied(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 
 
 	                if (fieldName.equalsIgnoreCase("lastschool")) {
-	                	student.setSchoollastattended(DataUtil.emptyString(item.getString()));
+	                	student.setSchoollastattended(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 
 
 	                if (fieldName.equalsIgnoreCase("admnno")) {
-	                	student.setAdmissionnumber(DataUtil.emptyString(item.getString()));
+	                	student.setAdmissionnumber(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 
 	                if (fieldName.equalsIgnoreCase("dateofadmission")) {
-	                	student.setAdmissiondate(DateUtil.indiandateParser(item.getString()));
+	                	student.setAdmissiondate(DateUtil.indiandateParser(request.getParameter(fieldName)));
 	                }
 
 
 	                if (fieldName.equalsIgnoreCase("bloodgroup")) {
-	                    student.setBloodgroup(DataUtil.emptyString(item.getString()));
+	                    student.setBloodgroup(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 
 
 
 	                if (fieldName.equalsIgnoreCase("nationality")) {
-	                	student.setNationality(DataUtil.emptyString(item.getString()));
+	                	student.setNationality(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 
 
 	                if (fieldName.equalsIgnoreCase("religion")) {
-	                    student.setReligion(DataUtil.emptyString(item.getString()));
+	                    student.setReligion(DataUtil.emptyString(request.getParameter(fieldName)));
 
 	                }
 
 	                if (fieldName.equalsIgnoreCase("caste")) {
-	                    student.setCaste(DataUtil.emptyString(item.getString()));
+	                    student.setCaste(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 
 	                if (fieldName.equalsIgnoreCase("motherT")) {
-	                    student.setMothertongue(DataUtil.emptyString(item.getString()));
+	                    student.setMothertongue(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 
 	                if (fieldName.equalsIgnoreCase("createddate")) {
-	                    student.setCreateddate(DateUtil.indiandateParser(item.getString()));
+	                    student.setCreateddate(DateUtil.indiandateParser(request.getParameter(fieldName)));
 	                }
 
 	                if (fieldName.equalsIgnoreCase("remarks")) {
-	                	student.setRemarks(DataUtil.emptyString(item.getString()));
+	                	student.setRemarks(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                
 	                if(fieldName.equalsIgnoreCase("studentpicupdate")){
-	                	studentPicUpdate=DataUtil.emptyString(item.getString());
+	                	studentPicUpdate=DataUtil.emptyString(request.getParameter(fieldName));
 	                }
 	                
 	                if(fieldName.equalsIgnoreCase("studentexternalid")){
-	                	student.setStudentexternalid(DataUtil.emptyString(item.getString()));
+	                	student.setStudentexternalid(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("crecord")) {
-	                	student.setCrecord(DataUtil.emptyString(item.getString()));
+	                	student.setCrecord(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("dateofcr")) {
-	                	student.setCrecorddate(DateUtil.indiandateParser(item.getString()));
+	                	student.setCrecorddate(DateUtil.indiandateParser(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("place")) {
-	                	student.setPlaceofbirth(DataUtil.emptyString(item.getString()));
+	                	student.setPlaceofbirth(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("tcno")) {
-	                	student.setNooftc(DataUtil.parseInt(item.getString()));
+	                	student.setNooftc(DataUtil.parseInt(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("dateoftc")) {
-	                	student.setDateoftc(DateUtil.indiandateParser(item.getString()));
+	                	student.setDateoftc(DateUtil.indiandateParser(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("classonleaving")) {
-	                	student.setClassonleaving(DataUtil.emptyString(item.getString()));
+	                	student.setClassonleaving(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("progress")) {
-	                	student.setSubsequentprogress(DataUtil.emptyString(item.getString()));
+	                	student.setSubsequentprogress(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("dateofleaving")) {
-	                	student.setDateleaving(DateUtil.indiandateParser(item.getString()));
+	                	student.setDateleaving(DateUtil.indiandateParser(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("reasonforleaving")) {
-	                	student.setReasonleaving(DataUtil.emptyString(item.getString()));
+	                	student.setReasonleaving(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("notcissued")) {
-	                	student.setNotcissued(DataUtil.parseInt(item.getString()));
+	                	student.setNotcissued(DataUtil.parseInt(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("dateoftcissued")) {
-	                	student.setDatetcissued(DateUtil.indiandateParser(item.getString()));
+	                	student.setDatetcissued(DateUtil.indiandateParser(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("guardian")) {
-	                	student.setGuardiandetails(DataUtil.emptyString(item.getString()));
+	                	student.setGuardiandetails(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                
 	                if (fieldName.equalsIgnoreCase("semester")) {
-	                	student.setSemester(DataUtil.parseInt(item.getString()));
+	                	student.setSemester(DataUtil.parseInt(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("stream")) {
-	                	student.setStream(DataUtil.emptyString(item.getString()));
+	                	student.setStream(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }		                
 	                if (fieldName.equalsIgnoreCase("mediumofinstruction")) {
-	                	student.setMediumofinstruction(DataUtil.emptyString(item.getString()));
+	                	student.setMediumofinstruction(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }	
 	                if (fieldName.equalsIgnoreCase("previousschooltype")) {
-	                	student.setPreviousschooltype(DataUtil.emptyString(item.getString()));
+	                	student.setPreviousschooltype(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("previouschooladdress")) {
-	                	student.setPreviouschooladdress(DataUtil.emptyString(item.getString()));
+	                	student.setPreviouschooladdress(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("urbanrural")) {
-	                	student.setUrbanrural(DataUtil.emptyString(item.getString()));
+	                	student.setUrbanrural(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("studentscastecertno")) {
-	                	student.setStudentscastecertno(DataUtil.emptyString(item.getString()));
+	                	student.setStudentscastecertno(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("studentscaste")) {
-	                	student.setStudentscaste(DataUtil.emptyString(item.getString()));
+	                	student.setStudentscaste(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("socialcategory")) {
-	                	student.setSocialcategory(DataUtil.emptyString(item.getString()));
+	                	student.setSocialcategory(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("belongtobpl")) {
-	                	student.setBelongtobpl(DataUtil.parseInt(item.getString()));
+	                	student.setBelongtobpl(DataUtil.parseInt(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("bplcardno")) {
-	                	student.setBplcardno(DataUtil.emptyString(item.getString()));
+	                	student.setBplcardno(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("bhagyalakshmibondnumber")) {
-	                	student.setBhagyalakshmibondnumber(DataUtil.emptyString(item.getString()));
+	                	student.setBhagyalakshmibondnumber(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("disabilitychild")) {
-	                	student.setDisabilitychild(DataUtil.emptyString(item.getString()));
+	                	student.setDisabilitychild(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("specialcategory")) {
-	                	dropdowncateg = DataUtil.emptyString(item.getString());
+	                	dropdowncateg = DataUtil.emptyString(request.getParameter(fieldName));
 	                }
 	                if(fieldName.equalsIgnoreCase("newcategory")) {
-	                	newcateg = DataUtil.emptyString(item.getString());
+	                	newcateg = DataUtil.emptyString(request.getParameter(fieldName));
 	                }
 	                if (fieldName.equalsIgnoreCase("sts")) {
-	                	student.setSts(DataUtil.parseInt(item.getString()));
+	                	student.setSts(DataUtil.parseInt(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("rte")) {
-	                	student.setRte(DataUtil.parseInt(item.getString()));
+	                	student.setRte(DataUtil.parseInt(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("passedout")) {
-	                	student.setPassedout(DataUtil.parseInt(item.getString()));
+	                	student.setPassedout(DataUtil.parseInt(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("leftout")) {
-	                	student.setLeftout(DataUtil.parseInt(item.getString()));
+	                	student.setLeftout(DataUtil.parseInt(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("droppedout")) {
-	                	student.setDroppedout(DataUtil.parseInt(item.getString()));
+	                	student.setDroppedout(DataUtil.parseInt(request.getParameter(fieldName)));
 	                }
 	                // Updating paretns information
 	                
@@ -897,204 +893,201 @@ public class StudentService {
 	        		parents.setSid(studentId);
 
 	                if (fieldName.equalsIgnoreCase("fathersname")) {
-	                	parents.setFathersname(DataUtil.emptyString(item.getString()));
+	                	parents.setFathersname(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 
 
 	                if (fieldName.equalsIgnoreCase("mothersname")) {
-	                	parents.setMothersname(DataUtil.emptyString(item.getString()));
+	                	parents.setMothersname(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 
 	                if (fieldName.equalsIgnoreCase("profession")) {
-	                    parents.setProfession(DataUtil.emptyString(item.getString()));
+	                    parents.setProfession(DataUtil.emptyString(request.getParameter(fieldName)));
 
 	                }
 
 	                if (fieldName.equalsIgnoreCase("annualincome")) {
-	                	parents.setParentsannualincome(DataUtil.emptyString(item.getString()));
+	                	parents.setParentsannualincome(DataUtil.emptyString(request.getParameter(fieldName)));
 
 	                }
 
 	                if (fieldName.equalsIgnoreCase("permanentaddress")) {
-	                    parents.setAddresspermanent(DataUtil.emptyString(item.getString()));
+	                    parents.setAddresspermanent(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 
 	                if (fieldName.equalsIgnoreCase("temporaryaddress")) {
-	                    parents.setAddresstemporary(DataUtil.emptyString(item.getString()));
+	                    parents.setAddresstemporary(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 
 
 	                if (fieldName.equalsIgnoreCase("noofdependents")) {
-	                	parents.setNoofdependents(DataUtil.parseInt(item.getString()));
+	                	parents.setNoofdependents(DataUtil.parseInt(request.getParameter(fieldName)));
 	                }
 	                
 	                if (fieldName.equalsIgnoreCase("remarksadditional")) {
-	                	parents.setRemarks(DataUtil.emptyString(item.getString()));
+	                	parents.setRemarks(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                
 	                
 	                if (fieldName.equalsIgnoreCase("contactnumber")) {
-	                	parents.setContactnumber(DataUtil.emptyString(item.getString()));
+	                	parents.setContactnumber(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                
 	                if (fieldName.equalsIgnoreCase("cocontactnumber")) {
-	                	parents.setCocontactnumber(DataUtil.emptyString(item.getString()));
+	                	parents.setCocontactnumber(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                
 	                if(fieldName.equalsIgnoreCase("email")){
-	                	parents.setEmail(DataUtil.emptyString(item.getString()));
+	                	parents.setEmail(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                
 	                if (fieldName.equalsIgnoreCase("pep")) {
-                            puDetails.setExampassedappearance(DataUtil.parseInt(item.getString()));
+                            puDetails.setExampassedappearance(DataUtil.parseInt(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("passedyear")) {
-                            puDetails.setExampassedyear(DataUtil.emptyString(item.getString()));
+                            puDetails.setExampassedyear(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("regno")) {
-                            puDetails.setExampassedregno(DataUtil.emptyString(item.getString()));
+                            puDetails.setExampassedregno(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("resultclass")) {
-                            puDetails.setExampassedresultwithclass(DataUtil.emptyString(item.getString()));
+                            puDetails.setExampassedresultwithclass(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("Xsecondlanguage")) {
-                            puDetails.setSecondlanguage(DataUtil.emptyString(item.getString()));
+                            puDetails.setSecondlanguage(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("aggmarks")) {
-                            puDetails.setAggregatemarkssslc(DataUtil.emptyString(item.getString()));
+                            puDetails.setAggregatemarkssslc(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("subjectspart1")) {
-                            puDetails.setOptionalsubjects(DataUtil.emptyString(item.getString()));
+                            puDetails.setOptionalsubjects(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("subjectspart2")) {
-                            puDetails.setcompulsorysubjects(DataUtil.emptyString(item.getString()));
+                            puDetails.setcompulsorysubjects(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("Xmediuminstruction")) {
-                            puDetails.setSslcmediuminstruction(DataUtil.emptyString(item.getString()));
+                            puDetails.setSslcmediuminstruction(DataUtil.emptyString(request.getParameter(fieldName)));
                            
                         }
                         if (fieldName.equalsIgnoreCase("PUmediuminstruction")) {
-                            puDetails.setPumediuminstruction(DataUtil.emptyString(item.getString()));
+                            puDetails.setPumediuminstruction(DataUtil.emptyString(request.getParameter(fieldName)));
                            
                         }
                         if (fieldName.equalsIgnoreCase("pudetailsid")) {
-                            puDetails.setIdpudetails(DataUtil.parseInt(item.getString()));
+                            puDetails.setIdpudetails(DataUtil.parseInt(request.getParameter(fieldName)));
                            
                         }
                         if (fieldName.equalsIgnoreCase("fathersqualification")) {
-                            parents.setFathersqualification(DataUtil.emptyString(item.getString()));
+                            parents.setFathersqualification(DataUtil.emptyString(request.getParameter(fieldName)));
                            
                         }
                         if (fieldName.equalsIgnoreCase("mothersqualification")) {
-                            parents.setMothersqualification(DataUtil.emptyString(item.getString()));
+                            parents.setMothersqualification(DataUtil.emptyString(request.getParameter(fieldName)));
                            
                         }
 		                if(fieldName.equalsIgnoreCase("fatherscastecertno")){
-		                	parents.setFatherscastecertno(DataUtil.emptyString(item.getString()));
+		                	parents.setFatherscastecertno(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if(fieldName.equalsIgnoreCase("motherscastecertno")){
-		                	parents.setMotherscastecertno(DataUtil.emptyString(item.getString()));
+		                	parents.setMotherscastecertno(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if(fieldName.equalsIgnoreCase("fatherscaste")){
-		                	parents.setFatherscaste(DataUtil.emptyString(item.getString()));
+		                	parents.setFatherscaste(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if(fieldName.equalsIgnoreCase("motherscaste")){
-		                	parents.setMotherscaste(DataUtil.emptyString(item.getString()));
+		                	parents.setMotherscaste(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
                         if (fieldName.equalsIgnoreCase("languagesstudied")) {
-                            student.setLanguagesstudied(DataUtil.emptyString(item.getString()));
+                            student.setLanguagesstudied(DataUtil.emptyString(request.getParameter(fieldName)));
                            
                         }
                         if (fieldName.equalsIgnoreCase("mediumofinstructionlastschool")) {
-                            student.setInstructionmediumlastschool(DataUtil.emptyString(item.getString()));
+                            student.setInstructionmediumlastschool(DataUtil.emptyString(request.getParameter(fieldName)));
                            
                         }
                         
                      // Updating Degree Details
                         if (fieldName.equalsIgnoreCase("pepdc")) {
-                            degreeDetails.setExampassedappearance(DataUtil.parseInt(item.getString()));
+                            degreeDetails.setExampassedappearance(DataUtil.parseInt(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("passedyeardc")) {
-                            degreeDetails.setExampassedyear(DataUtil.emptyString(item.getString()));
+                            degreeDetails.setExampassedyear(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("regnodc")) {
-                            degreeDetails.setExampassedregno(DataUtil.emptyString(item.getString()));
+                            degreeDetails.setExampassedregno(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("resultclassdc")) {
-                            degreeDetails.setExampassedresultwithclass(DataUtil.emptyString(item.getString()));
+                            degreeDetails.setExampassedresultwithclass(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("mediumofinstructiondc")) {
-                            degreeDetails.setPumediuminstruction(DataUtil.emptyString(item.getString()));
+                            degreeDetails.setPumediuminstruction(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("qpartone")) {
-                            degreeDetails.setSubjectsqualifingexampartone(DataUtil.emptyString(item.getString()));
+                            degreeDetails.setSubjectsqualifingexampartone(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("qparttwo")) {
-                            degreeDetails.setSubjectsqualifingexamparttwo(DataUtil.emptyString(item.getString()));
+                            degreeDetails.setSubjectsqualifingexamparttwo(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("ppartone")) {
-                            degreeDetails.setSubjectsdegreecoursepartone(DataUtil.emptyString(item.getString()));
+                            degreeDetails.setSubjectsdegreecoursepartone(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("pparttwo")) {
-                            degreeDetails.setSubjectsdegreecourseparttwo(DataUtil.emptyString(item.getString()));
+                            degreeDetails.setSubjectsdegreecourseparttwo(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("pumarkscard")) {
-                            degreeDetails.setPumarkscard(DataUtil.parseInt(item.getString()));
+                            degreeDetails.setPumarkscard(DataUtil.parseInt(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("medicalreport")) {
-                            degreeDetails.setMedicalreport(DataUtil.parseInt(item.getString()));
+                            degreeDetails.setMedicalreport(DataUtil.parseInt(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("incomecertificate")) {
-                            degreeDetails.setIncomecertificate(DataUtil.parseInt(item.getString()));
+                            degreeDetails.setIncomecertificate(DataUtil.parseInt(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("migrationcertificate")) {
-                            degreeDetails.setMigrationcertificate(DataUtil.parseInt(item.getString()));
+                            degreeDetails.setMigrationcertificate(DataUtil.parseInt(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("originaltc")) {
-                            degreeDetails.setTransfercertificate(DataUtil.parseInt(item.getString()));
+                            degreeDetails.setTransfercertificate(DataUtil.parseInt(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("castecertificate")) {
-                            degreeDetails.setCastecertificate(DataUtil.parseInt(item.getString()));
+                            degreeDetails.setCastecertificate(DataUtil.parseInt(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("games")) {
-                            degreeDetails.setProficiencysports(DataUtil.emptyString(item.getString()));
+                            degreeDetails.setProficiencysports(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("extracurricular")) {
-                            degreeDetails.setExtracurricular(DataUtil.emptyString(item.getString()));
+                            degreeDetails.setExtracurricular(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("employer")) {
-                            degreeDetails.setAreyouemployee(DataUtil.emptyString(item.getString()));
+                            degreeDetails.setAreyouemployee(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("karnataka")) {
-                            degreeDetails.setKarnataka(DataUtil.parseInt(item.getString()));
+                            degreeDetails.setKarnataka(DataUtil.parseInt(request.getParameter(fieldName)));
                         }
                         //End Degree Details
                         
                       //Bank Details
 		                if (fieldName.equalsIgnoreCase("bankname")) {
-		                	student.setBankname(DataUtil.emptyString(item.getString()));
+		                	student.setBankname(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("bankifsc")) {
-		                	student.setBankifsc(DataUtil.emptyString(item.getString()));
+		                	student.setBankifsc(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("accno")) {
-		                	student.setAccno(DataUtil.emptyString(item.getString()));
+		                	student.setAccno(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		              //End Bank Details
 		                
-	            } else {
-	                String fieldName = item.getFieldName();
+	            } 
+			if(listOfFiles != null && listOfFiles.length != 0){
 
-	                if (fieldName.equalsIgnoreCase("fileToUpload")) {
+				for (MultipartFile fileItem : listOfFiles) {
+					String fileName = (DataUtil.emptyString(fileItem.getOriginalFilename()));
+					String fileValue = (DataUtil.emptyString(fileItem.getName()));
 
-
-	                    String fileName = (DataUtil.emptyString(item.getName()));
-	                    String fileValue = (DataUtil.emptyString(item.getString()));
 	                    if (!fileName.equalsIgnoreCase("")) {
-	                       
-	                    	                    	
 	                    	// Resize the image
-	                    	byte[]   bytesEncoded = Base64.encodeBase64(item.get());
+	                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
 	                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
 	                    	String saveFile = new String(bytesEncoded);
 
@@ -1106,7 +1099,6 @@ public class StudentService {
 	                    }
 	                }
 	            }
-	        }
 	
 	} catch (Exception e) {
 		e.printStackTrace();

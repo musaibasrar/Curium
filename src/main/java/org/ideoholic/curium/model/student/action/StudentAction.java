@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
  * @author Musaib_2
@@ -151,9 +154,9 @@ public class StudentAction {
 		return viewAll();
 	}
 
-	@PostMapping("/updateStudent")
-	public String updateStudent(HttpServletRequest request, HttpServletResponse response) {
-		String idbranchid = new StudentService(request, response).updateStudent();
+	@RequestMapping(value = "/updateStudent", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public String updateStudent(@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
+		String idbranchid = new StudentService(request, response).updateStudent(uploadedFiles);
 		String id[] = idbranchid.split("_");
 		return viewStudent(id[0], id[1]);
 	}
@@ -177,17 +180,19 @@ public class StudentAction {
 
 	@GetMapping("/ViewDetails")
 	public String viewStudent() {
-
+		String branchId;
 		if (new StudentService(request, response).viewDetailsOfStudent()) {
-			if (request.getParameter("urlbranchid").equalsIgnoreCase("1")) {
+			Object obj = request.getAttribute("urlbranchid");
+			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
+			if (branchId.equalsIgnoreCase("1")) {
 				return "student_details";
-			} else if (request.getParameter("urlbranchid").equalsIgnoreCase("2")) {
+			} else if (branchId.equalsIgnoreCase("2")) {
 				return "student_details";
-			} else if (request.getParameter("urlbranchid").equalsIgnoreCase("3")) {
+			} else if (branchId.equalsIgnoreCase("3")) {
 				return "student_details";
-			} else if (request.getParameter("urlbranchid").equalsIgnoreCase("4")) {
+			} else if (branchId.equalsIgnoreCase("4")) {
 				return "student_details";
-			} else if (request.getParameter("urlbranchid").equalsIgnoreCase("5")) {
+			} else if (branchId.equalsIgnoreCase("5")) {
 				return "student_details";
 			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
 				return "student_details_withoutmodify";
@@ -198,9 +203,10 @@ public class StudentAction {
 		}
 	}
 
-	@PostMapping("/AddStudent")
-	public String addStudent() {
-		if (new StudentService(request, response).addStudent()) {
+	@RequestMapping(value = "/AddStudent", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public String addStudent(MultipartHttpServletRequest request,
+			@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
+		if (new StudentService(request, response).addStudent(uploadedFiles)) {
 			return "saved";
 		} else {
 			return "notSaved";
