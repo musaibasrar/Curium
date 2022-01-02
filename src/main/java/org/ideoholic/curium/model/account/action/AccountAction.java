@@ -195,7 +195,7 @@ public class AccountAction {
 	public String deleteAccount() {
 		
 		if(new AccountService(request, response).deleteAccount()){
-			return createVoucher();
+			return createAccount();
 		}
 		return ERRORPAGE;
 		
@@ -205,14 +205,14 @@ public class AccountAction {
 	public String saveAccount() {
 		
 		if(!"false".equalsIgnoreCase(new AccountService(request, response).saveAccount())){
-			return createVoucher();
+			return createAccount();
 		} 
 		return ERRORPAGE;
 		
 		
 	}
 
-	@PostMapping("/getSubGroupNames")
+	@GetMapping("/getSubGroupNames")
 	public void getSubGroupNames() {
 		
 			try {

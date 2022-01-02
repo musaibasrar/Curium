@@ -480,7 +480,7 @@ for(Cookie cookie : cookies){
 
                         </td>
                         <td>
-                            <button id="print" type="button" style="background-image: url(images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                            <button id="print" type="button" style="background-image: url(/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
                                     this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
                         </td>
 

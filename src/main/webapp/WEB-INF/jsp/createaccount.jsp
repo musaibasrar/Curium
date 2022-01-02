@@ -751,25 +751,25 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Account Type<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+							src="/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
 						<th title="click to sort" class="headerText">Group<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+							src="/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
 						<th title="click to sort" class="headerText">Sub-Group<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+							src="/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
 						<th title="click to sort" class="headerText">Account Code<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Account Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Balance<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="/css/dataTable/images/sort_both.png" /></th>
 					</tr>
 				</thead>
 
