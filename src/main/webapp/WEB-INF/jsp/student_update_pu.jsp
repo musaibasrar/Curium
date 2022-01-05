@@ -1006,7 +1006,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td width="30%" class="alignRight">Second Language Offered in SSLC/HSC(X std.) or Equivalent Examination&nbsp;</td>
 							<td width="12%" align="left"><label> <input
-									name="Xsecondlanguage" type="text" class="myclass" id="Xsecondlanguage" size="36"
+									name="xsecondlanguage" type="text" class="myclass" id="xsecondlanguage" size="36"
 									value="${student.pudetails.secondlanguage}" 
 									>
 							</label></td>
@@ -1058,7 +1058,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td width="30%" class="alignRight">Medium of instruction at the SSLC/SSC/HSC (X std.) or Equivalent Examination&nbsp;</td>
 							<td width="12%" align="left"><label> <input
-									name="Xmediuminstruction" type="text" class="myclass" id="Xmediuminstruction" size="36"
+									name="xmediuminstruction" type="text" class="myclass" id="xmediuminstruction" size="36"
 									 value="${student.pudetails.sslcmediuminstruction}" 
 									>
 							</label></td>
