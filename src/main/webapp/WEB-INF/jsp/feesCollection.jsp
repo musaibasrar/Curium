@@ -439,7 +439,7 @@
             <c:forEach varStatus="status" items="${studentListFeesCollection}" var="student">{
             	value:'<c:out default="0" value="${student.name}" />',
                 admissionno:'<c:out default="0" value="${student.admissionnumber}" />',
-                regno:'<c:out default="0" value="${student.registrationnumber}" />',
+                regno:'<c:out default="0" value="${student.studentexternalid}" />',
                 name:'<c:out default="0" value="${student.name}" />',
                 classandsec:'<c:out default="0" value="${student.classstudying}" />',
                 id:'<c:out default="0" value="${student.sid}" />',
@@ -1068,8 +1068,8 @@ for(Cookie cookie : cookies){
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
 									<select name="transferbankname" id="transferbankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
-											<option value="axisbank">Axis Bank</option>
-											<option value="canarabank">Canara Bank</option>
+											<option value="sbibank">SBI Bank</option>
+											<!-- <option value="canarabank">Canara Bank</option> -->
 								</select>
 							
 							</label>
@@ -1111,8 +1111,8 @@ for(Cookie cookie : cookies){
 							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
 									<select name="chequebankname" id="chequebankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
-											<option value="axisbank">Axis Bank</option>
-											<option value="canarabank">Canara Bank</option>
+											<option value="sbibank">SBI Bank</option>
+											<!-- <option value="canarabank">Canara Bank</option> -->
 								</select>
 							
 							</label>

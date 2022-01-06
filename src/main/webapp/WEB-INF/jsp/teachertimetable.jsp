@@ -615,10 +615,10 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Staff Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Department<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="/css/dataTable/images/sort_both.png" /></th>
 					</tr>
 				</thead>
 

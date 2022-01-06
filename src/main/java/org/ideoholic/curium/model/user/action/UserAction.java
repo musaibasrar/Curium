@@ -71,6 +71,17 @@ public class UserAction {
 		}
 		return "login";
 	}
+	
+	@GetMapping("/multiUser")
+	public String authenticateMultiUser(Model model) {
+		// ModelAndView model = new ModelAndView("/");
+		if (new UserService(request, response).authenticateMultiUser()) {
+			model.addAttribute("login_success", true);
+		} else {
+			model.addAttribute("login_success", false);
+		}
+		return "login";
+	}
 
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logOutUser(Model model) {

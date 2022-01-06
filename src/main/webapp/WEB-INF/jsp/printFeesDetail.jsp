@@ -150,10 +150,10 @@
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
+             margin-bottom: 1cm;
+             margin-top: 1cm;
         }
 
         @media screen {
@@ -162,8 +162,8 @@
                         font-family: 'Times New Roman'
             }
             .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
+                margin-left: 1px ;
+                margin-right: 1px;
             }
         }
     </style>
@@ -175,17 +175,19 @@
 <div style="border: 1px solid;border-radius: 15px">
 	<form method="post" class="bodymargin">
 		<br>
-		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 50px;">
-				<img src="/images/logo.jpg" width="200" height="100"/>
+				<td align="left" style="padding-left: 10px;">
+				<img src="/images/roshanfees.jpg" width="100" height="94"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 100px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 70px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 40px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
+				<td align="left" style="padding-right: 10px;">
+				<img src="/images/roshanpaytm.jpeg" width="100" height="94"/>
+				</td> 
 			</tr>
 </table>
 
@@ -362,15 +364,29 @@
 			</tr>
 			
 
-<tr>
+			<tr>
 			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
 
+			<tr>
+				<td class="headerText" style="font-weight: bold;">
+					Total Fees: Rs. ${totalfees} &nbsp;&nbsp;&nbsp;&nbsp; Total fees paid : &#x20B9; ${sumoffees}
+					&nbsp;&nbsp;&nbsp;&nbsp; Total fees Due : &#x20B9; ${dueamount} 
+				</td>
+				
+			</tr>
+			
+			<tr>
+			
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			</tr>
 <tr>
-<td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
+<td align="left" style="padding-left: 10px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
 </tr>
 <tr>
 <td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
@@ -378,7 +394,7 @@
 </tr>
 
 <tr>
-<td align="left">Note: Fees once deposited will not be refunded under any Circumstances</td>
+<td align="left" style="padding-left: 10px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
 </tr>
 
 <tr>

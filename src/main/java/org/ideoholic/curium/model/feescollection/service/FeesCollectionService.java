@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.academicyear.dao.YearDAO;
+import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
@@ -251,15 +253,15 @@ public class FeesCollectionService {
 				
 			//Pass Receipt : Credit the student Fees Receivable & debit the cash
 			
-			int crFees = getLedgerAccountId("studentfeesreceivable");
+			int crFees = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			int drAccount = 0;
 			
 			if("cashpayment".equalsIgnoreCase(paymentMethod)) {
-				drAccount = getLedgerAccountId(httpSession.getAttribute(username).toString());
+				drAccount = getLedgerAccountId(httpSession.getAttribute(username).toString()+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			}else if("banktransfer".equalsIgnoreCase(paymentMethod)) {
-				drAccount = getLedgerAccountId(transferBankname);
+				drAccount = getLedgerAccountId(transferBankname+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
-				drAccount = getLedgerAccountId(chequeBankname);
+				drAccount = getLedgerAccountId(chequeBankname+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			} 
 			
 			
@@ -286,8 +288,8 @@ public class FeesCollectionService {
 			
 			//Pass J.V. : Credit the student Fees as Income & debit the unearned revenue
 			
-			int crFeesIncome = getLedgerAccountId("studentfeesincome");
-			int drAccountIncome = getLedgerAccountId("unearnedstudentfeesincome");;
+			int crFeesIncome = getLedgerAccountId("studentfeesincome"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			int drAccountIncome = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			
 			VoucherEntrytransactions transactionsIncome = new VoucherEntrytransactions();
 			
@@ -732,6 +734,40 @@ public class FeesCollectionService {
 		    }
 		    
 		    return result;
+	}
+
+	public void getFeesDetails() {
+		
+		try {
+			long id = Long.parseLong(request.getParameter("studentId"));
+			
+			Currentacademicyear currentYear = new YearDAO().showYear();
+			httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
+			
+			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
+			request.setAttribute("receiptinfo",rinfo);
+			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, currentYear.getCurrentacademicyear());
+			
+			long totalSum = 0l;
+			for (Receiptinfo receiptInfoSingle : rinfo) {
+				totalSum = totalSum + receiptInfoSingle.getTotalamount();
+			}
+			
+			long totalFeesAmount = 0l;
+			for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
+				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
+			}
+			
+				httpSession.setAttribute("feesstructure", feesstructure);
+				httpSession.setAttribute("sumoffees", totalSum);
+				httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
+				httpSession.setAttribute("totalfees", totalFeesAmount);
+				httpSession.setAttribute("academicPerYear", currentYear.getCurrentacademicyear());
+				httpSession.setAttribute("currentAcademicYear", currentYear.getCurrentacademicyear());
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

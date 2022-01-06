@@ -147,7 +147,7 @@ public class AccountService {
 		String accountCode = DataUtil.emptyString(request.getParameter("accountcode"));
 		
 		
-		Accountdetails accountDetailsCheck = new AccountDAO().checkAccountDetails(accountName, accountCode);
+		Accountdetails accountDetailsCheck = new AccountDAO().checkAccountDetails(accountName, accountCode, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		if(accountDetailsCheck==null) {
 			
@@ -876,8 +876,8 @@ public class AccountService {
 		        	
 		        	if(!accountSSGroupMaster.isEmpty()){
 		        		String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
+		        		buffer = buffer+"<option></option>";
 			        	for(int i =0; i<accountSSGroupMaster.size();i++){
-			        		buffer = buffer+"<option></option>";
 			        		buffer = buffer +  "<option value="+accountSSGroupMaster.get(i).getSsgroupmasterid()+">"+accountSSGroupMaster.get(i).getSsgroupname()+"</option>";
 			        	}
 			        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option></select>";

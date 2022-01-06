@@ -148,7 +148,6 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
 					<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					with Registration Number &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:100px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -160,11 +159,7 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
 					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					is a student of &nbsp;&nbsp; <span style="font-weight: bold;width: 100px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
-						    		${splt} 
-								</c:forEach>
+					is/ was a student of this School/College.
 					</span>
 					
 					</h3>
@@ -179,9 +174,13 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft"  >
 				
 				<h3 style="font-weight: normal;" >
-					
-					for the academic year <span style="font-weight: bold;width: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;${currentAcademicYear}</span>
-					He/She is a bonafide student of our college.
+					He/ She is/ Was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>
+					</span>
+					during the year <span style="font-weight: bold;width: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;${currentAcademicYear}</span>.His/ her date of birth
 					</h3>
 					
 				</td>
@@ -192,6 +191,19 @@ for(Cookie cookie : cookies){
 			<td></td>
 			</tr>
 			<tr>
+			<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+					 as per School/College record is
+					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
+					</h3>
+					
+				</td>
+				
+
+			</tr>
 			<td></td>
 			</tr>
 			<tr>

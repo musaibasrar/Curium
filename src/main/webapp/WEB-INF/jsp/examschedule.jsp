@@ -687,19 +687,19 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Class<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Subject<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="/css/dataTable/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Date<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Start Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">End Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+							src="/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
 
 					</tr>

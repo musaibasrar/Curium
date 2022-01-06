@@ -425,7 +425,7 @@ for(Cookie cookie : cookies){
 
             <table width="100%">
                 <tr>
-                    <td  class="headerTD">NAME: &nbsp;<c:out value="${student.name}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <td  class="headerTD">NAME: &nbsp;<c:out value="${student.name}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UID: &nbsp;<c:out value="${student.studentexternalid}" />
                       
 
                     </td>
@@ -568,7 +568,7 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                         <td  width="25%"  class="alignLeft" height="50" >Was in receipt of any scholarship
+                         <td  width="25%"  class="alignLeft" height="50" >Belong to BPL
                             </td>
                             <td width="25%" class="tablerows" >
                                
@@ -580,7 +580,7 @@ for(Cookie cookie : cookies){
            						 </c:if>
            						 
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50" >Adhar Card No.
+                            <td  width="25%"  class="alignLeft" height="50" >BPL Card No.
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.bplcardno}" />
@@ -589,20 +589,13 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                         <td  width="25%"  class="alignLeft" height="50" >Whether Vaccinated
+                         <td  width="25%"  class="alignLeft" height="50" >Bhagyalakshmi Bond No.
                             </td>
                             <td width="25%" class="tablerows" >
-                               
-                                <c:if test="${(student.bhagyalakshmibondnumber ==0)}">    
-           						  <c:out default="" value="No" />
-           						 </c:if>
-                                <c:if test="${(student.bhagyalakshmibondnumber ==1)}">    
-           						  <c:out default="" value="Yes" />
-           						 </c:if>
-           						 
+                                <c:out default="" value="${student.bhagyalakshmibondnumber}" />
                             </td>
                             
-                            <td  width="25%"  class="alignLeft" height="50" >Marks of Identification on Pupil's body
+                            <td  width="25%"  class="alignLeft" height="50" >Student's Aadhar Card No.
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.disabilitychild}" />
@@ -702,6 +695,62 @@ for(Cookie cookie : cookies){
 
                             </td>
                         </tr>
+                    </table>
+                </div>
+    </div>
+    
+    
+    <div class="accordion" style="width: 100%;height: 100%">
+		
+                <h3><a href="#">Documents</a></h3>
+                <div>
+
+                    <table  border="0px" width="100%"  id="table1" align="center">
+                    
+                        <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc1.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc2.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc3.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc4.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="studentdoc5.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
+                    </td>
+                    </tr>
                     </table>
                 </div>
     </div>
@@ -862,12 +911,12 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50">Fathers Occupation</td>
+                            <td width="25%"  class="alignLeft" height="50">Father's Caste <br> Certificate No</td>
                             <td width="25%" class="tablerows" >
                                  <c:out value="${parents.fatherscastecertno}" />
                                 
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Mothers Occupation
+                            <td width="25%"  class="alignLeft" height="50" >Mother's Caste <br> Certificate No
                             </td>
                             <td width="25%"  class="tablerows">
                                 <c:out default="" value="${parents.motherscastecertno}" />
@@ -997,7 +1046,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${receiptinfo.date}"/></a></td>
                                 <td  class="dataText"><c:out value="${receiptinfo.receiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  
 
                             </tr>

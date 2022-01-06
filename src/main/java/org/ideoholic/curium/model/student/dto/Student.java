@@ -222,6 +222,21 @@ public class Student implements java.io.Serializable {
 	@Column(name = "userid")
 	private int userid;
 	
+	@Column(name = "studentdoc1")
+	private String studentdoc1;
+	
+	@Column(name = "studentdoc2")
+	private String studentdoc2;
+	
+	@Column(name = "studentdoc3")
+	private String studentdoc3;
+	
+	@Column(name = "studentdoc4")
+	private String studentdoc4;
+	
+	@Column(name = "studentdoc5")
+	private String studentdoc5;
+	
 	private String lastcourse;
 	private Integer totalmarks;
 	private String lastfirstlanguage;

@@ -64,6 +64,7 @@ public class FeesCollectionAction {
 		@PostMapping("/StampFees")
 		public String StampFees() {
                 new FeesCollectionService(request, response).getStampFees();
+                new FeesCollectionService(request, response).getFeesDetails();
                 new FeesService(request, response).viewAllBranchStudents();
                 return "feesCollection";
         }

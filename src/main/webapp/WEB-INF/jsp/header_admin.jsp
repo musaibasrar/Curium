@@ -122,10 +122,10 @@ for(Cookie cookie : cookies){
                         <table width="100%" border="0" align="center"
 						cellpadding="2" cellspacing="0" bordercolor="#FFFFFF">
 						<tr><td></td></tr>
-						<tr>
+						<tr style="height: 45px;">
 							
-									<td style="padding-left: 20px;padding-right: 50px;">
-								<a target="mainFrame" href="/welcome" ><img src="/images/logo.jpg"/></a>
+									<td style="padding-left: 20px;">
+								<a target="mainFrame" href="/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
 								</td>
 								
 							<!-- <td align="left"><img src="/images/curiumheader.png"

@@ -195,14 +195,14 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
-		<br>
-		<table>
+		<br><br>
+		<table style="padding-left: 30px;padding-right: 20px;">
 			<tr>
 			<td class="dataTextBoldLeft">
-			<br><br>
-				Date:&nbsp;&nbsp;
+			<br><br><br>
+				<%-- Date:&nbsp;&nbsp;
 				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" ></td>
+					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" > --%></td>
 			
 			</tr>
 			
@@ -225,9 +225,9 @@ for(Cookie cookie : cookies){
 			<tr>
 			
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					with Registration Number &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:100px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span>
+					<h3 style="font-weight: normal;">This is to certify that Smt/Sri &nbsp;&nbsp;
+					<span style="font-weight: bold;text-transform: capitalize;width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
+					<%-- with Registration Number &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:100px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span> --%>
 					</h3>
 				</td>
 			</tr>
@@ -238,14 +238,27 @@ for(Cookie cookie : cookies){
 				
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					is a student of &nbsp;&nbsp; <span style="font-weight: bold;width: 100px;">
+					S/o, D/o &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>					
+					is/ was a student of this School/College.
+					 
+					</h3>
+				</td>
+			
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+				
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;" >
+					 He/ She is/ Was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
 					</span>
-					
+					during the year <span style="font-weight: bold;width: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;${currentAcademicYear}</span>.His/ her date of birth
 					</h3>
 				</td>
 			
@@ -258,9 +271,8 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft"  >
 				
 				<h3 style="font-weight: normal;" >
-					
-					for the academic year <span style="font-weight: bold;width: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;${currentAcademicYear}</span>
-					He/She is a bonafide student of our college.
+					 as per School/College record is
+					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
 					</h3>
 					
 				</td>
@@ -271,6 +283,15 @@ for(Cookie cookie : cookies){
 			<td></td>
 			</tr>
 			<tr>
+				<td class="dataTextBoldLeft"  style="padding-left: 60px;">
+				<h3 style="font-weight: normal;" align="center">
+					He bears good Moral Character
+					</h3>
+				</td>
+				
+
+			</tr>
+			<tr>
 			<td></td>
 			</tr>
 			<tr>
@@ -279,8 +300,7 @@ for(Cookie cookie : cookies){
 		</table>
 		
 
-		<TABLE id="dataTable" width="100%" border="0"
-			style="page-break-after: always; border-collapse: collapse;">
+		<TABLE width="100%" border="0" style="page-break-after: always; border-collapse: collapse;">
 
 			<tr>
 			<td>
@@ -294,10 +314,8 @@ for(Cookie cookie : cookies){
 			<td></td>
 			</tr>
 		<tr>
-		<td></td>
-			<td align="left">Clerk</td>	
-			<td align="center">College Seal</td>
-			<td align="center">Principal</td>
+			<td style="padding-left: 10px;">Date</td>	
+			<td align="right" style="padding-right: 70px;">Head Master/Principal</td>
 		</tr>
 		</TABLE>
 	</form>
