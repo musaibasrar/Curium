@@ -24,4 +24,9 @@ public class CuriumApplication extends SpringBootServletInitializer {
 		return application.sources(CuriumApplication.class);
 	}
 
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(CuriumApplication.class);
+	}
+
 }
