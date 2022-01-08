@@ -16,8 +16,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Generate Hall Ticket</title>
-<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/css/datePicker/demos.css">
+<link rel="stylesheet" href="/curium/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/curium/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -298,42 +298,42 @@ background-color:rgba(0, 0, 0, 0);
 	
 }
 </style>
-<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/curium/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/curium/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/curium/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/curium/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/curium/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/sliderAccess.js"></script>
+	src="/curium/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/curium/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/curium/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/curium/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/curium/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/curium/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/curium/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/curium/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/curium/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/curium/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/curium/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -348,12 +348,12 @@ background-color:rgba(0, 0, 0, 0);
 	});
 </script>
 
-<script type="text/javascript" src="/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/curium/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	
 	function search() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/ExamDetailsProcess/searchHallTicketDetails";
+		form1.action="/curium/ExamDetailsProcess/searchHallTicketDetails";
 		form1.method = "POST";
 		form1.submit();
 
@@ -361,7 +361,7 @@ background-color:rgba(0, 0, 0, 0);
 	
 	function printPreview() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/ExamDetailsProcess/printPreviewHallTicket";
+		form1.action="/curium/ExamDetailsProcess/printPreviewHallTicket";
 		form1.method = "POST";
 		form1.submit();
 
@@ -479,7 +479,7 @@ background-color:rgba(0, 0, 0, 0);
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
