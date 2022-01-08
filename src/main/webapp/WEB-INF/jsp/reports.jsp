@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Reports</title>
-        <script language="JavaScript" src="/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/css/datePicker/demos.css">
+        <script language="JavaScript" src="/curium/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/curium/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/curium/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/css/font-awesome.css">
+        <script type="text/javascript" src="/curium/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/curium/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/curium/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/curium/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/curium/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/curium/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/curium/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/curium/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -471,7 +471,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
+            				 <a target="mainFrame" href="/curium/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr>
             		
@@ -492,7 +492,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
+            				<a target="mainFrame" href="/curium/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
             			</td>
             		</tr>
                 </table>
@@ -553,12 +553,12 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/incomestatement" style="font-size: 12px;">Income Statement</a>
+            				<a target="mainFrame" href="/curium/incomestatement" style="font-size: 12px;">Income Statement</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            				 <a target="mainFrame" href="/curium/trialbalance" style="font-size: 12px;">Trial Balance</a>
             			</td>
             		</tr>
             		<tr>
