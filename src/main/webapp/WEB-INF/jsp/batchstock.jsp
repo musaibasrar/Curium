@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Batch Stock</title>
-<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/css/datePicker/demos.css">
+<link rel="stylesheet" href="/curium/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/curium/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -401,17 +401,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/curium/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/curium/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/curium/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/curium/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -464,13 +464,13 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/curium/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/MessItemsProcess/printBatchStockAvailability";
+		form1.action="/curium/MessItemsProcess/printBatchStockAvailability";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -506,7 +506,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
