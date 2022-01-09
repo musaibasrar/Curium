@@ -507,7 +507,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=StudentProcess&action=exportDataForStudents" method="POST">
+	<form id="form1" action="Controller?process=FeesCollection&action=exportDataForStudentsFeesReport" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />

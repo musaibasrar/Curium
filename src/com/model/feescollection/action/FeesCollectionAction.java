@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import com.model.feescategory.service.FeesService;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.feescollection.service.FeesCollectionService;
+import com.model.student.service.StudentService;
 
 /**
  * @author Musaib_2
@@ -44,11 +45,27 @@ public class FeesCollectionAction {
                             url = undoFeesReceipt();
                         }else if (action.equalsIgnoreCase("searchFeesReport")) {
                             url = searchFeesReport();
-                    }
+                        }else if (action.equalsIgnoreCase("exportDataForStudentsFeesReport")) {
+                            url = exportDataForStudentsFeesReport();
+                        }else if (action.equalsIgnoreCase("download")) {
+                            url = download();
+                        }
                 return url;
         }
 
-        private String searchFeesReport() {
+		private String download() {
+			if (new FeesCollectionService(request, response).downlaod()) {
+				return "feesreportexportsuccess.jsp";
+			}
+			return "exportfailure.jsp";
+			}
+
+		private String exportDataForStudentsFeesReport() {
+        	new FeesCollectionService(request, response).exportDataForStudentsFeesReport();
+            return "feesreportexportsuccess.jsp";
+		}
+
+		private String searchFeesReport() {
             new FeesCollectionService(request, response).getFeesReport();
             return "feesreport.jsp";
     }

@@ -126,7 +126,7 @@
 	border-radius: 3px;
 	width: 10px;
 	font-family: Tahoma;
-	font-size: 14px;
+	font-size: 12px;
 	background-color: #4b6a84;
 	color: #FFFFFF;
 	font-weight: Bold;
@@ -510,7 +510,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=StudentProcess&action=exportDataForStudents" method="POST">
+	<form id="form1" action="Controller?process=FeesCollection&action=exportDataForStudentsFeesReport" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -649,9 +649,11 @@ for(Cookie cookie : cookies){
 				</tbody>
 				<tfoot>
 					<tr>
+					
+					<td  class="footerTD" > <input value="Export"
+							type="submit" id="export"/></td>
 													
-						<td class="footerTD" colspan="2" >
-						 
+						<td class="footerTD" colspan="4" >
 						 Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;
 						 Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount }
