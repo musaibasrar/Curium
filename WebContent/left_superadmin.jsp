@@ -1,5 +1,5 @@
 <%-- 
-Document   : left_superadmin
+Document   : left
 Created on : Jan 4, 2012, 3:41:11 PM
 Author     : Musaib
 --%>
@@ -240,8 +240,8 @@ Author     : Musaib
                 color:#cfe0ea;;
             }
             a:hover{
-                text-decoration:none;
-                color:#FFFFFF;
+                text-decoration:underline;
+                color:#EB6000;
             }
             h1{
                 font-size:140%;
@@ -277,6 +277,21 @@ Author     : Musaib
                 height: 22px;
             }
 
+.sideaccordian{
+		
+		font-size: 12px;
+		/* border: 0px; */
+		border-radius: 5px;
+		/* border-bottom:  1px solid #010d1c !important; */
+}
+
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #cccccc; background: #ffffff url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #1c94c4; }
+.ui-widget-content {
+    border: 1px solid #b6cfe2;
+    background: #ffffff;
+    color: #222222;
+}
 
 
         </style>
@@ -427,42 +442,145 @@ for(Cookie cookie : cookies){
 }
 %>
     <body onload="StartClock()" onunload="KillClock()">
-        <form name="theClock">
+       <!--  <form name="theClock">
 
             <div id="clock" class="headerTD"></div>
-        </form>
-        <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div>
+        </form> -->
+        <%-- <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div> --%>
 
-        <div id="container" style="width: 100%" >
-            <h5 style="font-size: 12px"><a href="#">Students</a></h5>
-            <div>
-                <a target="mainFrame" href="Controller?process=StudentProcess&action=viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
+        <div id="container" style="width: 95%" >
+        
+        	<h5 style="font-size: 12px"><a href="#" >Search</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+                              <a target="mainFrame" href="Controller?process=StudentProcess&action=mainAdvanceSearchStudents" style="font-size: 12px;">Search</a>
+				        </td>
+				     </tr>
+				 </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
-            
-            <div>
-				<a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Fees Details</a><br/>
-            </div> 
-            
-            <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Archive</a></h5>
-            <div>
-                <a target="mainFrame" href="Controller?process=StudentProcess&action=archiveViewAll" >Archive Students</a><br/>
-                <a target="mainFrame" href="Controller?process=ClassProcess&action=viewGraduated" >Graduated Students</a><br/>
-                <a target="mainFrame" href="Controller?process=ClassProcess&action=viewDropped" >Dropped Out Students</a><br/>
-                <a target="mainFrame" href="Controller?process=ClassProcess&action=viewLeftOut" >Left Out Students</a><br/>
+            <h5 class="sideaccordian" ><a href="#">Appointments</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Controller?process=AppointmentProcess&action=viewAllAppointments" style="font-size: 12px;">Appointment</a>
+            			</td>
+            		</tr>
+                </table>
             </div>
-
-            <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
-            <div >
-                <a target="mainFrame" href="changePassword.jsp" style="font-size: 12px;">Change Password</a><br/>
+        
+         <h5 class="sideaccordian" ><a href="#">Queries</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Controller?process=QueryProcess&action=viewAllQueries" style="font-size: 12px;">Queries</a>
+            			</td>
+            		</tr>
+                </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
-            <div >
-                <a target="mainFrame" href="sendsms_superadmin.jsp" style="font-size: 12px;">SMS</a><br/>
+            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Controller?process=StudentProcess&action=viewAll" style="font-size: 12px;">View All</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=StudentProcess&action=addNew" style="font-size: 12px;">Add New</a>
+            			</td>
+            		</tr>
+            		
+                </table>
             </div>
-           
+            
+                  <!-- <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Controller?process=StudentProcess&action=advanceSearchStudents" style="font-size: 12px;">Search</a>
+            			</td>
+            		</tr>
+                </table>
+            </div> -->
+            
+            
+            <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Backup&Restore.jsp" style="font-size: 12px;">Backup</a>
+            			</td>
+            		</tr> -->
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="changePassword.jsp" style="font-size: 12px;">Change Password</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=StudentProcess&action=archiveViewAll" style="font-size: 12px;">Archive Students</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+             <h5 class="sideaccordian" ><a href="#">Login</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Controller?process=EmployeeProcess&action=viewAllEmployee" style="font-size: 12px;">View All</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="Controller?process=EmployeeProcess&action=addEmployeePage" style="font-size: 12px;">Add New</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            <!-- <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="Controller?process=SMSProcess&action=sendSMS" style="font-size: 12px;">SMS</a>
+            			</td>
+            		</tr>
+                </table>
+            </div> -->
+            
+            <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="downloadimporttemplate.jsp" style="font-size: 12px;">Download Template</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+                              <a target="mainFrame" href="importfile.jsp" style="font-size: 12px;">Import Files</a><br/>
+				        </td>
+				     </tr>
+				     <!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+                              <a target="_blank" href="feedback.jsp" style="font-size: 12px;">Feedback</a><br/>
+				        </td>
+				     </tr> -->
+				 </table>
+            </div>
+            
             </div>
                    
             

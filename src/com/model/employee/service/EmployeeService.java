@@ -38,8 +38,21 @@ public class EmployeeService {
 		Teacher employee = new Teacher();
 		boolean result = false;
 		if(httpSession.getAttribute(BRANCHID)!=null){
+			String[] gender = request.getParameterValues("gender");
+			String stringGender = null;
+			
+			for (int i=0;i<gender.length;i++) {
+				
+				if(stringGender == null) {
+					stringGender = gender[i];
+				}else {
+					stringGender = gender[i]+" & "+stringGender;
+				}
+				
+			}
+			
 		employee.setTeachername(DataUtil.emptyString(request.getParameter("name")));
-		employee.setGender(DataUtil.emptyString(request.getParameter("gender")));
+		employee.setGender(DataUtil.emptyString(stringGender));
 		//employee.setAddress(DataUtil.emptyString(request.getParameter("address")));
 		//employee.setContactnumber(DataUtil.emptyString(request.getParameter("contactnumber")));
 		//employee.setEmail(DataUtil.emptyString(request.getParameter("email")));

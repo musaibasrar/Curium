@@ -487,9 +487,11 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft" style="padding-left: 20px;">Module &nbsp;</td>
 							<td>&nbsp;Queries<input
 								type="checkbox" value="queries" name="gender" id="yes:queries"
-								onclick="yesCheck(this.id);enableDepartment()" />&nbsp; &nbsp;Appointments<input
+								 />&nbsp; &nbsp;Appointments<input
 								type="checkbox" value="appointments" name="gender" id="no:queries"
-								onclick="noCheck(this.id);disableDepartment()" />
+								 />
+								<!-- onclick="noCheck(this.id);disableDepartment()"
+								onclick="yesCheck(this.id);enableDepartment()" -->
 							</td>
 						</tr>
 						<tr>

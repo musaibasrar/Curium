@@ -128,6 +128,8 @@ form{
                 	window.open('index_queries.jsp','_self');
                 }else if(type=='appointments'){
                     window.open('index_appointments.jsp','_self');
+                }else if(type=='queryappt'){
+                    window.open('index_queryappt.jsp','_self');
                 }
             }
             else if(!flag1){

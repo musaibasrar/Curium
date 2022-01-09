@@ -699,7 +699,13 @@ public class UserService {
 		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
 		}
 		user.setPassword(builder.toString());
-		user.setUsertype(employee.getGender()+"-"+employee.getDepartment());
+		String[] gender = employee.getGender().split("&");
+		
+		if(gender.length>1) {
+			gender[0]="queryappt";
+		}
+			
+		user.setUsertype(gender[0]+"-"+employee.getDepartment());
 		Branch branch = new Branch();
 		branch.setIdbranch(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		user.setBranch(branch);
