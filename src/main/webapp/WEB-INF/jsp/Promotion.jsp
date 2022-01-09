@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JSP Page</title>
-<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/css/datePicker/demos.css">
+<link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -277,42 +277,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/roshan/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/roshan/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/js/datePicker/ui/sliderAccess.js"></script>
+	src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/roshan/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/roshan/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/roshan/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/roshan/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/roshan/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/roshan/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/roshan/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/roshan/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/roshan/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -374,11 +374,11 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchClass() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/ClassProcess/searchByClass";
+		form1.action = "/roshan/ClassProcess/searchByClass";
 		form1.method = "POST";
 		form1.submit();
 
@@ -406,7 +406,7 @@
     function graduateMultiple(){
         
         var form1=document.getElementById("form1");
-        form1.action="/ClassProcess/graduateMultiple";
+        form1.action="/roshan/ClassProcess/graduateMultiple";
        form1.submit();
         
     }
@@ -414,7 +414,7 @@
     function dropoutMultiple(){
         
         var form1=document.getElementById("form1");
-        form1.action="/ClassProcess/dropoutMultiple";
+        form1.action="/roshan/ClassProcess/dropoutMultiple";
        form1.submit();
         
     }
@@ -422,7 +422,7 @@
     function leftoutMultiple(){
         
         var form1=document.getElementById("form1");
-        form1.action="/ClassProcess/leftoutMultiple";
+        form1.action="/roshan/ClassProcess/leftoutMultiple";
        form1.submit();
         
     }
@@ -503,7 +503,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -517,7 +517,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1"
-		action="/StudentProcess/promoteClass" method="POST">
+		action="/roshan/StudentProcess/promoteClass" method="POST">
 		<div style="height: 28px">
 			<button id="add">Search</button>
 			<br />
@@ -594,7 +594,7 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/StudentProcess/ViewDetails?id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/roshan/StudentProcess/ViewDetails?id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Student.name}"/></td>
                                 <td class="dataText">
                                 <c:forEach var="splt" items="${fn:split(Student.classstudying,'--')}">

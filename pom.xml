@@ -13,9 +13,10 @@
 	<artifactId>curium</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>Curium</name>
+	<name>roshan</name>
 	<description>School Management System developed by Ideoholic</description>
 	<properties>
+		<start-class>org.ideoholic.curium.CuriumApplication</start-class>
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
@@ -168,14 +169,15 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

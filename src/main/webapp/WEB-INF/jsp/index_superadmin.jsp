@@ -61,7 +61,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -74,11 +74,11 @@ for(Cookie cookie : cookies){
 }
 %>
     <frameset    rows="70,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="/header_superadmin"   name="topFrame" scrolling="NO" noresize frameborder="0">
+        <frame   src="/roshan/header_superadmin"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/left_superadmin" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/welcome" name="mainFrame" scrolling="yes" />
+                <frame  src="/roshan/left_superadmin" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame src="/roshan/welcome" name="mainFrame" scrolling="yes" />
             </frameset>
 
    </frameset>

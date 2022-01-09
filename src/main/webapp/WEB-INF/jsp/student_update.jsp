@@ -14,22 +14,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Student Update</title>
-<link rel="stylesheet" href="/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/roshan/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/roshan/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/roshan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/roshan/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/css/datePicker/demos.css">
+	src="/roshan/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -191,7 +191,7 @@
 }
 -->
 </style>
-<script type="text/javascript" src="/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
 
 <script type="text/javascript">
 	
@@ -415,7 +415,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/UserProcess/sessionTimeOut");
+	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -428,7 +428,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form action="Controller?process=PersonalProcess&action=viewAll"
+	<form action="/roshan/Controller?process=PersonalProcess&action=viewAll"
 		id="form1" method="POST" enctype="multipart/form-data">
 		<div>
 			<div id="tabs">
@@ -449,7 +449,7 @@ for(Cookie cookie : cookies){
 				
 				<tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
+                    <img src="/roshan/data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
                     <input type="hidden" value="<c:out value="${student.studentpic}"/>" id="studentpicupdate" name="studentpicupdate">
                     
                     <input type="hidden" value="<c:out value="${student.studentdoc1}"/>" id="studentdoc1update" name="studentdoc1update">
@@ -971,7 +971,7 @@ for(Cookie cookie : cookies){
 								<tr>
 
 									<td align="center">
-									<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
+									<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="/roshan/#">Next</a>
 									</td>
 								</tr>
 
@@ -1000,7 +1000,7 @@ for(Cookie cookie : cookies){
                   		 	 <input type="checkbox" name="studentpicdelete" value="delete">Delete
                     		</td>
 							<td>
-                  		  	<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Pic" style="width: 200px;height: 200px;">
+                  		  	<img src="/roshan/data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Pic" style="width: 200px;height: 200px;">
                    			 </td>
                     
 							<td><br />
@@ -1013,7 +1013,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc1delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
+                    <img src="/roshan/data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="studentdoc1" accept="image/*" >
@@ -1025,7 +1025,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc2delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
+                    <img src="/roshan/data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="studentdoc2" accept="image/*" >
@@ -1038,7 +1038,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc3delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
+                    <img src="/roshan/data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                    <input type="file" name="fileToUpload" id="studentdoc3" accept="image/*" >
@@ -1050,7 +1050,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc4delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
+                    <img src="/roshan/data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="studentdoc4" accept="image/*" >
@@ -1062,7 +1062,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc5delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
+                    <img src="/roshan/data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="studentdoc5" accept="image/*" >
@@ -1082,9 +1082,9 @@ for(Cookie cookie : cookies){
 								<tr>
 
 									<td align="center">
-									<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
+									<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="/roshan/#">Next</a>
 								&nbsp;&nbsp;&nbsp;
-									<a class="prevtab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Previous</a>
+									<a class="prevtab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="/roshan/#">Previous</a>
 									</td>
 								</tr>
 
@@ -1197,11 +1197,11 @@ for(Cookie cookie : cookies){
 							<tr>
 							<td></td>
 								<td align="center">
-								<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
+								<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="/roshan/#">Next</a>
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<a class="prevtab"
 									style="font-weight: bold; color: #325F6D; font-size: 13px"
-									href="#">Previous</a></td>
+									href="/roshan/#">Previous</a></td>
 							</tr>
 							
 							<tr>
@@ -1467,9 +1467,9 @@ for(Cookie cookie : cookies){
 								<tr align="center">
 									<td></td>
 									<td align="center">
-									<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
+									<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="/roshan/#">Next</a>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-									<a class="prevtab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Previous</a>
+									<a class="prevtab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="/roshan/#">Previous</a>
 									</td>
 								</tr>
 								
@@ -1660,11 +1660,11 @@ for(Cookie cookie : cookies){
 							<tr>
 
 								<td align="center">
-								<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
+								<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="/roshan/#">Next</a>
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<a class="prevtab"
 									style="font-weight: bold; color: #325F6D; font-size: 13px"
-									href="#">Previous</a></td>
+									href="/roshan/#">Previous</a></td>
 							</tr>
 
 							<tr>
@@ -1762,7 +1762,7 @@ for(Cookie cookie : cookies){
 								 <a
 										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="#">Previous</a></td>
+										href="/roshan/#">Previous</a></td>
 								</tr>
 								<tr><td><br></td></tr>
 									<tr>
@@ -1831,7 +1831,7 @@ for(Cookie cookie : cookies){
 							function cancel() {
 
 								var form1 = document.getElementById("form1");
-								form1.action = "/StudentProcess/viewAll";
+								form1.action = "/roshan/StudentProcess/viewAll";
 								form1.submit();
 							}
 
@@ -1839,7 +1839,7 @@ for(Cookie cookie : cookies){
 								
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
-									form1.action = "/StudentProcess/updateStudent";
+									form1.action = "/roshan/StudentProcess/updateStudent";
 									form1.submit();
 								  }
 							}

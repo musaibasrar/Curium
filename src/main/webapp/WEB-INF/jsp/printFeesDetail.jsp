@@ -178,7 +178,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 10px;">
-				<img src="/images/roshanfees.jpg" width="100" height="94"/>
+				<img src="/roshan/images/roshanfees.jpg" width="100" height="94"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
@@ -186,7 +186,7 @@
 				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 				<td align="left" style="padding-right: 10px;">
-				<img src="/images/roshanpaytm.jpeg" width="100" height="94"/>
+				<img src="/roshan/images/roshanpaytm.jpeg" width="100" height="94"/>
 				</td> 
 			</tr>
 </table>

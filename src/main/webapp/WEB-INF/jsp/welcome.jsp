@@ -13,11 +13,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Dash Board</title>
-        <script src="js/Chart.min.js"></script>
-         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/popper.min.js"></script>
+        <script src="/roshan/js/Chart.min.js"></script>
+         <link rel="stylesheet" href="/roshan/css/bootstrap.min.css">
+        <script src="/roshan/js/jquery.min.js"></script>
+        <script src="/roshan/js/bootstrap.min.js"></script>
+        <script src="/roshan/js/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
@@ -67,7 +67,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/roshan/Controller?process=UserProcess&action=sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -110,8 +110,8 @@ for(Cookie cookie : cookies){
         					<td style="padding-left:50px;">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Ismail Ideal L.P.S (Kannada) </label><br>
         						<a target="_parent"
-        						 href="/UserProcess/multiUser?branchid=2"> <img
-									src="/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
+        						 href="/roshan/UserProcess/multiUser?branchid=2"> <img
+									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
         					</td>
         				</tr>
         			</table>
@@ -124,8 +124,8 @@ for(Cookie cookie : cookies){
         					<td style="padding-left:50px;">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Ismail Ideal Public School (Urdu) </label><br>
         						<a target="_parent" 
-        						 href="/UserProcess/multiUser?branchid=3"> <img
-									src="/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
+        						 href="/roshan/UserProcess/multiUser?branchid=3"> <img
+									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
         					</td>
         				</tr>
         			</table>
@@ -139,8 +139,8 @@ for(Cookie cookie : cookies){
         					<td style="padding-left:50px;">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Ismail Ideal Urdu High School</label><br>
         						<a target="_parent"
-        						 href="/UserProcess/multiUser?branchid=4"> <img
-									src="/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
+        						 href="/roshan/UserProcess/multiUser?branchid=4"> <img
+									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
         					</td>
         				</tr>
         			</table>
@@ -155,8 +155,8 @@ for(Cookie cookie : cookies){
         					<td style="padding-left:50px;">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Ismail Ideal Higher & Primary School</label><br>
         						<a target="_parent"
-        						 href="/UserProcess/multiUser?branchid=5"> <img
-									src="/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
+        						 href="/roshan/UserProcess/multiUser?branchid=5"> <img
+									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
         					</td>
         				</tr>
         			</table>
@@ -172,8 +172,8 @@ for(Cookie cookie : cookies){
         					<td style="padding-left:50px;">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> The Roshan Planet High School </label><br>
         						<a target="_parent"
-        						 href="/UserProcess/multiUser?branchid=6"> <img
-									src="/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
+        						 href="/roshan/UserProcess/multiUser?branchid=6"> <img
+									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
         					</td>
         				</tr>
         			</table>
@@ -188,8 +188,8 @@ for(Cookie cookie : cookies){
         					<td style="padding-left:50px;">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> The Roshan Planet P.U. Science College </label><br>
         						<a target="_parent"
-        						 href="/UserProcess/multiUser?branchid=7"> <img
-									src="/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
+        						 href="/roshan/UserProcess/multiUser?branchid=7"> <img
+									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
         					</td>
         				</tr>
         			</table>
