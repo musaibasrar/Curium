@@ -413,7 +413,7 @@
                 var form1 = document.getElementById("form1");
                 var id = document.getElementById("id").value;
                 
-                form1.action = "/roshan/Controller?process=StudentProcess&action=feesStructurePerYear&id="+id;
+                form1.action = "/roshan/StudentProcess/feesStructurePerYear?id="+id;
                 form1.submit();
 
             }
@@ -421,7 +421,7 @@
             function deleteRecord() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/roshan/Controller?process=FeesProcess&action=deleteFeesCategory";
+                form1.action = "/roshan/FeesProcess/deleteFeesCategory";
                 form1.submit();
 
             }
@@ -429,7 +429,7 @@
             function waiveOff() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/roshan/Controller?process=FeesProcess&action=waiveOffFees";
+                form1.action = "/roshan/FeesProcess/waiveOffFees";
                 form1.submit();
 
             }
@@ -437,7 +437,7 @@
             function applyConcession() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/roshan/Controller?process=FeesProcess&action=applyConcession";
+                form1.action = "/roshan/FeesProcess/applyConcession";
                 form1.submit();
 
             }
@@ -461,7 +461,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -705,7 +705,7 @@ for(Cookie cookie : cookies){
         
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/roshan/Controller?process=StudentProcess&action=ViewAll";
+                form1.action="/roshan/StudentProcess/ViewAll";
                 form1.submit();
             }
         </script>
