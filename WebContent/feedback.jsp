@@ -89,7 +89,7 @@ p {
   <div class="container">
     <div class="item">
       <label for="0">
-      <input class="radio" type="radio" name="feedback" id="0" value="1">
+      <input class="radio" type="radio" name="feedback" id="0" value="1" required>
       <span>1</span>
     </label>
     </div>
