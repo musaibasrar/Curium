@@ -11,7 +11,7 @@
 		 
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 	 	<property name="hibernate.connection.password">root</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/curium</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/curium_testing</property>
 		<property name="hibernate.connection.username">root</property> 
 		
 		<!--<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>

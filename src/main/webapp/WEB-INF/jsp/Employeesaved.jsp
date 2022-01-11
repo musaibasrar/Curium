@@ -66,7 +66,7 @@
 
             function ViewAll(){
                 var form1=document.getElementById("form1");
-                form1.action="/EmployeeProcess/ViewAllEmployee";
+                form1.action="/EmployeeProcess/viewAllEmployee";
                 form1.submit();
             }
         </script>

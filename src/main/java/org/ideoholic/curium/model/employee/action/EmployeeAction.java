@@ -60,7 +60,7 @@ public class EmployeeAction {
 		return "employee_details";
 	}
 
-	@RequestMapping(value = "/ViewAllEmployee", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/viewAllEmployee", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewEmployee() {
 		new EmployeeService(request, response).ViewAllEmployee();
 		return "viewAllEmployee";
