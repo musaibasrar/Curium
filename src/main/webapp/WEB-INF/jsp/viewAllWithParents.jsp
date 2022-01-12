@@ -367,6 +367,14 @@
                 
                 //window.location.reload();
             } 
+            
+            function viewStudentDetails(sid,branchid){
+                var form1=document.getElementById("form1");
+               form1.action="/curium/StudentProcess/ViewDetails?id="+sid+"&urlbranchid="+branchid+"";
+               form1.submit();
+               
+               //window.location.reload();
+           } 
         </script>
     </head>
       <%
@@ -387,7 +395,7 @@ for(Cookie cookie : cookies){
 %>
     <body  >
 
-        <form name="form1" id="form1"action="/curium/StudentProcess/archiveMultiple" method="post">
+        <form name="form1" id="form1" action="/curium/StudentProcess/archiveMultiple" method="post">
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>
@@ -402,6 +410,7 @@ for(Cookie cookie : cookies){
                     <thead>
                         <tr>
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
+                            <th title="click to sort" class="headerText">UID</th>
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Class</th>
@@ -415,6 +424,7 @@ for(Cookie cookie : cookies){
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${Parents.student.sid},${Parents.student.branchid})"><c:out value="${Parents.student.studentexternalid}"/></a></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/curium/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.name}"/></td>
                                 <td class="dataText" style="text-transform:uppercase">
