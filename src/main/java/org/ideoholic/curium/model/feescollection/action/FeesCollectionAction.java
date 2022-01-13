@@ -107,5 +107,20 @@ public class FeesCollectionAction {
                 }
                 
         }
-
+        
+        @PostMapping("/exportDataForStudentsFeesReport")
+        private String exportDataForStudentsFeesReport() {
+        	new FeesCollectionService(request, response).exportDataForStudentsFeesReport();
+            return "feesreportexportsuccess";
+		}
+        
+        
+        @PostMapping("/download")
+        private String download() {
+        	if (new FeesCollectionService(request, response).downlaod()) {
+    			return "feesreportexportsuccess";
+    		}
+    		return "exportfailure";
+		}
+		
 }

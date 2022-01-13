@@ -246,4 +246,13 @@ public class JspController {
 		return "printstudentdetailsfeesstructure";
 	}
 	
+	@GetMapping("/feesreportexportsuccess")
+	public String getFeesreportexportsuccess() {
+		return "feesreportexportsuccess";
+	}
+	
+	@GetMapping("/exportfailure")
+	public String getExportfailure() {
+		return "exportfailure";
+	}
 }
