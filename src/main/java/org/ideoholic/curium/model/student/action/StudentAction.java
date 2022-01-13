@@ -178,7 +178,7 @@ public class StudentAction {
 		return "viewAll";
 	}
 
-	@GetMapping("/ViewDetails")
+	@RequestMapping(value = "/ViewDetails", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewStudent() {
 		String branchId;
 		if (new StudentService(request, response).viewDetailsOfStudent()) {

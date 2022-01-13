@@ -27,168 +27,8 @@ Author     : Musaib
         <link href="/curium/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/curium/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="/curium/css/font-awesome.css">
-        <script type="text/javascript">
-            var get;
-            function getdata1() {
-                var startHour, startMin;
-                var tDate = new Date();
-                startHour = tDate.getHours();
-                startMin = tDate.getMinutes();
-
-                if (typeof XMLHttpRequest != "undefined") {
-                    get = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    get = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                get.onreadystatechange = processdata;
-                get.open("POST", "AjaxController?process=VisitProcess&action=getAJaxNextVisit&startHour=" + startHour + "&startMin=" + startMin, true);
-                get.send(null);
-
-            }
-
-            function processdata() {
-                var id, hourID, patientID, reminderTime, visitTime, rating, name, complaint, link;
-                if (get.readyState == 4)
-                {
-                    if (get.status == 200) {
-                        var visits = get.responseXML.getElementsByTagName("Visits")[0];
-                        var visitNodes = visits.getElementsByTagName("Visit");
-                        for (var i = 0; i < visitNodes.length; i++) {
-                            var visit = visitNodes[i];
-
-                            patientID = visit.getElementsByTagName("PatientID")[0].firstChild.nodeValue;
-                            visitTime = visit.getElementsByTagName("VisitTime")[0].firstChild.nodeValue;
-                            name = visit.getElementsByTagName("PatientName")[0].firstChild.nodeValue;
-                            link = "<a target='mainFrame' href='Controller?process=PatientProcess&action=viewDetails&id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
-
-                            $(function() {
-                                $('#Notification').jnotifyAddMessage({
-                                    text: link,
-                                    permanent: false,
-                                    disappearTime: 30000
-                                });
-
-                            });
-
-                        }
-
-
-                        setTimeout('getdata1();', 60000);
-
-
-                    }
-                }
-
-            }
-            /**
-             * Comment
-             */
-            var getExpiringStockCount;
-            function getExpiringStock() {
-                if (typeof XMLHttpRequest != "undefined") {
-                    getExpiringStockCount = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getExpiringStockCount = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                getExpiringStockCount.onreadystatechange = processExpiringStockData;
-                getExpiringStockCount.open("POST", "AjaxController?process=StockProcess&action=getExpiringStock", true);
-                getExpiringStockCount.send(null);
-
-            }
-           
-            var getDepletingStockCount;
-            function getDepletingStock() {
-                if (typeof XMLHttpRequest != "undefined") {
-                    getDepletingStockCount = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getDepletingStockCount = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                getDepletingStockCount.onreadystatechange = processDepletingStockData;
-                getDepletingStockCount.open("POST", "AjaxController?process=StockProcess&action=getDepletingStock", true);
-                getDepletingStockCount.send(null);
-
-            }
-            function processDepletingStockData() {
-
-                if (getDepletingStockCount.readyState == 4)
-                {
-                    if (getDepletingStockCount.status == 200) {
-                        var count = getDepletingStockCount.responseXML.getElementsByTagName("DepletingStockCount")[0];
-                        var depletingStockCount = count.childNodes[0].nodeValue;
-                        var depletingStock = document.getElementById("depletingStock");
-                        depletingStock.innerHTML = " " + depletingStockCount;
-                        setTimeout('getDepletingStock();', 60000);
-
-
-                    }
-                }
-
-            }
-
-        </script>
-        <script type="text/javascript">
-            var req;
-
-
-            function count() {
-
-                var idField = document.getElementById("userid");
-                var url = "AppointmentController";
-                if (typeof XMLHttpRequest != "undefined") {
-                    req = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    req = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                reload(req);
-                //req.open("POST", url, true);
-
-                //req.send();
-                /*req.onreadystatechange = function()
-                 {
-                 if (req.readyState==4)
-                 {
-                 if (req.status==200){
-                 
-                 var count = req.responseXML.getElementsByTagName("count")[0];
-                 var childCount=count.childNodes[0].nodeValue;
-                 var mdiv = document.getElementById("n1");
-                 mdiv.innerHTML=childCount;
-                 mdiv.style.visible='block';
-                 
-                 }
-                 }
-                 }*/
-
-
-
-            }
-            function handleRequest() {
-                if (req.readyState == 4)
-                {
-                    if (req.status == 200) {
-
-                        var count = req.responseXML.getElementsByTagName("count")[0];
-                        var childCount = count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML = childCount;
-                        mdiv.style.visible = 'block';
-
-                    }
-                }
-                setTimeout(function() {
-                    reload(req);
-                }, 100);
-            }
-
-
-
-        </script>
+        
+        
         <style>
 
             .noti_Container {
@@ -429,7 +269,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -457,7 +297,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="Controller?process=DocumentsProcess&action=studentsDetailsReports" style="font-size: 12px;">Student Details Report</a>
+            				 <a target="mainFrame" href="/curium/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details Report</a>
             			</td>
             		</tr>
             		
@@ -477,17 +317,17 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="Controller?process=FeesProcess&action=feesReport" style="font-size: 12px;">Fees Report</a>
+            				 <a target="mainFrame" href="/curium/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="Controller?process=FeesProcess&action=feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
+            				<a target="mainFrame" href="/curium/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="Controller?process=FeesProcess&action=feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
+            				 <a target="mainFrame" href="/curium/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
             			</td>
             		</tr>
             		<tr>
@@ -505,7 +345,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExport" style="font-size: 12px;">Export Attendance</a>
+            				 <a target="mainFrame" href="/curium/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr>
                 </table>
@@ -518,7 +358,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
+            				 <a target="mainFrame" href="/curium/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr>
                 </table>
@@ -531,12 +371,12 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=progressReport" style="font-size: 12px;">Generate Marks Card</a>
+            				 <a target="mainFrame" href="/curium/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Marks Card</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
+            				<a target="mainFrame" href="/curium/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
             			</td>
             		</tr>
                 </table>
@@ -548,7 +388,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="Controller?process=AccountProcess&action=generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
+            				 <a target="mainFrame" href="/curium/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
             			</td>
             		</tr>
             		<tr>
@@ -563,7 +403,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="Controller?process=AccountProcess&action=balanceSheet" style="font-size: 12px;">Balance Sheet</a>
+            				<a target="mainFrame" href="/curium/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
             			</td>
             		</tr>
                 </table>
@@ -578,22 +418,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=currentStock" style="font-size: 12px;">Stock Quantity Report</a>
+            				 <a target="mainFrame" href="/curium/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=batchStock" style="font-size: 12px;">Stock Price Report</a>
+            				 <a target="mainFrame" href="/curium/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="Controller?process=MessItemsProcess&action=issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
+            				<a target="mainFrame" href="/curium/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="Controller?process=MessItemsProcess&action=receiveStock" style="font-size: 12px;">Stock Received Report</a>
+            				 <a target="mainFrame" href="/curium/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
             			</td>
             		</tr>
             	</table>
