@@ -374,15 +374,6 @@
 
 <script type="text/javascript">
 	$(function() {
-
-		$("#set").button().click(function() {
-			addPatientWithAppointment();
-
-		});
-		$("#saveAndSetToday").button().click(function() {
-			addPatientWithTodaysAppointment();
-
-		});
 		$("#search").button().click(function() {
 			searchStudent();
 
@@ -585,17 +576,6 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
-						<tr>
-
-							<td width="30%" class="alignRight"><label> <font
-									color="red"><div id="mydiv"></div></font>
-							</label></td>
-							<td width="20%" class="alignRight"></td>
-							<td class="alignRight"><font color="red"><div
-										id="mydivmobile"></div></font></td>
-						</tr>
-
-
 
 						<tr>
 							<td width="30%" class="alignRight">Name &nbsp;</td>
@@ -624,7 +604,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						
-						<!-- <tr>
+						 <tr>
 							<td width="30%" class="alignRight">STS Number&nbsp;</td>
 							<td width="12%" align="left"><label>
 										<input
@@ -632,12 +612,26 @@ for(Cookie cookie : cookies){
 											id="sts" size="36"/>
 							</label></td>
 
-							<td width="30%" class="alignRight">RTE &nbsp;</td>
+							<td width="30%" class="alignRight">UID &nbsp;</td>
+							<td width="16%" height="30" class="alignLeft">
+							
+							<label>
+										<input
+											name="uid" type="text" class="textField"
+											id="uid" size="36"/>
+							</label>
+							
+							
+							
+<!-- 							<td width="30%" class="alignRight">RTE &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
 								type="checkbox" value="1" name="rte" id="yes:rte"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
 								type="checkbox" value="0" name="rte" id="no:rte"
 								onclick="noCheck(this.id);" />
+
+							</td>
+							 -->
 
 							</td>
 
@@ -649,7 +643,7 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td><br /></td>
-						</tr> -->
+						</tr> 
 
 						<tr>
 							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
@@ -972,18 +966,6 @@ for(Cookie cookie : cookies){
 								<tr>
 									<td><br /></td>
 								</tr>
-
-								<tr>
-
-									<td width="30%" class="alignRight"><label> <font
-											color="red"><div id="mydiv"></div></font>
-									</label></td>
-									<td width="20%" class="alignRight"></td>
-									<td class="alignRight"><font color="red"><div
-												id="mydivmobile"></div></font></td>
-								</tr>
-
-
 
 								<tr>
 									<td width="30%" class="alignRight">Father's Name* &nbsp;</td>

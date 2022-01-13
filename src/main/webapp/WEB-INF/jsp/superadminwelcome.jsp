@@ -66,7 +66,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -101,7 +101,7 @@ for(Cookie cookie : cookies){
         					<td align="center">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sunrise College of Nursing </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/roshan/Controller?process=UserProcess&action=authenticateSuperUser&branchid=2"> <img
+        						 href="/roshan/UserProcess/authenticateSuperUser?branchid=2"> <img
 									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -128,7 +128,7 @@ for(Cookie cookie : cookies){
         					<td align="center">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sunrise College of Pharmacy </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/roshan/Controller?process=UserProcess&action=authenticateSuperUser&branchid=3"> <img
+        						 href="/roshan/UserProcess/authenticateSuperUser?branchid=3"> <img
 									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -157,7 +157,7 @@ for(Cookie cookie : cookies){
         					<td align="center">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sunrise College of Physiotherapy </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/roshan/Controller?process=UserProcess&action=authenticateSuperUser&branchid=4"> <img
+        						 href="/roshan/UserProcess/authenticateSuperUser?branchid=4"> <img
 									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -193,7 +193,7 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of </label>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Paramedical Sciences </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/roshan/Controller?process=UserProcess&action=authenticateSuperUser&branchid=5"> <img
+        						 href="/roshan/UserProcess/authenticateSuperUser?branchid=5"> <img
 									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -222,7 +222,7 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of Nursing</label>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (B.Sc. Nursing) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/roshan/Controller?process=UserProcess&action=authenticateSuperUser&branchid=6"> <img
+        						 href="/roshan/UserProcess/authenticateSuperUser?branchid=6"> <img
 									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -253,7 +253,7 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of Nursing</label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/roshan/Controller?process=UserProcess&action=authenticateSuperUser&branchid=7"> <img
+        						 href="/roshan/UserProcess/authenticateSuperUser?branchid=7"> <img
 									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -289,7 +289,7 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of Nursing</label>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/roshan/Controller?process=UserProcess&action=authenticateSuperUser&branchid=8"> <img
+        						 href="/roshan/UserProcess/authenticateSuperUser?branchid=8"> <img
 									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -317,7 +317,7 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sri Sai School of Nursing </label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/roshan/Controller?process=UserProcess&action=authenticateSuperUser&branchid=9"> <img
+        						 href="/roshan/UserProcess/authenticateSuperUser?branchid=9"> <img
 									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
@@ -345,7 +345,7 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Kshatriya School of Nursing </label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/roshan/Controller?process=UserProcess&action=authenticateSuperUser&branchid=10"> <img
+        						 href="/roshan/UserProcess/authenticateSuperUser?branchid=10"> <img
 									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>

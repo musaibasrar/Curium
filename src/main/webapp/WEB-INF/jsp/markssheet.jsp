@@ -216,7 +216,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -289,7 +289,7 @@ for(Cookie cookie : cookies){
                             <table style=" border-collapse: collapse;width: 30%;float: left">
                             	<tr>
                             		<td>
-                            			<img src="/roshan/data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" style="width: 60px;height: 60px;">
+                            			<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" style="width: 60px;height: 60px;">
                             		</td>
                             	</tr>
                             

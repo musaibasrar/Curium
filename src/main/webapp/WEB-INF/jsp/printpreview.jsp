@@ -431,7 +431,7 @@ for(Cookie cookie : cookies){
   								<img src="/roshan/images/logo.jpg" alt="Avatar" style="width:100%">
   								<div class="container">
     							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/roshan/data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
   								</div>
 						</div>
                             
@@ -447,7 +447,7 @@ for(Cookie cookie : cookies){
   								<img src="/roshan/images/logo.jpg" alt="Avatar" style="width:100%">
   								<div class="container">
     							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/roshan/data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" alt="Student's Photo" /> 
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" alt="Student's Photo" /> 
   								</div>
 						</div></td>
 						 <td></td>
@@ -460,7 +460,7 @@ for(Cookie cookie : cookies){
   								<img src="/roshan/images/logo.jpg" alt="Avatar" style="width:100%">
   								<div class="container">
     							<h4>Student's Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/roshan/data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
+    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
   								</div>
 						</div></td>
                             </c:if>

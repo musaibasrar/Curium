@@ -32,7 +32,7 @@
 		  border: 0px solid;
 		  padding: 10px; 
 		  width: 340px;
-		  height: 120px; 
+		  height: 160px; 
 		  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		}
 		
@@ -67,7 +67,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/Controller?process=UserProcess&action=sessionTimeOut");
+	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -107,11 +107,12 @@ for(Cookie cookie : cookies){
         			
         			<table>
         				<tr>
-        					<td style="padding-left:50px;">
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Ismail Ideal L.P.S (Kannada) </label><br>
-        						<a target="_parent"
+        					<td style="padding-left:80px;">
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;padding-left: 50px;"> 6529 </label><br>
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Ismail Ideal L.P.S </label><br>
+        						<a target="_parent" style="padding-left: 40px;"
         						 href="/roshan/UserProcess/multiUser?branchid=2"> <img
-									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
+									src="/roshan/images/login.svg" width="25" height="25" alt="Login" />Login</a>
         					</td>
         				</tr>
         			</table>
@@ -121,11 +122,12 @@ for(Cookie cookie : cookies){
         			<div id="rcorners1">
         			<table>
         				<tr>
-        					<td style="padding-left:50px;">
-        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Ismail Ideal Public School (Urdu) </label><br>
-        						<a target="_parent" 
+        					<td style="padding-left:65px;">
+        					<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;padding-left: 80px;"> 6516 </label><br>
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Ismail Ideal Public School</label><br>
+        						<a target="_parent" style="padding-left: 70px;"
         						 href="/roshan/UserProcess/multiUser?branchid=3"> <img
-									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
+									src="/roshan/images/login.svg" width="25" height="25" alt="Login"/>Login</a>
         					</td>
         				</tr>
         			</table>
@@ -137,10 +139,11 @@ for(Cookie cookie : cookies){
         			<table>
         				<tr>
         					<td style="padding-left:50px;">
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;padding-left: 80px;"> 6521 </label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Ismail Ideal Urdu High School</label><br>
-        						<a target="_parent"
+        						<a target="_parent" style="padding-left: 70px;"
         						 href="/roshan/UserProcess/multiUser?branchid=4"> <img
-									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
+									src="/roshan/images/login.svg" width="25" height="25" alt="Login"/>Login</a>
         					</td>
         				</tr>
         			</table>
@@ -152,16 +155,16 @@ for(Cookie cookie : cookies){
         		<div id="rcorners1">
         			<table>
         				<tr>
-        					<td style="padding-left:50px;">
+        					<td style="padding-left:15px;">
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;padding-left: 120px;"> 6533 </label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Ismail Ideal Higher & Primary School</label><br>
-        						<a target="_parent"
+        						<a target="_parent" style="padding-left: 110px;"
         						 href="/roshan/UserProcess/multiUser?branchid=5"> <img
-									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
+									src="/roshan/images/login.svg" width="25" height="25" alt="Login" />Login</a>
         					</td>
         				</tr>
         			</table>
         			</div>
-        	
         	 </div>
         	 
         	 
@@ -170,10 +173,11 @@ for(Cookie cookie : cookies){
         			<table>
         				<tr>
         					<td style="padding-left:50px;">
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;padding-left: 100px;"> 6520 </label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> The Roshan Planet High School </label><br>
-        						<a target="_parent"
+        						<a target="_parent" style="padding-left: 90px;"
         						 href="/roshan/UserProcess/multiUser?branchid=6"> <img
-									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
+									src="/roshan/images/login.svg" width="25" height="25" alt="Login" />Login</a>
         					</td>
         				</tr>
         			</table>
@@ -181,15 +185,16 @@ for(Cookie cookie : cookies){
         	</div>
         	
         	 
-        	 <div class="col" style="padding-bottom: 40px;">
+        	 <div class="col" style="padding-bottom: 10px;">
         		<div id="rcorners1">
         			<table>
         				<tr>
-        					<td style="padding-left:50px;">
+        					<td style="padding-left:10px;">
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;padding-left: 130px;"> 6534 </label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> The Roshan Planet P.U. Science College </label><br>
-        						<a target="_parent"
+        						<a target="_parent" style="padding-left: 120px;"
         						 href="/roshan/UserProcess/multiUser?branchid=7"> <img
-									src="/roshan/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login</a>
+									src="/roshan/images/login.svg" width="25" height="25" alt="Login" />Login</a>
         					</td>
         				</tr>
         			</table>

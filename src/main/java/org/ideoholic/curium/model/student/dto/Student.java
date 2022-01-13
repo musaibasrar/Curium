@@ -199,7 +199,7 @@ public class Student implements java.io.Serializable {
 	private String disabilitychild;
 
 	@Column(name = "sts")
-	private Integer sts;
+	private String sts;
 
 	@Column(name = "specialcategory", length = 25)
 	private String specialcategory;

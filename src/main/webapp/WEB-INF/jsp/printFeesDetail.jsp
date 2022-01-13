@@ -18,16 +18,17 @@
 .dataText {
 	font-family: Tahoma;
 	color: black;
-	font-size: 12px;
+	font-size: 10px;
 	letter-spacing: normal;
 	text-align: center;
+	fon
 }
-<!--
+
 .headerText {
 	width: 10px;
 	font-family: Tahoma;
 	font-size: 12px;
-	color: #FFFFFF;
+	color: black;
 	font-weight: normal;
 	width: auto;
 	height: 22px;
@@ -57,19 +58,19 @@
 }
 
 .dataTextBoldLeft {
-	font-weight: bold;
+	font-weight: normal;
 	font-family: Tahoma;
 	color: black;
-	font-size: 12px;
+	font-size: 8px;
 	letter-spacing: normal;
 	text-align: left;
 }
 
 .dataTextBoldCenter {
-	font-weight: bold;
+	font-weight: normal;
 	font-family: Tahoma;
 	color: black;
-	font-size: 32px;
+	font-size: 28px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -78,12 +79,11 @@
 	font-weight: normal;
 	font-family: ariel;
 	color: black;
-	font-size: 18px;
+	font-size: 16px;
 	letter-spacing: normal;
 	text-align: center;
 }
 
--->
 
 </style>
 
@@ -172,21 +172,21 @@
 
 
 <body style="text-align: center" class="bodymargin">
-<div style="border: 1px solid;border-radius: 15px">
+<div style="border: 1px solid;border-radius: 15px;page-break-after: always;">
 	<form method="post" class="bodymargin">
 		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 10px;">
-				<img src="/roshan/images/roshanfees.jpg" width="100" height="94"/>
+				<img src="/roshan/images/roshanfees.jpg" width="90" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 40px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 				<td align="left" style="padding-right: 10px;">
-				<img src="/roshan/images/roshanpaytm.jpeg" width="100" height="94"/>
+				<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="90" height="60">
 				</td> 
 			</tr>
 </table>
@@ -197,7 +197,7 @@
                 </tr>
             </TABLE>
 
-		<table style="padding-left: 30px;">
+		<table style="padding-left: 40px;">
 		
 			<tr>
 			<td></td>
@@ -206,17 +206,17 @@
 			<tr >
 			
 				<td class="dataTextBoldLeft" style="width: 50%">Student
-					Name:&nbsp;<c:out value="${student.name}" />
+					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${student.name}" /></label>
 				</td>
 			
-				<td class="dataTextBoldLeft" style="width: 30%">Admission No:&nbsp;<c:out value="${student.admissionnumber}" />
+				<td class="dataTextBoldLeft" style="width: 30%">UID:&nbsp;<c:out value="${student.studentexternalid}" />
 				</td>
 				
 
 				
 
 				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
-						value="${recieptinfo.branchreceiptnumber}" />
+						value="${recieptinfo.branchreceiptnumber}" /> <c:out value="(${currentAcademicYear})" />
 				</td>
 
 			</tr>
@@ -225,7 +225,7 @@
 			</tr>
 			<tr>
 			<td class="dataTextBoldLeft" style="width: 50%">Fathers
-					Name:&nbsp;<c:out value="${parents.fathersname}" />
+					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
 				</td>
 			
 				<td class="dataTextBoldLeft" style="width: 30%">
@@ -258,13 +258,13 @@
             </TABLE>
 
 		<TABLE id="dataTable" width="100%" border="0"
-			style="page-break-after: always; border-collapse: collapse;">
+			style="border-collapse: collapse;">
 
 
 			<tr>
 
-				<td class="headerText" style="font-weight: bold">Particulars</td>
-				<td class="headerText" style="font-weight: bold">Fees Amount</td>
+				<td class="headerText">Particulars</td>
+				<td class="headerText">Fees Amount</td>
 				
 
 			</tr>
@@ -345,6 +345,11 @@
 			<td></td>
 			</tr>
 			
+			</table>
+			
+			
+			<TABLE width="100%" border="0">
+			
 			<tr>
 			
 			<td><hr width="100%"></td>
@@ -354,62 +359,58 @@
 			
 			
 			<tr>
-				<!-- <td>&nbsp;</td> -->
-				<td class="headerText" style="font-weight: bold;" >
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				Total</td>
-				<td class="headerText">&#x20B9; <c:out
-						value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" ></td>
+				<td class="headerText"></td>
+				<td class="headerText" style="padding-left: 250px;">Total&nbsp;&nbsp;&nbsp;&#x20B9; <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
+			</table>
+			
+		<TABLE width="100%" border="0">
+			<tr>
+			
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			</tr>
 
 			<tr>
-			
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			</tr>
-
-			<tr>
-				<td class="headerText" style="font-weight: bold;">
-					Total Fees: Rs. ${totalfees} &nbsp;&nbsp;&nbsp;&nbsp; Total fees paid : &#x20B9; ${sumoffees}
-					&nbsp;&nbsp;&nbsp;&nbsp; Total fees Due : &#x20B9; ${dueamount} 
+				<td class="headerText">
+					Total Fees: Rs. ${totalfees}
+				</td>
+				<td class="headerText">
+					Total fees paid : &#x20B9; ${sumoffees}
+				</td>
+				<td class="headerText">
+				 Total fees Due : &#x20B9; ${dueamount} 
 				</td>
 				
 			</tr>
 			
 			<tr>
-			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
-<tr>
-<td align="left" style="padding-left: 10px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
-</tr>
-<tr>
-<td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
-<td></td>
-</tr>
+			</table>
+			
+			<TABLE width="100%" border="0">
+		<tr >
+		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></label></td>
+		</tr>
 
-<tr>
-<td align="left" style="padding-left: 10px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
-</tr>
-
-<tr>
-<td><br><br></td>
-</tr>
-<tr>
-<td></td>
-<td align="left"><br>Signature of Cashier/Accountant</td>
-<!-- 
-<td align="left">H.M</td> -->
-
-</tr>
+		<tr>
+		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
+		</tr>
+		</table>
+		
+		<TABLE width="100%" border="0">
+		<tr>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
+		<td><img src="/roshan/images/roshanpaytm.jpeg" width="100" height="94"/></td>
+		<td>Received with thanks,<br><br> Cashier/Accountant</td>
+		</tr>
 		</TABLE>
-
-
 	</form>
 	
 	</div>

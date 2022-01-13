@@ -165,8 +165,8 @@
         <property name="specialcategory" type="string">
             <column name="specialcategory" length="25" />
         </property> 
-        <property name="sts" type="java.lang.Integer">
-            <column name="sts" />
+        <property name="sts" type="string">
+            <column name="sts" length="30"/>
         </property>
         <property name="rte" type="java.lang.Integer">
             <column name="rte" />

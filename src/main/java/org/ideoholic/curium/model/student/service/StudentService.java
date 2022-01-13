@@ -260,7 +260,7 @@ public class StudentService {
 		                	student.setSpecialcategory(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("sts")) {
-		                	student.setSts(DataUtil.parseInt(request.getParameter(fieldName)));
+		                	student.setSts(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("rte")) {
 		                	student.setRte(DataUtil.parseInt(request.getParameter(fieldName)));
@@ -963,7 +963,7 @@ public class StudentService {
 	                	newcateg = DataUtil.emptyString(request.getParameter(fieldName));
 	                }
 	                if (fieldName.equalsIgnoreCase("sts")) {
-	                	student.setSts(DataUtil.parseInt(request.getParameter(fieldName)));
+	                	student.setSts(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("rte")) {
 	                	student.setRte(DataUtil.parseInt(request.getParameter(fieldName)));

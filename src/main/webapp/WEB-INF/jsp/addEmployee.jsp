@@ -738,7 +738,7 @@ for(Cookie cookie : cookies){
 										<td></td><td></td>
 										<td align="center"><a class="nexttab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="/roshan/#">Next</a></td>
+											href="#">Next</a></td>
 									</tr>
 									
 								<tr>
@@ -808,10 +808,10 @@ for(Cookie cookie : cookies){
 										<td align="center">
 										<a class="nexttab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="/roshan/#">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;
+											href="#">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;
 										<a class="prevtab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="/roshan/#">Previous</a></td>
+											href="#">Previous</a></td>
 									</tr>
 									
 									
@@ -871,7 +871,7 @@ for(Cookie cookie : cookies){
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<a class="prevtab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="/roshan/#">Previous</a></td>
+											href="#">Previous</a></td>
 									</tr>
 									
 									

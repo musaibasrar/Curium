@@ -1020,7 +1020,7 @@
 
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="/roshan/#">Next</a></td>
+										href="#">Next</a></td>
 								</tr>
 
 								<tr>
@@ -1119,10 +1119,10 @@
 
 										<td align="center"><a class="nexttab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="/roshan/#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+											href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 											class="prevtab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
-											href="/roshan/#">Previous</a></td>
+											href="#">Previous</a></td>
 									</tr>
 
 									<tr>
@@ -1255,10 +1255,10 @@
 
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="/roshan/#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="/roshan/#">Previous</a></td>
+										href="#">Previous</a></td>
 								</tr>
 								
 								<tr>
@@ -1368,7 +1368,7 @@
 									<td><br /></td>
 								</tr>
 								<tr>
-									<td class="alignLeft">Father's Caste <br> Certificate No
+									<td class="alignLeft">Father's Aadhar No
 										&nbsp;</td>
 									<td><label> <input
 											name="fatherscastecertno" type="text" class="myclass"
@@ -1376,7 +1376,7 @@
 											id="fatherscastecertno" size="36">
 									</label></td>
 
-									<td class="alignLeft" style="padding-left: 20px;">Mother's Caste <br> Certificate No
+									<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhar No
 										&nbsp;</td>
 									<td ><label> <input
 											name="motherscastecertno" type="text" class="myclass"
@@ -1538,10 +1538,10 @@
 									<td class="alignRight">&nbsp;</td>
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="/roshan/#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="/roshan/#">Previous</a></td>
+										href="#">Previous</a></td>
 								</tr>
 
 
@@ -1701,10 +1701,10 @@
 									<td class="alignRight">&nbsp;</td>
 									<td align="center"><a class="nexttab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="/roshan/#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+										href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="/roshan/#">Previous</a></td>
+										href="#">Previous</a></td>
 								</tr>
 
 
@@ -1800,7 +1800,7 @@
 								 <a
 										class="prevtab"
 										style="font-weight: bold; color: #325F6D; font-size: 13px"
-										href="/roshan/#">Previous</a></td>
+										href="#">Previous</a></td>
 								</tr>
 								<tr><td><br></td></tr>
 									<tr>
