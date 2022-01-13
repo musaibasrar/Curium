@@ -510,7 +510,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/roshan/StudentProcess/exportDataForStudents" method="POST">
+	<form id="form1" action="/roshan/FeesCollection/exportDataForStudentsFeesReport" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -649,6 +649,9 @@ for(Cookie cookie : cookies){
 				</tbody>
 				<tfoot>
 					<tr>
+					
+					<td  class="footerTD" > <input value="Export"
+							type="submit" id="export"/></td>
 													
 						<td class="footerTD" colspan="2" >
 						 
