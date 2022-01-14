@@ -49,9 +49,15 @@ public class FeesCollectionAction {
                             url = exportDataForStudentsFeesReport();
                         }else if (action.equalsIgnoreCase("download")) {
                             url = download();
+                        }else if (action.equalsIgnoreCase("printFeesReport")) {
+                            url = printFeesReport();
                         }
                 return url;
         }
+
+		private String printFeesReport() {
+			return "feesreportprint.jsp";
+		}
 
 		private String download() {
 			if (new FeesCollectionService(request, response).downlaod()) {

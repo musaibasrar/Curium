@@ -373,6 +373,14 @@
 		form1.submit();
 
 	}
+	
+	
+	function printFeesReport(){
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=FeesCollection&action=printFeesReport";
+		form1.method = "POST";
+		form1.submit();
+	}
 
 	$(function() {
 
@@ -399,6 +407,14 @@
 			icons : {
 				primary : "ui-icon-trash"
 			}
+		});
+		
+		$("#print").button({
+			icons : {
+				primary : "ui-icon-print"
+			}
+		}).click(function() {
+			printFeesReport();
 		});
 		
 		$('#chckHead').click(function() {
@@ -650,18 +666,16 @@ for(Cookie cookie : cookies){
 				<tfoot>
 					<tr>
 					
-					<td  class="footerTD" > <input value="Export"
-							type="submit" id="export"/></td>
+					<td  class="footerTD" > <input value="Export" type="submit" id="export"/> </td>
+							
+					<td  class="footerTD" align="left"> <input value="Print" id="print" style="width: 40px;"/></td>
 													
-						<td class="footerTD" colspan="4" >
+						<td class="footerTD" colspan="3" >
 						 Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;
 						 Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount }
 						 
 						</td>
-							
-							
-
 					</tr>
 				</tfoot>
 			</table>
