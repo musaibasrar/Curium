@@ -85,23 +85,34 @@ public class MessItemsDAO {
         try {
             transaction = session.beginTransaction();
             
-            List<MessStockAvailability> stocklist = new ArrayList<MessStockAvailability>();
-            Query queryStock = session.createQuery("from MessStockAvailability msa where msa.availablestock > 0 and msa.messitems.id IN (:ids) ");
-            queryStock.setParameterList("ids", ids);
-            stocklist = queryStock.getResultList();
-            
-            if (stocklist.isEmpty()) {
-            	
-            	Query queryMSA = session.createQuery("delete from MessStockAvailability msa where msa.messitems.id IN (:ids)");
-                queryMSA.setParameterList("ids", ids);
-                queryMSA.executeUpdate();
+            for (Integer id : ids) {
+				
+            	MessStockAvailability stocklist = new MessStockAvailability();
+                Query queryStock = session.createQuery("from MessStockAvailability msa where msa.messitems.id IN (:ids) ");
+                queryStock.setParameter("ids", id);
+                stocklist = (MessStockAvailability) queryStock.uniqueResult();
                 
-                Query queryMI = session.createQuery("delete from MessItems where id IN (:ids)");
-                queryMI.setParameterList("ids", ids);
-                queryMI.executeUpdate();
-                
-                result = true;
+                if (stocklist==null) {
+                	
+					/*
+					 * Query queryMSA = session.
+					 * createQuery("delete from MessStockAvailability msa where msa.messitems.id IN (:ids)"
+					 * ); queryMSA.setParameter("ids", id); queryMSA.executeUpdate();
+					 */
+                    
+                    Query queryMI = session.createQuery("delete from MessItems where id IN (:ids)");
+                    queryMI.setParameter("ids", id);
+                    queryMI.executeUpdate();
+                    
+                    result = true;
+    			}else if(stocklist.getAvailablestock() == 0) {
+    				Query queryMI = session.createQuery("update MessItems mi set mi.status='inactive' where id IN (:ids)");
+                    queryMI.setParameter("ids", id);
+                    queryMI.executeUpdate();
+    			}
 			}
+            
+            
             transaction.commit();
             
         } catch (HibernateException hibernateException) {transaction.rollback();
@@ -245,7 +256,7 @@ public class MessItemsDAO {
         List<MessStockAvailability> results = new ArrayList<MessStockAvailability>();
         try {
                 transaction = session.beginTransaction();
-                results = (List<MessStockAvailability>) session.createQuery("From MessStockAvailability ms order by ms.messitems.name ASC").setCacheable(true).setCacheRegion("commonregion").list();
+                results = (List<MessStockAvailability>) session.createQuery("From MessStockAvailability ms where ms.messitems.status = 'active' order by ms.messitems.name ASC").setCacheable(true).setCacheRegion("commonregion").list();
                 transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
                 

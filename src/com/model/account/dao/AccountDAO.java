@@ -583,4 +583,20 @@ public class AccountDAO {
 		return accountDetails;
 	}
 
+	public VoucherEntrytransactions getVoucherDetailsByNarration(String supplierreferenceno) {
+		
+		VoucherEntrytransactions voucherTransactions = new VoucherEntrytransactions();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from VoucherEntrytransactions where narration like '%"+supplierreferenceno+"%'");
+			voucherTransactions = (VoucherEntrytransactions) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return voucherTransactions;
+	}
+
 }

@@ -80,6 +80,7 @@ public class MessItemsService {
 			 messItems.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			 messItems.setLinkedledgerid(getLedgerAccountId("itemaccountid"));
 			 messItems.setLinkedledgeridexpense(getLedgerAccountId("itemaccountidexpense"));
+			 messItems.setStatus("Active");
 			 messItems.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			 
 			 messStockAvailability.setAvailablestock(0.0f);
@@ -186,6 +187,7 @@ public class MessItemsService {
 				String[] lineTotal = request.getParameterValues("linetotal");
 				String sup = request.getParameter("supplierid");
 				String[] supplieridledgerid = sup.split(":");
+				String randomString =  DataUtil.generateString(5);
 				
 				//Invoice Details
 				MessInvoiceDetails messInvoiceDetails = new MessInvoiceDetails();
@@ -194,7 +196,7 @@ public class MessItemsService {
 				messInvoiceDetails.setInvoicedate(DateUtil.indiandateParser(request.getParameter("invoicedate")));
 				messInvoiceDetails.setEntrydate(DateUtil.todaysDate());
 				messInvoiceDetails.setInvoicetotal(itemsTotalAmount.floatValue());
-				messInvoiceDetails.setSupplierreferenceno(request.getParameter("supplierreferenceno"));
+				messInvoiceDetails.setSupplierreferenceno(randomString+":"+request.getParameter("supplierreferenceno"));
 				messInvoiceDetails.setSuppliersid(DataUtil.parseInt(supplieridledgerid[0]));
 				messInvoiceDetails.setStatus("ACTIVE");
 				
@@ -264,7 +266,7 @@ public class MessItemsService {
 						transactionTC.setVouchertype(4);
 						transactionTC.setTransactiondate(DateUtil.indiandateParser(request.getParameter("invoicedate")));
 						transactionTC.setEntrydate(DateUtil.todaysDate());
-						transactionTC.setNarration("Towards transportation/labour charges. Ref. No:"+request.getParameter("supplierreferenceno"));
+						transactionTC.setNarration("Towards transportation/labour charges. Ref. No:"+randomString+":"+request.getParameter("supplierreferenceno"));
 						transactionTC.setCancelvoucher("no");
 						transactionTC.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						transactionTC.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
