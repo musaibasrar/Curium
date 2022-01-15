@@ -125,7 +125,7 @@ public class FeesDetailsService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Admission Number", "Student Name", "Father Name", "Date of Fees", "Total"});
+					new Object[] { "Admission Number", "Student Name", "Date of Fees", "Total"});
 			int i = 1;
 			for (Receiptinfo feesDetails : listOfFeesDetails) {
 				
