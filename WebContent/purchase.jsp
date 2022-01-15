@@ -867,6 +867,8 @@
 
                     }
                 });
+                
+                $("#print").button()
             });
 
 
@@ -896,6 +898,17 @@
 		        		  }
 		        		
 		        	}
+		        	
+		        	
+		        	 function printlayer(layer){
+		             	var generator = window.open(",");
+		             	var layetext = document.getElementById(layer);
+		             	generator.document.write(layetext.innerHTML.replace("Print Me"));
+		             	
+		             	generator.document.close();
+		             	generator.print();
+		             	generator.close();
+		             }
 		        	
         </script>
 
@@ -1129,6 +1142,10 @@ for(Cookie cookie : cookies){
               			
            		 </div>
            		 
+           		 <div align="center">
+           		 <br><br>
+           		 <a href="#" id="print" onclick="javascript: printlayer('mrvdetails')">Print</a>
+           		 </div>
            		 <!-- <table width="100%" border="0">
 						
 						
