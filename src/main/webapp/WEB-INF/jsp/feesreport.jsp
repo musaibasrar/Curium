@@ -131,7 +131,7 @@
 	color: #FFFFFF;
 	font-weight: Bold;
 	width: auto;
-	height: 27px;
+	height: 24px;
 	vertical-align: text-top;
 	text-align: center;
 	background-image:
