@@ -794,7 +794,7 @@ public class FeesCollectionService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Registration Number", "Admission Number","Student Name", "Class & Sec", "Fees Details", "Total Due Summary", "Total Fees Summary"});
+					new Object[] { "UID", "Admission Number","Student Name", "Class & Sec", "Fees Details", "Total Due Summary", "Total Fees Summary"});
 			int i = 1;
 			for (StudentFeesReport studentFeesReport : studentFeesReportList) {
 				
@@ -812,7 +812,7 @@ public class FeesCollectionService {
 				}
 				
 				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(studentFeesReport.getStudent().getRegistrationnumber()),  DataUtil.emptyString(studentFeesReport.getStudent().getAdmissionnumber()),
+						new Object[] { DataUtil.emptyString(studentFeesReport.getStudent().getStudentexternalid()),  DataUtil.emptyString(studentFeesReport.getStudent().getAdmissionnumber()),
 								 DataUtil.emptyString(studentFeesReport.getStudent().getName()),
 								 DataUtil.emptyString(studentFeesReport.getStudent().getClassstudying().replace("--", " ")),
 								 DataUtil.emptyString(feesDetails),
