@@ -187,7 +187,7 @@ public class MessItemsService {
 				String[] lineTotal = request.getParameterValues("linetotal");
 				String sup = request.getParameter("supplierid");
 				String[] supplieridledgerid = sup.split(":");
-				String randomString =  DataUtil.generateString(5);
+				String randomString =  DataUtil.generateString(8);
 				
 				//Invoice Details
 				MessInvoiceDetails messInvoiceDetails = new MessInvoiceDetails();

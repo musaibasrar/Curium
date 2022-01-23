@@ -143,7 +143,7 @@ public class DataUtil {
    public static String generateString(int lengthh) {
 
        // ||, -, *, /, <>, <, >, ,(comma), =, <=, >=, ~=, !=, ^=, (, )
-       String alphaNumeric = new String("abcdefgh0123456ijklmnopqrs789tuvwxyz}");
+       String alphaNumeric = new String("abcdefgh0123456ijklmnopqrs789tuvwxyz");
        int alphaNumericLength = alphaNumeric.length();
 
        String generatedRandomNumber = new String();

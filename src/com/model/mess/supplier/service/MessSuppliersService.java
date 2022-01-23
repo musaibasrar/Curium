@@ -422,7 +422,7 @@ public class MessSuppliersService {
 				messSuppliersPayment.setStatus("CLEARED");
 				messSuppliersPayment.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				
-				//Pass J.V. : Credit the Bank & debit the Cheque Awaiting Settlement 
+				//Pass J.V. : Credit the Bank/Cash & debit the Cheque Awaiting Settlement 
 				int crBankId = getLedgerAccountId(bankName);
 				int drCasId = getLedgerAccountId("CAS");
 				
@@ -443,6 +443,8 @@ public class MessSuppliersService {
 				
 				String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+crBankId;
 				String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+drCasId;
+				
+				// End  Pass J.V. : Credit the Bank/Cash & debit the Cheque Awaiting Settlement
 				
 				
 				
@@ -544,7 +546,9 @@ public class MessSuppliersService {
 		
 		List<MessSuppliers> messSuppliersList = new ArrayList<MessSuppliers>();
 		List<Accountdetailsbalance> accountdetailsbalanceList = new ArrayList<Accountdetailsbalance>();
-			
+		List<Accountdetailsbalance> suppliersbalanceList = new ArrayList<Accountdetailsbalance>();
+		String todate = DateUtil.dateParseryyyymmdd(new Date());
+		String fromDate = "2019-01-01";
 		
 		 if(httpSession.getAttribute(BRANCHID)!=null){
 			 	messSuppliersList =	new MessSuppliersDAO().getSupplierDetails();
@@ -557,10 +561,43 @@ public class MessSuppliersService {
 			 	
 			 	accountdetailsbalanceList = new AccountDAO().getAccountBalanceDetails(supplierLedgerId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			 	
+			 	for (Accountdetailsbalance accountDetailsBalance : accountdetailsbalanceList) {
+			 		
+			 		List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, todate, accountDetailsBalance.getAccountDetails().getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					BigDecimal totalAmount = getTotalBalance(accountDetailsBalance,voucherTransactions);
+					accountDetailsBalance.setCurrentbalance(totalAmount);
+					suppliersbalanceList.add(accountDetailsBalance);
+				}
 			 	
 		 }
 		 
-		 request.setAttribute("supplierbalancedetails", accountdetailsbalanceList);
+		 request.setAttribute("supplierbalancedetails", suppliersbalanceList);
+	}
+
+
+	private BigDecimal getTotalBalance(Accountdetailsbalance accountDetailsBalance,	List<VoucherEntrytransactions> voucherTransactions) {
+		
+		BigDecimal totalBalanceAcc = BigDecimal.ZERO;
+		BigDecimal debitAcc = BigDecimal.ZERO;
+		BigDecimal creditAcc = BigDecimal.ZERO;
+		
+		for (VoucherEntrytransactions voucherTransaction : voucherTransactions) {
+			
+			if(voucherTransaction.getDraccountid().equals(accountDetailsBalance.getAccountDetails().getAccountdetailsid())) {
+				debitAcc = debitAcc.add(voucherTransaction.getDramount());
+			}else if(voucherTransaction.getCraccountid().equals( accountDetailsBalance.getAccountDetails().getAccountdetailsid())) {
+				creditAcc = creditAcc.add(voucherTransaction.getCramount());
+			}
+		}
+	
+	if(accountDetailsBalance.getAccountDetails().getAccountGroupMaster().getAccountgroupid()==1 || accountDetailsBalance.getAccountDetails().getAccountGroupMaster().getAccountgroupid()==5) {
+		totalBalanceAcc = debitAcc.subtract(creditAcc);
+	}else{
+		totalBalanceAcc = creditAcc.subtract(debitAcc);
+	}
+	
+	return totalBalanceAcc;
+	
 	}
 	
 }

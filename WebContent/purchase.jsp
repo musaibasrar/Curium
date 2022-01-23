@@ -966,7 +966,7 @@ for(Cookie cookie : cookies){
 							</td>
 							
 							<td class="alignRight">&nbsp;&nbsp;&nbsp;Ref./Invoice No.&nbsp;</td>
-							<td ><input type="text" id="supplierreferenceno" name="supplierreferenceno" class="textfieldvalues" style="font-size: 14px;">
+							<td ><input type="text" id="supplierreferenceno" name="supplierreferenceno" class="textfieldvalues" style="font-size: 14px;" required>
 							</td>
 							
 						</tr>

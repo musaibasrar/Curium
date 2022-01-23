@@ -49,11 +49,11 @@ public class MessStockEntryService {
 			
 			List<MessStockEntry> messStockEntryList = new ArrayList<MessStockEntry>();
 			messStockEntryList = new MessStockEntryDAO().getMRVDetails(invoiceDetailsId);
-			VoucherEntrytransactions vet = new AccountDAO().getVoucherDetailsByNarration(messStockEntryList.get(0).getMessinvoicedetails().getSupplierreferenceno());
+			List<VoucherEntrytransactions> vet = new AccountDAO().getVoucherDetailsByNarration(messStockEntryList.get(0).getMessinvoicedetails().getSupplierreferenceno());
 			String labourCharge = "";
 			
-			if(vet!=null) {
-				vet.getDramount().toBigInteger().toString();
+			if(!vet.isEmpty()) {
+				labourCharge=vet.get(0).getDramount().toBigInteger().toString();
 			}
 			
 			
