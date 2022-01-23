@@ -405,8 +405,41 @@
 		$("#anim").change(function() {
 			$("#todate").datepicker("option", "showAnim", $(this).val());
 		});
+		
+		$("#print").button({
+			icons : {
+				primary : "ui-icon-print"
+			}
+		}).click(function() {
+			printTrialBalance();
+			return false;
+		});
+		
+		$("#export").button({
+			icons : {
+				primary : "ui-icon-print"
+			}
+		}).click(function() {
+			exportTrialBalance();
+			return false;
+		});
 	});
 
+	
+	function printTrialBalance(){
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=AccountProcess&action=printTrialBalance";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
+	
+	function exportTrialBalance(){
+		var form1 = document.getElementById("form1");
+		form1.action = "Controller?process=AccountProcess&action=exportTrialBalance";
+		form1.method = "POST";
+		form1.submit();
+	}
 
 </script>
 
@@ -569,7 +602,9 @@ for(Cookie cookie : cookies){
 						</tr>
 					<tr>
 						<td class="footerTD" colspan="3"><input 
-							type="hidden"  id="delete" />
+							type="button"  value="Print" id="print" />
+							<input 
+							type="button"  value="Export" id="export" />
 							</td>
 							
 

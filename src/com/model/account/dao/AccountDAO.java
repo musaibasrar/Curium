@@ -583,13 +583,14 @@ public class AccountDAO {
 		return accountDetails;
 	}
 
-	public VoucherEntrytransactions getVoucherDetailsByNarration(String supplierreferenceno) {
+	public List<VoucherEntrytransactions> getVoucherDetailsByNarration(String supplierreferenceno) {
 		
-		VoucherEntrytransactions voucherTransactions = new VoucherEntrytransactions();
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		
 		try {
 			transaction = session.beginTransaction();
 			Query query = session.createQuery("from VoucherEntrytransactions where narration like '%"+supplierreferenceno+"%'");
-			voucherTransactions = (VoucherEntrytransactions) query.uniqueResult();
+			voucherTransactions = query.list();
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
