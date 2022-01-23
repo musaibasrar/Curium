@@ -224,7 +224,7 @@
             <table class="datatable">
             <thead>
  				 <tr>
- 				 		<th class=datath>Sl.No</th>
+ 				 		<th class="datath">Sl.No</th>
 						<th class="datath">Item Name</th>
 						<th class="datath">Available Quantity</th>
 						<th class="datath">Status</th>
