@@ -67,6 +67,12 @@ public class AccountAction {
 			url = viewNextVoucher();
 		}else if ("trialBalance".equalsIgnoreCase(action)) {
 			url = trialBalance();
+		}else if ("printTrialBalance".equalsIgnoreCase(action)) {
+			url = printTrialBalance();
+		}else if ("exportTrialBalance".equalsIgnoreCase(action)) {
+			url = exportTrialBalance();
+		}else if ("downloadTrialBalance".equalsIgnoreCase(action)) {
+			url = downloadTrialBalance();
 		}else if ("cancelVoucher".equalsIgnoreCase(action)) {
 			url = cancelVoucher();
 		}else if ("viewCancelledVouchers".equalsIgnoreCase(action)) {
@@ -82,6 +88,22 @@ public class AccountAction {
 		}
 		return url;
 		}
+	
+	private String downloadTrialBalance() {
+		if (new AccountService(request, response).downloadTrialBalance()) {
+			return "trialbalanceexportsuccess.jsp";
+		}
+		return "exportfailure.jsp";
+		}
+
+	private String exportTrialBalance() {
+    	new AccountService(request, response).exportTrialBalance();
+        return "trialbalanceexportsuccess.jsp";
+	}
+
+	private String printTrialBalance() {
+		return "trialbalanceprint.jsp";
+	}
 
 	private String incomeStatement() {
 		new AccountService(request, response).getIncomeStatement();

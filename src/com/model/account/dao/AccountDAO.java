@@ -37,12 +37,12 @@ public class AccountDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public boolean create(Financialaccountingyear financialaccountingyear) {
+	public boolean create(Financialaccountingyear financialaccountingyear, int branchId) {
 		boolean result = false;
 		Financialaccountingyear financialYear = new Financialaccountingyear();
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Financialaccountingyear where active='yes'");
+			Query query = session.createQuery("from Financialaccountingyear where active='yes' and branchid="+branchId);
 			financialYear = (Financialaccountingyear) query.uniqueResult();
 			if(financialYear!=null && financialYear.getActive().equalsIgnoreCase(financialaccountingyear.getActive())){
 				financialYear.setActive("no");
@@ -363,14 +363,16 @@ public class AccountDAO {
 	}
 
 	public String getAccountName(Integer accountid) {
+		
 		Accountdetails accountDetails = new Accountdetails();
 		String accountName = null;
 		try {
 			transaction = session.beginTransaction();
 			Query query =  session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
 			accountDetails = (Accountdetails) query.uniqueResult(); 
-			transaction.commit();
 			accountName = accountDetails.getAccountname();
+			transaction.commit();
+			
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally {
@@ -579,6 +581,23 @@ public class AccountDAO {
 			HibernateUtil.closeSession();
 		}
 		return accountDetails;
+	}
+
+	public List<VoucherEntrytransactions> getVoucherDetailsByNarration(String supplierreferenceno) {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from VoucherEntrytransactions where narration like '%"+supplierreferenceno+"%'");
+			voucherTransactions = query.list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return voucherTransactions;
 	}
 
 }
