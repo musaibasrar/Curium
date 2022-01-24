@@ -256,4 +256,15 @@ public class JspController {
 		return "exportfailure";
 	}
 	
+	@GetMapping("/trialbalanceexportsuccess")
+	public String getTrialbalanceexportsuccess() {
+		return "trialbalanceexportsuccess";
+	}
+	
+	
+	@GetMapping("/trialbalanceprint")
+	public String getTrialbalanceprint() {
+		return "trialbalanceprint";
+	}
+	
 }
