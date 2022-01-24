@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
 import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
@@ -30,7 +32,7 @@ public class MessStockEntryService {
 
 	public void getMRVDetails()  throws IOException {
 		
-		
+		System.out.println("In mrv details");
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			
 			int invoiceDetailsId = Integer.parseInt(request.getParameter("invoicedetailsid"));
@@ -46,6 +48,13 @@ public class MessStockEntryService {
 			
 			List<MessStockEntry> messStockEntryList = new ArrayList<MessStockEntry>();
 			messStockEntryList = new MessStockEntryDAO().getMRVDetails(invoiceDetailsId);
+			//List<VoucherEntrytransactions> vet = new AccountDAO().getVoucherDetailsByNarration(messStockEntryList.get(0).getMessinvoicedetails().getSupplierreferenceno());
+			String labourCharge = "100";
+			
+			/*
+			 * if(!vet.isEmpty()) {
+			 * labourCharge=vet.get(0).getDramount().toBigInteger().toString(); }
+			 */
 			
 			PrintWriter out = response.getWriter(); 
 			response.setContentType("text/xml");
@@ -75,6 +84,19 @@ public class MessStockEntryService {
 		        				"							<td class='alignRightInvoice'> "+invoiceDate+"</td>" + 
 		        				"						<td class='alignRight'>Grand Total&nbsp;</td>" + 
 		        				"							<td class='alignRightInvoice'> "+invoicetotal+"</td>" + 
+		        				"							</tr>" + 
+		        				"							<tr>" + 
+		        				"							<td><br /></td>" + 
+		        				"							</tr>" + 
+		        				"							<tr>" + 
+		        				"							<td><br /></td>" + 
+		        				"							</tr>" + 
+		        				"							</tr>" + 
+		        				"						<tr>" + 
+		        				"							<td class='alignRight'>&nbsp;</td>" + 
+		        				"							<td class='alignRightInvoice'></td>" + 
+		        				"							<td class='alignRight'>&nbsp;&nbsp;&nbsp;Labour charges&nbsp;</td>" + 
+		        				"							<td class='alignRightInvoice'> "+labourCharge+"</td>" + 
 		        				"							</tr>" + 
 		        				"							<tr>" + 
 		        				"							<td><br /></td>" + 
