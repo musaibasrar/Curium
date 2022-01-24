@@ -2,6 +2,7 @@ package com.model.mess.stockentry.service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.account.dao.AccountDAO;
+import com.model.account.dto.VoucherEntrytransactions;
 import com.model.mess.item.dao.MessItemsDAO;
 import com.model.mess.item.dto.MessItems;
 import com.model.mess.stockentry.dao.MessStockEntryDAO;
@@ -46,6 +49,13 @@ public class MessStockEntryService {
 			
 			List<MessStockEntry> messStockEntryList = new ArrayList<MessStockEntry>();
 			messStockEntryList = new MessStockEntryDAO().getMRVDetails(invoiceDetailsId);
+			List<VoucherEntrytransactions> vet = new AccountDAO().getVoucherDetailsByNarration(messStockEntryList.get(0).getMessinvoicedetails().getSupplierreferenceno());
+			String labourCharge = "";
+			
+			if(!vet.isEmpty()) {
+				labourCharge=vet.get(0).getDramount().toBigInteger().toString();
+			}
+			
 			
 			PrintWriter out = response.getWriter(); 
 			response.setContentType("text/xml");
@@ -62,7 +72,7 @@ public class MessStockEntryService {
 		        				"								"+supplierName+"" + 
 		        				"							</td>" + 
 		        				"							" + 
-		        				"							<td class='alignRight'>Reference/Invoice No.&nbsp;</td>" + 
+		        				"							<td class='alignRight'>&nbsp;&nbsp;&nbsp;Reference/Invoice No.&nbsp;</td>" + 
 		        				"							<td class='alignRightInvoice'>"
 		        				+ "									"+supplierRefNo+"</td>" + 
 		        				"							" + 
@@ -71,10 +81,20 @@ public class MessStockEntryService {
 		        				"							<td><br /></td>" + 
 		        				"							</tr>" + 
 		        				"						<tr>" + 
-		        				"						<td class='alignRight'>Invoice Date&nbsp;</td>" + 
+		        				"							<td class='alignRight'>Invoice Date&nbsp;</td>" + 
 		        				"							<td class='alignRightInvoice'> "+invoiceDate+"</td>" + 
-		        				"						<td class='alignRight'>Grand Total&nbsp;</td>" + 
+		        				"						<td class='alignRight'>&nbsp;&nbsp;&nbsp;Grand Total&nbsp;</td>" + 
 		        				"							<td class='alignRightInvoice'> "+invoicetotal+"</td>" + 
+		        				"							</tr>" + 
+		        				"							<tr>" + 
+		        				"							<td><br /></td>" + 
+		        				"							</tr>" + 
+		        				"							</tr>" + 
+		        				"						<tr>" + 
+		        				"							<td class='alignRight'>&nbsp;</td>" + 
+		        				"							<td class='alignRightInvoice'></td>" + 
+		        				"							<td class='alignRight'>&nbsp;&nbsp;&nbsp;Labour charges&nbsp;</td>" + 
+		        				"							<td class='alignRightInvoice'> "+labourCharge+"</td>" + 
 		        				"							</tr>" + 
 		        				"							<tr>" + 
 		        				"							<td><br /></td>" + 

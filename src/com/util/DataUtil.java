@@ -94,7 +94,7 @@ public class DataUtil {
      public String getPropertiesValue(String key){
     	 String value= null;
     	 Properties properties = new Properties();
-         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("util.properties");
+         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
          try {
  			properties.load(inputStream);
  		} catch (IOException e1) {
@@ -143,7 +143,7 @@ public class DataUtil {
    public static String generateString(int lengthh) {
 
        // ||, -, *, /, <>, <, >, ,(comma), =, <=, >=, ~=, !=, ^=, (, )
-       String alphaNumeric = new String("hijklmno0123459ABEFGHIJKL678MNOPQZabcdefgpqCDrstuvwxyz@#$&-+[]{RSTUVWXY}");
+       String alphaNumeric = new String("abcdefgh0123456ijklmnopqrs789tuvwxyz");
        int alphaNumericLength = alphaNumeric.length();
 
        String generatedRandomNumber = new String();
@@ -172,6 +172,10 @@ public class DataUtil {
            mathrandom = (int) (mathrandom * randomDouble);
        } while (mathrandom >= alphaNumericLength);
        return mathrandom;
+   }
+   
+   public static boolean containsIgnoreCase(String str, String subString) {
+       return str.toLowerCase().contentEquals(subString.toLowerCase());
    }
      
     
