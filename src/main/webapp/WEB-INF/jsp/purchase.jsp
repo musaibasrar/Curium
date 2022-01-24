@@ -818,7 +818,7 @@
         	             
         	         }
         			xmlHttp.onreadystatechange = stateChangedSSGroup;
-        			xmlHttp.open("GET", "/stockentry/mrvdetails?invoicedetailsid="+invoicedetailsid+"&entrydate="+date+"&supplierreferenceno="+supplierrefno+"&suppliername="+name+"&invoicetotal="+invoicetotal+"",true);;
+        			xmlHttp.open("GET", "/stockentry/mrvdetails?invoicedetailsid="+invoicedetailsid+"&entrydate="+date+"&supplierreferenceno="+supplierrefno+"&suppliername="+name+"&invoicetotal="+invoicetotal+"",true);
         			xmlHttp.send(null);
 
         		

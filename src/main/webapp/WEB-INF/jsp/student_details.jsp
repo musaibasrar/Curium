@@ -1161,7 +1161,7 @@ for(Cookie cookie : cookies){
         
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/roshan/StudentProcess/ViewAll";
+                form1.action="/roshan/StudentProcess/viewAll";
                 form1.submit();
             }
         </script>
