@@ -235,5 +235,36 @@ public class JspController {
 	public String getProgressReport() {
 		return "progressreport";
 	}
-
+	
+	@GetMapping("/reports")
+	public String getReports() {
+		return "reports";
+	}
+	
+	@GetMapping("/printstudentdetailsfeesstructure")
+	public String getPrintstudentdetailsfeesstructure() {
+		return "printstudentdetailsfeesstructure";
+	}
+	
+	@GetMapping("/feesreportexportsuccess")
+	public String getFeesreportexportsuccess() {
+		return "feesreportexportsuccess";
+	}
+	
+	@GetMapping("/exportfailure")
+	public String getExportfailure() {
+		return "exportfailure";
+	}
+	
+	@GetMapping("/trialbalanceexportsuccess")
+	public String getTrialbalanceexportsuccess() {
+		return "trialbalanceexportsuccess";
+	}
+	
+	
+	@GetMapping("/trialbalanceprint")
+	public String getTrialbalanceprint() {
+		return "trialbalanceprint";
+	}
+	
 }
