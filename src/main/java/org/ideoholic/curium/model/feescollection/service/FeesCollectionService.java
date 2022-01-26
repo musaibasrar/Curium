@@ -1,7 +1,11 @@
 package org.ideoholic.curium.model.feescollection.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -20,6 +24,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.ideoholic.curium.model.academicyear.dao.YearDAO;
+import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
@@ -49,6 +59,8 @@ public class FeesCollectionService {
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
 	private String username = "username";
+	
+	private static final int BUFFER_SIZE = 4096;
 	
 	public FeesCollectionService(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -251,15 +263,15 @@ public class FeesCollectionService {
 				
 			//Pass Receipt : Credit the student Fees Receivable & debit the cash
 			
-			int crFees = getLedgerAccountId("studentfeesreceivable");
+			int crFees = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			int drAccount = 0;
 			
 			if("cashpayment".equalsIgnoreCase(paymentMethod)) {
-				drAccount = getLedgerAccountId(httpSession.getAttribute(username).toString());
+				drAccount = getLedgerAccountId(httpSession.getAttribute(username).toString()+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			}else if("banktransfer".equalsIgnoreCase(paymentMethod)) {
-				drAccount = getLedgerAccountId(transferBankname);
+				drAccount = getLedgerAccountId(transferBankname+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
-				drAccount = getLedgerAccountId(chequeBankname);
+				drAccount = getLedgerAccountId(chequeBankname+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			} 
 			
 			
@@ -286,8 +298,8 @@ public class FeesCollectionService {
 			
 			//Pass J.V. : Credit the student Fees as Income & debit the unearned revenue
 			
-			int crFeesIncome = getLedgerAccountId("studentfeesincome");
-			int drAccountIncome = getLedgerAccountId("unearnedstudentfeesincome");;
+			int crFeesIncome = getLedgerAccountId("studentfeesincome"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			int drAccountIncome = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			
 			VoucherEntrytransactions transactionsIncome = new VoucherEntrytransactions();
 			
@@ -541,7 +553,7 @@ public class FeesCollectionService {
 				studentFeesReportList.add(studentFeesReport);
 			}
 		
-			request.setAttribute("studentfeesreportlist", studentFeesReportList);
+			httpSession.setAttribute("studentfeesreportlist", studentFeesReportList);
 		}
 		
 	  }
@@ -732,6 +744,160 @@ public class FeesCollectionService {
 		    }
 		    
 		    return result;
+	}
+
+	public void getFeesDetails() {
+		
+		try {
+			long id = Long.parseLong(request.getParameter("studentId"));
+			
+			Currentacademicyear currentYear = new YearDAO().showYear();
+			httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
+			
+			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
+			request.setAttribute("receiptinfo",rinfo);
+			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, currentYear.getCurrentacademicyear());
+			
+			long totalSum = 0l;
+			for (Receiptinfo receiptInfoSingle : rinfo) {
+				totalSum = totalSum + receiptInfoSingle.getTotalamount();
+			}
+			
+			long totalFeesAmount = 0l;
+			for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
+				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
+			}
+			
+				httpSession.setAttribute("feesstructure", feesstructure);
+				httpSession.setAttribute("sumoffees", totalSum);
+				httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
+				httpSession.setAttribute("totalfees", totalFeesAmount);
+				httpSession.setAttribute("academicPerYear", currentYear.getCurrentacademicyear());
+				httpSession.setAttribute("currentAcademicYear", currentYear.getCurrentacademicyear());
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public boolean exportDataForStudentsFeesReport() {
+
+		boolean writeSucees = false;
+		
+		try {
+
+			List<StudentFeesReport> studentFeesReportList = (List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist");
+			
+			// Creating an excel file
+			XSSFWorkbook workbook = new XSSFWorkbook();
+			XSSFSheet sheet = workbook.createSheet("ListOfStudents");
+			Map<String, Object[]> data = new HashMap<String, Object[]>();
+			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
+			headerData.put("Header",
+					new Object[] { "Registration Number", "Admission Number","Student Name", "Class & Sec", "Fees Details", "Total Due Summary", "Total Fees Summary"});
+			int i = 1;
+			for (StudentFeesReport studentFeesReport : studentFeesReportList) {
+				
+				List<Studentfeesstructure> sfs = studentFeesReport.getStudentFeesStructure();
+				String feesDetails = "";
+				Long dueAmount = 0l;
+				Long totalAmount = 0l;
+				
+				for (Studentfeesstructure studentFee : sfs) {
+					Long feesDue = studentFee.getFeesamount()-studentFee.getFeespaid() - studentFee.getConcession() - studentFee.getWaiveoff();
+					Long feesTotal = studentFee.getFeesamount() - studentFee.getConcession() - studentFee.getWaiveoff();
+					dueAmount = dueAmount+studentFee.getFeesamount()-studentFee.getFeespaid()-studentFee.getConcession()-studentFee.getWaiveoff();
+					totalAmount = totalAmount+studentFee.getFeesamount()-studentFee.getConcession()-studentFee.getWaiveoff();
+					feesDetails=feesDetails+studentFee.getFeescategory().getFeescategoryname()+":"+feesDue+"/"+feesTotal+"\n";
+				}
+				
+				data.put(Integer.toString(i),
+						new Object[] { DataUtil.emptyString(studentFeesReport.getStudent().getRegistrationnumber()),  DataUtil.emptyString(studentFeesReport.getStudent().getAdmissionnumber()),
+								 DataUtil.emptyString(studentFeesReport.getStudent().getName()),
+								 DataUtil.emptyString(studentFeesReport.getStudent().getClassstudying().replace("--", " ")),
+								 DataUtil.emptyString(feesDetails),
+								 String.valueOf(dueAmount),
+								 String.valueOf(totalAmount) });
+				i++;
+			}
+			
+			Row headerRow = sheet.createRow(0);
+			Object[] objArrHeader = headerData.get("Header");
+			int cellnum1 = 0;
+			for (Object obj : objArrHeader) {
+				Cell cell = headerRow.createCell(cellnum1++);
+				if (obj instanceof String)
+					cell.setCellValue((String) obj);
+			}
+			Set<String> keyset = data.keySet();
+			int rownum = 1;
+			for (String key : keyset) {
+				Row row = sheet.createRow(rownum++);
+				Object[] objArr = data.get(key);
+				int cellnum = 0;
+				for (Object obj : objArr) {
+					Cell cell = row.createCell(cellnum++);
+					if (obj instanceof Date)
+						cell.setCellValue((Date) obj);
+					else if (obj instanceof Boolean)
+						cell.setCellValue((Boolean) obj);
+					else if (obj instanceof String)
+						cell.setCellValue((String) obj);
+					else if (obj instanceof Double)
+						cell.setCellValue((Double) obj);
+				}
+			}
+				
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/studentsfeesreport.xlsx"));
+				workbook.write(out);
+				out.close();
+				writeSucees = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return writeSucees;
+		// getFile(name, path);
+	}
+
+	public boolean downlaod() {
+		boolean result = false;
+		try {
+
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/studentsfeesreport.xlsx");
+	        FileInputStream inStream = new FileInputStream(downloadFile);
+
+	        // get MIME type of the file
+			String mimeType = "application/vnd.ms-excel";
+
+			// set content attributes for the response
+			response.setContentType(mimeType);
+			// response.setContentLength((int) bis.length());
+
+			// set headers for the response
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"",
+					"studentsfeesreport.xlsx");
+			response.setHeader(headerKey, headerValue);
+
+			// get output stream of the response
+			OutputStream outStream = response.getOutputStream();
+
+			byte[] buffer = new byte[BUFFER_SIZE];
+			int bytesRead = -1;
+
+			// write bytes read from the input stream into the output stream
+			while ((bytesRead = inStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+
+			inStream.close();
+			outStream.close();
+			result = true;
+		} catch (Exception e) {
+			System.out.println("" + e);
+		}
+		return result;
 	}
 
 }

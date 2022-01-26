@@ -1,25 +1,24 @@
 <%-- 
-    Document   : import file success
-    Created on : Sep 08, 2021, 4:55:53 PM
-    Author     : Adeeba
+    Document   : Fees Report Export Success
+    Created on : Jan 13, 2022, 1:11:53 PM
+    Author     : Musaib
 --%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
 
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Import File Success</title>
-<style type="text/css" title="currentStyle">
-            @import "css/dataTable/css/demo_page.css";
-            @import "css/dataTable/css/jquery.dataTables.css";
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Fees Report Export Success</title>
+        <style type="text/css" title="currentStyle">
+            @import "/curium/css/dataTable/css/demo_page.css";
+            @import "/curium/css/dataTable/css/jquery.dataTables.css";
         </style>
         <link rel="stylesheet" href="/curium/css/datePicker/jquery-ui-1.8.17.custom.css">
         <link rel="stylesheet" href="/curium/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/curium/js/dataTable/jquery.js"></script>-->
+        <!--<script type="text/javascript" language="javascript" src="js/dataTable/jquery.js"></script>-->
         <script type="text/javascript" src="/curium/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" language="javascript" src="/curium/js/dataTable/jquery.dataTables.js"></script>
         <script type="text/javascript" src="/curium/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -27,11 +26,7 @@
         <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.widget.js"></script>
         <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.button.js"></script>
         
-        
-        
-        
-        <style type="text/css">
-<!--
+<style type="text/css">
 .divCSS {
 	height: 40px;
 	width: 200px;
@@ -54,12 +49,24 @@
 	font-size: 12px;
 	color: #000000;
 }
--->
-        </style>
+  </style>
 
-       
+        <script type="text/javascript">
+            $(function(){
+                $("#download").button().click(function() {
+        			downloadFile();
+
+        		});
+                });
+
+            function downloadFile(){
+                var form1=document.getElementById("form1");
+                form1.action="/curium/FeesCollection/download";
+                form1.submit();
+            }
+        </script>
 </head>
-  <%
+<%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -75,18 +82,21 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="/images/bg.jpg" >
+    <body background="/curium/images/bg.jpg" >
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-          <td height="250" align="center" style="font-color:red" valign="middle"><p class="style1">File Imported Successfully</p>
-          <td width="26%"  class="alignRightYear">
-                            
-                             
-                            </td>
-                            
-            
-		</td>
+        <td height="50" align="center" valign="middle"><p class="style1"> File Exported Successfully</p>
+        </td>
+        
+      </tr>
+      <tr>
+          <td height="5" align="center" valign="middle"><p class="style1">
+                  
+                  <button id="download">Download</button>
+                                   
+              </p>
+        </td>
       </tr>
     </table>
             </form>
