@@ -414,6 +414,15 @@ public class MessSuppliersService {
 				
 				String supplierName = request.getParameter("externalid_"+supid);
 				String issueAmount = request.getParameter("chequeamount_"+supid);
+				String paymentType = request.getParameter("chequeno_"+supid);
+				
+				if ("Cash".equalsIgnoreCase(paymentType)) {
+						paymentType = "By Cash";
+				
+				}else {
+					paymentType = "By Cheque #: "+paymentType;
+				}
+				
 				String amount = issueAmount.replace(",", "");
 				
 				MessSuppliersPayment messSuppliersPayment = new MessSuppliersPayment();
@@ -435,7 +444,7 @@ public class MessSuppliersService {
 				transactions.setVouchertype(4);
 				transactions.setTransactiondate(DateUtil.indiandateParser(date));
 				transactions.setEntrydate(DateUtil.todaysDate());
-				transactions.setNarration("Towards Payment of supplier '"+supplierName+"'");
+				transactions.setNarration("Towards Payment of supplier '"+supplierName+"' : "+paymentType);
 				transactions.setCancelvoucher("no");
 				transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 				transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -461,7 +470,7 @@ public class MessSuppliersService {
 				transactionsSupplier.setVouchertype(4);
 				transactionsSupplier.setTransactiondate(DateUtil.indiandateParser(date));
 				transactionsSupplier.setEntrydate(DateUtil.todaysDate());
-				transactionsSupplier.setNarration("Towards Payment of supplier '"+supplierName+"'");
+				transactionsSupplier.setNarration("Towards Payment of supplier '"+supplierName+"' : "+paymentType);
 				transactionsSupplier.setCancelvoucher("no");
 				transactionsSupplier.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 				transactionsSupplier.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
