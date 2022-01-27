@@ -259,6 +259,26 @@ public class AccountAction {
 	       
 		
 	}
+	
+	@PostMapping("/downloadTrialBalance")
+	private String downloadTrialBalance() {
+		if (new AccountService(request, response).downloadTrialBalance()) {
+			return "trialbalanceexportsuccess";
+		}
+		return "exportfailure";
+		}
+
+
+	@PostMapping("/exportTrialBalance")
+	private String exportTrialBalance() {
+    	new AccountService(request, response).exportTrialBalance();
+        return "trialbalanceexportsuccess";
+	}
+
+	@PostMapping("/printTrialBalance")
+	private String printTrialBalance() {
+		return "trialbalanceprint";
+	}
 
 	
 
