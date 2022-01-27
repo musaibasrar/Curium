@@ -27,6 +27,9 @@
          <property name="linkedledgeridexpense" type="java.lang.Integer">
             <column name="linkedledgeridexpense" />
         </property>
+         <property name="status" type="string">
+            <column name="status" />
+        </property>
         <property name="userid" type="int">
  <column name="userid" />
 </property>
