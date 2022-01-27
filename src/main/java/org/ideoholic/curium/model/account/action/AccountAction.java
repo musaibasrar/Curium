@@ -280,6 +280,12 @@ public class AccountAction {
 		return "trialbalanceprint";
 	}
 
-	
+	@GetMapping("/searchSingleLedgerEntries")
+	private String searchSingleLedgerEntries() {
+		new AccountService(request, response).searchSingleLedgerEntries();
+		new AccountService(request, response).getAllLedgers();
+		return "generalledgerreport";
+	}
+
 
 }
