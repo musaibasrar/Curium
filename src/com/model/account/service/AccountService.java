@@ -1355,4 +1355,42 @@ public class AccountService {
 		}
 		return result;
 	}
+
+
+	public boolean searchSingleLedgerEntries() {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		int accountId = DataUtil.parseInt(request.getParameter("accountid"));
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+
+		String twoAccounts = null;
+		
+		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+		Financialaccountingyear finYear = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		int financialYearId = finYear.getFinancialid();
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(DateUtil.dateParseryyyymmdd(finYear.getFinancialstartdate()), DateUtil.dateParseryyyymmdd(finYear.getFinancialenddate()), accountId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+			
+			if(voucherEntry.getDraccountid() != accountId) {
+				twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+":Dr";
+			}else if(voucherEntry.getCraccountid() != accountId) {
+				twoAccounts = new AccountDAO().getAccountName(voucherEntry.getCraccountid())+":Cr";
+			}
+			//twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+			voucherMap.put(voucherEntry, twoAccounts);
+		}
+		
+		request.setAttribute("ledgertransactions", voucherMap);
+		request.setAttribute("ledgername", DataUtil.emptyString(request.getParameter("ledgername")));
+		
+		request.setAttribute("accountid", accountId);
+		request.setAttribute("fromdate", DateUtil.dateParserddMMYYYY(finYear.getFinancialstartdate()));
+		request.setAttribute("todate", DateUtil.dateParserddMMYYYY(finYear.getFinancialenddate()));
+		
+		return true;
+		
+		}
+		return false;
+	}
 }

@@ -546,6 +546,10 @@ for(Cookie cookie : cookies){
 							cellpadding="1" cellspacing="1">
 							<td class="dataText" style="text-align: left"><c:out value="${accountdetails.key.accountname}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td class="dataText" style="text-align: left">
+							
+							<a target="mainFrame" href="Controller?process=AccountProcess&action=searchSingleLedgerEntries&accountid=${accountdetails.key.accountdetailsid}&ledgername=${accountdetails.key.accountname}">
+							<c:out value="${accountdetails.key.accountname}" /></a></td>
 							
 							<c:if test="${(accountdetails.key.accountGroupMaster.accountgroupid == 1) || (accountdetails.key.accountGroupMaster.accountgroupid == 5)}">
 							
