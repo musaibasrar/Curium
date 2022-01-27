@@ -87,10 +87,18 @@ public class AccountAction {
 			url = incomeStatement();
 		}else if ("printSearchLedgerEntries".equalsIgnoreCase(action)) {
 			url = printSearchLedgerEntries();
+		}else if ("searchSingleLedgerEntries".equalsIgnoreCase(action)) {
+			url = searchSingleLedgerEntries();
 		}
 		return url;
 		}
 	
+	private String searchSingleLedgerEntries() {
+		new AccountService(request, response).searchSingleLedgerEntries();
+		new AccountService(request, response).getAllLedgers();
+		return "generalledgerreport.jsp";
+	}
+
 	private String downloadTrialBalance() {
 		if (new AccountService(request, response).downloadTrialBalance()) {
 			return "trialbalanceexportsuccess.jsp";
