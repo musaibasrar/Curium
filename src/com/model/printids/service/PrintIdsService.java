@@ -103,7 +103,7 @@ public class PrintIdsService {
 			
         	for (Card card : cardList) {
         		
-        		if(card.getSid() == parentsList.getStudent().getSid()) {
+        		if(card.getSid().equals(parentsList.getStudent().getSid())) {
         			parentsCard.put(parentsList, card);
         		}
 				
