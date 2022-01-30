@@ -209,7 +209,7 @@ public class SmsService {
 
 			if (messageCharCount <= maxChar) {
 
-				String smsMessage = templateStringParts[0] + "," + message;
+				String smsMessage = templateStringParts[0] + " " + message +" "+templateStringParts[1];
 				
 				
 				String data = URLEncoder.encode("APIKey", "UTF-8") + "=" + URLEncoder.encode(apikey, "UTF-8");

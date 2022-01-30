@@ -102,7 +102,6 @@ public class AppointmentService {
 				
 				if(resultQuery!=null && "yes".equalsIgnoreCase(sendAppointmentSMS)) {
 					result = true;
-					 String feedbacklink = new DataUtil().getPropertiesValue("feedbacklink");
 					 String message = "Your appt. with appt. no "+resultQuery+" has been scheduled on "+appointmentDateParent+" at "+appointment.getAppointmenttime()+".";
 					 new SmsService(request, response).sendSMS("91"+pidContact[1], message);
 				}

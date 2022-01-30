@@ -103,7 +103,8 @@ public class QueryService {
 						 String param = "?id="+queryValues[1]+"&no="+pidContact[0]+"";
 						 feedbacklink = feedbacklink+param;
 						 String messageOne = "Your enquiry related to "+dep[1]+" has been submitted successfully";
-						 String message = "Your enquiry no. is "+queryValues[0]+".Please click the link to give your feedback. "+feedbacklink+"";
+						 String message= "Click "+feedbacklink+" to give feedback on enq. # "+queryValues[0]+"";
+						 //String message = "Your enquiry no. is "+queryValues[0]+".Please click the link to give your feedback. "+feedbacklink+"";
 						 new SmsService(request, response).sendSMS("91"+pidContact[1], messageOne);
 						 new SmsService(request, response).sendSMS("91"+pidContact[1], message);
 					}
@@ -161,7 +162,7 @@ public class QueryService {
 				request.setAttribute("querycompleted","success");
 				request.setAttribute("querystatus",true);
 				for (ParentQuery parentQuery : result) {
-					 String message = "Your enquiry with enq. no "+parentQuery.getExternalid()+" related to "+parentQuery.getDepartment().getDepartmentname()+" has been solved.";
+					 String message = "Your enquiry with enq. no "+parentQuery.getExternalid()+" related to "+parentQuery.getDepartment().getDepartmentname()+" has been resolved.";
 					 new SmsService(request, response).sendSMS("91"+parentQuery.getParent().getContactnumber(), message);
 				}
 			}
