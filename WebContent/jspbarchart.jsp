@@ -92,7 +92,7 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<label id="labelnumber">${totalstudents}</label><br>
+        						<label id="labelnumber">${grandtotalstudents}</label><br>
         						<label id="labelnumber">${totalteachers}</label>	
         					</td>
         				</tr>

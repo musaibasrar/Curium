@@ -125,7 +125,11 @@ public class UserService {
                     }
                     
                 	}
-        
+            
+            
+            List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0");
+            request.setAttribute("grandtotalstudents", student.size());
+            
         	// Total Teachers
         	List<Teacher> teacher = new EmployeeDAO().readCurrentTeachers();
         	request.setAttribute("totalteachers", teacher.size());
@@ -218,9 +222,13 @@ public class UserService {
         	double feedbackPtToday = 0l;
         	for (ParentQuery parentQueryToday : parentQueryListToday) {
         		int feedbackToday = DataUtil.parseInt(parentQueryToday.getFeedback());
-        		feedbackPtToday = feedbackPt+feedbackToday;
+        		feedbackPtToday = feedbackPtToday+feedbackToday;
 			}
+        	System.out.println("total feedback pt "+feedbackPtToday);
+        	System.out.println("parent query list "+parentQueryListToday.size());
+        	
         	double averageToday = feedbackPtToday/parentQueryListToday.size();
+        	System.out.println("average "+averageToday);
         	request.setAttribute("todayaveragefeedbackpt", averageToday );
         	//
         	
