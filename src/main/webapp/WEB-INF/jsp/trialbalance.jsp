@@ -432,7 +432,7 @@
 
 function printTrialBalance(){
 	var form1 = document.getElementById("form1");
-	form1.action = "/roshan/AccountProcess/printTrialBalance";
+	form1.action = "/curium/AccountProcess/printTrialBalance";
 	form1.method = "POST";
 	form1.submit();
 }
@@ -440,7 +440,7 @@ function printTrialBalance(){
 
 function exportTrialBalance(){
 	var form1 = document.getElementById("form1");
-	form1.action = "/roshan/AccountProcess/exportTrialBalance";
+	form1.action = "/curium/AccountProcess/exportTrialBalance";
 	form1.method = "POST";
 	form1.submit();
 }
@@ -547,8 +547,10 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${accountdetails.key.accountname}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td class="dataText" style="text-align: left">
+							
+							<a target="mainFrame" href="/curium/AccountProcess/searchSingleLedgerEntries&accountid=${accountdetails.key.accountdetailsid}&ledgername=${accountdetails.key.accountname}">
+							<c:out value="${accountdetails.key.accountname}" /></a></td>
 							
 							<c:if test="${(accountdetails.key.accountGroupMaster.accountgroupid == 1) || (accountdetails.key.accountGroupMaster.accountgroupid == 5)}">
 							
