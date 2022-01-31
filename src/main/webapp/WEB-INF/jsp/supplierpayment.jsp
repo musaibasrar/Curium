@@ -1077,7 +1077,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Issue Date</th>
 						<th title="click to sort" class="headerText">Status</th>
 						<th title="click to sort" class="headerText">Supplier Name</th>
-						<th title="click to sort" class="headerText">Cheque #</th>
+						<th title="click to sort" class="headerText">Payment Type</th>
 						<th title="click to sort" class="headerText">Amount</th>
 					</tr>
 				</thead>
@@ -1114,7 +1114,17 @@ for(Cookie cookie : cookies){
 						  <input type="hidden"  name="supplierledgerid_${supplierpaymentlist.id}" value="<c:out value="${nameparts[1]}" />">
 						  <input type="hidden"  name="issuevoucherid_${supplierpaymentlist.id}" value="<c:out value="${supplierpaymentlist.voucherid}" />">
 						  </td>
-						  <td class="dataText"><c:out value="${supplierpaymentlist.chequeno}" /></td>
+						  <td class="dataText">
+						  	 <c:choose>
+                                <c:when test="${supplierpaymentlist.chequeno=='Cash'}">
+                                    By Cash
+                                </c:when>
+                                <c:otherwise>
+                                    By Cheque # <c:out value="${supplierpaymentlist.chequeno}" />
+                                </c:otherwise>
+                            </c:choose>
+						  <input type="hidden"  name="chequeno_${supplierpaymentlist.id}" value="${supplierpaymentlist.chequeno}" readonly>
+						  </td>
 						  
 						  <td class="dataTextRight">
 						  	<input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: right;width: 70px;" name="chequeamount_${supplierpaymentlist.id}" value="<fmt:formatNumber type="number"  maxFractionDigits = "2"  value="${supplierpaymentlist.amount}" />" readonly>
@@ -1208,7 +1218,7 @@ for(Cookie cookie : cookies){
 							
 							</td>
 							
-							<td>Bank&nbsp;</td>
+							<td>Payment Type&nbsp;</td>
 							<td ><label>
 									<select name="bankname" id="bankname" class="dropdownlist" style="font-size: 14px;" required>
 											<option></option>
