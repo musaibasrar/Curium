@@ -844,6 +844,20 @@
      	var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
      	chequeamount.value = res;
      }
+     
+     
+          function getPaymentType() {
+     
+      		var paymentType=document.getElementById('paymenttype').value;
+     
+      			 if(paymentType == 'cheque'){
+      				 document.getElementById('chequerow').style.display = '';
+      				document.getElementById('chequeno').value = '';
+      			 }else if (paymentType == 'cash'){
+      				 document.getElementById('chequerow').style.display = 'none';
+      				 document.getElementById('chequeno').value = 'Cash';
+      			 }		
+      	}
     
 </script>
 
@@ -931,14 +945,14 @@ for(Cookie cookie : cookies){
 		<div class="alert-box successsupplierpayment" id="div1">Supplier Payment has been issued successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
 		<div class="alert-box failuresupplierpayment" id="div2">Supplier Payment failed, Please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
 		
-		<div class="alert-box successchequedelivered" id="div3">Cheque delivered successfully!!!&nbsp;&nbsp;&nbsp;<button  class="button"  id="3" onclick="closediv(this.id);">OK</button></div>
-		<div class="alert-box failurechequedelivered" id="div4">Cheque delivery failed, Please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="4" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box successchequedelivered" id="div3">Payment delivered successfully!!!&nbsp;&nbsp;&nbsp;<button  class="button"  id="3" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box failurechequedelivered" id="div4">Payment delivery failed, Please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="4" onclick="closediv(this.id);">OK</button></div>
 		
-		<div class="alert-box successchequecleared" id="div5">Cheque cleared successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="5" onclick="closediv(this.id);">OK</button></div>
-		<div class="alert-box failurechequecleared" id="div6">Cheque clearance failed, Please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="6" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box successchequecleared" id="div5">Payment cleared successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="5" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box failurechequecleared" id="div6">Payment clearance failed, Please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="6" onclick="closediv(this.id);">OK</button></div>
 		
-		<div class="alert-box successchequecancelled" id="div7">Cheque cancelled successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="7" onclick="closediv(this.id);">OK</button></div>
-		<div class="alert-box failurechequecancelled" id="div8">Cheque cancellation failed, Please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="8" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box successchequecancelled" id="div7">Payment cancelled successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="7" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box failurechequecancelled" id="div8">Payment cancellation failed, Please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="8" onclick="closediv(this.id);">OK</button></div>
 		
 		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		<div style="height: 28px">
@@ -999,11 +1013,16 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td  class="alignRight">Cheque No. &nbsp;</td>
-							<td ><label> <input name="chequeno" 
-									type="text" class="textfieldvalues" id="chequeno" style="font-size: 14px;">
-							</label></td>
 						
+						<td  class="alignRight">Payment Type &nbsp;</td>
+							<td ><label> 
+									<select name="paymenttype" id="paymenttype" class="dropdownlist" style="font-size: 14px;" onchange="getPaymentType()" required>
+											<option></option>
+											<option value="cheque">Cheque</option>
+											<option value="cash">Cash</option>
+								</select>	
+								</label></td>
+							
 							<td  class="alignRight">Amount &nbsp;</td>
 							<td ><label> <input name="chequeamount" onkeyup="numberWithCommas(this);"
 									type="text" class="textfieldvalues" id="chequeamount" style="font-size: 14px;" >
@@ -1013,6 +1032,17 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						
+						<tr id="chequerow" style="display: none;">
+							<td  class="alignRight">Cheque No. &nbsp;</td>
+							<td ><label> <input name="chequeno" 
+									type="text" class="textfieldvalues" id="chequeno" style="font-size: 14px;">
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -1047,7 +1077,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Issue Date</th>
 						<th title="click to sort" class="headerText">Status</th>
 						<th title="click to sort" class="headerText">Supplier Name</th>
-						<th title="click to sort" class="headerText">Cheque #</th>
+						<th title="click to sort" class="headerText">Payment Type</th>
 						<th title="click to sort" class="headerText">Amount</th>
 					</tr>
 				</thead>
@@ -1084,7 +1114,17 @@ for(Cookie cookie : cookies){
 						  <input type="hidden"  name="supplierledgerid_${supplierpaymentlist.id}" value="<c:out value="${nameparts[1]}" />">
 						  <input type="hidden"  name="issuevoucherid_${supplierpaymentlist.id}" value="<c:out value="${supplierpaymentlist.voucherid}" />">
 						  </td>
-						  <td class="dataText"><c:out value="${supplierpaymentlist.chequeno}" /></td>
+						  <td class="dataText">
+						  	 <c:choose>
+                                <c:when test="${supplierpaymentlist.chequeno=='Cash'}">
+                                    By Cash
+                                </c:when>
+                                <c:otherwise>
+                                    By Cheque # <c:out value="${supplierpaymentlist.chequeno}" />
+                                </c:otherwise>
+                            </c:choose>
+						  <input type="hidden"  name="chequeno_${supplierpaymentlist.id}" value="${supplierpaymentlist.chequeno}" readonly>
+						  </td>
 						  
 						  <td class="dataTextRight">
 						  	<input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: right;width: 70px;" name="chequeamount_${supplierpaymentlist.id}" value="<fmt:formatNumber type="number"  maxFractionDigits = "2"  value="${supplierpaymentlist.amount}" />" readonly>
@@ -1178,11 +1218,13 @@ for(Cookie cookie : cookies){
 							
 							</td>
 							
-							<td>Bank&nbsp;</td>
+							<td>Payment Type&nbsp;</td>
 							<td ><label>
 									<select name="bankname" id="bankname" class="dropdownlist" style="font-size: 14px;" required>
+											<option></option>
 											<option value="axisbank">Axis Bank</option>
 											<option value="canarabank">Canara Bank</option>
+											<option value="admin">Cash</option>
 								</select>
 							
 							</label></td>
