@@ -7,10 +7,14 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -100,7 +104,7 @@ public class Student implements java.io.Serializable {
 
 	@Column(name = "studentexternalid", unique = true, nullable = false, length = 45)
 	private String studentexternalid;
-	
+
 	@Column(name = "crecord", length = 45)
 	private String crecord;
 
@@ -221,13 +225,20 @@ public class Student implements java.io.Serializable {
 
 	@Column(name = "userid")
 	private int userid;
-	
+
 	private String lastcourse;
 	private Integer totalmarks;
 	private String lastfirstlanguage;
 	private String lastsecondlanguage;
 	private String lastschooladdress;
 	private String registrationnumber;
+
+/*	@ManyToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name="pudetailsid") */
 	private Pudetails pudetails;
+
+	
+/*	@ManyToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name="degreedetailsid") */
 	private Degreedetails degreedetails;
 }
