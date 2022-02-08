@@ -199,7 +199,7 @@ public class Student implements java.io.Serializable {
 	private String disabilitychild;
 
 	@Column(name = "sts")
-	private Integer sts;
+	private String sts;
 
 	@Column(name = "specialcategory", length = 25)
 	private String specialcategory;
@@ -221,6 +221,21 @@ public class Student implements java.io.Serializable {
 
 	@Column(name = "userid")
 	private int userid;
+	
+	@Column(name = "studentdoc1")
+	private String studentdoc1;
+	
+	@Column(name = "studentdoc2")
+	private String studentdoc2;
+	
+	@Column(name = "studentdoc3")
+	private String studentdoc3;
+	
+	@Column(name = "studentdoc4")
+	private String studentdoc4;
+	
+	@Column(name = "studentdoc5")
+	private String studentdoc5;
 	
 	private String lastcourse;
 	private Integer totalmarks;

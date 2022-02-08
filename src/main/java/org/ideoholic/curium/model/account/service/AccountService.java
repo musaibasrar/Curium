@@ -876,8 +876,8 @@ public class AccountService {
 		        	
 		        	if(!accountSSGroupMaster.isEmpty()){
 		        		String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
-			        	for(int i =0; i<accountSSGroupMaster.size();i++){
-			        		buffer = buffer+"<option></option>";
+		        		buffer = buffer+"<option></option>";
+		        		for(int i =0; i<accountSSGroupMaster.size();i++){
 			        		buffer = buffer +  "<option value="+accountSSGroupMaster.get(i).getSsgroupmasterid()+">"+accountSSGroupMaster.get(i).getSsgroupname()+"</option>";
 			        	}
 			        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option></select>";
