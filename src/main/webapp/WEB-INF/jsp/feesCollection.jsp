@@ -14,30 +14,30 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Fees Collection</title>
-        <link rel="stylesheet" href="/curium/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/curium/css/graph/jquery.jqplot.css">
+        <link rel="stylesheet" href="/flora/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/flora/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/curium/css/datePicker/demos.css">
-        <script type="text/javascript" src="/curium/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script  type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <link rel="stylesheet" href="/flora/css/datePicker/demos.css">
+        <script type="text/javascript" src="/flora/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script  type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.resizable.js"></script>
 
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.effects.slide.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.effects.bounce.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.effects.clip.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.effects.transfer.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.effects.blind.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.effects.slide.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.effects.bounce.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.effects.clip.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.effects.transfer.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.effects.blind.js"></script>
         <style type="text/css">
             <!--
             .labelCss {
@@ -439,7 +439,7 @@
             <c:forEach varStatus="status" items="${studentListFeesCollection}" var="student">{
             	value:'<c:out default="0" value="${student.name}" />',
                 admissionno:'<c:out default="0" value="${student.admissionnumber}" />',
-                regno:'<c:out default="0" value="${student.registrationnumber}" />',
+                regno:'<c:out default="0" value="${student.studentexternalid}" />',
                 name:'<c:out default="0" value="${student.name}" />',
                 classandsec:'<c:out default="0" value="${student.classstudying}" />',
                 id:'<c:out default="0" value="${student.sid}" />',
@@ -747,7 +747,7 @@
             	}
             	
             	var form1 = document.getElementById("form1");
-        		form1.action="/curium/FeesCollection/feesAdd?paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
+        		form1.action="/flora/FeesCollection/feesAdd?paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
         		form1.method = "POST";
         		form1.submit();
         		
@@ -755,7 +755,7 @@
             
             function getstampfees(){
             	var form1 = document.getElementById("form1");
-        		form1.action="/curium/FeesCollection/StampFees";
+        		form1.action="/flora/FeesCollection/StampFees";
         		form1.method = "POST";
         		form1.submit();
             }
@@ -849,7 +849,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
+	response.sendRedirect("/flora/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

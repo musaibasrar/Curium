@@ -17,34 +17,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Please wait...</title> 
 
-        <script type="text/javascript" language="JavaScript" src="/curium/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/curium/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/curium/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/flora/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/flora/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/flora/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/curium/css/datePicker/demos.css">
-        <script type="text/javascript" src="/curium/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/flora/css/datePicker/demos.css">
+        <script type="text/javascript" src="/flora/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/curium/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/curium/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/curium/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/curium/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/curium/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/curium/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/curium/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/curium/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/flora/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/flora/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/flora/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/flora/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/flora/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/flora/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/flora/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/flora/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
             <!--
@@ -265,7 +265,7 @@
 
             function updateContact() {
                 var form1 = document.getElementById("form1");
-                form1.action="/curium/PersonalProcess/updateContactDetails?id=1";
+                form1.action="/flora/PersonalProcess/updateContactDetails?id=1";
                 form1.submit();
             }
 
@@ -325,7 +325,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
+	response.sendRedirect("/flora/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -428,7 +428,7 @@ for(Cookie cookie : cookies){
                             <c:if test="${limit < iInitial}">
                             <td class="fontsize" >
                          <div class="card">
-  								<img src="/curium/images/logo.jpg" alt="Avatar" style="width:100%">
+  								<img src="/flora/images/logo.jpg" alt="Avatar" style="width:100%">
   								<div class="container">
     							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
     							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
@@ -444,7 +444,7 @@ for(Cookie cookie : cookies){
                             <% i = i + 1;%>
                             <c:if test="${limit < iInitial}">
                             <td  class="fontsize"> <div class="card">
-  								<img src="/curium/images/logo.jpg" alt="Avatar" style="width:100%">
+  								<img src="/flora/images/logo.jpg" alt="Avatar" style="width:100%">
   								<div class="container">
     							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
     							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" alt="Student's Photo" /> 
@@ -457,7 +457,7 @@ for(Cookie cookie : cookies){
                             <% i = i + 1;%>
                             <c:if test="${limit < iInitial}">
                             <td  class="fontsize"> <div class="card">
-  								<img src="/curium/images/logo.jpg" alt="Avatar" style="width:100%">
+  								<img src="/flora/images/logo.jpg" alt="Avatar" style="width:100%">
   								<div class="container">
     							<h4>Student's Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
     							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />

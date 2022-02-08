@@ -13,19 +13,19 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/curium/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/curium/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/curium/css/datePicker/demos.css">
+        <script language="JavaScript" src="/flora/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/flora/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/flora/css/datePicker/demos.css">
 
-        <script type="text/javascript" src="/curium/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/curium/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/curium/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/curium/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/curium/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/curium/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/curium/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/flora/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/flora/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/flora/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/flora/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/flora/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/flora/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/flora/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/flora/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             var get;
@@ -431,7 +431,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
+	response.sendRedirect("/flora/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -453,61 +453,61 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/curium/StudentProcess/viewAll" >View All</a><br/>
-                <a target="mainFrame" href="/curium/feesstructure" >Fees Structure</a><br/>
+                <a target="mainFrame" href="/flora/StudentProcess/viewAll" >View All</a><br/>
+                <a target="mainFrame" href="/flora/feesstructure" >Fees Structure</a><br/>
                 
 
             </div>
             <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="/curium/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/curium/EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/curium/DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/curium/PositionProcess/positionView" >Add Position</a>
+                <a target="mainFrame" href="/flora/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="/flora/EmployeeProcess/addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="/flora/DepartmentProcess/departmentView" >Add Department</a>
+                <a target="mainFrame" href="/flora/PositionProcess/positionView" >Add Position</a>
 
             </div> -->
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="/curium/FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/curium/FeesProcess/feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="/flora/FeesProcess/feesView" >Fees Category</a>
+                <a target="mainFrame" href="/flora/FeesProcess/feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
             <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/curium/AdminProcess/viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="/flora/AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/curium/AdvanceSearch" >Search</a><br/>
+                <a target="mainFrame" href="/flora/AdvanceSearch" >Search</a><br/>
 
 
             </div>
 			<!--
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/curium/Promotion" >Promotions</a><br/>
+                <a target="mainFrame" href="/flora/Promotion" >Promotions</a><br/>
 
 
             </div> -->
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/curium/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/flora/StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
             <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="/curium/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/curium/YearProcess/updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="/flora/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="/flora/YearProcess/updateYear" >Academic year</a><br/>
                 
 
             </div> -->
@@ -515,15 +515,15 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-               <!--  <a target="mainFrame" href="/curium/Backup&Restore" >Backup</a><br/>
-                <a target="mainFrame" href="/curium/currentIssue" >Current Issue</a><br/>
-                <a target="mainFrame" href="/curium/changePassword" >Change Password</a><br/> -->
-                <a target="mainFrame" href="/curium/feesCollectionDetails" >Fees Collection Details</a><br/>
+               <!--  <a target="mainFrame" href="/flora/Backup&Restore" >Backup</a><br/>
+                <a target="mainFrame" href="/flora/currentIssue" >Current Issue</a><br/>
+                <a target="mainFrame" href="/flora/changePassword" >Change Password</a><br/> -->
+                <a target="mainFrame" href="/flora/feesCollectionDetails" >Fees Collection Details</a><br/>
             </div>
             
            <!--  <h5 style="font-size: 12px"><a href="#" >Reports</a></h5>
             <div >
-                <a target="mainFrame" href="/curium/studentsdetailsreports" >Student Details</a><br/>
+                <a target="mainFrame" href="/flora/studentsdetailsreports" >Student Details</a><br/>
                 
             </div>  -->
             

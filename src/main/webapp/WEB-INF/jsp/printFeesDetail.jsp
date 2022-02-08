@@ -150,10 +150,10 @@
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
+             margin-bottom: 1cm;
+             margin-top: 1cm;
         }
 
         @media screen {
@@ -175,16 +175,18 @@
 <div style="border: 1px solid;border-radius: 15px">
 	<form method="post" class="bodymargin">
 		<br>
-		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 50px;">
-				<img src="/curium/images/logo.jpg" width="200" height="100"/>
+				<td align="left" style="padding-left: 60px;">
+				<img src="/flora/images/logo.png" width="150" height="150"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 100px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 70px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left: 100px;">A.N.I. Education Trust<br></label>
+				<label class="addressLine" style="padding-left: 80px;">(Regd. by Govt. of Karnataka)<br></label>
+				<label class="dataTextBoldCenter" style="padding-left: 50px;">Flora Public School </label><br>
+				<label class="addressLine" style="padding-left: 80px;">Kannada & English Medium<br></label>
+				<label class="addressLine" style="padding-left: 10px;">${branchaddress}<br></label>
+				<%-- <label class="addressLine" style="padding-left: 70px;">Contact:&nbsp;${branchcontact} </label> --%>
 				</td>
 			</tr>
 </table>

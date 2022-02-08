@@ -217,7 +217,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
+	response.sendRedirect("/flora/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -239,11 +239,14 @@ for(Cookie cookie : cookies){
                         		
 			<tr>
 				<td width="30%"></td>
-				<td><img src="/curium/images/logo.jpg" width="140" height="70"/></td>
+				<td><img src="/flora/images/logo.png" width="80" height="80"/></td>
 				<td>
-				<label class="dataTextBoldCenter">${branchname} </label><br>
-				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">A.N.I. Education Trust<br></label>
+				<label class="addressLine">(Regd. by Govt. of Karnataka)<br></label>
+				<label class="dataTextBoldCenter" >Flora Public School </label><br>
+				<label class="addressLine">Kannada & English Medium<br></label>
+				<label class="addressLine" style="padding-left: 10px;">${branchaddress}<br></label>
+				<%-- <label class="addressLine">Contact: ${branchcontact}</label> --%>
 				</td>
 			</tr>
 </table>
