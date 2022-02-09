@@ -56,4 +56,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### mapstrut auto-generated ###
+/.apt_generated/
 /.apt_generated_tests/
