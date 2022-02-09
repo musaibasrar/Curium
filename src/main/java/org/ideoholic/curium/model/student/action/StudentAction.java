@@ -9,14 +9,11 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.dto.StudentDto;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -262,9 +259,9 @@ public class StudentAction {
 		}
 	}
 	@RequestMapping(value = "/AddStudent", method = RequestMethod.POST, consumes = "multipart/form-data")
-	public String addStudent(MultipartHttpServletRequest request,
+	public String addStudent(@ModelAttribute("student") StudentDto student,
 			@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
-		if (new StudentService(request, response).addStudent(uploadedFiles)) {
+		if (new StudentService(request, response).addStudent(student, uploadedFiles)) {
 			return "saved";
 		} else {
 			return "notSaved";

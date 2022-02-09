@@ -714,7 +714,7 @@ $(document).ready(function() {
 	}
 %>
 <body>
-	<form id="form1" 
+	<form id="form1" modelAttribute="student"
 		method="post" enctype="multipart/form-data">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
