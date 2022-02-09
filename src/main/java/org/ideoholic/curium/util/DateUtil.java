@@ -34,9 +34,8 @@ public class DateUtil {
         } catch (ParseException ex) {
             ex.printStackTrace();
             returnDate = null;
-        } finally {
-            return returnDate;
         }
+        return returnDate;
 
     }
 
@@ -426,8 +425,12 @@ public static String dateParseryyyymmdd(Date date) {
 }
 
 public static Date indiandateParser(String stringDate) {
-	
+    if (stringDate == null || stringDate.equalsIgnoreCase("")) {
+        return null;
+    }
+
 	Date datefinal = null;
+	
 	try {
 		Date date = null;
 
