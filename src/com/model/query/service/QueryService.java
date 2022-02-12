@@ -277,6 +277,8 @@ public class QueryService {
 			String response = request.getParameter("response");
 			int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
 			boolean result = false;
+			parentQuery = parentQuery.replace("'", "''");
+			response = response.replace("'", "''");
 			result = new QueryDAO().updateQueries(queryId, parentQuery, response, userId);
 			request.setAttribute("querystatus",result);
 		}
