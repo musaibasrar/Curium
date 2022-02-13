@@ -13,7 +13,7 @@
 	<artifactId>curium</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>Curium</name>
+	<name>lflower</name>
 	<description>School Management System developed by Ideoholic</description>
 	<properties>
 		<java.version>1.8</java.version>
