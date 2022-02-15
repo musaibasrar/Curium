@@ -1219,7 +1219,7 @@ public class StudentService {
         List<Branch> centerList = new LinkedList<Branch>();
         Map<List<String>,List<String>> languageReports = new LinkedHashMap<List<String>,List<String>>();
         String academicYear = null;
-        
+        System.out.println("Here i am");
         String centerQuery =null;
         
              if(!request.getParameter("centercode").equalsIgnoreCase("")) {
@@ -1258,9 +1258,9 @@ public class StudentService {
                      List<String> centerNameCode = new LinkedList<String>();
                      List<String> languageCount = new ArrayList<String>();
                      int englishCount =0, urduCount=0, hindiCount=0, kannadaCount = 0;
-                     
-                     parentsList = new studentDetailsDAO().getStudentsList("From Parents parents where "
-                             + "parents.Student.examlevel='"+request.getParameter("examlevel").toString()+"' and parents.Student.centercode='"+eachBranch.getCentercode()+"' and parents.Student.admissionnumber like '"+academicYear+"%'  AND parents.Student.archive = 0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin')  Order By parents.Student.admissionnumber ASC");
+                     String query = "From Parents parents where "
+                             + "parents.Student.examlevel='"+request.getParameter("examlevel").toString()+"' and parents.Student.centercode='"+eachBranch.getCentercode()+"' and parents.Student.admissionnumber like '"+academicYear+"%'  AND parents.Student.archive = 0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin')  Order By parents.Student.admissionnumber ASC";
+                     parentsList = new studentDetailsDAO().getStudentsList(query);
                     
                      for (Parents singleParents : parentsList) {
                              if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("English")) {
@@ -1301,9 +1301,9 @@ public class StudentService {
                     List<String> centerNameCode = new LinkedList<String>();
                     List<String> languageCount = new ArrayList<String>();
                     int englishCount = 0, urduCount = 0, hindiCount = 0, kannadaCount = 0;
-                    
-                    parentsList = new studentDetailsDAO().getStudentsList("From Parents parents where "
-                            + "parents.Student.centercode='"+eachBranch.getCentercode()+"' AND parents.Student.archive = 0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin') order by parents.Student.centercode DESC");
+                    String query = "From Parents parents where "
+                            + "parents.Student.centercode='"+eachBranch.getCentercode()+"' and parents.Student.admissionnumber like '"+academicYear+"%' AND parents.Student.archive = 0 AND parents.Student.passedout = 0 AND parents.Student.droppedout = 0 AND (parents.Student.remarks = 'approved' OR parents.Student.remarks = 'admin') order by parents.Student.centercode DESC";
+                    parentsList = new studentDetailsDAO().getStudentsList(query);
                    
                     for (Parents singleParents : parentsList) {
                             if(singleParents.getStudent().getLanguageopted().equalsIgnoreCase("English")) {

@@ -281,7 +281,7 @@
   						<th  class="datath">Registration No.</th>
 						<th  class="datath">Student Name</th>
 						<c:set var="attendanexamlevel" value="${fn:split(viewAttendancemaplist.value, '/')}" />
-						<c:if test="${(attendanexamlevel[0] == 'CF') || (attendanexamlevel[0] == 'CS') }">
+						<c:if test="${(attendanexamlevel[0] == 'CF') || (attendanexamlevel[0] == 'CS') || (attendanexamlevel[0] == 'DFA')  || (attendanexamlevel[0] == 'DSA')  || (attendanexamlevel[0] == 'DTA')}">
 								<th class="datath">Paper 1</th>
 							</c:if>
 							
