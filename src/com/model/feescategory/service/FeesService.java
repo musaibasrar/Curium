@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.model.feescategory.dao.feesCategoryDAO;
+import com.model.feescategory.dto.Concession;
 import com.model.feescategory.dto.Feescategory;
 import com.model.feesdetails.dao.feesDetailsDAO;
 import com.model.student.dto.Student;
@@ -177,4 +178,43 @@ public class FeesService {
         }
         
     }
+
+
+	public String applyConcession() {
+        
+        String[] idfeescategory = request.getParameterValues("sfsid");
+        List<Integer> sfsId = new ArrayList<Integer>();
+        List<Integer> feesCatId = new ArrayList<Integer>();
+        List<String> consession = new ArrayList<String>();
+        List<Concession> concessionList = new ArrayList<Concession>();
+        
+        String studentId = request.getParameter("id");
+        
+        if(idfeescategory!=null){
+                
+                for (String string : idfeescategory) {
+                	
+                		Concession con = new Concession();
+                		String[] test = string.split("_");
+                        sfsId.add(Integer.valueOf(test[0]));
+                		String dueAmount = request.getParameter("dueamount:"+Integer.valueOf(test[0]));
+                        String concessionAmount = request.getParameter("concession:"+Integer.valueOf(test[0]));
+                        
+                        if(Integer.parseInt(concessionAmount)<=Integer.parseInt(dueAmount)) {
+                        	feesCatId.add(Integer.valueOf(test[1]));
+                            con.setSfsid(Integer.valueOf(test[0]));
+                            con.setFeescatid(Integer.valueOf(test[1]));
+                            con.setConcessionOld(request.getParameter("concessionold:"+Integer.valueOf(test[0])));
+                            con.setConcession(request.getParameter("concession:"+Integer.valueOf(test[0])));
+                            concessionList.add(con);
+                        }
+                        
+               }
+           new feesCategoryDAO().applyConcession(concessionList,studentId);
+           return "Controller?process=StudentProcess&action=ViewFeesStructure&id="+studentId;
+        }
+        
+       return "error.jsp";
+       
+	}
 }

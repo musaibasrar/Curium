@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
+import com.model.feescategory.dto.Concession;
 import com.model.feescategory.dto.Feescategory;
 import com.model.feescollection.dto.Feescollection;
 import com.util.HibernateUtil;
@@ -107,6 +108,26 @@ public class feesCategoryDAO {
 			}
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+	}
+
+	public void applyConcession(List<Concession> concessionList, String sid) {
+		
+		try {
+			transaction = session.beginTransaction();
+			for (Concession concession : concessionList) {
+				Query query = session.createQuery("update Studentfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"' where fees.sfsid='"+concession.getSfsid()+"'");
+				query.executeUpdate();
+				Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
+				queryAcademicFees.executeUpdate();
+			}
+			transaction.commit();
+		} catch (Exception hibernateException) {
+			transaction.rollback(); 
+			logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
