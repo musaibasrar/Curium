@@ -549,7 +549,7 @@ for(Cookie cookie : cookies){
 							cellpadding="1" cellspacing="1">
 							<td class="dataText" style="text-align: left">
 							
-							<a target="mainFrame" href="/lflower/AccountProcess/searchSingleLedgerEntries&accountid=${accountdetails.key.accountdetailsid}&ledgername=${accountdetails.key.accountname}">
+							<a target="mainFrame" href="/lflower/AccountProcess/searchSingleLedgerEntries?accountid=${accountdetails.key.accountdetailsid}&ledgername=${accountdetails.key.accountname}">
 							<c:out value="${accountdetails.key.accountname}" /></a></td>
 							
 							<c:if test="${(accountdetails.key.accountGroupMaster.accountgroupid == 1) || (accountdetails.key.accountGroupMaster.accountgroupid == 5)}">

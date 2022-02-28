@@ -82,7 +82,18 @@ for(Cookie cookie : cookies){
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
                 <frame  src="/lflower/left_admin" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/lflower/welcome" name="mainFrame" scrolling="yes" />
+                 <c:if test="${(branchid == '2' || branchid == '3' || branchid == '4')}">
+			  		   <frame src="/lflower/welcome" name="mainFrame" scrolling="yes" />
+		   		</c:if>
+                 <c:if test="${(branchid == '5')}">
+			  		  <frame   src="/lflower/welcomesinglebranch"   name="topFrame" scrolling="NO" noresize frameborder="0">
+		  		 </c:if>
+		  		  <c:if test="${(branchid == '6')}">
+			    	<frame   src="/lflower/welcomesinglebranch"   name="topFrame" scrolling="NO" noresize frameborder="0">
+		  		 </c:if>
+		  		 
+                
+               
             </frameset>
 
    </frameset>

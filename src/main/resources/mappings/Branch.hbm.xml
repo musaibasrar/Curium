@@ -14,6 +14,9 @@
          <property name="branchcode" type="string">
             <column name="branchcode" length="50" />
         </property>
+         <property name="subbranch" type="string">
+            <column name="subbranch" length="100" />
+        </property>
          <property name="address" type="string">
             <column name="address" length="500" />
         </property>

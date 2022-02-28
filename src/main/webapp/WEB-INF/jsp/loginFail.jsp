@@ -146,8 +146,8 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">							
-			<h2><img border="0" style="vertical-align: text-bottom;height: 150px;width: 150px;" alt="ideoholic" src="/lflower/images/lflowerlogo.png"></h2>
-			<h2 style="font-weight: bold;">Curium</h2><h3> Public School</h3></span>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 180px;width: 180px;" alt="ideoholic" src="/lflower/images/logo.png"></h2>
+			</span>
 			<!-- <h2 style="font-weight: bold;">Flora<img border="0" style="vertical-align: text-bottom;height: 120px;width: 200px;" alt="ideoholic" src="/lflower/images/shaheenwhitelogo.png"></h2><h3> Public School</h3></span></span> -->
 				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
 			</div>

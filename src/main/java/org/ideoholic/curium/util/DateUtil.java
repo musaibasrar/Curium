@@ -418,7 +418,6 @@ public static String dateParseryyyymmdd(Date date) {
 		SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		datefinal = dateformatter.format(date);
-		System.out.println("datefinal "+datefinal);
 	} catch (Exception e) {
 			e.printStackTrace();
 	}

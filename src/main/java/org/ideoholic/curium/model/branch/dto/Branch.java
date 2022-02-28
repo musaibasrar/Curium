@@ -19,6 +19,7 @@ public class Branch implements java.io.Serializable {
 
 	private Integer idbranch;
 	private String branchname;
+	private String subbranch;
 	private String branchcode;
 	private String address;
 	private String contact;
@@ -26,8 +27,9 @@ public class Branch implements java.io.Serializable {
 	public Branch() {
 	}
 
-	public Branch(String branchname, String branchcode, String address,String contact) {
+	public Branch(String branchname, String branchcode, String address,String contact, String subbranch) {
 		this.branchname = branchname;
+		this.subbranch = subbranch;
 		this.branchcode = branchcode;
 		this.address = address;
 		this.contact = contact;
@@ -75,5 +77,13 @@ public class Branch implements java.io.Serializable {
 
 	public void setContact(String contact) {
 		this.contact = contact;
+	}
+
+	public String getSubbranch() {
+		return subbranch;
+	}
+
+	public void setSubbranch(String subbranch) {
+		this.subbranch = subbranch;
 	}
 }

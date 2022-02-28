@@ -150,10 +150,10 @@
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
+             margin-bottom: 1cm;
+             margin-top: 1cm;
         }
 
         @media screen {
@@ -174,12 +174,10 @@
 <body style="text-align: center" class="bodymargin">
 <div style="border: 1px solid;border-radius: 15px">
 	<form method="post" class="bodymargin">
-		<br>
-		<br>
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
-				<img src="/lflower/images/logo.jpg" width="200" height="100"/>
+				<img src="/lflower/images/logo.png" width="110" height="110"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
@@ -370,9 +368,6 @@
 			</tr>
 
 <tr>
-<td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
-</tr>
-<tr>
 <td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
 <td></td>
 </tr>
@@ -380,9 +375,11 @@
 <tr>
 <td align="left">Note: Fees once deposited will not be refunded under any Circumstances</td>
 </tr>
-
 <tr>
-<td><br><br></td>
+<td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
+</tr>
+<tr>
+<td></td>
 </tr>
 <tr>
 <td></td>
