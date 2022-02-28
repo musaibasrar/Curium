@@ -1116,16 +1116,16 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Classes<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="/lflower/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Day Start Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="/lflower/css/dataTable/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Day End Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="/lflower/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Total No Of Periods<img
 							alt=" " style="position: relative; top: 4px;"
-							src="css/dataTable/images/sort_both.png" /></th>
+							src="/lflower/css/dataTable/images/sort_both.png" /></th>
 					</tr>
 				</thead>
 
