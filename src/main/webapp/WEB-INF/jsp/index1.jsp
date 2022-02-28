@@ -57,11 +57,11 @@
     </head>
 
     <frameset    rows="139,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="/curium/header1"   name="topFrame" scrolling="NO" noresize frameborder="0">
+        <frame   src="/tajacc/header1"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="175,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/curium/left" name="leftFrame" scrolling="NO"  frameborder="1"   />
-                <frame src="/curium/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
+                <frame  src="/tajacc/left" name="leftFrame" scrolling="NO"  frameborder="1"   />
+                <frame src="/tajacc/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
             </frameset>
 
    

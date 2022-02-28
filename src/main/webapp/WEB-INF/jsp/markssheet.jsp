@@ -237,7 +237,7 @@ for(Cookie cookie : cookies){
                         	<table style="page-break-inside: avoid;border-collapse: collapse;">
 			<tr>
 				<td width="10%"></td>
-				<td><img src="/curium/images/curiumheader.png" width="190" height="60"/></td>
+				<td><img src="/tajacc/images/tajaccheader.png" width="190" height="60"/></td>
 				<td width="5%"></td>
 				<td>
 				<label class="dataTextBoldCenter">Divine M.A. Independent P.U. College </label><br>

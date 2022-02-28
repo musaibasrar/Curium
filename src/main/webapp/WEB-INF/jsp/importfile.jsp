@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<form id="form1" action="/curium/ImportProcess/readFile" method="post"  enctype="multipart/form-data">
+<form id="form1" action="/tajacc/ImportProcess/readFile" method="post"  enctype="multipart/form-data">
 <table width="100%" border="0" align="center">
 <tr>								
 <td><br /><br />

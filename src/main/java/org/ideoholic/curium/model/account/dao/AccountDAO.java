@@ -491,11 +491,11 @@ public class AccountDAO {
 		return accountDetails;
 	}
 
-	public Accountdetails checkAccountDetails(String accountName, String accountCode) {
+	public Accountdetails checkAccountDetails(String accountName, String accountCode, int branchId) {
 		Accountdetails accountDetails = new Accountdetails();
 		try {
 			transaction = session.beginTransaction();
-			Query query =  session.createQuery("from Accountdetails where accountname = '"+accountName+"' or accountcode='"+accountCode+"'");
+			Query query =  session.createQuery("from Accountdetails where (accountname = '"+accountName+"' or accountcode='"+accountCode+"') and branchid="+branchId+"");
 			accountDetails = (Accountdetails) query.uniqueResult(); 
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
