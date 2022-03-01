@@ -575,11 +575,15 @@ for(Cookie cookie : cookies){
 										
 									<c:if test="${accountdetails.value >= 1}">
 										<td class="dataText"></td>
-										<td class="dataText" style="text-align: right;"><c:out value="${accountdetails.value}" /></td>			
+										<td class="dataText" style="text-align: right;">
+										<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${accountdetails.value}" />
+										</td>			
 									</c:if>
 
 									<c:if test="${accountdetails.value < 1}">
-										<td class="dataText" style="text-align: right;"><c:out value="${accountdetails.value*-1}" /></td>
+										<td class="dataText" style="text-align: right;">
+										<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${accountdetails.value*-1}" />
+										</td>
 										<td class="dataText"></td>			
 									</c:if>
 										

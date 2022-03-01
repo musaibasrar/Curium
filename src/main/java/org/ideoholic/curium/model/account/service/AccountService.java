@@ -514,6 +514,69 @@ public class AccountService {
 	public boolean balanceSheet() {
 		
 		//Group 1
+		BigDecimal liabilities = BigDecimal.ZERO;
+		Map<String,BigDecimal> liabilitiesLedgerAccount = new HashMap<String, BigDecimal>();
+		
+		BigDecimal reserves = BigDecimal.ZERO;
+		Map<String,BigDecimal> reservesLedgerAccount = new HashMap<String, BigDecimal>();
+		
+		//Group 2
+		BigDecimal assets = BigDecimal.ZERO;
+		Map<String,BigDecimal> assetsLedgerAccount = new HashMap<String, BigDecimal>();
+		
+		
+		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
+		accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		
+		for (Accountdetailsbalance accountdetails : accountDetailsBalance) {
+			int groupId = accountdetails.getAccountDetails().getAccountGroupMaster().getAccountgroupid();
+
+			switch(groupId){
+			case 1: 
+					assets = assets.add(accountdetails.getCurrentbalance());
+					if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+						assetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					}
+					break;
+			case 2: 
+					liabilities = liabilities.add(accountdetails.getCurrentbalance());
+					if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+						liabilitiesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					}	
+					break;
+					
+			case 3:
+					reserves = reserves.add(accountdetails.getCurrentbalance());
+					if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+						reservesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					}
+					break;
+
+			default:
+					
+			}
+		}
+		
+		//group 1
+		request.setAttribute("liabilities", liabilities);
+		request.setAttribute("liabilitiesLedgeraccount", liabilitiesLedgerAccount);
+		request.setAttribute("reserves", reserves);
+		request.setAttribute("reservesLedgeraccount", reservesLedgerAccount);
+			
+		//group 2
+		request.setAttribute("assets", assets);
+		request.setAttribute("assetsLedgeraccount", assetsLedgerAccount);
+
+		
+		request.setAttribute("grouponetotal", liabilities);
+		request.setAttribute("grouponetotalreserves", reserves);
+		request.setAttribute("grouptwototal", assets);
+		
+		
+		return true;
+		/*
+		 * 	//Group 1
 		BigDecimal capital = BigDecimal.ZERO;
 		Map<String,BigDecimal> capitalLedgerAccount = new HashMap<String, BigDecimal>();
 		
@@ -541,63 +604,53 @@ public class AccountService {
 		
 		BigDecimal miscellaneousExpenses = BigDecimal.ZERO;
 		Map<String,BigDecimal> miscellaneousExpensesLedgerAccount = new HashMap<String, BigDecimal>();
-		
-		
-		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-		accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		
-		for (Accountdetailsbalance accountdetails : accountDetailsBalance) {
-			int groupId = accountdetails.getAccountDetails().getAccountGroupMaster().getAccountgroupid();
-
-			switch(groupId){
-			case 1: 
-					capital = capital.add(accountdetails.getCurrentbalance());
-					capitalLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-			case 2: 
-					currentAssets = currentAssets.add(accountdetails.getCurrentbalance());
-					currentAssetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 3:
-					currentLiabilities = currentLiabilities.add(accountdetails.getCurrentbalance());
-					currentLiabilitiesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-			
-			case 6:
-					fixedAssets = fixedAssets.add(accountdetails.getCurrentbalance());
-					fixedAssetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 9:
-					investments = investments.add(accountdetails.getCurrentbalance());
-					investmentsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-				  	break;
-				  	
-			case 10:
-					loansAssets = loansAssets.add(accountdetails.getCurrentbalance());
-					loansAssetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 11:
-					loansLiabilities = loansLiabilities.add(accountdetails.getCurrentbalance());
-					loansLiabilitiesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 12:
-					miscellaneousExpenses = miscellaneousExpenses.add(accountdetails.getCurrentbalance());
-					miscellaneousExpensesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 13:
-					reserves = reserves.add(accountdetails.getCurrentbalance());
-					reservesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			default:
-					
-			}
-		}
+		 * for (Accountdetailsbalance accountdetails : accountDetailsBalance) { int
+		 * groupId =
+		 * accountdetails.getAccountDetails().getAccountGroupMaster().getAccountgroupid(
+		 * );
+		 * 
+		 * switch(groupId){ case 1: capital =
+		 * capital.add(accountdetails.getCurrentbalance());
+		 * capitalLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(),
+		 * accountdetails.getCurrentbalance()); break; case 2: currentAssets =
+		 * currentAssets.add(accountdetails.getCurrentbalance());
+		 * currentAssetsLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 3: currentLiabilities =
+		 * currentLiabilities.add(accountdetails.getCurrentbalance());
+		 * currentLiabilitiesLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 6: fixedAssets = fixedAssets.add(accountdetails.getCurrentbalance());
+		 * fixedAssetsLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 9: investments = investments.add(accountdetails.getCurrentbalance());
+		 * investmentsLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 10: loansAssets = loansAssets.add(accountdetails.getCurrentbalance());
+		 * loansAssetsLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 11: loansLiabilities =
+		 * loansLiabilities.add(accountdetails.getCurrentbalance());
+		 * loansLiabilitiesLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 12: miscellaneousExpenses =
+		 * miscellaneousExpenses.add(accountdetails.getCurrentbalance());
+		 * miscellaneousExpensesLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 13: reserves = reserves.add(accountdetails.getCurrentbalance());
+		 * reservesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname()
+		 * , accountdetails.getCurrentbalance()); break;
+		 * 
+		 * default:
+		 * 
+		 * } }
 		
 		//group 1
 		request.setAttribute("capital", capital);
@@ -643,8 +696,10 @@ public class AccountService {
 			request.setAttribute("differenceamount", diff.abs());
 			
 		}
+		 */
+		///////////////////////////////////////
 		
-		return true;
+		
 	}
 
 
