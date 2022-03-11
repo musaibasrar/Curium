@@ -71,7 +71,7 @@ public class UserService {
             httpSession.setAttribute("branchcode",login.getBranch().getBranchcode());
             httpSession.setAttribute("branchaddress",login.getBranch().getAddress());
             httpSession.setAttribute("branchcontact",login.getBranch().getContact());
-            httpSession.setAttribute("subbranchname",login.getBranch().getBranchlogo());
+            httpSession.setAttribute("subbranchname",login.getBranch().getBranchcode());
             
             String[] userType = login.getUsertype().split("-");
             httpSession.setAttribute("userType", userType[0]);
@@ -669,7 +669,7 @@ public class UserService {
             httpSession.setAttribute("branchcode",login.getBranch().getBranchcode());
             httpSession.setAttribute("branchaddress",login.getBranch().getAddress());
             httpSession.setAttribute("branchcontact",login.getBranch().getContact());
-            httpSession.setAttribute("subbranchname",login.getBranch().getBranchlogo());
+            httpSession.setAttribute("subbranchname",login.getBranch().getBranchcode());
             
             
             String[] userType = login.getUsertype().split("-");

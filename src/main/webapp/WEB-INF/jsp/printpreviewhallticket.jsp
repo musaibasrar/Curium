@@ -238,8 +238,7 @@ for(Cookie cookie : cookies){
                         	<table style="page-break-inside: avoid;border-collapse: collapse;">
                         		
 			<tr>
-				<td width="30%"></td>
-				<td><img src="/rauzamission/images/logo.jpg" width="140" height="70"/></td>
+				<td style="padding-left: 220px;"><img src="/rauzamission/images/logo${subbranchname}.png" width="71" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter">${branchname} </label><br>
 				<label class="addressLine">${branchaddress}</label><br>

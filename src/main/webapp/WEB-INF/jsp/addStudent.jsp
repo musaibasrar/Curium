@@ -856,7 +856,7 @@
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td  class="alignLeft" >Belong to BPL&nbsp;</td>
 							<td>&nbsp;Yes<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
@@ -879,14 +879,37 @@
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 						<tr>
-							<td class="alignLeft" >Bhagyalakshmi Bond No.&nbsp;</td>
+							<!-- <td class="alignLeft" >Bhagyalakshmi Bond No.&nbsp;</td>
 								<td><input
 									name="bhagyalakshmibondnumber" type="text" class="myclass"
 									style="text-transform:capitalize;"
 									id="bhagyalakshmibondnumber" size="36">
-							</td>
+							</td> -->
+							<td class="alignLeft" >Special Category&nbsp;</td>
+
+							<td id="categoryname"><label> <select
+									name="specialcategory" onchange="enterOtherSpecialCategory()"
+									id="specialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>None</option>
+										<option></option>
+										<option>None</option>
+										<option>Destitute</option>
+										<option>HIV Case</option>
+										<option>Orphans</option>
+										<option>Others (Please Specify)</option>
+								</select>
+
+							</label></td>
+							
+							<td  id="newcateg"
+								style="display: none;"><label> <input
+									name="newcategory" id="newcategory" type="text" class="myclass" size="36"
+									style="text-transform:capitalize;"
+									placeholder="Add Other Category" />
+							</label></td>
+							
 							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
 							<td ><label> <input
 									name="disabilitychild" type="text" class="myclass"
@@ -903,36 +926,10 @@
 						</tr>
 						
 						<tr>
-							<td class="alignLeft" >Special Category&nbsp;</td>
-
-							<td id="categoryname"><label> <select
-									name="specialcategory" onchange="enterOtherSpecialCategory()"
-									id="specialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>None</option>
-										<option></option>
-										<option>None</option>
-										<option>Destitute</option>
-										<option>HIV Case</option>
-										<option>Orphans</option>
-										<option>Others (Please Specify)</option>
-								</select>
-
-							</label></td>
-							<td  id="newcateg"
-								style="display: none;"><label> <input
-									name="newcategory" id="newcategory" type="text" class="myclass" size="36"
-									style="text-transform:capitalize;"
-									placeholder="Add Other Category" />
-							</label></td>
 							
 							<td  class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
 							<td >
-								<!-- <label> <input name="motherT"
-									type="text" class="textField" id="motherT" size="36"
-									onblur="validateNameContact();"
-									onkeypress="return validateContactNum(this);">
-
-							</label> --> <label> <select name="motherT"
+								 <label> <select name="motherT"
 									 id="motherT"
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
@@ -946,6 +943,13 @@
 								</select>
 							</label>
 							</td>
+							
+								<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
+							<td ><label> <input name="remarks"
+									type="text" class="myclass" id="remarks" size="36"
+									style="text-transform:capitalize;"
+									>
+							</label></td>
 						</tr>
 						<tr>
 									<td><br /></td>
@@ -954,7 +958,7 @@
 									<td><br /></td>
 								</tr>
 
-						<tr>
+						<!-- <tr>
 						
 							<td class="alignLeft"  >RTE
 										&nbsp;</td>
@@ -966,12 +970,7 @@
 								onclick="noCheck(this.id);" />
 										</td>
 										
-							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
-							<td ><label> <input name="remarks"
-									type="text" class="myclass" id="remarks" size="36"
-									style="text-transform:capitalize;"
-									>
-							</label></td>
+						
 						</tr>
 
 <tr>
@@ -979,7 +978,7 @@
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 						<tr>
 										
 							<td class="alignLeft">Created Date &nbsp;</td>

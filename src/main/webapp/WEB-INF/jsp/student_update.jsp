@@ -791,7 +791,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						
-							<tr>
+							<%-- <tr>
 								<td class="alignLeft">Belong to BPL &nbsp;</td>
 								<td height="30">&nbsp;Yes<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
@@ -812,37 +812,21 @@ for(Cookie cookie : cookies){
 						
 							<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<tr>
 
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Bhagyalakshmi Bond No.
+							<%-- <td class="alignLeft">Bhagyalakshmi Bond No.
 								&nbsp;</td>
 								<td>
 										<input
 									name="bhagyalakshmibondnumber" type="text" class="myclass" value="${student.bhagyalakshmibondnumber}"
 									id="bhagyalakshmibondnumber" size="30">
 
-							</td>
-							<td class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
-							<td><label> <input
-									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}"
-									id="disabilitychild" size="30">
-
-							</label></td>
-						</tr>
-												
-							<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-
-						<tr>
+							</td> --%>
+							
 							<td class="alignLeft">Special Category&nbsp;</td>
 
 							<td id="categoryname"><label> <select
@@ -861,6 +845,26 @@ for(Cookie cookie : cookies){
 									name="newcategory" id="newcategory" type="text" class="myclass" size="30" 
 									<%-- value= "${student.newcategory}" --%>placeholder="Add Other Category" />
 							</label></td>
+							
+							
+							<td class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
+							<td><label> <input
+									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}"
+									id="disabilitychild" size="30">
+
+							</label></td>
+						</tr>
+												
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							
 
 							<td class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
 
@@ -887,7 +891,14 @@ for(Cookie cookie : cookies){
 							
 							</td>
 
+						<td class="alignLeft" style="padding-left: 20px;">Remarks&nbsp;</td>
 
+							<td align="left"><label> <input name="remarks"
+									type="text" class="myclass"
+									value="<c:out default="" value="${student.remarks}" />"
+									id="remarks" size="30">
+
+							</label></td>
 
 						</tr>
 						<tr>
@@ -897,7 +908,7 @@ for(Cookie cookie : cookies){
 
 							<td><br /></td>
 						</tr>
-						
+						<%-- 
 						<tr>
 
 							<td class="alignLeft">RTE &nbsp;</td>
@@ -926,7 +937,7 @@ for(Cookie cookie : cookies){
 
 							<td><br /></td>
 						</tr>
-
+ --%>
 
 
 						<tr>

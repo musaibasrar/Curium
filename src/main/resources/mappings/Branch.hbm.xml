@@ -12,7 +12,7 @@
             <column name="branchname" length="50" />
         </property>
          <property name="branchcode" type="string">
-            <column name="branchcode" length="50" />
+            <column name="branchcode"/>
         </property>
          <property name="address" type="string">
             <column name="address" length="500" />
