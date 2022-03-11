@@ -18,10 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -260,7 +256,7 @@ public class StudentService {
 		                	student.setSpecialcategory(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("sts")) {
-		                	student.setSts(DataUtil.parseInt(request.getParameter(fieldName)));
+		                	student.setSts(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 		                if (fieldName.equalsIgnoreCase("rte")) {
 		                	student.setRte(DataUtil.parseInt(request.getParameter(fieldName)));
@@ -456,15 +452,72 @@ public class StudentService {
 			// Process form file field (input type="file")
 			 if(listOfFiles != null && listOfFiles.length != 0) 
 				 {
-					 for (MultipartFile fileItem : listOfFiles) {
-						  String fileName = (DataUtil.emptyString(fileItem.getOriginalFilename()));
-		                    String fileValue = (DataUtil.emptyString(fileItem.getName()));
-		                    if (!fileName.equalsIgnoreCase("")) {
-		                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
+						 
+						 MultipartFile fileItem1 = listOfFiles[0];
+						  String fileName1 = (DataUtil.emptyString(fileItem1.getOriginalFilename()));
+		                    
+		                    if (!fileName1.equalsIgnoreCase("")) {
+		                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem1.getBytes());
 		                    	String saveFile = new String(bytesEncoded);
 		                    	student.setStudentpic(saveFile);
 		                    }
-					 }
+		                    
+		                    //Student Docs
+		                    MultipartFile fileItem2 = listOfFiles[1];
+							String fileName2 = (DataUtil.emptyString(fileItem2.getOriginalFilename()));
+			                
+			                    if (!fileName2.equalsIgnoreCase("")) {
+			                    	// encode data on your side using BASE64
+			                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem2.getBytes());
+			                    	String saveFile = new String(bytesEncoded);
+			                    	student.setStudentdoc1(saveFile);
+
+			                    } 
+			                
+			                MultipartFile fileItem3 = listOfFiles[2];
+			                String fileName3 = (DataUtil.emptyString(fileItem3.getOriginalFilename()));
+			                
+			                    if (!fileName3.equalsIgnoreCase("")) {
+			                    	// encode data on your side using BASE64
+			                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem3.getBytes());
+			                    	String saveFile = new String(bytesEncoded);
+			                    	student.setStudentdoc2(saveFile);
+
+			                    } 
+			                
+			                
+			                MultipartFile fileItem4 = listOfFiles[3];
+							String fileName4 = (DataUtil.emptyString(fileItem4.getOriginalFilename()));
+			                
+			                    if (!fileName4.equalsIgnoreCase("")) {
+			                    	// encode data on your side using BASE64
+			                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem4.getBytes());
+			                    	String saveFile = new String(bytesEncoded);
+			                    	student.setStudentdoc3(saveFile);
+
+			                    } 
+			                
+			                MultipartFile fileItem5 = listOfFiles[4];
+			                	String fileName5 = (DataUtil.emptyString(fileItem5.getOriginalFilename()));
+			                    if (!fileName5.equalsIgnoreCase("")) {
+			                    	// encode data on your side using BASE64
+			                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem5.getBytes());
+			                    	String saveFile = new String(bytesEncoded);
+			                    	student.setStudentdoc4(saveFile);
+
+			                    } 
+			                
+			                MultipartFile fileItem6 = listOfFiles[5];
+
+			                	String fileName6 = (DataUtil.emptyString(fileItem6.getOriginalFilename()));
+			                    if (!fileName6.equalsIgnoreCase("")) {
+			                    	// encode data on your side using BASE64
+			                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem6.getBytes());
+			                    	String saveFile = new String(bytesEncoded);
+			                    	student.setStudentdoc5(saveFile);
+			                    } 
+			                
+			                //End Student Docs
 				 }
 
 		} catch (IOException e) {
@@ -475,7 +528,8 @@ public class StudentService {
 		student.setPassedout(0);
 		student.setDroppedout(0);
 		student.setLeftout(0);
-		student.setStudentexternalid(DataUtil.generateString(5));
+		//DataUtil.generateString(5)
+		student.setStudentexternalid(httpSession.getAttribute("branchcode").toString());
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		student.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		puDetails.setOptionalsubjects(optional.toString());
@@ -624,6 +678,17 @@ public class StudentService {
 		int parentsId = 0;
 		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying=null,conClassAdmittedIn=null;
 		String studentPicUpdate=null;
+		String studentpicdelete=null;
+		String studentDoc1Update=null;
+		String studentDoc2Update=null;
+		String studentDoc3Update=null;
+		String studentDoc4Update=null;
+		String studentDoc5Update=null;
+		String studentdoc1delete=null;
+		String studentdoc2delete=null;
+		String studentdoc3delete=null;
+		String studentdoc4delete=null;
+		String studentdoc5delete=null;
 		String dropdowncateg=null;
 		String newcateg=null;
 		
@@ -787,6 +852,27 @@ public class StudentService {
 	                	studentPicUpdate=DataUtil.emptyString(request.getParameter(fieldName));
 	                }
 	                
+	                if(fieldName.equalsIgnoreCase("studentdoc1update")){
+	                	studentDoc1Update=DataUtil.emptyString(request.getParameter(fieldName));
+	                }
+
+	                if(fieldName.equalsIgnoreCase("studentdoc2update")){
+	                	studentDoc2Update=DataUtil.emptyString(request.getParameter(fieldName));
+	                }
+
+	                if(fieldName.equalsIgnoreCase("studentdoc3update")){
+	                	studentDoc3Update=DataUtil.emptyString(request.getParameter(fieldName));
+	                }
+
+	                if(fieldName.equalsIgnoreCase("studentdoc4update")){
+	                	studentDoc4Update=DataUtil.emptyString(request.getParameter(fieldName));
+	                }
+
+	                if(fieldName.equalsIgnoreCase("studentdoc5update")){
+	                	studentDoc5Update=DataUtil.emptyString(request.getParameter(fieldName));
+	                }
+
+	                
 	                if(fieldName.equalsIgnoreCase("studentexternalid")){
 	                	student.setStudentexternalid(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
@@ -873,7 +959,7 @@ public class StudentService {
 	                	newcateg = DataUtil.emptyString(request.getParameter(fieldName));
 	                }
 	                if (fieldName.equalsIgnoreCase("sts")) {
-	                	student.setSts(DataUtil.parseInt(request.getParameter(fieldName)));
+	                	student.setSts(DataUtil.emptyString(request.getParameter(fieldName)));
 	                }
 	                if (fieldName.equalsIgnoreCase("rte")) {
 	                	student.setRte(DataUtil.parseInt(request.getParameter(fieldName)));
@@ -1078,10 +1164,36 @@ public class StudentService {
 		                }
 		              //End Bank Details
 		                
+		                if (fieldName.equalsIgnoreCase("studentpicdelete")) {
+		                	studentpicdelete=DataUtil.emptyString(request.getParameter(fieldName));
+		                }
+
+		                if (fieldName.equalsIgnoreCase("studentdoc1delete")) {
+		                	studentdoc1delete=DataUtil.emptyString(request.getParameter(fieldName));
+		                }
+
+		                if (fieldName.equalsIgnoreCase("studentdoc2delete")) {
+		                	studentdoc2delete=DataUtil.emptyString(request.getParameter(fieldName));
+		                }
+
+		                if (fieldName.equalsIgnoreCase("studentdoc3delete")) {
+		                	studentdoc3delete=DataUtil.emptyString(request.getParameter(fieldName));
+		                }
+
+		                if (fieldName.equalsIgnoreCase("studentdoc4delete")) {
+		                	studentdoc4delete=DataUtil.emptyString(request.getParameter(fieldName));
+		                }
+
+		                if (fieldName.equalsIgnoreCase("studentdoc5delete")) {
+		                	studentdoc5delete=DataUtil.emptyString(request.getParameter(fieldName));
+		                }
+		                
 	            } 
+			
+			
 			if(listOfFiles != null && listOfFiles.length != 0){
 
-				for (MultipartFile fileItem : listOfFiles) {
+					MultipartFile fileItem = listOfFiles[0];
 					String fileName = (DataUtil.emptyString(fileItem.getOriginalFilename()));
 					String fileValue = (DataUtil.emptyString(fileItem.getName()));
 
@@ -1097,7 +1209,89 @@ public class StudentService {
 	                    	
 	                    	student.setStudentpic(studentPicUpdate);
 	                    }
-	                }
+
+	                    	MultipartFile fileItem1 = listOfFiles[1];
+	                    	String studentdoc1 = (DataUtil.emptyString(fileItem1.getOriginalFilename()));
+	                    	
+		                    if (!studentdoc1.equalsIgnoreCase("")) {
+		                    	// Resize the image
+		                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem1.getBytes());
+		                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
+		                    	String saveFile = new String(bytesEncoded);
+
+		                    	student.setStudentdoc1(saveFile);
+
+		                    } else if(studentdoc1delete!=null) {
+		                    		student.setStudentdoc1(null);
+		                    	}else {
+		                    	student.setStudentdoc1(studentDoc1Update);
+		                    	}
+
+
+		                    MultipartFile fileItem2 = listOfFiles[2];
+		                	String studentdoc2 = (DataUtil.emptyString(fileItem2.getOriginalFilename()));
+		                    if (!studentdoc2.equalsIgnoreCase("")) {
+		                    	// Resize the image
+		                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem2.getBytes());
+		                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
+		                    	String saveFile = new String(bytesEncoded);
+
+		                    	student.setStudentdoc2(saveFile);
+
+		                    } else if(studentdoc2delete!=null) {
+		                    		student.setStudentdoc2(null);
+		                    	}else {
+		                    	student.setStudentdoc2(studentDoc2Update);
+		                    	}
+
+
+		                    MultipartFile fileItem3 = listOfFiles[3];
+		                	String studentdoc3 = (DataUtil.emptyString(fileItem3.getOriginalFilename()));
+		                    if (!studentdoc3.equalsIgnoreCase("")) {
+		                    	// Resize the image
+		                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem3.getBytes());
+		                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
+		                    	String saveFile = new String(bytesEncoded);
+
+		                    	student.setStudentdoc3(saveFile);
+
+		                    } else if(studentdoc3delete!=null) {
+		                    		student.setStudentdoc3(null);
+		                    	}else {
+		                    	student.setStudentdoc3(studentDoc3Update);
+		                    	}
+
+		                    MultipartFile fileItem4 = listOfFiles[4];
+		                	String studentdoc4 = (DataUtil.emptyString(fileItem4.getOriginalFilename()));
+		                    if (!studentdoc4.equalsIgnoreCase("")) {
+		                    	// Resize the image
+		                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem4.getBytes());
+		                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
+		                    	String saveFile = new String(bytesEncoded);
+
+		                    	student.setStudentdoc4(saveFile);
+
+		                    } else if(studentdoc4delete!=null) {
+		                    		student.setStudentdoc4(null);
+		                    	}else {
+		                    	student.setStudentdoc4(studentDoc4Update);
+		                    	}
+
+		                    MultipartFile fileItem5 = listOfFiles[5];
+		                	String studentdoc5 = (DataUtil.emptyString(fileItem5.getOriginalFilename()));
+		                    if (!studentdoc5.equalsIgnoreCase("")) {
+		                    	// Resize the image
+		                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem5.getBytes());
+		                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
+		                    	String saveFile = new String(bytesEncoded);
+
+		                    	student.setStudentdoc5(saveFile);
+
+		                    } else if(studentdoc5delete!=null) {
+		                    		student.setStudentdoc5(null);
+		                    	}else {
+		                    	student.setStudentdoc5(studentDoc5Update);
+		                    	}
 	            }
 	
 	} catch (Exception e) {

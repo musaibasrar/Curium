@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,13 +26,11 @@ import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.feescollection.action.FeesCollectionAction;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
@@ -66,8 +65,14 @@ public class UserService {
             }
             httpSession.setAttribute("currentAcademicYear",academicyear);
             httpSession.setAttribute("username",login.getUsername());
+           
             httpSession.setAttribute("branchid",login.getBranch().getIdbranch());
             httpSession.setAttribute("branchname",login.getBranch().getBranchname());
+            httpSession.setAttribute("branchcode",login.getBranch().getBranchcode());
+            httpSession.setAttribute("branchaddress",login.getBranch().getAddress());
+            httpSession.setAttribute("branchcontact",login.getBranch().getContact());
+            httpSession.setAttribute("subbranchname",login.getBranch().getBranchlogo());
+            
             String[] userType = login.getUsertype().split("-");
             httpSession.setAttribute("userType", userType[0]);
             httpSession.setAttribute("typeOfUser",userType[0]);
@@ -621,5 +626,70 @@ public class UserService {
 		return new UserDAO().addUser(user);
 		
 	}
+	
+	
+	public boolean authenticateMultiUser() {
+        boolean result = false;
+        
+        String userName =null;
+        String superUserAuth = null;
+
+        
+        	if(httpSession.getAttribute("username")!=null) {
+        		userName = httpSession.getAttribute("username").toString();
+	        }
+        
+        	if(httpSession.getAttribute("superuserAuth")!=null) {
+	        	superUserAuth = DataUtil.emptyString(httpSession.getAttribute("superuserAuth").toString());	
+	        }
+        
+        if(userName != null) {
+        	int branchId = Integer.parseInt(request.getParameter("branchid").toString());
+        	login = new UserDAO().getLoginDetails(userName, branchId);
+
+       if (login != null) {
+    	   
+    	   Enumeration em = httpSession.getAttributeNames();
+    	   while (em.hasMoreElements()) {
+    		    String element = (String)em.nextElement();
+    		    if (!"uname".equals(element))
+    		    	httpSession.removeAttribute(element);
+    		}
+    	   
+            Currentacademicyear currentAcademicYear = new YearDAO().showYear();
+            String academicyear = "";
+            if(currentAcademicYear!=null){
+            academicyear = currentAcademicYear.getCurrentacademicyear();
+            }
+            httpSession.setAttribute("currentAcademicYear",academicyear);
+            httpSession.setAttribute("username",login.getUsername());
+            
+            httpSession.setAttribute("branchid",login.getBranch().getIdbranch());
+            httpSession.setAttribute("branchname",login.getBranch().getBranchname());
+            httpSession.setAttribute("branchcode",login.getBranch().getBranchcode());
+            httpSession.setAttribute("branchaddress",login.getBranch().getAddress());
+            httpSession.setAttribute("branchcontact",login.getBranch().getContact());
+            httpSession.setAttribute("subbranchname",login.getBranch().getBranchlogo());
+            
+            
+            String[] userType = login.getUsertype().split("-");
+            httpSession.setAttribute("userType", userType[0]);
+            httpSession.setAttribute("typeOfUser",userType[0]);
+            httpSession.setAttribute("userAuth", userType[0]);
+            httpSession.setAttribute("superuserAuth", "superAdmin");
+            httpSession.setAttribute("userloginid", login.getUserid());
+            
+			//setting session to expiry in 60 mins
+           	httpSession.setMaxInactiveInterval(60*60);
+			Cookie cookie = new Cookie("user",  login.getUsertype());
+			cookie.setMaxAge(30*60);
+			response.addCookie(cookie);
+           result = true;
+       } else {
+           result = false;
+       }
+        }
+       return result;
+   }
 
 }

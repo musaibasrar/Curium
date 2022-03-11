@@ -286,6 +286,10 @@ public class AccountAction {
 		new AccountService(request, response).getAllLedgers();
 		return "generalledgerreport";
 	}
-
-
+	
+	@PostMapping("/printSearchLedgerEntries")
+	private String printSearchLedgerEntries() {
+		new AccountService(request, response).printSearchJournalEntries();
+		return "printgeneralledgerreport";
+	}
 }
