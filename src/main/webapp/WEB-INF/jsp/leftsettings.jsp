@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/curium/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/curium/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/curium/css/datePicker/demos.css">
+        <script language="JavaScript" src="/rauzamission/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/rauzamission/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/rauzamission/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/curium/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/curium/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/curium/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/curium/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/curium/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/curium/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/curium/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/curium/css/font-awesome.css">
+        <script type="text/javascript" src="/rauzamission/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/rauzamission/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/rauzamission/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/rauzamission/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/rauzamission/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/rauzamission/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/rauzamission/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/rauzamission/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/rauzamission/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/rauzamission/css/font-awesome.css">
       
         <script type="text/javascript">
             var req;
@@ -317,7 +317,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
+	response.sendRedirect("/rauzamission/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -339,68 +339,68 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 95%" >
             <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
-                <a target="mainFrame" href="/curium/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/>
-                <a target="mainFrame" href="/curium/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
+                <a target="mainFrame" href="/rauzamission/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/>
+                <a target="mainFrame" href="/rauzamission/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Class</a></h5>
             <div>
-                <a target="mainFrame" href="/curium/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
+                <a target="mainFrame" href="/rauzamission/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             <div>
-                <a target="mainFrame" href="/curium/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
-                <a target="mainFrame" href="/curium/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+                <a target="mainFrame" href="/rauzamission/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
+                <a target="mainFrame" href="/rauzamission/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             <div>
-                <a target="mainFrame" href="/curium/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
-                <a target="mainFrame" href="/curium/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
-                <a target="mainFrame" href="/curium/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
-                <a target="mainFrame" href="/curium/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
+                <a target="mainFrame" href="/rauzamission/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
+                <a target="mainFrame" href="/rauzamission/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
+                <a target="mainFrame" href="/rauzamission/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
+                <a target="mainFrame" href="/rauzamission/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
-                <a target="mainFrame" href="/curium/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/curium/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
+                <a target="mainFrame" href="/rauzamission/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
+                <a target="mainFrame" href="/rauzamission/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div>
             
               <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-				<a target="mainFrame" href="/curium/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
+				<a target="mainFrame" href="/rauzamission/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
                 
-                <a target="mainFrame" href="/curium/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
-                <a target="mainFrame" href="/curium/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
+                <a target="mainFrame" href="/rauzamission/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
+                <a target="mainFrame" href="/rauzamission/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
-                <a target="mainFrame" href="/curium/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
+                <a target="mainFrame" href="/rauzamission/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
             
              <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/curium/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
-                <a target="mainFrame" href="/curium/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
-                <a target="mainFrame" href="/curium/HrProcess/payHead" style="font-size: 12px;">Pay Head</a><br/>
-                <a target="mainFrame" href="/curium/HrProcess/addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
-                <a target="mainFrame" href="/curium/HrProcess/deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
-                <a target="mainFrame" href="/curium/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
-                <a target="mainFrame" href="/curium/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
-                <a target="mainFrame" href="/curium/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
+                <a target="mainFrame" href="/rauzamission/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
+                <a target="mainFrame" href="/rauzamission/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
+                <a target="mainFrame" href="/rauzamission/HrProcess/payHead" style="font-size: 12px;">Pay Head</a><br/>
+                <a target="mainFrame" href="/rauzamission/HrProcess/addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
+                <a target="mainFrame" href="/rauzamission/HrProcess/deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
+                <a target="mainFrame" href="/rauzamission/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
+                <a target="mainFrame" href="/rauzamission/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
+                <a target="mainFrame" href="/rauzamission/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
             </div>
             
               <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
             <div>
-                <a target="mainFrame" href="/curium/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/curium/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
+                <a target="mainFrame" href="/rauzamission/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
+                <a target="mainFrame" href="/rauzamission/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div> -->
             
             </div>

@@ -8,7 +8,7 @@ pageEncoding="ISO-8859-1"%>
 <head>
 <title>CBSE Calendar</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/curium/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="/rauzamission/css/screen.css" />
 
 
 <link rel='stylesheet' type='text/css' href='/css/fullcalendar.css' />
@@ -76,7 +76,7 @@ return value;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
+	response.sendRedirect("/rauzamission/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -180,7 +180,7 @@ pageEncoding="ISO-8859-1"%>
 <head>
 <title>CBSE Calendar</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/curium/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="/rauzamission/css/screen.css" />
 
 
 <link rel='stylesheet' type='text/css' href='resources/fullcalendar/fullcalendar.css' />

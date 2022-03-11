@@ -217,7 +217,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
+	response.sendRedirect("/rauzamission/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -239,7 +239,7 @@ for(Cookie cookie : cookies){
                         		
 			<tr>
 				<td width="30%"></td>
-				<td><img src="/curium/images/logo.jpg" width="140" height="70"/></td>
+				<td><img src="/rauzamission/images/logo.jpg" width="140" height="70"/></td>
 				<td>
 				<label class="dataTextBoldCenter">${branchname} </label><br>
 				<label class="addressLine">${branchaddress}</label><br>
