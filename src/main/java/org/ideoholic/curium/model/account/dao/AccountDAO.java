@@ -596,4 +596,21 @@ public class AccountDAO {
 		return voucherTransactions;
 	}
 
+	public List<VoucherEntrytransactions> getVoucherDetailsByRecieptNumber(String queryReceiptNumber) {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from VoucherEntrytransactions where narration = '"+queryReceiptNumber+"'");
+			voucherTransactions = query.list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return voucherTransactions;
+	}
+
 }

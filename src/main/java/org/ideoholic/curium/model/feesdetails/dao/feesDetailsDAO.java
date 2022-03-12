@@ -271,12 +271,26 @@ public class feesDetailsDAO {
             }
     }
 
-		public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection) {
+		public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection, String updateDrAccountVoucher1, String updateCrAccountVoucher1, String cancelVoucherVoucher1, String updateDrAccountVoucher4, String updateCrAccountVoucher4, String cancelVoucherVoucher4) {
 			
 			boolean result = false;
 
             try {
                     transaction = session.beginTransaction();
+                    
+	                    Query updateDrVoucher1 = session.createQuery(updateDrAccountVoucher1);
+	        			updateDrVoucher1.executeUpdate();
+	        			Query updateCrVoucher1 = session.createQuery(updateCrAccountVoucher1);
+	        			updateCrVoucher1.executeUpdate();
+	        			Query cancelVoucherQueryVoucher1 = session.createQuery(cancelVoucherVoucher1);
+	        			cancelVoucherQueryVoucher1.executeUpdate();
+	        			
+	        			Query updateDrVoucher4 = session.createQuery(updateDrAccountVoucher4);
+	        			updateDrVoucher4.executeUpdate();
+	        			Query updateCrVoucher4 = session.createQuery(updateCrAccountVoucher4);
+	        			updateCrVoucher4.executeUpdate();
+	        			Query cancelVoucherQueryVoucher4 = session.createQuery(cancelVoucherVoucher4);
+	        			cancelVoucherQueryVoucher4.executeUpdate();
                     
 	                    Query query = session.createQuery("update Receiptinfo set cancelreceipt=1 where receiptnumber="+receiptId);
 	                    query.executeUpdate();
