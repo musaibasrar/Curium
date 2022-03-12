@@ -1205,7 +1205,9 @@ public class StudentService {
 
 	                    	student.setStudentpic(saveFile);
 
-	                    } else{
+	                    }else if(studentpicdelete!=null) {
+                    		student.setStudentpic(null);
+                    	} else{
 	                    	
 	                    	student.setStudentpic(studentPicUpdate);
 	                    }
