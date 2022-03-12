@@ -208,7 +208,7 @@
 					Name:&nbsp;<c:out value="${student.name}" />
 				</td>
 			
-				<td class="dataTextBoldLeft" style="width: 30%">Admission No:&nbsp;<c:out value="${student.admissionnumber}" />
+				<td class="dataTextBoldLeft" style="width: 30%">Admission No:&nbsp;<c:out value="${student.studentexternalid}" />
 				</td>
 				
 
@@ -369,7 +369,7 @@
 					Name:&nbsp;<c:out value="${student.name}" />
 				</td>
 			
-				<td class="dataTextBoldLeft" style="width: 30%">Admission No:&nbsp;<c:out value="${student.admissionnumber}" />
+				<td class="dataTextBoldLeft" style="width: 30%">Admission No:&nbsp;<c:out value="${student.studentexternalid}" />
 				</td>
 				
 
