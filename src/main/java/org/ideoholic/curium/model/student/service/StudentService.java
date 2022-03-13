@@ -1204,12 +1204,13 @@ public class StudentService {
 	                    if (!fileName.equalsIgnoreCase("")) {
 	                    	// Resize the image
 	                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
-	                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
 	                    	String saveFile = new String(bytesEncoded);
 
 	                    	student.setStudentpic(saveFile);
 
-	                    } else{
+	                    }else if(studentpicdelete!=null) {
+                    		student.setStudentpic(null);
+                    	} else{
 	                    	
 	                    	student.setStudentpic(studentPicUpdate);
 	                    }
