@@ -125,7 +125,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							
 									<td style="padding-left: 20px;padding-right: 50px;">
-								<a target="mainFrame" href="/rauzamission/welcome" ><img src="/rauzamission/images/logo.jpg"/></a>
+								<a target="mainFrame" href="/rauzamission/welcome" ><img src="/rauzamission/images/logo${subbranchname}.jpg"/></a>
 								</td>
 								
 							<!-- <td align="left"><img src="/rauzamission/images/rauzamissionheader.png"
