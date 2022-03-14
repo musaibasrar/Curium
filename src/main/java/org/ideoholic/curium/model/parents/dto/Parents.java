@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -72,8 +73,8 @@ public class Parents implements java.io.Serializable {
 	@Column(name = "email")
 	private String email;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "sid")
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "sid", unique=true, nullable = false)
 	private Student student;
 
 	@Column(name = "branchid")
