@@ -15,8 +15,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Search Journal Entries</title>
-<link rel="stylesheet" href="/rauzamission/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/rauzamission/css/datePicker/demos.css">
+<link rel="stylesheet" href="/kwrs/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/kwrs/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -302,44 +302,44 @@
 }
 </style>
 
-<link rel="stylesheet" href="/rauzamission/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/rauzamission/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/kwrs/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/kwrs/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/rauzamission/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/rauzamission/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/kwrs/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/rauzamission/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/rauzamission/js/datePicker/ui/sliderAccess.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/kwrs/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/rauzamission/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/kwrs/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/ScrollableGridPlugin.js"></script>
-	<link href="/rauzamission/css/select2.min.css" rel="stylesheet" />
-<script src="/rauzamission/js/select2.min.js"></script>
+	src="/kwrs/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	<link href="/kwrs/css/select2.min.css" rel="stylesheet" />
+<script src="/kwrs/js/select2.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -365,12 +365,12 @@
 	
 </script>
 
-<script type="text/javascript" src="/rauzamission/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/kwrs/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function search() {
 		var form1 = document.getElementById("form1");
 		if(form1.checkValidity()) {
-			form1.action = "/rauzamission/AccountProcess/searchLedgerEntries";
+			form1.action = "/kwrs/AccountProcess/searchLedgerEntries";
 			form1.method = "POST";
 			form1.submit();
 		  }
@@ -379,7 +379,7 @@
 	
 	function printRecords() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/rauzamission/AccountProcess/printSearchLedgerEntries";
+			form1.action = "/kwrs/AccountProcess/printSearchLedgerEntries";
 			form1.method = "POST";
 			form1.submit();
 	}
@@ -461,7 +461,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/rauzamission/UserProcess/sessionTimeOut");
+	response.sendRedirect("/kwrs/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

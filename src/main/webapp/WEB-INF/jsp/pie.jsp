@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/curium/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/curium/css/datePicker/jquery-ui-1.8.18.custom.css">
-         <link rel="stylesheet" href="/curium/css/scss.css">
-        <link rel="stylesheet" href="/curium/css/datePicker/demos.css">
+        <script language="JavaScript" src="/kwrs/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/kwrs/css/datePicker/jquery-ui-1.8.18.custom.css">
+         <link rel="stylesheet" href="/kwrs/css/scss.css">
+        <link rel="stylesheet" href="/kwrs/css/datePicker/demos.css">
 
-        <script type="text/javascript" src="/curium/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/curium/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/curium/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/curium/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/curium/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/curium/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/curium/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/kwrs/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/kwrs/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/kwrs/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/kwrs/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/kwrs/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/kwrs/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/kwrs/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/kwrs/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
         var donut = document.getElementById('donut');
@@ -335,7 +335,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
+	response.sendRedirect("/kwrs/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

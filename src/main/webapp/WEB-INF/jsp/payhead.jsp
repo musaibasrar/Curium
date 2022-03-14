@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Pay Head</title>
-<link rel="stylesheet" href="/rauzamission/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/rauzamission/css/datePicker/demos.css">
+<link rel="stylesheet" href="/kwrs/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/kwrs/css/datePicker/demos.css">
 <style type="text/css">
 .footerTD{
                 border-radius:6px;
@@ -281,42 +281,42 @@
 }
 </style>
 
-<link rel="stylesheet" href="/rauzamission/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/rauzamission/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/kwrs/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/kwrs/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/rauzamission/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/rauzamission/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/kwrs/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/rauzamission/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/rauzamission/js/datePicker/ui/sliderAccess.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/kwrs/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/rauzamission/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/kwrs/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/rauzamission/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/kwrs/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -348,11 +348,11 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/rauzamission/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/kwrs/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function addFeesCategory() {
 		var form1 = document.getElementById("form1");
-		form1.action="/rauzamission/FeesProcess/addFeesParticular";
+		form1.action="/kwrs/FeesProcess/addFeesParticular";
 		form1.method = "POST";
 		form1.submit();
 
@@ -415,7 +415,7 @@
 	 
 	 function savePayHead(){
 		 var form1=document.getElementById("form1");
-         form1.action="/rauzamission/HrProcess/savePayHead";
+         form1.action="/kwrs/HrProcess/savePayHead";
          form1.submit();
      }
 	 
@@ -423,7 +423,7 @@
          
 		if(confirm('Are you sure, you want to delete the leave type?')){
 			var form1=document.getElementById("form1");
-	         form1.action="/rauzamission/HrProcess/deleteLeaveType";
+	         form1.action="/kwrs/HrProcess/deleteLeaveType";
 	        form1.submit();
 		}
          
@@ -436,7 +436,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/rauzamission/UserProcess/sessionTimeOut");
+	response.sendRedirect("/kwrs/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -566,16 +566,16 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Pay Head Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/rauzamission/css/dataTable/images/sort_both.png" /></th>
+							src="/kwrs/css/dataTable/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Type<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/rauzamission/css/dataTable/images/sort_both.png" /></th>
+							src="/kwrs/css/dataTable/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Validatory<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/rauzamission/css/dataTable/images/sort_both.png" /></th>
+							src="/kwrs/css/dataTable/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Description<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/rauzamission/css/dataTable/images/sort_both.png" /></th>
+							src="/kwrs/css/dataTable/images/sort_both.png" /></th>
 					</tr>
 				</thead>
 

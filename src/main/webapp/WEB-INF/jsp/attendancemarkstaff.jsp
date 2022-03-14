@@ -14,39 +14,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>fees structure</title>
-<script src="/curium/js/Chart.js"></script>
-<link rel="stylesheet" href="/curium/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/curium/css/datePicker/demos.css">
-<link rel="stylesheet" href="/curium/css/graph/jquery.jqplot.css">
-<link rel="stylesheet" href="/curium/css/graph/jquery.jqplot.min.css">
+<script src="/kwrs/js/Chart.js"></script>
+<link rel="stylesheet" href="/kwrs/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/kwrs/css/datePicker/demos.css">
+<link rel="stylesheet" href="/kwrs/css/graph/jquery.jqplot.css">
+<link rel="stylesheet" href="/kwrs/css/graph/jquery.jqplot.min.css">
 
 
-  <script type="text/javascript" src="/curium/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+  <script type="text/javascript" src="/kwrs/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/kwrs/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         
         
-         <script  type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/curium/js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="/curium/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/curium/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/curium/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/curium/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/curium/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/curium/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/curium/js/graph/plugins/jqplot.trendline.min.js"></script>
-        <script src="/curium/js/jquery.jqplot.min.js" ></script>
-        <script src="/curium/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
+         <script  type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/kwrs/js/graph/jquery.jqplot.js"></script>        
+        <script  type="text/javascript" src="/kwrs/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/kwrs/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/kwrs/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/kwrs/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/kwrs/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/kwrs/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/kwrs/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script src="/kwrs/js/jquery.jqplot.min.js" ></script>
+        <script src="/kwrs/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
         
 <style type="text/css">
 <!--
@@ -328,42 +328,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/curium/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/curium/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/kwrs/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/kwrs/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/curium/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/kwrs/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/curium/js/datePicker/ui/sliderAccess.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/kwrs/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/curium/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/kwrs/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/kwrs/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -389,7 +389,7 @@
 	
 </script>
 
-<script type="text/javascript" src="/curium/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/kwrs/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -410,7 +410,7 @@
 	
 	function searchStudentAttendanceDetailsMonthly() {
 		var form1 = document.getElementById("form1");
-		form1.action="/curium/AttendanceProcess/searchStudentAttendanceDetailsMonthly";
+		form1.action="/kwrs/AttendanceProcess/searchStudentAttendanceDetailsMonthly";
 		form1.method = "POST";
 		form1.submit();
 
@@ -418,7 +418,7 @@
 	
 	function searchStudentAttendanceDetailsMark() {
 		var form1 = document.getElementById("form1");
-		form1.action="/curium/AttendanceProcess/searchStudentAttendanceDetailsMark";
+		form1.action="/kwrs/AttendanceProcess/searchStudentAttendanceDetailsMark";
 		form1.method = "POST";
 		form1.submit();
 
@@ -480,7 +480,7 @@
 	
 	function updateRecords(){
 		var form1 = document.getElementById("form1");
-		form1.action="/curium/AttendanceProcess/markStaffAttendance";
+		form1.action="/kwrs/AttendanceProcess/markStaffAttendance";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -494,7 +494,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
+	response.sendRedirect("/kwrs/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -508,7 +508,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form id="form1" action="/curium/StampFeesProcess/applyFees" method="POST">
+	<form id="form1" action="/kwrs/StampFeesProcess/applyFees" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />

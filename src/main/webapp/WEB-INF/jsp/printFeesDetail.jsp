@@ -180,7 +180,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 130px;">
-				<img src="/rauzamission/images/logo${subbranchname}.png" width="88" height="100"/>
+				<img src="/kwrs/images/logo${subbranchname}.png" width="88" height="100"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
@@ -341,7 +341,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 130px;">
-				<img src="/rauzamission/images/logo${subbranchname}.png" width="88" height="100"/>
+				<img src="/kwrs/images/logo${subbranchname}.png" width="88" height="100"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>

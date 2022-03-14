@@ -59,7 +59,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
+	response.sendRedirect("/kwrs/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -73,11 +73,11 @@ for(Cookie cookie : cookies){
 %>
 
     <frameset    rows="139,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="/curium/header"   name="topFrame" scrolling="NO" noresize frameborder="0">
+        <frame   src="/kwrs/header"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="175,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/curium/left_reception" name="leftFrame" scrolling="NO"  frameborder="1"   />
-                <frame src="/curium/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
+                <frame  src="/kwrs/left_reception" name="leftFrame" scrolling="NO"  frameborder="1"   />
+                <frame src="/kwrs/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
             </frameset>
 
    

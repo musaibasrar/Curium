@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Issue Staff Salary</title>
-<link rel="stylesheet" href="/curium/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/curium/css/datePicker/demos.css">
+<link rel="stylesheet" href="/kwrs/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/kwrs/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -325,43 +325,43 @@
 
 </style>
 
-<link rel="stylesheet" href="/curium/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/curium/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/kwrs/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/kwrs/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/curium/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/kwrs/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/curium/js/datePicker/ui/sliderAccess.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/kwrs/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/curium/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/kwrs/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/kwrs/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/curium/js/datePicker/ui/ScrollableGridPlugin.js"></script>
-<script src="/curium/js/print/jquery.printPage.js" type="text/javascript"></script>
+	src="/kwrs/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+<script src="/kwrs/js/print/jquery.printPage.js" type="text/javascript"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -388,7 +388,7 @@
 </script>
   
 
-<script type="text/javascript" src="/curium/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/kwrs/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -455,7 +455,7 @@
 
 function issueStaffSalary(){
 	var form1 = document.getElementById("form1");
-	form1.action="/curium/HrProcess/issueProcessedSalary";
+	form1.action="/kwrs/HrProcess/issueProcessedSalary";
 	form1.method = "POST";
 	form1.submit();
 
@@ -463,7 +463,7 @@ function issueStaffSalary(){
 
 function cancelStaffSalary(){
 	var form1 = document.getElementById("form1");
-	form1.action="/curium/HrProcess/cancelStaffSalary";
+	form1.action="/kwrs/HrProcess/cancelStaffSalary";
 	form1.method = "POST";
 	form1.submit();
 
@@ -481,7 +481,7 @@ function cancelStaffSalary(){
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
+	response.sendRedirect("/kwrs/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -519,7 +519,7 @@ for(Cookie cookie : cookies){
 						<th class="headerText" ><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/curium/images/sort_both.png" /></th>
+							src="/kwrs/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Department&nbsp;</th>
 							<th title="click to sort" class="headerText">Designation&nbsp;</th>
 							<th title="click to sort" class="headerText">Processed Date&nbsp;</th>
@@ -560,7 +560,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${processsalarydetailslist.netpayment}"/></td>
                                 <td class="dataText"><c:out value="${processsalarydetailslist.paymenttype}"/></td>
                                 <td class="dataText"><c:out value="${processsalarydetailslist.status}"/></td>
-                                <td class="dataText"><a id="print" href="/curium/HrProcess/printSalarySlip?salaryid=<c:out value="${processsalarydetailslist.idprocesssalarydetails}" />"><div align="center" align="center"><img  alt="Printsalaryslip" src="/curium/images/printer.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
+                                <td class="dataText"><a id="print" href="/kwrs/HrProcess/printSalarySlip?salaryid=<c:out value="${processsalarydetailslist.idprocesssalarydetails}" />"><div align="center" align="center"><img  alt="Printsalaryslip" src="/kwrs/images/printer.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
                             </tr>
                         </c:forEach>
 				</tbody>
