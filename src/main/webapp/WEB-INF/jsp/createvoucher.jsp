@@ -558,10 +558,10 @@ for(Cookie cookie : cookies){
 
             <div id="tabs">
 				<ul>
+					<li><a href="#tabs-4">Journal</a></li>
 					<li><a href="#tabs-1">Receipt</a></li>
 					<li><a href="#tabs-2">Payment</a></li>
 					<li><a href="#tabs-3">Contra</a></li>
-					<li><a href="#tabs-4">Journal</a></li>
 				</ul>
 				<div id="tabs-1">
 					<table  width="100%">
@@ -579,7 +579,7 @@ for(Cookie cookie : cookies){
                         <input
 									name="dateofreceipt" type="text" class="textField"
 									id="dateofreceipt" size="25" 
-									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" 
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									required/> </td>
                         
                     </tr>
@@ -762,7 +762,7 @@ for(Cookie cookie : cookies){
                         <input
 									name="dateofpayment" type="text" class="textField"
 									id="dateofpayment" size="25" 
-									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" 
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									required/> </td>
                         
                     </tr>
@@ -948,7 +948,7 @@ for(Cookie cookie : cookies){
                         <input
 									name="dateofcontra" type="text" class="textField"
 									id="dateofcontra" size="25" 
-									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" 
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									required/> </td>
                         
                     </tr>
@@ -1131,7 +1131,7 @@ for(Cookie cookie : cookies){
                         <input
 									name="dateofjournal" type="text" class="textField"
 									id="dateofjournal" size="25" 
-									value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" 
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									required/> </td>
                         
                     </tr>

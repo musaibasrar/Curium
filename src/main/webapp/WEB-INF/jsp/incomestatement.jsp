@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -390,7 +391,7 @@
 			changeMonth : true,
 			yearRange: "-50:+10"
 		});
-		$( "#fromdate" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#fromdate" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#fromdate").datepicker("option", "showAnim", $(this).val());
 		});
@@ -400,7 +401,7 @@
 			changeMonth : true,
 			yearRange: "-50:+10"
 		});
-		$( "#todate" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+		$( "#todate" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#todate").datepicker("option", "showAnim", $(this).val());
 		});
@@ -447,14 +448,14 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-						<td width="20%" class="alignRight">From Date(MM/DD/YYYY)&nbsp;</td>
+						<td width="20%" class="alignRight">From Date&nbsp;</td>
 							<td width="28%"><label> <input name="fromdate" autocomplete="off"
 									type="text" 
 									class="textField" id="fromdate" size="36" 
 									data-validate="validate(required)">
 							</label></td>
 							
-							<td width="20%" class="alignRight">To Date(MM/DD/YYYY)&nbsp;</td>
+							<td width="20%" class="alignRight">To Date&nbsp;</td>
 							<td width="28%"><label> <input name="todate" autocomplete="off"
 									type="text" 
 									class="textField" id="todate" size="36"
@@ -528,9 +529,9 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1" >
-							<td class="dataText" style="text-align: right" width="20%"><c:out value="${expensesledgersaccount.key.accountcode}" /></td>
-							<td class="dataText" style="text-align: right" width="50%"><c:out value="${expensesledgersaccount.key.accountname}" /></td>
-							<td class="dataText" style="text-align: right" width="30%"><c:out value="${expensesledgersaccount.value}" /></td>
+							<td class="dataText" style="text-align: center" width="20%"><c:out value="${expensesledgersaccount.key.accountcode}" /></td>
+							<td class="dataText" style="text-align: left" width="50%"><c:out value="${expensesledgersaccount.key.accountname}" /></td>
+							<td class="dataText" style="text-align: left" width="30%"><fmt:formatNumber type="currency" pattern="#,##0.00;" value="${expensesledgersaccount.value}" /></td>
 
 						</tr>
 					</c:forEach>
@@ -602,9 +603,9 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right" width="20%"><c:out value="${incomeledgersaccount.key.accountcode}" /></td>
-							<td class="dataText" style="text-align: right" width="50%"><c:out value="${incomeledgersaccount.key.accountname}" /></td>
-							<td class="dataText" style="text-align: right" width="30%"><c:out value="${incomeledgersaccount.value}" /></td>
+							<td class="dataText" style="text-align: center" width="20%"><c:out value="${incomeledgersaccount.key.accountcode}" /></td>
+							<td class="dataText" style="text-align: left" width="50%"><c:out value="${incomeledgersaccount.key.accountname}" /></td>
+							<td class="dataText" style="text-align: left" width="30%"><fmt:formatNumber type="currency" pattern="#,##0.00;" value="${incomeledgersaccount.value}" /></td>
 
 						</tr>
 					</c:forEach>

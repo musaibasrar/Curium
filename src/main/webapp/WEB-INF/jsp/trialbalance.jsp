@@ -353,6 +353,26 @@
 		$("#tabs").tabs();
 
 		$("#search").button().click(function() {
+			
+			var fromdate = document.getElementById("fromdate").value;
+			var partsfromdate = fromdate.split("/");
+			var varfromDate = new Date(partsfromdate[2], partsfromdate[1] - 1, partsfromdate[0]);
+        	
+        	var todate = document.getElementById("todate").value;
+        	var partstodate = todate.split("/");
+			var vartoDate = new Date(partstodate[2], partstodate[1] - 1, partstodate[0]); 
+        	
+        	
+				
+        	if(varfromDate > vartoDate ) {
+        	alert("please enter valid dates");
+        	return false;
+        	}
+        	
+        	if($("#fromdate").val().length==0 || $("#todate").val().length==0){
+        		return false;
+        	}
+        	
 			getTrialBalance();
 		});
 		$("#effect").hide();
@@ -549,7 +569,7 @@ for(Cookie cookie : cookies){
 							cellpadding="1" cellspacing="1">
 							<td class="dataText" style="text-align: left">
 							
-							<a target="mainFrame" href="/tajacc/AccountProcess/searchSingleLedgerEntries&accountid=${accountdetails.key.accountdetailsid}&ledgername=${accountdetails.key.accountname}">
+							<a target="mainFrame" href="/tajacc/AccountProcess/searchSingleLedgerEntries?accountid=${accountdetails.key.accountdetailsid}&ledgername=${accountdetails.key.accountname}">
 							<c:out value="${accountdetails.key.accountname}" /></a></td>
 							
 							<c:if test="${(accountdetails.key.accountGroupMaster.accountgroupid == 1) || (accountdetails.key.accountGroupMaster.accountgroupid == 5)}">

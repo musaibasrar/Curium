@@ -370,7 +370,7 @@ public class AccountService {
 		transactions.setDramount(new BigDecimal(drAmount));
 		transactions.setCramount(new BigDecimal(crAmount));
 		transactions.setVouchertype(Integer.parseInt(receiptVoucher));
-		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(receiptDate));
+		transactions.setTransactiondate(DateUtil.indiandateParser(receiptDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(receiptNarration);
 		transactions.setCancelvoucher("no");
@@ -406,7 +406,7 @@ public class AccountService {
 		transactions.setDramount(new BigDecimal(drAmountPayment));
 		transactions.setCramount(new BigDecimal(crAmountPayment));
 		transactions.setVouchertype(Integer.parseInt(paymentVoucher));
-		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(paymentDate));
+		transactions.setTransactiondate(DateUtil.indiandateParser(paymentDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(paymentNarration);
 		transactions.setCancelvoucher("no");
@@ -441,7 +441,7 @@ public class AccountService {
 		transactions.setDramount(new BigDecimal(drAmountContra));
 		transactions.setCramount(new BigDecimal(crAmountContra));
 		transactions.setVouchertype(Integer.parseInt(contraVoucher));
-		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(contraDate));
+		transactions.setTransactiondate(DateUtil.indiandateParser(contraDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(contraNarration);
 		transactions.setCancelvoucher("no");
@@ -476,7 +476,7 @@ public class AccountService {
 		transactions.setDramount(new BigDecimal(drAmountJournal));
 		transactions.setCramount(new BigDecimal(crAmountJournal));
 		transactions.setVouchertype(Integer.parseInt(journalVoucher));
-		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(journalDate));
+		transactions.setTransactiondate(DateUtil.indiandateParser(journalDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(journalNarration);
 		transactions.setCancelvoucher("no");
@@ -514,6 +514,69 @@ public class AccountService {
 	public boolean balanceSheet() {
 		
 		//Group 1
+		BigDecimal liabilities = BigDecimal.ZERO;
+		Map<String,BigDecimal> liabilitiesLedgerAccount = new HashMap<String, BigDecimal>();
+		
+		BigDecimal reserves = BigDecimal.ZERO;
+		Map<String,BigDecimal> reservesLedgerAccount = new HashMap<String, BigDecimal>();
+		
+		//Group 2
+		BigDecimal assets = BigDecimal.ZERO;
+		Map<String,BigDecimal> assetsLedgerAccount = new HashMap<String, BigDecimal>();
+		
+		
+		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
+		accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		
+		for (Accountdetailsbalance accountdetails : accountDetailsBalance) {
+			int groupId = accountdetails.getAccountDetails().getAccountGroupMaster().getAccountgroupid();
+
+			switch(groupId){
+			case 1: 
+					assets = assets.add(accountdetails.getCurrentbalance());
+					if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+						assetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					}
+					break;
+			case 2: 
+					liabilities = liabilities.add(accountdetails.getCurrentbalance());
+					if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+						liabilitiesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					}	
+					break;
+					
+			case 3:
+					reserves = reserves.add(accountdetails.getCurrentbalance());
+					if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+						reservesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					}
+					break;
+
+			default:
+					
+			}
+		}
+		
+		//group 1
+		request.setAttribute("liabilities", liabilities);
+		request.setAttribute("liabilitiesLedgeraccount", liabilitiesLedgerAccount);
+		request.setAttribute("reserves", reserves);
+		request.setAttribute("reservesLedgeraccount", reservesLedgerAccount);
+			
+		//group 2
+		request.setAttribute("assets", assets);
+		request.setAttribute("assetsLedgeraccount", assetsLedgerAccount);
+
+		
+		request.setAttribute("grouponetotal", liabilities);
+		request.setAttribute("grouponetotalreserves", reserves);
+		request.setAttribute("grouptwototal", assets);
+		
+		
+		return true;
+		/*
+		 * 	//Group 1
 		BigDecimal capital = BigDecimal.ZERO;
 		Map<String,BigDecimal> capitalLedgerAccount = new HashMap<String, BigDecimal>();
 		
@@ -541,63 +604,53 @@ public class AccountService {
 		
 		BigDecimal miscellaneousExpenses = BigDecimal.ZERO;
 		Map<String,BigDecimal> miscellaneousExpensesLedgerAccount = new HashMap<String, BigDecimal>();
-		
-		
-		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-		accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		
-		for (Accountdetailsbalance accountdetails : accountDetailsBalance) {
-			int groupId = accountdetails.getAccountDetails().getAccountGroupMaster().getAccountgroupid();
-
-			switch(groupId){
-			case 1: 
-					capital = capital.add(accountdetails.getCurrentbalance());
-					capitalLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-			case 2: 
-					currentAssets = currentAssets.add(accountdetails.getCurrentbalance());
-					currentAssetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 3:
-					currentLiabilities = currentLiabilities.add(accountdetails.getCurrentbalance());
-					currentLiabilitiesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-			
-			case 6:
-					fixedAssets = fixedAssets.add(accountdetails.getCurrentbalance());
-					fixedAssetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 9:
-					investments = investments.add(accountdetails.getCurrentbalance());
-					investmentsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-				  	break;
-				  	
-			case 10:
-					loansAssets = loansAssets.add(accountdetails.getCurrentbalance());
-					loansAssetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 11:
-					loansLiabilities = loansLiabilities.add(accountdetails.getCurrentbalance());
-					loansLiabilitiesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 12:
-					miscellaneousExpenses = miscellaneousExpenses.add(accountdetails.getCurrentbalance());
-					miscellaneousExpensesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 13:
-					reserves = reserves.add(accountdetails.getCurrentbalance());
-					reservesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			default:
-					
-			}
-		}
+		 * for (Accountdetailsbalance accountdetails : accountDetailsBalance) { int
+		 * groupId =
+		 * accountdetails.getAccountDetails().getAccountGroupMaster().getAccountgroupid(
+		 * );
+		 * 
+		 * switch(groupId){ case 1: capital =
+		 * capital.add(accountdetails.getCurrentbalance());
+		 * capitalLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(),
+		 * accountdetails.getCurrentbalance()); break; case 2: currentAssets =
+		 * currentAssets.add(accountdetails.getCurrentbalance());
+		 * currentAssetsLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 3: currentLiabilities =
+		 * currentLiabilities.add(accountdetails.getCurrentbalance());
+		 * currentLiabilitiesLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 6: fixedAssets = fixedAssets.add(accountdetails.getCurrentbalance());
+		 * fixedAssetsLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 9: investments = investments.add(accountdetails.getCurrentbalance());
+		 * investmentsLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 10: loansAssets = loansAssets.add(accountdetails.getCurrentbalance());
+		 * loansAssetsLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 11: loansLiabilities =
+		 * loansLiabilities.add(accountdetails.getCurrentbalance());
+		 * loansLiabilitiesLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 12: miscellaneousExpenses =
+		 * miscellaneousExpenses.add(accountdetails.getCurrentbalance());
+		 * miscellaneousExpensesLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 13: reserves = reserves.add(accountdetails.getCurrentbalance());
+		 * reservesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname()
+		 * , accountdetails.getCurrentbalance()); break;
+		 * 
+		 * default:
+		 * 
+		 * } }
 		
 		//group 1
 		request.setAttribute("capital", capital);
@@ -643,8 +696,10 @@ public class AccountService {
 			request.setAttribute("differenceamount", diff.abs());
 			
 		}
+		 */
+		///////////////////////////////////////
 		
-		return true;
+		
 	}
 
 
@@ -960,8 +1015,8 @@ public class AccountService {
 		request.setAttribute("ledgername", accountIdName[1]);
 		
 		request.setAttribute("accountid", accountDetails);
-		request.setAttribute("fromdate", fromDate);
-		request.setAttribute("todate", toDate);
+		request.setAttribute("fromdate", DataUtil.dateFromatConversionSlash(fromDate));
+		request.setAttribute("todate", DataUtil.dateFromatConversionSlash(toDate));
 		
 		return true;
 		
@@ -981,8 +1036,8 @@ public class AccountService {
 
 	public boolean getIncomeStatement() {
 		
-		String fromDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("fromdate")));
-		String toDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("todate")));
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
 		
 		if(httpSession.getAttribute(BRANCHID)!=null) {
 			
@@ -1041,8 +1096,8 @@ public class AccountService {
 		request.setAttribute("incometotal", totalIncome);
 		request.setAttribute("expensetotal", totalExpense);
 		
-		request.setAttribute("fromdate", fromDate);
-		request.setAttribute("todate", toDate);
+		request.setAttribute("fromdate", request.getParameter("fromdate"));
+		request.setAttribute("todate", request.getParameter("todate"));
 		
 		
 		BigDecimal profit = totalIncome.subtract(totalExpense);
@@ -1067,8 +1122,8 @@ public boolean printSearchJournalEntries() {
 		String accountDetails = DataUtil.emptyString(request.getParameter("accountidselected"));
 		String[] accountIdName = accountDetails.split(":");
 		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
-		String fromDate = DataUtil.emptyString(request.getParameter("fromdateselected"));
-		String toDate = DataUtil.emptyString(request.getParameter("todateselected"));
+		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdateselected")));
+		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todateselected")));
 		if(httpSession.getAttribute(BRANCHID)!=null) {
 
 		String twoAccounts = null;

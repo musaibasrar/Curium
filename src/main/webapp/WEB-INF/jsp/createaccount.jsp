@@ -498,7 +498,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/SubGroupName/getSubGroupNames?groupname="+selected,true);
+			xmlHttp.open("GET", "/tajacc/SubGroupName/getSubGroupNames?groupname="+selected,true);
 			xmlHttp.send(null);
 		}
 		
@@ -553,7 +553,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChangedSSGroup;
-			xmlHttp.open("GET", "/SubGroupName/getSSGroupNames?subgroupname="+selected,true);
+			xmlHttp.open("GET", "/tajacc/SubGroupName/getSSGroupNames?subgroupname="+selected,true);
 			xmlHttp.send(null);
 		}
 
@@ -788,7 +788,7 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountSSGroupMaster.ssgroupname}" /></td>
 							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountcode}" /></td>
 							<td class="dataText"><c:out value="${accountdetailsbalance.accountDetails.accountname}" /></td>
-							<td class="dataText">&#8377;&nbsp<c:out value="${accountdetailsbalance.currentbalance}" /></td>
+							<td class="dataText">AED;&nbsp<c:out value="${accountdetailsbalance.currentbalance}" /></td>
 						</tr>
 					</c:forEach>
 
