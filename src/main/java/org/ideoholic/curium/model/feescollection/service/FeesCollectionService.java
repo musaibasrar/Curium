@@ -31,6 +31,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.Accountdetails;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
@@ -292,7 +293,7 @@ public class FeesCollectionService {
 			
 			String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptInfo.getTotalamount()+" where accountdetailsid="+drAccount;
 
-			String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptInfo.getTotalamount()+" where accountdetailsid="+crFees;
+			String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+receiptInfo.getTotalamount()+" where accountdetailsid="+crFees;
 			
 			// End Receipt
 			
@@ -316,7 +317,7 @@ public class FeesCollectionService {
 			transactionsIncome.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			transactionsIncome.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			
-			String updateDrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptInfo.getTotalamount()+" where accountdetailsid="+drAccountIncome;
+			String updateDrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance-"+receiptInfo.getTotalamount()+" where accountdetailsid="+drAccountIncome;
 
 			String updateCrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptInfo.getTotalamount()+" where accountdetailsid="+crFeesIncome;
 			
@@ -414,7 +415,53 @@ public class FeesCollectionService {
 			
 			int receiptId = DataUtil.parseInt(request.getParameter("id"));
 			List<Feescollection> feesCollection = new feesCollectionDAO().getFeesCollectionDetails(receiptId);
-			boolean result = new feesDetailsDAO().cancelFeesReceipt(receiptId, feesCollection);
+			
+			
+			// Cancel Vouchers
+			
+			Date now = new Date();
+	        String pattern = "yyyy-MM-dd";
+	        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
+	        String todaysDate = formatter.format(now);
+	        
+			List<VoucherEntrytransactions> voucherEntryList = new ArrayList<VoucherEntrytransactions>();
+			String Query = "Towards Fees Payment:    Receipt no: "+receiptId;
+			voucherEntryList = new AccountDAO().getVoucherDetailsByRecieptNumber(Query);
+			String updateDrAccountVoucher1 = null;
+			String updateCrAccountVoucher1 = null;
+			String cancelVoucherVoucher1 = null;
+			String updateDrAccountVoucher4 = null;
+			String updateCrAccountVoucher4 = null;
+			String cancelVoucherVoucher4 = null;
+			
+			for (VoucherEntrytransactions voucherEntrytransactions : voucherEntryList) {
+				
+				if(voucherEntrytransactions.getVouchertype()==1) {
+					
+					//Pass Receipt : Credit the student Fees Receivable & debit the cash
+					
+					updateDrAccountVoucher1="update Accountdetailsbalance set currentbalance=currentbalance-"+voucherEntrytransactions.getDramount()+" where accountdetailsid="+voucherEntrytransactions.getDraccountid();
+					updateCrAccountVoucher1="update Accountdetailsbalance set currentbalance=currentbalance+"+voucherEntrytransactions.getCramount()+" where accountdetailsid="+voucherEntrytransactions.getCraccountid();
+
+					cancelVoucherVoucher1 = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+voucherEntrytransactions.getTransactionsid();
+					// End Receipt
+					
+				}else if(voucherEntrytransactions.getVouchertype()==4) {
+					
+					//Pass J.V. : Credit the student Fees as Income & debit the unearned revenue
+							
+						updateDrAccountVoucher4 = "update Accountdetailsbalance set currentbalance=currentbalance+"+voucherEntrytransactions.getDramount()+" where accountdetailsid="+voucherEntrytransactions.getDraccountid();
+						updateCrAccountVoucher4 = "update Accountdetailsbalance set currentbalance=currentbalance-"+voucherEntrytransactions.getCramount()+" where accountdetailsid="+voucherEntrytransactions.getCraccountid();
+						cancelVoucherVoucher4 = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+voucherEntrytransactions.getTransactionsid();
+						
+					// End J.V
+						
+				}
+			}
+			
+			//End Cancel Vouchers
+			
+			boolean result = new feesDetailsDAO().cancelFeesReceipt(receiptId, feesCollection, updateDrAccountVoucher1, updateCrAccountVoucher1, cancelVoucherVoucher1, updateDrAccountVoucher4, updateCrAccountVoucher4, cancelVoucherVoucher4);
 			
 			request.setAttribute("cancelreceiptresult", result);
 				

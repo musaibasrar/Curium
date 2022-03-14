@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/UserProcess")
@@ -65,6 +64,17 @@ public class UserAction {
 	public String authenticateUser(Model model) {
 		// ModelAndView model = new ModelAndView("/");
 		if (new UserService(request, response).authenticateUser()) {
+			model.addAttribute("login_success", true);
+		} else {
+			model.addAttribute("login_success", false);
+		}
+		return "login";
+	}
+	
+	@GetMapping("/multiUser")
+	public String authenticateMultiUser(Model model) {
+		// ModelAndView model = new ModelAndView("/");
+		if (new UserService(request, response).authenticateMultiUser()) {
 			model.addAttribute("login_success", true);
 		} else {
 			model.addAttribute("login_success", false);

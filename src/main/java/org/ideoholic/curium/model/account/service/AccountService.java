@@ -43,9 +43,8 @@ public class AccountService {
 	    private HttpServletResponse response;
 	    private HttpSession httpSession;
 	    private String BRANCHID = "branchid";
-	    
 	    private static final int BUFFER_SIZE = 4096;
-	
+	    
 	public AccountService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
         this.response = response;
@@ -159,7 +158,7 @@ public class AccountService {
 		String accountCode = DataUtil.emptyString(request.getParameter("accountcode"));
 		
 		
-		Accountdetails accountDetailsCheck = new AccountDAO().checkAccountDetails(accountName, accountCode);
+		Accountdetails accountDetailsCheck = new AccountDAO().checkAccountDetails(accountName, accountCode, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		if(accountDetailsCheck==null) {
 			
@@ -514,6 +513,69 @@ public class AccountService {
 	public boolean balanceSheet() {
 		
 		//Group 1
+		BigDecimal liabilities = BigDecimal.ZERO;
+		Map<String,BigDecimal> liabilitiesLedgerAccount = new HashMap<String, BigDecimal>();
+		
+		BigDecimal reserves = BigDecimal.ZERO;
+		Map<String,BigDecimal> reservesLedgerAccount = new HashMap<String, BigDecimal>();
+		
+		//Group 2
+		BigDecimal assets = BigDecimal.ZERO;
+		Map<String,BigDecimal> assetsLedgerAccount = new HashMap<String, BigDecimal>();
+		
+		
+		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
+		accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		
+		for (Accountdetailsbalance accountdetails : accountDetailsBalance) {
+			int groupId = accountdetails.getAccountDetails().getAccountGroupMaster().getAccountgroupid();
+
+			switch(groupId){
+			case 1: 
+					assets = assets.add(accountdetails.getCurrentbalance());
+					if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+						assetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					}
+					break;
+			case 2: 
+					liabilities = liabilities.add(accountdetails.getCurrentbalance());
+					if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+						liabilitiesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					}	
+					break;
+					
+			case 3:
+					reserves = reserves.add(accountdetails.getCurrentbalance());
+					if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+						reservesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+					}
+					break;
+
+			default:
+					
+			}
+		}
+		
+		//group 1
+		request.setAttribute("liabilities", liabilities);
+		request.setAttribute("liabilitiesLedgeraccount", liabilitiesLedgerAccount);
+		request.setAttribute("reserves", reserves);
+		request.setAttribute("reservesLedgeraccount", reservesLedgerAccount);
+			
+		//group 2
+		request.setAttribute("assets", assets);
+		request.setAttribute("assetsLedgeraccount", assetsLedgerAccount);
+
+		
+		request.setAttribute("grouponetotal", liabilities);
+		request.setAttribute("grouponetotalreserves", reserves);
+		request.setAttribute("grouptwototal", assets);
+		
+		
+		return true;
+		/*
+		 * 	//Group 1
 		BigDecimal capital = BigDecimal.ZERO;
 		Map<String,BigDecimal> capitalLedgerAccount = new HashMap<String, BigDecimal>();
 		
@@ -541,63 +603,53 @@ public class AccountService {
 		
 		BigDecimal miscellaneousExpenses = BigDecimal.ZERO;
 		Map<String,BigDecimal> miscellaneousExpensesLedgerAccount = new HashMap<String, BigDecimal>();
-		
-		
-		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-		accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		
-		for (Accountdetailsbalance accountdetails : accountDetailsBalance) {
-			int groupId = accountdetails.getAccountDetails().getAccountGroupMaster().getAccountgroupid();
-
-			switch(groupId){
-			case 1: 
-					capital = capital.add(accountdetails.getCurrentbalance());
-					capitalLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-			case 2: 
-					currentAssets = currentAssets.add(accountdetails.getCurrentbalance());
-					currentAssetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 3:
-					currentLiabilities = currentLiabilities.add(accountdetails.getCurrentbalance());
-					currentLiabilitiesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-			
-			case 6:
-					fixedAssets = fixedAssets.add(accountdetails.getCurrentbalance());
-					fixedAssetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 9:
-					investments = investments.add(accountdetails.getCurrentbalance());
-					investmentsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-				  	break;
-				  	
-			case 10:
-					loansAssets = loansAssets.add(accountdetails.getCurrentbalance());
-					loansAssetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 11:
-					loansLiabilities = loansLiabilities.add(accountdetails.getCurrentbalance());
-					loansLiabilitiesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 12:
-					miscellaneousExpenses = miscellaneousExpenses.add(accountdetails.getCurrentbalance());
-					miscellaneousExpensesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			case 13:
-					reserves = reserves.add(accountdetails.getCurrentbalance());
-					reservesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
-					break;
-					
-			default:
-					
-			}
-		}
+		 * for (Accountdetailsbalance accountdetails : accountDetailsBalance) { int
+		 * groupId =
+		 * accountdetails.getAccountDetails().getAccountGroupMaster().getAccountgroupid(
+		 * );
+		 * 
+		 * switch(groupId){ case 1: capital =
+		 * capital.add(accountdetails.getCurrentbalance());
+		 * capitalLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(),
+		 * accountdetails.getCurrentbalance()); break; case 2: currentAssets =
+		 * currentAssets.add(accountdetails.getCurrentbalance());
+		 * currentAssetsLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 3: currentLiabilities =
+		 * currentLiabilities.add(accountdetails.getCurrentbalance());
+		 * currentLiabilitiesLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 6: fixedAssets = fixedAssets.add(accountdetails.getCurrentbalance());
+		 * fixedAssetsLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 9: investments = investments.add(accountdetails.getCurrentbalance());
+		 * investmentsLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 10: loansAssets = loansAssets.add(accountdetails.getCurrentbalance());
+		 * loansAssetsLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 11: loansLiabilities =
+		 * loansLiabilities.add(accountdetails.getCurrentbalance());
+		 * loansLiabilitiesLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 12: miscellaneousExpenses =
+		 * miscellaneousExpenses.add(accountdetails.getCurrentbalance());
+		 * miscellaneousExpensesLedgerAccount.put(accountdetails.getAccountDetails().
+		 * getAccountname(), accountdetails.getCurrentbalance()); break;
+		 * 
+		 * case 13: reserves = reserves.add(accountdetails.getCurrentbalance());
+		 * reservesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname()
+		 * , accountdetails.getCurrentbalance()); break;
+		 * 
+		 * default:
+		 * 
+		 * } }
 		
 		//group 1
 		request.setAttribute("capital", capital);
@@ -643,8 +695,10 @@ public class AccountService {
 			request.setAttribute("differenceamount", diff.abs());
 			
 		}
+		 */
+		///////////////////////////////////////
 		
-		return true;
+		
 	}
 
 
@@ -700,8 +754,6 @@ public class AccountService {
 					
 					BigDecimal totalAmount = getTotalBalance(accountDetails,voucherTransactions);
 					
-					if(totalAmount.compareTo(BigDecimal.ZERO) != 0 ) {
-						
 					accountBalanceMap.put(accountDetails, totalAmount);
 						
 					if(accountDetails.getAccountGroupMaster().getAccountgroupid()==1 || accountDetails.getAccountGroupMaster().getAccountgroupid()==5) {
@@ -721,13 +773,11 @@ public class AccountService {
 						}
 					}
 				}
-					
-				}
-				httpSession.setAttribute("accountdetailsbalanceMap", accountBalanceMap);
-				httpSession.setAttribute("credittotal", creditAllAcc);
-				httpSession.setAttribute("debittotal", debitAllAcc);
-				httpSession.setAttribute("fromdatetb", fromDate = DataUtil.dateFromatConversionSlash(fromDate));
-				httpSession.setAttribute("todatetb", toDate = DataUtil.dateFromatConversionSlash(toDate));
+				request.setAttribute("accountdetailsbalanceMap", accountBalanceMap);
+				request.setAttribute("credittotal", creditAllAcc);
+				request.setAttribute("debittotal", debitAllAcc);
+				request.setAttribute("fromdatetb", fromDate = DataUtil.dateFromatConversionSlash(fromDate));
+				request.setAttribute("todatetb", toDate = DataUtil.dateFromatConversionSlash(toDate));
 				
 				totalBalanceAllAccDiff = creditAllAcc.subtract(debitAllAcc);
 				
@@ -892,8 +942,8 @@ public class AccountService {
 		        	
 		        	if(!accountSSGroupMaster.isEmpty()){
 		        		String buffer = "<select name='ssgroupname' style='width: 240px' id='ssgname' onchange='ssGroupSelect()'>";
-			        	for(int i =0; i<accountSSGroupMaster.size();i++){
-			        		buffer = buffer+"<option></option>";
+		        		buffer = buffer+"<option></option>";
+		        		for(int i =0; i<accountSSGroupMaster.size();i++){
 			        		buffer = buffer +  "<option value="+accountSSGroupMaster.get(i).getSsgroupmasterid()+">"+accountSSGroupMaster.get(i).getSsgroupname()+"</option>";
 			        	}
 			        	buffer = buffer+"<option value='New Sub-Group'>New Sub-Group</option></select>";
@@ -962,6 +1012,10 @@ public class AccountService {
 		
 		request.setAttribute("ledgertransactions", voucherMap);
 		request.setAttribute("ledgername", accountIdName[1]);
+		
+		request.setAttribute("accountid", accountDetails);
+		request.setAttribute("fromdate", fromDate);
+		request.setAttribute("todate", toDate);
 		
 		return true;
 		
@@ -1061,249 +1115,21 @@ public class AccountService {
 	}
 	
 	
-	public boolean printSearchJournalEntries() {
-
+public boolean printSearchJournalEntries() {
+		
 		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
 		String accountDetails = DataUtil.emptyString(request.getParameter("accountidselected"));
 		String[] accountIdName = accountDetails.split(":");
 		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
-		String fromDate = DateUtil
-				.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdateselected")));
-		String toDate = DateUtil
-				.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todateselected")));
-		if (httpSession.getAttribute(BRANCHID) != null) {
-
-			String twoAccounts = null;
-
-			Map<VoucherEntrytransactions, String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
-			int financialYearId = new AccountDAO()
-					.getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()))
-					.getFinancialid();
-			voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountId,
-					Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-
-			for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
-
-				if (voucherEntry.getDraccountid() != accountId) {
-					twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid()) + ":Dr";
-				} else if (voucherEntry.getCraccountid() != accountId) {
-					twoAccounts = new AccountDAO().getAccountName(voucherEntry.getCraccountid()) + ":Cr";
-				}
-				// twoAccounts = new
-				// AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new
-				// AccountDAO().getAccountName(voucherEntry.getCraccountid());
-				voucherMap.put(voucherEntry, twoAccounts);
-			}
-
-			request.setAttribute("ledgertransactions", voucherMap);
-			request.setAttribute("ledgername", accountIdName[1]);
-			request.setAttribute("fromdateselected", request.getParameter("fromdateselected"));
-			request.setAttribute("todateselected", request.getParameter("todateselected"));
-
-			return true;
-
-		}
-		return false;
-	}
-	
-	
-	public boolean exportTrialBalance() {
-
-		boolean writeSucees = false;
-		Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
-		
-		DecimalFormat df = new DecimalFormat("###.##");
-		
-		accountBalanceMap = (Map<Accountdetails, BigDecimal>) httpSession.getAttribute("accountdetailsbalanceMap");
-		String creditAllAcc = httpSession.getAttribute("credittotal").toString();
-		String debitAllAcc = httpSession.getAttribute("debittotal").toString();
-		String fromDate = (String) httpSession.getAttribute("fromdatetb");
-		String toDate = (String) httpSession.getAttribute("todatetb");
-		
-		try {
-
-			// Creating an excel file
-			XSSFWorkbook workbook = new XSSFWorkbook();
-			XSSFSheet sheet = workbook.createSheet("trialbalance");
-			Map<String, Object[]> data = new HashMap<String, Object[]>();
-			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
-			headerData.put("Header",
-					new Object[] { "Trial Balance"});
-			Map<String, Object[]> headerData1 = new HashMap<String, Object[]>();
-			headerData1.put("Header",
-					new Object[] { "From Date: "+fromDate+"  To Date: "+toDate+""});
-			Map<String, Object[]> headerData2 = new HashMap<String, Object[]>();
-			headerData2.put("Header",
-					new Object[] { "Particulars", "Debit","Credit"});
-			int i = 1;
-			
-			for (Entry<Accountdetails, BigDecimal> accBal : accountBalanceMap.entrySet()) {
-				
-				String dr = "";
-				String cr = "";
-				
-						
-				if(accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 1 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 5) {
-					
-					if(accBal.getValue().compareTo(BigDecimal.ONE)==0 || accBal.getValue().compareTo(BigDecimal.ONE)==1) {
-						dr = df.format(accBal.getValue());
-						
-					}else if(accBal.getValue().compareTo(BigDecimal.ONE)<1) {
-						cr = df.format(accBal.getValue().negate());
-					}
-				}else if(accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 2 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 3 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 4) {
-					
-					if(accBal.getValue().compareTo(BigDecimal.ONE)==0 || accBal.getValue().compareTo(BigDecimal.ONE)==1) {
-						cr = df.format(accBal.getValue());
-						
-					}else if(accBal.getValue().compareTo(BigDecimal.ONE)<1) {
-						dr = df.format(accBal.getValue().negate());
-					}
-				}
-				
-				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(accBal.getKey().getAccountname()),  dr ,
-								 cr });
-				i++;
-			}
-			
-			Row headerRow = sheet.createRow(0);
-			Object[] objArrHeader = headerData.get("Header");
-			int cellnum1 = 1;
-			for (Object obj : objArrHeader) {
-				Cell cell = headerRow.createCell(cellnum1++);
-				if (obj instanceof String)
-					cell.setCellValue((String) obj);
-			}
-			
-			Row headerRow1 = sheet.createRow(1);
-			Object[] objArrHeader1 = headerData1.get("Header");
-			int cellnum11 = 1;
-			for (Object obj : objArrHeader1) {
-				Cell cell = headerRow1.createCell(cellnum11++);
-				if (obj instanceof String)
-					cell.setCellValue((String) obj);
-			}
-			
-			Row headerRow2 = sheet.createRow(2);
-			Object[] objArrHeader2 = headerData2.get("Header");
-			int cellnum12 = 0;
-			for (Object obj : objArrHeader2) {
-				Cell cell = headerRow2.createCell(cellnum12++);
-				if (obj instanceof String)
-					cell.setCellValue((String) obj);
-			}
-			
-			Set<String> keyset = data.keySet();
-			int rownum = 3;
-			for (String key : keyset) {
-				Row row = sheet.createRow(rownum++);
-				Object[] objArr = data.get(key);
-				int cellnum = 0;
-				for (Object obj : objArr) {
-					Cell cell = row.createCell(cellnum++);
-					if (obj instanceof Date)
-						cell.setCellValue((Date) obj);
-					else if (obj instanceof Boolean)
-						cell.setCellValue((Boolean) obj);
-					else if (obj instanceof String)
-						cell.setCellValue((String) obj);
-					else if (obj instanceof Double)
-						cell.setCellValue((Double) obj);
-				}
-			}
-			
-			rownum++;
-			
-			data.clear();
-			data.put(Integer.toString(1),
-					new Object[] { "Total",  debitAllAcc ,
-							creditAllAcc });
-			
-			Set<String> keyset2 = data.keySet();
-			for (String key : keyset2) {
-				Row row = sheet.createRow(rownum++);
-				Object[] objArr = data.get(key);
-				int cellnum = 0;
-				for (Object obj : objArr) {
-					Cell cell = row.createCell(cellnum++);
-					if (obj instanceof Date)
-						cell.setCellValue((Date) obj);
-					else if (obj instanceof Boolean)
-						cell.setCellValue((Boolean) obj);
-					else if (obj instanceof String)
-						cell.setCellValue((String) obj);
-					else if (obj instanceof Double)
-						cell.setCellValue((Double) obj);
-				}
-			}
-			
-				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/trialbalance.xlsx"));
-				workbook.write(out);
-				out.close();
-				workbook.close();
-				writeSucees = true;
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return writeSucees;
-		// getFile(name, path);
-	}
-
-
-	public boolean downloadTrialBalance() {
-		boolean result = false;
-		try {
-
-			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/trialbalance.xlsx");
-	        FileInputStream inStream = new FileInputStream(downloadFile);
-
-	        // get MIME type of the file
-			String mimeType = "application/vnd.ms-excel";
-
-			// set content attributes for the response
-			response.setContentType(mimeType);
-			// response.setContentLength((int) bis.length());
-
-			// set headers for the response
-			String headerKey = "Content-Disposition";
-			String headerValue = String.format("attachment; filename=\"%s\"",
-					"trialbalance.xlsx");
-			response.setHeader(headerKey, headerValue);
-
-			// get output stream of the response
-			OutputStream outStream = response.getOutputStream();
-
-			byte[] buffer = new byte[BUFFER_SIZE];
-			int bytesRead = -1;
-
-			// write bytes read from the input stream into the output stream
-			while ((bytesRead = inStream.read(buffer)) != -1) {
-				outStream.write(buffer, 0, bytesRead);
-			}
-
-			inStream.close();
-			outStream.close();
-			result = true;
-		} catch (Exception e) {
-			System.out.println(""+e);
-		}
-		return result;
-	}
-	
-public boolean searchSingleLedgerEntries() {
-		
-		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
-		int accountId = DataUtil.parseInt(request.getParameter("accountid"));
+		String fromDate = DataUtil.emptyString(request.getParameter("fromdateselected"));
+		String toDate = DataUtil.emptyString(request.getParameter("todateselected"));
 		if(httpSession.getAttribute(BRANCHID)!=null) {
 
 		String twoAccounts = null;
 		
 		Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
-		Financialaccountingyear finYear = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-		int financialYearId = finYear.getFinancialid();
-		voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(DateUtil.dateParseryyyymmdd(finYear.getFinancialstartdate()), DateUtil.dateParseryyyymmdd(finYear.getFinancialenddate()), accountId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		//int financialYearId = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid();
+		voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
 			
@@ -1317,15 +1143,236 @@ public boolean searchSingleLedgerEntries() {
 		}
 		
 		request.setAttribute("ledgertransactions", voucherMap);
-		request.setAttribute("ledgername", DataUtil.emptyString(request.getParameter("ledgername")));
-		
-		request.setAttribute("accountid", accountId);
-		request.setAttribute("fromdate", DateUtil.dateParserddMMYYYY(finYear.getFinancialstartdate()));
-		request.setAttribute("todate", DateUtil.dateParserddMMYYYY(finYear.getFinancialenddate()));
+		request.setAttribute("ledgername", accountIdName[1]);
+		request.setAttribute("fromdateselected", request.getParameter("fromdateselected"));
+		request.setAttribute("todateselected", request.getParameter("todateselected"));
 		
 		return true;
-	
+		
 		}
 		return false;
 	}
+
+
+			public boolean exportTrialBalance() {
+			
+				boolean writeSucees = false;
+				Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
+				
+				DecimalFormat df = new DecimalFormat("###.##");
+				
+				accountBalanceMap = (Map<Accountdetails, BigDecimal>) httpSession.getAttribute("accountdetailsbalanceMap");
+				String creditAllAcc = httpSession.getAttribute("credittotal").toString();
+				String debitAllAcc = httpSession.getAttribute("debittotal").toString();
+				String fromDate = (String) httpSession.getAttribute("fromdatetb");
+				String toDate = (String) httpSession.getAttribute("todatetb");
+				
+				try {
+			
+					// Creating an excel file
+					XSSFWorkbook workbook = new XSSFWorkbook();
+					XSSFSheet sheet = workbook.createSheet("trialbalance");
+					Map<String, Object[]> data = new HashMap<String, Object[]>();
+					Map<String, Object[]> headerData = new HashMap<String, Object[]>();
+					headerData.put("Header",
+							new Object[] { "Trial Balance"});
+					Map<String, Object[]> headerData1 = new HashMap<String, Object[]>();
+					headerData1.put("Header",
+							new Object[] { "From Date: "+fromDate+"  To Date: "+toDate+""});
+					Map<String, Object[]> headerData2 = new HashMap<String, Object[]>();
+					headerData2.put("Header",
+							new Object[] { "Particulars", "Debit","Credit"});
+					int i = 1;
+					
+					for (Entry<Accountdetails, BigDecimal> accBal : accountBalanceMap.entrySet()) {
+						
+						String dr = "";
+						String cr = "";
+						
+								
+						if(accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 1 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 5) {
+							
+							if(accBal.getValue().compareTo(BigDecimal.ONE)==0 || accBal.getValue().compareTo(BigDecimal.ONE)==1) {
+								dr = df.format(accBal.getValue());
+								
+							}else if(accBal.getValue().compareTo(BigDecimal.ONE)<1) {
+								cr = df.format(accBal.getValue().negate());
+							}
+						}else if(accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 2 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 3 || accBal.getKey().getAccountGroupMaster().getAccountgroupid() == 4) {
+							
+							if(accBal.getValue().compareTo(BigDecimal.ONE)==0 || accBal.getValue().compareTo(BigDecimal.ONE)==1) {
+								cr = df.format(accBal.getValue());
+								
+							}else if(accBal.getValue().compareTo(BigDecimal.ONE)<1) {
+								dr = df.format(accBal.getValue().negate());
+							}
+						}
+						
+						data.put(Integer.toString(i),
+								new Object[] { DataUtil.emptyString(accBal.getKey().getAccountname()),  dr ,
+										 cr });
+						i++;
+					}
+					
+					Row headerRow = sheet.createRow(0);
+					Object[] objArrHeader = headerData.get("Header");
+					int cellnum1 = 1;
+					for (Object obj : objArrHeader) {
+						Cell cell = headerRow.createCell(cellnum1++);
+						if (obj instanceof String)
+							cell.setCellValue((String) obj);
+					}
+					
+					Row headerRow1 = sheet.createRow(1);
+					Object[] objArrHeader1 = headerData1.get("Header");
+					int cellnum11 = 1;
+					for (Object obj : objArrHeader1) {
+						Cell cell = headerRow1.createCell(cellnum11++);
+						if (obj instanceof String)
+							cell.setCellValue((String) obj);
+					}
+					
+					Row headerRow2 = sheet.createRow(2);
+					Object[] objArrHeader2 = headerData2.get("Header");
+					int cellnum12 = 0;
+					for (Object obj : objArrHeader2) {
+						Cell cell = headerRow2.createCell(cellnum12++);
+						if (obj instanceof String)
+							cell.setCellValue((String) obj);
+					}
+					
+					Set<String> keyset = data.keySet();
+					int rownum = 3;
+					for (String key : keyset) {
+						Row row = sheet.createRow(rownum++);
+						Object[] objArr = data.get(key);
+						int cellnum = 0;
+						for (Object obj : objArr) {
+							Cell cell = row.createCell(cellnum++);
+							if (obj instanceof Date)
+								cell.setCellValue((Date) obj);
+							else if (obj instanceof Boolean)
+								cell.setCellValue((Boolean) obj);
+							else if (obj instanceof String)
+								cell.setCellValue((String) obj);
+							else if (obj instanceof Double)
+								cell.setCellValue((Double) obj);
+						}
+					}
+					
+					rownum++;
+					
+					data.clear();
+					data.put(Integer.toString(1),
+							new Object[] { "Total",  debitAllAcc ,
+									creditAllAcc });
+					
+					Set<String> keyset2 = data.keySet();
+					for (String key : keyset2) {
+						Row row = sheet.createRow(rownum++);
+						Object[] objArr = data.get(key);
+						int cellnum = 0;
+						for (Object obj : objArr) {
+							Cell cell = row.createCell(cellnum++);
+							if (obj instanceof Date)
+								cell.setCellValue((Date) obj);
+							else if (obj instanceof Boolean)
+								cell.setCellValue((Boolean) obj);
+							else if (obj instanceof String)
+								cell.setCellValue((String) obj);
+							else if (obj instanceof Double)
+								cell.setCellValue((Double) obj);
+						}
+					}
+					
+						FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/trialbalance.xlsx"));
+						workbook.write(out);
+						out.close();
+						workbook.close();
+						writeSucees = true;
+						
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return writeSucees;
+				// getFile(name, path);
+			}
+
+
+		public boolean downloadTrialBalance() {
+			boolean result = false;
+			try {
+		
+				File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/trialbalance.xlsx");
+		        FileInputStream inStream = new FileInputStream(downloadFile);
+		
+		        // get MIME type of the file
+				String mimeType = "application/vnd.ms-excel";
+		
+				// set content attributes for the response
+				response.setContentType(mimeType);
+				// response.setContentLength((int) bis.length());
+		
+				// set headers for the response
+				String headerKey = "Content-Disposition";
+				String headerValue = String.format("attachment; filename=\"%s\"",
+						"trialbalance.xlsx");
+				response.setHeader(headerKey, headerValue);
+		
+				// get output stream of the response
+				OutputStream outStream = response.getOutputStream();
+		
+				byte[] buffer = new byte[BUFFER_SIZE];
+				int bytesRead = -1;
+		
+				// write bytes read from the input stream into the output stream
+				while ((bytesRead = inStream.read(buffer)) != -1) {
+					outStream.write(buffer, 0, bytesRead);
+				}
+		
+				inStream.close();
+				outStream.close();
+				result = true;
+			} catch (Exception e) {
+				System.out.println(""+e);
+			}
+			return result;
+		}
+		
+		public boolean searchSingleLedgerEntries() {
+			
+			List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+			int accountId = DataUtil.parseInt(request.getParameter("accountid"));
+			if(httpSession.getAttribute(BRANCHID)!=null) {
+
+			String twoAccounts = null;
+			
+			Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
+			Financialaccountingyear finYear = new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			int financialYearId = finYear.getFinancialid();
+			voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(DateUtil.dateParseryyyymmdd(finYear.getFinancialstartdate()), DateUtil.dateParseryyyymmdd(finYear.getFinancialenddate()), accountId, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			
+			for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
+				
+				if(voucherEntry.getDraccountid() != accountId) {
+					twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+":Dr";
+				}else if(voucherEntry.getCraccountid() != accountId) {
+					twoAccounts = new AccountDAO().getAccountName(voucherEntry.getCraccountid())+":Cr";
+				}
+				//twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
+				voucherMap.put(voucherEntry, twoAccounts);
+			}
+			
+			request.setAttribute("ledgertransactions", voucherMap);
+			request.setAttribute("ledgername", DataUtil.emptyString(request.getParameter("ledgername")));
+			
+			request.setAttribute("accountid", accountId);
+			request.setAttribute("fromdate", DateUtil.dateParserddMMYYYY(finYear.getFinancialstartdate()));
+			request.setAttribute("todate", DateUtil.dateParserddMMYYYY(finYear.getFinancialenddate()));
+			
+			return true;
+		
+			}
+			return false;
+		}
 }

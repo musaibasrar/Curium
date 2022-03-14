@@ -9,32 +9,111 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-    <head>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Curium - School ERP</title>
-        <script type="text/javascript" src="/curium/js/openWindow.js"></script>
-        <style type="text/css">
-            <!--
-            .style6 {font-size: 12}
-            .style8 {font-family: Tahoma; font-size: 12; color: #333333; }
-            .status {font-family: Tahoma; font-size: 12px; color: red;  display: none}
-            .style48 {font-family: Arial, Helvetica, sans-serif}
-            -->
-        </style>
 
-
-        <script type="text/javascript">
+	<head>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	 <title>Curium - School ERP</title>
+	<link rel="stylesheet" href="/rauzamission/css/bootstrap3.min.css">
+	<script type="text/javascript" src="/rauzamission/js/openWindow.js"></script>
+	
+	<style type="text/css">
+	
+	.main-content{
+	width: 50%;
+	border-radius: 20px;
+	box-shadow: 0 5px 5px rgba(0,0,0,.4);
+	margin: 5em auto;
+	display: flex;
+		}
+	.company__info{
+		background-color: #1786b4;
+		border-top-left-radius: 20px;
+		border-bottom-left-radius: 20px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		color: #fff;
+	}
+	.fa-android{
+		font-size:3em;
+	}
+@media screen and (max-width: 640px) {
+	.main-content{width: 90%;}
+	.company__info{
+		display: none;
+	}
+	.login_form{
+		border-top-left-radius:20px;
+		border-bottom-left-radius:20px;
+	}
+}
+@media screen and (min-width: 642px) and (max-width:800px){
+	.main-content{width: 70%;}
+}
+.row > h2{
+	color:#1786b4;
+}
+.row > h3{
+	color:#1786b4;
+}
+.login_form{
+	background-color: #fff;
+	border-top-right-radius:20px;
+	border-bottom-right-radius:20px;
+	border-top:1px solid #ccc;
+	border-right:1px solid #ccc;
+}
+form{
+	padding: 0 2em;
+}
+.form__input{
+	width: 70%;
+	border:0px solid transparent;
+	border-radius: 0;
+	border-bottom: 1px solid #aaa;
+	padding: 1em .5em .5em;
+	padding-left: 2em;
+	outline:none;
+	margin:1.5em auto;
+	transition: all .5s ease;
+}
+.form__input:focus{
+	border-bottom-color: #1786b4;
+	box-shadow: 0 0 5px rgba(0,80,80,.4); 
+	border-radius: 4px;
+}
+.btn{
+	transition: all .5s ease;
+	width: 70%;
+	border-radius: 30px;
+	color:#1786b4;
+	font-weight: 600;
+	background-color: #fff;
+	border: 1px solid #1786b4;
+	margin-top: 1.5em;
+	margin-bottom: 1em;
+}
+.btn:hover, .btn:focus{
+	background-color: #1786b4;
+	color:#fff;
+}
+	
+	</style>
+	
+ <script type="text/javascript">
             
 
             function redirect(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="/curium/UserProcess/authenticate";
+                form1.action="/rauzamission/UserProcess/authenticate";
                 form1.submit();
             }
         </script>
-    </head>
+        
+</head>
       
     <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
         <script type="text/javascript">
@@ -44,48 +123,70 @@
             if(flag1){
             	
             	if(type=='superadmin'){
-                    window.open('/curium/index_superadmin','_self');
+                    window.open('/index_superadmin','_self');
                 }else if(type=='admin'){
-                    window.open('/curium/index_admin','_self');
+                    window.open('/rauzamission/index_admin','_self');
                 }else if(type=='feescollector'){
-                    window.open('/curium/index_feescollector','_self');
+                    window.open('/index_feescollector','_self');
                 }else if(type=='reception'){                    
                    window.open('','_self');
                     window.close();
-                    openIndexPage('/curium/index_reception',screen.width,screen.height);
+                    openIndexPage('/index_reception',screen.width,screen.height);
                 }
                 else if(type=='staff'){
-                	window.open('/curium/index','_self');
+                	window.open('/index','_self');
                 }
             }
             else if(!flag1){
-            	window.open('/curium/loginFail','_self');
+            	window.open('/rauzamission/loginFail','_self');
             }
         </script>
-        <form action="/curium/UserProcess/authenticateUser" method="post" id="form1">
-                    	
-                                    <table align="center">
-                                    	<tr>
-                                    	<td>
-                                    	<br><br><br>
-                                    	</td>
-                                    	</tr>
-                                    	<tr>
-                                    	<td> <img alt="" src="/curium/images/curiumlogin.jpg" style="width:300px;height: 300px"></td>
-                                    	<td></td><td></td><td></td>
-                                    	 <td>
-                                    	 <p align="left" style="color: red;">Please enter correct username and password</p>
-                                            <img src="/curium/images/username.png" height="30" name="login" style="vertical-align: bottom;"/>
-                                                    <input name="loginName" type="text"  placeholder="UserName" >
-                                                <br><br><br>
-                                                <img type="image" src="/curium/images/lock.png" height="28" name="login" style="vertical-align: bottom;"/>
-                                                <input name="password" type="password" placeholder="Password">
-                                                <br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <input type="image" src="/curium/images/loginbutton.png" name="login" border="0" />
-                                                </td>
-                                    	</tr>
-                                    </table>
-                                    
-        </form>
+                    	<!-- Main Content -->
+	<div class="container-fluid">
+		<div class="row main-content bg-success text-center">
+			<div class="col-md-4 text-center company__info">
+			<span class="company__logo">							
+			<h2><img border="0" style="vertical-align: text-bottom;height: 136px;width: 120px;" alt="ideoholic" src="/rauzamission/images/logo.png"></h2>
+			</span>
+			<!-- <h2 style="font-weight: bold;">Flora<img border="0" style="vertical-align: text-bottom;height: 120px;width: 200px;" alt="ideoholic" src="/rauzamission/images/shaheenwhitelogo.png"></h2><h3> Public School</h3></span></span> -->
+				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
+			</div>
+			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+				<div class="container-fluid">
+					<div class="row">
+						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/rauzamission/images/shaheenlogo.png"></h2></span> -->
+						<h3>Log In</h3>
+						<p align="center" style="color: red;font-size: 10px;">Please enter correct username and password</p>
+					</div>
+					<div class="row">
+						<form action="/rauzamission/UserProcess/authenticateUser"  method="post" class="form-group">
+							<div class="row">
+								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="Username">
+							</div>
+							<div class="row">
+								<!-- <span class="fa fa-lock"></span> -->
+								<input type="password" name="password" id="password" class="form__input" placeholder="Password">
+							</div>
+							
+							<div class="row">
+								<input type="submit" value="Login" class="btn">
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<div class="container-fluid text-center footer">
+		<p>
+			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/rauzamission/images/ideoholic.png"> image with a default alignment.</p> --> 
+			
+			<a href="http://www.ideoholic.com" >
+				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/rauzamission/images/ideoholic.png">
+			</a>
+			
+	</div>
     </body>
 </html>

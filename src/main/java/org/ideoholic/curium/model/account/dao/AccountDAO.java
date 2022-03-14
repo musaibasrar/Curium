@@ -2,13 +2,11 @@ package org.ideoholic.curium.model.account.dao;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
-
 import org.ideoholic.curium.model.account.dto.Accountdetails;
 import org.ideoholic.curium.model.account.dto.Accountdetailsbalance;
 import org.ideoholic.curium.model.account.dto.Accountgroupmaster;
@@ -491,11 +489,11 @@ public class AccountDAO {
 		return accountDetails;
 	}
 
-	public Accountdetails checkAccountDetails(String accountName, String accountCode) {
+	public Accountdetails checkAccountDetails(String accountName, String accountCode, int branchId) {
 		Accountdetails accountDetails = new Accountdetails();
 		try {
 			transaction = session.beginTransaction();
-			Query query =  session.createQuery("from Accountdetails where accountname = '"+accountName+"' or accountcode='"+accountCode+"'");
+			Query query =  session.createQuery("from Accountdetails where (accountname = '"+accountName+"' or accountcode='"+accountCode+"') and branchid="+branchId+"");
 			accountDetails = (Accountdetails) query.uniqueResult(); 
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
@@ -588,6 +586,23 @@ public class AccountDAO {
 		try {
 			transaction = session.beginTransaction();
 			Query query = session.createQuery("from VoucherEntrytransactions where narration like '%"+supplierreferenceno+"%'");
+			voucherTransactions = query.list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return voucherTransactions;
+	}
+
+	public List<VoucherEntrytransactions> getVoucherDetailsByRecieptNumber(String queryReceiptNumber) {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
+		
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from VoucherEntrytransactions where narration = '"+queryReceiptNumber+"'");
 			voucherTransactions = query.list();
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
