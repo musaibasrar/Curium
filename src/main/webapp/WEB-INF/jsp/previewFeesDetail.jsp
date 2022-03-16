@@ -177,7 +177,7 @@ for(Cookie cookie : cookies){
                 <tbody>
                     <tr>
                         <td style="width: 35%">Student Name: <c:out value="${student.name}" /></td>
-                        <td style="width: 20%">Admission No:  <c:out value="${student.admissionnumber}" /></td>
+                        <td style="width: 20%">Admission No:  <c:out value="${student.studentexternalid}" /></td>
                         <td style="width: 20%">Date:  <c:out value="${recieptdate}" /></td>
                         <td style="width: 20%">Receipt No:  <c:out value="${recieptinfo.branchreceiptnumber}" /></td>
 
@@ -218,7 +218,7 @@ for(Cookie cookie : cookies){
                     <%-- <c:forEach end="1" items="${dispense.dispensedmedicinebills}" var="dispensedmedicinebill"> --%>
                         <tr>
 
-                            <td colspan="3" align="right">Total Amount</td>
+                            <td align="right">Total Amount</td>
                             <td align="center"><c:out value="${recieptinfo.totalamount}" /></td>
                         </tr>
                         
