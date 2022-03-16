@@ -63,7 +63,7 @@ public class Periodmaster implements java.io.Serializable {
 	@Column(name = "userid")
 	private int userid;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Periodmaster")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "periodmasterid")
 	private Set<Perioddetails> periodDetails = new HashSet<Perioddetails>(0);
 
 }
