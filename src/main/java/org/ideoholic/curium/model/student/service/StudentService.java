@@ -1556,7 +1556,7 @@ public class StudentService {
 								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
 								 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
-								 DataUtil.emptyString(studentDetails.getStudent().getAdmissiondate().toString()),
+								 DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getAdmissiondate()),
 								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
 								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
 								 DataUtil.emptyString(studentDetails.getMothersname()) });
