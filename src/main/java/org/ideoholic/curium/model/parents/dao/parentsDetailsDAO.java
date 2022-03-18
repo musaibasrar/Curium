@@ -102,25 +102,38 @@ public class parentsDetailsDAO {
 
 		@SuppressWarnings("finally")
 	public boolean createMultiple(List<Parents> parents) {
-		
+			
+			Student student = new Student();
 			boolean result = false;
-		 try {
-	            //this.session = sessionFactory.openCurrentSession();
-	            transaction = session.beginTransaction();
-	            
-	            for (Parents parent : parents) {
-	            	session.save(parent);	
-				}
-
-	            transaction.commit();
-	           result = true;
-	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-	            
-	            hibernateException.printStackTrace();
-	        } finally {
-	    			HibernateUtil.closeSession();
-	            return result;
-	        }
-	}
+			
+			 try {
+		            //this.session = sessionFactory.openCurrentSession();
+		            transaction = session.beginTransaction();
+		          
+		            for (Parents parent : parents) {
+		            	
+		            	 Query query = session.createQuery("from Student as student order by id desc");
+				            query.setMaxResults(1);
+				            student = (Student) query.uniqueResult();
+				            
+		            	if(student!=null) {
+			            	parent.getStudent().setStudentexternalid(parent.getStudent().getStudentexternalid()+String.format("%04d", student.getSid()+1));
+			            }else {
+			            	parent.getStudent().setStudentexternalid(parent.getStudent().getStudentexternalid()+String.format("%04d", 1));
+			            }
+			            
+		            	session.save(parent);	
+					}
+		            
+		            transaction.commit();
+		           result = true;
+		        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		            
+		            hibernateException.printStackTrace();
+		        } finally {
+		    			HibernateUtil.closeSession();
+		    			return result;
+		        }
+		}
 
 }
