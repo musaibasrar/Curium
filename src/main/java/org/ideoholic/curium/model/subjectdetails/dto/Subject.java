@@ -34,6 +34,7 @@ public class Subject implements java.io.Serializable {
 	@Column(name = "subjectname", length = 45)
 	private String subjectname;
 
+	@Column(name = "subjectid")
 	private Integer subjectid;
 
 	@Column(name = "minmarks")
