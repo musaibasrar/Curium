@@ -284,5 +284,9 @@ public class JspController {
 	@GetMapping("/importfile")
 	public String getImportfile() {
 		return "importfile";
+		
+	@GetMapping("/adminexpensesreport")
+	public String getAdminExpensesReport() {
+		return "adminexpensesreport";
 	}
 }
