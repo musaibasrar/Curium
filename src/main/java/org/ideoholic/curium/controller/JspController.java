@@ -280,4 +280,9 @@ public class JspController {
 	public String getPrintgeneralledgerreport() {
 		return "printgeneralledgerreport";
 	}
+	
+	@GetMapping("/adminexpensesreport")
+	public String getAdminExpensesReport() {
+		return "adminexpensesreport";
+	}
 }

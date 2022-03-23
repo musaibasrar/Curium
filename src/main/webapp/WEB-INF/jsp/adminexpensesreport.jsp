@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Admin Expense</title>
+<title>Admin Expense Report</title>
 <link rel="stylesheet" href="/kwrs/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/kwrs/css/datePicker/demos.css">
 <style type="text/css">
@@ -276,7 +276,7 @@
 }
 .alignLeft {
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 14px;
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
@@ -304,15 +304,11 @@
 	text-transform: capitalize;
 }
 
-.alignRight {
-	font-family: Tahoma;
-	font-size: 14px;
-	font-style: normal;
-	text-transform: capitalize;
-	color: #325F6D;
-	text-align: right;
-	vertical-align: middle;
-	font-weight: bold;
+.dropdownlist{
+	width: 220px;
+	height:27px;
+	border-radius: 5px;
+	background-color: white;
 }
 
 </style>
@@ -395,17 +391,6 @@
 		return month + "/" + day + "/" + year;
 
 	}
-	
-    function getChequeDetails() {
-        var distlistitem = document.getElementById("paymenttype");
-        var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
-
-        if (distlistitemtext == "Cheque") {
-            document.getElementById("chequediv").style.display = '';
-        }else {
-        	document.getElementById("chequediv").style.display = "none";
-        }
-    }
 </script>
 <script type="text/javascript">
 	$(function() {
@@ -423,24 +408,26 @@
 			return false;
 		});
 	});
+	
 	$(function() {
-		$("#entrydate").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			yearRange: "-50:+0"
-		});
-		$("#anim").change(function() {
-			$("#entrydate").datepicker("option", "showAnim", $(this).val());
-		});
-		
-		$("#chequedate").datepicker({
+		$("#datepickerfromdate").datepicker({
 			changeYear : true,
 			changeMonth : true,
 			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
 		$("#anim").change(function() {
-			$("#chequedate").datepicker("option", "showAnim", $(this).val());
+			$("#datepickerfromdate").datepicker("option", "showAnim", $(this).val());
+		});
+		
+		$("#datepickertodate").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(function() {
+			$("#datepickertodate").datepicker("option", "showAnim", $(this).val());
 		});
 	});
 </script>
@@ -483,6 +470,15 @@
 		form1.submit();
 	}
 	
+	
+	function searchRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action="/kwrs/AdminProcess/viewExpensesBetweenDates";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
+	
 	$(function() {
 
 		$("#tabs").tabs();
@@ -492,29 +488,7 @@
 		$("#effect").hide();
 
 	});
-	function calculatestock() {
 
-		var tablet = document.getElementById('tablet').value;
-		var strip = document.getElementById('strip').value;
-
-		var stock = Number(tablet) * Number(strip);
-
-		document.getElementById('stockQuantity').value = stock;
-
-	}
-	
-
-    function numberWithCommas(annualincome) {
-    	var x=annualincome.value;
-    	x = x.replace (/,/g, "");
-    	
-    	var lastThree = x.substring(x.length-3);
-    	var otherNumbers = x.substring(0,x.length-3);
-    	if(otherNumbers != '')
-    	    lastThree = ',' + lastThree;
-    	var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
-    	annualincome.value = res;
-    }
     
 	 $(function(){
          $("#delete").button({
@@ -543,6 +517,16 @@
              }
          }).click(function(){
              approveRecords();
+             return false;
+
+         });
+         
+         $("#search").button({
+             icons:{
+                 primary: "ui-icon-search"
+             }
+         }).click(function(){
+             searchRecords();
              return false;
 
          });
@@ -620,7 +604,7 @@ for(Cookie cookie : cookies){
 					"MM/dd/yyyy");
 		%>
 		<div style="height: 28px">
-			<button id="add">Add Expenses</button>
+			<button id="add">Search Expenses</button>
 			<br />
 		</div>
 
@@ -630,125 +614,64 @@ for(Cookie cookie : cookies){
 					<li><a href="#tabs-1">Details</a></li>
 
 				</ul>
-				<div id="tabs-1">
-					<table width="50%" border="0"  cellpadding="0"
-						cellspacing="0" id="table1" style="float: left;">
-						<tr>
-							<td><br><br></td>
-						</tr>
-						<tr>
-							<td  class="alignRight">Amount (Rs.) &nbsp;</td>
-							<td ><label> <input id="price"
-									name="price" type="text" class="textField" 
-									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
-									required size="26" onkeyup="numberWithCommas(this);">
-							</label></td>
-							
-						</tr>
+				<div id="tabs-2">
+					<table style="margin-left: auto;margin-right: auto;" id="table1">
+						
+						
 						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignRight">Party Name &nbsp;</td>
-							<td ><label> <input id="paidto"
-									name="paidto" type="text" class="textField" 
-									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
-									required size="26">
-
+							<td class="alignLeft">From Date:  &nbsp;&nbsp;</td>
+							<td ><label> <input name="fromdate"
+									type="text" class="textField" id="datepickerfromdate" size="20"
+									style="text-transform:uppercase;height: 30px;font-size: 16px;font-weight: bold;border-radius: 5px"
+									data-validate="validate(required)">
+							</label></td>
+							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date:</td>
+							<td ><label> <input name="todate"
+									type="text" class="textField" id="datepickertodate" size="20"
+									style="text-transform:uppercase;height: 30px;font-size: 16px;font-weight: bold;border-radius: 5px"
+									data-validate="validate(required)">
 							</label></td>
 						</tr>
+						
 						<tr>
-							<td><br /></td>
+						<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<td class="alignRight">Being &nbsp;</td>
-							<td ><label> <input id="item"
-									name="item" type="text" class="textField" 
-									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
-									required size="26">
-							</label></td>
+						<td>&nbsp;</td>
 						</tr>
+						
 						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignRight">Payment Type &nbsp;</td>
-							<td ><label> <select name="paymenttype" onchange="getChequeDetails()"
-									id="paymenttype" style="width: 256px;height: 30px;border-radius: 5px;font-size: 16px;background-color: white">
-										<option selected>Cash</option>
-										<option>Cheque</option>
+							<td class="alignLeft">Voucher Status: &nbsp;&nbsp;</td>
+							<td ><label>
+									<select name="voucherstatus"
+									id="voucherstatus" class="dropdownlist" style="font-size: 14px;" >
+										<option value="pending">Pending</option>
+										<option value="approved">Approved</option>
+										<option value="cancelled">Cancelled</option>
 								</select>
+							
+							</label></td>
+						
+							<td class="alignLeft">&nbsp;&nbsp; &nbsp;&nbsp;Payment Type: </td>
+							<td ><label>
+									<select name="paymenttype" id="paymenttype" class="dropdownlist" style="font-size: 14px;">
+											<option value="cash">Cash</option>
+										<option value="cheque">Cheque</option>
+								</select>
+							
 							</label></td>
 							
 						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-						<td class="alignRight">Date&nbsp;</td>
-							<td><label> <input name="entrydate"
-									style="text-transform:uppercase;height: 30px;font-size: 16px;font-weight: bold;border-radius: 5px"
-									type="text" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
-									class="textField" id="entrydate" size="24"
-									data-validate="validate(required)">
-							</label></td>
-							
-							</tr>
-							
-							
-							<tr>
-							<td><br /></td>
-						</tr>
+						
 					</table>
-					<div id="chequediv" style="display: none;">
-					<table width="50%" border="0"  cellpadding="0"
-						cellspacing="0" id="table1" style="float: left;">
-						<tr>
-							<td><br><br></td>
-						</tr>
-						<tr>
-							<td  class="alignRight">Cheque # &nbsp;</td>
-							<td ><label> <input id="chequeno"
-									name="chequeno" type="text" class="textField" 
-									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
-									required size="26">
-
-							</label></td>
-							
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignRight">Cheque Date&nbsp;</td>
-							<td><label> <input name="chequedate"
-									style="text-transform:uppercase;height: 30px;font-size: 16px;font-weight: bold;border-radius: 5px"
-									type="text" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
-									class="textField" id="chequedate" size="24"
-									data-validate="validate(required)">
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignRight">Bank Name &nbsp;</td>
-							<td ><label> <input id="bankname"
-									name="bankname" type="text" class="textField" 
-									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
-									required size="26">
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-					</table>
-					</div>
 					<table id="table2" width="100%" border="0" align="center">
 						<tr>
 							<td align="center">
-								<button id="save">Save</button>
+								<br>
+								<button onmouseover="checkFieldsButton();" id="search">Search</button>
 							</td>
 						</tr>
 					</table>
@@ -770,7 +693,6 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Voucher #</th>
 						<th title="click to sort" class="headerText">Date</th>
-						<th title="click to sort" class="headerText">Amount (Rs.)</th>
 						<th title="click to sort" class="headerText">Party Name</th>
 						<th title="click to sort" class="headerText">Being</th>
 						<th title="click to sort" class="headerText">Payment Type</th>
@@ -778,6 +700,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Cheque Date</th>
 						<th title="click to sort" class="headerText">Bank Name</th>
 						<th title="click to sort" class="headerText">Status</th>	
+						<th title="click to sort" class="headerText">Amount (Rs.)</th>
 					</tr>
 				</thead>
 
@@ -791,7 +714,6 @@ for(Cookie cookie : cookies){
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${expenses.idAdminExpenses}"/>" class = "chcktbl"  name="expensesIDs"  value="<c:out value="${expenses.idAdminExpenses}"/>"/></td>
 						  <td class="dataText"><c:out value="${expenses.idAdminExpenses}" /></td>
 						  <td class="dataText"><fmt:formatDate value="${expenses.entrydate}" pattern="dd/MM/yyyy"/></td>
-						  <td class="dataText"><c:out value="${expenses.priceofitem}" /></td>
 						  <td class="dataText"><c:out value="${expenses.paidto}" /></td>
 						  <td class="dataText"><c:out value="${expenses.itemdescription}" /></td>
 						  <td class="dataText"><c:out value="${expenses.paymenttype}" /></td>
@@ -799,11 +721,21 @@ for(Cookie cookie : cookies){
 						  <td class="dataText"><fmt:formatDate value="${expenses.chequedate}" pattern="dd/MM/yyyy"/></td>
 						  <td class="dataText"><c:out value="${expenses.bankname}" /></td>
 						  <td class="dataText"><label style="text-transform: capitalize;"><c:out value="${expenses.voucherstatus}" /></label></td>
+						  <td class="dataText"><c:out value="${expenses.priceofitem}" /></td>
 						</tr>
 					</c:forEach>
 
 				</tbody>
 					<tfoot>
+					
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							
+							<td class="dataTextInActive" style="text-align: right">TOTAL&nbsp;&nbsp;&nbsp;
+							 	<fmt:setLocale value="en_IN" scope="request"/>
+								<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${sumofexpenses}" />
+							</td>
+						</tr>
 						<tr>
                             <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
                     		<td class="footerTD"  colspan="8">

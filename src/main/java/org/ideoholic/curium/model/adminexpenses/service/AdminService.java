@@ -333,5 +333,43 @@ public class AdminService {
 	}
 
 
-	
+	public boolean viewExpensesBetweenDates() {
+		
+		boolean result = false;
+		
+        try {
+        	String toDate=  DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todate")));
+    		String fromDate=  DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdate")));
+    		String voucherStatus =  DataUtil.emptyString(request.getParameter("voucherstatus"));
+    		String paymentType=  DataUtil.emptyString(request.getParameter("paymenttype"));
+        	String queryMain ="From Adminexpenses as adminexpenses where adminexpenses.branchid="+httpSession.getAttribute(BRANCHID).toString()+" AND";
+    		
+    		String querySub = " adminexpenses.entrydate between '" + fromDate + "' AND '" + toDate + "'";
+    		
+    		if(voucherStatus!="") {
+    			querySub = querySub +" and adminexpenses.voucherstatus='"+voucherStatus+"'";
+    		}
+    		
+    		if(paymentType!="") {
+    			querySub = querySub +" and adminexpenses.paymenttype='"+paymentType+"'";
+    		}
+    		
+    		List<Adminexpenses> adminExpenseList = new ArrayList<Adminexpenses>();
+    		
+			adminExpenseList = new AdminDetailsDAO().searchExpensesbydate(queryMain + querySub);
+			BigDecimal sumOfExpenses = BigDecimal.ZERO;
+			for (Adminexpenses expenseAdmin : adminExpenseList) {
+				BigDecimal fee = new BigDecimal(expenseAdmin.getPriceofitem());
+				sumOfExpenses = sumOfExpenses.add(fee);
+			}
+			
+            httpSession.setAttribute("adminexpenses", adminExpenseList);
+            httpSession.setAttribute("sumofexpenses", sumOfExpenses);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = false;
+        }
+        return result;
+	}
 }

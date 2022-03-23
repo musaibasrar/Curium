@@ -84,7 +84,15 @@ public class AdminAction {
 
 	
 
-	
+	@PostMapping("/viewExpensesBetweenDates")
+	public String viewExpensesBetweenDates() {
+		 if (new AdminService(request, response).viewExpensesBetweenDates()) {
+	            return "adminexpensesreport";
+	        } else {
+	            return "notSavedExpenses";
+	        }
+		
+	}
 
 	
 
