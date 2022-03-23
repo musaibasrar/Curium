@@ -230,15 +230,15 @@
 			<td></td>
 			</tr>
 			<tr>
-				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Amount (Rs.):</td>
-				<td align="left"><c:out	value="${adminexpenses.priceofitem}" />	</td>
+				<td class="dataTextBoldLeft" style="text-align: left;" >Amount (Rs.):</td>
+				<td align="left">Rs. <c:out	value="${adminexpenses.priceofitem}" />	</td>
 			</tr>
 
 			<tr>
 			<td></td>
 			</tr>
 			<tr>
-				<td class="dataTextBoldLeft" >Paid To:</td>
+				<td class="dataTextBoldLeft" style="text-align: left;">Paid To:</td>
 				<td align="left">  <c:out value="${adminexpenses.paidto}" /></td>
 			</tr>
 
@@ -247,7 +247,7 @@
 			</tr>
 			
 			<tr>
-				<td class="dataTextBoldLeft" >On Account of: </td>
+				<td class="dataTextBoldLeft" style="text-align: left;">On Account of: </td>
 				<td align="left"><c:out value="${adminexpenses.itemdescription}" /></td>
 			</tr>
 
@@ -260,8 +260,20 @@
 			</tr>
 			
 			<tr>
-				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Cheque #: </td>
-				<td align="left"><c:out value="${adminexpenses.chequeno}" /> </td>
+				<td class="dataTextBoldLeft" style="text-align: left;">Payment Type: </td>
+				<td align="left"> 
+				
+							<c:choose>
+                                <c:when test="${adminexpenses.paymenttype=='Cash'}">
+                                    By Cash
+                                </c:when>
+                                <c:otherwise>
+                                    By Cheque # <c:out value="${adminexpenses.chequeno}" />
+                                </c:otherwise>
+                            </c:choose>
+				
+				
+				</td>
 			</tr>
 
 			<tr>

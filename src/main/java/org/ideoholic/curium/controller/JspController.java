@@ -267,4 +267,24 @@ public class JspController {
 		return "trialbalanceprint";
 	}
 	
+	@GetMapping("/welcomesinglebranch")
+	public String getWelcomeSinglebranch() {
+		return "welcomesinglebranch";
+	}
+	
+	@GetMapping("/generalledgerreport")
+	public String getGeneralledgerreport() {
+		return "generalledgerreport";
+	}
+	
+	@GetMapping("/printgeneralledgerreport")
+	public String getPrintgeneralledgerreport() {
+		return "printgeneralledgerreport";
+	}
+	
+	@GetMapping("/adminexpensesreport")
+	public String getAdminExpensesReport() {
+		return "adminexpensesreport";
+	}
+
 }
