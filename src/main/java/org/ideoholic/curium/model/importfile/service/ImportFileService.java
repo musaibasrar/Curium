@@ -99,15 +99,16 @@ public class ImportFileService {
 
 									}
 								}
-								student.setAdmissionnumber(row.getCell(0).getStringCellValue());
+								
+								/*student.setAdmissionnumber(row.getCell(0).getStringCellValue());
 								student.setSts(row.getCell(1).getStringCellValue());
 								student.setName(row.getCell(2).getStringCellValue());
-								student.setGender(row.getCell(3).getStringCellValue());
+								//student.setGender(row.getCell(3).getStringCellValue());
 								student.setDateofbirth(DateUtil.simpleDateParser(
 										(row.getCell(16).getStringCellValue()) + "/" + (row.getCell(17).getStringCellValue())
 												+ "/" + (row.getCell(18).getStringCellValue())));
-								student.setAge(Integer.parseInt(row.getCell(5).getStringCellValue()));
-								student.setPlaceofbirth(row.getCell(6).getRawValue());
+								//student.setAge(Integer.parseInt(row.getCell(5).getStringCellValue()));
+								//student.setPlaceofbirth(row.getCell(6).getRawValue());
 								student.setAdmissiondate(DateUtil.simpleDateParser(
 										(row.getCell(19).getStringCellValue()) + "/" + (row.getCell(20).getStringCellValue())
 												+ "/" + (row.getCell(21).getStringCellValue())));
@@ -155,12 +156,41 @@ public class ImportFileService {
 								parent.setCocontactnumber(row.getCell(37).getStringCellValue());
 
 								parent.setStudent(student);
+								parent.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));*/
+								
+								
+								student.setAdmissionnumber(row.getCell(0).getStringCellValue());
+								student.setSts(row.getCell(1).getStringCellValue());
+								student.setName(row.getCell(2).getStringCellValue());
+								student.setDateofbirth(DateUtil.simpleDateParser(
+										(row.getCell(8).getStringCellValue()) + "/" + (row.getCell(9).getStringCellValue())
+												+ "/" + (row.getCell(10).getStringCellValue())));
+								student.setClassstudying(row.getCell(4).getStringCellValue());
+								student.setClassadmittedin(row.getCell(7).getStringCellValue());
+								student.setCreateddate(DateUtil.simpleDateParser(
+										(row.getCell(11).getStringCellValue()) + "/" + (row.getCell(12).getStringCellValue())
+												+ "/" + (row.getCell(13).getStringCellValue())));
+								
+								student.setUserid(Integer.parseInt(row.getCell(14).getStringCellValue()));
+
+								student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+								student.setArchive(0);
+								student.setPassedout(0);
+								student.setDroppedout(0);
+								student.setLeftout(0);
+								student.setStudentexternalid(httpSession.getAttribute("branchcode").toString());
+								student.setLeftout(0);
+
+								parent.setFathersname(row.getCell(3).getStringCellValue());
+								parent.setContactnumber(row.getCell(6).getStringCellValue());
+								parent.setMothersname(row.getCell(5).getStringCellValue());
+
+								parent.setStudent(student);
 								parent.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+
 
 								listParents.add(parent);
 
-								// System.out.println("date of birth***"
-								// +((row.getCell(25).getStringCellValue())+"/"+(row.getCell(26).getStringCellValue())+"/"+(row.getCell(27).getStringCellValue())));
 							}
 
 							System.out.println("Values Inserted Successfully");
