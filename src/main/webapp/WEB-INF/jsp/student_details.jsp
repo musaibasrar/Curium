@@ -567,8 +567,8 @@ for(Cookie cookie : cookies){
                         
                         </tr>
                         
-                        <%-- <tr>
-                         <td  width="25%"  class="alignLeft" height="50" >Belong to BPL
+                        <tr>
+                         <td  width="25%"  class="alignLeft" height="50" >Whether Child is Vaccinated
                             </td>
                             <td width="25%" class="tablerows" >
                                
@@ -580,13 +580,13 @@ for(Cookie cookie : cookies){
            						 </c:if>
            						 
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50" >BPL Card No.
+                            <td  width="25%"  class="alignLeft" height="50" >Hobbies and Achievements if any
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.bplcardno}" />
                             </td>                        
                         
-                        </tr> --%>
+                        </tr>
                         
                          <tr>
                         <%-- <td  width="25%"  class="alignLeft" height="50" >Bhagyalakshmi Bond No.

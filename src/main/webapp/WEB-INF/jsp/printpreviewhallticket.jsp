@@ -238,8 +238,7 @@ for(Cookie cookie : cookies){
                         	<table style="page-break-inside: avoid;border-collapse: collapse;">
                         		
 			<tr>
-				<td width="30%"></td>
-				<td><img src="/kwrs/images/logo.jpg" width="140" height="70"/></td>
+				<td style="padding-left: 15px"><img src="/kwrs/images/logo${subbranchname}.png" width="88" height="100"/></td>
 				<td>
 				<label class="dataTextBoldCenter">${branchname} </label><br>
 				<label class="addressLine">${branchaddress}</label><br>

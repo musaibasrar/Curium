@@ -421,7 +421,7 @@
 		 
 		 $("#sts").keypress(function (e) {
 		     //if the letter is not digit then display error and don't type anything
-		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		     if (e.which != 8 && e.which != 0 && e.which != 32 && (e.which < 48 || e.which > 57)) {
 		               return false;
 		    }
 		   });
@@ -525,6 +525,19 @@
     	    lastThree = ',' + lastThree;
     	var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
     	annualincome.value = res;
+    }
+    
+    function Upload() {
+        var fileUpload = document.getElementById("fileToUpload");
+        if (typeof (fileUpload.files) != "undefined") {
+            var size = parseFloat(fileUpload.files[0].size / 1024).toFixed(2);
+            if(size>100){
+            	alert("File size should not exceed 100KB");
+            	document.getElementById("fileToUpload").value='';
+            }
+        } else {
+            alert("This browser does not support HTML5.");
+        }
     }
 </script>
 </head>
@@ -856,8 +869,8 @@
 						<tr>
 							<td><br /></td>
 						</tr>
-						<!-- <tr>
-							<td  class="alignLeft" >Belong to BPL&nbsp;</td>
+						<tr>
+							<td  class="alignLeft" >Whether Child is Vaccinated&nbsp;</td>
 							<td>&nbsp;Yes<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
@@ -865,7 +878,7 @@
 								onclick="noCheck(this.id);" />
 
 							</td>
-							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
+							<td class="alignLeft" style="padding-left: 20px;">Hobbies and Achievements if any
 								&nbsp;</td>
 							<td ><label> <input
 									name="bplcardno" type="text" class="myclass"
@@ -879,7 +892,7 @@
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr> -->
+						</tr>
 						<tr>
 							<!-- <td class="alignLeft" >Bhagyalakshmi Bond No.&nbsp;</td>
 								<td><input
@@ -1042,17 +1055,17 @@
 						<div id="fragment-3">
 							<table width="100%" border="0" align="center">
 								<tr>
-									<td><label style="font-size: 16px;color: #eb6000;font-weight: bold;">Note: Upload only .jpg files</label><br><br><br><br></td>
+									<td><label style="font-size: 16px;color: #eb6000;font-weight: bold;">Note: Upload only .jpg files and file size should not exceed 100KB</label><br><br><br><br></td>
 								</tr>
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Pic</label><br />  <input type="file" name="fileToUpload"
-										id="fileToUpload" accept="image/*"><br><br><br><br></td>
+										id="fileToUpload" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 1</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc1" accept="image/*"><br><br><br><br></td>
+										id="studentdoc1" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1062,7 +1075,7 @@
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 2</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc2" accept="image/*"><br><br><br><br></td>
+										id="studentdoc2" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1072,7 +1085,7 @@
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 3</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc3" accept="image/*"><br><br><br><br></td>
+										id="studentdoc3" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1082,7 +1095,7 @@
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 4</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc4" accept="image/*"><br><br><br><br></td>
+										id="studentdoc4" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1092,7 +1105,7 @@
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 5</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc5" accept="image/*"><br><br><br><br></td>
+										id="studentdoc5" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 
 

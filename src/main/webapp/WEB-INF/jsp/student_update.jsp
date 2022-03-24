@@ -791,8 +791,8 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						
-							<%-- <tr>
-								<td class="alignLeft">Belong to BPL &nbsp;</td>
+						<tr>
+								<td class="alignLeft">Whether Child is Vaccinated &nbsp;</td>
 								<td height="30">&nbsp;Yes<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
 								onclick="yesCheck(this.id);" ${student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
@@ -800,7 +800,7 @@ for(Cookie cookie : cookies){
 								onclick="noCheck(this.id);" ${student.belongtobpl == '0' ? 'checked' : ''}/>
 
 							</td>
-							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
+							<td class="alignLeft" style="padding-left: 20px;">Hobbies and Achievements if any
 								&nbsp;</td>
 							<td><label> <input
 									name="bplcardno" type="text" class="myclass" value="${student.bplcardno}"
@@ -812,7 +812,7 @@ for(Cookie cookie : cookies){
 						
 							<tr>
 							<td><br /></td>
-						</tr> --%>
+						</tr>
 						<tr>
 
 							<td><br /></td>

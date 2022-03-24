@@ -69,7 +69,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 32px;
+	font-size: 20px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -78,7 +78,7 @@
 	font-weight: normal;
 	font-family: ariel;
 	color: black;
-	font-size: 18px;
+	font-size: 12px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -179,13 +179,13 @@
 	
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 130px;">
+				<td align="left" style="padding-left: 30px;">
 				<img src="/kwrs/images/logo${subbranchname}.png" width="88" height="100"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 20px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 30px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="dataTextBoldCenter" style="padding-left: 30px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 90px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 			</tr>
 </table>
@@ -340,13 +340,13 @@
 	
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 130px;">
+				<td align="left" style="padding-left: 30px;">
 				<img src="/kwrs/images/logo${subbranchname}.png" width="88" height="100"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 20px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 30px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="dataTextBoldCenter" style="padding-left: 30px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 90px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 			</tr>
 </table>

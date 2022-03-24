@@ -385,7 +385,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/kwrs/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
             
-             <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
+            <!--  <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
                 <a target="mainFrame" href="/kwrs/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
                 <a target="mainFrame" href="/kwrs/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
@@ -395,7 +395,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/kwrs/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
                 <a target="mainFrame" href="/kwrs/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
                 <a target="mainFrame" href="/kwrs/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
-            </div>
+            </div> -->
             
               <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
             <div>

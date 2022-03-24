@@ -144,7 +144,8 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 136px;width: 120px;" alt="rauzamission" src="/kwrs/images/logo.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 143px;width: 150px;" alt="kwrs" src="/kwrs/images/login.png"></h2>
+			<h4 style="font-weight: bold;">Karnataka White Rose<br> English School</h4>
 			</span>
 				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
 			</div>

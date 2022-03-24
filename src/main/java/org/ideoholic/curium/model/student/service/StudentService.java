@@ -236,11 +236,11 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("socialcategory")) {
 		                	student.setSocialcategory(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
-		                //@UI 'Was in receipt of any scholarship'
+		                //@UI 'Whether Vaccinated'
 		                if (fieldName.equalsIgnoreCase("belongtobpl")) {
 		                	student.setBelongtobpl(DataUtil.parseInt(request.getParameter(fieldName)));
 		                }
-		                //@UI 'Adhar card no'
+		                //@UI 'Hobbies and Achievements if any'
 		                if (fieldName.equalsIgnoreCase("bplcardno")) {
 		                	student.setBplcardno(DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
@@ -452,7 +452,7 @@ public class StudentService {
 			// Process form file field (input type="file")
 			 if(listOfFiles != null && listOfFiles.length != 0) 
 				 {
-						 
+						 System.out.println("File length "+listOfFiles.length);
 						 MultipartFile fileItem1 = listOfFiles[0];
 						  String fileName1 = (DataUtil.emptyString(fileItem1.getOriginalFilename()));
 		                    
@@ -528,19 +528,22 @@ public class StudentService {
 		student.setPassedout(0);
 		student.setDroppedout(0);
 		student.setLeftout(0);
-		//DataUtil.generateString(5)
 		student.setStudentexternalid(httpSession.getAttribute("branchcode").toString());
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		student.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
-		puDetails.setOptionalsubjects(optional.toString());
-		puDetails.setcompulsorysubjects(compulsory.toString());
-		student.setPudetails(puDetails);
-		student.setDegreedetails(degreeDetails);
+		
 		parents.setStudent(student);
 		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		parents.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 		parents = new parentsDetailsDAO().create(parents);
 
+		
+		//DataUtil.generateString(5)
+		//puDetails.setOptionalsubjects(optional.toString());
+		//puDetails.setcompulsorysubjects(compulsory.toString());
+		//student.setPudetails(puDetails);
+		//student.setDegreedetails(degreeDetails);
+		
 		if(parents!=null){
 			result=true;
 		}
