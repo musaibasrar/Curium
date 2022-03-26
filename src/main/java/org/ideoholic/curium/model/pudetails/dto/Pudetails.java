@@ -1,7 +1,11 @@
 package org.ideoholic.curium.model.pudetails.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +26,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "pudetails")
 public class Pudetails implements java.io.Serializable {
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "idpudetails")
 	private Integer idpudetails;
 
