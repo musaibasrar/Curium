@@ -159,17 +159,17 @@ public class MessSuppliersService {
 			
 		
 		Properties properties = new Properties();
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("util.properties");
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 		        try {
 					properties.load(inputStream);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 		    
-		    String groupName = properties.getProperty("groupName");    
-	        String subGroupCode = properties.getProperty("subGroupCode");
-	        String ssGroupCode = properties.getProperty("ssGroupCode");
-	        String accountCode = properties.getProperty("accountcode");
+		    String groupName = properties.getProperty("groupName"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));    
+	        String subGroupCode = properties.getProperty("subGroupCode"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        String ssGroupCode = properties.getProperty("ssGroupCode"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	        String accountCode = properties.getProperty("accountcode"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
         
         
 	        Accountdetails accountDetails = new Accountdetails();
@@ -290,8 +290,8 @@ public class MessSuppliersService {
 			messSuppliersPayment.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			
 			//Pass J.V. : Credit the Cheque Awaiting Settlement & debit the Payment Awaiting Settlement 
-			int crCasId = getLedgerAccountId("CAS");
-			int drPasId = getLedgerAccountId("PAS");
+			int crCasId = getLedgerAccountId("CAS"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			int drPasId = getLedgerAccountId("PAS"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			
 			VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 			
@@ -325,7 +325,7 @@ public class MessSuppliersService {
 		
 	 	
 	 	Properties properties = new Properties();
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("util.properties");
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 		
         		try {
 					properties.load(inputStream);
@@ -423,8 +423,8 @@ public class MessSuppliersService {
 				messSuppliersPayment.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 				
 				//Pass J.V. : Credit the Bank/Cash & debit the Cheque Awaiting Settlement 
-				int crBankId = getLedgerAccountId(bankName);
-				int drCasId = getLedgerAccountId("CAS");
+				int crBankId = getLedgerAccountId(bankName+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				int drCasId = getLedgerAccountId("CAS"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				
 				VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 				
@@ -449,7 +449,7 @@ public class MessSuppliersService {
 				
 				
 				//Pass J.V. : Credit the Payment Awaiting Settlement & Debit the Supplier 
-				int crPasId = getLedgerAccountId("PAS");
+				int crPasId = getLedgerAccountId("PAS"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				int drSupplierLedgerId = Integer.parseInt(request.getParameter("supplierledgerid_"+supid));
 				
 				VoucherEntrytransactions transactionsSupplier = new VoucherEntrytransactions();
@@ -502,8 +502,8 @@ public class MessSuppliersService {
 						// Reverse entry for issue cheque
 
 						//Pass J.V. : Credit the Cheque Awaiting Settlement & debit the Payment Awaiting Settlement 
-						int drCasId = getLedgerAccountId("CAS");
-						int CrPasId = getLedgerAccountId("PAS");
+						int drCasId = getLedgerAccountId("CAS"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						int CrPasId = getLedgerAccountId("PAS"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						
 						VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 						

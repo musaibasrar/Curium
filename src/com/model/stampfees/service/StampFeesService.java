@@ -243,8 +243,8 @@ public class StampFeesService {
 		//Accounts
 		//Pass J.V. : credit the Fees as income & debit the cash
 		
-		int crFees = getLedgerAccountId("unearnedstudentfeesincome");
-		int drAccount = getLedgerAccountId("studentfeesreceivable");;
+		int crFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 		
@@ -278,7 +278,7 @@ public class StampFeesService {
 		int result = 0;
 	 	
 	 	Properties properties = new Properties();
-		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("util.properties");
+		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 		
         		try {
 					properties.load(inputStream);

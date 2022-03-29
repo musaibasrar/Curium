@@ -8,11 +8,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page import="java.util.*" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-<title>FEES RECIEPT</title>
+<title>FEES RECEIPT</title>
 <head>
 <style type="text/css">
 .dataText {
@@ -172,10 +173,10 @@
 
 
 <body style="text-align: center" class="bodymargin">
-<div style="border: 1px solid;border-radius: 15px">
+
+<div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
-		<br>
-		<br>
+		<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
@@ -256,7 +257,7 @@
             </TABLE>
 
 		<TABLE id="dataTable" width="100%" border="0"
-			style="page-break-after: always; border-collapse: collapse;">
+			style="border-collapse: collapse;">
 
 
 			<tr>
@@ -275,7 +276,16 @@
 			</tr>
 
 
-			<c:forEach items="${feescatmap}" var="feescatmap">
+			<c:forEach items="${feescatmap}" var="feescatmap" varStatus="loop">
+				
+				<c:if test="${loop.index>0}">
+					<tr>
+						<td><hr width="100%"></td>
+						<td><hr width="100%"></td>
+						<td><hr width="100%"></td>
+					</tr>
+				</c:if>
+				
 				<tr>
 					<td class="dataText"><c:out
 							value="${feescatmap.key}" /></td>
@@ -284,64 +294,9 @@
 					
 					<%-- &#x20B9;<td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
+				
 			</c:forEach>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
 			
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
 			
 			<tr>
 			
@@ -368,34 +323,191 @@
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
-
-<tr>
-<td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
-</tr>
 <tr>
 <td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
 <td></td>
 </tr>
-
 <tr>
-<td align="left">Note: Fees once deposited will not be refunded under any Circumstances</td>
-</tr>
-
-<tr>
-<td><br><br></td>
+<td align="left">Payment Mode&nbsp;:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name&nbsp;&nbsp;:&nbsp;<label style="text-transform: capitalize;">${username}</label><br> Date & Time&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<%= (new java.util.Date()).toLocaleString()%></td>
 </tr>
 <tr>
-<td></td>
-<td align="left"><br>Signature of Cashier/Accountant</td>
-<!-- 
-<td align="left">H.M</td> -->
-
+<td align="left">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Fees once deposited will not be refunded under any Circumstances</td>
+</tr>
+<tr>
+<td><br></td>
+</tr>
+<tr>
+<td align="right"><br>Signature of Cashier/Accountant</td>
 </tr>
 		</TABLE>
+	</div>
+	<br>
+	<div style="border: 1px solid;border-radius: 15px">
+		<table width="100%" style="border-collapse: collapse;">
+			<tr>
+				<td align="left" style="padding-left: 50px;">
+				<img src="images/shaheenlogo.png" width="200" height="100"/>
+				</td> 
+				<td style="width: 100%;" align="left">
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 100px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 70px;">Contact:&nbsp;${branchcontact} </label>
+				</td>
+			</tr>
+</table>
+
+<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+                <tr>
+                    <td colspan="4" ></td>
+                </tr>
+            </TABLE>
+
+		<table style="padding-left: 30px;">
+		
+			<tr>
+			<td></td>
+			
+			</tr>
+			<tr >
+			
+				<td class="dataTextBoldLeft" style="width: 50%">Student
+					Name:&nbsp;<c:out value="${student.name}" />
+				</td>
+			
+				<td class="dataTextBoldLeft" style="width: 30%">Admission No:&nbsp;<c:out value="${student.admissionnumber}" />
+				</td>
+				
+
+				
+
+				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
+						value="${recieptinfo.branchreceiptnumber}" />
+				</td>
+
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+			<td class="dataTextBoldLeft" style="width: 50%">Fathers
+					Name:&nbsp;<c:out value="${parents.fathersname}" />
+				</td>
+			
+				<td class="dataTextBoldLeft" style="width: 30%">
+				 <c:set var = "string1" value = "${student.classstudying}"/>
+			     <c:set var = "string2" value = "${fn:replace(string1, '--', '')}" />
+					Class & Sec:&nbsp;<c:out value="${string2}" />
+				</td>
+
+			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
+						value="${recieptdate}" />
+				</td>
+			</tr>
+
+			<tr>
+			<td></td>
+			
+			</tr>
+			<tr>
+			<td></td>
+			
+			</tr>
+
+		</table>
+		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
+
+		<TABLE id="dataTable" width="100%" border="0"
+			style="border-collapse: collapse;">
 
 
-	</form>
+			<tr>
+
+				<td class="headerText" style="font-weight: bold">Particulars</td>
+				<td class="headerText" style="font-weight: bold">Fees Amount</td>
+				
+
+			</tr>
+			
+			<tr>
+			
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			</tr>
+
+
+			<c:forEach items="${feescatmap}" var="feescatmap" varStatus="loop">
+			
+				<c:if test="${loop.index>0}">
+					<tr>
+						<td><hr width="100%"></td>
+						<td><hr width="100%"></td>
+						<td><hr width="100%"></td>
+					</tr>
+				</c:if>
+				
+				<tr>
+					<td class="dataText"><c:out
+							value="${feescatmap.key}" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${feescatmap.value}" /></td>
+					
+					<%-- &#x20B9;<td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
+				</tr>
+			</c:forEach>
+			
+			
+			<tr>
+			
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			</tr>
+			
+			
+			<tr>
+				<!-- <td>&nbsp;</td> -->
+				<td class="headerText" style="font-weight: bold;" >
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				Total</td>
+				<td class="headerText">&#x20B9; <c:out
+						value="${recieptinfo.totalamount}" /></td>
+			</tr>
+			
+
+<tr>
+			
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			</tr>
+<tr>
+<td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
+<td></td>
+</tr>
+<tr>
+<td align="left">Payment Mode&nbsp;:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name&nbsp;&nbsp;:&nbsp;<label style="text-transform: capitalize;">${username}</label><br> Date & Time&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<%= (new java.util.Date()).toLocaleString()%></td>
+</tr>
+<tr>
+<td align="left">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Fees once deposited will not be refunded under any Circumstances</td>
+</tr>
+<tr>
+<td><br></td>
+</tr>
+<tr>
+<td align="right"><br>Signature of Cashier/Accountant</td>
+</tr>
+		</TABLE>
+	</div>
 	
+	</form>
 	</div>
 </body>
 </html>

@@ -13,7 +13,7 @@ public class YearService {
 	 private HttpServletRequest request;
 	    private HttpServletResponse response;
 	    private HttpSession httpSession;
-	    
+	    private String BRANCHID = "branchid";
 	
 	public YearService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -27,6 +27,7 @@ public class YearService {
 		String errorService=null;
 		Currentacademicyear currentacademicyear = new Currentacademicyear();
 		currentacademicyear.setCurrentacademicyear(DataUtil.emptyString(request.getParameter("academicyear")));
+		currentacademicyear.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		errorService=new YearDAO().create(currentacademicyear);
 		
 		if(currentacademicyear!=null){
@@ -44,7 +45,7 @@ public class YearService {
 	public boolean updateYear() {
 		Currentacademicyear currentacademicyear = new Currentacademicyear();
 		
-		currentacademicyear = new YearDAO().showYear();
+		currentacademicyear = new YearDAO().showYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			if(currentacademicyear != null){
 				request.setAttribute("currentyear", currentacademicyear.getCurrentacademicyear());
 				return true;
@@ -58,7 +59,7 @@ public class YearService {
 	public boolean getYear() {
 		 boolean result = false;
 	        try {
-	        	Currentacademicyear currentYear = new YearDAO().showYear();
+	        	Currentacademicyear currentYear = new YearDAO().showYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	            httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
 
 	            result = true;

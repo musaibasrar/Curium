@@ -46,7 +46,7 @@ public class PeriodService {
 		List<Periodmaster> periodMaster = new ArrayList<Periodmaster>();
 		
 		try {
-	                Currentacademicyear currentYear = new YearDAO().showYear();
+	                Currentacademicyear currentYear = new YearDAO().showYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	                httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
 	                
 	                new SubjectDetailsService(request, response).readListOfSubjects();
@@ -222,7 +222,7 @@ public class PeriodService {
 		
 		if(httpSession.getAttribute(BRANCHID)!=null){
 
-			Currentacademicyear currentYear = new YearDAO().showYear();
+			Currentacademicyear currentYear = new YearDAO().showYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	        httpSession.setAttribute("currentYear", currentYear.getCurrentacademicyear());
 	       
 	        periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));

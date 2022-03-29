@@ -78,8 +78,8 @@ public class MessItemsService {
 			 messItems.setExternalid(DataUtil.emptyString(request.getParameter("itemname")));
 			 messItems.setUnitofmeasure(DataUtil.emptyString(request.getParameter("unitofmeasure")));
 			 messItems.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			 messItems.setLinkedledgerid(getLedgerAccountId("itemaccountid"));
-			 messItems.setLinkedledgeridexpense(getLedgerAccountId("itemaccountidexpense"));
+			 messItems.setLinkedledgerid(getLedgerAccountId("itemaccountid"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())));
+			 messItems.setLinkedledgeridexpense(getLedgerAccountId("itemaccountidexpense"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())));
 			 messItems.setStatus("Active");
 			 messItems.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			 
@@ -227,7 +227,7 @@ public class MessItemsService {
 					
 						//Pass J.V. : credit the supplier debit the stock account
 						int supplierLedgerId = DataUtil.parseInt(supplieridledgerid[1]);
-						int stockLedgerId = getLedgerAccountId("itemaccountid");
+						int stockLedgerId = getLedgerAccountId("itemaccountid"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						
 						VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 						
@@ -251,7 +251,7 @@ public class MessItemsService {
 						
 						//Pass J.V to book transportation charges
 						
-						int drTransportationExpense = getLedgerAccountId("transportationexpenses");
+						int drTransportationExpense = getLedgerAccountId("transportationexpenses"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						int crSupplierLedgerId = DataUtil.parseInt(supplieridledgerid[1]);
 						String transportationCharges = request.getParameter("transportationcharges");
 						

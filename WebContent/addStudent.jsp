@@ -577,12 +577,12 @@
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">
 
 							</label></td>
-							<td width="16%" class="alignRight">STS Number &nbsp;</td>
+							<td width="16%" class="alignRight">Registration Number &nbsp;</td>
 
 									<td width="28%"><label> <input
-											name="sts" type="text" class="myclass" size="30"
+											name="registrationnumber" type="text" class="myclass" size="30" value="${registrationno}"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-											id="sts" size="30">
+											id="registrationnumber" size="30">
 
 									</label></td>
 						</tr>
@@ -673,7 +673,7 @@
 						<tr>
 
 
-							<td class="alignRight">Studying in Class&nbsp;</td>
+							<td class="alignRight">Class Studying&nbsp;</td>
 							<td width="28%"><label> <select name="addclass"
 									id="addclass" style="width: 128px;">
 										<option selected></option>
@@ -700,7 +700,7 @@
 								</select>
 							</label></td>
 
-							<td width="16%" class="alignRight">Admitted in Class &nbsp;
+							<td width="16%" class="alignRight">Class Admitted In&nbsp;
 							</td>
 
 							<td width="28%"><label> <select name="admclassE"
@@ -865,12 +865,12 @@
 								onclick="noCheck(this.id);" />
 
 							</td>
-							<td width="20%" class="alignRight">Student's adhar Card No.
+							<td width="20%" class="alignRight">Student's Aadhar Card No.
 								&nbsp;</td>
 							<td width="28%"><label> <input
-									name="bplcardno" type="text" class="myclass"
+									name="stream" type="text" class="myclass"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									id="bplcardno" size="30">
+									id="stream" size="30">
 
 							</label></td>
 						</tr>	
@@ -880,7 +880,7 @@
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td width="20%" class="alignRight">Whether Vaccinated
 								&nbsp;</td>
 								<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
@@ -903,7 +903,7 @@
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 						
 						<tr>
 							<td width="20%" class="alignRight">Special Category&nbsp;</td>
@@ -1321,9 +1321,9 @@
 									<td class="alignRight">Fathers Occupation
 										&nbsp;</td>
 									<td><label> <input
-											name="fatherscastecertno" type="text" class="myclass"
+											name="fatheroccupation" type="text" class="myclass"
 											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-											id="fatherscastecertno" size="30">
+											id="fatheroccupation" size="30">
 									</label></td>
 
 									<td class="alignRight">Mothers Occupation
@@ -1405,7 +1405,7 @@
 								</tr>
 
 
-								<tr>
+								<!-- <tr>
 
 									<td class="alignRight">Email &nbsp;</td>
 
@@ -1436,7 +1436,8 @@
 								<tr>
 									<td><br /></td>
 								</tr>
-
+								 -->
+								<tr>
 								<td class="alignRight">Permanent Address &nbsp;</td>
 
 								<td ><label> <textarea
@@ -1465,6 +1466,16 @@
 
 
 								<tr>
+								
+									<td class="alignRight">Number Of Dependents
+										&nbsp;</td>
+
+									<td ><label> <input
+											name="noofdependents" type="text" class="myclass"
+											style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+											id="noofdependents" size="30" >
+
+									</label></td>
 
 									<td class="alignRight">Notes &nbsp;</td>
 									<td ><label> <input name="remarksadditional"
@@ -1585,7 +1596,7 @@
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<!-- <tr>
 							<td class="alignRight">Languages Studied &nbsp;</td>
 
 							<td><label> <input
@@ -1609,7 +1620,7 @@
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 						
 						<tr>
 							<td class="alignRight">Previous School Medium of

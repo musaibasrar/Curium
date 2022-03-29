@@ -588,7 +588,7 @@ for(Cookie cookie : cookies){
 										<c:forEach items="${listSubjectNames}" var="listSubject">
 
 											<option value="${listSubject.subjectid}">
-												<c:out value="${listSubject.subjectname}" />
+												${listSubject.subjectid}<c:out value="${listSubject.subjectname}" />
 											</option>
 
 

@@ -1211,8 +1211,7 @@ for(Cookie cookie : cookies){
 							<td ><label>
 									<select name="bankname" id="bankname" class="dropdownlist" style="font-size: 14px;" required>
 											<option></option>
-											<option value="axisbank">Axis Bank</option>
-											<option value="canarabank">Canara Bank</option>
+											<option value="sbi">SBI Bank</option>
 											<option value="cashinhandaccountid">Cash</option>
 								</select>
 							

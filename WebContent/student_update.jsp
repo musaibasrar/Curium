@@ -482,11 +482,11 @@ for(Cookie cookie : cookies){
 									id="admnno" size="30" data-validate="validate(required)">
 
 							</label></td>
-							<td width="16%" class="alignRight">STS Number &nbsp;</td>
+							<td width="16%" class="alignRight">Registration Number &nbsp;</td>
 
 									<td width="16%"><label> <input
-											name="sts" type="text" class="textField"
-											id="sts" size="36" value="${student.sts}">
+											name="registrationnumber" type="text" class="textField"
+											id="registrationnumber" size="36" value="${student.registrationnumber}">
 
 									</label></td>
 						</tr>
@@ -584,7 +584,7 @@ for(Cookie cookie : cookies){
 						
 						
 						<tr>
-							<td width="16%" class="alignRight">Studying in Class&nbsp;</td>
+							<td width="16%" class="alignRight"> Class Studying&nbsp;</td>
 
 							<td width="28%">
 							
@@ -797,8 +797,8 @@ for(Cookie cookie : cookies){
 							<td width="20%" class="alignRight">Adhar Card No.
 								&nbsp;</td>
 							<td width="28%"><label> <input
-									name="bplcardno" type="text" class="textField" value="${student.bplcardno}"
-									id="bplcardno" size="36">
+									name="stream" type="text" class="textField" value="${student.stream}"
+									id="stream" size="36">
 
 							</label></td>
 						
@@ -811,7 +811,7 @@ for(Cookie cookie : cookies){
 
 							<td><br /></td>
 						</tr>
-						<tr>
+						<%-- <tr>
 							<td width="20%" class="alignRight">Whether Vaccinated
 								&nbsp;</td>
 								<td width="16%" height="30" class="alignLeft">&nbsp;Yes<input
@@ -835,7 +835,7 @@ for(Cookie cookie : cookies){
 						<tr>
 
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 
 						<tr>
 							<td width="20%" class="alignRight">Special Category&nbsp;</td>
@@ -1271,8 +1271,8 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td width="20%" class="alignRight">Fathers Occupation&nbsp;</td>
 							<td width="28%"><label> <input
-									name="fatherscastecertno" type="text" class="textField" value="${parents.fatherscastecertno}"
-									id="fatherscastecertno" size="36">
+									name="fatheroccupation" type="text" class="textField" value="${parents.fatheroccupation}"
+									id="fatheroccupation" size="36">
 
 							</label></td>
 
@@ -1305,8 +1305,8 @@ for(Cookie cookie : cookies){
 
 							<td width="16%" class="alignRight">Annual Income &nbsp;</td>
 
-							<td width="28%"><label> <input name="annualincome"
-									type="text" class="textField" id="annualincome" size="36"
+							<td width="28%"><label> <input name="parentsannualincome"
+									type="text" class="textField" id="parentsannualincome" size="36"
 									value="<c:out default="" value="${parents.parentsannualincome}" />">
 
 							</label></td>
@@ -1347,7 +1347,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
+<%-- 
 
 						<tr>
 							<td width="16%" class="alignRight">Email
@@ -1376,7 +1376,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<tr>
 							<td width="16%" class="alignRight">Permanent Address &nbsp;</td>
 							<td width="28%"><label> <textarea
@@ -1405,6 +1405,15 @@ for(Cookie cookie : cookies){
 
 
 						<tr>
+							<td width="20%" class="alignRight">Number Of Dependents
+								&nbsp;</td>
+
+							<td width="28%"><label> <input name="noofdependents"
+									type="text" class="textField" id="noofdependents" size="36"
+									onblur="validateNameContact();"
+									value="<c:out default="" value="${parents.noofdependents}" />">
+
+							</label></td>
 							
 							<td width="20%" class="alignRight">Notes &nbsp;</td>
 							<td width="28%"><label> <input name="remarksadditional"
@@ -1479,7 +1488,7 @@ for(Cookie cookie : cookies){
 
 							<td><label><input name="tcno"
 									type="text" class="textField"
-									value="<c:out default="" value="${student.nooftc}"/>"
+									value="<c:out default="" value="${student.notcissued}"/>"
 									id="tcno" size="36">  
 
 							</label></td>
@@ -1537,7 +1546,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
-						<tr>
+						<%-- <tr>
 							<td width="16%" class="alignRight">Languages Studied &nbsp;</td>
 
 							<td><label> <input
@@ -1559,7 +1568,7 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<tr>
 
 							<td><br /></td>

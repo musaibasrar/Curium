@@ -117,7 +117,7 @@ public class HrService {
 
 	public boolean viewLeavesDetails() {
 		
-		Currentacademicyear currentYear = new YearDAO().showYear();
+		Currentacademicyear currentYear = new YearDAO().showYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		httpSession.setAttribute("currentAcademicYear",currentYear.getCurrentacademicyear());
 		
 		List<Leavedetails> leaveDetailsList = new HrDAO().getLeaveDetails(DataUtil.emptyString(request.getParameter("id")),currentYear.getCurrentacademicyear());
@@ -405,7 +405,7 @@ public class HrService {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Currentacademicyear currentAcademicYear = new YearDAO().showYear();
+				Currentacademicyear currentAcademicYear = new YearDAO().showYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				
 					List<Attendancemaster> staffAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails(Integer.toString((teacherid)));
 					if(staffAttendanceMaster.get(0).getWeeklyoff() == null){

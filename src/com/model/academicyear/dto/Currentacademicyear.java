@@ -19,12 +19,14 @@ public class Currentacademicyear implements java.io.Serializable {
 
 	private Integer cayid;
 	private String currentacademicyear;
+	private Integer branchid;
 
 	public Currentacademicyear() {
 	}
 
-	public Currentacademicyear(String currentacademicyear) {
+	public Currentacademicyear(String currentacademicyear, int branchid) {
 		this.currentacademicyear = currentacademicyear;
+		this.branchid = branchid;
 	}
 
 	@Id
@@ -45,6 +47,15 @@ public class Currentacademicyear implements java.io.Serializable {
 
 	public void setCurrentacademicyear(String currentacademicyear) {
 		this.currentacademicyear = currentacademicyear;
+	}
+
+	@Column(name = "branchid")
+	public Integer getBranchid() {
+		return branchid;
+	}
+
+	public void setBranchid(Integer branchid) {
+		this.branchid = branchid;
 	}
 
 }

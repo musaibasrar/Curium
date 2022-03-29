@@ -262,15 +262,15 @@ public class FeesCollectionService {
 				
 			//Pass Receipt : Credit the student Fees Receivable & debit the cash
 			
-			int crFees = getLedgerAccountId("studentfeesreceivable");
+			int crFees = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			int drAccount = 0;
 			
 			if("cashpayment".equalsIgnoreCase(paymentMethod)) {
-				drAccount = getLedgerAccountId(httpSession.getAttribute(username).toString());
+				drAccount = getLedgerAccountId(httpSession.getAttribute(username).toString()+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			}else if("banktransfer".equalsIgnoreCase(paymentMethod)) {
-				drAccount = getLedgerAccountId(transferBankname);
+				drAccount = getLedgerAccountId(transferBankname+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
-				drAccount = getLedgerAccountId(chequeBankname);
+				drAccount = getLedgerAccountId(chequeBankname+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			} 
 			
 			
@@ -297,8 +297,8 @@ public class FeesCollectionService {
 			
 			//Pass J.V. : Credit the student Fees as Income & debit the unearned revenue
 			
-			int crFeesIncome = getLedgerAccountId("studentfeesincome");
-			int drAccountIncome = getLedgerAccountId("unearnedstudentfeesincome");;
+			int crFeesIncome = getLedgerAccountId("studentfeesincome"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			int drAccountIncome = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			
 			VoucherEntrytransactions transactionsIncome = new VoucherEntrytransactions();
 			
@@ -725,7 +725,7 @@ public class FeesCollectionService {
 		int result = 0;
 	 	
 	 	Properties properties = new Properties();
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("util.properties");
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 		
         		try {
 					properties.load(inputStream);

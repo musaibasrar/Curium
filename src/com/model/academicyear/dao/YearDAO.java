@@ -48,12 +48,12 @@ public class YearDAO {
 
 	
 
-	public Currentacademicyear showYear() {
+	public Currentacademicyear showYear(Integer branchId) {
 		Currentacademicyear currentacademicyear = new Currentacademicyear();
 		try {
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("from Currentacademicyear as ca where ca.cayid = (select max(cayid) from Currentacademicyear) ");
+					.createQuery("from Currentacademicyear as ca where ca.cayid = (select max(cayid) from Currentacademicyear where branchid="+branchId+")");
 			currentacademicyear = (Currentacademicyear) query.setCacheable(true).setCacheRegion("commonregion").uniqueResult();
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

@@ -454,10 +454,10 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.admissionnumber}" />
                             </td>
                             
-                        <td width="25%" class="alignLeft" height="50">STS Number
+                        <td width="25%" class="alignLeft" height="50">Registration Number
 								</td>
                             <td width="25%" class="tablerows">
-                                <c:out default="" value="${student.sts}" />
+                                <c:out default="" value="${student.registrationnumber}" />
                             </td>
                             
                         </tr>
@@ -580,15 +580,15 @@ for(Cookie cookie : cookies){
            						 </c:if>
            						 
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50" >Adhar Card No.
+                            <td  width="25%"  class="alignLeft" height="50" >Student's Aadhar Card No.
                             </td>
                             <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.bplcardno}" />
+                                <c:out default="" value="${student.stream}" />
                             </td>                        
                         
                         </tr>
                         
-                        <tr>
+                        <%-- <tr>
                          <td  width="25%"  class="alignLeft" height="50" >Whether Vaccinated
                             </td>
                             <td width="25%" class="tablerows" >
@@ -607,7 +607,7 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.disabilitychild}" />
                             </td>                        
-                        </tr>
+                        </tr> --%>
                         <tr>
                         <td  width="25%"  class="alignLeft" height="50" >Special Category
                             </td>
@@ -717,7 +717,7 @@ for(Cookie cookie : cookies){
                             <td width="25%"  class="alignLeft" height="50">Transfer Certificate No.
                             </td>
                             <td  width="25%" class="tablerows" >
-                               <c:out default="" value="${student.nooftc}" />
+                               <c:out default="" value="${student.notcissued}" />
                             </td>
                              <td width="25%"  class="alignLeft" height="50">Date of Transfer Certificate
                             </td>
@@ -739,7 +739,7 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         
-                         <tr>
+                        <%--  <tr>
                         <td width="25%"   class="alignLeft" height="50" >Languages Studied</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.languagesstudied}" />
@@ -750,7 +750,7 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.subsequentprogress}" />
                             </td>
-                        </tr>
+                        </tr> --%>
                         
                         <tr>
                        <td width="25%" class="alignLeft" height="50">Previous School Medium of
@@ -864,7 +864,7 @@ for(Cookie cookie : cookies){
                         <tr>
                             <td width="25%"  class="alignLeft" height="50">Fathers Occupation</td>
                             <td width="25%" class="tablerows" >
-                                 <c:out value="${parents.fatherscastecertno}" />
+                                 <c:out value="${parents.fatheroccupation}" />
                                 
                             </td>
                             <td width="25%"  class="alignLeft" height="50" >Mothers Occupation
@@ -897,7 +897,7 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
 					<tr>
-					<td width="25%" class="alignLeft" height="50">Email</td>
+					<%-- <td width="25%" class="alignLeft" height="50">Email</td>
 						<td width="25%" class="tablerows"><c:out default=""
 								value="${parents.email}" /></td>
 								
@@ -905,7 +905,7 @@ for(Cookie cookie : cookies){
 							Dependents</td>
 						<td width="25%" class="tablerows"><c:out default=""
 								value="${parents.noofdependents}" /></td>
-					</tr>
+					</tr> --%>
 					
 					<tr>
                             <td width="25%"   class="alignLeft" height="50" >Parmanent Address</td>

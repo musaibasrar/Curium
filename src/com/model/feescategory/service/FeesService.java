@@ -301,7 +301,7 @@ public class FeesService {
 			for (Parents parents : searchStudentList) {
 				studentids.add(parents.getStudent().getSid());
 			}
-			Currentacademicyear currentYear = new YearDAO().showYear();
+			Currentacademicyear currentYear = new YearDAO().showYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
 			
 			List<Studentfeesstructure> listStudentsFeesStructure = new feesCollectionDAO().getStudentsFeesStructure(studentids, currentYear.getCurrentacademicyear(), searchCriteria);

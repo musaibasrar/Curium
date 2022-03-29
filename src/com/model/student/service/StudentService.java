@@ -248,24 +248,20 @@ public class StudentService {
                         
                         /* End Previous School Details */
                         
-                        
-						/*
-						 * 
-						 * 
-						 *   if(fieldName.equalsIgnoreCase("motherscastecertno")){
+                           if(fieldName.equalsIgnoreCase("motherscastecertno")){
 				                	parents.setMotherscastecertno(DataUtil.emptyString(item.getString()));
 				                }
-				                if(fieldName.equalsIgnoreCase("fatherscaste")){
+				        /*  if(fieldName.equalsIgnoreCase("fatherscaste")){
 				                	parents.setFatherscaste(DataUtil.emptyString(item.getString()));
 				                }
 				                if(fieldName.equalsIgnoreCase("motherscaste")){
 				                	parents.setMotherscaste(DataUtil.emptyString(item.getString()));
-				                }
+				                } */
                 
                         if (fieldName.equalsIgnoreCase("noofdependents")) {
                                 parents.setNoofdependents(DataUtil.parseInt(item.getString()));
                         }
-						 * 
+						 /* 
 						 * if (fieldName.equalsIgnoreCase("admclassE")) {
 						 * 
 						 * addClassE = DataUtil.emptyString(item.getString());
@@ -561,7 +557,7 @@ public class StudentService {
 			httpSession.setAttribute("parentsfromservice",parents);
 			httpSession.setAttribute("idofstudentfromservice",id);*/
 			
-			Currentacademicyear currentYear = new YearDAO().showYear();
+			Currentacademicyear currentYear = new YearDAO().showYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
 			
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());

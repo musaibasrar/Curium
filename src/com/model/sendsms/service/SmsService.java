@@ -193,7 +193,7 @@ public class SmsService {
 		try 
 		{
 			Properties properties = new Properties();
-	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("util.properties");
+	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 	        properties.load(inputStream);
 	        String smsuser = properties.getProperty("smsuser");
 	        String smssender = properties.getProperty("smssender");

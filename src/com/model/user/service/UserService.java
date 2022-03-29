@@ -59,7 +59,7 @@ public class UserService {
        login = new UserDAO().readUniqueObject(userName, password);
 
        if (login != null) {
-            Currentacademicyear currentAcademicYear = new YearDAO().showYear();
+            Currentacademicyear currentAcademicYear = new YearDAO().showYear(login.getBranch().getIdbranch());
             String academicyear = "";
             if(currentAcademicYear!=null){
             academicyear = currentAcademicYear.getCurrentacademicyear();
@@ -453,7 +453,7 @@ public class UserService {
         boolean result = false;
         try {
             Properties properties = new Properties();
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("util.properties");
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
             properties.load(inputStream);
             String backupDirectoryIS = properties.getProperty("backupdirectory");
             System.out.println("the backup directory from input stream is " + backupDirectoryIS);
