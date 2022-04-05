@@ -1504,7 +1504,7 @@ public class StudentService {
 		if (studentIds != null) {
 			for (String id : studentIds) {
 				if (id != null || id != "") {
-					String queryMain = "From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
+					String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
 					String querySub = " parents.Student.id = "+id+" order by parents.Student.admissionnumber ASC";
 					queryMain = queryMain + querySub;
 
@@ -1545,7 +1545,7 @@ public class StudentService {
 			headerData.put("Header",
 					new Object[] { "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
 							"Admitted In Class", "Admission Number", "Admission Date", "Blood Group", "Religion",
-							"Caste", "Fathers Name", "Mothers Name" });
+							"Caste", "Fathers Name", "Mothers Name", "Archive", "Graduated", "Left Out", "Dropped Out"});
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
@@ -1555,10 +1555,12 @@ public class StudentService {
 								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
 								 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
-								 DataUtil.emptyString(studentDetails.getStudent().getAdmissiondate().toString()),
+								 studentDetails.getStudent().getAdmissiondate(),
 								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
 								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
-								 DataUtil.emptyString(studentDetails.getMothersname()) });
+								 DataUtil.emptyString(studentDetails.getMothersname()), studentDetails.getStudent().getArchive()==1 ? "Yes" : "No" , 
+										 studentDetails.getStudent().getPassedout()==1 ? "Yes" : "No", studentDetails.getStudent().getLeftout()==1 ? "Yes" : "No",
+												 studentDetails.getStudent().getDroppedout()==1 ? "Yes" : "No"});
 				i++;
 			}
 			Row headerRow = sheet.createRow(0);
