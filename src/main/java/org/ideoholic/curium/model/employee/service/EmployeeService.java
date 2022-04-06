@@ -62,7 +62,7 @@ public class EmployeeService {
 		
 		
 		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-		int count =4;
+		int count = 2;
 		StringBuilder builder = new StringBuilder();
 		while (count-- != 0) {
 		int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());

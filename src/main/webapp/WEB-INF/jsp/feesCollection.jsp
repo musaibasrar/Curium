@@ -471,7 +471,7 @@
             }).data( "autocomplete" )._renderItem = function( ul, item ) {
                 return $( "<li></li>" )
                 .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +" / "+item.regno+" </b> </a>" )
+                .append( "<a><b> " + item.value +" / "+item.regno+" / "+item.classandsec+"</b> </a>" )
                 .appendTo( ul );
             };
             var addFeesButtonID="#addFees";
@@ -1067,8 +1067,7 @@ for(Cookie cookie : cookies){
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
 									<select name="transferbankname" id="transferbankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
-											<option value="axisbank">Axis Bank</option>
-											<option value="canarabank">Canara Bank</option>
+											<option value="sbi">SBI Bank</option>
 								</select>
 							
 							</label>
@@ -1110,8 +1109,7 @@ for(Cookie cookie : cookies){
 							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label>
 									<select name="chequebankname" id="chequebankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
-											<option value="axisbank">Axis Bank</option>
-											<option value="canarabank">Canara Bank</option>
+											<option value="sbi">SBI Bank</option>
 								</select>
 							
 							</label>

@@ -940,7 +940,7 @@
 						
 						<tr>
 							
-							<td  class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
+							<td  class="alignLeft" >Mother Tongue &nbsp;</td>
 							<td >
 								 <label> <select name="motherT"
 									 id="motherT"
@@ -993,8 +993,44 @@
 							<td><br /></td>
 						</tr> -->
 						<tr>
-										
-							<td class="alignLeft">Created Date &nbsp;</td>
+							
+							<td  class="alignLeft" >Branch &nbsp;</td>
+							<td >
+								 <label> <select name="crecord"
+									 id="crecord"
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+								</select>
+							</label>
+							</td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">RTE&nbsp;</td>
+
+									<td  >&nbsp;Yes<input
+								type="checkbox" value="1" name="rte" id="yes:rte"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="rte" id="no:rte" checked
+								onclick="noCheck(this.id);" />
+										</td>
+							
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						
+						<tr>
+							
+							<td class="alignLeft" >Created Date &nbsp;</td>
 							<td ><label> <input name="createddate"
 									type="text"
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"

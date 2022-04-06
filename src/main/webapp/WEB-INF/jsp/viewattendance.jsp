@@ -392,7 +392,7 @@
                        
             var students = [
             <c:forEach varStatus="status" items="${studentList}" var="student">{
-                value:'<c:out default="0" value="${student.admissionnumber}" />',
+                value:'<c:out default="0" value="${student.studentexternalid}" />',
                 name:'<c:out default="0" value="${student.name}" />',
                 classandsec:'<c:out default="0" value="${student.classstudying}" />',
                 id:'<c:out default="0" value="${student.sid}" />',
@@ -459,7 +459,7 @@
             }).data( "autocomplete" )._renderItem = function( ul, item ) {
                 return $( "<li></li>" )
                 .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +" </b> </a>" )
+                .append( "<a><b> " + item.externalid +" / "+item.name+" / "+item.classandsec+"</b> </a>" )
                 .appendTo( ul );
             };
             
@@ -867,7 +867,7 @@ for(Cookie cookie : cookies){
 						<td><br></td>
 						</tr>
 						<tr>
-                    <td style="width: 45%" class="alignRightFields">Admission No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" onfocus="checkDate();" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" />
+                    <td style="width: 45%" class="alignRightFields">Admission No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" onfocus="checkDate();" style="width: 180px" /> <input name="studentId" type="hidden" id="studentId" value="" />
                     <input name="studentexternalid" type="hidden" id="studentexternalid" /> </td>
                         
                     </tr>
@@ -1002,6 +1002,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Attendance Status&nbsp;</th>
@@ -1017,6 +1018,9 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${attendanceList.attendanceid}"/>" class="chcktbl"
 								name="attandanceIDs"
 								value="<c:out value="${attendanceList.attendanceid},${status.index}"/>" /></td>
+								<td class="dataTextInActive"><a class="dataTextInActive"
+								><c:out
+										value="${StudentListAttendance[status.index].studentexternalid}" /></a></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
 										value="${StudentListAttendance[status.index].admissionnumber}" /></a></td>

@@ -12,7 +12,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-<title>FEES RECIEPT</title>
+<title>FEES RECEIPT</title>
 <head>
 <style type="text/css">
 .dataText {

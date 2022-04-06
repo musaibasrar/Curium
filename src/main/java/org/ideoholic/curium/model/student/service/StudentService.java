@@ -1546,7 +1546,7 @@ public class StudentService {
 			headerData.put("Header",
 					new Object[] { "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
 							"Admitted In Class", "Admission Number", "Admission Date", "Blood Group", "Religion",
-							"Caste", "Fathers Name", "Mothers Name" });
+							"Caste", "Fathers Name", "Mothers Name", "RTE" });
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
@@ -1556,10 +1556,10 @@ public class StudentService {
 								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
 								 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
-								 DataUtil.emptyString(studentDetails.getStudent().getAdmissiondate().toString()),
+								 studentDetails.getStudent().getAdmissiondate(),
 								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
 								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
-								 DataUtil.emptyString(studentDetails.getMothersname()) });
+								 DataUtil.emptyString(studentDetails.getMothersname()),DataUtil.emptyString(studentDetails.getStudent().getRte() == 1 ? "Yes" : "No" ) });
 				i++;
 			}
 			Row headerRow = sheet.createRow(0);

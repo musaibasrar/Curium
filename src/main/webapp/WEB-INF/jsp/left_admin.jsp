@@ -463,15 +463,17 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/kwrs/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/kwrs/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/kwrs/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            			</td>
+            		</tr>
+            		
                 </table>
             </div>
             
@@ -495,11 +497,11 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/kwrs/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr> -->
-            		<tr>
+            		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/kwrs/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
             			</td>
-            		</tr>
+            		</tr> -->
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/kwrs/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>

@@ -836,9 +836,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
 						<th title="click to sort" class="headerText">Admission Date</th>
-
-
-
+						<th title="click to sort" class="headerText">Admission Type</th>
 					</tr>
 				</thead>
 
@@ -861,6 +859,18 @@ for(Cookie cookie : cookies){
 									</c:forEach>
 							<td class="dataText"><c:out
 									value="${Parents.student.admissiondate}" /></td>
+							<td class="dataText">
+						 		<c:set var="classstudying" value="${fn:split(Parents.student.classstudying, '_')}" />
+						 		<c:set var="classadmitted" value="${fn:split(Parents.student.classadmittedin, '_')}" />
+						 		 <c:choose>
+                                <c:when test="${classstudying[0] == classadmitted[0]}">
+                                   <c:out value="New Admission" />
+                                </c:when>
+                                <c:otherwise>
+                                    <c:out value="Old Admission" />
+                                </c:otherwise>
+                            </c:choose>
+						 	</td>
 
 
 						</tr>
