@@ -24,7 +24,48 @@ public class MarksDetailsDAO {
 	}
 
 	@SuppressWarnings("finally")
-    public String addMarksMap(Map<String, List<Marks>> marksSubjectMap, List<List<Studentdailyattendance>> studentDailyAttendanceList) {
+    public String addMarksMap(Map<String, List<Marks>> marksSubjectMap) {
+		
+		String output = "success";
+		
+		try{
+
+			transaction = session.beginTransaction();
+			for (Map.Entry<String,List<Marks>> entry : marksSubjectMap.entrySet()) {
+				
+				for (Marks marks : entry.getValue()) {
+					session.save(marks);
+				}
+			}
+			
+			//Mark Attendance 
+			/*
+			 * for (List<Studentdailyattendance> studentDailyAttendance :
+			 * studentDailyAttendanceList) {
+			 * 
+			 * for (Studentdailyattendance studentAttendance : studentDailyAttendance) {
+			 * session.save(studentAttendance); } }
+			 */
+			
+			//End Mark Attendance
+			
+			transaction.commit();
+		}  catch(ConstraintViolationException  e){                                                       
+		    transaction.rollback();
+		    output = "Duplicate";
+                }  catch (HibernateException hibernateException) {
+                    transaction.rollback();
+                    hibernateException.printStackTrace();
+                   
+            }
+		finally {
+			HibernateUtil.closeSession();
+			return output;
+		}
+	}
+	
+	@SuppressWarnings("finally")
+    public String addMarksMapOld(Map<String, List<Marks>> marksSubjectMap, List<List<Studentdailyattendance>> studentDailyAttendanceList) {
 		
 		String output = "success";
 		

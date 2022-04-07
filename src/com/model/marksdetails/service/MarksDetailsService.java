@@ -634,10 +634,12 @@ public class MarksDetailsService {
             
 		       String searchQuery = "From Parents as parent where ";
 		       String subQuery =null;
+		       String joinQuery =null;
 		       
 		            if(!request.getParameter("centercode").equalsIgnoreCase("")) {
 		                String[] centerCode = request.getParameter("centercode").split(":");
 		                subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
+		                joinQuery = "s.centercode = '"+centerCode[0]+"'";
 		                httpSession.setAttribute("printcentername", "Center Name: "+centerCode[1]);
 		                httpSession.setAttribute("printcentercode", "Center Code: "+centerCode[0]);
 		                httpSession.setAttribute("evaluationsheetcentersearch", centerCode[0]+":"+centerCode[1]);
@@ -648,8 +650,10 @@ public class MarksDetailsService {
 		            if(!request.getParameter("examlevel").equalsIgnoreCase("")) {
 		                if(subQuery!=null) {
 		                    subQuery = subQuery+" AND parent.Student.examlevel = '"+examLevel+"'";
+		                    joinQuery = joinQuery+" AND s.examlevel = '"+examLevel+"'";
 		                }else {
 		                    subQuery = "parent.Student.examlevel = '"+examLevel+"'";
+		                    joinQuery = "s.examlevel = '"+examLevel+"'";
 		                }
 		                httpSession.setAttribute("printexamlevel", "Examination Level: "+examLevel);
 		                httpSession.setAttribute("evaluationsheetexamlevelsearch", request.getParameter("examlevel").toString());
@@ -663,8 +667,10 @@ public class MarksDetailsService {
 		            if(!request.getParameter("languageopted").equalsIgnoreCase("")) {
                         if(subQuery!=null) {
                             subQuery = subQuery+" AND parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+                            joinQuery = joinQuery+" AND s.languageopted = '"+request.getParameter("languageopted")+"'";
                         }else {
                             subQuery = " parent.Student.languageopted = '"+request.getParameter("languageopted")+"'";
+                            joinQuery = " s.languageopted = '"+request.getParameter("languageopted")+"'";
                         }
                         httpSession.setAttribute("printlanguage", "Language: "+request.getParameter("languageopted").toString());
                         httpSession.setAttribute("languagesearch", request.getParameter("languageopted").toString());
@@ -678,8 +684,11 @@ public class MarksDetailsService {
 		                    String subAcademicYear = request.getParameter("examyear").toString().substring(2, 4);
 		                    String subCurrentAcademicYear = httpSession.getAttribute(CURRENTACADEMICYEAR).toString().substring(2, 4);
 		                    
-		                    subQuery = subQuery+"AND (parent.Student.admissionnumber like '"+subCurrentAcademicYear+"%'";
+		                    subQuery = subQuery+" AND (parent.Student.admissionnumber like '"+subCurrentAcademicYear+"%'";
 		                    subQuery = subQuery+" OR parent.Student.admissionnumber like '"+subAcademicYear+"%')";
+		                    
+		                    joinQuery = joinQuery+" AND (s.admissionnumber like '"+subCurrentAcademicYear+"%'";
+		                    joinQuery = joinQuery+" OR s.admissionnumber like '"+subAcademicYear+"%')";
 		                }
 		                httpSession.setAttribute("studentmarksentryexamyear", request.getParameter("examyear").toString());
 		            }else {
@@ -697,11 +706,19 @@ public class MarksDetailsService {
 	                            List<String> studentExternalId = new ArrayList<String>();
 	                            for (Studentdailyattendance studentdailyattendance : studentDailyAttendanceOne) {
 	                            	studentExternalId.add(studentdailyattendance.getAttendeeid());
-								}
+								} */
 	                            
-	                            List<Parents> parentsList = new studentDetailsDAO().getStudentsListAttendance(searchQuery, studentExternalId);*/
-                    searchQuery = searchQuery+subQuery;
-                    List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);
+	                            //List<Parents> parentsList = new studentDetailsDAO().getStudentsListAttendance(searchQuery, studentExternalId);
+	                            
+	                            searchQuery = searchQuery+subQuery;
+	                            
+	                            
+	                            List<Student> parentsList = new studentDetailsDAO().getStudentsPresentAttendanceList("select s.sid,s.name,s.qualification,s.examlevel,s.age,s.gender,s.dateofbirth,s.languageopted,s.districtcode,s.admissiondate,s.Remarks,s.createddate,s.archive,s.studentpic,s.guardiandetails,s.branchid,s.religion,s.education,s.admittedin,s.passedout,s.droppedout,s.approvedon,s.studentexternalid,s.admissionnumber, s.centercode  FROM student s "
+	                            		+ "INNER JOIN att_studentdailyattendance as2 on s.studentexternalid = as2 .attendeeid "
+	                            		+ "where "+joinQuery+" "
+	                            		+ " AND as2.attendancestatus = 'Present' and as2.academicyear = '"+request.getParameter("examyear").toString()+"'");
+                    /*searchQuery = searchQuery+subQuery;
+                    List<Parents> parentsList = new studentDetailsDAO().getStudentsList(searchQuery);*/
 		            httpSession.setAttribute("studentslist", parentsList);
 		            
 		            new ExamLevelService(request, response).examLevels();
@@ -730,7 +747,7 @@ public class MarksDetailsService {
 		
 		List<Subexamlevel> subjectList = (List<Subexamlevel>) httpSession.getAttribute("subjectsperexam");
 		Map<String,List<Marks>> marksSubjectMap = new HashMap<String,List<Marks>>();
-		List<List<Studentdailyattendance>> studentDailyAttendanceList = new ArrayList<List<Studentdailyattendance>>();
+		//List<List<Studentdailyattendance>> studentDailyAttendanceList = new ArrayList<List<Studentdailyattendance>>();
 		
 		for (Subexamlevel subexamlevel : subjectList) {
 			
@@ -739,25 +756,27 @@ public class MarksDetailsService {
 			logger.info("the subject id is " + subject + ", and exam level is " + exam);
 			
 			Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
-			Map<String, String> mapOfMarksAttendance = new HashMap<String, String>();
-			
+			//Map<String, String> mapOfMarksAttendance = new HashMap<String, String>();
 			if (studentIds != null && subject != null) {
 
 				for (String sid : studentIds) {
 	                        String[] stdId = sid.split(":");
 	                        String stdMarks = studentsMarks[Integer.parseInt(stdId[1])];
 	                        int marksStudent = Integer.parseInt(stdMarks);
+	                        mapOfMarks.put(Integer.valueOf(stdId[0]),studentsMarks[Integer.parseInt(stdId[1])]); 
+							/*
+							 * if(marksStudent>0) { mapOfMarks.put(Integer.valueOf(stdId[0]),
+							 * studentsMarks[Integer.parseInt(stdId[1])]); }
+							 */
 	                        
-	                        if(marksStudent>0) {
-	                        	mapOfMarks.put(Integer.valueOf(stdId[0]), studentsMarks[Integer.parseInt(stdId[1])]);
-	                        }
-	                        
-	                        mapOfMarksAttendance.put(stdId[2], studentsMarks[Integer.parseInt(stdId[1])]);
+	                       /* mapOfMarksAttendance.put(stdId[2], studentsMarks[Integer.parseInt(stdId[1])]);*/
 	                }
 				
-				 List<Studentdailyattendance> studentDailyAttendance = markAttendance(mapOfMarksAttendance, subject, exam, centerCode);
-				 studentDailyAttendanceList.add(studentDailyAttendance);
-				 
+					/*
+					 * List<Studentdailyattendance> studentDailyAttendance =
+					 * markAttendance(mapOfMarksAttendance, subject, exam, centerCode);
+					 * studentDailyAttendanceList.add(studentDailyAttendance);
+					 */
 				Set mapSet = mapOfMarks.entrySet();
 				Iterator mapIterator = mapSet.iterator();
 				
@@ -787,7 +806,7 @@ public class MarksDetailsService {
 			}
 		}
 		
-			String output = new MarksDetailsDAO().addMarksMap(marksSubjectMap,studentDailyAttendanceList);
+			String output = new MarksDetailsDAO().addMarksMap(marksSubjectMap);
 			
 			if(output=="success"){
 				result = "true";

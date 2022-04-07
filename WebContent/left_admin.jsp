@@ -375,13 +375,20 @@ for(Cookie cookie : cookies){
 				<a target="mainFrame" href="feesCollectionDetails.jsp" style="font-size: 12px;">Fees Details</a><br/>
             </div>  -->
             
+             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
+            <div>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
+                <a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/>
+                <!-- <a target="mainFrame" href="attendanceexport.jsp" style="font-size: 12px;">Export Attendance</a><br/> -->
+            </div>
+            
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             
             <div>
                 <!-- <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=enterMarks" style="font-size: 12px;">Enter Marks</a><br/> -->
                 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=getSubjectsExams" style="font-size: 12px;">Enter Marks</a><br/>
                 <a target="mainFrame" href="Controller?process=MarksDetailsProcess&action=deleteMarks" style="font-size: 12px;">Delete Marks</a><br/>
-				<a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">Attendance</a><br/>
+				<!-- <a target="mainFrame" href="Controller?process=AttendanceProcess&action=viewAttendance" style="font-size: 12px;">Attendance</a><br/> -->
 <!--                 <a target="mainFrame" href="Controller?process=AttendanceProcess&action=markAttendance" style="font-size: 12px;">Mark Attendance</a><br/> -->
             	<!-- <a target="mainFrame" href="progressreport.jsp" style="font-size: 12px;">Generate Report</a><br/> -->
             </div> 

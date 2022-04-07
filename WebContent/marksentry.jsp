@@ -708,19 +708,19 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 				</thead>
 
 				<tbody>
-					<c:forEach items="${studentslist}" var="Parents" varStatus="status">
+					<c:forEach items="${studentslist}" var="student" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="dataText" style="display: none;"><input type="checkbox" checked 
-								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
+								id="<c:out value="${student.sid}"/>" class="chcktbl"
 								name="studentIDs"
-								value="<c:out value="${Parents.student.sid}:${status.index}:${Parents.student.studentexternalid}"/>" /></td>
+								value="<c:out value="${student.sid}:${status.index}:${student.studentexternalid}"/>" /></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText"><c:out value="${Parents.student.examlevel}" /></td>
+										value="${student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${student.name}" /></td>
+							<td class="dataText"><c:out value="${student.examlevel}" /></td>
 							
 							<c:forEach items="${subjectsperexam}" var="subjects">
 							<td class="dataText"><input type="text"
