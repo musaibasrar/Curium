@@ -95,7 +95,7 @@ public class StudentService {
         student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
         student.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
         puDetails.setOptionalsubjects(optional.toString());
-        puDetails.setcompulsorysubjects(compulsory.toString());
+        puDetails.setCompulsorysubjects(compulsory.toString());
         student.setPudetails(puDetails);
         student.setDegreedetails(degreeDetails);
         parents.setStudent(student);
@@ -226,6 +226,81 @@ public class StudentService {
 		}
 		return result;
 	}
+	public String updateStudent(StudentDto studentDto, MultipartFile[] listOfFiles) {
+		Student student = new Student();
+		Classsec classsec = new Classsec();
+		Parents parents = new Parents();
+		Pudetails puDetails = new Pudetails();
+		Degreedetails degreeDetails = new Degreedetails();
+		String id = "";
+		String pid = "";
+		int studentId = 0;
+		int parentsId = 0;
+		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying=null,conClassAdmittedIn=null;
+		String studentPicUpdate=null;
+		String dropdowncateg=null;
+		String newcateg=null;
+		
+		try{
+			
+			Student students = StudentMapper.INSTANCE.mapStudent(studentDto);
+			
+			if(listOfFiles != null && listOfFiles.length != 0){
+
+				for (MultipartFile fileItem : listOfFiles) {
+					String fileName = (DataUtil.emptyString(fileItem.getOriginalFilename()));
+					String fileValue = (DataUtil.emptyString(fileItem.getName()));
+
+	                    if (!fileName.equalsIgnoreCase("")) {
+	                    	// Resize the image
+	                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
+	                    	System.out.println("ecncoded value is " + new String(bytesEncoded ));
+	                    	String saveFile = new String(bytesEncoded);
+
+	                    	student.setStudentpic(saveFile);
+
+	                    } else{
+	                    	
+	                    	student.setStudentpic(studentPicUpdate);
+	                    }
+	                }
+	            }
+	
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+		if("".equalsIgnoreCase(newcateg)) {
+			student.setSpecialcategory(dropdowncateg);
+		}else {
+			student.setSpecialcategory(newcateg);
+		}
+		 student.setArchive(0);
+		 student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		 student.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+		 
+		 if(puDetails.getIdpudetails()!=null) {
+			 new studentDetailsDAO().updatePuDetails(puDetails);
+	         student.setPudetails(puDetails);
+		 }
+	         
+		 if(degreeDetails.getIddegreedetails()!=null) {
+			 new studentDetailsDAO().updateDegreeDetails(degreeDetails);
+	         student.setDegreedetails(degreeDetails);
+		 } 
+		 student = new studentDetailsDAO().update(student);
+ 		if (pid != "") {
+ 			parents.setStudent(student);
+ 			parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+ 			parents.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+ 			
+ 			parents = new parentsDetailsDAO().update(parents);
+ 		}
+		String stId = student.getSid().toString();
+		int branchId = student.getBranchid();
+        return stId+"_"+branchId;
+		
+	}
+
 
 	public String updateStudent(MultipartFile[] listOfFiles) {
 		Student student = new Student();
@@ -578,7 +653,7 @@ public class StudentService {
                             puDetails.setOptionalsubjects(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("subjectspart2")) {
-                            puDetails.setcompulsorysubjects(DataUtil.emptyString(request.getParameter(fieldName)));
+                            puDetails.setCompulsorysubjects(DataUtil.emptyString(request.getParameter(fieldName)));
                         }
                         if (fieldName.equalsIgnoreCase("xmediuminstruction")) {
                             puDetails.setSslcmediuminstruction(DataUtil.emptyString(request.getParameter(fieldName)));
