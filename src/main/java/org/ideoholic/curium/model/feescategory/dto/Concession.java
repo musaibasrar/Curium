@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "fee_feescategory")
+@Table(name = "concession")
 public class Concession implements java.io.Serializable {
 
 	/**
