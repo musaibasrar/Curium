@@ -7,6 +7,7 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
@@ -19,7 +20,7 @@ import org.mapstruct.factory.Mappers;
  * @author Ideoholic
  *
  */
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, imports = DateUtil.class)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, nullValueCheckStrategy=NullValueCheckStrategy.ALWAYS, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, imports = DateUtil.class)
 public interface StudentMapper {
     StudentMapper INSTANCE = Mappers.getMapper(StudentMapper.class);
 
