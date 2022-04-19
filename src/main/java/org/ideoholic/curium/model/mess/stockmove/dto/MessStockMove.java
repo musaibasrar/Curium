@@ -1,6 +1,6 @@
 package org.ideoholic.curium.model.mess.stockmove.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import static javax.persistence.GenerationType.AUTO;
 
 import java.util.Date;
 
@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class MessStockMove implements java.io.Serializable {
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 

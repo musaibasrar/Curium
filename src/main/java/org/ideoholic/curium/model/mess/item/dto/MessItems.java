@@ -1,6 +1,6 @@
 package org.ideoholic.curium.model.mess.item.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import static javax.persistence.GenerationType.AUTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class MessItems implements java.io.Serializable {
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 

@@ -1,6 +1,6 @@
 package org.ideoholic.curium.model.mess.stockentry.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import static javax.persistence.GenerationType.AUTO;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 public class MessStockAvailability implements java.io.Serializable {
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
