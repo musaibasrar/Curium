@@ -269,10 +269,7 @@ public class StudentService {
 
 						student.setStudentpic(saveFile);
 
-					} else {
-
-						student.setStudentpic(studentPicUpdate);
-					}
+					} 
 				}
 			}
 

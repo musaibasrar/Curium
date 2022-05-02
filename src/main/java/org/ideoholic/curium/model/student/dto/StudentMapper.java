@@ -69,6 +69,8 @@ public interface StudentMapper {
     @Mapping(target = "datetcissued", expression = "java(DateUtil.indiandateParser(studentDto.getDateoftcissued()))")
     @Mapping(target = "guardiandetails", source = "guardian")
     @Mapping(target = "instructionmediumlastschool", source = "mediumofinstructionlastschool")
+    @Mapping(target = "dropdowncateg", source = "specialcategory")
+    @Mapping(target = "newcateg", source = "newcategory")
     Student mapStudent(StudentDto studentDto);
 
     @Mapping(target = "addresspermanent", source = "permanentaddress")
