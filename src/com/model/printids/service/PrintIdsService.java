@@ -226,7 +226,7 @@ public class PrintIdsService {
 				
 				for (Card card : cardList) {
 					
-					if(card.getSid() == parents.getStudent().getSid()) {
+					if(card.getSid().compareTo(parents.getStudent().getSid()) == 0 ) {
 						parentsCardList.put(parents, card);
 					}
 				}
