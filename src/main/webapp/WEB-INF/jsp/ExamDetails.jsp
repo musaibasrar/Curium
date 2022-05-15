@@ -16,8 +16,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JSP Page</title>
-<link rel="stylesheet" href="/kwrs/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/kwrs/css/datePicker/demos.css">
+<link rel="stylesheet" href="/sla/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/sla/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -278,42 +278,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/kwrs/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/kwrs/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/sla/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/sla/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/sla/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/kwrs/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/sla/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/sla/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/kwrs/js/datePicker/ui/sliderAccess.js"></script>
+	src="/sla/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/sla/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/kwrs/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/sla/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/sla/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/sla/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/sla/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/sla/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/sla/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/sla/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/sla/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/sla/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/sla/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/sla/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -385,11 +385,11 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/kwrs/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/sla/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function addExam() {
 		var form1 = document.getElementById("form1");
-		form1.action="/kwrs/ExamDetailsProcess/addExam";
+		form1.action="/sla/ExamDetailsProcess/addExam";
 		form1.method = "POST";
 		form1.submit();
 
@@ -397,7 +397,7 @@
 	
 	function deleteRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action="/kwrs/ExamDetailsProcess/deleteMultiple";
+		form1.action="/sla/ExamDetailsProcess/deleteMultiple";
 		form1.method = "POST";
 		form1.submit();
 
@@ -472,7 +472,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/kwrs/UserProcess/sessionTimeOut");
+	response.sendRedirect("/sla/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -485,7 +485,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/kwrs/ExamDetailsProcess/deleteMultiple" method="POST">
+	<form id="form1" action="/sla/ExamDetailsProcess/deleteMultiple" method="POST">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");
@@ -545,7 +545,7 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Exam Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/kwrs/images/sort_both.png" /></th>
+							src="/sla/images/sort_both.png" /></th>
 						</tr>
 				</thead>
 

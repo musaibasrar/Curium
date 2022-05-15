@@ -61,7 +61,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/kwrs/UserProcess/sessionTimeOut");
+	response.sendRedirect("/sla/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -74,11 +74,11 @@ for(Cookie cookie : cookies){
 }
 %>
     <frameset    rows="70,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="/kwrs/header_feescollector"   name="topFrame" scrolling="NO" noresize frameborder="0">
+        <frame   src="/sla/header_feescollector"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/kwrs/left_feescollector" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/kwrs/welcome" name="mainFrame" scrolling="yes" />
+                <frame  src="/sla/left_feescollector" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame src="/sla/welcome" name="mainFrame" scrolling="yes" />
             </frameset>
 
    </frameset>

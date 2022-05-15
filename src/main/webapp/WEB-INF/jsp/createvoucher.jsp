@@ -15,12 +15,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Voucher</title>
 
-        <link rel="stylesheet" href="/kwrs/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/sla/css/datePicker/jquery-ui-1.8.18.custom.css">
 
-        <link rel="stylesheet" href="/kwrs/css/datePicker/demos.css">
-        <script type="text/javascript" src="/kwrs/js/jquery-1.7.1.min.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <link rel="stylesheet" href="/sla/css/datePicker/demos.css">
+        <script type="text/javascript" src="/sla/js/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.datepicker.js"></script>
   
         <style type="text/css">
             <!--
@@ -280,7 +280,7 @@
         	if(confirm('Are you sure,you want to save the receipt voucher?')){
         		
         		var form1 = document.getElementById("form1");
-                form1.action="/kwrs/AccountProcess/saveReceipt";
+                form1.action="/sla/AccountProcess/saveReceipt";
                 form1.submit();	
         	}
         	
@@ -299,7 +299,7 @@
         	  if(confirm('Are you sure,you want to save the payment voucher?')){
         	  
         		  var form1 = document.getElementById("form1");
-              	  form1.action="/kwrs/AccountProcess/savePayment";
+              	  form1.action="/sla/AccountProcess/savePayment";
               	  form1.submit();
         	  
         	  }
@@ -318,7 +318,7 @@
       }else{
     	  if(confirm('Are you sure,you want to save the contra voucher?')){
     	  var form1 = document.getElementById("form1");
-          form1.action="/kwrs/AccountProcess/saveContra";
+          form1.action="/sla/AccountProcess/saveContra";
           form1.submit();
     	  }
       }
@@ -335,7 +335,7 @@
         }else{
         	if(confirm('Are you sure,you want to save the journal voucher?')){
         	 var form1 = document.getElementById("form1");
-             form1.action="/kwrs/AccountProcess/saveJournal";
+             form1.action="/sla/AccountProcess/saveJournal";
              form1.submit();
         	}
         }
@@ -540,7 +540,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/kwrs/UserProcess/sessionTimeOut");
+	response.sendRedirect("/sla/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

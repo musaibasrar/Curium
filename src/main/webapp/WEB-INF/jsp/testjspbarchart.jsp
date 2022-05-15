@@ -15,38 +15,38 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
 
-        <script type="text/javascript" language="JavaScript" src="/kwrs/js/motionpack.js"></script>
-        <script src="/kwrs/js/Chart.js"></script>
-        <link rel="stylesheet" href="/kwrs/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/kwrs/css/graph/jquery.jqplot.css">
-        <link rel="stylesheet" href="/kwrs/css/graph/jquery.jqplot.min.css">
+        <script type="text/javascript" language="JavaScript" src="/sla/js/motionpack.js"></script>
+        <script src="/sla/js/Chart.js"></script>
+        <link rel="stylesheet" href="/sla/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/sla/css/graph/jquery.jqplot.css">
+        <link rel="stylesheet" href="/sla/css/graph/jquery.jqplot.min.css">
 
-        <link rel="stylesheet" href="/kwrs/css/datePicker/demos.css">
-        <script type="text/javascript" src="/kwrs/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/sla/css/datePicker/demos.css">
+        <script type="text/javascript" src="/sla/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/kwrs/js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="/kwrs/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/kwrs/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/kwrs/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/kwrs/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/kwrs/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/kwrs/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/kwrs/js/graph/plugins/jqplot.trendline.min.js"></script>
-        <script src="/kwrs/js/jquery.jqplot.min.js" ></script>
-        <script src="/kwrs/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
+        <script  type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/sla/js/graph/jquery.jqplot.js"></script>        
+        <script  type="text/javascript" src="/sla/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/sla/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/sla/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/sla/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/sla/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/sla/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/sla/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script src="/sla/js/jquery.jqplot.min.js" ></script>
+        <script src="/sla/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
 
         <style type="text/css">
             <!--

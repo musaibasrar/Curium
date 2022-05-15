@@ -130,9 +130,9 @@
             }
             -->
         </style>
-        <script type="text/javascript" src="/kwrs/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/kwrs/js/print/jquery.printPage.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/sla/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/sla/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {
@@ -149,7 +149,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/kwrs/UserProcess/sessionTimeOut");
+	response.sendRedirect("/sla/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -226,7 +226,7 @@ for(Cookie cookie : cookies){
                     <tr>
 
 
-                        <td align="center"><a id="print" href="/kwrs/FeesCollection/printReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td align="center"><a id="print" href="/sla/FeesCollection/printReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </TABLE>
