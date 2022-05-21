@@ -135,7 +135,8 @@ public boolean readFile() throws FileNotFoundException, IOException {
             student.setLastfirstlanguage(row.getCell(44).getStringCellValue());
             student.setUserid(Integer.parseInt(row.getCell(46).getStringCellValue()));
             
-            student.setBranchid(3);
+            int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+            student.setBranchid(branchId);
             student.setArchive(0);
     		student.setPassedout(0);
     		student.setDroppedout(0);

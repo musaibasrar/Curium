@@ -245,8 +245,9 @@ public class StudentAction {
         }
 
         private String addStudent() {
-                 if (new StudentService(request, response).addStudent()) {
-                    return "saved.jsp";
+        	String studentName = new StudentService(request, response).addStudent();
+                 if ( studentName != null) {
+                	 return "Controller?process=StampFeesProcess&action=search&classsearch=&secsearch=&namesearch="+studentName; 
                 } else {
                     return "notSaved.jsp";
                 }

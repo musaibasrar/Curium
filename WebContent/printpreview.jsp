@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="css/datePicker/demos.css">
+        <!-- <link rel="stylesheet" href="css/datePicker/demos.css"> -->
         <script type="text/javascript" src="js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <script type="text/javascript" src="js/datePicker/ui/jquery.ui.dialog.js"></script>
@@ -259,7 +259,6 @@
                 font-weight: bold;
 
             }
-            -->
         </style>
         <script type="text/javascript">
 
@@ -372,10 +371,10 @@ for(Cookie cookie : cookies){
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
+             margin-bottom: 1cm;
+             margin-top: 1cm;
         }
 
         @media screen {
@@ -392,7 +391,8 @@ for(Cookie cookie : cookies){
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 5.5cm;
-    height: 8.5cm;
+    height: 9cm;
+    border-radius: 25px;
 }
 
 .card:hover {
@@ -400,8 +400,24 @@ for(Cookie cookie : cookies){
 }
 
 .container {
-    padding: 2px 16px;
+    padding: 1px 16px;
 }
+
+
+ .tableidcard {
+        border-spacing: 0px;
+        table-layout: fixed;
+        margin-left: auto;
+        margin-right: auto;
+        width: 310px;
+      }
+      .tdidcard {
+        font-size: 10px;
+      }
+      
+/* .containerschoolname {
+		padding: 2px 5px;
+} */
     </style>
 
 
@@ -427,14 +443,81 @@ for(Cookie cookie : cookies){
                         <tr>
                             <c:if test="${limit < iInitial}">
                             <td class="fontsize" >
-                         <div class="card">
-  								<img src="images/logo.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
-  								</div>
-						</div>
-                            
+	                         <div class="card" style="position: relative;">
+	                         		<div style="padding-top: 10px;" align="center">
+	                         			<h6 style="text-transform: uppercase;margin-top: 0px;margin-bottom: 0px;">${branchname}</h6>
+	                         			<h6 style="text-transform: capitalize;margin-top: 0px;margin-bottom: 5px;">${branchaddress}</h6>
+	                         		</div>
+		                         	
+	  								<img src="images/shaheenlogo.png" alt="Shaheen" style="width:100px;height:50px;padding-left: 20px;">
+	  								<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:50px;width:50px;border: 1px solid black;" alt="Photo" />
+	  								<hr width="100%" style="margin-top:0px;margin-bottom:0px;">
+	  								<h5 style="margin-top: 0px;margin-bottom: 0px;font-weight: bold;" align="center">Academic Year:<%= request.getSession().getAttribute("currentAcademicYear")%></h5>
+	  								<hr width="100%" style="margin-top:0px;margin-bottom:0px;">
+	  								
+	  								<table style="margin-top:5px;margin-left:10px;">
+	  									<tr>
+	  										<td class="tdidcard" style="width:10px;" >Adm. No.</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("admissionno" + i + "")%></td>
+	  									</tr>
+	  									<tr>
+	  										<td class="tdidcard">Student Name</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("studentname" + i + "")%></td>
+	  									</tr>
+	  									<tr>
+	  										<td class="tdidcard">Father Name</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("fathersname" + i + "")%></td>
+	  									</tr>
+	  									<tr>
+	  										<td class="tdidcard">Class</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("class" + i + "")%></td>
+	  									</tr>
+	  									<tr>
+	  										<td class="tdidcard">Phone</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("contactnumber" + i + "")%></td>
+	  									</tr>
+	  									
+	  									<tr>
+	  										<td class="tdidcard">Address</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("Address" + i + "")%></td>
+	  									</tr>
+	  								
+	  								</table>
+	  								<div style="position: absolute;bottom: 10px;margin-left: 120px;">
+	  									<table align="right" style="margin-right:20px;">
+	  								
+	  										<tr align="right">
+											<c:choose>
+                                					<c:when test="${branchid eq 3}">
+                                    					<td><img src="images/principal.png" alt="sign" style="width:50px;height:20px;padding-left: 5px;"></td>
+                                					</c:when>
+                                			<c:otherwise>
+                                    			<td><img src="images/hm.png" alt="sign" style="width:50px;height:20px;padding-left: 5px;"></td>
+                                			</c:otherwise>
+                            				</c:choose>
+													  									
+	  									</tr>
+	  									
+	  									<tr align="right">
+											<c:choose>
+                                					<c:when test="${branchid eq 3}">
+                                    					<td align="left">Principal</td>
+                                					</c:when>
+                                			<c:otherwise>
+                                    			<td align="left">H.M.</td>
+                                			</c:otherwise>
+                            				</c:choose>
+													  									
+	  									</tr>
+	  								</table>
+	  								</div>
+							</div>
                             
                             </td>
                             <td></td>
@@ -443,26 +526,167 @@ for(Cookie cookie : cookies){
                             <c:set var="limit" value="${limit+1}"/>
                             <% i = i + 1;%>
                             <c:if test="${limit < iInitial}">
-                            <td  class="fontsize"> <div class="card">
-  								<img src="images/logo.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" alt="Student's Photo" /> 
-  								</div>
-						</div></td>
+                            <td  class="fontsize"> 
+                            	<div class="card" style="position: relative;">
+	                         		<div style="padding-top: 10px;" align="center">
+	                         			<h6 style="text-transform: uppercase;margin-top: 0px;margin-bottom: 0px;">${branchname}</h6>
+	                         			<h6 style="text-transform: capitalize;margin-top: 0px;margin-bottom: 5px;">${branchaddress}</h6>
+	                         		</div>
+		                         	
+	  								<img src="images/shaheenlogo.png" alt="Shaheen" style="width:100px;height:50px;padding-left: 20px;">
+	  								<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:50px;width:50px;border: 1px solid black;" alt="Photo" />
+	  								<hr width="100%" style="margin-top:0px;margin-bottom:0px;">
+	  								<h5 style="margin-top: 0px;margin-bottom: 0px;font-weight: bold;" align="center">Academic Year:<%= request.getSession().getAttribute("currentAcademicYear")%></h5>
+	  								<hr width="100%" style="margin-top:0px;margin-bottom:0px;">
+	  								
+	  								<table style="margin-top:5px;margin-left:10px;">
+	  									<tr>
+	  										<td class="tdidcard" style="width:10px;" >Adm. No.</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("admissionno" + i + "")%></td>
+	  									</tr>
+	  									<tr>
+	  										<td class="tdidcard">Student Name</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("studentname" + i + "")%></td>
+	  									</tr>
+	  									<tr>
+	  										<td class="tdidcard">Father Name</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("fathersname" + i + "")%></td>
+	  									</tr>
+	  									<tr>
+	  										<td class="tdidcard">Class</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("class" + i + "")%></td>
+	  									</tr>
+	  									<tr>
+	  										<td class="tdidcard">Phone</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("contactnumber" + i + "")%></td>
+	  									</tr>
+	  									
+	  									<tr>
+	  										<td class="tdidcard">Address</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("Address" + i + "")%></td>
+	  									</tr>
+	  								
+	  								</table>
+	  								<div style="position: absolute;bottom: 10px;margin-left: 120px;">
+	  								<table align="right" style="margin-right:20px;">
+	  								
+	  								<tr align="right">
+											<c:choose>
+                                					<c:when test="${branchid eq 3}">
+                                    					<td><img src="images/principal.png" alt="sign" style="width:50px;height:20px;padding-left: 5px;"></td>
+                                					</c:when>
+                                			<c:otherwise>
+                                    			<td><img src="images/hm.png" alt="sign" style="width:50px;height:20px;padding-left: 5px;"></td>
+                                			</c:otherwise>
+                            				</c:choose>
+													  									
+	  									</tr>
+	  									
+	  									<tr align="right">
+											<c:choose>
+                                					<c:when test="${branchid eq 3}">
+                                    					<td align="left">Principal</td>
+                                					</c:when>
+                                			<c:otherwise>
+                                    			<td align="left">H.M.</td>
+                                			</c:otherwise>
+                            				</c:choose>
+													  									
+	  									</tr>
+	  								</table>
+	  								</div>
+							</div>
+                            
+                            </td>
 						 <td></td>
                             <td></td>
                             </c:if>
                             <c:set var="limit" value="${limit+1}"/>
                             <% i = i + 1;%>
                             <c:if test="${limit < iInitial}">
-                            <td  class="fontsize"> <div class="card">
-  								<img src="images/logo.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Student's Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
-  								</div>
-						</div></td>
+                            <td  class="fontsize"> 
+                            	<div class="card" style="position: relative;">
+	                         		<div style="padding-top: 10px;" align="center">
+	                         			<h6 style="text-transform: uppercase;margin-top: 0px;margin-bottom: 0px;">${branchname}</h6>
+	                         			<h6 style="text-transform: capitalize;margin-top: 0px;margin-bottom: 5px;">${branchaddress}</h6>
+	                         		</div>
+		                         	
+	  								<img src="images/shaheenlogo.png" alt="Shaheen" style="width:100px;height:50px;padding-left: 20px;">
+	  								<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:50px;width:50px;border: 1px solid black;" alt="Photo" />
+	  								<hr width="100%" style="margin-top:0px;margin-bottom:0px;">
+	  								<h5 style="margin-top: 0px;margin-bottom: 0px;font-weight: bold;" align="center">Academic Year:<%= request.getSession().getAttribute("currentAcademicYear")%></h5>
+	  								<hr width="100%" style="margin-top:0px;margin-bottom:0px;">
+	  								
+	  								<table style="margin-top:5px;margin-left:10px;">
+	  									<tr>
+	  										<td class="tdidcard" style="width:10px;" >Adm. No.</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("admissionno" + i + "")%></td>
+	  									</tr>
+	  									<tr>
+	  										<td class="tdidcard">Student Name</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("studentname" + i + "")%></td>
+	  									</tr>
+	  									<tr>
+	  										<td class="tdidcard">Father Name</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("fathersname" + i + "")%></td>
+	  									</tr>
+	  									<tr>
+	  										<td class="tdidcard">Class</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("class" + i + "")%></td>
+	  									</tr>
+	  									<tr>
+	  										<td class="tdidcard">Phone</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("contactnumber" + i + "")%></td>
+	  									</tr>
+	  									
+	  									<tr>
+	  										<td class="tdidcard">Address</td>
+	  										<td class="tdidcard">:</td>
+	  										<td class="tdidcard"><%= request.getSession().getAttribute("Address" + i + "")%></td>
+	  									</tr>
+	  								</table>
+	  								<div style="position: absolute;bottom: 10px;margin-left: 120px;">
+	  								<table align="right" style="margin-right:20px;">
+	  								
+	  								<tr align="right">
+											<c:choose>
+                                					<c:when test="${branchid eq 3}">
+                                    					<td><img src="images/principal.png" alt="sign" style="width:50px;height:20px;padding-left: 5px;"></td>
+                                					</c:when>
+                                			<c:otherwise>
+                                    			<td><img src="images/hm.png" alt="sign" style="width:50px;height:20px;padding-left: 5px;"></td>
+                                			</c:otherwise>
+                            				</c:choose>
+													  									
+	  									</tr>
+	  									
+	  									<tr align="right">
+											<c:choose>
+                                					<c:when test="${branchid eq 3}">
+                                    					<td align="left">Principal</td>
+                                					</c:when>
+                                			<c:otherwise>
+                                    			<td align="left">H.M.</td>
+                                			</c:otherwise>
+                            				</c:choose>
+													  									
+	  									</tr>
+	  								</table>
+	  								</div>
+							</div>
+                            
+                            </td>
                             </c:if>
                         </tr>
                         <% i = i + 1;%>

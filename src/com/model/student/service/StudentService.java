@@ -62,14 +62,14 @@ public class StudentService {
 		this.httpSession = request.getSession();
 	}
 
-	public boolean addStudent() {
+	public String addStudent() {
 	    
 		Student student = new Student();
 		Parents parents = new Parents();
 		Pudetails puDetails = new Pudetails();
 		Degreedetails degreeDetails = new Degreedetails();
 		String addClass = null,addSec =null,addClassE=null,addSecE=null,conClassStudying = null,conClassAdmittedIn=null;
-		boolean result=false;
+		String result=null;
 		
 		try {
 			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
@@ -513,7 +513,7 @@ public class StudentService {
 		parents = new parentsDetailsDAO().create(parents);
 
 		if(parents!=null){
-			result=true;
+			result=student.getName();
 		}
 
 		return result;
@@ -1378,10 +1378,10 @@ public class StudentService {
 						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
 								 DataUtil.emptyString(DateUtil.getStringDate(studentDetails.getStudent().getDateofbirth())),
 								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
-								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
-								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
+								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying()).replace("--", " "),
+								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin()).replace("--", " "),
 								 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
-								 DataUtil.emptyString(studentDetails.getStudent().getAdmissiondate().toString()),
+								 studentDetails.getStudent().getAdmissiondate(),
 								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
 								 DataUtil.emptyString(studentDetails.getStudent().getSecondlanguage()),  DataUtil.emptyString(studentDetails.getFathersname()),
 								 DataUtil.emptyString(studentDetails.getMothersname()) });
@@ -1504,10 +1504,15 @@ public class StudentService {
             
             request.setAttribute("registrationno", registrationNo);
             
+            
             if("2".equalsIgnoreCase(branchId)) {
                 return "addStudent.jsp";
             }else if("3".equalsIgnoreCase(branchId)) {
                 return "addStudentPU.jsp";
+            }else if("4".equalsIgnoreCase(branchId)) {
+                return "addStudent.jsp";
+            }else if("5".equalsIgnoreCase(branchId)) {
+                return "addStudent.jsp";
             }
             
         }
