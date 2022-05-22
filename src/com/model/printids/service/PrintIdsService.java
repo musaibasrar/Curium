@@ -99,10 +99,11 @@ public class PrintIdsService {
                //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
 
                if (parentsDetails != null) {
-            	   httpSession.setAttribute("admissionno" + i + "", parentsDetails.getStudent().getRegistrationnumber());
+            	   httpSession.setAttribute("admissionno" + i + "", parentsDetails.getStudent().getAdmissionnumber());
                    httpSession.setAttribute("studentname" + i + "", parentsDetails.getStudent().getName());
                    httpSession.setAttribute("fathersname" + i + "", parentsDetails.getFathersname());
-                   httpSession.setAttribute("class" + i + "", parentsDetails.getStudent().getClassstudying());
+                   String[] classStudying = parentsDetails.getStudent().getClassstudying().split("--");
+                   httpSession.setAttribute("class" + i + "", classStudying[0]);
                    httpSession.setAttribute("Address" + i + "", parentsDetails.getAddresspermanent());
                    httpSession.setAttribute("contactnumber" + i + "", parentsDetails.getContactnumber());
                    httpSession.setAttribute("studentpic" + i + "",parentsDetails.getStudent().getStudentpic());
