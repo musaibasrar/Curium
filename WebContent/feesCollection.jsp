@@ -894,6 +894,31 @@ for(Cookie cookie : cookies){
                     </tr>
                     
                     <tr>
+                        <td style="width: 45%">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp; 
+                        	   <label>
+                                        <label> <select name="academicyear" id="academicyear" required
+									style="width: 120px">
+										<option selected>${currentAcademicYear}</option>
+										<option>2021/22</option>
+										<option>2020/21</option>
+										<option>2019/20</option>
+										<option>2018/19</option>
+										<option>2017/18</option>
+										
+								</select>
+
+							</label> 
+                                    </label>
+                        
+                        </td>
+                        
+                    </tr>
+                    
+                    <tr>
+						<td><br></td>
+                    </tr>
+                    
+                    <tr>
                     	
                         <td><button id="addFees">Search Fees</button>&nbsp;&nbsp;&nbsp;</td>
                         
@@ -916,7 +941,21 @@ for(Cookie cookie : cookies){
                     <tr>
                     
                         <td style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" style="width: 200px" readonly/></td>
-                        <td>Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsecDetails" id="classandsecDetails" value="${classandsecDetails}"/></td>
+                        <td>Class & SEC : &nbsp;&nbsp;&nbsp;
+                        
+                        		<select name="classandsecDetails"
+									id="classandsecDetails" style="width: 186px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${classandsecDetails}</option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+                        
+                        </td>
                         
                     </tr>
                     <tr>

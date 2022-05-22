@@ -156,8 +156,9 @@ public class FeesCollectionService {
 
 	public void getStampFees() {
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		String academicYear = request.getParameter("academicyear");
 		long id = Long.parseLong(request.getParameter("studentId"));
-		List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, academicYear);
 		//List<Feescollection> feesCollection = new feesCollectionDAO().getFeesForTheCurrentYear(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 		Map<Studentfeesstructure,Long> feesMap = new LinkedHashMap<Studentfeesstructure, Long>();
 		
@@ -324,6 +325,7 @@ public class FeesCollectionService {
 			createFeesCollection = new feesCollectionDAO().create(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome);
 		}
 		}
+		httpSession.setAttribute("classsec", request.getParameter("classandsecDetails"));
 		return receiptInfo;
 	}
 

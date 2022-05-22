@@ -27,17 +27,19 @@ public class Feescategory implements java.io.Serializable {
 	private String particularname;
 	private int branchid;
 	private int userid;
-	
+	private String academicyear;
+
 	public Feescategory() {
 	}
 
 	public Feescategory(String feescategoryname, Integer amount, String particularname,
-			int branchid, 	int userid) {
+			int branchid, 	int userid, String academicyear) {
 		this.feescategoryname = feescategoryname;
 		this.amount = amount;
 		this.particularname = particularname;
 		this.branchid = branchid;
 		this.userid = userid;
+		this.academicyear = academicyear;
 	}
 
 	@Id
@@ -93,6 +95,14 @@ public class Feescategory implements java.io.Serializable {
 
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+
+	public String getAcademicyear() {
+		return academicyear;
+	}
+
+	public void setAcademicyear(String academicyear) {
+		this.academicyear = academicyear;
 	}
 
 }

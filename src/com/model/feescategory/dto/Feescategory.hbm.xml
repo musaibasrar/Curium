@@ -23,5 +23,8 @@
          <property name="userid" type="int">
 	 			<column name="userid" />
 			</property>
+		<property name="academicyear" type="string">
+            <column name="academicyear" length="20" />
+        </property>
     </class>
 </hibernate-mapping>

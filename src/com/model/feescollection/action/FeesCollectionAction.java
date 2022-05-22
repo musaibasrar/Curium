@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import com.model.feescategory.service.FeesService;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.feescollection.service.FeesCollectionService;
+import com.model.std.service.StandardService;
 import com.model.student.service.StudentService;
 
 /**
@@ -94,6 +95,7 @@ public class FeesCollectionAction {
 		private String StampFees() {
                 new FeesCollectionService(request, response).getStampFees();
                 new FeesService(request, response).viewAllBranchStudents();
+                new StandardService(request, response).viewClasses();
                 return "feesCollection.jsp";
         }
 
