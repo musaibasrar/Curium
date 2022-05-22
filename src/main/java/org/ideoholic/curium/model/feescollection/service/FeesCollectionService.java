@@ -157,8 +157,10 @@ public class FeesCollectionService {
 
 	public void getStampFees() {
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		String academicYear = request.getParameter("academicyear");	
+			
 		long id = Long.parseLong(request.getParameter("studentId"));
-		List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, academicYear);
 		//List<Feescollection> feesCollection = new feesCollectionDAO().getFeesForTheCurrentYear(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 		Map<Studentfeesstructure,Long> feesMap = new LinkedHashMap<Studentfeesstructure, Long>();
 		
@@ -325,6 +327,7 @@ public class FeesCollectionService {
 			createFeesCollection = new feesCollectionDAO().create(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome);
 		}
 		}
+		httpSession.setAttribute("classsec", request.getParameter("classandsecDetails"));
 		return receiptInfo;
 	}
 
@@ -750,13 +753,14 @@ public class FeesCollectionService {
 		
 		try {
 			long id = Long.parseLong(request.getParameter("studentId"));
+			String academicYear = request.getParameter("academicyear");
 			
 			Currentacademicyear currentYear = new YearDAO().showYear();
 			httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
 			
-			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
+			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,academicYear);
 			request.setAttribute("receiptinfo",rinfo);
-			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, currentYear.getCurrentacademicyear());
+			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, academicYear);
 			
 			long totalSum = 0l;
 			for (Receiptinfo receiptInfoSingle : rinfo) {
@@ -772,8 +776,8 @@ public class FeesCollectionService {
 				httpSession.setAttribute("sumoffees", totalSum);
 				httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
 				httpSession.setAttribute("totalfees", totalFeesAmount);
-				httpSession.setAttribute("academicPerYear", currentYear.getCurrentacademicyear());
-				httpSession.setAttribute("currentAcademicYear", currentYear.getCurrentacademicyear());
+				httpSession.setAttribute("academicPerYear", academicYear);
+				httpSession.setAttribute("currentAcademicYear", academicYear);
 				
 		} catch (Exception e) {
 			e.printStackTrace();
