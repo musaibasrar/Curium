@@ -9871,7 +9871,7 @@ $.extend(Datepicker.prototype, {
 			html += group;
 		}
 		html += buttonPanel + ($.browser.msie && parseInt($.browser.version,10) < 7 && !inst.inline ?
-			'<iframe src="javascript:false;" class="ui-datepicker-cover" frameborder="0"></iframe>' : '');
+			'<iframe src="/sla//slajavascript:false;" class="ui-datepicker-cover" frameborder="0"></iframe>' : '');
 		inst._keyEvent = false;
 		return html;
 	},

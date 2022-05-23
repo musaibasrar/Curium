@@ -339,16 +339,16 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 95%" >
             <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
-                <a target="mainFrame" href="/sla/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/>
-                <a target="mainFrame" href="/sla/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
+                <a target="mainFrame" href="/sla/YearProcess/updateYear" style="font-size: 12px;">year</a><br/>
+                <!-- <a target="mainFrame" href="/sla/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/> -->
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Class</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#">Class</a></h5>
             <div>
                 <a target="mainFrame" href="/sla/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
             </div>
-            
-            <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
+             -->
+            <!-- <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             <div>
                 <a target="mainFrame" href="/sla/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
                 <a target="mainFrame" href="/sla/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
@@ -378,7 +378,7 @@ for(Cookie cookie : cookies){
                 
                 <a target="mainFrame" href="/sla/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
                 <a target="mainFrame" href="/sla/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
-            </div>
+            </div> -->
 
             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >

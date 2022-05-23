@@ -252,8 +252,8 @@
 
 
         <script type="text/javascript" src="/sla/js/datetimepicker_css.js"></script>
-        <script src="JavaScript/actb.js"></script>
-        <script src="JavaScript/common.js"></script>
+        <script src="/sla//slaJavaScript/actb.js"></script>
+        <script src="/sla//slaJavaScript/common.js"></script>
 
         <script>
 

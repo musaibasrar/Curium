@@ -37,7 +37,7 @@
      * To use this renderer, you need to include the 
      * meter gauge renderer plugin, for example:
      * 
-     * > <script type="text/javascript" src="plugins/jqplot.meterGaugeRenderer.js"></script>
+     * > <script type="text/javascript" src="/sla//slaplugins/jqplot.meterGaugeRenderer.js"></script>
      * 
      * Properties described here are passed into the $.jqplot function
      * as options on the series renderer.  For example:

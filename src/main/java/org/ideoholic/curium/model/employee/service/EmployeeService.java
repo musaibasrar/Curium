@@ -72,11 +72,11 @@ public class EmployeeService {
 		employee.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		if(new EmployeeDAO().create(employee)){
-			if(new UserService(request, response).addUser(employee)){
-				return true;
-			}else{
-				new EmployeeDAO().delete(employee);
-			}
+			return true;
+			/*
+			 * if(new UserService(request, response).addUser(employee)){ return true; }else{
+			 * new EmployeeDAO().delete(employee); }
+			 */
 		}
 		}
 		return false;

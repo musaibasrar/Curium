@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.service.StudentService;
@@ -34,7 +35,7 @@ public class StudentAction {
 	@Autowired
 	HttpSession httpSession;
 
-	@PostMapping("/multiClassSearch")
+	@RequestMapping(value = "/multiClassSearch", method = { RequestMethod.GET, RequestMethod.POST })
 	public String multiClassSearch() {
 		new StampFeesService(request, response).multiClassSearch();
 		return "studentsdetailsreports";
@@ -233,5 +234,12 @@ public class StudentAction {
 		request.setAttribute("urlbranchid", branchId);
 		return viewStudent();
 	}
+	
+	@RequestMapping(value = "/mainAdvanceSearchStudents", method = { RequestMethod.GET, RequestMethod.POST })
+	private String mainAdvanceSearchStudents() {
+		//new EmployeeService(request, response).ViewAllEmployee();
+		return "mainsearch";
+	}
+
 
 }

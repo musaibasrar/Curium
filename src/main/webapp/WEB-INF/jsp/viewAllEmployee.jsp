@@ -393,7 +393,7 @@ for(Cookie cookie : cookies){
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>
-                        <td  class="headerTD">View All Employees</td>
+                        <td  class="headerTD">View All Staffs</td>
                     </tr>
 
                     
@@ -406,11 +406,7 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Contact Number</th>
-                            <th title="click to sort" class="headerText">Department&nbsp;</th>
-                            
-                             
-
-
+                            <!-- <th title="click to sort" class="headerText">Department&nbsp;</th> -->
                         </tr>
                     </thead>
 
@@ -421,10 +417,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
                                 <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/sla/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.contactnumber}"/></td>
-                                <td class="dataText"><c:out value="${employee.department}"/></td>
-                                
-                                 
-
+                                <%-- <td class="dataText"><c:out value="${employee.department}"/></td> --%>
                             </tr>
                         </c:forEach>
                     </tbody>

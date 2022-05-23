@@ -80,6 +80,7 @@ public class StudentService {
 		                    
 		                    student.setName(DataUtil.emptyString(request.getParameter(fieldName)));
 		                    System.out.println("name==" + request.getParameter(fieldName));
+		                    httpSession.setAttribute("name", DataUtil.emptyString(request.getParameter(fieldName)));
 		                }
 
 		                
@@ -1506,7 +1507,7 @@ public class StudentService {
 			for (String id : studentIds) {
 				if (id != null || id != "") {
 					String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
-					String querySub = " parents.Student.id = "+id+" order by parents.Student.admissionnumber ASC";
+					String querySub = " parents.Student.id = "+id+" order by parents.Student.sid ASC";
 					queryMain = queryMain + querySub;
 
 					List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
@@ -1544,23 +1545,13 @@ public class StudentService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
-							"Admitted In Class", "Admission Number", "Admission Date", "Blood Group", "Religion",
-							"Caste", "Fathers Name", "Mothers Name", "RTE" , "Archive", "Graduated", "Left Out", "Dropped Out"});
+					new Object[] { "UID", "Client Name", "Gender", "Contact Number", "Active"});
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
-								 DataUtil.emptyString(DateUtil.getStringDate(studentDetails.getStudent().getDateofbirth())),
-								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
-								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
-								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
-								 studentDetails.getStudent().getAdmissiondate(),
-								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
-								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
-								 DataUtil.emptyString(studentDetails.getMothersname()),DataUtil.emptyString(studentDetails.getStudent().getRte() == 1 ? "Yes" : "No" ),
-								 studentDetails.getStudent().getArchive()==1 ? "Yes" : "No" , studentDetails.getStudent().getPassedout()==1 ? "Yes" : "No", studentDetails.getStudent().getLeftout()==1 ? "Yes" : "No",
-												 studentDetails.getStudent().getDroppedout()==1 ? "Yes" : "No"});
+						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getStudentexternalid()),DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
+								 DataUtil.emptyString(studentDetails.getContactnumber()),
+								 studentDetails.getStudent().getArchive()==1 ? "Yes" : "No" });
 				i++;
 			}
 			Row headerRow = sheet.createRow(0);
@@ -1595,7 +1586,7 @@ public class StudentService {
 				//Local 
 				//FileOutputStream out = new FileOutputStream("D:/schoolfiles/test.xlsx");
 				//FileOutputStream out = new FileOutputStream(new File("/usr/local/tomcat/webapps/www.searchmysearch.com/musarpbiabha/studentsdetails.xlsx"));
-				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/studentsdetails.xlsx"));
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/clientdetails.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;
@@ -1626,7 +1617,7 @@ public class StudentService {
 		boolean result = false;
 		try {
 
-			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/studentsdetails.xlsx");
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/clientdetails.xlsx");
 	        FileInputStream inStream = new FileInputStream(downloadFile);
 
 	        // get MIME type of the file
@@ -1639,7 +1630,7 @@ public class StudentService {
 			// set headers for the response
 			String headerKey = "Content-Disposition";
 			String headerValue = String.format("attachment; filename=\"%s\"",
-					"studentdetails.xlsx");
+					"clientdetails.xlsx");
 			response.setHeader(headerKey, headerValue);
 
 			// get output stream of the response

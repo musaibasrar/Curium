@@ -3119,7 +3119,7 @@ jQuery( window ).bind( 'unload', function(){
 		id = "script" + (new Date).getTime();
 
 	div.style.display = "none";
-	div.innerHTML = '   <link/><table></table><a href="/a" style="color:red;float:left;opacity:.5;">a</a><select><option>text</option></select><object><param/></object>';
+	div.innerHTML = '   <link/><table></table><a href="/sla//a" style="color:red;float:left;opacity:.5;">a</a><select><option>text</option></select><object><param/></object>';
 
 	var all = div.getElementsByTagName("*"),
 		a = div.getElementsByTagName("a")[0];

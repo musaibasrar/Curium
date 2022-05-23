@@ -125,7 +125,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							
 									<td style="padding-left: 20px;padding-right: 50px;">
-								<a target="mainFrame" href="/sla/welcome" ><img src="/sla/images/logo.jpg"/></a>
+								<a target="mainFrame" href="welcome"><img src="/sla/images/headerlogo.jpg"/></a>
 								</td>
 								
 							<!-- <td align="left"><img src="/sla/images/slaheader.png"
@@ -135,7 +135,13 @@ for(Cookie cookie : cookies){
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
-							<td><a target="mainFrame"
+								<td><a target="mainFrame"
+								href="/sla/StudentProcess/mainAdvanceSearchStudents"> <img
+									src="/sla/images/adminexp.svg" width="18" height="18"
+									alt="Client Search" style="vertical-align: bottom;" />Create Job / Appt.
+							</a></td>
+
+							<!-- <td><a target="mainFrame"
 								href="/sla/FeesProcess/feesCollect"> <img
 									src="/sla/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
@@ -148,7 +154,7 @@ for(Cookie cookie : cookies){
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
 								</a>
-							</td>
+							</td> -->
 
 							<!-- <td ><a target="mainFrame" href="/sla/feesCollectionDetails"><img  alt="Fees Details" src="/sla/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
@@ -156,7 +162,7 @@ for(Cookie cookie : cookies){
 							<td><a target="mainFrame"
 								href="/sla/StudentProcess/addNew"> <img
 									src="/sla/images/student_header.svg" width="18" height="18"
-									alt="Add New Student" style="vertical-align: bottom;" />Add Student
+									alt="Add New Student" style="vertical-align: bottom;" />Add Client
 							</a></td>
 
 							<td ><a target="leftFrame" href="/sla/leftsettings">
@@ -164,11 +170,11 @@ for(Cookie cookie : cookies){
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
-							<td ><a target="mainFrame"
+							<!-- <td ><a target="mainFrame"
 								href="/sla/AdminProcess/viewAllExpenses"><img
 									alt="Admin Exp" src="/sla/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
-							</a></td>
+							</a></td> -->
 
 							<td ><!-- <a target="mainFrame" href="/sla/sendsms"><img
 									src="/sla/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
@@ -185,7 +191,7 @@ for(Cookie cookie : cookies){
 								href="/sla/StudentProcess/viewAllStudentsWithParents"><img
 									alt="View All Students" src="/sla/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
-								View Students
+								View Clients
 							</a></td>
 							
 							<td ><a target="mainFrame"

@@ -413,7 +413,7 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         
-                        <tr>
+                        <%-- <tr>
                         <td width="25%"   class="alignLeft" height="50" >Department</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${employee.department}" />
@@ -427,7 +427,7 @@ for(Cookie cookie : cookies){
                            
                            
                         
-                        </tr>
+                        </tr> --%>
                         
                         <tr>
                          

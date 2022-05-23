@@ -22,12 +22,14 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
-import org.ideoholic.curium.model.adminexpenses.service.AdminService;
+import org.ideoholic.curium.model.appointment.dao.AppointmentDAO;
+import org.ideoholic.curium.model.appointment.service.AppointmentService;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
-import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
+import org.ideoholic.curium.model.job.dao.JobDAO;
+import org.ideoholic.curium.model.job.service.JobService;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
@@ -78,6 +80,7 @@ public class UserService {
             httpSession.setAttribute("typeOfUser",userType[0]);
             httpSession.setAttribute("userAuth", userType[0]);
             httpSession.setAttribute("userloginid", login.getUserid());
+            httpSession.setAttribute("usertypedetails", login.getUsertype());
 			//setting session to expiry in 60 mins
            	httpSession.setMaxInactiveInterval(60*60);
 			Cookie cookie = new Cookie("user",  login.getUsertype());
@@ -126,31 +129,93 @@ public class UserService {
                     }
                     
                 	}
-        
+            
+            
+            List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0");
+            request.setAttribute("grandtotalstudents", student.size());
+            
         	// Total Teachers
         	List<Teacher> teacher = new EmployeeDAO().readCurrentTeachers();
         	request.setAttribute("totalteachers", teacher.size());
         	// End Total Teachers
         	
-        	//Fees Details
-        	new FeesCollectionService(request, response).getFeesDetailsDashBoard();
-        	//End Fees Details
         	
-        	//Daily Expenses
-        		new AdminService(request, response).dailyExpenses();
-        		
-        	//Monthly Expenses
-        		new AdminService(request, response).getMonthlyExpenses();
-        		
-        	//Get Boys & Girls
-        		new AdminService(request, response).getTotalBoysGirls();
-        		
+        	//total queries
+        	int totalQueries = new JobDAO().getNoOfRecords();
+        	request.setAttribute("totalqueries", totalQueries);
+        	new JobService(request, response).getMonthlyQueries();
+        	//
         	
-        request.setAttribute("studentxaxis", xaxisList);
-        request.setAttribute("studentyaxis", yaxisList);
-        request.setAttribute("totalstudents", totalStudents);
-        feesdailysearch();
-		feesmonthlysearch();
+        	//total appointments
+        	int totalAppointments = new AppointmentDAO().getNoOfRecords();
+        	request.setAttribute("totalappointments", totalAppointments);
+        	//
+        	
+        	
+        	//Current Months Queries
+        	int monthlyQueries = new JobService(request, response).getNoOfRecordsMonthly();
+        	request.setAttribute("monthlyqueries", monthlyQueries);
+        	//
+        	
+        	//Current Months Appointments
+        	int monthlyAppointments = new AppointmentService(request, response).getNoOfRecordsMonthly();
+        	request.setAttribute("monthlyappointments", monthlyAppointments);
+        	//
+        	
+        	
+        	//Total Resolved Queries
+        	int totalResolvedQueries = new JobDAO().getNoOfRecordsResolvedQueries();
+        	request.setAttribute("totalresolvedqueries", totalResolvedQueries);
+        	//
+        	
+        	
+        	//Total Unresolved Queries
+        	int totalUnresolvedQueries = new JobDAO().getNoOfRecordsUnResolvedQueries();
+        	request.setAttribute("totalunresolvedqueries", totalUnresolvedQueries);
+        	//
+        	
+
+        	//Today Resolved Queries
+        	int todayResolvedQueries = new JobDAO().getNoOfRecordsTodayResolvedQueries();
+        	request.setAttribute("todayresolvequeries", todayResolvedQueries);
+        	//
+        	
+        	
+        	//Today Unresolved Queries
+        	int todayUnresolvedQueries = new JobDAO().getNoOfRecordsTodayUnResolvedQueries();
+        	request.setAttribute("todayunresolvequeries", todayUnresolvedQueries);
+        	//
+        	
+        	//Total Completed Appointments
+        	int totalCompletedAppointments = new AppointmentDAO().getNoOfRecordsCompletedAppointments();
+        	request.setAttribute("totalcompletedappointments", totalCompletedAppointments);
+        	//
+        	
+        	
+        	//Total Incomplete Appointments
+        	int totalIncompleteAppointments = new AppointmentDAO().getNoOfRecordsIncompleteAppointments ();
+        	request.setAttribute("totalincompleteappointments", totalIncompleteAppointments );
+        	//
+        	
+        	
+        	//Today Completed Appointments
+        	int todayCompletedAppointments = new AppointmentDAO().getNoOfRecordsTodayCompletedAppointments();
+        	request.setAttribute("todaycompletedappointments", todayCompletedAppointments);
+        	//
+        	
+        	
+        	//Today Incomplete Appointments
+        	int todayIncompleteAppointments = new AppointmentDAO().getNoOfRecordsTodayIncompleteAppointments ();
+        	request.setAttribute("todayincompleteappointments", todayIncompleteAppointments );
+        	//
+               	
+        	request.setAttribute("studentxaxis", xaxisList);
+        	request.setAttribute("studentyaxis", yaxisList);
+        	request.setAttribute("totalstudents", totalStudents);
+        	new JobService(request, response).getMonthlyQueries();
+        	new AppointmentService(request, response).getMonthlyAppointments();
+        	//feesdailysearch();
+        	//feesmonthlysearch();
 		}
 		
 	}
@@ -691,5 +756,40 @@ public class UserService {
         }
        return result;
    }
+
+	public void mainAdvanceSearch() {
+		
+
+		
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		String queryMain ="From Parents as parents where parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND";
+		String studentname= DataUtil.emptyString(request.getParameter("name"));
+		
+			
+			String contactNo =  DataUtil.emptyString(request.getParameter("contactnumber"));
+			
+			String querySub = "";
+			
+			if(!studentname.equalsIgnoreCase("")){
+				querySub = " parents.Student.name like '%"+studentname+"%'" ;
+			}
+			
+			if(!contactNo.equalsIgnoreCase("")  &&  !querySub.equalsIgnoreCase("") ){
+				querySub = querySub + " parents.contactnumber like '%"+contactNo+"%'";
+			}else if(!contactNo.equalsIgnoreCase("")){
+				querySub = querySub + " parents.contactnumber like '%"+contactNo+"%'";
+			}
+			
+			queryMain = queryMain+querySub+" AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+	}
+			
+			request.setAttribute("searchStudentList", searchStudentList);
+		
+		
+	
+	}
 
 }

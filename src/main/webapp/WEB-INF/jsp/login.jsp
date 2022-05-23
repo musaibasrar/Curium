@@ -14,7 +14,7 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	 <title>Curium - School ERP</title>
+	 <title>ERP</title>
 	<link rel="stylesheet" href="/sla/css/bootstrap3.min.css">
 	<script type="text/javascript" src="/sla/js/openWindow.js"></script>
 	
@@ -130,7 +130,7 @@ form{
                 }else if(type=='feescollector'){
                     window.open('/index_feescollector','_self');
                 }else if(type=='staff'){
-                	window.open('/index','_self');
+                	window.open('/sla/index_staff','_self');
                 }
             }
             else if(!flag1){
@@ -144,8 +144,8 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 143px;width: 150px;" alt="Supreme Law Associate" src="/sla/images/login.png"></h2>
-			<h4 style="font-weight: bold;">Supreme Law<br> Associates</h4>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 148px;width: 180px;" alt="Suprema Law Associate" src="/sla/images/slalogo.png"></h2>
+			<h4><label style="font-weight: bold;">Suprema Law Associates</label></h4>
 			</span>
 				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
 			</div>

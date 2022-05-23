@@ -66,7 +66,8 @@
 
             function ViewAll(){
                 var form1=document.getElementById("form1");
-                form1.action="/sla/StudentProcess/viewAll";
+                var name = document.getElementById("name").value;
+                form1.action="/sla/UserProcess/advanceMainSearch?name="+name;
                 form1.submit();
             }
         </script>
@@ -91,10 +92,10 @@ for(Cookie cookie : cookies){
         <form id="form1" action=""  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="250" align="center" valign="middle"><p class="style1"> Student Added Successfully</p>
+        <td height="250" align="center" valign="middle"><p class="style1"> Client Added Successfully</p>
         <p class="style1">
-          
-            <input type="button" id="view" value="View All " onClick="ViewAll()">
+          	<input type="hidden" value="${name}" id="name">
+            <input type="button" id="view" value="Create Job / Appointment" onClick="ViewAll()">
             <!-- <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='/addStudent';"> -->
         </p></td>
       </tr>

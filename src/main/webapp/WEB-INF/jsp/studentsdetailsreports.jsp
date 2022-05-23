@@ -516,11 +516,11 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Students Details Report</a></li>
+					<li><a href="#tabs-1">Clients Details Report</a></li>
 
 				</ul>
 				<div id="tabs-1">
-					<table>
+					<%-- <table>
 
 						<tr>
 							<td class="alignRight">Name &nbsp;</td>
@@ -547,7 +547,7 @@ for(Cookie cookie : cookies){
 										</c:if>	
 										
 							</c:forEach>
-							<%-- <label> <select name="classsearch"
+							<label> <select name="classsearch"
 									id="classsearch" style="width: 150px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -559,7 +559,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 
-							</label>  --%><label style="visibility: hidden;"> <select name="secsearch" id="secsearch"
+							</label> <label style="visibility: hidden;"> <select name="secsearch" id="secsearch"
 									style="width: 120px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -594,7 +594,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
-					</table>
+					</table> --%>
 					
 					
 
@@ -614,11 +614,11 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class &
-							Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Admission Date</th>
+						<th title="click to sort" class="headerText">UID</th>
+						<th title="click to sort" class="headerText">Client Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<!-- <th title="click to sort" class="headerText">Class &
+							Sec&nbsp;</th> -->
+						<th title="click to sort" class="headerText">Contact Number</th>
 
 
 
@@ -636,14 +636,10 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="/sla/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
+										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out
-									value="${Parents.student.classstudying}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.admissiondate}" /></td>
-
-
+									value="${Parents.contactnumber}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>

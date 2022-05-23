@@ -39,10 +39,10 @@
  * To use jqPlot include jQuery, the jqPlot jQuery plugin, the jqPlot css file and optionally 
  * the excanvas script for IE support in your web page:
  * 
- * > <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="excanvas.js"></script><![endif]-->
- * > <script language="javascript" type="text/javascript" src="jquery-1.4.4.min.js"></script>
- * > <script language="javascript" type="text/javascript" src="jquery.jqplot.min.js"></script>
- * > <link rel="stylesheet" type="text/css" href="jquery.jqplot.css" />
+ * > <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="/sla//slaexcanvas.js"></script><![endif]-->
+ * > <script language="javascript" type="text/javascript" src="/sla//slajquery-1.4.4.min.js"></script>
+ * > <script language="javascript" type="text/javascript" src="/sla//slajquery.jqplot.min.js"></script>
+ * > <link rel="stylesheet" type="text/css" href="/sla/jquery.jqplot.css" />
  * 
  * jqPlot can be customized by overriding the defaults of any of the objects which make
  * up the plot. The general usage of jqplot is:

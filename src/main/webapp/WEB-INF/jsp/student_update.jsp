@@ -105,7 +105,16 @@
 	vertical-align: middle;
 	font-weight: bold;
 }
-
+.alignLeft {
+                font-family: Tahoma;
+                font-size: 13px;
+                font-style: normal;
+                text-transform: capitalize;
+                color: #325F6D;
+                text-align: left;
+                vertical-align: middle;
+                font-weight: bold;
+}
 .alignRightMultiple {
 	font-family: Tahoma;
 	font-size: 11px;
@@ -433,12 +442,12 @@ for(Cookie cookie : cookies){
 		<div>
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Student Details</a></li>
-					<li><a href="#tabs-5">Previous School Details</a></li>
-					<li><a href="#tabs-2">Parent's Details</a></li>
-					<li><a href="#tabs-3">Upload Photo</a></li>
-					<li><a href="#tabs-4">Additional Details</a></li>
-					<li><a href="#tabs-6">Bank Details</a></li>
+					<li><a href="#tabs-1">Client Details</a></li>
+					<!-- <li><a href="#tabs-5">Previous School Details</a></li>
+					<li><a href="#tabs-2">Parent's Details</a></li> -->
+					<li><a href="#tabs-3">Upload Documents</a></li>
+					<!-- <li><a href="#tabs-4">Additional Details</a></li>
+					<li><a href="#tabs-6">Bank Details</a></li> -->
 				</ul>
 
 
@@ -448,8 +457,11 @@ for(Cookie cookie : cookies){
 				<table align="center">
 				
 				<tr>
+					<td style="display: none;">
+						<img src="/sla//sladata:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
+					</td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
+                    <%-- <img src="/sla//sladata:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;"> --%>
                     <input type="hidden" value="<c:out value="${student.studentpic}"/>" id="studentpicupdate" name="studentpicupdate">
                     
                     <input type="hidden" value="<c:out value="${student.studentdoc1}"/>" id="studentdoc1update" name="studentdoc1update">
@@ -480,7 +492,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						
-						<tr>
+						<%-- <tr>
 
 
 							<td class="alignLeft">Admission Number&nbsp;</td>
@@ -500,7 +512,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<tr>
 							<td class="alignLeft">Name &nbsp;</td>
 							<td><input type="hidden" name="id" id="id"
@@ -530,10 +542,81 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						
+						<tr>
 
+							<td class="alignLeft">Contact Number*</td>
+
+							<td><label> <input name="contactnumber"
+									type="text" class="myclass" id="contactnumber" size="30" required
+									value="<c:out default="" value="${parents.contactnumber}" />">
+
+							</label></td>
+
+							<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number</td>
+
+							<td><label> <input
+									name="cocontactnumber" type="text" class="myclass"
+									id="cocontactnumber" size="30"
+									value="<c:out default="" value="${parents.cocontactnumber}" />">
+
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 
 
 						<tr>
+							<td class="alignLeft">S/O,D/O,W/O</td>
+							<td ><input type="hidden"
+								name="idparents" id="idparents"
+								value="<c:out value="${parents.pid}" />" /> <label> <input
+									name="fathersname" type="text" class="myclass" id="name"
+									size="30" style="text-transform: capitalize;"
+									value="<c:out default="" value="${parents.fathersname}" />"">
+									<!-- onkeyup="check(this.value);"  -->
+							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Address</td>
+							<td><label> <textarea
+										name="permanentaddress" type="text" class="myclass"
+										id="permanentaddress" rows="4" cols="30"
+										value="<c:out default="" value="${parents.addresspermanent}"/>">${parents.addresspermanent}</textarea>
+							</label></td>
+							
+
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+
+						<tr>
+							
+							<td class="alignLeft">Notes</td>
+							<td><label> <input name="remarksadditional"
+									type="text" class="myclass" id="remarksadditional" size="30"
+									value="<c:out default="" value="${parents.remarks}" />">
+							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Created Date &nbsp;</td>
+							<td><label> <input name="createddate"
+									type="text" value="<fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>" class="myclass"
+									id="datepickerCD" size="30" data-validate="validate(required)">
+							</label></td>
+						</tr>
+
+
+						<%-- <tr>
 							<td class="alignLeft">Date Of Birth &nbsp;</td>
 							<td><label> <input name="dateofbirth" autocomplete="false"
 									type="text" value="<fmt:formatDate value="${student.dateofbirth}" pattern="dd/MM/yyyy"/>"
@@ -716,12 +799,12 @@ for(Cookie cookie : cookies){
 
 							<td class="alignLeft">Religion &nbsp;</td>
 
-							<td><%-- <label> <input name="religion"
+							<td><label> <input name="religion"
 									type="text" class="myclass"
 									value="<c:out default="" value="${student.religion}" />"
 									id="religion" size="30">
 
-							</label> --%>
+							</label>
 							
 							<label> <select name="religion" onblur="validateNameContact();"
 									id="religion" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
@@ -739,7 +822,7 @@ for(Cookie cookie : cookies){
 							</td>
 
 
-							<%-- <td width="16%" class="alignRight">Caste &nbsp;</td>
+							<td width="16%" class="alignRight">Caste &nbsp;</td>
 
 							<td align="left"><label> <input name="caste"
 									type="text" class="myclass"
@@ -747,7 +830,7 @@ for(Cookie cookie : cookies){
 									id="caste" size="30">
 
 							</label></td>
- --%>
+
  							<td class="alignLeft" style="padding-left: 20px;">Students Caste</td>
 							<td><label> <input
 									name="studentscastecertno" type="text" class="myclass" value="${student.studentscastecertno}"
@@ -818,14 +901,14 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<%-- <td class="alignLeft">Bhagyalakshmi Bond No.
+							<td class="alignLeft">Bhagyalakshmi Bond No.
 								&nbsp;</td>
 								<td>
 										<input
 									name="bhagyalakshmibondnumber" type="text" class="myclass" value="${student.bhagyalakshmibondnumber}"
 									id="bhagyalakshmibondnumber" size="30">
 
-							</td> --%>
+							</td>
 							
 							<td class="alignLeft">Special Category&nbsp;</td>
 
@@ -843,7 +926,7 @@ for(Cookie cookie : cookies){
 							</label></td>
 							<td id="newcateg" style="display: none;"><label> <input
 									name="newcategory" id="newcategory" type="text" class="myclass" size="30" 
-									<%-- value= "${student.newcategory}" --%>placeholder="Add Other Category" />
+									value= "${student.newcategory}"placeholder="Add Other Category" />
 							</label></td>
 							
 							
@@ -868,12 +951,12 @@ for(Cookie cookie : cookies){
 
 							<td class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
 
-							<td align="left"><%-- <label> <input name="motherT"
+							<td align="left"><label> <input name="motherT"
 									type="text" class="myclass"
 									value="<c:out default="" value="${student.mothertongue}" />"
 									id="motherT" size="30">
 
-							</label> --%>
+							</label>
 							
 							<label>
 							<select name="motherT" onblur="validateNameContact();"
@@ -907,7 +990,7 @@ for(Cookie cookie : cookies){
 						<tr>
 
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<%-- 
 						<tr>
 
@@ -928,7 +1011,7 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 							</tr>
-							
+							 
 							
 							<tr>
 							<td><br /></td>
@@ -937,17 +1020,10 @@ for(Cookie cookie : cookies){
 
 							<td><br /></td>
 						</tr>
- --%>
+--%>
 
 
-						<tr>
-							<td class="alignLeft">Created Date &nbsp;</td>
-							<td><label> <input name="createddate"
-									type="text" value="<fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>" class="myclass"
-									id="datepickerCD" size="30" data-validate="validate(required)">
-							</label></td>
-
-							</tr>
+						
 							
 						<tr>
 
@@ -1006,12 +1082,12 @@ for(Cookie cookie : cookies){
 				
 				<div id="tabs-3">
 					<table width="100%" border="0" align="center" >
-						<tr>
+						<tr style="display: none;">
 							<td>
                   		 	 <input type="checkbox" name="studentpicdelete" value="delete">Delete
                     		</td>
 							<td>
-                  		  	<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Pic" style="width: 200px;height: 200px;">
+                  		  	<img src="/sla//sladata:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Pic" style="width: 200px;height: 200px;">
                    			 </td>
                     
 							<td><br />
@@ -1024,7 +1100,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc1delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
+                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Doc1" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="studentdoc1" accept="image/*" >
@@ -1036,7 +1112,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc2delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
+                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Doc2" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="studentdoc2" accept="image/*" >
@@ -1049,7 +1125,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc3delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
+                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Doc3" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                    <input type="file" name="fileToUpload" id="studentdoc3" accept="image/*" >
@@ -1061,7 +1137,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc4delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
+                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Doc4" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="studentdoc4" accept="image/*" >
@@ -1073,7 +1149,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc5delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
+                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Doc5" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="studentdoc5" accept="image/*" >
@@ -1136,7 +1212,7 @@ for(Cookie cookie : cookies){
 </div>
 
 
-						<div id="tabs-4">
+						<%-- <div id="tabs-4">
 							<table width="70%" border="0" align="center" id="table1">
 								<tr>
 									<td><br /></td>
@@ -1255,11 +1331,11 @@ for(Cookie cookie : cookies){
 							</table>
 							
 							</div>
-							
+							 --%>
 							
 							
 
-				<div id="tabs-2">
+				<%-- <div id="tabs-2">
 					<table width="70%" align="center">
 						<tr>
 							<td><br /></td>
@@ -1517,9 +1593,9 @@ for(Cookie cookie : cookies){
 						</tr>
 						</table>
 
-						</div>
+						</div> --%>
 
-							<div id="tabs-5">
+							<%-- <div id="tabs-5">
 				
 						<table style="width:70%;" align="center">
 								<tr>
@@ -1714,9 +1790,9 @@ for(Cookie cookie : cookies){
 
 					</div>
 
-				</div>
+				</div> --%>
 				
-				<div id="tabs-6">
+				<%-- <div id="tabs-6">
 
 							<div>
 								<table width="30%" align="center">
@@ -1808,7 +1884,7 @@ for(Cookie cookie : cookies){
 
 							</div>
 
-						</div>
+						</div> --%>
 	
 						</div>
 						</div>

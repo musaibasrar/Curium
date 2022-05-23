@@ -35,12 +35,12 @@
      * To use this plugin, include the renderer js file in 
      * your source:
      * 
-     * > <script type="text/javascript" src="plugins/jqplot.ohlcRenderer.js"></script>
+     * > <script type="text/javascript" src="/sla//slaplugins/jqplot.ohlcRenderer.js"></script>
      * 
      * You will most likely want to use a date axis renderer
      * for the x axis also, so include the date axis render js file also:
      * 
-     * > <script type="text/javascript" src="plugins/jqplot.dateAxisRenderer.js"></script>
+     * > <script type="text/javascript" src="/sla//slaplugins/jqplot.dateAxisRenderer.js"></script>
      * 
      * Then you set the renderer in the series options on your plot:
      * 

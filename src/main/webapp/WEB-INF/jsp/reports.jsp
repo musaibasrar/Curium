@@ -292,12 +292,12 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 95%" >
             
              
-            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Clients</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/sla/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details Report</a>
+            				 <a target="mainFrame" href="/sla/StudentProcess/multiClassSearch" style="font-size: 12px;">Client Details Report</a>
             			</td>
             		</tr>
             		
@@ -305,7 +305,41 @@ for(Cookie cookie : cookies){
             </div>
             
             
-              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
+            <h5 class="sideaccordian">
+			<a href="#">Jobs</a>
+		</h5>
+		<div style="padding-left: 0px; padding-right: 0px;">
+			<table style="border-collapse: collapse; width: 100%">
+
+				<tr>
+					<td
+						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
+						<a target="mainFrame"
+						href="/sla/QueryProcess/queryReport"
+						style="font-size: 12px;">Jobs Report</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+            <h5 class="sideaccordian">
+			<a href="#">Appointments</a>
+		</h5>
+		<div style="padding-left: 0px; padding-right: 0px;">
+			<table style="border-collapse: collapse; width: 100%">
+
+				<tr>
+					<td
+						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
+						<a target="mainFrame"
+						href="/sla/AppointmentProcess/appointmentReport"
+						style="font-size: 12px;">Appointments Report</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+            
+              <!-- <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		
@@ -349,10 +383,10 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div>
+            </div> -->
             
             
-              <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
+              <!-- <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		
@@ -362,10 +396,10 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div>
+            </div> -->
             
 
-            <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
+           <!--  <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		
@@ -380,7 +414,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div>
+            </div> -->
             
             <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -421,7 +455,7 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#" >Stock</a></h5>
+       <!--      <h5 class="sideaccordian" ><a href="#" >Stock</a></h5>
             
             <div style="padding-left: 0px;padding-right: 0px;">
             
@@ -447,7 +481,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             	</table>
-            </div>
+            </div> -->
             
             </div>
                    

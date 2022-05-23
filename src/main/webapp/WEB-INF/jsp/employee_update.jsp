@@ -462,7 +462,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 
-						<tr>
+						<%-- <tr>
 							<td width="16%" class="alignRight">Department&nbsp;</td>
 
 							<td width="28%"><label> <select name="department"
@@ -513,7 +513,7 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 
 
 

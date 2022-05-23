@@ -107,5 +107,7 @@
 		<mapping resource="mappings/mess/MessStockMove.hbm.xml"></mapping>
 		<mapping resource="mappings/mess/MessSuppliersPayment.hbm.xml"></mapping>
 		<mapping resource="mappings/mess/Card.hbm.xml"></mapping>
+		<mapping resource="mappings/Appointment.hbm.xml"/>
+		<mapping resource="mappings/JobQuery.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

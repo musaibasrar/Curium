@@ -14,7 +14,7 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	 <title>Curium - School ERP</title>
+	 <title>ERP</title>
 	<link rel="stylesheet" href="/sla/css/bootstrap3.min.css">
 	<script type="text/javascript" src="/sla/js/openWindow.js"></script>
 	
@@ -146,8 +146,8 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">							
-			<h2><img border="0" style="vertical-align: text-bottom;height: 143px;width: 150px;" alt="Supreme Law Associate" src="/sla/images/login.png"></h2>
-			<h4 style="font-weight: bold;">Karnataka White Rose<br> English School</h4>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 150px;width: 225px;" alt="Suprema Law Associate" src="/sla/images/slalogo.png"></h2>
+			<h4 style="font-weight: bold;">Suprema Law<br> Associates</h4>
 			</span>
 			<!-- <h2 style="font-weight: bold;">Flora<img border="0" style="vertical-align: text-bottom;height: 120px;width: 200px;" alt="ideoholic" src="/sla/images/shaheenwhitelogo.png"></h2><h3> Public School</h3></span></span> -->
 				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
@@ -184,7 +184,7 @@ form{
 		<p>
 			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/sla/images/ideoholic.png"> image with a default alignment.</p> --> 
 			
-			<a href="http://www.ideoholic.com" >
+			<a href="/sla/http://www.ideoholic.com" >
 				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/sla/images/ideoholic.png">
 			</a>
 			

@@ -33,7 +33,7 @@
     *  A plugin for jqPlot to render a category style axis, with equal pixel spacing between y data values of a series.
     *  
     *  To use this renderer, include the plugin in your source
-    *  > <script type="text/javascript" language="javascript" src="plugins/jqplot.categoryAxisRenderer.js"></script>
+    *  > <script type="text/javascript" language="javascript" src="/sla//slaplugins/jqplot.categoryAxisRenderer.js"></script>
     *  
     *  and supply the appropriate options to your plot
     *  

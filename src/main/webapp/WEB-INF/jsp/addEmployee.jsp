@@ -20,7 +20,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Add Employee</title>
+<title>Add Staff</title>
 <link rel="stylesheet" href="/sla/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/sla/css/validation/jquery.ketchup.css">
 
@@ -226,8 +226,8 @@
 
 
 <script type="text/javascript" src="/sla/js/datetimepicker_css.js"></script>
-<script src="JavaScript/actb.js"></script>
-<script src="JavaScript/common.js"></script>
+<script src="/sla//slaJavaScript/actb.js"></script>
+<script src="/sla//slaJavaScript/common.js"></script>
 
 <script>
 	$(function() {
@@ -662,7 +662,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
+						<%-- <tr>
 							<td class="alignRight">Department &nbsp;</td>
 							<td class="alignLeft"><label>
 									<select name="department" id="department"
@@ -706,7 +706,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<tr>
 
 							<!-- <td width="30%" class="alignRight">Salary &nbsp;</td>
@@ -715,7 +715,7 @@ for(Cookie cookie : cookies){
 									id="salary" size="36" onblur="validateName();">
 									onkeyup="check(this.value);" 
 							</label></td> -->
-							<td class="alignRight">Current Employee &nbsp;</td>
+							<td class="alignRight">Current Staff &nbsp;</td>
 							<td class="alignLeft">&nbsp;Yes<input
 								type="checkbox" value="1" name="currentemployee" id="yes:employee"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input

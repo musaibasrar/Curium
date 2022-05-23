@@ -94,7 +94,7 @@ for(Cookie cookie : cookies){
 <h1>appointment</h1>
 <div id=navigation>
 <a href="#" class="navi"><div id="naviElement" class="hovered">Calendar</div></a>
-<a href="logout" class="navi"><div id="naviElement">Logout</div></a>
+<a href="/sla/logout" class="navi"><div id="naviElement">Logout</div></a>
 </div>
 
 
@@ -250,7 +250,7 @@ return value;
 <h1>appointment</h1>
 <div id=navigation>
 <a href="#" class="navi"><div id="naviElement" class="hovered">Calendar</div></a>
-<a href="logout" class="navi"><div id="naviElement">Logout</div></a>
+<a href="/sla/logout" class="navi"><div id="naviElement">Logout</div></a>
 </div>
 
 

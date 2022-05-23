@@ -686,7 +686,7 @@ addEvent(window, "load", function() {
 	}
 	var banner = id("qunit-header");
 	if ( banner ) {
-		banner.innerHTML = '<a href="' + QUnit.url({ filter: undefined }) + '"> ' + banner.innerHTML + '</a> ' +
+		banner.innerHTML = '<a href="/sla/' + QUnit.url({ filter: undefined }) + '"> ' + banner.innerHTML + '</a> ' +
 			'<label><input name="noglobals" type="checkbox"' + ( config.noglobals ? ' checked="checked"' : '' ) + '>noglobals</label>' +
 			'<label><input name="notrycatch" type="checkbox"' + ( config.notrycatch ? ' checked="checked"' : '' ) + '>notrycatch</label>';
 		addEvent( banner, "change", function( event ) {

@@ -18,7 +18,7 @@
         </style>
         <link rel="stylesheet" href="/sla/css/datePicker/jquery-ui-1.8.17.custom.css">
         <link rel="stylesheet" href="/sla/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="js/dataTable/jquery.js"></script>-->
+        <!--<script type="text/javascript" language="javascript" src="/sla//slajs/dataTable/jquery.js"></script>-->
         <script type="text/javascript" src="/sla/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" language="javascript" src="/sla/js/dataTable/jquery.dataTables.js"></script>
         <script type="text/javascript" src="/sla/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>

@@ -434,19 +434,19 @@ for(Cookie cookie : cookies){
             </table>
             <div class="accordion" style="width: 100%;height: 100%">
 		
-                <h3><a href="#">Student Details</a></h3>
+                <h3><a href="#">Client Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
                     
                     
-                    <tr>
+                    <tr style="display: none;">
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
+                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
                     </td>
                     </tr>
                     
-                    	<tr>
+                    	<%-- <tr>
                          
                             <td  width="25%"  class="alignLeft" height="50">Admission Number
                             </td>
@@ -460,7 +460,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.sts}" />
                             </td>
                             
-                        </tr>
+                        </tr> --%>
 
 					<tr>
                             <td width="25%"  class="alignLeft" height="50">Name</td>
@@ -473,10 +473,81 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.gender}" />
                             </td>
                         </tr>
+                        
+                        
                         <tr>
+                            <td width="25%"  class="alignLeft" height="50" >Contact Number</td>
+                            <td  width="25%"  class="tablerows">
+                                <c:out default="" value="${parents.contactnumber}" />
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50">Co-Contact Number
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${parents.cocontactnumber}" />
+                            </td>
+                        </tr>
+                        
+                        
+                        <tr>
+
+                            <td width="25%"  class="alignLeft" height="50">S/O,D/O,W/O</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.fathersname}" />
+                            </td>
+                            
+                            <td width="25%"   class="alignLeft" height="50" >Address</td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${parents.addresspermanent}" />
+                            </td>
+                            
+                            <%-- <td width="25%"  class="alignLeft" height="50" >Mother's Name
+                            </td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.mothersname}" />
+                            </td> --%>
+                        </tr>
+                        
+                        <%-- <tr>
+
+                            <td width="25%"  class="alignLeft" height="50">Father's Qualification</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.fathersqualification}" />
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50" >Mother's Qualification
+                            </td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.mothersqualification}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="25%"  class="alignLeft" height="50">Father's Caste <br> Certificate No</td>
+                            <td width="25%" class="tablerows" >
+                                 <c:out value="${parents.fatherscastecertno}" />
+                                
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50" >Mother's Caste <br> Certificate No
+                            </td>
+                            <td width="25%"  class="tablerows">
+                                <c:out default="" value="${parents.motherscastecertno}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="25%"  class="alignLeft" height="50">Guardian's name & address</td>
+                            <td width="25%" class="tablerows" >
+                                 <c:out value="${student.guardiandetails}" />
+                                
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50" >Annual Income
+                            </td>
+                            <td width="25%"  class="tablerows">
+                                <c:out default="" value="${parents.parentsannualincome}" />
+                            </td>
+                        </tr> --%>
+					
+                        <%-- <tr>
                             <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
                             <td width="25%" class="tablerows" >
-                                <%-- <c:out value="${student.dateofbirth}" /> --%>
+                                <c:out value="${student.dateofbirth}" />
                                 <fmt:formatDate value="${student.dateofbirth}" pattern="dd/MM/yyyy"/>
                                 
                             </td>
@@ -505,7 +576,7 @@ for(Cookie cookie : cookies){
                             <c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
 						    ${splt} 
 							</c:forEach>
-                               <%--  <c:out default="" value="${student.classstudying}" /> --%>
+                                <c:out default="" value="${student.classstudying}" />
                             </td>
                             <td width="25%"  class="alignLeft" height="50">Admitted in class
                             </td>
@@ -538,13 +609,13 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.religion}" />
                             </td>
-                  <%--           
+                            
                             <td  width="25%"  class="alignLeft" height="50" >Caste
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.caste}" />
                             </td>
- --%>
+
                                       
                             <td  width="25%"  class="alignLeft" height="50" >Students Caste Certificate No.
                             </td>
@@ -589,11 +660,11 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                          <tr>
-                        <%-- <td  width="25%"  class="alignLeft" height="50" >Bhagyalakshmi Bond No.
+                        <td  width="25%"  class="alignLeft" height="50" >Bhagyalakshmi Bond No.
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.bhagyalakshmibondnumber}" />
-                            </td> --%>
+                            </td>
                             <td  width="25%"  class="alignLeft" height="50" >Special Category
                             </td>
                             <td width="25%" class="tablerows" >
@@ -620,7 +691,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.remarks}" />
                                 
                             </td>                         
-                        </tr>
+                        </tr> --%>
                         
                        <%--  <tr>
                         
@@ -647,6 +718,14 @@ for(Cookie cookie : cookies){
                         
                         <tr>
                         
+                        
+                        	<td  width="25%"  class="alignLeft" height="50">Notes
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${parents.remarks}" />
+                                
+                            </td>
+                        
                              <td  width="25%"  class="alignLeft" height="50">Created Date
                             </td>
                             <td width="25%" class="tablerows">
@@ -656,7 +735,7 @@ for(Cookie cookie : cookies){
    
                         </tr>
                                                 
-                        <tr>
+                        <%-- <tr>
                             <td  width="25%"  class="alignLeft" height="50" >Class of leaving
                             </td>
                             <td width="25%" class="tablerows" >
@@ -687,7 +766,7 @@ for(Cookie cookie : cookies){
                             </td>
                           
                            
-                        </tr>
+                        </tr> --%>
                         
            
 
@@ -717,7 +796,7 @@ for(Cookie cookie : cookies){
                     
                         <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
+                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Doc1" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc1.jpg" href="/sla/data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
@@ -726,7 +805,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
+                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Doc2" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc2.jpg" href="/sla/data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
@@ -735,7 +814,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
+                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Doc3" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc3.jpg" href="/sla/data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
@@ -744,7 +823,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
+                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Doc4" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc4.jpg" href="/sla/data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
@@ -753,7 +832,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
+                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Doc5" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc5.jpg" href="/sla/data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
@@ -763,7 +842,7 @@ for(Cookie cookie : cookies){
                 </div>
     </div>
     
-    	<div class="accordion" style="width: 100%;height: 100%">
+    	<%-- <div class="accordion" style="width: 100%;height: 100%">
 		
                 <h3><a href="#">Previous School Details</a></h3>
                 <div>
@@ -838,9 +917,9 @@ for(Cookie cookie : cookies){
                         </tr>
                     </table>
                 </div>
-    </div>
+    </div> --%>
     
-    <div class="accordion" style="width: 100%;height: 100%">
+    <%-- <div class="accordion" style="width: 100%;height: 100%">
 		
                 <h3><a href="#">Bank Details</a></h3>
                 <div>
@@ -885,8 +964,8 @@ for(Cookie cookie : cookies){
                     </table>
                 </div>
     </div>
-    
-            <div id="accordion1" style="width: 100%;height: 100%">
+     --%>
+            <%-- <div id="accordion1" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Parent's Details</a></h3>
                 <div>
@@ -1019,8 +1098,8 @@ for(Cookie cookie : cookies){
 
 
 
-            </div>
-              <div id="accordion2" style="width: 100%;height: 100%">
+            </div> --%>
+              <%-- <div id="accordion2" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Fees Details</a></h3>
                 
@@ -1074,8 +1153,8 @@ for(Cookie cookie : cookies){
 
 
 
-            </div>
-            <div id="accordion3" style="width: 100%;height: 100%">
+            </div> --%>
+            <%-- <div id="accordion3" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Fees Structure</a></h3>
                 
@@ -1145,7 +1224,7 @@ for(Cookie cookie : cookies){
 
 
 
-            </div>
+            </div> --%>
             <table  width="70%"  id="table11" align="center">
                         <tr>
                             <td width="30%"> 

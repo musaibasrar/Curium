@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.user.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -101,6 +102,13 @@ public class UserAction {
 	public void setHttpobjects(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
+	}
+	
+	@PostMapping("/advanceMainSearch")
+	private String advanceMainSearch() {
+		new UserService(request, response).mainAdvanceSearch();
+		new EmployeeService(request, response).ViewAllEmployee();
+        return "advancesearchresult";
 	}
 
 }
