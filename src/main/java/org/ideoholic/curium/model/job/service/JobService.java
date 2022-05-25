@@ -114,7 +114,7 @@ public class JobService {
 			 		//int year = calendar.get(Calendar.YEAR);
 			 		int month = calendar.get(Calendar.MONTH);
 			 		
-			 		String externalId = Integer.toString(year).concat("_").concat(Integer.toString(month)).concat("_").concat(subSubWork).concat("_").concat(filetype);
+			 		String externalId = Integer.toString(year).concat("_").concat(Integer.toString(month+1)).concat("_").concat(subSubWork).concat("_").concat(filetype);
 			 		query.setExternalid(externalId);
 			 		
 					String resultQuery = new JobDAO().addQuery(query);
