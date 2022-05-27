@@ -35,6 +35,9 @@
         <property name="paymenttype" type="string">
             <column name="paymenttype" length="100" />
         </property>
+        <property name="classsec" type="string">
+            <column name="classsec" length="20" />
+        </property>
        
         <!-- inverse="true" -->
         <set name="feesCollectionRecords" table="feescollecion"
