@@ -278,7 +278,7 @@ public class studentDetailsDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public boolean promoteMultiple(List<Student> students, String classStudying) {
+	public boolean promoteMultiple(List<Student> students, String classStudying, String promotedYear) {
 		boolean result = false;
 		
 		  String stringclassStudying = classStudying;
@@ -309,7 +309,7 @@ public class studentDetailsDAO {
 						  sect = tempstudent[1];
 					 }
 					 
-					String hql = "UPDATE Student set classstudying = '"+ch.getUpperclass()+"--"+sect+"' WHERE sid = "+student.getSid()+"";
+					String hql = "UPDATE Student set classstudying = '"+ch.getUpperclass()+"--"+sect+"', promotedyear='"+promotedYear+"' WHERE sid = "+student.getSid()+"";
 					Query query = session.createQuery(hql);
 					query.executeUpdate();
 				}

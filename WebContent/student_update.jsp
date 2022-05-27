@@ -931,6 +931,43 @@ for(Cookie cookie : cookies){
 									type="text" value="<fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>" class="textField"
 									id="datepickerCD" size="30" data-validate="validate(required)">
 							</label></td>
+							
+							<td  class="alignLeft" style="padding-left: 20px;">Admission Year:&nbsp;&nbsp;&nbsp;&nbsp; 
+                                        <label> <select name="yearofadmission" id="yearofadmission" required
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${student.yearofadmission}</option>
+										<option>2025/26</option>
+										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
+										<option>2021/22</option>
+										<option>2020/21</option>
+										<option>2019/20</option>
+										<option>2018/19</option>
+										<option>2017/18</option>
+										<option>2016/17</option>
+										<option>2015/16</option>
+										<option>2014/15</option>
+										<option>2013/14</option>
+										<option>2012/13</option>
+										<option>2011/12</option>
+										<option>2010/11</option>
+										<option>2009/10</option>
+										<option>2008/09</option>
+										<option>2007/08</option>
+										<option>2006/07</option>
+										<option>2005/06</option>
+										<option>2004/05</option>
+										<option>2003/04</option>
+										<option>2002/03</option>
+										<option>2001/02</option>
+										<option>2000/01</option>										
+								</select>
+
+							</label> 
+                        
+                        </td>
+							
 
 							</tr>
 							

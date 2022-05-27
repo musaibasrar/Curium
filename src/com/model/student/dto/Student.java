@@ -89,6 +89,10 @@ public class Student implements java.io.Serializable {
 	private String accno;
 	private String bankifsc;
 	private int userid;
+	private String yearofadmission;
+	private String promotedyear;
+	
+	
 	
 	public Student() {
 	}
@@ -112,7 +116,8 @@ public class Student implements java.io.Serializable {
 			Integer passedout, Integer droppedout, Integer leftout, Integer semester,String stream,String mediumofinstruction,
 			 String previousschooltype,String previouschooladdress,String urbanrural,String studentscastecertno,String studentscaste,
 			 String socialcategory,Integer belongtobpl,String lastcourse,String lastfirstlanguage,
-			 String lastsecondlanguage,String specialcategory, String registrationnumber, Integer rte, String bankname, String bankbranch, String accno, String bankifsc, int userid) {
+			 String lastsecondlanguage,String specialcategory, String registrationnumber, Integer rte, String bankname, String bankbranch, String accno, String bankifsc, int userid,
+			 String yearofadmission, String promotedyear) {
 		this.name = name;
 		this.classstudying = classstudying;
 		this.classadmittedin = classadmittedin;
@@ -171,6 +176,8 @@ public class Student implements java.io.Serializable {
 		this.accno=accno;
 		this.bankifsc=bankifsc;
 		this.userid = userid;
+		this.yearofadmission = yearofadmission;
+		this.promotedyear= promotedyear; ;
 	}
 
 	@Id
@@ -723,6 +730,22 @@ public class Student implements java.io.Serializable {
 
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+
+	public String getYearofadmission() {
+		return yearofadmission;
+	}
+
+	public void setYearofadmission(String yearofadmission) {
+		this.yearofadmission = yearofadmission;
+	}
+
+	public String getPromotedyear() {
+		return promotedyear;
+	}
+
+	public void setPromotedyear(String promotedyear) {
+		this.promotedyear = promotedyear;
 	}
 	
 }

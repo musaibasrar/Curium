@@ -36,7 +36,16 @@ public class Receiptinfo implements java.io.Serializable {
 	private int userid;
 	private String branchreceiptnumber;
 	private String paymenttype;
+	private String classsec;
 	
+	public String getClasssec() {
+		return classsec;
+	}
+
+	public void setClasssec(String classsec) {
+		this.classsec = classsec;
+	}
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Receiptinfo")
 	private Set<Feescollection> feesCollectionRecords =
 			new HashSet<Feescollection>(0);
@@ -49,7 +58,7 @@ public class Receiptinfo implements java.io.Serializable {
 	}
 
 	public Receiptinfo(int sid, Date date, Long totalamount, String academicyear, 
-			Set<Feescollection> feesCollecionRecords, int branchid, int cancelreceipt, int userid, String branchreceiptnumber,String paymenttype) {
+			Set<Feescollection> feesCollecionRecords, int branchid, int cancelreceipt, int userid, String branchreceiptnumber,String paymenttype, String classsec) {
 		this.sid = sid;
 		this.date = date;
 		this.totalamount = totalamount;
@@ -60,6 +69,7 @@ public class Receiptinfo implements java.io.Serializable {
 		this.userid = userid;
 		this.branchreceiptnumber = branchreceiptnumber;
 		this.paymenttype = paymenttype;
+		this.classsec = classsec;
 	}
 
 	@Id

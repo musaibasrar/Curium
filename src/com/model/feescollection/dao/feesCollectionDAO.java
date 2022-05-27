@@ -144,14 +144,14 @@ public class feesCollectionDAO {
 			}
 	}
 
-	public Receiptinfo getReceiptInfoDetails(Integer receiptNumber, String currentAcademicYear, String branchId) {
+	public Receiptinfo getReceiptInfoDetails(Integer receiptNumber) {
 		
 		Receiptinfo receiptDetails = new Receiptinfo();
 		
 		try {
 			 
 			 transaction = session.beginTransaction();
-			 Query query = session.createQuery("from Receiptinfo where receiptnumber = '"+receiptNumber+"' and branchid='"+branchId+"' and academicyear = '"+currentAcademicYear+"'");
+			 Query query = session.createQuery("from Receiptinfo where receiptnumber = '"+receiptNumber+"'");
 			 receiptDetails = (Receiptinfo) query.uniqueResult();
 			 transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

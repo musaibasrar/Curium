@@ -186,6 +186,12 @@
          <property name="userid" type="int">
 	 			<column name="userid" />
 			</property>
+		<property name="yearofadmission" type="string">
+            <column name="yearofadmission" length="10" />
+        </property>  
+        <property name="promotedyear" type="string">
+            <column name="promotedyear" length="10" />
+        </property>  
          <!-- <many-to-one name="Pudetails" class="com.model.pudetails.dto.Pudetails"
             column="pudetailsid" unique="true" not-null="true" lazy="false"
             cascade="all" />
