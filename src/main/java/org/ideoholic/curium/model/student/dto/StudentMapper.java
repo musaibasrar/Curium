@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.student.dto;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.pudetails.dto.Pudetails;
+import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.mapstruct.Mapper;
@@ -99,4 +100,6 @@ public interface StudentMapper {
     @Mapping(target = "proficiencysports", source = "games")
     @Mapping(target = "areyouemployee", source = "employer")
     Degreedetails mapDegreedetails(StudentDto studentDto);
+    
+    Classsec mapClassec(StudentDto studentDto);
 }

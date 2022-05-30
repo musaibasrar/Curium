@@ -243,47 +243,28 @@ public class StudentService {
 		Parents parents = StudentMapper.INSTANCE.mapParent(studentDto);
 		Pudetails puDetails = StudentMapper.INSTANCE.mapPudetails(studentDto);
 		Degreedetails degreeDetails = StudentMapper.INSTANCE.mapDegreedetails(studentDto);
-		String id = "";
-		String pid = "";
-		int studentId = 0;
-		int parentsId = 0;
-		String addClass = null, addSec = null, addClassE = null, addSecE = null, conClassStudying = null,
-				conClassAdmittedIn = null;
 		String studentPicUpdate = null;
-		String dropdowncateg = null;
-		String newcateg = null;
 
 		try {
-
 			if (listOfFiles != null && listOfFiles.length != 0) {
-
 				for (MultipartFile fileItem : listOfFiles) {
 					String fileName = (DataUtil.emptyString(fileItem.getOriginalFilename()));
 					String fileValue = (DataUtil.emptyString(fileItem.getName()));
-
 					if (!fileName.equalsIgnoreCase("")) {
 						// Resize the image
 						byte[] bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
 						System.out.println("ecncoded value is " + new String(bytesEncoded));
 						String saveFile = new String(bytesEncoded);
-
 						student.setStudentpic(saveFile);
-
 					} else {
-
 						student.setStudentpic(studentPicUpdate);
 					}
 				}
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if ("".equalsIgnoreCase(newcateg)) {
-			student.setSpecialcategory(dropdowncateg);
-		} else {
-			student.setSpecialcategory(newcateg);
-		}
+
 		student.setArchive(0);
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		student.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
@@ -298,7 +279,7 @@ public class StudentService {
 			student.setDegreedetails(degreeDetails);
 		}
 		student = new studentDetailsDAO().update(student);
-		if (pid != "") {
+		if (parents.getPid() != null) {
 			parents.setStudent(student);
 			parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			parents.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
