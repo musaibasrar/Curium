@@ -163,7 +163,7 @@ public class FeesCollectionService {
 				}
 				
 			}*/
-			Long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid();
+			Long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid() - singleFeesStructure.getConcession();
 			feesMap.put(singleFeesStructure,totalDueAmount);
 		}
 		request.setAttribute("studentfeesdetails", feesMap);
