@@ -941,7 +941,7 @@ for(Cookie cookie : cookies){
 
 							<td align="left">
 							<label> <select name="yearofadmission" id="yearofadmission" required
-									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${student.yearofadmission}</option>
 										<option>2025/26</option>
 										<option>2024/25</option>
