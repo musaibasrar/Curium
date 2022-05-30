@@ -152,7 +152,8 @@ public class StudentAction {
 	}
 
 	@RequestMapping(value = "/updateStudent", method = RequestMethod.POST, consumes = "multipart/form-data")
-	public String updateStudent(@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
+	public String updateStudent(@ModelAttribute("student") StudentDto student,
+			@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
 		String idbranchid = new StudentService(request, response).updateStudent(uploadedFiles);
 		String id[] = idbranchid.split("_");
 		return viewStudent(id[0], id[1]);

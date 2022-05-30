@@ -64,6 +64,8 @@ public class StudentDto {
 	private String bankbranch;
 	private String languagesstudied;
 	private String mediumofinstructionlastschool;
+	private String studentPicUpdate;
+	private String newcategory;
 
 	/* Parents Data */
 	private String fathersname;
