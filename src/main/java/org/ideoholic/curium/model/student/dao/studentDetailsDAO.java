@@ -278,7 +278,7 @@ public class studentDetailsDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public boolean promoteMultiple(List<Student> students, String classStudying, String promotedYear) {
+	public boolean promoteMultiple(List<Student> students, String classStudying, String promotedYear, int branchid) {
 		boolean result = false;
 		
 		  String stringclassStudying = classStudying;
@@ -295,7 +295,7 @@ public class studentDetailsDAO {
 
 		try {
 			transaction = session.beginTransaction();
-			Query query1 = session.createQuery("From Classhierarchy where lowerclass = '"+classStudying+"'");
+			Query query1 = session.createQuery("From Classhierarchy where lowerclass = '"+classStudying+"' and branchid="+branchid+"");
 			Classhierarchy ch = (Classhierarchy) query1.uniqueResult();
 			
 			if(ch!=null) {

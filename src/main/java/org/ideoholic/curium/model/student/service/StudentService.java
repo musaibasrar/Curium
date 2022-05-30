@@ -1431,7 +1431,7 @@ public class StudentService {
 			studentList.add(student);
 		}
 		
-		if (new studentDetailsDAO().promoteMultiple(studentList, classStudying, promotedYear)) {
+		if (new studentDetailsDAO().promoteMultiple(studentList, classStudying, promotedYear, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()))) {
 			result = true;
 		}
 		return result;
