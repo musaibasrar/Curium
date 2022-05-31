@@ -56,6 +56,7 @@ public class StudentDto {
 	private String bhagyalakshmibondnumber;
 	private String disabilitychild;
 	private String specialcategory;
+	private String newcategory;
 	private Integer sts;
 	private Integer rte;
 	private String bankname;
@@ -93,12 +94,12 @@ public class StudentDto {
 	private String aggmarks;
 	private String xmediuminstruction;
 	private String PUmediuminstruction;
-	
+
 	private String arts1;
 	private String arts2;
 	private String science1;
 	private String science2;
-	
+
 	/* Degree Details Data */
 	private Integer pepdc;
 	private String passedyeardc;
@@ -119,5 +120,4 @@ public class StudentDto {
 	private String extracurricular;
 	private String employer;
 	private Integer karnataka;
-
 }
