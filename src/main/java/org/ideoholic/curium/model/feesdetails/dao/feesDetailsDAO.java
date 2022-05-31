@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
+import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.HibernateUtil;
 
@@ -228,15 +229,15 @@ public class feesDetailsDAO {
                 return results;
         }
 
-        public List<Student> readListOfStudents(int branchId) {
-                List<Student> results = new ArrayList<Student>();
+        public List<Parents> readListOfStudents(int branchId) {
+                List<Parents> results = new ArrayList<Parents>();
 
                 try {
                         // this.session =
                         // HibernateUtil.getSessionFactory().openCurrentSession();
                         transaction = session.beginTransaction();
 
-                        results = (List<Student>) session.createQuery("FROM Student s where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")")
+                        results = (List<Parents>) session.createQuery("FROM Parents p where p.Student.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")")
                                         .list();
                         transaction.commit();
 

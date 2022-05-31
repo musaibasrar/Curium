@@ -103,7 +103,7 @@ public class FeesService {
 
                 boolean result = false;
                 try {
-                        List<Student> list = new feesDetailsDAO().readListOfStudents(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                        List<Parents> list = new feesDetailsDAO().readListOfStudents(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
                         request.setAttribute("studentListFeesCollection", list);
                         result = true;
                 } catch (Exception e) {

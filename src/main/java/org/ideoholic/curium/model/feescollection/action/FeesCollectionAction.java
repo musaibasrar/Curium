@@ -67,7 +67,7 @@ public class FeesCollectionAction {
                 new FeesCollectionService(request, response).getStampFees();
                 new FeesCollectionService(request, response).getFeesDetails();
                 new StandardService(request, response).viewClasses();
-                new FeesService(request, response).viewAllBranchStudents();
+                new FeesService(request, response).viewAllStudentsList();
                 return "feesCollection";
         }
 
