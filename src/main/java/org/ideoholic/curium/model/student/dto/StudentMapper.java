@@ -3,10 +3,12 @@ package org.ideoholic.curium.model.student.dto;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.pudetails.dto.Pudetails;
+import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
@@ -19,7 +21,7 @@ import org.mapstruct.factory.Mappers;
  * @author Ideoholic
  *
  */
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, imports = DateUtil.class)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, nullValueCheckStrategy=NullValueCheckStrategy.ALWAYS, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, imports = DateUtil.class)
 public interface StudentMapper {
     StudentMapper INSTANCE = Mappers.getMapper(StudentMapper.class);
 
@@ -98,4 +100,6 @@ public interface StudentMapper {
     @Mapping(target = "proficiencysports", source = "games")
     @Mapping(target = "areyouemployee", source = "employer")
     Degreedetails mapDegreedetails(StudentDto studentDto);
+    
+    Classsec mapClassec(StudentDto studentDto);
 }
