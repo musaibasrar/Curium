@@ -436,13 +436,14 @@
             }
            
             var students = [
-            <c:forEach varStatus="status" items="${studentListFeesCollection}" var="student">{
-            	value:'<c:out default="0" value="${student.name}" />',
-                admissionno:'<c:out default="0" value="${student.admissionnumber}" />',
-                regno:'<c:out default="0" value="${student.studentexternalid}" />',
-                name:'<c:out default="0" value="${student.name}" />',
-                classandsec:'<c:out default="0" value="${student.classstudying}" />',
-                id:'<c:out default="0" value="${student.sid}" />',
+            <c:forEach varStatus="status" items="${studentListFeesCollection}" var="parent">{
+            	value:'<c:out default="0" value="${parent.student.name}" />',
+                admissionno:'<c:out default="0" value="${parent.student.admissionnumber}" />',
+                regno:'<c:out default="0" value="${parent.student.studentexternalid}" />',
+                name:'<c:out default="0" value="${parent.student.name}" />',
+                classandsec:'<c:out default="0" value="${parent.student.classstudying}" />',
+                id:'<c:out default="0" value="${parent.student.sid}" />',
+                fathername:'<c:out default="0" value="${parent.fathersname}" />',
                 
             }<c:if test="${!status.last}">,</c:if>
             </c:forEach>
@@ -471,7 +472,7 @@
             }).data( "autocomplete" )._renderItem = function( ul, item ) {
                 return $( "<li></li>" )
                 .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +" / "+item.regno+" </b> </a>" )
+                .append( "<a><b> " + item.value +" / "+item.regno+" / "+item.fathername+" </b> </a>" )
                 .appendTo( ul );
             };
             var addFeesButtonID="#addFees";
