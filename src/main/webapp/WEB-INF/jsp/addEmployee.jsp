@@ -597,9 +597,9 @@ for(Cookie cookie : cookies){
 									type="text" class="textField" id="address" size="36">
 							</label></td>
 
-							<td class="alignRight">Contact Number &nbsp;</td>
+							<td class="alignRight">Contact Number* &nbsp;</td>
 							<td><label> <input
-									name="contactnumber" type="text" class="textField"
+									name="contactnumber" type="text" class="textField" required
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									id="contactnumber" size="36" maxlength="10" minlength="10"/>
 							</label></td>
@@ -898,8 +898,10 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function addEmployee() {
 								var form1 = document.getElementById("form1");
-								form1.action="/sla/EmployeeProcess/addEmployee";
-								form1.submit();
+								if(form1.checkValidity()) {
+									form1.action="/sla/EmployeeProcess/addEmployee";
+									form1.submit();
+								  }
 							}
 
 							function Cancel() {

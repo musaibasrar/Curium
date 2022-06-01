@@ -631,7 +631,20 @@
     				document.getElementById("typeofworknoncourtmwtr").style.display = '';
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
     				document.getElementById("typeofworkcourtdocstr").style.display = "none";
-    			}  
+    			} else if(typeofworktext == "Notice") {
+	    			document.getElementById("typeofworkcourtcasestr").style.display = "none";
+    				document.getElementById("typeofworknoncourtabttr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtsrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtdrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcstr").style.display = "none";
+    				document.getElementById("typeofworknoncourturdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
+    				document.getElementById("typeofworkcourtcasestr").style.display = "none";
+    				document.getElementById("typeofworkcourtdocstr").style.display = "none";
+    				document.getElementById("typeofworknoncourtnotr").style.display = '';
+    			} 
     	
     		}    		
     		
@@ -674,7 +687,7 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">UID</th>
                             <th title="click to sort" class="headerText">Name</th>
-                            <th title="click to sort" class="headerText">Job</th>
+                            <th title="click to sort" class="headerText">Job/Appt.</th>
                         </tr>
                     </thead>
 
@@ -821,15 +834,9 @@ for(Cookie cookie : cookies){
 											<option value="Unregistered Documents">Unregistered Documents</option>
 											<option value="Reading & Legal Opinion">Reading & Legal Opinion</option>
 											<option value="Mutation Work">Mutation Work</option>
+											<option value="Notice">Notice</option>
 										</select>
 									</label></td>
-								</tr>
-								
-								
-								
-								
-								<tr>
-									<td><br></td>
 								</tr>
 								
 								
@@ -887,6 +894,7 @@ for(Cookie cookie : cookies){
 											<option value="CTSD">CTS Documents</option>
 											<option value="EC">Encumberance Certificate</option>
 											<option value="LSD">Land Survey Documents</option>
+											<option value="DRD">District Registrar Documents</option>
 											<option value="RED">Revenue Documents</option>
 										</select>
 									</label></td>
@@ -898,6 +906,7 @@ for(Cookie cookie : cookies){
 											<option selected></option>
 											<option value="AD">Adoption Deed</option>
 											<option value="ASA">Agriculture Sale Agreement</option>
+											<option value="ASAGPA">Agriculture Sale Agreement & GPA</option>
 											<option value="ASD">Agriculture Sale Deed</option>
 											<option value="AT">Amendment of Trust</option>
 											<option value="ASSD">Assignment Deed</option>
@@ -934,6 +943,7 @@ for(Cookie cookie : cookies){
 											<option value="DP">Dissolution of Partnership</option>
 											<option value="GPAAU">GPA Authentication</option>
 											<option value="PD">Partnership Deed</option>
+											<option value="RP">Reconstitution of Partnership</option>
 										</select>
 									</label></td>
 								</tr>
@@ -964,7 +974,6 @@ for(Cookie cookie : cookies){
 													<option value="MOU">MOU</option>
 													<option value="MJDA">MOU for JDA</option>
 													<option value="MN">Mubaratnama</option>
-													<option value="NC">Name Change</option>
 													<option value="NASA">Notary Agriculture Sale Agreement</option>
 													<option value="NFS">Notary Family Settlement</option>
 													<option value="NGD">Notary Gift Deed</option>
@@ -974,6 +983,8 @@ for(Cookie cookie : cookies){
 													<option value="NW">Notary Will</option>
 													<option value="RPT">Receipts</option>
 													<option value="RTR">RERA Title Report</option>
+													<option value="RES">Resolution</option>
+													<option value="SMP">Sale of Moveable Property</option>
 													<option value="TN">Talaqnama</option>
 													<option value="TR">Title Report</option>
 					
@@ -1001,6 +1012,17 @@ for(Cookie cookie : cookies){
 											<option value="CTSM">CTS Mutation</option>
 											<option value="GM">GESCOM Mutation</option>
 											<option value="PM">Panchayat Mutation</option>
+										</select>
+									</label></td>
+								</tr>
+								
+								<tr style="display: none;" id="typeofworknoncourtnotr">
+									<td class="alignLeft">Type of Cases:</td>
+									<td><label> <select name="typeofworknoncourtno" id="typeofworknoncourtno" style="width: 250px;height: 25px;">
+											<option selected></option>
+											<option value="PN">Paper Notice</option>
+											<option value="LN">Legal Notice</option>
+											<option value="NC">Name Change</option>
 										</select>
 									</label></td>
 								</tr>

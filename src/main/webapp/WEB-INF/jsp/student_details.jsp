@@ -842,6 +842,121 @@ for(Cookie cookie : cookies){
                 </div>
     </div>
     
+    
+     <div class="accordion" style="width: 100%;height: 100%">
+		
+                <h3><a href="#">Jobs</a></h3>
+                <div>
+                <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+
+                    <thead>
+                        <tr  >
+                            <th title="click to sort" class="headerText">UID</th>
+                            <th title="click to sort" class="headerText">Job No.</th>
+                            <th title="click to sort" class="headerText">Created Date</th>
+                            <th title="click to sort" class="headerText">Updated Date</th>
+                            <th title="click to sort" class="headerText">Staff</th>
+                            <th title="click to sort" class="headerText">Client Name</th>
+                            <th title="click to sort" class="headerText">Contact Number</th>
+                            <th title="click to sort" class="headerText">Status</th>
+                            <!-- <th title="click to sort" class="headerText">Details</th> -->
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <c:forEach items="${queryList}" var="query">
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                            	<c:if test="${query.status == 'To Do' }">
+                                	<td class="dataText" style="background-color: red;"><c:out value="${query.id}"/></td>
+                                </c:if>
+                                <c:if test="${query.status == 'In Progress' }">
+                                	<td class="dataText" style="background-color: yellow;"><c:out value="${query.id}"/></td>
+                                </c:if>
+                                <c:if test="${query.status == 'Completed' }">
+                                	<td class="dataText" style="background-color: green;"><c:out value="${query.id}"/></td>
+                                </c:if>
+                                 <td class="dataText"><c:out value="${query.externalid}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
+                                <td class="dataText"><c:out value="${query.teacher.teachername}"/></td>
+                                <td class="dataText"><c:out value="${query.parent.student.name}"/>
+	                                <input type="hidden" id="contactno_${query.id}" name="contactno_${query.id}" value="${query.parent.contactnumber}">
+                                </td>
+                                <td class="dataText"><c:out  value="${query.parent.contactnumber}"/></td>
+                                <td class="dataText"><c:out  value="${query.status}"/></td>
+                                <%-- <td class="dataText"><a href="#" onclick="openPopup(${query.id})" style="color:#eb6000;">View Details</a></td> --%>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                    
+                    <tfoot><tr>
+                    
+                    <td  class="footerTD" colspan="2" >
+                            </td>
+                   </tr></tfoot>
+                </table>
+                
+                </div>
+    </div>
+    
+    <div class="accordion" style="width: 100%;height: 100%">
+		
+                <h3><a href="#">Appointments</a></h3>
+                <div>
+                <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+
+                    <thead>
+                        <tr  >
+                            <th title="click to sort" class="headerText">Appt. UID</th>
+                            <th title="click to sort" class="headerText">Appt. No.</th>
+                            <th title="click to sort" class="headerText">Appt. Date</th>
+                            <th title="click to sort" class="headerText">Appt. Time</th>
+                            <!-- <th title="click to sort" class="headerText">Admission Number</th> -->
+                            <th title="click to sort" class="headerText">Client Name</th>
+                            <th title="click to sort" class="headerText">Contact Number</th>
+                            <!-- <th title="click to sort" class="headerText">Class</th> -->
+                            <!-- <th title="click to sort" class="headerText">Father Name</th> -->
+                            <!-- <th title="click to sort" class="headerText">Mother Name</th> -->
+                            <th title="click to sort" class="headerText">Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <c:forEach items="${appointmentList}" var="appointment">
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                                <td class="dataText"><c:out value="${appointment.id}"/></td>
+                                <td class="dataText"><c:out value="${appointment.externalid}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${appointment.appointmentdate}"/></td>
+                                <td class="dataText"><c:out value="${appointment.appointmenttime}"/></td>
+                                <%-- <td class="dataText"><c:out value="${appointment.parent.student.admissionnumber}"/></td> --%>
+                                <td class="dataText"><c:out value="${appointment.parent.student.name}"/></td>
+                                <td class="dataText"><c:out  value="${appointment.parent.contactnumber}"/></td>
+                                <%-- <td class="dataText">
+                                <c:forEach var="splt" items="${fn:split(appointment.parent.student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>
+									<input type="hidden" id="classstudyingone" name="classstudying" value="${Student.classstudying}"/>
+									 <input type="hidden" id="classstudying" name="classstudying_${Student.sid}" value="${Student.classstudying}"/>
+                                </td>
+                                <td class="dataText"><c:out value="${appointment.parent.fathersname}"/></td>
+                                <td class="dataText"><c:out  value="${appointment.parent.mothersname}"/></td> --%>
+                                <td class="dataText"><c:out  value="${appointment.status}"/></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                    
+                    <tfoot><tr>
+                    
+                    <td  class="footerTD" colspan="2" >
+                            </td>
+                   </tr></tfoot>
+                </table>
+                
+                </div>
+    </div>
+    
+    
+    
     	<%-- <div class="accordion" style="width: 100%;height: 100%">
 		
                 <h3><a href="#">Previous School Details</a></h3>

@@ -407,5 +407,16 @@ public class AppointmentService {
 		}
 		return result;
 	}
+
+	public void generateAppointmentsReportForClient() {
+		
+		String studentId = request.getParameter("id");
+		String queryMain = "from Appointment ap where ap.parent.Student.sid = '"+studentId+"' ";
+		List<Appointment> appointmentList = new ArrayList<Appointment>();
+				
+		appointmentList = new AppointmentDAO().generateAppointmentsReport(queryMain);
+		
+		httpSession.setAttribute("appointmentList", appointmentList);
+	}
 	
 }

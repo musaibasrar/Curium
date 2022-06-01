@@ -621,7 +621,15 @@ for(Cookie cookie : cookies){
                     <tbody>
                         <c:forEach items="${queryList}" var="query">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${query.id}"/>" class = "chcktbl"  name="queryids"  value="<c:out value="${query.id}"/>"/></td>
+                            	<c:if test="${query.status == 'To Do' }">
+                                	<td class="dataText" style="background-color: red;"><input type="checkbox" id = "<c:out value="${query.id}"/>" class = "chcktbl"  name="queryids"  value="<c:out value="${query.id}"/>"/></td>
+                                </c:if>
+                                <c:if test="${query.status == 'In Progress' }">
+                                	<td class="dataText" style="background-color: yellow;"><input type="checkbox" id = "<c:out value="${query.id}"/>" class = "chcktbl"  name="queryids"  value="<c:out value="${query.id}"/>"/></td>
+                                </c:if>
+                                <c:if test="${query.status == 'Completed' }">
+                                	<td class="dataText" style="background-color: green;"><input type="checkbox" id = "<c:out value="${query.id}"/>" class = "chcktbl"  name="queryids"  value="<c:out value="${query.id}"/>"/></td>
+                                </c:if>
                                  <td class="dataText"><c:out value="${query.id}"/></td>
                                  <td class="dataText"><c:out value="${query.externalid}"/></td>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>

@@ -44,7 +44,18 @@ public class JobDAO {
 					 Query<JobQuery> queryParentQuery = session.createQuery("from JobQuery where branchid = "+query.getBranchid()+" order by id DESC");
 					 	List<JobQuery> queryList = queryParentQuery.list();
 					 	
-					 	if(queryList.size() > 0) {
+					 	Date date = queryList.get(0).getCreateddate();
+					 	Date todaysDate = new Date();
+					 	
+				 		Calendar calendar = Calendar.getInstance();
+				 		calendar.setTime(date);
+				 		int month = calendar.get(Calendar.MONTH);
+				 		
+				 		Calendar todayscalendar = Calendar.getInstance();
+				 		todayscalendar.setTime(todaysDate);
+				 		int todaysmonth = todayscalendar.get(Calendar.MONTH);
+					 	
+					 	if(todaysmonth == month) {
 					 		String qNo = queryList.get(0).getExternalid();
 					 		String[] splitqNo = qNo.split("_");
 					 		int sum = Integer.parseInt(splitqNo[2])+1;

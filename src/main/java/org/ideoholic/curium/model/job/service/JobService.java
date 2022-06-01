@@ -126,7 +126,7 @@ public class JobService {
 						 String[] queryValues = resultQuery.split(":");
 						 String param = "?id="+queryValues[1]+"&no="+pidContact[0]+"";
 						 feedbacklink = feedbacklink+param;
-						 String messageClient = "Your File No. "+queryValues[0]+" is alloted to "+dep[1]+", Mobile No "+dep[1]+"";
+						 String messageClient = "Your File No. "+queryValues[0]+" is alloted to "+dep[1]+", Mobile No "+dep[2]+"";
 						 String messageInternal = "You are alloted with File No. "+queryValues[0]+", client name: "+pidContact[2]+", contact no. "+pidContact[1]+" ";
 						 
 						 String message= "Click "+feedbacklink+" to give feedback on enq. # "+queryValues[0]+"";
@@ -582,5 +582,17 @@ public class JobService {
 			}
 			return writeSucees;
 			// getFile(name, path);
+	}
+
+	public void generateQueriesReportForClient() {
+		
+		String studentId = request.getParameter("id");
+		
+		String queryMain = "from JobQuery pq where pq.parent.Student.sid = '"+studentId+"'";
+		List<JobQuery> JobQueryList = new ArrayList<JobQuery>();
+				
+		JobQueryList = new JobDAO().generateQueriesReport(queryMain);
+		
+		httpSession.setAttribute("queryList", JobQueryList);
 	}
 }

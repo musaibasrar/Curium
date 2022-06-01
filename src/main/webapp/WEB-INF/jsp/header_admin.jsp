@@ -162,7 +162,7 @@ for(Cookie cookie : cookies){
 							<td><a target="mainFrame"
 								href="/sla/StudentProcess/addNew"> <img
 									src="/sla/images/student_header.svg" width="18" height="18"
-									alt="Add New Student" style="vertical-align: bottom;" />Add Client
+									alt="Add New Client" style="vertical-align: bottom;" />Add Client
 							</a></td>
 
 							<td ><a target="leftFrame" href="/sla/leftsettings">

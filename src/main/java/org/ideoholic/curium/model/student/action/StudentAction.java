@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.appointment.service.AppointmentService;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
+import org.ideoholic.curium.model.job.service.JobService;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.service.StudentService;
@@ -113,6 +115,7 @@ public class StudentAction {
 	@GetMapping("/viewAllStudentsWithParents")
 	public String viewAllStudentsWithParents() {
 		new StudentService(request, response).viewAllStudentsParents();
+		new EmployeeService(request, response).ViewAllEmployee();
 		return "viewAllWithParents";
 	}
 
@@ -183,6 +186,8 @@ public class StudentAction {
 	public String viewStudent() {
 		String branchId;
 		if (new StudentService(request, response).viewDetailsOfStudent()) {
+			new JobService(request, response).generateQueriesReportForClient();
+			new AppointmentService(request, response).generateAppointmentsReportForClient();
 			Object obj = request.getAttribute("urlbranchid");
 			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
 			if (branchId.equalsIgnoreCase("1")) {
