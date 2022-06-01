@@ -287,7 +287,7 @@
 					<td class="dataText">Rs. <c:out
 							value="${feescatmap.value}" /></td>
 					
-					<%-- &#x20B9;<td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
+					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
 			<tr>
@@ -364,7 +364,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 250px;">Total&nbsp;&nbsp;&nbsp;&#x20B9; <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 250px;">Total&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -382,10 +382,10 @@
 					Total Fees: Rs. ${totalfees}
 				</td>
 				<td class="headerText">
-					Total fees paid : &#x20B9; ${sumoffees}
+					Total fees paid : Rs.  ${sumoffees}
 				</td>
 				<td class="headerText">
-				 Total fees Due : &#x20B9; ${dueamount} 
+				 Total fees Due : Rs.  ${dueamount} 
 				</td>
 				
 			</tr>
@@ -529,7 +529,7 @@
 					<td class="dataText">Rs. <c:out
 							value="${feescatmap.value}" /></td>
 					
-					<%-- &#x20B9;<td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
+					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
 			<tr>
@@ -606,7 +606,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 250px;">Total&nbsp;&nbsp;&nbsp;&#x20B9; <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 250px;">Total&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -624,10 +624,10 @@
 					Total Fees: Rs. ${totalfees}
 				</td>
 				<td class="headerText">
-					Total fees paid : &#x20B9; ${sumoffees}
+					Total fees paid : Rs.  ${sumoffees}
 				</td>
 				<td class="headerText">
-				 Total fees Due : &#x20B9; ${dueamount} 
+				 Total fees Due : Rs.  ${dueamount} 
 				</td>
 				
 			</tr>

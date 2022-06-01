@@ -271,10 +271,10 @@
                 
 					<div align="center">
 				<h class="dataTextFees">Academic Year : ${academicPerYear}</h>&nbsp;&nbsp;&nbsp;
-				<h class="dataTextFees">Total fees : &#x20B9; ${totalfees}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Total fees paid : &#x20B9; ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
+				<h class="dataTextFees">Total fees : Rs.  ${totalfees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total fees paid : Rs.  ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Due Amount : </h>
-                <h class="dataTextDueFees"> &#x20B9; ${dueamount}</h>
+                <h class="dataTextDueFees"> Rs.  ${dueamount}</h>
                 </div>
                 
                 <TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
