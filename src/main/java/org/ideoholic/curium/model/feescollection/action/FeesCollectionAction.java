@@ -82,16 +82,14 @@ public class FeesCollectionAction {
         public String printReceipt() {
                 new FeesCollectionService(request, response).previewDetails();
                 
-                if(httpSession.getAttribute("branchid")!=null){
-                    String branchId = httpSession.getAttribute("branchid").toString();
-                    if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
-                        return "printFeesDetail";
-                    }else if("4".equalsIgnoreCase(branchId)) {
-                        return "printFeesDetail_pu";
-                    }else if("5".equalsIgnoreCase(branchId)) {
-                        return "printFeesDetail_dc";
-                    }
-                }
+				/*
+				 * if(httpSession.getAttribute("branchid")!=null){ String branchId =
+				 * httpSession.getAttribute("branchid").toString();
+				 * if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) ||
+				 * "3".equalsIgnoreCase(branchId)) { return "printFeesDetail"; }else
+				 * if("4".equalsIgnoreCase(branchId)) { return "printFeesDetail"; }else
+				 * if("5".equalsIgnoreCase(branchId)) { return "printFeesDetail"; } }
+				 */
                 
                 return "printFeesDetail";
         }
