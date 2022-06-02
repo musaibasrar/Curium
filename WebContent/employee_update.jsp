@@ -310,11 +310,12 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form action="Controller?process=EmployeeProcess&action=viewAllEmployee"
-		id="form1" method="POST">
+		id="form1" method="POST" enctype="multipart/form-data">
 		<div>
 			<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Employee Details</a></li>
+					<li><a href="#tabs-4">Upload Photo</a></li>
 					<li><a href="#tabs-2">Bank Details</a></li>
 					<li><a href="#tabs-3">Additional Details</a></li>
 
@@ -323,6 +324,23 @@ for(Cookie cookie : cookies){
 
 
 				<div id="tabs-1">
+				
+					<table align="center">
+				
+				<tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${employee.employeephoto}"/>" alt="Staff's Photo" style="width: 200px;height: 200px;">
+                    <input type="hidden" value="<c:out value="${employee.employeephoto}"/>" id="employeephotoupdate" name="employeephotoupdate">
+                    <input type="hidden" value="<c:out value="${employee.employeedoc1}"/>" id="employeedoc1update" name="employeedoc1update">
+                    <input type="hidden" value="<c:out value="${employee.employeedoc2}"/>" id="employeedoc2update" name="employeedoc2update">
+                    <input type="hidden" value="<c:out value="${employee.employeedoc3}"/>" id="employeedoc3update" name="employeedoc3update">
+                    <input type="hidden" value="<c:out value="${employee.employeedoc4}"/>" id="employeedoc4update" name="employeedoc4update">
+                    <input type="hidden" value="<c:out value="${employee.employeedoc5}"/>" id="employeedoc5update" name="employeedoc5update">
+                    </td>
+                    </tr>
+				
+				</table>
+				
 					<table width="70%" border="0" align="center" id="table1">
 
 
@@ -738,6 +756,132 @@ for(Cookie cookie : cookies){
 
 					</table>
 				</div>
+				
+				<div id="tabs-4">
+					<table width="100%" border="0" align="center" >
+						<tr>
+						
+							<td><br />
+							<input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" >
+							</td>
+						</tr>
+						<tr>
+						<td>
+                    <input type="checkbox" name="employeedoc1delete" value="delete">Delete
+                    </td>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${employee.employeedoc1}"/>" alt="Staff's Doc1" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <input type="file" name="employeedoc1" id="employeedoc1" accept="image/*" >
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <input type="checkbox" name="employeedoc2delete" value="delete">Delete
+                    </td>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${employee.employeedoc2}"/>" alt="Staff's Doc2" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <input type="file" name="employeedoc2" id="employeedoc2" accept="image/*" >
+                    </td>
+                    
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <input type="checkbox" name="employeedoc3delete" value="delete">Delete
+                    </td>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${employee.employeedoc3}"/>" alt="Staff's Doc3" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                   <input type="file" name="employeedoc3" id="employeedoc3" accept="image/*" >
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <input type="checkbox" name="employeedoc4delete" value="delete">Delete
+                    </td>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${employee.employeedoc4}"/>" alt="Staff's Doc4" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <input type="file" name="employeedoc4" id="employeedoc4" accept="image/*" >
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <input type="checkbox" name="employeedoc5delete" value="delete">Delete
+                    </td>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${employee.employeedoc5}"/>" alt="Staff's Doc5" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <input type="file" name="employeedoc5" id="employeedoc5" accept="image/*" >
+                    </td>
+                    </tr>
+						
+
+</table>
+
+
+
+<div>
+							<table width="100%">
+								<tr>
+
+									<td><br /></td>
+								</tr>
+								
+								<tr>
+
+									<td align="center">
+									<a class="nexttab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Next</a>
+								&nbsp;&nbsp;&nbsp;
+									<a class="prevtab" style="font-weight: bold;color: #325F6D;font-size: 13px" href="#">Previous</a>
+									</td>
+								</tr>
+
+							<tr>
+
+									<td><br /></td>
+								</tr>
+								
+								<tr>
+									<td align="center">
+										
+										
+										<button id="set4" class="set">Update</button>
+
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button type="submit" id="cancel4" class="cancel">Cancel</button>
+
+									</td>
+
+
+								</tr>
+								<tr>
+<td><br/></td>
+</tr>
+<tr>
+<td><br/></td>
+</tr>
+<tr>
+<td><br/></td>
+</tr>
+<tr>
+<td><br/></td>
+</tr>
+							</table>
+
+						</div>
+						
+</div>
 				
 			</div>
 

@@ -54,6 +54,7 @@ public class EmployeeAction {
 	private String addEmployeePage() {
 		
 		new EmployeeService(request, response).viewAllRelations();
+		new EmployeeService(request, response).addNew();
        return "addEmployee.jsp";
 		
 	}

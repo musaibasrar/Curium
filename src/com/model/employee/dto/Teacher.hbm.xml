@@ -78,5 +78,23 @@
         <property name="userid" type="int">
  			<column name="userid" />
 		</property>
+		<property name="employeephoto" type="string">
+            <column name="employeephoto" />
+        </property>
+		<property name="employeedoc1" type="string">
+            <column name="employeedoc1" />
+        </property>
+        <property name="employeedoc2" type="string">
+            <column name="employeedoc2" />
+        </property>
+        <property name="employeedoc3" type="string">
+            <column name="employeedoc3" />
+        </property>
+        <property name="employeedoc4" type="string">
+            <column name="employeedoc4" />
+        </property>
+        <property name="employeedoc5" type="string">
+            <column name="employeedoc5" />
+        </property>
     </class>
 </hibernate-mapping>
