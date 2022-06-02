@@ -94,8 +94,9 @@ public class FeesCollectionAction {
 
 		private String StampFees() {
                 new FeesCollectionService(request, response).getStampFees();
+                new FeesService(request, response).viewAllStudentsList();
                 //new FeesCollectionService(request, response).getFeesDetails();
-                new FeesService(request, response).viewAllBranchStudents();
+                //new FeesService(request, response).viewAllBranchStudents();
                 new StandardService(request, response).viewClasses();
                 return "feesCollection.jsp";
         }
