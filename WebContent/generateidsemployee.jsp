@@ -368,7 +368,7 @@
 
 	function printPreview() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=Printids&action=printpreview";
+		form1.action = "Controller?process=Printids&action=printpreviewemployee";
 		form1.method = "POST";
 		form1.submit();
 
@@ -463,93 +463,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=Printids&action=printpreview" method="POST">
-		<!-- <div style="height: 28px">
-			<button id="add">Add Department</button>
-			<br />
-		</div> -->
-
-		<div id="effect" class="ui-widget-content ui-corner-all">
-			<div id="tabs">
-				<ul>
-					<li><a href="#tabs-1">Generate Ids</a></li>
-
-				</ul>
-				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-
-						<tr>
-							<td class="alignRightFields">Name &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
-							</label></td>
-							
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-
-						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select name="classsearch"
-									id="classsearch" style="width: 130px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 100px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.section != '')}">
-												<option value="${classdetailslist.section}">
-													<c:out value="${classdetailslist.section}" />
-												</option>
-											</c:if>
-										</c:forEach>
-
-								</select>
-							</label>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-
-							<td width="30%" class="alignRight"></td>
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
-							</td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-					</table>
-					
-					
-
-				</div>
-			</div>
-		</div>
+	<form id="form1" action="Controller?process=Printids&action=printpreviewemployee" method="POST">
 
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
@@ -563,36 +477,24 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class &
-							Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Admission Date</th>
-
-
-
+						<th title="click to sort" class="headerText">Contact Number</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<c:forEach items="${searchStudentList}" var="Parents">
+					<c:forEach items="${employeeList}" var="employees">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
-								name="studentIDs"
-								value="<c:out value="${Parents.student.sid}"/>" /></td>
+								id="<c:out value="${employees.tid}"/>" class="chcktbl"
+								name="employeeIDs"
+								value="<c:out value="${employees.tid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.classstudying}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.admissiondate}" /></td>
-
-
+								href="Controller?process=EmployeeProcess&action=ViewDetails&id=<c:out value='${employee.tid}'/>"><c:out
+										value="${employees.teachername}" /></a></td>
+							<td class="dataText"><c:out value="${employees.contactnumber}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>

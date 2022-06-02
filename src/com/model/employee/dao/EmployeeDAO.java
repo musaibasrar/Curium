@@ -12,6 +12,7 @@ import org.hibernate.query.Query;
 
 import com.model.employee.dto.Teacher;
 import com.model.hr.dto.Paybasic;
+import com.model.student.dto.Student;
 import com.util.HibernateUtil;
 
 public class EmployeeDAO {
@@ -317,6 +318,23 @@ public class EmployeeDAO {
 				HibernateUtil.closeSession();
 			return payList;
 		}
+	}
+
+	public List<Teacher> getListEmployees(String query) {
+		
+		List<Teacher> teacher = new ArrayList<Teacher>();
+        try {
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(query);
+            teacher = HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        }finally {
+			HibernateUtil.closeSession();
+		 }
+        return teacher;
 	}
 
 }

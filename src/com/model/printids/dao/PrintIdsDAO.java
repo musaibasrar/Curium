@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+import com.model.employee.dto.Teacher;
 import com.model.mess.card.dto.Card;
 import com.model.parents.dto.Parents;
 import com.util.DateUtil;
@@ -74,5 +75,24 @@ public boolean updateCardValidity(List<Card> cardList) {
 		 }
 		return result;
 	}
+
+
+public Teacher printMultipleIdsEmployee(String id) {
+	Teacher teacherDetails = new Teacher();
+     
+     try {
+          transaction = session.beginTransaction();
+                  int sid = Integer.valueOf(id);
+                  Query query = session.createQuery("From Teacher as teacher where teacher.tid=" + sid);
+                  teacherDetails = (Teacher) query.uniqueResult();
+          transaction.commit();
+      } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+          
+          hibernateException.printStackTrace();
+      } finally {
+			HibernateUtil.closeSession();
+		}	      
+      return teacherDetails;
+}
 
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.employee.dto.Teacher;
 import com.model.mess.card.dto.Card;
 import com.model.parents.dto.Parents;
 import com.model.printids.dao.PrintIdsDAO;
@@ -235,5 +236,55 @@ public boolean updateCardValidity() {
         request.setAttribute("updatecard", result);
         return result;
 	}
+
+public boolean printMultipleEmployees() {
+	boolean result = false;
+    String[] studentIDs = request.getParameterValues("employeeIDs");
+    List<Long> ids = new ArrayList<Long>();
+    Teacher teacherDetails = new Teacher();
+ 
+    	
+      int i = 1;
+   
+      for (String id : studentIDs) {
+
+          
+           System.out.println("Value of i is " + i);
+           int sid = Integer.valueOf(id);
+           teacherDetails = new PrintIdsDAO().printMultipleIdsEmployee(id);
+           
+           //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
+
+           if (teacherDetails != null) {
+        	   httpSession.setAttribute("staffid" + i + "", teacherDetails.getTeacherexternalid());
+        	   httpSession.setAttribute("teachername" + i + "", teacherDetails.getTeachername());
+               httpSession.setAttribute("contactnumber" + i + "", teacherDetails.getContactnumber());
+               httpSession.setAttribute("designation" + i + "", teacherDetails.getDesignation());
+               httpSession.setAttribute("Address" + i + "", teacherDetails.getAddress());
+               httpSession.setAttribute("employeephoto" + i + "",teacherDetails.getEmployeephoto());
+               
+               //result = true;
+           } else {
+
+              
+               //result = false;
+           }
+
+           i++;
+       }
+   
+   httpSession.setAttribute("iInitial", i);
+   i = (int) (Math.ceil((float) (i) / 3));
+   httpSession.setAttribute("endValue", i);
+   
+   
+    if (teacherDetails == null) {
+        result = false;
+    } else {
+        result = true;
+    }
+    return result;
+
+}
 	
 }

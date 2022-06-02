@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.employee.service.EmployeeService;
 import com.model.feescategory.service.FeesService;
 import com.model.printids.service.PrintIdsService;
 import com.model.stampfees.service.StampFeesService;
@@ -45,11 +46,26 @@ public class PrintIdsAction {
 			url = searchDetailsCardValidity();
 		}else if (action.equalsIgnoreCase("updateCardValidity")) {
 			url = updateCardValidity();
+		}else if (action.equalsIgnoreCase("generateIdsEmployees")) {
+			url = generateIdsEmployees();
+		}else if (action.equalsIgnoreCase("printpreviewemployee")) {
+			url = printPreviewEmployee();
 		}
 		return url;
 	}
 	
 	
+	private String printPreviewEmployee() {
+
+		new PrintIdsService(request, response).printMultipleEmployees();
+        return "printpreviewemployee.jsp";
+	}
+
+	private String generateIdsEmployees() {
+		 new EmployeeService(request, response).ViewAllEmployee();
+		return "generateidsemployee.jsp";
+	}
+
 	private String updateCardValidity() {
 		
 		new PrintIdsService(request, response).updateCardValidity();
