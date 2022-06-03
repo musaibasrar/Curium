@@ -1,6 +1,5 @@
 package org.ideoholic.curium.model.academicyear.dto;
 
-import org.ideoholic.curium.model.student.dto.StudentMapper;
 import org.ideoholic.curium.util.DateUtil;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;
@@ -12,6 +11,7 @@ import org.mapstruct.factory.Mappers;
  * https://marketplace.eclipse.org/content/mapstruct-eclipse-plugin
  * https://mapstruct.org/documentation/ide-support/
  * https://stackoverflow.com/questions/45518161/how-to-get-eclipse-to-generate-mapstruct-mappers-using-gradle
+ * 
  * @author Ideoholic
  *
  */
@@ -20,4 +20,5 @@ import org.mapstruct.factory.Mappers;
 public interface AcademicyearMapper {
 	AcademicyearMapper INSTANCE = Mappers.getMapper(AcademicyearMapper.class);
 
+	Currentacademicyear mapStudent(AcademicyearDto academicyearDto);
 }
