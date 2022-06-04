@@ -197,7 +197,7 @@
                 </tr>
             </TABLE>
 
-		<table style="padding-left: 40px;">
+		<table style="padding-left: 5px;">
 		
 			<tr>
 			<td></td>
@@ -205,37 +205,37 @@
 			</tr>
 			<tr >
 			
-				<td class="dataTextBoldLeft" style="width: 50%">Student
-					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${student.name}" /></label>
+				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
+					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
 			
-				<td class="dataTextBoldLeft">UID:&nbsp;<c:out value="${student.studentexternalid}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
 				</td>
 				
 
 				
 
-				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
 						value="${recieptinfo.branchreceiptnumber}" /> 
 				</td>
 				
-				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Academic Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Academic Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
 				</td>
 
 			</tr>
 			<tr>
 			<td></td>
 			</tr>
-			<tr>
-			<td class="dataTextBoldLeft" style="width: 50%">Fathers
+			<tr style="font-size: 20px;">
+			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
 					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
 				</td>
 			
-				<td class="dataTextBoldLeft" >
+				<td class="dataTextBoldLeft" style="font-size: 14px;">
 					Class & Sec:&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
 
-			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
+			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
 						value="${recieptdate}" />
 				</td>
 				
@@ -398,19 +398,19 @@
 			</table>
 			
 			<TABLE width="100%" border="0">
-		<tr >
+		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></label></td>
 		</tr>
 
-		<tr>
+		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
 		</tr>
 		</table>
 		
 		<TABLE width="100%" border="0">
-		<tr>
+		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
-		<td><img src="/roshan/images/roshanpaytm.jpeg" width="100" height="94"/></td>
+		<td><img src="/roshan/images/roshanpaytm.jpeg" width="80" height="75"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -439,7 +439,7 @@
                 </tr>
             </TABLE>
 
-		<table style="padding-left: 40px;">
+		<table style="padding-left: 5px;">
 		
 			<tr>
 			<td></td>
@@ -447,37 +447,37 @@
 			</tr>
 			<tr >
 			
-				<td class="dataTextBoldLeft" style="width: 50%">Student
-					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${student.name}" /></label>
+				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
+					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
 			
-				<td class="dataTextBoldLeft">UID:&nbsp;<c:out value="${student.studentexternalid}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
 				</td>
 				
 
 				
 
-				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
-						value="${recieptinfo.branchreceiptnumber}" /> <c:out value="(${currentAcademicYear})" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
+						value="${recieptinfo.branchreceiptnumber}" /> 
 				</td>
 				
-				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Academic Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Academic Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
 				</td>
 
 			</tr>
 			<tr>
 			<td></td>
 			</tr>
-			<tr>
-			<td class="dataTextBoldLeft" style="width: 50%">Fathers
+			<tr style="font-size: 20px;">
+			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
 					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
 				</td>
 			
-				<td class="dataTextBoldLeft" >
+				<td class="dataTextBoldLeft" style="font-size: 14px;">
 					Class & Sec:&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
 
-			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
+			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
 						value="${recieptdate}" />
 				</td>
 				
@@ -640,19 +640,19 @@
 			</table>
 			
 			<TABLE width="100%" border="0">
-		<tr >
+		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></label></td>
 		</tr>
 
-		<tr>
+		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
 		</tr>
 		</table>
 		
 		<TABLE width="100%" border="0">
-		<tr>
+		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
-		<td><img src="/roshan/images/roshanpaytm.jpeg" width="100" height="94"/></td>
+		<td><img src="/roshan/images/roshanpaytm.jpeg" width="80" height="75"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
