@@ -38,6 +38,18 @@ public class EmployeeDAO {
 		boolean result = false;
 		try {
 			transaction = session.beginTransaction();
+			Query<Teacher> queryTeacher = session.createQuery("from Teacher where branchid = "+employee.getBranchid()+" order by id DESC");
+		 	List<Teacher> queryList = queryTeacher.list();
+		 	String externalId = employee.getTeacherexternalid();
+		 	
+		 	if(queryList.size()>0) {
+		 		String tEId = queryList.get(0).getTeacherexternalid();
+			 	String externalIdNo = tEId.length() > 2 ? tEId.substring(tEId.length() - 2) : tEId;
+			 	employee.setTeacherexternalid(externalId+String.format("%02d",Integer.parseInt(externalIdNo)+1));
+		 	}else {
+		 		employee.setTeacherexternalid(externalId+String.format("%02d",1));
+		 	}
+			
 			session.save(employee);
 			transaction.commit();
 			result = true;
