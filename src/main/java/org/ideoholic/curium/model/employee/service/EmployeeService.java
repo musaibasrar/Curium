@@ -68,7 +68,15 @@ public class EmployeeService {
 		int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
 		builder.append(ALPHA_NUMERIC_STRING.charAt(character));
 		}
-		employee.setTeacherexternalid(builder.toString());
+		
+		int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+		
+		if(branchId==2 || branchId==3 || branchId==4 || branchId==5 || branchId==6) {
+			employee.setTeacherexternalid("RGI007");
+		}else if(branchId==7) {
+			employee.setTeacherexternalid("RGI226");
+		}
+		//employee.setTeacherexternalid(httpSession.getAttribute(BRANCHID).toString());
 		employee.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		
 		if(new EmployeeDAO().create(employee)){
