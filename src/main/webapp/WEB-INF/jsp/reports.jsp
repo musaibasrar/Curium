@@ -287,7 +287,7 @@ for(Cookie cookie : cookies){
             <div id="clock" class="headerTD"></div>
         </form> -->
         <%-- <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div> --%>
-         <div class="headerTD" style="width: 95%">Reports</div>
+        <div class="headerTD" style="width: 95%" >Academic Year:&nbsp;<c:out default="" value="${currentAcademicYear}"/> </div>
 
         <div id="container" style="width: 95%" >
             
@@ -301,7 +301,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/roshan/DocumentsProcess/studentsAdmissionReports" style="font-size: 12px;">Admission Report</a>
             			</td>
             		</tr>
