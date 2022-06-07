@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classhierarchy;
 import org.ideoholic.curium.model.std.dto.Classsec;
@@ -212,7 +213,7 @@ public class StandardService {
 				if(classofStd!=null) {
 					classofStd=classofStd+"--";
 				}
-				List<Student> studentList = new StandardDetailsDAO().getStudentsByClass(classofStd, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), httpSession.getAttribute("currentAcademicYear").toString());
+				List<Parents> studentList = new StandardDetailsDAO().getStudentsByClass(classofStd, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), httpSession.getAttribute("currentAcademicYear").toString());
 				request.setAttribute("studentList", studentList);
 				result = true;
 			} catch (Exception e) {
