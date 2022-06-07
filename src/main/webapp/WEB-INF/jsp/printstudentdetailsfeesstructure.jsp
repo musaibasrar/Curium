@@ -226,7 +226,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/roshan/images/logo.jpg" width="150" height="50"/>
+				<img src="/roshan/images/roshanfees.jpg" width="90" height="60"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				
@@ -271,10 +271,10 @@
                 
 					<div align="center">
 				<h class="dataTextFees">Academic Year : ${academicPerYear}</h>&nbsp;&nbsp;&nbsp;
-				<h class="dataTextFees">Total fees : Rs.  ${totalfees}</h>&nbsp;&nbsp;&nbsp;
+				<%-- <h class="dataTextFees">Total fees : Rs.  ${totalfees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Total fees paid : Rs.  ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Due Amount : </h>
-                <h class="dataTextDueFees"> Rs.  ${dueamount}</h>
+                <h class="dataTextDueFees"> Rs.  ${dueamount}</h> --%>
                 </div>
                 
                 <TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
@@ -295,7 +295,7 @@
                             <th class="datath" style="text-align: center;">Fees Paid&nbsp;</th>
                             <th class="datath" style="text-align: center;">Fees Due&nbsp;</th>
                             <th class="datath" style="text-align: center;">Concession Amount&nbsp;</th>
-                            <th class="datath" style="text-align: center;">Waive Off Amount&nbsp;</th>
+                           <!--  <th class="datath" style="text-align: center;">Waive Off Amount&nbsp;</th> -->
                         </tr>
                     </thead>
 
@@ -309,10 +309,21 @@
                                 <td class="datatd" style="text-align: right">${feesstructure.feespaid}</td>
                                 <td class="datatd" style="text-align: right">${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff}</td>
                                 <td class="datatd" style="text-align: right">${feesstructure.concession}</td>
-                                <td class="datatd" style="text-align: right">${feesstructure.waiveoff}</td>
+                                <%-- <td class="datatd" style="text-align: right">${feesstructure.waiveoff}</td> --%>
                             </tr>
                         </c:forEach>
                     </tbody>
+                    
+                    <tfoot>
+                    	<tr>
+                    			<td class="datatd" style="text-align: right;font-weight: bold;" colspan="2">Total</td>
+                                <td class="datatd" style="text-align: right;font-weight: bold;">${totalfees}</td>
+                                <td class="datatd" style="text-align: right;font-weight: bold;">${sumoffees}</td>
+                                <td class="datatd" style="text-align: right;font-weight: bold;">${dueamount}</td>
+                                <td class="datatd" style="text-align: right;font-weight: bold;">${totalfeesconcession}</td>
+                    	</tr>
+                    
+                    </tfoot>
                    
                 </table>
 				
