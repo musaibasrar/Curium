@@ -429,7 +429,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form action="/curium/PersonalProcess/viewAll"
-		id="form1" method="POST" enctype="multipart/form-data">
+		id="form1" @ModelAttribute("update") method="POST" enctype="multipart/form-data">
 		<div>
 			<div id="tabs">
 				<ul>
