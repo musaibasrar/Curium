@@ -219,7 +219,7 @@
 						value="${recieptinfo.branchreceiptnumber}" /> 
 				</td>
 				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Academic Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
 				</td>
 
 			</tr>
@@ -232,7 +232,7 @@
 				</td>
 			
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					Class & Sec:&nbsp;<c:out value="${recieptinfo.classsec}" />
+					Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
 
 			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
@@ -410,7 +410,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
-		<td><img src="/roshan/images/roshanpaytm.jpeg" width="80" height="75"/></td>
+		<td><img src="/roshan/images/roshanpaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -461,7 +461,7 @@
 						value="${recieptinfo.branchreceiptnumber}" /> 
 				</td>
 				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Academic Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
 				</td>
 
 			</tr>
@@ -474,7 +474,7 @@
 				</td>
 			
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					Class & Sec:&nbsp;<c:out value="${recieptinfo.classsec}" />
+					Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
 
 			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
@@ -652,7 +652,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
-		<td><img src="/roshan/images/roshanpaytm.jpeg" width="80" height="75"/></td>
+		<td><img src="/roshan/images/roshanpaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
