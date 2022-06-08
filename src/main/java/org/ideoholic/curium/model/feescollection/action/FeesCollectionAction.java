@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
+import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.user.action.UserAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,7 +65,9 @@ public class FeesCollectionAction {
 		@PostMapping("/StampFees")
 		public String StampFees() {
                 new FeesCollectionService(request, response).getStampFees();
-                new FeesService(request, response).viewAllBranchStudents();
+                new FeesCollectionService(request, response).getFeesDetails();
+                new StandardService(request, response).viewClasses();
+                new FeesService(request, response).viewAllStudentsList();
                 return "feesCollection";
         }
 

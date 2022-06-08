@@ -230,7 +230,7 @@
 				<td class="dataTextBoldLeft" style="width: 30%">
 				 <c:set var = "string1" value = "${student.classstudying}"/>
 			     <c:set var = "string2" value = "${fn:replace(string1, '--', '')}" />
-					Class & Sec:&nbsp;<c:out value="${string2}" />
+					Class & Sec:&nbsp;<c:out value="${classsec}" />
 				</td>
 
 			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
