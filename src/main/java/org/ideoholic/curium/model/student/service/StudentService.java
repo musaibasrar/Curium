@@ -1546,7 +1546,7 @@ public class StudentService {
 			headerData.put("Header",
 					new Object[] { "UID", "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
 							"Admitted In Class", "Admission Number", "Admission Date", "Blood Group", "Religion",
-							"Caste", "Fathers Name", "Mothers Name", "RTE" , "Archive", "Graduated", "Left Out", "Dropped Out"});
+							"Caste", "Fathers Name", "Mothers Name","Contact Number", "RTE" , "Archive", "Graduated", "Left Out", "Dropped Out"});
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
@@ -1556,10 +1556,12 @@ public class StudentService {
 								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
-								 ateUtil.dateParserddMMYYYY(studentDetails.getStudent().getAdmissiondate()),
+								 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
+								 DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getAdmissiondate()),
+								 DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getAdmissiondate()),
 								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
 								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
-								 DataUtil.emptyString(studentDetails.getMothersname()),DataUtil.emptyString(studentDetails.getStudent().getRte() == 1 ? "Yes" : "No" ),
+								 DataUtil.emptyString(studentDetails.getMothersname()),DataUtil.emptyString(studentDetails.getContactnumber()),DataUtil.emptyString(studentDetails.getStudent().getRte() == 1 ? "Yes" : "No" ),
 								 studentDetails.getStudent().getArchive()==1 ? "Yes" : "No" , studentDetails.getStudent().getPassedout()==1 ? "Yes" : "No", studentDetails.getStudent().getLeftout()==1 ? "Yes" : "No",
 												 studentDetails.getStudent().getDroppedout()==1 ? "Yes" : "No"});
 				i++;
