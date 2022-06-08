@@ -261,6 +261,9 @@ public class StudentService {
 		                if (fieldName.equalsIgnoreCase("rte")) {
 		                	student.setRte(DataUtil.parseInt(request.getParameter(fieldName)));
 		                }
+		                if (fieldName.equalsIgnoreCase("yearofadmission")) {
+		                	student.setYearofadmission(DataUtil.emptyString(request.getParameter(fieldName)));
+		                }
 		                // PU Details
 		                if (fieldName.equalsIgnoreCase("pep")) {
                                     puDetails.setExampassedappearance(DataUtil.parseInt(request.getParameter(fieldName)));
@@ -976,6 +979,9 @@ public class StudentService {
 	                if (fieldName.equalsIgnoreCase("droppedout")) {
 	                	student.setDroppedout(DataUtil.parseInt(request.getParameter(fieldName)));
 	                }
+	                if (fieldName.equalsIgnoreCase("yearofadmission")) {
+	                	student.setYearofadmission(DataUtil.emptyString(request.getParameter(fieldName)));
+	                }
 	                // Updating paretns information
 	                
 	                parents.setPid(parentsId);
@@ -1413,6 +1419,7 @@ public class StudentService {
 	public boolean promoteMultiple() {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String classStudying = request.getParameter("classstudying");
+		String promotedYear = httpSession.getAttribute("currentAcademicYear").toString();
 		List<Student> studentList = new ArrayList<Student>();
 		
 		boolean result = false;
@@ -1424,7 +1431,7 @@ public class StudentService {
 			studentList.add(student);
 		}
 		
-		if (new studentDetailsDAO().promoteMultiple(studentList, classStudying)) {
+		if (new studentDetailsDAO().promoteMultiple(studentList, classStudying, promotedYear)) {
 			result = true;
 		}
 		return result;
@@ -1478,7 +1485,7 @@ public class StudentService {
                     
                     long totalFeesAmount = 0l;
                     for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
-                            totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff();
+                            totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
                     }
                             httpSession.setAttribute("feesstructure", feesstructure);
                             httpSession.setAttribute("sumoffees", totalSum);

@@ -245,4 +245,10 @@ public class Student implements java.io.Serializable {
 	private String registrationnumber;
 	private Pudetails pudetails;
 	private Degreedetails degreedetails;
+
+	@Column(name = "yearofadmission", length = 10)
+	private String yearofadmission;
+	
+	@Column(name = "promotedyear", length = 10)
+	private String promotedyear;
 }

@@ -217,6 +217,9 @@
 				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
 						value="${recieptinfo.branchreceiptnumber}" />
 				</td>
+				
+				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Academic Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				</td>
 
 			</tr>
 			<tr>
@@ -228,9 +231,9 @@
 				</td>
 			
 				<td class="dataTextBoldLeft" style="width: 30%">
-				 <c:set var = "string1" value = "${student.classstudying}"/>
-			     <c:set var = "string2" value = "${fn:replace(string1, '--', '')}" />
-					Class & Sec:&nbsp;<c:out value="${classsec}" />
+				<%--  <c:set var = "string1" value = "${student.classstudying}"/>
+			     <c:set var = "string2" value = "${fn:replace(string1, '--', '')}" /> --%>
+					Class & Sec:&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
 
 			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
@@ -378,7 +381,9 @@
 				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
 						value="${recieptinfo.branchreceiptnumber}" />
 				</td>
-
+			
+					<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Academic Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				</td>
 			</tr>
 			<tr>
 			<td></td>
@@ -389,9 +394,9 @@
 				</td>
 			
 				<td class="dataTextBoldLeft" style="width: 30%">
-				 <c:set var = "string1" value = "${student.classstudying}"/>
-			     <c:set var = "string2" value = "${fn:replace(string1, '--', '')}" />
-					Class & Sec:&nbsp;<c:out value="${string2}" />
+				<%--  <c:set var = "string1" value = "${student.classstudying}"/>
+			     <c:set var = "string2" value = "${fn:replace(string1, '--', '')}" /> --%>
+					Class & Sec:&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
 
 			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
