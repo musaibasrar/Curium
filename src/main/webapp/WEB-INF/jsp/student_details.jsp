@@ -1032,10 +1032,10 @@ for(Cookie cookie : cookies){
                 
                 <div>
 					<div align="center">
-					<h class="dataTextFees">Total fees : &#x20B9; ${totalfees}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Total fees paid : &#x20B9; ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
+					<h class="dataTextFees">Total fees : Rs.  ${totalfees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total fees paid : Rs.  ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Due Amount : </h>
-                <h class="dataTextDueFees"> &#x20B9; ${dueamount}</h>
+                <h class="dataTextDueFees"> Rs.  ${dueamount}</h>
                 </div>
                     <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 
@@ -1088,10 +1088,10 @@ for(Cookie cookie : cookies){
                 <div>
 					<div align="center">
 				<h class="dataTextFees">Academic Year : ${currentAcademicYear}</h>&nbsp;&nbsp;&nbsp;
-				<h class="dataTextFees">Total fees : &#x20B9; ${totalfees}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Total fees paid : &#x20B9; ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
+				<h class="dataTextFees">Total fees : Rs.  ${totalfees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total fees paid : Rs.  ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Due Amount : </h>
-                <h class="dataTextDueFees"> &#x20B9; ${dueamount}</h>
+                <h class="dataTextDueFees"> Rs.  ${dueamount}</h>
                 </div>
                     <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 
