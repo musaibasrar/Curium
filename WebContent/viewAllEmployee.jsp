@@ -403,6 +403,7 @@ for(Cookie cookie : cookies){
 
                     <thead>
                         <tr  >
+                        	<th class="headerText">Sl.No.</th>
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Contact Number</th>
@@ -415,9 +416,10 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${employeeList}" var="employee">
+                        <c:forEach items="${employeeList}" var="employee" varStatus="status">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                            <td class="dataText" style="text-transform:uppercase"><c:out value="${status.index+1}"/></td>
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
                                 <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="Controller?process=EmployeeProcess&action=ViewDetails&id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.contactnumber}"/></td>
@@ -429,7 +431,7 @@ for(Cookie cookie : cookies){
                         </c:forEach>
                     </tbody>
                     <tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><input value="Delete" type="submit" id="delete"/> </td>
+                            <td  class="footerTD" colspan="5" ><input value="Delete" type="submit" id="delete"/> </td>
                     
                         </tr></tfoot>
                 </table>

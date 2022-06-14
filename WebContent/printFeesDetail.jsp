@@ -70,7 +70,7 @@
 	font-weight: bold;
 	font-family: Tahoma;
 	color: black;
-	font-size: 32px;
+	font-size: 28px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -79,9 +79,13 @@
 	font-weight: normal;
 	font-family: ariel;
 	color: black;
-	font-size: 18px;
+	font-size: 16px;
 	letter-spacing: normal;
 	text-align: center;
+}
+
+.footer{
+	font-size: 10px;
 }
 
 -->
@@ -135,7 +139,7 @@
 
 
         @media print {
-            .fontsize { font-size: 15px ;
+            .fontsize { font-size: 12px ;
                         font-weight: bold;
                         font-family: 'Times New Roman';
                         
@@ -180,10 +184,10 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
-				<img src="images/shaheenlogo.png" width="200" height="100"/>
+				<img src="images/shaheenlogo.png" width="160" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${branchname}</label><br>
 				<label class="addressLine" style="padding-left: 100px;">${branchaddress}<br></label>
 				<label class="addressLine" style="padding-left: 70px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
@@ -290,7 +294,7 @@
 					<td class="dataText">Rs. <c:out
 							value="${feescatmap.value}" /></td>
 					
-					<%-- &#x20B9;<td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
+					<%-- Rs.<td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 				
 			</c:forEach>
@@ -310,7 +314,7 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				Total</td>
-				<td class="headerText">&#x20B9; <c:out
+				<td class="headerText">Rs. <c:out
 						value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
@@ -326,10 +330,10 @@
 <td></td>
 </tr>
 <tr>
-<td align="left">Payment Mode&nbsp;:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name&nbsp;&nbsp;:&nbsp;<label style="text-transform: capitalize;">${username}</label><br> Date & Time&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<%= (new java.util.Date()).toLocaleString()%></td>
+<td align="left" class="footer">Payment Mode&nbsp;:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name&nbsp;&nbsp;:&nbsp;<label style="text-transform: capitalize;">${username}</label><br> Date & Time&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<%= (new java.util.Date()).toLocaleString()%></td>
 </tr>
 <tr>
-<td align="left">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Fees once deposited will not be refunded under any Circumstances</td>
+<td align="left" class="footer">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Fees once deposited will not be refunded under any Circumstances</td>
 </tr>
 <tr>
 <td><br></td>
@@ -344,10 +348,10 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
-				<img src="images/shaheenlogo.png" width="200" height="100"/>
+				<img src="images/shaheenlogo.png" width="160" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${branchname}</label><br>
 				<label class="addressLine" style="padding-left: 100px;">${branchaddress}<br></label>
 				<label class="addressLine" style="padding-left: 70px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
@@ -454,7 +458,7 @@
 					<td class="dataText">Rs. <c:out
 							value="${feescatmap.value}" /></td>
 					
-					<%-- &#x20B9;<td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
+					<%-- Rs.<td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
 			
@@ -473,7 +477,7 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				Total</td>
-				<td class="headerText">&#x20B9; <c:out
+				<td class="headerText">Rs. <c:out
 						value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
@@ -489,10 +493,10 @@
 <td></td>
 </tr>
 <tr>
-<td align="left">Payment Mode&nbsp;:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name&nbsp;&nbsp;:&nbsp;<label style="text-transform: capitalize;">${username}</label><br> Date & Time&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<%= (new java.util.Date()).toLocaleString()%></td>
+<td align="left" class="footer">Payment Mode&nbsp;:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name&nbsp;&nbsp;:&nbsp;<label style="text-transform: capitalize;">${username}</label><br> Date & Time&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<%= (new java.util.Date()).toLocaleString()%></td>
 </tr>
 <tr>
-<td align="left">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Fees once deposited will not be refunded under any Circumstances</td>
+<td align="left" class="footer">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Fees once deposited will not be refunded under any Circumstances</td>
 </tr>
 <tr>
 <td><br></td>

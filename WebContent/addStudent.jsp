@@ -931,7 +931,8 @@
 									data-validate="validate(required)">
 							</label></td>
 							
-							<td  class="alignLeft" style="padding-left: 20px;">Admission Year:&nbsp;&nbsp;&nbsp;&nbsp; 
+							<td  class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;</td>
+							<td> 
                                         <label> <select name="yearofadmission" id="yearofadmission" required
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${currentAcademicYear}</option>

@@ -811,6 +811,7 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
+						<th class="headerText">Sl.No.</th>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Voucher #</th>
 						<th title="click to sort" class="headerText">Date</th>
@@ -827,11 +828,11 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 
-					<c:forEach items="${adminexpenses}" var="expenses">
+					<c:forEach items="${adminexpenses}" var="expenses" varStatus="status">
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
 							
-							
+						<td class="dataText" style="text-transform:uppercase"><c:out value="${status.index+1}"/></td>	
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${expenses.idAdminExpenses}"/>" class = "chcktbl"  name="expensesIDs"  value="<c:out value="${expenses.idAdminExpenses}"/>"/></td>
 						  <td class="dataText"><c:out value="${expenses.idAdminExpenses}" /></td>
 						  <td class="dataText"><fmt:formatDate value="${expenses.entrydate}" pattern="dd/MM/yyyy"/></td>

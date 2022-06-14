@@ -567,6 +567,7 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
+						<th class="headerText">Sl.No.</th>
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -581,7 +582,7 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-					<c:forEach items="${studentsfeesstructuredetailsconcession}" var="students">
+					<c:forEach items="${studentsfeesstructuredetailsconcession}" var="students" varStatus="status">
 
 						<c:forEach items="${students.value}" var="fees">
 						
@@ -590,6 +591,7 @@ for(Cookie cookie : cookies){
 									id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 									name="studentIDs"
 									value="<c:out value="${Parents.student.sid}"/>" /></td> --%>
+								<td class="dataText" style="text-transform:uppercase"><c:out value="${status.index+1}"/></td>	
 								<td class="dataTextInActive"><a class="dataTextInActive"
 									href="Controller?process=StudentProcess&action=ViewFeesStructure&id=<c:out value='${students.key.student.sid}'/>"><c:out
 											value="${students.key.student.admissionnumber}" /></a></td>
