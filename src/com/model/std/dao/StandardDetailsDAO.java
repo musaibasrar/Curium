@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
+import com.model.parents.dto.Parents;
 import com.model.std.dto.Classhierarchy;
 import com.model.std.dto.Classsec;
 import com.model.student.dto.Student;
@@ -267,13 +268,13 @@ public class StandardDetailsDAO {
     }
     
 	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Student> getStudentsByClass(String classofStd, int branchId) {
-		java.util.List<Student> results = new ArrayList<Student>();
+	public List<Parents> getStudentsByClass(String classofStd, int branchId, String currentAcademicYear) {
+		java.util.List<Parents> results = new ArrayList<Parents>();
 		try {
 			// this.session =
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
-			results = (java.util.List<Student>) session.createQuery("From Student s where s.branchid="+branchId+" AND s.classstudying LIKE '"+classofStd+"%' AND s.archive=0 AND s.passedout=0 AND s.droppedout=0 and s.leftout=0").list();
+			results = (java.util.List<Parents>) session.createQuery("From Parents p where p.Student.branchid="+branchId+" AND p.Student.classstudying LIKE '"+classofStd+"%' AND p.Student.archive=0 AND p.Student.passedout=0 AND p.Student.droppedout=0 and p.Student.leftout=0 and p.Student.promotedyear != '"+currentAcademicYear+"'").list();
 			transaction.commit();
 
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

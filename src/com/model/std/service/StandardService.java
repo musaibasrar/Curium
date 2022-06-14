@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.parents.dto.Parents;
 import com.model.std.dao.StandardDetailsDAO;
 import com.model.std.dto.Classhierarchy;
 import com.model.std.dto.Classsec;
@@ -212,7 +213,7 @@ public class StandardService {
 				if(classofStd!=null) {
 					classofStd=classofStd+"--";
 				}
-				List<Student> studentList = new StandardDetailsDAO().getStudentsByClass(classofStd, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Parents> studentList = new StandardDetailsDAO().getStudentsByClass(classofStd, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), httpSession.getAttribute("currentAcademicYear").toString());
 				request.setAttribute("studentList", studentList);
 				result = true;
 			} catch (Exception e) {

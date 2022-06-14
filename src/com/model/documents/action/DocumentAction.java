@@ -54,9 +54,38 @@ public class DocumentAction {
 			url = generateAdmissionAbstract();
 		}else if ("download".equalsIgnoreCase(action)) {
 			url = downloadAdmissionAbstract();
+		}else if ("studentsAdmissionReports".equalsIgnoreCase(action)) {
+			url = studentsAdmissionReports();
+		}else if ("studentsPendingAdmissionReports".equalsIgnoreCase(action)) {
+			url = studentsPendingAdmissionReports();
+		}else if ("multiClassSearchAdmissoinReport".equalsIgnoreCase(action)) {
+			url = multiClassSearchAdmissoinReport();
+		}else if ("multiClassSearchPendingAdmissoinReport".equalsIgnoreCase(action)) {
+			url = multiClassSearchPendingAdmissoinReport();
 		}
 		return url; 
 	} 
+	
+	
+	public String studentsAdmissionReports() {
+		new StandardService(request, response).viewClasses(); 
+		return "studentsadmissionreports.jsp";
+	}
+
+	public String studentsPendingAdmissionReports() {
+		new StandardService(request, response).viewClasses(); 
+		return "studentspendingadmissionreports.jsp";
+	}
+
+	public String multiClassSearchAdmissoinReport() {
+		new DocumentService(request, response).multiClassSearchAdmissoinReport(); 
+		return "studentsadmissionreports.jsp";
+	}
+
+	public String multiClassSearchPendingAdmissoinReport() {
+		new DocumentService(request, response).multiClassSearchPendingAdmissoinReport(); 
+		return "studentspendingadmissionreports.jsp";
+	}
 	
 
 	private String downloadAdmissionAbstract() {

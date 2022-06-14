@@ -2,13 +2,13 @@ package com.model.feescollection.dto;
 
 import java.util.List;
 
-import com.model.student.dto.Student;
+import com.model.parents.dto.Parents;
 import com.model.student.dto.Studentfeesstructure;
 
 public class StudentFeesReport {
 
 	
-	private Student student;
+	private Parents parents;
 	private List<Studentfeesstructure> studentFeesStructure;
 	private int userid;
 	
@@ -16,19 +16,19 @@ public class StudentFeesReport {
 	}
 
 
-	public StudentFeesReport(Student student, List<Studentfeesstructure> studentFeesStructure) {
-		this.student = student;
+	public StudentFeesReport(Parents parents, List<Studentfeesstructure> studentFeesStructure) {
+		this.parents= parents;
 		this.studentFeesStructure = studentFeesStructure;
 	}
 	
 
-	public Student getStudent() {
-		return student;
+	public Parents getParents() {
+		return parents;
 	}
 
 
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setParents(Parents parents) {
+		this.parents = parents;
 	}
 
 	public List<Studentfeesstructure> getStudentFeesStructure() {

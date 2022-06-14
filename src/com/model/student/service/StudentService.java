@@ -575,8 +575,10 @@ public class StudentService {
 			}
 			
 			long totalFeesAmount = 0l;
+			long totalFeesConcession = 0l;
 			for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
 				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
+				totalFeesConcession = totalFeesConcession+studentfeesstructureSingle.getConcession();
 			}
 			
 			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
@@ -622,6 +624,7 @@ public class StudentService {
 				httpSession.setAttribute("totalfees", totalFeesAmount);
 				httpSession.setAttribute("academicPerYear", currentYear.getCurrentacademicyear());
 				httpSession.setAttribute("currentAcademicYear", currentYear.getCurrentacademicyear());
+				httpSession.setAttribute("totalfeesconcession", totalFeesConcession);
 				
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
@@ -1256,7 +1259,7 @@ public class StudentService {
 			studentList.add(student);
 		}
 		
-		if (new studentDetailsDAO().promoteMultiple(studentList, classStudying, promotedYear)) {
+		if (new studentDetailsDAO().promoteMultiple(studentList, classStudying, promotedYear, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()))) {
 			result = true;
 		}
 		return result;
@@ -1309,14 +1312,17 @@ public class StudentService {
                     }
                     
                     long totalFeesAmount = 0l;
+                    long totalFeesConcession = 0l;
                     for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
                             totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
+                            totalFeesConcession = totalFeesConcession+studentfeesstructureSingle.getConcession();
                     }
                             httpSession.setAttribute("feesstructure", feesstructure);
                             httpSession.setAttribute("sumoffees", totalSum);
                             httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
                             httpSession.setAttribute("totalfees", totalFeesAmount);
                             httpSession.setAttribute("academicPerYear", academicYear);
+                            httpSession.setAttribute("totalfeesconcession", totalFeesConcession);
 
 			result = true;
 
@@ -1376,22 +1382,26 @@ public class StudentService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
-							"Admitted In Class", "Admission Number", "Admission Date", "Blood Group", "Religion",
-							"Caste", "Fathers Name", "Mothers Name" });
+					new Object[] { "UID","Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
+							"Admitted In Class", "Admission Number", "Admission Date", "Admission Year", "Promoted Year","Blood Group", "Religion",
+							"Caste", "Fathers Name", "Mothers Name","Contact No.", "Archive", "Graduated", "Left Out", "Dropped Out"});
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
+						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getStudentexternalid()), DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
 								 DataUtil.emptyString(DateUtil.getStringDate(studentDetails.getStudent().getDateofbirth())),
 								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying()).replace("--", " "),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin()).replace("--", " "),
 								 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
 								 studentDetails.getStudent().getAdmissiondate(),
+								 DataUtil.emptyString(studentDetails.getStudent().getYearofadmission()),DataUtil.emptyString(studentDetails.getStudent().getPromotedyear()),
 								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
 								 DataUtil.emptyString(studentDetails.getStudent().getSecondlanguage()),  DataUtil.emptyString(studentDetails.getFathersname()),
-								 DataUtil.emptyString(studentDetails.getMothersname()) });
+								 DataUtil.emptyString(studentDetails.getMothersname()),DataUtil.emptyString(studentDetails.getContactnumber()),
+								 studentDetails.getStudent().getArchive()==1 ? "Yes" : "No" , 
+										 studentDetails.getStudent().getPassedout()==1 ? "Yes" : "No", studentDetails.getStudent().getLeftout()==1 ? "Yes" : "No",
+												 studentDetails.getStudent().getDroppedout()==1 ? "Yes" : "No"});
 				i++;
 			}
 			Row headerRow = sheet.createRow(0);

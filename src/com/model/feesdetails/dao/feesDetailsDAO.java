@@ -5,18 +5,18 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.util.Session;
 import org.hibernate.SessionFactory;
-import com.util.Session.Transaction;
 import org.hibernate.query.Query;
 
 import com.model.feescategory.dto.Feescategory;
 import com.model.feescollection.dto.Feescollection;
 import com.model.feescollection.dto.Receiptinfo;
 import com.model.feesdetails.dto.Feesdetails;
+import com.model.parents.dto.Parents;
 import com.model.student.dto.Student;
 import com.util.HibernateUtil;
+import com.util.Session;
+import com.util.Session.Transaction;
 
 public class feesDetailsDAO {
         Session session = null;
@@ -228,16 +228,15 @@ public class feesDetailsDAO {
                 return results;
         }
 
-        public List<Student> readListOfStudents(int branchId) {
-                List<Student> results = new ArrayList<Student>();
-
+        public List<Parents> readListOfStudents(int branchId) {
+            List<Parents> results = new ArrayList<Parents>();
                 try {
                         // this.session =
                         // HibernateUtil.getSessionFactory().openCurrentSession();
                         transaction = session.beginTransaction();
 
-                        results = (List<Student>) session.createQuery("FROM Student s where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")")
-                                        .list();
+                        results = (List<Parents>) session.createQuery("FROM Parents p where p.Student.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")")
+                        				.list();
                         transaction.commit();
 
                 } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
