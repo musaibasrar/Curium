@@ -77,7 +77,8 @@ public class JobService {
 		String typeofworknoncourturd = request.getParameter("typeofworknoncourturd");
 		String typeofworknoncourtrlo = request.getParameter("typeofworknoncourtrlo");
 		String typeofworknoncourtmw = request.getParameter("typeofworknoncourtmw");
-		
+		String typeofworknoncourtno = request.getParameter("typeofworknoncourtno");
+		String expecteddeliverydate = request.getParameter("expecteddeliverydate");
 		
 		if(httpSession.getAttribute("branchid")!=null){
 								
@@ -86,6 +87,7 @@ public class JobService {
 					query.setResponse(queryString);
 					query.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 					query.setCreateddate(new Date());
+					query.setExpecteddeliverydate(DateUtil.indiandateParser(expecteddeliverydate));
 					query.setCreateduserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 					query.setResponse(filetype);
 					query.setStatus("To Do");
@@ -95,7 +97,7 @@ public class JobService {
 					String subWork = typeofworkcourt.concat(typeofworknoncourt);
 					query.setTypeofsubwork(subWork);
 					
-					String subSubWork = typeofworkcourtcases.concat(typeofworkcourtdocs).concat(typeofworknoncourtabt).concat(typeofworknoncourtcd).concat(typeofworknoncourtsr).concat(typeofworknoncourtdr).concat(typeofworknoncourtcs).concat(typeofworknoncourturd).concat(typeofworknoncourtrlo).concat(typeofworknoncourtmw);
+					String subSubWork = typeofworkcourtcases.concat(typeofworkcourtdocs).concat(typeofworknoncourtabt).concat(typeofworknoncourtcd).concat(typeofworknoncourtsr).concat(typeofworknoncourtdr).concat(typeofworknoncourtcs).concat(typeofworknoncourturd).concat(typeofworknoncourtrlo).concat(typeofworknoncourtmw).concat(typeofworknoncourtno);
 					query.setTypeofsubsubwork(subSubWork);
 					//Query.setStdid(1);
 					Parents parent = new Parents();
@@ -594,5 +596,34 @@ public class JobService {
 		JobQueryList = new JobDAO().generateQueriesReport(queryMain);
 		
 		httpSession.setAttribute("queryList", JobQueryList);
+	}
+
+	public void toDoQueries() {
+		
+		String[] queryIds = request.getParameterValues("queryids");
+		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
+		List<Integer> QueryIdsList = new ArrayList<Integer>();
+		boolean result = false;
+		
+		if(queryIds!=null) {
+			for (String ids : queryIds) {
+				QueryIdsList.add(Integer.parseInt(ids));
+			}
+			
+			result = new JobDAO().toDoQueries(QueryIdsList, userId);
+			request.setAttribute("querystatus",result);
+		}
+		
+	}
+
+	public void updateQueryRemarks() {
+		
+		String queryId = request.getParameter("queryid");
+		String remarks = request.getParameter("queryremarks");
+		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
+		boolean result = false;
+		remarks = remarks.replace("'", "''");
+		result = new JobDAO().updateQueryRemarks(queryId, remarks, userId);
+		request.setAttribute("querystatus",result);
 	}
 }

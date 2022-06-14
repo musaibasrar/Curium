@@ -149,7 +149,7 @@
 	border-right-width: thin;
 	border-bottom-width: thin;
 	border-left-width: thin;
-	background-image: url(/sla//sla/images/close.JPG);
+	background-image: url(/sla/images/close.JPG);
 	background-repeat: repeat-y;
 	background-attachment: scroll;
 	background-position: right;
@@ -175,6 +175,9 @@
 	text-align: left;
 	vertical-align: middle;
 	color: #325f6d;
+}
+.formfield * {
+  vertical-align: middle;
 }
 
 <!--
@@ -203,7 +206,7 @@
 	vertical-align: text-top;
 	text-align: center;
 	background-image:
-		url("/sla//sla/images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("/sla/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .dataText {
@@ -411,6 +414,20 @@
 			form1.submit();
 		}
 		
+		function toDoQueries() {
+			var form1 = document.getElementById("form1");
+			form1.action = "/sla/QueryProcess/toDoQueries";
+			form1.method = "POST";
+			form1.submit();
+		}
+		
+		function updateQueryRemarks(queryRemarks, queryid) {
+			var form1 = document.getElementById("form1");
+			form1.action = "/sla/QueryProcess/updateQueryRemarks?queryremarks="+queryRemarks.value+"&queryid="+queryid.value+"";
+			form1.method = "POST";
+			form1.submit();
+		}
+		
 		function updateQueryResponse(parentQuery, response, queryid) {
 			var form1 = document.getElementById("form1");
 			form1.action = "/sla/QueryProcess/updateQueries&parentquery="+parentQuery.value+"&response="+response.value+"&queryid="+queryid.value+"";
@@ -486,6 +503,15 @@
 
          });
          
+         $("#todo").button({
+             icons:{
+                 primary: "ui-icon-circle-plus"
+             }
+         }).click(function(){
+             toDoQueries();
+
+         });
+         
          $('#chckHead').click(function () {
              var length = $('.chcktbl:checked').length;
              var trLength=$('.trClass').length;
@@ -524,29 +550,14 @@
 	
 	<script type="text/javascript">
 
-            function openPopup(queryid){
+            function openPopup(queryRemarks,queryid){
             	
-        			 if (typeof XMLHttpRequest != "undefined") {
-        				 xmlHttp = new XMLHttpRequest();
-        	            
-        	         } else if (window.ActiveXObject) {
-        	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-        	             
-        	         }
-        			xmlHttp.onreadystatechange = stateChangedSSGroup;
-        			xmlHttp.open("GET", "/sla/QueryProcess/viewQueryDetails&id="+queryid+"",true);
-        			xmlHttp.send(null);
+            	document.getElementById("queryremarks").value=queryRemarks;
+            	document.getElementById("queryid").value= queryid;
 
         		
                 $( "#dialog" ).dialog( "open" );
             }
-            
-            function stateChangedSSGroup() {
-
-        		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-        			document.getElementById("querydetails").innerHTML = xmlHttp.responseText;
-        		}
-        	}
             
         </script>       
 
@@ -555,12 +566,12 @@
             $(function() {
                 $( "#dialog" ).dialog({
                     autoOpen: false,
-                    height: 300,
-                    width: 600,
+                    height: 220,
+                    width: 400,
                     modal: true,
                     buttons: {
-                        OK: function() {
-                        			updateQueryResponse(document.getElementById("parentquerypopup"),document.getElementById("responsepopup"),document.getElementById("queryid"));
+                        Update: function() {
+                        	updateQueryRemarks(document.getElementById("queryremarks"),document.getElementById("queryid"));
                             		$( this ).dialog( "close" );
                      		   }
                     }
@@ -610,10 +621,12 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Job No.</th>
                             <th title="click to sort" class="headerText">Created Date</th>
                             <th title="click to sort" class="headerText">Updated Date</th>
+                            <th title="click to sort" class="headerText">Expected Delivery</th>
                             <th title="click to sort" class="headerText">Staff</th>
                             <th title="click to sort" class="headerText">Client Name</th>
                             <th title="click to sort" class="headerText">Contact Number</th>
                             <th title="click to sort" class="headerText">Status</th>
+                            <th title="click to sort" class="headerText">Remarks</th>
                             <!-- <th title="click to sort" class="headerText">Details</th> -->
                         </tr>
                     </thead>
@@ -621,25 +634,37 @@ for(Cookie cookie : cookies){
                     <tbody>
                         <c:forEach items="${queryList}" var="query">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                            	
+                            	<td class="dataText"><input type="checkbox" id = "<c:out value="${query.id}"/>" class = "chcktbl"  name="queryids"  value="<c:out value="${query.id}"/>"/></td>
+                            	<td class="dataText"><c:out value="${query.id}"/></td>
                             	<c:if test="${query.status == 'To Do' }">
-                                	<td class="dataText" style="background-color: red;"><input type="checkbox" id = "<c:out value="${query.id}"/>" class = "chcktbl"  name="queryids"  value="<c:out value="${query.id}"/>"/></td>
+                                	<td class="dataText" style="color: #cb1b09;"><c:out value="${query.externalid}"/></td>
                                 </c:if>
                                 <c:if test="${query.status == 'In Progress' }">
-                                	<td class="dataText" style="background-color: yellow;"><input type="checkbox" id = "<c:out value="${query.id}"/>" class = "chcktbl"  name="queryids"  value="<c:out value="${query.id}"/>"/></td>
+                                	<td class="dataText" style="color: #0001ff;"><c:out value="${query.externalid}"/></td>
                                 </c:if>
                                 <c:if test="${query.status == 'Completed' }">
-                                	<td class="dataText" style="background-color: green;"><input type="checkbox" id = "<c:out value="${query.id}"/>" class = "chcktbl"  name="queryids"  value="<c:out value="${query.id}"/>"/></td>
+                                	<td class="dataText" style="color: #65a358;"><c:out value="${query.externalid}"/></td>
                                 </c:if>
-                                 <td class="dataText"><c:out value="${query.id}"/></td>
-                                 <td class="dataText"><c:out value="${query.externalid}"/></td>
+                                <c:if test="${query.status == 'Cancelled' }">
+                                	<td class="dataText" style="color: grey;"><c:out value="${query.externalid}"/></td>
+                                </c:if>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.expecteddeliverydate}"/></td>
                                 <td class="dataText"><c:out value="${query.teacher.teachername}"/></td>
                                 <td class="dataText"><c:out value="${query.parent.student.name}"/>
 	                                <input type="hidden" id="contactno_${query.id}" name="contactno_${query.id}" value="${query.parent.contactnumber}">
                                 </td>
                                 <td class="dataText"><c:out  value="${query.parent.contactnumber}"/></td>
                                 <td class="dataText"><c:out  value="${query.status}"/></td>
+                                <c:if test="${not empty query.feedback}">
+                                	<td class="dataText"><a href="#" onclick="openPopup('${query.feedback}','${query.id}')" style="color:#eb6000;">View</a></td>
+                                </c:if>
+                                <c:if test="${empty query.feedback}">
+                                	<td class="dataText"><a href="#" onclick="openPopup('${query.feedback}','${query.id}')" style="color:#4b6a84;">Add</a></td>
+                                </c:if>
+                                
                                 <%-- <td class="dataText"><a href="#" onclick="openPopup(${query.id})" style="color:#eb6000;">View Details</a></td> --%>
                             </tr>
                         </c:forEach>
@@ -657,6 +682,7 @@ for(Cookie cookie : cookies){
                     	<td  colspan="2" ><button value="completed" id="completed">Completed</button>
                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="inprogress">In Progress</button>
                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="cancel">Cancel</button> 
+                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="todo">To Do</button> 
                     	</td>
                    </tr>
                 </table>
@@ -698,12 +724,31 @@ for(Cookie cookie : cookies){
                 </div>
 		</div>
 		
-		<div id="dialog" title="Query Details">
+		<div id="dialog" title="Job Remarks">
                 
-             	 <div id="querydetails">
+                
+                <table style="width: auto;height: auto;">
+								
+								<tr>
+									<td>
+										<p class="formfield">
+										<input type="hidden" id="queryid" name="queryid" >
+										<label style="font-size: 14px;"> Remarks :</label>
+										<textarea  name="queryremarks" id="queryremarks" cols="40" rows="5"></textarea>
+										</p>
+									</td>
+								</tr>
+								
+								<tr>
+									<td><br></td>
+								</tr>
+						</table>
+						
+						
+             	 <!-- <div id="querydetails">
               			
               			
-           		 </div>
+           		 </div> -->
            		 
 			</div>
 	</form>

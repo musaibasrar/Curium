@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Queries Report</title>
+<title>Jobs Report</title>
 <link rel="stylesheet" href="/sla/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/sla/css/datePicker/demos.css">
 <style type="text/css">
@@ -438,9 +438,12 @@
 
 	function generateQueriesReport() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/sla/QueryProcess/generateQueriesReport";
-			form1.method = "POST";
-			form1.submit();
+			
+			if(form1.checkValidity()) {
+				form1.action = "/sla/QueryProcess/generateQueriesReport";
+				form1.method = "POST";
+				form1.submit();
+			  }
 	}
 	
  

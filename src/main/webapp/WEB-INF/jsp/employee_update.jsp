@@ -380,7 +380,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Contact Number&nbsp;</td>
 
 							<td align="left"><label> <input name="contactnumber"
-									type="text" class="textField"
+									type="text" class="textField" required
 									value="<c:out default="" value="${employee.contactnumber}" />"
 									id="contactnumber" size="30">
 

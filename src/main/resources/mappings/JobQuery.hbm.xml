@@ -41,6 +41,9 @@
         </property>  
         <property name="updateddate" type="date">
             <column name="updateddate" />
+        </property>
+        <property name="expecteddeliverydate" type="date">
+            <column name="expecteddeliverydate" />
         </property>        
         <property name="branchid" type="java.lang.Integer">
             <column name="branchid"  />

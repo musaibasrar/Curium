@@ -58,14 +58,26 @@
 
         <script type="text/javascript">
             $(function(){
-                $("#search").button().click(function() {
-        			search();
+                $("#viewallclients").button().click(function() {
+                	viewAllClients();
         			});
                 });
 
-            function search(){
+            function viewAllClients(){
                 var form1=document.getElementById("form1");
-                form1.action="/sla/StudentProcess/mainAdvanceSearchStudents";
+                form1.action="/sla/StudentProcess/viewAllStudentsWithParents";
+                form1.submit();
+            }
+            
+            $(function(){
+                $("#viewjobs").button().click(function() {
+        			viewJobs();
+        			});
+                });
+
+            function viewJobs(){
+                var form1=document.getElementById("form1");
+                form1.action="/sla/QueryProcess/viewAllQueries";
                 form1.submit();
             }
         </script>
@@ -97,7 +109,8 @@ for(Cookie cookie : cookies){
       <tr>
           <td height="5" align="center" valign="middle"><p class="style1">
                   
-                  <button id="search">Search</button>
+                  <button id="viewallclients">View All Clients</button> &nbsp;&nbsp;&nbsp; 
+                  <button id="viewjobs">View Jobs</button>
                                    
               </p>
         </td>

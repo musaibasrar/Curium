@@ -496,4 +496,46 @@ public class JobDAO {
 			return result;
 		}
 
+
+		public boolean toDoQueries(List<Integer> queryIdsList, int userId) {
+			
+			boolean result = false;
+			try {
+				transaction = session.beginTransaction();
+				
+				for (Integer appId : queryIdsList) {
+					Query query = session.createQuery("update JobQuery set status = 'To Do', updateduserid= "+userId+", updateddate=CURDATE()   where id="+appId+"");
+					query.executeUpdate();
+				}
+				
+				transaction.commit();
+				result = true;
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				hibernateException.printStackTrace();
+			}finally {
+				HibernateUtil.closeSession();
+			 }
+			return result;
+		}
+
+
+		public boolean updateQueryRemarks(String queryId, String remarks, int userId) {
+			
+			boolean result = false;
+			try {
+				transaction = session.beginTransaction();
+				
+					Query query = session.createQuery("update JobQuery set feedback = '"+remarks+"', updateduserid= "+userId+", updateddate = CURDATE() where id="+queryId+"");
+					query.executeUpdate();
+				
+				transaction.commit();
+				result = true;
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				hibernateException.printStackTrace();
+			}finally {
+				HibernateUtil.closeSession();
+			 }
+			return result;
+		}
+
 }

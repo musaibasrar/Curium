@@ -3,6 +3,8 @@
  */
 package org.ideoholic.curium.model.student.action;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -112,7 +114,7 @@ public class StudentAction {
 		}
 	}
 
-	@GetMapping("/viewAllStudentsWithParents")
+	@RequestMapping(value = "/viewAllStudentsWithParents", method = { RequestMethod.GET, RequestMethod.POST })
 	public String viewAllStudentsWithParents() {
 		new StudentService(request, response).viewAllStudentsParents();
 		new EmployeeService(request, response).ViewAllEmployee();
@@ -245,6 +247,17 @@ public class StudentAction {
 		//new EmployeeService(request, response).ViewAllEmployee();
 		return "mainsearch";
 	}
-
+	
+	
+	@GetMapping("/checkContactNo")
+	public void checkContactNo() {
+		
+			try {
+				new StudentService(request, response).checkContactNo();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+	}
 
 }

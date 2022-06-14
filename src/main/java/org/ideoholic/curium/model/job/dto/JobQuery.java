@@ -27,6 +27,7 @@ public class JobQuery implements java.io.Serializable {
 	private Integer updateduserid;
 	private Date createddate;
 	private Date updateddate;
+	private Date expecteddeliverydate;
 	private Integer branchid;
 	private String academicyear;
 	private String status;
@@ -38,7 +39,7 @@ public class JobQuery implements java.io.Serializable {
 	}
 
 	public JobQuery(Integer stdid, String externalid, String typeofwork,String typeofsubwork,String typeofsubsubwork, String response, Integer createduserid, Integer updateduserid, 
-			Date createddate, Date updateddate, Integer branchid, String academicyear, String status, String feedback){
+			Date createddate, Date updateddate, Date expecteddeliverydate, Integer branchid, String academicyear, String status, String feedback){
 		this.stdid = stdid;
 		this.externalid = externalid;
 		this.typeofwork = typeofwork;
@@ -53,6 +54,7 @@ public class JobQuery implements java.io.Serializable {
 		this.academicyear = academicyear;
 		this.status = status;
 		this.feedback = feedback;
+		this.expecteddeliverydate = expecteddeliverydate;
 	}
 
 	public Integer getId() {
@@ -200,5 +202,12 @@ public class JobQuery implements java.io.Serializable {
 		this.staffid = staffid;
 	}
 
-	
+	public Date getExpecteddeliverydate() {
+		return expecteddeliverydate;
+	}
+
+	public void setExpecteddeliverydate(Date expecteddeliverydate) {
+		this.expecteddeliverydate = expecteddeliverydate;
+	}
+
 }

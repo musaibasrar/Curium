@@ -92,7 +92,13 @@ public class JobAction {
 		new JobService(request, response).updateQueries();
 		return viewAllQueries();
 	}
-
+	
+	@PostMapping("/updateQueryRemarks")
+	private String updateQueryRemarks() {
+		new JobService(request, response).updateQueryRemarks();
+		return viewAllQueries();
+	}
+	
 	@PostMapping("/viewQueryDetails")
 	private void viewQueryDetails() {
 		
@@ -107,6 +113,12 @@ public class JobAction {
 	@PostMapping("/inProgressQueries")
 	private String inProgressQueries() {
 		new JobService(request, response).inProgressQueries();
+		return viewAllQueries();
+	}
+	
+	@PostMapping("/toDoQueries")
+	private String toDoQueries() {
+		new JobService(request, response).toDoQueries();
 		return viewAllQueries();
 	}
 

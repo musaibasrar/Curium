@@ -333,7 +333,7 @@
                 $(function() {
                     $( "#dialogquery" ).dialog({
                         autoOpen: false,
-                        height: 330,
+                        height: 380,
                         width: 550,
                         modal: true,
                         buttons: {
@@ -343,7 +343,7 @@
                             			document.getElementById("typeofworkcourtcases"),document.getElementById("typeofworkcourtdocs"),document.getElementById("typeofworknoncourtabt"),
                             			document.getElementById("typeofworknoncourtcd"),document.getElementById("typeofworknoncourtsr"),document.getElementById("typeofworknoncourtdr"),
                             			document.getElementById("typeofworknoncourtcs"),document.getElementById("typeofworknoncourturd"),document.getElementById("typeofworknoncourtrlo"),
-                            			document.getElementById("typeofworknoncourtmw"));
+                            			document.getElementById("typeofworknoncourtmw"),document.getElementById("typeofworknoncourtno"),document.getElementById("expecteddeliverydate"));
                                 		$( this ).dialog( "close" );
                          		   }
                         }
@@ -427,12 +427,12 @@
 		        		form1.submit();
 		            }
 		
-				function writeQuery(assignto,filetype,typeofwork,typeofworkcourt,typeofworknoncourt,typeofworkcourtcases,typeofworkcourtdocs,typeofworknoncourtabt,typeofworknoncourtcd,typeofworknoncourtsr,typeofworknoncourtdr,typeofworknoncourtcs,typeofworknoncourturd,typeofworknoncourtrlo,typeofworknoncourtmw){
+				function writeQuery(assignto,filetype,typeofwork,typeofworkcourt,typeofworknoncourt,typeofworkcourtcases,typeofworkcourtdocs,typeofworknoncourtabt,typeofworknoncourtcd,typeofworknoncourtsr,typeofworknoncourtdr,typeofworknoncourtcs,typeofworknoncourturd,typeofworknoncourtrlo,typeofworknoncourtmw,typeofworknoncourtno,expecteddeliverydate){
 					
 					var assignto = assignto.value;					
 					var form1 = document.getElementById("form1");
 					
-		    		form1.action = "/sla/QueryProcess/addQuery?staffid="+assignto+"&filetype="+filetype.value+"&typeofwork="+typeofwork.value+"&typeofworkcourt="+typeofworkcourt.value+"&typeofworknoncourt="+typeofworknoncourt.value+"&typeofworkcourtcases="+typeofworkcourtcases.value+"&typeofworkcourtdocs="+typeofworkcourtdocs.value+"&typeofworknoncourtabt="+typeofworknoncourtabt.value+"&typeofworknoncourtcd="+typeofworknoncourtcd.value+"&typeofworknoncourtsr="+typeofworknoncourtsr.value+"&typeofworknoncourtdr="+typeofworknoncourtdr.value+"&typeofworknoncourtcs="+typeofworknoncourtcs.value+"&typeofworknoncourturd="+typeofworknoncourturd.value+"&typeofworknoncourtrlo="+typeofworknoncourtrlo.value+"&typeofworknoncourtmw="+typeofworknoncourtmw.value+"";
+		    		form1.action = "/sla/QueryProcess/addQuery?staffid="+assignto+"&filetype="+filetype.value+"&typeofwork="+typeofwork.value+"&typeofworkcourt="+typeofworkcourt.value+"&typeofworknoncourt="+typeofworknoncourt.value+"&typeofworkcourtcases="+typeofworkcourtcases.value+"&typeofworkcourtdocs="+typeofworkcourtdocs.value+"&typeofworknoncourtabt="+typeofworknoncourtabt.value+"&typeofworknoncourtcd="+typeofworknoncourtcd.value+"&typeofworknoncourtsr="+typeofworknoncourtsr.value+"&typeofworknoncourtdr="+typeofworknoncourtdr.value+"&typeofworknoncourtcs="+typeofworknoncourtcs.value+"&typeofworknoncourturd="+typeofworknoncourturd.value+"&typeofworknoncourtrlo="+typeofworknoncourtrlo.value+"&typeofworknoncourtmw="+typeofworknoncourtmw.value+"&typeofworknoncourtno="+typeofworknoncourtno.value+"&expecteddeliverydate="+expecteddeliverydate.value+"";
 		    		form1.method = "POST";
 		    		form1.submit();
 		        }
@@ -457,6 +457,18 @@
       	      	  
       	      	  
             }
+            
+            $(function() {
+        		$("#expecteddeliverydate").datepicker({
+        			changeYear : true,
+        			changeMonth : true,
+        			dateFormat: 'dd/mm/yy',
+        			yearRange: "-50:+0"
+        		});
+        		$("#anim").change(function() {
+        			$("#expecteddeliverydate").datepicker("option", "showAnim", $(this).val());
+        		});
+        	});
              
         </script>
         
@@ -478,6 +490,7 @@
             				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
             				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
             				document.getElementById("typeofworkcourtcasestr").style.display = "none";
+            				document.getElementById("typeofworknoncourtnotr").style.display = "none";
             				
             				document.getElementById("typeofworkcourttd").style.display = '';
     	    		}else if(typeofworktext == "Non Court") {
@@ -492,6 +505,7 @@
         				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
         				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
         				document.getElementById("typeofworkcourtcasestr").style.display = "none";
+        				document.getElementById("typeofworknoncourtnotr").style.display = "none";
         				
         				document.getElementById("typeofworknoncourttd").style.display = '';
 	    		} 
@@ -512,6 +526,7 @@
         				document.getElementById("typeofworknoncourturdtr").style.display = "none";
         				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
         				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
+        				document.getElementById("typeofworknoncourtnotr").style.display = "none";
         				
         				document.getElementById("typeofworkcourtcasestr").style.display = '';
 	    		}else if(typeofworktext == "Certified Documents") {
@@ -524,6 +539,7 @@
     				document.getElementById("typeofworknoncourturdtr").style.display = "none";
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtnotr").style.display = "none";
     				
     				document.getElementById("typeofworkcourtdocstr").style.display = '';
     			} 
@@ -537,118 +553,221 @@
 
     			if (typeofworktext == "Arbitration") { 
         				document.getElementById("typeofworkcourtdocstr").style.display = "none";
+        				document.getElementById("typeofworkcourtdocs").selectedIndex = 0;
         				document.getElementById("typeofworknoncourtabttr").style.display = '';
         				document.getElementById("typeofworknoncourtcdtr").style.display = "none";
+        				document.getElementById("typeofworknoncourtcd").selectedIndex = 0;
         				document.getElementById("typeofworknoncourtsrtr").style.display = "none";
+        				document.getElementById("typeofworknoncourtsr").selectedIndex = 0;
         				document.getElementById("typeofworknoncourtdrtr").style.display = "none";
+        				document.getElementById("typeofworknoncourtdr").selectedIndex = 0;
         				document.getElementById("typeofworknoncourtcstr").style.display = "none";
+        				document.getElementById("typeofworknoncourtcs").selectedIndex = 0;
         				document.getElementById("typeofworknoncourturdtr").style.display = "none";
+        				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
         				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
+        				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
         				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
+        				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
         				document.getElementById("typeofworkcourtcasestr").style.display = "none";
-        				document.getElementById("typeofworkcourtdocstr").style.display = "none";
+        				document.getElementById("typeofworkcourtcases").selectedIndex = 0;
+        				document.getElementById("typeofworknoncourtnotr").style.display = "none";
+        				document.getElementById("typeofworknoncourtno").selectedIndex = 0;
 	    		}else if(typeofworktext == "Certified Documents") {
 	    			document.getElementById("typeofworkcourtcasestr").style.display = "none";
+	    			document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtabttr").style.display = "none";
+    				document.getElementById("typeofworknoncourtabt").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcdtr").style.display = '';
     				document.getElementById("typeofworknoncourtsrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtsr").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtdrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtdr").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcstr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcs").selectedIndex = 0;
     				document.getElementById("typeofworknoncourturdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
+    				document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworkcourtdocstr").style.display = "none";
+    				document.getElementById("typeofworkcourtdocs").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtnotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtno").selectedIndex = 0;
     			}else if(typeofworktext == "Sub Registrar") {
 	    			document.getElementById("typeofworkcourtcasestr").style.display = "none";
+	    			document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtabttr").style.display = "none";
+    				document.getElementById("typeofworknoncourtabt").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtsrtr").style.display = '';
     				document.getElementById("typeofworknoncourtdrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtdr").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcstr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcs").selectedIndex = 0;
     				document.getElementById("typeofworknoncourturdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
+    				document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworkcourtdocstr").style.display = "none";
+    				document.getElementById("typeofworkcourtdocs").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtnotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtno").selectedIndex = 0;
     			} else if(typeofworktext == "District Registrar") {
 	    			document.getElementById("typeofworkcourtcasestr").style.display = "none";
+	    			document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtabttr").style.display = "none";
+    				document.getElementById("typeofworknoncourtabt").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtsrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtsr").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtdrtr").style.display = '';
     				document.getElementById("typeofworknoncourtcstr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcs").selectedIndex = 0;
     				document.getElementById("typeofworknoncourturdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
+    				document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworkcourtdocstr").style.display = "none";
+    				document.getElementById("typeofworkcourtdocs").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtnotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtno").selectedIndex = 0;
     			} else if(typeofworktext == "Co-operative Society") {
 	    			document.getElementById("typeofworkcourtcasestr").style.display = "none";
+	    			document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtabttr").style.display = "none";
+    				document.getElementById("typeofworknoncourtabt").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtsrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtsr").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtdrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtdr").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcstr").style.display = '';
     				document.getElementById("typeofworknoncourturdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
+    				document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworkcourtdocstr").style.display = "none";
+    				document.getElementById("typeofworkcourtdocs").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtnotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtno").selectedIndex = 0;
     			} else if(typeofworktext == "Unregistered Documents") {
 	    			document.getElementById("typeofworkcourtcasestr").style.display = "none";
+	    			document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtabttr").style.display = "none";
+    				document.getElementById("typeofworknoncourtabt").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtsrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtsr").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtdrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtdr").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcstr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcs").selectedIndex = 0;
     				document.getElementById("typeofworknoncourturdtr").style.display = '';
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
+    				document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworkcourtdocstr").style.display = "none";
+    				document.getElementById("typeofworkcourtdocs").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtnotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtno").selectedIndex = 0;
     			} else if(typeofworktext == "Reading & Legal Opinion") {
 	    			document.getElementById("typeofworkcourtcasestr").style.display = "none";
+	    			document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtabttr").style.display = "none";
+    				document.getElementById("typeofworknoncourtabt").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtsrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtsr").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtdrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtdr").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcstr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcs").selectedIndex = 0;
     				document.getElementById("typeofworknoncourturdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtrlotr").style.display = '';
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
+    				document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworkcourtdocstr").style.display = "none";
+    				document.getElementById("typeofworkcourtdocs").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtnotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtno").selectedIndex = 0;
     			} else if(typeofworktext == "Mutation Work") {
 	    			document.getElementById("typeofworkcourtcasestr").style.display = "none";
+	    			document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtabttr").style.display = "none";
+    				document.getElementById("typeofworknoncourtabt").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtsrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtsr").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtdrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtdr").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcstr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcs").selectedIndex = 0;
     				document.getElementById("typeofworknoncourturdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = '';
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
+    				document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworkcourtdocstr").style.display = "none";
+    				document.getElementById("typeofworkcourtdocs").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtnotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtno").selectedIndex = 0;
     			} else if(typeofworktext == "Notice") {
 	    			document.getElementById("typeofworkcourtcasestr").style.display = "none";
+	    			document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtabttr").style.display = "none";
+    				document.getElementById("typeofworknoncourtabt").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtsrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtsr").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtdrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtdr").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtcstr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcs").selectedIndex = 0;
     				document.getElementById("typeofworknoncourturdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
+    				document.getElementById("typeofworkcourtcases").selectedIndex = 0;
     				document.getElementById("typeofworkcourtdocstr").style.display = "none";
+    				document.getElementById("typeofworkcourtdocs").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtnotr").style.display = '';
     			} 
     	
     		}    		
-    		
-    		
     		
     	</script>
     </head>
@@ -820,8 +939,7 @@ for(Cookie cookie : cookies){
 										</select>
 									</label></td>
 								</tr>
-								
-								
+																
 									<tr style="display: none;" id="typeofworknoncourttd">
 									<td class="alignLeft">Type of Non-Court Jobs:</td>
 									<td><label> <select name="typeofworknoncourt" id="typeofworknoncourt" style="width: 250px;height: 25px;" onchange="selectnoncourtwork()">
@@ -837,6 +955,10 @@ for(Cookie cookie : cookies){
 											<option value="Notice">Notice</option>
 										</select>
 									</label></td>
+								</tr>
+								
+								<tr>
+									<td><br></td>
 								</tr>
 								
 								
@@ -930,6 +1052,8 @@ for(Cookie cookie : cookies){
 											<option value="TRUST">Trust</option>
 											<option value="WN">Waqfnama</option>
 											<option value="WILL">Will</option>
+											<option value="TRD">Transfer Deed</option>
+											<option value="PVS">Property Valuation Statement</option>
 											<option value="OD">Other Deeds</option>
 										</select>
 									</label></td>
@@ -987,6 +1111,7 @@ for(Cookie cookie : cookies){
 													<option value="SMP">Sale of Moveable Property</option>
 													<option value="TN">Talaqnama</option>
 													<option value="TR">Title Report</option>
+													<option value="PVS">Property Valuation Statement</option>
 					
 											</select>
 									</label></td>
@@ -1046,6 +1171,23 @@ for(Cookie cookie : cookies){
 												<!-- <input type="text" name="filetype" id="filetype"/> -->
 										</label></td>
 								</tr>
+								
+								<tr>
+									<td><br></td>
+								</tr>
+								
+									<tr>
+										
+										<td class="alignLeft">Expected Delivery Date: &nbsp;</td>
+	
+										<td ><label>
+											<input type="text"  name="expecteddeliverydate"
+									class="textField" style="font-size: 14px;"
+									id="expecteddeliverydate" autocomplete="false" required
+									data-validate="validate(required)">
+										</label></td>
+								</tr>
+
 						</table>
 						
 					</div>

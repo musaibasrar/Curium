@@ -442,7 +442,7 @@ for(Cookie cookie : cookies){
                     
                     <tr style="display: none;">
                     <td>
-                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
                     </td>
                     </tr>
                     
@@ -794,50 +794,60 @@ for(Cookie cookie : cookies){
 
                     <table  border="0px" width="100%"  id="table1" align="center">
                     
+                  	<c:if test="${not empty student.studentdoc1}">
                         <tr>
                     <td>
-                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Doc1" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Doc1" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc1.jpg" href="/sla/data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
+                    <a download="studentdoc1.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
                     </td>
                     </tr>
+                    </c:if>
                     
+                    <c:if test="${not empty student.studentdoc2}">
                     <tr>
                     <td>
-                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Doc2" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Doc2" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc2.jpg" href="/sla/data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
+                    <a download="studentdoc2.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
                     </td>
                     </tr>
+                    </c:if>
                     
+                    <c:if test="${not empty student.studentdoc3}">
                     <tr>
                     <td>
-                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Doc3" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Doc3" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc3.jpg" href="/sla/data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
+                    <a download="studentdoc3.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
                     </td>
                     </tr>
+                    </c:if>
                     
+                    <c:if test="${not empty student.studentdoc4}">
                     <tr>
                     <td>
-                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Doc4" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Doc4" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc4.jpg" href="/sla/data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
+                    <a download="studentdoc4.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
                     </td>
                     </tr>
+                    </c:if>
                     
+                    <c:if test="${not empty student.studentdoc5}">
                     <tr>
                     <td>
-                    <img src="/sla//sladata:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Doc5" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Doc5" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc5.jpg" href="/sla/data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
+                    <a download="studentdoc5.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
                     </td>
                     </tr>
+                    </c:if>
                     </table>
                 </div>
     </div>
@@ -873,6 +883,9 @@ for(Cookie cookie : cookies){
                                 	<td class="dataText" style="background-color: yellow;"><c:out value="${query.id}"/></td>
                                 </c:if>
                                 <c:if test="${query.status == 'Completed' }">
+                                	<td class="dataText" style="background-color: green;"><c:out value="${query.id}"/></td>
+                                </c:if>
+                                <c:if test="${query.status == 'Cancelled' }">
                                 	<td class="dataText" style="background-color: green;"><c:out value="${query.id}"/></td>
                                 </c:if>
                                  <td class="dataText"><c:out value="${query.externalid}"/></td>

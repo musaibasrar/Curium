@@ -439,35 +439,43 @@
 
 
 <script type="text/javascript">
-	function check(value) {
-
-		xmlHttp = GetXmlHttpObject()
-		var url = "/check";
-		url = url + "?name=" + value;
-		xmlHttp.onreadystatechange = stateChanged
-		xmlHttp.open("GET", url, true)
-		xmlHttp.send(null)
-	}
-	function stateChanged() {
-		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-			var showdata = xmlHttp.responseText;
-			document.getElementById("mydiv").innerHTML = showdata;
+		var xmlHttp;
+		var count;
+		function checkContactNo() {
+		
+			var selected=document.getElementById('contactnumber').value;
+				
+				 if (typeof XMLHttpRequest != "undefined") {
+					 xmlHttp = new XMLHttpRequest();
+		            
+		         } else if (window.ActiveXObject) {
+		        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		             
+		         }
+				xmlHttp.onreadystatechange = stateChanged;
+				xmlHttp.open("GET", "/sla/StudentProcess/checkContactNo?contactnumber="+selected,true);
+				xmlHttp.send(null);
 		}
-	}
-	function GetXmlHttpObject() {
-		var xmlHttp = null;
-		try {
-			xmlHttp = new XMLHttpRequest();
-		} catch (e) {
-			try {
-				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-			} catch (e) {
-				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		
+		function stateChanged() {
+		
+			if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+				document.getElementById("mydivmobile").innerHTML = xmlHttp.responseText;
 			}
 		}
-		return xmlHttp;
-	}
-
+		function GetXmlHttpObject() {
+			var xmlHttp = null;
+			try {
+				xmlHttp = new XMLHttpRequest();
+			} catch (e) {
+				try {
+					xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+				} catch (e) {
+					xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+			}
+			return xmlHttp;
+		}
 
 	function CalculateAge(value) {
 		var dateOfBirth = document.getElementById('datepicker').value;
@@ -625,7 +633,7 @@
 
 									<td><label> <input
 											name="contactnumber" type="text" class="myclass" required
-											style="text-transform:capitalize;"
+											style="text-transform:capitalize;" onkeyup="checkContactNo();"
 											id="contactnumber" size="36" maxlength="10" minlength="10">
 
 									</label></td>
@@ -641,6 +649,13 @@
 											id="cocontactnumber" size="36" maxlength="10" minlength="10">
 
 									</label></td>
+								</tr>
+								
+								<tr>
+									<td></td>
+									<td style="color: red;">
+                                    <div id="mydivmobile"></div>
+                                	</td>
 								</tr>
 
 								<tr>
