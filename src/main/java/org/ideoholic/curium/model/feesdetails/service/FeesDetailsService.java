@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -80,25 +81,22 @@ public class FeesDetailsService {
 		
 		String[] feesIds = request.getParameterValues("feesIDs");
 		boolean successResult = false;
-		List<Receiptinfo> listOfFeesDetails = new ArrayList<Receiptinfo>();
 		Receiptinfo receiptInfo = new Receiptinfo();
-		List<Parents> listOfStudentDetails = new ArrayList<Parents>();
 		Parents student = new Parents();
+		Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
 
 		if (feesIds != null) {
 			for (String id : feesIds) {
 				if (id != null || id != "") {
 					
 					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
-					listOfFeesDetails.add(receiptInfo);
-					
 					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
-					listOfStudentDetails.add(student);
+					feesMap.put(student, receiptInfo);
 				}
 
 			}
 			try {
-				if (exportDataToExcel(listOfFeesDetails, listOfStudentDetails)) {
+				if (exportDataToExcel(feesMap)) {
 					successResult = true;
 				} else {
 					successResult = false;
@@ -113,7 +111,7 @@ public class FeesDetailsService {
 	}
 	
 	
-	public boolean exportDataToExcel(List<Receiptinfo> listOfFeesDetails, List<Parents> listOfStudent)
+	public boolean exportDataToExcel(Map<Parents,Receiptinfo> feeMap)
 			throws Exception {
 
 		boolean writeSucees = false;
@@ -127,22 +125,23 @@ public class FeesDetailsService {
 			headerData.put("Header",
 					new Object[] { "Admission Number","UID","STS","Student Name","Father Name","Contact Number", "Date of Fees", "Total"});
 			int i = 1;
-			for (Receiptinfo feesDetails : listOfFeesDetails) {
-				
-				for (Parents studentDetails : listOfStudent) {
-				
-					data.put(Integer.toString(i),new Object[] { 
-						studentDetails.getStudent().getAdmissionnumber(), 
-						studentDetails.getStudent().getStudentexternalid(), 
-						studentDetails.getStudent().getSts(), 
-						studentDetails.getStudent().getName(), 
-						studentDetails.getFathersname(), 
-						studentDetails.getContactnumber(), 
-						feesDetails.getDate().toString(),
-						feesDetails.getTotalamount() });
-				}
+			
+			for (Entry<Parents, Receiptinfo> entry : feeMap.entrySet()) {
+	            
+				data.put(Integer.toString(i),new Object[] { 
+						entry.getKey().getStudent().getAdmissionnumber(), 
+						entry.getKey().getStudent().getStudentexternalid(), 
+						entry.getKey().getStudent().getSts(), 
+						entry.getKey().getStudent().getName(), 
+						entry.getKey().getFathersname(), 
+						entry.getKey().getContactnumber(), 
+						entry.getValue().getDate().toString(),
+						entry.getValue().getTotalamount() });
 				i++;
-			}
+				}
+				
+			
+			
 			Row headerRow = sheet.createRow(0);
 			Object[] objArrHeader = headerData.get("Header");
 			int cellnum1 = 0;
