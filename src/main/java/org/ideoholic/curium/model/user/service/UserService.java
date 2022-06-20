@@ -208,7 +208,11 @@ public class UserService {
         	int todayIncompleteAppointments = new AppointmentDAO().getNoOfRecordsTodayIncompleteAppointments ();
         	request.setAttribute("todayincompleteappointments", todayIncompleteAppointments );
         	//
-               	
+            
+        	//Total In Progress Queries
+        	int totalInprogressQueries = new JobDAO().getNoOfRecordsInProgressQueries();
+        	request.setAttribute("totalinprogressqueries", totalInprogressQueries);
+        	
         	request.setAttribute("studentxaxis", xaxisList);
         	request.setAttribute("studentyaxis", yaxisList);
         	request.setAttribute("totalstudents", totalStudents);

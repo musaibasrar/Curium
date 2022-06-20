@@ -418,5 +418,53 @@ public class AppointmentService {
 		
 		httpSession.setAttribute("appointmentList", appointmentList);
 	}
+
+	public boolean updateAppointment() {
+		
+		String[] appointmentIds = request.getParameterValues("appointmentids");
+		List<Appointment> appointmentList = new ArrayList<Appointment>();
+		boolean result = false;
+		
+		if(appointmentIds.length > 0 ) {
+			
+			for (String ids : appointmentIds) {
+				Appointment appt = new Appointment();
+				appt.setId(Integer.parseInt(ids));
+				appt.setAppointmentstarttime(request.getParameter("starttime_"+ids));
+				appt.setAppointmentendtime(request.getParameter("endtime_"+ids));
+				
+				 SimpleDateFormat format = new SimpleDateFormat("HH:mm"); // 12 hour format
+				 java.util.Date d1 = null;
+				 java.util.Date d2 = null;
+				 
+				 if(appt.getAppointmentstarttime() != "" && appt.getAppointmentendtime() !="" ) {
+					 
+				 
+				try {
+					d1 = (java.util.Date)format.parse(request.getParameter("starttime_"+ids).toString());
+					d2 = (java.util.Date)format.parse(request.getParameter("endtime_"+ids).toString());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				long difference_In_Time = d2.getTime()-d1.getTime();
+				 //long difference_In_Hours = (difference_In_Time / (1000 * 60 * 60)) % 24;
+				 
+				 long diffSeconds = difference_In_Time / 1000;         
+				 long diffMinutes = difference_In_Time / (60 * 1000) % 60;         
+				 long diffHours = difference_In_Time / (60 * 60 * 1000);  
+				 
+				 appt.setTotaltime(Long.toString(diffHours)+":"+Long.toString(diffMinutes));
+				
+				 }else {
+					 appt.setTotaltime("");
+				 }
+				 appointmentList.add(appt);
+			}
+			result = new AppointmentDAO().updateAppointments(appointmentList);
+		}
+		
+		return result;
+	}
 	
 }

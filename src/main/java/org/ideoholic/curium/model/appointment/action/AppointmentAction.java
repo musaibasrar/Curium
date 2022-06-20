@@ -95,4 +95,14 @@ public class AppointmentAction {
 			return "error";
 		}
 	}
+	
+	@PostMapping("/updateAppointment")
+	private String updateAppointment() {
+		
+		if(new AppointmentService(request, response).updateAppointment()){
+			return "appointmentsuccess";
+		}else{
+			return "error";
+		}
+	}
 }

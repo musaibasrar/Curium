@@ -1089,6 +1089,7 @@ for(Cookie cookie : cookies){
 										<td><label> <select name="typeofworknoncourturd" id="typeofworknoncourturd" style="width: 250px;height: 25px;">
 													<option selected></option>
 													<option value="AF">Affidavit</option>
+													<option value="BTA">Business Transfer Agreement</option>
 													<option value="CA">Construction Agreement</option>
 													<option value="DD">Divorce Deed</option>
 													<option value="FA">Franchise Agreement</option>

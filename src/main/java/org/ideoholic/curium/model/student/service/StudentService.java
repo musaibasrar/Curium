@@ -1364,7 +1364,8 @@ public class StudentService {
 		if (studentIds != null) {
 			List<Integer> ids = new ArrayList();
 			for (String id : studentIds) {
-				ids.add(Integer.valueOf(id));
+				String[] sid = id.split(":");
+				ids.add(Integer.valueOf(sid[0]));
 
 			}
 			new studentDetailsDAO().archiveMultiple(ids);

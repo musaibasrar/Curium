@@ -344,4 +344,25 @@ public class AppointmentDAO {
 	        return results;
 }
 
+		public boolean updateAppointments(List<Appointment> appointmentList) {
+			
+			boolean result = false;
+			try {
+				transaction = session.beginTransaction();
+				
+					for (Appointment appointment : appointmentList) {
+						Query query = session.createQuery("update Appointment set appointmentstarttime = '"+appointment.getAppointmentstarttime()+"', appointmentendtime='"+appointment.getAppointmentendtime()+"', totaltime='"+appointment.getTotaltime()+"' where id="+appointment.getId()+"");
+						query.executeUpdate();
+					}
+					
+					transaction.commit();
+					result = true;
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				hibernateException.printStackTrace();
+			}finally {
+				HibernateUtil.closeSession();
+			 }
+			return result;
+		}
+
 }

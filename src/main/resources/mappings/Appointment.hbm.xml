@@ -38,6 +38,15 @@
          <property name="status" type="string">
             <column name="status" length="100" />
         </property>
+         <property name="appointmentstarttime" type="string">
+            <column name="appointmentstarttime" length="100" />
+        </property>
+         <property name="appointmentendtime" type="string">
+            <column name="appointmentendtime" length="100" />
+        </property>
+        <property name="totaltime" type="string">
+            <column name="totaltime" length="100" />
+        </property>
         <many-to-one name="parent" class="org.ideoholic.curium.model.parents.dto.Parents"
             column="stdid" lazy="false" />
             

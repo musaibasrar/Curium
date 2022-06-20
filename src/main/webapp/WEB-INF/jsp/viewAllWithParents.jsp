@@ -209,9 +209,9 @@
         <script type="text/javascript">
             function deleteRecords(){
                 var form1=document.getElementById("form1");
-                 
-                form1.submit();
-            }
+                form1.action="/sla/StudentProcess/archiveMultiple";
+               form1.submit();
+           }
             function filter2 (phrase, _id)
             {
                 var words = phrase.value.toLowerCase().split(" ");
@@ -306,15 +306,6 @@
         </script>
         <script type="text/javascript">
             $(function(){
-                $("#delete").button({
-                    icons:{
-                        primary: "ui-icon-trash"
-                    }
-                }).click(function(){
-                    deleteRecords();
-                    return false;
-
-                });
                 $('#chckHead').click(function () {
                     var length = $('.chcktbl:checked').length;
                     var trLength=$('.trClass').length;
@@ -385,11 +376,12 @@
                         primary: "ui-icon-trash"
                     }
                 }).click(function(){
-                    deleteRecords();
+                	if(confirm('Are you sure,you want to archive?')){
+                		deleteRecords();	
+                	}
                     return false;
 
                 });
-                
                 
                 $(".querybutton").button({
                     icons:{
@@ -902,7 +894,7 @@ for(Cookie cookie : cookies){
 %>
     <body  >
 
-        <form name="form1" id="form1" action="/sla/StudentProcess/archiveMultiple" method="post">
+        <form name="form1" id="form1" method="post">
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>
@@ -1143,10 +1135,11 @@ for(Cookie cookie : cookies){
 											<option selected></option>
 											<option value="CPD">Corporation Documents</option>
 											<option value="CTSD">CTS Documents</option>
+											<option value="DRD">District Registrar Documents</option>
 											<option value="EC">Encumberance Certificate</option>
 											<option value="LSD">Land Survey Documents</option>
-											<option value="DRD">District Registrar Documents</option>
 											<option value="RED">Revenue Documents</option>
+											<option value="SRD">Sub Registrar Documents</option>
 										</select>
 									</label></td>
 								</tr>
@@ -1218,6 +1211,7 @@ for(Cookie cookie : cookies){
 										<td><label> <select name="typeofworknoncourturd" id="typeofworknoncourturd" style="width: 250px;height: 25px;">
 													<option selected></option>
 													<option value="AF">Affidavit</option>
+													<option value="BTA">Business Transfer Agreement</option>
 													<option value="CA">Construction Agreement</option>
 													<option value="DD">Divorce Deed</option>
 													<option value="FA">Franchise Agreement</option>

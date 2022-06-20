@@ -438,12 +438,9 @@
 
 	function generateQueriesReport() {
 			var form1 = document.getElementById("form1");
-			
-			if(form1.checkValidity()) {
 				form1.action = "/sla/QueryProcess/generateQueriesReport";
 				form1.method = "POST";
 				form1.submit();
-			  }
 	}
 	
  
@@ -597,7 +594,7 @@ for(Cookie cookie : cookies){
 							<td><label> <input type="text"  name="transactiondatefrom"
 									class="textField" style="font-size: 14px;"
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
-									id="transactiondatefrom" autocomplete="false" required
+									id="transactiondatefrom" autocomplete="false" 
 									data-validate="validate(required)">
 							</label></td>
 							
@@ -605,7 +602,7 @@ for(Cookie cookie : cookies){
 							<td><label> <input type="text"  name="transactiondateto"
 									class="textField" style="font-size: 14px;"
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
-									id="transactiondateto" autocomplete="false" required
+									id="transactiondateto" autocomplete="false" 
 									data-validate="validate(required)">
 							</label></td>
 							

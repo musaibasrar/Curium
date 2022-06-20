@@ -452,6 +452,16 @@
 
          });
          
+         
+         $("#update").button({
+             icons:{
+                 primary: "ui-icon-refresh"
+             }
+         }).click(function(){
+             updateAppointment();
+
+         });
+         
          $('#chckHead').click(function () {
              var length = $('.chcktbl:checked').length;
              var trLength=$('.trClass').length;
@@ -485,6 +495,23 @@
               
 
      });
+	 
+	 
+	   function viewStudentDetails(sid,branchid){
+           var form1=document.getElementById("form1");
+          form1.action="/sla/StudentProcess/ViewDetails?id="+sid+"&urlbranchid="+branchid+"";
+          form1.submit();
+          
+          //window.location.reload();
+      }
+	   
+	   function updateAppointment(){
+     	  
+       	var form1 = document.getElementById("form1");
+   		form1.action = "/sla/AppointmentProcess/updateAppointment";
+   		form1.method = "POST";
+   		form1.submit();
+       }
 		
 </script>
 	       
@@ -507,7 +534,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1">
+	<form id="form1" method="post">
 
 
 		<div class="alert-box success" id="div1">Appointment updated successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
@@ -531,7 +558,9 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Appt. Time</th>
                             <!-- <th title="click to sort" class="headerText">Admission Number</th> -->
                             <th title="click to sort" class="headerText">Client Name</th>
-                            <th title="click to sort" class="headerText">Contact Number</th>
+                           <th title="click to sort" class="headerText">Start Time</th>
+                           <th title="click to sort" class="headerText">End Time</th>
+                           <th title="click to sort" class="headerText">Total Time</th>
                             <!-- <th title="click to sort" class="headerText">Class</th> -->
                             <!-- <th title="click to sort" class="headerText">Father Name</th> -->
                             <!-- <th title="click to sort" class="headerText">Mother Name</th> -->
@@ -548,8 +577,10 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${appointment.appointmentdate}"/></td>
                                 <td class="dataText"><c:out value="${appointment.appointmenttime}"/></td>
                                 <%-- <td class="dataText"><c:out value="${appointment.parent.student.admissionnumber}"/></td> --%>
-                                <td class="dataText"><c:out value="${appointment.parent.student.name}"/></td>
-                                <td class="dataText"><c:out  value="${appointment.parent.contactnumber}"/></td>
+                                <td class="dataText"><a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${appointment.parent.student.sid},${appointment.parent.student.branchid})"><c:out value="${appointment.parent.student.name}"/></a></td>
+                                <td class="dataText"><input type="time" value="${appointment.appointmentstarttime}" name="starttime_${appointment.id}" id="starttime" /></td>
+                                <td class="dataText"><input type="time" value="${appointment.appointmentendtime}" name="endtime_${appointment.id}" id="endtime" /></td>
+                                <td class="dataText"><c:out value="${appointment.totaltime}"/></td>
                                 <%-- <td class="dataText">
                                 <c:forEach var="splt" items="${fn:split(appointment.parent.student.classstudying,'--')}">
 						    		${splt} 
@@ -566,15 +597,16 @@ for(Cookie cookie : cookies){
                     
                     <tfoot><tr>
                     
-                    <td  class="footerTD" colspan="2" >
+                    <td  class="footerTD" colspan="9" >
                             </td>
                    </tr></tfoot>
                 </table>
                 
                 <table>
                 	<tr>
-                    	<td  colspan="2" ><button value="completed" type="submit" id="completed">Completed</button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="cancel">Cancel</button> 
+                    	<td  colspan="9" ><button value="completed" type="submit" id="completed">Completed</button>
+ 									&nbsp;&nbsp;&nbsp;&nbsp;<button id="update">Update</button>
+ 									 &nbsp;&nbsp;&nbsp;&nbsp;<button id="cancel">Cancel</button> 
                     	</td>
                    </tr>
                 </table>

@@ -494,7 +494,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/sla/AppointmentProcess/viewAllAppointments" style="font-size: 12px;">Appointment</a>
+            				 <a target="mainFrame" href="/sla/AppointmentProcess/viewAllAppointments" style="font-size: 12px;">View</a>
             			</td>
             		</tr>
                 </table>
@@ -763,6 +763,11 @@ for(Cookie cookie : cookies){
             				<a target="mainFrame" href="/sla/changePassword" style="font-size: 12px;">Change Password</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/sla/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Clients</a>
+            			</td>
+            		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/sla/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
@@ -770,7 +775,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/sla/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
+            				 <a target="mainFrame" href="/sla/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Clients</a>
             			</td>
             		</tr> -->
                 </table>

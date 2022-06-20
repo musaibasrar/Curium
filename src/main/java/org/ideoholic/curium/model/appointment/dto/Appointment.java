@@ -19,6 +19,9 @@ public class Appointment implements java.io.Serializable {
 	private String externalid;
 	private Date appointmentdate;
 	private String appointmenttime;
+	private String appointmentstarttime;
+	private String appointmentendtime;
+	private String totaltime;
 	private Integer createduserid;
 	private Integer updateduserid;
 	private Date createddate;
@@ -32,7 +35,7 @@ public class Appointment implements java.io.Serializable {
 	}
 
 	public Appointment(Integer stdid, String externalid, Date appointmentdate, String appointmenttime, Integer createduserid, Integer updateduserid, 
-			Date createddate, Integer branchid, String academicyear, String status, Integer userid){
+			Date createddate, Integer branchid, String academicyear, String status, Integer userid, String appointmentstarttime, String appointmentendtime, String totaltime){
 		this.stdid = stdid;
 		this.externalid = externalid;
 		this.appointmentdate = appointmentdate;
@@ -44,6 +47,9 @@ public class Appointment implements java.io.Serializable {
 		this.academicyear = academicyear;
 		this.status = status;
 		this.userid = userid;
+		this.appointmentstarttime = appointmentstarttime;
+		this.appointmentendtime = appointmentendtime;
+		this.totaltime = totaltime;
 	}
 
 	public Integer getId() {
@@ -148,6 +154,30 @@ public class Appointment implements java.io.Serializable {
 
 	public void setUserid(Integer userid) {
 		this.userid = userid;
+	}
+
+	public String getAppointmentstarttime() {
+		return appointmentstarttime;
+	}
+
+	public void setAppointmentstarttime(String appointmentstarttime) {
+		this.appointmentstarttime = appointmentstarttime;
+	}
+
+	public String getAppointmentendtime() {
+		return appointmentendtime;
+	}
+
+	public void setAppointmentendtime(String appointmentendtime) {
+		this.appointmentendtime = appointmentendtime;
+	}
+
+	public String getTotaltime() {
+		return totaltime;
+	}
+
+	public void setTotaltime(String totaltime) {
+		this.totaltime = totaltime;
 	}
 
 	

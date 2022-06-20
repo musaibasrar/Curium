@@ -386,7 +386,7 @@ public class JobDAO {
 				// HibernateUtil.getSessionFactory().openCurrentSession();
 				transaction = session.beginTransaction();
 
-				results = (List<JobQuery>) session.createQuery("From JobQuery where status = 'Assigned' or status = 'In Progress'").setCacheable(true).setCacheRegion("commonregion")
+				results = (List<JobQuery>) session.createQuery("From JobQuery where status = 'To Do'").setCacheable(true).setCacheRegion("commonregion")
 						.list();
 				noOfRecords = results.size();
 				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
@@ -525,7 +525,7 @@ public class JobDAO {
 			try {
 				transaction = session.beginTransaction();
 				
-					Query query = session.createQuery("update JobQuery set feedback = '"+remarks+"', updateduserid= "+userId+", updateddate = CURDATE() where id="+queryId+"");
+					Query query = session.createQuery("update JobQuery set feedback = IFNULL (CONCAT( feedback , '"+remarks+"' ), '"+remarks+"'), updateduserid= "+userId+", updateddate = CURDATE() where id="+queryId+"");
 					query.executeUpdate();
 				
 				transaction.commit();
@@ -536,6 +536,33 @@ public class JobDAO {
 				HibernateUtil.closeSession();
 			 }
 			return result;
+		}
+
+
+		public int getNoOfRecordsInProgressQueries() {
+			
+			List<JobQuery> results = new ArrayList<JobQuery>();
+			int noOfRecords = 0;
+			try {
+				// this.session =
+				// HibernateUtil.getSessionFactory().openCurrentSession();
+				transaction = session.beginTransaction();
+
+				results = (List<JobQuery>) session.createQuery("From JobQuery where status = 'In Progress'").setCacheable(true).setCacheRegion("commonregion")
+						.list();
+				noOfRecords = results.size();
+				logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
+								+ noOfRecords);
+				transaction.commit();
+
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+				
+				hibernateException.printStackTrace();
+
+			} finally {
+					HibernateUtil.closeSession();
+				return noOfRecords;
+			}
 		}
 
 }

@@ -421,9 +421,11 @@
 			form1.submit();
 		}
 		
-		function updateQueryRemarks(queryRemarks, queryid) {
+		function updateQueryRemarks(queryRemarksAdded,queryRemarks, queryid) {
 			var form1 = document.getElementById("form1");
-			form1.action = "/sla/QueryProcess/updateQueryRemarks?queryremarks="+queryRemarks.value+"&queryid="+queryid.value+"";
+			var remarksAdded = queryRemarks.value;
+			var result = " sla" +" "+ remarksAdded;
+			form1.action = "/sla/QueryProcess/updateQueryRemarks?queryremarks="+result+"&queryid="+queryid.value+"";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -552,7 +554,9 @@
 
             function openPopup(queryRemarks,queryid){
             	
-            	document.getElementById("queryremarks").value=queryRemarks;
+            	var regex = /sla/g;
+            	var queryRemarksadded = queryRemarks.replace(regex,"\n ->");
+            	document.getElementById("queryremarksadded").value=queryRemarksadded;
             	document.getElementById("queryid").value= queryid;
 
         		
@@ -566,18 +570,25 @@
             $(function() {
                 $( "#dialog" ).dialog({
                     autoOpen: false,
-                    height: 220,
+                    height: 300,
                     width: 400,
                     modal: true,
                     buttons: {
                         Update: function() {
-                        	updateQueryRemarks(document.getElementById("queryremarks"),document.getElementById("queryid"));
+                        	updateQueryRemarks(document.getElementById("queryremarksadded"),document.getElementById("queryremarks"),document.getElementById("queryid"));
                             		$( this ).dialog( "close" );
                      		   }
                     }
                 });
             });
 
+            function viewStudentDetails(sid,branchid){
+                var form1=document.getElementById("form1");
+               form1.action="/sla/StudentProcess/ViewDetails?id="+sid+"&urlbranchid="+branchid+"";
+               form1.submit();
+               
+               //window.location.reload();
+           }
         </script>
 
 
@@ -599,7 +610,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1">
+	<form id="form1" method="post">
 
 
 		<div class="alert-box success" id="div1">Job updated successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
@@ -619,14 +630,13 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">UID</th>
                             <th title="click to sort" class="headerText">Job No.</th>
+                            <th title="click to sort" class="headerText">Client Name</th>
+                            <th title="click to sort" class="headerText">Staff</th>
+                            <th title="click to sort" class="headerText">Remarks</th>
+                            <th title="click to sort" class="headerText">Status</th>
                             <th title="click to sort" class="headerText">Created Date</th>
                             <th title="click to sort" class="headerText">Updated Date</th>
                             <th title="click to sort" class="headerText">Expected Delivery</th>
-                            <th title="click to sort" class="headerText">Staff</th>
-                            <th title="click to sort" class="headerText">Client Name</th>
-                            <th title="click to sort" class="headerText">Contact Number</th>
-                            <th title="click to sort" class="headerText">Status</th>
-                            <th title="click to sort" class="headerText">Remarks</th>
                             <!-- <th title="click to sort" class="headerText">Details</th> -->
                         </tr>
                     </thead>
@@ -638,26 +648,18 @@ for(Cookie cookie : cookies){
                             	<td class="dataText"><input type="checkbox" id = "<c:out value="${query.id}"/>" class = "chcktbl"  name="queryids"  value="<c:out value="${query.id}"/>"/></td>
                             	<td class="dataText"><c:out value="${query.id}"/></td>
                             	<c:if test="${query.status == 'To Do' }">
-                                	<td class="dataText" style="color: #cb1b09;"><c:out value="${query.externalid}"/></td>
+                                	<td class="dataText" style="color: #cb1b09;font-weight: bold;"><c:out value="${query.externalid}"/></td>
                                 </c:if>
                                 <c:if test="${query.status == 'In Progress' }">
-                                	<td class="dataText" style="color: #0001ff;"><c:out value="${query.externalid}"/></td>
+                                	<td class="dataText" style="color: #0001ff;font-weight: bold;"><c:out value="${query.externalid}"/></td>
                                 </c:if>
                                 <c:if test="${query.status == 'Completed' }">
-                                	<td class="dataText" style="color: #65a358;"><c:out value="${query.externalid}"/></td>
+                                	<td class="dataText" style="color: #65a358;font-weight: bold;"><c:out value="${query.externalid}"/></td>
                                 </c:if>
                                 <c:if test="${query.status == 'Cancelled' }">
-                                	<td class="dataText" style="color: grey;"><c:out value="${query.externalid}"/></td>
+                                	<td class="dataText" style="color: grey;font-weight: bold;"><c:out value="${query.externalid}"/></td>
                                 </c:if>
-                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
-                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
-                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.expecteddeliverydate}"/></td>
-                                <td class="dataText"><c:out value="${query.teacher.teachername}"/></td>
-                                <td class="dataText"><c:out value="${query.parent.student.name}"/>
-	                                <input type="hidden" id="contactno_${query.id}" name="contactno_${query.id}" value="${query.parent.contactnumber}">
-                                </td>
-                                <td class="dataText"><c:out  value="${query.parent.contactnumber}"/></td>
-                                <td class="dataText"><c:out  value="${query.status}"/></td>
+                               <td class="dataText"><a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${query.parent.student.sid},${query.parent.student.branchid})"><c:out value="${query.parent.student.name}"/></a>
                                 <c:if test="${not empty query.feedback}">
                                 	<td class="dataText"><a href="#" onclick="openPopup('${query.feedback}','${query.id}')" style="color:#eb6000;">View</a></td>
                                 </c:if>
@@ -665,6 +667,14 @@ for(Cookie cookie : cookies){
                                 	<td class="dataText"><a href="#" onclick="openPopup('${query.feedback}','${query.id}')" style="color:#4b6a84;">Add</a></td>
                                 </c:if>
                                 
+                                
+                                <td class="dataText"><c:out value="${query.teacher.teachername}"/></td>
+	                                <input type="hidden" id="contactno_${query.id}" name="contactno_${query.id}" value="${query.parent.contactnumber}">
+                                </td>
+                                <td class="dataText"><c:out  value="${query.status}"/></td>
+                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.expecteddeliverydate}"/></td>
                                 <%-- <td class="dataText"><a href="#" onclick="openPopup(${query.id})" style="color:#eb6000;">View Details</a></td> --%>
                             </tr>
                         </c:forEach>
@@ -734,6 +744,16 @@ for(Cookie cookie : cookies){
 										<p class="formfield">
 										<input type="hidden" id="queryid" name="queryid" >
 										<label style="font-size: 14px;"> Remarks :</label>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<textarea  name="queryremarksadded" id="queryremarksadded" cols="40" rows="5" readonly></textarea>
+										</p>
+									</td>
+								</tr>
+								
+								<tr>
+									<td>
+										<p class="formfield">
+										<label style="font-size: 14px;"> Add Remarks :</label>
 										<textarea  name="queryremarks" id="queryremarks" cols="40" rows="5"></textarea>
 										</p>
 									</td>

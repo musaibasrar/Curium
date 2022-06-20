@@ -126,6 +126,33 @@ for(Cookie cookie : cookies){
         			</div>
         	</div>
         	
+        	<div class="col" style="padding-bottom: 40px;"> 
+        			<div id="rcorners1">
+        			<table>
+        				<tr>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td>
+        						<img src="/sla/images/lifesaver.svg" height="20" width="20"/>
+        						<label id="labelname">${Currentmonth} Jobs&nbsp;&nbsp;&nbsp;</label><br>
+        						<img src="/sla/images/lifesaver.svg" height="20" width="20"/>
+        						<label id="labelname">${Currentmonth} Appt.&nbsp;&nbsp;&nbsp;</label><br>
+        					</td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        					<td>
+        						<label id="labelnumber">${monthlyqueries}</label><br>
+        						<label id="labelnumber">${monthlyappointments}</label>	
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	</div>
+        	
         	<div class="col" style="padding-bottom: 40px;">
         		<div id="rcorners1">
         			<table>
@@ -166,9 +193,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td>
         					<img src="/sla/images/lifesaver.svg" height="20" width="20"/>	
-        						<label id="labelname">Total Resolved Jobs</label><br>
+        						<label id="labelname">Total Completed Jobs</label><br>
         						<img src="/sla/images/lifesaver.svg"  height="20" width="20"/>
-        						<label id="labelname">Total Unresolved Jobs&nbsp;</label>
+        						<label id="labelname">Total To Do Jobs&nbsp;</label>
         					</td>
         					<td></td>
         					<td></td>
@@ -184,34 +211,6 @@ for(Cookie cookie : cookies){
         	 </div>
         	 
         	 
-        	 <div class="col" style="padding-bottom: 40px;"> 
-        			<div id="rcorners1">
-        			<table>
-        				<tr>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td>
-        						<img src="/sla/images/lifesaver.svg" height="20" width="20"/>
-        						<label id="labelname">${Currentmonth} Jobs&nbsp;&nbsp;&nbsp;</label><br>
-        						<img src="/sla/images/lifesaver.svg" height="20" width="20"/>
-        						<label id="labelname">${Currentmonth} Appt.&nbsp;&nbsp;&nbsp;</label><br>
-        					</td>
-        					<td></td>
-        					<td></td>
-        					<td></td>
-        					<td>
-        						<label id="labelnumber">${monthlyqueries}</label><br>
-        						<label id="labelnumber">${monthlyappointments}</label>	
-        					</td>
-        				</tr>
-        			</table>
-        			</div>
-        	</div>
-        	
-        	 
         	 <div class="col" style="padding-bottom: 40px;">
         		<div id="rcorners1">
         			<table>
@@ -223,10 +222,10 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td>
         						<img src="/sla/images/lifesaver.svg" height="20" width="20"/>
-        						<label id="labelname">Today's Resolved Jobs</label>
+        						<label id="labelname">Today's Completed Jobs</label>
         						<br>		
         						<img src="/sla/images/lifesaver.svg" height="20" width="20"/>	
-        						<label id="labelname">Today's Unresolved Jobs</label>	
+        						<label id="labelname">Today's To Do Jobs</label>	
         					</td>
         					<td></td>
         					<td></td>
@@ -270,7 +269,7 @@ for(Cookie cookie : cookies){
         	
         	 </div>
         	 
-        	 <%-- <div class="col" style="padding-bottom: 40px;">
+        	 <div class="col" style="padding-bottom: 40px;">
         		<div id="rcorners1">
         			<table>
         				<tr>
@@ -281,23 +280,23 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td>
         						<img src="/sla/images/lifesaver.svg" height="20" width="20"/>
-        						<label id="labelname">Average Feedback Point</label>
+        						<label id="labelname">Total In Progress Jobs</label>
         						<br>		
-        						<img src="/sla/images/lifesaver.svg" height="20" width="20"/>	
-        						<label id="labelname">Today's Avg. Feedback Pt.</label>	
+        						<!-- <img src="/sla/images/lifesaver.svg" height="20" width="20"/>	
+        						<label id="labelname">Today's Avg. Feedback Pt.</label> -->	
         					</td>
         					<td></td>
         					<td></td>
         					<td></td>
         					<td>
-        						<label id="labelnumber"><fmt:formatNumber type="number" maxFractionDigits="2" value="${totalaveragefeedbackpt}"/></label><br>
-        						<label id="labelnumber"><fmt:formatNumber type="number" maxFractionDigits="2" value="${todayaveragefeedbackpt}"/></label>
+        						<label id="labelnumber"><fmt:formatNumber type="number" maxFractionDigits="2" value="${totalinprogressqueries}"/></label><br>
+        						<%-- <label id="labelnumber"><fmt:formatNumber type="number" maxFractionDigits="2" value="${todayaveragefeedbackpt}"/></label> --%>
         					</td>
         				</tr>
         			</table>
         			</div>
         	
-        	 </div> --%>
+        	 </div>
         	 
         </div>
         
