@@ -418,6 +418,8 @@ public class FeesCollectionService {
 			NumberToWord toWord = new NumberToWord();
 			String grandTotal = toWord.convert(rinfo.getTotalamount().intValue());
 			httpSession.setAttribute("grandTotal", grandTotal+" "+"Only");
+			
+			getFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
 		}
 		
 	}
@@ -444,6 +446,8 @@ public class FeesCollectionService {
 			request.setAttribute("recieptinfo", rinfo);
 			request.setAttribute("feescatmap", feeCatMap);
 			request.setAttribute("duplicate", "duplicate");
+
+			getFeesDetails(String.valueOf(rinfo.getSid()), rinfo.getAcademicyear());
 			
 		}
 	}
