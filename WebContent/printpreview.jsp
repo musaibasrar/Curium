@@ -452,8 +452,8 @@ for(Cookie cookie : cookies){
                             <td class="fontsize" >
 	                         <div class="card" style="position: relative;">
 	                         		<div style="padding-top: 10px;" align="center">
-	                         			<h3 style="text-transform: uppercase;margin-top: 0px;margin-bottom: 0px;">${branchname}</h3>
-	                         			<h4 style="text-transform: capitalize;margin-top: 0px;margin-bottom: 0px;">${branchaddress}</h4>
+	                         			<h4 style="text-transform: uppercase;margin-top: 0px;margin-bottom: 0px;">${branchname}</h4>
+	                         			<h5 style="text-transform: capitalize;margin-top: 0px;margin-bottom: 0px;">${branchaddress}</h5>
 	                         			<h6 style="text-transform: capitalize;margin-top: 0px;margin-bottom: 5px;">Contact : 9739190167/9686449445</h6>
 	                         		</div>
 		                         	

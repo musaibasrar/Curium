@@ -1388,7 +1388,7 @@ public class StudentService {
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getStudentexternalid()), DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
+						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getRegistrationnumber()), DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
 								 DataUtil.emptyString(DateUtil.getStringDate(studentDetails.getStudent().getDateofbirth())),
 								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying()).replace("--", " "),

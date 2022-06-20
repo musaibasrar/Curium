@@ -58,9 +58,18 @@ public class FeesAction {
                     url = searchFeesConcessionReport();
                 }else if ("printFeesConcessionReport".equalsIgnoreCase(action)) {
                     url = printFeesConcessionReport();
+                }else if ("feesDueStampFees".equalsIgnoreCase(action)) {
+                    url = feesDueStampFees();
                 }
                 return url;
         }
+        
+        
+		private String feesDueStampFees() {
+        	new StandardService(request, response).viewClasses();
+			return "feesstampdue.jsp";
+		}
+
 
 		private String applyConcession() {
         	return new FeesService(request, response).applyConcession();

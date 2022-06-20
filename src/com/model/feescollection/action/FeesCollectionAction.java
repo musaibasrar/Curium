@@ -52,9 +52,16 @@ public class FeesCollectionAction {
                             url = download();
                         }else if (action.equalsIgnoreCase("printFeesReport")) {
                             url = printFeesReport();
+                        }else if (action.equalsIgnoreCase("searchFeesStampDueReport")) {
+                            url = searchFeesStampDueReport();
                         }
                 return url;
         }
+
+		private String searchFeesStampDueReport() {
+			new FeesCollectionService(request, response).getFeesStampDueReport();
+			return "feesstampdue.jsp";
+		}
 
 		private String printFeesReport() {
 			return "feesreportprint.jsp";

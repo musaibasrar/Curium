@@ -135,8 +135,14 @@ public class StudentAction {
                 
                 
                 new StudentService(request, response).viewfeesStructurePerYear();
-        return "student_details_feesstructure.jsp";
-        
+                
+                if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+                    return "student_details_feesstructure_admin.jsp";
+                }else if(!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+                    return "student_details_feesstructure.jsp";
+                }else {
+                	return "student_details_feesstructure.jsp";
+                }
         }
 
         private String ViewFeesStructure() {

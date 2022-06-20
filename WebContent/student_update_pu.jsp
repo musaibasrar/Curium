@@ -1348,7 +1348,7 @@ for(Cookie cookie : cookies){
 									<td  class="alignLeft" style="padding-left: 20px;">Occupation
 										&nbsp;</td>
 									<td ><label> 
-												<input name="profession" type="text" class="myclass" id="profession" size="30" required
+												<input name="profession" type="text" class="myclass" id="profession" size="30"
 												value="<c:out default="" value="${parents.profession}" />"" >
 									
 									</label></td>

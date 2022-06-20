@@ -1,5 +1,5 @@
 <%--
-    Document   : Fees Report
+    Document   : Fees Stamp Due
     Created on : MAR 24, 2020, 12:58:28 PM
     Author     : Musaib
 --%>
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Fees Report</title>
+<title>Fees Stamp Due</title>
 <link rel="stylesheet" href="css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="css/datePicker/demos.css">
 <style type="text/css">
@@ -368,7 +368,7 @@
 
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "Controller?process=FeesCollection&action=searchFeesReport";
+		form1.action = "Controller?process=FeesCollection&action=searchFeesStampDueReport";
 		form1.method = "POST";
 		form1.submit();
 

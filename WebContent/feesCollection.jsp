@@ -434,11 +434,11 @@
                 return day+"/"+month+"/"+year;
 
             }
-           
+            var students = [
             <c:forEach varStatus="status" items="${studentListFeesCollection}" var="parent">{
             	value:'<c:out default="0" value="${parent.student.name}" />',
                 admissionno:'<c:out default="0" value="${parent.student.admissionnumber}" />',
-                regno:'<c:out default="0" value="${parent.student.studentexternalid}" />',
+                regno:'<c:out default="0" value="${parent.student.registrationnumber}" />',
                 name:'<c:out default="0" value="${parent.student.name}" />',
                 classandsec:'<c:out default="0" value="${parent.student.classstudying}" />',
                 id:'<c:out default="0" value="${parent.student.sid}" />',
