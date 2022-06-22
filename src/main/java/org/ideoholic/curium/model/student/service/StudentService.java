@@ -1554,22 +1554,24 @@ public class StudentService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "UID", "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
-							"Admitted In Class", "Admission Number", "Admission Date","Admission Year", "Promoted Year", "Blood Group", "Religion",
-							"Caste", "Fathers Name", "Mothers Name","Contact No.","RTE" , "Archive", "Graduated", "Left Out", "Dropped Out"});
+					new Object[] { "Admission No.","STS","UID", "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
+							"Admitted In Class", "Admission Date","Admission Year", "Promoted Year", "Blood Group", "Religion", "Student Aadhar Card",
+							"Caste", "Fathers Name", "Mothers Name","Contact No.", "Archive", "Graduated", "Left Out", "Dropped Out"});
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getStudentexternalid()),
-						DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
+						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
+								DataUtil.emptyString(studentDetails.getStudent().getSts()),
+								DataUtil.emptyString(studentDetails.getStudent().getStudentexternalid()),
+								 DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
 								 DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getDateofbirth()),
 								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
-								 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
 								 DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getAdmissiondate()),
 								 DataUtil.emptyString(studentDetails.getStudent().getYearofadmission()),DataUtil.emptyString(studentDetails.getStudent().getPromotedyear()),
 								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
+								 DataUtil.emptyString(studentDetails.getStudent().getDisabilitychild()),
 								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
 								 DataUtil.emptyString(studentDetails.getMothersname()),DataUtil.emptyString(studentDetails.getContactnumber()),DataUtil.emptyString(studentDetails.getStudent().getRte() == 1 ? "Yes" : "No" ),
 								 studentDetails.getStudent().getArchive()==1 ? "Yes" : "No" , studentDetails.getStudent().getPassedout()==1 ? "Yes" : "No", studentDetails.getStudent().getLeftout()==1 ? "Yes" : "No",
