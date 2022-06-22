@@ -218,7 +218,7 @@
 						value="${recieptinfo.branchreceiptnumber}" />
 				</td>
 				
-				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Academic Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
 				</td>
 
 			</tr>
@@ -229,11 +229,8 @@
 			<td class="dataTextBoldLeft" style="width: 50%">Fathers
 					Name:&nbsp;<c:out value="${parents.fathersname}" />
 				</td>
-			
 				<td class="dataTextBoldLeft" style="width: 30%">
-				<%--  <c:set var = "string1" value = "${student.classstudying}"/>
-			     <c:set var = "string2" value = "${fn:replace(string1, '--', '')}" /> --%>
-					Class & Sec:&nbsp;<c:out value="${recieptinfo.classsec}" />
+					Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
 
 			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
@@ -315,6 +312,7 @@
 			<td><hr width="100%"></td>
 			</tr>
 
+<<<<<<< HEAD
 <tr>
 <td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
 </tr>
@@ -380,8 +378,7 @@
 				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
 						value="${recieptinfo.branchreceiptnumber}" />
 				</td>
-			
-					<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Academic Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
 				</td>
 			</tr>
 			<tr>
@@ -391,11 +388,8 @@
 			<td class="dataTextBoldLeft" style="width: 50%">Fathers
 					Name:&nbsp;<c:out value="${parents.fathersname}" />
 				</td>
-			
-				<td class="dataTextBoldLeft" style="width: 30%">
-				<%--  <c:set var = "string1" value = "${student.classstudying}"/>
-			     <c:set var = "string2" value = "${fn:replace(string1, '--', '')}" /> --%>
-					Class & Sec:&nbsp;<c:out value="${recieptinfo.classsec}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">
+					Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
 
 			<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
@@ -474,28 +468,29 @@
 			<td><hr width="100%"></td>
 			</tr>
 
-<tr>
-<td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
-</tr>
-<tr>
-<td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
-<td></td>
-</tr>
+			<tr>
+			<td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
+			</tr>
+			<tr>
+			<td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
+			<td></td>
+			</tr>
+			
+			<tr>
+			<td align="left">Note: Fees once deposited will not be refunded under any Circumstances</td>
+			</tr>
+			
+			<tr>
+			<td><br></td>
+			</tr>
+			<tr>
+			<td></td>
+			<td align="left"><br>Signature of Cashier/Accountant</td>
+			<!-- 
+			<td align="left">H.M</td> -->
+			
+			</tr>
 
-<tr>
-<td align="left">Note: Fees once deposited will not be refunded under any Circumstances</td>
-</tr>
-
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td></td>
-<td align="left"><br>Signature of Cashier/Accountant</td>
-<!-- 
-<td align="left">H.M</td> -->
-
-</tr>
 		</TABLE>
 
 </div>
