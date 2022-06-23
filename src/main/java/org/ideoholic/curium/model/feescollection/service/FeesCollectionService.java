@@ -998,6 +998,75 @@ public class FeesCollectionService {
 		return result;
 	}
 
+	public void getFeesStampDueReport() {
+		
+		
+		String academicYear = request.getParameter("academicyear");
+		//Get Students
+		
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		
+		String queryMain = "From Parents as parents where";
+		String[] addClass = request.getParameterValues("classsearch");
+		StringBuffer conClassStudying = new StringBuffer();
+
+			int i = 0;
+			for (String classOne : addClass) {
+				
+				if(i>0) {
+					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+				}else {
+					conClassStudying.append(classOne+"--"+"%");
+				}
+				
+				i++;
+			}
+		
+		String classStudying = DataUtil.emptyString(conClassStudying.toString());
+		String querySub = "";
+
+		if (!classStudying.equalsIgnoreCase("")) {
+			querySub = querySub + " (parents.Student.classstudying like '"
+					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+		}
+
+		if(!"".equalsIgnoreCase(querySub)) {
+			queryMain = queryMain + querySub;
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		}
+		
+	}
+		//End Students
+		
+		
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+			
+			List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
+			
+			for (Parents parents : searchStudentList) {
+				
+				StudentFeesReport studentFeesReport = new StudentFeesReport();
+				
+				long id = parents.getStudent().getSid();
+				List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, academicYear);
+				
+				if (feesstructure.size() == 0) {
+					
+					studentFeesReport.setParents(parents);
+					studentFeesReport.setStudentFeesStructure(feesstructure);
+					
+					studentFeesReportList.add(studentFeesReport);
+					
+				}
+			}
+		
+			httpSession.setAttribute("studentfeesreportlist", studentFeesReportList);
+		}
+		
+	  }
+
 }
 
 
