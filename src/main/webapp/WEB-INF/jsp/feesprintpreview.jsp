@@ -4,7 +4,6 @@
     Author     : Musaib
 --%>
 
-<%@page import="org.ideoholic.curium.model.personal.dto.PersonalDetails"%>
 <%@page import="java.lang.String"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
