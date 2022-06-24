@@ -384,6 +384,14 @@
 			updateStudent();
 
 		});
+		$("#updatefive").button().click(function() {
+			updateStudent();
+
+		});
+		$("#updatesix").button().click(function() {
+			updateStudent();
+
+		});
 
 		$("#canceltwo").button().click(function() {
 			Cancel();
@@ -394,6 +402,14 @@
 
 		});
 		$("#cancelfour").button().click(function() {
+			Cancel();
+
+		});
+		$("#cancelfive").button().click(function() {
+			Cancel();
+
+		});
+		$("#cancelsix").button().click(function() {
 			Cancel();
 
 		});

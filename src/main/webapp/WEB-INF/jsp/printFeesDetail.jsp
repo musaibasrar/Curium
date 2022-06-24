@@ -290,64 +290,6 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			
 			</table>
 			
 			
@@ -532,63 +474,6 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td></td>
-			</tr>
 			
 			</table>
 			
