@@ -103,7 +103,7 @@ public class SmsService {
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
 						logger.info("Numbers are *** "+numbers);
-						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebody")));
+						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebody")),"all");
 					}
 					
 				offset = offset+100;
@@ -122,7 +122,7 @@ public class SmsService {
 		
 		boolean result=false;
 		String numbers = DataUtil.emptyString(request.getParameter("numbers"));
-		int resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodynumbers")));
+		int resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodynumbers")),"all");
 		if(resultSMS==200){
 			result = true;
 		}
@@ -174,7 +174,7 @@ public class SmsService {
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
 						logger.info("Numbers are *** "+numbers);
-						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodystaff")));
+						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodystaff")),"staffall");
 					}
 					
 				offset = offset+100;
@@ -188,7 +188,7 @@ public class SmsService {
         return result;
 	}
 	
-	public int sendSMS(String numbers, String message) {
+	public int sendSMS(String numbers, String message, String templateType) {
 		int responseCode = 0;
 		try 
 		{
@@ -198,19 +198,61 @@ public class SmsService {
 	        String smsuser = properties.getProperty("smsuser");
 	        String smssender = properties.getProperty("smssender");
 	        String apikey = properties.getProperty("apikey");
+	        String peid = properties.getProperty("peid");
+	        String templateid = properties.getProperty(templateType+"templateid");
+	        String templatemessage = properties.getProperty(templateType+"templatemessage");
+	        String[] messageSeq = message.split(":");
+	        String var1 = "";
+	        String var2 = "";
+	        String var3 = "";
+	        String var4 = "";
 	        
-	      
+	        int messageIterations = messageSeq.length;
+	        
+	        
+	        switch (messageIterations) {
+			case 1:
+				var1=messageSeq[0];
+				break;
+			case 2:
+				var1=messageSeq[0];
+				var2=messageSeq[1];
+				break;
+			case 3:
+				var1=messageSeq[0];
+				var2=messageSeq[1];
+				var3=messageSeq[2];
+				break;
+			case 4:
+				var1=messageSeq[0];
+				var2=messageSeq[1];
+				var3=messageSeq[2];
+				var4=messageSeq[3];
+				break;
+
+			default:
+				break;
+			}
+	        
+	        templatemessage = templatemessage.replace("var1", var1);
+	        templatemessage = templatemessage.replace("var2", var2);
+	        templatemessage = templatemessage.replace("var3", var3);
+	        templatemessage = templatemessage.replace("var4", var4);
 		// Construct data
 		String phonenumbers=numbers;
 		String data="username=" + URLEncoder.encode(smsuser, "UTF-8");
-		data +="&message=" + URLEncoder.encode(message, "UTF-8");
+		data +="&message=" + URLEncoder.encode(templatemessage, "UTF-8");
 		data +="&sendername=" + URLEncoder.encode(smssender, "UTF-8");
 		data +="&smstype=" + "TRANS";
 		data +="&numbers=" + URLEncoder.encode(phonenumbers, "UTF-8");
 		data +="&apikey=" + apikey;
+		data +="&peid=" + peid;
+		data +="&templateid=" + templateid;
 		// Send data
 		
 		String POST_URL = "http://sms.bulksmsind.in/sendSMS?"+data;
+		logger.info(templateType+": URL "+POST_URL);
+		System.out.println(templateType+": URL "+POST_URL);
         URL obj = new URL(POST_URL);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("POST");
