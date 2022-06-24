@@ -41,6 +41,7 @@ import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
@@ -330,6 +331,8 @@ public class FeesCollectionService {
 			
 			if(createFeesCollection) {
 				getFeesDetails(sid,request.getParameter("academicyear"));
+				Parents parent = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(sid));
+				new SmsService(request, response).sendSMS(parent.getContactnumber(), "Total "+String.valueOf(receiptInfo.getTotalamount()) , "fees");
 			}
 			
 		}
