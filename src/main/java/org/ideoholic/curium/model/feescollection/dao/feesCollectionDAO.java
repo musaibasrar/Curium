@@ -54,8 +54,6 @@ public class feesCollectionDAO {
 			 		receiptInfo.setBranchreceiptnumber(String.format("%03d",1));
 			 	}
 			 	
-			 	session.save(receiptInfo);
-			 	
 			 	//Receipts
 			 	transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
 				session.save(transactions);
@@ -73,6 +71,10 @@ public class feesCollectionDAO {
 				Query queryqueryAccountsIncome1 = session.createQuery(updateCrAccountIncome);
 				queryqueryAccountsIncome1.executeUpdate();
 				//
+				
+				receiptInfo.setReceiptvoucher(transactions.getTransactionsid().intValue());
+				receiptInfo.setJournalvoucher(transactionsIncome.getTransactionsid().intValue());
+				session.save(receiptInfo);
 				
 			for (Feescollection singleFeescollection :  feescollectionList) {
 				singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());

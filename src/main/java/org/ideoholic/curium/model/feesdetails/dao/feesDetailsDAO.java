@@ -272,7 +272,7 @@ public class feesDetailsDAO {
             }
     }
 
-		public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection) {
+		public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection, String updateReceiptDrAccount, String updateReceiptCrAccount, String cancelReceiptVoucher, String updateJournalDrAccount, String updateJournalCrAccount, String cancelJournalVoucher) {
 			
 			boolean result = false;
 
@@ -286,6 +286,22 @@ public class feesDetailsDAO {
                     	Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.getSfsid());
                     	queryStudentFS.executeUpdate();
 					}
+                    
+                    if(updateReceiptDrAccount!=null && updateReceiptCrAccount!=null && cancelReceiptVoucher != null && updateJournalDrAccount!=null && updateJournalCrAccount!=null && cancelJournalVoucher!=null) {
+	                    Query updateReceiptDr = session.createQuery(updateReceiptDrAccount);
+	        			updateReceiptDr.executeUpdate();
+	        			Query updateReceiptCr = session.createQuery(updateReceiptCrAccount);
+	        			updateReceiptCr.executeUpdate();
+	        			Query cancelReceiptVoucherQuery = session.createQuery(cancelReceiptVoucher);
+	        			cancelReceiptVoucherQuery.executeUpdate();
+	        			
+	        			Query updateJournalDr = session.createQuery(updateJournalDrAccount);
+	        			updateJournalDr.executeUpdate();
+	        			Query updateJournalCr = session.createQuery(updateJournalCrAccount);
+	        			updateJournalCr.executeUpdate();
+	        			Query cancelJournalVoucherQuery = session.createQuery(cancelJournalVoucher);
+	        			cancelJournalVoucherQuery.executeUpdate();
+                    }
                     
                     transaction.commit();
                     result = true;

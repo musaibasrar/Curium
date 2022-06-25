@@ -31,6 +31,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.Accountdetails;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
@@ -458,10 +459,65 @@ public class FeesCollectionService {
 		
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
 			
-			int receiptId = DataUtil.parseInt(request.getParameter("id"));
-			List<Feescollection> feesCollection = new feesCollectionDAO().getFeesCollectionDetails(receiptId);
-			boolean result = new feesDetailsDAO().cancelFeesReceipt(receiptId, feesCollection);
+			String rid = request.getParameter("receiptid");
+			String jid = request.getParameter("journalid");
+			int feesReceiptId = DataUtil.parseInt(request.getParameter("id"));
+			boolean result=false;
+			List<Feescollection> feesCollection = new feesCollectionDAO().getFeesCollectionDetails(feesReceiptId);
+			Date now = new Date();
+	        String pattern = "yyyy-MM-dd";
+	        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
+			String todaysDate = formatter.format(now);
 			
+			if(rid !=null && jid !=null ) {
+				
+				int receiptId = DataUtil.parseInt(rid);
+				int journalId = DataUtil.parseInt(jid);
+			
+			// Cancel Voucher
+
+				VoucherEntrytransactions receiptVoucherTransaction = new AccountDAO().getVoucherDetails(String.valueOf(receiptId));
+				
+			
+				String updateReceiptDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+receiptVoucherTransaction.getDramount()+" where accountdetailsid="+receiptVoucherTransaction.getDraccountid();
+				String updateReceiptCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+receiptVoucherTransaction.getCramount()+" where accountdetailsid="+receiptVoucherTransaction.getCraccountid();
+
+				String cancelReceiptVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+receiptId;
+				
+			
+				VoucherEntrytransactions journalVoucherTransaction = new AccountDAO().getVoucherDetails(String.valueOf(journalId));
+				
+				// Dr
+				Accountdetails accountDetailsDr = new AccountDAO().getAccountDetails(journalVoucherTransaction.getDraccountid());
+				String updateJournalDrAccount= null;
+				if(accountDetailsDr.getAccountGroupMaster().getAccountgroupid()==1 || accountDetailsDr.getAccountGroupMaster().getAccountgroupid()==5) {
+					updateJournalDrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+journalVoucherTransaction.getDramount()+" where accountdetailsid="+journalVoucherTransaction.getDraccountid();
+				}else {
+					updateJournalDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+journalVoucherTransaction.getDramount()+" where accountdetailsid="+journalVoucherTransaction.getDraccountid();
+				}
+				
+				//Cr
+				
+				Accountdetails accountDetailsCr = new AccountDAO().getAccountDetails(journalVoucherTransaction.getCraccountid());
+				String updateJournalCrAccount= null;
+				
+				if(accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==2 || accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==3 || accountDetailsCr.getAccountGroupMaster().getAccountgroupid()==4) {
+					updateJournalCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+journalVoucherTransaction.getCramount()+" where accountdetailsid="+journalVoucherTransaction.getCraccountid();
+				}else {
+					updateJournalCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+journalVoucherTransaction.getCramount()+" where accountdetailsid="+journalVoucherTransaction.getCraccountid();
+				}
+				
+				String cancelJournalVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='"+todaysDate+"' where transactionsid="+journalId;
+				
+			
+			// End Cancel Voucher
+			result = new feesDetailsDAO().cancelFeesReceipt(feesReceiptId, feesCollection, updateReceiptDrAccount, updateReceiptCrAccount, cancelReceiptVoucher,
+					updateJournalDrAccount, updateJournalCrAccount, cancelJournalVoucher);
+		}else {
+			result = new feesDetailsDAO().cancelFeesReceipt(feesReceiptId, feesCollection, null, null, null,
+					null, null, null);
+		}
+		
 			request.setAttribute("cancelreceiptresult", result);
 				
 		}
