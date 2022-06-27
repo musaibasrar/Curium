@@ -353,6 +353,13 @@
 
 
                 });
+                $( "#print" )
+                .button()
+                .click(function() {
+                    Print();
+
+
+                });
             });
             var type='<c:out default="" value="${typeOfUser}"/>';
             function checkUsertype(){
@@ -1160,6 +1167,7 @@ for(Cookie cookie : cookies){
                                 <button id="modify" type="submit">Modify</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button id="cancel" >Cancel</button>
+                                <button id="print" >Print</button>
                                 <!-- <button id="print" onclick= "printPage">Print</button> -->
                             </td>
 
@@ -1176,6 +1184,12 @@ for(Cookie cookie : cookies){
             function Cancel(){
                 var form1=document.getElementById("form1");
                 form1.action="/roshan/StudentProcess/viewAll";
+                form1.submit();
+            }
+            
+            function Print(){
+                var form1=document.getElementById("form1");
+                form1.action="/roshan/StudentProcess/printAdmissionForm";
                 form1.submit();
             }
         </script>

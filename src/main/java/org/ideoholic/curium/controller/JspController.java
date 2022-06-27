@@ -301,4 +301,9 @@ public class JspController {
 	public String getfeesStampDue() {
 		return "feesstampdue";
 	}
+	
+	@GetMapping("/printadmissionform.jsp")
+	public String getPrintAdmissionForm() {
+		return "printadmissionform";
+	}
 }

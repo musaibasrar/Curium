@@ -233,5 +233,10 @@ public class StudentAction {
 		request.setAttribute("urlbranchid", branchId);
 		return viewStudent();
 	}
+	
+	@PostMapping("/printAdmissionForm")
+	public String printAdmissionForm() {
+			return "printadmissionform";
+	}
 
 }

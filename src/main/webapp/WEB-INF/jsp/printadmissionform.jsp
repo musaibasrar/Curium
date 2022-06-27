@@ -1,50 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Admission Form</title>
-
-<style type="text/css">
-h3{
-	margin-left: 400px;
-	margin-right: 30px;
-	margin-top: 10px;
-}
-
-h2{
-	margin-left: 400px;
-}
-
-h4{
-	margin-left: 400px;
-}
-
-.admission input{
-	height:20px;
-	margin-bottom: 10px;
-
-}
-
-.admission input[type="date"] {
-	margin-right: 30px;
-}
-
-input[type="submit"]{
-	font-size: 18px;
-	width: 80px;
-	height:40px;
-	margin-left: 40px;
-}
-
-input {
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style: groove;
-}
-
 
 <script type="text/javascript">
 function validateForm() {
