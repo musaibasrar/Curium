@@ -289,6 +289,16 @@
 	font-weight: bold;
 	height: 22px;
 }
+
+.dataTextRight {
+	border-radius: 3px;
+	font-family: Tahoma;
+	color: #4b6a84;
+	font-size: 13px;
+	letter-spacing: normal;
+	text-align: right;
+	background-color: #E3EFFF;
+}
 </style>
 
 <link rel="stylesheet" href="/roshan/css/validation/jquery.ketchup.css">
@@ -327,6 +337,8 @@
 	src="/roshan/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
 	src="/roshan/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	<link href="/roshan/css/select2.min.css" rel="stylesheet" />
+<script src="/roshan/js/select2.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -362,6 +374,13 @@
 			form1.submit();
 		  }
 	}
+	
+	function printRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/roshan/AccountProcess/printSearchLedgerEntries";
+		form1.method = "POST";
+		form1.submit();
+}
 
 	$(function() {
 
@@ -370,11 +389,33 @@
 		});
 		
 
+		 $("#print").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         }).click(function(){
+             printRecords();
+             return false;
+
+         });
 	});
 
 	$(function() {
-
 		$("#tabs").tabs();
+		$("#effect").hide();
+		// run the currently selected effect
+		function runEffect() {
+
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		// set effect from select menu value
+		$("#add").button().click(function() {
+			runEffect();
+			return false;
+		});
 	});
 	
 	
@@ -425,7 +466,14 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
+		<c:set var="crtotal" value="${0}" />
+		<c:set var="drtotal" value="${0}" />
 	<form id="form1">
+	
+		<div style="height: 28px">
+			<button id="add">Parameters</button>
+			<br />
+		</div>
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -434,8 +482,7 @@ for(Cookie cookie : cookies){
 
 				</ul>
 				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
+					<table style="margin-left: auto;margin-right: auto;">
 
 						<tr>
 							<td><br /></td>
@@ -444,8 +491,8 @@ for(Cookie cookie : cookies){
 
 						<tr>
 						
-						<td class="alignRight">Select Account&nbsp;&nbsp;</td>
-							<td><label> <select name="accountid" id="accountid" style="width: 230px" required>
+						<td class="alignRight">Select Account</td>
+							<td><label> <select name="accountid" id="accountid" class="select2" style="width: 230px" required>
 										<option selected></option>
 									
 									  <c:forEach items="${ledgeraccountdetails}" var="ledger">
@@ -468,11 +515,11 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-						<td class="alignRight">From Date&nbsp;&nbsp;</td>
+						<td class="alignRight">From Date&nbsp;</td>
 							<td><label> <input name="fromdate" autocomplete="off" type="text" class="textField" id="fromdate" size="36" required>
 							</label></td>
 							
-							<td  class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;To Date&nbsp;&nbsp;</td>
+							<td  class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;To Date&nbsp;</td>
 							<td ><label> <input name="todate" autocomplete="off" type="text" class="textField" id="todate" size="36" required>
 							</label></td>
 							
@@ -513,10 +560,21 @@ for(Cookie cookie : cookies){
 		</div>
 
 		<div style="overflow: scroll; height: 600px">
+		
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Ledger: ${ledgername}</td>
+					<td class="headerTD">
+						<label style="text-decoration: underline;">General Leger Details</label><br>
+						<label style="text-transform: capitalize;">From:</label>  
+					<input type="text" name="fromdateselected" style="background: transparent;border: none;color: white;font-weight: bold;width: 90px;" value="${fromdate}" >
+					<label style="text-transform: capitalize;">To:</label>  
+					<input type="text" name="todateselected" style="background: transparent;border: none;color: white;font-weight: bold;" value="${todate}" >
+					<label style="text-transform: capitalize;">Ledger:</label>
+					<input type="text" style="background: transparent;border: none;color: white;font-weight: bold;width: 260px;" value="${ledgername}" >
+					<input type="hidden" name="accountidselected" style="background: transparent;border: none;color: white;font-weight: bold;width: 260px;" value="${accountid}" >
+					</td>
 				</tr>
+				
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
 				id="myTable">
@@ -534,6 +592,7 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
+				<fmt:setLocale value="en_IN" scope="session"/>
 					<c:forEach items="${ledgertransactions}" var="ledgertransactions">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
@@ -551,20 +610,27 @@ for(Cookie cookie : cookies){
 							<td class="dataText">
 							<c:set var="ledgername" value="${fn:split(ledgertransactions.value,':')}"></c:set>
 							${ledgername[0]}<%-- <c:out value="${ledgertransactions.value}" /> --%></td>
-							  <td class="dataText"><c:out	value="${ledgertransactions.key.narration}" /></td>
+							 <td class="dataText"><c:out	value="${ledgertransactions.key.narration}" /></td>
 							
 							<c:if test="${ledgername[1] == 'Dr'}">
+								
 								<td class="dataText"></td>
-								<td class="dataText"><c:out	value="${ledgertransactions.key.cramount}" /></td>
-							</c:if>
-							<c:if test="${ledgername[1] == 'Cr'}">
-								<td class="dataText"><c:out	value="${ledgertransactions.key.dramount}" /></td>
-								<td class="dataText"></td>
+								<c:set var="crtotal" value="${crtotal + ledgertransactions.key.cramount}" />
+								<td class="dataTextRight">
+									<fmt:formatNumber type="number"  maxFractionDigits = "2" value="${ledgertransactions.key.cramount}" />
+								</td>
+								
 							</c:if>
 							
-						  
-
-
+							<c:if test="${ledgername[1] == 'Cr'}">
+								
+								<td class="dataTextRight">
+									<c:set var="drtotal" value="${drtotal + ledgertransactions.key.dramount}" />
+									<fmt:formatNumber type="number"  maxFractionDigits = "2"  value="${ledgertransactions.key.dramount}" />
+								</td>
+								
+								<td class="dataText"></td>
+							</c:if>
 						</tr>
 					</c:forEach>
 					<tr>
@@ -573,16 +639,16 @@ for(Cookie cookie : cookies){
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
-					<td class="dataTextRight" >
-						<label style="color: #eb6000"><b>
+						<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>
 							<fmt:formatNumber type="currency"  value="${drtotal}" /></b>
-						</label> 
-					</td>
-						<td class="dataTextRight">
-						  <label style="color: #eb6000"><b>
+							</label> 
+							</td>
+							<td class="dataTextRight">
+							<label style="color: #eb6000"><b>
 							<fmt:formatNumber type="currency"  value="${crtotal}" /></b>
-						  </label>
-						</td>
+							</label>
+							</td>
 					</tr>
 					<tr>
 					<td class="dataText"></td>
@@ -590,27 +656,30 @@ for(Cookie cookie : cookies){
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
-					<td class="dataTextRight" >
-						<label style="color: #eb6000"><b>Balance</b>
-						</label> 
-					</td>
-						<td class="dataTextRight">
-						  <label style="color: #eb6000">
-						  		<b>
-							  		<c:if test="${drtotal > crtotal}">
-							  			<fmt:formatNumber type="currency"  value="${drtotal - crtotal}" />
-							  		</c:if>
-							  		<c:if test="${crtotal > drtotal}">
-							  			<fmt:formatNumber type="currency"  value="${crtotal - drtotal}" />
-							  		</c:if>
-						  		</b>
-						  </label>
-						</td>
+							<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>
+									Balance</b>
+							</label> 
+							</td>
+							
+							<td class="dataTextRight">
+								<label style="color: #eb6000"><b>
+							<c:choose>
+                                <c:when test="${drtotal > crtotal}">
+									<fmt:formatNumber type="currency"  value="${drtotal-crtotal}" />                                    
+                                </c:when>
+                                <c:otherwise>
+                                   <fmt:formatNumber type="currency"  value="${crtotal-drtotal}" />
+                                </c:otherwise>
+                            </c:choose>
+							</b>
+							</label>
+							</td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"><!-- <button id="cancel">Cancel Voucher</button> -->
+						<td class="footerTD" colspan="2"><button id="print">Print</button>
 							</td>
 							
 
@@ -622,6 +691,9 @@ for(Cookie cookie : cookies){
 
 
 	</form>
+<script>
+    $('.select2').select2();
+</script>
 
 </body>
 </html>
