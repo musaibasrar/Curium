@@ -426,32 +426,54 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						
-						<th title="click to sort" class="headerText" style="font-weight: bold;">Capital & Liabilities</th>
-						
+						<th title="click to sort" class="headerText" style="font-weight: bold;">Liabilities</th>
 						<th title="click to sort" class="headerText" style="font-weight: bold;">Amount</th>
-						
 						<th ></th>
-
 
 					</tr>
 				</thead>
 
 				<tbody>
+					
+					<c:forEach items="${liabilitiesLedgeraccount}" var="currentliabilitiesledgeraccount">
+
+						<c:if test="${currentliabilitiesledgeraccount.value != 0}">
+						
+							<tr class="trClass" style="border-color: #000000" border="1"
+								cellpadding="1" cellspacing="1">
+								<td class="dataText" style="text-align: left"><c:out value="${currentliabilitiesledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td class="dataText" style="text-align: right;"><c:out value="${currentliabilitiesledgeraccount.value}" /></td>
+	
+							</tr>
+						
+						</c:if>
+					</c:forEach>
+					
 					<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							
-							<td class="dataTextInActive" style="text-align: left">CAPITAL</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${capital}" /></td>
+							<td class="dataTextInActive" style="text-align: right;">Total</td>
+							<td class="dataTextInActive" style="text-align: right;"><c:out value="${liabilities}" /></td>
 
 						</tr>
 						
-					<c:forEach items="${capitalledgeraccount}" var="capitalledgeraccount">
+						<tr>
+							<td><br></td>
+						</tr>
+					
+					<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<th title="click to sort" class="headerText" style="font-weight: bold;">Equities</th>
+							<th title="click to sort" class="headerText" style="font-weight: bold;">Amount</th>
+						</tr>
+					<c:forEach items="${reservesLedgeraccount}" var="reservesledgeraccount">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${capitalledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${capitalledgeraccount.value}" /></td>
-							<td class="dataText"></td>
+							<td class="dataText" style="text-align: left;"><c:out value="${reservesledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td class="dataText" style="text-align: right;"><c:out value="${reservesledgeraccount.value}" /></td>
 
 						</tr>
 					</c:forEach>
@@ -460,58 +482,12 @@ for(Cookie cookie : cookies){
 					<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							
-							<td class="dataTextInActive" style="text-align: left">LOANS(LIABILITY)</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${loansliabilities}" /></td>
+							<td class="dataTextInActive" style="text-align: right;">Total</td>
+							<td class="dataTextInActive" style="text-align: right;"><c:out value="${reserves}" /></td>
 
 						</tr>
-					<c:forEach items="${loansliabilitiesledgeraccount}" var="loansliabilitiesledgeraccount">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${loansliabilitiesledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${loansliabilitiesledgeraccount.value}" /></td>
-							<td class="dataText"></td>
-
-						</tr>
-					</c:forEach>
 					
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataTextInActive" style="text-align: left">CURRENT LIABILITIES</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${currentliabilities}" /></td>
-
-						</tr>
-					<c:forEach items="${currentliabilitiesledgeraccount}" var="currentliabilitiesledgeraccount">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${currentliabilitiesledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${currentliabilitiesledgeraccount.value}" /></td>
-							<td class="dataText"></td>
-
-						</tr>
-					</c:forEach>
-					
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataTextInActive" style="text-align: left">RESERVES</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${reserves}" /></td>
-
-						</tr>
-					<c:forEach items="${reservesledgeraccount}" var="reservesledgeraccount">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${reservesledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${reservesledgeraccount.value}" /></td>
-							<td class="dataText"></td>
-
-						</tr>
-					</c:forEach>
-					
-					<tr class="trClass" style="border-color: #000000" border="1"
+					<%-- <tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							
 							<td class="dataTextInActive" style="text-align: left;height: 20px;"><c:out value="${grouponetotallabel}" /></td>
@@ -533,7 +509,7 @@ for(Cookie cookie : cookies){
 							<td class="dataTextInActive" style="text-align: left;height: 20px;">TOTAL</td>
 							<td class="dataTextInActive" style="text-align: right"><c:out value="${grouponetotal}" /></td>
 
-						</tr>
+						</tr> --%>
 					
 				</tbody>
 				<tfoot>
@@ -550,128 +526,29 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th title="click to sort" class="headerText" style="font-weight: bold;">Property & Assets</th>
+						<th title="click to sort" class="headerText" style="font-weight: bold;">Assets</th>
 						<th title="click to sort" class="headerText" style="font-weight: bold;">Amount</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<!-- FIXED ASSETS -->
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataTextInActive" style="text-align: left">FIXED ASSETS</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${fixedassets}" /></td>
-
-						</tr>
-					<c:forEach items="${fixedassetsledgeraccount}" var="fixedassetsledgeraccount">
+					
+					<c:forEach items="${assetsLedgeraccount}" var="assetsledgeraccount">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${fixedassetsledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${fixedassetsledgeraccount.value}" /></td>
-							<td class="dataText"></td>
+							<td class="dataText" style="text-align: left"><c:out value="${assetsledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td class="dataText" style="text-align: right"><c:out value="${assetsledgeraccount.value}" /></td>
 
 						</tr>
 					</c:forEach>
 					
-					<!-- INVESTMENTS -->
 					<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							
-							<td class="dataTextInActive" style="text-align: left">INVESTMENTS</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${investments}" /></td>
-
-						</tr>
-					<c:forEach items="${investmentsledgeraccount}" var="investmentsledgeraccount">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${investmentsledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${investmentsledgeraccount.value}" /></td>
-							<td class="dataText"></td>
-
-						</tr>
-					</c:forEach>
-					
-					<!-- CURRENT ASSETS -->
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataTextInActive" style="text-align: left">CURRENT ASSETS</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${currentassets}" /></td>
-
-						</tr>
-					<c:forEach items="${currentassetsledgeraccount}" var="currentassetsledgeraccount">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${currentassetsledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${currentassetsledgeraccount.value}" /></td>
-								<td class="dataText"></td>
-
-						</tr>
-					</c:forEach>
-
-					<!-- LOANS(ASSET)	 -->
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataTextInActive" style="text-align: left">LOANS(ASSET)</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${loansassets}" /></td>
-
-						</tr>
-					<c:forEach items="${loansassetsledgeraccount}" var="loansassetsledgeraccount">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right"><c:out value="${loansassetsledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${loansassetsledgeraccount.value}" /></td>
-							<td class="dataText"></td>
-
-						</tr>
-					</c:forEach>
-					
-					<!-- LOANS(ASSET)	 -->
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataTextInActive" style="text-align: left">MISCELLANEOUS EXPENSES(ASSET)</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${miscellaneousexpenses}" /></td>
-
-						</tr>
-					<c:forEach items="${miscellaneousexpensesledgeraccount}" var="miscellaneousexpensesledgeraccount">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText"><c:out value="${miscellaneousexpensesledgeraccount.key}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${miscellaneousexpensesledgeraccount.value}" /></td>
-							<td class="dataText"></td>
-
-						</tr>
-					</c:forEach>
-
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataTextInActive" style="text-align: left;height: 20px;"><c:out value="${grouptwototallabel}" /></td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${grouptwosemitotal}" /></td>
-
-						</tr>
-						
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataTextInActive" style="text-align: left;height: 20px;"><c:out value="${grouptwodifferencelabel}" /></td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${grouptwodifferenceamount}" /></td>
-
-						</tr>
-						
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							
-							<td class="dataTextInActive" style="text-align: left;height: 20px;">TOTAL</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${grouptwototal}" /></td>
+							<td class="dataTextInActive" style="text-align: right;">Total</td>
+							<td class="dataTextInActive" style="text-align: right;"><c:out value="${assets}" /></td>
 
 						</tr>
 				</tbody>

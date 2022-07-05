@@ -716,7 +716,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${feesdetails.branchreceiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=ViewDetails&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=CancelFeesReceipt&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=FeesCollection&action=CancelFeesReceipt&id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>&receiptid=<c:out value='${feesdetails.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
 
                             </tr>
                         </c:forEach>

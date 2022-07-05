@@ -675,7 +675,7 @@ public class EmployeeService {
             
             if(teacherList.size()>0) {
             	teacherList.get(0).getTeacherexternalid();
-            	int regNo = Integer.parseInt(teacherList.get(0).getTeacherexternalid().substring(teacherList.get(0).getTeacherexternalid().length()-4));
+            	int regNo = Integer.parseInt(teacherList.get(0).getTeacherexternalid().substring(teacherList.get(0).getTeacherexternalid().length()-3));
             	registrationNo = branchCode+String.format("%03d", regNo+1);
             }else {
             	registrationNo = branchCode+String.format("%03d", 1);

@@ -780,10 +780,7 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 						logger.info("send SMS "+e);
 					}
         
-        String sendSMS = properties.getProperty("sendsms");
-        String classesPrePrimary = properties.getProperty("classespreprimary");
-        String classesPrimary = properties.getProperty("classesprimary");
-        String classesHigh = properties.getProperty("classeshigh");
+        String sendSMS = properties.getProperty("absentsendsms");
         
         
         if("yes".equalsIgnoreCase(sendSMS)) {
@@ -792,36 +789,34 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
         	String absentMessage = null;
         	StringBuilder sbN = new StringBuilder();
         	String numbers = null;
-        	List<String> classesPrePrimaryArray = Arrays.asList(classesPrePrimary.split(","));
-        	List<String> classesPrimaryArray = Arrays.asList(classesPrimary.split(","));
-        	List<String> classesHighArray = Arrays.asList(classesHigh.split(","));
         	
-        	if(classesPrePrimaryArray.contains(attendanceClass)) {
-        		absentMessage = properties.getProperty("absentmessagepreprimary");
-        	}else if(classesPrimaryArray.contains(attendanceClass)) {
-        		absentMessage = properties.getProperty("absentmessageprimary");
-        	}else if(classesHighArray.contains(attendanceClass)) {
-        		absentMessage = properties.getProperty("absentmessagehigh");
-        	}
+        	//absentMessage = properties.getProperty("absentmessage");
+        	String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
         	
         	for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
 				  
         		if("A".equalsIgnoreCase(studentDailyAttendance.getAttendancestatus())) {
         				List<Parents> parentDetails = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
-        				if(parentDetails.size()>0) {
-        					sbN.append(parentDetails.get(0).getContactnumber());
-        					sbN.append(",");
-        				}
+        				//absentMessage.replace("var1", parentDetails.get(0).getStudent().getName());
+        				//absentMessage.replace("var2", todaysDate);
+        				new SmsService(request, response).sendSMS(parentDetails.get(0).getContactnumber(), parentDetails.get(0).getStudent().getName()+":"+parentDetails.get(0).getStudent().getClassstudying()+":"+todaysDate,"absent");
+        				
+						/*
+						 * if(parentDetails.size()>0) {
+						 * sbN.append(parentDetails.get(0).getContactnumber()); sbN.append(","); }
+						 */
 				  }
 			}
         	
-        	if(sbN.length()>1) {
-        		numbers = sbN.toString();
-    			numbers = numbers.substring(0, numbers.length()-1);
-    			String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
-    			logger.info("Absentees Numbers "+numbers+" Absentees Message "+absentMessage.replace("%todaysdate%", todaysDate));
-    			new SmsService(request, response).sendSMS(numbers, absentMessage.replace("%todaysdate%", todaysDate));
-        	}
+			/*
+			 * if(sbN.length()>1) { numbers = sbN.toString(); numbers = numbers.substring(0,
+			 * numbers.length()-1); String todaysDate = new
+			 * DateUtil().dateParserddMMYYYY(new Date());
+			 * logger.info("Absentees Numbers "+numbers+" Absentees Message "+absentMessage.
+			 * replace("%todaysdate%", todaysDate)); new SmsService(request,
+			 * response).sendSMS(numbers, absentMessage.replace("%todaysdate%",
+			 * todaysDate)); }
+			 */
         }
         
 		

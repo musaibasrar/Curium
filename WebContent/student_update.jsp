@@ -485,7 +485,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" class="alignRight">Registration Number &nbsp;</td>
 
 									<td width="16%"><label> <input
-											name="registrationnumber" type="text" class="textField"
+											name="registrationnumber" type="text" class="textField" readonly
 											id="registrationnumber" size="36" value="${student.registrationnumber}">
 
 									</label></td>

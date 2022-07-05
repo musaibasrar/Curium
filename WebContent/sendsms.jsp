@@ -581,6 +581,21 @@
 		} else
 			inputBox.value = text;
 	}
+	
+	$(document).ready(function(){
+	    $("select").change(function(){
+	        $(this).find("option:selected").each(function(){
+	            var optionValue = $(this).attr("value");
+	            if(optionValue){
+	                $(".box").not("." + optionValue).hide();
+	                $("." + optionValue).show();
+	            } else{
+	                $(".box").hide();
+	            }
+	        });
+	    }).change();
+	});
+	
 </script>
 </head>
   <%
@@ -613,7 +628,7 @@ for(Cookie cookie : cookies){
 
 
 				<div id="tabs-1">
-					<table width="100%" border="0" align="center" id="table1">
+					<table  border="0" style="width: auto;height: auto;"  id="table1">
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -621,21 +636,12 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 
+						
 						<tr>
-
-							<td width="30%" class="alignRight"><label> <font
-									color="red"><div id="mydiv"></div></font>
-							</label></td>
-							<td width="20%" class="alignRight"></td>
-							<td class="alignRight"><font color="red"><div
-										id="mydivmobile"></div></font></td>
-						</tr>
-
-<tr>
-
-
-							<td class="alignRight">Select&nbsp;</td>
-							<td width="28%"> <label>Class: <select name="addclass" id="addclass"
+							<td class="alignRight"><label>Class </label>
+							</td><td>
+							<label>
+							<select name="addclass" id="addclass"
 									style="width: 120px">
 										<option selected></option>
 										<option>ALL</option>
@@ -648,7 +654,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 
-							</label> <label>&nbsp;Sec:
+							</label> <label>&nbsp;Sec
 									<select name="addsec" id="addsec"
 									style=" width: 120px">
 										<option selected></option>
@@ -661,20 +667,80 @@ for(Cookie cookie : cookies){
 										</c:if>	
 										</c:forEach>
 
-								</select>
-							</label></td>
+								</select></label>
+								</td>
+						</tr>
 							<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td width="40%" class="alignRight">Message* &nbsp;</td>
-							<td width="12%" align="center"><label> <textarea  name="messagebody"
-											type="text" class="textField" id="messagebody" rows="6" cols="55"
-											></textarea>
+							<td class="alignRight">SMS Template &nbsp;</td>
+							<td><label>
+								<select name="messagebody" id="messagebody"
+									style="width: 120px">
+											<option selected></option>
+            								<option value="holiday">Holiday</option>
+            								<option value="exams">Exams</option>
+            								<option value="ptm">PTM</option>
+            								<option value="feesreminder">Fees Reminder</option>
+								</select>
+							
 							</label></td>
 							
 						</tr>
 						<tr>
+							<td><br /></td>
+						</tr>
+											
+						<tr>
+							<td class="alignRight">Message&nbsp;</td>
+							<td >
+								<div class="holiday box">								
+								<span style="font-size: 16px;">Dear Parents,On</span> <span style="font-weight: bold;color: red">Date</span>  <span style="font-size: 16px;">there will be a holiday on account of</span> <span style="font-weight: bold;color: red">Reason</span>
+								<br><br>
+								<label style="color: red;">Date:</label>&nbsp;<input type="text" id="holidayvar1" name="holidayvar1" maxlength="30">
+								<br><br>
+								<label style="color: red;">Reason:&nbsp;</label><input type="text" id="holidayvar2" name="holidayvar2" maxlength="30">
+								<input type="hidden" id="holidayvar3" name="holidayvar3" maxlength="30">
+								<input type="hidden" id="holidayvar4" name="holidayvar4" maxlength="30">
+								</div>
+									
+    							<div class="exams box">
+    								<span style="font-size: 16px;">Dear Parent,</span> <span style="font-weight: bold;color: red">Exams</span>  <span style="font-size: 16px;">will commence from</span> <span style="font-weight: bold;color: red">Date</span>
+									<span style="font-size: 16px;">Please collect the Hall ticket.ABFURA</span>
+								<br><br>
+								<label style="color: red;">Exams:</label>&nbsp;<input type="text" id="examsvar1" name="examsvar1" maxlength="30" value="Exams">
+								<br><br>
+								<label style="color: red;">Date:&nbsp;</label><input type="text" id="examsvar2" name="examsvar2" maxlength="30">
+								<input type="hidden" id="examsvar3" name="examsvar3" maxlength="30">
+								<input type="hidden" id="examsvar4" name="examsvar4" maxlength="30">
+    							</div>
+    							
+    							<div class="ptm box">
+    							<span style="font-size: 16px;">Dear Parents, You are hereby requested to attend our PTM (Parent Teachers Meeting) on </span> <span style="font-weight: bold;color: red">Date</span>  <span style="font-size: 16px;">between</span> <span style="font-weight: bold;color: red">Timings</span>
+								<br><br>
+								<label style="color: red;">Date:</label>&nbsp;<input type="text" id="ptmvar1" name="ptmvar1" maxlength="30">
+								<br><br>
+								<label style="color: red;">Timings:&nbsp;</label><input type="text" id="ptmvar2" name="ptmvar2" maxlength="30">
+								<input type="hidden" id="ptmvar3" name="ptmvar3" maxlength="30">
+								<input type="hidden" id="ptmvar4" name="ptmvar4" maxlength="30">
+								</div>
+								
+    							<div class="feesreminder box">
+    								<span style="font-size: 16px;">Dear Parents,This is a gentle reminder to pay the due fees. Kindly ignore if already paid. </span>
+								<br><br>
+								<input type="hidden" id="ptmvar1" name="ptmvar1" maxlength="30">
+								<br><br>
+								<input type="hidden" id="ptmvar2" name="ptmvar2" maxlength="30">
+								<input type="hidden" id="holidayvar3" name="holidayvar3" maxlength="30">
+								<input type="hidden" id="holidayvar4" name="holidayvar4" maxlength="30">
+    							</div>
+							
+							</td>
+							
+						</tr>
+						
+						<!-- <tr>
 						
 						<td width="30%" class="alignRight">Count: &nbsp;</td>
 							<td width="12%" align="left"><label name="count" id="count" style="color: #325F6D;font-weight: bold;">
@@ -686,12 +752,12 @@ for(Cookie cookie : cookies){
 							<td width="30%" class="alignRight">No. Of Messages : &nbsp;</td>
 							<td width="12%" align="left"><label name="messagecount" id="messagecount" style="color: #325F6D;font-weight: bold;">
 							</label></td>
-						</tr>
+						</tr> -->
 
 						<tr>
 							<td><br /></td>
 						</tr>
-
+						</table>
 
 						<div>
 							<table width="100%">
@@ -700,7 +766,7 @@ for(Cookie cookie : cookies){
 									<td><br /></td>
 								</tr>
 								<tr>
-									<td align="center">
+									<td>
 
 										<button id="sendsms">Send</button>
 
@@ -713,6 +779,7 @@ for(Cookie cookie : cookies){
 								</tr>
 							</table>
 
+						</div>
 						</div>
 						
 						<div id="tabs-2">

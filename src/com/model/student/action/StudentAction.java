@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.model.feescategory.service.FeesService;
 import com.model.stampfees.service.StampFeesService;
 import com.model.std.service.StandardService;
 import com.model.student.service.StudentService;
@@ -253,6 +254,7 @@ public class StudentAction {
         private String addStudent() {
         	String studentName = new StudentService(request, response).addStudent();
                  if ( studentName != null) {
+                	 new FeesService(request, response).viewFees();
                 	 return "Controller?process=StampFeesProcess&action=search&classsearch=&secsearch=&namesearch="+studentName; 
                 } else {
                     return "notSaved.jsp";

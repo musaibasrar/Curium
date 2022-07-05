@@ -586,7 +586,7 @@ for(Cookie cookie : cookies){
 				<h class="dataTextFees">Total Fees : Rs. ${totalfees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Total Fees Paid : Rs. ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Total Due Fees : </h>
-                <h class="dataTextDueFees"> Rs. ${dueamount}</h>
+                <h class="dataTextDueFees"> Rs. ${dueamount}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Total Fees Concession : Rs.  ${totalfeesconcession}</h>
                 </div>
                     <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">

@@ -103,7 +103,11 @@ public class SmsService {
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
 						logger.info("Numbers are *** "+numbers);
-						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebody")));
+						
+						String SMSTempType = request.getParameter("messagebody");
+						String message = request.getParameter(SMSTempType+"var1")+":"+request.getParameter(SMSTempType+"var2")+":"+request.getParameter(SMSTempType+"var3")+":"+request.getParameter(SMSTempType+"var4");
+						
+						resultSMS = sendSMS(numbers,message,SMSTempType);
 					}
 					
 				offset = offset+100;
@@ -122,7 +126,7 @@ public class SmsService {
 		
 		boolean result=false;
 		String numbers = DataUtil.emptyString(request.getParameter("numbers"));
-		int resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodynumbers")));
+		int resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodynumbers")),"all");
 		if(resultSMS==200){
 			result = true;
 		}
@@ -174,7 +178,7 @@ public class SmsService {
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
 						logger.info("Numbers are *** "+numbers);
-						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodystaff")));
+						resultSMS = sendSMS(numbers,DataUtil.emptyString(request.getParameter("messagebodystaff")),"all");
 					}
 					
 				offset = offset+100;
@@ -188,60 +192,111 @@ public class SmsService {
         return result;
 	}
 	
-	public int sendSMS(String numbers, String message) {
+	public int sendSMS(String numbers, String message, String templateType) {
 		int responseCode = 0;
 		try 
 		{
 			Properties properties = new Properties();
 	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 	        properties.load(inputStream);
-	        String smsuser = properties.getProperty("smsuser");
+	        String sendsms = properties.getProperty(templateType+"sendsms");
+	        
+	        if("yes".equalsIgnoreCase(sendsms)) {
+	        	
 	        String smssender = properties.getProperty("smssender");
 	        String apikey = properties.getProperty("apikey");
+	        String smsURL = properties.getProperty("smsurl");
+			String channel = properties.getProperty("channel");
+			String route = properties.getProperty("route");
+			String peid = properties.getProperty("peid");
+			String templateid = properties.getProperty(templateType+"templateid");
+	        String templatemessage = properties.getProperty(templateType+"templatemessage");
+	        String[] messageSeq = message.split(":");
+	        String var1 = "";
+	        String var2 = "";
+	        String var3 = "";
+	        String var4 = "";
 	        
-	      
-		// Construct data
-		String phonenumbers=numbers;
-		String data="username=" + URLEncoder.encode(smsuser, "UTF-8");
-		data +="&message=" + URLEncoder.encode(message, "UTF-8");
-		data +="&sendername=" + URLEncoder.encode(smssender, "UTF-8");
-		data +="&smstype=" + "TRANS";
-		data +="&numbers=" + URLEncoder.encode(phonenumbers, "UTF-8");
-		data +="&apikey=" + apikey;
-		// Send data
-		
-		String POST_URL = "http://sms.bulksmsind.in/sendSMS?"+data;
-        URL obj = new URL(POST_URL);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		con.setRequestMethod("POST");
+	        int messageIterations = messageSeq.length;
+	        
+	        
+	        switch (messageIterations) {
+			case 1:
+				var1=messageSeq[0];
+				break;
+			case 2:
+				var1=messageSeq[0];
+				var2=messageSeq[1];
+				break;
+			case 3:
+				var1=messageSeq[0];
+				var2=messageSeq[1];
+				var3=messageSeq[2];
+				break;
+			case 4:
+				var1=messageSeq[0];
+				var2=messageSeq[1];
+				var3=messageSeq[2];
+				var4=messageSeq[3];
+				break;
 
-		// For POST only - START
-		con.setDoOutput(true);
-		OutputStream os = con.getOutputStream();
-		os.write("CURIUM".getBytes());
-		os.flush();
-		os.close();
-		// For POST only - END
-
-		responseCode = con.getResponseCode();
-		logger.info("POST Response Code :: " + responseCode);
-
-		if (responseCode == HttpURLConnection.HTTP_OK) { //success
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					con.getInputStream()));
-			String inputLine;
-			StringBuffer response = new StringBuffer();
-
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
+			default:
+				break;
 			}
-			in.close();
+	        
+	        templatemessage = templatemessage.replace("var1", var1);
+	        templatemessage = templatemessage.replace("var2", var2);
+	        templatemessage = templatemessage.replace("var3", var3);
+	        templatemessage = templatemessage.replace("var4", var4);
+	        
+	           
+		// Construct data
+		
+			String data = URLEncoder.encode("APIKey", "UTF-8") + "=" + URLEncoder.encode(apikey, "UTF-8");
+			data += "&" + URLEncoder.encode("senderid", "UTF-8") + "=" + URLEncoder.encode(smssender, "UTF-8");
+			data += "&" + URLEncoder.encode("channel", "UTF-8") + "=" + URLEncoder.encode(channel, "UTF-8");
+			data += "&" + URLEncoder.encode("DCS", "UTF-8") + "=" + URLEncoder.encode("0", "UTF-8");
+			data += "&" + URLEncoder.encode("flashsms", "UTF-8") + "=" + URLEncoder.encode("0", "UTF-8");
+			data += "&" + URLEncoder.encode("number", "UTF-8") + "=" + URLEncoder.encode(numbers, "UTF-8");
+			data += "&" + URLEncoder.encode("text", "UTF-8") + "=" + URLEncoder.encode(templatemessage, "UTF-8");
+			data += "&" + URLEncoder.encode("route", "UTF-8") + "=" + URLEncoder.encode(route, "UTF-8");
+			data += "&" + URLEncoder.encode("DLTTemplateId", "UTF-8") + "=" + URLEncoder.encode(templateid, "UTF-8");
+			data += "&" + URLEncoder.encode("PEID", "UTF-8") + "=" + URLEncoder.encode(peid, "UTF-8");
+			String rsp = "";
+			String url1 = smsURL;
+			url1 += "?" + data;
+			URL url = new URL(url1);
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			StringBuilder sb = new StringBuilder();
+			String line;
+			  while ((line = reader.readLine()) != null) {
+				  		sb = sb.append(line);
+			  		}
+			  			rsp = sb.toString();
+			  			
+			  			responseCode = connection.getResponseCode();
+			  			logger.info("POST Response Code :: " + responseCode);
 
-			// print result
-			logger.info(response.toString());
-		} else {
-			logger.info("POST request not worked");
-		}}
+			  			if (responseCode == HttpURLConnection.HTTP_OK) { //success
+			  				BufferedReader in = new BufferedReader(new InputStreamReader(
+			  						connection.getInputStream()));
+			  				String inputLine;
+			  				StringBuffer response = new StringBuffer();
+
+			  				while ((inputLine = in.readLine()) != null) {
+			  					response.append(inputLine);
+			  				}
+			  				in.close();
+
+			  				// print result
+			  				logger.info(response.toString());
+			  			} else {
+			  				logger.info("POST request not worked");
+			  			}
+	        }	
+			  			
+		}
 		catch (Exception e)
 		{
 		logger.info("Error SMS "+e);

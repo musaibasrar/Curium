@@ -45,13 +45,22 @@ public class AdminAction {
 			url = approveVoucher();
 		}else if (action.equalsIgnoreCase("rejectVoucher")) {
 			url = rejectVoucher();
+		}else if (action.equalsIgnoreCase("viewExpensesBetweenDates")) {
+			url = viewExpensesBetweenDates();
 		}
 		return url;
 	}
 
 	
 
-	
+	public String viewExpensesBetweenDates() {
+		 if (new AdminService(request, response).viewExpensesBetweenDates()) {
+	            return "adminexpensesreport.jsp";
+	        } else {
+	            return "adminexpensesreport.jsp";
+	        }
+		
+	}
 
 	private String rejectVoucher() {
 		

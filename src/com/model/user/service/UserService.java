@@ -602,7 +602,7 @@ public class UserService {
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
 			}
-			
+
 			httpSession.setAttribute("searchfeesdetailslist", feesDetailsList);
 			httpSession.setAttribute("sumofdetailsfees", sumOfFees);
 	}

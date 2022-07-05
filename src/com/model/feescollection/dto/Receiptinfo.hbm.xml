@@ -38,6 +38,12 @@
        <property name="classsec" type="string">
             <column name="classsec" length="20" />
         </property>
+         <property name="receiptvoucher" type="java.lang.Integer">
+            <column name="receiptvoucher" />
+        </property>
+        <property name="journalvoucher" type="java.lang.Integer">
+            <column name="journalvoucher" />
+        </property>
         <!-- inverse="true" -->
         <set name="feesCollectionRecords" table="feescollecion"
 				 lazy="false" cascade="all">

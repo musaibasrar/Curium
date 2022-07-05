@@ -33,6 +33,7 @@ import com.model.feescollection.dto.Receiptinfo;
 import com.model.parents.dao.parentsDetailsDAO;
 import com.model.parents.dto.Parents;
 import com.model.pudetails.dto.Pudetails;
+import com.model.sendsms.service.SmsService;
 import com.model.std.dto.Classsec;
 import com.model.std.service.StandardService;
 import com.model.student.dao.studentDetailsDAO;
@@ -517,6 +518,7 @@ public class StudentService {
 
 		if(parents!=null){
 			result=student.getName();
+			new SmsService(request, response).sendSMS(parents.getContactnumber(), parents.getStudent().getName()+":"+parents.getStudent().getClassstudying() , "admission");
 		}
 
 		return result;
@@ -1509,7 +1511,7 @@ public class StudentService {
             String branchId = httpSession.getAttribute(BRANCHID).toString();
             String branchCode = httpSession.getAttribute("branchcode").toString();
             String registrationNo = null;
-            List<Student> studentList = new studentDetailsDAO().getListStudents("from Student as student where student.branchid="+branchId+" and student.archive=0 and passedout=0 and droppedout=0 and leftout=0 order by student.sid DESC");
+            List<Student> studentList = new studentDetailsDAO().getListStudents("from Student as student where student.branchid="+branchId+" order by student.sid DESC");
             
             if(studentList.size()>0) {
             	studentList.get(0).getRegistrationnumber();
