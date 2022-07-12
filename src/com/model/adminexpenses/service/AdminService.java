@@ -225,7 +225,8 @@ public class AdminService {
 		List<Adminexpenses> adminExpenseList = new ArrayList<Adminexpenses>();
 		Date dateBefore = null;
 		Date dateAfter = null;
-		String queryMain = "From Adminexpenses as adminexpenses where ";
+		
+		String queryMain = "From Adminexpenses as adminexpenses where branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND ";
 		String toDate = DataUtil.emptyString(request.getParameter("todate"));
 		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
 		
@@ -280,7 +281,7 @@ public class AdminService {
 		int totalBoys = 0, totalGirls = 0;
 		List<String> boysGirls = new ArrayList<String>();
 		
-		studentsList = new studentDetailsDAO().getListStudents("From Student as student where student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND branchid = "+branchId+" order by name ASC");
+		studentsList = new studentDetailsDAO().getListStudents("From Student as student where student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid = "+branchId+" order by name ASC");
 		
 		for (Student student : studentsList) {
 			if("Male".equalsIgnoreCase(student.getGender())) {

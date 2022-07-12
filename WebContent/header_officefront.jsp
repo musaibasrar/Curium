@@ -130,7 +130,7 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="images/curiumheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="left_admin.jsp"> <img
+							<td><a target="leftFrame" href="left_officefront.jsp"> <img
 									src="images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
@@ -159,22 +159,22 @@ for(Cookie cookie : cookies){
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="leftsettings.jsp">
+							<!-- <td ><a target="leftFrame" href="leftsettings.jsp">
 									<img alt="Settings" src="images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
-							</a></td>
+							</a></td> -->
 
-							<td ><a target="mainFrame"
+							<!-- <td ><a target="mainFrame"
 								href="Controller?process=AdminProcess&action=viewAllExpenses"><img
 									alt="Admin Exp" src="images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
-							</a></td>
+							</a></td> -->
 
 							<td ><!-- <a target="mainFrame" href="sendsms.jsp"><img
 									src="images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="reports_officeadmin.jsp"><img
+								<a target="leftFrame" href="reports_officefront.jsp"><img
 									src="images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>

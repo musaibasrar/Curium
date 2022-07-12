@@ -313,8 +313,9 @@ public class FeesService {
 				List<Studentfeesstructure> singleStudent = new ArrayList<Studentfeesstructure>();
 				
 				for (Studentfeesstructure fees : listStudentsFeesStructure) {
-					
-						if(fees.getSid() == parents.getStudent().getSid()) {
+							int feeSid = fees.getSid();
+							int sid = parents.getStudent().getSid();
+						if(feeSid == sid) {
 								singleStudent.add(fees);
 						}
 				}

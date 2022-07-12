@@ -124,8 +124,8 @@ for(Cookie cookie : cookies){
 						<tr><td></td></tr>
 						<tr>
 							
-									<td style="padding-left: 20px;padding-right: 50px;">
-								<a target="mainFrame" href="welcome.jsp" ><img src="images/logo.png"/></a>
+									<td style="padding-left: 20px;padding-right: 50px;height: 44px;">
+								<a target="mainFrame" href="welcome.jsp" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
 								</td>
 								
 							<!-- <td align="left"><img src="images/curiumheader.png"

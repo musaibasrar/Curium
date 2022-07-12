@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -521,8 +522,11 @@ for(Cookie cookie : cookies){
 							<td class="dataTextInActive"><c:out value="${vouchertransactions.key.transactionsid}" />
 							</td>
 							<td class="dataText"><c:out value="${vouchertransactions.value}" /></td>
-							<td class="dataText"><c:out
-									value="${vouchertransactions.key.dramount} -- ${vouchertransactions.key.cramount}" /></td>
+							<td class="dataText">
+								<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${vouchertransactions.key.dramount}"/>
+								<c:out value=" -- " />
+								<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${vouchertransactions.key.cramount}"/>
+							</td>
 							<td class="dataText"><c:out
 									value="${vouchertransactions.key.transactiondate}" /></td>
 									<td class="dataText"><c:out

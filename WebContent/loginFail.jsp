@@ -124,10 +124,18 @@ form{
                     window.open('index_superadmin.jsp','_self');
                 }else if(type=='admin'){
                     window.open('index_admin.jsp','_self');
-                }else if(type=='feescollector'){
-                    window.open('index_feescollector.jsp','_self');
-                }else if(type=='staff'){
-                	window.open('index.jsp','_self');
+                }else if(type=='stock'){
+                	window.open('index_stock.jsp','_self');
+                }else if(type=='finance'){
+                    window.open('index_finance.jsp','_self');
+                }else if(type=='clerk'){
+                    window.open('index_clerk.jsp','_self');
+                }else if(type=='officeadmin'){
+                    window.open('index_officeadmin.jsp','_self');
+                }else if(type=='officeincharge'){
+                    window.open('index_officeincharge.jsp','_self');
+                }else if(type=='officefront'){
+                    window.open('index_officefront.jsp','_self');
                 }
             }
             else if(!flag1){

@@ -134,6 +134,8 @@ form{
                     window.open('index_officeadmin.jsp','_self');
                 }else if(type=='officeincharge'){
                     window.open('index_officeincharge.jsp','_self');
+                }else if(type=='officefront'){
+                    window.open('index_officefront.jsp','_self');
                 }
             }
             else if(!flag1){

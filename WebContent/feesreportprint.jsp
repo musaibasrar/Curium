@@ -262,7 +262,7 @@
 					<c:set var="TotalDueAmount" value="0" />
 					<c:set var="TotalSum" value="0" />
 					
-					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist">
+					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist" varStatus="status">
 
 
 						<tr>

@@ -621,8 +621,8 @@ for(Cookie cookie : cookies){
 			<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Students</a></li>
-					<li><a href="#tabs-2">Staff</a></li>
-					<li><a href="#tabs-3">Selected Numbers</a></li>
+					<!-- <li><a href="#tabs-2">Staff</a></li>
+					<li><a href="#tabs-3">Selected Numbers</a></li> -->
 				</ul>
 
 
@@ -698,9 +698,9 @@ for(Cookie cookie : cookies){
 								<div class="holiday box">								
 								<span style="font-size: 16px;">Dear Parents,On</span> <span style="font-weight: bold;color: red">Date</span>  <span style="font-size: 16px;">there will be a holiday on account of</span> <span style="font-weight: bold;color: red">Reason</span>
 								<br><br>
-								<label style="color: red;">Date:</label>&nbsp;<input type="text" id="holidayvar1" name="holidayvar1" maxlength="30">
+								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="holidayvar1" name="holidayvar1" maxlength="30">
 								<br><br>
-								<label style="color: red;">Reason:&nbsp;</label><input type="text" id="holidayvar2" name="holidayvar2" maxlength="30">
+								<label style="color: red;">Reason:&nbsp;&nbsp;</label><input type="text" id="holidayvar2" name="holidayvar2" maxlength="30">
 								<input type="hidden" id="holidayvar3" name="holidayvar3" maxlength="30">
 								<input type="hidden" id="holidayvar4" name="holidayvar4" maxlength="30">
 								</div>
@@ -709,9 +709,9 @@ for(Cookie cookie : cookies){
     								<span style="font-size: 16px;">Dear Parent,</span> <span style="font-weight: bold;color: red">Exams</span>  <span style="font-size: 16px;">will commence from</span> <span style="font-weight: bold;color: red">Date</span>
 									<span style="font-size: 16px;">Please collect the Hall ticket.ABFURA</span>
 								<br><br>
-								<label style="color: red;">Exams:</label>&nbsp;<input type="text" id="examsvar1" name="examsvar1" maxlength="30" value="Exams">
+								<label style="color: red;">Exams:&nbsp;</label>&nbsp;<input type="text" id="examsvar1" name="examsvar1" maxlength="30" value="Exams">
 								<br><br>
-								<label style="color: red;">Date:&nbsp;</label><input type="text" id="examsvar2" name="examsvar2" maxlength="30">
+								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="examsvar2" name="examsvar2" maxlength="30">
 								<input type="hidden" id="examsvar3" name="examsvar3" maxlength="30">
 								<input type="hidden" id="examsvar4" name="examsvar4" maxlength="30">
     							</div>
@@ -719,7 +719,7 @@ for(Cookie cookie : cookies){
     							<div class="ptm box">
     							<span style="font-size: 16px;">Dear Parents, You are hereby requested to attend our PTM (Parent Teachers Meeting) on </span> <span style="font-weight: bold;color: red">Date</span>  <span style="font-size: 16px;">between</span> <span style="font-weight: bold;color: red">Timings</span>
 								<br><br>
-								<label style="color: red;">Date:</label>&nbsp;<input type="text" id="ptmvar1" name="ptmvar1" maxlength="30">
+								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="ptmvar1" name="ptmvar1" maxlength="30">
 								<br><br>
 								<label style="color: red;">Timings:&nbsp;</label><input type="text" id="ptmvar2" name="ptmvar2" maxlength="30">
 								<input type="hidden" id="ptmvar3" name="ptmvar3" maxlength="30">
@@ -782,7 +782,7 @@ for(Cookie cookie : cookies){
 						</div>
 						</div>
 						
-						<div id="tabs-2">
+						<%-- <div id="tabs-2">
 					<table width="100%" border="0" align="center" id="table1">
 					
 					<tr>
@@ -866,9 +866,9 @@ for(Cookie cookie : cookies){
 								</tr>
 							</table>
 
-						</div>
+						</div> --%>
 						
-					<div id="tabs-3">
+					<!-- <div id="tabs-3">
 					
 					<br><br>
 					<div align="center">
@@ -962,9 +962,9 @@ for(Cookie cookie : cookies){
 
 						</div>
 
+						-->
+						</div> 
 						</div>
-						</div>
-
 
 						</form>
 						<script type="text/javascript">
