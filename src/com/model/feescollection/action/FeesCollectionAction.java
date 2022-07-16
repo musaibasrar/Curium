@@ -54,9 +54,24 @@ public class FeesCollectionAction {
                             url = printFeesReport();
                         }else if (action.equalsIgnoreCase("searchFeesStampDueReport")) {
                             url = searchFeesStampDueReport();
+                        }else if (action.equalsIgnoreCase("ViewFeesDetails")) {
+                            url = ViewFeesDetails();
+                        }else if (action.equalsIgnoreCase("printFeesReceipt")) {
+                            url = printFeesReceipt();
                         }
                 return url;
         }
+
+		private String printFeesReceipt() {
+            new FeesCollectionService(request, response).previewDetails();
+            return "printReceiptFeesDetail.jsp";
+    }
+
+		private String ViewFeesDetails() {
+            //new FeesCollectionService(request, response).preview();
+            new FeesCollectionService(request, response).previewFeesDetails();
+            return "previewFeesReceiptDetail.jsp";
+    }
 
 		private String searchFeesStampDueReport() {
 			new FeesCollectionService(request, response).getFeesStampDueReport();
