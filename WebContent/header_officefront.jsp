@@ -159,10 +159,10 @@ for(Cookie cookie : cookies){
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<!-- <td ><a target="leftFrame" href="leftsettings.jsp">
+							 <td ><a target="leftFrame" href="leftsettings_officefront.jsp">
 									<img alt="Settings" src="images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
-							</a></td> -->
+							</a></td> 
 
 							<!-- <td ><a target="mainFrame"
 								href="Controller?process=AdminProcess&action=viewAllExpenses"><img

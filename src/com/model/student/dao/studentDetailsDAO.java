@@ -207,7 +207,7 @@ public class studentDetailsDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Student> readListOfStudentsArchive() {
+	public List<Student> readListOfStudentsArchive(int branchId) {
 		List<Student> results = new ArrayList<Student>();
 
 		try {
@@ -216,7 +216,7 @@ public class studentDetailsDAO {
 			transaction = session.beginTransaction();
 
 			results = (List<Student>) session.createQuery(
-					"FROM Student s where s.archive = 1").setCacheable(true).setCacheRegion("commonregion")
+					"FROM Student s where s.archive=1 and s.branchid="+branchId+"").setCacheable(true).setCacheRegion("commonregion")
 					.list();
 			transaction.commit();
 
@@ -336,7 +336,7 @@ public class studentDetailsDAO {
 			
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("From Parents as parents where parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid = "+branchId+" order by registrationnumber ASC").setCacheable(true).setCacheRegion("commonregion");
+					.createQuery("From Parents as parents where parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid = "+branchId+" order by parents.Student.registrationnumber ASC").setCacheable(true).setCacheRegion("commonregion");
 			query.setFirstResult(offset);   
 			query.setMaxResults(noOfRecords);
 			results = query.getResultList();
