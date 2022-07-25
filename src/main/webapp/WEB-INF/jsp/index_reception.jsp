@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -55,7 +56,9 @@
 
         </script>
     </head>
-    <%
+
+
+<%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -71,16 +74,18 @@ for(Cookie cookie : cookies){
 }
 }
 %>
+    <frameset    rows="55,*"frameborder="0" border="0" framespacing="0"  >
+    
+		   <c:if test="${(userType == 'reception')}">
+			    <frame   src="/sla/header_reception"   name="topFrame" scrolling="NO" noresize frameborder="0">
+		   </c:if>
 
-    <frameset    rows="139,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="/sla/header"   name="topFrame" scrolling="NO" noresize frameborder="0">
-
-            <frameset  cols="175,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/sla/left_reception" name="leftFrame" scrolling="NO"  frameborder="1"   />
-                <frame src="/sla/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
+            <frameset  cols="*" frameborder="0" border="0" framespacing="0">
+                <!-- <frame  src="/sla/left_admin" name="leftFrame" scrolling="yes"  frameborder="1"   /> -->
+                <frame src="/sla/QueryProcess/viewAllTasks" name="mainFrame" scrolling="yes" />
             </frameset>
 
-   
+   </frameset>
 
 
 

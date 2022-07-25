@@ -8,12 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.appointment.service.AppointmentService;
+import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @author Musaib_2
@@ -76,7 +78,7 @@ public class AppointmentAction {
 		return viewAllAppointments();
 	}
 
-	@GetMapping("/viewAllAppointments")
+	@RequestMapping(value = "/viewAllAppointments", method = { RequestMethod.GET, RequestMethod.POST })
 	private String viewAllAppointments() {
 		
 		if(new AppointmentService(request, response).viewAllAppointments()){
@@ -90,7 +92,9 @@ public class AppointmentAction {
 	private String addAppointment() {
 		
 		if(new AppointmentService(request, response).addAppointment()){
-			return "appointmentsuccess";
+			new StudentService(request, response).viewAllStudentsParents();
+			new EmployeeService(request, response).ViewAllEmployee();
+			return "viewAllWithParents";
 		}else{
 			return "error";
 		}
@@ -100,7 +104,8 @@ public class AppointmentAction {
 	private String updateAppointment() {
 		
 		if(new AppointmentService(request, response).updateAppointment()){
-			return "appointmentsuccess";
+			return viewAllAppointments();
+			//return "appointmentsuccess";
 		}else{
 			return "error";
 		}

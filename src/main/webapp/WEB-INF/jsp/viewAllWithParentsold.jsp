@@ -125,54 +125,7 @@
 
 
             }
-            .alert-box {
-				padding: 15px;
-			    margin-bottom: 20px;
-			    border: 1px solid transparent;
-			    border-radius: 4px;  
-			}
-			
-			.success {
-			    color: #3c763d;
-			    background-color: #dff0d8;
-			    border-color: #d6e9c6;
-			    display: none;
-			}
-			
-			.failure {
-			    color: #a94442;
-			    background-color: #f2dede;
-			    border-color: #ebccd1;
-			    display: none;
-			}
-			
-			.button {
-			  background-color: #4CAF50; /* Green */
-			  border: none;
-			  color: white;
-			  padding: 8px;
-			  text-align: center;
-			  text-decoration: none;
-			  display: inline-block;
-			  font-size: 12px;
-			  margin: 4px 2px;
-			  cursor: pointer;
-			  border-radius: 12px;
-			}
-
-.buttonred {
-  background-color: red; /* Green */
-  border: none;
-  color: white;
-  padding: 8px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 12px;
-} 
+            -->
         </style>
         <script type="text/javascript">
             var getMember;
@@ -413,13 +366,6 @@
                
                //window.location.reload();
            } 
-            
-            function createQuery(sid,branchid){
-                var form1=document.getElementById("form1");
-               form1.action="/sla/QueryProcess/CreateQuery?id="+sid+"&urlbranchid="+branchid+"";
-               form1.submit();
-            }
-            
         </script>
         
         
@@ -441,7 +387,10 @@
                     icons:{
                         primary: "ui-icon-pencil"
                     }
-                })
+                }).click(function(){
+	                	$( "#dialogquery" ).dialog( "open" );
+	                    return false;
+                	});
                 
                 $(function() {
                     $( "#dialogquery" ).dialog({
@@ -1007,39 +956,6 @@
 				}
 </script>
  -->
- 
- <script type="text/javascript">
-					
-					var querystatus = '<c:out default="" value="${appointmentresult}"/>';
-		            
-		            if(querystatus == "true"){
-		            	 $(function(){
-		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 );
-		            		 $( "div.success" ).fadeOut("slow");
-		            	 });
-		            	 }else if(querystatus == "false"){
-		            	  $(function(){
-		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 );
-		            		 $( "div.success" ).fadeOut("slow");
-		            		 });
-		            	 }
-		            
-		        	function closediv(divid){
-		        		var x = document.getElementById("div"+divid);
-		        		  if (x.style.display === "none") {
-		        		    x.style.display = "block";
-		        		    return false;
-		        		  } else {
-		        		    x.style.display = "none";
-		        		    var form1 = document.getElementById("form1");
-		        			form1.action = "/sla/StudentProcess/viewAllStudentsWithParents";
-		        			form1.method = "POST";
-		        			form1.submit();
-		        		  }
-		        	}
-		        	
-        </script>
-        
     </head>
       <%
 //allow access only if session exists
@@ -1060,8 +976,6 @@ for(Cookie cookie : cookies){
     <body  >
 
         <form name="form1" id="form1" method="post">
-        	<div class="alert-box success" id="div1">Appointment scheduled successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
-		<div class="alert-box failure" id="div2">Appointment schedule failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>
@@ -1104,7 +1018,7 @@ for(Cookie cookie : cookies){
                                 <%-- <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.mothersname}"/></td> --%>
                                 <!-- <fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/>  -->
                                 <!-- <td class="dataText"><fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/></td> -->
-								<td class="dataText" style='white-space: nowrap'><button id="query_${Parents.student.sid}" class="querybutton" onclick="createQuery(${Parents.student.sid},${Parents.student.branchid})">Job</button><button id="appointment_${Parents.student.sid}" class="appointmentbutton" onclick="check(${Parents.student.sid})">Appt.</button></td>                                 
+								<td class="dataText" style='white-space: nowrap'><button id="query_${Parents.student.sid}" class="querybutton" onclick="check(${Parents.student.sid})">Job</button><button id="appointment_${Parents.student.sid}" class="appointmentbutton" onclick="check(${Parents.student.sid})">Appt.</button></td>                                 
 
                             </tr>
                         </c:forEach>

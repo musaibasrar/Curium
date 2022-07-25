@@ -21,7 +21,7 @@
             response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View All</title>
+        <title>Create Query</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -125,113 +125,17 @@
 
 
             }
-            .alert-box {
-				padding: 15px;
-			    margin-bottom: 20px;
-			    border: 1px solid transparent;
-			    border-radius: 4px;  
-			}
-			
-			.success {
-			    color: #3c763d;
-			    background-color: #dff0d8;
-			    border-color: #d6e9c6;
-			    display: none;
-			}
-			
-			.failure {
-			    color: #a94442;
-			    background-color: #f2dede;
-			    border-color: #ebccd1;
-			    display: none;
-			}
-			
-			.button {
-			  background-color: #4CAF50; /* Green */
-			  border: none;
-			  color: white;
-			  padding: 8px;
-			  text-align: center;
-			  text-decoration: none;
-			  display: inline-block;
-			  font-size: 12px;
-			  margin: 4px 2px;
-			  cursor: pointer;
-			  border-radius: 12px;
-			}
-
-.buttonred {
-  background-color: red; /* Green */
-  border: none;
-  color: white;
-  padding: 8px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 12px;
-} 
+            .alignLeft {
+				font-family: Tahoma;
+				font-size: 14px;
+				font-style: normal;
+				text-transform: capitalize;
+				color: #325F6D;
+				text-align: left;
+				vertical-align: middle;
+				font-weight: bold;
+			}           
         </style>
-        <script type="text/javascript">
-            var getMember;
-            var getVisit;
-            function getdata() {
-
-                if (typeof XMLHttpRequest != "undefined") {
-                    getMember = new XMLHttpRequest();
-                    getVisit = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getMember = new ActiveXObject("Microsoft.XMLHTTP");
-                    getVisit = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-                getMember.onreadystatechange = processMemberData;
-                getMember.open("POST", "ContactController",true);
-                getMember.send(null);
-
-                getVisit.onreadystatechange = processVisitData;
-                getVisit.open("POST", "AppointmentController",true);
-                getVisit.send(null);
-            }
-
-            function processMemberData() {
-                if (getMember.readyState==4)
-                {
-                    if (getMember.status==200){
-
-                        var count = getMember.responseXML.getElementsByTagName("count")[0];
-                        var childCount=count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML=childCount;
-                        mdiv.style.visibility='visible';
-                        setTimeout('getdata();', 60000);
-
-
-                    }
-                }
-
-            }
-            function processVisitData() {
-                if (getVisit.readyState==4)
-                {
-                    if (getVisit.status==200){
-
-                        var visitCount = getVisit.responseXML.getElementsByTagName("visitcount")[0];
-                        var childVisitCount=visitCount.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n2");
-                        mdiv.innerHTML=childVisitCount;
-                        mdiv.style.visibility='visible';
-                        setTimeout('getdata();', 60000);
-
-
-                    }
-                }
-
-            }
-
-        </script>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
                 $('#myTable').dataTable( {
@@ -305,52 +209,7 @@
             }
 
         </script>
-        <script type="text/javascript">
-            var getMember;
-           
-            function getlist() {
-                
-       
-                try{
-                    var listitem = document.getElementById("advsearch").value;
-                    if (typeof XMLHttpRequest != "undefined") {
-                        getMember = new XMLHttpRequest();
-                   
-                    } else if (window.ActiveXObject) {
-                        getMember = new ActiveXObject("Microsoft.XMLHTTP");
-                    
-                    }
-
-                    getMember.onreadystatechange = processMemberData;
-                    getMember.open("POST", "detailslist?alphabet="+listitem+"",true);
-                    getMember.send(null);
-               
-                    
-                }catch(e){
-                    alert(e);
-                }
-            }
-
-            function processMemberData() {
-                if (getMember.readyState==4)
-                {
-                    if (getMember.status==200){
-
-                        var count = getMember.responseXML.getElementsByTagName("count")[0];
-                        var childCount=count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML=childCount;
-                        mdiv.style.visibility='visible';
-                        setTimeout('getdata();', 60000);
-
-
-                    }
-                }
-
-            }
-            
-
-        </script>
+        
         <script type="text/javascript">
             $(function(){
                 $('#chckHead').click(function () {
@@ -391,32 +250,9 @@
 
             });
             
-            function refreshPage(){
-                 var form1=document.getElementById("form1");
-                form1.action="/sla/PersonalProcess/ViewAllGo";
-                form1.submit();
-                
-                //window.location.reload();
-            } 
-            function redirect(){
-                 var form1=document.getElementById("form1");
-                    form1.action="/sla/PersonalProcess/redirect";
-                    form1.submit();
-                
-                //window.location.reload();
-            } 
-            
-            function viewStudentDetails(sid,branchid){
+            function saveQuery(){
                 var form1=document.getElementById("form1");
-               form1.action="/sla/StudentProcess/ViewDetails?id="+sid+"&urlbranchid="+branchid+"";
-               form1.submit();
-               
-               //window.location.reload();
-           } 
-            
-            function createQuery(sid,branchid){
-                var form1=document.getElementById("form1");
-               form1.action="/sla/QueryProcess/CreateQuery?id="+sid+"&urlbranchid="+branchid+"";
+               form1.action="/sla/QueryProcess/addQuery";
                form1.submit();
             }
             
@@ -442,6 +278,16 @@
                         primary: "ui-icon-pencil"
                     }
                 })
+                
+                
+                $("#createquery").button({
+             		icons:{
+                 		primary: "ui-icon-check"
+             		}
+         				}).click(function(){
+             					saveQuery();
+             					return false;
+		         });
                 
                 $(function() {
                     $( "#dialogquery" ).dialog({
@@ -1007,39 +853,6 @@
 				}
 </script>
  -->
- 
- <script type="text/javascript">
-					
-					var querystatus = '<c:out default="" value="${appointmentresult}"/>';
-		            
-		            if(querystatus == "true"){
-		            	 $(function(){
-		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 );
-		            		 $( "div.success" ).fadeOut("slow");
-		            	 });
-		            	 }else if(querystatus == "false"){
-		            	  $(function(){
-		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 );
-		            		 $( "div.success" ).fadeOut("slow");
-		            		 });
-		            	 }
-		            
-		        	function closediv(divid){
-		        		var x = document.getElementById("div"+divid);
-		        		  if (x.style.display === "none") {
-		        		    x.style.display = "block";
-		        		    return false;
-		        		  } else {
-		        		    x.style.display = "none";
-		        		    var form1 = document.getElementById("form1");
-		        			form1.action = "/sla/StudentProcess/viewAllStudentsWithParents";
-		        			form1.method = "POST";
-		        			form1.submit();
-		        		  }
-		        	}
-		        	
-        </script>
-        
     </head>
       <%
 //allow access only if session exists
@@ -1060,148 +873,30 @@ for(Cookie cookie : cookies){
     <body  >
 
         <form name="form1" id="form1" method="post">
-        	<div class="alert-box success" id="div1">Appointment scheduled successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
-		<div class="alert-box failure" id="div2">Appointment schedule failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
-            <div style="overflow: hidden">
+            <div style="overflow: hidden" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
                 <table width="100%">
                     <tr>
-                        <td  class="headerTD">View All Clients</td>
-                    </tr>
-
-                    
-
-                </table>
-                <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
-
-                    <thead>
-                        <tr>
-                            <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
-                            <th title="click to sort" class="headerText">UID</th>
-                            <!-- <th title="click to sort" class="headerText">Admission Number</th> -->
-                            <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            <th title="click to sort" class="headerText">Contact Number</th>
-                            <!-- <th title="click to sort" class="headerText">Father's Name&nbsp;</th>
-                            <th title="click to sort" class="headerText">Mother's Name&nbsp;</th> -->
-                            <th title="click to sort" class="headerText">Job/Appt.</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <c:forEach items="${studentList}" var="Parents">
-											
-                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                            	<td class="dataText" style="text-align: center;"><input type="checkbox" id = "studentid_${Parents.student.sid}" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.pid}:${Parents.contactnumber}:${Parents.student.name}"/>"/></td>
-                                <%-- <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td> --%>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${Parents.student.sid},${Parents.student.branchid})"><c:out value="${Parents.student.studentexternalid}"/></a></td>
-                                <%-- <td  class="dataTextInActive"><a class="dataTextInActive" href="/sla/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td> --%>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.name}"/></td>
-                                <%-- <td class="dataText" style="text-transform:uppercase">
-                                 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
-						    		${splt} 
-								</c:forEach>
-                                </td> --%>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.contactnumber}"/></td>
-                                <%-- <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.mothersname}"/></td> --%>
-                                <!-- <fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/>  -->
-                                <!-- <td class="dataText"><fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/></td> -->
-								<td class="dataText" style='white-space: nowrap'><button id="query_${Parents.student.sid}" class="querybutton" onclick="createQuery(${Parents.student.sid},${Parents.student.branchid})">Job</button><button id="appointment_${Parents.student.sid}" class="appointmentbutton" onclick="check(${Parents.student.sid})">Appt.</button></td>                                 
-
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                    <tfoot><tr>
-                            <td  class="footerTD" colspan="4" ><input value="Archive" type="submit" id="delete"/> </td>
-                    
-                        </tr></tfoot>
-                </table>
-
-            </div>
-            
-            <div align="center">
-             <%--For displaying Previous link except for the 1st page --%>
-                <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/sla/StudentProcess/viewAll?page=${currentPage - 1}">Previous</a></td>
-                </c:if>
-
-                <%--For displaying Page numbers.
-                The when condition does not display a link for the current page--%>
-                <table border="0" cellpadding="5" cellspacing="5">
-                    <tr>
-                        <c:forEach begin="1" end="${noOfPages}" var="i">
-                            <c:choose>
-                                <c:when test="${currentPage eq i}">
-                                    <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
-                                </c:when>
-                                <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/sla/StudentProcess/viewAll?page=${i}">${i}</a></td>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
+                        <td  class="headerTD">Create Job</td>
                     </tr>
                 </table>
-
-                <%--For displaying Next link --%>
-                <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/sla/StudentProcess/viewAll?page=${currentPage + 1}">Next</a></td>
-                </c:if>
-                    </div>
-            
-            
-             <div id="dialogappointment" title="Appointment">
-				
-           		 
-		           		<table style="width: auto;height: auto;">
-								
+		           		<table style="margin-left: auto;margin-right: auto;">
 								<tr>
-									<td>
-										<label style="font-size: 14px;"> Date :</label>
-										<input type="date" name="appointmentdate" id="appointmentdate"/>
-										
-										
-										<label style="font-size: 14px;padding-left: 40px;">Time :</label>
-										<input type="time" name="appointmenttime" id="appointmenttime" />								
-									</td>
+									<td><input type="hidden" id = "studentid_${parents.student.sid}" name="studentIDs"  value="<c:out value="${parents.pid}:${parents.contactnumber}:${parents.student.name}"/>"/><br /></td>
 								</tr>
-								
 								<tr>
-									<td><br></td>
-								</tr>
-						</table>
-						
-					</div>
-					
-					
-					<div id="dialogquery" title="Job">
-				
-           		 
-		           		<table style="width: auto;height: auto;">
-		           		
-		           		
+									<td class="alignLeft" style="font-weight: bold;font-size: 16px;">Client Name:</td>
+									<td style="font-weight: bold;font-size: 16px;color: #eb6000;text-transform: uppercase;"><label> <c:out value="${student.name}" /></label></td>
+								</tr>		           		
+		           				<tr>
+									<td><br /></td>
+								</tr>	           		
+								<tr>
+									<td class="alignLeft" style="font-weight: bold;font-size: 16px;">UID:</td>
+									<td style="font-weight: bold;font-size: 16px;color: #eb6000"><label> <c:out value="${student.studentexternalid}" /></label></td>
+								</tr>		           		
 		           				<tr>
 									<td><br /></td>
 								</tr>
-
-								<%-- <tr>
-									<td class="alignLeft">Assign To:</td>
-									<td><label> <select name="assignto" id="assignto" style="width: 250px;height: 25px;">
-											<option selected></option>
-
-												<c:forEach items="${employeeList}" var="employeeList">
-
-													<option value="${employeeList.tid}:${employeeList.teachername}:${employeeList.contactnumber}">
-														<c:out value="${employeeList.teachername}" />
-													</option>
-
-
-											</c:forEach>
-
-										</select>
-									</label></td>
-								</tr>
-								
-								<tr>
-									<td><br></td>
-								</tr> --%>
 								
 								<tr>
 									<td class="alignLeft">Type of Job:</td>
@@ -1234,13 +929,13 @@ for(Cookie cookie : cookies){
 											<option selected></option>
 											<option value="Arbitration">Arbitration</option>
 											<option value="Certified Documents">Certified Documents</option>
-											<option value="Sub Registrar">Sub Registrar</option>
-											<option value="District Registrar">District Registrar</option>
 											<option value="Co-operative Society">Co-operative Society</option>
-											<option value="Unregistered Documents">Unregistered Documents</option>
-											<option value="Reading & Legal Opinion">Reading & Legal Opinion</option>
+											<option value="District Registrar">District Registrar</option>
 											<option value="Mutation Work">Mutation Work</option>
 											<option value="Notice">Notice</option>
+											<option value="Reading & Legal Opinion">Reading & Legal Opinion</option>
+											<option value="Sub Registrar">Sub Registrar</option>
+											<option value="Unregistered Documents">Unregistered Documents</option>
 										</select>
 									</label></td>
 								</tr>
@@ -1254,15 +949,15 @@ for(Cookie cookie : cookies){
 									<td class="alignLeft">Type of Cases:</td>
 									<td><label> <select name="typeofworkcourtcases" id="typeofworkcourtcases" style="width: 250px;height: 25px;">
 											<option selected></option>
-											<option value="SC">Supreme Court Case</option>
-											<option value="HC">High Court Case</option>
-											<option value="DC">District Court Case</option>
-											<option value="KAT">Karantaka Administrative Tribunal Case</option>
-											<option value="WT">Waqf Tribunal Case</option>
-											<option value="FC">Family Court Case</option>
-											<option value="RC">Revenue Courts Case</option>
 											<option value="CC">Consumer Court Case</option>
 											<option value="CSC">Co-Societies Court Case</option>
+											<option value="DC">District Court Case</option>
+											<option value="FC">Family Court Case</option>
+											<option value="HC">High Court Case</option>
+											<option value="KAT">Karantaka Administrative Tribunal Case</option>
+											<option value="RC">Revenue Courts Case</option>
+											<option value="SC">Supreme Court Case</option>
+											<option value="WT">Waqf Tribunal Case</option>
 											<option value="AOC">Any Other Court Case</option>
 										</select>
 									</label></td>
@@ -1272,15 +967,15 @@ for(Cookie cookie : cookies){
 									<td class="alignLeft">Type of Cases:</td>
 									<td><label> <select name="typeofworkcourtdocs" id="typeofworkcourtdocs" style="width: 250px;height: 25px;">
 											<option selected></option>
-											<option value="SCD">Supreme Court Documents</option>
-											<option value="HCD">High Court Documents</option>
-											<option value="DCD">District Court Documents</option>
-											<option value="KATD">Karantaka Administrative Tribunal Documents</option>
-											<option value="WTD">Waqf Tribunal Documents</option>
-											<option value="FCD">Family Court Documents</option>
-											<option value="RCD">Revenue Courts Documents</option>
 											<option value="CCD">Consumer Court Documents</option>
 											<option value="CSCD">Co-Societies Court Documents</option>
+											<option value="DCD">District Court Documents</option>
+											<option value="FCD">Family Court Documents</option>
+											<option value="HCD">High Court Documents</option>
+											<option value="KATD">Karantaka Administrative Tribunal Documents</option>
+											<option value="RCD">Revenue Courts Documents</option>
+											<option value="SCD">Supreme Court Documents</option>
+											<option value="WTD">Waqf Tribunal Documents</option>
 											<option value="AOCD">Any Others Court  Documents</option>
 										</select>
 									</label></td>
@@ -1366,8 +1061,8 @@ for(Cookie cookie : cookies){
 									<td><label> <select name="typeofworknoncourtcs" id="typeofworknoncourtcs" style="width: 250px;height: 25px;">
 											<option selected></option>
 											<option value="CSBL">Co-operative Society Bye Laws</option>
-											<option value="SBL">Society Bye Laws</option>
 											<option value="MLD">Money Lending Liecense</option>
+											<option value="SBL">Society Bye Laws</option>
 										</select>
 									</label></td>
 								</tr>
@@ -1470,7 +1165,7 @@ for(Cookie cookie : cookies){
 	
 										<td ><label>
 											<input type="text"  name="expecteddeliverydate"
-									class="textField" style="font-size: 14px;" style="width: 250px;height: 25px;"
+									class="textField" style="font-size: 14px;width: 250px;height: 25px;"
 									id="expecteddeliverydate" autocomplete="false" required
 									data-validate="validate(required)">
 										</label></td>
@@ -1478,69 +1173,6 @@ for(Cookie cookie : cookies){
 								<tr>
 									<td><br></td>
 								</tr>
-								
-								<tr>
-									<td class="alignLeft">Assign To:</td>
-									<td><label> <select name="assignto" id="assignto" style="width: 250px;height: 25px;">
-											<option selected></option>
-
-												<c:forEach items="${employeeList}" var="employeeList">
-
-													<option value="${employeeList.tid}:${employeeList.teachername}:${employeeList.contactnumber}">
-														<c:out value="${employeeList.teachername}" />
-													</option>
-
-
-											</c:forEach>
-
-										</select>
-									</label></td>
-								</tr>
-								
-								<tr>
-									<td><br></td>
-								</tr>
-								
-								
-								<!-- <tr>
-									
-									<td class="alignLeft">
-										Job:	
-  									</td>
-									<td>	<label> <select name="job" id="job" style="width: 250px;height: 25px;">
-   												  <option selected></option>
-  												</select>
-  											
-										</label><br><br>
-									</td>
-								</tr>
-								
-								<tr>
-  									
-  									<td class="alignLeft">		
-										Case: 	
-  									</td>
-  									<td>	<label><select name="case" id="case" style="width: 250px;height: 25px;">
-    												<option selected></option>
-  												</select>
-  											
-										</label><br><br>
-									</td>
-								</tr>
-								
-								<tr>
-									
-  									<td class="alignLeft">
-										Sub-Case: 
-									</td>
-									
-									<td>	<label> <select name="subcase" id="subcase" style="width: 250px;height: 25px;">
-    												<option selected></option>
-  												</select>
-  											
-										</label><br><br>
-									</td>
-								</tr> -->
 								
 						</table>
 						
@@ -1571,9 +1203,11 @@ for(Cookie cookie : cookies){
 						<tbody>						
 						</tbody>
 					</table>
-						
+						<div align="center">
+						<p>
+						<label><button id="createquery">Save</button></label></p>
 					</div>
-            
+					</div>
         </form>
     </body>
 </html>

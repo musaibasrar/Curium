@@ -57,7 +57,7 @@ public class EmployeeDAO {
 		try {
 
 			transaction = session.beginTransaction();
-			results = (List<Teacher>) session.createQuery("From Teacher where branchid="+branchId)
+			results = (List<Teacher>) session.createQuery("From Teacher where branchid="+branchId+" order by teachername ASC")
 					.list();
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

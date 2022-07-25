@@ -1,6 +1,6 @@
 <%--
-    Document   : Appointment
-    Created on : Dec 16, 2021, 11:56:28 PM
+    Document   : queries
+    Created on : Dec 19, 2021, 07:08:28 AM
     Author     : Musaib
 --%>
 
@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Appointments</title>
+<title>Queries</title>
 <link rel="stylesheet" href="/sla/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/sla/css/datePicker/demos.css">
 <style type="text/css">
@@ -149,7 +149,7 @@
 	border-right-width: thin;
 	border-bottom-width: thin;
 	border-left-width: thin;
-	background-image: url(images/close.JPG);
+	background-image: url(/sla/images/close.JPG);
 	background-repeat: repeat-y;
 	background-attachment: scroll;
 	background-position: right;
@@ -175,6 +175,9 @@
 	text-align: left;
 	vertical-align: middle;
 	color: #325f6d;
+}
+.formfield * {
+  vertical-align: middle;
 }
 
 <!--
@@ -203,7 +206,7 @@
 	vertical-align: text-top;
 	text-align: center;
 	background-image:
-		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("/sla/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .dataText {
@@ -254,7 +257,7 @@
 	border-radius: 6px;
 	background-color: #4b6a84;
 	background-image:
-		url("images/ui-bg_diagonals-small_50_466580_40x40.png");
+		url("/sla/images/ui-bg_diagonals-small_50_466580_40x40.png");
 	color: #FFFFFF;
 	font-family: Tahoma;
 	font-size: 13px;
@@ -320,7 +323,17 @@
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 12px;
-}            
+} 
+ .alignLeft {
+				font-family: Tahoma;
+				font-size: 14px;
+				font-style: normal;
+				text-transform: capitalize;
+				color: #325F6D;
+				text-align: left;
+				vertical-align: middle;
+				font-weight: bold;
+			}           
 </style>
 <style>
 #button {
@@ -371,7 +384,7 @@
 			"bLengthChange" : false,
 			"bFilter" : true,
 			"bSort" : true,
-			"bInfo" : false,
+			"bInfo" : true,
 			"bAutoWidth" : false
 		});
 	});
@@ -380,31 +393,63 @@
 
 
 	<script type="text/javascript">
-		function completeAppointment() {
+		function completeQueries() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/sla/AppointmentProcess/completeAppointments";
+			form1.action = "/sla/QueryProcess/completeQueries";
 			form1.method = "POST";
 			form1.submit();
 		}
 		
-		function cancelAppointment() {
+		function cancelQueries() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/sla/AppointmentProcess/cancelAppointments";
+			form1.action = "/sla/QueryProcess/cancelQueries";
 			form1.method = "POST";
 			form1.submit();
 		}
+		
+		function inProgressQueries() {
+			var form1 = document.getElementById("form1");
+			form1.action = "/sla/QueryProcess/inProgressQueries";
+			form1.method = "POST";
+			form1.submit();
+		}
+		
+		function toDoQueries() {
+			var form1 = document.getElementById("form1");
+			form1.action = "/sla/QueryProcess/toDoQueries";
+			form1.method = "POST";
+			form1.submit();
+		}
+		
+		function updateQueryRemarks(queryRemarksAdded,queryRemarks, queryid) {
+			var form1 = document.getElementById("form1");
+			var remarksAdded = queryRemarks.value;
+			var loginusername = username.value;
+			var result = " sla" +" "+loginusername+":  "+ remarksAdded;
+			form1.action = "/sla/QueryProcess/updateQueryRemarks?queryremarks="+result+"&queryid="+queryid.value+"&jobid="+queryid.value+"";
+			form1.method = "POST";
+			form1.submit();
+		}
+		
+		function updateQueryResponse(parentQuery, response, queryid) {
+			var form1 = document.getElementById("form1");
+			form1.action = "/sla/QueryProcess/updateQueries&parentquery="+parentQuery.value+"&response="+response.value+"&queryid="+queryid.value+"";
+			form1.method = "POST";
+			form1.submit();
+		}
+
 	</script>
 	
 	 <script type="text/javascript">
 					
-					var appointmentstatus = '<c:out default="" value="${appointmentstatus}"/>';
+					var querystatus = '<c:out default="" value="${querystatus}"/>';
 		            
-		            if(appointmentstatus == "true"){
+		            if(querystatus == "true"){
 		            	 $(function(){
 		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 );
 		            		 $( "div.success" ).fadeOut("slow");
 		            	 });
-		            	 }else if(appointmentstatus == "false"){
+		            	 }else if(querystatus == "false"){
 		            	  $(function(){
 		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 );
 		            		 $( "div.success" ).fadeOut("slow");
@@ -419,7 +464,7 @@
 		        		  } else {
 		        		    x.style.display = "none";
 		        		    var form1 = document.getElementById("form1");
-		        			form1.action = "/sla/AppointmentProcess/viewAllAppointments";
+		        			form1.action = "/sla/QueryProcess/viewAllQueries";
 		        			form1.method = "POST";
 		        			form1.submit();
 		        		  }
@@ -439,7 +484,7 @@
                  primary: "ui-icon-check"
              }
          }).click(function(){
-             completeAppointment();
+        	 completeQueries();
          });
          
          
@@ -448,17 +493,25 @@
                  primary: "ui-icon-cancel"
              }
          }).click(function(){
-             cancelAppointment();
+             cancelQueries();
 
          });
          
-         
-         $("#update").button({
+         $("#inprogress").button({
              icons:{
-                 primary: "ui-icon-refresh"
+                 primary: "ui-icon-circle-check"
              }
          }).click(function(){
-             updateAppointment();
+             inProgressQueries();
+
+         });
+         
+         $("#todo").button({
+             icons:{
+                 primary: "ui-icon-circle-plus"
+             }
+         }).click(function(){
+             toDoQueries();
 
          });
          
@@ -495,42 +548,50 @@
               
 
      });
-	 
-	 
-	   function viewStudentDetails(sid,branchid){
-           var form1=document.getElementById("form1");
-          form1.action="/sla/StudentProcess/ViewDetails?id="+sid+"&urlbranchid="+branchid+"";
-          form1.submit();
-          
-          //window.location.reload();
-      }
-	   
-	   function updateAppointment(){
-     	  
-       	var form1 = document.getElementById("form1");
-   		form1.action = "/sla/AppointmentProcess/updateAppointment";
-   		form1.method = "POST";
-   		form1.submit();
-       }
-	   
-	    function check(studentid){
-        	
-        	var length = $('.chcktbl:checked').length;
-            var trLength=$('.trClass').length;
-            if(length>0){
-                $('.chcktbl:checked').attr('checked', false);
-                this.checked=false;
-            }
-            else{
-                if (this.checked == false) {
-                    $('.chcktbl:checked').attr('checked', false);
-                }
-            }
-  	      	  document.getElementById(studentid).checked = true;  
-        }
 		
 </script>
-	       
+	
+	<script type="text/javascript">
+
+            function openPopup(queryRemarks,queryid){
+            	
+            	var regex = /sla/g;
+            	var queryRemarksadded = queryRemarks.replace(regex,"\n ->");
+            	document.getElementById("queryremarksadded").value=queryRemarksadded;
+            	document.getElementById("queryid").value= queryid;
+
+        		
+                $( "#dialog" ).dialog( "open" );
+            }
+            
+        </script>       
+
+ <script type="text/javascript">
+
+            $(function() {
+                $( "#dialog" ).dialog({
+                    autoOpen: false,
+                    height: 300,
+                    width: 400,
+                    modal: true
+                });
+            });
+
+            function viewStudentDetails(sid,branchid){
+                var form1=document.getElementById("form1");
+               form1.action="/sla/StudentProcess/ViewDetails?id="+sid+"&urlbranchid="+branchid+"";
+               form1.submit();
+               
+               //window.location.reload();
+           }
+            
+            function viewTaskDetails(jobid){
+               var form1=document.getElementById("form1");
+               form1.action="/sla/QueryProcess/ViewTaskDetails?jobid="+jobid+"";
+               form1.submit();
+           }
+        </script>
+
 
 </head>
   <%
@@ -553,13 +614,13 @@ for(Cookie cookie : cookies){
 	<form id="form1" method="post">
 
 
-		<div class="alert-box success" id="div1">Appointment updated successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
-		<div class="alert-box failure" id="div2">Appointment update failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box success" id="div1">Job updated successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
+		<div class="alert-box failure" id="div2">Job update failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
 		
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Appointments</td>
+					<td class="headerTD">Jobs</td>
 					
 				</tr>
 			</table>
@@ -568,69 +629,97 @@ for(Cookie cookie : cookies){
                     <thead>
                         <tr  >
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
-                            <th title="click to sort" class="headerText">Appt. UID</th>
-                            <th title="click to sort" class="headerText">Appt. No.</th>
-                            <th title="click to sort" class="headerText">Appt. Date</th>
-                            <th title="click to sort" class="headerText">Appt. Time</th>
-                            <!-- <th title="click to sort" class="headerText">Admission Number</th> -->
+                            <th title="click to sort" class="headerText">UID</th>
+                            <th title="click to sort" class="headerText">Job No.</th>
                             <th title="click to sort" class="headerText">Client Name</th>
-                           <th title="click to sort" class="headerText">Start Time</th>
-                           <th title="click to sort" class="headerText">End Time</th>
-                           <th title="click to sort" class="headerText">Total Time</th>
-                            <!-- <th title="click to sort" class="headerText">Class</th> -->
-                            <!-- <th title="click to sort" class="headerText">Father Name</th> -->
-                            <!-- <th title="click to sort" class="headerText">Mother Name</th> -->
+                            <th title="click to sort" class="headerText">Staff</th>
+                            <th title="click to sort" class="headerText">Remarks</th>
                             <th title="click to sort" class="headerText">Status</th>
+                            <th title="click to sort" class="headerText">Created Date</th>
+                            <th title="click to sort" class="headerText">Updated Date</th>
+                            <th title="click to sort" class="headerText">Expected Delivery</th>
+                            <!-- <th title="click to sort" class="headerText">Details</th> -->
                         </tr>
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${appointmentList}" var="appointment">
+                        <c:forEach items="${queryList}" var="query">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${appointment.id}"/>" class = "chcktbl"  name="appointmentids"  value="<c:out value="${appointment.id}"/>"/></td>
-                                <td class="dataText"><c:out value="${appointment.id}"/></td>
-                                <td class="dataText"><c:out value="${appointment.externalid}"/></td>
-                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${appointment.appointmentdate}"/></td>
-                                <td class="dataText"><c:out value="${appointment.appointmenttime}"/></td>
-                                <%-- <td class="dataText"><c:out value="${appointment.parent.student.admissionnumber}"/></td> --%>
-                                <td class="dataText"><a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${appointment.parent.student.sid},${appointment.parent.student.branchid})"><c:out value="${appointment.parent.student.name}"/></a></td>
-                                <td class="dataText"><input type="time" value="${appointment.appointmentstarttime}" onclick="check(${appointment.id})" name="starttime_${appointment.id}" id="starttime"  /></td>
-                                <td class="dataText"><input type="time" value="${appointment.appointmentendtime}" onclick="check(${appointment.id})" name="endtime_${appointment.id}" id="endtime" /></td>
-                                <td class="dataText"><c:out value="${appointment.totaltime}"/></td>
-                                <%-- <td class="dataText">
-                                <c:forEach var="splt" items="${fn:split(appointment.parent.student.classstudying,'--')}">
-						    		${splt} 
-								</c:forEach>
-									<input type="hidden" id="classstudyingone" name="classstudying" value="${Student.classstudying}"/>
-									 <input type="hidden" id="classstudying" name="classstudying_${Student.sid}" value="${Student.classstudying}"/>
+                            	
+                            	<td class="dataText"><input type="checkbox" id = "<c:out value="${query.id}"/>" class = "chcktbl"  name="queryids"  value="<c:out value="${query.id}"/>"/></td>
+                            	<td class="dataText"><c:out value="${query.id}"/><input type="hidden" id="username" name="username" value="${username}"> </td></td>
+                            	<c:if test="${query.status == 'To Do' }">
+                                	<td class="dataText" style="color: #cb1b09;font-weight: bold;">
+                                	<a class="dataTextInActive" style="color: #cb1b09;font-weight: bold;cursor: pointer;" >${query.externalid}</a>
+                                	</td>
+                                </c:if>
+                                <c:if test="${query.status == 'In Progress' }">
+                                	<td class="dataText" style="color: #0001ff;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: #0001ff;font-weight: bold;cursor: pointer;" >${query.externalid}</a>
+                                	</td>
+                                </c:if>
+                                <c:if test="${query.status == 'Completed' }">
+                                	<td class="dataText" style="color: #65a358;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: #65a358;font-weight: bold;cursor: pointer;" >${query.externalid}</a>
+                                	</td>
+                                </c:if>
+                                <c:if test="${query.status == 'Cancelled' }">
+                                	<td class="dataText" style="color: grey;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: grey;font-weight: bold;cursor: pointer;" >${query.externalid}</a>
+                                	</td>
+                                </c:if>
+                               <td class="dataText"><a class="dataTextInActive" style="cursor: pointer;" ><c:out value="${query.parent.student.name}"/></a></td>
+                                
+                                <td class="dataText" style="text-align: left">
+                                
+                                			<c:if test="${not empty query.tasks}">
+    											 <c:forEach items="${query.tasks}" var="task" varStatus="status">
+		                                				${status.index+1}.&nbsp;<c:out value="${task.teacher.teachername}"/><br>
+		                                		</c:forEach>
+											</c:if>
+											<c:if test="${empty query.tasks}">
+    											<c:out value="${query.teacher.teachername}"/>
+											</c:if>
+		                               
+                                
+                                <input type="hidden" id="contactno_${query.id}" name="contactno_${query.id}" value="${query.parent.contactnumber}">
                                 </td>
-                                <td class="dataText"><c:out value="${appointment.parent.fathersname}"/></td>
-                                <td class="dataText"><c:out  value="${appointment.parent.mothersname}"/></td> --%>
-                                <td class="dataText"><c:out  value="${appointment.status}"/></td>
+                                <c:if test="${not empty query.feedback}">
+                                	<td class="dataText"><a href="#" onclick="openPopup('${query.feedback}','${query.id}')" style="color:#eb6000;">View</a></td>
+                                </c:if>
+                                <c:if test="${empty query.feedback}">
+                                	<td class="dataText"><a href="#" onclick="openPopup('${query.feedback}','${query.id}')" style="color:#4b6a84;">Add</a></td>
+                                </c:if>
+                                <td class="dataText"><c:out  value="${query.status}"/></td>
+                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.expecteddeliverydate}"/></td>
+                                <%-- <td class="dataText"><a href="#" onclick="openPopup(${query.id})" style="color:#eb6000;">View Details</a></td> --%>
                             </tr>
                         </c:forEach>
                     </tbody>
                     
                     <tfoot><tr>
                     
-                    <td  class="footerTD" colspan="9" >
+                    <td  class="footerTD" colspan="2" >
                             </td>
                    </tr></tfoot>
                 </table>
                 
-                <table>
+            <!--     <table>
                 	<tr>
-                    	<td  colspan="9" ><button value="completed" type="submit" id="completed">Completed</button>
- 									&nbsp;&nbsp;&nbsp;&nbsp;<button id="update">Update</button>
- 									 &nbsp;&nbsp;&nbsp;&nbsp;<button id="cancel">Cancel</button> 
+                    	<td  colspan="2" ><button value="completed" id="completed">Completed</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="inprogress">In Progress</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="cancel">Cancel</button> 
+                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="todo">To Do</button> 
                     	</td>
                    </tr>
-                </table>
+                </table> -->
                 
                 <div align="center">
 		             <%--For displaying Previous link except for the 1st page --%>
 		                <c:if test="${currentPage != 1}">
-		                    <td><a style="color: #4B6A84;font-size: 12px" href="/sla/AppointmentProcess/viewAllAppointments&page=${currentPage - 1}">Previous</a></td>
+		                    <td><a style="color: #4B6A84;font-size: 12px" href="/sla/QueryProcess/viewAllQueries&page=${currentPage - 1}">Previous</a></td>
 		                </c:if>
 		
 		                <%--For displaying Page numbers.
@@ -646,7 +735,7 @@ for(Cookie cookie : cookies){
 		                                    <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
 		                                </c:when>
 		                                <c:otherwise>
-		                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/sla/AppointmentProcess/viewAllAppointments&page=${i}">${i}</a></td>
+		                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/sla/QueryProcess/viewAllQueries&page=${i}">${i}</a></td>
 		                                </c:otherwise>
 		                            </c:choose>
 		                            
@@ -659,10 +748,48 @@ for(Cookie cookie : cookies){
 		
 		                <%--For displaying Next link --%>
 		                <c:if test="${currentPage lt noOfPages}">
-		                    <td ><a style="color: #4B6A84;font-size: 12px" href="/sla/AppointmentProcess/viewAllAppointments&page=${currentPage + 1}">Next</a></td>
+		                    <td ><a style="color: #4B6A84;font-size: 12px" href="/sla/QueryProcess/viewAllQueries&page=${currentPage + 1}">Next</a></td>
 		                </c:if>
                 </div>
 		</div>
+		
+		<div id="dialog" title="Job Remarks">
+                
+                
+                <table style="width: auto;height: auto;">
+								
+								<tr>
+									<td>
+										<p class="formfield">
+										<input type="hidden" id="queryid" name="queryid" >
+										<label style="font-size: 14px;"> Remarks :</label>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<textarea  name="queryremarksadded" id="queryremarksadded" cols="40" rows="5" readonly></textarea>
+										</p>
+									</td>
+								</tr>
+								
+								<tr>
+									<td>
+										<p class="formfield">
+										<label style="font-size: 14px;"> Add Remarks :</label>
+										<textarea  name="queryremarks" id="queryremarks" cols="40" rows="5"></textarea>
+										</p>
+									</td>
+								</tr>
+								
+								<tr>
+									<td><br></td>
+								</tr>
+						</table>
+						
+						
+             	 <!-- <div id="querydetails">
+              			
+              			
+           		 </div> -->
+           		 
+			</div>
 	</form>
 </body>
 </html>

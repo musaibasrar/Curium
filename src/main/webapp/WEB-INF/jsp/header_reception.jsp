@@ -135,16 +135,22 @@ for(Cookie cookie : cookies){
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td> -->
 							
-							<td><a target="mainFrame"
+							<!-- <td><a target="mainFrame"
 								href="/sla/StudentProcess/mainAdvanceSearchStudents"> <img
 									src="/sla/images/adminexp.svg" width="18" height="18"
 									alt="Client Search" style="vertical-align: bottom;" />Create Job / Appt.
-							</a></td>
+							</a></td> -->
 
 							 <td><a target="mainFrame"
 								href="/sla/QueryProcess/viewAllTasks"> <img
 									src="/sla/images/feescollect.svg" width="18" height="18"
 									alt="View Jobs" style="vertical-align: bottom;" />View Tasks
+							</a></td>
+							
+							 <td><a target="mainFrame"
+								href="/sla/QueryProcess/viewAllQueries"> <img
+									src="/sla/images/feescollect.svg" width="18" height="18"
+									alt="View Jobs" style="vertical-align: bottom;" />View Jobs
 							</a></td>
 
 							<!--<td>

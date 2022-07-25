@@ -413,9 +413,11 @@ for(Cookie cookie : cookies){
 
                                     });
                                 });
-                                
-                                function calIssues(){
-                                    var fromIss = document.getElementById("").value;
+                                                                
+                                function viewTaskDetails(jobid){
+                                    var form1=document.getElementById("form1");
+                                    form1.action="/sla/QueryProcess/ViewTaskDetails?jobid="+jobid+"";
+                                    form1.submit();
                                 }
                             </script>
                         </td></tr>
@@ -876,19 +878,28 @@ for(Cookie cookie : cookies){
                     <tbody>
                         <c:forEach items="${queryList}" var="query">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                            	<td class="dataText" ><c:out value="${query.id}"/></td>
+                            	
                             	<c:if test="${query.status == 'To Do' }">
-                                	<td class="dataText" style="background-color: red;"><c:out value="${query.id}"/></td>
+                                	<td class="dataText" style="color: #cb1b09;font-weight: bold;">
+                                	<a class="dataTextInActive" style="color: #cb1b09;font-weight: bold;cursor: pointer;" onclick="viewTaskDetails(${query.id})">${query.externalid}</a>
+                                	</td>
                                 </c:if>
                                 <c:if test="${query.status == 'In Progress' }">
-                                	<td class="dataText" style="background-color: yellow;"><c:out value="${query.id}"/></td>
+                                	<td class="dataText" style="color: #0001ff;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: #0001ff;font-weight: bold;cursor: pointer;" onclick="viewTaskDetails(${query.id})">${query.externalid}</a>
+                                	</td>
                                 </c:if>
                                 <c:if test="${query.status == 'Completed' }">
-                                	<td class="dataText" style="background-color: green;"><c:out value="${query.id}"/></td>
+                                	<td class="dataText" style="color: #65a358;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: #65a358;font-weight: bold;cursor: pointer;" onclick="viewTaskDetails(${query.id})">${query.externalid}</a>
+                                	</td>
                                 </c:if>
                                 <c:if test="${query.status == 'Cancelled' }">
-                                	<td class="dataText" style="background-color: green;"><c:out value="${query.id}"/></td>
+                                	<td class="dataText" style="color: grey;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: grey;font-weight: bold;cursor: pointer;" onclick="viewTaskDetails(${query.id})">${query.externalid}</a>
+                                	</td>
                                 </c:if>
-                                 <td class="dataText"><c:out value="${query.externalid}"/></td>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
                                 <td class="dataText"><c:out value="${query.teacher.teachername}"/></td>
@@ -924,12 +935,14 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Appt. No.</th>
                             <th title="click to sort" class="headerText">Appt. Date</th>
                             <th title="click to sort" class="headerText">Appt. Time</th>
+                           <th title="click to sort" class="headerText">Total Time</th>
                             <!-- <th title="click to sort" class="headerText">Admission Number</th> -->
                             <th title="click to sort" class="headerText">Client Name</th>
                             <th title="click to sort" class="headerText">Contact Number</th>
                             <!-- <th title="click to sort" class="headerText">Class</th> -->
                             <!-- <th title="click to sort" class="headerText">Father Name</th> -->
                             <!-- <th title="click to sort" class="headerText">Mother Name</th> -->
+                           
                             <th title="click to sort" class="headerText">Status</th>
                         </tr>
                     </thead>
@@ -941,6 +954,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${appointment.externalid}"/></td>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${appointment.appointmentdate}"/></td>
                                 <td class="dataText"><c:out value="${appointment.appointmenttime}"/></td>
+                                <td class="dataText"><c:out value="${appointment.totaltime}"/></td>
                                 <%-- <td class="dataText"><c:out value="${appointment.parent.student.admissionnumber}"/></td> --%>
                                 <td class="dataText"><c:out value="${appointment.parent.student.name}"/></td>
                                 <td class="dataText"><c:out  value="${appointment.parent.contactnumber}"/></td>

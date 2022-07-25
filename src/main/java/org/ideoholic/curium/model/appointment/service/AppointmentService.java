@@ -108,7 +108,7 @@ public class AppointmentService {
 				}
 				
 				}
-		
+			request.setAttribute("appointmentresult", result);
 		return result;
 	}
 
@@ -463,7 +463,7 @@ public class AppointmentService {
 			}
 			result = new AppointmentDAO().updateAppointments(appointmentList);
 		}
-		
+		request.setAttribute("appointmentstatus",result);
 		return result;
 	}
 	

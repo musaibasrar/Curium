@@ -38,6 +38,9 @@ public class test {
 			System.out.println("key is "+string.getKey());
 		}*/
 		
+		String abc = "aaa" + "\n" + "bbb";
+		System.out.println("****************************"+abc);
+		
 		
 		
 		 SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");

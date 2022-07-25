@@ -82,7 +82,7 @@ for(Cookie cookie : cookies){
 
             <frameset  cols="*" frameborder="0" border="0" framespacing="0">
                 <!-- <frame  src="/sla/left_admin" name="leftFrame" scrolling="yes"  frameborder="1"   /> -->
-                <frame src="/sla/QueryProcess/viewAllQueriesDepartmentWise" name="mainFrame" scrolling="yes" />
+                <frame src="/sla/QueryProcess/viewAllTasks" name="mainFrame" scrolling="yes" />
             </frameset>
 
    </frameset>

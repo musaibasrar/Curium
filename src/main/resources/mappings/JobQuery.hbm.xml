@@ -57,6 +57,13 @@
         <many-to-one name="parent" class="org.ideoholic.curium.model.parents.dto.Parents"
             column="stdid" lazy="false" />
         <many-to-one name="teacher" class="org.ideoholic.curium.model.employee.dto.Teacher"
-            column="staffid" lazy="false" />    
+            column="staffid" lazy="false" /> 
+             <set name="tasks" table="h_task"
+				 lazy="false" cascade="all">
+            <key>
+                <column name="jobid" not-null="true" />
+            </key>
+            <one-to-many  class="org.ideoholic.curium.model.task.dto.Task" />
+        </set>   
     </class>
 </hibernate-mapping>

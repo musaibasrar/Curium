@@ -366,4 +366,43 @@ public class JspController {
 		return "header_staff";
 	}
 	
+	@GetMapping("/createquery")
+	public String getCreatequery() {
+		return "createquery";
+	}
+	
+	@GetMapping("/tasks")
+	public String getTasks() {
+		return "tasks";
+	}
+	
+	@GetMapping("/viewalltasks")
+	public String getViewalltasks() {
+		return "viewalltasks";
+	}
+	
+	@GetMapping("/left_staff")
+	public String getLeftStaff() {
+		return "left_staff";
+	}
+	
+	@GetMapping("/viewalltasksreadonly")
+	public String getViewAllTasksReadOnly() {
+		return "viewalltasksreadonly";
+	}
+	
+	@GetMapping("/header_reception")
+	public String getHeaderReception() {
+		return "header_reception";
+	}
+	
+	@GetMapping("/queriesreadonly")
+	public String getQueriesReadOnly() {
+		return "queriesreadonly";
+	}
+	
+	@GetMapping("/createtask")
+	public String getCreatetask() {
+		return "createtask";
+	}
 }

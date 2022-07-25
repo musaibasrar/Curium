@@ -1,4 +1,4 @@
-package org.ideoholic.curium.model.job.service;
+package org.ideoholic.curium.model.task.service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -35,19 +33,19 @@ import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.job.dao.JobDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
-import org.ideoholic.curium.model.task.dto.Task;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+
 import org.ideoholic.curium.model.job.dto.JobQuery;
 
-public class JobService {
+public class TaskService {
 
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession httpSession;
 	private static final int BUFFER_SIZE = 4096;
 
-	public JobService(HttpServletRequest request, HttpServletResponse response) {
+	public TaskService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
 		this.httpSession = request.getSession();
@@ -63,6 +61,8 @@ public class JobService {
 		String[] pidContact = studentId[0].split(":");
 		
 		
+		String assignto = request.getParameter("staffid");
+		String[] dep = assignto.split(":");
 		String filetype = request.getParameter("filetype");
 		String typeofwork = request.getParameter("typeofwork");
 		String typeofworkcourt = request.getParameter("typeofworkcourt");
@@ -104,37 +104,11 @@ public class JobService {
 					parent.setPid(Integer.parseInt(pidContact[0]));
 					query.setParent(parent);
 					
-					/*
-					 * Teacher teacher = new Teacher(); teacher.setTid(Integer.parseInt(dep[0]));
-					 * query.setTeacher(teacher);
-					 */
+					Teacher teacher = new Teacher();
+					teacher.setTid(Integer.parseInt(dep[0]));
+					query.setTeacher(teacher);
 					
-					
-					//GET TASKS
 
-					String[] assignto = request.getParameterValues("assignto");
-					String[] task = request.getParameterValues("task");
-					String[] description = request.getParameterValues("description");
-					String[] expecteddd = request.getParameterValues("expecteddeliverydatetask");
-					
-					//String[] dep = assignto.split(":");
-					List<Task> taskList = new ArrayList<Task>();
-						for (int i=0; i<assignto.length; i++ ) {
-							Task newTask = new Task();
-							Teacher teacher = new Teacher();
-							String[] staffDetails = assignto[i].split(":");
-							newTask.setTasks(task[i]);
-							newTask.setDescription(description[i]);
-							//newTask.setStaffid(Integer.parseInt(staffDetails[0]));
-							newTask.setExpecteddeliverydate(DateUtil.dateParserUpdateStd(expecteddd[i]));
-							newTask.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-							teacher.setTid(Integer.parseInt(staffDetails[0]));
-							newTask.setTeacher(teacher);
-							newTask.setStatus("To Do");
-							taskList.add(newTask);
-						}
-					//
-					
 			 		Date date = new Date();
 			 		Calendar calendar = Calendar.getInstance();
 			 		calendar.setTime(date);
@@ -146,13 +120,6 @@ public class JobService {
 			 		query.setExternalid(externalId);
 			 		
 					String resultQuery = new JobDAO().addQuery(query);
-					
-					
-					if(resultQuery!=null) {
-						String[] queryValues = resultQuery.split(":");
-						String resultTask = new JobDAO().addTask(taskList,Integer.parseInt(queryValues[1]));
-					}
-					
 					String sendQuerySMS = new DataUtil().getPropertiesValue("sendjobsms");
 									
 					if(resultQuery!=null && "yes".equalsIgnoreCase(sendQuerySMS)) {
@@ -161,12 +128,14 @@ public class JobService {
 						 String[] queryValues = resultQuery.split(":");
 						 String param = "?id="+queryValues[1]+"&no="+pidContact[0]+"";
 						 feedbacklink = feedbacklink+param;
-						 String messageClient = "File No. is "+queryValues[0]+"";
+						 String messageClient = "Your File No. "+queryValues[0]+" is alloted to "+dep[1]+", Mobile No "+dep[2]+"";
 						 String messageInternal = "You are alloted with File No. "+queryValues[0]+", client name: "+pidContact[2]+", contact no. "+pidContact[1]+" ";
 						 
 						 String message= "Click "+feedbacklink+" to give feedback on enq. # "+queryValues[0]+"";
+						 //String message = "Your enquiry no. is "+queryValues[0]+".Please click the link to give your feedback. "+feedbacklink+"";
 						 new SmsService(request, response).sendSMS("91"+pidContact[1], messageClient);
-						//check new SmsService(request, response).sendSMS("91"+dep[1], messageInternal);
+						 new SmsService(request, response).sendSMS("91"+dep[1], messageInternal);
+						 //new SmsService(request, response).sendSMS("91"+pidContact[1], message);
 					}else if(resultQuery!=null && "no".equalsIgnoreCase(sendQuerySMS)) {
 						result = true;
 					}
@@ -656,327 +625,5 @@ public class JobService {
 		remarks = remarks.replace("'", "''");
 		result = new JobDAO().updateQueryRemarks(queryId, remarks, userId);
 		request.setAttribute("querystatus",result);
-	}
-
-	public boolean viewTaskDetails() {
-		
-		boolean result = false;
-		if(httpSession.getAttribute("branchid")!=null){
-			
-			int jobId = Integer.parseInt(request.getParameter("jobid"));
-			List<Task> taskDetails = new JobDAO().viewTaksDetails(jobId);
-			request.setAttribute("taskdetails",taskDetails);
-			result = true;
-		}
-		
-		return result;
-	}
-
-	public boolean viewAllTasks() {
-
-		boolean result = false;
-		//String pages = "1";
-		if(httpSession.getAttribute("branchid")!=null){
-			try {
-				int page = 1;
-				int recordsPerPage = 500;
-					if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
-						page = Integer.parseInt(request.getParameter("page"));
-					}
-
-				List<Task> list = new JobDAO().readListOfObjectsPaginationTask((page - 1) * recordsPerPage,
-						recordsPerPage, Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-				request.setAttribute("studentList", list);
-				int noOfRecords = new JobDAO().getNoOfRecordsTask(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-				request.setAttribute("taskdetails", list);
-				request.setAttribute("noOfPages", noOfPages);
-				request.setAttribute("currentPage", page);
-				result = true;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return result;
-	}
-
-	public boolean viewAllTasksDepartmentWise() {
-
-		boolean result = false;
-		//String pages = "1";
-		if(httpSession.getAttribute("branchid")!=null){
-			
-			String[] loginDetails = httpSession.getAttribute("usertypedetails").toString().split("-");
-			try {
-				int page = 1;
-				int recordsPerPage = 500;
-					if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
-						page = Integer.parseInt(request.getParameter("page"));
-					}
-
-				List<Task> list = new JobDAO().readListOfObjectsPaginationDepartmentWiseTask((page - 1) * recordsPerPage,
-						recordsPerPage, Integer.parseInt(httpSession.getAttribute("branchid").toString()), Integer.parseInt(loginDetails[1]));
-				request.setAttribute("studentList", list);
-				int noOfRecords = new JobDAO().getNoOfRecordsDepartmentWiseTask(Integer.parseInt(httpSession.getAttribute("branchid").toString()), Integer.parseInt(loginDetails[1]));
-				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-				request.setAttribute("taskdetails", list);
-				request.setAttribute("noOfPages", noOfPages);
-				request.setAttribute("currentPage", page);
-				result = true;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return result;
-	}
-
-	public void completeTasks() {
-		
-		String[] TaskIds = request.getParameterValues("taskids");
-		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
-		List<Integer> TaskIdsList = new ArrayList<Integer>();
-		List<Task> result = new ArrayList<Task>();
-		int toDo = -1;
-		int inProgress = -1;
-		int completed = 0;
-		String jobStatus = null;
-		
-		if(TaskIds!=null) {
-			for (String ids : TaskIds) {
-				TaskIdsList.add(Integer.parseInt(ids));
-			}
-			completed = TaskIdsList.size();
-			
-			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(request.getParameter("jobid")));
-			int length = listTask.size();
-			
-			for (Task task : listTask) {
-				
-				if(task.getStatus().equalsIgnoreCase("To Do")) {
-					toDo = toDo+1;
-				}else if (task.getStatus().equalsIgnoreCase("In Progress")) {
-					inProgress = inProgress+1;
-				}else if (task.getStatus().equalsIgnoreCase("Completed")) {
-					completed = completed+1;
-				}
-			}
-			
-			if(toDo>=length) {
-				jobStatus ="To Do";
-			}else if(completed>=length) {
-				jobStatus ="Completed";
-			}else {
-				jobStatus ="In Progress";
-			}
-			
-			result = new JobDAO().completeTasks(TaskIdsList, userId, jobStatus, Integer.parseInt(request.getParameter("jobid")));
-			String sendCompletedQuerySMS = new DataUtil().getPropertiesValue("sendcompletedquerysms");
-			
-			
-			if(!result.isEmpty() && "yes".equalsIgnoreCase(sendCompletedQuerySMS) && jobStatus.equalsIgnoreCase("Completed")) {
-				request.setAttribute("querycompleted","success");
-				request.setAttribute("querystatus",true);
-				  for (Task JobQuery : result) { 
-					  String message =  "Your job with job. no "+JobQuery.getJobquery().getExternalid()+" has been resolved."; 
-					  new SmsService(request,response).sendSMS("91"+JobQuery.getJobquery().getParent().getContactnumber(), message); 
-					  }
-				 
-			}else if(!result.isEmpty()){
-				request.setAttribute("querycompleted","success");
-				request.setAttribute("querystatus",true);
-			}else {
-				request.setAttribute("querystatus",false);
-			}
-		}
-	}
-
-	public void cancelTasks() {
-		
-		String[] taskIds = request.getParameterValues("taskids");
-		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
-		List<Integer> taskIdsList = new ArrayList<Integer>();
-		List<Task> result = new ArrayList<Task>();
-		int toDo = 0;
-		int inProgress = 0;
-		int completed = 0;
-		int cancel=0;
-		
-		String jobStatus = null;
-		
-		if(taskIds!=null) {
-			for (String ids : taskIds) {
-				taskIdsList.add(Integer.parseInt(ids));
-			}
-			cancel=taskIdsList.size();
-			
-			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(request.getParameter("jobid")));
-			int length = listTask.size();
-			
-			for (Task task : listTask) {
-				
-				if(task.getStatus().equalsIgnoreCase("To Do")) {
-					toDo = toDo+1;
-				}else if (task.getStatus().equalsIgnoreCase("In Progress")) {
-					inProgress = inProgress+1;
-				}else if (task.getStatus().equalsIgnoreCase("Completed")) {
-					completed = completed+1;
-				}else if (task.getStatus().equalsIgnoreCase("Cancelled")) {
-					cancel = cancel+1;
-				}
-			}
-			
-			if(cancel>=length){
-				jobStatus ="Cancelled";
-			}
-			result = new JobDAO().cancelTasks(taskIdsList, userId, jobStatus, Integer.parseInt(request.getParameter("jobid")));
-			
-			if(!result.isEmpty()) {
-				request.setAttribute("querystatus",true);
-			}else {
-				request.setAttribute("querystatus",false);
-			}
-			
-		}
-		
-	}
-
-	public void toDoTasks() {
-		
-		String[] taskIds = request.getParameterValues("taskids");
-		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
-		List<Integer> taskIdsList = new ArrayList<Integer>();
-		List<Task> result = new ArrayList<Task>();
-		int toDo = 0;
-		int inProgress = 0;
-		int completed = 0;
-		int cancel=0;
-		
-		String jobStatus = null;
-		
-		if(taskIds!=null) {
-			for (String ids : taskIds) {
-				taskIdsList.add(Integer.parseInt(ids));
-			}
-			toDo = taskIdsList.size();
-			
-			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(request.getParameter("jobid")));
-			int length = listTask.size();
-			
-			for (Task task : listTask) {
-				
-				if(task.getStatus().equalsIgnoreCase("To Do")) {
-					toDo = toDo+1;
-				}else if (task.getStatus().equalsIgnoreCase("In Progress")) {
-					inProgress = inProgress+1;
-				}else if (task.getStatus().equalsIgnoreCase("Completed")) {
-					completed = completed+1;
-				}else if (task.getStatus().equalsIgnoreCase("Cancelled")) {
-					cancel = cancel+1;
-				}
-			}
-			
-			if(toDo>=length) {
-				jobStatus ="To Do";
-			}else if(completed>=length) {
-				jobStatus ="Completed";
-			}else if(cancel>=length){
-				jobStatus ="Cancelled";
-			}else {
-				jobStatus ="In Progress";
-			}
-			
-			result = new JobDAO().toDoTasks(taskIdsList, userId, jobStatus, Integer.parseInt(request.getParameter("jobid")));
-			
-			if(!result.isEmpty()) {
-				request.setAttribute("querystatus",true);
-			}else {
-				request.setAttribute("querystatus",false);
-			}
-		}
-		
-	}
-
-	public void inProgressTasks() {
-		
-		String[] taskIds = request.getParameterValues("taskids");
-		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
-		List<Integer> taskIdsList = new ArrayList<Integer>();
-		List<Task> result = new ArrayList<Task>();
-		
-		if(taskIds!=null) {
-			for (String ids : taskIds) {
-				taskIdsList.add(Integer.parseInt(ids));
-			}
-			
-			result = new JobDAO().inProgressTasks(taskIdsList, userId, "In Progress", Integer.parseInt(request.getParameter("jobid")));
-			
-			if(!result.isEmpty()) {
-				request.setAttribute("querystatus",true);
-			}else {
-				request.setAttribute("querystatus",false);
-			}
-		}
-		
-	}
-
-	public void createTask() {
-		
-		String jobId = request.getParameter("jobid");
-		String jobno = request.getParameter("jobno");
-		request.setAttribute("jobid",jobId);
-		request.setAttribute("jobno",jobno);
-	}
-
-	public boolean addTask() {
-		
-		boolean result = false;
-		
-		String jobid = request.getParameter("jobid");
-		
-		if(httpSession.getAttribute("branchid")!=null){
-					
-					
-					//GET TASKS
-
-					String[] assignto = request.getParameterValues("assignto");
-					String[] task = request.getParameterValues("task");
-					String[] description = request.getParameterValues("description");
-					String[] expecteddd = request.getParameterValues("expecteddeliverydatetask");
-					
-					//String[] dep = assignto.split(":");
-					List<Task> taskList = new ArrayList<Task>();
-						for (int i=0; i<assignto.length; i++ ) {
-							Task newTask = new Task();
-							Teacher teacher = new Teacher();
-							String[] staffDetails = assignto[i].split(":");
-							newTask.setTasks(task[i]);
-							newTask.setDescription(description[i]);
-							//newTask.setStaffid(Integer.parseInt(staffDetails[0]));
-							newTask.setExpecteddeliverydate(DateUtil.dateParserUpdateStd(expecteddd[i]));
-							newTask.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
-							teacher.setTid(Integer.parseInt(staffDetails[0]));
-							newTask.setTeacher(teacher);
-							newTask.setStatus("To Do");
-							taskList.add(newTask);
-						}
-					//
-					
-			 		Date date = new Date();
-			 		Calendar calendar = Calendar.getInstance();
-			 		calendar.setTime(date);
-			 		int year = Calendar.getInstance().get(Calendar.YEAR) % 100;
-			 		//int year = calendar.get(Calendar.YEAR);
-			 		int month = calendar.get(Calendar.MONTH);
-			 						
-						String resultTask = new JobDAO().addTask(taskList,Integer.parseInt(jobid));
-						
-						if(resultTask.equalsIgnoreCase("true")) {
-							result = true;
-						}
-				}
-		
-		return result;
 	}
 }

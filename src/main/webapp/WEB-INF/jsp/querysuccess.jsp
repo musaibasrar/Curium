@@ -77,7 +77,7 @@
 
             function viewJobs(){
                 var form1=document.getElementById("form1");
-                form1.action="/sla/QueryProcess/viewAllQueries";
+                form1.action="/sla/QueryProcess/viewAllTasks";
                 form1.submit();
             }
         </script>
@@ -102,7 +102,7 @@ for(Cookie cookie : cookies){
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="50" align="center" valign="middle"><p class="style1"> Job Created Successfully</p>
+        <td height="50" align="center" valign="middle"><p class="style1"> Job/Task Created Successfully</p>
         </td>
         
       </tr>

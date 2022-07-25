@@ -133,6 +133,12 @@ public class JobAction {
 		new JobService(request, response).completeQueries();
 		return viewAllQueries();
 	}
+	
+	@PostMapping("/CreateQuery")
+	private String createQuery() {
+		new StudentService(request, response).viewDetailsOfStudent();
+		return "createquery";
+	}
 
 	@RequestMapping(value = "/viewAllQueries", method = { RequestMethod.GET, RequestMethod.POST })
 	private String viewAllQueries() {
@@ -143,6 +149,9 @@ public class JobAction {
 			 result = new JobService(request, response).viewAllQueries(); 
          }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("staff")) {
         	 result = new JobService(request, response).viewAllQueriesDepartmentWise(); 
+         }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("reception")) {
+        	 result = new JobService(request, response).viewAllQueries();
+        	 return "queriesreadonly";
          }else {
         	 result = new JobService(request, response).viewAllQueries(); 
          }
@@ -152,14 +161,126 @@ public class JobAction {
   		}else{
   			return "error";
   		}
-		 
-		 
 	}
 
 	@PostMapping("/addQuery")
 	private String addQuery() {
 		
 		if(new JobService(request, response).addQuery()){
+			return "querysuccess";
+		}else{
+			return "error";
+		}
+	}
+	
+	
+	@RequestMapping(value = "/viewAllTasks", method = { RequestMethod.GET, RequestMethod.POST })
+	private String viewAllTasks() {
+		
+		boolean result = false;
+		
+		 if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			 result = new JobService(request, response).viewAllTasks(); 
+         }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("staff")) {
+        	 result = new JobService(request, response).viewAllTasksDepartmentWise(); 
+         }else if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("reception")) {
+        	 result = new JobService(request, response).viewAllTasks();
+        	 return "viewalltasksreadonly";
+         }else {
+        	 result = new JobService(request, response).viewAllTasks(); 
+         }
+		 
+		 if(result){
+  			return "viewalltasks";
+  		}else{
+  			return "error";
+  		}
+	}
+	
+	@PostMapping("/ViewTaskDetails")
+	private String viewTaskDetails() {
+		
+		if(new JobService(request, response).viewTaskDetails()){
+			return "tasks";
+		}else{
+			return "error";
+		}
+	}
+	
+	@PostMapping("/inProgressTasks")
+	private String inProgressTasks() {
+		new JobService(request, response).inProgressTasks();
+		String displayType = request.getParameter("display").toString();
+		
+		if(displayType.equalsIgnoreCase("viewall")) {
+			return viewAllTasks();
+		}else {
+			return viewTaskDetails();
+		}
+		
+	}
+	
+	@PostMapping("/toDoTasks")
+	private String toDoTasks() {
+		new JobService(request, response).toDoTasks();
+		String displayType = request.getParameter("display").toString();
+		
+		if(displayType.equalsIgnoreCase("viewall")) {
+			return viewAllTasks();
+		}else {
+			return viewTaskDetails();
+		}
+	}
+
+	@PostMapping("/cancelTasks")
+	private String cancelTasks() {
+		new JobService(request, response).cancelTasks();
+		String displayType = request.getParameter("display").toString();
+		
+		if(displayType.equalsIgnoreCase("viewall")) {
+			return viewAllTasks();
+		}else {
+			return viewTaskDetails();
+		}
+	}
+
+	@PostMapping("/completeTasks")
+	private String completeTasks() {
+		new JobService(request, response).completeTasks();
+		String displayType = request.getParameter("display").toString();
+		
+		if(displayType.equalsIgnoreCase("viewall")) {
+			return viewAllTasks();
+		}else {
+			return viewTaskDetails();
+		}
+	}
+	
+	@PostMapping("/updateTaskRemarks")
+	private String updateTaskRemarks() {
+		new JobService(request, response).updateQueryRemarks();
+		String displayType = request.getParameter("display").toString();
+		
+		if(displayType.equalsIgnoreCase("viewall")) {
+			return viewAllTasks();
+		}else {
+			return viewTaskDetails();
+		}
+	}
+	
+	
+	@PostMapping("/CreateTask")
+	private String createTask() {
+		new EmployeeService(request, response).ViewAllEmployee();
+		new JobService(request, response).createTask();
+		return "createtask";
+	}
+	
+	
+	@PostMapping("/addTask")
+	private String addTask() {
+		
+		if(new JobService(request, response).addTask()){
 			return "querysuccess";
 		}else{
 			return "error";

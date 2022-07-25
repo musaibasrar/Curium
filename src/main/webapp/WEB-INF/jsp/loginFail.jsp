@@ -128,13 +128,10 @@ form{
                     window.open('/sla/index_admin','_self');
                 }else if(type=='feescollector'){
                     window.open('/index_feescollector','_self');
-                }else if(type=='reception'){                    
-                   window.open('','_self');
-                    window.close();
-                    openIndexPage('/index_reception',screen.width,screen.height);
-                }
-                else if(type=='staff'){
-                	window.open('/index','_self');
+                }else if(type=='staff'){
+                	window.open('/sla/index_staff','_self');
+                }else if(type=='receiptionist'){
+                	window.open('/sla/index_receipt','_self');
                 }
             }
             else if(!flag1){

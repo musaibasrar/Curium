@@ -263,50 +263,11 @@
 
         </script>
         <script type="text/javascript">
-            var getMember;
-           
-            function getlist() {
-                
-       
-                try{
-                    var listitem = document.getElementById("advsearch").value;
-                    if (typeof XMLHttpRequest != "undefined") {
-                        getMember = new XMLHttpRequest();
-                   
-                    } else if (window.ActiveXObject) {
-                        getMember = new ActiveXObject("Microsoft.XMLHTTP");
-                    
-                    }
-
-                    getMember.onreadystatechange = processMemberData;
-                    getMember.open("POST", "detailslist?alphabet="+listitem+"",true);
-                    getMember.send(null);
-               
-                    
-                }catch(e){
-                    alert(e);
-                }
-            }
-
-            function processMemberData() {
-                if (getMember.readyState==4)
-                {
-                    if (getMember.status==200){
-
-                        var count = getMember.responseXML.getElementsByTagName("count")[0];
-                        var childCount=count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML=childCount;
-                        mdiv.style.visibility='visible';
-                        setTimeout('getdata();', 60000);
-
-
-                    }
-                }
-
-            }
-            
-
+        function createQuery(sid,branchid){
+            var form1=document.getElementById("form1");
+           form1.action="/sla/QueryProcess/CreateQuery?id="+sid+"&urlbranchid="+branchid+"";
+           form1.submit();
+        }
         </script>
         <script type="text/javascript">
             $(function(){
@@ -325,31 +286,7 @@
                     icons:{
                         primary: "ui-icon-pencil"
                     }
-                }).click(function(){
-	                	$( "#dialogquery" ).dialog( "open" );
-	                    return false;
-                	});
-                
-                $(function() {
-                    $( "#dialogquery" ).dialog({
-                        autoOpen: false,
-                        height: 380,
-                        width: 550,
-                        modal: true,
-                        buttons: {
-                            OK: function() {                              	
-                            	writeQuery(document.getElementById("assignto"),document.getElementById("filetype"),
-                            			document.getElementById("typeofwork"),document.getElementById("typeofworkcourt"),document.getElementById("typeofworknoncourt"),
-                            			document.getElementById("typeofworkcourtcases"),document.getElementById("typeofworkcourtdocs"),document.getElementById("typeofworknoncourtabt"),
-                            			document.getElementById("typeofworknoncourtcd"),document.getElementById("typeofworknoncourtsr"),document.getElementById("typeofworknoncourtdr"),
-                            			document.getElementById("typeofworknoncourtcs"),document.getElementById("typeofworknoncourturd"),document.getElementById("typeofworknoncourtrlo"),
-                            			document.getElementById("typeofworknoncourtmw"),document.getElementById("typeofworknoncourtno"),document.getElementById("expecteddeliverydate"));
-                                		$( this ).dialog( "close" );
-                         		   }
-                        }
-                    });
-                });
-                
+                })
                 
                 $(".appointmentbutton").button({
                     icons:{
@@ -806,6 +743,7 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">UID</th>
                             <th title="click to sort" class="headerText">Name</th>
+                            <th title="click to sort" class="headerText">Contact Number</th>
                             <th title="click to sort" class="headerText">Job/Appt.</th>
                         </tr>
                     </thead>
@@ -817,7 +755,8 @@ for(Cookie cookie : cookies){
                                 <td class="dataText" style="text-align: center;"><input type="checkbox" id = "studentid_${Parents.student.sid}" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.pid}:${Parents.contactnumber}:${Parents.student.name}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/sla/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.studentexternalid}"/></a></td>
                                 <td class="dataText"><c:out value="${Parents.student.name}"/></td>
-                                <td class="dataText" style='white-space: nowrap'><button id="query_${Parents.student.sid}" class="querybutton" onclick="check(${Parents.student.sid})">Job</button><button id="appointment_${Parents.student.sid}" class="appointmentbutton" onclick="check(${Parents.student.sid})">Appt.</button></td>
+                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.contactnumber}"/></td>
+                                <td class="dataText" style='white-space: nowrap'><button id="query_${Parents.student.sid}" class="querybutton" onclick="createQuery(${Parents.student.sid},${Parents.student.branchid})">Job</button><button id="appointment_${Parents.student.sid}" class="appointmentbutton" onclick="check(${Parents.student.sid})">Appt.</button></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -881,319 +820,6 @@ for(Cookie cookie : cookies){
 						</table>
 						
 					</div>
-					
-					
-					<div id="dialogquery" title="Job">
-				
-           		 
-		           		<table style="width: auto;height: auto;">
-		           		
-		           		
-		           				<tr>
-									<td><br /></td>
-								</tr>
-
-								<tr>
-									<td class="alignLeft">Assign To:</td>
-									<td><label> <select name="assignto" id="assignto" style="width: 250px;height: 25px;">
-											<option selected></option>
-
-												<c:forEach items="${employeeList}" var="employeeList">
-
-													<option value="${employeeList.tid}:${employeeList.teachername}:${employeeList.contactnumber}">
-														<c:out value="${employeeList.teachername}" />
-													</option>
-
-
-											</c:forEach>
-
-										</select>
-									</label></td>
-								</tr>
-								
-								<tr>
-									<td><br></td>
-								</tr>
-								
-								<tr>
-									<td class="alignLeft">Type of Job:</td>
-									<td><label> <select name="typeofwork" id="typeofwork" style="width: 250px;height: 25px;" onchange="choosetypeofwork()">
-											<option selected></option>
-											<option value="Court">Court</option>
-											<option value="Non Court">Non Court</option>
-										</select>
-									</label></td>
-								</tr>
-								
-								<tr>
-									<td><br></td>
-								</tr>
-								
-								
-								<tr style="display: none;" id="typeofworkcourttd">
-									<td class="alignLeft">Type of Court Jobs:</td>
-									<td><label> <select name="typeofworkcourt" id="typeofworkcourt" style="width: 250px;height: 25px;" onchange="choosecourtwork()">
-											<option selected></option>
-											<option value="Cases">Cases</option>
-											<option value="Certified Documents">Certified Documents</option>
-										</select>
-									</label></td>
-								</tr>
-																
-									<tr style="display: none;" id="typeofworknoncourttd">
-									<td class="alignLeft">Type of Non-Court Jobs:</td>
-									<td><label> <select name="typeofworknoncourt" id="typeofworknoncourt" style="width: 250px;height: 25px;" onchange="selectnoncourtwork()">
-											<option selected></option>
-											<option value="Arbitration">Arbitration</option>
-											<option value="Certified Documents">Certified Documents</option>
-											<option value="Sub Registrar">Sub Registrar</option>
-											<option value="District Registrar">District Registrar</option>
-											<option value="Co-operative Society">Co-operative Society</option>
-											<option value="Unregistered Documents">Unregistered Documents</option>
-											<option value="Reading & Legal Opinion">Reading & Legal Opinion</option>
-											<option value="Mutation Work">Mutation Work</option>
-											<option value="Notice">Notice</option>
-										</select>
-									</label></td>
-								</tr>
-								
-								<tr>
-									<td><br></td>
-								</tr>
-								
-								
-								<tr style="display: none;" id="typeofworkcourtcasestr">
-									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworkcourtcases" id="typeofworkcourtcases" style="width: 250px;height: 25px;">
-											<option selected></option>
-											<option value="SC">Supreme Court Case</option>
-											<option value="HC">High Court Case</option>
-											<option value="DC">District Court Case</option>
-											<option value="KAT">Karantaka Administrative Tribunal Case</option>
-											<option value="WT">Waqf Tribunal Case</option>
-											<option value="FC">Family Court Case</option>
-											<option value="RC">Revenue Courts Case</option>
-											<option value="CC">Consumer Court Case</option>
-											<option value="CSC">Co-Societies Court Case</option>
-											<option value="AOC">Any Other Court Case</option>
-										</select>
-									</label></td>
-								</tr>
-								
-								<tr style="display: none;" id="typeofworkcourtdocstr">
-									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworkcourtdocs" id="typeofworkcourtdocs" style="width: 250px;height: 25px;">
-											<option selected></option>
-											<option value="SCD">Supreme Court Documents</option>
-											<option value="HCD">High Court Documents</option>
-											<option value="DCD">District Court Documents</option>
-											<option value="KATD">Karantaka Administrative Tribunal Documents</option>
-											<option value="WTD">Waqf Tribunal Documents</option>
-											<option value="FCD">Family Court Documents</option>
-											<option value="RCD">Revenue Courts Documents</option>
-											<option value="CCD">Consumer Court Documents</option>
-											<option value="CSCD">Co-Societies Court Documents</option>
-											<option value="AOCD">Any Others Court  Documents</option>
-										</select>
-									</label></td>
-								</tr>
-								
-								<tr style="display: none;" id="typeofworknoncourtabttr">
-									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtabt" id="typeofworknoncourtabt" style="width: 250px;height: 25px;">
-											<option selected></option>
-											<option value="ABT">Arbitration</option>
-										</select>
-									</label></td>
-								</tr>
-								
-								
-								<tr style="display: none;" id="typeofworknoncourtcdtr">
-									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtcd" id="typeofworknoncourtcd" style="width: 250px;height: 25px;">
-											<option selected></option>
-											<option value="CPD">Corporation Documents</option>
-											<option value="CTSD">CTS Documents</option>
-											<option value="EC">Encumberance Certificate</option>
-											<option value="LSD">Land Survey Documents</option>
-											<option value="DRD">District Registrar Documents</option>
-											<option value="RED">Revenue Documents</option>
-										</select>
-									</label></td>
-								</tr>
-								
-								<tr style="display: none;" id="typeofworknoncourtsrtr">
-									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtsr" id="typeofworknoncourtsr" style="width: 250px;height: 25px;">
-											<option selected></option>
-											<option value="AD">Adoption Deed</option>
-											<option value="ASA">Agriculture Sale Agreement</option>
-											<option value="ASAGPA">Agriculture Sale Agreement & GPA</option>
-											<option value="ASD">Agriculture Sale Deed</option>
-											<option value="AT">Amendment of Trust</option>
-											<option value="ASSD">Assignment Deed</option>
-											<option value="CD">Cancellation Deed</option>
-											<option value="COND">Consenting Deed</option>
-											<option value="ED">Easementary Deed</option>
-											<option value="EXD">Exchange Deed</option>
-											<option value="GPA">General Power of Attorney</option>
-											<option value="GD">Gift Deed</option>
-											<option value="SA">House plot NA land Sale Agreements</option>
-											<option value="SD">House plot NA land Sale Deed</option>
-											<option value="JDA">Joint Development and GPA</option>
-											<option value="LD">Lease Deed</option>
-											<option value="MC">Marriage Certificate</option>
-											<option value="PTD">Partition Deed</option>
-											<option value="RCD">Reconveyance Deed</option>
-											<option value="RFD">Rectification Deed</option>
-											<option value="RD">Release Deed</option>
-											<option value="STD">Settlement Deed</option>
-											<option value="TD">Title Deposit</option>
-											<option value="TRUST">Trust</option>
-											<option value="WN">Waqfnama</option>
-											<option value="WILL">Will</option>
-											<option value="TRD">Transfer Deed</option>
-											<option value="PVS">Property Valuation Statement</option>
-											<option value="OD">Other Deeds</option>
-										</select>
-									</label></td>
-								</tr>
-								
-								
-								<tr style="display: none;" id="typeofworknoncourtdrtr">
-									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtdr" id="typeofworknoncourtdr" style="width: 250px;height: 25px;">
-											<option selected></option>
-											<option value="DP">Dissolution of Partnership</option>
-											<option value="GPAAU">GPA Authentication</option>
-											<option value="PD">Partnership Deed</option>
-											<option value="RP">Reconstitution of Partnership</option>
-										</select>
-									</label></td>
-								</tr>
-								
-								<tr style="display: none;" id="typeofworknoncourtcstr">
-									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtcs" id="typeofworknoncourtcs" style="width: 250px;height: 25px;">
-											<option selected></option>
-											<option value="CSBL">Co-operative Society Bye Laws</option>
-											<option value="SBL">Society Bye Laws</option>
-											<option value="MLD">Money Lending Liecense</option>
-										</select>
-									</label></td>
-								</tr>
-								
-								
-								<tr style="display: none;" id="typeofworknoncourturdtr">
-									<td class="alignLeft">Type of Cases:</td>
-										<td><label> <select name="typeofworknoncourturd" id="typeofworknoncourturd" style="width: 250px;height: 25px;">
-													<option selected></option>
-													<option value="AF">Affidavit</option>
-													<option value="BTA">Business Transfer Agreement</option>
-													<option value="CA">Construction Agreement</option>
-													<option value="DD">Divorce Deed</option>
-													<option value="FA">Franchise Agreement</option>
-													<option value="HL">Hand Loan</option>
-													<option value="ID">Investment Deed</option>
-													<option value="KN">Khulanama</option>
-													<option value="MOU">MOU</option>
-													<option value="MJDA">MOU for JDA</option>
-													<option value="MN">Mubaratnama</option>
-													<option value="NASA">Notary Agriculture Sale Agreement</option>
-													<option value="NFS">Notary Family Settlement</option>
-													<option value="NGD">Notary Gift Deed</option>
-													<option value="NSA">Notary House plot NA land Sale Agreement</option>
-													<option value="NL">Notary Lease</option>
-													<option value="NSD">Notary Sale Deed</option>
-													<option value="NW">Notary Will</option>
-													<option value="RPT">Receipts</option>
-													<option value="RTR">RERA Title Report</option>
-													<option value="RES">Resolution</option>
-													<option value="SMP">Sale of Moveable Property</option>
-													<option value="TN">Talaqnama</option>
-													<option value="TR">Title Report</option>
-													<option value="PVS">Property Valuation Statement</option>
-					
-											</select>
-									</label></td>
-								</tr>
-								
-								
-								<tr style="display: none;" id="typeofworknoncourtrlotr">
-									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtrlo" id="typeofworknoncourtrlo" style="width: 250px;height: 25px;">
-											<option selected></option>
-											<option value="ILO">Inheritance Legal Opinion</option>
-											<option value="LO">Legal Opinion</option>
-											<option value="READ">Reading</option>
-										</select>
-									</label></td>
-								</tr>
-								
-								<tr style="display: none;" id="typeofworknoncourtmwtr">
-									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtmw" id="typeofworknoncourtmw" style="width: 250px;height: 25px;">
-											<option selected></option>
-											<option value="CPM">Corporation Mutation</option>
-											<option value="CTSM">CTS Mutation</option>
-											<option value="GM">GESCOM Mutation</option>
-											<option value="PM">Panchayat Mutation</option>
-										</select>
-									</label></td>
-								</tr>
-								
-								<tr style="display: none;" id="typeofworknoncourtnotr">
-									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtno" id="typeofworknoncourtno" style="width: 250px;height: 25px;">
-											<option selected></option>
-											<option value="PN">Paper Notice</option>
-											<option value="LN">Legal Notice</option>
-											<option value="NC">Name Change</option>
-										</select>
-									</label></td>
-								</tr>
-								
-								<tr>
-									<td><br></td>
-								</tr>
-								
-									<tr>
-										
-										<td class="alignLeft">File Type: &nbsp;</td>
-	
-										<td ><label>
-											<select name="filetype" id="filetype" style="width: 250px;height: 25px;">
-											<option selected></option>
-											<option value="F">F</option>
-											<option value="OF">OF</option>
-											<option value="CF">CF</option>
-											<option value="WA">WA</option>
-										</select> 
-												<!-- <input type="text" name="filetype" id="filetype"/> -->
-										</label></td>
-								</tr>
-								
-								<tr>
-									<td><br></td>
-								</tr>
-								
-									<tr>
-										
-										<td class="alignLeft">Expected Delivery Date: &nbsp;</td>
-	
-										<td ><label>
-											<input type="text"  name="expecteddeliverydate"
-									class="textField" style="font-size: 14px;"
-									id="expecteddeliverydate" autocomplete="false" required
-									data-validate="validate(required)">
-										</label></td>
-								</tr>
-
-						</table>
-						
-					</div>
-            
-            
         </form>
     </body>
 </html>

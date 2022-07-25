@@ -131,6 +131,8 @@ form{
                     window.open('/index_feescollector','_self');
                 }else if(type=='staff'){
                 	window.open('/sla/index_staff','_self');
+                }else if(type=='reception'){
+                	window.open('/sla/index_reception','_self');
                 }
             }
             else if(!flag1){

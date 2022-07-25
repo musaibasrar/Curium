@@ -384,7 +384,7 @@
 			"bLengthChange" : false,
 			"bFilter" : true,
 			"bSort" : true,
-			"bInfo" : false,
+			"bInfo" : true,
 			"bAutoWidth" : false
 		});
 	});
@@ -424,8 +424,9 @@
 		function updateQueryRemarks(queryRemarksAdded,queryRemarks, queryid) {
 			var form1 = document.getElementById("form1");
 			var remarksAdded = queryRemarks.value;
-			var result = " sla" +" "+ remarksAdded;
-			form1.action = "/sla/QueryProcess/updateQueryRemarks?queryremarks="+result+"&queryid="+queryid.value+"";
+			var loginusername = username.value;
+			var result = " sla" +" "+loginusername+":  "+ remarksAdded;
+			form1.action = "/sla/QueryProcess/updateQueryRemarks?queryremarks="+result+"&queryid="+queryid.value+"&jobid="+queryid.value+"";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -575,7 +576,7 @@
                     modal: true,
                     buttons: {
                         Update: function() {
-                        	updateQueryRemarks(document.getElementById("queryremarksadded"),document.getElementById("queryremarks"),document.getElementById("queryid"));
+                        	updateQueryRemarks(document.getElementById("queryremarksadded"),document.getElementById("queryremarks"),document.getElementById("queryid"),document.getElementById("username"));
                             		$( this ).dialog( "close" );
                      		   }
                     }
@@ -589,6 +590,19 @@
                
                //window.location.reload();
            }
+            
+            function viewTaskDetails(jobid){
+               var form1=document.getElementById("form1");
+               form1.action="/sla/QueryProcess/ViewTaskDetails?jobid="+jobid+"";
+               form1.submit();
+           }
+            
+            function createTask(jobid,jobno){
+                var form1=document.getElementById("form1");
+                form1.action="/sla/QueryProcess/CreateTask?jobid="+jobid+"&jobno="+jobno+"";
+                form1.submit();
+            }
+            
         </script>
 
 
@@ -637,6 +651,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Created Date</th>
                             <th title="click to sort" class="headerText">Updated Date</th>
                             <th title="click to sort" class="headerText">Expected Delivery</th>
+                            <th title="click to sort" class="headerText">Task</th>
                             <!-- <th title="click to sort" class="headerText">Details</th> -->
                         </tr>
                     </thead>
@@ -646,35 +661,54 @@ for(Cookie cookie : cookies){
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                             	
                             	<td class="dataText"><input type="checkbox" id = "<c:out value="${query.id}"/>" class = "chcktbl"  name="queryids"  value="<c:out value="${query.id}"/>"/></td>
-                            	<td class="dataText"><c:out value="${query.id}"/></td>
+                            	<td class="dataText"><c:out value="${query.id}"/><input type="hidden" id="username" name="username" value="${username}"> </td></td>
                             	<c:if test="${query.status == 'To Do' }">
-                                	<td class="dataText" style="color: #cb1b09;font-weight: bold;"><c:out value="${query.externalid}"/></td>
+                                	<td class="dataText" style="color: #cb1b09;font-weight: bold;">
+                                	<a class="dataTextInActive" style="color: #cb1b09;font-weight: bold;cursor: pointer;" onclick="viewTaskDetails(${query.id})">${query.externalid}</a>
+                                	</td>
                                 </c:if>
                                 <c:if test="${query.status == 'In Progress' }">
-                                	<td class="dataText" style="color: #0001ff;font-weight: bold;"><c:out value="${query.externalid}"/></td>
+                                	<td class="dataText" style="color: #0001ff;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: #0001ff;font-weight: bold;cursor: pointer;" onclick="viewTaskDetails(${query.id})">${query.externalid}</a>
+                                	</td>
                                 </c:if>
                                 <c:if test="${query.status == 'Completed' }">
-                                	<td class="dataText" style="color: #65a358;font-weight: bold;"><c:out value="${query.externalid}"/></td>
+                                	<td class="dataText" style="color: #65a358;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: #65a358;font-weight: bold;cursor: pointer;" onclick="viewTaskDetails(${query.id})">${query.externalid}</a>
+                                	</td>
                                 </c:if>
                                 <c:if test="${query.status == 'Cancelled' }">
-                                	<td class="dataText" style="color: grey;font-weight: bold;"><c:out value="${query.externalid}"/></td>
+                                	<td class="dataText" style="color: grey;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: grey;font-weight: bold;cursor: pointer;" onclick="viewTaskDetails(${query.id})">${query.externalid}</a>
+                                	</td>
                                 </c:if>
-                               <td class="dataText"><a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${query.parent.student.sid},${query.parent.student.branchid})"><c:out value="${query.parent.student.name}"/></a>
+                               <td class="dataText"><a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${query.parent.student.sid},${query.parent.student.branchid})"><c:out value="${query.parent.student.name}"/></a></td>
+                                
+                                <td class="dataText" style="text-align: left">
+                                
+                                			<c:if test="${not empty query.tasks}">
+    											 <c:forEach items="${query.tasks}" var="task" varStatus="status">
+		                                				${status.index+1}.&nbsp;<c:out value="${task.teacher.teachername}"/><br>
+		                                		</c:forEach>
+											</c:if>
+											<c:if test="${empty query.tasks}">
+    											<c:out value="${query.teacher.teachername}"/>
+											</c:if>
+		                               
+                                
+                                <input type="hidden" id="contactno_${query.id}" name="contactno_${query.id}" value="${query.parent.contactnumber}">
+                                </td>
                                 <c:if test="${not empty query.feedback}">
                                 	<td class="dataText"><a href="#" onclick="openPopup('${query.feedback}','${query.id}')" style="color:#eb6000;">View</a></td>
                                 </c:if>
                                 <c:if test="${empty query.feedback}">
                                 	<td class="dataText"><a href="#" onclick="openPopup('${query.feedback}','${query.id}')" style="color:#4b6a84;">Add</a></td>
                                 </c:if>
-                                
-                                
-                                <td class="dataText"><c:out value="${query.teacher.teachername}"/></td>
-	                                <input type="hidden" id="contactno_${query.id}" name="contactno_${query.id}" value="${query.parent.contactnumber}">
-                                </td>
                                 <td class="dataText"><c:out  value="${query.status}"/></td>
                                  <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.expecteddeliverydate}"/></td>
+                                <td class="dataText"><a href="#" onclick="createTask('${query.id}','${query.externalid}')" style="color:#eb6000;">Create Task</a></td>
                                 <%-- <td class="dataText"><a href="#" onclick="openPopup(${query.id})" style="color:#eb6000;">View Details</a></td> --%>
                             </tr>
                         </c:forEach>
