@@ -62,7 +62,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/noman/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -77,12 +77,12 @@ for(Cookie cookie : cookies){
     <frameset    rows="55,*"frameborder="0" border="0" framespacing="0"  >
     
 		   <c:if test="${(userType == 'admin')}">
-			    <frame   src="/roshan/header_admin"   name="topFrame" scrolling="NO" noresize frameborder="0">
+			    <frame   src="/noman/header_admin"   name="topFrame" scrolling="NO" noresize frameborder="0">
 		   </c:if>
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/roshan/left_admin" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/roshan/welcome" name="mainFrame" scrolling="yes" />
+                <frame  src="/noman/left_admin" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame src="/noman/welcome" name="mainFrame" scrolling="yes" />
             </frameset>
 
    </frameset>
