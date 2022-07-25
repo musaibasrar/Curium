@@ -292,18 +292,23 @@ public class JspController {
 		return "studentsadmissionreports";
 	}
 	
-	@GetMapping("/studentspendingadmissionreports.jsp")
+	@GetMapping("/studentspendingadmissionreports")
 	public String getStudentsPendingAdmissionReports() {
 		return "studentspendingadmissionreports";
 	}
 
-	@GetMapping("/feesstampdue.jsp")
+	@GetMapping("/feesstampdue")
 	public String getfeesStampDue() {
 		return "feesstampdue";
 	}
 	
-	@GetMapping("/printadmissionform.jsp")
+	@GetMapping("/printadmissionform")
 	public String getPrintAdmissionForm() {
 		return "printadmissionform";
+	}
+	
+	@GetMapping("/importfile")
+	public String getImportFile() {
+		return "importfile";
 	}
 }
