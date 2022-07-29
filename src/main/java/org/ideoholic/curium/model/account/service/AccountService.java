@@ -62,7 +62,7 @@ public class AccountService {
 			financialaccountingyear.setFinancialenddate(DateUtil.dateParserUpdateStd(request.getParameter("todate")));
 			financialaccountingyear.setActive(DataUtil.emptyString(request.getParameter("active")));
 			financialaccountingyear.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			return new AccountDAO().create(financialaccountingyear);
+			return new AccountDAO().create(financialaccountingyear, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		}
 
 		return false;
@@ -513,7 +513,70 @@ public class AccountService {
 
 	public boolean balanceSheet() {
 		
+		
 		//Group 1
+				BigDecimal liabilities = BigDecimal.ZERO;
+				Map<String,BigDecimal> liabilitiesLedgerAccount = new HashMap<String, BigDecimal>();
+				
+				BigDecimal reserves = BigDecimal.ZERO;
+				Map<String,BigDecimal> reservesLedgerAccount = new HashMap<String, BigDecimal>();
+				
+				//Group 2
+				BigDecimal assets = BigDecimal.ZERO;
+				Map<String,BigDecimal> assetsLedgerAccount = new HashMap<String, BigDecimal>();
+				
+				
+				List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
+				accountDetailsBalance = new AccountDAO().getAccountdetailsbalance(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				
+				
+				for (Accountdetailsbalance accountdetails : accountDetailsBalance) {
+					int groupId = accountdetails.getAccountDetails().getAccountGroupMaster().getAccountgroupid();
+
+					switch(groupId){
+					case 1: 
+							assets = assets.add(accountdetails.getCurrentbalance());
+							if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+								assetsLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+							}
+							break;
+					case 2: 
+							liabilities = liabilities.add(accountdetails.getCurrentbalance());
+							if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+								liabilitiesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+							}	
+							break;
+							
+					case 3:
+							reserves = reserves.add(accountdetails.getCurrentbalance());
+							if(accountdetails.getCurrentbalance().compareTo(BigDecimal.ZERO) != 0 ) {
+								reservesLedgerAccount.put(accountdetails.getAccountDetails().getAccountname(), accountdetails.getCurrentbalance());
+							}
+							break;
+
+					default:
+							
+					}
+				}
+				
+				//group 1
+				request.setAttribute("liabilities", liabilities);
+				request.setAttribute("liabilitiesLedgeraccount", liabilitiesLedgerAccount);
+				request.setAttribute("reserves", reserves);
+				request.setAttribute("reservesLedgeraccount", reservesLedgerAccount);
+					
+				//group 2
+				request.setAttribute("assets", assets);
+				request.setAttribute("assetsLedgeraccount", assetsLedgerAccount);
+
+				
+				request.setAttribute("grouponetotal", liabilities);
+				request.setAttribute("grouponetotalreserves", reserves);
+				request.setAttribute("grouptwototal", assets);
+				
+				return true;
+		/*
+		//Group 1 
 		BigDecimal capital = BigDecimal.ZERO;
 		Map<String,BigDecimal> capitalLedgerAccount = new HashMap<String, BigDecimal>();
 		
@@ -644,7 +707,7 @@ public class AccountService {
 			
 		}
 		
-		return true;
+		return true; */
 	}
 
 
@@ -963,6 +1026,10 @@ public class AccountService {
 		request.setAttribute("ledgertransactions", voucherMap);
 		request.setAttribute("ledgername", accountIdName[1]);
 		
+		request.setAttribute("accountid", accountDetails);
+		request.setAttribute("fromdate", DataUtil.emptyString(request.getParameter("fromdate")));
+		request.setAttribute("todate", DataUtil.emptyString(request.getParameter("todate")));
+		
 		return true;
 		
 		}
@@ -1067,10 +1134,9 @@ public class AccountService {
 		String accountDetails = DataUtil.emptyString(request.getParameter("accountidselected"));
 		String[] accountIdName = accountDetails.split(":");
 		int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
-		String fromDate = DateUtil
-				.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdateselected")));
-		String toDate = DateUtil
-				.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todateselected")));
+		String fromDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("fromdateselected")));
+		String toDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(request.getParameter("todateselected")));
+		
 		if (httpSession.getAttribute(BRANCHID) != null) {
 
 			String twoAccounts = null;
