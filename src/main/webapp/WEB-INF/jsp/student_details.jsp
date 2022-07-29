@@ -1167,6 +1167,7 @@ for(Cookie cookie : cookies){
                                 <button id="modify" type="submit">Modify</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button id="cancel" >Cancel</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button id="print" >Print</button>
                                 <!-- <button id="print" onclick= "printPage">Print</button> -->
                             </td>
