@@ -117,4 +117,28 @@ public class DocumentAction {
 		}
         return error;
 	}
+	
+	@GetMapping("/studentsAdmissionReports")
+	public String studentsAdmissionReports() {
+		new StandardService(request, response).viewClasses(); 
+		return "studentsadmissionreports";
+	}
+	
+	@GetMapping("/studentsPendingAdmissionReports")
+	public String studentsPendingAdmissionReports() {
+		new StandardService(request, response).viewClasses(); 
+		return "studentspendingadmissionreports";
+	}
+	
+	@PostMapping("/multiClassSearchAdmissoinReport")
+	public String multiClassSearchAdmissoinReport() {
+		new DocumentService(request, response).multiClassSearchAdmissoinReport(); 
+		return "studentsadmissionreports";
+	}
+	
+	@PostMapping("/multiClassSearchPendingAdmissoinReport")
+	public String multiClassSearchPendingAdmissoinReport() {
+		new DocumentService(request, response).multiClassSearchPendingAdmissoinReport(); 
+		return "studentspendingadmissionreports";
+	}
 }
