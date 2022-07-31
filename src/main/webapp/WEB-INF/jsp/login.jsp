@@ -129,8 +129,8 @@ form{
                     window.open('/kwrs/index_admin','_self');
                 }else if(type=='feescollector'){
                     window.open('/index_feescollector','_self');
-                }else if(type=='staff'){
-                	window.open('/index','_self');
+                }else if(type=='officeadmin'){
+                	window.open('/roshan/index_officeadmin','_self');
                 }
             }
             else if(!flag1){
