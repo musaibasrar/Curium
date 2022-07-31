@@ -583,6 +583,8 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
+                            <th title="click to sort" class="headerText">Father Name&nbsp;</th>
+                            <th title="click to sort" class="headerText">Contact Number&nbsp;</th>
                             <th title="click to sort" class="headerText">Promotion Year&nbsp;</th>
                             <th title="click to sort" class="headerText">Admission Year&nbsp;</th>
                             <th title="click to sort" class="headerText">Admission Date</th>
@@ -597,19 +599,21 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
 								<td class="dataText"><c:out value="${status.index+1}"/></td>
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/lflower/StudentProcess/ViewDetails?id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
-                                <td class="dataText"><c:out value="${Student.name}"/></td>
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.student.sid}"/>"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/roshan/StudentProcess/ViewDetails?id=<c:out value='${Student.student.sid}'/>"><c:out value="${Student.student.admissionnumber}"/></a></td>
+                                <td class="dataText"><c:out value="${Student.student.name}"/></td>
                                 <td class="dataText">
-                                <c:forEach var="splt" items="${fn:split(Student.classstudying,'--')}">
+                                <c:forEach var="splt" items="${fn:split(Student.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
-								<input type="hidden" id="classstudyingone" name="classstudying" value="${Student.classstudying}"/>
-								 <input type="hidden" id="classstudying" name="classstudying_${Student.sid}" value="${Student.classstudying}"/>
+								<input type="hidden" id="classstudyingone" name="classstudying" value="${Student.student.classstudying}"/>
+								 <input type="hidden" id="classstudying" name="classstudying_${Student.student.sid}" value="${Student.student.classstudying}"/>
                                 </td>
-                                <td class="dataText"><c:out  value="${Student.promotedyear}"/></td>
-                                <td class="dataText"><c:out  value="${Student.yearofadmission}"/></td>
-                                <td class="dataText"><c:out  value="${Student.admissiondate}"/></td>
+                                <td class="dataText"><c:out  value="${Student.fathersname}"/></td>
+                                <td class="dataText"><c:out  value="${Student.contactnumber}"/></td>
+                                <td class="dataText"><c:out  value="${Student.student.promotedyear}"/></td>
+                                <td class="dataText"><c:out  value="${Student.student.yearofadmission}"/></td>
+                                <td class="dataText"><c:out  value="${Student.student.admissiondate}"/></td>
                                 
 
                             </tr>
