@@ -391,7 +391,7 @@
 		
 		if(confirm('Are you sure, you want to cancel the Journal Voucher?')){
 			var form1 = document.getElementById("form1");
-			form1.action="/lflower/AccountProcess&voucherType=4/cancelVoucher";
+			form1.action="/lflower/AccountProcess/cancelVoucher?voucherType=4";
 			form1.method = "POST";
 			form1.submit();	
 		}

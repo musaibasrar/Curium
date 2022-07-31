@@ -393,7 +393,7 @@
 		
 		if(confirm('Are you sure, you want to cancel the Contra Voucher?')){
 			var form1 = document.getElementById("form1");
-			form1.action="/lflower/AccountProcess&voucherType=3/cancelVoucher";
+			form1.action="/lflower/AccountProcess/cancelVoucher?voucherType=3";
 			form1.method = "POST";
 			form1.submit();	
 		}

@@ -390,7 +390,7 @@
 		
 		if(confirm('Are you sure, you want to cancel the Receipt Voucher?')){
 			var form1 = document.getElementById("form1");
-			form1.action="/lflower/AccountProcess&voucherType=1/cancelVoucher";
+			form1.action="/lflower/AccountProcess/cancelVoucher?voucherType=1";
 			form1.method = "POST";
 			form1.submit();	
 		}
