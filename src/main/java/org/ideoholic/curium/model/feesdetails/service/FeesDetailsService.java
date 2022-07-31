@@ -82,8 +82,8 @@ public class FeesDetailsService {
 		boolean successResult = false;
 		List<Receiptinfo> listOfFeesDetails = new ArrayList<Receiptinfo>();
 		Receiptinfo receiptInfo = new Receiptinfo();
-		List<Student> listOfStudentDetails = new ArrayList<Student>();
-		Student student = new Student();
+		List<Parents> listOfStudentDetails = new ArrayList<Parents>();
+		Parents student = new Parents();
 
 		if (feesIds != null) {
 			for (String id : feesIds) {
@@ -92,7 +92,7 @@ public class FeesDetailsService {
 					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
 					listOfFeesDetails.add(receiptInfo);
 					
-					student = new studentDetailsDAO().readUniqueObject(receiptInfo.getSid());
+					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
 					listOfStudentDetails.add(student);
 				}
 
@@ -113,7 +113,7 @@ public class FeesDetailsService {
 	}
 	
 	
-	public boolean exportDataToExcel(List<Receiptinfo> listOfFeesDetails, List<Student> listOfStudent)
+	public boolean exportDataToExcel(List<Receiptinfo> listOfFeesDetails, List<Parents> listOfStudent)
 			throws Exception {
 
 		boolean writeSucees = false;
@@ -125,14 +125,20 @@ public class FeesDetailsService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Admission Number", "Date of Fees", "Total"});
+					new Object[] { "Admission Number","UID","STS","Student Name","Father Name","Contact Number", "Date of Fees", "Total"});
 			int i = 1;
 			for (Receiptinfo feesDetails : listOfFeesDetails) {
 				
-				for (Student studentDetails : listOfStudent) {
+				for (Parents studentDetails : listOfStudent) {
 				
 					data.put(Integer.toString(i),new Object[] { 
-						studentDetails.getAdmissionnumber(), feesDetails.getDate().toString(),
+						studentDetails.getStudent().getAdmissionnumber(), 
+						studentDetails.getStudent().getStudentexternalid(), 
+						studentDetails.getStudent().getSts(), 
+						studentDetails.getStudent().getName(), 
+						studentDetails.getFathersname(), 
+						studentDetails.getContactnumber(), 
+						feesDetails.getDate().toString(),
 						feesDetails.getTotalamount() });
 				}
 				i++;
