@@ -614,7 +614,7 @@
 							</label></td>
 
 							<td  class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Male<input
+							<td  height="30" class="alignLeft">&nbsp;Male<input required
 								type="checkbox" value="Male" name="gender" id="yes:male"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
 								type="checkbox" value="Female" name="gender" id="no:male"
@@ -683,7 +683,7 @@
 
 
 							<td class="alignLeft">Studying in Class&nbsp;</td>
-							<td ><label> <select name="addclass"
+							<td ><label> <select name="addclass" required
 									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -711,7 +711,7 @@
 							<td  class="alignLeft" style="padding-left: 20px;">Admitted in Class &nbsp;
 							</td>
 
-							<td ><label> <select name="admclassE"
+							<td ><label> <select name="admclassE" required
 									id="admclassE" style="width: 186px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -1000,7 +1000,7 @@
 							<td  class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
 							 <td>
-                                        <label> <select name="yearofadmission" id="yearofadmission" required
+                                        <label> <select name="yearofadmission" id="yearofadmission"
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${currentAcademicYear}</option>
 										<option>2025/26</option>
