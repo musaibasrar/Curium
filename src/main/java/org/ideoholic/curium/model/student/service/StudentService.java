@@ -1548,11 +1548,12 @@ public class StudentService {
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
 						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getStudentexternalid()),
-						DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
+								 DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
 								 DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getDateofbirth()),
 								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
+								 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
 								 DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getAdmissiondate()),
 								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
 								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
