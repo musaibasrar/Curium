@@ -536,6 +536,7 @@ public class FeesCollectionService {
 	public void getFeesReport() {
 		
 		
+		String academicYear = request.getParameter("academicyear");
 		//Get Students
 		
 		List<Parents> searchStudentList = new ArrayList<Parents>();
@@ -584,12 +585,16 @@ public class FeesCollectionService {
 				StudentFeesReport studentFeesReport = new StudentFeesReport();
 				
 				long id = parents.getStudent().getSid();
-				List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+				List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, academicYear);
 				
-				studentFeesReport.setStudent(parents.getStudent());
-				studentFeesReport.setStudentFeesStructure(feesstructure);
-				
-				studentFeesReportList.add(studentFeesReport);
+				if (feesstructure.size() > 0) {
+					
+					studentFeesReport.setParents(parents);
+					studentFeesReport.setStudentFeesStructure(feesstructure);
+					
+					studentFeesReportList.add(studentFeesReport);
+					
+				}
 			}
 		
 			httpSession.setAttribute("studentfeesreportlist", studentFeesReportList);
@@ -661,7 +666,7 @@ public class FeesCollectionService {
 				List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id,
 						httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
-				studentFeesReport.setStudent(parents.getStudent());
+				studentFeesReport.setParents(parents);
 				studentFeesReport.setStudentFeesStructure(feesstructure);
 
 				studentFeesReportList.add(studentFeesReport);
@@ -834,7 +839,7 @@ public class FeesCollectionService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Registration Number", "Admission Number","Student Name", "Class & Sec", "Fees Details", "Total Due Summary", "Total Fees Summary"});
+					new Object[] { "UID", "Admission Number","Student Name", "Class & Sec","Father Name", "Contact Number", "Fees Details", "Total Due Summary", "Total Fees Summary"});
 			int i = 1;
 			for (StudentFeesReport studentFeesReport : studentFeesReportList) {
 				
@@ -852,9 +857,11 @@ public class FeesCollectionService {
 				}
 				
 				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(studentFeesReport.getStudent().getRegistrationnumber()),  DataUtil.emptyString(studentFeesReport.getStudent().getAdmissionnumber()),
-								 DataUtil.emptyString(studentFeesReport.getStudent().getName()),
-								 DataUtil.emptyString(studentFeesReport.getStudent().getClassstudying().replace("--", " ")),
+						new Object[] { DataUtil.emptyString(studentFeesReport.getParents().getStudent().getStudentexternalid()),  DataUtil.emptyString(studentFeesReport.getParents().getStudent().getAdmissionnumber()),
+								 DataUtil.emptyString(studentFeesReport.getParents().getStudent().getName()),
+								 DataUtil.emptyString(studentFeesReport.getParents().getStudent().getClassstudying().replace("--", " ")),
+								 DataUtil.emptyString(studentFeesReport.getParents().getFathersname()),
+								 DataUtil.emptyString(studentFeesReport.getParents().getContactnumber()),
 								 DataUtil.emptyString(feesDetails),
 								 String.valueOf(dueAmount),
 								 String.valueOf(totalAmount) });

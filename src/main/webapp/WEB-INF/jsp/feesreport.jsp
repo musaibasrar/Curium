@@ -551,7 +551,34 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
+					
+					
+						<tr>
+                    
+                        <td style="width: 45%">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp; 
+                        	   <label>
+                                        <label> <select name="academicyear" id="academicyear" required
+									style="width: 120px">
+										<option selected>${currentAcademicYear}</option>
+										<option>2021/22</option>
+										<option>2020/21</option>
+										<option>2019/20</option>
+										<option>2018/19</option>
+										<option>2017/18</option>
+										
+								</select>
 
+							</label> 
+                                    </label>
+                        
+                        </td>
+                        
+                    </tr>
+                    
+                    <tr>
+						<td><br></td>
+                    </tr>
+                    
 						<tr>
 
 							<td width="30%" class="alignRight"></td>
@@ -566,7 +593,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
+		
 					</table>
 					
 					
@@ -590,6 +617,8 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
+						<th title="click to sort" class="headerText">Father Name&nbsp;</th>
+						<th title="click to sort" class="headerText">Contact No.&nbsp;</th>
 						<th title="click to sort" class="headerText">Fees Details(Due Amount/Total Amount)</th>
 						<th title="click to sort" class="headerText">Fees Summary(Due Amount/Total Amount)</th>
 					</tr>
@@ -609,10 +638,12 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${studentfeesreportlist.student.sid}"/>" /></td> --%>
 							<td class="dataText"><c:out
-										value="${studentfeesreportlist.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${studentfeesreportlist.student.name}" /></td>
+										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>
 							<td class="dataText"><c:out
-									value="${studentfeesreportlist.student.classstudying}" /></td>
+									value="${studentfeesreportlist.parents.student.classstudying}" /></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.fathersname}" /></td>
+							<td class="dataText"><c:out value="${studentfeesreportlist.parents.contactnumber}" /></td>
 							<td class="dataText">
 									<c:set var="DueAmount" value="0" />
 									<c:set var="TotalAmount" value="0" />
@@ -653,7 +684,7 @@ for(Cookie cookie : cookies){
 					<td  class="footerTD" > <input value="Export"
 							type="submit" id="export"/></td>
 													
-						<td class="footerTD" colspan="2" >
+						<td class="footerTD" colspan="7" >
 						 
 						 Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;

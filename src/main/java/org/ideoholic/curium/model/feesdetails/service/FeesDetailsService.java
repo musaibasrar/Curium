@@ -165,7 +165,7 @@ public class FeesDetailsService {
 						cell.setCellValue((Long) obj);
 				}
 			}
-				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"feesdetails.xlsx"));
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/feesdetails.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;
