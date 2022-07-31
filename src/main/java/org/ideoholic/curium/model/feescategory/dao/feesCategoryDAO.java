@@ -36,13 +36,13 @@ public class feesCategoryDAO {
 	}
 
 	@SuppressWarnings({ "finally", "unchecked" })
-	public List<Feescategory> readListOfObjects(int branchId) {
+	public List<Feescategory> readListOfObjects(int branchId, String academicYear) {
 		
 		List<Feescategory> results = new ArrayList<Feescategory>();
         try {
             
             transaction = session.beginTransaction();
-            results = (List<Feescategory>) session.createQuery("From Feescategory where branchid="+branchId).list();
+            results = (List<Feescategory>) session.createQuery("From Feescategory where academicyear='"+academicYear+"' and branchid="+branchId).list();
             transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
