@@ -300,6 +300,16 @@
 	font-weight: bold;
 	height: 22px;
 }
+
+.dataTextRight {
+	border-radius: 3px;
+	font-family: Tahoma;
+	color: #4b6a84;
+	font-size: 13px;
+	letter-spacing: normal;
+	text-align: right;
+	background-color: #E3EFFF;
+}
 </style>
 
 <link rel="stylesheet" href="/kwrs/css/validation/jquery.ketchup.css">
@@ -336,8 +346,7 @@
 	src="/kwrs/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
 	src="/kwrs/js/datePicker/ui/jquery.effects.blind.js"></script>
-<script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+<script type="text/javascript"	src="/kwrs/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 	<link href="/kwrs/css/select2.min.css" rel="stylesheet" />
 <script src="/kwrs/js/select2.min.js"></script>
 <script type="text/javascript" charset="utf-8">
@@ -375,6 +384,13 @@
 			form1.submit();
 		  }
 	}
+	
+	function printRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/roshan/AccountProcess/printSearchLedgerEntries";
+		form1.method = "POST";
+		form1.submit();
+}
 
 	
 	function printRecords() {
@@ -402,11 +418,33 @@
          });
 		
 
+		 $("#print").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         }).click(function(){
+             printRecords();
+             return false;
+
+         });
 	});
 
 	$(function() {
-
 		$("#tabs").tabs();
+		$("#effect").hide();
+		// run the currently selected effect
+		function runEffect() {
+
+			var clipEffect = 'blind';
+			var options = {};
+			$("#effect").toggle(clipEffect, options, 1000);
+		}
+		;
+		// set effect from select menu value
+		$("#add").button().click(function() {
+			runEffect();
+			return false;
+		});
 	});
 	
 	
