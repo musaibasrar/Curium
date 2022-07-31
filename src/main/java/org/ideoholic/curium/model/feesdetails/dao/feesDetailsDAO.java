@@ -272,26 +272,12 @@ public class feesDetailsDAO {
             }
     }
 
-		public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection, String updateDrAccountVoucher1, String updateCrAccountVoucher1, String cancelVoucherVoucher1, String updateDrAccountVoucher4, String updateCrAccountVoucher4, String cancelVoucherVoucher4) {
+public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollection, String updateReceiptDrAccount, String updateReceiptCrAccount, String cancelReceiptVoucher, String updateJournalDrAccount, String updateJournalCrAccount, String cancelJournalVoucher) {
 			
 			boolean result = false;
 
             try {
                     transaction = session.beginTransaction();
-                    
-	                    Query updateDrVoucher1 = session.createQuery(updateDrAccountVoucher1);
-	        			updateDrVoucher1.executeUpdate();
-	        			Query updateCrVoucher1 = session.createQuery(updateCrAccountVoucher1);
-	        			updateCrVoucher1.executeUpdate();
-	        			Query cancelVoucherQueryVoucher1 = session.createQuery(cancelVoucherVoucher1);
-	        			cancelVoucherQueryVoucher1.executeUpdate();
-	        			
-	        			Query updateDrVoucher4 = session.createQuery(updateDrAccountVoucher4);
-	        			updateDrVoucher4.executeUpdate();
-	        			Query updateCrVoucher4 = session.createQuery(updateCrAccountVoucher4);
-	        			updateCrVoucher4.executeUpdate();
-	        			Query cancelVoucherQueryVoucher4 = session.createQuery(cancelVoucherVoucher4);
-	        			cancelVoucherQueryVoucher4.executeUpdate();
                     
 	                    Query query = session.createQuery("update Receiptinfo set cancelreceipt=1 where receiptnumber="+receiptId);
 	                    query.executeUpdate();
@@ -300,6 +286,22 @@ public class feesDetailsDAO {
                     	Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.getSfsid());
                     	queryStudentFS.executeUpdate();
 					}
+                    
+                    if(updateReceiptDrAccount!=null && updateReceiptCrAccount!=null && cancelReceiptVoucher != null && updateJournalDrAccount!=null && updateJournalCrAccount!=null && cancelJournalVoucher!=null) {
+	                    Query updateReceiptDr = session.createQuery(updateReceiptDrAccount);
+	        			updateReceiptDr.executeUpdate();
+	        			Query updateReceiptCr = session.createQuery(updateReceiptCrAccount);
+	        			updateReceiptCr.executeUpdate();
+	        			Query cancelReceiptVoucherQuery = session.createQuery(cancelReceiptVoucher);
+	        			cancelReceiptVoucherQuery.executeUpdate();
+	        			
+	        			Query updateJournalDr = session.createQuery(updateJournalDrAccount);
+	        			updateJournalDr.executeUpdate();
+	        			Query updateJournalCr = session.createQuery(updateJournalCrAccount);
+	        			updateJournalCr.executeUpdate();
+	        			Query cancelJournalVoucherQuery = session.createQuery(cancelJournalVoucher);
+	        			cancelJournalVoucherQuery.executeUpdate();
+                    }
                     
                     transaction.commit();
                     result = true;

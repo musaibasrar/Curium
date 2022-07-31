@@ -38,6 +38,13 @@
         <property name="classsec" type="string">
             <column name="classsec" length="20" />
         </property>
+        <property name="receiptvoucher" type="int">
+            <column name="receiptvoucher" />
+        </property>
+        <property name="journalvoucher" type="int">
+            <column name="journalvoucher" />
+        </property>
+        
        
         <!-- inverse="true" -->
         <set name="feesCollectionRecords" table="feescollecion"
