@@ -212,7 +212,7 @@ public class StandardService {
 				if(classofStd!=null) {
 					classofStd=classofStd+"--";
 				}
-				List<Student> studentList = new StandardDetailsDAO().getStudentsByClass(classofStd, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Student> studentList = new StandardDetailsDAO().getStudentsByClass(classofStd, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), httpSession.getAttribute("currentAcademicYear").toString());
 				request.setAttribute("studentList", studentList);
 				result = true;
 			} catch (Exception e) {

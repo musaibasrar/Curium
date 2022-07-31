@@ -191,7 +191,6 @@
 
 .headerText {
 	border-radius: 3px;
-	width: 10px;
 	font-family: Tahoma;
 	font-size: 12px;
 	background-color: #4b6a84;
@@ -322,7 +321,8 @@
 			"bFilter" : true,
 			"bSort" : true,
 			"bInfo" : false,
-			"bAutoWidth" : false
+			"bAutoWidth" : false,
+			"fixedColumns" : true
 		});
 	});
 </script>
@@ -578,10 +578,13 @@ for(Cookie cookie : cookies){
 
                     <thead>
                         <tr  >
+	                        <th title="click to sort" class="headerText">Sl.No.</th>
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
+                            <th title="click to sort" class="headerText">Promotion Year&nbsp;</th>
+                            <th title="click to sort" class="headerText">Admission Year&nbsp;</th>
                             <th title="click to sort" class="headerText">Admission Date</th>
                              
 
@@ -590,9 +593,10 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${studentList}" var="Student">
+                        <c:forEach items="${studentList}" var="Student" varStatus="status">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+								<td class="dataText"><c:out value="${status.index+1}"/></td>
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/lflower/StudentProcess/ViewDetails?id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Student.name}"/></td>
@@ -603,6 +607,8 @@ for(Cookie cookie : cookies){
 								<input type="hidden" id="classstudyingone" name="classstudying" value="${Student.classstudying}"/>
 								 <input type="hidden" id="classstudying" name="classstudying_${Student.sid}" value="${Student.classstudying}"/>
                                 </td>
+                                <td class="dataText"><c:out  value="${Student.promotedyear}"/></td>
+                                <td class="dataText"><c:out  value="${Student.yearofadmission}"/></td>
                                 <td class="dataText"><c:out  value="${Student.admissiondate}"/></td>
                                 
 
@@ -611,7 +617,7 @@ for(Cookie cookie : cookies){
                     </tbody>
                     <tfoot><tr>
                     
-                    <td  class="footerTD" colspan="2" ><button value="Promote" type="submit" id="promote">Promote</button>
+                    <td  class="footerTD" colspan="8" ><button value="Promote" type="submit" id="promote">Promote</button>
                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="graduated">Graduated</button> 
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <button id="droppedout">Dropped Out</button>
