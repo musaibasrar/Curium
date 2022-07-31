@@ -446,7 +446,7 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-	<div class="headerTD" style="width: 95%" >Academic Year:&nbsp;<c:out default="" value="${currentAcademicYear}"/> </div>
+	<div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
 
         <div id="container" style="width: 95%" >
             <h5 class="sideaccordian" ><a href="#">Students</a></h5>
