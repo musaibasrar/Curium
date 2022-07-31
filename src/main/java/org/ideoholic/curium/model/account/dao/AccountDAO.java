@@ -35,12 +35,12 @@ public class AccountDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public boolean create(Financialaccountingyear financialaccountingyear) {
+	public boolean create(Financialaccountingyear financialaccountingyear, int branchId) {
 		boolean result = false;
 		Financialaccountingyear financialYear = new Financialaccountingyear();
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Financialaccountingyear where active='yes'");
+			Query query = session.createQuery("from Financialaccountingyear where active='yes'  and branchid="+branchId);
 			financialYear = (Financialaccountingyear) query.uniqueResult();
 			if(financialYear!=null && financialYear.getActive().equalsIgnoreCase(financialaccountingyear.getActive())){
 				financialYear.setActive("no");
