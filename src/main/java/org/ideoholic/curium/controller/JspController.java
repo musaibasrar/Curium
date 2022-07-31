@@ -300,4 +300,34 @@ public class JspController {
 	public String getfeesStampDue() {
 		return "feesstampdue";
 	}
+	
+	@GetMapping("/printadmissionform.jsp")
+	public String getPrintAdmissionForm() {
+		return "printadmissionform";
+	}
+	
+	@GetMapping("/header_officeadmin")
+	public String getHeaderOfficeAdmin() {
+		return "header_officeadmin";
+	}
+	
+	@GetMapping("/index_officeadmin")
+	public String getIndexOfficeAdmin() {
+		return "index_officeadmin";
+	}
+	
+	@GetMapping("/left_officeadmin")
+	public String getLeftOfficeAdmin() {
+		return "left_officeadmin";
+	}
+	
+	@GetMapping("/leftsettings_officeadmin")
+	public String getLeftSettingsOfficeAdmin() {
+		return "leftsettings_officeadmin";
+	}
+	
+	@GetMapping("/reports_officeadmin")
+	public String getReportsOfficeAdmin() {
+		return "reports_officeadmin";
+	}
 }
