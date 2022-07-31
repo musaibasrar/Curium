@@ -121,6 +121,15 @@
 	font-size: 12px;
 
 }
+.dataTextRight {
+	border-radius: 3px;
+	font-family: Tahoma;
+	color: #4b6a84;
+	font-size: 16px;
+	letter-spacing: normal;
+	text-align: right;
+	background-color: #E3EFFF;
+}
 
 </style>
 
@@ -293,19 +302,49 @@
 			<br>
 			<table class="datatable">
 						<tr>
-							<td align="right">
+							<td class="dataText"></td>
+							<td class="dataText"></td>
+							<td class="dataText"></td>
+							<td class="dataText"></td>
+							<td class="dataText"></td>
+							<td align="right" class="dataTextRight" >
 							<label style="font-weight: bold;">
 							<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${drtotal}" />
 							</label>
 							</td>
 							
-							<td align="right" style="width: 90px;">
+							<td align="right" style="width: 90px;" class="dataTextRight" >
 							<label style="font-weight: bold;">
 							<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${crtotal}" />
 							</label>
 							</td>
 						</tr>
-						
+						<tr>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+							<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>
+									Balance</b>
+							</label> 
+							</td>
+							
+							<td class="dataTextRight">
+								<label style="color: #eb6000"><b>
+							<c:choose>
+                                <c:when test="${drtotal > crtotal}">
+									<fmt:formatNumber type="currency"  value="${drtotal-crtotal}" />                                    
+                                </c:when>
+                                <c:otherwise>
+                                   <fmt:formatNumber type="currency"  value="${crtotal-drtotal}" />
+                                </c:otherwise>
+                            </c:choose>
+							</b>
+							</label>
+							</td>
+					</tr>
 				</table>
 				
 			<div style="page-break-inside: avoid;" align="center">
