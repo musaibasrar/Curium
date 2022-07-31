@@ -135,6 +135,8 @@ form{
                 }
                 else if(type=='staff'){
                 	window.open('/index','_self');
+                }else if(type=='officeadmin'){
+                	window.open('/index_officeadmin','_self');
                 }
             }
             else if(!flag1){
