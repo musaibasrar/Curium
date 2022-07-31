@@ -290,4 +290,14 @@ public class JspController {
 	public String getAdminExpensesReport() {
 		return "adminexpensesreport";
 	}
+	
+	@GetMapping("/studentsadmissionreports")
+	public String getStudentsAdmissionReports() {
+		return "studentsadmissionreports";
+	}
+	
+	@GetMapping("/studentspendingadmissionreports.jsp")
+	public String getStudentsPendingAdmissionReports() {
+		return "studentspendingadmissionreports";
+	}
 }
