@@ -133,4 +133,11 @@ public class FeesAction {
 			return "viewAll";
 		}
 	}
+	
+	
+	@GetMapping("/feesDueStampFees")
+	public String feesDueStampFees() {
+		new StandardService(request, response).viewClasses();
+		return "feesstampdue";
+	}
 }
