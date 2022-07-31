@@ -295,5 +295,9 @@ public class JspController {
 	public String getStudentsPendingAdmissionReports() {
 		return "studentspendingadmissionreports";
 	}
-	
+
+	@GetMapping("/feesstampdue.jsp")
+	public String getfeesStampDue() {
+		return "feesstampdue";
+	}
 }

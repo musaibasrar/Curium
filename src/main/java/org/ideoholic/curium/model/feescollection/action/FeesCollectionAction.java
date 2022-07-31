@@ -124,5 +124,11 @@ public class FeesCollectionAction {
     		}
     		return "exportfailure";
 		}
+        
+        @PostMapping("/searchFeesStampDueReport")
+        public String searchFeesStampDueReport() {
+            new FeesCollectionService(request, response).getFeesStampDueReport();
+            return "feesstampdue";
+        }
 		
 }
