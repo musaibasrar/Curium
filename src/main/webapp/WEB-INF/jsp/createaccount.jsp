@@ -498,7 +498,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/SubGroupName/getSubGroupNames?groupname="+selected,true);
+			xmlHttp.open("GET", "/roshan/SubGroupName/getSubGroupNames?groupname="+selected,true);
 			xmlHttp.send(null);
 		}
 		
@@ -553,7 +553,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChangedSSGroup;
-			xmlHttp.open("GET", "/SubGroupName/getSSGroupNames?subgroupname="+selected,true);
+			xmlHttp.open("GET", "/roshan/SubGroupName/getSSGroupNames?subgroupname="+selected,true);
 			xmlHttp.send(null);
 		}
 

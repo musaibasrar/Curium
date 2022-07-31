@@ -90,7 +90,7 @@ public class UserAction {
 		return "login";
 	}
 
-	@GetMapping("/changePassword")
+	@PostMapping("/changePassword")
 	public String changePassword() {
 		if (new UserService(request, response).ChangePassword()) {
 			return "passwordSuccess";
