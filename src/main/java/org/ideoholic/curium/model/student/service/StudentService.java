@@ -664,7 +664,6 @@ public class StudentService {
 				httpSession.setAttribute("academicPerYear", currentYear.getCurrentacademicyear());
 				httpSession.setAttribute("currentAcademicYear", currentYear.getCurrentacademicyear());
 				httpSession.setAttribute("totalfeesconcession", totalFeesConcession);
-				
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
 			}
