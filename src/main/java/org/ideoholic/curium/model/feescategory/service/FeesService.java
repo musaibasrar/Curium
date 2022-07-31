@@ -50,7 +50,7 @@ public class FeesService {
                  
                  if(httpSession.getAttribute(BRANCHID)!=null){
                          try {
-                                List<Feescategory> list = new feesCategoryDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                                List<Feescategory> list = new feesCategoryDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),httpSession.getAttribute("currentAcademicYear").toString());
                             httpSession.setAttribute("feescategory", list);
                             result = true;
                         } catch (Exception e) {
@@ -78,6 +78,7 @@ public class FeesService {
                         feescategory.setAmount(DataUtil.parseInt(request.getParameter("amount")));
                         feescategory.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
                         feescategory.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+                        feescategory.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
                         if(!feescategory.getFeescategoryname().equalsIgnoreCase("") && !feescategory.getParticularname().equalsIgnoreCase("") && feescategory.getAmount() != 0 ){
                                 feescategory =  new feesCategoryDAO().create(feescategory);
                         }
