@@ -611,8 +611,10 @@ public class StudentService {
 			}
 			
 			long totalFeesAmount = 0l;
+			long totalFeesConcession = 0l;
 			for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
 				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
+				totalFeesConcession = totalFeesConcession+studentfeesstructureSingle.getConcession();
 			}
 			
 			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
@@ -660,7 +662,7 @@ public class StudentService {
 				httpSession.setAttribute("totalfees", totalFeesAmount);
 				httpSession.setAttribute("academicPerYear", currentYear.getCurrentacademicyear());
 				httpSession.setAttribute("currentAcademicYear", currentYear.getCurrentacademicyear());
-				
+				httpSession.setAttribute("totalfeesconcession", totalFeesConcession);
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
 			}
