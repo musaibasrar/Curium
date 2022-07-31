@@ -1544,18 +1544,18 @@ public class StudentService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] {"UID",  "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
+					new Object[] { "UID", "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
 							"Admitted In Class", "Admission Number", "Admission Date", "Blood Group", "Religion",
 							"Caste", "Fathers Name", "Mothers Name", "Archive", "Graduated", "Left Out", "Dropped Out"});
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
 						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getStudentexternalid()),
-						DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
 								 DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getDateofbirth()),
 								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
 								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
+								 DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
 								 DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getAdmissiondate()),
 								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
 								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
