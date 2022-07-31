@@ -526,6 +526,19 @@
     	var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
     	annualincome.value = res;
     }
+    
+    function Upload() {
+        var fileUpload = document.getElementById("fileToUpload");
+        if (typeof (fileUpload.files) != "undefined") {
+            var size = parseFloat(fileUpload.files[0].size / 1024).toFixed(2);
+            if(size>100){
+            	alert("File size should not exceed 100KB");
+            	document.getElementById("fileToUpload").value='';
+            }
+        } else {
+            alert("Unsupported File");
+        }
+    }
 </script>
 </head>
 <%
@@ -1084,12 +1097,12 @@
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Pic</label><br />  <input type="file" name="fileToUpload"
-										id="fileToUpload" accept="image/*"><br><br><br><br></td>
+										id="fileToUpload" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 1</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc1" accept="image/*"><br><br><br><br></td>
+										id="studentdoc1" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1099,7 +1112,7 @@
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 2</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc2" accept="image/*"><br><br><br><br></td>
+										id="studentdoc2" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1109,7 +1122,7 @@
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 3</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc3" accept="image/*"><br><br><br><br></td>
+										id="studentdoc3" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1119,7 +1132,7 @@
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 4</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc4" accept="image/*"><br><br><br><br></td>
+										id="studentdoc4" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1129,7 +1142,7 @@
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 5</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc5" accept="image/*"><br><br><br><br></td>
+										id="studentdoc5" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 
 

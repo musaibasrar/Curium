@@ -115,7 +115,7 @@ public class UserService {
 		    		}
 		    		
                     List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.classstudying like '"+classStudying+"'"
-                    		+ " AND parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0");
+                    + " AND parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0 AND parents.Student.branchid='"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+"' ");
                     totalStudents+=student.size();
                     xaxisList.add("\""+classstudying.getClassdetails()+"\"");
                     if(student.size()>0) {
@@ -128,7 +128,7 @@ public class UserService {
                 	}
         
         	// Total Teachers
-        	List<Teacher> teacher = new EmployeeDAO().readCurrentTeachers();
+        	List<Teacher> teacher = new EmployeeDAO().readCurrentTeachers(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
         	request.setAttribute("totalteachers", teacher.size());
         	// End Total Teachers
         	
