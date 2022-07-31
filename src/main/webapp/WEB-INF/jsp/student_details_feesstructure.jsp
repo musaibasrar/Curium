@@ -522,6 +522,7 @@ for(Cookie cookie : cookies){
                                         <label> <select name="academicyear" id="academicyear" required
 									style="width: 120px">
 										<option selected></option>
+										<option>2022/23</option>
 										<option>2021/22</option>
 										<option>2020/21</option>
 										<option>2019/20</option>
