@@ -180,7 +180,7 @@ public class ImportFileService {
 								student.setLeftout(0);
 								student.setStudentexternalid(httpSession.getAttribute("branchcode").toString());
 								student.setLeftout(0);
-
+								student.setGender(row.getCell(14).getStringCellValue());
 								parent.setFathersname(row.getCell(3).getStringCellValue());
 								parent.setContactnumber(row.getCell(6).getStringCellValue());
 								parent.setMothersname(row.getCell(5).getStringCellValue());

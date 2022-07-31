@@ -390,7 +390,7 @@
 		
 		if(confirm('Are you sure, you want to cancel the Payment Voucher?')){
 			var form1 = document.getElementById("form1");
-			form1.action="/rauzamission/AccountProcess&voucherType=2/cancelVoucher";
+			form1.action="/rauzamission/AccountProcess/cancelVoucher?voucherType=2";
 			form1.method = "POST";
 			form1.submit();	
 		}
