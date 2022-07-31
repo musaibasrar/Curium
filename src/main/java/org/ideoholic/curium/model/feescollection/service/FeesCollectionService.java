@@ -332,7 +332,9 @@ public class FeesCollectionService {
 			if(createFeesCollection) {
 				getFeesDetails(sid,request.getParameter("academicyear"));
 				Parents parent = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(sid));
-				new SmsService(request, response).sendSMS(parent.getContactnumber(), "Total "+String.valueOf(receiptInfo.getTotalamount()) , "fees");
+				String studentName = parent.getStudent().getName().substring(0, Math.min(parent.getStudent().getName().length(), 17));
+				new SmsService(request, response).sendSMS(parent.getContactnumber(), "of "+studentName+",Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
+				//new SmsService(request, response).sendSMS(parent.getContactnumber(), "Total "+String.valueOf(receiptInfo.getTotalamount()) , "fees");
 			}
 			
 		}
@@ -680,7 +682,7 @@ public class FeesCollectionService {
 
 		if (httpSession.getAttribute(BRANCHID) != null) {
 
-			String queryMain = "From Parents as parents where";
+			String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" AND ";
 			new StandardService(request, response).viewClasses();
 			List<Classsec> classList = (List<Classsec>) httpSession.getAttribute("classdetailslist");
 			
@@ -704,8 +706,7 @@ public class FeesCollectionService {
 
 			if (!classStudying.equalsIgnoreCase("")) {
 				querySub = querySub + " parents.Student.classstudying like '" + classStudying
-						+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="
-						+ Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())
+						+ "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 "
 						+ " order by parents.Student.admissionnumber ASC";
 			}
 
