@@ -14,10 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/kwrs/css/bootstrap.min.css">
-        <script src="/kwrs/js/jquery.min.js"></script>
-        <script src="/kwrs/js/bootstrap.min.js"></script>
-        <script src="/kwrs/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/newexcellent/css/bootstrap.min.css">
+        <script src="/newexcellent/js/jquery.min.js"></script>
+        <script src="/newexcellent/js/bootstrap.min.js"></script>
+        <script src="/newexcellent/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -92,7 +92,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/kwrs/UserProcess/logout";
+                form1.action="/newexcellent/UserProcess/logout";
                 form1.submit();
             }
 
@@ -102,7 +102,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/kwrs/UserProcess/sessionTimeOut");
+	response.sendRedirect("/newexcellent/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -124,80 +124,80 @@ for(Cookie cookie : cookies){
 						<tr><td></td></tr>
 						<tr>
 							
-									<td style="padding-left: 20px;padding-right: 50px;">
-								<a target="mainFrame" href="/kwrs/welcome" ><img src="/kwrs/images/logo.jpg"/></a>
+									<td style="padding-left: 20px;padding-right: 50px;height: 40px;">
+								<a target="mainFrame" href="/newexcellent/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/kwrs/images/kwrsheader.png"
+							<!-- <td align="left"><img src="/newexcellent/images/newexcellentheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/kwrs/left_admin"> <img
-									src="/kwrs/images/home.svg" width="18" height="18" 
+							<td><a target="leftFrame" href="/newexcellent/left_admin"> <img
+									src="/newexcellent/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="/kwrs/FeesProcess/feesCollect"> <img
-									src="/kwrs/images/feescollect.svg" width="18" height="18"
+								href="/newexcellent/FeesProcess/feesCollect"> <img
+									src="/newexcellent/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
 							<td>
 								<a target="mainFrame"
-								href="/kwrs/AccountProcess/createVoucher"> <img
-									src="/kwrs/images/createvoucher.svg" width="18" height="18"
+								href="/newexcellent/AccountProcess/createVoucher"> <img
+									src="/newexcellent/images/createvoucher.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/kwrs/feesCollectionDetails"><img  alt="Fees Details" src="/kwrs/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+							<!-- <td ><a target="mainFrame" href="/newexcellent/feesCollectionDetails"><img  alt="Fees Details" src="/newexcellent/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
-								href="/kwrs/StudentProcess/addNew"> <img
-									src="/kwrs/images/student_header.svg" width="18" height="18"
+								href="/newexcellent/StudentProcess/addNew"> <img
+									src="/newexcellent/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/kwrs/leftsettings">
-									<img alt="Settings" src="/kwrs/images/settings.svg" width="18"
+							<td ><a target="leftFrame" href="/newexcellent/leftsettings">
+									<img alt="Settings" src="/newexcellent/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
 							<td ><a target="mainFrame"
-								href="/kwrs/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/kwrs/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+								href="/newexcellent/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/newexcellent/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
 
-							<td ><!-- <a target="mainFrame" href="/kwrs/sendsms"><img
-									src="/kwrs/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+							<td ><!-- <a target="mainFrame" href="/newexcellent/sendsms"><img
+									src="/newexcellent/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/kwrs/reports"><img
-									src="/kwrs/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+								<a target="leftFrame" href="/newexcellent/reports"><img
+									src="/newexcellent/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
 							
 							</td>
 
 							<td ><a target="mainFrame"
-								href="/kwrs/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/kwrs/images/students.svg" width="18"
+								href="/newexcellent/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/newexcellent/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/kwrs/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/kwrs/images/dashboard.svg" width="18"
+								href="/newexcellent/UserProcess/dashBoard"><img
+									alt="Dash Board" src="/newexcellent/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td>
 								
 							<td ><a target="_parent"
-								href="/kwrs/UserProcess/logout"><img
-									src="/kwrs/images/logout.svg" width="18" height="18" alt="Log Out" 
+								href="/newexcellent/UserProcess/logout"><img
+									src="/newexcellent/images/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>

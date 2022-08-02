@@ -167,9 +167,9 @@ span{
             }
         }
     </style>
-	<script type="text/javascript" src="/kwrs/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/kwrs/js/print/jquery.printPage.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/newexcellent/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/newexcellent/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/newexcellent/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {

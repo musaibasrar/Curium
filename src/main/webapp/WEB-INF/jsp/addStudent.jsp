@@ -20,21 +20,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Student</title>
-<link rel="stylesheet" href="/kwrs/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/kwrs/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/newexcellent/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/newexcellent/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/kwrs/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/kwrs/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/kwrs/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/kwrs/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/kwrs/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/kwrs/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/kwrs/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+	src="/newexcellent/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/newexcellent/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/newexcellent/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/newexcellent/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/newexcellent/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/newexcellent/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/newexcellent/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/newexcellent/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript"
-	src="/kwrs/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/kwrs/css/datePicker/demos.css">
+	src="/newexcellent/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/newexcellent/css/datePicker/demos.css">
 
 
 
@@ -272,7 +272,7 @@
 
 
 
-<script type="text/javascript" src="/kwrs/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/newexcellent/js/datetimepicker_css.js"></script>
 
 <script>
 	$(function() {
@@ -545,7 +545,7 @@
 	//allow access only if session exists
 	String user = null;
 	if (session.getAttribute("userAuth") == null) {
-		response.sendRedirect("/kwrs/UserProcess/sessionTimeOut");
+		response.sendRedirect("/newexcellent/UserProcess/sessionTimeOut");
 	} else
 		user = (String) session.getAttribute("userAuth");
 	String userName = null;
@@ -1928,14 +1928,14 @@
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/kwrs/StudentProcess/AddStudent";
+									form1.action = "/newexcellent/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/kwrs/StudentProcess/viewAll";
+								form1.action = "/newexcellent/StudentProcess/viewAll";
 								form1.submit();
 							}
 

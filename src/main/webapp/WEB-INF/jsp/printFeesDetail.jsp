@@ -179,13 +179,13 @@
 	
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 30px;">
-				<img src="/kwrs/images/logo${subbranchname}.png" width="88" height="100"/>
+				<td align="left" style="padding-left: 80px;">
+				<img src="/newexcellent/images/newexcellent.jpg" width="88" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 30px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 90px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left:50px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 150px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 			</tr>
 </table>
@@ -305,6 +305,9 @@
 						value="${recieptinfo.totalamount}" /></td>
 
 			</tr>
+			</table>
+			
+		<TABLE width="100%" border="0">
 			<tr>
 			
 			<td><hr width="100%"></td>
@@ -312,21 +315,37 @@
 			<td><hr width="100%"></td>
 			</tr>
 
-<<<<<<< HEAD
+			<tr>
+				<td class="headerText">
+					Total Fees: Rs. ${totalfees}
+				</td>
+				<td class="headerText">
+					Total fees paid : Rs.  ${sumoffees}
+				</td>
+				<td class="headerText">
+				 Total fees Due : Rs.  ${dueamount} 
+				</td>
+				
+			</tr>
+			
+			<tr>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			</tr>
+			</table>
+			
+			<TABLE width="100%" border="0">
 <tr>
-<td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
-</tr>
-<tr>
-<td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
+<td align="left">In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
 <td></td>
 </tr>
 
 <tr>
 <td align="left">Note: Fees once deposited will not be refunded under any Circumstances</td>
 </tr>
-
 <tr>
-<td><br></td>
+<td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
 </tr>
 <tr>
 <td></td>
@@ -340,13 +359,13 @@
 	
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 30px;">
-				<img src="/kwrs/images/logo${subbranchname}.png" width="88" height="100"/>
+				<td align="left" style="padding-left: 80px;">
+				<img src="/newexcellent/images/newexcellent.jpg" width="88" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 30px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 90px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left:50px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 150px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 			</tr>
 </table>
@@ -378,8 +397,10 @@
 				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
 						value="${recieptinfo.branchreceiptnumber}" />
 				</td>
+				
 				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
 				</td>
+
 			</tr>
 			<tr>
 			<td></td>
@@ -388,7 +409,7 @@
 			<td class="dataTextBoldLeft" style="width: 50%">Fathers
 					Name:&nbsp;<c:out value="${parents.fathersname}" />
 				</td>
-				<td class="dataTextBoldLeft" style="font-size: 14px;">
+				<td class="dataTextBoldLeft" style="width: 30%">
 					Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
 
@@ -416,7 +437,7 @@
             </TABLE>
 
 		<TABLE id="dataTable" width="100%" border="0"
-			style="page-break-after: always; border-collapse: collapse;">
+			style="border-collapse: collapse;">
 
 
 			<tr>
@@ -462,35 +483,54 @@
 				Total</td>
 				<td class="headerText">Rs. <c:out
 						value="${recieptinfo.totalamount}" /></td>
+
 			</tr>
+			</table>
+			
+		<TABLE width="100%" border="0">
+			<tr>
+			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
 
 			<tr>
-			<td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
-			</tr>
-			<tr>
-			<td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
-			<td></td>
+				<td class="headerText">
+					Total Fees: Rs. ${totalfees}
+				</td>
+				<td class="headerText">
+					Total fees paid : Rs.  ${sumoffees}
+				</td>
+				<td class="headerText">
+				 Total fees Due : Rs.  ${dueamount} 
+				</td>
+				
 			</tr>
 			
 			<tr>
-			<td align="left">Note: Fees once deposited will not be refunded under any Circumstances</td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
 			</tr>
+			</table>
 			
-			<tr>
-			<td><br></td>
-			</tr>
-			<tr>
-			<td></td>
-			<td align="left"><br>Signature of Cashier/Accountant</td>
-			<!-- 
-			<td align="left">H.M</td> -->
-			
-			</tr>
+			<TABLE width="100%" border="0">
+<tr>
+<td align="left">In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
+<td></td>
+</tr>
 
+<tr>
+<td align="left">Note: Fees once deposited will not be refunded under any Circumstances</td>
+</tr>
+<tr>
+<td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
+</tr>
+<tr>
+<td></td>
+<td align="left"><br>Signature of Cashier/Accountant</td>
+</tr>
 		</TABLE>
 
 </div>

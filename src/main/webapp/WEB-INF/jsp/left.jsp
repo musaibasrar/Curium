@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/kwrs/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/kwrs/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/kwrs/css/datePicker/demos.css">
+        <script language="JavaScript" src="/newexcellent/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/newexcellent/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/newexcellent/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/kwrs/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/kwrs/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/kwrs/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/kwrs/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/kwrs/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/kwrs/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/kwrs/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/kwrs/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/kwrs/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/kwrs/css/font-awesome.css">
+        <script type="text/javascript" src="/newexcellent/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/newexcellent/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/newexcellent/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/newexcellent/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/newexcellent/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/newexcellent/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/newexcellent/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/newexcellent/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/newexcellent/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/newexcellent/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -414,7 +414,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/kwrs/UserProcess/sessionTimeOut");
+	response.sendRedirect("/newexcellent/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -436,120 +436,120 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/kwrs/StudentProcess/viewAll" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="/kwrs/StudentProcess/addNew" style="font-size: 12px;">Add New</a><br/>
+                <a target="mainFrame" href="/newexcellent/StudentProcess/viewAll" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/newexcellent/StudentProcess/addNew" style="font-size: 12px;">Add New</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
-                <a target="mainFrame" href="/kwrs/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
-                <a target="mainFrame" href="/kwrs/attendancemark" style="font-size: 12px;">Mark Attendance</a><br/>
-                <a target="mainFrame" href="/kwrs/attendanceexport" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="/newexcellent/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
+                <a target="mainFrame" href="/newexcellent/attendancemark" style="font-size: 12px;">Mark Attendance</a><br/>
+                <a target="mainFrame" href="/newexcellent/attendanceexport" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
-                <a target="mainFrame" href="/kwrs/EmployeeProcess/viewAllEmployee" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="/kwrs/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
-				<a target="mainFrame" href="/kwrs/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
-				<a target="mainFrame" href="/kwrs/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
-				<a target="mainFrame" href="/kwrs/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="/newexcellent/EmployeeProcess/viewAllEmployee" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/newexcellent/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
+				<a target="mainFrame" href="/newexcellent/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
+				<a target="mainFrame" href="/newexcellent/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
+				<a target="mainFrame" href="/newexcellent/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-                <a target="mainFrame" href="/kwrs/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>
-				<a target="mainFrame" href="/kwrs/feesstructure" style="font-size: 12px;">Fees Structure</a><br/>                
-				<a target="mainFrame" href="/kwrs/feesCollectionDetails" style="font-size: 12px;">Fees Details</a><br/>
+                <a target="mainFrame" href="/newexcellent/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>
+				<a target="mainFrame" href="/newexcellent/feesstructure" style="font-size: 12px;">Fees Structure</a><br/>                
+				<a target="mainFrame" href="/newexcellent/feesCollectionDetails" style="font-size: 12px;">Fees Details</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             
             <div>
-                <a target="mainFrame" href="/kwrs/marksentry" style="font-size: 12px;">Enter Marks</a><br/>
-                <a target="mainFrame" href="/kwrs/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
-            	<a target="mainFrame" href="/kwrs/progressreport" style="font-size: 12px;">Generate Report</a><br/>
-           		<a target="mainFrame" href="/kwrs/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
+                <a target="mainFrame" href="/newexcellent/marksentry" style="font-size: 12px;">Enter Marks</a><br/>
+                <a target="mainFrame" href="/newexcellent/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
+            	<a target="mainFrame" href="/newexcellent/progressreport" style="font-size: 12px;">Generate Report</a><br/>
+           		<a target="mainFrame" href="/newexcellent/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/kwrs/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
+                <a target="mainFrame" href="/newexcellent/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
 
 
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/kwrs/AdvanceSearch" style="font-size: 12px;">Search</a><br/>
+                <a target="mainFrame" href="/newexcellent/AdvanceSearch" style="font-size: 12px;">Search</a><br/>
 
 
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/kwrs/Promotion" style="font-size: 12px;">Promotions</a><br/>
+                <a target="mainFrame" href="/newexcellent/Promotion" style="font-size: 12px;">Promotions</a><br/>
 
 
             </div>
 
             <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/kwrs/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/newexcellent/StudentProcess/archiveViewAll" >Archive Students</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-                <a target="mainFrame" href="/kwrs/Backup&Restore" style="font-size: 12px;">Backup</a><br/>
-                <a target="mainFrame" href="/kwrs/changePassword" style="font-size: 12px;">Change Password</a><br/>
-                <a target="mainFrame" href="/kwrs/uploadattendance" style="font-size: 12px;">upload attendance file</a><br/>
+                <a target="mainFrame" href="/newexcellent/Backup&Restore" style="font-size: 12px;">Backup</a><br/>
+                <a target="mainFrame" href="/newexcellent/changePassword" style="font-size: 12px;">Change Password</a><br/>
+                <a target="mainFrame" href="/newexcellent/uploadattendance" style="font-size: 12px;">upload attendance file</a><br/>
             </div>
             
             
             <h5 style="font-size: 12px"><a href="#" >Generate Cards</a></h5>
             <div >
-                <a target="mainFrame" href="/kwrs/generateids" style="font-size: 12px;">Generate IDs</a><br/>
+                <a target="mainFrame" href="/newexcellent/generateids" style="font-size: 12px;">Generate IDs</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Documents</a></h5>
             <div >
-                <a target="mainFrame" href="/kwrs/studentsdetailsreports" style="font-size: 12px;">Student Details</a><br/>
-                <a target="mainFrame" href="/kwrs/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
-                <a target="mainFrame" href="/kwrs/studentsdetailsbonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
-                <a target="mainFrame" href="/kwrs/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
-                <a target="mainFrame" href="/kwrs/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
-                <a target="mainFrame" href="/kwrs/PeriodProcess/generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
+                <a target="mainFrame" href="/newexcellent/studentsdetailsreports" style="font-size: 12px;">Student Details</a><br/>
+                <a target="mainFrame" href="/newexcellent/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
+                <a target="mainFrame" href="/newexcellent/studentsdetailsbonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
+                <a target="mainFrame" href="/newexcellent/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
+                <a target="mainFrame" href="/newexcellent/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
+                <a target="mainFrame" href="/newexcellent/PeriodProcess/generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
             <div >
-                <a target="mainFrame" href="/kwrs/sendsms" style="font-size: 12px;">SMS</a><br/>
-                <a target="mainFrame" href="/kwrs/sendemail" style="font-size: 12px;">Email</a><br/>
+                <a target="mainFrame" href="/newexcellent/sendsms" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="/newexcellent/sendemail" style="font-size: 12px;">Email</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
-                <a target="mainFrame" href="/kwrs/AccountProcess/createAccount" style="font-size: 12px;">Ledger Account</a><br/>
-                <a target="mainFrame" href="/kwrs/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
-                <a target="mainFrame" href="/kwrs/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">Find/Edit Voucher</a><br/>
-                <a target="mainFrame" href="/kwrs/AccountProcess/trialBalance" style="font-size: 12px;">Trial Balance</a><br/>
-                <a target="mainFrame" href="/kwrs/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
+                <a target="mainFrame" href="/newexcellent/AccountProcess/createAccount" style="font-size: 12px;">Ledger Account</a><br/>
+                <a target="mainFrame" href="/newexcellent/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
+                <a target="mainFrame" href="/newexcellent/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">Find/Edit Voucher</a><br/>
+                <a target="mainFrame" href="/newexcellent/AccountProcess/trialBalance" style="font-size: 12px;">Trial Balance</a><br/>
+                <a target="mainFrame" href="/newexcellent/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
             </div>
             
              <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/kwrs/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/kwrs/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/kwrs/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Issue</a><br/>
-                <a target="mainFrame" href="/kwrs/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/kwrs/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
+                <a target="mainFrame" href="/newexcellent/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
+                <a target="mainFrame" href="/newexcellent/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
+                <a target="mainFrame" href="/newexcellent/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Issue</a><br/>
+                <a target="mainFrame" href="/newexcellent/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
+                <a target="mainFrame" href="/newexcellent/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
             <div >
-                <a target="mainFrame" href="/kwrs/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/kwrs/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+                <a target="mainFrame" href="/newexcellent/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
+                <a target="mainFrame" href="/newexcellent/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
             </div>
             
             </div>
