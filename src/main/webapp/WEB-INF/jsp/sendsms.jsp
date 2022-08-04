@@ -621,8 +621,8 @@ for(Cookie cookie : cookies){
 			<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Students</a></li>
-					<li><a href="#tabs-2">Staff</a></li>
-					<li><a href="#tabs-3">Selected Numbers</a></li>
+					<!-- <li><a href="#tabs-2">Staff</a></li>
+					<li><a href="#tabs-3">Selected Numbers</a></li> -->
 				</ul>
 
 
@@ -681,7 +681,7 @@ for(Cookie cookie : cookies){
 											<option selected></option>
             								<option value="holiday">Holiday</option>
             								<option value="exams">Exams</option>
-            								<option value="ptm">PTM</option>
+            								<option value="festival">Festival</option>
             								<option value="feesreminder">Fees Reminder</option>
 								</select>
 							
@@ -696,7 +696,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRight">Message&nbsp;</td>
 							<td >
 								<div class="holiday box">								
-								<span style="font-size: 16px;">Dear Parents,On</span> <span style="font-weight: bold;color: red">Date</span>  <span style="font-size: 16px;">there will be a holiday on account of</span> <span style="font-weight: bold;color: red">Reason</span>
+								<span style="font-size: 16px;">Dear Parents On</span> <span style="font-weight: bold;color: red">Date</span>  <span style="font-size: 16px;">there will be a holiday on account of</span> <span style="font-weight: bold;color: red">Reason</span>
 								<br><br>
 								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="holidayvar1" name="holidayvar1" maxlength="30">
 								<br><br>
@@ -716,24 +716,24 @@ for(Cookie cookie : cookies){
 								<input type="hidden" id="examsvar4" name="examsvar4" maxlength="30">
     							</div>
     							
-    							<div class="ptm box">
-    							<span style="font-size: 16px;">Dear Parents, You are hereby requested to attend our PTM (Parent Teachers Meeting) on </span> <span style="font-weight: bold;color: red">Date</span>  <span style="font-size: 16px;">between</span> <span style="font-weight: bold;color: red">Timings</span>
+    							<div class="festival box">
+    							<span style="font-size: 16px;"Dear Parents,We would like to wish you, a </span> <span style="font-weight: bold;color: red">Festival Name</span>
 								<br><br>
-								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="ptmvar1" name="ptmvar1" maxlength="30">
+								<label style="color: red;">Festival Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="festivalvar1" name="festivalvar1" maxlength="30">
 								<br><br>
-								<label style="color: red;">Timings:&nbsp;</label><input type="text" id="ptmvar2" name="ptmvar2" maxlength="30">
-								<input type="hidden" id="ptmvar3" name="ptmvar3" maxlength="30">
-								<input type="hidden" id="ptmvar4" name="ptmvar4" maxlength="30">
+								<input type="hidden" id="festivalvar2" name="festivalvar2" maxlength="30">
+								<input type="hidden" id="festivalvar3" name="festivalvar3" maxlength="30">
+								<input type="hidden" id="festivalvar4" name="festivalvar4" maxlength="30">
 								</div>
 								
     							<div class="feesreminder box">
-    								<span style="font-size: 16px;">Dear Parents,This is a gentle reminder to pay the due fees. Kindly ignore if already paid. </span>
+    								<span style="font-size: 16px;">Dear Parents This is a gentle reminder that fees payment is due. </span>
 								<br><br>
-								<input type="hidden" id="ptmvar1" name="ptmvar1" maxlength="30">
+								<input type="hidden" id="feesremindervar1" name="feesremindervar1" maxlength="30">
 								<br><br>
-								<input type="hidden" id="ptmvar2" name="ptmvar2" maxlength="30">
-								<input type="hidden" id="holidayvar3" name="holidayvar3" maxlength="30">
-								<input type="hidden" id="holidayvar4" name="holidayvar4" maxlength="30">
+								<input type="hidden" id="feesremindervar2" name="feesremindervar2" maxlength="30">
+								<input type="hidden" id="feesremindervar3" name="feesremindervar3" maxlength="30">
+								<input type="hidden" id="feesremindervar4" name="feesremindervar4" maxlength="30">
     							</div>
 							
 							</td>
@@ -782,7 +782,7 @@ for(Cookie cookie : cookies){
 						</div>
 						</div>
 						
-						<div id="tabs-2">
+						<%-- <div id="tabs-2">
 					<table width="100%" border="0" align="center" id="table1">
 					
 					<tr>
@@ -866,9 +866,9 @@ for(Cookie cookie : cookies){
 								</tr>
 							</table>
 
-						</div>
+						</div> --%>
 						
-					<div id="tabs-3">
+					<!-- <div id="tabs-3">
 					
 					<br><br>
 					<div align="center">
@@ -938,7 +938,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
+ -->
 
 						<div>
 							<table width="100%">

@@ -773,11 +773,6 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 						logger.info("send SMS "+e);
 					}
         
-        String sendSMS = properties.getProperty("sendabsentsms");
-        
-        
-        if("yes".equalsIgnoreCase(sendSMS)) {
-        	
         	String attendanceClass = request.getParameter("attendanceclass");
         	String absentMessage = null;
         	StringBuilder sbN = new StringBuilder();
@@ -807,7 +802,6 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 			 * response).sendSMS(numbers, absentMessage.replace("%todaysdate%",
 			 * todaysDate)); }
 			 */
-        }
         
 		
 	}
