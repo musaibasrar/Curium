@@ -679,10 +679,10 @@ for(Cookie cookie : cookies){
 								<select name="messagebody" id="messagebody"
 									style="width: 120px">
 											<option selected></option>
-            								<option value="holiday">Holiday</option>
-            								<option value="exams">Exams</option>
+            								<!-- <option value="holiday">Holiday</option>
+            								<option value="exams">Exams</option> -->
             								<option value="festival">Festival</option>
-            								<option value="feesreminder">Fees Reminder</option>
+            								<!-- <option value="feesreminder">Fees Reminder</option> -->
 								</select>
 							
 							</label></td>
@@ -717,7 +717,7 @@ for(Cookie cookie : cookies){
     							</div>
     							
     							<div class="festival box">
-    							<span style="font-size: 16px;"Dear Parents,We would like to wish you, a </span> <span style="font-weight: bold;color: red">Festival Name</span>
+    							<span style="font-size: 16px;">Dear Parents,We would like to wish you, a </span> <span style="font-weight: bold;color: red">Festival Name</span>
 								<br><br>
 								<label style="color: red;">Festival Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="festivalvar1" name="festivalvar1" maxlength="30">
 								<br><br>
