@@ -108,10 +108,9 @@ public class UserService {
             for (Classsec classstudying : classsecList) {
         	
 		        	String classStudying = classstudying.getClassdetails();
+		    		if(!classStudying.equalsIgnoreCase("")) {
 		    		
-		    		if (!classStudying.equalsIgnoreCase("")) {
 		    			classStudying = classStudying+"--" +"%";
-		    		}
 		    		
                     List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.classstudying like '"+classStudying+"'"
                     + " AND parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0 AND parents.Student.branchid='"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+"' ");
@@ -125,7 +124,7 @@ public class UserService {
                     }
                     
                 	}
-        
+        	}
         	// Total Teachers
         	List<Teacher> teacher = new EmployeeDAO().readCurrentTeachers(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
         	request.setAttribute("totalteachers", teacher.size());
