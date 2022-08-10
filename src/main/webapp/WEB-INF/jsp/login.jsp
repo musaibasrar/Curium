@@ -131,6 +131,8 @@ form{
                     window.open('/index_feescollector','_self');
                 }else if(type=='officeadmin'){
                 	window.open('/roshan/index_officeadmin','_self');
+                }else if(type=='marksentry'){
+                	window.open('/roshan/index_marksentry','_self');
                 }
             }
             else if(!flag1){

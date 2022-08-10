@@ -120,7 +120,7 @@ form{
             var flag1=<c:out default="" value="${param.login_success}"/>;
             var type='<c:out default="" value="${userType}"/>';
             
-            if(flag1){
+ 			if(flag1){
             	
             	if(type=='superadmin'){
                     window.open('/index_superadmin','_self');
@@ -128,15 +128,10 @@ form{
                     window.open('/roshan/index_admin','_self');
                 }else if(type=='feescollector'){
                     window.open('/index_feescollector','_self');
-                }else if(type=='reception'){                    
-                   window.open('','_self');
-                    window.close();
-                    openIndexPage('/index_reception',screen.width,screen.height);
-                }
-                else if(type=='staff'){
-                	window.open('/index','_self');
                 }else if(type=='officeadmin'){
-                	window.open('/index_officeadmin','_self');
+                	window.open('/roshan/index_officeadmin','_self');
+                }else if(type=='marksentry'){
+                	window.open('/roshan/index_marksentry','_self');
                 }
             }
             else if(!flag1){
