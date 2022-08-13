@@ -1,244 +1,392 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Admission Form</title>
 
-<script type="text/javascript">
-function validateForm() {
-  var x = document.forms["myForm"]["fname"].value;
-  if (x == "" || x == null) {
-    alert("First Name must be filled out");
-    return false;
-  }
+<style>
+
+h3{
+	margin-left: 400px;
+	margin-right: 30px;
+	margin-top: 10px;
 }
 
-</script>
+h2{
+	margin-left: 400px;
+}
+
+h4{
+	margin-left: 400px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+input {
+  border: 0;
+  outline: 0;
+  border-bottom: solid;
+        
+}
+
+
+
+
+</style>
+
+
 </head>
 <body>
 
 <form method="post"  enctype="multipart/form-data">
 
+	<div align="center">
+		<img alt="Govt Of Karnataka" src="/taha/images/Karnatakalogo.png">
+	</div>
+
 <h2>GOVERNMENT OF KARNATAKA</h2>
-<h4>STUDENT ENROLLMENT FORN FOR YEAR 2021-22</h4>
-<form name="myForm">
-	<div class="admission">
-	<div class="group1">
-	<form>
-		<label for="schoolnamelocation">School Name and Location:</label>
-        <input type="text" name="schoolnamelocation" size="172"></br>
-    </form>
-</div>
+<h4>STUDENT ENROLLMENT FORM FOR YEAR 2021-22</h4>
+<div class="schoolname">
+<label for="schoolname">School Name and Location:</label>
+ <input type="text" name="schoolname" style="width: 900px;">
+ </div>
 <h3>Admission Detail For Higher Class</h3>
+<table>	
+  <tr>
+    <td>1</td>
+    <td>Admission To Class</td> 
+    <td style="width:70%">
+    	<c:set var="classonly" value="${fn:split(parents.student.classstudying, '--')}" />
+    	1<input type="checkbox"
+		value="1" name="admissiontoclass" id="yes:1"
+		${classonly[0] == 'I' ? 'checked' : ''} />&nbsp;
+		&nbsp;2<input type="checkbox" value="2" name="admissiontoclass"
+		id="no:2" onclick="noCheck(this.id);"
+		${classonly[0] == 'II' ? 'checked' : ''} />
+		3<input type="checkbox"
+		value="3" name="admissiontoclass" id="yes:3"
+		${classonly[0] == 'III' ? 'checked' : ''} />&nbsp;
+		&nbsp;4<input type="checkbox" value="4" name="admissiontoclass"
+		id="no:4" onclick="noCheck(this.id);"
+		${classonly[0] == 'IV' ? 'checked' : ''} />
+		5<input type="checkbox"
+		value="5" name="admissiontoclass" id="yes:5"
+		${classonly[0] == 'V' ? 'checked' : ''} />&nbsp;
+		&nbsp;6<input type="checkbox" value="6" name="admissiontoclass"
+		id="no:6" onclick="noCheck(this.id);"
+		${classonly[0] == 'VI' ? 'checked' : ''} />
+		7<input type="checkbox"
+		value="7" name="admissiontoclass" id="yes:7"
+		${classonly[0] == 'VII' ? 'checked' : ''} />&nbsp;
+		&nbsp;8<input type="checkbox" value="8" name="admissiontoclass"
+		id="no:8" onclick="noCheck(this.id);"
+		${classonly[0] == 'VIII' ? 'checked' : ''} />
+		&nbsp;
+		&nbsp;9<input type="checkbox" value="9" name="admissiontoclass"
+		id="no:9" onclick="noCheck(this.id);"
+		${classonly[0] == 'IX' ? 'checked' : ''} />
+		&nbsp;
+		&nbsp;10<input type="checkbox" value="10" name="admissiontoclass"
+		id="no:10" onclick="noCheck(this.id);"
+		${classonly[0] == 'X' ? 'checked' : ''} /></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Stream For 11 and 12</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Medium For Instruction</td>
+    <td>Kannada<input type="checkbox"
+		value="Kannada" name="mediumofinstruction" id="yes:Kannada"
+		${parents.student.mediumofinstruction == 'Kannada' ? 'checked' : ''} />&nbsp;
+		&nbsp;Hindi<input type="checkbox" value="Hindi" name="mediumofinstruction"
+		id="no:Hindi" onclick="noCheck(this.id);"
+		${parents.student.mediumofinstruction == 'Hindi' ? 'checked' : ''} />
+		Urdu<input type="checkbox"
+		value="Urdu" name="mediumofinstruction" id="yes:Urdu"
+		${parents.student.mediumofinstruction == 'Urdu' ? 'checked' : ''} />&nbsp;
+		&nbsp;English<input type="checkbox" value="English" name="mediumofinstruction"
+		id="no:English" onclick="noCheck(this.id);"
+		${parents.student.mediumofinstruction == 'English' ? 'checked' : ''} />
+		Marathi<input type="checkbox"
+		value="Marathi" name="mediumofinstruction" id="yes:Marathi"
+		${parents.student.mediumofinstruction == 'Marathi' ? 'checked' : ''} />&nbsp;
+		&nbsp;Tamil<input type="checkbox" value="Tamil" name="mediumofinstruction"
+		id="no:Tamil" onclick="noCheck(this.id);"
+		${parents.student.mediumofinstruction == 'Tamil' ? 'checked' : ''} />
+		Telgu<input type="checkbox"
+		value="Telgu" name="mediumofinstruction" id="yes:Telgu"
+		${parents.student.mediumofinstruction == 'Telgu' ? 'checked' : ''} /></td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Mother Tongue</td>
+    <td>Kannada<input type="checkbox"
+		value="Kannada" name="mothertongue" id="yes:Kannada"
+		${parents.student.mothertongue == 'Kannada' ? 'checked' : ''} />&nbsp;
+		&nbsp;Hindi<input type="checkbox" value="Hindi" name="mothertongue"
+		id="no:Hindi" onclick="noCheck(this.id);"
+		${parents.student.mothertongue == 'Hindi' ? 'checked' : ''} />
+		Urdu<input type="checkbox"
+		value="Urdu" name="mothertongue" id="yes:Urdu"
+		${parents.student.mothertongue == 'Urdu' ? 'checked' : ''} />&nbsp;
+		&nbsp;English<input type="checkbox" value="English" name="mothertongue"
+		id="no:English" onclick="noCheck(this.id);"
+		${parents.student.mothertongue == 'English' ? 'checked' : ''} />
+		Marathi<input type="checkbox"
+		value="Marathi" name="mothertongue" id="yes:Marathi"
+		${parents.student.mothertongue == 'Marathi' ? 'checked' : ''} />&nbsp;
+		&nbsp;Tamil<input type="checkbox" value="Tamil" name="mothertongue"
+		id="no:Tamil" onclick="noCheck(this.id);"
+		${parents.student.mothertongue == 'Tamil' ? 'checked' : ''} />
+		Telgu<input type="checkbox"
+		value="Telgu" name="mothertongue" id="yes:Telgu"
+		${parents.student.mothertongue == 'Telgu' ? 'checked' : ''} /></td>
+  </tr>
+ 
+</table>
+
+<h3>Previous School Details</h3>
+<table>	
+  <tr>
+    <td>5</td>
+    <td>Previous School Affiliation</td>
+    <td style="width:70%"></td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>Transfer Certificate No.</td>
+    <td style="width:70%"><c:out default="" value="${parents.student.nooftc}" /></td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>SATS Child Number</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>Previous School Name</td>
+    <td><c:out default="" value="${parents.student.schoollastattended}" /></td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>Previous School Type</td>
+    <td>Government<input type="checkbox"
+		value="Government" name="previousschooltype" id="yes:Government"
+		${parents.student.previousschooltype == 'Government' ? 'checked' : ''} />&nbsp;
+		&nbsp;Private Aided<input type="checkbox" value="Private Aided" name="previousschooltype"
+		id="no:Private Aided" onclick="noCheck(this.id);"
+		${parents.student.previousschooltype == 'Private Aided' ? 'checked' : ''} />
+		Local Bodies<input type="checkbox"
+		value="Local Bodies" name="previousschooltype" id="yes:Local Bodies"
+		${parents.student.previousschooltype == 'Local Bodies' ? 'checked' : ''} />&nbsp;
+		&nbsp;Private Unaided School<input type="checkbox" value="Private Unaided School" name="previousschooltype"
+		id="no:Private Unaided School" onclick="noCheck(this.id);"
+		${parents.student.previousschooltype == 'Private Unaided School' ? 'checked' : ''} /></td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>Previous School Address</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>District</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td>Taluk</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>13</td>
+    <td>City</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>14</td>
+    <td>Pin Code</td>
+    <td></td>
+  </tr>
+ 
+</table>   
 
 
-	<form>
-        <label for="admissiontoclass">Admission To Class:</label>
-   	    <input type="checkbox" name="admissiontoclass" value="2">2
-        <input type="checkbox" name="admissiontoclass" value="3">3
-        <input type="checkbox" name="admissiontoclass" value="4">4
-        <input type="checkbox" name="admissiontoclass" value="5">5
-        <input type="checkbox" name="admissiontoclass" value="6">6
-        <input type="checkbox" name="admissiontoclass" value="7">7
-        <input type="checkbox" name="admissiontoclass" value="8">8
-        <input type="checkbox" name="admissiontoclass" value="9">9
-        <input type="checkbox" name="admissiontoclass" value="10">10
-        <input type="checkbox" name="admissiontoclass" value="11">11
-         <input type="checkbox" name="admissiontoclass" value="12">12
-    </form></br>
-
-    <form>
-        <label for="stream">Stream For 11 and !2:</label>
-   	    <input type="checkbox" name="stream" value="na">NA
-        <input type="checkbox" name="stream" value="commerce">COMMERCE
-        <input type="checkbox" name="stream" value="vocational">VOCATIONAL
-        <input type="checkbox" name="stream" value="sceince">SCEINCE
-        <input type="checkbox" name="stream" value="arts">ARTS
-    </form></br>
-
-	<form>
-        <label for="mediumfirinstruction" >Medium For Instruction:</label>
-   	    <input type="checkbox" name="mediumfirinstruction" value="Kannada">Kannada
-        <input type="checkbox" name="mediumfirinstruction" value="Hindi">Hindi
-        <input type="checkbox" name="mediumfirinstruction" value="Urdu">Urdu
-        <input type="checkbox" name="mediumfirinstruction" value="English">English
-        <input type="checkbox" name="mediumfirinstruction" value="Marathi">Marathi
-        <input type="checkbox" name="mediumfirinstruction" value="Tamil">Tamil
-        <input type="checkbox" name="mediumfirinstruction" value="Telugu">Telugu
-    </form></br>
-
-    <form>
-        <label for="mothertongue" >Mother Tongue:</label>
-   	    <input type="checkbox" name="mothertongue" value="Kannada">Kannada
-        <input type="checkbox" name="mothertongue" value="Hindi">Hindi
-        <input type="checkbox" name="mothertongue" value="Urdu">Urdu
-        <input type="checkbox" name="mothertongue" value="English">English
-        <input type="checkbox" name="mothertongue" value="Marathi">Marathi
-        <input type="checkbox" name="mothertongue" value="Tamil">Tamil
-        <input type="checkbox" name="mothertongue" value="Telugu">Telugu
-        <input type="checkbox" name="mothertongue" value="Other">Other
-    </form></br>
-
-    <h3>Previous School Details</h3>
-
-    <form>
-        <label for="Affiliation" >Previous School Affiliation:</label>
-   	    <input type="checkbox" name="Affiliation" value="State">State
-        <input type="checkbox" name="Affiliation" value="CBSE">CBSE
-        <input type="checkbox" name="Affiliation" value="ICSE">ICSE
-        <input type="checkbox" name="Affiliation" value="Other">Other
-    </form></br>
-
-		<label for="transfercertificateno">Transfer Certificate No.:</label>
-        <input type="text" name="transfercertificateno">
-        <label for="tcdate">TC Date:</label>
-        <input type="date" name="tcdate"></br>
-        <label for="childnumber">SATS Child Number:</label>
-        <input type="text" name="childnumber" size="172"></br>
-        <label for="previousschool">Previous School Name:</label>
-        <input type="text" name="previousschool"  required>
-        <label for="disecode">U-dise Code:</label>
-        <input type="text" name="disecode"></br>
-
-    <form>
-        <label for="schooltype" >Previous School Type:</label>
-   	    <input type="checkbox" name="schooltype" value="Government">Government School
-        <input type="checkbox" name="schooltype" value="Privateaided">Private Aided School
-        <input type="checkbox" name="schooltype" value="Local">Local Bodies
-        <input type="checkbox" name="schooltype" value="Privateunaided">Private Unaided School
-    </form></br>
-    	<label for="previousschooladdress">Previous School Address:</label>
-        <input type="text" name="previousschooladdress" size="172" required></br>
-        <label for="District">District:</label>
-        <input type="text" name="District" required>
-        <label for="Taluk">Taluk:</label>
-        <input type="text" name="Taluk" required>
-        <label for="City">City:</label>
-        <input type="text" name="City" required></br>
-        <label for="Pincode">Pin Code:</label></br>
-        <input type="text" name="Pincode" size="172" required></br>
 
         <h3>Student Details</h3>
-
-        <table class="table">
-    <thead>
-      <tr>
-      	<th></th>
-        <th>First Name</th>
-        <th>Middle Name</th>
-        <th>Last Name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><label for="studentname">Student Name:</label></td>
-        <td><input type="text" name="fname" required></td>
-        <td><input type="text" name="studentname"></td>
-        <td><input type="text" name="studentname"></td>
-      </tr>
-       <tr>
-        <td><label for="mothername">Mother's Name:</label></td>
-        <td><input type="text" name="mothername" ></td>
-        <td><input type="text" name="mothername"></td>
-        <td><input type="text" name="mothername"></td>
-      </tr>
-       <tr>
-        <td><label for="fathername">Father's Name:</label></td>
-        <td><input type="text" name="fathername" ></td>
-        <td><input type="text" name="fathername"></td>
-        <td><input type="text" name="fathername"></td>
-      </tr>
-     
-    </tbody>
+<table>	
+  <tr>
+    <td>15</td>
+    <td>Student Name</td>
+    <td style="width:70%">&nbsp;<c:out value="${parents.student.name}" /></td>
+  </tr>
+  <tr>
+    <td>16</td>
+    <td>Mother's Name</td>
+    <td><c:out value="${parents.mothersname}" /></td>
+  </tr>
+  <tr>
+    <td>17</td>
+    <td>Father's Name</td>
+    <td> <c:out value="${parents.fathersname}" /></td>
+  </tr>
+  <tr>
+    <td>18</td>
+    <td>Date of birth</td>
+    <td><fmt:formatDate value="${parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></td>
+  </tr>
+  <tr>
+    <td>19</td>
+    <td>Child Admitted Under RTE Quota</td>
+    <td>
+    	<c:if test="${(parents.student.rte ==1)}">    
+           <c:out default="" value="Yes" />
+           </c:if>
+          <c:if test="${(parents.student.rte == 0)}">    
+           	<c:out default="" value="No" />
+           	</c:if>
+    </td>
+  </tr>
+  <tr>
+    <td>20</td>
+    <td>Gender</td>
+    <td>Male<input type="checkbox"
+		value="Male" name="gender" id="yes:male"
+		${parents.student.gender == 'Male' ? 'checked' : ''} />&nbsp;
+		&nbsp;Female<input type="checkbox" value="Female" name="gender"
+		id="no:male" onclick="noCheck(this.id);"
+		${parents.student.gender == 'Female' ? 'checked' : ''} /></td>
+  </tr>
+  <tr>
+    <td>21</td>
+    <td>Student Adhaar No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>22</td>
+    <td>Mother's Adhaar No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>23</td>
+    <td>Father's Adhaar No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>24</td>
+    <td>Social Category</td>
+    <td> General<input type="checkbox"
+		value="General" name="socialcategory" id="yes:General"
+		${parents.student.socialcategory == 'General' ? 'checked' : ''} />&nbsp;
+		&nbsp;OBC<input type="checkbox" value="OBC" name="socialcategory"
+		id="no:OBC" onclick="noCheck(this.id);"
+		${parents.student.socialcategory == 'OBC' ? 'checked' : ''} />
+		SC<input type="checkbox"
+		value="SC" name="socialcategory" id="yes:SC"
+		${parents.student.socialcategory == 'SC' ? 'checked' : ''} />&nbsp;
+		&nbsp;ST<input type="checkbox" value="ST" name="socialcategory"
+		id="no:ST" onclick="noCheck(this.id);"
+		${parents.student.socialcategory == 'ST' ? 'checked' : ''} /></td>
+  </tr>
   </table>
-  		<label for="dob">Date of birth:</label>
-        <input type="date" name="dob">
-        <label for="inwords">In Words</label>
-        <input type="text" name="inwords"></br>
-        <label for="rte">Child Admitted Under RTE Quota</label>
-        Yes<input type="radio" name="rte" value="Yes">
-        No<input type="radio" name="rte" value="No"></br>
-        <label for="Gender">Gender</label>
-        Male<input type="radio" name="Gender" value="Male">
-        Female<input type="radio" name="Gender" value="Female">
-        Transgender<input type="radio" name="Gender" value="Transgender">
-        Other<input type="radio" name="Gender" value="Other"></br>
-
-        <table class="table1">
-    <thead>
-      <tr>
-      	<th></th>
-        <th>Child</th>
-        <th>Father's</th>
-        <th>Mother's</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><label for="aadharno">Aadhar UID No.</label></td>
-        <td><input type="text" name="aadharno" ></td>
-        <td><input type="text" name="aadharno"></td>
-        <td><input type="text" name="aadharno"></td>
-      </tr>
-  </tbody>
+  <h3>TC not produced at the time of admission please fill the following information</h3>
+  <table>
+  <tr>
+    <td>25</td>
+    <td>Student Caste Certificate No</td>
+    <td style="width:70%"><c:out default="" value="${parents.student.studentscastecertno}" /></td>
+  </tr>
+  <tr>
+    <td>26</td>
+    <td>Mother's Caste Certificate No</td>
+    <td><c:out default="" value="${parents.motherscastecertno}" /></td>
+  </tr>
+   <tr>
+    <td>27</td>
+    <td>Father's Caste Certificate No</td>
+    <td><c:out value="${parents.fatherscastecertno}" /></td>
+  </tr>
+  <tr>
+    <td>28</td>
+    <td>Belong To BPL</td>
+    <td>&nbsp;Yes<input
+		type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
+		onclick="yesCheck(this.id);" ${parents.student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
+		type="checkbox" value="0" name="belongtobpl" id="no:bpl"
+		onclick="noCheck(this.id);" ${parents.student.belongtobpl == '0' ? 'checked' : ''}/></td>
+  </tr>
+  <tr>
+    <td>29</td>
+    <td>Bhagyalaxmi Bond No</td>
+    <td><c:out default="" value="${parents.student.bhagyalakshmibondnumber}" /></td>
+  </tr>
+   <tr>
+    <td>30</td>
+    <td>Child with special need</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>31</td>
+    <td>Special Category</td>
+    <td>None<input type="checkbox"
+		value="None" name="specialcategory" id="yes:None"
+		${parents.student.specialcategory == 'None' ? 'checked' : ''} />&nbsp;
+		&nbsp;Destitute<input type="checkbox" value="Destitute" name="specialcategory"
+		id="no:Destitute" onclick="noCheck(this.id);"
+		${parents.student.specialcategory == 'Destitute' ? 'checked' : ''} />
+		HIV Case<input type="checkbox"
+		value="HIV Case" name="specialcategory" id="yes:HIV Case"
+		${parents.student.specialcategory == 'HIV Case' ? 'checked' : ''} />&nbsp;
+		&nbsp;Orphans<input type="checkbox" value="Orphans" name="specialcategory"
+		id="no:Orphans" onclick="noCheck(this.id);"
+		${parents.student.specialcategory == 'Orphans' ? 'checked' : ''} />
+		Others<input type="checkbox"
+		value="Others" name="specialcategory" id="yes:Others"
+		${parents.student.specialcategory == 'Others' ? 'checked' : ''} />&nbsp;</td>
+  </tr>
+  <tr>
+    <td>32</td>
+    <td>Pin Code</td>
+    <td></td>
+  </tr>
+   <tr>
+    <td>33</td>
+    <td>City/Village/Town</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>34</td>
+    <td>Address</td>
+    <td><c:out default="" value="${parents.addresspermanent}" /></td>
+  </tr>
+  <tr>
+    <td>35</td>
+    <td>Mobile Number</td>
+    <td><c:out default="" value="${parents.contactnumber}" /></td>
+  </tr>
+   <tr>
+    <td>36</td>
+    <td>BMTC Bus pass</td>
+    <td></td>
+  </tr>
+   
 </table>
-  		<label for="Category">Social Category</label>
-        General<input type="radio" name="Category" value="General">
-        OBC<input type="radio" name="Category" value="OBC">
-        SC<input type="radio" name="Category" value="SC">
-        ST<input type="radio" name="Category" value="ST"></br>
- 
- <h3>TC not produced at the time of admission please fill the following information</h3>
- 		<label for="scastenumber">Student Caste Certificate Number:</label>
-        <input type="text" name="scastenumber">
-        <label for="SCaste">Caste:</label>
-        <input type="text" name="SCaste">
-        <label for="SSubcaste">Sub Caste</label>
-        <input type="text" name="SSubcaste"></br>
-
-        <label for="fcastenumber">Father's Caste Certificate Number:</label>
-        <input type="text" name="fcastenumber">
-        <label for="FCaste">Caste:</label>
-        <input type="text" name="FCaste">
-        <label for="FSubcaste">Sub Caste</label>
-        <input type="text" name="FSubcaste"></br>
-
-        <label for="mcastenumber">Student Caste Certificate Number:</label>
-        <input type="text" name="mcastenumber">
-        <label for="MCaste">Caste:</label>
-        <input type="text" name="MCaste">
-        <label for="MSubcaste">Sub Caste</label>
-        <input type="text" name="MSubcaste"></br>
-
-        <label for="BPL">Belong To BPL</label>
-        Yes<input type="radio" name="BPL" value="Yes">
-        No<input type="radio" name="BPL" value="No">
-        <label for="bplcardno">BPL Card Number</label>
-        <input type="text" name="bplcardno"></br>
-
-        <label for="specialcategory" >Special Catagory:</label>
-   	    <input type="checkbox" name="specialcategory" value="None">None
-        <input type="checkbox" name="specialcategory" value="Destitude">Destitude
-        <input type="checkbox" name="specialcategory" value="HIV">HIV Case
-        <input type="checkbox" name="specialcategory" value="Orphan">Orphan
-        <input type="checkbox" name="specialcategory" value="Other">Other</br>
-
-        <label for="Pincode">Pin Code:</label>
-        <input type="text" name="Pincode">
-        <label for="District">District:</label>
-        <input type="text" name="District">
-        <label for="Taluk">Taluk:</label>
-        <input type="text" name="Taluk"></br>
-        <label for="cvt">City/Village/Town:</label>
-        <input type="text" name="cvt">
-        <label for="Locality">Locality:</label>
-        <input type="text" name="Locality"></br>
-        <label for="Address">Address:</label>
-        <input type="text" name="Address" size="172"></br>
-        <label for="mobileno">Mobile Number:</label>
-		<input type="tel" id="mobileno" name="mobileno" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"></br>
-		<label for="email">Email:</label>
-		<input type="email" id="email" name="email"></br>
+  		
 
 		<p>Note: Fill all the fields in capital letter.</p>
 
@@ -254,7 +402,6 @@ function validateForm() {
         <label for="IFSC">Bank IFSC Code:</label>
         <input type="text" name="IFSC" size="172"></br>
 
- <button type="button" onclick="validateForm();">Submit</button>
  <button onclick="window.print()">Print</button>
  </div>
  </form>

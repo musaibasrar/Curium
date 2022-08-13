@@ -414,6 +414,8 @@ public class FeesCollectionService {
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
 			Student student = new studentDetailsDAO().readUniqueObject(rinfo.getSid());
 			Parents parents = new parentsDetailsDAO().readUniqueObject(rinfo.getSid());
+			Login userLogin = new UserDAO().getUniqueObject(rinfo.getUserid());
+			request.setAttribute("user", userLogin);
 			httpSession.setAttribute("parents", parents);
 			httpSession.setAttribute("student", student);
 			request.setAttribute("recieptdate", reDate);
