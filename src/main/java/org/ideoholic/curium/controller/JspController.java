@@ -331,4 +331,30 @@ public class JspController {
 	public String getReportsOfficeAdmin() {
 		return "reports_officeadmin";
 	}
+	
+	@GetMapping("/header_marksentry")
+	public String getHeaderMarksEntry() {
+		return "header_marksentry";
+	}
+	
+	@GetMapping("/index_marksentry")
+	public String getIndexMarksEntry() {
+		return "index_marksentry";
+	}
+	
+	@GetMapping("/left_marksentry")
+	public String getLeftMarksEntry() {
+		return "left_marksentry";
+	}
+	
+	@GetMapping("/previewFeesReceiptDetail")
+	public String getPreviewFeesReceiptDetail() {
+		return "previewFeesReceiptDetail";
+	}
+	
+	@GetMapping("/printReceiptFeesDetail")
+	public String getPrintReceiptFeesDetail() {
+		return "printReceiptFeesDetail";
+	}
+	
 }
