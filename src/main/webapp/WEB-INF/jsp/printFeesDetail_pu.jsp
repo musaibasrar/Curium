@@ -175,7 +175,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left">
-				<img src="/roshan/images/roshanheader.png" width="200" height="150"/>
+				<img src="/divine/images/divineheader.png" width="200" height="150"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				Curium Comp. P.U. College <br>

@@ -13,19 +13,19 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/roshan/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
+        <script language="JavaScript" src="/divine/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/divine/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/divine/css/datePicker/demos.css">
 
-        <script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/roshan/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/roshan/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/divine/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/divine/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/divine/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/divine/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/divine/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/divine/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/divine/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/divine/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             var get;
@@ -431,7 +431,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/divine/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,61 +454,61 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/StudentProcess/viewAll" >View All</a><br/>
-                <a target="mainFrame" href="/roshan/feesstructure" >Fees Structure</a><br/>
+                <a target="mainFrame" href="/divine/StudentProcess/viewAll" >View All</a><br/>
+                <a target="mainFrame" href="/divine/feesstructure" >Fees Structure</a><br/>
                 
 
             </div>
             <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/roshan/EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/roshan/DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/roshan/PositionProcess/positionView" >Add Position</a>
+                <a target="mainFrame" href="/divine/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="/divine/EmployeeProcess/addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="/divine/DepartmentProcess/departmentView" >Add Department</a>
+                <a target="mainFrame" href="/divine/PositionProcess/positionView" >Add Position</a>
 
             </div> -->
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="/roshan/FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/roshan/FeesProcess/feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="/divine/FeesProcess/feesView" >Fees Category</a>
+                <a target="mainFrame" href="/divine/FeesProcess/feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
             <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/AdminProcess/viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="/divine/AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/AdvanceSearch" >Search</a><br/>
+                <a target="mainFrame" href="/divine/AdvanceSearch" >Search</a><br/>
 
 
             </div>
 			<!--
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/Promotion" >Promotions</a><br/>
+                <a target="mainFrame" href="/divine/Promotion" >Promotions</a><br/>
 
 
             </div> -->
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/divine/StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
             <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="/roshan/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/roshan/YearProcess/updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="/divine/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="/divine/YearProcess/updateYear" >Academic year</a><br/>
                 
 
             </div> -->
@@ -516,15 +516,15 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-               <!--  <a target="mainFrame" href="/roshan/Backup&Restore" >Backup</a><br/>
-                <a target="mainFrame" href="/roshan/currentIssue" >Current Issue</a><br/>
-                <a target="mainFrame" href="/roshan/changePassword" >Change Password</a><br/> -->
-                <a target="mainFrame" href="/roshan/feesCollectionDetails" >Fees Collection Details</a><br/>
+               <!--  <a target="mainFrame" href="/divine/Backup&Restore" >Backup</a><br/>
+                <a target="mainFrame" href="/divine/currentIssue" >Current Issue</a><br/>
+                <a target="mainFrame" href="/divine/changePassword" >Change Password</a><br/> -->
+                <a target="mainFrame" href="/divine/feesCollectionDetails" >Fees Collection Details</a><br/>
             </div>
             
            <!--  <h5 style="font-size: 12px"><a href="#" >Reports</a></h5>
             <div >
-                <a target="mainFrame" href="/roshan/studentsdetailsreports" >Student Details</a><br/>
+                <a target="mainFrame" href="/divine/studentsdetailsreports" >Student Details</a><br/>
                 
             </div>  -->
             

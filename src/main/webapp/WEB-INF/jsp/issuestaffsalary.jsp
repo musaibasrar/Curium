@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Issue Staff Salary</title>
-<link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
+<link rel="stylesheet" href="/divine/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/divine/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -325,43 +325,43 @@
 
 </style>
 
-<link rel="stylesheet" href="/roshan/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/divine/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/divine/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/divine/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/roshan/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/divine/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/divine/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
+	src="/divine/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/divine/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/roshan/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/divine/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/divine/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/divine/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/divine/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/divine/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/divine/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/divine/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/divine/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/divine/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/divine/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/ScrollableGridPlugin.js"></script>
-<script src="/roshan/js/print/jquery.printPage.js" type="text/javascript"></script>
+	src="/divine/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+<script src="/divine/js/print/jquery.printPage.js" type="text/javascript"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -388,7 +388,7 @@
 </script>
   
 
-<script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/divine/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -455,7 +455,7 @@
 
 function issueStaffSalary(){
 	var form1 = document.getElementById("form1");
-	form1.action = "/roshan/HrProcess/issueProcessedSalary";
+	form1.action = "/divine/HrProcess/issueProcessedSalary";
 	form1.method = "POST";
 	form1.submit();
 
@@ -463,7 +463,7 @@ function issueStaffSalary(){
 
 function cancelStaffSalary(){
 	var form1 = document.getElementById("form1");
-	form1.action = "/roshan/HrProcess/cancelStaffSalary";
+	form1.action = "/divine/HrProcess/cancelStaffSalary";
 	form1.method = "POST";
 	form1.submit();
 
@@ -481,7 +481,7 @@ function cancelStaffSalary(){
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/divine/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -519,7 +519,7 @@ for(Cookie cookie : cookies){
 						<th class="headerText" ><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/roshan/images/sort_both.png" /></th>
+							src="/divine/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Department&nbsp;</th>
 							<th title="click to sort" class="headerText">Designation&nbsp;</th>
 							<th title="click to sort" class="headerText">Processed Date&nbsp;</th>
@@ -560,7 +560,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${processsalarydetailslist.netpayment}"/></td>
                                 <td class="dataText"><c:out value="${processsalarydetailslist.paymenttype}"/></td>
                                 <td class="dataText"><c:out value="${processsalarydetailslist.status}"/></td>
-                                <td class="dataText"><a id="print" href="/roshan/HrProcess/printSalarySlip?salaryid=<c:out value="${processsalarydetailslist.idprocesssalarydetails}" />"><div align="center" align="center"><img  alt="Printsalaryslip" src="/roshan/images/printer.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
+                                <td class="dataText"><a id="print" href="/divine/HrProcess/printSalarySlip?salaryid=<c:out value="${processsalarydetailslist.idprocesssalarydetails}" />"><div align="center" align="center"><img  alt="Printsalaryslip" src="/divine/images/printer.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
                             </tr>
                         </c:forEach>
 				</tbody>

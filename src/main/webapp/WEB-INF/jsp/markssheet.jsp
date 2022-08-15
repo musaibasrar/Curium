@@ -216,7 +216,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/divine/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -237,7 +237,7 @@ for(Cookie cookie : cookies){
                         	<table style="page-break-inside: avoid;border-collapse: collapse;">
 			<tr>
 				<td width="10%"></td>
-				<td><img src="/roshan/images/roshanheader.png" width="190" height="60"/></td>
+				<td><img src="/divine/images/divineheader.png" width="190" height="60"/></td>
 				<td width="5%"></td>
 				<td>
 				<label class="dataTextBoldCenter">Divine M.A. Independent P.U. College </label><br>

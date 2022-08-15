@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Students Admission Reports</title>
-<link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
+<link rel="stylesheet" href="/divine/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/divine/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -300,42 +300,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/roshan/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/divine/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/divine/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/divine/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/roshan/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/divine/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/divine/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
+	src="/divine/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/divine/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/roshan/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/divine/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/divine/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/divine/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/divine/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/divine/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/divine/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/divine/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/divine/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/divine/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/divine/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/divine/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -361,11 +361,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/divine/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/DocumentsProcess/multiClassSearchAdmissoinReport";
+		form1.action = "/divine/DocumentsProcess/multiClassSearchAdmissoinReport";
 		form1.method = "POST";
 		form1.submit();
 
@@ -494,7 +494,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/divine/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -507,7 +507,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/roshan/StudentProcess/exportDataForStudents" method="POST">
+	<form id="form1" action="/divine/StudentProcess/exportDataForStudents" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -683,7 +683,7 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/roshan/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
+								href="/divine/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>

@@ -91,7 +91,7 @@ public class StampFeesService {
 		
 		String academicYear = request.getParameter("academicyear");
 			
-		String queryMain = "From Parents as parents where (parents.Student.promotedyear='"+academicYear+"' or parents.Student.yearofadmission='"+academicYear+"') and ";
+		String queryMain = "From Parents as parents where (parents.Student.promotedyear='"+academicYear+"' or parents.Student.yearofadmission='"+academicYear+"') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and";
 		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
 		String[] addClass = request.getParameterValues("classsearch");
 		//String addSec = request.getParameter("secsearch");
