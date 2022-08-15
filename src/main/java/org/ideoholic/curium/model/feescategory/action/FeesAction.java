@@ -72,6 +72,7 @@ public class FeesAction {
 	@GetMapping("/feesReport")
 	public String feesReport() {
 		new StandardService(request, response).viewClasses();
+		new FeesService(request, response).viewFees();
 		return "feesreport";
 	}
 
