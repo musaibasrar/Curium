@@ -398,7 +398,7 @@ public class FeesService {
        			        		buffer = buffer +  "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
        			        				+ "<label class='labelClass' style='font-weight: bold;color:#325F6D'> <input"
        			        				+ "									 type='checkbox' name='feescategory' class='chcktbl' value="+list.get(i).getIdfeescategory()+""
-       			        				+ "									size='36'> "+list.get(i).getFeescategoryname()+""
+       			        				+ "									size='36'> "+list.get(i).getFeescategoryname()+" : </label> <label style='font-weight: bold;color:#eb6000'>"+list.get(i).getParticularname()+""
        			        				+ "							</label><br>";
        			        	}
        			        	response.getWriter().println(buffer);
