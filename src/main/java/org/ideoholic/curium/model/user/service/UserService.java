@@ -109,7 +109,9 @@ public class UserService {
             for (Classsec classstudying : classsecList) {
         	
 		        	String classStudying = classstudying.getClassdetails();
-		    		
+            		
+            		if(!classStudying.equalsIgnoreCase("")) {
+		        			
 		    		if (!classStudying.equalsIgnoreCase("")) {
 		    			classStudying = classStudying+"--" +"%";
 		    		}
@@ -126,7 +128,7 @@ public class UserService {
                     }
                     
                 	}
-        
+		}        
         	// Total Teachers
         	List<Teacher> teacher = new EmployeeDAO().readCurrentTeachers(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
         	request.setAttribute("totalteachers", teacher.size());

@@ -387,7 +387,7 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/AccountProcess/printSearchLedgerEntries";
+		form1.action = "/rauzamission/AccountProcess/printSearchLedgerEntries";
 		form1.method = "POST";
 		form1.submit();
 }

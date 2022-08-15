@@ -297,17 +297,17 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/roshan/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Detail Report</a>
+            				 <a target="mainFrame" href="/rauzamission/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Detail Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/roshan/DocumentsProcess/studentsAdmissionReports" style="font-size: 12px;">Admission Report</a>
+            				 <a target="mainFrame" href="/rauzamission/DocumentsProcess/studentsAdmissionReports" style="font-size: 12px;">Admission Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/roshan/DocumentsProcess/studentsPendingAdmissionReports" style="font-size: 12px;">Pending Admission Report</a>
+            				 <a target="mainFrame" href="/rauzamission/DocumentsProcess/studentsPendingAdmissionReports" style="font-size: 12px;">Pending Admission Report</a>
             			</td>
             		</tr>
             		
@@ -333,23 +333,23 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/roshan/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>
+            				 <a target="mainFrame" href="/rauzamission/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>
             			</td>
             		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/roshan/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
+            				<a target="mainFrame" href="/rauzamission/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/roshan/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
+            				 <a target="mainFrame" href="/rauzamission/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/roshan/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
+            				<a target="mainFrame" href="/rauzamission/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
             			</td>
             		</tr>
                 </table>

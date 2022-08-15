@@ -335,4 +335,14 @@ public class JspController {
 	public String getReportsOfficeAdmin() {
 		return "reports_officeadmin";
 	}
+	
+	@GetMapping("/previewFeesReceiptDetail")
+	public String getPreviewFeesReceiptDetail() {
+		return "previewFeesReceiptDetail";
+	}
+	
+	@GetMapping("/printReceiptFeesDetail")
+	public String getPrintReceiptFeesDetail() {
+		return "printReceiptFeesDetail";
+	}
 }
