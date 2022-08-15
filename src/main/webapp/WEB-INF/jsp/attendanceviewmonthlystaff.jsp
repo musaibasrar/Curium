@@ -14,39 +14,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>fees structure</title>
-<script src="/roshan/js/Chart.js"></script>
-<link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
-<link rel="stylesheet" href="/roshan/css/graph/jquery.jqplot.css">
-<link rel="stylesheet" href="/roshan/css/graph/jquery.jqplot.min.css">
+<script src="/taha/js/Chart.js"></script>
+<link rel="stylesheet" href="/taha/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/taha/css/datePicker/demos.css">
+<link rel="stylesheet" href="/taha/css/graph/jquery.jqplot.css">
+<link rel="stylesheet" href="/taha/css/graph/jquery.jqplot.min.css">
 
 
-  <script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+  <script type="text/javascript" src="/taha/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/taha/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/taha/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/taha/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/taha/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/taha/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/taha/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/taha/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/taha/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/taha/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         
         
-         <script  type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="/roshan/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.trendline.min.js"></script>
-        <script src="/roshan/js/jquery.jqplot.min.js" ></script>
-        <script src="/roshan/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
+         <script  type="text/javascript" src="/taha/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/taha/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/taha/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/taha/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/taha/js/graph/jquery.jqplot.js"></script>        
+        <script  type="text/javascript" src="/taha/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/taha/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/taha/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/taha/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/taha/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/taha/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/taha/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script src="/taha/js/jquery.jqplot.min.js" ></script>
+        <script src="/taha/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
         
 <style type="text/css">
 <!--
@@ -328,42 +328,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/roshan/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/taha/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/taha/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/taha/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/roshan/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/taha/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/taha/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/taha/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
+	src="/taha/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/taha/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/taha/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/roshan/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/taha/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/taha/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/taha/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/taha/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/taha/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/taha/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/taha/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/taha/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/taha/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/taha/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/taha/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -433,7 +433,7 @@
         
         
         </script>
-<script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/taha/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -458,7 +458,7 @@
 	
 	function searchStaffAttendanceDetailsMonthly() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/AttendanceProcess/searchStaffAttendanceDetailsMonthly";
+		form1.action = "/taha/AttendanceProcess/searchStaffAttendanceDetailsMonthly";
 		form1.method = "POST";
 		form1.submit();
 
@@ -466,7 +466,7 @@
 	
 	function searchStaffAttendanceDetails() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/AttendanceProcess/searchStaffAttendanceDetails";
+		form1.action = "/taha/AttendanceProcess/searchStaffAttendanceDetails";
 		form1.method = "POST";
 		form1.submit();
 
@@ -620,7 +620,7 @@
 	   
 	function updateRecords(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/AttendanceProcess/updateStaffAttendanceDetails";
+		form1.action = "/taha/AttendanceProcess/updateStaffAttendanceDetails";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -634,7 +634,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/taha/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -648,7 +648,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form id="form1" action="/roshan/StampFeesProcess/applyFees" method="POST">
+	<form id="form1" action="/taha/StampFeesProcess/applyFees" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />

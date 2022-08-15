@@ -53,7 +53,7 @@ input {
 <form method="post"  enctype="multipart/form-data">
 
 	<div align="center">
-		<img alt="Govt Of Karnataka" src="/roshan/images/Karnatakalogo.png">
+		<img alt="Govt Of Karnataka" src="/taha/images/Karnatakalogo.png">
 	</div>
 
 <h2>GOVERNMENT OF KARNATAKA</h2>
@@ -71,36 +71,36 @@ input {
     	<c:set var="classonly" value="${fn:split(parents.student.classstudying, '--')}" />
     	1<input type="checkbox"
 		value="1" name="admissiontoclass" id="yes:1"
-		${classonly[0] == '1ST STD' ? 'checked' : ''} />&nbsp;
+		${classonly[0] == 'I' ? 'checked' : ''} />&nbsp;
 		&nbsp;2<input type="checkbox" value="2" name="admissiontoclass"
 		id="no:2" onclick="noCheck(this.id);"
-		${classonly[0] == 'IIND STD' ? 'checked' : ''} />
+		${classonly[0] == 'II' ? 'checked' : ''} />
 		3<input type="checkbox"
 		value="3" name="admissiontoclass" id="yes:3"
-		${classonly[0] == 'IIIRD STD' ? 'checked' : ''} />&nbsp;
+		${classonly[0] == 'III' ? 'checked' : ''} />&nbsp;
 		&nbsp;4<input type="checkbox" value="4" name="admissiontoclass"
 		id="no:4" onclick="noCheck(this.id);"
-		${classonly[0] == 'IVTH STD' ? 'checked' : ''} />
+		${classonly[0] == 'IV' ? 'checked' : ''} />
 		5<input type="checkbox"
 		value="5" name="admissiontoclass" id="yes:5"
-		${classonly[0] == 'VTH STD' ? 'checked' : ''} />&nbsp;
+		${classonly[0] == 'V' ? 'checked' : ''} />&nbsp;
 		&nbsp;6<input type="checkbox" value="6" name="admissiontoclass"
 		id="no:6" onclick="noCheck(this.id);"
-		${classonly[0] == 'VITH STD' ? 'checked' : ''} />
+		${classonly[0] == 'VI' ? 'checked' : ''} />
 		7<input type="checkbox"
 		value="7" name="admissiontoclass" id="yes:7"
-		${classonly[0] == 'VIITH STD' ? 'checked' : ''} />&nbsp;
+		${classonly[0] == 'VII' ? 'checked' : ''} />&nbsp;
 		&nbsp;8<input type="checkbox" value="8" name="admissiontoclass"
 		id="no:8" onclick="noCheck(this.id);"
-		${classonly[0] == 'VIII STD' ? 'checked' : ''} />
+		${classonly[0] == 'VIII' ? 'checked' : ''} />
 		&nbsp;
 		&nbsp;9<input type="checkbox" value="9" name="admissiontoclass"
 		id="no:9" onclick="noCheck(this.id);"
-		${classonly[0] == 'IX STD' ? 'checked' : ''} />
+		${classonly[0] == 'IX' ? 'checked' : ''} />
 		&nbsp;
 		&nbsp;10<input type="checkbox" value="10" name="admissiontoclass"
 		id="no:10" onclick="noCheck(this.id);"
-		${classonly[0] == 'X STD' ? 'checked' : ''} /></td>
+		${classonly[0] == 'X' ? 'checked' : ''} /></td>
   </tr>
   <tr>
     <td>2</td>
@@ -394,7 +394,7 @@ input {
 		<label for="enrollmentno">Student Enrollment Number:</label>
         <input type="text" name="enrollmentno">
         <label for="admissiondate">Admission Date:</label>
-        <input type="date" name="admissiondate">
+        <input type="text" name="admissiondate">
         <label for="U-Dise">U-Dise Code:</label>
         <input type="text" name="U-Dise"></br>
         <label for="bankaccount">Student/Parent Bank Account Number:</label>

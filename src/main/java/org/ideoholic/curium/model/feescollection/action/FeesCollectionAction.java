@@ -75,7 +75,8 @@ public class FeesCollectionAction {
         public String ViewDetails() {
                 //new FeesCollectionService(request, response).preview();
                 new FeesCollectionService(request, response).previewFeesDetails();
-                return "previewFeesDetail";
+                //return "previewFeesDetail";
+                return "previewFeesReceiptDetail";
         }
 
         @GetMapping("/printReceipt")
@@ -129,5 +130,11 @@ public class FeesCollectionAction {
             new FeesCollectionService(request, response).getFeesStampDueReport();
             return "feesstampdue";
         }
+        
+        @GetMapping("/printFeesReceipt")
+        private String printFeesReceipt() {
+            new FeesCollectionService(request, response).previewDetails();
+	    return "printReceiptFeesDetail";
+	    }
 		
 }
