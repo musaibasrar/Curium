@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.stampfees.action;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -52,5 +54,15 @@ public class StampFeesAction {
 	public String search() {
 		new StampFeesService(request, response).advanceSearch();
 		return "stampfees";
+	}
+	
+	@GetMapping("/showFeesDetailsYearly")
+	public void showFeesDetailsYearly() {
+		try {
+			new FeesService(request, response).viewFeesYearly();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
