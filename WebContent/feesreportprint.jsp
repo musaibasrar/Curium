@@ -248,8 +248,8 @@
 						<th class="datath">Admn. No.</th>
 						<th class="datath">Name</th>
 						<th class="datath">Class & Sec</th>
-						<!-- <th class="datath">Father Name&nbsp;</th>
-						<th class="datath">Contact No.&nbsp;</th> -->
+						<th class="datath">Father Name&nbsp;</th>
+						<th class="datath">Contact No.&nbsp;</th>
 						<th class="datath">Fees Details<br> (Due/Total)</th>
 						<th class="datath">Fees Summary<br> (Due/Total)</th>
 						
@@ -270,6 +270,9 @@
 								<td class="datatd" style="font-size: 9px;"><c:out value="${studentfeesreportlist.parents.student.admissionnumber}" /></td>
 								<td class="datatd" style="font-size: 9px;"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>
 								<td class="datatd" style="font-size: 9px;"><c:out value="${studentfeesreportlist.parents.student.classstudying}" /></td>
+								<td class="datatd" style="font-size: 9px;"><c:out value="${studentfeesreportlist.parents.fathersname}" /></td>
+								<td class="datatd" style="font-size: 9px;"><c:out value="${studentfeesreportlist.parents.contactnumber}" /></td>
+								
 								<td class="datatd" style="font-size: 9px;">
 									<c:set var="DueAmount" value="0" />
 									<c:set var="TotalAmount" value="0" />
@@ -287,8 +290,6 @@
 									</c:forEach>
 								</td>
 								
-								<%-- <td class="datatd" style="font-size: 9px;"><c:out value="${studentfeesreportlist.parents.fathersname}" /></td>
-								<td class="datatd" style="font-size: 9px;"><c:out value="${studentfeesreportlist.parents.contactnumber}" /></td> --%>
 								<%-- <td class="datatd" style="font-size: 9px;">
 									<c:set var="DueAmount" value="0" />
 									<c:set var="TotalAmount" value="0" />

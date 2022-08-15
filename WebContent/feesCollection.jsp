@@ -67,6 +67,7 @@
                 height: 22px;
                 vertical-align: middle;
                 text-align: center;
+                font-size: 16px;
                 background-image: url("images/ui-bg_diagonals-small_50_466580_40x40.png");
             }
             .headerTD{
@@ -167,13 +168,13 @@
             }
             .alignLeft {
                 font-family: Tahoma;
-                font-size: 11px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: left;
-                vertical-align: middle;
-                font-weight: bold;
+				font-size: 14px;
+				font-style: normal;
+				text-transform: capitalize;
+				color: #325F6D;
+				text-align: left;
+				vertical-align: middle;
+				font-weight: bold;
             }
             .alignRightMultiple {
                 font-family: Tahoma;
@@ -249,7 +250,27 @@
                 vertical-align: middle;
                 color: #325f6d;
             }
-            -->
+            
+            .myclass {
+				font-size: 1.3em;
+				border-top-style: solid;
+				border-right-style: solid;
+				border-bottom-style: solid;
+				border-left-style: solid;
+				border-top-color: #5d7e9b;
+				border-right-color: #5d7e9b;
+				border-bottom-color: #5d7e9b;
+				border-left-color: #5d7e9b;
+				border-top-width: 1px;
+				border-right-width: 1px;
+				border-bottom-width: 1px;
+				border-left-width: 1px;
+				width: auto;
+				height: 28px;
+				color: black;
+				text-transform: capitalize;
+				border-radius: 4px;
+			}
         </style>
         <script type="text/javascript">
             /**
@@ -863,30 +884,33 @@ for(Cookie cookie : cookies){
 %>
     <body>
         <form id="form1" method="post">
-            <div style="height: 28px">
-            <table  width="100%">
-                <thead>
-                    <tr>
-                        <th colspan="3" class="headerTD"> Fees Collection</th>
-
-                    </tr>
-                </thead>
-                <tbody>
+            <div id="tabs">
+				<ul>
+					<li><a href="#fragment-1">Fees Collection</a></li>
+				</ul>
+				
+			<div id="fragment-1">
+            	<table  width="100%">
+                 <tbody>
 	                <tr>
-                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">Search Student:&nbsp;&nbsp;&nbsp;&nbsp; 
-                    </tr>
+                     <td style="width: 45%;font-weight: bold;font-size: 15px;color: #eb6000;">Search Student:&nbsp;&nbsp;&nbsp;&nbsp;</td> 
+                   </tr>
+                    
+                   	<tr>
+                    	<td><br></td> 
+                     </tr>
                     <tr>
-                    <td style="width: 45%">Student Name: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentname" id="studentname" style="width: 200px" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
-                        
-                        <td>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
-                        
+                  <td style="width: 45%;" class="alignLeft">Student Name: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentname" id="studentname" class="myclass" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
+                         
+                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="myclass" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
                     </tr>
                     
                     <tr>
-                    
-                        <td style="width: 45%">Admission No:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admissionno" id="admissionno" style="width: 200px" readonly/></td>
-                        <td>Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" /></td>
-                        
+						<td><br></td>
+                    </tr>
+                    <tr>
+                      <td class="alignLeft" style="width: 45%">Admission No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admissionno" id="admissionno" class="myclass" readonly/></td>
+                      <td class="alignLeft">Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" class="myclass" /></td>
                     </tr>
                     
                     <tr>
@@ -894,10 +918,9 @@ for(Cookie cookie : cookies){
                     </tr>
                     
                     <tr>
-                        <td style="width: 45%">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp; 
-                        	   <label>
+                        <td class="alignLeft" style="width: 45%">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp;
                                         <label> <select name="academicyear" id="academicyear" required
-									style="width: 120px">
+									 style="width: 230px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${currentAcademicYear}</option>
 										<option>2021/22</option>
 										<option>2020/21</option>
@@ -908,7 +931,6 @@ for(Cookie cookie : cookies){
 								</select>
 
 							</label> 
-                                    </label>
                         
                         </td>
                         
@@ -929,22 +951,23 @@ for(Cookie cookie : cookies){
                     </tr>
 
 					<tr>
-                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">Student Details:&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #eb6000;">Student Details:&nbsp;&nbsp;&nbsp;&nbsp; 
                     </tr>
+                     <tr>
+						<td><br></td>
+                     </tr>
                     <tr>
-                    <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" style="width: 200px" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
-                        
-                        <td>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" value="${dateoffeesDetails}" /></td>
-                        
+                    	<td class="alignLeft" style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" class="myclass" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
+                    	<td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" class="myclass" value="${dateoffeesDetails}" /></td>
                     </tr>
                     
                     <tr>
                     
-                        <td style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" style="width: 200px" readonly/></td>
-                        <td>Class & SEC : &nbsp;&nbsp;&nbsp;
+                        <td class="alignLeft" style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" class="myclass" readonly/></td>
+                        <td class="alignLeft">Class & SEC : &nbsp;&nbsp;&nbsp;
                         
                         		<select name="classandsecDetails"
-									id="classandsecDetails" style="width: 186px;border-radius: 4px;background: white;height: 28px;">
+									id="classandsecDetails" style="width: 230px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${classandsecDetails}</option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -967,7 +990,7 @@ for(Cookie cookie : cookies){
                 </tbody>
             </table>
             
-            <table width="100%" border="0" style="border-color: #4b6a84;"
+            <table width="100%" border="1" style="border-color: #4b6a84;font-size: 14px;"
 				id="myTable">
 
 				<thead>
@@ -990,7 +1013,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
 								name="studentsfsids" 
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
-							<td class="dataTextInActive" align="center"><a class="dataTextInActive" style="text-transform:uppercase"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
+							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
 							<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
@@ -1160,7 +1183,8 @@ for(Cookie cookie : cookies){
 						
 					</table>
 			</div>
-            
+             </div>
+            </div>
         </form>
 
     </body>

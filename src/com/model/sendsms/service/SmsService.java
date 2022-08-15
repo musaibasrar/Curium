@@ -59,7 +59,7 @@ public class SmsService {
 			String conClassStudying = "";
 			
 			if(addClass.contains("ALL")){
-				querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+				querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
 			}else{
 				if (!addClass.equalsIgnoreCase("")) {
 
@@ -74,7 +74,7 @@ public class SmsService {
 				String classStudying = DataUtil.emptyString(conClassStudying);
 				
 				if(!classStudying.equalsIgnoreCase("")){
-					querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+					querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
 				}	
 			}
 			
@@ -97,8 +97,16 @@ public class SmsService {
 					if(!pContacts.isEmpty()){
 						for (Object parents : pContacts) {
 							Parents par = Parents.class.cast(parents);
-							sbN.append(par.getContactnumber());
-							sbN.append(",");
+							
+							String phoneNo = par.getContactnumber();
+							if(phoneNo!=null && !phoneNo.isEmpty()) {
+								char[] contactNo = phoneNo.toCharArray();
+								
+								if(contactNo.length == 10) {
+									sbN.append(par.getContactnumber());
+									sbN.append(",");
+								}
+							}
 						}
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);

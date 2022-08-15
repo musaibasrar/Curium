@@ -2,7 +2,9 @@ package com.model.feescategory.service;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -372,5 +374,43 @@ public class FeesService {
         
        return "error.jsp";
        
+	}
+	
+	public void viewFeesYearly() throws IOException {
+
+        String academicYear = request.getParameter("year");
+        if(httpSession.getAttribute(BRANCHID)!=null){
+
+                List<Feescategory> list = new feesCategoryDAO().readListOfObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),academicYear);
+                httpSession.setAttribute("feescategory", list);
+                PrintWriter out = response.getWriter(); 
+       			response.setContentType("text/xml");
+       		    response.setHeader("Cache-Control", "no-cache");
+       		        try {
+
+       		        	if(!list.isEmpty()){
+       		        		String buffer = "";
+       		        		/*String buffer = "<select name='subgroupname' style='width: 240px' id='sgname' onchange='dropdowndist();getSSGroup();'>";
+       		        		buffer = buffer +  "<option></option>";*/
+       			        	for(int i =0; i<list.size();i++){
+       			        		buffer = buffer +  "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+       			        				+ "<label class='labelClass' style='font-weight: bold;color:#325F6D'> <input"
+       			        				+ "									 type='checkbox' name='feescategory' class='chcktbl' value="+list.get(i).getIdfeescategory()+""
+       			        				+ "									size='36'> "+list.get(i).getFeescategoryname()+" : </label> <label style='font-weight: bold;color:#eb6000'>"+list.get(i).getParticularname()+""
+       			        				+ "							</label><br>";
+       			        	}
+       			        	response.getWriter().println(buffer);
+       		        	}else{
+       		        		String buffer = "<input type='checkbox'  name='chcktbl'>";
+       		        		response.getWriter().println(buffer);
+       		        	}
+
+       		        } catch (Exception e) {
+       		            out.write("<subgroup>0</subgroup>");
+       		        } finally {
+       		            out.flush();
+       		            out.close();
+       		        }
+        }
 	}
 }

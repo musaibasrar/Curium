@@ -109,6 +109,7 @@ public class FeesAction {
 
 		private String feesReport() {
         	new StandardService(request, response).viewClasses();
+        	new FeesService(request, response).viewFees();
 			return "feesreport.jsp";
 		}
 

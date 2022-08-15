@@ -595,6 +595,7 @@ public class FeesCollectionService {
 	public void getFeesReport() {
 		
 		String academicYear = request.getParameter("academicyear");
+		String[] feesCat = request.getParameterValues("feescategory");
 		//Get Students
 		
 		List<Parents> searchStudentList = new ArrayList<Parents>();
@@ -643,7 +644,13 @@ public class FeesCollectionService {
 				StudentFeesReport studentFeesReport = new StudentFeesReport();
 				
 				long id = parents.getStudent().getSid();
-				List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, academicYear);
+				
+				List<Integer> feesCatList = new ArrayList<>(); 
+				for (String feescat : feesCat) {
+					feesCatList.add(Integer.parseInt(feescat));
+				}
+				List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructurebyFeesCategory(id,feesCatList);
+				//List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, academicYear);
 				
 				if (feesstructure.size() > 0) {
 
