@@ -631,7 +631,7 @@ for(Cookie cookie : cookies){
 							<c:forEach items="${feescategory}" var="feescategory">
 										<label class="labelClass" style="font-weight: bold;color:#325F6D"> <input
 									 type="checkbox" name="feescategory" class="chcktbl" value="${feescategory.idfeescategory}"
-									size="36"> ${feescategory.feescategoryname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									size="36"> ${feescategory.feescategoryname} : </label> <label style="font-weight: bold;color:#eb6000">${feescategory.particularname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</label><br>
 							
 								</c:forEach>
