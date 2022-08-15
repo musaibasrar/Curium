@@ -400,10 +400,12 @@
 				primary : "ui-icon-trash"
 			}
 		});
-		
+	});
+
+	$(function() {
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
+			var trLength = $('.labelClass').length;
 			if (length > 0) {
 				$('.chcktbl:checked').attr('checked', false);
 				this.checked = false;
@@ -418,9 +420,10 @@
 			}
 
 		});
+		
 		$('.chcktbl').click(function() {
 			var length = $('.chcktbl:checked').length;
-			var trLength = $('.trClass').length;
+			var trLength = $('.labelClass').length;
 			alert(tdLength);
 			if (length > trLength) {
 
@@ -430,10 +433,7 @@
 			}
 		});
 
-		$("#go").button()
-
 	});
-	
 	
 </script>
 
@@ -487,6 +487,45 @@
             chkbox.checked=true;
         }
     }
+    
+    
+    var xmlHttp;
+    var count;
+    function getFeesCategory() {
+
+		var selected=document.getElementById('academicyear').value;
+			
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "/roshan/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
+			xmlHttp.send(null);
+	}
+    
+	function stateChanged() {
+
+		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+			document.getElementById("feescat").innerHTML = xmlHttp.responseText;
+		}
+	}
+	function GetXmlHttpObject() {
+		var xmlHttp = null;
+		try {
+			xmlHttp = new XMLHttpRequest();
+		} catch (e) {
+			try {
+				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+		return xmlHttp;
+	}
 
     </script>
 
@@ -526,11 +565,13 @@ for(Cookie cookie : cookies){
 				
 					<table>
 						<tr>
-							<td>Class &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td style="font-weight: bold;color:#325F6D">Class: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
 							<td><c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
-										<input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
-										${classdetailslist.classdetails}
+										
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
+										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</c:if>	
 							</c:forEach>
 								<label style="visibility: hidden;"> <select name="secsearch" id="secsearch">
@@ -543,11 +584,8 @@ for(Cookie cookie : cookies){
 										</c:if>	
 										</c:forEach></td>
 						</tr>
-					</table>
-					<table>
 						
-						
-						<tr>
+							<tr>
 							<td><br /></td>
 
 						</tr>
@@ -555,9 +593,11 @@ for(Cookie cookie : cookies){
 					
 						<tr>
                     
-                        <td style="width: 45%">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp; 
+                        <td style="font-weight: bold;color:#325F6D">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp;</td> 
+                        
+                        	<td>
                         	   <label>
-                                        <label> <select name="academicyear" id="academicyear" required
+                                         <select name="academicyear" id="academicyear" onchange="getFeesCategory()" required
 									style="width: 120px">
 										<option selected>${currentAcademicYear}</option>
 										<option>2021/22</option>
@@ -565,15 +605,49 @@ for(Cookie cookie : cookies){
 										<option>2019/20</option>
 										<option>2018/19</option>
 										<option>2017/18</option>
-										
-								</select>
-
-							</label> 
-                                    </label>
-                        
+										</select>
+                              </label>
                         </td>
                         
                     </tr>
+                    
+                     <tr>
+						<td><br></td>
+                    </tr>
+                    
+                    		<tr>
+							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td>
+							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
+							</label>
+							</td>
+							
+						</tr>
+											
+						<tr>
+							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
+							<td id="feescat">
+							
+							<c:forEach items="${feescategory}" var="feescategory">
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"> <input
+									 type="checkbox" name="feescategory" class="chcktbl" value="${feescategory.idfeescategory}"
+									size="36"> ${feescategory.feescategoryname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</label><br>
+							
+								</c:forEach>
+								
+							</td>
+							
+						</tr>
+						 <tr>
+							<td><br /></td>
+
+						</tr>
+                    
+					</table>
+					
+					
+					<table>
                     
                     <tr>
 						<td><br></td>
@@ -595,7 +669,6 @@ for(Cookie cookie : cookies){
 						</tr>
 		
 					</table>
-					
 					
 
 				</div>
