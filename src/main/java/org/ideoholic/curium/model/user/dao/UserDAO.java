@@ -222,4 +222,21 @@ public class UserDAO {
    			HibernateUtil.closeSession();
            return login;
        }}
+       
+       public Login getUniqueObject(int userid) {
+       Login login = null;
+       try{
+           transaction = session.beginTransaction();
+           Query query = session.createQuery("FROM Login as login where login.userid= :userId");
+           query.setParameter("userId", userid);
+           login = (Login) query.uniqueResult();
+           transaction.commit();
+           
+       }catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+           System.out.println("In userdao null pointer exception"+hibernateException);
+           hibernateException.printStackTrace();
+       }finally{
+   			HibernateUtil.closeSession();
+           return login;
+       }}
 }
