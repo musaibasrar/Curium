@@ -602,6 +602,7 @@ for(Cookie cookie : cookies){
 										<option selected value="${languageacademicsearch}">${languageacademicsearch}</option>
 											<option ></option>
 											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2021/22" >2021/22</option>
 											<option value="2020/21" >2020/21</option>
 											<option value="2019/20" >2019/20</option>
 											<option value="2018/19" >2018/19</option>
@@ -669,13 +670,12 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><c:out value="${languagereports.key.get(0)}" /></td>
-							<td class="dataText"><c:out value="${languagereports.key.get(1)}" /></td>
-							<td class="dataText"><c:out value="${languagereports.value.get(0)}" /></td>
-							<td class="dataText"><c:out	value="${languagereports.value.get(1)}" /></td>
-							<td class="dataText"><c:out	value="${languagereports.value.get(2)}" /></td>
-							<td class="dataText"><c:out	value="${languagereports.value.get(3)}" /></td>
-							<td class="dataText"><c:out	value="${languagereports.value.get(4)}" /></td>	
+							<c:forEach items="${languagereports.key}" var="languagereportskey">
+								<td class="dataText">${languagereportskey}</td>
+							</c:forEach>
+							<c:forEach items="${languagereports.value}" var="languagereportsvalue">
+								<td class="dataText">${languagereportsvalue}</td>
+							</c:forEach>
 						</tr>
 					</c:forEach>
 				</tbody>

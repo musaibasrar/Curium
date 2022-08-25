@@ -426,6 +426,7 @@ for(Cookie cookie : cookies){
 										<select name="examyear" id="examyear"
 									style="width: 200px;" required>
 										<option selected value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2021/22" >2021/22</option>
 											<option value="2020/21" >2020/21</option>
 											<option value="2019/20" >2019/20</option>
 											<option value="2018/19" >2018/19</option>

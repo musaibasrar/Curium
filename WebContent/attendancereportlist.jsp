@@ -712,6 +712,7 @@ for(Cookie cookie : cookies){
 										<option selected value="${studentsattendancesearch}">${studentsattendancesearch}</option>
 											<option ></option>
 											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2021/22" >2021/22</option>
 											<option value="2020/21" >2020/21</option>
 											<option value="2019/20" >2019/20</option>
 											<option value="2018/19" >2018/19</option>

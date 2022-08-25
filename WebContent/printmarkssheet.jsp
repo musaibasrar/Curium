@@ -103,7 +103,7 @@
 	text-align: left;
 }
 .markssheetvalue{
-	font-size: 18px;
+	font-size: 20px;
 	text-align: left;
 }
 #footer {
@@ -254,28 +254,28 @@
 			<tr>
 						<td><br><br><label class="markssheetlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						Candidate Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<label class="markssheetvalue">${mlist.parents.student.name}</label></td>
+						<label class="markssheetvalue" style="font-weight: bold;">${mlist.parents.student.name}</label></td>
 			</tr>
 			
 			      <tr>
 							<c:if test="${(mlist.parents.mothersname != '')}">
 							<td><label class="markssheetlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							W/O:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						<label class="markssheetvalue">${mlist.parents.mothersname}</label></td>
+						<label class="markssheetvalue" style="font-weight: bold;">${mlist.parents.mothersname}</label></td>
 							</c:if>	
 
 								<c:if test="${(mlist.parents.fathersname != '')}">
 								
 								<td><label class="markssheetlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								S/D/O:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-							<label class="markssheetvalue">${mlist.parents.fathersname}</label></td>
+							<label class="markssheetvalue" style="font-weight: bold;">${mlist.parents.fathersname}</label></td>
 						
 							</c:if>
 
                              	<c:if test="${(mlist.parents.student.guardiandetails != '')}">
                              	<td><label class="markssheetlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                              	Guardian:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-								<label class="markssheetvalue">${mlist.parents.student.guardiandetails}</label></td>
+								<label class="markssheetvalue" style="font-weight: bold;">${mlist.parents.student.guardiandetails}</label></td>
                                 </c:if>
                 </tr>
                 <tr>
@@ -286,7 +286,7 @@
 		</table>
             <br>
             
-            <table class="datatable" align="center">
+            <table class="datatable" align="center" style="width:85%">
             
             <thead>
 					<tr>
@@ -337,7 +337,7 @@
 							<c:forEach items="${mlist.referenceBooksList}" var="referencebooks" varStatus="status">
 							<tr align="center" >
 							<td></td>
-							<td align="left" style="font-weight: bold;">${status.index+1}.&nbsp;<c:out value="${referencebooks}" /><br></td>
+							<td align="left" style="font-weight: bold;font-size:20px;">${status.index+1}.&nbsp;<c:out value="${referencebooks}" /><br></td>
 							</tr>
 						</c:forEach>
 							</tr>
