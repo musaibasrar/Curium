@@ -14,22 +14,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>student update pu</title>
-<link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/roshan/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/shadaan/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/shadaan/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/roshan/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/shadaan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/shadaan/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/shadaan/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/shadaan/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/shadaan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/shadaan/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/shadaan/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/shadaan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/shadaan/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
+	src="/shadaan/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/shadaan/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -191,7 +191,7 @@
 }
 -->
 </style>
-<script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/shadaan/js/datetimepicker_css.js"></script>
 
 <script type="text/javascript">
 	document.getElementById("UpdateExecutive").style.display = 'none';
@@ -405,7 +405,7 @@ function CalculateAge(value) {
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/shadaan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -418,7 +418,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form action="/roshan/PersonalProcess/viewAll"
+	<form action="/shadaan/PersonalProcess/viewAll"
 		id="form1" method="POST" enctype="multipart/form-data">
 		<div>
 			<div id="tabs">
@@ -1598,7 +1598,7 @@ for(Cookie cookie : cookies){
 							function cancel() {
 
 								var form1 = document.getElementById("form1");
-								form1.action = "/roshan/StudentProcess/viewAll";
+								form1.action = "/shadaan/StudentProcess/viewAll";
 								form1.submit();
 							}
 
@@ -1606,7 +1606,7 @@ for(Cookie cookie : cookies){
 								
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
-									form1.action = "/roshan/StudentProcess/updateStudent";
+									form1.action = "/shadaan/StudentProcess/updateStudent";
 									form1.submit();
 								  }
 							}

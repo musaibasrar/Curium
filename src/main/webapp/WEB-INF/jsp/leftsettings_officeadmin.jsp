@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/roshan/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
+        <script language="JavaScript" src="/shadaan/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/shadaan/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/shadaan/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/roshan/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/roshan/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/roshan/css/font-awesome.css">
+        <script type="text/javascript" src="/shadaan/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/shadaan/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/shadaan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/shadaan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/shadaan/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/shadaan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/shadaan/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/shadaan/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/shadaan/css/font-awesome.css">
       
         <script type="text/javascript">
             var req;
@@ -317,7 +317,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/shadaan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -340,68 +340,68 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 95%" >
             <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
-                <!-- <a target="mainFrame" href="/roshan/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/> -->
-                <a target="mainFrame" href="/roshan/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
+                <!-- <a target="mainFrame" href="/shadaan/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/> -->
+                <a target="mainFrame" href="/shadaan/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Class</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
+                <a target="mainFrame" href="/shadaan/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
-                <a target="mainFrame" href="/roshan/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+                <a target="mainFrame" href="/shadaan/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
+                <a target="mainFrame" href="/shadaan/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
-                <a target="mainFrame" href="/roshan/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
-                <a target="mainFrame" href="/roshan/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
-                <a target="mainFrame" href="/roshan/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
+                <a target="mainFrame" href="/shadaan/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
+                <a target="mainFrame" href="/shadaan/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
+                <a target="mainFrame" href="/shadaan/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
+                <a target="mainFrame" href="/shadaan/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
             </div>
             
           <!--   <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/roshan/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
+                <a target="mainFrame" href="/shadaan/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
+                <a target="mainFrame" href="/shadaan/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div>
             
               <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-				<a target="mainFrame" href="/roshan/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
+				<a target="mainFrame" href="/shadaan/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
             </div> -->
             
             <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
                 
-                <a target="mainFrame" href="/roshan/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
-                <a target="mainFrame" href="/roshan/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
+                <a target="mainFrame" href="/shadaan/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
+                <a target="mainFrame" href="/shadaan/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
             </div>
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
-                <a target="mainFrame" href="/roshan/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
+                <a target="mainFrame" href="/shadaan/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
             
              <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/roshan/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
-                <a target="mainFrame" href="/roshan/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
-                <a target="mainFrame" href="/roshan/HrProcess/payHead" style="font-size: 12px;">Pay Head</a><br/>
-                <a target="mainFrame" href="/roshan/HrProcess/addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
-                <a target="mainFrame" href="/roshan/HrProcess/deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
-                <a target="mainFrame" href="/roshan/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
-                <a target="mainFrame" href="/roshan/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
-                <a target="mainFrame" href="/roshan/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
+                <a target="mainFrame" href="/shadaan/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
+                <a target="mainFrame" href="/shadaan/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
+                <a target="mainFrame" href="/shadaan/HrProcess/payHead" style="font-size: 12px;">Pay Head</a><br/>
+                <a target="mainFrame" href="/shadaan/HrProcess/addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
+                <a target="mainFrame" href="/shadaan/HrProcess/deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
+                <a target="mainFrame" href="/shadaan/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
+                <a target="mainFrame" href="/shadaan/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
+                <a target="mainFrame" href="/shadaan/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
             </div> -->
             
               <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/roshan/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
+                <a target="mainFrame" href="/shadaan/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
+                <a target="mainFrame" href="/shadaan/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div> -->
             
             </div>

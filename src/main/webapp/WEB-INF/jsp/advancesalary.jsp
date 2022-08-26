@@ -14,30 +14,30 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Advance Salary</title>
-        <link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/roshan/css/graph/jquery.jqplot.css">
+        <link rel="stylesheet" href="/shadaan/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/shadaan/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
-        <script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script  type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <link rel="stylesheet" href="/shadaan/css/datePicker/demos.css">
+        <script type="text/javascript" src="/shadaan/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script  type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.resizable.js"></script>
 
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.effects.slide.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.effects.bounce.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.effects.clip.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.effects.transfer.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.effects.blind.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.effects.slide.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.effects.bounce.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.effects.clip.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.effects.transfer.js"></script>
+        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.effects.blind.js"></script>
         <style type="text/css">
             <!--
             .labelCss {
@@ -464,7 +464,7 @@
             
             function saveAdvanceSalary(){
             	var form1 = document.getElementById("form1");
-        		form1.action = "/roshan/HrProcess/saveAdvanceSalary";
+        		form1.action = "/shadaan/HrProcess/saveAdvanceSalary";
         		form1.method = "POST";
         		form1.submit();
             }
@@ -475,7 +475,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/shadaan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
