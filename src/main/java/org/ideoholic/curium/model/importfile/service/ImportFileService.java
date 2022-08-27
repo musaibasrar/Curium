@@ -12,22 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.web.multipart.MultipartFile;
 
 public class ImportFileService {
 
@@ -45,25 +40,15 @@ public class ImportFileService {
 
 	XSSFRow row;
 
-	public boolean readFile() throws FileNotFoundException, IOException {
+	public boolean readFile(MultipartFile uploadedFiles) throws FileNotFoundException, IOException {
 		// Student student = new Student();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
-		try {
-			System.out.println(
-					"-------------------------------READING THE SPREADSHEET-------------------------------------");
+		System.out.println("-------------------------------READING THE SPREADSHEET-------------------------------------");
 
-			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
-
-			for (FileItem item : items) {
-				// Process form file field (input type="file").
-				String fieldName = item.getFieldName();
-
-				if (fieldName.equalsIgnoreCase("fileToImport")) {
-
-					XSSFWorkbook workbookRead = new XSSFWorkbook(item.getInputStream());
+					XSSFWorkbook workbookRead = new XSSFWorkbook(uploadedFiles.getInputStream());
 					XSSFSheet spreadsheetRead = workbookRead.getSheetAt(0);
-
+		
 					Iterator<Row> rowIterator = spreadsheetRead.iterator();
 					int rowTotal = spreadsheetRead.getLastRowNum();
 					System.out.println("last row is " + rowTotal);
@@ -109,7 +94,8 @@ public class ImportFileService {
 						student.setAdmissiondate(DateUtil.simpleDateParser(
 								(row.getCell(19).getStringCellValue()) + "/" + (row.getCell(20).getStringCellValue())
 										+ "/" + (row.getCell(21).getStringCellValue())));
-						student.setClassstudying(row.getCell(8).getStringCellValue());
+						student.setClassstudying(row.getCell(8).getStringCellValue()+"--"+row.getCell(49).getStringCellValue());
+						
 						// student.setClassadmittedin(row.getCell(9).getStringCellValue());
 						student.setBloodgroup(row.getCell(9).getStringCellValue());
 						student.setMothertongue(row.getCell(10).getStringCellValue());
@@ -129,12 +115,12 @@ public class ImportFileService {
 						// student.setLastfirstlanguage(row.getCell(44).getStringCellValue());
 						student.setUserid(Integer.parseInt(row.getCell(46).getStringCellValue()));
 
-						student.setBranchid(3);
+						student.setBranchid(2);
 						student.setArchive(0);
 						student.setPassedout(0);
 						student.setDroppedout(0);
 						student.setLeftout(0);
-						student.setStudentexternalid(DataUtil.generateString(5));
+						student.setStudentexternalid(row.getCell(1).getStringCellValue());
 						student.setLeftout(0);
 
 						parent.setFathersname(row.getCell(25).getStringCellValue());
@@ -151,7 +137,10 @@ public class ImportFileService {
 						// parent.setProfession(row.getCell(36).getStringCellValue());
 						// parent.setMothersqualification(row.getCell(37).getStringCellValue());
 						parent.setCocontactnumber(row.getCell(37).getStringCellValue());
-
+						parent.setFatherscastecertno(row.getCell(47).getStringCellValue());
+						parent.setMotherscastecertno(row.getCell(48).getStringCellValue());
+						
+						
 						parent.setStudent(student);
 						parent.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 
@@ -162,11 +151,6 @@ public class ImportFileService {
 					}
 
 					System.out.println("Values Inserted Successfully");
-				}
-			}
-		} catch (FileUploadException e) {
-			e.printStackTrace();
-		}
 
 		return new parentsDetailsDAO().createMultiple(listParents);
 	}
