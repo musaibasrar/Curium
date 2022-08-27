@@ -627,7 +627,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
 							<td id="feescat">
-							
+							<div style="overflow:scroll;width:420px; height: 100px;">
 							<c:forEach items="${feescategory}" var="feescategory">
 										<label class="labelClass" style="font-weight: bold;color:#325F6D"> <input
 									 type="checkbox" name="feescategory" class="chcktbl" value="${feescategory.idfeescategory}"
@@ -635,7 +635,7 @@ for(Cookie cookie : cookies){
 										</label><br>
 							
 								</c:forEach>
-								
+								</div>
 							</td>
 							
 						</tr>

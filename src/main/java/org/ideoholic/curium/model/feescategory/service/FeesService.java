@@ -391,7 +391,7 @@ public class FeesService {
        		        try {
        		        	
        		        	if(!list.isEmpty()){
-       		        		String buffer = "";
+       		        		String buffer = "<div style='overflow:scroll;width:420px; height: 100px;'>";
        		        		/*String buffer = "<select name='subgroupname' style='width: 240px' id='sgname' onchange='dropdowndist();getSSGroup();'>";
        		        		buffer = buffer +  "<option></option>";*/
        			        	for(int i =0; i<list.size();i++){
@@ -401,6 +401,7 @@ public class FeesService {
        			        				+ "									size='36'> "+list.get(i).getFeescategoryname()+" : </label> <label style='font-weight: bold;color:#eb6000'>"+list.get(i).getParticularname()+""
        			        				+ "							</label><br>";
        			        	}
+       			        	buffer = buffer + "</div>";
        			        	response.getWriter().println(buffer);
        		        	}else{
        		        		String buffer = "<input type='checkbox'  name='chcktbl'>";
