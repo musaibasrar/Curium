@@ -177,17 +177,14 @@
 			<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 10px;">
-				<img src="/shadaan/images/shadaanfees.jpg" width="90" height="60"/>
+				<td align="left" style="padding-left: 80px;">
+				<img src="/shadaan/images/shadaanfees.jpg" width="81" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="dataTextBoldCenter" >${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 50px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 95px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
-				<td align="left" style="padding-right: 10px;">
-				<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="90" height="60">
-				</td> 
 			</tr>
 </table>
 
@@ -306,7 +303,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 470px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -351,9 +348,8 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
-		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${recieptdate}</td>
-		<td><img src="/shadaan/images/shadaanpaytm.jpeg" width="70" height="65"/></td>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label><br>
+		Date:${recieptdate}</td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -362,17 +358,14 @@
 		<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 10px;">
-				<img src="/shadaan/images/shadaanfees.jpg" width="90" height="60"/>
+				<td align="left" style="padding-left: 80px;">
+				<img src="/shadaan/images/shadaanfees.jpg" width="81" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="dataTextBoldCenter" >${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 50px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 95px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
-				<td align="left" style="padding-right: 10px;">
-				<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="90" height="60">
-				</td> 
 			</tr>
 </table>
 
@@ -475,7 +468,6 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-			
 			</table>
 			
 			
@@ -492,7 +484,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 470px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -537,9 +529,8 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
-		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${recieptdate}</td>
-		<td><img src="/shadaan/images/shadaanpaytm.jpeg" width="70" height="65"/></td>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label><br>
+		Date:${recieptdate}</td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
