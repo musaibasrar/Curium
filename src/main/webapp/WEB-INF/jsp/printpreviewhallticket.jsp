@@ -172,6 +172,7 @@ span{
         	border: 1px solid black;
     		text-align: left;
    		    padding: 8px;
+   		    font-size: 12px;
         }
         
         .nosubjectdetails{
@@ -236,12 +237,31 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${studentList}" var="Parents">
                         
                         <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
+                        
+                        <table width="100%" style="border-collapse: collapse;">
+					
+				<tr>
+					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket<br>${examname}
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+				</tr>
+				<tr></tr>
+			</table>
+			<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
          <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
 				<td><img src="/roshan/images/roshanfees.jpg" width="140" height="70"/></td>
 				<td>
-				<label class="dataTextBoldCenter">${branchname} </label><br>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname} - ${branchcode}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
@@ -256,18 +276,6 @@ for(Cookie cookie : cookies){
 
                 </tr>
             </TABLE>
-
-			<table width="100%" style="border-collapse: collapse;">
-					
-				<tr>
-					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket (${examname})
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-				</tr>
-				<tr></tr>
-			</table>
 
 			<table style=" border-collapse: collapse;width: 100%;">
 											
@@ -308,7 +316,7 @@ for(Cookie cookie : cookies){
                             	<tbody>
                             	<c:forEach items="${examschedulelist}" var="examschedulelist">
                              	<tr>
-                                <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="dd-MM-yyyy"/></td>
+                                <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="dd/MM/yyyy"/></td>
                                 <td class="subjectdetails"><c:out value="${examschedulelist.subject}"/></td>
                                 <td class="subjectdetails"><c:out value="${examschedulelist.starttime}"/>&nbsp;-&nbsp;<c:out value="${examschedulelist.endtime}"/></td>
                                 <td class="subjectdetails"></td>
@@ -322,8 +330,14 @@ for(Cookie cookie : cookies){
                             <TABLE id="dataTable" width="100%" border="0"
 			style="page-break-inside:avoid; border-collapse: collapse;">
 
-						<tr>
+						<!-- <tr>
 							<td><br><br><br></td>
+						</tr> -->
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><img src="/roshan/images/roshanhallticketsign.jpg" width="100" height="50"/></td>
 						</tr>
 				<tr>
 				<td></td>
@@ -334,7 +348,7 @@ for(Cookie cookie : cookies){
                     
 		</TABLE>
 		</div>
-		<br><br><br>
+		<br>
                                  
                         </c:forEach>
 			
