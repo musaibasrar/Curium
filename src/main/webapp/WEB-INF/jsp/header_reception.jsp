@@ -153,6 +153,19 @@ for(Cookie cookie : cookies){
 									alt="View Jobs" style="vertical-align: bottom;" />View Jobs
 							</a></td>
 
+
+							<td><a target="mainFrame"
+								href="/sla/CaseProcess/createCase"> <img
+									src="/sla/images/feescollect.svg" width="18" height="18"
+									alt="Create Case" style="vertical-align: bottom;" />Create Case
+							</a></td>
+							
+							
+							<td><a target="mainFrame"
+								href="/sla/CaseProcess/viewAllCases"> <img
+									src="/sla/images/viewcases.svg" width="18" height="18"
+									alt="Create Case" style="vertical-align: bottom;" />View Cases
+							</a></td>
 							<!--<td>
 								<a target="mainFrame"
 								href="/sla/AccountProcess/createVoucher"> <img

@@ -140,7 +140,31 @@ for(Cookie cookie : cookies){
 									src="/sla/images/adminexp.svg" width="18" height="18"
 									alt="Client Search" style="vertical-align: bottom;" />Create Job / Appt.
 							</a></td>
+							
+							<td><a target="mainFrame"
+								href="/sla/CasesProcess/createCase"> <img
+									src="/sla/images/feescollect.svg" width="18" height="18"
+									alt="Create Case" style="vertical-align: bottom;" />Create Case
+							</a></td>
+							
+							<td><a target="mainFrame"
+								href="/sla/CasesProcess/viewAllCases"> <img
+									src="/sla/images/caseview.svg" width="18" height="18"
+									alt="View Case" style="vertical-align: bottom;" />View Cases
+							</a></td>
+							
+							<td><a target="mainFrame"
+								href="/sla/CaveatProcess/createCaveats"> <img
+									src="/sla/images/caveat.svg" width="18" height="18"
+									alt="Create Caveat" style="vertical-align: bottom;" />Create Caveat
+							</a></td>
 
+							<td><a target="mainFrame"
+								href="/sla/CaveatProcess/viewAllCaveats"> <img
+									src="/sla/images/caveatview.svg" width="18" height="18"
+									alt="View Case" style="vertical-align: bottom;" />View Caveats
+							</a></td>
+							
 							 <td><a target="mainFrame"
 								href="/sla/QueryProcess/viewAllTasks"> <img
 									src="/sla/images/feescollect.svg" width="18" height="18"

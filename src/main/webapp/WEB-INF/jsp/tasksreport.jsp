@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Jobs Report</title>
+<title>Tasks Report</title>
 <link rel="stylesheet" href="/sla/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/sla/css/datePicker/demos.css">
 <style type="text/css">
@@ -436,9 +436,9 @@
 <script type="text/javascript" src="/sla/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
-	function generateQueriesReport() {
+	function generateTasksReport() {
 			var form1 = document.getElementById("form1");
-				form1.action = "/sla/QueryProcess/generateQueriesReport";
+				form1.action = "/sla/QueryProcess/generateTasksReport";
 				form1.method = "POST";
 				form1.submit();
 	}
@@ -451,7 +451,7 @@
                  primary: "ui-icon-document"
              }
          }).click(function(){
-             generateQueriesReport();
+             generateTasksReport();
              return false;
 
          });
@@ -471,7 +471,7 @@
      
 	 function printRecords() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/sla/QueryProcess/printQueriesReport";
+			form1.action = "/sla/QueryProcess/printTasksReport";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -615,7 +615,7 @@ for(Cookie cookie : cookies){
 						<tr>
 						
 						<tr>
-							<%-- <td class="alignRight">Staff&nbsp;</td>
+							<td class="alignRight">Staff&nbsp;</td>
 							<td ><label>
 									<select name="employee" id="employee"
 									style="width: 230px;border-radius: 4px;background: white;height: 28px;font-size: 14px;">
@@ -630,11 +630,11 @@ for(Cookie cookie : cookies){
 
 										</c:forEach>
 
-								</select></label></td> --%>
+								</select></label></td>
 						
 							<td  class="alignRight">Status &nbsp;</td>
 							<td ><label> <select name="status"
-									id="status" class="dropdownlist" style="font-size: 14px;" required>
+									id="status" class="dropdownlist" style="font-size: 14px;">
 										<option selected></option>
 										<option>To Do</option>
 										<option>Completed</option>
@@ -643,18 +643,21 @@ for(Cookie cookie : cookies){
 								</select>
 							</label></td>
 							
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
 							<td class="alignRight">Client Name&nbsp;</td>
 							<td ><label>
 										<input  type="text" name="clientname" id="clientname"  class="myclass" style="width: 200px" /> 
 										<input name="studentId" type="hidden" id="studentId" value="" />
 										<input name="studentName" type="hidden" id="studentName" value="" />
 							</label></td>
-							
 						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
-						
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -676,7 +679,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Jobs Report <br>
+					<td class="headerTD">Tasks Report <br>
 					${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;
 					</td>
 				</tr>
@@ -699,27 +702,18 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${parentquerylist}" var="query">
+                        <c:forEach items="${parenttaskslist}" var="task">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                            <td class="dataText"><c:out value="${query.id}"/></td>
-                            <td class="dataText"><c:out value="${query.externalid}"/></td>
-                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
-                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
+                            <td class="dataText"><c:out value="${task.id}"/></td>
+                            <td class="dataText"><c:out value="${task.jobquery.externalid}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${task.jobquery.createddate}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${task.jobquery.updateddate}"/></td>
                                  <td class="dataText">
-                                 		<c:if test="${not empty query.tasks}">
-    											 <c:forEach items="${query.tasks}" var="task" varStatus="status">
-    											 		<c:if test="${task.status ne 'Cancelled'}">
-		                                				${status.index+1}.&nbsp;<c:out value="${task.teacher.teachername}"/><br>
-		                                				</c:if>
-		                                		</c:forEach>
-											</c:if>
-											<c:if test="${empty query.tasks}">
-    											<c:out value="${query.teacher.teachername}"/>
-											</c:if>
+										<c:out value="${task.teacher.teachername}"/><br>
                                  </td>
-                                <td class="dataText"><c:out value="${query.parent.student.name}"/></td>
-                                <td class="dataText"><c:out value="${query.parent.contactnumber}"/></td>
-                                <td class="dataText"><c:out  value="${query.status}"/></td>
+                                <td class="dataText"><c:out value="${task.jobquery.parent.student.name}"/></td>
+                                <td class="dataText"><c:out value="${task.jobquery.parent.contactnumber}"/></td>
+                                <td class="dataText"><c:out  value="${task.status}"/></td>
                                 <%-- <td class="dataText"><c:out  value="${query.feedback}"/></td> --%>
                             </tr>
                         </c:forEach>
@@ -737,7 +731,7 @@ for(Cookie cookie : cookies){
                             <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
                     		<td class="footerTD"  colspan="8">
                     		<button id="print">Print</button>
-                    		<button id="export">Export</button> 
+                    		<!-- <button id="export">Export</button> --> 
                     		&nbsp;&nbsp;&nbsp;
                     		<!-- <button id="approve">Approve</button>
                     		&nbsp;&nbsp;&nbsp;

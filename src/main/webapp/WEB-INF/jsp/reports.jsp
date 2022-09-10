@@ -322,6 +322,57 @@ for(Cookie cookie : cookies){
 			</table>
 		</div>
 		
+		<h5 class="sideaccordian">
+			<a href="#">Tasks</a>
+		</h5>
+		<div style="padding-left: 0px; padding-right: 0px;">
+			<table style="border-collapse: collapse; width: 100%">
+
+				<tr>
+					<td
+						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
+						<a target="mainFrame"
+						href="/sla/QueryProcess/taskReport"
+						style="font-size: 12px;">Tasks Report</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<h5 class="sideaccordian">
+			<a href="#">Cases</a>
+		</h5>
+		<div style="padding-left: 0px; padding-right: 0px;">
+			<table style="border-collapse: collapse; width: 100%">
+
+				<tr>
+					<td
+						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
+						<a target="mainFrame"
+						href="/sla/CasesProcess/casesReport"
+						style="font-size: 12px;">Cases Report</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<h5 class="sideaccordian">
+			<a href="#">Caveat</a>
+		</h5>
+		<div style="padding-left: 0px; padding-right: 0px;">
+			<table style="border-collapse: collapse; width: 100%">
+
+				<tr>
+					<td
+						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
+						<a target="mainFrame"
+						href="/sla/CaveatProcess/caveatsReport"
+						style="font-size: 12px;">Caveat Report</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
             <h5 class="sideaccordian">
 			<a href="#">Appointments</a>
 		</h5>

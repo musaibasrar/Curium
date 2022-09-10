@@ -983,6 +983,145 @@ for(Cookie cookie : cookies){
     </div>
     
     
+    <div class="accordion" style="width: 100%;height: 100%">
+		
+                <h3><a href="#">Cases</a></h3>
+                <div>
+                <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+
+                    <thead>
+                        <tr  >
+                            <th title="click to sort" class="headerText">UID</th>
+                            <th title="click to sort" class="headerText">Case Title</th>
+                            <th title="click to sort" class="headerText">Case No.</th>
+                            <th title="click to sort" class="headerText">File No.</th>
+                            <th title="click to sort" class="headerText">Status</th>
+                            <th title="click to sort" class="headerText">Court</th>
+                            <th title="click to sort" class="headerText">Court Name</th>
+                            <th title="click to sort" class="headerText">Date of Dispose/NOC</th>
+                            <th title="click to sort" class="headerText">File Taken</th>
+                            <th title="click to sort" class="headerText">File Taken By</th>
+                            <th title="click to sort" class="headerText">File Taken By Name</th>
+                            <th title="click to sort" class="headerText">File Taken By Number</th>
+                            <th title="click to sort" class="headerText">Created Date</th>
+                            <th title="click to sort" class="headerText">Updated Date</th>
+                            
+                            <!-- <th title="click to sort" class="headerText">Details</th> -->
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <c:forEach items="${caseslist}" var="cases">
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                            	<td class="dataText" ><c:out value="${cases.id}"/></td>
+                            	
+                            	<c:if test="${cases.status == 'Pending' }">
+                                	<td class="dataText" style="color: #0001ff;font-weight: bold;text-transform: capitalize;">
+                                	<a class="dataTextInActive" style="color: #0001ff;font-weight: bold;">${cases.casetitle}</a>
+                                	</td>
+                                </c:if>
+                                <c:if test="${cases.status == 'Disposed' }">
+                                	<td class="dataText" style="color: green;font-weight: bold;text-transform: capitalize;">
+                                		<a class="dataTextInActive" style="color: green;font-weight:bold;">${cases.casetitle}</a>
+                                	</td>
+                                </c:if>
+                                <c:if test="${cases.status == 'NOC' }">
+                                	<td class="dataText" style="color: red;font-weight: bold;text-transform: capitalize;">
+                                		<a class="dataTextInActive" style="color: red;font-weight: bold;">${cases.casetitle}</a>
+                                	</td>
+                                </c:if>
+                                <c:if test="${cases.status == 'Cancelled' }">
+                                	<td class="dataText" style="color: grey;font-weight: bold;text-transform: capitalize;">
+                                		<a class="dataTextInActive" style="color: grey;font-weight: bold;">${cases.casetitle}</a>
+                                	</td>
+                                </c:if>
+                                <td class="dataText"><c:out value="${cases.casenumber}"/></td>
+                                <td class="dataText"><c:out value="${cases.fileno}"/></td>
+                                <td class="dataText"><c:out value="${cases.status}"/></td>
+                                <td class="dataText"><c:out value="${cases.court}"/></td>
+                                <td class="dataText"><c:out value="${cases.courtname}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy"  value="${cases.dateofdispose}"/></td>
+                                <td class="dataText"><c:out value="${cases.filetaken}"/></td>
+                                <td class="dataText"><c:out value="${cases.filetakenby}"/></td>
+                                <td class="dataText"><c:out value="${cases.filetakenbyname}"/></td>
+                                <td class="dataText"><c:out value="${cases.filetakenbynumber}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy"  value="${cases.createddate}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${cases.updateddate}"/></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                    
+                    <tfoot><tr>
+                    
+                    <td  class="footerTD" colspan="2" >
+                            </td>
+                   </tr></tfoot>
+                </table>
+                
+                </div>
+    </div>
+    
+    
+    <div class="accordion" style="width: 100%;height: 100%">
+		
+                <h3><a href="#">Caveats</a></h3>
+                <div>
+                <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+
+                    <thead>
+                        <tr  >
+                            <th title="click to sort" class="headerText">UID</th>
+                            <th title="click to sort" class="headerText">Caveat Title</th>
+                            <th title="click to sort" class="headerText">Caveat No.</th>
+                            <th title="click to sort" class="headerText">File No.</th>
+                            <th title="click to sort" class="headerText">Status</th>
+                            <th title="click to sort" class="headerText">Court</th>
+                            <th title="click to sort" class="headerText">Court Name</th>
+                            <th title="click to sort" class="headerText">Caveat Date</th>
+                            <th title="click to sort" class="headerText">Expiry Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <c:forEach items="${caveatlist}" var="caveat">
+                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                            	<td class="dataText" ><c:out value="${caveat.id}"/></td>
+                            	
+                            	<c:if test="${caveat.status == 'Pending' }">
+                                	<td class="dataText" style="color: #0001ff;font-weight: bold;text-transform: capitalize;">
+                                	<a class="dataTextInActive" style="color: #0001ff;font-weight: bold;">${caveat.caveattitle}</a>
+                                	</td>
+                                </c:if>
+                                <c:if test="${caveat.status == 'Expired' }">
+                                	<td class="dataText" style="color: green;font-weight: bold;text-transform: capitalize;">
+                                		<a class="dataTextInActive" style="color: green;font-weight:bold;">${caveat.caveattitle}</a>
+                                	</td>
+                                </c:if>
+                                <c:if test="${caveat.status == 'Cancelled' }">
+                                	<td class="dataText" style="color: grey;font-weight: bold;text-transform: capitalize;">
+                                		<a class="dataTextInActive" style="color: grey;font-weight: bold;">${caveat.caveattitle}</a>
+                                	</td>
+                                </c:if>
+                                <td class="dataText"><c:out value="${caveat.caveatnumber}"/></td>
+                                <td class="dataText"><c:out value="${caveat.fileno}"/></td>
+                                <td class="dataText"><c:out value="${caveat.status}"/></td>
+                                <td class="dataText"><c:out value="${caveat.court}"/></td>
+                                <td class="dataText"><c:out value="${caveat.courtname}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy"  value="${caveat.createddate}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy"  value="${caveat.dateofdispose}"/></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                    
+                    <tfoot><tr>
+                    
+                    <td  class="footerTD" colspan="2" >
+                            </td>
+                   </tr></tfoot>
+                </table>
+                
+                </div>
+    </div>
     
     	<%-- <div class="accordion" style="width: 100%;height: 100%">
 		

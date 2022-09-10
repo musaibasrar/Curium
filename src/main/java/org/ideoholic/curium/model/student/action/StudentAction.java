@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.appointment.service.AppointmentService;
+import org.ideoholic.curium.model.cases.service.CasesService;
+import org.ideoholic.curium.model.caveat.service.CaveatService;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.job.service.JobService;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
@@ -190,6 +192,8 @@ public class StudentAction {
 		if (new StudentService(request, response).viewDetailsOfStudent()) {
 			new JobService(request, response).generateQueriesReportForClient();
 			new AppointmentService(request, response).generateAppointmentsReportForClient();
+			new CasesService(request, response).generateCasesReportForClient();
+			new CaveatService(request, response).generateCaveatsReportForClient();
 			Object obj = request.getAttribute("urlbranchid");
 			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
 			if (branchId.equalsIgnoreCase("1")) {

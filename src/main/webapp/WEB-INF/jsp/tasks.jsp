@@ -671,7 +671,7 @@ for(Cookie cookie : cookies){
                                <td class="dataText"><c:out value="${task.description}"/></td>
                                 
                                 <td class="dataText" style="text-align: left">
-                                		<c:out value="${task.jobquery.parent.student.name}"/>
+                                		<a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${task.jobquery.parent.student.sid},${task.jobquery.parent.student.branchid})"><c:out value="${task.jobquery.parent.student.name}"/></a>
                                 </td>
                                 <td class="dataText"><c:out value="${task.teacher.teachername}"/></td>
                                 <c:if test="${not empty task.jobquery.feedback}">

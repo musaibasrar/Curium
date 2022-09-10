@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23 May, 2018 11:42:50 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.caveat.dto.Caveat" table="h_caveat">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="court" type="string">
+            <column name="court" length="400" />
+        </property>
+         <property name="caveattitle" type="string">
+            <column name="caveattitle" length="1000" />
+        </property>
+        <property name="courtname" type="string">
+            <column name="courtname" length="400" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="50" />
+        </property>
+		     <property name="dateofdispose" type="date">
+            <column name="dateofdispose" />
+        </property> 
+        <property name="filetaken" type="string">
+            <column name="filetaken" length="50" />
+        </property>
+                <property name="filetakenby" type="string">
+            <column name="filetakenby" length="50" />
+        </property>
+                <property name="filetakenbyname" type="string">
+            <column name="filetakenbyname" length="200" />
+        </property>
+        <property name="filetakenbynumber" type="string">
+            <column name="filetakenbynumber" length="20" />
+        </property>
+		<property name="remarks" type="string">
+            <column name="remarks" length="1000" />
+        </property>
+        <property name="createddate" type="date">
+            <column name="createddate" />
+        </property>
+        <property name="updateddate" type="date">
+            <column name="updateddate" />
+        </property>
+		<property name="createduserid" type="java.lang.Integer">
+            <column name="createduserid"  />
+        </property>
+        <property name="updateduserid" type="java.lang.Integer">
+            <column name="updateduserid"  />
+        </property>
+		<property name="branchid" type="java.lang.Integer">
+            <column name="branchid"  />
+        </property>
+        <property name="assignto" type="java.lang.Integer">
+            <column name="assignto"  />
+        </property>
+        <property name="sid" type="java.lang.Integer">
+            <column name="sid"  />
+        </property>
+			 <property name="caveatnumber" type="string">
+            <column name="caveatnumber" length="100" />
+        </property>
+         <property name="fileno" type="string">
+            <column name="fileno" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

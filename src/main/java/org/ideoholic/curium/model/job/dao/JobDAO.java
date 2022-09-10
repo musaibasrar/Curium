@@ -852,4 +852,23 @@ public class JobDAO {
 			return result;
 		}
 
+
+		public List<Task> generateTasksReport(String parentQuery) {
+			
+	        List<Task> results = new ArrayList<Task>();
+	        
+	        try {
+	                transaction = session.beginTransaction();
+	                results = (List<Task>) session.createQuery(parentQuery).setCacheable(true).setCacheRegion("commonregion").list();
+	                transaction.commit();
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	                
+	                hibernateException.printStackTrace();
+
+	        } finally {
+	    			HibernateUtil.closeSession();
+	        }
+	        return results;
+}
+
 }

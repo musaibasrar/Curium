@@ -1,6 +1,6 @@
 <%--
-    Document   : Queries Report
-    Created on : DEC 23, 2021, 6:29:28 PM
+    Document   : Cases Report
+    Created on : AUG 19, 2022, 4:53:28 PM
     Author     : Musaib
 --%>
 
@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Jobs Report</title>
+<title>Cases Report</title>
 <link rel="stylesheet" href="/sla/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/sla/css/datePicker/demos.css">
 <style type="text/css">
@@ -436,9 +436,9 @@
 <script type="text/javascript" src="/sla/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
-	function generateQueriesReport() {
+	function generateCasesReport() {
 			var form1 = document.getElementById("form1");
-				form1.action = "/sla/QueryProcess/generateQueriesReport";
+				form1.action = "/sla/CasesProcess/generateCasesReport";
 				form1.method = "POST";
 				form1.submit();
 	}
@@ -451,7 +451,7 @@
                  primary: "ui-icon-document"
              }
          }).click(function(){
-             generateQueriesReport();
+             generateCasesReport();
              return false;
 
          });
@@ -471,7 +471,7 @@
      
 	 function printRecords() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/sla/QueryProcess/printQueriesReport";
+			form1.action = "/sla/CasesProcess/printCasesReport";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -615,46 +615,50 @@ for(Cookie cookie : cookies){
 						<tr>
 						
 						<tr>
-							<%-- <td class="alignRight">Staff&nbsp;</td>
-							<td ><label>
-									<select name="employee" id="employee"
-									style="width: 230px;border-radius: 4px;background: white;height: 28px;font-size: 14px;">
-										<option selected></option>
-
-										<c:forEach items="${employeeList}" var="employeelist">
-
-											<option value="${employeelist.tid}:${employeelist.teachername}">
-												<c:out value="${employeelist.teachername}" />
-											</option>
-
-
-										</c:forEach>
-
-								</select></label></td> --%>
+							<td class="alignRight">Court&nbsp;</td>
+							<td >
+									<label> <select name="court" id="court" style="width: 230px;border-radius: 4px;background: white;height: 28px;font-size: 14px;">
+											<option selected></option>
+											<option value="SC">Supreme Court</option>
+											<option value="HC">High Court</option>
+											<option value="DC">District Court</option>
+											<option value="KAT">Karantaka Administrative Tribunal</option>
+											<option value="WT">Waqf Tribunal</option>
+											<option value="FC">Family Court</option>
+											<option value="RC">Revenue Courts</option>
+											<option value="CC">Consumer Court</option>
+											<option value="CSC">Co-Societies Court</option>
+											<option value="AOC">Any Other Court</option>
+										</select>
+									</label>
+								</td>
 						
 							<td  class="alignRight">Status &nbsp;</td>
 							<td ><label> <select name="status"
-									id="status" class="dropdownlist" style="font-size: 14px;" required>
+									id="status" class="dropdownlist" style="font-size: 14px;">
 										<option selected></option>
-										<option>To Do</option>
-										<option>Completed</option>
-										<option>In Progress</option>
+										<option>Pending</option>
+										<option>Disposed</option>
+										<option>NOC</option>
 										<option>Cancelled</option>
 								</select>
-							</label></td>
-							
-							<td class="alignRight">Client Name&nbsp;</td>
-							<td ><label>
-										<input  type="text" name="clientname" id="clientname"  class="myclass" style="width: 200px" /> 
-										<input name="studentId" type="hidden" id="studentId" value="" />
-										<input name="studentName" type="hidden" id="studentName" value="" />
 							</label></td>
 							
 						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
-						
+						<tr>
+							<td class="alignRight">Client Name&nbsp;</td>
+							<td ><label>
+										<input  type="text" name="clientname" id="clientname"  class="myclass" style="width: 200px" /> 
+										<input name="studentId" type="hidden" id="studentId" value="" />
+										<input name="studentName" type="hidden" id="studentName" value="" />
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -676,7 +680,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Jobs Report <br>
+					<td class="headerTD">Cases Report <br>
 					${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;
 					</td>
 				</tr>
@@ -687,40 +691,59 @@ for(Cookie cookie : cookies){
 				<thead>
                         <tr>
                         	<th title="click to sort" class="headerText">UID</th>
-                        	<th title="click to sort" class="headerText">Job No.</th>
+                            <th title="click to sort" class="headerText">Case Title</th>
+                            <th title="click to sort" class="headerText">Case No.</th>
+                            <th title="click to sort" class="headerText">File No.</th>
+                            <th title="click to sort" class="headerText">Status</th>
+                            <th title="click to sort" class="headerText">Court</th>
+                            <th title="click to sort" class="headerText">Court Name</th>
+                            <th title="click to sort" class="headerText">Date of Dispose/NOC</th>
+                            <th title="click to sort" class="headerText">File Taken</th>
+                            <th title="click to sort" class="headerText">File Taken By</th>
+                            <th title="click to sort" class="headerText">File Taken By Name</th>
+                            <th title="click to sort" class="headerText">File Taken By Number</th>
                             <th title="click to sort" class="headerText">Created Date</th>
                             <th title="click to sort" class="headerText">Updated Date</th>
-                            <th title="click to sort" class="headerText">Staff</th>
-                            <th title="click to sort" class="headerText">Client Name</th>
-                            <th title="click to sort" class="headerText">Contact No.</th>
-                            <th title="click to sort" class="headerText">Status</th>
-                            <!-- <th title="click to sort" class="headerText">Feedback</th> -->
                         </tr>
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${parentquerylist}" var="query">
+                        <c:forEach items="${caseslist}" var="cases">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                            <td class="dataText"><c:out value="${query.id}"/></td>
-                            <td class="dataText"><c:out value="${query.externalid}"/></td>
-                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
-                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
-                                 <td class="dataText">
-                                 		<c:if test="${not empty query.tasks}">
-    											 <c:forEach items="${query.tasks}" var="task" varStatus="status">
-    											 		<c:if test="${task.status ne 'Cancelled'}">
-		                                				${status.index+1}.&nbsp;<c:out value="${task.teacher.teachername}"/><br>
-		                                				</c:if>
-		                                		</c:forEach>
-											</c:if>
-											<c:if test="${empty query.tasks}">
-    											<c:out value="${query.teacher.teachername}"/>
-											</c:if>
-                                 </td>
-                                <td class="dataText"><c:out value="${query.parent.student.name}"/></td>
-                                <td class="dataText"><c:out value="${query.parent.contactnumber}"/></td>
-                                <td class="dataText"><c:out  value="${query.status}"/></td>
-                                <%-- <td class="dataText"><c:out  value="${query.feedback}"/></td> --%>
+                            	<td class="dataText" ><c:out value="${cases.id}"/></td>
+                            	
+                            	<c:if test="${cases.status == 'Pending' }">
+                                	<td class="dataText" style="color: #0001ff;font-weight: bold;">
+                                	<a class="dataTextInActive" style="color: #0001ff;font-weight: bold;">${cases.casetitle}</a>
+                                	</td>
+                                </c:if>
+                                <c:if test="${cases.status == 'Disposed' }">
+                                	<td class="dataText" style="color: green;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: green;font-weight:bold;">${cases.casetitle}</a>
+                                	</td>
+                                </c:if>
+                                <c:if test="${cases.status == 'NOC' }">
+                                	<td class="dataText" style="color: red;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: red;font-weight: bold;">${cases.casetitle}</a>
+                                	</td>
+                                </c:if>
+                                <c:if test="${cases.status == 'Cancelled' }">
+                                	<td class="dataText" style="color: grey;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: grey;font-weight: bold;">${cases.casetitle}</a>
+                                	</td>
+                                </c:if>
+                                <td class="dataText"><c:out value="${cases.casenumber}"/></td>
+                                <td class="dataText"><c:out value="${cases.fileno}"/></td>
+                                <td class="dataText"><c:out value="${cases.status}"/></td>
+                                <td class="dataText"><c:out value="${cases.court}"/></td>
+                                <td class="dataText"><c:out value="${cases.courtname}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy"  value="${cases.dateofdispose}"/></td>
+                                <td class="dataText"><c:out value="${cases.filetaken}"/></td>
+                                <td class="dataText"><c:out value="${cases.filetakenby}"/></td>
+                                <td class="dataText"><c:out value="${cases.filetakenbyname}"/></td>
+                                <td class="dataText"><c:out value="${cases.filetakenbynumber}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy"  value="${cases.createddate}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${cases.updateddate}"/></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -737,7 +760,7 @@ for(Cookie cookie : cookies){
                             <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
                     		<td class="footerTD"  colspan="8">
                     		<button id="print">Print</button>
-                    		<button id="export">Export</button> 
+                    		<!-- <button id="export">Export</button> --> 
                     		&nbsp;&nbsp;&nbsp;
                     		<!-- <button id="approve">Approve</button>
                     		&nbsp;&nbsp;&nbsp;

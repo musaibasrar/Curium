@@ -1,5 +1,5 @@
 <%-- 
-    Document   : Print Queries Report
+    Document   : Print Caveat Report
     Created on : JAN 8 2021, 2:01 PM
     Author     : Musaib
 --%>
@@ -13,10 +13,10 @@
 
 <html >
 <head>
-<title>Print Queries Report</title>
+<title>Print Caveat Report</title>
 <style type="text/css">
 <!--
-.headerText {
+.datath {
 	width: 10px;
 	font-family: Tahoma;
 	font-size: 12px;
@@ -28,7 +28,7 @@
 	text-align: center;
 }
 
-.headerTextLeft {
+.datathLeft {
 	width: 10px;
 	font-family: Tahoma;
 	font-size: 12px;
@@ -226,7 +226,7 @@
 				<td class="dataTextBoldCenter" style="width: 100%">
 				<label style="text-transform: uppercase;font-size: 24px;">Suprema Law Associate</label>
 				<br>
-				<label class="addressLine">Jobs Report</label><br>
+				<label class="addressLine">Caveats Report</label><br>
 				<label class="addressLineTwo">${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;${issuedtoselected}&nbsp;&nbsp;${purposeselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp;
 				</label>
 				</td>
@@ -247,47 +247,52 @@
             <thead>
             	
             	  		<tr>
-                           	<th class="datath">Sl.No</th>
-                           	<th class="datath">UID</th>
-                           	<th class="datath">Job No.</th>
-                            <th class="datath">Created Date</th>
-                            <th class="datath">Updated Date</th>
-                            <th class="datath">Staff</th>
-                            <th class="datath">Client Name</th>
-                            <th class="datath">Contact Number</th>
+            	  			<th class="datath">Sl. No.</th>
+            	  			<th class="datath">UID</th>
+                            <th class="datath">Caveat Title</th>
+                            <th class="datath">Caveat No.</th>
+                            <th class="datath">File No.</th>
                             <th class="datath">Status</th>
-                            <!-- <th class="datath">Feedback</th> -->
+                            <th class="datath">Court</th>
+                            <th class="datath">Court Name</th>
+                            <th class="datath">Caveat Date</th>
+                            <th class="datath">Expiry Date</th>
+                            <th class="datath">Created Date</th>
                         </tr>
  			 </thead>
  		 
 			<tbody>
 			
-						<c:forEach items="${parentquerylist}" var="query" varStatus="status">
+						<c:forEach items="${caveatslist}" var="caveat" varStatus="status">
                             <tr>
-                                <td class="datatd" style="font-size: 9px;">${status.index+1}</td>
-                                <td class="datatd" style="font-size: 9px;"><c:out value="${query.id}"/></td>
-                                <td class="datatd" style="font-size: 9px;"><c:out value="${query.externalid}"/></td>
-                                <td class="datatd" style="font-size: 9px;"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
-                                <td class="datatd" style="font-size: 9px;"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
-                                <td class="datatd" style="font-size: 9px;">
-                                		<c:if test="${not empty query.tasks}">
-    											 <c:forEach items="${query.tasks}" var="task" varStatus="status">
-    											 		<c:if test="${task.status ne 'Cancelled'}">
-		                                				${status.index+1}.&nbsp;<c:out value="${task.teacher.teachername}"/><br>
-		                                				</c:if>
-		                                		</c:forEach>
-											</c:if>
-											<c:if test="${empty query.tasks}">
-    											<c:out value="${query.teacher.teachername}"/>
-											</c:if>
-                                </td>
-                                <td class="datatd" style="font-size: 9px;"><c:out value="${query.parent.student.name}"/></td>
-                                <td class="datatd" style="font-size: 9px;"><c:out value="${query.parent.contactnumber}"/></td>
-                                <td class="datatd" style="font-size: 9px;"><c:out  value="${query.status}"/></td>
+                            	<td class="datatd" style="font-size: 9px;">${status.index+1}</td>
+                            	<td class="datatd" style="font-size: 9px;"><c:out value="${caveat.id}"/></td>
+                            	
+                            	<c:if test="${caveat.status == 'Pending' }">
+                                	<td class="datatd" style="font-size: 9px;">
+                                	<c:out value="${caveat.caveattitle}"/>
+                                	</td>
+                                </c:if>
+                                <c:if test="${caveat.status == 'Expired' }">
+                                	<td class="datatd" style="font-size: 9px;">
+                                		<c:out value="${caveat.caveattitle}"/>
+                                	</td>
+                                </c:if>
+                                <c:if test="${caveat.status == 'Cancelled' }">
+                                	<td class="datatd" style="font-size: 9px;">
+                                		<c:out value="${caveat.caveattitle}"/>
+                                	</td>
+                                </c:if>
+                                <td class="datatd" style="font-size: 9px;"><c:out value="${caveat.caveatnumber}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><c:out value="${caveat.fileno}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><c:out value="${caveat.status}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><c:out value="${caveat.court}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><c:out value="${caveat.courtname}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><fmt:formatDate pattern="dd/MM/yyyy"  value="${caveat.createddate}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><fmt:formatDate pattern="dd/MM/yyyy"  value="${caveat.dateofdispose}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><fmt:formatDate pattern="dd/MM/yyyy" value="${caveat.updateddate}"/></td>
                             </tr>
                         </c:forEach>
-			
-					
 			</tbody>
 				</table>
 			<br>

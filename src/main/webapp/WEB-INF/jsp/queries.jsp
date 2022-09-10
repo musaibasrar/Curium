@@ -421,7 +421,7 @@
 			form1.submit();
 		}
 		
-		function updateQueryRemarks(queryRemarksAdded,queryRemarks, queryid) {
+		function updateQueryRemarks(queryRemarksAdded,queryRemarks, queryid, username) {
 			var form1 = document.getElementById("form1");
 			var remarksAdded = queryRemarks.value;
 			var loginusername = username.value;
@@ -603,6 +603,21 @@
                 form1.submit();
             }
             
+            function check(studentid){
+            	
+            	var length = $('.chcktbl:checked').length;
+                var trLength=$('.trClass').length;
+                if(length>0){
+                    $('.chcktbl:checked').attr('checked', false);
+                    this.checked=false;
+                }
+                else{
+                    if (this.checked == false) {
+                        $('.chcktbl:checked').attr('checked', false);
+                    }
+                }
+      	      	  document.getElementById(studentid).checked = true;  
+            }
         </script>
 
 
@@ -648,8 +663,8 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Staff</th>
                             <th title="click to sort" class="headerText">Remarks</th>
                             <th title="click to sort" class="headerText">Status</th>
-                            <th title="click to sort" class="headerText">Created Date</th>
-                            <th title="click to sort" class="headerText">Updated Date</th>
+                            <!-- <th title="click to sort" class="headerText">Created Date</th>
+                            <th title="click to sort" class="headerText">Updated Date</th> -->
                             <th title="click to sort" class="headerText">Expected Delivery</th>
                             <th title="click to sort" class="headerText">Task</th>
                             <!-- <th title="click to sort" class="headerText">Details</th> -->
@@ -688,7 +703,9 @@ for(Cookie cookie : cookies){
                                 
                                 			<c:if test="${not empty query.tasks}">
     											 <c:forEach items="${query.tasks}" var="task" varStatus="status">
+    											 		<c:if test="${task.status ne 'Cancelled'}">
 		                                				${status.index+1}.&nbsp;<c:out value="${task.teacher.teachername}"/><br>
+		                                				</c:if>
 		                                		</c:forEach>
 											</c:if>
 											<c:if test="${empty query.tasks}">
@@ -705,10 +722,10 @@ for(Cookie cookie : cookies){
                                 	<td class="dataText"><a href="#" onclick="openPopup('${query.feedback}','${query.id}')" style="color:#4b6a84;">Add</a></td>
                                 </c:if>
                                 <td class="dataText"><c:out  value="${query.status}"/></td>
-                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
-                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
+                                 <%-- <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td> --%>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.expecteddeliverydate}"/></td>
-                                <td class="dataText"><a href="#" onclick="createTask('${query.id}','${query.externalid}')" style="color:#eb6000;">Create Task</a></td>
+                                <td class="dataText"><a href="#" onclick="check(${query.id}),createTask('${query.id}','${query.externalid}')" style="color:#eb6000;">Create Task</a></td>
                                 <%-- <td class="dataText"><a href="#" onclick="openPopup(${query.id})" style="color:#eb6000;">View Details</a></td> --%>
                             </tr>
                         </c:forEach>

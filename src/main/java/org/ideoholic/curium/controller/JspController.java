@@ -405,4 +405,64 @@ public class JspController {
 	public String getCreatetask() {
 		return "createtask";
 	}
+	
+	@GetMapping("/tasksreport")
+	public String getTasksreport() {
+		return "tasksreport";
+	}
+	
+	@GetMapping("/printtasksreport")
+	public String getPrintTasksReport() {
+		return "printtasksreport";
+	}
+	
+	@GetMapping("/createcases")
+	public String getCreateCases() {
+		return "createcases";
+	}
+	
+	@GetMapping("/cases")
+	public String getCases() {
+		return "cases";
+	}
+	
+	@GetMapping("/createnewcases")
+	public String getCreateNewCases() {
+		return "createnewcases";
+	}
+	
+	@GetMapping("/casesreport")
+	public String getCasesReport() {
+		return "casesreport";
+	}
+	
+	@GetMapping("/printcasesreport")
+	public String getPrintCasesReport() {
+		return "printcasesreport";
+	}
+	
+	@GetMapping("/createcaveat")
+	public String getCreateCaveat() {
+		return "createcaveat";
+	}
+	
+	@GetMapping("/caveats")
+	public String getcaveats() {
+		return "caveat";
+	}
+	
+	@GetMapping("/createnewcaveats")
+	public String getCreateNewCaveat() {
+		return "createnewcaveat";
+	}
+	
+	@GetMapping("/caveatsreport")
+	public String getCaveatReport() {
+		return "caveatreport";
+	}
+	
+	@GetMapping("/printcaveatsreport")
+	public String getPrintCaveatsReport() {
+		return "printcaveatsreport";
+	}
 }

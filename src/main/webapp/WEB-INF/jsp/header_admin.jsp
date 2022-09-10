@@ -141,13 +141,25 @@ for(Cookie cookie : cookies){
 									alt="Client Search" style="vertical-align: bottom;" />Create Job / Appt.
 							</a></td>
 
-							<!-- <td><a target="mainFrame"
+							<td><a target="mainFrame"
+								href="/sla/CasesProcess/createCase"> <img
+									src="/sla/images/feescollect.svg" width="18" height="18"
+									alt="Create Case" style="vertical-align: bottom;" />Create Case
+							</a></td>
+							
+							<td><a target="mainFrame"
+								href="/sla/CaveatProcess/createCaveats"> <img
+									src="/sla/images/caveat.svg" width="18" height="18"
+									alt="Create Caveat" style="vertical-align: bottom;" />Create Caveat
+							</a></td>
+							
+							<!--<td><a target="mainFrame"
 								href="/sla/FeesProcess/feesCollect"> <img
 									src="/sla/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
-							<td>
+							 <td>
 								<a target="mainFrame"
 								href="/sla/AccountProcess/createVoucher"> <img
 									src="/sla/images/createvoucher.svg" width="18" height="18"

@@ -627,14 +627,14 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">UID</th>
                             <th title="click to sort" class="headerText">Job No.</th>
-                            <th title="click to sort" class="headerText">Task</th>
-                            <th title="click to sort" class="headerText">Description</th>
                             <th title="click to sort" class="headerText">Client Name</th>
                             <th title="click to sort" class="headerText">Staff</th>
                             <th title="click to sort" class="headerText">Remarks</th>
                             <th title="click to sort" class="headerText">Status</th>
-                            <th title="click to sort" class="headerText">Created Date</th>
-                            <th title="click to sort" class="headerText">Updated Date</th>
+                            <!-- <th title="click to sort" class="headerText">Created Date</th>
+                            <th title="click to sort" class="headerText">Updated Date</th> -->
+                            <th title="click to sort" class="headerText">Task</th>
+                            <th title="click to sort" class="headerText">Description</th>
                             <th title="click to sort" class="headerText">Expected Delivery</th>
                             <!-- <th title="click to sort" class="headerText">Details</th> -->
                         </tr>
@@ -659,11 +659,9 @@ for(Cookie cookie : cookies){
                                 <c:if test="${task.status == 'Cancelled' }">
                                 	<td class="dataText" style="color: grey;font-weight: bold;"><c:out value="${task.jobquery.externalid}"/></td>
                                 </c:if>
-                                <td class="dataText"><c:out value="${task.tasks}"/></td>
-                               <td class="dataText"><c:out value="${task.description}"/></td>
                                 
                                 <td class="dataText" style="text-align: left">
-                                		<c:out value="${task.jobquery.parent.student.name}"/>
+                                		<a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${task.jobquery.parent.student.sid},${task.jobquery.parent.student.branchid})"><c:out value="${task.jobquery.parent.student.name}"/></a>
                                 </td>
                                 <td class="dataText"><c:out value="${task.teacher.teachername}"/></td>
                                 <c:if test="${not empty task.jobquery.feedback}">
@@ -673,8 +671,10 @@ for(Cookie cookie : cookies){
                                 	<td class="dataText"><a href="#" onclick="openPopup('${task.jobquery.feedback}','${task.jobquery.id}')" style="color:#4b6a84;">Add</a></td>
                                 </c:if>
                                 <td class="dataText"><c:out  value="${task.status}"/></td>
-                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${task.jobquery.createddate}"/></td>
-                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${task.updateddate}"/></td>
+                                 <%-- <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${task.jobquery.createddate}"/></td>
+                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${task.updateddate}"/></td> --%>
+                                <td class="dataText"><c:out value="${task.tasks}"/></td>
+                               	<td class="dataText"><c:out value="${task.description}"/></td>
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${task.expecteddeliverydate}"/></td>
                                 <%-- <td class="dataText"><a href="#" onclick="openPopup(${query.id})" style="color:#eb6000;">View Details</a></td> --%>
                             </tr>

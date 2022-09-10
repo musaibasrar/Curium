@@ -1,6 +1,6 @@
 <%-- 
-    Document   : appointment success
-    Created on : Dec 15, 2021, 6:44:53 PM
+    Document   : Caveat success
+    Created on : Aug 18, 2022, 11:30:53 AM
     Author     : Musaib
 --%>
 
@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Query Success</title>
+        <title>Caveats Success</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
@@ -65,19 +65,19 @@
 
             function viewAllClients(){
                 var form1=document.getElementById("form1");
-                form1.action="/sla/StudentProcess/viewAllStudentsWithParents";
+                form1.action="/sla/CaveatProcess/createCaveats";
                 form1.submit();
             }
             
             $(function(){
-                $("#viewjobs").button().click(function() {
-        			viewJobs();
+                $("#viewcaveat").button().click(function() {
+                	viewCaveat();
         			});
                 });
 
-            function viewJobs(){
+            function viewCaveat(){
                 var form1=document.getElementById("form1");
-                form1.action="/sla/QueryProcess/viewAllTasks";
+                form1.action="/sla/CaveatProcess/viewAllCaveats";
                 form1.submit();
             }
         </script>
@@ -102,15 +102,13 @@ for(Cookie cookie : cookies){
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="50" align="center" valign="middle"><p class="style1"> Job/Task Created Successfully</p>
+        <td height="50" align="center" valign="middle"><p class="style1"> Caveat Created Successfully</p>
         </td>
-        
       </tr>
       <tr>
           <td height="5" align="center" valign="middle"><p class="style1">
-                  
                   <button id="viewallclients">View All Clients</button> &nbsp;&nbsp;&nbsp; 
-                  <button id="viewjobs">View Tasks</button>
+                  <button id="viewcaveat">View Caveats</button>
                                    
               </p>
         </td>

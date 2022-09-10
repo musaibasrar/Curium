@@ -110,5 +110,7 @@
 		<mapping resource="mappings/Appointment.hbm.xml"/>
 		<mapping resource="mappings/JobQuery.hbm.xml"/>
 		<mapping resource="mappings/Task.hbm.xml"/>
+		<mapping resource="mappings/Cases.hbm.xml"/>
+		<mapping resource="mappings/Caveat.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

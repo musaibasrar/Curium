@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print Queries Report</title>
+<title>Print Tasks Report</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -226,7 +226,7 @@
 				<td class="dataTextBoldCenter" style="width: 100%">
 				<label style="text-transform: uppercase;font-size: 24px;">Suprema Law Associate</label>
 				<br>
-				<label class="addressLine">Jobs Report</label><br>
+				<label class="addressLine">Tasks Report</label><br>
 				<label class="addressLineTwo">${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;${issuedtoselected}&nbsp;&nbsp;${purposeselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp;
 				</label>
 				</td>
@@ -262,28 +262,19 @@
  		 
 			<tbody>
 			
-						<c:forEach items="${parentquerylist}" var="query" varStatus="status">
+						<c:forEach items="${parenttaskslist}" var="task" varStatus="status">
                             <tr>
                                 <td class="datatd" style="font-size: 9px;">${status.index+1}</td>
-                                <td class="datatd" style="font-size: 9px;"><c:out value="${query.id}"/></td>
-                                <td class="datatd" style="font-size: 9px;"><c:out value="${query.externalid}"/></td>
-                                <td class="datatd" style="font-size: 9px;"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.createddate}"/></td>
-                                <td class="datatd" style="font-size: 9px;"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.updateddate}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><c:out value="${task.id}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><c:out value="${task.jobquery.externalid}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><fmt:formatDate pattern="dd/MM/yyyy" value="${task.jobquery.createddate}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><fmt:formatDate pattern="dd/MM/yyyy" value="${task.jobquery.updateddate}"/></td>
                                 <td class="datatd" style="font-size: 9px;">
-                                		<c:if test="${not empty query.tasks}">
-    											 <c:forEach items="${query.tasks}" var="task" varStatus="status">
-    											 		<c:if test="${task.status ne 'Cancelled'}">
-		                                				${status.index+1}.&nbsp;<c:out value="${task.teacher.teachername}"/><br>
-		                                				</c:if>
-		                                		</c:forEach>
-											</c:if>
-											<c:if test="${empty query.tasks}">
-    											<c:out value="${query.teacher.teachername}"/>
-											</c:if>
+		                               <c:out value="${task.teacher.teachername}"/><br>
                                 </td>
-                                <td class="datatd" style="font-size: 9px;"><c:out value="${query.parent.student.name}"/></td>
-                                <td class="datatd" style="font-size: 9px;"><c:out value="${query.parent.contactnumber}"/></td>
-                                <td class="datatd" style="font-size: 9px;"><c:out  value="${query.status}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><c:out value="${task.jobquery.parent.student.name}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><c:out value="${task.jobquery.parent.contactnumber}"/></td>
+                                <td class="datatd" style="font-size: 9px;"><c:out  value="${task.status}"/></td>
                             </tr>
                         </c:forEach>
 			

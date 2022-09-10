@@ -956,6 +956,7 @@ for(Cookie cookie : cookies){
 											<option value="HC">High Court Case</option>
 											<option value="KAT">Karantaka Administrative Tribunal Case</option>
 											<option value="RC">Revenue Courts Case</option>
+											<option value="RTIC">RTI Case</option>
 											<option value="SC">Supreme Court Case</option>
 											<option value="WT">Waqf Tribunal Case</option>
 											<option value="AOC">Any Other Court Case</option>
@@ -1128,9 +1129,11 @@ for(Cookie cookie : cookies){
 									<td class="alignLeft">Type of Cases:</td>
 									<td><label> <select name="typeofworknoncourtno" id="typeofworknoncourtno" style="width: 250px;height: 25px;">
 											<option selected></option>
-											<option value="PN">Paper Notice</option>
 											<option value="LN">Legal Notice</option>
+											<option value="LTR">Letters</option>
 											<option value="NC">Name Change</option>
+											<option value="PN">Paper Notice</option>
+											<option value="POC">Police Complaint</option>
 										</select>
 									</label></td>
 								</tr>

@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -30,15 +28,14 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.job.dao.JobDAO;
+import org.ideoholic.curium.model.job.dto.JobQuery;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.task.dto.Task;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.ideoholic.curium.model.job.dto.JobQuery;
 
 public class JobService {
 
@@ -407,8 +404,8 @@ public class JobService {
 		
 		String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondatefrom"));
 		String toDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondateto"));
-		String dep = request.getParameter("employee");
-		String[] depParts = dep.split(":");
+		//String dep = request.getParameter("employee");
+		//String[] depParts = dep.split(":");
 		String status = request.getParameter("status");
 		String studentId = request.getParameter("studentId");
 		String admnno = request.getParameter("clientname");
@@ -417,15 +414,15 @@ public class JobService {
 		String subQuery = "";
 		List<JobQuery> JobQueryList = new ArrayList<JobQuery>();
 				
-		if(!dep.isEmpty()) {
-			subQuery = "and pq.teacher.tid = "+Integer.parseInt(depParts[0])+"";
-			httpSession.setAttribute("teacherselected", "teacher:&nbsp;"+depParts[1]);
-		}else {
-			httpSession.setAttribute("teacherselected", "");
-		}
+		/*
+		 * if(!dep.isEmpty()) { subQuery =
+		 * "and pq.teacher.tid = "+Integer.parseInt(depParts[0])+"";
+		 * httpSession.setAttribute("teacherselected", "teacher:&nbsp;"+depParts[1]);
+		 * }else { httpSession.setAttribute("teacherselected", ""); }
+		 */
 		
 		if(!status.isEmpty()) {
-			subQuery = subQuery + " and status = '"+status+"'";
+			subQuery = subQuery + " and pq.status = '"+status+"'";
 			httpSession.setAttribute("statusselected", "Status:&nbsp;"+status);
 		}else {
 		httpSession.setAttribute("statusselected", "");
@@ -570,11 +567,22 @@ public class JobService {
 								"Contact Number", "Status"});
 				int i = 1;
 				for (JobQuery queryDetails : queriesList) {
+					
+					StringBuffer staffNames = new StringBuffer();
+					for (Task row : queryDetails.getTasks()) {
+							staffNames.append(row.getTeacher().getTeachername()+",");
+						
+					}
+					
+					if(queryDetails.getTasks().isEmpty()) {
+						staffNames.append(queryDetails.getTeacher().getTeachername());
+					}
+					
 					data.put(Integer.toString(i),
 							new Object[] { DataUtil.emptyString(Integer.toString(queryDetails.getId())),  DataUtil.emptyString(queryDetails.getExternalid()),
 									 DataUtil.emptyString(DateUtil.getStringDate(queryDetails.getCreateddate())),
 									 DataUtil.emptyString(DateUtil.getStringDate(queryDetails.getUpdateddate())),
-									 DataUtil.emptyString(queryDetails.getTeacher().getTeachername()),
+									 DataUtil.emptyString(staffNames.toString()),
 									 DataUtil.emptyString(queryDetails.getParent().getStudent().getName()),
 									 DataUtil.emptyString(queryDetails.getParent().getContactnumber()),
 									 DataUtil.emptyString(queryDetails.getStatus())});
@@ -760,12 +768,12 @@ public class JobService {
 					inProgress = inProgress+1;
 				}else if (task.getStatus().equalsIgnoreCase("Completed")) {
 					completed = completed+1;
+				}else if (task.getStatus().equalsIgnoreCase("Cancelled")) {
+					length = length-1;
 				}
 			}
 			
-			if(toDo>=length) {
-				jobStatus ="To Do";
-			}else if(completed>=length) {
+			if(completed>=length) {
 				jobStatus ="Completed";
 			}else {
 				jobStatus ="In Progress";
@@ -816,20 +824,33 @@ public class JobService {
 			
 			for (Task task : listTask) {
 				
-				if(task.getStatus().equalsIgnoreCase("To Do")) {
-					toDo = toDo+1;
-				}else if (task.getStatus().equalsIgnoreCase("In Progress")) {
-					inProgress = inProgress+1;
-				}else if (task.getStatus().equalsIgnoreCase("Completed")) {
-					completed = completed+1;
-				}else if (task.getStatus().equalsIgnoreCase("Cancelled")) {
-					cancel = cancel+1;
+				Integer i = task.getId();
+				
+				if(!taskIdsList.contains(i)) {
+					
+					if(task.getStatus().equalsIgnoreCase("To Do")) {
+						toDo = toDo+1;
+					}else if (task.getStatus().equalsIgnoreCase("In Progress")) {
+						inProgress = inProgress+1;
+					}else if (task.getStatus().equalsIgnoreCase("Completed")) {
+						completed = completed+1;
+					}else if (task.getStatus().equalsIgnoreCase("Cancelled")) {
+						cancel = cancel+1;
+					}	
 				}
 			}
 			
-			if(cancel>=length){
+			if(completed==0 && inProgress==0 && toDo==0){
 				jobStatus ="Cancelled";
+			}else if(toDo==0 && inProgress==0 ) {
+				jobStatus ="Completed";
+			}else if(completed==0 && inProgress==0) {
+				jobStatus ="To Do";
+			}else {
+				jobStatus="In Progress";
 			}
+			
+			
 			result = new JobDAO().cancelTasks(taskIdsList, userId, jobStatus, Integer.parseInt(request.getParameter("jobid")));
 			
 			if(!result.isEmpty()) {
@@ -850,8 +871,6 @@ public class JobService {
 		List<Task> result = new ArrayList<Task>();
 		int toDo = 0;
 		int inProgress = 0;
-		int completed = 0;
-		int cancel=0;
 		
 		String jobStatus = null;
 		
@@ -866,23 +885,25 @@ public class JobService {
 			
 			for (Task task : listTask) {
 				
+					Integer i = task.getId();
+				
+				if(!taskIdsList.contains(i)) {
+					
 				if(task.getStatus().equalsIgnoreCase("To Do")) {
 					toDo = toDo+1;
 				}else if (task.getStatus().equalsIgnoreCase("In Progress")) {
 					inProgress = inProgress+1;
 				}else if (task.getStatus().equalsIgnoreCase("Completed")) {
-					completed = completed+1;
+					inProgress = inProgress+1;
 				}else if (task.getStatus().equalsIgnoreCase("Cancelled")) {
-					cancel = cancel+1;
+					length = length-1;
+				}
+				
 				}
 			}
 			
-			if(toDo>=length) {
+			if(toDo>=length && inProgress==0) {
 				jobStatus ="To Do";
-			}else if(completed>=length) {
-				jobStatus ="Completed";
-			}else if(cancel>=length){
-				jobStatus ="Cancelled";
 			}else {
 				jobStatus ="In Progress";
 			}
@@ -978,5 +999,48 @@ public class JobService {
 				}
 		
 		return result;
+	}
+
+	public void generateTasksReport() {
+		
+		String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondatefrom"));
+		String toDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondateto"));
+		String dep = request.getParameter("employee");
+		String[] depParts = dep.split(":");
+		String status = request.getParameter("status");
+		String studentId = request.getParameter("studentId");
+		String admnno = request.getParameter("clientname");
+		String studentName = request.getParameter("studentName");
+		String queryMain = "from Task pq where pq.jobquery.createddate between '"+fromDate+"' and '"+toDate+"' ";
+		String subQuery = "";
+		List<Task> JobQueryList = new ArrayList<Task>();
+				
+		if(!dep.isEmpty()) {
+			subQuery = "and pq.teacher.tid = "+Integer.parseInt(depParts[0])+"";
+			httpSession.setAttribute("teacherselected", "teacher:&nbsp;"+depParts[1]);
+		}else {
+			httpSession.setAttribute("teacherselected", "");
+		}
+		
+		if(!status.isEmpty()) {
+			subQuery = subQuery + " and pq.status = '"+status+"'";
+			httpSession.setAttribute("statusselected", "Status:&nbsp;"+status);
+		}else {
+		httpSession.setAttribute("statusselected", "");
+		}
+		
+		if(!studentId.isEmpty()) {
+			subQuery = subQuery + "and pq.jobquery.parent.Student.sid = '"+studentId+"'";
+			httpSession.setAttribute("studentselected", "Client Name:&nbsp;"+studentName);
+		}else {
+			httpSession.setAttribute("studentselected", "");
+		}
+		
+		JobQueryList = new JobDAO().generateTasksReport(queryMain+subQuery);
+		
+		httpSession.setAttribute("parenttaskslist", JobQueryList);
+		httpSession.setAttribute("transactionfromdateselected", "From:"+request.getParameter("transactiondatefrom"));
+		httpSession.setAttribute("transactiontodateselected", "To:"+request.getParameter("transactiondateto"));
+		
 	}
 }

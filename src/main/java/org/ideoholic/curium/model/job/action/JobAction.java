@@ -286,4 +286,22 @@ public class JobAction {
 			return "error";
 		}
 	}
+	
+	@GetMapping("/taskReport")
+	private String taskReport() {
+		new EmployeeService(request, response).ViewAllEmployee();
+		new StudentService(request, response).viewAllStudentsList();
+		return "tasksreport";
+	}
+	
+	@PostMapping("/generateTasksReport")
+	private String generateTasksReport() {
+		new JobService(request, response).generateTasksReport();
+		return taskReport();
+	}
+	
+	@PostMapping("/printTasksReport")
+	private String printTasksReport() {
+		return "printtasksreport";
+	}
 }
