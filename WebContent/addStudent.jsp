@@ -814,6 +814,8 @@
 									<select name="staytype"	id="staytype" style="width: 256px;">
 										<option selected>Day Scholar</option>
 										<option>Day Scholar with Bus</option>
+										<option>Residential</option>
+										<option>Semi-residential</option>
 										</select>
 							</label> </td>
 							

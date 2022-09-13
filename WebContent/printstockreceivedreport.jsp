@@ -247,7 +247,8 @@
             	
  				 <tr>
  				 		<th class=datath>Sl.No</th>
- 				 		<th class="datath">Date</th>
+ 				 		<th class="datath">Entry Date</th>
+ 				 		<th class="datath">Invoice Date</th>
 						<th class="datath">Batch#</th>
 						<th class="datath">Item</th>
 						<th class="datath">Qty.</th>
@@ -268,6 +269,7 @@
 								<td class="datatd" style="font-size: 9px;">${status.index+1}</td>
 								<td class="datatd" style="font-size: 9px;">
 									<input type="text"  style="background: transparent;border-style: none;color: #4B6A84;text-align: center;width: 80px;"  value="<fmt:formatDate value="${messstockentrylist.messinvoicedetails.entrydate}" pattern="dd/MM/yyyy"/>" readonly>
+									<input type="text"  style="background: transparent;border-style: none;color: #4B6A84;text-align: center;width: 80px;"  value="<fmt:formatDate value="${messstockentrylist.messinvoicedetails.invoicedate}" pattern="dd/MM/yyyy"/>" readonly>
 								</td>
 								<td class="datatd" style="font-size: 9px;"><c:out value="${messstockentrylist.batchno}" /></td>
 								<td class="datatd" style="font-size: 9px;">

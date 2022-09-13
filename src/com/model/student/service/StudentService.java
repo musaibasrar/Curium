@@ -521,17 +521,17 @@ public class StudentService {
 			List<Studentfeesstructure> studentFeesStructure = new ArrayList<Studentfeesstructure>();
 			
 			for (Feescategory feescat : feesCategory) {
-					if("breakfast".equalsIgnoreCase(student.getBreakfast()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"Breakfast Fee")) {
+					if("breakfast".equalsIgnoreCase(student.getBreakfast()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"General Food - Breakfast")) {
 						feesbreakfastid = feescat.getIdfeescategory();
 						feesbreakfast = feescat.getAmount() * Integer.parseInt(monthfees);
 						Studentfeesstructure studentFeesBreakFast = new StampFeesService(request, response).stampStudentFeesStructure(feesbreakfastid, new Long(feesbreakfast));
 						studentFeesStructure.add(studentFeesBreakFast);
-					}else if("lunch".equalsIgnoreCase(student.getLunch()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"Lunch Fee")) {
+					}else if("lunch".equalsIgnoreCase(student.getLunch()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"General Food - Lunch")) {
 						feeslunchid = feescat.getIdfeescategory();
 						feeslunch = feescat.getAmount() * Integer.parseInt(monthfees);
 						Studentfeesstructure studentFeesLunch = new StampFeesService(request, response).stampStudentFeesStructure(feeslunchid, new Long(feeslunch));
 						studentFeesStructure.add(studentFeesLunch);
-					}else if("dinner".equalsIgnoreCase(student.getDinner()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"Dinner Fee")) {
+					}else if("dinner".equalsIgnoreCase(student.getDinner()) && DataUtil.containsIgnoreCase(feescat.getFeescategoryname(),"General Food - Dinner")) {
 						feesdinnerid = feescat.getIdfeescategory();
 						feesdinner = feescat.getAmount() * Integer.parseInt(monthfees);
 						Studentfeesstructure studentFeesDinner = new StampFeesService(request, response).stampStudentFeesStructure(feesdinnerid, new Long(feesdinner));

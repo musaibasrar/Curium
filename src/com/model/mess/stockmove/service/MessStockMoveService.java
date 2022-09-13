@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -72,10 +73,10 @@ public class MessStockMoveService {
 									if(reqQty<=messStockEntry.getAvailablequantity()) {
 
 										MessStockMove messStockMove = new MessStockMove();
-										
+										Date newDate = new Date();
 										messStockMove.setStockentryid(messStockEntry.getId());
 										messStockMove.setItemid(messStockEntry.getItemid());
-										messStockMove.setExternalid(request.getParameter("itemname_"+StockEntryIds[i]));
+										messStockMove.setExternalid(request.getParameter("itemname_"+StockEntryIds[i])+"_"+DateUtil.dateParserddMMYYYY(newDate));
 										messStockMove.setQuantity(reqQty);
 										messStockMove.setPurpose(request.getParameter("purpose"));
 										messStockMove.setTransactiondate(DateUtil.indiandateParser(request.getParameter("transactiondate")));

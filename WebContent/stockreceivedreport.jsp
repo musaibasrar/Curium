@@ -611,7 +611,8 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText">Sl.No.</th>
-						<th title="click to sort" class="headerText">Date</th>
+						<th title="click to sort" class="headerText">Entry Date</th>
+						<th title="click to sort" class="headerText">Invoice Date</th>
 						<th title="click to sort" class="headerText">Batch#</th>
 						<th title="click to sort" class="headerText">Item</th>
 						<th title="click to sort" class="headerText">Quantity</th>
@@ -628,6 +629,7 @@ for(Cookie cookie : cookies){
 							cellspacing="1">
 							<td class="dataText"><c:out value="${status.index+1}" /></td>
 						  <td class="dataText"><input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: center;"  value="<fmt:formatDate value="${messstockentrylist.messinvoicedetails.entrydate}" pattern="dd/MM/yyyy"/>" readonly></td>
+						  <td class="dataText"><input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: center;"  value="<fmt:formatDate value="${messstockentrylist.messinvoicedetails.invoicedate}" pattern="dd/MM/yyyy"/>" readonly></td>
 						  <td class="dataText"><c:out value="${messstockentrylist.batchno}" /></td>
 						  <c:set var="dataParts" value="${fn:split(messstockentrylist.externalid, '_')}" />
 						  <td class="dataText"><c:out value="${dataParts[0]}" /></td>
