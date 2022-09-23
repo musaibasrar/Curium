@@ -35,6 +35,9 @@
         <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.core.js"></script>
         <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.widget.js"></script>
         <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.button.js"></script>
+		<script type="text/javascript" src="/sla/js/chosen.jquery.min.js"></script>
+		<link rel="stylesheet" href="/sla/css/chosen.min.css">
+       
         <style type="text/css" >
 			.myclass {
 				font-size: 1.3em;
@@ -46,11 +49,27 @@
 				border-right-color: #5d7e9b;
 				border-bottom-color: #5d7e9b;
 				border-left-color: #5d7e9b;
-				border-top-width: 1px;
+				/* border-top-width: 1px;
 				border-right-width: 1px;
 				border-bottom-width: 1px;
-				border-left-width: 1px;
+				border-left-width: 1px; */
 				width: 220px;
+				height: 28px;
+				color: black;
+				text-transform: capitalize;
+				border-radius: 4px;
+			}
+			.myclassone {
+				font-size: 1.3em;
+				border-top-style: solid;
+				border-right-style: solid;
+				border-bottom-style: solid;
+				border-left-style: solid;
+				border-top-color: #5d7e9b;
+				border-right-color: #5d7e9b;
+				border-bottom-color: #5d7e9b;
+				border-left-color: #5d7e9b;
+				width: 200px;
 				height: 28px;
 				color: black;
 				text-transform: capitalize;
@@ -440,7 +459,22 @@
         		$("#anim").change(function() {
         			$("#expecteddeliverydate").datepicker("option", "showAnim", $(this).val());
         		});
+        		$(".chosen-select").chosen({
+        			  no_results_text: "Oops, nothing found!"
+        			})
         	});
+            
+            
+            function addRow() {
+                var rowCount = document.getElementById('dataTableTasks').rows.length;    
+                var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=items_"+rowCount+" /><input type='hidden' name='itemids' id=items_id_"+rowCount+" value='' /></td>";
+                var col2="<td class='dataTextInActive'><label> <select name='referredbyone' id=onereferredby_"+rowCount+" class='myclassone'><option selected></option><c:forEach items='${studentList}' var='studentList'><option value='${studentList.sid}'><c:out value='${studentList.name}' /></option></c:forEach></select></label></td>";
+                var newRow = $("<tr class='trClass'>"+col1+col2+"</tr>");
+            
+            $(function() {
+                $("#dataTableTasks").find('tbody').append(newRow);
+            });
+            }  
             
         </script>
         
@@ -890,33 +924,33 @@ for(Cookie cookie : cookies){
 									<td class="alignLeft">Year:</td>
 									<td><label> <select name="caseyear" id="caseyear" class="myclass">
 													<option selected></option>
-													<option value="1996">1996</option>
-													<option value="1997">1997</option>
-													<option value="1998">1998</option>
-													<option value="1999">1999</option>
-													<option value="2000">2000</option>
-													<option value="2001">2001</option>
-													<option value="2002">2002</option>
-													<option value="2003">2003</option>
-													<option value="2004">2004</option>
-													<option value="2005">2005</option>
-													<option value="2006">2006</option>
-													<option value="2007">2007</option>
-													<option value="2008">2008</option>
-													<option value="2009">2009</option>
-													<option value="2010">2010</option>
-													<option value="2011">2011</option>
-													<option value="2012">2012</option>
-													<option value="2013">2013</option>
-													<option value="2014">2014</option>
-													<option value="2015">2015</option>
-													<option value="2016">2016</option>
-													<option value="2017">2017</option>
-													<option value="2018">2018</option>
-													<option value="2019">2019</option>
-													<option value="2020">2020</option>
-													<option value="2021">2021</option>
 													<option value="2022">2022</option>
+													<option value="2021">2021</option>
+													<option value="2020">2020</option>
+													<option value="2019">2019</option>
+													<option value="2018">2018</option>
+													<option value="2017">2017</option>
+													<option value="2016">2016</option>
+													<option value="2015">2015</option>
+													<option value="2014">2014</option>
+													<option value="2013">2013</option>
+													<option value="2012">2012</option>
+													<option value="2011">2011</option>
+													<option value="2010">2010</option>
+													<option value="2009">2009</option>
+													<option value="2008">2008</option>
+													<option value="2007">2007</option>
+													<option value="2006">2006</option>
+													<option value="2005">2005</option>
+													<option value="2004">2004</option>
+													<option value="2003">2003</option>
+													<option value="2002">2002</option>
+													<option value="2001">2001</option>
+													<option value="2000">2000</option>
+													<option value="1999">1999</option>
+													<option value="1998">1998</option>
+													<option value="1997">1997</option>
+													<option value="1996">1996</option>
 												</select>
 									</label></td>
 								</tr>
@@ -1032,6 +1066,39 @@ for(Cookie cookie : cookies){
 								<tr>
 									<td><br></td>
 								</tr>
+								
+								<tr>
+									<td class="alignLeft">Referred By:</td>
+									<td>
+										<select multiple class="chosen-select" name="referredby" id="referredby" style="width: 225px;border-radius: 4px;">
+  										     <c:forEach items='${studentList}' var='studentList'>
+  										     	<option value='${studentList.sid}'><c:out value='${studentList.name}' /></option>
+  										     </c:forEach>
+  										  </select>
+										<!-- <button id="addnewitem"></button><button id="removenewitem"></button> -->
+									</td>
+								
+								</tr>
+								
+								<tr>
+									<td></td>
+									<!-- <td>
+										<table style="margin-left: auto;margin-right: auto;border: 0px solid black;" id="dataTableTasks">
+											<thead>
+												<tr>
+													<th class="headerText">
+														<input type="checkbox" id="chckHeadReceived" />
+													<th class="headerText">Client</th>
+												</tr>
+											</thead>
+					
+											<tbody>						
+											</tbody>
+										</table>
+									</td> -->
+								</tr>
+								
+								
 								
 						</table>
 						<div align="center">

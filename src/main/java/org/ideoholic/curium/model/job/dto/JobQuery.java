@@ -41,6 +41,7 @@ public class JobQuery implements java.io.Serializable {
 	private Parents parent;
 	private Teacher teacher;
 	private String feedback;
+	private String referredby;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "JobQuery")
 	private Set<Task> tasks =
@@ -50,7 +51,7 @@ public class JobQuery implements java.io.Serializable {
 	}
 
 	public JobQuery(Integer stdid, String externalid, String typeofwork,String typeofsubwork,String typeofsubsubwork, String response, Integer createduserid, Integer updateduserid, 
-			Set<Task> tasks,Date createddate, Date updateddate, Date expecteddeliverydate, Integer branchid, String academicyear, String status, String feedback){
+			Set<Task> tasks,Date createddate, Date updateddate, Date expecteddeliverydate, Integer branchid, String academicyear, String status, String feedback, String referredby){
 		this.stdid = stdid;
 		this.externalid = externalid;
 		this.typeofwork = typeofwork;
@@ -67,6 +68,7 @@ public class JobQuery implements java.io.Serializable {
 		this.feedback = feedback;
 		this.expecteddeliverydate = expecteddeliverydate;
 		this.tasks = tasks;
+		this.referredby = referredby;
 	}
 
 	public Integer getId() {
@@ -228,6 +230,14 @@ public class JobQuery implements java.io.Serializable {
 
 	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
+	}
+
+	public String getReferredby() {
+		return referredby;
+	}
+
+	public void setReferredby(String referredby) {
+		this.referredby = referredby;
 	}
 
 }

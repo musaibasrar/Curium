@@ -3,6 +3,8 @@
  */
 package org.ideoholic.curium.model.cases.action;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.cases.service.CasesService;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.job.service.JobService;
+import org.ideoholic.curium.model.mess.stockentry.service.MessStockEntryService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,6 +73,7 @@ public class CasesAction {
 	@PostMapping("/createNewCases")
 	public String createNewCases() {
 		new StudentService(request, response).viewDetailsOfStudent();
+		new StudentService(request, response).viewAllStudentsList();
 		return "createnewcases";
 	}
 	
@@ -123,5 +127,16 @@ public class CasesAction {
 	 @PostMapping("/printCasesReport")
 		private String printCasesReport() {
 			return "printcasesreport";
+		}
+	 
+	 
+	 @GetMapping("/viewReferredby")
+		public void mrvDetails() {
+			try {
+				new CasesService(request, response).getReferredbyDetails();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}
 }

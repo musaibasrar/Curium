@@ -754,7 +754,22 @@ for(Cookie cookie : cookies){
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText" style="text-align: center;"><input type="checkbox" id = "studentid_${Parents.student.sid}" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.pid}:${Parents.contactnumber}:${Parents.student.name}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/sla/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.studentexternalid}"/></a></td>
-                                <td class="dataText"><c:out value="${Parents.student.name}"/></td>
+                                <td class="dataText">
+                                
+                                <c:if test="${Parents.student.nationality == 'Mr.' }">
+                            	Mr. <c:out value="${Parents.student.name}"/>
+                            </c:if>
+                            <c:if test="${Parents.student.nationality == 'Ms.' }">
+                            	Ms. <c:out value="${Parents.student.name}"/>
+                            </c:if>
+                            <c:if test="${Parents.student.nationality == 'Company' }">
+                            	<c:out value="${Parents.student.name}"/>
+                            </c:if>
+                             <c:if test="${Parents.student.nationality eq null }">
+                            	<c:out value="${Parents.student.name}"/>
+                            </c:if>
+                                
+                                </td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.contactnumber}"/></td>
                                 <td class="dataText" style='white-space: nowrap'><button id="query_${Parents.student.sid}" class="querybutton" onclick="createQuery(${Parents.student.sid},${Parents.student.branchid})">Job</button><button id="appointment_${Parents.student.sid}" class="appointmentbutton" onclick="check(${Parents.student.sid})">Appt.</button></td>
                             </tr>

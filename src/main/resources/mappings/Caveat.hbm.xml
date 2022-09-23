@@ -65,5 +65,8 @@
          <property name="fileno" type="string">
             <column name="fileno" length="50" />
         </property>
+        <property name="referredby" type="string">
+            <column name="referredby" length="100" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -62,6 +62,27 @@
 	border-radius: 4px;
 }
 
+.myclassdropdown {
+	font-size: 1.3em;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #5d7e9b;
+	border-right-color: #5d7e9b;
+	border-bottom-color: #5d7e9b;
+	border-left-color: #5d7e9b;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	width: 80px;
+	height: 28px;
+	text-transform: capitalize;
+	border-radius: 4px;
+	background-color:white;
+}
+
 <!--
 .divCSS {
 	overflow: scroll;
@@ -519,6 +540,27 @@
 	            document.getElementById("newcateg").style.display = '';
 	        }
 	    }
+	 
+	 function choosepersonentity(){
+		 
+		 var pe = document.getElementById("nationality");
+	        var petext = pe.options[pe.selectedIndex].text;
+
+	        if (petext == "Mr.") {
+	            document.getElementById("sonof").style.display = '';
+	            document.getElementById("dowo").style.display = "none";
+	            document.getElementById("person").style.display = "none";
+	        }else if (petext == "Ms.") {
+	            document.getElementById("sonof").style.display = "none";
+	            document.getElementById("dowo").style.display = '';
+	            document.getElementById("person").style.display = "none";
+	        }else if (petext == "Company") {
+	            document.getElementById("sonof").style.display = "none";
+	            document.getElementById("dowo").style.display = "none";
+	            document.getElementById("person").style.display = '';
+	        }
+		 
+	 }
 </script>
 
 <script type="text/javascript">
@@ -596,7 +638,25 @@
 						<tr>
 							<td><br /></td>
 						</tr>
-
+						
+						<tr>
+						
+								<td class="alignLeft">Person/Entity*:</td>
+									<td><label> <select name="nationality" id="nationality" class="myclassdropdown" onchange="choosepersonentity();" required>
+											<option selected></option>
+											<option value="Mr.">Mr.</option>
+											<option value="Ms.">Ms.</option>
+											<option value="Company">Company</option>
+										</select>
+									</label></td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 						
 						<tr>
 							<td class="alignLeft">Name* &nbsp;</td>
@@ -666,8 +726,25 @@
 								</tr>
 						
 						
-						<tr>
-									<td class="alignLeft">S/o,D/o,W/o &nbsp;</td>
+						<tr style="display:none;" id="sonof">
+									<td class="alignLeft" >S/o&nbsp;</td>
+									<td ><label> <input
+											name="fathersname" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="fathersname" size="36"
+											> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+									<td class="alignLeft" style="padding-left: 20px;">Notes &nbsp;</td>
+									<td ><label> <input name="remarksadditional"
+											type="text" class="myclass" id="remarksadditional" size="36"
+											style="text-transform:capitalize;"
+											>
+									</label></td>
+							</tr>
+							
+							<tr style="display:none;" id="dowo">
+									
+									<td class="alignLeft">D/o,W/o &nbsp;</td>
 									<td ><label> <input
 											name="fathersname" type="text" class="myclass"
 											style="text-transform:capitalize;"
@@ -675,17 +752,61 @@
 											> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 									
+									<td class="alignLeft" style="padding-left: 20px;">Notes &nbsp;</td>
+									<td ><label> <input name="remarksadditional"
+											type="text" class="myclass" id="remarksadditional" size="36"
+											style="text-transform:capitalize;"
+											>
+									</label></td>
+							</tr>
+							
+							<tr style="display:none;" id="person">
+									<td class="alignLeft" >Person &nbsp;</td>
+									<td ><label> <input
+											name="mothersname" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="mothersname" size="36"
+											> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
 									
-									<td class="alignLeft" style="padding-left: 20px;">Address &nbsp;</td>
+									<td class="alignLeft" style="padding-left: 20px;">Notes &nbsp;</td>
+									<td ><label> <input name="remarksadditional"
+											type="text" class="myclass" id="remarksadditional" size="36"
+											style="text-transform:capitalize;"
+											>
+									</label></td>
+							</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+						
+						
+						<tr>
+						
+								<td class="alignLeft" >Address &nbsp;</td>
 
 								<td ><label> <textarea
 											name="permanentaddress" type="text" 
-											id="permanentaddress" rows="4" cols="40"
+											id="permanentaddress" rows="4" cols="36"
 											style="text-transform:capitalize;"
 											></textarea>
 
 								</label></td>
 								
+								<td class="alignLeft" style="padding-left: 20px;">Pin Code &nbsp;</td>
+
+								<td ><label> <input
+											name="temporaryaddress" type="text" 
+											id="temporaryaddress" class="myclass"
+											style="text-transform:capitalize;"
+											>
+
+								</label></td>
+								
+								</tr>
 									<!-- <td class="alignLeft" style="padding-left: 20px;">Mother's Name* &nbsp;</td>
 									<td><label> <input
 											name="mothersname" type="text" class="myclass" id="name" required
@@ -857,14 +978,6 @@
 								</tr>
 
 								<tr>
-
-									<td class="alignLeft">Notes &nbsp;</td>
-									<td ><label> <input name="remarksadditional"
-											type="text" class="myclass" id="remarksadditional" size="36"
-											style="text-transform:capitalize;"
-											>
-									</label></td>
-									
 									<td class="alignLeft" style="padding-left: 20px;">Created Date &nbsp;</td>
 							<td ><label> <input name="createddate"
 									type="text"

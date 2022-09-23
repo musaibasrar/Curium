@@ -233,25 +233,26 @@
 
         </script>
         <script type="text/javascript" charset="utf-8">
-            $(document).ready(function() {
-                $('#myTable').dataTable( {
-                    "sScrollY": "380px",
-                    "bPaginate": true,
-                    "bLengthChange": false,
-                    "bFilter": true,
-                    "bSort": true,
-                    "bInfo": true,
-                    "bStateSave": false,
-                    "bProcessing": false,
-                    "bServerSide": false,
-                    "bAutoWidth": false,
-                    "iDisplayLength": 2000,
-                    "aoColumnDefs":[
-                        { 'bSortable': false, 'aTargets': [ 0 ] }
-                    ]
-                    
-                } );
+        
+        $(document).ready(function() {
+            $('#myTable').dataTable( {
+                "sScrollY": "380px",
+                "bPaginate": true,
+                "bLengthChange": false,
+                "bFilter": true,
+                "bSort": true,
+                "bInfo": true,
+                "bStateSave": false,
+                "bProcessing": false,
+                "bServerSide": false,
+                "bAutoWidth": false,
+                "iDisplayLength": 2000,
+                "aoColumnDefs":[
+                    { 'bSortable': false, 'aTargets': [ 0 ] }
+                ]
+                
             } );
+        } );
         </script>
         <script type="text/javascript">
             function deleteRecords(){
@@ -1075,42 +1076,44 @@ for(Cookie cookie : cookies){
 
                     <thead>
                         <tr>
+                        	<th class="headerText">Sl.No.</th>
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">UID</th>
-                            <!-- <th title="click to sort" class="headerText">Admission Number</th> -->
-                            <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th title="click to sort" class="headerText">Name</th>
                             <th title="click to sort" class="headerText">Contact Number</th>
-                            <!-- <th title="click to sort" class="headerText">Father's Name&nbsp;</th>
-                            <th title="click to sort" class="headerText">Mother's Name&nbsp;</th> -->
                             <th title="click to sort" class="headerText">Job/Appt.</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${studentList}" var="Parents">
+                        <c:forEach items="${studentList}" var="Parents" varStatus="status">
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                            	<td class="dataText" style="text-transform:uppercase"><c:out value="${status.index+1}"/></td>
                             	<td class="dataText" style="text-align: center;"><input type="checkbox" id = "studentid_${Parents.student.sid}" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.pid}:${Parents.contactnumber}:${Parents.student.name}"/>"/></td>
-                                <%-- <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td> --%>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${Parents.student.sid},${Parents.student.branchid})"><c:out value="${Parents.student.studentexternalid}"/></a></td>
-                                <%-- <td  class="dataTextInActive"><a class="dataTextInActive" href="/sla/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td> --%>
-                                <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.name}"/></td>
-                                <%-- <td class="dataText" style="text-transform:uppercase">
-                                 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
-						    		${splt} 
-								</c:forEach>
-                                </td> --%>
+                                <td class="dataText" style="text-transform:capitalize;text-align: left;">
+                                 <c:if test="${Parents.student.nationality == 'Mr.' }">
+                            	Mr. <c:out value="${Parents.student.name}"/>
+                            </c:if>
+                            <c:if test="${Parents.student.nationality == 'Ms.' }">
+                            	Ms. <c:out value="${Parents.student.name}"/>
+                            </c:if>
+                            <c:if test="${Parents.student.nationality == 'Company' }">
+                            	<c:out value="${Parents.student.name}"/>
+                            </c:if>
+                             <c:if test="${Parents.student.nationality eq null }">
+                            	<c:out value="${Parents.student.name}"/>
+                            </c:if>
+                                
+                                </td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.contactnumber}"/></td>
-                                <%-- <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.mothersname}"/></td> --%>
-                                <!-- <fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/>  -->
-                                <!-- <td class="dataText"><fmt:formatDate value="${Parents.student.admissiondate}" pattern="yyyy-MM-dd"/></td> -->
 								<td class="dataText" style='white-space: nowrap'><button id="query_${Parents.student.sid}" class="querybutton" onclick="createQuery(${Parents.student.sid},${Parents.student.branchid})">Job</button><button id="appointment_${Parents.student.sid}" class="appointmentbutton" onclick="check(${Parents.student.sid})">Appt.</button></td>                                 
-
                             </tr>
                         </c:forEach>
                     </tbody>
                     <tfoot><tr>
-                            <td  class="footerTD" colspan="4" ><input value="Archive" type="submit" id="delete"/> </td>
+                            <td  class="footerTD" colspan="2" ><input value="Archive" type="submit" id="delete"/> </td>
                     
                         </tr></tfoot>
                 </table>
@@ -1171,7 +1174,7 @@ for(Cookie cookie : cookies){
 					</div>
 					
 					
-					<div id="dialogquery" title="Job">
+					<%-- <div id="dialogquery" title="Job">
 				
            		 
 		           		<table style="width: auto;height: auto;">
@@ -1181,7 +1184,7 @@ for(Cookie cookie : cookies){
 									<td><br /></td>
 								</tr>
 
-								<%-- <tr>
+								<tr>
 									<td class="alignLeft">Assign To:</td>
 									<td><label> <select name="assignto" id="assignto" style="width: 250px;height: 25px;">
 											<option selected></option>
@@ -1201,7 +1204,7 @@ for(Cookie cookie : cookies){
 								
 								<tr>
 									<td><br></td>
-								</tr> --%>
+								</tr>
 								
 								<tr>
 									<td class="alignLeft">Type of Job:</td>
@@ -1572,7 +1575,7 @@ for(Cookie cookie : cookies){
 						</tbody>
 					</table>
 						
-					</div>
+					</div> --%>
             
         </form>
     </body>

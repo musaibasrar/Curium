@@ -137,6 +137,7 @@ public class JobAction {
 	@PostMapping("/CreateQuery")
 	private String createQuery() {
 		new StudentService(request, response).viewDetailsOfStudent();
+		new StudentService(request, response).viewAllStudentsList();
 		return "createquery";
 	}
 
@@ -202,6 +203,16 @@ public class JobAction {
 		
 		if(new JobService(request, response).viewTaskDetails()){
 			return "tasks";
+		}else{
+			return "error";
+		}
+	}
+	
+	@PostMapping("/viewOneJobDetails")
+	private String viewOneJobDetails() {
+		
+		if(new JobService(request, response).viewOneJobDetails()){
+			return "queries";
 		}else{
 			return "error";
 		}
@@ -303,5 +314,15 @@ public class JobAction {
 	@PostMapping("/printTasksReport")
 	private String printTasksReport() {
 		return "printtasksreport";
+	}
+	
+	@GetMapping("/viewReferredby")
+	public void mrvDetails() {
+		try {
+			new JobService(request, response).getReferredbyDetails();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 }

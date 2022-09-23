@@ -556,7 +556,7 @@
             function openPopup(queryRemarks,queryid){
             	
             	var regex = /sla/g;
-            	var queryRemarksadded = queryRemarks.replace(regex,"\n ->");
+            	var queryRemarksadded = queryRemarks.replace(regex,"\n");
             	document.getElementById("queryremarksadded").value=queryRemarksadded;
             	document.getElementById("queryid").value= queryid;
 
@@ -619,6 +619,51 @@
       	      	  document.getElementById(studentid).checked = true;  
             }
         </script>
+        
+        <script type="text/javascript">
+
+            function openPopupReferredby(referredby){
+            	
+        			 if (typeof XMLHttpRequest != "undefined") {
+        				 xmlHttp = new XMLHttpRequest();
+        	            
+        	         } else if (window.ActiveXObject) {
+        	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        	             
+        	         }
+        			xmlHttp.onreadystatechange = stateChangedSSGroup;
+        			xmlHttp.open("GET", "/sla/QueryProcess/viewReferredby?referredby="+referredby+"",true);;
+        			xmlHttp.send(null);
+
+        		
+                $( "#dialogreferredbydetails" ).dialog( "open" );
+            }
+            
+            function stateChangedSSGroup() {
+
+        		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+        			document.getElementById("referredbydetails").innerHTML = xmlHttp.responseText;
+        		}
+        	}
+        </script>
+        
+          <script type="text/javascript">
+
+            $(function() {
+                $( "#dialogreferredbydetails" ).dialog({
+                    autoOpen: false,
+                    height: 280,
+                    width: 280,
+                    modal: true,
+                    buttons: {
+                        Cancel: function() {
+                            $( this ).dialog( "close" );
+                        }
+
+                    }
+                });
+            });
+        </script>
 
 
 </head>
@@ -663,11 +708,9 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Staff</th>
                             <th title="click to sort" class="headerText">Remarks</th>
                             <th title="click to sort" class="headerText">Status</th>
-                            <!-- <th title="click to sort" class="headerText">Created Date</th>
-                            <th title="click to sort" class="headerText">Updated Date</th> -->
                             <th title="click to sort" class="headerText">Expected Delivery</th>
                             <th title="click to sort" class="headerText">Task</th>
-                            <!-- <th title="click to sort" class="headerText">Details</th> -->
+                            <th title="click to sort" class="headerText">Referred By</th>
                         </tr>
                     </thead>
 
@@ -697,7 +740,21 @@ for(Cookie cookie : cookies){
                                 		<a class="dataTextInActive" style="color: grey;font-weight: bold;cursor: pointer;" onclick="viewTaskDetails(${query.id})">${query.externalid}</a>
                                 	</td>
                                 </c:if>
-                               <td class="dataText"><a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${query.parent.student.sid},${query.parent.student.branchid})"><c:out value="${query.parent.student.name}"/></a></td>
+                               <td class="dataText" style="text-align: left;text-transform: capitalize;"><a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${query.parent.student.sid},${query.parent.student.branchid})">
+                               
+                               <c:if test="${query.parent.student.nationality == 'Mr.' }">
+                            	Mr. <c:out value="${query.parent.student.name}"/>
+                            </c:if>
+                            <c:if test="${query.parent.student.nationality == 'Ms.' }">
+                            	Ms. <c:out value="${query.parent.student.name}"/>
+                            </c:if>
+                            <c:if test="${query.parent.student.nationality == 'Company' }">
+                            	<c:out value="${query.parent.student.name}"/>
+                            </c:if>
+                             <c:if test="${query.parent.student.nationality eq null }">
+                            	<c:out value="${query.parent.student.name}"/>
+                            </c:if>
+                               </a></td>
                                 
                                 <td class="dataText" style="text-align: left">
                                 
@@ -727,6 +784,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${query.expecteddeliverydate}"/></td>
                                 <td class="dataText"><a href="#" onclick="check(${query.id}),createTask('${query.id}','${query.externalid}')" style="color:#eb6000;">Create Task</a></td>
                                 <%-- <td class="dataText"><a href="#" onclick="openPopup(${query.id})" style="color:#eb6000;">View Details</a></td> --%>
+                                <td class="dataText"><a href="#" onclick="openPopupReferredby('<c:out value="${query.referredby}"/>')" style="color:#eb6000;">View Details</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -738,7 +796,7 @@ for(Cookie cookie : cookies){
                    </tr></tfoot>
                 </table>
                 
-                <table>
+                <!-- <table>
                 	<tr>
                     	<td  colspan="2" ><button value="completed" id="completed">Completed</button>
                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="inprogress">In Progress</button>
@@ -746,7 +804,7 @@ for(Cookie cookie : cookies){
                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="todo">To Do</button> 
                     	</td>
                    </tr>
-                </table>
+                </table> -->
                 
                 <div align="center">
 		             <%--For displaying Previous link except for the 1st page --%>
@@ -821,6 +879,11 @@ for(Cookie cookie : cookies){
               			
            		 </div> -->
            		 
+			</div>
+			
+			<div id="dialogreferredbydetails" title="Referred By Details">
+		             	 <div id="referredbydetails">
+		           		 </div>
 			</div>
 	</form>
 </body>

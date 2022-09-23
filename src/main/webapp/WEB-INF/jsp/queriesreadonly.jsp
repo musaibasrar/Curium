@@ -556,7 +556,7 @@
             function openPopup(queryRemarks,queryid){
             	
             	var regex = /sla/g;
-            	var queryRemarksadded = queryRemarks.replace(regex,"\n ->");
+            	var queryRemarksadded = queryRemarks.replace(regex,"\n");
             	document.getElementById("queryremarksadded").value=queryRemarksadded;
             	document.getElementById("queryid").value= queryid;
 

@@ -54,6 +54,9 @@
          <property name="feedback" type="string">
             <column name="feedback" length="500" />
         </property>
+        <property name="referredby" type="string">
+            <column name="referredby" length="100" />
+        </property>
         <many-to-one name="parent" class="org.ideoholic.curium.model.parents.dto.Parents"
             column="stdid" lazy="false" />
         <many-to-one name="teacher" class="org.ideoholic.curium.model.employee.dto.Teacher"

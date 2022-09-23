@@ -732,6 +732,54 @@
 
          	}
         </script>
+        
+        <script type="text/javascript">
+
+            function openPopup(referredby){
+            	
+        			 if (typeof XMLHttpRequest != "undefined") {
+        				 xmlHttp = new XMLHttpRequest();
+        	            
+        	         } else if (window.ActiveXObject) {
+        	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        	             
+        	         }
+        			xmlHttp.onreadystatechange = stateChangedSSGroup;
+        			xmlHttp.open("GET", "/sla/CaveatProcess/viewReferredby?referredby="+referredby+"",true);;
+        			xmlHttp.send(null);
+
+        		
+                $( "#dialogreferredbydetails" ).dialog( "open" );
+            }
+            
+            function stateChangedSSGroup() {
+
+        		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+        			document.getElementById("referredbydetails").innerHTML = xmlHttp.responseText;
+        		}
+        	}
+        </script>
+        
+         <script type="text/javascript">
+
+            $(function() {
+                $( "#dialogreferredbydetails" ).dialog({
+                    autoOpen: false,
+                    height: 280,
+                    width: 280,
+                    modal: true,
+                    buttons: {
+                        Cancel: function() {
+                            $( this ).dialog( "close" );
+                        }
+
+                    }
+                });
+            });
+
+
+
+        </script>
 
 
 </head>
@@ -776,6 +824,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">File No</th>
                             <th title="click to sort" class="headerText">Status</th>
                             <th title="click to sort" class="headerText">Court</th>
+                            <th title="click to sort" class="headerText">Referred By</th>
                         </tr>
                     </thead>
 
@@ -787,17 +836,17 @@ for(Cookie cookie : cookies){
                             	<td class="dataText"><c:out value="${caveat.id}"/><input type="hidden" id="username" name="username" value="${username}"> </td></td>
                             	<c:if test="${caveat.status == 'Pending' }">
                                 	<td class="dataText" style="color: #0001ff;font-weight: bold;">
-                                	<a class="dataTextInActive" style="color: #0001ff;font-weight: bold;cursor: pointer;" onclick="viewStudentDetails(${caveat.sid},${caveat.branchid})">${caveat.caveattitle}</a>
+                                	<a class="dataTextInActive" style="color: #0001ff;font-weight: bold;cursor: pointer;text-transform: capitalize;" onclick="viewStudentDetails(${caveat.sid},${caveat.branchid})">${caveat.caveattitle}</a>
                                 	</td>
                                 </c:if>
                                 <c:if test="${caveat.status == 'Expired' }">
                                 	<td class="dataText" style="color: red;font-weight: bold;">
-                                		<a class="dataTextInActive" style="color: red;font-weight: bold;cursor: pointer;" onclick="viewStudentDetails(${caveat.sid},${caveat.branchid})">${caveat.caveattitle}</a>
+                                		<a class="dataTextInActive" style="color: red;font-weight: bold;cursor: pointer;text-transform: capitalize;" onclick="viewStudentDetails(${caveat.sid},${caveat.branchid})">${caveat.caveattitle}</a>
                                 	</td>
                                 </c:if>
                                 <c:if test="${caveat.status == 'Cancelled' }">
                                 	<td class="dataText" style="color: grey;font-weight: bold;">
-                                		<a class="dataTextInActive" style="color: grey;font-weight: bold;cursor: pointer;" onclick="viewStudentDetails(${caveat.sid},${caveat.branchid})">${caveat.caveattitle}</a>
+                                		<a class="dataTextInActive" style="color: grey;font-weight: bold;cursor: pointer;text-transform: capitalize;" onclick="viewStudentDetails(${caveat.sid},${caveat.branchid})">${caveat.caveattitle}</a>
                                 	</td>
                                 </c:if>
                                <td class="dataText"><c:out value="${caveat.caveatnumber}"/></td>
@@ -814,6 +863,7 @@ for(Cookie cookie : cookies){
 										<td class="dataText"><c:out  value="${caveat.court}"/></td>
 									</c:otherwise>
 								</c:choose>
+								<td class="dataText"><a href="#" onclick="openPopup('<c:out value="${caveat.referredby}"/>')" style="color:#eb6000;">View Details</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -1013,6 +1063,11 @@ for(Cookie cookie : cookies){
 						</table>
 						
 					</div>
+					
+					<div id="dialogreferredbydetails" title="Referred By Details">
+		             	 <div id="referredbydetails">
+		           		 </div>
+			</div>
 					
 	</form>
 </body>

@@ -467,7 +467,19 @@ for(Cookie cookie : cookies){
 					<tr>
                             <td width="25%"  class="alignLeft" height="50">Name</td>
                             <td width="25%" class="tablerows" style="text-transform:uppercase">
-                                <c:out default="" value="${student.name}" />
+                            <c:if test="${student.nationality == 'Mr.' }">
+                            	Mr. <c:out default="" value="${student.name}" />
+                            </c:if>
+                            <c:if test="${student.nationality == 'Ms.' }">
+                            	Ms. <c:out default="" value="${student.name}" />
+                            </c:if>
+                            <c:if test="${student.nationality == 'Company' }">
+                            	<c:out default="" value="${student.name}" />
+                            </c:if>
+                             <c:if test="${student.nationality eq null }">
+                            	<c:out default="" value="${student.name}" />
+                            </c:if>
+                                
                             </td>
                             <td width="25%"  class="alignLeft" height="50" >Gender
                             </td>
@@ -497,9 +509,30 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${parents.fathersname}" />
                             </td>
                             
+                            <td  width="25%"  class="alignLeft" height="50">Notes
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${parents.remarks}" />
+                                
+                            </td>
+                            
+                            <%-- <td width="25%"  class="alignLeft" height="50" >Mother's Name
+                            </td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.mothersname}" />
+                            </td> --%>
+                        </tr>
+                        
+                        
+                        <tr>
                             <td width="25%"   class="alignLeft" height="50" >Address</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${parents.addresspermanent}" />
+                            </td>
+                            
+                            <td width="25%"   class="alignLeft" height="50" >Pin Code</td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${parents.addresstemporary}" />
                             </td>
                             
                             <%-- <td width="25%"  class="alignLeft" height="50" >Mother's Name
@@ -720,13 +753,6 @@ for(Cookie cookie : cookies){
                         
                         <tr>
                         
-                        
-                        	<td  width="25%"  class="alignLeft" height="50">Notes
-                            </td>
-                            <td width="25%" class="tablerows" >
-                                <c:out default="" value="${parents.remarks}" />
-                                
-                            </td>
                         
                              <td  width="25%"  class="alignLeft" height="50">Created Date
                             </td>

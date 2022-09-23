@@ -33,13 +33,19 @@ import org.ideoholic.curium.model.cases.dto.Cases;
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.job.dao.JobDAO;
+import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.task.dto.Task;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 
 import org.ideoholic.curium.model.job.dto.JobQuery;
+import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
+import org.ideoholic.curium.model.mess.item.dto.MessItems;
+import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
+import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
 
 public class CasesService {
 
@@ -86,13 +92,14 @@ public class CasesService {
 		String petitioner = request.getParameter("petitioner");
 		String respondent = request.getParameter("respondent");
 		
+		String[] referredby = request.getParameterValues("referredby");
 		String caseNoDetails = "";
-		
+		StringBuilder sbf = new StringBuilder();
 		if(httpSession.getAttribute("branchid")!=null){
 								
 					Cases cases = new Cases();
 					cases.setCourt(court);
-					cases.setCasetitle(petitioner+" v/s "+respondent);
+					cases.setCasetitle(petitioner+" V/s "+respondent);
 					caseNoDetails = supremecourt+highcourt+ksatcourt+districtcourt+waqfcourt+rticourt+anyothercourt+revenuecourt+"_"+caseNo+"_"+caseYear;
 					cases.setCasenumber(caseNoDetails);
 					
@@ -104,6 +111,12 @@ public class CasesService {
 					cases.setStatus("Pending");
 					cases.setSid(Integer.parseInt(pidContact[3]));
 					
+					if(referredby!=null) {
+						for (String string : referredby) {
+							sbf.append(string+",");
+						}
+						cases.setReferredby(sbf.toString());
+					}
 					String resultCases = new CasesDAO().addCases(cases);
 					String sendQuerySMS = new DataUtil().getPropertiesValue("sendcasessms");
 									
@@ -693,6 +706,69 @@ public class CasesService {
 		httpSession.setAttribute("caseslist", casesList);
 		httpSession.setAttribute("transactionfromdateselected", "From:"+request.getParameter("transactiondatefrom"));
 		httpSession.setAttribute("transactiontodateselected", "To:"+request.getParameter("transactiondateto"));
+		
+	}
+
+	public void getReferredbyDetails() throws IOException {
+		
+		if(httpSession.getAttribute("branchid")!=null){
+			
+			
+			PrintWriter out = response.getWriter();
+			try {
+				
+			String ref = request.getParameter("referredby");
+			
+			String[] refBy = ref.split(",");
+			List<Integer> sidList = new ArrayList<Integer>();
+			for (String refered : refBy) {
+				sidList.add(Integer.parseInt(refered));
+			}
+			
+			List<Parents> parentsList = new ArrayList<Parents>();
+			parentsList = new studentDetailsDAO().getReferredList(sidList);
+			
+			response.setContentType("text/xml");
+		        response.setHeader("Cache-Control", "no-cache");
+		        
+		        
+		        	
+		        	StringBuilder rowBuidler = new StringBuilder( "<table border='1' style='margin-left: auto;margin-right: auto;' style='border-color:#4b6a84' id='vd'>" + 
+			        													"<thead>" + 
+			        													"<tr class='headerText' >" + 
+			        													"<th>Client Name</th>" + 
+			        													"<th>Contact Number</th>" + 
+			        													"</tr>" + 
+			        													"</thead>" + 
+		        													"<tbody>");
+		        	
+		        	
+		        	for (Parents listofParents : parentsList) {
+		        		
+		        		rowBuidler.append(
+		        	                 "<tr style='border-color:#000000' border='1' cellpadding='1' cellspacing='1' >" + 
+		        			         "<td class='dataText'>"+listofParents.getStudent().getName()+"</td>" + 
+		        			         "<td class='dataText'>"+listofParents.getContactnumber()+"</td>" + 
+		        			         "</tr>");
+		        		
+		        		
+		        	}
+		        	
+		        	rowBuidler.append("</tbody>" + 
+		        			"		                </table>");
+		        	
+		        	String outputTable = rowBuidler.toString();
+		        	
+		        	response.getWriter().println(outputTable);
+		        	
+		        } catch (Exception e) {
+		            out.write("<table> <tr><td>Data Not Available</td></tr></table>");
+		        } finally {
+		            out.flush();
+		            out.close();
+		        }
+		}
+		
 		
 	}
 }

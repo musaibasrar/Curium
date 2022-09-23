@@ -586,6 +586,13 @@
                
                //window.location.reload();
            }
+            
+            function viewOneJobDetails(jobid){
+                var form1=document.getElementById("form1");
+                form1.action="/sla/QueryProcess/viewOneJobDetails?jobid="+jobid+"";
+                form1.submit();
+            }
+            
         </script>
 
 
@@ -613,7 +620,7 @@ for(Cookie cookie : cookies){
 		<div class="alert-box success" id="div1">Task updated successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
 		<div class="alert-box failure" id="div2">Task update failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
 		
-		<div style="overflow: scroll; height: 600px">
+		<div style="overflow: hidden">
 			<table width="100%">
 				<tr>
 					<td class="headerTD">Tasks</td>
@@ -623,60 +630,62 @@ for(Cookie cookie : cookies){
 			<table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 
                     <thead>
-                        <tr  >
+                        <tr>
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
-                            <th title="click to sort" class="headerText">UID</th>
-                            <th title="click to sort" class="headerText">Job No.</th>
-                            <th title="click to sort" class="headerText">Client Name</th>
-                            <th title="click to sort" class="headerText">Staff</th>
-                            <th title="click to sort" class="headerText">Remarks</th>
-                            <th title="click to sort" class="headerText">Status</th>
-                            <!-- <th title="click to sort" class="headerText">Created Date</th>
-                            <th title="click to sort" class="headerText">Updated Date</th> -->
-                            <th title="click to sort" class="headerText">Task</th>
-                            <th title="click to sort" class="headerText">Description</th>
-                            <th title="click to sort" class="headerText">Expected Delivery</th>
-                            <!-- <th title="click to sort" class="headerText">Details</th> -->
+                            <th class="headerText">UID</th>
+                            <th class="headerText">Job No.</th>
+                            <th class="headerText">Client Name</th>
+                            <th class="headerText">Staff</th>
+                            <th class="headerText">Remarks</th>
+                            <th class="headerText">Status</th>
+                            <th class="headerText">Task</th>
+                            <th class="headerText">Description</th>
+                            <th class="headerText">EXP. Delivery</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         <c:forEach items="${taskdetails}" var="task" varStatus="status">
-                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                            <tr class="trClass" style="border-color:#000000" border="1">
                             	
                             	<td class="dataText"><input type="checkbox" id = "<c:out value="${task.id}"/>" class = "chcktbl"  name="taskids"  value="<c:out value="${task.id}"/>"/></td>
                             	<td class="dataText"><c:out value="${task.id}"/> <input type="hidden" id="jobid" name="jobid" value="${task.jobquery.id}">
                             	<input type="hidden" id="username" name="username" value="${username}"> </td>
                             	<c:if test="${task.status == 'To Do' }">
-                                	<td class="dataText" style="color: #cb1b09;font-weight: bold;"><c:out value="${task.jobquery.externalid}"/></td>
+                                	<td class="dataText" style="color: #cb1b09;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: #cb1b09;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
+                                	</td>
                                 </c:if>
                                 <c:if test="${task.status == 'In Progress' }">
-                                	<td class="dataText" style="color: #0001ff;font-weight: bold;"><c:out value="${task.jobquery.externalid}"/></td>
+                                	<td class="dataText" style="color: #0001ff;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: #cb1b09;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
+                                	</td>
                                 </c:if>
                                 <c:if test="${task.status == 'Completed' }">
-                                	<td class="dataText" style="color: #65a358;font-weight: bold;"><c:out value="${task.jobquery.externalid}"/></td>
+                                	<td class="dataText" style="color: #65a358;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: #cb1b09;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
+                                	</td>
                                 </c:if>
                                 <c:if test="${task.status == 'Cancelled' }">
-                                	<td class="dataText" style="color: grey;font-weight: bold;"><c:out value="${task.jobquery.externalid}"/></td>
+                                	<td class="dataText" style="color: grey;font-weight: bold;">
+                                		<a class="dataTextInActive" style="color: #cb1b09;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
+                                	</td>
                                 </c:if>
                                 
-                                <td class="dataText" style="text-align: left">
+                                <td class="dataText" style="text-align: left;text-transform: capitalize;">
                                 		<a class="dataTextInActive" style="cursor: pointer;" onclick="viewStudentDetails(${task.jobquery.parent.student.sid},${task.jobquery.parent.student.branchid})"><c:out value="${task.jobquery.parent.student.name}"/></a>
                                 </td>
-                                <td class="dataText"><c:out value="${task.teacher.teachername}"/></td>
+                                <td class="dataText" style="text-align: left;text-transform: capitalize;"><c:out value="${task.teacher.teachername}"/></td>
                                 <c:if test="${not empty task.jobquery.feedback}">
-                                	<td class="dataText"><a href="#" onclick="openPopup('${task.jobquery.feedback}','${task.jobquery.id}')" style="color:#eb6000;">View</a></td>
+                                	<td class="dataText" ><a href="#" onclick="openPopup('${task.jobquery.feedback}','${task.jobquery.id}')" style="color:#eb6000;">View</a></td>
                                 </c:if>
                                 <c:if test="${empty task.jobquery.feedback}">
                                 	<td class="dataText"><a href="#" onclick="openPopup('${task.jobquery.feedback}','${task.jobquery.id}')" style="color:#4b6a84;">Add</a></td>
                                 </c:if>
                                 <td class="dataText"><c:out  value="${task.status}"/></td>
-                                 <%-- <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${task.jobquery.createddate}"/></td>
-                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${task.updateddate}"/></td> --%>
-                                <td class="dataText"><c:out value="${task.tasks}"/></td>
-                               	<td class="dataText"><c:out value="${task.description}"/></td>
-                                <td class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${task.expecteddeliverydate}"/></td>
-                                <%-- <td class="dataText"><a href="#" onclick="openPopup(${query.id})" style="color:#eb6000;">View Details</a></td> --%>
+                                <td class="dataText" style="text-align: left;"><c:out value="${task.tasks}"/></td>
+                               	<td class="dataText" style="text-align: left;"><c:out value="${task.description}"/></td>
+                                <td class="dataText" style="text-align: left;"><fmt:formatDate pattern="dd/MM/yyyy" value="${task.expecteddeliverydate}"/></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -733,12 +742,10 @@ for(Cookie cookie : cookies){
 		                    <td ><a style="color: #4B6A84;font-size: 12px" href="/sla/QueryProcess/viewAllTasks&page=${currentPage + 1}">Next</a></td>
 		                </c:if>
                 </div>
-		</div>
-		
-		<div id="dialog" title="Job Remarks">
                 
+                <div id="dialog" title="Job Remarks">
                 
-                <table style="width: auto;height: auto;">
+               			 <table style="width: auto;height: auto;">
 								
 								<tr>
 									<td>
@@ -764,14 +771,8 @@ for(Cookie cookie : cookies){
 									<td><br></td>
 								</tr>
 						</table>
-						
-						
-             	 <!-- <div id="querydetails">
-              			
-              			
-           		 </div> -->
-           		 
 			</div>
+		</div>
 	</form>
 </body>
 </html>

@@ -3,6 +3,8 @@
  */
 package org.ideoholic.curium.model.caveat.action;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -68,6 +70,7 @@ public class CaveatAction {
 	@PostMapping("/createNewCaveats")
 	public String createNewCaveats() {
 		new StudentService(request, response).viewDetailsOfStudent();
+		new StudentService(request, response).viewAllStudentsList();
 		return "createnewcaveat";
 	}
 	
@@ -127,5 +130,15 @@ public class CaveatAction {
 	 @PostMapping("/printCaveatsReport")
 		private String printCaveatsReport() {
 			return "printcaveatsreport";
+		}
+	 
+	 @GetMapping("/viewReferredby")
+		public void mrvDetails() {
+			try {
+				new CaveatService(request, response).getReferredbyDetails();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}
 }

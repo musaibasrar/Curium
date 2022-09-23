@@ -32,13 +32,14 @@ public class Caveat implements java.io.Serializable {
 	private Integer updateduserid;
 	private Integer assignto;
 	private String fileno;
+	private String referredby;
 	
 	public Caveat() {
 	}
 
 	public Caveat(Integer sid,Integer assignto, String court,String caveattitle,String courtname, String status, Date dateofdispose, String filetaken,String filetakenby,
 			String filetakenbyname,String filetakenbynumber,Date createddate,Date updateddate, Integer branchid,Integer createduserid,
-			Integer updateduserid, String remarks, String caveatnumber, String fileno){
+			Integer updateduserid, String remarks, String caveatnumber, String fileno, String referredby){
 		this.sid = sid;
 		this.assignto = assignto;
 		this.court = court;
@@ -58,6 +59,7 @@ public class Caveat implements java.io.Serializable {
 		this.remarks = remarks;
 		this.caveatnumber = caveatnumber;
 		this.fileno = fileno;
+		this.referredby = referredby;
 	}
 
 	public Integer getId() {
@@ -218,6 +220,14 @@ public class Caveat implements java.io.Serializable {
 
 	public void setSid(Integer sid) {
 		this.sid = sid;
+	}
+
+	public String getReferredby() {
+		return referredby;
+	}
+
+	public void setReferredby(String referredby) {
+		this.referredby = referredby;
 	}
 
 	

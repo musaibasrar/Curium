@@ -35,7 +35,49 @@
         <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.core.js"></script>
         <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.widget.js"></script>
         <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.button.js"></script>
+        <script type="text/javascript" src="/sla/js/chosen.jquery.min.js"></script>
+		<link rel="stylesheet" href="/sla/css/chosen.min.css">
         <style type="text/css" >
+        	.myclass {
+				font-size: 1.3em;
+				border-top-style: solid;
+				border-right-style: solid;
+				border-bottom-style: solid;
+				border-left-style: solid;
+				border-top-color: #5d7e9b;
+				border-right-color: #5d7e9b;
+				border-bottom-color: #5d7e9b;
+				border-left-color: #5d7e9b;
+				border-top-width: 1px;
+				border-right-width: 1px;
+				border-bottom-width: 1px;
+				border-left-width: 1px;
+				width: 220px;
+				height: 28px;
+				color: black;
+				text-transform: capitalize;
+				border-radius: 4px;
+			}
+			.chosen-select{
+				ont-size: 1.3em;
+				border-top-style: solid;
+				border-right-style: solid;
+				border-bottom-style: solid;
+				border-left-style: solid;
+				border-top-color: #5d7e9b;
+				border-right-color: #5d7e9b;
+				border-bottom-color: #5d7e9b;
+				border-left-color: #5d7e9b;
+				/* border-top-width: 1px;
+				border-right-width: 1px;
+				border-bottom-width: 1px;
+				border-left-width: 1px; */
+				width: 220px;
+				height: 28px;
+				color: black;
+				text-transform: capitalize;
+				border-radius: 4px;
+			}
             <!--
             .header {
                 font-family: Arial, Helvetica, sans-serif;
@@ -491,6 +533,10 @@
         		$("#anim").change(function() {
         			$("#expecteddeliverydate").datepicker("option", "showAnim", $(this).val());
         		});
+        		
+                $(".chosen-select").chosen({
+      			  no_results_text: "Oops, nothing found!"
+      			});
         	});
             
             function addRow() {
@@ -885,7 +931,7 @@ for(Cookie cookie : cookies){
 								</tr>
 								<tr>
 									<td class="alignLeft" style="font-weight: bold;font-size: 16px;">Client Name:</td>
-									<td style="font-weight: bold;font-size: 16px;color: #eb6000;text-transform: uppercase;"><label> <c:out value="${student.name}" /></label></td>
+									<td style="font-weight: bold;font-size: 16px;color: #eb6000;text-transform: uppercase;" ><label> <c:out value="${student.name}" /></label></td>
 								</tr>		           		
 		           				<tr>
 									<td><br /></td>
@@ -900,7 +946,7 @@ for(Cookie cookie : cookies){
 								
 								<tr>
 									<td class="alignLeft">Type of Job:</td>
-									<td><label> <select name="typeofwork" id="typeofwork" style="width: 250px;height: 25px;" onchange="choosetypeofwork()">
+									<td><label> <select name="typeofwork" id="typeofwork"  style="width: 250px;height: 25px;" class="myclass" onchange="choosetypeofwork()" class="myclass">
 											<option selected></option>
 											<option value="Court">Court</option>
 											<option value="Non Court">Non Court</option>
@@ -915,7 +961,7 @@ for(Cookie cookie : cookies){
 								
 								<tr style="display: none;" id="typeofworkcourttd">
 									<td class="alignLeft">Type of Court Jobs:</td>
-									<td><label> <select name="typeofworkcourt" id="typeofworkcourt" style="width: 250px;height: 25px;" onchange="choosecourtwork()">
+									<td><label> <select name="typeofworkcourt" id="typeofworkcourt"  style="width: 250px;height: 25px;" class="myclass" onchange="choosecourtwork()" class="myclass">
 											<option selected></option>
 											<option value="Cases">Cases</option>
 											<option value="Certified Documents">Certified Documents</option>
@@ -925,7 +971,7 @@ for(Cookie cookie : cookies){
 																
 									<tr style="display: none;" id="typeofworknoncourttd">
 									<td class="alignLeft">Type of Non-Court Jobs:</td>
-									<td><label> <select name="typeofworknoncourt" id="typeofworknoncourt" style="width: 250px;height: 25px;" onchange="selectnoncourtwork()">
+									<td><label> <select name="typeofworknoncourt" id="typeofworknoncourt"  style="width: 250px;height: 25px;" class="myclass" onchange="selectnoncourtwork()" class="myclass">
 											<option selected></option>
 											<option value="Arbitration">Arbitration</option>
 											<option value="Certified Documents">Certified Documents</option>
@@ -947,12 +993,12 @@ for(Cookie cookie : cookies){
 								
 								<tr style="display: none;" id="typeofworkcourtcasestr">
 									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworkcourtcases" id="typeofworkcourtcases" style="width: 250px;height: 25px;">
+									<td><label> <select name="typeofworkcourtcases" id="typeofworkcourtcases"  style="width: 250px;height: 25px;" class="myclass" class="myclass">
 											<option selected></option>
-											<option value="CC">Consumer Court Case</option>
-											<option value="CSC">Co-Societies Court Case</option>
+											<!-- <option value="CC">Consumer Court Case</option>
+											<option value="CSC">Co-Societies Court Case</option> -->
 											<option value="DC">District Court Case</option>
-											<option value="FC">Family Court Case</option>
+											<!-- <option value="FC">Family Court Case</option> -->
 											<option value="HC">High Court Case</option>
 											<option value="KAT">Karantaka Administrative Tribunal Case</option>
 											<option value="RC">Revenue Courts Case</option>
@@ -966,7 +1012,7 @@ for(Cookie cookie : cookies){
 								
 								<tr style="display: none;" id="typeofworkcourtdocstr">
 									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworkcourtdocs" id="typeofworkcourtdocs" style="width: 250px;height: 25px;">
+									<td><label> <select name="typeofworkcourtdocs" id="typeofworkcourtdocs"  style="width: 250px;height: 25px;" class="myclass">
 											<option selected></option>
 											<option value="CCD">Consumer Court Documents</option>
 											<option value="CSCD">Co-Societies Court Documents</option>
@@ -984,7 +1030,7 @@ for(Cookie cookie : cookies){
 								
 								<tr style="display: none;" id="typeofworknoncourtabttr">
 									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtabt" id="typeofworknoncourtabt" style="width: 250px;height: 25px;">
+									<td><label> <select name="typeofworknoncourtabt" id="typeofworknoncourtabt"  style="width: 250px;height: 25px;" class="myclass">
 											<option selected></option>
 											<option value="ABT">Arbitration</option>
 										</select>
@@ -994,7 +1040,7 @@ for(Cookie cookie : cookies){
 								
 								<tr style="display: none;" id="typeofworknoncourtcdtr">
 									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtcd" id="typeofworknoncourtcd" style="width: 250px;height: 25px;">
+									<td><label> <select name="typeofworknoncourtcd" id="typeofworknoncourtcd"  style="width: 250px;height: 25px;" class="myclass">
 											<option selected></option>
 											<option value="CPD">Corporation Documents</option>
 											<option value="CTSD">CTS Documents</option>
@@ -1009,7 +1055,7 @@ for(Cookie cookie : cookies){
 								
 								<tr style="display: none;" id="typeofworknoncourtsrtr">
 									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtsr" id="typeofworknoncourtsr" style="width: 250px;height: 25px;">
+									<td><label> <select name="typeofworknoncourtsr" id="typeofworknoncourtsr"  style="width: 250px;height: 25px;" class="myclass">
 											<option selected></option>
 											<option value="AD">Adoption Deed</option>
 											<option value="ASA">Agriculture Sale Agreement</option>
@@ -1047,7 +1093,7 @@ for(Cookie cookie : cookies){
 								
 								<tr style="display: none;" id="typeofworknoncourtdrtr">
 									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtdr" id="typeofworknoncourtdr" style="width: 250px;height: 25px;">
+									<td><label> <select name="typeofworknoncourtdr" id="typeofworknoncourtdr"  style="width: 250px;height: 25px;" class="myclass">
 											<option selected></option>
 											<option value="DP">Dissolution of Partnership</option>
 											<option value="GPAAU">GPA Authentication</option>
@@ -1059,7 +1105,7 @@ for(Cookie cookie : cookies){
 								
 								<tr style="display: none;" id="typeofworknoncourtcstr">
 									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtcs" id="typeofworknoncourtcs" style="width: 250px;height: 25px;">
+									<td><label> <select name="typeofworknoncourtcs" id="typeofworknoncourtcs"  style="width: 250px;height: 25px;" class="myclass">
 											<option selected></option>
 											<option value="CSBL">Co-operative Society Bye Laws</option>
 											<option value="MLD">Money Lending Liecense</option>
@@ -1071,7 +1117,7 @@ for(Cookie cookie : cookies){
 								
 								<tr style="display: none;" id="typeofworknoncourturdtr">
 									<td class="alignLeft">Type of Cases:</td>
-										<td><label> <select name="typeofworknoncourturd" id="typeofworknoncourturd" style="width: 250px;height: 25px;">
+										<td><label> <select name="typeofworknoncourturd" id="typeofworknoncourturd"  style="width: 250px;height: 25px;" class="myclass">
 													<option selected></option>
 													<option value="AF">Affidavit</option>
 													<option value="BTA">Business Transfer Agreement</option>
@@ -1104,7 +1150,7 @@ for(Cookie cookie : cookies){
 								
 								<tr style="display: none;" id="typeofworknoncourtrlotr">
 									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtrlo" id="typeofworknoncourtrlo" style="width: 250px;height: 25px;">
+									<td><label> <select name="typeofworknoncourtrlo" id="typeofworknoncourtrlo"  style="width: 250px;height: 25px;" class="myclass">
 											<option selected></option>
 											<option value="ILO">Inheritance Legal Opinion</option>
 											<option value="LO">Legal Opinion</option>
@@ -1115,7 +1161,7 @@ for(Cookie cookie : cookies){
 								
 								<tr style="display: none;" id="typeofworknoncourtmwtr">
 									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtmw" id="typeofworknoncourtmw" style="width: 250px;height: 25px;">
+									<td><label> <select name="typeofworknoncourtmw" id="typeofworknoncourtmw"  style="width: 250px;height: 25px;" class="myclass">
 											<option selected></option>
 											<option value="CPM">Corporation Mutation</option>
 											<option value="CTSM">CTS Mutation</option>
@@ -1127,7 +1173,7 @@ for(Cookie cookie : cookies){
 								
 								<tr style="display: none;" id="typeofworknoncourtnotr">
 									<td class="alignLeft">Type of Cases:</td>
-									<td><label> <select name="typeofworknoncourtno" id="typeofworknoncourtno" style="width: 250px;height: 25px;">
+									<td><label> <select name="typeofworknoncourtno" id="typeofworknoncourtno"  style="width: 250px;height: 25px;" class="myclass">
 											<option selected></option>
 											<option value="LN">Legal Notice</option>
 											<option value="LTR">Letters</option>
@@ -1147,7 +1193,7 @@ for(Cookie cookie : cookies){
 										<td class="alignLeft">File Type: &nbsp;</td>
 	
 										<td ><label>
-											<select name="filetype" id="filetype" style="width: 250px;height: 25px;">
+											<select name="filetype" id="filetype"  style="width: 250px;height: 25px;" class="myclass">
 											<option selected></option>
 											<option value="F">F</option>
 											<option value="OF">OF</option>
@@ -1168,7 +1214,7 @@ for(Cookie cookie : cookies){
 	
 										<td ><label>
 											<input type="text"  name="expecteddeliverydate"
-									class="textField" style="font-size: 14px;width: 250px;height: 25px;"
+									class="textField myclass" style="font-size: 14px;width: 245px;height: 25px;"
 									id="expecteddeliverydate" autocomplete="false" required
 									data-validate="validate(required)">
 										</label></td>
@@ -1177,6 +1223,21 @@ for(Cookie cookie : cookies){
 									<td><br></td>
 								</tr>
 								
+								<tr>
+										
+										<td class="alignLeft">Referred By: &nbsp;</td>
+	
+										<td ><label>
+											<select multiple class="chosen-select" name="referredby" id="referredby" style="width: 250px;border-radius: 4px;" >
+  										     <c:forEach items='${studentList}' var='studentList'>
+  										     	<option value='${studentList.sid}'><c:out value='${studentList.name}' /></option>
+  										     </c:forEach>
+  										  </select>
+										</label></td>
+								</tr>
+								<tr>
+									<td><br></td>
+								</tr>
 						</table>
 						
 						<div align="center">

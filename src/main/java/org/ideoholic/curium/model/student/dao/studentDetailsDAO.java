@@ -621,5 +621,23 @@ public class studentDetailsDAO {
 			 }
 			return cardDetailsList;
 		}
+
+	public List<Parents> getReferredList(List<Integer> sidList) {
+		
+		List<Parents> DetailsList = new ArrayList<Parents>();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("From Parents as parents where parents.Student.sid IN (:ids)");
+			query.setParameterList("ids", sidList);
+			DetailsList = query.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return DetailsList;
+	}
 	
 }

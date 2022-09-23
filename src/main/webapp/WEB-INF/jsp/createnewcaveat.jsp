@@ -35,6 +35,8 @@
         <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.core.js"></script>
         <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.widget.js"></script>
         <script type="text/javascript" src="/sla/js/datePicker/ui/jquery.ui.button.js"></script>
+        <script type="text/javascript" src="/sla/js/chosen.jquery.min.js"></script>
+		<link rel="stylesheet" href="/sla/css/chosen.min.css">
         <style type="text/css" >
 			.myclass {
 				font-size: 1.3em;
@@ -452,6 +454,10 @@
         		$("#anim").change(function() {
         			$("#caveatexpirydate").datepicker("option", "showAnim", $(this).val());
         		});
+        		
+        		$(".chosen-select").chosen({
+      			  no_results_text: "Oops, nothing found!"
+      			})
         	});
             
             function addRow() {
@@ -554,15 +560,25 @@
     			}
     	} 		
     		
-    		/*  function calculateValidity(id){
+    		function calculateDays(){
+    			
+    			
+    			//convert string to date
+    			var dattmp = document.getElementById('caveatdate').value.split('/').reverse().join('/');
+    			var nwdate =  new Date(dattmp);
+
+    			// to add 1 day use:
+    			nwdate.setDate(nwdate.getDate()+90);
+
+    			//to retrieve the new date use
+    			[nwdate.getDate(),nwdate.getMonth()+1,nwdate.getFullYear()].join('/');
     			 
-    			 var startDate = document.getElementById('caveatdate').value;
-    			 var dateSplit = startDate.split('/');
-    			 var month = parseInt(dateSplit[1])+parseInt(3);
-    			 var endDate = dateSplit[0]+'/'+month+'/'+dateSplit[2];
-    			 document.getElementById('validtill').value = endDate;
+    			document.getElementById('caveatexpirydate').value = [nwdate.getDate(),nwdate.getMonth()+1,nwdate.getFullYear()].join('/');
+    			 /* var startDate = document.getElementById('caveatdate').value;
+    			 var result = Date.parse(startDate);
+    			 document.getElementById('caveatexpirydate').value = result.getDate() + 90; */
     			 
-    		 } */
+    		 } 
     		
     	</script>
     	
@@ -591,7 +607,7 @@ for(Cookie cookie : cookies){
             <div style="overflow: hidden" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
                 <table width="100%">
                     <tr>
-                        <td  class="headerTD">Create Case</td>
+                        <td  class="headerTD">Create Caveat</td>
                     </tr>
                 </table>
 		           		<table style="margin-left: auto;margin-right: auto;">
@@ -707,7 +723,7 @@ for(Cookie cookie : cookies){
 									<td class="alignLeft">Caveat Expiry Date:</td>
 									<td><label>
 											<input type="text"  name="caveatexpirydate"
-												class="myclass"
+												class="myclass" onfocus="calculateDays();"
 												id="caveatexpirydate" autocomplete="false"
 												data-validate="validate(required)">
 									</label></td>
@@ -716,6 +732,24 @@ for(Cookie cookie : cookies){
 								<tr>
 									<td><br></td>
 								</tr>
+								
+								<tr>
+									<td class="alignLeft">Referred By:</td>
+									<td>
+										<select multiple class="chosen-select" name="referredby" id="referredby" style="width: 225px;border-radius: 4px;">
+  										     <c:forEach items='${studentList}' var='studentList'>
+  										     	<option value='${studentList.sid}'><c:out value='${studentList.name}' /></option>
+  										     </c:forEach>
+  										  </select>
+									</td>
+								
+								</tr>
+								
+								<tr>
+									<td><br></td>
+								</tr>
+								
+								
 						</table>
 						<div align="center">
 						<p>

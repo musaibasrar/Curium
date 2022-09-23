@@ -582,31 +582,46 @@ for(Cookie cookie : cookies){
 									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
 							
-							<td class="alignLeft" style="padding-left: 20px;">Address</td>
+							<td class="alignLeft" style="padding-left: 20px;">Notes</td>
+							<td><label> <input name="remarksadditional"
+									type="text" class="myclass" id="remarksadditional" size="30"
+									value="<c:out default="" value="${parents.remarks}" />">
+							</label></td>
+							
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignLeft" >Address</td>
 							<td><label> <textarea
 										name="permanentaddress" type="text" class="myclass"
 										id="permanentaddress" rows="4" cols="30"
 										value="<c:out default="" value="${parents.addresspermanent}"/>">${parents.addresspermanent}</textarea>
 							</label></td>
 							
-
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-
-						<tr>
-							
-							<td class="alignLeft">Notes</td>
-							<td><label> <input name="remarksadditional"
-									type="text" class="myclass" id="remarksadditional" size="30"
-									value="<c:out default="" value="${parents.remarks}" />">
+							<td class="alignLeft" style="padding-left: 20px;">Pin Code</td>
+							<td><label> <input name="temporaryaddress"
+									type="text" class="myclass" id="temporaryaddress" size="30"
+									value="<c:out default="" value="${parents.addresstemporary}" />">
 							</label></td>
+
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+
+						<tr>
 							
 							<td class="alignLeft" style="padding-left: 20px;">Created Date &nbsp;</td>
 							<td><label> <input name="createddate"

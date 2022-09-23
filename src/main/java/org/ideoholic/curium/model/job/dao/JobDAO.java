@@ -831,7 +831,7 @@ public class JobDAO {
 			try {
 				transaction = session.beginTransaction();
 				
-				Query query = session.createQuery("update JobQuery set status = '"+jobStatus+"', updateddate = CURDATE(), updateduserid= "+userId+" where id="+jobId+"");
+				Query query = session.createQuery("update JobQuery set status = 'In Progress', updateddate = CURDATE(), updateduserid= "+userId+" where id="+jobId+"");
 				query.executeUpdate();
 				
 				for (Integer appId : taskIdsList) {
@@ -870,5 +870,24 @@ public class JobDAO {
 	        }
 	        return results;
 }
+
+
+		public List<JobQuery> viewOneJobDetails(int jobId) {
+			
+	        List<JobQuery> results = new ArrayList<JobQuery>();
+	        
+	        try {
+	                transaction = session.beginTransaction();
+	                results = (List<JobQuery>) session.createQuery("from JobQuery where id="+jobId+"").list();
+	                transaction.commit();
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	                
+	                hibernateException.printStackTrace();
+
+	        } finally {
+	    			HibernateUtil.closeSession();
+	        }
+	        return results;
+		}
 
 }

@@ -35,13 +35,14 @@ public class Cases implements java.io.Serializable {
 	private Integer updateduserid;
 	private Integer assignto;
 	private String fileno;
+	private String referredby;
 	
 	public Cases() {
 	}
 
 	public Cases(Integer sid,Integer assignto, String court,String casetitle,String courtname, String status, Date dateofdispose, String filetaken,String filetakenby,
 			String filetakenbyname,String filetakenbynumber,Date createddate,Date updateddate, Integer branchid,Integer createduserid,
-			Integer updateduserid, String remarks, String casenumber, String fileno){
+			Integer updateduserid, String remarks, String casenumber, String fileno, String referredby){
 		this.sid = sid;
 		this.assignto = assignto;
 		this.court = court;
@@ -61,6 +62,7 @@ public class Cases implements java.io.Serializable {
 		this.remarks = remarks;
 		this.casenumber = casenumber;
 		this.fileno = fileno;
+		this.referredby = referredby;
 	}
 
 	public Integer getId() {
@@ -221,6 +223,14 @@ public class Cases implements java.io.Serializable {
 
 	public void setSid(Integer sid) {
 		this.sid = sid;
+	}
+
+	public String getReferredby() {
+		return referredby;
+	}
+
+	public void setReferredby(String referredby) {
+		this.referredby = referredby;
 	}
 
 	
