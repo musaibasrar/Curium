@@ -703,7 +703,7 @@ for(Cookie cookie : cookies){
 						<tr>
 
 							<td width="20%" class="alignRight">Admission Number&nbsp;</td>
-							<td width="28%" id="getAdmNumber"><label><input name="admnno" type="text" class="textField" id="admnno" size="36" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;" required></label></td>
+							<td width="28%" id="getAdmNumber"><label><input name="admnno" type="text" class="textField" id="admnno" size="36" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;" readonly="readonly" required></label></td>
 							
 							<td width="16%" class="alignRight">Religion&nbsp;</td>
 							<td width="28%">

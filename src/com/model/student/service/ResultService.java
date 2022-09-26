@@ -1303,6 +1303,7 @@ public class ResultService {
 		                    }
 		                    
 		                    result.setStudent(studentDetails.getStudent());
+		                    result.setFathername(studentDetails.getFathersname());
 		                    result.setSubjectList(subjectList);
 		                    result.setMarksList(marksList);
 		                    result.setPercentage(percentage);

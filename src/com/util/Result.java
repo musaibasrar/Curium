@@ -7,6 +7,7 @@ import com.model.student.dto.Student;
 public class Result  implements java.io.Serializable,Comparable<Result> {
     
     Student student;
+    String fathername;
     List<Integer> marksList;
     List<String> subjectList;
     List<String> referenceBooksList;
@@ -17,7 +18,7 @@ public class Result  implements java.io.Serializable,Comparable<Result> {
     public Result() {
     }
 
-    public Result(Student student, List<Integer> marksList, double percentage, String resultclass, List<String> subjectList, List<String> referenceBooksList, Integer rank) {
+    public Result(Student student, List<Integer> marksList, double percentage, String resultclass, List<String> subjectList, List<String> referenceBooksList, Integer rank, String fathername) {
         this.student = student;
         this.subjectList = subjectList;
         this.marksList = marksList;
@@ -25,6 +26,7 @@ public class Result  implements java.io.Serializable,Comparable<Result> {
         this.resultclass = resultclass;
         this.referenceBooksList = referenceBooksList;
         this.rank = rank;
+        this.fathername = fathername;
     }
 
     
@@ -101,4 +103,12 @@ public class Result  implements java.io.Serializable,Comparable<Result> {
     public void setRank(Integer rank) {
         this.rank = rank;
     }
+
+	public String getFathername() {
+		return fathername;
+	}
+
+	public void setFathername(String fathername) {
+		this.fathername = fathername;
+	}
   }

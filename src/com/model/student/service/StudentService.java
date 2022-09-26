@@ -1773,20 +1773,13 @@ public class StudentService {
 	            admission = Integer.parseInt(lastSid.get(0).getAdmissionnumber().substring(lastSid.get(0).getAdmissionnumber().length()-3));
 	            admission++;
 	        }
-	        
-	        admissionNumber = admNo+String.format("%03d", admission);
-	        System.out.println("AdmissionNumber "+admissionNumber);
-			
 		
 		//End update correct admission number
 			
-			List ids = new ArrayList();
 			
 			for (String id : studentIds) {
-				ids.add(Integer.valueOf(id));
-				String adno = request.getParameter("admissionno_"+id);
-				String admNoParam = admissionNo.substring(0, admissionNo.length() - 3);
-				 admissionNumber = admNoParam+String.format("%03d", admission);
+				 admissionNumber = admNo+String.format("%03d", admission);
+				 System.out.println("AdmissionNumber "+admissionNumber);
 				idAdmissionNo.put(id, admissionNumber);
 				admission++;
 			}

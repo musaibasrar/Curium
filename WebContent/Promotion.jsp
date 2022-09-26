@@ -632,7 +632,8 @@ for(Cookie cookie : cookies){
                         <tr  >
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">Admission Number</th>
-                            <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <th title="click to sort" class="headerText">Name</th>
+                            <th title="click to sort" class="headerText">Father Name</th>
                             <th title="click to sort" class="headerText">Exam Level&nbsp;</th>
                             <th title="click to sort" class="headerText">Qualification&nbsp;</th>
                             <th title="click to sort" class="headerText">Center Code&nbsp;</th>
@@ -648,6 +649,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${resultlist.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${resultlist.student.sid}~${resultlist.student.admissionnumber}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${resultlist.student.sid}'/>"><c:out value="${resultlist.student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${resultlist.student.name}"/></td>
+                                <td class="dataText"><c:out value="${resultlist.fathername}"/></td>
                                 <td class="dataText"><c:out value="${resultlist.student.examlevel}"/></td>
                                 <td class="dataText"><c:out value="${resultlist.student.qualification}"/></td>
                                 <td class="dataText"><c:out value="${resultlist.student.centercode}"/></td>
