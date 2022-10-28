@@ -547,7 +547,7 @@ for(Cookie cookie : cookies){
 								onclick="noCheck(this.id);" ${employee.currentemployee == '0' ? 'checked' : ''}/>
 							</td>
 
-							<td width="16%" class="alignRight">Remarks&nbsp;</td>
+							<td width="16%" class="alignRight">S/o,D/o,W/o&nbsp;</td>
 
 							<td align="left"><label> <input name="remarks"
 									type="text" class="textField"

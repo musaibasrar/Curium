@@ -454,7 +454,7 @@ for(Cookie cookie : cookies){
 	                         		<div style="padding-top: 10px;" align="center">
 	                         			<h4 style="text-transform: uppercase;margin-top: 0px;margin-bottom: 0px;">${branchname}</h4>
 	                         			<h5 style="text-transform: capitalize;margin-top: 0px;margin-bottom: 0px;">${branchaddress}</h5>
-	                         			<h6 style="text-transform: capitalize;margin-top: 0px;margin-bottom: 5px;">Contact : 9739190167/9686449445</h6>
+	                         			<h6 style="text-transform: capitalize;margin-top: 0px;margin-bottom: 5px;">${branchcontact}</h6>
 	                         		</div>
 		                         	
 	  								<img src="images/shaheenlogo.png" alt="Shaheen" style="width:170px;height:90px;padding-left: 30px;">

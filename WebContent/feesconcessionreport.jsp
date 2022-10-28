@@ -124,6 +124,22 @@
 }
 
 .footerTD {
+	border-radius: 3px;
+	width: 10px;
+	font-family: Tahoma;
+	font-size: 14px;
+	background-color: #4b6a84;
+	color: #FFFFFF;
+	font-weight: Bold;
+	width: auto;
+	height: 27px;
+	vertical-align: baseline;
+	text-align: right;
+	background-image:
+		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+}
+
+.footerTDButton {
 	border-radius: 6px;
 	background-color: #4b6a84;
 	text-align: left;
@@ -582,6 +598,7 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
+					<c:set var="TotalFeesConcession" value="0" />
 					<c:forEach items="${studentsfeesstructuredetailsconcession}" var="students" varStatus="status">
 
 						<c:forEach items="${students.value}" var="fees">
@@ -602,13 +619,18 @@ for(Cookie cookie : cookies){
 								<td class="dataText"><c:out	value="${fees.totalinstallment}" /></td>
 								<td class="dataText"><c:out	value="${fees.feesamount}" /></td>
 								<td class="dataText"><c:out	value="${fees.concession}" /></td>
+								<c:set var="TotalFeesConcession" value="${TotalFeesConcession+fees.concession}" />
 							</tr>
 						</c:forEach>
 					</c:forEach>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"><button id="print">Print</button>
+						<td class="footerTDButton" colspan="2"><button id="print">Print</button>
+							</td>
+							<td class="footerTD" colspan="2" >
+								 Total Fees Concession: Rs. ${TotalFeesConcession}
+								 &nbsp;&nbsp;&nbsp;
 							</td>
 					</tr>
 				</tfoot>

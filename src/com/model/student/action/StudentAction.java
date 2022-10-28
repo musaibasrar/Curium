@@ -137,7 +137,7 @@ public class StudentAction {
                 
                 new StudentService(request, response).viewfeesStructurePerYear();
                 
-                if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+                if(httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin") || httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
                     return "student_details_feesstructure_admin.jsp";
                 }else if(!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
                     return "student_details_feesstructure.jsp";

@@ -453,7 +453,7 @@ for(Cookie cookie : cookies){
            						 </c:if>
                             </td>
                         
-                            <td width="25%" class="alignLeft" height="50" >Remarks</td>
+                            <td width="25%" class="alignLeft" height="50" >S/o,D/o,W/o</td>
                             <td width="25%" class="tablerows"  >
                                  <c:out default="" value="${employee.remarks}" />
                             </td>

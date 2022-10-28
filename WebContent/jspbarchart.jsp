@@ -455,8 +455,8 @@ for(Cookie cookie : cookies){
                 	   yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: 500000,
-                                stepSize: 20000
+                                max: 1000000,
+                                stepSize: 50000
                                }
                         
                             }]
@@ -556,8 +556,8 @@ for(Cookie cookie : cookies){
                 	   yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: 500000,
-                                stepSize: 20000
+                                max: 1000000,
+                                stepSize: 50000
                                }
                         
                             }]

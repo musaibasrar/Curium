@@ -690,7 +690,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="Controller?process=printids&action=generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
             			</td>
             		</tr>

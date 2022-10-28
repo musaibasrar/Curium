@@ -727,7 +727,7 @@ for(Cookie cookie : cookies){
 								onclick="noCheck(this.id)" />
 							</td>
 
-							<td class="alignRight">Remarks &nbsp;</td>
+							<td class="alignRight">S/o,D/o,W/o &nbsp;</td>
 							<td align="left"><label> <input
 									name="remarks" type="text" class="myclass" id="remarks"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
