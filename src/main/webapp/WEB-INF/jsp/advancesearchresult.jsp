@@ -765,6 +765,9 @@ for(Cookie cookie : cookies){
                             <c:if test="${Parents.student.nationality == 'Company' }">
                             	<c:out value="${Parents.student.name}"/>
                             </c:if>
+                             <c:if test="${Parents.student.nationality == 'Dr.' }">
+                            	Dr. <c:out default="" value="${Parents.student.name}" />
+                            </c:if>
                              <c:if test="${Parents.student.nationality eq null }">
                             	<c:out value="${Parents.student.name}"/>
                             </c:if>

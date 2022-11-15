@@ -574,6 +574,7 @@
             				document.getElementById("typeofworknoncourtcstr").style.display = "none";
             				document.getElementById("typeofworknoncourturdtr").style.display = "none";
             				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
+            				document.getElementById("typeofworknoncourtrltr").style.display = "none";
             				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
             				document.getElementById("typeofworkcourtcasestr").style.display = "none";
             				document.getElementById("typeofworknoncourtnotr").style.display = "none";
@@ -589,6 +590,7 @@
         				document.getElementById("typeofworknoncourtcstr").style.display = "none";
         				document.getElementById("typeofworknoncourturdtr").style.display = "none";
         				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
+        				document.getElementById("typeofworknoncourtrltr").style.display = "none";
         				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
         				document.getElementById("typeofworkcourtcasestr").style.display = "none";
         				document.getElementById("typeofworknoncourtnotr").style.display = "none";
@@ -611,6 +613,7 @@
         				document.getElementById("typeofworknoncourtcstr").style.display = "none";
         				document.getElementById("typeofworknoncourturdtr").style.display = "none";
         				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
+        				document.getElementById("typeofworknoncourtrltr").style.display = "none";
         				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
         				document.getElementById("typeofworknoncourtnotr").style.display = "none";
         				
@@ -624,6 +627,7 @@
     				document.getElementById("typeofworknoncourtcstr").style.display = "none";
     				document.getElementById("typeofworknoncourturdtr").style.display = "none";
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrltr").style.display = "none";
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
     				document.getElementById("typeofworknoncourtnotr").style.display = "none";
     				
@@ -653,6 +657,8 @@
         				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
         				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
         				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
+        				document.getElementById("typeofworknoncourtrltr").style.display = "none";
+        				document.getElementById("typeofworknoncourtrl").selectedIndex = 0;
         				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
         				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
         				document.getElementById("typeofworkcourtcasestr").style.display = "none";
@@ -675,6 +681,8 @@
     				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
     				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtrltr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrl").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
     				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
@@ -699,6 +707,8 @@
     				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
     				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtrltr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrl").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
     				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
@@ -723,6 +733,8 @@
     				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
     				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtrltr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrl").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
     				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
@@ -747,6 +759,8 @@
     				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
     				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtrltr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrl").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
     				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
@@ -771,6 +785,8 @@
     				document.getElementById("typeofworknoncourturdtr").style.display = '';
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
     				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtrltr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrl").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
     				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
@@ -795,6 +811,36 @@
     				document.getElementById("typeofworknoncourturdtr").style.display = "none";
     				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtrlotr").style.display = '';
+    				document.getElementById("typeofworknoncourtrltr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrl").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
+    				document.getElementById("typeofworkcourtcasestr").style.display = "none";
+    				document.getElementById("typeofworkcourtcases").selectedIndex = 0;
+    				document.getElementById("typeofworkcourtdocstr").style.display = "none";
+    				document.getElementById("typeofworkcourtdocs").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtnotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtno").selectedIndex = 0;
+    			} else if(typeofworktext == "Registration & License") {
+    				document.getElementById("typeofworknoncourtrltr").style.display = '';
+	    			document.getElementById("typeofworkcourtcasestr").style.display = "none";
+	    			document.getElementById("typeofworkcourtcases").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtabttr").style.display = "none";
+    				document.getElementById("typeofworknoncourtabt").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtcdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcd").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtsrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtsr").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtdrtr").style.display = "none";
+    				document.getElementById("typeofworknoncourtdr").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtcstr").style.display = "none";
+    				document.getElementById("typeofworknoncourtcs").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourturdtr").style.display = "none";
+    				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtrltr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrl").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
     				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
@@ -820,6 +866,8 @@
     				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
     				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtrltr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrl").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = '';
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
     				document.getElementById("typeofworkcourtcases").selectedIndex = 0;
@@ -844,6 +892,8 @@
     				document.getElementById("typeofworknoncourturd").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtrlotr").style.display = "none";
     				document.getElementById("typeofworknoncourtrlo").selectedIndex = 0;
+    				document.getElementById("typeofworknoncourtrltr").style.display = "none";
+    				document.getElementById("typeofworknoncourtrl").selectedIndex = 0;
     				document.getElementById("typeofworknoncourtmwtr").style.display = "none";
     				document.getElementById("typeofworknoncourtmw").selectedIndex = 0;
     				document.getElementById("typeofworkcourtcasestr").style.display = "none";
@@ -980,6 +1030,7 @@ for(Cookie cookie : cookies){
 											<option value="Mutation Work">Mutation Work</option>
 											<option value="Notice">Notice</option>
 											<option value="Reading & Legal Opinion">Reading & Legal Opinion</option>
+											<option value="Registration & License">Registration & License</option>
 											<option value="Sub Registrar">Sub Registrar</option>
 											<option value="Unregistered Documents">Unregistered Documents</option>
 										</select>
@@ -1155,6 +1206,18 @@ for(Cookie cookie : cookies){
 											<option value="ILO">Inheritance Legal Opinion</option>
 											<option value="LO">Legal Opinion</option>
 											<option value="READ">Reading</option>
+										</select>
+									</label></td>
+								</tr>
+								
+								<tr style="display: none;" id="typeofworknoncourtrltr">
+									<td class="alignLeft">Type of Cases:</td>
+									<td><label> <select name="typeofworknoncourtrlo" id="typeofworknoncourtrl"  style="width: 250px;height: 25px;" class="myclass">
+											<option selected></option>
+											<option value="CLL">Contract Labour License</option>
+											<option value="EPFR">EPF Registration</option>
+											<option value="ESIR">ESI Registration</option>
+											<option value="SEL">Shops & Establishments License</option>
 										</select>
 									</label></td>
 								</tr>

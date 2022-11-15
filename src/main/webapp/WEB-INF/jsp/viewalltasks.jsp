@@ -658,17 +658,17 @@ for(Cookie cookie : cookies){
                                 </c:if>
                                 <c:if test="${task.status == 'In Progress' }">
                                 	<td class="dataText" style="color: #0001ff;font-weight: bold;">
-                                		<a class="dataTextInActive" style="color: #cb1b09;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
+                                		<a class="dataTextInActive" style="color: #0001ff;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
                                 	</td>
                                 </c:if>
                                 <c:if test="${task.status == 'Completed' }">
                                 	<td class="dataText" style="color: #65a358;font-weight: bold;">
-                                		<a class="dataTextInActive" style="color: #cb1b09;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
+                                		<a class="dataTextInActive" style="color: #65a358;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
                                 	</td>
                                 </c:if>
                                 <c:if test="${task.status == 'Cancelled' }">
                                 	<td class="dataText" style="color: grey;font-weight: bold;">
-                                		<a class="dataTextInActive" style="color: #cb1b09;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
+                                		<a class="dataTextInActive" style="color: grey;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
                                 	</td>
                                 </c:if>
                                 

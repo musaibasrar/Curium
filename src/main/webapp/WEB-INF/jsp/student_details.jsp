@@ -466,7 +466,7 @@ for(Cookie cookie : cookies){
 
 					<tr>
                             <td width="25%"  class="alignLeft" height="50">Name</td>
-                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                            <td width="25%" class="tablerows" style="text-transform:capitalize;">
                             <c:if test="${student.nationality == 'Mr.' }">
                             	Mr. <c:out default="" value="${student.name}" />
                             </c:if>
@@ -474,7 +474,10 @@ for(Cookie cookie : cookies){
                             	Ms. <c:out default="" value="${student.name}" />
                             </c:if>
                             <c:if test="${student.nationality == 'Company' }">
-                            	<c:out default="" value="${student.name}" />
+                            	M/s. <c:out default="" value="${student.name}" />
+                            </c:if>
+                            <c:if test="${student.nationality == 'Dr.' }">
+                            	Dr. <c:out default="" value="${student.name}" />
                             </c:if>
                              <c:if test="${student.nationality eq null }">
                             	<c:out default="" value="${student.name}" />
@@ -505,7 +508,7 @@ for(Cookie cookie : cookies){
                         <tr>
 
                             <td width="25%"  class="alignLeft" height="50">S/O,D/O,W/O</td>
-                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                            <td width="25%" class="tablerows" style="text-transform:capitalize;">
                                 <c:out default="" value="${parents.fathersname}" />
                             </td>
                             

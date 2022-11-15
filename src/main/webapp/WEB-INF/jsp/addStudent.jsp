@@ -550,14 +550,31 @@
 	            document.getElementById("sonof").style.display = '';
 	            document.getElementById("dowo").style.display = "none";
 	            document.getElementById("person").style.display = "none";
+	            document.getElementById("doctor").style.display = "none";
+	            document.getElementById("table1").style.display = '';
+	            document.getElementById("no:male").checked = false;
+	            document.getElementById("yes:male").checked = true;
 	        }else if (petext == "Ms.") {
 	            document.getElementById("sonof").style.display = "none";
 	            document.getElementById("dowo").style.display = '';
 	            document.getElementById("person").style.display = "none";
+	            document.getElementById("doctor").style.display = "none";
+	            document.getElementById("table1").style.display = '';
+	            document.getElementById("yes:male").checked = false;
+	            document.getElementById("no:male").checked = true;
+	            
 	        }else if (petext == "Company") {
 	            document.getElementById("sonof").style.display = "none";
 	            document.getElementById("dowo").style.display = "none";
+	            document.getElementById("doctor").style.display = "none";
 	            document.getElementById("person").style.display = '';
+	            document.getElementById("table1").style.display = '';
+	        }else if (petext == "Dr.") {
+	            document.getElementById("sonof").style.display = "none";
+	            document.getElementById("dowo").style.display = "none";
+	            document.getElementById("person").style.display = "none";
+	            document.getElementById("doctor").style.display = '';
+	            document.getElementById("table1").style.display = '';
 	        }
 		 
 	 }
@@ -631,7 +648,8 @@
 
 
 				<div id="fragment-1">
-					<table style="width: auto;height: auto;" border="0" align="center" id="table1">
+				
+					<table style="width: auto;height: auto;" border="0" align="center" id="table2">
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -640,16 +658,28 @@
 						</tr>
 						
 						<tr>
-						
-								<td class="alignLeft">Person/Entity*:</td>
-									<td><label> <select name="nationality" id="nationality" class="myclassdropdown" onchange="choosepersonentity();" required>
-											<option selected></option>
-											<option value="Mr.">Mr.</option>
-											<option value="Ms.">Ms.</option>
-											<option value="Company">Company</option>
-										</select>
-									</label></td>
+							<td class="alignLeft">Person/Entity*:</td>
+								<td><label> <select name="nationality" id="nationality" class="myclassdropdown" onchange="choosepersonentity();" required>
+										<option selected></option>
+										<option value="Mr.">Mr.</option>
+										<option value="Ms.">Ms.</option>
+										<option value="Company">Company</option>
+										<option value="Dr.">Dr.</option>
+									</select>
+								</label></td>
 						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+					</table>
+				
+				
+					<table style="width: auto;height: auto;display: none;" border="0" align="center" id="table1">
 						
 						<tr>
 							<td><br /></td>
@@ -662,12 +692,20 @@
 							<td class="alignLeft">Name* &nbsp;</td>
 							<td ><label> <input
 									name="name" type="text" class="myclass" id="name" size="36" required
-									style="text-transform:capitalize;"
 									required>
 							</label></td>
+							
+							
+							<td class="alignLeft" style="padding-left: 20px;">Contact Number* &nbsp;</td>
 
-							<td  class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Male<input
+							<td><label> <input
+											name="contactnumber" type="text" class="myclass" required
+											style="text-transform:capitalize;" onkeyup="checkContactNo();"
+											id="contactnumber" size="36" maxlength="10" minlength="10">
+							</label></td>
+
+							 <td  class="alignLeft" style="padding-left: 20px;display: none;">Gender &nbsp;</td>
+							<td  height="30" style="display: none;" class="alignLeft">&nbsp;Male<input
 								type="checkbox" value="Male" name="gender" id="yes:male"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
 								type="checkbox" value="Female" name="gender" id="no:male"
@@ -678,53 +716,22 @@
 
 						</tr>
 						
-						
 						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						<tr>
-
-									<td class="alignLeft">Contact Number* &nbsp;</td>
-
-									<td><label> <input
-											name="contactnumber" type="text" class="myclass" required
-											style="text-transform:capitalize;" onkeyup="checkContactNo();"
-											id="contactnumber" size="36" maxlength="10" minlength="10">
-
-									</label></td>
-
-
-
-									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
-										&nbsp;</td>
-
-									<td><label> <input
-											name="cocontactnumber" type="text" class="myclass"
-											style="text-transform:capitalize;"
-											id="cocontactnumber" size="36" maxlength="10" minlength="10">
-
-									</label></td>
-								</tr>
-								
-								<tr>
+									<td></td>
+									<td></td>
 									<td></td>
 									<td style="color: red;">
                                     <div id="mydivmobile"></div>
                                 	</td>
 								</tr>
-
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
 						
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
 						
 						<tr style="display:none;" id="sonof">
 									<td class="alignLeft" >S/o&nbsp;</td>
@@ -734,11 +741,15 @@
 											id="fathersname" size="36"
 											> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
-									<td class="alignLeft" style="padding-left: 20px;">Notes &nbsp;</td>
-									<td ><label> <input name="remarksadditional"
-											type="text" class="myclass" id="remarksadditional" size="36"
+									
+									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
+										&nbsp;</td>
+
+									<td><label> <input
+											name="cocontactnumber" type="text" class="myclass"
 											style="text-transform:capitalize;"
-											>
+											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+
 									</label></td>
 							</tr>
 							
@@ -752,16 +763,19 @@
 											> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 									
-									<td class="alignLeft" style="padding-left: 20px;">Notes &nbsp;</td>
-									<td ><label> <input name="remarksadditional"
-											type="text" class="myclass" id="remarksadditional" size="36"
+									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
+										&nbsp;</td>
+
+									<td><label> <input
+											name="cocontactnumber" type="text" class="myclass"
 											style="text-transform:capitalize;"
-											>
+											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+
 									</label></td>
 							</tr>
 							
 							<tr style="display:none;" id="person">
-									<td class="alignLeft" >Person &nbsp;</td>
+									<td class="alignLeft" >Person* &nbsp;</td>
 									<td ><label> <input
 											name="mothersname" type="text" class="myclass"
 											style="text-transform:capitalize;"
@@ -769,12 +783,37 @@
 											> <!-- onkeyup="check(this.value);"  -->
 									</label></td>
 									
-									<td class="alignLeft" style="padding-left: 20px;">Notes &nbsp;</td>
-									<td ><label> <input name="remarksadditional"
-											type="text" class="myclass" id="remarksadditional" size="36"
+									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
+										&nbsp;</td>
+
+									<td><label> <input
+											name="cocontactnumber" type="text" class="myclass"
 											style="text-transform:capitalize;"
-											>
+											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+
 									</label></td>
+								
+							</tr>
+							
+							<tr style="display:none;" id="doctor">
+									<td class="alignLeft" >S/o,D/o,W/o* &nbsp;</td>
+									<td ><label> <input
+											name="fathersname" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="fathersname" size="36"
+											> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+									
+									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
+										&nbsp;</td>
+
+									<td><label> <input
+											name="cocontactnumber" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+
+									</label></td>
+								
 							</tr>
 								<tr>
 									<td><br /></td>
@@ -801,7 +840,7 @@
 								<td ><label> <input
 											name="temporaryaddress" type="text" 
 											id="temporaryaddress" class="myclass"
-											style="text-transform:capitalize;"
+											style="text-transform:capitalize;" size="36"
 											>
 
 								</label></td>
@@ -978,6 +1017,14 @@
 								</tr>
 
 								<tr>
+								
+									<td class="alignLeft">Notes &nbsp;</td>
+									<td ><label> <input name="remarksadditional"
+											type="text" class="myclass" id="remarksadditional" size="36"
+											style="text-transform:capitalize;"
+											>
+									</label></td>
+								
 									<td class="alignLeft" style="padding-left: 20px;">Created Date &nbsp;</td>
 							<td ><label> <input name="createddate"
 									type="text"

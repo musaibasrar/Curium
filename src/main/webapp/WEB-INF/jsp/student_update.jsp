@@ -415,7 +415,43 @@
 		 
 	});
 	
-	
+	function choosepersonentity(){
+		 
+		 var pe = document.getElementById("nationality");
+	        var petext = pe.options[pe.selectedIndex].text;
+
+	        if (petext == "Mr.") {
+	            document.getElementById("sonof").style.display = '';
+	            document.getElementById("dowo").style.display = "none";
+	            document.getElementById("person").style.display = "none";
+	            document.getElementById("doctor").style.display = "none";
+	            document.getElementById("table1").style.display = '';
+	            document.getElementById("no:male").checked = false;
+	            document.getElementById("yes:male").checked = true;
+	        }else if (petext == "Ms.") {
+	            document.getElementById("sonof").style.display = "none";
+	            document.getElementById("dowo").style.display = '';
+	            document.getElementById("person").style.display = "none";
+	            document.getElementById("doctor").style.display = "none";
+	            document.getElementById("table1").style.display = '';
+	            document.getElementById("yes:male").checked = false;
+	            document.getElementById("no:male").checked = true;
+	            
+	        }else if (petext == "Company") {
+	            document.getElementById("sonof").style.display = "none";
+	            document.getElementById("dowo").style.display = "none";
+	            document.getElementById("doctor").style.display = "none";
+	            document.getElementById("person").style.display = '';
+	            document.getElementById("table1").style.display = '';
+	        }else if (petext == "Doctor") {
+	            document.getElementById("sonof").style.display = "none";
+	            document.getElementById("dowo").style.display = "none";
+	            document.getElementById("person").style.display = "none";
+	            document.getElementById("doctor").style.display = '';
+	            document.getElementById("table1").style.display = '';
+	        }
+		 
+	 }
 
 
 </script>
@@ -436,7 +472,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-<body>
+<body onload="choosepersonentity();">
 	<form action="/sla/PersonalProcess/viewAll"
 		id="form1" method="POST" enctype="multipart/form-data">
 		<div>
@@ -479,6 +515,36 @@ for(Cookie cookie : cookies){
 				
 				</table>
 				
+				
+					<table style="width: auto;height: auto;" border="0" align="center" id="table2">
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignLeft">Person/Entity*:</td>
+								<td><label> <select name="nationality" id="nationality" class="myclassdropdown" onchange="choosepersonentity();" required>
+										<option selected>${student.nationality}</option>
+										<option value="Mr.">Mr.</option>
+										<option value="Ms.">Ms.</option>
+										<option value="Company">Company</option>
+										<option value="Dr.">Dr.</option>
+									</select>
+								</label></td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+					</table>
+					
 					<table width="70%" border="0" align="center" id="table1">
 
 
@@ -513,19 +579,28 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr> --%>
+						
 						<tr>
 							<td class="alignLeft">Name &nbsp;</td>
 							<td><input type="hidden" name="id" id="id"
 								value="<c:out value="${student.sid}" />" /><input type="hidden" name="studentexternalid" id="studentexternalid"
 								value="<c:out value="${student.studentexternalid}" />" /> <label> <input
-									name="name" type="text" style="text-transform:uppercase" required
+									name="name" type="text" style="text-transform:capitalize;" required
 									value="<c:out value="${student.name}" />" class="myclass"
 									id="name" size="30" data-validate="validate(required)">
 							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Contact Number*</td>
 
-							<td class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
+							<td><label> <input name="contactnumber"
+									type="text" class="myclass" id="contactnumber" size="30" required
+									value="<c:out default="" value="${parents.contactnumber}" />">
 
-							<td>Male<input type="checkbox"
+							</label></td>
+
+							<td class="alignLeft" style="padding-left: 20px;display: none;" >Gender &nbsp;</td>
+
+							<td style="display: none;">Male<input type="checkbox"
 								value="Male" name="gender" id="yes:male" onclick="yesCheck(this.id);"
 								${student.gender == 'Male' ? 'checked' : ''} />&nbsp;
 								&nbsp;Female<input type="checkbox" value="Female" name="gender"
@@ -543,15 +618,92 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						
-						<tr>
+						<tr style="display:none;" id="sonof">
+									<td class="alignLeft" >S/o&nbsp;</td>
+									<td ><label> <input
+											name="fathersname" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="fathersname" size="36"
+											> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+									
+									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
+										&nbsp;</td>
 
-							<td class="alignLeft">Contact Number*</td>
+									<td><label> <input
+											name="cocontactnumber" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="cocontactnumber" size="36" maxlength="10" minlength="10">
 
-							<td><label> <input name="contactnumber"
-									type="text" class="myclass" id="contactnumber" size="30" required
-									value="<c:out default="" value="${parents.contactnumber}" />">
+									</label></td>
+							</tr>
+							
+						<tr style="display:none;" id="dowo">
+									
+									<td class="alignLeft">D/o,W/o &nbsp;</td>
+									<td ><label> <input
+											name="fathersname" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="fathersname" size="36"
+											> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+									
+									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
+										&nbsp;</td>
 
-							</label></td>
+									<td><label> <input
+											name="cocontactnumber" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+
+									</label></td>
+							</tr>
+							
+							<tr style="display:none;" id="person">
+									<td class="alignLeft" >Person* &nbsp;</td>
+									<td ><label> <input
+											name="mothersname" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="mothersname" size="36"
+											> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+									
+									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
+										&nbsp;</td>
+
+									<td><label> <input
+											name="cocontactnumber" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+
+									</label></td>
+								
+							</tr>
+							
+							<tr style="display:none;" id="doctor">
+									<td class="alignLeft" >S/o,D/o,W/o* &nbsp;</td>
+									<td ><label> <input
+											name="fathersname" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="fathersname" size="36"
+											> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+									
+									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
+										&nbsp;</td>
+
+									<td><label> <input
+											name="cocontactnumber" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+
+									</label></td>
+								
+							</tr>
+						
+						<%-- <tr>
+
+							
 
 							<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number</td>
 
@@ -561,7 +713,7 @@ for(Cookie cookie : cookies){
 									value="<c:out default="" value="${parents.cocontactnumber}" />">
 
 							</label></td>
-						</tr>
+						</tr> --%>
 
 						<tr>
 							<td><br /></td>
@@ -569,34 +721,6 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
-
-						<tr>
-							<td class="alignLeft">S/O,D/O,W/O</td>
-							<td ><input type="hidden"
-								name="idparents" id="idparents"
-								value="<c:out value="${parents.pid}" />" /> <label> <input
-									name="fathersname" type="text" class="myclass" id="name"
-									size="30" style="text-transform: capitalize;"
-									value="<c:out default="" value="${parents.fathersname}" />"">
-									<!-- onkeyup="check(this.value);"  -->
-							</label></td>
-							
-							<td class="alignLeft" style="padding-left: 20px;">Notes</td>
-							<td><label> <input name="remarksadditional"
-									type="text" class="myclass" id="remarksadditional" size="30"
-									value="<c:out default="" value="${parents.remarks}" />">
-							</label></td>
-							
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
 						<tr>
 							<td class="alignLeft" >Address</td>
 							<td><label> <textarea
@@ -622,6 +746,12 @@ for(Cookie cookie : cookies){
 
 
 						<tr>
+						
+						<td class="alignLeft" >Notes</td>
+							<td><label> <input name="remarksadditional"
+									type="text" class="myclass" id="remarksadditional" size="30"
+									value="<c:out default="" value="${parents.remarks}" />">
+							</label></td>
 							
 							<td class="alignLeft" style="padding-left: 20px;">Created Date &nbsp;</td>
 							<td><label> <input name="createddate"
@@ -789,7 +919,7 @@ for(Cookie cookie : cookies){
 							</label></td>
 							<td class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
 
-							<td><label> <select name="nationality"
+							<td><label> <select name="nationality1"
 									id="nationality" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
 										<option selected>${student.nationality }</option>
 										<option>Indian</option>

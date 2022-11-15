@@ -751,6 +751,9 @@ for(Cookie cookie : cookies){
                             <c:if test="${query.parent.student.nationality == 'Company' }">
                             	<c:out value="${query.parent.student.name}"/>
                             </c:if>
+                             <c:if test="${query.parent.student.nationality == 'Dr.' }">
+                            	Dr. <c:out default="" value="${query.parent.student.name}" />
+                            </c:if>
                              <c:if test="${query.parent.student.nationality eq null }">
                             	<c:out value="${query.parent.student.name}"/>
                             </c:if>
@@ -773,7 +776,12 @@ for(Cookie cookie : cookies){
                                 <input type="hidden" id="contactno_${query.id}" name="contactno_${query.id}" value="${query.parent.contactnumber}">
                                 </td>
                                 <c:if test="${not empty query.feedback}">
-                                	<td class="dataText"><a href="#" onclick="openPopup('${query.feedback}','${query.id}')" style="color:#eb6000;">View</a></td>
+      								<c:set var = "string1" value = "${query.feedback}"/>
+      								<c:set var="search" value="'" />
+    								<c:set var="replace" value="`" />
+			     					<c:set var = "string2" value = "${fn:replace(string1, search, replace)}" />
+      								
+                                	<td class="dataText"><a href="#" onclick="openPopup('${string2}','${query.id}')" style="color:#eb6000;">View</a></td>
                                 </c:if>
                                 <c:if test="${empty query.feedback}">
                                 	<td class="dataText"><a href="#" onclick="openPopup('${query.feedback}','${query.id}')" style="color:#4b6a84;">Add</a></td>
