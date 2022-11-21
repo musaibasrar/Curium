@@ -13,11 +13,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Dash Board</title>
-        <script src="/roshan/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/roshan/css/bootstrap.min.css">
-        <script src="/roshan/js/jquery.min.js"></script>
-        <script src="/roshan/js/bootstrap.min.js"></script>
-        <script src="/roshan/js/popper.min.js"></script>
+        <script src="/redrose/js/Chart.min.js"></script>
+         <link rel="stylesheet" href="/redrose/css/bootstrap.min.css">
+        <script src="/redrose/js/jquery.min.js"></script>
+        <script src="/redrose/js/bootstrap.min.js"></script>
+        <script src="/redrose/js/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
@@ -51,7 +51,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/redrose/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -83,10 +83,10 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/roshan/images/student.svg"  height="20" width="20"/>
+        						<img src="/redrose/images/student.svg"  height="20" width="20"/>
         						<label id="labelname">Total Students </label>
         						<br>		
-        						<img src="/roshan/images/teacher.svg" height="20" width="20"/>
+        						<img src="/redrose/images/teacher.svg" height="20" width="20"/>
         						<label id="labelname">Total Teachers </label>
         					</td>
         					<td></td>
@@ -110,9 +110,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/roshan/images/totalfees.svg" height="20" width="20"/>
+        						<img src="/redrose/images/totalfees.svg" height="20" width="20"/>
         						<label id="labelname">Total Fees&nbsp;&nbsp;&nbsp;</label><br>
-        						<img src="/roshan/images/monthlyfees.svg"  height="20" width="20"/>	
+        						<img src="/redrose/images/monthlyfees.svg"  height="20" width="20"/>	
         						<label id="labelname">${Currentmonth} Fees</label>
         					</td>
         					<td></td>
@@ -138,9 +138,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        					<img src="/roshan/images/feespaid.svg" height="20" width="20"/>	
+        					<img src="/redrose/images/feespaid.svg" height="20" width="20"/>	
         						<label id="labelname">Total Fees Paid</label><br>
-        						<img src="/roshan/images/feesdue.svg"  height="20" width="20"/>
+        						<img src="/redrose/images/feesdue.svg"  height="20" width="20"/>
         						<label id="labelname">Total Fees Due&nbsp;</label>
         					</td>
         					<td></td>
@@ -166,10 +166,10 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/roshan/images/todayscollection.svg" height="20" width="20"/>
+        						<img src="/redrose/images/todayscollection.svg" height="20" width="20"/>
         						<label id="labelname">Today's Fees</label>
         						<br>		
-        						<img src="/roshan/images/todaysexpenses.svg" height="20" width="20"/>	
+        						<img src="/redrose/images/todaysexpenses.svg" height="20" width="20"/>	
         						<label id="labelname">Today's Expenses</label>	
         					</td>
         					<td></td>

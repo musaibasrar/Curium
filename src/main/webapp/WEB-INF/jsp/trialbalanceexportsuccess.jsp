@@ -13,18 +13,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Trial balance export success</title>
         <style type="text/css" title="currentStyle">
-            @import "/roshan/css/dataTable/css/demo_page.css";
-            @import "/roshan/css/dataTable/css/jquery.dataTables.css";
+            @import "/redrose/css/dataTable/css/demo_page.css";
+            @import "/redrose/css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/roshan/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/roshan/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/redrose/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/redrose/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/redrose/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/redrose/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/redrose/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/redrose/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/redrose/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/redrose/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/redrose/js/datePicker/ui/jquery.ui.button.js"></script>
         
         
         
@@ -66,7 +66,7 @@
 
             function downloadFile(){
                 var form1=document.getElementById("form1");
-                form1.action="/roshan/AccountProcess/downloadTrialBalance";
+                form1.action="/redrose/AccountProcess/downloadTrialBalance";
                 form1.submit();
             }
         </script>
@@ -75,7 +75,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/redrose/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -87,7 +87,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="/roshan/images/bg.jpg" >
+    <body background="/redrose/images/bg.jpg" >
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>

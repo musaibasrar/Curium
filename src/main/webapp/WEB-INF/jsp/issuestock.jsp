@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Issue Stock</title>
-<link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
+<link rel="stylesheet" href="/redrose/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/redrose/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -444,17 +444,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/redrose/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/redrose/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/roshan/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/redrose/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/redrose/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/redrose/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/redrose/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/redrose/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -548,14 +548,14 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/redrose/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function saveissueentry() {
 		var form1 = document.getElementById("form1");
 		
 		if(form1.checkValidity()) {
-			form1.action = "/roshan/MessItemsMoveProcess/saveStockMove";
+			form1.action = "/redrose/MessItemsMoveProcess/saveStockMove";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -565,7 +565,7 @@
 	
 	function cancelRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/MessItemsMoveProcess/cancelStockMove";
+		form1.action = "/redrose/MessItemsMoveProcess/cancelStockMove";
 		form1.method = "POST";
 		form1.submit();
 
@@ -573,21 +573,21 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/AdminProcess/printVoucher";
+		form1.action = "/redrose/AdminProcess/printVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function approveRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/AdminProcess/approveVoucher";
+		form1.action = "/redrose/AdminProcess/approveVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function rejectRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/AdminProcess/rejectVoucher";
+		form1.action = "/redrose/AdminProcess/rejectVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -797,7 +797,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/redrose/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -995,7 +995,7 @@ for(Cookie cookie : cookies){
 			<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/roshan/MessItemsMoveProcess/issueItems?page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/redrose/MessItemsMoveProcess/issueItems?page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -1008,7 +1008,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/roshan/MessItemsMoveProcess/issueItems?page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/redrose/MessItemsMoveProcess/issueItems?page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -1017,7 +1017,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/roshan/MessItemsMoveProcess/issueItems?page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/redrose/MessItemsMoveProcess/issueItems?page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
                     

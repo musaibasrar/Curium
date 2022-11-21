@@ -130,9 +130,9 @@
             }
             -->
         </style>
-        <script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/roshan/js/print/jquery.printPage.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/redrose/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/redrose/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/redrose/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {
@@ -141,7 +141,7 @@
              
              function printReceipt(){
             	 document.getElementById("print").click();
-            	 //document.location.href = "/roshan/FeesProcess/feesCollect"; 
+            	 //document.location.href = "/redrose/FeesProcess/feesCollect"; 
              }
         </script>
     </head>
@@ -149,7 +149,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/redrose/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -226,7 +226,7 @@ for(Cookie cookie : cookies){
                     <tr>
 
 
-                        <td align="center"><a id="print" href="/roshan/FeesCollection/printReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td align="center"><a id="print" href="/redrose/FeesCollection/printReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </TABLE>

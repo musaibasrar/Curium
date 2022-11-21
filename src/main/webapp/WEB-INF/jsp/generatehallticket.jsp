@@ -16,8 +16,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Generate Hall Ticket</title>
-<link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
+<link rel="stylesheet" href="/redrose/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/redrose/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -298,42 +298,42 @@ background-color:rgba(0, 0, 0, 0);
 	
 }
 </style>
-<link rel="stylesheet" href="/roshan/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/redrose/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/redrose/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/redrose/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/roshan/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/redrose/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/redrose/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/redrose/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
+	src="/redrose/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/redrose/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/redrose/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/roshan/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/redrose/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/redrose/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/redrose/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/redrose/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/redrose/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/redrose/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/redrose/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/redrose/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/redrose/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/redrose/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/redrose/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -348,12 +348,12 @@ background-color:rgba(0, 0, 0, 0);
 	});
 </script>
 
-<script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/redrose/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	
 	function search() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/ExamDetailsProcess/searchHallTicketDetails";
+		form1.action = "/redrose/ExamDetailsProcess/searchHallTicketDetails";
 		form1.method = "POST";
 		form1.submit();
 
@@ -361,7 +361,7 @@ background-color:rgba(0, 0, 0, 0);
 	
 	function printPreview() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/ExamDetailsProcess/printPreviewHallTicket";
+		form1.action = "/redrose/ExamDetailsProcess/printPreviewHallTicket";
 		form1.method = "POST";
 		form1.submit();
 
@@ -479,7 +479,7 @@ background-color:rgba(0, 0, 0, 0);
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/redrose/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -657,22 +657,22 @@ for(Cookie cookie : cookies){
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
 						<th title="click to sort" class="headerText">Exam<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/roshan/css/dataTable/images/sort_both.png" /></th>
+							src="/redrose/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Class<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/roshan/css/dataTable/images/sort_both.png" /></th>
+							src="/redrose/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Subject<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/roshan/css/dataTable/images/sort_both.png" /></th>
+							src="/redrose/css/dataTable/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Date<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/roshan/css/dataTable/images/sort_both.png" /></th>
+							src="/redrose/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Start Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/roshan/css/dataTable/images/sort_both.png" /></th>
+							src="/redrose/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">End Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/roshan/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+							src="/redrose/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
 
 					</tr>
