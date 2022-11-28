@@ -219,7 +219,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jasmine/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -259,7 +259,7 @@ for(Cookie cookie : cookies){
          <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/roshan/images/roshanfees.jpg" width="140" height="70"/></td>
+				<td><img src="/jasmine/images/logo.jpg" width="77" height="70"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname} - ${branchcode}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
@@ -337,7 +337,7 @@ for(Cookie cookie : cookies){
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><img src="/roshan/images/roshanhallticketsign.jpg" width="100" height="50"/></td>
+							<td><img src="/jasmine/images/jasminehallticketsign.jpg" width="100" height="50"/></td>
 						</tr>
 				<tr>
 				<td></td>

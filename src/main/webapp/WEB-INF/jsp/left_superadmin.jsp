@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/roshan/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
+        <script language="JavaScript" src="/jasmine/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/jasmine/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/jasmine/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/roshan/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/roshan/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/roshan/css/font-awesome.css">
+        <script type="text/javascript" src="/jasmine/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/jasmine/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/jasmine/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/jasmine/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/jasmine/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/jasmine/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/jasmine/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/jasmine/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/jasmine/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -414,7 +414,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jasmine/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -437,31 +437,31 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/StudentProcess/viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/jasmine/StudentProcess/viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-				<a target="mainFrame" href="/roshan/feesCollectionDetails" style="font-size: 12px;">Fees Details</a><br/>
+				<a target="mainFrame" href="/jasmine/feesCollectionDetails" style="font-size: 12px;">Fees Details</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/StudentProcess/archiveViewAll" >Archive Students</a><br/>
-                <a target="mainFrame" href="/roshan/ClassProcess/viewGraduated" >Graduated Students</a><br/>
-                <a target="mainFrame" href="/roshan/ClassProcess/viewDropped" >Dropped Out Students</a><br/>
-                <a target="mainFrame" href="/roshan/ClassProcess/viewLeftOut" >Left Out Students</a><br/>
+                <a target="mainFrame" href="/jasmine/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/jasmine/ClassProcess/viewGraduated" >Graduated Students</a><br/>
+                <a target="mainFrame" href="/jasmine/ClassProcess/viewDropped" >Dropped Out Students</a><br/>
+                <a target="mainFrame" href="/jasmine/ClassProcess/viewLeftOut" >Left Out Students</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-                <a target="mainFrame" href="/roshan/changePassword" style="font-size: 12px;">Change Password</a><br/>
+                <a target="mainFrame" href="/jasmine/changePassword" style="font-size: 12px;">Change Password</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
             <div >
-                <a target="mainFrame" href="/roshan/sendsms_superadmin" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="/jasmine/sendsms_superadmin" style="font-size: 12px;">SMS</a><br/>
             </div>
            
             </div>

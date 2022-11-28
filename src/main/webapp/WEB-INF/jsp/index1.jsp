@@ -57,11 +57,11 @@
     </head>
 
     <frameset    rows="139,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="/roshan/header1"   name="topFrame" scrolling="NO" noresize frameborder="0">
+        <frame   src="/jasmine/header1"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="175,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/roshan/left" name="leftFrame" scrolling="NO"  frameborder="1"   />
-                <frame src="/roshan/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
+                <frame  src="/jasmine/left" name="leftFrame" scrolling="NO"  frameborder="1"   />
+                <frame src="/jasmine/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
             </frameset>
 
    

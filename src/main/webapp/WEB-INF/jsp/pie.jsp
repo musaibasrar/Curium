@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/roshan/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-         <link rel="stylesheet" href="/roshan/css/scss.css">
-        <link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
+        <script language="JavaScript" src="/jasmine/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/jasmine/css/datePicker/jquery-ui-1.8.18.custom.css">
+         <link rel="stylesheet" href="/jasmine/css/scss.css">
+        <link rel="stylesheet" href="/jasmine/css/datePicker/demos.css">
 
-        <script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/roshan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/roshan/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/roshan/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/jasmine/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/jasmine/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/jasmine/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/jasmine/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/jasmine/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/jasmine/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/jasmine/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
         var donut = document.getElementById('donut');
@@ -335,7 +335,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jasmine/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

@@ -15,34 +15,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Details Fees Structure</title>
 
-        <script type="text/javascript" language="JavaScript" src="/roshan/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/roshan/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/jasmine/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/jasmine/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/jasmine/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
-        <script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/jasmine/css/datePicker/demos.css">
+        <script type="text/javascript" src="/jasmine/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/roshan/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/jasmine/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/jasmine/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/jasmine/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/jasmine/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/jasmine/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/jasmine/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/jasmine/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/jasmine/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/jasmine/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
         .dataText {
@@ -374,7 +374,7 @@
             function searchLeaveDetails() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/roshan/HrProcess/leaveDetailsPerYear";
+                form1.action = "/jasmine/HrProcess/leaveDetailsPerYear";
                 form1.submit();
 
             }
@@ -382,7 +382,7 @@
             function deleteRecord() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/roshan/FeesProcess/deleteFeesCategory";
+                form1.action = "/jasmine/FeesProcess/deleteFeesCategory";
                 form1.submit();
 
             }
@@ -395,7 +395,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jasmine/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -604,7 +604,7 @@ for(Cookie cookie : cookies){
         
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/roshan/StudentProcess/ViewAll";
+                form1.action="/jasmine/StudentProcess/ViewAll";
                 form1.submit();
             }
         </script>

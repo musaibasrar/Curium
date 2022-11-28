@@ -167,9 +167,9 @@ span{
             }
         }
     </style>
-	<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/roshan/js/print/jquery.printPage.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/jasmine/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/jasmine/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/jasmine/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {
@@ -316,7 +316,7 @@ span{
 			
 		</TABLE>
 		
-		<%-- <a id="print" href="/roshan/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
+		<%-- <a id="print" href="/jasmine/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
 	</form>
 	
 	
