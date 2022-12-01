@@ -14,10 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/roshan/css/bootstrap.min.css">
-        <script src="/roshan/js/jquery.min.js"></script>
-        <script src="/roshan/js/bootstrap.min.js"></script>
-        <script src="/roshan/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/lilyrose/css/bootstrap.min.css">
+        <script src="/lilyrose/js/jquery.min.js"></script>
+        <script src="/lilyrose/js/bootstrap.min.js"></script>
+        <script src="/lilyrose/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -92,7 +92,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/roshan/UserProcess/logout";
+                form1.action="/lilyrose/UserProcess/logout";
                 form1.submit();
             }
 
@@ -102,7 +102,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/lilyrose/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -125,79 +125,79 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/roshan/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
+								<a target="mainFrame" href="/lilyrose/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/roshan/images/roshanheader.png"
+							<!-- <td align="left"><img src="/lilyrose/images/lilyroseheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/roshan/left_officeadmin"> <img
-									src="/roshan/images/home.svg" width="18" height="18" 
+							<td><a target="leftFrame" href="/lilyrose/left_officeadmin"> <img
+									src="/lilyrose/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="/roshan/FeesProcess/feesCollect"> <img
-									src="/roshan/images/feescollect.svg" width="18" height="18"
+								href="/lilyrose/FeesProcess/feesCollect"> <img
+									src="/lilyrose/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
 							<td>
 								<a target="mainFrame"
-								href="/roshan/AccountProcess/createVoucher"> <img
-									src="/roshan/images/createvoucher.svg" width="18" height="18"
+								href="/lilyrose/AccountProcess/createVoucher"> <img
+									src="/lilyrose/images/createvoucher.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/roshan/feesCollectionDetails"><img  alt="Fees Details" src="/roshan/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+							<!-- <td ><a target="mainFrame" href="/lilyrose/feesCollectionDetails"><img  alt="Fees Details" src="/lilyrose/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
-								href="/roshan/StudentProcess/addNew"> <img
-									src="/roshan/images/student_header.svg" width="18" height="18"
+								href="/lilyrose/StudentProcess/addNew"> <img
+									src="/lilyrose/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/roshan/leftsettings_officeadmin">
-									<img alt="Settings" src="/roshan/images/settings.svg" width="18"
+							<td ><a target="leftFrame" href="/lilyrose/leftsettings_officeadmin">
+									<img alt="Settings" src="/lilyrose/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
 							<td ><a target="mainFrame"
-								href="/roshan/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/roshan/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+								href="/lilyrose/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/lilyrose/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
 
-							<td ><!-- <a target="mainFrame" href="/roshan/sendsms"><img
-									src="/roshan/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+							<td ><!-- <a target="mainFrame" href="/lilyrose/sendsms"><img
+									src="/lilyrose/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/roshan/reports_officeadmin"><img
-									src="/roshan/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+								<a target="leftFrame" href="/lilyrose/reports_officeadmin"><img
+									src="/lilyrose/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
 							
 							</td>
 
 							<td ><a target="mainFrame"
-								href="/roshan/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/roshan/images/students.svg" width="18"
+								href="/lilyrose/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/lilyrose/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
 							</a></td>
 							
 							<!-- <td ><a target="mainFrame"
-								href="/roshan/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/roshan/images/dashboard.svg" width="18"
+								href="/lilyrose/UserProcess/dashBoard"><img
+									alt="Dash Board" src="/lilyrose/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td> -->
 								
 							<td ><a target="_parent"
-								href="/roshan/UserProcess/logout"><img
-									src="/roshan/images/logout.svg" width="18" height="18" alt="Log Out" 
+								href="/lilyrose/UserProcess/logout"><img
+									src="/lilyrose/images/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>

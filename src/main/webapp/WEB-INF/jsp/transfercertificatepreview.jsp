@@ -167,9 +167,9 @@ span{
             }
         }
     </style>
-	<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/roshan/js/print/jquery.printPage.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/lilyrose/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/lilyrose/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/lilyrose/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Transfer Certificate</title>
         <script type="text/javascript">
              $(function() {
@@ -183,7 +183,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/lilyrose/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -331,11 +331,11 @@ for(Cookie cookie : cookies){
 			</tr>
 			
 			<tr>
-                        <td align="center"><a id="print" href="/roshan/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>
+                        <td align="center"><a id="print" href="/lilyrose/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>
                     </tr>
 		</TABLE>
 		
-		<%-- <a id="print" href="/roshan/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
+		<%-- <a id="print" href="/lilyrose/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
 	</form>
 	
 	

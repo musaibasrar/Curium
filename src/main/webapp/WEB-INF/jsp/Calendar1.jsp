@@ -8,7 +8,7 @@ pageEncoding="ISO-8859-1"%>
 <head>
 <title>CBSE Calendar</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/roshan/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="/lilyrose/css/screen.css" />
 
 
 <link rel='stylesheet' type='text/css' href='/css/fullcalendar.css' />
@@ -76,7 +76,7 @@ return value;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/lilyrose/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -117,7 +117,7 @@ Appointments for
 
 
 <div id="addAppointment">
-<form id="appointment" action="/roshan/appointment" method="POST">
+<form id="appointment" action="/lilyrose/appointment" method="POST">
 <h2>new Appointment</h2>
 
 <font color="red">
@@ -180,7 +180,7 @@ pageEncoding="ISO-8859-1"%>
 <head>
 <title>CBSE Calendar</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/roshan/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="/lilyrose/css/screen.css" />
 
 
 <link rel='stylesheet' type='text/css' href='resources/fullcalendar/fullcalendar.css' />
@@ -273,7 +273,7 @@ Appointments for
 
 
 <div id="addAppointment">
-<form id="appointment" action="/roshan/appointment" method="POST">
+<form id="appointment" action="/lilyrose/appointment" method="POST">
 <h2>new Appointment</h2>
 
 <font color="red">

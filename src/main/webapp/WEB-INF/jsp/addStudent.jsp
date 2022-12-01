@@ -20,22 +20,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Student</title>
-<link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/roshan/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/lilyrose/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/lilyrose/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/roshan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/roshan/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/lilyrose/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/lilyrose/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/lilyrose/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/lilyrose/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/lilyrose/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/lilyrose/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/lilyrose/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/lilyrose/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/lilyrose/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
+	src="/lilyrose/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/lilyrose/css/datePicker/demos.css">
 
 
 
@@ -273,10 +273,10 @@
 
 
 
-<script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/lilyrose/js/datetimepicker_css.js"></script>
 
-<script src="/roshan/JavaScript/actb.js"></script>
-<script src="/roshan/JavaScript/common.js"></script>
+<script src="/lilyrose/JavaScript/actb.js"></script>
+<script src="/lilyrose/JavaScript/common.js"></script>
 
 
 
@@ -552,7 +552,7 @@
 	//allow access only if session exists
 	String user = null;
 	if (session.getAttribute("userAuth") == null) {
-		response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+		response.sendRedirect("/lilyrose/UserProcess/sessionTimeOut");
 	} else
 		user = (String) session.getAttribute("userAuth");
 	String userName = null;
@@ -1902,14 +1902,14 @@
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/roshan/StudentProcess/AddStudent";
+									form1.action = "/lilyrose/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/roshan/StudentProcess/viewAll";
+								form1.action = "/lilyrose/StudentProcess/viewAll";
 								form1.submit();
 							}
 
