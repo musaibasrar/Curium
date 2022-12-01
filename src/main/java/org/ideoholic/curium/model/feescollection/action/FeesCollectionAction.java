@@ -137,9 +137,4 @@ public class FeesCollectionAction {
 	    return "printReceiptFeesDetail";
 	    }
 	    
-	    @GetMapping("/printFeesReceipt")
-        private String printFeesReceipt() {
-            new FeesCollectionService(request, response).previewDetails();
-	    return "printReceiptFeesDetail";
-	    }
 }
