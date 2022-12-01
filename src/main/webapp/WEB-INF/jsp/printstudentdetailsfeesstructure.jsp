@@ -226,7 +226,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/redrose/images/redrosefees.jpg" width="90" height="60"/>
+				<img src="/redrose/images/logo.jpg" width="53" height="60"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				

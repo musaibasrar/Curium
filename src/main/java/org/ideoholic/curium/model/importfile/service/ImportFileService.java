@@ -90,20 +90,27 @@ public class ImportFileService {
 
 						}
 					}
-					student.setAdmissionnumber(row.getCell(0).getStringCellValue());
-					student.setStudentexternalid(row.getCell(1).getStringCellValue());
+					student.setAdmissionnumber(row.getCell(47).getStringCellValue());
+					student.setStudentexternalid(row.getCell(0).getStringCellValue());
+					student.setSts(row.getCell(1).getStringCellValue());
 					// student.setRegistrationnumber(row.getCell(1).getStringCellValue());
 					student.setName(row.getCell(2).getStringCellValue());
 					student.setGender(row.getCell(3).getStringCellValue());
-					student.setDateofbirth(DateUtil.simpleDateParser(
-							(row.getCell(16).getStringCellValue()) + "/" + (row.getCell(17).getStringCellValue())
-									+ "/" + (row.getCell(18).getStringCellValue())));
+					/*
+					 * student.setDateofbirth(DateUtil.simpleDateParser(
+					 * (row.getCell(16).getStringCellValue()) + "/" +
+					 * (row.getCell(17).getStringCellValue()) + "/" +
+					 * (row.getCell(18).getStringCellValue())));
+					 */
 					student.setAge(Integer.parseInt(row.getCell(5).getStringCellValue()));
 					student.setPlaceofbirth(row.getCell(6).getRawValue());
-					student.setAdmissiondate(DateUtil.simpleDateParser(
-							(row.getCell(19).getStringCellValue()) + "/" + (row.getCell(20).getStringCellValue())
-									+ "/" + (row.getCell(21).getStringCellValue())));
-					student.setClassstudying(row.getCell(8).getStringCellValue());
+					/*
+					 * student.setAdmissiondate(DateUtil.simpleDateParser(
+					 * (row.getCell(19).getStringCellValue()) + "/" +
+					 * (row.getCell(20).getStringCellValue()) + "/" +
+					 * (row.getCell(21).getStringCellValue())));
+					 */
+					student.setClassstudying(row.getCell(8).getStringCellValue()+"--");
 					// student.setClassadmittedin(row.getCell(9).getStringCellValue());
 					student.setBloodgroup(row.getCell(9).getStringCellValue());
 					student.setMothertongue(row.getCell(10).getStringCellValue());
@@ -130,8 +137,8 @@ public class ImportFileService {
 					student.setLeftout(0);
 					//student.setStudentexternalid(DataUtil.generateString(5));
 					student.setLeftout(0);
-					student.setYearofadmission("2021/22");
-					student.setPromotedyear("2021/22");
+					//student.setYearofadmission("2022/23");
+					student.setPromotedyear("2022/23");
 					
 					parent.setFathersname(row.getCell(25).getStringCellValue());
 					// parent.setFatheroccupation(row.getCell(26).getStringCellValue());

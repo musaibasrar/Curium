@@ -178,7 +178,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 10px;">
-				<img src="/redrose/images/redrosefees.jpg" width="90" height="60"/>
+				<img src="/redrose/images/logo.jpg" width="53" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
@@ -363,7 +363,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 10px;">
-				<img src="/redrose/images/redrosefees.jpg" width="90" height="60"/>
+				<img src="/redrose/images/logo.jpg" width="53" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>

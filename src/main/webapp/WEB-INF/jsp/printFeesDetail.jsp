@@ -12,7 +12,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-<title>FEES RECIEPT</title>
+<title>FEES RECEIPT</title>
 <head>
 <style type="text/css">
 .dataText {
@@ -177,17 +177,14 @@
 			<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 10px;">
-				<img src="/redrose/images/redrosefees.jpg" width="90" height="60"/>
+				<td align="left" style="padding-left: 130px;">
+				<img src="/redrose/images/logo.jpg" width="60" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left: 50px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 10px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
-				<td align="left" style="padding-right: 10px;">
-				<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="90" height="60">
-				</td> 
 			</tr>
 </table>
 
@@ -352,8 +349,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
-		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${recieptdate}</td>
-		<td><img src="/redrose/images/redrosepaytm.jpeg" width="70" height="65"/></td>
+		&nbsp;&nbsp;Date&nbsp;${recieptdate}</td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -362,17 +358,14 @@
 		<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 10px;">
-				<img src="/redrose/images/redrosefees.jpg" width="90" height="60"/>
+				<td align="left" style="padding-left: 130px;">
+				<img src="/redrose/images/logo.jpg" width="60" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left: 50px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 10px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
-				<td align="left" style="padding-right: 10px;">
-				<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="90" height="60">
-				</td> 
 			</tr>
 </table>
 
@@ -475,7 +468,6 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-			
 			</table>
 			
 			
@@ -538,8 +530,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
-		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${recieptdate}</td>
-		<td><img src="/redrose/images/redrosepaytm.jpeg" width="70" height="65"/></td>
+		&nbsp;&nbsp;Date&nbsp;${recieptdate}</td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>

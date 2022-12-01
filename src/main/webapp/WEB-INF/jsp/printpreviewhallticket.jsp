@@ -259,7 +259,7 @@ for(Cookie cookie : cookies){
          <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/redrose/images/redrosefees.jpg" width="140" height="70"/></td>
+				<td><img src="/redrose/images/logo.jpg" width="62" height="70"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname} - ${branchcode}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
