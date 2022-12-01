@@ -177,13 +177,13 @@ public class SubjectDetailsDAO {
 	}
 	
 	
-	public List<Subject> readAllSubjectsClassWise(int branchId, String examClass) {
+	public List<Subject> readAllSubjectsClassWise(int branchId, String examClass, String examName) {
 		
 		List<Subject> results = new ArrayList<Subject>();
 		try {
 
 			transaction = session.beginTransaction();
-			results = (List<Subject>) session.createQuery("From Subject where examclass='"+examClass+"' and branchid="+branchId)
+			results = (List<Subject>) session.createQuery("From Subject where examclass='"+examClass+"' and examname='"+examName+"' and branchid="+branchId)
 					.list();
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
