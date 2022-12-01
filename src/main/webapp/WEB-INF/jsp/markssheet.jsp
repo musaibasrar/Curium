@@ -236,12 +236,10 @@ for(Cookie cookie : cookies){
                         <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
                         	<table style="page-break-inside: avoid;border-collapse: collapse;">
 			<tr>
-				<td width="10%"></td>
-				<td><img src="/shadaan/images/shadaanheader.png" width="190" height="60"/></td>
-				<td width="5%"></td>
+				<td style="padding-left: 200px;"><img src="/shadaan/images/shadaanfees.jpg" width="100" height="80"/></td>
 				<td>
-				<label class="dataTextBoldCenter">Divine M.A. Independent P.U. College </label><br>
-				<label class="addressLine">Astana Road, Nai Kaman, Bidar. Ph.No- +91-8095248270</label>
+				<label class="dataTextBoldCenter">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label>
 				</td>
 			</tr>
 			<tr>
