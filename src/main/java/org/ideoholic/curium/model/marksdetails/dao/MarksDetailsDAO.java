@@ -135,12 +135,12 @@ public class MarksDetailsDAO {
 			return result;
 		}
 
-		public List<Marks> readMarksforStudent(int id, String currentAcademicYear) {
+		public List<Marks> readMarksforStudent(int id, String currentAcademicYear, int examId) {
 			List<Marks> results = new ArrayList<Marks>();
 			try {
 
 				transaction = session.beginTransaction();
-				Query query = session.createQuery("From Marks where sid = '"+id+"' and academicyear = '"+currentAcademicYear+"' ORDER BY examid,subid ASC");
+				Query query = session.createQuery("From Marks where sid = '"+id+"' and academicyear = '"+currentAcademicYear+"' and examid = '"+examId+"' ORDER BY examid,subid ASC");
 				results = query.list();
 				transaction.commit();
 			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
