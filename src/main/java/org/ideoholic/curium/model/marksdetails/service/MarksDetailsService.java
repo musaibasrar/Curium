@@ -467,10 +467,9 @@ public class MarksDetailsService {
 			String[] studentIds = request.getParameterValues("studentIDs");
 			String examC = request.getParameter("examclass");
 			String[] examClass = examC.split("--");
-			String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
-			String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
+			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
+			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0]);
 			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 
 			for (int i = 0; i < studentIds.length; i++) {
@@ -478,8 +477,6 @@ public class MarksDetailsService {
 				List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
 				Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
 				markssheet.setParents(studentDetails);
-				
-				List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 				
 				for (Exams exam : examsList) {
 						
@@ -490,14 +487,24 @@ public class MarksDetailsService {
 					int totalObtainedMarks = 0;
 					int totalMarks = 0;
 					
+					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),exam.getExid());
+					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname());
+					
+					
 					for (Marks marks : marksDetailsList) {
-						
-						if(exam.getExid() == marks.getExamid()) {
+							
+							int examId = exam.getExid();
+							int marksExamId = marks.getExamid();
+							
+						if( examId == marksExamId) {
 									present = true;
 									
 								for (Subject sub : subjectList) {
 									
-									if(marks.getSubid()==sub.getSubjectid()) {
+									int marksSubid = marks.getSubid();
+									int subjectId = sub.getSubjectid();
+									
+									if(marksSubid == subjectId) {
 										
 										if( marks.getMarksobtained() < sub.getMinmarks()) {
 											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_F");
