@@ -25,7 +25,7 @@
 		<jfreechart.version>1.5.0</jfreechart.version>
 		<commons.fileupload.version>1.3.3</commons.fileupload.version>
 		<commons.email.version>1.5</commons.email.version>
-		<commons.net.version>3.6</commons.net.version>
+		<commons.net.version>3.9.0</commons.net.version>
 		<!-- automatically run annotation processors within the incremental compilation -->
 		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
 	</properties>
