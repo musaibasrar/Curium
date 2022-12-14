@@ -97,8 +97,8 @@ public class ImportFileService {
 
 							}
 						}
-						student.setAdmissionnumber(row.getCell(0).getStringCellValue());
-						// student.setRegistrationnumber(row.getCell(1).getStringCellValue());
+						student.setAdmissionnumber(row.getCell(47).getStringCellValue());
+						student.setStudentexternalid(row.getCell(0).getStringCellValue());
 						student.setName(row.getCell(2).getStringCellValue());
 						student.setGender(row.getCell(3).getStringCellValue());
 						student.setDateofbirth(DateUtil.simpleDateParser(
