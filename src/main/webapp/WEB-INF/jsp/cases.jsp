@@ -567,14 +567,14 @@
         	function dispose(disposedate,disposefiletaken,disposefiletakenby,disposefiletakenbyname,disposefiletakenbycontact){
         		
           	  	var ddate = disposedate.value;
-          	  	var fileTaken = disposefiletaken;
+          	  	var fileTaken;
 	          	  for (var checkbox of disposefiletaken)
 	              {
 	                  if (checkbox.checked) {
 	                	  fileTaken=checkbox.value;
 	                  }
 	              }
-          	    var fileTakeBy = disposefiletakenby;
+          	    var fileTakeBy;
 	          	  for (var checkbox of disposefiletakenby)
 	              {
 	                  if (checkbox.checked) {

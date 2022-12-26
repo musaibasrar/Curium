@@ -394,33 +394,29 @@
 
 	<script type="text/javascript">
 		function completeTasks() {
-			var jobId = document.getElementById("jobid").value;
 			var form1 = document.getElementById("form1");
-			form1.action = "/sla/QueryProcess/completeTasks?jobid="+jobId+"&display=viewall";
+			form1.action = "/sla/QueryProcess/completeTasks?display=viewall";
 			form1.method = "POST";
 			form1.submit();
 		}
 		
 		function cancelTasks() {
-			var jobId = document.getElementById("jobid").value;
 			var form1 = document.getElementById("form1");
-			form1.action = "/sla/QueryProcess/cancelTasks?jobid="+jobId+"&display=viewall";
+			form1.action = "/sla/QueryProcess/cancelTasks?display=viewall";
 			form1.method = "POST";
 			form1.submit();
 		}
 		
 		function inProgressTasks() {
-			var jobId = document.getElementById("jobid").value;
 			var form1 = document.getElementById("form1");
-			form1.action = "/sla/QueryProcess/inProgressTasks?jobid="+jobId+"&display=viewall";
+			form1.action = "/sla/QueryProcess/inProgressTasks?display=viewall";
 			form1.method = "POST";
 			form1.submit();
 		}
 		
 		function toDoTasks() {
-			var jobId = document.getElementById("jobid").value;
 			var form1 = document.getElementById("form1");
-			form1.action = "/sla/QueryProcess/toDoTasks?jobid="+jobId+"&display=viewall";
+			form1.action = "/sla/QueryProcess/toDoTasks?display=viewall";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -648,7 +644,7 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${taskdetails}" var="task" varStatus="status">
                             <tr class="trClass" style="border-color:#000000" border="1">
                             	
-                            	<td class="dataText"><input type="checkbox" id = "<c:out value="${task.id}"/>" class = "chcktbl"  name="taskids"  value="<c:out value="${task.id}"/>"/></td>
+                            	<td class="dataText"><input type="checkbox" id = "<c:out value="${task.id}"/>" class = "chcktbl"  name="taskids"  value="<c:out value="${task.id}_${task.jobquery.id}"/>"/></td>
                             	<td class="dataText"><c:out value="${task.id}"/> <input type="hidden" id="jobid" name="jobid" value="${task.jobquery.id}">
                             	<input type="hidden" id="username" name="username" value="${username}"> </td>
                             	<c:if test="${task.status == 'To Do' }">

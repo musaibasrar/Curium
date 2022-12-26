@@ -24,10 +24,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.job.dao.JobDAO;
 import org.ideoholic.curium.model.job.dto.JobQuery;
@@ -45,6 +48,7 @@ public class JobService {
 	private HttpSession httpSession;
 	private static final int BUFFER_SIZE = 4096;
 
+	private static final Logger logger = LogManager.getLogger(JobService.class);
 	public JobService(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
@@ -761,14 +765,17 @@ public class JobService {
 		int inProgress = -1;
 		int completed = 0;
 		String jobStatus = null;
+		String jobId = null;
 		
 		if(TaskIds!=null) {
 			for (String ids : TaskIds) {
-				TaskIdsList.add(Integer.parseInt(ids));
+				String[] tidJid = ids.split("_");
+				TaskIdsList.add(Integer.parseInt(tidJid[0]));
+				jobId = tidJid[1];
 			}
 			completed = TaskIdsList.size();
 			
-			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(request.getParameter("jobid")));
+			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(jobId));
 			int length = listTask.size();
 			
 			for (Task task : listTask) {
@@ -790,7 +797,7 @@ public class JobService {
 				jobStatus ="In Progress";
 			}
 			
-			result = new JobDAO().completeTasks(TaskIdsList, userId, jobStatus, Integer.parseInt(request.getParameter("jobid")));
+			result = new JobDAO().completeTasks(TaskIdsList, userId, jobStatus, Integer.parseInt(jobId));
 			String sendCompletedQuerySMS = new DataUtil().getPropertiesValue("sendcompletedquerysms");
 			
 			
@@ -829,7 +836,7 @@ public class JobService {
 				taskIdsList.add(Integer.parseInt(ids));
 			}
 			cancel=taskIdsList.size();
-			
+			logger.info("Cancel for the job id "+request.getParameter("jobid"));
 			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(request.getParameter("jobid")));
 			int length = listTask.size();
 			
@@ -882,16 +889,18 @@ public class JobService {
 		List<Task> result = new ArrayList<Task>();
 		int toDo = 0;
 		int inProgress = 0;
-		
+		String jobId = null;
 		String jobStatus = null;
 		
 		if(taskIds!=null) {
 			for (String ids : taskIds) {
-				taskIdsList.add(Integer.parseInt(ids));
+				String[] tidJid = ids.split("_");
+				taskIdsList.add(Integer.parseInt(tidJid[0]));
+				jobId = tidJid[1];
 			}
 			toDo = taskIdsList.size();
-			
-			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(request.getParameter("jobid")));
+			logger.info("To do for the job id "+request.getParameter("jobid"));
+			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(jobId));
 			int length = listTask.size();
 			
 			for (Task task : listTask) {
@@ -919,7 +928,7 @@ public class JobService {
 				jobStatus ="In Progress";
 			}
 			
-			result = new JobDAO().toDoTasks(taskIdsList, userId, jobStatus, Integer.parseInt(request.getParameter("jobid")));
+			result = new JobDAO().toDoTasks(taskIdsList, userId, jobStatus, Integer.parseInt(jobId));
 			
 			if(!result.isEmpty()) {
 				request.setAttribute("querystatus",true);
@@ -936,13 +945,15 @@ public class JobService {
 		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
 		List<Integer> taskIdsList = new ArrayList<Integer>();
 		List<Task> result = new ArrayList<Task>();
+		String jobId = null;
 		
 		if(taskIds!=null) {
 			for (String ids : taskIds) {
-				taskIdsList.add(Integer.parseInt(ids));
+				String[] tidJid = ids.split("_");
+				taskIdsList.add(Integer.parseInt(tidJid[0]));
+				jobId = tidJid[1];
 			}
-			
-			result = new JobDAO().inProgressTasks(taskIdsList, userId, "In Progress", Integer.parseInt(request.getParameter("jobid")));
+			result = new JobDAO().inProgressTasks(taskIdsList, userId, "In Progress", Integer.parseInt(jobId));
 			
 			if(!result.isEmpty()) {
 				request.setAttribute("querystatus",true);

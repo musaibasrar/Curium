@@ -495,6 +495,10 @@
         				document.getElementById("onselectedcourts").style.display = '';
         				document.getElementById("onselectedcourtsdistrict").style.display = "none";
         				document.getElementById("onselectedcourtsrevenue").style.display = "none";
+	    			}else{
+	    				document.getElementById("onselectedcourts").style.display = "none";
+        				document.getElementById("onselectedcourtsdistrict").style.display = "none";
+        				document.getElementById("onselectedcourtsrevenue").style.display = "none";
 	    			}
 	    	}
     		
@@ -641,6 +645,94 @@ for(Cookie cookie : cookies){
 											<option value="RTIC">RTI Cases</option>
 											<option value="AOC">Any Other Court</option>
 										</select>
+									</label></td>
+								</tr>
+								
+								<tr>
+									<td><br></td>
+								</tr>
+								
+								<tr style="display: none;" id="onselectedcourtsdistrict">
+									<td class="alignLeft">Court Name:</td>
+									<td><label> <select class="myclass" name="districtcourtname" id="districtcourtname">
+												<option selected></option>
+													<option value="PDJ">PRL District and Sessions Judge - PDJ</option>
+													<option value="DJ1">First Addl District and Sessions Judge - DJ1</option>
+													<option value="DJ2">Second Addl District and Sessions Judge - DJ2</option>
+													<option value="DJ3">Third Addl District and Sessions Judge - DJ3</option>
+													<option value="DJ4">Fourth Addl District and Sessions Judge - DJ4</option>
+													<option value="DJ5">Fifth Addl District and Sessions Judge - DJ5</option>
+													<option value="POCSO">POCSO Court - POCSO</option>
+													<option value="PFC">PRL Family Court - PFC</option>
+													<option value="FC1">First Addl Family Court - FC1</option>
+													<option value="LC">Labour Court - LC</option>
+													<option value="CC">Consumer Court - CC</option>
+													<option value="COMC">Commercial Court - COMC</option>
+													<option value="PLA">Permanent Lok Adalat - PLA</option>
+													<option value="JJB">Juvenile Justice Board - JJB</option>
+													<option value="PSCJ">PRL Senior Civil Judge and CJM - PSCJ</option>
+													<option value="SCJ1">First Addl Senior Civil Judge and CJM - SCJ1</option>
+													<option value="SCJ2">Second Addl Senior Civil Judge and CJM - SCJ2</option>
+													<option value="SCJ3">Third Addl Senior Civil Judge and CJM - SCJ3</option>
+													<option value="PCJ">PRL Civil Judge and JMFC - PCJ</option>
+													<option value="CJ1">First Addl Civil Judge and JMFC - CJ1</option>
+													<option value="CJ2">Second Addl Civil Judge and JMFC - CJ2</option>
+													<option value="CJ3">Third Addl Civil Judge and JMFC - CJ3</option>
+													<option value="CJ4">Fourth Addl Civil Judge and JMFC - CJ4</option>
+													<option value="CJ5">Fifth Addl Civil Judge and JMFC - CJ5</option>
+													<option value="SCJ Chitapur">Senior Civil Judge and CJM, Chitapur - SCJ Chitapur</option>
+													<option value="CJ Chitapur">Civil Judge and JMFC, Chitapur - CJ Chitapur</option>
+													<option value="CJ Shahabad">Civil Judge and JMFC, Shahabad - CJ Shahabad</option>
+													<option value="SCJ Jevargi">Senior Civil Judge and CJM, Jevargi - SCJ Jevargi</option>
+													<option value="CJ Jevargi">Civil Judge and JMFC, Jevargi - CJ Jevargi</option>
+													<option value="SCJ Afzalpur">Senior Civil Judge and CJM, Afzalpur - SCJ Afzalpur</option>
+													<option value="CJ Afzalpur">Civil Judge and JMFC, Afzalpur - CJ Afzalpur</option>
+													<option value="SCJ Aland">Senior Civil Judge and CJM, Aland - SCJ Aland</option>
+													<option value="PCJ Aland">PRL Civil Judge and JMFC, Aland - PCJ Aland </option>
+													<option value="SCJ Sedam">Senior Civil Judge and CJM, Sedam - SCJ Sedam</option>
+													<option value="CJ Sedam">Civil Judge and JMFC, Sedam - CJ Sedam</option>
+													<option value="SCJ Chincholi">Senior Civil Judge and CJM, Chincholi - SCJ Chincholi</option>
+													<option value="CJ Chincholi">Civil Judge and JMFC, Chincholi - CJ Chincholi</option>
+													<option value="DJ Yadgir">District and Sessions Judge, Yadgir - DJ Yadgir</option>
+													<option value="PSCJ Shorapur">PRL Senior Civil Judge and CJM, Shorapur - PSCJ Shorapur</option>
+													<option value="PCJ Shorapur">PRL Civil Judge and JMFC, Shorapur - PCJ Shorapur</option>
+													<option value="SCJ Shahapur">Senior Civil Judge and JMFC, Shahapur - SCJ Shorapur</option>
+													<option value="CJ Shahapur">Civil Judge and JMFC, Shahapur - CJ Shorapur</option>
+													<option value="SCJ Manvi">Senior Civil Judge and JMFC, Manvi - SCJ Manvi</option>
+													<option value="CJ Manvi">Civil Judge and JMFC, Manvi - CJ Manvi</option>
+										</select>
+									</label></td>
+								</tr>
+								
+								<tr style="display: none;" id="onselectedcourtsrevenue">
+									<td class="alignLeft">Court Name:</td>
+									<td><label> <select class="myclass" name="revenuecourtname" id="revenuecourtname">
+													<option selected></option>
+													<option value="KAT">Karnataka Appellate Tribunal - KAT</option>
+													<option value="RC">Rigional Commissioner - RC</option>
+													<option value="DC">Deputy Commissioner - DC</option>
+													<option value="AC">Assistant Commissioner - AC</option>
+													<option value="THS">Tahsildar - THS</option>
+													<option value="THS ALN">Tahsildar, Aland - THS ALN</option>
+													<option value="JDLR">Joint Director of Land Records - JDLR</option>
+													<option value="DDLR">Deputy Director of Land Records - DDLR</option>
+													<option value="ADLR">Assistant Director of Land Records - ADLR</option>
+													<option value="CCK">City Corporation Kalaburagi - CCK</option>
+													<option value="DC Raichur">Deputy Commissioner, Raichur - DC Raichur</option>
+													<option value="AC Raichur">Assitant Commissioner, Raichur - AC Raichur</option>
+													<option value="DDLR Raichur">Deputy Director of Land Records, Raichur - DDLR Raichur</option>
+													<option value="ADLR Raichur">Assistant Director of Land Records, Raichur - ADLR Raichur</option>
+													<option value="THS Manvi">Tahsildar, Manvi - THS Manvi</option>
+													<option value="TMC Manvi">Town Municipal Council, Manvi - TMC Manvi</option>
+													<option value="DC Bidar">Deputy Commissioner, Bidar - DC Bidar</option>
+													<option value="ARCS">Assistant Registrar of Co-operative Societies - ARCS</option>
+											</select>
+									</label></td>
+								</tr>
+								
+								<tr style="display: none;" id="onselectedcourts">
+									<td class="alignLeft">Court Name:</td>
+									<td><label> <input type="text" class="myclass" name="courtname" id="courtname">
 									</label></td>
 								</tr>
 								
@@ -952,94 +1044,6 @@ for(Cookie cookie : cookies){
 													<option value="1997">1997</option>
 													<option value="1996">1996</option>
 												</select>
-									</label></td>
-								</tr>
-								
-								<tr>
-									<td><br></td>
-								</tr>
-								
-								<tr style="display: none;" id="onselectedcourtsdistrict">
-									<td class="alignLeft">Court Name:</td>
-									<td><label> <select class="myclass" name="districtcourtname" id="districtcourtname">
-												<option selected></option>
-													<option value="PDJ">PRL District and Sessions Judge - PDJ</option>
-													<option value="DJ1">First Addl District and Sessions Judge - DJ1</option>
-													<option value="DJ2">Second Addl District and Sessions Judge - DJ2</option>
-													<option value="DJ3">Third Addl District and Sessions Judge - DJ3</option>
-													<option value="DJ4">Fourth Addl District and Sessions Judge - DJ4</option>
-													<option value="DJ5">Fifth Addl District and Sessions Judge - DJ5</option>
-													<option value="POCSO">POCSO Court - POCSO</option>
-													<option value="PFC">PRL Family Court - PFC</option>
-													<option value="FC1">First Addl Family Court - FC1</option>
-													<option value="LC">Labour Court - LC</option>
-													<option value="CC">Consumer Court - CC</option>
-													<option value="COMC">Commercial Court - COMC</option>
-													<option value="PLA">Permanent Lok Adalat - PLA</option>
-													<option value="JJB">Juvenile Justice Board - JJB</option>
-													<option value="PSCJ">PRL Senior Civil Judge and CJM - PSCJ</option>
-													<option value="SCJ1">First Addl Senior Civil Judge and CJM - SCJ1</option>
-													<option value="SCJ2">Second Addl Senior Civil Judge and CJM - SCJ2</option>
-													<option value="SCJ3">Third Addl Senior Civil Judge and CJM - SCJ3</option>
-													<option value="PCJ">PRL Civil Judge and JMFC - PCJ</option>
-													<option value="CJ1">First Addl Civil Judge and JMFC - CJ1</option>
-													<option value="CJ2">Second Addl Civil Judge and JMFC - CJ2</option>
-													<option value="CJ3">Third Addl Civil Judge and JMFC - CJ3</option>
-													<option value="CJ4">Fourth Addl Civil Judge and JMFC - CJ4</option>
-													<option value="CJ5">Fifth Addl Civil Judge and JMFC - CJ5</option>
-													<option value="SCJ Chitapur">Senior Civil Judge and CJM, Chitapur - SCJ Chitapur</option>
-													<option value="CJ Chitapur">Civil Judge and JMFC, Chitapur - CJ Chitapur</option>
-													<option value="CJ Shahabad">Civil Judge and JMFC, Shahabad - CJ Shahabad</option>
-													<option value="SCJ Jevargi">Senior Civil Judge and CJM, Jevargi - SCJ Jevargi</option>
-													<option value="CJ Jevargi">Civil Judge and JMFC, Jevargi - CJ Jevargi</option>
-													<option value="SCJ Afzalpur">Senior Civil Judge and CJM, Afzalpur - SCJ Afzalpur</option>
-													<option value="CJ Afzalpur">Civil Judge and JMFC, Afzalpur - CJ Afzalpur</option>
-													<option value="SCJ Aland">Senior Civil Judge and CJM, Aland - SCJ Aland</option>
-													<option value="PCJ Aland">PRL Civil Judge and JMFC, Aland - PCJ Aland </option>
-													<option value="SCJ Sedam">Senior Civil Judge and CJM, Sedam - SCJ Sedam</option>
-													<option value="CJ Sedam">Civil Judge and JMFC, Sedam - CJ Sedam</option>
-													<option value="SCJ Chincholi">Senior Civil Judge and CJM, Chincholi - SCJ Chincholi</option>
-													<option value="CJ Chincholi">Civil Judge and JMFC, Chincholi - CJ Chincholi</option>
-													<option value="DJ Yadgir">District and Sessions Judge, Yadgir - DJ Yadgir</option>
-													<option value="PSCJ Shorapur">PRL Senior Civil Judge and CJM, Shorapur - PSCJ Shorapur</option>
-													<option value="PCJ Shorapur">PRL Civil Judge and JMFC, Shorapur - PCJ Shorapur</option>
-													<option value="SCJ Shahapur">Senior Civil Judge and JMFC, Shahapur - SCJ Shorapur</option>
-													<option value="CJ Shahapur">Civil Judge and JMFC, Shahapur - CJ Shorapur</option>
-													<option value="SCJ Manvi">Senior Civil Judge and JMFC, Manvi - SCJ Manvi</option>
-													<option value="CJ Manvi">Civil Judge and JMFC, Manvi - CJ Manvi</option>
-										</select>
-									</label></td>
-								</tr>
-								
-								<tr style="display: none;" id="onselectedcourtsrevenue">
-									<td class="alignLeft">Court Name:</td>
-									<td><label> <select class="myclass" name="revenuecourtname" id="revenuecourtname">
-													<option selected></option>
-													<option value="KAT">Karnataka Appellate Tribunal - KAT</option>
-													<option value="RC">Rigional Commissioner - RC</option>
-													<option value="DC">Deputy Commissioner - DC</option>
-													<option value="AC">Assistant Commissioner - AC</option>
-													<option value="THS">Tahsildar - THS</option>
-													<option value="THS ALN">Tahsildar, Aland - THS ALN</option>
-													<option value="JDLR">Joint Director of Land Records - JDLR</option>
-													<option value="DDLR">Deputy Director of Land Records - DDLR</option>
-													<option value="ADLR">Assistant Director of Land Records - ADLR</option>
-													<option value="CCK">City Corporation Kalaburagi - CCK</option>
-													<option value="DC Raichur">Deputy Commissioner, Raichur - DC Raichur</option>
-													<option value="AC Raichur">Assitant Commissioner, Raichur - AC Raichur</option>
-													<option value="DDLR Raichur">Deputy Director of Land Records, Raichur - DDLR Raichur</option>
-													<option value="ADLR Raichur">Assistant Director of Land Records, Raichur - ADLR Raichur</option>
-													<option value="THS Manvi">Tahsildar, Manvi - THS Manvi</option>
-													<option value="TMC Manvi">Town Municipal Council, Manvi - TMC Manvi</option>
-													<option value="DC Bidar">Deputy Commissioner, Bidar - DC Bidar</option>
-													<option value="ARCS">Assistant Registrar of Co-operative Societies - ARCS</option>
-											</select>
-									</label></td>
-								</tr>
-								
-								<tr style="display: none;" id="onselectedcourts">
-									<td class="alignLeft">Court Name:</td>
-									<td><label> <input type="text" class="myclass" name="courtname" id="courtname">
 									</label></td>
 								</tr>
 								

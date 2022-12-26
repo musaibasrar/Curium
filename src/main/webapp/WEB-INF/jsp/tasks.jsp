@@ -394,33 +394,29 @@
 
 	<script type="text/javascript">
 		function completeTasks() {
-			var jobId = document.getElementById("jobid").value;
 			var form1 = document.getElementById("form1");
-			form1.action = "/sla/QueryProcess/completeTasks?jobid="+jobId+"&display=viewtask";
+			form1.action = "/sla/QueryProcess/completeTasks?display=viewtask";
 			form1.method = "POST";
 			form1.submit();
 		}
 		
 		function cancelTasks() {
-			var jobId = document.getElementById("jobid").value;
 			var form1 = document.getElementById("form1");
-			form1.action = "/sla/QueryProcess/cancelTasks?jobid="+jobId+"&display=viewtask";
+			form1.action = "/sla/QueryProcess/cancelTasks?display=viewtask";
 			form1.method = "POST";
 			form1.submit();
 		}
 		
 		function inProgressTasks() {
-			var jobId = document.getElementById("jobid").value;
 			var form1 = document.getElementById("form1");
-			form1.action = "/sla/QueryProcess/inProgressTasks?jobid="+jobId+"&display=viewtask";
+			form1.action = "/sla/QueryProcess/inProgressTasks?display=viewtask";
 			form1.method = "POST";
 			form1.submit();
 		}
 		
 		function toDoTasks() {
-			var jobId = document.getElementById("jobid").value;
 			var form1 = document.getElementById("form1");
-			form1.action = "/sla/QueryProcess/toDoTasks?jobid="+jobId+"&display=viewtask";
+			form1.action = "/sla/QueryProcess/toDoTasks?display=viewtask";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -658,7 +654,7 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${taskdetails}" var="task" varStatus="status">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                             	
-                            	<td class="dataText"><input type="checkbox" id = "<c:out value="${task.id}"/>" class = "chcktbl"  name="taskids"  value="<c:out value="${task.id}"/>"/></td>
+                            	<td class="dataText"><input type="checkbox" id = "<c:out value="${task.id}"/>" class = "chcktbl"  name="taskids"  value="<c:out value="${task.id}_${task.jobquery.id}"/>"/></td>
                             	<td class="dataText"><c:out value="${task.id}"/> <input type="hidden" id="jobid" name="jobid" value="${task.jobquery.id}">
                             	<input type="hidden" id="username" name="username" value="${username}"> </td>
                             	<c:if test="${task.status == 'To Do' }">
@@ -668,17 +664,17 @@ for(Cookie cookie : cookies){
                                 </c:if>
                                 <c:if test="${task.status == 'In Progress' }">
                                 	<td class="dataText" style="color: #0001ff;font-weight: bold;cursor: pointer;">
-                                		<a class="dataTextInActive" style="color: #cb1b09;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
+                                		<a class="dataTextInActive" style="color: #0001ff;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
                                 	</td>
                                 </c:if>
                                 <c:if test="${task.status == 'Completed' }">
                                 	<td class="dataText" style="color: #65a358;font-weight: bold;cursor: pointer;">
-                                		<a class="dataTextInActive" style="color: #cb1b09;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
+                                		<a class="dataTextInActive" style="color: #65a358;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
                                 	</td>
                                 </c:if>
                                 <c:if test="${task.status == 'Cancelled' }">
                                 	<td class="dataText" style="color: grey;font-weight: bold;cursor: pointer;">
-                                		<a class="dataTextInActive" style="color: #cb1b09;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
+                                		<a class="dataTextInActive" style="color: grey;font-weight: bold;cursor: pointer;" onclick="viewOneJobDetails(${task.jobquery.id})"><c:out value="${task.jobquery.externalid}"/></a>
                                 	</td>
                                 </c:if>
                                 <td class="dataText" style="text-align: left">

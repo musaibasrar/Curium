@@ -103,7 +103,7 @@ public class CasesService {
 					caseNoDetails = supremecourt+highcourt+ksatcourt+districtcourt+waqfcourt+rticourt+anyothercourt+revenuecourt+"_"+caseNo+"_"+caseYear;
 					cases.setCasenumber(caseNoDetails);
 					
-					cases.setCourtname(courtName+courtNameDistrict+courtNameDistrict);
+					cases.setCourtname(courtName+courtNameDistrict+courtNameRevenue);
 					cases.setAssignto(Integer.parseInt(dep[0]));
 					cases.setBranchid(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 					cases.setCreateddate(new Date());
