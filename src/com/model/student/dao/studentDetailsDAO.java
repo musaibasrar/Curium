@@ -1,6 +1,7 @@
 package com.model.student.dao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -55,8 +56,8 @@ public class studentDetailsDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public List<Student> readListOfObjectsPagination(int offset, int noOfRecords, int branchId) {
-		List<Student> results = new ArrayList<Student>();
+	public List<Object[]> readListOfObjectsPagination(int offset, int noOfRecords, int branchId) {
+		List<Object[]> results = new ArrayList<Object[]>();
 
 		try {
 			// this.session =
@@ -66,7 +67,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("FROM Student s where s.archive = 0 AND branchid="+branchId+" order by name ASC").setCacheable(true).setCacheRegion("commonregion");
+					.createQuery("select s.sid, s.registrationnumber, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from Student s JOIN Parents f ON s.sid=f.Student.sid where s.archive = 0 AND s.branchid="+branchId+" order by s.sid DESC").setCacheable(true).setCacheRegion("commonregion");
 			query.setFirstResult(offset);
 			query.setMaxResults(noOfRecords);
 			results = query.list();
@@ -91,11 +92,19 @@ public class studentDetailsDAO {
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
 
-			results = (List<Student>) session.createQuery("From Student where archive=0 AND passedout=0 AND droppedout=0 and leftout=0 AND branchid="+branchId).setCacheable(true).setCacheRegion("commonregion")
-					.list();
-			noOfRecords = results.size();
-			logger.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: "
-							+ noOfRecords);
+			/*
+			 * results = (List<Student>) session.
+			 * createQuery("From Student where archive=0 AND passedout=0 AND droppedout=0 and leftout=0 AND branchid="
+			 * +branchId).setCacheable(true).setCacheRegion("commonregion") .list();
+			 * noOfRecords = results.size();
+			 */
+			Query query = session.createQuery("select count(*) from Student where  archive=0 AND passedout=0 AND droppedout=0 and leftout=0 AND branchid="+branchId).setCacheable(true).setCacheRegion("commonregion");
+			noOfRecords = Integer.parseInt(query.uniqueResult().toString()); 
+			/*
+			 * System.out.
+			 * println("The size of list is:::::::::::::::::::::::::::::::::::::::::: " +
+			 * query.uniqueResult());
+			 */
 			transaction.commit();
 
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
@@ -482,6 +491,22 @@ public class studentDetailsDAO {
             transaction = session.beginTransaction();
             Query HQLquery = session.createQuery(query);
             student = HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        }finally {
+			HibernateUtil.closeSession();
+		 }
+        return student;
+	}
+	
+	public List<Object[]> getListStudentsObject(String query) {
+		List<Object[]> student = new ArrayList<Object[]>();
+        try {
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(query).setCacheable(true).setCacheRegion("commonregion");
+            student = (List<Object[]>)HQLquery.list();
             transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
