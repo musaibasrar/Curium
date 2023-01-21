@@ -105,8 +105,23 @@ public class FeesService {
 
                 boolean result = false;
                 try {
-                        List<Parents> list = new feesDetailsDAO().readListOfStudents(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-                        request.setAttribute("studentListFeesCollection", list);
+                        List<Object[]> list = new feesDetailsDAO().readListOfStudents(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                        
+                        List<Parents> parentDetails = new ArrayList<Parents>();
+                        for(Object[] parentdetails: list){
+                        	Parents parent = new Parents();
+                        	Student student = new Student();
+                            student.setSid((Integer)parentdetails[0]);
+                            student.setName((String)parentdetails[1]);
+                            student.setClassstudying((String)parentdetails[2]);
+                            student.setRegistrationnumber((String)parentdetails[3]);
+                            student.setAdmissionnumber((String)parentdetails[4]);
+                            parent.setFathersname((String)parentdetails[5]);
+                            parent.setStudent(student);
+                            parentDetails.add(parent);
+                        }
+                        
+                        request.setAttribute("studentListFeesCollection", parentDetails);
                         result = true;
                 } catch (Exception e) {
                         result = false;
