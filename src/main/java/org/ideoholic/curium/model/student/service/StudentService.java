@@ -1463,7 +1463,7 @@ public class StudentService {
 	            	Parents parent = new Parents();
 	            	Student student = new Student();
 	                student.setSid((Integer)parentdetails[0]);
-	                student.setRegistrationnumber((String)parentdetails[1]);
+	                student.setStudentexternalid((String)parentdetails[1]);
 	                student.setAdmissionnumber((String)parentdetails[2]);
 	                student.setName((String)parentdetails[3]);
 	                student.setClassstudying((String)parentdetails[4]);
@@ -1475,7 +1475,7 @@ public class StudentService {
 				
 				int noOfRecords = new studentDetailsDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-				request.setAttribute("studentList", list);
+				request.setAttribute("studentList", parentDetails);
 				request.setAttribute("noOfPages", noOfPages);
 				request.setAttribute("currentPage", page);
 				result = true;
