@@ -170,7 +170,7 @@ span{
         
         .subjectdetails{
         	border: 1px solid black;
-    		text-align: left;
+    		text-align: center;
    		    padding: 8px;
    		    font-size: 12px;
         }
@@ -238,24 +238,6 @@ for(Cookie cookie : cookies){
                         
                         <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
                         
-                        <table width="100%" style="border-collapse: collapse;">
-					
-				<tr>
-					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket<br>${examname}
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-				</tr>
-				<tr></tr>
-			</table>
-			<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
-                <tr>
-
-                    <td colspan="4" ></td>
-
-                </tr>
-            </TABLE>
          <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
@@ -276,6 +258,18 @@ for(Cookie cookie : cookies){
 
                 </tr>
             </TABLE>
+            
+            <table width="100%" style="border-collapse: collapse;">
+					
+				<tr>
+					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket<br>${examname}
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+				</tr>
+				<tr></tr>
+			</table>
 
 			<table style=" border-collapse: collapse;width: 100%;">
 											
@@ -308,6 +302,7 @@ for(Cookie cookie : cookies){
                             	<thead>
                             	<tr>
                             	<th class="subjectdetails">Date</th>
+                            	<th class="subjectdetails">Day</th>
                             	<th class="subjectdetails">Subject</th>
                             	<th class="subjectdetails">Time</th>
                             	<th class="subjectdetails">Examiner's Sign</th>
@@ -317,6 +312,7 @@ for(Cookie cookie : cookies){
                             	<c:forEach items="${examschedulelist}" var="examschedulelist">
                              	<tr>
                                 <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="dd/MM/yyyy"/></td>
+                                <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="E"/></td>
                                 <td class="subjectdetails"><c:out value="${examschedulelist.subject}"/></td>
                                 <td class="subjectdetails"><c:out value="${examschedulelist.starttime}"/>&nbsp;-&nbsp;<c:out value="${examschedulelist.endtime}"/></td>
                                 <td class="subjectdetails"></td>

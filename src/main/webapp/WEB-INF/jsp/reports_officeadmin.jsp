@@ -315,45 +315,45 @@ for(Cookie cookie : cookies){
             </div>
             
             
-              <!-- <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
+              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		
-            		<tr>
+            		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/roshan/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
-            		</tr>
+            		</tr> -->
             		
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/roshan/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
             			</td>
             		</tr>
             		
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/roshan/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>
             			</td>
             		</tr>
             		
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/roshan/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/roshan/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/roshan/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
             			</td>
             		</tr>
                 </table>
-            </div> -->
+            </div>
             
             
              <h5 class="sideaccordian" ><a href="#">Student Attendance</a></h5>
@@ -369,7 +369,7 @@ for(Cookie cookie : cookies){
             </div>
             
             
-             <!--  <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
+              <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		
@@ -379,7 +379,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div> -->
+            </div>
             
 
             <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
@@ -438,7 +438,7 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-            <!-- <h5 class="sideaccordian" ><a href="#" >Stock</a></h5>
+            <h5 class="sideaccordian" ><a href="#" >Stock</a></h5>
             
             <div style="padding-left: 0px;padding-right: 0px;">
             
@@ -464,7 +464,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             	</table>
-            </div> -->
+            </div>
             
             </div>
                    

@@ -174,7 +174,7 @@ for(Cookie cookie : cookies){
 									src="/roshan/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/roshan/reports"><img
+								<a target="leftFrame" href="/roshan/reports_officeadmin"><img
 									src="/roshan/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>

@@ -1,10 +1,11 @@
 <%-- 
-    Document   : index_superadmin
-    Created on : JUN 22, 2018, 7:38:37 PM
+    Document   : index
+    Created on : Dec 29, 2011, 5:42:37 PM
     Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -73,8 +74,9 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <frameset    rows="70,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="/roshan/header_superadmin"   name="topFrame" scrolling="NO" noresize frameborder="0">
+    <frameset    rows="55,*"frameborder="0" border="0" framespacing="0"  >
+    
+			    <frame   src="/roshan/header_superadmin"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
                 <frame  src="/roshan/left_superadmin" name="leftFrame" scrolling="yes"  frameborder="1"   />

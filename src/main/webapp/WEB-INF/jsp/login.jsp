@@ -124,7 +124,7 @@ form{
             if(flag1){
             	
             	if(type=='superadmin'){
-                    window.open('/index_superadmin','_self');
+                    window.open('/roshan/index_superadmin','_self');
                 }else if(type=='admin'){
                     window.open('/roshan/index_admin','_self');
                 }else if(type=='feescollector'){
