@@ -242,7 +242,6 @@ public class Student implements java.io.Serializable {
 	private String lastfirstlanguage;
 	private String lastsecondlanguage;
 	private String lastschooladdress;
-	private String registrationnumber;
 	private Pudetails pudetails;
 	private Degreedetails degreedetails;
 	
