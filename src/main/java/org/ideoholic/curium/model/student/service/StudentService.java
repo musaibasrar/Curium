@@ -567,7 +567,7 @@ public class StudentService {
 				page = Integer.parseInt(pages);
 			}
 
-			List<Student> list = new studentDetailsDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
+			List<Parents> list = new studentDetailsDAO().readListOfObjectsPaginationALL((page - 1) * recordsPerPage,
 					recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			int noOfRecords = new studentDetailsDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
@@ -1451,9 +1451,31 @@ public class StudentService {
 						page = Integer.parseInt(request.getParameter("page"));
 					}
 
-				List<Parents> list = new studentDetailsDAO().readListOfObjectsPaginationALL((page - 1) * recordsPerPage,
+					/*
+					 * List<Parents> list = new
+					 * studentDetailsDAO().readListOfObjectsPaginationALL((page - 1) *
+					 * recordsPerPage, recordsPerPage,
+					 * Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					 */
+				
+				List<Object[]> list = new studentDetailsDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
 						recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				request.setAttribute("studentList", list);
+				
+				List<Parents> parentDetails = new ArrayList<Parents>();
+	            for(Object[] parentdetails: list){
+	            	Parents parent = new Parents();
+	            	Student student = new Student();
+	                student.setSid((Integer)parentdetails[0]);
+	                student.setRegistrationnumber((String)parentdetails[1]);
+	                student.setAdmissionnumber((String)parentdetails[2]);
+	                student.setName((String)parentdetails[3]);
+	                student.setClassstudying((String)parentdetails[4]);
+	                parent.setFathersname((String)parentdetails[5]);
+	                parent.setMothersname((String)parentdetails[6]);
+	                parent.setStudent(student);
+	                parentDetails.add(parent);
+	            }
+				
 				int noOfRecords = new studentDetailsDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				request.setAttribute("studentList", list);
