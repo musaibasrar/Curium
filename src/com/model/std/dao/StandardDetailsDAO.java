@@ -274,7 +274,7 @@ public class StandardDetailsDAO {
 			// this.session =
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 			transaction = session.beginTransaction();
-			results = (java.util.List<Parents>) session.createQuery("From Parents p where p.Student.branchid="+branchId+" AND p.Student.classstudying LIKE '"+classofStd+"%' AND p.Student.archive=0 AND p.Student.passedout=0 AND p.Student.droppedout=0 and p.Student.leftout=0 and p.Student.promotedyear != '"+currentAcademicYear+"'").list();
+			results = (java.util.List<Parents>) session.createQuery("From Parents p where p.Student.branchid="+branchId+" AND p.Student.classstudying LIKE '"+classofStd+"%' AND p.Student.archive=0 AND p.Student.passedout=0 AND p.Student.droppedout=0 and p.Student.leftout=0 and (p.Student.promotedyear != '"+currentAcademicYear+"' or p.Student.promotedyear is NULL)").list();
 			transaction.commit();
 
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);

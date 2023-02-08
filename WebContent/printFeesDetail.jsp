@@ -218,8 +218,8 @@
 
 				
 
-				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
-						value="${recieptinfo.branchreceiptnumber}" />
+				<td class="dataTextBoldLeft" >&nbsp;Receipt No:&nbsp;<c:out
+						value="${recieptinfo.branchreceiptnumber}-${recieptinfo.academicyear}" />
 				</td>
 
 			</tr>
@@ -382,8 +382,8 @@
 
 				
 
-				<td class="dataTextBoldLeft" >&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
-						value="${recieptinfo.branchreceiptnumber}" />
+				<td class="dataTextBoldLeft" >&nbsp;Receipt No:&nbsp;<c:out
+						value="${recieptinfo.branchreceiptnumber}-${recieptinfo.academicyear}" />
 				</td>
 
 			</tr>

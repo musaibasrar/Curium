@@ -67,7 +67,7 @@ public class studentDetailsDAO {
 			// results = (List<PersonalDetails>)
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
-					.createQuery("select s.sid, s.registrationnumber, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from Student s JOIN Parents f ON s.sid=f.Student.sid where s.archive = 0 AND s.branchid="+branchId+" order by s.sid DESC").setCacheable(true).setCacheRegion("commonregion");
+					.createQuery("select s.sid, s.registrationnumber, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from Student s JOIN Parents f ON s.sid=f.Student.sid where s.archive = 0 and s.passedout=0 AND s.droppedout=0 and s.leftout=0 AND s.branchid="+branchId+" and (s.promotedyear='2022/23' or s.yearofadmission='2022/23') order by s.sid DESC").setCacheable(true).setCacheRegion("commonregion");
 			query.setFirstResult(offset);
 			query.setMaxResults(noOfRecords);
 			results = query.list();

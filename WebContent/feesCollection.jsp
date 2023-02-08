@@ -964,7 +964,7 @@ for(Cookie cookie : cookies){
                     <tr>
                     
                         <td class="alignLeft" style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" class="myclass" readonly/></td>
-                        <td class="alignLeft">Class & SEC : &nbsp;&nbsp;&nbsp;
+                        <td class="alignLeft">Class & SEC : &nbsp;&nbsp;
                         
                         		<select name="classandsecDetails"
 									id="classandsecDetails" style="width: 230px;border-radius: 4px;background: white;height: 28px;">
@@ -980,6 +980,9 @@ for(Cookie cookie : cookies){
                         
                         </td>
                         
+                    </tr>
+                    <tr>
+                    	<td class="alignLeft" style="width: 45%">Academic Year: &nbsp;&nbsp; <input  type="text" name="feesacademicyear" required id="feesacademicyear" readonly value="${feesacademicyear}" class="myclass" /> </td>
                     </tr>
                     <tr>
 						<td><br></td>
