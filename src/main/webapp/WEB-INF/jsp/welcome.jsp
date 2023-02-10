@@ -13,11 +13,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Dash Board</title>
-        <script src="/roshan/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/roshan/css/bootstrap.min.css">
-        <script src="/roshan/js/jquery.min.js"></script>
-        <script src="/roshan/js/bootstrap.min.js"></script>
-        <script src="/roshan/js/popper.min.js"></script>
+        <script src="/riyan/js/Chart.min.js"></script>
+         <link rel="stylesheet" href="/riyan/css/bootstrap.min.css">
+        <script src="/riyan/js/jquery.min.js"></script>
+        <script src="/riyan/js/bootstrap.min.js"></script>
+        <script src="/riyan/js/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
@@ -67,7 +67,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -111,8 +111,8 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;padding-left: 50px;"> 6529 </label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Ismail Ideal L.P.S </label><br>
         						<a target="_parent" style="padding-left: 40px;"
-        						 href="/roshan/UserProcess/multiUser?branchid=2"> <img
-									src="/roshan/images/login.svg" width="25" height="25" alt="Login" />Login</a>
+        						 href="/riyan/UserProcess/multiUser?branchid=2"> <img
+									src="/riyan/images/login.svg" width="25" height="25" alt="Login" />Login</a>
         					</td>
         				</tr>
         			</table>
@@ -126,8 +126,8 @@ for(Cookie cookie : cookies){
         					<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;padding-left: 80px;"> 6516 </label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Ismail Ideal Public School</label><br>
         						<a target="_parent" style="padding-left: 70px;"
-        						 href="/roshan/UserProcess/multiUser?branchid=3"> <img
-									src="/roshan/images/login.svg" width="25" height="25" alt="Login"/>Login</a>
+        						 href="/riyan/UserProcess/multiUser?branchid=3"> <img
+									src="/riyan/images/login.svg" width="25" height="25" alt="Login"/>Login</a>
         					</td>
         				</tr>
         			</table>
@@ -142,8 +142,8 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;padding-left: 80px;"> 6521 </label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Ismail Ideal Urdu High School</label><br>
         						<a target="_parent" style="padding-left: 70px;"
-        						 href="/roshan/UserProcess/multiUser?branchid=4"> <img
-									src="/roshan/images/login.svg" width="25" height="25" alt="Login"/>Login</a>
+        						 href="/riyan/UserProcess/multiUser?branchid=4"> <img
+									src="/riyan/images/login.svg" width="25" height="25" alt="Login"/>Login</a>
         					</td>
         				</tr>
         			</table>
@@ -159,8 +159,8 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;padding-left: 120px;"> 6533 </label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Ismail Ideal Higher & Primary School</label><br>
         						<a target="_parent" style="padding-left: 110px;"
-        						 href="/roshan/UserProcess/multiUser?branchid=5"> <img
-									src="/roshan/images/login.svg" width="25" height="25" alt="Login" />Login</a>
+        						 href="/riyan/UserProcess/multiUser?branchid=5"> <img
+									src="/riyan/images/login.svg" width="25" height="25" alt="Login" />Login</a>
         					</td>
         				</tr>
         			</table>
@@ -176,8 +176,8 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;padding-left: 100px;"> 6520 </label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> The Roshan Planet High School </label><br>
         						<a target="_parent" style="padding-left: 90px;"
-        						 href="/roshan/UserProcess/multiUser?branchid=6"> <img
-									src="/roshan/images/login.svg" width="25" height="25" alt="Login" />Login</a>
+        						 href="/riyan/UserProcess/multiUser?branchid=6"> <img
+									src="/riyan/images/login.svg" width="25" height="25" alt="Login" />Login</a>
         					</td>
         				</tr>
         			</table>
@@ -193,8 +193,8 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;padding-left: 130px;"> 6534 </label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> The Roshan Planet P.U. Science College </label><br>
         						<a target="_parent" style="padding-left: 120px;"
-        						 href="/roshan/UserProcess/multiUser?branchid=7"> <img
-									src="/roshan/images/login.svg" width="25" height="25" alt="Login" />Login</a>
+        						 href="/riyan/UserProcess/multiUser?branchid=7"> <img
+									src="/riyan/images/login.svg" width="25" height="25" alt="Login" />Login</a>
         					</td>
         				</tr>
         			</table>

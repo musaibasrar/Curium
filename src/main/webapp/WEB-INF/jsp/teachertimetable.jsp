@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Staff's List</title>
-<link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
+<link rel="stylesheet" href="/riyan/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/riyan/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -317,42 +317,42 @@
 }
 </style>
 
-<link rel="stylesheet" href="/roshan/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/riyan/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/riyan/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/riyan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/roshan/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/riyan/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/riyan/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/roshan/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/riyan/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/riyan/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -378,7 +378,7 @@
 	
 </script>
 
-<script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/riyan/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -524,7 +524,7 @@
 	 
 	function savePeriods() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/PeriodProcess/savePeriods";
+		form1.action = "/riyan/PeriodProcess/savePeriods";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -574,7 +574,7 @@
 	
 	function deleteRecord(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/PeriodProcess/deletePeriods";
+		form1.action = "/riyan/PeriodProcess/deletePeriods";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -586,7 +586,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -615,10 +615,10 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Staff Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/roshan/css/dataTable/images/sort_both.png" /></th>
+							src="/riyan/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Department<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/roshan/css/dataTable/images/sort_both.png" /></th>
+							src="/riyan/css/dataTable/images/sort_both.png" /></th>
 					</tr>
 				</thead>
 
@@ -629,7 +629,7 @@ for(Cookie cookie : cookies){
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
 							<td class="dataText"><input type="checkbox" id="<c:out value="${employeelist.tid}"/>" class="chcktbl" name="staffid" value="<c:out value="${employeelist.tid}"/>" /></td>
-							<td class="dataText"><a class="dataTextInActive" href="/roshan/PeriodProcess/viewTeacherTimeTable?teachername=<c:out value="${employeelist.teachername}" />"><c:out value="${employeelist.teachername}" /></a></td>
+							<td class="dataText"><a class="dataTextInActive" href="/riyan/PeriodProcess/viewTeacherTimeTable?teachername=<c:out value="${employeelist.teachername}" />"><c:out value="${employeelist.teachername}" /></a></td>
 							<td class="dataText"><c:out value="${employeelist.department}" /></td>
 						</tr>
 					</c:forEach>
