@@ -357,4 +357,14 @@ public class JspController {
 		return "printReceiptFeesDetail";
 	}
 	
+	@GetMapping("/billsreport")
+	public String getBillsreport() {
+		return "billsreport";
+	}
+	
+	@GetMapping("/bill")
+	public String getBill() {
+		return "bill";
+	}
+	
 }
