@@ -39,6 +39,12 @@
 			<property name="receiveddate" type="date">
           		  <column name="receiveddate" />
        		 </property>
+       		 <property name="sgst" type="java.lang.Float">
+            	<column name="sgst" />
+        	</property>
+        	<property name="cgst" type="java.lang.Float">
+            	<column name="cgst" />
+	        </property>
         	<many-to-one name="messinvoicedetails" class="org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails"
             column="invoicedetailsid" unique="true" not-null="true" lazy="false"
             cascade="all" />

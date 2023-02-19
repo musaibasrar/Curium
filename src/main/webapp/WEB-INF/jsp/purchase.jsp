@@ -18,8 +18,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Purchase Entry</title>
-<link rel="stylesheet" href="/newexcellent/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/newexcellent/css/datePicker/demos.css">
+<link rel="stylesheet" href="/riyan/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/riyan/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -407,17 +407,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/newexcellent/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/riyan/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/newexcellent/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/riyan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/newexcellent/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/newexcellent/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/riyan/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/newexcellent/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/newexcellent/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/newexcellent/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -503,7 +503,7 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/newexcellent/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/riyan/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	
 	function saveInventory() {
@@ -511,7 +511,7 @@
 		var form1 = document.getElementById("form1");
 		
 		if(form1.checkValidity()) {
-			form1.action="/newexcellent/MessItemsProcess/savePurchase";
+			form1.action = "/riyan/MessItemsProcess/savePurchase";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -521,7 +521,7 @@
 	function cancelPurchase() {
 			
 				var form1 = document.getElementById("form1");
-				form1.action="/newexcellent/MessItemsProcess/cancelPurchase";
+				form1.action = "/riyan/MessItemsProcess/cancelPurchase";
 				form1.method = "POST";
 				form1.submit();
 			
@@ -543,15 +543,27 @@
         }
     }
 	
-	 function calculate(value2) {
+	function calculate(value2) {
 
-      	var price=document.getElementById("price_"+value2).value;
+      	  var purchaseprice = document.getElementById("purchaseprice_"+value2).value;
+      	  var sgst=document.getElementById("sgst_"+value2).value;
+      	  var cgst=document.getElementById("cgst_"+value2).value;
       	
-      	        	
-          var final1=document.getElementById("linetotal_"+value2);
-          var quantity=document.getElementById("items_quantity_"+value2).value;
-          final1.value=price*quantity;
+      	  
+      	  var sgstpercentage = (sgst / 100) * purchaseprice;
+      	  var cgstpercentage = (cgst / 100) * purchaseprice;
+      	
+          var final1 = document.getElementById("linetotal_"+value2);
+          var totalpricewithoutgst = document.getElementById("totalpricewithoutgst_"+value2);
+          
+          var quantity = document.getElementById("items_quantity_"+value2).value;
+          var gstprice = parseFloat(purchaseprice)+parseFloat(sgstpercentage)+parseFloat(cgstpercentage);
+          var totalgstprice = parseFloat(gstprice)*quantity;
+          var totalpricewithoutgstvalue = parseFloat(purchaseprice)*quantity;
+          
+          final1.value=parseFloat(totalgstprice).toFixed(2);
          
+          totalpricewithoutgst.value = parseFloat(totalpricewithoutgstvalue).toFixed(2);
       }
 	 
 	 function calculateTransportationCharges() {
@@ -561,7 +573,8 @@
 	      	        	
 	          var final1=document.getElementById("itemsGrandTotalAmount");
 	          var transportationcharges=document.getElementById("transportationcharges").value;
-	          final1.value = parseInt(grandtotal) + parseInt(transportationcharges);
+	          var totalprice = parseFloat(grandtotal) + parseFloat(transportationcharges);
+	          final1.value = parseFloat(totalprice).toFixed(2);
 	         
 	      }
 	
@@ -579,14 +592,19 @@
         
         var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=items_"+rowCount+" /><input type='hidden' name='itemids' id=items_id_"+rowCount+" value='' /></td>";
         var col2="<td class='dataTextInActive'><input type='text' name='itemsname' id=items_name_"+rowCount+" class='textfieldvalues' style='font-size: 14px;'/></td>";
-        var col3="<td class='dataTextInActive'><input  value='0'   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
-        var col4="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
-        var col5="<td class='dataTextInActive'><input type='text' value='0'  name='price' id=price_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
-        var col6="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+        var col3="<td class='dataTextInActive'><input type='text' name='batchno' id=batchno_"+rowCount+" class='textfieldvalues' style='font-size: 14px;'/></td>";
+        var col4="<td class='dataTextInActive'><input  value='0'   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+        var col5="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
+        var col6="<td class='dataTextInActive'><input type='text' value='0'  name='price' id=price_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;'/></td>";
+        var col7="<td class='dataTextInActive'><input type='text' value='0'  name='purchaseprice' id=purchaseprice_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
+        var col8="<td class='dataTextInActive'><input type='text' value='0'  name='sgst' id=sgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
+        var col9="<td class='dataTextInActive'><input type='text' value='0'  name='cgst' id=cgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
+        var col10="<td class='dataTextInActive'><input type='text' class='linetotalAmountwithoutgst' value='0'  name='totalpricewithoutgst' id=totalpricewithoutgst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+        var col11="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
         /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
-        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+"</tr>");
+        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+col7+col8+col9+col10+col11+"</tr>");
         $(function() {
             $("#dataTable").find('tbody').append(newRow);
         });
@@ -658,10 +676,18 @@
 	
 	function calculateGrandTotal() {
         var sum = 0.0;
+        var sum2 = 0.0;
         var column2 = $('.linetotalAmount')
         jQuery.each(column2,function(){
             sum += parseFloat($(this).val());
         });
+        
+        
+        var column1 = $('.linetotalAmountwithoutgst')
+        jQuery.each(column1,function(){
+        sum2 += parseFloat($(this).val());
+        });
+        $('#itemsGrandTotalAmountWithoutGST').val(sum2);
         
         $('#itemsTotalAmount').val(sum);
     }
@@ -678,6 +704,13 @@
                 sum += parseFloat($(this).val());
             });
             
+            var sum2 = 0.0;
+            var column1 = $('.linetotalAmountwithoutgst')
+            jQuery.each(column1,function(){
+            sum2 += parseFloat($(this).val());
+            });
+            $('#itemsGrandTotalAmountWithoutGST').val(sum2);
+            
             $('#itemsTotalAmount').val(sum);
             
         });
@@ -689,6 +722,13 @@
             jQuery.each(column2,function(){
                 sum += parseFloat($(this).val());
             });
+            
+            var sum2 = 0.0;
+            var column1 = $('.linetotalAmountwithoutgst')
+            jQuery.each(column1,function(){
+            sum2 += parseFloat($(this).val());
+            });
+            $('#itemsGrandTotalAmountWithoutGST').val(sum2);
             
             $('#itemsTotalAmount').val(sum);
         });
@@ -716,11 +756,20 @@
             
             var sum = 0.0;
             var totalSum=0.0;
+            var totalSum2=0.0;
             var column2 = $('.linetotalAmount')
             jQuery.each(column2,function(){
                 sum += parseFloat($(this).val());
             });
             totalSum=sum;
+            
+            var sum2 = 0.0;
+            var column1 = $('.linetotalAmountwithoutgst')
+            jQuery.each(column1,function(){
+            sum2 += parseFloat($(this).val());
+            });
+            totalSum2=sum2;
+            $('#itemsGrandTotalAmountWithoutGST').val(totalSum2);
             
             $('#itemsTotalAmount').val(totalSum);
             	calculateGrandTotal();
@@ -818,7 +867,7 @@
         	             
         	         }
         			xmlHttp.onreadystatechange = stateChangedSSGroup;
-        			xmlHttp.open("GET", "/stockentry/mrvdetails?invoicedetailsid="+invoicedetailsid+"&entrydate="+date+"&supplierreferenceno="+supplierrefno+"&suppliername="+name+"&invoicetotal="+invoicetotal+"",true);;
+        			xmlHttp.open("GET", "/riyan/stockentry/mrvDetails?invoicedetailsid="+invoicedetailsid+"&entrydate="+date+"&supplierreferenceno="+supplierrefno+"&suppliername="+name+"&invoicetotal="+invoicetotal+"",true);
         			xmlHttp.send(null);
 
         		
@@ -895,7 +944,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/newexcellent/UserProcess/sessionTimeOut");
+	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -918,7 +967,7 @@ for(Cookie cookie : cookies){
 		<div class="alert-box failure" id="div2">Items received failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
 		
 		<div style="height: 28px">
-			<button id="add">Receive Entry</button>
+			<button id="add">Purchase Entry</button>
 			<br />
 		</div>
 
@@ -985,31 +1034,44 @@ for(Cookie cookie : cookies){
 									id="selectAll" name="selectAll"
 									onclick="selectAllRow('dataTable')" /> --> </th>
 								<th class="headerText">Item Name</th>
+								<th class="headerText">Batch No</th>
 								<th class="headerText">UOM</th>
 								<th class="headerText">Quantity</th>
-								<th class="headerText">Unit Price</th>
-								<th class="headerText">Item Total</th>
+								<th class="headerText">Sales Price</th>
+								<th class="headerText">Purchase Price</th>
+								<th class="headerText">SGST</th>
+								<th class="headerText">CGST</th>
+								<th class="headerText">Total</th>
+								<th class="headerText">Total (Incl. GST)</th>
 							</tr>
 						</thead>
 
 						<tbody>						
 						</tbody>
 							<tfoot>
+							
 							<tr>
 
-								<td colspan="5" align="right" style="font-weight: bold;">Total&nbsp;&nbsp;</td>
+ 								<td colspan="9" align="right" style="font-weight: bold;">Total&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
-									name="itemsTotalAmount" id="itemsTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" /></td>
+									name="itemsGrandTotalAmountWithoutGST" id="itemsGrandTotalAmountWithoutGST" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" /></td>
+							</tr>
+
+							<tr>
+
+								<td colspan="10" align="right" style="font-weight: bold;">Total(Incl. GST)&nbsp;&nbsp;</td>
+								<td align="center"><input type="text"
+									name="itemsTotalAmount" id="itemsTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" onkeyup="calculateTransportationCharges();"/></td>
 							</tr>
 							<tr>
 
-								<td colspan="5" align="right" style="font-weight: bold;">Transportation & Labour Charges&nbsp;&nbsp;</td>
+								<td colspan="10" align="right" style="font-weight: bold;">Transportation & Labour Charges&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
 									name="transportationcharges" id="transportationcharges" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" onkeyup="calculateTransportationCharges();" value="0" /></td>
 							</tr>
 							<tr>
 
-								<td colspan="5" align="right" style="font-weight: bold;">Grand Total&nbsp;&nbsp;</td>
+								<td colspan="10" align="right" style="font-weight: bold;">Grand Total(Incl. GST)&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
 									name="itemsGrandTotalAmount" id="itemsGrandTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" /></td>
 							</tr>
@@ -1083,7 +1145,7 @@ for(Cookie cookie : cookies){
 				<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/newexcellent/MessItemsProcess/purchaseItems?page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/riyan/MessItemsProcess/purchaseItems?page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -1096,7 +1158,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/newexcellent/MessItemsProcess/purchaseItems?page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/riyan/MessItemsProcess/purchaseItems?page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -1105,7 +1167,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/newexcellent/MessItemsProcess/purchaseItems?page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/riyan/MessItemsProcess/purchaseItems?page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
 

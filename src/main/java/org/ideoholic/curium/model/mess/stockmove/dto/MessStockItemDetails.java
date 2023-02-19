@@ -16,6 +16,8 @@ public class MessStockItemDetails implements java.io.Serializable {
 	private String batchno;
 	private Float itemunitprice;
 	private Float availablequantity;
+	private Float sgst;
+	private Float cgst;
 	private Integer itemid;
 	private String itemname;
 	private String unitofmeasure;
@@ -26,11 +28,13 @@ public class MessStockItemDetails implements java.io.Serializable {
 	public MessStockItemDetails() {
 	}
 	
-	public MessStockItemDetails(Integer stockentryid, String stockentryexternalid, String batchno, Float availablequantity, Integer itemid, String itemname, String unitofmeasure, Integer linkedledgeridassets, Integer linkedledgeridexpenses, int userid) {
+	public MessStockItemDetails(Integer stockentryid, String stockentryexternalid, String batchno, Float availablequantity, Integer itemid, String itemname, String unitofmeasure, Integer linkedledgeridassets, Integer linkedledgeridexpenses, int userid, Float sgst, Float cgst) {
 		this.stockentryid = stockentryid;
 		this.stockentryexternalid = stockentryexternalid;
 		this.batchno = batchno;
 		this.availablequantity = availablequantity;
+		this.cgst = cgst;
+		this.sgst = sgst;
 		this.itemid = itemid;
 		this.itemname = itemname;
 		this.unitofmeasure = unitofmeasure;
@@ -125,6 +129,22 @@ public class MessStockItemDetails implements java.io.Serializable {
 
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+
+	public Float getSgst() {
+		return sgst;
+	}
+
+	public void setSgst(Float sgst) {
+		this.sgst = sgst;
+	}
+
+	public Float getCgst() {
+		return cgst;
+	}
+
+	public void setCgst(Float cgst) {
+		this.cgst = cgst;
 	}
 	
 }
