@@ -346,4 +346,13 @@ public class JspController {
 	public String getImportFile() {
 		return "importfile";
 	}
+	@GetMapping("/billsreport")
+	public String getBillsreport() {
+		return "billsreport";
+	}
+	
+	@GetMapping("/bill")
+	public String getBill() {
+		return "bill";
+	}
 }
