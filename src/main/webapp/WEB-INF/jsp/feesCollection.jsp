@@ -994,6 +994,9 @@ for(Cookie cookie : cookies){
                         </td>
                         
                     </tr>
+                     <tr>
+                    	<td class="alignLeft" style="width: 45%">Academic Year: &nbsp;&nbsp; <input  type="text" name="feesacademicyear" required id="feesacademicyear" readonly value="${feesacademicyear}" class="myclass" /> </td>
+                    </tr>
                     <tr>
 						<td><br></td>
                     </tr>

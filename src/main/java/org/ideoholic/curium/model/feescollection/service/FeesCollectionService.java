@@ -195,7 +195,7 @@ public class FeesCollectionService {
 		request.setAttribute("classandsecDetails", request.getParameter("classandsec"));
 		request.setAttribute("studentIdDetails", request.getParameter("studentId"));
 		request.setAttribute("dateoffeesDetails", request.getParameter("dateoffees"));
-		
+		request.setAttribute("feesacademicyear", academicYear);
 		}
 	}
 
@@ -222,7 +222,8 @@ public class FeesCollectionService {
 		String chequeDate = request.getParameter("chequedate");
 		String chequeBankname = request.getParameter("chequebankname");
 		String paymentType = "Cash";
-				
+		String feesacademicyear = request.getParameter("feesacademicyear");
+		
 			if("banktransfer".equalsIgnoreCase(paymentMethod)) {
 				ackNoVoucherNarration = " acknowledgement number: "+ackNo+" , Amount transfer date: "+transferDate;
 				paymentType = "Bank Transfer";
@@ -236,7 +237,7 @@ public class FeesCollectionService {
 		if(studentSfsIds!=null){
 			
 			// create receipt information
-			receiptInfo.setAcademicyear(request.getParameter("academicyear"));
+			receiptInfo.setAcademicyear(feesacademicyear);
 			receiptInfo.setDate(DateUtil.indiandateParser(request.getParameter("dateoffeesDetails")));
 			receiptInfo.setSid(DataUtil.parseInt(sid));
 			receiptInfo.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -259,7 +260,7 @@ public class FeesCollectionService {
 					feesCollect.setSid(DataUtil.parseInt(sid));
 					feesCollect.setFine(DataUtil.parseLong(fine[i]));
 					feesCollect.setDate(DateUtil.indiandateParser(request.getParameter("dateoffeesDetails")));
-					feesCollect.setAcademicyear(request.getParameter("academicyear"));
+					feesCollect.setAcademicyear(feesacademicyear);
 					//feesCollect.setReceiptnumber(receiptInfo.getReceiptnumber());
 					feesCollect.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 					feesCollect.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
@@ -331,7 +332,7 @@ public class FeesCollectionService {
 			createFeesCollection = new feesCollectionDAO().create(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome);
 			
 			if(createFeesCollection) {
-				getFeesDetails(sid,request.getParameter("academicyear"));
+				getFeesDetails(sid,feesacademicyear);
 				Parents parent = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(sid));
 				String studentName = parent.getStudent().getName().substring(0, Math.min(parent.getStudent().getName().length(), 17));
 				new SmsService(request, response).sendSMS(parent.getContactnumber(), "of "+studentName+",Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
