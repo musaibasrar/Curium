@@ -1440,7 +1440,7 @@ for(Cookie cookie : cookies){
 								</select>
 							</label></td> -->
 							
-							<td class="alignRight">Customer&nbsp;</td>
+							<td class="alignRight">Student&nbsp;</td>
 							<td>
 								<div class="container">
 										<div class="row">
@@ -1448,7 +1448,7 @@ for(Cookie cookie : cookies){
 										        	<option></option>
 										        	<c:forEach items="${studentList}" var="student">
 										        	
-										        		<option style="color: black;" value="${student.student.name}_${student.student.classstudying}_${student.student.remarks}">${student.student.name}&nbsp;&nbsp;/&nbsp;&nbsp;${student.student.classstudying}</option>
+										        		<option style="color: black;" value="${student.student.name}_${student.student.classstudying}_${student.fathersname}">${student.student.name}&nbsp;&nbsp;/&nbsp;&nbsp;${student.student.classstudying}/&nbsp;&nbsp;${student.fathersname}</option>
 										        	</c:forEach>
 										        </select><!-- &nbsp;&nbsp;<a target="mainFrame" href="/roshan/StudentProcess/addNew">New Customer --></a>
 									 	</div>

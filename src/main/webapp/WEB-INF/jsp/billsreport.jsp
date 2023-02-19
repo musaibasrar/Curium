@@ -844,7 +844,9 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Issue Date</th>
 						<th title="click to sort" class="headerText">Bill No.</th>
-						<th title="click to sort" class="headerText">Customer Name</th>
+						<th title="click to sort" class="headerText">Student Name</th>
+						<th title="click to sort" class="headerText">Class</th>
+						<th title="click to sort" class="headerText">Father Name</th>
 						<th title="click to sort" class="headerText">Item</th>
 						<th title="click to sort" class="headerText">Quantity</th>
 						<th title="click to sort" class="headerText">Unit Price</th>
@@ -863,6 +865,8 @@ for(Cookie cookie : cookies){
 						  <td class="dataText" style="text-align: center"><c:out value="${itemparts[1]}" /></td>
 						  <c:set var="issuedtoparts" value="${fn:split(stockmovelist.issuedto, '_')}" />
 						  <td class="dataText" style="text-align: left">${issuedtoparts[0]}</td>
+						  <td class="dataText" style="text-align: left">${issuedtoparts[1]}</td>
+						  <td class="dataText" style="text-align: left">${issuedtoparts[2]}</td>
 						  <td class="dataText" style="text-align: left"><c:out value="${itemparts[0]}" /></td>
 						  <td class="dataText" style="text-align: right"><c:out value="${stockmovelist.quantity}" /></td>
 						  <td class="dataText" style="text-align: right">

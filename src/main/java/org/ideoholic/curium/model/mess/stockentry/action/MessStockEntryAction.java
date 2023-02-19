@@ -37,7 +37,6 @@ public class MessStockEntryAction {
 
 	@GetMapping("/mrvDetails")
 	public void mrvDetails() {
-		System.out.println("here in mrvdetails");
 		try {
 			new MessStockEntryService(request, response).getMRVDetails();
 		} catch (IOException e) {
