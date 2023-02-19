@@ -27,11 +27,14 @@ public class MessStockEntry implements java.io.Serializable {
 	private String status;
 	private int userid;
 	private Date receiveddate;
+	private Integer invoicedetailsid;
+	private Float sgst;
+	private Float cgst;
 	
 	public MessStockEntry() {
 	}
 	
-	public MessStockEntry(Integer id, String externalid, String batchno, Float quantity, Float itemunitprice,Integer branchid, Integer itemsid, Float availablequantity, String status, int userid, Date receiveddate) {
+	public MessStockEntry(Integer id, String externalid, String batchno, Float quantity, Float itemunitprice,Integer branchid, Integer itemsid, Float availablequantity, String status, int userid, Date receiveddate,Integer invoicedetailsid,MessInvoiceDetails messinvoicedetails, Float sgst, Float cgst) {
 		this.id = id;
 		this.externalid = externalid;
 		this.batchno = batchno;
@@ -43,6 +46,10 @@ public class MessStockEntry implements java.io.Serializable {
 		this.status = status;
 		this.userid = userid;
 		this.receiveddate = receiveddate;
+		this.invoicedetailsid = invoicedetailsid;
+		this.messinvoicedetails = messinvoicedetails;
+		this.sgst = sgst;
+		this.cgst = cgst;
 	}
 
 	public Integer getId() {
@@ -139,6 +146,30 @@ public class MessStockEntry implements java.io.Serializable {
 
 	public void setReceiveddate(Date receiveddate) {
 		this.receiveddate = receiveddate;
+	}
+
+	public Integer getInvoicedetailsid() {
+		return invoicedetailsid;
+	}
+
+	public void setInvoicedetailsid(Integer invoicedetailsid) {
+		this.invoicedetailsid = invoicedetailsid;
+	}
+
+	public Float getSgst() {
+		return sgst;
+	}
+
+	public void setSgst(Float sgst) {
+		this.sgst = sgst;
+	}
+
+	public Float getCgst() {
+		return cgst;
+	}
+
+	public void setCgst(Float cgst) {
+		this.cgst = cgst;
 	}
 
 

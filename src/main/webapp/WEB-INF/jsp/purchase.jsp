@@ -543,15 +543,27 @@
         }
     }
 	
-	 function calculate(value2) {
+	function calculate(value2) {
 
-      	var price=document.getElementById("price_"+value2).value;
+      	  var purchaseprice = document.getElementById("purchaseprice_"+value2).value;
+      	  var sgst=document.getElementById("sgst_"+value2).value;
+      	  var cgst=document.getElementById("cgst_"+value2).value;
       	
-      	        	
-          var final1=document.getElementById("linetotal_"+value2);
-          var quantity=document.getElementById("items_quantity_"+value2).value;
-          final1.value=price*quantity;
+      	  
+      	  var sgstpercentage = (sgst / 100) * purchaseprice;
+      	  var cgstpercentage = (cgst / 100) * purchaseprice;
+      	
+          var final1 = document.getElementById("linetotal_"+value2);
+          var totalpricewithoutgst = document.getElementById("totalpricewithoutgst_"+value2);
+          
+          var quantity = document.getElementById("items_quantity_"+value2).value;
+          var gstprice = parseFloat(purchaseprice)+parseFloat(sgstpercentage)+parseFloat(cgstpercentage);
+          var totalgstprice = parseFloat(gstprice)*quantity;
+          var totalpricewithoutgstvalue = parseFloat(purchaseprice)*quantity;
+          
+          final1.value=parseFloat(totalgstprice).toFixed(2);
          
+          totalpricewithoutgst.value = parseFloat(totalpricewithoutgstvalue).toFixed(2);
       }
 	 
 	 function calculateTransportationCharges() {
@@ -561,7 +573,8 @@
 	      	        	
 	          var final1=document.getElementById("itemsGrandTotalAmount");
 	          var transportationcharges=document.getElementById("transportationcharges").value;
-	          final1.value = parseInt(grandtotal) + parseInt(transportationcharges);
+	          var totalprice = parseFloat(grandtotal) + parseFloat(transportationcharges);
+	          final1.value = parseFloat(totalprice).toFixed(2);
 	         
 	      }
 	
@@ -579,14 +592,19 @@
         
         var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=items_"+rowCount+" /><input type='hidden' name='itemids' id=items_id_"+rowCount+" value='' /></td>";
         var col2="<td class='dataTextInActive'><input type='text' name='itemsname' id=items_name_"+rowCount+" class='textfieldvalues' style='font-size: 14px;'/></td>";
-        var col3="<td class='dataTextInActive'><input  value='0'   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
-        var col4="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
-        var col5="<td class='dataTextInActive'><input type='text' value='0'  name='price' id=price_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
-        var col6="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+        var col3="<td class='dataTextInActive'><input type='text' name='batchno' id=batchno_"+rowCount+" class='textfieldvalues' style='font-size: 14px;'/></td>";
+        var col4="<td class='dataTextInActive'><input  value='0'   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+        var col5="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
+        var col6="<td class='dataTextInActive'><input type='text' value='0'  name='price' id=price_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;'/></td>";
+        var col7="<td class='dataTextInActive'><input type='text' value='0'  name='purchaseprice' id=purchaseprice_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
+        var col8="<td class='dataTextInActive'><input type='text' value='0'  name='sgst' id=sgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
+        var col9="<td class='dataTextInActive'><input type='text' value='0'  name='cgst' id=cgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")'/></td>";
+        var col10="<td class='dataTextInActive'><input type='text' class='linetotalAmountwithoutgst' value='0'  name='totalpricewithoutgst' id=totalpricewithoutgst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+        var col11="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
         /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
-        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+"</tr>");
+        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+col7+col8+col9+col10+col11+"</tr>");
         $(function() {
             $("#dataTable").find('tbody').append(newRow);
         });
@@ -658,10 +676,18 @@
 	
 	function calculateGrandTotal() {
         var sum = 0.0;
+        var sum2 = 0.0;
         var column2 = $('.linetotalAmount')
         jQuery.each(column2,function(){
             sum += parseFloat($(this).val());
         });
+        
+        
+        var column1 = $('.linetotalAmountwithoutgst')
+        jQuery.each(column1,function(){
+        sum2 += parseFloat($(this).val());
+        });
+        $('#itemsGrandTotalAmountWithoutGST').val(sum2);
         
         $('#itemsTotalAmount').val(sum);
     }
@@ -678,6 +704,13 @@
                 sum += parseFloat($(this).val());
             });
             
+            var sum2 = 0.0;
+            var column1 = $('.linetotalAmountwithoutgst')
+            jQuery.each(column1,function(){
+            sum2 += parseFloat($(this).val());
+            });
+            $('#itemsGrandTotalAmountWithoutGST').val(sum2);
+            
             $('#itemsTotalAmount').val(sum);
             
         });
@@ -689,6 +722,13 @@
             jQuery.each(column2,function(){
                 sum += parseFloat($(this).val());
             });
+            
+            var sum2 = 0.0;
+            var column1 = $('.linetotalAmountwithoutgst')
+            jQuery.each(column1,function(){
+            sum2 += parseFloat($(this).val());
+            });
+            $('#itemsGrandTotalAmountWithoutGST').val(sum2);
             
             $('#itemsTotalAmount').val(sum);
         });
@@ -716,11 +756,20 @@
             
             var sum = 0.0;
             var totalSum=0.0;
+            var totalSum2=0.0;
             var column2 = $('.linetotalAmount')
             jQuery.each(column2,function(){
                 sum += parseFloat($(this).val());
             });
             totalSum=sum;
+            
+            var sum2 = 0.0;
+            var column1 = $('.linetotalAmountwithoutgst')
+            jQuery.each(column1,function(){
+            sum2 += parseFloat($(this).val());
+            });
+            totalSum2=sum2;
+            $('#itemsGrandTotalAmountWithoutGST').val(totalSum2);
             
             $('#itemsTotalAmount').val(totalSum);
             	calculateGrandTotal();
@@ -818,7 +867,7 @@
         	             
         	         }
         			xmlHttp.onreadystatechange = stateChangedSSGroup;
-        			xmlHttp.open("GET", "/stockentry/mrvdetails?invoicedetailsid="+invoicedetailsid+"&entrydate="+date+"&supplierreferenceno="+supplierrefno+"&suppliername="+name+"&invoicetotal="+invoicetotal+"",true);;
+        			xmlHttp.open("GET", "/lflower/stockentry/mrvDetails?invoicedetailsid="+invoicedetailsid+"&entrydate="+date+"&supplierreferenceno="+supplierrefno+"&suppliername="+name+"&invoicetotal="+invoicetotal+"",true);
         			xmlHttp.send(null);
 
         		
@@ -918,7 +967,7 @@ for(Cookie cookie : cookies){
 		<div class="alert-box failure" id="div2">Items received failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
 		
 		<div style="height: 28px">
-			<button id="add">Receive Entry</button>
+			<button id="add">Purchase Entry</button>
 			<br />
 		</div>
 
@@ -985,31 +1034,44 @@ for(Cookie cookie : cookies){
 									id="selectAll" name="selectAll"
 									onclick="selectAllRow('dataTable')" /> --> </th>
 								<th class="headerText">Item Name</th>
+								<th class="headerText">Batch No</th>
 								<th class="headerText">UOM</th>
 								<th class="headerText">Quantity</th>
-								<th class="headerText">Unit Price</th>
-								<th class="headerText">Item Total</th>
+								<th class="headerText">Sales Price</th>
+								<th class="headerText">Purchase Price</th>
+								<th class="headerText">SGST</th>
+								<th class="headerText">CGST</th>
+								<th class="headerText">Total</th>
+								<th class="headerText">Total (Incl. GST)</th>
 							</tr>
 						</thead>
 
 						<tbody>						
 						</tbody>
 							<tfoot>
+							
 							<tr>
 
-								<td colspan="5" align="right" style="font-weight: bold;">Total&nbsp;&nbsp;</td>
+ 								<td colspan="9" align="right" style="font-weight: bold;">Total&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
-									name="itemsTotalAmount" id="itemsTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" /></td>
+									name="itemsGrandTotalAmountWithoutGST" id="itemsGrandTotalAmountWithoutGST" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" /></td>
+							</tr>
+
+							<tr>
+
+								<td colspan="10" align="right" style="font-weight: bold;">Total(Incl. GST)&nbsp;&nbsp;</td>
+								<td align="center"><input type="text"
+									name="itemsTotalAmount" id="itemsTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" onkeyup="calculateTransportationCharges();"/></td>
 							</tr>
 							<tr>
 
-								<td colspan="5" align="right" style="font-weight: bold;">Transportation & Labour Charges&nbsp;&nbsp;</td>
+								<td colspan="10" align="right" style="font-weight: bold;">Transportation & Labour Charges&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
 									name="transportationcharges" id="transportationcharges" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" onkeyup="calculateTransportationCharges();" value="0" /></td>
 							</tr>
 							<tr>
 
-								<td colspan="5" align="right" style="font-weight: bold;">Grand Total&nbsp;&nbsp;</td>
+								<td colspan="10" align="right" style="font-weight: bold;">Grand Total(Incl. GST)&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
 									name="itemsGrandTotalAmount" id="itemsGrandTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" /></td>
 							</tr>
