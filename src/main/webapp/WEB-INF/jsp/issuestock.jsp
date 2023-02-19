@@ -19,6 +19,7 @@
 <title>Issue Stock</title>
 <link rel="stylesheet" href="/rauzamission/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/rauzamission/css/datePicker/demos.css">
+
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -455,6 +456,11 @@
 <script type="text/javascript" src="/rauzamission/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
 	src="/rauzamission/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	
+	<script src="/rauzamission/js/bootstrap.min.js"></script>
+<link href="/rauzamission/css/select2.min.css" rel="stylesheet" />
+<script src="/rauzamission/js/select2.min.js"></script>
+
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -555,7 +561,7 @@
 		var form1 = document.getElementById("form1");
 		
 		if(form1.checkValidity()) {
-			form1.action="/rauzamission/MessItemsMoveProcess/saveStockMove";
+			form1.action = "/rauzamission/MessItemsMoveProcess/saveStockMove";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -565,7 +571,7 @@
 	
 	function cancelRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action="/rauzamission/MessItemsMoveProcess/cancelStockMove";
+		form1.action = "/rauzamission/MessItemsMoveProcess/cancelStockMove";
 		form1.method = "POST";
 		form1.submit();
 
@@ -573,21 +579,21 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action="/rauzamission/AdminProcess/printVoucher";
+		form1.action = "/rauzamission/AdminProcess/printVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function approveRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action="/rauzamission/AdminProcess/approveVoucher";
+		form1.action = "/rauzamission/AdminProcess/approveVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function rejectRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action="/rauzamission/AdminProcess/rejectVoucher";
+		form1.action = "/rauzamission/AdminProcess/rejectVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -596,9 +602,9 @@
 
 		$("#tabs").tabs();
 		
-		$("#saveissueentry").button().click(function() {
+		/* $("#saveissueentry").button().click(function() {
 			saveissueentry();
-		});
+		}); */
 		$("#saveissueentry2").button().click(function() {
 			saveissueentry();
 		});
@@ -622,32 +628,324 @@
         }
     }
 	
+	var itemlist=[
+        <c:forEach varStatus="status" items="${messstockitemdetailslist}" var="itemlist">{
+        		availablestock:'<c:out default="0" value="${itemlist.availablequantity}" />',
+        		unitprice:'<c:out default="0" value="${itemlist.itemunitprice}" />',
+        		sgst:'<c:out default="0" value="${itemlist.sgst}" />',
+        		cgst:'<c:out default="0" value="${itemlist.cgst}" />',
+                value:'<c:out default="0" value="${itemlist.itemname}" />',
+                batchno:'<c:out default="0" value="${itemlist.batchno}" />',
+                particularname:'<c:out default="Kilogram" value="${itemlist.unitofmeasure}" />',
+                itemid:'<c:out default="0" value="${itemlist.itemid}" />',
+                salesprice:'<c:out default="0" value="${itemlist.stockentryexternalid}" />',
+                id:'<c:out default="0" value="${itemlist.stockentryid}" />'
+                }<c:if test="${!status.last}">,</c:if>
+        </c:forEach>
+        ];
+	
+	function addRow() {
+        var rowCount = document.getElementById('dataTable').rows.length;    
+        
+        var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=ids_"+rowCount+" /><input type='hidden' name='ids' id=stockmove_ids_"+rowCount+" value='' /></td>";
+        var col2="<td class='dataTextInActive'><input type='text' name='itemsname' id=items_name_"+rowCount+" class='textfieldvalues' style='font-size: 14px;' required/><input type='hidden' name='itemsids' id=items_ids_"+rowCount+" value='' /><input type='hidden' name='batchno' id=batchno_"+rowCount+" value='' /></td>";
+ 	    var col3="<td class='dataTextInActive'><input type='text' value='0'   name='itemsquantity'  id=items_quantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+ 	   	var col4="<td class='dataTextInActive'><input type='text' value=''   name='itemsunitofmeasure'  id=items_unitofmeasure_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+ 	    var col5="<td class='dataTextInActive'><input type='text' value='0'  name='itemunitprice' id=itemunitprice_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;'/><input type='hidden' name='purchaseprice' id=purchaseprice_"+rowCount+" value='' /></td>";
+ 	    var col6="<td class='dataTextInActive'><input type='text' value=''   name='sgst'  id=sgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+ 	    var col7="<td class='dataTextInActive'><input type='text' value=''   name='cgst'  id=cgst_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' readonly/></td>";
+ 	    var col8="<td class='dataTextInActive'><input type='text' name='issuequantity' id=issuequantity_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' onkeyup='calculate("+rowCount+")' onkeydown='calculate("+rowCount+")' required /></td>";
+ 	    var col9="<td class='dataTextInActive'><input type='text'  value='0'  name='priceonlygst' id=priceonlygst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+ 	    var col10="<td class='dataTextInActive'><input type='text' class='linetotalAmountwithoutgst' value='0'  name='totalpricewithoutgst' id=totalpricewithoutgst_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+ 	   	var col11="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>";
+ 	    var col12="<td class='dataTextInActive'><button onClick='addRow();'>+</button></td>";
+        /* var col6="<td class='dataTextInActive'><input type='text' class='linetotalAmount' value='0'  name='linetotal' id=linetotal_"+rowCount+" style='font-size: 14px;border-top-style: solid;border-right-style: solid;border-bottom-style: solid;border-left-style: solid;border-top-color: #5d7e9b;border-right-color: #5d7e9b;border-bottom-color: #5d7e9b;border-left-color: #5d7e9b;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px;width: 80px;height: 25px;border-radius: 5px;background-color: white;' readonly/></td>"; */
+        /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
+        /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
+        /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
+        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+col7+col8+col9+col10+col11+col12+"</tr>");
+        $(function() {
+            $("#dataTable").find('tbody').append(newRow);
+        });
+        $(function() {
+            $("#items_name_"+rowCount).autocomplete({
+                source: itemlist,
+                minLength: 1,
+                change:function(event,ui){
+                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
+                    $("#items_ids_"+rowCount ).val( ui.item.itemid );
+                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
+                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
+                    $("#itemunitprice_"+rowCount).val( ui.item.salesprice );
+                    $("#purchaseprice_"+rowCount).val( ui.item.unitprice );
+                    $("#sgst_"+rowCount).val( ui.item.sgst );
+                    $("#cgst_"+rowCount).val( ui.item.cgst );
+                },
+                focus: function( event, ui ) {
+                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
+                    $( "#items_name_"+rowCount).val( ui.item.name );
+                    $( "#items_ids_"+rowCount ).val( ui.item.itemid );
+                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
+                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
+                    $("#itemunitprice_"+rowCount).val( ui.item.salesprice );
+                    $("#purchaseprice_"+rowCount).val( ui.item.unitprice );
+                    $("#sgst_"+rowCount).val( ui.item.sgst );
+                    $("#cgst_"+rowCount).val( ui.item.cgst );
+                    return true;
+                },
+                select: function( event, ui ) {
+                	$("#stockmove_ids_"+rowCount ).val( ui.item.id );
+                    $( "#items_name_"+rowCount).val( ui.item.value );
+                    $( "#items_ids_"+rowCount ).val( ui.item.itemid );
+                    $("#items_unitofmeasure_"+rowCount).val( ui.item.particularname );
+                    $("#items_quantity_"+rowCount).val( ui.item.availablestock );
+                    $("#itemunitprice_"+rowCount).val( ui.item.salesprice );
+                    $("#purchaseprice_"+rowCount).val( ui.item.unitprice );
+                    $("#sgst_"+rowCount).val( ui.item.sgst );
+                    $("#cgst_"+rowCount).val( ui.item.cgst );
+                    return true;
+                }
+            }).data( "autocomplete" )._renderItem = function( ul, item ) {
+                return $( "<li></li>" )
+                .data( "item.autocomplete", item )
+                .append( "<a><b> " + item.value +"&nbsp;/&nbsp;</b> <b> "+item.batchno +"</b></a>" )
+                .appendTo( ul );
+            };
+
+        });
+    }
 	
 	function calculate(value2) {
 
- 	    	  var availableQuantity=document.getElementById("items_quantity_"+value2).value;
+ 	    	var availableQuantity=document.getElementById("items_quantity_"+value2).value;
  	        var issueQuantity=document.getElementById("issuequantity_"+value2).value;
  	        
- 	        if(parseFloat(issueQuantity,10)>parseFloat(availableQuantity,10)){
- 	      		document.getElementById("errormessage_"+value2).style.display = '';
+ 	        /* if(parseFloat(issueQuantity,10)>parseFloat(availableQuantity,10)){
+ 	      		//document.getElementById("errormessage_"+value2).style.display = '';
+ 	      		$( "#dialog" ).dialog( "open" );
  	      	  document.getElementById("issuequantity_"+value2).value='';
- 	        }
+ 	      	document.getElementById("ids_"+value2).checked = false;
+ 	        } */
+ 	        if(issueQuantity !== ""){
  	        
- 	        if(parseFloat(issueQuantity)>0 && parseFloat(issueQuantity,10)<=parseFloat(availableQuantity,10)){
- 	        	document.getElementById("errormessage_"+value2).style.display = 'none';
- 	      	  document.getElementById("item_id_"+value2).checked = true;  
- 	        }else{
- 	      	  document.getElementById("item_id_"+value2).checked = false;
+	 	        if(parseFloat(issueQuantity)>0 && (parseFloat(issueQuantity,10)<=parseFloat(availableQuantity,10))){
+	 	        	//document.getElementById("errormessage_"+value2).style.display = 'none';
+	 	      	  document.getElementById("ids_"+value2).checked = true;  
+	 	      	  
+	 	      	  var unitprice = document.getElementById("itemunitprice_"+value2).value;
+	 	       	  var sgst=document.getElementById("sgst_"+value2).value;
+	 	       	  var cgst=document.getElementById("cgst_"+value2).value;
+	 	       	
+	 	       	  
+	 	       	  var sgstpercentage = (sgst / 100) * unitprice;
+	 	       	  var cgstpercentage = (cgst / 100) * unitprice;
+	 	       	
+	 	           var final1 = document.getElementById("linetotal_"+value2);
+	 	           var priceonlygst = document.getElementById("priceonlygst_"+value2);
+	 	           var totalpricewithoutgst = document.getElementById("totalpricewithoutgst_"+value2);
+	 	           
+	 	           var quantity = document.getElementById("issuequantity_"+value2).value;
+	 	           var gstprice = parseFloat(unitprice)+parseFloat(sgstpercentage)+parseFloat(cgstpercentage);
+	 	           var onlygstprice = parseFloat(sgst)+parseFloat(cgst);
+	 	           var totalpricewithoutgstvalue = parseFloat(unitprice)*quantity;
+	 	           var totalgstprice = parseFloat(gstprice)*quantity;
+	 	           
+	 	          priceonlygst.value= parseFloat(onlygstprice).toFixed(1);
+     			  totalpricewithoutgst.value = parseFloat(totalpricewithoutgstvalue).toFixed(2);
+	 	          final1.value= parseFloat(totalgstprice).toFixed(2);
+	 	           
+	 	        }else{
+	 	        	$( "#dialog" ).dialog( "open" );
+	 	        	document.getElementById("issuequantity_"+value2).value='';
+	 	      	  document.getElementById("ids_"+value2).checked = false;
+	 	        }
+ 	        
  	        }
  			
     }
 	 
+	 $(function() {
+         $( "#dialog" ).dialog({
+             autoOpen: false,
+             height: 40,
+             width: 180,
+             modal: true,
+         });
+     });
+	 
 	$(function() {
 
 		$("#tabs").tabs();
-		$("#effect").hide();
+		$("#effect").show();
+		
+		var addItemsButtonID1="#addnewitem1";
+        
+        $( addItemsButtonID1 )
+        .button({
+            icons: {
+                primary: "ui-icon-plus"
+            }
+        })
+        .click(function() {
+            addRow();
+            return false;
+        });
+		
+		var addItemsButtonID=".addnewitem";
+        var removeItemsButtonID="#removenewitem";
+        
+        $( addItemsButtonID )
+        .button({
+            icons: {
+                primary: "ui-icon-plus"
+            }
+        })
+        .click(function() {
+            addRow();
+            return false;
+        });
+        
+       $(removeItemsButtonID)
+        .button({
+            icons: {
+                primary: "ui-icon-minus"
+            }
+        })
+        .click(function() {
+            deleteRow('dataTable');
+            return false;
+        }); 
+        
+       
+       
+       $("#saveissueentry").button().click(function(){
+        	 $( "#dialogpaymentmethod" ).dialog( "open" );
+             return false;
+
+         });
+         
+         $(function() {
+             $( "#dialogpaymentmethod" ).dialog({
+                 autoOpen: false,
+                 height: 330,
+                 width: 570,
+                 modal: true,
+                 buttons: {
+                     OK: function() {
+                     	
+                    		 generatebill(document.getElementById("cashpayment"),document.getElementById("banktransfer"),
+                     					document.getElementById("chequetransfer"), document.getElementById("ackno"), 
+                     			document.getElementById("transferdate"), document.getElementById("transferbankname"),
+                     			document.getElementById("chequeno"), document.getElementById("chequedate"), document.getElementById("chequebankname"), 
+                     			document.getElementById("totalcashamount"), document.getElementById("totalbanktransferamount"),
+                     			document.getElementById("totalchequetransferamount"),document.getElementById("itemsGrandTotalAmount"),document.getElementById("itemsGrandTotalAmountWithoutGST"));
+                         		$( this ).dialog( "close" );
+                  		   }
+                 }
+             });
+         });
+         
+         $("#transferdate").datepicker({
+    			changeYear : true,
+    			changeMonth : true,
+    			dateFormat: 'dd/mm/yy',
+    			yearRange: "-50:+0"
+    		});
+    		$("#anim").change(function() {
+    			$("#transferdate").datepicker("option", "showAnim", $(this).val());
+    		});
+            
+            $("#chequedate").datepicker({
+    			changeYear : true,
+    			changeMonth : true,
+    			dateFormat: 'dd/mm/yy',
+    			yearRange: "-50:+0"
+    		});
+    		$("#anim").change(function() {
+    			$("#chequedate").datepicker("option", "showAnim", $(this).val());
+    		});
+         
+
 	});
    
+	
+	function generatebill(cashpayment,banktransfer,chequetransfer,ackno,transferdate,transferbankname,chequeno,chequedate,chequebankname,totalcashamount,totalbanktransferamount,
+			totalchequetransferamount,itemsgrandtotalamount,itemsGrandTotalAmountWithoutGST){
+    	
+    	var paymentmethodbanktransfer = '';
+    	var paymentmethodchequetransfer = '';
+    	var paymentmethodcash = '';
+    	var cashpaymentvalue = '';
+    	var acknovalue = '';
+    	var transferdatevalue = '';
+    	var transferbanknamevalue = '';
+    	var chequenovalue = '';
+    	var chequedatevalue = '';
+    	var chequebanknamevalue = '';
+    	var totalcashamountvalue = '';
+    	var totalbanktransferamountvalue = '';
+    	var totalchequetransferamountvalue = '';
+    	var itemsgrandtotalamountvalue = '';
+    	var itemsTotalAmountWithoutGST='';
+    	
+    	itemsgrandtotalamountvalue = itemsgrandtotalamount.value;
+    	totalcashamountvalue = totalcashamount.value;
+    	totalbanktransferamountvalue = totalbanktransferamount.value;
+    	totalchequetransferamountvalue = totalchequetransferamount.value;
+    	
+    	var sum = (parseFloat(totalcashamountvalue)+parseFloat(totalbanktransferamountvalue)+parseFloat(totalchequetransferamountvalue)).toFixed(2);
+    	var grandtotal = parseFloat(itemsgrandtotalamountvalue);
+    	itemsTotalAmountWithoutGST = parseFloat(itemsGrandTotalAmountWithoutGST.value);
+    	
+    	if(parseFloat(sum) == parseFloat(grandtotal))
+    		
+    		{
+    	
+    	if(banktransfer.checked == true ){
+    		paymentmethodbanktransfer = 'banktransfer';
+    		
+    	}
+    	
+    	if(chequetransfer.checked == true){
+    		paymentmethodchequetransfer = 'chequetransfer';
+    	}
+    	
+    	if(cashpayment.checked == true){
+    		paymentmethodcash = 'cashpayment';
+    	}
+    	
+    	if(ackno!=null){
+    		acknovalue = ackno.value;
+    	}
+    	
+    	if(transferdate!=null){
+    		transferdatevalue = transferdate.value;
+    	}
+    	
+    	if(transferbankname!=null){
+    		transferbanknamevalue = transferbankname.value;
+    	}
+    	if(chequeno!=null){
+    		chequenovalue = chequeno.value;
+    	}
+    	if(chequedate!=null){
+    		chequedatevalue = chequedate.value;
+    	}
+    	if(chequebankname!=null){
+    		chequebanknamevalue = chequebankname.value;
+    	}
+    	
+    	var form1 = document.getElementById("form1");
+		form1.action="/rauzamission/MessItemsMoveProcess/saveStockMove?paymentmethodbanktransfer="+paymentmethodbanktransfer+"&paymentmethodchequetransfer="+paymentmethodchequetransfer+"&paymentmethodcash="+paymentmethodcash+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"&totalcashamount="+totalcashamountvalue+"&totalbanktransferamount="+totalbanktransferamountvalue+"&totalchequetransferamount="+totalchequetransferamountvalue+"&itemsGrandTotalAmountWithoutGST="+itemsTotalAmountWithoutGST+"";
+		form1.method = "POST";
+		form1.submit();
+		
+    		}else{
+    			document.getElementById('totalerror').style.display = '';
+    		}
+		
+    }
+	
 	 $(function(){
 		 
 		
@@ -747,6 +1045,47 @@
         }
     }
      
+     
+     /* var xmlHttp;
+ 	function getLastPrice(rowIndex){
+ 		
+ 		var itemId = document.getElementById('items_ids_'+rowIndex).value;
+ 		var customerName = document.getElementById('issuedto').value;
+
+ 			 if (typeof XMLHttpRequest != "undefined") {
+ 				 xmlHttp = new XMLHttpRequest();
+ 	            
+ 	         } else if (window.ActiveXObject) {
+ 	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+ 	             
+ 	         }
+ 			xmlHttp.onreadystatechange = stateChanged;
+ 			xmlHttp.open("GET", "/rauzamission/MessItemsMoveProcess/getCustomerLastPrice?customerName="+customerName+"&itemid="+itemId+"",true);
+ 			xmlHttp.send(null);
+ 	}
+ 	
+ 	function stateChanged() {
+
+ 		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+ 			document.getElementById("pricelist").innerHTML = xmlHttp.responseText;
+ 			
+            
+ 		}
+ 	}
+ 	function GetXmlHttpObject() {
+ 		var xmlHttp = null;
+ 		try {
+ 			xmlHttp = new XMLHttpRequest();
+ 		} catch (e) {
+ 			try {
+ 				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+ 			} catch (e) {
+ 				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+ 			}
+ 		}
+ 		return xmlHttp;
+ 	} */
+ 	
      function writeNumber(number){
     	 var val = number.id;
     	 var res = val.split("_")
@@ -790,6 +1129,241 @@
 		        		
 		        	}
 		        	
+		        	
+		        	function selectPayment(id){
+		            	
+		            	
+		            	if(id == 'cashpayment'){
+		            		
+		            		if(document.getElementById("cashpayment").checked){
+		            			
+		            			document.getElementById('cashamount').style.display = '';
+			            		document.getElementById('banktransferamount').style.display = "none";
+			            		document.getElementById('chequetransferamount').style.display = "none";
+			            		
+			            		document.getElementById('onlinechequeack').style.display = "none";
+			            		document.getElementById('onlinechequedate').style.display = "none";
+			            		document.getElementById('onlinechequebank').style.display = "none";
+			            		
+			            		document.getElementById('onlinetransferack').style.display = "none";
+			            		document.getElementById('onlinetransferdate').style.display = "none";
+			            		document.getElementById('onlinetransferbank').style.display = "none";
+		            			
+		            		}else{
+		            			
+		            			document.getElementById('cashamount').style.display = "none";
+			            		document.getElementById('banktransferamount').style.display = "none";
+			            		document.getElementById('chequetransferamount').style.display = "none";
+			            		
+			            		document.getElementById('onlinechequeack').style.display = "none";
+			            		document.getElementById('onlinechequedate').style.display = "none";
+			            		document.getElementById('onlinechequebank').style.display = "none";
+			            		
+			            		document.getElementById('onlinetransferack').style.display = "none";
+			            		document.getElementById('onlinetransferdate').style.display = "none";
+			            		document.getElementById('onlinetransferbank').style.display = "none";
+		            		}
+		            		
+		            		
+		            		
+		            			
+		            	}else if(id == 'banktransfer'){
+		            		
+		            		
+		            		if(document.getElementById("banktransfer").checked){
+		            		
+		            		document.getElementById('cashamount').style.display = "none";
+		            		document.getElementById('banktransferamount').style.display = '';
+		            		document.getElementById('chequetransferamount').style.display = "none";
+		            		
+		            		document.getElementById('onlinechequeack').style.display = "none";
+		            		document.getElementById('onlinechequedate').style.display = "none";
+		            		document.getElementById('onlinechequebank').style.display = "none";
+		            		
+		            		document.getElementById('onlinetransferack').style.display = '';
+		            		document.getElementById('onlinetransferdate').style.display = '';
+		            		document.getElementById('onlinetransferbank').style.display = '';
+		            		
+		            		
+		            	}else{
+	            			
+	            			document.getElementById('cashamount').style.display = "none";
+		            		document.getElementById('banktransferamount').style.display = "none";
+		            		document.getElementById('chequetransferamount').style.display = "none";
+		            		
+		            		document.getElementById('onlinechequeack').style.display = "none";
+		            		document.getElementById('onlinechequedate').style.display = "none";
+		            		document.getElementById('onlinechequebank').style.display = "none";
+		            		
+		            		document.getElementById('onlinetransferack').style.display = "none";
+		            		document.getElementById('onlinetransferdate').style.display = "none";
+		            		document.getElementById('onlinetransferbank').style.display = "none";
+	            		}
+	            		
+		            		
+		            		
+		            	}else if(id == 'chequetransfer'){
+		            		
+		            		
+		            		if(document.getElementById("chequetransfer").checked){
+		            			
+		            		document.getElementById('cashamount').style.display = "none";
+		            		document.getElementById('banktransferamount').style.display = "none";
+		            		document.getElementById('chequetransferamount').style.display = '';
+		            		
+		            		document.getElementById('onlinechequeack').style.display = '';
+		            		document.getElementById('onlinechequedate').style.display = '';
+		            		document.getElementById('onlinechequebank').style.display = '';
+		            		
+		            		document.getElementById('onlinetransferack').style.display = "none";
+		            		document.getElementById('onlinetransferdate').style.display = "none";
+		            		document.getElementById('onlinetransferbank').style.display = "none";
+		            		
+		            		
+		            	}else{
+	            			
+	            			document.getElementById('cashamount').style.display = "none";
+		            		document.getElementById('banktransferamount').style.display = "none";
+		            		document.getElementById('chequetransferamount').style.display = "none";
+		            		
+		            		document.getElementById('onlinechequeack').style.display = "none";
+		            		document.getElementById('onlinechequedate').style.display = "none";
+		            		document.getElementById('onlinechequebank').style.display = "none";
+		            		
+		            		document.getElementById('onlinetransferack').style.display = "none";
+		            		document.getElementById('onlinetransferdate').style.display = "none";
+		            		document.getElementById('onlinetransferbank').style.display = "none";
+	            		}
+	            		
+		            	}
+		            	
+		            }
+		        	
+		        	
+		        	function calculateGrandTotal() {
+		                var sum = 0.0;
+		                var sum2 = 0.0;
+		                var column2 = $('.linetotalAmount')
+		                jQuery.each(column2,function(){
+		                    sum += parseFloat($(this).val());
+		                });
+		                
+		                var column1 = $('.linetotalAmountwithoutgst')
+		                jQuery.each(column1,function(){
+		                sum2 += parseFloat($(this).val());
+		                });
+		                $('#itemsGrandTotalAmountWithoutGST').val(sum2);
+		                
+		                $('#itemsTotalAmount').val(sum);
+		                $('#itemsGrandTotalAmount').val(sum);
+		            }
+		        	
+		        	$(document).ready(function() {
+		                
+		                
+		                $("#dataTable").keyup(function(){
+		                    
+		                    var sum = 0.0;
+		                    var totalSum=0.0;
+		                    var sum2 = 0.0;
+		                    var column2 = $('.linetotalAmount')
+		                    jQuery.each(column2,function(){
+		                        sum += parseFloat($(this).val());
+		                    });
+		                    
+		                    var column1 = $('.linetotalAmountwithoutgst')
+		                    jQuery.each(column1,function(){
+		                    sum2 += parseFloat($(this).val());
+		                    });
+		                    $('#itemsGrandTotalAmountWithoutGST').val(sum2);
+		                    
+		                    $('#itemsTotalAmount').val(sum);
+		                    $('#itemsGrandTotalAmount').val(sum);
+		                    
+		                });
+		                $("#dataTable").click(function(){
+		                    
+		                    var sum = 0.0;
+		                    var totalSum=0.0;
+		                    var sum2 = 0.0;
+		                    var column2 = $('.linetotalAmount')
+		                    jQuery.each(column2,function(){
+		                        sum += parseFloat($(this).val());
+		                    });
+		                    
+		                    var column1 = $('.linetotalAmountwithoutgst')
+		                    jQuery.each(column1,function(){
+		                    sum2 += parseFloat($(this).val());
+		                    });
+		                    $('#itemsGrandTotalAmountWithoutGST').val(sum2);
+		                    $('#itemsTotalAmount').val(sum);
+		                    $('#itemsGrandTotalAmount').val(sum);
+		                });
+						$("#dataTable").focus(function(){
+		                    
+		                    var sum = 0.0;
+		                    var sum2 = 0.0;
+		                    var totalSum=0.0;
+		                    var column2 = $('.linetotalAmount')
+		                    jQuery.each(column2,function(){
+		                        sum += parseFloat($(this).val());
+		                    });
+		                    
+		                    var column1 = $('.linetotalAmountwithoutgst')
+		                    jQuery.each(column1,function(){
+		                    sum2 += parseFloat($(this).val());
+		                    });
+		                    $('#itemsGrandTotalAmountWithoutGST').val(sum2);
+		                    $('#itemsTotalAmount').val(sum);
+		                    $('#itemsGrandTotalAmount').val(sum);
+		                });
+
+
+		            });
+		        	
+		        	function deleteRow(tableID) {
+		                try {
+		                    var table = document.getElementById(tableID);
+		                    var rowCount = table.rows.length;
+		                    if(rowCount==1){
+		                        alert('No records to delete');
+		                    }
+		                    for(var i=1; i<rowCount-3; i++) {
+		                        var row = table.rows[i];
+		                        var chkbox = row.cells[0].childNodes[0];
+		                        if(null != chkbox && true == chkbox.checked) {
+		                            table.deleteRow(i);
+		                            rowCount--;
+		                            i--;
+		                        }
+		                    }
+		                   
+		                    
+		                    var sum = 0.0;
+		                    var sum2 = 0.0;
+		                    var totalSum=0.0;
+		                    var column2 = $('.linetotalAmount')
+		                    jQuery.each(column2,function(){
+		                        sum += parseFloat($(this).val());
+		                    });
+		                    totalSum=sum;
+		                    
+		                    var column1 = $('.linetotalAmountwithoutgst')
+		                    jQuery.each(column1,function(){
+		                    sum2 += parseFloat($(this).val());
+		                    });
+		                    totalSum2=sum2;
+		                    $('#itemsGrandTotalAmountWithoutGST').val(totalSum2);
+		                    
+		                    $('#itemsTotalAmount').val(totalSum);
+		                    $('#itemsGrandTotalAmount').val(totalSum);
+		                    	calculateGrandTotal();
+		                    //$('#grandTotalAmount').val(0);
+		                }catch(e) {
+		                    alert(e);
+		                }
+		            }
+		        	
         </script>
 
 </head>
@@ -818,25 +1392,24 @@ for(Cookie cookie : cookies){
 		
 		%>
 		
-		<div class="alert-box success" id="div1">Items has been issued successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
-		<div class="alert-box failure" id="div2">Items issuance failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
-		
 		<jsp:useBean id="now" class="java.util.Date" scope="page" />
-		<div style="height: 28px">
+		<!-- <div style="height: 28px">
 			<button id="add">Issue Entry</button>
 			<br />
-		</div>
+		</div> -->
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Details</a></li>
+					<li><a href="#tabs-1">Bill Details</a></li>
 
 				</ul>
 				<div id="tabs-1">
 				
-					<table>
-					
+					<table style="margin-left: auto;margin-right: auto;">
+						<tr>
+							<td><br></td>
+						</tr>
 						<tr>
 						<td class="alignRight">Date&nbsp;</td>
 							<td><label> <input type="text"  name="transactiondate"
@@ -856,8 +1429,8 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 						
-							<td  class="alignRight">Purpose &nbsp;</td>
-							<td ><label> <select name="purpose"
+							<!-- <td  class="alignRight" style="display: none;">Purpose &nbsp;</td>
+							<td ><label> <select name="purpose" style="display: none;"
 									id="purpose" class="dropdownlist" style="font-size: 14px;" required>
 										<option selected></option>
 										<option>Breakfast</option>
@@ -865,17 +1438,22 @@ for(Cookie cookie : cookies){
 										<option>Dinner</option>
 										<option>Other</option>
 								</select>
-							</label></td>
+							</label></td> -->
 							
-							<td class="alignRight">Issue To&nbsp;</td>
-							<td ><label>
-									<select name="issuedto"
-									id="issuedto" class="dropdownlist" style="font-size: 14px;" >
-										<option selected="selected">Mess Location 1</option>
-										<option>Mess Location 2</option>
-								</select>
-							
-							</label></td>
+							<td class="alignRight">Student&nbsp;</td>
+							<td>
+								<div class="container">
+										<div class="row">
+										        <select name="issuedto"	id="issuedto" style="font-size: 24px;width: 225px;"  class="form-control select2" required>
+										        	<option></option>
+										        	<c:forEach items="${studentList}" var="student">
+										        	
+										        		<option style="color: black;" value="${student.student.name}_${student.student.classstudying}_${student.fathersname}">${student.student.name}&nbsp;&nbsp;/&nbsp;&nbsp;${student.student.classstudying}/&nbsp;&nbsp;${student.fathersname}</option>
+										        	</c:forEach>
+										        </select><!-- &nbsp;&nbsp;<a target="mainFrame" href="/rauzamission/StudentProcess/addNew">New Customer --></a>
+									 	</div>
+								</div>
+							</td>
 							
 							
 						</tr>
@@ -884,145 +1462,223 @@ for(Cookie cookie : cookies){
 						</tr>
 					</table>
 					
-					<div align="left">
-							<button id="saveissueentry">Issue Stock</button>
-							<br><br>
+					
+						<div align="center">
+						<p>
+						<h2 style="text-decoration: underline;color: #eb6000">Items Details</h2>	
+						<label><button id="addnewitem1">Add Item</button></label><label><button id="removenewitem">Remove Item</button></label></p>
 					</div>
-										
-			 <table style="float:center;border-color: #4b6a84;width: 50%" id="dataTableOne">
-
-					<thead>
+					
+					<br>
+					<table style="margin-left: auto;margin-right: auto;border: 1px solid black;" id="dataTable">
+						<thead>
 							<tr>
-								 <!-- <th class="headerText" style="display: none;" ><input type="checkbox" /> </th> --> 
-								 <th class="headerText">
-								 Item Details
-								</th>
+								<th class="headerText"><input type="checkbox"
+									id="selectAll" name="selectAll"
+									onclick="selectAllRow('dataTable')" /> </th>
+								<th class="headerText">Item Name</th>
+								<th class="headerText">Available Quantity</th>
+								<th class="headerText">Unit of Measure</th>
+								<th class="headerText">Unit Price</th>
+								<th class="headerText">SGST Price</th>
+								<th class="headerText">CGST Price</th>
+								<th class="headerText">Issue Quantity</th>
+								<th class="headerText">Total GST</th>
+								<th class="headerText">Total (Excl. GST)</th>
+								<th class="headerText">Total (Incl. GST)</th>
+								<th class="headerText">Add</th>
 							</tr>
 						</thead>
 
-				<tbody>
+						<tbody>						
+						</tbody>
+						<tfoot>
+							<tr>
 
-						   <c:forEach items="${stocklist}" var="itemlist" varStatus="status">
-           							<tr>
-           									<td class="dataTextLeft">
-           										<input type="checkbox" class = "chcktbl" name="itemids" id="item_id_${itemlist.messitems.id}"  value="<c:out value="${itemlist.messitems.id}"/>"/>
-	                							<input type="text" value="<c:out value="${itemlist.messitems.name}"/>" name="itemname_${itemlist.messitems.id}" style="display: none;font-size: 21px;" id="itemname_${itemlist.messitems.id}" />
-	                							<label style="font-size: 14px;font-weight: bold;"><c:out value="${itemlist.messitems.name}"/></label>
-												<input type="text" value="<c:out value="${itemlist.availablestock}"/>" id="items_quantity_${itemlist.messitems.id}" class="textfieldvaluesshorts" style="font-size: 14px;color: black;width:45px;" disabled="disabled"/>
-												
-														<c:out value="${itemlist.messitems.unitofmeasure}"/>
-												<br><br>
-												<input type="text" name="issuequantity_${itemlist.messitems.id}" id="issuequantity_${itemlist.messitems.id}" class="textfieldvaluesshorts" style="font-size: 14px;" onkeyup="calculate(${itemlist.messitems.id})" onkeypress="calculate(${itemlist.messitems.id})" onkeydown="calculate(${itemlist.messitems.id})" onfocusout="calculate(${itemlist.messitems.id})" />
-												<br>
-												<label id="errormessage_${itemlist.messitems.id}" style="font-size: 10px;display: none;color: red;">Quantity not in stock</label>
-												<br>
-											</td>
-                					</tr>
+								<td colspan="10" align="right" style="font-weight: bold;">Total&nbsp;&nbsp;</td>
+								<td align="center"><input type="text"
+									name="itemsTotalAmount" id="itemsTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0" onkeyup="calculateTransportationCharges();"/></td>
+							</tr>
+						</tfoot>
+					</table>
+					<br>
+					
+					<br>
+					<table id="table2" width="100%" border="0" align="center">
+						<tr align="center">
+							<td>
+									<div id="pricelist"> 
 								
-							</c:forEach>
-				</tbody>
-				
-				<tfoot>
-						<tr>
-							<td class="footerTD" colspan="2"><label style="font-size: 14px;color: white;">&nbsp;&nbsp;&nbsp;Note: 10gm=0.01kg, 100gm=0.1kg</label></td>
-                         <!--    <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button> 
-                    		<td class="footerTD"  colspan="8">
-                    		<button id="print">Print</button> 
-                    		<button id="approve">Approve</button>
-                    		&nbsp;&nbsp;&nbsp;
-                    		<button id="reject">Reject</button> 
-                    		&nbsp;&nbsp;&nbsp;
-                    		<button id="saveissueentry2">Issue</button></td> -->
-                    		
-                        </tr>
-                    </tfoot>
-			</table> 
+									</div>
+								<br>
+								<button id="saveissueentry">Generate Bill</button>
+							</td>
+						</tr>
+					</table>
 					</div>
 				</div>
 			</div>
-
-		<div style="overflow: scroll; height: 600px">
-			<table width="100%">
-				<tr>
-					<td class="headerTD">Items Issue List</td>
-				</tr>
-			</table>
-			<table width="100%" border="0" style="border-color: #4b6a84;"
-				id="myTable">
-
-				<thead>
-					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Issue Date</th>
-						<th title="click to sort" class="headerText">Purpose</th>
-						<th title="click to sort" class="headerText">Item Name</th>
-						<th title="click to sort" class="headerText">Quantity</th>
-						<th title="click to sort" class="headerText">Issued To</th>
-					</tr>
-				</thead>
-
-				<tbody>
-
-					<c:forEach items="${messstockmovelist}" var="stockmovelist">
-						<tr style="border-color: #000000" border="1" cellpadding="1"
-							cellspacing="1">
-                          <td class="dataTextLeft"><input type="checkbox" id = "<c:out value="${stockmovelist.id}"/>" class = "chcktbl"  name="stockmoveid"  value="<c:out value="${stockmovelist.id}"/>"/></td>
-						  <td class="dataTextLeft" style="width: 10%;"><input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: center;" name="transactiondate_${stockmovelist.id}" value="<fmt:formatDate value="${stockmovelist.transactiondate}" pattern="dd/MM/yyyy"/>" readonly></td>
-						  <td class="dataTextLeft"><c:out value="${stockmovelist.purpose}" /></td>
-						     <c:set var="itemparts" value="${fn:split(stockmovelist.externalid, '_')}" />
-						  <td class="dataTextLeft"><c:out value="${itemparts[0]}" /></td>
-						  <td class="dataTextRight"><c:out value="${stockmovelist.quantity}" /></td>
-						  <td class="dataTextLeft"><c:out value="${stockmovelist.issuedto}" /></td>
-						</tr>
-					</c:forEach>
-
-				</tbody>
-					<tfoot>
-						<tr>
-                            <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
-                    		<td class="footerTD"  colspan="8">
-                    		<!-- <button id="print">Print</button> --> 
-                    		<!-- <button id="approve">Approve</button>
-                    		&nbsp;&nbsp;&nbsp;
-                    		<button id="reject">Reject</button> 
-                    		&nbsp;&nbsp;&nbsp; -->
-                    		<button id="cancel">Cancel</button>
-                    		</td>
-                        </tr>
-                    </tfoot>
-			</table>
-			
-			<div align="center">
-             <%--For displaying Previous link except for the 1st page --%>
-                <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/rauzamission/MessItemsMoveProcess/issueItems?page=${currentPage - 1}">Previous</a></td>
-                </c:if>
-
-                <%--For displaying Page numbers.
-                The when condition does not display a link for the current page--%>
-                <table border="0" cellpadding="5" cellspacing="5">
-                    <tr>
-                        <c:forEach begin="1" end="${noOfPages}" var="i">
-                            <c:choose>
-                                <c:when test="${currentPage eq i}">
-                                    <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
-                                </c:when>
-                                <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/rauzamission/MessItemsMoveProcess/issueItems?page=${i}">${i}</a></td>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </tr>
-                </table>
-
-                <%--For displaying Next link --%>
-                <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/rauzamission/MessItemsMoveProcess/issueItems?page=${currentPage + 1}">Next</a></td>
-                </c:if>
-                    </div>
-                    
-		</div>
-
 	</form>
+	
+	<div id="dialog" title="Quantity not in stock">
+	</div>
+	
+	<div id="dialogpaymentmethod" title="Payment Method">
+	
+				<table style="width: auto;height: auto;display: none;" id="totalerror">
+						<tr>
+           		 			<td>
+           		 				<p align="center" style="color: red;font-size: 10px;">Grand Total Doesn't Match</p>
+           		 			</td>	
+           		 		</tr>
+				</table>
+	
+				<table style="width: auto;height: auto;">
+					<tr>
+           		 			<td>
+           		 				Grand Total: &nbsp;<input type="text" name="itemsGrandTotalAmount" id="itemsGrandTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" readonly/>
+           		 				<input type="hidden" name="itemsGrandTotalAmountWithoutGST" id="itemsGrandTotalAmountWithoutGST" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" readonly/>
+           		 				<br>
+           		 			</td>	
+           		 			
+           		 			
+           		 		</tr>
+				</table>
+				
+           		 
+           		 <table style="width: auto;height: auto;">
+						
+						<tr>
+							<td>Payment method: &nbsp;</td>
+						
+							<td>
+							
+								<input type="checkbox" id="cashpayment" name="paymentmethod" value="cashpayment" onclick="selectPayment(this.id)">
+								<label for="cashpayment">Cash</label>
+									
+								<input type="checkbox" id="banktransfer" name="paymentmethod" value="banktransfer" onclick="selectPayment(this.id)">
+								<label for="banktransfer">Bank Transfer</label>
+								
+								<input type="checkbox" id="chequetransfer" name="paymentmethod" value="chequetransfer" onclick="selectPayment(this.id)">
+								<label for="chequetransfer">Cheque</label>							
+							
+							</td>
+						<tr>
+							<td><br></td>
+						</tr>	
+							
+						</tr>
+						<tr id="cashamount" style="display: none;">
+							<td></td>
+						
+							<td>
+								Amount &nbsp;<input type="text" name="totalcashamount" id="totalcashamount" class="textfieldvaluesshorts" value="0" style="font-size: 14px;font-weight: bold;" />														
+							</td>
+							
+						</tr>
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr id="banktransferamount" style="display: none;">
+							<td></td>
+						
+							<td>
+								Amount &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="text" name="totalbanktransferamount" id="totalbanktransferamount" class="textfieldvaluesshorts" value="0" style="font-size: 14px;font-weight: bold;"/>														
+							</td>
+							
+						</tr>
+						<tr id="onlinetransferack" style="display: none;">
+							<td></td>
+						
+							<td>
+								Acknowledgement # &nbsp;<input type="text" id="ackno" name="ackno" class="textfieldvaluesshorts" style="width: 220px;font-size: 14px;font-weight: bold;">														
+							</td>
+							
+						</tr>
+						<tr id="onlinetransferdate" style="display: none;">
+							<td></td>
+						
+							<td>
+							Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="text"  name="transferdate"
+									class="textField" style="font-size: 14px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="transferdate" autocomplete="false" required
+									data-validate="validate(required)">
+								
+							</td>
+							
+						</tr>
+						
+						<tr id="onlinetransferbank" style="display: none;">
+							<td></td>
+						
+							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label>
+									<select name="transferbankname" id="transferbankname" class="dropdownlist" style="font-size: 14px;width: 220px;" required>
+											<option value="sbi">SBI Bank</option>
+								</select>
+							
+							</label>
+							
+							</td>
+							
+						</tr>
+						
+						<tr id="chequetransferamount" style="display: none;">
+							<td></td>
+						
+							<td>
+								Amount &nbsp;&nbsp;&nbsp;<input type="text" name="totalchequetransferamount" id="totalchequetransferamount" value="0" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" value="0"/>														
+							</td>
+							
+						</tr>
+						<tr id="onlinechequeack" style="display: none;">
+							<td></td>
+						
+							<td>
+								Cheque # &nbsp;<input type="text" id="chequeno" name="chequeno" class="textfieldvaluesshorts" style="width: 220px;font-size: 14px;font-weight: bold;">														
+							</td>
+							
+						</tr>
+						<tr id="onlinechequedate" style="display: none;">
+							<td></td>
+						
+							<td>
+							Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="text"  name="chequedate"
+									class="textField" style="font-size: 14px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="chequedate" autocomplete="false" required
+									data-validate="validate(required)">
+								
+							</td>
+							
+						</tr>
+						
+						<tr id="onlinechequebank" style="display: none;">
+							<td></td>
+						
+							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label>
+									<select name="chequebankname" id="chequebankname" class="dropdownlist" style="font-size: 14px;width: 220px;" required>
+											<option value="sbi">SBI Bank</option>
+								</select>
+							
+							</label>
+							
+							</td>
+							
+						</tr>
+						
+					</table>
+			</div>
+	
+	<script>
+    $('.select2').select2();
+</script>
 </body>
 </html>
