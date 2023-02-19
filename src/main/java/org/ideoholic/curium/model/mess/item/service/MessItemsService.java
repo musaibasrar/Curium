@@ -3,16 +3,11 @@ package org.ideoholic.curium.model.mess.item.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Properties;
 
@@ -21,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.account.dao.AccountDAO;
-import org.ideoholic.curium.model.account.dto.Accountdetails;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
@@ -29,7 +23,6 @@ import org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockAvailability;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
 import org.ideoholic.curium.model.mess.stockmove.dao.MessStockMoveDAO;
-import org.ideoholic.curium.model.mess.stockmove.dto.MessStockItemDetails;
 import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
 import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
 import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
@@ -78,8 +71,8 @@ public class MessItemsService {
 			 messItems.setExternalid(DataUtil.emptyString(request.getParameter("itemname")));
 			 messItems.setUnitofmeasure(DataUtil.emptyString(request.getParameter("unitofmeasure")));
 			 messItems.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			 messItems.setLinkedledgerid(getLedgerAccountId("itemaccountid"));
-			 messItems.setLinkedledgeridexpense(getLedgerAccountId("itemaccountidexpense"));
+			 messItems.setLinkedledgerid(getLedgerAccountId("itemaccountid"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())));
+			 messItems.setLinkedledgeridexpense(getLedgerAccountId("itemaccountidexpense"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())));
 			 messItems.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			 
 			 messStockAvailability.setAvailablestock(0.0f);
@@ -175,18 +168,23 @@ public class MessItemsService {
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			
 			
-				String itemsTotal = request.getParameter("itemsTotalAmount");
+				//String itemsTotal = request.getParameter("itemsTotalAmount");
+				String itemsTotal = request.getParameter("itemsGrandTotalAmountWithoutGST");
 				BigDecimal itemsTotalAmount = new BigDecimal(itemsTotal);
 				itemsTotalAmount = itemsTotalAmount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 				
 				String[] itemIds = request.getParameterValues("itemids");
 				String[] itemsName = request.getParameterValues("itemsname");
 				String[] itemsQuantity = request.getParameterValues("itemsquantity");
-				String[] unitPrice = request.getParameterValues("price");
+				String[] salesPrice = request.getParameterValues("price");
+				String[] batchNo = request.getParameterValues("batchno");
 				String[] lineTotal = request.getParameterValues("linetotal");
 				String sup = request.getParameter("supplierid");
 				String[] supplieridledgerid = sup.split(":");
 				String randomString =  DataUtil.generateString(8);
+				String[] purchasePrice = request.getParameterValues("purchaseprice");
+				String[] sgst = request.getParameterValues("sgst");
+				String[] cgst = request.getParameterValues("cgst");
 				
 				//Invoice Details
 				MessInvoiceDetails messInvoiceDetails = new MessInvoiceDetails();
@@ -209,14 +207,16 @@ public class MessItemsService {
 						MessStockEntry messStockEntry = new MessStockEntry();
 						
 						messStockEntry.setItemid(Integer.parseInt(itemIds[i]));
-						messStockEntry.setExternalid(itemsName[i]);
-						messStockEntry.setBatchno(DataUtil.dateFromatConversionSlashToNoSlash(request.getParameter("itementrydate"))+"_"+itemIds[i]+"_"+request.getParameter("supplierid"));
+						messStockEntry.setExternalid(itemsName[i]+"_"+salesPrice[i]);
+						messStockEntry.setBatchno(batchNo[i]);
 						messStockEntry.setReceiveddate(DateUtil.indiandateParser(request.getParameter("itementrydate")));
-						messStockEntry.setItemunitprice(Float.parseFloat(unitPrice[i]));
+						messStockEntry.setItemunitprice(Float.parseFloat(purchasePrice[i]));
 						messStockEntry.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						messStockEntry.setQuantity(Float.parseFloat(itemsQuantity[i]));
 						messStockEntry.setAvailablequantity(Float.parseFloat(itemsQuantity[i]));
 						messStockEntry.setMessinvoicedetails(messInvoiceDetails);
+						messStockEntry.setSgst(Float.parseFloat(sgst[i]));
+						messStockEntry.setCgst(Float.parseFloat(cgst[i]));
 						messStockEntry.setStatus("ACTIVE");
 						messStockEntry.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 						
@@ -226,7 +226,7 @@ public class MessItemsService {
 					
 						//Pass J.V. : credit the supplier debit the stock account
 						int supplierLedgerId = DataUtil.parseInt(supplieridledgerid[1]);
-						int stockLedgerId = getLedgerAccountId("itemaccountid");
+						int stockLedgerId = getLedgerAccountId("itemaccountid"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						
 						VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 						
@@ -250,7 +250,7 @@ public class MessItemsService {
 						
 						//Pass J.V to book transportation charges
 						
-						int drTransportationExpense = getLedgerAccountId("transportationexpenses");
+						int drTransportationExpense = getLedgerAccountId("transportationexpenses"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						int crSupplierLedgerId = DataUtil.parseInt(supplieridledgerid[1]);
 						String transportationCharges = request.getParameter("transportationcharges");
 						
@@ -404,12 +404,11 @@ public class MessItemsService {
 				httpSession.setAttribute("issuedtoselected", "");
 			}
 			
-			if(!purpose.isEmpty()) {
-				subQuery = subQuery + "and purpose = '"+purpose+"'";
-				httpSession.setAttribute("purposeselected", "Purpose:&nbsp;"+purpose);
-			}else {
-			httpSession.setAttribute("purposeselected", "");
-			}
+			/*
+			 * if(!purpose.isEmpty()) { subQuery = subQuery + "and purpose = '"+purpose+"'";
+			 * httpSession.setAttribute("purposeselected", "Purpose:&nbsp;"+purpose); }else
+			 * { httpSession.setAttribute("purposeselected", ""); }
+			 */
 			
 			if(!item.isEmpty()) {
 				subQuery = subQuery + "and itemid = '"+item+"'";

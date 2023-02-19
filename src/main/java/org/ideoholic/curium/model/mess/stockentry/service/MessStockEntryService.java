@@ -32,7 +32,6 @@ public class MessStockEntryService {
 
 	public void getMRVDetails()  throws IOException {
 		
-		System.out.println("In mrv details");
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			
 			int invoiceDetailsId = Integer.parseInt(request.getParameter("invoicedetailsid"));
@@ -110,10 +109,14 @@ public class MessStockEntryService {
 		        	StringBuilder rowBuidler = new StringBuilder( "<table border='1' style='margin-left: auto;margin-right: auto;' style='border-color:#4b6a84' id='vd'>" + 
 			        													"<thead>" + 
 			        													"<tr class='headerText' >" + 
-			        													"<th>Name</th>" + 
+			        													"<th>Item Name</th>" +
+			        													"<th>Batch No.</th>" +
 			        													"<th>Quantity</th>" + 
-			        													"<th>Unit</th>" + 
-			        													"<th>Unit Price</th>" + 
+			        													"<th>UOM</th>" + 
+			        													"<th>Sales Price</th>" +
+			        													"<th>Purchase Price</th>" +
+			        													"<th>SGST</th>" +
+			        													"<th>CGST</th>" +
 			        													"<th>Item Total</th>" + 
 			        													"</tr>" + 
 			        													"</thead>" + 
@@ -124,13 +127,17 @@ public class MessStockEntryService {
 		        		
 		        			   MessItems messItems = new MessItemsDAO().getItem(messStockEntry.getItemid());
 		        			   float itemTotal = messStockEntry.getQuantity() * messStockEntry.getItemunitprice();
-		        			   
+		        			   String[] purchasePrice = messStockEntry.getExternalid().split("_");
 		        		rowBuidler.append(
 		        	                 "<tr style='border-color:#000000' border='1' cellpadding='1' cellspacing='1' >" + 
 		        			         "<td class='dataText'>"+messItems.getName()+"</td>" + 
+		        			         "<td class='dataText'>"+messStockEntry.getBatchno()+"</td>" + 
 		        			         "<td class='dataText'>"+messStockEntry.getQuantity()+"</td>" + 
 		        			         "<td class='dataText'>"+messItems.getUnitofmeasure()+"</td>" + 
-		        			         "<td class='dataText'>"+messStockEntry.getItemunitprice()+"</td>" + 
+		        			         "<td class='dataText'>"+purchasePrice[1]+"</td>" +
+		        			         "<td class='dataText'>"+messStockEntry.getItemunitprice()+"</td>" +
+		        			         "<td class='dataText'>"+messStockEntry.getSgst()+"</td>" +
+		        			         "<td class='dataText'>"+messStockEntry.getCgst()+"</td>" +
 		        			         "<td class='dataText'>"+itemTotal+"</td>" + 
 		        			         "</tr>");
 		        		
