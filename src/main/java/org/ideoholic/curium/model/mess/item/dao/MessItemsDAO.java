@@ -7,13 +7,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
-
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockAvailability;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
-import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
@@ -161,8 +159,12 @@ public class MessItemsDAO {
 	            
 	            for (MessStockEntry messStockEntry : messStockEntryList) {
 	            	session.save(messStockEntry);
-	            	Query queryUpdateMessStock = session.createQuery("update MessStockEntry set externalid= concat(externalid,'_"+messStockEntry.getId()+"') where id="+messStockEntry.getId());
-	            	queryUpdateMessStock.executeUpdate();
+					/*
+					 * Query queryUpdateMessStock = session.
+					 * createQuery("update MessStockEntry set externalid= concat(externalid,'_"
+					 * +messStockEntry.getId()+"') where id="+messStockEntry.getId());
+					 * queryUpdateMessStock.executeUpdate();
+					 */
 					Query queryStockAvailability = session.createQuery("update MessStockAvailability set availablestock= availablestock+'"+messStockEntry.getQuantity()+"' where itemid="+messStockEntry.getItemid());
 					queryStockAvailability.executeUpdate();
 					Query queryInvoice = session.createQuery("update MessInvoiceDetails set voucherid= '"+transactions.getTransactionsid()+"' where id="+messStockEntry.getMessinvoicedetails().getId());
