@@ -12,6 +12,7 @@ import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
+import org.ideoholic.curium.model.mess.stockmove.dto.Bill;
 import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.pudetails.dto.Pudetails;
@@ -141,9 +142,13 @@ public class MessStockMoveDAO {
 
 
 	public boolean moveStockSave(List<MessStockMove> messStockMovesList, VoucherEntrytransactions transactions,
-			String updateDrAccount, String updateCrAccount) {
+			String updateDrAccount, String updateCrAccount, VoucherEntrytransactions transactionsIncomeCash,VoucherEntrytransactions transactionsIncomeBank,
+			VoucherEntrytransactions transactionsIncomeCheque,
+			String updateDrAccountIncomeCash, String updateCrAccountIncomeCash, String updateDrAccountIncomeBank, String updateCrAccountIncomeBank,
+			String updateDrAccountIncomeCheque, String updateCrAccountIncomeCheque) {
 		 
-		boolean result = false; 
+		boolean result = false;
+		int billNo = 0;
 		try {
 	        //this.session = sessionFactory.openCurrentSession();
 	        transaction = session.beginTransaction();
@@ -152,11 +157,58 @@ public class MessStockMoveDAO {
 			query.executeUpdate();
 			Query query1 = session.createQuery(updateCrAccount);
 			query1.executeUpdate();
-
+			
+			if(transactionsIncomeCash!=null) {
+				session.save(transactionsIncomeCash);
+			}
+			
+			if(transactionsIncomeBank!=null) {
+				session.save(transactionsIncomeBank);
+			}
+			
+			if(transactionsIncomeCheque!=null) {
+				session.save(transactionsIncomeCheque);
+			}
+			
+			
+			if(updateDrAccountIncomeCash!=null) {
+				Query queryIncome = session.createQuery(updateDrAccountIncomeCash);
+				queryIncome.executeUpdate();
+				Query queryIncomeCr = session.createQuery(updateCrAccountIncomeCash);
+				queryIncomeCr.executeUpdate();
+			}
+			
+			
+			if(updateDrAccountIncomeBank!=null) {
+				Query queryIncome = session.createQuery(updateDrAccountIncomeBank);
+				queryIncome.executeUpdate();
+				Query queryIncomeCr = session.createQuery(updateCrAccountIncomeBank);
+				queryIncomeCr.executeUpdate();
+			}
+			
+			
+			if(updateDrAccountIncomeCheque!=null) {
+				Query queryIncome = session.createQuery(updateDrAccountIncomeCheque);
+				queryIncome.executeUpdate();
+				Query queryIncomeCr = session.createQuery(updateCrAccountIncomeCheque);
+				queryIncomeCr.executeUpdate();
+			}
+			
+			Query queryMaxRow = session.createQuery("from MessStockMove ORDER BY id DESC");
+			queryMaxRow.setMaxResults(1);
+   			MessStockMove msm = (MessStockMove) queryMaxRow.uniqueResult();
+			
+			if(msm!=null) {
+				String[] externalId = msm.getExternalid().split("_");
+				billNo = Integer.parseInt(externalId[1]) + 1;
+			}else {
+				billNo = 1;
+			}
+			
 			for (MessStockMove messStockMove : messStockMovesList) {
 	        	
 				session.save(messStockMove);
-	        	Query queryUpdateMessStock = session.createQuery("update MessStockMove set externalid= concat(externalid,'_"+messStockMove.getId()+"'), voucherid = '"+transactions.getTransactionsid()+"' where id="+messStockMove.getId());
+	        	Query queryUpdateMessStock = session.createQuery("update MessStockMove set externalid= concat(externalid,'_"+billNo+"'), voucherid = '"+transactions.getTransactionsid()+"' where id="+messStockMove.getId());
 	        	queryUpdateMessStock.executeUpdate();
 				Query queryStockAvailability = session.createQuery("update MessStockAvailability set availablestock= availablestock-'"+messStockMove.getQuantity()+"' where itemid="+messStockMove.getItemid());
 				queryStockAvailability.executeUpdate();
@@ -173,22 +225,22 @@ public class MessStockMoveDAO {
 	        transaction.commit();
 	        result = true;
 	        
-    } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-        
-        hibernateException.printStackTrace();
-    } finally {
+   } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+       
+       hibernateException.printStackTrace();
+   } finally {
 			HibernateUtil.closeSession();
-    }
+   }
 
- return result;
+return result;
 }
 
 
 
-	public List<MessStockMove> getStockMoveDetails(int offset,
+	public List<Bill> getStockMoveDetails(int offset,
 			int noOfRecords, int branchId) {
 		
-        List<MessStockMove> results = new ArrayList<MessStockMove>();
+        List<Bill> results = new ArrayList<Bill>();
         
         try {
                 transaction = session.beginTransaction();
@@ -213,7 +265,7 @@ public class MessStockMoveDAO {
 
 	public MessStockMove getStockMoveDetails(int stockid) {
 		
-        MessStockMove results = new MessStockMove();
+		MessStockMove results = new MessStockMove();
         
         try {
                 transaction = session.beginTransaction();
@@ -315,6 +367,52 @@ public class MessStockMoveDAO {
 				HibernateUtil.closeSession();
 			return noOfRecords;
 		}
+	}
+	
+	public List<MessStockMove> getCustomerLastPrices(String customerName, String itemid, int branchId) {
+		List<MessStockMove> results = new ArrayList<MessStockMove>();
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			transaction = session.beginTransaction();
+
+			Query query = session.createQuery("From MessStockMove msm where msm.status != 'CANCELLED' and issuedto='"+customerName+"' and itemid='"+itemid+"' AND msm.branchid="+branchId+" order by id DESC").setCacheable(true).setCacheRegion("commonregion");
+			results = query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+
+
+
+	public MessStockMove getMessStockMoveMaxRow() {
+		
+		MessStockMove msm = new MessStockMove();
+		
+				try {
+					
+		            transaction = session.beginTransaction();
+		    		Query queryMaxRow = session.createQuery("from MessStockMove ORDER BY id DESC");
+		    		queryMaxRow.setMaxResults(1);
+		    		 msm = (MessStockMove) queryMaxRow.uniqueResult();
+		            transaction.commit();
+		            
+		    } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		            
+		            hibernateException.printStackTrace();
+		
+		    } finally {
+					HibernateUtil.closeSession();
+		    }
+				return msm;
+		
 	}
 	
 }
