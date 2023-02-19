@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Stock Issuance Report</title>
-<link rel="stylesheet" href="/lilyrose/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/lilyrose/css/datePicker/demos.css">
+<link rel="stylesheet" href="/riyan/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/riyan/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -367,17 +367,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/lilyrose/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/riyan/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/riyan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/lilyrose/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/lilyrose/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/riyan/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/lilyrose/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/lilyrose/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/riyan/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -431,12 +431,17 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/lilyrose/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/riyan/js/datetimepicker_css.js"></script>
+
+<script src="/riyan/js/bootstrap.min.js"></script>
+<link href="/riyan/css/select2.min.css" rel="stylesheet" />
+<script src="/riyan/js/select2.min.js"></script>
+
 <script type="text/javascript">
 
 	function generateStockIssuanceReport() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/lilyrose/MessItemsProcess/generateStockIssuanceReport";
+			form1.action = "/riyan/MessItemsProcess/generateStockIssuanceReport";
 			form1.method = "POST";
 			form1.submit();
 	}
@@ -469,7 +474,7 @@
      
 	 function printRecords() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/lilyrose/MessItemsProcess/printStockIssuanceReport";
+			form1.action = "/riyan/MessItemsProcess/printStockIssuanceReport";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -481,7 +486,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/lilyrose/UserProcess/sessionTimeOut");
+	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -549,18 +554,30 @@ for(Cookie cookie : cookies){
 						<tr>
 						
 						<tr>
-							<td class="alignRight">Issue To&nbsp;</td>
+							<td class="alignRight">Student Name&nbsp;</td>
 							<td ><label>
-									<select name="issuedto"
-									id="issuedto" class="dropdownlist" style="font-size: 14px;" >
-										<option selected="selected">Mess Location 1</option>
-										<option></option>
-										<option>Mess Location 2</option>
+									<select name="issuedto"	id="issuedto" style="font-size: 24px;width: 220px;"  class="form-control select2" required>
+										        	<option></option>
+										        	<c:forEach items="${studentList}" var="student">
+										        	
+										        		<option value="${student.student.name}_${student.student.classstudying}_${student.fathersname}">${student.student.name}/${student.student.classstudying}/${student.fathersname}</option>
+										        	</c:forEach>
+										        </select>
+							
+							</label></td>
+							
+							<td class="alignRight">Item&nbsp;</td>
+							<td ><label>
+									<select name="itemname" id="itemname" class="dropdownlist" style="font-size: 14px;" required>
+											<option></option>
+										<c:forEach items="${itemslist}" var="itemslist">
+											<option value="${itemslist.id}">${itemslist.name}</option>
+										</c:forEach>
 								</select>
 							
 							</label></td>
 						
-							<td  class="alignRight">Purpose &nbsp;</td>
+							<!-- <td  class="alignRight">Purpose &nbsp;</td>
 							<td ><label> <select name="purpose"
 									id="purpose" class="dropdownlist" style="font-size: 14px;" required>
 										<option selected></option>
@@ -569,13 +586,13 @@ for(Cookie cookie : cookies){
 										<option>Dinner</option>
 										<option>Other</option>
 								</select>
-							</label></td>
+							</label></td> -->
 							
 						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
+						<%-- <tr>
 							<td class="alignRight">Item&nbsp;</td>
 							<td ><label>
 									<select name="itemname" id="itemname" class="dropdownlist" style="font-size: 14px;" required>
@@ -589,7 +606,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -649,7 +666,7 @@ for(Cookie cookie : cookies){
 						  <td class="dataText"><c:out value="${stockissuancelist.itemunitprice}" /></td>
 						  <td class="dataText">
 						  <c:set var="itemTotal" value="${itemTotal + stockissuancelist.itemunitprice * stockissuancelist.quantity}" />
-						  <fmt:setLocale value="en_IN" scope="request"/>
+						  <fmt:setLocale value="en_IN" scope="session"/>
 							<fmt:formatNumber type="currency"  value="${stockissuancelist.itemunitprice * stockissuancelist.quantity}" />
 						  </td>
 						</tr>
@@ -660,7 +677,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>Grand Total:
-							<fmt:setLocale value="en_IN" scope="request"/>
+							<fmt:setLocale value="en_IN" scope="session"/>
 							<fmt:formatNumber type="currency"  value="${itemTotal}" /></b>
 							</label> 
 							</td>
@@ -682,6 +699,8 @@ for(Cookie cookie : cookies){
 
 		</div>
 	</form>
-	
+	<script>
+    $('.select2').select2();
+</script>
 </body>
 </html>
