@@ -776,7 +776,7 @@ for(Cookie cookie : cookies){
             	
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/riyan/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate</a>
+            				 <a target="mainFrame" href="/riyan/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipt</a>
             			</td>
             		</tr>
             		<!-- <tr>
@@ -786,7 +786,7 @@ for(Cookie cookie : cookies){
             		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/riyan/MessItemsProcess/purchaseItems" style="font-size: 12px;">Receive</a>
+            				 <a target="mainFrame" href="/riyan/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
             			</td>
             		</tr>
             		<tr>
