@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.model.mess.stockmove.service.MessStockMoveService;
+import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,12 +43,21 @@ public class MessStockMoveAction {
 
 	@GetMapping("/issueItems")
 	public String issueItems() {
+		
 		new MessItemsService(request, response).getCurrentStockToIssue();
 		/*
 		 * Batch stock issue new MessStockMoveService(request,
 		 * response).viewStockEntryDetails();
 		 */
+		
+		//Batch stock issue 
+    	new MessStockMoveService(request, response).viewStockEntryDetails();
+    	
+    	//Get Customers
+    	new StudentService(request, response).viewAllStudentsParents();
+		
 		new MessStockMoveService(request, response).viewStockMoveDetails();
+		
 		return "issuestock";
 	}
 
@@ -61,8 +71,21 @@ public class MessStockMoveAction {
 		 * response).viewStockEntryDetails();
 		 */
 		new MessStockMoveService(request, response).viewStockMoveDetails();
-		return "issuestock";
+		
+		new MessStockMoveService(request, response).viewStockMoveDetails();
+    	//Get Customers
+    	new StudentService(request, response).viewAllStudentsParents();
+    	return "bill";
 
 	}
+	
+	
+	@GetMapping("/billsReport")
+	public String billsReport() {
+		    	
+    	new MessStockMoveService(request, response).viewStockMoveDetails();
+    	
+    	return "billsreport";
+    }
 
 }
