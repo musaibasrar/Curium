@@ -13,19 +13,19 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/riyan/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/riyan/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/riyan/css/datePicker/demos.css">
+        <script language="JavaScript" src="/akshara/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/akshara/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/akshara/css/datePicker/demos.css">
 
-        <script type="text/javascript" src="/riyan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/riyan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/riyan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/riyan/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/riyan/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/riyan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/riyan/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/riyan/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/akshara/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/akshara/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/akshara/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/akshara/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/akshara/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/akshara/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/akshara/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             var get;
@@ -431,7 +431,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/akshara/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,61 +454,61 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/riyan/StudentProcess/viewAll" >View All</a><br/>
-                <a target="mainFrame" href="/riyan/feesstructure" >Fees Structure</a><br/>
+                <a target="mainFrame" href="/akshara/StudentProcess/viewAll" >View All</a><br/>
+                <a target="mainFrame" href="/akshara/feesstructure" >Fees Structure</a><br/>
                 
 
             </div>
             <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="/riyan/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/riyan/EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/riyan/DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/riyan/PositionProcess/positionView" >Add Position</a>
+                <a target="mainFrame" href="/akshara/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="/akshara/EmployeeProcess/addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="/akshara/DepartmentProcess/departmentView" >Add Department</a>
+                <a target="mainFrame" href="/akshara/PositionProcess/positionView" >Add Position</a>
 
             </div> -->
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="/riyan/FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/riyan/FeesProcess/feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="/akshara/FeesProcess/feesView" >Fees Category</a>
+                <a target="mainFrame" href="/akshara/FeesProcess/feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
             <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/riyan/AdminProcess/viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="/akshara/AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/riyan/AdvanceSearch" >Search</a><br/>
+                <a target="mainFrame" href="/akshara/AdvanceSearch" >Search</a><br/>
 
 
             </div>
 			<!--
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/riyan/Promotion" >Promotions</a><br/>
+                <a target="mainFrame" href="/akshara/Promotion" >Promotions</a><br/>
 
 
             </div> -->
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/riyan/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/akshara/StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
             <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="/riyan/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/riyan/YearProcess/updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="/akshara/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="/akshara/YearProcess/updateYear" >Academic year</a><br/>
                 
 
             </div> -->
@@ -516,15 +516,15 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-               <!--  <a target="mainFrame" href="/riyan/Backup&Restore" >Backup</a><br/>
-                <a target="mainFrame" href="/riyan/currentIssue" >Current Issue</a><br/>
-                <a target="mainFrame" href="/riyan/changePassword" >Change Password</a><br/> -->
-                <a target="mainFrame" href="/riyan/feesCollectionDetails" >Fees Collection Details</a><br/>
+               <!--  <a target="mainFrame" href="/akshara/Backup&Restore" >Backup</a><br/>
+                <a target="mainFrame" href="/akshara/currentIssue" >Current Issue</a><br/>
+                <a target="mainFrame" href="/akshara/changePassword" >Change Password</a><br/> -->
+                <a target="mainFrame" href="/akshara/feesCollectionDetails" >Fees Collection Details</a><br/>
             </div>
             
            <!--  <h5 style="font-size: 12px"><a href="#" >Reports</a></h5>
             <div >
-                <a target="mainFrame" href="/riyan/studentsdetailsreports" >Student Details</a><br/>
+                <a target="mainFrame" href="/akshara/studentsdetailsreports" >Student Details</a><br/>
                 
             </div>  -->
             

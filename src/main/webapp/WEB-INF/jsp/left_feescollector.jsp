@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/riyan/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/riyan/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/riyan/css/datePicker/demos.css">
+        <script language="JavaScript" src="/akshara/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/akshara/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/akshara/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/riyan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/riyan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/riyan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/riyan/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/riyan/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/riyan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/riyan/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/riyan/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/riyan/css/font-awesome.css">
+        <script type="text/javascript" src="/akshara/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/akshara/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/akshara/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/akshara/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/akshara/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/akshara/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/akshara/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/akshara/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/akshara/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -414,7 +414,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/akshara/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -437,19 +437,19 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/riyan/StudentProcess/viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/akshara/StudentProcess/viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
             </div>
             
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-                <a target="mainFrame" href="/riyan/FeesProcess/feesCollectAllBranches" style="font-size: 12px;">Fees Collect</a><br/>
+                <a target="mainFrame" href="/akshara/FeesProcess/feesCollectAllBranches" style="font-size: 12px;">Fees Collect</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
             <div >
-                <a target="mainFrame" href="/riyan/sendsms_superadmin" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="/akshara/sendsms_superadmin" style="font-size: 12px;">SMS</a><br/>
             </div>
             
             </div>

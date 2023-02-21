@@ -14,39 +14,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>View Attendance</title>
-<script src="/riyan/js/Chart.js"></script>
-<link rel="stylesheet" href="/riyan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/riyan/css/datePicker/demos.css">
-<link rel="stylesheet" href="/riyan/css/graph/jquery.jqplot.css">
-<link rel="stylesheet" href="/riyan/css/graph/jquery.jqplot.min.css">
+<script src="/akshara/js/Chart.js"></script>
+<link rel="stylesheet" href="/akshara/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/akshara/css/datePicker/demos.css">
+<link rel="stylesheet" href="/akshara/css/graph/jquery.jqplot.css">
+<link rel="stylesheet" href="/akshara/css/graph/jquery.jqplot.min.css">
 
 
-  <script type="text/javascript" src="/riyan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+  <script type="text/javascript" src="/akshara/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         
         
-         <script  type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/riyan/js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="/riyan/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/riyan/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/riyan/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/riyan/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/riyan/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/riyan/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/riyan/js/graph/plugins/jqplot.trendline.min.js"></script>
-        <script src="/riyan/js/jquery.jqplot.min.js" ></script>
-        <script src="/riyan/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
+         <script  type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/akshara/js/graph/jquery.jqplot.js"></script>        
+        <script  type="text/javascript" src="/akshara/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/akshara/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/akshara/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/akshara/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/akshara/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/akshara/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/akshara/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script src="/akshara/js/jquery.jqplot.min.js" ></script>
+        <script src="/akshara/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
         
 <style type="text/css">
 <!--
@@ -328,42 +328,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/riyan/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/riyan/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/akshara/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/akshara/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/akshara/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/riyan/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/akshara/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/akshara/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/riyan/js/datePicker/ui/sliderAccess.js"></script>
+	src="/akshara/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/akshara/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/riyan/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/akshara/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/akshara/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/akshara/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/akshara/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/akshara/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/akshara/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/akshara/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/akshara/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/akshara/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/akshara/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/akshara/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -523,7 +523,7 @@
     	}
        
         </script>
-<script type="text/javascript" src="/riyan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/akshara/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -551,7 +551,7 @@
 	
 	function searchStudentAttendanceDetailsMonthly() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/riyan/AttendanceProcess/searchStudentAttendanceDetailsMonthly";
+		form1.action = "/akshara/AttendanceProcess/searchStudentAttendanceDetailsMonthly";
 		form1.method = "POST";
 		form1.submit();
 
@@ -559,7 +559,7 @@
 	
 	function searchStudentAttendanceDetailsMonthlyGraph() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/riyan/AttendanceProcess/searchStudentAttendanceDetailsMonthlyGraph";
+		form1.action = "/akshara/AttendanceProcess/searchStudentAttendanceDetailsMonthlyGraph";
 		form1.method = "POST";
 		form1.submit();
 
@@ -567,7 +567,7 @@
 	
 	function searchStudentAttendanceDetails() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/riyan/AttendanceProcess/searchStudentAttendanceDetails";
+		form1.action = "/akshara/AttendanceProcess/searchStudentAttendanceDetails";
 		form1.method = "POST";
 		form1.submit();
 
@@ -727,7 +727,7 @@
 	   
 	function updateRecords(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/riyan/AttendanceProcess/updateStudentAttendanceDetails";
+		form1.action = "/akshara/AttendanceProcess/updateStudentAttendanceDetails";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -741,7 +741,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/akshara/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -755,7 +755,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form id="form1" action="/riyan/StampFeesProcess/applyFees" method="POST">
+	<form id="form1" action="/akshara/StampFeesProcess/applyFees" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />

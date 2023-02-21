@@ -13,11 +13,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Dash Board</title>
-        <script src="/riyan/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/riyan/css/bootstrap.min.css">
-        <script src="/riyan/js/jquery.min.js"></script>
-        <script src="/riyan/js/bootstrap.min.js"></script>
-        <script src="/riyan/js/popper.min.js"></script>
+        <script src="/akshara/js/Chart.min.js"></script>
+         <link rel="stylesheet" href="/akshara/css/bootstrap.min.css">
+        <script src="/akshara/js/jquery.min.js"></script>
+        <script src="/akshara/js/bootstrap.min.js"></script>
+        <script src="/akshara/js/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
@@ -51,7 +51,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/akshara/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -83,10 +83,10 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/riyan/images/student.svg"  height="20" width="20"/>
+        						<img src="/akshara/images/student.svg"  height="20" width="20"/>
         						<label id="labelname">Total Students </label>
         						<br>		
-        						<img src="/riyan/images/teacher.svg" height="20" width="20"/>
+        						<img src="/akshara/images/teacher.svg" height="20" width="20"/>
         						<label id="labelname">Total Teachers </label>
         					</td>
         					<td></td>
@@ -110,9 +110,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/riyan/images/totalfees.svg" height="20" width="20"/>
+        						<img src="/akshara/images/totalfees.svg" height="20" width="20"/>
         						<label id="labelname">Total Fees&nbsp;&nbsp;&nbsp;</label><br>
-        						<img src="/riyan/images/monthlyfees.svg"  height="20" width="20"/>	
+        						<img src="/akshara/images/monthlyfees.svg"  height="20" width="20"/>	
         						<label id="labelname">${Currentmonth} Fees</label>
         					</td>
         					<td></td>
@@ -138,9 +138,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        					<img src="/riyan/images/feespaid.svg" height="20" width="20"/>	
+        					<img src="/akshara/images/feespaid.svg" height="20" width="20"/>	
         						<label id="labelname">Total Fees Paid</label><br>
-        						<img src="/riyan/images/feesdue.svg"  height="20" width="20"/>
+        						<img src="/akshara/images/feesdue.svg"  height="20" width="20"/>
         						<label id="labelname">Total Fees Due&nbsp;</label>
         					</td>
         					<td></td>
@@ -166,10 +166,10 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/riyan/images/todayscollection.svg" height="20" width="20"/>
+        						<img src="/akshara/images/todayscollection.svg" height="20" width="20"/>
         						<label id="labelname">Today's Fees</label>
         						<br>		
-        						<img src="/riyan/images/todaysexpenses.svg" height="20" width="20"/>	
+        						<img src="/akshara/images/todaysexpenses.svg" height="20" width="20"/>	
         						<label id="labelname">Today's Expenses</label>	
         					</td>
         					<td></td>

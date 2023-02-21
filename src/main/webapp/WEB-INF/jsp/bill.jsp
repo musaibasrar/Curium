@@ -178,7 +178,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 40px;">
-				<img src="/riyan/images/riyan.jpg" width="65" height="60"/>
+				<img src="/akshara/images/akshara.jpg" width="65" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 110px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
@@ -364,7 +364,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 40px;">
-				<img src="/riyan/images/riyan.jpg" width="65" height="60"/>
+				<img src="/akshara/images/akshara.jpg" width="65" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 110px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>

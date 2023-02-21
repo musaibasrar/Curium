@@ -21,20 +21,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Employee</title>
-<link rel="stylesheet" href="/riyan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/riyan/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/akshara/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/akshara/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/riyan/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/riyan/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/riyan/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/riyan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/riyan/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/riyan/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/riyan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/riyan/css/datePicker/demos.css">
+	src="/akshara/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/akshara/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/akshara/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/akshara/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/akshara/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/akshara/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/akshara/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/akshara/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="/akshara/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/akshara/css/datePicker/demos.css">
 
 <style type="text/css">
 .myclass {
@@ -225,9 +225,9 @@
 </style>
 
 
-<script type="text/javascript" src="/riyan/js/datetimepicker_css.js"></script>
-<script src="/riyan/JavaScript/actb.js"></script>
-<script src="/riyan/JavaScript/common.js"></script>
+<script type="text/javascript" src="/akshara/js/datetimepicker_css.js"></script>
+<script src="/akshara/JavaScript/actb.js"></script>
+<script src="/akshara/JavaScript/common.js"></script>
 
 <script>
 	$(function() {
@@ -527,7 +527,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/akshara/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -540,7 +540,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/riyan/PersonalProcess/add" method="post">
+	<form id="form1" action="/akshara/PersonalProcess/add" method="post">
 		
 		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		
@@ -898,13 +898,13 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function addEmployee() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/riyan/EmployeeProcess/addEmployee";
+								form1.action = "/akshara/EmployeeProcess/addEmployee";
 								form1.submit();
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/riyan/EmployeeProcess/viewAllEmployee";
+								form1.action = "/akshara/EmployeeProcess/viewAllEmployee";
 								form1.submit();
 							}
 

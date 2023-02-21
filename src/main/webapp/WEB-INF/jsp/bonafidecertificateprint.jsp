@@ -93,15 +93,15 @@ span{
     font-weight: normal;
 }
 </style>
-	<script type="text/javascript" src="/riyan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/riyan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/akshara/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/akshara/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Bonafide Certificate</title>
 </head>
 <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/akshara/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -234,7 +234,7 @@ for(Cookie cookie : cookies){
 		</tr>
 		
 			<tr>
-              <td align="center"><a id="print" href="/riyan/DocumentsProcess/printBonafide">Print</a></td>
+              <td align="center"><a id="print" href="/akshara/DocumentsProcess/printBonafide">Print</a></td>
             </tr>
 		</TABLE>
 	</form>

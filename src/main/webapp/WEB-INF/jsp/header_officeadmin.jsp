@@ -14,10 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/riyan/css/bootstrap.min.css">
-        <script src="/riyan/js/jquery.min.js"></script>
-        <script src="/riyan/js/bootstrap.min.js"></script>
-        <script src="/riyan/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/akshara/css/bootstrap.min.css">
+        <script src="/akshara/js/jquery.min.js"></script>
+        <script src="/akshara/js/bootstrap.min.js"></script>
+        <script src="/akshara/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -92,7 +92,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/riyan/UserProcess/logout";
+                form1.action="/akshara/UserProcess/logout";
                 form1.submit();
             }
 
@@ -102,7 +102,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/akshara/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -125,79 +125,79 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/riyan/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
+								<a target="mainFrame" href="/akshara/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/riyan/images/riyanheader.png"
+							<!-- <td align="left"><img src="/akshara/images/aksharaheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/riyan/left_officeadmin"> <img
-									src="/riyan/images/home.svg" width="18" height="18" 
+							<td><a target="leftFrame" href="/akshara/left_officeadmin"> <img
+									src="/akshara/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="/riyan/FeesProcess/feesCollect"> <img
-									src="/riyan/images/feescollect.svg" width="18" height="18"
+								href="/akshara/FeesProcess/feesCollect"> <img
+									src="/akshara/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
 							<td>
 								<a target="mainFrame"
-								href="/riyan/AccountProcess/createVoucher"> <img
-									src="/riyan/images/createvoucher.svg" width="18" height="18"
+								href="/akshara/AccountProcess/createVoucher"> <img
+									src="/akshara/images/createvoucher.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/riyan/feesCollectionDetails"><img  alt="Fees Details" src="/riyan/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+							<!-- <td ><a target="mainFrame" href="/akshara/feesCollectionDetails"><img  alt="Fees Details" src="/akshara/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
-								href="/riyan/StudentProcess/addNew"> <img
-									src="/riyan/images/student_header.svg" width="18" height="18"
+								href="/akshara/StudentProcess/addNew"> <img
+									src="/akshara/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/riyan/leftsettings_officeadmin">
-									<img alt="Settings" src="/riyan/images/settings.svg" width="18"
+							<td ><a target="leftFrame" href="/akshara/leftsettings_officeadmin">
+									<img alt="Settings" src="/akshara/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
 							<td ><a target="mainFrame"
-								href="/riyan/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/riyan/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+								href="/akshara/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/akshara/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
 
-							<td ><!-- <a target="mainFrame" href="/riyan/sendsms"><img
-									src="/riyan/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+							<td ><!-- <a target="mainFrame" href="/akshara/sendsms"><img
+									src="/akshara/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/riyan/reports_officeadmin"><img
-									src="/riyan/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+								<a target="leftFrame" href="/akshara/reports_officeadmin"><img
+									src="/akshara/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
 							
 							</td>
 
 							<td ><a target="mainFrame"
-								href="/riyan/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/riyan/images/students.svg" width="18"
+								href="/akshara/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/akshara/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
 							</a></td>
 							
 							<!-- <td ><a target="mainFrame"
-								href="/riyan/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/riyan/images/dashboard.svg" width="18"
+								href="/akshara/UserProcess/dashBoard"><img
+									alt="Dash Board" src="/akshara/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td> -->
 								
 							<td ><a target="_parent"
-								href="/riyan/UserProcess/logout"><img
-									src="/riyan/images/logout.svg" width="18" height="18" alt="Log Out" 
+								href="/akshara/UserProcess/logout"><img
+									src="/akshara/images/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>
