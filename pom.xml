@@ -23,7 +23,7 @@
 		<jaxb.version>2.2.11</jaxb.version>
 		<apache.poi.version>4.0.0</apache.poi.version>
 		<jfreechart.version>1.5.0</jfreechart.version>
-		<commons.fileupload.version>1.3.3</commons.fileupload.version>
+		<commons.fileupload.version>1.5</commons.fileupload.version>
 		<commons.email.version>1.5</commons.email.version>
 		<commons.net.version>3.6</commons.net.version>
 		<!-- automatically run annotation processors within the incremental compilation -->
