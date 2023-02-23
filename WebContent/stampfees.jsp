@@ -455,7 +455,7 @@
 				changeYear : true,
 				changeMonth : true,
 				dateFormat: 'dd/mm/yy',
-				yearRange: "-50:+0"
+				yearRange: "-50:+1"
 			});
 			$("#anim").change(
 					function() {
