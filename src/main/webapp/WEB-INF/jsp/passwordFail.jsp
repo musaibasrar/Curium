@@ -16,15 +16,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/roshan/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/roshan/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/alhidaya/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/alhidaya/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/alhidaya/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/alhidaya/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/alhidaya/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.button.js"></script>
         
         
         
@@ -77,7 +77,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alhidaya/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

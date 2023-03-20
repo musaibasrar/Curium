@@ -16,34 +16,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Details</title>
 
-        <script type="text/javascript" language="JavaScript" src="/roshan/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/roshan/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/alhidaya/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/alhidaya/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/alhidaya/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
-        <script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/alhidaya/css/datePicker/demos.css">
+        <script type="text/javascript" src="/alhidaya/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/roshan/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/alhidaya/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/alhidaya/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
         .dataText {
@@ -300,7 +300,7 @@
             function updateStudent(){
                
                 var form1=document.getElementById("form1");
-                form1.action="/roshan/StudentProcess/updateStudentDetails?id=<c:out value='${student.sid}'/>&urlbranchid=<c:out value='${student.branchid}'/>";
+                form1.action="/alhidaya/StudentProcess/updateStudentDetails?id=<c:out value='${student.sid}'/>&urlbranchid=<c:out value='${student.branchid}'/>";
                 form1.submit();
             }
             
@@ -383,7 +383,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alhidaya/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -732,7 +732,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc1.jpg" href="/roshan/data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
+                    <a download="studentdoc1.jpg" href="/alhidaya/data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -741,7 +741,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc2.jpg" href="/roshan/data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
+                    <a download="studentdoc2.jpg" href="/alhidaya/data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -750,7 +750,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc3.jpg" href="/roshan/data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
+                    <a download="studentdoc3.jpg" href="/alhidaya/data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -759,7 +759,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc4.jpg" href="/roshan/data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
+                    <a download="studentdoc4.jpg" href="/alhidaya/data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -768,7 +768,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc5.jpg" href="/roshan/data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
+                    <a download="studentdoc5.jpg" href="/alhidaya/data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
                     </td>
                     </tr>
                     </table>
@@ -1066,7 +1066,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${receiptinfo.date}"/></a></td>
                                 <td  class="dataText"><c:out value="${receiptinfo.receiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/roshan/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/alhidaya/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  
 
                             </tr>
@@ -1184,13 +1184,13 @@ for(Cookie cookie : cookies){
         
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/roshan/StudentProcess/viewAll";
+                form1.action="/alhidaya/StudentProcess/viewAll";
                 form1.submit();
             }
             
             function Print(){
                 var form1=document.getElementById("form1");
-                form1.action="/roshan/StudentProcess/printAdmissionForm";
+                form1.action="/alhidaya/StudentProcess/printAdmissionForm";
                 form1.submit();
             }
         </script>

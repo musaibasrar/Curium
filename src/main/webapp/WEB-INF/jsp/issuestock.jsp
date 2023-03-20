@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Issue Stock</title>
-<link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
+<link rel="stylesheet" href="/alhidaya/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/alhidaya/css/datePicker/demos.css">
 
 <style type="text/css">
 .divCSS {
@@ -445,21 +445,21 @@
 }
 
 </style>
-<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/alhidaya/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/alhidaya/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/roshan/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/alhidaya/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/alhidaya/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/alhidaya/js/datePicker/ui/jquery.ui.accordion.js"></script>
 	
-	<script src="/roshan/js/bootstrap.min.js"></script>
-<link href="/roshan/css/select2.min.css" rel="stylesheet" />
-<script src="/roshan/js/select2.min.js"></script>
+	<script src="/alhidaya/js/bootstrap.min.js"></script>
+<link href="/alhidaya/css/select2.min.css" rel="stylesheet" />
+<script src="/alhidaya/js/select2.min.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -554,14 +554,14 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/alhidaya/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function saveissueentry() {
 		var form1 = document.getElementById("form1");
 		
 		if(form1.checkValidity()) {
-			form1.action = "/roshan/MessItemsMoveProcess/saveStockMove";
+			form1.action = "/alhidaya/MessItemsMoveProcess/saveStockMove";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -571,7 +571,7 @@
 	
 	function cancelRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/MessItemsMoveProcess/cancelStockMove";
+		form1.action = "/alhidaya/MessItemsMoveProcess/cancelStockMove";
 		form1.method = "POST";
 		form1.submit();
 
@@ -579,21 +579,21 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/AdminProcess/printVoucher";
+		form1.action = "/alhidaya/AdminProcess/printVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function approveRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/AdminProcess/approveVoucher";
+		form1.action = "/alhidaya/AdminProcess/approveVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function rejectRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/roshan/AdminProcess/rejectVoucher";
+		form1.action = "/alhidaya/AdminProcess/rejectVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -936,7 +936,7 @@
     	}
     	
     	var form1 = document.getElementById("form1");
-		form1.action="/roshan/MessItemsMoveProcess/saveStockMove?paymentmethodbanktransfer="+paymentmethodbanktransfer+"&paymentmethodchequetransfer="+paymentmethodchequetransfer+"&paymentmethodcash="+paymentmethodcash+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"&totalcashamount="+totalcashamountvalue+"&totalbanktransferamount="+totalbanktransferamountvalue+"&totalchequetransferamount="+totalchequetransferamountvalue+"&itemsGrandTotalAmountWithoutGST="+itemsTotalAmountWithoutGST+"";
+		form1.action="/alhidaya/MessItemsMoveProcess/saveStockMove?paymentmethodbanktransfer="+paymentmethodbanktransfer+"&paymentmethodchequetransfer="+paymentmethodchequetransfer+"&paymentmethodcash="+paymentmethodcash+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"&totalcashamount="+totalcashamountvalue+"&totalbanktransferamount="+totalbanktransferamountvalue+"&totalchequetransferamount="+totalchequetransferamountvalue+"&itemsGrandTotalAmountWithoutGST="+itemsTotalAmountWithoutGST+"";
 		form1.method = "POST";
 		form1.submit();
 		
@@ -1060,7 +1060,7 @@
  	             
  	         }
  			xmlHttp.onreadystatechange = stateChanged;
- 			xmlHttp.open("GET", "/roshan/MessItemsMoveProcess/getCustomerLastPrice?customerName="+customerName+"&itemid="+itemId+"",true);
+ 			xmlHttp.open("GET", "/alhidaya/MessItemsMoveProcess/getCustomerLastPrice?customerName="+customerName+"&itemid="+itemId+"",true);
  			xmlHttp.send(null);
  	}
  	
@@ -1371,7 +1371,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alhidaya/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -1450,7 +1450,7 @@ for(Cookie cookie : cookies){
 										        	
 										        		<option style="color: black;" value="${student.student.name}_${student.student.classstudying}_${student.fathersname}">${student.student.name}&nbsp;&nbsp;/&nbsp;&nbsp;${student.student.classstudying}/&nbsp;&nbsp;${student.fathersname}</option>
 										        	</c:forEach>
-										        </select><!-- &nbsp;&nbsp;<a target="mainFrame" href="/roshan/StudentProcess/addNew">New Customer --></a>
+										        </select><!-- &nbsp;&nbsp;<a target="mainFrame" href="/alhidaya/StudentProcess/addNew">New Customer --></a>
 									 	</div>
 								</div>
 							</td>
