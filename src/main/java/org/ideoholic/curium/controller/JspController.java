@@ -370,4 +370,14 @@ public class JspController {
 		return "bill";
 	}
 	
+	@GetMapping("/importfile")
+	public String getImportFile() {
+		return "importfile";
+	}
+	
+	@GetMapping("/duereport")
+	public String getDuereport() {
+		return "duereport";
+	}
+	
 }
