@@ -158,12 +158,12 @@ public class StampFeesDAO {
 			
 			for (Studentfeesstructure studentfeesstructure : listOfstudentfeesstructure) {
 				
-				Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.Feescategory.idfeescategory = '"+studentfeesstructure.getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
+				Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.Feescategory.idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
 				Studentfeesstructure feesStructure = (Studentfeesstructure) query.uniqueResult();
 				if(feesStructure != null){
 					
 					Query queryUpdate = session
-							.createQuery("update Studentfeesstructure set idfeescategory = '"+studentfeesstructure.getIdfeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and academicyear = '"+currentYear+"'");
+							.createQuery("update Studentfeesstructure set idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and academicyear = '"+currentYear+"'");
 					
 					
 					queryUpdate.executeUpdate();

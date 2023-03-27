@@ -199,8 +199,7 @@ public class MessStockMoveDAO {
    			MessStockMove msm = (MessStockMove) queryMaxRow.uniqueResult();
 			
 			if(msm!=null) {
-				String[] externalId = msm.getExternalid().split("_");
-				billNo = Integer.parseInt(externalId[1]) + 1;
+				billNo = msm.getId() + 1;
 			}else {
 				billNo = 1;
 			}
@@ -208,7 +207,7 @@ public class MessStockMoveDAO {
 			for (MessStockMove messStockMove : messStockMovesList) {
 	        	
 				session.save(messStockMove);
-	        	Query queryUpdateMessStock = session.createQuery("update MessStockMove set externalid= concat(externalid,'_"+billNo+"'), voucherid = '"+transactions.getTransactionsid()+"' where id="+messStockMove.getId());
+	        	Query queryUpdateMessStock = session.createQuery("update MessStockMove set voucherid = '"+transactions.getTransactionsid()+"' where id="+messStockMove.getId());
 	        	queryUpdateMessStock.executeUpdate();
 				Query queryStockAvailability = session.createQuery("update MessStockAvailability set availablestock= availablestock-'"+messStockMove.getQuantity()+"' where itemid="+messStockMove.getItemid());
 				queryStockAvailability.executeUpdate();
@@ -413,6 +412,29 @@ return result;
 		    }
 				return msm;
 		
+	}
+
+
+
+	public List<Object[]> readStockDueDetails(String classStudying,int branchId) {
+		List<Object[]> results = new ArrayList<Object[]>();
+
+		try {
+			transaction = session.beginTransaction();
+
+			Query query = session
+					.createSQLQuery("select s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from student s JOIN parents f ON s.sid=f.sid where s.archive = 0 and s.branchid="+branchId+" and s.classstudying like '"+classStudying+"'  and NOT EXISTS (select externalid from mess_stockmoves ms where ms.externalid = s.sid)");
+			results = query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
 	}
 	
 }

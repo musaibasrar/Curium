@@ -639,8 +639,10 @@ for(Cookie cookie : cookies){
 					<tr>
 						<th class="headerText">Sl.No.</th>
 						<th title="click to sort" class="headerText">Date</th>
-						<th title="click to sort" class="headerText">Issued To</th>
-						<th title="click to sort" class="headerText">Purpose</th>
+						<th title="click to sort" class="headerText">Student Name</th>
+						<th title="click to sort" class="headerText">Class</th>
+						<th title="click to sort" class="headerText">Father Name</th>
+						<!-- <th title="click to sort" class="headerText">Purpose</th> -->
 						<th title="click to sort" class="headerText">Item Name</th>
 						<th title="click to sort" class="headerText">Quantity</th>
 						<th title="click to sort" class="headerText">Unit of Measure</th>
@@ -657,8 +659,11 @@ for(Cookie cookie : cookies){
 							cellspacing="1">
 							<td class="dataText"><c:out value="${status.index+1}" /></td>
 						  <td class="dataText"><input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: center;"  value="<fmt:formatDate value="${stockissuancelist.transactiondate}" pattern="dd/MM/yyyy"/>" readonly></td>
-						  <td class="dataText"><c:out value="${stockissuancelist.issuedto}" /></td>
-						  <td class="dataText"><c:out value="${stockissuancelist.purpose}" /></td>
+						    <c:set var="nameparts" value="${fn:split(stockissuancelist.issuedto, '_')}" />
+						 	<td class="dataText"><c:out value="${nameparts[0]}" /></td>
+						 	<td class="dataText"><c:out value="${nameparts[1]}" /></td>
+						 	<td class="dataText"><c:out value="${nameparts[2]}" /></td>
+						  <%-- <td class="dataText"><c:out value="${stockissuancelist.purpose}" /></td> --%>
 						  <td class="dataText"><c:out value="${stockissuancelist.itemname}" /></td>
 						  <td class="dataText"><c:out value="${stockissuancelist.quantity}" /></td>
 						  <td class="dataText"><c:out value="${stockissuancelist.unitofmeasure}" /></td>
