@@ -174,10 +174,15 @@ for(Cookie cookie : cookies){
 									src="/alhidaya/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/alhidaya/reports_officeadmin"><img
+								<a target="leftFrame" href="/alhidaya/reports"><img
 									src="/alhidaya/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
+								
+								<!-- <a target="leftFrame" href="/alhidaya/reports_officeadmin"><img
+									src="/alhidaya/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a> -->
 							
 							</td>
 

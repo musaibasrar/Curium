@@ -129,7 +129,7 @@ form{
             if(flag1){
             	
             	if(type=='superadmin'){
-                    window.open('/index_superadmin','_self');
+                    window.open('/alhidaya/index_superadmin','_self');
                 }else if(type=='admin'){
                     window.open('/alhidaya/index_admin','_self');
                 }else if(type=='feescollector'){
@@ -151,7 +151,7 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 235px;width: 240px;" alt="ideoholic" src="/alhidaya/images/alhidaya.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 152px;width: 250px;" alt="ideoholic" src="/alhidaya/images/alhidaya.png"></h2>
 			<!-- <h5 style="font-weight: bold;">Shaheen Kidz</h5> --></span>
 				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
 			</div>

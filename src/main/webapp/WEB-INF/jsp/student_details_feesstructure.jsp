@@ -647,11 +647,11 @@ for(Cookie cookie : cookies){
                                             <button id="delete" >
                                             Delete</button>
 
-                                            <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                              <button id="waiveoff">Waive Off</button>
                                              
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                             <button id="applyconcession">Apply Concession</button>  -->
+                                             <button id="applyconcession">Apply Concession</button>
                                              
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                              <button id="print" onclick="window.location.href='/alhidaya/printstudentdetailsfeesstructure'">Print</button>
