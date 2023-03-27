@@ -24,6 +24,9 @@ import org.ideoholic.curium.model.mess.stockmove.dao.MessStockMoveDAO;
 import org.ideoholic.curium.model.mess.stockmove.dto.Bill;
 import org.ideoholic.curium.model.mess.stockmove.dto.MessStockItemDetails;
 import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
@@ -163,7 +166,7 @@ public class MessStockMoveService {
 					
 					messStockMove.setStockentryid(Integer.parseInt(StockEntryIds[i]));
 					messStockMove.setItemid(Integer.parseInt(itemsIds[i]));
-					messStockMove.setExternalid(itemsName[i]);
+					messStockMove.setExternalid(custDetails[3]);
 					messStockMove.setQuantity(Float.parseFloat(issuequantity[i]));
 					messStockMove.setPurpose(itemunitprice[i]);
 					messStockMove.setTransactiondate(DateUtil.indiandateParser(request.getParameter("transactiondate")));
@@ -329,8 +332,7 @@ public class MessStockMoveService {
 							MessStockMove msm = new MessStockMoveDAO().getMessStockMoveMaxRow();
 							int billNo = 0;
 							if(msm!=null) {
-								String[] externalId = msm.getExternalid().split("_");
-								billNo = Integer.parseInt(externalId[1]) + 1;
+								billNo = msm.getId() + 1;
 							}else {
 								billNo = 1;
 							}
@@ -662,6 +664,51 @@ public class MessStockMoveService {
             out.close();
         }
 		}
+	}
+
+
+
+
+	public boolean viewStockDueDetails() {
+
+		String classSearch = request.getParameter("classsearch");
+		String conClassStudying = "";
+
+		if (!classSearch.equalsIgnoreCase("")) {
+			conClassStudying = classSearch+"--"+"%";
+		}
+		boolean result = false;
+		List<Parents> parentDetails = new ArrayList<Parents>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			
+			try {
+								
+				List<Object[]> list = new MessStockMoveDAO().readStockDueDetails(conClassStudying,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				
+	            for(Object[] parentdetails: list){
+	            	Parents parent = new Parents();
+	            	Student student = new Student();
+	                student.setSid((Integer)parentdetails[0]);
+	                student.setStudentexternalid((String)parentdetails[1]);
+	                student.setAdmissionnumber((String)parentdetails[2]);
+	                student.setName((String)parentdetails[3]);
+	                student.setClassstudying((String)parentdetails[4]);
+	                parent.setFathersname((String)parentdetails[5]);
+	                parent.setMothersname((String)parentdetails[6]);
+	                parent.setStudent(student);
+	                parentDetails.add(parent);
+	            }
+				
+				result = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			request.setAttribute("studentsduelist", parentDetails);
+		}
+		
+		return result;
 	}
 	
 	
