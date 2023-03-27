@@ -368,8 +368,13 @@ public class JspController {
 	}
 	
 	@GetMapping("/importfile")
-	public String getImportfile() {
+	public String getImportFile() {
 		return "importfile";
+	}
+	
+	@GetMapping("/duereport")
+	public String getDuereport() {
+		return "duereport";
 	}
 	
 }

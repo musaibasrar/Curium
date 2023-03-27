@@ -1448,7 +1448,7 @@ for(Cookie cookie : cookies){
 										        	<option></option>
 										        	<c:forEach items="${studentList}" var="student">
 										        	
-										        		<option style="color: black;" value="${student.student.name}_${student.student.classstudying}_${student.fathersname}">${student.student.name}&nbsp;&nbsp;/&nbsp;&nbsp;${student.student.classstudying}/&nbsp;&nbsp;${student.fathersname}</option>
+										        		<option style="color: black;" value="${student.student.name}_${student.student.classstudying}_${student.fathersname}_${student.student.sid}">${student.student.name}&nbsp;&nbsp;/&nbsp;&nbsp;${student.student.classstudying}/&nbsp;&nbsp;${student.fathersname}</option>
 										        	</c:forEach>
 										        </select><!-- &nbsp;&nbsp;<a target="mainFrame" href="/jdh/StudentProcess/addNew">New Customer --></a>
 									 	</div>
