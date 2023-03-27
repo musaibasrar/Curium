@@ -150,7 +150,7 @@
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/riyan/UserProcess/logout";
+                form1.action="/jdh/UserProcess/logout";
                 form1.submit();
             }
 
@@ -163,8 +163,8 @@
                     <td height="10" valign="top" background="/images/headerBook.png">
                         <table width="100%" height="137" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
                             <tr>
-                               <td width="234" rowspan="2"><!--<div align="center"><img src="/riyan/images/logo.png" width="200" height="64" /></div> --></td> 
-                                <!-- <td width="548" rowspan="2"><div align="center"><img src="/riyan/images/SMS.png" width="391" height="92" /></div></td> -->
+                               <td width="234" rowspan="2"><!--<div align="center"><img src="/jdh/images/logo.png" width="200" height="64" /></div> --></td> 
+                                <!-- <td width="548" rowspan="2"><div align="center"><img src="/jdh/images/SMS.png" width="391" height="92" /></div></td> -->
                                 <!-- <td width="210" height="104">&nbsp;</td> -->
                             </tr>
                             <tr>
@@ -172,10 +172,10 @@
                                 <td width="150" height="34" background="/images/tab1.png"><table width="153" border="0" align="center" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td width="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                            <td width="40"><a target="mainFrame" href="/riyan/StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Studets" src="/riyan/images/Users.png" width="40" height="30" /> <div id="n1" class="noti_bubble"></div></div></a></td>
-                                            <td width="40"><a target="mainFrame" href="/riyan/PersonalProcess/viewAll"><div align="center"  align="center"></div></div></a></td>
-                                            <td width="40"><a target="mainFrame" href="/riyan/UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="/riyan/images/dashboard.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
-                                            <td width="40" ><div align="center" ><a target="_parent" href="/riyan/UserProcess/logout"><img   src="/riyan/images/logout_icon.png" width="24" height="24" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div></div></td>
+                                            <td width="40"><a target="mainFrame" href="/jdh/StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Studets" src="/jdh/images/Users.png" width="40" height="30" /> <div id="n1" class="noti_bubble"></div></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/jdh/PersonalProcess/viewAll"><div align="center"  align="center"></div></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/jdh/UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="/jdh/images/dashboard.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
+                                            <td width="40" ><div align="center" ><a target="_parent" href="/jdh/UserProcess/logout"><img   src="/jdh/images/logout_icon.png" width="24" height="24" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div></div></td>
                                         </tr>
                                     </table></td>
                             </tr>

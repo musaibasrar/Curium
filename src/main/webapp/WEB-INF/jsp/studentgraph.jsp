@@ -14,13 +14,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Graph</title>
-        <script src="/riyan/js/Chart.min.js"></script>
+        <script src="/jdh/js/Chart.min.js"></script>
     </head>
     <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jdh/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

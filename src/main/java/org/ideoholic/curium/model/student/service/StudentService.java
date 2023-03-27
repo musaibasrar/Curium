@@ -535,6 +535,9 @@ public class StudentService {
 		student.setPassedout(0);
 		student.setDroppedout(0);
 		student.setLeftout(0);
+		if(student.getRte() == null) {
+			student.setRte(0);
+		}
 		//DataUtil.generateString(5)
 		student.setStudentexternalid(httpSession.getAttribute("branchcode").toString());
 		student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));

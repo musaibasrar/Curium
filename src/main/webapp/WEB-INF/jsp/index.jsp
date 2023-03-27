@@ -61,7 +61,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jdh/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -74,11 +74,11 @@ for(Cookie cookie : cookies){
 }
 %>
     <frameset    rows="70,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="/riyan/header"   name="topFrame" scrolling="NO" noresize frameborder="0">
+        <frame   src="/jdh/header"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/riyan/left" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/riyan/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
+                <frame  src="/jdh/left" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame src="/jdh/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
             </frameset>
 
    </frameset>

@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Fees Report</title>
-<link rel="stylesheet" href="/riyan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/riyan/css/datePicker/demos.css">
+<link rel="stylesheet" href="/jdh/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/jdh/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -305,38 +305,38 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/riyan/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/riyan/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/jdh/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/jdh/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/jdh/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/riyan/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/jdh/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/jdh/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/jdh/js/datePicker/ui/jquery.ui.tabs.js"></script>
 
 
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.effects.blind.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -363,12 +363,12 @@
 	
 </script>
 
-<script type="text/javascript" src="/riyan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/jdh/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/riyan/FeesCollection/searchFeesReport";
+		form1.action = "/jdh/FeesCollection/searchFeesReport";
 		form1.method = "POST";
 		form1.submit();
 
@@ -503,7 +503,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/riyan/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
+			xmlHttp.open("GET", "/jdh/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
 			xmlHttp.send(null);
 	}
     
@@ -536,7 +536,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jdh/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -549,7 +549,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/riyan/FeesCollection/exportDataForStudentsFeesReport" method="POST">
+	<form id="form1" action="/jdh/FeesCollection/exportDataForStudentsFeesReport" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />

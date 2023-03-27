@@ -177,13 +177,13 @@
 			<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 40px;">
-				<img src="/riyan/images/riyan.jpg" width="65" height="60"/>
+				<td align="right" style="padding-left: 60px;">
+				<img src="/jdh/images/jdh.jpg" width="50" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 110px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 10px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 110px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="dataTextBoldCenter" style="padding-left: 50px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 80px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 150px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 				
 			</tr>
@@ -360,14 +360,14 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 40px;">
-				<img src="/riyan/images/riyan.jpg" width="65" height="60"/>
+				<img src="/jdh/images/jdh.jpg" width="65" height="60"/>
 				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 110px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 10px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 110px;">Contact:&nbsp;${branchcontact} </label>
-				</td>
 				
+				<td style="width: 100%;" align="left">
+				<label class="dataTextBoldCenter" style="padding-left: 50px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 80px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 150px;">Contact:&nbsp;${branchcontact} </label>
+				</td>
 			</tr>
 </table>
 

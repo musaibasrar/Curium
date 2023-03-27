@@ -315,4 +315,49 @@ public class StampFeesService {
 	}
 		}
 
+	public void advanceSearchStampFees() {
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+		
+		if(httpSession.getAttribute(BRANCHID)!=null){
+		
+		String queryMain = "From Parents as parents where";
+		String studentname = DataUtil.emptyString(request.getParameter("namesearch"));
+		String addClass = request.getParameter("classsearch");
+		String addSec = request.getParameter("secsearch");
+		String conClassStudying = "";
+
+		if (!addClass.equalsIgnoreCase("")) {
+			conClassStudying = addClass+"--"+"%";
+		}
+		if (!addSec.equalsIgnoreCase("")) {
+			conClassStudying = addClass;
+			conClassStudying = conClassStudying+"--"+addSec+"%";
+		}
+
+		String classStudying = DataUtil.emptyString(conClassStudying);
+		String querySub = "";
+
+		if (!studentname.equalsIgnoreCase("")) {
+			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 and parents.Student.rte=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+		}
+
+		if (!classStudying.equalsIgnoreCase("")
+				&& !querySub.equalsIgnoreCase("")) {
+			querySub = querySub + " AND parents.Student.classstudying like '"
+					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.rte=0 and parents.Student.leftout=0";
+		} else if (!classStudying.equalsIgnoreCase("")) {
+			querySub = querySub + " parents.Student.classstudying like '"
+					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.rte=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
+		}
+
+		if(!"".equalsIgnoreCase(querySub)) {
+			queryMain = queryMain + querySub;
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		}
+		
+	}
+		request.setAttribute("searchStudentList", searchStudentList);
+
+	}
+
 }

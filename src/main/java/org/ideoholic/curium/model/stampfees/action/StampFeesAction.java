@@ -52,7 +52,7 @@ public class StampFeesAction {
 
 	@PostMapping("/search")
 	public String search() {
-		new StampFeesService(request, response).advanceSearch();
+		new StampFeesService(request, response).advanceSearchStampFees();
 		return "stampfees";
 	}
 	

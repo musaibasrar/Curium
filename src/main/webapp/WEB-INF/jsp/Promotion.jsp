@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JSP Page</title>
-<link rel="stylesheet" href="/riyan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/riyan/css/datePicker/demos.css">
+<link rel="stylesheet" href="/jdh/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/jdh/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -276,42 +276,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/riyan/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/riyan/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/jdh/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/jdh/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/jdh/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/riyan/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/jdh/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/jdh/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/riyan/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/riyan/js/datePicker/ui/sliderAccess.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/jdh/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/jdh/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/riyan/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/jdh/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/jdh/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/riyan/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/jdh/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -374,11 +374,11 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/riyan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/jdh/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchClass() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/riyan/ClassProcess/searchByClass";
+		form1.action = "/jdh/ClassProcess/searchByClass";
 		form1.method = "POST";
 		form1.submit();
 
@@ -406,7 +406,7 @@
     function graduateMultiple(){
         
         var form1=document.getElementById("form1");
-        form1.action="/riyan/ClassProcess/graduateMultiple";
+        form1.action="/jdh/ClassProcess/graduateMultiple";
        form1.submit();
         
     }
@@ -414,7 +414,7 @@
     function dropoutMultiple(){
         
         var form1=document.getElementById("form1");
-        form1.action="/riyan/ClassProcess/dropoutMultiple";
+        form1.action="/jdh/ClassProcess/dropoutMultiple";
        form1.submit();
         
     }
@@ -422,7 +422,7 @@
     function leftoutMultiple(){
         
         var form1=document.getElementById("form1");
-        form1.action="/riyan/ClassProcess/leftoutMultiple";
+        form1.action="/jdh/ClassProcess/leftoutMultiple";
        form1.submit();
         
     }
@@ -503,7 +503,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/riyan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jdh/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -517,7 +517,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1"
-		action="/riyan/StudentProcess/promoteClass" method="POST">
+		action="/jdh/StudentProcess/promoteClass" method="POST">
 		<div style="height: 28px">
 			<button id="add">Search</button>
 			<br />
@@ -600,7 +600,7 @@ for(Cookie cookie : cookies){
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
 								<td class="dataText"><c:out value="${status.index+1}"/></td>
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.student.sid}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/riyan/StudentProcess/ViewDetails?id=<c:out value='${Student.student.sid}'/>"><c:out value="${Student.student.admissionnumber}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/jdh/StudentProcess/ViewDetails?id=<c:out value='${Student.student.sid}'/>"><c:out value="${Student.student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Student.student.name}"/></td>
                                 <td class="dataText">
                                 <c:forEach var="splt" items="${fn:split(Student.student.classstudying,'--')}">
