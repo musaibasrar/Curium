@@ -447,6 +447,12 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/riyan/MessItemsMoveProcess/billsReport" style="font-size: 12px;">Receipts Report</a>
             			</td>
             		</tr>
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/riyan/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Due Report</a>
+            			</td>
+            		</tr>
                 </table>
             </div>
             
