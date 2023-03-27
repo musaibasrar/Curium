@@ -332,6 +332,21 @@ public class JspController {
 		return "reports_officeadmin";
 	}
 	
+	@GetMapping("/header_marksentry")
+	public String getHeaderMarksEntry() {
+		return "header_marksentry";
+	}
+	
+	@GetMapping("/index_marksentry")
+	public String getIndexMarksEntry() {
+		return "index_marksentry";
+	}
+	
+	@GetMapping("/left_marksentry")
+	public String getLeftMarksEntry() {
+		return "left_marksentry";
+	}
+	
 	@GetMapping("/previewFeesReceiptDetail")
 	public String getPreviewFeesReceiptDetail() {
 		return "previewFeesReceiptDetail";
@@ -342,10 +357,6 @@ public class JspController {
 		return "printReceiptFeesDetail";
 	}
 	
-	@GetMapping("/importfile")
-	public String getImportFile() {
-		return "importfile";
-	}
 	@GetMapping("/billsreport")
 	public String getBillsreport() {
 		return "billsreport";
@@ -355,4 +366,15 @@ public class JspController {
 	public String getBill() {
 		return "bill";
 	}
+	
+	@GetMapping("/importfile")
+	public String getImportFile() {
+		return "importfile";
+	}
+	
+	@GetMapping("/duereport")
+	public String getDuereport() {
+		return "duereport";
+	}
+	
 }
