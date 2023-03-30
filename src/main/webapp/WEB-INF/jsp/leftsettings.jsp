@@ -404,7 +404,15 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/roshan/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div> -->
             
+             <!--this is my coding tauqueer  -->
+             <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
+            <div>
+                <a target="mainFrame" href="/roshan/FeesProcess/otherfeesView" style="font-size: 12px;">Other Fees Category</a><br/>
+               
             </div>
+            
+            </div>
+           
             
             <!-- END -->
            

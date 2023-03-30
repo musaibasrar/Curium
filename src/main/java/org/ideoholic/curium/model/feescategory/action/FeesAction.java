@@ -93,7 +93,12 @@ public class FeesAction {
 		new FeesService(request, response).deleteMultiple();
 		return viewFees();
 	}
-
+	//this is my coding
+	@PostMapping("/odeleteMultiple")
+	public String odeleteMultiple() {
+		new FeesService(request, response).odeleteMultiple();
+		return otherviewFees();
+	}
 	@GetMapping("/feesCollect")
 	public String feesCollect() {
 		new FeesService(request, response).viewFees();
@@ -113,14 +118,25 @@ public class FeesAction {
 		new FeesService(request, response).addFeesParticular();
 		return viewFees();
 	}
-
+//this is my addother feeparticular
+	@PostMapping("/addotherFeesParticular")
+	public String addotherFeesParticular() {
+		new FeesService(request, response).addotherFeesParticular();
+		return otherviewFees();
+	}
 	@GetMapping("/feesView")
 	public String viewFees() {
 		new FeesService(request, response).viewFees();
 		new StandardService(request, response).viewClasses();
 		return "feesCategory";
 	}
-
+    //this is my coding 
+	@GetMapping("/otherfeesView")
+	public String otherviewFees() {
+		new FeesService(request, response).viewOtherFees();
+		new StandardService(request, response).viewClasses();
+		return "otherfeecategory";
+	}
 	private String studentFeePage(String studentId) {
 		if (new StudentService(request, response).viewDetailsOfStudent(studentId)) {
 			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {

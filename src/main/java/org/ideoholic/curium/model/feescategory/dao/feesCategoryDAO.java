@@ -13,6 +13,7 @@ import org.hibernate.query.Query;
 
 import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
+import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.util.HibernateUtil;
 
@@ -52,7 +53,24 @@ public class feesCategoryDAO {
             return results;
         }
 	}
-
+    //this is my coding
+	@SuppressWarnings({ "finally", "unchecked" })
+	public List<OtherFeecategory> readListOfOtherFeeObjects(int branchId, String academicYear) {
+		
+		List<OtherFeecategory> results = new ArrayList<OtherFeecategory>();
+        try {
+            
+            transaction = session.beginTransaction();
+            results = (List<OtherFeecategory>) session.createQuery("From OtherFeecategory where academicyear='"+academicYear+"' and branchid="+branchId).list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return results;
+        }
+	}
 	@SuppressWarnings("finally")
 	public Feescategory create(Feescategory feescategory) {
 		try {
@@ -69,6 +87,25 @@ public class feesCategoryDAO {
         } finally {
     			HibernateUtil.closeSession();
             return feescategory;
+        }
+	}
+//this is my create
+	@SuppressWarnings("finally")
+	public OtherFeecategory createOtherFeeCategory(OtherFeecategory ofeescategory) {
+		try {
+            //this.session = sessionFactory.openCurrentSession();
+            transaction = session.beginTransaction();
+            session.save(ofeescategory);
+
+
+            transaction.commit();
+            
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return ofeescategory;
         }
 	}
 
@@ -91,7 +128,26 @@ public class feesCategoryDAO {
 		}
 
 	}
+//this is my coding
+	public void odeleteMultiple(List ids) {
+		try {
+			transaction = session.beginTransaction();
+			
+			
+			Query query = session
+					.createQuery("delete from OtherFeecategory as fess where fess.idfeescategory IN (:ids)");
+			query.setParameterList("ids", ids);
+			
+			query.executeUpdate();
+			
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
 
+	}
 	public void deleteFeesCategory(List ids, List feesCatId, String sid) {
 		
 		List<Feescollection> feesCollection = new ArrayList<Feescollection>();

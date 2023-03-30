@@ -357,4 +357,9 @@ public class JspController {
 		return "printReceiptFeesDetail";
 	}
 	
+	@GetMapping("/otherfeecategory")
+	public String getOtherfeecategory() {
+		return "otherfeecategory";
+	}
+	
 }

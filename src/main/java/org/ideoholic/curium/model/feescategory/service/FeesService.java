@@ -19,6 +19,7 @@ import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
+import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.mess.card.dto.Card;
@@ -63,7 +64,23 @@ public class FeesService {
                 return result;
         }
 
-
+       //this is my coding 
+        public boolean viewOtherFees() {
+            
+            boolean result = false;
+            
+            if(httpSession.getAttribute(BRANCHID)!=null){
+                    try {
+                           List<OtherFeecategory> list = new feesCategoryDAO().readListOfOtherFeeObjects(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),httpSession.getAttribute("currentAcademicYear").toString());
+                       httpSession.setAttribute("otherfeescategory", list);
+                       result = true;
+                   } catch (Exception e) {
+                       e.printStackTrace();
+                       result = false;
+                   }
+            }
+           return result;
+   }
         public void addFeesParticular() {
                 
                 Feescategory feescategory = new Feescategory();
@@ -86,7 +103,29 @@ public class FeesService {
                         }
                 }
         }
-
+//my coding for otherfeecategory
+        public void addotherFeesParticular() {
+            
+            OtherFeecategory ofeescategory = new OtherFeecategory();
+            
+            if(httpSession.getAttribute(BRANCHID)!=null){
+                    
+                    ofeescategory.setFeescategoryname(DataUtil.emptyString(request.getParameter("feescategory")));
+                    if(!DataUtil.emptyString(request.getParameter("fromclass")).equalsIgnoreCase("ALL") && !DataUtil.emptyString(request.getParameter("toclass")).equalsIgnoreCase("ALL")){
+                            ofeescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass"))+"-"+DataUtil.emptyString(request.getParameter("toclass")));
+                    }else{
+                            ofeescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass")));
+                    }
+                    
+                    ofeescategory.setAmount(DataUtil.parseInt(request.getParameter("amount")));
+                    ofeescategory.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+                    ofeescategory.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+                    ofeescategory.setAcademicyear(httpSession.getAttribute("currentAcademicYear").toString());
+                    if(!ofeescategory.getFeescategoryname().equalsIgnoreCase("") && !ofeescategory.getParticularname().equalsIgnoreCase("") && ofeescategory.getAmount() != 0 ){
+                            ofeescategory =  new feesCategoryDAO().createOtherFeeCategory(ofeescategory);
+                    }
+            }
+    }
 
         public void deleteMultiple() {
                  String[] idfeescategory = request.getParameterValues("idfeescategory");
@@ -99,8 +138,18 @@ public class FeesService {
                 new feesCategoryDAO().deleteMultiple(ids);
                  }
         }
-
-
+//this is my coding
+        public void odeleteMultiple() {
+            String[] idfeescategory = request.getParameterValues("idfeescategory");
+            if(idfeescategory!=null){
+           List<Integer> ids = new ArrayList();
+           for (String id : idfeescategory) {
+               System.out.println("id" + id);
+               ids.add(Integer.valueOf(id));
+           }
+           new feesCategoryDAO().odeleteMultiple(ids);
+            }
+   }
         public boolean viewAllStudentsList() {
 
                 boolean result = false;
