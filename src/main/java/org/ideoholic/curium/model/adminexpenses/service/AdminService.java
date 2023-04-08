@@ -239,10 +239,12 @@ public class AdminService {
 		start1.setTime(dateBefore);
 		Calendar end1 = Calendar.getInstance();
 		end1.setTime(dateAfter);
-		start1.set(Calendar.MONTH, start1.getActualMinimum(Calendar.MONTH));
-		start1.set(Calendar.DAY_OF_MONTH, start1.getActualMinimum(Calendar.DAY_OF_MONTH));
-		end1.set(Calendar.MONTH, end1.getActualMaximum(Calendar.MONTH));
-		end1.add(Calendar.DAY_OF_MONTH, 1);
+		
+		start1.set(Calendar.MONTH, Calendar.JUNE);
+		start1.set(Calendar.DAY_OF_MONTH, 1);
+		end1.set(Calendar.YEAR, start1.get(Calendar.YEAR) + 1);
+		end1.set(Calendar.MONTH, Calendar.MAY);
+		end1.add(Calendar.DAY_OF_MONTH, end1.getActualMaximum(Calendar.DAY_OF_MONTH));
 		
 		for (Date date = start1.getTime(); start1.before(end1); start1.add(Calendar.MONTH,+1), date = start1.getTime()) {
 			fromDate = new SimpleDateFormat("YYYY-MM-dd").format(date);
