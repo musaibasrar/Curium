@@ -177,13 +177,13 @@
 			<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 50px;">
-				<img src="/alhidaya/images/alhidaya.jpg" width="110" height="60"/>
+				<td align="left" style="padding-left: 10px;">
+				<img src="/bsb/images/bsb.jpg" width="120" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="dataTextBoldCenter" style="padding-left: 5px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 110px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 			</tr>
 </table>
@@ -359,13 +359,13 @@
 		<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 50px;">
-				<img src="/alhidaya/images/alhidaya.jpg" width="110" height="60"/>
+				<td align="left" style="padding-left: 10px;">
+				<img src="/bsb/images/bsb.jpg" width="120" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="dataTextBoldCenter" style="padding-left: 5px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 110px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 			</tr>
 </table>

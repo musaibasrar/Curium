@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/alhidaya/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/alhidaya/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/alhidaya/css/datePicker/demos.css">
+        <script language="JavaScript" src="/bsb/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/bsb/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/bsb/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/alhidaya/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/alhidaya/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/alhidaya/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/alhidaya/css/font-awesome.css">
+        <script type="text/javascript" src="/bsb/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/bsb/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/bsb/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/bsb/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/bsb/css/font-awesome.css">
       
         <script type="text/javascript">
             var req;
@@ -317,7 +317,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alhidaya/UserProcess/sessionTimeOut");
+	response.sendRedirect("/bsb/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -340,68 +340,68 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 95%" >
             <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
-                <!-- <a target="mainFrame" href="/alhidaya/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/> -->
-                <a target="mainFrame" href="/alhidaya/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
+                <!-- <a target="mainFrame" href="/bsb/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/> -->
+                <a target="mainFrame" href="/bsb/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Class</a></h5>
             <div>
-                <a target="mainFrame" href="/alhidaya/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
+                <a target="mainFrame" href="/bsb/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             <div>
-                <a target="mainFrame" href="/alhidaya/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
-                <a target="mainFrame" href="/alhidaya/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+                <a target="mainFrame" href="/bsb/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
+                <a target="mainFrame" href="/bsb/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             <div>
-                <a target="mainFrame" href="/alhidaya/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
-                <a target="mainFrame" href="/alhidaya/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
-                <a target="mainFrame" href="/alhidaya/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
-                <a target="mainFrame" href="/alhidaya/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
+                <a target="mainFrame" href="/bsb/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
+                <a target="mainFrame" href="/bsb/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
+                <a target="mainFrame" href="/bsb/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
+                <a target="mainFrame" href="/bsb/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
             </div>
             
           <!--   <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
-                <a target="mainFrame" href="/alhidaya/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/alhidaya/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
+                <a target="mainFrame" href="/bsb/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
+                <a target="mainFrame" href="/bsb/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div>
             
               <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-				<a target="mainFrame" href="/alhidaya/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
+				<a target="mainFrame" href="/bsb/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
             </div> -->
             
             <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
                 
-                <a target="mainFrame" href="/alhidaya/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
-                <a target="mainFrame" href="/alhidaya/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
+                <a target="mainFrame" href="/bsb/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
+                <a target="mainFrame" href="/bsb/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
             </div>
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
-                <a target="mainFrame" href="/alhidaya/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
+                <a target="mainFrame" href="/bsb/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
             
              <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/alhidaya/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/payHead" style="font-size: 12px;">Pay Head</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/payHead" style="font-size: 12px;">Pay Head</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
             </div> -->
             
               <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
             <div>
-                <a target="mainFrame" href="/alhidaya/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/alhidaya/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
+                <a target="mainFrame" href="/bsb/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
+                <a target="mainFrame" href="/bsb/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div> -->
             
             </div>

@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Admin Expense</title>
-<link rel="stylesheet" href="/alhidaya/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/alhidaya/css/datePicker/demos.css">
+<link rel="stylesheet" href="/bsb/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/bsb/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -316,42 +316,42 @@
 }
 
 </style>
-<link rel="stylesheet" href="/alhidaya/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/alhidaya/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/bsb/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/bsb/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/alhidaya/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/bsb/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/alhidaya/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/bsb/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/alhidaya/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/bsb/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/alhidaya/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/alhidaya/js/datePicker/ui/sliderAccess.js"></script>
+	src="/bsb/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/bsb/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/alhidaya/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/bsb/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/alhidaya/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/bsb/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/alhidaya/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/bsb/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/alhidaya/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/bsb/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/alhidaya/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/bsb/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/alhidaya/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/bsb/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/alhidaya/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/bsb/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/alhidaya/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/bsb/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/alhidaya/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/bsb/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/alhidaya/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/bsb/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/alhidaya/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/bsb/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -444,11 +444,11 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/alhidaya/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/bsb/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function addExpenses() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alhidaya/AdminProcess/addExpenses";
+		form1.action = "/bsb/AdminProcess/addExpenses";
 		form1.method = "POST";
 		form1.submit();
 
@@ -456,7 +456,7 @@
 	
 	function deleteRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alhidaya/AdminProcess/deleteMultiple";
+		form1.action = "/bsb/AdminProcess/deleteMultiple";
 		form1.method = "POST";
 		form1.submit();
 
@@ -464,21 +464,21 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alhidaya/AdminProcess/printVoucher";
+		form1.action = "/bsb/AdminProcess/printVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function approveRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alhidaya/AdminProcess/approveVoucher";
+		form1.action = "/bsb/AdminProcess/approveVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function rejectRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alhidaya/AdminProcess/rejectVoucher";
+		form1.action = "/bsb/AdminProcess/rejectVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -600,7 +600,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alhidaya/UserProcess/sessionTimeOut");
+	response.sendRedirect("/bsb/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -614,7 +614,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1"
-		action="/alhidaya/DepartmentProcess/deleteMultiple" method="POST">
+		action="/bsb/DepartmentProcess/deleteMultiple" method="POST">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");

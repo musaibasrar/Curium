@@ -20,20 +20,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Advance Search for print</title>
-        <link rel="stylesheet" href="/alhidaya/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/alhidaya/css/validation/jquery.ketchup.css">
+        <link rel="stylesheet" href="/bsb/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/bsb/css/validation/jquery.ketchup.css">
 
-        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/alhidaya/js/datePicker/jquery-1.7.1.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery.ui.tabs.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script src="/alhidaya/js/validation/jquery.ketchup.all.min.js"></script>
-        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.button.js"></script>
-        <link rel="stylesheet" href="/alhidaya/css/datePicker/demos.css">
+        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/bsb/js/datePicker/jquery-1.7.1.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery.ui.tabs.js"></script>
+        <script src="/bsb/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script src="/bsb/js/validation/jquery.ketchup.all.min.js"></script>
+        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/bsb/css/datePicker/demos.css">
 
 
 
@@ -251,9 +251,9 @@
         </style>
 
 
-        <script type="text/javascript" src="/alhidaya/js/datetimepicker_css.js"></script>
-        <script src="/alhidaya/JavaScript/actb.js"></script>
-        <script src="/alhidaya/JavaScript/common.js"></script>
+        <script type="text/javascript" src="/bsb/js/datetimepicker_css.js"></script>
+        <script src="/bsb/JavaScript/actb.js"></script>
+        <script src="/bsb/JavaScript/common.js"></script>
 
         <script>
 
@@ -324,7 +324,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alhidaya/UserProcess/sessionTimeOut");
+	response.sendRedirect("/bsb/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -506,14 +506,14 @@ for(Cookie cookie : cookies){
             function changePassword() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/alhidaya/UserProcess/changePassword";
+                form1.action = "/bsb/UserProcess/changePassword";
                 form1.submit();
 
             }
          
             function Cancel() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/alhidaya/StudentProcess/viewAll";
+                form1.action = "/bsb/StudentProcess/viewAll";
                 form1.submit();
             }
 

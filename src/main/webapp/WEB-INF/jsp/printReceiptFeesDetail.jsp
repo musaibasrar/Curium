@@ -175,20 +175,18 @@
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+			
+			<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 10px;">
-				<img src="/alhidaya/images/alhidayafees.jpg" width="90" height="60"/>
+				<img src="/bsb/images/bsb.jpg" width="120" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label><br>
+				<label class="dataTextBoldCenter" style="padding-left: 5px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 110px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact} </label>
 				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
 				</td>
-				<td align="left" style="padding-right: 10px;">
-				<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="90" height="60">
-				</td> 
 			</tr>
 </table>
 
@@ -353,7 +351,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/alhidaya/images/alhidayapaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/bsb/images/bsbpaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -363,17 +361,14 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 10px;">
-				<img src="/alhidaya/images/alhidayafees.jpg" width="90" height="60"/>
+				<img src="/bsb/images/bsb.jpg" width="120" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label><br>
+				<label class="dataTextBoldCenter" style="padding-left: 5px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 110px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact} </label>
 				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
 				</td>
-				<td align="left" style="padding-right: 10px;">
-				<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="90" height="60">
-				</td> 
 			</tr>
 </table>
 
@@ -539,7 +534,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/alhidaya/images/alhidayapaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/bsb/images/bsbpaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>

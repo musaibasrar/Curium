@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/alhidaya/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/alhidaya/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/alhidaya/css/datePicker/demos.css">
+        <script language="JavaScript" src="/bsb/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/bsb/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/bsb/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/alhidaya/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/alhidaya/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/alhidaya/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/alhidaya/css/font-awesome.css">
+        <script type="text/javascript" src="/bsb/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/bsb/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/bsb/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/bsb/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/bsb/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -429,7 +429,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alhidaya/UserProcess/sessionTimeOut");
+	response.sendRedirect("/bsb/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,22 +454,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
+            				 <a target="mainFrame" href="/bsb/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alhidaya/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
+            				 <a target="mainFrame" href="/bsb/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            				 <a target="mainFrame" href="/bsb/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alhidaya/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            				 <a target="mainFrame" href="/bsb/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
                 </table>
@@ -482,37 +482,37 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
+            				 <a target="mainFrame" href="/bsb/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/alhidaya/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
+            				<a target="mainFrame" href="/bsb/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
+            				 <a target="mainFrame" href="/bsb/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/alhidaya/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
+            				<a target="mainFrame" href="/bsb/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
+            				 <a target="mainFrame" href="/bsb/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/alhidaya/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
+            				<a target="mainFrame" href="/bsb/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
+            				 <a target="mainFrame" href="/bsb/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
             			</td>
             		</tr> -->
                 </table>
@@ -523,7 +523,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
+            				 <a target="mainFrame" href="/bsb/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
             			</td>
             		</tr>
                 </table>
@@ -536,43 +536,43 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
+            				 <a target="mainFrame" href="/bsb/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/alhidaya/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
+            				<a target="mainFrame" href="/bsb/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a>
+            				 <a target="mainFrame" href="/bsb/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a>
             			</td>
             			            		
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/alhidaya/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
+            				<a target="mainFrame" href="/bsb/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
+            				 <a target="mainFrame" href="/bsb/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/alhidaya/incomestatement" style="font-size: 12px;">Income Statement</a>
+            				<a target="mainFrame" href="/bsb/incomestatement" style="font-size: 12px;">Income Statement</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            				 <a target="mainFrame" href="/bsb/trialbalance" style="font-size: 12px;">Trial Balance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/alhidaya/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
+            				<a target="mainFrame" href="/bsb/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
             			</td>
             		</tr> -->
                 </table>
@@ -584,37 +584,37 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
+            				 <a target="mainFrame" href="/bsb/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
             			</td>
             		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/alhidaya/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
+            				<a target="mainFrame" href="/bsb/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alhidaya/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
+            				 <a target="mainFrame" href="/bsb/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/alhidaya/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
+            				<a target="mainFrame" href="/bsb/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alhidaya/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
+            				 <a target="mainFrame" href="/bsb/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/alhidaya/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
+            				<a target="mainFrame" href="/bsb/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alhidaya/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
+            				 <a target="mainFrame" href="/bsb/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
             			</td>
             		</tr>
                 </table>
@@ -626,17 +626,17 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            				 <a target="mainFrame" href="/bsb/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alhidaya/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            				 <a target="mainFrame" href="/bsb/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
+            				 <a target="mainFrame" href="/bsb/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr>
                 </table>
@@ -648,22 +648,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
+            				 <a target="mainFrame" href="/bsb/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/alhidaya/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
+            				<a target="mainFrame" href="/bsb/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
+            				 <a target="mainFrame" href="/bsb/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/alhidaya/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
+            				<a target="mainFrame" href="/bsb/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
             			</td>
             		</tr> -->
                 </table>
@@ -675,7 +675,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
+            				 <a target="mainFrame" href="/bsb/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
             			</td>
             		</tr>
                 </table>
@@ -686,7 +686,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
+            				 <a target="mainFrame" href="/bsb/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
             			</td>
             		</tr>
                 </table>
@@ -699,27 +699,27 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
+            				 <a target="mainFrame" href="/bsb/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alhidaya/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
+            				 <a target="mainFrame" href="/bsb/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
+            				 <a target="mainFrame" href="/bsb/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-								<a target="mainFrame" href="/alhidaya/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
+								<a target="mainFrame" href="/bsb/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
+            				 <a target="mainFrame" href="/bsb/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr> -->
                 </table>
@@ -732,22 +732,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/Backup&Restore" style="font-size: 12px;">Backup</a>
+            				 <a target="mainFrame" href="/bsb/Backup&Restore" style="font-size: 12px;">Backup</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/alhidaya/changePassword" style="font-size: 12px;">Change Password</a>
+            				<a target="mainFrame" href="/bsb/changePassword" style="font-size: 12px;">Change Password</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/alhidaya/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
+            				<a target="mainFrame" href="/bsb/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alhidaya/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
+            				 <a target="mainFrame" href="/bsb/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
             			</td>
             		</tr>
                 </table>
@@ -755,17 +755,17 @@ for(Cookie cookie : cookies){
             
            <!--   <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/alhidaya/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
             <div >
-                <a target="mainFrame" href="/alhidaya/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
             </div> -->
             
             <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
@@ -775,17 +775,17 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
+            				 <a target="mainFrame" href="/bsb/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alhidaya/MessItemsProcess/purchaseItems" style="font-size: 12px;">Receive</a>
+            				 <a target="mainFrame" href="/bsb/MessItemsProcess/purchaseItems" style="font-size: 12px;">Receive</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/alhidaya/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
+            				<a target="mainFrame" href="/bsb/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
             			</td>
             		</tr>
             	</table>
@@ -799,22 +799,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
+            				 <a target="mainFrame" href="/bsb/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alhidaya/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
+            				 <a target="mainFrame" href="/bsb/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/alhidaya/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
+            				<a target="mainFrame" href="/bsb/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alhidaya/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
+            				 <a target="mainFrame" href="/bsb/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
             			</td>
             		</tr>
             	</table>
@@ -827,22 +827,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
+            				 <a target="mainFrame" href="/bsb/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alhidaya/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
+            				 <a target="mainFrame" href="/bsb/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/alhidaya/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
+            				<a target="mainFrame" href="/bsb/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alhidaya/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
+            				 <a target="mainFrame" href="/bsb/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
             			</td>
             		</tr>
             	</table>
@@ -855,12 +855,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
+            				 <a target="mainFrame" href="/bsb/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/alhidaya/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
+            				 <a target="mainFrame" href="/bsb/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
             			</td>
             		</tr>
             	</table>
@@ -871,12 +871,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/alhidaya/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
+            				 <a target="mainFrame" href="/bsb/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/alhidaya/sendemail" style="font-size: 12px;">Email</a>
+            				<a target="mainFrame" href="/bsb/sendemail" style="font-size: 12px;">Email</a>
             			</td>
             		</tr>
                 </table>
@@ -887,7 +887,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/alhidaya/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
+            				<a target="mainFrame" href="/bsb/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
             			</td>
             		</tr>
                 </table>
@@ -899,7 +899,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                              <a target="mainFrame" href="/alhidaya/importfile" style="font-size: 12px;">Import Files</a><br/>
+                              <a target="mainFrame" href="/bsb/importfile" style="font-size: 12px;">Import Files</a><br/>
 				        </td>
 				     </tr>
 				 </table>

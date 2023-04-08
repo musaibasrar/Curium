@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/alhidaya/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/alhidaya/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/alhidaya/css/datePicker/demos.css">
+        <script language="JavaScript" src="/bsb/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/bsb/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/bsb/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/alhidaya/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/alhidaya/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/alhidaya/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/alhidaya/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/alhidaya/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/alhidaya/css/font-awesome.css">
+        <script type="text/javascript" src="/bsb/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/bsb/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/bsb/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/bsb/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/bsb/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/bsb/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -414,7 +414,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alhidaya/UserProcess/sessionTimeOut");
+	response.sendRedirect("/bsb/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -436,120 +436,120 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/alhidaya/StudentProcess/viewAll" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="/alhidaya/StudentProcess/addNew" style="font-size: 12px;">Add New</a><br/>
+                <a target="mainFrame" href="/bsb/StudentProcess/viewAll" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/bsb/StudentProcess/addNew" style="font-size: 12px;">Add New</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
-                <a target="mainFrame" href="/alhidaya/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
-                <a target="mainFrame" href="/alhidaya/attendancemark" style="font-size: 12px;">Mark Attendance</a><br/>
-                <a target="mainFrame" href="/alhidaya/attendanceexport" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="/bsb/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
+                <a target="mainFrame" href="/bsb/attendancemark" style="font-size: 12px;">Mark Attendance</a><br/>
+                <a target="mainFrame" href="/bsb/attendanceexport" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
-                <a target="mainFrame" href="/alhidaya/EmployeeProcess/viewAllEmployee" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="/alhidaya/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
-				<a target="mainFrame" href="/alhidaya/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
-				<a target="mainFrame" href="/alhidaya/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
-				<a target="mainFrame" href="/alhidaya/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="/bsb/EmployeeProcess/viewAllEmployee" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/bsb/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
+				<a target="mainFrame" href="/bsb/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
+				<a target="mainFrame" href="/bsb/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
+				<a target="mainFrame" href="/bsb/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-                <a target="mainFrame" href="/alhidaya/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>
-				<a target="mainFrame" href="/alhidaya/feesstructure" style="font-size: 12px;">Fees Structure</a><br/>                
-				<a target="mainFrame" href="/alhidaya/feesCollectionDetails" style="font-size: 12px;">Fees Details</a><br/>
+                <a target="mainFrame" href="/bsb/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>
+				<a target="mainFrame" href="/bsb/feesstructure" style="font-size: 12px;">Fees Structure</a><br/>                
+				<a target="mainFrame" href="/bsb/feesCollectionDetails" style="font-size: 12px;">Fees Details</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             
             <div>
-                <a target="mainFrame" href="/alhidaya/marksentry" style="font-size: 12px;">Enter Marks</a><br/>
-                <a target="mainFrame" href="/alhidaya/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
-            	<a target="mainFrame" href="/alhidaya/progressreport" style="font-size: 12px;">Generate Report</a><br/>
-           		<a target="mainFrame" href="/alhidaya/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
+                <a target="mainFrame" href="/bsb/marksentry" style="font-size: 12px;">Enter Marks</a><br/>
+                <a target="mainFrame" href="/bsb/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
+            	<a target="mainFrame" href="/bsb/progressreport" style="font-size: 12px;">Generate Report</a><br/>
+           		<a target="mainFrame" href="/bsb/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/alhidaya/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
+                <a target="mainFrame" href="/bsb/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
 
 
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/alhidaya/AdvanceSearch" style="font-size: 12px;">Search</a><br/>
+                <a target="mainFrame" href="/bsb/AdvanceSearch" style="font-size: 12px;">Search</a><br/>
 
 
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/alhidaya/Promotion" style="font-size: 12px;">Promotions</a><br/>
+                <a target="mainFrame" href="/bsb/Promotion" style="font-size: 12px;">Promotions</a><br/>
 
 
             </div>
 
             <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/alhidaya/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/bsb/StudentProcess/archiveViewAll" >Archive Students</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-                <a target="mainFrame" href="/alhidaya/Backup&Restore" style="font-size: 12px;">Backup</a><br/>
-                <a target="mainFrame" href="/alhidaya/changePassword" style="font-size: 12px;">Change Password</a><br/>
-                <a target="mainFrame" href="/alhidaya/uploadattendance" style="font-size: 12px;">upload attendance file</a><br/>
+                <a target="mainFrame" href="/bsb/Backup&Restore" style="font-size: 12px;">Backup</a><br/>
+                <a target="mainFrame" href="/bsb/changePassword" style="font-size: 12px;">Change Password</a><br/>
+                <a target="mainFrame" href="/bsb/uploadattendance" style="font-size: 12px;">upload attendance file</a><br/>
             </div>
             
             
             <h5 style="font-size: 12px"><a href="#" >Generate Cards</a></h5>
             <div >
-                <a target="mainFrame" href="/alhidaya/generateids" style="font-size: 12px;">Generate IDs</a><br/>
+                <a target="mainFrame" href="/bsb/generateids" style="font-size: 12px;">Generate IDs</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Documents</a></h5>
             <div >
-                <a target="mainFrame" href="/alhidaya/studentsdetailsreports" style="font-size: 12px;">Student Details</a><br/>
-                <a target="mainFrame" href="/alhidaya/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
-                <a target="mainFrame" href="/alhidaya/studentsdetailsbonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
-                <a target="mainFrame" href="/alhidaya/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
-                <a target="mainFrame" href="/alhidaya/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
-                <a target="mainFrame" href="/alhidaya/PeriodProcess/generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
+                <a target="mainFrame" href="/bsb/studentsdetailsreports" style="font-size: 12px;">Student Details</a><br/>
+                <a target="mainFrame" href="/bsb/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
+                <a target="mainFrame" href="/bsb/studentsdetailsbonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
+                <a target="mainFrame" href="/bsb/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
+                <a target="mainFrame" href="/bsb/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
+                <a target="mainFrame" href="/bsb/PeriodProcess/generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
             <div >
-                <a target="mainFrame" href="/alhidaya/sendsms" style="font-size: 12px;">SMS</a><br/>
-                <a target="mainFrame" href="/alhidaya/sendemail" style="font-size: 12px;">Email</a><br/>
+                <a target="mainFrame" href="/bsb/sendsms" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="/bsb/sendemail" style="font-size: 12px;">Email</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
-                <a target="mainFrame" href="/alhidaya/AccountProcess/createAccount" style="font-size: 12px;">Ledger Account</a><br/>
-                <a target="mainFrame" href="/alhidaya/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
-                <a target="mainFrame" href="/alhidaya/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">Find/Edit Voucher</a><br/>
-                <a target="mainFrame" href="/alhidaya/AccountProcess/trialBalance" style="font-size: 12px;">Trial Balance</a><br/>
-                <a target="mainFrame" href="/alhidaya/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
+                <a target="mainFrame" href="/bsb/AccountProcess/createAccount" style="font-size: 12px;">Ledger Account</a><br/>
+                <a target="mainFrame" href="/bsb/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
+                <a target="mainFrame" href="/bsb/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">Find/Edit Voucher</a><br/>
+                <a target="mainFrame" href="/bsb/AccountProcess/trialBalance" style="font-size: 12px;">Trial Balance</a><br/>
+                <a target="mainFrame" href="/bsb/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
             </div>
             
              <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/alhidaya/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Issue</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Issue</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
             <div >
-                <a target="mainFrame" href="/alhidaya/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/alhidaya/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
+                <a target="mainFrame" href="/bsb/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
             </div>
             
             </div>

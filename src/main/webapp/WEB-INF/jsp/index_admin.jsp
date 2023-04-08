@@ -62,7 +62,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alhidaya/UserProcess/sessionTimeOut");
+	response.sendRedirect("/bsb/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -77,12 +77,12 @@ for(Cookie cookie : cookies){
     <frameset    rows="55,*"frameborder="0" border="0" framespacing="0"  >
     
 		   <c:if test="${(userType == 'admin')}">
-			    <frame   src="/alhidaya/header_admin"   name="topFrame" scrolling="NO" noresize frameborder="0">
+			    <frame   src="/bsb/header_admin"   name="topFrame" scrolling="NO" noresize frameborder="0">
 		   </c:if>
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/alhidaya/left_admin" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/alhidaya/welcome" name="mainFrame" scrolling="yes" />
+                <frame  src="/bsb/left_admin" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame src="/bsb/welcome" name="mainFrame" scrolling="yes" />
             </frameset>
 
    </frameset>
