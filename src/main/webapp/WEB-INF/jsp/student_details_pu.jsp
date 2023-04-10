@@ -15,34 +15,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Details PU</title>
 
-        <script type="text/javascript" language="JavaScript" src="/bsb/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/bsb/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/bsb/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/bsr/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/bsr/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/bsr/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/bsb/css/datePicker/demos.css">
-        <script type="text/javascript" src="/bsb/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/bsb/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/bsr/css/datePicker/demos.css">
+        <script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/bsr/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/bsb/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/bsb/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/bsb/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/bsb/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/bsb/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/bsb/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/bsb/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/bsb/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/bsr/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/bsr/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/bsr/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/bsr/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/bsr/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/bsr/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/bsr/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/bsr/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
         .dataText {
@@ -299,7 +299,7 @@
             function updateStudent(){
                
                 var form1=document.getElementById("form1");
-                form1.action="/bsb/StudentProcess/updateStudentDetails?id=<c:out value='${student.sid}'/>&urlbranchid=<c:out value='${student.branchid}'/>";
+                form1.action="/bsr/StudentProcess/updateStudentDetails?id=<c:out value='${student.sid}'/>&urlbranchid=<c:out value='${student.branchid}'/>";
                 form1.submit();
             }
             
@@ -368,7 +368,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsb/UserProcess/sessionTimeOut");
+	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -889,7 +889,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${receiptinfo.date}"/></a></td>
                                 <td  class="dataText"><c:out value="${receiptinfo.receiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/bsb/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/bsr/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  
 
                             </tr>
@@ -997,7 +997,7 @@ for(Cookie cookie : cookies){
         
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/bsb/StudentProcess/ViewAll";
+                form1.action="/bsr/StudentProcess/ViewAll";
                 form1.submit();
             }
         </script>

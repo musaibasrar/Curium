@@ -167,9 +167,9 @@ span{
             }
         }
     </style>
-	<script type="text/javascript" src="/bsb/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/bsb/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/bsb/js/print/jquery.printPage.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/bsr/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Transfer Certificate</title>
         <script type="text/javascript">
              $(function() {
@@ -183,7 +183,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsb/UserProcess/sessionTimeOut");
+	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -331,11 +331,11 @@ for(Cookie cookie : cookies){
 			</tr>
 			
 			<tr>
-                        <td align="center"><a id="print" href="/bsb/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>
+                        <td align="center"><a id="print" href="/bsr/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>
                     </tr>
 		</TABLE>
 		
-		<%-- <a id="print" href="/bsb/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
+		<%-- <a id="print" href="/bsr/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
 	</form>
 	
 	

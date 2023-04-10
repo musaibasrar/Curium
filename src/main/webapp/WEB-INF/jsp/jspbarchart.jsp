@@ -13,11 +13,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Dash Board</title>
-        <script src="/bsb/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/bsb/css/bootstrap.min.css">
-        <script src="/bsb/js/jquery.min.js"></script>
-        <script src="/bsb/js/bootstrap.min.js"></script>
-        <script src="/bsb/js/popper.min.js"></script>
+        <script src="/bsr/js/Chart.min.js"></script>
+         <link rel="stylesheet" href="/bsr/css/bootstrap.min.css">
+        <script src="/bsr/js/jquery.min.js"></script>
+        <script src="/bsr/js/bootstrap.min.js"></script>
+        <script src="/bsr/js/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
@@ -51,7 +51,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsb/UserProcess/sessionTimeOut");
+	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -83,10 +83,10 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/bsb/images/student.svg"  height="20" width="20"/>
+        						<img src="/bsr/images/student.svg"  height="20" width="20"/>
         						<label id="labelname">Total Students </label>
         						<br>		
-        						<img src="/bsb/images/teacher.svg" height="20" width="20"/>
+        						<img src="/bsr/images/teacher.svg" height="20" width="20"/>
         						<label id="labelname">Total Teachers </label>
         					</td>
         					<td></td>
@@ -110,9 +110,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/bsb/images/totalfees.svg" height="20" width="20"/>
+        						<img src="/bsr/images/totalfees.svg" height="20" width="20"/>
         						<label id="labelname">Total Fees&nbsp;&nbsp;&nbsp;</label><br>
-        						<img src="/bsb/images/monthlyfees.svg"  height="20" width="20"/>	
+        						<img src="/bsr/images/monthlyfees.svg"  height="20" width="20"/>	
         						<label id="labelname">${Currentmonth} Fees</label>
         					</td>
         					<td></td>
@@ -138,9 +138,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        					<img src="/bsb/images/feespaid.svg" height="20" width="20"/>	
+        					<img src="/bsr/images/feespaid.svg" height="20" width="20"/>	
         						<label id="labelname">Total Fees Paid</label><br>
-        						<img src="/bsb/images/feesdue.svg"  height="20" width="20"/>
+        						<img src="/bsr/images/feesdue.svg"  height="20" width="20"/>
         						<label id="labelname">Total Fees Due&nbsp;</label>
         					</td>
         					<td></td>
@@ -166,10 +166,10 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/bsb/images/todayscollection.svg" height="20" width="20"/>
+        						<img src="/bsr/images/todayscollection.svg" height="20" width="20"/>
         						<label id="labelname">Today's Fees</label>
         						<br>		
-        						<img src="/bsb/images/todaysexpenses.svg" height="20" width="20"/>	
+        						<img src="/bsr/images/todaysexpenses.svg" height="20" width="20"/>	
         						<label id="labelname">Today's Expenses</label>	
         					</td>
         					<td></td>
