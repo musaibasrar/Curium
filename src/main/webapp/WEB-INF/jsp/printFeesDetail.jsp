@@ -177,13 +177,13 @@
 			<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 10px;">
-				<img src="/bsr/images/bsr.jpg" width="120" height="60"/>
+				<td align="left" style="padding-left: 110px;">
+				<img src="/bsr/images/bsr.jpg" width="80" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 5px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 110px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 40px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 25px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 			</tr>
 </table>
@@ -348,8 +348,8 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
-		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${recieptdate}</td>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
+		Date&nbsp;:&nbsp;${recieptdate}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
@@ -359,16 +359,16 @@
 		<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 10px;">
-				<img src="/bsr/images/bsr.jpg" width="120" height="60"/>
+				<td align="left" style="padding-left: 110px;">
+				<img src="/bsr/images/bsr.jpg" width="80" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 5px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 110px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 40px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 25px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 			</tr>
-</table>
+		</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -531,8 +531,8 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
-		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${recieptdate}</td>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
+		Date&nbsp;:&nbsp;${recieptdate}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
