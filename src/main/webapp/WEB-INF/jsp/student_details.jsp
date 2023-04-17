@@ -777,7 +777,7 @@ for(Cookie cookie : cookies){
     
     	<div class="accordion" style="width: 100%;height: 100%">
 		
-                <h3><a href="#">Previous School Details</a></h3>
+                <h3><a href="#">previous School Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">

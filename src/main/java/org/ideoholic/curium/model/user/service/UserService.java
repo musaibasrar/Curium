@@ -73,6 +73,7 @@ public class UserService {
             httpSession.setAttribute("branchcontact",login.getBranch().getContact());
             
             String[] userType = login.getUsertype().split("-");
+            System.out.println("HERE **************** "+login.getUsertype());
             httpSession.setAttribute("userType", userType[0]);
             httpSession.setAttribute("typeOfUser",userType[0]);
             httpSession.setAttribute("userAuth", userType[0]);

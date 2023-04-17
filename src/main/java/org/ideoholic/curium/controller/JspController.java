@@ -71,6 +71,11 @@ public class JspController {
 		return "stampfees";
 	}
 
+	@GetMapping("/otherstampfees")
+	public String getOtherStampFees() {
+		return "otherstampfees";
+	}
+
 	@GetMapping("/left")
 	public String getLeft() {
 		return "left";
@@ -360,6 +365,11 @@ public class JspController {
 	@GetMapping("/otherfeecategory")
 	public String getOtherfeecategory() {
 		return "otherfeecategory";
+	}
+	
+	@GetMapping("/otherfeesCollection")
+	public String getOtherfeesCollection() {
+		return "otherfeesCollection";
 	}
 	
 }

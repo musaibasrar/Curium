@@ -485,6 +485,12 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/roshan/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
             			</td>
             		</tr>
+            		<!-- this is for other fee collect -->
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/roshan/FeesProcess/otherfeesCollect" style="font-size: 12px;">otherFees Collect</a>
+            			</td>
+            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/roshan/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>

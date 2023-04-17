@@ -14,8 +14,10 @@ import org.hibernate.query.Query;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
+import org.ideoholic.curium.model.stampfees.dto.Academicotherfeesstructure;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.HibernateUtil;
 
@@ -164,6 +166,65 @@ public class StampFeesDAO {
 					
 					Query queryUpdate = session
 							.createQuery("update Studentfeesstructure set idfeescategory = '"+studentfeesstructure.getIdfeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and academicyear = '"+currentYear+"'");
+					
+					
+					queryUpdate.executeUpdate();
+				}else if(feesStructure == null){
+					session.save(studentfeesstructure);
+				}
+		}
+			
+			//accounts
+			
+			session.save(transactions);
+			Query queryAccounts = session.createQuery(updateDrAccount);
+			queryAccounts.executeUpdate();
+			Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+			queryqueryAccounts1.executeUpdate();
+			
+
+			transaction.commit();
+			System.out.println("in add3");
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+			HibernateUtil.closeSession();
+		}
+	}
+//other stamp fee
+	public void addotherStampFees(
+			java.util.List<Academicotherfeesstructure> listOfacademicfessstructure, String currentYear, List<Studentotherfeesstructure> listOfstudentfeesstructure, VoucherEntrytransactions transactions, String updateDrAccount, String updateCrAccount) {
+		try {
+			// this.session = sessionFactory.openCurrentSession();
+			transaction = session.beginTransaction();
+			
+			for (Academicotherfeesstructure academicfeesStructure : listOfacademicfessstructure) {
+				Query query = session.createQuery("from Academicotherfeesstructure afs where afs.sid = '"+academicfeesStructure.getSid()+"' and afs.academicyear = '"+currentYear+"'");
+				Academicotherfeesstructure feesStructure = (Academicotherfeesstructure) query.uniqueResult();
+				if(feesStructure != null){
+					
+					Query queryUpdate = session
+							.createQuery("update Academicotherfeesstructure set totalfees = '"+academicfeesStructure.getTotalfees()+"'  where sid = '"+academicfeesStructure.getSid()+"' and academicyear = '"+currentYear+"'");
+					
+					
+					queryUpdate.executeUpdate();
+				}else if(feesStructure == null){
+					session.save(academicfeesStructure);
+				}
+				
+			
+			
+			}
+			
+			for (Studentotherfeesstructure studentfeesstructure : listOfstudentfeesstructure) {
+				
+				Query query = session.createQuery("from Studentotherfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.OtherFeecategory.idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
+				Studentotherfeesstructure feesStructure = (Studentotherfeesstructure) query.uniqueResult();
+				if(feesStructure != null){
+					
+					Query queryUpdate = session
+							.createQuery("update Studentotherfeesstructure set idfeescategory = '"+studentfeesstructure.getIdfeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and academicyear = '"+currentYear+"'");
 					
 					
 					queryUpdate.executeUpdate();

@@ -70,7 +70,15 @@ public class FeesCollectionAction {
                 new FeesService(request, response).viewAllStudentsList();
                 return "feesCollection";
         }
-
+//this code is for otherstampfees
+		@PostMapping("/otherStampFees")
+		public String otherStampFees() {
+                new FeesCollectionService(request, response).getotherStampFees();
+                new FeesCollectionService(request, response).getotherFeesDetails();
+                new StandardService(request, response).viewClasses();
+                new FeesService(request, response).viewAllStudentsList();
+                return "otherfeesCollection";
+        }
 		@GetMapping("/ViewDetails")
         public String ViewDetails() {
                 //new FeesCollectionService(request, response).preview();

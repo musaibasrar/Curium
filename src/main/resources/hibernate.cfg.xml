@@ -10,7 +10,7 @@
             <property name="hibernate.multi_tenant_connection_provider">com.model.multitenant.MultiTenantProvider</property> -->
 		 
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-	 	<property name="hibernate.connection.password">root</property>
+	 	<property name="hibernate.connection.password">7764</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/curium</property>
 		<property name="hibernate.connection.username">root</property> 
 		
@@ -107,5 +107,8 @@
 		<mapping resource="mappings/mess/MessStockMove.hbm.xml"></mapping>
 		<mapping resource="mappings/mess/MessSuppliersPayment.hbm.xml"></mapping>
 		<mapping resource="mappings/mess/Card.hbm.xml"></mapping>
+		<mapping resource="mappings/OtherFeescategory.hbm.xml"></mapping>
+		<mapping resource="mappings/Academicotherfeesstructure.hbm.xml"></mapping>
+		<mapping resource="mappings/Studentotherfeesstructure.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>

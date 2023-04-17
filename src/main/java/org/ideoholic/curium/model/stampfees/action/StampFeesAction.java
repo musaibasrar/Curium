@@ -41,7 +41,13 @@ public class StampFeesAction {
 		new StampFeesService(request, response).addFeesStamp();
 		return "feesstampsuccess";
 	}
-
+//method for apply other fees
+	@PostMapping("/applyotherFees")
+	public String applyotherFees() {
+		new StampFeesService(request, response).addotherFeesStamp();
+		return "feesstampsuccess";
+	}
+	
 	@GetMapping("/showFeesDetails")
 	public String showFeesDetails() {
 		new FeesService(request, response).viewFees();
@@ -49,13 +55,25 @@ public class StampFeesAction {
 		new StandardService(request, response).viewClasses();
 		return "stampfees";
 	}
-
+//this coding is for otherstamp
+	@GetMapping("/showOtherFeesDetails")
+	public String showOtherFeesDetails() {
+		new FeesService(request, response).viewOtherFees();
+		new YearService(request, response).getYear();
+		new StandardService(request, response).viewClasses();
+		return "otherstampfees";
+	}
 	@PostMapping("/search")
 	public String search() {
 		new StampFeesService(request, response).advanceSearch();
 		return "stampfees";
 	}
-	
+	//this is other search
+	@PostMapping("/othersearch")
+	public String othersearch() {
+		new StampFeesService(request, response).otheradvanceSearch();
+		return "otherstampfees";
+	}
 	@GetMapping("/showFeesDetailsYearly")
 	public void showFeesDetailsYearly() {
 		try {

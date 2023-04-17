@@ -17,6 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
@@ -47,6 +48,7 @@ import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
@@ -189,6 +191,52 @@ public class FeesCollectionService {
 			
 		}
 		request.setAttribute("studentfeesdetails", feesMap);
+		request.setAttribute("studentNameDetails", request.getParameter("studentname"));
+		//request.setAttribute("admnoDetails", request.getParameter("admno"));
+		request.setAttribute("admnoDetails", request.getParameter("admissionno"));
+		request.setAttribute("classandsecDetails", request.getParameter("classandsec"));
+		request.setAttribute("studentIdDetails", request.getParameter("studentId"));
+		request.setAttribute("dateoffeesDetails", request.getParameter("dateoffees"));
+		
+		}
+	}
+//this is othergetstampfees
+	public void getotherStampFees() {
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		String academicYear = request.getParameter("academicyear");	
+			
+		long id = Long.parseLong(request.getParameter("studentId"));
+		List<Studentotherfeesstructure> feesstructure = new studentDetailsDAO().getotherStudentFeesStructure(id, academicYear);
+		//List<Feescollection> feesCollection = new feesCollectionDAO().getFeesForTheCurrentYear(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		Map<Studentotherfeesstructure,Long> feesMap = new LinkedHashMap<Studentotherfeesstructure, Long>();
+		
+		for (Map.Entry<Studentotherfeesstructure, Long> feescollection2 : feesMap.entrySet()) {
+			Studentotherfeesstructure sf = feescollection2.getKey();
+			sf.getFeescategory().getFeescategoryname();
+		}
+		
+		for (Studentotherfeesstructure singleFeesStructure : feesstructure) {
+			Long totalAmountPerCategory = 0l;
+			/*for (Feescollection singleFeescollection : feesCollection) {
+				
+				if(singleFeescollection.getSfsid() == singleFeesStructure.getSfsid()){
+					totalAmountPerCategory = totalAmountPerCategory + singleFeescollection.getAmountpaid();
+				}
+				
+			}*/
+			Long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid() - singleFeesStructure.getConcession() - singleFeesStructure.getWaiveoff();
+			
+				if(totalDueAmount>0) {
+					feesMap.put(singleFeesStructure,totalDueAmount);
+				}
+			
+		}
+		
+		for (Entry<Studentotherfeesstructure, Long> entry : feesMap.entrySet()) 
+            System.out.println("Key = " + entry.getKey().getFeescategory().getFeescategoryname() +
+                             ", Value = " + entry.getValue());
+		
+		request.setAttribute("studentotherfeesdetails", feesMap);
 		request.setAttribute("studentNameDetails", request.getParameter("studentname"));
 		//request.setAttribute("admnoDetails", request.getParameter("admno"));
 		request.setAttribute("admnoDetails", request.getParameter("admissionno"));
@@ -884,6 +932,41 @@ public class FeesCollectionService {
 			
 			long totalFeesAmount = 0l;
 			for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
+				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
+			}
+			
+				httpSession.setAttribute("feesstructure", feesstructure);
+				httpSession.setAttribute("sumoffees", totalSum);
+				httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
+				httpSession.setAttribute("totalfees", totalFeesAmount);
+				httpSession.setAttribute("academicPerYear", academicYear);
+				httpSession.setAttribute("currentAcademicYear", academicYear);
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+//getotherfeessdetail
+public void getotherFeesDetails() {
+		
+		try {
+			long id = Long.parseLong(request.getParameter("studentId"));
+			String academicYear = request.getParameter("academicyear");
+			
+			//Currentacademicyear currentYear = new YearDAO().showYear();
+			//httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
+			
+			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,academicYear);
+			request.setAttribute("receiptinfo",rinfo);
+			List<Studentotherfeesstructure> feesstructure = new studentDetailsDAO().getotherStudentFeesStructure(id, academicYear);
+			
+			long totalSum = 0l;
+			for (Receiptinfo receiptInfoSingle : rinfo) {
+				totalSum = totalSum + receiptInfoSingle.getTotalamount();
+			}
+			
+			long totalFeesAmount = 0l;
+			for (Studentotherfeesstructure studentfeesstructureSingle : feesstructure) {
 				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
 			}
 			

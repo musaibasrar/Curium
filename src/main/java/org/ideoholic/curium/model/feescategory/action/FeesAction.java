@@ -105,7 +105,13 @@ public class FeesAction {
 		new FeesService(request, response).viewAllStudentsList();
 		return "feesCollection";
 	}
-
+// this method is for otherfeescollect
+	@GetMapping("/otherfeesCollect")
+	public String otherfeesCollect() {
+		new FeesService(request, response).viewOtherFees();
+		new FeesService(request, response).viewAllStudentsList();
+		return "otherfeesCollection";
+	}
 	@GetMapping("/feesCollectAllBranches")
 	public String feesCollectAllBranches() {
 		new FeesService(request, response).viewFees();

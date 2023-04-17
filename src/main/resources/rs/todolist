@@ -3,3 +3,10 @@ Take the login creation page
 
 //DB Details
 database(v2dev) :  21 MAY 2019
+
+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
+
+//Create Table Otherfee_feescategory
+(idfeescategory int(11) not null primary key auto_increment,feescategoryname varchar(150),
+amount int(11),particularname varchar(150),branchid int(11),userid int(11),academicyear varchar(20));
+

@@ -408,7 +408,7 @@ for(Cookie cookie : cookies){
              <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
             <div>
                 <a target="mainFrame" href="/roshan/FeesProcess/otherfeesView" style="font-size: 12px;">Other Fees Category</a><br/>
-               
+                 <a target="mainFrame" href="/roshan/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">OtherStamp Fee</a><br/>
             </div>
             
             </div>
