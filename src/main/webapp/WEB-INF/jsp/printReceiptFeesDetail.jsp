@@ -178,17 +178,24 @@
 			
 			<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 10px;">
-				<img src="/bsr/images/bsr.jpg" width="120" height="60"/>
+				<td align="left" style="padding-left: 110px;">
+				<img src="/alfarooq/images/alfarooq.jpg" width="85" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 5px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 110px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact} </label>
-				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
+				<c:choose>
+                  <c:when test="${branchid eq 4}">
+                         <label class="dataTextBoldCenter" style="padding-left: 30px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+                  </c:when>
+                  <c:otherwise>
+                         <label class="dataTextBoldCenter" style="padding-left: 0px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+                  </c:otherwise>
+                </c:choose>
+				<label class="addressLine" style="padding-left: 25px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 90px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
 				</td>
 			</tr>
-</table>
+		</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -351,7 +358,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/bsr/images/bsrpaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/alfarooq/images/alfarooqpaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -360,14 +367,21 @@
 		<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 10px;">
-				<img src="/bsr/images/bsr.jpg" width="120" height="60"/>
+				<td align="left" style="padding-left: 110px;">
+				<img src="/alfarooq/images/alfarooq.jpg" width="85" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 5px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 110px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact} </label>
-				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
+				<c:choose>
+                  <c:when test="${branchid eq 4}">
+                         <label class="dataTextBoldCenter" style="padding-left: 30px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+                  </c:when>
+                  <c:otherwise>
+                         <label class="dataTextBoldCenter" style="padding-left: 0px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+                  </c:otherwise>
+                </c:choose>
+				<label class="addressLine" style="padding-left: 25px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 90px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
 				</td>
 			</tr>
 </table>
@@ -534,7 +548,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/bsr/images/bsrpaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/alfarooq/images/alfarooqpaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
