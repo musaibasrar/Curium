@@ -61,7 +61,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alfarooq/UserProcess/sessionTimeOut");
+	response.sendRedirect("/shbranchtl/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -74,11 +74,11 @@ for(Cookie cookie : cookies){
 }
 %>
     <frameset    rows="70,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="/alfarooq/header"   name="topFrame" scrolling="NO" noresize frameborder="0">
+        <frame   src="/shbranchtl/header"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/alfarooq/left" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/alfarooq/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
+                <frame  src="/shbranchtl/left" name="leftFrame" scrolling="yes"  frameborder="1"   />
+                <frame src="/shbranchtl/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
             </frameset>
 
    </frameset>

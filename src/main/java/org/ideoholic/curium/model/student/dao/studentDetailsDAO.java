@@ -72,7 +72,7 @@ public class studentDetailsDAO {
 			 * "commonregion");
 			 */
 			Query query = session
-					.createQuery("select s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from Student s JOIN Parents f ON s.sid=f.Student.sid where s.archive = 0 AND s.branchid="+branchId+" order by s.sid DESC").setCacheable(true).setCacheRegion("commonregion");
+					.createQuery("select s.sid, s.registrationnumber, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from Student s JOIN Parents f ON s.sid=f.Student.sid where s.archive = 0 AND s.branchid="+branchId+" order by s.sid DESC").setCacheable(true).setCacheRegion("commonregion");
 			query.setFirstResult(offset);
 			query.setMaxResults(noOfRecords);
 			results = query.list();
@@ -656,6 +656,22 @@ public class studentDetailsDAO {
 				HibernateUtil.closeSession();
 			return results;
 		}
+	}
+
+	public List<Object[]> getListStudentsObject(String query) {
+		List<Object[]> student = new ArrayList<Object[]>();
+        try {
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(query).setCacheable(true).setCacheRegion("commonregion");
+            student = (List<Object[]>)HQLquery.list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        }finally {
+			HibernateUtil.closeSession();
+		 }
+        return student;
 	}
 	
 }

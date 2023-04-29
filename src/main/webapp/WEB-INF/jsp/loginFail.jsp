@@ -15,8 +15,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	 <title>Curium - School ERP</title>
-	<link rel="stylesheet" href="/alfarooq/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/alfarooq/js/openWindow.js"></script>
+	<link rel="stylesheet" href="/shbranchtl/css/bootstrap3.min.css">
+	<script type="text/javascript" src="/shbranchtl/js/openWindow.js"></script>
 	
 	<style type="text/css">
 	.main-content{
@@ -112,7 +112,7 @@ form{
             function redirect(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="/alfarooq/UserProcess/authenticate";
+                form1.action="/shbranchtl/UserProcess/authenticate";
                 form1.submit();
             }
         </script>
@@ -129,19 +129,19 @@ form{
             if(flag1){
             	
             	if(type=='superadmin'){
-                    window.open('/alfarooq/index_superadmin','_self');
+                    window.open('/shbranchtl/index_superadmin','_self');
                 }else if(type=='admin'){
-                    window.open('/alfarooq/index_admin','_self');
+                    window.open('/shbranchtl/index_admin','_self');
                 }else if(type=='feescollector'){
-                    window.open('/alfarooq/index_feescollector','_self');
+                    window.open('/shbranchtl/index_feescollector','_self');
                 }else if(type=='officeadmin'){
-                	window.open('/alfarooq/index_officeadmin','_self');
+                	window.open('/shbranchtl/index_officeadmin','_self');
                 }else if(type=='marksentry'){
-                	window.open('/alfarooq/index_marksentry','_self');
+                	window.open('/shbranchtl/index_marksentry','_self');
                 }
             }
             else if(!flag1){
-            	window.open('/alfarooq/loginFail','_self');
+            	window.open('/shbranchtl/loginFail','_self');
             }
         </script>
         
@@ -151,19 +151,19 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 180px;width: 180px;" alt="ideoholic" src="/alfarooq/images/alfarooq.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 180px;width: 180px;" alt="ideoholic" src="/shbranchtl/images/shbranchtl.png"></h2>
 			<!-- <h5 style="font-weight: bold;">Shaheen Kidz</h5> --></span>
 				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
 					<div class="row">
-						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/alfarooq/images/shaheenlogo.png"></h2></span> -->
+						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/shbranchtl/images/shaheenlogo.png"></h2></span> -->
 						<h3>Log In</h3>
 						<p align="center" style="color: red;font-size: 10px;">Please enter correct username and password</p>
 					</div>
 					<div class="row">
-						<form action="/alfarooq/UserProcess/authenticateUser"  method="post" class="form-group">
+						<form action="/shbranchtl/UserProcess/authenticateUser"  method="post" class="form-group">
 							<div class="row">
 								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="Username">
 							</div>
@@ -185,10 +185,10 @@ form{
 	<!-- Footer -->
 	<div class="container-fluid text-center footer">
 		<p>
-			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/alfarooq/images/ideoholic.png"> image with a default alignment.</p> --> 
+			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/shbranchtl/images/ideoholic.png"> image with a default alignment.</p> --> 
 			
 			<a href="http://www.ideoholic.com" >
-				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/alfarooq/images/ideoholic.png">
+				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/shbranchtl/images/ideoholic.png">
 			</a>
 			
 	</div>

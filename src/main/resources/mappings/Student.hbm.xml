@@ -35,6 +35,9 @@
         <property name="religion" type="string">
             <column name="religion" length="45" />
         </property>
+         <property name="secondlanguage" type="string">
+            <column name="secondlanguage" length="45" />
+        </property>
         <property name="caste" type="string">
             <column name="caste" length="45" />
         </property>
@@ -165,6 +168,9 @@
         <property name="specialcategory" type="string">
             <column name="specialcategory" length="25" />
         </property> 
+        <property name="registrationnumber" type="string">
+            <column name="registrationnumber" length="50"/>
+        </property>
         <property name="sts" type="string">
             <column name="sts" length="30"/>
         </property>
@@ -207,7 +213,24 @@
         <property name="promotedyear" type="string">
             <column name="promotedyear" length="10" />
         </property>  
-        
+        <property name="percentage" type="string">
+            <column name="percentage" length="45" />
+        </property>
+        <property name="totalmarks" type="java.lang.Integer">
+            <column name="totalmarks" />
+        </property>
+         <property name="lastcourse" type="string">
+            <column name="lastcourse" length="25" />
+        </property>
+        <property name="lastfirstlanguage" type="string">
+            <column name="lastfirstlanguage" length="25" />
+        </property>
+        <property name="lastsecondlanguage" type="string">
+            <column name="lastsecondlanguage" length="40" />
+        </property>  
+        <property name="lastschooladdress" type="string">
+            <column name="lastschooladdress" length="200" />
+        </property>
          <!-- <many-to-one name="Pudetails" class="org.ideoholic.curium.model.pudetails.dto.Pudetails"
             column="pudetailsid" unique="true" not-null="true" lazy="false"
             cascade="all" />

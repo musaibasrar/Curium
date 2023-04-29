@@ -204,6 +204,10 @@ public class Student implements java.io.Serializable {
 	@Column(name = "specialcategory", length = 25)
 	private String specialcategory;
 
+	
+	@Column(name = "registrationnumber", length = 50)
+	private String registrationnumber;
+	
 	@Column(name = "rte")
 	private Integer rte;
 
@@ -237,13 +241,29 @@ public class Student implements java.io.Serializable {
 	@Column(name = "studentdoc5")
 	private String studentdoc5;
 	
-	private String lastcourse;
-	private Integer totalmarks;
-	private String lastfirstlanguage;
-	private String lastsecondlanguage;
-	private String lastschooladdress;
 	private Pudetails pudetails;
 	private Degreedetails degreedetails;
+	
+	@Column(name = "secondlanguage", length = 45)
+	private String secondlanguage;
+	
+	@Column(name = "percentage", length = 45)
+	private String percentage;
+	
+	@Column(name = "totalmarks")
+	private Integer totalmarks;
+	
+	@Column(name = "lastcourse", length = 25)
+	private String lastcourse;
+	
+	@Column(name = "lastfirstlanguage", length = 25)
+	private String lastfirstlanguage;
+	
+	@Column(name = "lastsecondlanguage", length = 40)
+	private String lastsecondlanguage;
+	
+	@Column(name = "lastschooladdress", length = 100)
+	private String lastschooladdress;
 	
 	@Column(name = "yearofadmission", length = 10)
 	private String yearofadmission;

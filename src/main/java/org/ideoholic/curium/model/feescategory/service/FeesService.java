@@ -114,7 +114,7 @@ public class FeesService {
                             student.setSid((Integer)parentdetails[0]);
                             student.setName((String)parentdetails[1]);
                             student.setClassstudying((String)parentdetails[2]);
-                            student.setStudentexternalid((String)parentdetails[3]);
+                            student.setRegistrationnumber((String)parentdetails[3]);
                             student.setAdmissionnumber((String)parentdetails[4]);
                             parent.setFathersname((String)parentdetails[5]);
                             parent.setStudent(student);

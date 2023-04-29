@@ -242,7 +242,7 @@ public class feesDetailsDAO {
 						 * createQuery("FROM Parents p where p.Student.sid in (select f.sid from Studentfeesstructure f where f.branchid = "
 						 * +branchId+")") .list();
 						 */
-                        Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, p.fathersname from Student s JOIN Parents p ON s.sid=p.Student.sid where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
+                        Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.registrationnumber, s.admissionnumber, p.fathersname from Student s JOIN Parents p ON s.sid=p.Student.sid where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
                         results= (List<Object[]>)q.list();
                         transaction.commit();
 

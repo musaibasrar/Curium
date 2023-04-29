@@ -52,7 +52,7 @@ public class Parents implements java.io.Serializable {
 			String remarks, String contactnumber, String cocontactnumber, String email,
 			Student student, int branchid, String fathersqualification, String mothersqualification,
 			 String motherscastecertno, String fatherscastecertno, String fatherscaste,
-			String motherscaste, int userid) {
+			String motherscaste, int userid, String emergencycontactno, String fatheroccupation) {
 		this.fathersname = fathersname;
 		this.mothersname = mothersname;
 		this.addresspermanent = addresspermanent;
@@ -75,6 +75,8 @@ public class Parents implements java.io.Serializable {
 		this.fatherscaste = fatherscaste;
 		this.motherscaste = motherscaste;
 		this.userid = userid;
+		this.emergencycontactno = emergencycontactno;
+		this.fatheroccupation = fatheroccupation;
 	}
 
 	@Id
@@ -124,7 +126,7 @@ public class Parents implements java.io.Serializable {
 		this.addresstemporary = addresstemporary;
 	}
 
-	@Column(name = "professsion", length = 100)
+	@Column(name = "profession", length = 100)
 	public String getProfession() {
 		return this.profession;
 	}
@@ -284,6 +286,22 @@ public class Parents implements java.io.Serializable {
 
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+
+	public String getEmergencycontactno() {
+		return emergencycontactno;
+	}
+
+	public void setEmergencycontactno(String emergencycontactno) {
+		this.emergencycontactno = emergencycontactno;
+	}
+
+	public String getFatheroccupation() {
+		return fatheroccupation;
+	}
+
+	public void setFatheroccupation(String fatheroccupation) {
+		this.fatheroccupation = fatheroccupation;
 	}
 
 }

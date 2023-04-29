@@ -13,11 +13,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Dash Board</title>
-        <script src="/alfarooq/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/alfarooq/css/bootstrap.min.css">
-        <script src="/alfarooq/js/jquery.min.js"></script>
-        <script src="/alfarooq/js/bootstrap.min.js"></script>
-        <script src="/alfarooq/js/popper.min.js"></script>
+        <script src="/shbranchtl/js/Chart.min.js"></script>
+         <link rel="stylesheet" href="/shbranchtl/css/bootstrap.min.css">
+        <script src="/shbranchtl/js/jquery.min.js"></script>
+        <script src="/shbranchtl/js/bootstrap.min.js"></script>
+        <script src="/shbranchtl/js/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
@@ -51,7 +51,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alfarooq/UserProcess/sessionTimeOut");
+	response.sendRedirect("/shbranchtl/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -83,10 +83,10 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/alfarooq/images/student.svg"  height="20" width="20"/>
+        						<img src="/shbranchtl/images/student.svg"  height="20" width="20"/>
         						<label id="labelname">Total Students </label>
         						<br>		
-        						<img src="/alfarooq/images/teacher.svg" height="20" width="20"/>
+        						<img src="/shbranchtl/images/teacher.svg" height="20" width="20"/>
         						<label id="labelname">Total Teachers </label>
         					</td>
         					<td></td>
@@ -110,9 +110,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/alfarooq/images/totalfees.svg" height="20" width="20"/>
+        						<img src="/shbranchtl/images/totalfees.svg" height="20" width="20"/>
         						<label id="labelname">Total Fees&nbsp;&nbsp;&nbsp;</label><br>
-        						<img src="/alfarooq/images/monthlyfees.svg"  height="20" width="20"/>	
+        						<img src="/shbranchtl/images/monthlyfees.svg"  height="20" width="20"/>	
         						<label id="labelname">${Currentmonth} Fees</label>
         					</td>
         					<td></td>
@@ -138,9 +138,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        					<img src="/alfarooq/images/feespaid.svg" height="20" width="20"/>	
+        					<img src="/shbranchtl/images/feespaid.svg" height="20" width="20"/>	
         						<label id="labelname">Total Fees Paid</label><br>
-        						<img src="/alfarooq/images/feesdue.svg"  height="20" width="20"/>
+        						<img src="/shbranchtl/images/feesdue.svg"  height="20" width="20"/>
         						<label id="labelname">Total Fees Due&nbsp;</label>
         					</td>
         					<td></td>
@@ -166,10 +166,10 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/alfarooq/images/todayscollection.svg" height="20" width="20"/>
+        						<img src="/shbranchtl/images/todayscollection.svg" height="20" width="20"/>
         						<label id="labelname">Today's Fees</label>
         						<br>		
-        						<img src="/alfarooq/images/todaysexpenses.svg" height="20" width="20"/>	
+        						<img src="/shbranchtl/images/todaysexpenses.svg" height="20" width="20"/>	
         						<label id="labelname">Today's Expenses</label>	
         					</td>
         					<td></td>

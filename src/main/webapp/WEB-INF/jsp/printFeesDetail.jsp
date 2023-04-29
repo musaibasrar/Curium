@@ -74,6 +74,14 @@
 	letter-spacing: normal;
 	text-align: center;
 }
+.dataTextBoldCenter {
+	font-weight: normal;
+	font-family: Tahoma;
+	color: black;
+	font-size: 18px;
+	letter-spacing: normal;
+	text-align: center;
+}
 
 .addressLine{
 	font-weight: normal;
@@ -175,25 +183,18 @@
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 110px;">
-				<img src="/alfarooq/images/alfarooq.jpg" width="85" height="80"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<c:choose>
-                  <c:when test="${branchid eq 4}">
-                         <label class="dataTextBoldCenter" style="padding-left: 30px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-                  </c:when>
-                  <c:otherwise>
-                         <label class="dataTextBoldCenter" style="padding-left: 0px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-                  </c:otherwise>
-                </c:choose>
-				<label class="addressLine" style="padding-left: 25px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 90px;">Contact:&nbsp;${branchcontact} </label>
+				<td><img src="/shbranchtl/images/shaheenlogo.png" width="160" height="80"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
 			</tr>
-</table>
+		</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -364,23 +365,14 @@
 		</div>
 		<br>
 		<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 110px;">
-				<img src="/alfarooq/images/alfarooq.jpg" width="85" height="80"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<c:choose>
-                  <c:when test="${branchid eq 4}">
-                         <label class="dataTextBoldCenter" style="padding-left: 30px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-                  </c:when>
-                  <c:otherwise>
-                         <label class="dataTextBoldCenter" style="padding-left: 0px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-                  </c:otherwise>
-                </c:choose>
-				
-				<label class="addressLine" style="padding-left: 25px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 90px;">Contact:&nbsp;${branchcontact} </label>
+				<td><img src="/shbranchtl/images/shaheenlogo.png" width="160" height="80"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
 			</tr>
 		</table>
