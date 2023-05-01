@@ -15,8 +15,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Search Journal Entries</title>
-<link rel="stylesheet" href="/bsr/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/bsr/css/datePicker/demos.css">
+<link rel="stylesheet" href="/madina/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/madina/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -301,44 +301,44 @@
 }
 </style>
 
-<link rel="stylesheet" href="/bsr/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/madina/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/madina/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/madina/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/bsr/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/madina/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/madina/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/madina/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/bsr/js/datePicker/ui/sliderAccess.js"></script>
+	src="/madina/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/madina/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/madina/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/bsr/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/madina/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/madina/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/madina/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/madina/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/madina/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/madina/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/madina/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/madina/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/madina/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/madina/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/ScrollableGridPlugin.js"></script>
-	<link href="/bsr/css/select2.min.css" rel="stylesheet" />
-<script src="/bsr/js/select2.min.js"></script>
+	src="/madina/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	<link href="/madina/css/select2.min.css" rel="stylesheet" />
+<script src="/madina/js/select2.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -364,12 +364,12 @@
 	
 </script>
 
-<script type="text/javascript" src="/bsr/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/madina/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function search() {
 		var form1 = document.getElementById("form1");
 		if(form1.checkValidity()) {
-			form1.action = "/bsr/AccountProcess/searchLedgerEntries";
+			form1.action = "/madina/AccountProcess/searchLedgerEntries";
 			form1.method = "POST";
 			form1.submit();
 		  }
@@ -377,7 +377,7 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/bsr/AccountProcess/printSearchLedgerEntries";
+		form1.action = "/madina/AccountProcess/printSearchLedgerEntries";
 		form1.method = "POST";
 		form1.submit();
 }
@@ -453,7 +453,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/madina/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Holiday</title>
-<link rel="stylesheet" href="/bsr/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/bsr/css/datePicker/demos.css">
+<link rel="stylesheet" href="/madina/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/madina/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -291,42 +291,42 @@
 }
 </style>
 
-<link rel="stylesheet" href="/bsr/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/madina/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/madina/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/madina/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/bsr/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/madina/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/madina/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/madina/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/bsr/js/datePicker/ui/sliderAccess.js"></script>
+	src="/madina/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/madina/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/madina/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/bsr/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/madina/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/madina/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/madina/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/madina/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/madina/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/madina/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/madina/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/madina/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/madina/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/madina/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/madina/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -351,13 +351,13 @@
 	}
 	
 </script>
-<script type="text/javascript" src="/bsr/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/madina/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function addHolidays() {
 
 		var form1 = document.getElementById("form1");
-		form1.action = "/bsr/AttendanceProcess/addHolidays";
+		form1.action = "/madina/AttendanceProcess/addHolidays";
 		form1.method = "POST";
 		form1.submit();
 
@@ -365,7 +365,7 @@
 
 	function searchForEmployees(staffName, staffDepartment){
 		var form1 = document.getElementById("form1");
-		form1.action = "/bsr/AttendanceProcess/searchEmployees?staffName="+staffName+"&staffDepartment="+staffDepartment+"";
+		form1.action = "/madina/AttendanceProcess/searchEmployees?staffName="+staffName+"&staffDepartment="+staffDepartment+"";
 		form1.method = "POST";
 		form1.submit();
 
@@ -432,14 +432,14 @@
 
 	function addStudentAttendanceMaster() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/bsr/AttendanceProcess/addStudentAttendanceMaster";
+		form1.action = "/madina/AttendanceProcess/addStudentAttendanceMaster";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function addStaffAttendanceMaster() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/bsr/AttendanceProcess/addStaffAttendanceMaster";
+		form1.action = "/madina/AttendanceProcess/addStaffAttendanceMaster";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -451,7 +451,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/madina/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -464,7 +464,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/bsr/MarksDetailsProcess/updateMarks" method="POST">
+	<form id="form1" action="/madina/MarksDetailsProcess/updateMarks" method="POST">
 		
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -694,7 +694,7 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/bsr/images/sort_both.png" /></th>
+							src="/madina/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Contact Number&nbsp;</th>
 							<th title="click to sort" class="headerText">Department&nbsp;</th>
 						</tr>
@@ -706,7 +706,7 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/bsr/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
+                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/madina/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.contactnumber}"/></td>
                                 <td class="dataText"><c:out value="${employee.department}"/></td>
                                 

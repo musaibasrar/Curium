@@ -20,22 +20,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SEND SMS</title>
-<link rel="stylesheet" href="/bsr/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/bsr/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/madina/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/madina/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/bsr/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/bsr/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/bsr/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/bsr/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/bsr/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/bsr/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/bsr/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/madina/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/madina/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/madina/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/madina/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/madina/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/madina/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/madina/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/madina/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/madina/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/bsr/css/datePicker/demos.css">
+	src="/madina/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/madina/css/datePicker/demos.css">
 
 
 
@@ -288,10 +288,10 @@
 
 
 
-<script type="text/javascript" src="/bsr/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/madina/js/datetimepicker_css.js"></script>
 
-<script src="/bsr/JavaScript/actb.js"></script>
-<script src="/bsr/JavaScript/common.js"></script>
+<script src="/madina/JavaScript/actb.js"></script>
+<script src="/madina/JavaScript/common.js"></script>
 
 
 
@@ -602,7 +602,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/madina/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -970,19 +970,19 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function sendSMSAll() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/bsr/SMSProcess/sendAllSMS";
+								form1.action = "/madina/SMSProcess/sendAllSMS";
 								form1.submit();
 							}
 							
 							function sendSMSNumbers() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/bsr/SMSProcess/sendNumbersSMS";
+								form1.action = "/madina/SMSProcess/sendNumbersSMS";
 								form1.submit();
 							}
 							
 							function sendSMSStaff() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/bsr/SMSProcess/sendStaffSMS";
+								form1.action = "/madina/SMSProcess/sendStaffSMS";
 								form1.submit();
 							}
 							
