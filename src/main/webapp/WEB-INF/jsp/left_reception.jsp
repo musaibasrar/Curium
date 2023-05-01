@@ -13,19 +13,19 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/madina/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/madina/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/madina/css/datePicker/demos.css">
+        <script language="JavaScript" src="/noble/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/noble/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/noble/css/datePicker/demos.css">
 
-        <script type="text/javascript" src="/madina/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/madina/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/madina/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/madina/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/madina/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/madina/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/madina/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/madina/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/madina/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/noble/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/noble/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/noble/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/noble/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/noble/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/noble/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/noble/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/noble/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/noble/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             var get;
@@ -431,7 +431,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/madina/UserProcess/sessionTimeOut");
+	response.sendRedirect("/noble/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,61 +454,61 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/madina/StudentProcess/viewAll" >View All</a><br/>
-                <a target="mainFrame" href="/madina/feesstructure" >Fees Structure</a><br/>
+                <a target="mainFrame" href="/noble/StudentProcess/viewAll" >View All</a><br/>
+                <a target="mainFrame" href="/noble/feesstructure" >Fees Structure</a><br/>
                 
 
             </div>
             <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="/madina/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/madina/EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/madina/DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/madina/PositionProcess/positionView" >Add Position</a>
+                <a target="mainFrame" href="/noble/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="/noble/EmployeeProcess/addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="/noble/DepartmentProcess/departmentView" >Add Department</a>
+                <a target="mainFrame" href="/noble/PositionProcess/positionView" >Add Position</a>
 
             </div> -->
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="/madina/FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/madina/FeesProcess/feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="/noble/FeesProcess/feesView" >Fees Category</a>
+                <a target="mainFrame" href="/noble/FeesProcess/feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
             <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/madina/AdminProcess/viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="/noble/AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/madina/AdvanceSearch" >Search</a><br/>
+                <a target="mainFrame" href="/noble/AdvanceSearch" >Search</a><br/>
 
 
             </div>
 			<!--
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/madina/Promotion" >Promotions</a><br/>
+                <a target="mainFrame" href="/noble/Promotion" >Promotions</a><br/>
 
 
             </div> -->
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/madina/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/noble/StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
             <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="/madina/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/madina/YearProcess/updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="/noble/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="/noble/YearProcess/updateYear" >Academic year</a><br/>
                 
 
             </div> -->
@@ -516,15 +516,15 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-               <!--  <a target="mainFrame" href="/madina/Backup&Restore" >Backup</a><br/>
-                <a target="mainFrame" href="/madina/currentIssue" >Current Issue</a><br/>
-                <a target="mainFrame" href="/madina/changePassword" >Change Password</a><br/> -->
-                <a target="mainFrame" href="/madina/feesCollectionDetails" >Fees Collection Details</a><br/>
+               <!--  <a target="mainFrame" href="/noble/Backup&Restore" >Backup</a><br/>
+                <a target="mainFrame" href="/noble/currentIssue" >Current Issue</a><br/>
+                <a target="mainFrame" href="/noble/changePassword" >Change Password</a><br/> -->
+                <a target="mainFrame" href="/noble/feesCollectionDetails" >Fees Collection Details</a><br/>
             </div>
             
            <!--  <h5 style="font-size: 12px"><a href="#" >Reports</a></h5>
             <div >
-                <a target="mainFrame" href="/madina/studentsdetailsreports" >Student Details</a><br/>
+                <a target="mainFrame" href="/noble/studentsdetailsreports" >Student Details</a><br/>
                 
             </div>  -->
             
