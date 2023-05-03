@@ -219,7 +219,7 @@ public class StampFeesDAO {
 			
 			for (Studentotherfeesstructure studentfeesstructure : listOfstudentfeesstructure) {
 				
-				Query query = session.createQuery("from Studentotherfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.OtherFeecategory.idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
+				Query query = session.createQuery("from Studentotherfeesstructure as sfs where sfs.sid = '"+studentfeesstructure.getSid()+"' and sfs.OtherFeecategory.idfeescategory = '"+studentfeesstructure.getOtherfeescategory().getIdfeescategory()+"' and sfs.academicyear = '"+currentYear+"'");
 				Studentotherfeesstructure feesStructure = (Studentotherfeesstructure) query.uniqueResult();
 				if(feesStructure != null){
 					

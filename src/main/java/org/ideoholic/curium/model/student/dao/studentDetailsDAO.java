@@ -547,7 +547,24 @@ public class studentDetailsDAO {
 			return studentFeesStructure;
 		}
 	}
+    //this is othergetstudentfeestructure detail
+	public List<Studentotherfeesstructure> getotherStudentFeesStructureDetails(int sfsid) {
+		List<Studentotherfeesstructure> studentFeesStructure = new ArrayList<Studentotherfeesstructure>();
 
+		try {
+			transaction = session.beginTransaction();
+			studentFeesStructure = session.createQuery("from Studentotherfeesstructure sfs where sfs.sfsid = '"+sfsid+"'").list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return studentFeesStructure;
+		}
+	}
 	public boolean updateStudent(Student student) {
 		
 		try {
@@ -672,6 +689,32 @@ public class studentDetailsDAO {
 			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
 			Query query = session
 					.createQuery("from Studentfeesstructure sfs where sfs.sid = '"+id+"' and sfs.Feescategory.idfeescategory IN (:feescat)");
+			query.setParameterList("feescat", feesCat);
+			results = query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+	//getStudentotherFeesStructurebyFeesCategory
+	public List<Studentotherfeesstructure> getStudentotherFeesStructurebyFeesCategory(long id, List<Integer> feesCat) {
+		List<Studentotherfeesstructure> results = new ArrayList<Studentotherfeesstructure>();
+
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			transaction = session.beginTransaction();
+
+			// results = (List<PersonalDetails>)
+			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
+			Query query = session
+					.createQuery("from Studentotherfeesstructure sfs where sfs.sid = '"+id+"' and sfs.otherfeescategory.idfeescategory IN (:feescat)");
 			query.setParameterList("feescat", feesCat);
 			results = query.list();
 			transaction.commit();

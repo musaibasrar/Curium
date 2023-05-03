@@ -175,7 +175,7 @@ public void addotherFeesStamp() {
 		OtherFeecategory feescategory = new OtherFeecategory();
 		studentfeesstructure.setSid(Integer.valueOf(id));
 		feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIds[i]));
-		studentfeesstructure.setFeescategory(feescategory);
+		studentfeesstructure.setOtherfeescategory(feescategory);
 		studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[i]));
 		studentfeesstructure.setFeespaid((long) 0);
 		studentfeesstructure.setWaiveoff((long) 0);

@@ -38,7 +38,7 @@
          <property name="userid" type="int">
 	 			<column name="userid" />
 			</property>
-        <many-to-one name="Feescategory" class="org.ideoholic.curium.model.feescategory.dto.OtherFeecategory" lazy="false"
+        <many-to-one name="otherfeescategory" class="org.ideoholic.curium.model.feescategory.dto.OtherFeecategory" lazy="false"
             column="idfeescategory" />
     </class>
 </hibernate-mapping>

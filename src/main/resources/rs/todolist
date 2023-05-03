@@ -10,3 +10,48 @@ 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
 (idfeescategory int(11) not null primary key auto_increment,feescategoryname varchar(150),
 amount int(11),particularname varchar(150),branchid int(11),userid int(11),academicyear varchar(20));
 
+//create table otherfee_feereceipt
+CREATE TABLE `curium`.`otherfee_receiptinfo` (
+  `receiptnumber` INT NOT NULL AUTO_INCREMENT,
+  `sid` INT NOT NULL,
+  `date` DATE NULL,
+  `totalamount` DECIMAL(10,0) NULL,
+  `academicyear` VARCHAR(15) NULL,
+  `branchid` INT NULL,
+  `cancelreceipt` INT NULL DEFAULT 0,
+  `branchreceiptnumber` VARCHAR(20) NULL,
+  `paymenttype` VARCHAR(100) NULL,
+  `userid` INT NULL,
+  `classsec` VARCHAR(20) NULL,
+  `receiptvoucher` INT NULL,
+  `journalvoucher` INT NULL,
+  PRIMARY KEY (`receiptnumber`),
+  INDEX `otherstudentidreceipt_idx` (`sid` ASC),
+  CONSTRAINT `otherstudentidreceipt`
+    FOREIGN KEY (`sid`)
+    REFERENCES `curium`.`student` (`sid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+//
+ALTER TABLE `curium`.`otherfee_feescollection` 
+DROP FOREIGN KEY `otherreceiptnumber`,
+DROP FOREIGN KEY `othersfsid`;
+ALTER TABLE `curium`.`otherfee_feescollection` 
+ADD INDEX `otherreceiptnumber_idx` (`receiptnumber` ASC),
+ADD INDEX `othersfsid_idx` (`sfsid` ASC),
+DROP INDEX `otherreceiptnumber_idx` ,
+DROP INDEX `othersfsid_idx` ;
+;
+ALTER TABLE `curium`.`otherfee_feescollection` 
+ADD CONSTRAINT `otherreceiptnumber`
+  FOREIGN KEY (`receiptnumber`)
+  REFERENCES `curium`.`otherfee_receiptinfo` (`receiptnumber`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `othersfsid`
+  FOREIGN KEY (`sfsid`)
+  REFERENCES `curium`.`otherfee_studentfeesstructure` (`sfsid`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+

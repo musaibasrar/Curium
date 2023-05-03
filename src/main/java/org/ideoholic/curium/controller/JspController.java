@@ -372,4 +372,13 @@ public class JspController {
 		return "otherfeesCollection";
 	}
 	
+	@GetMapping("/otherpreviewfeesdetail")
+	public String getOtherPreviewFeesDetail() {
+		return "otherpreviewfeesdetail";
+	}
+	@GetMapping("/otherfeesreport")
+	public String getOtherfeesreport() {
+		return "otherfeesreport";
+	}
+	
 }

@@ -330,7 +330,12 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/roshan/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
             			</td>
             		</tr>
-            		
+            		<!-- this is other fees reports -->
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/roshan/FeesProcess/otherfeesReport" style="font-size: 12px;">Other fees Report</a>
+            			</td>
+            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/roshan/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>

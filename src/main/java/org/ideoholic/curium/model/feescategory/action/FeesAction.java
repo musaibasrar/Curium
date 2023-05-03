@@ -75,7 +75,13 @@ public class FeesAction {
 		new FeesService(request, response).viewFees();
 		return "feesreport";
 	}
-
+   //other fees report
+	@GetMapping("/otherfeesReport")
+	public String otherfeesReport() {
+		new StandardService(request, response).viewClasses();
+		new FeesService(request, response).viewOtherFees();
+		return "otherfeesreport";
+	}
 	@GetMapping("/feesStructure")
 	public String feesStructure() {
 		new StandardService(request, response).viewClasses();

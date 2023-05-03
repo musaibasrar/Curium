@@ -32,7 +32,7 @@ public class Studentotherfeesstructure implements java.io.Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idfeescategory")
-	private OtherFeecategory feescategory;
+	private OtherFeecategory otherfeescategory;
 	private int userid;
 	
 	public Studentotherfeesstructure() {
@@ -98,15 +98,6 @@ public class Studentotherfeesstructure implements java.io.Serializable {
 	public void setAcademicyear(String academicyear) {
 		this.academicyear = academicyear;
 	}
-	
-	
-	public OtherFeecategory getFeescategory() {
-		return feescategory;
-	}
-
-	public void setFeescategory(OtherFeecategory feescategory) {
-		this.feescategory = feescategory;
-	}
 
 	@Column(name = "branchid")
 	public int getBranchid() {
@@ -115,6 +106,14 @@ public class Studentotherfeesstructure implements java.io.Serializable {
 
 	public void setBranchid(int branchid) {
 	this.branchid = branchid;
+	}
+
+	public OtherFeecategory getOtherfeescategory() {
+		return otherfeescategory;
+	}
+
+	public void setOtherfeescategory(OtherFeecategory otherfeescategory) {
+		this.otherfeescategory = otherfeescategory;
 	}
 
 	@Column(name = "concession")

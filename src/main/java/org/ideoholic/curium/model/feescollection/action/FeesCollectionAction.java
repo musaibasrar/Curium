@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.service.StandardService;
@@ -41,7 +42,12 @@ public class FeesCollectionAction {
             new FeesCollectionService(request, response).getFeesReport();
             return "feesreport";
         }
-
+        //other search fees report
+        @PostMapping("/othersearchFeesReport")
+        public String othersearchFeesReport() {
+            new FeesCollectionService(request, response).getotherFeesReport();
+            return "otherfeesreport";
+        }
         @GetMapping("/UndoFeesReceipt")
 		public String undoFeesReceipt() {
         	new FeesCollectionService(request, response).undoFeesReceipt();
@@ -102,7 +108,23 @@ public class FeesCollectionAction {
                 
                 return "printFeesDetail";
         }
-
+       //other printreceipt
+        @GetMapping("/otherprintReceipt")
+        public String otherprintReceipt() {
+                new FeesCollectionService(request, response).otherpreviewDetails();
+                
+				/*
+				 * if(httpSession.getAttribute("branchid")!=null){ String branchId =
+				 * httpSession.getAttribute("branchid").toString();
+				 * if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) ||
+				 * "3".equalsIgnoreCase(branchId)) { return "printFeesDetail"; }else
+				 * if("4".equalsIgnoreCase(branchId)) { return "printFeesDetail"; }else
+				 * if("5".equalsIgnoreCase(branchId)) { return "printFeesDetail"; } }
+				 */
+                
+                return "printFeesDetail";
+        }
+        
         @PostMapping("/feesAdd")	
         public String feesAdd() {
                 Receiptinfo receiptInfo = new FeesCollectionService(request, response).add();
@@ -117,7 +139,21 @@ public class FeesCollectionAction {
                 }
                 
         }
-        
+       //other feesadd 
+        @PostMapping("/feesAddother")	
+        public String feesAddother() {
+        	Otherreceiptinfo receiptInfo = new FeesCollectionService(request, response).addother();
+                if(receiptInfo.getReceiptnumber()!=null){
+                        //under implementation
+                        /*SmsService smsSerivce = new SmsService(request, response);
+                        smsSerivce.sendSMS(DataUtil.emptyString(request.getParameter("contactnumber")),"We have received Rs."+DataUtil.emptyString(request.getParameter("grandTotalAmount"))+" towards fees collection.");*/
+                        new FeesCollectionService(request, response).otherpreview(receiptInfo);
+                        return "otherpreviewfeesdetail";
+                }else{
+                        return "error";
+                }
+                
+        }
         @PostMapping("/exportDataForStudentsFeesReport")
         private String exportDataForStudentsFeesReport() {
         	new FeesCollectionService(request, response).exportDataForStudentsFeesReport();
