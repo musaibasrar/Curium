@@ -352,6 +352,11 @@ for(Cookie cookie : cookies){
             				<a target="mainFrame" href="/alfarooq/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/noble/FeesProcess/otherfeesReport" style="font-size: 12px;">Other fees Report</a>
+            			</td>
+            		</tr>
                 </table>
             </div>
             
