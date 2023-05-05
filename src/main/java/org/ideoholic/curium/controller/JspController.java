@@ -377,4 +377,33 @@ public class JspController {
 		return "duereport";
 	}
 	
+	@GetMapping("/otherfeecategory")
+	public String getOtherfeecategory() {
+		return "otherfeecategory";
+	}
+	
+	@GetMapping("/otherstampfees")
+	public String getOtherStampFees() {
+		return "otherstampfees";
+	}
+	
+	@GetMapping("/otherfeesCollection")
+	public String getOtherfeesCollection() {
+		return "otherfeesCollection";
+	}
+	
+	@GetMapping("/otherpreviewfeesdetail")
+	public String getOtherPreviewFeesDetail() {
+		return "otherpreviewfeesdetail";
+	}
+	
+	@GetMapping("/otherfeesreport")
+	public String getOtherfeesreport() {
+		return "otherfeesreport";
+	}
+	
+	@GetMapping("/otherfeesCollectionDetails")
+	public String getOtherFeesCollectionDetails() {
+		return "otherfeesCollectionDetails";
+	}
 }
