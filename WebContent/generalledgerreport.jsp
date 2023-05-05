@@ -384,8 +384,28 @@
 			form1.submit();
 	}
 
+	function exportGL() {
+		var form1 = document.getElementById("form1");
+			form1.action = "Controller?process=AccountProcess&action=exportGeneralLedgerReport";
+			form1.method = "POST";
+			form1.submit();
+	}
 	
 	$(function() {
+		
+		/* $("#export").button.click(function(){
+			exportGL();
+		}); */
+		
+		 $("#export").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         }).click(function(){
+        	 exportGL();
+             return false;
+
+         });
 
 		$("#search").button().click(function() {
 			search();
@@ -606,7 +626,7 @@ for(Cookie cookie : cookies){
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							
-							<td class="dataText"><input type="checkbox"
+							<td class="dataText"> <input type="checkbox"
 								id="<c:out value="${ledgertransactions.key.transactionsid}"/>" class="chcktbl"
 								name="transactionids"
 								value="<c:out value="${ledgertransactions.key.transactionsid}"/>" />
@@ -688,6 +708,7 @@ for(Cookie cookie : cookies){
 				<tfoot>
 					<tr>
 						<td class="footerTD" colspan="2"><button id="print">Print</button>
+						<button id="export">Export</button>
 							</td>
 							
 

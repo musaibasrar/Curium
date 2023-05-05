@@ -89,10 +89,26 @@ public class AccountAction {
 			url = printSearchLedgerEntries();
 		}else if ("searchSingleLedgerEntries".equalsIgnoreCase(action)) {
 			url = searchSingleLedgerEntries();
+		}else if ("exportGeneralLedgerReport".equalsIgnoreCase(action)) {
+			url = exportGeneralLedgerReport();
+		}else if ("downloadGeneralLedger".equalsIgnoreCase(action)) {
+			url = downloadGeneralLedger();
 		}
 		return url;
 		}
 	
+	private String downloadGeneralLedger() {
+		if (new AccountService(request, response).downloadGeneralLedger()) {
+			return "generalledgerexportsuccess.jsp";
+		}
+		return "exportfailure.jsp";
+		}
+
+	private String exportGeneralLedgerReport() {
+    	new AccountService(request, response).exportGeneralLedgerReport();
+        return "generalledgerexportsuccess.jsp";
+	}
+
 	private String searchSingleLedgerEntries() {
 		new AccountService(request, response).searchSingleLedgerEntries();
 		new AccountService(request, response).getAllLedgers();

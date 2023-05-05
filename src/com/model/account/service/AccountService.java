@@ -1026,12 +1026,12 @@ public class AccountService {
 			voucherMap.put(voucherEntry, twoAccounts);
 		}
 		
-		request.setAttribute("ledgertransactions", voucherMap);
-		request.setAttribute("ledgername", accountIdName[1]);
+		httpSession.setAttribute("ledgertransactions", voucherMap);
+		httpSession.setAttribute("ledgername", accountIdName[1]);
 		
-		request.setAttribute("accountid", accountDetails);
-		request.setAttribute("fromdate", DataUtil.emptyString(request.getParameter("fromdate")));
-		request.setAttribute("todate", DataUtil.emptyString(request.getParameter("todate")));
+		httpSession.setAttribute("accountid", accountDetails);
+		httpSession.setAttribute("fromdate", DataUtil.emptyString(request.getParameter("fromdate")));
+		httpSession.setAttribute("todate", DataUtil.emptyString(request.getParameter("todate")));
 		
 		return true;
 		
@@ -1392,5 +1392,199 @@ public class AccountService {
 		
 		}
 		return false;
+	}
+
+
+	public boolean exportGeneralLedgerReport() {
+
+		boolean writeSucees = false;
+		Map<VoucherEntrytransactions,String> accountBalanceMap = new LinkedHashMap<VoucherEntrytransactions,String>();
+		
+		DecimalFormat df = new DecimalFormat("###.##");
+		
+		accountBalanceMap = (Map<VoucherEntrytransactions,String>) httpSession.getAttribute("ledgertransactions");
+		  
+		  BigDecimal creditAllAcc = BigDecimal.ZERO;
+		  BigDecimal debitAllAcc = BigDecimal.ZERO;
+		  String ledgername = (String) httpSession.getAttribute("ledgername"); 
+		  String fromDate = (String) httpSession.getAttribute("fromdate"); 
+		  String toDate = (String) httpSession.getAttribute("todate");
+		 
+		
+		try {
+
+			// Creating an excel file
+			XSSFWorkbook workbook = new XSSFWorkbook();
+			XSSFSheet sheet = workbook.createSheet("General Ledger Report");
+			Map<String, Object[]> data = new HashMap<String, Object[]>();
+			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
+			headerData.put("Header",
+					new Object[] { "General Ledger Report"});
+			Map<String, Object[]> headerData1 = new HashMap<String, Object[]>();
+			headerData1.put("Header",
+					new Object[] { "From Date: "+fromDate+"  To Date: "+toDate+"","Ledger Name: "+ledgername+""});
+			Map<String, Object[]> headerData2 = new HashMap<String, Object[]>();
+			headerData2.put("Header",
+					new Object[] { "Voucher No.","Date","Account Description","Narration", "Debit","Credit"});
+			int i = 1;
+			
+			for (Entry<VoucherEntrytransactions, String> accBal : accountBalanceMap.entrySet()) {
+				
+				String dr = "";
+				String cr = "";
+				
+				String[] ledgerName = accBal.getValue().split(":");
+				
+				if(ledgerName[1].equalsIgnoreCase("Dr")){
+					
+					if(accBal.getKey().getCramount().compareTo(BigDecimal.ONE)==0 || accBal.getKey().getCramount().compareTo(BigDecimal.ONE)==1) {
+						cr = df.format(accBal.getKey().getCramount());
+						creditAllAcc = creditAllAcc.add(accBal.getKey().getCramount());
+						
+					}else if(accBal.getKey().getCramount().compareTo(BigDecimal.ONE)<1) {
+						dr = df.format(accBal.getKey().getCramount().negate());
+						debitAllAcc = debitAllAcc.add(accBal.getKey().getDramount());
+					}
+					
+				}else if(ledgerName[1].equalsIgnoreCase("Cr")) {
+
+					if(accBal.getKey().getDramount().compareTo(BigDecimal.ONE)==0 || accBal.getKey().getDramount().compareTo(BigDecimal.ONE)==1) {
+						dr = df.format(accBal.getKey().getDramount());
+						debitAllAcc = debitAllAcc.add(accBal.getKey().getDramount());
+						
+					}else if(accBal.getKey().getDramount().compareTo(BigDecimal.ONE)<1) {
+						cr = df.format(accBal.getKey().getDramount().negate());
+						creditAllAcc = creditAllAcc.add(accBal.getKey().getDramount());
+					}
+					
+				}
+				
+				data.put(Integer.toString(i),
+						new Object[] { accBal.getKey().getTransactionsid().toString(),accBal.getKey().getEntrydate().toString(),ledgerName[0],accBal.getKey().getNarration(),  dr ,
+								 cr });
+				i++;
+			}
+			
+			Row headerRow = sheet.createRow(0);
+			Object[] objArrHeader = headerData.get("Header");
+			int cellnum1 = 1;
+			for (Object obj : objArrHeader) {
+				Cell cell = headerRow.createCell(cellnum1++);
+				if (obj instanceof String)
+					cell.setCellValue((String) obj);
+			}
+			
+			Row headerRow1 = sheet.createRow(1);
+			Object[] objArrHeader1 = headerData1.get("Header");
+			int cellnum11 = 1;
+			for (Object obj : objArrHeader1) {
+				Cell cell = headerRow1.createCell(cellnum11++);
+				if (obj instanceof String)
+					cell.setCellValue((String) obj);
+			}
+			
+			Row headerRow2 = sheet.createRow(2);
+			Object[] objArrHeader2 = headerData2.get("Header");
+			int cellnum12 = 0;
+			for (Object obj : objArrHeader2) {
+				Cell cell = headerRow2.createCell(cellnum12++);
+				if (obj instanceof String)
+					cell.setCellValue((String) obj);
+			}
+			
+			Set<String> keyset = data.keySet();
+			int rownum = 3;
+			for (String key : keyset) {
+				Row row = sheet.createRow(rownum++);
+				Object[] objArr = data.get(key);
+				int cellnum = 0;
+				for (Object obj : objArr) {
+					Cell cell = row.createCell(cellnum++);
+					if (obj instanceof Date)
+						cell.setCellValue((Date) obj);
+					else if (obj instanceof Boolean)
+						cell.setCellValue((Boolean) obj);
+					else if (obj instanceof String)
+						cell.setCellValue((String) obj);
+					else if (obj instanceof Double)
+						cell.setCellValue((Double) obj);
+				}
+			}
+			
+			rownum++;
+			data.clear();
+			data.put(Integer.toString(1),
+					new Object[] { "","","","Total",  debitAllAcc.toString() ,
+							creditAllAcc.toString() });
+			
+			Set<String> keyset2 = data.keySet();
+			for (String key : keyset2) {
+				Row row = sheet.createRow(rownum++);
+				Object[] objArr = data.get(key);
+				int cellnum = 0;
+				for (Object obj : objArr) {
+					Cell cell = row.createCell(cellnum++);
+					if (obj instanceof Date)
+						cell.setCellValue((Date) obj);
+					else if (obj instanceof Boolean)
+						cell.setCellValue((Boolean) obj);
+					else if (obj instanceof String)
+						cell.setCellValue((String) obj);
+					else if (obj instanceof Double)
+						cell.setCellValue((Double) obj);
+				}
+			}
+			
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/generalledgerreport.xlsx"));
+				workbook.write(out);
+				out.close();
+				writeSucees = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return writeSucees;
+		// getFile(name, path);
+	}
+
+
+	public boolean downloadGeneralLedger() {
+		boolean result = false;
+		try {
+
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/generalledgerreport.xlsx");
+	        FileInputStream inStream = new FileInputStream(downloadFile);
+
+	        // get MIME type of the file
+			String mimeType = "application/vnd.ms-excel";
+
+			// set content attributes for the response
+			response.setContentType(mimeType);
+			// response.setContentLength((int) bis.length());
+
+			// set headers for the response
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"",
+					"generalledgerreport.xlsx");
+			response.setHeader(headerKey, headerValue);
+
+			// get output stream of the response
+			OutputStream outStream = response.getOutputStream();
+
+			byte[] buffer = new byte[BUFFER_SIZE];
+			int bytesRead = -1;
+
+			// write bytes read from the input stream into the output stream
+			while ((bytesRead = inStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+
+			inStream.close();
+			outStream.close();
+			result = true;
+		} catch (Exception e) {
+			System.out.println("" + e);
+		}
+		return result;
 	}
 }
