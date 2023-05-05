@@ -352,6 +352,16 @@ for(Cookie cookie : cookies){
             				<a target="mainFrame" href="/madina/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/noble/FeesProcess/otherfeesReport" style="font-size: 12px;">Other Fees Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/noble/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
+            			</td>
+            		</tr>
                 </table>
             </div>
             
