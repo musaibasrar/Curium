@@ -794,7 +794,7 @@ for(Cookie cookie : cookies){
 								onclick="noCheck(this.id);" ${student.belongtobpl == '0' ? 'checked' : ''}/>
 
 							</td>
-							<td width="20%" class="alignRight">Adhar Card No.
+							<td width="20%" class="alignRight">Aadhar Card No.
 								&nbsp;</td>
 							<td width="28%"><label> <input
 									name="stream" type="text" class="textField" value="${student.stream}"
