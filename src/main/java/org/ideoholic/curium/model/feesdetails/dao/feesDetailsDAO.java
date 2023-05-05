@@ -5,19 +5,18 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import org.ideoholic.curium.util.Session;
 import org.hibernate.SessionFactory;
-import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
-
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
+import org.ideoholic.curium.model.feescollection.dto.Otherfeescollection;
+import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
-import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
 
 public class feesDetailsDAO {
         Session session = null;
@@ -335,6 +334,69 @@ public boolean cancelFeesReceipt(int receiptId, List<Feescollection> feesCollect
                     	Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+feescoll.getAmountpaid()+" where sfsid="+feescoll.getSfsid());
                     	queryStudentFS.executeUpdate();
 					}
+                    
+                    transaction.commit();
+                    result = true;
+            } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+                    
+                    hibernateException.printStackTrace();
+
+            }finally {
+    			HibernateUtil.closeSession();
+    		}
+            return result;
+			
+		}
+
+		public Otherreceiptinfo readOtherFeesDetails(long feesDetailsid) {
+			Otherreceiptinfo feesdetails = new Otherreceiptinfo();
+           try {
+               //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+
+               transaction = session.beginTransaction();
+               Query query = session.createQuery("From Otherreceiptinfo as feesdetails where feesdetails.receiptnumber=" + feesDetailsid);
+               feesdetails = (Otherreceiptinfo) query.uniqueResult();
+               transaction.commit();
+           } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+               
+               hibernateException.printStackTrace();
+           }finally {
+   			HibernateUtil.closeSession();
+   		}
+           return feesdetails;
+   }
+		
+
+		public boolean cancelOtherFeesReceipt(int receiptId, List<Otherfeescollection> feesCollection, String updateReceiptDrAccount, String updateReceiptCrAccount, String cancelReceiptVoucher, String updateJournalDrAccount, String updateJournalCrAccount, String cancelJournalVoucher) {
+			
+			boolean result = false;
+
+            try {
+                    transaction = session.beginTransaction();
+                    
+	                    Query query = session.createQuery("update Otherreceiptinfo set cancelreceipt=1 where receiptnumber="+receiptId);
+	                    query.executeUpdate();
+                    
+                    for (Otherfeescollection feescoll : feesCollection) {
+                    	Query queryStudentFS = session.createQuery("update Studentotherfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.getSfsid());
+                    	queryStudentFS.executeUpdate();
+					}
+                    
+                    if(updateReceiptDrAccount!=null && updateReceiptCrAccount!=null && cancelReceiptVoucher != null && updateJournalDrAccount!=null && updateJournalCrAccount!=null && cancelJournalVoucher!=null) {
+	                    Query updateReceiptDr = session.createQuery(updateReceiptDrAccount);
+	        			updateReceiptDr.executeUpdate();
+	        			Query updateReceiptCr = session.createQuery(updateReceiptCrAccount);
+	        			updateReceiptCr.executeUpdate();
+	        			Query cancelReceiptVoucherQuery = session.createQuery(cancelReceiptVoucher);
+	        			cancelReceiptVoucherQuery.executeUpdate();
+	        			
+	        			Query updateJournalDr = session.createQuery(updateJournalDrAccount);
+	        			updateJournalDr.executeUpdate();
+	        			Query updateJournalCr = session.createQuery(updateJournalCrAccount);
+	        			updateJournalCr.executeUpdate();
+	        			Query cancelJournalVoucherQuery = session.createQuery(cancelJournalVoucher);
+	        			cancelJournalVoucherQuery.executeUpdate();
+                    }
                     
                     transaction.commit();
                     result = true;
