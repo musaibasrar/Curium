@@ -362,6 +362,13 @@ for(Cookie cookie : cookies){
 
             </div>
             
+            <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
+            <div>
+                <a target="mainFrame" href="/noble/FeesProcess/otherfeesView" style="font-size: 12px;">Other Fees Category</a><br/>
+                <a target="mainFrame" href="/noble/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Other Fee Stamp</a><br/>
+
+            </div>
+            
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             <div>
                 <a target="mainFrame" href="/abc/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
