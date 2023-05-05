@@ -141,4 +141,43 @@ public class FeesAction {
 		new StandardService(request, response).viewClasses();
 		return "feesstampdue";
 	}
+	
+	@PostMapping("/odeleteMultiple")
+	public String odeleteMultiple() {
+		new FeesService(request, response).odeleteMultiple();
+		return otherviewFees();
+	}
+	
+	@PostMapping("/addotherFeesParticular")
+	public String addotherFeesParticular() {
+		new FeesService(request, response).addotherFeesParticular();
+		return otherviewFees();
+	}
+	
+	@GetMapping("/otherfeesView")
+	public String otherviewFees() {
+		new FeesService(request, response).viewOtherFees();
+		new StandardService(request, response).viewClasses();
+		return "otherfeecategory";
+	}
+	
+	@GetMapping("/otherfeesCollect")
+	public String otherfeesCollect() {
+		new FeesService(request, response).viewOtherFees();
+		new FeesService(request, response).viewAllStudentsList();
+		return "otherfeesCollection";
+	}
+	
+	@GetMapping("/otherfeesReport")
+	public String otherfeesReport() {
+		new StandardService(request, response).viewClasses();
+		new FeesService(request, response).viewOtherFees();
+		return "otherfeesreport";
+	}
+
+	public void setHttpobjects(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+		this.response = response;
+	}
+
 }
