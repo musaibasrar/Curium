@@ -298,6 +298,7 @@ for(Cookie cookie : cookies){
                             	<thead>
                             	<tr>
                             	<th class="subjectdetails">Date</th>
+                            	<th class="subjectdetails">Day</th>
                             	<th class="subjectdetails">Subject</th>
                             	<th class="subjectdetails">Time</th>
                             	<th class="subjectdetails">Examiner's Sign</th>
@@ -307,6 +308,7 @@ for(Cookie cookie : cookies){
                             	<c:forEach items="${examschedulelist}" var="examschedulelist">
                              	<tr>
                                 <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="dd-MM-yyyy"/></td>
+                                <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="E"/></td>
                                 <td class="subjectdetails"><c:out value="${examschedulelist.subject}"/></td>
                                 <td class="subjectdetails"><c:out value="${examschedulelist.starttime}"/>&nbsp;-&nbsp;<c:out value="${examschedulelist.endtime}"/></td>
                                 <td class="subjectdetails"></td>

@@ -180,7 +180,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
-				<img src="/alhidaya/images/alhidaya.jpg" width="110" height="60"/>
+				<img src="/rauzamission/images/rauzamission.jpg" width="110" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
@@ -356,7 +356,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
-				<img src="/alhidaya/images/alhidaya.jpg" width="110" height="60"/>
+				<img src="/rauzamission/images/rauzamission.jpg" width="110" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
