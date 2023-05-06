@@ -65,4 +65,24 @@ public class StampFeesAction {
 			e.printStackTrace();
 		}
 	}
+	
+	@PostMapping("/applyotherFees")
+	public String applyotherFees() {
+		new StampFeesService(request, response).addotherFeesStamp();
+		return "feesstampsuccess";
+	}
+	
+	@GetMapping("/showOtherFeesDetails")
+	public String showOtherFeesDetails() {
+		new FeesService(request, response).viewOtherFees();
+		new YearService(request, response).getYear();
+		new StandardService(request, response).viewClasses();
+		return "otherstampfees";
+	}
+	
+	@PostMapping("/othersearch")
+	public String othersearch() {
+		new StampFeesService(request, response).otheradvanceSearch();
+		return "otherstampfees";
+	}
 }
