@@ -22,7 +22,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
+import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
@@ -123,7 +123,7 @@ public class FeesDetailsService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Admission Number","UID","STS","Receipt No.", "Student Name","Father Name","Contact Number", "Date of Fees", "Total"});
+					new Object[] { "Admission Number","UID","STS","Receipt No.", "Student Name","Class","Father Name","Contact Number", "Date of Fees", "Total"});
 			int i = 1;
 			
 			for (Entry<Parents, Receiptinfo> entry : feeMap.entrySet()) {
@@ -133,7 +133,118 @@ public class FeesDetailsService {
 						entry.getKey().getStudent().getStudentexternalid(), 
 						entry.getKey().getStudent().getSts(), 
 						entry.getValue().getBranchreceiptnumber(),
-						entry.getKey().getStudent().getName(), 
+						entry.getKey().getStudent().getName(),
+						entry.getKey().getStudent().getClassstudying(),
+						entry.getKey().getFathersname(), 
+						entry.getKey().getContactnumber(), 
+						entry.getValue().getDate().toString(),
+						entry.getValue().getTotalamount() });
+				i++;
+				}
+				
+			
+			
+			Row headerRow = sheet.createRow(0);
+			Object[] objArrHeader = headerData.get("Header");
+			int cellnum1 = 0;
+			for (Object obj : objArrHeader) {
+				Cell cell = headerRow.createCell(cellnum1++);
+				if (obj instanceof String)
+					cell.setCellValue((String) obj);
+			}
+			Set<String> keyset = data.keySet();
+			int rownum = 1;
+			for (String key : keyset) {
+				Row row = sheet.createRow(rownum++);
+				Object[] objArr = data.get(key);
+				int cellnum = 0;
+				for (Object obj : objArr) {
+					Cell cell = row.createCell(cellnum++);
+					if (obj instanceof Date)
+						cell.setCellValue((Date) obj);
+					else if (obj instanceof Boolean)
+						cell.setCellValue((Boolean) obj);
+					else if (obj instanceof String)
+						cell.setCellValue((String) obj);
+					else if (obj instanceof Double)
+						cell.setCellValue((Double) obj);
+					else if (obj instanceof Long)
+						cell.setCellValue((Long) obj);
+				}
+			}
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/feesdetails.xlsx"));
+				workbook.write(out);
+				out.close();
+				writeSucees = true;
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return writeSucees;
+		// getFile(name, path);
+	}
+
+
+
+	public boolean exportDataForOtherFees() {
+		
+		String[] feesIds = request.getParameterValues("feesIDs");
+		boolean successResult = false;
+		Otherreceiptinfo receiptInfo = new Otherreceiptinfo();
+		Parents student = new Parents();
+		Map<Parents,Otherreceiptinfo> feesMap = new HashMap<Parents,Otherreceiptinfo>();
+
+		if (feesIds != null) {
+			for (String id : feesIds) {
+				if (id != null || id != "") {
+					
+					receiptInfo = new feesDetailsDAO().readOtherFeesDetails(Long.parseLong(id));
+					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
+					feesMap.put(student, receiptInfo);
+				}
+
+			}
+			try {
+				if (exportOtherFeesDataToExcel(feesMap)) {
+					successResult = true;
+				} else {
+					successResult = false;
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return successResult;
+	}
+	
+	
+	public boolean exportOtherFeesDataToExcel(Map<Parents,Otherreceiptinfo> feeMap)
+			throws Exception {
+
+		boolean writeSucees = false;
+
+		try {
+			// Start creating an excel file
+			XSSFWorkbook workbook = new XSSFWorkbook();
+			XSSFSheet sheet = workbook.createSheet("Fees Details");
+			Map<String, Object[]> data = new HashMap<String, Object[]>();
+			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
+			headerData.put("Header",
+					new Object[] { "Admission Number","UID","STS","Receipt No.", "Student Name","Class","Father Name","Contact Number", "Date of Fees", "Total"});
+			int i = 1;
+			
+			for (Entry<Parents, Otherreceiptinfo> entry : feeMap.entrySet()) {
+	            
+				data.put(Integer.toString(i),new Object[] { 
+						entry.getKey().getStudent().getAdmissionnumber(), 
+						entry.getKey().getStudent().getStudentexternalid(), 
+						entry.getKey().getStudent().getSts(), 
+						entry.getValue().getBranchreceiptnumber(),
+						entry.getKey().getStudent().getName(),
+						entry.getKey().getStudent().getClassstudying(),
 						entry.getKey().getFathersname(), 
 						entry.getKey().getContactnumber(), 
 						entry.getValue().getDate().toString(),
