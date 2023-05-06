@@ -9,7 +9,7 @@ import org.ideoholic.curium.util.Session;
 import org.hibernate.SessionFactory;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
-
+import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.student.dto.Student;
@@ -239,4 +239,24 @@ public class UserDAO {
    			HibernateUtil.closeSession();
            return login;
        }}
+	
+	@SuppressWarnings("unchecked")
+	public java.util.List<Otherreceiptinfo> getOtherReceiptDetailsList(String queryMain) {
+		java.util.List<Otherreceiptinfo> feesDetails = new ArrayList<Otherreceiptinfo>();
+        try {
+            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(queryMain);
+            feesDetails = (java.util.List<Otherreceiptinfo>) HQLquery.list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        }
+        finally {
+			HibernateUtil.closeSession();
+		 }
+        return feesDetails;
+	}
 }

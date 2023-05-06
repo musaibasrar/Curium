@@ -355,6 +355,13 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/divine/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
             </div>
             
+            <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
+            <div>
+                <a target="mainFrame" href="/divine/FeesProcess/otherfeesView" style="font-size: 12px;">Other Fees Category</a><br/>
+                <a target="mainFrame" href="/divine/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Other Fee Stamp</a><br/>
+
+            </div>
+            
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             <div>
                 <a target="mainFrame" href="/divine/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
