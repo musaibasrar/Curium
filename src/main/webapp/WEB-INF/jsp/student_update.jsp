@@ -449,9 +449,9 @@ for(Cookie cookie : cookies){
 		<div>
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Student Details</a></li>
+					<li><a href="#tabs-1">Basic Details</a></li>
+					<li><a href="#tabs-2">Other Details</a></li>
 					<li><a href="#tabs-5">Previous School Details</a></li>
-					<li><a href="#tabs-2">Parent's Details</a></li>
 					<li><a href="#tabs-3">Upload Photo</a></li>
 					<li><a href="#tabs-4">Additional Details</a></li>
 					<li><a href="#tabs-6">Bank Details</a></li>
@@ -506,13 +506,9 @@ for(Cookie cookie : cookies){
 									id="admnno" size="30" data-validate="validate(required)">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
-
-									<td width="16%"><label> <input
-											name="sts" type="text" class="myclass"
-											id="sts" size="30" value="${student.sts}">
-
-									</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -546,68 +542,9 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
-
-
-						<tr>
-							<td class="alignLeft">Date Of Birth &nbsp;</td>
-							<td><label> <input name="dateofbirth" autocomplete="false"
-									type="text" value="<fmt:formatDate value="${student.dateofbirth}" pattern="dd/MM/yyyy"/>"
-									class="myclass" id="datepicker" size="30"
-									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
-									
-									
-							</label></td>
-
-							<td class="alignLeft" style="padding-left: 20px;">Age&nbsp;</td>
-
-							<td><label> <input name="age"
-									type="text" class="myclass"
-									value="<c:out default="" value="${student.age}" />" id="age"
-									size="30">
-
-							</label></td>
-						</tr>
-
-
-<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
 						
 						<tr>
-							<td class="alignLeft">Place of birth, Tq, Dist.&nbsp;</td>
-							<td><label> <input name="place"
-									type="text" class="myclass"
-									value="<c:out default="" value="${student.placeofbirth}" />"
-									id="place" size="30" data-validate="validate(required)">
-
-							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">Date Of Admission &nbsp;</td>
-
-							<td><label> <input
-									name="dateofadmission" type="text" class="myclass" autocomplete="false"
-									value="<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>"
-									id="dateofadmission" size="30"
-									data-validate="validate(required)">
-
-							</label></td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>		
 						
-						
-						<tr>
 							<td class="alignLeft">Studying in Class&nbsp;</td>
 
 							<td>
@@ -643,308 +580,53 @@ for(Cookie cookie : cookies){
 							</td>
 
 
-
-							<td class="alignLeft" style="padding-left: 20px;">Admitted in class &nbsp;</td>
-
-							<td>
-							<label> 
-								<select name="admclass" id="admclass" style="width: 130px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>${classadm}</option>
-										<option></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}" >
-												<c:out value="${classdetailslist.classdetails}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-								</select>
-							</label> <label> 
-									<select name="admsec" id="admsec"
-									style="width: 75px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>${secadm}</option>
-										<option></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.section != '')}">
-											<option value="${classdetailslist.section}">
-												<c:out value="${classdetailslist.section}" />
-											</option>
-										</c:if>	
-										</c:forEach>
-							</select>
-							</label>
-							
-							
-							
-							</td>
+						
+							<td class="alignLeft" style="padding-left: 20px;">Father's Name*</td>
+							<td ><input type="hidden"
+								name="idparents" id="idparents"
+								value="<c:out value="${parents.pid}" />" /> <label> <input
+									name="fathersname" type="text" class="myclass" id="name"
+									size="30" style="text-transform: capitalize;" required
+									value="<c:out default="" value="${parents.fathersname}" />"">
+									<!-- onkeyup="check(this.value);"  -->
+							</label></td>
 						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
+						
 						<tr>
 							<td><br /></td>
 						</tr>
 						
 						<tr>
-							<td class="alignLeft">Blood Group &nbsp;</td>
-
-							<td><label> <select name="bloodgroup"
-									id="bloodgroup" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>${student.bloodgroup}</option>
-										<option>A +ve</option>
-										<option>A -ve</option>
-										<option>AB +ve</option>
-										<option>AB -ve</option>
-										<option>O +ve</option>
-										<option>O -ve</option>
-										<option>B +ve</option>
-										<option>B -ve</option>
-								</select>
-
-							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
-
-							<td><label> <select name="nationality"
-									id="nationality" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
-										<option selected>${student.nationality }</option>
-										<option>Indian</option>
-										<option>Other</option>
-								</select>
-
-							</label></td>
-						</tr>
-
-						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
 
-							<td><br /></td>
-						</tr>
-
-
-
-						<tr>
-
-
-							<td class="alignLeft">Religion &nbsp;</td>
-
-							<td><%-- <label> <input name="religion"
-									type="text" class="myclass"
-									value="<c:out default="" value="${student.religion}" />"
-									id="religion" size="30">
-
-							</label> --%>
-							
-							<label> <select name="religion" onblur="validateNameContact();"
-									id="religion" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
-										<option selected>${student.religion}</option>
-										<option>Islam</option>
-										<option>Hinduism</option>
-										<option>Christianity</option>
-										<option>jainism</option>
-										<option>sikhism</option>
-								</select>
-
-							</label>
-							
-							
-							</td>
-
-
-							<%-- <td width="16%" class="alignRight">Caste &nbsp;</td>
-
-							<td align="left"><label> <input name="caste"
-									type="text" class="myclass"
-									value="<c:out default="" value="${student.caste}" />"
-									id="caste" size="30">
-
-							</label></td>
- --%>
- 							<td class="alignLeft" style="padding-left: 20px;">Students Caste</td>
+							<td class="alignLeft">Mother's Name*</td>
 							<td><label> <input
-									name="studentscastecertno" type="text" class="myclass" value="${student.studentscastecertno}"
-									id="studentscastecertno" size="30">
-
+									name="mothersname" type="text" class="myclass" id="name"
+									size="30" style="text-transform: capitalize;" required
+									value="<c:out default="" value="${parents.mothersname}" />"">
+									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-						<tr>
-								<td class="alignLeft">Students Caste &nbsp;</td>
-								<td><label> <input name="studentscaste"
-									type="text" class="myclass" id="studentscaste" value="${student.studentscaste}" size="30">
-
-							</label></td>
-
-							<td class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
-							<td><label> <select name="socialcategory"
-									id="socialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
-										<option>General</option>
-										<option>OBC</option>
-										<option>SC</option>
-										<option>ST</option>
-								</select>
-
-							</label></td>
-
-							</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-						
-						
-							<tr>
-								<td class="alignLeft">Belong to BPL &nbsp;</td>
-								<td height="30">&nbsp;Yes<input
-								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" ${student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
-								onclick="noCheck(this.id);" ${student.belongtobpl == '0' ? 'checked' : ''}/>
-
-							</td>
-							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
-								&nbsp;</td>
-							<td><label> <input
-									name="bplcardno" type="text" class="myclass" value="${student.bplcardno}"
-									id="bplcardno" size="30">
-
-							</label></td>
-						
-						</tr>
-						
-							<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignLeft">Bhagyalakshmi Bond No.
-								&nbsp;</td>
-								<td>
-										<input
-									name="bhagyalakshmibondnumber" type="text" class="myclass" value="${student.bhagyalakshmibondnumber}"
-									id="bhagyalakshmibondnumber" size="30">
-
-							</td>
-							<td class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
-							<td><label> <input
-									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}"
-									id="disabilitychild" size="30">
-
-							</label></td>
-						</tr>
-												
-							<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td class="alignLeft">Special Category&nbsp;</td>
-
-							<td id="categoryname"><label> <select
-									name="specialcategory" onchange="enterOtherSpecialCategory()"
-									id="specialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>${student.specialcategory}</option>
-										<option>None</option>
-										<option>Destitute</option>
-										<option>HIV Case</option>
-										<option>Orphans</option>
-										<option>Others (Please Specify)</option>
-								</select>
-
-							</label></td>
-							<td id="newcateg" style="display: none;"><label> <input
-									name="newcategory" id="newcategory" type="text" class="myclass" size="30" 
-									<%-- value= "${student.newcategory}" --%>placeholder="Add Other Category" />
-							</label></td>
-
-							<td class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
-
-							<td align="left"><%-- <label> <input name="motherT"
-									type="text" class="myclass"
-									value="<c:out default="" value="${student.mothertongue}" />"
-									id="motherT" size="30">
-
-							</label> --%>
 							
-							<label>
-							<select name="motherT" onblur="validateNameContact();"
-									id="motherT" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
-										<option selected>${student.mothertongue}</option>
-										<option>Urdu</option>
-										<option>Hindi</option>
-										<option>English</option>
-										<option>Kannada</option>
-										<option>Marathi</option>
-										<option>Telugu</option>
-										<option>Tamil</option>
-								</select>
-							</label>
-							
-							</td>
+								<td class="alignLeft" style="padding-left: 20px;">Contact Number*</td>
 
+							<td><label> <input name="contactnumber"
+									type="text" class="myclass" id="contactnumber" size="30" required
+									value="<c:out default="" value="${parents.contactnumber}" />">
+
+							</label></td>
 
 
 						</tr>
+
 						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
-
 							<td><br /></td>
 						</tr>
 						
-						<tr>
-
-							<td class="alignLeft">RTE &nbsp;</td>
-							<td height="30">&nbsp;Yes<input
-								type="checkbox" value="1" name="rte" id="yes:rte"
-								onclick="yesCheck(this.id);" ${student.rte == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="rte" id="no:rte"
-								onclick="noCheck(this.id);" ${student.rte == '0' ? 'checked' : ''}/>
-							</td>
-
-							<td class="alignLeft" style="padding-left: 20px;">Remarks&nbsp;</td>
-
-							<td align="left"><label> <input name="remarks"
-									type="text" class="myclass"
-									value="<c:out default="" value="${student.remarks}" />"
-									id="remarks" size="30">
-
-							</label></td>
-							</tr>
-							
-							
-							<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-
-
-
 						<tr>
 							<td class="alignLeft">Created Date &nbsp;</td>
 							<td><label> <input name="createddate"
@@ -1311,29 +993,381 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						
+						<tr>
+
+							<td class="alignLeft">Admitted in class &nbsp;</td>
+
+							<td>
+							<label> 
+								<select name="admclass" id="admclass" style="width: 130px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${classadm}</option>
+										<option></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}" >
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>	
+										</c:forEach>
+								</select>
+							</label> <label> 
+									<select name="admsec" id="admsec"
+									style="width: 75px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${secadm}</option>
+										<option></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.section != '')}">
+											<option value="${classdetailslist.section}">
+												<c:out value="${classdetailslist.section}" />
+											</option>
+										</c:if>	
+										</c:forEach>
+							</select>
+							</label>
+							</td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number</td>
+
+							<td><label> <input
+									name="cocontactnumber" type="text" class="myclass"
+									id="cocontactnumber" size="30"
+									value="<c:out default="" value="${parents.cocontactnumber}" />">
+
+							</label></td>
+						</tr>
 
 						<tr>
-							<td class="alignLeft">Father's Name*</td>
-							<td ><input type="hidden"
-								name="idparents" id="idparents"
-								value="<c:out value="${parents.pid}" />" /> <label> <input
-									name="fathersname" type="text" class="myclass" id="name"
-									size="30" style="text-transform: capitalize;" required
-									value="<c:out default="" value="${parents.fathersname}" />"">
-									<!-- onkeyup="check(this.value);"  -->
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+							
+							
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignLeft">Date Of Birth &nbsp;</td>
+							<td><label> <input name="dateofbirth" autocomplete="false"
+									type="text" value="<fmt:formatDate value="${student.dateofbirth}" pattern="dd/MM/yyyy"/>"
+									class="myclass" id="datepicker" size="30"
+									onchange="CalculateAge(this)"
+									data-validate="validate(required)">
+									
+									
 							</label></td>
 
-							<td class="alignLeft" style="padding-left: 20px;">Mother's Name*</td>
-							<td><label> <input
-									name="mothersname" type="text" class="myclass" id="name"
-									size="30" style="text-transform: capitalize;" required
-									value="<c:out default="" value="${parents.mothersname}" />"">
-									<!-- onkeyup="check(this.value);"  -->
+							<td class="alignLeft" style="padding-left: 20px;">Age&nbsp;</td>
+
+							<td><label> <input name="age"
+									type="text" class="myclass"
+									value="<c:out default="" value="${student.age}" />" id="age"
+									size="30">
+
 							</label></td>
+						</tr>
+
+
+<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignLeft">Place of birth, Tq, Dist.&nbsp;</td>
+							<td><label> <input name="place"
+									type="text" class="myclass"
+									value="<c:out default="" value="${student.placeofbirth}" />"
+									id="place" size="30" data-validate="validate(required)">
+
+							</label></td>
+							<td class="alignLeft" style="padding-left: 20px;">Date Of Admission &nbsp;</td>
+
+							<td><label> <input
+									name="dateofadmission" type="text" class="myclass" autocomplete="false"
+									value="<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>"
+									id="dateofadmission" size="30"
+									data-validate="validate(required)">
+
+							</label></td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>		
+						
+						
+						<tr>
+							<td class="alignLeft">Blood Group &nbsp;</td>
+
+							<td><label> <select name="bloodgroup"
+									id="bloodgroup" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${student.bloodgroup}</option>
+										<option>A +ve</option>
+										<option>A -ve</option>
+										<option>AB +ve</option>
+										<option>AB -ve</option>
+										<option>O +ve</option>
+										<option>O -ve</option>
+										<option>B +ve</option>
+										<option>B -ve</option>
+								</select>
+
+							</label></td>
+							<td class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
+
+							<td><label> <select name="nationality"
+									id="nationality" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
+										<option selected>${student.nationality }</option>
+										<option>Indian</option>
+										<option>Other</option>
+								</select>
+
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+
+
+
+						<tr>
+
+
+							<td class="alignLeft">Religion &nbsp;</td>
+
+							<td><%-- <label> <input name="religion"
+									type="text" class="myclass"
+									value="<c:out default="" value="${student.religion}" />"
+									id="religion" size="30">
+
+							</label> --%>
+							
+							<label> <select name="religion" onblur="validateNameContact();"
+									id="religion" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
+										<option selected>${student.religion}</option>
+										<option>Islam</option>
+										<option>Hinduism</option>
+										<option>Christianity</option>
+										<option>jainism</option>
+										<option>sikhism</option>
+								</select>
+
+							</label>
+							
+							
+							</td>
+
+
+							<%-- <td width="16%" class="alignRight">Caste &nbsp;</td>
+
+							<td align="left"><label> <input name="caste"
+									type="text" class="myclass"
+									value="<c:out default="" value="${student.caste}" />"
+									id="caste" size="30">
+
+							</label></td>
+ --%>
+ 							<td class="alignLeft" style="padding-left: 20px;">Students Caste</td>
+							<td><label> <input
+									name="studentscastecertno" type="text" class="myclass" value="${student.studentscastecertno}"
+									id="studentscastecertno" size="30">
+
+							</label></td>
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+						<tr>
+								<td class="alignLeft">Students Caste &nbsp;</td>
+								<td><label> <input name="studentscaste"
+									type="text" class="myclass" id="studentscaste" value="${student.studentscaste}" size="30">
+
+							</label></td>
+
+							<td class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
+							<td><label> <select name="socialcategory"
+									id="socialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option>General</option>
+										<option>OBC</option>
+										<option>SC</option>
+										<option>ST</option>
+								</select>
+
+							</label></td>
+
+							</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+						
+						
+							<tr>
+								<td class="alignLeft">Belong to BPL &nbsp;</td>
+								<td height="30">&nbsp;Yes<input
+								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
+								onclick="yesCheck(this.id);" ${student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
+								onclick="noCheck(this.id);" ${student.belongtobpl == '0' ? 'checked' : ''}/>
+
+							</td>
+							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
+								&nbsp;</td>
+							<td><label> <input
+									name="bplcardno" type="text" class="myclass" value="${student.bplcardno}"
+									id="bplcardno" size="30">
+
+							</label></td>
+						
+						</tr>
+						
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignLeft">Bhagyalakshmi Bond No.
+								&nbsp;</td>
+								<td>
+										<input
+									name="bhagyalakshmibondnumber" type="text" class="myclass" value="${student.bhagyalakshmibondnumber}"
+									id="bhagyalakshmibondnumber" size="30">
+
+							</td>
+							<td class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
+							<td><label> <input
+									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}"
+									id="disabilitychild" size="30">
+
+							</label></td>
+						</tr>
+												
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td class="alignLeft">Special Category&nbsp;</td>
+
+							<td id="categoryname"><label> <select
+									name="specialcategory" onchange="enterOtherSpecialCategory()"
+									id="specialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${student.specialcategory}</option>
+										<option>None</option>
+										<option>Destitute</option>
+										<option>HIV Case</option>
+										<option>Orphans</option>
+										<option>Others (Please Specify)</option>
+								</select>
+
+							</label></td>
+							<td id="newcateg" style="display: none;"><label> <input
+									name="newcategory" id="newcategory" type="text" class="myclass" size="30" 
+									<%-- value= "${student.newcategory}" --%>placeholder="Add Other Category" />
+							</label></td>
+
+							<td class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
+
+							<td align="left"><%-- <label> <input name="motherT"
+									type="text" class="myclass"
+									value="<c:out default="" value="${student.mothertongue}" />"
+									id="motherT" size="30">
+
+							</label> --%>
+							
+							<label>
+							<select name="motherT" onblur="validateNameContact();"
+									id="motherT" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
+										<option selected>${student.mothertongue}</option>
+										<option>Urdu</option>
+										<option>Hindi</option>
+										<option>English</option>
+										<option>Kannada</option>
+										<option>Marathi</option>
+										<option>Telugu</option>
+										<option>Tamil</option>
+								</select>
+							</label>
+							
+							</td>
+
 
 
 						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
 
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+
+							<td class="alignLeft">RTE &nbsp;</td>
+							<td height="30">&nbsp;Yes<input
+								type="checkbox" value="1" name="rte" id="yes:rte"
+								onclick="yesCheck(this.id);" ${student.rte == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="rte" id="no:rte"
+								onclick="noCheck(this.id);" ${student.rte == '0' ? 'checked' : ''}/>
+							</td>
+
+							<td class="alignLeft" style="padding-left: 20px;">Remarks&nbsp;</td>
+
+							<td align="left"><label> <input name="remarks"
+									type="text" class="myclass"
+									value="<c:out default="" value="${student.remarks}" />"
+									id="remarks" size="30">
+
+							</label></td>
+							</tr>
+							
+							
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
 
 
 						<tr>
@@ -1418,34 +1452,6 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
-						<tr>
-
-							<td class="alignLeft">Contact Number*</td>
-
-							<td><label> <input name="contactnumber"
-									type="text" class="myclass" id="contactnumber" size="30" required
-									value="<c:out default="" value="${parents.contactnumber}" />">
-
-							</label></td>
-
-							<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number</td>
-
-							<td><label> <input
-									name="cocontactnumber" type="text" class="myclass"
-									id="cocontactnumber" size="30"
-									value="<c:out default="" value="${parents.cocontactnumber}" />">
-
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
 
 						<tr>
 							<td class="alignLeft">Email</td>

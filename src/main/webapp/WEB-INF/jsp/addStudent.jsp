@@ -577,9 +577,9 @@
 		<div>
 			<div id="tabs">
 				<ul>
-					<li><a href="#fragment-1">Student's Details</a></li>
-					<li><a href="#fragment-2">Parent's Details</a></li>
+					<li><a href="#fragment-1">Basic Details</a></li>
 					<li><a href="#fragment-3">Upload Photo</a></li>
+					<li><a href="#fragment-2">Other Details</a></li>
 					<li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
@@ -603,13 +603,13 @@
 									style=" text-transform: capitalize;">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
+							<!-- <td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
 									<td ><label> <input
 											name="sts" type="text" class="myclass" size="36"
 											style="text-transform:capitalize;"
 											id="sts" size="36">
 
-									</label></td>
+									</label></td> -->
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -644,54 +644,7 @@
 						<tr>
 							<td><br /></td>
 						</tr>
-
-						<tr>
-						<tr>
-							<td class="alignLeft">Date Of Birth &nbsp;</td>
-							<td ><label> <input name="dateofbirth"
-									type="text" class="myclass" id="datepicker" size="36" autocomplete="false"
-									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
-							</label></td>
-
-							<td class="alignLeft" style="padding-left: 20px;">Age &nbsp;</td>
-							<td><label> <input
-									name="age" type="text" class="myclass" id="age" size="36"
-									>
-							</label></td>
-
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-
-						<tr>
-
-							<td  class="alignLeft">Place Of Birth, Tq,
-								Dist.&nbsp;</td>
-							<td><label> <input
-							style="text-transform:capitalize;"
-									name="place" type="text" class="myclass" id="place" size="36">
-							</label></td>
-							
-							<td class="alignLeft" style="padding-left: 20px;">Date of admission&nbsp;</td>
-							<td ><label><input name="dateofadmission" autocomplete="false"
-									type="text" class="myclass" id="dateofadmission" size="36"
-									data-validate="validate(required)"> </label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
+						
 						<tr>
 
 
@@ -720,201 +673,17 @@
 										</c:forEach>
 								</select>
 							</label></td>
-
-							<td  class="alignLeft" style="padding-left: 20px;">Admitted in Class &nbsp;
-							</td>
-
-							<td ><label> <select name="admclassE"
-									id="admclassE" style="width: 186px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-							</label> <label> <select name="admsecE" id="admsecE" style="width: 70px;border-radius: 4px;background: white;height: 28px;"
-									>
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.section != '')}">
-												<option value="${classdetailslist.section}">
-													<c:out value="${classdetailslist.section}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Father's Name* &nbsp;</td>
+									<td ><label> <input
+											name="fathersname" type="text" class="myclass" required
+											style="text-transform:capitalize;"
+											id="fathersname" size="36"
+											required> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
 
 						</tr>
 
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td  class="alignLeft">Blood Group &nbsp;</td>
-
-							<td><label> <select name="bloodgroup"
-									id="bloodgroup" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>A +ve</option>
-										<option>B +ve</option>
-										<option>AB +ve</option>
-										<option>O +ve</option>
-										<option>A -ve</option>
-										<option>B -ve</option>
-										<option>AB -ve</option>
-										<option>O -ve</option>
-
-
-								</select>
-
-							</label></td>
-
-
-							<td  class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
-
-							<td><label> <select name="nationality"
-									id="nationality" style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
-										<option selected>Indian</option>
-										<option>Indian</option>
-										<option>Other</option>
-								</select>
-
-							</label></td>
-
-
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-
-
-							<td class="alignLeft">Religion &nbsp;</td>
-
-							<td >
-								<!-- <label> <input name="religion"
-									type="text" class="myclass" id="religion" size="36"
-									onblur="validateNameContact();"
-									onkeypress="return validateContactNum(this);">
-
-							</label> --> <label> <select name="religion"
-									id="religion" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>Islam</option>
-										<option>Hinduism</option>
-										<option>Christianity</option>
-										<option>jainism</option>
-										<option>sikhism</option>
-								</select>
-
-							</label>
-
-							</td>
-
-
-
-							<!-- <td class="alignRight">Caste &nbsp;</td>
-							<td ><label> <input name="caste"
-									type="text" class="myclass" id="caste" size="36"
-									onblur="validateNameContact();"
-									onkeypress="return validateContactNum(this);">
-
-							</label></td> -->
-
-							<td class="alignLeft" style="padding-left: 20px;">Students Caste <br>
-								Certificate No.&nbsp;</td>
-							<td ><label> <input
-									name="studentscastecertno" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="studentscastecertno" size="36">
-
-							</label></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignLeft">Students Caste &nbsp;</td>
-							<td ><label> <input name="studentscaste"
-							style="text-transform:capitalize;"
-									type="text" class="myclass" id="studentscaste" size="36">
-
-							</label></td>
-
-							<td  class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
-							<td><label> <select name="socialcategory"
-									id="socialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>General</option>
-										<option>OBC</option>
-										<option>SC</option>
-										<option>ST</option>
-								</select>
-
-							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td  class="alignLeft" >Belong to BPL&nbsp;</td>
-							<td>&nbsp;Yes<input
-								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
-								onclick="noCheck(this.id);" />
-
-							</td>
-							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
-								&nbsp;</td>
-							<td ><label> <input
-									name="bplcardno" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="bplcardno" size="36">
-
-							</label></td>
-						</tr>	
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignLeft" >Bhagyalakshmi Bond No.&nbsp;</td>
-								<td><input
-									name="bhagyalakshmibondnumber" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="bhagyalakshmibondnumber" size="36">
-							</td>
-							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
-							<td ><label> <input
-									name="disabilitychild" type="text" class="myclass"
-									style="text-transform:capitalize;"
-									id="disabilitychild" size="36">
-
-							</label></td>
-						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -923,83 +692,35 @@
 						</tr>
 						
 						<tr>
-							<td class="alignLeft" >Special Category&nbsp;</td>
+									<td class="alignLeft">Mother's Name* &nbsp;</td>
+									<td><label> <input
+											name="mothersname" type="text" class="myclass" id="name" required
+											style="text-transform:capitalize;"
+											size="36"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
 
-							<td id="categoryname"><label> <select
-									name="specialcategory" onchange="enterOtherSpecialCategory()"
-									id="specialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>None</option>
-										<option></option>
-										<option>None</option>
-										<option>Destitute</option>
-										<option>HIV Case</option>
-										<option>Orphans</option>
-										<option>Others (Please Specify)</option>
-								</select>
 
-							</label></td>
-							<td  id="newcateg"
-								style="display: none;"><label> <input
-									name="newcategory" id="newcategory" type="text" class="myclass" size="36"
-									style="text-transform:capitalize;"
-									placeholder="Add Other Category" />
-							</label></td>
-							
-							<td  class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
-							<td >
-								<!-- <label> <input name="motherT"
-									type="text" class="textField" id="motherT" size="36"
-									onblur="validateNameContact();"
-									onkeypress="return validateContactNum(this);">
+									<td class="alignLeft" style="padding-left: 20px;">Contact Number* &nbsp;</td>
 
-							</label> --> <label> <select name="motherT"
-									 id="motherT"
-									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>Urdu</option>
-										<option>Hindi</option>
-										<option>English</option>
-										<option>Kannada</option>
-										<option>Marathi</option>
-										<option>Telugu</option>
-										<option>Tamil</option>
-								</select>
-							</label>
-							</td>
-						</tr>
-						<tr>
+									<td><label> <input
+											name="contactnumber" type="text" class="myclass" required
+											style="text-transform:capitalize;"
+											id="contactnumber" size="36" maxlength="10" minlength="10">
+
+									</label></td>
+
+								</tr>
+
+
+
+								<tr>
 									<td><br /></td>
 								</tr>
 								<tr>
 									<td><br /></td>
 								</tr>
-
-						<tr>
-						
-							<td class="alignLeft"  >RTE
-										&nbsp;</td>
-
-									<td  >&nbsp;Yes<input
-								type="checkbox" value="1" name="rte" id="yes:rte"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="rte" id="no:rte"
-								onclick="noCheck(this.id);" />
-										</td>
-										
-							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
-							<td ><label> <input name="remarks"
-									type="text" class="myclass" id="remarks" size="36"
-									style="text-transform:capitalize;"
-									>
-							</label></td>
-						</tr>
-
-<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
+								
+							
 						<tr>
 										
 							<td class="alignLeft">Created Date &nbsp;</td>
@@ -1362,34 +1083,344 @@
 								<tr>
 									<td><br /></td>
 								</tr>
-
+								
 								<tr>
-									<td class="alignLeft">Father's Name* &nbsp;</td>
-									<td ><label> <input
-											name="fathersname" type="text" class="myclass" required
-											style="text-transform:capitalize;"
-											id="fathersname" size="36"
-											required> <!-- onkeyup="check(this.value);"  -->
-									</label></td>
+								
+								<td  class="alignLeft">Admitted in Class &nbsp;
+							</td>
 
-									<td class="alignLeft" style="padding-left: 20px;">Mother's Name* &nbsp;</td>
+							<td ><label> <select name="admclassE"
+									id="admclassE" style="width: 186px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+							</label> <label> <select name="admsecE" id="admsecE" style="width: 70px;border-radius: 4px;background: white;height: 28px;"
+									>
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.section != '')}">
+												<option value="${classdetailslist.section}">
+													<c:out value="${classdetailslist.section}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
+										&nbsp;</td>
+
 									<td><label> <input
-											name="mothersname" type="text" class="myclass" id="name" required
+											name="cocontactnumber" type="text" class="myclass"
 											style="text-transform:capitalize;"
-											size="36"> <!-- onkeyup="check(this.value);"  -->
+											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+
 									</label></td>
-
-
-								</tr>
-
-
+							
+							</tr>
 
 								<tr>
 									<td><br /></td>
 								</tr>
 								<tr>
 									<td><br /></td>
+								</tr>	
+
+						<tr>
+							<td class="alignLeft">Date Of Birth &nbsp;</td>
+							<td ><label> <input name="dateofbirth"
+									type="text" class="myclass" id="datepicker" size="36" autocomplete="false"
+									onchange="CalculateAge(this)"
+									data-validate="validate(required)">
+							</label></td>
+
+							<td class="alignLeft" style="padding-left: 20px;">Age &nbsp;</td>
+							<td><label> <input
+									name="age" type="text" class="myclass" id="age" size="36"
+									>
+							</label></td>
+
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+
+						<tr>
+
+							<td  class="alignLeft">Place Of Birth, Tq,
+								Dist.&nbsp;</td>
+							<td><label> <input
+							style="text-transform:capitalize;"
+									name="place" type="text" class="myclass" id="place" size="36">
+							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Date of admission&nbsp;</td>
+							<td ><label><input name="dateofadmission" autocomplete="false"
+									type="text" class="myclass" id="dateofadmission" size="36"
+									data-validate="validate(required)"> </label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td  class="alignLeft">Blood Group &nbsp;</td>
+
+							<td><label> <select name="bloodgroup"
+									id="bloodgroup" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>A +ve</option>
+										<option>B +ve</option>
+										<option>AB +ve</option>
+										<option>O +ve</option>
+										<option>A -ve</option>
+										<option>B -ve</option>
+										<option>AB -ve</option>
+										<option>O -ve</option>
+
+
+								</select>
+
+							</label></td>
+
+
+							<td  class="alignLeft" style="padding-left: 20px;">Nationality &nbsp;</td>
+
+							<td><label> <select name="nationality"
+									id="nationality" style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="dropdown()">
+										<option selected>Indian</option>
+										<option>Indian</option>
+										<option>Other</option>
+								</select>
+
+							</label></td>
+
+
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+
+
+							<td class="alignLeft">Religion &nbsp;</td>
+
+							<td >
+								<!-- <label> <input name="religion"
+									type="text" class="myclass" id="religion" size="36"
+									onblur="validateNameContact();"
+									onkeypress="return validateContactNum(this);">
+
+							</label> --> <label> <select name="religion"
+									id="religion" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>Islam</option>
+										<option>Hinduism</option>
+										<option>Christianity</option>
+										<option>jainism</option>
+										<option>sikhism</option>
+								</select>
+
+							</label>
+
+							</td>
+
+
+
+							<!-- <td class="alignRight">Caste &nbsp;</td>
+							<td ><label> <input name="caste"
+									type="text" class="myclass" id="caste" size="36"
+									onblur="validateNameContact();"
+									onkeypress="return validateContactNum(this);">
+
+							</label></td> -->
+
+							<td class="alignLeft" style="padding-left: 20px;">Students Caste <br>
+								Certificate No.&nbsp;</td>
+							<td ><label> <input
+									name="studentscastecertno" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="studentscastecertno" size="36">
+
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignLeft">Students Caste &nbsp;</td>
+							<td ><label> <input name="studentscaste"
+							style="text-transform:capitalize;"
+									type="text" class="myclass" id="studentscaste" size="36">
+
+							</label></td>
+
+							<td  class="alignLeft" style="padding-left: 20px;">Social Category&nbsp;</td>
+							<td><label> <select name="socialcategory"
+									id="socialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>General</option>
+										<option>OBC</option>
+										<option>SC</option>
+										<option>ST</option>
+								</select>
+
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td  class="alignLeft" >Belong to BPL&nbsp;</td>
+							<td>&nbsp;Yes<input
+								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
+								onclick="noCheck(this.id);" />
+
+							</td>
+							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
+								&nbsp;</td>
+							<td ><label> <input
+									name="bplcardno" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="bplcardno" size="36">
+
+							</label></td>
+						</tr>	
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignLeft" >Bhagyalakshmi Bond No.&nbsp;</td>
+								<td><input
+									name="bhagyalakshmibondnumber" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="bhagyalakshmibondnumber" size="36">
+							</td>
+							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
+							<td ><label> <input
+									name="disabilitychild" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="disabilitychild" size="36">
+
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignLeft" >Special Category&nbsp;</td>
+
+							<td id="categoryname"><label> <select
+									name="specialcategory" onchange="enterOtherSpecialCategory()"
+									id="specialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>None</option>
+										<option></option>
+										<option>None</option>
+										<option>Destitute</option>
+										<option>HIV Case</option>
+										<option>Orphans</option>
+										<option>Others (Please Specify)</option>
+								</select>
+
+							</label></td>
+							<td  id="newcateg"
+								style="display: none;"><label> <input
+									name="newcategory" id="newcategory" type="text" class="myclass" size="36"
+									style="text-transform:capitalize;"
+									placeholder="Add Other Category" />
+							</label></td>
+							
+							<td  class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
+							<td >
+								<!-- <label> <input name="motherT"
+									type="text" class="textField" id="motherT" size="36"
+									onblur="validateNameContact();"
+									onkeypress="return validateContactNum(this);">
+
+							</label> --> <label> <select name="motherT"
+									 id="motherT"
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>Urdu</option>
+										<option>Hindi</option>
+										<option>English</option>
+										<option>Kannada</option>
+										<option>Marathi</option>
+										<option>Telugu</option>
+										<option>Tamil</option>
+								</select>
+							</label>
+							</td>
+						</tr>
+						<tr>
+									<td><br /></td>
 								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+						<tr>
+						
+							<td class="alignLeft"  >RTE
+										&nbsp;</td>
+
+									<td  >&nbsp;Yes<input
+								type="checkbox" value="1" name="rte" id="yes:rte"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="rte" id="no:rte"
+								onclick="noCheck(this.id);" />
+										</td>
+										
+							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
+							<td ><label> <input name="remarks"
+									type="text" class="myclass" id="remarks" size="36"
+									style="text-transform:capitalize;"
+									>
+							</label></td>
+						</tr>
+
+<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 
 								<tr>
 									<td class="alignLeft">Father's Qualification
@@ -1473,38 +1504,6 @@
 								<tr>
 									<td><br /></td>
 								</tr>
-
-								<tr>
-
-									<td class="alignLeft">Contact Number* &nbsp;</td>
-
-									<td><label> <input
-											name="contactnumber" type="text" class="myclass" required
-											style="text-transform:capitalize;"
-											id="contactnumber" size="36" maxlength="10" minlength="10">
-
-									</label></td>
-
-
-
-									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
-										&nbsp;</td>
-
-									<td><label> <input
-											name="cocontactnumber" type="text" class="myclass"
-											style="text-transform:capitalize;"
-											id="cocontactnumber" size="36" maxlength="10" minlength="10">
-
-									</label></td>
-								</tr>
-
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
 
 								<tr>
 

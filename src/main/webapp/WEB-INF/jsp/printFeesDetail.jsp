@@ -183,7 +183,7 @@
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 110px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
 				<label class="addressLine" style="padding-left: 10px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 110px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left: 130px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 				
 			</tr>
@@ -365,7 +365,7 @@
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 110px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
 				<label class="addressLine" style="padding-left: 10px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 110px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left: 130px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 				
 			</tr>
