@@ -354,7 +354,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/noble/FeesProcess/otherfeesReport" style="font-size: 12px;">Other fees Report</a>
+            				 <a target="mainFrame" href="/madina/FeesProcess/otherfeesReport" style="font-size: 12px;">Other fees Report</a>
             			</td>
             		</tr>
                 </table>

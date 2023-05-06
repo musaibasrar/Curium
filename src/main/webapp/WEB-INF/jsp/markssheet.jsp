@@ -237,7 +237,7 @@ for(Cookie cookie : cookies){
                         	<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 								<tr>
-									<td><img src="/noble/images/madina.jpg" width="92" height="80"/></td>
+									<td><img src="/madina/images/madina.jpg" width="92" height="80"/></td>
 									<td>
 									<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 									<label class="addressLine">${branchaddress}</label><br>
