@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>stamp fees</title>
-<link rel="stylesheet" href="/noble/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/noble/css/datePicker/demos.css">
+<link rel="stylesheet" href="/bsr/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/bsr/css/datePicker/demos.css">
 
 <style type="text/css">
 <!--
@@ -270,45 +270,45 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/noble/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/noble/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/bsr/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/bsr/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/noble/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/noble/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/bsr/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/bsr/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/noble/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/noble/js/datePicker/ui/sliderAccess.js"></script>
+	src="/bsr/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/bsr/js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript" src="/noble/js/globalize.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/noble/js/globalize.cultures.js"></script>
+<script type="text/javascript" src="/bsr/js/globalize.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/bsr/js/globalize.cultures.js"></script>
 
 <script type="text/javascript"
-	src="/noble/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/bsr/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/bsr/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/bsr/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/bsr/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/bsr/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/bsr/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/bsr/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/bsr/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/bsr/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/bsr/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/bsr/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -332,11 +332,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/noble/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/bsr/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/noble/StampFeesProcess/othersearch";
+		form1.action = "/bsr/StampFeesProcess/othersearch";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -402,7 +402,7 @@
 	
 	function deleteFeesStamp(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/noble/StampFeesProcess/delete";
+		form1.action = "/bsr/StampFeesProcess/delete";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -616,7 +616,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/noble/UserProcess/sessionTimeOut");
+	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -629,7 +629,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/noble/StampFeesProcess/applyotherFees" method="POST">
+	<form id="form1" action="/bsr/StampFeesProcess/applyotherFees" method="POST">
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -777,7 +777,7 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/noble/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
+								href="/bsr/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">
