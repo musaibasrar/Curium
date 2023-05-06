@@ -107,5 +107,10 @@
 		<mapping resource="mappings/mess/MessStockMove.hbm.xml"></mapping>
 		<mapping resource="mappings/mess/MessSuppliersPayment.hbm.xml"></mapping>
 		<mapping resource="mappings/mess/Card.hbm.xml"></mapping>
+		<mapping resource="mappings/OtherFeescategory.hbm.xml"></mapping>
+		<mapping resource="mappings/Academicotherfeesstructure.hbm.xml"></mapping>
+		<mapping resource="mappings/Studentotherfeesstructure.hbm.xml"></mapping>
+		<mapping resource="mappings/Otherfeescollection.hbm.xml"></mapping>
+		<mapping resource="mappings/Otherreceiptinfo.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>
