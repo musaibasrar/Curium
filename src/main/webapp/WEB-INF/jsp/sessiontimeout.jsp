@@ -17,15 +17,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/noble/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/noble/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/noble/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/noble/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/noble/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/noble/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/noble/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/noble/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/noble/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/jih/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/jih/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/jih/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/jih/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/jih/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/jih/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/jih/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/jih/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/jih/js/datePicker/ui/jquery.ui.button.js"></script>
         
         
         
@@ -71,7 +71,7 @@
         <td height="250" align="center" valign="middle"><p class="style1">Session time out, Please login again</p>
         <p class="style1">
           	<!-- <input type="button" value="Login" id="login" > -->
-          	<a href="/noble/UserProcess/logout" target="_parent" id="login">Login</a>
+          	<a href="/jih/UserProcess/logout" target="_parent" id="login">Login</a>
         </p></td>
       </tr>
     </table>

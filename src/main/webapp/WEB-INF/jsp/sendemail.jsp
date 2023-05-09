@@ -18,22 +18,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Send Email</title>
-<link rel="stylesheet" href="/noble/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/noble/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/jih/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/jih/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/noble/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/noble/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/noble/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/noble/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/noble/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/noble/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/noble/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/noble/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/jih/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/jih/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/jih/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/jih/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/jih/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/jih/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/jih/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/jih/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/jih/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/noble/css/datePicker/demos.css">
+	src="/jih/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/jih/css/datePicker/demos.css">
 
 
 
@@ -286,10 +286,10 @@
 
 
 
-<script type="text/javascript" src="/noble/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/jih/js/datetimepicker_css.js"></script>
 
-<script src="/noble/JavaScript/actb.js"></script>
-<script src="/noble/JavaScript/common.js"></script>
+<script src="/jih/JavaScript/actb.js"></script>
+<script src="/jih/JavaScript/common.js"></script>
 
 
 
@@ -555,7 +555,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/noble/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jih/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -874,19 +874,19 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function sendEmailAll() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/noble/EmailProcess/sendAllEmail";
+								form1.action = "/jih/EmailProcess/sendAllEmail";
 								form1.submit();
 							}
 							
 							function sendSMSNumbers() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/noble/SMSProcess/sendNumbersSMS";
+								form1.action = "/jih/SMSProcess/sendNumbersSMS";
 								form1.submit();
 							}
 							
 							function sendSMSStaff() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/noble/SMSProcess/sendStaffSMS";
+								form1.action = "/jih/SMSProcess/sendStaffSMS";
 								form1.submit();
 							}
 							
