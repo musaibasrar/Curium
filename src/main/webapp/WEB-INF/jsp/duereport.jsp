@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Bills Report</title>
-<link rel="stylesheet" href="/noble/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/noble/css/datePicker/demos.css">
+<link rel="stylesheet" href="/curium/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/curium/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -408,17 +408,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/noble/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/curium/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/curium/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/noble/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/noble/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/curium/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/noble/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/curium/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/curium/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/noble/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/curium/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -455,12 +455,12 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/noble/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/curium/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function generateStockDueReport() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/noble/MessItemsMoveProcess/dueReport";
+		form1.action = "/curium/MessItemsMoveProcess/dueReport";
 		form1.method = "POST";
 		form1.submit();
 	}

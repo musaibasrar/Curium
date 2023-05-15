@@ -15,8 +15,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	 <title>Curium - School ERP</title>
-	<link rel="stylesheet" href="/noble/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/noble/js/openWindow.js"></script>
+	<link rel="stylesheet" href="/curium/css/bootstrap3.min.css">
+	<script type="text/javascript" src="/curium/js/openWindow.js"></script>
 	
 	<style type="text/css">
 	.main-content{
@@ -112,7 +112,7 @@ form{
             function redirect(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="/noble/UserProcess/authenticate";
+                form1.action="/curium/UserProcess/authenticate";
                 form1.submit();
             }
         </script>
@@ -129,19 +129,19 @@ form{
             if(flag1){
             	
             	if(type=='superadmin'){
-                    window.open('/noble/index_superadmin','_self');
+                    window.open('/curium/index_superadmin','_self');
                 }else if(type=='admin'){
-                    window.open('/noble/index_admin','_self');
+                    window.open('/curium/index_admin','_self');
                 }else if(type=='feescollector'){
-                    window.open('/noble/index_feescollector','_self');
+                    window.open('/curium/index_feescollector','_self');
                 }else if(type=='officeadmin'){
-                	window.open('/noble/index_officeadmin','_self');
+                	window.open('/curium/index_officeadmin','_self');
                 }else if(type=='marksentry'){
-                	window.open('/noble/index_marksentry','_self');
+                	window.open('/curium/index_marksentry','_self');
                 }
             }
             else if(!flag1){
-            	window.open('/noble/loginFail','_self');
+            	window.open('/curium/loginFail','_self');
             }
         </script>
         
@@ -151,18 +151,18 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 170px;width: 170px;" alt="ideoholic" src="/noble/images/noble.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 170px;width: 170px;" alt="ideoholic" src="/curium/images/noble.png"></h2>
 			<!-- <h5 style="font-weight: bold;">Shaheen Kidz</h5> --></span>
 				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
 					<div class="row">
-						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/noble/images/shaheenlogo.png"></h2></span> -->
+						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/curium/images/shaheenlogo.png"></h2></span> -->
 						<h3>Log In</h3>
 					</div>
 					<div class="row">
-						<form action="/noble/UserProcess/authenticateUser"  method="post" class="form-group">
+						<form action="/curium/UserProcess/authenticateUser"  method="post" class="form-group">
 							<div class="row">
 								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="Username">
 							</div>
@@ -184,10 +184,10 @@ form{
 	<!-- Footer -->
 	<div class="container-fluid text-center footer">
 		<p>
-			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/noble/images/ideoholic.png"> image with a default alignment.</p> --> 
+			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/curium/images/ideoholic.png"> image with a default alignment.</p> -->
 			
 			<a href="http://www.ideoholic.com" >
-				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/noble/images/ideoholic.png">
+				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/curium/images/ideoholic.png">
 			</a>
 			
 	</div>

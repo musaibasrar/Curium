@@ -13,20 +13,10 @@ public class CuriumApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-       return application.sources(CuriumApplication.class);
+        return application.sources(CuriumApplication.class);
     }
-  public static void main(String[] args) {
-    SpringApplication.run(CuriumApplication.class, args);
-  }
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(CuriumApplication.class);
-	}
-
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(CuriumApplication.class);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(CuriumApplication.class, args);
+    }
 }

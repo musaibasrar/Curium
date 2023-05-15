@@ -175,7 +175,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left">
-				<img src="/noble/images/nobleheader.png" width="200" height="150"/>
+				<img src="/curium/images/nobleheader.png" width="200" height="150"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				<label class="addressLine">Curium Education Society's
