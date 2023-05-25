@@ -14,10 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/noble/css/bootstrap.min.css">
-        <script src="/noble/js/jquery.min.js"></script>
-        <script src="/noble/js/bootstrap.min.js"></script>
-        <script src="/noble/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/curium/css/bootstrap.min.css">
+        <script src="/curium/js/jquery.min.js"></script>
+        <script src="/curium/js/bootstrap.min.js"></script>
+        <script src="/curium/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -92,7 +92,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/noble/UserProcess/logout";
+                form1.action="/curium/UserProcess/logout";
                 form1.submit();
             }
 
@@ -102,7 +102,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/noble/UserProcess/sessionTimeOut");
+	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -125,79 +125,79 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/noble/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
+								<a target="mainFrame" href="/curium/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/noble/images/nobleheader.png"
+							<!-- <td align="left"><img src="/curium/images/curiumheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/noble/left_superadmin"> <img
-									src="/noble/images/home.svg" width="18" height="18" 
+							<td><a target="leftFrame" href="/curium/left_superadmin"> <img
+									src="/curium/images/home.svg" width="18" height="18"
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="/noble/FeesProcess/feesCollect"> <img
-									src="/noble/images/feescollect.svg" width="18" height="18"
+								href="/curium/FeesProcess/feesCollect"> <img
+									src="/curium/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
 							<td>
 								<a target="mainFrame"
-								href="/noble/AccountProcess/createVoucher"> <img
-									src="/noble/images/createvoucher.svg" width="18" height="18"
+								href="/curium/AccountProcess/createVoucher"> <img
+									src="/curium/images/createvoucher.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/noble/feesCollectionDetails"><img  alt="Fees Details" src="/noble/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+							<!-- <td ><a target="mainFrame" href="/curium/feesCollectionDetails"><img  alt="Fees Details" src="/curium/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
-								href="/noble/StudentProcess/addNew"> <img
-									src="/noble/images/student_header.svg" width="18" height="18"
+								href="/curium/StudentProcess/addNew"> <img
+									src="/curium/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/noble/leftsettings">
-									<img alt="Settings" src="/noble/images/settings.svg" width="18"
+							<td ><a target="leftFrame" href="/curium/leftsettings">
+									<img alt="Settings" src="/curium/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
 							<td ><a target="mainFrame"
-								href="/noble/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/noble/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+								href="/curium/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/curium/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
 
-							<td ><!-- <a target="mainFrame" href="/noble/sendsms"><img
-									src="/noble/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+							<td ><!-- <a target="mainFrame" href="/curium/sendsms"><img
+									src="/curium/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/noble/reports"><img
-									src="/noble/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+								<a target="leftFrame" href="/curium/reports"><img
+									src="/curium/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
 							
 							</td>
 
 							<td ><a target="mainFrame"
-								href="/noble/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/noble/images/students.svg" width="18"
+								href="/curium/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/curium/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/noble/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/noble/images/dashboard.svg" width="18"
+								href="/curium/UserProcess/dashBoard"><img
+									alt="Dash Board" src="/curium/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td>
 								
 							<td ><a target="_parent"
-								href="/noble/UserProcess/logout"><img
-									src="/noble/images/logout.svg" width="18" height="18" alt="Log Out" 
+								href="/curium/UserProcess/logout"><img
+									src="/curium/images/logout.svg" width="18" height="18" alt="Log Out"
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>

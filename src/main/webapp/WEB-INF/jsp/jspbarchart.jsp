@@ -13,11 +13,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Dash Board</title>
-        <script src="/noble/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/noble/css/bootstrap.min.css">
-        <script src="/noble/js/jquery.min.js"></script>
-        <script src="/noble/js/bootstrap.min.js"></script>
-        <script src="/noble/js/popper.min.js"></script>
+        <script src="/curium/js/Chart.min.js"></script>
+         <link rel="stylesheet" href="/curium/css/bootstrap.min.css">
+        <script src="/curium/js/jquery.min.js"></script>
+        <script src="/curium/js/bootstrap.min.js"></script>
+        <script src="/curium/js/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
@@ -51,7 +51,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/noble/UserProcess/sessionTimeOut");
+	response.sendRedirect("/curium/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -83,10 +83,10 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/noble/images/student.svg"  height="20" width="20"/>
+        						<img src="/curium/images/student.svg"  height="20" width="20"/>
         						<label id="labelname">Total Students </label>
         						<br>		
-        						<img src="/noble/images/teacher.svg" height="20" width="20"/>
+        						<img src="/curium/images/teacher.svg" height="20" width="20"/>
         						<label id="labelname">Total Teachers </label>
         					</td>
         					<td></td>
@@ -110,9 +110,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/noble/images/totalfees.svg" height="20" width="20"/>
+        						<img src="/curium/images/totalfees.svg" height="20" width="20"/>
         						<label id="labelname">Total Fees&nbsp;&nbsp;&nbsp;</label><br>
-        						<img src="/noble/images/monthlyfees.svg"  height="20" width="20"/>	
+        						<img src="/curium/images/monthlyfees.svg"  height="20" width="20"/>
         						<label id="labelname">${Currentmonth} Fees</label>
         					</td>
         					<td></td>
@@ -138,9 +138,9 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        					<img src="/noble/images/feespaid.svg" height="20" width="20"/>	
+        					<img src="/curium/images/feespaid.svg" height="20" width="20"/>
         						<label id="labelname">Total Fees Paid</label><br>
-        						<img src="/noble/images/feesdue.svg"  height="20" width="20"/>
+        						<img src="/curium/images/feesdue.svg"  height="20" width="20"/>
         						<label id="labelname">Total Fees Due&nbsp;</label>
         					</td>
         					<td></td>
@@ -166,10 +166,10 @@ for(Cookie cookie : cookies){
         					<td></td>
         					<td></td>
         					<td>
-        						<img src="/noble/images/todayscollection.svg" height="20" width="20"/>
+        						<img src="/curium/images/todayscollection.svg" height="20" width="20"/>
         						<label id="labelname">Today's Fees</label>
         						<br>		
-        						<img src="/noble/images/todaysexpenses.svg" height="20" width="20"/>	
+        						<img src="/curium/images/todaysexpenses.svg" height="20" width="20"/>
         						<label id="labelname">Today's Expenses</label>	
         					</td>
         					<td></td>
