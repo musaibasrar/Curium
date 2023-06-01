@@ -932,6 +932,7 @@ for(Cookie cookie : cookies){
                                         <label> <select name="academicyear" id="academicyear" required
 									 style="width: 184px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${currentAcademicYear}</option>
+										<option>2022/23</option>
 										<option>2021/22</option>
 										<option>2020/21</option>
 										<option>2019/20</option>
@@ -970,7 +971,7 @@ for(Cookie cookie : cookies){
                     <tr>
                     <td class="alignLeft" style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" class="myclass" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
                         
-                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" class="myclass" value="${dateoffeesDetails}" /></td>
+                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" class="myclass" value="${dateoffeesDetails}" readonly/></td>
                         
                     </tr>
                     

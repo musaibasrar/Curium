@@ -241,7 +241,7 @@ public class MessSuppliersService {
 			NumberFormat currency  = NumberFormat.getCurrencyInstance(indiaLocale);
 		        
 		        try {
-		        		String buffer = "<input name='balance'  type='text' class='textfieldvalues' id='balance' value="+currency.format(accountDetailsBalance.getCurrentbalance())+" style='font-size: 14px;' readonly>";
+		        		String buffer = "<input name='balance'  type='text' class='textfieldvalues' id='balance' value="+accountDetailsBalance.getCurrentbalance()+" style='font-size: 14px;' readonly>";
 		        	
 			        	response.getWriter().println(buffer);
 		        	

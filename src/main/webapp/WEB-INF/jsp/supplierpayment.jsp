@@ -699,7 +699,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/SupplierBalance/getSupplierBalance?supplierid="+selected,true);
+			xmlHttp.open("GET", "/roshan/SupplierBalance/getSupplierBalance?supplierid="+selected,true);
 			xmlHttp.send(null);
 		
 	}

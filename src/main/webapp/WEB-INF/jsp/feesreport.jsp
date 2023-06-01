@@ -600,6 +600,7 @@ for(Cookie cookie : cookies){
                                          <select name="academicyear" id="academicyear" onchange="getFeesCategory()" required
 									style="width: 120px">
 										<option selected>${currentAcademicYear}</option>
+										<option>2022/23</option>
 										<option>2021/22</option>
 										<option>2020/21</option>
 										<option>2019/20</option>

@@ -354,7 +354,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/noble/FeesProcess/otherfeesReport" style="font-size: 12px;">Other fees Report</a>
+            				 <a target="mainFrame" href="/roshan/FeesProcess/otherfeesReport" style="font-size: 12px;">Other fees Report</a>
             			</td>
             		</tr>
                 </table>
@@ -449,7 +449,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/riyan/MessItemsMoveProcess/billsReport" style="font-size: 12px;">Receipts Report</a>
+            				 <a target="mainFrame" href="/roshan/MessItemsMoveProcess/billsReport" style="font-size: 12px;">Receipts Report</a>
             			</td>
             		</tr>
                 </table>
