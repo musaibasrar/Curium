@@ -56,7 +56,7 @@ public class MessStockMoveAction {
     	new MessStockMoveService(request, response).viewStockEntryDetails();
     	
     	//Get Customers
-    	new StudentService(request, response).viewAllStudentsParents();
+    	new StudentService(request, response).viewStudentsParentsPerBranch();
 		
 		
 		
