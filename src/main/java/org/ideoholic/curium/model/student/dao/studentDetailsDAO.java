@@ -747,4 +747,25 @@ public class studentDetailsDAO {
 			return studentFeesStructure;
 		}
 	}
+	
+	public List<Object[]> readStudentsParentsPerBranch(int branchId) {
+		List<Object[]> results = new ArrayList<Object[]>();
+
+		try {
+			transaction = session.beginTransaction();
+
+			Query query = session
+					.createQuery("select s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from Student s JOIN Parents f ON s.sid=f.Student.sid where s.archive = 0 AND s.branchid="+branchId+" order by s.sid DESC").setCacheable(true).setCacheRegion("commonregion");
+			results = query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
 }
