@@ -309,7 +309,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form action="/bsr/EmployeeProcess/viewAllEmployee"
+	<form action="/roshan/EmployeeProcess/viewAllEmployee"
 		id="form1" method="POST" enctype="multipart/form-data">
 		<div>
 			<div id="tabs">

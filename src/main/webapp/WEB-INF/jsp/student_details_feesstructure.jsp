@@ -653,6 +653,11 @@ for(Cookie cookie : cookies){
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                              <button id="applyconcession">Apply Concession</button>  -->
                                              
+                                             <c:if test="${!(totalfeesconcession > 0)}">
+                                                     <button id="applyconcession">Apply Concession</button>
+                                             </c:if>
+                                             
+                                             
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                              <button id="print" onclick="window.location.href='/roshan/printstudentdetailsfeesstructure'">Print</button>
 

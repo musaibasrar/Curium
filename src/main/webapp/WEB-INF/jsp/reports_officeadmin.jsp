@@ -319,11 +319,11 @@ for(Cookie cookie : cookies){
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/roshan/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
-            		</tr> -->
+            		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
