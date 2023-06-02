@@ -15,7 +15,7 @@
 <html>
     <head >
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Please wait...</title> 
+        <title>Student Id Card</title> 
 
         <script type="text/javascript" language="JavaScript" src="/bsr/js/motionpack.js"></script>
         <link rel="stylesheet" href="/bsr/css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -320,8 +320,7 @@
                                 });
                             </script>
 
-    </head>
-      <%
+ <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -338,22 +337,7 @@ for(Cookie cookie : cookies){
 }
 %>
 
-    <!-- <style type="text/css">
-         
-         @media print {
-     body { font-size: 25px }
-     .hide { visibility: hidden }
-       }
-       
-   @media screen {
-     body { font-size: 13px }
-   }
-   
-         
-         
-     </style> -->
-
-    <style type="text/css">
+   <style type="text/css">
 
         @media print {
             .fontsize { font-size: 15px ;
@@ -388,11 +372,19 @@ for(Cookie cookie : cookies){
                 margin-right: 0px;
             }
         }
-        .card {
+ /*        .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    width: 5.5cm;
-    height: 8.5cm;
+    width: 8.5cm;
+    height: 13cm;
+    border-radius: 25px;
+    background: blue;
+} */
+
+       .card {
+    width: 11cm;
+    height: 7cm;
+    background: #FEE12B;
 }
 
 .card:hover {
@@ -400,104 +392,155 @@ for(Cookie cookie : cookies){
 }
 
 .container {
-    padding: 2px 16px;
+    padding: 1px 16px;
 }
+
+
+ .tableidcard {
+        border-spacing: 0px;
+        table-layout: fixed;
+        margin-left: auto;
+        margin-right: auto;
+        width: 310px;
+      }
+      .tdidcard {
+        font-size: 16px;
+      }
+      
+/* .containerschoolname {
+		padding: 2px 5px;
+} */
     </style>
 
+<style>
+    /* CSS to display tables side by side */
+    .table-container {
+      display: flex;
+      margin-bottom: 20px; /* Add a gap between table sets */
+    }
+    
+    .table-container table {
+      margin-right: 20px;
+    }
+    
+    /* CSS for table styling */
+    table {
+      border-collapse: collapse;
+      width: 300px;
+    }
+    
+    th, td {
+      border: none; /* Remove borders */
+      padding: 8px;
+      text-align: left;
+    }
+    
+    .vertical-line {
+      border-left: 2px solid #350c76; /* Add a vertical line */
+    }
+  </style>
+    </head>
+     
 
     <body class="bodymargin">
        
         <form action="/bsr/" method="post" id="form1" class="bodymargin">
-
-           
-            <div>
-
-
-
-                <table cellpadding="2"  border="0">
-
-                        <c:set var="iInitial" value="${iInitial}"/>
-                        <c:set var="limit" value="1"/>
+			
+			
+	     <c:set var="iInitial" value="${iInitial}"/>
+         <c:set var="limit" value="1"/>
                         
-                    <c:forEach begin="1" end="${endValue}">
+          <c:forEach begin="1" end="${endValue}">
                         <%!                        
                             int i = 1;
                         %>
+			<c:if test="${limit < iInitial}">
+			<div class="card" style="background-color: #FEE12B; width: 11cm; height: 7cm;border: 1px solid;border-radius: 5px;">
+  <div class="table-container" style="margin-bottom: 5px;">
+    <table>
+      <tr>
+        <td>
+          <img src="/bsr/images/idlogo.png" alt="Brainy Stars" width="180" height="70">
+        </td>
+      </tr>
+    </table>
 
-                        <tr>
-                            <c:if test="${limit < iInitial}">
-                            <td class="fontsize" >
-                         <div class="card">
-  								<img src="/bsr/images/logo.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
-  								</div>
-						</div>
-                            
-                            
-                            </td>
-                            <td></td>
-                            <td></td>
-                            </c:if>
-                            <c:set var="limit" value="${limit+1}"/>
-                            <% i = i + 1;%>
-                            <c:if test="${limit < iInitial}">
-                            <td  class="fontsize"> <div class="card">
-  								<img src="/bsr/images/logo.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Students Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" alt="Student's Photo" /> 
-  								</div>
-						</div></td>
-						 <td></td>
-                            <td></td>
-                            </c:if>
-                            <c:set var="limit" value="${limit+1}"/>
-                            <% i = i + 1;%>
-                            <c:if test="${limit < iInitial}">
-                            <td  class="fontsize"> <div class="card">
-  								<img src="/bsr/images/logo.jpg" alt="Avatar" style="width:100%">
-  								<div class="container">
-    							<h4>Student's Name:<%= request.getSession().getAttribute("studentname" + i + "")%></h4> 
-    							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "")%>" style="height:150px;width:100px;" alt="Student's Photo" />
-  								</div>
-						</div></td>
-                            </c:if>
-                        </tr>
-                        <% i = i + 1;%>
+    <table class="vertical-line">
+      <tr>
+        <td style="padding-left: 2px;">
+          ${branchname}<br>
+          ${branchaddress}<br>
+          Contact:${branchcontact}<br>
+          Email:thebrainystarsacademy@gmail.com<br>
+          Website:www.brainystars.com
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="table-container" style="padding-left: 10px;">
+    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 130%;">
+  <tr>
+    <td style="padding: 0;">&nbsp;&nbsp;Name</td>
+    <td style="padding: 0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("studentname" + i + "") %></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;Father's Name</td>
+    <td style="padding: 0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;Mother's Name</td>
+    <td style="padding: 0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("mothersname" + i + "") %></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;">&nbsp;&nbsp;Class</td>
+    <td style="padding: 0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;">&nbsp;&nbsp;Phone</td>
+    <td style="padding: 0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;">&nbsp;&nbsp;Address</td>
+    <td style="padding: 0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>
+  </tr>
+</table>
+
+
+    <table style="width: 70%;">
+      <tr>
+		<td style="background-color: green;border-radius: 5px;text-align: center;"><label style="color: #FEE12B;font-weight: bold;font-size: 12px;">Student ID</label></td>      
+      </tr>
+      <tr>
+        <td>
+          <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:100px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+  </c:if>
+   <% i = i + 1;%>
                         <c:set var="limit" value="${limit+1}"/>
                         
                     </c:forEach>
                     <% i = 1;%>
                     <c:set var="iInitial" value="1"/>
                         <c:set var="limit" value="1"/>
-                </table>
-
-                <table  width="70%"  id="table11" align="left">
+                   <table  width="70%"  id="table11" align="left">
                     <tr>
                         <td width="30%"> 
 
                         </td>
                         <td>
-                            <button id="print" type="button" style="background-image: url(/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                            <button id="print" type="button" style="background-image: url(/bsr/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
                                     this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
                         </td>
 
                     </tr>
 
-                </table>
-
-            </div>
-
-
-
-
-
-
-
-
-
+                </table>     
         </form>
     </body>
 </html>

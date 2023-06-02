@@ -184,7 +184,8 @@
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 5px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
 				<label class="addressLine" style="padding-left: 110px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact}<br> </label>
+				<label class="addressLine" style="padding-left: 115px;">Email:&nbsp;thebrainystarsacademy@gmail.com </label>
 				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
 				</td>
 			</tr>
@@ -366,7 +367,8 @@
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 5px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
 				<label class="addressLine" style="padding-left: 110px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact}<br> </label>
+				<label class="addressLine" style="padding-left: 115px;">Email:&nbsp;thebrainystarsacademy@gmail.com </label>
 				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
 				</td>
 			</tr>

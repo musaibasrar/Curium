@@ -233,6 +233,7 @@
 				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
 				<label class="addressLine" style="padding-left: 20px;">${branchaddress}</label><br>
 				<label class="addressLine" style="padding-left: 30px;">Contact:&nbsp;${branchcontact}</label><br>
+				<label class="addressLine" style="padding-left: 24px;">Email:&nbsp;thebrainystarsacademy@gmail.com </label><br>
 				<label class="addressLine" style="text-decoration: underline;">Fees Card</label><br>
 				<%-- <label class="addressLineTwo">${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;${issuedtoselected}&nbsp;&nbsp;${purposeselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp;
 				</label> --%>

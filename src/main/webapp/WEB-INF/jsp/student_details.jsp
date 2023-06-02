@@ -729,46 +729,46 @@ for(Cookie cookie : cookies){
                     
                         <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" >
                     </td>
                     <td>
-                    <a download="studentdoc1.jpg" href="/bsr/data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
-                    </td>
-                    <td>
-                    <a download="studentdoc2.jpg" href="/bsr/data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
+                    <a download="studentdoc1.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
                     </td>
                     </tr>
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" >
                     </td>
                     <td>
-                    <a download="studentdoc3.jpg" href="/bsr/data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
-                    </td>
-                    <td>
-                    <a download="studentdoc4.jpg" href="/bsr/data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
+                    <a download="studentdoc1.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
                     </td>
                     </tr>
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" >
                     </td>
                     <td>
-                    <a download="studentdoc5.jpg" href="/bsr/data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
+                    <a download="studentdoc1.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" >
+                    </td>
+                    <td>
+                    <a download="studentdoc1.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" >
+                    </td>
+                    <td>
+                    <a download="studentdoc1.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
                     </td>
                     </tr>
                     </table>

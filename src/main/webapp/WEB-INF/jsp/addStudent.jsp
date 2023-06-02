@@ -1476,7 +1476,7 @@
 
 								<tr>
 
-									<td class="alignLeft">Contact Number* &nbsp;</td>
+									<td class="alignLeft">Father Contact Number* &nbsp;</td>
 
 									<td><label> <input
 											name="contactnumber" type="text" class="myclass" required
@@ -1487,7 +1487,7 @@
 
 
 
-									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
+									<td class="alignLeft" style="padding-left: 20px;">Mother Contact Number
 										&nbsp;</td>
 
 									<td><label> <input

@@ -184,6 +184,7 @@
 				<label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
 				<label class="addressLine" style="padding-left: 40px;">${branchaddress}<br></label>
 				<label class="addressLine" style="padding-left: 25px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left: 43px;">Email:&nbsp;thebrainystarsacademy@gmail.com </label>
 				</td>
 			</tr>
 </table>
@@ -366,6 +367,7 @@
 				<label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
 				<label class="addressLine" style="padding-left: 40px;">${branchaddress}<br></label>
 				<label class="addressLine" style="padding-left: 25px;">Contact:&nbsp;${branchcontact} </label>
+				<label class="addressLine" style="padding-left: 43px;">Email:&nbsp;thebrainystarsacademy@gmail.com </label>
 				</td>
 			</tr>
 		</table>
