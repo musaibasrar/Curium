@@ -45,6 +45,12 @@ public class Teacher implements java.io.Serializable {
 	private String accno;
 	private String currentemployee;
 	private int userid;
+	private String employeephoto;
+	private String employeedoc1;
+	private String employeedoc2;
+	private String employeedoc3;
+	private String employeedoc4;
+	private String employeedoc5;
 
 	
 	
@@ -61,7 +67,8 @@ public class Teacher implements java.io.Serializable {
 			String classesteaching, String salary, String department,
 			String qualification, String totalexperience, String address,
 			String contactnumber, String email, String remarks, String gender,
-			String teacherexternalid, Date leavingdate, String bankname, String bankbranch, String bankifsc, String accno, String currentemployee, int userid
+			String teacherexternalid, Date leavingdate, String bankname, String bankbranch, String bankifsc, String accno, String currentemployee, int userid,String employeephoto,
+			String employeedoc1,String employeedoc2,String employeedoc3,String employeedoc4,String employeedoc5
 ) {
 		this.teachername = teachername;
 		this.designation = designation;
@@ -85,6 +92,12 @@ public class Teacher implements java.io.Serializable {
 		this.accno = accno;
 		this.currentemployee = currentemployee;
 		this.userid = userid;
+		this.employeephoto = employeephoto;
+		this.employeedoc1 = employeedoc1;
+		this.employeedoc2 = employeedoc2;
+		this.employeedoc3 = employeedoc3;
+		this.employeedoc4 = employeedoc4;
+		this.employeedoc5 = employeedoc5;
 	}
 
 	@Id
@@ -297,5 +310,53 @@ public class Teacher implements java.io.Serializable {
 
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+	
+	public String getEmployeephoto() {
+		return employeephoto;
+	}
+
+	public void setEmployeephoto(String employeephoto) {
+		this.employeephoto = employeephoto;
+	}
+	
+	public String getEmployeedoc1() {
+		return employeedoc1;
+	}
+
+	public void setEmployeedoc1(String employeedoc1) {
+		this.employeedoc1 = employeedoc1;
+	}
+
+	public String getEmployeedoc2() {
+		return employeedoc2;
+	}
+
+	public void setEmployeedoc2(String employeedoc2) {
+		this.employeedoc2 = employeedoc2;
+	}
+
+	public String getEmployeedoc3() {
+		return employeedoc3;
+	}
+
+	public void setEmployeedoc3(String employeedoc3) {
+		this.employeedoc3 = employeedoc3;
+	}
+
+	public String getEmployeedoc4() {
+		return employeedoc4;
+	}
+
+	public void setEmployeedoc4(String employeedoc4) {
+		this.employeedoc4 = employeedoc4;
+	}
+
+	public String getEmployeedoc5() {
+		return employeedoc5;
+	}
+
+	public void setEmployeedoc5(String employeedoc5) {
+		this.employeedoc5 = employeedoc5;
 	}
 }
