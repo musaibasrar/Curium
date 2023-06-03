@@ -94,7 +94,7 @@ public class ImportFileService {
 						student.setAdmissiondate(DateUtil.simpleDateParser(
 								(row.getCell(19).getStringCellValue()) + "/" + (row.getCell(20).getStringCellValue())
 										+ "/" + (row.getCell(21).getStringCellValue())));
-						student.setClassstudying(row.getCell(8).getStringCellValue()+"--"+row.getCell(49).getStringCellValue());
+						student.setClassstudying(row.getCell(8).getStringCellValue()+"--");
 						
 						// student.setClassadmittedin(row.getCell(9).getStringCellValue());
 						student.setBloodgroup(row.getCell(9).getStringCellValue());
@@ -102,7 +102,7 @@ public class ImportFileService {
 						student.setReligion(row.getCell(11).getStringCellValue());
 						student.setStudentscaste(row.getCell(12).getStringCellValue());
 						student.setNationality(row.getCell(13).getStringCellValue());
-						student.setStudentscastecertno(row.getCell(14).getStringCellValue());
+						student.setSts(row.getCell(14).getStringCellValue());
 						// student.setSecondlanguage(row.getCell(15).getStringCellValue());
 						student.setCreateddate(DateUtil.simpleDateParser(
 								(row.getCell(22).getStringCellValue()) + "/" + (row.getCell(23).getStringCellValue())

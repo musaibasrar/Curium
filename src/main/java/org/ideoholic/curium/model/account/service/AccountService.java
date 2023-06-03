@@ -817,10 +817,12 @@ public class AccountService {
 		BigDecimal creditAcc = BigDecimal.ZERO;
 		
 		for (VoucherEntrytransactions voucherTransaction : voucherTransactions) {
-			
-			if(voucherTransaction.getDraccountid() == accountDetails.getAccountdetailsid()) {
+			int drAccountid = voucherTransaction.getDraccountid();
+			int crAccountid = voucherTransaction.getCraccountid();
+			int acccountId = accountDetails.getAccountdetailsid(); 
+			if(drAccountid == acccountId) {
 				debitAcc = debitAcc.add(voucherTransaction.getDramount());
-			}else if(voucherTransaction.getCraccountid() == accountDetails.getAccountdetailsid()) {
+			}else if(crAccountid == acccountId) {
 				creditAcc = creditAcc.add(voucherTransaction.getCramount());
 			}
 		}

@@ -357,9 +357,6 @@ public class JspController {
 		return "printReceiptFeesDetail";
 	}
 	
-	@GetMapping("/importfile")
-	public String getImportfile() {
-		return "importfile";
 	@GetMapping("/billsreport")
 	public String getBillsreport() {
 		return "billsreport";

@@ -199,7 +199,7 @@ public class StampFeesService {
 
 		String[] feesCategoryIds = request.getParameterValues("feesIDS");
 		String[] feesAmount = request.getParameterValues("fessFullCat");
-		String[] concession = request.getParameterValues("feesConcession");
+		//String[] concession = request.getParameterValues("feesConcession");
 		String[] totalInstallments = request.getParameterValues("feesCount");
 		
 		List<Integer> ids = new ArrayList();
@@ -236,7 +236,7 @@ public class StampFeesService {
 			studentfeesstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
-			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));
+			studentfeesstructure.setConcession(0);
 			listOfstudentfeesstructure.add(studentfeesstructure);
 		}
 			
