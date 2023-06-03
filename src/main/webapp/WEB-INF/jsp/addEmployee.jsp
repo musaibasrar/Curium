@@ -540,7 +540,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/shadaan/PersonalProcess/add" method="post">
+	<form id="form1" method="post" enctype="multipart/form-data">
 		
 		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		
@@ -550,6 +550,7 @@ for(Cookie cookie : cookies){
 				
 				<ul>
 					<li><a href="#tabs-1">Staff Details</a></li>
+					<li><a href="#tabs-4">Upload Documents</a></li>
 					<li><a href="#tabs-2">Bank Details</a></li>
 					<li><a href="#tabs-3">Additional Details</a></li>
 				</ul>
@@ -890,6 +891,116 @@ for(Cookie cookie : cookies){
 					</table>
 					</div>
 					
+					<div id="tabs-4">
+							<table width="100%" border="0" align="center">
+								<tr>
+									<td><br /> <input type="file" name="fileToUpload"
+										id="fileToUpload" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 1</label><br /> <input type="file" name="fileToUpload"
+										id="employeedoc1" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 2</label><br /> <input type="file" name="fileToUpload"
+										id="employeedoc2" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 3</label><br /> <input type="file" name="fileToUpload"
+										id="employeedoc3" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 4</label><br /> <input type="file" name="fileToUpload"
+										id="employeedoc4" accept="image/*"></td>
+								</tr>
+								
+								<tr>
+								<td></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Doc 5</label><br /> <input type="file" name="fileToUpload"
+										id="employeedoc5" accept="image/*"></td>
+								</tr>
+
+
+							</table>
+
+
+
+							<div>
+								<table width="100%">
+									<tr>
+
+										<td><br /></td>
+									</tr>
+
+									<tr>
+										<td></td><td></td>		
+										<td align="center">
+										<a class="nexttab"
+											style="font-weight: bold; color: #325F6D; font-size: 13px"
+											href="#">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;
+										<a class="prevtab"
+											style="font-weight: bold; color: #325F6D; font-size: 13px"
+											href="#">Previous</a></td>
+									</tr>
+									
+									
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td></td><td></td>
+									<td>
+										<button id="save" class="save" onmouseover="validateNameContact();">Save</button>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="cancel" class="cancel">Cancel</button>
+
+									</td>
+								</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+								</table>
+
+							</div>
+
+						</div>
 					
 					</div>
 					
