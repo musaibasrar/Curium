@@ -6,6 +6,7 @@ package org.ideoholic.curium.model.printids.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.printids.service.PrintIdsService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,4 +68,17 @@ public class PrintIdsAction {
 		new PrintIdsService(request, response).printMultiple();
 		return "printpreview";
 	}
+	
+	@GetMapping("/generateIdsEmployees")
+	public String generateIdsEmployees() {
+		 new EmployeeService(request, response).ViewAllEmployee();
+		return "generateidsemployee";
+	}
+	
+	@PostMapping("/printpreviewemployee")
+	public String printpreviewemployee() {
+		 new EmployeeService(request, response).printMultipleEmployees();
+		 return "printpreviewemployee";
+	}
+	
 }
