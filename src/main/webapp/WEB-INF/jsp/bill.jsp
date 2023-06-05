@@ -299,7 +299,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${billgrandtotal}" /></td>
+				<td class="headerText" style="padding-left: 400px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${billgrandtotal}" /></td>
 			</tr>
 			
 			</table>
@@ -381,49 +381,43 @@
 			<tr >
 			
 				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
-					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
+					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${billdetailsstudentname}" /></label>
 				</td>
-			
-				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
+				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
+					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${billdetailsfathername}" /></label>
 				</td>
-				
-
-				
-
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
-						value="${recieptinfo.branchreceiptnumber}" /> 
-				</td>
-				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
-				</td>
-
 			</tr>
 			<tr>
 			<td></td>
 			</tr>
-			<tr style="font-size: 20px;">
-			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
-					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
-				</td>
-			
+			<tr>
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
+					Class:&nbsp;<c:out value="${billdetailsclassstudying}" />
 				</td>
 
-			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
-						value="${recieptdate}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Date:&nbsp;<c:out
+						value="${billdetailstransactiondate}" />
 				</td>
-				
 				<td></td>
 			</tr>
 
 			<tr>
 			<td></td>
-			
+			</tr>
+			<tr>
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Receipt No:&nbsp;<c:out
+						value="${billno}" /> 
+				</td>
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Year:&nbsp;<c:out value="${currentAcademicYear}" />
+				</td>
+				<td></td>
+			</tr>
+
+			<tr>
+			<td></td>
 			</tr>
 			<tr>
 			<td></td>
-			
 			</tr>
 
 		</table>
@@ -455,17 +449,16 @@
 			</tr>
 
 
-			<c:forEach items="${feescatmap}" var="feescatmap">
+			<c:forEach items="${billdetails}" var="feescatmap">
 				<tr>
 					<td class="dataText"><c:out
-							value="${feescatmap.key}" /></td>
+							value="${feescatmap.itemname}" /></td>
 					<td class="dataText">Rs. <c:out
-							value="${feescatmap.value}" /></td>
+							value="${feescatmap.salesprice}" /></td>
 					
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-			
 			</table>
 			
 			
@@ -482,12 +475,12 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 400px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${billgrandtotal}" /></td>
 			</tr>
 			
 			</table>
 			
-		<TABLE width="100%" border="0">
+		<%-- <TABLE width="100%" border="0">
 			<tr>
 			
 			<td><hr width="100%"></td>
@@ -513,11 +506,11 @@
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
-			</table>
+			</table> --%>
 			
 			<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></label></td>
+		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${billdetailstotaltotal}" /><c:out value="${duplicate}" /></label></td>
 		</tr>
 
 		<tr style="font-size: 10px;">
@@ -527,8 +520,8 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
-		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${recieptdate}</td>
+		<%-- <td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
+		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${recieptdate}</td> --%>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
