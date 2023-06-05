@@ -174,7 +174,7 @@ for(Cookie cookie : cookies){
 									src="/akshara/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/akshara/reports_officeadmin"><img
+								<a target="leftFrame" href="/akshara/reports"><img
 									src="/akshara/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
