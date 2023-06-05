@@ -101,9 +101,10 @@ public class PrintIdsService {
                if (parentsDetails != null) {
                    httpSession.setAttribute("studentname" + i + "", parentsDetails.getStudent().getName());
                    httpSession.setAttribute("fathersname" + i + "", parentsDetails.getFathersname());
-                   httpSession.setAttribute("class" + i + "", parentsDetails.getClass());
-                   httpSession.setAttribute("Address" + i + "", parentsDetails.getAddresspermanent());
-                   httpSession.setAttribute("Contactnumber" + i + "", parentsDetails.getContactnumber());
+                   httpSession.setAttribute("mothersname" + i + "", parentsDetails.getMothersname());
+                   httpSession.setAttribute("classsection" + i + "", parentsDetails.getStudent().getClassstudying());
+                   httpSession.setAttribute("contactnumber" + i + "", parentsDetails.getContactnumber());
+                   httpSession.setAttribute("address" + i + "", parentsDetails.getAddresspermanent());
                    httpSession.setAttribute("studentpic" + i + "",parentsDetails.getStudent().getStudentpic());
                    
                    //result = true;
