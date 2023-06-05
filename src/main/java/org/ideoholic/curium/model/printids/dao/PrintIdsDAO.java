@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-
+import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.mess.card.dto.Card;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.util.DateUtil;
@@ -74,5 +74,24 @@ public boolean updateCardValidity(List<Card> cardList) {
 		 }
 		return result;
 	}
+
+
+public Teacher printMultipleIdsEmployee(String id) {
+	Teacher teacherDetails = new Teacher();
+    
+    try {
+         transaction = session.beginTransaction();
+                 int sid = Integer.valueOf(id);
+                 Query query = session.createQuery("From Teacher as teacher where teacher.tid=" + sid);
+                 teacherDetails = (Teacher) query.uniqueResult();
+         transaction.commit();
+     } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+         
+         hibernateException.printStackTrace();
+     } finally {
+			HibernateUtil.closeSession();
+		}	      
+     return teacherDetails;
+}
 
 }
