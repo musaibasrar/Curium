@@ -409,4 +409,15 @@ public class JspController {
 	public String getOtherFeesCollectionDetails() {
 		return "otherfeesCollectionDetails";
 	}
+	
+	@GetMapping("/generateidsemployee")
+	public String getGenerateidsemployee() {
+		return "generateidsemployee";
+	}
+	
+	@GetMapping("/printpreviewemployee")
+	public String getPrintpreviewemployee() {
+		return "printpreviewemployee";
+	}
+	
 }
