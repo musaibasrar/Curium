@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 @RequestMapping("/EmployeeProcess")
@@ -38,9 +41,10 @@ public class EmployeeAction {
 		return viewEmployee();
 	}
 
-	@PostMapping("/updateEmployee")
-	public String updateEmployee() {
-		request.setAttribute("id", new EmployeeService(request, response).updateEmployee());
+	@RequestMapping(value = "/updateEmployee", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public String updateEmployee(MultipartHttpServletRequest request,
+			@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
+		request.setAttribute("id", new EmployeeService(request, response).updateEmployee(uploadedFiles));
 		return viewDetails();
 	}
 
@@ -66,9 +70,10 @@ public class EmployeeAction {
 		return "viewAllEmployee";
 	}
 
-	@PostMapping("/addEmployee")
-	public String addEmployee() {
-		if (new EmployeeService(request, response).addEmployee()) {
+	@RequestMapping(value = "/addEmployee", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public String addEmployee(MultipartHttpServletRequest request,
+			@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
+		if (new EmployeeService(request, response).addEmployee(uploadedFiles)) {
 			return "Employeesaved";
 		} else {
 			return "EmployeenotSaved";
