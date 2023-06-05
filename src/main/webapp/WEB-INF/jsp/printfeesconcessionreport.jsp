@@ -218,23 +218,22 @@
 <body style="text-align: center" class="bodymargin">
 <c:set var="itemTotal" value="${0}" />
 	<form method="post" class="bodymargin">
-		<table width="100%" style="border-collapse: collapse;">
+	
+	<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="center">
-				<img src="/lilyrose/images/lilyrose.jpg" width="150" height="50"/>
-				</td>
-				<td class="dataTextBoldCenter" style="width: 100%">
-				
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 20px;">${branchaddress}</label><br>
-				<label class="addressLine" style="padding-left: 30px;">Contact:&nbsp;${branchcontact}</label><br>
+				<td><img src="/lilyrose/images/lilyrose.jpg" width="100" height="100"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine" style="font-size: 13px;">Preprimary | Primary | High School<br></label>
+				<label class="addressLine" style="font-size: 13px;">Recognised by Govt of Karnataka<br></label>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				<label class="addressLine" style="text-decoration: underline;">Concession Report</label><br>
-				<%-- <label class="addressLineTwo">${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;${issuedtoselected}&nbsp;&nbsp;${purposeselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp;
-				</label> --%>
 				</td>
 			</tr>
-	</table>
-
+		</table>
+		
 			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
 

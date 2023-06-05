@@ -178,10 +178,12 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center" style="padding-left: 140px;">
-				<img src="/lilyrose/images/lilyrose.jpg" width="70" height="70"/>
+				<img src="/lilyrose/images/lilyrose.jpg" width="90" height="90"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 55px;font-size: 13px;">Preprimary | Primary | High School<br></label>
+				<label class="addressLine" style="padding-left: 58px;font-size: 13px;">Recognised by Govt of Karnataka<br></label>
 				<label class="addressLine" style="padding-left: 15px;">${branchaddress}<br></label>
 				<label class="addressLine" style="padding-left: 20px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
@@ -363,6 +365,8 @@
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 55px;font-size: 13px;">Preprimary | Primary | High School<br></label>
+				<label class="addressLine" style="padding-left: 58px;font-size: 13px;">Recognised by Govt of Karnataka<br></label>
 				<label class="addressLine" style="padding-left: 15px;">${branchaddress}<br></label>
 				<label class="addressLine" style="padding-left: 20px;">Contact:&nbsp;${branchcontact} </label>
 				</td>

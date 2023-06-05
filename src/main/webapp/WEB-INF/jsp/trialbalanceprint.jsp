@@ -208,19 +208,24 @@
 
 <body style="text-align: center" class="bodymargin">
 	<form method="post" class="bodymargin">
-		<table width="100%" style="border-collapse: collapse;">
+		
+		
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="center">
-				<img src="/lilyrose/images/shaheenlogo.png" width="150" height="80"/>
-				</td>
-				<td class="dataTextBoldCenter" style="width: 100%">
-				${branchname}<br><br>
+				<td><img src="/lilyrose/images/lilyrose.jpg" width="100" height="100"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine" style="font-size: 13px;">Preprimary | Primary | High School<br></label>
+				<label class="addressLine" style="font-size: 13px;">Recognised by Govt of Karnataka<br></label>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				<label class="addressLine">Trial Balance</label><br>
 				 From Date: ${fromdatetb}&nbsp;&nbsp;&nbsp;To Date: ${todatetb}
 				</td>
 			</tr>
-	</table>
-
+		</table>
+		
 				<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
 

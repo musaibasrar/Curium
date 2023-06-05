@@ -259,9 +259,11 @@ for(Cookie cookie : cookies){
          <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/lilyrose/images/lilyrose.jpg" width="140" height="70"/></td>
+				<td><img src="/lilyrose/images/lilyrose.jpg" width="90" height="90"/></td>
 				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname} - ${branchcode}</label><br>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine" style="font-size: 13px;">Preprimary | Primary | High School<br></label>
+				<label class="addressLine" style="font-size: 13px;">Recognised by Govt of Karnataka<br></label>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
@@ -339,7 +341,7 @@ for(Cookie cookie : cookies){
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><img src="/lilyrose/images/lilyrose.jpg" width="100" height="50"/></td>
+							<td></td>
 						</tr>
 				<tr>
 				<td></td>

@@ -234,18 +234,19 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${markssheetlist}" var="Parents">
                         
                         <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
-                        	<table style="page-break-inside: avoid;border-collapse: collapse;">
+                        	<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td style="padding-left: 200px;"><img src="/lilyrose/images/lilyroseheader.png" width="100" height="80"/></td>
+				<td><img src="/lilyrose/images/lilyrose.jpg" width="80" height="80"/></td>
 				<td>
-				<label class="dataTextBoldCenter">${branchname}</label><br>
-				<label class="addressLine">${branchaddress}</label>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine" style="font-size: 13px;">Preprimary | Primary | High School<br></label>
+				<label class="addressLine" style="font-size: 13px;">Recognised by Govt of Karnataka<br></label>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
 			</tr>
-			<tr>
-			<td></td></tr>
-			<tr></tr>
-</table>
+		</table>
 
 			<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
                 <tr>

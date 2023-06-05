@@ -175,23 +175,24 @@
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
+		
+		
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 10px;">
-				<img src="/lilyrose/images/lilyrose.jpg" width="90" height="60"/>
+				<td align="center" style="padding-left: 140px;">
+				<img src="/lilyrose/images/lilyrose.jpg" width="90" height="90"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label><br>
+				<label class="dataTextBoldCenter" style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 55px;font-size: 13px;">Preprimary | Primary | High School<br></label>
+				<label class="addressLine" style="padding-left: 58px;font-size: 13px;">Recognised by Govt of Karnataka<br></label>
+				<label class="addressLine" style="padding-left: 15px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 20px;">Contact:&nbsp;${branchcontact} </label><br>
 				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
 				</td>
-				<td align="left" style="padding-right: 10px;">
-				<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="90" height="60">
-				</td> 
 			</tr>
 </table>
-
+		
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
                     <td colspan="4" ></td>
@@ -362,18 +363,17 @@
 		<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 10px;">
-				<img src="/lilyrose/images/lilyrose.jpg" width="90" height="60"/>
+				<td align="center" style="padding-left: 140px;">
+				<img src="/lilyrose/images/lilyrose.jpg" width="90" height="90"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label><br>
+				<label class="dataTextBoldCenter" style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 55px;font-size: 13px;">Preprimary | Primary | High School<br></label>
+				<label class="addressLine" style="padding-left: 58px;font-size: 13px;">Recognised by Govt of Karnataka<br></label>
+				<label class="addressLine" style="padding-left: 15px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 20px;">Contact:&nbsp;${branchcontact} </label><br>
 				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
 				</td>
-				<td align="left" style="padding-right: 10px;">
-				<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="90" height="60">
-				</td> 
 			</tr>
 </table>
 

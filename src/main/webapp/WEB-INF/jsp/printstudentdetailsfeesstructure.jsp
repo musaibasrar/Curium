@@ -223,19 +223,19 @@
         <jsp:useBean id="now" class="java.util.Date" />
         <fmt:formatDate var="today" type="date" value="${now}" />
         <form  method="post" id="form1">
-		<table width="100%" style="border-collapse: collapse;">
+        
+        <table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="center">
-				<img src="/lilyrose/images/lilyrose.jpg" width="90" height="60"/>
-				</td>
-				<td class="dataTextBoldCenter" style="width: 100%">
-				
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 20px;">${branchaddress}</label><br>
-				<label class="addressLine" style="padding-left: 30px;">Contact:&nbsp;${branchcontact}</label><br>
-				<label class="addressLine" style="text-decoration: underline;">Fees Card</label><br>
-				<%-- <label class="addressLineTwo">${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;${issuedtoselected}&nbsp;&nbsp;${purposeselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp;
-				</label> --%>
+				<td align="center" style="padding-left: 140px;">
+				<img src="/lilyrose/images/lilyrose.jpg" width="110" height="110"/>
+				</td> 
+				<td style="width: 100%;" align="left">
+				<label class="dataTextBoldCenter" style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 40px;font-size: 13px;">Preprimary | Primary | High School<br></label>
+				<label class="addressLine" style="padding-left: 43px;font-size: 13px;">Recognised by Govt of Karnataka<br></label>
+				<label class="addressLine" style="padding-left: 15px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 20px;">Contact:&nbsp;${branchcontact} </label><br>
+				<label class="addressLine" style="padding-left: 110px;text-decoration: underline;">Fees Card</label><br>
 				</td>
 			</tr>
 		</table>

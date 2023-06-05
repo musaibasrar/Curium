@@ -177,15 +177,17 @@
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+			
+			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 50px;">
-				<img src="/lilyrose/images/lilyrose.jpg" width="110" height="60"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
+				<td><img src="/lilyrose/images/lilyrose.jpg" width="90" height="90"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine" style="font-size: 13px;">Preprimary | Primary | High School<br></label>
+				<label class="addressLine" style="font-size: 13px;">Recognised by Govt of Karnataka<br></label>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
 			</tr>
 		</table>
@@ -353,15 +355,16 @@
 		</div>
 		<br>
 		<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 50px;">
-				<img src="/lilyrose/images/lilyrose.jpg" width="110" height="60"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
+				<td><img src="/lilyrose/images/lilyrose.jpg" width="90" height="90"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine" style="font-size: 13px;">Preprimary | Primary | High School<br></label>
+				<label class="addressLine" style="font-size: 13px;">Recognised by Govt of Karnataka<br></label>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
 			</tr>
 		</table>
