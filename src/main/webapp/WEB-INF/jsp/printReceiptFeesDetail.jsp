@@ -175,21 +175,33 @@
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
-			
-			<table width="100%" style="border-collapse: collapse;">
+		
+		
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 10px;">
-				<img src="/bsr/images/bsr.jpg" width="120" height="60"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 5px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 110px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact}<br> </label>
-				<label class="addressLine" style="padding-left: 115px;">Email:&nbsp;thebrainystarsacademy@gmail.com </label>
+				<td><img src="/iica/images/iica.jpg" width="100" height="95"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<c:if test="${not empty branchaddress1}">
+				<label class="addressLine">${branchaddress1}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress2}">
+				<label class="addressLine">${branchaddress2}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress3}">
+				<label class="addressLine">${branchaddress3}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress4}">
+				<label class="addressLine">${branchaddress4}<br></label>
+				</c:if>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
 				</td>
 			</tr>
-</table>
+		</table>
+			
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -306,7 +318,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 400px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -352,27 +364,37 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/bsr/images/bsrpaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/iica/images/iicapaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
 		</div>
 		<br>
 		<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 10px;">
-				<img src="/bsr/images/bsr.jpg" width="120" height="60"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 5px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 110px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact}<br> </label>
-				<label class="addressLine" style="padding-left: 115px;">Email:&nbsp;thebrainystarsacademy@gmail.com </label>
+				<td><img src="/iica/images/iica.jpg" width="100" height="95"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<c:if test="${not empty branchaddress1}">
+				<label class="addressLine">${branchaddress1}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress2}">
+				<label class="addressLine">${branchaddress2}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress3}">
+				<label class="addressLine">${branchaddress3}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress4}">
+				<label class="addressLine">${branchaddress4}<br></label>
+				</c:if>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
 				</td>
 			</tr>
-</table>
+		</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -490,7 +512,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 400px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -536,7 +558,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/bsr/images/bsrpaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/iica/images/iicapaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>

@@ -70,6 +70,10 @@ public class UserService {
             httpSession.setAttribute("branchname",login.getBranch().getBranchname());
             httpSession.setAttribute("branchcode",login.getBranch().getBranchcode());
             httpSession.setAttribute("branchaddress",login.getBranch().getAddress());
+            httpSession.setAttribute("branchaddress1",login.getBranch().getAddress1());
+            httpSession.setAttribute("branchaddress2",login.getBranch().getAddress2());
+            httpSession.setAttribute("branchaddress3",login.getBranch().getAddress3());
+            httpSession.setAttribute("branchaddress4",login.getBranch().getAddress4());
             httpSession.setAttribute("branchcontact",login.getBranch().getContact());
             
             String[] userType = login.getUsertype().split("-");

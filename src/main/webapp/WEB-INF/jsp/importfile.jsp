@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<form id="form1" action="/bsr/ImportProcess/readFile" method="post"  enctype="multipart/form-data">
+<form id="form1" action="/iica/ImportProcess/readFile" method="post"  enctype="multipart/form-data">
 <table width="100%" border="0" align="center">
 <tr>								
 <td><br /><br />

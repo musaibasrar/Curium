@@ -20,5 +20,17 @@
          <property name="contact" type="string">
             <column name="contact" length="200" />
         </property>
+        <property name="address1" type="string">
+            <column name="address1" length="500" />
+        </property>
+        <property name="address2" type="string">
+            <column name="address2" length="500" />
+        </property>
+        <property name="address3" type="string">
+            <column name="address3" length="500" />
+        </property>
+        <property name="address4" type="string">
+            <column name="address4" length="500" />
+        </property>
     </class>
 </hibernate-mapping>

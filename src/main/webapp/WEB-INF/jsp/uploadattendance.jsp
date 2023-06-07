@@ -16,15 +16,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/bsr/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/bsr/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/bsr/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/bsr/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/iica/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/iica/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/iica/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/iica/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/iica/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/iica/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/iica/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/iica/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/iica/js/datePicker/ui/jquery.ui.button.js"></script>
         
         
         
@@ -67,7 +67,7 @@
 
             function ViewAll(){
                 var form1=document.getElementById("form1");
-                form1.action="/bsr/PersonalProcess/viewAll";
+                form1.action="/iica/PersonalProcess/viewAll";
                 form1.submit();
             }
         </script>
@@ -76,7 +76,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/iica/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -91,7 +91,7 @@ for(Cookie cookie : cookies){
     <body background="/images/bg.jpg" >
 
 
-        <form action="/bsr/AttendanceProcess/uploadAttendanceFile" method="post" enctype="multipart/form-data">
+        <form action="/iica/AttendanceProcess/uploadAttendanceFile" method="post" enctype="multipart/form-data">
                 
         
     <table height="400" class="tableCSS"  >

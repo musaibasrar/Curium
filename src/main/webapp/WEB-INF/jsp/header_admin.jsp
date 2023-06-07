@@ -14,10 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/bsr/css/bootstrap.min.css">
-        <script src="/bsr/js/jquery.min.js"></script>
-        <script src="/bsr/js/bootstrap.min.js"></script>
-        <script src="/bsr/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/iica/css/bootstrap.min.css">
+        <script src="/iica/js/jquery.min.js"></script>
+        <script src="/iica/js/bootstrap.min.js"></script>
+        <script src="/iica/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -92,7 +92,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/bsr/UserProcess/logout";
+                form1.action="/iica/UserProcess/logout";
                 form1.submit();
             }
 
@@ -102,7 +102,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/iica/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -125,84 +125,84 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/bsr/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
+								<a target="mainFrame" href="/iica/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/bsr/images/bsrheader.png"
+							<!-- <td align="left"><img src="/iica/images/iicaheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/bsr/left_admin"> <img
-									src="/bsr/images/home.svg" width="18" height="18" 
+							<td><a target="leftFrame" href="/iica/left_admin"> <img
+									src="/iica/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="/bsr/FeesProcess/feesCollect"> <img
-									src="/bsr/images/feescollect.svg" width="18" height="18"
+								href="/iica/FeesProcess/feesCollect"> <img
+									src="/iica/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
 							<td>
 								<a target="mainFrame"
-								href="/bsr/AccountProcess/createVoucher"> <img
-									src="/bsr/images/createvoucher.svg" width="18" height="18"
+								href="/iica/AccountProcess/createVoucher"> <img
+									src="/iica/images/createvoucher.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/bsr/feesCollectionDetails"><img  alt="Fees Details" src="/bsr/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+							<!-- <td ><a target="mainFrame" href="/iica/feesCollectionDetails"><img  alt="Fees Details" src="/iica/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
-								href="/bsr/StudentProcess/addNew"> <img
-									src="/bsr/images/student_header.svg" width="18" height="18"
+								href="/iica/StudentProcess/addNew"> <img
+									src="/iica/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/bsr/leftsettings">
-									<img alt="Settings" src="/bsr/images/settings.svg" width="18"
+							<td ><a target="leftFrame" href="/iica/leftsettings">
+									<img alt="Settings" src="/iica/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
 							<td ><a target="mainFrame"
-								href="/bsr/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/bsr/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+								href="/iica/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/iica/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
 
-							<td ><!-- <a target="mainFrame" href="/bsr/sendsms"><img
-									src="/bsr/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+							<td ><!-- <a target="mainFrame" href="/iica/sendsms"><img
+									src="/iica/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/bsr/reports"><img
-									src="/bsr/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+								<a target="leftFrame" href="/iica/reports"><img
+									src="/iica/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
 								
-								<!-- <a target="leftFrame" href="/bsr/reports_officeadmin"><img
-									src="/bsr/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+								<!-- <a target="leftFrame" href="/iica/reports_officeadmin"><img
+									src="/iica/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a> -->
 							
 							</td>
 
 							<td ><a target="mainFrame"
-								href="/bsr/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/bsr/images/students.svg" width="18"
+								href="/iica/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/iica/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/bsr/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/bsr/images/dashboard.svg" width="18"
+								href="/iica/UserProcess/dashBoard"><img
+									alt="Dash Board" src="/iica/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td>
 								
 							<td ><a target="_parent"
-								href="/bsr/UserProcess/logout"><img
-									src="/bsr/images/logout.svg" width="18" height="18" alt="Log Out" 
+								href="/iica/UserProcess/logout"><img
+									src="/iica/images/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>

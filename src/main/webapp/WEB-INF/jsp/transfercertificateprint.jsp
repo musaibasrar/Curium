@@ -167,9 +167,9 @@ span{
             }
         }
     </style>
-	<script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/bsr/js/print/jquery.printPage.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/iica/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/iica/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/iica/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {
@@ -316,7 +316,7 @@ span{
 			
 		</TABLE>
 		
-		<%-- <a id="print" href="/bsr/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
+		<%-- <a id="print" href="/iica/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
 	</form>
 	
 	

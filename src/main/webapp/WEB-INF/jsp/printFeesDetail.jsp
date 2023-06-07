@@ -175,19 +175,29 @@
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 110px;">
-				<img src="/bsr/images/bsr.jpg" width="80" height="80"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 40px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 25px;">Contact:&nbsp;${branchcontact} </label>
-				<label class="addressLine" style="padding-left: 43px;">Email:&nbsp;thebrainystarsacademy@gmail.com </label>
+				<td><img src="/iica/images/iica.jpg" width="100" height="95"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<c:if test="${not empty branchaddress1}">
+				<label class="addressLine">${branchaddress1}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress2}">
+				<label class="addressLine">${branchaddress2}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress3}">
+				<label class="addressLine">${branchaddress3}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress4}">
+				<label class="addressLine">${branchaddress4}<br></label>
+				</c:if>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				</td>
 			</tr>
-</table>
+		</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -304,7 +314,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 400px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -358,16 +368,26 @@
 		</div>
 		<br>
 		<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 110px;">
-				<img src="/bsr/images/bsr.jpg" width="80" height="80"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 40px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 25px;">Contact:&nbsp;${branchcontact} </label>
-				<label class="addressLine" style="padding-left: 43px;">Email:&nbsp;thebrainystarsacademy@gmail.com </label>
+				<td><img src="/iica/images/iica.jpg" width="100" height="95"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<c:if test="${not empty branchaddress1}">
+				<label class="addressLine">${branchaddress1}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress2}">
+				<label class="addressLine">${branchaddress2}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress3}">
+				<label class="addressLine">${branchaddress3}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress4}">
+				<label class="addressLine">${branchaddress4}<br></label>
+				</c:if>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				</td>
 			</tr>
 		</table>
@@ -488,7 +508,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 400px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>

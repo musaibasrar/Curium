@@ -219,7 +219,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/iica/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -241,12 +241,23 @@ for(Cookie cookie : cookies){
          <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/bsr/images/bsr.jpg" width="80" height="80"/></td>
+				<td><img src="/iica/images/iica.jpg" width="100" height="95"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
+				<c:if test="${not empty branchaddress1}">
+				<label class="addressLine">${branchaddress1}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress2}">
+				<label class="addressLine">${branchaddress2}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress3}">
+				<label class="addressLine">${branchaddress3}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress4}">
+				<label class="addressLine">${branchaddress4}<br></label>
+				</c:if>
 				<label class="addressLine">Contact: ${branchcontact}</label><br>
-				<label class="addressLine">Email:&nbsp;thebrainystarsacademy@gmail.com </label>
 				</td>
 				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
 			</tr>
@@ -334,7 +345,7 @@ for(Cookie cookie : cookies){
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><img src="/bsr/images/bsrhallticketsign.jpg" width="100" height="50"/></td>
+							<td><img src="/iica/images/iicahallticketsign.jpg" width="100" height="50"/></td>
 						</tr>
 				<tr>
 				<td></td>

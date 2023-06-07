@@ -85,7 +85,7 @@ public class ImportFileService {
 						student.setAdmissionnumber(row.getCell(0).getStringCellValue());
 						student.setStudentexternalid(row.getCell(1).getStringCellValue());
 						student.setName(row.getCell(2).getStringCellValue());
-						//student.setGender(row.getCell(3).getStringCellValue());
+						student.setGender(row.getCell(3).getStringCellValue());
 						student.setDateofbirth(DateUtil.simpleDateParser(
 								(row.getCell(16).getStringCellValue()) + "/" + (row.getCell(17).getStringCellValue())
 										+ "/" + (row.getCell(18).getStringCellValue())));
@@ -94,17 +94,18 @@ public class ImportFileService {
 						//student.setAdmissiondate(DateUtil.simpleDateParser(
 						//		(row.getCell(19).getStringCellValue()) + "/" + (row.getCell(20).getStringCellValue())
 						//				+ "/" + (row.getCell(21).getStringCellValue())));
-						student.setClassstudying(row.getCell(8).getStringCellValue()+"--"+row.getCell(47).getStringCellValue());
+						student.setClassstudying(row.getCell(8).getStringCellValue()+"--");
 						
 						
 						// student.setClassadmittedin(row.getCell(9).getStringCellValue());
 						//student.setBloodgroup(row.getCell(9).getStringCellValue());
-						//student.setMothertongue(row.getCell(10).getStringCellValue());
+//						student.setMothertongue(row.getCell(10).getStringCellValue());
 						student.setReligion(row.getCell(11).getStringCellValue());
 						//student.setStudentscaste(row.getCell(12).getStringCellValue());
 						student.setNationality(row.getCell(13).getStringCellValue());
+						student.setSts(row.getCell(14).getStringCellValue());
 						//student.setStudentscastecertno(row.getCell(14).getStringCellValue());
-						student.setDisabilitychild(row.getCell(14).getStringCellValue());
+//						student.setDisabilitychild(row.getCell(14).getStringCellValue());
 						// student.setSecondlanguage(row.getCell(15).getStringCellValue());
 						student.setCreateddate(DateUtil.simpleDateParser(
 								(row.getCell(22).getStringCellValue()) + "/" + (row.getCell(23).getStringCellValue())
@@ -118,7 +119,7 @@ public class ImportFileService {
 						student.setUserid(Integer.parseInt(row.getCell(46).getStringCellValue()));
 						//student.setSts(row.getCell(49).getStringCellValue());
 
-						student.setBranchid(2);
+						student.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						student.setArchive(0);
 						student.setPassedout(0);
 						student.setDroppedout(0);

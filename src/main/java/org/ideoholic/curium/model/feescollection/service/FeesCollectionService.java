@@ -894,7 +894,7 @@ public class FeesCollectionService {
 				httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
 				httpSession.setAttribute("totalfees", totalFeesAmount);
 				httpSession.setAttribute("academicPerYear", academicYear);
-				httpSession.setAttribute("currentAcademicYear", academicYear);
+				//httpSession.setAttribute("currentAcademicYear", academicYear);
 				
 		} catch (Exception e) {
 			e.printStackTrace();

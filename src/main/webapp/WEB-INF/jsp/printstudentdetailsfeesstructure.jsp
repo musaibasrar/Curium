@@ -223,23 +223,31 @@
         <jsp:useBean id="now" class="java.util.Date" />
         <fmt:formatDate var="today" type="date" value="${now}" />
         <form  method="post" id="form1">
-		<table width="100%" style="border-collapse: collapse;">
+        <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="center">
-				<img src="/bsr/images/bsrfees.jpg" width="90" height="60"/>
-				</td>
-				<td class="dataTextBoldCenter" style="width: 100%">
-				
-				<label class="dataTextBoldCenter">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 20px;">${branchaddress}</label><br>
-				<label class="addressLine" style="padding-left: 30px;">Contact:&nbsp;${branchcontact}</label><br>
-				<label class="addressLine" style="padding-left: 24px;">Email:&nbsp;thebrainystarsacademy@gmail.com </label><br>
+				<td><img src="/iica/images/iica.jpg" width="80" height="80"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<c:if test="${not empty branchaddress1}">
+				<label class="addressLine">${branchaddress1}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress2}">
+				<label class="addressLine">${branchaddress2}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress3}">
+				<label class="addressLine">${branchaddress3}<br></label>
+				</c:if>
+				<c:if test="${not empty branchaddress4}">
+				<label class="addressLine">${branchaddress4}<br></label>
+				</c:if>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				<label class="addressLine" style="text-decoration: underline;">Fees Card</label><br>
-				<%-- <label class="addressLineTwo">${transactionfromdateselected}&nbsp;&nbsp;${transactiontodateselected}&nbsp;&nbsp;${issuedtoselected}&nbsp;&nbsp;${purposeselected}&nbsp;&nbsp;${itemselected}&nbsp;&nbsp;
-				</label> --%>
 				</td>
 			</tr>
 		</table>
+		
 
 			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
