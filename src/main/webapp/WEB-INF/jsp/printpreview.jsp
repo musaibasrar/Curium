@@ -17,34 +17,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Id Card</title> 
 
-        <script type="text/javascript" language="JavaScript" src="/bsr/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/bsr/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/bsr/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/descent/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/descent/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/descent/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/bsr/css/datePicker/demos.css">
-        <script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/descent/css/datePicker/demos.css">
+        <script type="text/javascript" src="/descent/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/descent/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/descent/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/descent/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/descent/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/descent/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/descent/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/descent/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/descent/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/descent/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/bsr/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/bsr/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/bsr/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/bsr/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/bsr/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/bsr/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/bsr/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/bsr/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/descent/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/descent/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/descent/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/descent/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/descent/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/descent/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/descent/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/descent/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/descent/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/descent/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/descent/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/descent/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
             <!--
@@ -265,7 +265,7 @@
 
             function updateContact() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/bsr/PersonalProcess/updateContactDetails?id=1";
+                form1.action = "/descent/PersonalProcess/updateContactDetails?id=1";
                 form1.submit();
             }
 
@@ -324,7 +324,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/descent/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -444,7 +444,7 @@ for(Cookie cookie : cookies){
 
     <body class="bodymargin">
        
-        <form action="/bsr/" method="post" id="form1" class="bodymargin">
+        <form action="/descent/" method="post" id="form1" class="bodymargin">
 			
 			
 	     <c:set var="iInitial" value="${iInitial}"/>
@@ -460,7 +460,7 @@ for(Cookie cookie : cookies){
     <table>
       <tr>
         <td>
-          <img src="/bsr/images/idlogo.png" alt="Brainy Stars" width="180" height="70">
+          <img src="/descent/images/idlogo.png" alt="Brainy Stars" width="180" height="70">
         </td>
       </tr>
     </table>
@@ -534,7 +534,7 @@ for(Cookie cookie : cookies){
 
                         </td>
                         <td>
-                            <button id="print" type="button" style="background-image: url(/bsr/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                            <button id="print" type="button" style="background-image: url(/descent/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
                                     this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
                         </td>
 

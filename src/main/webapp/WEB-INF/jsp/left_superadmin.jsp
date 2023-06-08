@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/bsr/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/bsr/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/bsr/css/datePicker/demos.css">
+        <script language="JavaScript" src="/descent/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/descent/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/descent/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/bsr/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/bsr/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/bsr/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/bsr/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/bsr/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/bsr/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/bsr/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/bsr/css/font-awesome.css">
+        <script type="text/javascript" src="/descent/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/descent/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/descent/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/descent/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/descent/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/descent/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/descent/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/descent/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/descent/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/descent/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -429,7 +429,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/descent/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,22 +454,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
+            				 <a target="mainFrame" href="/descent/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bsr/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
+            				 <a target="mainFrame" href="/descent/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            				 <a target="mainFrame" href="/descent/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bsr/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            				 <a target="mainFrame" href="/descent/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
                 </table>
@@ -482,42 +482,42 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
+            				 <a target="mainFrame" href="/descent/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/bsr/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
+            				<a target="mainFrame" href="/descent/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
+            				 <a target="mainFrame" href="/descent/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
+            				 <a target="mainFrame" href="/descent/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/bsr/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
+            				<a target="mainFrame" href="/descent/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
+            				 <a target="mainFrame" href="/descent/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/bsr/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
+            				<a target="mainFrame" href="/descent/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
+            				 <a target="mainFrame" href="/descent/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
             			</td>
             		</tr> -->
                 </table>
@@ -528,7 +528,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
+            				 <a target="mainFrame" href="/descent/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
             			</td>
             		</tr>
                 </table>
@@ -541,43 +541,43 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
+            				 <a target="mainFrame" href="/descent/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/bsr/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
+            				<a target="mainFrame" href="/descent/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a>
+            				 <a target="mainFrame" href="/descent/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a>
             			</td>
             			            		
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/bsr/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
+            				<a target="mainFrame" href="/descent/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
+            				 <a target="mainFrame" href="/descent/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/bsr/incomestatement" style="font-size: 12px;">Income Statement</a>
+            				<a target="mainFrame" href="/descent/incomestatement" style="font-size: 12px;">Income Statement</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            				 <a target="mainFrame" href="/descent/trialbalance" style="font-size: 12px;">Trial Balance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/bsr/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
+            				<a target="mainFrame" href="/descent/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
             			</td>
             		</tr> -->
                 </table>
@@ -589,37 +589,37 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
+            				 <a target="mainFrame" href="/descent/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
             			</td>
             		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/bsr/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
+            				<a target="mainFrame" href="/descent/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bsr/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
+            				 <a target="mainFrame" href="/descent/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/bsr/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
+            				<a target="mainFrame" href="/descent/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bsr/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
+            				 <a target="mainFrame" href="/descent/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/bsr/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
+            				<a target="mainFrame" href="/descent/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bsr/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
+            				 <a target="mainFrame" href="/descent/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
             			</td>
             		</tr>
                 </table>
@@ -631,17 +631,17 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            				 <a target="mainFrame" href="/descent/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bsr/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            				 <a target="mainFrame" href="/descent/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
+            				 <a target="mainFrame" href="/descent/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr>
                 </table>
@@ -653,22 +653,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
+            				 <a target="mainFrame" href="/descent/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/bsr/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
+            				<a target="mainFrame" href="/descent/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
+            				 <a target="mainFrame" href="/descent/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/bsr/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
+            				<a target="mainFrame" href="/descent/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
             			</td>
             		</tr> -->
                 </table>
@@ -680,7 +680,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
+            				 <a target="mainFrame" href="/descent/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
             			</td>
             		</tr>
                 </table>
@@ -691,7 +691,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
+            				 <a target="mainFrame" href="/descent/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
             			</td>
             		</tr>
                 </table>
@@ -704,27 +704,27 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
+            				 <a target="mainFrame" href="/descent/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bsr/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
+            				 <a target="mainFrame" href="/descent/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
+            				 <a target="mainFrame" href="/descent/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-								<a target="mainFrame" href="/bsr/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
+								<a target="mainFrame" href="/descent/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
+            				 <a target="mainFrame" href="/descent/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr> -->
                 </table>
@@ -737,22 +737,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/Backup&Restore" style="font-size: 12px;">Backup</a>
+            				 <a target="mainFrame" href="/descent/Backup&Restore" style="font-size: 12px;">Backup</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/bsr/changePassword" style="font-size: 12px;">Change Password</a>
+            				<a target="mainFrame" href="/descent/changePassword" style="font-size: 12px;">Change Password</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/bsr/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
+            				<a target="mainFrame" href="/descent/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bsr/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
+            				 <a target="mainFrame" href="/descent/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
             			</td>
             		</tr>
                 </table>
@@ -760,17 +760,17 @@ for(Cookie cookie : cookies){
             
            <!--   <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/bsr/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/bsr/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/bsr/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
-                <a target="mainFrame" href="/bsr/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/bsr/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
+                <a target="mainFrame" href="/descent/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
+                <a target="mainFrame" href="/descent/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
+                <a target="mainFrame" href="/descent/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
+                <a target="mainFrame" href="/descent/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
+                <a target="mainFrame" href="/descent/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
             <div >
-                <a target="mainFrame" href="/bsr/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/bsr/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+                <a target="mainFrame" href="/descent/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
+                <a target="mainFrame" href="/descent/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
             </div> -->
             
             <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
@@ -780,17 +780,17 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
+            				 <a target="mainFrame" href="/descent/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bsr/MessItemsProcess/purchaseItems" style="font-size: 12px;">Receive</a>
+            				 <a target="mainFrame" href="/descent/MessItemsProcess/purchaseItems" style="font-size: 12px;">Receive</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/bsr/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
+            				<a target="mainFrame" href="/descent/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
             			</td>
             		</tr>
             	</table>
@@ -804,22 +804,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
+            				 <a target="mainFrame" href="/descent/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bsr/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
+            				 <a target="mainFrame" href="/descent/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/bsr/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
+            				<a target="mainFrame" href="/descent/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bsr/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
+            				 <a target="mainFrame" href="/descent/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
             			</td>
             		</tr>
             	</table>
@@ -832,22 +832,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
+            				 <a target="mainFrame" href="/descent/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bsr/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
+            				 <a target="mainFrame" href="/descent/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/bsr/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
+            				<a target="mainFrame" href="/descent/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bsr/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
+            				 <a target="mainFrame" href="/descent/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
             			</td>
             		</tr>
             	</table>
@@ -860,12 +860,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
+            				 <a target="mainFrame" href="/descent/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bsr/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
+            				 <a target="mainFrame" href="/descent/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
             			</td>
             		</tr>
             	</table>
@@ -876,12 +876,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bsr/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
+            				 <a target="mainFrame" href="/descent/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/bsr/sendemail" style="font-size: 12px;">Email</a>
+            				<a target="mainFrame" href="/descent/sendemail" style="font-size: 12px;">Email</a>
             			</td>
             		</tr>
                 </table>
@@ -892,7 +892,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/bsr/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
+            				<a target="mainFrame" href="/descent/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
             			</td>
             		</tr>
                 </table>
@@ -904,7 +904,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                              <a target="mainFrame" href="/bsr/importfile" style="font-size: 12px;">Import Files</a><br/>
+                              <a target="mainFrame" href="/descent/importfile" style="font-size: 12px;">Import Files</a><br/>
 				        </td>
 				     </tr>
 				 </table>

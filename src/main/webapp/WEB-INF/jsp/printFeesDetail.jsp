@@ -178,7 +178,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 110px;">
-				<img src="/bsr/images/bsr.jpg" width="80" height="80"/>
+				<img src="/descent/images/descent.jpg" width="80" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
@@ -361,7 +361,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 110px;">
-				<img src="/bsr/images/bsr.jpg" width="80" height="80"/>
+				<img src="/descent/images/descent.jpg" width="80" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>

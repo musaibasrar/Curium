@@ -93,15 +93,15 @@ span{
     font-weight: normal;
 }
 </style>
-	<script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/descent/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/descent/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Bonafide Certificate</title>
 </head>
 <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/descent/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -234,7 +234,7 @@ for(Cookie cookie : cookies){
 		</tr>
 		
 			<tr>
-              <td align="center"><a id="print" href="/bsr/DocumentsProcess/printBonafide">Print</a></td>
+              <td align="center"><a id="print" href="/descent/DocumentsProcess/printBonafide">Print</a></td>
             </tr>
 		</TABLE>
 	</form>

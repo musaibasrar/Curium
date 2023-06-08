@@ -15,8 +15,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	 <title>Curium - School ERP</title>
-	<link rel="stylesheet" href="/bsr/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/bsr/js/openWindow.js"></script>
+	<link rel="stylesheet" href="/descent/css/bootstrap3.min.css">
+	<script type="text/javascript" src="/descent/js/openWindow.js"></script>
 	
 	<style type="text/css">
 	.main-content{
@@ -112,7 +112,7 @@ form{
             function redirect(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="/bsr/UserProcess/authenticate";
+                form1.action="/descent/UserProcess/authenticate";
                 form1.submit();
             }
         </script>
@@ -129,19 +129,19 @@ form{
             if(flag1){
             	
             	if(type=='superadmin'){
-                    window.open('/bsr/index_superadmin','_self');
+                    window.open('/descent/index_superadmin','_self');
                 }else if(type=='admin'){
-                    window.open('/bsr/index_admin','_self');
+                    window.open('/descent/index_admin','_self');
                 }else if(type=='feescollector'){
                     window.open('/index_feescollector','_self');
                 }else if(type=='officeadmin'){
-                	window.open('/bsr/index_officeadmin','_self');
+                	window.open('/descent/index_officeadmin','_self');
                 }else if(type=='marksentry'){
-                	window.open('/bsr/index_marksentry','_self');
+                	window.open('/descent/index_marksentry','_self');
                 }
             }
             else if(!flag1){
-            	window.open('/bsr/loginFail','_self');
+            	window.open('/descent/loginFail','_self');
             }
         </script>
         
@@ -151,18 +151,18 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 180px;width: 180px;" alt="ideoholic" src="/bsr/images/bsr.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 180px;width: 180px;" alt="ideoholic" src="/descent/images/descent.png"></h2>
 			<!-- <h5 style="font-weight: bold;">Shaheen Kidz</h5> --></span>
 				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
 					<div class="row">
-						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/bsr/images/shaheenlogo.png"></h2></span> -->
+						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/descent/images/shaheenlogo.png"></h2></span> -->
 						<h3>Log In</h3>
 					</div>
 					<div class="row">
-						<form action="/bsr/UserProcess/authenticateUser"  method="post" class="form-group">
+						<form action="/descent/UserProcess/authenticateUser"  method="post" class="form-group">
 							<div class="row">
 								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="Username">
 							</div>
@@ -184,10 +184,10 @@ form{
 	<!-- Footer -->
 	<div class="container-fluid text-center footer">
 		<p>
-			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/bsr/images/ideoholic.png"> image with a default alignment.</p> --> 
+			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/descent/images/ideoholic.png"> image with a default alignment.</p> --> 
 			
 			<a href="http://www.ideoholic.com" >
-				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/bsr/images/ideoholic.png">
+				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/descent/images/ideoholic.png">
 			</a>
 			
 	</div>

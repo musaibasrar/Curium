@@ -21,22 +21,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Student DC</title>
-<link rel="stylesheet" href="/bsr/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/bsr/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/descent/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/descent/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/bsr/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/bsr/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/bsr/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/bsr/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/bsr/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/bsr/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/bsr/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/descent/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/descent/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/descent/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/descent/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/descent/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/descent/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/descent/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/descent/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/descent/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/bsr/css/datePicker/demos.css">
+	src="/descent/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/descent/css/datePicker/demos.css">
 
 
 
@@ -261,10 +261,10 @@
 
 
 
-<script type="text/javascript" src="/bsr/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/descent/js/datetimepicker_css.js"></script>
 
-<script src="/bsr/JavaScript/actb.js"></script>
-<script src="/bsr/JavaScript/common.js"></script>
+<script src="/descent/JavaScript/actb.js"></script>
+<script src="/descent/JavaScript/common.js"></script>
 
 
 
@@ -625,7 +625,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/descent/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -638,7 +638,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/bsr/PersonalProcess/add"
+	<form id="form1" action="/descent/PersonalProcess/add"
 		method="post"  enctype="multipart/form-data">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
@@ -1529,14 +1529,14 @@ for(Cookie cookie : cookies){
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/bsr/StudentProcess/AddStudent";
+									form1.action = "/descent/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/bsr/StudentProcess/viewAll";
+								form1.action = "/descent/StudentProcess/viewAll";
 								form1.submit();
 							}
 

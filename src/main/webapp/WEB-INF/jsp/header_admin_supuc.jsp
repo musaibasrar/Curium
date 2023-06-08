@@ -150,7 +150,7 @@
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/bsr/UserProcess/logout";
+                form1.action="/descent/UserProcess/logout";
                 form1.submit();
             }
 
@@ -160,7 +160,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/descent/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -179,8 +179,8 @@ for(Cookie cookie : cookies){
                     <td valign="top" background="/images/h_bg.jpg">
                         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
                             <!-- <tr>
-                               <td width="234" ><div align="center"><img src="/bsr/images/logo.png" width="200" height="64" /></div></td> 
-                                <td width="700" ><div align="center"><img src="/bsr/images/SMS.png" width="391" height="50" /></div></td>
+                               <td width="234" ><div align="center"><img src="/descent/images/logo.png" width="200" height="64" /></div></td> 
+                                <td width="700" ><div align="center"><img src="/descent/images/SMS.png" width="391" height="50" /></div></td>
                                
                             </tr> -->
                             <tr>
@@ -188,38 +188,38 @@ for(Cookie cookie : cookies){
                             </tr>
                             <tr>
                             				<td width="10"></td>
-                                          	<td align="left"><img src="/bsr/images/bsrheader.png" /></td>  
+                                          	<td align="left"><img src="/descent/images/descentheader.png" /></td>  
                                           	<!-- <td><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td> -->
-                            				<td width="40" ><div align="center" ><a target="leftFrame" href="/bsr/left"><img src="/bsr/images/house_home.png" width="35" height="35" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                            				<td><a target="leftFrame" href="/bsr/left" style="color:white;font-size: 11px;font-family: arial;">Home</a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                            				<td width="40" ><div align="center" ><a target="leftFrame" href="/descent/left"><img src="/descent/images/house_home.png" width="35" height="35" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                            				<td><a target="leftFrame" href="/descent/left" style="color:white;font-size: 11px;font-family: arial;">Home</a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/bsr/FeesProcess/feesCollect"><img   src="/bsr/images/feescollectw.png" width="40" height="40" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/descent/FeesProcess/feesCollect"><img   src="/descent/images/feescollectw.png" width="40" height="40" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><label style="color:white;font-size: 11px;font-family: arial;">Fees <br>Collect</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				
-                            				<td width="40"><a target="mainFrame" href="/bsr/AccountProcess/createVoucher"><div align="center" align="center"><img  alt="Create Voucher" src="/bsr/images/voucherw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                            				<td width="40"><a target="mainFrame" href="/descent/AccountProcess/createVoucher"><div align="center" align="center"><img  alt="Create Voucher" src="/descent/images/voucherw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Create <br>Voucher</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <!-- <td width="40"><a target="mainFrame" href="/bsr/feesCollectionDetails"><div align="center" align="center"><img  alt="Fees Details" src="/bsr/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <!-- <td width="40"><a target="mainFrame" href="/descent/feesCollectionDetails"><div align="center" align="center"><img  alt="Fees Details" src="/descent/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td> -->
                                             
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/bsr/StudentProcess/addNew"><img   src="/bsr/images/Usersw.png" width="30" height="30" alt="Add New Student" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/descent/StudentProcess/addNew"><img   src="/descent/images/Usersw.png" width="30" height="30" alt="Add New Student" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><label style="color:white;font-size: 12px;">Add <br>New</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                            					
-                           					<td width="40"><a target="leftFrame" href="/bsr/leftsettings"><div align="center" align="center"><img  alt="Settings" src="/bsr/images/ssettingsw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                           					<td width="40"><a target="leftFrame" href="/descent/leftsettings"><div align="center" align="center"><img  alt="Settings" src="/descent/images/ssettingsw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Master<br> Settings</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40"><a target="mainFrame" href="/bsr/AdminProcess/viewAllExpenses"><div align="center" align="center"><img  alt="Admin Exp" src="/bsr/images/adexpw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/descent/AdminProcess/viewAllExpenses"><div align="center" align="center"><img  alt="Admin Exp" src="/descent/images/adexpw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Admin<br> Expense</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/bsr/sendsms"><img   src="/bsr/images/sendsmsw.png" width="30" height="30" alt="Send SMS" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/descent/sendsms"><img   src="/descent/images/sendsmsw.png" width="30" height="30" alt="Send SMS" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                 			<td><label style="color:white;font-size: 12px;">Send <br>Message</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40"><a target="mainFrame" href="/bsr/StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Students" src="/bsr/images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/descent/StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Students" src="/descent/images/allusersw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">View <br>All</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40"><a target="mainFrame" href="/bsr/UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="/bsr/images/dashboardw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="/descent/UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="/descent/images/dashboardw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Dash<br> Board</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
-                                            <td width="40" ><div align="center" ><a target="_parent" href="/bsr/UserProcess/logout"><img   src="/bsr/images/logoutw.png" width="30" height="30" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="_parent" href="/descent/UserProcess/logout"><img   src="/descent/images/logoutw.png" width="30" height="30" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             <td width="60" ><div align="center" ><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             </tr>
                             <tr>
