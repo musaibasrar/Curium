@@ -101,6 +101,7 @@ public class UserService {
 			
 			//List<Branch> branchList = new BranchDAO().readListOfObjects();
             List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+            String currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString();
             List<String> xaxisList = new LinkedList<String>() ;
             List<String> yaxisList = new LinkedList<String>() ;
             int totalStudents = 0;
@@ -113,7 +114,7 @@ public class UserService {
 		    			classStudying = classStudying+"--" +"%";
 		    		
                     List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where parents.Student.classstudying like '"+classStudying+"'"
-                    + " AND parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0 AND parents.Student.branchid='"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+"' ");
+                    + " AND parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND (parents.Student.promotedyear = '"+currentAcademicYear+"' OR parents.Student.yearofadmission = '"+currentAcademicYear+"') AND parents.Student.leftout=0 AND parents.Student.branchid='"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+"' ");
                     totalStudents+=student.size();
                     xaxisList.add("\""+classstudying.getClassdetails()+"\"");
                     if(student.size()>0) {
