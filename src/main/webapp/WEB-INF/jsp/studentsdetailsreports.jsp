@@ -686,7 +686,7 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 								<td class="dataText">${status.index+1}</td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/roshan/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
+								href="/roshan/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>
