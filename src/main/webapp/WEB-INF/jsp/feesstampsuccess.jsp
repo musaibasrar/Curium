@@ -19,16 +19,25 @@
         <link rel="stylesheet" href="/shadaan/css/datePicker/jquery-ui-1.8.17.custom.css">
         <link rel="stylesheet" href="/shadaan/css/datePicker/demos.css">
         <!--<script type="text/javascript" language="javascript" src="/shadaan/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/shadaan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/shadaan/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.button.js"></script>
-        
-        
-        
-        
+		<link rel="stylesheet" href="/shadaan/css/datePicker/jquery-ui-1.8.18.custom.css">
+		<link rel="stylesheet" href="/shadaan/css/datePicker/demos.css">        
+		
+		<link rel="stylesheet" href="/shadaan/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/shadaan/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript"
+	src="/shadaan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script type="text/javascript" language="javascript"
+	src="/shadaan/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.core.js"></script>
+<script type="text/javascript"
+	src="/shadaan/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script type="text/javascript"
+	src="/shadaan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/shadaan/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/shadaan/js/datePicker/ui/sliderAccess.js"></script>
+
+<script type="text/javascript" src="/shadaan/js/globalize.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/shadaan/js/globalize.cultures.js"></script>
         <style type="text/css">
 <!--
 .divCSS {
@@ -54,21 +63,41 @@
 	color: #000000;
 }
 -->
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #72a9df;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #5488ba;
+}
         </style>
 
         <script type="text/javascript">
-            $(function(){
-                $("#view").button()
-                
-                $("#addnew").button()
+        
+        $(function() {
 
-                });
+    		$("#search").button().click(function() {
+    			searchForFees();
+    		});
+    		
 
-            function ViewAll(){
-                var form1=document.getElementById("form1");
-                form1.action="/shadaan/EmployeeProcess/ViewAllEmployee";
-                form1.submit();
-            }
+    	});
+        
+        function searchForFees() {
+    		var form1 = document.getElementById("form1");
+    		form1.action = "/shadaan/StampFeesProcess/showFeesDetails";
+    		form1.method = "POST";
+    		form1.submit();
+
+    	}
         </script>
 </head>
 <%
@@ -93,12 +122,11 @@ for(Cookie cookie : cookies){
       <tr>
         <td height="250" align="center" valign="middle"><p class="style1">Fees stamp saved Successfully</p>
         <p class="style1">
-          
-            
-            <input type="button" value="Add New" id="addnew" onClick="JavaScript:window.location='/stampfees';">
+          	<a href="/shadaan/StampFeesProcess/showFeesDetails" id="search">Stamp Fee</a>
         </p></td>
       </tr>
     </table>
             </form>
     </body>
 </html>
+
