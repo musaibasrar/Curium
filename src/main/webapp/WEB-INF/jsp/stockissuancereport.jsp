@@ -640,6 +640,7 @@ for(Cookie cookie : cookies){
 					<tr>
 						<th class="headerText">Sl.No.</th>
 						<th title="click to sort" class="headerText">Date</th>
+						<th title="click to sort" class="headerText">Bill No.</th>
 						<th title="click to sort" class="headerText">Student Name</th>
 						<th title="click to sort" class="headerText">Class</th>
 						<th title="click to sort" class="headerText">Father Name</th>
@@ -660,6 +661,7 @@ for(Cookie cookie : cookies){
 							cellspacing="1">
 							<td class="dataText"><c:out value="${status.index+1}" /></td>
 						  <td class="dataText"><input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: center;"  value="<fmt:formatDate value="${stockissuancelist.transactiondate}" pattern="dd/MM/yyyy"/>" readonly></td>
+						  <td class="dataText"><c:out value="${stockissuancelist.billno}" /></td>
 						    <c:set var="nameparts" value="${fn:split(stockissuancelist.issuedto, '_')}" />
 						 	<td class="dataText"><c:out value="${nameparts[0]}" /></td>
 						 	<td class="dataText"><c:out value="${nameparts[1]}" /></td>

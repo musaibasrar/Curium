@@ -449,6 +449,8 @@ public class MessItemsService {
 									stockIssuance.setItemunitprice(stockEntry.getItemunitprice());
 									stockIssuance.setIssuedto(messStockMove.getIssuedto());
 									stockIssuance.setPurpose(messStockMove.getPurpose());
+									String[] bill = messStockMove.getExternalid().split("_");
+									stockIssuance.setBillno(bill[1]);
 									stockIssuance.setTransactiondate(messStockMove.getTransactiondate());
 									stockIssuanceList.add(stockIssuance);	
 									break;

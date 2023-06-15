@@ -330,14 +330,9 @@ public class MessStockMoveService {
 							
 							//Get Bill No
 							MessStockMove msm = new MessStockMoveDAO().getMessStockMoveMaxRow();
-							int billNo = 0;
-							if(msm!=null) {
-								billNo = msm.getId() + 1;
-							}else {
-								billNo = 1;
-							}
+							String[] billNo = msm.getExternalid().split("_");
 							
-					     	 request.setAttribute("billno", billNo);
+					     	 request.setAttribute("billno", billNo[1]);
 					     	 
 						}else {
 							request.setAttribute("billdetails", "");

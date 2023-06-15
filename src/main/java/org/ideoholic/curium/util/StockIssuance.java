@@ -16,11 +16,12 @@ public class StockIssuance implements Serializable{
 	Float quantity;
 	String unitofmeasure;
 	Date transactiondate;
+	String billno;
 	
 	public StockIssuance() {
 	}
 
-	public StockIssuance(Integer stockid, Integer itemid, String externalIdStock, String externalIdItems, String itemname, String issuedto, String purpose, Float quantity, Float itemunitprice, String unitofmeasure, Date transactiondate) {
+	public StockIssuance(Integer stockid, Integer itemid, String externalIdStock, String externalIdItems, String itemname, String issuedto, String purpose, Float quantity, Float itemunitprice, String unitofmeasure, Date transactiondate, String billno) {
 		this.stockid = stockid;
 		this.itemid = itemid;
 		this.externalIdStock =  externalIdStock;
@@ -32,6 +33,7 @@ public class StockIssuance implements Serializable{
 		this.itemunitprice = itemunitprice;
 		this.unitofmeasure = unitofmeasure;
 		this.transactiondate = transactiondate;
+		this.billno = billno;
 	}
 
 	public Integer getStockid() {
@@ -120,5 +122,13 @@ public class StockIssuance implements Serializable{
 
 	public void setTransactiondate(Date transactiondate) {
 		this.transactiondate = transactiondate;
+	}
+
+	public String getBillno() {
+		return billno;
+	}
+
+	public void setBillno(String billno) {
+		this.billno = billno;
 	}
 }
