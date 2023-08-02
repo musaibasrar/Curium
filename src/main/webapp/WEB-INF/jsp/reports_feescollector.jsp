@@ -1,6 +1,6 @@
 <%-- 
-Document   : left
-Created on : Jan 4, 2012, 3:41:11 PM
+Document   : reports
+Created on : Nov 8, 2021, 09:50:11 PM
 Author     : Musaib
 --%>
 
@@ -12,7 +12,7 @@ Author     : Musaib
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Left</title>
+        <title>Reports</title>
         <script language="JavaScript" src="/shadaan/js/motionpack.js"></script>
         <link rel="stylesheet" href="/shadaan/css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="/shadaan/css/datePicker/demos.css">
@@ -27,168 +27,8 @@ Author     : Musaib
         <link href="/shadaan/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/shadaan/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="/shadaan/css/font-awesome.css">
-        <script type="text/javascript">
-            var get;
-            function getdata1() {
-                var startHour, startMin;
-                var tDate = new Date();
-                startHour = tDate.getHours();
-                startMin = tDate.getMinutes();
-
-                if (typeof XMLHttpRequest != "undefined") {
-                    get = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    get = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                get.onreadystatechange = processdata;
-                get.open("POST", "/VisitProcess/getAJaxNextVisit?startHour=" + startHour + "&startMin=" + startMin, true);
-                get.send(null);
-
-            }
-
-            function processdata() {
-                var id, hourID, patientID, reminderTime, visitTime, rating, name, complaint, link;
-                if (get.readyState == 4)
-                {
-                    if (get.status == 200) {
-                        var visits = get.responseXML.getElementsByTagName("Visits")[0];
-                        var visitNodes = visits.getElementsByTagName("Visit");
-                        for (var i = 0; i < visitNodes.length; i++) {
-                            var visit = visitNodes[i];
-
-                            patientID = visit.getElementsByTagName("PatientID")[0].firstChild.nodeValue;
-                            visitTime = visit.getElementsByTagName("VisitTime")[0].firstChild.nodeValue;
-                            name = visit.getElementsByTagName("PatientName")[0].firstChild.nodeValue;
-                            link = "<a target='mainFrame' href='/PatientProcess/viewDetails?id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
-
-                            $(function() {
-                                $('#Notification').jnotifyAddMessage({
-                                    text: link,
-                                    permanent: false,
-                                    disappearTime: 30000
-                                });
-
-                            });
-
-                        }
-
-
-                        setTimeout('getdata1();', 60000);
-
-
-                    }
-                }
-
-            }
-            /**
-             * Comment
-             */
-            var getExpiringStockCount;
-            function getExpiringStock() {
-                if (typeof XMLHttpRequest != "undefined") {
-                    getExpiringStockCount = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getExpiringStockCount = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                getExpiringStockCount.onreadystatechange = processExpiringStockData;
-                getExpiringStockCount.open("POST", "/StockProcess/getExpiringStock", true);
-                getExpiringStockCount.send(null);
-
-            }
-           
-            var getDepletingStockCount;
-            function getDepletingStock() {
-                if (typeof XMLHttpRequest != "undefined") {
-                    getDepletingStockCount = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getDepletingStockCount = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                getDepletingStockCount.onreadystatechange = processDepletingStockData;
-                getDepletingStockCount.open("POST", "/StockProcess/getDepletingStock", true);
-                getDepletingStockCount.send(null);
-
-            }
-            function processDepletingStockData() {
-
-                if (getDepletingStockCount.readyState == 4)
-                {
-                    if (getDepletingStockCount.status == 200) {
-                        var count = getDepletingStockCount.responseXML.getElementsByTagName("DepletingStockCount")[0];
-                        var depletingStockCount = count.childNodes[0].nodeValue;
-                        var depletingStock = document.getElementById("depletingStock");
-                        depletingStock.innerHTML = " " + depletingStockCount;
-                        setTimeout('getDepletingStock();', 60000);
-
-
-                    }
-                }
-
-            }
-
-        </script>
-        <script type="text/javascript">
-            var req;
-
-
-            function count() {
-
-                var idField = document.getElementById("userid");
-                var url = "AppointmentController";
-                if (typeof XMLHttpRequest != "undefined") {
-                    req = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    req = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                reload(req);
-                //req.open("POST", url, true);
-
-                //req.send();
-                /*req.onreadystatechange = function()
-                 {
-                 if (req.readyState==4)
-                 {
-                 if (req.status==200){
-                 
-                 var count = req.responseXML.getElementsByTagName("count")[0];
-                 var childCount=count.childNodes[0].nodeValue;
-                 var mdiv = document.getElementById("n1");
-                 mdiv.innerHTML=childCount;
-                 mdiv.style.visible='block';
-                 
-                 }
-                 }
-                 }*/
-
-
-
-            }
-            function handleRequest() {
-                if (req.readyState == 4)
-                {
-                    if (req.status == 200) {
-
-                        var count = req.responseXML.getElementsByTagName("count")[0];
-                        var childCount = count.childNodes[0].nodeValue;
-                        var mdiv = document.getElementById("n1");
-                        mdiv.innerHTML = childCount;
-                        mdiv.style.visible = 'block';
-
-                    }
-                }
-                setTimeout(function() {
-                    reload(req);
-                }, 100);
-            }
-
-
-
-        </script>
+        
+        
         <style>
 
             .noti_Container {
@@ -446,105 +286,137 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-	<div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div>
+        <%-- <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div> --%>
+        <div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div>
 
         <div id="container" style="width: 95%" >
-			
+            
+             
               <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shadaan/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shadaan/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
-            			</td>
-            		</tr> 
+            		
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/shadaan/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr> -->
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shadaan/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
-            			</td>
-            		</tr> -->
-            		<!-- <tr>
+            		
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/shadaan/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
             			</td>
             		</tr>
+            		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/shadaan/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>
+            			</td>
+            		</tr>
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/shadaan/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/shadaan/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
             			</td>
-            		</tr> -->
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
+            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shadaan/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
+            				<a target="mainFrame" href="/shadaan/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/shadaan/FeesProcess/otherfeesReport" style="font-size: 12px;">Other fees Report</a>
             			</td>
             		</tr>
                 </table>
             </div>
-            
             
             
             <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shadaan/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shadaan/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shadaan/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a>
-            			</td>
-            			            		
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shadaan/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
-            			</td>
-            		</tr>
             		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/shadaan/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/shadaan/incomestatement" style="font-size: 12px;">Income Statement</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/shadaan/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/shadaan/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
+            			</td>
+            		</tr>
                 </table>
             </div>
             
-            
-                  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Expense</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/shadaan/adminexpensesreport" style="font-size: 12px;">Expense Report</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+              <h5 class="sideaccordian" ><a href="#">Stock Receipts</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/shadaan/MessItemsMoveProcess/billsReport" style="font-size: 12px;">Receipts Report</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#" >Stock</a></h5>
+            
+            <div style="padding-left: 0px;padding-right: 0px;">
+            
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shadaan/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
+            				 <a target="mainFrame" href="/shadaan/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
             			</td>
             		</tr>
-                </table>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/shadaan/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/shadaan/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/shadaan/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
+            			</td>
+            		</tr>
+            	</table>
             </div>
             
-           
             </div>
                    
             

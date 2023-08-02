@@ -494,7 +494,7 @@
             }).data( "autocomplete" )._renderItem = function( ul, item ) {
                 return $( "<li></li>" )
                 .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +" / "+item.regno+" / "+item.fathername+" </b> </a>" )
+                .append( "<a><b> " + item.value +" / "+item.classandsec+" / "+item.regno+" / "+item.fathername+" </b> </a>" )
                 .appendTo( ul );
             };
             var addFeesButtonID="#addFees";

@@ -133,7 +133,7 @@ form{
                 }else if(type=='admin'){
                     window.open('/shadaan/index_admin','_self');
                 }else if(type=='feescollector'){
-                    window.open('/index_feescollector','_self');
+                    window.open('/shadaan/index_feescollector','_self');
                 }else if(type=='officeadmin'){
                 	window.open('/shadaan/index_officeadmin','_self');
                 }else if(type=='marksentry'){
