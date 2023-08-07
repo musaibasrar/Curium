@@ -14,10 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/alfarooq/css/bootstrap.min.css">
-        <script src="/alfarooq/js/jquery.min.js"></script>
-        <script src="/alfarooq/js/bootstrap.min.js"></script>
-        <script src="/alfarooq/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/meps/css/bootstrap.min.css">
+        <script src="/meps/js/jquery.min.js"></script>
+        <script src="/meps/js/bootstrap.min.js"></script>
+        <script src="/meps/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -92,7 +92,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/alfarooq/UserProcess/logout";
+                form1.action="/meps/UserProcess/logout";
                 form1.submit();
             }
 
@@ -102,7 +102,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alfarooq/UserProcess/sessionTimeOut");
+	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -125,79 +125,79 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/alfarooq/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
+								<a target="mainFrame" href="/meps/welcome" ><img src="/meps/images/curiumheader.png" width="112" height="41"/></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/alfarooq/images/alfarooqheader.png"
+							<!-- <td align="left"><img src="/meps/images/mepsheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/alfarooq/left_officeadmin"> <img
-									src="/alfarooq/images/home.svg" width="18" height="18" 
+							<td><a target="leftFrame" href="/meps/left_officeadmin"> <img
+									src="/meps/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="/alfarooq/FeesProcess/feesCollect"> <img
-									src="/alfarooq/images/feescollect.svg" width="18" height="18"
+								href="/meps/FeesProcess/feesCollect"> <img
+									src="/meps/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
 							<td>
 								<a target="mainFrame"
-								href="/alfarooq/AccountProcess/createVoucher"> <img
-									src="/alfarooq/images/createvoucher.svg" width="18" height="18"
+								href="/meps/AccountProcess/createVoucher"> <img
+									src="/meps/images/createvoucher.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/alfarooq/feesCollectionDetails"><img  alt="Fees Details" src="/alfarooq/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+							<!-- <td ><a target="mainFrame" href="/meps/feesCollectionDetails"><img  alt="Fees Details" src="/meps/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
-								href="/alfarooq/StudentProcess/addNew"> <img
-									src="/alfarooq/images/student_header.svg" width="18" height="18"
+								href="/meps/StudentProcess/addNew"> <img
+									src="/meps/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/alfarooq/leftsettings_officeadmin">
-									<img alt="Settings" src="/alfarooq/images/settings.svg" width="18"
+							<td ><a target="leftFrame" href="/meps/leftsettings_officeadmin">
+									<img alt="Settings" src="/meps/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
 							<td ><a target="mainFrame"
-								href="/alfarooq/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/alfarooq/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+								href="/meps/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/meps/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
 
-							<td ><!-- <a target="mainFrame" href="/alfarooq/sendsms"><img
-									src="/alfarooq/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+							<td ><!-- <a target="mainFrame" href="/meps/sendsms"><img
+									src="/meps/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/alfarooq/reports_officeadmin"><img
-									src="/alfarooq/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+								<a target="leftFrame" href="/meps/reports_officeadmin"><img
+									src="/meps/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
 							
 							</td>
 
 							<td ><a target="mainFrame"
-								href="/alfarooq/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/alfarooq/images/students.svg" width="18"
+								href="/meps/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/meps/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
 							</a></td>
 							
 							<!-- <td ><a target="mainFrame"
-								href="/alfarooq/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/alfarooq/images/dashboard.svg" width="18"
+								href="/meps/UserProcess/dashBoard"><img
+									alt="Dash Board" src="/meps/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td> -->
 								
 							<td ><a target="_parent"
-								href="/alfarooq/UserProcess/logout"><img
-									src="/alfarooq/images/logout.svg" width="18" height="18" alt="Log Out" 
+								href="/meps/UserProcess/logout"><img
+									src="/meps/images/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>

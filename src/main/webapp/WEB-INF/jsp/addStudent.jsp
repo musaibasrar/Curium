@@ -20,22 +20,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Student</title>
-<link rel="stylesheet" href="/alfarooq/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/alfarooq/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/meps/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/alfarooq/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/alfarooq/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/alfarooq/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/alfarooq/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/alfarooq/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/alfarooq/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/alfarooq/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/alfarooq/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/meps/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/meps/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/meps/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/meps/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/meps/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/meps/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/alfarooq/css/datePicker/demos.css">
+	src="/meps/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/meps/css/datePicker/demos.css">
 
 
 
@@ -273,10 +273,10 @@
 
 
 
-<script type="text/javascript" src="/alfarooq/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/meps/js/datetimepicker_css.js"></script>
 
-<script src="/alfarooq/JavaScript/actb.js"></script>
-<script src="/alfarooq/JavaScript/common.js"></script>
+<script src="/meps/JavaScript/actb.js"></script>
+<script src="/meps/JavaScript/common.js"></script>
 
 
 
@@ -552,7 +552,7 @@
 	//allow access only if session exists
 	String user = null;
 	if (session.getAttribute("userAuth") == null) {
-		response.sendRedirect("/alfarooq/UserProcess/sessionTimeOut");
+		response.sendRedirect("/meps/UserProcess/sessionTimeOut");
 	} else
 		user = (String) session.getAttribute("userAuth");
 	String userName = null;
@@ -1902,14 +1902,14 @@
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/alfarooq/StudentProcess/AddStudent";
+									form1.action = "/meps/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/alfarooq/StudentProcess/viewAll";
+								form1.action = "/meps/StudentProcess/viewAll";
 								form1.submit();
 							}
 

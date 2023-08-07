@@ -17,34 +17,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Please wait...</title> 
 
-        <script type="text/javascript" language="JavaScript" src="/alfarooq/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/alfarooq/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/alfarooq/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/meps/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/meps/css/graph/jquery.jqplot.css">
 
-        <!-- <link rel="stylesheet" href="/alfarooq/css/datePicker/demos.css"> -->
-        <script type="text/javascript" src="/alfarooq/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <!-- <link rel="stylesheet" href="/meps/css/datePicker/demos.css"> -->
+        <script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/alfarooq/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/meps/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/meps/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/meps/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/meps/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/meps/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/meps/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/meps/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/meps/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
             <!--
@@ -458,7 +458,7 @@ for(Cookie cookie : cookies){
 	                         			<h6 style="text-transform: capitalize;margin-top: 0px;margin-bottom: 5px;">Contact : ${branchcontact}</h6>
 	                         		</div>
 		                         	
-	  								<img src="/alfarooq/images/alfarooq.png" alt="Brainy Stars" style=" width:90px;height:90px;padding-left: 60px;padding-right:10px;">
+	  								<img src="/meps/images/meps.png" alt="Brainy Stars" style=" width:90px;height:90px;padding-left: 60px;padding-right:10px;">
 	  								<img src="data:image;base64,<%= request.getSession().getAttribute("employeephoto" + i + "")%>" style="height:90px;width:90px;border: 1px solid black;border-radius: 5px;" alt="Photo" />
 	  								<hr width="100%" style="margin-top:0px;margin-bottom:0px;">
 	  								<h3 style="margin-top: 0px;margin-bottom: 0px;font-weight: bold;" align="center">STAFF</h3>

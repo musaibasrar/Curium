@@ -12,8 +12,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Create Account</title>
-<link rel="stylesheet" href="/alfarooq/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/alfarooq/css/datePicker/demos.css">
+<link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/meps/css/datePicker/demos.css">
 <style type="text/css">
 .footerTD{
                 border-radius:6px;
@@ -293,42 +293,42 @@
 
 </style>
 
-<link rel="stylesheet" href="/alfarooq/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/alfarooq/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/meps/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/alfarooq/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/meps/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/meps/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/alfarooq/js/datePicker/ui/sliderAccess.js"></script>
+	src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/meps/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/alfarooq/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/meps/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/meps/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/meps/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/meps/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/meps/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/meps/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/meps/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/meps/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/meps/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -360,11 +360,11 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/alfarooq/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/meps/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function addFeesCategory() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alfarooq/FeesProcess/addFeesParticular";
+		form1.action = "/meps/FeesProcess/addFeesParticular";
 		form1.method = "POST";
 		form1.submit();
 
@@ -439,7 +439,7 @@
 		 
 			if(form1.checkValidity()) {
 				var form1=document.getElementById("form1");
-		        form1.action="/alfarooq/AccountProcess/saveAccount";
+		        form1.action="/meps/AccountProcess/saveAccount";
 		        form1.submit();
 			  }
 		 $("#save").attr("disabled", false);
@@ -449,7 +449,7 @@
          
 		if(confirm('Are you sure, you want to delete the account?')){
 			var form1=document.getElementById("form1");
-	         form1.action="/alfarooq/AccountProcess/deleteAccount";
+	         form1.action="/meps/AccountProcess/deleteAccount";
 	        form1.submit();
 		}
          
@@ -498,7 +498,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/alfarooq/SubGroupName/getSubGroupNames?groupname="+selected,true);
+			xmlHttp.open("GET", "/meps/SubGroupName/getSubGroupNames?groupname="+selected,true);
 			xmlHttp.send(null);
 		}
 		
@@ -553,7 +553,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChangedSSGroup;
-			xmlHttp.open("GET", "/alfarooq/SubGroupName/getSSGroupNames?subgroupname="+selected,true);
+			xmlHttp.open("GET", "/meps/SubGroupName/getSSGroupNames?subgroupname="+selected,true);
 			xmlHttp.send(null);
 		}
 
@@ -601,7 +601,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alfarooq/UserProcess/sessionTimeOut");
+	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -751,25 +751,25 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Account Type<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/alfarooq/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+							src="/meps/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
 						<th title="click to sort" class="headerText">Group<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/alfarooq/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+							src="/meps/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
 						<th title="click to sort" class="headerText">Sub-Group<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/alfarooq/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+							src="/meps/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
 						<th title="click to sort" class="headerText">Account Code<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/alfarooq/css/dataTable/images/sort_both.png" /></th>
+							src="/meps/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Account Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/alfarooq/css/dataTable/images/sort_both.png" /></th>
+							src="/meps/css/dataTable/images/sort_both.png" /></th>
 						<!-- <th title="click to sort" class="headerText">Balance<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/alfarooq/css/dataTable/images/sort_both.png" /></th> -->
+							src="/meps/css/dataTable/images/sort_both.png" /></th> -->
 					</tr>
 				</thead>
 

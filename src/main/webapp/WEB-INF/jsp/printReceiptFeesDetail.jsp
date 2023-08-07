@@ -179,7 +179,7 @@
 			<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 110px;">
-				<img src="/alfarooq/images/alfarooq.jpg" width="85" height="80"/>
+				<img src="/meps/images/meps.jpg" width="85" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<c:choose>
@@ -358,7 +358,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/alfarooq/images/alfarooqpaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/meps/images/mepspaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -368,7 +368,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 110px;">
-				<img src="/alfarooq/images/alfarooq.jpg" width="85" height="80"/>
+				<img src="/meps/images/meps.jpg" width="85" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<c:choose>
@@ -548,7 +548,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/alfarooq/images/alfarooqpaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/meps/images/mepspaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>

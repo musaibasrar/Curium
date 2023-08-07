@@ -17,15 +17,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/alfarooq/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/alfarooq/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/alfarooq/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/alfarooq/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/alfarooq/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/meps/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/meps/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/meps/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.button.js"></script>
         
         
         
@@ -67,7 +67,7 @@
 
             function ViewAll(){
                 var form1=document.getElementById("form1");
-                form1.action="/alfarooq/StudentProcess/viewAll";
+                form1.action="/meps/StudentProcess/viewAll";
                 form1.submit();
             }
         </script>
@@ -76,7 +76,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alfarooq/UserProcess/sessionTimeOut");
+	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -89,7 +89,7 @@ for(Cookie cookie : cookies){
 }
 %>
     <body background="/images/bg.jpg" >
-        <form id="form1" action="/alfarooq/MarksDetailsProcess/downloadReportCard"  method="post">
+        <form id="form1" action="/meps/MarksDetailsProcess/downloadReportCard"  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
         <td height="250" align="center" valign="middle"><p class="style1"> Report card generated successfully<c:out value="${reportcardpath}"></c:out></p>

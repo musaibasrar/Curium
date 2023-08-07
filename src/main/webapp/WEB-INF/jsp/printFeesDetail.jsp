@@ -177,20 +177,13 @@
 			<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 110px;">
-				<img src="/alfarooq/images/alfarooq.jpg" width="85" height="80"/>
+				<td align="left" style="padding-left: 50px;">
+				<img src="/meps/images/meps.jpg" width="118" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<c:choose>
-                  <c:when test="${branchid eq 4}">
-                         <label class="dataTextBoldCenter" style="padding-left: 30px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-                  </c:when>
-                  <c:otherwise>
-                         <label class="dataTextBoldCenter" style="padding-left: 0px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-                  </c:otherwise>
-                </c:choose>
-				<label class="addressLine" style="padding-left: 25px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 90px;">Contact:&nbsp;${branchcontact} </label>
+                <label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 20px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 05px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 			</tr>
 </table>
@@ -366,24 +359,16 @@
 		<div style="border: 1px solid;border-radius: 15px">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td align="left" style="padding-left: 110px;">
-				<img src="/alfarooq/images/alfarooq.jpg" width="85" height="80"/>
+				<td align="left" style="padding-left: 50px;">
+				<img src="/meps/images/meps.jpg" width="118" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
-				<c:choose>
-                  <c:when test="${branchid eq 4}">
-                         <label class="dataTextBoldCenter" style="padding-left: 30px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-                  </c:when>
-                  <c:otherwise>
-                         <label class="dataTextBoldCenter" style="padding-left: 0px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-                  </c:otherwise>
-                </c:choose>
-				
-				<label class="addressLine" style="padding-left: 25px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 90px;">Contact:&nbsp;${branchcontact} </label>
+                <label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 20px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 05px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
 			</tr>
-		</table>
+</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>

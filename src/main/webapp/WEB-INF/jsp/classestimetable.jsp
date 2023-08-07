@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Classes Time Table</title>
-<link rel="stylesheet" href="/alfarooq/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/alfarooq/css/datePicker/demos.css">
+<link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/meps/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -317,42 +317,42 @@
 }
 </style>
 
-<link rel="stylesheet" href="/alfarooq/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/alfarooq/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/meps/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/alfarooq/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/meps/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/meps/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/alfarooq/js/datePicker/ui/sliderAccess.js"></script>
+	src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/meps/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/alfarooq/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/meps/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/meps/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/meps/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/meps/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/meps/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/meps/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/meps/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/meps/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/meps/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -378,7 +378,7 @@
 	
 </script>
 
-<script type="text/javascript" src="/alfarooq/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/meps/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -524,7 +524,7 @@
 	 
 	function savePeriods() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alfarooq/PeriodProcess/savePeriods";
+		form1.action = "/meps/PeriodProcess/savePeriods";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -574,7 +574,7 @@
 	
 	function deleteRecord(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/alfarooq/PeriodProcess/deletePeriods";
+		form1.action = "/meps/PeriodProcess/deletePeriods";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -586,7 +586,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alfarooq/UserProcess/sessionTimeOut");
+	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -615,16 +615,16 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Classes<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/alfarooq/css/dataTable/images/sort_both.png" /></th>
+							src="/meps/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Day Start Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/alfarooq/css/dataTable/images/sort_both.png" /></th>
+							src="/meps/css/dataTable/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Day End Time<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/alfarooq/css/dataTable/images/sort_both.png" /></th>
+							src="/meps/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Total No Of Periods<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/alfarooq/css/dataTable/images/sort_both.png" /></th>
+							src="/meps/css/dataTable/images/sort_both.png" /></th>
 					</tr>
 				</thead>
 
@@ -635,7 +635,7 @@ for(Cookie cookie : cookies){
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
 							<td class="dataText"><input type="checkbox" id="<c:out value="${periodmasterlist.idperiodmaster}"/>" class="chcktbl" name="idperiodmaster" value="<c:out value="${periodmasterlist.idperiodmaster}"/>" /></td>
-							<td class="dataText"><a class="dataTextInActive" href="/alfarooq/PeriodProcess/viewTimeTable?id=<c:out value="${periodmasterlist.idperiodmaster}" />"><c:out value="${periodmasterlist.class_}" /></a></td>
+							<td class="dataText"><a class="dataTextInActive" href="/meps/PeriodProcess/viewTimeTable?id=<c:out value="${periodmasterlist.idperiodmaster}" />"><c:out value="${periodmasterlist.class_}" /></a></td>
 							<td class="dataText"><c:out value="${periodmasterlist.daystart}" /></td>
 							<td class="dataText"><c:out value="${periodmasterlist.dayend}" /></td>
 							<td class="dataText"><c:out value="${periodmasterlist.totalperiods}" /></td>

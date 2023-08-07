@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Issue Stock</title>
-<link rel="stylesheet" href="/alfarooq/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/alfarooq/css/datePicker/demos.css">
+<link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/meps/css/datePicker/demos.css">
 
 <style type="text/css">
 .divCSS {
@@ -445,21 +445,21 @@
 }
 
 </style>
-<script type="text/javascript" src="/alfarooq/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/alfarooq/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/meps/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/alfarooq/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
 	
-	<script src="/alfarooq/js/bootstrap.min.js"></script>
-<link href="/alfarooq/css/select2.min.css" rel="stylesheet" />
-<script src="/alfarooq/js/select2.min.js"></script>
+	<script src="/meps/js/bootstrap.min.js"></script>
+<link href="/meps/css/select2.min.css" rel="stylesheet" />
+<script src="/meps/js/select2.min.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -554,14 +554,14 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/alfarooq/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/meps/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function saveissueentry() {
 		var form1 = document.getElementById("form1");
 		
 		if(form1.checkValidity()) {
-			form1.action = "/alfarooq/MessItemsMoveProcess/saveStockMove";
+			form1.action = "/meps/MessItemsMoveProcess/saveStockMove";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -571,7 +571,7 @@
 	
 	function cancelRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alfarooq/MessItemsMoveProcess/cancelStockMove";
+		form1.action = "/meps/MessItemsMoveProcess/cancelStockMove";
 		form1.method = "POST";
 		form1.submit();
 
@@ -579,21 +579,21 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alfarooq/AdminProcess/printVoucher";
+		form1.action = "/meps/AdminProcess/printVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function approveRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alfarooq/AdminProcess/approveVoucher";
+		form1.action = "/meps/AdminProcess/approveVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function rejectRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/alfarooq/AdminProcess/rejectVoucher";
+		form1.action = "/meps/AdminProcess/rejectVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -936,7 +936,7 @@
     	}
     	
     	var form1 = document.getElementById("form1");
-		form1.action="/alfarooq/MessItemsMoveProcess/saveStockMove?paymentmethodbanktransfer="+paymentmethodbanktransfer+"&paymentmethodchequetransfer="+paymentmethodchequetransfer+"&paymentmethodcash="+paymentmethodcash+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"&totalcashamount="+totalcashamountvalue+"&totalbanktransferamount="+totalbanktransferamountvalue+"&totalchequetransferamount="+totalchequetransferamountvalue+"&itemsGrandTotalAmountWithoutGST="+itemsTotalAmountWithoutGST+"";
+		form1.action="/meps/MessItemsMoveProcess/saveStockMove?paymentmethodbanktransfer="+paymentmethodbanktransfer+"&paymentmethodchequetransfer="+paymentmethodchequetransfer+"&paymentmethodcash="+paymentmethodcash+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"&totalcashamount="+totalcashamountvalue+"&totalbanktransferamount="+totalbanktransferamountvalue+"&totalchequetransferamount="+totalchequetransferamountvalue+"&itemsGrandTotalAmountWithoutGST="+itemsTotalAmountWithoutGST+"";
 		form1.method = "POST";
 		form1.submit();
 		
@@ -1060,7 +1060,7 @@
  	             
  	         }
  			xmlHttp.onreadystatechange = stateChanged;
- 			xmlHttp.open("GET", "/alfarooq/MessItemsMoveProcess/getCustomerLastPrice?customerName="+customerName+"&itemid="+itemId+"",true);
+ 			xmlHttp.open("GET", "/meps/MessItemsMoveProcess/getCustomerLastPrice?customerName="+customerName+"&itemid="+itemId+"",true);
  			xmlHttp.send(null);
  	}
  	
@@ -1371,7 +1371,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alfarooq/UserProcess/sessionTimeOut");
+	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -1450,7 +1450,7 @@ for(Cookie cookie : cookies){
 										        	
 										        		<option style="color: black;" value="${student.student.name}_${student.student.classstudying}_${student.fathersname}_${student.student.sid}">${student.student.name}&nbsp;&nbsp;/&nbsp;&nbsp;${student.student.classstudying}/&nbsp;&nbsp;${student.fathersname}</option>
 										        	</c:forEach>
-										        </select><!-- &nbsp;&nbsp;<a target="mainFrame" href="/alfarooq/StudentProcess/addNew">New Customer --></a>
+										        </select><!-- &nbsp;&nbsp;<a target="mainFrame" href="/meps/StudentProcess/addNew">New Customer --></a>
 									 	</div>
 								</div>
 							</td>
