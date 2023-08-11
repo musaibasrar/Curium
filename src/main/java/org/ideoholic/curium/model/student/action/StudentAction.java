@@ -240,5 +240,11 @@ public class StudentAction {
 	public String printAdmissionForm() {
 			return "printadmissionform";
 	}
+	//from here new coding
+	/*@PostMapping("/searchfeecategory")
+	public String searchfeecategory() {
+		new StudentService(request, response).getfeecategory();
+		return "addStudent";
+	}*/
 
 }
