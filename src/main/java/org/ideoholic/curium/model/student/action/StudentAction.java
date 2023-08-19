@@ -110,7 +110,25 @@ public class StudentAction {
 			return "viewAll";
 		}
 	}
-
+//my coding for otherviewfeesstructure
+	@GetMapping("/ViewotherFeesStructure")
+	public String ViewotherFeesStructure() {
+		if (new StudentService(request, response).otherviewDetailsOfStudent()) {
+			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+				return "student_details_other_feesstructure";
+			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				return "student_details_other_feesstructure";
+			} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				return "student_details_other_feesstructure";
+			} else {
+				return "student_details_other_feesstructure";
+			}
+		} else {
+			return "viewAll";
+		}
+	}
+	//end of otherviewfeesstructure
+	
 	@GetMapping("/viewAllStudentsWithParents")
 	public String viewAllStudentsWithParents() {
 		new StudentService(request, response).viewAllStudentsParents();

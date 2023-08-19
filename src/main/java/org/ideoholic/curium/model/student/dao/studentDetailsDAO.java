@@ -450,7 +450,7 @@ public class studentDetailsDAO {
 		}
 	}
 //this is other
-	public List<Studentotherfeesstructure> getotherStudentFeesStructure(long id,
+	public List<Studentotherfeesstructure> getStudentOtherFeesStructure(long id,
 			String currentYear) {
 		List<Studentotherfeesstructure> results = new ArrayList<Studentotherfeesstructure>();
 

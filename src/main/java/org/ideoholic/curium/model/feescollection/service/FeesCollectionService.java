@@ -246,7 +246,7 @@ public class FeesCollectionService {
 		String academicYear = request.getParameter("academicyear");	
 			
 		long id = Long.parseLong(request.getParameter("studentId"));
-		List<Studentotherfeesstructure> feesstructure = new studentDetailsDAO().getotherStudentFeesStructure(id, academicYear);
+		List<Studentotherfeesstructure> feesstructure = new studentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
 		//List<Feescollection> feesCollection = new feesCollectionDAO().getFeesForTheCurrentYear(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 		Map<Studentotherfeesstructure,Long> feesMap = new LinkedHashMap<Studentotherfeesstructure, Long>();
 		
@@ -1273,7 +1273,7 @@ public void getotherFeesDetails() {
 			
 			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,academicYear);
 			request.setAttribute("receiptinfo",rinfo);
-			List<Studentotherfeesstructure> feesstructure = new studentDetailsDAO().getotherStudentFeesStructure(id, academicYear);
+			List<Studentotherfeesstructure> feesstructure = new studentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
 			
 			long totalSum = 0l;
 			for (Receiptinfo receiptInfoSingle : rinfo) {

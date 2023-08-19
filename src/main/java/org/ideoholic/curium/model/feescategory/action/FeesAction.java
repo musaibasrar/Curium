@@ -30,7 +30,12 @@ public class FeesAction {
 		String studentId = new FeesService(request, response).applyConcession();
 		return studentFeePage(studentId);
 	}
-
+//other concession
+	@PostMapping("/applyotherConcession")
+	public String applyotherConcession() {
+		String studentId = new FeesService(request, response).applyotherConcession();
+		return studentotherFeePage(studentId);
+	}
 	@PostMapping("/printFeesWaiveoffReport")
 	public String printFeesWaiveoffReport() {
 		return "printfeeswaiveoffreport";
@@ -164,6 +169,21 @@ public class FeesAction {
 			return "viewAll";
 		}
 	}
+	//student other fee page
+	private String studentotherFeePage(String studentId) {
+		if (new StudentService(request, response).otherviewDetailsOfStudent(studentId)) {
+			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				return "student_details_other_feesstructure";
+			} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				return "student_details_other_feesstructure";
+			} else {
+				return "student_details_other_feesstructure";
+			}
+		} else {
+			return "viewAll";
+		}
+	}
+	//end of student other fee page
 	
 	
 	@GetMapping("/feesDueStampFees")
