@@ -234,5 +234,26 @@ public class feesCategoryDAO {
 		}
 
 	}
+	
+	public List <Feescategory> getfeecategoryofstudent(String classname)
+	{
+		List <Feescategory> result= new ArrayList();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from Feescategory where particularname like '%"+classname+"--%'");
+			result=query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return result;
+
+		}
+	}
 
 }
