@@ -730,7 +730,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class</th>
@@ -746,8 +746,8 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
+							<td class="dataText" style="display: none;"><input type="checkbox"
+								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl" checked
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
@@ -785,7 +785,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 					
 						<td class="footerTD" colspan="2"><input value="Update"
 							type="submit" id="updateMarks" />
-							&nbsp; &nbsp; &nbsp; &nbsp;<button id="delete">Delete</button>
+							<!-- &nbsp; &nbsp; &nbsp; &nbsp;<button id="delete">Delete</button> -->
 							<!-- <input value="Delete Stamp Fees"
 							type="submit" id="deleteStamp" /> --></td>
 							

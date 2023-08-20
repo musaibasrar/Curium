@@ -351,7 +351,6 @@ public class MarksDetailsService {
 		String[] marksid = request.getParameterValues("marksid");
 		String exam = request.getParameter("examidselected");
 		String subject = request.getParameter("subjectidselected");
-		System.out.println("the subject id is " + subject + ", and exam id is " + exam);
 		int sizeOfArray = 0;
 		Map<Integer, Map<Integer, String>> mapOfMarksid = new HashMap<Integer, Map<Integer, String>>();
 		List<Integer> ids = new ArrayList<Integer>();
@@ -506,14 +505,25 @@ public class MarksDetailsService {
 									
 									if(marksSubid == subjectId) {
 										
-										if( marks.getMarksobtained() < sub.getMinmarks()) {
+										int marksObtained = marks.getMarksobtained();
+										int minMarks = sub.getMinmarks();
+										int maxMarks = sub.getMaxmarks();
+										
+										if( marksObtained < minMarks) {
+											
 											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_F");
-										}else if ( marks.getMarksobtained() >= sub.getMinmarks()) {
+											totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
+										}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
+											
 											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_P");
+											totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
+										}else if(marksObtained == 999) {
+											subMarks.put(sub.getSubjectname(), " _AB");
 										}
 										
-										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 										totalMarks = totalMarks+sub.getMaxmarks();
+										
+										
 									}
 								}
 						}
