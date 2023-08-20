@@ -498,13 +498,13 @@ for(Cookie cookie : cookies){
 						<tr></tr>
 						<tr>
 						
-						<td width="16%" class="alignRight">From Class &nbsp;
+						<td width="16%" class="alignRight">Class &nbsp;
 							</td>
 
 							<td width="8%">
 							 <label> 
 								<select name="fromclass" id="fromclass"
-									style="width: 120px;">
+									style="width: 210px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
@@ -516,11 +516,11 @@ for(Cookie cookie : cookies){
 								</select>
 								
 							</label>
-							&nbsp;<label style="font-weight: bold;color:#325F85">To Class &nbsp;</label>
+							&nbsp;<label style="font-weight: bold;color:#325F85;display: none;">To Class &nbsp;</label>
 							
 							<label>
 							<select name="toclass" id="toclass"
-									style="width: 120px;">
+									style="width: 120px;display: none;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 													<c:if test="${(classdetailslist.classdetails != '')}">
