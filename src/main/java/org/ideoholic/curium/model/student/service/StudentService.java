@@ -4,13 +4,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +27,17 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
+import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.pudetails.dto.Pudetails;
+import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
+import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
@@ -46,6 +54,7 @@ public class StudentService {
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
+	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
 	
@@ -546,10 +555,128 @@ public class StudentService {
 
 		if(parents!=null){
 			result=true;
+			stampFees(parents.getStudent().getSid());
 		}
 
 		return result;
 
+	}
+	
+	private void stampFees(Integer stdIds) {
+
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		String[] studentIds = {stdIds.toString()};
+		if(studentIds!=null){
+		Academicfeesstructure academicfessstructure = new Academicfeesstructure();
+		List<Academicfeesstructure> listOfacademicfessstructure = new ArrayList<Academicfeesstructure>();
+		List<Studentfeesstructure> listOfstudentfeesstructure = new ArrayList<Studentfeesstructure>();
+
+		String feesTotalAmount = request.getParameter("feesTotalAmount");
+		Long grandTotal = 0l;
+
+		String[] feesCategoryIds = request.getParameterValues("feesIDS");
+		String[] feesAmount = request.getParameterValues("fessCat");
+		String[] concession = request.getParameterValues("feesConcession");
+		String[] totalInstallments = request.getParameterValues("feesCount");
+
+		List<Integer> ids = new ArrayList();
+		listOfacademicfessstructure.clear();
+		for (String id : studentIds) {
+			System.out.println("id" + id);
+			academicfessstructure = new Academicfeesstructure();
+			academicfessstructure.setSid(Integer.valueOf(id));
+			academicfessstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			academicfessstructure.setTotalfees(feesTotalAmount);
+			grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
+			academicfessstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+
+			listOfacademicfessstructure.add(academicfessstructure);
+			// ids.add(Integer.valueOf(id));
+
+		}
+
+		for (String id : studentIds) {
+
+			for(int i=0; i < feesCategoryIds.length ; i++){
+
+			Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
+			Feescategory feescategory = new Feescategory();
+			studentfeesstructure.setSid(Integer.valueOf(id));
+			feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIds[i]));
+			studentfeesstructure.setFeescategory(feescategory);
+			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[i]));
+			studentfeesstructure.setFeespaid((long) 0);
+			studentfeesstructure.setWaiveoff((long) 0);
+			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[i]));
+			studentfeesstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));
+			listOfstudentfeesstructure.add(studentfeesstructure);
+		}
+
+
+
+		}
+
+		//Accounts
+		//Pass J.V. : credit the Fees as income & debit the cash
+
+		int crFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));;
+
+		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+
+		transactions.setDraccountid(drAccount);
+		transactions.setCraccountid(crFees);
+		transactions.setDramount(new BigDecimal(grandTotal));
+		transactions.setCramount(new BigDecimal(grandTotal));
+		transactions.setVouchertype(4);
+		transactions.setTransactiondate(DateUtil.todaysDate());
+		transactions.setEntrydate(DateUtil.todaysDate());
+		transactions.setNarration("Towards Fees Stamp");
+		transactions.setCancelvoucher("no");
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+
+		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+drAccount;
+
+		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+crFees;
+
+		// End J.V
+		new StampFeesDAO().addStampFees(listOfacademicfessstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
+		//new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+
+		}
+		}
+	}
+	
+	private int getLedgerAccountId(String itemAccount) {
+
+		int result = 0;
+
+	 	Properties properties = new Properties();
+		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
+
+        		try {
+					properties.load(inputStream);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+        		String ItemLedgerId = properties.getProperty(itemAccount);
+
+		    if(ItemLedgerId!=null) {
+		    	result = Integer.parseInt(ItemLedgerId);
+		    }else {
+		    	String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
+		    	result = Integer.parseInt(ItemLedger.toLowerCase());
+		    }
+
+		    return result;
 	}
 
 	public boolean viewAllStudents() {
