@@ -547,6 +547,130 @@
         }
     }
 </script>
+
+<script>
+var xmlHttp;
+    var count;
+    function searchfeecategory() {
+		var selected=document.getElementById('addclass').value;
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "/meps/FeesProcess/searchfeecategory?classstudying="+selected,true);
+			xmlHttp.send(null);
+		
+	}
+    
+	function stateChanged() {
+		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+			document.getElementById("feescat").innerHTML = xmlHttp.responseText;
+		}
+	}
+	function GetXmlHttpObject() {
+		var xmlHttp = null;
+		try {
+			xmlHttp = new XMLHttpRequest();
+		} catch (e) {
+			try {
+				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+		return xmlHttp;
+	}
+    
+</script>
+<script>
+$(function() {
+	$('#chckHead').click(function() {
+		var length = $('.chcktbl:checked').length;
+		var trLength = $('.labelClass').length;
+		if (length > 0) {
+			$('.chcktbl:checked').attr('checked', false);
+			this.checked = false;
+		} else {
+			if (this.checked == false) {
+				$('.chcktbl:checked').attr('checked', false);
+			} else {
+				$('.chcktbl:not(:checked)').attr('checked', true);
+			}
+		}
+	});
+	
+	$('.chcktbl').click(function() {
+		var length = $('.chcktbl:checked').length;
+		var trLength = $('.labelClass').length;
+		alert(tdLength);
+		if (length > trLength) {
+			$('.chcktbl:not(:checked)').attr('disabled', true);
+		} else {
+			$('.chcktbl:not(:checked)').attr('disabled', false);
+		}
+	});
+});
+</script>
+<script>
+function calculate(value2) {
+	var feesCount=document.getElementById("feesCount_"+value2).value;
+	//alert("hii", value2);
+	 var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
+	 //alert("hii", value2);
+     var feesCount=document.getElementById("feesCount_"+value2).value;
+     var final1=document.getElementById("hiddenfees_full_amount_"+value2);
+     	
+     	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
+     	//feesConcession (direct amount)
+         final1.value=feesCat*feesCount;
+     	
+         calculateGrandTotal();
+   
+}
+function calculateGrandTotal() {
+	
+	
+    var sum = 0.0;
+    var column2 = $('.feesFullAmount')
+    jQuery.each(column2,function(){
+        sum += parseFloat($(this).val());
+    });
+    
+    $('#feesTotalAmount').val(sum);
+}
+$(document).ready(function() {
+    
+    
+    $("#dataTable").keyup(function(){
+        
+        var sum = 0.0;
+        var totalSum=0.0;
+        var column2 = $('.feesFullAmount')
+        jQuery.each(column2,function(){
+            sum += parseFloat($(this).val());
+        });
+        
+        $('#feesTotalAmount').val(sum);
+        
+    });
+    $("#dataTable").click(function(){
+        
+        var sum = 0.0;
+        var totalSum=0.0;
+        var column2 = $('.feesFullAmount')
+        jQuery.each(column2,function(){
+            sum += parseFloat($(this).val());
+        });
+        
+        $('#feesTotalAmount').val(sum);
+       
+    });
+});
+</script>
 </head>
 <%
 	//allow access only if session exists
@@ -583,6 +707,7 @@
 					<li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
+					<li><a href="#fragment-7">Stamp Fee</a></li>
 				</ul>
 
 
@@ -650,7 +775,7 @@
 
 							<td class="alignLeft">Studying in Class&nbsp;</td>
 							<td ><label> <select name="addclass"
-									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;">
+									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -1884,6 +2009,72 @@
 							</div>
 
 						</div>
+						
+						<div id="fragment-7">
+						
+						<table style="width: auto;height: auto;" align="center">
+								
+							<tr>
+							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td>
+							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
+							</label>
+							</td>
+							
+						</tr>
+											
+						<tr>
+							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
+							<td id="feescat">
+							
+							</td>
+							
+						</tr>
+						 <tr>
+							<td><br /></td>
+						</tr>
+							
+						
+							<tr>
+								<td></td>
+								<td align="left">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+								<tr><td><br></td></tr>
+								<tr>
+								<tfoot>
+					
+				</tfoot>
+								</tr>
+									<tr>
+										<td></td>
+										<td align="left">
+										
+											<button id="saveseven" class="save" name="savestudent">Save</button>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<button id="cancelthree" class="cancel">Cancel</button>
+										</td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+				
+					
+				</table>
+				</div>
 					</table>
 				</div>
 
