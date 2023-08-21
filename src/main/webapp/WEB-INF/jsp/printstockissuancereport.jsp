@@ -248,6 +248,7 @@
  				 <tr>
  				 		<th class=datath>Sl.No</th>
  				 		<th class="datath">Date</th>
+ 				 		<th class="datath">Bill No.</th>
 						<th class="datath">Issued To</th>
 						<th class="datath">Purpose</th>
 						<th class="datath">Item</th>
@@ -266,6 +267,7 @@
 						<tr>
 								<td class="datatd" style="font-size: 9px;">${status.index+1}</td>
 								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.transactiondate}" /></td>
+								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.billno}" /></td>
 								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.issuedto}" /></td>
 								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.purpose}" /></td>
 								<td class="datatd" style="font-size: 9px;"><c:out value="${stockissuancelist.itemname}" /></td>
