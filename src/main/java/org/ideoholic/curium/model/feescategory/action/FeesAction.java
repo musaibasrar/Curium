@@ -176,7 +176,7 @@ public class FeesAction {
 		new FeesService(request, response).viewOtherFees();
 		return "otherfeesreport";
 	}
-
+	
 	@GetMapping("/searchfeecategory")
 	public void searchfeecategory() {
 			try {
@@ -186,10 +186,30 @@ public class FeesAction {
 				e.printStackTrace();
 			}
 	}
-	
+
 	public void setHttpobjects(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
+	}
+	
+	@PostMapping("/applyotherConcession")
+	public String applyotherConcession() {
+		String studentId = new FeesService(request, response).applyotherConcession();
+		return studentotherFeePage(studentId);
+	}
+	
+	private String studentotherFeePage(String studentId) {
+		if (new StudentService(request, response).viewOtherFeesDetailsOfStudent(studentId)) {
+			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				return "student_details_other_feesstructure";
+			} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				return "student_details_other_feesstructure";
+			} else {
+				return "student_details_other_feesstructure";
+			}
+		} else {
+			return "viewAll";
+		}
 	}
 
 }

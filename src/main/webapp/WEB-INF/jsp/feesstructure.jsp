@@ -510,7 +510,8 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
-						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">View Fees</th>
+						<th title="click to sort" class="headerText">View Other Fees</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
@@ -532,6 +533,9 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${Parents.student.sid}"/>" /></td> --%>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="/noman/StudentProcess/ViewFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
+										value="${Parents.student.admissionnumber}" /></a></td>
+							<td class="dataTextInActive"><a class="dataTextInActive"
+								href="/meps/StudentProcess/ViewotherFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out
