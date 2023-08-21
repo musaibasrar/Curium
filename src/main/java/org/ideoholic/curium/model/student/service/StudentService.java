@@ -32,6 +32,7 @@ import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
+import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -43,6 +44,7 @@ import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.web.multipart.MultipartFile;
@@ -1902,5 +1904,99 @@ public class StudentService {
 		
 		return result;
 	}
+	
+	
+	public boolean viewOtherFeesDetailsOfStudent() {
+		return viewOtherFeesDetailsOfStudent(request.getParameter("id"));
+	}
+	public boolean viewOtherFeesDetailsOfStudent(String studentId) {
+		boolean result = false;
+		try {
+			long id = Long.parseLong(studentId);
+			Student student = new studentDetailsDAO().readUniqueObject(id);
+			Parents parents = new parentsDetailsDAO().readUniqueObject(id);
+
+			/*httpSession.setAttribute("studentfromservice",student);
+			httpSession.setAttribute("parentsfromservice",parents);
+			httpSession.setAttribute("idofstudentfromservice",id);*/
+
+			Currentacademicyear currentYear = new YearDAO().showYear();
+			httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
+
+			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
+			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
+			List<Otherreceiptinfo> rinfo = new feesCollectionDAO().getotherReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
+			request.setAttribute("receiptinfo",rinfo);
+			List<Studentotherfeesstructure> feesstructure = new studentDetailsDAO().getStudentOtherFeesStructure(id, currentYear.getCurrentacademicyear());
+
+			long totalSum = 0l;
+			for (Otherreceiptinfo receiptInfoSingle : rinfo) {
+				totalSum = totalSum + receiptInfoSingle.getTotalamount();
+			}
+
+			long totalFeesAmount = 0l;
+			long totalFeesConcession = 0l;
+			for (Studentotherfeesstructure studentfeesstructureSingle : feesstructure) {
+				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
+				totalFeesConcession = totalFeesConcession+studentfeesstructureSingle.getConcession();
+			}
+
+			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
+			//String totalFees = new feesDetailsDAO().feesTotal(id, currentYear.getCurrentacademicyear());
+			//String dueAmount = new feesDetailsDAO().dueAmount(id, currentYear.getCurrentacademicyear());
+			if (student == null) {
+				result = false;
+			} else {
+				httpSession.setAttribute("student", student);
+				String classStudying = student.getClassstudying();
+				if (!classStudying.equalsIgnoreCase("")) {
+					String[] classParts = classStudying.split("--");
+					httpSession.setAttribute("classstudying", classParts[0]);
+					httpSession.setAttribute("secstudying", "");
+					if(classParts.length>1) {
+						httpSession.setAttribute("secstudying", classParts[1]);
+					}
+
+				} else {
+					httpSession.setAttribute("classstudying", classStudying);
+					httpSession.setAttribute("secstudying", "");
+				}
+
+				String classAdmitted = student.getClassadmittedin();
+
+				if (!classAdmitted.equalsIgnoreCase("")) {
+
+					String[] classAdmittedParts = classAdmitted.split("--");
+					request.setAttribute("classadm", classAdmittedParts[0]);
+					request.setAttribute("secadm", "");
+					if(classAdmittedParts.length>1) {
+						request.setAttribute("secadm", classAdmittedParts[1]);
+					}
+
+				} else {
+					request.setAttribute("classadm", classAdmitted);
+					request.setAttribute("secadm", "");
+				}
+
+				httpSession.setAttribute("parents", parents);
+				//httpSession.setAttribute("feesdetails", feesdetails);
+				httpSession.setAttribute("feesstructure", feesstructure);
+				httpSession.setAttribute("sumoffees", totalSum);
+				httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
+				httpSession.setAttribute("totalfees", totalFeesAmount);
+				httpSession.setAttribute("academicPerYear", currentYear.getCurrentacademicyear());
+				httpSession.setAttribute("currentAcademicYear", currentYear.getCurrentacademicyear());
+				httpSession.setAttribute("totalfeesconcession", totalFeesConcession);
+				result = true;
+				httpSession.setAttribute("resultfromservice",result);
+			}
+			new StandardService(request, response).viewClasses();
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}
+		return result;
+	}
+	//end of otherview of student
 	
 }

@@ -205,7 +205,6 @@ public class StampFeesService {
 		List<Integer> ids = new ArrayList();
 		listOfacademicfessstructure.clear();
 		for (String id : studentIds) {
-			System.out.println("id" + id);
 			academicfessstructure = new Academicfeesstructure();
 			academicfessstructure.setSid(Integer.valueOf(id));
 			academicfessstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
@@ -338,7 +337,6 @@ public class StampFeesService {
 		List<Integer> ids = new ArrayList();
 		listOfacademicfessstructure.clear();
 		for (String id : studentIds) {
-			System.out.println("id" + id);
 			academicfessstructure = new Academicotherfeesstructure();
 			academicfessstructure.setSid(Integer.valueOf(id));
 			academicfessstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());

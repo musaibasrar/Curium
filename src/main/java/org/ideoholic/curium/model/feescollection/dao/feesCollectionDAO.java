@@ -359,5 +359,20 @@ public class feesCollectionDAO {
 			return results;
 		}
 	}
+	
+	public List<Otherreceiptinfo> getotherReceiptDetailsPerStudent(long id,
+			String currentacademicyear) {
+		List<Otherreceiptinfo> receiptInfo = new ArrayList<Otherreceiptinfo>();
+		try{
+			transaction = session.beginTransaction();
+			receiptInfo = session.createQuery("from Otherreceiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
+			transaction.commit();
+		}catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return receiptInfo;
+	}
 
 }
