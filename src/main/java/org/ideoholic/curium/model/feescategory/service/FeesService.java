@@ -544,4 +544,42 @@ public class FeesService {
 
 	        }
 	    }
+	   
+	   public String applyotherConcession() {
+
+	        String[] idfeescategory = request.getParameterValues("sfsid");
+	        List<Integer> sfsId = new ArrayList<Integer>();
+	        List<Integer> feesCatId = new ArrayList<Integer>();
+	        List<String> consession = new ArrayList<String>();
+	        List<Concession> concessionList = new ArrayList<Concession>();
+
+	        String studentId = request.getParameter("id");
+
+	        if(idfeescategory!=null){
+
+	                for (String string : idfeescategory) {
+
+	                		Concession con = new Concession();
+	                		String[] test = string.split("_");
+	                        sfsId.add(Integer.valueOf(test[0]));
+	                		String dueAmount = request.getParameter("dueamount:"+Integer.valueOf(test[0]));
+	                        String concessionAmount = request.getParameter("concession:"+Integer.valueOf(test[0]));
+
+	                        if(Integer.parseInt(concessionAmount)<=Integer.parseInt(dueAmount)) {
+	                        	feesCatId.add(Integer.valueOf(test[1]));
+	                            con.setSfsid(Integer.valueOf(test[0]));
+	                            con.setFeescatid(Integer.valueOf(test[1]));
+	                            con.setConcessionOld(request.getParameter("concessionold:"+Integer.valueOf(test[0])));
+	                            con.setConcession(request.getParameter("concession:"+Integer.valueOf(test[0])));
+	                            concessionList.add(con);
+	                        }
+
+	               }
+	           new feesCategoryDAO().applyotherConcession(concessionList,studentId);
+	           return studentId;
+	        }
+
+	        throw new IllegalArgumentException("Fees category for the given student does not exist");
+
+		}
 }
