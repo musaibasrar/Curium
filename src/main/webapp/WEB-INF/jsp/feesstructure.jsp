@@ -537,6 +537,9 @@ for(Cookie cookie : cookies){
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="/meps/StudentProcess/ViewotherFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
+							<td class="dataTextInActive"><a class="dataTextInActive"
+								href="/meps/StudentProcess/ViewotherFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
+										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.student.classstudying}" /></td>
