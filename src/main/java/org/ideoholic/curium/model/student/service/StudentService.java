@@ -735,8 +735,12 @@ public class StudentService {
 			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, currentYear.getCurrentacademicyear());
 			
 			long totalSum = 0l;
+			long totalFineAmount = 0l;
+			long totalMiscAmount = 0l;
 			for (Receiptinfo receiptInfoSingle : rinfo) {
-				totalSum = totalSum + receiptInfoSingle.getTotalamount();
+				totalSum = totalSum + receiptInfoSingle.getTotalamount()-receiptInfoSingle.getFine()-receiptInfoSingle.getMisc();
+				totalFineAmount = receiptInfoSingle.getFine();
+				totalMiscAmount = receiptInfoSingle.getMisc();
 			}
 			
 			long totalFeesAmount = 0l;
@@ -792,6 +796,9 @@ public class StudentService {
 				httpSession.setAttribute("academicPerYear", currentYear.getCurrentacademicyear());
 				httpSession.setAttribute("currentAcademicYear", currentYear.getCurrentacademicyear());
 				httpSession.setAttribute("totalfeesconcession", totalFeesConcession);
+				httpSession.setAttribute("totalfineamount", totalFineAmount);
+				httpSession.setAttribute("totalmiscamount", totalMiscAmount);
+				
 				result = true;
 				httpSession.setAttribute("resultfromservice",result);
 			}
