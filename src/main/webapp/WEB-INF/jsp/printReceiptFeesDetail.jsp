@@ -288,6 +288,18 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
+			<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.fine}" /></td>
+				</tr>
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.misc}" /></td>
+				</tr>
 			</table>
 			
 			
@@ -304,7 +316,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -470,6 +482,19 @@
 				</tr>
 			</c:forEach>
 			
+			<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.fine}" /></td>
+				</tr>
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.misc}" /></td>
+				</tr>
+			
 			</table>
 			
 			
@@ -486,7 +511,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
