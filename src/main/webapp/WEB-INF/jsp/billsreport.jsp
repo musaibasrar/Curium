@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Bills Report</title>
-<link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
+<link rel="stylesheet" href="/divine/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/divine/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -408,26 +408,26 @@
 }
 
 </style>
-<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/divine/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/divine/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/roshan/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/divine/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/divine/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/divine/js/datePicker/ui/jquery.ui.accordion.js"></script>
 	
 	<!-- Select drop down -->	
-	<!-- <link href="/roshan/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-<script src="/roshan/js/bootstrap.min.js"></script>
-<!-- <script src="/roshan/js/jquery.min.js"></script> -->
+	<!-- <link href="/divine/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<script src="/divine/js/bootstrap.min.js"></script>
+<!-- <script src="/divine/js/jquery.min.js"></script> -->
 
 
-<link href="/roshan/css/select2.min.css" rel="stylesheet" />
-<script src="/roshan/js/select2.min.js"></script>
+<link href="/divine/css/select2.min.css" rel="stylesheet" />
+<script src="/divine/js/select2.min.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -501,7 +501,7 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/divine/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function saveissueentry() {
@@ -900,7 +900,7 @@ for(Cookie cookie : cookies){
 			<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/roshan/MessItemsMoveProcess/issueItems?page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/divine/MessItemsMoveProcess/issueItems?page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -913,7 +913,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/roshan/MessItemsMoveProcess/issueItems?page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/divine/MessItemsMoveProcess/issueItems?page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -922,7 +922,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/roshan/MessItemsMoveProcess/issueItems?page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/divine/MessItemsMoveProcess/issueItems?page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
                     
