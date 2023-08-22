@@ -567,6 +567,8 @@ public class StudentService {
 	private void stampFees(Integer stdIds) {
 
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		String[] feesCategoryIds = request.getParameterValues("feesIDS");
+		if(feesCategoryIds!=null) {
 		String[] studentIds = {stdIds.toString()};
 		if(studentIds!=null){
 		Academicfeesstructure academicfessstructure = new Academicfeesstructure();
@@ -652,6 +654,7 @@ public class StudentService {
 		new StampFeesDAO().addStampFees(listOfacademicfessstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
 		//new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
+		}
 		}
 		}
 	}
