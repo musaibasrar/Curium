@@ -290,6 +290,18 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
+				<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.fine}" /></td>
+				</tr>
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.misc}" /></td>
+				</tr>
 			</table>
 			
 			
@@ -312,7 +324,7 @@
 			</table>
 			
 		<TABLE width="100%" border="0">
-			<tr>
+			<%-- <tr>
 			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
@@ -330,7 +342,7 @@
 				 Total fees Due : Rs.  ${dueamount} 
 				</td>
 				
-			</tr>
+			</tr> --%>
 			
 			<tr>
 			<td><hr width="100%"></td>
@@ -474,7 +486,18 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-			
+				<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.fine}" /></td>
+				</tr>
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.misc}" /></td>
+				</tr>
 			</table>
 			
 			
@@ -497,7 +520,7 @@
 			</table>
 			
 		<TABLE width="100%" border="0">
-			<tr>
+			<%-- <tr>
 			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
@@ -515,7 +538,7 @@
 				 Total fees Due : Rs.  ${dueamount} 
 				</td>
 				
-			</tr>
+			</tr> --%>
 			
 			<tr>
 			<td><hr width="100%"></td>
