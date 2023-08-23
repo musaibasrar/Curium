@@ -292,18 +292,23 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-			<tr>
+			<c:if test="${recieptinfo.fine > 0}">
+				<tr>
 					<td class="dataText"><c:out
 							value="Fine" /></td>
 					<td class="dataText">Rs. <c:out
 							value="${recieptinfo.fine}" /></td>
 				</tr>
+			</c:if>
+
+			<c:if test="${recieptinfo.misc > 0}">	
 				<tr>
 					<td class="dataText"><c:out
 							value="Misc" /></td>
 					<td class="dataText">Rs. <c:out
 							value="${recieptinfo.misc}" /></td>
 				</tr>
+			</c:if>
 			</table>
 			
 			
@@ -492,18 +497,23 @@
 				</tr>
 			</c:forEach>
 			
-			<tr>
+			<c:if test="${recieptinfo.fine > 0}">
+				<tr>
 					<td class="dataText"><c:out
 							value="Fine" /></td>
 					<td class="dataText">Rs. <c:out
 							value="${recieptinfo.fine}" /></td>
 				</tr>
+			</c:if>
+
+			<c:if test="${recieptinfo.misc > 0}">	
 				<tr>
 					<td class="dataText"><c:out
 							value="Misc" /></td>
 					<td class="dataText">Rs. <c:out
 							value="${recieptinfo.misc}" /></td>
 				</tr>
+			</c:if>
 			
 			</table>
 			
