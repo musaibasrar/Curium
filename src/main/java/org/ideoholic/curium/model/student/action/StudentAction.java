@@ -233,5 +233,27 @@ public class StudentAction {
 		request.setAttribute("urlbranchid", branchId);
 		return viewStudent();
 	}
+	
+	@PostMapping("/printAdmissionForm")
+	public String printAdmissionForm() {
+			return "printadmissionform";
+	}
+	
+	@GetMapping("/ViewotherFeesStructure")
+	public String ViewotherFeesStructure() {
+		if (new StudentService(request, response).viewOtherFeesDetailsOfStudent()) {
+			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+				return "student_details_other_feesstructure";
+			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				return "student_details_other_feesstructure";
+			} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				return "student_details_other_feesstructure";
+			} else {
+				return "student_details_other_feesstructure";
+			}
+		} else {
+			return "viewAll";
+		}
+	}
 
 }
