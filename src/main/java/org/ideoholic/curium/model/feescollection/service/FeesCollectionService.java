@@ -50,6 +50,7 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.model.user.dao.UserDAO;
+import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
@@ -274,6 +275,8 @@ public class FeesCollectionService {
 				
 			//Pass Receipt : Credit the student Fees Receivable & debit the cash
 			
+			BigDecimal onlyTotalFee = new BigDecimal(receiptInfo.getTotalamount()-receiptInfo.getFine()-receiptInfo.getMisc());	
+				
 			int crFees = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			int drAccount = 0;
 			
@@ -290,8 +293,8 @@ public class FeesCollectionService {
 			
 			transactions.setDraccountid(drAccount);
 			transactions.setCraccountid(crFees);
-			transactions.setDramount(new BigDecimal(receiptInfo.getTotalamount()));
-			transactions.setCramount(new BigDecimal(receiptInfo.getTotalamount()));
+			transactions.setDramount(onlyTotalFee);
+			transactions.setCramount(onlyTotalFee);
 			transactions.setVouchertype(1);
 			transactions.setTransactiondate(receiptInfo.getDate());
 			transactions.setEntrydate(DateUtil.todaysDate());
@@ -301,9 +304,9 @@ public class FeesCollectionService {
 			transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			
-			String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptInfo.getTotalamount()+" where accountdetailsid="+drAccount;
+			String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+drAccount;
 
-			String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+receiptInfo.getTotalamount()+" where accountdetailsid="+crFees;
+			String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+crFees;
 			
 			// End Receipt
 			
@@ -316,8 +319,8 @@ public class FeesCollectionService {
 			
 			transactionsIncome.setDraccountid(drAccountIncome);
 			transactionsIncome.setCraccountid(crFeesIncome);
-			transactionsIncome.setDramount(new BigDecimal(receiptInfo.getTotalamount()));
-			transactionsIncome.setCramount(new BigDecimal(receiptInfo.getTotalamount()));
+			transactionsIncome.setDramount(onlyTotalFee);
+			transactionsIncome.setCramount(onlyTotalFee);
 			transactionsIncome.setVouchertype(4);
 			transactionsIncome.setTransactiondate(receiptInfo.getDate());
 			transactionsIncome.setEntrydate(DateUtil.todaysDate());
@@ -327,9 +330,9 @@ public class FeesCollectionService {
 			transactionsIncome.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			transactionsIncome.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			
-			String updateDrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance-"+receiptInfo.getTotalamount()+" where accountdetailsid="+drAccountIncome;
+			String updateDrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+drAccountIncome;
 
-			String updateCrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance+"+receiptInfo.getTotalamount()+" where accountdetailsid="+crFeesIncome;
+			String updateCrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+crFeesIncome;
 			
 			// End J.V
 			  

@@ -683,7 +683,11 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees collected :</label>Rs. ${sumofdetailsfees}</td>
+					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees :</label>Rs. ${sumofonlyfee}
+					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fine :</label>Rs. ${sumoffine}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total Misc. :</label>Rs. ${sumofmisc}
+					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">Grand Total :</label>Rs. ${sumofdetailsfees}
+					
+					</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -694,7 +698,10 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input type="checkbox" id="chckHead" /></th>
                             <th title="click to sort" class="headerText">Date of fees</th>
                             <th title="click to sort" class="headerText">Reference Number</th>
-                            <th title="click to sort" class="headerText">Total Amount</th>
+                            <th title="click to sort" class="headerText">Fee</th>
+                            <th title="click to sort" class="headerText">Fine</th>
+                            <th title="click to sort" class="headerText">Misc</th>
+                            <th title="click to sort" class="headerText">Grand Total</th>
                             <th title="click to sort" class="headerText">View Details</th>
                             <th title="click to sort" class="headerText">Cancel Receipt</th>
 
@@ -712,6 +719,9 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
                                 <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
                                 <td  class="dataText"><c:out value="${feesdetails.branchreceiptnumber}"/></a></td>
+                                <td class="dataText"><c:out value="${feesdetails.totalamount-feesdetails.fine-feesdetails.misc}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.fine}"/></td>
+                                <td class="dataText"><c:out value="${feesdetails.misc}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/rauzamission/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/rauzamission/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>&receiptid=<c:out value='${feesdetails.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
