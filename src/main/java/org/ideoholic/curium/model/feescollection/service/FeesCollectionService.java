@@ -209,8 +209,10 @@ public class FeesCollectionService {
 		
 		String sid = request.getParameter("studentIdDetails");
 		String[] amountPaying = request.getParameterValues("amountpaying");
-		String[] fine = request.getParameterValues("fine");
+		Long fineAmount = DataUtil.parseLong(request.getParameter("fineamount"));
+		Long miscAmount = DataUtil.parseLong(request.getParameter("miscamount"));
 		String[] studentSfsIds = request.getParameterValues("studentsfsids");
+		
 		
 		//Get Payment Details
 		String paymentMethod = request.getParameter("paymentmethod");
@@ -248,8 +250,10 @@ public class FeesCollectionService {
 				String[] totalAmount = studentSfsIds[i].split("_");
 				grantTotal+=DataUtil.parseLong(amountPaying[Integer.parseInt(totalAmount[1])]);
 			}
-			receiptInfo.setTotalamount(grantTotal);
 			receiptInfo.setPaymenttype(paymentType);
+			receiptInfo.setFine(fineAmount);
+			receiptInfo.setMisc(miscAmount);
+			receiptInfo.setTotalamount(grantTotal+fineAmount+miscAmount);
 			/* new feesCollectionDAO().createReceipt(receiptInfo); */
 			 
 				for (int i = 0; i < studentSfsIds.length; i++) {
@@ -258,7 +262,7 @@ public class FeesCollectionService {
 					feesCollect.setSfsid(DataUtil.parseInt(studentSfsIdamount[0]));
 					feesCollect.setAmountpaid(DataUtil.parseLong(amountPaying[Integer.parseInt(studentSfsIdamount[1])]));
 					feesCollect.setSid(DataUtil.parseInt(sid));
-					feesCollect.setFine(DataUtil.parseLong(fine[i]));
+					feesCollect.setFine(Long.parseLong("0"));
 					feesCollect.setDate(DateUtil.indiandateParser(request.getParameter("dateoffeesDetails")));
 					feesCollect.setAcademicyear(request.getParameter("academicyear"));
 					//feesCollect.setReceiptnumber(receiptInfo.getReceiptnumber());
