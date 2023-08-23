@@ -286,7 +286,22 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
+				<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.fine}" /></td>
+				</tr>
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.misc}" /></td>
+				</tr>
+			</table>
 			
+			
+			<TABLE width="100%" border="0">
 			<tr>
 			
 			<td><hr width="100%"></td>
@@ -305,14 +320,15 @@
 						value="${recieptinfo.totalamount}" /></td>
 
 			</tr>
-			<tr>
+			</table>
 			
+		<TABLE width="100%" border="0">
+			<tr>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
 
-<<<<<<< HEAD
 <tr>
 <td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${username}</label></td>
 </tr>
@@ -332,6 +348,43 @@
 <td></td>
 <td align="left"><br>Signature of Cashier/Accountant</td>
 </tr>
+			<tr>
+				<td class="headerText">
+					Total Fees: Rs. ${totalfees}
+				</td>
+				<td class="headerText">
+					Total fees paid : Rs.  ${sumoffees}
+				</td>
+				<td class="headerText">
+				 Total fees Due : Rs.  ${dueamount} 
+				</td>
+				
+			</tr>
+			
+			<tr>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			<td><hr width="100%"></td>
+			</tr>
+			</table>
+			
+			<TABLE width="100%" border="0">
+		<tr style="font-size: 10px;">
+		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></label></td>
+		</tr>
+
+		<tr style="font-size: 10px;">
+		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
+		</tr>
+		</table>
+		
+		<TABLE width="100%" border="0">
+		<tr style="font-size: 10px;">
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
+		Date&nbsp;:&nbsp;${recieptdate}</td>
+		
+		<td>Received with thanks,<br><br> Cashier/Accountant</td>
+		</tr>
 		</TABLE>
 
 </div>
@@ -445,7 +498,22 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
+				<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.fine}" /></td>
+				</tr>
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.misc}" /></td>
+				</tr>
+			</table>
 			
+			
+			<TABLE width="100%" border="0">
 			<tr>
 			
 			<td><hr width="100%"></td>
@@ -463,6 +531,11 @@
 				<td class="headerText">Rs. <c:out
 						value="${recieptinfo.totalamount}" /></td>
 			</tr>
+			
+			</table>
+			
+		<TABLE width="100%" border="0">
+			<tr>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
@@ -475,6 +548,18 @@
 			<td >In Words: Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></td>
 			<td></td>
 			</tr>
+			<tr>
+				<td class="headerText">
+					Total Fees: Rs. ${totalfees}
+				</td>
+				<td class="headerText">
+					Total fees paid : Rs.  ${sumoffees}
+				</td>
+				<td class="headerText">
+				 Total fees Due : Rs.  ${dueamount} 
+				</td>
+				
+			</tr> 
 			
 			<tr>
 			<td align="left">Note: Fees once deposited will not be refunded under any Circumstances</td>
