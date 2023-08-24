@@ -191,11 +191,11 @@
 			</tr>
 </table>
 
-<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
                     <td colspan="4" ></td>
                 </tr>
-            </TABLE>
+        </TABLE>
 
 		<table style="padding-left: 30px;">
 		
@@ -287,6 +287,22 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
+				<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.fine}" /></td>
+				</tr>
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.misc}" /></td>
+				</tr>
+			</table>
+			
+			
+			<TABLE width="100%" border="0">
 			
 			<tr>
 			
@@ -304,7 +320,6 @@
 				Total</td>
 				<td class="headerText">Rs. <c:out
 						value="${recieptinfo.totalamount}" /></td>
-
 			</tr>
 			<tr>
 			
@@ -312,8 +327,6 @@
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
-
-<<<<<<< HEAD
 <tr>
 <td align="left">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
 </tr>
@@ -334,7 +347,6 @@
 <td align="left"><br>Signature of Cashier/Accountant</td>
 </tr>
 		</TABLE>
-
 </div>
 <br>
 <div style="border: 1px solid;border-radius: 15px">
@@ -447,6 +459,23 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
+			<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.fine}" /></td>
+				</tr>
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.misc}" /></td>
+				</tr>
+			
+			</table>
+			
+			
+			<TABLE width="100%" border="0">
 			
 			<tr>
 			
