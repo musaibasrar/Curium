@@ -503,7 +503,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/roshan/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
+			xmlHttp.open("GET", "/rauzamission/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
 			xmlHttp.send(null);
 	}
     
