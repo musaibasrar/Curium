@@ -93,7 +93,7 @@
         
         function searchForFees() {
     		var form1 = document.getElementById("form1");
-    		form1.action = "/roshan/StampFeesProcess/showFeesDetails";
+    		form1.action = "/divine/StampFeesProcess/showFeesDetails";
     		form1.method = "POST";
     		form1.submit();
 
