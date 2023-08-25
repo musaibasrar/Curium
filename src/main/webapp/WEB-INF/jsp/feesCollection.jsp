@@ -256,12 +256,17 @@
              * Comment
              */
             function calculateGrandTotal() {
-                var sum = 0.0;
+            	 var fineamount=parseFloat($("#fineamount").val());
+                 var miscamount=parseFloat($("#miscamount").val());
+                 var sum = 0.0;
+                 var totalSum=0.0;
+            	var sum = 0.0;
                 var column2 = $('.feesAmount')
                 jQuery.each(column2,function(){
                     sum += parseFloat($(this).val());
                 });
-                $('#grandTotalAmount').val(sum);
+                totalSum=sum+fineamount+miscamount;
+                $('#grandTotalAmount').val(totalSum);
 
             }
             
@@ -271,46 +276,47 @@
                 //$("#dateoffees").datepicker();
                 
                 
-                $("#balanceamount").keyup(function(){
-                    var consultation=parseFloat($("#balanceamount").val());
-                    var miscellanous=parseFloat($("#miscellanousamount").val());
+                $("#fineamount").keyup(function(){
+                    var fineamount=parseFloat($("#fineamount").val());
+                    var miscamount=parseFloat($("#miscamount").val());
                     var sum = 0.0;
                     var totalSum=0.0;
                     var column2 = $('.feesAmount')
                     jQuery.each(column2,function(){
                         sum += parseFloat($(this).val());
                     });
-                    totalSum=sum+miscellanous+consultation;
+                    totalSum=sum+fineamount+miscamount;
                     $('#grandTotalAmount').val(totalSum);
 
                 });
-                $("#miscellanousamount").keyup(function(){
-                    var consultation=parseFloat($("#balanceamount").val());
-                    var miscellanous=parseFloat($("#miscellanousamount").val());
+                $("#miscamount").keyup(function(){
+                    var fineamount=parseFloat($("#fineamount").val());
+                    var miscamount=parseFloat($("#miscamount").val());
                     var sum = 0.0;
                     var totalSum=0.0;
                     var column2 = $('.feesAmount')
                     jQuery.each(column2,function(){
                         sum += parseFloat($(this).val());
                     });
-                    totalSum=sum+miscellanous+consultation;
+                    totalSum=sum+miscamount+fineamount;
                     $('#grandTotalAmount').val(totalSum);
                 });
                 $("#dataTable").keyup(function(){
-                    var consultation=parseFloat($("#balanceamount").val());
-                    var miscellanous=parseFloat($("#miscellanousamount").val());
+                    var fineamount=parseFloat($("#fineamount").val());
+                    var miscamount=parseFloat($("#miscamount").val());
                     var sum = 0.0;
                     var totalSum=0.0;
                     var column2 = $('.feesAmount')
                     jQuery.each(column2,function(){
                         sum += parseFloat($(this).val());
                     });
-                    totalSum=sum+miscellanous+consultation;
+                    totalSum=sum+fineamount+miscamount;
                     $('#feesTotalAmount').val(sum.toPrecision(6));
                     $('#grandTotalAmount').val();
                 });
                 $("#myTable").keyup(function(){
-                   
+                	var fineamount=parseFloat($("#fineamount").val());
+                    var miscamount=parseFloat($("#miscamount").val());
                     var sum = 0.0;
                     var totalSum=0.0;
                     var amountp = $('.amountpaying');
@@ -321,19 +327,19 @@
                     jQuery.each(finep,function(){
                         sum += parseFloat($(this).val());
                     });
-                    totalSum=sum;
+                    totalSum=sum+fineamount+miscamount;
                     $('#grandTotalAmount').val(totalSum);
                 });
                 $("#dataTable").click(function(){
-                    var consultation=parseFloat($("#balanceamount").val());
-                    var miscellanous=parseFloat($("#miscellanousamount").val());
+                    var fineamount=parseFloat($("#fineamount").val());
+                    var miscamount=parseFloat($("#miscamount").val());
                     var sum = 0.0;
                     var totalSum=0.0;
                     var column2 = $('.feesAmount')
                     jQuery.each(column2,function(){
                         sum += parseFloat($(this).val());
                     });
-                    totalSum=sum+miscellanous+consultation;
+                    totalSum=sum+fineamount+miscamount;
                     $('#feesTotalAmount').val(sum.toPrecision(6));
                     $('#grandTotalAmount').val(totalSum);
                 });
@@ -573,15 +579,15 @@
                     }
                 }
                
-                var consultation=parseFloat($("#balanceamount").val());
-                var miscellanous=parseFloat($("#miscellanousamount").val());
+                var fineamount=parseFloat($("#fineamount").val());
+                var miscamount=parseFloat($("#miscamount").val());
                 var sum = 0.0;
                 var totalSum=0.0;
                 var column2 = $('.feesAmount')
                 jQuery.each(column2,function(){
                     sum += parseFloat($(this).val());
                 });
-                totalSum=sum+miscellanous+consultation;
+                totalSum=sum+fineamount+miscamount;
                 $('#feesTotalAmount').val(sum);
                 $('#grandTotalAmount').val(totalSum);
                 
@@ -787,6 +793,36 @@
             	
             	
             }
+            
+            
+		function checkFineAmount(duePayment,finemiscid){
+            	
+            	var fineAmount = parseInt(document.getElementById("fineamount").value);
+            	
+            	if(fineAmount<1 || isNaN(fineAmount)){
+            		document.getElementById("fineamount").value = 0;
+            		document.getElementById(finemiscid).checked = false;
+            	 }else{
+            		 document.getElementById("fineamount").value = fineAmount;
+            		 document.getElementById(finemiscid).checked = true;
+            	 }
+            	
+            }
+		
+		function checkMiscAmount(duePayment,finemiscid){
+        	
+        	
+        	var miscAmount = parseInt(document.getElementById("miscamount").value);
+        	
+        	if(miscAmount<1 || isNaN(miscAmount)){
+        		document.getElementById("miscamount").value = 0;
+        		document.getElementById(finemiscid).checked = false;
+        	 }else{
+        		 document.getElementById("miscamount").value = miscAmount;
+        		 document.getElementById(finemiscid).checked = true;
+        	 }
+        	
+        }
             
  function selectPayment(id){
             	
@@ -999,13 +1035,43 @@ for(Cookie cookie : cookies){
 							</td>
 							<td class="dataText" align="center">
 							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
-							<input type="hidden" id="fine" value="0" class="fine" name="fine" >
+							<!-- <input type="hidden" id="fine" value="0" class="fine" name="fine" > -->
 							</td>
 							<!-- <td class="dataText" align="center">
 							<input type="text" id="fine" value="0" class="fine" name="fine" >
 							</td> -->
 						</tr>
 					</c:forEach>
+					
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
+								id="fine" 
+								name="fine" 
+								value="1"></td>
+							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">Fine</td>
+							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
+							
+							</td>
+							<td class="dataText" align="center">
+							<input type="text" id="fineamount" name="fineamount" value="0" onkeyup="checkFineAmount(this,'fine')"/>
+							</td>
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
+								id="misc" 
+								name="misc" 
+								value="1"></td>
+							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">Miscellaneous</td>
+							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
+							
+							</td>
+							<td class="dataText" align="center">
+							<input type="text" id="miscamount" name="miscamount" value="0" onkeyup="checkMiscAmount(this,'misc')"/>
+							</td>
+						</tr>
 				</tbody>
 				<tfoot>
                     
