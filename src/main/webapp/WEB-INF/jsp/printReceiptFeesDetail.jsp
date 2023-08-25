@@ -288,6 +288,18 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
+			<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.fine}" /></td>
+				</tr>
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.misc}" /></td>
+				</tr>
 			</table>
 			
 			
@@ -357,6 +369,7 @@
 		</div>
 		<br>
 		<div style="border: 1px solid;border-radius: 15px">
+		
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 80px;">
@@ -470,6 +483,19 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
+			<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.fine}" /></td>
+				</tr>
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.misc}" /></td>
+				</tr>
+			
 			</table>
 			
 			
