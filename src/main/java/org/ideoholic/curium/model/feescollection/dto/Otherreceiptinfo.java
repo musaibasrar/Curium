@@ -32,7 +32,9 @@ public class Otherreceiptinfo implements java.io.Serializable {
 	private String classsec;
 	private Integer receiptvoucher;
 	private Integer journalvoucher;
-
+	private Long fine;
+	private Long misc;
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Receiptinfo")
 	private Set<Otherfeescollection> feesCollectionRecords =
 			new HashSet<Otherfeescollection>(0);
@@ -44,7 +46,7 @@ public class Otherreceiptinfo implements java.io.Serializable {
 		this.sid = sid;
 	}
 
-	public Otherreceiptinfo(int sid, Date date, Long totalamount, String academicyear, 
+	public Otherreceiptinfo(int sid, Date date, Long totalamount, String academicyear, Long fine, Long misc,
 			Set<Otherfeescollection> feesCollecionRecords, int branchid, int cancelreceipt, int userid, String branchreceiptnumber,String paymenttype, String classsec,
 			Integer receiptvoucher, Integer journalvoucher) {
 		this.sid = sid;
@@ -60,6 +62,8 @@ public class Otherreceiptinfo implements java.io.Serializable {
 		this.classsec = classsec;
 		this.receiptvoucher = receiptvoucher;
 		this.journalvoucher = journalvoucher;
+		this.fine = fine;
+		this.misc = misc;
 	}
 
 	@Id
@@ -182,5 +186,21 @@ public class Otherreceiptinfo implements java.io.Serializable {
 
 	public void setJournalvoucher(Integer journalvoucher) {
 		this.journalvoucher = journalvoucher;
+	}
+	
+	public Long getFine() {
+		return fine;
+	}
+
+	public void setFine(Long fine) {
+		this.fine = fine;
+	}
+
+	public Long getMisc() {
+		return misc;
+	}
+
+	public void setMisc(Long misc) {
+		this.misc = misc;
 	}
 }

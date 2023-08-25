@@ -53,7 +53,7 @@ public class Receiptinfo implements java.io.Serializable {
 		this.sid = sid;
 	}
 
-	public Receiptinfo(int sid, Date date, Long totalamount, String academicyear, Long fineamount, Long miscamount,
+	public Receiptinfo(int sid, Date date, Long totalamount, String academicyear, Long fine, Long misc,
 			Set<Feescollection> feesCollecionRecords, int branchid, int cancelreceipt, int userid, String branchreceiptnumber,String paymenttype, String classsec,
 			Integer receiptvoucher, Integer journalvoucher) {
 		this.sid = sid;
@@ -69,6 +69,8 @@ public class Receiptinfo implements java.io.Serializable {
 		this.classsec = classsec;
 		this.receiptvoucher = receiptvoucher;
 		this.journalvoucher = journalvoucher;
+		this.fine = fine;
+		this.misc = misc;
 	}
 
 	@Id
