@@ -417,4 +417,14 @@ public class JspController {
 		return "printpreviewemployee";
 	}
 	
+	@GetMapping("/left_feescollector")
+	public String getLeftFeescollector() {
+		return "left_feescollector";
+	}
+	
+	@GetMapping("/reports_feescollector")
+	public String getReportsFeescollector() {
+		return "reports_feescollector";
+	}
+	
 }
