@@ -575,7 +575,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Fees Paid&nbsp;</th>
                             <th title="click to sort" class="headerText">Fees Due&nbsp;</th>
                             <th title="click to sort" class="headerText">Concession Amount&nbsp;</th>
-                            <th title="click to sort" class="headerText">Waive Off Amount&nbsp;</th>
+                            <!-- <th title="click to sort" class="headerText">Waive Off Amount&nbsp;</th> -->
                         </tr>
                     </thead>
 
@@ -598,10 +598,10 @@ for(Cookie cookie : cookies){
                                 <input type="text" id="concession:${feesstructure.sfsid}" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" onkeyup="checkConcession(${feesstructure.feesamount-feesstructure.feespaid - feesstructure.concession - feesstructure.waiveoff},this.value,${feesstructure.sfsid})" 
                                 name="concession:${feesstructure.sfsid}" class="concession"
                                 value="${feesstructure.concession}"></td>
-                                <td class="dataText">
+                                <%-- <td class="dataText">
 
                                 <input type="hidden" name="waiveoff:${feesstructure.sfsid}" value="${feesstructure.waiveoff}" >
-                                <c:out value="${feesstructure.waiveoff}"/></td>
+                                <c:out value="${feesstructure.waiveoff}"/></td> --%>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -628,8 +628,8 @@ for(Cookie cookie : cookies){
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                              <button id="applyconcession">Apply Concession</button> 
 
-                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                             <button id="print" onclick="window.location.href='/roshan/printstudentdetailsfeesstructure'">Print</button>
+                                             <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                             <button id="print" onclick="window.location.href='/roshan/printstudentdetailsfeesstructure'">Print</button> -->
 
                                         </td>
 
