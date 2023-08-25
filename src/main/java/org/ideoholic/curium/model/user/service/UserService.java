@@ -574,12 +574,19 @@ public class UserService {
 			
 	}
 			long sumOfFees = 0l;
+			long fine = 0l;
+			long misc = 0l;
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
+				fine = fine + receiptinfo.getFine();
+				misc = misc + receiptinfo.getMisc();
 			}
 			
 			httpSession.setAttribute("searchfeesdetailslist", feesDetailsList);
 			httpSession.setAttribute("sumofdetailsfees", sumOfFees);
+			httpSession.setAttribute("sumofonlyfee", sumOfFees-fine-misc);
+			httpSession.setAttribute("sumoffine", fine);
+			httpSession.setAttribute("sumofmisc", misc);
 	}
 
 	public boolean addUser(Teacher employee) {
