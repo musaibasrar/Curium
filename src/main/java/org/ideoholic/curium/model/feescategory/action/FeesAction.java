@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.feescategory.action;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -174,10 +176,40 @@ public class FeesAction {
 		new FeesService(request, response).viewOtherFees();
 		return "otherfeesreport";
 	}
+	
+	@GetMapping("/searchfeecategory")
+	public void searchfeecategory() {
+			try {
+				new FeesService(request, response).getfeecategory();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
 
 	public void setHttpobjects(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
+	}
+	
+	@PostMapping("/applyotherConcession")
+	public String applyotherConcession() {
+		String studentId = new FeesService(request, response).applyotherConcession();
+		return studentotherFeePage(studentId);
+	}
+	
+	private String studentotherFeePage(String studentId) {
+		if (new StudentService(request, response).viewOtherFeesDetailsOfStudent(studentId)) {
+			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				return "student_details_other_feesstructure";
+			} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				return "student_details_other_feesstructure";
+			} else {
+				return "student_details_other_feesstructure";
+			}
+		} else {
+			return "viewAll";
+		}
 	}
 
 }

@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -483,4 +484,102 @@ public class FeesService {
           new feesCategoryDAO().odeleteMultiple(ids);
            }
   }
+	   
+	   public void getfeecategory() throws IOException {
+
+	        if(httpSession.getAttribute(BRANCHID)!=null){
+	        	String classname = request.getParameter("classstudying");
+	            List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(classname);
+	            httpSession.setAttribute("feescategory", feecategoryList);
+
+	            Locale indiaLocale = new Locale("en", "IN");
+	    		PrintWriter out = response.getWriter(); 
+	    		response.setContentType("text/xml");
+	            response.setHeader("Cache-Control", "no-cache");
+
+	    		if(feecategoryList.size() > 0) {
+
+	    		        try {
+	    		        	String buffer = "<div style='overflow:scroll;width:750px; height: 250px;'><table id='dataTable'><thead><tr>"
+	    		        			+ "   			        				                            <td>Fees Category</td>"
+	    		        			+ "   			        											<td>class</td>	<td>Fees Amount</td>"
+	    		        			+ "   			        												<td>No.of installments in a Year</td><td>Fees Total Amount</td></tr>"
+	    		        			+ "   			        										</thead>";
+	   		        		/*String buffer = "<select name='subgroupname' style='width: 240px' id='sgname' onchange='dropdowndist();getSSGroup();'>";
+	   		        		buffer = buffer +  "<option></option>";*/
+	   			        	for(int i =0; i<feecategoryList.size();i++){
+	   			        		buffer = buffer +  "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+	   			        				+ "<label class='labelClass' style='font-weight: bold;color:#325F6D'> <input"
+	   			        				+ "									 type='checkbox' name='feescategory' class='chcktbl' value="+feecategoryList.get(i).getIdfeescategory()+""
+	   			        				+ "									size='36'> "+feecategoryList.get(i).getFeescategoryname()+" : </label></td><td> <label style='font-weight: bold;color:#eb6000'>"+feecategoryList.get(i).getParticularname()+""
+	   			        				+ "							</label> &nbsp;&nbsp;<input type='hidden' value='0' name='feesConcession' id='feesConcession_"+i+"' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+i+" value='"+feecategoryList.get(i).getIdfeescategory()+"'></td><td><input class='feesAmount' type='text' value='"+feecategoryList.get(i).getAmount()+"'   name='fessCat'  id=hiddenfees_amount_"+i+" /></td><td> <input"
+	   			        						+ "   			     type='text' value='0' name='feesCount' id='feesCount_"+i+"'"
+	   			        						+ "   			        				+ \"								onclick='calculate("+i+")' onkeyup='calculate("+i+")' size='36'><br></td>"
+	   			        						+ "<td> <input class='feesFullAmount' type='text' value='0' name='feesFullCat' id='hiddenfees_full_amount_"+i+"'></td></tr>";
+	   			        	}
+	   			        	buffer = buffer + " <tfoot><tr><td colspan='4' align='right'>Toatal</td><td align='center'><input type='text' name='feesTotalAmount' id=feesTotalAmount value='0' /></td></tr></table></div>";
+
+	    			        	response.getWriter().println(buffer);
+
+	    		        } catch (Exception e) {
+	    		            out.write("<input name='feescategoryempty'  type='text' class='textfieldvalues' id='feescategoryempty'  style='font-size: 14px;' readonly>");
+	    		        } finally {
+	    		            out.flush();
+	    		            out.close();
+	    		        }
+	    		}else {
+
+	    		        try {
+	    		        		String buffer = "<input name='balance'  type='text' class='textfieldvalues' id='balance'  style='font-size: 14px;' readonly>";
+	    			        	response.getWriter().println(buffer);
+
+	    		        } catch (Exception e) {
+	    		            out.write("<input name='balance'  type='text' class='textfieldvalues' id='balance'  style='font-size: 14px;' readonly>");
+	    		        } finally {
+	    		            out.flush();
+	    		            out.close();
+	    		        }
+	    		}
+
+
+	        }
+	    }
+	   
+	   public String applyotherConcession() {
+
+	        String[] idfeescategory = request.getParameterValues("sfsid");
+	        List<Integer> sfsId = new ArrayList<Integer>();
+	        List<Integer> feesCatId = new ArrayList<Integer>();
+	        List<String> consession = new ArrayList<String>();
+	        List<Concession> concessionList = new ArrayList<Concession>();
+
+	        String studentId = request.getParameter("id");
+
+	        if(idfeescategory!=null){
+
+	                for (String string : idfeescategory) {
+
+	                		Concession con = new Concession();
+	                		String[] test = string.split("_");
+	                        sfsId.add(Integer.valueOf(test[0]));
+	                		String dueAmount = request.getParameter("dueamount:"+Integer.valueOf(test[0]));
+	                        String concessionAmount = request.getParameter("concession:"+Integer.valueOf(test[0]));
+
+	                        if(Integer.parseInt(concessionAmount)<=Integer.parseInt(dueAmount)) {
+	                        	feesCatId.add(Integer.valueOf(test[1]));
+	                            con.setSfsid(Integer.valueOf(test[0]));
+	                            con.setFeescatid(Integer.valueOf(test[1]));
+	                            con.setConcessionOld(request.getParameter("concessionold:"+Integer.valueOf(test[0])));
+	                            con.setConcession(request.getParameter("concession:"+Integer.valueOf(test[0])));
+	                            concessionList.add(con);
+	                        }
+
+	               }
+	           new feesCategoryDAO().applyotherConcession(concessionList,studentId);
+	           return studentId;
+	        }
+
+	        throw new IllegalArgumentException("Fees category for the given student does not exist");
+
+		}
 }
