@@ -73,9 +73,9 @@ public class FeesService {
                         
                         feescategory.setFeescategoryname(DataUtil.emptyString(request.getParameter("feescategory")));
                         if(!DataUtil.emptyString(request.getParameter("fromclass")).equalsIgnoreCase("ALL") && !DataUtil.emptyString(request.getParameter("toclass")).equalsIgnoreCase("ALL")){
-                                feescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass"))+"-"+DataUtil.emptyString(request.getParameter("toclass")));
+                                feescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass"))+"--");
                         }else{
-                                feescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass")));
+                                feescategory.setParticularname(DataUtil.emptyString(request.getParameter("fromclass"))+"--");
                         }
                         
                         feescategory.setAmount(DataUtil.parseInt(request.getParameter("amount")));
