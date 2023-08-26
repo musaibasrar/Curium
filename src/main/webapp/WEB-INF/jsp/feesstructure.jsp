@@ -512,6 +512,7 @@ for(Cookie cookie : cookies){
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Father Name</th>
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
 						<th title="click to sort" class="headerText">Admission Date</th>
@@ -534,6 +535,7 @@ for(Cookie cookie : cookies){
 								href="/jasmine/StudentProcess/ViewFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
+						        <td class="dataText"><c:out value="${Parents.fathersname}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.student.classstudying}" /></td>
 							<td class="dataText"><c:out
