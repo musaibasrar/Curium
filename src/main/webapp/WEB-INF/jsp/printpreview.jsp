@@ -260,6 +260,23 @@
 
             }
             -->
+            .dataTextBoldCenter {
+	font-weight: normal;
+	font-family: Tahoma;
+	color: black;
+	font-size: 14px;
+	letter-spacing: normal;
+	text-align: center;
+}
+
+.addressLine{
+	font-weight: normal;
+	font-family: ariel;
+	color: black;
+	font-size: 9px;
+	letter-spacing: normal;
+	text-align: center;
+}
         </style>
         <script type="text/javascript">
 
@@ -457,7 +474,7 @@ for(Cookie cookie : cookies){
 			<c:if test="${limit < iInitial}">
 			<div class="card" style="background-color: #FEE12B; width: 11cm; height: 7cm;border: 1px solid;border-radius: 5px;">
   <div class="table-container" style="margin-bottom: 5px;">
-    <table>
+    <%-- <table>
       <tr>
         <td>
           <img src="/bsr/images/idlogo.png" alt="Brainy Stars" width="180" height="70">
@@ -475,10 +492,34 @@ for(Cookie cookie : cookies){
           Website:www.brainystars.com
         </td>
       </tr>
-    </table>
+    </table> --%>
+    <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
+			<tr>
+				<td><img src="/bsr/images/bsr.png" width="80" height="80"/></td>
+				<td style="height: 90px;padding-right: 0px;padding-left: 0px;">
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
+				<!-- <label class="addressLine">Email:&nbsp;thebrainystarsacademy@gmail.com </label> -->
+				</td>
+			</tr>
+		</table>
   </div>
 
   <div class="table-container" style="padding-left: 10px;">
+  
+  <table style="width: 70%;">
+      <tr>
+		<td style="background-color: green;border-radius: 5px;text-align: center;"><label style="color: #FEE12B;font-weight: bold;font-size: 12px;">Student ID</label></td>      
+      </tr>
+      <tr>
+        <td>
+          <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:100px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
+        </td>
+      </tr>
+    </table>
+    
     <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 130%;">
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;Name</td>
@@ -505,18 +546,7 @@ for(Cookie cookie : cookies){
     <td style="padding: 0;">&nbsp;&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>
   </tr>
 </table>
-
-
-    <table style="width: 70%;">
-      <tr>
-		<td style="background-color: green;border-radius: 5px;text-align: center;"><label style="color: #FEE12B;font-weight: bold;font-size: 12px;">Student ID</label></td>      
-      </tr>
-      <tr>
-        <td>
-          <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:100px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
-        </td>
-      </tr>
-    </table>
+    
   </div>
 </div>
 

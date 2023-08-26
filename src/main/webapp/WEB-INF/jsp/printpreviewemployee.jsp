@@ -475,11 +475,11 @@ for(Cookie cookie : cookies){
 	  										<td class="tdidcard">:</td>
 	  										<td class="tdidcard"><%= request.getSession().getAttribute("teachername" + i + "")%></td>
 	  									</tr>
-	  									<tr>
+	  									<%--<tr>
 	  										<td class="tdidcard">S/o,D/o,W/o</td>
 	  										<td class="tdidcard">:</td>
 	  										<td class="tdidcard"><%= request.getSession().getAttribute("guardian" + i + "")%></td>
-	  									</tr>
+	  									</tr>--%>
 	  									<tr>
 	  										<td class="tdidcard">Contact No.</td>
 	  										<td class="tdidcard">:</td>
