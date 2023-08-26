@@ -175,16 +175,17 @@
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
-				<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
 				<td><img src="/noble/images/noble.jpg" width="80" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
 				</td>
+				
 			</tr>
 	</table>
 
@@ -363,9 +364,10 @@
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
 				</td>
+				
 			</tr>
 	</table>
 
