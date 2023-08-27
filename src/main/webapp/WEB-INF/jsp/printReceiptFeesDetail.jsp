@@ -176,7 +176,6 @@
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
 		
-		
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
@@ -302,6 +301,18 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
+			<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.fine}" /></td>
+				</tr>
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.misc}" /></td>
+				</tr>
 			</table>
 			
 			
@@ -495,6 +506,19 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
+			
+			<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.fine}" /></td>
+				</tr>
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.misc}" /></td>
+				</tr>
 			
 			</table>
 			
