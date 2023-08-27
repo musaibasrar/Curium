@@ -175,19 +175,17 @@
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 110px;">
-				<img src="/bsr/images/bsr.jpg" width="80" height="80"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 40px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 25px;">Contact:&nbsp;${branchcontact} </label>
-				<label class="addressLine" style="padding-left: 43px;">Email:&nbsp;thebrainystarsacademy@gmail.com </label>
+				<td><img src="/presidency/images/presidency.jpg" width="80" height="80"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				</td>
 			</tr>
-</table>
+		</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -358,16 +356,14 @@
 		</div>
 		<br>
 		<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 110px;">
-				<img src="/bsr/images/bsr.jpg" width="80" height="80"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 40px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 25px;">Contact:&nbsp;${branchcontact} </label>
-				<label class="addressLine" style="padding-left: 43px;">Email:&nbsp;thebrainystarsacademy@gmail.com </label>
+				<td><img src="/presidency/images/presidency.jpg" width="80" height="80"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				</td>
 			</tr>
 		</table>

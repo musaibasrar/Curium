@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/bsr/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/bsr/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/bsr/css/datePicker/demos.css">
+        <script language="JavaScript" src="/presidency/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/presidency/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/presidency/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/bsr/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/bsr/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/bsr/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/bsr/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/bsr/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/bsr/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/bsr/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/bsr/css/font-awesome.css">
+        <script type="text/javascript" src="/presidency/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/presidency/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/presidency/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/presidency/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/presidency/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/presidency/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/presidency/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/presidency/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/presidency/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -414,7 +414,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/presidency/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -437,19 +437,19 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/bsr/StudentProcess/viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/presidency/StudentProcess/viewAllSuperAdmin" style="font-size: 12px;">View All</a><br/>
             </div>
             
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-                <a target="mainFrame" href="/bsr/FeesProcess/feesCollectAllBranches" style="font-size: 12px;">Fees Collect</a><br/>
+                <a target="mainFrame" href="/presidency/FeesProcess/feesCollectAllBranches" style="font-size: 12px;">Fees Collect</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
             <div >
-                <a target="mainFrame" href="/bsr/sendsms_superadmin" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="/presidency/sendsms_superadmin" style="font-size: 12px;">SMS</a><br/>
             </div>
             
             </div>

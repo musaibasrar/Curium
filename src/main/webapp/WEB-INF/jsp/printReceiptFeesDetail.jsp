@@ -176,20 +176,18 @@
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
 			
-			<table width="100%" style="border-collapse: collapse;">
+			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 10px;">
-				<img src="/bsr/images/bsr.jpg" width="120" height="60"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 5px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 110px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact}<br> </label>
-				<label class="addressLine" style="padding-left: 115px;">Email:&nbsp;thebrainystarsacademy@gmail.com </label>
-				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
+				<td><img src="/presidency/images/presidency.jpg" width="80" height="80"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
+				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label><br>
 				</td>
 			</tr>
-</table>
+		</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -352,27 +350,25 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/bsr/images/bsrpaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/presidency/images/presidencypaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
 		</div>
 		<br>
 		<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 10px;">
-				<img src="/bsr/images/bsr.jpg" width="120" height="60"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 5px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 110px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 140px;">Contact:&nbsp;${branchcontact}<br> </label>
-				<label class="addressLine" style="padding-left: 115px;">Email:&nbsp;thebrainystarsacademy@gmail.com </label>
-				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
+				<td><img src="/presidency/images/presidency.jpg" width="80" height="80"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
+				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label><br>
 				</td>
 			</tr>
-</table>
+		</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -536,7 +532,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/bsr/images/bsrpaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/presidency/images/presidencypaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>

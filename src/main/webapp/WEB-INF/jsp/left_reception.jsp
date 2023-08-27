@@ -13,19 +13,19 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/bsr/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/bsr/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/bsr/css/datePicker/demos.css">
+        <script language="JavaScript" src="/presidency/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/presidency/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/presidency/css/datePicker/demos.css">
 
-        <script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/bsr/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/bsr/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/bsr/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/bsr/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/bsr/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/bsr/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/bsr/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/presidency/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/presidency/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/presidency/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/presidency/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/presidency/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/presidency/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/presidency/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/presidency/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             var get;
@@ -431,7 +431,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/presidency/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,61 +454,61 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/bsr/StudentProcess/viewAll" >View All</a><br/>
-                <a target="mainFrame" href="/bsr/feesstructure" >Fees Structure</a><br/>
+                <a target="mainFrame" href="/presidency/StudentProcess/viewAll" >View All</a><br/>
+                <a target="mainFrame" href="/presidency/feesstructure" >Fees Structure</a><br/>
                 
 
             </div>
             <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="/bsr/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/bsr/EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/bsr/DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/bsr/PositionProcess/positionView" >Add Position</a>
+                <a target="mainFrame" href="/presidency/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="/presidency/EmployeeProcess/addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="/presidency/DepartmentProcess/departmentView" >Add Department</a>
+                <a target="mainFrame" href="/presidency/PositionProcess/positionView" >Add Position</a>
 
             </div> -->
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="/bsr/FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/bsr/FeesProcess/feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="/presidency/FeesProcess/feesView" >Fees Category</a>
+                <a target="mainFrame" href="/presidency/FeesProcess/feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
             <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/bsr/AdminProcess/viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="/presidency/AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/bsr/AdvanceSearch" >Search</a><br/>
+                <a target="mainFrame" href="/presidency/AdvanceSearch" >Search</a><br/>
 
 
             </div>
 			<!--
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/bsr/Promotion" >Promotions</a><br/>
+                <a target="mainFrame" href="/presidency/Promotion" >Promotions</a><br/>
 
 
             </div> -->
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/bsr/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/presidency/StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
             <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="/bsr/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/bsr/YearProcess/updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="/presidency/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="/presidency/YearProcess/updateYear" >Academic year</a><br/>
                 
 
             </div> -->
@@ -516,15 +516,15 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-               <!--  <a target="mainFrame" href="/bsr/Backup&Restore" >Backup</a><br/>
-                <a target="mainFrame" href="/bsr/currentIssue" >Current Issue</a><br/>
-                <a target="mainFrame" href="/bsr/changePassword" >Change Password</a><br/> -->
-                <a target="mainFrame" href="/bsr/feesCollectionDetails" >Fees Collection Details</a><br/>
+               <!--  <a target="mainFrame" href="/presidency/Backup&Restore" >Backup</a><br/>
+                <a target="mainFrame" href="/presidency/currentIssue" >Current Issue</a><br/>
+                <a target="mainFrame" href="/presidency/changePassword" >Change Password</a><br/> -->
+                <a target="mainFrame" href="/presidency/feesCollectionDetails" >Fees Collection Details</a><br/>
             </div>
             
            <!--  <h5 style="font-size: 12px"><a href="#" >Reports</a></h5>
             <div >
-                <a target="mainFrame" href="/bsr/studentsdetailsreports" >Student Details</a><br/>
+                <a target="mainFrame" href="/presidency/studentsdetailsreports" >Student Details</a><br/>
                 
             </div>  -->
             

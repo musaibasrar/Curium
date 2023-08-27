@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>stamp fees</title>
-<link rel="stylesheet" href="/bsr/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/bsr/css/datePicker/demos.css">
+<link rel="stylesheet" href="/presidency/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/presidency/css/datePicker/demos.css">
 
 <style type="text/css">
 <!--
@@ -297,45 +297,45 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/bsr/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/presidency/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/presidency/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/presidency/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/bsr/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/presidency/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/presidency/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/bsr/js/datePicker/ui/sliderAccess.js"></script>
+	src="/presidency/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/presidency/js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript" src="/bsr/js/globalize.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/bsr/js/globalize.cultures.js"></script>
+<script type="text/javascript" src="/presidency/js/globalize.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/presidency/js/globalize.cultures.js"></script>
 
 <script type="text/javascript"
-	src="/bsr/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/presidency/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/presidency/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/presidency/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/presidency/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/presidency/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/presidency/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/presidency/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/presidency/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/presidency/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/presidency/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/presidency/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -361,11 +361,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/bsr/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/presidency/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/bsr/StampFeesProcess/search";
+		form1.action = "/presidency/StampFeesProcess/search";
 		form1.method = "POST";
 		form1.submit();
 
@@ -446,7 +446,7 @@
 	
 	function deleteFeesStamp(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/bsr/StampFeesProcess/delete";
+		form1.action = "/presidency/StampFeesProcess/delete";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -561,13 +561,13 @@
         var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=fees_"+rowCount+" /><input type='hidden' class='feesStatus' name='feesStatuses' id=fees_status_"+rowCount+" value='not set' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+rowCount+" value='' /></td>";
         var col2="<td class='dataTextInActive'><input class='feesName'   type='text' name='feesNames' id=fees_name_"+rowCount+" /></td>";
         var col3="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'   name='fessCat'  id=hiddenfees_amount_"+rowCount+" /></td>";
-        var col4="<td class='dataTextInActive'><input type='text' value='0' onclick='SelectAll("+rowCount+");calculate("+rowCount+");' onfocus='SelectAll("+rowCount+")' onkeyup='calculate("+rowCount+")' name='feesCount' id=feesCount_"+rowCount+" /></td>";
-        var col5="<td class='dataTextInActive'><input type='text' value='0' name='feesConcession' id=feesConcession_"+rowCount+" /></td>";
-        var col6="<td class='dataTextInActive'><input class='feesFullAmount' type='text' value='0'   name='fessFullCat'  id=hiddenfees_full_amount_"+rowCount+" /></td>";
+        var col4="<td class='dataTextInActive'><input type='text' value='0' onclick='SelectAll("+rowCount+");calculate("+rowCount+");' onfocus='SelectAll("+rowCount+")' onkeyup='calculate("+rowCount+")' name='feesCount' id=feesCount_"+rowCount+" /><input type='hidden' value='0' name='feesConcession' id=feesConcession_"+rowCount+" /></td>";
+        /* var col5="<td class='dataTextInActive'><input type='text' value='0' name='feesConcession' id=feesConcession_"+rowCount+" /></td>"; */
+        var col5="<td class='dataTextInActive'><input class='feesFullAmount' type='text' value='0'   name='fessFullCat'  id=hiddenfees_full_amount_"+rowCount+" /></td>";
         /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
-        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+"</tr>");
+        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+"</tr>");
         $(function() {
             $("#dataTable").find('tbody').append(newRow);
         });
@@ -673,7 +673,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/presidency/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -686,7 +686,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/bsr/StampFeesProcess/applyFees" method="POST">
+	<form id="form1" action="/presidency/StampFeesProcess/applyFees" method="POST">
     
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -794,7 +794,7 @@ for(Cookie cookie : cookies){
 								<td class="headerText">Fees Category</td>
 								<td class="headerText">Fees Amount</td>
 								<td class="headerText">No.of installments in a Year</td>
-								<td class="headerText">Concession Amount</td>
+								<!-- <td class="headerText">Concession Amount</td> -->
 								<td class="headerText">Fees Total Amount</td>
 
 
@@ -807,7 +807,7 @@ for(Cookie cookie : cookies){
 						<tfoot>
 							<tr>
 
-								<td colspan="5" align="right">Total&nbsp;&nbsp;</td>
+								<td colspan="4" align="right">Total&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
 									name="feesTotalAmount" id="feesTotalAmount" value="0" /></td>
 							</tr>
@@ -850,7 +850,7 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/bsr/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
+								href="/presidency/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">

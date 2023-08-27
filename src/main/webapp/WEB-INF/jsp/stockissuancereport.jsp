@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Stock Issuance Report</title>
-<link rel="stylesheet" href="/bsr/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/bsr/css/datePicker/demos.css">
+<link rel="stylesheet" href="/presidency/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/presidency/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -367,17 +367,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/presidency/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/presidency/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/bsr/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/presidency/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/bsr/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/presidency/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/bsr/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/presidency/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -431,17 +431,17 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/bsr/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/presidency/js/datetimepicker_css.js"></script>
 
-<script src="/bsr/js/bootstrap.min.js"></script>
-<link href="/bsr/css/select2.min.css" rel="stylesheet" />
-<script src="/bsr/js/select2.min.js"></script>
+<script src="/presidency/js/bootstrap.min.js"></script>
+<link href="/presidency/css/select2.min.css" rel="stylesheet" />
+<script src="/presidency/js/select2.min.js"></script>
 
 <script type="text/javascript">
 
 	function generateStockIssuanceReport() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/bsr/MessItemsProcess/generateStockIssuanceReport";
+			form1.action = "/presidency/MessItemsProcess/generateStockIssuanceReport";
 			form1.method = "POST";
 			form1.submit();
 	}
@@ -474,7 +474,7 @@
      
 	 function printRecords() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/bsr/MessItemsProcess/printStockIssuanceReport";
+			form1.action = "/presidency/MessItemsProcess/printStockIssuanceReport";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -486,7 +486,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bsr/UserProcess/sessionTimeOut");
+	response.sendRedirect("/presidency/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
