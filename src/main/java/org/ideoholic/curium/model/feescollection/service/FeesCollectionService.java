@@ -190,6 +190,44 @@ public class FeesCollectionService {
 				}
 			
 		}
+		
+		String[] yearParts = academicYear.split("/");
+		String previousYear = "";
+        if (yearParts.length == 2) {
+            int previousYearFirstPart = Integer.parseInt(yearParts[0]) - 1 ;
+            int previousYearSecondPart = Integer.parseInt(yearParts[1]) - 1;
+            previousYear = previousYearFirstPart + "/" + previousYearSecondPart;
+            
+        } 
+        
+		List<Studentfeesstructure> feesstructurePreviousYear = new studentDetailsDAO().getStudentFeesStructure(id, previousYear);
+		//List<Feescollection> feesCollection = new feesCollectionDAO().getFeesForTheCurrentYear(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		Map<Studentfeesstructure,Long> feesMapPreviousYear = new LinkedHashMap<Studentfeesstructure, Long>();
+		
+		for (Map.Entry<Studentfeesstructure, Long> feescollection2 : feesMapPreviousYear.entrySet()) {
+			Studentfeesstructure sf = feescollection2.getKey();
+			sf.getFeescategory().getFeescategoryname();
+		}
+		
+		for (Studentfeesstructure singleFeesStructure : feesstructurePreviousYear) {
+			Long totalAmountPerCategory = 0l;
+			/*for (Feescollection singleFeescollection : feesCollection) {
+				
+				if(singleFeescollection.getSfsid() == singleFeesStructure.getSfsid()){
+					totalAmountPerCategory = totalAmountPerCategory + singleFeescollection.getAmountpaid();
+				}
+				
+			}*/
+			Long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid() - singleFeesStructure.getConcession() - singleFeesStructure.getWaiveoff();
+			
+				if(totalDueAmount>0) {
+					feesMapPreviousYear.put(singleFeesStructure,totalDueAmount);
+				}
+			
+		}
+		
+		request.setAttribute("studentfeesdetailspreviousyear", feesMapPreviousYear);
+		request.setAttribute("previousyear", previousYear);
 		request.setAttribute("studentfeesdetails", feesMap);
 		request.setAttribute("studentNameDetails", request.getParameter("studentname"));
 		//request.setAttribute("admnoDetails", request.getParameter("admno"));
