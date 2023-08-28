@@ -339,7 +339,15 @@ for(Cookie cookie : cookies){
 				<td></td>
 				<td align="left">Accountant</td>	
 					<td align="centre">Class Teacher</td>
-					<td align="centre">Head Master</td>
+					<c:choose>
+                                		<c:when test="${urlbranchid == 7}">
+						 	<td align="centre">Principal</td>                                  
+                                		</c:when>
+                                		<c:otherwise>
+                                   			<td align="centre">Head Master</td>
+                                		</c:otherwise>
+                            		</c:choose>
+					
 					</tr>
                     
 		</TABLE>
