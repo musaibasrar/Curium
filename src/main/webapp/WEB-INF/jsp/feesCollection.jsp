@@ -1077,7 +1077,6 @@ for(Cookie cookie : cookies){
 							</td> -->
 						</tr>
 					</c:forEach>
-					
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
@@ -1107,6 +1106,28 @@ for(Cookie cookie : cookies){
 							<input type="text" id="miscamount" name="miscamount" value="0" onkeyup="checkMiscAmount(this,'misc')"/>
 							</td>
 						</tr>
+						<c:forEach items="${studentfeesdetailspreviousyear}" var="studentfeesdetails" varStatus="status">
+
+						<tr class="trClass" style="border-color: #000000;background: red" border="1" 
+							cellpadding="1" cellspacing="1">
+							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2" disabled="disabled"
+								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
+								name="studentsfsidspy" 
+								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
+							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;color:white;"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategorypy" value="${studentfeesdetails.key.idfeescategory}" /></td>
+							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;color:white;">
+							<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value} (${previousyear})" />
+							<input type="hidden" id="dueamountpy_${status.index}" value="${studentfeesdetails.value}"/>
+							</td>
+							<td class="dataText" align="center">
+							<input type="text" class="amountpaying" value="0" id="amountpayingpy_${status.index}" name="amountpayingpy" disabled="disabled" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
+							<!-- <input type="hidden" id="fine" value="0" class="fine" name="fine" > -->
+							</td>
+							<!-- <td class="dataText" align="center">
+							<input type="text" id="fine" value="0" class="fine" name="fine" >
+							</td> -->
+						</tr>
+					</c:forEach>
 				</tbody>
 				<tfoot>
                     
