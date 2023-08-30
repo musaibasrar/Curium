@@ -178,7 +178,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
-				<img src="/meps/images/meps.jpg" width="118" height="80"/>
+				<img src="/demov2/images/demov2.jpg" width="118" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
                 <label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
@@ -377,7 +377,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
-				<img src="/meps/images/meps.jpg" width="118" height="80"/>
+				<img src="/demov2/images/demov2.jpg" width="118" height="80"/>
 				</td> 
 				<td style="width: 100%;" align="left">
                 <label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
