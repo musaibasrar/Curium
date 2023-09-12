@@ -73,7 +73,7 @@ public class studentDetailsDAO {
 			 * "commonregion");
 			 */
 			Query query = session
-					.createQuery("select s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from Student s JOIN Parents f ON s.sid=f.Student.sid where s.archive = 0 AND s.branchid="+branchId+" order by s.sid DESC").setCacheable(true).setCacheRegion("commonregion");
+					.createQuery("select s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, s.remarks, s.bloodgroup  from Student s JOIN Parents f ON s.sid=f.Student.sid where s.archive = 0 AND s.branchid="+branchId+" order by s.sid DESC").setCacheable(true).setCacheRegion("commonregion");
 			query.setFirstResult(offset);
 			query.setMaxResults(noOfRecords);
 			results = query.list();

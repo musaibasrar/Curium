@@ -12,7 +12,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-<title>FEES RECIEPT</title>
+<title>RECIEPT</title>
 <head>
 <style type="text/css">
 .dataText {
@@ -201,7 +201,7 @@
 			</tr>
 			<tr >
 			
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
+				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">
 					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
 			
@@ -215,14 +215,14 @@
 						value="${recieptinfo.branchreceiptnumber}" /> 
 				</td>
 				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
-				</td>
+				<%-- <td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				</td> --%>
 
 			</tr>
 			<tr>
 			<td></td>
 			</tr>
-			<tr style="font-size: 20px;">
+			<tr style="font-size: 20px;display: none;">
 			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
 					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
 				</td>
@@ -263,7 +263,7 @@
 			<tr>
 
 				<td class="headerText">Particulars</td>
-				<td class="headerText">Fees Amount</td>
+				<td class="headerText">Amount</td>
 				
 
 			</tr>
@@ -307,7 +307,7 @@
 			
 			</table>
 			
-		<TABLE width="100%" border="0">
+		<%-- <TABLE width="100%" border="0">
 			<tr>
 			
 			<td><hr width="100%"></td>
@@ -333,16 +333,16 @@
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
-			</table>
+			</table> --%>
 			
 			<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></label></td>
 		</tr>
 
-		<tr style="font-size: 10px;">
+		<!-- <tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
-		</tr>
+		</tr> -->
 		</table>
 		
 		<TABLE width="100%" border="0">
@@ -356,7 +356,7 @@
 		</div>
 		<br>
 		<div style="border: 1px solid;border-radius: 15px">
-			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+	<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
 				<td><img src="/jih/images/jih.jpg" width="80" height="80"/></td>
@@ -382,7 +382,7 @@
 			</tr>
 			<tr >
 			
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
+				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">
 					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
 			
@@ -396,14 +396,14 @@
 						value="${recieptinfo.branchreceiptnumber}" /> 
 				</td>
 				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
-				</td>
+				<%-- <td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				</td> --%>
 
 			</tr>
 			<tr>
 			<td></td>
 			</tr>
-			<tr style="font-size: 20px;">
+			<tr style="font-size: 20px;display: none;">
 			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
 					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
 				</td>
@@ -444,7 +444,7 @@
 			<tr>
 
 				<td class="headerText">Particulars</td>
-				<td class="headerText">Fees Amount</td>
+				<td class="headerText">Amount</td>
 				
 
 			</tr>
@@ -467,7 +467,6 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-			
 			</table>
 			
 			
@@ -489,7 +488,7 @@
 			
 			</table>
 			
-		<TABLE width="100%" border="0">
+		<%-- <TABLE width="100%" border="0">
 			<tr>
 			
 			<td><hr width="100%"></td>
@@ -515,16 +514,16 @@
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
-			</table>
+			</table> --%>
 			
 			<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></label></td>
 		</tr>
 
-		<tr style="font-size: 10px;">
+		<!-- <tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
-		</tr>
+		</tr> -->
 		</table>
 		
 		<TABLE width="100%" border="0">

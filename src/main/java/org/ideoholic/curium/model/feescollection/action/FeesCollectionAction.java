@@ -210,4 +210,10 @@ public class FeesCollectionAction {
 	        	new FeesCollectionService(request, response).exportDataForStudentsOtherFeesReport();
 	            return "feesreportexportsuccess";
 			}
+		 
+		 @GetMapping("/lastPaymentReport")
+	        private String lastPaymentReport() {
+	        	new FeesCollectionService(request, response).lastPaymentReport();
+	            return "lastpaymentreport";
+			} 
 }

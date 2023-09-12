@@ -14,7 +14,7 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	 <title>Curium - School ERP</title>
+	 <title>Hisabaat</title>
 	<link rel="stylesheet" href="/jih/css/bootstrap3.min.css">
 	<script type="text/javascript" src="/jih/js/openWindow.js"></script>
 	

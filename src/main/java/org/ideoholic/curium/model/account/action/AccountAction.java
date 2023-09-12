@@ -147,7 +147,7 @@ public class AccountAction {
 	@PostMapping("/saveJournal")
 	public String saveJournal() {
 		if(new AccountService(request, response).saveJournal()){
-			return createVoucher();
+			return createVoucher("createjournalvoucher");
 		}
 		return ERRORPAGE;
 		
@@ -156,7 +156,7 @@ public class AccountAction {
 	@PostMapping("/saveContra")
 	public String saveContra() {
 		if(new AccountService(request, response).saveContra()){
-			return createVoucher();
+			return createVoucher("createcontravoucher");
 		}
 		return ERRORPAGE;
 		
@@ -166,7 +166,7 @@ public class AccountAction {
 	public String savePayment() {
 		
 		if(new AccountService(request, response).savePayment()){
-			return createVoucher();
+			return createVoucher("createpaymentvoucher");
 		}
 		return ERRORPAGE;
 		
@@ -175,12 +175,21 @@ public class AccountAction {
 	@PostMapping("/saveReceipt")
 	public String saveReceipt() {
 		if(new AccountService(request, response).saveReceipt()){
-			return createVoucher();
+			return createVoucher("createvoucher");
 		}
 		return ERRORPAGE;
 		
 	}
 
+	public String createVoucher(String returnPage) {
+
+		if(new AccountService(request, response).createVoucher()){
+			return returnPage;
+		}
+		return ERRORPAGE;
+		
+	}
+	
 	@GetMapping("/createVoucher")
 	public String createVoucher() {
 
@@ -292,5 +301,22 @@ public class AccountAction {
 		new AccountService(request, response).printSearchJournalEntries();
 		return "printgeneralledgerreport";
 	}
+	
+	@PostMapping("/rpStatement")
+	public String rpStatement() {
+		new AccountService(request, response).getRPStatement();
+		return "receiptsandpayments";
+	}
+	
+	@GetMapping("/rpStatementPrint")
+	public String rpStatementPrint() {
+		new AccountService(request, response).getRPStatement();
+		return "rpstatementprint";
+	}
 
+	@GetMapping("/incomeStatementPrint")
+	public String incomeStatementPrint() {
+		new AccountService(request, response).getIncomeStatementPrint();
+		return "incomestatementprint";
+	}
 }

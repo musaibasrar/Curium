@@ -547,6 +547,129 @@
         }
     }
 </script>
+<script>
+var xmlHttp;
+    var count;
+    function searchfeecategory() {
+		var selected=document.getElementById('addclass').value;
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "/jih/FeesProcess/searchfeecategory",true);
+			xmlHttp.send(null);
+		
+	}
+    
+	function stateChanged() {
+		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+			document.getElementById("feescat").innerHTML = xmlHttp.responseText;
+		}
+	}
+	function GetXmlHttpObject() {
+		var xmlHttp = null;
+		try {
+			xmlHttp = new XMLHttpRequest();
+		} catch (e) {
+			try {
+				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+		return xmlHttp;
+	}
+    
+</script>
+<script>
+$(function() {
+	$('#chckHead').click(function() {
+		var length = $('.chcktbl:checked').length;
+		var trLength = $('.labelClass').length;
+		if (length > 0) {
+			$('.chcktbl:checked').attr('checked', false);
+			this.checked = false;
+		} else {
+			if (this.checked == false) {
+				$('.chcktbl:checked').attr('checked', false);
+			} else {
+				$('.chcktbl:not(:checked)').attr('checked', true);
+			}
+		}
+	});
+	
+	$('.chcktbl').click(function() {
+		var length = $('.chcktbl:checked').length;
+		var trLength = $('.labelClass').length;
+		alert(tdLength);
+		if (length > trLength) {
+			$('.chcktbl:not(:checked)').attr('disabled', true);
+		} else {
+			$('.chcktbl:not(:checked)').attr('disabled', false);
+		}
+	});
+});
+</script>
+<script>
+function calculate(value2) {
+	var feesCount=document.getElementById("feesCount_"+value2).value;
+	//alert("hii", value2);
+	 var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
+	 //alert("hii", value2);
+     var feesCount=document.getElementById("feesCount_"+value2).value;
+     var final1=document.getElementById("hiddenfees_full_amount_"+value2);
+     	
+     	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
+     	//feesConcession (direct amount)
+         final1.value=feesCat*feesCount;
+     	
+         calculateGrandTotal();
+   
+}
+function calculateGrandTotal() {
+	
+	
+    var sum = 0.0;
+    var column2 = $('.feesFullAmount')
+    jQuery.each(column2,function(){
+        sum += parseFloat($(this).val());
+    });
+    
+    $('#feesTotalAmount').val(sum);
+}
+$(document).ready(function() {
+    
+    
+    $("#dataTable").keyup(function(){
+        
+        var sum = 0.0;
+        var totalSum=0.0;
+        var column2 = $('.feesFullAmount')
+        jQuery.each(column2,function(){
+            sum += parseFloat($(this).val());
+        });
+        
+        $('#feesTotalAmount').val(sum);
+        
+    });
+    $("#dataTable").click(function(){
+        
+        var sum = 0.0;
+        var totalSum=0.0;
+        var column2 = $('.feesFullAmount')
+        jQuery.each(column2,function(){
+            sum += parseFloat($(this).val());
+        });
+        
+        $('#feesTotalAmount').val(sum);
+       
+    });
+});
+</script>
 </head>
 <%
 	//allow access only if session exists
@@ -577,19 +700,20 @@
 		<div>
 			<div id="tabs">
 				<ul>
-					<li><a href="#fragment-1">Student's Details</a></li>
-					<li><a href="#fragment-2">Parent's Details</a></li>
+					<li><a href="#fragment-1">Donor's Details</a></li>
+					<!-- <li><a href="#fragment-2">Parent's Details</a></li> -->
 					<li><a href="#fragment-3">Upload Photo</a></li>
-					<li><a href="#fragment-5">Previous School Details</a></li>
+					<li><a href="#fragment-7">Contributions</a></li>
+					<!-- <li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
-					<li><a href="#fragment-6">Bank Details</a></li>
+					<li><a href="#fragment-6">Bank Details</a></li> -->
 				</ul>
 
 
 
 				<div id="fragment-1">
 					<table style="width: auto;height: auto;" border="0" align="center" id="table1">
-						<tr>
+						<!-- <tr>
 							<td><br /></td>
 						</tr>
 						<tr>
@@ -613,27 +737,36 @@
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td><br /></td>
 						</tr>
 						
 						<tr>
-							<td class="alignLeft">Student Name* &nbsp;</td>
+							<td class="alignLeft">Name*&nbsp;</td>
 							<td ><label> <input
 									name="name" type="text" class="myclass" id="name" size="36" required
-									style="text-transform:capitalize;"
-									required>
+									style="text-transform:capitalize;" onfocus="searchfeecategory()"
+									>
 							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Contact Number*&nbsp;</td>
 
-							<td  class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
+									<td><label> <input
+											name="addclass" type="text" class="myclass" required
+											style="text-transform:capitalize;"
+											id="addclass" size="36" maxlength="10" minlength="10">
+
+									</label></td>
+
+							<!-- <td  class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
 							<td  height="30" class="alignLeft">&nbsp;Male<input
 								type="checkbox" value="Male" name="gender" id="yes:male"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
 								type="checkbox" value="Female" name="gender" id="no:male"
-								onclick="noCheck(this.id)" />
+								onclick="noCheck(this.id)" /> 
 
-							</td>
+							</td> -->
 
 
 						</tr>
@@ -646,6 +779,42 @@
 						</tr>
 
 						<tr>
+						<tr>
+							<td class="alignLeft">Address&nbsp;</td>
+							<td ><label> <input
+									name="remarks" type="text" class="myclass" id="remarks" size="36"
+									style="text-transform:capitalize;"
+									>
+							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Email&nbsp;</td>
+
+									<td><label><input name="bloodgroup"
+											type="bloodgroup" class="myclass" id="email" size="36"
+											> 
+
+									</label></td>
+
+							<!-- <td  class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
+							<td  height="30" class="alignLeft">&nbsp;Male<input
+								type="checkbox" value="Male" name="gender" id="yes:male"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
+								type="checkbox" value="Female" name="gender" id="no:male"
+								onclick="noCheck(this.id)" /> 
+
+							</td> -->
+
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<%-- <tr>
 						<tr>
 							<td class="alignLeft">Date Of Birth &nbsp;</td>
 							<td ><label> <input name="dateofbirth"
@@ -999,7 +1168,7 @@
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<tr>
 										
 							<td class="alignLeft">Created Date &nbsp;</td>
@@ -1010,7 +1179,7 @@
 									data-validate="validate(required)">
 							</label></td>
 							
-							<td  class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<%-- <td  class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
 							 <td>
                                         <label> <select name="yearofadmission" id="yearofadmission" required
@@ -1046,7 +1215,7 @@
 
 							</label> 
                         
-                        </td>
+                        </td> --%>
 							
 						</tr>
 						<tr>
@@ -1105,12 +1274,12 @@
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Pic</label><br />  <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Donor Pic</label><br />  <input type="file" name="fileToUpload"
 										id="fileToUpload" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 1</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Donor Doc 1</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc1" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
@@ -1120,7 +1289,7 @@
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 2</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Donor Doc 2</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc2" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
@@ -1130,7 +1299,7 @@
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 3</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Donor Doc 3</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc3" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
@@ -1140,7 +1309,7 @@
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 4</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Donor Doc 4</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc4" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 								
@@ -1150,7 +1319,7 @@
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 5</label><br /> <input type="file" name="fileToUpload"
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Donor Doc 5</label><br /> <input type="file" name="fileToUpload"
 										id="studentdoc5" accept="image/*" onchange="Upload()"><br><br><br><br></td>
 								</tr>
 
@@ -1168,7 +1337,7 @@
 
 									<tr>
 
-										<td align="center"><a class="nexttab"
+										<td align="center"> <a class="nexttab"
 											style="font-weight: bold; color: #325F6D; font-size: 13px"
 											href="#">Next</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 											class="prevtab"
@@ -1211,9 +1380,75 @@
 							</div>
 
 						</div>
+						
+						<div id="fragment-7">
+						
+						<table style="width: auto;height: auto;" align="center">
+								
+							<tr>
+							<td style="font-weight: bold;color:#325F6D">Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td>
+							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" checked id = "chckHead" />All
+							</label>
+							</td>
+							
+						</tr>
+											
+						<tr>
+							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
+							<td id="feescat">
+							
+							</td>
+							
+						</tr>
+						 <tr>
+							<td><br /></td>
+						</tr>
+							
+						
+							<tr>
+								<td></td>
+								<td align="left">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+								<tr><td><br></td></tr>
+								<tr>
+								<tfoot>
+					
+				</tfoot>
+								</tr>
+									<tr>
+										<td></td>
+										<td align="left">
+										
+											<button id="saveseven" class="save" name="savestudent">Save</button>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<button id="cancelthree" class="cancel">Cancel</button>
+										</td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+				
+					
+				</table>
+				</div>
 
 
-						<div id="fragment-4">
+						<%-- <div id="fragment-4">
 							<table style="width: auto;height: auto;" border="0" align="center" id="table1">
 								<tr>
 									<td><br /></td>
@@ -1351,10 +1586,10 @@
 
 							</table>
 
-						</div>
+						</div> --%>
 
 
-						<div id="fragment-2">
+						<!-- <div id="fragment-2">
 							<table style="width: auto;height: auto;" border="0" align="center" id="table1">
 								<tr>
 									<td><br /></td>
@@ -1369,14 +1604,14 @@
 											name="fathersname" type="text" class="myclass" required
 											style="text-transform:capitalize;"
 											id="fathersname" size="36"
-											required> <!-- onkeyup="check(this.value);"  -->
+											required> onkeyup="check(this.value);" 
 									</label></td>
 
 									<td class="alignLeft" style="padding-left: 20px;">Mother's Name* &nbsp;</td>
 									<td><label> <input
 											name="mothersname" type="text" class="myclass" id="name" required
 											style="text-transform:capitalize;"
-											size="36"> <!-- onkeyup="check(this.value);"  -->
+											size="36"> onkeyup="check(this.value);" 
 									</label></td>
 
 
@@ -1398,7 +1633,7 @@
 											name="fathersqualification" type="text" class="myclass"
 											id="fathersqualification" 
 											style="text-transform:capitalize;"
-											size="36"> <!-- onkeyup="check(this.value);"  -->
+											size="36"> onkeyup="check(this.value);" 
 									</label></td>
 
 									<td class="alignLeft" style="padding-left: 20px;">Mother's
@@ -1407,7 +1642,7 @@
 											name="mothersqualification" type="text" class="myclass"
 											id="mothersqualification"
 											style="text-transform:capitalize;"
-											size="36"> <!-- onkeyup="check(this.value);"  -->
+											size="36"> onkeyup="check(this.value);" 
 									</label></td>
 
 
@@ -1618,9 +1853,9 @@
 									<td><br /></td>
 								</tr>
 							</table>
-						</div>
+						</div> -->
 						
-						<div id="fragment-5">
+						<%-- <div id="fragment-5">
 
 							<div>
 								<table style="width: auto;height: auto;" align="center">
@@ -1794,9 +2029,9 @@
 
 							</div>
 
-						</div>
+						</div> --%>
 						
-						<div id="fragment-6">
+						<!-- <div id="fragment-6">
 
 							<div>
 								<table style="width: auto;height: auto;" align="center">
@@ -1884,7 +2119,7 @@
 
 							</div>
 
-						</div>
+						</div> -->
 					</table>
 				</div>
 

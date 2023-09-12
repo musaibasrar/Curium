@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.service.DocumentService;
+import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -88,6 +89,12 @@ public class DocumentAction {
 		return "studentsdetailsreports";
 	}
 
+	@GetMapping("/donorDetailsReports")
+	public String donorDetailsReports() {
+		new StampFeesService(request, response).advanceSearch();
+		return "studentsdetailsreports";
+	}
+	
 	@GetMapping("/PrintTransferCertificate")
 	public String printTransferCertificate() {
 		

@@ -4,13 +4,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,22 +21,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
+import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
+import org.ideoholic.curium.model.feescategory.action.FeesAction;
+import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.pudetails.dto.Pudetails;
+import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
+import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
@@ -50,6 +55,7 @@ public class StudentService {
 	private HttpSession httpSession;
 	private String BRANCHID = "branchid";
 	private String USERID = "userloginid";
+	private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
 	
@@ -550,10 +556,129 @@ public class StudentService {
 
 		if(parents!=null){
 			result=true;
+			stampFees(parents.getStudent().getSid());
 		}
 
 		return result;
 
+	}
+	
+	private void stampFees(Integer stdIds) {
+
+		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
+		String[] studentIds = {stdIds.toString()};
+		if(studentIds!=null){
+		Academicfeesstructure academicfessstructure = new Academicfeesstructure();
+		List<Academicfeesstructure> listOfacademicfessstructure = new ArrayList<Academicfeesstructure>();
+		List<Studentfeesstructure> listOfstudentfeesstructure = new ArrayList<Studentfeesstructure>();
+
+		String feesTotalAmount = request.getParameter("feesTotalAmount");
+		Long grandTotal = 0l;
+
+		String[] feesCategoryIds = request.getParameterValues("feesIDS");
+		//String[] feesAmount = request.getParameterValues("fessCat");
+		//String[] concession = request.getParameterValues("feesConcession");
+		//String[] totalInstallments = request.getParameterValues("feesCount");
+
+		List<Integer> ids = new ArrayList();
+		listOfacademicfessstructure.clear();
+		for (String id : studentIds) {
+			System.out.println("id" + id);
+			academicfessstructure = new Academicfeesstructure();
+			academicfessstructure.setSid(Integer.valueOf(id));
+			academicfessstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			academicfessstructure.setTotalfees(feesTotalAmount);
+			//grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
+			academicfessstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
+
+			listOfacademicfessstructure.add(academicfessstructure);
+			// ids.add(Integer.valueOf(id));
+
+		}
+
+		for (String id : studentIds) {
+
+			for(int i=0; i < feesCategoryIds.length ; i++){
+
+			Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
+			Feescategory feescategory = new Feescategory();
+			studentfeesstructure.setSid(Integer.valueOf(id));
+			feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIds[i]));
+			studentfeesstructure.setFeescategory(feescategory);
+			studentfeesstructure.setFeesamount(1l);
+			studentfeesstructure.setFeespaid((long) 0);
+			studentfeesstructure.setWaiveoff((long) 0);
+			studentfeesstructure.setTotalinstallment(1);
+			studentfeesstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			studentfeesstructure.setConcession(0);
+			listOfstudentfeesstructure.add(studentfeesstructure);
+		}
+
+
+
+		}
+
+		//Accounts
+		//Pass J.V. : credit the Fees as income & debit the cash
+		/*
+		int crFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));;
+
+		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+
+		transactions.setDraccountid(drAccount);
+		transactions.setCraccountid(crFees);
+		transactions.setDramount(new BigDecimal(grandTotal));
+		transactions.setCramount(new BigDecimal(grandTotal));
+		transactions.setVouchertype(4);
+		transactions.setTransactiondate(DateUtil.todaysDate());
+		transactions.setEntrydate(DateUtil.todaysDate());
+		transactions.setNarration("Towards Fees Stamp");
+		transactions.setCancelvoucher("no");
+		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		transactions.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+
+		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+drAccount;
+
+		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+crFees;
+		*/
+		// End J.V
+		new StampFeesDAO().addStampFees(listOfacademicfessstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),listOfstudentfeesstructure,null,null,null);
+		//new StampFeesDAO().addStampFees(listOfacademicfessstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
+		//new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+
+		}
+		}
+	}
+
+	private int getLedgerAccountId(String itemAccount) {
+
+		int result = 0;
+
+	 	Properties properties = new Properties();
+		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
+
+        		try {
+					properties.load(inputStream);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+        		String ItemLedgerId = properties.getProperty(itemAccount);
+
+		    if(ItemLedgerId!=null) {
+		    	result = Integer.parseInt(ItemLedgerId);
+		    }else {
+		    	String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
+		    	result = Integer.parseInt(ItemLedger.toLowerCase());
+		    }
+
+		    return result;
 	}
 
 	public boolean viewAllStudents() {
@@ -1445,7 +1570,7 @@ public class StudentService {
 		if(httpSession.getAttribute(BRANCHID)!=null){
 			try {
 				int page = 1;
-				int recordsPerPage = 100;
+				int recordsPerPage = 1000;
 					if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
 						page = Integer.parseInt(request.getParameter("page"));
 					}
@@ -1469,8 +1594,8 @@ public class StudentService {
 	                student.setAdmissionnumber((String)parentdetails[2]);
 	                student.setName((String)parentdetails[3]);
 	                student.setClassstudying((String)parentdetails[4]);
-	                parent.setFathersname((String)parentdetails[5]);
-	                parent.setMothersname((String)parentdetails[6]);
+	                student.setRemarks((String)parentdetails[5]);
+	                student.setBloodgroup((String)parentdetails[6]);
 	                parent.setStudent(student);
 	                parentDetails.add(parent);
 	            }
@@ -1577,31 +1702,15 @@ public class StudentService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Admission No.","STS","UID", "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
-							"Admitted In Class", "Admission Date","Admission Year", "Promoted Year", "Blood Group", "Religion", "Student Aadhar Card",
-							"Caste", "Fathers Name", "Mothers Name","Contact No.", "Archive", "Graduated", "Left Out", "Dropped Out"});
+					new Object[] { "UID", "Name", "Contact Number", "Address", "Email"});
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
-						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
-								DataUtil.emptyString(studentDetails.getStudent().getSts()),
-								DataUtil.emptyString(studentDetails.getStudent().getStudentexternalid()),
-								 DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
-								 DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getDateofbirth()),
-								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
+						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getStudentexternalid()),
+								 DataUtil.emptyString(studentDetails.getStudent().getName()),  
 								 DataUtil.emptyString(studentDetails.getStudent().getClassstudying().replace("--", " ")),
-								 DataUtil.emptyString(studentDetails.getStudent().getClassadmittedin().replace("--", " ")),
-								 DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getAdmissiondate()),
-								 DataUtil.emptyString(studentDetails.getStudent().getYearofadmission()),DataUtil.emptyString(studentDetails.getStudent().getPromotedyear()),
-								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup()),  DataUtil.emptyString(studentDetails.getStudent().getReligion()),
-								 DataUtil.emptyString(studentDetails.getStudent().getDisabilitychild()),
-								 DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
-								 DataUtil.emptyString(studentDetails.getMothersname()),DataUtil.emptyString(studentDetails.getContactnumber()),
-								 
-								 
-								 studentDetails.getStudent().getArchive()==1 ? "Yes" : "No" , 
-										 studentDetails.getStudent().getPassedout()==1 ? "Yes" : "No", studentDetails.getStudent().getLeftout()==1 ? "Yes" : "No",
-												 studentDetails.getStudent().getDroppedout()==1 ? "Yes" : "No"});
+								 DataUtil.emptyString(studentDetails.getStudent().getRemarks()),
+								 DataUtil.emptyString(studentDetails.getStudent().getBloodgroup())});
 				i++;
 			}
 			Row headerRow = sheet.createRow(0);
@@ -1636,7 +1745,7 @@ public class StudentService {
 				//Local 
 				//FileOutputStream out = new FileOutputStream("D:/schoolfiles/test.xlsx");
 				//FileOutputStream out = new FileOutputStream(new File("/usr/local/tomcat/webapps/www.searchmysearch.com/musarpbiabha/studentsdetails.xlsx"));
-				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/studentsdetails.xlsx"));
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/donordetails.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;
@@ -1667,7 +1776,7 @@ public class StudentService {
 		boolean result = false;
 		try {
 
-			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/studentsdetails.xlsx");
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/donordetails.xlsx");
 	        FileInputStream inStream = new FileInputStream(downloadFile);
 
 	        // get MIME type of the file
@@ -1680,7 +1789,7 @@ public class StudentService {
 			// set headers for the response
 			String headerKey = "Content-Disposition";
 			String headerValue = String.format("attachment; filename=\"%s\"",
-					"studentdetails.xlsx");
+					"donordetails.xlsx");
 			response.setHeader(headerKey, headerValue);
 
 			// get output stream of the response

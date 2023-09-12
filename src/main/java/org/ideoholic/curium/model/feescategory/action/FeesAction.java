@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.feescategory.action;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -173,6 +175,16 @@ public class FeesAction {
 		new StandardService(request, response).viewClasses();
 		new FeesService(request, response).viewOtherFees();
 		return "otherfeesreport";
+	}
+	
+	@GetMapping("/searchfeecategory")
+	public void searchfeecategory() {
+			try {
+				new FeesService(request, response).getfeecategory();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 
 	public void setHttpobjects(HttpServletRequest request, HttpServletResponse response) {

@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Details</title>
+        <title>Donor Details</title>
 
         <script type="text/javascript" language="JavaScript" src="/jih/js/motionpack.js"></script>
         <link rel="stylesheet" href="/jih/css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -448,7 +448,7 @@ for(Cookie cookie : cookies){
             </table>
             <div class="accordion" style="width: 100%;height: 100%">
 		
-                <h3><a href="#">Student Details</a></h3>
+                <h3><a href="#">Donor Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
@@ -456,11 +456,11 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Donor's Photo" style="width: 200px;height: 200px;">
                     </td>
                     </tr>
                     
-                    	<tr>
+                    	<%-- <tr>
                          
                             <td  width="25%"  class="alignLeft" height="50">Admission Number
                             </td>
@@ -474,23 +474,36 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.sts}" />
                             </td>
                             
-                        </tr>
+                        </tr> --%>
 
 					<tr>
                             <td width="25%"  class="alignLeft" height="50">Name</td>
                             <td width="25%" class="tablerows" style="text-transform:uppercase">
                                 <c:out default="" value="${student.name}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Gender
+                            <td width="25%"  class="alignLeft" height="50" >Contact Number
                             </td>
                             <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.gender}" />
+                                <c:out default="" value="${student.classstudying}" />
                             </td>
                         </tr>
+                        
                         <tr>
+                            <td width="25%"  class="alignLeft" height="50">Address</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${student.remarks}" />
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50" >Email
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${student.bloodgroup}" />
+                            </td>
+                        </tr>
+                        
+                        <%-- <tr>
                             <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
                             <td width="25%" class="tablerows" >
-                                <%-- <c:out value="${student.dateofbirth}" /> --%>
+                                <c:out value="${student.dateofbirth}" />
                                 <fmt:formatDate value="${student.dateofbirth}" pattern="dd/MM/yyyy"/>
                                 
                             </td>
@@ -519,7 +532,7 @@ for(Cookie cookie : cookies){
                             <c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
 						    ${splt} 
 							</c:forEach>
-                               <%--  <c:out default="" value="${student.classstudying}" /> --%>
+                                <c:out default="" value="${student.classstudying}" />
                             </td>
                             <td width="25%"  class="alignLeft" height="50">Admitted in class
                             </td>
@@ -552,13 +565,13 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.religion}" />
                             </td>
-                  <%--           
+                            
                             <td  width="25%"  class="alignLeft" height="50" >Caste
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.caste}" />
                             </td>
- --%>
+
                                       
                             <td  width="25%"  class="alignLeft" height="50" >Students Caste Certificate No.
                             </td>
@@ -609,7 +622,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.bhagyalakshmibondnumber}" />
                             </td>
                             
-                            <td  width="25%"  class="alignLeft" height="50" >Student's Aadhar Card No.
+                            <td  width="25%"  class="alignLeft" height="50" >Donor's Aadhar Card No.
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.disabilitychild}" />
@@ -656,7 +669,7 @@ for(Cookie cookie : cookies){
                              <td  width="25%"  class="alignLeft" height="50">Created Date
                             </td>
                             <td width="25%" class="tablerows">
-                                <%-- <c:out default="" value="${student.createddate}" /> --%>
+                                <c:out default="" value="${student.createddate}" />
                                 <fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>
                             </td>
    
@@ -700,7 +713,7 @@ for(Cookie cookie : cookies){
                           
                            
                         </tr>
-                        
+                         --%>
            
 
                         <tr>
@@ -729,7 +742,7 @@ for(Cookie cookie : cookies){
                     
                         <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Donor's Doc1" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc1.jpg" href="/jih/data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
@@ -738,7 +751,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Donor's Doc2" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc2.jpg" href="/jih/data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
@@ -747,7 +760,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Donor's Doc3" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc3.jpg" href="/jih/data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
@@ -756,7 +769,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Donor's Doc4" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc4.jpg" href="/jih/data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
@@ -765,7 +778,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Donor's Doc5" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <a download="studentdoc5.jpg" href="/jih/data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
@@ -775,7 +788,7 @@ for(Cookie cookie : cookies){
                 </div>
     </div>
     
-    	<div class="accordion" style="width: 100%;height: 100%">
+    	<%-- <div class="accordion" style="width: 100%;height: 100%">
 		
                 <h3><a href="#">Previous School Details</a></h3>
                 <div>
@@ -850,9 +863,9 @@ for(Cookie cookie : cookies){
                         </tr>
                     </table>
                 </div>
-    </div>
+    </div> --%>
     
-    <div class="accordion" style="width: 100%;height: 100%">
+    <%-- <div class="accordion" style="width: 100%;height: 100%">
 		
                 <h3><a href="#">Bank Details</a></h3>
                 <div>
@@ -896,9 +909,9 @@ for(Cookie cookie : cookies){
                         
                     </table>
                 </div>
-    </div>
+    </div> --%>
     
-            <div id="accordion1" style="width: 100%;height: 100%">
+            <%-- <div id="accordion1" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Parent's Details</a></h3>
                 <div>
@@ -1031,24 +1044,24 @@ for(Cookie cookie : cookies){
 
 
 
-            </div>
+            </div> --%>
               <div id="accordion2" style="width: 100%;height: 100%">
 
-                <h3><a href="#">Fees Details</a></h3>
+                <h3><a href="#">Contribution Details</a></h3>
                 
                 <div>
 					<div align="center">
-					<h class="dataTextFees">Total fees : Rs.  ${totalfees}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Total fees paid : Rs.  ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Due Amount : </h>
-                <h class="dataTextDueFees"> Rs.  ${dueamount}</h>
+					<%-- <h class="dataTextFees">Total fees : Rs.  ${totalfees}</h>&nbsp;&nbsp;&nbsp; --%>
+                <h class="dataTextFees">Total Contribution : Rs.  ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
+                <%-- <h class="dataTextFees">Due Amount : </h>
+                <h class="dataTextDueFees"> Rs.  ${dueamount}</h> --%>
                 </div>
                     <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 
                     <thead>
                         <tr  >
                             
-                            <th title="click to sort" class="headerText">Date of fees</th>
+                            <th title="click to sort" class="headerText">Date</th>
                             <th title="click to sort" class="headerText">Reference Number</th>
                             <th title="click to sort" class="headerText">Total Amount</th>
                             <th title="click to sort" class="headerText">View Details</th>
@@ -1087,7 +1100,7 @@ for(Cookie cookie : cookies){
 
 
             </div>
-            <div id="accordion3" style="width: 100%;height: 100%">
+            <%-- <div id="accordion3" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Fees Structure</a></h3>
                 
@@ -1157,7 +1170,7 @@ for(Cookie cookie : cookies){
 
 
 
-            </div>
+            </div> --%>
             <table  width="70%"  id="table11" align="center">
                         <tr>
                             <td width="30%"> 
@@ -1168,7 +1181,7 @@ for(Cookie cookie : cookies){
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button id="cancel" >Cancel</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button id="print" >Print</button>
+                                <!-- <button id="print" >Print</button> -->
                                 <!-- <button id="print" onclick= "printPage">Print</button> -->
                             </td>
 

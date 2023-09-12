@@ -175,18 +175,19 @@
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
-				<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+			
+			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/jih/images/jih.jpg" width="80" height="80"/></td>
+				<td><img src="/presidency/images/presidency.jpg" width="80" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
-				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
+				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label><br>
 				</td>
 			</tr>
-	</table>
+		</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -202,7 +203,7 @@
 			</tr>
 			<tr >
 			
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
+				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">
 					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
 			
@@ -223,7 +224,7 @@
 			<tr>
 			<td></td>
 			</tr>
-			<tr style="font-size: 20px;">
+			<tr style="font-size: 20px;display: none;">
 			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
 					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
 				</td>
@@ -287,6 +288,23 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
+			<c:if test="${recieptinfo.fine > 0}">
+				<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.fine}" /></td>
+				</tr>
+			</c:if>
+				
+			<c:if test="${recieptinfo.misc > 0}">	
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.misc}" /></td>
+				</tr>
+			</c:if>
 			</table>
 			
 			
@@ -303,7 +321,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -349,7 +367,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/jih/images/jihpaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/presidency/images/presidencypaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -359,15 +377,15 @@
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/jih/images/jih.jpg" width="80" height="80"/></td>
+				<td><img src="/presidency/images/presidency.jpg" width="80" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
-				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label>
+				<label class="addressLine">Contact: ${branchcontact}</label><br>
+				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label><br>
 				</td>
 			</tr>
-	</table>
+		</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -404,7 +422,7 @@
 			<tr>
 			<td></td>
 			</tr>
-			<tr style="font-size: 20px;">
+			<tr style="font-size: 20px;display: none;">
 			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
 					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
 				</td>
@@ -469,6 +487,24 @@
 				</tr>
 			</c:forEach>
 			
+			<c:if test="${recieptinfo.fine > 0}">
+				<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.fine}" /></td>
+				</tr>
+			</c:if>
+				
+			<c:if test="${recieptinfo.misc > 0}">	
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${recieptinfo.misc}" /></td>
+				</tr>
+			</c:if>
+			
 			</table>
 			
 			
@@ -485,7 +521,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -531,7 +567,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/jih/images/jihpaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/presidency/images/presidencypaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>

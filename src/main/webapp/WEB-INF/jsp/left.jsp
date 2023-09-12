@@ -434,7 +434,7 @@ for(Cookie cookie : cookies){
         <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div>
 
         <div id="container" style="width: 100%" >
-            <h5 style="font-size: 12px"><a href="#">Students</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Donors</a></h5>
             <div>
                 <a target="mainFrame" href="/jih/StudentProcess/viewAll" style="font-size: 12px;">View All</a><br/>
                 <a target="mainFrame" href="/jih/StudentProcess/addNew" style="font-size: 12px;">Add New</a><br/>
@@ -496,7 +496,7 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/jih/StudentProcess/archiveViewAll" >Archive Donors</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>

@@ -225,6 +225,7 @@
 	letter-spacing: normal;
 	text-align: center;
 	background-color: #E3EFFF;
+	text-transform: capitalize;
 }
 
 .dataTextInActive {

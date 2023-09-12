@@ -6,13 +6,15 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Balance Sheet</title>
+<title>Receipts & Payments Statement</title>
 <link rel="stylesheet" href="/jih/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/jih/css/datePicker/demos.css">
 <style type="text/css">
@@ -351,15 +353,15 @@
 		$("#tabs").tabs();
 
 		$("#search").button().click(function() {
-			getIncomeStatement();
+			getRPStatement();
 		});
 		$("#effect").hide();
 	});
 	
 
-	function getIncomeStatement(){
+	function getRPStatement(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/jih/AccountProcess/incomeStatement";
+		form1.action = "/jih/AccountProcess/rpStatement";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -404,17 +406,16 @@
 		$("#anim").change(function() {
 			$("#todate").datepicker("option", "showAnim", $(this).val());
 		});
-		
-		 $(function(){
-	         $("#print").button({
-	             icons:{
-	                 primary: "ui-icon-print"
-	             }
-	         });
-	         
-	     });
 	});
 
+	 $(function(){
+         $("#print").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         });
+         
+     });
 
 </script>
 <script type="text/javascript" src="/jih/js/datetimepicker_css.js"></script>
@@ -491,7 +492,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 				<table width="100%">
                     <tr>
-                        <td  class="headerTD">Income Statement</td>
+                        <td  class="headerTD">Receipts & Payments Statement</td>
                     </tr>
                     
                     <tr>
@@ -503,85 +504,259 @@ for(Cookie cookie : cookies){
                 </table>
                 
                <br><br>
+               
                <table width="50%" border="0" style="border-color: #4b6a84;float: left;">
                     <tr>
-                        <td  class="headerTD">Expenses</td>
+                        <td  class="headerTD">Receipts</td>
                     </tr>
                 </table>
-                
-                <table width="50%" border="0" style="border-color: #4b6a84;float: left;">
+               
+               <table width="50%" border="0" style="border-color: #4b6a84;float: left;">
                     <tr>
-                        <td  class="headerTD">Income</td>
+                        <td  class="headerTD">Payments</td>
                     </tr>
                 </table>
                 
-			<table width="50%" border="0" style="border-color: #4b6a84;float: left;margin-bottom:50px;">
+			
+			<table width="50%" border="1" class="incomeexpense" style="border-color: #4b6a84;float: left"	>
 
 				<thead>
 					
 					<tr>
-						
-						<th title="click to sort" class="headerText" style="font-weight: bold;">Account Code</th>
-						<th title="click to sort" class="headerText" style="font-weight: bold;">Name</th>
-						<th title="click to sort" class="headerText" style="font-weight: bold;">Balance</th>
-						
-						<th ></th>
-
-
+						<th title="click to sort" class="headerText" style="font-weight: bold;">Sl.No.</th>
+						<th title="click to sort" class="headerText" style="font-weight: bold;">Receipts</th>
+						<th title="click to sort" class="headerText" style="font-weight: bold;">Amount</th>
 					</tr>
 				</thead>
 
 				<tbody>
-										
-					<c:forEach items="${expensesledgersaccount}" var="expensesledgersaccount">
+					
+					<c:forEach items="${incomeledgersaccount}" var="incomeledgersaccount" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1" >
-							<td class="dataText" style="text-align: right" width="20%"><c:out value="${expensesledgersaccount.key.accountcode}" /></td>
-							<td class="dataText" style="text-align: right" width="50%"><c:out value="${expensesledgersaccount.key.accountname}" /></td>
-							<td class="dataText" style="text-align: right" width="30%"><c:out value="${expensesledgersaccount.value}" /></td>
+							cellpadding="1" cellspacing="1">
+							<td class="dataText" style="text-align: center" width="20%"><c:out value="${status.index+1}" /></td>
+							<td class="dataText" style="text-align: left" width="50%"><c:out value="${incomeledgersaccount.key.accountname}" /></td>
+							<td class="dataText" style="text-align: right" width="30%">
+							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${incomeledgersaccount.value}" />
+							</td>
 
 						</tr>
 					</c:forEach>
+				</tbody>
+			</table>
+			
+			
+			<table width="50%" border="1" class="incomeexpense" style="border-color: #4b6a84;float: left;">
+
+				<thead>
+					
+					<tr>
+						<th title="click to sort" class="headerText" style="font-weight: bold;">Sl.No.</th>
+						<th title="click to sort" class="headerText" style="font-weight: bold;">Payments</th>
+						<th title="click to sort" class="headerText" style="font-weight: bold;">Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+								<c:set var="startindex" value="1" />		
+					<c:forEach items="${expensesledgersaccount}" var="expensesledgersaccount" varStatus="status">
+
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataText" style="text-align: center" width="20%"><c:out value="${status.index+1}" /></td>
+							<td class="dataText" style="text-align: left" width="50%"><c:out value="${expensesledgersaccount.key.accountname}" /></td>
+							<td class="dataText" style="text-align: right" width="30%">
+							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${expensesledgersaccount.value}" />
+							</td>
+
+						</tr>
+						<c:set var="startindex" value="${status.index+1}" />
+					</c:forEach>
+					<c:forEach items="${maphalqasharepaidaccount}" var="maphalqasharepaidaccount" varStatus="status">
+
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataText" style="text-align: center" width="20%"><c:out value="${startindex+status.index+1}" /></td>
+							<td class="dataText" style="text-align: left" width="50%"><c:out value="${maphalqasharepaidaccount.key.accountname}" /></td>
+							<td class="dataText" style="text-align: right" width="30%">
+							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${maphalqasharepaidaccount.value}" />
+							</td>
+
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			
+			
+			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+	                <tr>
+	                    <td colspan="4" ></td>
+	                </tr>
+            	</TABLE>
+                
+			<table width="50%" border="1" class="incomeexpense" style="border-color: #4b6a84;float: left"	>
+
+				<tbody>
 					
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1" >
 							<td class="dataText" style="text-align: right" width="20%"></td>
-							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"></td>
-							<td class="dataTextInActive" style="text-align: right" width="30%"></td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="${incometotallabel}" /></td>
+							<td class="dataTextInActive" style="text-align: right" width="30%">
+							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${incometotal}" />
+							</td>
 
 						</tr>
-					
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataText" style="text-align: right" width="20%"></td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="Opening Balance" /></td>
+							<td class="dataTextInActive" style="text-align: right" width="30%">
+								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${openingbalance}" />
+							</td>
+
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataText" style="text-align: right" width="20%"></td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="Total" /></td>
+							<td class="dataTextInActive" style="text-align: right" width="30%">
+								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${grandreceipttotal}" />
+							</td>
+
+						</tr>
+						
+						
+				</tbody>
+			</table>
+			
+			
+			<table width="50%" border="1" class="incomeexpense" style="border-color: #4b6a84;float: left;">
+
+				<tbody>
 					
 					<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1" >
 							<td class="dataText" style="text-align: right" width="20%"></td>
 							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="${expensetotallabel}" /></td>
-							<td class="dataTextInActive" style="text-align: right" width="30%"><c:out value="${expensetotal}" /></td>
+							<td class="dataTextInActive" style="text-align: right" width="30%">
+								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${expensetotal}" />
+							</td>
 
 						</tr>
 						
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1" >
 							<td class="dataText" style="text-align: right" width="20%"></td>
-							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="${profitlabel}" /></td>
-							<td class="dataTextInActive" style="text-align: right" width="30%"><c:out value="${totalprofit}" /></td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="Closing Balance" /></td>
+							<td class="dataTextInActive" style="text-align: right" width="30%">
+								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${closingbalance}" />
+							</td>
 
 						</tr>
 						
-						<%-- <tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1" width="80%">
-							
-							<td class="dataTextInActive" style="text-align: left;height: 20px;">TOTAL</td>
-							<td class="dataTextInActive" style="text-align: right"><c:out value="${grouponetotal}" /></td>
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataText" style="text-align: right" width="20%"></td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="Total" /></td>
+							<td class="dataTextInActive" style="text-align: right" width="30%">
+								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${grandpaymenttotal}" />
+							</td>
 
-						</tr> --%>
+						</tr>
+				</tbody>
+			</table>
+			
+			
+			<table width="50%" style="border-color: #4b6a84;float: left;">
+
+				<tbody>
+						<tr><td><br/></td></tr>
+						<tr class="trClass">
+							<td class="dataTextInActive" style="text-align: left;height: 20px;width:40%">Sign Ameer-e-Muqami</td>
+							<td class="dataTextInActive" style="text-align: center;">:</td>
+							<td class="dataTextInActive" style="text-align: left">-----------------------------</td>
+
+						</tr>
+						
+						<tr class="trClass" >
+							<td class="dataTextInActive" style="text-align: left;height: 60px;width:40%" >Sign Accountant</td>
+							<td class="dataTextInActive" style="text-align: center;">:</td>
+							<td class="dataTextInActive" style="text-align: left">-----------------------------</td>
+
+						</tr>
+						
+					   <tr class="trClass">
+							<td class="dataTextInActive" style="text-align: left;height: 60px;width:40%">Sign Treasurer</td>
+							<td class="dataTextInActive" style="text-align: center;">:</td>
+							<td class="dataTextInActive" style="text-align: left" >-----------------------------</td>
+
+						</tr>
+						
+						<tr class="trClass">
+							<td class="dataTextInActive" style="text-align: left;height: 0px;width:40%">Date</td>
+							<td class="dataTextInActive" style="text-align: center;">:</td>
+							<td class="dataTextInActive" style="text-align: left"></td>
+
+						</tr>
+						
+						
+				</tbody>
+			</table>
+			
+                 <table width="50%" border="0" style="border-color: #4b6a84;float: left;">
+                    <tr>
+                        <td  class="headerTD">Halqa Share Details</td>
+                    </tr>
+                </table>
+			
+			<table width="50%" border="1" class="incomeexpense" style="border-color: #4b6a84;float: left;margin-bottom:0px;">
+			
+				<tbody>
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">Halqa Previous Dues</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">
+								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${halqasharepreviousdue}" />
+							</td>
+						</tr>
 					
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">Income Of the Month</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">
+								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalpayablehalqaduration}" />
+							</td>
+
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">Total Due</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">${halqatotaldue}</td>
+
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">Paid Halqa Share</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">${totalhalqasharepaid}</td>
+
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">Payable to Halqa</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">${halqatotalpayable}</td>
+
+						</tr>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="3"><input 
-							type="hidden"  id="delete" />
+						<td class="footerTD" colspan="3">
+							<a id="print" href="/jih/AccountProcess/rpStatementPrint?fromdate=<c:out value="${fromdate}" />&todate=<c:out value="${todate}"/>">Print</a>
 							</td>
 							
 
@@ -589,75 +764,6 @@ for(Cookie cookie : cookies){
 				</tfoot>
 			</table>
 			
-			<table width="50%" border="0" style="border-color: #4b6a84;float: left"	>
-
-				<thead>
-					
-					<tr>
-						
-						<th title="click to sort" class="headerText" style="font-weight: bold;">Account Code</th>
-						<th title="click to sort" class="headerText" style="font-weight: bold;">Name</th>
-						<th title="click to sort" class="headerText" style="font-weight: bold;">Balance</th>
-						
-						<th ></th>
-
-
-					</tr>
-				</thead>
-
-				<tbody>
-					
-					<c:forEach items="${incomeledgersaccount}" var="incomeledgersaccount">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right" width="20%"><c:out value="${incomeledgersaccount.key.accountcode}" /></td>
-							<td class="dataText" style="text-align: right" width="50%"><c:out value="${incomeledgersaccount.key.accountname}" /></td>
-							<td class="dataText" style="text-align: right" width="30%"><c:out value="${incomeledgersaccount.value}" /></td>
-
-						</tr>
-					</c:forEach>
-					
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="text-align: right" width="20%"></td>
-							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"></td>
-							<td class="dataTextInActive" style="text-align: right" width="30%"></td>
-
-						</tr>
-					
-					<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1" >
-							<td class="dataText" style="text-align: right" width="20%"></td>
-							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="${incometotallabel}" /></td>
-							<td class="dataTextInActive" style="text-align: right" width="30%"><c:out value="${incometotal}" /></td>
-
-						</tr>
-						
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1" >
-							<td class="dataText" style="text-align: right" width="20%"></td>
-							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="${losslabel}" /></td>
-							<td class="dataTextInActive" style="text-align: right" width="30%"><c:out value="${totalloss}" /></td>
-
-						</tr>
-						
-						
-				</tbody>
-				<tfoot>
-					<tr>
-						<td class="footerTD" colspan="3">
-						
-						<a id="print" href="/jih/AccountProcess/incomeStatementPrint?fromdate=<c:out value="${fromdate}" />&todate=<c:out value="${todate}"/>">Print</a>
-						<input 
-							type="hidden"  id="delete" />
-							</td>
-							
-
-					</tr>
-				</tfoot>
-			</table>
-
 		</div>
 
 

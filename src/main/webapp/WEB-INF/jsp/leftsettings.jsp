@@ -334,11 +334,11 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-        <div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div>
+        <%-- <div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div> --%>
         <%-- <div class="headerTD" style="width: 95%">Master Settings <c:out default="" value="${userAuth}"/> </div> --%>
 
         <div id="container" style="width: 95%" >
-            <h5 style="font-size: 12px"><a href="#">General</a></h5>
+            <!-- <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
                 <a target="mainFrame" href="/jih/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/>
                 <a target="mainFrame" href="/jih/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
@@ -347,15 +347,15 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="#">Class</a></h5>
             <div>
                 <a target="mainFrame" href="/jih/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
-            </div>
+            </div> -->
             
-            <h5 style="font-size: 12px"><a href="#">Fees</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Contribution</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
-                <a target="mainFrame" href="/jih/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+                <a target="mainFrame" href="/jih/FeesProcess/feesView" style="font-size: 12px;">Contribution Category</a><br/>
+                <a target="mainFrame" href="/jih/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Contribution</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
+           <!--  <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
             <div>
                 <a target="mainFrame" href="/jih/FeesProcess/otherfeesView" style="font-size: 12px;">Other Fees Category</a><br/>
                 <a target="mainFrame" href="/jih/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Other Fee Stamp</a><br/>
@@ -387,13 +387,13 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/jih/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
                 <a target="mainFrame" href="/jih/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
             </div>
-
+ -->
             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
                 <a target="mainFrame" href="/jih/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
             
-             <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
+            <!--  <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
                 <a target="mainFrame" href="/jih/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
                 <a target="mainFrame" href="/jih/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
@@ -403,7 +403,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/jih/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
                 <a target="mainFrame" href="/jih/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
                 <a target="mainFrame" href="/jih/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
-            </div>
+            </div> -->
             
               <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
             <div>

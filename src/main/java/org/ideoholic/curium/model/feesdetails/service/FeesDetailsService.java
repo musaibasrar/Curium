@@ -123,20 +123,16 @@ public class FeesDetailsService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Admission Number","UID","STS","Receipt No.", "Student Name","Class","Father Name","Contact Number", "Date of Fees", "Total"});
+					new Object[] { "UID","Receipt No.","Name","Contact Number", "Date", "Total"});
 			int i = 1;
 			
 			for (Entry<Parents, Receiptinfo> entry : feeMap.entrySet()) {
 	            
 				data.put(Integer.toString(i),new Object[] { 
-						entry.getKey().getStudent().getAdmissionnumber(), 
 						entry.getKey().getStudent().getStudentexternalid(), 
-						entry.getKey().getStudent().getSts(), 
 						entry.getValue().getBranchreceiptnumber(),
 						entry.getKey().getStudent().getName(),
 						entry.getKey().getStudent().getClassstudying(),
-						entry.getKey().getFathersname(), 
-						entry.getKey().getContactnumber(), 
 						entry.getValue().getDate().toString(),
 						entry.getValue().getTotalamount() });
 				i++;
@@ -172,7 +168,7 @@ public class FeesDetailsService {
 						cell.setCellValue((Long) obj);
 				}
 			}
-				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/feesdetails.xlsx"));
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/contributiondetails.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;
@@ -282,7 +278,7 @@ public class FeesDetailsService {
 						cell.setCellValue((Long) obj);
 				}
 			}
-				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/feesdetails.xlsx"));
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/contributiondetails.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;

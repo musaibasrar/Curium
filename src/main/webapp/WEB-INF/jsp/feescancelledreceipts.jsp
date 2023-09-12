@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Fees Collecion Details</title>
+<title>Collecion Details</title>
 <link rel="stylesheet" href="/jih/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/jih/css/datePicker/demos.css">
 <link rel="stylesheet" href="/jih/css/font-awesome.css">
@@ -592,7 +592,7 @@ for(Cookie cookie : cookies){
 		
 		
 		<div style="height: 28px">
-			<button id="add">Search Fees Collection Details</button>
+			<button id="add">Search Cancelled Receipts</button>
 			<br />
 		</div>
 
@@ -692,8 +692,8 @@ for(Cookie cookie : cookies){
 				<thead>
                         <tr>
                             <th class="headerText"><input type="checkbox" id="chckHead" /></th>
-                            <th title="click to sort" class="headerText">Date of fees</th>
-                            <th title="click to sort" class="headerText">Reference Number</th>
+                            <th title="click to sort" class="headerText">Date</th>
+                            <th title="click to sort" class="headerText">Receipt Number</th>
                             <th title="click to sort" class="headerText">Total Amount</th>
                             <th title="click to sort" class="headerText">View Details</th>
                             <th title="click to sort" class="headerText">Undo Receipt</th>

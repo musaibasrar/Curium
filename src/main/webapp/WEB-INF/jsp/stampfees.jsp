@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>stamp fees</title>
+<title>Stamp Category</title>
 <link rel="stylesheet" href="/jih/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/jih/css/datePicker/demos.css">
 
@@ -691,12 +691,12 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Stamp Fees</a></li>
+					<li><a href="#tabs-1">Contribution Category</a></li>
 
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
+						cellspacing="0" id="table1" style="display: none;">
 
 						<tr>
 							<td class="alignRightFields">Name &nbsp;</td>
@@ -778,24 +778,24 @@ for(Cookie cookie : cookies){
 					</table>
 					<div class="alignRightFields">
 
-						Fees Category:
-						<button id="addFeesCat">Add</button>
-						<button id="removeFeesCat">Remove</button>
+						Category:
+						<!-- <button id="addFeesCat">Add</button>
+						<button id="removeFeesCat">Remove</button> -->
 						<input
 									name="currentyear" type="hidden" value="${currentYear}" class="myclass" id="currentyear"
 									size="36"">
 					</div>
-					<TABLE id="dataTable" width="100%" border="0">
+					<TABLE id="dataTable" width="100%" border="0" style="display: block;">
 						<thead>
 							<tr>
 								<td class="headerText"><INPUT type="checkbox"
 									id="selectAll" name="selectAll"
 									onclick="selectAllRow('dataTable')" /></td>
 								<td class="headerText">Fees Category</td>
-								<td class="headerText">Fees Amount</td>
+								<!-- <td class="headerText">Fees Amount</td>
 								<td class="headerText">No.of installments in a Year</td>
 								<td class="headerText">Concession Amount</td>
-								<td class="headerText">Fees Total Amount</td>
+								<td class="headerText">Fees Total Amount</td> -->
 
 
 
@@ -803,13 +803,36 @@ for(Cookie cookie : cookies){
 						</thead>
 						<tbody>
 
-						</tbody>
-						<tfoot>
+					<c:forEach items="${feescategory}" var="fees" varStatus="status">
+
+						<tr style="border-color: #000000" border="1" cellpadding="1"
+							cellspacing="1">
+							<td class="dataText"><input type="checkbox"
+								id="<c:out value="${fees.idfeescategory}"/>" class="chcktbl"
+								name="idfeescategory"
+								value="<c:out value="${fees.idfeescategory}"/>" /></td>
+							<td class="dataText"><c:out value="${fees.feescategoryname}" />
+							<input type="hidden" class="feesId" name="feesIDS" id="feesIDS" value="${fees.idfeescategory}" />
+							<input type="hidden" class="feesFullAmount" name="fessFullCat"  id="fessFullCat" value="${fees.amount}"/>
+							<input type="hidden" value="0" name="feesConcession" id="feesConcession"/>
+							<input type="hidden" value="1" name="feesCount" id="feesCount"/>
+							</td>
+							<%-- <td class="dataText"><c:out value="${fees.particularname}" /></td>
+							<td class="dataText"><c:out value="${fees.amount}" /></td> --%>
+
+						</tr>
+					</c:forEach>
+
+
+
+
+				</tbody>
+						<tfoot style="display: none;">
 							<tr>
 
 								<td colspan="5" align="right">Total&nbsp;&nbsp;</td>
 								<td align="center"><input type="text"
-									name="feesTotalAmount" id="feesTotalAmount" value="0" /></td>
+									name="feesTotalAmount" id="feesTotalAmount" value="10" /></td>
 							</tr>
 
 						</tfoot>
@@ -831,12 +854,11 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class &
-							Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Admission Date</th>
-						<th title="click to sort" class="headerText">Admission Type</th>
+						<th title="click to sort" class="headerText">Contact No.</th>
+						<th title="click to sort" class="headerText">Address</th>
+						<th title="click to sort" class="headerText">Email</th>
 					</tr>
 				</thead>
 
@@ -851,15 +873,15 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="/jih/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
+										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">
 							 <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 								    ${splt} 
 									</c:forEach>
-							<td class="dataText"><c:out
-									value="${Parents.student.admissiondate}" /></td>
-						 	<td class="dataText">
+							<td class="dataText"><c:out	value="${Parents.student.remarks}" /></td>
+							<td class="dataText"><c:out	value="${Parents.student.bloodgroup}" /></td>
+						 	<%-- <td class="dataText">
 						 		<c:set var="classstudying" value="${fn:split(Parents.student.classstudying, '_')}" />
 						 		<c:set var="classadmitted" value="${fn:split(Parents.student.classadmittedin, '_')}" />
 						 		 <c:choose>
@@ -870,7 +892,7 @@ for(Cookie cookie : cookies){
                                     <c:out value="Old Admission" />
                                 </c:otherwise>
                             </c:choose>
-						 	</td>
+						 	</td> --%>
 
 
 						</tr>

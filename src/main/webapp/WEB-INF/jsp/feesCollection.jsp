@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Fees Collection</title>
+        <title>Contribution Collection</title>
         <link rel="stylesheet" href="/jih/css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="/jih/css/graph/jquery.jqplot.css">
 
@@ -487,7 +487,7 @@
                     $( "#studentId").val( ui.item.id );
        			  $( "#studentName").val( ui.item.name );
        			$( "#classandsec").val( ui.item.classandsec );
-       			$( "#admissionno").val( ui.item.admissionno );
+       			$( "#admissionno").val( ui.item.regno );
                     /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
                     return true;
                 }
@@ -722,6 +722,17 @@
            		$("#anim").change(function() {
            			$("#chequedate").datepicker("option", "showAnim", $(this).val());
            		});
+           		
+                $("#dateoffeesDetails").datepicker({
+           			changeYear : true,
+           			changeMonth : true,
+           			dateFormat: 'dd/mm/yy',
+           			yearRange: "-50:+1"
+           		});
+           		$("#anim").change(function() {
+           			$("#dateoffeesDetails").datepicker("option", "showAnim", $(this).val());
+           		});
+
                    
             });
 
@@ -810,6 +821,51 @@
             	
             }
             
+	function checkAmount(duePayment,sfsid){
+            	
+            	var str = duePayment.id;
+            	var res = str.split("_");
+            	//var dueAmount = parseInt(document.getElementById("dueamount_"+res[1]).value);
+            	var payment = parseInt(duePayment.value,10);
+            	document.getElementById(sfsid).checked = true; 
+            	
+            	if(payment>=1){
+            		duePayment.value = payment;
+            		document.getElementById("muqami_"+res[1]).value = payment/2;
+            		document.getElementById("halqa_"+res[1]).value = payment/2;
+            	}else if(payment<1 || isNaN(payment)){
+            		duePayment.value = 0;
+            		ocument.getElementById("muqami_"+res[1]).value = 0;
+            		document.getElementById("halqa_"+res[1]).value = 0;
+            		document.getElementById(sfsid).checked = false; 
+            	}
+            	
+            	
+            }
+	
+	
+	   function checkWithTotalAmount(duePayment,sfsid){
+       	
+       	var str = duePayment.id;
+       	var res = str.split("_");
+       	
+       	var muqamiAmount = parseInt(document.getElementById("muqami_"+res[1]).value);
+       	var halqaAmount = parseInt(document.getElementById("halqa_"+res[1]).value);
+       	var amountPaying = parseInt(document.getElementById("amountpaying_"+res[1]).value);
+       	var totalDividedValue = muqamiAmount+halqaAmount;
+
+       	document.getElementById(sfsid).checked = true; 
+       	
+       	if(totalDividedValue>amountPaying){
+       		document.getElementById(sfsid).checked = false; 
+       		alert('Halqa share & Maqami Share Should be equal to Total Paying Amount');
+       		document.getElementById("muqami_"+res[1]).value = amountPaying/2;
+    		document.getElementById("halqa_"+res[1]).value = amountPaying/2;
+       	}
+       	
+       	
+       }
+            
  function selectPayment(id){
             	
             	
@@ -889,14 +945,14 @@ for(Cookie cookie : cookies){
             
             <div id="tabs">
 				<ul>
-					<li><a href="#fragment-1">Fees Collection</a></li>
+					<li><a href="#fragment-1">Contribution Collection</a></li>
 				</ul>
 				
 			<div id="fragment-1">
-            	<table  width="100%">
+            	<table  width="50%">
                  <tbody>
 	                <tr>
-                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #eb6000;">Search Student:&nbsp;&nbsp;&nbsp;&nbsp;</td> 
+                    <td style="font-weight: bold;font-size: 15px;color: #eb6000;">Search Donor:&nbsp;&nbsp;&nbsp;&nbsp;</td> 
                     </tr>
                     
                    	<tr>
@@ -904,30 +960,20 @@ for(Cookie cookie : cookies){
                     </tr>
                     
                     <tr>
-                    <td style="width: 45%;" class="alignLeft">Student Name: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentname" id="studentname" class="myclass" /> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
+                    <td class="alignLeft">Donor Name: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentname" id="studentname" class="myclass" /> <input name="studentId" type="hidden" id="studentId" value="" /> <button id="addFees">Search</button></td>
                         
-                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="myclass" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
+                        <td class="alignLeft" style="display: none;">Date:&nbsp;&nbsp;<input type="text" class="myclass" name="dateoffees" id="dateoffees"  readonly="readonly"/></td>
                     </tr>
                     
-                    <tr>
-						<td><br></td>
-                    </tr>
-                    
-                    
-                    <tr>
+                    <tr style="display: none;">
                     
                         <td class="alignLeft" style="width: 45%">Admission No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admissionno" id="admissionno" class="myclass" readonly/></td>
                         <td class="alignLeft">Class & SEC : &nbsp;&nbsp;&nbsp;<input type="text" name="classandsec" id="classandsec" class="myclass" /></td>
                         
                     </tr>
+                    <tr style="display: none;">
                     
-                    <tr>
-						<td><br></td>
-                    </tr>
-                    
-                    <tr>
-                    
-                        <td class="alignLeft" style="width: 45%">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp; 
+                        <td class="alignLeft">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp; 
                         	   <label>
                                         <label> <select name="academicyear" id="academicyear" required
 									 style="width: 184px;border-radius: 4px;background: white;height: 28px;">
@@ -946,38 +992,37 @@ for(Cookie cookie : cookies){
                         </td>
                         
                     </tr>
-                    
+                    </table>
+                    <table  width="50%">
                     <tr>
 						<td><br></td>
                     </tr>
-                    
-                    <tr>
-                    	
-                        <td><button id="addFees">Search Fees</button>&nbsp;&nbsp;&nbsp;</td>
-                        
-                    </tr>
-                    
-                    <tr>
-						<td><br></td>
-                    </tr>
-
 					<tr>
-                    <td style="width: 45%;font-weight: bold;font-size: 15px;color: #eb6000;">Student Details:&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <td style="font-weight: bold;font-size: 15px;color: #eb6000;">Donor Details:&nbsp;&nbsp;&nbsp;&nbsp; 
                     </tr>
                      <tr>
 						<td><br></td>
                     </tr>
                     <tr>
-                    <td class="alignLeft" style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" class="myclass" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
+                    <td class="alignLeft">UID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" class="myclass" /> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
                         
-                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" class="myclass" value="${dateoffeesDetails}" /></td>
+                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        		<input type="text"  name="dateoffeesDetails"
+									class="myclass" style="font-size: 14px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="dateoffeesDetails" autocomplete="false" required
+									data-validate="validate(required)">
+                        </td>
                         
                     </tr>
-                    
+                    <tr>
+						<td><br></td>
+                    </tr>
                     <tr>
                     
-                        <td class="alignLeft" style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" class="myclass" readonly/></td>
-                        <td class="alignLeft">Class & SEC : &nbsp;&nbsp;&nbsp;
+                        <td class="alignLeft" >Donor Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" class="myclass" readonly/></td>
+                        <td class="alignLeft" >Receipt No.:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="bookreceiptno" id="bookreceiptno" class="myclass"/></td>
+                        <td class="alignLeft" style="display: none;">Class & SEC : &nbsp;&nbsp;&nbsp;
                         
                         		<select name="classandsecDetails"
 									id="classandsecDetails" style="width: 184px;border-radius: 4px;background: white;height: 28px;">
@@ -1002,16 +1047,17 @@ for(Cookie cookie : cookies){
                     </tr>
                 </tbody>
             </table>
-            
-            <table width="100%" border="1" style="border-color: #4b6a84;font-size: 18px;"
+            <table width="50%" border="1" style="border-color: #4b6a84;font-size: 18px;"
 				id="myTable">
 
 				<thead>
                     <tr >
                     	<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-                        <td class="headerText">Fees Category</td>
-                        <td class="headerText">Total Amount/Due Amount</td>                       
-                        <td class="headerText">Amount Due to be paid</td>
+                        <td class="headerText">Contribution Category</td>
+                        <!-- <td class="headerText">Total Amount/Due Amount</td>  -->                      
+                        <td class="headerText">Total Amount</td>
+                        <td class="headerText">Maqami Share</td>
+                        <td class="headerText">Halqa Share</td>
                         <!-- <td class="headerText">Fine</td> -->
 
                     </tr>
@@ -1026,14 +1072,23 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
 								name="studentsfsids" 
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
-							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
-							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
+							<td class="dataText" align="left" style="font-weight: bold;font-size: 13px;">
+							<input type="text" value="${studentfeesdetails.key.feescategory.feescategoryname}" id="feescategoryname" name="feescategoryname" style="border: none;">
+							<input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
+							<%-- <td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
 							<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
+							</td> --%>
+							<td class="dataText" align="center">
+							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;">
+							<%-- <input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})"> --%>
+								<input type="hidden" id="fine" value="0" class="fine" name="fine" >
 							</td>
 							<td class="dataText" align="center">
-							<input type="text" class="amountpaying" value="0" id="amountpaying_${status.index}" name="amountpaying" onkeyup="checkWithDueAmount(this,${studentfeesdetails.key.sfsid})">
-							<input type="hidden" id="fine" value="0" class="fine" name="fine" >
+								<input type="text" value="0" id="muqami_${status.index}" name="maqamiamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;">
+							</td>
+							<td class="dataText" align="center">
+								<input type="text"  value="0" id="halqa_${status.index}" name="halqaamount" onkeyup="checkWithTotalAmount(this,${studentfeesdetails.key.sfsid})" style="border: none;">
 							</td>
 							<!-- <td class="dataText" align="center">
 							<input type="text" id="fine" value="0" class="fine" name="fine" >
@@ -1045,11 +1100,22 @@ for(Cookie cookie : cookies){
                     
                     <tr>
 
-                        <td colspan="3" align="right"><b>Total&nbsp;&nbsp;</b></td>
+                        <td colspan="2" align="right"><b>Total&nbsp;&nbsp;</b></td>
                         <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
                     </tr>
                 </tfoot>
 			</table>
+			
+			<table>
+					<tr>
+						<td align="right"><b>Narration&nbsp;&nbsp;</b></td>
+                        <td align="left"><label><textarea  name="narrationreceipt"
+											type="text" class="textField" id="narrationreceipt" rows="2" cols="40"
+											
+											onkeypress="return validateContactNum(this);"></textarea></label></td>
+                    </tr>
+                    
+                    </table>
             <!-- <TABLE id="dataTable" width="100%" border="1" >
                 <thead>
                     <tr >
@@ -1095,7 +1161,7 @@ for(Cookie cookie : cookies){
 						
 							<td>
 							
-								<input type="radio" id="cashpayment" name="paymentmethod" value="cashpayment" onclick="selectPayment(this.id)">
+								<input type="radio" id="cashpayment" name="paymentmethod" value="cashpayment" checked="checked" onclick="selectPayment(this.id)">
 								<label for="cashpayment">Cash</label>
 									
 								<input type="radio" id="banktransfer" name="paymentmethod" value="banktransfer" onclick="selectPayment(this.id)">

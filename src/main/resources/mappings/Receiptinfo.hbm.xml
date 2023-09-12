@@ -44,7 +44,15 @@
         <property name="journalvoucher" type="int">
             <column name="journalvoucher" />
         </property>
-        
+        <property name="fine" type="java.lang.Long">
+            <column name="fine" precision="10" scale="0" />
+        </property>
+        <property name="misc" type="java.lang.Long">
+            <column name="misc" precision="10" scale="0" />
+        </property>
+        <property name="bookreceiptno" type="string">
+            <column name="bookreceiptno" length="100" />
+        </property>
        
         <!-- inverse="true" -->
         <set name="feesCollectionRecords" table="feescollecion"

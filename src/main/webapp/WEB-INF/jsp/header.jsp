@@ -201,7 +201,7 @@ for(Cookie cookie : cookies){
                                             <td width="40"><a target="mainFrame" href="/jih/feesCollectionDetails"><div align="center" align="center"><img  alt="Fees Details" src="/jih/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                                             
-                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/jih/StudentProcess/addNew"><img   src="/jih/images/Usersw.png" width="30" height="30" alt="Add New Student" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
+                                            <td width="40" ><div align="center" ><a target="mainFrame" href="/jih/StudentProcess/addNew"><img   src="/jih/images/Usersw.png" width="30" height="30" alt="Add New" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><label style="color:white;font-size: 12px;">Add <br>New</label><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                            					
                            					<td width="40"><a target="leftFrame" href="/jih/leftsettings"><div align="center" align="center"><img  alt="Settings" src="/jih/images/ssettingsw.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>

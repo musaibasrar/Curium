@@ -91,7 +91,7 @@ for(Cookie cookie : cookies){
         <form id="form1" action="/jih/"  method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="250" align="center" valign="middle"><p class="style1">Fees stamp saved Successfully</p>
+        <td height="250" align="center" valign="middle"><p class="style1">Contributions Added Successfully</p>
         <p class="style1">
           
             

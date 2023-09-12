@@ -234,5 +234,26 @@ public class feesCategoryDAO {
 		}
 
 	}
+	
+	public List <Feescategory> getfeecategoryofstudent(int branchId)
+	{
+		List <Feescategory> result= new ArrayList();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from Feescategory fc where fc.branchid = "+branchId);
+			result=query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return result;
+
+		}
+	}
 
 }

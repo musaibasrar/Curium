@@ -163,7 +163,7 @@ public class StampFeesDAO {
 				if(feesStructure != null){
 					
 					Query queryUpdate = session
-							.createQuery("update Studentfeesstructure set idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"',feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and academicyear = '"+currentYear+"'");
+							.createQuery("update Studentfeesstructure set feesamount = '"+studentfeesstructure.getFeesamount()+"'  where sid = '"+studentfeesstructure.getSid()+"' and idfeescategory = '"+studentfeesstructure.getFeescategory().getIdfeescategory()+"' and academicyear = '"+currentYear+"'");
 					
 					
 					queryUpdate.executeUpdate();
@@ -174,15 +174,15 @@ public class StampFeesDAO {
 			
 			//accounts
 			
+			/*
 			session.save(transactions);
 			Query queryAccounts = session.createQuery(updateDrAccount);
 			queryAccounts.executeUpdate();
 			Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
 			queryqueryAccounts1.executeUpdate();
-			
+			*/
 
 			transaction.commit();
-			System.out.println("in add3");
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();

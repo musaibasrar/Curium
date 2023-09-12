@@ -37,8 +37,8 @@ public class feesCollectionDAO {
 	}
 
 	@SuppressWarnings("finally")
-	public boolean create(Receiptinfo receiptInfo, List<Feescollection> feescollectionList, VoucherEntrytransactions transactions, String updateCrAccount,
-			String updateDrAccount, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome) {
+	public boolean create(Receiptinfo receiptInfo, List<Feescollection> feescollectionList, List<VoucherEntrytransactions> transactionsList, List<String> updateDrAccountList,
+			List<String> updateCrAccountList, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome) {
 		 
 		boolean result = false;
 		try {
@@ -55,14 +55,29 @@ public class feesCollectionDAO {
 			 	}
 			 	
 			 	//Receipts
-			 	transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
-				session.save(transactions);
-				Query queryAccounts = session.createQuery(updateDrAccount);
-				queryAccounts.executeUpdate();
-				Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
-				queryqueryAccounts1.executeUpdate();
+			 	for (VoucherEntrytransactions transactions : transactionsList) {
+			 		
+			 		transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+					session.save(transactions);
+					receiptInfo.setReceiptvoucher(transactions.getTransactionsid().intValue());
+					session.save(receiptInfo);
+				}
+			 	
+			 	for (String updateCrAccount : updateCrAccountList) {
+			 		
+			 		Query queryAccounts = session.createQuery(updateCrAccount);
+					queryAccounts.executeUpdate();
+					
+				}
+			 	
+			 	for (String updateDrAccount : updateDrAccountList) {
+			 		
+					Query queryqueryAccounts1 = session.createQuery(updateDrAccount);
+					queryqueryAccounts1.executeUpdate();
+				}
+			 	
 				//
-				
+				/*
 				// J.V
 				transactionsIncome.setNarration(transactionsIncome.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
 				session.save(transactionsIncome);
@@ -71,10 +86,11 @@ public class feesCollectionDAO {
 				Query queryqueryAccountsIncome1 = session.createQuery(updateCrAccountIncome);
 				queryqueryAccountsIncome1.executeUpdate();
 				//
+				*/
+			 	
 				
-				receiptInfo.setReceiptvoucher(transactions.getTransactionsid().intValue());
-				receiptInfo.setJournalvoucher(transactionsIncome.getTransactionsid().intValue());
-				session.save(receiptInfo);
+				//receiptInfo.setJournalvoucher(transactionsIncome.getTransactionsid().intValue());
+				
 				
 			for (Feescollection singleFeescollection :  feescollectionList) {
 				singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());
@@ -354,6 +370,26 @@ public class feesCollectionDAO {
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+
+	public List<Object[]> readListOfStudentsCollectionReport(int branchId) {
+		List<Object[]> results = new ArrayList<Object[]>();
+
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("SELECT s.sid,s.name,s.classstudying,MAX(fc.date) AS last_payment_date,DATEDIFF(CURRENT_DATE, MAX(fc.date)) AS days_since_last_payment FROM Student s LEFT JOIN Feescollection fc ON s.sid = fc.sid WHERE s.archive = 0 AND s.branchid = 2 GROUP BY s.sid, s.name, s.classstudying ORDER BY days_since_last_payment DESC").setCacheable(true).setCacheRegion("commonregion");
+			results = query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
 		} finally {
 				HibernateUtil.closeSession();
 			return results;

@@ -446,10 +446,10 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-	<div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
+	<%-- <div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div> --%>
 
         <div id="container" style="width: 95%" >
-            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Donors</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -462,7 +462,7 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/jih/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
             			</td>
             		</tr>
-            		<tr>
+            		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/jih/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
             			</td>
@@ -471,30 +471,30 @@ for(Cookie cookie : cookies){
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/jih/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
             			</td>
-            		</tr>
+            		</tr> -->
                 </table>
             </div>
             
             
 			
-              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
+              <h5 class="sideaccordian" ><a href="#">Contributions</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/jih/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
+            				 <a target="mainFrame" href="/jih/FeesProcess/feesCollect" style="font-size: 12px;">Collect Contributions</a>
             			</td>
             		</tr>
-            		<tr>
+            		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/jih/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
+            				<a target="mainFrame" href="/jih/FeesProcess/feesStructure" style="font-size: 12px;">Contributions Structure</a>
             			</td>
-            		</tr>
-            		<tr>
+            		</tr> -->
+            		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/jih/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
             			</td>
-            		</tr>
+            		</tr> -->
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/jih/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
@@ -580,14 +580,14 @@ for(Cookie cookie : cookies){
             </div>
             
             
-            <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
+            <!-- <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/jih/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
             			</td>
-            		</tr> -->
+            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/jih/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
@@ -622,7 +622,7 @@ for(Cookie cookie : cookies){
             </div>
             
             
-            <!--  <h5 class="sideaccordian" ><a href="#">Attendance</a></h5>
+             <h5 class="sideaccordian" ><a href="#">Attendance</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -642,7 +642,7 @@ for(Cookie cookie : cookies){
             		</tr>
                 </table>
             </div>
-             -->
+            
             
             <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -657,7 +657,7 @@ for(Cookie cookie : cookies){
             				<a target="mainFrame" href="/jih/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
             			</td>
             		</tr>
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/jih/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
             			</td>
@@ -666,7 +666,7 @@ for(Cookie cookie : cookies){
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/jih/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
             			</td>
-            		</tr> -->
+            		</tr>
                 </table>
             </div>
             
@@ -718,11 +718,11 @@ for(Cookie cookie : cookies){
 								<a target="mainFrame" href="/jih/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
             			</td>
             		</tr>
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/jih/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
             			</td>
-            		</tr> -->
+            		</tr>
                 </table>
             </div>
             
@@ -748,13 +748,13 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/jih/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
+            				 <a target="mainFrame" href="/jih/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Donorss</a>
             			</td>
             		</tr>
                 </table>
             </div>
             
-           <!--   <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
+             <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
                 <a target="mainFrame" href="/jih/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
                 <a target="mainFrame" href="/jih/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
@@ -767,7 +767,7 @@ for(Cookie cookie : cookies){
             <div >
                 <a target="mainFrame" href="/jih/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
                 <a target="mainFrame" href="/jih/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
-            </div> -->
+            </div>
             
             <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
         	
@@ -780,11 +780,11 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/jih/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
             			</td>
             		</tr>
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/jih/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
             			</td>
-            		</tr> -->
+            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/jih/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
@@ -799,7 +799,7 @@ for(Cookie cookie : cookies){
             </div>
             
             
-           <!--  <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
+            <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
             
             <div style="padding-left: 0px;padding-right: 0px;">
             
@@ -825,7 +825,7 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             	</table>
-            </div> -->
+            </div>
             
             <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
               
@@ -855,7 +855,7 @@ for(Cookie cookie : cookies){
             	</table>
             </div>
             
-           <!--  <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
+            <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
             
             <div style="padding-left: 0px;padding-right: 0px;">
             
@@ -871,8 +871,8 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             	</table>
-            </div> -->
-            
+            </div>
+             -->
             <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
@@ -889,7 +889,7 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-               <h5 class="sideaccordian" ><a href="#">Promotion</a></h5>
+               <!-- <h5 class="sideaccordian" ><a href="#">Promotion</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -910,7 +910,7 @@ for(Cookie cookie : cookies){
 				        </td>
 				     </tr>
 				 </table>
-            </div>
+            </div> -->
             
             </div>
                    

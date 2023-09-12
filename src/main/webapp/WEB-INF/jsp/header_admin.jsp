@@ -138,7 +138,7 @@ for(Cookie cookie : cookies){
 							<td><a target="mainFrame"
 								href="/jih/FeesProcess/feesCollect"> <img
 									src="/jih/images/feescollect.svg" width="18" height="18"
-									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
+									alt="Fees Collection" style="vertical-align: bottom;" />Contribution Collection
 							</a></td>
 
 							<td>
@@ -155,8 +155,8 @@ for(Cookie cookie : cookies){
 
 							<td><a target="mainFrame"
 								href="/jih/StudentProcess/addNew"> <img
-									src="/jih/images/student_header.svg" width="18" height="18"
-									alt="Add New Student" style="vertical-align: bottom;" />Add Student
+									src="/jih/images/member.svg" width="18" height="18"
+									alt="Add New Student" style="vertical-align: bottom;" />Add Donor
 							</a></td>
 
 							<td ><a target="leftFrame" href="/jih/leftsettings">
@@ -190,15 +190,15 @@ for(Cookie cookie : cookies){
 								href="/jih/StudentProcess/viewAllStudentsWithParents"><img
 									alt="View All Students" src="/jih/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
-								View Students
+								View Donors
 							</a></td>
 							
-							<td ><a target="mainFrame"
+							<!-- <td ><a target="mainFrame"
 								href="/jih/UserProcess/dashBoard"><img
 									alt="Dash Board" src="/jih/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
-									</a></td>
+									</a></td> -->
 								
 							<td ><a target="_parent"
 								href="/jih/UserProcess/logout"><img

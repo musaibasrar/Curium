@@ -292,7 +292,7 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 95%" >
             
              
-            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Donors</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -361,7 +361,7 @@ for(Cookie cookie : cookies){
             </div>
             
             
-             <h5 class="sideaccordian" ><a href="#">Student Attendance</a></h5>
+             <h5 class="sideaccordian" ><a href="#">Donor Attendance</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		

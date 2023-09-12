@@ -620,7 +620,7 @@ for(Cookie cookie : cookies){
 		<div>
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Students</a></li>
+					<li><a href="#tabs-1">Donors</a></li>
 					<!-- <li><a href="#tabs-2">Staff</a></li>
 					<li><a href="#tabs-3">Selected Numbers</a></li> -->
 				</ul>
@@ -637,7 +637,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						
-						<tr>
+						<%-- <tr>
 							<td class="alignRight"><label>Class </label>
 							</td><td>
 							<label>
@@ -669,7 +669,7 @@ for(Cookie cookie : cookies){
 
 								</select></label>
 								</td>
-						</tr>
+						</tr> --%>
 							<tr>
 							<td><br /></td>
 						</tr>

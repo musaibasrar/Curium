@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -370,7 +373,7 @@ public class AccountService {
 		transactions.setDramount(new BigDecimal(drAmount));
 		transactions.setCramount(new BigDecimal(crAmount));
 		transactions.setVouchertype(Integer.parseInt(receiptVoucher));
-		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(receiptDate));
+		transactions.setTransactiondate(DateUtil.indiandateParser(receiptDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(receiptNarration);
 		transactions.setCancelvoucher("no");
@@ -398,6 +401,7 @@ public class AccountService {
 		String crAmountPayment = DataUtil.emptyString(request.getParameter("cramountpaymentsecond"));
 		String paymentDate = DataUtil.emptyString(request.getParameter("dateofpayment"));
 		String paymentNarration = DataUtil.emptyString(request.getParameter("paymentnarration"));
+		String paymentNarrationCategory = DataUtil.emptyString(request.getParameter("paymentnarrationcategory"));
 		
 		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 		
@@ -406,9 +410,9 @@ public class AccountService {
 		transactions.setDramount(new BigDecimal(drAmountPayment));
 		transactions.setCramount(new BigDecimal(crAmountPayment));
 		transactions.setVouchertype(Integer.parseInt(paymentVoucher));
-		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(paymentDate));
+		transactions.setTransactiondate(DateUtil.indiandateParser(paymentDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
-		transactions.setNarration(paymentNarration);
+		transactions.setNarration(paymentNarrationCategory+":"+paymentNarration);
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
@@ -441,7 +445,7 @@ public class AccountService {
 		transactions.setDramount(new BigDecimal(drAmountContra));
 		transactions.setCramount(new BigDecimal(crAmountContra));
 		transactions.setVouchertype(Integer.parseInt(contraVoucher));
-		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(contraDate));
+		transactions.setTransactiondate(DateUtil.indiandateParser(contraDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(contraNarration);
 		transactions.setCancelvoucher("no");
@@ -476,7 +480,7 @@ public class AccountService {
 		transactions.setDramount(new BigDecimal(drAmountJournal));
 		transactions.setCramount(new BigDecimal(crAmountJournal));
 		transactions.setVouchertype(Integer.parseInt(journalVoucher));
-		transactions.setTransactiondate(DateUtil.dateParserUpdateStd(journalDate));
+		transactions.setTransactiondate(DateUtil.indiandateParser(journalDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(journalNarration);
 		transactions.setCancelvoucher("no");
@@ -825,7 +829,9 @@ public class AccountService {
 			}
 		}
 	
-	if(accountDetails.getAccountGroupMaster().getAccountgroupid()==1 || accountDetails.getAccountGroupMaster().getAccountgroupid()==5) {
+	int groupId = accountDetails.getAccountGroupMaster().getAccountgroupid();
+		
+	if(groupId==1 || groupId==5) {
 		totalBalanceAcc = debitAcc.subtract(creditAcc);
 	}else{
 		totalBalanceAcc = creditAcc.subtract(debitAcc);
@@ -1394,4 +1400,386 @@ public boolean searchSingleLedgerEntries() {
 		}
 		return false;
 	}
+
+
+public boolean getRPStatement() {
+	
+	String fromDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("fromdate")));
+	String toDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("todate")));
+	
+	if(httpSession.getAttribute(BRANCHID)!=null) {
+		
+			int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+
+			String incomeLedgersRP = getLedgerAccountId("incomeledgerrp"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			String expenseLedgersRP = getLedgerAccountId("expenseledgerrp"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			
+			String[] strArray = incomeLedgersRP.split(":");
+			List<Integer> arrayIncomeLedgersRP = new ArrayList<>();
+			for (String s : strArray) {
+	        	arrayIncomeLedgersRP.add(Integer.parseInt(s));
+	        }
+	        
+			String[] strArrayEx = expenseLedgersRP.split(":");
+			List<Integer> arrayExpenseLedgersRP = new ArrayList<>();
+			for (String s : strArrayEx) {
+	        	arrayExpenseLedgersRP.add(Integer.parseInt(s));
+	        }
+	        
+			List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
+			accountsDetails = new AccountDAO().getAccountdetailsIncomeExpenseForRP(arrayIncomeLedgersRP,arrayExpenseLedgersRP,branchId);
+			
+			//Group 1
+			BigDecimal totalIncome = BigDecimal.ZERO;
+			Map<Accountdetails,BigDecimal> incomeLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+			
+			
+			//Group 2
+			BigDecimal totalExpense = BigDecimal.ZERO;
+			Map<Accountdetails,BigDecimal> expenseLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+			
+			//Group 3
+			BigDecimal totalPayableHalqaDuration = BigDecimal.ZERO;
+			
+			for (Accountdetails accountDetails : accountsDetails) {
+				
+				List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				
+				if(!voucherTransactions.isEmpty()) {
+				
+					BigDecimal totalAmount = getTotalBalance(accountDetails,voucherTransactions);
+					totalAmount = totalAmount.abs();
+					int groupId = accountDetails.getAccountGroupMaster().getAccountgroupid();
+
+					switch(groupId){
+					
+					case 2: 
+						totalIncome = totalIncome.add(totalAmount);
+						totalPayableHalqaDuration = totalPayableHalqaDuration.add(totalAmount);
+						incomeLedgersAccount.put(accountDetails, totalAmount);
+						break;
+					case 4: 
+							totalIncome = totalIncome.add(totalAmount);
+							incomeLedgersAccount.put(accountDetails, totalAmount);
+							break;
+					case 5: 
+							totalExpense = totalExpense.add(totalAmount);
+							expenseLedgersAccount.put(accountDetails, totalAmount);
+							break;
+					default:
+							
+					}
+					
+					}else {
+						
+						int groupId = accountDetails.getAccountGroupMaster().getAccountgroupid();
+
+						switch(groupId){
+						
+						case 2: 
+							incomeLedgersAccount.put(accountDetails, BigDecimal.ZERO);
+							break;
+						case 4: 
+								incomeLedgersAccount.put(accountDetails, BigDecimal.ZERO);
+								break;
+						case 5: 
+								expenseLedgersAccount.put(accountDetails, BigDecimal.ZERO);
+								break;
+						default:
+								
+						}
+					}
+				}
+
+	
+	BigDecimal profit = totalIncome.subtract(totalExpense);
+	
+	if(profit.compareTo(BigDecimal.ZERO) > 0){
+		request.setAttribute("profitlabel", "Net Profit");
+		request.setAttribute("totalprofit", profit);
+	}else if(profit.compareTo(BigDecimal.ZERO) < 0){
+		request.setAttribute("losslabel", "Net Loss");
+		request.setAttribute("totalloss", profit.negate());
+	}
+	
+	//Caluclate Halqa Previous Dues
+	List<Accountdetailsbalance> accountDetailsBalanceListHalqaPreviousShare = new AccountDAO().getAccountBalanceDetails(arrayIncomeLedgersRP, branchId);
+	BigDecimal halqaShareDue = BigDecimal.ZERO;
+	
+	for (Accountdetailsbalance accountdetailsbalance : accountDetailsBalanceListHalqaPreviousShare) {
+		int accountId = accountdetailsbalance.getAccountDetails().getAccountGroupMaster().getAccountgroupid();
+		
+		if(accountId==2) {
+			halqaShareDue = halqaShareDue.add(accountdetailsbalance.getCurrentbalance());
+		}
+		
+	}
+	
+	BigDecimal halqaSharePreviousDue = halqaShareDue.subtract(totalPayableHalqaDuration);
+	request.setAttribute("halqasharepreviousdue", halqaSharePreviousDue);
+	request.setAttribute("halqatotaldue", halqaShareDue);
+	//End Calculating Previous Halqa Share
+	
+	
+	
+	//Calculate halqa paid share
+	
+	String halqaSharePaid = getLedgerAccountId("halqasharepaid"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	Map<Accountdetails,BigDecimal> mapHalqaSharePaidAccount = new HashMap<Accountdetails, BigDecimal>();
+	BigDecimal totalHalqaSharePaid = BigDecimal.ZERO;
+	String[] halqaSharePaidstrArray = halqaSharePaid.split(":");
+	List<Integer> halqaSharePaidList = new ArrayList<>();
+	for (String s : halqaSharePaidstrArray) {
+		halqaSharePaidList.add(Integer.parseInt(s));
+    }
+    
+	List<Accountdetails> accountsDetailsHalqaSharePaidAccount = new ArrayList<Accountdetails>();
+	accountsDetailsHalqaSharePaidAccount = new AccountDAO().getAccountdetailsMultiple(halqaSharePaidList,branchId);
+	
+	for (Accountdetails accountDetails : accountsDetailsHalqaSharePaidAccount) {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		if(!voucherTransactions.isEmpty()) {
+		
+			BigDecimal totalAmount = getTotalBalanceDebit(accountDetails,voucherTransactions);
+			totalAmount = totalAmount.abs();
+			totalHalqaSharePaid = totalHalqaSharePaid.add(totalAmount);
+			accountDetails.setAccountname(accountDetails.getAccountname().replace("Payable", "Share Paid").trim());
+			mapHalqaSharePaidAccount.put(accountDetails, totalAmount);
+			
+			}
+		}
+	 request.setAttribute("maphalqasharepaidaccount", mapHalqaSharePaidAccount);
+	 
+	//End Calculating halqa paid share
+	 
+	// Calculate Opening Balances
+		
+		BigDecimal openingBalance = BigDecimal.ZERO;
+		BigDecimal closingBalance = BigDecimal.ZERO;
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date newdate = new Date();
+		String todaysDate = df.format(newdate);
+		
+		List<Accountdetails> accountsDetailsOB = new ArrayList<Accountdetails>();
+		accountsDetailsOB = new AccountDAO().getAccountdetailsIncomeExpense(branchId);
+		
+		//Group 1
+		BigDecimal totalIncomeOB = BigDecimal.ZERO;
+		Map<Accountdetails,BigDecimal> incomeLedgersAccountOB = new HashMap<Accountdetails, BigDecimal>();
+		
+		
+		//Group 2
+		BigDecimal totalExpenseOB = BigDecimal.ZERO;
+		Map<Accountdetails,BigDecimal> expenseLedgersAccountOB = new HashMap<Accountdetails, BigDecimal>();
+		
+		for (Accountdetails accountDetails : accountsDetailsOB) {
+			
+			List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, todaysDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			
+			if(!voucherTransactions.isEmpty()) {
+			
+				BigDecimal totalAmount = getTotalBalance(accountDetails,voucherTransactions);
+				totalAmount = totalAmount.abs();
+				int groupId = accountDetails.getAccountGroupMaster().getAccountgroupid();
+
+				switch(groupId){
+				
+				case 4: 
+						totalIncomeOB = totalIncomeOB.add(totalAmount);
+						incomeLedgersAccountOB.put(accountDetails, totalAmount);
+						break;
+				case 5: 
+						totalExpenseOB = totalExpenseOB.add(totalAmount);
+						expenseLedgersAccountOB.put(accountDetails, totalAmount);
+						break;
+				default:
+						
+				}
+				
+				}
+			}
+		//String openingBalances = getLedgerAccountId("openingbalanceledgers"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		//String[] OBalances = openingBalances.split(":");
+		List<Integer> accountids = new ArrayList<Integer>();
+		accountids.add(1);
+		accountids.add(2);
+		List<Accountdetailsbalance> accountDetailsBalanceList = new AccountDAO().getAccountBalanceDetails(accountids, branchId);
+		BigDecimal cashBalance = BigDecimal.ZERO;
+		BigDecimal bankBalance = BigDecimal.ZERO;
+		
+		for (Accountdetailsbalance accountdetailsbalance : accountDetailsBalanceList) {
+			int accountId = accountdetailsbalance.getAccountDetails().getAccountdetailsid();
+			
+			if(accountId==1) {
+				cashBalance = accountdetailsbalance.getCurrentbalance();
+			}else if (accountId==2) {
+				bankBalance = accountdetailsbalance.getCurrentbalance();
+			}
+			
+		}
+		BigDecimal openingDrCr = totalIncomeOB.add(totalExpenseOB);
+		openingBalance = cashBalance.subtract(openingDrCr);
+		
+		BigDecimal closingDrCr = totalIncome.subtract(totalExpense.add(totalHalqaSharePaid));
+		closingBalance = openingBalance.add(closingDrCr);
+		
+		BigDecimal grandReceiptTotal = totalIncome.add(openingBalance);
+		BigDecimal grandPaymentTotal = totalExpense.add(totalHalqaSharePaid).add(closingBalance);
+		
+		request.setAttribute("grandreceipttotal", grandReceiptTotal);
+		request.setAttribute("grandpaymenttotal", grandPaymentTotal);
+		request.setAttribute("openingbalance", openingBalance);
+		request.setAttribute("closingbalance", closingBalance);
+		// End calculating Opening Balances
+		
+		
+		//group 1
+		request.setAttribute("income", totalIncome);
+		request.setAttribute("incomeledgersaccount", incomeLedgersAccount);
+		
+		//group 2
+		request.setAttribute("expenses", totalExpense);
+		request.setAttribute("expensesledgersaccount", expenseLedgersAccount);
+		
+		request.setAttribute("incometotallabel", "TOTAL");
+		request.setAttribute("expensetotallabel", "TOTAL");
+		request.setAttribute("incometotal", totalIncome);
+		request.setAttribute("expensetotal", totalExpense.add(totalHalqaSharePaid));
+		
+		//group 3
+		request.setAttribute("totalpayablehalqaduration", totalPayableHalqaDuration);
+		request.setAttribute("totalhalqasharepaid", totalHalqaSharePaid);
+		request.setAttribute("halqatotalpayable", halqaShareDue.subtract(totalHalqaSharePaid));
+		request.setAttribute("fromdate", DataUtil.emptyString(request.getParameter("fromdate")));
+		request.setAttribute("todate", DataUtil.emptyString(request.getParameter("todate")));
+		
+	
+}
+	return true;
+}
+
+	private BigDecimal getTotalBalanceDebit(Accountdetails accountDetails,List<VoucherEntrytransactions> voucherTransactions) {
+		
+			BigDecimal debitAcc = BigDecimal.ZERO;
+			
+			for (VoucherEntrytransactions voucherTransaction : voucherTransactions) {
+				
+				int vDr = voucherTransaction.getDraccountid();
+				int aId = accountDetails.getAccountdetailsid();
+				if(vDr == aId) {
+					debitAcc = debitAcc.add(voucherTransaction.getDramount());
+				}
+			}
+		return debitAcc;
+	
+	}
+
+
+	private String getLedgerAccountId(String itemAccount) {
+		String result = "";
+	 	
+	 	Properties properties = new Properties();
+	    InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
+		
+	    		try {
+					properties.load(inputStream);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		    
+	    		String ItemLedgerId = properties.getProperty(itemAccount);
+		    
+		    if(ItemLedgerId!=null) {
+		    	result = ItemLedgerId;
+		    }else {
+		    	String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
+		    	result = ItemLedger.toLowerCase();
+		    }
+		    
+		    return result;
+	}
+
+
+	public boolean getIncomeStatementPrint() {
+		
+		String fromDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("fromdate")));
+		String toDate = DataUtil.dateFromatConversionDash(DataUtil.emptyString(request.getParameter("todate")));
+		
+		if(httpSession.getAttribute(BRANCHID)!=null) {
+			
+					int branchId = Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+
+				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
+				accountsDetails = new AccountDAO().getAccountdetailsIncomeExpense(branchId);
+				
+				
+				//Group 1
+				BigDecimal totalIncome = BigDecimal.ZERO;
+				Map<Accountdetails,BigDecimal> incomeLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+				
+				
+				//Group 2
+				BigDecimal totalExpense = BigDecimal.ZERO;
+				Map<Accountdetails,BigDecimal> expenseLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+				
+				for (Accountdetails accountDetails : accountsDetails) {
+					
+					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					
+					if(!voucherTransactions.isEmpty()) {
+					
+						BigDecimal totalAmount = getTotalBalance(accountDetails,voucherTransactions);
+					
+						int groupId = accountDetails.getAccountGroupMaster().getAccountgroupid();
+	
+						switch(groupId){
+						
+						case 4: 
+								totalIncome = totalIncome.add(totalAmount);
+								incomeLedgersAccount.put(accountDetails, totalAmount);
+								break;
+						case 5: 
+								totalExpense = totalExpense.add(totalAmount);
+								expenseLedgersAccount.put(accountDetails, totalAmount);
+								break;
+						default:
+								
+						}
+						
+						}
+					}
+		//group 1
+		request.setAttribute("income", totalIncome);
+		request.setAttribute("incomeledgersaccount", incomeLedgersAccount);
+		
+		//group 2
+		request.setAttribute("expenses", totalExpense);
+		request.setAttribute("expensesledgersaccount", expenseLedgersAccount);
+		
+		request.setAttribute("incometotallabel", "TOTAL");
+		request.setAttribute("expensetotallabel", "TOTAL");
+		request.setAttribute("incometotal", totalIncome);
+		request.setAttribute("expensetotal", totalExpense);
+		
+		request.setAttribute("fromdate", fromDate);
+		request.setAttribute("todate", toDate);
+		
+		
+		BigDecimal profit = totalIncome.subtract(totalExpense);
+		
+		if(profit.compareTo(BigDecimal.ZERO) > 0){
+			request.setAttribute("profitlabel", "Net Profit");
+			request.setAttribute("totalprofit", profit);
+		}else if(profit.compareTo(BigDecimal.ZERO) < 0){
+			request.setAttribute("losslabel", "Net Loss");
+			request.setAttribute("totalloss", profit.negate());
+		}
+		
+		
+	}
+		return true;
+	}
+
 }

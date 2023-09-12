@@ -406,4 +406,20 @@ public class JspController {
 	public String getOtherFeesCollectionDetails() {
 		return "otherfeesCollectionDetails";
 	}
+	
+	@GetMapping("/receiptpayment")
+	public String receiptpayment() {
+		return "receiptsandpayments";
+	}
+	
+	@GetMapping("/rpstatementprint")
+	public String rpstatementprint() {
+		return "rpstatementprint";
+	}
+	
+	@GetMapping("/incomestatementprint")
+	public String incomeStatementPrint() {
+		return "incomestatementprint";
+	}
+	
 }

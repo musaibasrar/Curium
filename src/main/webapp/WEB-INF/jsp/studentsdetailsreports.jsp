@@ -516,10 +516,10 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Students Details Report</a></li>
+					<li><a href="#tabs-1">Donor Details Report</a></li>
 
 				</ul>
-				<div id="tabs-1">
+				<div id="tabs-1" style="display: none;">
 					<table>
 
 						<tr>
@@ -659,15 +659,15 @@ for(Cookie cookie : cookies){
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th class="headerText">Sl.No</th>
-						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Father Name</th>
+						<!-- <th title="click to sort" class="headerText">Father Name</th> -->
 						<th title="click to sort" class="headerText">Contact Number</th>
-						<th title="click to sort" class="headerText">Class &
-							Sec&nbsp;</th>
-							<th title="click to sort" class="headerText">Promoted Year</th>
-							<th title="click to sort" class="headerText">Admission Year</th>
-						<th title="click to sort" class="headerText">Admission Date</th>
+						<!-- <th title="click to sort" class="headerText">Class &
+							Sec&nbsp;</th> -->
+							<th title="click to sort" class="headerText">Address</th>
+							<th title="click to sort" class="headerText">Email</th>
+						<!-- <th title="click to sort" class="headerText">Admission Date</th> -->
 						
 
 
@@ -687,18 +687,14 @@ for(Cookie cookie : cookies){
 								<td class="dataText">${status.index+1}</td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="/jih/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
+										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
-							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>
-							<td class="dataText"><c:out value="${Parents.contactnumber}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.student.classstudying}" /></td>
 									<td class="dataText"><c:out
-									value="${Parents.student.promotedyear}" /></td>
+									value="${Parents.student.remarks}" /></td>
 									<td class="dataText"><c:out
-									value="${Parents.student.yearofadmission}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.admissiondate}" /></td>
+									value="${Parents.student.bloodgroup}" /></td>
 
 
 						</tr>

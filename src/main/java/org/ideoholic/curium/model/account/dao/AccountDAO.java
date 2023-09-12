@@ -598,4 +598,39 @@ public class AccountDAO {
 		return voucherTransactions;
 	}
 
+	public List<Accountdetails> getAccountdetailsIncomeExpenseForRP(List<Integer> accountIncomeIds,List<Integer> accountExpenseIds,int branchId) {
+		
+		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
+		try {
+			transaction = session.beginTransaction();												  	
+			Query query = session.createQuery("from Accountdetails as accdetails where accdetails.accountdetailsid IN (:accountIncomeIds) or accdetails.accountdetailsid IN (:accountExpenseIds) and accdetails.branchid = "+branchId+" order by accountcode ASC");
+			query.setParameterList("accountIncomeIds", accountIncomeIds);
+			query.setParameterList("accountExpenseIds", accountExpenseIds);
+			accountDetails = query.getResultList();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return accountDetails;
+	}
+	
+	public List<Accountdetails> getAccountdetailsMultiple(List<Integer> accountIds,int branchId) {
+		
+		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
+		try {
+			transaction = session.beginTransaction();												  	
+			Query query = session.createQuery("from Accountdetails as accdetails where accdetails.accountdetailsid IN (:accountIds) and accdetails.branchid = "+branchId+" order by accountcode ASC");
+			query.setParameterList("accountIds", accountIds);
+			accountDetails = query.getResultList();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return accountDetails;
+	}
+
 }
