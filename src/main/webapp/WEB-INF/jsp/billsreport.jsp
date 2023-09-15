@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Bills Report</title>
-<link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/meps/css/datePicker/demos.css">
+<link rel="stylesheet" href="/genius/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/genius/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -408,26 +408,26 @@
 }
 
 </style>
-<script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/genius/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/genius/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/meps/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/genius/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/genius/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/genius/js/datePicker/ui/jquery.ui.accordion.js"></script>
 	
 	<!-- Select drop down -->	
-	<!-- <link href="/meps/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-<script src="/meps/js/bootstrap.min.js"></script>
-<!-- <script src="/meps/js/jquery.min.js"></script> -->
+	<!-- <link href="/genius/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<script src="/genius/js/bootstrap.min.js"></script>
+<!-- <script src="/genius/js/jquery.min.js"></script> -->
 
 
-<link href="/meps/css/select2.min.css" rel="stylesheet" />
-<script src="/meps/js/select2.min.js"></script>
+<link href="/genius/css/select2.min.css" rel="stylesheet" />
+<script src="/genius/js/select2.min.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -501,7 +501,7 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/meps/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/genius/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function saveissueentry() {
@@ -900,7 +900,7 @@ for(Cookie cookie : cookies){
 			<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/meps/MessItemsMoveProcess/issueItems?page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/genius/MessItemsMoveProcess/issueItems?page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -913,7 +913,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/meps/MessItemsMoveProcess/issueItems?page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/genius/MessItemsMoveProcess/issueItems?page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -922,7 +922,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/meps/MessItemsMoveProcess/issueItems?page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/genius/MessItemsMoveProcess/issueItems?page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
                     

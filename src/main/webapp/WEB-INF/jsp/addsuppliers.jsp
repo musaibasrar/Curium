@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Suppliers</title>
-<link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/meps/css/datePicker/demos.css">
+<link rel="stylesheet" href="/genius/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/genius/css/datePicker/demos.css">
 
 <style type="text/css">
 
@@ -401,10 +401,10 @@
 
 </style>
 
-<script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
-<script type="text/javascript" src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script type="text/javascript" src="/meps/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/genius/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/genius/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script type="text/javascript" src="/genius/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.datepicker.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -428,7 +428,7 @@
 	});
 </script>
 
-<script type="text/javascript" src="/meps/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/genius/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 
@@ -466,7 +466,7 @@
 	function addSuppliers(){
 		var form1 = document.getElementById("form1");
 		if(form1.checkValidity()) {
-			form1.action = "/meps/MessSuppliersProcess/addSuppliers";
+			form1.action = "/genius/MessSuppliersProcess/addSuppliers";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -475,13 +475,13 @@
 	
 	function updateSuppliers(){
 		var form1 = document.getElementById("form1");
-			form1.action = "/meps/MessSuppliersProcess/updateSuppliers";
+			form1.action = "/genius/MessSuppliersProcess/updateSuppliers";
 			form1.method = "POST";
 			form1.submit();	
 	}
 	
 	function deleteSuppliers(){
-			form1.action = "/meps/MessSuppliersProcess/deleteSuppliers";
+			form1.action = "/genius/MessSuppliersProcess/deleteSuppliers";
 			form1.method = "POST";
 			form1.submit();	
 	}
@@ -560,7 +560,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/genius/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

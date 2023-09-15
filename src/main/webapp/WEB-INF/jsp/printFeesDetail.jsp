@@ -175,18 +175,18 @@
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 50px;">
-				<img src="/meps/images/meps.jpg" width="118" height="80"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-                <label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 20px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 05px;">Contact:&nbsp;${branchcontact} </label>
+				<td><img src="/genius/images/genius.jpg" width="80" height="80"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
+				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
 			</tr>
-</table>
+		</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -374,18 +374,18 @@
 		</div>
 		<br>
 		<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
 			<tr>
-				<td align="left" style="padding-left: 50px;">
-				<img src="/meps/images/meps.jpg" width="118" height="80"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-                <label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 20px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 05px;">Contact:&nbsp;${branchcontact} </label>
+				<td><img src="/genius/images/genius.jpg" width="80" height="80"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
+				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
 			</tr>
-</table>
+		</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>

@@ -17,34 +17,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Please wait...</title> 
 
-        <script type="text/javascript" language="JavaScript" src="/meps/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/meps/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/genius/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/genius/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/genius/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/meps/css/datePicker/demos.css">
-        <script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/genius/css/datePicker/demos.css">
+        <script type="text/javascript" src="/genius/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/meps/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/meps/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/meps/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/meps/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/meps/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/meps/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/meps/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/meps/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/genius/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/genius/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/genius/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/genius/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/genius/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/genius/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/genius/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/genius/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
             <!--
@@ -265,7 +265,7 @@
 
             function updateContact() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/meps/PersonalProcess/updateContactDetails?id=1";
+                form1.action = "/genius/PersonalProcess/updateContactDetails?id=1";
                 form1.submit();
             }
 
@@ -325,7 +325,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/genius/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -393,7 +393,7 @@ for(Cookie cookie : cookies){
 
     <body class="bodymargin">
        
-        <form action="/meps/" method="post" id="form1" class="bodymargin">
+        <form action="/genius/" method="post" id="form1" class="bodymargin">
 
            
             <div>

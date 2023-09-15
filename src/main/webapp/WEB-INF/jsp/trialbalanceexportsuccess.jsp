@@ -13,18 +13,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Trial balance export success</title>
         <style type="text/css" title="currentStyle">
-            @import "/meps/css/dataTable/css/demo_page.css";
-            @import "/meps/css/dataTable/css/jquery.dataTables.css";
+            @import "/genius/css/dataTable/css/demo_page.css";
+            @import "/genius/css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/meps/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/meps/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/meps/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/genius/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/genius/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/genius/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/genius/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/genius/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.button.js"></script>
         
         
         
@@ -66,7 +66,7 @@
 
             function downloadFile(){
                 var form1=document.getElementById("form1");
-                form1.action="/meps/AccountProcess/downloadTrialBalance";
+                form1.action="/genius/AccountProcess/downloadTrialBalance";
                 form1.submit();
             }
         </script>
@@ -75,7 +75,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/genius/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -87,7 +87,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="/meps/images/bg.jpg" >
+    <body background="/genius/images/bg.jpg" >
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>

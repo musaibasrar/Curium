@@ -15,12 +15,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Voucher</title>
 
-        <link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/genius/css/datePicker/jquery-ui-1.8.18.custom.css">
 
-        <link rel="stylesheet" href="/meps/css/datePicker/demos.css">
-        <script type="text/javascript" src="/meps/js/jquery-1.7.1.min.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <link rel="stylesheet" href="/genius/css/datePicker/demos.css">
+        <script type="text/javascript" src="/genius/js/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.datepicker.js"></script>
   
         <style type="text/css">
             <!--
@@ -217,8 +217,8 @@
                 height: auto;
                 display: inline;
             }
-            .style1 { <link rel="stylesheet" href="/meps/https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-		<script src="/meps/https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+            .style1 { <link rel="stylesheet" href="/genius/https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+		<script src="/genius/https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
                 font-family: Tahoma;
                 font-size: 14px;
             }
@@ -280,7 +280,7 @@
         	if(confirm('Are you sure,you want to save the receipt voucher?')){
         		
         		var form1 = document.getElementById("form1");
-                form1.action = "/meps/AccountProcess/saveReceipt";
+                form1.action = "/genius/AccountProcess/saveReceipt";
                 form1.submit();	
         	}
         	
@@ -299,7 +299,7 @@
         	  if(confirm('Are you sure,you want to save the payment voucher?')){
         	  
         		  var form1 = document.getElementById("form1");
-              	  form1.action = "/meps/AccountProcess/savePayment";
+              	  form1.action = "/genius/AccountProcess/savePayment";
               	  form1.submit();
         	  
         	  }
@@ -318,7 +318,7 @@
       }else{
     	  if(confirm('Are you sure,you want to save the contra voucher?')){
     	  var form1 = document.getElementById("form1");
-          form1.action = "/meps/AccountProcess/saveContra";
+          form1.action = "/genius/AccountProcess/saveContra";
           form1.submit();
     	  }
       }
@@ -335,7 +335,7 @@
         }else{
         	if(confirm('Are you sure,you want to save the journal voucher?')){
         	 var form1 = document.getElementById("form1");
-             form1.action = "/meps/AccountProcess/saveJournal";
+             form1.action = "/genius/AccountProcess/saveJournal";
              form1.submit();
         	}
         }
@@ -540,7 +540,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/genius/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

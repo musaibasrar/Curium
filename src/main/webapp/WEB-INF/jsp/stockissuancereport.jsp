@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Stock Issuance Report</title>
-<link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/meps/css/datePicker/demos.css">
+<link rel="stylesheet" href="/genius/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/genius/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -367,17 +367,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/genius/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/genius/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/meps/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/genius/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/genius/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/genius/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -431,17 +431,17 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/meps/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/genius/js/datetimepicker_css.js"></script>
 
-<script src="/meps/js/bootstrap.min.js"></script>
-<link href="/meps/css/select2.min.css" rel="stylesheet" />
-<script src="/meps/js/select2.min.js"></script>
+<script src="/genius/js/bootstrap.min.js"></script>
+<link href="/genius/css/select2.min.css" rel="stylesheet" />
+<script src="/genius/js/select2.min.js"></script>
 
 <script type="text/javascript">
 
 	function generateStockIssuanceReport() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/meps/MessItemsProcess/generateStockIssuanceReport";
+			form1.action = "/genius/MessItemsProcess/generateStockIssuanceReport";
 			form1.method = "POST";
 			form1.submit();
 	}
@@ -474,7 +474,7 @@
      
 	 function printRecords() {
 			var form1 = document.getElementById("form1");
-			form1.action = "/meps/MessItemsProcess/printStockIssuanceReport";
+			form1.action = "/genius/MessItemsProcess/printStockIssuanceReport";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -486,7 +486,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/genius/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

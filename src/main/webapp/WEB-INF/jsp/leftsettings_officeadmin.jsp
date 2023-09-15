@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/meps/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/meps/css/datePicker/demos.css">
+        <script language="JavaScript" src="/genius/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/genius/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/genius/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/meps/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/meps/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/meps/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/meps/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/meps/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/meps/css/font-awesome.css">
+        <script type="text/javascript" src="/genius/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/genius/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/genius/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/genius/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/genius/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/genius/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/genius/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/genius/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/genius/css/font-awesome.css">
       
         <script type="text/javascript">
             var req;
@@ -317,7 +317,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/genius/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -340,68 +340,68 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 95%" >
             <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
-                <!-- <a target="mainFrame" href="/meps/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/> -->
-                <a target="mainFrame" href="/meps/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
+                <!-- <a target="mainFrame" href="/genius/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/> -->
+                <a target="mainFrame" href="/genius/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Class</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
+                <a target="mainFrame" href="/genius/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
-                <a target="mainFrame" href="/meps/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+                <a target="mainFrame" href="/genius/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
+                <a target="mainFrame" href="/genius/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
-                <a target="mainFrame" href="/meps/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
-                <a target="mainFrame" href="/meps/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
-                <a target="mainFrame" href="/meps/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
+                <a target="mainFrame" href="/genius/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
+                <a target="mainFrame" href="/genius/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
+                <a target="mainFrame" href="/genius/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
+                <a target="mainFrame" href="/genius/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
             </div>
             
           <!--   <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/meps/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
+                <a target="mainFrame" href="/genius/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
+                <a target="mainFrame" href="/genius/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div>
             
               <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-				<a target="mainFrame" href="/meps/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
+				<a target="mainFrame" href="/genius/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
             </div> -->
             
             <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
                 
-                <a target="mainFrame" href="/meps/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
-                <a target="mainFrame" href="/meps/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
+                <a target="mainFrame" href="/genius/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
+                <a target="mainFrame" href="/genius/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
             </div>
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
-                <a target="mainFrame" href="/meps/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
+                <a target="mainFrame" href="/genius/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
             
              <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/meps/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
-                <a target="mainFrame" href="/meps/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
-                <a target="mainFrame" href="/meps/HrProcess/payHead" style="font-size: 12px;">Pay Head</a><br/>
-                <a target="mainFrame" href="/meps/HrProcess/addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
-                <a target="mainFrame" href="/meps/HrProcess/deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
-                <a target="mainFrame" href="/meps/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
-                <a target="mainFrame" href="/meps/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
-                <a target="mainFrame" href="/meps/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
+                <a target="mainFrame" href="/genius/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
+                <a target="mainFrame" href="/genius/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
+                <a target="mainFrame" href="/genius/HrProcess/payHead" style="font-size: 12px;">Pay Head</a><br/>
+                <a target="mainFrame" href="/genius/HrProcess/addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
+                <a target="mainFrame" href="/genius/HrProcess/deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
+                <a target="mainFrame" href="/genius/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
+                <a target="mainFrame" href="/genius/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
+                <a target="mainFrame" href="/genius/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
             </div> -->
             
               <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/meps/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
+                <a target="mainFrame" href="/genius/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
+                <a target="mainFrame" href="/genius/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div> -->
             
             </div>

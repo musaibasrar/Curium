@@ -13,19 +13,19 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/meps/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/meps/css/datePicker/demos.css">
+        <script language="JavaScript" src="/genius/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/genius/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/genius/css/datePicker/demos.css">
 
-        <script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/meps/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/meps/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/meps/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/meps/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/meps/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/genius/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/genius/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/genius/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/genius/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/genius/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/genius/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/genius/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/genius/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             var get;
@@ -431,7 +431,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/genius/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,61 +454,61 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/StudentProcess/viewAll" >View All</a><br/>
-                <a target="mainFrame" href="/meps/feesstructure" >Fees Structure</a><br/>
+                <a target="mainFrame" href="/genius/StudentProcess/viewAll" >View All</a><br/>
+                <a target="mainFrame" href="/genius/feesstructure" >Fees Structure</a><br/>
                 
 
             </div>
             <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/meps/EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/meps/DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/meps/PositionProcess/positionView" >Add Position</a>
+                <a target="mainFrame" href="/genius/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="/genius/EmployeeProcess/addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="/genius/DepartmentProcess/departmentView" >Add Department</a>
+                <a target="mainFrame" href="/genius/PositionProcess/positionView" >Add Position</a>
 
             </div> -->
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="/meps/FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/meps/FeesProcess/feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="/genius/FeesProcess/feesView" >Fees Category</a>
+                <a target="mainFrame" href="/genius/FeesProcess/feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
             <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/AdminProcess/viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="/genius/AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/AdvanceSearch" >Search</a><br/>
+                <a target="mainFrame" href="/genius/AdvanceSearch" >Search</a><br/>
 
 
             </div>
 			<!--
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/Promotion" >Promotions</a><br/>
+                <a target="mainFrame" href="/genius/Promotion" >Promotions</a><br/>
 
 
             </div> -->
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/genius/StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
             <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="/meps/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/meps/YearProcess/updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="/genius/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="/genius/YearProcess/updateYear" >Academic year</a><br/>
                 
 
             </div> -->
@@ -516,15 +516,15 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-               <!--  <a target="mainFrame" href="/meps/Backup&Restore" >Backup</a><br/>
-                <a target="mainFrame" href="/meps/currentIssue" >Current Issue</a><br/>
-                <a target="mainFrame" href="/meps/changePassword" >Change Password</a><br/> -->
-                <a target="mainFrame" href="/meps/feesCollectionDetails" >Fees Collection Details</a><br/>
+               <!--  <a target="mainFrame" href="/genius/Backup&Restore" >Backup</a><br/>
+                <a target="mainFrame" href="/genius/currentIssue" >Current Issue</a><br/>
+                <a target="mainFrame" href="/genius/changePassword" >Change Password</a><br/> -->
+                <a target="mainFrame" href="/genius/feesCollectionDetails" >Fees Collection Details</a><br/>
             </div>
             
            <!--  <h5 style="font-size: 12px"><a href="#" >Reports</a></h5>
             <div >
-                <a target="mainFrame" href="/meps/studentsdetailsreports" >Student Details</a><br/>
+                <a target="mainFrame" href="/genius/studentsdetailsreports" >Student Details</a><br/>
                 
             </div>  -->
             
