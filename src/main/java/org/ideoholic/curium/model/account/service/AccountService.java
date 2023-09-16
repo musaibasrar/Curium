@@ -1563,7 +1563,11 @@ public boolean getRPStatement() {
 		String todaysDate = df.format(newdate);
 		
 		List<Accountdetails> accountsDetailsOB = new ArrayList<Accountdetails>();
-		accountsDetailsOB = new AccountDAO().getAccountdetailsIncomeExpense(branchId);
+		accountsDetailsOB = new AccountDAO().getAccountdetailsForOB(branchId);
+		
+		//Liability
+		BigDecimal totalLiabililtyOB = BigDecimal.ZERO;
+		Map<Accountdetails,BigDecimal> liabililtyLedgersAccountOB = new HashMap<Accountdetails, BigDecimal>();
 		
 		//Group 1
 		BigDecimal totalIncomeOB = BigDecimal.ZERO;
@@ -1586,6 +1590,10 @@ public boolean getRPStatement() {
 
 				switch(groupId){
 				
+				case 2:
+						totalLiabililtyOB = totalLiabililtyOB.add(totalAmount);
+						liabililtyLedgersAccountOB.put(accountDetails, totalAmount);
+						break;				
 				case 4: 
 						totalIncomeOB = totalIncomeOB.add(totalAmount);
 						incomeLedgersAccountOB.put(accountDetails, totalAmount);
@@ -1619,7 +1627,7 @@ public boolean getRPStatement() {
 			}
 			
 		}
-		BigDecimal openingDrCr = totalIncomeOB.add(totalExpenseOB);
+		BigDecimal openingDrCr = totalIncomeOB.add(totalExpenseOB).add(totalLiabililtyOB);
 		openingBalance = cashBalance.subtract(openingDrCr);
 		
 		BigDecimal closingDrCr = totalIncome.subtract(totalExpense.add(totalHalqaSharePaid));

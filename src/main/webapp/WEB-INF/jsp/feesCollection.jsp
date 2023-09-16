@@ -679,8 +679,10 @@
                 
                 
                 $("#submitbtn").button().click(function(){
+                	if(form1.checkValidity()) {
                   	 $( "#dialogpaymentmethod" ).dialog( "open" );
                        return false;
+                	}
 
                    });
                    
@@ -1008,10 +1010,10 @@ for(Cookie cookie : cookies){
                         
                         <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         		<input type="text"  name="dateoffeesDetails"
-									class="myclass" style="font-size: 14px;"
-									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
-									id="dateoffeesDetails" autocomplete="false" required
-									data-validate="validate(required)">
+									class="myclass" style="font-size: 14px;" required
+									value="<fmt:formatDate type="date" value="" pattern="dd/MM/yyyy"/>" 
+									id="dateoffeesDetails" autocomplete="false" 
+									>
                         </td>
                         
                     </tr>

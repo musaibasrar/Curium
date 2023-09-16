@@ -581,6 +581,21 @@ public class AccountDAO {
 		return accountDetails;
 	}
 	
+	public List<Accountdetails> getAccountdetailsForOB(int branchId) {
+		
+		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
+		try {
+			transaction = session.beginTransaction();												  	
+			accountDetails =  session.createQuery("from Accountdetails as accdetails where (accdetails.accountGroupMaster.accountgroupid = 2 or accdetails.accountGroupMaster.accountgroupid = 4 or accdetails.accountGroupMaster.accountgroupid = 5) and accdetails.branchid = "+branchId+" order by accountcode ASC").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return accountDetails;
+	}
+	
 	public List<VoucherEntrytransactions> getVoucherDetailsByNarration(String supplierreferenceno) {
 		
 		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();

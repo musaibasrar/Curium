@@ -338,9 +338,11 @@
         	alert('Credits must be equal to Debits.'); 	
         }else{
         	if(confirm('Are you sure,you want to save the journal voucher?')){
+        		if(form1.checkValidity()) {
         	 var form1 = document.getElementById("form1");
              form1.action = "/jih/AccountProcess/saveJournal";
              form1.submit();
+        		}
         	}
         }
     }

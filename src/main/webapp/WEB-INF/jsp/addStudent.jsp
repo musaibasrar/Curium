@@ -750,10 +750,10 @@ $(document).ready(function() {
 									>
 							</label></td>
 							
-							<td class="alignLeft" style="padding-left: 20px;">Contact Number*&nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Contact Number&nbsp;</td>
 
 									<td><label> <input
-											name="addclass" type="text" class="myclass" required
+											name="addclass" type="text" class="myclass" 
 											style="text-transform:capitalize;"
 											id="addclass" size="36" maxlength="10" minlength="10">
 
