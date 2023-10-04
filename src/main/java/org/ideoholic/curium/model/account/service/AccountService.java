@@ -1676,7 +1676,36 @@ public boolean getRPStatement() {
 		
 		
 		//Club Expenses
+		
 		String[] expClub = getLedgerAccountId("clubexpenses"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(":");
+		String[] expClubLedger = getLedgerAccountId("clubexpenseledger"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(":");
+		Map<Accountdetails,BigDecimal> expenseLedgers = new HashMap<Accountdetails, BigDecimal>();
+		List<Integer> expClubLedgerList = new ArrayList<Integer>();
+		
+		for (String exCl : expClubLedger) {
+			expClubLedgerList.add(Integer.parseInt(exCl));
+		}
+		
+		List<Accountdetails> expLedgerClub = new ArrayList<Accountdetails>();
+		expLedgerClub = new AccountDAO().getAccountdetailsMultiple(expClubLedgerList,branchId);
+		
+		for (Accountdetails accountDetails : expLedgerClub) {
+			
+			List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			
+			if(!voucherTransactions.isEmpty()) {
+			
+						BigDecimal totalAmountEx = getTotalBalanceDebit(accountDetails,voucherTransactions);
+						totalAmountEx = totalAmountEx.abs();
+						totalExpense = totalExpense.add(totalAmountEx);
+						expenseLedgers.put(accountDetails, totalAmountEx);
+				}else {
+					
+					    expenseLedgers.put(accountDetails, BigDecimal.ZERO);
+							
+				}
+			}
+		
 		Map<Accountdetails,BigDecimal> expenseLedgersAccountClub = new HashMap<Accountdetails, BigDecimal>();
 		Map<Accountdetails,BigDecimal> expenseLedgersAllAccountClub = new HashMap<Accountdetails, BigDecimal>();
 		List<Integer> expClubList = new ArrayList<Integer>();
@@ -1738,7 +1767,8 @@ public boolean getRPStatement() {
 		
 		//group 2
 		request.setAttribute("expenses", totalExpense);
-		request.setAttribute("expensesledgersaccount", expenseLedgersAccount);
+		request.setAttribute("expensesledgersaccount", expenseLedgers);
+		//request.setAttribute("expensesledgersaccount", expenseLedgersAccount);
 		
 		request.setAttribute("incometotallabel", "TOTAL");
 		request.setAttribute("expensetotallabel", "TOTAL");
