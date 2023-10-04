@@ -1755,37 +1755,26 @@ public class StudentService {
 	public boolean approveRecords() {
 		
 		String[] studentIds = request.getParameterValues("studentIDs");
-		Map<String,String> idAdmissionNo = new HashMap<String, String>();
 		
 		if (studentIds != null) {
 			
-			//Start update correct admission number
-			
-			String admissionNo = request.getParameter("admissionno_"+studentIds[0]);
-			String admNo = admissionNo.substring(0, admissionNo.length() - 3);
-			String admissionNumber = null;
-			
-			List<Student> lastSid = new studentDetailsDAO().getListStudents("From Student where admissionnumber like '"+admNo+"%'AND (remarks = 'approved' OR remarks = 'admin') order by sid DESC");
-			
-			int admission = 1;
-	        if(lastSid.size() > 0) {
-	            //admission = lastSid.get(0).getSid();
-	            admission = Integer.parseInt(lastSid.get(0).getAdmissionnumber().substring(lastSid.get(0).getAdmissionnumber().length()-3));
-	            admission++;
-	        }
-		
-		//End update correct admission number
-			
-			
 			for (String id : studentIds) {
+				
+				String admissionNo = request.getParameter("admissionno_"+id);
+				String admNo = admissionNo.substring(0, admissionNo.length() - 3);
+				String admissionNumber = null;
+				
+				List<Student> lastSid = new studentDetailsDAO().getListStudents("From Student where admissionnumber like '"+admNo+"%' AND (remarks = 'approved' OR remarks = 'admin') order by sid DESC");
+				
+				int admission = 1;
+		        if(lastSid.size() > 0) {
+		            //admission = lastSid.get(0).getSid();
+		            admission = Integer.parseInt(lastSid.get(0).getAdmissionnumber().substring(lastSid.get(0).getAdmissionnumber().length()-3));
+		            admission++;
+		        }
 				 admissionNumber = admNo+String.format("%03d", admission);
 				 System.out.println("AdmissionNumber "+admissionNumber);
-				idAdmissionNo.put(id, admissionNumber);
-				admission++;
-			}
-			
-			if(new studentDetailsDAO().approveRecords(idAdmissionNo)) {
-			    return true;
+				 new studentDetailsDAO().approveRecords(id,admissionNumber);
 			}
 		}
 		

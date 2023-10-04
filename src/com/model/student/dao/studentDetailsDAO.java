@@ -816,16 +816,13 @@ public class studentDetailsDAO {
 
   }
 
-		public boolean approveRecords(Map<String, String> idAdmissionNo) {
+		public boolean approveRecords(String id, String admissionNo) {
 			try {
 				transaction = session.beginTransaction();
 				
 				
-				for (Map.Entry<String,String> admnoid : idAdmissionNo.entrySet()) {
-					Query query = session.createQuery("update Student set admissionnumber = '"+admnoid.getValue()+"' , remarks='approved',approvedon=current_date() where sid = "+admnoid.getKey()+"");
+					Query query = session.createQuery("update Student set admissionnumber = '"+admissionNo+"' , remarks='approved',approvedon=current_date() where sid = "+id+"");
 					query.executeUpdate();
-				}
-				
 				/*
 				 * Query query = session
 				 * .createQuery("update Student set remarks='approved',approvedon=current_date() where sid IN (:ids)"
