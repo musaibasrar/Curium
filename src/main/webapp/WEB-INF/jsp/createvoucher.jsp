@@ -282,10 +282,11 @@
         }else{
         	
         	if(confirm('Are you sure,you want to save the receipt voucher?')){
+        	var form1 = document.getElementById("form1");
         		if(form1.checkValidity()) {
-        		var form1 = document.getElementById("form1");
-                form1.action = "/jih/AccountProcess/saveReceipt";
-                form1.submit();	
+                		form1.action = "/jih/AccountProcess/saveReceipt";
+                		form1.method = "POST";
+                		form1.submit();	
         		}
         	}
         	
@@ -302,10 +303,11 @@
           	alert('Credits must be equal to Debits.'); 	
           }else{
         	  if(confirm('Are you sure,you want to save the payment voucher?')){
+        	  var form1 = document.getElementById("form1");
         		  if(form1.checkValidity()) {
-        		  var form1 = document.getElementById("form1");
-              	  form1.action = "/jih/AccountProcess/savePayment";
-              	  form1.submit();
+              	 		form1.action = "/jih/AccountProcess/savePayment";
+              	  		form1.method = "POST";
+              	 		form1.submit();
         		  }
         	  
         	  }
@@ -323,10 +325,11 @@
         	alert('Credits must be equal to Debits.'); 	
       }else{
     	  if(confirm('Are you sure,you want to save the contra voucher?')){
-    		  if(form1.checkValidity()) {
     	  var form1 = document.getElementById("form1");
-          form1.action = "/jih/AccountProcess/saveContra";
-          form1.submit();
+    		  if(form1.checkValidity()) {
+        		 form1.action = "/jih/AccountProcess/saveContra";
+         		 form1.method = "POST";
+        		 form1.submit();
     		  }
     	  }
       }
@@ -342,10 +345,11 @@
         	alert('Credits must be equal to Debits.'); 	
         }else{
         	if(confirm('Are you sure,you want to save the journal voucher?')){
+        	var form1 = document.getElementById("form1");
         		if(form1.checkValidity()) {
-        		var form1 = document.getElementById("form1");
-             form1.action = "/jih/AccountProcess/saveJournal";
-             form1.submit();
+        		    form1.action = "/jih/AccountProcess/saveJournal";
+         		    form1.method = "POST";
+         		    form1.submit();
         		}
         	}
         }
@@ -589,7 +593,7 @@ for(Cookie cookie : cookies){
                         <input
 									name="dateofreceipt" type="text" class="textField"
 									id="dateofreceipt" size="25" 
-									value="<fmt:formatDate type="date" value="" pattern="dd/mm/yy"/>" 
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									required/> </td>
                         
                     </tr>
@@ -774,7 +778,7 @@ for(Cookie cookie : cookies){
                         <input
 									name="dateofpayment" type="text" class="textField"
 									id="dateofpayment" size="25" 
-									value="<fmt:formatDate type="date" value="" pattern="dd/mm/yy"/>" 
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									required/> </td>
                         
                     </tr>
@@ -973,7 +977,7 @@ for(Cookie cookie : cookies){
                         <input
 									name="dateofcontra" type="text" class="textField"
 									id="dateofcontra" size="25" 
-									value="<fmt:formatDate type="date" value="" pattern="dd/mm/yy"/>" 
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									required/> </td>
                         
                     </tr>
@@ -1158,7 +1162,7 @@ for(Cookie cookie : cookies){
                         <input
 									name="dateofjournal" type="text" class="textField"
 									id="dateofjournal" size="25" 
-									value="<fmt:formatDate type="date" value="" pattern="dd/mm/yy"/>" 
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									required/> </td>
                         
                     </tr>
