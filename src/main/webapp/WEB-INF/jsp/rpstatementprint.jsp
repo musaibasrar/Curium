@@ -287,47 +287,47 @@
 					</tr>
 				</thead>
 				<tbody>
-								<c:set var="startindex" value="1" />		
-					<c:forEach items="${expensesledgersaccount}" var="expensesledgersaccount" varStatus="status">
+						<c:set var="sequenceCounter" value="1" scope="page"/>
+						<c:forEach items="${expenseledgersaccountclub}" var="expenseledgersaccountclub" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1" >
-							<td class="dataText" style="text-align: center" width="20%"><c:out value="${status.index+1}" /></td>
-							<td class="dataText" style="text-align: left" width="50%"><c:out value="${expensesledgersaccount.key.accountname}" /></td>
-							<td class="dataText" style="text-align: right" width="30%">
-							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${expensesledgersaccount.value}" />
-							</td>
-
-						</tr>
-						<c:set var="startindex" value="${status.index+1}" />
-					</c:forEach>
-					<c:set var="startindex2" value="${startindex}" />
-					<c:forEach items="${maphalqasharepaidaccount}" var="maphalqasharepaidaccount" varStatus="status">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1" >
-							<td class="dataText" style="text-align: center" width="20%"><c:out value="${startindex2+status.index+1}" /></td>
-							<td class="dataText" style="text-align: left" width="50%"><c:out value="${maphalqasharepaidaccount.key.accountname}" /></td>
-							<td class="dataText" style="text-align: right" width="30%">
-							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${maphalqasharepaidaccount.value}" />
-							</td>
-
-						</tr>
-						<c:set var="startindex2" value="${startindex2+status.index+1}" />
-					</c:forEach>
-					<c:set var="startindex3" value="${startindex2}" />
-					<c:forEach items="${expenseledgersaccountclub}" var="expenseledgersaccountclub" varStatus="status">
-
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1" >
-							<td class="dataText" style="text-align: center" width="20%"><c:out value="${startindex3+status.index+1}" /></td>
+							<td class="dataText" style="text-align: center" width="20%"><c:out value="${sequenceCounter}" /></td>
 							<td class="dataText" style="text-align: left" width="50%"><c:out value="${expenseledgersaccountclub.key.accountname}" /></td>
 							<td class="dataText" style="text-align: right" width="30%">
 							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${expenseledgersaccountclub.value}" />
 							</td>
 
 						</tr>
-						<c:set var="startindex3" value="${startindex3+status.index+1}" />
+						<c:set var="sequenceCounter" value="${sequenceCounter + 1}" scope="page"/>
+					</c:forEach>
+							
+					<c:forEach items="${maphalqasharepaidaccount}" var="maphalqasharepaidaccount" varStatus="status">
+
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataText" style="text-align: center" width="20%"><c:out value="${sequenceCounter}" /></td>
+							<td class="dataText" style="text-align: left" width="50%"><c:out value="${maphalqasharepaidaccount.key.accountname}" /></td>
+							<td class="dataText" style="text-align: right" width="30%">
+							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${maphalqasharepaidaccount.value}" />
+							</td>
+
+						</tr>
+						<c:set var="sequenceCounter" value="${sequenceCounter + 1}" scope="page"/>
+					</c:forEach>
+					
+					<c:forEach items="${expensesledgersaccount}" var="expensesledgersaccount" varStatus="status">
+
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataText" style="text-align: center" width="20%"><c:out value="${sequenceCounter}" /></td>
+							<td class="dataText" style="text-align: left" width="50%"><c:out value="${expensesledgersaccount.key.accountname}" /></td>
+							<td class="dataText" style="text-align: right" width="30%">
+							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${expensesledgersaccount.value}" />
+							</td>
+
+						</tr>
+						<c:set var="sequenceCounter" value="${sequenceCounter + 1}" scope="page"/>
 					</c:forEach>
 				</tbody>
 			</table>
