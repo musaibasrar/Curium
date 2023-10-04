@@ -752,7 +752,8 @@ for(Cookie cookie : cookies){
 											<option value="2020/21" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2020/21</option>
 											<option value="2021/22" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2021/22</option>
 											<option value="2022/23" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2022/23</option>
-											
+											<option value="2023/24" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2023/24</option>
+											<option value="2024/25" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2024/25</option>
 								</select>	
 								</label></td>
 						</tr>
