@@ -627,9 +627,19 @@ for(Cookie cookie : cookies){
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1" >
 							<td class="dataText" style="text-align: right" width="20%"></td>
-							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="Opening Balance" /></td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="Opening Balance Cash" /></td>
 							<td class="dataTextInActive" style="text-align: right" width="30%">
 								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${openingbalance}" />
+							</td>
+
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataText" style="text-align: right" width="20%"></td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="Opening Balance Bank" /></td>
+							<td class="dataTextInActive" style="text-align: right" width="30%">
+								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${openingbalancebank}" />
 							</td>
 
 						</tr>
@@ -666,11 +676,19 @@ for(Cookie cookie : cookies){
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1" >
 							<td class="dataText" style="text-align: right" width="20%"></td>
-							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="Closing Balance" /></td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="Closing Balance Cash" /></td>
 							<td class="dataTextInActive" style="text-align: right" width="30%">
 								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${closingbalance}" />
 							</td>
-
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataText" style="text-align: right" width="20%"></td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="Closing Balance Bank" /></td>
+							<td class="dataTextInActive" style="text-align: right" width="30%">
+								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${closingbalancebank}" />
+							</td>
 						</tr>
 						
 						<tr class="trClass" style="border-color: #000000" border="1"
