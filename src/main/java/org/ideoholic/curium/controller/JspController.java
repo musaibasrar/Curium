@@ -336,6 +336,10 @@ public class JspController {
 	public String getReportsOfficeAdmin() {
 		return "reports_officeadmin";
 	}
+	@GetMapping("/reports_parents")
+	public String getReportsParents() {
+		return "reports_parents";
+	}
 	
 	@GetMapping("/header_marksentry")
 	public String getHeaderMarksEntry() {
@@ -346,6 +350,7 @@ public class JspController {
 	public String getIndexMarksEntry() {
 		return "index_marksentry";
 	}
+	
 	
 	@GetMapping("/left_marksentry")
 	public String getLeftMarksEntry() {
@@ -381,4 +386,32 @@ public class JspController {
 		return "otherfeesreport";
 	}
 	
+	@GetMapping("/index_parents")
+	public String getIndexParents() {
+		return "index_parents";
+	}
+	@GetMapping("/header_parent")
+	public String getHeaderParents() {
+		return "header_parent";
+	}
+	@GetMapping("/left_parent")
+	public String getLeftParents() {
+		return "left_parent";
+	}
+	@GetMapping("/Views_student_detail")
+	public String getViewsstudentdetail() {
+		return "Views_student_detail";
+	}
+	@GetMapping("/diary")
+	public String getDiary() {
+		return "diary";
+	}
+	@GetMapping("/viewDiary")
+	public String getViewDiary() {
+		return "viewDiary";
+	}
+	@GetMapping("/welcomeparent")
+	public String getWelcomeparent() {
+		return "welcomeparent";
+	}
 }

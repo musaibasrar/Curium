@@ -112,5 +112,6 @@
 		<mapping resource="mappings/Studentotherfeesstructure.hbm.xml"></mapping>
 		<mapping resource="mappings/Otherfeescollection.hbm.xml"></mapping>
 		<mapping resource="mappings/Otherreceiptinfo.hbm.xml"></mapping>
+		<mapping resource="mappings/Diary.hbm.xml"></mapping>
 	</session-factory>
 </hibernate-configuration>

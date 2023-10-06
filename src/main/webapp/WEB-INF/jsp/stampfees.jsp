@@ -543,7 +543,7 @@
         function calculate(value2) {
 
         	var feesCount=document.getElementById("feesCount_"+value2).value;
-        	
+        	//alert('hiiii'+value2);
         	        	
             var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
             var feesCount=document.getElementById("feesCount_"+value2).value;

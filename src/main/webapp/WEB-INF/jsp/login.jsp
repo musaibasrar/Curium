@@ -133,6 +133,9 @@ form{
                 	window.open('/roshan/index_officeadmin','_self');
                 }else if(type=='marksentry'){
                 	window.open('/roshan/index_marksentry','_self');
+                }else if(type=='parents'){
+                	window.open('/roshan/index_parents','_self');
+                	//window.open('/roshan/index_Parentbootstrap','_self');
                 }
             }
             else if(!flag1){

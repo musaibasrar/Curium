@@ -140,6 +140,13 @@ public class StudentAction {
 		new StudentService(request, response).viewAllStudentsParents();
 		return "viewAllWithParents";
 	}
+	//student detail
+	@GetMapping("/studentdetail")
+	public String studentdetail() {
+		//new StudentService(request, response).viewAllStudentsParents();
+		return "Views_student_detail";
+	}
+	//end
 
 	@PostMapping("/promoteClass")
 	public String promoteClass() {
@@ -222,7 +229,56 @@ public class StudentAction {
 			return "error";
 		}
 	}
-
+//view detail with external id ViewDetailsbyexternalid
+	@RequestMapping(value = "/ViewDetailsbyexternalid", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ViewDetailsbyexternalid() {
+		String branchId;
+		if (new StudentService(request, response).viewDetailsbySidOfStudent()) {
+			Object obj = request.getAttribute("urlbranchid");
+			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
+			if (branchId.equalsIgnoreCase("1")) {
+				return "student_detailparent";
+			} else if (branchId.equalsIgnoreCase("2")) {
+				return "student_detailparent";
+			} else if (branchId.equalsIgnoreCase("3")) {
+				return "student_detailparent";
+			} else if (branchId.equalsIgnoreCase("4")) {
+				return "student_detailparent";
+			} else if (branchId.equalsIgnoreCase("5")) {
+				return "student_detailparent";
+			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
+				return "student_details_withoutmodify";
+			}
+			return "student_detailparent";
+		} else {
+			return "error";
+		}
+	}
+	//end view detail
+	@RequestMapping(value = "/ViewFeesDetailsbyexternalid", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ViewFeesDetailsbyexternalid() {
+		String branchId;
+		if (new StudentService(request, response).viewDetailsbySidOfStudent()) {
+			Object obj = request.getAttribute("urlbranchid");
+			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
+			if (branchId.equalsIgnoreCase("1")) {
+				return "studentfee_detail";
+			} else if (branchId.equalsIgnoreCase("2")) {
+				return "studentfee_detail";
+			} else if (branchId.equalsIgnoreCase("3")) {
+				return "studentfee_detail";
+			} else if (branchId.equalsIgnoreCase("4")) {
+				return "studentfee_detail";
+			} else if (branchId.equalsIgnoreCase("5")) {
+				return "studentfee_detail";
+			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
+				return "student_details_withoutmodify";
+			}
+			return "studentfee_detail";
+		} else {
+			return "error";
+		}
+	}
 	@RequestMapping(value = "/AddStudent", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public String addStudent(MultipartHttpServletRequest request,
 			@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {

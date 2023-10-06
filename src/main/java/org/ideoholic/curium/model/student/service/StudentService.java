@@ -33,6 +33,7 @@ import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
@@ -49,6 +50,8 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
+import org.ideoholic.curium.model.user.dao.UserDAO;
+import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.web.multipart.MultipartFile;
@@ -569,12 +572,27 @@ public class StudentService {
 			result=true;
 			
 			stampFees(parents.getStudent().getSid());
+			createParentLogin(parents.getStudent().getStudentexternalid(),parents.getContactnumber(),parents.getBranchid());
 		}
 
 		return result;
 
 	}
 	
+	
+	
+	private void createParentLogin(String studentexternalid, String contactnumber, int branchid) {
+		// TODO Auto-generated method stub
+	    Login login= new Login();
+	    Branch branch = new Branch();
+	    login.setUsername(studentexternalid);
+	    login.setPassword(contactnumber);
+	    branch.setIdbranch(branchid);
+	    login.setBranch(branch);
+	    login.setUsertype("parents");
+	    new UserDAO().addUser(login);
+	}
+
 private void stampFees(Integer stdIds) {
 	
 	if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
@@ -812,6 +830,101 @@ private int getLedgerAccountId(String itemAccount) {
 		}
 		return result;
 	}
+	//code for viewDetailsbySidOfStudent
+	public boolean viewDetailsbySidOfStudent() {
+		return viewDetailsbySidOfStudent(request.getParameter("id"));
+	}
+
+	public boolean viewDetailsbySidOfStudent(String studentId) {
+		boolean result = false;
+		try {
+			long id = Long.parseLong(studentId);
+			Student student = new studentDetailsDAO().readploginUniqueObject(id);
+			Parents parents = new parentsDetailsDAO().readploginUniqueObject(id);
+
+			/*httpSession.setAttribute("studentfromservice",student);
+			httpSession.setAttribute("parentsfromservice",parents);
+			httpSession.setAttribute("idofstudentfromservice",id);*/
+			
+			Currentacademicyear currentYear = new YearDAO().showYear();
+			httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
+			
+			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
+			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
+			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
+			request.setAttribute("receiptinfo",rinfo);
+			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, currentYear.getCurrentacademicyear());
+			String name = "tauqeer";
+			long totalSum = 0l;
+			for (Receiptinfo receiptInfoSingle : rinfo) {
+				totalSum = totalSum + receiptInfoSingle.getTotalamount();
+			}
+			
+			long totalFeesAmount = 0l;
+			long totalFeesConcession = 0l;
+			for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
+				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
+				totalFeesConcession = totalFeesConcession+studentfeesstructureSingle.getConcession();
+			}
+			
+			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
+			//String totalFees = new feesDetailsDAO().feesTotal(id, currentYear.getCurrentacademicyear());
+			//String dueAmount = new feesDetailsDAO().dueAmount(id, currentYear.getCurrentacademicyear());
+			if (student == null) {
+				result = false;
+			} else {
+				httpSession.setAttribute("student", student);
+				String classStudying = student.getClassstudying();
+				if (!classStudying.equalsIgnoreCase("")) {
+					String[] classParts = classStudying.split("--");
+					httpSession.setAttribute("classstudying", classParts[0]);
+					httpSession.setAttribute("secstudying", "");
+					if(classParts.length>1) {
+						httpSession.setAttribute("secstudying", classParts[1]);
+					}
+					
+				} else {
+					httpSession.setAttribute("classstudying", classStudying);
+					httpSession.setAttribute("secstudying", "");
+				}
+
+				String classAdmitted = student.getClassadmittedin();
+				
+				if (!classAdmitted.equalsIgnoreCase("")) {
+
+					String[] classAdmittedParts = classAdmitted.split("--");
+					request.setAttribute("classadm", classAdmittedParts[0]);
+					request.setAttribute("secadm", "");
+					if(classAdmittedParts.length>1) {
+						request.setAttribute("secadm", classAdmittedParts[1]);
+					}
+					
+				} else {
+					request.setAttribute("classadm", classAdmitted);
+					request.setAttribute("secadm", "");
+				}
+
+				httpSession.setAttribute("parents", parents);
+				//httpSession.setAttribute("feesdetails", feesdetails);
+				httpSession.setAttribute("feesstructure", feesstructure);
+				httpSession.setAttribute("name", name);
+				httpSession.setAttribute("sumoffees", totalSum);
+				httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
+				httpSession.setAttribute("totalfees", totalFeesAmount);
+				httpSession.setAttribute("academicPerYear", currentYear.getCurrentacademicyear());
+				httpSession.setAttribute("currentAcademicYear", currentYear.getCurrentacademicyear());
+				httpSession.setAttribute("totalfeesconcession", totalFeesConcession);
+				result = true;
+				httpSession.setAttribute("resultfromservice",result);
+			}
+			new StandardService(request, response).viewClasses();
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}
+		return result;
+	}
+	//end of viewDetailsbySidOfStudent
 //other view detail of students
 	public boolean otherviewDetailsOfStudent() {
 		return otherviewDetailsOfStudent(request.getParameter("id"));
