@@ -1577,10 +1577,26 @@ public boolean getRPStatement() {
 	//Caluclate Halqa Previous Dues
 	List<Accountdetailsbalance> accountDetailsBalanceListHalqaPreviousShare = new AccountDAO().getAccountBalanceDetails(halqaSharePaidList, branchId);
 	BigDecimal halqaShareDue = BigDecimal.ZERO;
+	BigDecimal totalHalqaSharePaidOBCash = BigDecimal.ZERO;
+	BigDecimal totalHalqaSharePaidOBBank = BigDecimal.ZERO;
 	BigDecimal totalPayableHalqaTillToday = BigDecimal.ZERO;
 	BigDecimal totalPayableHalqaTillTodayCash = BigDecimal.ZERO;
 	BigDecimal totalPayableHalqaTillTodayBank = BigDecimal.ZERO;
-
+    
+	for (Accountdetails accountDetails : accountsDetailsHalqaSharePaidAccount) {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, todaysDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		if(!voucherTransactions.isEmpty()) {
+		
+			BigDecimal[] totalAmount = getTotalBalanceCashBankDebit(accountDetails,voucherTransactions,cashLedgerid,bankLedgerid);
+			totalAmount[0] = totalAmount[0].abs();
+			totalAmount[1] = totalAmount[1].abs();
+			totalHalqaSharePaidOBCash = totalHalqaSharePaidOBCash.add(totalAmount[0]);
+			totalHalqaSharePaidOBBank = totalHalqaSharePaidOBBank.add(totalAmount[1]);
+			}
+		}
+	 
 	
 	for (Accountdetails accountDetails : accountsDetailsHalqaSharePaidAccount) {
 		
@@ -1605,7 +1621,7 @@ public boolean getRPStatement() {
 		
 	}
 	totalPayableHalqaTillToday = totalPayableHalqaTillTodayCash.add(totalPayableHalqaTillTodayBank);
-	BigDecimal halqaSharePreviousDue = halqaShareDue.add(totalHalqaSharePaidCash).add(totalHalqaSharePaidBank);
+	BigDecimal halqaSharePreviousDue = halqaShareDue.add(totalHalqaSharePaidOBCash).add(totalHalqaSharePaidOBBank);
 	halqaSharePreviousDue = halqaSharePreviousDue.subtract(totalPayableHalqaTillToday);
 	request.setAttribute("halqasharepreviousdue", halqaSharePreviousDue);
 	request.setAttribute("halqatotaldue", halqaSharePreviousDue.add(totalPayableHalqaDuration));
