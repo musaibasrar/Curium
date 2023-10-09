@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/meps/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/meps/css/datePicker/demos.css">
+        <script language="JavaScript" src="/shatabdi/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/meps/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/meps/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/meps/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/meps/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/meps/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/meps/css/font-awesome.css">
+        <script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/shatabdi/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/shatabdi/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/shatabdi/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/shatabdi/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/shatabdi/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/shatabdi/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/shatabdi/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/shatabdi/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -414,7 +414,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -436,120 +436,120 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/StudentProcess/viewAll" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="/meps/StudentProcess/addNew" style="font-size: 12px;">Add New</a><br/>
+                <a target="mainFrame" href="/shatabdi/StudentProcess/viewAll" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/shatabdi/StudentProcess/addNew" style="font-size: 12px;">Add New</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
-                <a target="mainFrame" href="/meps/attendancemark" style="font-size: 12px;">Mark Attendance</a><br/>
-                <a target="mainFrame" href="/meps/attendanceexport" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="/shatabdi/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
+                <a target="mainFrame" href="/shatabdi/attendancemark" style="font-size: 12px;">Mark Attendance</a><br/>
+                <a target="mainFrame" href="/shatabdi/attendanceexport" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/EmployeeProcess/viewAllEmployee" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="/meps/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
-				<a target="mainFrame" href="/meps/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
-				<a target="mainFrame" href="/meps/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
-				<a target="mainFrame" href="/meps/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="/shatabdi/EmployeeProcess/viewAllEmployee" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/shatabdi/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
+				<a target="mainFrame" href="/shatabdi/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
+				<a target="mainFrame" href="/shatabdi/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
+				<a target="mainFrame" href="/shatabdi/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-                <a target="mainFrame" href="/meps/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>
-				<a target="mainFrame" href="/meps/feesstructure" style="font-size: 12px;">Fees Structure</a><br/>                
-				<a target="mainFrame" href="/meps/feesCollectionDetails" style="font-size: 12px;">Fees Details</a><br/>
+                <a target="mainFrame" href="/shatabdi/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>
+				<a target="mainFrame" href="/shatabdi/feesstructure" style="font-size: 12px;">Fees Structure</a><br/>                
+				<a target="mainFrame" href="/shatabdi/feesCollectionDetails" style="font-size: 12px;">Fees Details</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             
             <div>
-                <a target="mainFrame" href="/meps/marksentry" style="font-size: 12px;">Enter Marks</a><br/>
-                <a target="mainFrame" href="/meps/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
-            	<a target="mainFrame" href="/meps/progressreport" style="font-size: 12px;">Generate Report</a><br/>
-           		<a target="mainFrame" href="/meps/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
+                <a target="mainFrame" href="/shatabdi/marksentry" style="font-size: 12px;">Enter Marks</a><br/>
+                <a target="mainFrame" href="/shatabdi/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
+            	<a target="mainFrame" href="/shatabdi/progressreport" style="font-size: 12px;">Generate Report</a><br/>
+           		<a target="mainFrame" href="/shatabdi/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
+                <a target="mainFrame" href="/shatabdi/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
 
 
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/AdvanceSearch" style="font-size: 12px;">Search</a><br/>
+                <a target="mainFrame" href="/shatabdi/AdvanceSearch" style="font-size: 12px;">Search</a><br/>
 
 
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/Promotion" style="font-size: 12px;">Promotions</a><br/>
+                <a target="mainFrame" href="/shatabdi/Promotion" style="font-size: 12px;">Promotions</a><br/>
 
 
             </div>
 
             <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/meps/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/shatabdi/StudentProcess/archiveViewAll" >Archive Students</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-                <a target="mainFrame" href="/meps/Backup&Restore" style="font-size: 12px;">Backup</a><br/>
-                <a target="mainFrame" href="/meps/changePassword" style="font-size: 12px;">Change Password</a><br/>
-                <a target="mainFrame" href="/meps/uploadattendance" style="font-size: 12px;">upload attendance file</a><br/>
+                <a target="mainFrame" href="/shatabdi/Backup&Restore" style="font-size: 12px;">Backup</a><br/>
+                <a target="mainFrame" href="/shatabdi/changePassword" style="font-size: 12px;">Change Password</a><br/>
+                <a target="mainFrame" href="/shatabdi/uploadattendance" style="font-size: 12px;">upload attendance file</a><br/>
             </div>
             
             
             <h5 style="font-size: 12px"><a href="#" >Generate Cards</a></h5>
             <div >
-                <a target="mainFrame" href="/meps/generateids" style="font-size: 12px;">Generate IDs</a><br/>
+                <a target="mainFrame" href="/shatabdi/generateids" style="font-size: 12px;">Generate IDs</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Documents</a></h5>
             <div >
-                <a target="mainFrame" href="/meps/studentsdetailsreports" style="font-size: 12px;">Student Details</a><br/>
-                <a target="mainFrame" href="/meps/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
-                <a target="mainFrame" href="/meps/studentsdetailsbonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
-                <a target="mainFrame" href="/meps/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
-                <a target="mainFrame" href="/meps/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
-                <a target="mainFrame" href="/meps/PeriodProcess/generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
+                <a target="mainFrame" href="/shatabdi/studentsdetailsreports" style="font-size: 12px;">Student Details</a><br/>
+                <a target="mainFrame" href="/shatabdi/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
+                <a target="mainFrame" href="/shatabdi/studentsdetailsbonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
+                <a target="mainFrame" href="/shatabdi/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
+                <a target="mainFrame" href="/shatabdi/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
+                <a target="mainFrame" href="/shatabdi/PeriodProcess/generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
             <div >
-                <a target="mainFrame" href="/meps/sendsms" style="font-size: 12px;">SMS</a><br/>
-                <a target="mainFrame" href="/meps/sendemail" style="font-size: 12px;">Email</a><br/>
+                <a target="mainFrame" href="/shatabdi/sendsms" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="/shatabdi/sendemail" style="font-size: 12px;">Email</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
-                <a target="mainFrame" href="/meps/AccountProcess/createAccount" style="font-size: 12px;">Ledger Account</a><br/>
-                <a target="mainFrame" href="/meps/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
-                <a target="mainFrame" href="/meps/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">Find/Edit Voucher</a><br/>
-                <a target="mainFrame" href="/meps/AccountProcess/trialBalance" style="font-size: 12px;">Trial Balance</a><br/>
-                <a target="mainFrame" href="/meps/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
+                <a target="mainFrame" href="/shatabdi/AccountProcess/createAccount" style="font-size: 12px;">Ledger Account</a><br/>
+                <a target="mainFrame" href="/shatabdi/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
+                <a target="mainFrame" href="/shatabdi/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">Find/Edit Voucher</a><br/>
+                <a target="mainFrame" href="/shatabdi/AccountProcess/trialBalance" style="font-size: 12px;">Trial Balance</a><br/>
+                <a target="mainFrame" href="/shatabdi/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
             </div>
             
              <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/meps/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/meps/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/meps/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Issue</a><br/>
-                <a target="mainFrame" href="/meps/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/meps/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
+                <a target="mainFrame" href="/shatabdi/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
+                <a target="mainFrame" href="/shatabdi/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
+                <a target="mainFrame" href="/shatabdi/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Issue</a><br/>
+                <a target="mainFrame" href="/shatabdi/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
+                <a target="mainFrame" href="/shatabdi/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
             <div >
-                <a target="mainFrame" href="/meps/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/meps/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+                <a target="mainFrame" href="/shatabdi/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
+                <a target="mainFrame" href="/shatabdi/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
             </div>
             
             </div>

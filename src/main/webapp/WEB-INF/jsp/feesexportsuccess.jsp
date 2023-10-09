@@ -16,15 +16,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/meps/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/meps/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/meps/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/shatabdi/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/shatabdi/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.button.js"></script>
         
         
         
@@ -66,7 +66,7 @@
 
             function downloadFile(){
                 var form1=document.getElementById("form1");
-                form1.action="/meps/FeesDetails/download";
+                form1.action="/shatabdi/FeesDetails/download";
                 form1.submit();
             }
         </script>
@@ -75,7 +75,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

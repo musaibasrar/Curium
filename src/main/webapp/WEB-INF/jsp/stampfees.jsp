@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>stamp fees</title>
-<link rel="stylesheet" href="/meps/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/meps/css/datePicker/demos.css">
+<link rel="stylesheet" href="/shatabdi/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/shatabdi/css/datePicker/demos.css">
 
 <style type="text/css">
 <!--
@@ -297,45 +297,45 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/meps/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/meps/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/shatabdi/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/shatabdi/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/shatabdi/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/meps/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/shatabdi/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/shatabdi/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/meps/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/meps/js/datePicker/ui/sliderAccess.js"></script>
+	src="/shatabdi/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/shatabdi/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/shatabdi/js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript" src="/meps/js/globalize.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/meps/js/globalize.cultures.js"></script>
+<script type="text/javascript" src="/shatabdi/js/globalize.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/shatabdi/js/globalize.cultures.js"></script>
 
 <script type="text/javascript"
-	src="/meps/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/shatabdi/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/shatabdi/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/shatabdi/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/shatabdi/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/shatabdi/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/shatabdi/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/shatabdi/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/shatabdi/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/shatabdi/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/shatabdi/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/meps/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/shatabdi/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -361,11 +361,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/meps/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/shatabdi/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/meps/StampFeesProcess/search";
+		form1.action = "/shatabdi/StampFeesProcess/search";
 		form1.method = "POST";
 		form1.submit();
 
@@ -446,7 +446,7 @@
 	
 	function deleteFeesStamp(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/meps/StampFeesProcess/delete";
+		form1.action = "/shatabdi/StampFeesProcess/delete";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -673,7 +673,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/meps/UserProcess/sessionTimeOut");
+	response.sendRedirect("/shatabdi/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -686,7 +686,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/meps/StampFeesProcess/applyFees" method="POST">
+	<form id="form1" action="/shatabdi/StampFeesProcess/applyFees" method="POST">
     
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -849,7 +849,7 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/meps/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
+								href="/shatabdi/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText">

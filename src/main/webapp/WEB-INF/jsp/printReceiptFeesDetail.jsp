@@ -176,19 +176,19 @@
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
 			
-		<table width="100%" style="border-collapse: collapse;">
-					<tr>
-						<td align="left" style="padding-left: 50px;">
-						<img src="/meps/images/meps.jpg" width="118" height="80"/>
-						</td> 
-						<td style="width: 100%;" align="left">
-		                <label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-						<label class="addressLine" style="padding-left: 20px;">${branchaddress}<br></label>
-						<label class="addressLine" style="padding-left: 05px;">Contact:&nbsp;${branchcontact} </label>
-						<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
-						</td>
-					</tr>
+			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
+			<tr>
+				<td><img src="/shatabdi/images/shatabdi.jpg" width="67" height="80"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
+				</td>
+			</tr>
 		</table>
+		
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -328,7 +328,7 @@
 			</table>
 			
 		<TABLE width="100%" border="0">
-			<%--<tr>
+			<tr>
 			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
@@ -346,7 +346,7 @@
 				 Total fees Due : Rs.  ${dueamount} 
 				</td>
 				
-			</tr> --%>
+			</tr>
 			
 			<tr>
 			<td><hr width="100%"></td>
@@ -368,7 +368,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/meps/images/mepspaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/shatabdi/images/shatabdipaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -376,18 +376,17 @@
 		<br>
 		<div style="border: 1px solid;border-radius: 15px">
 		
-		<table width="100%" style="border-collapse: collapse;">
-					<tr>
-						<td align="left" style="padding-left: 50px;">
-						<img src="/meps/images/meps.jpg" width="118" height="80"/>
-						</td> 
-						<td style="width: 100%;" align="left">
-		                <label class="dataTextBoldCenter" style="padding-left: 40px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-						<label class="addressLine" style="padding-left: 20px;">${branchaddress}<br></label>
-						<label class="addressLine" style="padding-left: 05px;">Contact:&nbsp;${branchcontact} </label>
-						<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
-						</td>
-					</tr>
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+                        		
+			<tr>
+				<td><img src="/shatabdi/images/shatabdi.jpg" width="67" height="80"/></td>
+				<td>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">${branchaddress}</label><br>
+				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
+				</td>
+			</tr>
 		</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
@@ -530,7 +529,7 @@
 			</table>
 			
 		<TABLE width="100%" border="0">
-			<%--<tr>
+			<tr>
 			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
@@ -548,7 +547,7 @@
 				 Total fees Due : Rs.  ${dueamount} 
 				</td>
 				
-			</tr>--%>
+			</tr>
 			
 			<tr>
 			<td><hr width="100%"></td>
@@ -570,7 +569,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/meps/images/mepspaytm.jpeg" width="70" height="65"/></td>
+		<td><img src="/shatabdi/images/shatabdipaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
