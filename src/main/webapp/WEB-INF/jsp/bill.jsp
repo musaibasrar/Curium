@@ -184,6 +184,8 @@
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 45px;">A Senior Secondary School<br></label>
+				<label class="addressLine" style="padding-left: 45px;">Affiliated to CBSE., Delhi, Affiliation No-330113<br></label>
 				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
 				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
@@ -360,6 +362,8 @@
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 45px;">A Senior Secondary School<br></label>
+				<label class="addressLine" style="padding-left: 45px;">Affiliated to CBSE., Delhi, Affiliation No-330113<br></label>
 				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
 				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
 				</td>

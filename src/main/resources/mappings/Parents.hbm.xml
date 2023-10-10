@@ -62,7 +62,7 @@
             <column name="fatherscastecertno" length="25" />
         </property>
         <property name="motherscastecertno" type="string">
-            <column name="motherscastecertno" length="25" />
+            <column name="motherscastecertno" length="100" />
         </property>
         <property name="fatherscaste" type="string">
             <column name="fatherscaste" length="15" />

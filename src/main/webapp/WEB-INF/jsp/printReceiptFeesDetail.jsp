@@ -182,6 +182,8 @@
 				<td><img src="/shatabdi/images/shatabdi.jpg" width="67" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">A Senior Secondary School<br></label>
+				<label class="addressLine">Affiliated to CBSE., Delhi, Affiliation No-330113<br></label>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label>
 				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
@@ -382,6 +384,8 @@
 				<td><img src="/shatabdi/images/shatabdi.jpg" width="67" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="addressLine">A Senior Secondary School<br></label>
+				<label class="addressLine">Affiliated to CBSE., Delhi, Affiliation No-330113<br></label>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label>
 				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
