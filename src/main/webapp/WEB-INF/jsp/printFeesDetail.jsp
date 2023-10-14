@@ -182,11 +182,11 @@
 				</td> 
 				<td style="width: 100%;" align="left">
 				<c:choose>
-                  <c:when test="${branchid eq 4}">
-                         <label class="dataTextBoldCenter" style="padding-left: 30px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+                  <c:when test="${branchid eq 3}">
+                         <label class="dataTextBoldCenter" style="padding-left: 30px;">&nbsp;&nbsp;&nbsp;Al-Farooq Education Society</label><br>
                   </c:when>
                   <c:otherwise>
-                         <label class="dataTextBoldCenter" style="padding-left: 0px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+                         <label class="dataTextBoldCenter" style="padding-left: 0px;">&nbsp;&nbsp;&nbsp;Al-Farooq Urdu Higher Primary School</label><br>
                   </c:otherwise>
                 </c:choose>
 				<label class="addressLine" style="padding-left: 25px;">${branchaddress}<br></label>
@@ -388,11 +388,11 @@
 				</td> 
 				<td style="width: 100%;" align="left">
 				<c:choose>
-                  <c:when test="${branchid eq 4}">
-                         <label class="dataTextBoldCenter" style="padding-left: 30px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+                  <c:when test="${branchid eq 3}">
+                         <label class="dataTextBoldCenter" style="padding-left: 30px;">&nbsp;&nbsp;&nbsp;Al-Farooq Education Society</label><br>
                   </c:when>
                   <c:otherwise>
-                         <label class="dataTextBoldCenter" style="padding-left: 0px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+                         <label class="dataTextBoldCenter" style="padding-left: 0px;">&nbsp;&nbsp;&nbsp;Al-Farooq Urdu Higher Primary School</label><br>
                   </c:otherwise>
                 </c:choose>
 				
