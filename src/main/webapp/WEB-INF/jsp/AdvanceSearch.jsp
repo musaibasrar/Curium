@@ -20,22 +20,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Addvance Search</title>
-<link rel="stylesheet" href="/jih/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/jih/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/jihtel/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/jihtel/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/jih/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/jih/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/jih/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/jih/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/jih/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/jih/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/jih/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/jih/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/jihtel/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/jihtel/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/jihtel/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/jihtel/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/jihtel/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/jihtel/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/jihtel/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/jihtel/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/jih/css/datePicker/demos.css">
+	src="/jihtel/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/jihtel/css/datePicker/demos.css">
 
 
 
@@ -288,10 +288,10 @@
 
 
 
-<script type="text/javascript" src="/jih/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/jihtel/js/datetimepicker_css.js"></script>
 
-<script src="/jih/JavaScript/actb.js"></script>
-<script src="/jih/JavaScript/common.js"></script>
+<script src="/jihtel/JavaScript/actb.js"></script>
+<script src="/jihtel/JavaScript/common.js"></script>
 
 
 
@@ -538,7 +538,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/jih/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jihtel/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -551,7 +551,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/jih/UserProcess/advanceSearch"
+	<form id="form1" action="/jihtel/UserProcess/advanceSearch"
 		method="post">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
@@ -1039,17 +1039,17 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function searchStudent() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/jih/UserProcess/advanceSearch";
+								form1.action = "/jihtel/UserProcess/advanceSearch";
 								form1.submit();
 							}
 							function searchByParents() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/jih/UserProcess/advanceSearchByParents";
+								form1.action = "/jihtel/UserProcess/advanceSearchByParents";
 								form1.submit();
 							}
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/jih/PersonalProcess/ViewAll";
+								form1.action = "/jihtel/PersonalProcess/ViewAll";
 								form1.submit();
 							}
 

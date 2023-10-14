@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Holiday</title>
-<link rel="stylesheet" href="/jih/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/jih/css/datePicker/demos.css">
+<link rel="stylesheet" href="/jihtel/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/jihtel/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -291,42 +291,42 @@
 }
 </style>
 
-<link rel="stylesheet" href="/jih/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/jih/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/jihtel/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/jihtel/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/jih/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/jih/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/jihtel/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/jihtel/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/jih/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/jih/js/datePicker/ui/sliderAccess.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/jihtel/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/jihtel/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/jih/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/jihtel/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/jihtel/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -351,13 +351,13 @@
 	}
 	
 </script>
-<script type="text/javascript" src="/jih/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/jihtel/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function addHolidays() {
 
 		var form1 = document.getElementById("form1");
-		form1.action = "/jih/AttendanceProcess/addHolidays";
+		form1.action = "/jihtel/AttendanceProcess/addHolidays";
 		form1.method = "POST";
 		form1.submit();
 
@@ -365,7 +365,7 @@
 
 	function searchForEmployees(staffName, staffDepartment){
 		var form1 = document.getElementById("form1");
-		form1.action = "/jih/AttendanceProcess/searchEmployees?staffName="+staffName+"&staffDepartment="+staffDepartment+"";
+		form1.action = "/jihtel/AttendanceProcess/searchEmployees?staffName="+staffName+"&staffDepartment="+staffDepartment+"";
 		form1.method = "POST";
 		form1.submit();
 
@@ -432,14 +432,14 @@
 
 	function addStudentAttendanceMaster() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/jih/AttendanceProcess/addStudentAttendanceMaster";
+		form1.action = "/jihtel/AttendanceProcess/addStudentAttendanceMaster";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function addStaffAttendanceMaster() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/jih/AttendanceProcess/addStaffAttendanceMaster";
+		form1.action = "/jihtel/AttendanceProcess/addStaffAttendanceMaster";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -451,7 +451,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/jih/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jihtel/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -464,7 +464,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/jih/MarksDetailsProcess/updateMarks" method="POST">
+	<form id="form1" action="/jihtel/MarksDetailsProcess/updateMarks" method="POST">
 		
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -694,7 +694,7 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/jih/images/sort_both.png" /></th>
+							src="/jihtel/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Contact Number&nbsp;</th>
 							<th title="click to sort" class="headerText">Department&nbsp;</th>
 						</tr>
@@ -706,7 +706,7 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/jih/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
+                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/jihtel/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.contactnumber}"/></td>
                                 <td class="dataText"><c:out value="${employee.department}"/></td>
                                 

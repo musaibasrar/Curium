@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/jih/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/jih/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/jih/css/datePicker/demos.css">
+        <script language="JavaScript" src="/jihtel/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/jihtel/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/jihtel/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/jih/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/jih/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/jih/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/jih/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/jih/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/jih/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/jih/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/jih/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/jih/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/jih/css/font-awesome.css">
+        <script type="text/javascript" src="/jihtel/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/jihtel/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/jihtel/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/jihtel/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/jihtel/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/jihtel/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/jihtel/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/jihtel/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/jihtel/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/jihtel/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -414,7 +414,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/jih/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jihtel/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -436,120 +436,120 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Donors</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/StudentProcess/viewAll" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="/jih/StudentProcess/addNew" style="font-size: 12px;">Add New</a><br/>
+                <a target="mainFrame" href="/jihtel/StudentProcess/viewAll" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/jihtel/StudentProcess/addNew" style="font-size: 12px;">Add New</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
-                <a target="mainFrame" href="/jih/attendancemark" style="font-size: 12px;">Mark Attendance</a><br/>
-                <a target="mainFrame" href="/jih/attendanceexport" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="/jihtel/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a><br/>
+                <a target="mainFrame" href="/jihtel/attendancemark" style="font-size: 12px;">Mark Attendance</a><br/>
+                <a target="mainFrame" href="/jihtel/attendanceexport" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/EmployeeProcess/viewAllEmployee" style="font-size: 12px;">View All</a><br/>
-                <a target="mainFrame" href="/jih/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
-				<a target="mainFrame" href="/jih/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
-				<a target="mainFrame" href="/jih/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
-				<a target="mainFrame" href="/jih/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
+                <a target="mainFrame" href="/jihtel/EmployeeProcess/viewAllEmployee" style="font-size: 12px;">View All</a><br/>
+                <a target="mainFrame" href="/jihtel/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a><br/>
+				<a target="mainFrame" href="/jihtel/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a><br/>
+				<a target="mainFrame" href="/jihtel/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a><br/>
+				<a target="mainFrame" href="/jihtel/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-                <a target="mainFrame" href="/jih/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>
-				<a target="mainFrame" href="/jih/feesstructure" style="font-size: 12px;">Fees Structure</a><br/>                
-				<a target="mainFrame" href="/jih/feesCollectionDetails" style="font-size: 12px;">Fees Details</a><br/>
+                <a target="mainFrame" href="/jihtel/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a><br/>
+				<a target="mainFrame" href="/jihtel/feesstructure" style="font-size: 12px;">Fees Structure</a><br/>                
+				<a target="mainFrame" href="/jihtel/feesCollectionDetails" style="font-size: 12px;">Fees Details</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             
             <div>
-                <a target="mainFrame" href="/jih/marksentry" style="font-size: 12px;">Enter Marks</a><br/>
-                <a target="mainFrame" href="/jih/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
-            	<a target="mainFrame" href="/jih/progressreport" style="font-size: 12px;">Generate Report</a><br/>
-           		<a target="mainFrame" href="/jih/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
+                <a target="mainFrame" href="/jihtel/marksentry" style="font-size: 12px;">Enter Marks</a><br/>
+                <a target="mainFrame" href="/jihtel/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a><br/>
+            	<a target="mainFrame" href="/jihtel/progressreport" style="font-size: 12px;">Generate Report</a><br/>
+           		<a target="mainFrame" href="/jihtel/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
+                <a target="mainFrame" href="/jihtel/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a><br/>
 
 
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/AdvanceSearch" style="font-size: 12px;">Search</a><br/>
+                <a target="mainFrame" href="/jihtel/AdvanceSearch" style="font-size: 12px;">Search</a><br/>
 
 
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/Promotion" style="font-size: 12px;">Promotions</a><br/>
+                <a target="mainFrame" href="/jihtel/Promotion" style="font-size: 12px;">Promotions</a><br/>
 
 
             </div>
 
             <h5 style="font-size: 12px"><a href="#" style="font-size: 12px;">Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/StudentProcess/archiveViewAll" >Archive Donors</a><br/>
+                <a target="mainFrame" href="/jihtel/StudentProcess/archiveViewAll" >Archive Donors</a><br/>
             </div>
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-                <a target="mainFrame" href="/jih/Backup&Restore" style="font-size: 12px;">Backup</a><br/>
-                <a target="mainFrame" href="/jih/changePassword" style="font-size: 12px;">Change Password</a><br/>
-                <a target="mainFrame" href="/jih/uploadattendance" style="font-size: 12px;">upload attendance file</a><br/>
+                <a target="mainFrame" href="/jihtel/Backup&Restore" style="font-size: 12px;">Backup</a><br/>
+                <a target="mainFrame" href="/jihtel/changePassword" style="font-size: 12px;">Change Password</a><br/>
+                <a target="mainFrame" href="/jihtel/uploadattendance" style="font-size: 12px;">upload attendance file</a><br/>
             </div>
             
             
             <h5 style="font-size: 12px"><a href="#" >Generate Cards</a></h5>
             <div >
-                <a target="mainFrame" href="/jih/generateids" style="font-size: 12px;">Generate IDs</a><br/>
+                <a target="mainFrame" href="/jihtel/generateids" style="font-size: 12px;">Generate IDs</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Documents</a></h5>
             <div >
-                <a target="mainFrame" href="/jih/studentsdetailsreports" style="font-size: 12px;">Student Details</a><br/>
-                <a target="mainFrame" href="/jih/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
-                <a target="mainFrame" href="/jih/studentsdetailsbonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
-                <a target="mainFrame" href="/jih/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
-                <a target="mainFrame" href="/jih/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
-                <a target="mainFrame" href="/jih/PeriodProcess/generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
+                <a target="mainFrame" href="/jihtel/studentsdetailsreports" style="font-size: 12px;">Student Details</a><br/>
+                <a target="mainFrame" href="/jihtel/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a><br/>
+                <a target="mainFrame" href="/jihtel/studentsdetailsbonafide" style="font-size: 12px;">Bonafide Certificate</a><br/>
+                <a target="mainFrame" href="/jihtel/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a><br/>
+                <a target="mainFrame" href="/jihtel/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a><br/>
+                <a target="mainFrame" href="/jihtel/PeriodProcess/generateTimeTable" style="font-size: 12px;">Time Table</a><br/>
             </div> 
             
             <h5 style="font-size: 12px"><a href="#" >Send Notifications</a></h5>
             <div >
-                <a target="mainFrame" href="/jih/sendsms" style="font-size: 12px;">SMS</a><br/>
-                <a target="mainFrame" href="/jih/sendemail" style="font-size: 12px;">Email</a><br/>
+                <a target="mainFrame" href="/jihtel/sendsms" style="font-size: 12px;">SMS</a><br/>
+                <a target="mainFrame" href="/jihtel/sendemail" style="font-size: 12px;">Email</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
-                <a target="mainFrame" href="/jih/AccountProcess/createAccount" style="font-size: 12px;">Ledger Account</a><br/>
-                <a target="mainFrame" href="/jih/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
-                <a target="mainFrame" href="/jih/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">Find/Edit Voucher</a><br/>
-                <a target="mainFrame" href="/jih/AccountProcess/trialBalance" style="font-size: 12px;">Trial Balance</a><br/>
-                <a target="mainFrame" href="/jih/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
+                <a target="mainFrame" href="/jihtel/AccountProcess/createAccount" style="font-size: 12px;">Ledger Account</a><br/>
+                <a target="mainFrame" href="/jihtel/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a><br/>
+                <a target="mainFrame" href="/jihtel/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">Find/Edit Voucher</a><br/>
+                <a target="mainFrame" href="/jihtel/AccountProcess/trialBalance" style="font-size: 12px;">Trial Balance</a><br/>
+                <a target="mainFrame" href="/jihtel/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a><br/>
             </div>
             
              <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/jih/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/jih/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/jih/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Issue</a><br/>
-                <a target="mainFrame" href="/jih/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/jih/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
+                <a target="mainFrame" href="/jihtel/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
+                <a target="mainFrame" href="/jihtel/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
+                <a target="mainFrame" href="/jihtel/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Issue</a><br/>
+                <a target="mainFrame" href="/jihtel/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
+                <a target="mainFrame" href="/jihtel/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
             <div >
-                <a target="mainFrame" href="/jih/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/jih/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+                <a target="mainFrame" href="/jihtel/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
+                <a target="mainFrame" href="/jihtel/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
             </div>
             
             </div>

@@ -119,9 +119,9 @@
             }
             -->
         </style>
-        <script type="text/javascript" src="/jih/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/jih/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/jih/js/print/jquery.printPage.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/jihtel/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/jihtel/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/jihtel/js/print/jquery.printPage.js" type="text/javascript"></script>
         <title>Print Receipt</title>
         <script type="text/javascript">
              $(function() {
@@ -130,7 +130,7 @@
              
              function printReceipt(){
             	 document.getElementById("print").click();
-            	 //document.location.href = "/jih/FeesProcess/feesCollect"; 
+            	 //document.location.href = "/jihtel/FeesProcess/feesCollect"; 
              }
         </script>
 </head>
@@ -138,7 +138,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/jih/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jihtel/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -199,7 +199,7 @@ for(Cookie cookie : cookies){
                         
                     <%-- </c:forEach> --%>
                     <tr>
-                        <td align="center"><a id="print" href="/jih/FeesCollection/otherprintReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td align="center"><a id="print" href="/jihtel/FeesCollection/otherprintReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </TABLE>

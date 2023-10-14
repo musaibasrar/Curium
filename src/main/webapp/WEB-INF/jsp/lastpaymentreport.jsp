@@ -224,7 +224,7 @@
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/jih/images/jih.png" width="80" height="80"/></td>
+				<td><img src="/jihtel/images/jihtel.png" width="80" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>

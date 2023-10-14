@@ -1713,89 +1713,91 @@ public boolean getRPStatement() {
 		//Club Expenses
 		
 		String[] expClub = getLedgerAccountId("clubexpenses"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(":");
-		String[] expClubLedger = getLedgerAccountId("clubexpenseledger"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(":");
 		Map<Accountdetails,BigDecimal> expenseLedgers = new HashMap<Accountdetails, BigDecimal>();
-		List<Integer> expClubLedgerList = new ArrayList<Integer>();
-		
-		for (String exCl : expClubLedger) {
-			expClubLedgerList.add(Integer.parseInt(exCl));
-		}
-		
-		List<Accountdetails> expLedgerClub = new ArrayList<Accountdetails>();
-		expLedgerClub = new AccountDAO().getAccountdetailsMultiple(expClubLedgerList,branchId);
-		
-		for (Accountdetails accountDetails : expLedgerClub) {
-			
-			List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			
-			if(!voucherTransactions.isEmpty()) {
-			
-						BigDecimal[] totalAmountEx = getTotalBalanceCashBankDebit(accountDetails,voucherTransactions,cashLedgerid,bankLedgerid);
-						totalAmountEx[0] = totalAmountEx[0].abs();
-						totalAmountEx[1] = totalAmountEx[1].abs();
-						totalExpenseCash = totalExpenseCash.add(totalAmountEx[0]);
-						totalExpenseBank = totalExpenseBank.add(totalAmountEx[1]);
-						expenseLedgers.put(accountDetails, totalAmountEx[0].add(totalAmountEx[1]));
-				}else {
-					
-					    expenseLedgers.put(accountDetails, BigDecimal.ZERO);
-							
-				}
-			}
-		
 		Map<Accountdetails,BigDecimal> expenseLedgersAccountClub = new HashMap<Accountdetails, BigDecimal>();
-		Map<Accountdetails,BigDecimal> expenseLedgersAllAccountClub = new HashMap<Accountdetails, BigDecimal>();
-		List<Integer> expClubList = new ArrayList<Integer>();
-		
-		String[] expClubAllAcc = getLedgerAccountId("clubexpensesallaccounts"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(":");
-		for (String exCl : expClubAllAcc) {
-			expClubList.add(Integer.parseInt(exCl));
-		}
-		
-		List<Accountdetails> accountsDetailsClub = new ArrayList<Accountdetails>();
-		accountsDetailsClub = new AccountDAO().getAccountdetailsMultiple(expClubList,branchId);
-		
-		for (Accountdetails accountDetails : accountsDetailsClub) {
+		if (!expClub[0].isBlank()) {
 			
-			List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			
-			if(!voucherTransactions.isEmpty()) {
-						BigDecimal totalAmountEx = getTotalBalanceDebit(accountDetails,voucherTransactions);
-						totalAmountEx = totalAmountEx.abs();
-						expenseLedgersAllAccountClub.put(accountDetails, totalAmountEx);
-				}else {
-					expenseLedgersAllAccountClub.put(accountDetails, BigDecimal.ZERO);
+				String[] expClubLedger = getLedgerAccountId("clubexpenseledger"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(":");
+				List<Integer> expClubLedgerList = new ArrayList<Integer>();
+				
+				for (String exCl : expClubLedger) {
+					expClubLedgerList.add(Integer.parseInt(exCl));
+				}
+				
+				List<Accountdetails> expLedgerClub = new ArrayList<Accountdetails>();
+				expLedgerClub = new AccountDAO().getAccountdetailsMultiple(expClubLedgerList,branchId);
+				
+				for (Accountdetails accountDetails : expLedgerClub) {
+					
+					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					
+					if(!voucherTransactions.isEmpty()) {
+					
+								BigDecimal[] totalAmountEx = getTotalBalanceCashBankDebit(accountDetails,voucherTransactions,cashLedgerid,bankLedgerid);
+								totalAmountEx[0] = totalAmountEx[0].abs();
+								totalAmountEx[1] = totalAmountEx[1].abs();
+								totalExpenseCash = totalExpenseCash.add(totalAmountEx[0]);
+								totalExpenseBank = totalExpenseBank.add(totalAmountEx[1]);
+								expenseLedgers.put(accountDetails, totalAmountEx[0].add(totalAmountEx[1]));
+						}else {
+							
+							    expenseLedgers.put(accountDetails, BigDecimal.ZERO);
+									
+						}
 					}
-			}
+				
+				Map<Accountdetails,BigDecimal> expenseLedgersAllAccountClub = new HashMap<Accountdetails, BigDecimal>();
+				List<Integer> expClubList = new ArrayList<Integer>();
+				
+				String[] expClubAllAcc = getLedgerAccountId("clubexpensesallaccounts"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(":");
+				for (String exCl : expClubAllAcc) {
+					expClubList.add(Integer.parseInt(exCl));
+				}
+				
+				List<Accountdetails> accountsDetailsClub = new ArrayList<Accountdetails>();
+				accountsDetailsClub = new AccountDAO().getAccountdetailsMultiple(expClubList,branchId);
+				
+				for (Accountdetails accountDetails : accountsDetailsClub) {
+					
+					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					
+					if(!voucherTransactions.isEmpty()) {
+								BigDecimal totalAmountEx = getTotalBalanceDebit(accountDetails,voucherTransactions);
+								totalAmountEx = totalAmountEx.abs();
+								expenseLedgersAllAccountClub.put(accountDetails, totalAmountEx);
+						}else {
+							expenseLedgersAllAccountClub.put(accountDetails, BigDecimal.ZERO);
+							}
+					}
+				
+				 for (String exCl : expClub) {
+					 Accountdetails accountName = new Accountdetails();
+					 BigDecimal totalAmountClub = BigDecimal.ZERO;
+					 
+					 accountName.setAccountname(exCl);
+					 String[] expClubAccounts = getLedgerAccountId(exCl+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(":");
+					 
+					 int[] expClubAccountsIds = new int[expClubAccounts.length];
 		
-		 for (String exCl : expClub) {
-			 Accountdetails accountName = new Accountdetails();
-			 BigDecimal totalAmountClub = BigDecimal.ZERO;
-			 
-			 accountName.setAccountname(exCl);
-			 String[] expClubAccounts = getLedgerAccountId(exCl+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(":");
-			 
-			 int[] expClubAccountsIds = new int[expClubAccounts.length];
-
-		        // Convert and populate the int array
-		        for (int i = 0; i < expClubAccounts.length; i++) {
-		        	expClubAccountsIds[i] = Integer.parseInt(expClubAccounts[i]);
-		        }
-
-			 
-			 for (Entry<Accountdetails, BigDecimal> entry : expenseLedgersAllAccountClub.entrySet()) { 
-	            
-	            for (int accId : expClubAccountsIds) {
-	            	int accIds = entry.getKey().getAccountdetailsid();
-	                if(accIds == accId) {
-	                	totalAmountClub = totalAmountClub.add(entry.getValue());
-	                }
-	            }
-	            
-		 	}
-			 expenseLedgersAccountClub.put(accountName, totalAmountClub);
-		 }
-		 
+				        // Convert and populate the int array
+				        for (int i = 0; i < expClubAccounts.length; i++) {
+				        	expClubAccountsIds[i] = Integer.parseInt(expClubAccounts[i]);
+				        }
+		
+					 
+					 for (Entry<Accountdetails, BigDecimal> entry : expenseLedgersAllAccountClub.entrySet()) { 
+			            
+			            for (int accId : expClubAccountsIds) {
+			            	int accIds = entry.getKey().getAccountdetailsid();
+			                if(accIds == accId) {
+			                	totalAmountClub = totalAmountClub.add(entry.getValue());
+			                }
+			            }
+			            
+				 	}
+					 expenseLedgersAccountClub.put(accountName, totalAmountClub);
+				 }
+		}
 		//End Club Expenses
 		
 		//group 1

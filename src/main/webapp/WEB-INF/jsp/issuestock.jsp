@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Issue Stock</title>
-<link rel="stylesheet" href="/jih/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/jih/css/datePicker/demos.css">
+<link rel="stylesheet" href="/jihtel/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/jihtel/css/datePicker/demos.css">
 
 <style type="text/css">
 .divCSS {
@@ -445,21 +445,21 @@
 }
 
 </style>
-<script type="text/javascript" src="/jih/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/jihtel/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/jih/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/jih/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/jihtel/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/jihtel/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/jih/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/jihtel/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/jih/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/jihtel/js/datePicker/ui/jquery.ui.accordion.js"></script>
 	
-	<script src="/jih/js/bootstrap.min.js"></script>
-<link href="/jih/css/select2.min.css" rel="stylesheet" />
-<script src="/jih/js/select2.min.js"></script>
+	<script src="/jihtel/js/bootstrap.min.js"></script>
+<link href="/jihtel/css/select2.min.css" rel="stylesheet" />
+<script src="/jihtel/js/select2.min.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -554,14 +554,14 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/jih/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/jihtel/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function saveissueentry() {
 		var form1 = document.getElementById("form1");
 		
 		if(form1.checkValidity()) {
-			form1.action = "/jih/MessItemsMoveProcess/saveStockMove";
+			form1.action = "/jihtel/MessItemsMoveProcess/saveStockMove";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -571,7 +571,7 @@
 	
 	function cancelRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/jih/MessItemsMoveProcess/cancelStockMove";
+		form1.action = "/jihtel/MessItemsMoveProcess/cancelStockMove";
 		form1.method = "POST";
 		form1.submit();
 
@@ -579,21 +579,21 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/jih/AdminProcess/printVoucher";
+		form1.action = "/jihtel/AdminProcess/printVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function approveRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/jih/AdminProcess/approveVoucher";
+		form1.action = "/jihtel/AdminProcess/approveVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function rejectRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/jih/AdminProcess/rejectVoucher";
+		form1.action = "/jihtel/AdminProcess/rejectVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -936,7 +936,7 @@
     	}
     	
     	var form1 = document.getElementById("form1");
-		form1.action="/jih/MessItemsMoveProcess/saveStockMove?paymentmethodbanktransfer="+paymentmethodbanktransfer+"&paymentmethodchequetransfer="+paymentmethodchequetransfer+"&paymentmethodcash="+paymentmethodcash+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"&totalcashamount="+totalcashamountvalue+"&totalbanktransferamount="+totalbanktransferamountvalue+"&totalchequetransferamount="+totalchequetransferamountvalue+"&itemsGrandTotalAmountWithoutGST="+itemsTotalAmountWithoutGST+"";
+		form1.action="/jihtel/MessItemsMoveProcess/saveStockMove?paymentmethodbanktransfer="+paymentmethodbanktransfer+"&paymentmethodchequetransfer="+paymentmethodchequetransfer+"&paymentmethodcash="+paymentmethodcash+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"&totalcashamount="+totalcashamountvalue+"&totalbanktransferamount="+totalbanktransferamountvalue+"&totalchequetransferamount="+totalchequetransferamountvalue+"&itemsGrandTotalAmountWithoutGST="+itemsTotalAmountWithoutGST+"";
 		form1.method = "POST";
 		form1.submit();
 		
@@ -1060,7 +1060,7 @@
  	             
  	         }
  			xmlHttp.onreadystatechange = stateChanged;
- 			xmlHttp.open("GET", "/jih/MessItemsMoveProcess/getCustomerLastPrice?customerName="+customerName+"&itemid="+itemId+"",true);
+ 			xmlHttp.open("GET", "/jihtel/MessItemsMoveProcess/getCustomerLastPrice?customerName="+customerName+"&itemid="+itemId+"",true);
  			xmlHttp.send(null);
  	}
  	
@@ -1371,7 +1371,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/jih/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jihtel/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -1450,7 +1450,7 @@ for(Cookie cookie : cookies){
 										        	
 										        		<option style="color: black;" value="${student.student.name}_${student.student.classstudying}_${student.fathersname}_${student.student.sid}">${student.student.name}&nbsp;&nbsp;/&nbsp;&nbsp;${student.student.classstudying}/&nbsp;&nbsp;${student.fathersname}</option>
 										        	</c:forEach>
-										        </select><!-- &nbsp;&nbsp;<a target="mainFrame" href="/jih/StudentProcess/addNew">New Customer --></a>
+										        </select><!-- &nbsp;&nbsp;<a target="mainFrame" href="/jihtel/StudentProcess/addNew">New Customer --></a>
 									 	</div>
 								</div>
 							</td>

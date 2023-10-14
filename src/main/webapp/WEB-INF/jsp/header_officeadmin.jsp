@@ -14,10 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/jih/css/bootstrap.min.css">
-        <script src="/jih/js/jquery.min.js"></script>
-        <script src="/jih/js/bootstrap.min.js"></script>
-        <script src="/jih/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/jihtel/css/bootstrap.min.css">
+        <script src="/jihtel/js/jquery.min.js"></script>
+        <script src="/jihtel/js/bootstrap.min.js"></script>
+        <script src="/jihtel/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -92,7 +92,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/jih/UserProcess/logout";
+                form1.action="/jihtel/UserProcess/logout";
                 form1.submit();
             }
 
@@ -102,7 +102,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/jih/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jihtel/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -125,79 +125,79 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/jih/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
+								<a target="mainFrame" href="/jihtel/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/jih/images/jihheader.png"
+							<!-- <td align="left"><img src="/jihtel/images/jihtelheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/jih/left_officeadmin"> <img
-									src="/jih/images/home.svg" width="18" height="18" 
+							<td><a target="leftFrame" href="/jihtel/left_officeadmin"> <img
+									src="/jihtel/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="/jih/FeesProcess/feesCollect"> <img
-									src="/jih/images/feescollect.svg" width="18" height="18"
+								href="/jihtel/FeesProcess/feesCollect"> <img
+									src="/jihtel/images/feescollect.svg" width="18" height="18"
 									alt="Contribution Collection" style="vertical-align: bottom;" />Contribution Collection
 							</a></td>
 
 							<td>
 								<a target="mainFrame"
-								href="/jih/AccountProcess/createVoucher"> <img
-									src="/jih/images/createvoucher.svg" width="18" height="18"
+								href="/jihtel/AccountProcess/createVoucher"> <img
+									src="/jihtel/images/createvoucher.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/jih/feesCollectionDetails"><img  alt="Fees Details" src="/jih/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+							<!-- <td ><a target="mainFrame" href="/jihtel/feesCollectionDetails"><img  alt="Fees Details" src="/jihtel/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
-								href="/jih/StudentProcess/addNew"> <img
-									src="/jih/images/member.svg" width="18" height="18"
+								href="/jihtel/StudentProcess/addNew"> <img
+									src="/jihtel/images/member.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Donor
 							</a></td>
 
-							<td ><a target="leftFrame" href="/jih/leftsettings_officeadmin">
-									<img alt="Settings" src="/jih/images/settings.svg" width="18"
+							<td ><a target="leftFrame" href="/jihtel/leftsettings_officeadmin">
+									<img alt="Settings" src="/jihtel/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
 							<td ><a target="mainFrame"
-								href="/jih/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/jih/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+								href="/jihtel/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/jihtel/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
 
-							<td ><!-- <a target="mainFrame" href="/jih/sendsms"><img
-									src="/jih/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+							<td ><!-- <a target="mainFrame" href="/jihtel/sendsms"><img
+									src="/jihtel/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/jih/reports_officeadmin"><img
-									src="/jih/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+								<a target="leftFrame" href="/jihtel/reports_officeadmin"><img
+									src="/jihtel/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
 							
 							</td>
 
 							<td ><a target="mainFrame"
-								href="/jih/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/jih/images/students.svg" width="18"
+								href="/jihtel/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/jihtel/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Donors
 							</a></td>
 							
 							<!-- <td ><a target="mainFrame"
-								href="/jih/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/jih/images/dashboard.svg" width="18"
+								href="/jihtel/UserProcess/dashBoard"><img
+									alt="Dash Board" src="/jihtel/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td> -->
 								
 							<td ><a target="_parent"
-								href="/jih/UserProcess/logout"><img
-									src="/jih/images/logout.svg" width="18" height="18" alt="Log Out" 
+								href="/jihtel/UserProcess/logout"><img
+									src="/jihtel/images/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>

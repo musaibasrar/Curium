@@ -13,19 +13,19 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/jih/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/jih/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/jih/css/datePicker/demos.css">
+        <script language="JavaScript" src="/jihtel/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/jihtel/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/jihtel/css/datePicker/demos.css">
 
-        <script type="text/javascript" src="/jih/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/jih/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/jih/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/jih/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/jih/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/jih/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/jih/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/jih/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/jih/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="/jihtel/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/jihtel/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/jihtel/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/jihtel/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/jihtel/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/jihtel/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/jihtel/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/jihtel/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/jihtel/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             var get;
@@ -431,7 +431,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/jih/UserProcess/sessionTimeOut");
+	response.sendRedirect("/jihtel/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,61 +454,61 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/StudentProcess/viewAll" >View All</a><br/>
-                <a target="mainFrame" href="/jih/feesstructure" >Fees Structure</a><br/>
+                <a target="mainFrame" href="/jihtel/StudentProcess/viewAll" >View All</a><br/>
+                <a target="mainFrame" href="/jihtel/feesstructure" >Fees Structure</a><br/>
                 
 
             </div>
             <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/jih/EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/jih/DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/jih/PositionProcess/positionView" >Add Position</a>
+                <a target="mainFrame" href="/jihtel/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="/jihtel/EmployeeProcess/addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="/jihtel/DepartmentProcess/departmentView" >Add Department</a>
+                <a target="mainFrame" href="/jihtel/PositionProcess/positionView" >Add Position</a>
 
             </div> -->
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="/jih/FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/jih/FeesProcess/feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="/jihtel/FeesProcess/feesView" >Fees Category</a>
+                <a target="mainFrame" href="/jihtel/FeesProcess/feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
             <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/AdminProcess/viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="/jihtel/AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/AdvanceSearch" >Search</a><br/>
+                <a target="mainFrame" href="/jihtel/AdvanceSearch" >Search</a><br/>
 
 
             </div>
 			<!--
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/Promotion" >Promotions</a><br/>
+                <a target="mainFrame" href="/jihtel/Promotion" >Promotions</a><br/>
 
 
             </div> -->
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/jih/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="/jihtel/StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
             <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="/jih/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/jih/YearProcess/updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="/jihtel/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="/jihtel/YearProcess/updateYear" >Academic year</a><br/>
                 
 
             </div> -->
@@ -516,15 +516,15 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-               <!--  <a target="mainFrame" href="/jih/Backup&Restore" >Backup</a><br/>
-                <a target="mainFrame" href="/jih/currentIssue" >Current Issue</a><br/>
-                <a target="mainFrame" href="/jih/changePassword" >Change Password</a><br/> -->
-                <a target="mainFrame" href="/jih/feesCollectionDetails" >Fees Collection Details</a><br/>
+               <!--  <a target="mainFrame" href="/jihtel/Backup&Restore" >Backup</a><br/>
+                <a target="mainFrame" href="/jihtel/currentIssue" >Current Issue</a><br/>
+                <a target="mainFrame" href="/jihtel/changePassword" >Change Password</a><br/> -->
+                <a target="mainFrame" href="/jihtel/feesCollectionDetails" >Fees Collection Details</a><br/>
             </div>
             
            <!--  <h5 style="font-size: 12px"><a href="#" >Reports</a></h5>
             <div >
-                <a target="mainFrame" href="/jih/studentsdetailsreports" >Student Details</a><br/>
+                <a target="mainFrame" href="/jihtel/studentsdetailsreports" >Student Details</a><br/>
                 
             </div>  -->
             
