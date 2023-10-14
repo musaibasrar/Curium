@@ -40,7 +40,7 @@
 }
 
 .bg-success {
-    background-color: #8b1300;
+    background-color: #243664;
 }
 
 @media screen and (max-width: 640px) {
