@@ -241,7 +241,7 @@ public class feesCategoryDAO {
 		try {
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("from Feescategory where particularname like '%"+classname+"--%'");
+					.createQuery("from Feescategory where particularname like '"+classname+"--%'");
 			result=query.list();
 			transaction.commit();
 
