@@ -77,6 +77,9 @@ public class UserService {
             httpSession.setAttribute("typeOfUser",userType[0]);
             httpSession.setAttribute("userAuth", userType[0]);
             httpSession.setAttribute("userloginid", login.getUserid());
+            if(userType.length>1) {
+            	httpSession.setAttribute("userSubType", userType[1]);
+            }
 			//setting session to expiry in 60 mins
            	httpSession.setMaxInactiveInterval(60*60);
 			Cookie cookie = new Cookie("user",  login.getUsertype());
