@@ -1715,7 +1715,7 @@ public boolean getRPStatement() {
 		String[] expClub = getLedgerAccountId("clubexpenses"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(":");
 		Map<Accountdetails,BigDecimal> expenseLedgers = new HashMap<Accountdetails, BigDecimal>();
 		Map<Accountdetails,BigDecimal> expenseLedgersAccountClub = new HashMap<Accountdetails, BigDecimal>();
-		if (!expClub[0].isBlank()) {
+		if (!expClub[0].isEmpty()) {
 			
 				String[] expClubLedger = getLedgerAccountId("clubexpenseledger"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(":");
 				List<Integer> expClubLedgerList = new ArrayList<Integer>();
