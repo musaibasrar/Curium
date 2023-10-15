@@ -39,7 +39,7 @@ public class feesCollectionDAO {
 	@SuppressWarnings("finally")
 	public boolean create(Receiptinfo receiptInfo, List<Feescollection> feescollectionList, List<VoucherEntrytransactions> transactionsList, List<String> updateDrAccountList,
 			List<String> updateCrAccountList, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome) {
-				int[] transactionsId = new int[2];
+				int[] transactionsId = new int[3];
 				int i = 0;
 		boolean result = false;
 		try {
@@ -65,6 +65,7 @@ public class feesCollectionDAO {
 			 	
 			 	receiptInfo.setReceiptvoucher(transactionsId[0]);
 			 	receiptInfo.setJournalvoucher(transactionsId[1]);
+			 	receiptInfo.setMisc(Integer.toUnsignedLong(transactionsId[2]));
 				session.save(receiptInfo);
 			 	
 			 	for (String updateCrAccount : updateCrAccountList) {

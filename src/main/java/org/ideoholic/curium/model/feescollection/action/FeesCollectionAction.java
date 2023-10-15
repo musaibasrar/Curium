@@ -70,7 +70,13 @@ public class FeesCollectionAction {
                 new FeesCollectionService(request, response).getFeesDetails();
                 new StandardService(request, response).viewClasses();
                 new FeesService(request, response).viewAllStudentsList();
-                return "feesCollection";
+                if (httpSession.getAttribute("userSubType").toString().equalsIgnoreCase("city")) {
+        			return "feesCollection";
+        		} else if (httpSession.getAttribute("userSubType").toString().equalsIgnoreCase("metro")) {
+        			return "feesCollectionCity";
+        		} else {
+        			return "feesCollection";
+        		}
         }
 
 		@GetMapping("/ViewDetails")

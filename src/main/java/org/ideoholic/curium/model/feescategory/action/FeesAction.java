@@ -100,7 +100,13 @@ public class FeesAction {
 	public String feesCollect() {
 		new FeesService(request, response).viewFees();
 		new FeesService(request, response).viewAllStudentsList();
-		return "feesCollection";
+        if (httpSession.getAttribute("userSubType").toString().equalsIgnoreCase("city")) {
+			return "feesCollection";
+		} else if (httpSession.getAttribute("userSubType").toString().equalsIgnoreCase("metro")) {
+			return "feesCollectionCity";
+		} else {
+			return "feesCollection";
+		}
 	}
 
 	@GetMapping("/feesCollectAllBranches")

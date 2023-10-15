@@ -220,6 +220,7 @@ public class FeesCollectionService {
 		String[] feescategoryname = request.getParameterValues("feescategoryname");
 		String[] maqamiPaying = request.getParameterValues("maqamiamount");
 		String[] halqaPaying = request.getParameterValues("halqaamount");
+		String[] cityPaying = request.getParameterValues("cityamount");
 		//Get Payment Details
 		String paymentMethod = request.getParameter("paymentmethod");
 		String ackNo = request.getParameter("ackno");
@@ -344,6 +345,36 @@ public class FeesCollectionService {
 						
 						String updateCrAccountHalqa="update Accountdetailsbalance set currentbalance=currentbalance+"+halqaShare+" where accountdetailsid="+crFeesHalqa;
 						updateCrAccountList.add(updateCrAccountHalqa);
+						
+						//City
+						
+					    if(cityPaying != null) {
+					    	
+							Long cityShare = DataUtil.parseLong(cityPaying[Integer.parseInt(studentSfsIdamount[1])]);
+							int crFeesCity = getLedgerAccountId("city"+feescategoryname[DataUtil.parseInt(studentSfsIdamount[1])]+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+							
+							VoucherEntrytransactions transactionsCity = new VoucherEntrytransactions();
+							
+							transactionsCity.setDraccountid(drAccount);
+							transactionsCity.setCraccountid(crFeesCity);
+							transactionsCity.setDramount(new BigDecimal(cityShare));
+							transactionsCity.setCramount(new BigDecimal(cityShare));
+							transactionsCity.setVouchertype(1);
+							transactionsCity.setTransactiondate(receiptInfo.getDate());
+							transactionsCity.setEntrydate(DateUtil.todaysDate());
+							transactionsCity.setNarration(Receiptnarration+" Details: Towards Collection:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
+							transactionsCity.setCancelvoucher("no");
+							transactionsCity.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
+							transactionsCity.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+							transactionsCity.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+							transactionsList.add(transactionsCity);			
+							
+							String updateDrAccountCity ="update Accountdetailsbalance set currentbalance=currentbalance+"+cityShare+" where accountdetailsid="+drAccount;
+							updateDrAccountList.add(updateDrAccountCity);
+							
+							String updateCrAccountCity="update Accountdetailsbalance set currentbalance=currentbalance+"+cityShare+" where accountdetailsid="+crFeesCity;
+							updateCrAccountList.add(updateCrAccountCity);
+					    }
 				}
 				/* createFeesCollection = new feesCollectionDAO().create(feescollection); */
 				
