@@ -1,5 +1,8 @@
 package org.ideoholic.curium.model.documents.dao;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.util.Session;
@@ -62,5 +65,10 @@ public class DocumentDAO {
 		}
 		return tc;
 	}
+	//code to convert date into word
 	
-}
+
+		public String generatedate(Date dateofbirth) {
+			// TODO Auto-generated method stub
+		       
+		}}

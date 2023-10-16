@@ -414,4 +414,8 @@ public class JspController {
 	public String getWelcomeparent() {
 		return "welcomeparent";
 	}
+	@GetMapping("/mptransferCertificate")
+	public String getMptransfercertificate() {
+		return "mptransferCertificate";
+	}
 }

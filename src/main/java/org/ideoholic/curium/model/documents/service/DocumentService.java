@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.documents.service;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -74,16 +75,22 @@ public class DocumentService {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	public String generateTransferCertificate() {
 		Student student = new Student();
 		Parents parents = new Parents();
 		Transfercertificate tc = new Transfercertificate();
 		String transferCertificateString = null;
+		LocalDate date = LocalDate.now();
+		String medium="English";
+		String dist="Ratlam";
 		
+		request.setAttribute("currentacadmicyear", httpSession.getAttribute("currentAcademicYear"));
 		int studentId = DataUtil.parseInt(request.getParameter("studentId"));
 		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
 		Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
-		
+		request.setAttribute("dist", dist);
+		request.setAttribute("medium", medium);
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
 		 boolean updateStudent = new studentDetailsDAO().updateStudent(student);
@@ -107,9 +114,102 @@ public class DocumentService {
 			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			 request.setAttribute("studentdetails", parents);
 			 request.setAttribute("tcdetails", tc);
+			 String adhar=parents.getStudent().getDisabilitychild();
+			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+			 char[] arr=adhar.toCharArray();
+			 request.setAttribute("arr", arr);
+			 request.setAttribute("dateinword", dateinword);
 			 return "true";
 		 }
 		 return "false";
+	}
+
+
+	private String generateDate(Date dateofbirth) {
+		// TODO Auto-generated method stub
+		
+		String dateOfBirth = DateUtil.dateParseryyyymmdd(dateofbirth);
+		String[] dob = dateOfBirth.split("-");
+		String dayInWords = formatDayInWords(Integer.parseInt(dob[2]));
+	        String monthInWords = formatMonthInWords(Integer.parseInt(dob[1]));
+	        String yearInWords = formatYearInWords(Integer.parseInt(dob[0]));
+	        
+	        return dayInWords+" "+monthInWords+" "+yearInWords;
+
+	    }
+
+
+	    public static String formatDayInWords(int day) {
+	        String[] dayNames = {
+	            "", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth",
+	            "Tenth", "Eleventh", "Twelfth", "Thirteenth", "Fourteenth", "Fifteenth", "Sixteenth",
+	            "Seventeenth", "Eighteenth", "Nineteenth", "Twentieth", "Twenty-First", "Twenty-Second",
+	            "Twenty-Third", "Twenty-Fourth", "Twenty-Fifth", "Twenty-Sixth", "Twenty-Seventh",
+	            "Twenty-Eighth", "Twenty-Ninth", "Thirtieth", "Thirty-First"
+	        };
+
+	        if (day >= 1 && day <= 31) {
+	            return dayNames[day];
+	        } else {
+	            return "Invalid day";
+	        }
+	    }
+
+	    public static String formatMonthInWords(int month) {
+	        String[] monthNames = {
+	            "", "January", "February", "March", "April", "May", "June", "July", "August", "September",
+	            "October", "November", "December"
+	        };
+
+	        if (month >= 1 && month <= 12) {
+	            return monthNames[month];
+	        } else {
+	            return "Invalid month";
+	        }
+	    }
+
+	    public static String formatYearInWords(int year) {
+	        if (year >= 1900 && year <= 2099) {
+	            String[] units = {
+	                "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"
+	            };
+	            String[] teens = {
+	                "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"
+	            };
+	            String[] tens = {
+	                "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+	            };
+
+	            int thousandsDigit = (year / 1000) % 10;
+	            int hundredsDigit = (year / 100) % 10;
+	            int tensDigit = (year / 10) % 10;
+	            int onesDigit = year % 10;
+
+	            String yearInWords = "";
+
+	            if (thousandsDigit > 0) {
+	                yearInWords += units[thousandsDigit] + " Thousand ";
+	            }
+
+	            if (hundredsDigit > 0) {
+	                yearInWords += units[hundredsDigit] + " Hundred ";
+	            }
+
+	            if (tensDigit > 1) {
+	                yearInWords += tens[tensDigit];
+	                if (onesDigit > 0) {
+	                    yearInWords += "-" + units[onesDigit];
+	                }
+	            } else if (tensDigit == 1) {
+	                yearInWords += teens[onesDigit];
+	            } else if (onesDigit > 0) {
+	                yearInWords += units[onesDigit];
+	            }
+
+	            return yearInWords.trim();
+	        } else {
+	            return "Invalid year";
+	        }
 	}
 
 
@@ -601,6 +701,55 @@ public class DocumentService {
 		request.setAttribute("searchStudentList", searchStudentList);
 
 	
+	}
+
+
+	public boolean mptransferCertificate() {
+		if(httpSession.getAttribute(BRANCHID)!=null){
+			try {
+				List<Parents> list = new studentDetailsDAO().getStudentsList("from Parents where branchid = "+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				request.setAttribute("studentListtc", list);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return false;
+	}
+
+
+	public boolean mpTransferCertificatePrint() {
+		Parents parents = new Parents();
+		Transfercertificate tc = new Transfercertificate();
+		
+		int studentId = DataUtil.parseInt(request.getParameter("id"));
+		String medium="English";
+		String dist="Ratlam";
+		
+		request.setAttribute("currentacadmicyear", request.getAttribute("currentAcademicYear"));
+		 
+			tc = new DocumentDAO().getTransferCertificateDetails(studentId);
+		 
+			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
+			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			 String adhar=parents.getStudent().getDisabilitychild();
+			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+			 char[] arr=adhar.toCharArray();
+			 request.setAttribute("currentacadmicyear", httpSession.getAttribute("currentAcademicYear"));
+
+			 request.setAttribute("arr", arr);
+			 request.setAttribute("dateinword", dateinword);
+			 request.setAttribute("studentdetails", parents);
+			 request.setAttribute("tcdetails", tc);
+			 request.setAttribute("medium", medium);
+			 request.setAttribute("dist", dist);
+			 
+			 if(tc.getTcid() != null){
+				 return true;
+			 }else{
+				 return false;
+			 }
 	}
 
 	

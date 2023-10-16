@@ -96,6 +96,15 @@ public class DocumentAction {
 		}
         return error;
 	}
+	//mprint transfercertificate
+	@GetMapping("/mpTransferCertificatePrint")
+	public String mpTransferCertificatePrint() {
+		
+		if(new DocumentService(request, response).mpTransferCertificatePrint()){
+			return "mpTransferCertificatePrint";
+		}
+        return error;
+	}
 
 	@PostMapping("/generateTransferCertificate")
 	public String generateTransferCertificate() {
@@ -105,7 +114,7 @@ public class DocumentAction {
 		if("true".equalsIgnoreCase(result)){
 			return "transfercertificatepreview";
 		}else if("studentexists".equalsIgnoreCase(result)){
-        return "transfercertificatefail";
+        return "transfercertificatepreview";
 		}
 		return error;
 	}
@@ -114,6 +123,14 @@ public class DocumentAction {
 	public String transferCertificate() {
 		if(new DocumentService(request, response).transferCertificate()){
 			return "transfercertificate";
+		}
+        return error;
+	}
+	//mptransferCertificate
+	@GetMapping("/mptransferCertificate")
+	public String mptransferCertificate() {
+		if(new DocumentService(request, response).mptransferCertificate()){
+			return "mptransferCertificate";
 		}
         return error;
 	}

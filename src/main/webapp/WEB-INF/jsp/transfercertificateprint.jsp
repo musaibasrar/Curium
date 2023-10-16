@@ -299,7 +299,7 @@ span{
 			<tr>
 			<td>
 			<br>
-			<br><br><br></td>
+			<br><br></td>
 			</tr>
 			<tr>
 			<td></td>

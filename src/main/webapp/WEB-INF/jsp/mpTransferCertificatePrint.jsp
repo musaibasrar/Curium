@@ -150,8 +150,8 @@ span{
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
              margin-bottom: 0cm;
              margin-top: 0cm;
         }
@@ -167,7 +167,7 @@ span{
             }
         }
         .input{
-        width:15px;
+        width:10px;
         text-align:center;
         }
     </style>
@@ -210,7 +210,7 @@ for(Cookie cookie : cookies){
 				THE BRAINY STARS ACADEMY </td>
 			</tr>
 			<tr>
-			<td class="addressLine"><u>A UNIT OF TAMIRE MILLAT EDUCATIONAL SOCIETY RATLAM</u></td>
+			<td class="addressLine"><u>A UNIT OF TAMIRE MILLAT EDUCATIONAL SOCITY RATLAM</u></td>
 			</tr>
 			<tr>
 			<td class="addressLine"><u>SECTOR NO. ARIHANT PARISAR RATLAM MP 457001</u></td>
@@ -247,7 +247,7 @@ for(Cookie cookie : cookies){
 			</tr>
 			<tr>
 			<td></td>
-			<td></td>
+			
 			<td >
 			Date:&nbsp;&nbsp;<input
 									name="dateoftc" type="text" class="textField" style="border: none;border-color: transparent;"
@@ -486,7 +486,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td>
 			<br>
-			<br><br><br></td>
+			<br></td>
 			</tr>
 			<tr>
 			<td></td>
@@ -503,7 +503,7 @@ for(Cookie cookie : cookies){
 			</tr>
 			
 			<tr>
-                        <td align="center"><a id="print" href="/roshan/DocumentsProcess/mpTransferCertificatePrint?id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>
+                     <!--    <td align="center"><a id="print" href="/roshan/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>-->
                     </tr>
 		</TABLE>
 		
