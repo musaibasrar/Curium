@@ -823,9 +823,14 @@ public class AccountService {
 		
 		for (VoucherEntrytransactions voucherTransaction : voucherTransactions) {
 			
-			if(voucherTransaction.getDraccountid() == accountDetails.getAccountdetailsid()) {
+			int accountId = accountDetails.getAccountdetailsid();
+			
+			int drAccountid = voucherTransaction.getDraccountid();
+			int crAccountid = voucherTransaction.getCraccountid();
+			
+			if(drAccountid == accountId) {
 				debitAcc = debitAcc.add(voucherTransaction.getDramount());
-			}else if(voucherTransaction.getCraccountid() == accountDetails.getAccountdetailsid()) {
+			}else if(crAccountid == accountId) {
 				creditAcc = creditAcc.add(voucherTransaction.getCramount());
 			}
 		}

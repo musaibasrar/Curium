@@ -833,8 +833,8 @@
             	
             	if(payment>=1){
             		duePayment.value = payment;
-            		document.getElementById("muqami_"+res[1]).value = payment/2;
-            		document.getElementById("halqa_"+res[1]).value = (payment*35)/100;
+            		document.getElementById("muqami_"+res[1]).value = (payment*35)/100;
+            		document.getElementById("halqa_"+res[1]).value = payment/2;
             		document.getElementById("city_"+res[1]).value = (payment*15)/100;
             	}else if(payment<1 || isNaN(payment)){
             		duePayment.value = 0;
@@ -861,11 +861,11 @@
 
        	document.getElementById(sfsid).checked = true; 
        	
-       	if(totalDividedValue>amountPaying){
+       	if(totalDividedValue>amountPaying || totalDividedValue<amountPaying){
        		document.getElementById(sfsid).checked = false; 
        		alert('Halqa share, Maqami Share & City Share Should be equal to Total Paying Amount');
-       		document.getElementById("muqami_"+res[1]).value = amountPaying/2;
-       		document.getElementById("halqa_"+res[1]).value = (payment*35)/100;
+       		document.getElementById("muqami_"+res[1]).value = (payment*35)/100;
+       		document.getElementById("halqa_"+res[1]).value = amountPaying/2;
     		document.getElementById("city_"+res[1]).value = (payment*15)/100;
        	}
        	
