@@ -212,7 +212,7 @@ public class FeesCollectionService {
 		Receiptinfo receiptInfo =new Receiptinfo();
 		boolean createFeesCollection = false;
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
-		
+			
 		String sid = request.getParameter("studentIdDetails");
 		String[] amountPaying = request.getParameterValues("amountpaying");
 		String[] fine = request.getParameterValues("fine");
@@ -234,6 +234,7 @@ public class FeesCollectionService {
 		String paymentType = "Cash";
 		String Receiptnarration = request.getParameter("narrationreceipt");
 		String bookReceiptNo = request.getParameter("bookreceiptno");
+		String grandTotalAmount = request.getParameter("grandTotalAmount");
 		
 			if("banktransfer".equalsIgnoreCase(paymentMethod)) {
 				ackNoVoucherNarration = " acknowledgement number: "+ackNo+" , Amount transfer date: "+transferDate;
@@ -254,12 +255,13 @@ public class FeesCollectionService {
 			receiptInfo.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			receiptInfo.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			receiptInfo.setClasssec(request.getParameter("classandsecDetails"));
-			Long grantTotal = 0l;
-			for (int i = 0; i < studentSfsIds.length; i++) {
-				String[] totalAmount = studentSfsIds[i].split("_");
-				grantTotal+=DataUtil.parseLong(amountPaying[Integer.parseInt(totalAmount[1])]);
-			}
-			receiptInfo.setTotalamount(grantTotal);
+			/*
+			 * Long grantTotal = 0l; for (int i = 0; i < studentSfsIds.length; i++) {
+			 * String[] totalAmount = studentSfsIds[i].split("_");
+			 * grantTotal+=DataUtil.parseLong(amountPaying[Integer.parseInt(totalAmount[1])]
+			 * ); }
+			 */
+			receiptInfo.setTotalamount(DataUtil.parseLong(grandTotalAmount));
 			receiptInfo.setPaymenttype(paymentType);
 			receiptInfo.setBookreceiptno(bookReceiptNo);
 			/* new feesCollectionDAO().createReceipt(receiptInfo); */
@@ -280,7 +282,8 @@ public class FeesCollectionService {
 				for (int i = 0; i < studentSfsIds.length; i++) {
 					Feescollection feesCollect = new Feescollection();
 					String[] studentSfsIdamount = studentSfsIds[i].split("_");
-					Long feeCategoryAmount = DataUtil.parseLong(amountPaying[Integer.parseInt(studentSfsIdamount[1])]);
+					String feeAmount = amountPaying[Integer.parseInt(studentSfsIdamount[1])].replace(",", "");
+					Long feeCategoryAmount = DataUtil.parseLong(feeAmount);
 					feesCollect.setSfsid(DataUtil.parseInt(studentSfsIdamount[0]));
 					feesCollect.setAmountpaid(feeCategoryAmount);
 					feesCollect.setSid(DataUtil.parseInt(sid));
@@ -294,7 +297,7 @@ public class FeesCollectionService {
 					
 					//Maqami
 					
-						Long MaqamiShare = DataUtil.parseLong(maqamiPaying[Integer.parseInt(studentSfsIdamount[1])]);
+						double MaqamiShare = DataUtil.parseDouble(maqamiPaying[Integer.parseInt(studentSfsIdamount[1])]);
 						int crFeesMaqami = getLedgerAccountId(feescategoryname[DataUtil.parseInt(studentSfsIdamount[1])]+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						
 						VoucherEntrytransactions transactions = new VoucherEntrytransactions();
@@ -321,7 +324,7 @@ public class FeesCollectionService {
 					
 					//Halqa
 				    
-						Long halqaShare = DataUtil.parseLong(halqaPaying[Integer.parseInt(studentSfsIdamount[1])]);
+						double halqaShare = DataUtil.parseDouble(halqaPaying[Integer.parseInt(studentSfsIdamount[1])]);
 						int crFeesHalqa = getLedgerAccountId("halqa"+feescategoryname[DataUtil.parseInt(studentSfsIdamount[1])]+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						
 						VoucherEntrytransactions transactionsHalqa = new VoucherEntrytransactions();
@@ -350,7 +353,7 @@ public class FeesCollectionService {
 						
 					    if(cityPaying != null) {
 					    	
-							Long cityShare = DataUtil.parseLong(cityPaying[Integer.parseInt(studentSfsIdamount[1])]);
+							double cityShare = DataUtil.parseDouble(cityPaying[Integer.parseInt(studentSfsIdamount[1])]);
 							int crFeesCity = getLedgerAccountId("city"+feescategoryname[DataUtil.parseInt(studentSfsIdamount[1])]+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 							
 							VoucherEntrytransactions transactionsCity = new VoucherEntrytransactions();

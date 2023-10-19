@@ -12,7 +12,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-<title>DUPLICATE FEES RECEIPT</title>
+<title>DUPLICATE RECEIPT</title>
 <head>
 <style type="text/css">
 .dataText {
@@ -179,12 +179,12 @@
 			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/presidency/images/presidency.jpg" width="80" height="80"/></td>
+				<td><img src="/jihtel/images/jihtel.jpg" width="80" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label><br>
-				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label><br>
+				<label class="addressLine">Duplicate Receipt</label><br>
 				</td>
 			</tr>
 		</table>
@@ -210,16 +210,14 @@
 				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
 				</td>
 				
-
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
+						value="${recieptdate}" /> 
+				</td>
 				
 
 				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
 						value="${recieptinfo.branchreceiptnumber}" /> 
 				</td>
-				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
-				</td>
-
 			</tr>
 			<tr>
 			<td></td>
@@ -265,7 +263,7 @@
 			<tr>
 
 				<td class="headerText">Particulars</td>
-				<td class="headerText">Fees Amount</td>
+				<td class="headerText">Amount</td>
 				
 
 			</tr>
@@ -288,23 +286,6 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-			<c:if test="${recieptinfo.fine > 0}">
-				<tr>
-					<td class="dataText"><c:out
-							value="Fine" /></td>
-					<td class="dataText">Rs. <c:out
-							value="${recieptinfo.fine}" /></td>
-				</tr>
-			</c:if>
-				
-			<c:if test="${recieptinfo.misc > 0}">	
-				<tr>
-					<td class="dataText"><c:out
-							value="Misc" /></td>
-					<td class="dataText">Rs. <c:out
-							value="${recieptinfo.misc}" /></td>
-				</tr>
-			</c:if>
 			</table>
 			
 			
@@ -334,7 +315,7 @@
 			<td><hr width="100%"></td>
 			</tr>
 
-			<tr>
+			<%-- <tr>
 				<td class="headerText">
 					Total Fees: Rs. ${totalfees}
 				</td>
@@ -351,7 +332,7 @@
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
-			</tr>
+			</tr> --%>
 			</table>
 			
 			<TABLE width="100%" border="0">
@@ -359,15 +340,14 @@
 		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></label></td>
 		</tr>
 
-		<tr style="font-size: 10px;">
+		<!-- <tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
-		</tr>
+		</tr> -->
 		</table>
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/presidency/images/presidencypaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
@@ -377,12 +357,12 @@
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/presidency/images/presidency.jpg" width="80" height="80"/></td>
+				<td><img src="/jihtel/images/jihtel.jpg" width="80" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label><br>
-				<label class="addressLine" style="padding-left: 155px;">Duplicate Receipt</label><br>
+				<label class="addressLine">Duplicate Receipt</label><br>
 				</td>
 			</tr>
 		</table>
@@ -401,23 +381,21 @@
 			</tr>
 			<tr >
 			
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
+				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">
 					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
 			
 				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
 				</td>
 				
-
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
+						value="${recieptdate}" /> 
+				</td>
 				
 
 				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
 						value="${recieptinfo.branchreceiptnumber}" /> 
 				</td>
-				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
-				</td>
-
 			</tr>
 			<tr>
 			<td></td>
@@ -463,7 +441,7 @@
 			<tr>
 
 				<td class="headerText">Particulars</td>
-				<td class="headerText">Fees Amount</td>
+				<td class="headerText">Amount</td>
 				
 
 			</tr>
@@ -486,24 +464,6 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-			
-			<c:if test="${recieptinfo.fine > 0}">
-				<tr>
-					<td class="dataText"><c:out
-							value="Fine" /></td>
-					<td class="dataText">Rs. <c:out
-							value="${recieptinfo.fine}" /></td>
-				</tr>
-			</c:if>
-				
-			<c:if test="${recieptinfo.misc > 0}">	
-				<tr>
-					<td class="dataText"><c:out
-							value="Misc" /></td>
-					<td class="dataText">Rs. <c:out
-							value="${recieptinfo.misc}" /></td>
-				</tr>
-			</c:if>
 			
 			</table>
 			
@@ -534,7 +494,7 @@
 			<td><hr width="100%"></td>
 			</tr>
 
-			<tr>
+			<%-- <tr>
 				<td class="headerText">
 					Total Fees: Rs. ${totalfees}
 				</td>
@@ -551,7 +511,7 @@
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
-			</tr>
+			</tr> --%>
 			</table>
 			
 			<TABLE width="100%" border="0">
@@ -559,15 +519,14 @@
 		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></label></td>
 		</tr>
 
-		<tr style="font-size: 10px;">
+		<!-- <tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
-		</tr>
+		</tr> -->
 		</table>
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
-		<td><img src="/presidency/images/presidencypaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
