@@ -335,9 +335,10 @@
                    
                     var sum = 0.0;
                     var totalSum=0.0;
-                    var amountp = $('.amountpaying');
+                	var amountp = $('.amountpaying');
                     jQuery.each(amountp,function(){
-                        sum += parseFloat($(this).val());
+                    	var dueAmount = $(this).val().replace(/,/g, '');
+                        sum += parseFloat(dueAmount);
                     });
                     var finep = $('.fine');
                     jQuery.each(finep,function(){
@@ -827,8 +828,8 @@
             	
             	var str = duePayment.id;
             	var res = str.split("_");
-            	//var dueAmount = parseInt(document.getElementById("dueamount_"+res[1]).value);
-            	var payment = parseInt(duePayment.value,10);
+            	var dueAmount = duePayment.value.replace(/,/g, '');
+            	var payment = parseInt(dueAmount,10);
             	document.getElementById(sfsid).checked = true; 
             	
             	if(payment>=1){
@@ -838,11 +839,21 @@
             		document.getElementById("city_"+res[1]).value = (payment*15)/100;
             	}else if(payment<1 || isNaN(payment)){
             		duePayment.value = 0;
-            		ocument.getElementById("muqami_"+res[1]).value = 0;
+            		document.getElementById("muqami_"+res[1]).value = 0;
             		document.getElementById("halqa_"+res[1]).value = 0;
             		document.getElementById("city_"+res[1]).value = 0;
             		document.getElementById(sfsid).checked = false; 
             	}
+            	
+             	var x=duePayment.value;
+        	 	x = x.replace (/,/g, "");
+        	 	
+        	 	var lastThree = x.substring(x.length-3);
+        	 	var otherNumbers = x.substring(0,x.length-3);
+        	 	if(otherNumbers != '')
+        	 	    lastThree = ',' + lastThree;
+        	 	var result = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+        	 	document.getElementById("amountpaying_"+res[1]).value = result; 
             	
             	
             }
@@ -856,19 +867,20 @@
        	var muqamiAmount = parseInt(document.getElementById("muqami_"+res[1]).value);
        	var halqaAmount = parseInt(document.getElementById("halqa_"+res[1]).value);
        	var cityAmount = parseInt(document.getElementById("city_"+res[1]).value);
-       	var amountPaying = parseInt(document.getElementById("amountpaying_"+res[1]).value);
+       	var amountPayingString = document.getElementById("amountpaying_"+res[1]).value;
+       	var dueAmount = amountPayingString.replace(/,/g, '');
+    	var amountPaying = parseInt(dueAmount,10);
        	var totalDividedValue = muqamiAmount+cityAmount+halqaAmount;
 
        	document.getElementById(sfsid).checked = true; 
        	
        	if(totalDividedValue>amountPaying || totalDividedValue<amountPaying){
        		document.getElementById(sfsid).checked = false; 
-       		alert('Halqa share, Maqami Share & City Share Should be equal to Total Paying Amount');
-       		document.getElementById("muqami_"+res[1]).value = (payment*35)/100;
-       		document.getElementById("halqa_"+res[1]).value = amountPaying/2;
-    		document.getElementById("city_"+res[1]).value = (payment*15)/100;
+       		alert('WARNING!!!!!!!!!!!!! Halqa share, Maqami Share & City Share Should be equal to Total Paying Amount');
+       		document.getElementById("muqami_"+res[1]).value = muqamiAmount;
+       		document.getElementById("halqa_"+res[1]).value = halqaAmount;
+    		document.getElementById("city_"+res[1]).value = cityAmount;
        	}
-       	
        	
        }
             
@@ -928,6 +940,7 @@
             	
             }
             
+
         </script>
     </head>
     <%
