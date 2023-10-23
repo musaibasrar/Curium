@@ -414,6 +414,11 @@
                  primary: "ui-icon-print"
              }
          });
+         $("#printhalqa").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         });
          
      });
 
@@ -704,6 +709,129 @@ for(Cookie cookie : cookies){
 			</table>
 			
 			
+			  <table width="50%" border="0" style="border-color: #4b6a84;float: left;">
+                    <tr>
+                        <td  class="headerTD">City Share Details</td>
+                    </tr>
+                </table>
+			
+			<table width="50%" border="0" style="border-color: #4b6a84;float: right;">
+                    <tr>
+                        <td  class="headerTD">Halqa Share Details</td>
+                    </tr>
+                </table>
+                
+			<table width="50%" border="1" class="incomeexpense" style="border-color: #4b6a84;float: left;margin-bottom:0px;">
+			
+				<tbody>
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">City Previous Dues</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">
+								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${citysharepreviousdue}" />
+							</td>
+						</tr>
+					
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">Income Of the Month</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">
+								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalpayablecityduration}" />
+							</td>
+
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">Total Due</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">
+							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${citytotaldue}" /></td>
+
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">Paid City Share</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">
+							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalcitysharepaid}" /></td>
+
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">Payable to City</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">
+							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${citytotalpayable}" /></td>
+
+						</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td class="footerTD" colspan="3">
+							<a id="print" href="/jihtel/AccountProcess/rpStatementPrint?fromdate=<c:out value="${fromdate}" />&todate=<c:out value="${todate}"/>">Print</a>
+							</td>
+							
+
+					</tr>
+				</tfoot>
+			</table>
+			
+			
+			<table width="50%" border="1" class="incomeexpense" style="border-color: #4b6a84;float: right;margin-bottom:0px;">
+			
+				<tbody>
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">Halqa Previous Dues</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">
+								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${halqasharepreviousdue}" />
+							</td>
+						</tr>
+					
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">Income Of the Month</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">
+								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalpayablehalqaduration}" />
+							</td>
+
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">Total Due</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">
+							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${halqatotaldue}" /></td>
+
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">Paid Halqa Share</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">
+							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalhalqasharepaid}" /></td>
+
+						</tr>
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataTextInActive" style="text-align: left;width:60%">Payable to Halqa</td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;">
+							<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${halqatotalpayable}" /></td>
+
+						</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td class="footerTD" colspan="3">
+							<a id="printhalqa" href="/jihtel/AccountProcess/rpStatementPrint?fromdate=<c:out value="${fromdate}" />&todate=<c:out value="${todate}"/>">Print</a>
+							</td>
+							
+
+					</tr>
+				</tfoot>
+			</table>
+			
 			<table width="50%" style="border-color: #4b6a84;float: left;">
 
 				<tbody>
@@ -738,64 +866,6 @@ for(Cookie cookie : cookies){
 						
 						
 				</tbody>
-			</table>
-			
-                 <table width="50%" border="0" style="border-color: #4b6a84;float: left;">
-                    <tr>
-                        <td  class="headerTD">Halqa Share Details</td>
-                    </tr>
-                </table>
-			
-			<table width="50%" border="1" class="incomeexpense" style="border-color: #4b6a84;float: left;margin-bottom:0px;">
-			
-				<tbody>
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1" >
-							<td class="dataTextInActive" style="text-align: left;width:60%">Halqa Previous Dues</td>
-							<td class="dataTextInActive" style="text-align: right;height: 20px;">
-								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${halqasharepreviousdue}" />
-							</td>
-						</tr>
-					
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1" >
-							<td class="dataTextInActive" style="text-align: left;width:60%">Income Of the Month</td>
-							<td class="dataTextInActive" style="text-align: right;height: 20px;">
-								<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${totalpayablehalqaduration}" />
-							</td>
-
-						</tr>
-						
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1" >
-							<td class="dataTextInActive" style="text-align: left;width:60%">Total Due</td>
-							<td class="dataTextInActive" style="text-align: right;height: 20px;">${halqatotaldue}</td>
-
-						</tr>
-						
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1" >
-							<td class="dataTextInActive" style="text-align: left;width:60%">Paid Halqa Share</td>
-							<td class="dataTextInActive" style="text-align: right;height: 20px;">${totalhalqasharepaid}</td>
-
-						</tr>
-						
-						<tr class="trClass" style="border-color: #000000" border="1"
-							cellpadding="1" cellspacing="1" >
-							<td class="dataTextInActive" style="text-align: left;width:60%">Payable to Halqa</td>
-							<td class="dataTextInActive" style="text-align: right;height: 20px;">${halqatotalpayable}</td>
-
-						</tr>
-				</tbody>
-				<tfoot>
-					<tr>
-						<td class="footerTD" colspan="3">
-							<a id="print" href="/jihtel/AccountProcess/rpStatementPrint?fromdate=<c:out value="${fromdate}" />&todate=<c:out value="${todate}"/>">Print</a>
-							</td>
-							
-
-					</tr>
-				</tfoot>
 			</table>
 			
 		</div>

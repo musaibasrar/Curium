@@ -365,6 +365,7 @@ public class AccountService {
 		String drAmount = DataUtil.emptyString(request.getParameter("dramount"));
 		String crAmount = DataUtil.emptyString(request.getParameter("cramountsecond"));
 		String receiptDate = DataUtil.emptyString(request.getParameter("dateofreceipt"));
+		String receiptVoucherNo = DataUtil.emptyString(request.getParameter("receiptvoucherno"));
 		String receiptNarration = DataUtil.emptyString(request.getParameter("receiptnarration"));
 		
 		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
@@ -376,6 +377,7 @@ public class AccountService {
 		transactions.setVouchertype(Integer.parseInt(receiptVoucher));
 		transactions.setTransactiondate(DateUtil.indiandateParser(receiptDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
+		transactions.setVoucherno(receiptVoucherNo);
 		transactions.setNarration(receiptNarration);
 		transactions.setCancelvoucher("no");
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
@@ -401,6 +403,7 @@ public class AccountService {
 		String drAmountPayment = DataUtil.emptyString(request.getParameter("dramountpayment"));
 		String crAmountPayment = DataUtil.emptyString(request.getParameter("cramountpaymentsecond"));
 		String paymentDate = DataUtil.emptyString(request.getParameter("dateofpayment"));
+		String paymentVoucherNo = DataUtil.emptyString(request.getParameter("paymentvoucherno"));
 		String paymentNarration = DataUtil.emptyString(request.getParameter("paymentnarration"));
 		String paymentNarrationCategory = DataUtil.emptyString(request.getParameter("paymentnarrationcategory"));
 		
@@ -412,6 +415,7 @@ public class AccountService {
 		transactions.setCramount(new BigDecimal(crAmountPayment));
 		transactions.setVouchertype(Integer.parseInt(paymentVoucher));
 		transactions.setTransactiondate(DateUtil.indiandateParser(paymentDate));
+		transactions.setVoucherno(paymentVoucherNo);
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration(paymentNarrationCategory+":"+paymentNarration);
 		transactions.setCancelvoucher("no");
@@ -437,6 +441,7 @@ public class AccountService {
 		String drAmountContra = DataUtil.emptyString(request.getParameter("dramountcontra"));
 		String crAmountContra = DataUtil.emptyString(request.getParameter("cramountcontrasecond"));
 		String contraDate = DataUtil.emptyString(request.getParameter("dateofcontra"));
+		String contraVoucherNo = DataUtil.emptyString(request.getParameter("contravoucherno"));
 		String contraNarration = DataUtil.emptyString(request.getParameter("contranarration"));
 		
 		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
@@ -448,6 +453,7 @@ public class AccountService {
 		transactions.setVouchertype(Integer.parseInt(contraVoucher));
 		transactions.setTransactiondate(DateUtil.indiandateParser(contraDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
+		transactions.setVoucherno(contraVoucherNo);
 		transactions.setNarration(contraNarration);
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -472,6 +478,7 @@ public class AccountService {
 		String drAmountJournal = DataUtil.emptyString(request.getParameter("dramountjournal"));
 		String crAmountJournal = DataUtil.emptyString(request.getParameter("cramountjournalsecond"));
 		String journalDate = DataUtil.emptyString(request.getParameter("dateofjournal"));
+		String journalVoucherNo = DataUtil.emptyString(request.getParameter("journalvoucherno"));
 		String journalNarration = DataUtil.emptyString(request.getParameter("journalnarration"));
 		
 		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
@@ -483,6 +490,7 @@ public class AccountService {
 		transactions.setVouchertype(Integer.parseInt(journalVoucher));
 		transactions.setTransactiondate(DateUtil.indiandateParser(journalDate));
 		transactions.setEntrydate(DateUtil.todaysDate());
+		transactions.setVoucherno(journalVoucherNo);
 		transactions.setNarration(journalNarration);
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
@@ -1632,6 +1640,122 @@ public boolean getRPStatement() {
 	request.setAttribute("halqatotaldue", halqaSharePreviousDue.add(totalPayableHalqaDuration));
 	//request.setAttribute("halqatotaldue", halqaShareDue);
 	//End Calculating Previous Halqa Share
+	
+	request.setAttribute("totalpayablehalqaduration", totalPayableHalqaDuration);
+	request.setAttribute("totalhalqasharepaid", totalHalqaSharePaidCash.add(totalHalqaSharePaidBank));
+	request.setAttribute("halqatotalpayable", halqaSharePreviousDue.add(totalPayableHalqaDuration).subtract(totalHalqaSharePaidCash.add(totalHalqaSharePaidBank)));
+	
+	//****************************************************************************** CITY ****************************************************
+	
+	
+	//Calculate City total income
+	
+	String citySharePaid = getLedgerAccountId("citysharepaid"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+	BigDecimal totalPayableCityDuration = BigDecimal.ZERO;
+	String[] citySharePaidstrArray = citySharePaid.split(":");
+	List<Integer> citySharePaidList = new ArrayList<>();
+	for (String s : citySharePaidstrArray) {
+		citySharePaidList.add(Integer.parseInt(s));
+    }
+    
+	List<Accountdetails> accountsDetailsCitySharePaidAccount = new ArrayList<Accountdetails>();
+	accountsDetailsCitySharePaidAccount = new AccountDAO().getAccountdetailsMultiple(citySharePaidList,branchId);
+	
+	for (Accountdetails accountDetails : accountsDetailsCitySharePaidAccount) {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		if(!voucherTransactions.isEmpty()) {
+		
+			BigDecimal totalAmount = getTotalBalanceCredit(accountDetails,voucherTransactions);
+			totalAmount = totalAmount.abs();
+			totalPayableCityDuration = totalPayableCityDuration.add(totalAmount);
+			}
+		}
+	 
+		//End Calculating total income
+		
+		//Calculate City paid share
+		
+		Map<Accountdetails,BigDecimal> mapCitySharePaidAccount = new HashMap<Accountdetails, BigDecimal>();
+		BigDecimal totalCitySharePaidCash = BigDecimal.ZERO;
+		BigDecimal totalCitySharePaidBank = BigDecimal.ZERO;
+		
+		for (Accountdetails accountDetails : accountsDetailsCitySharePaidAccount) {
+			
+			List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			
+			if(!voucherTransactions.isEmpty()) {
+			
+				BigDecimal[] totalAmount = getTotalBalanceCashBankDebit(accountDetails,voucherTransactions,cashLedgerid,bankLedgerid);
+				totalAmount[0] = totalAmount[0].abs();
+				totalAmount[1] = totalAmount[1].abs();
+				totalCitySharePaidCash = totalCitySharePaidCash.add(totalAmount[0]);
+				totalCitySharePaidBank = totalCitySharePaidBank.add(totalAmount[1]);
+				accountDetails.setAccountname(accountDetails.getAccountname().replace("Payable", "Share Paid").trim());
+				mapCitySharePaidAccount.put(accountDetails, totalAmount[0].add(totalAmount[1]));
+				
+				}
+			}
+		 request.setAttribute("mapcitysharepaidaccount", mapCitySharePaidAccount);
+		 
+		//End Calculating City paid share
+		
+		//Caluclate City Previous Dues
+		List<Accountdetailsbalance> accountDetailsBalanceListCityPreviousShare = new AccountDAO().getAccountBalanceDetails(citySharePaidList, branchId);
+		BigDecimal cityShareDue = BigDecimal.ZERO;
+		BigDecimal totalCitySharePaidOBCash = BigDecimal.ZERO;
+		BigDecimal totalCitySharePaidOBBank = BigDecimal.ZERO;
+		BigDecimal totalPayableCityTillToday = BigDecimal.ZERO;
+		BigDecimal totalPayableCityTillTodayCash = BigDecimal.ZERO;
+		BigDecimal totalPayableCityTillTodayBank = BigDecimal.ZERO;
+		
+		for (Accountdetails accountDetails : accountsDetailsCitySharePaidAccount) {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, todaysDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		if(!voucherTransactions.isEmpty()) {
+		
+			BigDecimal[] totalAmount = getTotalBalanceCashBankDebit(accountDetails,voucherTransactions,cashLedgerid,bankLedgerid);
+			totalAmount[0] = totalAmount[0].abs();
+			totalAmount[1] = totalAmount[1].abs();
+			totalCitySharePaidOBCash = totalCitySharePaidOBCash.add(totalAmount[0]);
+			totalCitySharePaidOBBank = totalCitySharePaidOBBank.add(totalAmount[1]);
+			}
+		}
+		
+		
+		for (Accountdetails accountDetails : accountsDetailsCitySharePaidAccount) {
+		
+		List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(fromDate, todaysDate, accountDetails.getAccountdetailsid(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		
+		if(!voucherTransactions.isEmpty()) {
+		
+			BigDecimal[] totalAmount = getTotalBalanceCashBankCredit(accountDetails,voucherTransactions,cashLedgerid,bankLedgerid);
+			totalAmount[0] = totalAmount[0].abs();
+			totalAmount[1] = totalAmount[1].abs();
+			totalPayableCityTillTodayCash = totalPayableCityTillTodayCash.add(totalAmount[0]);
+			totalPayableCityTillTodayBank = totalPayableCityTillTodayBank.add(totalAmount[1]);
+			}
+		}
+		
+		for (Accountdetailsbalance accountdetailsbalance : accountDetailsBalanceListCityPreviousShare) {
+		int accountId = accountdetailsbalance.getAccountDetails().getAccountGroupMaster().getAccountgroupid();
+		
+		if(accountId==2) {
+			cityShareDue = cityShareDue.add(accountdetailsbalance.getCurrentbalance());
+		}
+		
+		}
+		totalPayableCityTillToday = totalPayableCityTillTodayCash.add(totalPayableCityTillTodayBank);
+		BigDecimal citySharePreviousDue = cityShareDue.add(totalCitySharePaidOBCash).add(totalCitySharePaidOBBank);
+		citySharePreviousDue = citySharePreviousDue.subtract(totalPayableCityTillToday);
+		request.setAttribute("citysharepreviousdue", citySharePreviousDue);
+		request.setAttribute("citytotaldue", citySharePreviousDue.add(totalPayableCityDuration));
+		//request.setAttribute("citytotaldue", cityShareDue);
+		//End Calculating Previous City Share
+
+//********************************************************************* CITY **********************************************************************//
 	 
 	// Calculate Opening Balances
 		

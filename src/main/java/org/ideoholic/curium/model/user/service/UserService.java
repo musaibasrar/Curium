@@ -10,9 +10,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.Cookie;
@@ -28,6 +30,7 @@ import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
+import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
@@ -576,12 +579,18 @@ public class UserService {
 			
 	}
 			long sumOfFees = 0l;
+			Parents student = new Parents();
+			Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
+			
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				sumOfFees = sumOfFees + receiptinfo.getTotalamount();
+				student = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.getSid());
+				feesMap.put(student, receiptinfo);
 			}
 			
-			httpSession.setAttribute("searchfeesdetailslist", feesDetailsList);
-			httpSession.setAttribute("sumofdetailsfees", sumOfFees);
+			request.setAttribute("feesdetailslistmap", feesMap);
+			request.setAttribute("searchfeesdetailslist", feesDetailsList);
+			request.setAttribute("sumofdetailsfees", sumOfFees);
 	}
 
 	public boolean addUser(Teacher employee) {

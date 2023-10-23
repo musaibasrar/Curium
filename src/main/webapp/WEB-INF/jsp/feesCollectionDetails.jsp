@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 
 <html>
@@ -666,7 +667,7 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total collection :</label>Rs. ${sumofdetailsfees}</td>
+					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total collection :</label>Rs. <fmt:formatNumber type="currency" pattern="#,##0.00;" value="${sumofdetailsfees}" /></td>
 				</tr> 
 							</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -677,6 +678,7 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input type="checkbox" id="chckHead" /></th>
                             <th title="click to sort" class="headerText">Date</th>
                             <th title="click to sort" class="headerText">Receipt Number</th>
+                            <th title="click to sort" class="headerText">Name</th>
                             <th title="click to sort" class="headerText">Total Amount</th>
                             <th title="click to sort" class="headerText">View Details</th>
                             <th title="click to sort" class="headerText">Cancel Receipt</th>
@@ -686,19 +688,19 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${searchfeesdetailslist}" var="feesdetails">
+                        <c:forEach items="${feesdetailslistmap}" var="feesdetails">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox"
-								id="<c:out value="${feesdetails.receiptnumber}"/>" class="chcktbl"
+								id="<c:out value="${feesdetails.value.receiptnumber}"/>" class="chcktbl"
 								name="feesIDs"
-								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
-                                <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
-                                <td  class="dataText"><c:out value="${feesdetails.bookreceiptno}"/></a></td>
-                                <%-- <td  class="dataText"><c:out value="${feesdetails.branchreceiptnumber}"/></a></td> --%>
-                                <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/jihtel/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/jihtel/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>&receiptid=<c:out value='${feesdetails.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+								value="<c:out value="${feesdetails.value.receiptnumber}"/>" /></td>
+                                <td  class="dataText"><c:out value="${feesdetails.value.date}"/></a></td>
+                                <td  class="dataText"><c:out value="${feesdetails.value.bookreceiptno}"/></a></td>
+                                <td  class="dataText"><c:out value="${feesdetails.key.student.name}"/></a></td>
+                                <td class="dataText" style="text-align:right;"><fmt:formatNumber type="currency" pattern="#,##0.00;" value="${feesdetails.value.totalamount}" /></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/jihtel/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/jihtel/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.value.receiptnumber}'/>&sid=<c:out value='${feesdetails.value.sid}'/>&receiptid=<c:out value='${feesdetails.value.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.value.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
 
                             </tr>
                         </c:forEach>

@@ -971,7 +971,8 @@ for(Cookie cookie : cookies){
 									id="dateofcontra" size="25" 
 									value="<fmt:formatDate type="date" value="" pattern="dd/mm/yy"/>" 
 									required/> </td>
-                        
+                        <td><label style="font-weight: bold;">Voucher No.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                        		<input name="contravoucherno" type="text" class="textField" size="25"/> </td>
                     </tr>
                     <tr>
                     	<td>
