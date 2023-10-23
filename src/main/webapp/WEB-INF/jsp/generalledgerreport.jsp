@@ -581,7 +581,7 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th title="click to sort" class="headerText">Sl.No.</th>
 						<th title="click to sort" class="headerText">Voucher Number</th>
 						<th title="click to sort" class="headerText">Date</th>
 						<th title="click to sort" class="headerText">Account Description&nbsp;</th>
@@ -593,15 +593,12 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 				<fmt:setLocale value="en_IN" scope="session"/>
-					<c:forEach items="${ledgertransactions}" var="ledgertransactions">
+					<c:forEach items="${ledgertransactions}" var="ledgertransactions" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							
-							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${ledgertransactions.key.transactionsid}"/>" class="chcktbl"
-								name="transactionids"
-								value="<c:out value="${ledgertransactions.key.transactionsid}"/>" />
+							<td class="dataText"><c:out value="${status.index+1}" />
 								
 							</td>
 							<td class="dataTextInActive"><c:out value="${ledgertransactions.key.transactionsid}" />
@@ -617,7 +614,7 @@ for(Cookie cookie : cookies){
 								<td class="dataText"></td>
 								<c:set var="crtotal" value="${crtotal + ledgertransactions.key.cramount}" />
 								<td class="dataTextRight">
-									<fmt:formatNumber type="number"  maxFractionDigits = "2" value="${ledgertransactions.key.cramount}" />
+									<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${ledgertransactions.key.cramount}" />
 								</td>
 								
 							</c:if>
@@ -626,19 +623,22 @@ for(Cookie cookie : cookies){
 								
 								<td class="dataTextRight">
 									<c:set var="drtotal" value="${drtotal + ledgertransactions.key.dramount}" />
-									<fmt:formatNumber type="number"  maxFractionDigits = "2"  value="${ledgertransactions.key.dramount}" />
+									<fmt:formatNumber type="currency" pattern="#,##0.00;" value="${ledgertransactions.key.dramount}" />
 								</td>
 								
 								<td class="dataText"></td>
 							</c:if>
 						</tr>
 					</c:forEach>
-					<tr>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
+					
+			</table>
+			
+			
+			<table width="13%" border="0" style="border-color: #4b6a84;float: right;padding-right: 15px;"
+				id="myTable">
+
+				<tbody>
+					<tr align="right">
 						<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
 							<fmt:formatNumber type="currency"  value="${drtotal}" /></b>
@@ -650,12 +650,8 @@ for(Cookie cookie : cookies){
 							</label>
 							</td>
 					</tr>
-					<tr>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
+					<tr align="right">
+					
 							<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
 									Balance</b>
@@ -677,6 +673,9 @@ for(Cookie cookie : cookies){
 							</td>
 					</tr>
 				</tbody>
+			</table>
+			
+			<table width="100%" border="0" style="border-color: #4b6a84;">
 				<tfoot>
 					<tr>
 						<td class="footerTD" colspan="2"><button id="print">Print</button>

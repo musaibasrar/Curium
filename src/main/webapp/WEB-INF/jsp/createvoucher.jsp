@@ -397,6 +397,8 @@
          		               return false;
          		    }
          		    $('#grandTotalAmountDr').val(document.getElementById("dramount").value);
+         		   $('#cramountsecond').val(document.getElementById("cramountsecond").value);
+         		  $('#grandTotalAmountCr').val(document.getElementById("cramountsecond").value);
          		   });
                 
                 $("#dramount").keyup(function (e) {
@@ -595,7 +597,8 @@ for(Cookie cookie : cookies){
 									id="dateofreceipt" size="25" 
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									required/> </td>
-                        
+						<td><label style="font-weight: bold;">Voucher No.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                        		<input name="receiptvoucherno" type="text" class="textField" size="25"/> </td>			
                     </tr>
                     <tr>
                     	<td>
@@ -780,7 +783,8 @@ for(Cookie cookie : cookies){
 									id="dateofpayment" size="25" 
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									required/> </td>
-                        
+                        <td><label style="font-weight: bold;">Voucher No.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                        		<input name="paymentvoucherno" type="text" class="textField" size="25"/> </td>
                     </tr>
                     <tr>
                     	<td>
@@ -979,6 +983,8 @@ for(Cookie cookie : cookies){
 									id="dateofcontra" size="25" 
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									required/> </td>
+									<td><label style="font-weight: bold;">Voucher No.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                        		<input name="contravoucherno" type="text" class="textField" size="25"/> </td>
                         
                     </tr>
                     <tr>
@@ -1164,7 +1170,8 @@ for(Cookie cookie : cookies){
 									id="dateofjournal" size="25" 
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
 									required/> </td>
-                        
+                        <td><label style="font-weight: bold;">Voucher No.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                        		<input name="journalvoucherno" type="text" class="textField" size="25"/> </td>
                     </tr>
                     <tr>
                     	<td>

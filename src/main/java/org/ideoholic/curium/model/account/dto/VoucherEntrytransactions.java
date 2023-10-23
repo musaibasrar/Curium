@@ -35,6 +35,7 @@ public class VoucherEntrytransactions implements java.io.Serializable {
 	private String cancelvoucher;
 	private int branchid;
 	private int userid;
+	private String voucherno;
 	
 	public VoucherEntrytransactions() {
 	}
@@ -42,7 +43,7 @@ public class VoucherEntrytransactions implements java.io.Serializable {
 	public VoucherEntrytransactions(Integer draccountid, Integer craccountid,
 			BigDecimal dramount, BigDecimal cramount, Integer vouchertype,
 			Date transactionDate, String narration, int financialyear, String cancelVoucher,Date entrydate,Date vouchercancellationdate,
-			int branchid, int userid) {
+			int branchid, int userid, String voucherno) {
 		this.draccountid = draccountid;
 		this.craccountid = craccountid;
 		this.dramount = dramount;
@@ -56,6 +57,7 @@ public class VoucherEntrytransactions implements java.io.Serializable {
 		this.vouchercancellationdate = vouchercancellationdate;
 		this.branchid = branchid;
 		this.userid = userid;	
+		this.voucherno = voucherno;
 	}
 
 	@Id
@@ -180,5 +182,13 @@ public class VoucherEntrytransactions implements java.io.Serializable {
 
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+
+	public String getVoucherno() {
+		return voucherno;
+	}
+
+	public void setVoucherno(String voucherno) {
+		this.voucherno = voucherno;
 	}
 }

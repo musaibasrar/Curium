@@ -47,5 +47,8 @@
          <property name="userid" type="int">
  			<column name="userid" />
 		</property>
+		<property name="voucherno" type="string">
+ 			<column name="voucherno" length="200"/>
+		</property>
     </class>
 </hibernate-mapping>
