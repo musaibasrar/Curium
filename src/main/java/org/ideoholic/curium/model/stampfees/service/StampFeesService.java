@@ -201,13 +201,14 @@ public class StampFeesService {
 		String[] feesAmount = request.getParameterValues("fessFullCat");
 		//String[] concession = request.getParameterValues("feesConcession");
 		String[] totalInstallments = request.getParameterValues("feesCount");
+		String[] feesYears = request.getParameterValues("feesYears");
 		
 		List<Integer> ids = new ArrayList();
 		listOfacademicfessstructure.clear();
 		for (String id : studentIds) {
 			academicfessstructure = new Academicfeesstructure();
 			academicfessstructure.setSid(Integer.valueOf(id));
-			academicfessstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			academicfessstructure.setAcademicyear(feesYears[0]);
 			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			academicfessstructure.setTotalfees(feesTotalAmount);
 			grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
@@ -232,7 +233,7 @@ public class StampFeesService {
 			studentfeesstructure.setFeespaid((long) 0);
 			studentfeesstructure.setWaiveoff((long) 0);
 			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[i]));
-			studentfeesstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			studentfeesstructure.setAcademicyear(feesYears[i]);
 			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			studentfeesstructure.setConcession(0);
@@ -333,13 +334,14 @@ public class StampFeesService {
 		String[] feesAmount = request.getParameterValues("fessFullCat");
 		String[] concession = request.getParameterValues("feesConcession");
 		String[] totalInstallments = request.getParameterValues("feesCount");
-
+		String[] feesYears = request.getParameterValues("feesYears");
+		
 		List<Integer> ids = new ArrayList();
 		listOfacademicfessstructure.clear();
 		for (String id : studentIds) {
 			academicfessstructure = new Academicotherfeesstructure();
 			academicfessstructure.setSid(Integer.valueOf(id));
-			academicfessstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			academicfessstructure.setAcademicyear(feesYears[0]);
 			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			academicfessstructure.setTotalfees(feesTotalAmount);
 			grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
@@ -364,7 +366,7 @@ public class StampFeesService {
 			studentfeesstructure.setFeespaid((long) 0);
 			studentfeesstructure.setWaiveoff((long) 0);
 			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[i]));
-			studentfeesstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			studentfeesstructure.setAcademicyear(feesYears[i]);
 			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));
