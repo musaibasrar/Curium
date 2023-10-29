@@ -406,7 +406,18 @@
 		 
 	});
 	
-	
+	 function Upload() {
+	        var fileUpload = document.getElementById("fileToUpload");
+	        if (typeof (fileUpload.files) != "undefined") {
+	            var size = parseFloat(fileUpload.files[0].size / 1024).toFixed(2);
+	            if(size>100){
+	            	alert("File size should not exceed 100KB");
+	            	document.getElementById("fileToUpload").value='';
+	            }
+	        } else {
+	            alert("Unsupported File");
+	        }
+	    }
 
 
 </script>
@@ -1054,7 +1065,7 @@ for(Cookie cookie : cookies){
                    			 </td>
                     
 							<td><br />
-							<input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" >
+							<input type="file" name="fileToUpload" id="fileToUpload" onchange="Upload()" accept="image/*" >
 							</td>
 						</tr>
 						
@@ -1066,7 +1077,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <input type="file" name="fileToUpload" id="studentdoc1" accept="image/*" >
+                    <input type="file" name="fileToUpload" id="studentdoc1" onchange="Upload()" accept="image/*" >
                     </td>
                     </tr>
                     
@@ -1078,7 +1089,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <input type="file" name="fileToUpload" id="studentdoc2" accept="image/*" >
+                    <input type="file" name="fileToUpload" id="studentdoc2" onchange="Upload()" accept="image/*" >
                     </td>
                     
                     </tr>
@@ -1091,7 +1102,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                   <input type="file" name="fileToUpload" id="studentdoc3" accept="image/*" >
+                   <input type="file" name="fileToUpload" id="studentdoc3" onchange="Upload()" accept="image/*" >
                     </td>
                     </tr>
                     
@@ -1103,7 +1114,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <input type="file" name="fileToUpload" id="studentdoc4" accept="image/*" >
+                    <input type="file" name="fileToUpload" id="studentdoc4" onchange="Upload()" accept="image/*" >
                     </td>
                     </tr>
                     
@@ -1115,7 +1126,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <input type="file" name="fileToUpload" id="studentdoc5" accept="image/*" >
+                    <input type="file" name="fileToUpload" id="studentdoc5" onchange="Upload()" accept="image/*" >
                     </td>
                     </tr>
 				</table>
