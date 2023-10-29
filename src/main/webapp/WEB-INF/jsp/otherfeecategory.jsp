@@ -440,7 +440,7 @@ for(Cookie cookie : cookies){
 						cellspacing="0" id="table1" style="display: block">
 						<tr>
 							<td width="10%" class="alignRight">Fees Category &nbsp;</td>
-							<td width="70%"><label> <input id="feescategory"
+							<td width="70%"><label> <input id="feescategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;"
 									name="feescategory" type="text" class="textField" required size="30">
 
 							</label></td>
@@ -459,7 +459,7 @@ for(Cookie cookie : cookies){
 							<td width="8%">
 							 <label> 
 								<select name="fromclass" id="fromclass"
-									style="width: 120px;">
+									style="width: 120px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
@@ -475,7 +475,7 @@ for(Cookie cookie : cookies){
 
 							<label>
 							<select name="toclass" id="toclass"
-									style="width: 120px;">
+									style="width: 120px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 													<c:if test="${(classdetailslist.classdetails != '')}">
@@ -500,9 +500,32 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td width="10%" class="alignRight">Amount &nbsp;</td>
-							<td width="70%"><label> <input name="amount"
+							<td width="70%"><label> <input name="amount" style="width: 210px;border-radius: 4px;background: white;height: 28px;"
 									type="text" class="textField" id="amount" required size="30">
 							</label></td>
+						</tr>
+						
+							<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr></tr>
+						
+						<tr>
+							<td width="10%" class="alignRight">Year &nbsp;</td>
+							<td width="70%"><label> <select name="categoryyearof" id="categoryyearof" 
+									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${currentAcademicYear}</option>
+										<option>2025/26</option>
+										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
+										<option>2021/22</option>
+										<option>2020/21</option>
+										<option>2019/20</option>
+								</select>
+
+							</label> </td>
 						</tr>
 
 					</table>
@@ -539,6 +562,10 @@ for(Cookie cookie : cookies){
 							alt=" " style="position: relative; top: 4px;"
 							src="/jasmine/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
+						<th title="click to sort" class="headerText">Year<img
+							alt=" " style="position: relative; top: 4px;"
+							src="/jasmine/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+						</th>
 
 					</tr>
 				</thead>
@@ -556,7 +583,7 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out value="${fees.feescategoryname}" /></td>
 							<td class="dataText"><c:out value="${fees.particularname}" /></td>
 							<td class="dataText"><c:out value="${fees.amount}" /></td>
-
+							<td class="dataText"><c:out value="${fees.academicyear}" /></td>
 						</tr>
 					</c:forEach>
 
