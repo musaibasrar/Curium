@@ -557,14 +557,26 @@ public class StudentService {
 
 		if(parents!=null){
 			result=true;
-			stampFees(parents.getStudent().getSid());
+			String[] yearofAdmission = parents.getStudent().getYearofadmission().split("/");
+        	String[] currentAcademicYear = httpSession.getAttribute("currentAcademicYear").toString().split("/");
+        	String setYear = null;
+        	int yoa = Integer.parseInt(yearofAdmission[0]);
+        	int ca = Integer.parseInt(currentAcademicYear[0]);
+        	
+        	if(yoa == ca || yoa < ca) {
+        		setYear = httpSession.getAttribute("currentAcademicYear").toString();
+        	}else if (yoa > ca) {
+        		setYear = request.getParameter("yearofadmission");
+        	}
+        	
+			stampFees(parents.getStudent().getSid(),setYear);
 		}
 
 		return result;
 
 	}
 	
-	private void stampFees(Integer stdIds) {
+	private void stampFees(Integer stdIds, String setYear) {
 
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR)!=null){
 		String[] feesCategoryIds = request.getParameterValues("feesIDS");
@@ -589,7 +601,7 @@ public class StudentService {
 			System.out.println("id" + id);
 			academicfessstructure = new Academicfeesstructure();
 			academicfessstructure.setSid(Integer.valueOf(id));
-			academicfessstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			academicfessstructure.setAcademicyear(setYear);
 			academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			academicfessstructure.setTotalfees(feesTotalAmount);
 			grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
@@ -614,7 +626,7 @@ public class StudentService {
 			studentfeesstructure.setFeespaid((long) 0);
 			studentfeesstructure.setWaiveoff((long) 0);
 			studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[i]));
-			studentfeesstructure.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			studentfeesstructure.setAcademicyear(setYear);
 			studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 			studentfeesstructure.setConcession(Integer.parseInt(concession[i]));
