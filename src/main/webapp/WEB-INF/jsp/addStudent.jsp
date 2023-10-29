@@ -561,7 +561,7 @@ var xmlHttp;
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/meps/FeesProcess/searchfeecategory?classstudying="+selected,true);
+			xmlHttp.open("GET", "/redrose/FeesProcess/searchfeecategory?classstudying="+selected,true);
 			xmlHttp.send(null);
 		
 	}
