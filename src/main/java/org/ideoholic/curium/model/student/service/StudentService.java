@@ -581,7 +581,6 @@ public class StudentService {
 		String feesTotalAmount = request.getParameter("feesTotalAmount");
 		Long grandTotal = 0l;
 
-		String[] feesCategoryIds = request.getParameterValues("feesIDS");
 		String[] feesAmount = request.getParameterValues("fessCat");
 		String[] concession = request.getParameterValues("feesConcession");
 		String[] totalInstallments = request.getParameterValues("feesCount");
