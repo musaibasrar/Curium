@@ -179,13 +179,13 @@ public class feesCategoryDAO {
 	}
 	
 	@SuppressWarnings({ "finally", "unchecked" })
-	public List<OtherFeecategory> readListOfOtherFeeObjects(int branchId, String academicYear) {
+	public List<OtherFeecategory> readListOfOtherFeeObjects(int branchId, String academicYear, String nextYear) {
 
 		List<OtherFeecategory> results = new ArrayList<OtherFeecategory>();
         try {
 
             transaction = session.beginTransaction();
-            results = (List<OtherFeecategory>) session.createQuery("From OtherFeecategory where academicyear='"+academicYear+"' and branchid="+branchId).list();
+            results = (List<OtherFeecategory>) session.createQuery("From OtherFeecategory where (academicyear='"+academicYear+"' or academicyear='"+nextYear+"') and branchid="+branchId).list();
             transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 
@@ -235,13 +235,13 @@ public class feesCategoryDAO {
 
 	}
 	
-	public List <Feescategory> getfeecategoryofstudent(String classname)
+	public List <Feescategory> getfeecategoryofstudent(String classname, String searchYear)
 	{
 		List <Feescategory> result= new ArrayList();
 		try {
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("from Feescategory where particularname like '"+classname+"--%'");
+					.createQuery("from Feescategory where particularname like '"+classname+"--%' and academicyear = '"+searchYear+"'");
 			result=query.list();
 			transaction.commit();
 
@@ -274,6 +274,23 @@ public class feesCategoryDAO {
 		}finally {
 			HibernateUtil.closeSession();
 		}
+	}
+
+	public List<Feescategory> readListOfFeeCategory(int branchId, String academicYear, String nextYear) {
+		
+		List<Feescategory> results = new ArrayList<Feescategory>();
+        try {
+            
+            transaction = session.beginTransaction();
+            results = (List<Feescategory>) session.createQuery("From Feescategory where (academicyear='"+academicYear+"' or academicyear='"+nextYear+"') and branchid="+branchId).list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return results;
+        }
 	}
 
 }
