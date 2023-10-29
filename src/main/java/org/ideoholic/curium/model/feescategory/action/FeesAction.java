@@ -152,11 +152,11 @@ public class FeesAction {
 	
 	@PostMapping("/addotherFeesParticular")
 	public String addotherFeesParticular() {
-		new FeesService(request, response).addotherFeesParticular();
+		new FeesService(request, response).addOtherFeesParticular();
 		return otherviewFees();
 	}
 	
-	@GetMapping("/otherfeesView")
+	@GetMapping("/otherFeesView")
 	public String otherviewFees() {
 		new FeesService(request, response).viewOtherFees();
 		new StandardService(request, response).viewClasses();
@@ -178,11 +178,10 @@ public class FeesAction {
 	}
 	
 	@GetMapping("/searchfeecategory")
-	public void searchfeecategory() {
+	public void searchFeeCategory() {
 			try {
-				new FeesService(request, response).getfeecategory();
+				new FeesService(request, response).getFeeCategory();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	}
