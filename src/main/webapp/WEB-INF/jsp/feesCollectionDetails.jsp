@@ -703,9 +703,13 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Misc</th>
                             <th title="click to sort" class="headerText">Grand Total</th>
                             <th title="click to sort" class="headerText">View Details</th>
-                            <th title="click to sort" class="headerText">Cancel Receipt</th>
-
-
+                            <c:choose>
+                                <c:when test="${userType=='superadmin'}">
+                                    <th title="click to sort" class="headerText">Cancel Receipt</th>
+                                </c:when>
+                                <c:otherwise>
+                                </c:otherwise>
+                            </c:choose>
                         </tr>
                     </thead>
 
@@ -724,8 +728,13 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesdetails.misc}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/roshan/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/roshan/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>&receiptid=<c:out value='${feesdetails.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
-
+                                <c:choose>
+                                <c:when test="${userType=='superadmin'}">
+                                    <td  class="dataTextInActive"><a class="dataTextInActive" href="/roshan/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>&receiptid=<c:out value='${feesdetails.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+                                </c:when>
+                                <c:otherwise>
+                                </c:otherwise>
+	                            </c:choose>
                             </tr>
                         </c:forEach>
                     </tbody>

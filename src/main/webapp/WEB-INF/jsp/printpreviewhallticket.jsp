@@ -333,7 +333,17 @@ for(Cookie cookie : cookies){
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><img src="/roshan/images/roshanhallticketsign.jpg" width="100" height="50"/></td>
+							<td>
+									<c:choose>
+                                		<c:when test="${urlbranchid == 7}">
+                                		</c:when>
+                                		<c:otherwise>
+                                   			<img src="/roshan/images/roshanhallticketsign.jpg" width="100" height="50"/>
+                                		</c:otherwise>
+                            		</c:choose>
+							
+							
+							</td>
 						</tr>
 				<tr>
 				<td></td>
