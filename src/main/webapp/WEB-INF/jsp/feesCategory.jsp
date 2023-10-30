@@ -629,7 +629,7 @@ for(Cookie cookie : cookies){
 						</th>
 						<th title="click to sort" class="headerText">Year<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/shatabdi/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
+							src="/kwrs/css/dataTable/images/sort_both.png" />&nbsp;&nbsp;
 						</th>
 
 					</tr>
