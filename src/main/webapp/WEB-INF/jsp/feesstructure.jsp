@@ -535,10 +535,10 @@ for(Cookie cookie : cookies){
 								href="/lilyrose/StudentProcess/ViewFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/meps/StudentProcess/ViewotherFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
+								href="/lilyrose/StudentProcess/ViewotherFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/meps/StudentProcess/ViewotherFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
+								href="/lilyrose/StudentProcess/ViewotherFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out
