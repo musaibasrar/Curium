@@ -422,7 +422,18 @@
 		 
 	});
 	
-	
+	 function Upload() {
+	        var fileUpload = document.getElementById("fileToUpload");
+	        if (typeof (fileUpload.files) != "undefined") {
+	            var size = parseFloat(fileUpload.files[0].size / 1024).toFixed(2);
+	            if(size>100){
+	            	alert("File size should not exceed 100KB");
+	            	document.getElementById("fileToUpload").value='';
+	            }
+	        } else {
+	            alert("Unsupported File");
+	        }
+	    }
 
 
 </script>
