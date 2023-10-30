@@ -679,8 +679,7 @@ for(Cookie cookie : cookies){
 								</div>
 									
     							<div class="exams box">
-    								<span style="font-size: 16px;">Dear Parents,</span> <span style="font-weight: bold;color: red">We would like to inform you that the </span> <span style="font-weight: bold;color: red">Exam</span>  <span style="font-size: 16px;">will commence from</span> <span style="font-weight: bold;color: red">Date</span>
-    								<span style="font-size: 16px;"> Please ensure your child is well-prepared and ready for the upcoming examinations.</span>
+    								<span style="font-size: 16px;">Dear Parents,We would like to inform you that the </span> <span style="font-weight: bold;color: red">Exam</span>  <span style="font-size: 16px;">will commence from</span> <span style="font-weight: bold;color: red">Date</span>
 								<br><br>
 								<label style="color: red;">Exams:&nbsp;</label>&nbsp;<input type="text" id="examsvar1" name="examsvar1" maxlength="30" value="Exams">
 								<br><br>
