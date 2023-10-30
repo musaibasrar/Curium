@@ -531,6 +531,9 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
 							<td class="alignLeft">Name &nbsp;</td>
 							<td><input type="hidden" name="id" id="id"
 								value="<c:out value="${student.sid}" />" /><input type="hidden" name="studentexternalid" id="studentexternalid"
@@ -821,15 +824,17 @@ for(Cookie cookie : cookies){
 						
 						
 							<tr>
-								<td class="alignLeft">Belong to BPL &nbsp;</td>
-								<td height="30">&nbsp;Yes<input
-								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" ${student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
-								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
-								onclick="noCheck(this.id);" ${student.belongtobpl == '0' ? 'checked' : ''}/>
+								<td class="alignLeft">Weight
+								&nbsp;</td>
+								<td>
+										<input
+									name="bhagyalakshmibondnumber" type="text" class="myclass" value="${student.bhagyalakshmibondnumber}"
+									id="bhagyalakshmibondnumber" size="30">
 
 							</td>
-							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
+
+							</td>
+							<td class="alignLeft" style="padding-left: 20px;">Height
 								&nbsp;</td>
 							<td><label> <input
 									name="bplcardno" type="text" class="myclass" value="${student.bplcardno}"
@@ -839,30 +844,6 @@ for(Cookie cookie : cookies){
 						
 						</tr>
 						
-							<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignLeft">Bhagyalakshmi Bond No.
-								&nbsp;</td>
-								<td>
-										<input
-									name="bhagyalakshmibondnumber" type="text" class="myclass" value="${student.bhagyalakshmibondnumber}"
-									id="bhagyalakshmibondnumber" size="30">
-
-							</td>
-							<td class="alignLeft" style="padding-left: 20px;">Student's Aadhar Card No.&nbsp;</td>
-							<td><label> <input
-									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}"
-									id="disabilitychild" size="30">
-
-							</label></td>
-						</tr>
-												
 							<tr>
 							<td><br /></td>
 						</tr>
@@ -929,13 +910,20 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 
-							<td class="alignLeft">RTE &nbsp;</td>
+							<%-- <td class="alignLeft">RTE &nbsp;</td>
 							<td height="30">&nbsp;Yes<input
 								type="checkbox" value="1" name="rte" id="yes:rte"
 								onclick="yesCheck(this.id);" ${student.rte == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
 								type="checkbox" value="0" name="rte" id="no:rte"
 								onclick="noCheck(this.id);" ${student.rte == '0' ? 'checked' : ''}/>
-							</td>
+							</td> --%>
+							
+							<td class="alignLeft">Student's Aadhar Card No.&nbsp;</td>
+							<td><label> <input
+									name="disabilitychild" type="text" class="myclass" value="${student.disabilitychild}"
+									id="disabilitychild" size="30">
+
+							</label></td>
 
 							<td class="alignLeft" style="padding-left: 20px;">Remarks&nbsp;</td>
 
@@ -969,7 +957,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;</td>
 
 							<td align="left">
-							<label> <select name="yearofadmission" id="yearofadmission" required
+							<label> <select name="yearofadmission" id="yearofadmission"
 									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${student.yearofadmission}</option>
 										<option>2025/26</option>
@@ -1383,7 +1371,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-						<td class="alignLeft">Father's Caste <br> Certificate No</td>
+						<td class="alignLeft">Father's Occupation</td>
 							<td><label> <input
 									name="fatherscastecertno" type="text"  style="text-transform:capitalize;" class="myclass" value="${parents.fatherscastecertno}"
 									id="fatherscastecertno" size="30">
@@ -1391,7 +1379,7 @@ for(Cookie cookie : cookies){
 							</label></td>
 
 					
-						<td class="alignLeft" style="padding-left: 20px;">Mother's Caste <br> Certificate No</td>
+						<td class="alignLeft" style="padding-left: 20px;">Mother's Occupation</td>
 							<td><label> <input name="motherscastecertno"
 									type="text" class="myclass" id="motherscastecertno"  style="text-transform:capitalize;" value="${parents.motherscastecertno}" size="30">
 
@@ -1657,7 +1645,7 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 							
-							<td class="alignLeft" style="padding-left: 20px;">Core Subjects Studied&nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Percentage of Marks&nbsp;</td>
 							<td><label> <input name="progress"
 									type="text" class="myclass" style="text-transform:capitalize;"
 									value="<c:out default="" value="${student.subsequentprogress}" />"

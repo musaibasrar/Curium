@@ -501,7 +501,8 @@
                              value:'<c:out default="0" value="${fees.feescategoryname}" />',
                              particularname:'<c:out default="0" value="${fees.particularname}" />',
                              price:'<c:out default="0" value="${fees.amount}" />',
-                             id:'<c:out default="0" value="${fees.idfeescategory}" />'
+                             id:'<c:out default="0" value="${fees.idfeescategory}" />',
+                             year:'<c:out default="0" value="${fees.academicyear}" />'
                              }<c:if test="${!status.last}">,</c:if>
                      </c:forEach>
                      ];
@@ -560,14 +561,15 @@
         var rowCount = document.getElementById('dataTable').rows.length;    
         var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=fees_"+rowCount+" /><input type='hidden' class='feesStatus' name='feesStatuses' id=fees_status_"+rowCount+" value='not set' /><input type='hidden' class='feesId' name='feesIDS' id=fees_id_"+rowCount+" value='' /></td>";
         var col2="<td class='dataTextInActive'><input class='feesName'   type='text' name='feesNames' id=fees_name_"+rowCount+" /></td>";
-        var col3="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'   name='fessCat'  id=hiddenfees_amount_"+rowCount+" /></td>";
-        var col4="<td class='dataTextInActive'><input type='text' value='0' onclick='SelectAll("+rowCount+");calculate("+rowCount+");' onfocus='SelectAll("+rowCount+")' onkeyup='calculate("+rowCount+")' name='feesCount' id=feesCount_"+rowCount+" /><input type='hidden' value='0' name='feesConcession' id=feesConcession_"+rowCount+" /></td>";
+        var col3="<td class='dataTextInActive'><input class='feesYear'   type='text' name='feesYears' id=fees_year_"+rowCount+" readonly/></td>";
+        var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'   name='fessCat'  id=hiddenfees_amount_"+rowCount+" /></td>";
+        var col5="<td class='dataTextInActive'><input type='text' value='0' onclick='SelectAll("+rowCount+");calculate("+rowCount+");' onfocus='SelectAll("+rowCount+")' onkeyup='calculate("+rowCount+")' name='feesCount' id=feesCount_"+rowCount+" /><input type='hidden' value='0' name='feesConcession' id=feesConcession_"+rowCount+" /></td>";
         /* var col5="<td class='dataTextInActive'><input type='text' value='0' name='feesConcession' id=feesConcession_"+rowCount+" /></td>"; */
-        var col5="<td class='dataTextInActive'><input class='feesFullAmount' type='text' value='0'   name='fessFullCat'  id=hiddenfees_full_amount_"+rowCount+" /></td>";
+        var col6="<td class='dataTextInActive'><input class='feesFullAmount' type='text' value='0'   name='fessFullCat'  id=hiddenfees_full_amount_"+rowCount+" /></td>";
         /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
         /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
-        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+"</tr>");
+        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+col6+"</tr>");
         $(function() {
             $("#dataTable").find('tbody').append(newRow);
         });
@@ -580,6 +582,7 @@
                     $("#fees_id_"+rowCount ).val( ui.item.id );
                     $( "#fees_status_"+rowCount ).val("set");
                     $("#hiddenfees_amount_"+rowCount).val( ui.item.price );
+                    $("#fees_year_"+rowCount).val( ui.item.year );
                     //$("#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
                    
 
@@ -589,6 +592,7 @@
                     $( "#fees_status_"+rowCount ).val("not set");
                     $( "#fees_id_"+rowCount ).val( ui.item.id );
                     $( "#hiddenfees_amount_"+rowCount).val( ui.item.price );
+                    $("#fees_year_"+rowCount).val( ui.item.year );
                     //$( "#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
                    
 
@@ -599,6 +603,7 @@
                     $( "#fees_id_"+rowCount ).val( ui.item.id );
                     $( "#fees_status_"+rowCount ).val("set");
                     $( "#hiddenfees_amount_"+rowCount).val( ui.item.price );
+                    $("#fees_year_"+rowCount).val( ui.item.year );
                    // $( "#hiddenfees_full_amount_"+rowCount).val( ui.item.price );
                    
                     return true;
@@ -606,7 +611,7 @@
             }).data( "autocomplete" )._renderItem = function( ul, item ) {
                 return $( "<li></li>" )
                 .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +":-</b> <b> "+item.particularname +"</b></a>" )
+                .append( "<a><b> " + item.value +" of "+item.year+":-</b> <b> "+item.particularname +"</b></a>" )
                 .appendTo( ul );
             };
 
@@ -792,6 +797,7 @@ for(Cookie cookie : cookies){
 									id="selectAll" name="selectAll"
 									onclick="selectAllRow('dataTable')" /></td>
 								<td class="headerText">Fees Category</td>
+								<td class="headerText">Academic Year</td>
 								<td class="headerText">Fees Amount</td>
 								<td class="headerText">No.of installments in a Year</td>
 								<td class="headerText">Fees Total Amount</td>
