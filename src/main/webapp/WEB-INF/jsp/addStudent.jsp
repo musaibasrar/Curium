@@ -702,12 +702,13 @@ $(document).ready(function() {
 			<div id="tabs">
 				<ul>
 					<li><a href="#fragment-1">Student's Details</a></li>
+					<li><a href="#fragment-7">Stamp Fee</a></li>
 					<li><a href="#fragment-2">Parent's Details</a></li>
 					<li><a href="#fragment-3">Upload Photo</a></li>
 					<li><a href="#fragment-5">Previous School Details</a></li>
 					<li><a href="#fragment-4">Additional Details</a></li>
 					<li><a href="#fragment-6">Bank Details</a></li>
-					<li><a href="#fragment-7">Stamp Fee</a></li>
+					
 				</ul>
 
 
@@ -722,16 +723,22 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Admission Number* &nbsp;</td>
-							<td ><label> <input name="admnno" required
+							<td class="alignLeft">Admission Number &nbsp;</td>
+							<td ><label> <input name="admnno"
 									type="text" class="myclass" id="admnno" size="36"
 									style=" text-transform: capitalize;">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Student Name* &nbsp;</td>
+							<td ><label> <input
+									name="name" type="text" class="myclass" id="name" size="36" required
+									style="text-transform:capitalize;"
+									required>
+							</label></td>
+							<td class="alignLeft" style="padding-left: 20px;display: none;">STS Number &nbsp;</td>
 									<td ><label> <input
 											name="sts" type="text" class="myclass" size="36"
-											style="text-transform:capitalize;"
+											style="text-transform:capitalize;display: none;"
 											id="sts" size="36">
 
 									</label></td>
@@ -744,13 +751,15 @@ $(document).ready(function() {
 						</tr>
 						
 						<tr>
-							<td class="alignLeft">Student Name* &nbsp;</td>
-							<td ><label> <input
-									name="name" type="text" class="myclass" id="name" size="36" required
-									style="text-transform:capitalize;"
-									required>
-							</label></td>
-
+						
+							<td class="alignLeft">Father's Name* &nbsp;</td>
+									<td ><label> <input
+											name="fathersname" type="text" class="myclass" required
+											style="text-transform:capitalize;"
+											id="fathersname" size="36"
+											required> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+									
 							<td  class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
 							<td  height="30" class="alignLeft">&nbsp;Male<input
 								type="checkbox" value="Male" name="gender" id="yes:male"
@@ -769,54 +778,7 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
-
-						<tr>
-						<tr>
-							<td class="alignLeft">Date Of Birth &nbsp;</td>
-							<td ><label> <input name="dateofbirth"
-									type="text" class="myclass" id="datepicker" size="36" autocomplete="false"
-									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
-							</label></td>
-
-							<td class="alignLeft" style="padding-left: 20px;">Age &nbsp;</td>
-							<td><label> <input
-									name="age" type="text" class="myclass" id="age" size="36"
-									>
-							</label></td>
-
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-
-						<tr>
-
-							<td  class="alignLeft">Place Of Birth, Tq,
-								Dist.&nbsp;</td>
-							<td><label> <input
-							style="text-transform:capitalize;"
-									name="place" type="text" class="myclass" id="place" size="36">
-							</label></td>
-							
-							<td class="alignLeft" style="padding-left: 20px;">Date of admission&nbsp;</td>
-							<td ><label><input name="dateofadmission" autocomplete="false"
-									type="text" class="myclass" id="dateofadmission" size="36"
-									data-validate="validate(required)"> </label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
+						
 						<tr>
 
 
@@ -875,6 +837,106 @@ $(document).ready(function() {
 
 						</tr>
 
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+										
+							<td class="alignLeft">Created Date &nbsp;</td>
+							<td ><label> <input name="createddate"
+									type="text"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
+									class="myclass" id="datepickerCD" size="36"
+									data-validate="validate(required)">
+							</label></td>
+							
+							<td  class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
+							 <td>
+                                        <label> <select name="yearofadmission" id="yearofadmission" required
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected>${currentAcademicYear}</option>
+										<option>2025/26</option>
+										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
+										<option>2021/22</option>
+										<option>2020/21</option>
+										<option>2019/20</option>
+										<option>2018/19</option>
+										<option>2017/18</option>
+										<option>2016/17</option>
+										<option>2015/16</option>
+										<option>2014/15</option>
+										<option>2013/14</option>
+										<option>2012/13</option>
+										<option>2011/12</option>
+										<option>2010/11</option>
+										<option>2009/10</option>
+										<option>2008/09</option>
+										<option>2007/08</option>
+										<option>2006/07</option>
+										<option>2005/06</option>
+										<option>2004/05</option>
+										<option>2003/04</option>
+										<option>2002/03</option>
+										<option>2001/02</option>
+										<option>2000/01</option>										
+								</select>
+
+							</label> 
+                        
+                        </td>
+							
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignLeft">Date Of Birth &nbsp;</td>
+							<td ><label> <input name="dateofbirth"
+									type="text" class="myclass" id="datepicker" size="36" autocomplete="false"
+									onchange="CalculateAge(this)"
+									data-validate="validate(required)">
+							</label></td>
+
+							<td class="alignLeft" style="padding-left: 20px;">Age &nbsp;</td>
+							<td><label> <input
+									name="age" type="text" class="myclass" id="age" size="36"
+									>
+							</label></td>
+
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+
+							<td  class="alignLeft">Place Of Birth, Tq,
+								Dist.&nbsp;</td>
+							<td><label> <input
+							style="text-transform:capitalize;"
+									name="place" type="text" class="myclass" id="place" size="36">
+							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Date of admission&nbsp;</td>
+							<td ><label><input name="dateofadmission" autocomplete="false"
+									type="text" class="myclass" id="dateofadmission" size="36"
+									data-validate="validate(required)"> </label></td>
+						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -1125,61 +1187,7 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
-										
-							<td class="alignLeft">Created Date &nbsp;</td>
-							<td ><label> <input name="createddate"
-									type="text"
-									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
-									class="myclass" id="datepickerCD" size="36"
-									data-validate="validate(required)">
-							</label></td>
-							
-							<td  class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
-							
-							 <td>
-                                        <label> <select name="yearofadmission" id="yearofadmission" required
-									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected>${currentAcademicYear}</option>
-										<option>2025/26</option>
-										<option>2024/25</option>
-										<option>2023/24</option>
-										<option>2022/23</option>
-										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
-										<option>2018/19</option>
-										<option>2017/18</option>
-										<option>2016/17</option>
-										<option>2015/16</option>
-										<option>2014/15</option>
-										<option>2013/14</option>
-										<option>2012/13</option>
-										<option>2011/12</option>
-										<option>2010/11</option>
-										<option>2009/10</option>
-										<option>2008/09</option>
-										<option>2007/08</option>
-										<option>2006/07</option>
-										<option>2005/06</option>
-										<option>2004/05</option>
-										<option>2003/04</option>
-										<option>2002/03</option>
-										<option>2001/02</option>
-										<option>2000/01</option>										
-								</select>
-
-							</label> 
-                        
-                        </td>
-							
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
+						
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -1489,13 +1497,20 @@ $(document).ready(function() {
 								</tr>
 
 								<tr>
-									<td class="alignLeft">Father's Name* &nbsp;</td>
+									<td class="alignLeft">Notes &nbsp;</td>
+									<td ><label> <input name="remarksadditional"
+											type="text" class="myclass" id="remarksadditional" size="36"
+											style="text-transform:capitalize;"
+											>
+									</label></td>
+									
+									<!-- <td class="alignLeft">Father's Name* &nbsp;</td>
 									<td ><label> <input
 											name="fathersname" type="text" class="myclass" required
 											style="text-transform:capitalize;"
 											id="fathersname" size="36"
-											required> <!-- onkeyup="check(this.value);"  -->
-									</label></td>
+											required> onkeyup="check(this.value);" 
+									</label></td> -->
 
 									<td class="alignLeft" style="padding-left: 20px;">Mother's Name* &nbsp;</td>
 									<td><label> <input
@@ -1516,6 +1531,36 @@ $(document).ready(function() {
 									<td><br /></td>
 								</tr>
 
+<tr>
+
+									<td class="alignLeft">Father Contact Number* &nbsp;</td>
+
+									<td><label> <input
+											name="contactnumber" type="text" class="myclass" required
+											style="text-transform:capitalize;"
+											id="contactnumber" size="36" maxlength="10" minlength="10">
+
+									</label></td>
+
+
+
+									<td class="alignLeft" style="padding-left: 20px;">Mother Contact Number
+										&nbsp;</td>
+
+									<td><label> <input
+											name="cocontactnumber" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+
+									</label></td>
+								</tr>
+
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
 								<tr>
 									<td class="alignLeft">Father's Qualification
 										&nbsp;</td>
@@ -1601,38 +1646,6 @@ $(document).ready(function() {
 
 								<tr>
 
-									<td class="alignLeft">Father Contact Number* &nbsp;</td>
-
-									<td><label> <input
-											name="contactnumber" type="text" class="myclass" required
-											style="text-transform:capitalize;"
-											id="contactnumber" size="36" maxlength="10" minlength="10">
-
-									</label></td>
-
-
-
-									<td class="alignLeft" style="padding-left: 20px;">Mother Contact Number
-										&nbsp;</td>
-
-									<td><label> <input
-											name="cocontactnumber" type="text" class="myclass"
-											style="text-transform:capitalize;"
-											id="cocontactnumber" size="36" maxlength="10" minlength="10">
-
-									</label></td>
-								</tr>
-
-								<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-									<td><br /></td>
-								</tr>
-
-
-								<tr>
-
 									<td class="alignLeft">Email &nbsp;</td>
 
 									<td ><label> <input name="email"
@@ -1689,7 +1702,7 @@ $(document).ready(function() {
 								</tr>
 
 
-								<tr>
+								<!-- <tr>
 
 									<td class="alignLeft">Notes &nbsp;</td>
 									<td ><label> <input name="remarksadditional"
@@ -1706,7 +1719,7 @@ $(document).ready(function() {
 
 								<tr>
 									<td><br /></td>
-								</tr>
+								</tr> -->
 
 
 

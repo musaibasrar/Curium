@@ -351,7 +351,7 @@ for(Cookie cookie : cookies){
 				<td></td>
 				<td align="left">Accountant</td>	
 					<td align="centre">Class Teacher</td>
-					<td align="centre">Head Master</td>
+					<td align="centre">Principal</td>
 					</tr>
                     
 		</TABLE>
