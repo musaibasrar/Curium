@@ -552,7 +552,8 @@
 var xmlHttp;
     var count;
     function searchfeecategory() {
-		var selected=document.getElementById('addclass').value;
+    	var addClass=document.getElementById('addclass').value;
+    	var yoa=document.getElementById('yearofadmission').value;
 			 if (typeof XMLHttpRequest != "undefined") {
 				 xmlHttp = new XMLHttpRequest();
 	            
@@ -561,7 +562,7 @@ var xmlHttp;
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/redrose/FeesProcess/searchfeecategory?classstudying="+selected,true);
+			xmlHttp.open("GET", "/redrose/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -671,6 +672,27 @@ $(document).ready(function() {
     });
 });
 </script>
+<script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                $('#myTable').dataTable( {
+                    "sScrollY": "380px",
+                    "bPaginate": true,
+                    "bLengthChange": false,
+                    "bFilter": true,
+                    "bSort": true,
+                    "bInfo": true,
+                    "bStateSave": false,
+                    "bProcessing": false,
+                    "bServerSide": false,
+                    "bAutoWidth": false,
+                    "iDisplayLength": 2000,
+                    "aoColumnDefs":[
+                        { 'bSortable': false, 'aTargets': [ 0 ] }
+                    ]
+                    
+                } );
+            } );
+        </script>
 </head>
 <%
 	//allow access only if session exists
@@ -821,7 +843,7 @@ $(document).ready(function() {
 
 
 							<td class="alignLeft">Studying in Class&nbsp;</td>
-							<td ><label> <select name="addclass"
+							<td ><label> <select name="addclass" required
 									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -1139,7 +1161,7 @@ $(document).ready(function() {
 							
 							 <td>
                                         <label> <select name="yearofadmission" id="yearofadmission" required
-									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected>${currentAcademicYear}</option>
 										<option>2025/26</option>
 										<option>2024/25</option>
@@ -2016,7 +2038,7 @@ $(document).ready(function() {
 						<table style="width: auto;height: auto;" align="center">
 								
 							<tr>
-							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td style="font-weight: bold;color:#325F6D">Stamp Fee: &nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td>
 							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
 							</label>
