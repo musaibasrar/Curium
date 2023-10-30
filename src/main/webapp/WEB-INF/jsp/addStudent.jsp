@@ -552,7 +552,8 @@
 var xmlHttp;
     var count;
     function searchfeecategory() {
-		var selected=document.getElementById('addclass').value;
+    	var addClass=document.getElementById('addclass').value;
+    	var yoa=document.getElementById('yearofadmission').value;
 			 if (typeof XMLHttpRequest != "undefined") {
 				 xmlHttp = new XMLHttpRequest();
 	            
@@ -561,7 +562,7 @@ var xmlHttp;
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/iica/FeesProcess/searchfeecategory?classstudying="+selected,true);
+			xmlHttp.open("GET", "/iica/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -671,6 +672,27 @@ $(document).ready(function() {
     });
 });
 </script>
+<script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                $('#myTable').dataTable( {
+                    "sScrollY": "380px",
+                    "bPaginate": true,
+                    "bLengthChange": false,
+                    "bFilter": true,
+                    "bSort": true,
+                    "bInfo": true,
+                    "bStateSave": false,
+                    "bProcessing": false,
+                    "bServerSide": false,
+                    "bAutoWidth": false,
+                    "iDisplayLength": 2000,
+                    "aoColumnDefs":[
+                        { 'bSortable': false, 'aTargets': [ 0 ] }
+                    ]
+                    
+                } );
+            } );
+        </script>
 </head>
 <%
 	//allow access only if session exists
@@ -783,7 +805,7 @@ $(document).ready(function() {
 
 
 							<td class="alignLeft">Studying in Class&nbsp;</td>
-							<td ><label> <select name="addclass"
+							<td ><label> <select name="addclass" required
 									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -1187,7 +1209,61 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
-						
+						<tr>
+										
+							<td class="alignLeft">Created Date &nbsp;</td>
+							<td ><label> <input name="createddate"
+									type="text"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
+									class="myclass" id="datepickerCD" size="36"
+									data-validate="validate(required)">
+							</label></td>
+							
+							<td  class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
+							 <td>
+                                        <label> <select name="yearofadmission" id="yearofadmission" required
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
+										<option selected>${currentAcademicYear}</option>
+										<option>2025/26</option>
+										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
+										<option>2021/22</option>
+										<option>2020/21</option>
+										<option>2019/20</option>
+										<option>2018/19</option>
+										<option>2017/18</option>
+										<option>2016/17</option>
+										<option>2015/16</option>
+										<option>2014/15</option>
+										<option>2013/14</option>
+										<option>2012/13</option>
+										<option>2011/12</option>
+										<option>2010/11</option>
+										<option>2009/10</option>
+										<option>2008/09</option>
+										<option>2007/08</option>
+										<option>2006/07</option>
+										<option>2005/06</option>
+										<option>2004/05</option>
+										<option>2003/04</option>
+										<option>2002/03</option>
+										<option>2001/02</option>
+										<option>2000/01</option>										
+								</select>
+
+							</label> 
+                        
+                        </td>
+							
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
@@ -2029,7 +2105,7 @@ $(document).ready(function() {
 						<table style="width: auto;height: auto;" align="center">
 								
 							<tr>
-							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td style="font-weight: bold;color:#325F6D">Stamp Fee: &nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td>
 							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
 							</label>
