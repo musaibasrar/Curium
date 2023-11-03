@@ -81,7 +81,11 @@ public class DocumentAction {
 		new StandardService(request, response).viewClasses(); 
 		return "studentsdetailsbonafide";
 	}
-
+	@GetMapping("/characterCertificate")
+	public String characterCertificate() {
+		new StandardService(request, response).viewClasses(); 
+		return "studentcharactersdetails";
+	}
 	@GetMapping("/studentsDetailsReports")
 	public String studentsDetailsReports() {
 		new StandardService(request, response).viewClasses(); 
@@ -105,7 +109,7 @@ public class DocumentAction {
 		if("true".equalsIgnoreCase(result)){
 			return "transfercertificatepreview";
 		}else if("studentexists".equalsIgnoreCase(result)){
-        return "transfercertificatefail";
+        return "transfercertificatepreview";
 		}
 		return error;
 	}
