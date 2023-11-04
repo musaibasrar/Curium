@@ -503,16 +503,15 @@ for(Cookie cookie : cookies){
                                         <label> <select name="academicyear" id="academicyear"
 									style="width: 120px">
 										<option selected></option>
-										<option>2015/16</option>
-										<option>2016/17</option>
-										<option>2017/18</option>
-										<option>2018/19</option>
-										<option>2019/20</option>
-										<option>2020/21</option>
-										<option>2021/22</option>
-										<option>2022/23</option>
-										<option>2023/24</option>
+										<option>2025/26</option>
 										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
+										<option>2021/22</option>
+										<option>2020/21</option>
+										<option>2019/20</option>
+										<option>2018/19</option>
+										<option>2017/18</option>
 								</select>
 
 							</label> 
