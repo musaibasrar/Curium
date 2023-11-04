@@ -138,6 +138,8 @@ form{
                 	window.open('/demov2/index_officeadmin','_self');
                 }else if(type=='marksentry'){
                 	window.open('/demov2/index_marksentry','_self');
+                }else if(type=='parents'){
+                	window.open('/demov2/index_parents','_self');
                 }
             }
             else if(!flag1){
