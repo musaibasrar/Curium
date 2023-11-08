@@ -75,6 +75,10 @@ public class DocumentAction {
 	public String printBonafide() {
 		return "bonafideprint";
 	}
+	@GetMapping("/printCharacterCertificate")
+	public String printCharacterCertificate() {
+		return "characterprint";
+	}
 
 	@GetMapping("/studentsDetailsBonafide")
 	public String studentsDetailsBonafide() {
