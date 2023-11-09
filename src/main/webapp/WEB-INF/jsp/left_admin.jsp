@@ -600,21 +600,27 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/shatabdi/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/shatabdi/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/shatabdi/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/shatabdi/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/shatabdi/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
             			</td>
             		</tr>

@@ -289,7 +289,21 @@ for(Cookie cookie : cookies){
 				</td>
 			</tr><tr><td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">5.&nbsp;&nbsp;Whether the Student Belongs to Shedule Caste or Shedule Tribes &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;width:400px;"></span>
+					<span style="font-weight: bold;border-bottom-style: dotted;width:400px;">
+						<c:if test="${(studentdetails.student.socialcategory == 'General')}">
+							<c:out value="No" />
+						</c:if>
+						<c:if test="${(studentdetails.student.socialcategory == 'OBC')}">
+							<c:out value="No" />
+						</c:if>
+						<c:if test="${(studentdetails.student.socialcategory == 'SC')}">
+							<c:out value="Yes" />
+						</c:if>
+						<c:if test="${(studentdetails.student.socialcategory == 'ST')}">
+							<c:out value="Yes" />
+						</c:if>
+					
+					</span>
 					</h3>
 				</td>
 			</tr>
@@ -298,7 +312,14 @@ for(Cookie cookie : cookies){
 					<h3 style="font-weight: normal;">6.&nbsp;&nbsp;Date of first Admission in the School &nbsp;&nbsp;
 					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.admissiondate}" /></span>
 					&nbsp;&nbsp;in Class &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.classadmittedin}" /></span>
+					<span style="font-weight: bold;border-bottom-style: dotted;">
+					
+						<c:forEach var="splt" items="${fn:split(studentdetails.student.classadmittedin,'--')}">
+						    	<c:out
+							value="${splt}" />							
+								</c:forEach>
+								
+					 </span>
 					</h3>
 				</td>
 				</tr>
@@ -328,7 +349,12 @@ for(Cookie cookie : cookies){
 				<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;In Figures &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.classstudying}" /></span>
+					<span style="font-weight: bold;border-bottom-style: dotted;"> 
+					
+					<c:forEach var="splt" items="${fn:split(studentdetails.student.classstudying,'--')}">
+						    	<c:out
+							value="${splt}" />							
+								</c:forEach></span>
 					&nbsp;&nbsp;&nbsp;&nbsp;In Words &nbsp;&nbsp;
 					<span style="font-weight: bold;border-bottom-style: dotted;"> </span>
 					</h3>
@@ -467,14 +493,17 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">21.&nbsp;&nbsp;Date of issue for Certificate &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;width:600px;"> </span>
+					<span style="font-weight: bold;border-bottom-style: dotted;width:600px;">
+					<fmt:formatDate
+							value="${studentdetails.student.datetcissued}" pattern="dd/MM/yyyy" />
+					</span>
 					</h3>
 				</td>
 			</tr>
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">22.&nbsp;&nbsp;Reason for leaving the school &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;width:600px;"> </span>
+					<span style="font-weight: bold;border-bottom-style: dotted;width:600px;"> <c:out value="${studentdetails.student.reasonleaving}" /></span>
 					</h3>
 				</td>
 			</tr>

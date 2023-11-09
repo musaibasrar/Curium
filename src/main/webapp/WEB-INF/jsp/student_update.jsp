@@ -925,7 +925,7 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 
-							<td class="alignLeft" style="padding-left: 20px;">Remarks&nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Mark of Identification&nbsp;</td>
 
 							<td align="left"><label> <input name="remarks"
 									type="text" class="myclass"

@@ -1118,7 +1118,7 @@ $(document).ready(function() {
 									id="disabilitychild" size="36">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Mark of Identification &nbsp;</td>
 							<td ><label> <input name="remarks"
 									type="text" class="myclass" id="remarks" size="36"
 									style="text-transform:capitalize;"

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.documents.service.DocumentService;
+import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,10 +76,6 @@ public class DocumentAction {
 	public String printBonafide() {
 		return "bonafideprint";
 	}
-	@GetMapping("/printCharacterCertificate")
-	public String printCharacterCertificate() {
-		return "characterprint";
-	}
 
 	@GetMapping("/studentsDetailsBonafide")
 	public String studentsDetailsBonafide() {
@@ -113,7 +110,7 @@ public class DocumentAction {
 		if("true".equalsIgnoreCase(result)){
 			return "transfercertificatepreview";
 		}else if("studentexists".equalsIgnoreCase(result)){
-        return "transfercertificatepreview";
+        return "transfercertificatefail";
 		}
 		return error;
 	}
@@ -148,5 +145,21 @@ public class DocumentAction {
 	public String multiClassSearchPendingAdmissoinReport() {
 		new DocumentService(request, response).multiClassSearchPendingAdmissoinReport(); 
 		return "studentspendingadmissionreports";
+	}
+	
+	@PostMapping("/GenerateCharacterCertificate")
+	public String generateCharacterCertificate() {
+		String result = new DocumentService(request, response).GenerateCharacterCertificate();
+		if (result != null) {
+			return result;
+		} else {
+			return "bonafidefailure";
+		}
+	}
+	
+	@PostMapping("/searchStudentsForCharacter")
+	public String searchStudentsForCharacter() {
+		new StampFeesService(request, response).advanceSearch();
+		return "studentcharactersdetails";
 	}
 }
