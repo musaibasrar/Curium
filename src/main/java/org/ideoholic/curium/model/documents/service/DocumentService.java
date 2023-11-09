@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,17 +20,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import org.ideoholic.curium.model.documents.dao.DocumentDAO;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -79,6 +75,9 @@ public class DocumentService {
 		Parents parents = new Parents();
 		Transfercertificate tc = new Transfercertificate();
 		String transferCertificateString = null;
+		LocalDate date = LocalDate.now();
+		String medium="English";
+		String dist="Ratlam";
 		
 		int studentId = DataUtil.parseInt(request.getParameter("studentId"));
 		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
@@ -105,8 +104,18 @@ public class DocumentService {
 		 if("true".equalsIgnoreCase(transferCertificateString)){
 			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			 String aadhar=parents.getStudent().getDisabilitychild();
+			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+			 char[] arr=aadhar.toCharArray();
+			 
+			 request.setAttribute("arr", arr);
+			 request.setAttribute("dateinword", dateinword);
 			 request.setAttribute("studentdetails", parents);
 			 request.setAttribute("tcdetails", tc);
+			 request.setAttribute("tcdate", DateUtil.dateParserddMMYYYY(tc.getDateofissues()));
+			 request.setAttribute("currentacadmicyear", httpSession.getAttribute("currentAcademicYear"));
+			 request.setAttribute("dist", dist);
+			 request.setAttribute("medium", medium);
 			 return "true";
 		 }
 		 return "false";
@@ -117,21 +126,31 @@ public class DocumentService {
 		
 		Parents parents = new Parents();
 		Transfercertificate tc = new Transfercertificate();
+		String transferCertificateString = "true";
+		String medium="English";
+		String dist="Ratlam";
 		
-		int studentId = DataUtil.parseInt(request.getParameter("id"));
+		int studentId = DataUtil.parseInt(request.getParameter("studentId"));
+		
 		 
-			tc = new DocumentDAO().getTransferCertificateDetails(studentId);
-		 
+		 if("true".equalsIgnoreCase(transferCertificateString)){
 			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			 String aadhar=parents.getStudent().getDisabilitychild();
+			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+			 char[] arr=aadhar.toCharArray();
+			 
+			 request.setAttribute("arr", arr);
+			 request.setAttribute("dateinword", dateinword);
 			 request.setAttribute("studentdetails", parents);
 			 request.setAttribute("tcdetails", tc);
-			 
-			 if(tc.getTcid() != null){
-				 return true;
-			 }else{
-				 return false;
-			 }
+			 request.setAttribute("currentacadmicyear", httpSession.getAttribute("currentAcademicYear"));
+			 request.setAttribute("dist", dist);
+			 request.setAttribute("medium", medium);
+			 request.setAttribute("dateoftc", request.getParameter("tcdate"));
+			 return true;
+		 }
+		 return false;
 	}
 
 
@@ -601,6 +620,93 @@ public class DocumentService {
 		request.setAttribute("searchStudentList", searchStudentList);
 
 	
+	}
+	
+	private String generateDate(Date dateofbirth) {
+		// TODO Auto-generated method stub
+
+		String dateOfBirth = DateUtil.dateParseryyyymmdd(dateofbirth);
+		String[] dob = dateOfBirth.split("-");
+		String dayInWords = formatDayInWords(Integer.parseInt(dob[2]));
+	        String monthInWords = formatMonthInWords(Integer.parseInt(dob[1]));
+	        String yearInWords = formatYearInWords(Integer.parseInt(dob[0]));
+
+	        return dayInWords+" "+monthInWords+" "+yearInWords;
+
+	    }
+
+
+	    public static String formatDayInWords(int day) {
+	        String[] dayNames = {
+	            "", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth",
+	            "Tenth", "Eleventh", "Twelfth", "Thirteenth", "Fourteenth", "Fifteenth", "Sixteenth",
+	            "Seventeenth", "Eighteenth", "Nineteenth", "Twentieth", "Twenty-First", "Twenty-Second",
+	            "Twenty-Third", "Twenty-Fourth", "Twenty-Fifth", "Twenty-Sixth", "Twenty-Seventh",
+	            "Twenty-Eighth", "Twenty-Ninth", "Thirtieth", "Thirty-First"
+	        };
+
+	        if (day >= 1 && day <= 31) {
+	            return dayNames[day];
+	        } else {
+	            return "Invalid day";
+	        }
+	    }
+
+	    public static String formatMonthInWords(int month) {
+	        String[] monthNames = {
+	            "", "January", "February", "March", "April", "May", "June", "July", "August", "September",
+	            "October", "November", "December"
+	        };
+
+	        if (month >= 1 && month <= 12) {
+	            return monthNames[month];
+	        } else {
+	            return "Invalid month";
+	        }
+	    }
+
+	    public static String formatYearInWords(int year) {
+	        if (year >= 1900 && year <= 2099) {
+	            String[] units = {
+	                "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"
+	            };
+	            String[] teens = {
+	                "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"
+	            };
+	            String[] tens = {
+	                "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+	            };
+
+	            int thousandsDigit = (year / 1000) % 10;
+	            int hundredsDigit = (year / 100) % 10;
+	            int tensDigit = (year / 10) % 10;
+	            int onesDigit = year % 10;
+
+	            String yearInWords = "";
+
+	            if (thousandsDigit > 0) {
+	                yearInWords += units[thousandsDigit] + " Thousand ";
+	            }
+
+	            if (hundredsDigit > 0) {
+	                yearInWords += units[hundredsDigit] + " Hundred ";
+	            }
+
+	            if (tensDigit > 1) {
+	                yearInWords += tens[tensDigit];
+	                if (onesDigit > 0) {
+	                    yearInWords += "-" + units[onesDigit];
+	                }
+	            } else if (tensDigit == 1) {
+	                yearInWords += teens[onesDigit];
+	            } else if (onesDigit > 0) {
+	                yearInWords += units[onesDigit];
+	            }
+
+	            return yearInWords.trim();
+	        } else {
+	            return "Invalid year";
+	        }
 	}
 
 	

@@ -400,7 +400,7 @@
         var distlistitem = document.getElementById("paymenttype");
         var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
 
-        if (distlistitemtext == "Cheque") {
+        if (distlistitemtext == "Cheque" || distlistitemtext == "Bank Transfer") {
             document.getElementById("chequediv").style.display = '';
         }else {
         	document.getElementById("chequediv").style.display = "none";
@@ -676,6 +676,7 @@ for(Cookie cookie : cookies){
 							<td ><label> <select name="paymenttype" onchange="getChequeDetails()"
 									id="paymenttype" style="width: 256px;height: 30px;border-radius: 5px;font-size: 16px;background-color: white">
 										<option selected>Cash</option>
+										<option>Bank Transfer</option>
 										<option>Cheque</option>
 								</select>
 							</label></td>
@@ -707,7 +708,7 @@ for(Cookie cookie : cookies){
 							<td><br><br></td>
 						</tr>
 						<tr>
-							<td  class="alignRight">Cheque # &nbsp;</td>
+							<td  class="alignRight">Transaction/Cheque # &nbsp;</td>
 							<td ><label> <input id="chequeno"
 									name="chequeno" type="text" class="textField" 
 									style="text-transform:uppercase;height: 30px;font-size: 16px; border-radius: 5px"
@@ -720,7 +721,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignRight">Cheque Date&nbsp;</td>
+							<td class="alignRight">Transaction/Cheque Date&nbsp;</td>
 							<td><label> <input name="chequedate"
 									style="text-transform:uppercase;height: 30px;font-size: 16px;font-weight: bold;border-radius: 5px"
 									type="text" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
@@ -774,8 +775,8 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Party Name</th>
 						<th title="click to sort" class="headerText">Being</th>
 						<th title="click to sort" class="headerText">Payment Type</th>
-						<th title="click to sort" class="headerText">Cheque #</th>
-						<th title="click to sort" class="headerText">Cheque Date</th>
+						<th title="click to sort" class="headerText">Transaction/Cheque #</th>
+						<th title="click to sort" class="headerText">Transaction/Cheque Date</th>
 						<th title="click to sort" class="headerText">Bank Name</th>
 						<th title="click to sort" class="headerText">Status</th>	
 					</tr>

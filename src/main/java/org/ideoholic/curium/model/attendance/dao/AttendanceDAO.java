@@ -325,7 +325,7 @@ public class AttendanceDAO {
 			transaction = session.beginTransaction();
 			int i =0;
 			for (Integer attIn : attendanceIdsList) {
-				Query query = session.createSQLQuery("update Studentdailyattendance set attendancestatus = '"+studentAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
+				Query query = session.createSQLQuery("update att_studentdailyattendance set attendancestatus = '"+studentAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
 				query.executeUpdate();
 				
 				i++;

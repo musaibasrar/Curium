@@ -775,7 +775,7 @@ for(Cookie cookie : cookies){
 
 							</label></td>
  --%>
- 							<td class="alignLeft" style="padding-left: 20px;">Students Caste</td>
+ 							<td class="alignLeft" style="padding-left: 20px;">Student Caste <br> Certificate No.</td>
 							<td><label> <input
 									name="studentscastecertno" type="text" class="myclass" value="${student.studentscastecertno}"
 									id="studentscastecertno" size="30">

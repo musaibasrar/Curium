@@ -27,7 +27,6 @@
 	vertical-align: middle;
 	text-align: center;
 }
-
 .headerTextLeft {
 	width: 10px;
 	font-family: Tahoma;
@@ -39,7 +38,6 @@
 	vertical-align: middle;
 	text-align: left;
 }
-
 .dataTextBold {
 	font-weight: bold;
 	font-family: Tahoma;
@@ -48,7 +46,6 @@
 	letter-spacing: normal;
 	text-align: center;
 }
-
 .dataTextBoldLeft {
 	font-weight: normal;
 	font-family: Tahoma;
@@ -57,7 +54,6 @@
 	letter-spacing: normal;
 	text-align: left;
 }
-
 .dataTextBoldCenter {
 	font-weight: bold;
 	font-family: Tahoma;
@@ -66,7 +62,6 @@
 	letter-spacing: normal;
 	text-align: center;
 }
-
 .addressLine{
 	font-weight: normal;
 	font-family: ariel;
@@ -75,7 +70,6 @@
 	letter-spacing: normal;
 	text-align: center;
 }
-
 .dataText {
 	font-family: Tahoma;
 	color: black;
@@ -84,7 +78,6 @@
 	text-align: center;
 }
 -->
-
 span{
     display:inline-block;
     border-bottom:2px solid black;
@@ -96,7 +89,6 @@ span{
 
 
 <!-- <style type="text/css">
-
         @media print {
             .fontsize { font-size: 15px ;
                         font-weight: bold;
@@ -118,7 +110,6 @@ span{
            	  margin: 0mm;  /* this affects the margin in the printer settings */ 
             
         }
-
         @media screen {
             .fontsize { font-size: 15px;
                         font-weight: bold;
@@ -130,9 +121,8 @@ span{
             }
         }
     </style> -->
-    
-    <style type="text/css">
 
+    <style type="text/css">
         @media print {
             .fontsize { font-size: 15px ;
                         font-weight: bold;
@@ -150,12 +140,11 @@ span{
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
+             margin-left:  1cm;
+             margin-right: 1cm;
              margin-bottom: 0cm;
              margin-top: 0cm;
         }
-
         @media screen {
             .fontsize { font-size: 15px;
                         font-weight: bold;
@@ -166,6 +155,10 @@ span{
                 margin-right: 0px;
             }
         }
+        .input{
+        width:10px;
+        text-align:center;
+        }
     </style>
 	<script type="text/javascript" src="/bsr/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/bsr/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -173,7 +166,6 @@ span{
         <title>Print Transfer Certificate</title>
         <script type="text/javascript">
              $(function() {
-
                  $("#print").printPage();
              });
         </script>
@@ -202,11 +194,17 @@ for(Cookie cookie : cookies){
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				
-				Curium School </td>
+
+				THE BRAINY STARS ACADEMY </td>
 			</tr>
 			<tr>
-			<td class="addressLine">XXXX Street, XXXX Road, XXXX. Ph.No- +00-000000</td>
+			<td class="addressLine"><u>A UNIT OF TAMIRE MILLAT EDUCATIONAL SOCITY RATLAM</u></td>
+			</tr>
+			<tr>
+			<td class="addressLine"><u>SECTOR NO. ARIHANT PARISAR RATLAM MP 457001</u></td>
+			</tr>
+			<tr>
+			<td class="addressLine"><u>PHONE 07412-455722</u></td>
 			</tr>
 
 			<tr>
@@ -224,30 +222,30 @@ for(Cookie cookie : cookies){
 
 		<table>
 		<tr>
-			
+
 			<td colspan="2">
-			
+
 			<h3><u>TRANSFER CERTIFICATE</u></h3>
 			</td>
-			
+
 			</tr>
 			<tr>
 			<td></td>
-			
+
 			</tr>
 			<tr>
 			<td></td>
-			<td></td>
-			
-			<td >
+
+			<td style="align-content: right">
 			Date:&nbsp;&nbsp;<input
 									name="dateoftc" type="text" class="textField" style="border: none;border-color: transparent;"
 									 size="10" value="<fmt:formatDate type="date" value="${tcdetails.dateofissues}" pattern="yyyy-MM-dd"/>" ></td>
-			
+
 			</tr>
 			<tr>
-			
-				<td class="dataTextBoldLeft">
+
+				<td class="dataTextBoldLeft"style="width: 40%;">
+				&nbsp;&nbsp;
 					<h3 style="font-weight: normal;">This is to certify that Ms. &nbsp;&nbsp;
 					<span style="font-weight: bold;"> <c:out value="${studentdetails.student.name}" /></span>
 					</h3>
@@ -255,15 +253,56 @@ for(Cookie cookie : cookies){
 				<!-- <td>
 				
 				</td> -->
-				
+
 				<td class="dataTextBoldLeft" style="width: 40%;">
 					 &nbsp;&nbsp;
 					<h3 style="font-weight: normal;" >
-					
-					Son of &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${studentdetails.fathersname}" /></span></h3>
+
+					Mother's name &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${studentdetails.mothersname}" /></span></h3>
 				</td>
-				
-			
+
+
+			</tr>
+			<tr>
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">Father's/Guardian's Name &nbsp;&nbsp;
+					<span style="font-weight: bold;"> <c:out value="${studentdetails.fathersname}" /></span>
+					</h3>
+				</td>
+				<td class="dataTextBoldLeft" style="width: 40%;">
+					 &nbsp;&nbsp;
+					<h3 style="font-weight: normal;" >
+
+					Religion &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${studentdetails.student.religion}" /></span></h3>
+				</td>
+
+			</tr>
+			<tr>
+			<td class="dataTextBoldLeft" style="width: 40%;">
+					 &nbsp;&nbsp;
+					<h3 style="font-weight: normal;" >
+
+					Caste &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${studentdetails.student.studentscaste}" /></span></h3>
+				</td>
+			<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">Block &nbsp;&nbsp;
+					<span style="font-weight: bold;"> <c:out value="${dist}" /></span>
+					</h3>
+				</td>
+				</tr>
+				<tr>
+			<td class="dataTextBoldLeft" style="width: 40%;">
+					 &nbsp;&nbsp;
+					<h3 style="font-weight: normal;" >
+
+					District &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${dist}" /></span></h3>
+				</td>
+			<td class="dataTextBoldLeft" style="width: 40%;">
+					 &nbsp;&nbsp;
+					<h3 style="font-weight: normal;" >
+
+					City &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${dist}" /></span></h3>
+				</td>
 			</tr>
 			<tr>
 			<td></td>
@@ -275,20 +314,141 @@ for(Cookie cookie : cookies){
 					
 					Son of &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${studentdetails.fathersname}" /></span></h3>
 				</td> --%>
-			
+
 				<td class="dataTextBoldLeft"  >
-				
+
 				<h3 style="font-weight: normal;" >
-					
-					is presently studying in Grade &nbsp;&nbsp; <span style="font-weight: bold;"><c:out value="${studentdetails.student.classstudying}     " /></span></h3>
-				
-				
+
+					was present in school from &nbsp;&nbsp; <span style="font-weight: bold;"><c:out value="${studentdetails.student.admissiondate}" /></span></h3>
+
+
 				</td>
-				
-				<td class="dataTextBoldLeft">as residential student / day student in our school.</td>
+				<td class="dataTextBoldLeft"  >
+
+				<h3 style="font-weight: normal;" >
+
+					to &nbsp;&nbsp; <span style="font-weight: bold;"><c:out value="${studentdetails.student.dateleaving}" /></span></h3>
+
+
+				</td>
+				<tr>
+				<td class="dataTextBoldLeft"  >
+
+				<h3 style="font-weight: normal;" >
+
+					He/She leaving School on &nbsp;&nbsp; <span style="font-weight: bold;"><c:out value="${studentdetails.student.dateleaving}     " /></span></h3>
+
+
+				</td>
 
 			</tr>
+             <tr>
 
+				<td class="dataTextBoldLeft"style="width: 40%;">
+				&nbsp;&nbsp;
+					<h3 style="font-weight: normal;">Pupil's SSSMID &nbsp;&nbsp;
+				<!-- 	<span style="font-weight: bold;">--> <input class="input" type="text">
+				<input class="input" type="text">
+				<input class="input" type="text">
+				<input class="input" type="text">
+				<input class="input" type="text">
+				<input class="input" type="text">
+				<input class="input" type="text">
+				<input class="input" type="text">
+				<input class="input" type="text">
+
+
+				<!-- </span>-->
+					</h3>
+				</td>
+				<!-- <td>
+				
+				</td> -->
+
+				<td class="dataTextBoldLeft" style="width: 40%;">
+					 &nbsp;&nbsp;
+					<h3 style="font-weight: normal;" >
+
+					Family ID &nbsp;&nbsp;<input class="input" type="text">
+				<input class="input" type="text">
+				<input class="input" type="text">
+				<input class="input" type="text">
+				<input class="input" type="text">
+				<input class="input" type="text">
+				<input class="input" type="text">
+				<input class="input" type="text"></h3>
+				</td>
+
+
+			</tr>
+			<tr>
+
+				<td class="dataTextBoldLeft"style="width: 40%;">
+				&nbsp;&nbsp;
+					<h3 style="font-weight: normal;">ADHAR NO. &nbsp;&nbsp;
+					<input class="input" type="text"  value="${arr[0]}">
+				<input class="input" type="text" value="${arr[1]}">
+				<input class="input" type="text" value="${arr[2]}">
+				<input class="input" type="text" value="${arr[3]}">
+				<input class="input" type="text" value="${arr[4]}">
+				<input class="input" type="text" value="${arr[5]}">
+				<input class="input" type="text" value="${arr[6]}">
+				<input class="input" type="text" value="${arr[7]}">
+				<input class="input" type="text" value="${arr[8]}">
+				<input class="input" type="text" value="${arr[9]}">
+				<input class="input" type="text" value="${arr[10]}">
+				<input class="input" type="text" value="${arr[11]}">
+
+					</h3>
+				</td>
+
+
+
+			</tr>
+			<tr>
+
+				<td class="dataTextBoldLeft"style="width: 40%;">
+				&nbsp;&nbsp;
+					<h3 style="font-weight: normal;">DATE OF BIRTH(in numbers) &nbsp;&nbsp;
+					<span style="font-weight: bold;"> <c:out value="${studentdetails.student.dateofbirth}" /></span>
+					</h3>
+				</td>
+				<!-- <td>
+				
+				</td> -->
+
+				<td class="dataTextBoldLeft" style="width: 40%;">
+					 &nbsp;&nbsp;
+					<h3 style="font-weight: normal;" >
+
+					DATE OF BIRTH(in words) &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${dateinword}" /></span></h3>
+				</td>
+
+
+			</tr>
+			<tr>
+			<td class="dataTextBoldLeft" style="width: 40%;">
+					 &nbsp;&nbsp;
+					<h3 style="font-weight: normal;" >
+
+					Class last student studied &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${studentdetails.student.classstudying}" /></span></h3>
+				</td>
+
+				<td class="dataTextBoldLeft" style="width: 40%;">
+					 &nbsp;&nbsp;
+					<h3 style="font-weight: normal;" >
+
+					Medium &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${medium}" /></span></h3>
+				</td>
+				</tr>
+				<tr>
+				<td class="dataTextBoldLeft" style="width: 40%;">
+					 &nbsp;&nbsp;
+					<h3 style="font-weight: normal;" >
+
+					Year &nbsp;&nbsp;<span style="font-weight: bold;"><c:out value="${currentacadmicyear}" /></span></h3>
+				</td>
+			</tr>
 			<tr>
 			<td></td>
 			</tr>
@@ -298,14 +458,13 @@ for(Cookie cookie : cookies){
 		</table>
 		<TABLE width="100%" border="0"
 			style="page-break-after: always; border-collapse: collapse;">
-			
+
 		<tr>
 		<td><br></td>
 		</tr>
 		<tr>
 		<td class="dataTextBoldLeft" >
-					His/Her date of birth as per our school record is&nbsp;&nbsp;<span style="font-weight: bold;">
-					<c:out value="${studentdetails.student.dateofbirth}" /></span></td>	
+					She/He was <b>Excellent/ Very Good/ Good</b></td>	
 	    </tr>
 		</TABLE>
 
@@ -315,7 +474,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td>
 			<br>
-			<br><br><br></td>
+			<br></td>
 			</tr>
 			<tr>
 			<td></td>
@@ -325,19 +484,20 @@ for(Cookie cookie : cookies){
 			</tr>
 		<tr>
 		<td></td>
-		<td align="left">Clerk</td>	
+		<td align="left">Class Teacher</td>	
+		<td align="centre">Checked By</td>
 			<td align="centre">School Seal</td>
-			<td align="centre">Principal</td>
+
 			</tr>
-			
+
 			<tr>
-                        <td align="center"><a id="print" href="/bsr/DocumentsProcess/PrintTransferCertificate?id=<c:out value="${studentdetails.student.sid}" />">Print</a></td>
-                    </tr>
+               <td align="center"><a id="print" href="/bsr/DocumentsProcess/PrintTransferCertificate?studentId=<c:out value="${studentdetails.student.sid}"/>&tcdate=<c:out value="${tcdate}"/>">Print</a></td>
+             </tr>
 		</TABLE>
-		
+
 		<%-- <a id="print" href="/bsr/Controller?process=StudentProcess&action=GenerateBonafide&id=<c:out value="${studentdetails.student.sid}" />">Print</a> --%>
 	</form>
-	
-	
+
+
 </body>
 </html>
