@@ -189,7 +189,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/jasmine/UserProcess/dashBoard"><img
+								href="/jasmine/dashboardloader"><img
 									alt="Dash Board" src="/jasmine/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
