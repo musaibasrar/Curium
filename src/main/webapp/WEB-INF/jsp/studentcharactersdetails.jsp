@@ -358,9 +358,9 @@
 
 <script type="text/javascript" src="/shatabdi/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchStudentsForBonafide() {
+	function searchStudentsForCharacterCertificate() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/shatabdi/StudentProcess/searchStudentsForCharacter";
+		form1.action = "/shatabdi/DocumentsProcess/searchStudentsForCharacter";
 		form1.method = "POST";
 		form1.submit();
 
@@ -369,7 +369,7 @@
 	$(function() {
 
 		$("#search").button().click(function() {
-			searchStudentsForBonafide();
+			searchStudentsForCharacterCertificate();
 		});
 		
 
@@ -620,7 +620,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/shatabdi/StudentProcess/GenerateCharacterCertificate" method="POST">
+	<form id="form1" action="/shatabdi/DocumentsProcess/GenerateCharacterCertificate" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />

@@ -162,4 +162,9 @@ public class DocumentAction {
 		new StampFeesService(request, response).advanceSearch();
 		return "studentcharactersdetails";
 	}
+	
+	@GetMapping("/printCharacterCertificate")
+	public String printCharacterCertificate() {
+		return "characterprint";
+	}
 }

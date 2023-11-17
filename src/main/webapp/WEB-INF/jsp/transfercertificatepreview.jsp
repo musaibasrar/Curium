@@ -314,11 +314,8 @@ for(Cookie cookie : cookies){
 					&nbsp;&nbsp;in Class &nbsp;&nbsp;
 					<span style="font-weight: bold;border-bottom-style: dotted;">
 					
-						<c:forEach var="splt" items="${fn:split(studentdetails.student.classadmittedin,'--')}">
-						    	<c:out
-							value="${splt}" />							
-								</c:forEach>
-								
+					<c:set var="splt" value="${fn:split(studentdetails.student.classadmittedin,'--')}"/>
+					<c:out value="${splt[0]}" />
 					 </span>
 					</h3>
 				</td>
@@ -350,11 +347,9 @@ for(Cookie cookie : cookies){
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;In Figures &nbsp;&nbsp;
 					<span style="font-weight: bold;border-bottom-style: dotted;"> 
-					
-					<c:forEach var="splt" items="${fn:split(studentdetails.student.classstudying,'--')}">
-						    	<c:out
-							value="${splt}" />							
-								</c:forEach></span>
+					<c:set var="splt" value="${fn:split(studentdetails.student.classstudying,'--')}"/>
+					<c:out value="${splt[0]}" />
+					</span>
 					&nbsp;&nbsp;&nbsp;&nbsp;In Words &nbsp;&nbsp;
 					<span style="font-weight: bold;border-bottom-style: dotted;"> </span>
 					</h3>

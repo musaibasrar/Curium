@@ -173,7 +173,11 @@ for(Cookie cookie : cookies){
 					</h3></td></tr><tr>
 					<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
-					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
+					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;
+						<c:set var="splt" value="${fn:split(studentdetailsbonafide.student.classstudying,'--')}"/>
+					<c:out value="${splt[0]}" />
+					
+					</span>
 					bearing Roll Number<span style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 					</h3>
 				</td>
@@ -182,7 +186,10 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 			<h3 style="font-weight: normal;" >
-			His/Her date of Birth as per our record is<span style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
+			His/Her date of Birth as per our record is<span style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input name="dateofcr" type="text" style="border: none;border-color: transparent;"
+					size="10" value="<fmt:formatDate type="date" value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/>" >
+			</span>
 			</h3>
 			</td>
 			</tr>

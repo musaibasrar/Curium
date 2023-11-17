@@ -234,7 +234,7 @@ for(Cookie cookie : cookies){
 			<td >
 			Date:&nbsp;&nbsp;<input
 									name="dateoftc" type="text" class="textField" style="border: none;border-color: transparent;"
-									 size="10" value="<fmt:formatDate type="date" value="${tcdetails.dateofissues}" pattern="yyyy-MM-dd"/>" ></td>
+									 size="10" value="<fmt:formatDate type="date" value="${tcdetails.dateofissues}" pattern="dd/MM/yyyy"/>" ></td>
 			
 			</tr>
 			
@@ -312,10 +312,8 @@ for(Cookie cookie : cookies){
 					<span style="font-weight: bold;border-bottom-style: dotted;"> <c:out value="${studentdetails.student.admissiondate}" /></span>
 					&nbsp;&nbsp;in Class &nbsp;&nbsp;
 					<span style="font-weight: bold;border-bottom-style: dotted;"> 
-						<c:forEach var="splt" items="${fn:split(studentdetails.student.classadmittedin,'--')}">
-						    	<c:out
-							value="${splt}" />							
-								</c:forEach>					
+					<c:set var="splt" value="${fn:split(studentdetails.student.classadmittedin,'--')}"/>
+					<c:out value="${splt[0]}" />
 					</span>
 					</h4>
 				</td>
@@ -347,11 +345,8 @@ for(Cookie cookie : cookies){
 			<td class="dataTextBoldLeft">
 					<h4 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;In Figures &nbsp;&nbsp;
 					<span style="font-weight: bold;border-bottom-style: dotted;"> 
-					
-					<c:forEach var="splt" items="${fn:split(studentdetails.student.classstudying,'--')}">
-						    	<c:out
-							value="${splt}" />							
-								</c:forEach>					
+						<c:set var="splt" value="${fn:split(studentdetails.student.classstudying,'--')}"/>
+					<c:out value="${splt[0]}" />
 					
 					</span>
 					&nbsp;&nbsp;&nbsp;&nbsp;In Words &nbsp;&nbsp;
