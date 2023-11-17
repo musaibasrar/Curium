@@ -679,8 +679,8 @@ for(Cookie cookie : cookies){
 								<select name="messagebody" id="messagebody"
 									style="width: 120px">
 											<option selected></option>
-            								<!-- <option value="holiday">Holiday</option>
-            								<option value="exams">Exams</option> -->
+            								<option value="holiday">Holiday</option>
+            								<option value="exams">Exams</option>
             								<option value="festival">Festival</option>
             								<!-- <option value="feesreminder">Fees Reminder</option> -->
 								</select>
@@ -695,8 +695,9 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRight">Message&nbsp;</td>
 							<td >
-								<div class="holiday box">								
-								<span style="font-size: 16px;">Dear Parents On</span> <span style="font-weight: bold;color: red">Date</span>  <span style="font-size: 16px;">there will be a holiday on account of</span> <span style="font-weight: bold;color: red">Reason</span>
+								<div class="holiday box">
+								 								
+								<span style="font-size: 16px;">Dear parents, school will be closed on </span> <span style="font-weight: bold;color: red">Date</span>  <span style="font-size: 16px;">due to</span> <span style="font-weight: bold;color: red">Reason</span>
 								<br><br>
 								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="holidayvar1" name="holidayvar1" maxlength="30">
 								<br><br>
@@ -706,8 +707,7 @@ for(Cookie cookie : cookies){
 								</div>
 									
     							<div class="exams box">
-    								<span style="font-size: 16px;">Dear Parent,</span> <span style="font-weight: bold;color: red">Exams</span>  <span style="font-size: 16px;">will commence from</span> <span style="font-weight: bold;color: red">Date</span>
-									<span style="font-size: 16px;">Please collect the Hall ticket.ABFURA</span>
+    								<span style="font-size: 16px;">Dear Parents,We would like to inform you that the </span> <span style="font-weight: bold;color: red">Exam</span>  <span style="font-size: 16px;">will commence from</span> <span style="font-weight: bold;color: red">Date</span>
 								<br><br>
 								<label style="color: red;">Exams:&nbsp;</label>&nbsp;<input type="text" id="examsvar1" name="examsvar1" maxlength="30" value="Exams">
 								<br><br>
@@ -940,7 +940,7 @@ for(Cookie cookie : cookies){
 						</tr>
  -->
 
-						<div>
+						<!-- <div>
 							<table width="100%">
 								<tr>
 
@@ -961,7 +961,7 @@ for(Cookie cookie : cookies){
 							</table>
 
 						</div>
-
+ -->
 						</div>
 						</div>
 
