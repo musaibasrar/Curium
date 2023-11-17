@@ -55,7 +55,7 @@ public class UserAction {
 		return "advanceSearchResult";
 	}
 
-	@GetMapping("/dashBoard")
+	@PostMapping("/dashBoard")
 	public String dashBoard() {
 		new UserService(request, response).dashBoard();
 		return "jspbarchart";
