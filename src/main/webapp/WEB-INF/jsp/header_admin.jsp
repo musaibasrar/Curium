@@ -189,7 +189,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/rauzamission/UserProcess/dashBoard"><img
+								href="/rauzamission/dashboardloader"><img
 									alt="Dash Board" src="/rauzamission/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
